@@ -14,21 +14,33 @@ export class Button extends Component {
     children: React.PropTypes.string,
     style: View.propTypes.style,
     textStyle: Text.propTypes.style,
+    type: React.PropTypes.oneOf(['outline', 'clear', 'rounded']),
+    size: React.PropTypes.oneOf(['small', 'medium', 'large']),
     onPress: React.PropTypes.func,
     onLongPress: React.PropTypes.func,
     onPressIn: React.PropTypes.func,
-    onPressOut: React.PropTypes.func
+    onPressOut: React.PropTypes.func,
   };
 
-  _renderInnerTextiOS() {
+  _renderInnerTextiOS(style) {
     return (
-      <Text style={[styles.textButton]}>
+      <Text style={[style, this.props.textStyle]}>
         {this.props.children}
       </Text>
     );
   }
 
   render() {
+    let boxStyle = [styles.button];
+    let textStyle = [styles.textButton];
+    if(this.props.type){
+      boxStyle.push(styles[this.props.type]);
+      textStyle.push(styles[this.props.type + 'Text']);
+    }
+    if(this.props.size){
+      boxStyle.push(styles[this.props.size]);
+      textStyle.push(styles[this.props.size + 'Text']);
+    }
     let touchableProps = {
       onPress: this.props.onPress,
       onPressIn: this.props.onPressIn,
@@ -37,8 +49,8 @@ export class Button extends Component {
     };
     return (
       <TouchableOpacity {...touchableProps}
-        style={[styles.button]}>
-        {this._renderInnerTextiOS()}
+        style={[boxStyle, this.props.style]}>
+        {this._renderInnerTextiOS(textStyle)}
       </TouchableOpacity>
     );
   }
@@ -55,5 +67,48 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 18,
     alignSelf: 'center',
+  },
+  outline: {
+    borderWidth: 1,
+    paddingVertical: 9,
+    paddingHorizontal: 14,
+    backgroundColor: 'transparent',
+    borderColor: '#2196F3'
+  },
+  outlineText: {
+    color: '#2196F3'
+  },
+  clear: {
+    backgroundColor: 'transparent',
+  },
+  clearText: {
+    color: '#2196F3'
+  },
+  rounded: {
+    borderRadius: 50,
+  },
+  roundedText: {
+  },
+  small: {
+    paddingVertical: 4,
+    paddingHorizontal: 7,
+  },
+  smallText: {
+    fontSize: 14,
+  },
+  medium: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  mediumText: {
+    fontSize: 18,
+  },
+  large: {
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+  },
+  largeText: {
+    fontSize: 22,
   }
+
 });
