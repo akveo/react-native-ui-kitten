@@ -73,7 +73,7 @@ class ExplorerApp extends Component {
           <TouchableOpacity
             onPress={this._openDrawer}>
             <Image
-              source={require('./ic_menu_black_24dp.png')}
+              source={require('image!ic_menu_black_24dp')}
               style={{width: 50, height: 50}}/>
           </TouchableOpacity>
         );
