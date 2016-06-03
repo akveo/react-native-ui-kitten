@@ -14,7 +14,7 @@ class ExplorerApp extends Component {
         style={styles.container}
         initialRoute={{
           title: 'Ui KIT',
-          component: ComponentsScreen,
+          component: ComponentsScreen
         }}
         />
     );
@@ -24,8 +24,8 @@ class ExplorerApp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
-  },
+    backgroundColor: 'red'
+  }
 });
 
 AppRegistry.registerComponent('ExplorerApp', () => ExplorerApp);

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import {ButtonScreen} from './ButtonScreen';
+import {StartScreen} from './StartScreen';
 
 export class ComponentsScreen extends Component {
 
@@ -19,6 +20,11 @@ export class ComponentsScreen extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     let data = [
+      {
+        title: 'Start screen',
+        description: "Start screen with greeting",
+        screenView: StartScreen
+      },
       {
         title: "Buttons",
         description: "Different styles for buttons",
@@ -52,11 +58,11 @@ export class ComponentsScreen extends Component {
         component: componentDefinition.screenView
       });
     } else {
-      dismissKeyboard();
       this.props.navigator.push({
         title: componentDefinition.title,
         component: componentDefinition.screenView
       });
+      this.props.onSelect();
     }
   }
 
