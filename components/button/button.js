@@ -7,6 +7,10 @@ import {
   View,
 } from 'react-native';
 
+import {
+  Config
+} from '../config/config';
+
 
 export class Button extends Component {
 
@@ -60,7 +64,7 @@ export class Button extends Component {
 const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: Config.colors.gray,
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
@@ -73,16 +77,16 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     paddingHorizontal: 14,
     backgroundColor: 'transparent',
-    borderColor: '#2196F3'
+    borderColor: Config.colors.primary
   },
   outlineText: {
-    color: '#2196F3'
+    color: Config.colors.primary
   },
   clear: {
     backgroundColor: 'transparent',
   },
   clearText: {
-    color: '#2196F3'
+    color: Config.colors.primary
   },
   rounded: {
     borderRadius: 50,
