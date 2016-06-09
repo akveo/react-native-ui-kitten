@@ -7,7 +7,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import {Button} from 'react-native-ui-kit';
+import {Button, Config} from 'react-native-ui-kit';
 
 export class ButtonScreen extends Component {
 
@@ -106,18 +106,18 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   primaryBg: {
-    backgroundColor: '#2196F3'
+    backgroundColor: Config.colors.primary
   },
   dangerBg: {
-    backgroundColor: '#F44336'
+    backgroundColor: Config.colors.danger
   },
   warningBg: {
-    backgroundColor: '#FFC107'
+    backgroundColor: Config.colors.warning
   },
   successBorder: {
-    borderColor: '#4CAF50'
+    borderColor: Config.colors.success
   },
   successText: {
-    color: '#4CAF50'
+    color: Config.colors.success
   }
 });
