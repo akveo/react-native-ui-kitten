@@ -74,11 +74,10 @@ class ExplorerApp extends Component {
             onPress={this._openDrawer}>
             <Image
               source={require('image!ic_menu_black_24dp')}
-              style={{width: 50, height: 50}}/>
+              style={styles.tabBarIcon}/>
           </TouchableOpacity>
         );
       },
-
       Title(route, navigator, index, navState) {
         return (
           <View style={styles.titleContainer}>
@@ -88,7 +87,6 @@ class ExplorerApp extends Component {
           </View>
         );
       },
-
       RightButton() {
         return null;
       }
@@ -112,6 +110,10 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex:1,
     justifyContent: 'center'
+  },
+  tabBarIcon: {
+    width: 50,
+    height: 50
   }
 });
 

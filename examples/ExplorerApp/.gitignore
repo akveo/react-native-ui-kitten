@@ -38,3 +38,6 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
+android/gradle.properties
+android/app/build.gradle
+android/app/my-release-key.keystore

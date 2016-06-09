@@ -22,7 +22,7 @@ export class Button extends Component {
     onPressOut: React.PropTypes.func,
   };
 
-  _renderInnerTextiOS(style) {
+  _renderInnerText(style) {
     return (
       <Text style={[style, this.props.textStyle]}>
         {this.props.children}
@@ -50,7 +50,7 @@ export class Button extends Component {
     return (
       <TouchableOpacity {...touchableProps}
         style={[boxStyle, this.props.style]}>
-        {this._renderInnerTextiOS(textStyle)}
+        {this._renderInnerText(textStyle)}
       </TouchableOpacity>
     );
   }
