@@ -9,7 +9,7 @@ import {
 
 import {
   Config
-} from '../config/config';
+} from '../../config/config';
 
 
 export class Button extends Component {
