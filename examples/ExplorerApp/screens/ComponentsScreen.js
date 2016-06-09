@@ -62,7 +62,7 @@ export class ComponentsScreen extends Component {
         title: componentDefinition.title,
         component: componentDefinition.screenView
       });
-      this.props.onSelect();
+      this.props.onSelect(componentDefinition);
     }
   }
 

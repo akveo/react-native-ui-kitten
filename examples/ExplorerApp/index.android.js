@@ -3,98 +3,66 @@ import {
   AppRegistry,
   StyleSheet,
   Navigator,
-  Text,
-  TouchableOpacity,
   View,
   DrawerLayoutAndroid,
   Dimensions,
   ToolbarAndroid,
-  Image
 } from 'react-native';
 
 import {ComponentsScreen} from "./screens/ComponentsScreen";
 import {StartScreen} from './screens/StartScreen';
 
-var {height, width} = Dimensions.get('window');
+let {height, width} = Dimensions.get('window');
+let toolBarHeight = 56;
+let maxDrawerWidth = 400;
+let drawerWidth = width - toolBarHeight > maxDrawerWidth ? maxDrawerWidth :  width - toolBarHeight;
+
 class ExplorerApp extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      title: 'Start screen'
+    };
   }
 
   render() {
     return (
       <DrawerLayoutAndroid
-        ref={'drawer'}
-        drawerWidth={width/2}
+        ref={(drawer) => { this.drawer = drawer; }}
+        drawerWidth={drawerWidth}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() => <ComponentsScreen
-                                      onSelect={this._closeDrawer.bind(this)}
-                                      navigator={this.refs['navigator']}/>}>
-        <Navigator
-          navigationBar={this._getNavBar()}
-          ref={'navigator'}
-          initialRoute={{
-            title: 'Start screen',
-            component: StartScreen
-          }}
-          renderScene={this._renderScene}
-          configureScene={(route, routeStack) => Navigator.SceneConfigs.FadeAndroid}
-        />
+                                      onSelect={(component) => {
+                                        this.drawer.closeDrawer();
+                                        this.setState({title: component.title});
+                                      }}
+                                      navigator={this.navigator}/>}>
+        {this._renderApp()}
       </DrawerLayoutAndroid>
     );
   }
 
-  _renderScene(route, navigator) {
-    return <route.component/>;
-  }
-
-  _openDrawer() {
-    this.refs['drawer'].openDrawer()
-  }
-
-  _closeDrawer() {
-    this.refs['drawer'].closeDrawer()
-  }
-
-  _getNavBar() {
+  _renderApp(){
     return (
-      <Navigator.NavigationBar
-        routeMapper={this._getNavigationBarRouteMapper()}/>
+      <View style={styles.container}>
+        <ToolbarAndroid
+          ref={(toolbar) => { this.toolbar = toolbar; }}
+          navIcon={require('image!ic_menu_black_24dp')}
+          onIconClicked={() => this.drawer.openDrawer()}
+          style={styles.toolbar}
+          title={this.state.title}/>
+        <Navigator
+          ref={(navigator) => { this.navigator = navigator; }}
+          initialRoute={{
+            title: 'Start screen',
+            component: StartScreen
+          }}
+          renderScene={(route) => <route.component/>}
+          configureScene={(route, routeStack) => Navigator.SceneConfigs.FadeAndroid}
+        />
+      </View>
     );
-  }
-
-  _getNavigationBarRouteMapper() {
-    return {
-      _openDrawer: this._openDrawer.bind(this),
-
-      LeftButton(route, navigator, index, navState) {
-        return (
-          <TouchableOpacity
-            onPress={this._openDrawer}>
-            <Image
-              source={require('image!ic_menu_black_24dp')}
-              style={styles.tabBarIcon}/>
-          </TouchableOpacity>
-        );
-      },
-      Title(route, navigator, index, navState) {
-        return (
-          <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>
-              {route.title}
-            </Text>
-          </View>
-        );
-      },
-      RightButton() {
-        return null;
-      }
-    };
-  }
-
-  state = {
-    title: 'Start screen'
   }
 
 }
@@ -102,19 +70,12 @@ class ExplorerApp extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50
+    flex: 1,
   },
-  titleText: {
-    fontSize: 26,
+  toolbar: {
+    backgroundColor: '#E9EAED',
+    height: toolBarHeight,
   },
-  titleContainer: {
-    flex:1,
-    justifyContent: 'center'
-  },
-  tabBarIcon: {
-    width: 50,
-    height: 50
-  }
 });
 
 AppRegistry.registerComponent('ExplorerApp', () => ExplorerApp);
