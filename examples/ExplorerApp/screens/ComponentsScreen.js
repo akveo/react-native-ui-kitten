@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import {ButtonScreen} from './ButtonScreen';
+import {CheckboxScreen} from './CheckboxScreen';
 import {StartScreen} from './StartScreen';
 
 export class ComponentsScreen extends Component {
@@ -29,6 +30,11 @@ export class ComponentsScreen extends Component {
         title: "Buttons",
         description: "Different styles for buttons",
         screenView: ButtonScreen
+      },
+      {
+        title: "Checkboxes",
+        description: "Different styles for checkboxes",
+        screenView: CheckboxScreen
       },
       {
         title: "Ohter"
