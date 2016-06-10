@@ -7,7 +7,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import {Button, Config} from 'react-native-ui-kit';
+import {RkButton, RkConfig} from 'react-native-ui-kit';
 
 export class ButtonScreen extends Component {
 
@@ -19,59 +19,59 @@ export class ButtonScreen extends Component {
         <View style={styles.section}>
           <Text style={styles.titleText}>Simple button</Text>
           <View style={styles.buttonContainer}>
-            <Button>Default</Button>
+            <RkButton>Default</RkButton>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Colored buttons</Text>
           <View style={styles.buttonContainer}>
-            <Button style={styles.primaryBg} textStyle={styles.whiteText}>Primary</Button>
-            <Button style={[styles.spaceAround, styles.warningBg]} textStyle={styles.whiteText}>Warning</Button>
-            <Button style={styles.dangerBg} textStyle={styles.whiteText}>Danger</Button>
+            <RkButton style={styles.primaryBg} textStyle={styles.whiteText}>Primary</RkButton>
+            <RkButton style={[styles.spaceAround, styles.warningBg]} textStyle={styles.whiteText}>Warning</RkButton>
+            <RkButton style={styles.dangerBg} textStyle={styles.whiteText}>Danger</RkButton>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Outline buttons</Text>
           <View style={styles.buttonContainer}>
-            <Button type='outline'>Outline</Button>
-            <Button type='outline' style={[styles.successBorder, styles.spaceAround]} textStyle={styles.successText}>Custom
-              color</Button>
+            <RkButton type='outline'>Outline</RkButton>
+            <RkButton type='outline' style={[styles.successBorder, styles.spaceAround]} textStyle={styles.successText}>Custom
+              color</RkButton>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Clear button</Text>
           <View style={styles.buttonContainer}>
-            <Button type='clear'>Clear</Button>
+            <RkButton type='clear'>Clear</RkButton>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Rounded button</Text>
           <View style={styles.buttonContainer}>
-            <Button type='rounded'>Rounded</Button>
+            <RkButton type='rounded'>Rounded</RkButton>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Button sizes</Text>
           <View style={styles.section}>
             <View style={styles.buttonContainer}>
-              <Button size='small'>Small</Button>
-              <Button size='small' type='outline' style={styles.spaceAround}>Small</Button>
-              <Button size='small' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}>Small</Button>
+              <RkButton size='small'>Small</RkButton>
+              <RkButton size='small' type='outline' style={styles.spaceAround}>Small</RkButton>
+              <RkButton size='small' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}>Small</RkButton>
             </View>
           </View>
           <View style={styles.section}>
             <View style={styles.buttonContainer}>
-              <Button size='medium'>Medium</Button>
-              <Button size='medium' type='outline' style={styles.spaceAround}>Medium</Button>
-              <Button size='medium' type='rounded' style={[styles.warningBg]}
-                      textStyle={styles.whiteText}>Medium</Button>
+              <RkButton size='medium'>Medium</RkButton>
+              <RkButton size='medium' type='outline' style={styles.spaceAround}>Medium</RkButton>
+              <RkButton size='medium' type='rounded' style={[styles.warningBg]}
+                      textStyle={styles.whiteText}>Medium</RkButton>
             </View>
           </View>
           <View style={styles.section}>
             <View style={styles.buttonContainer}>
-              <Button size='large'>Large</Button>
-              <Button size='large' type='outline' style={styles.spaceAround}>Large</Button>
-              <Button size='large' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}>Large</Button>
+              <RkButton size='large'>Large</RkButton>
+              <RkButton size='large' type='outline' style={styles.spaceAround}>Large</RkButton>
+              <RkButton size='large' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}>Large</RkButton>
             </View>
           </View>
         </View>
@@ -106,18 +106,18 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   primaryBg: {
-    backgroundColor: Config.colors.primary
+    backgroundColor: RkConfig.colors.primary
   },
   dangerBg: {
-    backgroundColor: Config.colors.danger
+    backgroundColor: RkConfig.colors.danger
   },
   warningBg: {
-    backgroundColor: Config.colors.warning
+    backgroundColor: RkConfig.colors.warning
   },
   successBorder: {
-    borderColor: Config.colors.success
+    borderColor: RkConfig.colors.success
   },
   successText: {
-    color: Config.colors.success
+    color: RkConfig.colors.success
   }
 });

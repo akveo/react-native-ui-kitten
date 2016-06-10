@@ -1,2 +1,2 @@
-export {Button} from './components/button/button';
-export {Config} from 'config/config.js';
+export {RkButton} from './components/button/button';
+export {RkConfig} from './config/config.js';

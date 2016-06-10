@@ -2,6 +2,6 @@ import {
   Colors
 } from './color.js';
 
-export const Config ={
+export const RkConfig ={
   colors : Colors
 };

@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 
 import {
-  Config
+  RkConfig
 } from '../../config/config';
 
 
-export class Button extends Component {
+export class RkButton extends Component {
 
   static propTypes = {
     children: React.PropTypes.string,
@@ -64,7 +64,7 @@ export class Button extends Component {
 const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
-    backgroundColor: Config.colors.gray,
+    backgroundColor: RkConfig.colors.gray,
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
@@ -77,16 +77,16 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     paddingHorizontal: 14,
     backgroundColor: 'transparent',
-    borderColor: Config.colors.primary
+    borderColor: RkConfig.colors.primary
   },
   outlineText: {
-    color: Config.colors.primary
+    color: RkConfig.colors.primary
   },
   clear: {
     backgroundColor: 'transparent',
   },
   clearText: {
-    color: Config.colors.primary
+    color: RkConfig.colors.primary
   },
   rounded: {
     borderRadius: 50,
