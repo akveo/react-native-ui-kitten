@@ -74,6 +74,19 @@ export class ButtonScreen extends Component {
               <RkButton size='large' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}>Large</RkButton>
             </View>
           </View>
+          <View style={styles.section}>
+            <Text style={styles.titleText}>With icons</Text>
+            <View style={styles.buttonContainer}>
+              <RkButton style={styles.primaryBg} textStyle={styles.whiteText}
+                        icon="diamond" iconStyle={styles.whiteText}>Primary</RkButton>
+              <RkButton type='outline' style={[styles.successBorder, styles.spaceAround]} textStyle={styles.successText}
+                        icon="git" iconStyle={styles.successText}>Custom color</RkButton>
+              <RkButton size='small' type='outline' style={styles.spaceAround}
+                        icon="facebook">Small</RkButton>
+              <RkButton size='large' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}
+                        icon="twitter" iconStyle={styles.whiteText}>Large</RkButton>
+            </View>
+          </View>
         </View>
       </ScrollView>
     );
