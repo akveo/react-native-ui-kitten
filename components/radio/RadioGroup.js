@@ -15,6 +15,7 @@ import {
   RkRadioButton
 } from './RadioButton';
 
+import _ from 'lodash';
 
 export class RkRadioGroup extends Component {
   static propTypes = {
@@ -40,18 +41,36 @@ export class RkRadioGroup extends Component {
   }
 
   _onSelect(index) {
-    if(index == this.state.selectedIndex){
-      index = -1;
-    }
     this.setState({
       selectedIndex: index
     });
     this.props.onChange && this.props.onChange(index);
   }
 
-  _processChildren(){
+  _processChildren() {
     let index = 0;
     let selectedIndex = this.state.selectedIndex;
+
+    let processTrigger = (child, index) => {
+      if (child.type === RkRadioButton) {
+        return React.cloneElement(child, {
+          inTrigger: true,
+          selected: index === selectedIndex
+        });
+      } else if (child.props && child.props.children) {
+        let children;
+        if(_.isArray(child.props.children)){
+          children = React.Children.map(child.props.children, (child) => processTrigger(child, index));
+        } else {
+          children = processTrigger(child.props.children, index);
+        }
+        return React.cloneElement(child, {
+          children: children
+        });
+      }
+      return child;
+    };
+
     let process = (child) => {
       if (child.type === RkRadioButton) {
         let radioIndex = index++;
@@ -59,18 +78,23 @@ export class RkRadioGroup extends Component {
           onPress: () => this._onSelect(radioIndex),
           selected: radioIndex === selectedIndex
         });
-      } else if(child.props && child.props.children){
+      } else if (child.props && _.isArray(child.props.children)) {
         return React.cloneElement(child, {
           children: React.Children.map(child.props.children, process)
         });
-      } else {
-        return child;
       }
+      else if (child.props && child.props.radioTrigger) {
+        let radioIndex = index++;
+        return React.cloneElement(child, {
+          onPress: () => this._onSelect(radioIndex),
+          children: processTrigger(child.props.children, radioIndex)
+        });
+      }
+      return child;
     };
+
     return React.Children.map(this.props.children, process);
   }
-
-
 
 
 }

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -15,13 +15,12 @@ import {
 export class RkRadioButton extends Component {
 
   static propTypes = {
-    style: TouchableHighlight.propTypes.style,
-    selectedStyle: TouchableHighlight.propTypes.style,
     innerStyle: View.propTypes.style,
     innerSelectedStyle: View.propTypes.style,
     underlayColor: React.PropTypes.string,
     onPress: React.PropTypes.func,
     selected: React.PropTypes.bool,
+    inTrigger: React.PropTypes.bool,
   };
 
   constructor(props) {
@@ -29,21 +28,31 @@ export class RkRadioButton extends Component {
   }
 
   render() {
-    let innerStyle  = [styles.inner, this.props.innerStyle];
+    let innerStyle = [styles.inner, this.props.innerStyle];
     let outerStyle = [styles.outer, this.props.style];
-    if(this.props.selected){
+    if (this.props.selected) {
       innerStyle.push(styles.innerSelected);
       innerStyle.push(this.props.innerSelectedStyle);
       outerStyle.push(this.props.selectedStyle);
     }
-    return (
-      <TouchableHighlight
-        style={outerStyle}
-        onPress={this.props.onPress}
-        underlayColor={this.props.underlayColor || 'transparent'}>
+    if (this.props.inTrigger) {
+      return (
+        <View
+          style={outerStyle}
+          underlayColor={this.props.underlayColor || 'transparent'}>
           <View style={innerStyle}></View>
-      </TouchableHighlight>
-    );
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          style={outerStyle}
+          onPress={this.props.onPress}
+          underlayColor={this.props.underlayColor || 'transparent'}>
+          <View style={innerStyle}></View>
+        </TouchableOpacity>
+      );
+    }
   }
 
 }
@@ -54,12 +63,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 100,
   },
-  inner :{
+  inner: {
     width: 10,
     height: 10,
     borderRadius: 100,
   },
-  innerSelected :{
+  innerSelected: {
     backgroundColor: 'black'
   },
 });
