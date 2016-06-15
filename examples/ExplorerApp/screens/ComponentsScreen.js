@@ -12,6 +12,7 @@ import {
 import {ButtonScreen} from './ButtonScreen';
 import {CheckboxScreen} from './CheckboxScreen';
 import {RadioScreen} from './RadioScreen';
+import {InputScreen} from './InputScreen';
 import {StartScreen} from './StartScreen';
 
 export class ComponentsScreen extends Component {
@@ -41,6 +42,11 @@ export class ComponentsScreen extends Component {
         title: "Radio Buttons",
         description: "",
         screenView: RadioScreen
+      },
+      {
+        title: "Inputs",
+        description: "",
+        screenView: InputScreen
       },
       {
         title: "Ohter"
