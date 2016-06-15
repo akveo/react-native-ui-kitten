@@ -59,10 +59,12 @@ export class RkRadioGroup extends Component {
           onPress: () => this._onSelect(radioIndex),
           selected: radioIndex === selectedIndex
         });
-      } else if(child.props.children){
+      } else if(child.props && child.props.children){
         return React.cloneElement(child, {
           children: React.Children.map(child.props.children, process)
         });
+      } else {
+        return child;
       }
     };
     return React.Children.map(this.props.children, process);
