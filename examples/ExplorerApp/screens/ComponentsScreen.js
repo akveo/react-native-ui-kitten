@@ -13,6 +13,7 @@ import {ButtonScreen} from './ButtonScreen';
 import {CheckboxScreen} from './CheckboxScreen';
 import {RadioScreen} from './RadioScreen';
 import {InputScreen} from './InputScreen';
+import {ThemeScreen} from './ThemeScreen';
 import {StartScreen} from './StartScreen';
 
 export class ComponentsScreen extends Component {
@@ -47,6 +48,11 @@ export class ComponentsScreen extends Component {
         title: "Inputs",
         description: "",
         screenView: InputScreen
+      },
+      {
+        title: "Theme",
+        description: "",
+        screenView: ThemeScreen
       },
       {
         title: "Ohter"
