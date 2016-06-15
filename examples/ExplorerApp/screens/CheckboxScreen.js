@@ -53,11 +53,11 @@ export class CheckboxScreen extends Component {
           <Text style={styles.titleText}>Custom icons</Text>
           <View style={styles.rowContainer}>
             <RkCheckbox style={[styles.rounded, styles.primaryBorder, styles.bigOuter, styles.borderBolder]}
-                        iconStyle={[styles.primaryColor, styles.bigInner]} icon='diamond' checked={true}/>
-            <RkCheckbox
-              style={[styles.rounded, styles.successBorder, styles.whiteBg, styles.bigOuter, styles.spaceAround, styles.borderBolder]}
-              iconStyle={[styles.dangerColor, styles.bigInner]} checkedStyle={styles.warningBg} icon='star'
-              checked={true}/>
+                        iconStyle={[styles.primaryColor, styles.bigInner]} icon='diamond' checked={true}
+                        checkedIcon="star" checkedIconStyle={styles.dangerColor}/>
+            <RkCheckbox style={[styles.rounded, styles.successBorder, styles.whiteBg, styles.bigOuter, styles.spaceAround, styles.borderBolder]}
+                        iconStyle={[styles.dangerColor, styles.bigInner]} checkedStyle={styles.warningBg} icon='star'
+                        checked={true}/>
           </View>
         </View>
         <View style={styles.section}>

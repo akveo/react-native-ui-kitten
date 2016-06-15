@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {
   StyleSheet,
-  TouchableHighlight,
+  TouchableWithoutFeedback,
   View,
   Text,
 } from 'react-native';
@@ -24,40 +24,57 @@ let icons = {
 export class RkCheckbox extends Component {
 
   static propTypes = {
-    style: TouchableHighlight.propTypes.style,
-    checkedStyle: TouchableHighlight.propTypes.style,
+    style: View.propTypes.style,
+    checkedStyle: View.propTypes.style,
     innerStyle: View.propTypes.style,
+    checkedInnerStyle: View.propTypes.style,
     iconStyle: Text.propTypes.style,
+    checkedIconStyle: Text.propTypes.style,
     icon: React.PropTypes.string,
+    checkedIcon: React.PropTypes.string,
     onChange: React.PropTypes.func,
     underlayColor: React.PropTypes.string,
     checked: React.PropTypes.bool,
-    iconFamily: React.PropTypes.oneOf(['FontAwesome', 'Ionicons', 'MaterialIcons'])
+    iconFamily: React.PropTypes.oneOf(['FontAwesome', 'Ionicons', 'MaterialIcons']),
+    checkedIconFamily: React.PropTypes.oneOf(['FontAwesome', 'Ionicons', 'MaterialIcons'])
   };
 
   constructor(props) {
     super(props);
+
     this.state = {
       checked: !!props.checked
     };
+    this.Icon = this._getIconTag();
   }
 
   render() {
-    const Icon = icons[this.props.iconFamily || 'FontAwesome'];
-    const iconName = this.props.icon || "check";
-    const outerStyle = [styles.outerStyle, this.props.style];
-    if (this.props.checkedStyle && this.state.checked) {
-      outerStyle.push(this.props.checkedStyle);
-    }
+    const iconName = this.state.checked ? this.props.icon || "check" : this.props.checkedIcon;
+    const outerStyle = [styles.outerStyle, this.props.style, this.props.checked && this.props.checkedStyle];
     return (
-      <TouchableHighlight underlayColor={this.props.underlayColor || 'transparent'}
-                          onPress={(e) => this._toggle(e)}
-                          style={outerStyle}>
-        <View style={[styles.innerStyle, this.props.innerStyle]}>
-          {this.state.checked && <Icon name={iconName} style={[styles.iconStyle, this.props.iconStyle]}/>}
+        <View  style={outerStyle}>
+          <TouchableWithoutFeedback onPress={(e) => this._toggle(e)}>
+            <View style={[styles.innerStyle, this.props.innerStyle, this.state.checked && this.props.checkedInnerStyle]}>
+              {this._renderIcon(iconName)}
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-      </TouchableHighlight>
     );
+  }
+
+  _getIconTag() {
+    return this.state.checked ?
+        icons[this.props.iconFamily || 'FontAwesome'] :
+        icons[this.props.checkedIconFamily];
+  }
+
+  _renderIcon(iconName) {
+    if (iconName != undefined) {
+      let iconStyles = [styles.iconStyle, this.props.iconStyle, this.state.checked && this.props.checkedIconStyle];
+      return (
+          <this.Icon name={iconName} style={iconStyles}/>
+      )
+    }
   }
 
   _toggle(event) {
