@@ -42,14 +42,14 @@ export class ThemeScreen extends Component {
                               style={{borderWidth: 0.5, borderColor: RkConfig.colors.gray, padding: 5, borderRadius: 3, margin: 5}}>
               <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center"}}>
                 <Text>Ios like theme</Text>
-                <RkRadioButton style={styles.spaceAround}/>
+                <RkRadioButton style={styles.spaceAround} innerStyle={{width: 10}} innerSelectedStyle={{fontSize: 16}} icon={'md-checkmark'}/>
               </View>
             </TouchableOpacity>
             <TouchableOpacity radioTrigger={true}
                               style={{borderWidth: 0.5, borderColor: RkConfig.colors.gray, padding: 5, borderRadius: 3, margin: 5}}>
               <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center"}}>
                 <Text>Material theme</Text>
-                <RkRadioButton style={styles.spaceAround}/>
+                <RkRadioButton style={styles.spaceAround} innerStyle={{width: 10}} innerSelectedStyle={{fontSize: 16}} icon={'md-checkmark'}/>
               </View>
             </TouchableOpacity>
           </View>

@@ -59,7 +59,7 @@ export class RkRadioGroup extends Component {
         });
       } else if (child.props && child.props.children) {
         let children;
-        if(_.isArray(child.props.children)){
+        if (_.isArray(child.props.children)) {
           children = React.Children.map(child.props.children, (child) => processTrigger(child, index));
         } else {
           children = processTrigger(child.props.children, index);
@@ -78,16 +78,20 @@ export class RkRadioGroup extends Component {
           onPress: () => this._onSelect(radioIndex),
           selected: radioIndex === selectedIndex
         });
-      } else if (child.props && _.isArray(child.props.children)) {
-        return React.cloneElement(child, {
-          children: React.Children.map(child.props.children, process)
-        });
       }
       else if (child.props && child.props.radioTrigger) {
         let radioIndex = index++;
         return React.cloneElement(child, {
           onPress: () => this._onSelect(radioIndex),
           children: processTrigger(child.props.children, radioIndex)
+        });
+      }
+      else if (child.props && child.props.children) {
+        let children = _.isArray(child.props.children) ?
+          React.Children.map(child.props.children, process) :
+          process(child.props.children);
+        return React.cloneElement(child, {
+          children: children
         });
       }
       return child;
