@@ -7,7 +7,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import {RkButton, RkConfig} from 'react-native-ui-kit';
+import {RkButton, RkConfig, RkStyle} from 'react-native-ui-kit';
 
 export class ButtonScreen extends Component {
 
@@ -17,24 +17,24 @@ export class ButtonScreen extends Component {
         automaticallyAdjustContentInsets={false}
         style={styles.container}>
         <View style={styles.section}>
-          <Text style={styles.titleText}>Simple button</Text>
+          <Text style={styles.titleText}>Basic button</Text>
           <View style={styles.buttonContainer}>
-            <RkButton>Default</RkButton>
+            <RkButton type='basic'>Default</RkButton>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Colored buttons</Text>
           <View style={styles.buttonContainer}>
-            <RkButton style={styles.primaryBg} textStyle={styles.whiteText}>Primary</RkButton>
-            <RkButton style={[styles.spaceAround, styles.warningBg]} textStyle={styles.whiteText}>Warning</RkButton>
-            <RkButton style={styles.dangerBg} textStyle={styles.whiteText}>Danger</RkButton>
+            <RkButton type='basic' style={RkStyle.blueBg} textStyle={RkStyle.whiteText}>Primary</RkButton>
+            <RkButton type='basic' style={[styles.spaceAround, RkStyle.yellowBg]} textStyle={RkStyle.whiteText}>Warning</RkButton>
+            <RkButton type='basic' style={RkStyle.redBg} textStyle={RkStyle.whiteText}>Danger</RkButton>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Outline buttons</Text>
           <View style={styles.buttonContainer}>
             <RkButton type='outline'>Outline</RkButton>
-            <RkButton type='outline' style={[styles.successBorder, styles.spaceAround]} textStyle={styles.successText}>Custom
+            <RkButton type='outline' style={[RkStyle.greenBorder, styles.spaceAround]} textStyle={RkStyle.greenText}>Custom
               color</RkButton>
           </View>
         </View>
@@ -54,37 +54,37 @@ export class ButtonScreen extends Component {
           <Text style={styles.titleText}>Button sizes</Text>
           <View style={styles.section}>
             <View style={styles.buttonContainer}>
-              <RkButton size='small'>Small</RkButton>
-              <RkButton size='small' type='outline' style={styles.spaceAround}>Small</RkButton>
-              <RkButton size='small' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}>Small</RkButton>
+              <RkButton type='basic' size='small'>Small</RkButton>
+              <RkButton type='basic' size='small' type='outline' style={styles.spaceAround}>Small</RkButton>
+              <RkButton type='basic' size='small' type='rounded' style={[RkStyle.yellowBg]} textStyle={RkStyle.whiteText}>Small</RkButton>
             </View>
           </View>
           <View style={styles.section}>
             <View style={styles.buttonContainer}>
-              <RkButton size='medium'>Medium</RkButton>
-              <RkButton size='medium' type='outline' style={styles.spaceAround}>Medium</RkButton>
-              <RkButton size='medium' type='rounded' style={[styles.warningBg]}
-                      textStyle={styles.whiteText}>Medium</RkButton>
+              <RkButton type='basic' size='medium'>Medium</RkButton>
+              <RkButton type='basic' size='medium' type='outline' style={styles.spaceAround}>Medium</RkButton>
+              <RkButton type='basic' size='medium' type='rounded' style={[RkStyle.yellowBg]}
+                      textStyle={RkStyle.whiteText}>Medium</RkButton>
             </View>
           </View>
           <View style={styles.section}>
             <View style={styles.buttonContainer}>
-              <RkButton size='large'>Large</RkButton>
+              <RkButton type='basic' size='large'>Large</RkButton>
               <RkButton size='large' type='outline' style={styles.spaceAround}>Large</RkButton>
-              <RkButton size='large' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}>Large</RkButton>
+              <RkButton size='large' type='rounded' style={[RkStyle.yellowBg]} textStyle={RkStyle.whiteText}>Large</RkButton>
             </View>
           </View>
           <View style={styles.section}>
             <Text style={styles.titleText}>With icons</Text>
             <View style={styles.buttonContainer}>
-              <RkButton style={styles.primaryBg} textStyle={styles.whiteText}
-                        icon="diamond" iconStyle={styles.whiteText}>Primary</RkButton>
-              <RkButton type='outline' style={[styles.successBorder, styles.spaceAround]} textStyle={styles.successText}
-                        icon="git" iconStyle={styles.successText}>Custom color</RkButton>
-              <RkButton size='small' type='outline' style={styles.spaceAround}
+              <RkButton type='basic' style={RkStyle.blueBg} textStyle={RkStyle.whiteText}
+                        icon="diamond" iconStyle={RkStyle.whiteText}>Primary</RkButton>
+              <RkButton type='outline' style={[RkStyle.greenBorder, styles.spaceAround]} textStyle={RkStyle.greenText}
+                        icon="git" iconStyle={RkStyle.greenText}>Custom color</RkButton>
+              <RkButton type='basic' size='small' type='outline' style={styles.spaceAround} iconStyle={RkStyle.blueText}
                         icon="facebook">Small</RkButton>
-              <RkButton size='large' type='rounded' style={[styles.warningBg]} textStyle={styles.whiteText}
-                        icon="twitter" iconStyle={styles.whiteText}>Large</RkButton>
+              <RkButton type='basic' size='large' type='rounded' style={[RkStyle.yellowBg]} textStyle={RkStyle.whiteText}
+                        icon="twitter" iconStyle={RkStyle.whiteText}>Large</RkButton>
             </View>
           </View>
         </View>
@@ -110,27 +110,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexWrap: 'wrap'
   },
   spaceAround: {
     marginHorizontal: 5
-  },
-  whiteText: {
-    color: 'white'
-  },
-  primaryBg: {
-    backgroundColor: RkConfig.colors.primary
-  },
-  dangerBg: {
-    backgroundColor: RkConfig.colors.danger
-  },
-  warningBg: {
-    backgroundColor: RkConfig.colors.warning
-  },
-  successBorder: {
-    borderColor: RkConfig.colors.success
-  },
-  successText: {
-    color: RkConfig.colors.success
   }
 });

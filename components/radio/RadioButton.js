@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderWidth: 1,
     borderRadius: 100,
-    borderColor: RkConfig.colors.primary
+    borderColor: RkConfig.colors.blue
   },
   classicInner: {
     width: 15,
@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   classicInnerSelected: {
-    backgroundColor: RkConfig.colors.primary
+    backgroundColor: RkConfig.colors.blue
   },
 });

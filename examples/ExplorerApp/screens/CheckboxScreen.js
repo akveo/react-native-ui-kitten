@@ -8,7 +8,7 @@ import {
   Alert
 } from 'react-native';
 
-import {RkCheckbox, RkConfig} from 'react-native-ui-kit';
+import {RkCheckbox, RkStyle, RkConfig} from 'react-native-ui-kit';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -42,28 +42,28 @@ export class CheckboxScreen extends Component {
         <View style={styles.section}>
           <Text style={styles.titleText}>Colored</Text>
           <View style={styles.rowContainer}>
-            <RkCheckbox style={[styles.rounded, styles.primaryBorder]} iconStyle={styles.primaryColor} checked={true}/>
-            <RkCheckbox style={[styles.primaryBorder, styles.spaceAround]} checkedStyle={styles.primaryBg}
-                        iconStyle={styles.whiteColor} checked={true}/>
-            <RkCheckbox style={styles.primaryBorder} iconStyle={styles.primaryColor} checkedStyle={styles.warningBg}
-                        underlayColor={RkConfig.colors.danger} checked={true}/>
+            <RkCheckbox style={[styles.rounded, RkStyle.blueBorder]} iconStyle={RkStyle.blueText} checked={true}/>
+            <RkCheckbox style={[RkStyle.blueBorder, styles.spaceAround]} checkedStyle={RkStyle.blueBg}
+                        iconStyle={RkStyle.whiteText} checked={true}/>
+            <RkCheckbox style={RkStyle.blueBorder} iconStyle={RkStyle.blueText} checkedStyle={RkStyle.yellowBg}
+                        underlayColor={RkConfig.colors.red} checked={true}/>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Custom icons</Text>
           <View style={styles.rowContainer}>
-            <RkCheckbox style={[styles.rounded, styles.primaryBorder, styles.bigOuter, styles.borderBolder]}
-                        iconStyle={[styles.primaryColor, styles.bigInner]} icon='diamond' checked={true}
-                        checkedIcon="star" checkedIconStyle={styles.dangerColor}/>
-            <RkCheckbox style={[styles.rounded, styles.successBorder, styles.whiteBg, styles.bigOuter, styles.spaceAround, styles.borderBolder]}
-                        iconStyle={[styles.dangerColor, styles.bigInner]} checkedStyle={styles.warningBg} icon='star'
+            <RkCheckbox style={[styles.rounded, RkStyle.blueBorder, styles.bigOuter, styles.borderBolder]}
+                        iconStyle={[RkStyle.blueText, styles.bigInner]} icon='diamond' checked={true}
+                        checkedIcon="star" checkedIconStyle={RkStyle.redText}/>
+            <RkCheckbox style={[styles.rounded, RkStyle.greenBorder, RkStyle.whiteBg, styles.bigOuter, styles.spaceAround, styles.borderBolder]}
+                        iconStyle={[RkStyle.redText, styles.bigInner]} checkedStyle={RkStyle.yellowBg} icon='star'
                         checked={true}/>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Event example</Text>
           <View style={styles.rowContainer}>
-            <RkCheckbox style={[styles.rounded, styles.primaryBorder]} iconStyle={styles.primaryColor} checked={true}
+            <RkCheckbox style={[styles.rounded, RkStyle.blueBorder]} iconStyle={RkStyle.blueText} checked={true}
                         onChange={(checked) => {Alert.alert(checked ? "Checked" : "Unchecked")}}/>
           </View>
         </View>
@@ -98,33 +98,6 @@ const styles = StyleSheet.create({
   },
   rounded: {
     borderRadius: 20
-  },
-  primaryColor: {
-    color: RkConfig.colors.primary
-  },
-  warningBg: {
-    backgroundColor: RkConfig.colors.warning
-  },
-  whiteColor: {
-    color: 'white'
-  },
-  dangerColor: {
-    color: RkConfig.colors.danger
-  },
-  primaryBg: {
-    backgroundColor: RkConfig.colors.primary
-  },
-  whiteBg: {
-    backgroundColor: 'white'
-  },
-  primaryBorder: {
-    borderColor: RkConfig.colors.primary
-  },
-  warningBorder: {
-    borderColor: RkConfig.colors.warning
-  },
-  successBorder: {
-    borderColor: RkConfig.colors.success
   },
   borderBolder: {
     borderWidth: 2,

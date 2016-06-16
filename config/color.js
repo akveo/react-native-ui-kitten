@@ -1,7 +1,8 @@
 export const Colors = {
+  white: '#fff',
   gray: '#E0E0E0',
-  primary: '#2196F3',
-  success: '#4CAF50',
-  warning: '#FFC107',
-  danger: '#F44336',
+  blue: '#2196F3',
+  green: '#4CAF50',
+  yellow: '#FFC107',
+  red: '#F44336',
 };

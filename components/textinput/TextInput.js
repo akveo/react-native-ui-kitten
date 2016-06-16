@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   defaultInput: {},
   defaultContainer: {
-    borderBottomColor: RkConfig.colors.primary,
+    borderBottomColor: RkConfig.colors.blue,
     borderBottomWidth: 2,
   },
   roundedInput: {},

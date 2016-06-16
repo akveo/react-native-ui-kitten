@@ -27,7 +27,7 @@ export class RkButton extends Component {
     children: React.PropTypes.string,
     style: View.propTypes.style,
     textStyle: Text.propTypes.style,
-    type: React.PropTypes.oneOf(['outline', 'clear', 'rounded']),
+    type: React.PropTypes.oneOf(['outline', 'clear', 'rounded', 'basic']),
     size: React.PropTypes.oneOf(['small', 'medium', 'large']),
     onPress: React.PropTypes.func,
     onLongPress: React.PropTypes.func,
@@ -99,16 +99,16 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     paddingHorizontal: 14,
     backgroundColor: 'transparent',
-    borderColor: RkConfig.colors.primary
+    borderColor: RkConfig.colors.blue
   },
   outlineText: {
-    color: RkConfig.colors.primary
+    color: RkConfig.colors.blue
   },
   clear: {
     backgroundColor: 'transparent',
   },
   clearText: {
-    color: RkConfig.colors.primary
+    color: RkConfig.colors.blue
   },
   rounded: {
     borderRadius: 50,
