@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   phrases: {
+      fontFamily: 'System',
       fontSize: 26
   }
 });

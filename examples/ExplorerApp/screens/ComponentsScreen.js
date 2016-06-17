@@ -5,9 +5,13 @@ import {
   ListView,
   View,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   Platform,
 } from 'react-native';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import {RkStyle} from 'react-native-ui-kit';
 
 import {ButtonScreen} from './ButtonScreen';
 import {CheckboxScreen} from './CheckboxScreen';
@@ -26,36 +30,27 @@ export class ComponentsScreen extends Component {
     let data = [
       {
         title: 'Start screen',
-        description: "Start screen with greeting",
         screenView: StartScreen
       },
       {
         title: "Buttons",
-        description: "Different styles for buttons",
         screenView: ButtonScreen
       },
       {
         title: "Checkboxes",
-        description: "Different styles for checkboxes",
         screenView: CheckboxScreen
       },
       {
         title: "Radio Buttons",
-        description: "",
         screenView: RadioScreen
       },
       {
         title: "Inputs",
-        description: "",
         screenView: InputScreen
       },
       {
         title: "Theme",
-        description: "",
         screenView: ThemeScreen
-      },
-      {
-        title: "Ohter"
       },
     ];
     this.state = {
@@ -65,27 +60,22 @@ export class ComponentsScreen extends Component {
 
   renderComponent(componentDefinition) {
     return (
-      <TouchableHighlight onPress={() => this.selectComponent(componentDefinition)}>
+      <TouchableOpacity onPress={() => this.selectComponent(componentDefinition)}>
         <View style={styles.componentRow}>
-          <Text style={styles.titleText}>{componentDefinition.title}</Text>
-          <Text style={styles.descriptionText}>{componentDefinition.description}</Text>
+          <Text style={[styles.titleText]}>{componentDefinition.title}</Text>
+          <Icon name={'angle-right'} size={18} style={RkStyle.grayText}/>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 
   selectComponent(componentDefinition:Object) {
     if (componentDefinition.screenView === undefined) return;
-    if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        title: componentDefinition.title,
-        component: componentDefinition.screenView
-      });
-    } else {
-      this.props.navigator.push({
-        title: componentDefinition.title,
-        component: componentDefinition.screenView
-      });
+    this.props.navigator.push({
+      title: componentDefinition.title,
+      component: componentDefinition.screenView
+    });
+    if (Platform.OS == 'android') {
       this.props.onSelect(componentDefinition);
     }
   }
@@ -125,20 +115,18 @@ const styles = StyleSheet.create({
   componentRow: {
     paddingHorizontal: 15,
     paddingVertical: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   titleText: {
-    color: '#2196F3',
-    fontSize: 20,
-  },
-  descriptionText: {
-    color: '#9E9E9E',
     fontSize: 16,
   },
   rowSeparator: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     height: 1,
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
   rowSeparatorHide: {
     opacity: 0.0,
