@@ -27,7 +27,7 @@ export class RkButton extends Component {
     children: React.PropTypes.string,
     style: View.propTypes.style,
     textStyle: Text.propTypes.style,
-    type: React.PropTypes.oneOf(['outline', 'clear', 'rounded', 'basic']),
+    type: React.PropTypes.oneOf(['outline', 'clear', 'basic']),
     size: React.PropTypes.oneOf(['small', 'medium', 'large']),
     onPress: React.PropTypes.func,
     onLongPress: React.PropTypes.func,
@@ -49,7 +49,7 @@ export class RkButton extends Component {
   render() {
     let boxStyle = [styles.button];
     let textStyle = [styles.textButton];
-    let iconStyle = [styles.iconStyle];
+    let iconStyle = this.props.children ? [styles.iconStyle, styles.iconMargin] : [styles.iconStyle];
     let type = this.props.type || RkConfig.theme.buttons.defaultType;
     boxStyle.push(styles[type]);
     textStyle.push(styles[type + 'Text']);
@@ -68,7 +68,7 @@ export class RkButton extends Component {
         style={[boxStyle, this.props.style]}>
         <View style={styles.buttonContainer}>
           {this.props.icon && <Icon name={this.props.icon} style={[iconStyle, this.props.iconStyle]}/>}
-          {this._renderInnerText(textStyle)}
+          {this.props.children && this._renderInnerText(textStyle)}
         </View>
       </TouchableOpacity>
     );
@@ -79,18 +79,19 @@ export class RkButton extends Component {
 const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
-    backgroundColor: RkConfig.colors.gray,
+    backgroundColor: RkConfig.colors.lightGray,
     paddingVertical: 10,
     paddingHorizontal: 15
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   textButton: {
     fontSize: 18,
     alignSelf: 'center',
+    textAlign: 'center',
   },
   basic: {},
   basicText: {},
@@ -110,10 +111,6 @@ const styles = StyleSheet.create({
   clearText: {
     color: RkConfig.colors.blue
   },
-  rounded: {
-    borderRadius: 50,
-  },
-  roundedText: {},
   small: {
     paddingVertical: 4,
     paddingHorizontal: 7,
@@ -122,22 +119,24 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   medium: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  mediumText: {
+    fontSize: 16,
+  },
+  large: {
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
-  mediumText: {
-    fontSize: 18,
-  },
-  large: {
-    paddingVertical: 15,
-    paddingHorizontal: 25,
-  },
   largeText: {
-    fontSize: 22,
+    fontSize: 20,
   },
   iconStyle: {
     fontSize: 18,
-    marginRight: 10
   },
+  iconMargin: {
+    marginRight: 10
+  }
 
 });
