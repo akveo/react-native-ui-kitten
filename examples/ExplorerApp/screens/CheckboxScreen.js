@@ -42,28 +42,28 @@ export class CheckboxScreen extends Component {
         <View style={styles.section}>
           <Text style={styles.titleText}>Colored</Text>
           <View style={styles.rowContainer}>
-            <RkCheckbox style={[styles.rounded, RkStyle.blueBorder]} iconStyle={RkStyle.blueText} checked={true}/>
-            <RkCheckbox style={[RkStyle.blueBorder, styles.spaceAround]} checkedStyle={RkStyle.blueBg}
+            <RkCheckbox style={[styles.rounded, RkStyle.primaryBorder]} iconStyle={RkStyle.primaryText} checked={true}/>
+            <RkCheckbox style={[RkStyle.primaryBorder, styles.spaceAround]} checkedStyle={RkStyle.primaryBg}
                         iconStyle={RkStyle.whiteText} checked={true}/>
-            <RkCheckbox style={RkStyle.blueBorder} iconStyle={RkStyle.blueText} checkedStyle={RkStyle.yellowBg}
-                        underlayColor={RkConfig.colors.red} checked={true}/>
+            <RkCheckbox style={RkStyle.primaryBorder} iconStyle={RkStyle.primaryText} checkedStyle={RkStyle.darkWarningBg}
+                        underlayColor={RkConfig.colors.danger} checked={true}/>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Custom icons</Text>
           <View style={styles.rowContainer}>
-            <RkCheckbox style={[styles.rounded, RkStyle.blueBorder, styles.bigOuter, styles.borderBolder]}
-                        iconStyle={[RkStyle.blueText, styles.bigInner]} icon='diamond' checked={true}
-                        checkedIcon="star" checkedIconStyle={RkStyle.redText}/>
-            <RkCheckbox style={[styles.rounded, RkStyle.greenBorder, RkStyle.whiteBg, styles.bigOuter, styles.spaceAround, styles.borderBolder]}
-                        iconStyle={[RkStyle.redText, styles.bigInner]} checkedStyle={RkStyle.yellowBg} icon='star'
+            <RkCheckbox style={[styles.rounded, RkStyle.primaryBorder, styles.bigOuter, styles.borderBolder]}
+                        iconStyle={[RkStyle.primaryText, styles.bigInner]} icon='diamond' checked={true}
+                        checkedIcon="star" checkedIconStyle={RkStyle.dangerText}/>
+            <RkCheckbox style={[styles.rounded, RkStyle.successBorder, RkStyle.whiteBg, styles.bigOuter, styles.spaceAround, styles.borderBolder]}
+                        iconStyle={[RkStyle.dangerText, styles.bigInner]} checkedStyle={RkStyle.darkWarningBg} icon='star'
                         checked={true}/>
           </View>
         </View>
         <View style={styles.section}>
           <Text style={styles.titleText}>Event example</Text>
           <View style={styles.rowContainer}>
-            <RkCheckbox style={[styles.rounded, RkStyle.blueBorder]} iconStyle={RkStyle.blueText} checked={true}
+            <RkCheckbox style={[styles.rounded, RkStyle.primaryBorder]} iconStyle={RkStyle.primaryText} checked={true}
                         onChange={(checked) => {Alert.alert(checked ? "Checked" : "Unchecked")}}/>
           </View>
         </View>

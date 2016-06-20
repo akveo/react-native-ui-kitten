@@ -47,15 +47,7 @@ export class RkButton extends Component {
   }
 
   render() {
-    let boxStyle = [styles.button];
-    let textStyle = [styles.textButton];
-    let iconStyle = this.props.children ? [styles.iconStyle, styles.iconMargin] : [styles.iconStyle];
-    let type = this.props.type || RkConfig.theme.buttons.defaultType;
-    boxStyle.push(styles[type]);
-    textStyle.push(styles[type + 'Text']);
-    let size = this.props.size || RkConfig.theme.buttons.defaultSize;
-    boxStyle.push(styles[size]);
-    textStyle.push(styles[size + 'Text']);
+    let {boxStyle, textStyle, iconStyle} = this._defineStyles();
     let touchableProps = {
       onPress: this.props.onPress,
       onPressIn: this.props.onPressIn,
@@ -72,6 +64,23 @@ export class RkButton extends Component {
         </View>
       </TouchableOpacity>
     );
+  }
+
+  _defineStyles(){
+    let boxStyle = [styles.button];
+    let textStyle = [styles.textButton];
+    let iconStyle = this.props.children ? [styles.iconStyle, styles.iconMargin] : [styles.iconStyle];
+    let type = this.props.type || RkConfig.theme.buttons.defaultType;
+    if(type) {
+      boxStyle.push(styles[type]);
+      textStyle.push(styles[type + 'Text']);
+    }
+    let size = this.props.size || RkConfig.theme.buttons.defaultSize;
+    if(size) {
+      boxStyle.push(styles[size]);
+      textStyle.push(styles[size + 'Text']);
+    }
+    return {boxStyle, textStyle, iconStyle}
   }
 
 }
@@ -100,16 +109,16 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     paddingHorizontal: 14,
     backgroundColor: 'transparent',
-    borderColor: RkConfig.colors.blue
+    borderColor: RkConfig.colors.primary
   },
   outlineText: {
-    color: RkConfig.colors.blue
+    color: RkConfig.colors.primary
   },
   clear: {
     backgroundColor: 'transparent',
   },
   clearText: {
-    color: RkConfig.colors.blue
+    color: RkConfig.colors.primary
   },
   small: {
     paddingVertical: 4,
@@ -136,7 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   iconMargin: {
-    marginRight: 10
+    marginRight: 5
   }
 
 });

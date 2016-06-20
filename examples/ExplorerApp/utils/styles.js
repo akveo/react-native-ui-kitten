@@ -49,7 +49,7 @@ export const UtilStyles = StyleSheet.create({
 
   },
   codeText: {
-    color: RkConfig.colors.deepOrange,
+    color: RkConfig.colors.deepWarning,
     backgroundColor: RkConfig.colors.lightGray,
     paddingHorizontal: 4,
     paddingVertical: 2,

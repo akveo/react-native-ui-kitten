@@ -41,13 +41,13 @@ export class RadioScreen extends Component {
           <View style={styles.rowContainer}>
             <RkRadioGroup selectedIndex={0}>
               <View style={styles.rowRadio}>
-                <RkRadioButton type={'classic'} style={RkStyle.redBorder} innerStyle={RkStyle.redBg}
-                               selectedStyle={RkStyle.greenBorder} innerSelectedStyle={RkStyle.greenBg}/>
-                <RkRadioButton type={'classic'} style={[RkStyle.redBorder, styles.spaceAround]}
-                               innerStyle={RkStyle.redBg}
-                               selectedStyle={RkStyle.greenBorder} innerSelectedStyle={RkStyle.greenBg}/>
-                <RkRadioButton type={'classic'} style={RkStyle.redBorder} innerStyle={RkStyle.redBg}
-                               selectedStyle={RkStyle.greenBorder} innerSelectedStyle={RkStyle.greenBg}/>
+                <RkRadioButton type={'classic'} style={RkStyle.dangerBorder} innerStyle={RkStyle.dangerBg}
+                               selectedStyle={RkStyle.successBorder} innerSelectedStyle={RkStyle.successBg}/>
+                <RkRadioButton type={'classic'} style={[RkStyle.dangerBorder, styles.spaceAround]}
+                               innerStyle={RkStyle.dangerBg}
+                               selectedStyle={RkStyle.successBorder} innerSelectedStyle={RkStyle.successBg}/>
+                <RkRadioButton type={'classic'} style={RkStyle.dangerBorder} innerStyle={RkStyle.dangerBg}
+                               selectedStyle={RkStyle.successBorder} innerSelectedStyle={RkStyle.successBg}/>
               </View>
             </RkRadioGroup>
           </View>
@@ -59,13 +59,13 @@ export class RadioScreen extends Component {
               <View style={styles.rowRadio}>
                 <RkRadioButton icon={'md-checkmark'}
                                style={[RkStyle.rounded, styles.exampleIcon]}
-                               innerSelectedStyle={{color: RkConfig.colors.blue, fontSize: 20}}/>
+                               innerSelectedStyle={{color: RkConfig.colors.primary, fontSize: 20}}/>
                 <RkRadioButton icon={'md-checkmark'}
                                style={[styles.exampleIcon, styles.spaceAround, RkStyle.rounded]}
-                               innerSelectedStyle={{color: RkConfig.colors.blue, fontSize: 20}}/>
+                               innerSelectedStyle={{color: RkConfig.colors.primary, fontSize: 20}}/>
                 <RkRadioButton icon={'md-checkmark'}
                                style={[RkStyle.rounded, styles.exampleIcon]}
-                               innerSelectedStyle={{color: RkConfig.colors.blue, fontSize: 20, }}/>
+                               innerSelectedStyle={{color: RkConfig.colors.primary, fontSize: 20, }}/>
               </View>
             </RkRadioGroup>
           </View>
@@ -79,7 +79,7 @@ export class RadioScreen extends Component {
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 1</Text>
                     <RkRadioButton style={{marginLeft: 10}} innerStyle={{width: 10}}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.blue}}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.primary}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
@@ -87,7 +87,7 @@ export class RadioScreen extends Component {
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 2</Text>
                     <RkRadioButton style={{marginLeft: 10}} innerStyle={{width: 10}}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.blue}}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.primary}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
@@ -95,7 +95,7 @@ export class RadioScreen extends Component {
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 3</Text>
                     <RkRadioButton style={{marginLeft: 10}} innerStyle={{width: 10}}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.blue}}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.primary}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
@@ -103,7 +103,7 @@ export class RadioScreen extends Component {
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 4</Text>
                     <RkRadioButton style={{marginLeft: 10}} innerStyle={{width: 10}}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.blue}}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.primary}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
@@ -114,32 +114,32 @@ export class RadioScreen extends Component {
                 <TouchableOpacity radioTrigger={true}>
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 1</Text>
-                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.red}} iconUnchecked={'md-close'}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.green}}
+                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.danger}} iconUnchecked={'md-close'}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.success}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity radioTrigger={true}>
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 2</Text>
-                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.red}} iconUnchecked={'md-close'}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.green}}
+                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.danger}} iconUnchecked={'md-close'}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.success}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity radioTrigger={true}>
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 3</Text>
-                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.red}} iconUnchecked={'md-close'}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.green}}
+                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.danger}} iconUnchecked={'md-close'}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.success}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity radioTrigger={true}>
                   <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
                     <Text>Option 4</Text>
-                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.red}} iconUnchecked={'md-close'}
-                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.green}}
+                    <RkRadioButton style={{marginLeft: 10}} innerStyle={{color: RkConfig.colors.danger}} iconUnchecked={'md-close'}
+                                   innerSelectedStyle={{fontSize: 16, color: RkConfig.colors.success}}
                                    icon={'md-checkmark'}/>
                   </View>
                 </TouchableOpacity>
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     height: 25,
     padding: 5,
     borderWidth: 1,
-    borderColor: RkConfig.colors.blue,
+    borderColor: RkConfig.colors.primary,
     flex: 1,
     justifyContent: "center",
     alignItems: 'center'
