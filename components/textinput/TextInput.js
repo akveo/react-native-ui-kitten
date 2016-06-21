@@ -21,54 +21,37 @@ export class RkTextInput extends Component {
   render() {
     let {
       containerStyle,
-      type,
       iconStyle,
       icon,
       ...inputProps
       } = this.props;
-    type = type || 'default'
-    inputProps.style = [styles.basicInput, styles[type + 'Input'], inputProps.style];
-    containerStyle = [styles.basicContainer, styles[type + 'Container'], containerStyle];
+    let {boxStyle, inputStyle} = this._defineStyles();
+    inputProps.style = [inputStyle, inputProps.style];
+    boxStyle.push(containerStyle);
     return (
-      <View style={containerStyle}>
+      <View style={boxStyle}>
         {icon && <Icon name={icon} size={18} style={iconStyle}/>}
         <TextInput {...inputProps}/>
       </View>
     );
   }
 
+  _defineStyles() {
+    let types = this.props.type || (RkConfig.theme.input ? RkConfig.theme.input.defaultType : '');
+    types = types && types.length ? types.split(" ") : [];
+    let boxStyle = [RkConfig.themes.styles.input._container];
+    let inputStyle = [RkConfig.themes.styles.input._input];
+    for (type of types) {
+      if(RkConfig.themes.styles.input[type]) {
+        boxStyle.push(RkConfig.themes.styles.input[type].container);
+        inputStyle.push(RkConfig.themes.styles.input[type].input);
+      }
+    }
+    return {boxStyle, inputStyle}
+  }
+
 }
 
 const styles = StyleSheet.create({
-  basicInput: {
-    fontSize: 16,
-    height: 16 * 1.42,
-    paddingHorizontal: 5,
-    flex: 1,
-    alignSelf: 'flex-end'
-  },
-  basicContainer: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    padding: 1,
-  },
-  defaultInput: {},
-  defaultContainer: {
-    borderBottomColor: RkConfig.colors.primary,
-    borderBottomWidth: 2,
-  },
-  roundedInput: {},
-  roundedContainer: {
-    backgroundColor: RkConfig.colors.gray,
-    borderRadius: 100,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  borderedInput: {},
-  borderedContainer: {
-    padding: 5,
-    borderWidth: 0.5,
-    borderColor: RkConfig.colors.gray,
-    borderRadius: 3,
-  }
+
 });

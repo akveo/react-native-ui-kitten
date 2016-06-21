@@ -91,6 +91,42 @@ export const Themes = {
       },
     },
 
+    input:{
+      _input: {
+        fontSize: 16,
+        height: 16 * 1.42,
+        paddingHorizontal: 5,
+        flex: 1,
+        alignSelf: 'flex-end'
+      },
+      _container: {
+        alignItems: 'flex-end',
+        flexDirection: 'row',
+        padding: 1,
+      },
+      basic:{
+        input:{},
+        container:{}
+      },
+      bordered:{
+        input:{},
+        container:{
+          padding: 5,
+          borderWidth: 0.5,
+          borderColor: Colors.gray,
+          borderRadius: 3,
+        }
+      },
+      rounded:{
+        input:{},
+        container:{
+          backgroundColor: Colors.gray,
+          borderRadius: 100,
+          paddingHorizontal: 10,
+          paddingVertical: 5,
+        }
+      }
+    }
 
   }
 
