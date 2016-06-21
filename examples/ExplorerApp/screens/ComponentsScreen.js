@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
   },
   componentRow: {
     paddingHorizontal: 15,
-    paddingVertical: 5,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
   titleText: {
-    fontSize: 16,
+    fontSize: 18,
   },
   rowSeparator: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',

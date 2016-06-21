@@ -95,35 +95,69 @@ export const Themes = {
       _input: {
         fontSize: 16,
         height: 16 * 1.42,
-        paddingHorizontal: 5,
         flex: 1,
         alignSelf: 'flex-end'
       },
       _container: {
         alignItems: 'flex-end',
         flexDirection: 'row',
-        padding: 1,
+        flex: 1,
+      },
+      _label: {
+        height: 16 * 1.42,
+        fontSize: 16,
+        alignSelf: 'center',
+        marginRight: 5,
+      },
+      _icon:{
+        marginRight: 5,
       },
       basic:{
         input:{},
-        container:{}
+        container:{},
+        label:{}
       },
       bordered:{
         input:{},
         container:{
           padding: 5,
           borderWidth: 0.5,
-          borderColor: Colors.gray,
+          borderColor: Colors.lightGray,
           borderRadius: 3,
-        }
+        },
+        label:{}
       },
       rounded:{
         input:{},
         container:{
-          backgroundColor: Colors.gray,
+          backgroundColor: Colors.lightGray,
           borderRadius: 100,
           paddingHorizontal: 10,
           paddingVertical: 5,
+        },
+        label:{}
+      },
+      underlay: {
+        input:{},
+        container:{
+          borderBottomWidth: 0.5,
+          borderBottomColor: Colors.primary,
+        },
+        label:{}
+      },
+      topLabel:{
+        input:{
+          alignSelf: 'stretch',
+        },
+        container:{
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+        },
+        label:{
+          fontSize: 12,
+          height: 12 * 1.4,
+          color: Colors.gray,
+          alignSelf: 'flex-start'
         }
       }
     }
