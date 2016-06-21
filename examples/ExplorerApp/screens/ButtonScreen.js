@@ -11,7 +11,7 @@ import {
 import {RkButton, RkConfig, RkStyle} from 'react-native-ui-kit';
 
 import {UtilStyles} from '../utils/styles';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export class ButtonScreen extends Component {
 
@@ -24,7 +24,7 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>Basic button</Text>
           <View style={UtilStyles.rowContainer}>
             <View style={UtilStyles.exampleView}>
-              <RkButton type='basic' size='medium'>Button</RkButton>
+              <RkButton type='basic medium'>Button</RkButton>
             </View>
             <View style={UtilStyles.description}>
               <Text>Just create button element with text inside:</Text>
@@ -40,11 +40,11 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>Colored buttons</Text>
           <View style={[UtilStyles.rowContainer]}>
             <View style={UtilStyles.exampleView}>
-              <RkButton type='basic' size='medium' style={RkStyle.primaryBg}
-                        textStyle={RkStyle.whiteText}>Primary</RkButton>
-              <RkButton type='basic' size='medium' style={[UtilStyles.spaceV, RkStyle.darkWarningBg]}
-                        textStyle={RkStyle.whiteText}>Warning</RkButton>
-              <RkButton type='basic' size='medium' style={RkStyle.dangerBg} textStyle={RkStyle.whiteText}>Danger</RkButton>
+              <RkButton type='basic medium' style={RkStyle.primaryBg}
+                        innerStyle={RkStyle.whiteText}>Primary</RkButton>
+              <RkButton type='basic medium' style={[UtilStyles.spaceV, RkStyle.darkWarningBg]}
+                        innerStyle={RkStyle.whiteText}>Warning</RkButton>
+              <RkButton type='basic medium' style={RkStyle.dangerBg} innerStyle={RkStyle.whiteText}>Danger</RkButton>
             </View>
             <View style={[UtilStyles.description]}>
               <Text>Easy to customize colors using
@@ -52,7 +52,7 @@ export class ButtonScreen extends Component {
                 props for button container styles such as
                 <Text style={RkStyle.deepWarningText}> backgroundColor </Text>
                 and
-                <Text style={RkStyle.deepWarningText}> textStyle </Text>
+                <Text style={RkStyle.deepWarningText}> innerStyle </Text>
                 props for inner text</Text>
             </View>
           </View>
@@ -61,9 +61,9 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>Button type props</Text>
           <View style={UtilStyles.rowContainer}>
             <View style={UtilStyles.exampleView}>
-              <RkButton size='medium' type='basic'>Basic</RkButton>
-              <RkButton size='medium' type='clear'>Clear</RkButton>
-              <RkButton size='medium' type='outline'>Outline</RkButton>
+              <RkButton type='basic medium'>Basic</RkButton>
+              <RkButton type='basic clear'>Clear</RkButton>
+              <RkButton type='basic outline'>Outline</RkButton>
             </View>
             <View style={[UtilStyles.description]}>
               <Text>With button props
@@ -83,21 +83,23 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>Button sizes</Text>
           <View style={UtilStyles.rowContainer}>
             <View style={[UtilStyles.row, {alignItems: 'center'}]}>
-              <RkButton type='basic' size='small' type='outline'>Small</RkButton>
-              <RkButton type='basic' size='medium' type='outline' style={UtilStyles.spaceAround}>Medium</RkButton>
-              <RkButton type='outline' size='large'>Large</RkButton>
+              <RkButton type='small outline'>Small</RkButton>
+              <RkButton type='medium outline' style={UtilStyles.spaceAround}>Medium</RkButton>
+              <RkButton type='outline large'>Large</RkButton>
             </View>
           </View>
-          <View style={[UtilStyles.description, UtilStyles.row, {paddingLeft: 0, marginTop: 10}]}>
-            <Text>
-              <Text style={RkStyle.deepWarningText}>size </Text>
-              props allow you to define the mass of button
-            </Text>
-            <View style={[{alignItems: 'flex-start'}]}>
-              <Text style={{marginVertical: 5}}>Available values:</Text>
-              <Text style={[UtilStyles.codeText, UtilStyles.tab]}>small</Text>
-              <Text style={[UtilStyles.codeText, UtilStyles.tab, UtilStyles.spaceV]}>medium</Text>
-              <Text style={[UtilStyles.codeText, UtilStyles.tab]}>large</Text>
+          <View style={UtilStyles.row}>
+            <View style={[UtilStyles.description , {paddingLeft: 0, marginTop: 10}]}>
+              <Text>
+                <Text style={RkStyle.deepWarningText}>type </Text>
+                props also allow you to define the mass of button.
+              </Text>
+              <View style={[{alignItems: 'flex-start'}]}>
+                <Text style={{marginVertical: 5}}>Available values:</Text>
+                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>small</Text>
+                <Text style={[UtilStyles.codeText, UtilStyles.tab, UtilStyles.spaceV]}>medium</Text>
+                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>large</Text>
+              </View>
             </View>
           </View>
         </View>
@@ -105,25 +107,22 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>With icons</Text>
           <View style={UtilStyles.rowContainer}>
             <View style={[UtilStyles.exampleView, {alignItems: 'flex-start'}]}>
-              <RkButton type='basic' size='medium' style={RkStyle.primaryBg} textStyle={RkStyle.whiteText}
-                        icon="diamond" iconStyle={RkStyle.whiteText}>shine</RkButton>
-              <RkButton type='outline' size='medium' style={[RkStyle.deepWarningBorder, UtilStyles.spaceV]}
-                        textStyle={RkStyle.deepWarningText}
-                        icon="git" iconStyle={RkStyle.deepWarningText}>smart</RkButton>
-              <RkButton type='basic' size='small' type='outline'
-                        iconStyle={[RkStyle.primaryText, {fontWeight: '100', fontSize: 10, alignSelf: 'flex-start', marginRight:2}]}
-                        icon="plus">Add</RkButton>
+              <RkButton type='small outline' style={[ RkStyle.deepWarningBorder]} innerStyle={RkStyle.deepWarningText}>
+                <Icon style={{marginRight: 5, fontSize: 18}} name={'logo-github'}/>Star
+              </RkButton>
+              <RkButton type='small' style={[UtilStyles.spaceV, RkStyle.primaryBg]} innerStyle={RkStyle.whiteText}>
+                <Icon style={{marginRight: 5, fontSize: 18}} name={'logo-twitter'}/>Follow
+              </RkButton>
+              <RkButton type='small outline' style={{paddingTop: 1, paddingLeft: 3}}>
+                <Icon name={'md-add'} style={{fontSize: 10,alignSelf: 'flex-start'}}/><Text>Add</Text>
+              </RkButton>
             </View>
             <View style={[UtilStyles.description]}>
               <Text>For icons used react-native-vector-icons. Add
-                <Text style={RkStyle.deepWarningText}> icon </Text>
-                props with icon name.
-                Style icon with
-                <Text style={RkStyle.deepWarningText}> iconStyle </Text>
-                props.
-                Chose icon family with
-                <Text style={RkStyle.deepWarningText}> iconFamily </Text>
-                props.</Text>
+                <Text style={RkStyle.deepWarningText}> {" <Icon/> "} </Text>
+                and text inside
+                <Text style={RkStyle.deepWarningText}>{" <RkButton> "}</Text>
+                element.</Text>
             </View>
           </View>
         </View>
@@ -131,26 +130,17 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>Icons only</Text>
           <View style={UtilStyles.rowContainer}>
             <View style={[UtilStyles.row, {alignItems: 'center'}]}>
-              <RkButton type='basic' size='medium' style={RkStyle.primaryBg} textStyle={RkStyle.whiteText}
-                        icon="diamond" iconStyle={RkStyle.whiteText}/>
-              <RkButton type='outline' size='medium' style={[RkStyle.deepWarningBorder, UtilStyles.spaceH]}
-                        textStyle={RkStyle.deepWarningText}
-                        icon="git" iconStyle={RkStyle.deepWarningText}/>
-              <RkButton type='basic' style={{borderRadius: 25, paddingVertical: 5, paddingHorizontal: 7}} size='small'
-                        type='outline' iconStyle={[RkStyle.primaryText, {fontWeight: '100', fontSize: 14}]}
-                        icon="plus"/>
-            </View>
-          </View>
-          <View style={[UtilStyles.description, UtilStyles.row, {paddingLeft: 0, marginTop: 10}]}>
-            <Text>
-              <Text style={RkStyle.deepWarningText}>size </Text>
-              props allow you to define the mass of button
-            </Text>
-            <View style={[{alignItems: 'flex-start'}]}>
-              <Text style={{marginVertical: 5}}>Available values:</Text>
-              <Text style={[UtilStyles.codeText, UtilStyles.tab]}>small</Text>
-              <Text style={[UtilStyles.codeText, UtilStyles.tab, UtilStyles.spaceV]}>medium</Text>
-              <Text style={[UtilStyles.codeText, UtilStyles.tab]}>large</Text>
+              <RkButton type='basic' style={[ RkStyle.deepWarningBg]} innerStyle={RkStyle.whiteText}>
+                <Icon name={'md-share'}/>
+              </RkButton>
+              <RkButton type='basic circle'
+                        style={[UtilStyles.spaceH,  RkStyle.dangerBg, {paddingVertical: 5, paddingHorizontal: 10}]}
+                        innerStyle={[RkStyle.whiteText, {fontSize: 22}]}>
+                <Icon name={'md-add'}/>
+              </RkButton>
+              <RkButton type='outline circle small' style={{paddingVertical: 2}}>
+                <Icon style={{fontSize: 20}} name={'md-add'}/>
+              </RkButton>
             </View>
           </View>
         </View>
@@ -158,7 +148,8 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>Events</Text>
           <View style={UtilStyles.rowContainer}>
             <View style={UtilStyles.exampleView}>
-              <RkButton type='basic' size='medium' onPress={() => {Alert.alert('click')}} style={RkStyle.dangerBg} textStyle={RkStyle.whiteText}>Push me!</RkButton>
+              <RkButton type='basic medium' onPress={() => {Alert.alert('click')}} style={RkStyle.dangerBg}
+                        innerStyle={RkStyle.whiteText}>Push me!</RkButton>
             </View>
             <View style={UtilStyles.description}>
               <View style={[{alignItems: 'flex-start'}]}>
