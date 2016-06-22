@@ -67,7 +67,7 @@ export class InputScreen extends Component {
           <Text style={UtilStyles.titleText}>With icon</Text>
           <View style={[UtilStyles.rowContainer]}>
             <View style={{flex: 1}}>
-              <RkTextInput icon={'ios-log-in'} placeholder={'Login'}/>
+              <RkTextInput icon={'ios-person-outline'} placeholder={'Login'} iconStyle={{fontSize: 22}}/>
               <RkSeparator style={{marginVertical: 5, marginRight: 20}}/>
               <RkTextInput secureTextEntry={true} icon={'ios-key-outline'} placeholder={'Password'}/>
 

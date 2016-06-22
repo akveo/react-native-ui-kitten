@@ -39,7 +39,7 @@ export class RkButton extends Component {
       <TouchableOpacity {...touchableProps}
         style={[boxStyle, this.props.style]}>
         <View style={styles.buttonContainer}>
-          {this._renderChildren(innerStyle)}
+          {this.props.children && this._renderChildren(innerStyle)}
         </View>
       </TouchableOpacity>
     );

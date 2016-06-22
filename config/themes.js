@@ -96,10 +96,9 @@ export const Themes = {
         fontSize: 16,
         height: 16 * 1.42,
         flex: 1,
-        alignSelf: 'flex-end'
+        alignSelf: 'center'
       },
       _container: {
-        alignItems: 'flex-end',
         flexDirection: 'row',
         flex: 1,
       },
@@ -111,6 +110,8 @@ export const Themes = {
       },
       _icon:{
         marginRight: 5,
+        alignSelf: 'center',
+        backgroundColor: 'transparent'
       },
       basic:{
         input:{},

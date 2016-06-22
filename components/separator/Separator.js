@@ -15,7 +15,7 @@ export class RkSeparator extends Component {
 
   render() {
     return (
-      <View style={[{backgroundColor: RkConfig.colors.lightGray, height:1, flex: 1}, this.props.style]}/>
+      <View style={[{backgroundColor: RkConfig.colors.lightGray, height:1}, this.props.style]}/>
     );
   }
 
