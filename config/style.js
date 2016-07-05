@@ -13,10 +13,10 @@ export const RkStyle = _.merge({
     card:{
       card: {
         backgroundColor: 'white',
-        padding: 10,
+        padding: 5,
       },
       shadowMargin:{
-        marginBottom: 15,
+        marginVertical: 10,
         shadowColor: Colors.gray,
         shadowOpacity: 0.5,
         shadowRadius: 5,
@@ -34,6 +34,11 @@ export const RkStyle = _.merge({
         width: 75,
         height: 75,
         borderRadius: 37.5
+      },
+      avatarBigImg: {
+        width: 120,
+        height: 120,
+        borderRadius: 60
       },
       avatarSmallImg: {
         width: 40,
