@@ -31,12 +31,15 @@ export class RkModalImg extends Component {
       visible: false,
       width,
       height,
-      index: props.index,
+      index: props.index || 0,
     }
   }
 
-  componentDidMount() {
-    this.listView && this.listView.scrollTo({x: this.state.index * this.state.width})
+  componentDidUpdate() {
+    if(this.state.openUpdate && this.refs.listView){
+      this.refs.listView.scrollTo({x: +this.props.index * this.state.width})
+      this.setState({openUpdate: false, index: +this.props.index});
+    }
   }
 
   render() {
@@ -50,12 +53,14 @@ export class RkModalImg extends Component {
       modalContainerStyle,
       imageInModalStyle,
       source,
+      delimiter,
       index,
       ...imgProps,
       } = this.props;
     renderHeader = renderHeader || this._renderHeader.bind(this);
     renderFooter = renderFooter || this._renderFooter.bind(this);
     animationType = animationType || 'fade';
+    delimiter = delimiter || '/';
     transparent = transparent === undefined ? false : transparent;
     visible = visible === undefined ? this.state.visible : visible;
     modalContainerStyle = [{
@@ -69,7 +74,7 @@ export class RkModalImg extends Component {
     let basicSource = Array.isArray(source) ? source[index] : source;
     return (
       <View>
-        <TouchableWithoutFeedback style={containerStyle} onPress={() => this.setState({visible: true})}>
+        <TouchableWithoutFeedback style={containerStyle} onPress={() => this.setState({visible: true, openUpdate: true})}>
           <Image source={basicSource} {...imgProps}/>
         </TouchableWithoutFeedback>
         <Modal
@@ -78,7 +83,7 @@ export class RkModalImg extends Component {
           visible={visible}>
           <View style={modalContainerStyle}>
             { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
-            {renderHeader()}
+            {renderHeader(delimiter)}
             {renderFooter()}
           </View>
         </Modal>
@@ -89,7 +94,7 @@ export class RkModalImg extends Component {
   _renderList(source, index, props) {
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return <ListView
-      ref={listView => this.listView = listView}
+      ref='listView'
       onScroll={(e)=>this._onScroll(e)}
       style={{flex: 1}}
       dataSource={ds.cloneWithRows(source.map((s)=>{return {img: s}}))}
@@ -126,20 +131,30 @@ export class RkModalImg extends Component {
     );
   }
 
-  _renderHeader() {
+  _renderHeader(delimiter) {
     return (
       <Animated.View style={[styles.header, {opacity: this.state.opacity}]}>
-        <RkButton innerStyle={{color: 'white'}} type={'clear'}
+        <RkButton innerStyle={{color: 'white'}} style={{paddingVertical: 0, paddingHorizontal: 0}} type={'clear'}
                   onPress={()=> this.setState({visible: false})}>Close</RkButton>
         <View>
-          {Array.isArray(this.props.source) &&
-          <Text style={{color: 'white'}}>
-            {this.state.index + 1}/{this.props.source.length}
-          </Text>}
+          {this._renderPageNumbers(delimiter)}
         </View>
-        <View/>
+        <View><Text style={{color: 'white'}}>1234</Text></View>
       </Animated.View>
     );
+  }
+
+  _renderPageNumbers(delimeter) {
+    if (Array.isArray(this.props.source)) {
+      let pageText = +this.state.index+ + 1;
+      pageText += delimeter;
+      pageText += this.props.source.length;
+      return (
+        <Text style={{color: 'white'}}>
+          {pageText}
+        </Text>
+      )
+    } else return null;
   }
 
   _onScroll(e) {
