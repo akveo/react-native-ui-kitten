@@ -6,5 +6,6 @@ export {RkTextInput} from './components/textinput/TextInput';
 export {RkSeparator} from './components/separator/Separator';
 export {RkBoardUpView} from './components/boardup/BoardUpView';
 export {RkModalImg} from './components/image/ModalImg';
+export {RkBarBg} from './components/status/BarBg';
 export {RkConfig} from './config/config.js';
 export {RkStyle} from './config/style.js';
