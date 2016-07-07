@@ -20,6 +20,10 @@ import {
   RkButton
 } from '../button/Button';
 
+import {
+  RkBarBg
+} from '../status/BarBg';
+
 export class RkModalImg extends Component {
 
 
@@ -85,6 +89,7 @@ export class RkModalImg extends Component {
             { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
             {renderHeader(delimiter)}
             {renderFooter()}
+            <RkBarBg style={{backgroundColor: '#212121'}}/>
           </View>
         </Modal>
       </View>
@@ -134,12 +139,14 @@ export class RkModalImg extends Component {
   _renderHeader(delimiter) {
     return (
       <Animated.View style={[styles.header, {opacity: this.state.opacity}]}>
-        <RkButton innerStyle={{color: 'white'}} style={{paddingVertical: 0, paddingHorizontal: 0}} type={'clear'}
+        <View style={{flex: 1}}>
+          <RkButton innerStyle={{color: 'white'}} style={{width: 60}} type={'clear'}
                   onPress={()=> this.setState({visible: false})}>Close</RkButton>
-        <View>
-          {this._renderPageNumbers(delimiter)}
         </View>
-        <View><Text style={{color: 'white'}}>1234</Text></View>
+        <View style={{flex: 1}}>
+          <Text style={{textAlign: 'center', fontSize: 16}}>{this._renderPageNumbers(delimiter)}</Text>
+        </View>
+        <View style={{flex: 1}}></View>
       </Animated.View>
     );
   }
@@ -174,12 +181,12 @@ export class RkModalImg extends Component {
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
-    top: 0,
+    top: 20,
     left: 0,
     right: 0,
-    paddingTop: 20,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between',
     backgroundColor: '#212121',
     flexDirection: 'row',
   },
