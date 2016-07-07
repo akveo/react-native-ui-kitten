@@ -40,7 +40,7 @@ export class RkModalImg extends Component {
   }
 
   componentDidUpdate() {
-    if(this.state.openUpdate && this.refs.listView){
+    if (this.state.openUpdate && this.refs.listView) {
       this.refs.listView.scrollTo({x: +this.props.index * this.state.width})
       this.setState({openUpdate: false, index: +this.props.index});
     }
@@ -75,10 +75,14 @@ export class RkModalImg extends Component {
       height: this.state.height,
       width: this.state.width
     }, imageInModalStyle];
+    let closeImage = this._closeImage.bind(this);
+    let pageNumber = +this.state.index + 1;
+    let totalPages = this.props.source.length;
     let basicSource = Array.isArray(source) ? source[index] : source;
     return (
       <View>
-        <TouchableWithoutFeedback style={containerStyle} onPress={() => this.setState({visible: true, openUpdate: true})}>
+        <TouchableWithoutFeedback style={containerStyle}
+                                  onPress={() => this.setState({visible: true, openUpdate: true})}>
           <Image source={basicSource} {...imgProps}/>
         </TouchableWithoutFeedback>
         <Modal
@@ -87,8 +91,13 @@ export class RkModalImg extends Component {
           visible={visible}>
           <View style={modalContainerStyle}>
             { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
-            {renderHeader(delimiter)}
-            {renderFooter()}
+            <Animated.View style={[styles.header, {opacity: this.state.opacity}]}>
+              {renderHeader(closeImage, pageNumber, totalPages, delimiter)}
+            </Animated.View>
+            <Animated.View style={[styles.footer, {opacity: this.state.opacity}]}>
+              {renderFooter(closeImage, pageNumber, totalPages, delimiter)}
+            </Animated.View>
+
             <RkBarBg style={{backgroundColor: '#212121'}}/>
           </View>
         </Modal>
@@ -130,31 +139,31 @@ export class RkModalImg extends Component {
   }
 
 
-  _renderFooter() {
+  _renderFooter(closeImage, pageNumber, totalPages, delimiter) {
     return (
-      <Animated.View style={[styles.footer, {opacity: this.state.opacity}]}/>
+      <View style={{height: 40}}/>
     );
   }
 
-  _renderHeader(delimiter) {
+  _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
     return (
-      <Animated.View style={[styles.header, {opacity: this.state.opacity}]}>
+      <View style={styles.innerHeaderContainer}>
         <View style={{flex: 1}}>
           <RkButton innerStyle={{color: 'white'}} style={{width: 60}} type={'clear'}
-                  onPress={()=> this.setState({visible: false})}>Close</RkButton>
+                    onPress={closeImage}>Close</RkButton>
         </View>
         <View style={{flex: 1}}>
           <Text style={{textAlign: 'center', fontSize: 16}}>{this._renderPageNumbers(delimiter)}</Text>
         </View>
         <View style={{flex: 1}}></View>
-      </Animated.View>
+      </View>
     );
   }
 
-  _renderPageNumbers(delimeter) {
+  _renderPageNumbers(delimiter) {
     if (Array.isArray(this.props.source)) {
-      let pageText = +this.state.index+ + 1;
-      pageText += delimeter;
+      let pageText = +this.state.index + +1;
+      pageText += delimiter;
       pageText += this.props.source.length;
       return (
         <Text style={{color: 'white'}}>
@@ -175,6 +184,10 @@ export class RkModalImg extends Component {
     }
   }
 
+  _closeImage(){
+    this.setState({visible: false})
+  }
+
 }
 
 
@@ -185,9 +198,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     paddingHorizontal: 10,
+    backgroundColor: '#212121',
+  },
+  innerHeaderContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#212121',
     flexDirection: 'row',
   },
   footer: {
@@ -195,8 +210,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    flexDirection: 'row',
     backgroundColor: '#212121',
-    height: 40
   }
 });
