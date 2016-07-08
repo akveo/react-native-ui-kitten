@@ -7,5 +7,6 @@ export {RkSeparator} from './components/separator/Separator';
 export {RkBoardUpView} from './components/boardup/BoardUpView';
 export {RkModalImg} from './components/image/ModalImg';
 export {RkBarBg} from './components/status/BarBg';
+export {RkTabView} from './components/tab/TabView';
 export {RkConfig} from './config/config.js';
 export {RkStyle} from './config/style.js';
