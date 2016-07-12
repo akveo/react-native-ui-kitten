@@ -18,56 +18,61 @@ export const Themes = {
   styles: {
 
     button: {
-      _container:{
+      _container: {
         borderRadius: 5,
-        paddingVertical: 10,
+        paddingVertical: 8,
         paddingHorizontal: 15
       },
-      _inner:{
+      _inner: {
         fontSize: 18,
         alignSelf: 'center',
         textAlign: 'center',
       },
-      basic:{
-        container:{
+      basic: {
+        container: {
           backgroundColor: Colors.lightGray,
         },
-        inner:{
-
-        }
+        inner: {}
       },
-      outline:{
-        container:{
+      outline: {
+        container: {
           borderWidth: 1,
           backgroundColor: 'transparent',
           borderColor: Colors.primary
         },
-        inner:{
+        inner: {
           color: Colors.primary
         }
       },
-      clear:{
-        container:{
+      material: {
+        container: {
+          shadowColor: Colors.gray,
+          shadowOpacity: 0.5,
+          shadowRadius: 2,
+          borderRadius: 2,
+        },
+        inner:{}
+      },
+      clear: {
+        container: {
           backgroundColor: 'transparent'
         },
-        inner:{
+        inner: {
           color: Colors.primary
         }
       },
-      circle:{
-        container:{
+      circle: {
+        container: {
           borderRadius: 100
         },
-        inner:{
-
-        }
+        inner: {}
       },
       small: {
         container: {
           paddingVertical: 4,
           paddingHorizontal: 7,
         },
-        inner:{
+        inner: {
           fontSize: 14,
         }
       },
@@ -76,22 +81,22 @@ export const Themes = {
           paddingVertical: 8,
           paddingHorizontal: 12,
         },
-        inner:{
+        inner: {
           fontSize: 16,
         }
       },
-      large:{
-        container:{
+      large: {
+        container: {
           paddingVertical: 10,
           paddingHorizontal: 15,
         },
-        inner:{
+        inner: {
           fontSize: 20,
         }
       },
     },
 
-    input:{
+    input: {
       _input: {
         fontSize: 16,
         height: 16 * 1.42,
@@ -108,57 +113,102 @@ export const Themes = {
         alignSelf: 'center',
         marginRight: 5,
       },
-      _icon:{
+      _icon: {
         marginRight: 5,
         alignSelf: 'center',
         backgroundColor: 'transparent'
       },
-      basic:{
-        input:{},
-        container:{},
-        label:{}
+      basic: {
+        input: {},
+        container: {},
+        label: {}
       },
-      bordered:{
-        input:{},
-        container:{
+      bordered: {
+        input: {},
+        container: {
           padding: 5,
           borderWidth: 0.5,
           borderColor: Colors.lightGray,
           borderRadius: 3,
         },
-        label:{}
+        label: {}
       },
-      rounded:{
-        input:{},
-        container:{
+      rounded: {
+        input: {},
+        container: {
           backgroundColor: Colors.lightGray,
           borderRadius: 100,
           paddingHorizontal: 10,
           paddingVertical: 5,
         },
-        label:{}
+        label: {}
       },
       underlay: {
-        input:{},
-        container:{
+        input: {},
+        container: {
           borderBottomWidth: 0.5,
           borderBottomColor: Colors.primary,
         },
-        label:{}
+        label: {}
       },
-      topLabel:{
-        input:{
+      topLabel: {
+        input: {
           alignSelf: 'stretch',
         },
-        container:{
+        container: {
           flexDirection: 'column',
           alignItems: 'flex-start',
         },
-        label:{
+        label: {
           fontSize: 12,
           height: 12 * 1.4,
           color: Colors.gray,
           alignSelf: 'flex-start'
+        }
+      }
+    },
+    boardUp: {},
+    tab:{
+      _container:{
+        padding: 10,
+        borderWidth: 0.5,
+        backgroundColor: Colors.white,
+        borderColor: Colors.primary
+      },
+      _inner:{
+        textAlign: 'center',
+        fontSize: 18,
+        color: Colors.primary
+      },
+      _containerSelected:{
+        backgroundColor: Colors.primary
+      },
+      _innerSelected:{
+        color: Colors.white
+      },
+      material: {
+        container:{
+          backgroundColor: Colors.lightGray,
+          padding: 10,
+          borderTopWidth: 0,
+          borderLeftWidth: 0,
+          borderRightWidth: 0,
+          borderBottomWidth: 0.5,
+          borderBottomColor: Colors.gray
+        },
+        inner:{
+          textAlign: 'center',
+          fontSize: 18,
+          color: Colors.darkGray
+        },
+        containerSelected:{
+          backgroundColor: Colors.lightGray,
+          borderBottomWidth: 3,
+          paddingBottom: 8.5,
+          borderBottomColor: Colors.primary
+        },
+        innerSelected:{
+          color: Colors.primary
         }
       }
     }

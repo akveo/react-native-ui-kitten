@@ -19,6 +19,8 @@ import {RadioScreen} from './RadioScreen';
 import {InputScreen} from './InputScreen';
 import {ThemeScreen} from './ThemeScreen';
 import {StartScreen} from './StartScreen';
+import {ImageScreen} from './ImageScreen';
+import {TabScreen} from './TabScreen';
 import {BoardUpScreen} from './BoardUpScreen';
 
 export class ComponentsScreen extends Component {
@@ -52,6 +54,14 @@ export class ComponentsScreen extends Component {
       {
         title: "Board Up View",
         screenView: BoardUpScreen
+      },
+      {
+        title: "Image Viewer",
+        screenView: ImageScreen
+      },
+      {
+        title: "Tab View",
+        screenView: TabScreen
       },
       {
         title: "Theme",

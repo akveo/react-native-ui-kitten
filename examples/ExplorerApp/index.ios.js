@@ -3,20 +3,32 @@ import {
   AppRegistry,
   NavigatorIOS,
   StyleSheet,
+  StatusBar,
+  View
 } from 'react-native';
 
 import {ComponentsScreen} from "./screens/ComponentsScreen";
+import {RkBarBg, RkConfig} from 'react-native-ui-kit';
 
 class ExplorerApp extends Component {
   render() {
     return (
-      <NavigatorIOS
-        style={styles.container}
-        initialRoute={{
+      <View style={styles.container}>
+        <StatusBar
+          barStyle="light-content"
+          />
+        <NavigatorIOS
+          style={styles.container}
+          barTintColor={RkConfig.colors.primary}
+          titleTextColor= {RkConfig.colors.white}
+          tintColor= {RkConfig.colors.white}
+          initialRoute={{
           title: 'Ui KIT',
           component: ComponentsScreen
         }}
-        />
+          />
+        <RkBarBg/>
+      </View>
     );
   }
 }
@@ -24,7 +36,6 @@ class ExplorerApp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red'
   }
 });
 

@@ -10,4 +10,5 @@ export const Colors = {
   darkWarning: '#FFD600',
   deepWarning: '#FF5722',
   danger: '#F44336',
+  cyan: '#00BCD4'
 };

@@ -62,8 +62,9 @@ export class ButtonScreen extends Component {
           <View style={UtilStyles.rowContainer}>
             <View style={UtilStyles.exampleView}>
               <RkButton type='basic medium'>Basic</RkButton>
-              <RkButton type='basic clear'>Clear</RkButton>
-              <RkButton type='basic outline'>Outline</RkButton>
+              <RkButton style={{marginTop: 10}}type='clear'>Clear</RkButton>
+              <RkButton style={{marginTop: 10}}type='outline'>Outline</RkButton>
+              <RkButton style={{marginTop: 10, backgroundColor: RkConfig.colors.primary}} innerStyle={RkStyle.whiteText} type='material'>Material</RkButton>
             </View>
             <View style={[UtilStyles.description]}>
               <Text>With button props

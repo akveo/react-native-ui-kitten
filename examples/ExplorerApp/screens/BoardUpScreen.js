@@ -37,8 +37,11 @@ export class BoardUpScreen extends Component {
         <RkBoardUpView style={[RkStyle.lightGrayBg]}>
           <ScrollView
             automaticallyAdjustContentInsets={true}
+            onLayout={(e) => {
+              console.log(e)
+            }}
             style={{height: this._height}}>
-            <View style={{height: 550, justifyContent: 'flex-end'}}>
+            <View style={{height: this._height - 72, justifyContent: 'flex-end'}}>
               <View>
                 <ListView
                   scrollEnabled={false}
