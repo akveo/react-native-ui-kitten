@@ -12,15 +12,19 @@ import {
 } from '../../config/config';
 
 import {
-  RkRadioButton
-} from './RadioButton';
+  RkChoice
+} from './Choice';
 
 import _ from 'lodash';
 
-export class RkRadioGroup extends Component {
+export class RkChoiceGroup extends Component {
+
+  static Choice = RkChoice;
+
   static propTypes = {
     style: View.propTypes.style,
     selectedIndex: React.PropTypes.number,
+    multi: React.PropTypes.bool,
     onChange: React.PropTypes.func,
   };
 
@@ -52,7 +56,7 @@ export class RkRadioGroup extends Component {
     let selectedIndex = this.state.selectedIndex;
 
     let processTrigger = (child, index) => {
-      if (child.type === RkRadioButton) {
+      if (child.type === RkChoice) {
         return React.cloneElement(child, {
           inTrigger: true,
           selected: index === selectedIndex
@@ -72,7 +76,7 @@ export class RkRadioGroup extends Component {
     };
 
     let process = (child) => {
-      if (child.type === RkRadioButton) {
+      if (child.type === RkChoice) {
         let radioIndex = index++;
         return React.cloneElement(child, {
           onPress: () => this._onSelect(radioIndex),

@@ -14,8 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {RkStyle} from 'react-native-ui-kit';
 
 import {ButtonScreen} from './ButtonScreen';
-import {CheckboxScreen} from './CheckboxScreen';
-import {RadioScreen} from './RadioScreen';
+import {ChoiceScreen} from './ChoiceScreen';
 import {InputScreen} from './InputScreen';
 import {ThemeScreen} from './ThemeScreen';
 import {StartScreen} from './StartScreen';
@@ -40,12 +39,8 @@ export class ComponentsScreen extends Component {
         screenView: ButtonScreen
       },
       {
-        title: "Checkboxes",
-        screenView: CheckboxScreen
-      },
-      {
-        title: "Radio Buttons",
-        screenView: RadioScreen
+        title: "Selectable Components",
+        screenView: ChoiceScreen
       },
       {
         title: "Inputs",

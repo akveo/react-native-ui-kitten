@@ -9,14 +9,14 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import {RkRadioButton, RkRadioGroup, RkStyle, RkConfig, RkSeparator} from 'react-native-ui-kit';
+import {RkRadioButton, RkChoiceGroup, RkChoice, RkStyle, RkConfig, RkSeparator} from 'react-native-ui-kit';
 import {UtilStyles} from '../utils/styles';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 
 
-export class RadioScreen extends Component {
+export class ChoiceScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -29,6 +29,62 @@ export class RadioScreen extends Component {
   }
 
   render() {
+    return (
+      <ScrollView
+        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}
+        automaticallyAdjustContentInsets={true}>
+        <View style={UtilStyles.section}>
+          <Text style={UtilStyles.titleText}>Classic selectable components</Text>
+          <View style={UtilStyles.rowContainer}>
+            <View style={[styles.rowRadio, {flex: 1,justifyContent: 'space-around', marginTop: 5}]}>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice/>
+                </View>
+                <Text style={styles.typeText}>default</Text>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice type='material' selected={true}/>
+                </View>
+                <Text style={styles.typeText}>material</Text>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice type='radio'/>
+                </View>
+                <Text style={styles.typeText}>radio</Text>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice innerStyle={{textAlign: 'center'}} type='posNeg'/>
+                </View>
+                <Text style={styles.typeText}>pos/neg</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={UtilStyles.section}>
+          <Text style={UtilStyles.titleText}>Labels Example</Text>
+          <View style={UtilStyles.rowContainer}>
+            <View style={styles.rowRadio}>
+              <RkChoiceGroup>
+                <TouchableOpacity radioTrigger>
+                  <View style={{"flex": 1, "flexDirection": "row", "alignItems": "center", padding: 5}}>
+                    <Text>Label</Text>
+                    <RkChoice type='posNeg' selected={true}/>
+                  </View>
+                </TouchableOpacity>
+              </RkChoiceGroup>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    );
+  }
+
+
+  render2() {
     return (
       <ScrollView
         style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}
@@ -165,7 +221,8 @@ export class RadioScreen extends Component {
             <View style={styles.componentRow}>
               <Text style={{fontSize: 16}}>Settings</Text>
               <View style={{flexDirection: 'row'}}>
-                <Text style={{marginRight: 7, color: RkConfig.colors.gray, alignSelf: 'center'}}>{this.state.settingsOption.name}</Text>
+                <Text
+                  style={{marginRight: 7, color: RkConfig.colors.gray, alignSelf: 'center'}}>{this.state.settingsOption.name}</Text>
                 <AIcon name={'angle-right'} size={20} style={RkStyle.grayText}/></View>
             </View>
           </TouchableOpacity>
@@ -180,9 +237,11 @@ export class RadioScreen extends Component {
       component: SettingsScreen,
       passProps: {
         option: this.state.settingsOption,
-        onChange: (option) => {this.setState({
-          settingsOption: option
-        })}
+        onChange: (option) => {
+          this.setState({
+            settingsOption: option
+          })
+        }
       }
     });
   }
@@ -288,5 +347,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: 'center'
+  },
+  typeText: {
+    color: RkConfig.colors.gray,
+    textAlign: 'center'
   }
 });

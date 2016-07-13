@@ -51,7 +51,7 @@ export const Themes = {
           shadowRadius: 2,
           borderRadius: 2,
         },
-        inner:{}
+        inner: {}
       },
       clear: {
         container: {
@@ -167,28 +167,100 @@ export const Themes = {
         }
       }
     },
+    choice: {
+      _container: {
+        paddingHorizontal: 2,
+        paddingTop: 1,
+        paddingBottom: 3,
+        borderWidth: 1,
+        borderColor: Colors.gray
+      },
+      _containerSelected: {},
+      _innerSelected: {},
+      _inner: {
+        textAlign: 'center',
+        fontSize: 22,
+        width: 18,
+        height: 18
+      },
+      _icon: 'md-checkmark',
+      material: {
+        container: {
+          borderRadius: 2,
+          borderWidth: 2,
+        },
+        containerSelected: {
+          borderWidth: 0,
+          backgroundColor: Colors.cyan
+        },
+        innerSelected: {
+          width: 20,
+          height: 20
+        },
+        inner: {
+          width: 16,
+          height: 16,
+          color: Colors.white
+        },
+      },
+      radio: {
+        container: {
+          borderRadius: 20,
+          paddingHorizontal: 3,
+          paddingTop: 3,
+        },
+        containerSelected: {
+          borderColor: Colors.primary
+        },
+        innerSelected: {
+          backgroundColor: Colors.primary
+        },
+        inner: {
+          width: 15,
+          height: 15,
+          borderRadius: 7,
+        },
+        icon: false
+      },
+      posNeg:{
+        container: {
+          borderWidth: 0,
+        },
+        inner: {
+          width: 20,
+          height: 20,
+          fontSize: 24,
+          color: Colors.danger
+        },
+        innerSelected: {
+          color: Colors.success
+        },
+        iconUnchecked: 'md-close',
+        icon: 'md-checkmark'
+      }
+    },
     boardUp: {},
-    tab:{
-      _container:{
+    tab: {
+      _container: {
         flex: 1,
         padding: 10,
         borderWidth: 0.5,
         backgroundColor: Colors.white,
         borderColor: Colors.primary
       },
-      _inner:{
+      _inner: {
         textAlign: 'center',
         fontSize: 18,
         color: Colors.primary
       },
-      _containerSelected:{
+      _containerSelected: {
         backgroundColor: Colors.primary
       },
-      _innerSelected:{
+      _innerSelected: {
         color: Colors.white
       },
       material: {
-        container:{
+        container: {
           backgroundColor: Colors.lightGray,
           padding: 10,
           borderTopWidth: 0,
@@ -197,18 +269,18 @@ export const Themes = {
           borderBottomWidth: 0.5,
           borderBottomColor: Colors.gray
         },
-        inner:{
+        inner: {
           textAlign: 'center',
           fontSize: 18,
           color: Colors.darkGray
         },
-        containerSelected:{
+        containerSelected: {
           backgroundColor: Colors.lightGray,
           borderBottomWidth: 3,
           paddingBottom: 7.5,
           borderBottomColor: Colors.primary
         },
-        innerSelected:{
+        innerSelected: {
           color: Colors.primary
         }
       }
