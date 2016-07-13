@@ -170,6 +170,7 @@ export const Themes = {
     boardUp: {},
     tab:{
       _container:{
+        flex: 1,
         padding: 10,
         borderWidth: 0.5,
         backgroundColor: Colors.white,
@@ -204,7 +205,7 @@ export const Themes = {
         containerSelected:{
           backgroundColor: Colors.lightGray,
           borderBottomWidth: 3,
-          paddingBottom: 8.5,
+          paddingBottom: 7.5,
           borderBottomColor: Colors.primary
         },
         innerSelected:{

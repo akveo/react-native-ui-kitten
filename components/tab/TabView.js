@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {
   View,
   TouchableOpacity,
-  ListView,
+  ScrollView,
   Text,
   Dimensions,
 } from 'react-native';
@@ -17,10 +17,8 @@ export class RkTabView extends Component {
 
   constructor(props) {
     super(props);
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      index: +props.index || 0,
-      tabStore: ds
+      index: +props.index || 0
     }
   }
 
@@ -35,7 +33,7 @@ export class RkTabView extends Component {
     );
   }
 
-  _onContainerLayout(e, tabsCount){
+  _onContainerLayout(e, tabsCount) {
     let width = e.nativeEvent.layout.width;
     let tabWidth = width / tabsCount;
     this.setState({tabWidth: tabWidth})
@@ -47,28 +45,31 @@ export class RkTabView extends Component {
   }
 
   _renderTabs(tabs, scrollableHeader) {
-    return (
-      <ListView
-        onLayout={(e)=>{this._onContainerLayout(e, scrollableHeader ? this.props.maxVisibleTabs : tabs.length)}}
+    let contentContainerStyle = scrollableHeader ? {} : {flex: 1, flexDirection: 'row', justifyContent: scrollableHeader ? 'flex-start' : 'center'};
+     return (
+       <ScrollView
+        onLayout={(e)=>{this._onContainerLayout(e, this.props.maxVisibleTabs)}}
         scrollEnabled={scrollableHeader}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        horizontal
-        dataSource={this.state.tabStore.cloneWithRows(tabs)}
-        renderRow={(rowData, sectionID, rowID) => this._renderTab(rowData, rowID)}
-        />
+        bounces={false}
+        horizontal={true}
+        contentContainerStyle={contentContainerStyle}
+        >
+        {tabs.map((tab, i) => this._renderTab(tab, i, scrollableHeader))}
+      </ScrollView>
     )
   }
 
-  _renderTab(tab, id) {
+  _renderTab(tab, id, scrollableHeader) {
     let inner = tab.props.title;
     if (typeof inner === 'function') {
       inner = inner(this.state.index === +id);
     } else if (typeof inner === 'string') {
-      let{boxStyle, innerStyle} = this._defineStyles(this.state.index === +id);
+      let {boxStyle, innerStyle} = this._defineStyles(this.state.index === +id);
       boxStyle.push(tab.props.style);
       innerStyle.push(tab.props.innerStyle);
-      if(this.state.index === +id){
+      if (this.state.index === +id) {
         boxStyle.push(tab.props.styleSelected);
         innerStyle.push(tab.props.innerStyleSelected);
       }
@@ -79,26 +80,28 @@ export class RkTabView extends Component {
         </View>
       )
     }
+    let containerStyle = [{flex: 1}];
+    if(scrollableHeader) containerStyle.push({width: this.state.tabWidth});
     return (
-      <TouchableOpacity style={{width: this.state.tabWidth}} onPress={() => this._selectTab(id)}>
+      <TouchableOpacity style={containerStyle} key={id} onPress={() => this._selectTab(id)}>
         {inner}
       </TouchableOpacity>
     )
   }
 
   _defineStyles(selected) {
-    let types = this.props.type || (RkConfig.theme.tab? RkConfig.theme.tab.defaultType : '');
+    let types = this.props.type || (RkConfig.theme.tab ? RkConfig.theme.tab.defaultType : '');
     types = types && types.length ? types.split(" ") : [];
     let boxStyle = [RkConfig.themes.styles.tab._container];
     let innerStyle = [RkConfig.themes.styles.tab._inner];
-    if(selected) {
+    if (selected) {
       boxStyle.push(RkConfig.themes.styles.tab._containerSelected);
       innerStyle.push(RkConfig.themes.styles.tab._innerSelected);
     }
     for (type of types) {
       boxStyle.push(RkConfig.themes.styles.tab[type].container);
       innerStyle.push(RkConfig.themes.styles.tab[type].inner);
-      if(selected) {
+      if (selected) {
         boxStyle.push(RkConfig.themes.styles.tab[type].containerSelected);
         innerStyle.push(RkConfig.themes.styles.tab[type].innerSelected);
       }

@@ -86,7 +86,7 @@ export class TabScreen extends Component {
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Scrollable Header</Text>
           <View style={UtilStyles.rowContainer}>
-            <RkTabView scrollableHeader maxVisibleTabs={3}>
+            <RkTabView maxVisibleTabs={3}>
               <RkTabView.Tab title={'Tab 1'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
                   <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
@@ -149,8 +149,7 @@ export class TabScreen extends Component {
         innerStyle={{color: 'white'}}
         innerStyleSelected={{color: RkConfig.colors.warning}}
         title={'Tab ' + tab}>
-
-        <View style={{flex: 1, paddingVertical: 15}}>
+        <View style={{flex: 1, paddingVertical: 15, backgroundColor: 'white'}}>
           <Text style={{textAlign: 'center'}}>Tab {tab} Content</Text>
         </View>
       </RkTabView.Tab>
