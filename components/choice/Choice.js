@@ -18,6 +18,7 @@ export class RkChoice extends Component {
   static propTypes = {
     onChange: React.PropTypes.func,
     selected: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
     inTrigger: React.PropTypes.bool,
     icon: React.PropTypes.string,
     iconUnchecked: React.PropTypes.string,
@@ -31,10 +32,16 @@ export class RkChoice extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selected !== this.state.selected) {
+      this.setState({selected: nextProps.selected});
+    }
+  }
+
   render() {
     let {outerStyle, innerStyle, icon} = this._defineStyles(this.state.selected);
     let inner = <Text style={innerStyle}/>;
-    if(icon){
+    if (icon) {
       inner = typeof icon === 'string' ? (<Icon name={icon} style={innerStyle}/>) : icon;
     }
     if (this.props.inTrigger) {
@@ -46,6 +53,7 @@ export class RkChoice extends Component {
     } else {
       return (
         <TouchableOpacity
+          activeOpacity={this.props.disabled ? 1 : 0.2}
           style={[{padding: 10}, this.props.containerStyle]}
           onPress={(e) => {this._onPress(e)}}
           >
@@ -57,10 +65,12 @@ export class RkChoice extends Component {
     }
   }
 
-  _onPress(e){
-    let selected = !this.state.selected;
-    this.setState({selected});
-    this.props.onChange && this.props.onChange(selected, e);
+  _onPress(e) {
+    if (!this.props.disabled) {
+      let selected = !this.state.selected;
+      this.setState({selected});
+      this.props.onChange && this.props.onChange(selected, e);
+    }
   }
 
   _defineStyles(selected) {
@@ -74,6 +84,10 @@ export class RkChoice extends Component {
       innerStyle.push(RkConfig.themes.styles.choice._innerSelected);
       icon = RkConfig.themes.styles.choice._icon;
     }
+    if (this.props.disabled) {
+      outerStyle.push(RkConfig.themes.styles.choice._containerDisabled);
+      innerStyle.push(RkConfig.themes.styles.choice._inneDisabled);
+    }
     for (type of types) {
       outerStyle.push(RkConfig.themes.styles.choice[type].container);
       innerStyle.push(RkConfig.themes.styles.choice[type].inner);
@@ -84,15 +98,23 @@ export class RkChoice extends Component {
       } else {
         icon = RkConfig.themes.styles.choice[type].iconUnchecked === undefined ? icon : RkConfig.themes.styles.choice[type].iconUnchecked;
       }
+      if (this.props.disabled) {
+        outerStyle.push(RkConfig.themes.styles.choice[type].containerDisabled);
+        innerStyle.push(RkConfig.themes.styles.choice[type].innerDisabled);
+      }
     }
     outerStyle.push(this.props.style);
     innerStyle.push(this.props.innerStyle);
-    if(selected){
+    if (selected) {
       outerStyle.push(this.props.styleSelected);
       innerStyle.push(this.props.innerStyleSelected);
-      icon = this.props.icon === undefined ?  icon : this.props.icon;
+      icon = this.props.icon === undefined ? icon : this.props.icon;
     } else {
-      icon = this.props.iconUnchecked === undefined ?  icon : this.props.iconUnchecked;
+      icon = this.props.iconUnchecked === undefined ? icon : this.props.iconUnchecked;
+    }
+    if (this.props.disabled) {
+      outerStyle.push(this.props.containerDisabled);
+      innerStyle.push(this.props.innerDisabled);
     }
     return {outerStyle, innerStyle, icon}
   }

@@ -183,6 +183,12 @@ export const Themes = {
         width: 18,
         height: 18
       },
+      _containerDisabled: {
+        borderColor: Colors.lightGray
+      },
+      _innerDisabled:{
+        color: Colors.lightGray
+      },
       _icon: 'md-checkmark',
       material: {
         container: {
@@ -200,6 +206,13 @@ export const Themes = {
         inner: {
           width: 16,
           height: 16,
+          color: Colors.white
+        },
+        containerDisabled: {
+          borderColor: Colors.lightGray,
+          backgroundColor: Colors.lightGray
+        },
+        innerDisabled:{
           color: Colors.white
         },
       },
@@ -220,7 +233,13 @@ export const Themes = {
           height: 15,
           borderRadius: 7,
         },
-        icon: false
+        icon: false,
+        containerDisabled: {
+          borderColor: Colors.lightGray,
+        },
+        innerDisabled:{
+          backgroundColor: Colors.lightGray,
+        },
       },
       posNeg:{
         container: {
@@ -235,8 +254,24 @@ export const Themes = {
         innerSelected: {
           color: Colors.success
         },
+        innerDisabled:{
+          color: Colors.lightGray,
+        },
         iconUnchecked: 'md-close',
         icon: 'md-checkmark'
+      },
+      clear: {
+        container: {
+          borderWidth: 0,
+        },
+        inner: {
+          width: 20,
+          height: 20,
+          color: Colors.primary
+        },
+        innerDisabled:{
+          color: Colors.lightGray,
+        },
       }
     },
     boardUp: {},

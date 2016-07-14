@@ -1,5 +1,4 @@
 export {RkButton} from './components/button/Button';
-export {RkCheckbox} from './components/checkbox/Checkbox';
 export {RkChoice} from './components/choice/Choice.js';
 export {RkChoiceGroup} from './components/choice/ChoiceGroup.js';
 export {RkTextInput} from './components/textinput/TextInput';
