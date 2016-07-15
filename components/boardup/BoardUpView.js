@@ -20,7 +20,7 @@ export class RkBoardUpView extends Component {
   onKeyboardWillShow(e) {
     Animated.timing(this.state.top, {
       toValue: -(e.startCoordinates.height),
-      duration: 200,
+      duration: e.duration,
     }).start();
   }
 
@@ -31,7 +31,7 @@ export class RkBoardUpView extends Component {
   onKeyboardWillHide(e) {
     Animated.timing(this.state.top, {
       toValue: 0,
-      duration: 200,
+      duration: e.duration,
     }).start();
   }
 
