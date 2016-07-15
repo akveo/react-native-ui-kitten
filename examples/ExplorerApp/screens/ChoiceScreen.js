@@ -275,12 +275,12 @@ class SettingsScreen extends Component {
   render() {
 
     let renderOption = (option, i) => (
-      <TouchableHighlight key={i} underlayColor={RkConfig.colors.lightGray} choiceTrigger>
-        <View style={styles.settingsOption}>
+      <TouchableOpacity key={i} underlayColor={RkConfig.colors.lightGray} choiceTrigger>
+        <View style={[styles.settingsOption, i === this.state.options.length - 1 ? {borderBottomWidth: 0} : {}]}>
           <Text style={{fontSize: 14}}>{option.name}</Text>
           <RkChoice/>
         </View>
-      </TouchableHighlight>);
+      </TouchableOpacity>);
 
     return (
       <ScrollView

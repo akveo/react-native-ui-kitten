@@ -41,7 +41,7 @@ export class RkChoiceGroup extends Component {
     let values = this.state.values;
     let index = 0;
     let process = (child) => {
-      if (child.type === RkChoice) {
+      if (child.type === RkChoice && values[index] === undefined) {
         values[index++] = !!child.props.selected;
       } else if (child.props && child.props.children) {
         React.Children.map(child.props.children, process)
