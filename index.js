@@ -7,5 +7,6 @@ export {RkBoardUpView} from './components/boardup/BoardUpView';
 export {RkModalImg} from './components/image/ModalImg';
 export {RkBarBg} from './components/status/BarBg';
 export {RkTabView} from './components/tab/TabView';
+export {RkCard} from './components/card/Card';
 export {RkConfig} from './config/config.js';
 export {RkStyle} from './config/style.js';

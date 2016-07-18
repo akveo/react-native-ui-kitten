@@ -186,7 +186,7 @@ export const Themes = {
       _containerDisabled: {
         borderColor: Colors.lightGray
       },
-      _innerDisabled:{
+      _innerDisabled: {
         color: Colors.lightGray
       },
       _icon: 'md-checkmark',
@@ -212,7 +212,7 @@ export const Themes = {
           borderColor: Colors.lightGray,
           backgroundColor: Colors.lightGray
         },
-        innerDisabled:{
+        innerDisabled: {
           color: Colors.white
         },
       },
@@ -237,11 +237,11 @@ export const Themes = {
         containerDisabled: {
           borderColor: Colors.lightGray,
         },
-        innerDisabled:{
+        innerDisabled: {
           backgroundColor: Colors.lightGray,
         },
       },
-      posNeg:{
+      posNeg: {
         container: {
           borderWidth: 0,
         },
@@ -254,7 +254,7 @@ export const Themes = {
         innerSelected: {
           color: Colors.success
         },
-        innerDisabled:{
+        innerDisabled: {
           color: Colors.lightGray,
         },
         iconUnchecked: 'md-close',
@@ -269,12 +269,106 @@ export const Themes = {
           height: 20,
           color: Colors.primary
         },
-        innerDisabled:{
+        innerDisabled: {
           color: Colors.lightGray,
         },
       }
     },
     boardUp: {},
+    card: {
+      _container: {
+        margin: 5,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: Colors.lightGray
+      },
+      _header: {
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+        padding: 8,
+        backgroundColor: Colors.lightGray,
+      },
+      _content: {
+        padding: 8,
+        backgroundColor: Colors.white,
+      },
+      _footer: {
+        padding: 8,
+        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 5,
+        backgroundColor: Colors.lightGray,
+      },
+      _title:{
+        fontSize: 24
+      },
+      _subTitle:{
+        fontSize: 14,
+        color: Colors.darkGray
+      },
+      _img:{
+        height: 300,
+        width: null,
+      },
+      _fullImg:{
+        height: 300,
+        width: null,
+      },
+      material: {
+        container: {
+          borderRadius: 2,
+        },
+        header: {
+          borderTopLeftRadius: 2,
+          borderTopRightRadius: 2,
+          backgroundColor: Colors.white,
+        },
+        footer: {
+          borderBottomLeftRadius: 5,
+          borderBottomRightRadius: 5,
+          backgroundColor: Colors.white,
+        }
+      },
+      bordered: {
+        container: {
+          borderWidth: 1,
+          borderColor: Colors.lightGray
+        },
+        header: {
+          borderBottomWidth: 0.5,
+          borderBottomColor: Colors.lightGray
+        },
+        footer: {
+          borderTopWidth: 0.5,
+          borderTopColor: Colors.lightGray
+        }
+      },
+      noPadding:{
+        container: {
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+        header: {
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+        content: {
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+        footer: {
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+      }
+    },
     tab: {
       _container: {
         flex: 1,

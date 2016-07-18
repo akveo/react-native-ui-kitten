@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import {ComponentsScreen} from "./screens/ComponentsScreen";
-import {RkBarBg, RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kit';
 
 class ExplorerApp extends Component {
   render() {
@@ -25,9 +25,8 @@ class ExplorerApp extends Component {
           initialRoute={{
           title: 'Ui KIT',
           component: ComponentsScreen
-        }}
+          }}
           />
-        <RkBarBg/>
       </View>
     );
   }

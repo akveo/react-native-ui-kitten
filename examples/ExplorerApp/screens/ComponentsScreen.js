@@ -21,6 +21,7 @@ import {StartScreen} from './StartScreen';
 import {ImageScreen} from './ImageScreen';
 import {TabScreen} from './TabScreen';
 import {BoardUpScreen} from './BoardUpScreen';
+import {CardScreen} from './CardScreen';
 
 export class ComponentsScreen extends Component {
 
@@ -45,6 +46,10 @@ export class ComponentsScreen extends Component {
       {
         title: "Inputs",
         screenView: InputScreen
+      },
+      {
+        title: "Cards",
+        screenView: CardScreen
       },
       {
         title: "Board Up View",
