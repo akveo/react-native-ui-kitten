@@ -20,7 +20,8 @@ export class RkCard extends Component {
     rkCardFooter: 'footer',
     rkCardTitle: 'title',
     rkCardSubTitle: 'subTitle',
-    rkCardFullImg: 'fullImg'
+    rkCardBigImg: 'bigImg',
+    rkCardImg: 'img'
   };
 
   render() {
@@ -72,13 +73,16 @@ export class RkCard extends Component {
   }
 
   _defineElemStyle(name, elem) {
-    let types = elem.props.type || this.props.type || (RkConfig.theme.card ? RkConfig.theme.card.defaultType : '');
-    types = types && types.length ? types.split(" ") : [];
+    let types = '';
+    if(RkConfig.theme.card) types += RkConfig.theme.card.defaultType;
+    if(this.props.type) types += this.props.type + ' ';
+    if(elem.props.type) types += elem.props.type + ' ';
+    types = types && types.length ? types.split(/\s+/) : [];
     let style = [RkConfig.themes.styles.card["_" + name]];
     for (type of types) {
-      style.push(RkConfig.themes.styles.card[type][name])
+      if(type) style.push(RkConfig.themes.styles.card[type][name])
     }
-    style.push(elem.props.style)
+    style.push(elem.props.style);
     return style;
   }
 

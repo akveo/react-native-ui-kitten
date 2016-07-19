@@ -67,6 +67,17 @@ export const Themes = {
         },
         inner: {}
       },
+      shadow: {
+        container: {
+          shadowColor: Colors.gray,
+          shadowOpacity: 0.5,
+          shadowRadius: 3,
+          shadowOffset: {
+            height: 1,
+            width: 0
+          }
+        }
+      },
       small: {
         container: {
           paddingVertical: 4,
@@ -278,15 +289,14 @@ export const Themes = {
     card: {
       _container: {
         margin: 5,
-        borderRadius: 5,
+        borderRadius: 1,
         borderWidth: 1,
         borderColor: Colors.lightGray
       },
       _header: {
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
+        borderTopLeftRadius: 1,
+        borderTopRightRadius: 1,
         padding: 8,
-        backgroundColor: Colors.lightGray,
       },
       _content: {
         padding: 8,
@@ -294,28 +304,35 @@ export const Themes = {
       },
       _footer: {
         padding: 8,
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        backgroundColor: Colors.lightGray,
+        borderBottomLeftRadius: 1,
+        borderBottomRightRadius: 1,
       },
-      _title:{
+      _title: {
         fontSize: 24
       },
-      _subTitle:{
+      _subTitle: {
         fontSize: 14,
         color: Colors.darkGray
       },
-      _img:{
+      _img: {
+        height: 150,
+        width: null,
+      },
+      _bigImg: {
         height: 300,
         width: null,
       },
-      _fullImg:{
-        height: 300,
-        width: null,
-      },
+      rkCardText: {},
       material: {
         container: {
           borderRadius: 2,
+          shadowColor: Colors.gray,
+          shadowOpacity: 0.5,
+          shadowRadius: 3,
+          shadowOffset: {
+            height: 1,
+            width: 0
+          }
         },
         header: {
           borderTopLeftRadius: 2,
@@ -326,6 +343,10 @@ export const Themes = {
           borderBottomLeftRadius: 5,
           borderBottomRightRadius: 5,
           backgroundColor: Colors.white,
+        },
+        rkCardText: {
+          lineHeight: 22,
+          fontSize: 16
         }
       },
       bordered: {
@@ -342,7 +363,7 @@ export const Themes = {
           borderTopColor: Colors.lightGray
         }
       },
-      noPadding:{
+      noPadding: {
         container: {
           paddingLeft: 0,
           paddingRight: 0,
