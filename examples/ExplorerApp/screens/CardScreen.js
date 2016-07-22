@@ -55,13 +55,10 @@ export class CardScreen extends Component {
 
           <RkCard type='material'>
 
-            <View rkCardHeader type='noPadding'>
-              <Image style={{resizeMode: 'cover', justifyContent: 'flex-end'}} source={require('../img/sleep.gif')} rkCardBigImg>
-                <View rkCardHeader style={{backgroundColor: 'transparent', justifyContent: 'center'}}>
-                  <Text style={{color: 'white'}}rkCardTitle>Material Card</Text>
-                  <Text style={{color: 'white'}}rkCardSubTitle>Sub header</Text>
-                </View>
-              </Image>
+            <View rkCardHeader style={{backgroundColor: RkConfig.colors.primary, paddingTop: 0, paddingRight: 0}}>
+              <RkButton type='clear' style={{alignSelf: 'flex-end', marginBottom: 50, paddingHorizontal: 8}} innerStyle={{color: 'white'}}><Icon name='md-close'/></RkButton>
+              <Text style={{color: 'white'}} rkCardTitle>Material Card</Text>
+              <Text style={{color: 'white'}} rkCardSubTitle>Sub header</Text>
             </View>
 
             <View rkCardContent>
@@ -81,11 +78,12 @@ export class CardScreen extends Component {
           </RkCard>
 
           <RkCard type='material'>
-            <View rkCardHeader type='noPadding'>
-              <Image resizeMode={'cover'} source={require('../img/dog.gif')} rkCardImg/>
+            <View rkCardHeader type='noPadding bordered'>
+              <Image resizeMode={'cover'} source={require('../img/rainyday.gif')} rkCardImg/>
             </View>
 
-            <View style={{flex: 1, justifyContent: 'flex-end',alignItems: 'flex-end', marginRight: 20, marginVertical: -22.5, zIndex: 111}}>
+            <View
+              style={{flex: 1, justifyContent: 'flex-end',alignItems: 'flex-end', marginRight: 20, marginVertical: -22.5, zIndex: 111}}>
               <RkButton type='circle shadow'
                         style={[UtilStyles.spaceH,  RkStyle.darkWarningBg, {paddingVertical: 5, paddingHorizontal: 12.5}]}
                         innerStyle={[RkStyle.whiteText, {fontSize: 32}]}>
@@ -119,7 +117,6 @@ export class CardScreen extends Component {
             </View>
 
           </RkCard>
-
 
 
         </ScrollView>

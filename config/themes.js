@@ -48,7 +48,11 @@ export const Themes = {
         container: {
           shadowColor: Colors.gray,
           shadowOpacity: 0.5,
-          shadowRadius: 2,
+          shadowRadius: 3,
+          shadowOffset: {
+            height: 1,
+            width: 0
+          },
           borderRadius: 2,
         },
         inner: {}
@@ -119,7 +123,6 @@ export const Themes = {
         flex: 1,
       },
       _label: {
-        height: 16 * 1.42,
         fontSize: 16,
         alignSelf: 'center',
         marginRight: 5,
@@ -130,37 +133,29 @@ export const Themes = {
         backgroundColor: 'transparent'
       },
       basic: {
-        input: {},
-        container: {},
-        label: {}
+
       },
       bordered: {
-        input: {},
         container: {
           padding: 5,
           borderWidth: 0.5,
           borderColor: Colors.lightGray,
           borderRadius: 3,
         },
-        label: {}
       },
       rounded: {
-        input: {},
         container: {
           backgroundColor: Colors.lightGray,
           borderRadius: 100,
           paddingHorizontal: 10,
           paddingVertical: 5,
-        },
-        label: {}
+        }
       },
       underlay: {
-        input: {},
         container: {
           borderBottomWidth: 0.5,
           borderBottomColor: Colors.primary,
-        },
-        label: {}
+        }
       },
       topLabel: {
         input: {
@@ -172,7 +167,6 @@ export const Themes = {
         },
         label: {
           fontSize: 12,
-          height: 12 * 1.4,
           color: Colors.gray,
           alignSelf: 'flex-start'
         }
@@ -340,8 +334,8 @@ export const Themes = {
           backgroundColor: Colors.white,
         },
         footer: {
-          borderBottomLeftRadius: 5,
-          borderBottomRightRadius: 5,
+          borderBottomLeftRadius: 2,
+          borderBottomRightRadius: 2,
           backgroundColor: Colors.white,
         },
         rkCardText: {

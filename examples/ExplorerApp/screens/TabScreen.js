@@ -33,6 +33,9 @@ export class TabScreen extends Component {
               <RkTabView.Tab title={'Tab 1'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
                   <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
+                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
+                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
+                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 2'}>

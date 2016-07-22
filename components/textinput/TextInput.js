@@ -31,7 +31,7 @@ export class RkTextInput extends Component {
     let {boxStyle, inputStyle, labelS, iconS} = this._defineStyles();
     labelStyle = [labelS, labelStyle];
     inputProps.style = [inputStyle, inputProps.style];
-    iconStyle = [iconS, iconStyle]
+    iconStyle = [iconS, iconStyle];
     boxStyle.push(containerStyle);
     return (
       <View style={boxStyle}>
@@ -50,7 +50,7 @@ export class RkTextInput extends Component {
     let labelS = [RkConfig.themes.styles.input._label];
     let iconS = [RkConfig.themes.styles.input._icon];
     for (type of types) {
-      if(RkConfig.themes.styles.input[type]) {
+      if (RkConfig.themes.styles.input[type]) {
         boxStyle.push(RkConfig.themes.styles.input[type].container);
         inputStyle.push(RkConfig.themes.styles.input[type].input);
         labelS.push(RkConfig.themes.styles.input[type].label);

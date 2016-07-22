@@ -26,9 +26,13 @@ export class RkTabView extends Component {
     let scrollableHeader = !!this.props.maxVisibleTabs;
     let tabs = this._getTabs(this.props.children);
     return (
-      <View style={[{flex: 1}, this.props.style]}>
-        {this._renderTabs(tabs, scrollableHeader)}
-        {tabs[this.state.index]}
+      <View style={[{flex: 1, justifyContent: 'flex-start'}, this.props.style]}>
+        <View>
+          {this._renderTabs(tabs, scrollableHeader)}
+        </View>
+        <View>
+          {tabs[this.state.index]}
+        </View>
       </View>
     );
   }
@@ -45,9 +49,13 @@ export class RkTabView extends Component {
   }
 
   _renderTabs(tabs, scrollableHeader) {
-    let contentContainerStyle = scrollableHeader ? {} : {flex: 1, flexDirection: 'row', justifyContent: scrollableHeader ? 'flex-start' : 'center'};
-     return (
-       <ScrollView
+    let contentContainerStyle = scrollableHeader ? {} : {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: scrollableHeader ? 'flex-start' : 'center'
+    };
+    return (
+      <ScrollView
         onLayout={(e)=>{this._onContainerLayout(e, this.props.maxVisibleTabs)}}
         scrollEnabled={scrollableHeader}
         showsHorizontalScrollIndicator={false}
@@ -81,7 +89,7 @@ export class RkTabView extends Component {
       )
     }
     let containerStyle = [{flex: 1}];
-    if(scrollableHeader) containerStyle.push({width: this.state.tabWidth});
+    if (scrollableHeader) containerStyle.push({width: this.state.tabWidth});
     return (
       <TouchableOpacity style={containerStyle} key={id} onPress={() => this._selectTab(id)}>
         {inner}
