@@ -22,7 +22,7 @@ export class BoardUpScreen extends Component {
     let ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
-    this._messages = []
+    this._messages = [];
     this._height = height - 52;
     this.state = {
       message: '',
@@ -38,7 +38,7 @@ export class BoardUpScreen extends Component {
           <ScrollView
             automaticallyAdjustContentInsets={true}
             style={{height: this._height}}>
-            <View style={{height: this._height - 72, justifyContent: 'flex-end'}}>
+            <View style={{justifyContent: 'flex-end'}}>
               <View>
                 <ListView
                   scrollEnabled={false}
@@ -91,7 +91,7 @@ export class BoardUpScreen extends Component {
       alignSelf: 'flex-end',
       marginLeft: 50,
       marginRight: 10,
-    }
+    };
     return (
       <View style={[{padding: 10, borderRadius: 20, marginVertical: 5}, containerStyle]}>
         <View>

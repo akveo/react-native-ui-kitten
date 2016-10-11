@@ -17,9 +17,7 @@ export default class MainScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'newsTab',
-      notifyCount: 0,
-      presses: 0,
+      selectedTab: 'newsTab'
     };
   }
 
@@ -63,14 +61,13 @@ export default class MainScreen extends Component {
             {ScreenService.getNewsScreen(false, {navigator: this.props.navigator})}
           </Icon.TabBarItemIOS>
           <Icon.TabBarItemIOS
-            title="Chat"
+            title="Chats"
             iconName="ios-chatboxes"
-            badge={this.state.notifyCount > 0 ? this.state.notifyCount : undefined}
+            badge={1}
             selected={this.state.selectedTab === 'chatTab'}
             onPress={() => {
             this.setState({
               selectedTab: 'chatTab',
-              notifyCount: this.state.notifyCount + 1,
             });
           }}>
             {ScreenService.getChatListScreen(false, {navigator: this.props.navigator})}
@@ -83,7 +80,6 @@ export default class MainScreen extends Component {
             onPress={() => {
             this.setState({
               selectedTab: 'settingsTab',
-              presses: this.state.presses + 1
             });
           }}>
             {ScreenService.getSettingsScreen(false, {navigator: this.props.navigator})}

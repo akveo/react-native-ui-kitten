@@ -1,3 +1,74 @@
+let whereIsMyMind = [
+  "Ooooooh - stop",
+  "With your feet in the air and your head on the ground",
+  "Try this trick and spin it, yeah",
+  "Your head will collapse",
+  "But there's nothing in it",
+  "And you'll ask yourself",
+  "Where is my mind [3x]",
+  "Ooooh",
+  "With your feet in the air and your head on the ground",
+  "Ooooh",
+  "Try this trick and spin it, yeah",
+  "Ooooh",
+  "Ooooh"
+];
+
+let tnt = [
+  "See me ride out of the sunset",
+  "On your color TV screen",
+  "Out for all that I can get",
+  "If you know what I mean",
+  "Women to the left of me",
+  "And women to the right",
+  "Ain't got no gun",
+  "Ain't got no knife",
+  "Don't you start no fight",
+  "'Cause I'm T.N.T. I'm dynamite",
+  "T.N.T. and I'll win the fight",
+  "T.N.T. I'm a power load",
+  "T.N.T. watch me explode"
+];
+
+let highWay = [
+  "Living easy, living free",
+  "Season ticket on a one-way ride",
+  "Asking nothing, leave me be",
+  "Taking everything in my stride",
+  "Don't need reason, don't need rhyme",
+  "Ain't nothing I would rather do",
+  "Going down, party time",
+  "My friends are gonna be there too",
+  "I'm on the highway to hell",
+  "On the highway to hell",
+  "Highway to hell",
+  "I'm on the highway to hell",
+  "Whoa!",
+];
+
+let backInBlack = [
+  "Back in black",
+  "I hit the sack",
+  "I've been too long I'm glad to be back",
+  "Yes, I'm let loose",
+  "From the noose",
+  "That's kept me hanging about",
+  "I've been looking at the sky",
+  "'Cause it's gettin' me high",
+  "Forget the hearse 'cause I never die",
+  "I got nine lives",
+  "Cat's eyes",
+  "Abusin' every one of them and running wild",
+  "'Cause I'm back",
+  "Yes, I'm back",
+  "Well, I'm back",
+  "Yes, I'm back",
+  "Well, I'm back, back",
+  "Well, I'm back in black",
+  "Yes, I'm back in black"
+];
+
+
 function getUserInfo(id) {
   return users.find((u) => u.id === id);
 }
@@ -25,6 +96,42 @@ function likePost(post){
     post.likes++;
     post.liked = true;
 }
+
+function getUserMsgList(userId){
+  return [
+    {
+      from: '2',
+      text: 'Ooooh',
+      time: '40 seconds ago'
+    },
+    {
+      from: '3',
+      text: 'T.N.T. watch me explode',
+      time: '2 minutes ago'
+    },
+    {
+      from: '4',
+      text: "I'm on the highway to hell",
+      time: '3 hours ago'
+    },
+    {
+      from: '5',
+      text: 'Out of the sight',
+      time: '27 September'
+    },
+  ]
+}
+
+function getMessages(userId){
+  let user = getUserInfo(userId);
+  return user.favoriteSong.map((msg, i) => {
+    return {
+      text: msg,
+      my: i == user.favoriteSong.length - 1 ? false : Math.random() >= 0.5
+    }
+  });
+}
+
 
 let userId = '1';
 
@@ -55,7 +162,8 @@ let users = [
     "address": "492 Applegate Court, Westboro, Marshall Islands, 7942",
     "registered": "Sunday, October 4, 2015 8:40 PM",
     "avatar": require("../img/avatars/boy2.jpg"),
-    "profileBg": require("../img/bg/profileBg.jpg")
+    "profileBg": require("../img/bg/profileBg.jpg"),
+    "favoriteSong": whereIsMyMind
   },
   {
     "id": "3",
@@ -69,7 +177,8 @@ let users = [
     "address": "228 Cheever Place, Ladera, Idaho, 459",
     "registered": "Friday, April 24, 2015 9:38 PM",
     "avatar": require("../img/avatars/boy3.jpg"),
-    "profileBg": require("../img/bg/profileBg.jpg")
+    "profileBg": require("../img/bg/profileBg.jpg"),
+    "favoriteSong": tnt
   },
   {
     "id": "4",
@@ -83,7 +192,8 @@ let users = [
     "address": "863 Chester Avenue, Shrewsbury, Utah, 8537",
     "registered": "Wednesday, May 21, 2014 10:13 PM",
     "avatar": require("../img/avatars/boy4.jpg"),
-    "profileBg": require("../img/bg/profileBg.jpg")
+    "profileBg": require("../img/bg/profileBg.jpg"),
+    "favoriteSong": highWay
   },
   {
     "id": "5",
@@ -97,7 +207,8 @@ let users = [
     "address": "155 Bethel Loop, Santel, Arizona, 3114",
     "registered": "Wednesday, September 2, 2015 2:04 AM",
     "avatar": require("../img/avatars/girl.jpeg"),
-    "profileBg": require("../img/bg/profileBg.jpg")
+    "profileBg": require("../img/bg/profileBg.jpg"),
+    "favoriteSong": backInBlack
   },
 
 ];
@@ -188,5 +299,7 @@ export default {
   getUserPosts,
   getUserFeed,
   likePost,
+  getUserMsgList,
+  getMessages,
   userId,
 }
