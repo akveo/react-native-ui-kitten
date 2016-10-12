@@ -20,7 +20,7 @@ export default class SettingsScreenClassic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authIndex: ScreenService.getCurrentLoginScreenIndex()
+      themeIndex: ScreenService.currentThemeIndex
     }
   }
 
@@ -30,13 +30,13 @@ export default class SettingsScreenClassic extends Component {
       <ScrollView
         style={[RkStyle.lightGrayBg, {paddingTop: 20}]}
         automaticallyAdjustContentInsets={true}>
-        <Text style={styles.settingsTitle}>LOGIN/REGISTER SCREENS</Text>
+        <Text style={styles.settingsTitle}>THEMES</Text>
         <View style={styles.settingsSection}>
           <RkChoiceGroup
             radio
             type='clear'
-            selectedIndex={this.state.authIndex}
-            onChange={(index)=> this._changeScreen(index, 'authIndex', 'setLoginScreen')}>
+            selectedIndex={this.state.themeIndex}
+            onChange={(index)=> this._changeTheme(index)}>
             <TouchableOpacity choiceTrigger>
               <View style={styles.setting}>
                 <Text style={styles.settingLabel}>Classic</Text>
@@ -64,11 +64,11 @@ export default class SettingsScreenClassic extends Component {
     );
   }
 
-  _changeScreen(index, stateName, screenName) {
-    let newState = {};
-    newState[stateName] = index;
-    this.setState(newState);
-    ScreenService[screenName](index);
+  _changeTheme(index) {
+    this.setState({
+      themeIndex: index
+    });
+    ScreenService.setCurrentThemeIndex(index);
   }
 
 

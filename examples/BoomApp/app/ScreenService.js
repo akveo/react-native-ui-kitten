@@ -11,80 +11,67 @@ import SettingsScreenClassic from './screens/settings/SettingsScreenClassic.js'
 
 import LoginScreenMaterial from './screens/auth/LoginScreenMaterial'
 import MainScreenMaterial from './screens/main/MainScreenMaterial'
+import ChatListScreenMaterial from './screens/chat/ChatListScreenMaterial'
+import ChatScreenMaterial from './screens/chat/ChatScreenMaterial'
 
 import LoginScreenBlur from './screens/auth/LoginScreenBlur'
 
-let loginScreens = [
-  (notRendered, props) => (notRendered ? LoginScreenClassic : <LoginScreenClassic {...props} />),
-  (notRendered, props) => (notRendered ? LoginScreenMaterial : <LoginScreenMaterial {...props} />),
-  (notRendered, props) => (notRendered ? LoginScreenBlur : <LoginScreenBlur {...props} />)
+
+
+let classicTheme = {
+  mainScreen: MainScreenClassic,
+  profileScreen: ProfileScreenClassic,
+  chatListScreen: ChatListScreenClassic,
+  chatScreen: ChatScreenClassic,
+  loginScreen: LoginScreenClassic,
+  newsScreen: NewsScreenClassic,
+  settingsScreens: SettingsScreenClassic,
+};
+
+let materialTheme = {
+  mainScreen: MainScreenMaterial,
+  profileScreen: ProfileScreenClassic,
+  chatListScreen: ChatListScreenMaterial,
+  chatScreen: ChatScreenMaterial,
+  loginScreen: LoginScreenMaterial,
+  newsScreen: NewsScreenClassic,
+  settingsScreens: SettingsScreenClassic,
+};
+
+let blurTheme = {
+  mainScreen: MainScreenClassic,
+  profileScreen: ProfileScreenClassic,
+  chatListScreen: ChatListScreenClassic,
+  chatScreen: ChatScreenClassic,
+  loginScreen: LoginScreenBlur,
+  newsScreen: NewsScreenClassic,
+  settingsScreens: SettingsScreenClassic,
+};
+
+let initScreen = (Screen, notRendered, props) => {
+  return notRendered ? Screen : <Screen {...props} />
+};
+
+let themes = [
+  classicTheme,
+  materialTheme,
+  blurTheme
 ];
 
-let chatListScreens = [
-  (notRendered, props) => (notRendered ? ChatListScreenClassic : <ChatListScreenClassic {...props} />)
-];
+let currentThemeIndex = 0;
 
-let chatScreens = [
-  (notRendered, props) => (notRendered ? ChatScreenClassic : <ChatScreenClassic {...props} />)
-];
-
-let mainScreens = [
-  (notRendered, props) => (notRendered ? MainScreenClassic : <MainScreenClassic {...props} />),
-  (notRendered, props) => (notRendered ? MainScreenMaterial : <MainScreenMaterial {...props} />)
-];
-
-let newsScreens = [
-  (notRendered, props) => (notRendered ? NewsScreenClassic : <NewsScreenClassic {...props} />)
-];
-
-let profileScreens = [
-  (notRendered, props) => (notRendered ? ProfileScreenClassic : <ProfileScreenClassic {...props} />)
-];
-
-let settingsScreens = [
-  (notRendered, props) => (notRendered ? SettingsScreenClassic : <SettingsScreenClassic {...props} />)
-];
-
-let currentMainScreenIndex = 1;
-let currentLoginScreenIndex = 0;
-let currentChatScreenIndex = 0;
-let currentChatListScreenIndex = 0;
-let currentNewsScreenIndex = 0;
-let currentProfileScreenIndex = 0;
-let currentSettingsScreenIndex = 0;
 
 export default ScreenService = {
 
-  getMainScreens: () => mainScreens,
-  getLoginScreens: () => loginScreens,
-  getChatScreens: () => chatScreens,
-  getChatListScreens: () => chatListScreens,
-  getNewsScreens: () => newsScreens,
-  getProfileScreens: () => profileScreens,
-  getSettingsScreens: () => settingsScreens,
+  currentThemeIndex,
+  setCurrentThemeIndex: index => currentThemeIndex = index,
 
-  setMainScreen: (i) => currentMainScreenIndex = i,
-  setLoginScreen: (i) => currentLoginScreenIndex = i,
-  setChatScreen: (i) => currentChatScreenIndex = i,
-  setChatListScreen: (i) => currentChatListScreenIndex = i,
-  setNewsScreen: (i) => currentNewsScreenIndex = i,
-  setProfileScreen: (i) => currentProfileScreenIndex = i,
-  setSettingsScreen: (i) => currentSettingsScreenIndex = i,
-
-  getMainScreen: (notRendered, props) => mainScreens[currentMainScreenIndex](notRendered, props),
-  getLoginScreen: (notRendered, props) => loginScreens[currentLoginScreenIndex](notRendered, props),
-  getChatScreen: (notRendered, props) => chatScreens[currentChatScreenIndex](notRendered, props),
-  getChatListScreen: (notRendered, props) => chatListScreens[currentChatListScreenIndex](notRendered, props),
-  getNewsScreen: (notRendered, props) => newsScreens[currentNewsScreenIndex](notRendered, props),
-  getProfileScreen: (notRendered, props) => profileScreens[currentProfileScreenIndex](notRendered, props),
-  getSettingsScreen: (notRendered, props) => settingsScreens[currentSettingsScreenIndex](notRendered, props),
-
-  getCurrentMainScreenIndex: ()=>currentMainScreenIndex,
-  getCurrentLoginScreenIndex: ()=>currentLoginScreenIndex,
-  getCurrentChatScreenIndex: ()=>currentChatScreenIndex,
-  getCurrentChatListScreenIndex: ()=>currentChatListScreenIndex,
-  getCurrentNewsScreenIndex: ()=>currentNewsScreenIndex,
-  getCurrentProfileScreenIndex: ()=>currentProfileScreenIndex,
-  getCurrentSettingsScreenIndex: ()=>currentSettingsScreenIndex,
+  getMainScreen: (notRendered, props) => initScreen(themes[currentThemeIndex].mainScreen, notRendered, props),
+  getLoginScreen: (notRendered, props) => initScreen(themes[currentThemeIndex].loginScreen, notRendered, props),
+  getChatScreen: (notRendered, props) => initScreen(themes[currentThemeIndex].chatScreen, notRendered, props),
+  getChatListScreen: (notRendered, props) => initScreen(themes[currentThemeIndex].chatListScreen, notRendered, props),
+  getNewsScreen: (notRendered, props) => initScreen(themes[currentThemeIndex].newsScreen, notRendered, props),
+  getProfileScreen: (notRendered, props) => initScreen(themes[currentThemeIndex].profileScreen, notRendered, props),
+  getSettingsScreen: (notRendered, props) => initScreen(themes[currentThemeIndex].settingsScreens, notRendered, props),
 
 }

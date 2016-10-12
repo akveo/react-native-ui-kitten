@@ -14,14 +14,14 @@ import ScreenService from './app/ScreenService'
 
 class BoomApp extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
 
   render() {
     return (
-      <NavigatorIOS
+      <NavigatorIOS //TODO user cross platform Navigator
         style={{flex: 1}}
         navigationBarHidden={true}
         initialRoute={{

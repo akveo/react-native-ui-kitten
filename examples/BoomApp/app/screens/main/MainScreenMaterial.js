@@ -13,7 +13,7 @@ import Icon from '../../../node_modules/react-native-vector-icons/Ionicons'; //T
 import ScreenService from '../../ScreenService';
 import {RkConfig, RkBarBg, RkTabView, RkButton, RkSeparator, RkStyle} from 'react-native-ui-kit';
 import api from '../../api';
-import MaterialToolBar from '../../components/MaterialToolbar';
+import MaterialToolbar from '../../components/MaterialToolbar';
 import DrawerMenu from '../../components/DrawerMenu';
 
 export default class MainScreen extends Component {
@@ -51,7 +51,11 @@ export default class MainScreen extends Component {
            mainOverlay: { opacity: 0.6*ratio, backgroundColor: 'black' }
         })}
       >
-        <MaterialToolBar title={this.state.selectedTab} onMenuClick={()=>(this.refs.drawer.open())}/>
+        <StatusBar barStyle="light-content"/>
+        <MaterialToolbar
+          title={this.state.selectedTab}
+          leftIcon="md-menu"
+          onLeftClick={()=>(this.refs.drawer.open())}/>
         {this._getCurrentScreen()}
       </Drawer>
     );
@@ -67,11 +71,8 @@ export default class MainScreen extends Component {
   _openChat(user) {
     this.refs.drawer.close();
     this.props.navigator.push({
-      title: `${user.name.first} ${user.name.last}`,
+      interactivePopGestureEnabled: true,
       component: ScreenService.getChatScreen(true),
-      barTintColor: RkConfig.colors.primary,
-      titleTextColor: RkConfig.colors.white,
-      navigationBarHidden: false,
       passProps: {
         userId: user.id
       }

@@ -65,7 +65,7 @@ export default class DrawerMenu extends Component {
         <View style={{height: 8}}/>
         <RkSeparator/>
         <View style={{height: 8}}/>
-        <TouchableOpacity onPress={() => this.props._hangeScreen('Settings')}>
+        <TouchableOpacity onPress={() => this.props.changeScreen('Settings')}>
           <View style={styles.menuItem}>
             <Icon style={styles.menuItemIcon} name="md-settings"/>
             <Text style={styles.menuItemText}>Settings</Text>

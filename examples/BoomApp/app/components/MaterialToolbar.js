@@ -16,12 +16,11 @@ export default class MaterialToolbar extends Component {
 
   render() {
     return (
-      <View style={styles.barContainer}>
-        <RkButton style={{paddingVertical: 0}} type="clear" onPress={() => this.props.onMenuClick()}>
-          <Icon name="md-menu" style={{color: 'white', fontSize: 32}}/>
+      <View style={[styles.barContainer, this.props.style]}>
+        <RkButton style={{paddingVertical: 0}} type="clear" onPress={() => this.props.onLeftClick()}>
+          <Icon name={this.props.leftIcon} style={{color: 'white', fontSize: 32}}/>
         </RkButton>
-        <Text style={{fontSize: 16, color: 'white'}}>{this.props.title}</Text>
-        <View style={{width: 54}}/>
+        <Text style={styles.barTitle}>{this.props.title}</Text>
       </View>
     )
   }
@@ -34,7 +33,15 @@ var styles = StyleSheet.create({
     height: 56,
     backgroundColor: RkConfig.colors.primary,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    shadowColor: 'black',
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+    zIndex: 2
+  },
+  barTitle: {
+    fontSize: 20,
+    color: 'white',
+    marginLeft: 10,
+    marginTop: 4
   }
 });
