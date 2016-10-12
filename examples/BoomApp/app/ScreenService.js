@@ -10,6 +10,7 @@ import ProfileScreenClassic from './screens/profile/ProfileScreenClassic.js'
 import SettingsScreenClassic from './screens/settings/SettingsScreenClassic.js'
 
 import LoginScreenMaterial from './screens/auth/LoginScreenMaterial'
+import MainScreenMaterial from './screens/main/MainScreenMaterial'
 
 import LoginScreenBlur from './screens/auth/LoginScreenBlur'
 
@@ -28,7 +29,8 @@ let chatScreens = [
 ];
 
 let mainScreens = [
-  (notRendered, props) => (notRendered ? MainScreenClassic : <MainScreenClassic {...props} />)
+  (notRendered, props) => (notRendered ? MainScreenClassic : <MainScreenClassic {...props} />),
+  (notRendered, props) => (notRendered ? MainScreenMaterial : <MainScreenMaterial {...props} />)
 ];
 
 let newsScreens = [
@@ -43,7 +45,7 @@ let settingsScreens = [
   (notRendered, props) => (notRendered ? SettingsScreenClassic : <SettingsScreenClassic {...props} />)
 ];
 
-let currentMainScreenIndex = 0;
+let currentMainScreenIndex = 1;
 let currentLoginScreenIndex = 0;
 let currentChatScreenIndex = 0;
 let currentChatListScreenIndex = 0;

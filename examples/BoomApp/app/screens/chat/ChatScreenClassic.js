@@ -32,17 +32,6 @@ export default class ChatScreen extends Component {
 
   }
 
-  componentDidUpdate() {
-    this._scrollToBottom();
-  }
-
-  _scrollToBottom() {
-    if (this.refs.scroll) {
-      this.refs.scroll.scrollTo({y: this.state.msgListHeight - this._height});
-    }
-  }
-
-
   render() {
     return (
       <View>
@@ -61,6 +50,7 @@ export default class ChatScreen extends Component {
                   scrollEnabled={false}
                   style={{paddingHorizontal: 10}}
                   dataSource={this.state.dataSource}
+                  onLayout={()=>{this._scrollToBottom()}}
                   renderRow={(rowData) => this._renderRow(rowData)}
                 />
               </View>
@@ -96,6 +86,14 @@ export default class ChatScreen extends Component {
         </View>
       </View>
     );
+  }
+
+  _scrollToBottom() {
+    if (this.refs.scroll) {
+      setTimeout(() => {
+        this.refs.scroll.scrollTo({y: this.state.msgListHeight - this._height});
+      }, 100)
+    }
   }
 
   _sendMessage() {

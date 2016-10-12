@@ -21,16 +21,6 @@ export default class MainScreen extends Component {
     };
   }
 
-  _renderContent(pageText, num) {
-    return (
-      <View style={[styles.tabContent]}>
-        <Text style={styles.tabText}>{pageText}</Text>
-        <Text style={styles.tabText}>{num} re-renders of the {pageText}</Text>
-      </View>
-    );
-  }
-
-
   render() {
     return (
       <View style={{flex: 1}}>
@@ -91,13 +81,7 @@ export default class MainScreen extends Component {
   }
 }
 var styles = StyleSheet.create({
-  tabContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  tabText: {
-    margin: 50,
-  },
+
 });
 
 
