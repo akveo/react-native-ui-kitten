@@ -86,7 +86,7 @@ var styles = StyleSheet.create({
   },
   profileBg:{
     width: null,
-    height: 160
+    height: 200
   },
   menuItem: {
     paddingLeft: 15,

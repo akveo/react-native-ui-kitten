@@ -9,12 +9,13 @@ import {
   Dimensions
 } from 'react-native';
 
+import LoginScreenClassic from './LoginScreenClassic';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkButton, RkStyle, RkTextInput, RkSeparator, RkConfig, RkCard} from 'react-native-ui-kit';
-import ScreenService from '../../ScreenService';
+import ScreenService from '../../util/ScreenService';
 
 
-export default class LoginScreenMaterial extends Component {
+export default class LoginScreenMaterial extends LoginScreenClassic {
 
   constructor(props) {
     super(props)
@@ -94,11 +95,7 @@ export default class LoginScreenMaterial extends Component {
             <View rkCardFooter style={{alignItems: 'flex-end', paddingHorizontal: 20}}>
               <RkButton style={[RkStyle.primaryBg, {marginTop: 20}]}
                         innerStyle={RkStyle.whiteText}
-                        onPress={()=>this.props.navigator.push(
-                        {
-                          title: '',
-                          component: ScreenService.getMainScreen(true),
-                        })}
+                        onPress={()=>super._renderMainScreen()}
                         type='material'>
                 NEXT
               </RkButton>

@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
+    Image,
   StatusBar,
   ScrollView,
   TouchableOpacity,
@@ -11,7 +11,7 @@ import {
 
 import {RkConfig, RkSeparator, RkButton, RkStyle, RkTabView} from 'react-native-ui-kit';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
-import api from '../../api';
+import api from '../../util/ApiMock';
 import FriendList from '../../components/FriendList';
 import ContactList from '../../components/ContactList';
 import ImageList from '../../components/ImageList';
@@ -53,9 +53,7 @@ export default class ProfileScreen extends Component {
 
   _showMoreFriends() {
     this.props.navigator.push({
-      title: 'Friends',
-      component: FriendList,
-      navigationBarHidden: false,
+      screen: FriendList,
       passProps: {
         style: {marginTop: 10},
         friends: api.getUserFriends(api.userId).concat(api.getUserFriends(api.userId))

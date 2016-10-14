@@ -10,8 +10,9 @@ import {
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import ScreenService from '../../util/ScreenService';
 import {RkConfig, RkBarBg, RkTabView} from 'react-native-ui-kit';
+import MainScreenClassic from './MainScreenClassic';
 
-export default class MainScreen extends Component {
+export default class MainScreenBlur extends MainScreenClassic {
 
 
   constructor(props) {
@@ -19,12 +20,7 @@ export default class MainScreen extends Component {
     this.state = {
       selectedTab: 'newsTab'
     };
-    this._screens = {
-      profile: ScreenService.getProfileScreen(),
-      news: ScreenService.getNewsScreen(),
-      chat: ScreenService.getChatListScreen(),
-      settings: ScreenService.getSettingsScreen(),
-    }
+
   }
 
   render() {
@@ -32,11 +28,16 @@ export default class MainScreen extends Component {
       <View style={{flex: 1}}>
         <StatusBar
           barStyle="light-content"
-          />
-        <TabBarIOS>
+        />
+        <TabBarIOS
+          barTintColor={RkConfig.colors.black}
+          tintColor={RkConfig.colors.white}>
           <Icon.TabBarItemIOS
             title="Profile"
             iconName="ios-person"
+            renderAsOriginal={true}
+            selectedIconColor={RkConfig.colors.white}
+            iconColor={RkConfig.colors.lightGray}
             selected={this.state.selectedTab === 'profileTab'}
             onPress={() => {
             this.setState({
@@ -48,6 +49,9 @@ export default class MainScreen extends Component {
           <Icon.TabBarItemIOS
             title="News"
             iconName="ios-paper-outline"
+            renderAsOriginal={true}
+            selectedIconColor={RkConfig.colors.white}
+            iconColor={RkConfig.colors.lightGray}
             selected={this.state.selectedTab === 'newsTab'}
             onPress={() => {
             this.setState({
@@ -59,6 +63,9 @@ export default class MainScreen extends Component {
           <Icon.TabBarItemIOS
             title="Chats"
             iconName="ios-chatboxes"
+            renderAsOriginal={true}
+            selectedIconColor={RkConfig.colors.white}
+            iconColor={RkConfig.colors.lightGray}
             badge={1}
             selected={this.state.selectedTab === 'chatTab'}
             onPress={() => {
@@ -71,6 +78,9 @@ export default class MainScreen extends Component {
           <Icon.TabBarItemIOS
             title="Settings"
             iconName="ios-settings-outline"
+            renderAsOriginal={true}
+            selectedIconColor={RkConfig.colors.white}
+            iconColor={RkConfig.colors.lightGray}
             selectedIconName="ios-settings"
             selected={this.state.selectedTab === 'settingsTab'}
             onPress={() => {
@@ -81,13 +91,10 @@ export default class MainScreen extends Component {
             {<this._screens.settings navigator={this.props.navigator} />}
           </Icon.TabBarItemIOS>
         </TabBarIOS>
-        <RkBarBg/>
       </View>
     );
   }
 }
-var styles = StyleSheet.create({
-
-});
+var styles = StyleSheet.create({});
 
 

@@ -10,7 +10,7 @@ import {
 
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import {RkButton, RkStyle, RkTextInput, RkSeparator, RkConfig} from 'react-native-ui-kit';
-import ScreenService from '../../ScreenService';
+import ScreenService from '../../util/ScreenService';
 
 
 export default class LoginScreenClassic extends Component {
@@ -43,11 +43,7 @@ export default class LoginScreenClassic extends Component {
           </View>
           <View>
             <RkButton innerStyle={[{fontSize: 20}]} type='circle outline medium'
-                      onPress={()=>this.props.navigator.push(
-                      {
-                        title: '',
-                        component: ScreenService.getMainScreen(true),
-                      })}>
+                      onPress={() => this._renderMainScreen()}>
               SIGN IN
             </RkButton>
           </View>
@@ -55,15 +51,13 @@ export default class LoginScreenClassic extends Component {
       </View>
     );
   }
+
+  _renderMainScreen(){
+    this.props.navigator.replace({screen: ScreenService.getMainScreen()});
+  }
+
 }
 
 let styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-  }
+
 });

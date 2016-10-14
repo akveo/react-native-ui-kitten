@@ -12,7 +12,7 @@ import {
 
 import {RkConfig, RkButton, RkSeparator, RkStyle, RkTextInput, RkBoardUpView, RkBarBg} from 'react-native-ui-kit';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
-import api from '../../api';
+import api from '../../util/ApiMock';
 import MaterialToolbar from '../../components/MaterialToolbar';
 
 
@@ -57,7 +57,7 @@ export default class ChatScreenMaterial extends Component {
                 <ListView
                   ref="messageList"
                   scrollEnabled={false}
-                  style={{paddingHorizontal: 10, paddingBottom: 10, paddingTop: 56}}
+                  style={{paddingHorizontal: 10, paddingBottom: 10, paddingTop: MaterialToolbar.height}}
                   dataSource={this.state.dataSource}
                   onLayout={()=>{this._scrollToBottom()}}
                   renderRow={(rowData) => this._renderRow(rowData)}

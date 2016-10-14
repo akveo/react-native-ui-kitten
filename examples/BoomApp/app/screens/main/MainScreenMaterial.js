@@ -10,13 +10,14 @@ import {
 
 import Drawer from 'react-native-drawer'
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons'; //TODO normal import string?
-import ScreenService from '../../ScreenService';
+import ScreenService from '../../util/ScreenService';
 import {RkConfig, RkBarBg, RkTabView, RkButton, RkSeparator, RkStyle} from 'react-native-ui-kit';
-import api from '../../api';
+import api from '../../util/ApiMock';
 import MaterialToolbar from '../../components/MaterialToolbar';
 import DrawerMenu from '../../components/DrawerMenu';
+import MainScreenClassic from './MainScreenClassic';
 
-export default class MainScreen extends Component {
+export default class MainScreenMaterial extends MainScreenClassic {
 
 
   constructor(props) {
@@ -71,8 +72,7 @@ export default class MainScreen extends Component {
   _openChat(user) {
     this.refs.drawer.close();
     this.props.navigator.push({
-      interactivePopGestureEnabled: true,
-      component: ScreenService.getChatScreen(true),
+      screen: ScreenService.getChatScreen(true),
       passProps: {
         userId: user.id
       }
@@ -81,16 +81,16 @@ export default class MainScreen extends Component {
 
   _getCurrentScreen() {
     if (this.state.selectedTab === 'Profile') {
-      return ScreenService.getProfileScreen(false, {navigator: this.props.navigator})
+      return <this._screens.profile navigator={this.props.navigator} />
     }
     if (this.state.selectedTab === 'News') {
-      return ScreenService.getNewsScreen(false, {navigator: this.props.navigator})
+      return <this._screens.news navigator={this.props.navigator} />
     }
     if (this.state.selectedTab === 'Chats') {
-      return ScreenService.getChatListScreen(false, {navigator: this.props.navigator})
+      return <this._screens.chats navigator={this.props.navigator} />
     }
     if (this.state.selectedTab === 'Settings') {
-      return ScreenService.getSettingsScreen(false, {navigator: this.props.navigator})
+      return <this._screens.settings navigator={this.props.navigator} />
     }
   }
 

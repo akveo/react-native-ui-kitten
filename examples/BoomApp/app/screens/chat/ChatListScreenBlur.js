@@ -16,7 +16,7 @@ import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import ScreenService from '../../util/ScreenService';
 import api from '../../util/ApiMock';
 
-export default class ChatListScreen extends Component {
+export default class ChatListScreenBlur extends Component {
 
   constructor(props) {
     super(props);
@@ -33,20 +33,20 @@ export default class ChatListScreen extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.headerText}>
-              Chats
-            </Text>
+        <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={styles.backgroundImage}>
+          <View style={styles.header}>
+            <View>
+              <Text style={styles.headerText}>
+                Chats
+              </Text>
+            </View>
           </View>
-        </View>
-        <ListView
-          automaticallyAdjustContentInsets={false}
-          renderSeparator={(sID, rID)=> <RkSeparator style={styles.chatSeparator}  key={`${sID}-${rID}`}/>}
-          dataSource={this.state.dataSource}
-          style={RkStyle.whiteBg}
-          renderRow={(row) => this._renderRow(row)}
-        />
+          <ListView
+            automaticallyAdjustContentInsets={false}
+            dataSource={this.state.dataSource}
+            renderRow={(row) => this._renderRow(row)}
+          />
+        </Image>
       </View>
     );
   }
@@ -57,12 +57,15 @@ export default class ChatListScreen extends Component {
       <TouchableOpacity onPress={()=>{this._openChat(user)}}>
         <View style={styles.itemContainer}>
           <Image source={user.avatar} style={styles.avatar}/>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{user.name.first} {user.name.last}</Text>
-            <Text style={styles.subTitle}>{msg.text}</Text>
-          </View>
-          <View style={styles.aside}>
-            <Text style={styles.subTitle}>{msg.time}</Text>
+          <View style={styles.avatarSide}/>
+          <View style={styles.textContent}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>{user.name.first} {user.name.last}</Text>
+              <Text style={styles.subTitle}>{msg.text}</Text>
+            </View>
+            <View style={styles.aside}>
+              <Text style={styles.subTitle}>{msg.time}</Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -80,29 +83,43 @@ export default class ChatListScreen extends Component {
 }
 
 let styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
   itemContainer: {
     flexDirection: 'row',
-    padding: 7
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  },
+  textContent: {
+    flexDirection: 'row',
+    flex: 1,
+    padding: 8,
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'rgba(255,255,255,0.1)'
   },
   avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25
-  },
-  titleContainer: {
-    marginLeft: 10,
-    justifyContent: 'center'
+    width: 76,
+    height: 76,
+    opacity: 0.8
   },
   title: {
     fontSize: 18,
-    color: RkConfig.colors.primary,
+    color: 'rgba(255,255,255,0.7)',
+    backgroundColor: 'transparent',
   },
   subTitle: {
-    marginTop: 5,
+    marginTop: 10,
     color: RkConfig.colors.gray,
+    backgroundColor: 'transparent',
     fontSize: 14
   },
   aside: {
+    marginTop: -10,
     flex: 1,
     alignItems: 'flex-end'
   },
@@ -114,13 +131,20 @@ let styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: RkConfig.colors.lightGray
+    borderBottomColor: 'rgba(255,255,255,0.1)'
   },
   headerText: {
+    color: 'rgba(255,255,255,0.7)',
+    backgroundColor: 'transparent',
     fontSize: 18,
     paddingHorizontal: 8,
   },
+  avatarSide: {
+    width: 10,
+    backgroundColor: 'rgba(0,0,0,0.3 )',
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'rgba(255,255,255,0.1)'
+  }
 });

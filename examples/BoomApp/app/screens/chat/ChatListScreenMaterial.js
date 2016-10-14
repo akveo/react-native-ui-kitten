@@ -13,8 +13,8 @@ import {
 import {RkConfig, RkSeparator, RkStyle, RkButton} from 'react-native-ui-kit';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 
-import ScreenService from '../../ScreenService';
-import api from '../../api';
+import ScreenService from '../../util/ScreenService';
+import api from '../../util/ApiMock';
 
 //TODO extend from classic?
 export default class ChatListScreenMaterial extends Component {
@@ -64,8 +64,7 @@ export default class ChatListScreenMaterial extends Component {
 
   _openChat(user) {
     this.props.navigator.push({
-      component: ScreenService.getChatScreen(true),
-      interactivePopGestureEnabled: true,
+      screen: ScreenService.getChatScreen(true),
       passProps: {
         userId: user.id
       }
@@ -85,7 +84,6 @@ let styles = StyleSheet.create({
   },
   titleContainer: {
     marginLeft: 10,
-    top: -5,
     justifyContent: 'center'
   },
   title: {

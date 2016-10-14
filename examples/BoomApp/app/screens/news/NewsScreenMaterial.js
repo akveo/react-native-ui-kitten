@@ -10,11 +10,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {RkConfig, RkSeparator, RkStyle, RkButton, RkModalImg} from 'react-native-ui-kit';
+import {RkConfig, RkSeparator, RkStyle, RkButton, RkModalImg, RkCard} from 'react-native-ui-kit';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import api from '../../util/ApiMock';
 
-export default class NewsScreen extends Component {
+export default class NewsScreenMaterial extends Component {
 
 
   constructor(props) {
@@ -37,11 +37,11 @@ export default class NewsScreen extends Component {
       <View style={{flex: 1}}>
         <ScrollView
           style={[RkStyle.lightGrayBg]}
-          automaticallyAdjustContentInsets={true}>
+          automaticallyAdjustContentInsets={false}>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={(rowData) => this._renderRow(rowData)}
-            />
+          />
         </ScrollView>
       </View>
     );
@@ -50,8 +50,8 @@ export default class NewsScreen extends Component {
 
   _renderRow(post) {
     return (
-      <View style={[RkStyle.card.card, RkStyle.card.shadowMargin, {paddingHorizontal: 0, paddingVertical:10}]}>
-        <View style={[RkStyle.card.header, {paddingHorizontal: 10}]}>
+      <RkCard type='material'>
+        <View rkCardHeader style={{flexDirection: 'row'}}>
           <Image source={post.userAvatar} style={RkStyle.card.avatarSmallImg}/>
           <View style={RkStyle.card.titleContainer}>
             <Text style={RkStyle.card.title}>{post.userName}</Text>
@@ -64,15 +64,15 @@ export default class NewsScreen extends Component {
             </RkButton>
           </View>
         </View>
-        <View style={RkStyle.card.content}>
-            <RkModalImg source={post.img}
-                        style={{width: null, height: 250, marginTop: 5, resizeMode: "cover"}}
-                        modalContainerStyle={{backgroundColor: 'rgba(0,0,0,0.9)'}}
-                        renderHeader={this._renderHeader.bind({post: post})}
-                        renderFooter={this._renderFooter.bind({post: post})}
-                        imageInModalStyle={{ resizeMode: "contain"}}/>
+        <View rkCardContent>
+          <RkModalImg source={post.img}
+                      style={{width: null, height: 250, marginTop: 5, resizeMode: "cover"}}
+                      modalContainerStyle={{backgroundColor: 'rgba(0,0,0,0.9)'}}
+                      renderHeader={this._renderHeader.bind({post: post})}
+                      renderFooter={this._renderFooter.bind({post: post})}
+                      imageInModalStyle={{ resizeMode: "contain"}}/>
         </View>
-        <View style={[RkStyle.card.footer, {paddingHorizontal: 10}]}>
+        <View rkCardFooter>
           <View style={RkStyle.card.leftControls}>
             <RkButton type='clear' onPress={()=> this._setLike(post)} style={{paddingHorizontal: 5, paddingVertical: 5}}
                       innerStyle={{fontSize: 26}}>
@@ -85,7 +85,7 @@ export default class NewsScreen extends Component {
             </RkButton>
           </View>
         </View>
-      </View>
+      </RkCard>
     );
   }
 

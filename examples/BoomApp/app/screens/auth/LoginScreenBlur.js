@@ -8,53 +8,49 @@ import {
   Text
 } from 'react-native';
 
-
+import LoginScreenClassic from './LoginScreenClassic';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import {RkButton, RkStyle, RkTextInput, RkSeparator, RkConfig} from 'react-native-ui-kit';
-import ScreenService from '../../ScreenService';
+import ScreenService from '../../util/ScreenService';
 
 
-export default class LoginScreenBlur extends Component {
+export default class LoginScreenBlur extends LoginScreenClassic {
 
   render() {
     return (
       <View style={{flex: 1}}>
         <StatusBar
           barStyle="light-content"
-          />
-        <Image blurRadius={30}  source={require('../../../img/bg/lamp.jpg')} style={styles.backgroundImage}>
-          <View style={{paddingHorizontal: 50, justifyContent: 'space-between', flex: 1}}>
+        />
+        <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={styles.backgroundImage}>
+          <View style={styles.container}>
             <View><Text
-              style={{marginTop: 150, fontSize: 42, color: 'white', backgroundColor: 'transparent', textAlign: 'center', fontWeight: '100'}}>BOOM</Text></View>
+              style={styles.title}>BOOM</Text></View>
             <View>
               <RkTextInput
                 type='underlay'
-                containerStyle={{borderBottomColor: 'rgba(255,255,255,0.5)', marginTop: 30}}
-                iconStyle={[{color: 'white', fontSize: 32, fontWeight: '300'}]}
-                style={[{color: 'rgba(255,255,255,0.7)', fontWeight: '300', fontSize: 20, textAlign: 'center', marginRight: 35}]}
+                containerStyle={styles.inputContainer}
+                iconStyle={styles.inputIcon}
+                style={styles.input}
                 icon={'ios-person-outline'}
                 placeholder={'Login'}
                 placeholderTextColor={RkConfig.colors.lightGray}/>
               <RkTextInput type='underlay'
-                           containerStyle={{borderBottomColor: 'rgba(255,255,255,0.5)', marginTop: 30}}
-                           iconStyle={[{color: 'white', fontSize: 32, fontWeight: '300'}]}
-                           style={[{color: 'rgba(255,255,255,0.7)', fontWeight: '300', fontSize: 20, textAlign: 'center', marginRight: 35}]}
+                           containerStyle={styles.inputContainer}
+                           iconStyle={styles.inputIcon}
+                           style={styles.input}
                            secureTextEntry={true}
                            icon={'ios-key-outline'}
                            placeholder={'Password'}
                            placeholderTextColor={RkConfig.colors.lightGray}/>
-              <RkButton innerStyle={{fontSize: 22, fontWeight: '300', color: 'rgba(255,255,255,0.7)'}}
-                        style={{backgroundColor: 'rgba(0,0,0,0.1)', marginTop: 40, borderRadius: 0}}
+              <RkButton innerStyle={styles.buttonInner}
+                        style={styles.buttonContainer}
                         type='basic'
-                        onPress={()=>this.props.navigator.push(
-                      {
-                        title: '',
-                        component: ScreenService.getMainScreen(true),
-                      })}>
+                        onPress={()=>super._renderMainScreen()}>
                 Sing in
               </RkButton>
             </View>
-            <Text style={{marginBottom: 30, alignSelf: 'center', fontWeight: '300', color: 'rgba(255,255,255,0.7)', backgroundColor: 'transparent'}}>
+            <Text style={styles.footText}>
               Don't have account? Sign up here.
             </Text>
           </View>
@@ -65,6 +61,35 @@ export default class LoginScreenBlur extends Component {
 }
 
 let styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 50,
+    justifyContent: 'space-between',
+    flex: 1
+  },
+  title: {
+    marginTop: 150,
+    fontSize: 42,
+    color: 'white',
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    fontWeight: '100'
+  },
+  inputContainer: {
+    borderBottomColor: RkConfig.colors.blurTextStrong,
+    marginTop: 30
+  },
+  inputIcon: {
+    color: 'white',
+    fontSize: 32,
+    fontWeight: '300'
+  },
+  input: {
+    color: RkConfig.colors.blurTextStrong,
+    fontWeight: '300',
+    fontSize: 20,
+    textAlign: 'center',
+    marginRight: 35
+  },
   backgroundImage: {
     flex: 1,
     width: null,
@@ -72,5 +97,22 @@ let styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center',
     alignItems: 'stretch',
+  },
+  footText: {
+    marginBottom: 30,
+    alignSelf: 'center',
+    fontWeight: '300',
+    color: RkConfig.colors.blurTextStrong,
+    backgroundColor: 'transparent'
+  },
+  buttonContainer: {
+    backgroundColor: RkConfig.colors.blurBg,
+    marginTop: 40,
+    borderRadius: 0
+  },
+  buttonInner: {
+    fontSize: 22,
+    fontWeight: '300',
+    color: RkConfig.colors.blurTextStrong
   }
 });

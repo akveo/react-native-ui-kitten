@@ -7,14 +7,14 @@ import {
   StatusBar,
   ListView,
   ScrollView,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 
 import {RkConfig, RkButton, RkSeparator, RkStyle, RkTextInput, RkBoardUpView, RkBarBg} from 'react-native-ui-kit';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import api from '../../util/ApiMock';
 
-export default class ChatScreen extends Component {
+export default class ChatScreenBlur extends Component {
 
   constructor(props) {
     super(props);
@@ -34,8 +34,8 @@ export default class ChatScreen extends Component {
 
   render() {
     return (
-      <View>
-        <RkBoardUpView style={[RkStyle.lightGrayBg]}>
+      <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={styles.backgroundImage}>
+        <RkBoardUpView style={[{backgroundColor: 'transparent'}]}>
           <ScrollView
             ref="scroll"
             automaticallyAdjustContentInsets={true}
@@ -60,17 +60,17 @@ export default class ChatScreen extends Component {
             style={styles.footer}>
             <RkTextInput
               placeholder='Message...'
-              placeholderColor={RkConfig.colors.lightGray}
+              placeholderTextColor={'rgba(255,255,255,0.5)'}
               type='bordered'
+              style={{color: 'rgba(255,255,255,0.7)'}}
               onChangeText={message => this.setState({message})}
               value={this.state.message}
               clearButtonMode='while-editing'
               containerStyle={{marginHorizontal: 20, paddingVertical: 1}}/>
-            <RkButton type='clear' style={{paddingVertical: 5}} onPress={()=>this._sendMessage()}>Send</RkButton>
+            <RkButton type='clear' innerStyle={{color: 'rgba(255,255,255,0.7)'}} style={{paddingVertical: 5}}  onPress={()=>this._sendMessage()}>Send</RkButton>
           </View>
         </RkBoardUpView>
-        <RkBarBg/>
-      </View>
+      </Image>
     );
   }
 
@@ -108,28 +108,36 @@ export default class ChatScreen extends Component {
 }
 
 let styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
   footer: {
     height: this._inputFooterHeight,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(0,0,0,0.3)',
     paddingVertical: 10,
     paddingHorizontal: 5
   },
   messageContainer: {
-    backgroundColor: RkConfig.colors.white,
+    backgroundColor: 'rgba(0,0,0,0.3)',
     alignSelf: 'flex-start',
     marginRight: 50,
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 2,
     marginVertical: 5
   },
   myMessageContainer: {
-    backgroundColor: RkConfig.colors.primary,
     alignSelf: 'flex-end',
     marginLeft: 50,
     marginRight: 0
   },
   messageText: {
-    fontSize: 16
+    fontSize: 16,
+    color: 'rgba(255,255,255,0.7)'
   }
 });

@@ -10,6 +10,8 @@ import {RkConfig, RkButton} from 'react-native-ui-kit';
 
 export default class MaterialToolbar extends Component {
 
+  static height = 64;
+
   constructor(props) {
     super(props);
   }
@@ -17,7 +19,7 @@ export default class MaterialToolbar extends Component {
   render() {
     return (
       <View style={[styles.barContainer, this.props.style]}>
-        <RkButton style={{paddingVertical: 0}} type="clear" onPress={() => this.props.onLeftClick()}>
+        <RkButton  type="clear" onPress={() => this.props.onLeftClick()}>
           <Icon name={this.props.leftIcon} style={{color: 'white', fontSize: 32}}/>
         </RkButton>
         <Text style={styles.barTitle}>{this.props.title}</Text>
@@ -30,9 +32,10 @@ export default class MaterialToolbar extends Component {
 var styles = StyleSheet.create({
   barContainer: {
     paddingTop: 20,
-    height: 56,
+    height: MaterialToolbar.height,
     backgroundColor: RkConfig.colors.primary,
     flexDirection: 'row',
+    alignItems: 'center',
     shadowColor: 'black',
     shadowOpacity: 0.8,
     shadowRadius: 3,
@@ -42,6 +45,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     marginLeft: 10,
-    marginTop: 4
+    marginTop: 2
   }
 });

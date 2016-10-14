@@ -7,10 +7,11 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  NavigatorIOS
+  Navigator
 } from 'react-native';
 
-import ScreenService from './app/ScreenService'
+import Init from './app/util/Setup'
+import ScreenService from './app/util/ScreenService'
 
 class BoomApp extends Component {
 
@@ -21,12 +22,12 @@ class BoomApp extends Component {
 
   render() {
     return (
-      <NavigatorIOS //TODO user cross platform Navigator
+      <Navigator
         style={{flex: 1}}
         navigationBarHidden={true}
-        initialRoute={{
-        title: '',
-        component: ScreenService.getLoginScreen(true),
+        initialRoute={{screen: ScreenService.getLoginScreen()}}
+        renderScene={(route, navigator) =>{
+         return  <route.screen navigator={navigator} {...route.passProps} />
         }}
       />
     );

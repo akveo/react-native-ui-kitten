@@ -13,7 +13,7 @@ import {
 import {RkConfig, RkSeparator, RkStyle, RkButton, RkChoiceGroup, RkChoice} from 'react-native-ui-kit';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import ScreenService from '../../ScreenService';
+import ScreenService from '../../util/ScreenService';
 
 export default class SettingsScreenClassic extends Component {
 
@@ -73,8 +73,8 @@ export default class SettingsScreenClassic extends Component {
 
 
   _logOut() {
-    this.props.navigator.push({
-      component: ScreenService.getLoginScreen(true),
+    this.props.navigator.replace({
+      screen: ScreenService.getLoginScreen(),
     });
   }
 

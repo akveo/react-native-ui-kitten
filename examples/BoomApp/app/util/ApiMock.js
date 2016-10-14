@@ -147,8 +147,8 @@ let users = [
     "phone": "+1 (898) 460-3581",
     "address": "140 Riverdale Avenue, Allendale, Maine, 1825",
     "registered": "Saturday, June 14, 2014 8:33 PM",
-    "avatar": require("../img/avatars/boy.jpeg"),
-    "profileBg": require("../img/bg/lights2.jpeg")
+    "avatar": require("../../img/avatars/boy.jpeg"),
+    "profileBg": require("../../img/bg/lights2.jpeg")
   },
   {
     "id": "2",
@@ -161,8 +161,8 @@ let users = [
     "phone": "+1 (911) 404-2873",
     "address": "492 Applegate Court, Westboro, Marshall Islands, 7942",
     "registered": "Sunday, October 4, 2015 8:40 PM",
-    "avatar": require("../img/avatars/boy2.jpg"),
-    "profileBg": require("../img/bg/profileBg.jpg"),
+    "avatar": require("../../img/avatars/boy2.jpg"),
+    "profileBg": require("../../img/bg/profileBg.jpg"),
     "favoriteSong": whereIsMyMind
   },
   {
@@ -176,8 +176,8 @@ let users = [
     "phone": "+1 (935) 577-3141",
     "address": "228 Cheever Place, Ladera, Idaho, 459",
     "registered": "Friday, April 24, 2015 9:38 PM",
-    "avatar": require("../img/avatars/boy3.jpg"),
-    "profileBg": require("../img/bg/profileBg.jpg"),
+    "avatar": require("../../img/avatars/boy3.jpg"),
+    "profileBg": require("../../img/bg/profileBg.jpg"),
     "favoriteSong": tnt
   },
   {
@@ -191,8 +191,8 @@ let users = [
     "phone": "+1 (910) 494-2110",
     "address": "863 Chester Avenue, Shrewsbury, Utah, 8537",
     "registered": "Wednesday, May 21, 2014 10:13 PM",
-    "avatar": require("../img/avatars/boy4.jpg"),
-    "profileBg": require("../img/bg/profileBg.jpg"),
+    "avatar": require("../../img/avatars/boy4.jpg"),
+    "profileBg": require("../../img/bg/profileBg.jpg"),
     "favoriteSong": highWay
   },
   {
@@ -206,8 +206,8 @@ let users = [
     "phone": "+1 (928) 463-3103",
     "address": "155 Bethel Loop, Santel, Arizona, 3114",
     "registered": "Wednesday, September 2, 2015 2:04 AM",
-    "avatar": require("../img/avatars/girl.jpeg"),
-    "profileBg": require("../img/bg/profileBg.jpg"),
+    "avatar": require("../../img/avatars/girl.jpeg"),
+    "profileBg": require("../../img/bg/profileBg.jpg"),
     "favoriteSong": backInBlack
   },
 
@@ -217,67 +217,67 @@ let posts = [
   {
     id: "1",
     userId: "1",
-    img: require("../img/postPhotos/animal.jpeg"),
+    img: require("../../img/postPhotos/animal.jpeg"),
     likes: 4
   },
   {
     id: "2",
     userId: "1",
-    img: require("../img/postPhotos/bird.jpeg"),
+    img: require("../../img/postPhotos/bird.jpeg"),
     likes: 5
   },
   {
     id: "3",
     userId: "1",
-    img: require("../img/postPhotos/clock.jpg"),
+    img: require("../../img/postPhotos/clock.jpg"),
     likes: 6
   },
   {
     id: "4",
     userId: "1",
-    img: require("../img/postPhotos/fireworks.jpeg"),
+    img: require("../../img/postPhotos/fireworks.jpeg"),
     likes: 3
   },
   {
     id: "5",
     userId: "1",
-    img: require("../img/postPhotos/flowers.jpeg"),
+    img: require("../../img/postPhotos/flowers.jpeg"),
     likes: 4
   },
   {
     id: "6",
     userId: "2",
-    img: require("../img/postPhotos/night.jpeg"),
+    img: require("../../img/postPhotos/night.jpeg"),
     likes: 11
   },
   {
     id: "7",
     userId: "3",
-    img: require("../img/postPhotos/river.jpeg"),
+    img: require("../../img/postPhotos/river.jpeg"),
     likes: 2
   },
   {
     id: "8",
     userId: "4",
-    img: require("../img/postPhotos/sea.jpg"),
+    img: require("../../img/postPhotos/sea.jpg"),
     likes: 44
   },
   {
     id: "9",
     userId: "5",
-    img: require("../img/postPhotos/sun.jpg"),
+    img: require("../../img/postPhotos/sun.jpg"),
     likes: 1
   },
   {
     id: "10",
     userId: "5",
-    img: require("../img/postPhotos/tree.jpeg"),
+    img: require("../../img/postPhotos/tree.jpeg"),
     likes: 8
   },
   {
     id: "11",
     userId: "5",
-    img: require("../img/postPhotos/wood.jpeg"),
+    img: require("../../img/postPhotos/wood.jpeg"),
     likes: 7
   }
 ];
