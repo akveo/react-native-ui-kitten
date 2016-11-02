@@ -10,11 +10,12 @@ import {
   Dimensions
 } from 'react-native';
 
+import _ from "lodash";
 import {RkConfig, RkButton, RkSeparator, RkStyle, RkTextInput, RkBoardUpView, RkBarBg} from 'react-native-ui-kit';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
+import Toolbar from '../../components/Toolbar';
 import api from '../../util/ApiMock';
 
-export default class ChatScreen extends Component {
+export default class ChatScreenClassic extends Component {
 
   constructor(props) {
     super(props);
@@ -29,62 +30,99 @@ export default class ChatScreen extends Component {
       message: '',
       dataSource: ds.cloneWithRows(this._messages)
     };
-
+    this._styles = _.cloneDeep(styles);
   }
 
   render() {
     return (
-      <View>
-        <RkBoardUpView style={[RkStyle.lightGrayBg]}>
-          <ScrollView
-            ref="scroll"
-            automaticallyAdjustContentInsets={true}
-            onContentSizeChange={(contentWidth, contentHeight)=>{
-              this.setState({msgListHeight: contentHeight})
-            }}
-            style={{height: this._height}}>
-            <View style={{justifyContent: 'flex-end'}}>
-              <View>
-                <ListView
-                  ref="messageList"
-                  scrollEnabled={false}
-                  style={{paddingHorizontal: 10}}
-                  dataSource={this.state.dataSource}
-                  onLayout={()=>{this._scrollToBottom()}}
-                  renderRow={(rowData) => this._renderRow(rowData)}
-                />
-              </View>
-            </View>
-          </ScrollView>
-          <View
-            style={styles.footer}>
-            <RkTextInput
-              placeholder='Message...'
-              placeholderColor={RkConfig.colors.lightGray}
-              type='bordered'
-              onChangeText={message => this.setState({message})}
-              value={this.state.message}
-              clearButtonMode='while-editing'
-              containerStyle={{marginHorizontal: 20, paddingVertical: 1}}/>
-            <RkButton type='clear' style={{paddingVertical: 5}} onPress={()=>this._sendMessage()}>Send</RkButton>
-          </View>
-        </RkBoardUpView>
-        <RkBarBg/>
-      </View>
+      this._render()
     );
   }
 
-  _renderRow(message) {
-    let containerStyle = [styles.messageContainer];
+  _render(){
+    let user = api.getUserInfo(this.props.userId);
+    return(
+      <View>
+        <Toolbar
+          style={this._styles.toolbar}
+          leftIcon="ios-arrow-round-back"
+          title={user.name.first + ' ' + user.name.last}
+          onLeftClick={()=>this.props.navigator.pop()}/>
+        {this._renderBoardUp()}
+      </View>
+    )
+  }
+
+  _renderBoardUp() {
+    return (
+      <RkBoardUpView style={this._styles.boardUp}>
+        <ScrollView
+          ref="scroll"
+          automaticallyAdjustContentInsets={true}
+          onContentSizeChange={(contentWidth, contentHeight)=>{
+              this.setState({msgListHeight: contentHeight})
+            }}
+          style={{height: this._height}}>
+          <View style={{justifyContent: 'flex-end'}}>
+            <View>
+              <ListView
+                ref="messageList"
+                scrollEnabled={false}
+                style={{paddingHorizontal: 10}}
+                dataSource={this.state.dataSource}
+                onLayout={()=>{this._scrollToBottom()}}
+                renderRow={(rowData) => this._renderMessage(rowData)}
+              />
+            </View>
+          </View>
+        </ScrollView>
+        {this._renderFooter()}
+      </RkBoardUpView>
+    )
+  }
+
+  _renderMessage(message) {
+    let containerStyle = [this._styles.messageContainer];
     if (message.my) {
-      containerStyle.push(styles.myMessageContainer)
+      containerStyle.push(this._styles.myMessageContainer)
     }
     return (
       <View style={containerStyle}>
         <View>
-          <Text style={styles.messageText}>{message.text}</Text>
+          <Text style={this._styles.messageText}>{message.text}</Text>
         </View>
       </View>
+    );
+  }
+
+  _renderFooter() {
+    return (
+      <View style={this._styles.footer}>
+        {this._renderMsgInput()}
+        {this._renderMsgSubmit()}
+      </View>
+    )
+  }
+
+  _renderMsgInput() {
+    return (
+      <RkTextInput
+        placeholder='Message...'
+        placeholderColor={RkConfig.colors.lightGray}
+        type='bordered'
+        onChangeText={message => this.setState({message})}
+        value={this.state.message}
+        clearButtonMode='while-editing'
+        containerStyle={{marginHorizontal: 20, paddingVertical: 1}}/>
+    )
+  }
+
+  _renderMsgSubmit() {
+    return (
+      <RkButton type='clear' style={{paddingVertical: 5}}
+                onPress={()=>this._sendMessage()}>
+        Send
+      </RkButton>
     );
   }
 
@@ -107,7 +145,15 @@ export default class ChatScreen extends Component {
   }
 }
 
-let styles = StyleSheet.create({
+let styles = {
+  toolbar: {
+    position: 'absolute',
+    left: 0,
+    right: 0
+  },
+  boardUp: {
+    backgroundColor: RkConfig.colors.lightGray
+  },
   footer: {
     height: this._inputFooterHeight,
     flexDirection: 'row',
@@ -132,4 +178,4 @@ let styles = StyleSheet.create({
   messageText: {
     fontSize: 16
   }
-});
+};

@@ -17,10 +17,6 @@ export default class MainScreenBlur extends MainScreenClassic {
 
   constructor(props) {
     super(props);
-    this.state = {
-      selectedTab: 'newsTab'
-    };
-
   }
 
   render() {

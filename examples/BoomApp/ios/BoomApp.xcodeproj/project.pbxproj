@@ -330,7 +330,7 @@
 				00E356EF1AD99517003FC87E /* BoomAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 			);
-			indentWidth = 2;
+			indentWidth = 3;
 			sourceTree = "<group>";
 			tabWidth = 2;
 		};

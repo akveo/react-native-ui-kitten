@@ -22,7 +22,9 @@ export default class LoginScreenBlur extends LoginScreenClassic {
         <StatusBar
           barStyle="light-content"
         />
-        <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={styles.backgroundImage}>
+        <Image blurRadius={30}
+               source={require('../../../img/bg/lamp.jpg')}
+               style={RkConfig.styles.backgroundImage}>
           <View style={styles.container}>
             <View><Text
               style={styles.title}>BOOM</Text></View>
@@ -89,14 +91,6 @@ let styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginRight: 35
-  },
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    alignItems: 'stretch',
   },
   footText: {
     marginBottom: 30,

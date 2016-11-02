@@ -8,7 +8,7 @@ import {
 import Icon from '../../node_modules/react-native-vector-icons/Ionicons'; //TODO normal import string?
 import {RkConfig, RkButton} from 'react-native-ui-kit';
 
-export default class MaterialToolbar extends Component {
+export default class Toolbar extends Component {
 
   static height = 64;
 
@@ -32,7 +32,7 @@ export default class MaterialToolbar extends Component {
 var styles = StyleSheet.create({
   barContainer: {
     paddingTop: 20,
-    height: MaterialToolbar.height,
+    height: Toolbar.height,
     backgroundColor: RkConfig.colors.primary,
     flexDirection: 'row',
     alignItems: 'center',

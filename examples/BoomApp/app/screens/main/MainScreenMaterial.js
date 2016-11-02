@@ -13,7 +13,7 @@ import Icon from '../../../node_modules/react-native-vector-icons/Ionicons'; //T
 import ScreenService from '../../util/ScreenService';
 import {RkConfig, RkBarBg, RkTabView, RkButton, RkSeparator, RkStyle} from 'react-native-ui-kit';
 import api from '../../util/ApiMock';
-import MaterialToolbar from '../../components/MaterialToolbar';
+import Toolbar from '../../components/Toolbar';
 import DrawerMenu from '../../components/DrawerMenu';
 import MainScreenClassic from './MainScreenClassic';
 
@@ -29,7 +29,12 @@ export default class MainScreenMaterial extends MainScreenClassic {
 
   render() {
     const drawerStyles = {
-      drawer: {shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
+      drawer: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.8,
+        shadowRadius: 3,
+        backgroundColor: 'white'
+      },
       main: {paddingLeft: 3},
     };
     return (
@@ -53,7 +58,7 @@ export default class MainScreenMaterial extends MainScreenClassic {
         })}
       >
         <StatusBar barStyle="light-content"/>
-        <MaterialToolbar
+        <Toolbar
           title={this.state.selectedTab}
           leftIcon="md-menu"
           onLeftClick={()=>(this.refs.drawer.open())}/>
@@ -87,7 +92,7 @@ export default class MainScreenMaterial extends MainScreenClassic {
       return <this._screens.news navigator={this.props.navigator} />
     }
     if (this.state.selectedTab === 'Chats') {
-      return <this._screens.chats navigator={this.props.navigator} />
+      return <this._screens.chat navigator={this.props.navigator} />
     }
     if (this.state.selectedTab === 'Settings') {
       return <this._screens.settings navigator={this.props.navigator} />

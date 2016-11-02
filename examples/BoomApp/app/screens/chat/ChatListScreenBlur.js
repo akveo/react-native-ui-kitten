@@ -1,150 +1,85 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   Image,
-  StatusBar,
-  ScrollView,
-  ListView,
-  TouchableOpacity
 } from 'react-native';
 
-import {RkConfig, RkSeparator, RkStyle, RkButton} from 'react-native-ui-kit';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
+import {RkConfig, RkStyle, RkButton} from 'react-native-ui-kit';
 
-import ScreenService from '../../util/ScreenService';
-import api from '../../util/ApiMock';
+import ChatListScreenClassic from './ChatListScreenClassic';
+import _ from "lodash";
 
-export default class ChatListScreenBlur extends Component {
+
+export default class ChatListScreenBlur extends ChatListScreenClassic {
 
   constructor(props) {
     super(props);
-    let ds = new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
-    });
-    let data = api.getUserMsgList(api.userId);
-    this.state = {
-      dataSource: ds.cloneWithRows(data)
-    };
+    this._styles = _.merge(this._styles, styles);
   }
-
 
   render() {
     return (
       <View style={{flex: 1}}>
-        <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={styles.backgroundImage}>
-          <View style={styles.header}>
+        <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={RkConfig.styles.backgroundImage}>
+          <View style={this._styles.header}>
             <View>
-              <Text style={styles.headerText}>
+              <Text style={this._styles.headerText}>
                 Chats
               </Text>
             </View>
           </View>
-          <ListView
-            automaticallyAdjustContentInsets={false}
-            dataSource={this.state.dataSource}
-            renderRow={(row) => this._renderRow(row)}
-          />
+          {super._renderChatList()}
         </Image>
       </View>
     );
   }
 
-  _renderRow(msg) {
-    let user = api.getUserInfo(msg.from);
-    return (
-      <TouchableOpacity onPress={()=>{this._openChat(user)}}>
-        <View style={styles.itemContainer}>
-          <Image source={user.avatar} style={styles.avatar}/>
-          <View style={styles.avatarSide}/>
-          <View style={styles.textContent}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>{user.name.first} {user.name.last}</Text>
-              <Text style={styles.subTitle}>{msg.text}</Text>
-            </View>
-            <View style={styles.aside}>
-              <Text style={styles.subTitle}>{msg.time}</Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
+  _renderSeparator(){
 
-  _openChat(user) {
-    this.props.navigator.push({
-      screen: ScreenService.getChatScreen(true),
-      passProps: {
-        userId: user.id
-      }
-    });
   }
 }
 
-let styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-    alignItems: 'stretch',
+let styles = {
+  header: {
+    backgroundColor: 'transparent',
+    borderBottomWidth: 1,
+    borderBottomColor: RkConfig.colors.blurBgWhite
+  },
+  headerText: {
+    color: RkConfig.colors.blurTextStrong,
+    backgroundColor: 'transparent',
+  },
+  list: {
+    backgroundColor: 'transparent'
   },
   itemContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(0,0,0,0.1)',
-  },
-  textContent: {
-    flexDirection: 'row',
-    flex: 1,
-    padding: 8,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'rgba(255,255,255,0.1)'
+    backgroundColor: RkConfig.colors.blurBg,
+    padding: 0
   },
   avatar: {
     width: 76,
     height: 76,
-    opacity: 0.8
+    opacity: 0.8,
+    borderRadius: 0,
+  },
+  textContainer:{
+    borderTopWidth: 1,
+    borderTopColor: RkConfig.colors.blurBgWhite,
+    borderLeftWidth: 15,
+    borderLeftColor: RkConfig.colors.blurBgStrong
+  },
+  titleContainer: {
+    marginLeft: 0,
+    paddingLeft: 10,
   },
   title: {
-    fontSize: 18,
-    color: 'rgba(255,255,255,0.7)',
-    backgroundColor: 'transparent',
+    color: RkConfig.colors.blurTextStrong,
+    backgroundColor: 'transparent'
   },
   subTitle: {
-    marginTop: 10,
     color: RkConfig.colors.gray,
     backgroundColor: 'transparent',
     fontSize: 14
   },
-  aside: {
-    marginTop: -10,
-    flex: 1,
-    alignItems: 'flex-end'
-  },
-  chatSeparator: {
-    marginLeft: 67
-  },
-  header: {
-    height: 50,
-    marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.1)'
-  },
-  headerText: {
-    color: 'rgba(255,255,255,0.7)',
-    backgroundColor: 'transparent',
-    fontSize: 18,
-    paddingHorizontal: 8,
-  },
-  avatarSide: {
-    width: 10,
-    backgroundColor: 'rgba(0,0,0,0.3 )',
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'rgba(255,255,255,0.1)'
-  }
-});
+};

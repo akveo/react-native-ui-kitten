@@ -1,5 +1,7 @@
-export const Colors = {
+export let Colors = {
+  transparent: 'transparent',
   white: '#fff',
+  black: '#000',
   gray: '#9E9E9E',
   lightGray: '#E0E0E0',
   darkGray: '#616161',
