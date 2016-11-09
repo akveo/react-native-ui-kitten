@@ -46,7 +46,7 @@ export default class LoginScreenMaterial extends LoginScreenClassic {
             </View>
             <View rkCardContent style={{paddingHorizontal: 20, paddingTop: 15}}>
               <RkTextInput
-                type='underlay topLabel'
+                type='underline topLabel'
                 label='Enter your email'
                 value={this.state.login}
                 onChangeText={(text)=>this.setState({login: text})}
@@ -84,7 +84,7 @@ export default class LoginScreenMaterial extends LoginScreenClassic {
             </View>
             <View rkCardContent style={{paddingHorizontal: 20, paddingTop: 15}}>
               <RkTextInput
-                type='underlay topLabel'
+                type='underline topLabel'
                 label='Enter your password'
                 secureTextEntry={true}
                 labelStyle={{paddingBottom: 25}}

@@ -30,14 +30,14 @@ export default class LoginScreenBlur extends LoginScreenClassic {
               style={styles.title}>BOOM</Text></View>
             <View>
               <RkTextInput
-                type='underlay'
+                type='underline'
                 containerStyle={styles.inputContainer}
                 iconStyle={styles.inputIcon}
                 style={styles.input}
                 icon={'ios-person-outline'}
                 placeholder={'Login'}
                 placeholderTextColor={RkConfig.colors.lightGray}/>
-              <RkTextInput type='underlay'
+              <RkTextInput type='underline'
                            containerStyle={styles.inputContainer}
                            iconStyle={styles.inputIcon}
                            style={styles.input}

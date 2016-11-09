@@ -26,14 +26,14 @@ export default class LoginScreenClassic extends Component {
           </View>
           <View>
             <RkTextInput
-              type='underlay topLabel'
+              type='underline topLabel'
               label='EMAIL ADDRESS'
               labelStyle={{paddingBottom: 25}}
               containerStyle={{borderBottomColor: RkConfig.colors.darkGray, }}
               style={[{fontSize: 20}]}
               placeholderTextColor={RkConfig.colors.lightGray}/>
             <RkTextInput
-              type='underlay topLabel'
+              type='underline topLabel'
               label='PASSWORD'
               labelStyle={{paddingBottom: 25}}
               containerStyle={{borderBottomColor: RkConfig.colors.darkGray, marginTop: 40}}
