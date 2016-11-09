@@ -9,13 +9,13 @@ import {
   Dimensions
 } from 'react-native';
 
-import LoginScreenClassic from './LoginScreenClassic';
+import LoginScreenClassic from './LoginScreenBase';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkButton, RkStyle, RkTextInput, RkSeparator, RkConfig, RkCard} from 'react-native-ui-kit';
 import ScreenService from '../../util/ScreenService';
 
 //TODO refactor
-export default class LoginScreenMaterial extends LoginScreenClassic {
+export default class LoginScreenMaterial extends LoginScreenBase {
 
   constructor(props) {
     super(props)
