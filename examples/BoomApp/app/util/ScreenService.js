@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LoginScreenClassic from '../screens/auth/LoginScreenBase'
+import LoginScreenClassic from '../screens/auth/LoginScreenClassic'
 import ChatListScreenClassic from './../screens/chat/ChatListScreenClassic'
 import ChatScreenClassic from './../screens/chat/ChatScreenClassic'
 import MainScreenClassic from './../screens/main/MainScreenClassic'

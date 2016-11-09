@@ -8,13 +8,13 @@ import {
   Text
 } from 'react-native';
 
-import LoginScreenClassic from './LoginScreenBase';
+import LoginScreenClassic from './LoginScreenClassic';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import {RkButton, RkStyle, RkTextInput, RkSeparator, RkConfig} from 'react-native-ui-kit';
 import ScreenService from '../../util/ScreenService';
 
 
-export default class LoginScreenBlur extends LoginScreenBase {
+export default class LoginScreenBlur extends LoginScreenClassic {
 
   render() {
     return (
