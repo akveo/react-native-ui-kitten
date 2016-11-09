@@ -67,7 +67,7 @@ export class RkButton extends Component {
     types = types && types.length ? types.split(" ") : [];
     let boxStyle = [RkConfig.themes.styles.button._container];
     let innerStyle = [RkConfig.themes.styles.button._inner];
-    for (type of types) {
+    for (let type of types) {
       boxStyle.push(RkConfig.themes.styles.button[type].container);
       innerStyle.push(RkConfig.themes.styles.button[type].inner);
     }

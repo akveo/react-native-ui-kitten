@@ -10,4 +10,10 @@ export const RkConfig =  class {
   static iconFamily = 'Ionicons';
   static setColor = (name, value) => RkConfig.colors[name] = value;
   static setStyle = (name, value) => RkConfig.styles[name] = value;
+  static setType = (element, name, value) => {
+    RkConfig.themes.styles[element][name] = value;
+  };
+  static setTheme = (themeName, value) => {
+    RkConfig.themes[themeName] = value;
+  };
 };

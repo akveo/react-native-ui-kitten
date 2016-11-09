@@ -1,3 +1,4 @@
+export {RkText} from './components/text/Text';
 export {RkButton} from './components/button/Button';
 export {RkChoice} from './components/choice/Choice.js';
 export {RkChoiceGroup} from './components/choice/ChoiceGroup.js';

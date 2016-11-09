@@ -40,6 +40,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Montserrat-Regular.ttf</string>
 		<string>FontAwesome.ttf</string>
 		<string>Ionicons.ttf</string>
 		<string>MaterialIcons.ttf</string>

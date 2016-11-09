@@ -40,6 +40,8 @@
 		FA1427101DA7CFF70079F3C4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA1427011DA7CFF70079F3C4 /* Zocial.ttf */; };
 		FA1427111DA7CFF70079F3C4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA1427011DA7CFF70079F3C4 /* Zocial.ttf */; };
 		FA14271B1DA7E67D0079F3C4 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA14271A1DA7E65E0079F3C4 /* libRNVectorIcons.a */; };
+		FA4969191DD38210001E36E1 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA4969181DD38210001E36E1 /* Montserrat-Regular.ttf */; };
+		FA49691A1DD38210001E36E1 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA4969181DD38210001E36E1 /* Montserrat-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +162,7 @@
 		FA1427001DA7CFF70079F3C4 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		FA1427011DA7CFF70079F3C4 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		FA1427151DA7E65E0079F3C4 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		FA4969181DD38210001E36E1 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +349,7 @@
 		FA1426F91DA7CFF70079F3C4 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FA4969181DD38210001E36E1 /* Montserrat-Regular.ttf */,
 				FA1426FA1DA7CFF70079F3C4 /* Entypo.ttf */,
 				FA1426FB1DA7CFF70079F3C4 /* EvilIcons.ttf */,
 				FA1426FC1DA7CFF70079F3C4 /* FontAwesome.ttf */,
@@ -574,6 +578,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA49691A1DD38210001E36E1 /* Montserrat-Regular.ttf in Resources */,
 				FA1427111DA7CFF70079F3C4 /* Zocial.ttf in Resources */,
 				FA14270B1DA7CFF70079F3C4 /* Ionicons.ttf in Resources */,
 				FA1427031DA7CFF70079F3C4 /* Entypo.ttf in Resources */,
@@ -590,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA14270C1DA7CFF70079F3C4 /* MaterialIcons.ttf in Resources */,
+				FA4969191DD38210001E36E1 /* Montserrat-Regular.ttf in Resources */,
 				FA14270E1DA7CFF70079F3C4 /* Octicons.ttf in Resources */,
 				FA1427101DA7CFF70079F3C4 /* Zocial.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
