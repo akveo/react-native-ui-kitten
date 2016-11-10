@@ -4,10 +4,11 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 
-import { RkConfig} from '../../config/config';
+import {RkConfig} from '../../config/config';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
@@ -21,25 +22,34 @@ export class RkTextInput extends Component {
   render() {
     let {
       containerStyle,
-      iconStyle,
-      icon,
       label,
       type,
       labelStyle,
       ...inputProps
-      } = this.props;
-    let {boxStyle, inputStyle, labelS, iconS} = this._defineStyles();
+    } = this.props;
+    let {boxStyle, inputStyle, labelS} = this._defineStyles();
     labelStyle = [labelS, labelStyle];
     inputProps.style = [inputStyle, inputProps.style];
-    iconStyle = [iconS, iconStyle];
     boxStyle.push(containerStyle);
     return (
       <View style={boxStyle}>
-        {label && <Text onPress={() => this.refs.input.focus()} style={labelStyle}>{label}</Text>}
-        {icon && <Icon onPress={() => this.refs.input.focus()} name={icon} size={18} style={iconStyle}/>}
+        {label && this._displayLabel(label, labelStyle)}
         <TextInput ref={'input'} {...inputProps}/>
       </View>
     );
+  }
+
+  _displayLabel(label, labelStyle) {
+    if (typeof label === 'string') {
+      return (
+        <Text style={labelStyle} onPress={() => this.refs.input.focus()}>{label}</Text>
+      )
+    } else {
+      return React.cloneElement(label, {
+        onPress: (e) => {this.refs.input.focus(); label.props.onPress && label.props.onPress(e)},
+        style: [labelStyle, label.props.style]
+      });
+    }
   }
 
   _defineStyles() {
@@ -48,15 +58,14 @@ export class RkTextInput extends Component {
     let boxStyle = [RkConfig.themes.styles.input._container];
     let inputStyle = [RkConfig.themes.styles.input._input];
     let labelS = [RkConfig.themes.styles.input._label];
-    let iconS = [RkConfig.themes.styles.input._icon];
-    for (type of types) {
+    for (let type of types) {
       if (RkConfig.themes.styles.input[type]) {
         boxStyle.push(RkConfig.themes.styles.input[type].container);
         inputStyle.push(RkConfig.themes.styles.input[type].input);
         labelS.push(RkConfig.themes.styles.input[type].label);
       }
     }
-    return {boxStyle, inputStyle, labelS, iconS}
+    return {boxStyle, inputStyle, labelS}
   }
 
 }

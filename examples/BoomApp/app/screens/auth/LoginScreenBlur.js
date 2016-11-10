@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import LoginScreenClassic from './LoginScreenClassic';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {RkButton, RkText, RkTextInput, RkSeparator, RkConfig} from 'react-native-ui-kit';
 import ScreenService from '../../util/ScreenService';
 
@@ -35,18 +35,18 @@ export default class LoginScreenBlur extends LoginScreenClassic {
                                     <RkTextInput
                                         type='rounded'
                                         containerStyle={styles.inputContainer}
-                                        iconStyle={styles.inputIcon}
+                                        label={<Icon name='ios-person-outline'/>}
+                                        labelStyle={styles.inputIcon}
                                         style={styles.input}
-                                        icon={'ios-person-outline'}
                                         placeholder={'Login'}
                                         placeholderTextColor={RkConfig.colors.lightGray}/>
                                     <RkTextInput
                                         type='rounded'
                                         containerStyle={styles.inputContainer}
-                                        iconStyle={[styles.inputIcon, styles.inputIconLock]}
+                                        label={<Icon name='ios-lock-outline'/>}
+                                        labelStyle={[styles.inputIcon, styles.inputIconLock]}
                                         style={styles.input}
                                         secureTextEntry={true}
-                                        icon={'ios-lock-outline'}
                                         placeholder={'Password'}
                                         placeholderTextColor={RkConfig.colors.lightGray}/>
                                 </View>

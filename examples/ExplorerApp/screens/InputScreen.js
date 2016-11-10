@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import { RkConfig, RkTextInput, RkSeparator} from 'react-native-ui-kit';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {UtilStyles} from '../utils/styles';
 
 export class InputScreen extends Component {
@@ -67,11 +68,11 @@ export class InputScreen extends Component {
           <Text style={UtilStyles.titleText}>With icon</Text>
           <View style={[UtilStyles.rowContainer]}>
             <View style={{flex: 1}}>
-              <RkTextInput icon='ios-person-outline' placeholder='Login' iconStyle={{fontSize: 22}}/>
+              <RkTextInput label={<Icon name='ios-person-outline'/>} placeholder='Login' iconStyle={{fontSize: 22}}/>
               <RkSeparator style={{marginVertical: 5, marginRight: 20}}/>
               <RkTextInput secureTextEntry={true} icon='ios-key-outline' placeholder='Password'/>
 
-              <RkTextInput type='rounded' icon='ios-search-outline' containerStyle={{marginTop: 20}}
+              <RkTextInput type='rounded' label={<Icon name='ios-search-outline'/>} containerStyle={{marginTop: 20}}
                            placeholder='Search'/>
             </View>
           </View>
