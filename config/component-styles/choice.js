@@ -1,4 +1,10 @@
 import {Colors} from '../color.js';
+import React, {Component} from 'react';
+import {
+  Image,
+  View
+} from 'react-native';
+
 
 export const ChoiceStyles = {
 
@@ -9,21 +15,26 @@ export const ChoiceStyles = {
         borderWidth: 1,
         borderColor: Colors.gray
     },
-    _containerSelected: {},
-    _innerSelected: {},
     _inner: {
-        textAlign: 'center',
-        fontSize: 22,
         width: 18,
         height: 18
     },
+    _containerSelected: {},
+    _innerSelected: {},
     _containerDisabled: {
         borderColor: Colors.lightGray
     },
     _innerDisabled: {
-        color: Colors.lightGray
     },
-    _icon: 'md-checkmark',
+    _containerSelectedDisabled: {
+        borderColor: Colors.lightGray
+    },
+    _innerSelectedDisabled: {
+    },
+    _content: (<Image source={require('../../assets/img/choice/check_black.png')}/>),
+    _contentDisabled: (<Image source={require('../../assets/img/choice/check_grey.png')}/>),
+    _contentUnchecked: (<View/>),
+    _contentUncheckedDisabled: (<View/>),
     material: {
         container: {
             borderRadius: 2,
@@ -40,15 +51,15 @@ export const ChoiceStyles = {
         inner: {
             width: 16,
             height: 16,
-            color: Colors.white
         },
         containerDisabled: {
-            borderColor: Colors.lightGray,
+            borderColor: Colors.lightGray
+        },
+        containerSelectedDisabled: {
             backgroundColor: Colors.lightGray
         },
-        innerDisabled: {
-            color: Colors.white
-        },
+        content: (<Image source={require('../../assets/img/choice/check_white.png')}/>),
+        contentDisabled: (<Image source={require('../../assets/img/choice/check_white.png')}/>),
     },
     radio: {
         container: {
@@ -65,34 +76,25 @@ export const ChoiceStyles = {
         inner: {
             width: 15,
             height: 15,
-            borderRadius: 7,
+            borderRadius: 8,
         },
-        icon: false,
         containerDisabled: {
             borderColor: Colors.lightGray,
         },
-        innerDisabled: {
+        innerSelectedDisabled: {
             backgroundColor: Colors.lightGray,
         },
+        content: (<View/>),
+        contentDisabled: (<View/>),
     },
     posNeg: {
         container: {
             borderWidth: 0,
         },
-        inner: {
-            width: 20,
-            height: 20,
-            fontSize: 24,
-            color: Colors.danger
-        },
-        innerSelected: {
-            color: Colors.success
-        },
-        innerDisabled: {
-            color: Colors.lightGray,
-        },
-        iconUnchecked: 'md-close',
-        icon: 'md-checkmark'
+        content: (<Image source={require('../../assets/img/choice/check_green.png')}/>),
+        contentDisabled: (<Image source={require('../../assets/img/choice/check_grey.png')}/>),
+        contentUnchecked: (<Image source={require('../../assets/img/choice/close_red.png')}/>),
+        contentUncheckedDisabled: (<Image source={require('../../assets/img/choice/close_grey.png')}/>),
     },
     clear: {
         container: {
@@ -101,10 +103,8 @@ export const ChoiceStyles = {
         inner: {
             width: 20,
             height: 20,
-            color: Colors.primary
         },
-        innerDisabled: {
-            color: Colors.lightGray,
-        },
+        content: (<Image source={require('../../assets/img/choice/check_blue.png')}/>),
+        contentDisabled: (<Image source={require('../../assets/img/choice/check_grey.png')}/>),
     }
 };

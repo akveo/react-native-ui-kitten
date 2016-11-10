@@ -11,8 +11,6 @@ import {
 
 import {RkButton, RkConfig, RkStyle, RkBoardUpView, RkTextInput} from 'react-native-ui-kit';
 
-import {UtilStyles} from '../utils/styles';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 export class BoardUpScreen extends Component {
 

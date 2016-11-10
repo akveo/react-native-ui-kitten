@@ -85,7 +85,7 @@ export class RkChoiceGroup extends Component {
         let props = {
           inTrigger: true,
           selected: this.state.values[index]
-        }
+        };
         if(this.props.type && !child.props.type) props.type = this.props.type;
         if(this.props.disabled !== undefined && child.props.disabled == undefined) props.disabled = this.props.disabled;
         return React.cloneElement(child, props);

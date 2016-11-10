@@ -15,16 +15,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export class RkChoice extends Component {
 
-  static propTypes = {
-    onChange: React.PropTypes.func,
-    selected: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    inTrigger: React.PropTypes.bool,
-    icon: React.PropTypes.string,
-    iconUnchecked: React.PropTypes.string,
-  };
-
-
   constructor(props) {
     super(props);
     this.state = {
@@ -39,15 +29,12 @@ export class RkChoice extends Component {
   }
 
   render() {
-    let {outerStyle, innerStyle, icon} = this._defineStyles(this.state.selected);
-    let inner = <Text style={innerStyle}/>;
-    if (icon) {
-      inner = typeof icon === 'string' ? (<Icon name={icon} style={innerStyle}/>) : icon;
-    }
+    let {outerStyle, innerStyle} = this._defineStyles(this.state.selected, this.props.disabled);
+    let content = this._defineContent(this.state.selected, this.props.disabled, innerStyle);
     if (this.props.inTrigger) {
       return (
         <View style={outerStyle}>
-          {inner}
+          {content}
         </View>
       );
     } else {
@@ -58,7 +45,7 @@ export class RkChoice extends Component {
           onPress={(e) => {this._onPress(e)}}
           >
           <View style={outerStyle}>
-            {inner}
+            {content}
           </View>
         </TouchableOpacity>
       );
@@ -73,50 +60,61 @@ export class RkChoice extends Component {
     }
   }
 
-  _defineStyles(selected) {
+  _defineContent(selected, disabled,  style){
+    let types = this._getTypes();
+    let theme = RkConfig.themes.styles.choice;
+    let contentName = selected ? '_content' : '_contentUnchecked';
+    let content = disabled ? theme[contentName + 'Disabled'] : theme[contentName];
+    contentName = selected ? 'content' : 'contentUnchecked';
+    if(disabled){
+      contentName += 'Disabled'
+    }
+    for (let type of types) {
+      content = theme[type][contentName] === undefined ? content : theme[type][contentName]
+    }
+    content = this.props[contentName] === undefined ? content : this.props[contentName];
+    if(content){
+      return React.cloneElement(content, {
+        style: [style, content.props.style]
+      });
+    } else {
+      return null;
+    }
+  }
+
+  _defineStyles(selected, disabled) {
+    let types = this._getTypes();
+    var styles = RkConfig.themes.styles.choice;
+    let outerStyle = [];
+    let innerStyle = [];
+    let pushStyles = (source, outerName, innerName) => {
+      outerStyle.push(source[outerName]);
+      innerStyle.push(source[innerName]);
+      if(selected){
+        outerStyle.push(source[outerName + 'Selected']);
+        innerStyle.push(source[innerName + 'Selected']);
+      }
+      if(disabled){
+        outerStyle.push(source[outerName + 'Disabled']);
+        innerStyle.push(source[innerName + 'Disabled']);
+      }
+      if(disabled && selected){
+        outerStyle.push(source[outerName + 'SelectedDisabled']);
+        innerStyle.push(source[innerName + 'SelectedDisabled']);
+      }
+    };
+    pushStyles(styles, '_container', '_inner');
+    for (let type of types) {
+      pushStyles(styles[type], 'container', 'inner');
+    }
+    pushStyles(this.props, 'style', 'innerStyle');
+    return {outerStyle, innerStyle}
+  }
+
+  _getTypes(){
     let types = this.props.type || (RkConfig.theme.choice ? RkConfig.theme.choice.defaultType : '');
     types = types && types.length ? types.split(" ") : [];
-    let outerStyle = [RkConfig.themes.styles.choice._container];
-    let innerStyle = [RkConfig.themes.styles.choice._inner];
-    let icon = RkConfig.themes.styles.choice._iconUnchecked;
-    if (selected) {
-      outerStyle.push(RkConfig.themes.styles.choice._containerSelected);
-      innerStyle.push(RkConfig.themes.styles.choice._innerSelected);
-      icon = RkConfig.themes.styles.choice._icon;
-    }
-    if (this.props.disabled) {
-      outerStyle.push(RkConfig.themes.styles.choice._containerDisabled);
-      innerStyle.push(RkConfig.themes.styles.choice._inneDisabled);
-    }
-    for (type of types) {
-      outerStyle.push(RkConfig.themes.styles.choice[type].container);
-      innerStyle.push(RkConfig.themes.styles.choice[type].inner);
-      if (selected) {
-        outerStyle.push(RkConfig.themes.styles.choice[type].containerSelected);
-        innerStyle.push(RkConfig.themes.styles.choice[type].innerSelected);
-        icon = RkConfig.themes.styles.choice[type].icon === undefined ? icon : RkConfig.themes.styles.choice[type].icon;
-      } else {
-        icon = RkConfig.themes.styles.choice[type].iconUnchecked === undefined ? icon : RkConfig.themes.styles.choice[type].iconUnchecked;
-      }
-      if (this.props.disabled) {
-        outerStyle.push(RkConfig.themes.styles.choice[type].containerDisabled);
-        innerStyle.push(RkConfig.themes.styles.choice[type].innerDisabled);
-      }
-    }
-    outerStyle.push(this.props.style);
-    innerStyle.push(this.props.innerStyle);
-    if (selected) {
-      outerStyle.push(this.props.styleSelected);
-      innerStyle.push(this.props.innerStyleSelected);
-      icon = this.props.icon === undefined ? icon : this.props.icon;
-    } else {
-      icon = this.props.iconUnchecked === undefined ? icon : this.props.iconUnchecked;
-    }
-    if (this.props.disabled) {
-      outerStyle.push(this.props.containerDisabled);
-      innerStyle.push(this.props.innerDisabled);
-    }
-    return {outerStyle, innerStyle, icon}
+    return types;
   }
 
 }

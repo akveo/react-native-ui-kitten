@@ -10,11 +10,10 @@ import {
   Image
 } from 'react-native';
 
-import {RkRadioButton, RkChoiceGroup, RkChoice, RkStyle, RkConfig, RkSeparator} from 'react-native-ui-kit';
+import {RkRadioButton, RkChoiceGroup, RkChoice, RkStyle, RkConfig} from 'react-native-ui-kit';
 import {UtilStyles} from '../utils/styles';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-import AIcon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export class ChoiceScreen extends Component {
@@ -176,6 +175,58 @@ export class ChoiceScreen extends Component {
             </RkChoiceGroup>
           </View>
         </View>
+        <View style={UtilStyles.section}>
+          <Text style={UtilStyles.titleText}>Custom content</Text>
+          <View style={[UtilStyles.rowContainer, {flex: 1,justifyContent: 'space-around', marginTop: 5}]}>
+            <View>
+              <View style={{alignItems: 'center'}}>
+                <RkChoice
+                  style={{
+                    borderWidth: 0
+                  }}
+                  innerStyle={{
+                    width: 90,
+                    height: 25,
+                    textAlign: 'center'
+                  }}
+                  innerStyleDisabled={{
+                    color: RkConfig.colors.lightGray
+                  }}
+                  content={<Text>CHECKED</Text>}
+                  contentDisabled={<Text>CHECKED</Text>}
+                  contentUnchecked={<Text>UNCHECKED</Text>}
+                  contentUncheckedDisabled={<Text>UNCHECKED</Text>}
+                />
+              </View>
+              <Text style={styles.typeText}>text content</Text>
+            </View>
+            <View>
+              <View style={{alignItems: 'center'}}>
+                <RkChoice
+                  selected
+                  style={{
+                    borderWidth: 0
+                  }}
+                  innerStyle={{
+                    color: RkConfig.colors.darkWarning,
+                    fontSize: 22,
+                    height: 25,
+                    width: 25,
+                    textAlign: 'center'
+                  }}
+                  innerStyleDisabled={{
+                    color: RkConfig.colors.lightGray
+                  }}
+                  content={<Icon name={'star'}/>}
+                  contentUnchecked={<Text/>}
+                  contentDisabled={<Icon name={'star'}/>}
+                  contentUncheckedDisabled={<Text/>}
+                />
+              </View>
+              <Text style={styles.typeText}>icon content</Text>
+            </View>
+          </View>
+        </View>
         <View style={[UtilStyles.section, {paddingVertical: 7}]}>
           <TouchableOpacity onPress={()=>this.showSettingsScreen()}>
             <View style={styles.componentRow}>
@@ -183,7 +234,7 @@ export class ChoiceScreen extends Component {
               <View style={{flexDirection: 'row'}}>
                 <Text
                   style={{marginRight: 7, color: RkConfig.colors.gray, alignSelf: 'center'}}>{this.state.settingsOption.name}</Text>
-                <AIcon name={'angle-right'} size={20} style={RkStyle.grayText}/></View>
+                <Icon name={'angle-right'} size={20} style={RkStyle.grayText}/></View>
             </View>
           </TouchableOpacity>
         </View>
@@ -212,6 +263,41 @@ export class ChoiceScreen extends Component {
               <View>
                 <View style={{alignItems: 'center'}}>
                   <RkChoice type='posNeg'/>
+                </View>
+                <Text style={styles.typeText}>pos/neg</Text>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice type='clear'/>
+                </View>
+                <Text style={styles.typeText}>clear</Text>
+              </View>
+            </View>
+          </RkChoiceGroup>
+          <Text style={[UtilStyles.titleText, {marginTop: 10}]}>Selected & Disabled components</Text>
+          <RkChoiceGroup disabled>
+            <View style={[UtilStyles.rowContainer, {flex: 1,justifyContent: 'space-around', marginTop: 5}]}>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice selected/>
+                </View>
+                <Text style={styles.typeText}>default</Text>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice selected type='material'/>
+                </View>
+                <Text style={styles.typeText}>material</Text>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice selected type='radio'/>
+                </View>
+                <Text style={styles.typeText}>radio</Text>
+              </View>
+              <View>
+                <View style={{alignItems: 'center'}}>
+                  <RkChoice selected type='posNeg'/>
                 </View>
                 <Text style={styles.typeText}>pos/neg</Text>
               </View>
