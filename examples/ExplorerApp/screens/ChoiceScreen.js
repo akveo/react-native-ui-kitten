@@ -10,7 +10,7 @@ import {
   Image
 } from 'react-native';
 
-import {RkRadioButton, RkChoiceGroup, RkChoice, RkStyle, RkConfig} from 'react-native-ui-kit';
+import {RkRadioButton, RkChoiceGroup, RkChoice, RkStyle, RkConfig, RkCard} from 'react-native-ui-kit';
 import {UtilStyles} from '../utils/styles';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -35,7 +35,7 @@ export class ChoiceScreen extends Component {
         automaticallyAdjustContentInsets={true}>
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Classic selectable components</Text>
-          <View style={[UtilStyles.rowContainer, {flex: 1,justifyContent: 'space-around', marginTop: 5}]}>
+          <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
             <View>
               <View style={{alignItems: 'center'}}>
                 <RkChoice/>
@@ -76,7 +76,13 @@ export class ChoiceScreen extends Component {
                 <TouchableOpacity choiceTrigger
                                   style={[{borderWidth: 0.5, borderColor: RkConfig.colors.gray, borderRadius: 2}]}>
                   <View
-                    style={{"flex": 1, "flexDirection": "row", "alignItems": "flex-end", paddingLeft: 5, paddingBottom: 3}}>
+                    style={{
+                      "flex": 1,
+                      "flexDirection": "row",
+                      "alignItems": "flex-end",
+                      paddingLeft: 5,
+                      paddingBottom: 3
+                    }}>
                     <Text>Label</Text>
                     <RkChoice style={UtilStyles.spaceH} type='posNeg'/>
                   </View>
@@ -86,18 +92,16 @@ export class ChoiceScreen extends Component {
           </View>
           <View style={{marginVertical: 20}}>
             <RkChoiceGroup>
-              <TouchableOpacity choiceTrigger
-                                style={[RkStyle.card.card, {borderWidth: 0.5, borderColor: RkConfig.colors.gray, borderRadius: 2}]}>
-                <View style={RkStyle.card.header}>
-                  <Image source={require('../img/animal.jpeg')} style={RkStyle.card.avatarSmallImg}/>
-                  <View style={RkStyle.card.titleContainer}>
-                    <Text style={RkStyle.card.title}>Sample User</Text>
-                    <Text style={RkStyle.card.subTitle}>Hello, could you please...</Text>
+              <TouchableOpacity choiceTrigger>
+                <RkCard type="material">
+                  <View rkCardHeader>
+                    <View>
+                      <Text rkCardTitle>Hello</Text>
+                      <Text rkCardSubTitle>Click me!</Text>
+                    </View>
+                    <RkChoice style={{alignSelf: 'flex-start'}} type='material'/>
                   </View>
-                  <View style={RkStyle.card.headerControls}>
-                    <RkChoice style={UtilStyles.spaceH} type='material'/>
-                  </View>
-                </View>
+                </RkCard>
               </TouchableOpacity>
             </RkChoiceGroup>
           </View>
@@ -106,7 +110,12 @@ export class ChoiceScreen extends Component {
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Label 1</Text>
                   <RkChoice style={UtilStyles.spaceAround}/>
                 </View>
@@ -114,7 +123,12 @@ export class ChoiceScreen extends Component {
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Label 2</Text>
                   <RkChoice selected style={UtilStyles.spaceAround}/>
                 </View>
@@ -122,14 +136,24 @@ export class ChoiceScreen extends Component {
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Label 3</Text>
                   <RkChoice style={UtilStyles.spaceAround}/>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity choiceTrigger>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Label 4</Text>
                   <RkChoice style={UtilStyles.spaceAround}/>
                 </View>
@@ -144,7 +168,12 @@ export class ChoiceScreen extends Component {
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Option 1</Text>
                   <RkChoice style={UtilStyles.spaceAround}/>
                 </View>
@@ -152,7 +181,12 @@ export class ChoiceScreen extends Component {
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Option 2</Text>
                   <RkChoice selected style={UtilStyles.spaceAround}/>
                 </View>
@@ -160,14 +194,24 @@ export class ChoiceScreen extends Component {
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Option 3</Text>
                   <RkChoice style={UtilStyles.spaceAround}/>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity choiceTrigger>
                 <View
-                  style={{"flexDirection": "row", justifyContent: "space-between",  "alignItems": "flex-end", paddingVertical: 5}}>
+                  style={{
+                    "flexDirection": "row",
+                    justifyContent: "space-between",
+                    "alignItems": "flex-end",
+                    paddingVertical: 5
+                  }}>
                   <Text>Option 4</Text>
                   <RkChoice style={UtilStyles.spaceAround}/>
                 </View>
@@ -177,7 +221,7 @@ export class ChoiceScreen extends Component {
         </View>
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Custom content</Text>
-          <View style={[UtilStyles.rowContainer, {flex: 1,justifyContent: 'space-around', marginTop: 5}]}>
+          <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
             <View>
               <View style={{alignItems: 'center'}}>
                 <RkChoice
@@ -233,7 +277,11 @@ export class ChoiceScreen extends Component {
               <Text style={{fontSize: 16}}>Settings example</Text>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{marginRight: 7, color: RkConfig.colors.gray, alignSelf: 'center'}}>{this.state.settingsOption.name}</Text>
+                  style={{
+                    marginRight: 7,
+                    color: RkConfig.colors.gray,
+                    alignSelf: 'center'
+                  }}>{this.state.settingsOption.name}</Text>
                 <Icon name={'angle-right'} size={20} style={RkStyle.grayText}/></View>
             </View>
           </TouchableOpacity>
@@ -241,7 +289,7 @@ export class ChoiceScreen extends Component {
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Disabled components</Text>
           <RkChoiceGroup disabled>
-            <View style={[UtilStyles.rowContainer, {flex: 1,justifyContent: 'space-around', marginTop: 5}]}>
+            <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
               <View>
                 <View style={{alignItems: 'center'}}>
                   <RkChoice/>
@@ -276,7 +324,7 @@ export class ChoiceScreen extends Component {
           </RkChoiceGroup>
           <Text style={[UtilStyles.titleText, {marginTop: 10}]}>Selected & Disabled components</Text>
           <RkChoiceGroup disabled>
-            <View style={[UtilStyles.rowContainer, {flex: 1,justifyContent: 'space-around', marginTop: 5}]}>
+            <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
               <View>
                 <View style={{alignItems: 'center'}}>
                   <RkChoice selected/>

@@ -21,7 +21,8 @@ export class RkCard extends Component {
     rkCardTitle: 'title',
     rkCardSubTitle: 'subTitle',
     rkCardBigImg: 'bigImg',
-    rkCardImg: 'img'
+    rkCardImg: 'img',
+    rkCardAvatar: 'avatar',
   };
 
   render() {
@@ -79,7 +80,7 @@ export class RkCard extends Component {
     if(elem.props.type) types += elem.props.type + ' ';
     types = types && types.length ? types.split(/\s+/) : [];
     let style = [RkConfig.themes.styles.card["_" + name]];
-    for (type of types) {
+    for (let type of types) {
       if(type) style.push(RkConfig.themes.styles.card[type][name])
     }
     style.push(elem.props.style);

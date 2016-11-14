@@ -8,6 +8,8 @@ export const CardStyles = {
         borderColor: Colors.lightGray
     },
     _header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         borderTopLeftRadius: 1,
         borderTopRightRadius: 1,
         padding: 8,
@@ -22,17 +24,26 @@ export const CardStyles = {
         borderBottomRightRadius: 1,
     },
     _title: {
-        fontSize: 24
+        fontSize: 24,
+        flexDirection: 'column',
     },
     _subTitle: {
         fontSize: 14,
         color: Colors.darkGray
     },
     _img: {
+        flex: 1,
         height: 150,
         width: null,
     },
+    _avatar: {
+        height: 64,
+        width: 64,
+        borderRadius: 32,
+        marginRight: 10
+    },
     _bigImg: {
+        flex: 1,
         height: 300,
         width: null,
     },
@@ -67,6 +78,10 @@ export const CardStyles = {
         container: {
             borderWidth: 1,
             borderColor: Colors.lightGray
+        },
+        content: {
+            borderTopWidth: 0.5,
+            borderTopColor: Colors.lightGray
         },
         header: {
             borderBottomWidth: 0.5,
