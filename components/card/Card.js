@@ -23,6 +23,8 @@ export class RkCard extends Component {
     rkCardBigImg: 'bigImg',
     rkCardImg: 'img',
     rkCardAvatar: 'avatar',
+    rkCardAvatarSmall: 'avatarSmall',
+    rkRow: 'row',
   };
 
   render() {

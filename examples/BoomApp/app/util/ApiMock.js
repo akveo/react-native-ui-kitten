@@ -78,17 +78,20 @@ function getUserFriends(id) {
 }
 
 function getUserPosts(id) {
-  return posts.filter((p) => p.userId == id);
+  return appendUserToPost(posts.filter((p) => p.userId == id));
 }
 
 function getUserFeed(id) {
-  return posts.filter((p) => p.userId !== id)
-    .map((p) => {
-      let user = getUserInfo(p.userId);
-      p.userName = user.name.first + ' ' +user.name.last;
-      p.userAvatar = user.avatar;
-      return p;
-    });
+  return appendUserToPost(posts.filter((p) => p.userId !== id))
+}
+
+function appendUserToPost(posts){
+  return posts.map((p) => {
+    let user = getUserInfo(p.userId);
+    p.userName = user.name.first + ' ' +user.name.last;
+    p.userAvatar = user.avatar;
+    return p;
+  });
 }
 
 function likePost(post){
@@ -217,30 +220,35 @@ let posts = [
   {
     id: "1",
     userId: "1",
+    text: "Stars can't shine without darkness.",
     img: require("../../img/postPhotos/animal.jpeg"),
     likes: 4
   },
   {
     id: "2",
     userId: "1",
+    text: "Stars can't shine without darkness.",
     img: require("../../img/postPhotos/bird.jpeg"),
     likes: 5
   },
   {
     id: "3",
     userId: "1",
+    text: "Stars can't shine without darkness.",
     img: require("../../img/postPhotos/clock.jpg"),
     likes: 6
   },
   {
     id: "4",
     userId: "1",
+    text: "Stars can't shine without darkness.",
     img: require("../../img/postPhotos/fireworks.jpeg"),
     likes: 3
   },
   {
     id: "5",
     userId: "1",
+    text: "Stars can't shine without darkness.",
     img: require("../../img/postPhotos/flowers.jpeg"),
     likes: 4
   },

@@ -15,9 +15,13 @@ import ChatScreenMaterial from './../screens/chat/ChatScreenMaterial'
 import NewsScreenMaterial from './../screens/news/NewsScreenMaterial'
 
 import MainScreenBlur from './../screens/main/MainScreenBlur'
+import NewsScreenBlur from './../screens/news/NewsScreenBlur'
+import ProfileScreenBlur from './../screens/profile/ProfileScreenBlur'
 import LoginScreenBlur from './../screens/auth/LoginScreenBlur'
 import ChatListScreenBlur from './../screens/chat/ChatListScreenBlur'
 import ChatScreenBlur from './../screens/chat/ChatScreenBlur'
+
+import {RkConfig} from 'react-native-ui-kit';
 
 let classicTheme = {
   mainScreen: MainScreenClassic,
@@ -27,6 +31,9 @@ let classicTheme = {
   loginScreen: LoginScreenClassic,
   newsScreen: NewsScreenClassic,
   settingsScreens: SettingsScreenClassic,
+  setup: function () {
+    RkConfig.theme = RkConfig.themes.iosLike;
+  }
 };
 
 let materialTheme = {
@@ -37,16 +44,22 @@ let materialTheme = {
   loginScreen: LoginScreenMaterial,
   newsScreen: NewsScreenMaterial,
   settingsScreens: SettingsScreenClassic,
+  setup: function () {
+      RkConfig.theme = RkConfig.themes.material;
+  }
 };
 
 let blurTheme = {
   mainScreen: MainScreenBlur,
-  profileScreen: ProfileScreenClassic,
+  profileScreen: ProfileScreenBlur,
   chatListScreen: ChatListScreenBlur,
   chatScreen: ChatScreenBlur,
   loginScreen: LoginScreenBlur,
-  newsScreen: NewsScreenClassic,
+  newsScreen: NewsScreenBlur,
   settingsScreens: SettingsScreenClassic,
+  setup: function () {
+    RkConfig.theme = RkConfig.themes.blur;
+  }
 };
 
 
@@ -56,13 +69,16 @@ let themes = [
   blurTheme
 ];
 
-let currentThemeIndex = 2;
-
+let currentThemeIndex = 0;
+themes[currentThemeIndex].setup();
 
 export default ScreenService = {
 
   currentThemeIndex,
-  setCurrentThemeIndex: index => currentThemeIndex = index,
+  setCurrentThemeIndex: index => {
+    currentThemeIndex = index;
+    themes[currentThemeIndex].setup();
+  },
 
   getMainScreen: () => themes[currentThemeIndex].mainScreen,
   getLoginScreen: () => themes[currentThemeIndex].loginScreen,

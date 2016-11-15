@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TabBarIOS,
-  StatusBar
+  StatusBar,
+  Image
 } from 'react-native';
 
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
@@ -25,6 +26,9 @@ export default class MainScreenBlur extends MainScreenClassic {
         <StatusBar
           barStyle="light-content"
         />
+        <Image
+          source={require('../../../img/bg/blurBg.png')}
+          style={RkConfig.styles.backgroundImage}>
         <TabBarIOS
           barTintColor={RkConfig.colors.black}
           tintColor={RkConfig.colors.white}>
@@ -87,6 +91,7 @@ export default class MainScreenBlur extends MainScreenClassic {
             {<this._screens.settings navigator={this.props.navigator} />}
           </Icon.TabBarItemIOS>
         </TabBarIOS>
+          </Image>
       </View>
     );
   }

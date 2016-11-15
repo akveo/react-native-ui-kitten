@@ -3,18 +3,16 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  StatusBar,
   ScrollView,
   ListView,
-  TouchableOpacity,
+  Image
 } from 'react-native';
 
-import {RkConfig, RkSeparator, RkStyle, RkButton, RkModalImg, RkCard} from 'react-native-ui-kit';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
-import api from '../../util/ApiMock';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {RkConfig, RkButton, RkStyle, RkModalImg, RkCard, RkText} from 'react-native-ui-kit';
+import api from '../util/ApiMock';
 
-export default class NewsScreenMaterial extends Component {
+export default class Toolbar extends Component {
 
 
   constructor(props) {
@@ -24,20 +22,18 @@ export default class NewsScreenMaterial extends Component {
         return true
       },
     });
-    this._data = api.getUserFeed(api.userId);
+    this._data = props.posts;
     this.state = {
       vis: false,
       dataSource: ds.cloneWithRows(this._data)
     };
   }
 
-
   render() {
     return (
       <View style={{flex: 1}}>
         <ScrollView
-          style={[RkStyle.lightGrayBg]}
-          automaticallyAdjustContentInsets={false}>
+          automaticallyAdjustContentInsets={true}>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={(rowData) => this._renderRow(rowData)}
@@ -47,46 +43,57 @@ export default class NewsScreenMaterial extends Component {
     );
   }
 
-
   _renderRow(post) {
     return (
-      <RkCard type='material'>
-        <View rkCardHeader style={{flexDirection: 'row'}}>
-          <Image source={post.userAvatar} style={RkStyle.card.avatarSmallImg}/>
-          <View style={RkStyle.card.titleContainer}>
-            <Text style={RkStyle.card.title}>{post.userName}</Text>
-            <Text style={RkStyle.card.subTitle}>posted photo</Text>
-          </View>
-          <View style={RkStyle.card.headerControls}>
-            <RkButton type='clear' style={{paddingVertical: 0}}>
-              <Icon name={'ios-more'}
-                    style={{ fontSize: 36, color: RkConfig.colors.gray, alignSelf: 'flex-start', padding: 0}}/>
-            </RkButton>
+      <RkCard>
+        <View rkCardHeader>
+          <View rkRow>
+            <Image source={post.userAvatar} rkCardAvatarSmall/>
+            <View>
+              <RkText rkCardTitle>{post.userName}</RkText>
+              <RkText rkCardSubTitle>posted photo</RkText>
+            </View>
           </View>
         </View>
         <View rkCardContent>
           <RkModalImg source={post.img}
-                      style={{width: null, height: 250, marginTop: 5, resizeMode: "cover"}}
+                      style={{width: null, height: 250, resizeMode: "cover"}}
                       modalContainerStyle={{backgroundColor: 'rgba(0,0,0,0.9)'}}
                       renderHeader={this._renderHeader.bind({post: post})}
                       renderFooter={this._renderFooter.bind({post: post})}
                       imageInModalStyle={{resizeMode: "contain"}}/>
+          {this._renderPostText(post.text)}
         </View>
         <View rkCardFooter>
-          <View style={RkStyle.card.leftControls}>
-            <RkButton type='clear' onPress={()=> this._setLike(post)} style={{paddingHorizontal: 5, paddingVertical: 5}}
-                      innerStyle={{fontSize: 26}}>
+          <View rkRow style={{alignItems: 'center'}}>
+            <RkButton type='clear postControl'  innerStyle={this.props.iconStyle} onPress={()=> this._setLike(post)}>
               <Icon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
             </RkButton>
-            <Text style={[RkStyle.primaryText, {fontSize: 16, marginTop: -3}]}>{post.likes.toString()}</Text>
-            <RkButton type='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
-                      innerStyle={{fontSize: 26}}>
-              <Icon name={'ios-chatboxes-outline'}/>
+            <RkText style={[{fontSize: 16, marginTop: -3, marginRight: 10}]}>{post.likes.toString()}</RkText>
+            <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+              <Icon name={'ios-chatboxes'}/>
             </RkButton>
           </View>
+          <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+            <Icon name={'md-cloud-download'}/>
+          </RkButton>
         </View>
       </RkCard>
     );
+  }
+
+  _renderPostText(text) {
+    if(text){
+      return (
+        <View style={{paddingHorizontal: 15, paddingTop: 10}}>
+          <RkText>{text}</RkText>
+        </View>
+      )
+    } else {
+      return (
+        <View/>
+      )
+    }
   }
 
 
@@ -142,7 +149,7 @@ export default class NewsScreenMaterial extends Component {
 
 }
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   header: {
     position: 'absolute',
     top: 20,

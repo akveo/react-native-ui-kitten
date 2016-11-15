@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Text,
   View,
@@ -21,21 +21,19 @@ export default class ChatListScreenBlur extends ChatListScreenClassic {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={RkConfig.styles.backgroundImage}>
-          <View style={this._styles.header}>
-            <View>
-              <Text style={this._styles.headerText}>
-                Chats
-              </Text>
-            </View>
+        <View style={this._styles.header}>
+          <View>
+            <Text style={this._styles.headerText}>
+              Chats
+            </Text>
           </View>
-          {super._renderChatList()}
-        </Image>
+        </View>
+        {super._renderChatList()}
       </View>
     );
   }
 
-  _renderSeparator(){
+  _renderSeparator() {
 
   }
 }
@@ -63,7 +61,7 @@ let styles = {
     opacity: 0.8,
     borderRadius: 0,
   },
-  textContainer:{
+  textContainer: {
     borderTopWidth: 1,
     borderTopColor: RkConfig.colors.blurBgWhite,
     borderLeftWidth: 15,

@@ -4,7 +4,8 @@ import PostList from '../../components/PostList';
 import api from '../../util/ApiMock';
 import {RkConfig} from 'react-native-ui-kit';
 
-export default class NewsScreen extends Component {
+
+export default class NewsBlur extends Component {
 
 
   constructor(props) {
@@ -13,7 +14,7 @@ export default class NewsScreen extends Component {
 
   render(){
     return(
-      <PostList posts={api.getUserFeed(api.userId)} iconStyle={{color: RkConfig.colors.primary}}/>
+      <PostList posts={api.getUserFeed(api.userId)} iconStyle={{color: RkConfig.colors.blurTextStrong}}/>
     )
   }
 

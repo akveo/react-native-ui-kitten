@@ -18,9 +18,9 @@ export default class ChatScreenBlur extends ChatScreenClassic {
 
   render() {
     return (
-      <Image blurRadius={30} source={require('../../../img/bg/lamp.jpg')} style={RkConfig.styles.backgroundImage}>
+      <View>
         {this._render()}
-      </Image>
+      </View>
     );
   }
 

@@ -27,7 +27,7 @@ export class RkTabView extends Component {
     let tabs = this._getTabs(this.props.children);
     return (
       <View style={[{flex: 1, justifyContent: 'flex-start'}, this.props.style]}>
-        <View>
+        <View style={this.props.tabsContainerStyle}>
           {this._renderTabs(tabs, scrollableHeader)}
         </View>
         <View>

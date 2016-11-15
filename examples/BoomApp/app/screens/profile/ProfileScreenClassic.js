@@ -13,6 +13,7 @@ import {RkConfig, RkSeparator, RkButton, RkStyle, RkTabView} from 'react-native-
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import api from '../../util/ApiMock';
 import FriendList from '../../components/FriendList';
+import PostList from '../../components/PostList';
 import ContactList from '../../components/ContactList';
 import ImageList from '../../components/ImageList';
 
@@ -40,11 +41,8 @@ export default class ProfileScreen extends Component {
             </Text>
           </Image>
           <View
-            style={{flex: 1, backgroundColor: RkConfig.colors.white}}>
+            style={{flex: 1}}>
             {this._renderTabs()}
-            <View style={{marginHorizontal: 30, marginTop: 20, alignSelf: 'stretch', backgroundColor: RkConfig.colors.white, borderTopWidth: 0.5, borderTopColor: RkConfig.colors.primary}}>
-              <RkButton type='clear' innerStyle={{fontSize: 14, color: RkConfig.colors.gray}}>Edit my info</RkButton>
-            </View>
           </View>
         </ScrollView>
       </View>
@@ -62,6 +60,7 @@ export default class ProfileScreen extends Component {
   }
 
   _renderTab(selected, tab) {
+    let styles = this._getStyles();
     return (
       <View style={[styles.statContainer, selected ? styles.statContainerSelected : {}]}>
         <Text style={[styles.statText, styles.titleStatText]}>{tab.value}</Text>
@@ -70,10 +69,18 @@ export default class ProfileScreen extends Component {
     )
   }
 
+  _getStyles(){
+    return styles;
+  }
+
   _renderTabs() {
+    let styles = this._getStyles();
     return (
-      <RkTabView style={{backgroundColor: RkConfig.colors.lightGray}}>
-        <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'FRIENDS', value: '11'})}>
+      <RkTabView tabsContainerStyle={styles.tabView}>
+        <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Posts', value: '62'})}>
+          <PostList posts={api.getUserPosts(api.userId)} iconStyle={styles.postIconsStyle}/>
+        </RkTabView.Tab>
+        <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Followers', value: '124'})}>
           <View style={[{backgroundColor: 'white', marginTop: 10, height: 225}]}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5, paddingHorizontal: 10}}>
@@ -89,7 +96,7 @@ export default class ProfileScreen extends Component {
             <FriendList friends={api.getUserFriends(api.userId)}/>
           </View>
         </RkTabView.Tab>
-        <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'POSTS', value: '87'})}>
+        <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Photo', value: '48'})}>
           <View style={[{backgroundColor: 'white', marginTop: 10, height: 225}]}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5}}>
@@ -100,24 +107,6 @@ export default class ProfileScreen extends Component {
             <ImageList posts={api.getUserPosts(api.userId)}/>
           </View>
         </RkTabView.Tab>
-        <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'CONTACTS', value: '3'})}>
-          <View style={[{backgroundColor: 'white', marginTop: 10, height: 225}]}>
-            <ContactList contacts={[
-              {
-                label: 'email',
-                value: api.getUserInfo(api.userId).email
-              },
-              {
-                label: 'address',
-                value: api.getUserInfo(api.userId).address
-              },
-              {
-                label: 'phone',
-                value: api.getUserInfo(api.userId).phone
-              },
-              ]}/>
-          </View>
-        </RkTabView.Tab>
       </RkTabView>
     );
   }
@@ -125,7 +114,9 @@ export default class ProfileScreen extends Component {
 }
 
 let styles = StyleSheet.create({
-
+  tabView:{
+    backgroundColor: 'white',
+  },
   statContainer: {
     alignItems: 'center',
     backgroundColor: 'white',
@@ -153,7 +144,8 @@ let styles = StyleSheet.create({
     fontSize: 24,
     alignSelf: 'center',
     color: RkConfig.colors.primary,
+  },
+  postIconsStyle:{
+    color: RkConfig.colors.primary
   }
-
-
 });

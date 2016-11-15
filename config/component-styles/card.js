@@ -19,6 +19,8 @@ export const CardStyles = {
         backgroundColor: Colors.white,
     },
     _footer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         padding: 8,
         borderBottomLeftRadius: 1,
         borderBottomRightRadius: 1,
@@ -26,6 +28,9 @@ export const CardStyles = {
     _title: {
         fontSize: 24,
         flexDirection: 'column',
+    },
+    _row:{
+      flexDirection: 'row'
     },
     _subTitle: {
         fontSize: 14,
@@ -40,6 +45,12 @@ export const CardStyles = {
         height: 64,
         width: 64,
         borderRadius: 32,
+        marginRight: 10
+    },
+    _avatarSmall: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
         marginRight: 10
     },
     _bigImg: {
