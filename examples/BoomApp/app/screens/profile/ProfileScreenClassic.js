@@ -3,13 +3,13 @@ import {
   StyleSheet,
   Text,
   View,
-    Image,
+  Image,
   StatusBar,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
 
-import {RkConfig, RkSeparator, RkButton, RkStyle, RkTabView} from 'react-native-ui-kit';
+import {RkConfig, RkText, RkButton, RkStyle, RkTabView} from 'react-native-ui-kit';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import api from '../../util/ApiMock';
 import FriendList from '../../components/FriendList';
@@ -21,6 +21,7 @@ export default class ProfileScreen extends Component {
 
   constructor(props) {
     super(props);
+    this._friends = api.getUserFriends(api.userId).concat(api.getUserFriends(api.userId));
   }
 
 
@@ -49,16 +50,6 @@ export default class ProfileScreen extends Component {
     );
   }
 
-  _showMoreFriends() {
-    this.props.navigator.push({
-      screen: FriendList,
-      passProps: {
-        style: {marginTop: 10},
-        friends: api.getUserFriends(api.userId).concat(api.getUserFriends(api.userId))
-      }
-    })
-  }
-
   _renderTab(selected, tab) {
     let styles = this._getStyles();
     return (
@@ -78,22 +69,17 @@ export default class ProfileScreen extends Component {
     return (
       <RkTabView tabsContainerStyle={styles.tabView}>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Posts', value: '62'})}>
-          <PostList posts={api.getUserPosts(api.userId)} iconStyle={styles.postIconsStyle}/>
+          <PostList style={[{marginTop: 10}]} posts={api.getUserPosts(api.userId)} iconStyle={styles.postIconsStyle}/>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Followers', value: '124'})}>
-          <View style={[{backgroundColor: 'white', marginTop: 10, height: 225}]}>
+          <View style={[{marginTop: 10}]}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5, paddingHorizontal: 10}}>
-              <Text style={{ fontSize: 14,  color: RkConfig.colors.gray}}>
-                {api.getUserFriends(api.userId).length * 2} friends
-              </Text>
-              <RkButton type='small clear' innerStyle={{color: RkConfig.colors.gray}}
-                        onPress={() => this._showMoreFriends()}>
-                see all
-                <Icon style={{alignSelf: 'flex-end', marginLeft: 3, marginTop: 3}} name='ios-arrow-forward'/>
-              </RkButton>
+              <RkText style={{ fontSize: 14}}>
+                {this._friends.length} friends
+              </RkText>
             </View>
-            <FriendList friends={api.getUserFriends(api.userId)}/>
+            <FriendList friends={this._friends}/>
           </View>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Photo', value: '48'})}>

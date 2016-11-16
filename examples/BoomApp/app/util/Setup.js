@@ -7,7 +7,8 @@ RkConfig.setColor('blurBgWhite', 'rgba(255,255,255,0.1)');
 RkConfig.setColor('blurBg', 'rgba(0,0,0,0.1)');
 RkConfig.setColor('blurBgStrong', 'rgba(0,0,0,0.3)');
 RkConfig.setColor('blurPrimary', '#00e5bf');
-RkConfig.setColor('blurDark', '#21324f');
+RkConfig.setColor('blurDark', '#15213b');
+RkConfig.setColor('blurExtraDark', '#0b162a');
 RkConfig.setType('text', 'white', {
   color: RkConfig.colors.blurTextStrong
 });
@@ -31,7 +32,7 @@ RkConfig.setType('button', 'postControl', {
 RkConfig.setType('card', 'blur', {
   container: {
     margin: 0,
-    marginTop: 10,
+    marginBottom: 15,
     borderWidth: 0,
     borderRadius: 0,
     shadowOpacity: 0,

@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "react": "15.3.1",
-    "react-native": "0.34.1",
+    "react-native": "0.37.0",
     "react-native-drawer": "^2.3.0",
     "react-native-vector-icons": "^2.0.3",
     "react-native-ui-kit": "file:../../"

@@ -31,14 +31,13 @@ export default class Toolbar extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        <ScrollView
-          automaticallyAdjustContentInsets={true}>
+      <View style={[{flex: 1}, this.props.style]}>
           <ListView
+            automaticallyAdjustContentInsets={true}
+            style={{backgroundColor: RkConfig.colors.blurExtraDark}}
             dataSource={this.state.dataSource}
             renderRow={(rowData) => this._renderRow(rowData)}
           />
-        </ScrollView>
       </View>
     );
   }
