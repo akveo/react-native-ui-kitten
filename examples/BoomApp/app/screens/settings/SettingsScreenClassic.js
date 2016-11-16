@@ -20,7 +20,7 @@ export default class SettingsScreenClassic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      themeIndex: ScreenService.currentThemeIndex
+      themeIndex: ScreenService.getCurrentThemeIndex()
     }
   }
 

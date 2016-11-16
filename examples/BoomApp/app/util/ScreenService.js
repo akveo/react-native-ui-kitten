@@ -74,7 +74,7 @@ themes[currentThemeIndex].setup();
 
 export default ScreenService = {
 
-  currentThemeIndex,
+  getCurrentThemeIndex: () => currentThemeIndex,
   setCurrentThemeIndex: index => {
     currentThemeIndex = index;
     themes[currentThemeIndex].setup();
