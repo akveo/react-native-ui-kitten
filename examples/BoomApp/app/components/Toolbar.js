@@ -45,6 +45,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     marginLeft: 10,
-    marginTop: 2
+    marginTop: -3,
   }
 });

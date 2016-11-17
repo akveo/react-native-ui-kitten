@@ -18,9 +18,11 @@ export default class ChatScreenBlur extends ChatScreenClassic {
 
   render() {
     return (
-      <View>
+      <Image
+        source={require('../../../img/bg/blurBg.png')}
+        style={RkConfig.styles.backgroundImage}>
         {this._render()}
-      </View>
+      </Image>
     );
   }
 
@@ -51,6 +53,9 @@ export default class ChatScreenBlur extends ChatScreenClassic {
 }
 
 let styles = {
+  toolbar: {
+    backgroundColor: RkConfig.colors.blurDark
+  },
   boardUp: {
     backgroundColor: RkConfig.colors.transparent
   },

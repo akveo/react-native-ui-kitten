@@ -62,7 +62,7 @@ export default class ChatListScreen extends Component {
   _renderMsgItem(msg) {
     let user = api.getUserInfo(msg.from);
     return (
-      <TouchableOpacity onPress={()=>{this._openChat(user)}}>
+      <TouchableOpacity style={this._styles.itemWrap} onPress={()=>{this._openChat(user)}}>
         <View style={this._styles.itemContainer}>
           <Image source={user.avatar} style={this._styles.avatar}/>
           <View style={this._styles.textContainer}>
@@ -97,7 +97,7 @@ export default class ChatListScreen extends Component {
 
 let styles = {
   header: {
-    height: 50,
+    minHeight: 50,
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',

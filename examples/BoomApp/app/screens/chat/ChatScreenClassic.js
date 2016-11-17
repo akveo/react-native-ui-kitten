@@ -147,6 +147,7 @@ export default class ChatScreenClassic extends Component {
 
 let styles = {
   toolbar: {
+    alignItems: 'center',
     position: 'absolute',
     left: 0,
     right: 0

@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import {RkConfig, RkStyle, RkButton} from 'react-native-ui-kit';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import ChatListScreenClassic from './ChatListScreenClassic';
 import _ from "lodash";
@@ -22,11 +23,15 @@ export default class ChatListScreenBlur extends ChatListScreenClassic {
     return (
       <View style={{flex: 1}}>
         <View style={this._styles.header}>
-          <View>
+            <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+              <Icon name={'ios-person-add-outline'} style={{fontSize: 28}}/>
+            </RkButton>
             <Text style={this._styles.headerText}>
-              Chats
+              CHATS
             </Text>
-          </View>
+            <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+              <Icon name={'ios-mail'} style={{fontSize: 28}}/>
+            </RkButton>
         </View>
         {super._renderChatList()}
       </View>
@@ -40,9 +45,16 @@ export default class ChatListScreenBlur extends ChatListScreenClassic {
 
 let styles = {
   header: {
-    backgroundColor: 'transparent',
+    marginTop: 0,
+    paddingHorizontal: 10,
+    paddingTop: 25,
+    paddingBottom: 5,
+    marginBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: RkConfig.colors.blurExtraDark,
     borderBottomWidth: 1,
-    borderBottomColor: RkConfig.colors.blurBgWhite
+    borderBottomColor: RkConfig.colors.blurDark,
   },
   headerText: {
     color: RkConfig.colors.blurTextStrong,
@@ -51,23 +63,28 @@ let styles = {
   list: {
     backgroundColor: 'transparent'
   },
-  itemContainer: {
+  itemWrap:{
+    padding: 5,
+    paddingLeft: 0,
     backgroundColor: RkConfig.colors.blurBg,
-    padding: 0
+    borderBottomWidth: 0.5,
+    borderBottomColor: RkConfig.colors.blurBgStrong
+  },
+  itemContainer: {
+    padding: 0,
+    borderLeftWidth: 5,
+    borderLeftColor: RkConfig.colors.blurBgStrong,
   },
   avatar: {
     width: 76,
     height: 76,
     opacity: 0.8,
-    borderRadius: 0,
+    borderRadius: 3
   },
   textContainer: {
-    borderTopWidth: 1,
-    borderTopColor: RkConfig.colors.blurBgWhite,
-    borderLeftWidth: 15,
-    borderLeftColor: RkConfig.colors.blurBgStrong
   },
   titleContainer: {
+    justifyContent: 'center',
     marginLeft: 0,
     paddingLeft: 10,
   },
@@ -76,8 +93,9 @@ let styles = {
     backgroundColor: 'transparent'
   },
   subTitle: {
-    color: RkConfig.colors.gray,
+    color: RkConfig.colors.blurText,
     backgroundColor: 'transparent',
-    fontSize: 14
+    fontSize: 14,
+    marginTop: 10
   },
 };
