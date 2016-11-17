@@ -60,7 +60,7 @@ export class RkModalImg extends Component {
       delimiter,
       index,
       ...imgProps,
-      } = this.props;
+    } = this.props;
     renderHeader = renderHeader || this._renderHeader.bind(this);
     renderFooter = renderFooter || this._renderFooter.bind(this);
     animationType = animationType || 'fade';
@@ -111,7 +111,9 @@ export class RkModalImg extends Component {
       ref='listView'
       onScroll={(e)=>this._onScroll(e)}
       style={{flex: 1}}
-      dataSource={ds.cloneWithRows(source.map((s)=>{return {img: s}}))}
+      dataSource={ds.cloneWithRows(source.map((s)=> {
+        return {img: s}
+      }))}
       renderRow={(source)=> this._renderImage(source.img, props)}
       horizontal
       pagingEnabled
@@ -120,7 +122,7 @@ export class RkModalImg extends Component {
       showsVerticalScrollIndicator={false}
       directionalLockEnabled
       scrollEventThrottle={100}
-      />
+    />
   }
 
   _renderImage(source, props) {
@@ -148,14 +150,10 @@ export class RkModalImg extends Component {
   _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
     return (
       <View style={styles.innerHeaderContainer}>
-        <View style={{flex: 1}}>
-          <RkButton innerStyle={{color: 'white'}} style={{width: 60}} type={'clear'}
-                    onPress={closeImage}>Close</RkButton>
-        </View>
-        <View style={{flex: 1}}>
-          <Text style={{textAlign: 'center', fontSize: 16}}>{this._renderPageNumbers(delimiter)}</Text>
-        </View>
-        <View style={{flex: 1}}></View>
+        <RkButton innerStyle={{color: 'white'}} type={'clear'}
+                  onPress={closeImage}>Close</RkButton>
+        <Text style={{ textAlign: 'center', fontSize: 16}}>{this._renderPageNumbers(delimiter)}</Text>
+        <RkButton innerStyle={{color: 'transparent'}}>Close</RkButton>
       </View>
     );
   }
@@ -184,7 +182,7 @@ export class RkModalImg extends Component {
     }
   }
 
-  _closeImage(){
+  _closeImage() {
     this.setState({visible: false})
   }
 
@@ -201,7 +199,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#212121',
   },
   innerHeaderContainer: {
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },

@@ -118,6 +118,10 @@ let styles = StyleSheet.create({
     margin: 10,
     borderRadius: 35,
   },
+  tabContent:{
+    marginTop: 10,
+    backgroundColor: RkConfig.colors.blurExtraDark
+  },
   statContainer: {
     alignItems: 'center',
     backgroundColor: 'transparent',

@@ -69,10 +69,10 @@ export default class ProfileScreen extends Component {
     return (
       <RkTabView tabsContainerStyle={styles.tabView}>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Posts', value: '62'})}>
-          <PostList style={[{marginTop: 10}]} posts={api.getUserPosts(api.userId)} iconStyle={styles.postIconsStyle}/>
+          <PostList style={styles.tabContent} posts={api.getUserPosts(api.userId)} iconStyle={styles.postIconsStyle}/>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Followers', value: '124'})}>
-          <View style={[{marginTop: 10}]}>
+          <View style={styles.tabContent}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5, paddingHorizontal: 10}}>
               <RkText style={{ fontSize: 14}}>
@@ -83,13 +83,7 @@ export default class ProfileScreen extends Component {
           </View>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Photo', value: '48'})}>
-          <View style={[{backgroundColor: 'white', marginTop: 10, height: 225}]}>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5}}>
-              <Text style={{fontSize: 14,  color: RkConfig.colors.gray}}>
-                {api.getUserPosts(api.userId).length} photos
-              </Text>
-            </View>
+          <View style={styles.tabContent}>
             <ImageList posts={api.getUserPosts(api.userId)}/>
           </View>
         </RkTabView.Tab>
@@ -102,6 +96,10 @@ export default class ProfileScreen extends Component {
 let styles = StyleSheet.create({
   tabView:{
     backgroundColor: 'white',
+  },
+  tabContent:{
+    marginTop: 10,
+    backgroundColor: 'white'
   },
   statContainer: {
     alignItems: 'center',

@@ -32,12 +32,12 @@ export default class Toolbar extends Component {
   render() {
     return (
       <View style={[{flex: 1}, this.props.style]}>
-          <ListView
-            automaticallyAdjustContentInsets={true}
-            style={{backgroundColor: RkConfig.colors.blurExtraDark}}
-            dataSource={this.state.dataSource}
-            renderRow={(rowData) => this._renderRow(rowData)}
-          />
+        <ListView
+          automaticallyAdjustContentInsets={true}
+          style={{backgroundColor: RkConfig.colors.blurExtraDark}}
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => this._renderRow(rowData)}
+        />
       </View>
     );
   }
@@ -65,7 +65,7 @@ export default class Toolbar extends Component {
         </View>
         <View rkCardFooter>
           <View rkRow style={{alignItems: 'center'}}>
-            <RkButton type='clear postControl'  innerStyle={this.props.iconStyle} onPress={()=> this._setLike(post)}>
+            <RkButton type='clear postControl' innerStyle={this.props.iconStyle} onPress={()=> this._setLike(post)}>
               <Icon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
             </RkButton>
             <RkText style={[{fontSize: 16, marginTop: -3, marginRight: 10}]}>{post.likes.toString()}</RkText>
@@ -82,7 +82,7 @@ export default class Toolbar extends Component {
   }
 
   _renderPostText(text) {
-    if(text){
+    if (text) {
       return (
         <View style={{paddingHorizontal: 15, paddingTop: 10}}>
           <RkText>{text}</RkText>
@@ -125,15 +125,11 @@ export default class Toolbar extends Component {
 
   _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
     return (
-      <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-        <View style={{flex: 1}}>
-          <RkButton innerStyle={{color: 'white'}} style={{width: 60}} type={'clear'}
-                    onPress={closeImage}>Close</RkButton>
-        </View>
-        <View style={{flex: 1}}>
-          <Text style={{textAlign: 'center', color: 'white'}}>{this.post.userName}</Text>
-        </View>
-        <View style={{flex: 1}}></View>
+      <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
+        <RkButton innerStyle={{color: 'white'}} type={'clear'}
+                  onPress={closeImage}>Close</RkButton>
+        <Text style={{textAlign: 'center', color: 'white'}}>{this.post.userName}</Text>
+        <RkButton innerStyle={{color: 'transparent'}}>Close</RkButton>
       </View>
     );
   }
