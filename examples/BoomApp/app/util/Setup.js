@@ -32,6 +32,19 @@ RkConfig.setType('button', 'postControl', {
   },
 });
 
+RkConfig.setType('input', 'classic', {
+  input: {
+    fontSize: 20,
+    color: RkConfig.colors.primary
+  },
+  container: {
+    borderBottomColor: RkConfig.colors.darkGray,
+    marginTop: 40
+  },
+  label: {
+    paddingBottom: 15
+  }
+});
 RkConfig.setType('card', 'blur', {
   container: {
     margin: 0,

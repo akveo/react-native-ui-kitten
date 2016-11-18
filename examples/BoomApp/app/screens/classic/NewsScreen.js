@@ -15,8 +15,8 @@ export default class NewsScreen extends Component {
   render() {
     return (
       <PostList
-        style={{backgroundColor: RkConfig.colors.lightGray, marginTop: 10}}
         posts={api.getUserFeed(api.userId)}
+        style={{backgroundColor: RkConfig.colors.lightGray, marginTop: 10}}
         iconStyle={{color: RkConfig.colors.primary}}/>
     )
   }

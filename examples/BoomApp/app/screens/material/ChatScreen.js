@@ -5,10 +5,10 @@ import {
 
 import _ from "lodash";
 import {RkConfig, RkButton,RkStyle, RkTextInput} from 'react-native-ui-kit';
-import ChatScreenClassic from './ChatScreenClassic';
+import ChatScreenClassic from '../classic/ChatScreen';
 import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 
-export default class ChatScreenMaterial extends ChatScreenClassic {
+export default class ChatScreenMaterial extends Component {
 
   constructor(props) {
     super(props);

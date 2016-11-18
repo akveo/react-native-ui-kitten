@@ -15,9 +15,9 @@ import {RkConfig, RkBarBg, RkTabView, RkButton, RkSeparator, RkStyle} from 'reac
 import api from '../../util/ApiMock';
 import Toolbar from '../../components/Toolbar';
 import DrawerMenu from '../../components/DrawerMenu';
-import MainScreenClassic from './MainScreenClassic';
+import MainScreenBase from '../base/MainScreenBase';
 
-export default class MainScreenMaterial extends MainScreenClassic {
+export default class MainScreenMaterial extends MainScreenBase {
 
 
   constructor(props) {

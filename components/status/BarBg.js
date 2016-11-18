@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 import {
   View,
-  Dimensions
+  Dimensions,
+  StyleSheet
 } from 'react-native';
 
 import { RkConfig} from '../../config/config';
@@ -21,7 +22,7 @@ export class RkBarBg extends Component {
     return (
       <View
         onLayout={e => this._onLayout(e)}
-        style={[{backgroundColor: RkConfig.colors.primary, height: 20, position: 'absolute', top: 0, left:0, right: 0}, this.props.style]}>
+        style={[styles.bar, this.props.style]}>
       </View>
     );
   }
@@ -37,3 +38,14 @@ export class RkBarBg extends Component {
   }
 
 }
+
+let styles = StyleSheet.create({
+  bar:{
+    backgroundColor: RkConfig.colors.primary,
+    height: 20,
+    position: 'absolute',
+    top: 0,
+    left:0,
+    right: 0
+  }
+});

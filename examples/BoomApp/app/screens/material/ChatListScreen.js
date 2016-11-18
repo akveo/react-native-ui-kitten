@@ -5,7 +5,7 @@ import {
 
 import {RkConfig} from 'react-native-ui-kit';
 
-import ChatListScreenClassic from './ChatListScreenClassic';
+import ChatListScreenClassic from '../classic/ChatListScreen';
 import _ from "lodash";
 
 

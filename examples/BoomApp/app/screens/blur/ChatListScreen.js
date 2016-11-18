@@ -8,11 +8,11 @@ import {
 import {RkConfig, RkStyle, RkButton} from 'react-native-ui-kit';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import ChatListScreenClassic from './ChatListScreenClassic';
+import ChatListScreen from '../classic/ChatListScreen';
 import _ from "lodash";
 
 
-export default class ChatListScreenBlur extends ChatListScreenClassic {
+export default class ChatListScreenBlur extends ChatListScreen {
 
   constructor(props) {
     super(props);

@@ -1,31 +1,25 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Image,
-  StatusBar,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 
 import {
   RkConfig,
-  RkSeparator,
   RkButton,
-  RkStyle,
   RkText
 } from 'react-native-ui-kit';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 import api from '../../util/ApiMock';
-import FriendList from '../../components/FriendList';
-import ContactList from '../../components/ContactList';
-import ImageList from '../../components/ImageList';
-import ProfileScreenClassic from './ProfileScreenClassic';
+import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
+import ProfileScreenBase from "../base/ProfileScreenBase";
 
-export default class ProfileScreenBlur extends ProfileScreenClassic {
+export default class ProfileScreenBlur extends ProfileScreenBase {
+
   constructor(props) {
     super(props);
+    this._friends = api.getUserFriends(api.userId).concat(api.getUserFriends(api.userId));
   }
 
 
@@ -34,7 +28,7 @@ export default class ProfileScreenBlur extends ProfileScreenClassic {
       <View style={{flex: 1}}>
         <ScrollView
           automaticallyAdjustContentInsets={true}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginTop: 20}}>
+          <View style={styles.head}>
             <RkButton style={styles.button} innerStyle={styles.buttonIconInner}><Icon name='ios-person'/></RkButton>
             <Image source={api.getUserInfo(api.userId).avatar} style={styles.avatar}/>
             <RkButton style={styles.button} innerStyle={styles.buttonIconInner}><Icon name='ios-mail'/></RkButton>
@@ -46,15 +40,11 @@ export default class ProfileScreenBlur extends ProfileScreenClassic {
           <RkButton style={[styles.button, styles.followButton]} innerStyle={styles.buttonInner}>Follow</RkButton>
           <View
             style={{flex: 1}}>
-            {this._renderTabs()}
+            {this._renderTabs(styles)}
           </View>
         </ScrollView>
       </View>
     );
-  }
-
-  _getStyles() {
-    return styles;
   }
 
 }
@@ -71,6 +61,12 @@ let styles = StyleSheet.create({
       height: 2,
       width: 0
     }
+  },
+  head: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 20
   },
   button: {
     borderWidth: 1,
@@ -140,7 +136,7 @@ let styles = StyleSheet.create({
     borderBottomColor: RkConfig.colors.blurExtraDark,
     borderBottomWidth: 1
   },
-  friendIcon:{
+  friendIcon: {
     fontSize: 28,
     color: 'white'
   },

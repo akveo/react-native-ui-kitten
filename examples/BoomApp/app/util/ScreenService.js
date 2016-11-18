@@ -1,25 +1,25 @@
 import React from 'react';
 
-import LoginScreenClassic from '../screens/auth/LoginScreenClassic'
-import ChatListScreenClassic from './../screens/chat/ChatListScreenClassic'
-import ChatScreenClassic from './../screens/chat/ChatScreenClassic'
-import MainScreenClassic from './../screens/main/MainScreenClassic'
-import NewsScreenClassic from './../screens/news/NewsScreenClassic'
-import ProfileScreenClassic from './../screens/profile/ProfileScreenClassic.js'
-import SettingsScreenClassic from './../screens/settings/SettingsScreenClassic.js'
+import LoginScreenClassic from '../screens/classic/LoginScreen'
+import ChatListScreenClassic from '../screens/classic/ChatListScreen'
+import ChatScreenClassic from '../screens/classic/ChatScreen'
+import MainScreenClassic from '../screens/classic/MainScreen'
+import NewsScreenClassic from '../screens/classic/NewsScreen'
+import ProfileScreenClassic from '../screens/classic/ProfileScreen'
+import SettingsScreenClassic from '../screens/classic/SettingsScreen'
 
-import LoginScreenMaterial from './../screens/auth/LoginScreenMaterial'
-import MainScreenMaterial from './../screens/main/MainScreenMaterial'
-import ChatListScreenMaterial from './../screens/chat/ChatListScreenMaterial'
-import ChatScreenMaterial from './../screens/chat/ChatScreenMaterial'
-import NewsScreenMaterial from './../screens/news/NewsScreenMaterial'
+import LoginScreenMaterial from '../screens/material/LoginScreen'
+import MainScreenMaterial from '../screens/material/MainScreen'
+import ChatListScreenMaterial from '../screens/material/ChatListScreen'
+import ChatScreenMaterial from '../screens/material/ChatScreen'
+import NewsScreenMaterial from '../screens/material/NewsScreen'
 
-import MainScreenBlur from './../screens/main/MainScreenBlur'
-import NewsScreenBlur from './../screens/news/NewsScreenBlur'
-import ProfileScreenBlur from './../screens/profile/ProfileScreenBlur'
-import LoginScreenBlur from './../screens/auth/LoginScreenBlur'
-import ChatListScreenBlur from './../screens/chat/ChatListScreenBlur'
-import ChatScreenBlur from './../screens/chat/ChatScreenBlur'
+import MainScreenBlur from '../screens/blur/MainScreen'
+import NewsScreenBlur from '../screens/blur/NewsScreen'
+import ProfileScreenBlur from '../screens/blur/ProfileScreen'
+import LoginScreenBlur from '../screens/blur/LoginScreen'
+import ChatListScreenBlur from '../screens/blur/ChatListScreen'
+import ChatScreenBlur from '../screens/blur/ChatScreen'
 
 import {RkConfig} from 'react-native-ui-kit';
 

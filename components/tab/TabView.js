@@ -106,7 +106,7 @@ export class RkTabView extends Component {
       boxStyle.push(RkConfig.themes.styles.tab._containerSelected);
       innerStyle.push(RkConfig.themes.styles.tab._innerSelected);
     }
-    for (type of types) {
+    for (let type of types) {
       boxStyle.push(RkConfig.themes.styles.tab[type].container);
       innerStyle.push(RkConfig.themes.styles.tab[type].inner);
       if (selected) {

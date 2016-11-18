@@ -9,13 +9,12 @@ import {
   ScrollView
 } from 'react-native';
 
-import LoginScreenClassic from './LoginScreenClassic';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkButton, RkText, RkTextInput, RkSeparator, RkConfig} from 'react-native-ui-kit';
-import ScreenService from '../../util/ScreenService';
+import LoginScreenBase from "../base/LoginScreenBase";
 
 
-export default class LoginScreenBlur extends LoginScreenClassic {
+export default class LoginScreenBlur extends LoginScreenBase {
 
   render() {
     return (
@@ -26,7 +25,7 @@ export default class LoginScreenBlur extends LoginScreenClassic {
         <Image
           source={require('../../../img/bg/blurBg.png')}
           style={RkConfig.styles.backgroundImage}>
-          <ScrollView contentContainerStyle={{flex:1}}>
+          <ScrollView contentContainerStyle={{flex: 1}}>
             <View style={styles.container}>
               <View>
                 <Image style={styles.logoImg} source={require('../../../img/react_logo.png')}/>
@@ -59,7 +58,7 @@ export default class LoginScreenBlur extends LoginScreenClassic {
                   <RkButton innerStyle={styles.buttonInner}
                             style={styles.buttonContainer}
                             type='circle shadow'
-                            onPress={()=>super._renderMainScreen()}>
+                            onPress={() => super._renderMainScreen()}>
                     <RkText>Log In</RkText>
                   </RkButton>
                 </View>
