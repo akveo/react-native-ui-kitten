@@ -69,7 +69,9 @@ export default class ProfileScreen extends Component {
     return (
       <RkTabView tabsContainerStyle={styles.tabView}>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Posts', value: '62'})}>
-          <PostList style={styles.tabContent} posts={api.getUserPosts(api.userId)} iconStyle={styles.postIconsStyle}/>
+          <PostList style={styles.tabContent}
+                    posts={api.getUserPosts(api.userId)}
+                    iconStyle={styles.postIconsStyle}/>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Followers', value: '124'})}>
           <View style={styles.tabContent}>
@@ -79,11 +81,16 @@ export default class ProfileScreen extends Component {
                 {this._friends.length} friends
               </RkText>
             </View>
-            <FriendList friends={this._friends}/>
+            <FriendList
+              friends={this._friends}
+              cardStyle={styles.friendCard}
+              headerStyle={styles.friendHeader}
+              iconStyle={styles.friendIcon}
+            />
           </View>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Photo', value: '48'})}>
-          <View style={styles.tabContent}>
+          <View style={[styles.tabContent, {paddingTop: 0}]}>
             <ImageList posts={api.getUserPosts(api.userId)}/>
           </View>
         </RkTabView.Tab>
@@ -98,8 +105,8 @@ let styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   tabContent:{
-    marginTop: 10,
-    backgroundColor: 'white'
+    paddingTop: 10,
+    backgroundColor: RkConfig.colors.lightGray
   },
   statContainer: {
     alignItems: 'center',
@@ -131,5 +138,19 @@ let styles = StyleSheet.create({
   },
   postIconsStyle:{
     color: RkConfig.colors.primary
-  }
+  },
+  friendCard: {
+    marginBottom: 0,
+    marginHorizontal: 0,
+    borderBottomColor: RkConfig.colors.lightGray,
+    borderBottomWidth: 1
+  },
+  friendHeader:{
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
+  friendIcon:{
+    fontSize: 28,
+    color: RkConfig.colors.primary
+  },
 });

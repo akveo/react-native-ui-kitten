@@ -14,7 +14,10 @@ export default class NewsBlur extends Component {
 
   render(){
     return(
-      <PostList posts={api.getUserFeed(api.userId)} iconStyle={{color: RkConfig.colors.blurTextStrong}}/>
+      <PostList
+        style={{backgroundColor: RkConfig.colors.blurExtraDark}}
+        posts={api.getUserFeed(api.userId)}
+        iconStyle={{color: RkConfig.colors.blurTextStrong}}/>
     )
   }
 

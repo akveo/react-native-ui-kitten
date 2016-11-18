@@ -28,23 +28,23 @@ export default class FriendList extends Component {
         style={[this.props.style, {flex: 1}]}
         scrollEnabled={false}
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => this._renderFriend(rowData)}
+        renderRow={(rowData) => this._renderFriend(rowData, this.props.cardStyle, this.props.headerStyle, this.props.iconStyle)}
       />
     )
   }
 
-  _renderFriend(user) {
+  _renderFriend(user, cardStyle, headerStyle, iconStyle) {
     return (
       <TouchableOpacity>
-        <RkCard style={{marginBottom: 0, borderBottomColor: RkConfig.colors.blurExtraDark, borderBottomWidth: 1,}}>
-          <View rkCardHeader>
+        <RkCard style={cardStyle}>
+          <View style={headerStyle} rkCardHeader>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image source={user.avatar} rkCardAvatarSmall/>
               <View>
                 <RkText style={{marginHorizontal: 10, fontSize: 16}}>{user.name.first} {user.name.last}</RkText>
               </View>
             </View>
-            <RkButton innerStyle={{fontSize: 28, color: 'white'}}><Icon name='ios-person-add-outline'/></RkButton>
+            <RkButton innerStyle={iconStyle}><Icon name='ios-person-add-outline'/></RkButton>
           </View>
         </RkCard>
       </TouchableOpacity>

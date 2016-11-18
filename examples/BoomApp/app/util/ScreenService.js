@@ -32,7 +32,7 @@ let classicTheme = {
   newsScreen: NewsScreenClassic,
   settingsScreens: SettingsScreenClassic,
   setup: function () {
-    RkConfig.theme = RkConfig.themes.iosLike;
+    RkConfig.theme = RkConfig.themes.classic;
   }
 };
 
@@ -69,7 +69,7 @@ let themes = [
   blurTheme
 ];
 
-let currentThemeIndex = 2;
+let currentThemeIndex = 0;
 themes[currentThemeIndex].setup();
 
 export default ScreenService = {

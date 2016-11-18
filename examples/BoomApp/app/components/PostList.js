@@ -34,7 +34,6 @@ export default class Toolbar extends Component {
       <View style={[{flex: 1}, this.props.style]}>
         <ListView
           automaticallyAdjustContentInsets={true}
-          style={{backgroundColor: RkConfig.colors.blurExtraDark}}
           dataSource={this.state.dataSource}
           renderRow={(rowData) => this._renderRow(rowData)}
         />

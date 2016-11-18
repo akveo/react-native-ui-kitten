@@ -26,7 +26,7 @@ export default class LoginScreenBlur extends LoginScreenClassic {
         <Image
           source={require('../../../img/bg/blurBg.png')}
           style={RkConfig.styles.backgroundImage}>
-          <ScrollView>
+          <ScrollView contentContainerStyle={{flex:1}}>
             <View style={styles.container}>
               <View>
                 <Image style={styles.logoImg} source={require('../../../img/react_logo.png')}/>
@@ -86,6 +86,7 @@ let styles = StyleSheet.create({
   widthLimit: {
     flex: 1,
     maxWidth: 275,
+    minHeight: 120,
   },
   logoImg: {
     alignSelf: 'center',

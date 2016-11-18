@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -8,8 +8,7 @@ import {
   Text
 } from 'react-native';
 
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
-import {RkButton, RkStyle, RkTextInput, RkSeparator, RkConfig} from 'react-native-ui-kit';
+import {RkButton, RkTextInput, RkConfig} from 'react-native-ui-kit';
 import ScreenService from '../../util/ScreenService';
 
 
@@ -24,22 +23,20 @@ export default class LoginScreenClassic extends Component {
               SIGN IN
             </Text>
           </View>
-          <View>
+          <View style={{minHeight: 160}}>
             <RkTextInput
               type='underline topLabel'
               label='EMAIL ADDRESS'
               labelStyle={{paddingBottom: 25}}
               containerStyle={{borderBottomColor: RkConfig.colors.darkGray, }}
-              style={[{fontSize: 20}]}
-              placeholderTextColor={RkConfig.colors.lightGray}/>
+              style={[{fontSize: 20, color: RkConfig.colors.primary}]}/>
             <RkTextInput
               type='underline topLabel'
               label='PASSWORD'
               labelStyle={{paddingBottom: 25}}
               containerStyle={{borderBottomColor: RkConfig.colors.darkGray, marginTop: 40}}
-              style={[{fontSize: 20}]}
-              secureTextEntry={true}
-              placeholderTextColor={RkConfig.colors.lightGray}/>
+              style={[{fontSize: 20, color: RkConfig.colors.primary}]}
+              secureTextEntry={true}/>
           </View>
           <View>
             <RkButton innerStyle={[{fontSize: 20}]} type='circle outline medium'
@@ -52,12 +49,10 @@ export default class LoginScreenClassic extends Component {
     );
   }
 
-  _renderMainScreen(){
+  _renderMainScreen() {
     this.props.navigator.replace({screen: ScreenService.getMainScreen()});
   }
 
 }
 
-let styles = StyleSheet.create({
-
-});
+let styles = StyleSheet.create({});

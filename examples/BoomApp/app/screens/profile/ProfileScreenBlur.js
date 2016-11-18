@@ -40,7 +40,8 @@ export default class ProfileScreenBlur extends ProfileScreenClassic {
             <RkButton style={styles.button} innerStyle={styles.buttonIconInner}><Icon name='ios-mail'/></RkButton>
           </View>
           <RkText style={[styles.text, styles.onlineText]}>Online</RkText>
-          <RkText style={[styles.text, styles.nameText]}>{api.getUserInfo(api.userId).name.first} {api.getUserInfo(api.userId).name.last}</RkText>
+          <RkText
+            style={[styles.text, styles.nameText]}>{api.getUserInfo(api.userId).name.first} {api.getUserInfo(api.userId).name.last}</RkText>
           <RkText style={[styles.text, styles.statusText]}>Head cook and bottle-washer.</RkText>
           <RkButton style={[styles.button, styles.followButton]} innerStyle={styles.buttonInner}>Follow</RkButton>
           <View
@@ -71,7 +72,7 @@ let styles = StyleSheet.create({
       width: 0
     }
   },
-  button:{
+  button: {
     borderWidth: 1,
     borderColor: RkConfig.colors.blurText,
     borderStyle: 'dotted',
@@ -80,36 +81,36 @@ let styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: RkConfig.colors.blurBgStrong,
   },
-  buttonInner:{
+  buttonInner: {
     color: 'white'
   },
-  buttonIconInner:{
+  buttonIconInner: {
     color: 'white',
     fontSize: 32,
     width: 25,
     height: 35
   },
-  text:{
+  text: {
     textAlign: 'center'
   },
-  followButton:{
+  followButton: {
     alignSelf: 'center',
     backgroundColor: 'transparent',
     paddingHorizontal: 50,
     marginTop: 15,
     marginBottom: 5,
   },
-  onlineText:{
+  onlineText: {
     marginTop: 3,
     marginBottom: 5,
     fontWeight: '100'
   },
-  nameText:{
+  nameText: {
     marginBottom: 3,
     fontSize: 26,
     fontWeight: 'bold'
   },
-  statusText:{
+  statusText: {
     fontSize: 14,
     fontWeight: '100'
   },
@@ -118,7 +119,7 @@ let styles = StyleSheet.create({
     margin: 10,
     borderRadius: 35,
   },
-  tabContent:{
+  tabContent: {
     marginTop: 10,
     backgroundColor: RkConfig.colors.blurExtraDark
   },
@@ -134,6 +135,16 @@ let styles = StyleSheet.create({
     borderColor: RkConfig.colors.blurPrimary,
     backgroundColor: RkConfig.colors.blurBgStrong,
   },
+  friendCard: {
+    marginBottom: 0,
+    borderBottomColor: RkConfig.colors.blurExtraDark,
+    borderBottomWidth: 1
+  },
+  friendIcon:{
+    fontSize: 28,
+    color: 'white'
+  },
+  friendHeader: {},
   titleStatText: {
     fontSize: 24,
     fontWeight: 'bold'
@@ -143,7 +154,7 @@ let styles = StyleSheet.create({
     fontSize: 14,
     color: RkConfig.colors.white
   },
-  postIconsStyle:{
+  postIconsStyle: {
     color: RkConfig.colors.blurTextStrong
   }
 });

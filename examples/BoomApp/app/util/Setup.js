@@ -12,6 +12,9 @@ RkConfig.setColor('blurExtraDark', '#0b162a');
 RkConfig.setType('text', 'white', {
   color: RkConfig.colors.blurTextStrong
 });
+RkConfig.setType('text', 'primary', {
+  color: RkConfig.colors.primary
+});
 RkConfig.setType('text', 'montserrat', {
   fontFamily: 'Montserrat-Regular'
 });
@@ -76,12 +79,47 @@ RkConfig.setType('card', 'blur', {
   },
 });
 
+RkConfig.setType('card', 'classic', {
+  container: {
+    borderRadius: 15,
+    marginHorizontal: 10,
+  },
+  content:{
+    backgroundColor: RkConfig.colors.white
+  },
+  title: {
+    color: RkConfig.colors.primary
+  },
+  subTitle: {
+    color: RkConfig.colors.primary
+  },
+  header: {
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    backgroundColor: RkConfig.colors.white,
+  },
+  footer: {
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    backgroundColor: RkConfig.colors.white,
+  },
+});
+
 RkConfig.setTheme('blur', {
   text: {
     defaultType: 'white montserrat transparentBg'
   },
   card: {
     defaultType: 'blur'
+  }
+});
+
+RkConfig.setTheme('classic', {
+  text: {
+    defaultType: 'montserrat transparentBg primary'
+  },
+  card: {
+    defaultType: 'blur classic'
   }
 });
 
