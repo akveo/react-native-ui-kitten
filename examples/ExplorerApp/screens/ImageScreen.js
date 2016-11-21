@@ -80,14 +80,14 @@ export class ImageScreen extends Component {
     return (
       <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' ,paddingVertical: 10, paddingHorizontal: 20}}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-          <RkButton type='clear' style={{paddingHorizontal: 5, paddingVertical: 5}}
+          <RkButton rkType='clear' style={{paddingHorizontal: 5, paddingVertical: 5}}
                     innerStyle={{fontSize: 26, color: 'white'}}>
             <Icon name={'ios-heart'}/>
           </RkButton>
           <Text style={[RkStyle.whiteText, {fontSize: 16, marginTop: -3}]}>12</Text>
         </View>
         <View style={{flex: 1}}>
-          <RkButton type='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
+          <RkButton rkType='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
                     innerStyle={{fontSize: 26, color: 'white'}}>
             <Icon name={'ios-chatboxes-outline'}/>
           </RkButton>

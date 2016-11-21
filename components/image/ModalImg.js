@@ -14,7 +14,7 @@ import {
 
 import {
   RkConfig
-} from '../../config/config';
+} from '../../util/config';
 
 import {
   RkButton
@@ -26,6 +26,7 @@ import {
 
 export class RkModalImg extends Component {
 
+  static name = 'image';
 
   constructor(props) {
     super(props);
@@ -150,7 +151,7 @@ export class RkModalImg extends Component {
   _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
     return (
       <View style={styles.innerHeaderContainer}>
-        <RkButton innerStyle={{color: 'white'}} type={'clear'}
+        <RkButton innerStyle={{color: 'white'}}rkType={'clear'}
                   onPress={closeImage}>Close</RkButton>
         <Text style={{ textAlign: 'center', fontSize: 16}}>{this._renderPageNumbers(delimiter)}</Text>
         <RkButton innerStyle={{color: 'transparent'}}>Close</RkButton>

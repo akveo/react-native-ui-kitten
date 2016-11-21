@@ -39,13 +39,13 @@ export default class LoginScreenMaterial extends Component {
         horizontal
         scrollEnabled={false}>
         <View style={{flex:1, width: this._width, justifyContent: 'center'}}>
-          <RkCard type='material' style={{marginHorizontal: 20, borderColor: 'transparent'}}>
+          <RkCard rkType='material' style={{marginHorizontal: 20, borderColor: 'transparent'}}>
             <View rkCardHeader style={{backgroundColor: RkConfig.colors.primary, paddingHorizontal: 20}}>
               <Text style={{color: 'white', fontSize: 20, marginTop: 100}}>Sign in into your account</Text>
             </View>
             <View rkCardContent style={{paddingHorizontal: 20, paddingTop: 15}}>
               <RkTextInput
-                type='underline topLabel'
+               rkType='underline topLabel'
                 label='Enter your email'
                 value={this.state.login}
                 onChangeText={(text)=>this.setState({login: text})}
@@ -59,7 +59,7 @@ export default class LoginScreenMaterial extends Component {
                 onPress={()=> {this.state.login ? this.refs.scrollView.scrollTo({x: this._width}) : this.setState({error: true})}}
                 style={[RkStyle.primaryBg, {marginTop: 20}]}
                 innerStyle={RkStyle.whiteText}
-                type='material'>
+               rkType='material'>
                 NEXT
               </RkButton>
               <Text style={{marginTop: 100, color: RkConfig.colors.gray, alignSelf: 'center'}}>or create new
@@ -68,10 +68,10 @@ export default class LoginScreenMaterial extends Component {
           </RkCard>
         </View>
         <View style={{flex:1, width: this._width, justifyContent: 'center'}}>
-          <RkCard type='material' style={{marginHorizontal: 20, borderColor: 'transparent'}}>
+          <RkCard rkType='material' style={{marginHorizontal: 20, borderColor: 'transparent'}}>
             <View rkCardHeader style={{backgroundColor: RkConfig.colors.primary}}>
               <RkButton
-                type='clear'
+               rkType='clear'
                 onPress={()=>this.refs.scrollView.scrollTo({x: 0})}
                 style={{alignSelf: 'flex-start', paddingHorizontal: 8}}
                 innerStyle={{color: 'white'}}>
@@ -83,7 +83,7 @@ export default class LoginScreenMaterial extends Component {
             </View>
             <View rkCardContent style={{paddingHorizontal: 20, paddingTop: 15}}>
               <RkTextInput
-                type='underline topLabel'
+               rkType='underline topLabel'
                 label='Enter your password'
                 secureTextEntry={true}
                 labelStyle={{paddingBottom: 25}}
@@ -95,7 +95,7 @@ export default class LoginScreenMaterial extends Component {
               <RkButton style={[RkStyle.primaryBg, {marginTop: 20}]}
                         innerStyle={RkStyle.whiteText}
                         onPress={()=>super._renderMainScreen()}
-                        type='material'>
+                        rkType='material'>
                 NEXT
               </RkButton>
               <Text style={{marginTop: 100, color: RkConfig.colors.gray, alignSelf: 'center'}}>or create new

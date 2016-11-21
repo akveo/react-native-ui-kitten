@@ -23,7 +23,7 @@ export default class ChatScreenMaterial extends Component {
 
   _renderMsgSubmit() {
     return (
-      <RkButton type='clear' style={{paddingVertical: 5}} onPress={()=>this._sendMessage()}>
+      <RkButton rkType='clear' style={{paddingVertical: 5}} onPress={()=>this._sendMessage()}>
         <Icon name="md-send" style={{fontSize: 22}}/>
       </RkButton>
     );

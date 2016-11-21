@@ -46,7 +46,7 @@ export default class MainScreenMaterial extends MainScreenBase {
           changeScreen={(name) => this._changeScreen(name)}
           openChat={(user) => this._openChat(user)}
         />}
-        type="overlay"
+       rkType="overlay"
         tapToClose={true}
         openDrawerOffset={0.2}
         panCloseMask={0.2}

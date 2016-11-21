@@ -8,12 +8,13 @@ import {
   Dimensions,
 } from 'react-native';
 
-import { RkConfig} from '../../config/config';
+import { RkConfig} from '../../util/config';
 import {RkTab} from './Tab'
 
 export class RkTabView extends Component {
 
   static Tab = RkTab;
+  static name = 'tabView';
 
   constructor(props) {
     super(props);
@@ -98,7 +99,7 @@ export class RkTabView extends Component {
   }
 
   _defineStyles(selected) {
-    let types = this.props.type || (RkConfig.theme.tab ? RkConfig.theme.tab.defaultType : '');
+    let types = this.props.rkType || (RkConfig.theme.tab ? RkConfig.theme.tab.defaultType : '');
     types = types && types.length ? types.split(" ") : [];
     let boxStyle = [RkConfig.themes.styles.tab._container];
     let innerStyle = [RkConfig.themes.styles.tab._inner];

@@ -34,7 +34,7 @@ export default class SettingsScreenClassic extends Component {
         <View style={styles.settingsSection}>
           <RkChoiceGroup
             radio
-            type='clear'
+           rkType='clear'
             selectedIndex={this.state.themeIndex}
             onChange={(index)=> this._changeTheme(index)}>
             <TouchableOpacity choiceTrigger>
@@ -58,7 +58,7 @@ export default class SettingsScreenClassic extends Component {
           </RkChoiceGroup>
         </View>
         <View style={[styles.settingsSection, styles.settingsSectionSymmetric]}>
-            <RkButton type='clear' onPress={()=>this._logOut()}>LOG OUT</RkButton>
+            <RkButton rkType='clear' onPress={()=>this._logOut()}>LOG OUT</RkButton>
         </View>
       </ScrollView>
     );

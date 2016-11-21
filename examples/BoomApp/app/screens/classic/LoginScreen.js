@@ -25,13 +25,13 @@ export default class LoginScreenClassic extends LoginScreenBase {
           </View>
           <View style={{minHeight: 185}}>
             <RkTextInput
-              type='underline topLabel'
+             rkType='underline topLabel'
               label='EMAIL ADDRESS'
               labelStyle={styles.inputLabel}
               containerStyle={styles.inputContainer}
               style={styles.input}/>
             <RkTextInput
-              type='underline topLabel'
+             rkType='underline topLabel'
               label='PASSWORD'
               labelStyle={styles.inputLabel}
               containerStyle={styles.inputContainer}
@@ -40,7 +40,7 @@ export default class LoginScreenClassic extends LoginScreenBase {
           </View>
           <View>
             <RkButton innerStyle={[{fontSize: 20}]}
-                      type='circle outline medium'
+                     rkType='circle outline medium'
                       onPress={() => this._renderMainScreen()}>
               SIGN IN
             </RkButton>

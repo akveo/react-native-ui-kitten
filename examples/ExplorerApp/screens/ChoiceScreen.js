@@ -44,25 +44,25 @@ export class ChoiceScreen extends Component {
             </View>
             <View>
               <View style={{alignItems: 'center'}}>
-                <RkChoice type='material' selected={true}/>
+                <RkChoice rkType='material' selected={true}/>
               </View>
               <Text style={styles.typeText}>material</Text>
             </View>
             <View>
               <View style={{alignItems: 'center'}}>
-                <RkChoice type='radio'/>
+                <RkChoice rkType='radio'/>
               </View>
               <Text style={styles.typeText}>radio</Text>
             </View>
             <View>
               <View style={{alignItems: 'center'}}>
-                <RkChoice type='posNeg'/>
+                <RkChoice rkType='posNeg'/>
               </View>
               <Text style={styles.typeText}>pos/neg</Text>
             </View>
             <View>
               <View style={{alignItems: 'center'}}>
-                <RkChoice selected type='clear'/>
+                <RkChoice selected rkType='clear'/>
               </View>
               <Text style={styles.typeText}>clear</Text>
             </View>
@@ -74,17 +74,15 @@ export class ChoiceScreen extends Component {
             <View>
               <RkChoiceGroup>
                 <TouchableOpacity choiceTrigger
-                                  style={[{borderWidth: 0.5, borderColor: RkConfig.colors.gray, borderRadius: 2}]}>
+                                  style={[{marginLeft: 5, borderWidth: 0.5, borderColor: RkConfig.colors.gray, borderRadius: 2}]}>
                   <View
                     style={{
-                      "flex": 1,
-                      "flexDirection": "row",
-                      "alignItems": "flex-end",
-                      paddingLeft: 5,
-                      paddingBottom: 3
+                      flexDirection: "row",
+                      alignItems: "center",
+                      padding: 5
                     }}>
                     <Text>Label</Text>
-                    <RkChoice style={UtilStyles.spaceH} type='posNeg'/>
+                    <RkChoice style={UtilStyles.spaceH} rkType='posNeg'/>
                   </View>
                 </TouchableOpacity>
               </RkChoiceGroup>
@@ -93,20 +91,20 @@ export class ChoiceScreen extends Component {
           <View style={{marginVertical: 20}}>
             <RkChoiceGroup>
               <TouchableOpacity choiceTrigger>
-                <RkCard type="material">
+                <RkCard rkType="material">
                   <View rkCardHeader>
                     <View>
                       <Text rkCardTitle>Hello</Text>
                       <Text rkCardSubTitle>Click me!</Text>
                     </View>
-                    <RkChoice style={{alignSelf: 'flex-start'}} type='material'/>
+                    <RkChoice style={{alignSelf: 'flex-start'}} rkType='material'/>
                   </View>
                 </RkCard>
               </TouchableOpacity>
             </RkChoiceGroup>
           </View>
           <View style={{alignItems: 'flex-start'}}>
-            <RkChoiceGroup type='clear'>
+            <RkChoiceGroup rkType='clear'>
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
@@ -164,7 +162,7 @@ export class ChoiceScreen extends Component {
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Radio example</Text>
           <View style={{alignItems: 'flex-start'}}>
-            <RkChoiceGroup type='radio' radio>
+            <RkChoiceGroup rkType='radio' radio>
               <TouchableOpacity choiceTrigger
                                 style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
                 <View
@@ -298,25 +296,25 @@ export class ChoiceScreen extends Component {
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice type='material'/>
+                  <RkChoice rkType='material'/>
                 </View>
                 <Text style={styles.typeText}>material</Text>
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice type='radio'/>
+                  <RkChoice rkType='radio'/>
                 </View>
                 <Text style={styles.typeText}>radio</Text>
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice type='posNeg'/>
+                  <RkChoice rkType='posNeg'/>
                 </View>
                 <Text style={styles.typeText}>pos/neg</Text>
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice type='clear'/>
+                  <RkChoice rkType='clear'/>
                 </View>
                 <Text style={styles.typeText}>clear</Text>
               </View>
@@ -333,25 +331,25 @@ export class ChoiceScreen extends Component {
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice selected type='material'/>
+                  <RkChoice selected rkType='material'/>
                 </View>
                 <Text style={styles.typeText}>material</Text>
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice selected type='radio'/>
+                  <RkChoice selected rkType='radio'/>
                 </View>
                 <Text style={styles.typeText}>radio</Text>
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice selected type='posNeg'/>
+                  <RkChoice selected rkType='posNeg'/>
                 </View>
                 <Text style={styles.typeText}>pos/neg</Text>
               </View>
               <View>
                 <View style={{alignItems: 'center'}}>
-                  <RkChoice selected type='clear'/>
+                  <RkChoice selected rkType='clear'/>
                 </View>
                 <Text style={styles.typeText}>clear</Text>
               </View>
@@ -421,7 +419,7 @@ class SettingsScreen extends Component {
         style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}
         automaticallyAdjustContentInsets={true}>
         <View style={[UtilStyles.section, {paddingVertical: 0, paddingHorizontal: 0}]}>
-          <RkChoiceGroup selectedIndex={this.props.option.index} radio type='clear'
+          <RkChoiceGroup selectedIndex={this.props.option.index} radio rkType='clear'
                          onChange={(index)=>this._change(index)}>
             {this.state.options.map(renderOption)}
           </RkChoiceGroup>

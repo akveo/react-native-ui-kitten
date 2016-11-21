@@ -53,12 +53,12 @@ export class BoardUpScreen extends Component {
             <RkTextInput style={{height: 16}}
                          placeholder='Message...'
                          placeholderColor={RkConfig.colors.lightGray}
-                         type='bordered'
+                         rkType='bordered'
                          onChangeText={message => this.setState({message})}
                          value={this.state.message}
                          clearButtonMode='while-editing'
                          containerStyle={{marginHorizontal: 20, paddingVertical: 1}}/>
-            <RkButton type='clear' style={{paddingVertical: 5}} onPress={()=>this._sendMessage()}>Send</RkButton>
+            <RkButton rkType='clear' style={{paddingVertical: 5}} onPress={()=>this._sendMessage()}>Send</RkButton>
           </View>
         </RkBoardUpView>
       </View>

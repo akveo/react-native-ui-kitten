@@ -140,7 +140,6 @@ let styles = StyleSheet.create({
     fontSize: 28,
     color: 'white'
   },
-  friendHeader: {},
   titleStatText: {
     fontSize: 24,
     fontWeight: 'bold'

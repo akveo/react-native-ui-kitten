@@ -7,7 +7,6 @@ export const RkConfig =  class {
   static themes = Themes;
   static theme = Themes.iosLike;
   static styles = RkStyle;
-  static iconFamily = 'Ionicons';
   static setColor = (name, value) => RkConfig.colors[name] = value;
   static setStyle = (name, value) => RkConfig.styles[name] = value;
   static setType = (element, name, value) => {

@@ -109,7 +109,7 @@ export default class ChatScreenClassic extends Component {
       <RkTextInput
         placeholder='Message...'
         placeholderColor={RkConfig.colors.lightGray}
-        type='bordered'
+       rkType='bordered'
         onChangeText={message => this.setState({message})}
         value={this.state.message}
         clearButtonMode='while-editing'
@@ -119,7 +119,7 @@ export default class ChatScreenClassic extends Component {
 
   _renderMsgSubmit() {
     return (
-      <RkButton type='clear' style={{paddingVertical: 5}}
+      <RkButton rkType='clear' style={{paddingVertical: 5}}
                 onPress={()=>this._sendMessage()}>
         Send
       </RkButton>

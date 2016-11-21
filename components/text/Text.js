@@ -4,10 +4,11 @@ import {
   Text,
 } from 'react-native';
 
-import { RkConfig} from '../../config/config';
+import { RkConfig} from '../../util/config';
 
 export class RkText extends Component {
 
+  static name = 'text';
 
   constructor(props) {
     super(props);
@@ -27,7 +28,7 @@ export class RkText extends Component {
   }
 
   _defineStyles() {
-    let types = this.props.type || (RkConfig.theme.text ? RkConfig.theme.text.defaultType : '');
+    let types = this.props.rkType || (RkConfig.theme.text ? RkConfig.theme.text.defaultType : '');
     types = types && types.length ? types.split(" ") : [];
     let styles = [];
     for (let type of types) {

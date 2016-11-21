@@ -57,7 +57,7 @@ export class TabScreen extends Component {
             Material theme example
           </Text>
           <View style={[UtilStyles.rowContainer, {marginTop: 0}]}>
-            <RkTabView type='material' style={{backgroundColor: RkConfig.colors.cyan}}>
+            <RkTabView rkType='material' style={{backgroundColor: RkConfig.colors.cyan}}>
               {this._renderMaterialTab('1')}
               {this._renderMaterialTab('2')}
               {this._renderMaterialTab('3')}

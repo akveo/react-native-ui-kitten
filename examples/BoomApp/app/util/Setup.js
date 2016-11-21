@@ -45,12 +45,70 @@ RkConfig.setType('input', 'classic', {
     paddingBottom: 15
   }
 });
-RkConfig.setType('card', 'blur', {
+
+
+RkConfig.setType('card', 'classic', {
   container: {
-    margin: 0,
+    borderRadius: 15,
+    marginHorizontal: 10,
+    marginTop: 0,
     marginBottom: 15,
     borderWidth: 0,
-    borderRadius: 0,
+  },
+  content:{
+    padding: 0,
+    backgroundColor: RkConfig.colors.white
+  },
+  title: {
+    fontSize: 16,
+    color: RkConfig.colors.primary
+  },
+  subTitle: {
+    fontSize: 12,
+    color: RkConfig.colors.primary
+  },
+  avatarSmall:{
+    width: 48,
+    height: 48,
+    borderRadius: 24
+  },
+  header: {
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    backgroundColor: RkConfig.colors.white,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  footer: {
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    backgroundColor: RkConfig.colors.white,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  friendContainer:{
+    marginBottom: 0,
+    marginHorizontal: 0,
+    borderBottomColor: RkConfig.colors.lightGray,
+    borderBottomWidth: 1
+  },
+  friendTitle:{
+    marginHorizontal: 10,
+    fontSize: 14
+  },
+  friendHeader:{
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
+  friendIcon:{
+    fontSize: 28,
+    color: RkConfig.colors.primary
+  }
+});
+
+RkConfig.setType('card', 'blur', {
+  container: {
+    marginHorizontal: 0,
     shadowOpacity: 0,
     shadowRadius: 0,
     shadowOffset: {
@@ -59,63 +117,34 @@ RkConfig.setType('card', 'blur', {
     }
   },
   content:{
-    padding: 0,
     backgroundColor: RkConfig.colors.blurDark
   },
   title: {
     marginVertical: 3,
-    fontSize: 16,
     color: RkConfig.colors.blurTextStrong
   },
   subTitle: {
-    fontSize: 12,
     color: RkConfig.colors.blurText
-  },
-  avatarSmall:{
-    width: 48,
-    height: 48,
-    borderRadius: 24
   },
   header: {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     backgroundColor: RkConfig.colors.blurDark,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
   },
   footer: {
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     backgroundColor: RkConfig.colors.blurDark,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
   },
-});
-
-RkConfig.setType('card', 'classic', {
-  container: {
-    borderRadius: 15,
-    marginHorizontal: 10,
+  friendContainer:{
+    borderBottomColor: RkConfig.colors.blurExtraDark,
   },
-  content:{
-    backgroundColor: RkConfig.colors.white
+  friendTitle:{
+    fontSize: 16
   },
-  title: {
-    color: RkConfig.colors.primary
-  },
-  subTitle: {
-    color: RkConfig.colors.primary
-  },
-  header: {
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    backgroundColor: RkConfig.colors.white,
-  },
-  footer: {
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
-    backgroundColor: RkConfig.colors.white,
-  },
+  friendIcon:{
+    color: 'white'
+  }
 });
 
 RkConfig.setTheme('blur', {
@@ -123,7 +152,7 @@ RkConfig.setTheme('blur', {
     defaultType: 'white montserrat transparentBg'
   },
   card: {
-    defaultType: 'blur'
+    defaultType: 'classic blur',
   }
 });
 
@@ -132,7 +161,7 @@ RkConfig.setTheme('classic', {
     defaultType: 'montserrat transparentBg primary'
   },
   card: {
-    defaultType: 'blur classic'
+    defaultType: 'classic',
   }
 });
 

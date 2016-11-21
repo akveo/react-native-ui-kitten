@@ -9,11 +9,13 @@ import {
 
 import {
   RkConfig
-} from '../../config/config';
+} from '../../util/config';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export class RkChoice extends Component {
+
+  static name = 'choice';
 
   constructor(props) {
     super(props);
@@ -112,7 +114,7 @@ export class RkChoice extends Component {
   }
 
   _getTypes(){
-    let types = this.props.type || (RkConfig.theme.choice ? RkConfig.theme.choice.defaultType : '');
+    let types = this.props.rkType || (RkConfig.theme.choice ? RkConfig.theme.choice.defaultType : '');
     types = types && types.length ? types.split(" ") : [];
     return types;
   }

@@ -4,20 +4,18 @@ import * as ComponentStyles from './component-styles';
 export const Themes = {
 
   'iosLike': {
-    buttons: {
+    button: {
       defaultType: 'outline small',
     }
   },
 
   'material': {
-    buttons: {
-      defaultType: 'basic',
-      defaultSize: 'medium'
+    button: {
+      defaultType: 'basic'
     }
   },
 
   styles: {
-
     text: {},
     button: ComponentStyles.ButtonStyles,
     input: ComponentStyles.TextInputStyles,
@@ -25,7 +23,6 @@ export const Themes = {
     boardUp: {},
     card: ComponentStyles.CardStyles,
     tab: ComponentStyles.TabStyles
-
-  }
+  },
 
 };

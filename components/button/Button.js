@@ -7,25 +7,14 @@ import {
   View,
 } from 'react-native';
 
-import {
-  RkConfig
-} from '../../config/config';
+import {RkConfig}from '../../util/config';
+import {RkText} from '../text/Text'
 
 import _ from 'lodash';
 
 export class RkButton extends Component {
 
-  static propTypes = {
-    style: View.propTypes.style,
-    innerStyle: Text.propTypes.style,
-    type: React.PropTypes.string,
-    size: React.PropTypes.string,
-    onPress: React.PropTypes.func,
-    onLongPress: React.PropTypes.func,
-    onPressIn: React.PropTypes.func,
-    onPressOut: React.PropTypes.func,
-  };
-
+  static name = 'button';
 
   render() {
     let {boxStyle, innerStyle} = this._defineStyles();
@@ -36,9 +25,8 @@ export class RkButton extends Component {
       onLongPress: this.props.onLongPress
     };
     return (
-      <TouchableOpacity {...touchableProps}
-        style={[boxStyle, this.props.style]}>
-        <View style={styles.buttonContainer}>
+      <TouchableOpacity {...touchableProps}>
+        <View style={[boxStyle, this.props.style]}>
           {this.props.children && this._renderChildren(innerStyle)}
         </View>
       </TouchableOpacity>
@@ -46,7 +34,7 @@ export class RkButton extends Component {
   }
 
   _renderChildren(style) {
-    let displayText = (text) => (<Text style={[style, this.props.innerStyle]}>{text}</Text>);
+    let displayText = (text) => (<RkText style={[style, this.props.innerStyle]}>{text}</RkText>);
     if (typeof this.props.children === 'string') {
       return displayText(this.props.children)
     }
@@ -63,23 +51,17 @@ export class RkButton extends Component {
   }
 
   _defineStyles() {
-    let types = this.props.type || (RkConfig.theme.buttons? RkConfig.theme.buttons.defaultType : '');
+    let types = this.props.rkType || (RkConfig.theme.button ? RkConfig.theme.button : '');
     types = types && types.length ? types.split(" ") : [];
-    let boxStyle = [RkConfig.themes.styles.button._container];
-    let innerStyle = [RkConfig.themes.styles.button._inner];
+    let themeStyles = RkConfig.themes.styles.button;
+    let boxStyle = [themeStyles._container];
+    let innerStyle = [themeStyles._inner];
     for (let type of types) {
-      boxStyle.push(RkConfig.themes.styles.button[type].container);
-      innerStyle.push(RkConfig.themes.styles.button[type].inner);
+      boxStyle.push(themeStyles[type].container);
+      innerStyle.push(themeStyles[type].inner);
     }
     return {boxStyle, innerStyle}
   }
 
 }
 
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});

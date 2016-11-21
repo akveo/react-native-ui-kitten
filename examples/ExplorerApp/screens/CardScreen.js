@@ -50,7 +50,7 @@ export class CardScreen extends Component {
               </Text>
             </View>
 
-            <View rkCardFooter type='bordered'>
+            <View rkCardFooter rkType='bordered'>
               <Text>Footer</Text>
             </View>
           </RkCard>
@@ -64,9 +64,9 @@ export class CardScreen extends Component {
                   <Text rkCardSubTitle>25 minutes ago</Text>
                 </View>
               </View>
-              <RkButton type='clear'><Icon style={{fontSize: 35}} name='ios-more'/></RkButton>
+              <RkButton rkType='clear'><Icon style={{fontSize: 35}} name='ios-more'/></RkButton>
             </View>
-            <View rkCardContent type='bordered'>
+            <View rkCardContent rkType='bordered'>
               <Text rkCardText>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam risus sem, vulputate ac sagittis ac,
                 ultricies at velit. Sed in sem auctor, egestas odio eu, blandit quam. Cras et ante pulvinar, blandit
@@ -78,14 +78,14 @@ export class CardScreen extends Component {
 
           </RkCard>
 
-          <RkCard type='material'>
+          <RkCard rkType='material'>
 
             <View rkCardHeader style={{backgroundColor: RkConfig.colors.primary, paddingTop: 0, paddingRight: 0}}>
               <View style={{alignSelf: 'flex-end'}}>
                 <Text style={{color: 'white'}} rkCardTitle>Material Card</Text>
                 <Text style={{color: 'white'}} rkCardSubTitle>Sub header</Text>
               </View>
-              <RkButton type='clear' style={{alignSelf: 'flex-end', marginBottom: 50, paddingHorizontal: 8}}
+              <RkButton rkType='clear' style={{alignSelf: 'flex-end', marginBottom: 50, paddingHorizontal: 8}}
                         innerStyle={{color: 'white'}}><Icon name='md-close'/></RkButton>
             </View>
 
@@ -96,7 +96,7 @@ export class CardScreen extends Component {
               </Text>
             </View>
 
-            <View rkCardFooter type='bordered'>
+            <View rkCardFooter rkType='bordered'>
               <Text rkCardText>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Mauris feugiat vel quam ac scelerisque...
@@ -105,8 +105,8 @@ export class CardScreen extends Component {
 
           </RkCard>
 
-          <RkCard type='material'>
-            <View rkCardHeader type='noPadding bordered'>
+          <RkCard rkType='material'>
+            <View rkCardHeader rkType='noPadding bordered'>
               <Image resizeMode={'cover'} source={require('../img/rainyday.gif')} rkCardImg/>
             </View>
 
@@ -119,7 +119,7 @@ export class CardScreen extends Component {
                 marginVertical: -22.5,
                 zIndex: 111
               }}>
-              <RkButton type='circle shadow'
+              <RkButton rkType='circle shadow'
                         style={[UtilStyles.spaceH, RkStyle.darkWarningBg, {
                           paddingVertical: 5,
                           paddingHorizontal: 12.5
@@ -144,12 +144,12 @@ export class CardScreen extends Component {
             <View rkCardFooter style={{flexDirection: 'row'}}>
               <RkButton
                 style={{paddingHorizontal: 5, paddingVertical: 5}}
-                type={'clear'}>
+                rkType={'clear'}>
                 SHARE
               </RkButton>
               <RkButton
                 style={{paddingHorizontal: 5, paddingVertical: 5}}
-                type={'clear'}>
+                rkType={'clear'}>
                 EXPLORE
               </RkButton>
             </View>

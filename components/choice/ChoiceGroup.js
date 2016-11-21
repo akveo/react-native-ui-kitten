@@ -9,7 +9,7 @@ import {
 
 import {
   RkConfig
-} from '../../config/config';
+} from '../../util/config';
 
 import {
   RkChoice
@@ -18,6 +18,8 @@ import {
 import _ from 'lodash';
 
 export class RkChoiceGroup extends Component {
+
+  static name = 'choiceGroup';
 
   static Choice = RkChoice;
 
@@ -86,7 +88,7 @@ export class RkChoiceGroup extends Component {
           inTrigger: true,
           selected: this.state.values[index]
         };
-        if(this.props.type && !child.props.type) props.type = this.props.type;
+        if(this.props.rkType && !child.props.rkType) props.rkType = this.props.rkType;
         if(this.props.disabled !== undefined && child.props.disabled == undefined) props.disabled = this.props.disabled;
         return React.cloneElement(child, props);
       } else if (child.props && child.props.children) {
@@ -110,7 +112,7 @@ export class RkChoiceGroup extends Component {
           onPress: () => this._onSelect(choiceIndex),
           selected: this.state.values[choiceIndex]
         };
-        if(this.props.type && !child.props.type) props.type = this.props.type;
+        if(this.props.rkType && !child.props.rkType) props.rkType = this.props.rkType;
         if(this.props.disabled !== undefined && child.props.disabled == undefined) props.disabled = this.props.disabled;
         return React.cloneElement(child, props);
       }

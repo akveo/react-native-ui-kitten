@@ -1,11 +1,13 @@
 import {Colors} from '../color.js';
 
 export const ButtonStyles = {
-
     _container: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: 5,
         paddingVertical: 8,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
     },
     _inner: {
         fontSize: 18,

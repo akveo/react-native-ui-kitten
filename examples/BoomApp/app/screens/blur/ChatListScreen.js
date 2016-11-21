@@ -23,13 +23,13 @@ export default class ChatListScreenBlur extends ChatListScreen {
     return (
       <View style={{flex: 1}}>
         <View style={this._styles.header}>
-            <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+            <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle}>
               <Icon name={'ios-person-add-outline'} style={{fontSize: 28}}/>
             </RkButton>
             <Text style={this._styles.headerText}>
               CHATS
             </Text>
-            <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+            <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle}>
               <Icon name={'ios-mail'} style={{fontSize: 28}}/>
             </RkButton>
         </View>

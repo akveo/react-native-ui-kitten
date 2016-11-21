@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
@@ -23,36 +23,32 @@ export default class ProfileScreen extends ProfileScreenBase {
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        <ScrollView
-          style={{backgroundColor: 'white'}}
-          automaticallyAdjustContentInsets={true}>
-          <Image source={api.getUserInfo(api.userId).profileBg}
-                 style={{ width: null, height: 220, justifyContent: 'flex-end', alignItems: 'stretch', }}>
-            <View/>
-            <Image source={api.getUserInfo(api.userId).avatar}
-                   style={[RkStyle.card.avatarBigImg, {alignSelf: 'center'}]}/>
-            <RkText
-              style={{backgroundColor: RkConfig.colors.blurBg, paddingLeft: 20, paddingVertical: 5, fontSize: 32, color: 'white'}}>
-              {api.getUserInfo(api.userId).name.first} {api.getUserInfo(api.userId).name.last}
-            </RkText>
-          </Image>
-          <View
-            style={{flex: 1}}>
-            {this._renderTabs(styles)}
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView
+        style={RkStyle.whiteBg}
+        automaticallyAdjustContentInsets={true}>
+        <Image source={api.getUserInfo(api.userId).profileBg}
+               style={styles.profileBackground}>
+          <View/>
+          <Image source={api.getUserInfo(api.userId).avatar}
+                 style={styles.avatar}/>
+          <RkText style={styles.nameText}>
+            {api.getUserInfo(api.userId).name.first} {api.getUserInfo(api.userId).name.last}
+          </RkText>
+        </Image>
+        <View style={RkStyle.flex1}>
+          {this._renderTabs(styles)}
+        </View>
+      </ScrollView>
     );
   }
 
 }
 
 let styles = StyleSheet.create({
-  tabView:{
+  tabView: {
     backgroundColor: 'white',
   },
-  tabContent:{
+  tabContent: {
     paddingVertical: 15,
     backgroundColor: RkConfig.colors.lightGray
   },
@@ -63,11 +59,30 @@ let styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderBottomColor: 'transparent'
   },
+  profileBackground:{
+    width: null,
+    height: 220,
+    justifyContent: 'flex-end',
+    alignItems: 'stretch'
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    alignSelf: 'center'
+  },
+  nameText:{
+    backgroundColor: RkConfig.colors.blurBg,
+    paddingLeft: 20,
+    paddingVertical: 5,
+    fontSize: 32,
+    color: 'white'
+  },
   statContainerSelected: {
     borderBottomColor: RkConfig.colors.primary
   },
   titleStatText: {
-    fontSize: 16
+    fontSize: 20
   },
   statText: {
     textAlign: 'center',
@@ -84,20 +99,10 @@ let styles = StyleSheet.create({
     alignSelf: 'center',
     color: RkConfig.colors.primary,
   },
-  postIconsStyle:{
+  postIconsStyle: {
     color: RkConfig.colors.primary
   },
-  friendCard: {
-    marginBottom: 0,
-    marginHorizontal: 0,
-    borderBottomColor: RkConfig.colors.lightGray,
-    borderBottomWidth: 1
-  },
-  friendHeader:{
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  },
-  friendIcon:{
+  friendIcon: {
     fontSize: 28,
     color: RkConfig.colors.primary
   },

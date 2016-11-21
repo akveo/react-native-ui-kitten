@@ -6,10 +6,12 @@ import {
   StyleSheet
 } from 'react-native';
 
-import { RkConfig} from '../../config/config';
+import { RkConfig} from '../../util/config';
 
 
 export class RkBarBg extends Component {
+
+  static name = 'barBg';
 
   constructor(props){
     super(props);

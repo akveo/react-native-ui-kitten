@@ -8,12 +8,13 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import {RkConfig} from '../../config/config';
+import {RkConfig} from '../../util/config';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export class RkTextInput extends Component {
 
+  static name = 'textInput';
 
   constructor(props) {
     super(props);
@@ -53,7 +54,7 @@ export class RkTextInput extends Component {
   }
 
   _defineStyles() {
-    let types = this.props.type || (RkConfig.theme.input ? RkConfig.theme.input.defaultType : '');
+    let types = this.props.rkType || (RkConfig.theme.input ? RkConfig.theme.input.defaultType : '');
     types = types && types.length ? types.split(" ") : [];
     let boxStyle = [RkConfig.themes.styles.input._container];
     let inputStyle = [RkConfig.themes.styles.input._input];

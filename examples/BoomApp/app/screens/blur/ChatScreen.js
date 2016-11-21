@@ -28,7 +28,7 @@ export default class ChatScreenBlur extends Component {
 
   _renderMsgSubmit() {
     return (
-      <RkButton type='clear' innerStyle={{color: RkConfig.colors.blurTextStrong}}
+      <RkButton rkType='clear' innerStyle={{color: RkConfig.colors.blurTextStrong}}
                 style={{paddingVertical: 5}}
                 onPress={()=>this._sendMessage()}>
         Send
@@ -41,7 +41,7 @@ export default class ChatScreenBlur extends Component {
       <RkTextInput
         placeholder='Message...'
         placeholderTextColor={RkConfig.colors.blurText}
-        type='bordered'
+        rkType='bordered'
         style={{color: RkConfig.colors.blurTextStrong}}
         onChangeText={message => this.setState({message})}
         value={this.state.message}

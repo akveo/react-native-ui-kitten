@@ -4,10 +4,11 @@ import {
   View,
 } from 'react-native';
 
-import { RkConfig} from '../../config/config';
+import { RkConfig} from '../../util/config';
 
 export class RkTab extends Component {
 
+  static name = 'tab';
 
   constructor(props) {
     super(props);

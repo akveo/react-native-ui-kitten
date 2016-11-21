@@ -50,7 +50,7 @@ export default class NewsScreenMaterial extends Component {
 
   _renderRow(post) {
     return (
-      <RkCard type='material'>
+      <RkCard rkType='material'>
         <View rkCardHeader style={{flexDirection: 'row'}}>
           <Image source={post.userAvatar} style={RkStyle.card.avatarSmallImg}/>
           <View style={RkStyle.card.titleContainer}>
@@ -58,7 +58,7 @@ export default class NewsScreenMaterial extends Component {
             <Text style={RkStyle.card.subTitle}>posted photo</Text>
           </View>
           <View style={RkStyle.card.headerControls}>
-            <RkButton type='clear' style={{paddingVertical: 0}}>
+            <RkButton rkType='clear' style={{paddingVertical: 0}}>
               <Icon name={'ios-more'}
                     style={{ fontSize: 36, color: RkConfig.colors.gray, alignSelf: 'flex-start', padding: 0}}/>
             </RkButton>
@@ -74,12 +74,12 @@ export default class NewsScreenMaterial extends Component {
         </View>
         <View rkCardFooter>
           <View style={RkStyle.card.leftControls}>
-            <RkButton type='clear' onPress={()=> this._setLike(post)} style={{paddingHorizontal: 5, paddingVertical: 5}}
+            <RkButton rkType='clear' onPress={()=> this._setLike(post)} style={{paddingHorizontal: 5, paddingVertical: 5}}
                       innerStyle={{fontSize: 26}}>
               <Icon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
             </RkButton>
             <Text style={[RkStyle.primaryText, {fontSize: 16, marginTop: -3}]}>{post.likes.toString()}</Text>
-            <RkButton type='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
+            <RkButton rkType='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
                       innerStyle={{fontSize: 26}}>
               <Icon name={'ios-chatboxes-outline'}/>
             </RkButton>
@@ -100,14 +100,14 @@ export default class NewsScreenMaterial extends Component {
         paddingHorizontal: 20
       }}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-          <RkButton type='clear' style={{paddingHorizontal: 5, paddingVertical: 5}}
+          <RkButton rkType='clear' style={{paddingHorizontal: 5, paddingVertical: 5}}
                     innerStyle={{fontSize: 26, color: 'white'}}>
             <Icon name={this.post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
           </RkButton>
           <Text style={[RkStyle.whiteText, {fontSize: 16, marginTop: -3}]}>{this.post.likes.toString()}</Text>
         </View>
         <View style={{flex: 1}}>
-          <RkButton type='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
+          <RkButton rkType='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
                     innerStyle={{fontSize: 26, color: 'white'}}>
             <Icon name={'ios-chatboxes-outline'}/>
           </RkButton>
@@ -121,7 +121,7 @@ export default class NewsScreenMaterial extends Component {
     return (
       <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
         <View style={{flex: 1}}>
-          <RkButton innerStyle={{color: 'white'}} style={{width: 60}} type={'clear'}
+          <RkButton innerStyle={{color: 'white'}} style={{width: 60}}rkType={'clear'}
                     onPress={closeImage}>Close</RkButton>
         </View>
         <View style={{flex: 1}}>

@@ -34,7 +34,7 @@ export default class LoginScreenBlur extends LoginScreenBase {
                 <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                   <View style={styles.widthLimit}>
                     <RkTextInput
-                      type='rounded'
+                     rkType='rounded'
                       containerStyle={styles.inputContainer}
                       label={<Icon name='ios-person-outline'/>}
                       labelStyle={styles.inputIcon}
@@ -42,7 +42,7 @@ export default class LoginScreenBlur extends LoginScreenBase {
                       placeholder={'Login'}
                       placeholderTextColor={RkConfig.colors.lightGray}/>
                     <RkTextInput
-                      type='rounded'
+                     rkType='rounded'
                       containerStyle={styles.inputContainer}
                       label={<Icon name='ios-lock-outline'/>}
                       labelStyle={[styles.inputIcon, styles.inputIconLock]}
@@ -57,7 +57,7 @@ export default class LoginScreenBlur extends LoginScreenBase {
                 <View style={styles.widthLimit}>
                   <RkButton innerStyle={styles.buttonInner}
                             style={styles.buttonContainer}
-                            type='circle shadow'
+                           rkType='circle shadow'
                             onPress={() => super._renderMainScreen()}>
                     <RkText>Log In</RkText>
                   </RkButton>

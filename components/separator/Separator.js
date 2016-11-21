@@ -4,10 +4,11 @@ import {
   View,
 } from 'react-native';
 
-import { RkConfig} from '../../config/config';
+import { RkConfig} from '../../util/config';
 
 export class RkSeparator extends Component {
 
+  static name = 'separator';
 
   constructor(props) {
     super(props);

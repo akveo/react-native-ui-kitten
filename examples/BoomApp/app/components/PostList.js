@@ -45,7 +45,7 @@ export default class Toolbar extends Component {
     return (
       <RkCard>
         <View rkCardHeader>
-          <View rkRow>
+          <View rkCardRowCenter>
             <Image source={post.userAvatar} rkCardAvatarSmall/>
             <View>
               <RkText rkCardTitle>{post.userName}</RkText>
@@ -63,16 +63,16 @@ export default class Toolbar extends Component {
           {this._renderPostText(post.text)}
         </View>
         <View rkCardFooter>
-          <View rkRow style={{alignItems: 'center'}}>
-            <RkButton type='clear postControl' innerStyle={this.props.iconStyle} onPress={()=> this._setLike(post)}>
+          <View rkCardRowCenter>
+            <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle} onPress={()=> this._setLike(post)}>
               <Icon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
             </RkButton>
             <RkText style={[{fontSize: 16, marginTop: -3, marginRight: 10}]}>{post.likes.toString()}</RkText>
-            <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+            <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle}>
               <Icon name={'ios-chatboxes'}/>
             </RkButton>
           </View>
-          <RkButton type='clear postControl' innerStyle={this.props.iconStyle}>
+          <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle}>
             <Icon name={'md-cloud-download'}/>
           </RkButton>
         </View>
@@ -105,14 +105,14 @@ export default class Toolbar extends Component {
         paddingHorizontal: 20
       }}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-          <RkButton type='clear' style={{paddingHorizontal: 5, paddingVertical: 5}}
+          <RkButton rkType='clear' style={{paddingHorizontal: 5, paddingVertical: 5}}
                     innerStyle={{fontSize: 26, color: 'white'}}>
             <Icon name={this.post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
           </RkButton>
           <Text style={[RkStyle.whiteText, {fontSize: 16, marginTop: -3}]}>{this.post.likes.toString()}</Text>
         </View>
         <View style={{flex: 1}}>
-          <RkButton type='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
+          <RkButton rkType='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
                     innerStyle={{fontSize: 26, color: 'white'}}>
             <Icon name={'ios-chatboxes-outline'}/>
           </RkButton>
@@ -125,7 +125,7 @@ export default class Toolbar extends Component {
   _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
     return (
       <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
-        <RkButton innerStyle={{color: 'white'}} type={'clear'}
+        <RkButton innerStyle={{color: 'white'}} rkType={'clear'}
                   onPress={closeImage}>Close</RkButton>
         <Text style={{textAlign: 'center', color: 'white'}}>{this.post.userName}</Text>
         <RkButton innerStyle={{color: 'transparent'}}>Close</RkButton>
