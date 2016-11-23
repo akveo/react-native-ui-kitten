@@ -69,7 +69,7 @@ let themes = [
   blurTheme
 ];
 
-let currentThemeIndex = 0;
+let currentThemeIndex = 1;
 themes[currentThemeIndex].setup();
 
 export default ScreenService = {

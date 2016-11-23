@@ -51,7 +51,7 @@ export class RkButton extends Component {
   }
 
   _defineStyles() {
-    let types = this.props.rkType || (RkConfig.theme.button ? RkConfig.theme.button : '');
+    let types = this.props.rkType || (RkConfig.theme.button ? RkConfig.theme.button.defaultType : '');
     types = types && types.length ? types.split(" ") : [];
     let themeStyles = RkConfig.themes.styles.button;
     let boxStyle = [themeStyles._container];

@@ -4,7 +4,6 @@ export const TextInputStyles = {
     _input: {
         fontSize: 16,
         height: 16 * 1.42,
-        flex: 1,
         alignSelf: 'center'
     },
     _container: {

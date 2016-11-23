@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -6,21 +6,22 @@ import {
   StatusBar,
   ScrollView,
   Text,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import {RkButton, RkStyle, RkTextInput, RkSeparator, RkConfig, RkCard} from 'react-native-ui-kit';
+import {RkButton, RkStyle, RkTextInput, RkText, RkConfig, RkCard} from 'react-native-ui-kit';
 import ScreenService from '../../util/ScreenService';
+import LoginScreenBase from "../base/LoginScreenBase";
 
 //TODO refactor
-export default class LoginScreenMaterial extends Component {
+export default class LoginScreenMaterial extends LoginScreenBase {
 
   constructor(props) {
     super(props)
     let {width} = Dimensions.get('window');
     this._width = width;
-    this.state={
+    this.state = {
       login: ''
     }
   }
@@ -38,68 +39,45 @@ export default class LoginScreenMaterial extends Component {
         bounces={false}
         horizontal
         scrollEnabled={false}>
-        <View style={{flex:1, width: this._width, justifyContent: 'center'}}>
-          <RkCard rkType='material' style={{marginHorizontal: 20, borderColor: 'transparent'}}>
-            <View rkCardHeader style={{backgroundColor: RkConfig.colors.primary, paddingHorizontal: 20}}>
-              <Text style={{color: 'white', fontSize: 20, marginTop: 100}}>Sign in into your account</Text>
+        <View style={{width: this._width, justifyContent: 'center'}}>
+          <RkCard style={styles.container}>
+            <View rkCardHeader style={styles.header}>
+              <RkText/>
+              <RkText style={styles.label}>Sign in into your account</RkText>
             </View>
-            <View rkCardContent style={{paddingHorizontal: 20, paddingTop: 15}}>
-              <RkTextInput
-               rkType='underline topLabel'
-                label='Enter your email'
-                value={this.state.login}
-                onChangeText={(text)=>this.setState({login: text})}
-                labelStyle={{paddingBottom: 25}}
-                containerStyle={{borderBottomColor: this.state.error ? RkConfig.colors.danger : RkConfig.colors.primary, borderBottomWidth: 1.5}}
-                style={[{fontSize: 20}]}
-                placeholderTextColor={RkConfig.colors.lightGray}/>
+            <View rkCardContent style={styles.content}>
+              {this._renderInput('Enter your email')}
             </View>
-            <View rkCardFooter style={{alignItems: 'flex-end', paddingHorizontal: 20}}>
+            <View rkCardFooter style={styles.footer}>
               <RkButton
-                onPress={()=> {this.state.login ? this.refs.scrollView.scrollTo({x: this._width}) : this.setState({error: true})}}
-                style={[RkStyle.primaryBg, {marginTop: 20}]}
-                innerStyle={RkStyle.whiteText}
-               rkType='material'>
+                onPress={()=> {this.refs.scrollView.scrollTo({x: this._width})}}
+                style={{marginTop: 20}}>
                 NEXT
               </RkButton>
-              <Text style={{marginTop: 100, color: RkConfig.colors.gray, alignSelf: 'center'}}>or create new
-                account</Text>
+              <RkText style={styles.signUpText}>or create new account</RkText>
             </View>
           </RkCard>
         </View>
-        <View style={{flex:1, width: this._width, justifyContent: 'center'}}>
-          <RkCard rkType='material' style={{marginHorizontal: 20, borderColor: 'transparent'}}>
-            <View rkCardHeader style={{backgroundColor: RkConfig.colors.primary}}>
+        <View style={{width: this._width, justifyContent: 'center'}}>
+          <RkCard style={styles.container}>
+            <View rkCardHeader style={styles.header}>
               <RkButton
-               rkType='clear'
+                rkType='clear'
                 onPress={()=>this.refs.scrollView.scrollTo({x: 0})}
-                style={{alignSelf: 'flex-start', paddingHorizontal: 8}}
-                innerStyle={{color: 'white'}}>
+                style={{alignSelf: 'flex-start'}}
+                innerStyle={{color: 'white', fontSize: 26}}>
                 <Icon name='md-arrow-back'/>
               </RkButton>
-              <Text style={{color: 'white', fontSize: 20, marginTop: 64, paddingHorizontal: 10}}>
-                Welcome {this.state.login}
-              </Text>
+              <RkText style={styles.label}>Welcome {this.state.login}</RkText>
             </View>
-            <View rkCardContent style={{paddingHorizontal: 20, paddingTop: 15}}>
-              <RkTextInput
-               rkType='underline topLabel'
-                label='Enter your password'
-                secureTextEntry={true}
-                labelStyle={{paddingBottom: 25}}
-                containerStyle={{borderBottomColor: RkConfig.colors.primary, borderBottomWidth: 1.5}}
-                style={[{fontSize: 20}]}
-                placeholderTextColor={RkConfig.colors.lightGray}/>
+            <View rkCardContent style={styles.content}>
+              {this._renderInput('Enter your password', true)}
             </View>
-            <View rkCardFooter style={{alignItems: 'flex-end', paddingHorizontal: 20}}>
-              <RkButton style={[RkStyle.primaryBg, {marginTop: 20}]}
-                        innerStyle={RkStyle.whiteText}
-                        onPress={()=>super._renderMainScreen()}
-                        rkType='material'>
+            <View rkCardFooter style={styles.footer}>
+              <RkButton onPress={()=>super._renderMainScreen()}>
                 NEXT
               </RkButton>
-              <Text style={{marginTop: 100, color: RkConfig.colors.gray, alignSelf: 'center'}}>or create new
-                account</Text>
+              <RkText style={styles.signUpText}>or create new account</RkText>
             </View>
           </RkCard>
         </View>
@@ -107,6 +85,55 @@ export default class LoginScreenMaterial extends Component {
     );
   }
 
+  _renderInput(label, secure){
+   return(
+     <RkTextInput
+       rkType='underline topLabel'
+       label={label}
+       secureTextEntry={secure}
+       labelStyle={{paddingBottom: 25}}
+       containerStyle={styles.inputContainer}
+       style={[{fontSize: 20}]}
+       placeholderTextColor={RkConfig.colors.lightGray}/>
+   )
+  }
+
 }
 
-let styles = StyleSheet.create({});
+let styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 20,
+    borderColor: 'transparent'
+  },
+  header: {
+    alignItems: 'flex-start',
+    backgroundColor: RkConfig.colors.cyan,
+    paddingRight: 15,
+    paddingTop: 5,
+    paddingLeft: 0,
+  },
+  content: {
+    flex: 1,
+    minHeight: 90,
+    paddingHorizontal: 20,
+    paddingTop: 15
+  },
+  footer: {
+    alignItems: 'flex-end',
+    paddingHorizontal: 20
+  },
+  label: {
+    alignSelf: 'flex-end',
+    color: 'white',
+    fontSize: 20,
+    marginTop: 100
+  },
+  signUpText: {
+    marginTop: 100,
+    color: RkConfig.colors.gray
+  },
+  inputContainer:{
+    borderBottomColor: RkConfig.colors.cyan,
+    borderBottomWidth: 1.5
+  }
+});

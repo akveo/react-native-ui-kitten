@@ -184,6 +184,19 @@ RkConfig.setType('card', 'blur', {
   },
 });
 
+RkConfig.setType('card', 'materialCard', {
+
+});
+
+RkConfig.setType('button', 'materialButton', {
+  container: {
+    backgroundColor: RkConfig.colors.cyan
+  },
+  inner: {
+    color: RkConfig.colors.warning
+  }
+});
+
 RkConfig.setTheme('blur', {
   text: {
     defaultType: 'white montserrat transparentBg blurText'
@@ -199,6 +212,18 @@ RkConfig.setTheme('classic', {
   },
   card: {
     defaultType: 'classic',
+  }
+});
+
+RkConfig.setTheme('material', {
+  text: {
+    defaultType: 'transparentBg primary'
+  },
+  card: {
+    defaultType: 'material materialCard',
+  },
+  button:{
+    defaultType: 'material materialButton'
   }
 });
 
