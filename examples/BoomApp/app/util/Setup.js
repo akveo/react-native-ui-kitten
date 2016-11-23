@@ -9,7 +9,7 @@ RkConfig.setColor('blurBgStrong', 'rgba(0,0,0,0.3)');
 RkConfig.setColor('blurPrimary', '#00e5bf');
 RkConfig.setColor('blurDark', '#15213b');
 RkConfig.setColor('blurExtraDark', '#0b162a');
-RkConfig.setType('text', 'white', {
+RkConfig.setType('text', 'blurText', {
   color: RkConfig.colors.blurTextStrong
 });
 RkConfig.setType('text', 'primary', {
@@ -21,14 +21,13 @@ RkConfig.setType('text', 'montserrat', {
 RkConfig.setType('text', 'transparentBg', {
   backgroundColor: 'transparent'
 });
-RkConfig.setType('button', 'postControl', {
+RkConfig.setType('button', 'iconButton', {
   container: {
     paddingHorizontal: 5,
     paddingVertical: 5,
   },
   inner: {
-    fontSize: 26,
-    color: RkConfig.colors.blurTextStrong
+    fontSize: 26
   },
 });
 
@@ -100,14 +99,28 @@ RkConfig.setType('card', 'classic', {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
-  friendIcon:{
-    fontSize: 28,
+  chatItem:{
+    marginHorizontal: 0,
+    marginBottom: 0,
+    alignItems: 'flex-start'
+  },
+  chatSubtitle:{
+    color: RkConfig.colors.gray
+  },
+  icon:{
+    fontSize: 27,
     color: RkConfig.colors.primary
+  },
+  headerBorder:{
+    marginBottom: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: RkConfig.colors.lightGray
   }
 });
 
 RkConfig.setType('card', 'blur', {
   container: {
+    borderRadius: 0,
     marginHorizontal: 0,
     shadowOpacity: 0,
     shadowRadius: 0,
@@ -120,7 +133,7 @@ RkConfig.setType('card', 'blur', {
     backgroundColor: RkConfig.colors.blurDark
   },
   title: {
-    marginVertical: 3,
+    marginBottom: 3,
     color: RkConfig.colors.blurTextStrong
   },
   subTitle: {
@@ -142,14 +155,39 @@ RkConfig.setType('card', 'blur', {
   friendTitle:{
     fontSize: 16
   },
-  friendIcon:{
+  chatItem:{
+    marginTop: 10,
+    marginRight: 10,
+    backgroundColor: RkConfig.colors.blurBg,
+    borderWidth: 0.1,
+    paddingLeft: 5,
+    borderColor: RkConfig.colors.blurBgStrong,
+    borderLeftWidth: 5,
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+  },
+  chatAvatar:{
+    borderRadius: 28,
+    marginLeft: 0,
+    height: 56,
+    width: 56,
+  },
+  chatSubtitle:{
+    color: RkConfig.colors.blurText
+  },
+  icon:{
     color: 'white'
-  }
+  },
+  headerBorder:{
+    backgroundColor: RkConfig.colors.blurBgStrong,
+    borderBottomWidth: 1,
+    borderBottomColor: RkConfig.colors.blurExtraDark
+  },
 });
 
 RkConfig.setTheme('blur', {
   text: {
-    defaultType: 'white montserrat transparentBg'
+    defaultType: 'white montserrat transparentBg blurText'
   },
   card: {
     defaultType: 'classic blur',

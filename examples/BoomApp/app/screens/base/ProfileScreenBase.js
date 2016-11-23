@@ -36,12 +36,7 @@ export default class ProfileScreenBase extends Component {
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Followers', value: '124'}, styles)}>
           <View style={styles.tabContent}>
-            <FriendList
-              friends={this._friends}
-              cardStyle={styles.friendCard}
-              headerStyle={styles.friendHeader}
-              iconStyle={styles.friendIcon}
-            />
+            <FriendList friends={this._friends}/>
           </View>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Photo', value: '48'}, styles)}>

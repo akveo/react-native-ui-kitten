@@ -10,6 +10,7 @@ export const CardStyles = {
   _header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     borderTopLeftRadius: 1,
     borderTopRightRadius: 1,
     padding: 8,

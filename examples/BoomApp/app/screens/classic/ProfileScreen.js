@@ -101,9 +101,5 @@ let styles = StyleSheet.create({
   },
   postIconsStyle: {
     color: RkConfig.colors.primary
-  },
-  friendIcon: {
-    fontSize: 28,
-    color: RkConfig.colors.primary
-  },
+  }
 });

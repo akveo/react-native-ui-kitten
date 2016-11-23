@@ -64,16 +64,16 @@ export default class Toolbar extends Component {
         </View>
         <View rkCardFooter>
           <View rkCardRowCenter>
-            <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle} onPress={()=> this._setLike(post)}>
-              <Icon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
+            <RkButton rkType='clear iconButton' onPress={()=> this._setLike(post)}>
+              <Icon  rkCardIcon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
             </RkButton>
             <RkText style={[{fontSize: 16, marginTop: -3, marginRight: 10}]}>{post.likes.toString()}</RkText>
-            <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle}>
-              <Icon name={'ios-chatboxes'}/>
+            <RkButton rkType='clear iconButton'>
+              <Icon  rkCardIcon name={'ios-chatboxes'}/>
             </RkButton>
           </View>
-          <RkButton rkType='clear postControl' innerStyle={this.props.iconStyle}>
-            <Icon name={'md-cloud-download'}/>
+          <RkButton rkType='clear iconButton'>
+            <Icon  rkCardIcon name={'md-cloud-download'}/>
           </RkButton>
         </View>
       </RkCard>

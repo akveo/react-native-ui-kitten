@@ -136,10 +136,6 @@ let styles = StyleSheet.create({
     borderBottomColor: RkConfig.colors.blurExtraDark,
     borderBottomWidth: 1
   },
-  friendIcon: {
-    fontSize: 28,
-    color: 'white'
-  },
   titleStatText: {
     fontSize: 24,
     fontWeight: 'bold'

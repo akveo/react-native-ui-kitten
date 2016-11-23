@@ -15,12 +15,8 @@ export class RkCard extends Component {
   static attrName = 'rkCard';
 
   render() {
-    let {
-      style,
-      ...props
-    } = this.props;
     return this._process(
-      <View rkCardContainer style={style} {...props}>
+      <View rkCardContainer {...this.props}>
         {this.props.children}
       </View>
     );
@@ -38,7 +34,7 @@ export class RkCard extends Component {
         styles.push(this._defineElemStyle(convertAttrToStyle(prop), elem))
       }
     }
-    styles = elem.props ? [elem.props.style].concat(styles): [];
+    if(elem.props) styles.push(elem.props.style);
     return this._copyElement(elem, {style: styles});
   };
 
