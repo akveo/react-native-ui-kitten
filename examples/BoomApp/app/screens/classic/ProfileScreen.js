@@ -24,7 +24,7 @@ export default class ProfileScreen extends ProfileScreenBase {
   render() {
     return (
       <ScrollView
-        style={RkStyle.whiteBg}
+        style={RkStyle.lightGrayBg}
         automaticallyAdjustContentInsets={true}>
         <Image source={api.getUserInfo(api.userId).profileBg}
                style={styles.profileBackground}>
@@ -35,9 +35,7 @@ export default class ProfileScreen extends ProfileScreenBase {
             {api.getUserInfo(api.userId).name.first} {api.getUserInfo(api.userId).name.last}
           </RkText>
         </Image>
-        <View style={RkStyle.flex1}>
-          {this._renderTabs(styles)}
-        </View>
+        {this._renderTabs(styles)}
       </ScrollView>
     );
   }
@@ -46,11 +44,16 @@ export default class ProfileScreen extends ProfileScreenBase {
 
 let styles = StyleSheet.create({
   tabView: {
-    backgroundColor: 'white',
+    backgroundColor: RkConfig.colors.white,
   },
   tabContent: {
     paddingVertical: 15,
     backgroundColor: RkConfig.colors.lightGray
+  },
+  imageTab: {
+    backgroundColor: RkConfig.colors.white,
+    marginTop: 15,
+    paddingVertical: 0,
   },
   statContainer: {
     alignItems: 'center',
@@ -59,7 +62,7 @@ let styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderBottomColor: 'transparent'
   },
-  profileBackground:{
+  profileBackground: {
     width: null,
     height: 220,
     justifyContent: 'flex-end',
@@ -71,7 +74,7 @@ let styles = StyleSheet.create({
     borderRadius: 60,
     alignSelf: 'center'
   },
-  nameText:{
+  nameText: {
     backgroundColor: RkConfig.colors.blurBg,
     paddingLeft: 20,
     paddingVertical: 5,

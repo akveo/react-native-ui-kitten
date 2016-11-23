@@ -40,7 +40,7 @@ export default class ProfileScreenBase extends Component {
           </View>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => this._renderTab(selected, {name: 'Photo', value: '48'}, styles)}>
-          <View style={[styles.tabContent]}>
+          <View style={[styles.tabContent, styles.imageTab]}>
             <ImageList posts={api.getUserPosts(api.userId)}/>
           </View>
         </RkTabView.Tab>

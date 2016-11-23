@@ -92,8 +92,7 @@ RkConfig.setType('card', 'classic', {
     borderBottomWidth: 1
   },
   friendTitle:{
-    marginHorizontal: 10,
-    fontSize: 14
+    fontSize: 16
   },
   friendHeader:{
     borderTopLeftRadius: 0,
