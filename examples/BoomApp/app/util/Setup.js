@@ -196,7 +196,7 @@ RkConfig.setTheme('blur', {
 
 RkConfig.setTheme('classic', {
   text: {
-    defaultType: 'montserrat transparentBg primary'
+    defaultType: 'transparentBg primary'
   },
   card: {
     defaultType: 'classic',
