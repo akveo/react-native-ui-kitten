@@ -214,6 +214,9 @@ RkConfig.setType('card', 'materialCard', {
   friendContainer:{
     shadowOpacity: 0
   },
+  chatItem:{
+    shadowOpacity: 0
+  }
 });
 
 RkConfig.setType('button', 'materialButton', {

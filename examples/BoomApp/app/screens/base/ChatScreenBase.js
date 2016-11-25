@@ -79,13 +79,15 @@ export default class ChatScreenBase extends Component {
   _renderMessage(message) {
     let styles = this.getStyle();
     let containerStyle = [styles.messageContainer];
+    let messageStyle = [styles.messageText];
     if (message.my) {
       containerStyle.push(styles.myMessageContainer)
+      messageStyle.push(styles.myMessageText)
     }
     return (
       <View style={containerStyle}>
         <View>
-          <RkText style={styles.messageText}>{message.text}</RkText>
+          <RkText style={messageStyle}>{message.text}</RkText>
         </View>
       </View>
     );

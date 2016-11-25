@@ -31,21 +31,33 @@ export default class ChatListScreenBase extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, marginTop: 20}}>
-        <RkCard rkCardHeader rkCardHeaderBorder style={styles.titleContainer}>
-          <RkButton rkType='clear iconButton'>
-            <Icon rkCardIcon name={'ios-person-add-outline'}/>
-          </RkButton>
-          <RkText style={styles.chatLabel}>
-            CHATS
-          </RkText>
-          <RkButton rkType='clear iconButton'>
-            <Icon rkCardIcon name={'ios-mail'}/>
-          </RkButton>
-        </RkCard>
+      this._render()
+    )
+  }
+
+  _render(styles) {
+    return (
+      <View style={[{flex: 1, marginTop: 20}, styles]}>
+        {this._renderHeader()}
         {this._renderChatList()}
       </View>
     );
+  }
+
+  _renderHeader() {
+    return (
+      <RkCard rkCardHeader rkCardHeaderBorder style={styles.titleContainer}>
+        <RkButton rkType='clear iconButton'>
+          <Icon rkCardIcon name={'ios-person-add-outline'}/>
+        </RkButton>
+        <RkText style={styles.chatLabel}>
+          CHATS
+        </RkText>
+        <RkButton rkType='clear iconButton'>
+          <Icon rkCardIcon name={'ios-mail'}/>
+        </RkButton>
+      </RkCard>
+    )
   }
 
   _renderChatList() {
@@ -65,17 +77,17 @@ export default class ChatListScreenBase extends Component {
       <TouchableOpacity onPress={()=> {
         this._openChat(user)
       }}>
-        <RkCard rkCardHeader rkCardChatItem >
-            <View rkCardRow>
-              <Image rkCardAvatarSmall rkCardChatAvatar source={user.avatar}/>
-              <View>
-                <RkText rkCardTitle>{user.name.first} {user.name.last}</RkText>
-                <RkText rkCardChatSubtitle>{msg.text}</RkText>
-              </View>
-            </View>
+        <RkCard rkCardHeader rkCardChatItem>
+          <View rkCardRow>
+            <Image rkCardAvatarSmall rkCardChatAvatar source={user.avatar}/>
             <View>
-              <RkText rkCardChatSubtitle>{msg.time}</RkText>
+              <RkText rkCardTitle>{user.name.first} {user.name.last}</RkText>
+              <RkText rkCardChatSubtitle>{msg.text}</RkText>
             </View>
+          </View>
+          <View>
+            <RkText rkCardChatSubtitle>{msg.time}</RkText>
+          </View>
         </RkCard>
       </TouchableOpacity>
     );

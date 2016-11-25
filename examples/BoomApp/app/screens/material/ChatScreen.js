@@ -1,46 +1,67 @@
 import React, { Component } from 'react';
 import {
-  View
+  View,
+  StyleSheet
 } from 'react-native';
 
-import _ from "lodash";
 import {RkConfig, RkButton,RkStyle, RkTextInput} from 'react-native-ui-kit';
-import ChatScreenClassic from '../classic/ChatScreen';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
+import ChatScreenBase from "../base/ChatScreenBase";
 
-export default class ChatScreenMaterial extends Component {
+export default class ChatScreenMaterial extends ChatScreenBase {
 
-  constructor(props) {
-    super(props);
-    this._styles = _.merge(this._styles, styles);
-  }
-
-  render() {
-    return (
-      this._render()
-    );
+  getStyle(){
+    return styles;
   }
 
   _renderMsgSubmit() {
     return (
-      <RkButton rkType='clear' style={{paddingVertical: 5}} onPress={()=>this._sendMessage()}>
-        <Icon name="md-send" style={{fontSize: 22}}/>
+      <RkButton style={{paddingVertical: 5}}
+                onPress={()=>this._sendMessage()}>
+        SEND
       </RkButton>
     );
   }
 
 }
 
-let styles = {
-  boardUp:{
-    backgroundColor: 'white'
+const styles = StyleSheet.create({
+  toolbar: {
+    alignItems: 'center',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    backgroundColor: RkConfig.colors.cyan,
+  },
+  boardUp: {
+    backgroundColor: RkConfig.colors.materialGray
   },
   footer: {
-    borderTopWidth: 1,
-    borderTopColor: RkConfig.colors.lightGray
+    height: this._inputFooterHeight,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 5
   },
   messageContainer: {
-    backgroundColor: RkConfig.colors.lightGray,
-    borderRadius: 3,
+    backgroundColor: RkConfig.colors.white,
+    alignSelf: 'flex-start',
+    marginRight: 50,
+    padding: 10,
+    borderRadius: 1,
+    marginVertical: 5
   },
-};
+  myMessageContainer: {
+    backgroundColor: RkConfig.colors.cyan,
+    alignSelf: 'flex-end',
+    marginLeft: 50,
+    marginRight: 0
+  },
+  messageText: {
+    fontSize: 16,
+    color: RkConfig.colors.cyan
+  },
+  myMessageText:{
+    color: RkConfig.colors.white
+  }
+});
+

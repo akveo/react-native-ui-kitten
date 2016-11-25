@@ -5,35 +5,21 @@ import {
 
 import {RkConfig} from 'react-native-ui-kit';
 
-import ChatListScreenClassic from '../classic/ChatListScreen';
 import _ from "lodash";
+import ChatListScreenBase from "../base/ChatListScreenBase";
 
 
-export default class ChatListScreenMaterial extends ChatListScreenClassic {
+export default class ChatListScreenMaterial extends ChatListScreenBase {
 
-  constructor(props) {
-    super(props);
-    this._styles = _.merge(this._styles, styles);
-  }
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        {super._renderChatList()}
-      </View>
-    );
+      this._render({
+        marginTop: 0
+      })
+    )
   }
-}
 
-let styles = {
-  itemContainer: {
-    padding: 15
-  },
-  title: {
-    color: RkConfig.colors.darkGray,
-    fontWeight: 'bold'
-  },
-  chatSeparator: {
-    marginLeft: 0,
-  }
-};
+  _renderHeader(){}
+
+}
