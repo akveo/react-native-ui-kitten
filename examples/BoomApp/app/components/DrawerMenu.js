@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import Icon from '../../node_modules/react-native-vector-icons/Ionicons'; //TODO normal import string?
-import {RkConfig, RkButton, RkSeparator} from 'react-native-ui-kit';
+import {RkConfig, RkText, RkSeparator} from 'react-native-ui-kit';
 
 export default class DrawerMenu extends Component {
 
@@ -22,15 +22,15 @@ export default class DrawerMenu extends Component {
     return (
       <View>
         <TouchableOpacity onPress={() => this.props.changeScreen('Profile')}>
-          <Image source={user.profileBg} style={styles.profileBg}>
+          <Image source={require('../../img/bg/materialBg.jpg')} style={styles.profileBg}>
             <View style={styles.profileContent}>
               <Image source={user.avatar} style={styles.userPhoto}/>
-              <Text style={styles.profileTitle}>
+              <RkText style={styles.profileTitle}>
                 {user.name.first} {user.name.last}
-              </Text>
-              <Text style={[styles.profileTitle, styles.profileEmail]}>
+              </RkText>
+              <RkText style={[styles.profileTitle, styles.profileEmail]}>
                 {user.email}
-              </Text>
+              </RkText>
             </View>
           </Image>
         </TouchableOpacity>
@@ -39,13 +39,13 @@ export default class DrawerMenu extends Component {
         <TouchableOpacity onPress={() => this.props.changeScreen('News')}>
           <View style={styles.menuItem}>
             <Icon style={styles.menuItemIcon} name="md-paper"/>
-            <Text style={styles.menuItemText}>News</Text>
+            <RkText style={styles.menuItemText}>News</RkText>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.changeScreen('Chats')}>
           <View style={styles.menuItem}>
             <Icon style={styles.menuItemIcon} name="md-chatboxes"/>
-            <Text style={styles.menuItemText}>Chats</Text>
+            <RkText style={styles.menuItemText}>Chats</RkText>
           </View>
           <View style={styles.subMenu}>
             {
@@ -54,7 +54,7 @@ export default class DrawerMenu extends Component {
                   <TouchableOpacity key={chatUser.id} onPress={() => this.props.openChat(chatUser)}>
                     <View style={styles.menuItem}>
                       <Image source={chatUser.avatar} style={styles.userPhotoSmall}/>
-                      <Text style={styles.menuItemText}>{chatUser.name.first} {chatUser.name.last}</Text>
+                      <RkText style={styles.menuItemText}>{chatUser.name.first} {chatUser.name.last}</RkText>
                     </View>
                   </TouchableOpacity>
                 )
@@ -68,7 +68,7 @@ export default class DrawerMenu extends Component {
         <TouchableOpacity onPress={() => this.props.changeScreen('Settings')}>
           <View style={styles.menuItem}>
             <Icon style={styles.menuItemIcon} name="md-settings"/>
-            <Text style={styles.menuItemText}>Settings</Text>
+            <RkText style={styles.menuItemText}>Settings</RkText>
           </View>
         </TouchableOpacity>
       </View>
@@ -78,13 +78,13 @@ export default class DrawerMenu extends Component {
 }
 
 var styles = StyleSheet.create({
-  profileContent:{
+  profileContent: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
     justifyContent: 'flex-end',
     paddingLeft: 16
   },
-  profileBg:{
+  profileBg: {
     width: null,
     height: 200
   },

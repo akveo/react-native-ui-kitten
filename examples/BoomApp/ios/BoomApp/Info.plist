@@ -41,9 +41,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Regular.ttf</string>
-		<string>FontAwesome.ttf</string>
 		<string>Ionicons.ttf</string>
-		<string>MaterialIcons.ttf</string>
+		<string>roboto.woff2</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

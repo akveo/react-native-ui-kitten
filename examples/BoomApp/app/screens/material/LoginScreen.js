@@ -31,7 +31,7 @@ export default class LoginScreenMaterial extends LoginScreenBase {
       <ScrollView
         ref='scrollView'
         contentContainerStyle={{flex: 1}}
-        style={{backgroundColor: RkConfig.colors.gray}}
+        style={{backgroundColor: RkConfig.colors.materialGray}}
         pagingEnabled={true}
         automaticallyAdjustContentInsets={false}
         showsHorizontalScrollIndicator={false}

@@ -43,6 +43,7 @@ export default class MainScreenMaterial extends MainScreenBase {
         content={<DrawerMenu
           user={api.getUserInfo(api.userId)}
           recentChats={[api.getUserInfo('2'), api.getUserInfo('3'), api.getUserInfo('4')]}
+          currentScreen={this.state.selectedTab}
           changeScreen={(name) => this._changeScreen(name)}
           openChat={(user) => this._openChat(user)}
         />}
@@ -77,7 +78,7 @@ export default class MainScreenMaterial extends MainScreenBase {
   _openChat(user) {
     this.refs.drawer.close();
     this.props.navigator.push({
-      screen: ScreenService.getChatScreen(true),
+      screen: ScreenService.getChatScreen(),
       passProps: {
         userId: user.id
       }

@@ -9,6 +9,8 @@ RkConfig.setColor('blurBgStrong', 'rgba(0,0,0,0.3)');
 RkConfig.setColor('blurPrimary', '#00e5bf');
 RkConfig.setColor('blurDark', '#15213b');
 RkConfig.setColor('blurExtraDark', '#0b162a');
+RkConfig.setColor('materialGray', '#ECECEC');
+
 RkConfig.setType('text', 'blurText', {
   color: RkConfig.colors.blurTextStrong
 });
@@ -17,6 +19,9 @@ RkConfig.setType('text', 'primary', {
 });
 RkConfig.setType('text', 'montserrat', {
   fontFamily: 'Montserrat-Regular'
+});
+RkConfig.setType('text', 'roboto', {
+  fontFamily: 'roboto'
 });
 RkConfig.setType('text', 'transparentBg', {
   backgroundColor: 'transparent'
@@ -185,7 +190,12 @@ RkConfig.setType('card', 'blur', {
 });
 
 RkConfig.setType('card', 'materialCard', {
-
+  container:{
+    borderWidth: 0
+  },
+  header:{
+    borderWidth: 0
+  }
 });
 
 RkConfig.setType('button', 'materialButton', {
@@ -217,7 +227,7 @@ RkConfig.setTheme('classic', {
 
 RkConfig.setTheme('material', {
   text: {
-    defaultType: 'transparentBg primary'
+    defaultType: 'transparentBg primary roboto'
   },
   card: {
     defaultType: 'material materialCard',
