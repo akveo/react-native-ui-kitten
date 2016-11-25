@@ -12,7 +12,7 @@ import {
   RkText
 } from 'react-native-ui-kit';
 import api from '../../util/ApiMock';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import ProfileScreenBase from "../base/ProfileScreenBase";
 
 export default class ProfileScreenBlur extends ProfileScreenBase {

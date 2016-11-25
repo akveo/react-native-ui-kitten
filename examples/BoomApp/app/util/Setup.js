@@ -211,8 +211,9 @@ RkConfig.setType('card', 'materialCard', {
   header:{
     borderWidth: 0,
   },
-  footer:{
-  }
+  friendContainer:{
+    shadowOpacity: 0
+  },
 });
 
 RkConfig.setType('button', 'materialButton', {

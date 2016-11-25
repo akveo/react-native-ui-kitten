@@ -44,7 +44,7 @@ export default class FriendList extends Component {
                 <RkText rkCardFriendTitle>{user.name.first} {user.name.last}</RkText>
               </View>
             </View>
-            <RkButton><Icon rkCardIcon name='ios-person-add-outline'/></RkButton>
+            <RkButton rkType="clear"><Icon rkCardIcon name='ios-person-add-outline'/></RkButton>
           </View>
         </RkCard>
       </TouchableOpacity>

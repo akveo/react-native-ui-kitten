@@ -10,6 +10,7 @@ import SettingsScreenClassic from '../screens/classic/SettingsScreen'
 
 import LoginScreenMaterial from '../screens/material/LoginScreen'
 import MainScreenMaterial from '../screens/material/MainScreen'
+import ProfileScreenMaterial from '../screens/material/ProfileScreen'
 import ChatListScreenMaterial from '../screens/material/ChatListScreen'
 import ChatScreenMaterial from '../screens/material/ChatScreen'
 import NewsScreenMaterial from '../screens/material/NewsScreen'
@@ -38,7 +39,7 @@ let classicTheme = {
 
 let materialTheme = {
   mainScreen: MainScreenMaterial,
-  profileScreen: ProfileScreenClassic,
+  profileScreen: ProfileScreenMaterial,
   chatListScreen: ChatListScreenMaterial,
   chatScreen: ChatScreenMaterial,
   loginScreen: LoginScreenMaterial,
