@@ -17,6 +17,9 @@ RkConfig.setType('text', 'blurText', {
 RkConfig.setType('text', 'primary', {
   color: RkConfig.colors.primary
 });
+RkConfig.setType('text', 'cyan', {
+  color: RkConfig.colors.cyan
+});
 RkConfig.setType('text', 'montserrat', {
   fontFamily: 'Montserrat-Regular'
 });
@@ -190,11 +193,25 @@ RkConfig.setType('card', 'blur', {
 });
 
 RkConfig.setType('card', 'materialCard', {
+  content: {
+    paddingHorizontal: 0,
+  },
   container:{
     borderWidth: 0
   },
+  title:{
+    color: RkConfig.colors.cyan
+  },
+  subTitle:{
+    color: RkConfig.colors.cyan
+  },
+  icon: {
+    color: RkConfig.colors.cyan,
+  },
   header:{
-    borderWidth: 0
+    borderWidth: 0,
+  },
+  footer:{
   }
 });
 
@@ -209,7 +226,7 @@ RkConfig.setType('button', 'materialButton', {
 
 RkConfig.setTheme('blur', {
   text: {
-    defaultType: 'white montserrat transparentBg blurText'
+    defaultType: 'montserrat transparentBg blurText'
   },
   card: {
     defaultType: 'classic blur',
@@ -227,10 +244,10 @@ RkConfig.setTheme('classic', {
 
 RkConfig.setTheme('material', {
   text: {
-    defaultType: 'transparentBg primary roboto'
+    defaultType: 'transparentBg warning roboto cyan'
   },
   card: {
-    defaultType: 'material materialCard',
+    defaultType: 'classic material materialCard',
   },
   button:{
     defaultType: 'material materialButton'

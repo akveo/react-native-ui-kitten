@@ -20,9 +20,9 @@ export default class Toolbar extends Component {
     return (
       <View style={[styles.barContainer, this.props.style]}>
         <RkButton  rkType="clear" onPress={() => this.props.onLeftClick()}>
-          <Icon name={this.props.leftIcon} style={{color: 'white', fontSize: 32}}/>
+          <Icon name={this.props.leftIcon} style={[{color: 'white', fontSize: 32}, this.props.textStyle]}/>
         </RkButton>
-        <Text style={styles.barTitle}>{this.props.title}</Text>
+        <Text style={[styles.barTitle, this.props.textStyle]}>{this.props.title}</Text>
       </View>
     )
   }

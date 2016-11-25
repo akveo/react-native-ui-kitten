@@ -31,13 +31,12 @@ export default class Toolbar extends Component {
 
   render() {
     return (
-      <View style={[{flex: 1}, this.props.style]}>
-        <ListView
-          automaticallyAdjustContentInsets={true}
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => this._renderRow(rowData)}
-        />
-      </View>
+      <ListView
+        style={this.props.style}
+        automaticallyAdjustContentInsets={true}
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => this._renderRow(rowData)}
+      />
     );
   }
 
@@ -65,15 +64,15 @@ export default class Toolbar extends Component {
         <View rkCardFooter>
           <View rkCardRowCenter>
             <RkButton rkType='clear iconButton' onPress={()=> this._setLike(post)}>
-              <Icon  rkCardIcon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
+              <Icon rkCardIcon name={post.liked ? 'ios-heart' : 'ios-heart-outline'}/>
             </RkButton>
             <RkText style={[{fontSize: 16, marginTop: -3, marginRight: 10}]}>{post.likes.toString()}</RkText>
             <RkButton rkType='clear iconButton'>
-              <Icon  rkCardIcon name={'ios-chatboxes'}/>
+              <Icon rkCardIcon name={'ios-chatboxes'}/>
             </RkButton>
           </View>
           <RkButton rkType='clear iconButton'>
-            <Icon  rkCardIcon name={'md-cloud-download'}/>
+            <Icon rkCardIcon name={'md-cloud-download'}/>
           </RkButton>
         </View>
       </RkCard>

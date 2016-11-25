@@ -47,7 +47,7 @@ export default class MainScreenMaterial extends MainScreenBase {
           changeScreen={(name) => this._changeScreen(name)}
           openChat={(user) => this._openChat(user)}
         />}
-       rkType="overlay"
+        type="overlay"
         tapToClose={true}
         openDrawerOffset={0.2}
         panCloseMask={0.2}
@@ -60,6 +60,7 @@ export default class MainScreenMaterial extends MainScreenBase {
       >
         <StatusBar barStyle="light-content"/>
         <Toolbar
+          style={{backgroundColor: RkConfig.colors.cyan}}
           title={this.state.selectedTab}
           leftIcon="md-menu"
           onLeftClick={()=>(this.refs.drawer.open())}/>
