@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  Image,
-  StatusBar,
-  ScrollView,
-  ListView,
-  TouchableOpacity
+  ListView
 } from 'react-native';
 
-import {RkSeparator, RkButton, RkCard, RkText, RkConfig} from 'react-native-ui-kit';
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons';
 
 import ScreenService from '../../util/ScreenService';
 import api from '../../util/ApiMock';
@@ -30,73 +23,30 @@ export default class ChatListScreenBase extends Component {
   }
 
   render() {
+     let Header = ScreenService.getChatListHeaderComponent();
     return (
-      this._render()
-    )
-  }
-
-  _render(styles) {
-    return (
-      <View style={[{flex: 1, marginTop: 20}, styles]}>
-        {this._renderHeader()}
-        {this._renderChatList()}
+      <View style={styles.container}>
+        <Header/>
+        <ListView
+          style={styles.list}
+          automaticallyAdjustContentInsets={false}
+          dataSource={this.state.dataSource}
+          renderRow={(row) => this._renderMsgItem(row)}
+        />
       </View>
-    );
-  }
-
-  _renderHeader() {
-    return (
-      <RkCard rkCardHeader rkCardHeaderBorder style={styles.titleContainer}>
-        <RkButton rkType='clear iconButton'>
-          <Icon rkCardIcon name={'ios-person-add-outline'}/>
-        </RkButton>
-        <RkText style={styles.chatLabel}>
-          CHATS
-        </RkText>
-        <RkButton rkType='clear iconButton'>
-          <Icon rkCardIcon name={'ios-mail'}/>
-        </RkButton>
-      </RkCard>
-    )
-  }
-
-  _renderChatList() {
-    return (
-      <ListView
-        automaticallyAdjustContentInsets={false}
-        renderSeparator={(sID, rID)=> this._renderSeparator(sID, rID)}
-        dataSource={this.state.dataSource}
-        renderRow={(row) => this._renderMsgItem(row)}
-      />
     )
   }
 
   _renderMsgItem(msg) {
     let user = api.getUserInfo(msg.from);
+    let ChatItem = ScreenService.getChatItemComponent();
     return (
-      <TouchableOpacity onPress={()=> {
-        this._openChat(user)
-      }}>
-        <RkCard rkCardHeader rkCardChatItem>
-          <View rkCardRow>
-            <Image rkCardAvatarSmall rkCardChatAvatar source={user.avatar}/>
-            <View>
-              <RkText rkCardTitle>{user.name.first} {user.name.last}</RkText>
-              <RkText rkCardChatSubtitle>{msg.text}</RkText>
-            </View>
-          </View>
-          <View>
-            <RkText rkCardChatSubtitle>{msg.time}</RkText>
-          </View>
-        </RkCard>
-      </TouchableOpacity>
+      <ChatItem
+        user={user}
+        message={msg}
+        onClick={(user) => this._openChat(user)}
+      />
     );
-  }
-
-  _renderSeparator(sID, rID) {
-    return (
-      <RkSeparator key={`${sID}-${rID}`}/>
-    )
   }
 
   _openChat(user) {
@@ -110,14 +60,10 @@ export default class ChatListScreenBase extends Component {
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    margin: 0,
-    marginHorizontal: 0,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 0
+  container:{
+    flex: 1,
   },
-  chatLabel: {
-    fontSize: 18
-  }
+  list: {
+    paddingTop: 10
+  },
 });

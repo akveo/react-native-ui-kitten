@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 
-import Icon from '../../node_modules/react-native-vector-icons/Ionicons'; //TODO normal import string?
+import Icon from 'react-native-vector-icons/Ionicons';
 import {RkConfig, RkButton} from 'react-native-ui-kit';
 
 export default class Toolbar extends Component {

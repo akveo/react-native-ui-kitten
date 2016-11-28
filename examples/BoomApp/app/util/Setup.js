@@ -26,6 +26,11 @@ RkConfig.setType('text', 'montserrat', {
 RkConfig.setType('text', 'roboto', {
   fontFamily: 'roboto'
 });
+RkConfig.setType('text', 'likes', {
+  fontSize: 16,
+  marginTop: -3,
+  marginRight: 10
+});
 RkConfig.setType('text', 'transparentBg', {
   backgroundColor: 'transparent'
 });
@@ -72,7 +77,7 @@ RkConfig.setType('card', 'classic', {
   },
   subTitle: {
     fontSize: 12,
-    color: RkConfig.colors.primary
+    color: RkConfig.colors.gray
   },
   avatarSmall:{
     width: 48,

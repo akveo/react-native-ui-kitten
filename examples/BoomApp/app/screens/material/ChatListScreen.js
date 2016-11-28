@@ -12,14 +12,5 @@ import ChatListScreenBase from "../base/ChatListScreenBase";
 export default class ChatListScreenMaterial extends ChatListScreenBase {
 
 
-  render() {
-    return (
-      this._render({
-        marginTop: 0
-      })
-    )
-  }
-
-  _renderHeader(){}
 
 }
