@@ -6,7 +6,7 @@ import {
 import {RkConfig, RkButton} from 'react-native-ui-kit';
 import Toolbar from '../common/Toolbar';
 
-export default class ToolbarBlur extends Component {
+export default class ToolbarMaterial extends Component {
 
   static height = 64;
 
@@ -26,7 +26,7 @@ export default class ToolbarBlur extends Component {
 
 var styles = StyleSheet.create({
   bar: {
-    backgroundColor: RkConfig.colors.blurBg,
+    backgroundColor: RkConfig.colors.cyan,
   },
 
 });

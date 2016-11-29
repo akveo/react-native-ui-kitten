@@ -10,8 +10,8 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkConfig, RkButton, RkStyle, RkModalImg, RkCard, RkText} from 'react-native-ui-kit';
-import api from '../util/ApiMock';
-import ScreenService from "../util/ScreenService";
+import api from '../../util/ApiMock';
+import ScreenService from "../../util/ScreenService";
 
 export default class Toolbar extends Component {
 

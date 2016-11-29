@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   View
 } from 'react-native';
-import PostList from '../../components/PostList';
+import PostList from '../../components/common/PostList';
 import api from '../../util/ApiMock';
 import {RkConfig} from 'react-native-ui-kit';
 import ScreenService from "../../util/ScreenService";

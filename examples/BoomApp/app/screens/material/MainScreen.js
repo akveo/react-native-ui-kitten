@@ -13,7 +13,7 @@ import Icon from '../../../node_modules/react-native-vector-icons/Ionicons'; //T
 import ScreenService from '../../util/ScreenService';
 import {RkConfig, RkBarBg, RkTabView, RkButton, RkSeparator, RkStyle} from 'react-native-ui-kit';
 import api from '../../util/ApiMock';
-import Toolbar from '../../components/Toolbar';
+import Toolbar from '../../components/common/Toolbar';
 import DrawerMenu from '../../components/DrawerMenu';
 import MainScreenBase from '../base/MainScreenBase';
 

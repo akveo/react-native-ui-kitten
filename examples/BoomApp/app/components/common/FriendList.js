@@ -3,7 +3,7 @@ import {
   ListView,
 } from 'react-native';
 
-import FollowerItem from "./common/FollowerItem";
+import FollowerItem from "./FollowerItem";
 import {RkSeparator}  from 'react-native-ui-kit';
 
 export default class FriendList extends Component {

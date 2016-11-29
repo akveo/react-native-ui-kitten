@@ -6,9 +6,9 @@ import {
 
 import {RkStyle, RkTabView} from 'react-native-ui-kit';
 import api from '../../util/ApiMock';
-import FriendList from '../../components/FriendList';
-import PostList from '../../components/PostList';
-import ImageList from '../../components/ImageList';
+import FriendList from '../../components/common/FriendList';
+import PostList from '../../components/common/PostList';
+import ImageList from '../../components/common/ImageList';
 import ScreenService from "../../util/ScreenService";
 
 

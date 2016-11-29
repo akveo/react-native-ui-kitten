@@ -9,7 +9,6 @@ import {RkConfig, RkTextInput, RkButton} from 'react-native-ui-kit';
 export default class ChatFooter extends Component {
 
   render() {
-    console.log(this.props.message);
     return (
       <View style={styles.footer}>
         <RkTextInput

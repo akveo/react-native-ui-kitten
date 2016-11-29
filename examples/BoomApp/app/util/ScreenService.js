@@ -11,15 +11,19 @@ import AppWrapperBlur from '../components/blur/AppWrapper';
 import PostClassic from '../components/classic/Post';
 import ChatItemClassic from '../components/classic/ChatItem';
 import ChatItemBlur from '../components/blur/ChatItem';
+import ChatItemMaterial from '../components/material/ChatItem';
 import ChatListHeaderClassic from '../components/classic/ChatListHeader';
 import ChatListHeaderBlur from '../components/blur/ChatListHeader';
+import ChatListHeaderMaterial from '../components/material/ChatListHeader';
 import ChatFooterClassic from '../components/classic/ChatFooter';
 import ChatFooterBlur from '../components/blur/ChatFooter';
+import ChatFooterMaterial from '../components/material/ChatFooter';
 import MessageClassic from '../components/classic/Message';
 import MessageBlur from '../components/blur/Message';
 import MessageMaterial from '../components/material/Message';
-import Toolbar from '../components/Toolbar';
+import Toolbar from '../components/common/Toolbar';
 import ToolbarBlur from '../components/blur/Toolbar';
+import ToolbarMaterial from '../components/material/Toolbar';
 import ProfileTabClassic from '../components/classic/ProfileTab';
 import ProfileTabBlur from '../components/blur/ProfileTab';
 import ProfileTabMaterial from '../components/material/ProfileTab';
@@ -71,11 +75,11 @@ let materialTheme = {
   settingsScreens: SettingsScreenClassic,
   appWrapperComponent: AppWrapperClassic,
   postComponent: PostClassic,
-  chatItemComponent: ChatItemClassic,
-  chatListHeaderComponent: ChatListHeaderClassic,
+  chatItemComponent: ChatItemMaterial,
+  chatListHeaderComponent: ChatListHeaderMaterial,
   messageComponent: MessageMaterial,
-  chatFooterComponent: ChatFooterClassic,
-  toolbarComponent: Toolbar,
+  chatFooterComponent: ChatFooterMaterial,
+  toolbarComponent: ToolbarMaterial,
   profileTabComponent: ProfileTabMaterial,
   profileComponent: ProfileClassic,
   newsHeadComponent: NewsHeadClassic,
@@ -114,7 +118,7 @@ let themes = [
   blurTheme
 ];
 
-let currentThemeIndex = 2;
+let currentThemeIndex = 1;
 themes[currentThemeIndex].setup();
 
 export default ScreenService = {
