@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 
 
-import ScreenService from '../../util/ScreenService';
-import api from '../../util/ApiMock';
+import ScreenService from '../util/ScreenService';
+import api from '../util/ApiMock';
 
 export default class ChatListScreenBase extends Component {
 

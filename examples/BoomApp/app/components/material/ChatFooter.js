@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
   },
   icon:{
     fontSize: 24,
-    color: RkConfig.colors.cyan
+    color: RkConfig.colors.materialBg
   }
 });

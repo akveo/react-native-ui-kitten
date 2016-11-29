@@ -2,14 +2,11 @@ import React, {Component} from 'react';
 import {
   View
 } from 'react-native';
-import PostList from '../../components/common/PostList';
-import api from '../../util/ApiMock';
-import {RkConfig} from 'react-native-ui-kit';
-import ScreenService from "../../util/ScreenService";
-
+import PostList from '../components/common/PostList';
+import api from '../util/ApiMock';
+import ScreenService from "../util/ScreenService";
 
 export default class NewsScreenBase extends Component {
-
 
   constructor(props) {
     super(props);
@@ -21,7 +18,7 @@ export default class NewsScreenBase extends Component {
       <View>
         <NewsHead user={api.getUserInfo(api.userId)}/>
         <PostList
-          style={{backgroundColor: NewsHead.newsBackgroundColor}}
+          style={NewsHead.newsContainerStyle}
           posts={api.getUserFeed(api.userId)}/>
       </View>
     )

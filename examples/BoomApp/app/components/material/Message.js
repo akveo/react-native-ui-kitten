@@ -24,14 +24,14 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   myMessageContainer: {
-    backgroundColor: RkConfig.colors.cyan,
+    backgroundColor: RkConfig.colors.materialBg,
     alignSelf: 'flex-end',
     marginLeft: 50,
     marginRight: 0
   },
   messageText: {
     fontSize: 16,
-    color: RkConfig.colors.cyan
+    color: RkConfig.colors.materialBg
   },
   myMessageText:{
     color: RkConfig.colors.white

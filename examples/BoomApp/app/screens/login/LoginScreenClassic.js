@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import {RkButton, RkTextInput, RkConfig, RkText} from 'react-native-ui-kit';
-import LoginScreenBase from "../base/LoginScreenBase";
+import LoginScreenBase from "../LoginScreenBase";
 
 
 export default class LoginScreenClassic extends LoginScreenBase {

@@ -11,6 +11,8 @@ RkConfig.setColor('blurPrimary', '#00e5bf');
 RkConfig.setColor('blurDark', '#15213b');
 RkConfig.setColor('blurExtraDark', '#0b162a');
 RkConfig.setColor('materialGray', '#ECECEC');
+RkConfig.setColor('materialWarning', '#FFC107');
+RkConfig.setColor('materialBg', '#009688');
 
 RkConfig.setType('text', 'blurText', {
   color: RkConfig.colors.blurTextStrong
@@ -19,7 +21,7 @@ RkConfig.setType('text', 'primary', {
   color: RkConfig.colors.primary
 });
 RkConfig.setType('text', 'cyan', {
-  color: RkConfig.colors.cyan
+  color: RkConfig.colors.materialBg
 });
 RkConfig.setType('text', 'montserrat', {
   fontFamily: 'Montserrat-Regular'
@@ -148,31 +150,41 @@ RkConfig.setType('card', 'blur', {
 
 RkConfig.setType('card', 'materialCard', {
   content: {
-    paddingHorizontal: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   container:{
+    borderRadius: 5,
     borderWidth: 0
   },
   title:{
-    color: RkConfig.colors.cyan
+    color: RkConfig.colors.materialBg
   },
   subTitle:{
-    color: RkConfig.colors.cyan
+    color: RkConfig.colors.materialBg
   },
   icon: {
-    color: RkConfig.colors.cyan,
+    color: RkConfig.colors.materialBg,
   },
   header:{
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
     borderWidth: 0,
+  },
+  footer:{
+    borderTopColor: RkConfig.colors.materialGray,
+    borderTopWidth: 0.5,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
   }
 });
 
 RkConfig.setType('button', 'materialButton', {
   container: {
-    backgroundColor: RkConfig.colors.cyan
+    backgroundColor: RkConfig.colors.materialBg
   },
   inner: {
-    color: RkConfig.colors.warning
+    color: RkConfig.colors.materialWarning
   }
 });
 

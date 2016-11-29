@@ -12,7 +12,7 @@ export default class PostImage extends Component {
   render() {
     return (
       <RkModalImg source={this.props.post.img}
-                  style={styles.imageStyle}
+                  style={[styles.imageStyle, this.props.style]}
                   modalContainerStyle={styles.modalContainer}
                   renderHeader={(closeImage) => this._renderHeader(closeImage, this.props.post)}
                   renderFooter={() => this._renderFooter(this.props.post)}
@@ -35,7 +35,7 @@ export default class PostImage extends Component {
           </RkButton>
         </View>
         <View style={RkStyle.flex1}>
-          <RkButton type="clear"/>
+          <RkButton rkType="clear" style={RkStyle.transparentBg} innerStyle={RkStyle.transparentText}>Close</RkButton>
         </View>
       </View>
     );
@@ -46,7 +46,7 @@ export default class PostImage extends Component {
       <View style={styles.headerContainer}>
         <RkButton innerStyle={RkStyle.whiteText} rkType={'clear'} onPress={closeImage}>Close</RkButton>
         <RkText style={styles.text}>{post.userName}</RkText>
-        <RkButton rkType="clear" innerStyle={RkStyle.transparentBg}>Close</RkButton>
+        <RkButton rkType="clear" style={RkStyle.transparentBg} innerStyle={RkStyle.transparentText}>Close</RkButton>
       </View>
     );
   }
@@ -89,5 +89,5 @@ var styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16
-  }
+  },
 });

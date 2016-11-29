@@ -12,8 +12,8 @@ import {
 
 import _ from "lodash";
 import {RkConfig, RkButton, RkText, RkTextInput, RkBoardUpView, RkBarBg} from 'react-native-ui-kit';
-import api from '../../util/ApiMock';
-import ScreenService from "../../util/ScreenService";
+import api from '../util/ApiMock';
+import ScreenService from "../util/ScreenService";
 
 export default class ChatScreenBase extends Component {
 

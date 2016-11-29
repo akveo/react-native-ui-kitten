@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     borderTopRightRadius: 0,
     borderTopLeftRadius: 0,
+    shadowOpacity: 0,
   },
 });
 

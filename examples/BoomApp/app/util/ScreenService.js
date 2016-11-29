@@ -1,14 +1,15 @@
 import React from 'react';
 
-import ChatListScreenBase from '../screens/base/ChatListScreenBase';
-import ChatScreenBase from '../screens/base/ChatScreenBase';
-import ProfileScreenBase from '../screens/base/ProfileScreenBase';
-import MainScreenBase from '../screens/base/MainScreenBase';
-import NewsScreenBase from '../screens/base/NewsScreenBase';
+import ChatListScreenBase from '../screens/ChatListScreenBase';
+import ChatScreenBase from '../screens/ChatScreenBase';
+import ProfileScreenBase from '../screens/ProfileScreenBase';
+import MainScreenBase from '../screens/MainScreenBase';
+import NewsScreenBase from '../screens/NewsScreenBase';
 
 import AppWrapperClassic from '../components/classic/AppWrapper';
 import AppWrapperBlur from '../components/blur/AppWrapper';
-import PostClassic from '../components/classic/Post';
+import PostBase from '../components/common/Post';
+import PostMaterial from '../components/material/Post';
 import ChatItemClassic from '../components/classic/ChatItem';
 import ChatItemBlur from '../components/blur/ChatItem';
 import ChatItemMaterial from '../components/material/ChatItem';
@@ -29,16 +30,18 @@ import ProfileTabBlur from '../components/blur/ProfileTab';
 import ProfileTabMaterial from '../components/material/ProfileTab';
 import ProfileClassic from '../components/classic/Profile';
 import ProfileBlur from '../components/blur/Profile';
+import ProfileMaterial from '../components/material/Profile';
 import NewsHeadClassic from '../components/classic/NewsHead';
 import NewsHeadBlur from '../components/blur/NewsHead';
+import NewsHeadMaterial from '../components/material/NewsHead';
 
-import LoginScreenClassic from '../screens/classic/LoginScreen';
-import SettingsScreenClassic from '../screens/classic/SettingsScreen';
+import LoginScreenClassic from '../screens/login/LoginScreenClassic';
+import SettingsScreenBase from '../screens/SettingsScreenBase';
 
-import LoginScreenMaterial from '../screens/material/LoginScreen';
-import MainScreenMaterial from '../screens/material/MainScreen';
+import LoginScreenMaterial from '../screens/login/LoginScreenMaterial';
+import MainScreenMaterial from '../screens/MainScreenMaterial';
 
-import LoginScreenBlur from '../screens/blur/LoginScreen';
+import LoginScreenBlur from '../screens/login/LoginScreenBlur';
 
 import {RkConfig} from 'react-native-ui-kit';
 
@@ -49,9 +52,9 @@ let classicTheme = {
   chatScreen: ChatScreenBase,
   loginScreen: LoginScreenClassic,
   newsScreen: NewsScreenBase,
-  settingsScreens: SettingsScreenClassic,
+  settingsScreens: SettingsScreenBase,
   appWrapperComponent: AppWrapperClassic,
-  postComponent: PostClassic,
+  postComponent: PostBase,
   chatItemComponent: ChatItemClassic,
   chatListHeaderComponent: ChatListHeaderClassic,
   messageComponent: MessageClassic,
@@ -72,17 +75,17 @@ let materialTheme = {
   chatScreen: ChatScreenBase,
   loginScreen: LoginScreenMaterial,
   newsScreen: NewsScreenBase,
-  settingsScreens: SettingsScreenClassic,
+  settingsScreens: SettingsScreenBase,
   appWrapperComponent: AppWrapperClassic,
-  postComponent: PostClassic,
+  postComponent: PostMaterial,
   chatItemComponent: ChatItemMaterial,
   chatListHeaderComponent: ChatListHeaderMaterial,
   messageComponent: MessageMaterial,
   chatFooterComponent: ChatFooterMaterial,
   toolbarComponent: ToolbarMaterial,
   profileTabComponent: ProfileTabMaterial,
-  profileComponent: ProfileClassic,
-  newsHeadComponent: NewsHeadClassic,
+  profileComponent: ProfileMaterial,
+  newsHeadComponent: NewsHeadMaterial,
   setup: function () {
       RkConfig.theme = RkConfig.themes.material;
   }
@@ -95,9 +98,9 @@ let blurTheme = {
   chatScreen: ChatScreenBase,
   loginScreen: LoginScreenBlur,
   newsScreen: NewsScreenBase,
-  settingsScreens: SettingsScreenClassic,
+  settingsScreens: SettingsScreenBase,
   appWrapperComponent: AppWrapperBlur,
-  postComponent: PostClassic,
+  postComponent: PostBase,
   chatItemComponent: ChatItemBlur,
   chatListHeaderComponent: ChatListHeaderBlur,
   messageComponent: MessageBlur,

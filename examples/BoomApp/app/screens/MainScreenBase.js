@@ -3,7 +3,7 @@ import {
   TabBarIOS,
 } from 'react-native';
 
-import ScreenService from '../../util/ScreenService';
+import ScreenService from '../util/ScreenService';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class MainScreenBase extends Component {

@@ -13,9 +13,9 @@ import {
 import {RkConfig, RkSeparator, RkStyle, RkButton, RkChoiceGroup, RkChoice} from 'react-native-ui-kit';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import ScreenService from '../../util/ScreenService';
+import ScreenService from '../util/ScreenService';
 
-export default class SettingsScreenClassic extends Component {
+export default class SettingsScreenBase extends Component {
 
   constructor(props) {
     super(props);

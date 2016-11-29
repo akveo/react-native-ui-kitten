@@ -5,11 +5,11 @@ import {
 } from 'react-native';
 
 import {RkStyle, RkTabView} from 'react-native-ui-kit';
-import api from '../../util/ApiMock';
-import FriendList from '../../components/common/FriendList';
-import PostList from '../../components/common/PostList';
-import ImageList from '../../components/common/ImageList';
-import ScreenService from "../../util/ScreenService";
+import api from '../util/ApiMock';
+import FriendList from '../components/common/FriendList';
+import PostList from '../components/common/PostList';
+import ImageList from '../components/common/ImageList';
+import ScreenService from "../util/ScreenService";
 
 
 export default class ProfileScreenBase extends Component {

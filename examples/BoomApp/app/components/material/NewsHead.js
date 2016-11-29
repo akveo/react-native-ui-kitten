@@ -10,7 +10,8 @@ import {RkConfig, RkCard, RkTextInput, RkButton} from 'react-native-ui-kit';
 export default class NewsHead extends Component {
 
   static newsContainerStyle = {
-    backgroundColor: RkConfig.colors.lightGray,
+    backgroundColor: RkConfig.colors.materialGray,
+    paddingTop: 10
   };
 
   render() {
@@ -32,14 +33,13 @@ export default class NewsHead extends Component {
 }
 
 const styles = StyleSheet.create({
- container:{
-   marginHorizontal: 0,
-   marginTop: 20,
-   marginBottom: 0,
-   borderRadius: 0,
-   borderTopRightRadius: 0,
-   borderTopLeftRadius: 0,
-   borderBottomWidth: 1,
-   borderBottomColor: RkConfig.colors.lightGray,
- }
+  container:{
+    marginHorizontal: 0,
+    marginBottom: 0,
+    borderRadius: 0,
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0,
+    borderBottomColor: RkConfig.colors.lightGray,
+    borderBottomWidth: 1
+  }
 });

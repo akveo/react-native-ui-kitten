@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 
 import Drawer from 'react-native-drawer'
-import Icon from '../../../node_modules/react-native-vector-icons/Ionicons'; //TODO normal import string?
-import ScreenService from '../../util/ScreenService';
+import Icon from '../../node_modules/react-native-vector-icons/Ionicons'; //TODO normal import string?
+import ScreenService from '../util/ScreenService';
 import {RkConfig, RkBarBg, RkTabView, RkButton, RkSeparator, RkStyle} from 'react-native-ui-kit';
-import api from '../../util/ApiMock';
-import Toolbar from '../../components/common/Toolbar';
-import DrawerMenu from '../../components/DrawerMenu';
-import MainScreenBase from '../base/MainScreenBase';
+import api from '../util/ApiMock';
+import Toolbar from '../components/common/Toolbar';
+import DrawerMenu from '../components/DrawerMenu';
+import MainScreenBase from './MainScreenBase';
 
 export default class MainScreenMaterial extends MainScreenBase {
 
@@ -51,7 +51,7 @@ export default class MainScreenMaterial extends MainScreenBase {
         tapToClose={true}
         openDrawerOffset={0.2}
         panCloseMask={0.2}
-        panOpenMask={0.5}
+        panOpenMask={0.2}
         closedDrawerOffset={-3}
         styles={drawerStyles}
         tweenHandler={(ratio) => ({
@@ -60,7 +60,7 @@ export default class MainScreenMaterial extends MainScreenBase {
       >
         <StatusBar barStyle="light-content"/>
         <Toolbar
-          style={{backgroundColor: RkConfig.colors.cyan}}
+          style={{backgroundColor: RkConfig.colors.materialBg}}
           title={this.state.selectedTab}
           leftIcon="md-menu"
           onLeftClick={()=>(this.refs.drawer.open())}/>

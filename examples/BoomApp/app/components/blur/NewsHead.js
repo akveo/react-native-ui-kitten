@@ -10,7 +10,9 @@ import {RkConfig, RkCard, RkTextInput, RkButton} from 'react-native-ui-kit';
 
 export default class NewsHead extends Component {
 
-  static newsBackgroundColor = RkConfig.colors.bluBg;
+  static newsContainerStyle = {
+    backgroundColor: RkConfig.colors.bluBg,
+  };
 
   render() {
     let user = this.props.user;

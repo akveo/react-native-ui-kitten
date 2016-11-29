@@ -7,7 +7,7 @@ import {
 
 import {RkConfig, RkText} from 'react-native-ui-kit';
 
-export default class ProfileTab extends Component {
+export default class Profile extends Component {
 
   render() {
     let user = this.props.user;

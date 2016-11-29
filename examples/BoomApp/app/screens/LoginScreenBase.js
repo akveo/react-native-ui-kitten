@@ -8,7 +8,7 @@ import {
   Text
 } from 'react-native';
 
-import ScreenService from '../../util/ScreenService';
+import ScreenService from '../util/ScreenService';
 
 
 export default class LoginScreenBase extends Component {

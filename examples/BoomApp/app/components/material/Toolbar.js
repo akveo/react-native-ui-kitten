@@ -26,7 +26,7 @@ export default class ToolbarMaterial extends Component {
 
 var styles = StyleSheet.create({
   bar: {
-    backgroundColor: RkConfig.colors.cyan,
+    backgroundColor: RkConfig.colors.materialBg,
   },
 
 });

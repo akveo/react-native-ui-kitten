@@ -12,7 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkButton, RkStyle, RkTextInput, RkText, RkConfig, RkCard} from 'react-native-ui-kit';
 import ScreenService from '../../util/ScreenService';
-import LoginScreenBase from "../base/LoginScreenBase";
+import LoginScreenBase from "../LoginScreenBase";
 
 //TODO refactor
 export default class LoginScreenMaterial extends LoginScreenBase {
@@ -107,7 +107,7 @@ let styles = StyleSheet.create({
   },
   header: {
     alignItems: 'flex-start',
-    backgroundColor: RkConfig.colors.cyan,
+    backgroundColor: RkConfig.colors.materialBg,
     paddingRight: 15,
     paddingTop: 5,
     paddingLeft: 0,
@@ -120,7 +120,8 @@ let styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'flex-end',
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    borderTopWidth: 0
   },
   label: {
     alignSelf: 'flex-end',
@@ -133,7 +134,7 @@ let styles = StyleSheet.create({
     color: RkConfig.colors.gray
   },
   inputContainer:{
-    borderBottomColor: RkConfig.colors.cyan,
+    borderBottomColor: RkConfig.colors.materialBg,
     borderBottomWidth: 1.5
   }
 });

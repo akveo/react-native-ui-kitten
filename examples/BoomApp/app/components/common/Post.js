@@ -8,7 +8,7 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkConfig, RkButton, RkCard, RkText} from 'react-native-ui-kit';
-import PostImage from '../common/PostImage';
+import PostImage from './PostImage';
 
 export default class Post extends Component {
 
@@ -52,7 +52,7 @@ export default class Post extends Component {
   _renderPostText(text) {
     if (text)
       return (
-        <View style={{paddingHorizontal: 15, paddingTop: 10}}>
+        <View style={styles.text}>
           <RkText>{text}</RkText>
         </View>
       );
@@ -61,5 +61,12 @@ export default class Post extends Component {
 
 
 }
+
+const styles = StyleSheet.create({
+  text: {
+    paddingHorizontal: 15,
+    paddingTop: 10
+  }
+});
 
 
