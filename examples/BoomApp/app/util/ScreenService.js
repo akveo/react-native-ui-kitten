@@ -2,10 +2,13 @@ import React from 'react';
 
 import ChatListScreenBase from '../screens/base/ChatListScreenBase';
 import ChatScreenBase from '../screens/base/ChatScreenBase';
+import ProfileScreenBase from '../screens/base/ProfileScreenBase';
+import MainScreenBase from '../screens/base/MainScreenBase';
+import NewsScreenBase from '../screens/base/NewsScreenBase';
 
-import AppWrapperClassic from '../components/classic/AppWrapper'
-import AppWrapperBlur from '../components/blur/AppWrapper'
-import PostClassic from '../components/classic/Post'
+import AppWrapperClassic from '../components/classic/AppWrapper';
+import AppWrapperBlur from '../components/blur/AppWrapper';
+import PostClassic from '../components/classic/Post';
 import ChatItemClassic from '../components/classic/ChatItem';
 import ChatItemBlur from '../components/blur/ChatItem';
 import ChatListHeaderClassic from '../components/classic/ChatListHeader';
@@ -15,32 +18,33 @@ import ChatFooterBlur from '../components/blur/ChatFooter';
 import MessageClassic from '../components/classic/Message';
 import MessageBlur from '../components/blur/Message';
 import MessageMaterial from '../components/material/Message';
+import Toolbar from '../components/Toolbar';
+import ToolbarBlur from '../components/blur/Toolbar';
+import ProfileTabClassic from '../components/classic/ProfileTab';
+import ProfileTabBlur from '../components/blur/ProfileTab';
+import ProfileTabMaterial from '../components/material/ProfileTab';
+import ProfileClassic from '../components/classic/Profile';
+import ProfileBlur from '../components/blur/Profile';
+import NewsHeadClassic from '../components/classic/NewsHead';
+import NewsHeadBlur from '../components/blur/NewsHead';
 
-import LoginScreenClassic from '../screens/classic/LoginScreen'
-import MainScreenBase from '../screens/base/MainScreenBase'
-import NewsScreenClassic from '../screens/classic/NewsScreen'
-import ProfileScreenClassic from '../screens/classic/ProfileScreen'
-import SettingsScreenClassic from '../screens/classic/SettingsScreen'
+import LoginScreenClassic from '../screens/classic/LoginScreen';
+import SettingsScreenClassic from '../screens/classic/SettingsScreen';
 
-import LoginScreenMaterial from '../screens/material/LoginScreen'
-import MainScreenMaterial from '../screens/material/MainScreen'
-import ProfileScreenMaterial from '../screens/material/ProfileScreen'
-import NewsScreenMaterial from '../screens/material/NewsScreen'
+import LoginScreenMaterial from '../screens/material/LoginScreen';
+import MainScreenMaterial from '../screens/material/MainScreen';
 
-import MainScreenBlur from '../screens/blur/MainScreen'
-import NewsScreenBlur from '../screens/blur/NewsScreen'
-import ProfileScreenBlur from '../screens/blur/ProfileScreen'
-import LoginScreenBlur from '../screens/blur/LoginScreen'
+import LoginScreenBlur from '../screens/blur/LoginScreen';
 
 import {RkConfig} from 'react-native-ui-kit';
 
 let classicTheme = {
   mainScreen: MainScreenBase,
-  profileScreen: ProfileScreenClassic,
+  profileScreen: ProfileScreenBase,
   chatListScreen: ChatListScreenBase,
   chatScreen: ChatScreenBase,
   loginScreen: LoginScreenClassic,
-  newsScreen: NewsScreenClassic,
+  newsScreen: NewsScreenBase,
   settingsScreens: SettingsScreenClassic,
   appWrapperComponent: AppWrapperClassic,
   postComponent: PostClassic,
@@ -48,6 +52,10 @@ let classicTheme = {
   chatListHeaderComponent: ChatListHeaderClassic,
   messageComponent: MessageClassic,
   chatFooterComponent: ChatFooterClassic,
+  toolbarComponent: Toolbar,
+  profileTabComponent: ProfileTabClassic,
+  profileComponent: ProfileClassic,
+  newsHeadComponent: NewsHeadClassic,
   setup: function () {
     RkConfig.theme = RkConfig.themes.classic;
   }
@@ -55,11 +63,11 @@ let classicTheme = {
 
 let materialTheme = {
   mainScreen: MainScreenMaterial,
-  profileScreen: ProfileScreenMaterial,
+  profileScreen: ProfileScreenBase,
   chatListScreen: ChatListScreenBase,
   chatScreen: ChatScreenBase,
   loginScreen: LoginScreenMaterial,
-  newsScreen: NewsScreenMaterial,
+  newsScreen: NewsScreenBase,
   settingsScreens: SettingsScreenClassic,
   appWrapperComponent: AppWrapperClassic,
   postComponent: PostClassic,
@@ -67,6 +75,10 @@ let materialTheme = {
   chatListHeaderComponent: ChatListHeaderClassic,
   messageComponent: MessageMaterial,
   chatFooterComponent: ChatFooterClassic,
+  toolbarComponent: Toolbar,
+  profileTabComponent: ProfileTabMaterial,
+  profileComponent: ProfileClassic,
+  newsHeadComponent: NewsHeadClassic,
   setup: function () {
       RkConfig.theme = RkConfig.themes.material;
   }
@@ -74,11 +86,11 @@ let materialTheme = {
 
 let blurTheme = {
   mainScreen: MainScreenBase,
-  profileScreen: ProfileScreenBlur,
+  profileScreen: ProfileScreenBase,
   chatListScreen: ChatListScreenBase,
   chatScreen: ChatScreenBase,
   loginScreen: LoginScreenBlur,
-  newsScreen: NewsScreenBlur,
+  newsScreen: NewsScreenBase,
   settingsScreens: SettingsScreenClassic,
   appWrapperComponent: AppWrapperBlur,
   postComponent: PostClassic,
@@ -86,6 +98,10 @@ let blurTheme = {
   chatListHeaderComponent: ChatListHeaderBlur,
   messageComponent: MessageBlur,
   chatFooterComponent: ChatFooterBlur,
+  toolbarComponent: ToolbarBlur,
+  profileTabComponent: ProfileTabBlur,
+  profileComponent: ProfileBlur,
+  newsHeadComponent: NewsHeadBlur,
   setup: function () {
     RkConfig.theme = RkConfig.themes.blur;
   }
@@ -122,5 +138,9 @@ export default ScreenService = {
   getChatItemComponent: () => themes[currentThemeIndex].chatItemComponent,
   getChatListHeaderComponent: () => themes[currentThemeIndex].chatListHeaderComponent,
   getMessageComponent: () => themes[currentThemeIndex].messageComponent,
-  getChatFooterComponent: () => themes[currentThemeIndex].chatFooterComponent
+  getChatFooterComponent: () => themes[currentThemeIndex].chatFooterComponent,
+  getToolbarComponent: () => themes[currentThemeIndex].toolbarComponent,
+  getProfileTabComponent: () => themes[currentThemeIndex].profileTabComponent,
+  getProfileComponent: () => themes[currentThemeIndex].profileComponent,
+  getNewsHeadComponent: () => themes[currentThemeIndex].newsHeadComponent
 }

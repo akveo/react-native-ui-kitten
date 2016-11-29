@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
-    backgroundColor: RkConfig.colors.blurBg,
+    backgroundColor: RkConfig.colors.blurBgLight,
     borderLeftWidth: 5,
-    borderLeftColor: RkConfig.colors.blurBgStrong
+    borderLeftColor: RkConfig.colors.blurBg
   },
   timeContainer:{
     alignSelf: 'flex-start'

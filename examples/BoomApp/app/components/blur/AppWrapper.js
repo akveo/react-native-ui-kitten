@@ -9,6 +9,11 @@ import {RkConfig, RkBarBg} from 'react-native-ui-kit';
 
 export default class AppWrapper extends Component {
 
+  static tabProps={
+    tintColor: RkConfig.colors.white,
+    barTintColor: RkConfig.colors.black
+  };
+
   render(){
     return(
     <Image
@@ -27,6 +32,6 @@ export default class AppWrapper extends Component {
 
 const styles = StyleSheet.create({
   bar: {
-    backgroundColor: RkConfig.colors.blurBgStrong
+    backgroundColor: RkConfig.colors.blurBg
   },
 });

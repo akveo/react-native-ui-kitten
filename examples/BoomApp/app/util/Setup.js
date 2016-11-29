@@ -4,8 +4,9 @@ RkConfig.setColor('blurText', 'rgba(255,255,255,0.7)');
 RkConfig.setColor('blurTextStrong', 'rgba(255,255,255,0.9)');
 RkConfig.setColor('blurBg', 'rgba(0,0,0,0.1)');
 RkConfig.setColor('blurBgWhite', 'rgba(255,255,255,0.1)');
-RkConfig.setColor('blurBg', 'rgba(0,0,0,0.1)');
-RkConfig.setColor('blurBgStrong', 'rgba(0,0,0,0.3)');
+RkConfig.setColor('blurBg', 'rgba(0,0,0,0.3)');
+RkConfig.setColor('blurBgLight', 'rgba(0,0,0,0.1)');
+RkConfig.setColor('blurBgStrong', 'rgba(0,0,0,0.5)');
 RkConfig.setColor('blurPrimary', '#00e5bf');
 RkConfig.setColor('blurDark', '#15213b');
 RkConfig.setColor('blurExtraDark', '#0b162a');
@@ -33,6 +34,11 @@ RkConfig.setType('text', 'likes', {
 });
 RkConfig.setType('text', 'transparentBg', {
   backgroundColor: 'transparent'
+});
+
+RkConfig.setType('separator', 'blur',{
+  backgroundColor: RkConfig.colors.blurBg,
+  height: 0.5
 });
 RkConfig.setType('button', 'iconButton', {
   container: {
@@ -98,35 +104,9 @@ RkConfig.setType('card', 'classic', {
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
-  friendContainer:{
-    marginBottom: 0,
-    marginHorizontal: 0,
-    borderBottomColor: RkConfig.colors.lightGray,
-    borderBottomWidth: 1
-  },
-  friendTitle:{
-    fontSize: 16
-  },
-  friendHeader:{
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  },
-  chatItem:{
-    marginHorizontal: 0,
-    marginBottom: 0,
-    alignItems: 'flex-start'
-  },
-  chatSubtitle:{
-    color: RkConfig.colors.gray
-  },
   icon:{
     fontSize: 27,
     color: RkConfig.colors.primary
-  },
-  headerBorder:{
-    marginBottom: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: RkConfig.colors.lightGray
   }
 });
 
@@ -142,7 +122,7 @@ RkConfig.setType('card', 'blur', {
     }
   },
   content:{
-    backgroundColor: RkConfig.colors.blurDark
+    backgroundColor: RkConfig.colors.blurBgStrong
   },
   title: {
     marginBottom: 3,
@@ -154,47 +134,16 @@ RkConfig.setType('card', 'blur', {
   header: {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    backgroundColor: RkConfig.colors.blurDark,
+    backgroundColor: RkConfig.colors.blurBgStrong,
   },
   footer: {
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    backgroundColor: RkConfig.colors.blurDark,
-  },
-  friendContainer:{
-    borderBottomColor: RkConfig.colors.blurExtraDark,
-  },
-  friendTitle:{
-    fontSize: 16
-  },
-  chatItem:{
-    marginTop: 10,
-    marginRight: 10,
-    backgroundColor: RkConfig.colors.blurBg,
-    borderWidth: 0.1,
-    paddingLeft: 5,
-    borderColor: RkConfig.colors.blurBgStrong,
-    borderLeftWidth: 5,
-    borderTopRightRadius: 15,
-    borderBottomRightRadius: 15,
-  },
-  chatAvatar:{
-    borderRadius: 28,
-    marginLeft: 0,
-    height: 56,
-    width: 56,
-  },
-  chatSubtitle:{
-    color: RkConfig.colors.blurText
+    backgroundColor: RkConfig.colors.blurBgStrong,
   },
   icon:{
     color: 'white'
-  },
-  headerBorder:{
-    backgroundColor: RkConfig.colors.blurBgStrong,
-    borderBottomWidth: 1,
-    borderBottomColor: RkConfig.colors.blurExtraDark
-  },
+  }
 });
 
 RkConfig.setType('card', 'materialCard', {
@@ -215,12 +164,6 @@ RkConfig.setType('card', 'materialCard', {
   },
   header:{
     borderWidth: 0,
-  },
-  friendContainer:{
-    shadowOpacity: 0
-  },
-  chatItem:{
-    shadowOpacity: 0
   }
 });
 
@@ -239,6 +182,9 @@ RkConfig.setTheme('blur', {
   },
   card: {
     defaultType: 'classic blur',
+  },
+  separator: {
+    defaultType: 'blur'
   }
 });
 

@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
   ListView,
-  TouchableOpacity
 } from 'react-native';
 
-import {RkCard, RkConfig, RkText, RkButton} from 'react-native-ui-kit';
-import Icon from '../../node_modules/react-native-vector-icons/Ionicons';
+import FollowerItem from "./common/FollowerItem";
+import {RkSeparator}  from 'react-native-ui-kit';
 
 export default class FriendList extends Component {
 
@@ -28,26 +23,10 @@ export default class FriendList extends Component {
         style={[this.props.style, {flex: 1}]}
         scrollEnabled={false}
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => this._renderFriend(rowData)}
+        renderSeparator={(sId,rId) => <RkSeparator key={rId}/>}
+        renderRow={(rowData) => <FollowerItem user={rowData}/>}
       />
     )
   }
 
-  _renderFriend(user) {
-    return (
-      <TouchableOpacity>
-        <RkCard rkCardFriendContainer>
-          <View rkCardHeader rkCardFriendHeader>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={user.avatar} rkCardAvatarSmall/>
-              <View>
-                <RkText rkCardFriendTitle>{user.name.first} {user.name.last}</RkText>
-              </View>
-            </View>
-            <RkButton rkType="clear"><Icon rkCardIcon name='ios-person-add-outline'/></RkButton>
-          </View>
-        </RkCard>
-      </TouchableOpacity>
-    );
-  }
 }

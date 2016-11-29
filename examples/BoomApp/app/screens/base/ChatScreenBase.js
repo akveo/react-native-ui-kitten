@@ -12,7 +12,6 @@ import {
 
 import _ from "lodash";
 import {RkConfig, RkButton, RkText, RkTextInput, RkBoardUpView, RkBarBg} from 'react-native-ui-kit';
-import Toolbar from '../../components/Toolbar';
 import api from '../../util/ApiMock';
 import ScreenService from "../../util/ScreenService";
 
@@ -37,6 +36,7 @@ export default class ChatScreenBase extends Component {
   render(){
     let user = api.getUserInfo(this.props.userId);
     let Wrapper = ScreenService.getAppWrapperComponent();
+    let Toolbar = ScreenService.getToolbarComponent();
     return(
       <Wrapper>
         <Toolbar

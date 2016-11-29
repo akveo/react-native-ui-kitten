@@ -17,6 +17,7 @@ export const Themes = {
 
   styles: {
     text: {},
+    separator: {},
     button: ComponentStyles.ButtonStyles,
     input: ComponentStyles.TextInputStyles,
     choice: ComponentStyles.ChoiceStyles,

@@ -15,13 +15,13 @@ export class RkText extends Component {
   }
 
   render() {
-    let styles = this._defineStyles();
     let {
-      type,
+      rkType,
       style,
       children,
       ...textProps
     } = this.props;
+    let styles = this._defineStyles();
     return (
       <Text style={[styles, style]} {...textProps}>{children}</Text>
     );

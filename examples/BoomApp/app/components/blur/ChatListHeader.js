@@ -27,7 +27,7 @@ export default class ChatListHeaderBlur extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: RkConfig.colors.blurBgStrong,
+    backgroundColor: RkConfig.colors.blurBg,
     marginTop: 20,
     marginBottom: 0,
     paddingVertical: 5,

@@ -15,7 +15,7 @@ export default class ChatFooter extends Component {
         <RkTextInput
           style={{flex: 1, color: RkConfig.colors.white}}
           placeholder='Message...'
-          placeholderColor={'#ffffff'}
+          placeholderTextColor={RkConfig.colors.blurText}
           rkType='rounded'
           onChangeText={message => this.props.onChange(message)}
           value={this.props.message}
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: RkConfig.colors.blurBg,
+    backgroundColor: RkConfig.colors.blurBgLight,
     paddingVertical: 3,
     paddingHorizontal: 5,
     borderTopColor: RkConfig.colors.blurBgStong,

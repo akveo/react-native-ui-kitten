@@ -25,7 +25,7 @@ export default class MainScreenBase extends Component {
     let Wrapper = ScreenService.getAppWrapperComponent();
     return (
       <Wrapper>
-        {this.renderTabBar()}
+        {this.renderTabBar(Wrapper.tabProps)}
       </Wrapper>
     )
   }
