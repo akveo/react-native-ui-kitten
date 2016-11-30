@@ -10,7 +10,7 @@ import {
 
 import Drawer from 'react-native-drawer'
 import Icon from '../../node_modules/react-native-vector-icons/Ionicons'; //TODO normal import string?
-import ScreenService from '../util/ScreenService';
+import ThemeService from '../util/ThemeService';
 import {RkConfig, RkBarBg, RkTabView, RkButton, RkSeparator, RkStyle} from 'react-native-ui-kit';
 import api from '../util/ApiMock';
 import Toolbar from '../components/common/Toolbar';
@@ -79,7 +79,7 @@ export default class MainScreenMaterial extends MainScreenBase {
   _openChat(user) {
     this.refs.drawer.close();
     this.props.navigator.push({
-      screen: ScreenService.getChatScreen(),
+      screen: ThemeService.getChatScreen(),
       passProps: {
         userId: user.id
       }

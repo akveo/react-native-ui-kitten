@@ -17,7 +17,7 @@ import LoginScreenBase from "../LoginScreenBase";
 export default class LoginScreenBlur extends LoginScreenBase {
 
   render() {
-    let AppWrapper = ScreenService.getAppWrapperComponent();
+    let AppWrapper = ThemeService.getAppWrapperComponent();
     return (
       <AppWrapper>
         <ScrollView contentContainerStyle={{flex: 1}}>

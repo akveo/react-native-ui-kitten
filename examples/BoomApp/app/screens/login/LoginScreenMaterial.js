@@ -11,10 +11,8 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkButton, RkStyle, RkTextInput, RkText, RkConfig, RkCard} from 'react-native-ui-kit';
-import ScreenService from '../../util/ScreenService';
 import LoginScreenBase from "../LoginScreenBase";
 
-//TODO refactor
 export default class LoginScreenMaterial extends LoginScreenBase {
 
   constructor(props) {

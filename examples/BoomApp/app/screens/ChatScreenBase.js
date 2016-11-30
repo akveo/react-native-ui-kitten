@@ -13,7 +13,7 @@ import {
 import _ from "lodash";
 import {RkConfig, RkButton, RkText, RkTextInput, RkBoardUpView, RkBarBg} from 'react-native-ui-kit';
 import api from '../util/ApiMock';
-import ScreenService from "../util/ScreenService";
+import ThemeService from "../util/ThemeService";
 
 export default class ChatScreenBase extends Component {
 
@@ -35,8 +35,8 @@ export default class ChatScreenBase extends Component {
 
   render(){
     let user = api.getUserInfo(this.props.userId);
-    let Wrapper = ScreenService.getAppWrapperComponent();
-    let Toolbar = ScreenService.getToolbarComponent();
+    let Wrapper = ThemeService.getAppWrapperComponent();
+    let Toolbar = ThemeService.getToolbarComponent();
     return(
       <Wrapper>
         <Toolbar
@@ -49,8 +49,8 @@ export default class ChatScreenBase extends Component {
   }
 
   _renderBoardUp() {
-    let Message = ScreenService.getMessageComponent();
-    let ChatFooter = ScreenService.getChatFooterComponent();
+    let Message = ThemeService.getMessageComponent();
+    let ChatFooter = ThemeService.getChatFooterComponent();
     return (
       <RkBoardUpView>
         <ScrollView

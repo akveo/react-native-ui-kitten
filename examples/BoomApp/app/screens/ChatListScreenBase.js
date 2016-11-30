@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 
-import ScreenService from '../util/ScreenService';
+import ThemeService from '../util/ThemeService';
 import api from '../util/ApiMock';
 
 export default class ChatListScreenBase extends Component {
@@ -23,7 +23,7 @@ export default class ChatListScreenBase extends Component {
   }
 
   render() {
-     let Header = ScreenService.getChatListHeaderComponent();
+     let Header = ThemeService.getChatListHeaderComponent();
     return (
       <View style={styles.container}>
         <Header/>
@@ -39,7 +39,7 @@ export default class ChatListScreenBase extends Component {
 
   _renderMsgItem(msg) {
     let user = api.getUserInfo(msg.from);
-    let ChatItem = ScreenService.getChatItemComponent();
+    let ChatItem = ThemeService.getChatItemComponent();
     return (
       <ChatItem
         user={user}
@@ -51,7 +51,7 @@ export default class ChatListScreenBase extends Component {
 
   _openChat(user) {
     this.props.navigator.push({
-      screen: ScreenService.getChatScreen(true),
+      screen: ThemeService.getChatScreen(true),
       passProps: {
         userId: user.id
       }

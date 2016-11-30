@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 
 import Init from './app/util/Setup'
-import ScreenService from './app/util/ScreenService'
+import ThemeService from './app/util/ThemeService'
 
 class BoomApp extends Component {
 
@@ -19,7 +19,7 @@ class BoomApp extends Component {
       <Navigator
         style={{flex: 1}}
         navigationBarHidden={true}
-        initialRoute={{screen: ScreenService.getLoginScreen()}}
+        initialRoute={{screen: ThemeService.getLoginScreen()}}
         renderScene={(route, navigator) =>{
           return  <route.screen navigator={navigator} {...route.passProps} />
         }}

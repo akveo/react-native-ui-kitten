@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import PostList from '../components/common/PostList';
 import api from '../util/ApiMock';
-import ScreenService from "../util/ScreenService";
+import ThemeService from "../util/ThemeService";
 
 export default class NewsScreenBase extends Component {
 
@@ -13,7 +13,7 @@ export default class NewsScreenBase extends Component {
   }
 
   render() {
-    let NewsHead = ScreenService.getNewsHeadComponent();
+    let NewsHead = ThemeService.getNewsHeadComponent();
     return (
       <View>
         <NewsHead user={api.getUserInfo(api.userId)}/>

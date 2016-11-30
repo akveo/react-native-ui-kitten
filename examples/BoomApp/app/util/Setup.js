@@ -74,6 +74,7 @@ RkConfig.setType('card', 'classic', {
     marginTop: 0,
     marginBottom: 15,
     borderWidth: 0,
+    backgroundColor: RkConfig.colors.white,
   },
   content:{
     padding: 0,
@@ -116,6 +117,7 @@ RkConfig.setType('card', 'blur', {
   container: {
     borderRadius: 0,
     marginHorizontal: 0,
+    backgroundColor: RkConfig.colors.blurBgStrong,
     shadowOpacity: 0,
     shadowRadius: 0,
     shadowOffset: {

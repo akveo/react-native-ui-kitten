@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   StatusBar,
   ScrollView,
-  ListView,
   TouchableOpacity
 } from 'react-native';
 
-import {RkConfig, RkSeparator, RkStyle, RkButton, RkChoiceGroup, RkChoice} from 'react-native-ui-kit';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {RkConfig, RkCard, RkButton, RkChoiceGroup, RkChoice, RkText} from 'react-native-ui-kit';
 
-import ScreenService from '../util/ScreenService';
+import ThemeService from '../util/ThemeService';
 
 export default class SettingsScreenBase extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      themeIndex: ScreenService.getCurrentThemeIndex()
+      themeIndex: ThemeService.getCurrentThemeIndex()
     }
   }
 
@@ -28,38 +25,37 @@ export default class SettingsScreenBase extends Component {
   render() {
     return (
       <ScrollView
-        style={[RkStyle.lightGrayBg, {paddingTop: 20}]}
         automaticallyAdjustContentInsets={true}>
-        <Text style={styles.settingsTitle}>THEMES</Text>
-        <View style={styles.settingsSection}>
+        <RkText style={styles.settingsTitle}>THEMES</RkText>
+        <RkCard style={styles.settingsSection}>
           <RkChoiceGroup
             radio
-           rkType='clear'
+            rkType='clear'
             selectedIndex={this.state.themeIndex}
             onChange={(index)=> this._changeTheme(index)}>
             <TouchableOpacity choiceTrigger>
               <View style={styles.setting}>
-                <Text style={styles.settingLabel}>Classic</Text>
+                <RkText style={styles.settingLabel}>Classic</RkText>
                 <RkChoice/>
               </View>
             </TouchableOpacity>
             <TouchableOpacity choiceTrigger>
               <View style={styles.setting}>
-                <Text style={styles.settingLabel}>Material</Text>
+                <RkText style={styles.settingLabel}>Material</RkText>
                 <RkChoice/>
               </View>
             </TouchableOpacity>
             <TouchableOpacity choiceTrigger>
               <View style={[styles.setting, styles.noBottomBorder]}>
-                <Text style={styles.settingLabel}>Blur</Text>
+                <RkText style={styles.settingLabel}>Blur</RkText>
                 <RkChoice/>
               </View>
             </TouchableOpacity>
           </RkChoiceGroup>
-        </View>
-        <View style={[styles.settingsSection, styles.settingsSectionSymmetric]}>
-            <RkButton rkType='clear' onPress={()=>this._logOut()}>LOG OUT</RkButton>
-        </View>
+        </RkCard>
+        <RkCard style={[styles.settingsSection, styles.settingsSectionSymmetric]}>
+            <RkButton onPress={()=>this._logOut()}>CHANGE THEME</RkButton>
+        </RkCard>
       </ScrollView>
     );
   }
@@ -68,13 +64,13 @@ export default class SettingsScreenBase extends Component {
     this.setState({
       themeIndex: index
     });
-    ScreenService.setCurrentThemeIndex(index);
   }
 
 
   _logOut() {
+    ThemeService.setCurrentThemeIndex(this.state.themeIndex);
     this.props.navigator.replace({
-      screen: ScreenService.getLoginScreen(),
+      screen: ThemeService.getLoginScreen(),
     });
   }
 
@@ -84,42 +80,33 @@ let styles = StyleSheet.create({
 
   settingsSection: {
     marginBottom: 30,
-    backgroundColor: 'white',
     paddingLeft: 15,
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
-    borderTopColor: RkConfig.colors.gray,
-    borderBottomColor: RkConfig.colors.gray,
   },
-
   settingsSectionSymmetric: {
     paddingLeft: 0
   },
-
   settingsTitle: {
+    marginTop: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
     fontSize: 13,
     color: RkConfig.colors.darkGray
   },
-
   setting: {
-    "flexDirection": "row",
+    flexDirection: "row",
     justifyContent: "space-between",
-    "alignItems": "center",
+    alignItems: "center",
     paddingVertical: 10,
     paddingRight: 10,
     borderBottomWidth: 0.5,
     borderBottomColor: RkConfig.colors.gray,
   },
-
   settingLabel: {
-    fontSize: 18
+    fontSize: 18,
   },
-
   noBottomBorder: {
     borderBottomWidth: 0
   }
-
-
 });

@@ -9,7 +9,7 @@ import api from '../util/ApiMock';
 import FriendList from '../components/common/FriendList';
 import PostList from '../components/common/PostList';
 import ImageGallery from '../components/common/ImageGallery';
-import ScreenService from "../util/ScreenService";
+import ThemeService from "../util/ThemeService";
 
 
 export default class ProfileScreenBase extends Component {
@@ -21,7 +21,7 @@ export default class ProfileScreenBase extends Component {
 
 
   render() {
-    let ProfileComponent = ScreenService.getProfileComponent();
+    let ProfileComponent = ThemeService.getProfileComponent();
     return (
       <View style={RkStyle.flex1}>
         <ScrollView
@@ -37,7 +37,7 @@ export default class ProfileScreenBase extends Component {
   }
 
   _renderTabs() {
-    let ProfileTab = ScreenService.getProfileTabComponent();
+    let ProfileTab = ThemeService.getProfileTabComponent();
     let styles = ProfileTab.getStyles();
     return (
       <RkTabView tabsContainerStyle={styles.tabView}>

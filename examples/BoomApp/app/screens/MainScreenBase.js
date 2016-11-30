@@ -3,7 +3,7 @@ import {
   TabBarIOS,
 } from 'react-native';
 
-import ScreenService from '../util/ScreenService';
+import ThemeService from '../util/ThemeService';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class MainScreenBase extends Component {
@@ -14,15 +14,15 @@ export default class MainScreenBase extends Component {
       selected: 'profile'
     };
     this._screens = {
-      profile: ScreenService.getProfileScreen(),
-      news: ScreenService.getNewsScreen(),
-      chat: ScreenService.getChatListScreen(),
-      settings: ScreenService.getSettingsScreen(),
+      profile: ThemeService.getProfileScreen(),
+      news: ThemeService.getNewsScreen(),
+      chat: ThemeService.getChatListScreen(),
+      settings: ThemeService.getSettingsScreen(),
     }
   }
 
   render() {
-    let Wrapper = ScreenService.getAppWrapperComponent();
+    let Wrapper = ThemeService.getAppWrapperComponent();
     return (
       <Wrapper>
         {this.renderTabBar(Wrapper.tabProps)}

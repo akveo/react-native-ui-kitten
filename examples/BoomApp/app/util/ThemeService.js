@@ -124,7 +124,7 @@ let themes = [
 let currentThemeIndex = 1;
 themes[currentThemeIndex].setup();
 
-export default ScreenService = {
+export default ThemeService = {
 
   getCurrentThemeIndex: () => currentThemeIndex,
   setCurrentThemeIndex: index => {

@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {RkConfig, RkButton, RkStyle, RkModalImg, RkCard, RkText} from 'react-native-ui-kit';
 import api from '../../util/ApiMock';
-import ScreenService from "../../util/ScreenService";
+import ThemeService from "../../util/ThemeService";
 
 export default class Toolbar extends Component {
 
@@ -42,7 +42,7 @@ export default class Toolbar extends Component {
   }
 
   _renderRow(post) {
-    let Post = ScreenService.getPostComponent();
+    let Post = ThemeService.getPostComponent();
     return (
       <Post post={post} setLike={(post)=> this._setLike(post)}/>
     );

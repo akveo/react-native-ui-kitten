@@ -141,7 +141,7 @@ export class RkModalImg extends Component {
 
   _renderFooter(closeImage, pageNumber, totalPages, delimiter) {
     return (
-      <View style={{height: 40}}/>
+      <View style={styles.footerContent}/>
     );
   }
 
@@ -195,6 +195,9 @@ const styles = StyleSheet.create({
     right: 0,
     paddingHorizontal: 10,
     backgroundColor: '#212121',
+  },
+  footerContent:{
+    height: 40,
   },
   innerHeaderContainer: {
     justifyContent: 'space-between',
