@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -27,7 +21,7 @@ class BoomApp extends Component {
         navigationBarHidden={true}
         initialRoute={{screen: ScreenService.getLoginScreen()}}
         renderScene={(route, navigator) =>{
-         return  <route.screen navigator={navigator} {...route.passProps} />
+          return  <route.screen navigator={navigator} {...route.passProps} />
         }}
       />
     );

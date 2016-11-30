@@ -3,13 +3,23 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
   },
   "dependencies": {
-    "react": "15.4.0",
+    "react": "15.4.1",
     "react-native": "0.38.0",
     "react-native-drawer": "^2.3.0",
-    "react-native-vector-icons": "^2.0.3",
+    "react-native-vector-icons": "^3.0.0",
     "react-native-ui-kit": "file:../../"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "devDependencies": {
+    "babel-jest": "17.0.2",
+    "babel-preset-react-native": "1.9.0",
+    "jest": "17.0.3",
+    "react-test-renderer": "15.4.1"
   }
 }
