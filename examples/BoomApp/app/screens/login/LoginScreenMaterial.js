@@ -46,7 +46,7 @@ export default class LoginScreenMaterial extends LoginScreenBase {
               <RkText style={styles.label}>Sign in into your account</RkText>
             </View>
             <View rkCardContent style={styles.content}>
-              {this._renderInput('Enter your email')}
+              {this._renderInput('Enter your email', false, this.state.login, text=>this.setState({login: text}))}
             </View>
             <View rkCardFooter style={styles.footer}>
               <RkButton
@@ -85,15 +85,17 @@ export default class LoginScreenMaterial extends LoginScreenBase {
     );
   }
 
-  _renderInput(label, secure){
+  _renderInput(label, secure, value, onChange){
    return(
      <RkTextInput
        rkType='underline topLabel'
        label={label}
        secureTextEntry={secure}
-       labelStyle={{paddingBottom: 25}}
+       value={value}
+       onChangeText={onChange}
+       labelStyle={styles.inputLabel}
        containerStyle={styles.inputContainer}
-       style={[{fontSize: 20}]}
+       style={styles.input}
        placeholderTextColor={RkConfig.colors.lightGray}/>
    )
   }
@@ -136,5 +138,11 @@ let styles = StyleSheet.create({
   inputContainer:{
     borderBottomColor: RkConfig.colors.materialBg,
     borderBottomWidth: 1.5
-  }
+  },
+  inputLabel:{
+    paddingBottom: 25
+  },
+  input:{
+    fontSize: 20
+  },
 });
