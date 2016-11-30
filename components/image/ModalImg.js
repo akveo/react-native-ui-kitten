@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 
 import {
-  RkConfig
-} from '../../util/config';
+  RkStyle
+} from '../../util/style';
 
 import {
   RkButton
@@ -42,7 +42,7 @@ export class RkModalImg extends Component {
 
   componentDidUpdate() {
     if (this.state.openUpdate && this.refs.listView) {
-      this.refs.listView.scrollTo({x: +this.props.index * this.state.width})
+      this.refs.listView.scrollTo({x: +this.props.index * this.state.width});
       this.setState({openUpdate: false, index: +this.props.index});
     }
   }
@@ -68,10 +68,7 @@ export class RkModalImg extends Component {
     delimiter = delimiter || '/';
     transparent = transparent === undefined ? false : transparent;
     visible = visible === undefined ? this.state.visible : visible;
-    modalContainerStyle = [{
-      backgroundColor: 'black',
-      flex: 1,
-    }, modalContainerStyle];
+    modalContainerStyle = [RkStyle.flex1, RkStyle.blackBg, modalContainerStyle];
     if (visible) imgProps.style = [imgProps.style, {
       height: this.state.height,
       width: this.state.width
@@ -99,7 +96,7 @@ export class RkModalImg extends Component {
               {renderFooter(closeImage, pageNumber, totalPages, delimiter)}
             </Animated.View>
 
-            <RkBarBg style={{backgroundColor: '#212121'}}/>
+            <RkBarBg style={styles.bar}/>
           </View>
         </Modal>
       </View>
@@ -111,7 +108,7 @@ export class RkModalImg extends Component {
     return <ListView
       ref='listView'
       onScroll={(e)=>this._onScroll(e)}
-      style={{flex: 1}}
+      style={RkStyle.flex1}
       dataSource={ds.cloneWithRows(source.map((s)=> {
         return {img: s}
       }))}
@@ -151,10 +148,10 @@ export class RkModalImg extends Component {
   _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
     return (
       <View style={styles.innerHeaderContainer}>
-        <RkButton innerStyle={{color: 'white'}}rkType={'clear'}
+        <RkButton innerStyle={RkStyle.whiteText} rkType={'clear'}
                   onPress={closeImage}>Close</RkButton>
-        <Text style={{ textAlign: 'center', fontSize: 16}}>{this._renderPageNumbers(delimiter)}</Text>
-        <RkButton innerStyle={{color: 'transparent'}}>Close</RkButton>
+        <Text style={styles.headerText}>{this._renderPageNumbers(delimiter)}</Text>
+        <RkButton rkType='clear' innerStyle={RkStyle.transparentText}>Close</RkButton>
       </View>
     );
   }
@@ -165,7 +162,7 @@ export class RkModalImg extends Component {
       pageText += delimiter;
       pageText += this.props.source.length;
       return (
-        <Text style={{color: 'white'}}>
+        <Text style={RkStyle.whiteText}>
           {pageText}
         </Text>
       )
@@ -209,6 +206,13 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    backgroundColor: '#212121',
+  },
+  headerText:{
+    textAlign: 'center',
+    fontSize: 16
+  },
+  bar:{
     backgroundColor: '#212121',
   }
 });

@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Text,
-  View,
-  Image,
   ListView,
-  TouchableOpacity,
   Dimensions,
 } from 'react-native';
 
-import {RkConfig, RkStyle, RkModalImg, RkButton} from 'react-native-ui-kit';
+import {RkModalImg} from 'react-native-ui-kit';
 
-export default class ImageList extends Component {
+export default class ImageGallery extends Component {
 
   constructor(props) {
     super(props);
@@ -26,30 +22,37 @@ export default class ImageList extends Component {
     return (
       <ListView
         pageSize={3}
-        contentContainerStyle={{
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          padding: 5
-        }}
+        contentContainerStyle={[styles.listStyle, this.props.style]}
         dataSource={this.state.dataSource}
-        renderRow={(rowData, sectionID, rowID) => this._renderImage(rowData, sectionID, rowID, width)}
+        renderRow={(rowData, sectionID, rowID) => this._renderImage(rowID, width)}
       />
     )
   }
 
-  _renderImage(post, sectionID, rowID, width) {
+  _renderImage(rowID, width) {
     let margin = 5;
     let rowSize = 3;
     let size = width/rowSize  - margin * 2 - 10/rowSize;
     return (
       <RkModalImg
         style={{width: size, height: size, resizeMode: "cover", margin}}
-        imageInModalStyle={{margin: 0}}
+        imageInModalStyle={styles.modalStyle}
         source={this.props.posts.map((p) => p.img)}
         index={rowID}/>
     );
   }
 
 }
+
+const styles = StyleSheet.create({
+  listStyle:{
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 5
+  },
+  modalStyle:{
+    margin: 0
+  }
+});

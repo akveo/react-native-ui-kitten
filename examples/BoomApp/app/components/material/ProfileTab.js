@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   tabContent: {
     paddingVertical: 15,
-    backgroundColor: RkConfig.colors.lightGray
+    backgroundColor: RkConfig.colors.materialGray
   },
   imageTab: {
     backgroundColor: RkConfig.colors.white,

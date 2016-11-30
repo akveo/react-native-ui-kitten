@@ -8,7 +8,7 @@ import {RkStyle, RkTabView} from 'react-native-ui-kit';
 import api from '../util/ApiMock';
 import FriendList from '../components/common/FriendList';
 import PostList from '../components/common/PostList';
-import ImageList from '../components/common/ImageList';
+import ImageGallery from '../components/common/ImageGallery';
 import ScreenService from "../util/ScreenService";
 
 
@@ -52,8 +52,8 @@ export default class ProfileScreenBase extends Component {
           </View>
         </RkTabView.Tab>
         <RkTabView.Tab title={(selected) => <ProfileTab selected={selected} name='Photo' value='48'/>}>
-          <View style={[styles.tabContent, styles.imageTab]}>
-            <ImageList posts={api.getUserPosts(api.userId)}/>
+          <View style={styles.tabContent}>
+            <ImageGallery style={styles.imageTab} posts={api.getUserPosts(api.userId)}/>
           </View>
         </RkTabView.Tab>
       </RkTabView>
