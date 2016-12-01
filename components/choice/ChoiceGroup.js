@@ -8,10 +8,6 @@ import {
 } from 'react-native';
 
 import {
-  RkConfig
-} from '../../util/config';
-
-import {
   RkChoice
 } from './Choice';
 

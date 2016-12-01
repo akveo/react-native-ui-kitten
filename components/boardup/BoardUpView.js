@@ -5,8 +5,6 @@ import {
   Animated,
 } from 'react-native';
 
-import { RkConfig} from '../../util/config';
-
 export class RkBoardUpView extends Component {
 
   static name = 'boardUp';

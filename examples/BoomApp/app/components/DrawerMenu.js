@@ -22,7 +22,7 @@ export default class DrawerMenu extends Component {
     return (
       <View>
         <TouchableOpacity onPress={() => this.props.changeScreen('Profile')}>
-          <Image source={require('../../img/bg/materialBg.jpg')} style={styles.profileBg}>
+          <Image source={require('../../img/materialBg.jpg')} style={styles.profileBg}>
             <View style={styles.profileContent}>
               <Image source={user.avatar} style={styles.userPhoto}/>
               <RkText style={styles.profileTitle}>

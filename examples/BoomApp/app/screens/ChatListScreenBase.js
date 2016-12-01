@@ -40,6 +40,7 @@ export default class ChatListScreenBase extends Component {
   _renderMsgItem(msg) {
     let user = api.getUserInfo(msg.from);
     let ChatItem = ThemeService.getChatItemComponent();
+    msg.text = msg.text.length > 25 ? msg.text.substring(0,23)+'...' : msg.text;
     return (
       <ChatItem
         user={user}

@@ -11,8 +11,6 @@ import {
   RkConfig
 } from '../../util/config';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-
 export class RkChoice extends Component {
 
   static name = 'choice';

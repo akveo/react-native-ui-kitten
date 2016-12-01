@@ -17,7 +17,7 @@ export default class AppWrapper extends Component {
   render(){
     return(
     <Image
-      source={require('../../../img/bg/blurBg.png')}
+      source={require('../../../img/blurBg.png')}
       style={RkConfig.styles.backgroundImage}>
       {this.props.children}
       <StatusBar

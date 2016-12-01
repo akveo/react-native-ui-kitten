@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {View} from "react-native";
 import {RkConfig} from "../../util/config";
 
-
 export class RkCard extends Component {
 
   static name = 'card';

@@ -121,7 +121,7 @@ let themes = [
   blurTheme
 ];
 
-let currentThemeIndex = 1;
+let currentThemeIndex = 0;
 themes[currentThemeIndex].setup();
 
 export default ThemeService = {

@@ -4,7 +4,6 @@ import {
   View,
 } from 'react-native';
 
-import { RkConfig} from '../../util/config';
 
 export class RkTab extends Component {
 

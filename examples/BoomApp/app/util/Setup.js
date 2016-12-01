@@ -11,7 +11,7 @@ RkConfig.setColor('blurPrimary', '#00e5bf');
 RkConfig.setColor('blurDark', '#15213b');
 RkConfig.setColor('blurExtraDark', '#0b162a');
 RkConfig.setColor('materialGray', '#ECECEC');
-RkConfig.setColor('materialWarning', '#FFC107');
+RkConfig.setColor('materialWarning', '#FFC65E');
 RkConfig.setColor('materialBg', '#009688');
 
 RkConfig.setType('text', 'blurText', {
@@ -186,7 +186,7 @@ RkConfig.setType('button', 'materialButton', {
     backgroundColor: RkConfig.colors.materialBg
   },
   inner: {
-    color: RkConfig.colors.materialWarning
+    color: RkConfig.colors.white
   }
 });
 

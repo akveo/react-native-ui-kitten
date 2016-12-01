@@ -8,8 +8,6 @@ import {
   Image
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-import {RkConfig, RkButton, RkStyle, RkModalImg, RkCard, RkText} from 'react-native-ui-kit';
 import api from '../../util/ApiMock';
 import ThemeService from "../../util/ThemeService";
 
@@ -19,14 +17,11 @@ export default class Toolbar extends Component {
   constructor(props) {
     super(props);
     let ds = new ListView.DataSource({
-      rowHasChanged: (row1, row2) => {
-        return true
-      },
+      rowHasChanged: (r1, r2) => r1 === r2,
     });
     this._data = props.posts;
     this.state = {
-      vis: false,
-      dataSource: ds.cloneWithRows(this._data)
+      dataSource: ds.cloneWithRows(props.posts)
     };
   }
 
@@ -50,9 +45,8 @@ export default class Toolbar extends Component {
 
   _setLike(post) {
     api.likePost(post);
-    this._data = api.getUserFeed(api.userId);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this._data)
+      dataSource: this.state.dataSource.cloneWithRows(this.props.posts)
     })
   }
 

@@ -83,6 +83,7 @@ let styles = StyleSheet.create({
     paddingLeft: 15,
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
+    borderColor: RkConfig.colors.blurBg,
   },
   settingsSectionSymmetric: {
     paddingLeft: 0
@@ -92,7 +93,7 @@ let styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     fontSize: 13,
-    color: RkConfig.colors.darkGray
+    color: RkConfig.colors.blurBgStrong
   },
   setting: {
     flexDirection: "row",
@@ -101,7 +102,7 @@ let styles = StyleSheet.create({
     paddingVertical: 10,
     paddingRight: 10,
     borderBottomWidth: 0.5,
-    borderBottomColor: RkConfig.colors.gray,
+    borderBottomColor: RkConfig.colors.blurBg,
   },
   settingLabel: {
     fontSize: 18,
