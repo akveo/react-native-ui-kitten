@@ -1,0 +1,34 @@
+{
+  "baseUrl": "/",
+  "locals": {
+    "url": "http://localhost:8080",
+    "name": "react native ui kit",
+    "owner": "Akveo",
+    "description": ""
+  },
+  "plugins": [
+    "wintersmith-sassy",
+    "./plugins/paginator.coffee",
+    "./node_modules/wintersmith-markdown-it/"
+  ],
+  "sass": {
+    "debug": "undefined"
+  },
+  "require": {
+    "moment": "moment",
+    "_": "underscore",
+    "typogr": "typogr"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "markdown-it": {
+    "m-include": {}
+  },
+  "paginator": {
+    "perPage": 3,
+    "groupSort": {
+      "TableOfContents": 300
+    }
+  }
+}

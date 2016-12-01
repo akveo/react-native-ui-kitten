@@ -5,7 +5,12 @@
   "description": "React Native components.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "wintersmith build -C docs"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "markdown-it": "^8.2.0",
+    "wintersmith": "^2.3.3"
+  }
 }
