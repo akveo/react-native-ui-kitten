@@ -23,7 +23,8 @@
     "pretty": true
   },
   "markdown-it": {
-    "m-include": {}
+    "m-include": {},
+    "markdown-it-attrs": {}
   },
   "paginator": {
     "perPage": 3,

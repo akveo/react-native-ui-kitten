@@ -1,4 +1,6 @@
 extends layout
+block scripts
+    script(src=contents.js['components.js'].url)
 
 block title
     | react-native-ui-kit documentation - #{page.title]
@@ -18,6 +20,6 @@ block content
                 h1=locals.page.title
                 div.subHeader
                 != typogr(page.html).typogrify()
-            div.phone
-                img(src=contents.images['phone.png'].url)
+            div#phone.phone
+                img#phoneImg.phoneImg(src=contents.images.components['button.png'].url)
 

@@ -785,6 +785,32 @@ figure {
   background: #eee;
 }
 
+.inner-content-components{
+  display: flex;
+  justify-content: space-between;
+  .inner-content{
+    float: none;
+  }
+}
+
+.phone{
+  width: 275px;
+  height: 550px;
+  position: fixed;
+  top: 150px;
+  left: 80%;
+  background: url("../images/phone.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.phoneImg{
+  width: 275px;
+  height: 550px;
+  box-sizing: border-box;
+  padding: 73px 21px 69px 18px;
+}
+
 h1:after {
   content: "";
   display: table;

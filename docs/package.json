@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "m-include": "file:plugins/m-include",
+    "markdown-it-attrs": "^0.8.0",
     "moment": "2.3.x",
     "typogr": "0.5.x",
     "underscore": "1.4.x",

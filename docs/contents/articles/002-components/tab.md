@@ -1,6 +1,7 @@
 ## TabView
 
-The TabView can be added to the page using the `RkTabView` component:
+
+The *TabView*{.component image=tab.png} can be added to the page using the `RkTabView` component:
 ```html
 <RkTabView>
     <RkTabView.Tab title={'Tab 1'}>
