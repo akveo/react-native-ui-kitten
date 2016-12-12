@@ -2,6 +2,7 @@ import {Colors} from '../color.js';
 
 export const TextInputStyles = {
     _input: {
+        flex: 1,
         fontSize: 16,
         height: 16 * 1.42,
         alignSelf: 'center'
