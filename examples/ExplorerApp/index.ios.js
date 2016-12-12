@@ -16,17 +16,17 @@ class ExplorerApp extends Component {
       <View style={styles.container}>
         <StatusBar
           barStyle="light-content"
-          />
+        />
         <NavigatorIOS
           style={styles.container}
           barTintColor={RkConfig.colors.primary}
           titleTextColor= {RkConfig.colors.white}
           tintColor= {RkConfig.colors.white}
           initialRoute={{
-          title: 'Ui KIT',
-          component: ComponentsScreen
+            title: 'Ui KIT',
+            component: ComponentsScreen
           }}
-          />
+        />
       </View>
     );
   }

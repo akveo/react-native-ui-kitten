@@ -33,11 +33,11 @@ class ExplorerApp extends Component {
         drawerWidth={drawerWidth}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() => <ComponentsScreen
-                                      onSelect={(component) => {
-                                        this.drawer.closeDrawer();
-                                        this.setState({title: component.title});
-                                      }}
-                                      navigator={this.navigator}/>}>
+          onSelect={(component) => {
+            this.drawer.closeDrawer();
+            this.setState({title: component.title});
+          }}
+          navigator={this.navigator}/>}>
         {this._renderApp()}
       </DrawerLayoutAndroid>
     );
