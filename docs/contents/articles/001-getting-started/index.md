@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 author: vl
-sort: 301
+sort: 901
 group: Table of contents
 template: article.jade
 ---

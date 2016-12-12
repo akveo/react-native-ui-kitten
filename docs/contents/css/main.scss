@@ -785,12 +785,36 @@ figure {
   background: #eee;
 }
 
-.inner-content-components{
-  display: flex;
-  justify-content: space-between;
-  .inner-content{
-    float: none;
+.componentArticle{
+  &.wrap{
+    width: 1160px;
   }
+  .inner-content-components{
+    display: flex;
+    justify-content: space-between;
+    .inner-content{
+      float: none;
+    }
+  }
+}
+
+
+.doc-prop{
+  margin: 0;
+  background-color: rgb(225, 246, 255);
+  color: #484848;
+  font-size: 14px;
+  padding: 5px 10px;
+  .p{
+    margin: 0
+  }
+  &:nth-child(odd){
+    background-color: rgb(235, 249, 255);
+  }
+}
+
+.component-end{
+  height: 400px;
 }
 
 .phone{
@@ -798,7 +822,7 @@ figure {
   height: 550px;
   position: fixed;
   top: 150px;
-  left: 80%;
+  left: calc(100% - 300px);
   background: url("../images/phone.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -934,6 +958,12 @@ code.lang-markdown .bullet {
 }
 
 /* media queries */
+
+@media screen and (max-width: 1160px) {
+  .phone{
+    display: none;
+  }
+}
 
 @media screen and (max-width: 960px) {
   .nav-main {

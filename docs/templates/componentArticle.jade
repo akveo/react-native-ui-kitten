@@ -6,7 +6,7 @@ block title
     | react-native-ui-kit documentation - #{page.title]
 
 block content
-    section.content.wrap.documentationContent
+    section.content.wrap.documentationContent.componentArticle
         div.nav-docs
             each group in groupedArticles
                 div.nav-docs.section
@@ -21,5 +21,5 @@ block content
                 div.subHeader
                 != typogr(page.html).typogrify()
             div#phone.phone
-                img#phoneImg.phoneImg(src=contents.images.components['button.png'].url)
+                img#phoneImg.phoneImg
 

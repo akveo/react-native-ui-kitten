@@ -2,7 +2,7 @@ document.addEventListener( "DOMContentLoaded", function(){
   var phone = document.getElementById('phoneImg');
   var phoneOffset = document.getElementById('phone').offsetTop;
   var components = document.getElementsByClassName('component');
-  var currentImageComponent = 0;
+  var currentImageComponent = -1;
   function selectImageComponent(scrolled) {
     scrolled = scrolled + phoneOffset;
     for(var i = 0; i < components.length; i++){

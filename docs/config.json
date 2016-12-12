@@ -8,8 +8,7 @@
   },
   "plugins": [
     "wintersmith-sassy",
-    "./plugins/paginator.coffee",
-    "./node_modules/wintersmith-markdown-it/"
+    "./plugins/paginator.coffee"
   ],
   "sass": {
     "debug": "undefined"
@@ -22,9 +21,9 @@
   "jade": {
     "pretty": true
   },
-  "markdown-it": {
-    "m-include": {},
-    "markdown-it-attrs": {}
+  "markdown": {
+    "smartLists": true,
+    "smartypants": true
   },
   "paginator": {
     "perPage": 3,
