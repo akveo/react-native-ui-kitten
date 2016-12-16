@@ -19,7 +19,7 @@ class ExplorerApp extends Component {
         />
         <NavigatorIOS
           style={styles.container}
-          barTintColor={RkConfig.colors.primary}
+          barTintColor={RkConfig.colors.blue500}
           titleTextColor= {RkConfig.colors.white}
           tintColor= {RkConfig.colors.white}
           initialRoute={{

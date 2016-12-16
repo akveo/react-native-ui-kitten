@@ -26,13 +26,13 @@ export const TextInputStyles = {
         container: {
             padding: 5,
             borderWidth: 0.5,
-            borderColor: Colors.lightGray,
+            borderColor: Colors.grey300,
             borderRadius: 3,
         },
     },
     rounded: {
         container: {
-            backgroundColor: Colors.lightGray,
+            backgroundColor: Colors.grey300,
             borderRadius: 100,
             paddingHorizontal: 10,
             paddingVertical: 5,
@@ -41,13 +41,13 @@ export const TextInputStyles = {
     underline: {
         container: {
             borderBottomWidth: 0.5,
-            borderBottomColor: Colors.primary,
+            borderBottomColor: Colors.blue500,
         }
     },
     'underline-text': {
         input:{
             borderBottomWidth: 0.5,
-            borderBottomColor: Colors.primary,
+            borderBottomColor: Colors.blue500,
         }
     },
     topLabel: {
@@ -60,7 +60,7 @@ export const TextInputStyles = {
         },
         label: {
             fontSize: 12,
-            color: Colors.gray,
+            color: Colors.grey500,
             alignSelf: 'flex-start'
         }
     }

@@ -5,7 +5,7 @@ export const CardStyles = {
     margin: 5,
     borderRadius: 1,
     borderWidth: 1,
-    borderColor: Colors.lightGray
+    borderColor: Colors.grey300
   },
   _header: {
     flexDirection: 'row',
@@ -39,7 +39,7 @@ export const CardStyles = {
   },
   _subTitle: {
     fontSize: 14,
-    color: Colors.darkGray
+    color: Colors.grey700
   },
   _img: {
     flex: 1,
@@ -67,7 +67,7 @@ export const CardStyles = {
   material: {
     container: {
       borderRadius: 2,
-      shadowColor: Colors.gray,
+      shadowColor: Colors.grey500,
       shadowOpacity: 0.5,
       shadowRadius: 3,
       shadowOffset: {
@@ -93,19 +93,19 @@ export const CardStyles = {
   bordered: {
     container: {
       borderWidth: 1,
-      borderColor: Colors.lightGray
+      borderColor: Colors.grey300
     },
     content: {
       borderTopWidth: 0.5,
-      borderTopColor: Colors.lightGray
+      borderTopColor: Colors.grey300
     },
     header: {
       borderBottomWidth: 0.5,
-      borderBottomColor: Colors.lightGray
+      borderBottomColor: Colors.grey300
     },
     footer: {
       borderTopWidth: 0.5,
-      borderTopColor: Colors.lightGray
+      borderTopColor: Colors.grey300
     }
   },
   noPadding: {

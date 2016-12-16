@@ -31,7 +31,7 @@ export class ChoiceScreen extends Component {
   render() {
     return (
       <ScrollView
-        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}
+        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.grey300}]}
         automaticallyAdjustContentInsets={true}>
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Classic selectable components</Text>
@@ -74,7 +74,7 @@ export class ChoiceScreen extends Component {
             <View>
               <RkChoiceGroup>
                 <TouchableOpacity choiceTrigger
-                                  style={[{marginLeft: 5, borderWidth: 0.5, borderColor: RkConfig.colors.gray, borderRadius: 2}]}>
+                                  style={[{marginLeft: 5, borderWidth: 0.5, borderColor: RkConfig.colors.grey500, borderRadius: 2}]}>
                   <View
                     style={{
                       flexDirection: "row",
@@ -106,7 +106,7 @@ export class ChoiceScreen extends Component {
           <View style={{alignItems: 'flex-start'}}>
             <RkChoiceGroup rkType='clear'>
               <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
+                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.grey500}]}>
                 <View
                   style={{
                     "flexDirection": "row",
@@ -119,7 +119,7 @@ export class ChoiceScreen extends Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
+                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.grey500}]}>
                 <View
                   style={{
                     "flexDirection": "row",
@@ -132,7 +132,7 @@ export class ChoiceScreen extends Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
+                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.grey500}]}>
                 <View
                   style={{
                     "flexDirection": "row",
@@ -164,7 +164,7 @@ export class ChoiceScreen extends Component {
           <View style={{alignItems: 'flex-start'}}>
             <RkChoiceGroup rkType='radio' radio>
               <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
+                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.grey500}]}>
                 <View
                   style={{
                     "flexDirection": "row",
@@ -177,7 +177,7 @@ export class ChoiceScreen extends Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
+                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.grey500}]}>
                 <View
                   style={{
                     "flexDirection": "row",
@@ -190,7 +190,7 @@ export class ChoiceScreen extends Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.gray}]}>
+                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkConfig.colors.grey500}]}>
                 <View
                   style={{
                     "flexDirection": "row",
@@ -232,7 +232,7 @@ export class ChoiceScreen extends Component {
                     textAlign: 'center'
                   }}
                   innerStyleDisabled={{
-                    color: RkConfig.colors.lightGray
+                    color: RkConfig.colors.grey300
                   }}
                   content={<Text>CHECKED</Text>}
                   contentDisabled={<Text>CHECKED</Text>}
@@ -250,14 +250,14 @@ export class ChoiceScreen extends Component {
                     borderWidth: 0
                   }}
                   innerStyle={{
-                    color: RkConfig.colors.darkWarning,
+                    color: RkConfig.colors.orange500,
                     fontSize: 22,
                     height: 25,
                     width: 25,
                     textAlign: 'center'
                   }}
                   innerStyleDisabled={{
-                    color: RkConfig.colors.lightGray
+                    color: RkConfig.colors.grey300
                   }}
                   content={<Icon name={'star'}/>}
                   contentUnchecked={<Text/>}
@@ -277,7 +277,7 @@ export class ChoiceScreen extends Component {
                 <Text
                   style={{
                     marginRight: 7,
-                    color: RkConfig.colors.gray,
+                    color: RkConfig.colors.grey500,
                     alignSelf: 'center'
                   }}>{this.state.settingsOption.name}</Text>
                 <Icon name={'angle-right'} size={20} style={RkStyle.grayText}/></View>
@@ -407,7 +407,7 @@ class SettingsScreen extends Component {
   render() {
 
     let renderOption = (option, i) => (
-      <TouchableOpacity key={i} underlayColor={RkConfig.colors.lightGray} choiceTrigger>
+      <TouchableOpacity key={i} underlayColor={RkConfig.colors.grey300} choiceTrigger>
         <View style={[styles.settingsOption, i === this.state.options.length - 1 ? {borderBottomWidth: 0} : {}]}>
           <Text style={{fontSize: 14}}>{option.name}</Text>
           <RkChoice/>
@@ -416,7 +416,7 @@ class SettingsScreen extends Component {
 
     return (
       <ScrollView
-        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}
+        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.grey300}]}
         automaticallyAdjustContentInsets={true}>
         <View style={[UtilStyles.section, {paddingVertical: 0, paddingHorizontal: 0}]}>
           <RkChoiceGroup selectedIndex={this.props.option.index} radio rkType='clear'
@@ -444,11 +444,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: RkConfig.colors.lightGray,
+    borderBottomColor: RkConfig.colors.grey300,
 
   },
   typeText: {
-    color: RkConfig.colors.gray,
+    color: RkConfig.colors.grey500,
     textAlign: 'center'
   }
 });

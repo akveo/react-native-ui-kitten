@@ -26,7 +26,7 @@ export class InputScreen extends Component {
       <ScrollView
         ref={'scrollView'}
         automaticallyAdjustContentInsets={true}
-        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}>
+        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.grey300}]}>
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Default input</Text>
           <View style={UtilStyles.rowContainer}>
@@ -70,7 +70,7 @@ export class InputScreen extends Component {
             <View style={{flex: 1}}>
               <RkTextInput label={<Icon name='ios-person-outline'/>} placeholder='Login' iconStyle={{fontSize: 22}}/>
               <RkSeparator style={{marginVertical: 5, marginRight: 20}}/>
-              <RkTextInput secureTextEntry={true} icon='ios-key-outline' placeholder='Password'/>
+              <RkTextInput secureTextEntry={true} label={<Icon name='ios-key-outline'/>} placeholder='Password'/>
 
               <RkTextInput rkType='rounded' label={<Icon name='ios-search-outline'/>} containerStyle={{marginTop: 20}}
                            placeholder='Search'/>

@@ -1,5 +1,10 @@
 import {RkConfig} from 'react-native-ui-kit';
 
+RkConfig.setColor('lightGray', RkConfig.colors.grey300);
+RkConfig.setColor('gray', RkConfig.colors.grey500);
+RkConfig.setColor('darkGray', RkConfig.colors.grey700);
+RkConfig.setColor('primary', RkConfig.colors.blue500);
+
 RkConfig.setColor('blurText', 'rgba(255,255,255,0.7)');
 RkConfig.setColor('blurTextStrong', 'rgba(255,255,255,0.9)');
 RkConfig.setColor('blurBg', 'rgba(0,0,0,0.1)');

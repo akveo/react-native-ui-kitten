@@ -45,7 +45,7 @@ export class ImageScreen extends Component {
 
         <ScrollView
           automaticallyAdjustContentInsets={true}
-          style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}>
+          style={[UtilStyles.container, {backgroundColor: RkConfig.colors.grey300}]}>
 
           <View style={UtilStyles.section}>
             <Text style={UtilStyles.titleText}>Basic example</Text>
