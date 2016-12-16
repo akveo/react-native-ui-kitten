@@ -49,7 +49,8 @@ _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
 
 ### Gallery
 
-Also `RkModalImg` supports multi image source
+Also `RkModalImg` supports multi image source,
+this options enable swaps between images
 
 ```html
 import {RkModalImg} from 'react-native-ui-kit';

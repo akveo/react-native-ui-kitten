@@ -63,7 +63,6 @@ import {RkTextInput} from 'react-native-ui-kit';
 
 The result will be this:
 
-
 ![Image of Colored Input](/images/components/coloredInput.png)
 
 ### Props

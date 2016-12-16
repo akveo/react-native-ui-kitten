@@ -8,7 +8,9 @@ template: componentArticle.jade
 
 <div class="component" image="choice.gif"></div>
 
-`RkChoice` component is analog of html checkbox:
+`RkChoice` component is analog of html checkbox and radio buttons.
+
+Minimal example: 
 
 ```html
 import {RkChoice} from 'react-native-ui-kit';
@@ -20,7 +22,7 @@ import {RkChoice} from 'react-native-ui-kit';
 
 ### Labels example
 
-Inside `RkChoiceGroup` define component with `choiceTrigger` prop and put inside `RkChoice`
+Inside `RkChoiceGroup` define component with `choiceTrigger` prop and put inside `RkChoice` component:
 
 ```html
 import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
@@ -40,7 +42,7 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
 
 ### Radio example
 
-Append `radio` prop to `RkChoiceGroup` component:
+Use `radio` prop to `RkChoiceGroup` component, only one options can be selected:
 
 ```html
 import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
@@ -72,7 +74,26 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
 
 ### Create custom rkType
 
-For example lets create dark type, first step - setup new type in  `RkConfig`:
+`RkChoice` can be customizable by this styles:
+
+- *container*  
+- *inner*  
+- *containerSelected*  
+- *innerSelected* 
+- *containerDisabled*  
+- *innerDisabled*
+- *containerSelectedDisabled*  
+- *innerSelectedDisabled*
+
+Also you can define content inside `RkChoice` with 
+this settings(should contains component):
+    
+- *content*  
+- *contentUnchecked*  
+- *contentDisabled*  
+- *contentUncheckedDisabled*
+    
+Setup new type in  `RkConfig`:
 
 ```javascript
 import {RkConfig} from 'react-native-ui-kit'; 

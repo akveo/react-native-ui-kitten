@@ -8,7 +8,7 @@ template: componentArticle.jade
 
 <div class="component" image="card.gif"></div>
 
-`RkCard` component works with custom props on react components like `View` or `Text`. 
+`RkCard` component works with custom props on react components. 
 
 
 ```html
@@ -42,7 +42,7 @@ import {RkCard} from 'react-native-ui-kit';
 </RkCard>
 ```
 
-Every component inside `RkCard` can use prop that starts with *RkCard*, for example *RkCardHeader* apply to the `View` this style:
+Every component inside `RkCard` can use prop that starts with *rkCard*, for example *rkCardHeader* apply to the `View` this style:
 
 ```javascript
 
@@ -73,6 +73,8 @@ By default there are 12 *rkCard* props that exist:
 - *rkCardAvatarSmall*  
 
 ### Create custom rkType
+
+You can create your own prop for example define style *footerText* and use it like *rkCardFooterText'
 
 For example lets create blue type, first step - setup new type in  `RkConfig`:
 

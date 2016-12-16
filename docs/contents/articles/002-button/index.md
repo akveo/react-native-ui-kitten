@@ -8,7 +8,11 @@ template: componentArticle.jade
 
 <div class="component" image="buttons.gif"></div>
 
-The *Button* can be added to the screen using the `RkButton` component:
+`RkButton` component easy to customize using a lot of *props* and also
+with *rkType* prop.
+ 
+
+Example usage:
 
 ```html
 import {RkButton} from 'react-native-ui-kit';
@@ -20,7 +24,8 @@ import {RkButton} from 'react-native-ui-kit';
 
 ### Usage with Icons 
 
-Simple put Icon component inside button with or without text
+You can put inside `RkButton` text or another component, this usable for
+icons or images:
 
 ```html
 import {RkButton} from 'react-native-ui-kit';
@@ -37,7 +42,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 ### Create custom rkType
 
-For example lets create dark type, first step - setup new type in  `RkConfig`:
+To define new rkType you should define style for *container* and *inner* 
+using `RkConfig`:
 
 ```javascript
 
@@ -67,7 +73,7 @@ RkConfig.setType('button', 'icon', {
 
 ```
 
-After this we can use new type like this: 
+Now in any part of your app you can write like this:
 
 ```html
 import {RkButton} from 'react-native-ui-kit';

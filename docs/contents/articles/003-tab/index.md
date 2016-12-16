@@ -9,7 +9,7 @@ template: componentArticle.jade
 
 <div class="component" image="tabs.gif"></div>
 
-The *TabView* can be added to the page using the `RkTabView` and `RkTabView.Tab` components:
+Example usage of `RkTabView` and `RkTabView.Tab` components:
 
 ```html
 import {RkTabView} from 'react-native-ui-kit';
@@ -31,7 +31,8 @@ import {RkTabView} from 'react-native-ui-kit';
 
 ### Create custom rkType
 
-For example lets create dark type, first step - setup new type in  `RkConfig`:
+To define new rkType you can modify style for 
+*container*, *inner*, *containerSelected*, *innerSelected*  in `RkConfig`
 
 ```javascript
 
@@ -55,7 +56,7 @@ RkConfig.setType('tab', 'dark', {
 
 ```
 
-After this we can use new type like this: 
+After this just set *rkType* to `RkTabView` component:
 
 ```html
 import {RkTabView} from 'react-native-ui-kit';

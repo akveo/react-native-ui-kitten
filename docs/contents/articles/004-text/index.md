@@ -8,7 +8,9 @@ template: componentArticle.jade
 
 <div class="component" image="text.png"></div>
 
-`RkText` component:
+Main purpose of `RkText` component - define custom *rkType* for
+different types of typography in your app. For example you can 
+define *rkType* for headers, articles, names and etc.
 
 ```html
 import {RkText} from 'react-native-ui-kit';
@@ -20,7 +22,7 @@ import {RkText} from 'react-native-ui-kit';
 
 ### Create custom rkType
 
-First step - setup new type in  `RkConfig`:
+Define style in `RkConfig`:
 
 ```javascript
 import {RkConfig} from 'react-native-ui-kit'; 
@@ -43,7 +45,7 @@ RkConfig.setType('text', 'curely', {
 
 ```
 
-After this we can use new type like this: 
+Use your *rkType* like this:
 
 ```html
 import {RkChoice} from 'react-native-ui-kit';
