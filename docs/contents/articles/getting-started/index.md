@@ -12,8 +12,9 @@ react-native-ui-kit is pure library with set of components that ease to customiz
 
 ## Installation
 
-> npm install --save react-native-ui-kit
-
+```
+npm install --save react-native-ui-kit
+```
 
 
 
