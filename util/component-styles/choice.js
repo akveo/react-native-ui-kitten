@@ -13,7 +13,7 @@ export const ChoiceStyles = {
         paddingTop: 1,
         paddingBottom: 3,
         borderWidth: 1,
-        borderColor: Colors.gray
+        borderColor: Colors.grey500
     },
     _inner: {
         width: 18,
@@ -22,12 +22,12 @@ export const ChoiceStyles = {
     _containerSelected: {},
     _innerSelected: {},
     _containerDisabled: {
-        borderColor: Colors.lightGray
+        borderColor: Colors.grey300
     },
     _innerDisabled: {
     },
     _containerSelectedDisabled: {
-        borderColor: Colors.lightGray
+        borderColor: Colors.grey300
     },
     _innerSelectedDisabled: {
     },
@@ -42,7 +42,7 @@ export const ChoiceStyles = {
         },
         containerSelected: {
             borderWidth: 0,
-            backgroundColor: Colors.cyan
+            backgroundColor: Colors.cyan500
         },
         innerSelected: {
             width: 20,
@@ -53,10 +53,10 @@ export const ChoiceStyles = {
             height: 16,
         },
         containerDisabled: {
-            borderColor: Colors.lightGray
+            borderColor: Colors.grey300
         },
         containerSelectedDisabled: {
-            backgroundColor: Colors.lightGray
+            backgroundColor: Colors.grey300
         },
         content: (<Image source={require('../../assets/img/choice/check_white.png')}/>),
         contentDisabled: (<Image source={require('../../assets/img/choice/check_white.png')}/>),
@@ -68,10 +68,10 @@ export const ChoiceStyles = {
             paddingTop: 3,
         },
         containerSelected: {
-            borderColor: Colors.primary
+            borderColor: Colors.blue500
         },
         innerSelected: {
-            backgroundColor: Colors.primary
+            backgroundColor: Colors.blue500
         },
         inner: {
             width: 15,
@@ -79,10 +79,10 @@ export const ChoiceStyles = {
             borderRadius: 8,
         },
         containerDisabled: {
-            borderColor: Colors.lightGray,
+            borderColor: Colors.grey300,
         },
         innerSelectedDisabled: {
-            backgroundColor: Colors.lightGray,
+            backgroundColor: Colors.grey300,
         },
         content: (<View/>),
         contentDisabled: (<View/>),

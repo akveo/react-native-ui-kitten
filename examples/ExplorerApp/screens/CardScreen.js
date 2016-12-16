@@ -80,7 +80,7 @@ export class CardScreen extends Component {
 
           <RkCard rkType='material'>
 
-            <View rkCardHeader style={{backgroundColor: RkConfig.colors.primary, paddingTop: 0, paddingRight: 0}}>
+            <View rkCardHeader style={{backgroundColor: RkConfig.colors.blue500, paddingTop: 0, paddingRight: 0}}>
               <View style={{alignSelf: 'flex-end'}}>
                 <Text style={{color: 'white'}} rkCardTitle>Material Card</Text>
                 <Text style={{color: 'white'}} rkCardSubTitle>Sub header</Text>
@@ -120,7 +120,7 @@ export class CardScreen extends Component {
                 zIndex: 111
               }}>
               <RkButton rkType='circle shadow'
-                        style={[UtilStyles.spaceH, RkStyle.darkWarningBg, {
+                        style={[UtilStyles.spaceH, RkStyle.orange500Bg, {
                           paddingVertical: 5,
                           paddingHorizontal: 12.5
                         }]}

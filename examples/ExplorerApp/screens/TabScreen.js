@@ -25,7 +25,7 @@ export class TabScreen extends Component {
     return (
       <ScrollView
         automaticallyAdjustContentInsets={true}
-        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.lightGray}]}>
+        style={[UtilStyles.container, {backgroundColor: RkConfig.colors.grey300}]}>
         <View style={UtilStyles.section}>
           <Text style={UtilStyles.titleText}>Basic example</Text>
           <View style={UtilStyles.rowContainer}>
@@ -53,11 +53,11 @@ export class TabScreen extends Component {
         </View>
         <View style={[UtilStyles.section, {paddingHorizontal: 0, paddingTop: 0}]}>
           <Text
-            style={[UtilStyles.titleText, {paddingHorizontal: 25, paddingVertical: 10, backgroundColor: RkConfig.colors.cyan, color: 'white'}]}>
+            style={[UtilStyles.titleText, {paddingHorizontal: 25, paddingVertical: 10, backgroundColor: RkConfig.colors.cyan500, color: 'white'}]}>
             Material theme example
           </Text>
           <View style={[UtilStyles.rowContainer, {marginTop: 0}]}>
-            <RkTabView rkType='material' style={{backgroundColor: RkConfig.colors.cyan}}>
+            <RkTabView rkType='material' style={{backgroundColor: RkConfig.colors.cyan500}}>
               {this._renderMaterialTab('1')}
               {this._renderMaterialTab('2')}
               {this._renderMaterialTab('3')}
@@ -134,9 +134,9 @@ export class TabScreen extends Component {
           alignItems: 'center',
           padding: 5,
           borderBottomWidth: 2,
-          borderBottomColor: RkConfig.colors.danger,
-          backgroundColor : selected ?  RkConfig.colors.danger : 'white'}}>
-        <Text style={{textAlign: 'center', color: selected? 'white' : RkConfig.colors.danger, flexDirection: 'row'}}>
+          borderBottomColor: RkConfig.colors.red500,
+          backgroundColor : selected ?  RkConfig.colors.red500 : 'white'}}>
+        <Text style={{textAlign: 'center', color: selected? 'white' : RkConfig.colors.red500, flexDirection: 'row'}}>
           <Icon style={{fontSize: 18}} name={tabIcon}/>
           <Text style={{fontSize: 18}}> {tabName}</Text>
         </Text>
@@ -147,10 +147,10 @@ export class TabScreen extends Component {
   _renderMaterialTab(tab) {
     return (
       <RkTabView.Tab
-        style={{backgroundColor: RkConfig.colors.cyan, borderBottomColor: RkConfig.colors.lightGray}}
-        styleSelected={{backgroundColor: RkConfig.colors.cyan, borderBottomColor: RkConfig.colors.warning}}
+        style={{backgroundColor: RkConfig.colors.cyan500, borderBottomColor: RkConfig.colors.grey300}}
+        styleSelected={{backgroundColor: RkConfig.colors.cyan500, borderBottomColor: RkConfig.colors.yellow500}}
         innerStyle={{color: 'white'}}
-        innerStyleSelected={{color: RkConfig.colors.warning}}
+        innerStyleSelected={{color: RkConfig.colors.yellow500}}
         title={'Tab ' + tab}>
         <View style={{flex: 1, paddingVertical: 15, backgroundColor: 'white'}}>
           <Text style={{textAlign: 'center'}}>Tab {tab} Content</Text>

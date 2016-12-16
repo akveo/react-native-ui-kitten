@@ -18,7 +18,7 @@ export const UtilStyles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 15,
     backgroundColor: 'white',
-    shadowColor: RkConfig.colors.gray,
+    shadowColor: RkConfig.colors.grey300,
     shadowOpacity: 0.5,
     shadowRadius: 5,
   },
@@ -49,8 +49,8 @@ export const UtilStyles = StyleSheet.create({
 
   },
   codeText: {
-    color: RkConfig.colors.deepWarning,
-    backgroundColor: RkConfig.colors.lightGray,
+    color: RkConfig.colors.orange700,
+    backgroundColor: RkConfig.colors.grey300,
     paddingHorizontal: 4,
     paddingVertical: 2,
     borderRadius: 4,

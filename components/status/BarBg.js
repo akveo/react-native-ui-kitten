@@ -43,7 +43,7 @@ export class RkBarBg extends Component {
 
 let styles = StyleSheet.create({
   bar:{
-    backgroundColor: RkConfig.colors.primary,
+    backgroundColor: RkConfig.colors.blue500,
     height: 20,
     position: 'absolute',
     top: 0,

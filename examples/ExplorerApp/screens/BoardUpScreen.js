@@ -32,7 +32,7 @@ export class BoardUpScreen extends Component {
   render() {
     return (
       <View>
-        <RkBoardUpView style={[RkStyle.lightGrayBg]}>
+        <RkBoardUpView style={[RkStyle.grey300Bg]}>
           <ScrollView
             automaticallyAdjustContentInsets={true}
             style={{height: this._height}}>
@@ -52,7 +52,7 @@ export class BoardUpScreen extends Component {
             style={{height: 52, flexDirection: 'row',backgroundColor: 'white', paddingVertical: 10,paddingHorizontal: 5}}>
             <RkTextInput style={{height: 16}}
                          placeholder='Message...'
-                         placeholderColor={RkConfig.colors.lightGray}
+                         placeholderColor={RkConfig.colors.grey300}
                          rkType='bordered'
                          onChangeText={message => this.setState({message})}
                          value={this.state.message}
@@ -78,14 +78,14 @@ export class BoardUpScreen extends Component {
   _renderHeader() {
     return (
       <View style={{padding: 10}}>
-        <Text style={{textAlign: 'center', color: RkConfig.colors.darkGray}}>RkBoardUpView provides you...</Text>
+        <Text style={{textAlign: 'center', color: RkConfig.colors.grey500}}>RkBoardUpView provides you...</Text>
       </View>
     )
   }
 
   _renderRow(message) {
     let containerStyle = {
-      backgroundColor: RkConfig.colors.primary,
+      backgroundColor: RkConfig.colors.blue500,
       alignSelf: 'flex-end',
       marginLeft: 50,
       marginRight: 10,

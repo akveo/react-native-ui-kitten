@@ -16,7 +16,7 @@ export const ButtonStyles = {
     },
     basic: {
         container: {
-            backgroundColor: Colors.lightGray,
+            backgroundColor: Colors.grey300,
         },
         inner: {}
     },
@@ -24,15 +24,15 @@ export const ButtonStyles = {
         container: {
             borderWidth: 1,
             backgroundColor: 'transparent',
-            borderColor: Colors.primary
+            borderColor: Colors.blue500
         },
         inner: {
-            color: Colors.primary
+            color: Colors.blue500
         }
     },
     material: {
         container: {
-            shadowColor: Colors.gray,
+            shadowColor: Colors.grey500,
             shadowOpacity: 0.5,
             shadowRadius: 3,
             shadowOffset: {
@@ -48,7 +48,7 @@ export const ButtonStyles = {
             backgroundColor: 'transparent'
         },
         inner: {
-            color: Colors.primary
+            color: Colors.blue500
         }
     },
     circle: {
@@ -59,7 +59,7 @@ export const ButtonStyles = {
     },
     shadow: {
         container: {
-            shadowColor: Colors.gray,
+            shadowColor: Colors.grey500,
             shadowOpacity: 0.5,
             shadowRadius: 3,
             shadowOffset: {
