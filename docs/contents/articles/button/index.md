@@ -40,9 +40,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 </RkButton>
 ```
 
+<a href="#" id="custom"></a>
+
 ### Create custom rkType
 
-To define new rkType you should define style for *container* and *inner* 
+To define new rkType you should define style for *container* and/or *inner* 
 using `RkConfig`:
 
 ```javascript
@@ -95,7 +97,7 @@ The result will be this:
 ### Props
 
 <div class="doc-prop">
-    <p><strong>rkType</strong> string</p>
+    <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
     <p>By default RkButton supports following types: basic, outline, material, clear, circle, shadow, small, medium, large</p>
 </div>
 

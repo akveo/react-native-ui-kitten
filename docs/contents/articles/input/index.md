@@ -24,6 +24,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 ```
 
+<a href="#" id="custom"></a>
+
 ### Create custom rkType
 
 For example lets create colored type, first step - setup new type in  `RkConfig`:
@@ -68,7 +70,7 @@ The result will be this:
 ### Props
 
 <div class="doc-prop">
-    <p><strong>rkType</strong> string</p>
+    <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
     <p>By default RkTextInput supports following types: bordered, rounded, underline, topLabel</p>
 </div>
 

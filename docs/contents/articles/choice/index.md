@@ -72,6 +72,8 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
 
 ```
 
+<a href="#" id="custom"></a>
+
 ### Create custom rkType
 
 `RkChoice` can be customizable by this styles:
@@ -154,7 +156,7 @@ The result will be this:
 ### RkChoice Props
 
 <div class="doc-prop">
-    <p><strong>rkType</strong> string</p>
+    <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
     <p>By default RkChoice supports following types: clear, radio, material, posNeg</p>
 </div>
 

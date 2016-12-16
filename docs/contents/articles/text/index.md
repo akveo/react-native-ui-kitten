@@ -20,6 +20,8 @@ import {RkText} from 'react-native-ui-kit';
 <RkText>Text</RkText>
 ```
 
+<a href="#" id="custom"></a>
+
 ### Create custom rkType
 
 Define style in `RkConfig`:
@@ -72,7 +74,7 @@ import {RkChoice} from 'react-native-ui-kit';
 
 
 <div class="doc-prop">
-    <p><strong>rkType</strong> string</p>
+    <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
 </div>
 
 <div class="doc-prop">

@@ -29,6 +29,8 @@ import {RkTabView} from 'react-native-ui-kit';
 </RkTabView>
 ```
 
+<a href="#" id="custom"></a>
+
 ### Create custom rkType
 
 To define new rkType you can modify style for 
@@ -97,7 +99,7 @@ The result will be this:
 ### RkTabView Props
 
 <div class="doc-prop">
-    <p><strong>rkType</strong> string</p>
+    <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
     <p>By default RkButton supports following types: material</p>
 </div>
 <div class="doc-prop">

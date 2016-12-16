@@ -72,6 +72,8 @@ By default there are 12 *rkCard* props that exist:
 - *rkCardAvatar*  
 - *rkCardAvatarSmall*  
 
+<a href="#" id="custom"></a>
+
 ### Create custom rkType
 
 You can create your own prop for example define style *footerText* and use it like *rkCardFooterText'
@@ -165,7 +167,7 @@ The result will be this:
 ### Props
 
 <div class="doc-prop">
-    <p><strong>rkType</strong> string</p>
+    <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
     <p>By default RkCard supports following types: material, bordered, noPadding</p>
 </div>
 
