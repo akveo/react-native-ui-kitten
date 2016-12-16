@@ -16,7 +16,7 @@ export default class MessageBlur extends MessageBase {
 
 const styles = StyleSheet.create({
   messageContainer: {
-    backgroundColor: RkConfig.colors.blurBg,
+    backgroundColor: RkConfig.colors.blurBgStrong,
     alignSelf: 'flex-start',
     marginRight: 50,
     padding: 10,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   myMessageContainer: {
-    backgroundColor: RkConfig.colors.blurBgStrong,
+    backgroundColor: RkConfig.colors.blurBg,
     alignSelf: 'flex-end',
     marginLeft: 50,
     marginRight: 0

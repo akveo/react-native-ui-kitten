@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Montserrat-ExtraLight.otf</string>
 		<string>Ionicons.ttf</string>
 		<string>Montserrat-Regular.ttf</string>
 		<string>roboto.woff2</string>

@@ -23,6 +23,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		FA16BC061E042202009C2917 /* Montserrat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA16BBF11E0421FE009C2917 /* Montserrat-ExtraLight.otf */; };
 		FA64E4051DEEDFE600C049C1 /* roboto.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = FA64E4041DEEDF2200C049C1 /* roboto.woff2 */; };
 		FA64E4061DEEDFE600C049C1 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA64E4031DEEDF1D00C049C1 /* Montserrat-Regular.ttf */; };
 		FA64E4071DEEDFE600C049C1 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA64E4021DEEDF0000C049C1 /* Ionicons.ttf */; };
@@ -202,6 +203,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		FA16BBF11E0421FE009C2917 /* Montserrat-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.otf"; sourceTree = "<group>"; };
 		FA64E3F81DEEDAF100C049C1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		FA64E4021DEEDF0000C049C1 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		FA64E4031DEEDF1D00C049C1 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FA16BBF11E0421FE009C2917 /* Montserrat-ExtraLight.otf */,
 				FA64E4041DEEDF2200C049C1 /* roboto.woff2 */,
 				FA64E4031DEEDF1D00C049C1 /* Montserrat-Regular.ttf */,
 				FA64E4021DEEDF0000C049C1 /* Ionicons.ttf */,
@@ -700,6 +703,7 @@
 				FA64E4061DEEDFE600C049C1 /* Montserrat-Regular.ttf in Resources */,
 				FA64E4071DEEDFE600C049C1 /* Ionicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				FA16BC061E042202009C2917 /* Montserrat-ExtraLight.otf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

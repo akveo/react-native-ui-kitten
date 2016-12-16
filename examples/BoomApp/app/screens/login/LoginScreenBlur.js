@@ -94,6 +94,7 @@ let styles = StyleSheet.create({
     fontWeight: '500'
   },
   subTitle: {
+    fontFamily: 'Montserrat-ExtraLight',
     fontSize: 36,
     textAlign: 'center',
     fontWeight: '100',
