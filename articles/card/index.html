@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="admin,dashboard,template,angular,bootstrap,blur,panel,html,css,javascript">
+    <title>react-native-ui-kit documentation - Card</title>
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900|Anonymous+Pro:400,700,400italic,700italic&amp;subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <script src="/js/components.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav-main">
+        <div class="wrap"><a href="/" class="nav-home"><img src="/images/logo.png" width="24" height="24" class="nav-logo">&nbsp;<span class="blur-label">react-native</span>-ui-kit</a>
+          <ul class="nav-site nav-site-internal">
+            <li><a href="/">Home</a></li>
+            <li><a href="/articles/getting-started/" class="active">Docs</a></li>
+          </ul><span class="nav-docs-right">Need some help? Let us know! <a href="mailto:contact@akveo.com">contact@akveo.com</a></span>
+        </div>
+      </div>
+      <section class="content wrap documentationContent">
+        <div class="nav-docs">
+          <div class="nav-docs section">
+            <h5>Quick Start</h5>
+            <ul>
+              <li><a href="/articles/getting-started/">Getting Started</a></li>
+              <li><a href="/articles/customization/">Customization</a></li>
+            </ul>
+          </div>
+          <div class="nav-docs section">
+            <h5>Components</h5>
+            <ul>
+              <li><a href="/articles/button/">Button</a></li>
+              <li><a href="/articles/choice/">Selectable components</a></li>
+              <li><a href="/articles/tab/">Tabs</a></li>
+              <li><a href="/articles/image/">Modal Image</a></li>
+              <li><a href="/articles/card/" class="active">Card</a></li>
+              <li><a href="/articles/input/">TextInput</a></li>
+              <li><a href="/articles/text/">Text</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="inner-content-wrap">
+          <div class="inner-content">
+            <h1>Card</h1>
+            <div class="subHeader"></div><div class="component" image="card.gif"></div>
+
+<p><code>RkCard</code> component works with custom props on react&nbsp;components. </p>
+<pre><code class="lang-html">import {RkCard} from 'react-native-ui-kit';
+
+//... 
+
+<span class="tag">&lt;<span class="name">RkCard</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">View</span> <span class="attr">rkCardHeader</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">View</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardTitle</span>&gt;</span>Header<span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardSubTitle</span>&gt;</span>Sub header<span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+        <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+    <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="name">View</span> <span class="attr">rkCardContent</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Image</span> <span class="attr">source</span>=<span class="string">{require(</span>'<span class="attr">..</span>/<span class="attr">img</span>/<span class="attr">sea.jpg</span>')} <span class="attr">rkCardImg</span>/&gt;</span>
+    <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="name">View</span> <span class="attr">rkCardContent</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardTitle</span>&gt;</span>Card content<span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardText</span>&gt;</span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Mauris feugiat vel quam ac scelerisque...
+        <span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+    <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="name">View</span> <span class="attr">rkCardFooter</span> <span class="attr">rkType</span>=<span class="string">'bordered'</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Footer<span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+    <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">RkCard</span>&gt;</span>
+</code></pre>
+<p>Every component inside <code>RkCard</code> can use prop that starts with <em>rkCard</em>, for example <em>rkCardHeader</em> apply to the <code>View</code> this&nbsp;style:</p>
+<pre><code class="lang-javascript">
+{
+    flexDirection: <span class="string">'row'</span>,
+    justifyContent: <span class="string">'space-between'</span>,
+    alignItems: <span class="string">'center'</span>,
+    borderTopLeftRadius: <span class="number">1</span>,
+    borderTopRightRadius: <span class="number">1</span>,
+    padding: <span class="number">8</span>,
+}
+</code></pre>
+<p>By default there are 12 <em>rkCard</em> props that&nbsp;exist: </p>
+<ul>
+<li><em>rkCardContainer</em>  </li>
+<li><em>rkCardContent</em>  </li>
+<li><em>rkCardHeader</em>  </li>
+<li><em>rkCardFooter</em>  </li>
+<li><em>rkCardTitle</em>  </li>
+<li><em>rkCardSubTitle</em>  </li>
+<li><em>rkCardRow</em>  </li>
+<li><em>rkCardRowCenter</em>  </li>
+<li><em>rkCardImg</em>  </li>
+<li><em>rkCardBigImg</em>  </li>
+<li><em>rkCardAvatar</em>  </li>
+<li><em>rkCardAvatarSmall</em>  </li>
+</ul>
+<p><a href="#" id="custom"></a></p>
+<h3 id="create-custom-rktype">Create custom&nbsp;rkType</h3>
+<p>You can create your own prop for example define style <em>footerText</em> and use it like&nbsp;*rkCardFooterText’</p>
+<p>For example lets create blue type, first step - setup new type in  <code>RkConfig</code>:</p>
+<pre><code class="lang-javascript">
+<span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kit'</span>;
+
+RkConfig.setType(<span class="string">'card'</span>, <span class="string">'blue'</span>, {
+  container: {
+    borderRadius: <span class="number">15</span>,
+    borderWidth: <span class="number">0</span>,
+    backgroundColor: RkConfig.colors.white,
+  },
+  content: {
+    borderLeftWidth: <span class="number">1</span>,
+    borderRightWidth: <span class="number">1</span>,
+    borderLeftColor: RkConfig.colors.lightGray,
+    borderRightColor: RkConfig.colors.lightGray
+  },
+  header: {
+    borderTopLeftRadius: <span class="number">15</span>,
+    borderTopRightRadius: <span class="number">15</span>,
+    backgroundColor: RkConfig.colors.primary,
+    paddingVertical: <span class="number">10</span>,
+    paddingHorizontal: <span class="number">15</span>
+  },
+  footer: {
+    borderBottomLeftRadius: <span class="number">15</span>,
+    borderBottomRightRadius: <span class="number">15</span>,
+    backgroundColor: RkConfig.colors.primary,
+    paddingVertical: <span class="number">10</span>,
+    paddingHorizontal: <span class="number">15</span>,
+    justifyContent: <span class="string">'center'</span>
+  },
+  contentTitle:{
+    color: RkConfig.colors.darkGray
+  },
+  title: {
+    color: RkConfig.colors.white
+  },
+  subTitle: {
+    color: RkConfig.colors.white
+  },
+  footerText: {
+    fontSize: <span class="number">20</span>,
+    color: RkConfig.colors.white
+  }
+});
+</code></pre>
+<p>After this we can use new type like&nbsp;this: </p>
+<pre><code class="lang-html">import {RkCard} from 'react-native-ui-kit';
+
+//... 
+
+<span class="tag">&lt;<span class="name">RkCard</span> <span class="attr">rkType</span>=<span class="string">"blue"</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">View</span> <span class="attr">rkCardHeader</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Image</span> <span class="attr">resizeMode</span>=<span class="string">{</span>'<span class="attr">cover</span>'} <span class="attr">source</span>=<span class="string">{require(</span>'<span class="attr">..</span>/<span class="attr">img</span>/<span class="attr">sea.jpg</span>')} <span class="attr">rkCardAvatar</span>/&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardTitle</span>&gt;</span><span class="caps">HEADER</span><span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardSubTitle</span>&gt;</span>sub header<span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+    <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="name">Image</span> <span class="attr">resizeMode</span>=<span class="string">{</span>'<span class="attr">cover</span>'} <span class="attr">source</span>=<span class="string">{require(</span>'<span class="attr">..</span>/<span class="attr">img</span>/<span class="attr">sea.jpg</span>')} <span class="attr">rkCardImg</span>/&gt;</span>
+
+    <span class="tag">&lt;<span class="name">View</span> <span class="attr">rkCardContent</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardTitle</span> <span class="attr">rkCardContentTitle</span>&gt;</span>Card content<span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardText</span>&gt;</span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Mauris feugiat vel quam ac scelerisque...
+        <span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+    <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="name">View</span> <span class="attr">rkCardFooter</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">Text</span> <span class="attr">rkCardFooterText</span>&gt;</span><span class="caps">FOOTER</span> HERE<span class="tag">&lt;/<span class="name">Text</span>&gt;</span>
+    <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">RkCard</span>&gt;</span>
+</code></pre>
+<p>The result will be&nbsp;this:</p>
+<p><img src="/images/components/customCard.png" alt="Image of dark buttons"></p>
+<h3 id="props">Props</h3>
+<div class="doc-prop">
+    <p><strong><a href="../customization#rkType">rkType</a></strong>&nbsp;string</p>
+    <p>By default RkCard supports following types: material, bordered,&nbsp;noPadding</p>
+</div>
+
+<div class="doc-prop">
+    <p><a href="https://facebook.github.io/react-native/docs/view.html#props" target="_blank">View.props</a></p>
+</div>
+
+
+            <div id="phone" class="phone"><img id="phoneImg" class="phoneImg"></div>
+          </div>
+        </div>
+      </section>
+      <footer class="wrap">
+        <div class="left">Powered by React Native</div>
+        <div class="right">© 2015–2016 Akveo LLC<br />Documentation licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</div>
+      </footer>
+    </div><a href="https://github.com/akveo/ng2-admin" title="Star &amp; Fork on GitHub" class="github-fork-ribbon"></a>
+  </body>
+</html>
