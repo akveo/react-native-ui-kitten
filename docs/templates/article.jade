@@ -1,4 +1,3 @@
-
 extends layout
 
 block title
@@ -13,9 +12,10 @@ block content
           ul
             each article in group.items
               li
-                a(href=article.url)(class= locals.page === article ? 'active': '')= article.title
-    div.inner-content
-      h1=locals.page.title
-      div.subHeader
-      != typogr(page.html).typogrify()
-
+                a(href=article.url)(class= locals.page === article ? 'active' : '')= article.title
+    div.inner-content-wrap
+      div.inner-content
+        h1=locals.page.title
+        div.subHeader
+        != typogr(page.html).typogrify()
+        block extra-content

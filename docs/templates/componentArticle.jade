@@ -1,25 +1,9 @@
-extends layout
+extends article
+
 block scripts
-    script(src=contents.js['components.js'].url)
+  script(src=contents.js['components.js'].url)
 
-block title
-    | react-native-ui-kit documentation - #{page.title]
-
-block content
-    section.content.wrap.documentationContent.componentArticle
-        div.nav-docs
-            each group in groupedArticles
-                div.nav-docs.section
-                    h5=group.groupName
-                    ul
-                        each article in group.items
-                            li
-                                a(href=article.url)(class= locals.page === article ? 'active' : '')= article.title
-        div.inner-content-components
-            div.inner-content
-                h1=locals.page.title
-                div.subHeader
-                != typogr(page.html).typogrify()
-            div#phone.phone
-                img#phoneImg.phoneImg
+block extra-content
+  div#phone.phone
+        img#phoneImg.phoneImg
 

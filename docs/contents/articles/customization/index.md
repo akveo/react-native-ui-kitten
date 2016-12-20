@@ -69,7 +69,31 @@ Now each `RkText` and `RkButton` component without *rkType*
 prop will use *rkType* which you define in *myTheme* 
  
 
+## Colors
 
+*react-native-ui-kit* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors.
+ 
+Example:
 
+```javascript 
 
+import {RkConfig} from 'react-native-ui-kit';
+
+<Text style={{color: RkConfig.colors.blue500}}>blue</Text>
+
+```
+
+You can define your own colors and use it in the same way as above.
+
+Create custom colors:
+
+```javascript 
+
+RkConfig.setColor('primary', RkConfig.colors.blue500);
+RkConfig.setColor('danger', RkConfig.colors.red500);
+RkConfig.setColor('warning', RkConfig.colors.yellow500);
+RkConfig.setColor('success', RkConfig.colors.green500);
+RkConfig.setColor('border', '#ECECEC');
+
+```
 
