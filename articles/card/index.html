@@ -83,12 +83,12 @@
 <p>Every component inside <code>RkCard</code> can use prop that starts with <em>rkCard</em>, for example <em>rkCardHeader</em> apply to the <code>View</code> this&nbsp;style:</p>
 <pre><code class="lang-javascript">
 {
-    flexDirection: <span class="string">'row'</span>,
-    justifyContent: <span class="string">'space-between'</span>,
-    alignItems: <span class="string">'center'</span>,
-    borderTopLeftRadius: <span class="number">1</span>,
-    borderTopRightRadius: <span class="number">1</span>,
-    padding: <span class="number">8</span>,
+    <span class="attr">flexDirection</span>: <span class="string">'row'</span>,
+    <span class="attr">justifyContent</span>: <span class="string">'space-between'</span>,
+    <span class="attr">alignItems</span>: <span class="string">'center'</span>,
+    <span class="attr">borderTopLeftRadius</span>: <span class="number">1</span>,
+    <span class="attr">borderTopRightRadius</span>: <span class="number">1</span>,
+    <span class="attr">padding</span>: <span class="number">8</span>,
 }
 </code></pre>
 <p>By default there are 12 <em>rkCard</em> props that&nbsp;exist: </p>
@@ -114,44 +114,44 @@
 <span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kit'</span>;
 
 RkConfig.setType(<span class="string">'card'</span>, <span class="string">'blue'</span>, {
-  container: {
-    borderRadius: <span class="number">15</span>,
-    borderWidth: <span class="number">0</span>,
-    backgroundColor: RkConfig.colors.white,
+  <span class="attr">container</span>: {
+    <span class="attr">borderRadius</span>: <span class="number">15</span>,
+    <span class="attr">borderWidth</span>: <span class="number">0</span>,
+    <span class="attr">backgroundColor</span>: RkConfig.colors.white,
   },
-  content: {
-    borderLeftWidth: <span class="number">1</span>,
-    borderRightWidth: <span class="number">1</span>,
-    borderLeftColor: RkConfig.colors.lightGray,
-    borderRightColor: RkConfig.colors.lightGray
+  <span class="attr">content</span>: {
+    <span class="attr">borderLeftWidth</span>: <span class="number">1</span>,
+    <span class="attr">borderRightWidth</span>: <span class="number">1</span>,
+    <span class="attr">borderLeftColor</span>: RkConfig.colors.lightGray,
+    <span class="attr">borderRightColor</span>: RkConfig.colors.lightGray
   },
-  header: {
-    borderTopLeftRadius: <span class="number">15</span>,
-    borderTopRightRadius: <span class="number">15</span>,
-    backgroundColor: RkConfig.colors.primary,
-    paddingVertical: <span class="number">10</span>,
-    paddingHorizontal: <span class="number">15</span>
+  <span class="attr">header</span>: {
+    <span class="attr">borderTopLeftRadius</span>: <span class="number">15</span>,
+    <span class="attr">borderTopRightRadius</span>: <span class="number">15</span>,
+    <span class="attr">backgroundColor</span>: RkConfig.colors.primary,
+    <span class="attr">paddingVertical</span>: <span class="number">10</span>,
+    <span class="attr">paddingHorizontal</span>: <span class="number">15</span>
   },
-  footer: {
-    borderBottomLeftRadius: <span class="number">15</span>,
-    borderBottomRightRadius: <span class="number">15</span>,
-    backgroundColor: RkConfig.colors.primary,
-    paddingVertical: <span class="number">10</span>,
-    paddingHorizontal: <span class="number">15</span>,
-    justifyContent: <span class="string">'center'</span>
+  <span class="attr">footer</span>: {
+    <span class="attr">borderBottomLeftRadius</span>: <span class="number">15</span>,
+    <span class="attr">borderBottomRightRadius</span>: <span class="number">15</span>,
+    <span class="attr">backgroundColor</span>: RkConfig.colors.primary,
+    <span class="attr">paddingVertical</span>: <span class="number">10</span>,
+    <span class="attr">paddingHorizontal</span>: <span class="number">15</span>,
+    <span class="attr">justifyContent</span>: <span class="string">'center'</span>
   },
-  contentTitle:{
-    color: RkConfig.colors.darkGray
+  <span class="attr">contentTitle</span>:{
+    <span class="attr">color</span>: RkConfig.colors.darkGray
   },
-  title: {
-    color: RkConfig.colors.white
+  <span class="attr">title</span>: {
+    <span class="attr">color</span>: RkConfig.colors.white
   },
-  subTitle: {
-    color: RkConfig.colors.white
+  <span class="attr">subTitle</span>: {
+    <span class="attr">color</span>: RkConfig.colors.white
   },
-  footerText: {
-    fontSize: <span class="number">20</span>,
-    color: RkConfig.colors.white
+  <span class="attr">footerText</span>: {
+    <span class="attr">fontSize</span>: <span class="number">20</span>,
+    <span class="attr">color</span>: RkConfig.colors.white
   }
 });
 </code></pre>
