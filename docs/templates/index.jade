@@ -1,0 +1,38 @@
+
+extends layout
+
+block title
+  | React Native UI Kit
+
+block content
+  div.hero
+    div.hero-content
+      div.wrap
+        div.text
+          strong react native - #[span.white-text ui kit]
+        div.minitext React native ui framework
+        div.buttons-unit
+          a.button(href=firstArticleUrl) Documentation
+        div.admin-screenshots
+          div.admin-screenshot
+                img(src=contents.images['main.png'].url)
+  div.index-block
+    div.wrap
+      h2 Is it free?
+      p Yes, ui-kit is completely free and MIT licensed. That means you can do with it whatever you want.
+  div.index-block
+    div.wrap
+      h2 How can I support you guys?
+      p Here's what you can do:
+      ul
+        li Star #[a(href='https://github.com/akveo/react-kit',target='_blank') our GitHub repo]
+        li Create pull requests, submit bugs, suggest new features
+        li Follow #[a(href='https://twitter.com/akveo_inc',target='_blank') us on Twitter]
+        li Like #[a(href='https://www.facebook.com/akveo/',target='_blank') our page on Facebook]
+  div.index-block
+    div.wrap
+      h2 Can I hire you?
+      p Yes! We are available for hire. Visit #[a(href='http://akveo.com',target='_blank') our homepage]
+        |&nbsp;or simply leave us a note at #[a(href='mailto:contact@akveo.com') contact@akveo.com].
+        |&nbsp;We will be happy to work with you!
+

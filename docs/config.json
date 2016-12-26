@@ -1,0 +1,34 @@
+{
+  "baseUrl": "/react-native-ui-kit/",
+  "locals": {
+    "url": "http://localhost:8080",
+    "name": "react native ui kit",
+    "owner": "Akveo",
+    "description": ""
+  },
+  "plugins": [
+    "wintersmith-sassy",
+    "./plugins/paginator.coffee"
+  ],
+  "sass": {
+    "debug": "undefined"
+  },
+  "require": {
+    "moment": "moment",
+    "_": "underscore",
+    "typogr": "typogr"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "markdown": {
+    "smartLists": true,
+    "smartypants": true
+  },
+  "paginator": {
+    "perPage": 3,
+    "groupSort": {
+      "TableOfContents": 300
+    }
+  }
+}
