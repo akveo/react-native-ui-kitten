@@ -116,5 +116,3 @@ The result will be this:
     <p>TouchableOpacity props</p>
 </div>
 
-<div class="component-end"></div>
-

@@ -4,6 +4,7 @@ block title
   | react-native-ui-kit documentation - #{page.title]
 
 block content
+  div.head-mock
   section.content.wrap.documentationContent
     div.nav-docs
       each group in groupedArticles
@@ -19,3 +20,4 @@ block content
         div.subHeader
         != typogr(page.html).typogrify()
         block extra-content
+    div.phoneSize

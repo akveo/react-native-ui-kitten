@@ -1,4 +1,3 @@
-
 extends layout
 
 block title
@@ -6,33 +5,41 @@ block title
 
 block content
   div.hero
+    div.hero-image
+      img(src=contents.images['main.png'].url)
     div.hero-content
-      div.wrap
-        div.text
-          strong react native - #[span.white-text ui kit]
-        div.minitext React native ui framework
-        div.buttons-unit
-          a.button(href=firstArticleUrl) Documentation
-        div.admin-screenshots
-          div.admin-screenshot
-                img(src=contents.images['main.png'].url)
-  div.index-block
-    div.wrap
-      h2 Is it free?
-      p Yes, ui-kit is completely free and MIT licensed. That means you can do with it whatever you want.
-  div.index-block
-    div.wrap
-      h2 How can I support you guys?
-      p Here's what you can do:
-      ul
-        li Star #[a(href='https://github.com/akveo/react-kit',target='_blank') our GitHub repo]
-        li Create pull requests, submit bugs, suggest new features
-        li Follow #[a(href='https://twitter.com/akveo_inc',target='_blank') us on Twitter]
-        li Like #[a(href='https://www.facebook.com/akveo/',target='_blank') our page on Facebook]
-  div.index-block
-    div.wrap
-      h2 Can I hire you?
-      p Yes! We are available for hire. Visit #[a(href='http://akveo.com',target='_blank') our homepage]
-        |&nbsp;or simply leave us a note at #[a(href='mailto:contact@akveo.com') contact@akveo.com].
-        |&nbsp;We will be happy to work with you!
+      div.text
+        span.title
+          strong React&nbsp;
+          span Native
+      div.text
+        span.sub UI FRAMEWORK
+      div.minitext Pure library with set of components that ease to customize
+      div.buttons-unit
+        a.button(href=firstArticleUrl) DOCUMENTATION
+  div.free-block
+    h2.free IS IT FREE?
+    p.yes Yes
+    p.description UI Kit is completely free and MIT licensed.
+      br
+      | That means you can do with it whatever you want.
+  div.support-block
+    h2.head HOW YOU CAN SUPPORT US?
+    p.do Here's what you can do:
+    div.actions
+      a(href="https://github.com/akveo/react-native-ui-kit", target='_blank')
+        img(src=contents.images['git.png'].url)
+        p Star us
+      a(href="https://twitter.com/akveo_inc", target='_blank')
+        img(src=contents.images['twitter.png'].url)
+        p Follow us
+      a(href="https://www.facebook.com/akveo/", target='_blank')
+        img(src=contents.images['fb.png'].url)
+        p Like us
+     p.thank THANKS =)
+  div.hire-block
+    h2.head CAN I HIRE YOU?
+    p.description Yes! We are available for hire. Visit #[a(href='http://akveo.com',target='_blank') our homepage]
+      | &nbsp;or simply leave us a note at #[a(href='mailto:contact@akveo.com') contact@akveo.com].
+      | &nbsp;We will be happy to work with you!
 

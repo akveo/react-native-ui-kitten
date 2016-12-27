@@ -139,5 +139,3 @@ The result will be this:
     <p>Style for RkTabView.Tab title when tab is selected(applied only when title is text)</p>
 </div>
 
-
-<div class="component-end"></div>

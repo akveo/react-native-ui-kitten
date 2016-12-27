@@ -23,21 +23,21 @@ html(lang='en')
   body(class=bodyclass)
     div.container
       div.nav-main
-        div.wrap
-          a.nav-home(href=contents['index'].url)
-            img.nav-logo(src=contents.images['logo.png'].url, width=24,height=24)
-            |&nbsp;#[span.blur-label react-native]-ui-kit
-          ul.nav-site.nav-site-internal
-            li
-              a(class= locals.page.metadata.activeHome ? 'active': '')(href=contents['index'].url) Home
-            li
-              a(class= !locals.page.metadata.activeHome ? 'active': '')(href=firstArticleUrl) Docs
+        div.wrap.nav-wrap
+          div
+            a.nav-home(href=contents['index'].url)
+             | React Native #[span.blur-label UI Kit]
+            ul.nav-site.nav-site-internal
+              li
+                a(class= locals.page.metadata.activeHome ? 'active': '')(href=contents['index'].url) Home
+              li
+                a(class= !locals.page.metadata.activeHome ? 'active': '')(href=firstArticleUrl) Docs
           span.nav-docs-right
             | Need some help? Let us know! #[a(href='mailto:contact@akveo.com') contact@akveo.com]
       block content
-      footer.wrap
-        div.left Powered by React Native
-        div.right
-          | © 2015–2016 Akveo LLC<br />
+      footer
+        div Powered by React Native
+        div
+          | © 2015–2017 Akveo LLC<br />
           | Documentation licensed under #[a(href='https://creativecommons.org/licenses/by/4.0/') CC BY 4.0].
     a(href='https://github.com/akveo/ng2-admin', class='github-fork-ribbon', title="Star & Fork on GitHub")

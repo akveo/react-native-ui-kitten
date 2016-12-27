@@ -122,5 +122,3 @@ let images = [ require('../img/animal.jpeg'),
     <p>Number of image(needed with multi source)</p>
 </div>
 
-
-<div class="component-end"></div>
