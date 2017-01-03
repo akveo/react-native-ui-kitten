@@ -6,7 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="buttons.gif"></div>
+<div class="component" image="https://thumbs.gfycat.com/ShockingComplexCowrie-size_restricted.gif"></div>
 
 `RkButton` component easy to customize using a lot of *props* and also
 with *rkType* prop.

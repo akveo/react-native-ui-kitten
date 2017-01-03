@@ -6,8 +6,6 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="text.png"></div>
-
 Main purpose of `RkText` component - define custom *rkType* for
 different types of typography in your app. For example you can 
 define *rkType* for headers, articles, names and etc.

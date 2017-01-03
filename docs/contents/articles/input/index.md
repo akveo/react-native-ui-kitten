@@ -6,7 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="input.gif"></div>
+<div class="component" image="https://thumbs.gfycat.com/ShockingComplexCowrie-size_restricted.gif"></div>
 
 `RkTextInput` component:
 

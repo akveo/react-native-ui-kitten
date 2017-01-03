@@ -6,8 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-
-<div class="component" image="tabs.gif"></div>
+<div class="component" image="https://thumbs.gfycat.com/ScarceGleefulBluetickcoonhound-size_restricted.gif"></div>
 
 Example usage of `RkTabView` and `RkTabView.Tab` components:
 

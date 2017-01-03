@@ -6,7 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="choice.gif"></div>
+<div class="component" image="https://thumbs.gfycat.com/FantasticRawGermanwirehairedpointer-size_restricted.gif"></div>
 
 `RkChoice` component is analog of html checkbox and radio buttons.
 

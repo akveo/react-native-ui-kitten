@@ -6,7 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="card.gif"></div>
+<div class="component" image="https://thumbs.gfycat.com/OptimalSmoothAsianpiedstarling-size_restricted.gif"></div>
 
 `RkCard` component works with custom props on react components. 
 

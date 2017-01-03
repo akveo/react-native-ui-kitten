@@ -6,7 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="image.gif"></div>
+<div class="component" image="https://thumbs.gfycat.com/IncredibleAnotherDorado-size_restricted.gif"></div>
 
 
 `RkModalImg` is extension on basic Image that opens image to full screen on click:
@@ -45,7 +45,7 @@ _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
 
 ```
 
-<div class="component" image="imageGallery.gif"></div>
+<div class="component" image="https://thumbs.gfycat.com/SpeedyCheeryConure-size_restricted.gif"></div>
 
 ### Gallery
 

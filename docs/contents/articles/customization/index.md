@@ -8,7 +8,7 @@ template: article.jade
 
 <a href="#" id="rkType"></a>
 
-## rkType
+### rkType
 
 Most of components support *rkType* prop which should contain string. 
 String can consist of one or more types separated by space. 
@@ -69,7 +69,7 @@ Now each `RkText` and `RkButton` component without *rkType*
 prop will use *rkType* which you define in *myTheme* 
  
 
-## Colors
+### Colors
 
 *react-native-ui-kit* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors.
  

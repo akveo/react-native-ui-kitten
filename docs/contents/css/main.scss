@@ -17,9 +17,10 @@
 }
 
 $primary: #00e5bf;
+$primary-dark: #00af8a;
 
 @mixin header {
-  margin: 10px 0;
+  margin: 20px 0 0 0;
   font-family: inherit;
   font-weight: bold;
   color: inherit;
@@ -38,7 +39,7 @@ body {
   height: 100%;
 }
 p {
-  margin: 0 0 10px
+  margin: 0 0 10px 0;
 }
 
 em {
@@ -143,10 +144,6 @@ body, pre {
   border: none;
   margin: 0;
   padding: 0
-}
-
-html {
-  background: #f9f9f9
 }
 
 .browser-mockup {
@@ -606,7 +603,6 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 }
 
 .nav-docs li {
-  line-height: 16px;
   margin: 0 0 6px
 }
 
@@ -617,11 +613,11 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 
 .nav-docs a:hover {
   text-decoration: none;
-  color: #285eb8
+  color: $primary-dark;
 }
 
 .nav-docs a.active {
-  color: #285eb8
+  color: $primary-dark;
 }
 
 .nav-docs a.external:after {
@@ -900,10 +896,6 @@ footer {
   display: table-cell
 }
 
-p {
-  margin: 10px 0
-}
-
 .highlight {
   padding: 10px;
   margin-bottom: 20px
@@ -943,7 +935,7 @@ figure {
 
 .doc-prop{
   margin: 0;
-  background-color: rgb(225, 246, 255);
+  background-color: #d7d7d7;
   color: #484848;
   font-size: 14px;
   padding: 5px 10px;
@@ -951,7 +943,13 @@ figure {
     margin: 0
   }
   &:nth-child(odd){
-    background-color: rgb(235, 249, 255);
+    background-color: #e4e4e4;
+  }
+  a{
+    color: $primary-dark
+  }
+  a:hover{
+    color: rgba($primary-dark, 0.9);
   }
 }
 
@@ -968,6 +966,7 @@ figure {
   width: 275px;
   height: 550px;
   position: fixed;
+  box-sizing: border-box;
   top: 150px;
   left: calc(50% + 325px);
   background: url("../images/phone.png");
@@ -976,10 +975,12 @@ figure {
 }
 
 .phoneImg{
-  width: 275px;
-  height: 550px;
+  height: 405px;
+  width: 227px;
+  margin-top: 75px;
+  margin-left: 23px;
   box-sizing: border-box;
-  padding: 73px 21px 69px 18px;
+  box-shadow: 0 0 2px 4.5px black;
 }
 
 h1:after {
@@ -1012,7 +1013,7 @@ pre code {
   display: block;
   line-height: 1.1;
   color: #333333;
-  background: #f8f5ec;
+  background: rgb(247,247,247);
   padding: 30px 14px 14px;
   position: relative;
   overflow-x: auto;
@@ -1026,8 +1027,8 @@ pre code:before {
   padding: 3px 7px;
   font-size: 12px;
   font-weight: bold;
-  color: #c2c0bc;
-  background-color: #f1ede4;
+  color: #676767;
+  background-color: rgb(210, 210, 210);
   content: "Code";
 }
 
@@ -1035,7 +1036,7 @@ p code {
   padding: 0.1em 0.3em 0.2em;
   border-radius: 0.3em;
   position: relative;
-  background: #fffff3;
+  background: rgb(247,247,247);
 
   white-space: nowrap;
 }
