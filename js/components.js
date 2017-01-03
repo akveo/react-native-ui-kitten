@@ -11,7 +11,7 @@ document.addEventListener( "DOMContentLoaded", function(){
       if(condition){
         if(currentImageComponent === i) return;
         currentImageComponent = i;
-        phone.src = '/react-native-ui-kit/images/components/' + components[i].getAttribute('image');
+        phone.src = components[i].getAttribute('image');
         return;
       }
     }
