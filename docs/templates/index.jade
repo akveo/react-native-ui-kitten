@@ -17,7 +17,8 @@ block content
       div.minitext Pure library with set of components that ease to customize
       div.buttons-unit
         a.button(href=firstArticleUrl) DOCUMENTATION
-  div.free-block
+    img#next.next(src=contents.images['mouse.png'].url)
+  div#free.free-block
     h2.free IS IT FREE?
     p.yes Yes
     p.description UI Kit is completely free and MIT licensed.
@@ -43,3 +44,5 @@ block content
       | &nbsp;or simply leave us a note at #[a(href='mailto:contact@akveo.com') contact@akveo.com].
       | &nbsp;We will be happy to work with you!
 
+block scripts
+  script(src=contents.js['index.js'].url)

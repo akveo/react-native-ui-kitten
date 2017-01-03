@@ -22,7 +22,7 @@ html(lang='en')
       block scripts
   body(class=bodyclass)
     div.container
-      div.nav-main
+      div#nav.nav-main
         div.wrap.nav-wrap
           div
             a.nav-home(href=contents['index'].url)
@@ -36,6 +36,9 @@ html(lang='en')
             | Need some help? Let us know! #[a(href='mailto:contact@akveo.com') contact@akveo.com]
       block content
       footer
+        div.hidden
+          | © 2015–2017 Akveo LLC<br />
+          | Documentation licensed under #[a(href='https://creativecommons.org/licenses/by/4.0/') CC BY 4.0].
         div Powered by React Native
         div
           | © 2015–2017 Akveo LLC<br />
