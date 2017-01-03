@@ -149,7 +149,7 @@ export class ButtonScreen extends Component {
           <Text style={UtilStyles.titleText}>Events</Text>
           <View style={UtilStyles.rowContainer}>
             <View style={UtilStyles.exampleView}>
-              <RkButton rkType='basic medium' onPress={() => {Alert.alert('click')}} style={RkStyle.red500Bg}
+              <RkButton rkType='basic medium' onPress={() => {Alert.alert('onPress')}} style={RkStyle.red500Bg}
                         innerStyle={RkStyle.whiteText}>Push me!</RkButton>
             </View>
             <View style={UtilStyles.description}>

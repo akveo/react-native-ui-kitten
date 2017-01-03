@@ -32,20 +32,17 @@ export class TabScreen extends Component {
             <RkTabView>
               <RkTabView.Tab title={'Tab 1'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
-                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
-                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
-                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 1 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 2'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 2 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 2 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 3'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 3 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 3 Content</Text>
                 </View>
               </RkTabView.Tab>
             </RkTabView>
@@ -70,17 +67,17 @@ export class TabScreen extends Component {
             <RkTabView>
               <RkTabView.Tab title={(selected) => this._renderCustomTab(selected, 'ios-apps', 'Apps')}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 1 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={(selected) => this._renderCustomTab(selected, 'ios-bowtie', 'Bowtie')}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 2 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 2 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={(selected) => this._renderCustomTab(selected, 'ios-cloud', 'Cloud')}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 3 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 3 Content</Text>
                 </View>
               </RkTabView.Tab>
             </RkTabView>
@@ -92,32 +89,32 @@ export class TabScreen extends Component {
             <RkTabView maxVisibleTabs={3}>
               <RkTabView.Tab title={'Tab 1'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 1 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 1 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 2'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 2 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 2 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 3'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 3 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 3 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 4'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 4 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 4 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 5'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 5 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 5 Content</Text>
                 </View>
               </RkTabView.Tab>
               <RkTabView.Tab title={'Tab 6'}>
                 <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={{textAlign: 'center'}}>Tab 6 Content</Text>
+                  <Text style={UtilStyles.tabContent}>Tab 6 Content</Text>
                 </View>
               </RkTabView.Tab>
             </RkTabView>
@@ -153,7 +150,7 @@ export class TabScreen extends Component {
         innerStyleSelected={{color: RkConfig.colors.yellow500}}
         title={'Tab ' + tab}>
         <View style={{flex: 1, paddingVertical: 15, backgroundColor: 'white'}}>
-          <Text style={{textAlign: 'center'}}>Tab {tab} Content</Text>
+          <Text style={UtilStyles.tabContent}>Tab {tab} Content</Text>
         </View>
       </RkTabView.Tab>
     )

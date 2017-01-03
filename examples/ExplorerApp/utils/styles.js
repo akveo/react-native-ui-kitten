@@ -66,4 +66,10 @@ export const UtilStyles = StyleSheet.create({
   column :{
     flexDirection: 'column'
   },
+  tabContent:{
+    fontSize: 32,
+    alignSelf: 'center',
+    padding: 30,
+    color: RkConfig.colors.grey500
+  }
 });

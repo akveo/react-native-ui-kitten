@@ -99,15 +99,18 @@ export class ImageScreen extends Component {
 
   _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+      <View style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
         <View style={{flex: 1}}>
-          <RkButton innerStyle={{color: 'white'}} style={{width: 60}} type={'clear'}
+          <RkButton innerStyle={{color: 'white'}} style={{width: 80}} rkType='clear'
                     onPress={closeImage}>Close</RkButton>
         </View>
-        <View style={{flex: 1}}>
-          <Text style={{textAlign: 'center', color: 'white'}}>header</Text>
+        <View>
+          <Text style={{textAlign: 'center', color: 'white'}}>Custom Header</Text>
         </View>
-        <View style={{flex: 1}}></View>
+        <View style={{flex: 1}}>
+          <RkButton style={{width: 80, opacity: 0}} rkType='clear'
+                    onPress={closeImage}>Close</RkButton>
+        </View>
       </View>
     );
   }
