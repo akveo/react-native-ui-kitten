@@ -72,6 +72,7 @@ prop will use *rkType* which you define in *myTheme*
 ### Colors
 
 *react-native-ui-kit* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors.
+All colors are listed in [RkConfig.colors](https://github.com/akveo-private/react-native-ui-kit/blob/master/util/color.js)
  
 Example:
 
@@ -90,7 +91,7 @@ Create custom colors:
 ```javascript 
 
 RkConfig.setColor('primary', RkConfig.colors.blue500);
-RkConfig.setColor('danger', RkConfig.colors.red500);
+RkConfig.setColor('danger',  RkConfig.colors.red500);
 RkConfig.setColor('warning', RkConfig.colors.yellow500);
 RkConfig.setColor('success', RkConfig.colors.green500);
 RkConfig.setColor('border', '#ECECEC');
