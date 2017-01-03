@@ -26,12 +26,12 @@ html(lang='en')
         div.wrap.nav-wrap
           div
             a.nav-home(href=contents['index'].url)
-             | React Native #[span.blur-label UI Kit]
+             | #[strong React] Native #[span.blur-label UI Kit]
             ul.nav-site.nav-site-internal
               li
-                a(class= locals.page.metadata.activeHome ? 'active': '')(href=contents['index'].url) Home
+                a(class= locals.page.metadata.activeHome ? 'active': '')(href=contents['index'].url) HOME
               li
-                a(class= !locals.page.metadata.activeHome ? 'active': '')(href=firstArticleUrl) Docs
+                a(class= !locals.page.metadata.activeHome ? 'active': '')(href=firstArticleUrl) DOCS
           span.nav-docs-right
             | Need some help? Let us know! #[a(href='mailto:contact@akveo.com') contact@akveo.com]
       block content
@@ -39,7 +39,9 @@ html(lang='en')
         div.hidden
           | © 2015–2017 Akveo LLC<br />
           | Documentation licensed under #[a(href='https://creativecommons.org/licenses/by/4.0/') CC BY 4.0].
-        div Powered by React Native
+        div
+          span.black Akveo <br />
+          | Powered by React Native
         div
           | © 2015–2017 Akveo LLC<br />
           | Documentation licensed under #[a(href='https://creativecommons.org/licenses/by/4.0/') CC BY 4.0].

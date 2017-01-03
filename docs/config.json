@@ -1,5 +1,5 @@
 {
-  "baseUrl": "/",
+  "baseUrl": "/react-native-ui-kit/",
   "locals": {
     "url": "http://localhost:8080",
     "name": "react native ui kit",

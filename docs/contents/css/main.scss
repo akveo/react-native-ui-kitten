@@ -183,11 +183,11 @@ body, pre {
 }
 
 .container {
-  height: calc(100% - 110px);
+  height: calc(100% - 140px);
 }
 
 .head-mock{
-  height: 55px;
+  height: 70px;
   background-color: black;
 }
 
@@ -249,7 +249,7 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
   color: #fafafa;
   position: fixed;
   top: 0;
-  height: 55px;
+  height: 70px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   width: 100%;
   z-index: 100
@@ -281,10 +281,12 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 
 .nav-main .nav-site li > a {
   box-sizing: content-box;
-  padding: 0 10px;
-  line-height: 50px;
+  padding: 0 15px;
+  line-height: 70px;
   display: inline-block;
-  height: 50px;
+  font-weight: lighter;
+  font-size: 16px;
+  height: 64px;
   color: #ddd
 }
 
@@ -294,14 +296,15 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 
 .nav-main .nav-site li > a.active {
   color: #fafafa;
-  border-bottom: 5px solid $primary;
+  border-bottom: 6px solid $primary;
 }
 
 .nav-main .nav-home {
   color: #ffffff;
   font-size: 24px;
-  line-height: 50px;
-  height: 50px;
+  line-height: 70px;
+  height: 70px;
+  font-weight: lighter;
   display: inline-block
 }
 
@@ -665,7 +668,10 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 .nav-docs-right {
   display: block;
   float: right;
-  line-height: 50px;
+  line-height: 70px;
+  color: rgba(white, 0.8);
+  font-size: 15px;
+  font-weight: lighter;
 }
 
 .nav-docs-right a {
@@ -775,7 +781,7 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 footer {
   padding: 10px;
   font-size: 14px;
-  height: 35px;
+  height: 50px;
   font-family: Montserrat, sans-serif;
   background-color: black;
   color: rgba(white, 0.7);
@@ -786,6 +792,10 @@ footer {
   a{
     color: white;
   }
+}
+
+.black{
+  color: black;
 }
 
 .hidden{
@@ -1011,6 +1021,7 @@ code {
 
 pre code {
   display: block;
+  margin-bottom: 10px;
   line-height: 1.1;
   color: #333333;
   background: rgb(247,247,247);
