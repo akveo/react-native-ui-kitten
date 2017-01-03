@@ -2,7 +2,9 @@
   "name": "react-native-ui-kit",
   "version": "0.0.1",
   "private": true,
-  "description": "React Native components.",
+  "description": "React Native components",
+  "author": "akveo",
+  "homepage": "http://akveo.github.io/react-native-ui-kit/",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,5 +16,12 @@
     "gh-pages": "^0.12.0",
     "markdown-it": "^8.2.0",
     "wintersmith": "^2.3.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akveo/react-native-ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/react-native-ui-kit/issues"
+  },
 }
