@@ -29,11 +29,13 @@ $primary: #00e5bf;
 html {
   font-family: 'Source Sans Pro', sans-serif;
   color: #484848;
-  line-height: 1.28
+  line-height: 1.28;
+  height: 100%;
 }
 
 body {
   position: relative;
+  height: 100%;
 }
 p {
   margin: 0 0 10px
@@ -184,6 +186,7 @@ html {
 }
 
 .container {
+  height: calc(100% - 110px);
 }
 
 .head-mock{
@@ -776,6 +779,7 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 footer {
   padding: 10px;
   font-size: 14px;
+  height: 35px;
   font-family: Montserrat, sans-serif;
   background-color: black;
   color: rgba(white, 0.7);
@@ -815,6 +819,12 @@ footer {
   color: #555;
   background-color: black;
   background-color: rgba(0, 0, 0, 0.04)
+}
+
+.documentationContent{
+  min-height: 100%;
+  padding-bottom: 20px;
+  background-color: white;
 }
 
 .documentationContent {
