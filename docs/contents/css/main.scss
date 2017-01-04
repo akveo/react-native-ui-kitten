@@ -1,19 +1,26 @@
 @font-face {
   font-family: 'Montserrat';
-  src: url(/fonts/Montserrat-Bold.otf);
+  src: url(/react-native-ui-kitten/fonts/Montserrat-Bold.otf);
   font-weight: 700;
 }
 
 @font-face {
   font-family: 'Montserrat';
-  src: url(/fonts/Montserrat-ExtraLight.otf);
-  font-weight: 300;
+  font-weight: 400;
+  src: url(/react-native-ui-kitten/fonts/Montserrat-Medium.otf);
 }
 
 @font-face {
   font-family: 'Montserrat';
-  font-weight: 400;
-  src: url(/fonts/Montserrat-Medium.otf);
+  src: url(/react-native-ui-kitten/fonts/Montserrat-ExtraLight.otf);
+  font-weight: 300;
+}
+
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(/react-native-ui-kitten/fonts/Montserrat-Thin.otf);
+  font-weight: 100;
 }
 
 $primary: #00e5bf;
@@ -51,7 +58,8 @@ h1 {
   @include header;
 
   line-height: 40px;
-  font-size: 39px
+  font-size: 39px;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -355,7 +363,7 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 .hero .hero-content {
   margin: 0 75px 75px 75px;
   color: #e9e9e9;
-  max-width: 350px;
+  max-width: 425px;
 }
 
 .next{
@@ -371,21 +379,21 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 }
 
 .title {
-  font-size: 64px;
-  line-height: 64px;
+  font-size: 72px;
+  line-height: 72px;
 }
 
 .sub{
   font-size: 42px;
   line-height: 42px;
-  font-weight: lighter;
+  font-weight: 100;
   color: $primary;
 }
 
 .hero .minitext {
   margin-top: 30px;
-  font-weight: lighter;
-  font-size: 20px;
+  font-weight: 100;
+  font-size: 24px;
   color: rgba(white, 0.8);
 }
 
@@ -413,7 +421,7 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
   flex-direction: column;
   align-items: center;
   background-color: black;
-  padding: 100px 10px;
+  padding: 150px 10px;
   text-align: center;
   font-family: Montserrat, sans-serif;
   .free{
@@ -442,7 +450,7 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 10px 30px 10px;
+  padding: 100px 10px 100px 10px;
   background: radial-gradient(circle at center, #171c59 0%, #0f0321 50%, #000  100%);
   .head{
     font-size: 48px;
@@ -619,6 +627,10 @@ h1:hover .hash-link, h2:hover .hash-link, h3:hover .hash-link, h4:hover .hash-li
 .nav-docs a {
   color: #666;
   display: block
+}
+
+.nav-docs h3 {
+  font-size: 20px;
 }
 
 .nav-docs a:hover {
@@ -880,7 +892,7 @@ footer {
   border-radius: 32px;
   border: 1px solid $primary;
   padding: 10px 30px;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 300;
   display: inline-block;
   color: #fafafa;
