@@ -72,7 +72,7 @@ prop will use *rkType* which you define in *myTheme*
 ### Colors
 
 *react-native-ui-kitten* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors.
-All colors are listed in [RkConfig.colors](https://github.com/akveo-private/react-native-ui-kitten/blob/master/util/color.js)
+All colors are listed in [RkConfig.colors](https://github.com/akveo/react-native-ui-kitten/blob/master/util/color.js)
  
 Example:
 
