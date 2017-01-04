@@ -8,7 +8,7 @@ import {
   Alert
 } from 'react-native';
 
-import {RkButton, RkConfig, RkStyle} from 'react-native-ui-kit';
+import {RkButton, RkConfig, RkStyle} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../utils/styles';
 import Icon from 'react-native-vector-icons/Ionicons';

@@ -10,7 +10,7 @@
 		"react": "15.4.1",
 		"react-native": "0.39.2",
 		"react-native-vector-icons": "^2.0.3",
-		"react-native-ui-kit": "file:../../"
+		"react-native-ui-kitten": "file:../../"
 	},
 	"devDependencies": {
 		"babel-jest": "17.0.2",

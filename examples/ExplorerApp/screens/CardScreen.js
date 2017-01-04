@@ -10,7 +10,7 @@ import {
   Image
 } from 'react-native';
 
-import {RkButton, RkConfig, RkStyle, RkModalImg, RkTextInput, RkBarBg, RkCard} from 'react-native-ui-kit';
+import {RkButton, RkConfig, RkStyle, RkModalImg, RkTextInput, RkBarBg, RkCard} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../utils/styles';
 import Icon from 'react-native-vector-icons/Ionicons';

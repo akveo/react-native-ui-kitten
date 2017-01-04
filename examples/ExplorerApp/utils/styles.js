@@ -3,7 +3,7 @@ import {
 } from 'react-native';
 import {
   RkConfig
-} from "react-native-ui-kit"
+} from "react-native-ui-kitten"
 
 export const UtilStyles = StyleSheet.create({
   container: {

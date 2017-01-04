@@ -10,7 +10,7 @@ import {
   Image
 } from 'react-native';
 
-import {RkRadioButton, RkChoiceGroup, RkChoice, RkStyle, RkConfig, RkCard} from 'react-native-ui-kit';
+import {RkRadioButton, RkChoiceGroup, RkChoice, RkStyle, RkConfig, RkCard} from 'react-native-ui-kitten';
 import {UtilStyles} from '../utils/styles';
 
 import Icon from 'react-native-vector-icons/FontAwesome';

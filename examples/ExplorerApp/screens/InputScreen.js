@@ -8,7 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 
-import { RkConfig, RkTextInput, RkSeparator} from 'react-native-ui-kit';
+import { RkConfig, RkTextInput, RkSeparator} from 'react-native-ui-kitten';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {UtilStyles} from '../utils/styles';
 

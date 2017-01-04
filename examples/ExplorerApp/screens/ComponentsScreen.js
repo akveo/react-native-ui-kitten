@@ -11,13 +11,11 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {RkStyle} from 'react-native-ui-kit';
+import {RkStyle} from 'react-native-ui-kitten';
 
 import {ButtonScreen} from './ButtonScreen';
 import {ChoiceScreen} from './ChoiceScreen';
 import {InputScreen} from './InputScreen';
-import {ThemeScreen} from './ThemeScreen';
-import {StartScreen} from './StartScreen';
 import {ImageScreen} from './ImageScreen';
 import {TabScreen} from './TabScreen';
 import {BoardUpScreen} from './BoardUpScreen';
@@ -31,10 +29,6 @@ export class ComponentsScreen extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     let data = [
-      {
-        title: 'Start screen',
-        screenView: StartScreen
-      },
       {
         title: "Buttons",
         screenView: ButtonScreen
@@ -62,11 +56,7 @@ export class ComponentsScreen extends Component {
       {
         title: "Tab View",
         screenView: TabScreen
-      },
-      {
-        title: "Theme",
-        screenView: ThemeScreen
-      },
+      }
     ];
     this.state = {
       dataSource: ds.cloneWithRows(data)

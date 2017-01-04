@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import {ComponentsScreen} from "./screens/ComponentsScreen";
-import {RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kitten';
 
 class ExplorerApp extends Component {
   render() {

@@ -1,7 +1,6 @@
 {
-  "name": "react-native-ui-kit",
+  "name": "react-native-ui-kitten",
   "version": "0.0.1",
-  "private": true,
   "description": "React Native components",
   "author": "akveo",
   "homepage": "http://akveo.github.io/react-native-ui-kit/",
@@ -19,9 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/akveo/react-native-ui-kit.git"
+    "url": "https://github.com/akveo/react-native-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/react-native-ui-kit/issues"
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   }
 }

@@ -9,7 +9,7 @@ import {
   Dimensions
 } from 'react-native';
 
-import {RkButton, RkConfig, RkStyle, RkBoardUpView, RkTextInput} from 'react-native-ui-kit';
+import {RkButton, RkConfig, RkStyle, RkBoardUpView, RkTextInput} from 'react-native-ui-kitten';
 
 
 export class BoardUpScreen extends Component {
