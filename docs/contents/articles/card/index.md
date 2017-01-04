@@ -12,7 +12,7 @@ template: componentArticle.jade
 
 
 ```html
-import {RkCard} from 'react-native-ui-kit';
+import {RkCard} from 'react-native-ui-kitten';
 
 //... 
 
@@ -82,7 +82,7 @@ For example lets create blue type, first step - setup new type in  `RkConfig`:
 
 ```javascript
 
-import {RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kitten';
 
 RkConfig.setType('card', 'blue', {
   container: {
@@ -131,7 +131,7 @@ RkConfig.setType('card', 'blue', {
 After this we can use new type like this: 
 
 ```html
-import {RkCard} from 'react-native-ui-kit';
+import {RkCard} from 'react-native-ui-kitten';
 
 //... 
 

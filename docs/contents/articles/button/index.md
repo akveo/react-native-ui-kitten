@@ -15,7 +15,7 @@ with *rkType* prop.
 Example usage:
 
 ```html
-import {RkButton} from 'react-native-ui-kit';
+import {RkButton} from 'react-native-ui-kitten';
 
 //... 
 
@@ -28,7 +28,7 @@ You can put inside `RkButton` text or another component, this usable for
 icons or images:
 
 ```html
-import {RkButton} from 'react-native-ui-kit';
+import {RkButton} from 'react-native-ui-kitten';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //... 
@@ -49,7 +49,7 @@ using `RkConfig`:
 
 ```javascript
 
-import {RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kitten';
 
 RkConfig.setType('button', 'dark', {
   container: {
@@ -78,7 +78,7 @@ RkConfig.setType('button', 'icon', {
 Now in any part of your app you can write like this:
 
 ```html
-import {RkButton} from 'react-native-ui-kit';
+import {RkButton} from 'react-native-ui-kitten';
 
 //... 
 

@@ -11,7 +11,7 @@ template: componentArticle.jade
 `RkTextInput` component:
 
 ```html
-import {RkTextInput} from 'react-native-ui-kit';
+import {RkTextInput} from 'react-native-ui-kitten';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //... 
@@ -32,7 +32,7 @@ For example lets create colored type, first step - setup new type in  `RkConfig`
 
 ```javascript
 
-import {RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kitten';
 
 RkConfig.setType('input', 'colored', {
     input: {
@@ -53,7 +53,7 @@ RkConfig.setType('input', 'colored', {
 After this we can use new type like this: 
 
 ```html
-import {RkTextInput} from 'react-native-ui-kit';
+import {RkTextInput} from 'react-native-ui-kitten';
 
 //... 
 

@@ -6,22 +6,22 @@ group: Quick Start
 template: article.jade
 ---
 
-### What is react-native-ui-kit?
+### What is react-native-ui-kitten?
 
-*react-native-ui-kit* is pure library with set of components that ease to customize.
+*react-native-ui-kitten* is pure library with set of components that ease to customize.
 
 ### Installation
 
 ```
-npm install --save react-native-ui-kit
+npm install --save react-native-ui-kitten
 ```
 
 <br/>
 
-Include *react-native-ui-kit* in your app:
+Include *react-native-ui-kitten* in your app:
 
 ```javascript
-import {RkButton, RkConfig} from 'react-native-ui-kit';
+import {RkButton, RkConfig} from 'react-native-ui-kitten';
 ```
 
 

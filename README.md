@@ -1,20 +1,20 @@
-# react-native-ui-kit
-React native UI-kit is set of customizable components.
+# react-native-ui-kitten
+React Native UI-Kitten is set of customizable components.
 App made with :heart: by [Akveo team](http://akveo.com/). 
 Follow us on [Twitter](https://twitter.com/akveo_inc) to get latest news about this template first!
 
-[Example app](https://github.com/akveo-private/react-native-ui-kit-demo-app)
+[Example app](https://github.com/akveo/react-native-ui-kitten-demo-app)
 
 ## Documentation
-The website’s [documentation](https://akveo-private.github.io/react-native-ui-kit/) contains this articles.
-- [Customization](https://akveo-private.github.io/react-native-ui-kit/articles/customization/)
-- [Button](https://akveo-private.github.io/react-native-ui-kit/articles/button/)
-- [Choice](https://akveo-private.github.io/react-native-ui-kit/articles/choice/)
-- [Tabs](https://akveo-private.github.io/react-native-ui-kit/articles/tab/)
-- [Modal Image](https://akveo-private.github.io/react-native-ui-kit/articles/image/)
-- [Card](https://akveo-private.github.io/react-native-ui-kit/articles/card/)
-- [Textinput](https://akveo-private.github.io/react-native-ui-kit/articles/input/)
-- [Text](https://akveo-private.github.io/react-native-ui-kit/articles/text)
+The website’s [documentation](https://akveo.github.io/react-native-ui-kitten/) contains this articles.
+- [Customization](https://akveo.github.io/react-native-ui-kitten/articles/customization/)
+- [Button](https://akveo.github.io/react-native-ui-kitten/articles/button/)
+- [Choice](https://akveo.github.io/react-native-ui-kitten/articles/choice/)
+- [Tabs](https://akveo.github.io/react-native-ui-kitten/articles/tab/)
+- [Modal Image](https://akveo.github.io/react-native-ui-kitten/articles/image/)
+- [Card](https://akveo.github.io/react-native-ui-kitten/articles/card/)
+- [Textinput](https://akveo.github.io/react-native-ui-kitten/articles/input/)
+- [Text](https://akveo.github.io/react-native-ui-kitten/articles/text)
 
 ## How can I support developers?
 - Star our GitHub repo

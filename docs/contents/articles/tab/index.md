@@ -11,7 +11,7 @@ template: componentArticle.jade
 Example usage of `RkTabView` and `RkTabView.Tab` components:
 
 ```html
-import {RkTabView} from 'react-native-ui-kit';
+import {RkTabView} from 'react-native-ui-kitten';
 
 //...
 
@@ -37,7 +37,7 @@ To define new rkType you can modify style for
 
 ```javascript
 
-import {RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kitten';
 
 RkConfig.setType('tab', 'dark', {
   container: {
@@ -60,7 +60,7 @@ RkConfig.setType('tab', 'dark', {
 After this just set *rkType* to `RkTabView` component:
 
 ```html
-import {RkTabView} from 'react-native-ui-kit';
+import {RkTabView} from 'react-native-ui-kitten';
 
 //... 
 

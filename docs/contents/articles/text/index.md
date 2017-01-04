@@ -11,7 +11,7 @@ different types of typography in your app. For example you can
 define *rkType* for headers, articles, names and etc.
 
 ```html
-import {RkText} from 'react-native-ui-kit';
+import {RkText} from 'react-native-ui-kitten';
 
 //... 
 
@@ -25,7 +25,7 @@ import {RkText} from 'react-native-ui-kit';
 Define style in `RkConfig`:
 
 ```javascript
-import {RkConfig} from 'react-native-ui-kit'; 
+import {RkConfig} from 'react-native-ui-kitten'; 
 
 RkConfig.setType('text', 'title', {
   fontSize: 20
@@ -48,7 +48,7 @@ RkConfig.setType('text', 'curely', {
 Use your *rkType* like this:
 
 ```html
-import {RkChoice} from 'react-native-ui-kit';
+import {RkChoice} from 'react-native-ui-kitten';
 
 //... 
 

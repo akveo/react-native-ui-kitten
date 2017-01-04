@@ -12,7 +12,7 @@ template: componentArticle.jade
 `RkModalImg` is extension on basic Image that opens image to full screen on click:
 
 ```html
-import {RkModalImg} from 'react-native-ui-kit';
+import {RkModalImg} from 'react-native-ui-kitten';
 
 //... 
 
@@ -25,7 +25,7 @@ import {RkModalImg} from 'react-native-ui-kit';
 Props `renderHeader` and `renderFooter` allow creating custom header and footer:
 
 ```html
-import {RkModalImg, RkButton} from 'react-native-ui-kit';
+import {RkModalImg, RkButton} from 'react-native-ui-kitten';
 
 //... 
 
@@ -53,7 +53,7 @@ Also `RkModalImg` supports multi image source,
 this options enable swaps between images
 
 ```html
-import {RkModalImg} from 'react-native-ui-kit';
+import {RkModalImg} from 'react-native-ui-kitten';
 
 let images = [ require('../img/animal.jpeg'),
                require('../img/bird.jpeg'),...]

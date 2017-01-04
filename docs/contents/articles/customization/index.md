@@ -16,7 +16,7 @@ String can consist of one or more types separated by space.
 For example: 
 
 ```html
-import {RkButton} from 'react-native-ui-kit';
+import {RkButton} from 'react-native-ui-kitten';
 
 //... 
 
@@ -43,7 +43,7 @@ default *rkType* for component:
  
 ```javascript
 
-import {RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kitten';
 
 
 RkConfig.setType('text', 'white', {
@@ -71,14 +71,14 @@ prop will use *rkType* which you define in *myTheme*
 
 ### Colors
 
-*react-native-ui-kit* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors.
-All colors are listed in [RkConfig.colors](https://github.com/akveo-private/react-native-ui-kit/blob/master/util/color.js)
+*react-native-ui-kitten* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors.
+All colors are listed in [RkConfig.colors](https://github.com/akveo-private/react-native-ui-kitten/blob/master/util/color.js)
  
 Example:
 
 ```javascript 
 
-import {RkConfig} from 'react-native-ui-kit';
+import {RkConfig} from 'react-native-ui-kitten';
 
 <Text style={{color: RkConfig.colors.blue500}}>blue</Text>
 

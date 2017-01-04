@@ -13,7 +13,7 @@ template: componentArticle.jade
 Minimal example: 
 
 ```html
-import {RkChoice} from 'react-native-ui-kit';
+import {RkChoice} from 'react-native-ui-kitten';
 
 //... 
 
@@ -25,7 +25,7 @@ import {RkChoice} from 'react-native-ui-kit';
 Inside `RkChoiceGroup` define component with `choiceTrigger` prop and put inside `RkChoice` component:
 
 ```html
-import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
+import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 //... 
 
@@ -45,7 +45,7 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
 Use `radio` prop to `RkChoiceGroup` component, only one options can be selected:
 
 ```html
-import {RkChoice, RkChoiceGroup} from 'react-native-ui-kit';
+import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 //... 
 
@@ -98,7 +98,7 @@ this settings(should contains component):
 Setup new type in  `RkConfig`:
 
 ```javascript
-import {RkConfig} from 'react-native-ui-kit'; 
+import {RkConfig} from 'react-native-ui-kitten'; 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 RkConfig.setType('choice', 'dark', {
@@ -137,7 +137,7 @@ RkConfig.setType('choice', 'star', {
 After this we can use new type like this: 
 
 ```html
-import {RkChoice} from 'react-native-ui-kit';
+import {RkChoice} from 'react-native-ui-kitten';
 
 //... 
 
