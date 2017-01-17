@@ -1,13 +1,15 @@
 # react-native-ui-kitten
-React Native UI-Kitten is set of customizable components.
-App made with :heart: by [Akveo team](http://akveo.com/). 
-Follow us on [Twitter](https://twitter.com/akveo_inc) to get latest news about this template first!
+A [react-native](https://facebook.github.io/react-native/) framework that helps you to bootstrap your mobile app development. The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way. This should allow you to focus on business logic, rather than visual appearance.
 
-[Example app](https://github.com/akveo/react-native-ui-kitten-demo-app)
+This framework was made with :heart: by [Akveo team](http://akveo.com/). 
+Follow us on [Facebook](https://www.facebook.com/akveo) or on [Twitter](https://twitter.com/akveo_inc) to get latest news about our new releases and other products!
+
+If you are looking for some quickstart, check out our [sample app](https://github.com/akveo/react-native-ui-kitten-demo-app)
 
 ## Documentation
-The website’s [documentation](https://akveo.github.io/react-native-ui-kitten/) contains this articles.
-- [Customization](https://akveo.github.io/react-native-ui-kitten/articles/customization/)
+A documentation for this framework is located [here](https://akveo.github.io/react-native-ui-kitten/).
+
+In particular, following components are available at the moment:
 - [Button](https://akveo.github.io/react-native-ui-kitten/articles/button/)
 - [Choice](https://akveo.github.io/react-native-ui-kitten/articles/choice/)
 - [Tabs](https://akveo.github.io/react-native-ui-kitten/articles/tab/)
