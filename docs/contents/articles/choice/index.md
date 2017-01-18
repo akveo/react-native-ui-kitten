@@ -8,9 +8,9 @@ template: componentArticle.jade
 
 <div class="component" image="https://thumbs.gfycat.com/FantasticRawGermanwirehairedpointer-size_restricted.gif"></div>
 
-`RkChoice` component is analog of html checkbox and radio buttons.
+`RkChoice` component is an analog of html checkbox and radio buttons.
 
-Minimal example: 
+Basic example: 
 
 ```html
 import {RkChoice} from 'react-native-ui-kitten';
@@ -22,7 +22,11 @@ import {RkChoice} from 'react-native-ui-kitten';
 
 ### Labels example
 
-Inside `RkChoiceGroup` define component with `choiceTrigger` prop and put inside `RkChoice` component:
+To render checkbox/radio with touchable label, you need to use `RkChoiceGroup` component.
+You need to put any *Touchable* component inside of it with `choiceTrigger` prop.
+After that define view with text and `RkChoice` component.
+
+Sample code:
 
 ```html
 import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
@@ -42,7 +46,7 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 ### Radio example
 
-Use `radio` prop to `RkChoiceGroup` component, only one options can be selected:
+Define `radio` prop on `RkChoiceGroup` component, when only one option can be selected:
 
 ```html
 import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
@@ -76,7 +80,7 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 ### Create custom rkType
 
-`RkChoice` can be customizable by this styles:
+Following segments and states of `RkChoice` can be customized:
 
 - *container*  
 - *inner*  
@@ -88,14 +92,14 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 - *innerSelectedDisabled*
 
 Also you can define content inside `RkChoice` with 
-this settings(should contains component):
+this settings, which needs to contain some component:
     
 - *content*  
 - *contentUnchecked*  
 - *contentDisabled*  
 - *contentUncheckedDisabled*
     
-Setup new type in  `RkConfig`:
+Example of setting up new type in `RkConfig`:
 
 ```javascript
 import {RkConfig} from 'react-native-ui-kitten'; 
@@ -134,7 +138,7 @@ RkConfig.setType('choice', 'star', {
 
 ```
 
-After this we can use new type like this: 
+We can then use created style like this: 
 
 ```html
 import {RkChoice} from 'react-native-ui-kitten';
@@ -149,7 +153,7 @@ import {RkChoice} from 'react-native-ui-kitten';
 
 ```
 
-The result will be this:
+The result will be:
 
 ![Image of dark buttons](/images/components/customChoice.png)
 

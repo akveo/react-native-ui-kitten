@@ -9,7 +9,7 @@ template: componentArticle.jade
 <div class="component" image="https://thumbs.gfycat.com/IncredibleAnotherDorado-size_restricted.gif"></div>
 
 
-`RkModalImg` is extension on basic Image that opens image to full screen on click:
+`RkModalImg` is extension on basic Image that also opens it in full screen on tap:
 
 ```html
 import {RkModalImg} from 'react-native-ui-kitten';
@@ -22,7 +22,7 @@ import {RkModalImg} from 'react-native-ui-kitten';
 
 ### Custom header and footer
 
-Props `renderHeader` and `renderFooter` allow creating custom header and footer:
+Props `renderHeader` and `renderFooter` allow to create custom header and footer:
 
 ```html
 import {RkModalImg, RkButton} from 'react-native-ui-kitten';
@@ -49,8 +49,8 @@ _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
 
 ### Gallery
 
-Also `RkModalImg` supports multi image source,
-this options enable swaps between images
+Also `RkModalImg` supports multi image source.
+This options allows to show several images in a gallery:
 
 ```html
 import {RkModalImg} from 'react-native-ui-kitten';
@@ -74,12 +74,12 @@ let images = [ require('../img/animal.jpeg'),
 
 <div class="doc-prop">
     <p><strong>containerStyle</strong> View.style</p>
-    <p>Style for container around image</p>
+    <p>Style for container wrapping image</p>
 </div>
 
 <div class="doc-prop">
     <p><strong>visible</strong> boolean</p>
-    <p>If image opened, prop will be passed to Modal component</p>
+    <p>true if modal is opened at the moment</p>
 </div>
 
 <div class="doc-prop">
@@ -94,12 +94,12 @@ let images = [ require('../img/animal.jpeg'),
 
 <div class="doc-prop">
     <p><strong>modalContainerStyle</strong> View.style</p>
-    <p>Style for container inside Modal component</p>
+    <p>Style passed to container inside of Modal component</p>
 </div>
 
 <div class="doc-prop">
     <p><strong>imageInModalStyle</strong> Image.style</p>
-    <p>Style for image when modal is visible</p>
+    <p>Style applied to image when modal is visible</p>
 </div>
 
 <div class="doc-prop">
@@ -119,6 +119,6 @@ let images = [ require('../img/animal.jpeg'),
 
 <div class="doc-prop">
     <p><strong>index</strong> number</p>
-    <p>Number of image(needed with multi source)</p>
+    <p>Order of image in a gallery (used only with multi image source)</p>
 </div>
 

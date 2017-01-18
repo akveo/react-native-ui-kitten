@@ -10,10 +10,13 @@ template: article.jade
 
 ### rkType
 
-Most of components support *rkType* prop which should contain string. 
-String can consist of one or more types separated by space. 
+Most of the components in this framework contain *rkType* property.
+For those who familiar with web, you can think of it as a HTML *class* property.
+Basically the main idea is to split style definitions from jsx templates.
+You configure *rkType*s in somewhere in your application and after that you're able to reuse that style in your components by just passing it as an input property.
+As well, there's always a possibility to override styles for some specific component.
 
-For example: 
+For example, consider this piece of code: 
 
 ```html
 import {RkButton} from 'react-native-ui-kitten';
@@ -26,10 +29,11 @@ import {RkButton} from 'react-native-ui-kitten';
 
 ```
 
-In this case for `RkButton` will be applied two styles: *outline* that 
-draws rounded border for button and *small* that reduces button size.
+In this case `RkButton` will have two styles: *outline* (style that 
+draws rounded border for button) and *small* (one that reduces button size).
 
-How to create your custom *rkType* defined in each component:
+You're able to create your custom *rkType*s for specific components.
+Each component that supports this feature has appropriate paragraph that describes how to do that:
 
 - *[RkButton](../button#custom)*  
 - *[RkChoice](../choice#custom)*  
@@ -38,8 +42,10 @@ How to create your custom *rkType* defined in each component:
 - *[RkTextInput](../input#custom)*  
 - *[RKText](../text#custom)*  
 
-If you get tired for example write rkType for each `RkButton` you can define
-default *rkType* for component:
+### Global settings
+
+There's also a possibility to define global settings for each component that supports *rkType*. 
+Example below shows how can you define some default styles for `RkButton` and `RkType`:
  
 ```javascript
 
@@ -65,16 +71,16 @@ RkConfig.setTheme('myTheme', {
 
 ```
  
-Now each `RkText` and `RkButton` component without *rkType* 
-prop will use *rkType* which you define in *myTheme* 
+Now each `RkText` and `RkButton` component can be used without *rkType* 
+prop. But it will still be applied with styles defined in *myTheme*. Nice! 
  
 
 ### Colors
 
-*react-native-ui-kitten* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors.
-All colors are listed in [RkConfig.colors](https://github.com/akveo/react-native-ui-kitten/blob/master/util/color.js)
+*react-native-ui-kitten* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors as constants.
+Look at the source code to view all colors available [RkConfig.colors](https://github.com/akveo/react-native-ui-kitten/blob/master/util/color.js)
  
-Example:
+Color usage example:
 
 ```javascript 
 
@@ -86,7 +92,7 @@ import {RkConfig} from 'react-native-ui-kitten';
 
 You can define your own colors and use it in the same way as above.
 
-Create custom colors:
+Custom color definition example:
 
 ```javascript 
 

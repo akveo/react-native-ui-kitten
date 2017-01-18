@@ -6,9 +6,11 @@ group: Components
 template: componentArticle.jade
 ---
 
-Main purpose of `RkText` component - define custom *rkType* for
-different types of typography in your app. For example you can 
-define *rkType* for headers, articles, names and etc.
+`RkText` is a component used to render text blocks in your application. 
+Its main purpose is to define custom *rkType*s for different types of typography in your app. 
+For example, you can define *rkType* for headers, articles, names and etc.
+
+Sample usage:
 
 ```html
 import {RkText} from 'react-native-ui-kitten';
@@ -22,7 +24,9 @@ import {RkText} from 'react-native-ui-kitten';
 
 ### Create custom rkType
 
-Define style in `RkConfig`:
+`RkText` doesn't have any segments.
+
+Sample style definition in `RkConfig`:
 
 ```javascript
 import {RkConfig} from 'react-native-ui-kitten'; 
@@ -45,7 +49,7 @@ RkConfig.setType('text', 'curely', {
 
 ```
 
-Use your *rkType* like this:
+Use created *rkType* like this:
 
 ```html
 import {RkChoice} from 'react-native-ui-kitten';

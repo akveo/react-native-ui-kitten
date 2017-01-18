@@ -8,7 +8,8 @@ template: componentArticle.jade
 
 <div class="component" image="https://thumbs.gfycat.com/OptimalSmoothAsianpiedstarling-size_restricted.gif"></div>
 
-`RkCard` component works with custom props on react components. 
+`RkCard` component used to render card view in your application. 
+It's usually being used with its props (described below) applied to standard react or custom components. 
 
 
 ```html
@@ -42,22 +43,7 @@ import {RkCard} from 'react-native-ui-kitten';
 </RkCard>
 ```
 
-Every component inside `RkCard` can use prop that starts with *rkCard*, for example *rkCardHeader* apply to the `View` this style:
-
-```javascript
-
-{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
-    padding: 8,
-}
-
-```
-
-By default there are 12 *rkCard* props that exist: 
+By default there are 12 *rkCard* props: 
 
 - *rkCardContainer*  
 - *rkCardContent*  
@@ -70,15 +56,31 @@ By default there are 12 *rkCard* props that exist:
 - *rkCardImg*  
 - *rkCardBigImg*  
 - *rkCardAvatar*  
-- *rkCardAvatarSmall*  
+- *rkCardAvatarSmall* 
+
+Every component inside `RkCard` can use these props to define specific layout behavior to that component. 
+For example, `rkCardHeader` will apply following styles to appropriate `View`.
+
+```javascript
+
+{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 1,
+    padding: 8,
+}
+
+``` 
 
 <a href="#" id="custom"></a>
 
 ### Create custom rkType
 
-You can create your own prop for example define style *footerText* and use it like *rkCardFooterText'
+You can customize 12 predefined *rkCard* props. As well it's possible to define your own one.
 
-For example lets create blue type, first step - setup new type in  `RkConfig`:
+For example let's create blue card type. First, we need to define new type in `RkConfig`:
 
 ```javascript
 
@@ -128,7 +130,7 @@ RkConfig.setType('card', 'blue', {
 
 ```
 
-After this we can use new type like this: 
+After this we can use created type like this: 
 
 ```html
 import {RkCard} from 'react-native-ui-kitten';

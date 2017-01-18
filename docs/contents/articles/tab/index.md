@@ -8,7 +8,9 @@ template: componentArticle.jade
 
 <div class="component" image="https://thumbs.gfycat.com/ScarceGleefulBluetickcoonhound-size_restricted.gif"></div>
 
-Example usage of `RkTabView` and `RkTabView.Tab` components:
+`RkTabView` is a component to display simple tabs component in your application.
+
+Sample usage of `RkTabView` and `RkTabView.Tab` components:
 
 ```html
 import {RkTabView} from 'react-native-ui-kitten';
@@ -32,8 +34,14 @@ import {RkTabView} from 'react-native-ui-kitten';
 
 ### Create custom rkType
 
-To define new rkType you can modify style for 
-*container*, *inner*, *containerSelected*, *innerSelected*  in `RkConfig`
+Following segments of `RkTextInput` can be customized:
+
+- *container*  
+- *inner*  
+- *containerSelected* 
+- *innerSelected* 
+
+Sample style definition in `RkConfig`:
 
 ```javascript
 
@@ -57,7 +65,7 @@ RkConfig.setType('tab', 'dark', {
 
 ```
 
-After this just set *rkType* to `RkTabView` component:
+Now we can apply created *rkType* to `RkTabView` component:
 
 ```html
 import {RkTabView} from 'react-native-ui-kitten';
@@ -90,7 +98,7 @@ const styles = StyleSheet.create({
 
 ```
 
-The result will be this:
+The result will look like this:
 
 ![Image of dark buttons](/images/components/darkTab.png)
 
@@ -99,42 +107,42 @@ The result will be this:
 
 <div class="doc-prop">
     <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
-    <p>By default RkButton supports following types: material</p>
+    <p>By default RkTabView supports following types: material</p>
 </div>
 <div class="doc-prop">
     <p><strong>style</strong> View.style </p>
-    <p>Style for RkTabView container (tabs & content)</p>
+    <p>Style applied to RkTabView container (tabs & content)</p>
 </div>
 <div class="doc-prop">
     <p><strong>tabsContainerStyle</strong> View.style </p>
-    <p>Style for container of tabs (not for content)</p>
+    <p>Style applied to container wrapping tabs (not for the content)</p>
 </div>
 <div class="doc-prop">
     <p><strong>maxVisibleTabs</strong> number </p>
-    <p>If specified tabs will be scrollable and tab width will be screen.width/maxVisibleTabs</p>
+    <p>If defined, tabs will be scrollable and tab width will be screen.width/maxVisibleTabs</p>
 </div>
 
 ### RkTabView.Tab Props
 
 <div class="doc-prop">
     <p><strong>title</strong> string || function </p>
-    <p>When type of title is string title is rendered like Text inside View.</p>
-    <p>Otherwise title is rendered by function passed to this prop, function should return React component</p>
+    <p>When type of title is string, title is rendered like Text inside of View.</p>
+    <p>Otherwise title is rendered using function passed to this prop, function should return React component</p>
 </div>
 <div class="doc-prop">
     <p><strong>style</strong> View.style </p>
-    <p>Style for RkTabView.Tab title container(applied only when title is text)</p>
+    <p>Style applied to RkTabView.Tab title container (used only when title is text)</p>
 </div>
 <div class="doc-prop">
     <p><strong>styleSelected</strong> View.style </p>
-    <p>Style for RkTabView.Tab title container when tab is selected(applied only when title is text)</p>
+    <p>Style applied to RkTabView.Tab title container when tab is selected (used only when title is text)</p>
 </div>
 <div class="doc-prop">
     <p><strong>innerStyle</strong> Text.style </p>
-    <p>Style for RkTabView.Tab title(applied only when title is text)</p>
+    <p>Style applied to RkTabView.Tab title (used only when title is text)</p>
 </div>
 <div class="doc-prop">
     <p><strong>innerStyleSelected</strong> Text.style </p>
-    <p>Style for RkTabView.Tab title when tab is selected(applied only when title is text)</p>
+    <p>Style applied to RkTabView.Tab title when tab is selected (used only when title is text)</p>
 </div>
 
