@@ -53,8 +53,8 @@
             <h1>Selectable components</h1>
             <div class="subHeader"></div><div class="component" image="https://thumbs.gfycat.com/FantasticRawGermanwirehairedpointer-size_restricted.gif"></div>
 
-<p><code>RkChoice</code> component is analog of html checkbox and radio&nbsp;buttons.</p>
-<p>Minimal&nbsp;example: </p>
+<p><code>RkChoice</code> component is an analog of html checkbox and radio&nbsp;buttons.</p>
+<p>Basic&nbsp;example: </p>
 <pre><code class="lang-html">import {RkChoice} from 'react-native-ui-kitten';
 
 //... 
@@ -62,7 +62,10 @@
 <span class="tag">&lt;<span class="name">RkChoice</span>/&gt;</span>
 </code></pre>
 <h3 id="labels-example">Labels&nbsp;example</h3>
-<p>Inside <code>RkChoiceGroup</code> define component with <code>choiceTrigger</code> prop and put inside <code>RkChoice</code> component:</p>
+<p>To render checkbox/radio with touchable label, you need to use <code>RkChoiceGroup</code> component.
+You need to put any <em>Touchable</em> component inside of it with <code>choiceTrigger</code> prop.
+After that define view with text and <code>RkChoice</code> component.</p>
+<p>Sample&nbsp;code:</p>
 <pre><code class="lang-html">import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 //... 
@@ -77,7 +80,7 @@
 <span class="tag">&lt;/<span class="name">RkChoiceGroup</span>&gt;</span>
 </code></pre>
 <h3 id="radio-example">Radio&nbsp;example</h3>
-<p>Use <code>radio</code> prop to <code>RkChoiceGroup</code> component, only one options can be&nbsp;selected:</p>
+<p>Define <code>radio</code> prop on <code>RkChoiceGroup</code> component, when only one option can be&nbsp;selected:</p>
 <pre><code class="lang-html">import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 //... 
@@ -105,7 +108,7 @@
 </code></pre>
 <p><a href="#" id="custom"></a></p>
 <h3 id="create-custom-rktype">Create custom&nbsp;rkType</h3>
-<p><code>RkChoice</code> can be customizable by this&nbsp;styles:</p>
+<p>Following segments and states of <code>RkChoice</code> can be&nbsp;customized:</p>
 <ul>
 <li><em>container</em>  </li>
 <li><em>inner</em>  </li>
@@ -117,14 +120,14 @@
 <li><em>innerSelectedDisabled</em></li>
 </ul>
 <p>Also you can define content inside <code>RkChoice</code> with 
-this settings(should contains&nbsp;component):</p>
+this settings, which needs to contain some&nbsp;component:</p>
 <ul>
 <li><em>content</em>  </li>
 <li><em>contentUnchecked</em>  </li>
 <li><em>contentDisabled</em>  </li>
 <li><em>contentUncheckedDisabled</em></li>
 </ul>
-<p>Setup new type in  <code>RkConfig</code>:</p>
+<p>Example of setting up new type in <code>RkConfig</code>:</p>
 <pre><code class="lang-javascript"><span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kitten'</span>; 
 <span class="keyword">import</span> Icon <span class="keyword">from</span> <span class="string">'react-native-vector-icons/FontAwesome'</span>;
 
@@ -159,7 +162,7 @@ RkConfig.setType(<span class="string">'choice'</span>, <span class="string">'sta
   contentUnchecked: (&lt;Icon name="star-o"/&gt;)
 });
 </code></pre>
-<p>After this we can use new type like&nbsp;this: </p>
+<p>We can then use created style like&nbsp;this: </p>
 <pre><code class="lang-html">import {RkChoice} from 'react-native-ui-kitten';
 
 //... 
@@ -170,7 +173,7 @@ RkConfig.setType(<span class="string">'choice'</span>, <span class="string">'sta
 
 <span class="tag">&lt;<span class="name">RkChoice</span> <span class="attr">rkType</span>=<span class="string">"star"</span> <span class="attr">selected</span>=<span class="string">{false}/</span>&gt;</span>
 </code></pre>
-<p>The result will be&nbsp;this:</p>
+<p>The result will&nbsp;be:</p>
 <p><img src="/react-native-ui-kitten/images/components/customChoice.png" alt="Image of dark buttons"></p>
 <h3 id="rkchoice-props">RkChoice&nbsp;Props</h3>
 <div class="doc-prop">

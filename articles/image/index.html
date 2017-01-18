@@ -54,7 +54,7 @@
             <div class="subHeader"></div><div class="component" image="https://thumbs.gfycat.com/IncredibleAnotherDorado-size_restricted.gif"></div>
 
 
-<p><code>RkModalImg</code> is extension on basic Image that opens image to full screen on&nbsp;click:</p>
+<p><code>RkModalImg</code> is extension on basic Image that also opens it in full screen on&nbsp;tap:</p>
 <pre><code class="lang-html">import {RkModalImg} from 'react-native-ui-kitten';
 
 //... 
@@ -62,7 +62,7 @@
 <span class="tag">&lt;<span class="name">RkModalImg</span> <span class="attr">source</span>=<span class="string">{require(</span>'<span class="attr">..</span>/<span class="attr">img</span>/<span class="attr">river.jpeg</span>')}/&gt;</span>
 </code></pre>
 <h3 id="custom-header-and-footer">Custom header and&nbsp;footer</h3>
-<p>Props <code>renderHeader</code> and <code>renderFooter</code> allow creating custom header and&nbsp;footer:</p>
+<p>Props <code>renderHeader</code> and <code>renderFooter</code> allow to create custom header and&nbsp;footer:</p>
 <pre><code class="lang-html">import {RkModalImg, RkButton} from 'react-native-ui-kitten';
 
 //... 
@@ -84,8 +84,8 @@ _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
 <div class="component" image="https://thumbs.gfycat.com/SpeedyCheeryConure-size_restricted.gif"></div>
 
 <h3 id="gallery">Gallery</h3>
-<p>Also <code>RkModalImg</code> supports multi image source,
-this options enable swaps between&nbsp;images</p>
+<p>Also <code>RkModalImg</code> supports multi image source.
+This options allows to show several images in a&nbsp;gallery:</p>
 <pre><code class="lang-html">import {RkModalImg} from 'react-native-ui-kitten';
 
 let images = [ require('../img/animal.jpeg'),
@@ -104,12 +104,12 @@ let images = [ require('../img/animal.jpeg'),
 
 <div class="doc-prop">
     <p><strong>containerStyle</strong>&nbsp;View.style</p>
-    <p>Style for container around&nbsp;image</p>
+    <p>Style for container wrapping&nbsp;image</p>
 </div>
 
 <div class="doc-prop">
     <p><strong>visible</strong>&nbsp;boolean</p>
-    <p>If image opened, prop will be passed to Modal&nbsp;component</p>
+    <p>true if modal is opened at the&nbsp;moment</p>
 </div>
 
 <div class="doc-prop">
@@ -124,12 +124,12 @@ let images = [ require('../img/animal.jpeg'),
 
 <div class="doc-prop">
     <p><strong>modalContainerStyle</strong>&nbsp;View.style</p>
-    <p>Style for container inside Modal&nbsp;component</p>
+    <p>Style passed to container inside of Modal&nbsp;component</p>
 </div>
 
 <div class="doc-prop">
     <p><strong>imageInModalStyle</strong>&nbsp;Image.style</p>
-    <p>Style for image when modal is&nbsp;visible</p>
+    <p>Style applied to image when modal is&nbsp;visible</p>
 </div>
 
 <div class="doc-prop">
@@ -149,7 +149,7 @@ let images = [ require('../img/animal.jpeg'),
 
 <div class="doc-prop">
     <p><strong>index</strong>&nbsp;number</p>
-    <p>Number of image(needed with multi&nbsp;source)</p>
+    <p>Order of image in a gallery (used only with multi image&nbsp;source)</p>
 </div>
 
 

@@ -53,7 +53,8 @@
             <h1>Card</h1>
             <div class="subHeader"></div><div class="component" image="https://thumbs.gfycat.com/OptimalSmoothAsianpiedstarling-size_restricted.gif"></div>
 
-<p><code>RkCard</code> component works with custom props on react&nbsp;components. </p>
+<p><code>RkCard</code> component used to render card view in your application. 
+It’s usually being used with its props (described below) applied to standard react or custom&nbsp;components. </p>
 <pre><code class="lang-html">import {RkCard} from 'react-native-ui-kitten';
 
 //... 
@@ -83,18 +84,7 @@
     <span class="tag">&lt;/<span class="name">View</span>&gt;</span>
 <span class="tag">&lt;/<span class="name">RkCard</span>&gt;</span>
 </code></pre>
-<p>Every component inside <code>RkCard</code> can use prop that starts with <em>rkCard</em>, for example <em>rkCardHeader</em> apply to the <code>View</code> this&nbsp;style:</p>
-<pre><code class="lang-javascript">
-{
-    <span class="attr">flexDirection</span>: <span class="string">'row'</span>,
-    <span class="attr">justifyContent</span>: <span class="string">'space-between'</span>,
-    <span class="attr">alignItems</span>: <span class="string">'center'</span>,
-    <span class="attr">borderTopLeftRadius</span>: <span class="number">1</span>,
-    <span class="attr">borderTopRightRadius</span>: <span class="number">1</span>,
-    <span class="attr">padding</span>: <span class="number">8</span>,
-}
-</code></pre>
-<p>By default there are 12 <em>rkCard</em> props that&nbsp;exist: </p>
+<p>By default there are 12 <em>rkCard</em>&nbsp;props: </p>
 <ul>
 <li><em>rkCardContainer</em>  </li>
 <li><em>rkCardContent</em>  </li>
@@ -107,12 +97,24 @@
 <li><em>rkCardImg</em>  </li>
 <li><em>rkCardBigImg</em>  </li>
 <li><em>rkCardAvatar</em>  </li>
-<li><em>rkCardAvatarSmall</em>  </li>
+<li><em>rkCardAvatarSmall</em> </li>
 </ul>
+<p>Every component inside <code>RkCard</code> can use these props to define specific layout behavior to that component. 
+For example, <code>rkCardHeader</code> will apply following styles to appropriate <code>View</code>.</p>
+<pre><code class="lang-javascript">
+{
+    <span class="attr">flexDirection</span>: <span class="string">'row'</span>,
+    <span class="attr">justifyContent</span>: <span class="string">'space-between'</span>,
+    <span class="attr">alignItems</span>: <span class="string">'center'</span>,
+    <span class="attr">borderTopLeftRadius</span>: <span class="number">1</span>,
+    <span class="attr">borderTopRightRadius</span>: <span class="number">1</span>,
+    <span class="attr">padding</span>: <span class="number">8</span>,
+}
+</code></pre>
 <p><a href="#" id="custom"></a></p>
 <h3 id="create-custom-rktype">Create custom&nbsp;rkType</h3>
-<p>You can create your own prop for example define style <em>footerText</em> and use it like&nbsp;*rkCardFooterText’</p>
-<p>For example lets create blue type, first step - setup new type in  <code>RkConfig</code>:</p>
+<p>You can customize 12 predefined <em>rkCard</em> props. As well it’s possible to define your own&nbsp;one.</p>
+<p>For example let’s create blue card type. First, we need to define new type in <code>RkConfig</code>:</p>
 <pre><code class="lang-javascript">
 <span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kitten'</span>;
 
@@ -158,7 +160,7 @@ RkConfig.setType(<span class="string">'card'</span>, <span class="string">'blue'
   }
 });
 </code></pre>
-<p>After this we can use new type like&nbsp;this: </p>
+<p>After this we can use created type like&nbsp;this: </p>
 <pre><code class="lang-html">import {RkCard} from 'react-native-ui-kitten';
 
 //... 

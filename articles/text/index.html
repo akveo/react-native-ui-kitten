@@ -51,9 +51,10 @@
         <div class="inner-content-wrap">
           <div class="inner-content">
             <h1>Text</h1>
-            <div class="subHeader"></div><p>Main purpose of <code>RkText</code> component - define custom <em>rkType</em> for
-different types of typography in your app. For example you can 
-define <em>rkType</em> for headers, articles, names and&nbsp;etc.</p>
+            <div class="subHeader"></div><p><code>RkText</code> is a component used to render text blocks in your application. 
+Its main purpose is to define custom <em>rkType</em>s for different types of typography in your app. 
+For example, you can define <em>rkType</em> for headers, articles, names and&nbsp;etc.</p>
+<p>Sample&nbsp;usage:</p>
 <pre><code class="lang-html">import {RkText} from 'react-native-ui-kitten';
 
 //... 
@@ -62,7 +63,8 @@ define <em>rkType</em> for headers, articles, names and&nbsp;etc.</p>
 </code></pre>
 <p><a href="#" id="custom"></a></p>
 <h3 id="create-custom-rktype">Create custom&nbsp;rkType</h3>
-<p>Define style in <code>RkConfig</code>:</p>
+<p><code>RkText</code> doesn’t have any&nbsp;segments.</p>
+<p>Sample style definition in <code>RkConfig</code>:</p>
 <pre><code class="lang-javascript"><span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kitten'</span>; 
 
 RkConfig.setType(<span class="string">'text'</span>, <span class="string">'title'</span>, {
@@ -81,7 +83,7 @@ RkConfig.setType(<span class="string">'text'</span>, <span class="string">'curel
   <span class="attr">fontFamily</span>: <span class="string">'Curely'</span>
 });
 </code></pre>
-<p>Use your <em>rkType</em> like&nbsp;this:</p>
+<p>Use created <em>rkType</em> like&nbsp;this:</p>
 <pre><code class="lang-html">import {RkChoice} from 'react-native-ui-kitten';
 
 //... 

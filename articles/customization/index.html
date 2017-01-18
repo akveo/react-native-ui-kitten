@@ -52,9 +52,12 @@
             <h1>Customization</h1>
             <div class="subHeader"></div><p><a href="#" id="rkType"></a></p>
 <h3 id="rktype">rkType</h3>
-<p>Most of components support <em>rkType</em> prop which should contain string. 
-String can consist of one or more types separated by&nbsp;space. </p>
-<p>For&nbsp;example: </p>
+<p>Most of the components in this framework contain <em>rkType</em> property.
+For those who familiar with web, you can think of it as a <span class="caps">HTML</span> <em>class</em> property.
+Basically the main idea is to split style definitions from jsx templates.
+You configure <em>rkType</em>s in somewhere in your application and after that you’re able to reuse that style in your components by just passing it as an input property.
+As well, there’s always a possibility to override styles for some specific&nbsp;component.</p>
+<p>For example, consider this piece of&nbsp;code: </p>
 <pre><code class="lang-html">import {RkButton} from 'react-native-ui-kitten';
 
 //... 
@@ -63,9 +66,10 @@ String can consist of one or more types separated by&nbsp;space. </p>
   Say Hello
 <span class="tag">&lt;/<span class="name">RkButton</span>&gt;</span>
 </code></pre>
-<p>In this case for <code>RkButton</code> will be applied two styles: <em>outline</em> that 
-draws rounded border for button and <em>small</em> that reduces button&nbsp;size.</p>
-<p>How to create your custom <em>rkType</em> defined in each&nbsp;component:</p>
+<p>In this case <code>RkButton</code> will have two styles: <em>outline</em> (style that 
+draws rounded border for button) and <em>small</em> (one that reduces button&nbsp;size).</p>
+<p>You’re able to create your custom <em>rkType</em>s for specific components.
+Each component that supports this feature has appropriate paragraph that describes how to do&nbsp;that:</p>
 <ul>
 <li><em><a href="/react-native-ui-kitten/articles/button#custom">RkButton</a></em>  </li>
 <li><em><a href="/react-native-ui-kitten/articles/choice#custom">RkChoice</a></em>  </li>
@@ -74,8 +78,9 @@ draws rounded border for button and <em>small</em> that reduces button&nbsp;size
 <li><em><a href="/react-native-ui-kitten/articles/input#custom">RkTextInput</a></em>  </li>
 <li><em><a href="/react-native-ui-kitten/articles/text#custom">RKText</a></em>  </li>
 </ul>
-<p>If you get tired for example write rkType for each <code>RkButton</code> you can define
-default <em>rkType</em> for&nbsp;component:</p>
+<h3 id="global-settings">Global&nbsp;settings</h3>
+<p>There’s also a possibility to define global settings for each component that supports <em>rkType</em>. 
+Example below shows how can you define some default styles for <code>RkButton</code> and <code>RkType</code>:</p>
 <pre><code class="lang-javascript">
 <span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kitten'</span>;
 
@@ -97,19 +102,19 @@ RkConfig.setTheme(<span class="string">'myTheme'</span>, {
   }
 });
 </code></pre>
-<p>Now each <code>RkText</code> and <code>RkButton</code> component without <em>rkType</em> 
-prop will use <em>rkType</em> which you define in <em>myTheme</em> </p>
+<p>Now each <code>RkText</code> and <code>RkButton</code> component can be used without <em>rkType</em> 
+prop. But it will still be applied with styles defined in <em>myTheme</em>.&nbsp;Nice! </p>
 <h3 id="colors">Colors</h3>
-<p><em>react-native-ui-kitten</em> contains <a href="https://material.io/guidelines/style/color.html#color-color-palette">material</a> colors.
-All colors are listed in <a href="https://github.com/akveo/react-native-ui-kitten/blob/master/util/color.js">RkConfig.colors</a></p>
-<p>Example:</p>
+<p><em>react-native-ui-kitten</em> contains <a href="https://material.io/guidelines/style/color.html#color-color-palette">material</a> colors as constants.
+Look at the source code to view all colors available <a href="https://github.com/akveo/react-native-ui-kitten/blob/master/util/color.js">RkConfig.colors</a></p>
+<p>Color usage&nbsp;example:</p>
 <pre><code class="lang-javascript">
 <span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kitten'</span>;
 
 <span class="xml"><span class="tag">&lt;<span class="name">Text</span> <span class="attr">style</span>=<span class="string">{{color:</span> <span class="attr">RkConfig.colors.blue500</span>}}&gt;</span>blue<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></span>
 </code></pre>
 <p>You can define your own colors and use it in the same way as&nbsp;above.</p>
-<p>Create custom&nbsp;colors:</p>
+<p>Custom color definition&nbsp;example:</p>
 <pre><code class="lang-javascript">
 RkConfig.setColor(<span class="string">'primary'</span>, RkConfig.colors.blue500);
 RkConfig.setColor(<span class="string">'danger'</span>,  RkConfig.colors.red500);

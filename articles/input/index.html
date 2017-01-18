@@ -53,7 +53,7 @@
             <h1>TextInput</h1>
             <div class="subHeader"></div><div class="component" image="https://thumbs.gfycat.com/ShockingComplexCowrie-size_restricted.gif"></div>
 
-<p><code>RkTextInput</code> component:</p>
+<p><code>RkTextInput</code> is a component to be used as a basic customizable text input. Sample&nbsp;usage:</p>
 <pre><code class="lang-html">import {RkTextInput} from 'react-native-ui-kitten';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -67,7 +67,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 </code></pre>
 <p><a href="#" id="custom"></a></p>
 <h3 id="create-custom-rktype">Create custom&nbsp;rkType</h3>
-<p>For example lets create colored type, first step - setup new type in  <code>RkConfig</code>:</p>
+<p>Following segments of <code>RkTextInput</code> can be&nbsp;customized:</p>
+<ul>
+<li><em>input</em>  </li>
+<li><em>container</em>  </li>
+<li><em>label</em> </li>
+</ul>
+<p>For example lets create colored&nbsp;input.</p>
+<p>First, we need to define new <em>rkType</em> in  <code>RkConfig</code>:</p>
 <pre><code class="lang-javascript">
 <span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kitten'</span>;
 
@@ -84,7 +91,7 @@ RkConfig.setType(<span class="string">'input'</span>, <span class="string">'colo
     },
 });
 </code></pre>
-<p>After this we can use new type like&nbsp;this: </p>
+<p>After this we can apply this type to inputs in our&nbsp;app: </p>
 <pre><code class="lang-html">import {RkTextInput} from 'react-native-ui-kitten';
 
 //... 
@@ -93,7 +100,7 @@ RkConfig.setType(<span class="string">'input'</span>, <span class="string">'colo
     <span class="attr">rkType</span>=<span class="string">'colored'</span> 
     <span class="attr">label</span>=<span class="string">'Name'</span>/&gt;</span>
 </code></pre>
-<p>The result will be&nbsp;this:</p>
+<p>The result will look like&nbsp;this:</p>
 <p><img src="/react-native-ui-kitten/images/components/coloredInput.png" alt="Image of Colored Input"></p>
 <h3 id="props">Props</h3>
 <div class="doc-prop">
@@ -107,17 +114,17 @@ RkConfig.setType(<span class="string">'input'</span>, <span class="string">'colo
 
 <div class="doc-prop">
     <p><strong>containerStyle</strong>&nbsp;View.style</p>
-    <p>Style for view around input and&nbsp;label</p>
+    <p>Style for view wrapping input and&nbsp;label</p>
 </div>
 
 <div class="doc-prop">
     <p><strong>label</strong> string ||&nbsp;component</p>
-    <p>Label displayed before input. When label is clicked input gets&nbsp;focus</p>
+    <p>Label displayed with input. When label is clicked input gets&nbsp;focus</p>
 </div>
 
 <div class="doc-prop">
     <p><strong>labelStyle</strong>&nbsp;style</p>
-    <p>Style for&nbsp;label</p>
+    <p>Style applied to&nbsp;label</p>
 </div>
             <div id="phone" class="phone"><img id="phoneImg" src="/react-native-ui-kitten/images/login.png" class="phoneImg"></div>
           </div>

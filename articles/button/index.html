@@ -51,10 +51,9 @@
         <div class="inner-content-wrap">
           <div class="inner-content">
             <h1>Button</h1>
-            <div class="subHeader"></div><div class="component" image="https://thumbs.gfycat.com/ShockingComplexCowrie-size_restricted.gif"></div>
+            <div class="subHeader"></div><div class="component" image="https://thumbs.gfycat.com/UnripeSpryBighornedsheep-size_restricted.gif"></div>
 
-<p><code>RkButton</code> component easy to customize using a lot of <em>props</em> and also
-with <em>rkType</em>&nbsp;prop.</p>
+<p><code>RkButton</code> is a basic button&nbsp;component.</p>
 <p>Example&nbsp;usage:</p>
 <pre><code class="lang-html">import {RkButton} from 'react-native-ui-kitten';
 
@@ -63,8 +62,7 @@ with <em>rkType</em>&nbsp;prop.</p>
 <span class="tag">&lt;<span class="name">RkButton</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">RkButton</span>&gt;</span>
 </code></pre>
 <h3 id="usage-with-icons">Usage with&nbsp;Icons</h3>
-<p>You can put inside <code>RkButton</code> text or another component, this usable for
-icons or&nbsp;images:</p>
+<p>You can put text and/or icon inside of <code>RkButton</code>. Example of button with icon&nbsp;usage:</p>
 <pre><code class="lang-html">import {RkButton} from 'react-native-ui-kitten';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -78,7 +76,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 </code></pre>
 <p><a href="#" id="custom"></a></p>
 <h3 id="create-custom-rktype">Create custom&nbsp;rkType</h3>
-<p>To define new rkType you should define style for <em>container</em> and/or <em>inner</em> 
+<p>To define new rkType you can override style for <em>container</em> and/or <em>inner</em> segments of your button
 using <code>RkConfig</code>:</p>
 <pre><code class="lang-javascript">
 <span class="keyword">import</span> {RkConfig} <span class="keyword">from</span> <span class="string">'react-native-ui-kitten'</span>;
@@ -105,7 +103,7 @@ RkConfig.setType(<span class="string">'button'</span>, <span class="string">'ico
   }
 });
 </code></pre>
-<p>Now in any part of your app you can write like&nbsp;this:</p>
+<p>Now you can use <em>dark</em> and <em>icon</em> types in you&nbsp;app:</p>
 <pre><code class="lang-html">import {RkButton} from 'react-native-ui-kitten';
 
 //... 
@@ -116,7 +114,7 @@ RkConfig.setType(<span class="string">'button'</span>, <span class="string">'ico
   <span class="tag">&lt;<span class="name">Icon</span> <span class="attr">name</span>=<span class="string">"md-heart"</span>/&gt;</span>
 <span class="tag">&lt;/<span class="name">RkButton</span>&gt;</span>
 </code></pre>
-<p>The result will be&nbsp;this:</p>
+<p>This should look like&nbsp;this:</p>
 <p><img src="/react-native-ui-kitten/images/components/darkButtons.png" alt="Image of dark buttons"></p>
 <h3 id="props">Props</h3>
 <div class="doc-prop">
