@@ -8,18 +8,28 @@ template: article.jade
 
 ### What is react-native-ui-kitten?
 
-*react-native-ui-kitten* is pure library with set of components that ease to customize.
+*React Native UI Kitten* is a mobile framework with set of easily customizable elements. 
+It aims on boosting your mobile application development and allows you to focus on business logic instead of view composition. 
+It helps you to bring your MVP to life in shorter period of time.
+
+### What is main benefit of using this kitten?
+
+Using React Native UI Kitten you will be able to create style configurations of components you use the most (buttons, inputs etc.). 
+These styles can be reused then in the process of development. Configure them once and use anywhere!
+
+### Can I use this kitten with other react libraries?
+
+Yes, as said above it's just set of UI components. It doesn't force you to use any specific library for business logic implementation.
 
 ### Installation
 
+
+Simply add it as an npm dependency:
 ```
 npm install --save react-native-ui-kitten
 ```
 
-<br/>
-
-Include *react-native-ui-kitten* in your app:
-
+And include the component you need into your application:
 ```javascript
 import {RkButton, RkConfig} from 'react-native-ui-kitten';
 ```
