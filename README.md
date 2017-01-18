@@ -6,6 +6,11 @@ Follow us on [Facebook](https://www.facebook.com/akveo) or on [Twitter](https://
 
 If you are looking for some quickstart, check out our [sample app](https://github.com/akveo/react-native-ui-kitten-demo-app)
 
+<a href="https://github.com/akveo/react-native-ui-kitten-demo-app">
+<img alt='news classic screen' src='https://camo.githubusercontent.com/85e0fdb46ca547804fa5b1de04e70b19a3eabc77/68747470733a2f2f7468756d62732e6766796361742e636f6d2f4772697a7a6c6564576869726c77696e644b616b61706f2d73697a655f726573747269637465642e676966' width='240' height='428'/>
+</a>
+
+
 ## Documentation
 A documentation for this framework is located [here](https://akveo.github.io/react-native-ui-kitten/).
 
