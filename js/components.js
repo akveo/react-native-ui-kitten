@@ -3,6 +3,7 @@ document.addEventListener( "DOMContentLoaded", function(){
   var phoneOffset = document.getElementById('phone').offsetTop;
   var components = document.getElementsByClassName('component');
   var currentImageComponent = -1;
+
   function selectImageComponent(scrolled) {
     scrolled = scrolled + phoneOffset;
     for(var i = 0; i < components.length; i++){
@@ -17,11 +18,13 @@ document.addEventListener( "DOMContentLoaded", function(){
     }
   }
 
-  selectImageComponent(window.pageYOffset || document.documentElement.scrollTop);
+  if(components && components.length){
+    selectImageComponent(components[0].offsetTop + 1);
+    window.onscroll = function() {
+      var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+      selectImageComponent(scrolled);
+    };
+  }
 
-  window.onscroll = function() {
-    var scrolled = window.pageYOffset || document.documentElement.scrollTop;
-    selectImageComponent(scrolled);
-  };
 
 }, false );
