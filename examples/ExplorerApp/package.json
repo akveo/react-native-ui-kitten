@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
+		"test": "jest",
+		"update-lib": "rm -r node_modules/react-native-ui-kitten && npm install && ./node_modules/react-native/packager/packager.sh  ."
 	},
 	"dependencies": {
 		"react": "15.4.1",

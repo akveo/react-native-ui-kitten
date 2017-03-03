@@ -1,26 +1,24 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   AppRegistry,
-  StyleSheet,
+  StatusBar,
   Navigator,
   View,
-  DrawerLayoutAndroid,
-  Dimensions,
+  Text,
+  Title,
+  StyleSheet,
   ToolbarAndroid,
+  TouchableOpacity
 } from 'react-native';
 
 import {ComponentsScreen} from "./screens/ComponentsScreen";
-import {StartScreen} from './screens/StartScreen';
-
-let {height, width} = Dimensions.get('window');
-let toolBarHeight = 56;
-let maxDrawerWidth = 400;
-let drawerWidth = width - toolBarHeight > maxDrawerWidth ? maxDrawerWidth :  width - toolBarHeight;
+import {RkConfig, RkAndroidBack} from 'react-native-ui-kitten';
 
 class ExplorerApp extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       title: 'Start screen'
     };
@@ -28,54 +26,81 @@ class ExplorerApp extends Component {
 
   render() {
     return (
-      <DrawerLayoutAndroid
-        ref={(drawer) => { this.drawer = drawer; }}
-        drawerWidth={drawerWidth}
-        drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => <ComponentsScreen
-          onSelect={(component) => {
-            this.drawer.closeDrawer();
-            this.setState({title: component.title});
-          }}
-          navigator={this.navigator}/>}>
-        {this._renderApp()}
-      </DrawerLayoutAndroid>
-    );
-  }
-
-  _renderApp(){
-    return (
       <View style={styles.container}>
-        <ToolbarAndroid
-          ref={(toolbar) => { this.toolbar = toolbar; }}
-          navIcon={require('image!ic_menu_black_24dp')}
-          onIconClicked={() => this.drawer.openDrawer()}
-          style={styles.toolbar}
-          title={this.state.title}/>
-        <Navigator
-          ref={(navigator) => { this.navigator = navigator; }}
-          initialRoute={{
-            title: 'Start screen',
-            component: StartScreen
-          }}
-          renderScene={(route) => <route.component/>}
-          configureScene={(route, routeStack) => Navigator.SceneConfigs.FadeAndroid}
+        <StatusBar
+          backgroundColor={RkConfig.colors.blue900}
+          barStyle="default"
         />
+        {this._renderNavigator()}
       </View>
     );
+  };
+
+  _renderToolbar(route, navigator) {
+    let icon = null;
+
+    if (this._hasScenesInStack(navigator)) {
+      icon = backImage;
+    }
+
+    return (
+      <View>
+        <ToolbarAndroid
+          onIconClicked={() => {
+            if (this._hasScenesInStack(navigator)) {
+              navigator.pop();
+            }
+          }}
+          navIcon={icon}
+          titleColor={RkConfig.colors.white}
+          style={styles.toolbar}
+          title={route.title}/>
+        <RkAndroidBack route={route} navigator={navigator}/>
+      </View>
+    )
+  }
+
+  _renderNavigator() {
+    return (<Navigator
+      renderScene={this._renderScene.bind(this)}
+      configureScene={(route) => {
+        if (route.sceneConfig) {
+          return route.sceneConfig;
+        }
+
+        return Navigator.SceneConfigs.FloatFromRight;
+      }}
+      initialRoute={{
+        title: this.state.title,
+        component: ComponentsScreen,
+      }}
+    />)
+  }
+
+  _renderScene(route, navigator) {
+    return (
+      <View style={styles.container}>
+        {this._renderToolbar(route, navigator)}
+        <route.component index={route.index} navigator={navigator}/>
+      </View>)
+  };
+
+  _hasScenesInStack(navigator) {
+    return navigator && navigator.getCurrentRoutes().length > 1;
   }
 
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   toolbar: {
-    backgroundColor: '#E9EAED',
-    height: toolBarHeight,
-  },
+    height: 56,
+    backgroundColor: RkConfig.colors.blue800
+  }
 });
+
+const backImage = {uri: "back"};
 
 AppRegistry.registerComponent('ExplorerApp', () => ExplorerApp);

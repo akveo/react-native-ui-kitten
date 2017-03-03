@@ -9,5 +9,6 @@ export {RkModalImg} from './components/image/ModalImg';
 export {RkBarBg} from './components/status/BarBg';
 export {RkTabView} from './components/tab/TabView';
 export {RkCard} from './components/card/Card';
+export {RkAndroidBack} from './components/navigation/AndroidBack';
 export {RkConfig} from './util/config.js';
 export {RkStyle} from './util/style.js';
