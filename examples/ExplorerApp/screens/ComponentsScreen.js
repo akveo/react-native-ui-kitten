@@ -20,6 +20,7 @@ import {ImageScreen} from './ImageScreen';
 import {TabScreen} from './TabScreen';
 import {BoardUpScreen} from './BoardUpScreen';
 import {CardScreen} from './CardScreen';
+import {ThemeScreen} from './ThemeScreen';
 
 export class ComponentsScreen extends Component {
 
@@ -56,6 +57,10 @@ export class ComponentsScreen extends Component {
       {
         title: "Tab View",
         screenView: TabScreen
+      },
+      {
+        title: "Themes View",
+        screenView: ThemeScreen
       }
     ];
     this.state = {
@@ -68,7 +73,7 @@ export class ComponentsScreen extends Component {
       <TouchableOpacity onPress={() => this.selectComponent(componentDefinition)}>
         <View style={styles.componentRow}>
           <Text style={[styles.titleText]}>{componentDefinition.title}</Text>
-          <Icon name={'angle-right'} size={18} style={RkStyle.grayText}/>
+        {/*/  <Icon name={'angle-right'} size={18} style={RkStyle.grayText}/>*/}
         </View>
       </TouchableOpacity>
     );
@@ -105,7 +110,7 @@ export class ComponentsScreen extends Component {
                 renderSeparator={this.renderSeparator}
                 automaticallyAdjustContentInsets={true}
                 keyboardDismissMode="on-drag"
-                keyboardShouldPersistTaps={true}
+                keyboardShouldPersistTaps='always'
                 showsVerticalScrollIndicator={false}
         />
     );

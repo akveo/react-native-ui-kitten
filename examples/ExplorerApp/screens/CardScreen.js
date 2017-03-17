@@ -10,17 +10,15 @@ import {
   Image
 } from 'react-native';
 
-import {RkButton, RkConfig, RkStyle, RkModalImg, RkTextInput, RkBarBg, RkCard} from 'react-native-ui-kitten';
+import {RkButton, RkTheme, RkModalImg, RkTextInput, RkBarBg, RkCard} from 'react-native-ui-kitten';
 
-import {UtilStyles} from '../utils/styles';
+import {UtilStyles} from '../style/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export class CardScreen extends Component {
 
   constructor(props) {
     super(props);
-
-
   }
 
   render() {
@@ -80,7 +78,7 @@ export class CardScreen extends Component {
 
           <RkCard rkType='material'>
 
-            <View rkCardHeader style={{backgroundColor: RkConfig.colors.blue500, paddingTop: 0, paddingRight: 0}}>
+            <View rkCardHeader style={{backgroundColor: RkTheme.colors.blue500, paddingTop: 0, paddingRight: 0}}>
               <View style={{alignSelf: 'flex-end'}}>
                 <Text style={{color: 'white'}} rkCardTitle>Material Card</Text>
                 <Text style={{color: 'white'}} rkCardSubTitle>Sub header</Text>
@@ -120,11 +118,11 @@ export class CardScreen extends Component {
                 zIndex: 111
               }}>
               <RkButton rkType='circle shadow'
-                        style={[UtilStyles.spaceH, RkStyle.orange500Bg, {
+                        style={[UtilStyles.spaceH, RkTheme.styles.orange500Bg, {
                           paddingVertical: 5,
                           paddingHorizontal: 12.5
                         }]}
-                        innerStyle={[RkStyle.whiteText, {fontSize: 32}]}>
+                        innerStyle={[RkTheme.styles.whiteText, {fontSize: 32}]}>
                 <Icon name={'md-add'}/>
               </RkButton>
             </View>
