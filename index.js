@@ -6,7 +6,7 @@ export {RkTextInput} from './src/components/textinput/rkTextInput';
 export {RkSeparator} from './src/components/separator/rkSeparator';
 // export {RkBoardUpView} from './components/boardup/BoardUpView';
 export {RkModalImg} from './src/components/image/rkModalImg';
-// export {RkBarBg} from './components/status/BarBg';
 export {RkTabView} from './src/components/tab/rkTabView';
 export {RkCard} from './src/components/card/rkCard';
+export {RkComponent} from './src/components/rkComponent';
 export {RkTheme} from './src/styles/theme';

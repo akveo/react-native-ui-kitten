@@ -39,34 +39,32 @@ export const RkTextInputTypes = (theme) => {
       borderRadius: 100,
       paddingHorizontal: 10,
       paddingVertical: 5,
-    },
-
-    'rounded-bg': {
-      borderRadius: 100,
-      paddingHorizontal: 10,
-      paddingVertical: 5,
       backgroundColor: theme.colors.background.default
     },
 
     form: {
       inputBackgroundColor: theme.colors.background.default,
+    },
+
+
+    topLabel: {
+      input: {
+        alignSelf: 'stretch',
+      },
+      container: {
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+      },
+      label: {
+        fontSize: 12,
+        color: theme.colors.text.subtitle,
+        alignSelf: 'flex-start'
+      }
+    },
+    underline: {
+      underlineWidth: 0.5,
+      underlineColor: theme.colors.border.default
     }
-
-
-    // topLabel: {
-    //   input: {
-    //     alignSelf: 'stretch',
-    //   },
-    //   container: {
-    //     flexDirection: 'column',
-    //     alignItems: 'flex-start',
-    //   },
-    //   label: {
-    //     fontSize: 12,
-    //     color: RkColors.grey500,
-    //     alignSelf: 'flex-start'
-    //   }
-
     // underline: {
     //   container: {
     //     borderBottomWidth: 0.5,

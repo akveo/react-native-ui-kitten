@@ -73,7 +73,7 @@ export class InputScreen extends Component {
               <RkSeparator style={{marginVertical: 5, marginRight: 20}}/>
               <RkTextInput secureTextEntry={true} label={<Icon name='ios-key-outline'/>} placeholder='Password'/>
 
-              <RkTextInput rkType='rounded-bg' label={<Icon name='ios-search-outline'/>} containerStyle={{marginTop: 20}}
+              <RkTextInput rkType='rounded' label={<Icon name='ios-search-outline'/>} containerStyle={{marginTop: 20}}
                            placeholder='Search'/>
             </View>
           </View>
@@ -82,8 +82,8 @@ export class InputScreen extends Component {
           <Text style={UtilStyles.titleText}>Labels</Text>
           <View style={[UtilStyles.rowContainer]}>
             <View style={{flex: 1}}>
-              <RkTextInput label='Login:' rkType="underline form"/>
-              <RkTextInput rkType="underline form" secureTextEntry={true} containerStyle={{marginTop: 10}} label='Password:'/>
+              <RkTextInput label='Login:' rkType="form"/>
+              <RkTextInput rkType="form" secureTextEntry={true} containerStyle={{marginTop: 10}} label='Password:'/>
             </View>
           </View>
           <Text style={[UtilStyles.titleText, {marginTop: 15}]}>Top Labels</Text>

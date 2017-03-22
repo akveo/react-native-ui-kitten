@@ -7,7 +7,6 @@ export const DefaultTypes = (theme) => {
     RkButton: ComponentTypes.RkButtonTypes(theme),
     RkTextInput: ComponentTypes.RkTextInputTypes(theme),
     RkChoice: ComponentTypes.RkChoiceTypes(theme),
-    // boardUp: {},
     RkCard: ComponentTypes.RkCardTypes(theme),
     RkTab: ComponentTypes.TabTypes(theme),
   })

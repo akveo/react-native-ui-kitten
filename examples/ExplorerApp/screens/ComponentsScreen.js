@@ -21,6 +21,7 @@ import {TabScreen} from './TabScreen';
 import {BoardUpScreen} from './BoardUpScreen';
 import {CardScreen} from './CardScreen';
 import {ThemeScreen} from './ThemeScreen';
+import {AvatarScreen} from './AvatarScreen';
 
 export class ComponentsScreen extends Component {
 
@@ -57,6 +58,10 @@ export class ComponentsScreen extends Component {
       {
         title: "Tab View",
         screenView: TabScreen
+      },
+      {
+        title: "Custom Control View",
+        screenView: AvatarScreen
       },
       {
         title: "Themes View",

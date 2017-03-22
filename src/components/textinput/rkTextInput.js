@@ -21,8 +21,8 @@ export class RkTextInput extends RkComponent {
       backgroundColor: 'backgroundColor',
       borderWidth: 'borderWidth',
       borderColor: 'borderColor',
-      borderRadius: 'borderRadius',
-      //TODO: bottom border complex
+      underlineWidth:'borderBottomWidth',
+      underlineColor: 'borderBottomColor'
     },
     input: {
       color: 'color',

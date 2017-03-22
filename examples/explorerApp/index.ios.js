@@ -8,16 +8,10 @@ import {
 } from 'react-native';
 
 import {RkTheme} from 'react-native-ui-kitten';
-import {BlueTheme, RedTheme} from "./style/my-theme"
-RkTheme.setType('RkTab','selected-gray',{
-  backgroundColor: '#e0e0e0',
-  color:'#2196f3'
-});
-
-//RkTheme.setTheme(BlueTheme);
-
 import {ComponentsScreen} from "./screens/ComponentsScreen";
+import {bootstrap} from "./style/themeBootstrapper"
 
+bootstrap();
 class ExplorerApp extends Component {
 
   render() {

@@ -40,6 +40,10 @@ class ThemeManager {
     TypeManager.setType(element, name, value);
   }
 
+  registerTypes(element, types) {
+    TypeManager.registerTypes(element, types);
+  }
+
   setColor(name, value) {
     this._colors[name] = value;
     this._updatePredefinedStyles();
@@ -65,6 +69,6 @@ class ThemeManager {
     return styleObject;
   }
 }
-;
+
 
 export let RkTheme = new ThemeManager();
