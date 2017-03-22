@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {TypeManager} from '../styles/type_manager.js';
+import {TypeManager} from '../styles/typeManager.js';
 import {RkTheme} from '../styles/theme.js';
 
 

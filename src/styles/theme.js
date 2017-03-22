@@ -1,6 +1,6 @@
-import {DefaultTheme} from './default_theme.js';
+import {DefaultTheme} from './defaultTheme.js';
 import {RkColors} from './color.js';
-import {TypeManager} from './type_manager.js';
+import {TypeManager} from './typeManager.js';
 import _ from 'lodash';
 
 class ThemeManager {
@@ -34,6 +34,7 @@ class ThemeManager {
 
     let newTheme = _.merge(baseTheme, theme);
     _.merge(this._currentTheme, newTheme);
+    TypeManager.invalidateTypes();
   }
 
   setType(element, name, value) {

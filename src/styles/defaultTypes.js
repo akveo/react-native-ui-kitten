@@ -1,4 +1,4 @@
-import * as ComponentTypes from './component_types';
+import * as ComponentTypes from './componentTypes';
 
 export const DefaultTypes = (theme) => {
   return ({
