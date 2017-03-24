@@ -35,7 +35,7 @@ export class RkChoice extends RkComponent {
     this.state = {
       selected: props.selected || false,
       disabled: props.disabled || false
-    }
+    };
 
     this._initStyles();
   }
@@ -48,6 +48,7 @@ export class RkChoice extends RkComponent {
 
   render() {
     let {container, content} = this._defineStyles();
+
 
     if (this.props.inTrigger) {
       return (
@@ -63,9 +64,7 @@ export class RkChoice extends RkComponent {
           onPress={(e) => {
             this._onPress(e)
           }}>
-
           {content}
-
         </TouchableOpacity>
       );
     }
@@ -99,12 +98,19 @@ export class RkChoice extends RkComponent {
     }
   }
 
+  _getContentFromProps() {
+    let propName = 'content';
+    if (this.state.selected) {
+      propName += 'Selected';
+    }
+    if (this.state.disabled) {
+      propName += 'Disabled';
+    }
+    return this.props[propName];
+  }
+
   _defineStyles() {
     let computedTypes = [];
-    if (this.props.rkSmartType) {
-      computedTypes.push(this.props.rkSmartType);
-    }
-
     if (this.state.selected && this.state.disabled) {
       computedTypes.push(this.selectedDisabledType)
     } else {
@@ -116,13 +122,21 @@ export class RkChoice extends RkComponent {
 
     let {container, inner} = this.defineStyles(_.join(computedTypes, " "));
 
+    let propsContent = this._getContentFromProps();
+
+
     let contentValue = _.find(container, (e) => e.hasOwnProperty('content'));
     if (contentValue) {
       container.splice(container.indexOf(contentValue), 1);
     }
+
     let content = React.cloneElement(contentValue.content, {
         style: [inner]
       }) || (<View/>);
+
+    if (propsContent) {
+      content = React.cloneElement(propsContent);
+    }
 
     return {container, content};
   }

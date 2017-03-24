@@ -15,18 +15,6 @@ export const RkButtonTypes = (theme) => {
         textAlign: 'center',
       },
     },
-
-    //made a copy from previous version
-    //seems like it works not how i would expect
-    _defaultShadow: {
-      shadowColor: theme.colors.shadow.default,
-      shadowOpacity: 0.5,
-      shadowRadius: 3,
-      shadowOffset: {
-        height: 1,
-        width: 0
-      }
-    },
     basic: {
       backgroundColor: theme.colors.background.default,
       color: theme.colors.text.default

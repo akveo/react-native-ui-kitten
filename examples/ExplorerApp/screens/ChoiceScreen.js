@@ -237,12 +237,12 @@ export class ChoiceScreen extends Component {
                     textAlign: 'center'
                   }}
                   innerStyleDisabled={{
-                    color: RkTheme.current.colors.grey300
+                    color: RkTheme.colors.grey300
                   }}
-                  content={<Text>CHECKED</Text>}
-                  contentDisabled={<Text>CHECKED</Text>}
-                  contentUnchecked={<Text>UNCHECKED</Text>}
-                  contentUncheckedDisabled={<Text>UNCHECKED</Text>}
+                  contentSelected={<Text>CHECKED</Text>}
+                  contentSelectedDisabled={<Text>CHECKED</Text>}
+                  content={<Text>UNCHECKED</Text>}
+                  contentDisabled={<Text>UNCHECKED</Text>}
                 />
               </View>
               <Text style={styles.typeText}>text content</Text>
@@ -255,19 +255,19 @@ export class ChoiceScreen extends Component {
                     borderWidth: 0
                   }}
                   innerStyle={{
-                    color: RkTheme.current.colors.orange500,
+                    color: RkTheme.colors.orange500,
                     fontSize: 22,
                     height: 25,
                     width: 25,
                     textAlign: 'center'
                   }}
                   innerStyleDisabled={{
-                    color: RkTheme.current.colors.grey300
+                    color: RkTheme.colors.grey300
                   }}
-                  content={<Icon name={'star'}/>}
-                  contentUnchecked={<Text/>}
-                  contentDisabled={<Icon name={'star'}/>}
-                  contentUncheckedDisabled={<Text/>}
+                  contentSelected={<Icon name={'star'}/>}
+                  content={<Text/>}
+                  contentSelectedDisabled={<Icon name={'star'}/>}
+                  contentDisabled={<Text/>}
                 />
               </View>
               <Text style={styles.typeText}>icon content</Text>

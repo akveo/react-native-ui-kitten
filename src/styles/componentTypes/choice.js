@@ -14,15 +14,13 @@ export const RkChoiceTypes = (theme) => {
         borderWidth: 1,
         borderColor: RkColors.grey500,
         padding: 10,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        content: (<View/>)
       },
       inner: {
         width: 18,
         height: 18,
       },
-    },
-    basic: {
-      content: (<View/>)
     },
     selected: {
       content: (<Image source={require('../../assets/img/choice/check_black.png')}/>)
