@@ -6,7 +6,8 @@ export const RkTextInputTypes = (theme) => {
         fontSize: 16,
         height: 16 * 1.42,
         alignSelf: 'center',
-        borderRadius: 3
+        borderRadius: 3,
+        paddingVertical: 0,
       },
       container: {
         flexDirection: 'row',
