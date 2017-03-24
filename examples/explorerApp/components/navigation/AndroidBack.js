@@ -4,7 +4,7 @@ import {
   BackAndroid
 } from 'react-native';
 
-export class RkAndroidBack extends Component{
+export class AndroidBack extends Component{
 
   constructor(props){
     super(props);

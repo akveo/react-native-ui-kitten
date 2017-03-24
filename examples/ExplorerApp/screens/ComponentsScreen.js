@@ -88,7 +88,7 @@ export class ComponentsScreen extends Component {
     if (componentDefinition.screenView === undefined) return;
     this.props.navigator.push({
       title: componentDefinition.title,
-      component: componentDefinition.screenView
+      component: componentDefinition.screenView,
     });
   }
 

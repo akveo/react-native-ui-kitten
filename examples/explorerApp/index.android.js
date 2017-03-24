@@ -12,7 +12,11 @@ import {
 } from 'react-native';
 
 import {ComponentsScreen} from "./screens/ComponentsScreen";
-import {RkConfig, RkAndroidBack} from 'react-native-ui-kitten';
+import {AndroidBack} from './components/navigation/AndroidBack'
+import {RkTheme} from 'react-native-ui-kitten';
+import {bootstrap} from "./style/themeBootstrapper"
+
+bootstrap();
 
 class ExplorerApp extends Component {
 
@@ -28,7 +32,7 @@ class ExplorerApp extends Component {
     return (
       <View style={styles.container}>
         <StatusBar
-          backgroundColor={RkConfig.colors.blue900}
+          backgroundColor={RkTheme.colors.blue900}
           barStyle="default"
         />
         {this._renderNavigator()}
@@ -52,10 +56,10 @@ class ExplorerApp extends Component {
             }
           }}
           navIcon={icon}
-          titleColor={RkConfig.colors.white}
+          titleColor={RkTheme.colors.white}
           style={styles.toolbar}
           title={route.title}/>
-        <RkAndroidBack route={route} navigator={navigator}/>
+        <AndroidBack route={route} navigator={navigator}/>
       </View>
     )
   }
@@ -81,7 +85,7 @@ class ExplorerApp extends Component {
     return (
       <View style={styles.container}>
         {this._renderToolbar(route, navigator)}
-        <route.component index={route.index} navigator={navigator}/>
+        <route.component index={route.index} navigator={navigator} data={route.data}/>
       </View>)
   };
 
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     height: 56,
-    backgroundColor: RkConfig.colors.blue800
+    backgroundColor: RkTheme.colors.blue800
   }
 });
 

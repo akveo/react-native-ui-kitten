@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import {
+  Platform,
   View,
   Text,
   StyleSheet,
@@ -367,20 +368,29 @@ export class ChoiceScreen extends Component {
 
 
   showSettingsScreen() {
-    this.props.navigator.push({
+    let param = {
       title: 'Settings',
       component: SettingsScreen,
-      passProps: {
-        option: this.state.settingsOption,
-        onChange: (option) => {
-          this.setState({
-            settingsOption: option
-          })
-        }
-      }
-    });
-  }
+    };
 
+    let data = {
+      option: this.state.settingsOption,
+      onChange: (option) => {
+        this.setState({
+          settingsOption: option
+        })
+      }
+    };
+
+    if (Platform.OS === 'ios') {
+      param.passProps = {};
+      param.passProps.data = data;
+    }
+    else {
+      param.data = data;
+    }
+    this.props.navigator.push(param);
+  }
 }
 
 class SettingsScreen extends Component {
@@ -406,7 +416,7 @@ class SettingsScreen extends Component {
   }
 
   _change(index) {
-    this.props.onChange(this.state.options[index]);
+    this.props.data.onChange(this.state.options[index]);
   }
 
   render() {
@@ -424,7 +434,7 @@ class SettingsScreen extends Component {
         style={[UtilStyles.container, {backgroundColor: RkTheme.current.colors.grey300}]}
         automaticallyAdjustContentInsets={true}>
         <View style={[UtilStyles.section, {paddingVertical: 0, paddingHorizontal: 0}]}>
-          <RkChoiceGroup selectedIndex={this.props.option.index} radio rkType='clear'
+          <RkChoiceGroup selectedIndex={this.props.data.option.index} radio rkType='clear'
                          onChange={(index) => this._change(index)}>
             {this.state.options.map(renderOption)}
           </RkChoiceGroup>
