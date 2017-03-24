@@ -90,9 +90,6 @@ export class ComponentsScreen extends Component {
       title: componentDefinition.title,
       component: componentDefinition.screenView
     });
-    if (Platform.OS == 'android') {
-      this.props.onSelect(componentDefinition);
-    }
   }
 
   renderSeparator(sectionID,
