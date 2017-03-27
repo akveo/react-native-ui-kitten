@@ -12,21 +12,22 @@ export const UtilStyles = StyleSheet.create({
   titleText: {
     fontSize: 20,
     fontFamily: 'System',
-    color: RkTheme.current.colors.text.default
+    color: RkTheme.current.colors.text.base
   },
   section: {
-    marginTop: 20,
-    paddingHorizontal: 25,
+    marginTop: 14,
+    paddingHorizontal: 24,
     paddingVertical: 15,
-    backgroundColor: RkTheme.current.colors.background.secondary,
-
+    borderBottomColor: '#0000001A',
+    borderBottomWidth: 0.5
   },
   rowContainer: {
-    marginTop: 5,
+    marginTop: 16,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap'
+    flexWrap:'wrap'
+  },
+  columnContainer:{
+    marginTop: 16
   },
   spaceAround: {
     marginHorizontal: 5
@@ -34,41 +35,46 @@ export const UtilStyles = StyleSheet.create({
   spaceH: {
     marginHorizontal: 5
   },
-  spaceV: {
-    marginVertical: 5
+  spaceTop: {
+    marginTop: 8
+  },
+  spaceBottom: {
+    marginBottom: 8
+  },
+  spaceVertical: {
+    marginVertical: 8
   },
   description: {
     paddingRight: 10,
     paddingLeft: 20,
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    flex:1
+    flex: 1
   },
-  exampleView:{
-
+  exampleView: {
+    paddingRight: 10,
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    flex: 1
   },
-  text:{
-    color: RkTheme.current.colors.text.default,
+  text: {
+    color: RkTheme.current.colors.text.base,
   },
   codeText: {
-    color: RkTheme.current.colors.main.accent,
-    backgroundColor: RkTheme.current.colors.lightGreen200,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 4,
-    fontSize: 12,
-    marginHorizontal: 2,
+    color: RkTheme.current.colors.danger,
   },
   tab: {
-    marginLeft: 25,
+    paddingLeft:20,
+    alignItems:'center',
   },
-  row :{
-    flexDirection: 'row'
+  row: {
+    flexDirection: 'row',
+    paddingTop: 20,
   },
-  column :{
+  column: {
     flexDirection: 'column'
   },
-  tabContent:{
+  tabContent: {
     fontSize: 32,
     alignSelf: 'center',
     padding: 30,

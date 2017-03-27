@@ -11,7 +11,8 @@ export class RkText extends RkComponent {
   typeMapping = {
     text: {
       color: 'color',
-      backgroundColor: 'backgroundColor'
+      backgroundColor: 'backgroundColor',
+      fontSize:'fontSize'
     }
   };
 

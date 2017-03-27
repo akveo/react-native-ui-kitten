@@ -8,183 +8,197 @@ import {
   Alert
 } from 'react-native';
 
-import {RkButton, RkTheme} from 'react-native-ui-kitten';
+import {RkButton, RkText, RkTheme} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-let test = {backgroundColor: RkTheme.current.colors.background.screen};
-let styles = {
-  section: {
-    marginTop: 20,
-    paddingHorizontal: 25,
-    paddingVertical: 15
-  },
-};
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
 
 export class ButtonScreen extends Component {
+
+  _onPress() {
+    Alert.alert('onPress');
+  }
+
+  _onLongPress() {
+    Alert.alert('onLongPress');
+  }
 
   render() {
     return (
       <ScrollView
         automaticallyAdjustContentInsets={true}
-        style={[UtilStyles.container, {backgroundColor: RkTheme.current.colors.background.screen}]}>
-        <View style={[styles.section, test]}>
-          <Text style={UtilStyles.titleText}>Basic button</Text>
+        style={UtilStyles.container}>
+        <View style={[UtilStyles.section]}>
+          <RkText rkType='header'>Basic button</RkText>
           <View style={UtilStyles.rowContainer}>
-            <View style={UtilStyles.exampleView}>
-              <RkButton rkType="danger success">Button</RkButton>
-            </View>
-            <View style={UtilStyles.description}>
-              <Text>Just create button element with text inside:</Text>
-              <View style={[UtilStyles.tab, {marginVertical: 3}]}>
-                <Text style={UtilStyles.codeText}>{"<RkButton>"}</Text>
-                <Text style={UtilStyles.tab}>Button</Text>
-                <Text style={UtilStyles.codeText}>{"</RkButton>"}</Text>
-              </View>
+            <RkText>Just create button element with text inside.</RkText>
+          </View>
+          <View style={[UtilStyles.rowContainer, {alignItems: 'center'}]}>
+            <RkButton>Button</RkButton>
+            <View style={[UtilStyles.tab]}>
+              <RkText rkType='danger'>{"<RkButton>"}</RkText>
+              <RkText>Button</RkText>
+              <RkText rkType='danger'>{"</RkButton>"}</RkText>
             </View>
           </View>
         </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Colored buttons</Text>
-          <View style={[UtilStyles.rowContainer]}>
-            <View style={UtilStyles.exampleView}>
-              <RkButton rkType='basic medium primary'>Primary</RkButton>
 
-              <RkButton rkType=' warning' style={UtilStyles.spaceV}>
-                <Text>
-                  <Text>no 1</Text>
-                  <Icon style={{marginRight: 5, fontSize: 18}} name={'logo-twitter'}/>
-                  <Text>no 2</Text>
-                </Text>
-              </RkButton>
-
-
-              <RkButton rkType='basic medium danger'>Danger</RkButton>
-            </View>
-            <View style={[UtilStyles.description]}>
-              <Text>Easy to customize colors using
-                <Text style={RkTheme.styles.orange500Text}> style </Text>
-                props for button container styles such as
-                <Text style={RkTheme.styles.orange500Text}> backgroundColor </Text>
-                and
-                <Text style={RkTheme.styles.orange500Text}> innerStyle </Text>
-                props for inner text</Text>
-            </View>
+        <View style={UtilStyles.section}>
+          <RkText rkType='header'>Colored buttons</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkText>Easy to customize colors using style
+              props for button container styles such as backgroundColor
+              and innerStyle props for inner text.</RkText>
+          </View>
+          <View style={[UtilStyles.columnContainer]}>
+            <RkButton rkType='primary' style={UtilStyles.spaceBottom}>Primary</RkButton>
+            <RkButton rkType='success' style={UtilStyles.spaceVertical}>Success</RkButton>
+            <RkButton rkType='info' style={UtilStyles.spaceVertical}>Info</RkButton>
+            <RkButton rkType='warning' style={UtilStyles.spaceVertical}>Warning</RkButton>
+            <RkButton rkType='danger' style={UtilStyles.spaceTop}>Danger</RkButton>
           </View>
         </View>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Button type props</Text>
+          <RkText rkType='header'>Button type props</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkText>With button props type
+              you can ease create already customized buttons.
+            </RkText>
+          </View>
           <View style={UtilStyles.rowContainer}>
             <View style={UtilStyles.exampleView}>
-              <RkButton rkType='basic medium'>Basic</RkButton>
-              <RkButton style={{marginTop: 10}} rkType='circle'>Circle</RkButton>
-              <RkButton style={{marginTop: 10}} rkType='outline'>Outline</RkButton>
+              <RkButton rkType='basic' style={UtilStyles.spaceBottom}>Basic</RkButton>
+              <RkButton rkType='rounded' style={UtilStyles.spaceVertical}>Rounded</RkButton>
+              <RkButton rkType='outline' style={UtilStyles.spaceTop}>Outline</RkButton>
             </View>
-            <View style={[UtilStyles.description]}>
-              <Text>With button props
-                <Text style={RkTheme.styles.deepWarningText}> type </Text>
-                you can ease create already customized buttons.
-              </Text>
-              <View style={[{alignItems: 'flex-start'}]}>
-                <Text style={{marginVertical: 5}}>Available values:</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>basic</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab, UtilStyles.spaceV]}>circle</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>outline</Text>
+          </View>
+        </View>
+        <View style={UtilStyles.section}>
+          <RkText rkType='header'>Button sizes</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkText>Type props also allow you to define the mass of button.</RkText>
+          </View>
+          <View style={UtilStyles.columnContainer}>
+            <RkButton rkType='small outline' style={UtilStyles.spaceBottom}>Small</RkButton>
+            <RkButton rkType='medium outline' style={UtilStyles.spaceVertical}>Medium</RkButton>
+            <RkButton rkType='large outline' style={UtilStyles.spaceVertical}>Large</RkButton>
+            <RkButton rkType='xlarge outline' style={UtilStyles.spaceTop}>Extra Large</RkButton>
+          </View>
+        </View>
+
+        <View style={UtilStyles.section}>
+          <RkText rkType='header'>With icons</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkText>Easy to customize colors using style props for button container styles
+              such as backgroundColor and innerStyle props for inner text.</RkText>
+          </View>
+          <View style={UtilStyles.columnContainer}>
+            <RkButton style={[{width: 110, justifyContent: 'flex-start', paddingLeft: 9}, UtilStyles.spaceBottom]}
+                      rkType='rounded danger'>
+              <AwesomeIcon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
+              <RkText>Delete</RkText>
+            </RkButton>
+
+            <RkButton style={[{width: 100, justifyContent: 'flex-start', paddingLeft: 9}, UtilStyles.spaceVertical]}
+                      rkType='rounded success'>
+              <AwesomeIcon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
+              <RkText>Add</RkText>
+            </RkButton>
+
+            <RkButton style={[{justifyContent: 'flex-start', paddingLeft: 0}, UtilStyles.spaceVertical]}>
+              <AwesomeIcon style={{marginHorizontal: 16, fontSize: 21}} name={'facebook'}/>
+              <RkText>Facebook</RkText>
+            </RkButton>
+
+            <RkButton style={[{justifyContent: 'flex-start', paddingLeft: 0}, UtilStyles.spaceVertical]} rkType='info'>
+              <AwesomeIcon style={{marginHorizontal: 12, fontSize: 22}} name={'twitter'}/>
+              <RkText>Twitter</RkText>
+            </RkButton>
+
+            <RkButton style={[styles.githubButton, UtilStyles.spaceTop]} rkType='info'>
+              <AwesomeIcon style={{marginHorizontal: 12, fontSize: 25}} name={'github'}/>
+              <RkText>Github</RkText>
+            </RkButton>
+
+          </View>
+
+        </View>
+        <View style={UtilStyles.section}>
+          <RkText rkType='header'>Icons only</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkText>For icons used react-native-vector-icons.
+              Add <RkText rkType='danger'> {'<icon/>'} </RkText>and text inside <RkText
+                rkType='danger'>{'<RkButton>'}</RkText> element.
+            </RkText>
+          </View>
+          <View style={UtilStyles.rowContainer}>
+            <RkButton style={[styles.iconButton, {marginLeft: 0}]}>
+              <AwesomeIcon style={{fontSize: 24}} name={'share-alt'}/>
+            </RkButton>
+            <RkButton style={styles.iconButton}>
+              <AwesomeIcon style={{fontSize: 24}} name={'envelope'}/>
+            </RkButton>
+            <RkButton rkType='success' style={styles.iconButton}>
+              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+            </RkButton>
+            <RkButton rkType='success circle' style={styles.circleIconButton}>
+              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+            </RkButton>
+          </View>
+          <View style={UtilStyles.rowContainer}>
+            <RkButton rkType='outline' style={[styles.iconButton, {marginLeft: 0}]}>
+              <AwesomeIcon style={{fontSize: 24}} name={'share-alt'}/>
+            </RkButton>
+            <RkButton rkType='outline' style={styles.iconButton}>
+              <AwesomeIcon style={{fontSize: 24}} name={'envelope'}/>
+            </RkButton>
+            <RkButton rkType='outline-success ' style={styles.iconButton}>
+              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+            </RkButton>
+            <RkButton rkType='outline-success circle' style={[styles.circleIconButton]}>
+              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+            </RkButton>
+          </View>
+        </View>
+        <View style={UtilStyles.section}>
+          <RkText rkType='header'>Events</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkButton onPress={this._onPress} onLongPress={this._onLongPress} rkType='warning'>Push me!</RkButton>
+            <View style={{paddingLeft: 24}}>
+              <RkText >Supported event props</RkText>
+              <View style={{paddingTop: 8}}>
+                <RkText style={styles.textSpace} rkType='danger'>onPress</RkText>
+                <RkText style={styles.textSpace} rkType='danger'>onLongPress</RkText>
+                <RkText style={styles.textSpace} rkType='danger'>onPressIn</RkText>
+                <RkText style={styles.textSpace} rkType='danger'>onPressOut</RkText>
               </View>
             </View>
           </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Button sizes</Text>
-          <View style={UtilStyles.rowContainer}>
-            <View style={[UtilStyles.row, {alignItems: 'center'}]}>
-              <RkButton rkType='small outline'>Small</RkButton>
-              <RkButton rkType='medium outline' style={UtilStyles.spaceAround}>Medium</RkButton>
-              <RkButton rkType='outline large'>Large</RkButton>
-            </View>
-          </View>
-          <View style={UtilStyles.row}>
-            <View style={[UtilStyles.description, {paddingLeft: 0, marginTop: 10}]}>
-              <Text>
-                <Text style={RkTheme.styles.deepWarningText}>type </Text>
-                props also allow you to define the mass of button.
-              </Text>
-              <View style={[{alignItems: 'flex-start'}]}>
-                <Text style={{marginVertical: 5}}>Available values:</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>small</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab, UtilStyles.spaceV]}>medium</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>large</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>With icons</Text>
-          <View style={UtilStyles.rowContainer}>
-            <View style={[UtilStyles.exampleView, {alignItems: 'flex-start'}]}>
-              <RkButton rkType='small outline' style={[RkTheme.styles.orange500Border]}
-                        innerStyle={RkTheme.styles.orange500Text}>
-                <Icon style={{marginRight: 5, fontSize: 18}} name={'logo-github'}/>Star
-              </RkButton>
-              <RkButton rkType='small' style={[UtilStyles.spaceV, RkTheme.styles.blue500Bg]}
-                        innerStyle={RkTheme.styles.whiteText}>
-                <Icon style={{marginRight: 5, fontSize: 18}} name={'logo-twitter'}/>Follow
-              </RkButton>
-              <RkButton rkType='small outline' style={{paddingTop: 1, paddingLeft: 3}}>
-                <Icon name={'md-add'} style={{fontSize: 10, alignSelf: 'flex-start'}}/><Text>Add</Text>
-              </RkButton>
-            </View>
-            <View style={[UtilStyles.description]}>
-              <Text>For icons used react-native-vector-icons. Add
-                <Text style={RkTheme.styles.deepWarningText}> {" <Icon/> "} </Text>
-                and text inside
-                <Text style={RkTheme.styles.deepWarningText}>{" <RkButton> "}</Text>
-                element.</Text>
-            </View>
-          </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Icons only</Text>
-          <View style={UtilStyles.rowContainer}>
-            <View style={[UtilStyles.row, {alignItems: 'center'}]}>
-              <RkButton rkType='basic' style={[RkTheme.styles.orange500Bg]} innerStyle={RkTheme.styles.whiteText}>
-                <Icon name={'md-share'}/>
-              </RkButton>
-              <RkButton rkType='basic circle'
-                        style={[UtilStyles.spaceH, RkTheme.styles.red500Bg, {
-                          paddingVertical: 5,
-                          paddingHorizontal: 10
-                        }]}
-                        innerStyle={[RkTheme.styles.whiteText, {fontSize: 22}]}>
-                <Icon name={'md-add'}/>
-              </RkButton>
-              <RkButton rkType='outline circle small' style={{paddingVertical: 2}}>
-                <Icon style={{fontSize: 20}} name={'md-add'}/>
-              </RkButton>
-            </View>
-          </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Events</Text>
-          <View style={UtilStyles.rowContainer}>
-            <View style={UtilStyles.exampleView}>
-              <RkButton rkType='basic medium' onPress={() => {
-                Alert.alert('onPress')
-              }} style={RkTheme.styles.red500Bg}
-                        innerStyle={RkTheme.styles.whiteText}>Push me!</RkButton>
-            </View>
-            <View style={UtilStyles.description}>
-              <View style={[{alignItems: 'flex-start'}]}>
-                <Text style={{marginBottom: 5}}>Supported event props:</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>onPress</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab, UtilStyles.spaceV]}>onLongPress</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab]}>onPressIn</Text>
-                <Text style={[UtilStyles.codeText, UtilStyles.tab, UtilStyles.spaceV]}>onPressOut</Text>
-              </View>
-            </View>
-          </View>
+
         </View>
       </ScrollView>
     );
   }
 }
+
+let styles = StyleSheet.create({
+  githubButton: {
+    backgroundColor: '#292f34',
+    justifyContent: 'flex-start',
+    paddingLeft: 0
+  },
+  iconButton: {
+    width: 50,
+    marginHorizontal: 8,
+    paddingHorizontal: 0
+  },
+  circleIconButton: {
+    width: 44,
+    paddingHorizontal: 0,
+    marginHorizontal: 9
+  },
+  textSpace: {
+    marginVertical: 3
+  }
+});

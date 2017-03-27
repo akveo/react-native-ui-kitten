@@ -10,10 +10,17 @@ export let bootstrap = () => {
     color: '#2196f3'
   });
 
-  // remove default border radius from all RkButtons in application
+  // remove base border radius from all RkButtons in application
   /**
    RkTheme.setType('RkButton', 'basic', {
     borderRadius: 0
   });
    */
+
+  RkTheme.setType('RkButton', 'outline-success', {
+    backgroundColor: 'transparent',
+    borderColor: RkTheme.current.colors.success,
+    borderWidth: 1,
+    color: RkTheme.current.colors.success,
+  })
 };

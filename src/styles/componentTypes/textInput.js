@@ -23,16 +23,16 @@ export const RkTextInputTypes = (theme) => {
     basic: {
       backgroundColor: 'transparent',
       inputBackgroundColor: 'transparent',
-      color: theme.colors.text.default,
+      color: theme.colors.text.base,
       labelFontSize: 14,
-      labelColor: theme.colors.text.default
+      labelColor: theme.colors.text.base
     },
 
     bordered: {
       paddingHorizontal: 5,
       paddingVertical: 5,
       borderWidth: 0.5,
-      borderColor: theme.colors.text.default,
+      borderColor: theme.colors.text.base,
       borderRadius: 3
     },
 
@@ -40,11 +40,11 @@ export const RkTextInputTypes = (theme) => {
       borderRadius: 100,
       paddingHorizontal: 10,
       paddingVertical: 5,
-      backgroundColor: theme.colors.background.default
+      backgroundColor: theme.colors.background.base
     },
 
     form: {
-      inputBackgroundColor: theme.colors.background.default,
+      inputBackgroundColor: theme.colors.background.base,
     },
 
 
@@ -64,7 +64,7 @@ export const RkTextInputTypes = (theme) => {
     },
     underline: {
       underlineWidth: 0.5,
-      underlineColor: theme.colors.border.default
+      underlineColor: theme.colors.border.base
     }
     // underline: {
     //   container: {

@@ -24,9 +24,16 @@ export class RkComponent extends Component {
 
     let styles = this._getDefaultStyles(componentTypes);
 
-    let usedTypes = _.pickBy(componentTypes, function (value, key) {
-      return types.includes(key);
+    let usedTypes = [];
+    types.forEach(type => {
+      if (componentTypes[type])
+        usedTypes.push(componentTypes[type]);
     });
+
+
+    // let usedTypes = _.pickBy(componentTypes, function (value, key) {
+    //   return types.includes(key);
+    // });
 
     for (let type in usedTypes) {
       for (let key in usedTypes[type]) {

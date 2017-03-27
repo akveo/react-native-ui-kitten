@@ -5,7 +5,7 @@ export const RkCardTypes = (theme) => {
         margin: 5,
         borderRadius: 1,
         borderWidth: 1,
-        borderColor: theme.colors.border.default
+        borderColor: theme.colors.border.base
       },
       header: {
         flexDirection: 'row',

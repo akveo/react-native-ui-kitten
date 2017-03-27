@@ -1,52 +1,72 @@
 import {RkColors} from './color'
-let primary = RkColors.cyan800;
-let accent = '#B2FF59';
-let success = RkColors.green600;
-let warning = RkColors.amber700;
-let danger = RkColors.red800;
-let info = RkColors.lightBlue300;
+
+export const Values = {
+  primary: '#397edc',
+  primaryActive: '#2d63ad',
+  success: '#22c93d',
+  successActive: '#1dab35',
+  info: '#19bfe5',
+  infoActive: '#17adcf',
+  warning: '#feb401',
+  warningActive: '#eba502',
+  danger: '#ed1c4d',
+  dangerActive: '#c2173f',
+  foreground: '#000000dd',
+  background: '#fff',
+  fontSize: 15,
+};
 
 export const DefaultTheme = {
   colors: {
-    main: {
-      primary: primary,
-      secondary: RkColors.lightGreen400,
-      accent: accent,
-      default: RkColors.lightGreen500,
-      success: success,
-      info: info,
-      warning: warning,
-      danger: danger
-    },
+    primary: Values.primary,
+    primaryActive: Values.primaryActive,
+    success: Values.success,
+    successActive: Values.successActive,
+    info: Values.info,
+    infoActive: Values.infoActive,
+    warning: Values.warning,
+    warningActive: Values.warningActive,
+    danger: Values.danger,
+    dangerActive: Values.dangerActive,
+    foreground: Values.foreground,
+    background: Values.background,
+
     text: {
-      default: RkColors.lightGreen900,
-      additional: RkColors.white,
-      subtitle: RkColors.lightGreen700
+      base: Values.foreground,
+      additional: Values.background,
+      subtitle: Values.foreground
     },
-    background: {
-      screen: RkColors.lightGreen50,
-      secondary: RkColors.lightGreen100,
-      default: RkColors.lightGreen300,
-      primary: primary,
-      success: success,
-      info: info,
-      warning: warning,
-      danger: danger,
+    back: {
+      base: Values.background,
+      button:Values.primary,
+      primary: Values.primary,
+      primaryActive: Values.primaryActive,
+      success: Values.success,
+      successActive: Values.successActive,
+      info: Values.info,
+      infoActive: Values.infoActive,
+      warning: Values.warning,
+      warningActive: Values.warningActive,
+      danger: Values.danger,
+      dangerActive: Values.dangerActive,
+      foreground: Values.foreground,
+      background: Values.background,
       outline: RkColors.transparent
     },
     border: {
-      default: RkColors.lightGreen700
+      base: Values.primary
     },
     shadow: {
-      default: RkColors.lightGreen400
+      base: RkColors.lightGreen400
     }
   },
   fonts: {
     sizes: {
-      default: 18,
-      small: 14,
-      medium: 16,
-      large: 20
+      base: Values.fontSize,
+      small: Values.fontSize * .8,
+      medium: Values.fontSize,
+      large: Values.fontSize * 1.2,
+      xlarge:Values.fontSize / 0.75
     }
   }
 };

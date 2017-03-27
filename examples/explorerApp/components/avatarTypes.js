@@ -17,7 +17,7 @@ export const AvatarTypes = (theme) => {
     round: {
       imageBorderRadius: 20,
       imageBorderWidth: 1,
-      color: theme.colors.text.default,
+      color: theme.colors.text.base,
       label: {
         paddingLeft: 2
       }
