@@ -3,94 +3,82 @@ export const RkTextInputTypes = (theme) => {
     _base: {
       input: {
         flex: 1,
-        fontSize: 16,
-        height: 16 * 1.42,
+        fontSize: theme.fonts.sizes.base,
+        height: theme.fonts.sizes.base * 1.42,
         alignSelf: 'center',
-        borderRadius: 3,
-        paddingVertical: 0,
+        marginVertical: 18,
+        marginLeft: 16
       },
       container: {
         flexDirection: 'row',
         flex: 1,
+        borderBottomWidth: 0.5,
+        borderBottomColor: theme.colors.border.underline,
+        marginVertical: 9
       },
       label: {
-        fontSize: 16,
+        fontSize: theme.fonts.sizes.base,
         alignSelf: 'center',
-        marginRight: 5,
       }
     },
-
     basic: {
       backgroundColor: 'transparent',
       inputBackgroundColor: 'transparent',
       color: theme.colors.text.base,
-      labelFontSize: 14,
-      labelColor: theme.colors.text.base
+      labelColor: theme.colors.text.hint,
+      placeholderTextColor: theme.colors.text.hint
     },
 
     bordered: {
-      paddingHorizontal: 5,
-      paddingVertical: 5,
+      borderRadius: 5,
       borderWidth: 0.5,
-      borderColor: theme.colors.text.base,
-      borderRadius: 3
+      borderColor: theme.colors.border.solid,
+      underlineColor: theme.colors.border.solid,
     },
 
     rounded: {
       borderRadius: 100,
-      paddingHorizontal: 10,
-      paddingVertical: 5,
-      backgroundColor: theme.colors.background.base
+      borderWidth: 0.5,
+      borderColor: theme.colors.border.solid,
+      underlineColor: theme.colors.border.solid,
     },
 
     form: {
-      inputBackgroundColor: theme.colors.background.base,
+      input: {
+        flex: -1,
+        width: 240,
+        borderColor: theme.colors.border.solid,
+        borderRadius: 5,
+        borderWidth: 1,
+        height: 50,
+        marginVertical: 0,
+        paddingLeft: 14,
+        marginLeft: 13
+      },
+      label: {
+        flexDirection: 'column',
+        alignSelf: 'center',
+      },
+      container: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+      },
+      underlineWidth: 0
     },
-
 
     topLabel: {
       input: {
         alignSelf: 'stretch',
+        marginVertical:14
       },
       container: {
         flexDirection: 'column',
         alignItems: 'flex-start',
       },
       label: {
-        fontSize: 12,
-        color: theme.colors.text.subtitle,
+        fontSize: theme.fonts.sizes.small,
         alignSelf: 'flex-start'
       }
     },
-    underline: {
-      underlineWidth: 0.5,
-      underlineColor: theme.colors.border.base
-    }
-    // underline: {
-    //   container: {
-    //     borderBottomWidth: 0.5,
-    //     borderBottomColor: RkColors.blue500,
-    //   }
-    // },
-    // 'underline-text': {
-    //   input: {
-    //     borderBottomWidth: 0.5,
-    //     borderBottomColor: RkColors.blue500,
-    //   }
-    // },
-    // topLabel: {
-    //   input: {
-    //     alignSelf: 'stretch',
-    //   },
-    //   container: {
-    //     flexDirection: 'column',
-    //     alignItems: 'flex-start',
-    //   },
-    //   label: {
-    //     fontSize: 12,
-    //     color: RkColors.grey500,
-    //     alignSelf: 'flex-start'
-    //   }
-    // }
   });
 };

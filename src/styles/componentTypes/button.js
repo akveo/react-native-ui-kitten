@@ -16,6 +16,9 @@ export const RkButtonTypes = (theme) => {
         alignSelf: 'center',
         textAlign: 'center',
       },
+      opacity:{
+        alignSelf:'flex-start'
+      }
     },
     basic: {
       backgroundColor: theme.colors.back.button,
@@ -83,6 +86,9 @@ export const RkButtonTypes = (theme) => {
       container: {
         height: 60,
         width: -1
+      },
+      opacity:{
+        alignSelf:'stretch'
       }
     },
     clear: {

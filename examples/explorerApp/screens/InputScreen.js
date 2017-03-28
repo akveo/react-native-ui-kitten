@@ -8,8 +8,8 @@ import {
   TextInput,
 } from 'react-native';
 
-import { RkTheme, RkTextInput, RkSeparator} from 'react-native-ui-kitten';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {RkText, RkTextInput} from 'react-native-ui-kitten';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {UtilStyles} from '../style/styles';
 
 export class InputScreen extends Component {
@@ -26,71 +26,63 @@ export class InputScreen extends Component {
       <ScrollView
         ref={'scrollView'}
         automaticallyAdjustContentInsets={true}
-        style={[UtilStyles.container, {backgroundColor: RkTheme.current.colors.grey300}]}>
+        style={UtilStyles.container}>
 
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Default input</Text>
+          <RkText rkType='header'>Default input</RkText>
           <View style={UtilStyles.rowContainer}>
             <View style={{flex: 1}}>
               <RkTextInput placeholder='Login' clearButtonMode='always'/>
-              <RkSeparator style={{marginVertical: 5, marginRight: 20}} />
               <RkTextInput secureTextEntry={true} placeholder='Password' clearButtonMode='always'/>
             </View>
           </View>
         </View>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Rounded input</Text>
+          <RkText rkType='header'>Rounded input</RkText>
           <View style={UtilStyles.rowContainer}>
             <View style={{flex: 1}}>
               <RkTextInput rkType='rounded' placeholder='Login'/>
-              <RkTextInput secureTextEntry={true} containerStyle={{marginTop: 5}} rkType='rounded' placeholder='Password'/>
+              <RkTextInput secureTextEntry={true} rkType='rounded'
+                           placeholder='Password'/>
             </View>
           </View>
         </View>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Bordered input</Text>
+          <RkText rkType='header'>Bordered input</RkText>
           <View style={UtilStyles.rowContainer}>
             <View style={{flex: 1}}>
               <RkTextInput rkType='bordered' placeholder='Login'/>
-              <RkTextInput secureTextEntry={true} containerStyle={{marginTop: 5}} rkType='bordered' placeholder='Password'/>
+              <RkTextInput secureTextEntry={true} rkType='bordered'
+                           placeholder='Password'/>
             </View>
           </View>
         </View>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Underline input</Text>
-          <View style={UtilStyles.rowContainer}>
+          <RkText rkType='header'>With icon</RkText>
+          <View style={[UtilStyles.rowContainer]}>
             <View style={{flex: 1}}>
-              <RkTextInput rkType='underline' placeholder='Login'/>
-              <RkTextInput secureTextEntry={true} containerStyle={{marginTop: 10}} rkType='underline' placeholder='Password'/>
+              <RkTextInput label={<Icon style={styles.inputIcon} name='user'/>} placeholder='Login'/>
+              <RkTextInput secureTextEntry={true} label={<Icon style={styles.inputIcon} name='lock'/>}
+                           placeholder='Password'/>
+              <RkTextInput rkType='rounded' label={<Icon style={[styles.inputIcon, styles.searchIcon]} name='search'/>}
+                           placeholder='Search' style={{marginLeft: 11}}/>
             </View>
           </View>
         </View>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>With icon</Text>
-          <View style={[UtilStyles.rowContainer]}>
-            <View style={{flex: 1}}>
-              <RkTextInput label={<Icon name='ios-person-outline'/>} placeholder='Login' iconStyle={{fontSize: 22}}/>
-              <RkSeparator style={{marginVertical: 5, marginRight: 20}}/>
-              <RkTextInput secureTextEntry={true} label={<Icon name='ios-key-outline'/>} placeholder='Password'/>
-
-              <RkTextInput rkType='rounded' label={<Icon name='ios-search-outline'/>} containerStyle={{marginTop: 20}}
-                           placeholder='Search'/>
-            </View>
+          <RkText rkType='header'>Labels</RkText>
+          <View style={[UtilStyles.columnContainer]}>
+            <RkTextInput label='Login' rkType='form'/>
+            <RkTextInput rkType="form" secureTextEntry={true} label='Password'/>
           </View>
         </View>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Labels</Text>
+          <RkText rkType='header'>Top Labels</RkText>
           <View style={[UtilStyles.rowContainer]}>
             <View style={{flex: 1}}>
-              <RkTextInput label='Login:' rkType="form"/>
-              <RkTextInput rkType="form" secureTextEntry={true} containerStyle={{marginTop: 10}} label='Password:'/>
-            </View>
-          </View>
-          <Text style={[UtilStyles.titleText, {marginTop: 15}]}>Top Labels</Text>
-          <View style={[UtilStyles.rowContainer]}>
-            <View style={{flex: 1}}>
-              <RkTextInput rkType="topLabel underline" label={'Login:'}/>
-              <RkTextInput secureTextEntry={true} rkType="topLabel underline" containerStyle={{marginTop: 15}} label='Password:'/>
+              <RkTextInput rkType="topLabel" label='Login'/>
+              <RkTextInput secureTextEntry={true} rkType="topLabel" containerStyle={{marginTop: 15}}
+                           label='Password'/>
             </View>
           </View>
         </View>
@@ -99,3 +91,14 @@ export class InputScreen extends Component {
     );
   }
 }
+
+let styles = StyleSheet.create({
+  inputIcon: {
+    fontSize: 15,
+    color: '#0000003a',
+    marginLeft: 4,
+  },
+  searchIcon: {
+    marginLeft: 16,
+  }
+});

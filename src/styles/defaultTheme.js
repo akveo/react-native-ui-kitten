@@ -34,11 +34,12 @@ export const DefaultTheme = {
     text: {
       base: Values.foreground,
       additional: Values.background,
-      subtitle: Values.foreground
+      subtitle: Values.foreground,
+      hint: '#0000008e'
     },
     back: {
       base: Values.background,
-      button:Values.primary,
+      button: Values.primary,
       primary: Values.primary,
       primaryActive: Values.primaryActive,
       success: Values.success,
@@ -54,10 +55,9 @@ export const DefaultTheme = {
       outline: RkColors.transparent
     },
     border: {
-      base: Values.primary
-    },
-    shadow: {
-      base: RkColors.lightGreen400
+      base: Values.primary,
+      underline: '#0000001A',
+      solid:'#0000003B'
     }
   },
   fonts: {
@@ -66,7 +66,7 @@ export const DefaultTheme = {
       small: Values.fontSize * .8,
       medium: Values.fontSize,
       large: Values.fontSize * 1.2,
-      xlarge:Values.fontSize / 0.75
+      xlarge: Values.fontSize / 0.75
     }
   }
 };

@@ -18,15 +18,17 @@ export const UtilStyles = StyleSheet.create({
     marginTop: 14,
     paddingHorizontal: 24,
     paddingVertical: 15,
+  },
+  bordered: {
     borderBottomColor: '#0000001A',
     borderBottomWidth: 0.5
   },
   rowContainer: {
     marginTop: 16,
     flexDirection: 'row',
-    flexWrap:'wrap'
+    flexWrap: 'wrap'
   },
-  columnContainer:{
+  columnContainer: {
     marginTop: 16
   },
   spaceAround: {
@@ -64,8 +66,8 @@ export const UtilStyles = StyleSheet.create({
     color: RkTheme.current.colors.danger,
   },
   tab: {
-    paddingLeft:20,
-    alignItems:'center',
+    paddingLeft: 20,
+    alignItems: 'center',
   },
   row: {
     flexDirection: 'row',

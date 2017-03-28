@@ -121,16 +121,10 @@ export class RkChoice extends RkComponent {
     }
 
     let {container, inner} = this.defineStyles(_.join(computedTypes, " "));
-
     let propsContent = this._getContentFromProps();
+    let contentValue = this.extractNonStyleValue(container,'content');
 
-
-    let contentValue = _.find(container, (e) => e.hasOwnProperty('content'));
-    if (contentValue) {
-      container.splice(container.indexOf(contentValue), 1);
-    }
-
-    let content = React.cloneElement(contentValue.content, {
+    let content = React.cloneElement(contentValue, {
         style: [inner]
       }) || (<View/>);
 

@@ -19,6 +19,17 @@ export class RkComponent extends Component {
     return this._getTypes(types);
   }
 
+  extractNonStyleValue(styles, property) {
+    let val = _.find(styles, (e) => e.hasOwnProperty(property));
+    if (val) {
+      styles.splice(styles.indexOf(val), 1);
+    }
+    else {
+      return val;
+    }
+    return val[property];
+  }
+
   _getTypes(types) {
     let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
 
@@ -29,11 +40,6 @@ export class RkComponent extends Component {
       if (componentTypes[type])
         usedTypes.push(componentTypes[type]);
     });
-
-
-    // let usedTypes = _.pickBy(componentTypes, function (value, key) {
-    //   return types.includes(key);
-    // });
 
     for (let type in usedTypes) {
       for (let key in usedTypes[type]) {

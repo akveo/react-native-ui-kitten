@@ -29,7 +29,7 @@ export class ButtonScreen extends Component {
       <ScrollView
         automaticallyAdjustContentInsets={true}
         style={UtilStyles.container}>
-        <View style={[UtilStyles.section]}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Basic button</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkText>Just create button element with text inside.</RkText>
@@ -44,7 +44,7 @@ export class ButtonScreen extends Component {
           </View>
         </View>
 
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Colored buttons</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkText>Easy to customize colors using style
@@ -59,7 +59,7 @@ export class ButtonScreen extends Component {
             <RkButton rkType='danger' style={UtilStyles.spaceTop}>Danger</RkButton>
           </View>
         </View>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Button type props</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkText>With button props type
@@ -74,7 +74,7 @@ export class ButtonScreen extends Component {
             </View>
           </View>
         </View>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Button sizes</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkText>Type props also allow you to define the mass of button.</RkText>
@@ -87,7 +87,7 @@ export class ButtonScreen extends Component {
           </View>
         </View>
 
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>With icons</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkText>Easy to customize colors using style props for button container styles
@@ -120,11 +120,9 @@ export class ButtonScreen extends Component {
               <AwesomeIcon style={{marginHorizontal: 12, fontSize: 25}} name={'github'}/>
               <RkText>Github</RkText>
             </RkButton>
-
           </View>
-
         </View>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Icons only</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkText>For icons used react-native-vector-icons.
@@ -161,7 +159,7 @@ export class ButtonScreen extends Component {
             </RkButton>
           </View>
         </View>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Events</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkButton onPress={this._onPress} onLongPress={this._onLongPress} rkType='warning'>Push me!</RkButton>
