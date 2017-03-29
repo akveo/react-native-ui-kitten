@@ -11,7 +11,7 @@ import {
   Image
 } from 'react-native';
 
-import {RkRadioButton, RkChoiceGroup, RkChoice, RkTheme, RkCard} from 'react-native-ui-kitten';
+import {RkText, RkChoiceGroup, RkChoice, RkTheme, RkCard} from 'react-native-ui-kitten';
 import {UtilStyles} from '../style/styles';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -35,8 +35,38 @@ export class ChoiceScreen extends Component {
         style={[UtilStyles.container, {backgroundColor: RkTheme.colors.primary}]}
         automaticallyAdjustContentInsets={true}>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Classic selectable components</Text>
-          <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
+          <RkText rkType='header'>Classic selectable components</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <View style={{flex: 1}}>
+              <View style={styles.componentRow}>
+                <RkChoice/>
+                <RkText>Default</RkText>
+              </View>
+              <View style={styles.componentRow}>
+                <RkChoice/>
+                <RkText>Default</RkText>
+              </View>
+              <View style={styles.componentRow}>
+                <RkChoice/>
+                <RkText>Default</RkText>
+              </View>
+            </View>
+            <View style={{flex: 1}}>
+              <View style={styles.componentRow}>
+                <RkChoice/>
+                <RkText>Default</RkText>
+              </View>
+              <View style={styles.componentRow}>
+                <RkChoice/>
+                <RkText>Default</RkText>
+              </View>
+              <View style={styles.componentRow}>
+                <RkChoice/>
+                <RkText>Default</RkText>
+              </View>
+            </View>
+          </View>
+          <View>
             <View>
               <View style={{alignItems: 'center'}}>
                 <RkChoice/>
@@ -448,8 +478,7 @@ class SettingsScreen extends Component {
 const styles = StyleSheet.create({
   componentRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+
   },
   settingsOption: {
     paddingVertical: 5,

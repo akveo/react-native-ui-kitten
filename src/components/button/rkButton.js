@@ -25,12 +25,11 @@ export class RkButton extends RkComponent {
     inner: {
       color: 'color',
       fontSize: 'fontSize'
-    },
-    opacity: {}
+    }
   };
 
   render() {
-    let {container, inner, opacity} = super.defineStyles();
+    let {container, inner} = super.defineStyles();
     let touchableProps = {
       onPress: this.props.onPress,
       onPressIn: this.props.onPressIn,
@@ -38,10 +37,8 @@ export class RkButton extends RkComponent {
       onLongPress: this.props.onLongPress
     };
     return (
-      <TouchableOpacity style={opacity} {...touchableProps}>
-        <View style={[container, this.props.style]}>
+      <TouchableOpacity style={[container, this.props.style]} {...touchableProps}>
           {this.props.children && this._renderChildren(inner)}
-        </View>
       </TouchableOpacity>
     );
   }

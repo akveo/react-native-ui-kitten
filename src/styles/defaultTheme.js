@@ -13,6 +13,7 @@ export const Values = {
   dangerActive: '#c2173f',
   foreground: '#000000dd',
   background: '#fff',
+  overlay: '#00000057',
   fontSize: 15,
 };
 
@@ -30,6 +31,7 @@ export const DefaultTheme = {
     dangerActive: Values.dangerActive,
     foreground: Values.foreground,
     background: Values.background,
+    overlay: Values.overlay,
 
     text: {
       base: Values.foreground,
@@ -57,7 +59,7 @@ export const DefaultTheme = {
     border: {
       base: Values.primary,
       underline: '#0000001A',
-      solid:'#0000003B'
+      solid: '#0000003B'
     }
   },
   fonts: {
@@ -66,7 +68,8 @@ export const DefaultTheme = {
       small: Values.fontSize * .8,
       medium: Values.fontSize,
       large: Values.fontSize * 1.2,
-      xlarge: Values.fontSize / 0.75
+      xlarge: Values.fontSize / 0.75,
+      xxlarge: Values.fontSize * 1.6,
     }
   }
 };

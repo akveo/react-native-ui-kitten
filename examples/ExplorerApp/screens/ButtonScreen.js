@@ -11,8 +11,7 @@ import {
 import {RkButton, RkText, RkTheme} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import Icon from 'react-native-vector-icons/Ionicons';
-import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import {Icon} from '../components/icon';
 
 export class ButtonScreen extends Component {
 
@@ -96,28 +95,28 @@ export class ButtonScreen extends Component {
           <View style={UtilStyles.columnContainer}>
             <RkButton style={[{width: 110, justifyContent: 'flex-start', paddingLeft: 9}, UtilStyles.spaceBottom]}
                       rkType='rounded danger'>
-              <AwesomeIcon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
+              <Icon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
               <RkText>Delete</RkText>
             </RkButton>
 
             <RkButton style={[{width: 100, justifyContent: 'flex-start', paddingLeft: 9}, UtilStyles.spaceVertical]}
                       rkType='rounded success'>
-              <AwesomeIcon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
+              <Icon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
               <RkText>Add</RkText>
             </RkButton>
 
             <RkButton style={[{justifyContent: 'flex-start', paddingLeft: 0}, UtilStyles.spaceVertical]}>
-              <AwesomeIcon style={{marginHorizontal: 16, fontSize: 21}} name={'facebook'}/>
+              <Icon style={{marginHorizontal: 16, fontSize: 21}} name={'facebook'}/>
               <RkText>Facebook</RkText>
             </RkButton>
 
             <RkButton style={[{justifyContent: 'flex-start', paddingLeft: 0}, UtilStyles.spaceVertical]} rkType='info'>
-              <AwesomeIcon style={{marginHorizontal: 12, fontSize: 22}} name={'twitter'}/>
+              <Icon style={{marginHorizontal: 12, fontSize: 22}} name={'twitter'}/>
               <RkText>Twitter</RkText>
             </RkButton>
 
             <RkButton style={[styles.githubButton, UtilStyles.spaceTop]} rkType='info'>
-              <AwesomeIcon style={{marginHorizontal: 12, fontSize: 25}} name={'github'}/>
+              <Icon style={{marginHorizontal: 12, fontSize: 25}} name={'github'}/>
               <RkText>Github</RkText>
             </RkButton>
           </View>
@@ -132,30 +131,30 @@ export class ButtonScreen extends Component {
           </View>
           <View style={UtilStyles.rowContainer}>
             <RkButton style={[styles.iconButton, {marginLeft: 0}]}>
-              <AwesomeIcon style={{fontSize: 24}} name={'share-alt'}/>
+              <Icon style={{fontSize: 24,}} name={'share-alt'}/>
             </RkButton>
             <RkButton style={styles.iconButton}>
-              <AwesomeIcon style={{fontSize: 24}} name={'envelope'}/>
+              <Icon style={{fontSize: 24}} name={'envelope'}/>
             </RkButton>
             <RkButton rkType='success' style={styles.iconButton}>
-              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+              <Icon style={{fontSize: 26, fontFamily:'FontAwesome'}} name={'plus'}/>
             </RkButton>
             <RkButton rkType='success circle' style={styles.circleIconButton}>
-              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+              <Icon style={{fontSize: 26}} name={'plus'}/>
             </RkButton>
           </View>
           <View style={UtilStyles.rowContainer}>
             <RkButton rkType='outline' style={[styles.iconButton, {marginLeft: 0}]}>
-              <AwesomeIcon style={{fontSize: 24}} name={'share-alt'}/>
+              <Icon style={{fontSize: 24}} name={'share-alt'}/>
             </RkButton>
             <RkButton rkType='outline' style={styles.iconButton}>
-              <AwesomeIcon style={{fontSize: 24}} name={'envelope'}/>
+              <Icon style={{fontSize: 24}} name={'envelope'}/>
             </RkButton>
             <RkButton rkType='outline-success ' style={styles.iconButton}>
-              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+              <Icon style={{fontSize: 26}} name={'plus'}/>
             </RkButton>
             <RkButton rkType='outline-success circle' style={[styles.circleIconButton]}>
-              <AwesomeIcon style={{fontSize: 26}} name={'plus'}/>
+              <Icon style={{fontSize: 26}} name={'plus'}/>
             </RkButton>
           </View>
         </View>

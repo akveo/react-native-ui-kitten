@@ -10,10 +10,17 @@ import {
   Image
 } from 'react-native';
 
-import {RkButton, RkTheme, RkModalImg, RkTextInput, RkBarBg, RkCard} from 'react-native-ui-kitten';
+import {
+  RkButton,
+  RkText,
+  RkTheme,
+  RkModalImg,
+  RkTextInput,
+  RkCard
+} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Icon} from '../components/icon';
 
 export class CardScreen extends Component {
 
@@ -27,137 +34,235 @@ export class CardScreen extends Component {
 
         <ScrollView
           automaticallyAdjustContentInsets={true}
-          style={[UtilStyles.container, {}]}>
+          style={[UtilStyles.container, styles.screen]}>
           <RkCard>
             <View rkCardHeader>
               <View>
-                <Text rkCardTitle>Header</Text>
-                <Text rkCardSubTitle>Sub header</Text>
+                <RkText rkType='header'>Header</RkText>
+                <RkText rkType='subtitle'>Subtitle</RkText>
               </View>
             </View>
-
+            <Image rkCardImg source={require('../img/post1.png')}/>
             <View rkCardContent>
-              <Image resizeMode={'cover'} source={require('../img/sea.jpg')} rkCardImg/>
+              <RkText rkType='cardText'>Far far away, behind the word mountains, far from the countries Vokalia and
+                Consonantia, there live the blind texts.</RkText>
             </View>
+            <View rkCardFooter>
+              <RkButton rkType='clear link accent'>
+                <Icon name="heart" style={styles.buttonIcon}/>
+                <RkText>18 Likes</RkText>
+              </RkButton>
+              <RkButton rkType='clear link'>
+                <Icon name="comment-o" style={styles.buttonIcon}/>
+                <RkText>2 Comments</RkText>
+              </RkButton>
+              <RkButton rkType='clear link'>
+                <Icon name="send-o" style={styles.buttonIcon}/>
+                <RkText>6 Shares</RkText>
+              </RkButton>
+            </View >
+          </RkCard>
 
+          <RkCard>
+            <View rkCardHeader>
+              <View>
+                <RkText rkType='header'>Header</RkText>
+                <RkText rkType='subtitle'>Subtitle</RkText>
+              </View>
+            </View>
+            <Image rkCardImg source={require('../img/post2.png')}/>
             <View rkCardContent>
-              <Text rkCardTitle>Card content</Text>
-              <Text rkCardText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Mauris feugiat vel quam ac scelerisque...
-              </Text>
+              <RkText rkType='cardText'>Far far away, behind the word mountains, far from the countries Vokalia and
+                Consonantia, there live the blind texts.</RkText>
             </View>
-
-            <View rkCardFooter rkType='bordered'>
-              <Text>Footer</Text>
+            <View rkCardFooter style={styles.footer}>
+              <RkButton rkType='clear link accent'>
+                <Icon name="heart" style={styles.buttonIcon}/>
+                <RkText>18</RkText>
+              </RkButton>
+              <RkButton rkType='clear link'>
+                <Icon name="comment-o" style={styles.buttonIcon}/>
+                <RkText>2</RkText>
+              </RkButton>
+              <RkButton rkType='clear link'>
+                <Icon name="send-o" style={styles.buttonIcon}/>
+                <RkText>6</RkText>
+              </RkButton>
             </View>
           </RkCard>
 
           <RkCard>
-            <View rkCardHeader style={{paddingTop: 0, paddingRight: 0}}>
-              <View style={{flexDirection: 'row', paddingTop: 8}}>
-                <Image resizeMode={'cover'} source={require('../img/dog.gif')} rkCardAvatar/>
-                <View style={{justifyContent: 'space-around'}}>
-                  <Text rkCardTitle>Alex Grey</Text>
-                  <Text rkCardSubTitle>25 minutes ago</Text>
+            <View rkCardHeader>
+              <View style={{flexDirection: 'row'}}>
+                <View style={styles.avatar}></View>
+                <View style={{}}>
+                  <RkText rkType='header'>Elena Zhukova</RkText>
+                  <RkText rkType='subtitle'>6 minutes ago</RkText>
                 </View>
               </View>
-              <RkButton rkType='clear'><Icon style={{fontSize: 35}} name='ios-more'/></RkButton>
-            </View>
-            <View rkCardContent rkType='bordered'>
-              <Text rkCardText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam risus sem, vulputate ac sagittis ac,
-                ultricies at velit. Sed in sem auctor, egestas odio eu, blandit quam. Cras et ante pulvinar, blandit
-                velit at, lobortis sem. Integer in elit odio. Aliquam fringilla purus sit amet dapibus elementum. Cras
-                posuere vehicula nisi, sit amet molestie turpis dictum sit amet. Nam cursus congue leo at accumsan.
-                Fusce eget tincidunt massa.
-              </Text>
-            </View>
 
+              <RkButton rkType='clear'>
+                <Icon style={styles.dot} name={'circle'}/>
+                <Icon style={styles.dot} name={'circle'}/>
+                <Icon style={styles.dot} name={'circle'}/>
+              </RkButton>
+            </View>
+            <View rkCardContent>
+              <RkText rkType='cardText'>Far far away, behind the word mountains, far from the countries Vokalia and
+                Consonantia, there live the blind texts.</RkText>
+            </View>
+            <View rkCardFooter style={styles.footer}>
+              <RkButton rkType='clear link accent'>
+                <Icon name="heart" style={styles.buttonIcon}/>
+                <RkText>18</RkText>
+              </RkButton>
+              <RkButton rkType='clear link'>
+                <Icon name="comment-o" style={styles.buttonIcon}/>
+                <RkText>2</RkText>
+              </RkButton>
+              <RkButton rkType='clear link'>
+                <Icon name="send-o" style={styles.buttonIcon}/>
+                <RkText>6</RkText>
+              </RkButton>
+            </View>
           </RkCard>
 
-          <RkCard rkType='material'>
+          <RkCard rkType='shadowed'>
+            <View>
+              <Image rkCardImg source={require('../img/post3.png')}/>
+              <View rkCardImgOverlay/>
+            </View>
+            <RkButton rkType='circle accent-bg' style={styles.floating}>
+              <Icon name={'plus'}/>
+            </RkButton>
 
-            <View rkCardHeader style={{backgroundColor: RkTheme.colors.blue500, paddingTop: 0, paddingRight: 0}}>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Text style={{color: 'white'}} rkCardTitle>Material Card</Text>
-                <Text style={{color: 'white'}} rkCardSubTitle>Sub header</Text>
+            <View rkCardHeader style={{paddingBottom: 2.5}}>
+              <View>
+                <RkText rkType='header xxlarge'>Header</RkText>
+                <RkText rkType='subtitle'>Subtitle</RkText>
               </View>
-              <RkButton rkType='clear' style={{alignSelf: 'flex-end', marginBottom: 50, paddingHorizontal: 8}}
-                        innerStyle={{color: 'white'}}><Icon name='md-close'/></RkButton>
             </View>
-
             <View rkCardContent>
-              <Text rkCardText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Mauris feugiat vel quam ac scelerisque...
-              </Text>
+              <RkText rkType='compactCardText'>Far far away, behind the word mountains, far from the countries Vokalia
+                and
+                Consonantia, there live the blind texts.</RkText>
             </View>
-
-            <View rkCardFooter rkType='bordered'>
-              <Text rkCardText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Mauris feugiat vel quam ac scelerisque...
-              </Text>
+            <View rkCardFooter>
+              <View style={styles.footerButtons}>
+                <RkButton rkType='clear action' style={{marginRight: 16}}>SHARE</RkButton>
+                <RkButton rkType='clear action'>EXPLORE</RkButton>
+              </View>
             </View>
-
           </RkCard>
 
-          <RkCard rkType='material'>
-            <View rkCardHeader rkType='noPadding bordered'>
-              <Image resizeMode={'cover'} source={require('../img/rainyday.gif')} rkCardImg/>
+          <RkCard rkType='shadowed'>
+            <View>
+              <Image rkCardImg source={require('../img/post4.png')}/>
+              <View rkCardImgOverlay style={styles.overlay}>
+                <RkText rkType='header xxlarge' style={{color: 'white'}}>Header</RkText>
+              </View>
             </View>
+            <RkButton rkType='circle accent-bg' style={styles.floating}>
+              <Icon name={'plus'}/>
+            </RkButton>
 
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'flex-end',
-                alignItems: 'flex-end',
-                marginRight: 20,
-                marginVertical: -22.5,
-                zIndex: 111
-              }}>
-              <RkButton rkType='circle shadow'
-                        style={[UtilStyles.spaceH, RkTheme.styles.orange500Bg, {
-                          paddingVertical: 5,
-                          paddingHorizontal: 12.5
-                        }]}
-                        innerStyle={[RkTheme.styles.whiteText, {fontSize: 32}]}>
-                <Icon name={'md-add'}/>
-              </RkButton>
+            <View rkCardHeader style={{paddingBottom: 2.5}}>
+              <View>
+
+                <RkText rkType='subtitle'>Subtitle</RkText>
+              </View>
             </View>
-
             <View rkCardContent>
-              <Text rkCardTitle>Material Card</Text>
-              <Text rkCardSubTitle>Sub header</Text>
+              <RkText rkType='compactCardText'>Far far away, behind the word mountains, far from the countries Vokalia
+                and
+                Consonantia, there live the blind texts.</RkText>
             </View>
-
-            <View rkCardContent>
-              <Text rkCardText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Mauris feugiat vel quam ac scelerisque...
-              </Text>
+            <View rkCardFooter>
+              <View style={styles.footerButtons}>
+                <RkButton rkType='clear action' style={{marginRight: 16}}>SHARE</RkButton>
+                <RkButton rkType='clear action'>EXPLORE</RkButton>
+              </View>
             </View>
-
-            <View rkCardFooter style={{flexDirection: 'row'}}>
-              <RkButton
-                style={{paddingHorizontal: 5, paddingVertical: 5}}
-                rkType={'clear'}>
-                SHARE
-              </RkButton>
-              <RkButton
-                style={{paddingHorizontal: 5, paddingVertical: 5}}
-                rkType={'clear'}>
-                EXPLORE
-              </RkButton>
-            </View>
-
           </RkCard>
 
-
+          <RkCard rkType='heroImage shadowed'>
+            <View>
+              <Image rkCardImg source={require('../img/post5.png')}/>
+              <View rkCardImgOverlay style={styles.overlay}>
+                <View style={{marginBottom: 20}}>
+                  <RkText rkType='header xxlarge' style={{color: 'white'}}>Header</RkText>
+                  <RkText rkType='subtitle' style={{color: 'white'}}>Subtitle</RkText>
+                </View>
+                <View style={styles.footerButtons}>
+                  <RkButton rkType='clear' style={{marginRight: 16}}>SHARE</RkButton>
+                  <RkButton rkType='clear '>EXPLORE</RkButton>
+                </View>
+              </View>
+            </View>
+          </RkCard>
+          <RkCard>
+            <View rkCardHeader>
+              <View>
+                <RkText rkType='header'>Header</RkText>
+                <RkText rkType='subtitle'>Subtitle</RkText>
+              </View>
+            </View>
+            <View rkCardContent style={{paddingTop: 0}}>
+              <RkText rkType='compactCardText'>The Big Oxmox advised her not to do so, because there were thousands of
+                bad Commas,
+                wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</RkText>
+            </View>
+            <View rkCardFooter>
+              <View style={styles.footerButtons}>
+                <RkButton rkType='clear action' style={{marginRight: 16}}>SHARE</RkButton>
+                <RkButton rkType='clear action'>EXPLORE</RkButton>
+              </View>
+            </View>
+          </RkCard>
         </ScrollView>
       </View>
     )
   }
-
 }
+let styles = StyleSheet.create({
+  screen: {
+    backgroundColor: '#f0f1f5',
+    padding: 12
+  },
+  buttonIcon: {
+    marginRight: 7,
+    fontSize: 19.7
+  },
+  footer: {
+    marginHorizontal: 16
+  },
+  avatar: {
+    width: 42,
+    height: 42,
+    backgroundColor: 'red',
+    borderRadius: 21,
+    marginRight: 17
+  },
+  dot: {
+    fontSize: 6.5,
+    color: '#0000008e',
+    marginLeft: 2.5,
+    marginTop: 7,
+  },
+  floating: {
+    width: 56,
+    height: 56,
+    position: 'absolute',
+    zIndex: 200,
+    right: 16,
+    top: 173,
+  },
+  footerButtons: {
+    flexDirection: 'row'
+  },
+  overlay: {
+    justifyContent: 'flex-end',
+    paddingVertical: 23,
+    paddingHorizontal: 16
+  }
+});

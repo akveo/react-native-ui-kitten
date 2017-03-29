@@ -12,14 +12,14 @@ export const RkChoiceTypes = (theme) => {
         paddingHorizontal: 2,
         paddingVertical: 2,
         borderWidth: 1,
-        borderColor: RkColors.grey500,
-        padding: 10,
+        borderColor: theme.colors.border.solid,
+        borderRadius:4,
         alignSelf: 'flex-start',
-        content: (<View/>)
+        content: (<View/>),
       },
       inner: {
-        width: 18,
-        height: 18,
+        width: 25,
+        height: 25,
       },
     },
     selected: {

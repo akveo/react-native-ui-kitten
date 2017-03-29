@@ -2,12 +2,34 @@ import {RkTheme} from 'react-native-ui-kitten';
 import {BlueTheme, RedTheme} from "../style/my-theme"
 import {AvatarTypes} from '../components/avatarTypes';
 
+let robotoLight = 'Roboto-Light';
+let robotoMed = 'Roboto-Medium';
+
 export let bootstrap = () => {
 
   RkTheme.registerTypes('Avatar', AvatarTypes);
+  RkTheme.setColor('accent', '#ed1c4d');
   RkTheme.setType('RkTab', 'selected-gray', {
     backgroundColor: '#e0e0e0',
     color: '#2196f3'
+  });
+
+  RkTheme.setType('RkText', 'basic', {
+    text: {
+      fontFamily: robotoLight,
+
+    }
+  });
+
+  RkTheme.setType('RkText', 'header', {
+    text: {
+      fontFamily: robotoMed
+    }
+  });
+  RkTheme.setType('RkButton', 'basic', {
+    inner: {
+      fontFamily: robotoMed
+    }
   });
 
   // remove base border radius from all RkButtons in application
@@ -22,5 +44,44 @@ export let bootstrap = () => {
     borderColor: RkTheme.current.colors.success,
     borderWidth: 1,
     color: RkTheme.current.colors.success,
+  });
+
+  RkTheme.setType('RkText', 'cardText', {
+    fontSize: 16,
+    text: {
+      lineHeight: 20,
+    }
+  });
+
+  RkTheme.setType('RkText', 'compactCardText', {
+    fontSize: 14,
+    text: {
+      lineHeight: 20,
+      letterSpacing:-0.1
+    }
+  });
+
+  RkTheme.setType('RkButton', 'link', {
+    color: '#00000099',
+    fontSize: RkTheme.current.fonts.sizes.small,
+    inner: {
+      letterSpacing: -0.1
+    }
+  });
+
+  RkTheme.setType('RkButton', 'action', {
+    color: RkTheme.current.colors.warning,
+    inner: {
+      fontFamily: robotoMed,
+    }
+
+  });
+
+  RkTheme.setType('RkButton', 'accent', {
+    color: RkTheme.colors.accent
+  });
+
+  RkTheme.setType('RkButton', 'accent-bg', {
+    backgroundColor: RkTheme.colors.accent
   })
 };

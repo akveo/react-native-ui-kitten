@@ -6,18 +6,17 @@ export const RkButtonTypes = (theme) => {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,
-        width: 128,
-        height: 44,
         paddingVertical: 8,
         paddingHorizontal: 12,
+        alignSelf: 'flex-start',
+        overflow: 'hidden',
+        width: 128,
+        height: 44,
       },
       inner: {
         fontSize: theme.fonts.sizes.base,
         alignSelf: 'center',
         textAlign: 'center',
-      },
-      opacity:{
-        alignSelf:'flex-start'
       }
     },
     basic: {
@@ -53,8 +52,8 @@ export const RkButtonTypes = (theme) => {
     rounded: {
       borderRadius: 22
     },
-    circle:{
-      borderRadius:300
+    circle: {
+      borderRadius: 300
     },
     small: {
       paddingVertical: 4,
@@ -85,14 +84,18 @@ export const RkButtonTypes = (theme) => {
       fontSize: theme.fonts.sizes.xlarge,
       container: {
         height: 60,
-        width: -1
-      },
-      opacity:{
-        alignSelf:'stretch'
+        width: -1,
+        alignSelf: 'stretch'
       }
     },
     clear: {
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      container: {
+        width: null,
+        height: null,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
+      }
     }
   })
 };

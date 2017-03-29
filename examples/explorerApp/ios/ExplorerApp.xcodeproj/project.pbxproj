@@ -24,6 +24,8 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		AAC0691D1E8AF1610000E114 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAC0691B1E8AF1610000E114 /* Roboto-Light.ttf */; };
+		AAC0691E1E8AF1610000E114 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAC0691C1E8AF1610000E114 /* Roboto-Medium.ttf */; };
 		FA64E41F1DFEF8E400C049C1 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA64E41E1DFEF8E400C049C1 /* Ionicons.ttf */; };
 		FA64E4421DFEF8F600C049C1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA64E4411DFEF8F600C049C1 /* FontAwesome.ttf */; };
 		FA64E4441DFEFFFA00C049C1 /* Curely.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA64E4431DFEFFFA00C049C1 /* Curely.ttf */; };
@@ -122,6 +124,48 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		AAC0690B1E8AF0980000E114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3C059A1DE3340900C268FA;
+			remoteInfo = yoga;
+		};
+		AAC0690D1E8AF0980000E114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3C06751DE3340C00C268FA;
+			remoteInfo = "yoga-tvOS";
+		};
+		AAC0690F1E8AF0980000E114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9251DE5FBEC00167DC4;
+			remoteInfo = cxxreact;
+		};
+		AAC069111E8AF0980000E114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
+			remoteInfo = "cxxreact-tvOS";
+		};
+		AAC069131E8AF0980000E114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD90B1DE5FBD600167DC4;
+			remoteInfo = jschelpers;
+		};
+		AAC069151E8AF0980000E114 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
+			remoteInfo = "jschelpers-tvOS";
+		};
 		FA64E4261DFEF8E400C049C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -196,6 +240,8 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		AAC0691B1E8AF1610000E114 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		AAC0691C1E8AF1610000E114 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		FA64E41E1DFEF8E400C049C1 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		FA64E4411DFEF8F600C049C1 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		FA64E4431DFEFFFA00C049C1 /* Curely.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Curely.ttf; sourceTree = "<group>"; };
@@ -327,7 +373,13 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
-				FA64E4401DFEF8E400C049C1 /* libReact-tvOS.a */,
+				FA64E4401DFEF8E400C049C1 /* libReact.a */,
+				AAC0690C1E8AF0980000E114 /* libyoga.a */,
+				AAC0690E1E8AF0980000E114 /* libyoga.a */,
+				AAC069101E8AF0980000E114 /* libcxxreact.a */,
+				AAC069121E8AF0980000E114 /* libcxxreact.a */,
+				AAC069141E8AF0980000E114 /* libjschelpers.a */,
+				AAC069161E8AF0980000E114 /* libjschelpers.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -380,6 +432,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				AAC0691B1E8AF1610000E114 /* Roboto-Light.ttf */,
+				AAC0691C1E8AF1610000E114 /* Roboto-Medium.ttf */,
 				FA64E4451DFF018700C049C1 /* Borg.ttf */,
 				FA64E4431DFEFFFA00C049C1 /* Curely.ttf */,
 				FA64E4411DFEF8F600C049C1 /* FontAwesome.ttf */,
@@ -606,6 +660,48 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		AAC0690C1E8AF0980000E114 /* libyoga.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libyoga.a;
+			remoteRef = AAC0690B1E8AF0980000E114 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAC0690E1E8AF0980000E114 /* libyoga.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libyoga.a;
+			remoteRef = AAC0690D1E8AF0980000E114 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAC069101E8AF0980000E114 /* libcxxreact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcxxreact.a;
+			remoteRef = AAC0690F1E8AF0980000E114 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAC069121E8AF0980000E114 /* libcxxreact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcxxreact.a;
+			remoteRef = AAC069111E8AF0980000E114 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAC069141E8AF0980000E114 /* libjschelpers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjschelpers.a;
+			remoteRef = AAC069131E8AF0980000E114 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAC069161E8AF0980000E114 /* libjschelpers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjschelpers.a;
+			remoteRef = AAC069151E8AF0980000E114 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FA64E4271DFEF8E400C049C1 /* libRCTImage-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -648,10 +744,10 @@
 			remoteRef = FA64E43B1DFEF8E400C049C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		FA64E4401DFEF8E400C049C1 /* libReact-tvOS.a */ = {
+		FA64E4401DFEF8E400C049C1 /* libReact.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libReact-tvOS.a";
+			path = libReact.a;
 			remoteRef = FA64E43F1DFEF8E400C049C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -669,10 +765,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAC0691E1E8AF1610000E114 /* Roboto-Medium.ttf in Resources */,
 				FA64E4461DFF038E00C049C1 /* Borg.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				FA64E41F1DFEF8E400C049C1 /* Ionicons.ttf in Resources */,
+				AAC0691D1E8AF1610000E114 /* Roboto-Light.ttf in Resources */,
 				FA64E4421DFEF8F600C049C1 /* FontAwesome.ttf in Resources */,
 				FA64E4441DFEFFFA00C049C1 /* Curely.ttf in Resources */,
 			);

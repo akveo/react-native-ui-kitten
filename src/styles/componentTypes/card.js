@@ -3,26 +3,30 @@ export const RkCardTypes = (theme) => {
     _base: {
       container: {
         margin: 5,
-        borderRadius: 1,
+        borderRadius: 2,
         borderWidth: 1,
-        borderColor: theme.colors.border.base
+        borderColor: '#00000014',
+        backgroundColor: theme.colors.back.base,
+        // overflow: 'hidden'
       },
       header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        paddingVertical: 17,
+        paddingHorizontal: 16,
         borderTopLeftRadius: 1,
         borderTopRightRadius: 1,
-        padding: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
       },
       content: {
-        padding: 8,
-        backgroundColor: theme.colors.background.screen,
+        paddingVertical: 12.5,
+        paddingHorizontal: 16,
       },
       footer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 8,
+        paddingTop: 12.5,
+        paddingBottom: 25,
+        paddingHorizontal: 16,
         borderBottomLeftRadius: 1,
         borderBottomRightRadius: 1,
       },
@@ -43,8 +47,18 @@ export const RkCardTypes = (theme) => {
       },
       img: {
         flex: 1,
-        height: 150,
+        height: 200,
         width: null,
+      },
+      imgOverlay: {
+        flex: 1,
+        height: 200,
+        width: null,
+        position: 'absolute',
+        zIndex: 100,
+        left: 0,
+        right: 0,
+        backgroundColor: theme.colors.overlay
       },
       avatar: {
         height: 64,
@@ -58,88 +72,32 @@ export const RkCardTypes = (theme) => {
         borderRadius: 20,
         marginRight: 10
       },
-      bigImg: {
+    },
+    shadowed: {
+      container: {
+        shadowColor: '#00000021',
+        shadowOffset: {
+          width: 2
+        },
+        shadowOpacity: 1,
+        shadowRadius: 4
+      }
+    },
+    heroImage: {
+      img:{
+        height:350
+      },
+      imgOverlay: {
         flex: 1,
-        height: 300,
         width: null,
+        height:null,
+        position: 'absolute',
+        zIndex: 100,
+        left: 0,
+        right: 0,
+        bottom:0,
+        backgroundColor: theme.colors.overlay
       },
     }
-
   });
 };
-
-
-// export const CardStyles = {
-//
-//   rkCardText: {},
-//   material: {
-//     container: {
-//       borderRadius: 2,
-//       shadowColor: RkColors.grey500,
-//       shadowOpacity: 0.5,
-//       shadowRadius: 3,
-//       shadowOffset: {
-//         height: 1,
-//         width: 0
-//       }
-//     },
-//     header: {
-//       borderTopLeftRadius: 2,
-//       borderTopRightRadius: 2,
-//       backgroundColor: RkColors.white,
-//     },
-//     footer: {
-//       borderBottomLeftRadius: 2,
-//       borderBottomRightRadius: 2,
-//       backgroundColor: RkColors.white,
-//     },
-//     rkCardText: {
-//       lineHeight: 22,
-//       fontSize: 16
-//     }
-//   },
-//   bordered: {
-//     container: {
-//       borderWidth: 1,
-//       borderColor: RkColors.grey300
-//     },
-//     content: {
-//       borderTopWidth: 0.5,
-//       borderTopColor: RkColors.grey300
-//     },
-//     header: {
-//       borderBottomWidth: 0.5,
-//       borderBottomColor: RkColors.grey300
-//     },
-//     footer: {
-//       borderTopWidth: 0.5,
-//       borderTopColor: RkColors.grey300
-//     }
-//   },
-//   noPadding: {
-//     container: {
-//       paddingLeft: 0,
-//       paddingRight: 0,
-//       paddingTop: 0,
-//       paddingBottom: 0,
-//     },
-//     header: {
-//       paddingLeft: 0,
-//       paddingRight: 0,
-//       paddingTop: 0,
-//       paddingBottom: 0,
-//     },
-//     content: {
-//       paddingLeft: 0,
-//       paddingRight: 0,
-//       paddingTop: 0,
-//       paddingBottom: 0,
-//     },
-//     footer: {
-//       paddingLeft: 0,
-//       paddingRight: 0,
-//       paddingTop: 0,
-//       paddingBottom: 0,
-//     },
-//   }
-// };

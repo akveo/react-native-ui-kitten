@@ -6,7 +6,25 @@ export const RkTextTypes = (theme) => {
     },
     header: {
       fontSize: theme.fonts.sizes.large,
-
+    },
+    xxlarge: {
+      fontSize: theme.fonts.sizes.xxlarge
+    },
+    xlarge: {
+      fontSize: theme.fonts.sizes.xlarge
+    },
+    large: {
+      fontSize: theme.fonts.sizes.large
+    },
+    medium: {
+      fontSize: theme.fonts.sizes.medium
+    },
+    small: {
+      fontSize: theme.fonts.sizes.small
+    },
+    subtitle: {
+      fontSize: theme.fonts.sizes.base,
+      color: theme.colors.text.hint
     },
     primary: {
       color: theme.colors.primary
