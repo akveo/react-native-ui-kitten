@@ -7,15 +7,18 @@ import {
   View,
 } from 'react-native';
 
-import {
-  RkChoice
-} from './rkChoice';
+import {RkChoice} from './rkChoice';
+import {RkComponent} from '../rkComponent';
+
 
 import _ from 'lodash';
 
-export class RkChoiceGroup extends Component {
+export class RkChoiceGroup extends RkComponent {
 
-  static name = 'choiceGroup';
+  componentName = 'RkChoiceGroup';
+  typeMapping = {
+    container: {}
+  };
 
   constructor(props) {
     super(props);
@@ -41,9 +44,10 @@ export class RkChoiceGroup extends Component {
   }
 
   render() {
+    let {container} = this.defineStyles();
     let children = this._processChildren();
     return (
-      <View style={this.props.style}>
+      <View style={[container, this.props.style]}>
         {children}
       </View>
     );
@@ -69,16 +73,15 @@ export class RkChoiceGroup extends Component {
   _processChildren() {
     let index = 0;
 
-    let appendChoiceProps = (props, child) =>{
-      if (this.props.rkType && !child.props.rkType) props.rkType = this.props.rkType;
+    let appendChoiceProps = (props, child) => {
       if (this.props.disabled !== undefined && child.props.disabled == undefined) props.disabled = this.props.disabled;
     };
 
     let processTrigger = (child, index) => {
       let props = {};
       if (child.type === RkChoice) {
-        props.inTrigger =  true;
-        props.selected  = this.state.values[index];
+        props.inTrigger = true;
+        props.selected = this.state.values[index];
         appendChoiceProps(props, child);
       } else if (child.props && child.props.children) {
         props.children = _.isArray(child.props.children) ?

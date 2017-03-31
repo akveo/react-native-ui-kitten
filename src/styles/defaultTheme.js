@@ -15,6 +15,7 @@ export const Values = {
   background: '#fff',
   overlay: '#00000057',
   fontSize: 15,
+  neutral: '#0000001A'
 };
 
 export const DefaultTheme = {
@@ -55,13 +56,15 @@ export const DefaultTheme = {
       foreground: Values.foreground,
       background: Values.background,
       outline: RkColors.transparent,
-      material : Values.primary
+      material: Values.primary,
+      disabled: Values.neutral
     },
     border: {
       base: Values.primary,
-      underline: '#0000001A',
+      underline: Values.neutral,
       solid: '#0000003B',
-      material: Values.warning
+      material: Values.warning,
+      disabled:Values.neutral
     }
   },
   fonts: {

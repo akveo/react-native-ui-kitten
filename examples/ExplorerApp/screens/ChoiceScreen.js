@@ -11,7 +11,7 @@ import {
   Image
 } from 'react-native';
 
-import {RkText, RkChoiceGroup, RkChoice, RkTheme, RkCard} from 'react-native-ui-kitten';
+import {RkText, RkChoiceGroup, RkChoice, RkTheme, RkSeparator} from 'react-native-ui-kitten';
 import {UtilStyles} from '../style/styles';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -32,370 +32,176 @@ export class ChoiceScreen extends Component {
   render() {
     return (
       <ScrollView
-        style={[UtilStyles.container, {backgroundColor: RkTheme.colors.primary}]}
+        style={UtilStyles.container}
         automaticallyAdjustContentInsets={true}>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Classic selectable components</RkText>
-          <View style={UtilStyles.rowContainer}>
-            <View style={{flex: 1}}>
-              <View style={styles.componentRow}>
-                <RkChoice/>
-                <RkText>Default</RkText>
-              </View>
-              <View style={styles.componentRow}>
-                <RkChoice/>
-                <RkText>Default</RkText>
-              </View>
-              <View style={styles.componentRow}>
-                <RkChoice/>
-                <RkText>Default</RkText>
-              </View>
-            </View>
-            <View style={{flex: 1}}>
-              <View style={styles.componentRow}>
-                <RkChoice/>
-                <RkText>Default</RkText>
-              </View>
-              <View style={styles.componentRow}>
-                <RkChoice/>
-                <RkText>Default</RkText>
-              </View>
-              <View style={styles.componentRow}>
-                <RkChoice/>
-                <RkText>Default</RkText>
-              </View>
-            </View>
-          </View>
-          <View>
-            <View>
-              <View style={{alignItems: 'center'}}>
-                <RkChoice/>
-              </View>
-              <Text style={styles.typeText}>default</Text>
-            </View>
-            <View>
-              <View style={{alignItems: 'center'}}>
-                <RkChoice rkType='material' rkSelectedType='materialSelected' selected={true}/>
-              </View>
-              <Text style={styles.typeText}>material</Text>
-            </View>
-            <View>
-              <View style={{alignItems: 'center'}}>
-                <RkChoice rkType='radio'/>
-              </View>
-              <Text style={styles.typeText}>radio</Text>
-            </View>
-            <View>
-              <View style={{alignItems: 'center'}}>
-                <RkChoice rkType='posNeg'/>
-              </View>
-              <Text style={styles.typeText}>pos/neg</Text>
-            </View>
-            <View>
-              <View style={{alignItems: 'center'}}>
-                <RkChoice selected rkType='clear'/>
-              </View>
-              <Text style={styles.typeText}>clear</Text>
-            </View>
-          </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Labels Example</Text>
-          <View style={{marginTop: 5, alignItems: 'flex-start'}}>
-            <View>
-              <RkChoiceGroup>
-                <TouchableOpacity choiceTrigger
-                                  style={[{
-                                    marginLeft: 5,
-                                    borderWidth: 0.5,
-                                    borderColor: RkTheme.current.colors.grey500,
-                                    borderRadius: 2
-                                  }]}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      padding: 5
-                    }}>
-                    <Text>Label</Text>
-                    <RkChoice style={UtilStyles.spaceH} rkType='posNeg'/>
-                  </View>
-                </TouchableOpacity>
-              </RkChoiceGroup>
-            </View>
-          </View>
-          <View style={{marginVertical: 20}}>
-            <RkChoiceGroup>
-              <TouchableOpacity choiceTrigger>
-                <RkCard rkType="material">
-                  <View rkCardHeader>
-                    <View>
-                      <Text rkCardTitle>Hello</Text>
-                      <Text rkCardSubTitle>Click me!</Text>
-                    </View>
-                    <RkChoice style={{alignSelf: 'flex-start'}} rkType='material'/>
-                  </View>
-                </RkCard>
-              </TouchableOpacity>
-            </RkChoiceGroup>
-          </View>
-          <View style={{alignItems: 'flex-start'}}>
-            <RkChoiceGroup rkType='clear'>
-              <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkTheme.current.colors.grey500}]}>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Label 1</Text>
-                  <RkChoice style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkTheme.current.colors.grey500}]}>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Label 2</Text>
-                  <RkChoice selected style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkTheme.current.colors.grey500}]}>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Label 3</Text>
-                  <RkChoice style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity choiceTrigger>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Label 4</Text>
-                  <RkChoice style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-            </RkChoiceGroup>
-          </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Radio example</Text>
-          <View style={{alignItems: 'flex-start'}}>
-            <RkChoiceGroup rkType='radio' radio>
-              <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkTheme.current.colors.grey500}]}>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Option 1</Text>
-                  <RkChoice style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkTheme.current.colors.grey500}]}>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Option 2</Text>
-                  <RkChoice selected style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity choiceTrigger
-                                style={[{borderBottomWidth: 0.5, borderBottomColor: RkTheme.current.colors.grey500}]}>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Option 3</Text>
-                  <RkChoice style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity choiceTrigger>
-                <View
-                  style={{
-                    "flexDirection": "row",
-                    justifyContent: "space-between",
-                    "alignItems": "flex-end",
-                    paddingVertical: 5
-                  }}>
-                  <Text>Option 4</Text>
-                  <RkChoice style={UtilStyles.spaceAround}/>
-                </View>
-              </TouchableOpacity>
-            </RkChoiceGroup>
-          </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Custom content</Text>
-          <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
-            <View>
-              <View style={{alignItems: 'center'}}>
-                <RkChoice
-                  style={{
-                    borderWidth: 0
-                  }}
-                  innerStyle={{
-                    width: 90,
-                    height: 25,
-                    textAlign: 'center'
-                  }}
-                  innerStyleDisabled={{
-                    color: RkTheme.colors.grey300
-                  }}
-                  contentSelected={<Text>CHECKED</Text>}
-                  contentSelectedDisabled={<Text>CHECKED</Text>}
-                  content={<Text>UNCHECKED</Text>}
-                  contentDisabled={<Text>UNCHECKED</Text>}
-                />
-              </View>
-              <Text style={styles.typeText}>text content</Text>
-            </View>
-            <View>
-              <View style={{alignItems: 'center'}}>
-                <RkChoice
-                  selected
-                  style={{
-                    borderWidth: 0
-                  }}
-                  innerStyle={{
-                    color: RkTheme.colors.orange500,
-                    fontSize: 22,
-                    height: 25,
-                    width: 25,
-                    textAlign: 'center'
-                  }}
-                  innerStyleDisabled={{
-                    color: RkTheme.colors.grey300
-                  }}
-                  contentSelected={<Icon name={'star'}/>}
-                  content={<Text/>}
-                  contentSelectedDisabled={<Icon name={'star'}/>}
-                  contentDisabled={<Text/>}
-                />
-              </View>
-              <Text style={styles.typeText}>icon content</Text>
-            </View>
-          </View>
-        </View>
-        <View style={[UtilStyles.section, {paddingVertical: 7}]}>
-          <TouchableOpacity onPress={() => this.showSettingsScreen()}>
+          <View style={UtilStyles.columnContainer}>
             <View style={styles.componentRow}>
-              <Text style={{fontSize: 16}}>Settings example</Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{
-                    marginRight: 7,
-                    color: RkTheme.current.colors.grey500,
-                    alignSelf: 'center'
-                  }}>{this.state.settingsOption.name}</Text>
-                <Icon name={'angle-right'} size={20} style={RkTheme.styles.grayText}/></View>
+              <RkChoice/>
+              <RkText rkType='bold' style={styles.caption}>Default</RkText>
             </View>
-          </TouchableOpacity>
+            <View style={styles.componentRow}>
+              <RkChoice rkType='radio'/>
+              <RkText rkType='bold' style={styles.caption}>Radio</RkText>
+            </View>
+            <View style={styles.componentRow}>
+              <RkChoice rkType='clear' selected/>
+              <RkText rkType='bold' style={styles.caption}>Clear</RkText>
+            </View>
+            <View style={styles.componentRow}>
+              <RkChoice rkType='posNeg'/>
+              <RkText rkType='bold' style={styles.caption}>Positive / Negative</RkText>
+            </View>
+          </View>
         </View>
         <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Disabled components</Text>
-          <RkChoiceGroup disabled>
-            <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice/>
+          <RkText rkType='header'>Labels Example</RkText>
+          <View style={[UtilStyles.columnContainer]}>
+            <RkChoiceGroup rkType='bordered'>
+              <TouchableOpacity choiceTrigger>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                  }}>
+                  <RkText rkType='bold'>Label</RkText>
+                  <RkChoice style={{marginLeft: 17}} rkType='posNeg'/>
                 </View>
-                <Text style={styles.typeText}>default</Text>
-              </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice rkType='material'/>
+              </TouchableOpacity>
+            </RkChoiceGroup>
+
+          </View>
+          <View style={UtilStyles.columnContainer}>
+            <RkChoiceGroup rkType='bordered stretch' style={UtilStyles.spaceTop}>
+              <TouchableOpacity choiceTrigger>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between'
+                  }}>
+                  <View>
+                    <RkText rkType='bold'>Hello</RkText>
+                    <RkText>Click me!</RkText>
+                  </View>
+                  <RkChoice style={{alignSelf: 'center'}}/>
                 </View>
-                <Text style={styles.typeText}>material</Text>
-              </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice rkType='radio'/>
-                </View>
-                <Text style={styles.typeText}>radio</Text>
-              </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice rkType='posNeg'/>
-                </View>
-                <Text style={styles.typeText}>pos/neg</Text>
-              </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
+              </TouchableOpacity>
+            </RkChoiceGroup>
+          </View>
+
+          <View style={UtilStyles.columnContainer}>
+            <RkChoiceGroup rkType='stretch' style={UtilStyles.spaceTop}>
+              <TouchableOpacity choiceTrigger>
+                <View style={styles.checkRow}>
+                  <RkText rkType='bold'>Label 1</RkText>
                   <RkChoice rkType='clear'/>
                 </View>
-                <Text style={styles.typeText}>clear</Text>
+              </TouchableOpacity>
+              <RkSeparator/>
+              <TouchableOpacity choiceTrigger>
+                <View style={styles.checkRow}>
+                  <RkText rkType='bold'>Label 2</RkText>
+                  <RkChoice rkType='clear' selected/>
+                </View>
+              </TouchableOpacity>
+              <RkSeparator/>
+              <TouchableOpacity choiceTrigger>
+                <View style={styles.checkRow}>
+                  <RkText rkType='bold'>Label 3</RkText>
+                  <RkChoice rkType='clear'/>
+                </View>
+              </TouchableOpacity>
+              <RkSeparator/>
+              <TouchableOpacity choiceTrigger>
+                <View style={styles.checkRow}>
+                  <RkText rkType='bold'>Label 4</RkText>
+                  <RkChoice rkType='clear'/>
+                </View>
+              </TouchableOpacity>
+              <RkSeparator/>
+            </RkChoiceGroup>
+          </View>
+        </View>
+        <View style={UtilStyles.section}>
+          <RkText rkType='header'>Radio components</RkText>
+          <View style={UtilStyles.columnContainer}>
+            <RkChoiceGroup radio>
+              <TouchableOpacity choiceTrigger>
+                <View style={[styles.radioRow, styles.spaceBottom]}>
+                  <RkChoice rkType='radio'/>
+                  <RkText rkType='bold' style={{marginLeft: 16.5}}>Option 1</RkText>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity choiceTrigger>
+                <View style={styles.radioRow}>
+                  <RkChoice rkType='radio'/>
+                  <RkText rkType='bold' style={{marginLeft: 16.5}}>Option 2</RkText>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity choiceTrigger>
+                <View style={styles.radioRow}>
+                  <RkChoice rkType='radio'/>
+                  <RkText rkType='bold' style={{marginLeft: 16.5}}>Option 3</RkText>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity choiceTrigger>
+                <View style={[styles.radioRow, styles.spaceTop]}>
+                  <RkChoice rkType='radio'/>
+                  <RkText rkType='bold' style={{marginLeft: 16.5}}>Option 4</RkText>
+                </View>
+              </TouchableOpacity>
+            </RkChoiceGroup>
+          </View>
+        </View>
+        <View>
+          <RkSeparator/>
+          <TouchableOpacity style={{padding: 23}} onPress={() => this.showSettingsScreen()}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <RkText>Setting Example</RkText>
+              <View style={{flexDirection: 'row'}}>
+                <RkText rkType='bold'>{this.state.settingsOption.name}</RkText>
+                <Icon name={'angle-right'} size={20} style={{marginLeft: 16, opacity: 0.3}}/>
               </View>
             </View>
-          </RkChoiceGroup>
-          <Text style={[UtilStyles.titleText, {marginTop: 10}]}>Selected & Disabled components</Text>
-          <RkChoiceGroup disabled>
-            <View style={[UtilStyles.rowContainer, {flex: 1, justifyContent: 'space-around', marginTop: 5}]}>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice selected/>
-                </View>
-                <Text style={styles.typeText}>default</Text>
+          </TouchableOpacity>
+          <RkSeparator/>
+        </View>
+        <View style={UtilStyles.section}>
+          <RkText rkType='header'>Disabled components</RkText>
+          <View style={[UtilStyles.rowContainer]}>
+            <View style={[UtilStyles.columnContainer, {flex: 1}]}>
+              <View style={styles.componentRow}>
+                <RkChoice disabled/>
+                <RkText rkType='bold' style={styles.caption}>Default</RkText>
               </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice selected rkType='material'/>
-                </View>
-                <Text style={styles.typeText}>material</Text>
+              <View style={styles.componentRow}>
+                <RkChoice rkType='radio' disabled/>
+                <RkText rkType='bold' style={styles.caption}>Radio</RkText>
               </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice selected rkType='radio'/>
-                </View>
-                <Text style={styles.typeText}>radio</Text>
-              </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice selected rkType='posNeg'/>
-                </View>
-                <Text style={styles.typeText}>pos/neg</Text>
-              </View>
-              <View>
-                <View style={{alignItems: 'center'}}>
-                  <RkChoice selected rkType='clear'/>
-                </View>
-                <Text style={styles.typeText}>clear</Text>
+              <View style={styles.componentRow}>
+                <RkChoice rkType='posNeg' disabled/>
+                <RkText rkType='bold' style={styles.caption}>Clear</RkText>
               </View>
             </View>
-          </RkChoiceGroup>
+            <View style={[UtilStyles.columnContainer, {flex: 1}]}>
+              <View style={styles.componentRow}>
+                <RkChoice disabled selected/>
+                <RkText rkType='bold' style={styles.caption}>Default</RkText>
+              </View>
+              <View style={styles.componentRow}>
+                <RkChoice rkType='radio' disabled selected/>
+                <RkText rkType='bold' style={styles.caption}>Radio</RkText>
+              </View>
+              <View style={styles.componentRow}>
+                <RkChoice rkType='clear' disabled selected/>
+                <RkText rkType='bold' style={styles.caption}>Clear</RkText>
+              </View>
+            </View>
+          </View>
         </View>
       </ScrollView>
     );
   }
-
 
   showSettingsScreen() {
     let param = {
@@ -452,19 +258,23 @@ class SettingsScreen extends Component {
   render() {
 
     let renderOption = (option, i) => (
-      <TouchableOpacity key={i} underlayColor={RkTheme.current.colors.grey300} choiceTrigger>
-        <View style={[styles.settingsOption, i === this.state.options.length - 1 ? {borderBottomWidth: 0} : {}]}>
-          <Text style={{fontSize: 14}}>{option.name}</Text>
-          <RkChoice/>
-        </View>
-      </TouchableOpacity>);
+      <View key={i}>
+        <TouchableOpacity choiceTrigger >
+          <View style={styles.checkRow}>
+            <RkText rkType='bold'>{option.name}</RkText>
+            <RkChoice rkType='clear'/>
+          </View>
+        </TouchableOpacity>
+        <RkSeparator/>
+      </View>);
 
     return (
       <ScrollView
         style={[UtilStyles.container, {backgroundColor: RkTheme.current.colors.grey300}]}
         automaticallyAdjustContentInsets={true}>
-        <View style={[UtilStyles.section, {paddingVertical: 0, paddingHorizontal: 0}]}>
-          <RkChoiceGroup selectedIndex={this.props.data.option.index} radio rkType='clear'
+
+        <View style={[UtilStyles.section,]}>
+          <RkChoiceGroup selectedIndex={this.props.data.option.index} radio rkType='stretch'
                          onChange={(index) => this._change(index)}>
             {this.state.options.map(renderOption)}
           </RkChoiceGroup>
@@ -478,6 +288,31 @@ class SettingsScreen extends Component {
 const styles = StyleSheet.create({
   componentRow: {
     flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 25
+  },
+  caption: {
+    marginLeft: 16
+  },
+  checkRow: {
+    marginVertical: 18,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight: 16,
+    marginLeft: 16
+  },
+  radioRow: {
+    flexDirection: 'row',
+    marginVertical: 11,
+    alignItems: 'center'
+  },
+  spaceBottom: {
+    marginTop: 0,
+    marginBottom: 11,
+  },
+  spaceTop: {
+    marginTop: 11,
+    marginBottom: 0,
   },
   settingsOption: {
     paddingVertical: 5,

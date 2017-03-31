@@ -5,3 +5,4 @@ export * from './card';
 export * from './tab';
 export * from './textInput';
 export * from './separator';
+export * from './choiceGroup';

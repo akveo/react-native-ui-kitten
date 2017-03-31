@@ -52,7 +52,7 @@ export class RkChoice extends RkComponent {
 
     if (this.props.inTrigger) {
       return (
-        <View style={container}>
+        <View style={[container,this.props.style]}>
           {content}
         </View>
       );
@@ -60,7 +60,7 @@ export class RkChoice extends RkComponent {
       return (
         <TouchableOpacity
           activeOpacity={this.props.disabled ? 1 : 0.2}
-          style={[container, this.props.containerStyle]}
+          style={[container, this.props.style]}
           onPress={(e) => {
             this._onPress(e)
           }}>

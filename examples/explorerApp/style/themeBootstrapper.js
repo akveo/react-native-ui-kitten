@@ -17,6 +17,12 @@ export let bootstrap = () => {
     }
   });
 
+  RkTheme.setType('RkText', 'bold', {
+    text: {
+      fontFamily: robotoMed,
+    }
+  });
+
   RkTheme.setType('RkText', 'header', {
     text: {
       fontFamily: robotoMed
