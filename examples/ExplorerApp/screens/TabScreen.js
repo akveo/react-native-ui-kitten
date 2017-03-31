@@ -7,13 +7,15 @@ import {
   ScrollView,
   ListView,
   Dimensions,
-  StatusBar
+  StatusBar,
+  Image
 } from 'react-native';
 
-import {RkButton, RkTheme, RkTabView} from 'react-native-ui-kitten';
+import {RkText, RkTheme, RkTabView} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {ImageIcon} from '../components/imageIcon'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class TabScreen extends Component {
 
@@ -25,99 +27,78 @@ export class TabScreen extends Component {
     return (
       <ScrollView
         automaticallyAdjustContentInsets={true}
-        style={[UtilStyles.container, {backgroundColor: RkTheme.colors.grey300}]}>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Basic example</Text>
-          <View style={UtilStyles.rowContainer}>
-            <RkTabView rkTypeSelected="selected-gray">
-              <RkTabView.Tab title={'Tab 1'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 1 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={'Tab 2'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 2 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={'Tab 3'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 3 Content</Text>
-                </View>
-              </RkTabView.Tab>
-            </RkTabView>
-          </View>
-        </View>
-        <View style={[UtilStyles.section, {paddingHorizontal: 0, paddingTop: 0}]}>
-          <Text
-            style={[UtilStyles.titleText, {paddingHorizontal: 25, paddingVertical: 10,
-              backgroundColor: RkTheme.colors.cyan500, color: 'white'}]}>
-            Material theme example
-          </Text>
-          <View style={[UtilStyles.rowContainer, {marginTop: 0}]}>
-            <RkTabView rkType='material' style={{backgroundColor: RkTheme.colors.cyan500}}>
-              {this._renderMaterialTab('1')}
-              {this._renderMaterialTab('2')}
-              {this._renderMaterialTab('3')}
-            </RkTabView>
-          </View>
-        </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Custom tab title</Text>
+        style={UtilStyles.container}>
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>Basic example</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkTabView>
-              <RkTabView.Tab title={(selected) => this._renderCustomTab(selected, 'ios-apps', 'Apps')}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 1 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={(selected) => this._renderCustomTab(selected, 'ios-bowtie', 'Bowtie')}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 2 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={(selected) => this._renderCustomTab(selected, 'ios-cloud', 'Cloud')}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 3 Content</Text>
-                </View>
-              </RkTabView.Tab>
+              <RkTabView.Tab title={'Tab 1'}/>
+              <RkTabView.Tab title={'Tab 2'}/>
+              <RkTabView.Tab title={'Tab 3'}/>
             </RkTabView>
           </View>
         </View>
-        <View style={UtilStyles.section}>
-          <Text style={UtilStyles.titleText}>Scrollable Header</Text>
+
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>Material Theme Example</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkTabView maxVisibleTabs={3}>
-              <RkTabView.Tab title={'Tab 1'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 1 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={'Tab 2'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 2 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={'Tab 3'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 3 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={'Tab 4'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 4 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={'Tab 5'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 5 Content</Text>
-                </View>
-              </RkTabView.Tab>
-              <RkTabView.Tab title={'Tab 6'}>
-                <View style={{flex: 1, paddingVertical: 15}}>
-                  <Text style={UtilStyles.tabContent}>Tab 6 Content</Text>
-                </View>
-              </RkTabView.Tab>
+            <RkTabView rkType="material">
+              <RkTabView.Tab title={'TAB 1'}/>
+              <RkTabView.Tab title={'TAB 2'}/>
+              <RkTabView.Tab title={'TAB 3'}/>
+            </RkTabView>
+          </View>
+        </View>
+
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <View >
+            <RkTabView rkType="material">
+              <RkTabView.Tab title={(selected) => {
+                return this._renderMaterialTab(selected, 'TAB 1', (<ImageIcon name='phone'/>))
+              }}/>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderMaterialTab(selected, 'TAB 2', (<ImageIcon name='heart'/>))
+              }}/>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderMaterialTab(selected, 'TAB 3', (<ImageIcon name='user'/>))
+              }}/>
+            </RkTabView>
+          </View>
+        </View>
+
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>Custom Tab Title</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkTabView>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderCustomTab(selected, 'Tab 1', 'paw')
+              }}/>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderCustomTab(selected, 'Tab 2', 'leaf')
+              }}/>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderCustomTab(selected, 'Tab 3', 'rocket')
+              }}/>
+            </RkTabView>
+          </View>
+        </View>
+
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>Scrollable Header</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkTabView rkType='noBorders' maxVisibleTabs={3}>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderScrollableTab(selected, 'Tab 1', 'first')
+              }}/>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderScrollableTab(selected, 'Tab 2')
+              }}/>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderScrollableTab(selected, 'Tab 3')
+              }}/>
+              <RkTabView.Tab title={(selected) => {
+                return this._renderScrollableTab(selected, 'Tab 4', 'last')
+              }}/>
             </RkTabView>
           </View>
         </View>
@@ -125,37 +106,57 @@ export class TabScreen extends Component {
     )
   }
 
-  _renderCustomTab(selected, tabIcon, tabName) {
+  _renderMaterialTab(selected, text, icon) {
+    let opacity = selected ? 1 : 0.7;
+    return (
+      <View style={{alignItems: 'center', opacity}}>
+        {icon}
+        <RkText style={{color: 'white', marginTop: 10}}>{text}</RkText>
+      </View>);
+  }
+
+  _renderCustomTab(selected, text, iconName) {
+    let backgroundColor = selected ? RkTheme.current.colors.primary : 'white';
+    let color = (!selected) ? RkTheme.current.colors.primary : 'white';
     return (
       <View
         style={{
+          backgroundColor,
+          justifyContent: 'center',
+          flexDirection: 'row',
           alignItems: 'center',
-          padding: 5,
-          borderBottomWidth: 2,
-          borderBottomColor: RkTheme.colors.red500,
-          backgroundColor : selected ?  RkTheme.colors.red500 : 'white'}}>
-        <Text style={{textAlign: 'center', color: selected? 'white' : RkTheme.colors.red500, flexDirection: 'row'}}>
-          <Icon style={{fontSize: 18}} name={tabIcon}/>
-          <Text style={{fontSize: 18}}> {tabName}</Text>
-        </Text>
+          padding: 17
+        }}>
+        <Icon name={iconName} style={{color, fontSize: 16}}/>
+        <RkText style={{color, marginLeft: 11}}>{text}</RkText>
       </View>
     )
   }
 
-  _renderMaterialTab(tab) {
+  _renderScrollableTab(selected, text) {
+    let backgroundColor = selected ? RkTheme.current.colors.primary : 'white';
+    let color = (!selected) ? RkTheme.current.colors.primary : 'white';
     return (
-      <RkTabView.Tab
-        style={{backgroundColor: RkTheme.colors.cyan500, borderBottomColor: RkTheme.colors.grey300}}
-        styleSelected={{backgroundColor: RkTheme.colors.cyan500, borderBottomColor: RkTheme.colors.yellow500}}
-        innerStyle={{color: 'white'}}
-        innerStyleSelected={{color: RkTheme.colors.yellow500}}
-        title={'Tab ' + tab}>
-        <View style={{flex: 1, paddingVertical: 15, backgroundColor: 'white'}}>
-          <Text style={UtilStyles.tabContent}>Tab {tab} Content</Text>
-        </View>
-      </RkTabView.Tab>
-    )
+
+      <View
+        style={{
+          backgroundColor,
+          justifyContent: 'center',
+          flexDirection: 'row',
+          alignItems: 'center',
+          padding: 17,
+        }}>
+        <RkText style={{color, marginLeft: 11}}>{text}</RkText>
+      </View>
+    );
   }
-
-
 }
+
+let styles = StyleSheet.create({
+  tabContainer: {
+    paddingHorizontal: 0
+  },
+  header: {
+    paddingHorizontal: 24,
+  }
+});

@@ -5,51 +5,46 @@ export const TabTypes = (theme) => {
     _base: {
       container: {
         flex: 1,
-        padding: 10,
-        borderWidth: 0.5,
-        backgroundColor: RkColors.white,
-        borderColor: RkColors.blue500
+        borderWidth: 1,
+        borderColor: theme.colors.primary
       },
       inner: {
+        margin:15,
         textAlign: 'center',
-        fontSize: 18,
-        color: RkColors.blue500
+        color: theme.colors.primary,
       }
     },
     basic: {
-      backgroundColor: RkColors.white,
-      color: RkColors.blue500
+      backgroundColor: theme.colors.back.base,
+      color: theme.colors.primary
     },
     selected: {
-      backgroundColor: RkColors.blue500,
-      color: RkColors.white
+      backgroundColor: '#ececec',
+    },
+    material: {
+      backgroundColor: theme.colors.back.material,
+      color: 'white',
+      inner: {
+        opacity: 0.7,
+      },
+      container:{
+        padding:15,
+        borderWidth: 0,
+        borderBottomColor: theme.colors.back.material,
+        borderBottomWidth: 2
+      }
+    },
+    materialSelected: {
+      color: 'white',
+      inner: {
+        opacity: 1
+      },
+      container: {
+        padding:15,
+        borderWidth: 0,
+        borderBottomColor: theme.colors.border.material,
+        borderBottomWidth: 2
+      }
     }
-
   });
 };
-
-// material: {
-//     container: {
-//         backgroundColor: RkColors.grey300,
-//         padding: 10,
-//         borderTopWidth: 0,
-//         borderLeftWidth: 0,
-//         borderRightWidth: 0,
-//         borderBottomWidth: 0.5,
-//         borderBottomColor: RkColors.grey500
-//     },
-//     inner: {
-//         textAlign: 'center',
-//         fontSize: 18,
-//         color: RkColors.darkGray
-//     },
-//     containerSelected: {
-//         backgroundColor: RkColors.grey300,
-//         borderBottomWidth: 3,
-//         paddingBottom: 7.5,
-//         borderBottomColor: RkColors.blue500
-//     },
-//     innerSelected: {
-//         color: RkColors.blue500
-//     }
-// }

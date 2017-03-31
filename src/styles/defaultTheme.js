@@ -54,12 +54,14 @@ export const DefaultTheme = {
       dangerActive: Values.dangerActive,
       foreground: Values.foreground,
       background: Values.background,
-      outline: RkColors.transparent
+      outline: RkColors.transparent,
+      material : Values.primary
     },
     border: {
       base: Values.primary,
       underline: '#0000001A',
-      solid: '#0000003B'
+      solid: '#0000003B',
+      material: Values.warning
     }
   },
   fonts: {

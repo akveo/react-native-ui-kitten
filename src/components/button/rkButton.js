@@ -38,7 +38,7 @@ export class RkButton extends RkComponent {
     };
     return (
       <TouchableOpacity style={[container, this.props.style]} {...touchableProps}>
-          {this.props.children && this._renderChildren(inner)}
+        {this.props.children && this._renderChildren(inner)}
       </TouchableOpacity>
     );
   }
@@ -53,8 +53,10 @@ export class RkButton extends RkComponent {
       if (typeof baby === 'string') {
         return displayText(baby);
       } else {
+        let {style:babyStyle, ...babyProps} = baby.props;
         return React.cloneElement(baby, {
-          style: [style, this.props.innerStyle, baby.props.style]
+          style: [style, this.props.innerStyle, babyStyle],
+          ...babyProps
         });
       }
     })

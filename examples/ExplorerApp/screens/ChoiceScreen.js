@@ -478,7 +478,6 @@ class SettingsScreen extends Component {
 const styles = StyleSheet.create({
   componentRow: {
     flexDirection: 'row',
-
   },
   settingsOption: {
     paddingVertical: 5,

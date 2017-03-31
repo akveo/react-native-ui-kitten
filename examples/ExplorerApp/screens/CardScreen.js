@@ -13,14 +13,12 @@ import {
 import {
   RkButton,
   RkText,
-  RkTheme,
-  RkModalImg,
-  RkTextInput,
   RkCard
 } from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
 import {Icon} from '../components/icon';
+import {ImageIcon} from '../components/imageIcon'
 
 export class CardScreen extends Component {
 
@@ -94,7 +92,7 @@ export class CardScreen extends Component {
           <RkCard>
             <View rkCardHeader>
               <View style={{flexDirection: 'row'}}>
-                <View style={styles.avatar}></View>
+                <Image source={require('../img/avatar1.png')} style={styles.avatar}/>
                 <View style={{}}>
                   <RkText rkType='header'>Elena Zhukova</RkText>
                   <RkText rkType='subtitle'>6 minutes ago</RkText>
@@ -133,7 +131,7 @@ export class CardScreen extends Component {
               <View rkCardImgOverlay/>
             </View>
             <RkButton rkType='circle accent-bg' style={styles.floating}>
-              <Icon name={'plus'}/>
+              <ImageIcon name='plus'/>
             </RkButton>
 
             <View rkCardHeader style={{paddingBottom: 2.5}}>
@@ -163,7 +161,7 @@ export class CardScreen extends Component {
               </View>
             </View>
             <RkButton rkType='circle accent-bg' style={styles.floating}>
-              <Icon name={'plus'}/>
+              <ImageIcon name='plus'/>
             </RkButton>
 
             <View rkCardHeader style={{paddingBottom: 2.5}}>
@@ -209,8 +207,7 @@ export class CardScreen extends Component {
             </View>
             <View rkCardContent style={{paddingTop: 0}}>
               <RkText rkType='compactCardText'>The Big Oxmox advised her not to do so, because there were thousands of
-                bad Commas,
-                wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</RkText>
+                bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</RkText>
             </View>
             <View rkCardFooter>
               <View style={styles.footerButtons}>
@@ -224,6 +221,7 @@ export class CardScreen extends Component {
     )
   }
 }
+
 let styles = StyleSheet.create({
   screen: {
     backgroundColor: '#f0f1f5',
@@ -239,7 +237,6 @@ let styles = StyleSheet.create({
   avatar: {
     width: 42,
     height: 42,
-    backgroundColor: 'red',
     borderRadius: 21,
     marginRight: 17
   },

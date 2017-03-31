@@ -9,15 +9,11 @@ export let bootstrap = () => {
 
   RkTheme.registerTypes('Avatar', AvatarTypes);
   RkTheme.setColor('accent', '#ed1c4d');
-  RkTheme.setType('RkTab', 'selected-gray', {
-    backgroundColor: '#e0e0e0',
-    color: '#2196f3'
-  });
+
 
   RkTheme.setType('RkText', 'basic', {
     text: {
       fontFamily: robotoLight,
-
     }
   });
 
@@ -74,7 +70,6 @@ export let bootstrap = () => {
     inner: {
       fontFamily: robotoMed,
     }
-
   });
 
   RkTheme.setType('RkButton', 'accent', {
@@ -83,5 +78,18 @@ export let bootstrap = () => {
 
   RkTheme.setType('RkButton', 'accent-bg', {
     backgroundColor: RkTheme.colors.accent
-  })
+  });
+
+  RkTheme.setType('RkTab','basic',{
+    inner:{
+      fontFamily: robotoMed
+    }
+  });
+
+  RkTheme.setType('RkTab','noBorders',{
+    container:{
+      borderLeftWidth:0,
+      borderRightWidth:0,
+    }
+  });
 };

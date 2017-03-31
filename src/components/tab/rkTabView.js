@@ -4,12 +4,13 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Text,
   Dimensions,
 } from 'react-native';
 
+import _ from 'lodash';
 import {RkComponent} from '../rkComponent';
 import {RkTab} from './rkTab'
+import {RkText} from '../text/rkText'
 
 export class RkTabView extends RkComponent {
 
@@ -35,8 +36,14 @@ export class RkTabView extends RkComponent {
     this.state = {
       index: +props.index || 0
     };
-    if(this.props.rkTypeSelected){
+    if (this.props.rkTypeSelected) {
       this.selectedType = this.props.rkTypeSelected
+    }
+    else {
+      let base = this.props.rkType ? this.props.rkType.split(" ")[0] : undefined;
+      if (base) {
+        this.selectedType = `${base}${_.upperFirst(this.selectedType)}`;
+      }
     }
   }
 
@@ -70,7 +77,7 @@ export class RkTabView extends RkComponent {
     let contentContainerStyle = scrollableHeader ? {} : {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: scrollableHeader ? 'flex-start' : 'center'
+        justifyContent: scrollableHeader ? 'flex-start' : 'center',
       };
     return (
       <ScrollView
@@ -91,28 +98,27 @@ export class RkTabView extends RkComponent {
 
   _renderTab(tab, id, scrollableHeader) {
     let inner = tab.props.title;
+    let content;
+    let {container:boxStyle, inner:innerStyle} = this._defineStyles(this.state.index === +id);
     if (typeof inner === 'function') {
-      inner = inner(this.state.index === +id);
+      content = inner(this.state.index === +id);
     } else if (typeof inner === 'string') {
-      let {container:boxStyle, inner:innerStyle} = this._defineStyles(this.state.index === +id);
       boxStyle.push(tab.props.style);
       innerStyle.push(tab.props.innerStyle);
       if (this.state.index === +id) {
         boxStyle.push(tab.props.styleSelected);
         innerStyle.push(tab.props.innerStyleSelected);
       }
-      inner = (
-        <View style={boxStyle}>
-          <Text
-            style={innerStyle}>{inner}</Text>
-        </View>
+      content = (
+        <RkText
+          style={innerStyle}>{inner}</RkText>
       )
     }
     let containerStyle = [{flex: 1}];
     if (scrollableHeader) containerStyle.push({width: this.state.tabWidth});
     return (
-      <TouchableOpacity style={containerStyle} key={id} onPress={() => this._selectTab(id)}>
-        {inner}
+      <TouchableOpacity style={[containerStyle, boxStyle]} key={id} onPress={() => this._selectTab(id)}>
+        {content}
       </TouchableOpacity>
     )
   }
@@ -128,6 +134,4 @@ export class RkTabView extends RkComponent {
       index: +id
     })
   }
-
-
 }
