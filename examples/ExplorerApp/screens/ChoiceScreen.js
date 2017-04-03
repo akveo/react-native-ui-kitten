@@ -270,7 +270,7 @@ class SettingsScreen extends Component {
 
     return (
       <ScrollView
-        style={[UtilStyles.container, {backgroundColor: RkTheme.current.colors.grey300}]}
+        style={UtilStyles.container}
         automaticallyAdjustContentInsets={true}>
 
         <View style={[UtilStyles.section,]}>

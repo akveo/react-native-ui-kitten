@@ -52,6 +52,7 @@ export const RkChoiceTypes = (theme) => {
       borderColor: RkTheme.current.colors.border.disabled
     },
     radioSelectedDisabled: {
+      borderColor: RkTheme.current.colors.border.disabled,
       inner: {
         width: 16,
         height: 16,

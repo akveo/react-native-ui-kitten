@@ -10,6 +10,7 @@ export const DefaultTypes = (theme) => {
     RkChoiceGroup: ComponentTypes.RkChoiceGroupTypes(theme),
     RkCard: ComponentTypes.RkCardTypes(theme),
     RkTab: ComponentTypes.TabTypes(theme),
+    RkModalImg: ComponentTypes.RkModalImgTypes(theme)
   })
 
 };

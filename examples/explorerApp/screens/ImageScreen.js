@@ -10,15 +10,16 @@ import {
   StatusBar
 } from 'react-native';
 
-import {RkButton, RkTheme, RkModalImg, RkBarBg} from 'react-native-ui-kitten';
+import {RkButton, RkTheme, RkModalImg, RkText} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Icon} from '../components/icon';
 
 export class ImageScreen extends Component {
 
   constructor(props) {
     super(props);
+
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     this._images = [
       require('../img/animal.jpeg'),
@@ -30,8 +31,6 @@ export class ImageScreen extends Component {
       require('../img/river.jpeg'),
       require('../img/sea.jpg'),
       require('../img/sun.jpg'),
-      require('../img/tree.jpeg'),
-      require('../img/wood.jpeg'),
     ];
     this.state = {
       ds: ds.cloneWithRows(this._images),
@@ -45,29 +44,37 @@ export class ImageScreen extends Component {
 
         <ScrollView
           automaticallyAdjustContentInsets={true}
-          style={[UtilStyles.container, {backgroundColor: RkTheme.colors.grey300}]}>
+          style={UtilStyles.container}>
 
-          <View style={UtilStyles.section}>
-            <Text style={UtilStyles.titleText}>Basic example</Text>
-            <View style={UtilStyles.rowContainer}>
-              <RkModalImg
-                style={{width: 100, height: 100, resizeMode: "cover"}}
-                source={require('../img/river.jpeg')}/>
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText style={styles.header} rkType='header'>Basic example</RkText>
+            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
+              <RkModalImg source={require('../img/animal.jpeg')}/>
+              <RkModalImg source={require('../img/clock.jpg')}/>
+              <RkModalImg source={require('../img/post2.png')}/>
             </View>
           </View>
-          <View style={UtilStyles.section}>
-            <Text style={UtilStyles.titleText}>Custom header and footer</Text>
-            <View style={UtilStyles.rowContainer}>
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText style={styles.header} rkType='header'>Custom header and footer</RkText>
+            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
               <RkModalImg
                 renderHeader={this._renderHeader}
                 renderFooter={this._renderFooter}
-                style={{width: 100, height: 100, resizeMode: "cover"}}
+                source={require('../img/post1.png')}/>
+              <RkModalImg
+                renderHeader={this._renderHeader}
+                renderFooter={this._renderFooter}
                 source={require('../img/river.jpeg')}/>
+              <RkModalImg
+                renderHeader={this._renderHeader}
+                renderFooter={this._renderFooter}
+                source={require('../img/post3.png')}/>
+
             </View>
           </View>
-          <View style={[UtilStyles.section]}>
-            <Text style={UtilStyles.titleText}>Gallery example</Text>
-            <View style={UtilStyles.rowContainer}>
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText style={styles.header} rkType='header'>Gallery Example</RkText>
+            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
               {this._renderGallery()}
             </View>
           </View>
@@ -76,68 +83,90 @@ export class ImageScreen extends Component {
     )
   }
 
-  _renderFooter(closeImage, pageNumber, totalPages, delimiter) {
+  _renderFooter(options) {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' ,paddingVertical: 10, paddingHorizontal: 20}}>
+      <View style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingVertical: 10,
+        paddingHorizontal: 20
+      }}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-          <RkButton rkType='clear' style={{paddingHorizontal: 5, paddingVertical: 5}}
-                    innerStyle={{fontSize: 26, color: 'white'}}>
-            <Icon name={'ios-heart'}/>
+          <RkButton rkType='clear small'>
+            <Icon name={'heart'} style={styles.buttonIcon}/>
+            <RkText>18</RkText>
+
           </RkButton>
-          <Text style={[RkTheme.styles.whiteText, {fontSize: 16, marginTop: -3}]}>12</Text>
         </View>
         <View style={{flex: 1}}>
-          <RkButton rkType='clear' style={{marginLeft: 10, paddingHorizontal: 5, paddingVertical: 5}}
-                    innerStyle={{fontSize: 26, color: 'white'}}>
-            <Icon name={'ios-chatboxes-outline'}/>
+          <RkButton rkType='clear small'>
+            <Icon name={'comment-o'} style={styles.buttonIcon}/>
+            <RkText>2</RkText>
           </RkButton>
         </View>
-        <View style={{flex: 1}}></View>
+        <View style={{flex: 1}}>
+          <RkButton rkType='clear small'>
+            <Icon name={'send-o'} style={styles.buttonIcon}/>
+            <RkText>7</RkText>
+          </RkButton>
+        </View>
       </View>
     );
   }
 
-  _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
+  _renderHeader(options) {
     return (
-      <View style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
-        <View style={{flex: 1}}>
-          <RkButton innerStyle={{color: 'white'}} style={{width: 80}} rkType='clear'
-                    onPress={closeImage}>Close</RkButton>
-        </View>
-        <View>
-          <Text style={{textAlign: 'center', color: 'white'}}>Custom Header</Text>
-        </View>
-        <View style={{flex: 1}}>
-          <RkButton style={{width: 80, opacity: 0}} rkType='clear'
-                    onPress={closeImage}>Close</RkButton>
-        </View>
+      <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
+        <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
+        <RkButton rkType='clear'>
+          <Icon style={styles.dot} name={'circle'}/>
+          <Icon style={styles.dot} name={'circle'}/>
+          <Icon style={styles.dot} name={'circle'}/>
+        </RkButton>
       </View>
     );
   }
 
   _renderGallery() {
-    let {width} = Dimensions.get('window');
     return (
       <ListView
         pageSize={3}
         contentContainerStyle={{
-           justifyContent: 'flex-start',
-           alignItems: 'flex-start',
-           flexDirection: 'row',
-           flexWrap: 'wrap'
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          flexWrap: 'wrap'
         }}
         scrollRenderAheadDistance={500}
         dataSource={this.state.ds}
         renderRow={(rowData, sectionID, rowID) => {
           return (
-           <RkModalImg
-              style={{width: (width-50)/3, height: 120 , resizeMode: "cover"}}
+            <RkModalImg
               source={this._images}
               index={rowID}/>
           )
         }}
-        />
+      />
     )
   }
 
 }
+
+let styles = StyleSheet.create({
+  imagesContainer: {
+    paddingHorizontal: 0
+  },
+  header: {
+    paddingHorizontal: 24,
+  },
+  dot: {
+    fontSize: 6.5,
+    marginLeft: 4,
+    marginVertical: 6,
+  },
+  buttonIcon: {
+    marginRight: 7,
+    fontSize: 19.7
+  },
+});

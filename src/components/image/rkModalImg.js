@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import {RkButton} from '../button/rkButton';
+import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
 import {RkTheme} from '../../styles/theme'
 
@@ -20,6 +21,16 @@ import {RkTheme} from '../../styles/theme'
 export class RkModalImg extends RkComponent {
 
   componentName = 'RkModalImg';
+  typeMapping = {
+    img: {},
+    header: {},
+    footerContent: {},
+    innerHeaderContainer: {},
+    footer: {},
+    headerText: {},
+    bar: {},
+    imgContainer: {}
+  };
 
   constructor(props) {
     super(props);
@@ -42,7 +53,7 @@ export class RkModalImg extends RkComponent {
 
   render() {
     let {
-      containerStyle,
+      imgContainerStyle,
       renderHeader,
       renderFooter,
       visible,
@@ -53,8 +64,29 @@ export class RkModalImg extends RkComponent {
       source,
       delimiter,
       index,
+      style:imgStyle,
       ...imgProps,
     } = this.props;
+
+    let {
+      header,
+      footerContent,
+      innerHeaderContainer,
+      footer,
+      headerText,
+      bar,
+      img,
+      imgContainer
+    } = this.defineStyles();
+
+    this.styles = {};
+    this.styles.header = header;
+    this.styles.footerContent = footerContent;
+    this.styles.innerHeaderContainer = innerHeaderContainer;
+    this.styles.footer = footer;
+    this.styles.headerText = headerText;
+    this.styles.bar = bar;
+
     renderHeader = renderHeader || this._renderHeader.bind(this);
     renderFooter = renderFooter || this._renderFooter.bind(this);
     animationType = animationType || 'fade';
@@ -62,6 +94,7 @@ export class RkModalImg extends RkComponent {
     transparent = transparent === undefined ? false : transparent;
     visible = visible === undefined ? this.state.visible : visible;
     modalContainerStyle = [{flex: 1}, RkTheme.styles.blackBg, modalContainerStyle];
+
     if (visible) imgProps.style = [imgProps.style, {
       height: this.state.height,
       width: this.state.width
@@ -72,9 +105,9 @@ export class RkModalImg extends RkComponent {
     let basicSource = Array.isArray(source) ? source[index] : source;
     return (
       <View>
-        <TouchableWithoutFeedback style={containerStyle}
+        <TouchableWithoutFeedback style={[imgContainer, imgContainerStyle]}
                                   onPress={() => this.setState({visible: true, openUpdate: true})}>
-          <Image source={basicSource} {...imgProps}/>
+          <Image source={basicSource} style={[img, imgStyle]} {...imgProps}/>
         </TouchableWithoutFeedback>
         <Modal
           animationType={animationType}
@@ -82,14 +115,12 @@ export class RkModalImg extends RkComponent {
           visible={visible}>
           <View style={modalContainerStyle}>
             { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
-            <Animated.View style={[styles.header, {opacity: this.state.opacity}]}>
-              {renderHeader(closeImage, pageNumber, totalPages, delimiter)}
+            <Animated.View style={[header, {opacity: this.state.opacity}]}>
+              {renderHeader({closeImage, pageNumber, totalPages, delimiter})}
             </Animated.View>
-            <Animated.View style={[styles.footer, {opacity: this.state.opacity}]}>
-              {renderFooter(closeImage, pageNumber, totalPages, delimiter)}
+            <Animated.View style={[footer, {opacity: this.state.opacity}]}>
+              {renderFooter({closeImage, pageNumber, totalPages, delimiter})}
             </Animated.View>
-
-            {/*<RkBarBg style={styles.bar}/>*/}
           </View>
         </Modal>
       </View>
@@ -132,19 +163,26 @@ export class RkModalImg extends RkComponent {
   }
 
 
-  _renderFooter(closeImage, pageNumber, totalPages, delimiter) {
+  _renderFooter(options) {
+    let footerStyle = this.styles ? this.styles.footer : {};
+
     return (
-      <View style={styles.footerContent}/>
+      <View style={footerStyle}/>
     );
   }
 
-  _renderHeader(closeImage, pageNumber, totalPages, delimiter) {
+  _renderHeader(options) {
+    let innerHeaderContainer = this.styles ? this.styles.innerHeaderContainer : {};
+    let headerText = this.styles ? this.styles.headerText : {};
     return (
-      <View style={styles.innerHeaderContainer}>
-        <RkButton innerStyle={RkTheme.styles.whiteText} rkType={'clear'}
-                  onPress={closeImage}>Close</RkButton>
-        <Text style={styles.headerText}>{this._renderPageNumbers(delimiter)}</Text>
-        <RkButton rkType='clear' innerStyle={RkTheme.styles.transparentText}>Close</RkButton>
+      <View style={innerHeaderContainer}>
+        <View style={{flex: 1}}>
+          <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
+        </View>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <RkText style={headerText}>{this._renderPageNumbers(options.delimiter)}</RkText>
+        </View>
+        <View style={{flex: 1}}/>
       </View>
     );
   }
@@ -176,39 +214,4 @@ export class RkModalImg extends RkComponent {
   _closeImage() {
     this.setState({visible: false})
   }
-
 }
-
-
-const styles = StyleSheet.create({
-  header: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    paddingTop: 20,
-    paddingHorizontal: 10,
-    backgroundColor: '#212121',
-  },
-  footerContent: {
-    height: 40,
-  },
-  innerHeaderContainer: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  footer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: '#212121',
-  },
-  headerText: {
-    textAlign: 'center',
-    fontSize: 16
-  },
-  bar: {
-    backgroundColor: '#212121',
-  }
-});
