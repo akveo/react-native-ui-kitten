@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 
 import {RkComponent} from '../rkComponent.js';
@@ -73,10 +74,11 @@ export class RkTextInput extends RkComponent {
     inputProps.style = [inputStyle, inputProps.style];
     inputProps.placeholderTextColor = placeholderColor;
     boxStyle.push(containerStyle);
+    let borderFix = Platform.OS === 'android' ? {underlineColorAndroid: 'transparent'} : {};
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
         {label && this._displayLabel(label, labelStyle)}
-        <TextInput ref={'input'} {...inputProps}/>
+        <TextInput underlineColorAndroid='transparent' ref={'input'} {...inputProps}/>
       </TouchableOpacity>
     );
   }

@@ -4,7 +4,6 @@ export {RkChoice} from './src/components/choice/rkChoice.js';
 export {RkChoiceGroup} from './src/components/choice/rkChoiceGroup.js';
 export {RkTextInput} from './src/components/textinput/rkTextInput';
 export {RkSeparator} from './src/components/separator/rkSeparator';
-// export {RkBoardUpView} from './components/boardup/BoardUpView';
 export {RkModalImg} from './src/components/image/rkModalImg';
 export {RkTabView} from './src/components/tab/rkTabView';
 export {RkCard} from './src/components/card/rkCard';

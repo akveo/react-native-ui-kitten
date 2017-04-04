@@ -5,7 +5,7 @@ import {
   Text,
   PixelRatio
 } from 'react-native'
-import {RkComponent} from 'react-native-ui-kitten'
+import {RkComponent, RkText} from 'react-native-ui-kitten'
 
 export class Avatar extends RkComponent {
 
@@ -27,6 +27,10 @@ export class Avatar extends RkComponent {
     label: {
       color: 'color',
       fontSize: 'fontSize'
+    },
+    caption: {
+      captionColor: 'color',
+      captionFontSize: 'fontSize'
     }
   };
 
@@ -36,17 +40,16 @@ export class Avatar extends RkComponent {
 
   render() {
 
-    let {container, image, label} = this.defineStyles();
-
-    let width = PixelRatio.getPixelSizeForLayoutSize(image.width || 40);
-    let height = PixelRatio.getPixelSizeForLayoutSize(image.height || 40);
-
-    url = `https://lorempixel.com/${width}/${height}/cats/`;
+    let {container, image, label, caption:captionStyle} = this.defineStyles();
+    let caption = this.props.caption ? (<RkText style={captionStyle}>{this.props.caption}</RkText>) : <View/>;
 
     return (
       <View style={[container, this.props.style]}>
-        <Image source={{uri: url}} style={image}/>
-        <Text style={label}>{this.props.name}</Text>
+        <Image source={this.props.source} style={image}/>
+        <View>
+          <RkText rkType='bold' style={label}>{this.props.name}</RkText>
+          {caption}
+        </View>
       </View>
     )
   }

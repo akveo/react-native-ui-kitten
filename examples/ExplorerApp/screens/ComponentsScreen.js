@@ -11,16 +11,14 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {RkStyle} from 'react-native-ui-kitten';
+import {RkText} from 'react-native-ui-kitten';
 
 import {ButtonScreen} from './ButtonScreen';
 import {ChoiceScreen} from './ChoiceScreen';
 import {InputScreen} from './InputScreen';
 import {ImageScreen} from './ImageScreen';
 import {TabScreen} from './TabScreen';
-import {BoardUpScreen} from './BoardUpScreen';
 import {CardScreen} from './CardScreen';
-import {ThemeScreen} from './ThemeScreen';
 import {AvatarScreen} from './AvatarScreen';
 
 export class ComponentsScreen extends Component {
@@ -48,10 +46,6 @@ export class ComponentsScreen extends Component {
         screenView: CardScreen
       },
       {
-        title: "Board Up View",
-        screenView: BoardUpScreen
-      },
-      {
         title: "Image Viewer",
         screenView: ImageScreen
       },
@@ -62,10 +56,6 @@ export class ComponentsScreen extends Component {
       {
         title: "Custom Control View",
         screenView: AvatarScreen
-      },
-      {
-        title: "Themes View",
-        screenView: ThemeScreen
       }
     ];
     this.state = {
@@ -77,8 +67,7 @@ export class ComponentsScreen extends Component {
     return (
       <TouchableOpacity onPress={() => this.selectComponent(componentDefinition)}>
         <View style={styles.componentRow}>
-          <Text style={[styles.titleText]}>{componentDefinition.title}</Text>
-        {/*/  <Icon name={'angle-right'} size={18} style={RkStyle.grayText}/>*/}
+          <RkText rkType='bold'>{componentDefinition.title}</RkText>
         </View>
       </TouchableOpacity>
     );
@@ -125,20 +114,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   componentRow: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingHorizontal: 24,
+    paddingVertical: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  titleText: {
-    fontSize: 18,
-  },
   rowSeparator: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     height: 1,
-    marginLeft: 10,
-    marginRight: 10,
   },
   rowSeparatorHide: {
     opacity: 0.0,

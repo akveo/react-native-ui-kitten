@@ -7,7 +7,8 @@ import {
 
 export const UtilStyles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor :'white'
   },
   titleText: {
     fontSize: 20,

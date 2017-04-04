@@ -7,20 +7,21 @@ export const AvatarTypes = (theme) => {
       container: {
         flex: 1,
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginVertical:4
       },
       image: {
         width: 40,
         height: 40
+      },
+      caption:{
+        paddingLeft:10,
+        color:theme.colors.text.hint
       }
     },
     round: {
       imageBorderRadius: 20,
-      imageBorderWidth: 1,
       color: theme.colors.text.base,
-      label: {
-        paddingLeft: 2
-      }
     }
   })
 };

@@ -5,7 +5,10 @@ export const RkModalImgTypes = (theme) => {
         position: 'absolute',
         left: 0,
         right: 0,
-        paddingTop: 36,
+        paddingTop: {
+          ios:36,
+          android:16
+        },
         paddingBottom: 10,
         paddingHorizontal: 16,
         backgroundColor: 'black',

@@ -4,9 +4,15 @@ export const RkTextInputTypes = (theme) => {
       input: {
         flex: 1,
         fontSize: theme.fonts.sizes.base,
-        height: theme.fonts.sizes.base * 1.42,
+        height: {
+          ios: theme.fonts.sizes.base * 1.42,
+          android: undefined
+        },
         alignSelf: 'center',
-        marginVertical: 18,
+        marginVertical: {
+          ios: 18,
+          android: 4
+        },
         marginLeft: 16
       },
       container: {
@@ -69,7 +75,10 @@ export const RkTextInputTypes = (theme) => {
     topLabel: {
       input: {
         alignSelf: 'stretch',
-        marginVertical:14
+        marginVertical: {
+          android: 2,
+          ios: 14
+        }
       },
       container: {
         flexDirection: 'column',

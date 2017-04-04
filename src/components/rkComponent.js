@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Platform} from 'react-native';
 import _ from 'lodash';
 import {TypeManager} from '../styles/typeManager.js';
 import {RkTheme} from '../styles/theme.js';
@@ -30,6 +31,15 @@ export class RkComponent extends Component {
     return val[property];
   }
 
+  _getPlatformValue(value) {
+    if (typeof value === 'object' && value !== null) {
+      if (value.hasOwnProperty(Platform.OS)) {
+        value = value[Platform.OS];
+      }
+    }
+    return value;
+  }
+
   _getTypes(types) {
     let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
 
@@ -54,13 +64,13 @@ export class RkComponent extends Component {
             //check if this is complex style
             if (this.typeMapping[key]) {
               for (let styleKey in usedTypes[type][key]) {
-                let value = usedTypes[type][key][styleKey];
+                let value = this._getPlatformValue(usedTypes[type][key][styleKey]);
                 this._mergeStyles(styles[key], styleKey, value);
               }
             } else {
-
               let styleKey = this.typeMapping[element][key];
-              let value = usedTypes[type][key];
+              let value = this._getPlatformValue(usedTypes[type][key]);
+
               this._mergeStyles(styles[element], styleKey, value);
             }
             break;
@@ -83,11 +93,14 @@ export class RkComponent extends Component {
   _getDefaultStyles(componentTypes) {
     let styles = {};
     let baseStyle = componentTypes[this.baseStyle];
+    let self = this;
     for (let element in baseStyle) {
       styles[element] = Object.keys(baseStyle[element]).map(function (key) {
-        return {[key]: baseStyle[element][key]};
+        let value = self._getPlatformValue(baseStyle[element][key]);
+        return {[key]: value};
       })
     }
     return styles;
   };
+
 }

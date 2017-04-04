@@ -110,6 +110,7 @@ export class RkModalImg extends RkComponent {
           <Image source={basicSource} style={[img, imgStyle]} {...imgProps}/>
         </TouchableWithoutFeedback>
         <Modal
+          onRequestClose={closeImage}
           animationType={animationType}
           transparent={transparent}
           visible={visible}>

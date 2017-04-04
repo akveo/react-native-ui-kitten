@@ -24,16 +24,14 @@ class ExplorerApp extends Component {
     super(props);
 
     this.state = {
-      title: 'Start screen'
+      title: 'UI KIT'
     };
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar
-          backgroundColor={RkTheme.colors.blue900}
-          barStyle="default"
+        <StatusBar barStyle="default"
         />
         {this._renderNavigator()}
       </View>
@@ -56,7 +54,7 @@ class ExplorerApp extends Component {
             }
           }}
           navIcon={icon}
-          titleColor={RkTheme.colors.white}
+          titleColor={RkTheme.current.colors.text.base}
           style={styles.toolbar}
           title={route.title}/>
         <AndroidBack route={route} navigator={navigator}/>
@@ -101,7 +99,6 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     height: 56,
-    backgroundColor: RkTheme.colors.blue800
   }
 });
 

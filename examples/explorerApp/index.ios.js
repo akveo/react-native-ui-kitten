@@ -27,7 +27,7 @@ class ExplorerApp extends Component {
           tintColor= {RkTheme.current.colors.text.base}
 
           initialRoute={{
-            title: 'Ui KIT',
+            title: 'UI KIT',
             component: ComponentsScreen
           }}
         />

@@ -10,7 +10,7 @@ import {
   StatusBar
 } from 'react-native';
 
-import {RkButton, RkTheme, RkModalImg, RkText} from 'react-native-ui-kitten';
+import {RkButton, RkModalImg, RkText} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
 import {Icon} from '../components/icon';
@@ -36,6 +36,8 @@ export class ImageScreen extends Component {
       ds: ds.cloneWithRows(this._images),
     };
 
+    let {width} = Dimensions.get('window');
+    this.imgSize = (width - 16) / 3;
   }
 
   render() {
@@ -49,26 +51,26 @@ export class ImageScreen extends Component {
           <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
             <RkText style={styles.header} rkType='header'>Basic example</RkText>
             <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
-              <RkModalImg source={require('../img/animal.jpeg')}/>
-              <RkModalImg source={require('../img/clock.jpg')}/>
-              <RkModalImg source={require('../img/post2.png')}/>
+              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}} source={require('../img/animal.jpeg')}/>
+              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}} source={require('../img/clock.jpg')}/>
+              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}} source={require('../img/post2.png')}/>
             </View>
           </View>
           <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
             <RkText style={styles.header} rkType='header'>Custom header and footer</RkText>
             <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
-              <RkModalImg
-                renderHeader={this._renderHeader}
-                renderFooter={this._renderFooter}
-                source={require('../img/post1.png')}/>
-              <RkModalImg
-                renderHeader={this._renderHeader}
-                renderFooter={this._renderFooter}
-                source={require('../img/river.jpeg')}/>
-              <RkModalImg
-                renderHeader={this._renderHeader}
-                renderFooter={this._renderFooter}
-                source={require('../img/post3.png')}/>
+              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
+                          renderHeader={this._renderHeader}
+                          renderFooter={this._renderFooter}
+                          source={require('../img/post1.png')}/>
+              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
+                          renderHeader={this._renderHeader}
+                          renderFooter={this._renderFooter}
+                          source={require('../img/river.jpeg')}/>
+              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
+                          renderHeader={this._renderHeader}
+                          renderFooter={this._renderFooter}
+                          source={require('../img/post3.png')}/>
 
             </View>
           </View>
@@ -143,6 +145,7 @@ export class ImageScreen extends Component {
         renderRow={(rowData, sectionID, rowID) => {
           return (
             <RkModalImg
+               style={{width: this.imgSize, height: this.imgSize}}
               source={this._images}
               index={rowID}/>
           )
