@@ -7,21 +7,20 @@ import {
   Text,
   TouchableOpacity,
   Platform,
+  StatusBar
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-import {RkText} from 'react-native-ui-kitten';
-
-import {ButtonScreen} from './ButtonScreen';
-import {ChoiceScreen} from './ChoiceScreen';
-import {InputScreen} from './InputScreen';
-import {ImageScreen} from './ImageScreen';
-import {TabScreen} from './TabScreen';
-import {CardScreen} from './CardScreen';
-import {AvatarScreen} from './AvatarScreen';
+import {RkText, RkTheme} from 'react-native-ui-kitten';
 
 export class ComponentsScreen extends Component {
+  static navigationOptions = {
+    title: 'UI KIT',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: RkTheme.current.colors.back.base
+      }
+    })
+  };
 
   constructor(props) {
     super(props);
@@ -31,31 +30,31 @@ export class ComponentsScreen extends Component {
     let data = [
       {
         title: "Buttons",
-        screenView: ButtonScreen
+        route: 'Button',
       },
       {
         title: "Selectable Components",
-        screenView: ChoiceScreen
+        route: 'Choice'
       },
       {
         title: "Inputs",
-        screenView: InputScreen
+        route: 'Input'
       },
       {
         title: "Cards",
-        screenView: CardScreen
+        route: 'Card'
       },
       {
         title: "Image Viewer",
-        screenView: ImageScreen
+        route: 'Image'
       },
       {
         title: "Tab View",
-        screenView: TabScreen
+        route: 'Tab'
       },
       {
         title: "Custom Control View",
-        screenView: AvatarScreen
+        route: 'Avatar'
       }
     ];
     this.state = {
@@ -74,11 +73,13 @@ export class ComponentsScreen extends Component {
   }
 
   selectComponent(componentDefinition) {
-    if (componentDefinition.screenView === undefined) return;
-    this.props.navigator.push({
-      title: componentDefinition.title,
-      component: componentDefinition.screenView,
-    });
+    const {navigate} = this.props.navigation;
+    navigate(componentDefinition.route);
+    // this.props.navigator.push({
+    //   title: componentDefinition.title,
+    //   component: componentDefinition.screenView,
+    // });
+
   }
 
   renderSeparator(sectionID,
@@ -103,7 +104,7 @@ export class ComponentsScreen extends Component {
                 keyboardDismissMode="on-drag"
                 keyboardShouldPersistTaps='always'
                 showsVerticalScrollIndicator={false}
-        />
+      />
     );
   }
 }

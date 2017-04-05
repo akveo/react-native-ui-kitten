@@ -14,6 +14,14 @@ import {UtilStyles} from '../style/styles';
 import {Icon} from '../components/icon';
 
 export class ButtonScreen extends Component {
+  static navigationOptions = {
+    title: 'Buttons',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: RkTheme.current.colors.back.base
+      }
+    })
+  };
 
   _onPress() {
     Alert.alert('onPress');

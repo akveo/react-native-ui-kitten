@@ -1,11 +1,20 @@
 import React, {Component}from 'react';
 import {StyleSheet, ScrollView, TextInput, TouchableOpacity, View, Image, Text} from 'react-native'
-import {RkText} from 'react-native-ui-kitten'
+import {RkText, RkTheme} from 'react-native-ui-kitten'
 import {Avatar} from '../components/avatar'
 
 import {UtilStyles} from '../style/styles';
 
 export class AvatarScreen extends Component {
+  static navigationOptions = {
+    title: 'Avatar',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: RkTheme.current.colors.back.base
+      }
+    })
+  };
+
   render() {
     return (
       <ScrollView automaticallyAdjustContentInsets={true}

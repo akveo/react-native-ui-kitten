@@ -13,7 +13,8 @@ import {
 import {
   RkButton,
   RkText,
-  RkCard
+  RkCard,
+  RkTheme
 } from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
@@ -21,6 +22,14 @@ import {Icon} from '../components/icon';
 import {ImageIcon} from '../components/imageIcon'
 
 export class CardScreen extends Component {
+  static navigationOptions = {
+    title: 'Cards',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: RkTheme.current.colors.back.base
+      }
+    })
+  };
 
   constructor(props) {
     super(props);

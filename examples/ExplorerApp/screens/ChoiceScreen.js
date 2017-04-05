@@ -18,6 +18,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export class ChoiceScreen extends Component {
+  static navigationOptions = {
+    title: 'Selectable components',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: RkTheme.current.colors.back.base
+      }
+    })
+  };
 
   constructor(props) {
     super(props);
@@ -204,83 +212,15 @@ export class ChoiceScreen extends Component {
   }
 
   showSettingsScreen() {
-    let param = {
-      title: 'Settings',
-      component: SettingsScreen,
-    };
-
-    let data = {
+    const {navigate} = this.props.navigation;
+     navigate('Settings', {
       option: this.state.settingsOption,
       onChange: (option) => {
         this.setState({
           settingsOption: option
         })
       }
-    };
-
-    if (Platform.OS === 'ios') {
-      param.passProps = {};
-      param.passProps.data = data;
-    }
-    else {
-      param.data = data;
-    }
-    this.props.navigator.push(param);
-  }
-}
-
-class SettingsScreen extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: [
-        {
-          index: 0,
-          name: "Option 1"
-        },
-        {
-          index: 1,
-          name: "Option 2"
-        },
-        {
-          index: 2,
-          name: "Option 3"
-        }
-      ]
-    }
-  }
-
-  _change(index) {
-    this.props.data.onChange(this.state.options[index]);
-  }
-
-  render() {
-
-    let renderOption = (option, i) => (
-      <View key={i}>
-        <TouchableOpacity choiceTrigger >
-          <View style={styles.checkRow}>
-            <RkText rkType='bold'>{option.name}</RkText>
-            <RkChoice rkType='clear'/>
-          </View>
-        </TouchableOpacity>
-        <RkSeparator/>
-      </View>);
-
-    return (
-      <ScrollView
-        style={UtilStyles.container}
-        automaticallyAdjustContentInsets={true}>
-
-        <View style={[UtilStyles.section,]}>
-          <RkChoiceGroup selectedIndex={this.props.data.option.index} radio rkType='stretch'
-                         onChange={(index) => this._change(index)}>
-            {this.state.options.map(renderOption)}
-          </RkChoiceGroup>
-        </View>
-      </ScrollView>
-    );
+    });
   }
 }
 

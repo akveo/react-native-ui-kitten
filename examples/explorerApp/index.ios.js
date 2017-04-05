@@ -1,45 +1,36 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   AppRegistry,
-  NavigatorIOS,
-  StyleSheet,
   StatusBar,
-  View
+  View,
+  Text,
+  Title,
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
-import {RkTheme} from 'react-native-ui-kitten';
-import {ComponentsScreen} from "./screens/ComponentsScreen";
+import * as Screens from "./screens";
+import {StackNavigator} from 'react-navigation';
 import {bootstrap} from "./style/themeBootstrapper"
 
 bootstrap();
-class ExplorerApp extends Component {
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-        />
-        <NavigatorIOS
-          style={styles.container}
-          barTintColor={RkTheme.current.colors.back.base}
-          titleTextColor= {RkTheme.current.colors.text.base}
-          tintColor= {RkTheme.current.colors.text.base}
-
-          initialRoute={{
-            title: 'UI KIT',
-            component: ComponentsScreen
-          }}
-        />
-      </View>
-    );
+const {header} =({state, setParams}) => ({
+  style: {
+    backgroundColor: 'white'
   }
-}
+});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
+const ExplorerApp = StackNavigator({
+  Home: {screen: Screens.ComponentsScreen},
+  Button: {screen: Screens.ButtonScreen},
+  Choice: {screen: Screens.ChoiceScreen},
+  Tab: {screen: Screens.TabScreen},
+  Card: {screen: Screens.CardScreen},
+  Avatar: {screen: Screens.AvatarScreen},
+  Input: {screen: Screens.InputScreen},
+  Image: {screen: Screens.ImageScreen},
+  Settings: {screen: Screens.SettingsScreen}
 });
 
 AppRegistry.registerComponent('ExplorerApp', () => ExplorerApp);

@@ -10,12 +10,21 @@ import {
   StatusBar
 } from 'react-native';
 
-import {RkButton, RkModalImg, RkText} from 'react-native-ui-kitten';
+import {RkButton, RkModalImg, RkText, RkTheme} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
 import {Icon} from '../components/icon';
 
 export class ImageScreen extends Component {
+  static navigationOptions = {
+    title: 'Images',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: RkTheme.current.colors.back.base
+      }
+    })
+  };
+
 
   constructor(props) {
     super(props);

@@ -8,11 +8,19 @@ import {
   TextInput,
 } from 'react-native';
 
-import {RkText, RkTextInput} from 'react-native-ui-kitten';
+import {RkText, RkTextInput, RkTheme} from 'react-native-ui-kitten';
 import {Icon} from '../components/icon'
 import {UtilStyles} from '../style/styles';
 
 export class InputScreen extends Component {
+  static navigationOptions = {
+    title: 'Inputs',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: RkTheme.current.colors.back.base
+      }
+    })
+  };
 
   constructor(props) {
     super(props);
