@@ -53,10 +53,10 @@ export class ButtonScreen extends Component {
 
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Colored buttons</RkText>
-          <View style={UtilStyles.rowContainer}>
-            <RkText>Easy to customize colors using style
-              props for button container styles such as backgroundColor
-              and innerStyle props for inner text.</RkText>
+          <View style={UtilStyles.columnContainer}>
+            <RkText>Easy to customize styles of control using rkType.
+              Styles will be applied according to current theme.</RkText>
+            <RkText>Here are buttons with predefined rkTypes:</RkText>
           </View>
           <View style={[UtilStyles.columnContainer]}>
             <RkButton rkType='primary' style={UtilStyles.spaceBottom}>Primary</RkButton>
@@ -67,10 +67,10 @@ export class ButtonScreen extends Component {
           </View>
         </View>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
-          <RkText rkType='header'>Button type props</RkText>
+          <RkText rkType='header'>Button types</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkText>With button props type
-              you can ease create already customized buttons.
+            <RkText>There are predefined rkTypes in all controls.
+              They define appearance of component.
             </RkText>
           </View>
           <View style={UtilStyles.rowContainer}>
@@ -84,7 +84,7 @@ export class ButtonScreen extends Component {
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Button sizes</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkText>Type props also allow you to define the mass of button.</RkText>
+            <RkText>rkType props also allow you to define the mass of button.</RkText>
           </View>
           <View style={UtilStyles.columnContainer}>
             <RkButton rkType='small outline' style={UtilStyles.spaceBottom}>Small</RkButton>
@@ -97,8 +97,7 @@ export class ButtonScreen extends Component {
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>With icons</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkText>Easy to customize colors using style props for button container styles
-              such as backgroundColor and innerStyle props for inner text.</RkText>
+            <RkText>But can contain not only text but icons.</RkText>
           </View>
           <View style={UtilStyles.columnContainer}>
             <RkButton style={[{width: 110, justifyContent: 'flex-start', paddingLeft: 9}, UtilStyles.spaceBottom]}
@@ -132,9 +131,7 @@ export class ButtonScreen extends Component {
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Icons only</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkText>For icons used react-native-vector-icons.
-              Add <RkText rkType='danger'> {'<icon/>'} </RkText>and text inside <RkText
-                rkType='danger'>{'<RkButton>'}</RkText> element.
+            <RkText>Or just add only icon inside rkButton element
             </RkText>
           </View>
           <View style={UtilStyles.rowContainer}>

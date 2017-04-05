@@ -10,12 +10,14 @@ import {
   StyleSheet,
   Animated,
   Dimensions,
+  Platform
 } from 'react-native';
 
 import {RkButton} from '../button/rkButton';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
-import {RkTheme} from '../../styles/theme'
+import {RkTheme} from '../../styles/theme';
+import _ from 'lodash';
 
 
 export class RkModalImg extends RkComponent {
@@ -45,9 +47,16 @@ export class RkModalImg extends RkComponent {
   }
 
   componentDidUpdate() {
-    if (this.state.openUpdate && this.refs.listView) {
-      this.refs.listView.scrollTo({x: +this.props.index * this.state.width});
+    let updateScroll = () => {
+      this.refs.listView.scrollTo({x: +this.props.index * this.state.width, animated: false});
       this.setState({openUpdate: false, index: +this.props.index});
+    };
+    if (this.state.openUpdate && this.refs.listView) {
+      if (Platform.OS === 'ios') {
+        updateScroll();
+      } else {
+        _.delay(updateScroll, 100);
+      }
     }
   }
 

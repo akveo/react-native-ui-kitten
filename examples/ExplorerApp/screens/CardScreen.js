@@ -253,7 +253,7 @@ let styles = StyleSheet.create({
     fontSize: 6.5,
     color: '#0000008e',
     marginLeft: 2.5,
-    marginTop: 7,
+    marginVertical: 10,
   },
   floating: {
     width: 56,
