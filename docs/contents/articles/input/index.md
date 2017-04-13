@@ -1,85 +1,155 @@
 ---
-title: TextInput
+title: RkTextInput
 author: vl
-sort: 202
+sort: 806
 group: Components
 template: componentArticle.jade
 ---
 
 <div class="component" image="https://thumbs.gfycat.com/ShockingComplexCowrie-size_restricted.gif"></div>
 
-`RkTextInput` is a component to be used as a basic customizable text input. Sample usage:
+`RkTextInput` is a component to be used as a basic text input.
 
-```html
+Usage example:
+
+```javascript
 import {RkTextInput} from 'react-native-ui-kitten';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 //... 
 
-<RkTextInput 
-    rkType='rounded' 
-    label={<Icon name='ios-search-outline'/>} 
-    containerStyle={{marginTop: 20}}
-    placeholder='Search'/>
+ <RkTextInput placeholder='Login'/>
 
 ```
+
+
+### Usage with icon or label
+
+`RkTextInput` can contain label or icon. By clicking on label/icon input will be focused.
+
+```javascript
+import Icon from 'react-native-vector-icons/Ionicons';
+import {RkTextInput} from 'react-native-ui-kitten';
+
+//...
+
+<RkTextInput label={<Icon name={'ios-search'}/>}/>
+
+<RkTextInput label='Search'/>
+
+``` 
 
 <a href="#" id="custom"></a>
 
 ### Create custom rkType
 
-Following segments of `RkTextInput` can be customized:
-
-- *input*  
-- *container*  
-- *label* 
-
-For example lets create colored input.
-
-First, we need to define new *rkType* in  `RkConfig`:
+To define new `rkType` you can use predefined properties which will passed to according element inside component:
 
 ```javascript
 
-import {RkConfig} from 'react-native-ui-kitten';
+import {RkTheme} from 'react-native-ui-kitten';
 
-RkConfig.setType('input', 'colored', {
-    input: {
-        color: RkConfig.colors.primary
-    },
-    container: {
-        borderBottomWidth: 1,
-        borderBottomColor: RkConfig.colors.darkWarning
-    },
-    label: {
-        color: RkConfig.colors.danger
-    },
+RkTheme.setType('RkTextInput','success',{
+  labelColor:'darkgreen',
+  underlineColor:'darkgreen',
+  underlineWidth:1,
 });
 
-
 ```
 
-After this we can apply this type to inputs in our app: 
+Now you can use *success* type in your app:
 
-```html
+```javascript
 import {RkTextInput} from 'react-native-ui-kitten';
 
-//... 
+//...
 
-<RkTextInput 
-    rkType='colored' 
-    label='Name'/>
+<RkTextInput label='Login' rkType='success'/>
 
 ```
 
-The result will look like this:
 
-![Image of Colored Input](/images/components/coloredInput.png)
+#### Available properties:
+
+- `color` : Color of typed text inside `RkTextInput`.
+- `inputBackgroundColor` : Background color of `TextInput` inside `RkTextInput`
+- `placeholderTextColor` : Color of placeholder text.
+- `labelColor` : Color of label/icon.
+- `labelFontSize` : Font size of label
+- `backgroundColor` : Background color of `RkTextInput`.
+- `borderWidth` : Width of outer border.
+- `borderRadius` : Border radius of `RkTextInput`.
+- `borderColor` : Color of border.
+- `underlineWidth` : Width of bottom border of component.
+- `underlineColor` : Color of bottom border of component.
+- `width` : Width of `RkTextInput`.
+- `height` : Height of `RkTextInput`.
+
+### Advanced Styling
+
+It's also possible to implement more detailed styling. `RkTextInput` consists from couple of base react components.
+You can easily set styles for each component.
+
+For example you can change the opacity of content passed to RkButton:
+
+```javascript
+
+import {RkTextInput, RkTheme} from 'react-native-ui-kitten';
+
+RkTheme.setType('RkTextInput', 'frame', {
+  input: {
+    backgroundColor: 'white',
+    marginLeft: 0,
+    marginHorizontal: 0,
+    borderRadius: 10
+  },
+  color: 'gray',
+  backgroundColor: 'gray',
+  borderRadius: 10,
+  container: {
+    paddingHorizontal: 20
+  }
+});
+
+//...
+
+<RkTextInput rkType='frame'/>
+
+```
+
+
+#### Available components
+
+- `container` : `TouchableOpacity` - container of `RkTextInput`.
+- `input` : `TextInput`.
+- `label` : `Text` or other View tree that you had specified in `label` props.
+
+
+#### Inline styling
+
+It's possible to set styles inline. Use props `style` for `container` component,
+ `labelStyle` for `label` component and `inputStyle` for `input`.
+
+Here is example of inline style usage:
+```javascript
+import {RkTextInput} from 'react-native-ui-kitten';
+
+//...
+
+<RkTextInput
+  abelStyle={{color: 'black'}}
+  label={'Name'}
+  inputStyle={{
+    backgroundColor: 'white',
+    borderRadius: 10,
+    color: 'black',
+  }}/>
+```
 
 ### Props
 
 <div class="doc-prop">
     <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
-    <p>By default RkTextInput supports following types: bordered, rounded, underline, topLabel</p>
+    <p>By default RkTextInput supports following types: bordered, rounded, form, topLabel</p>
 </div>
 
 <div class="doc-prop">
@@ -87,8 +157,8 @@ The result will look like this:
 </div>
 
 <div class="doc-prop">
-    <p><strong>containerStyle</strong> View.style</p>
-    <p>Style for view wrapping input and label</p>
+    <p><strong>style</strong> TouchableOpacity.style</p>
+    <p>Style for TouchableOpacity wrapping input and label</p>
 </div>
 
 <div class="doc-prop">
@@ -99,4 +169,9 @@ The result will look like this:
 <div class="doc-prop">
     <p><strong>labelStyle</strong> style</p>
     <p>Style applied to label</p>
+</div>
+
+<div class="doc-prop">
+    <p><strong>inputStyle</strong> TextInput.style</p>
+    <p>Style applied to text input</p>
 </div>

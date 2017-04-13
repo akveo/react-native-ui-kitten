@@ -27,11 +27,11 @@ export class RkModalImg extends RkComponent {
     img: {},
     header: {},
     footerContent: {},
-    innerHeaderContainer: {},
+    headerContent: {},
     footer: {},
     headerText: {},
-    bar: {},
-    imgContainer: {}
+    imgContainer: {},
+    modal: {}
   };
 
   constructor(props) {
@@ -68,10 +68,11 @@ export class RkModalImg extends RkComponent {
       visible,
       animationType,
       transparent,
-      modalContainerStyle,
-      imageInModalStyle,
+      modalStyle,
+      modalImgStyle,
+      headerStyle,
+      footerStyle,
       source,
-      delimiter,
       index,
       style:imgStyle,
       ...imgProps,
@@ -80,34 +81,38 @@ export class RkModalImg extends RkComponent {
     let {
       header,
       footerContent,
-      innerHeaderContainer,
+      headerContent,
       footer,
       headerText,
-      bar,
       img,
-      imgContainer
+      imgContainer,
+      modal,
+      modalImg
     } = this.defineStyles();
 
-    this.styles = {};
-    this.styles.header = header;
-    this.styles.footerContent = footerContent;
-    this.styles.innerHeaderContainer = innerHeaderContainer;
-    this.styles.footer = footer;
-    this.styles.headerText = headerText;
-    this.styles.bar = bar;
+    this.styles = {
+      header: [header, headerStyle],
+      footerContent,
+      headerContent,
+      footer: [footer, footerStyle],
+      headerText
+    };
 
     renderHeader = renderHeader || this._renderHeader.bind(this);
     renderFooter = renderFooter || this._renderFooter.bind(this);
     animationType = animationType || 'fade';
-    delimiter = delimiter || '/';
     transparent = transparent === undefined ? false : transparent;
     visible = visible === undefined ? this.state.visible : visible;
-    modalContainerStyle = [{flex: 1}, RkTheme.styles.blackBg, modalContainerStyle];
 
-    if (visible) imgProps.style = [imgProps.style, {
-      height: this.state.height,
-      width: this.state.width
-    }, imageInModalStyle];
+    if (visible) {
+      imgProps.style = [imgProps.style,
+        {
+          height: this.state.height,
+          width: this.state.width
+        },
+        modalImg,
+        modalImgStyle];
+    }
     let closeImage = this._closeImage.bind(this);
     let pageNumber = +this.state.index + 1;
     let totalPages = this.props.source.length;
@@ -123,13 +128,13 @@ export class RkModalImg extends RkComponent {
           animationType={animationType}
           transparent={transparent}
           visible={visible}>
-          <View style={modalContainerStyle}>
+          <View style={[modal, modalStyle]}>
             { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
-            <Animated.View style={[header, {opacity: this.state.opacity}]}>
-              {renderHeader({closeImage, pageNumber, totalPages, delimiter})}
+            <Animated.View style={[this.styles.header, {opacity: this.state.opacity}]}>
+              {renderHeader({closeImage, pageNumber, totalPages})}
             </Animated.View>
-            <Animated.View style={[footer, {opacity: this.state.opacity}]}>
-              {renderFooter({closeImage, pageNumber, totalPages, delimiter})}
+            <Animated.View style={[this.styles.footer, {opacity: this.state.opacity}]}>
+              {renderFooter({closeImage, pageNumber, totalPages})}
             </Animated.View>
           </View>
         </Modal>
@@ -174,7 +179,7 @@ export class RkModalImg extends RkComponent {
 
 
   _renderFooter(options) {
-    let footerStyle = this.styles ? this.styles.footer : {};
+    let footerStyle = this.styles ? this.styles.footerContent : {};
 
     return (
       <View style={footerStyle}/>
@@ -182,28 +187,28 @@ export class RkModalImg extends RkComponent {
   }
 
   _renderHeader(options) {
-    let innerHeaderContainer = this.styles ? this.styles.innerHeaderContainer : {};
+    let headerContent = this.styles ? this.styles.headerContent : {};
     let headerText = this.styles ? this.styles.headerText : {};
     return (
-      <View style={innerHeaderContainer}>
+      <View style={headerContent}>
         <View style={{flex: 1}}>
           <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
-          <RkText style={headerText}>{this._renderPageNumbers(options.delimiter)}</RkText>
+          <RkText style={headerText}>{this._renderPageNumbers()}</RkText>
         </View>
         <View style={{flex: 1}}/>
       </View>
     );
   }
 
-  _renderPageNumbers(delimiter) {
+  _renderPageNumbers() {
     if (Array.isArray(this.props.source)) {
       let pageText = +this.state.index + +1;
-      pageText += delimiter;
+      pageText += '/';
       pageText += this.props.source.length;
       return (
-        <Text style={RkTheme.styles.whiteText}>
+          <Text style={RkTheme.styles.whiteText}>
           {pageText}
         </Text>
       )

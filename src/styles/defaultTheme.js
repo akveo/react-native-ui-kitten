@@ -64,7 +64,8 @@ export const DefaultTheme = {
       underline: Values.neutral,
       solid: '#0000003B',
       material: Values.warning,
-      disabled:Values.neutral
+      disabled:Values.neutral,
+      card: '#00000014'
     }
   },
   fonts: {

@@ -14,13 +14,13 @@ export const RkChoiceTypes = (theme) => {
         borderColor: theme.colors.border.solid,
         borderRadius: 4,
         alignSelf: 'flex-start',
-        content: (<View/>),
       },
       inner: {
         width: 26,
         height: 26,
         justifyContent: 'center',
         alignItems: 'center',
+        content: (<View/>),
       },
     },
     selected: {

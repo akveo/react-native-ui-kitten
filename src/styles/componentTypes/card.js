@@ -5,9 +5,8 @@ export const RkCardTypes = (theme) => {
         margin: 5,
         borderRadius: 2,
         borderWidth: 1,
-        borderColor: '#00000014',
+        borderColor: theme.colors.border.card,
         backgroundColor: theme.colors.back.base,
-        // overflow: 'hidden'
       },
       header: {
         paddingVertical: 17,
@@ -30,21 +29,6 @@ export const RkCardTypes = (theme) => {
         borderBottomLeftRadius: 1,
         borderBottomRightRadius: 1,
       },
-      title: {
-        fontSize: 24,
-        flexDirection: 'column',
-      },
-      row: {
-        flexDirection: 'row'
-      },
-      rowCenter: {
-        flexDirection: 'row',
-        alignItems: 'center'
-      },
-      subTitle: {
-        fontSize: 14,
-        color: theme.colors.text.subtitle
-      },
       img: {
         flex: 1,
         height: 200,
@@ -59,19 +43,7 @@ export const RkCardTypes = (theme) => {
         left: 0,
         right: 0,
         backgroundColor: theme.colors.overlay
-      },
-      avatar: {
-        height: 64,
-        width: 64,
-        borderRadius: 32,
-        marginRight: 10
-      },
-      avatarSmall: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        marginRight: 10
-      },
+      }
     },
     shadowed: {
       container: {
@@ -79,7 +51,7 @@ export const RkCardTypes = (theme) => {
         shadowOffset: {
           width: 2
         },
-        shadowOpacity: 1,
+        shadowOpacity: 0.5,
         shadowRadius: 4
       }
     },

@@ -1,7 +1,7 @@
 ---
-title: Selectable components
+title: RkChoice
 author: vl
-sort: 702
+sort: 805
 group: Components
 template: componentArticle.jade
 ---
@@ -28,18 +28,18 @@ After that define view with text and `RkChoice` component.
 
 Sample code:
 
-```html
+```javascript
 import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 //... 
 
 <RkChoiceGroup>
-    <TouchableOpacity choiceTrigger>
-        <View>
-            <Text>Label</Text>
-            <RkChoice rkType='posNeg'/>
-        </View>
-    </TouchableOpacity>
+  <TouchableOpacity choiceTrigger>
+    <View>
+      <Text>Label</Text>
+        <RkChoice rkType='posNeg'/>
+    </View>
+  </TouchableOpacity>
 </RkChoiceGroup>
 
 ```
@@ -48,30 +48,30 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 Define `radio` prop on `RkChoiceGroup` component, when only one option can be selected:
 
-```html
+```javascript
 import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 //... 
 
-<RkChoiceGroup rkType='radio' radio>
-    <TouchableOpacity choiceTrigger>
-        <View>
-            <Text>Option 1</Text>
-            <RkChoice/>
-        </View>
-    </TouchableOpacity>
-    <TouchableOpacity choiceTrigger>
-        <View>
-            <Text>Option 2</Text>
-            <RkChoice/>
-        </View>
-    </TouchableOpacity>
-    <TouchableOpacity choiceTrigger>
-        <View>
-            <Text>Option 3</Text>
-            <RkChoice/>
-        </View>
-    </TouchableOpacity>
+<RkChoiceGroup radio>
+  <TouchableOpacity choiceTrigger>
+    <View>
+      <Text>Option 1</Text>
+      <RkChoice rkType='radio'/>
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity choiceTrigger>
+    <View>
+      <Text>Option 2</Text>
+      <RkChoice rkType='radio'/>
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity choiceTrigger>
+    <View>
+      <Text>Option 3</Text>
+      <RkChoice rkType='radio'/>
+    </View>
+  </TouchableOpacity>
 </RkChoiceGroup>
 
 ```
@@ -80,88 +80,141 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 ### Create custom rkType
 
-Following segments and states of `RkChoice` can be customized:
+`RkChoice` is a component which style depends or it's internal state. There are 4 states for this component:
+- unselected (base)
+- selected
+- unselected & disabled
+- selected & disabled
 
-- *container*  
-- *inner*  
-- *containerSelected*  
-- *innerSelected* 
-- *containerDisabled*  
-- *innerDisabled*
-- *containerSelectedDisabled*  
-- *innerSelectedDisabled*
+Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s 
+and `RkChoice` will apply them according to its state.
 
-Also you can define content inside `RkChoice` with 
-this settings, which needs to contain some component:
-    
-- *content*  
-- *contentUnchecked*  
-- *contentDisabled*  
-- *contentUncheckedDisabled*
-    
-Example of setting up new type in `RkConfig`:
+Use the following convention:
+
+- `%name%` : Unselected state.
+- `%name%Selected` : Selected state.
+- `%name%Disabled` : Unselected & disabled state.
+- `%name%SelectedDisabled`: Selected & disabled state.
+
+\* Where `%name%` is name of yours `rkType`.
+
+One more note: during state change `RkChoice` not *replace* base `rkType` with new one. It just *add* correct.
+So for example *disabled* component will have actually two `rkType`s - base and disabled.
+
+To define new `rkType` you can use predefined properties which will passed to according element inside component:
 
 ```javascript
-import {RkConfig} from 'react-native-ui-kitten'; 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {RkTheme, RkChoice} from 'react-native-ui-kitten';
 
-RkConfig.setType('choice', 'dark', {
-  container: {
-    borderWidth: 0,
-    backgroundColor: RkConfig.colors.lightGray,
-    borderRadius: 5,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 5,
-    paddingRight: 5,
-  },
+RkTheme.setType('RkChoice', 'semaphore', {
+  backgroundColor:'crimson',
+  borderWidth:0,
+  borderRadius:20
 });
 
-RkConfig.setType('choice', 'star', {
-  container: {
-    borderWidth: 0,
-    borderRadius: 5,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 5,
-    paddingRight: 5,
-  },
-  inner:{
-    width: 32,
-    height: 32,
-    fontSize: 32,
-    color: RkConfig.colors.warning
-  },
-  content: (<Icon name="star"/>),
-  contentUnchecked: (<Icon name="star-o"/>)
+RkTheme.setType('RkChoice', 'semaphoreSelected', {
+  backgroundColor: 'chartreuse',
 });
+
+RkTheme.setType('RkChoice', 'semaphoreDisabled', {
+  backgroundColor: 'darkgray',
+});
+
+RkTheme.setType('RkChoice', 'semaphoreSelectedDisabled', {
+  backgroundColor: 'lightgray',
+});
+
+//...
+
+<RkChoice rkType='semaphore'/>
+<RkChoice selected rkType='semaphore'/>
+<RkChoice disabled rkType='semaphore'/>
+<RkChoice disabled selected rkType='semaphore'/>
 
 ```
 
-We can then use created style like this: 
+#### Available properties
 
-```html
+- `color` : Color of content in `RkChoice`. Applied for `content` property.
+- `backgroundColor` : Background color of `RkChoice`.
+- `borderWidth` : Width of outer border.
+- `borderRadius` : Border radius of `RkChoice`.
+- `borderColor` : Color of border.
+- `width` : Width of `RkChoice`.
+- `height` : Height of `RkChoice`.
+- `content` : Component tree which will be set into `RkChoice`. As `content` you can use text, icon, image etc.
+
+Custom content example:
+```javascript
+import {RkTheme} from 'react-native-ui-kitten';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+RkTheme.setType('RkChoice', 'mic', {
+  backgroundColor: 'darkred',
+  borderWidth: 0,
+  borderRadius: 20,
+  content: (<View><Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic-off'}/></View>)
+});
+
+RkTheme.setType('RkChoice', 'micSelected', {
+  content: (<View><Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/></View>)
+});
+
+//...
+
+<RkChoice rkType='mic'/>
+```
+
+### Advanced Styling
+
+It's also possible to implement more detailed styling. `RkChoice` consist from couple of base react components.
+You can easily set styles for each component.
+
+For example you can add *disabled* and *disabled & selected* `rkTypes` for previous example
+```javascript
+
+import {RkTheme} from 'react-native-ui-kitten';
+
+RkTheme.setType('RkChoice', 'micDisabled', {
+  inner: {
+    opacity: 0.7
+  }
+});
+
+RkTheme.setType('RkChoice', 'micSelectedDisabled', {
+  content: (<View><Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/></View>),
+  inner: {
+    opacity: 0.7
+  }
+});
+```
+
+#### Available components:
+
+- `RkChoice`:
+    - `container` : Can be `View` or `TouchableOpacity` depending on using with `RkChoiceGroup` or without.
+    - `inner` : Applied to `content` property.
+- `RkChoiceGroup`:
+    - `container`: View which wraps all children of component. 
+
+#### Inline styling
+
+It's possible to set styles inline. Use props `style` for `container` component and `contentStyle` for `content` component.
+
+```javascript
 import {RkChoice} from 'react-native-ui-kitten';
 
-//... 
 
-<RkChoice rkType="dark" selected={true}/>
-
-<RkChoice rkType="star" selected={true}/>
-
-<RkChoice rkType="star" selected={false}/>
+//...
+<RkChoice style={{backgroundColor: 'green'}} contentStyle={{width: 50, height:50}} rkType='mic'/>
 
 ```
-
-The result will be:
-
-![Image of dark buttons](/images/components/customChoice.png)
 
 ### RkChoice Props
 
 <div class="doc-prop">
     <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
-    <p>By default RkChoice supports following types: clear, radio, material, posNeg</p>
+    <p>By default RkChoice supports following types: clear, radio, posNeg</p>
 </div>
 
 <div class="doc-prop">
@@ -185,70 +238,16 @@ The result will be:
 </div>
 
 <div class="doc-prop">
-    <p><strong>containerStyle</strong> TouchableOpacity.style</p>
-    <p>Style for TouchableOpacity around container</p>
+    <p><strong>contentStyle</strong> TouchableOpacity.style or View.style</p>
+    <p>Style for content inside component</p>
 </div>
 
-<div class="doc-prop">
-    <p><strong>innerStyle</strong> style</p>
-    <p>Style for component content</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>styleSelected</strong> View.style</p>
-    <p>Style for component container when selected</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>innerStyleSelected</strong> style</p>
-    <p>Style for component content when selected</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>styleDisabled</strong> View.style</p>
-    <p>Style for component container when disabled</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>innerStyleDisabled</strong> style</p>
-    <p>Style for component content when disabled</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>styleSelectedDisabled</strong> View.style</p>
-    <p>Style for component container when selected and disabled</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>innerStyleSelectedDisabled</strong> style</p>
-    <p>Style for component content when selected and disabled</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>content</strong> Component</p>
-    <p>For custom content</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>contentDisabled</strong> Component</p>
-    <p>For custom content when component disabled</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>contentUnchecked</strong> Component</p>
-    <p>For custom content when component is not selected</p>
-</div>
-
-<div class="doc-prop">
-    <p><strong>contentUncheckedDisabled</strong> Component</p>
-    <p>For custom content when component is not selected and disabled</p>
-</div>
 
 ### RkChoiceGroup Props
 
 <div class="doc-prop">
     <p><strong>rkType</strong> string</p>
-    <p>By default RkChoiceGroup supports all RkChoice types, type will be applied on each RkChoice component inside</p>
+    <p>By default RkChoiceGroup has not predefined rkTypes.</p>
 </div>
 
 <div class="doc-prop">

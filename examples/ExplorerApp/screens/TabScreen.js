@@ -154,7 +154,7 @@ export class TabScreen extends Component {
           alignItems: 'center',
           padding: 17,
         }}>
-        <RkText style={{color, marginLeft: 11}}>{text}</RkText>
+        <RkText style={{color}}>{text}</RkText>
       </View>
     );
   }

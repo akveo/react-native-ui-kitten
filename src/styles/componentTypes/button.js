@@ -13,7 +13,7 @@ export const RkButtonTypes = (theme) => {
         width: 128,
         height: 44,
       },
-      inner: {
+      content: {
         fontSize: theme.fonts.sizes.base,
         alignSelf: 'center',
         textAlign: 'center',
@@ -56,43 +56,45 @@ export const RkButtonTypes = (theme) => {
       borderRadius: 300
     },
     small: {
-      paddingVertical: 4,
-      paddingHorizontal: 6,
       fontSize: theme.fonts.sizes.small,
+      height: 36,
+      width: 80,
       container: {
-        height: 36,
-        width: 80,
+        paddingVertical: 4,
+        paddingHorizontal: 6,
       }
     },
     medium: {
-      paddingVertical: 8,
-      paddingHorizontal: 12,
+      container: {
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+      },
       fontSize: theme.fonts.sizes.medium,
     },
     large: {
-      paddingVertical: 10,
-      paddingHorizontal: 15,
       fontSize: theme.fonts.sizes.large,
+      height: 52,
+      width: 180,
       container: {
-        height: 52,
-        width: 180,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
       }
     },
     xlarge: {
-      paddingVertical: 15,
-      paddingHorizontal: 20,
       fontSize: theme.fonts.sizes.xlarge,
+      height: 60,
+      width: -1,
       container: {
-        height: 60,
-        width: -1,
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
       }
     },
     clear: {
       backgroundColor: 'transparent',
+      width: null,
+      height: null,
       container: {
-        width: null,
-        height: null,
         paddingVertical: 0,
         paddingHorizontal: 0,
       }

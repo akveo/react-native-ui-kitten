@@ -13,10 +13,11 @@ template: article.jade
 Most of the components in this framework contain *rkType* property.
 For those who familiar with web, you can think of it as a HTML *class* property.
 Basically the main idea is to split style definitions from jsx templates.
-You configure *rkType*s in somewhere in your application and after that you're able to reuse that style in your components by just passing it as an input property.
-As well, there's always a possibility to override styles for some specific component.
+Our components already have a set of predefined rkTypes. 
+Or you can configure *rkType*s in somewhere in your application and after that you're able to reuse that style in your components by just passing it as an input property.
+As well, there's always a possibility to override types for some specific component.
 
-For example, consider this piece of code: 
+For example, consider this code: 
 
 ```html
 import {RkButton} from 'react-native-ui-kitten';
@@ -33,7 +34,25 @@ In this case `RkButton` will have two styles: *outline* (style that
 draws rounded border for button) and *small* (one that reduces button size).
 
 You're able to create your custom *rkType*s for specific components.
-Each component that supports this feature has appropriate paragraph that describes how to do that:
+Here is example with creating *rkType* for rkButton:
+
+```javascript
+import {RkButton, RkTheme} from 'react-native-ui-kitten';
+
+let accent = '#ed1c4d';
+
+RkTheme.setType('RkButton', 'accent', {
+  backgroundColor: accent,
+  color: 'white'
+});
+
+//...
+
+<RkButton rkType='accent'>
+  Click me.
+</RkButton>
+```
+Each rk-component that supports this feature has appropriate paragraph that describes details about customization:
 
 - *[RkButton](../button#custom)*  
 - *[RkChoice](../choice#custom)*  
@@ -41,66 +60,39 @@ Each component that supports this feature has appropriate paragraph that describ
 - *[RkCard](../card#custom)*  
 - *[RkTextInput](../input#custom)*  
 - *[RKText](../text#custom)*  
+- *[RkSeparator](../separator#custom)*  
 
-### Global settings
+### Themes
 
-There's also a possibility to define global settings for each component that supports *rkType*. 
-Example below shows how can you define some default styles for `RkButton` and `RkType`:
- 
+All base *rkTypes* depends on theme of application. *Theme* contains base values (colors, fontSizes etc) for all Rk-components.
+You can easily override values in theme or even define your own theme using *[RkTheme](../theme)* [GUID](../guide/index.md)
+
+### Platform-dependent styles
+
+In some cases it may be necessary to write different styles depending on current platform. There is possibility to define 
+platform dependent value. Let's create `rkType` for `RkButton` which on *ios* will have blue background color and green on *android*.
+
 ```javascript
+import {RkTheme} from 'react-native-ui-kitten';
 
-import {RkConfig} from 'react-native-ui-kitten';
+//...
 
-
-RkConfig.setType('text', 'white', {
-  color: 'white'
+RkTheme.setType('RkButton','different',{
+  backgroundColor: {
+    ios: 'blue',
+    android: 'green'
+  }
 });
 
-RkConfig.setType('text', 'roboto', {
-  fontFamily: 'roboto'
-});
+//... or using control components:
 
-RkConfig.setTheme('myTheme', {
-  text: {
-    defaultType: 'roboto white'
-  },
-  button:{
-    defaultType: 'outline small'
+RkTheme.setType('RkButton','different',{
+  container: {
+    backgroundColor: {
+      ios: 'blue',
+      android: 'green'
+    }
   }
 });
 
 ```
- 
-Now each `RkText` and `RkButton` component can be used without *rkType* 
-prop. But it will still be applied with styles defined in *myTheme*. Nice! 
- 
-
-### Colors
-
-*react-native-ui-kitten* contains [material](https://material.io/guidelines/style/color.html#color-color-palette) colors as constants.
-Look at the source code to view all colors available [RkConfig.colors](https://github.com/akveo/react-native-ui-kitten/blob/master/util/color.js)
- 
-Color usage example:
-
-```javascript 
-
-import {RkConfig} from 'react-native-ui-kitten';
-
-<Text style={{color: RkConfig.colors.blue500}}>blue</Text>
-
-```
-
-You can define your own colors and use it in the same way as above.
-
-Custom color definition example:
-
-```javascript 
-
-RkConfig.setColor('primary', RkConfig.colors.blue500);
-RkConfig.setColor('danger',  RkConfig.colors.red500);
-RkConfig.setColor('warning', RkConfig.colors.yellow500);
-RkConfig.setColor('success', RkConfig.colors.green500);
-RkConfig.setColor('border', '#ECECEC');
-
-```
-

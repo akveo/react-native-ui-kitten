@@ -12,25 +12,14 @@ export class Avatar extends RkComponent {
   componentName = "Avatar";
   typeMapping = {
     container: {
-      backgroundColor: 'backgroundColor',
-      borderColor: 'borderColor',
-      borderWidth: 'borderWidth',
-      borderRadius: 'borderRadius'
+      backgroundColor: 'backgroundColor'
     },
-    image: {
-      imageWidth: 'width',
-      imageHeight: 'height',
-      imageBorderColor: 'borderColor',
-      imageBorderWidth: 'borderWidth',
-      imageBorderRadius: 'borderRadius'
+    image: {},
+    username: {
+      color: 'color'
     },
-    label: {
-      color: 'color',
-      fontSize: 'fontSize'
-    },
-    caption: {
-      captionColor: 'color',
-      captionFontSize: 'fontSize'
+    description: {
+      descriptionColor: 'color'
     }
   };
 
@@ -39,18 +28,34 @@ export class Avatar extends RkComponent {
   }
 
   render() {
-
-    let {container, image, label, caption:captionStyle} = this.defineStyles();
-    let caption = this.props.caption ? (<RkText style={captionStyle}>{this.props.caption}</RkText>) : <View/>;
+    let {container, image, username, description: descriptionStyle} = this.defineStyles();
+    let description = this.props.description ? (<RkText style={descriptionStyle}>{this.props.description}</RkText>) :
+      <View/>;
 
     return (
-      <View style={[container, this.props.style]}>
-        <Image source={this.props.source} style={image}/>
+      <View style={container}>
+        <Image style={image} source={this.props.source}/>
         <View>
-          <RkText rkType='bold' style={label}>{this.props.name}</RkText>
-          {caption}
+          <RkText style={username}>{this.props.name}</RkText>
+          {description}
         </View>
       </View>
     )
   }
+
+  // render() {
+  //
+  //   let {container, image, label, caption:captionStyle} = this.defineStyles();
+  //   let caption = this.props.caption ? (<RkText style={captionStyle}>{this.props.caption}</RkText>) : <View/>;
+  //
+  //   return (
+  //     <View style={[container, this.props.style]}>
+  //       <Image source={this.props.source} style={image}/>
+  //       <View>
+  //         <RkText rkType='bold' style={label}>{this.props.name}</RkText>
+  //         {caption}
+  //       </View>
+  //     </View>
+  //   )
+  // }
 }

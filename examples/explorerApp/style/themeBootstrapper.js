@@ -7,9 +7,8 @@ let robotoMed = 'Roboto-Medium';
 
 export let bootstrap = () => {
 
-  RkTheme.registerTypes('Avatar', AvatarTypes);
+  RkTheme.registerComponent('Avatar', AvatarTypes);
   RkTheme.setColor('accent', '#ed1c4d');
-
 
   RkTheme.setType('RkText', 'basic', {
     text: {
@@ -20,7 +19,7 @@ export let bootstrap = () => {
   RkTheme.setType('RkText', 'bold', {
     text: {
       fontFamily: robotoMed,
-    }
+  }
   });
 
   RkTheme.setType('RkText', 'header', {
@@ -29,10 +28,11 @@ export let bootstrap = () => {
     }
   });
   RkTheme.setType('RkButton', 'basic', {
-    inner: {
+    content: {
       fontFamily: robotoMed
     }
   });
+
 
   // remove base border radius from all RkButtons in application
   /**
@@ -59,21 +59,21 @@ export let bootstrap = () => {
     fontSize: 14,
     text: {
       lineHeight: 20,
-      letterSpacing:-0.1
+      letterSpacing: -0.1
     }
   });
 
   RkTheme.setType('RkButton', 'link', {
     color: '#00000099',
     fontSize: RkTheme.current.fonts.sizes.small,
-    inner: {
+    content: {
       letterSpacing: -0.1
     }
   });
 
   RkTheme.setType('RkButton', 'action', {
     color: RkTheme.current.colors.warning,
-    inner: {
+    content: {
       fontFamily: robotoMed,
     }
   });
@@ -86,16 +86,16 @@ export let bootstrap = () => {
     backgroundColor: RkTheme.colors.accent
   });
 
-  RkTheme.setType('RkTab','basic',{
-    inner:{
+  RkTheme.setType('RkTab', 'basic', {
+    inner: {
       fontFamily: robotoMed
     }
   });
 
-  RkTheme.setType('RkTab','noBorders',{
-    container:{
-      borderLeftWidth:0,
-      borderRightWidth:0,
+  RkTheme.setType('RkTab', 'noBorders', {
+    container: {
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
     }
   });
 };

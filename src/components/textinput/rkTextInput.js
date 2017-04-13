@@ -17,13 +17,13 @@ export class RkTextInput extends RkComponent {
   typeMapping = {
     container: {
       borderRadius: 'borderRadius',
-      paddingHorizontal: 'paddingHorizontal',
-      paddingVertical: 'paddingVertical',
       backgroundColor: 'backgroundColor',
       borderWidth: 'borderWidth',
       borderColor: 'borderColor',
       underlineWidth: 'borderBottomWidth',
-      underlineColor: 'borderBottomColor'
+      underlineColor: 'borderBottomColor',
+      height: 'height',
+      width: 'width'
     },
     input: {
       color: 'color',
@@ -63,18 +63,18 @@ export class RkTextInput extends RkComponent {
 
   render() {
     let {
-      containerStyle,
+      style,
       label,
       labelStyle,
+      inputStyle,
       ...inputProps
     } = this.props;
-    let {container:boxStyle, input:inputStyle, label:labelS} = this.defineStyles();
-    let placeholderColor = this.extractNonStyleValue(inputStyle, 'placeholderTextColor');
+    let {container:boxStyle, input:input, label:labelS} = this.defineStyles();
+    let placeholderColor = this.extractNonStyleValue(input, 'placeholderTextColor');
     labelStyle = [labelS, labelStyle];
-    inputProps.style = [inputStyle, inputProps.style];
+    inputProps.style = [input, inputStyle];
     inputProps.placeholderTextColor = placeholderColor;
-    boxStyle.push(containerStyle);
-    let borderFix = Platform.OS === 'android' ? {underlineColorAndroid: 'transparent'} : {};
+    boxStyle.push(style);
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
         {label && this._displayLabel(label, labelStyle)}

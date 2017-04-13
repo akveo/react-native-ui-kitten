@@ -11,6 +11,7 @@ import {
 
 import * as Screens from "./screens";
 import {StackNavigator} from 'react-navigation';
+import {RkTheme} from 'react-native-ui-kitten'
 import {bootstrap} from "./style/themeBootstrapper"
 
 bootstrap();
@@ -30,7 +31,8 @@ const ExplorerApp = StackNavigator({
   Avatar: {screen: Screens.AvatarScreen},
   Input: {screen: Screens.InputScreen},
   Image: {screen: Screens.ImageScreen},
-  Settings: {screen: Screens.SettingsScreen}
+  Settings: {screen: Screens.SettingsScreen},
+  Test: {screen: Screens.TestScreen}
 });
 
 AppRegistry.registerComponent('ExplorerApp', () => ExplorerApp);

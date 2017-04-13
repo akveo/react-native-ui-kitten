@@ -55,6 +55,10 @@ export class ComponentsScreen extends Component {
       {
         title: "Custom Control View",
         route: 'Avatar'
+      },
+      {
+        title: "Custom Control View",
+        route: 'Test'
       }
     ];
     this.state = {

@@ -16,7 +16,7 @@ export const RkModalImgTypes = (theme) => {
       footerContent: {
         height: 50,
       },
-      innerHeaderContainer: {
+        headerContent: {
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
@@ -32,15 +32,16 @@ export const RkModalImgTypes = (theme) => {
         textAlign: 'center',
         fontSize: theme.fonts.sizes.large
       },
-      bar: {
-        backgroundColor: 'black',
-      },
       img: {
         width: 120,
         height: 120,
-        resizeMode: "cover",
+        resizeMode: 'cover',
         margin: 2,
       },
+      modal:{
+        flex:1,
+        backgroundColor: 'black'
+      }
     }
   });
 };

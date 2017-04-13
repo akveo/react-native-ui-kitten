@@ -18,14 +18,15 @@ export class RkChoice extends RkComponent {
       borderWidth: 'borderWidth',
       borderColor: 'borderColor',
       borderRadius: 'borderRadius',
-      content: 'content',
-      paddingVertical: 'paddingVertical',
-      paddingHorizontal: 'paddingHorizontal'
     },
     inner: {
-      color: 'color'
+      color: 'color',
+      width: 'width',
+      height: 'height',
+      content: 'content',
     }
   };
+
   selectedType = 'selected';
   disabledType = 'disabled';
   selectedDisabledType = 'selectedDisabled';
@@ -52,7 +53,7 @@ export class RkChoice extends RkComponent {
 
     if (this.props.inTrigger) {
       return (
-        <View style={[container,this.props.style]}>
+        <View style={[container, this.props.style]}>
           {content}
         </View>
       );
@@ -122,10 +123,10 @@ export class RkChoice extends RkComponent {
 
     let {container, inner} = this.defineStyles(_.join(computedTypes, " "));
     let propsContent = this._getContentFromProps();
-    let contentValue = this.extractNonStyleValue(container,'content');
+    let contentValue = this.extractNonStyleValue(inner, 'content');
 
     let content = React.cloneElement(contentValue, {
-        style: [inner]
+        style: [inner, this.props.contentStyle]
       }) || (<View/>);
 
     if (propsContent) {

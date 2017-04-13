@@ -15,19 +15,18 @@ import {RkText} from '../text/rkText'
 export class RkTabView extends RkComponent {
 
   static Tab = RkTab;
-  componentName = 'RkTab';
+  componentName = 'RkTabView';
   typeMapping = {
-    container: {
+    container: {},
+    headerContainer: {},
+    tabContainer: {
       backgroundColor: 'backgroundColor',
       borderColor: 'borderColor',
-      borderRadius: 'borderRadius',
       borderWidth: 'borderWidth',
-      paddingVertical: 'paddingVertical',
-      paddingHorizontal: 'paddingHorizontal'
     },
-    inner: {
+    content: {
       color: 'color',
-    }
+    },
   };
   selectedType = 'selected';
 
@@ -50,9 +49,11 @@ export class RkTabView extends RkComponent {
   render() {
     let scrollableHeader = !!this.props.maxVisibleTabs;
     let tabs = this._getTabs(this.props.children);
+    let {headerContainer, container, ...otherStyles} = this.defineStyles();
+
     return (
-      <View style={[{flex: 1, justifyContent: 'flex-start'}, this.props.style]}>
-        <View style={this.props.tabsContainerStyle}>
+      <View style={[{flex: 1, justifyContent: 'flex-start'}, container, this.props.style]}>
+        <View style={[headerContainer, this.props.headerContainerStyle]}>
           {this._renderTabs(tabs, scrollableHeader)}
         </View>
         <View>
@@ -99,15 +100,15 @@ export class RkTabView extends RkComponent {
   _renderTab(tab, id, scrollableHeader) {
     let inner = tab.props.title;
     let content;
-    let {container:boxStyle, inner:innerStyle} = this._defineStyles(this.state.index === +id);
+    let {tabContainer:boxStyle, content:innerStyle} = this._defineStyles(this.state.index === +id);
     if (typeof inner === 'function') {
       content = inner(this.state.index === +id);
     } else if (typeof inner === 'string') {
       boxStyle.push(tab.props.style);
-      innerStyle.push(tab.props.innerStyle);
+      innerStyle.push(tab.props.contentStyle);
       if (this.state.index === +id) {
         boxStyle.push(tab.props.styleSelected);
-        innerStyle.push(tab.props.innerStyleSelected);
+        innerStyle.push(tab.props.contentStyleSelected);
       }
       content = (
         <RkText

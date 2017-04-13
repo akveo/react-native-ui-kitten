@@ -1,7 +1,7 @@
 ---
-title: Card
+title: RkCard
 author: vl
-sort: 402
+sort: 803
 group: Components
 template: componentArticle.jade
 ---
@@ -12,168 +12,103 @@ template: componentArticle.jade
 It's usually being used with its props (described below) applied to standard react or custom components. 
 
 
-```html
+```javascript
 import {RkCard} from 'react-native-ui-kitten';
 
 //... 
 
 <RkCard>
-    <View rkCardHeader>
-        <View>
-            <Text rkCardTitle>Header</Text>
-            <Text rkCardSubTitle>Sub header</Text>
-        </View>
-    </View>
-    
-    <View rkCardContent>
-        <Image source={require('../img/sea.jpg')} rkCardImg/>
-    </View>
-    
-    <View rkCardContent>
-        <Text rkCardTitle>Card content</Text>
-        <Text rkCardText>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris feugiat vel quam ac scelerisque...
-        </Text>
-    </View>
-    
-    <View rkCardFooter rkType='bordered'>
-        <Text>Footer</Text>
-    </View>
+  <View rkCardHeader>
+    <Text> Header </Text>
+  </View>
+  
+  <Image rkCardImg source={require('../img/sea.jpg')}/>
+  
+  <View rkCardContent>
+    <Text>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Mauris feugiat vel quam ac scelerisque...
+    </Text>
+  </View>
+  
+  <View rkCardFooter>
+    <Text>Footer</Text>
+  </View>
 </RkCard>
 ```
 
-By default there are 12 *rkCard* props: 
+By default there are 6 *rkCard* props: 
 
-- *rkCardContainer*  
-- *rkCardContent*  
-- *rkCardHeader*  
-- *rkCardFooter*  
-- *rkCardTitle*  
-- *rkCardSubTitle*  
-- *rkCardRow*  
-- *rkCardRowCenter*  
-- *rkCardImg*  
-- *rkCardBigImg*  
-- *rkCardAvatar*  
-- *rkCardAvatarSmall* 
+- `rkCardContainer` : Used for styling root card container.
+- `rkCardHeader` : Used for styling header of card. 
+- `rkCardImg` : Used for styling image content in card.
+- `rkCardImgOverlay` : Used for styling component which will be displayed over the image.
+- `rkCardContent` : Used for styling content. (usually text)
+- `rkCardFooter` : Used for styling footer of card.
 
-Every component inside `RkCard` can use these props to define specific layout behavior to that component. 
-For example, `rkCardHeader` will apply following styles to appropriate `View`.
+Every component inside `RkCard` can use these props to define specific layout styles to that component. 
 
-```javascript
-
-{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
-    padding: 8,
-}
-
-``` 
-
-<a href="#" id="custom"></a>
 
 ### Create custom rkType
 
-You can customize 12 predefined *rkCard* props. As well it's possible to define your own one.
-
-For example let's create blue card type. First, we need to define new type in `RkConfig`:
+You can define new `rkType` and then reuse it. You can change style of each of *rkCard* props:
 
 ```javascript
+import {RkCard, RkTheme} from 'react-native-ui-kitten';
 
-import {RkConfig} from 'react-native-ui-kitten';
-
-RkConfig.setType('card', 'blue', {
-  container: {
-    borderRadius: 15,
-    borderWidth: 0,
-    backgroundColor: RkConfig.colors.white,
-  },
-  content: {
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderLeftColor: RkConfig.colors.lightGray,
-    borderRightColor: RkConfig.colors.lightGray
+RkTheme.setType('RkCard', 'story', {
+  img: {
+    height: 100,
+    opacity: 0.7
   },
   header: {
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    backgroundColor: RkConfig.colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 15
+    alignSelf: 'center'
   },
-  footer: {
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
-    backgroundColor: RkConfig.colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    justifyContent: 'center'
-  },
-  contentTitle:{
-    color: RkConfig.colors.darkGray
-  },
-  title: {
-    color: RkConfig.colors.white
-  },
-  subTitle: {
-    color: RkConfig.colors.white
-  },
-  footerText: {
-    fontSize: 20,
-    color: RkConfig.colors.white
+  content:{
+    alignSelf:'center'
   }
 });
 
-```
+//...
 
-After this we can use created type like this: 
+ <RkCard rkType='story'>
+  <Image rkCardImg source={require('../img/sea.jpg')}/>
 
-```html
-import {RkCard} from 'react-native-ui-kitten';
+  <View rkCardHeader>
+    <RkText rkType='header'>Once upon a time</RkText>
+  </View>
 
-//... 
+  <View rkCardContent>
+    <RkText style={{textAlign:'center'}}>
+      One morning, when Gregor Samsa woke from happy dreams, he found himself transformed in ...
+    </RkText>
+  </View>
 
-<RkCard rkType="blue">
-    <View rkCardHeader>
-        <Image resizeMode={'cover'} source={require('../img/sea.jpg')} rkCardAvatar/>
-        <Text rkCardTitle>HEADER</Text>
-        <Text rkCardSubTitle>sub header</Text>
-    </View>
-    
-    <Image resizeMode={'cover'} source={require('../img/sea.jpg')} rkCardImg/>
-    
-    <View rkCardContent>
-        <Text rkCardTitle rkCardContentTitle>Card content</Text>
-        <Text rkCardText>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris feugiat vel quam ac scelerisque...
-        </Text>
-    </View>
-    
-    <View rkCardFooter>
-        <Text rkCardFooterText>FOOTER HERE</Text>
-    </View>
+  <View rkCardFooter>
+    <RkButton rkType='small outline'>Learn More</RkButton>
+    <RkButton rkType='small'>Read later</RkButton>
+  </View>
 </RkCard>
 
 ```
+Each *rkProp* mapped to key. This key can be used for styling. 
 
+- `container` : Style key for `rkCardContainer`.
+- `header` : Style key for `rkCardHeader`.
+- `content` : Style key for `rkCardContent`.
+- `footer` : Style key for `rkCardFooter`.
+- `img` : Style key for `rkCardImg`.
+- `imgOverlay` : Style key for `rkCardImgOverlay`.
 
-The result will be this:
-
-![Image of dark buttons](/images/components/customCard.png)
 
 ### Props
 
 <div class="doc-prop">
     <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
-    <p>By default RkCard supports following types: material, bordered, noPadding</p>
+    <p>By default RkCard supports following types: shadowed, heroImage</p>
 </div>
 
 <div class="doc-prop">
     <p><a href="https://facebook.github.io/react-native/docs/view.html#props" target="_blank">View.props</a></p>
+    <p>Style for root container of <strong>RkCard</strong></p>
 </div>
-

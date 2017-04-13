@@ -6,47 +6,8 @@ import _ from 'lodash';
 class ThemeManager {
 
   constructor() {
-    this._currentTheme = this.getDefault();
+    this._currentTheme = this._getDefault();
     this._colors = _.cloneDeep(RkColors);
-    this._updatePredefinedStyles();
-  }
-
-  getDefault() {
-    return _.cloneDeep(DefaultTheme);
-  }
-
-  get current() {
-    return this._currentTheme;
-  }
-
-  get styles() {
-    return this._predefinedStyles;
-  }
-
-  get colors() {
-    return this._colors;
-  }
-
-  setTheme(theme, baseTheme) {
-    if (baseTheme === undefined) {
-      baseTheme = this.getDefault();
-    }
-
-    let newTheme = _.merge(baseTheme, theme);
-    _.merge(this._currentTheme, newTheme);
-    TypeManager.invalidateTypes();
-  }
-
-  setType(element, name, value) {
-    TypeManager.setType(element, name, value);
-  }
-
-  registerTypes(element, types) {
-    TypeManager.registerTypes(element, types);
-  }
-
-  setColor(name, value) {
-    this._colors[name] = value;
     this._updatePredefinedStyles();
   }
 
@@ -68,6 +29,45 @@ class ThemeManager {
       };
     }
     return styleObject;
+  }
+
+  _getDefault() {
+    return _.cloneDeep(DefaultTheme);
+  }
+
+  get current() {
+    return this._currentTheme;
+  }
+
+  get styles() {
+    return this._predefinedStyles;
+  }
+
+  get colors() {
+    return this._colors;
+  }
+
+  setTheme(theme, baseTheme) {
+    if (baseTheme === undefined) {
+      baseTheme = this._getDefault();
+    }
+
+    let newTheme = _.merge(baseTheme, theme);
+    _.merge(this._currentTheme, newTheme);
+    TypeManager.invalidateTypes();
+  }
+
+  setType(element, name, value) {
+    TypeManager.setType(element, name, value);
+  }
+
+  registerComponent(element, types) {
+    TypeManager.registerTypes(element, types);
+  }
+
+  setColor(name, value) {
+    this._colors[name] = value;
+    this._updatePredefinedStyles();
   }
 }
 

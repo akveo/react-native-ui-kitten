@@ -19,10 +19,9 @@ These styles can be reused then in the process of development. Configure them on
 
 ### Can I use this kitten with other react libraries?
 
-Yes, as said above it's just set of UI components. It doesn't force you to use any specific library for business logic implementation.
+Yes, it's just set of UI components. It doesn't force you to use any specific library for business logic implementation.
 
 ### Installation
-
 
 Simply add it as an npm dependency:
 ```
@@ -31,7 +30,7 @@ npm install --save react-native-ui-kitten
 
 And include the component you need into your application:
 ```javascript
-import {RkButton, RkConfig} from 'react-native-ui-kitten';
+import {RkButton} from 'react-native-ui-kitten';
 ```
 
 

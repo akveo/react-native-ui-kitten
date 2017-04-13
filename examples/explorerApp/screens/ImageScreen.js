@@ -71,6 +71,7 @@ export class ImageScreen extends Component {
               <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
                           renderHeader={this._renderHeader}
                           renderFooter={this._renderFooter}
+                          headerContentStyle={{backgroundColor:'red'}}
                           source={require('../img/post1.png')}/>
               <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
                           renderHeader={this._renderHeader}

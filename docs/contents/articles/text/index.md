@@ -1,16 +1,15 @@
 ---
-title: Text
+title: RkText
 author: vl
-sort: 102
+sort: 807
 group: Components
 template: componentArticle.jade
 ---
 
 `RkText` is a component used to render text blocks in your application. 
-Its main purpose is to define custom *rkType*s for different types of typography in your app. 
-For example, you can define *rkType* for headers, articles, names and etc.
 
-Sample usage:
+
+Example usage:
 
 ```html
 import {RkText} from 'react-native-ui-kitten';
@@ -18,67 +17,81 @@ import {RkText} from 'react-native-ui-kitten';
 //... 
 
 <RkText>Text</RkText>
+
+<RkText rkType='header'>Title</RkText>
 ```
 
 <a href="#" id="custom"></a>
 
 ### Create custom rkType
 
-`RkText` doesn't have any segments.
-
-Sample style definition in `RkConfig`:
+To define new `rkType` you can use predefined properties which will passed to according element inside component:
 
 ```javascript
-import {RkConfig} from 'react-native-ui-kitten'; 
 
-RkConfig.setType('text', 'title', {
-  fontSize: 20
-});
+import {RkTheme} from 'react-native-ui-kitten';
 
-RkConfig.setType('text', 'gray', {
-  color: RkConfig.colors.darkGray
-});
-
-RkConfig.setType('text', 'borg', {
-  fontFamily: 'Borg'
-});
-
-RkConfig.setType('text', 'curely', {
-  fontFamily: 'Curely'
+RkTheme.setType('RkText','hero',{
+  fontSize: 40
 });
 
 ```
 
-Use created *rkType* like this:
+Now you can use *hero* type in your app:
 
-```html
-import {RkChoice} from 'react-native-ui-kitten';
+```javascript
+<RkText rkType='hero'>Header</RkText>
+```
 
-//... 
+#### Available properties
 
-<RkText>Default text</RkText>
+- `color` : Color of text.
+- `backgroundColor` : Background color of `RkText`.
+- `fontSize` : Font size of text.
 
-<RkText rkType='gray'>Gray text</RkText>
+### Advanced Styling
 
-<RkText rkType='title'>Title text</RkText>
+It's also possible to implement more detailed styling. `RkText` consists from base react component.
+You can easily set styles for it.
 
-<RkText rkType='title gray'>Title & Gray text</RkText>
+For example you can change font style:
 
-<RkText rkType='title borg'>Borg font text</RkText>
+```javascript
+import {RkTheme} from 'react-native-ui-kitten';
 
-<RkText rkType='title curely'>Curely font text</RkText>
-
+RkTheme.setType('RkText','italic',{
+  text:{
+    fontStyle:'italic'
+  }
+});
 
 ```
+
+#### Available components:
+
+- `text` : `Text` - component used to show text.
+
+
+#### Inline styling
+
+It's possible to set styles inline. Use props `style` for `text` component.
 
 
 ### Props
 
-
 <div class="doc-prop">
     <p><strong><a href="../customization#rkType">rkType</a></strong> string</p>
+    <p>By default RkText supports following types: primary, info, warning, danger, success, xxlarge, xlarge,
+        large, small, medium, header, subtitle</p>
 </div>
 
 <div class="doc-prop">
     <p><a href="https://facebook.github.io/react-native/docs/text.html#props" target="_blank">Text.props</a></p>
 </div>
+
+
+### Tips
+
+You can set default style for all instances of `RkText` using `RkTheme`. And then use `RkText` in application
+without explicit setting `rkType` to each control. This will allow change settings for whole text just in one place.
+About default styles for rk-components you can read here...

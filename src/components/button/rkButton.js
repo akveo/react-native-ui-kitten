@@ -19,32 +19,33 @@ export class RkButton extends RkComponent {
       borderColor: 'borderColor',
       borderRadius: 'borderRadius',
       borderWidth: 'borderWidth',
-      paddingVertical: 'paddingVertical',
-      paddingHorizontal: 'paddingHorizontal'
+      width: 'width',
+      height: 'height'
     },
-    inner: {
+    content: {
       color: 'color',
       fontSize: 'fontSize'
     }
   };
 
   render() {
-    let {container, inner} = super.defineStyles();
+    let {container, content} = super.defineStyles();
     let touchableProps = {
       onPress: this.props.onPress,
       onPressIn: this.props.onPressIn,
       onPressOut: this.props.onPressOut,
       onLongPress: this.props.onLongPress
     };
+
     return (
       <TouchableOpacity style={[container, this.props.style]} {...touchableProps}>
-        {this.props.children && this._renderChildren(inner)}
+        {this.props.children && this._renderChildren(content)}
       </TouchableOpacity>
     );
   }
 
   _renderChildren(style) {
-    let displayText = (text) => (<RkText style={[style, this.props.innerStyle]}>{text}</RkText>);
+    let displayText = (text) => (<RkText style={[style, this.props.contentStyle]}>{text}</RkText>);
     if (typeof this.props.children === 'string') {
       return displayText(this.props.children)
     }
@@ -55,7 +56,7 @@ export class RkButton extends RkComponent {
       } else {
         let {style:babyStyle, ...babyProps} = baby.props;
         return React.cloneElement(baby, {
-          style: [style, this.props.innerStyle, babyStyle],
+          style: [style, this.props.contentStyle, babyStyle],
           ...babyProps
         });
       }

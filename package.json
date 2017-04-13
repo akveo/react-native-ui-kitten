@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "wintersmith build -C docs",
+    "docs": "wintersmith build -C docs ",
     "gh-pages": "wintersmith build -C docs && gh-pages -d docs/build"
   },
   "license": "MIT",

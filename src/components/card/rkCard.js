@@ -4,26 +4,27 @@ import {RkComponent} from "../rkComponent";
 
 export class RkCard extends RkComponent {
 
+  static attrName = 'rkCard';
+
   componentName = 'RkCard';
   typeMapping = {
     container: {},
-    header:{},
-    content:{},
-    footer:{},
-    img:{},
-    imgOverlay:{}
+    header: {},
+    content: {},
+    footer: {},
+    img: {},
+    imgOverlay: {}
   };
 
   constructor(props) {
     super(props);
   }
 
-  static attrName = 'rkCard';
-
   render() {
     let {container, ...definedStyles} = this.defineStyles();
+    let {style, ...viewProps} = this.props;
     return this._process(
-      <View rkCardContainer style={container} {...this.props}>
+      <View rkCardContainer style={[container, style]} {...viewProps}>
         {this.props.children}
       </View>, definedStyles
     );

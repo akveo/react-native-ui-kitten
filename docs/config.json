@@ -1,7 +1,7 @@
 {
-  "baseUrl": "/react-native-ui-kitten/",
+  "baseUrl": "/docs/build",
   "locals": {
-    "url": "http://localhost:8080",
+    "url": "http://localhost:8000",
     "name": "react native ui kit",
     "owner": "Akveo",
     "description": ""

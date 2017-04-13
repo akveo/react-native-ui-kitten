@@ -29,22 +29,22 @@ export class AvatarScreen extends Component {
         </View>
 
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
-          <RkText rkType='header'>Avatar with caption</RkText>
+          <RkText rkType='header'>Avatar with description</RkText>
           <View style={UtilStyles.columnContainer}>
             <Avatar source={require('../img/avatars/image1.png')}
-                    name='Nataly Rover' caption='Secondary text'/>
+                    name='Nataly Rover' description='Secondary text'/>
             <Avatar source={require('../img/avatars/image5.png')}
-                    name='Alex Gilbert' caption='Secondary text'/>
+                    name='Alex Gilbert' description='Secondary text'/>
           </View>
         </View>
 
         <View style={[UtilStyles.section]}>
-          <RkText rkType='header'>Avatar with caption</RkText>
+          <RkText rkType='header'>Round avatar with description</RkText>
           <View style={UtilStyles.columnContainer}>
             <Avatar rkType='round' source={require('../img/avatars/image4.png')}
-                    name='Helen Milpon' caption='Secondary text'/>
+                    name='Helen Milpon' description='Secondary text'/>
             <Avatar rkType='round' source={require('../img/avatars/image2.png')}
-                    name='Laura Meitner' caption='Secondary text'/>
+                    name='Laura Meitner' description='Secondary text'/>
           </View>
         </View>
       </ScrollView>
