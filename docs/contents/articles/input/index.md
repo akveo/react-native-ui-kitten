@@ -6,18 +6,19 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="https://thumbs.gfycat.com/ShockingComplexCowrie-size_restricted.gif"></div>
+<div class="component" image="../../images/gif/input.gif"></div>
+
 
 `RkTextInput` is a component to be used as a basic text input.
 
 Usage example:
 
-```javascript
+```html
 import {RkTextInput} from 'react-native-ui-kitten';
 
 //... 
 
- <RkTextInput placeholder='Login'/>
+<RkTextInput placeholder='Login'/>
 
 ```
 
@@ -37,6 +38,10 @@ import {RkTextInput} from 'react-native-ui-kitten';
 <RkTextInput label='Search'/>
 
 ``` 
+
+Here is the result:
+
+![](../../images/components/input/base.png)
 
 <a href="#" id="custom"></a>
 
@@ -66,7 +71,9 @@ import {RkTextInput} from 'react-native-ui-kitten';
 <RkTextInput label='Login' rkType='success'/>
 
 ```
+Code above should render this:
 
+![](../../images/components/input/green.png)
 
 #### Available properties:
 
@@ -100,7 +107,7 @@ RkTheme.setType('RkTextInput', 'frame', {
     backgroundColor: 'white',
     marginLeft: 0,
     marginHorizontal: 0,
-    borderRadius: 10
+    borderRadius: 5
   },
   color: 'gray',
   backgroundColor: 'gray',
@@ -116,6 +123,10 @@ RkTheme.setType('RkTextInput', 'frame', {
 
 ```
 
+Here is result of code above:
+
+![](../../images/components/input/frame.png)
+
 
 #### Available components
 
@@ -124,26 +135,29 @@ RkTheme.setType('RkTextInput', 'frame', {
 - `label` : `Text` or other View tree that you had specified in `label` props.
 
 
-#### Inline styling
+### Inline styling
 
 It's possible to set styles inline. Use props `style` for `container` component,
  `labelStyle` for `label` component and `inputStyle` for `input`.
 
 Here is example of inline style usage:
-```javascript
+```html
 import {RkTextInput} from 'react-native-ui-kitten';
 
 //...
 
 <RkTextInput
-  abelStyle={{color: 'black'}}
+  labelStyle={{color: 'gray'}}
   label={'Name'}
   inputStyle={{
-    backgroundColor: 'white',
-    borderRadius: 10,
+    backgroundColor: 'lightgray',
     color: 'black',
   }}/>
 ```
+
+Code above should produce this:
+
+![](../../images/components/input/inline.png)
 
 ### Props
 

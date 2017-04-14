@@ -55,10 +55,6 @@ export class ComponentsScreen extends Component {
       {
         title: "Custom Control View",
         route: 'Avatar'
-      },
-      {
-        title: "Custom Control View",
-        route: 'Test'
       }
     ];
     this.state = {
@@ -79,11 +75,6 @@ export class ComponentsScreen extends Component {
   selectComponent(componentDefinition) {
     const {navigate} = this.props.navigation;
     navigate(componentDefinition.route);
-    // this.props.navigator.push({
-    //   title: componentDefinition.title,
-    //   component: componentDefinition.screenView,
-    // });
-
   }
 
   renderSeparator(sectionID,

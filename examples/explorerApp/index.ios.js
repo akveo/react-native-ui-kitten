@@ -31,8 +31,7 @@ const ExplorerApp = StackNavigator({
   Avatar: {screen: Screens.AvatarScreen},
   Input: {screen: Screens.InputScreen},
   Image: {screen: Screens.ImageScreen},
-  Settings: {screen: Screens.SettingsScreen},
-  Test: {screen: Screens.TestScreen}
+  Settings: {screen: Screens.SettingsScreen}
 });
 
 AppRegistry.registerComponent('ExplorerApp', () => ExplorerApp);

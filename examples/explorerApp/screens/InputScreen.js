@@ -40,7 +40,8 @@ export class InputScreen extends Component {
           <RkText rkType='header'>Default input</RkText>
           <View style={UtilStyles.rowContainer}>
             <View style={{flex: 1}}>
-              <RkTextInput placeholder='Login' clearButtonMode='always'/>
+              <RkTextInput autoCorrect={false}
+                           autoCapitalize={'none'} placeholder='Login' clearButtonMode='always'/>
               <RkTextInput secureTextEntry={true} placeholder='Password' clearButtonMode='always'/>
             </View>
           </View>

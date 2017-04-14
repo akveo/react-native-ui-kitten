@@ -6,7 +6,8 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="https://thumbs.gfycat.com/ScarceGleefulBluetickcoonhound-size_restricted.gif"></div>
+<div class="component" image="../../images/gif/tab.gif"></div>
+
 
 `RkTabView` is a component to display tabs in your application.
 
@@ -18,15 +19,15 @@ import {RkTabView} from 'react-native-ui-kitten';
 //...
 
 <RkTabView>
-    <RkTabView.Tab title={'Tab 1'}>
-        <Text>Tab 1 Content</Text>
-    </RkTabView.Tab>
-    <RkTabView.Tab title={'Tab 2'}>
-        <Text>Tab 2 Content</Text>
-    </RkTabView.Tab>
-    <RkTabView.Tab title={'Tab 3'}>
-        <Text>Tab 3 Content</Text>
-    </RkTabView.Tab>
+  <RkTabView.Tab title={'Tab 1'}>
+    <Text>Tab 1 Content</Text>
+  </RkTabView.Tab>
+  <RkTabView.Tab title={'Tab 2'}>
+    <Text>Tab 2 Content</Text>
+  </RkTabView.Tab>
+  <RkTabView.Tab title={'Tab 3'}>
+    <Text>Tab 3 Content</Text>
+  </RkTabView.Tab>
 </RkTabView>
 ```
 
@@ -61,6 +62,8 @@ let renderTab = (isSelected, title, icon) => {
     </View>);
 };
 
+//...
+
 <RkTabView>
   <RkTabView.Tab title={(selected) => {
     return renderTab(selected, 'Bus', 'ios-bus');
@@ -81,6 +84,9 @@ let renderTab = (isSelected, title, icon) => {
   </RkTabView.Tab>
 </RkTabView>
 ```
+
+![](../../images/components/tab/transport.png)
+
 
 ### Create custom rkType
 
@@ -126,6 +132,8 @@ RkTheme.setType('RkTabView', 'darkSelected', {
 
 ```
 
+![](../../images/components/tab/dark.png)
+
 
 #### Available properties:
 
@@ -162,12 +170,22 @@ RkTheme.setType('RkTabView', 'rounded', {
   }
 });
 
-RkTheme.setType('RkTabView', 'roundedelected', {
+RkTheme.setType('RkTabView', 'roundedSelected', {
   backgroundColor: '#4a636d',
   borderColor: '#4a636d'
 });
 
+//...
+
+<RkTabView rkType='rounded'>
+  <RkTabView.Tab title={'Tab 1'}/>
+  <RkTabView.Tab title={'Tab 2'}/>
+  <RkTabView.Tab title={'Tab 3'}/>
+</RkTabView>
+
 ```
+
+![](../../images/components/tab/rounded.png)
 
 #### Available components
 

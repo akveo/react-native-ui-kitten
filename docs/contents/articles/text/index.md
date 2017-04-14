@@ -3,7 +3,7 @@ title: RkText
 author: vl
 sort: 807
 group: Components
-template: componentArticle.jade
+template: article.jade
 ---
 
 `RkText` is a component used to render text blocks in your application. 
@@ -39,9 +39,13 @@ RkTheme.setType('RkText','hero',{
 
 Now you can use *hero* type in your app:
 
-```javascript
+```html
 <RkText rkType='hero'>Header</RkText>
 ```
+
+This should like this:
+
+![](../../images/components/text/hero.png)
 
 #### Available properties
 
@@ -94,4 +98,4 @@ It's possible to set styles inline. Use props `style` for `text` component.
 
 You can set default style for all instances of `RkText` using `RkTheme`. And then use `RkText` in application
 without explicit setting `rkType` to each control. This will allow change settings for whole text just in one place.
-About default styles for rk-components you can read here...
+About default styles for rk-components you can read [here](../guide#baseStyle).

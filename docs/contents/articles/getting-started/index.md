@@ -24,7 +24,8 @@ Yes, it's just set of UI components. It doesn't force you to use any specific li
 ### Installation
 
 Simply add it as an npm dependency:
-```
+
+```npm
 npm install --save react-native-ui-kitten
 ```
 

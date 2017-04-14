@@ -11,13 +11,13 @@ custom rk-components. This guide discover how to create your own rk-component fr
 
 Let's create avatar component which will have image of user, text with user name and optional description of user.
 
-### RkComponent
+### RkComponent 
 
 All *rk-components* are inherited from `RkComponent`. This class contains methods responsible for customization.
 Here is code for our Avatar component:
 
-```javascript
-avatar.js
+```html
+// avatar.js
 
 export class Avatar extends RkComponent {
   
@@ -27,7 +27,9 @@ export class Avatar extends RkComponent {
     
  render() {
 
-    let description = this.props.description ? (<RkText>{this.props.description}</RkText>) : <View/>;
+    let description = this.props.description ? 
+      (<RkText>{this.props.description}</RkText>) : 
+      (<View/>);
 
     return (
       <View>
@@ -43,6 +45,10 @@ export class Avatar extends RkComponent {
 
 ```
 
+Avatar component now looks like this:
+
+![](../../images/components/avatar/avatar1.png)
+
 At this point we create skeleton of component. Now we need to add styles in order to make component more pretty.
 All *rk-components* has default style for each internal component. Here we have 4 internal components: `container`, `image`,
 `username` and `description`. (We won't include View that wraps texts because it just help to group them).
@@ -54,8 +60,8 @@ Here we need to use method `registerComponent` from `RkTheme`. This method accep
 object with styles. Let's start from first parameter. Name should be set in `componentName` property of your component.
 Let's stand with `Avatar` name:
 
-```javascript
-avatar.js
+```html
+// avatar.js
 
 export class Avatar extends RkComponent {
   componentName = 'Avatar';
@@ -67,11 +73,16 @@ export class Avatar extends RkComponent {
   
 }
 ```
+Now we have to define base style for component.
 
-Now we have to define base style. Base style for *rk-component* should named `_base`.
+### Define base style 
+Each *rk-component* has base style. This style applied by default for all instances of component. Base style should be named `_base`.
+You can change base style using `RkTheme.setType` method.
+
+Here we define base style for avatar component:
 
 ```javascript
-avatarTypes.js
+// avatarTypes.js
 
 export const AvatarTypes = (theme) => {
   return({
@@ -104,18 +115,20 @@ export const AvatarTypes = (theme) => {
 Here we export function which accept theme object. Using `theme` we can set values based on current theme. If theme will change - 
 those values will be also changed.
 
+### Register rk-component
+
 Now we have all parameters for `registerComponent` method. Let's call it. Best place to do this - some kind of bootstrap method 
 which will be called on app startup.
 
-```javascript
-index.ios.js
+```html
+//index.ios.js
 
 import {RkTheme} from 'react-native-ui-kitten';
 import {AvatarTypes} from 'avatarTypes.js';
 
 //....
 
-  RkTheme.registerComponent('Avatar', AvatarTypes);
+RkTheme.registerComponent('Avatar', AvatarTypes);
 
 ```
 
@@ -126,8 +139,8 @@ for your component. This will be described a bit later. Now you only need to cre
 
 This is just an object where properties are names of inner components:
 
-```javascript
-avatar.js
+```html
+//avatar.js
 
 export class Avatar extends RkComponent {
   componentName = 'Avatar';
@@ -148,10 +161,12 @@ export class Avatar extends RkComponent {
 
 Last step is to set computed styles in according components. Here we should use method `defineStyles` of `RkComponent`:
 
-```javascript
+```html
+// avatar.js
+
 export class Avatar extends RkComponent {
 
-  componentName = "Avatar";
+  componentName = 'Avatar';
   typeMapping = {
     container: {},
     image: {},
@@ -183,7 +198,7 @@ export class Avatar extends RkComponent {
 
 After this last step we have nice looking, theme-dependent components. We can use our component in application:
 
-```javascript
+```html
 import {Avatar} from 'avatar.js'
 
 //...
@@ -194,12 +209,16 @@ import {Avatar} from 'avatar.js'
 
 ```
 
- Now if we change for example color for hint text in theme -
+Component now looks much better:
+
+![](../../images/components/avatar/avatar2.png)
+
+Now if we change for example color for hint text in theme -
 avatar's description color will be also changed.
 
 For example:
 ```javascript
-index.ios.js
+// index.ios.js
 
 import {RkTheme} from 'react-native-ui-kitten';
 
@@ -212,6 +231,10 @@ RkTheme.setTheme({
 });
 ```
 
+Now avatar should look like this:
+
+![](../../images/components/avatar/avatar3.png)
+
 ### Adding rkTypes to component.
 
 As long as `Avatar` is *rk-component* we can define rkTypes for it. As base style we may won't to create types that also will depend on 
@@ -219,7 +242,7 @@ current theme. In order to add such types we need to make changes into `avatarTy
 Let's add couple new types for `Avatar`:
 
 ```javascript
-avatarTypes.js
+// avatarTypes.js
 
 export const AvatarTypes = (theme) => {
   return({
@@ -227,7 +250,10 @@ export const AvatarTypes = (theme) => {
 //...
     round: {
       image: {
-        borderRadius: 20
+        borderRadius: 20,
+        width: 36,
+        height: 36,
+        margin: 2
       }
     },
     info: {
@@ -247,7 +273,7 @@ export const AvatarTypes = (theme) => {
 
 Now we have two new `rkType` which we can use in our app:
 
-```javascript
+```html
 import {Avatar} from 'avatar.js'
 
 //...
@@ -264,6 +290,10 @@ import {Avatar} from 'avatar.js'
 
 ```
 
+Here is result of code above:
+
+![](../../images/components/avatar/avatar4.png)
+
 ### User-friendly properties
 
 For advanced styling of `Avatar` component we need to know all customizable elements. But more often we need to change only
@@ -275,7 +305,7 @@ There are only few things to change in our component.
 Currently in our component we have variable `typeMapping` which has next structure:
 
 ```javascript
-avatar.js
+// avatar.js
 
 //...
 
@@ -297,7 +327,7 @@ Let's add `backgroundColor` for `Avatar` component. Background color should appl
 apply to `container` component of control. And should mapped to `backgroundColor` property of it:
 
 ```javascript
-avatar.js
+// avatar.js
 
 //...
 
@@ -318,7 +348,7 @@ Let's add other two properties. `color` property should apply for `username` com
 `descriptionColor` property should apply for `description` component and mapped to `color` property:
 
 ```javascript
-avatar.js
+// avatar.js
 
 //...
 
@@ -343,7 +373,7 @@ And that's all! Now you can use this property to define `rkType`.
 Let's rewrite defined above 'info' type using new properties.
 
 ```javascript
-avatarTypes.js
+// avatarTypes.js
 
 export const AvatarTypes = (theme) => {
   return({

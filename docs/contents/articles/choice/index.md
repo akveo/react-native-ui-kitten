@@ -6,7 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="https://thumbs.gfycat.com/FantasticRawGermanwirehairedpointer-size_restricted.gif"></div>
+<div class="component" image="../../images/gif/choice.gif"></div>
 
 `RkChoice` component is an analog of html checkbox and radio buttons.
 
@@ -35,14 +35,18 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 <RkChoiceGroup>
   <TouchableOpacity choiceTrigger>
-    <View>
+    <View style={{flexDirection:'row', alignItems:'center'}}>
+      <RkChoice rkType='posNeg'/>
       <Text>Label</Text>
-        <RkChoice rkType='posNeg'/>
     </View>
   </TouchableOpacity>
 </RkChoiceGroup>
 
 ```
+
+Code above should produce this:
+
+![](../../images/components/choice/label.png)
 
 ### Radio example
 
@@ -55,21 +59,21 @@ import {RkChoice, RkChoiceGroup} from 'react-native-ui-kitten';
 
 <RkChoiceGroup radio>
   <TouchableOpacity choiceTrigger>
-    <View>
+    <View style={{flexDirection:'row', alignItems:'center'}}>
+      <RkChoice rkType='radio'/>
       <Text>Option 1</Text>
-      <RkChoice rkType='radio'/>
     </View>
   </TouchableOpacity>
   <TouchableOpacity choiceTrigger>
-    <View>
+    <View style={{flexDirection:'row', alignItems:'center'}}>
+      <RkChoice rkType='radio'/>
       <Text>Option 2</Text>
-      <RkChoice rkType='radio'/>
-    </View>
+     </View>
   </TouchableOpacity>
   <TouchableOpacity choiceTrigger>
-    <View>
-      <Text>Option 3</Text>
+    <View style={{flexDirection:'row', alignItems:'center'}}> 
       <RkChoice rkType='radio'/>
+      <Text>Option 3</Text>
     </View>
   </TouchableOpacity>
 </RkChoiceGroup>
@@ -153,11 +157,19 @@ RkTheme.setType('RkChoice', 'mic', {
   backgroundColor: 'darkred',
   borderWidth: 0,
   borderRadius: 20,
-  content: (<View><Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic-off'}/></View>)
+  content: (
+    <View>
+      <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic-off'}/>
+    </View>
+  )
 });
 
 RkTheme.setType('RkChoice', 'micSelected', {
-  content: (<View><Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/></View>)
+  content: (
+    <View>
+      <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/>
+    </View>
+  )
 });
 
 //...
@@ -182,7 +194,11 @@ RkTheme.setType('RkChoice', 'micDisabled', {
 });
 
 RkTheme.setType('RkChoice', 'micSelectedDisabled', {
-  content: (<View><Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/></View>),
+  content: (
+    <View>
+      <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/>
+    </View>
+  ),
   inner: {
     opacity: 0.7
   }
@@ -201,12 +217,14 @@ RkTheme.setType('RkChoice', 'micSelectedDisabled', {
 
 It's possible to set styles inline. Use props `style` for `container` component and `contentStyle` for `content` component.
 
-```javascript
+```html
 import {RkChoice} from 'react-native-ui-kitten';
 
 
 //...
-<RkChoice style={{backgroundColor: 'green'}} contentStyle={{width: 50, height:50}} rkType='mic'/>
+<RkChoice style={{backgroundColor: 'green'}} 
+          contentStyle={{width: 50, height:50}} 
+          rkType='mic'/>
 
 ```
 

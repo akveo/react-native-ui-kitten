@@ -6,13 +6,13 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="https://thumbs.gfycat.com/OptimalSmoothAsianpiedstarling-size_restricted.gif"></div>
+<div class="component" image="../../images/gif/card.gif"></div>
 
 `RkCard` component used to render card view in your application. 
 It's usually being used with its props (described below) applied to standard react or custom components. 
 
 
-```javascript
+```html
 import {RkCard} from 'react-native-ui-kitten';
 
 //... 
@@ -36,6 +36,11 @@ import {RkCard} from 'react-native-ui-kitten';
   </View>
 </RkCard>
 ```
+
+Here is output of code above:
+
+![](../../images/components/card/card.png)
+
 
 By default there are 6 *rkCard* props: 
 
@@ -91,6 +96,11 @@ RkTheme.setType('RkCard', 'story', {
 </RkCard>
 
 ```
+
+Here is result:
+
+![](../../images/components/card/story.png)
+
 Each *rkProp* mapped to key. This key can be used for styling. 
 
 - `container` : Style key for `rkCardContainer`.

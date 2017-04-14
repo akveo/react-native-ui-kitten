@@ -23,19 +23,16 @@ export const AvatarTypes = (theme) => {
     },
     round: {
       image: {
-        borderRadius: 20
+        borderRadius: 20,
+        width:36,
+        height:36,
+        margin:2
       }
     },
     info: {
-      container: {
-        backgroundColor: theme.colors.back.info,
-      },
-      username: {
-        color: theme.colors.text.additional
-      },
-      description: {
-        color: theme.colors.text.additional
-      }
+      backgroundColor: theme.colors.back.info,
+      color: theme.colors.text.additional,
+      descriptionColor: theme.colors.text.additional
     }
   })
 };

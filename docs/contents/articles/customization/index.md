@@ -36,7 +36,7 @@ draws rounded border for button) and *small* (one that reduces button size).
 You're able to create your custom *rkType*s for specific components.
 Here is example with creating *rkType* for rkButton:
 
-```javascript
+```html
 import {RkButton, RkTheme} from 'react-native-ui-kitten';
 
 let accent = '#ed1c4d';
@@ -55,17 +55,18 @@ RkTheme.setType('RkButton', 'accent', {
 Each rk-component that supports this feature has appropriate paragraph that describes details about customization:
 
 - *[RkButton](../button#custom)*  
+- *[RKText](../text#custom)*  
+- *[RkTextInput](../input#custom)*  
 - *[RkChoice](../choice#custom)*  
+- *[RkModalImg](../image#custom)*  
 - *[RkTabView](../tab#custom)*  
 - *[RkCard](../card#custom)*  
-- *[RkTextInput](../input#custom)*  
-- *[RKText](../text#custom)*  
-- *[RkSeparator](../separator#custom)*  
+
 
 ### Themes
 
 All base *rkTypes* depends on theme of application. *Theme* contains base values (colors, fontSizes etc) for all Rk-components.
-You can easily override values in theme or even define your own theme using *[RkTheme](../theme)* [GUID](../guide/index.md)
+You can easily override values in theme or even define your own theme using *[RkTheme](../theme)*.
 
 ### Platform-dependent styles
 
@@ -84,7 +85,7 @@ RkTheme.setType('RkButton','different',{
   }
 });
 
-//... or using control components:
+//... or using internal control components:
 
 RkTheme.setType('RkButton','different',{
   container: {

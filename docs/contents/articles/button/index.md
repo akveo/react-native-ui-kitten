@@ -1,18 +1,18 @@
 ---
 title: RkButton
 author: vl
-sort: 802
+sort: 808
 group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="https://thumbs.gfycat.com/UnripeSpryBighornedsheep-size_restricted.gif"></div>
+<div class="component" image="../../images/gif/button.gif"></div>
 
 `RkButton` is a basic button component.
 
 Usage example:
 
-```javascript
+```html
 import {RkButton} from 'react-native-ui-kitten';
 
 //... 
@@ -24,7 +24,7 @@ import {RkButton} from 'react-native-ui-kitten';
 
 You can put text or/and icon inside of `RkButton`. Example of button with icon usage:
 
-```javascript
+```html
 import {RkButton} from 'react-native-ui-kitten';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -35,8 +35,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 </RkButton>
 ```
 
+Here is result:
 
-### Create custom rkType [#](#custom)
+![](../../images/components/button/iconButton.png)
+
+### Create custom rkType
 
 To define new `rkType` you can use predefined properties which will passed to according element inside components:
 
@@ -58,7 +61,7 @@ RkTheme.setType('RkButton', 'icon', {
 ```
 Now you can use *dark* and *icon* types in you app:
 
-```javascript
+```html
 import {RkButton} from 'react-native-ui-kitten';
 
 //... 
@@ -73,7 +76,7 @@ import {RkButton} from 'react-native-ui-kitten';
 
 This should look like this:
 
-![Image of dark buttons](/images/components/darkButtons.png)
+![](../../images/components/button/twoButtons.png)
 
 #### Available properties
 
@@ -125,6 +128,9 @@ import {RkButton} from 'react-native-ui-kitten';
   contentStyle={{color: 'white'}}> Hello </RkButton>
 
 ```
+Here is the result:
+
+![](../../images/components/button/redButton.png)
 
 ### Props
 

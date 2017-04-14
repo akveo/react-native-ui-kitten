@@ -6,7 +6,7 @@ group: Components
 template: componentArticle.jade
 ---
 
-<div class="component" image="https://thumbs.gfycat.com/IncredibleAnotherDorado-size_restricted.gif"></div>
+<div class="component" image="../../images/gif/image.gif"></div>
 
 
 `RkModalImg` is extension of basic Image that also opens it in full screen on tap:
@@ -30,11 +30,6 @@ import {RkModalImg, RkButton} from 'react-native-ui-kitten';
 
 //... 
 
-<RkModalImg source={require('../img/river.jpeg')}
-            renderHeader={this._renderHeader}/>
-
-//... 
-
 _renderHeader(options){
   return (
     <View>
@@ -43,9 +38,12 @@ _renderHeader(options){
    );
 }
 
-```
+//... 
 
-<div class="component" image="https://thumbs.gfycat.com/SpeedyCheeryConure-size_restricted.gif"></div>
+<RkModalImg source={require('../img/river.jpeg')}
+            renderHeader={this._renderHeader}/>
+
+```
 
 ### Gallery
 
@@ -85,8 +83,12 @@ RkTheme.setType('RkModalImg','small',{
 
 //...
 
-<RkModalImg rkType='small' source={require('../img/river.jpeg')}/>
+<RkModalImg rkType='small' source={require('../img/cat.jpeg')}/>
 ```
+
+Code above will render this:
+
+![](../../images/components/image/custom.png)
 
 #### Available components
 

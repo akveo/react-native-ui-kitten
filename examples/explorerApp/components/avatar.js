@@ -9,18 +9,12 @@ import {RkComponent, RkText} from 'react-native-ui-kitten'
 
 export class Avatar extends RkComponent {
 
-  componentName = "Avatar";
+  componentName = 'Avatar';
   typeMapping = {
-    container: {
-      backgroundColor: 'backgroundColor'
-    },
+    container: {},
     image: {},
-    username: {
-      color: 'color'
-    },
-    description: {
-      descriptionColor: 'color'
-    }
+    username: {},
+    description: {}
   };
 
   constructor(props) {
@@ -42,20 +36,4 @@ export class Avatar extends RkComponent {
       </View>
     )
   }
-
-  // render() {
-  //
-  //   let {container, image, label, caption:captionStyle} = this.defineStyles();
-  //   let caption = this.props.caption ? (<RkText style={captionStyle}>{this.props.caption}</RkText>) : <View/>;
-  //
-  //   return (
-  //     <View style={[container, this.props.style]}>
-  //       <Image source={this.props.source} style={image}/>
-  //       <View>
-  //         <RkText rkType='bold' style={label}>{this.props.name}</RkText>
-  //         {caption}
-  //       </View>
-  //     </View>
-  //   )
-  // }
 }
