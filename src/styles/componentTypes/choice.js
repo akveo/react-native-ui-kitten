@@ -24,7 +24,7 @@ export const RkChoiceTypes = (theme) => {
       },
     },
     selected: {
-      backgroundColor: RkTheme.current.colors.back.button,
+      backgroundColor: RkTheme.current.colors.back.primary,
       borderColor: RkTheme.current.colors.border.base,
       content: (<View><Image source={require('../../assets/img/choice/whiteCheckMark.png')}/></View>)
     },
@@ -45,7 +45,7 @@ export const RkChoiceTypes = (theme) => {
         height: 16,
         margin: 5,
         borderRadius: 10,
-        backgroundColor: RkTheme.current.colors.back.button,
+        backgroundColor: RkTheme.current.colors.back.primary,
       }
     },
     radioDisabled: {

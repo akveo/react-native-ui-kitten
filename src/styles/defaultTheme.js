@@ -42,7 +42,6 @@ export const DefaultTheme = {
     },
     back: {
       base: Values.background,
-      button: Values.primary,
       primary: Values.primary,
       primaryActive: Values.primaryActive,
       success: Values.success,

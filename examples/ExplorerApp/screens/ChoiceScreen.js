@@ -71,6 +71,7 @@ export class ChoiceScreen extends Component {
                 <View
                   style={{
                     flexDirection: 'row',
+                    alignItems: 'center'
                   }}>
                   <RkText rkType='bold'>Label</RkText>
                   <RkChoice style={{marginLeft: 17}} rkType='posNeg'/>

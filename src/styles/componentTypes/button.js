@@ -20,7 +20,7 @@ export const RkButtonTypes = (theme) => {
       }
     },
     basic: {
-      backgroundColor: theme.colors.back.button,
+      backgroundColor: theme.colors.back.primary,
       color: theme.colors.text.additional
     },
     primary: {
