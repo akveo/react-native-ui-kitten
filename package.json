@@ -1,9 +1,9 @@
 {
   "name": "react-native-ui-kitten",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React Native components",
   "author": "akveo",
-  "homepage": "http://akveo.github.io/react-native-ui-kit/",
+  "homepage": "https://akveo.github.io/react-native-ui-kitten/",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
