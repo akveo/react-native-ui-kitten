@@ -1,5 +1,5 @@
 # react-native-ui-kitten
-A [react-native](https://facebook.github.io/react-native/) framework that helps you to bootstrap your mobile app development. The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way. This should allow you to focus on business logic, rather than visual appearance.
+A [react-native](https://facebook.github.io/react-native/) framework helps you to bootstrap your mobile app development. The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way. This should allow you to focus on business side, rather than visual appearance.
 
 This framework was made with :heart: by [Akveo team](http://akveo.com/). 
 Follow us on [Facebook](https://www.facebook.com/akveo) or on [Twitter](https://twitter.com/akveo_inc) to get latest news about our new releases and other products!
