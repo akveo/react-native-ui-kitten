@@ -1,5 +1,5 @@
 # react-native-ui-kitten
-A [react-native](https://facebook.github.io/react-native/) framework helps you to bootstrap your mobile app development. The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way. This should allow you to focus on business side, rather than visual appearance.
+A [react-native](https://facebook.github.io/react-native/) framework helps you to bootstrap your mobile app development. The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way. This should allow you to focus on business logic, rather than visual appearance.
 
 This framework was made with :heart: by [Akveo team](http://akveo.com/). 
 Follow us on [Facebook](https://www.facebook.com/akveo) or on [Twitter](https://twitter.com/akveo_inc) to get latest news about our new releases and other products!
@@ -12,7 +12,7 @@ If you are looking for some quickstart, check out our [sample app](https://githu
 
 
 ## Documentation
-A documentation for this framework is located [here](https://akveo.github.io/react-native-ui-kitten/).
+A documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).
 
 In particular, following components are available at the moment:
 - [Button](https://akveo.github.io/react-native-ui-kitten/articles/button/)
@@ -30,7 +30,7 @@ In particular, following components are available at the moment:
 - Like our page on [Facebook](https://www.facebook.com/akveo/)
 
 ## Can I hire you guys?
-Yes! We are available for hire. Visit [our homepage](http://akveo.com/) or simply leave us a note to contact@akveo.com. We will be happy to work with you!
+Yes! We are available for hire. Visit [our homepage](http://akveo.com/) or simply leave us a message to contact@akveo.com. We will be happy to work with you!
 
 License
 -------------
@@ -39,4 +39,4 @@ License
 ### From akveo
 
 Enjoy!
-We're always happy to hear your feedback.
+We're always happy to receive your feedback.
