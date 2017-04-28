@@ -19,7 +19,7 @@ export let bootstrap = () => {
   RkTheme.setType('RkText', 'bold', {
     text: {
       fontFamily: robotoMed,
-  }
+    }
   });
 
   RkTheme.setType('RkText', 'header', {
@@ -48,6 +48,10 @@ export let bootstrap = () => {
     color: RkTheme.current.colors.success,
   });
 
+  RkTheme.setType('RkText', 'caption', {
+    color: RkTheme.current.colors.text.additional
+  });
+
   RkTheme.setType('RkText', 'cardText', {
     fontSize: 16,
     text: {
@@ -74,7 +78,7 @@ export let bootstrap = () => {
   RkTheme.setType('RkButton', 'action', {
     color: RkTheme.current.colors.warning,
     content: {
-      fontFamily: robotoMed,
+    fontFamily: robotoMed,
     }
   });
 

@@ -56,7 +56,7 @@ export class RkButton extends RkComponent {
       } else {
         let {style:babyStyle, ...babyProps} = baby.props;
         return React.cloneElement(baby, {
-          style: [style, this.props.contentStyle, babyStyle],
+          style: [this.props.contentStyle, babyStyle],
           ...babyProps
         });
       }

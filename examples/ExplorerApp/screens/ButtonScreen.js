@@ -11,7 +11,7 @@ import {
 import {RkButton, RkText, RkTheme} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import {Icon} from '../components/icon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class ButtonScreen extends Component {
   static navigationOptions = {
@@ -102,29 +102,29 @@ export class ButtonScreen extends Component {
           <View style={UtilStyles.columnContainer}>
             <RkButton style={[{width: 110, justifyContent: 'flex-start', paddingLeft: 9}, UtilStyles.spaceBottom]}
                       rkType='rounded danger'>
-              <Icon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
-              <RkText>Delete</RkText>
+              <Icon style={[styles.icon, styles.iconRound]} name={'times-circle'}/>
+              <RkText rkType='caption'>Delete</RkText>
             </RkButton>
 
             <RkButton style={[{width: 100, justifyContent: 'flex-start', paddingLeft: 9}, UtilStyles.spaceVertical]}
                       rkType='rounded success'>
-              <Icon style={{marginRight: 9, fontSize: 29}} name={'times-circle'}/>
-              <RkText>Add</RkText>
+              <Icon style={[styles.icon, styles.iconRound]} name={'times-circle'}/>
+              <RkText rkType='caption'>Add</RkText>
             </RkButton>
 
             <RkButton style={[{justifyContent: 'flex-start', paddingLeft: 0}, UtilStyles.spaceVertical]}>
-              <Icon style={{marginHorizontal: 16, fontSize: 21}} name={'facebook'}/>
-              <RkText>Facebook</RkText>
+              <Icon style={[styles.icon,{marginHorizontal: 16, fontSize: 21}]} name={'facebook'}/>
+              <RkText rkType='caption'>Facebook</RkText>
             </RkButton>
 
             <RkButton style={[{justifyContent: 'flex-start', paddingLeft: 0}, UtilStyles.spaceVertical]} rkType='info'>
-              <Icon style={{marginHorizontal: 12, fontSize: 22}} name={'twitter'}/>
-              <RkText>Twitter</RkText>
+              <Icon style={[styles.icon,{marginHorizontal: 12, fontSize: 22}]} name={'twitter'}/>
+              <RkText rkType='caption'>Twitter</RkText>
             </RkButton>
 
             <RkButton style={[styles.githubButton, UtilStyles.spaceTop]} rkType='info'>
-              <Icon style={{marginHorizontal: 12, fontSize: 25}} name={'github'}/>
-              <RkText>Github</RkText>
+              <Icon style={[styles.icon,{marginHorizontal: 12, fontSize: 25}]} name={'github'}/>
+              <RkText rkType='caption'>Github</RkText>
             </RkButton>
           </View>
         </View>
@@ -136,30 +136,30 @@ export class ButtonScreen extends Component {
           </View>
           <View style={UtilStyles.rowContainer}>
             <RkButton style={[styles.iconButton, {marginLeft: 0}]}>
-              <Icon style={{fontSize: 24,}} name={'share-alt'}/>
+              <Icon style={[styles.icon,{fontSize: 24,}]} name={'share-alt'}/>
             </RkButton>
             <RkButton style={styles.iconButton}>
-              <Icon style={{fontSize: 24}} name={'envelope'}/>
+              <Icon style={[styles.icon,{fontSize: 24}]} name={'envelope'}/>
             </RkButton>
             <RkButton rkType='success' style={styles.iconButton}>
-              <Icon style={{fontSize: 26, fontFamily:'FontAwesome'}} name={'plus'}/>
+              <Icon style={[styles.icon,{fontSize: 26}]} name={'plus'}/>
             </RkButton>
             <RkButton rkType='success circle' style={styles.circleIconButton}>
-              <Icon style={{fontSize: 26}} name={'plus'}/>
+              <Icon style={[styles.icon,{fontSize: 26}]} name={'plus'}/>
             </RkButton>
           </View>
           <View style={UtilStyles.rowContainer}>
             <RkButton rkType='outline' style={[styles.iconButton, {marginLeft: 0}]}>
-              <Icon style={{fontSize: 24}} name={'share-alt'}/>
+              <Icon style={[styles.primaryIcon,{fontSize: 24}]} name={'share-alt'}/>
             </RkButton>
             <RkButton rkType='outline' style={styles.iconButton}>
-              <Icon style={{fontSize: 24}} name={'envelope'}/>
+              <Icon style={[styles.primaryIcon,{fontSize: 24}]} name={'envelope'}/>
             </RkButton>
             <RkButton rkType='outline-success ' style={styles.iconButton}>
-              <Icon style={{fontSize: 26}} name={'plus'}/>
+              <Icon style={[styles.successIcon,{fontSize: 26}]} name={'plus'}/>
             </RkButton>
             <RkButton rkType='outline-success circle' style={[styles.circleIconButton]}>
-              <Icon style={{fontSize: 26}} name={'plus'}/>
+              <Icon style={[styles.successIcon,{fontSize: 26}]} name={'plus'}/>
             </RkButton>
           </View>
         </View>
@@ -177,7 +177,6 @@ export class ButtonScreen extends Component {
               </View>
             </View>
           </View>
-
         </View>
       </ScrollView>
     );
@@ -202,5 +201,18 @@ let styles = StyleSheet.create({
   },
   textSpace: {
     marginVertical: 3
+  },
+  icon: {
+    color: 'white'
+  },
+  primaryIcon:{
+    color:RkTheme.current.colors.primary
+  },
+  successIcon:{
+    color:RkTheme.current.colors.success
+  },
+  iconRound: {
+    marginRight: 9,
+    fontSize: 29
   }
 });

@@ -41,7 +41,7 @@ import {RkButton, RkTheme} from 'react-native-ui-kitten';
 
 let accent = '#ed1c4d';
 
-RkTheme.setType('RkButton', 'accent', {
+RkTheme.setType('RkButton', '   accent', {
   backgroundColor: accent,
   color: 'white'
 });

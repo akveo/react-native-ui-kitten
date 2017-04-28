@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import {RkText, RkTextInput, RkTheme} from 'react-native-ui-kitten';
-import {Icon} from '../components/icon'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {UtilStyles} from '../style/styles';
 
 export class InputScreen extends Component {

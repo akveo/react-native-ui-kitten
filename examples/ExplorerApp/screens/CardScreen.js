@@ -18,7 +18,7 @@ import {
 } from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import {Icon} from '../components/icon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {ImageIcon} from '../components/imageIcon'
 
 export class CardScreen extends Component {
