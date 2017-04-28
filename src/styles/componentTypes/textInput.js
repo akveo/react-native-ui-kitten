@@ -71,7 +71,9 @@ export const RkTextInputTypes = (theme) => {
       },
       underlineWidth: 0
     },
-
+    clear: {
+      underlineWidth: 0
+    },
     topLabel: {
       input: {
         alignSelf: 'stretch',
