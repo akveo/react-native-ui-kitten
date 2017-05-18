@@ -7,3 +7,4 @@ export * from './textInput';
 export * from './separator';
 export * from './choiceGroup';
 export * from './modalImg';
+export * from './avoidKeyboard';

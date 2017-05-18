@@ -7,5 +7,6 @@ export {RkSeparator} from './src/components/separator/rkSeparator';
 export {RkModalImg} from './src/components/image/rkModalImg';
 export {RkTabView} from './src/components/tab/rkTabView';
 export {RkCard} from './src/components/card/rkCard';
+export {RkAvoidKeyboard} from './src/components/avoidKeyboard/rkAvoidKeyboard';
 export {RkComponent} from './src/components/rkComponent';
 export {RkTheme} from './src/styles/theme';

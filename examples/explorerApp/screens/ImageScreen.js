@@ -13,7 +13,7 @@ import {
 import {RkButton, RkModalImg, RkText, RkTheme} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import {Icon} from '../components/icon';
+import {Icon} from '../components/imageIcon';
 
 export class ImageScreen extends Component {
   static navigationOptions = {

@@ -17,7 +17,6 @@ export const RkTextInputTypes = (theme) => {
       },
       container: {
         flexDirection: 'row',
-        flex: 1,
         borderBottomWidth: 0.5,
         borderBottomColor: theme.colors.border.underline,
         marginVertical: 9

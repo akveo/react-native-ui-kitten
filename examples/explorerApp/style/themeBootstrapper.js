@@ -102,4 +102,10 @@ export let bootstrap = () => {
       borderRightWidth: 0,
     }
   });
+
+  RkTheme.setType('RkCard', 'basic', {
+    container: {
+     marginVertical:10
+    }
+  });
 };

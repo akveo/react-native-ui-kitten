@@ -98,6 +98,12 @@ export const RkButtonTypes = (theme) => {
         paddingVertical: 0,
         paddingHorizontal: 0,
       }
+    },
+    stretch: {
+      container: {
+        alignSelf: 'stretch',
+      },
+      width: null
     }
   })
 };

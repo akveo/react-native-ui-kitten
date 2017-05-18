@@ -12,7 +12,8 @@ export class RkText extends RkComponent {
     text: {
       color: 'color',
       backgroundColor: 'backgroundColor',
-      fontSize:'fontSize'
+      fontSize: 'fontSize',
+      fontFamily: 'fontFamily'
     }
   };
 
