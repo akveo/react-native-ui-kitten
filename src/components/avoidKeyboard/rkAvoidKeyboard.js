@@ -27,7 +27,6 @@ export class RkAvoidKeyboard extends RkComponent {
       this.keyboardWillShowListner = Keyboard.addListener('keyboardWillShow', this.onKeyboardWillShow);
       this.keyboardWillHideListner = Keyboard.addListener('keyboardWillHide', this.onKeyboardWillHide);
     }
-
   }
 
   componentWillUnmount() {

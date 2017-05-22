@@ -2,7 +2,7 @@ export const RkCardTypes = (theme) => {
   return ({
     _base: {
       container: {
-        margin: 5,
+        margin: 0,
         borderRadius: 2,
         borderWidth: 1,
         borderColor: theme.colors.border.card,
