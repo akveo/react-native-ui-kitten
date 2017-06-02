@@ -4,14 +4,15 @@ export const BlueTheme = {
   colors: {
     text: {
       additional: 'white',
+      base:'red'
     },
-    background: {
-      screen: RkTheme.colors.lightBlue900,
+    back: {
+      base: 'green',
       secondary: RkTheme.colors.red100,
       default: RkTheme.colors.blue100,
-      primary: RkTheme.colors.blue400,
+      primary: RkTheme.colors.red700,
       success: RkTheme.colors.lime500,
-      info: RkTheme.colors.lightBlue400,
+      info: RkTheme.colors.red600,
       warning: RkTheme.colors.yellow800,
       danger: RkTheme.colors.pink600,
       outline: 'transparent'
@@ -23,7 +24,7 @@ export const BlueTheme = {
 export const RedTheme = {
   colors: {
     text: {
-      additional: 'white',
+      back: 'white',
     },
     background: {
       screen: RkTheme.colors.deepOrange100,

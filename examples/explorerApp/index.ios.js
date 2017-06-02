@@ -9,21 +9,21 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import * as Screens from "./screens";
+import * as Screens from './screens';
 import {StackNavigator} from 'react-navigation';
-import {RkTheme} from 'react-native-ui-kitten'
-import {bootstrap} from "./style/themeBootstrapper"
+import {withRkTheme} from 'react-native-ui-kitten'
+import {bootstrap} from './style/themeBootstrapper'
 
 bootstrap();
 
-const {header} =({state, setParams}) => ({
+const {header} = ({state, setParams}) => ({
   style: {
     backgroundColor: 'white'
   }
 });
 
 const ExplorerApp = StackNavigator({
-  Home: {screen: Screens.ComponentsScreen},
+  Home: {screen: withRkTheme(Screens.ComponentsScreen)},
   Button: {screen: Screens.ButtonScreen},
   Choice: {screen: Screens.ChoiceScreen},
   Tab: {screen: Screens.TabScreen},
@@ -31,7 +31,8 @@ const ExplorerApp = StackNavigator({
   Avatar: {screen: Screens.AvatarScreen},
   Input: {screen: Screens.InputScreen},
   Image: {screen: Screens.ImageScreen},
-  Settings: {screen: Screens.SettingsScreen}
+  Settings: {screen: Screens.SettingsScreen},
+  Test: {screen: withRkTheme(Screens.TestScreen)}
 });
 
 AppRegistry.registerComponent('ExplorerApp', () => ExplorerApp);

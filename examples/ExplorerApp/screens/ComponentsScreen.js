@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 import {
   StyleSheet,
   ListView,
   View,
-  Text,
-  TouchableOpacity,
-  Platform,
-  StatusBar
+  TouchableOpacity
 } from 'react-native';
 
-import {RkText, RkTheme} from 'react-native-ui-kitten';
+import {RkText, RkTheme, RkStyleSheet} from 'react-native-ui-kitten';
+
 
 export class ComponentsScreen extends Component {
   static navigationOptions = {
@@ -22,45 +21,61 @@ export class ComponentsScreen extends Component {
     })
   };
 
+
   constructor(props) {
     super(props);
-    let ds = new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
-    });
-    let data = [
+    this.data = [
       {
-        title: "Buttons",
+        title: 'Buttons',
         route: 'Button',
       },
       {
-        title: "Selectable Components",
+        title: 'Selectable Components',
         route: 'Choice'
       },
       {
-        title: "Inputs",
+        title: 'Inputs',
         route: 'Input'
       },
       {
-        title: "Cards",
+        title: 'Cards',
         route: 'Card'
       },
       {
-        title: "Image Viewer",
+        title: 'Image Viewer',
         route: 'Image'
       },
       {
-        title: "Tab View",
+        title: 'Tab View',
         route: 'Tab'
       },
       {
-        title: "Custom Control View",
+        title: 'Custom Control View',
         route: 'Avatar'
+      },
+      {
+        title: 'Test',
+        route: 'Test'
       }
     ];
     this.state = {
-      dataSource: ds.cloneWithRows(data)
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+      }).cloneWithRows(this.data),
+      theme: _.cloneDeep(RkTheme.current)
     };
   }
+
+  // componentWillReceiveProps() {
+  //   if (this.state.theme !== RkTheme.current) {
+  //     this.setState({
+  //       theme: _.cloneDeep(RkTheme.current),
+  //       dataSource: new ListView.DataSource({
+  //         rowHasChanged: (r1, r2) => r1 !== r2
+  //       }).cloneWithRows(this.data)
+  //     });
+  //   }
+  // }
 
   renderComponent(componentDefinition) {
     return (
@@ -104,23 +119,24 @@ export class ComponentsScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  componentRow: {
-    paddingHorizontal: 24,
-    paddingVertical: 18,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  rowSeparator: {
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    height: 1,
-  },
-  rowSeparatorHide: {
-    opacity: 0.0,
-  },
-});
+const
+  styles = RkStyleSheet.create(theme => ({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.back.base
+    },
+    componentRow: {
+      paddingHorizontal: 24,
+      paddingVertical: 18,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    },
+    rowSeparator: {
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      height: 1,
+    },
+    rowSeparatorHide: {
+      opacity: 0.0,
+    },
+  }));

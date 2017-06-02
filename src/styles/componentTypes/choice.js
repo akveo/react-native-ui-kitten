@@ -4,7 +4,7 @@ import {
   View
 } from 'react-native';
 
-import {RkTheme} from '../theme';
+import {RkTheme} from '../themeManager';
 
 export const RkChoiceTypes = (theme) => {
   return ({
@@ -24,14 +24,14 @@ export const RkChoiceTypes = (theme) => {
       },
     },
     selected: {
-      backgroundColor: RkTheme.current.colors.back.primary,
-      borderColor: RkTheme.current.colors.border.base,
+      backgroundColor: theme.colors.back.primary,
+      borderColor: theme.colors.border.base,
       content: (<View><Image source={require('../../assets/img/choice/whiteCheckMark.png')}/></View>)
     },
     disabled: {},
     selectedDisabled: {
-      borderColor: RkTheme.current.colors.border.disabled,
-      backgroundColor: RkTheme.current.colors.back.disabled,
+      borderColor: theme.colors.border.disabled,
+      backgroundColor: theme.colors.back.disabled,
       content: (<View><Image source={require('../../assets/img/choice/grayCheckMark.png')}/></View>)
     },
     radio: {
@@ -39,26 +39,26 @@ export const RkChoiceTypes = (theme) => {
       content: (<View/>)
     },
     radioSelected: {
-      borderColor: RkTheme.current.colors.border.base,
+      borderColor: theme.colors.border.base,
       inner: {
         width: 16,
         height: 16,
         margin: 5,
         borderRadius: 10,
-        backgroundColor: RkTheme.current.colors.back.primary,
+        backgroundColor: theme.colors.back.primary,
       }
     },
     radioDisabled: {
-      borderColor: RkTheme.current.colors.border.disabled
+      borderColor: theme.colors.border.disabled
     },
     radioSelectedDisabled: {
-      borderColor: RkTheme.current.colors.border.disabled,
+      borderColor: theme.colors.border.disabled,
       inner: {
         width: 16,
         height: 16,
         margin: 5,
         borderRadius: 10,
-        backgroundColor: RkTheme.current.colors.back.disabled,
+        backgroundColor: theme.colors.back.disabled,
       }
     },
 

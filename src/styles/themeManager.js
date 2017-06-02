@@ -1,7 +1,11 @@
-import {DefaultTheme} from './defaultTheme.js';
-import {RkColors} from './color.js';
-import {TypeManager} from './typeManager.js';
 import _ from 'lodash';
+import EventEmitter from 'wolfy87-eventemitter'
+import {DefaultTheme} from './defaultTheme';
+import {RkColors} from './color';
+import {TypeManager} from './typeManager';
+import {RkStyleSheet} from './styleSheet'
+
+const themeUpdated = 'themeUpdated';
 
 class ThemeManager {
 
@@ -9,6 +13,15 @@ class ThemeManager {
     this._currentTheme = this._getDefault();
     this._colors = _.cloneDeep(RkColors);
     this._updatePredefinedStyles();
+    this.emitter = new EventEmitter();
+  }
+
+  _subscribe(listener) {
+    this.emitter.addListener(themeUpdated, listener);
+  }
+
+  _unSubscribe(listener) {
+    this.emitter.removeListener(themeUpdated, listener);
   }
 
   _updatePredefinedStyles() {
@@ -54,7 +67,10 @@ class ThemeManager {
 
     let newTheme = _.merge(baseTheme, theme);
     _.merge(this._currentTheme, newTheme);
+
     TypeManager.invalidateTypes();
+    RkStyleSheet._invalidate();
+    this.emitter.emitEvent(themeUpdated);
   }
 
   setType(element, name, value) {

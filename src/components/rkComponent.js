@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Platform} from 'react-native';
 import _ from 'lodash';
 import {TypeManager} from '../styles/typeManager.js';
-import {RkTheme} from '../styles/theme.js';
+import {RkTheme} from '../styles/themeManager.js';
 
 
 export class RkComponent extends Component {
@@ -14,9 +14,9 @@ export class RkComponent extends Component {
   defaultType = 'basic';
 
   defineStyles(additionalTypes) {
-    let rkTypes = this.props.rkType || "";
-    let types = _.join([this.defaultType, rkTypes, additionalTypes], " ");
-    types = types && types.length ? types.split(" ") : [];
+    let rkTypes = this.props.rkType || '';
+    let types = _.join([this.defaultType, rkTypes, additionalTypes], ' ');
+    types = types && types.length ? types.split(' ') : [];
     return this._getTypes(types);
   }
 
@@ -31,11 +31,13 @@ export class RkComponent extends Component {
     return val[property];
   }
 
-  _getPlatformValue(value) {
+  _getStyleValue(value) {
     if (typeof value === 'object' && value !== null) {
       if (value.hasOwnProperty(Platform.OS)) {
-        value = value[Platform.OS];
+        value = this._getStyleValue(value[Platform.OS]);
       }
+    } else if (typeof value === 'function') {
+      value = value(RkTheme.current);
     }
     return value;
   }
@@ -64,12 +66,12 @@ export class RkComponent extends Component {
             //check if this is complex style
             if (this.typeMapping[key]) {
               for (let styleKey in usedTypes[type][key]) {
-                let value = this._getPlatformValue(usedTypes[type][key][styleKey]);
+                let value = this._getStyleValue(usedTypes[type][key][styleKey]);
                 this._mergeStyles(styles[key], styleKey, value);
               }
             } else {
               let styleKey = this.typeMapping[element][key];
-              let value = this._getPlatformValue(usedTypes[type][key]);
+              let value = this._getStyleValue(usedTypes[type][key]);
 
               this._mergeStyles(styles[element], styleKey, value);
             }
@@ -96,7 +98,7 @@ export class RkComponent extends Component {
     let self = this;
     for (let element in baseStyle) {
       styles[element] = Object.keys(baseStyle[element]).map(function (key) {
-        let value = self._getPlatformValue(baseStyle[element][key]);
+        let value = self._getStyleValue(baseStyle[element][key]);
         return {[key]: value};
       })
     }

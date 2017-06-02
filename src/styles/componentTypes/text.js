@@ -3,6 +3,7 @@ export const RkTextTypes = (theme) => {
     basic: {
       fontSize: theme.fonts.sizes.base,
       color: theme.colors.text.base,
+      backgroundColor: 'transparent'
     },
     header: {
       fontSize: theme.fonts.sizes.large,

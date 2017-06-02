@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {RkTheme} from '../theme';
+import {RkTheme} from '../themeManager';
 
 export const RkChoiceGroupTypes = (theme) => {
   return ({

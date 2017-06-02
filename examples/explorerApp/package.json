@@ -8,6 +8,7 @@
     "update-lib": "rm -r node_modules/react-native-ui-kitten && npm install && ./node_modules/react-native/packager/packager.sh  ."
   },
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "15.4.1",
     "react-native": "^0.42.3",
     "react-native-ui-kitten": "file:../../",

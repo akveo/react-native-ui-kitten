@@ -3,7 +3,7 @@ import {
 } from 'react-native';
 import {
   RkTheme
-} from "react-native-ui-kitten"
+} from 'react-native-ui-kitten'
 
 export const UtilStyles = StyleSheet.create({
   container: {

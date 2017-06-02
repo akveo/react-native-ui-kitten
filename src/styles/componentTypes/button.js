@@ -8,7 +8,6 @@ export const RkButtonTypes = (theme) => {
         borderRadius: 4,
         paddingVertical: 8,
         paddingHorizontal: 12,
-        alignSelf: 'flex-start',
         overflow: 'hidden',
         width: 128,
         height: 44,

@@ -13,7 +13,7 @@ template: componentArticle.jade
 Usage example:
 
 ```html
-import {RkButton} from 'react-native-ui-kitten';
+import {RkButton} from 'react-native-ui-kitten';  
 
 //... 
 

@@ -16,7 +16,7 @@ import {
 import {RkButton} from '../button/rkButton';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
-import {RkTheme} from '../../styles/theme';
+import {RkTheme} from '../../styles/themeManager';
 import _ from 'lodash';
 
 
