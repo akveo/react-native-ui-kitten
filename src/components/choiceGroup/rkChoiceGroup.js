@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import {RkChoice} from './rkChoice';
+import {RkChoice} from '../choice/rkChoice';
 import {RkComponent} from '../rkComponent';
 
 

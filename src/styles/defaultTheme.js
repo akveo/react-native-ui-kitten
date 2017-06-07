@@ -15,7 +15,8 @@ export const Values = {
   background: '#fff',
   overlay: '#00000057',
   fontSize: 15,
-  neutral: '#0000001A'
+  neutral: '#0000001A',
+  hint: '#0000008e'
 };
 
 export const DefaultTheme = {
@@ -33,14 +34,29 @@ export const DefaultTheme = {
     foreground: Values.foreground,
     background: Values.background,
     overlay: Values.overlay,
-
     text: {
       base: Values.foreground,
       additional: Values.background,
       subtitle: Values.foreground,
-      hint: '#0000008e'
+      hint: Values.hint
     },
-    back: {
+    button: {
+      primary: Values.primary,
+      primaryActive: Values.primaryActive,
+      success: Values.success,
+      successActive: Values.successActive,
+      info: Values.info,
+      infoActive: Values.infoActive,
+      warning: Values.warning,
+      warningActive: Values.warningActive,
+      danger: Values.danger,
+      dangerActive: Values.dangerActive,
+      foreground: Values.foreground,
+      background: Values.background,
+      text: Values.background,
+      outline: RkColors.transparent,
+    },
+    screen: {
       base: Values.background,
       primary: Values.primary,
       primaryActive: Values.primaryActive,
@@ -54,18 +70,23 @@ export const DefaultTheme = {
       dangerActive: Values.dangerActive,
       foreground: Values.foreground,
       background: Values.background,
-      outline: RkColors.transparent,
       material: Values.primary,
       disabled: Values.neutral
     },
     border: {
-      base: Values.primary,
-      underline: Values.neutral,
+      base: Values.neutral,
+      primary: Values.neutral,
       solid: '#0000003B',
       material: Values.warning,
-      disabled:Values.neutral,
+      disabled: Values.neutral,
       card: '#00000014'
-    }
+    },
+    input: {
+      text: Values.foreground,
+      background: Values.background,
+      label: Values.hint,
+      placeholder: Values.hint,
+    },
   },
   fonts: {
     sizes: {

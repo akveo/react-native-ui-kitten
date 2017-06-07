@@ -1,17 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   Image,
   View
 } from 'react-native';
-
-import {RkTheme} from '../themeManager';
 
 export const RkChoiceTypes = (theme) => {
   return ({
     _base: {
       container: {
         borderWidth: 1,
-        borderColor: theme.colors.border.solid,
+        borderColor: theme.colors.border.base,
         borderRadius: 4,
         alignSelf: 'flex-start',
       },
@@ -24,14 +22,14 @@ export const RkChoiceTypes = (theme) => {
       },
     },
     selected: {
-      backgroundColor: theme.colors.back.primary,
+      backgroundColor: theme.colors.screen.primary,
       borderColor: theme.colors.border.base,
       content: (<View><Image source={require('../../assets/img/choice/whiteCheckMark.png')}/></View>)
     },
     disabled: {},
     selectedDisabled: {
       borderColor: theme.colors.border.disabled,
-      backgroundColor: theme.colors.back.disabled,
+      backgroundColor: theme.colors.screen.disabled,
       content: (<View><Image source={require('../../assets/img/choice/grayCheckMark.png')}/></View>)
     },
     radio: {
@@ -45,7 +43,7 @@ export const RkChoiceTypes = (theme) => {
         height: 16,
         margin: 5,
         borderRadius: 10,
-        backgroundColor: theme.colors.back.primary,
+        backgroundColor: theme.colors.screen.primary,
       }
     },
     radioDisabled: {
@@ -58,7 +56,7 @@ export const RkChoiceTypes = (theme) => {
         height: 16,
         margin: 5,
         borderRadius: 10,
-        backgroundColor: theme.colors.back.disabled,
+        backgroundColor: theme.colors.screen.disabled,
       }
     },
 

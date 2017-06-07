@@ -1,34 +1,25 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
-  ListView,
-  Dimensions,
   Image
 } from 'react-native';
 
 import {
   RkButton,
   RkText,
-  RkCard,
-  RkTheme
+  RkCard
 } from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ImageIcon} from '../components/imageIcon'
 
-export class CardScreen extends Component {
+export class CardScreen extends React.Component {
   static navigationOptions = {
-    title: 'Cards',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Cards'
   };
 
   constructor(props) {

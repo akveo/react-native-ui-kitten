@@ -15,12 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class ButtonScreen extends Component {
   static navigationOptions = {
-    title: 'Buttons',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Buttons'
   };
 
   _onPress() {

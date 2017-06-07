@@ -1,30 +1,24 @@
-import React, {Component} from 'react';
-
+import React from 'react';
 import {
-  Platform,
   View,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  TouchableHighlight,
-  Image
 } from 'react-native';
-
-import {RkText, RkChoiceGroup, RkChoice, RkTheme, RkSeparator} from 'react-native-ui-kitten';
+import {
+  RkText,
+  RkChoiceGroup,
+  RkChoice,
+  RkTheme,
+  RkSeparator
+} from 'react-native-ui-kitten';
 import {UtilStyles} from '../style/styles';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export class ChoiceScreen extends Component {
+export class ChoiceScreen extends React.Component {
   static navigationOptions = {
-    title: 'Selectable components',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Selectable components'
   };
 
   constructor(props) {
@@ -63,7 +57,7 @@ export class ChoiceScreen extends Component {
             </View>
           </View>
         </View>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Labels Example</RkText>
           <View style={[UtilStyles.columnContainer]}>
             <RkChoiceGroup rkType='bordered'>
@@ -106,32 +100,32 @@ export class ChoiceScreen extends Component {
                   <RkChoice rkType='clear'/>
                 </View>
               </TouchableOpacity>
-              <RkSeparator/>
+
               <TouchableOpacity choiceTrigger>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 2</RkText>
                   <RkChoice rkType='clear' selected/>
                 </View>
               </TouchableOpacity>
-              <RkSeparator/>
+
               <TouchableOpacity choiceTrigger>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 3</RkText>
                   <RkChoice rkType='clear'/>
                 </View>
               </TouchableOpacity>
-              <RkSeparator/>
+
               <TouchableOpacity choiceTrigger>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 4</RkText>
                   <RkChoice rkType='clear'/>
                 </View>
               </TouchableOpacity>
-              <RkSeparator/>
+
             </RkChoiceGroup>
           </View>
         </View>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Radio components</RkText>
           <View style={UtilStyles.columnContainer}>
             <RkChoiceGroup radio>
@@ -162,8 +156,7 @@ export class ChoiceScreen extends Component {
             </RkChoiceGroup>
           </View>
         </View>
-        <View>
-          <RkSeparator/>
+        <View style={[UtilStyles.bordered]}>
           <TouchableOpacity style={{padding: 23}} onPress={() => this.showSettingsScreen()}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <RkText>Setting Example</RkText>
@@ -173,9 +166,9 @@ export class ChoiceScreen extends Component {
               </View>
             </View>
           </TouchableOpacity>
-          <RkSeparator/>
+
         </View>
-        <View style={UtilStyles.section}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Disabled components</RkText>
           <View style={[UtilStyles.rowContainer]}>
             <View style={[UtilStyles.columnContainer, {flex: 1}]}>
@@ -214,7 +207,7 @@ export class ChoiceScreen extends Component {
 
   showSettingsScreen() {
     const {navigate} = this.props.navigation;
-     navigate('Settings', {
+    navigate('Settings', {
       option: this.state.settingsOption,
       onChange: (option) => {
         this.setState({
@@ -236,11 +229,13 @@ const styles = StyleSheet.create({
     marginLeft: 16
   },
   checkRow: {
-    marginVertical: 18,
+    paddingVertical: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginRight: 16,
-    marginLeft: 16
+    paddingLeft: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: RkTheme.current.colors.border.base
   },
   radioRow: {
     flexDirection: 'row',

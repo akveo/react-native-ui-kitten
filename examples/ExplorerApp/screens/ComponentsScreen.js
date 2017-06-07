@@ -13,12 +13,7 @@ import {RkText, RkTheme, RkStyleSheet} from 'react-native-ui-kitten';
 
 export class ComponentsScreen extends Component {
   static navigationOptions = {
-    title: 'UI KIT',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'UI KIT'
   };
 
 
@@ -52,10 +47,6 @@ export class ComponentsScreen extends Component {
       {
         title: 'Custom Control View',
         route: 'Avatar'
-      },
-      {
-        title: 'Test',
-        route: 'Test'
       }
     ];
     this.state = {
@@ -123,7 +114,7 @@ const
   styles = RkStyleSheet.create(theme => ({
     container: {
       flex: 1,
-      backgroundColor: theme.colors.back.base
+      backgroundColor: theme.colors.screen.base
     },
     componentRow: {
       paddingHorizontal: 24,

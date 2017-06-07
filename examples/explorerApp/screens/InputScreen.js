@@ -14,12 +14,7 @@ import {UtilStyles} from '../style/styles';
 
 export class InputScreen extends Component {
   static navigationOptions = {
-    title: 'Inputs',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Inputs'
   };
 
   constructor(props) {

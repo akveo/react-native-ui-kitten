@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import {
-  View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
-  Platform
 } from 'react-native';
 
 import {RkComponent} from '../rkComponent.js';

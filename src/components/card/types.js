@@ -6,7 +6,7 @@ export const RkCardTypes = (theme) => {
         borderRadius: 2,
         borderWidth: 1,
         borderColor: theme.colors.border.card,
-        backgroundColor: theme.colors.back.base,
+        backgroundColor: theme.colors.screen.base,
       },
       header: {
         paddingVertical: 17,

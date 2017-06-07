@@ -1,5 +1,4 @@
 import {RkTheme} from 'react-native-ui-kitten';
-import {BlueTheme, RedTheme} from "../style/my-theme"
 import {AvatarTypes} from '../components/avatarTypes';
 
 let robotoLight = 'Roboto-Light';
@@ -43,13 +42,13 @@ export let bootstrap = () => {
 
   RkTheme.setType('RkButton', 'outline-success', {
     backgroundColor: 'transparent',
-    borderColor: RkTheme.current.colors.success,
+    borderColor: theme => theme.colors.success,
     borderWidth: 1,
-    color: RkTheme.current.colors.success,
+    color: theme => theme.colors.success,
   });
 
   RkTheme.setType('RkText', 'caption', {
-    color: RkTheme.current.colors.text.additional
+    color: theme => theme.colors.text.additional
   });
 
   RkTheme.setType('RkText', 'cardText', {
@@ -69,25 +68,25 @@ export let bootstrap = () => {
 
   RkTheme.setType('RkButton', 'link', {
     color: '#00000099',
-    fontSize: RkTheme.current.fonts.sizes.small,
+    fontSize: theme => theme.fonts.sizes.small,
     content: {
       letterSpacing: -0.1
     }
   });
 
   RkTheme.setType('RkButton', 'action', {
-    color: RkTheme.current.colors.warning,
+    color: theme => theme.colors.warning,
     content: {
-    fontFamily: robotoMed,
+      fontFamily: robotoMed,
     }
   });
 
   RkTheme.setType('RkButton', 'accent', {
-    color: RkTheme.colors.accent
+    color: theme => theme.colors.accent
   });
 
   RkTheme.setType('RkButton', 'accent-bg', {
-    backgroundColor: RkTheme.colors.accent
+    backgroundColor: theme => theme.colors.accent
   });
 
   RkTheme.setType('RkTab', 'basic', {
@@ -105,7 +104,7 @@ export let bootstrap = () => {
 
   RkTheme.setType('RkCard', 'basic', {
     container: {
-     marginVertical:10
+      marginVertical: 10
     }
   });
 };

@@ -18,7 +18,7 @@ export const RkTextInputTypes = (theme) => {
       container: {
         flexDirection: 'row',
         borderBottomWidth: 0.5,
-        borderBottomColor: theme.colors.border.underline,
+        borderBottomColor: theme.colors.border.base,
         marginVertical: 9
       },
       label: {
@@ -29,9 +29,9 @@ export const RkTextInputTypes = (theme) => {
     basic: {
       backgroundColor: 'transparent',
       inputBackgroundColor: 'transparent',
-      color: theme.colors.text.base,
-      labelColor: theme.colors.text.hint,
-      placeholderTextColor: theme.colors.text.hint
+      color: theme.colors.input.text,
+      labelColor: theme.colors.input.label,
+      placeholderTextColor: theme.colors.input.placeholder
     },
 
     bordered: {

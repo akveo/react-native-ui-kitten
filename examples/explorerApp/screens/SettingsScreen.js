@@ -2,21 +2,20 @@ import React, {Component} from 'react';
 import {
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
 import {UtilStyles} from '../style/styles';
-import {RkText, RkChoiceGroup, RkChoice, RkSeparator, RkTheme} from 'react-native-ui-kitten';
+import {
+  RkText,
+  RkChoiceGroup,
+  RkChoice,
+  RkTheme
+} from 'react-native-ui-kitten';
 
 export class SettingsScreen extends Component {
   static navigationOptions = {
-    title: 'Settings example',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Settings example'
   };
 
   constructor(props) {
@@ -25,22 +24,18 @@ export class SettingsScreen extends Component {
       options: [
         {
           index: 0,
-          name: "Option 1"
+          name: 'Option 1'
         },
         {
           index: 1,
-          name: "Option 2"
+          name: 'Option 2'
         },
         {
           index: 2,
-          name: "Option 3"
+          name: 'Option 3'
         }
       ]
     }
-  }
-
-  _change(index) {
-
   }
 
   render() {
@@ -53,7 +48,6 @@ export class SettingsScreen extends Component {
             <RkChoice rkType='clear'/>
           </View>
         </TouchableOpacity>
-        <RkSeparator/>
       </View>);
 
     return (
@@ -74,10 +68,12 @@ export class SettingsScreen extends Component {
 
 const styles = StyleSheet.create({
   checkRow: {
-    marginVertical: 18,
+    paddingVertical: 18,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginRight: 16,
-    marginLeft: 16
+    paddingLeft: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: RkTheme.current.colors.border.base
   },
 });

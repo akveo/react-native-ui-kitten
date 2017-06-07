@@ -30,7 +30,7 @@ export const AvatarTypes = (theme) => {
       }
     },
     info: {
-      backgroundColor: theme.colors.back.info,
+      backgroundColor: theme.colors.screen.info,
       color: theme.colors.text.additional,
       descriptionColor: theme.colors.text.additional
     }

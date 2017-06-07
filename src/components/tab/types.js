@@ -1,4 +1,4 @@
-import {RkColors} from '../color.js';
+import {RkColors} from '../../styles/color.js';
 
 export const TabTypes = (theme) => {
   return ( {
@@ -20,14 +20,14 @@ export const TabTypes = (theme) => {
         borderLeftWidth: 0.5,
         borderRightWidth: 0.5,
       },
-      backgroundColor: theme.colors.back.base,
+      backgroundColor: theme.colors.screen.base,
       color: theme.colors.primary
     },
     selected: {
       backgroundColor: '#ececec',
     },
     material: {
-      backgroundColor: theme.colors.back.material,
+      backgroundColor: theme.colors.screen.material,
       color: 'white',
       content: {
         opacity: 0.7,
@@ -35,7 +35,7 @@ export const TabTypes = (theme) => {
       tabContainer: {
         padding: 15,
         borderWidth: 0,
-        borderBottomColor: theme.colors.back.material,
+        borderBottomColor: theme.colors.screen.material,
         borderBottomWidth: 2
       }
     },

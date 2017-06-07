@@ -19,34 +19,34 @@ export const RkButtonTypes = (theme) => {
       }
     },
     basic: {
-      backgroundColor: theme.colors.back.primary,
-      color: theme.colors.text.additional
+      backgroundColor: theme.colors.button.primary,
+      color: theme.colors.button.text
     },
     primary: {
-      backgroundColor: theme.colors.back.primary,
-      color: theme.colors.text.additional
+      backgroundColor: theme.colors.button.primary,
+      color: theme.colors.button.text
     },
     warning: {
-      backgroundColor: theme.colors.back.warning,
-      color: theme.colors.text.additional
+      backgroundColor: theme.colors.button.warning,
+      color: theme.colors.button.text
     },
     danger: {
-      backgroundColor: theme.colors.back.danger,
-      color: theme.colors.text.additional
+      backgroundColor: theme.colors.button.danger,
+      color: theme.colors.button.text
     },
     success: {
-      backgroundColor: theme.colors.back.success,
-      color: theme.colors.text.additional
+      backgroundColor: theme.colors.button.success,
+      color: theme.colors.button.text
     },
     info: {
-      backgroundColor: theme.colors.back.info,
-      color: theme.colors.text.additional
+      backgroundColor: theme.colors.button.info,
+      color: theme.colors.button.text
     },
     outline: {
-      borderColor: theme.colors.border.base,
+      borderColor: theme.colors.button.primary,
       borderWidth: 1,
-      color: theme.colors.border.base,
-      backgroundColor: theme.colors.back.outline
+      color: theme.colors.button.primary,
+      backgroundColor: theme.colors.button.outline
     },
     rounded: {
       borderRadius: 22
