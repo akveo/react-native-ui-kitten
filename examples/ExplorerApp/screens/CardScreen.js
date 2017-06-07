@@ -10,7 +10,8 @@ import {
 import {
   RkButton,
   RkText,
-  RkCard
+  RkCard,
+  RkTheme
 } from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
@@ -27,6 +28,8 @@ export class CardScreen extends React.Component {
   }
 
   render() {
+    let likeStyle = [styles.buttonIcon, {color: RkTheme.colors.accent}];
+    let iconButton = [styles.buttonIcon, {color: RkTheme.current.colors.text.hint}];
     return (
       <View style={{flex: 1}}>
 
@@ -46,17 +49,17 @@ export class CardScreen extends React.Component {
                 Consonantia, there live the blind texts.</RkText>
             </View>
             <View rkCardFooter>
-              <RkButton rkType='clear link accent'>
-                <Icon name="heart" style={styles.buttonIcon}/>
-                <RkText>18 Likes</RkText>
+              <RkButton rkType='clear link'>
+                <Icon name="heart" style={likeStyle}/>
+                <RkText rkType='accent'>18 Likes</RkText>
               </RkButton>
               <RkButton rkType='clear link'>
-                <Icon name="comment-o" style={styles.buttonIcon}/>
-                <RkText>2 Comments</RkText>
+                <Icon name="comment-o" style={iconButton}/>
+                <RkText rkType='hint'>2 Comments</RkText>
               </RkButton>
               <RkButton rkType='clear link'>
-                <Icon name="send-o" style={styles.buttonIcon}/>
-                <RkText>6 Shares</RkText>
+                <Icon name="send-o" style={iconButton}/>
+                <RkText rkType='hint'>6 Shares</RkText>
               </RkButton>
             </View >
           </RkCard>
@@ -75,16 +78,16 @@ export class CardScreen extends React.Component {
             </View>
             <View rkCardFooter style={styles.footer}>
               <RkButton rkType='clear link accent'>
-                <Icon name="heart" style={styles.buttonIcon}/>
-                <RkText>18</RkText>
+                <Icon name="heart" style={likeStyle}/>
+                <RkText rkType='accent'>18</RkText>
               </RkButton>
               <RkButton rkType='clear link'>
-                <Icon name="comment-o" style={styles.buttonIcon}/>
-                <RkText>2</RkText>
+                <Icon name="comment-o" style={iconButton}/>
+                <RkText rkType='hint'>2</RkText>
               </RkButton>
               <RkButton rkType='clear link'>
-                <Icon name="send-o" style={styles.buttonIcon}/>
-                <RkText>6</RkText>
+                <Icon name="send-o" style={iconButton}/>
+                <RkText rkType='hint'>6</RkText>
               </RkButton>
             </View>
           </RkCard>
@@ -111,16 +114,16 @@ export class CardScreen extends React.Component {
             </View>
             <View rkCardFooter style={styles.footer}>
               <RkButton rkType='clear link accent'>
-                <Icon name="heart" style={styles.buttonIcon}/>
-                <RkText>18</RkText>
+                <Icon name="heart" style={likeStyle}/>
+                <RkText rkType='accent'>18</RkText>
               </RkButton>
               <RkButton rkType='clear link'>
-                <Icon name="comment-o" style={styles.buttonIcon}/>
-                <RkText>2</RkText>
+                <Icon name="comment-o" style={iconButton}/>
+                <RkText rkType='hint'>2</RkText>
               </RkButton>
               <RkButton rkType='clear link'>
-                <Icon name="send-o" style={styles.buttonIcon}/>
-                <RkText>6</RkText>
+                <Icon name="send-o" style={iconButton}/>
+                <RkText rkType='hint'>6</RkText>
               </RkButton>
             </View>
           </RkCard>
@@ -229,7 +232,7 @@ let styles = StyleSheet.create({
   },
   buttonIcon: {
     marginRight: 7,
-    fontSize: 19.7
+    fontSize: 19.7,
   },
   footer: {
     marginHorizontal: 16

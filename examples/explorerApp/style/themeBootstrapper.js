@@ -48,7 +48,7 @@ export let bootstrap = () => {
   });
 
   RkTheme.setType('RkText', 'caption', {
-    color: theme => theme.colors.text.additional
+    color: theme => theme.colors.text.inverse
   });
 
   RkTheme.setType('RkText', 'cardText', {
@@ -57,6 +57,19 @@ export let bootstrap = () => {
       lineHeight: 20,
     }
   });
+
+  RkTheme.setType('RkText', 'accent', {
+    color: RkTheme.colors.accent
+  });
+
+  RkTheme.setType('RkText', 'hint', {
+    color: RkTheme.current.colors.text.hint
+  });
+
+  RkTheme.setType('RkText', 'inverse', {
+    color: RkTheme.current.colors.text.inverse
+  });
+
 
   RkTheme.setType('RkText', 'compactCardText', {
     fontSize: 14,
@@ -67,7 +80,6 @@ export let bootstrap = () => {
   });
 
   RkTheme.setType('RkButton', 'link', {
-    color: '#00000099',
     fontSize: theme => theme.fonts.sizes.small,
     content: {
       letterSpacing: -0.1
@@ -81,12 +93,13 @@ export let bootstrap = () => {
     }
   });
 
+
   RkTheme.setType('RkButton', 'accent', {
-    color: theme => theme.colors.accent
+    color: RkTheme.colors.accent
   });
 
   RkTheme.setType('RkButton', 'accent-bg', {
-    backgroundColor: theme => theme.colors.accent
+    backgroundColor: RkTheme.colors.accent
   });
 
   RkTheme.setType('RkTab', 'basic', {

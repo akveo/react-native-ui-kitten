@@ -19,12 +19,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class TabScreen extends Component {
   static navigationOptions = {
-    title: 'Tabs',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Tabs'
   };
 
   constructor(props) {

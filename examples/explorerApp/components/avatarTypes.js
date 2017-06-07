@@ -31,8 +31,8 @@ export const AvatarTypes = (theme) => {
     },
     info: {
       backgroundColor: theme.colors.screen.info,
-      color: theme.colors.text.additional,
-      descriptionColor: theme.colors.text.additional
+      color: theme.colors.text.inverse,
+      descriptionColor: theme.colors.text.inverse
     }
   })
 };

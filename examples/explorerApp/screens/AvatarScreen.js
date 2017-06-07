@@ -7,12 +7,7 @@ import {UtilStyles} from '../style/styles';
 
 export class AvatarScreen extends Component {
   static navigationOptions = {
-    title: 'Avatar',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Avatar'
   };
 
   render() {

@@ -11,7 +11,7 @@ export const RkModalImgTypes = (theme) => {
         },
         paddingBottom: 10,
         paddingHorizontal: 16,
-        backgroundColor: 'black',
+        backgroundColor: theme.colors.screen.inverse,
       },
       footerContent: {
         height: 50,
@@ -26,7 +26,7 @@ export const RkModalImgTypes = (theme) => {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'black',
+        backgroundColor: theme.colors.screen.inverse,
       },
       headerText: {
         textAlign: 'center',
@@ -40,7 +40,7 @@ export const RkModalImgTypes = (theme) => {
       },
       modal:{
         flex:1,
-        backgroundColor: 'black'
+        backgroundColor: theme.colors.screen.inverse
       }
     }
   });

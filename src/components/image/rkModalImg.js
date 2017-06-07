@@ -7,7 +7,6 @@ import {
   Text,
   Modal,
   ListView,
-  StyleSheet,
   Animated,
   Dimensions,
   Platform
@@ -74,7 +73,7 @@ export class RkModalImg extends RkComponent {
       footerStyle,
       source,
       index,
-      style:imgStyle,
+      style: imgStyle,
       ...imgProps,
     } = this.props;
 
@@ -191,7 +190,7 @@ export class RkModalImg extends RkComponent {
     let headerText = this.styles ? this.styles.headerText : {};
     return (
       <View style={headerContent}>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, alignItems: 'flex-start'}}>
           <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
@@ -208,7 +207,7 @@ export class RkModalImg extends RkComponent {
       pageText += '/';
       pageText += this.props.source.length;
       return (
-          <Text style={RkTheme.styles.whiteText}>
+        <Text style={RkTheme.styles.whiteText}>
           {pageText}
         </Text>
       )

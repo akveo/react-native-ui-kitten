@@ -1,5 +1,3 @@
-import {RkColors} from '../../styles/color.js';
-
 export const TabTypes = (theme) => {
   return ( {
     _base: {
@@ -24,11 +22,11 @@ export const TabTypes = (theme) => {
       color: theme.colors.primary
     },
     selected: {
-      backgroundColor: '#ececec',
+      backgroundColor: theme.colors.highlight,
     },
     material: {
       backgroundColor: theme.colors.screen.material,
-      color: 'white',
+      color: theme.colors.text.inverse,
       content: {
         opacity: 0.7,
       },
@@ -40,7 +38,7 @@ export const TabTypes = (theme) => {
       }
     },
     materialSelected: {
-      color: 'white',
+      color: theme.colors.text.inverse,
       content: {
         opacity: 1
       },

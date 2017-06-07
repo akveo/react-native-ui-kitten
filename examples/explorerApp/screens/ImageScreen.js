@@ -1,30 +1,25 @@
 import React, {Component} from 'react';
-
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
   ListView,
-  Dimensions,
-  StatusBar
+  Dimensions
 } from 'react-native';
-
-import {RkButton, RkModalImg, RkText, RkTheme} from 'react-native-ui-kitten';
+import {
+  RkButton,
+  RkModalImg,
+  RkText,
+  RkStyleSheet
+} from 'react-native-ui-kitten';
 
 import {UtilStyles} from '../style/styles';
-import {Icon} from '../components/imageIcon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class ImageScreen extends Component {
   static navigationOptions = {
-    title: 'Images',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: RkTheme.current.colors.back.base
-      }
-    })
+    title: 'Images'
   };
-
 
   constructor(props) {
     super(props);
@@ -49,52 +44,6 @@ export class ImageScreen extends Component {
     this.imgSize = (width - 16) / 3;
   }
 
-  render() {
-    return (
-      <View style={{flex: 1}}>
-
-        <ScrollView
-          automaticallyAdjustContentInsets={true}
-          style={UtilStyles.container}>
-
-          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-            <RkText style={styles.header} rkType='header'>Basic example</RkText>
-            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
-              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}} source={require('../img/animal.jpeg')}/>
-              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}} source={require('../img/clock.jpg')}/>
-              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}} source={require('../img/post2.png')}/>
-            </View>
-          </View>
-          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-            <RkText style={styles.header} rkType='header'>Custom header and footer</RkText>
-            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
-              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
-                          renderHeader={this._renderHeader}
-                          renderFooter={this._renderFooter}
-                          headerContentStyle={{backgroundColor:'red'}}
-                          source={require('../img/post1.png')}/>
-              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
-                          renderHeader={this._renderHeader}
-                          renderFooter={this._renderFooter}
-                          source={require('../img/river.jpeg')}/>
-              <RkModalImg  style={{width: this.imgSize, height: this.imgSize}}
-                          renderHeader={this._renderHeader}
-                          renderFooter={this._renderFooter}
-                          source={require('../img/post3.png')}/>
-
-            </View>
-          </View>
-          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-            <RkText style={styles.header} rkType='header'>Gallery Example</RkText>
-            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
-              {this._renderGallery()}
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-    )
-  }
-
   _renderFooter(options) {
     return (
       <View style={{
@@ -107,20 +56,19 @@ export class ImageScreen extends Component {
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <RkButton rkType='clear small'>
             <Icon name={'heart'} style={styles.buttonIcon}/>
-            <RkText>18</RkText>
-
+            <RkText rkType='inverse'>18</RkText>
           </RkButton>
         </View>
         <View style={{flex: 1}}>
           <RkButton rkType='clear small'>
             <Icon name={'comment-o'} style={styles.buttonIcon}/>
-            <RkText>2</RkText>
+            <RkText rkType='inverse'>2</RkText>
           </RkButton>
         </View>
         <View style={{flex: 1}}>
           <RkButton rkType='clear small'>
             <Icon name={'send-o'} style={styles.buttonIcon}/>
-            <RkText>7</RkText>
+            <RkText rkType='inverse'>7</RkText>
           </RkButton>
         </View>
       </View>
@@ -155,7 +103,7 @@ export class ImageScreen extends Component {
         renderRow={(rowData, sectionID, rowID) => {
           return (
             <RkModalImg
-               style={{width: this.imgSize, height: this.imgSize}}
+              style={{width: this.imgSize, height: this.imgSize}}
               source={this._images}
               index={rowID}/>
           )
@@ -164,9 +112,54 @@ export class ImageScreen extends Component {
     )
   }
 
+  render() {
+    return (
+      <View style={{flex: 1}}>
+
+        <ScrollView
+          automaticallyAdjustContentInsets={true}
+          style={UtilStyles.container}>
+
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText style={styles.header} rkType='header'>Basic example</RkText>
+            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
+              <RkModalImg style={{width: this.imgSize, height: this.imgSize}} source={require('../img/animal.jpeg')}/>
+              <RkModalImg style={{width: this.imgSize, height: this.imgSize}} source={require('../img/clock.jpg')}/>
+              <RkModalImg style={{width: this.imgSize, height: this.imgSize}} source={require('../img/post2.png')}/>
+            </View>
+          </View>
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText style={styles.header} rkType='header'>Custom header and footer</RkText>
+            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
+              <RkModalImg style={{width: this.imgSize, height: this.imgSize}}
+                          renderHeader={this._renderHeader}
+                          renderFooter={this._renderFooter}
+                          headerContentStyle={{backgroundColor: 'red'}}
+                          source={require('../img/post1.png')}/>
+              <RkModalImg style={{width: this.imgSize, height: this.imgSize}}
+                          renderHeader={this._renderHeader}
+                          renderFooter={this._renderFooter}
+                          source={require('../img/river.jpeg')}/>
+              <RkModalImg style={{width: this.imgSize, height: this.imgSize}}
+                          renderHeader={this._renderHeader}
+                          renderFooter={this._renderFooter}
+                          source={require('../img/post3.png')}/>
+
+            </View>
+          </View>
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText style={styles.header} rkType='header'>Gallery Example</RkText>
+            <View style={[UtilStyles.rowContainer, {paddingLeft: 2}]}>
+              {this._renderGallery()}
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    )
+  }
 }
 
-let styles = StyleSheet.create({
+let styles = RkStyleSheet.create(theme => ({
   imagesContainer: {
     paddingHorizontal: 0
   },
@@ -177,9 +170,11 @@ let styles = StyleSheet.create({
     fontSize: 6.5,
     marginLeft: 4,
     marginVertical: 6,
+    color: theme.colors.text.inverse
   },
   buttonIcon: {
     marginRight: 7,
-    fontSize: 19.7
+    fontSize: 19.7,
+    color: theme.colors.text.inverse
   },
-});
+}));

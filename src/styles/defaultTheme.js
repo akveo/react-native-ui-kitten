@@ -13,10 +13,12 @@ export const Values = {
   dangerActive: '#c2173f',
   foreground: '#000000dd',
   background: '#fff',
+  inverseBackground:'#000000',
   overlay: '#00000057',
   fontSize: 15,
   neutral: '#0000001A',
-  hint: '#0000008e'
+  hint: '#0000008e',
+  highlight: '#ececec'
 };
 
 export const DefaultTheme = {
@@ -34,9 +36,10 @@ export const DefaultTheme = {
     foreground: Values.foreground,
     background: Values.background,
     overlay: Values.overlay,
+    highlight: Values.highlight,
     text: {
       base: Values.foreground,
-      additional: Values.background,
+      inverse: Values.background,
       subtitle: Values.foreground,
       hint: Values.hint
     },
@@ -71,7 +74,8 @@ export const DefaultTheme = {
       foreground: Values.foreground,
       background: Values.background,
       material: Values.primary,
-      disabled: Values.neutral
+      disabled: Values.neutral,
+      inverse: Values.inverseBackground
     },
     border: {
       base: Values.neutral,

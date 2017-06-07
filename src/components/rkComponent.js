@@ -4,15 +4,35 @@ import _ from 'lodash';
 import {TypeManager} from '../styles/typeManager.js';
 import {RkTheme} from '../styles/themeManager.js';
 
-
+/**
+ * RkComponent is component
+ */
 export class RkComponent extends Component {
 
   //default section used to configure control styles
+  /**
+   * {string} Name of component
+   */
   componentName = '';
+  /**
+   * {object} mapping
+   */
   typeMapping = {};
+  /**
+   * {string} base style name
+   */
   baseStyle = '_base';
+
+  /**
+   * {string} default type name
+   */
   defaultType = 'basic';
 
+  /**
+   * used to compile rkTypes
+   * @param {string} additionalTypes
+   * @returns {array} styles
+   */
   defineStyles(additionalTypes) {
     let rkTypes = this.props.rkType || '';
     let types = _.join([this.defaultType, rkTypes, additionalTypes], ' ');
@@ -20,6 +40,12 @@ export class RkComponent extends Component {
     return this._getTypes(types);
   }
 
+  /**
+   * Extracts non style value
+   * @param {string} styles
+   * @param {string} property
+   * @returns {object} something
+   */
   extractNonStyleValue(styles, property) {
     let val = _.find(styles, (e) => e.hasOwnProperty(property));
     if (val) {
