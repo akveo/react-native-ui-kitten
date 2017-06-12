@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -31,23 +30,21 @@ import {RkComponent} from '../rkComponent'
  * </RkButton>
  * ```
  *
- * `RkButton` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
- * There are already some predefined types.
  *
  * @example Using `rkType`prop
  *
- * Here is example of how to use rkType
+ * `RkButton` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
+ * There are already some predefined types. Here is example of how to use rkType
  *
  * ```
  * <RkButton rkType='success'>Accept</RkButton>
  * <RkButton rkType='danger small'>Cancel</RkButton>
  * ```
  *
- * Also it's easy and very common to create new types.
  *
  * @example Define new rkTypes
  *
- * Main point for all customization is `RkTheme` object.
+ * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
  * New rkTypes are defined using `setType` method of `RkTheme`:
  *
  * ```
@@ -108,7 +105,6 @@ import {RkComponent} from '../rkComponent'
  * It's possible to set styles inline. Use props style for container component and contentStyle for content component.
  *
  * ```
- *
  * <RkButton
  *    style={{backgroundColor: 'red'}}
  *    contentStyle={{color: 'white'}}> Hello </RkButton>
