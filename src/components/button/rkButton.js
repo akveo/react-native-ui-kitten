@@ -111,8 +111,8 @@ import {RkComponent} from '../rkComponent'
  * ```
  *
  * @property {string} rkType - Types for stylization component
- * By default RkButton supports following types: primary, info, warning, danger, success, outline, rounded,
- * circle, small, medium, large, xlarge, clear, stretch
+ * By default `RkButton` supports following types: `primary`, `info`, `warning`, `danger`, `success`, `outline`, `rounded`,
+ * `circle`, `small`, `medium`, `large`, `xlarge`, `clear`, `stretch`
  * @property {style} style - Style for button container
  * @property {style} contentStyle - Style for each button's children
  * @property {function} onPress - Called when the touch is released, but not if cancelled.
