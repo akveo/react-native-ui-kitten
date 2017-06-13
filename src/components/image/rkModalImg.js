@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-
+import React from 'react';
 import {
   View,
   TouchableWithoutFeedback,
@@ -11,13 +10,11 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
-
+import _ from 'lodash';
 import {RkButton} from '../button/rkButton';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
 import {RkTheme} from '../../styles/themeManager';
-import _ from 'lodash';
-
 
 export class RkModalImg extends RkComponent {
 
@@ -175,7 +172,6 @@ export class RkModalImg extends RkComponent {
       toValue: this.state.opacity._value ? 0 : 1
     }).start()
   }
-
 
   _renderFooter(options) {
     let footerStyle = this.styles ? this.styles.footerContent : {};

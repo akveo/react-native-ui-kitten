@@ -58,7 +58,7 @@ This should like this:
 It's also possible to implement more detailed styling. `RkText` consists from base react component.
 You can easily set styles for it.
 
-For example you can change font style:
+For example you can change font style:  
 
 ```javascript
 import {RkTheme} from 'react-native-ui-kitten';
@@ -90,7 +90,7 @@ It's possible to set styles inline. Use props `style` for `text` component.
 </div>
 
 <div class="doc-prop">
-    <p><a href="https://facebook.github.io/react-native/docs/text.html#props" target="_blank">Text.props</a></p>
+        <p><a href="https://facebook.github.io/react-native/docs/text.html#props" target="_blank">Text.props</a></p>
 </div>
 
 

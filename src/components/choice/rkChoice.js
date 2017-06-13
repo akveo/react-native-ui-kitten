@@ -83,7 +83,6 @@ import {RkComponent} from '../rkComponent';
  * ```
  *
  * @styles Available properties:
- *
  * - `color` : Color of content in `RkChoice`. Applied for `content` property.
  * - `backgroundColor` : Background color of `RkChoice`.
  * - `borderWidth` : Width of outer border.
@@ -171,6 +170,7 @@ import {RkComponent} from '../rkComponent';
  * @property {style} style - Style for component container
  * @property {style} contentStyle - Style for content inside component
  */
+
 export class RkChoice extends RkComponent {
   componentName = 'RkChoice';
   typeMapping = {
