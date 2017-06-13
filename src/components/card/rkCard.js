@@ -38,6 +38,7 @@ import {RkComponent} from "../rkComponent";
  * `RkCard` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
  * There are already some predefined types. Here is example of how to use rkType
  *
+ * ```
  * <RkCard rkType='shadowed'>
  *   <View rkCardHeader>
  *     <Text>Header</Text>
@@ -54,6 +55,7 @@ import {RkComponent} from "../rkComponent";
  * `rkType` used here to set style for each of 6 `rkCard` nested element props.
  * New rkTypes are defined using `setType` method of `RkTheme`:
  *
+ * ```
  * RkTheme.setType('RkCard', 'story', {
  *   img: {
  *     height: 100,
@@ -68,7 +70,6 @@ import {RkComponent} from "../rkComponent";
  * });
  *
  * //...
- *
  *
  * <RkCard rkType='story'>
  *   <Image rkCardImg source={require('../img/sea.jpg')}/>
@@ -94,7 +95,7 @@ import {RkComponent} from "../rkComponent";
  * - `img` : Style key for `rkCardImg`.
  * - `imgOverlay` : Style key for `rkCardImgOverlay`.
  *
- * @property {string} rkType - Types for stylization component
+ * @property {string} rkType - Types for component stylization
  * By default `RkCard` supports following types: `shadowed`, `heroImage`
  * @property {style} style - Style for root container of `RkCard`
  */

@@ -104,7 +104,7 @@ Use the following convention:
 
 One more note: during state change `RkChoice` not *replace* base `rkType` with new one. It just *add* correct.
 So for example *disabled* component will have actually two `rkType`s - base and disabled.
-
+    
 To define new `rkType` you can use predefined properties which will passed to according element inside component:
 
 ```javascript

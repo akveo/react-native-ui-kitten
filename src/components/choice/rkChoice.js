@@ -1,15 +1,176 @@
-import React, {Component} from 'react';
-
+import React from 'react';
 import {
-  StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import _ from 'lodash';
-
 import {RkComponent} from '../rkComponent';
 
+/**
+ * `RkChoice` component is an analog of html checkbox and radio buttons.
+ *
+ * @extends RkComponent
+ *
+ * @example Simple usage example:
+ *
+ * ```
+ * <RkChoice selected={true}/>
+ * ```
+ *
+ * @example Using `rkType`prop
+ *
+ * `RkChoice` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
+ * There are already some predefined types. Here is example of how to use rkType
+ *
+ * ```
+ * <RkChoice rkType='clear' selected={true}/>
+ * <RkChoice rkType='posNeg' selected={false}/>
+ * ```
+ *
+ * @example Define new rkTypes
+ *
+ * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
+ * New rkTypes are defined using `setType` method of `RkTheme`:
+ *
+ * `RkChoice` is a component which style depends or it's internal state. There are 4 states for this component:
+ * - unselected (base)
+ * - selected
+ * - unselected & disabled
+ * - selected & disabled
+ *
+ * Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
+ * and `RkChoice` will apply them according to its state.
+ *
+ * Use the following convention:
+ *
+ * - `%name%` : Unselected state.
+ * - `%name%Selected` : Selected state.
+ * - `%name%Disabled` : Unselected & disabled state.
+ * - `%name%SelectedDisabled`: Selected & disabled state.
+ *
+ * Where `%name%` is name of yours `rkType`.
+ *
+ * One more note: during state change `RkChoice` not replace base `rkType` with new one. It just add correct.
+ * So for example `disabled` component will have actually two `rkType`s - base and disabled.
+ *
+ * To define new `rkType` you can use predefined properties which will passed to according element inside component:
+ *
+ * ```
+ * RkTheme.setType('RkChoice', 'semaphore', {
+ *   backgroundColor:'crimson',
+ *   borderWidth:0,
+ *   borderRadius:20
+ * });
+ *
+ * RkTheme.setType('RkChoice', 'semaphoreSelected', {
+ *   backgroundColor: 'chartreuse',
+ * });
+ *
+ * RkTheme.setType('RkChoice', 'semaphoreDisabled', {
+ *   backgroundColor: 'darkgray',
+ * });
+ *
+ * RkTheme.setType('RkChoice', 'semaphoreSelectedDisabled', {
+ *   backgroundColor: 'lightgray',
+ * });
+ *
+ * //...
+ *
+ * <RkChoice rkType='semaphore'/>
+ * <RkChoice selected rkType='semaphore'/>
+ * <RkChoice disabled rkType='semaphore'/>
+ * <RkChoice disabled selected rkType='semaphore'/>
+ * ```
+ *
+ * @styles Available properties:
+ *
+ * - `color` : Color of content in `RkChoice`. Applied for `content` property.
+ * - `backgroundColor` : Background color of `RkChoice`.
+ * - `borderWidth` : Width of outer border.
+ * - `borderRadius` : Border radius of `RkChoice`.
+ * - `borderColor` : Color of border.
+ * - `width` : Width of `RkChoice`.
+ * - `height` : Height of `RkChoice`.
+ * - `content` : Component tree which will be set into `RkChoice`. As `content` you can use text, icon, image etc.
+ *
+ *
+ * @example Custom content example
+ *
+ * ```
+ * import Icon from 'react-native-vector-icons/Ionicons';
+ *
+ * RkTheme.setType('RkChoice', 'mic', {
+ *   backgroundColor: 'darkred',
+ *   borderWidth: 0,
+ *   borderRadius: 20,
+ *   content: (
+ *     <View>
+ *       <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic-off'}/>
+ *     </View>
+ *   )
+ * });
+ *
+ * RkTheme.setType('RkChoice', 'micSelected', {
+ *   content: (
+ *     <View>
+ *       <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/>
+ *     </View>
+ *   )
+ * });
+ *
+ * //...
+ *
+ * <RkChoice rkType='mic'/>
+ * ```
+ *
+ * @example Advanced Styling
+ *
+ * It's also possible to implement more detailed styling. `RkChoice` consists from couple of base react component.
+ * It's easy to set styles for each component.
+ *
+ * For example you can add `disabled` and `disabled & selected` `rkType` for previous example
+ *
+ * ```
+ * RkTheme.setType('RkChoice', 'micDisabled', {
+ *   inner: {
+ *     opacity: 0.7
+ *   }
+ * });
+ *
+ * RkTheme.setType('RkChoice', 'micSelectedDisabled', {
+ *   content: (
+ *     <View>
+ *       <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/>
+ *     </View>
+ *   ),
+ *   inner: {
+ *     opacity: 0.7
+ *   }
+ * });
+ * ```
+ *
+ * @example Inline styling
+ *
+ * It's possible to set styles inline. Use props `style` for `container` component and `contentStyle` for `content` component.
+ *
+ * ```
+ * <RkChoice style={{backgroundColor: 'green'}}
+ *    contentStyle={{width: 50, height:50}}
+ *    rkType='mic'/>
+ * ```
+ *
+ * @styles Available Components:
+ * - `container` : Can be `View` or `TouchableOpacity` depending on using with `RkChoiceGroup` or without.
+ * - `inner` : Applied to `content` property.
+ *
+ * @property {string} rkType - Types for component stylization
+ * By default `RkChoice` supports following types: `clear`, `radio`, `posNeg`
+ * @property {bool} selected - Determines whether component is checked
+ * @property {bool} disabled - Determines whether component is disabled
+ * @property {function} onPress - Triggered on press
+ * @property {style} style - Style for component container
+ * @property {style} contentStyle - Style for content inside component
+ */
 export class RkChoice extends RkComponent {
   componentName = 'RkChoice';
   typeMapping = {

@@ -84,7 +84,8 @@ import {RkComponent} from '../rkComponent'
  *
  * @example Advanced Styling
  *
- * It's also possible to implement more detailed styling. RkButton consists from couple of base react component. You can easily set styles for each component.
+ * It's also possible to implement more detailed styling. `RkButton` consists from couple of base react component.
+ * It's easy to set styles for each component.
  *
  * For example you can change the opacity of content passed to RkButton:
  *
@@ -98,11 +99,11 @@ import {RkComponent} from '../rkComponent'
  *
  * @styles Available properties:
  * - `container` : `TouchableOpacity` - container of `RkButton`.
- * - `content` : If you use plain text then `RkText`. If you insert children - then style will be applied to all children on first level.
+ * - `content` : If you use plain text then `RkText`. If you insert children - then style will not applied.
  *
  * @example Inline styling
  *
- * It's possible to set styles inline. Use props style for container component and contentStyle for content component.
+ * It's possible to set styles inline. Use props `style` for container component and `contentStyle` for content component.
  *
  * ```
  * <RkButton
@@ -110,7 +111,7 @@ import {RkComponent} from '../rkComponent'
  *    contentStyle={{color: 'white'}}> Hello </RkButton>
  * ```
  *
- * @property {string} rkType - Types for stylization component
+ * @property {string} rkType - Types for component stylization
  * By default `RkButton` supports following types: `primary`, `info`, `warning`, `danger`, `success`, `outline`, `rounded`,
  * `circle`, `small`, `medium`, `large`, `xlarge`, `clear`, `stretch`
  * @property {style} style - Style for button container

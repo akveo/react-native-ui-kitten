@@ -33,7 +33,7 @@ export class RkComponent extends Component {
    * @param {string} additionalTypes
    * @returns {array} styles
    */
-  defineStyles(additionalTypes) {
+    defineStyles(additionalTypes) {
     let rkTypes = this.props.rkType || '';
     let types = _.join([this.defaultType, rkTypes, additionalTypes], ' ');
     types = types && types.length ? types.split(' ') : [];

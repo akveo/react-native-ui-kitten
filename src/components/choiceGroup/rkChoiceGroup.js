@@ -1,18 +1,100 @@
-import React, {Component} from 'react';
-
+import React from 'react';
 import {
-  StyleSheet,
-  Text,
-  TouchableHighlight,
   View,
 } from 'react-native';
-
+import _ from 'lodash';
 import {RkChoice} from '../choice/rkChoice';
 import {RkComponent} from '../rkComponent';
 
-
-import _ from 'lodash';
-
+/**
+ * `RkChoiceGroup` component is container for elements that can be used as checkboxes or radio buttons
+ *
+ * Used usually in combination with `RkChoice` component.
+ *
+ * @extends RkComponent
+ *
+ * @example Simple usage with labels
+ *
+ * In order to render checkbox/radio with touchable label inside `RkChoiceGroup` should be placed any `touchable` component with `choiceTrigger` prop.
+ * This `touchable` component will trigger state change for component
+ *
+ * ```
+ * <RkChoiceGroup>
+ *   <TouchableOpacity choiceTrigger>
+ *     <View style={{flexDirection:'row', alignItems:'center'}}>
+ *       <RkChoice rkType='posNeg'/>
+ *       <Text>Label</Text>
+ *     </View>
+ *   </TouchableOpacity>
+ * </RkChoiceGroup>
+ * ```
+ *
+ * @example Radio buttons example
+ *
+ * In order to create radio-like component for `RkChoiceGroup` should be set `radio` prop:
+ *
+ * ```
+ * <RkChoiceGroup radio>
+ *   <TouchableOpacity choiceTrigger>
+ *     <View style={{flexDirection:'row', alignItems:'center'}}>
+ *       <RkChoice rkType='radio'/>
+ *       <Text>Option 1</Text>
+ *     </View>
+ *   </TouchableOpacity>
+ *   <TouchableOpacity choiceTrigger>
+ *     <View style={{flexDirection:'row', alignItems:'center'}}>
+ *       <RkChoice rkType='radio'/>
+ *       <Text>Option 2</Text>
+ *     </View>
+ *   </TouchableOpacity>
+ *   <TouchableOpacity choiceTrigger>
+ *     <View style={{flexDirection:'row', alignItems:'center'}}>
+ *       <RkChoice rkType='radio'/>
+ *       <Text>Option 3</Text>
+ *     </View>
+ *   </TouchableOpacity>
+ * </RkChoiceGroup>
+ * ```
+ *
+ * @example Using `rkType`prop
+ *
+ * `RkChoiceGroup` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
+ * There are already some predefined types. Here is example of how to use rkType
+ *
+ * ```
+ * <RkChoiceGroup rkType='bordered'>
+ *   <TouchableOpacity choiceTrigger>
+ *     <View style={{flexDirection:'row', alignItems:'center'}}>
+ *       <RkChoice rkType='posNeg'/>
+ *       <Text>Label</Text>
+ *     </View>
+ *   </TouchableOpacity>
+ * </RkChoiceGroup>
+ * ```
+ *
+ * @example Define new rkTypes
+ *
+ * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
+ * New rkTypes are defined using `setType` method of `RkTheme`:
+ *
+ * ```
+ * RkTheme.setType('RkChoiceGroup','rounded',{
+ *  container: {
+ *    borderRadius: 10
+ *  }
+ * });
+ * ```
+ *
+ * @styles Available properties:
+ * - `container` : `View` - root element of `RkChoiceGroup`
+ *
+ *
+ * @property {string} rkType - Types for component stylization
+ * By default `RkChoiceGroups` supports following types: `bordered`
+ * @property {style} style - Style for root container
+ * @property {boolean} radio - Enable radio buttons mode
+ * @property {number} selectedIndex - Determines which RkChoice component is checked from radio group.
+ */
 export class RkChoiceGroup extends RkComponent {
 
   componentName = 'RkChoiceGroup';
@@ -74,7 +156,8 @@ export class RkChoiceGroup extends RkComponent {
     let index = 0;
 
     let appendChoiceProps = (props, child) => {
-      if (this.props.disabled !== undefined && child.props.disabled == undefined) props.disabled = this.props.disabled;
+      if (this.props.disabled !== undefined && child.props.disabled == undefined)
+        props.disabled = this.props.disabled;
     };
 
     let processTrigger = (child, index) => {
@@ -113,6 +196,4 @@ export class RkChoiceGroup extends RkComponent {
 
     return React.Children.map(this.props.children, process);
   }
-
-
 }
