@@ -1,3 +1,12 @@
+
+import React from 'react';
+
+import {
+  Text,
+} from 'react-native';
+
+import {RkComponent} from '../rkComponent.js';
+
 /**
  * `RkText` is a component used to render text blocks
  *
@@ -60,14 +69,6 @@
  `large`, `small`, `medium`, `header`, `subtitle`
  * @property {Text.props} props - All `Text` props also applied to `RkText`
  */
-
-import React from 'react';
-
-import {
-  Text,
-} from 'react-native';
-
-import {RkComponent} from '../rkComponent.js';
 
 export class RkText extends RkComponent {
   componentName = 'RkText';
