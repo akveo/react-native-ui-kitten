@@ -36,7 +36,7 @@ import {RkComponent} from "../rkComponent";
  * @example Using `rkType`prop
  *
  * `RkCard` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
- * There are already some predefined types. Here is example of how to use rkType
+ * There are already some predefined types. Here is example of how to use rkTyphttp://cs9.pikabu.ru/post_img/2017/06/14/5/1497421256176090883.jpge
  *
  * ```
  * <RkCard rkType='shadowed'>
