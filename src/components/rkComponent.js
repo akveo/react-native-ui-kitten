@@ -1,37 +1,42 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Platform} from 'react-native';
 import _ from 'lodash';
 import {TypeManager} from '../styles/typeManager.js';
 import {RkTheme} from '../styles/themeManager.js';
 
 /**
- * RkComponent is component
+ * `RkComponent` is base component for all components in `react-native-ui-kitten` library
+ *
+ * This component includes core logic for stylization and theming. All themable components should extend this component.
+ * @extends React.Component
  */
-export class RkComponent extends Component {
+export class RkComponent extends React.Component {
 
-  //default section used to configure control styles
   /**
-   * {string} Name of component
+   * {string} Name of component. Should be overridden in inherited component.
    */
   componentName = '';
+
   /**
-   * {object} mapping
+   * {object} Mapping which used for defining predefined properties such as `color` in `RkButton`. Can be overridden in inherited component
    */
   typeMapping = {};
+
   /**
-   * {string} base style name
+   * {string} Default component style name. Can be overridden in inherited component
    */
   baseStyle = '_base';
 
   /**
-   * {string} default type name
+   * {string} Default type name for component. Can be overridden in inherited component.
    */
   defaultType = 'basic';
 
   /**
-   * used to compile rkTypes
-   * @param {string} additionalTypes
-   * @returns {array} styles
+   * Used to collect and compile all rkTypes into styles. Returns object with styles for all internal components.
+   * @param {string} additionalTypes - Sometimes inherited component need to apply additional type implicitly.
+   * For example - if component state is `selected` component may ask about `selected` type.
+   * @returns {object} styles - Object with compiled styles for each internal component.
    */
     defineStyles(additionalTypes) {
     let rkTypes = this.props.rkType || '';
@@ -41,10 +46,12 @@ export class RkComponent extends Component {
   }
 
   /**
-   * Extracts non style value
-   * @param {string} styles
-   * @param {string} property
-   * @returns {object} something
+   * Extracts property value from type. Often used if need to control non-style properties using types.
+   * Example - `placeholderTextColor` of `TextInput` component. For some reason this setting should be passed separately from `style` prop.
+   * So we keep `placeholderTextColor` as style property of `RkTextInput` but before applying to internal `TextInput` - we extract this value and pass it to according prop.
+   * @param {object} styles - Styles which contains non-style property
+   * @param {string} property - name of property that should be extracted.
+   * @returns {object} value of extracted property
    */
   extractNonStyleValue(styles, property) {
     let val = _.find(styles, (e) => e.hasOwnProperty(property));
