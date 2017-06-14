@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import {
   View,
 } from 'react-native';
 
-
-export class RkTab extends Component {
+export class RkTab extends React.Component {
 
   static name = 'tab';
 
