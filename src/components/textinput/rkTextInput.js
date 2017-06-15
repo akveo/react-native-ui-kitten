@@ -57,7 +57,6 @@ import {RkComponent} from '../rkComponent.js';
  * ```
  *
  * @styles Available properties:
- *
  * - `color` : Color of typed text inside `RkTextInput`.
  * - `inputBackgroundColor` : Background color of `TextInput` inside `RkTextInput`
  * - `placeholderTextColor` : Color of placeholder text.

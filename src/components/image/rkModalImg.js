@@ -89,12 +89,10 @@ import {RkTheme} from '../../styles/themeManager';
  * - `modal` : `View` - Root view of `Modal` component.
  * - `modalImg` : `Image` - Image in modal mode.
  * - `header` : `View` - View container for header in modal mode. Here also will be set content returned form `renderHeader` function.
- * - `headerContent` : `View` - View container for header in modal mode (A child of `header` view).
- * Only available if `renderHeader` not passed to component.
+ * - `headerContent` : `View` - View container for header in modal mode (A child of `header` view). Only available if `renderHeader` not passed to component.
  * - `headerText`: `RkText` - Text that render page number in header. Only available if `renderHeader` not passed to component.
  * - `footer` : `View` - View container for footer in modal mode. Here also will be set content returned form `renderFooter` function.
- * - `footerContent` : `View` - View container for footer in modal mode (A child of `footer` view).
- * Only available if `renderFooter` not passed to component.
+ * - `footerContent` : `View` - View container for footer in modal mode (A child of `footer` view). Only available if `renderFooter` not passed to component.
  *
  * @example Inline Styling
  *
