@@ -98,23 +98,17 @@ import {RkText} from '../text/rkText'
  *
  * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
  * New rkTypes are defined using `setType` method of `RkTheme`:
- *
  *`RkTabView` is a component which style depends or it's internal state. There are 2 states for this component:
  * - unselected (base)
  * - selected
- *
  * Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
  * and `RkTabView` will apply them according to its state.
- *
  * Use the following convention:
- *
  * - `%name%` : Unselected state.
  * - `%name%Selected` : Selected state.
  * Where `%name%` is name of yours `rkType`.
- *
  * One more note: during state change `RkTabView` not replace base `rkType` with new one. It just add correct.
  * So *selected* component will have actually two `rkType`s - base and selected.
- *
  * To define new `rkType` you can use predefined properties which will passed to according element inside component:
  *
  * ```
@@ -192,11 +186,11 @@ import {RkText} from '../text/rkText'
  *
  *
  * @example Inline styling
+ *
  * It's possible to set styles inline. Use prop `style` of `RkTabView` for `container` component and
  * `headerContainerStyle` for `headerContainer` component.
  * Use prop `style` (unselected) and `styleSelected` (selected) of `RkTabView.Tab` for `tabContainer` component.
  * Use prop `contentStyle` (unselected) and `contentStyleSelected` (selected) of `RkTabView.Tab` for `contentStyleSelected` component.
- *
  * Here is an example of inline styling:
  *
  * ```
@@ -216,8 +210,7 @@ import {RkText} from '../text/rkText'
  * @property {style} style - Style applied to RkTabView container (tabs & content)
  * @property {style} headerContainerStyle - Style applied to container wrapping tabs (not for the content)
  * @property {number} maxVisibleTabs - If set - tabs will be scrollable and only specified number of tabs will be visible.
- * @property {string | function} title - (RkTabView.Tab prop) When type of title is string, title is rendered like Text inside of View.
- * Otherwise title is rendered using function passed to this prop, function can apply isSelected argument and should return React component
+ * @property {string | function} title - (RkTabView.Tab prop) When type of title is string, title is rendered like Text inside of View. Otherwise title is rendered using function passed to this prop, function can apply isSelected argument and should return React component
  * @property {style} style - (RkTabView.Tab prop) Style applied to RkTabView.Tab content container (used only when label is text)
  * @property {style} styleSelected - (RkTabView.Tab prop) Style applied to RkTabView.Tab label container when tab is selected (used only when label is text)
  * @property {style} innerStyle - (RkTabView.Tab prop) Style applied to RkTabView.Tab label (used only when label is text)

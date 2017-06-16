@@ -4,6 +4,7 @@ import {RkComponent} from "../rkComponent";
 
 /**
  * `RkCard` component used to render card view in your application.
+ *
  * It's usually being used with its props (described below) applied to standard react or custom components.
  * @extends RkComponent
  *

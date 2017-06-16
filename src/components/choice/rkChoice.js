@@ -31,28 +31,21 @@ import {RkComponent} from '../rkComponent';
  *
  * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
  * New rkTypes are defined using `setType` method of `RkTheme`:
- *
  * `RkChoice` is a component which style depends or it's internal state. There are 4 states for this component:
  * - unselected (base)
  * - selected
  * - unselected & disabled
  * - selected & disabled
- *
  * Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
  * and `RkChoice` will apply them according to its state.
- *
  * Use the following convention:
- *
  * - `%name%` : Unselected state.
  * - `%name%Selected` : Selected state.
  * - `%name%Disabled` : Unselected & disabled state.
  * - `%name%SelectedDisabled`: Selected & disabled state.
- *
  * Where `%name%` is name of yours `rkType`.
- *
  * One more note: during state change `RkChoice` not replace base `rkType` with new one. It just add correct.
  * So for example `disabled` component will have actually two `rkType`s - base and disabled.
- *
  * To define new `rkType` you can use predefined properties which will passed to according element inside component:
  *
  * ```
@@ -126,7 +119,6 @@ import {RkComponent} from '../rkComponent';
  *
  * It's also possible to implement more detailed styling. `RkChoice` consists from couple of base react component.
  * It's easy to set styles for each component.
- *
  * For example you can add `disabled` and `disabled & selected` `rkType` for previous example
  *
  * ```

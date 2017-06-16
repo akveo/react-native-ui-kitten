@@ -28,6 +28,7 @@ import {RkTheme} from '../../styles/themeManager';
  * ```
  *
  * @example Custom header and footer
+ *
  * It's possible to render custom header and footer when image is in fullscreen mode. There are special props for this:
  * `renderHeader` and `renderFooter`. Functions passed as this props can accept `options` object described below.
  *
