@@ -331,6 +331,11 @@ export const STRUCTURE = [
             block: 'rk-description',
             klass: 'RkStyleSheet',
           },
+          {
+            type: 'block',
+            block: 'rk-example',
+            klass: 'RkStyleSheet',
+          }
         ]
       },
     ],

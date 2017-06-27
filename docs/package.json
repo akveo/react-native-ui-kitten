@@ -6,8 +6,7 @@
     "docs:gen": "docs:prepare && docs:pasre",
     "docs:serve": "documentation documentation.js build ../src/** -f json -o docs.json && prsr -g docjs -f react -i docs.json -o output.json && ng serve --port 3000",
     "start": "ng serve --port 3000",
-    "docs:build": "rimraf dist && ng build",
-    "docs:gh-pages": "npm run docs:build --base-href \"https://github.com/mishkolesnikov/react-native-ui-kitten\" && ngh"
+    "docs:build": "rimraf dist && ng build"
   },
   "dependencies": {
     "@angular/common": "4.1.3",
