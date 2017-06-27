@@ -1,0 +1,44 @@
+@import '../../styles/variables';
+
+@include nga-install-component {
+
+  max-width: nga-theme(content-width);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex:1;
+  text-align: center;
+  a {
+    img {
+      height: 41px;
+    }
+    &:nth-child(2) img {
+      margin: 32.5px;
+    }
+  }
+
+  @media screen and (max-width: 970px) {
+    p {
+      font-size: 0.75rem;
+    }
+    a {
+      img {
+        height: 30px;
+      }
+      &:nth-child(2) img {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px){
+    flex-direction: column-reverse;
+    .socio {
+      display: none;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,116 @@
+$title-font-size: 32px;
+$code-background: rgb(245, 246, 252);
+$text-color: rgba(0, 0, 0, 0.87);
+$text-color-active: rgba(255, 40, 36, 0.87);
+
+:host {
+  /deep/ nga-card {
+
+    nga-card-header {
+      font-size: $title-font-size;
+      font-weight: bold;
+      border: none;
+      text-transform: none;
+      opacity: 1;
+    }
+
+    nga-card-body {
+
+      .block-title {
+        font-size: $title-font-size;
+        font-weight: bold;
+        margin-bottom: 2rem;
+      }
+      .block-subtitle {
+        font-size: 20px; //1.25 rem
+        font-weight: bold;
+      }
+      .block-container {
+        margin-bottom: 2rem;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        margin: 0.5rem 0;
+      }
+
+      .table {
+        td {
+          padding: 0.75rem 0.75rem 0.75rem 0;
+        }
+        thead {
+          font-weight: bold;
+          td {
+            border-top: none;
+          }
+        }
+      }
+
+      code {
+        font-size: 100%;
+        color: $text-color-active;
+      }
+      pre {
+        background: $code-background;
+        padding: 0.75rem 1rem;
+        code {
+          color: $text-color;
+        }
+      }
+      react-code-highlighter {
+        display: none;
+        .code-title {
+          background: $code-background;
+          padding: 0.75rem 1rem;
+          border-radius: 3px;
+          border-bottom: 1px solid rgb(224, 225, 235);
+          position: relative;
+          i {
+            position: absolute;
+            right: 1rem;
+            color: rgb(224, 225, 235);
+          }
+        }
+      }
+
+      react-methods-block {
+        .method-signature {
+          margin-bottom: 1rem;
+        }
+      }
+
+      react-markdown-block {
+        pre {
+          margin-bottom: 2rem;
+        }
+      }
+      @media screen and (max-width: 600px) {
+        .table {
+          td {
+            word-break: normal;
+          }
+        }
+      }
+
+      @media screen and (max-width: 700px) {
+        react-examples-block {
+          & > div > pre {
+            display: none;
+          }
+          react-code-highlighter {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+

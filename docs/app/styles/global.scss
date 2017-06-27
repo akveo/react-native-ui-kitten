@@ -1,0 +1,33 @@
+@mixin ngd-global-theme() {
+ // TODO: global styles below nga-layout
+  .ui-kitten {
+    font-family: nga-theme(kitten-font);
+  }
+  a {
+    text-decoration: none;
+    color: nga-theme(color-fg);
+  }
+}
+
+
+// TODO: move to globals, use mixins
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+// For Internet Explorer
+body {
+  scrollbar-face-color: rgba(0, 0, 0, 0.3);
+  scrollbar-track-color: rgba(255, 255, 255, 0.7);
+  min-width: 320px;
+}

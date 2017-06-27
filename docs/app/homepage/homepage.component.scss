@@ -1,0 +1,295 @@
+@import '../styles/variables';
+@import '../styles/helpers';
+
+@include nga-install-root-component {
+  img{
+    max-width: 100%;
+  }
+
+  p {
+    font-size: 1.625rem;
+    max-width: 51.875rem;
+    margin: 1.625rem auto;
+  }
+
+  h1 {
+    font-size: 6.25rem;
+  }
+
+  h2 {
+    font-size: 5.5rem;
+  }
+
+  h3 {
+    font-size: 4.625rem;
+    margin-bottom: 1.625rem;
+  }
+
+  h4 {
+    font-size: 2.125rem;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.56);
+    margin-bottom: 1.625rem;
+  }
+
+  .wrapper {
+    padding: 0 1rem;
+    max-width: nga-theme(content-width);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  a.button {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.375rem;
+    border: 3px solid nga-theme(color-primary);
+    padding: 0 3.5em;
+    line-height: calc(3em - 6px);
+    border-radius: calc(1.5em - 3px);
+    color: nga-theme(color-primary);
+    margin: 0.625rem;
+    &:hover {
+      color: nga-theme(color-fg-inverse);
+      background: nga-theme(color-primary);
+    }
+    &.platform-button {
+      position: relative;
+      padding: 0 1em 0 3em;
+      i {
+        position: absolute;
+        left: 0.5em;
+        font-size: 2em;
+        &.ion-social-apple {
+          bottom: 0.1em;
+        }
+      }
+    }
+  }
+
+  .kitten {
+    color: nga-theme(color-fg-inverse);
+    background: url('../../assets/backgroundMainScreen.png') no-repeat 50% 0;
+    padding: 10rem 0 24.625rem;
+    background-size: cover;
+    margin-bottom: 6rem;
+    .title-container {
+      width: 60%;
+      display: flex;
+      justify-content: flex-end;
+      .title {
+        max-width: 35rem;
+        text-align: left;
+      }
+      p {
+          padding-right: 10rem;
+      }
+    }
+    a.button {
+      font-size: 1rem;
+      border-color: nga-theme(color-fg-inverse);
+      color: nga-theme(color-fg-inverse);
+      margin: 0.625rem 1.250rem 0.625rem 0;
+      &:hover {
+        color: nga-theme(color-primary);
+        background: nga-theme(color-fg-inverse);
+      }
+    }
+    img {
+      display: none;
+    }
+  }
+
+  .demo {
+    img {
+      margin: 1.625rem 0;
+    }
+    a.button {
+      margin-bottom: 10rem;
+    }
+  }
+
+  .contacts {
+    color: nga-theme(color-fg-inverse);
+    background: linear-gradient(to bottom, rgb(255, 147, 30), rgb(255, 29, 37));
+    img {
+      width: 100%;
+    }
+    .big-circle-img {
+      margin-bottom: -2px;
+
+    }
+    .contact-container {
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       margin-bottom: 4.5rem;
+       font-size: 2rem;
+      .icons {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 12rem;
+        width: 12.5rem;
+        .icon-socio {
+            position: absolute;
+            width: 10rem;
+            &:hover ~ .icon-cloud {
+              height: 98%;
+              width: 98%;
+              margin-right: 3px;
+            }
+          }
+        .icon-cloud {
+          width: 75%;
+          height: 75%;
+          transition: all 0.5s ease-out;
+        }
+      }
+    }
+  }
+
+  .hire-block {
+    padding: 2rem 0 4rem;
+    p {
+      max-width: 36.875rem;
+    }
+    h4 {
+      color: nga-theme(color-fg);
+      font-weight: 500;
+    }
+  }
+
+  @media screen and (max-width: 60.625rem) {
+    h2 {
+      $map: (37.5rem: 3.75rem, 60.625rem: 5.5rem);
+      font-size: linear-interpolation($map);
+    }
+    h1 {
+      $map: (37.5rem: 4.25rem, 60.625rem: 6.25rem);
+      font-size: linear-interpolation($map);
+    }
+    p {
+      $map: (37.5rem: 1.25rem, 60.625rem: 1.625rem);
+      font-size: linear-interpolation($map);
+      margin: 1rem auto;
+    }
+    h3 {
+      $map: (37.5rem: 2.5rem, 60.625rem: 4.375rem);
+      font-size: linear-interpolation($map);
+      margin-bottom: 1rem;
+    }
+    h4 {
+      $map: (37.5rem: 1.25, 60.625rem: 2.25rem);
+      font-size: linear-interpolation($map);
+      margin-bottom: 1rem;
+    }
+    .kitten {
+      background-size: 200%;
+      padding: 10% 0 55%;
+      margin-bottom: 0;
+      .title-container {
+        width: 62%;
+        P {
+          padding-right: 5rem;
+        }
+      }
+    }
+    .demo {
+      img {
+        margin: 1rem 0;
+      }
+      a.button {
+        margin-bottom: 7rem;
+      }
+    }
+    .contacts {
+      .contact-container {
+        font-size: 1.5rem;
+        .icons {
+          height: 10rem;
+          width: 10.3rem;
+          img.icon-socio {
+            width: 8.15rem;
+            &:hover ~ .icon-cloud {
+              height: 95%;
+              width: 95%;
+            }
+          }
+        }
+      }
+    }
+
+  }
+  @media screen and (max-width: 41.875rem) {// to avoid big bottom wwhitesapce
+    .kitten {
+      padding: 10% 0 40%;
+    }
+  }
+  @media screen and (max-width: 37.5rem) {
+    h2 {
+      font-size: 3.125rem;
+    }
+    h1 {
+      font-size: 3.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    h3 {
+      font-size: 1.875rem;
+    }
+    h4 {
+      font-size: 1.25rem;
+    }
+    a.button {
+      font-size: 1rem;
+    }
+    .kitten {
+      background-image: linear-gradient(to top, rgb(255, 147, 30), rgb(255, 29, 37));
+      padding: 0;
+      img {
+        display: inline;
+      }
+      .title-container {
+        justify-content: center;
+        width: 100%;
+        .title {
+          max-width: 20rem;
+          text-align: center;
+          P {
+            padding: 0;
+          }
+        }
+      }
+      a.button {
+        margin: 0.625rem;
+      }
+    }
+    .demo {
+      a.button {
+        margin-bottom: 0.625rem;
+        &:last-child {
+          margin-bottom: 3rem;
+        }
+        & ~ a.button {
+          margin-bottom: 3rem;
+        }
+      }
+    }
+    .contacts {
+      .contact-container {
+        font-size: 1rem;
+        .icons {
+          height: 5rem;
+          width: 5rem;
+          img.icon-socio {
+            width: 4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
