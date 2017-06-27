@@ -6,6 +6,18 @@
 // which themes you what to enable (empty to enable all - not recommended)
 $nga-enabled-themes: (default);
 
+@mixin nga-install-root-component() {
+
+	$themes-to-install: get-enabled-themes();
+
+	@each $theme-name, $theme in $themes-to-install {
+		:host .nga-theme-#{$theme-name} {
+			$theme: $theme !global;
+			@content;
+		}
+	}
+}
+
 $nga-themes: nga-register-theme((
   font-main: unquote('Roboto, sans-serif'),
   kitten-font: unquote('Righteous, cursive'),
@@ -31,6 +43,7 @@ $nga-themes: nga-register-theme((
   color-fg-inverse: white,
   docs-content-margin-top: 1.5rem,
   right-sidebar-width: 17.5rem,
+	code-snippets-bg: rgb(245, 246, 252),
 
   separator: color-bg,
   header-padding: 0,

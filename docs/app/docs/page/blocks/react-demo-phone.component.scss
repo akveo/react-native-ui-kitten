@@ -13,20 +13,20 @@ $color-primary: #ff241f;
       background-size: contain;
       img {
         position: absolute;
-        top: 62px;
+        top: 57px;
         left: 35px;
-        width: 203px;
-        height: 365px;
+        width: 208px;
+        height: 371px;
       }
 
       &.android {
         background: url(../../../../assets/androidPhoneImage.png) no-repeat;
         background-size: contain;
         img {
-          top: 57px;
+          top: 55px;
           left: 30px;
           width: 218px;
-          height: 388px;
+          height: 385px;
         }
       }
     }

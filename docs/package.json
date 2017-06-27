@@ -1,9 +1,13 @@
 {
   "name": "nga-docs",
   "scripts": {
-    "docs:gen": "documentation documentation.js build ../src/** -f json -o docs.json && prsr -g docjs -f react -i docs.json -o output.json",
-    "docs:serve": "documentation documentation.js build ../src/** -f json -o docs.json && prsr -g docjs -f react -i docs.json -o output.json && ng serve --port 4201",
-    "docs:build": "rimraf dist && ng build --prod -- --aot"
+    "docs:prepare": "documentation documentation.js build ../src/** -f json -o docs.json",
+    "docs:parse": "prsr -g docjs -f react -i docs.json -o output.json",
+    "docs:gen": "docs:prepare && docs:pasre",
+    "docs:serve": "documentation documentation.js build ../src/** -f json -o docs.json && prsr -g docjs -f react -i docs.json -o output.json &&",
+    "start": "ng serve --port 3000",
+    "docs:build": "rimraf dist && ng build --prod -- --aot",
+    "docs:gh-pages": ""
   },
   "dependencies": {
     "@angular/common": "4.1.3",
@@ -19,16 +23,15 @@
     "rxjs": "5.4.0",
     "zone.js": "0.8.10",
     "prismjs": "^1.6.0",
-    "marked": "^0.3.6",
-    "raw-loader": "^0.5.1"
-
+    "marked": "^0.3.6"
   },
   "devDependencies": {
     "@akveo/nga-theme": "^2.0.0-alpha.1-dev.2",
+    "@akveo/nga-auth": "^2.0.0-alpha.1-dev.2",
     "@angular/cli": "1.1.0",
     "@angular/compiler-cli": "4.1.3",
     "@types/node": "6.0.74",
-    "gulp": "^3.9.1",
+    "angular-cli-ghpages": "0.5.0",
     "rimraf": "2.6.1",
     "roboto-fontface": "^0.7.0",
     "typeface-righteous": "0.0.22",

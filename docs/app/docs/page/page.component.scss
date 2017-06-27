@@ -1,13 +1,15 @@
+@import '../../styles/variables';
 $title-font-size: 32px;
+//;
 $code-background: rgb(245, 246, 252);
 $text-color: rgba(0, 0, 0, 0.87);
 $text-color-active: rgba(255, 40, 36, 0.87);
 
-:host {
+@include nga-install-component {
   /deep/ nga-card {
 
     nga-card-header {
-      font-size: $title-font-size;
+      font-size: nga-theme(font-size-lg);
       font-weight: bold;
       border: none;
       text-transform: none;
@@ -17,7 +19,7 @@ $text-color-active: rgba(255, 40, 36, 0.87);
     nga-card-body {
 
       .block-title {
-        font-size: $title-font-size;
+        font-size: nga-theme(font-size-lg);
         font-weight: bold;
         margin-bottom: 2rem;
       }
@@ -49,10 +51,10 @@ $text-color-active: rgba(255, 40, 36, 0.87);
 
       code {
         font-size: 100%;
-        color: $text-color-active;
+        color: nga-theme(color-fg-active);
       }
       pre {
-        background: $code-background;
+        background: nga-theme(code-snippets-bg);
         padding: 0.75rem 1rem;
         code {
           color: $text-color;
@@ -61,7 +63,7 @@ $text-color-active: rgba(255, 40, 36, 0.87);
       react-code-highlighter {
         display: none;
         .code-title {
-          background: $code-background;
+          background: nga-theme(code-snippets-bg);
           padding: 0.75rem 1rem;
           border-radius: 3px;
           border-bottom: 1px solid rgb(224, 225, 235);
