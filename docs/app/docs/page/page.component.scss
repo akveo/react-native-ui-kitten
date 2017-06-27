@@ -17,7 +17,7 @@ $text-color-active: rgba(255, 40, 36, 0.87);
     }
 
     nga-card-body {
-
+      font-family: nga-theme(font-main);
       .block-title {
         font-size: nga-theme(font-size-lg);
         font-weight: bold;
