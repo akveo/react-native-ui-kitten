@@ -8,7 +8,6 @@ import {RkStyleSheet} from './styleSheet'
 const themeUpdated = 'themeUpdated';
 /**
  * `RkTheme` object is entry point for all manipulations with customization.
- * @alias RkTheme
  */
 class ThemeManager {
 
