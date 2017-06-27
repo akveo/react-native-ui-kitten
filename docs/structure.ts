@@ -318,7 +318,7 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'rk-description',
-            klass: 'RkTheme',
+            klass: 'ThemeManager',
           },
         ]
       },
@@ -329,12 +329,12 @@ export const STRUCTURE = [
           {
             type: 'block',
             block: 'rk-description',
-            klass: 'RkStyleSheet',
+            klass: 'ThemedStyleSheet',
           },
           {
             type: 'block',
             block: 'rk-example',
-            klass: 'RkStyleSheet',
+            klass: 'ThemedStyleSheet',
           }
         ]
       },
