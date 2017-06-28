@@ -15,9 +15,9 @@ export class ReactHomepageComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     Observable.fromEvent(window, 'scroll')
-      // .debounceTime(50)
       .subscribe(() => {
-        this.transparentHeader = document.body.scrollTop == 0;
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        this.transparentHeader = scrollTop == 0;
       });
   }
 }
