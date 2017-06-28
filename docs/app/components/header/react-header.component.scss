@@ -1,7 +1,6 @@
 @import '../../styles/variables';
 
 @include nga-install-component {
-
   display: flex;
   flex: 1;
   max-width: nga-theme(content-width);
@@ -64,7 +63,7 @@
       height: 0;
       overflow: hidden;
       background: nga-theme(color-bg);
-      transition: height 0.5s ease;
+      transition: height 0.3s ease-out;
       a, a:hover, a:focus, a:active {
         color: nga-theme(color-fg);
         font-weight: bold;
