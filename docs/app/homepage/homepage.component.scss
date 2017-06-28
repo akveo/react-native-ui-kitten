@@ -269,6 +269,13 @@
     }
 
   }
+
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    img.icon-cloud {
+      visibility: hidden;
+    }
+  }
+
   @media screen and (max-width: 41.875rem) {// to avoid big bottom wwhitesapce
     .kitten {
       padding: 15% 0 40%;
