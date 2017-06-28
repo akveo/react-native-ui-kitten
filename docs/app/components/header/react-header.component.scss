@@ -83,7 +83,6 @@
     i {
       display: none;
     }
-<<<<<<< HEAD
 
     /deep/ nga-menu.mobile-menu {
       position: fixed;
@@ -118,15 +117,6 @@
           padding-left: 1rem;
           font-weight: normal;
         }
-=======
-    .menu-collapsed, .menu-expanded {
-      visibility: visible;
-      opacity: 1;
-      height: 100%;
-      a {
-        padding-left: 1rem;
-        font-weight: normal;
->>>>>>> fix(docs): improve header
       }
     }
   }
