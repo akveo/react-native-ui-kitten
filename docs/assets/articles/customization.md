@@ -1,5 +1,6 @@
 ### Overview
-`react-native-ui-kitten` components have very flexible customization ability.
+Customization of `react-native-ui-kitten` is really easy and very extensible. 
+This feature allows to create beautiful and flexible component styles in a simple and elegant way.
 
 ### rkType
 
@@ -12,7 +13,7 @@ As well, there's always a possibility to override types for some specific compon
 
 For example, consider this code: 
 
-```jsx
+```
 import {RkButton} from 'react-native-ui-kitten';
 
 //... 
@@ -92,8 +93,8 @@ Let's change color and size for all `RkText` components in app:
 
 ### Themes
 
-All base *rkTypes* depends on theme of application. *Theme* contains base values (colors, fontSizes etc) for all Rk-components.
-You can easily override values in theme or even define your own theme using *[RkTheme](../theme)*.
+All base *rkTypes* depends on theme of application. *Theme* contains base values (colors, fontSizes etc) for all *rk-components*.
+You can easily override values in theme or even define your own theme using `RkTheme`.
 But user-defined *rkType*s should also be able to respond theme changes.
 For this purpose can be used property functions instead of values.
 Let's create `rkType` for `RkText` which will depend on some value from theme.
@@ -108,4 +109,3 @@ Variable `theme` here is instance of current theme. So in case theme was switche
  create above will be also changed and all components with this type will be also updated.
 
 Sometimes there is necessity to use theme values for regular components. In this case you need to use `RkStyleSheet`.
-More detailed about it described here [LINK]

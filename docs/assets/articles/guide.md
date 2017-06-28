@@ -1,6 +1,6 @@
 ### Overview
 React Native UI Kitten has strong customization support. In order to get this support it's possible to create 
-custom rk-components. This guide discover how to create your own rk-component from scratch.
+custom *rk-components*. This guide discover how to create your own *rk-component* from scratch.
 
 Let's create avatar component which will have image of user, text with user name and optional description of user.
 

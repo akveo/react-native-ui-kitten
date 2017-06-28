@@ -8,9 +8,7 @@ import {RkComponent} from '../rkComponent';
 
 /**
  * `RkChoiceGroup` component is container for elements that can be used as checkboxes or radio buttons
- *
  * Used usually in combination with `RkChoice` component.
- *
  * @extends RkComponent
  *
  * @example Simple usage with labels
@@ -56,7 +54,7 @@ import {RkComponent} from '../rkComponent';
  * </RkChoiceGroup>
  * ```
  *
- * @example Using `rkType`prop
+ * @example Using rkType prop
  *
  * `RkChoiceGroup` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
  * There are already some predefined types. Here is example of how to use rkType
@@ -93,7 +91,7 @@ import {RkComponent} from '../rkComponent';
  * By default `RkChoiceGroups` supports following types: `bordered`
  * @property {style} style - Style for root container
  * @property {boolean} radio - Enable radio buttons mode
- * @property {number} selectedIndex - Determines which RkChoice component is checked from radio group.
+ * @property {number} selectedIndex - Determines which RkChoice component is checked from radio group
  */
 export class RkChoiceGroup extends RkComponent {
 

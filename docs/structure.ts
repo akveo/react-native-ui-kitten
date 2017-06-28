@@ -16,17 +16,6 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
-        name: 'Guide',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guide.md'
-          }
-        ]
-      },
-      {
-        type: 'page',
         name: 'Customization',
         children: [
           {
@@ -46,7 +35,18 @@ export const STRUCTURE = [
             source: 'theme.md'
           }
         ]
-      }
+      },
+      {
+        type: 'page',
+        name: 'Create custom component',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guide.md'
+          }
+        ]
+      },
     ],
   },
   {
@@ -320,6 +320,11 @@ export const STRUCTURE = [
             block: 'rk-description',
             klass: 'ThemeManager',
           },
+          {
+            type: 'block',
+            block: 'rk-methods',
+            klass: 'ThemeManager',
+          }
         ]
       },
       {
@@ -333,7 +338,12 @@ export const STRUCTURE = [
           },
           {
             type: 'block',
-            block: 'rk-example',
+            block: 'rk-examples',
+            klass: 'ThemedStyleSheet',
+          },
+          {
+            type: 'block',
+            block: 'rk-methods',
             klass: 'ThemedStyleSheet',
           }
         ]

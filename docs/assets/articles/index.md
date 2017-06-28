@@ -13,7 +13,7 @@ These styles can be reused then in the process of development. Configure them on
 
 Yes, it's just set of UI components. It doesn't force you to use any specific library for business logic implementation.
 
-### Installation
+### How to install
 
 Simply add it as an npm dependency:
 
@@ -26,5 +26,18 @@ And include the component you need into your application:
 import {RkButton} from 'react-native-ui-kitten';
 ```
 
+Then just use:
 
+```
+render() {
+  return (
+    <View>
+      <RkButton>Click me!</RkButton>
+    </View>
+  )
+}
+```
 
+### Customization
+All components are flexible and can be customized.
+More detailed about stylization of components you can find [here](http://localhost:3000/#/docs/quick-start/customization)

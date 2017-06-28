@@ -18,7 +18,7 @@ import {RkComponent} from '../rkComponent.js';
  * <RkText>Text</RkText>
  * ```
  *
- * @example Using `rkType`prop
+ * @example Using rkType prop
  *
  * `RkText` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
  * There are already some predefined types. Here is example of how to use rkType
@@ -44,9 +44,9 @@ import {RkComponent} from '../rkComponent.js';
  * ```
  *
  * @styles Available properties
- * - `color` : Color of text.
- * - `backgroundColor` : Background color of `RkText`.
- * - `fontSize` : Font size of text.
+ * - `color` : Color of text
+ * - `backgroundColor` : Background color of `RkText`
+ * - `fontSize` : Font size of text
  *
  * @example Advanced Styling
  *

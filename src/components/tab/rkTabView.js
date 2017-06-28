@@ -75,7 +75,7 @@ import {RkText} from '../text/rkText'
  * </RkTabView>
  * ```
  *
- * @example Using `rkType`prop
+ * @example Using rkType prop
  *
  * `RkTabView` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
  * There are already some predefined types. Here is example of how to use rkType
@@ -104,9 +104,9 @@ import {RkText} from '../text/rkText'
  * Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
  * and `RkTabView` will apply them according to its state.
  * Use the following convention:
- * - `%name%` : Unselected state.
- * - `%name%Selected` : Selected state.
- * Where `%name%` is name of yours `rkType`.
+ * - `~name` : Unselected state.
+ * - `~nameSelected` : Selected state.
+ * Where `~name` is name of yours `rkType`.
  * One more note: during state change `RkTabView` not replace base `rkType` with new one. It just add correct.
  * So *selected* component will have actually two `rkType`s - base and selected.
  * To define new `rkType` you can use predefined properties which will passed to according element inside component:
@@ -133,10 +133,10 @@ import {RkText} from '../text/rkText'
  * ```
  *
  * @styles Available properties:
- *  - `color` : Color of content in header of `RkTabView`. Applied for `content` property.
- *  - `backgroundColor` : Background color of tab in header.
- *  - `borderWidth` : Width of tab border.
- *  - `borderColor` : Color of tab border.
+ *  - `color` : Color of content in header of `RkTabView`. Applied for `content` property
+ *  - `backgroundColor` : Background color of tab in header
+ *  - `borderWidth` : Width of tab border
+ *  - `borderColor` : Color of tab border
  *
  * @example Advanced Styling
  *
@@ -179,10 +179,10 @@ import {RkText} from '../text/rkText'
  * ```
  *
  * @styles Available components:
- * - `container` : `View` - root container of `RkTabView`.
- * - `headerContainer` : `View` - container for tab headers.
- * - `tabContainer` : `TouchableOpacity` - wraps each tab's header content.
- * - `content` : `RkText` when `label` prop used as string.
+ * - `container` : `View` - root container of `RkTabView`
+ * - `headerContainer` : `View` - container for tab headers
+ * - `tabContainer` : `TouchableOpacity` - wraps each tab's header content
+ * - `content` : `RkText` when `label` prop used as string
  *
  *
  * @example Inline styling
@@ -210,7 +210,7 @@ import {RkText} from '../text/rkText'
  * @property {style} style - Style applied to RkTabView container (tabs & content)
  * @property {style} headerContainerStyle - Style applied to container wrapping tabs (not for the content)
  * @property {number} maxVisibleTabs - If set - tabs will be scrollable and only specified number of tabs will be visible.
- * @property {string | function} title - (RkTabView.Tab prop) When type of title is string, title is rendered like Text inside of View. Otherwise title is rendered using function passed to this prop, function can apply isSelected argument and should return React component
+ * @property {string} title - (RkTabView.Tab prop) When type of title is string, title is rendered like Text inside of View. Otherwise title is rendered using function passed to this prop, function can apply isSelected argument and should return React component
  * @property {style} style - (RkTabView.Tab prop) Style applied to RkTabView.Tab content container (used only when label is text)
  * @property {style} styleSelected - (RkTabView.Tab prop) Style applied to RkTabView.Tab label container when tab is selected (used only when label is text)
  * @property {style} innerStyle - (RkTabView.Tab prop) Style applied to RkTabView.Tab label (used only when label is text)
