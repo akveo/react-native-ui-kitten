@@ -5,13 +5,13 @@ import { Component } from '@angular/core';
   styleUrls: ['react-footer.component.scss'],
   template: `
       <div class="socio">
-        <a href="https://github.com/akveo/react-native-ui-kitten">
+        <a href="https://github.com/akveo/react-native-ui-kitten" target="_blank">
           <img src="assets/githubBigLogo.png">
         </a>
-        <a href="https://twitter.com/akveo_inc">
+        <a href="https://twitter.com/akveo_inc" target="_blank">
           <img src="assets/twitterLogoSilhouette.png">
         </a>
-        <a href="https://www.facebook.com/akveo">
+        <a href="https://www.facebook.com/akveo" target="_blank">
           <img src="assets/facebookLogo.png">
         </a>
       </div>
