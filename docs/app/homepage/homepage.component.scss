@@ -12,7 +12,7 @@
     }
 
     /deep/ {
-      nav, a, .svg-logo .cls-1, .svg-logo .cls-2, .active-link::before {
+      nav, .menu a, .logo-container a, a.contact-us, .svg-logo .cls-1, .svg-logo .cls-2, .active-link::before {
         transition: all ease-in .2s;
       }
     }
@@ -23,7 +23,7 @@
         background: transparent;
         color: white;
       }
-      .menu a, .logo-container a {
+      .menu a, .logo-container a, a.contact-us {
         color: white;
       }
       .active-link::before {
@@ -35,7 +35,7 @@
         }
       }
 
-      nav, a, .svg-logo .cls-1, .svg-logo .cls-2, .active-link::before {
+      nav, .menu a, .logo-container a, a.contact-us, .svg-logo .cls-1, .svg-logo .cls-2, .active-link::before {
         transition: all ease-in .2s;
       }
     }

@@ -20,7 +20,7 @@ import { DocsService } from '../../docs/docs.service';
       <a routerLink="/docs" routerLinkActive="active-link">DOCUMENTATION</a>
     </div>
     <span> Need some help? Let us meow! 
-      <a href="mailto:contact@akveo.com"><b>contact@akveo.com</b></a>
+      <a class="contact-us" href="mailto:contact@akveo.com"><b>contact@akveo.com</b></a>
     </span>
     <i class="menu-icon ion-navicon" (click)="toggleMenu()"></i>
     <nga-menu class="mobile-menu" [class.active]="isMenuActive" [items]="menuItems"></nga-menu>

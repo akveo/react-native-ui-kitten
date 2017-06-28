@@ -70,10 +70,14 @@
     height: 0;
     overflow: hidden;
     background: nga-theme(color-bg);
-    transition: height 0.5s ease;
-    a, a:hover, a:focus, a:active, &.active {
-      color: nga-theme(header-fg);
+    transition: height 0.3s ease-out;
+    a, a:hover, a:focus, a:active {
+      color: nga-theme(color-fg);
       font-weight: bold;
+      &.active {
+        color: nga-theme(menu-fg);
+        font-weight: bold;
+      }
     }
     & > ul > li > a:first-child {
       &:not([ng-reflect-router-link]) {
@@ -83,40 +87,13 @@
     i {
       display: none;
     }
-
-    /deep/ nga-menu.mobile-menu {
-      position: fixed;
-      top: nga-theme(header-height);
-      left: 0;
-      width: 100vw;
-      height: 0;
-      overflow: hidden;
-      background: nga-theme(color-bg);
-      transition: height 0.3s ease-out;
-      a, a:hover, a:focus, a:active {
-        color: nga-theme(color-fg);
-        font-weight: bold;
-        &.active {
-          color: nga-theme(menu-fg);
-          font-weight: bold;
-        }
-      }
-      & > ul > li > a:first-child {
-        &:not([ng-reflect-router-link]) {
-          pointer-events: none;
-        }
-      }
-      i {
-        display: none;
-      }
-      .menu-collapsed, .menu-expanded {
-        visibility: visible;
-        opacity: 1;
-        height: 100%;
-        a {
-          padding-left: 1rem;
-          font-weight: normal;
-        }
+    .menu-collapsed, .menu-expanded {
+      visibility: visible;
+      opacity: 1;
+      height: 100%;
+      a {
+        padding-left: 1rem;
+        font-weight: normal;
       }
     }
   }
