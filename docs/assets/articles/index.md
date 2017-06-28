@@ -40,4 +40,4 @@ render() {
 
 ### Customization
 All components are flexible and can be customized.
-More detailed about stylization of components you can find [here](/#/docs/quick-start/customization)
+More detailed about stylization of components you can find [here](#/docs/quick-start/customization)
