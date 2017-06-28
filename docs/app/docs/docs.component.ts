@@ -66,7 +66,7 @@ export class ReactDocsComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((event) => {
         let firstMenuItem = this.menuItems.get(0).children.get(0);
         this.menuInternalService.itemSelect(firstMenuItem);
-        this.router.navigateByUrl(firstMenuItem.link);
+        this.router.navigateByUrl(firstMenuItem.link, {replaceUrl: true});
       });
 
     this.menuService.onItemSelect().subscribe((event: {tag: string, item: any}) => {
