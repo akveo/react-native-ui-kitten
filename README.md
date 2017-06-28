@@ -2,36 +2,36 @@
 
 # react-native-ui-kitten
 
-react-native-ui-kitten is a framework that contains set of commonly used UI components styled in similar way. 
-The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way.
+react-native-ui-kitten is a framework that contains a set of commonly used UI components styled in a similar way. 
+The main idea of this framework is to move style definitions into a specific place making components reusable and styled in a single way.
 You just focus on business logic and it takes care of visual appearance. 
 
-We have also brought the concept similar to css classes that will save you time when styling some particular elements. 
-And the most awesome thing: you can change themes on the fly by just passing different set of variables. 
+We have also brought a concept similar to CSS classes that will save you time when styling elements. 
+And the most awesome thing: you can change themes on the fly by just passing a different set of variables. 
 
 100% native. Give our kitten a try!
 
 <img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/ab511c86/docs/assets/buttons.png" width="350"/>
 
 ## Documentation
-A documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).
+Documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).
 
 ## Demo applications
 
-If you want to check how it works - just run explore app in *examples* folder.
+If you want to see how it works - just run explore app in *examples* folder.
 
-There is also [cool application](https://github.com/akveo/kittenTricks) built using our framework. It's open-source and free!
+There is also [a cool application](https://github.com/akveo/kittenTricks) built using our framework. It's open-source and free!
 
-Don't forget to check them!
+Don't forget to check them out!
 
-## How can I support developers?
+## How can I support the developers?
 - Star our GitHub repo
 - Create pull requests, submit bugs, suggest new features or documentation updates
 - Follow us on [Twitter](https://twitter.com/akveo_inc)
 - Like our page on [Facebook](https://www.facebook.com/akveo/)
 
 ## Can I hire you guys?
-Yes! We are available for hire. Visit [our homepage](http://akveo.com/) or simply leave us a message to contact@akveo.com. We will be happy to work with you!
+Yes! We are available for hire. Visit [our homepage](http://akveo.com/) or simply leave us a message at contact@akveo.com. We will be happy to work with you!
 
 License
 -------------
