@@ -13,7 +13,7 @@ import 'style-loader!./styles/styles.scss';
   selector: 'ngd-app-root',
   styleUrls: ['./app.component.scss'],
   template: `
-    <a class="github-fork-ribbon right-top" href="http://url.to-your.repo" title="Fork me on GitHub">Fork me on GitHub</a>
+    <a class="github-fork-ribbon right-top" href="https://github.com/akveo/react-native-ui-kitten" target="_blank" title="Fork me on GitHub">Fork me on GitHub</a>
     <router-outlet></router-outlet>
   `,
 })
