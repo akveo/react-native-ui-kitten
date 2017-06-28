@@ -2,8 +2,10 @@
 react-native-ui-kitten is a framework that contains set of commonly used UI components styled in similar way. 
 The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way.
 You just focus on business logic and it takes care of visual appearance. 
+
 We have also brought the concept similar to css classes that will save you time when styling some particular elements. 
 And the most awesome thing: you can change themes on the fly by just passing different set of variables. 
+
 100% native. Give our kitten a try!
 
 ## Documentation
