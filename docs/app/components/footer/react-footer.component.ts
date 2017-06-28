@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
         <a href="https://github.com/akveo/react-native-ui-kitten" target="_blank">
           <img src="assets/githubBigLogo.png">
         </a>
-        <a href="https://twitter.com/akveo_inc" target="_blank">
+        <a href="https://twitter.com/akveo_inc" target="_blank" class="twitter">
           <img src="assets/twitterLogoSilhouette.png">
         </a>
         <a href="https://www.facebook.com/akveo" target="_blank">

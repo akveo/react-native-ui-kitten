@@ -1,7 +1,8 @@
 <nga-layout>
-  <nga-layout-header fixed>
+  <nga-layout-header fixed [ngClass]="{ 'transparent': transparentHeader }">
     <react-header></react-header>
   </nga-layout-header>
+
   <nga-layout-column>
   <section class="kitten">
     <div class="wrapper">

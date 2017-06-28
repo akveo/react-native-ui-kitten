@@ -26,7 +26,8 @@ $nga-themes: nga-register-theme((
   color-primary: #ff241f,
   color-secondary: rgb(253, 224, 32),
   layout-padding: 0,
-  header-bg: color-primary,
+  header-bg: white,
+  header-fg: rgba(black, 0.75),
 
   shadow: none,
   color-fg: rgba(0, 0, 0, 0.87),

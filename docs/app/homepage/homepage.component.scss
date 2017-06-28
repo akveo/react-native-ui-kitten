@@ -2,11 +2,50 @@
 @import '../styles/helpers';
 
 @include nga-install-root-component {
-  /deep/ .layout .layout-container {
-    padding-top: 0;
-  }
+
   font-weight: nga-theme(font-main);
-  img{
+
+  nga-layout-header {
+
+    /deep/ nav {
+      border-bottom: 1px solid #eee;
+    }
+
+    /deep/ {
+      nav, a, .svg-logo .cls-1, .svg-logo .cls-2, .active-link::before {
+        transition: all ease-in .2s;
+      }
+    }
+
+    &.transparent /deep/ {
+      nav {
+        border-color: transparent;
+        background: transparent;
+        color: white;
+      }
+      .menu a, .logo-container a {
+        color: white;
+      }
+      .active-link::before {
+        background: white!important;
+      }
+      .svg-logo {
+        .cls-1, .cls-2 {
+          stroke: white;
+        }
+      }
+
+      nav, a, .svg-logo .cls-1, .svg-logo .cls-2, .active-link::before {
+        transition: all ease-in .2s;
+      }
+    }
+  }
+
+  /deep/ .layout-container {
+    padding-top: 0!important;
+  }
+
+  img {
     max-width: 100%;
   }
 
@@ -150,7 +189,7 @@
         .icon-cloud {
           width: 75%;
           height: 75%;
-          transition: all 0.5s ease-out;
+          transition: all 0.2s ease-out;
         }
       }
     }
