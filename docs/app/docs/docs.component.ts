@@ -62,21 +62,23 @@ export class ReactDocsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.routerSubscription = this.router.events
-      .filter(event => event instanceof NavigationEnd && event['url'] === '/docs')
+      .filter(event => event instanceof NavigationEnd)
       .subscribe((event) => {
-        let firstMenuItem = this.menuItems.get(0).children.get(0);
-        this.menuInternalService.itemSelect(firstMenuItem);
-        this.router.navigateByUrl(firstMenuItem.link, {replaceUrl: true});
-      });
+        this.menuService.getSelectedItem().subscribe((event: {tag: string, item: any}) => {
+          if (event && event.item && event.item.data && event.item.data.demogif) {
+            this.demoUrl = event.item.data.demogif;
+            this.demoUrl = require(`../../assets/gif/${this.demoUrl}`);
+          } else {
+              this.demoUrl = '';
+          }
+        });
 
-    this.menuService.onItemSelect().subscribe((event: {tag: string, item: any}) => {
-      if (event && event.item && event.item.data && event.item.data.demogif) {
-        this.demoUrl = event.item.data.demogif;
-        this.demoUrl = require(`../../assets/gif/${this.demoUrl}`);
-      } else {
-        this.demoUrl = '';
-      }
-    });
+        if (event['url'] === '/docs') {
+          let firstMenuItem = this.menuItems.get(0).children.get(0);
+          this.menuInternalService.itemSelect(firstMenuItem);
+          this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true });
+        }
+      });
   }
 
   ngOnDestroy() {

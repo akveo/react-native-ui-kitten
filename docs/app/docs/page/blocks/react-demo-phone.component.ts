@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
       <button [class.active]="isAndroid" (click)="switchToAndroid()">Android</button>
     </div>  
     <div [class.android]="isAndroid">
-      <img *ngIf="demoUrl" [src]="demoUrl">
+      <img *ngIf="demoUrl" [src]="demoUrl" alt="Loading...">
     </div>
   `
 })
