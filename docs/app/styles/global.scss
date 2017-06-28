@@ -31,3 +31,7 @@ body {
   scrollbar-track-color: rgba(255, 255, 255, 0.7);
   min-width: 320px;
 }
+
+body.scrolless {
+  overflow: hidden;
+}

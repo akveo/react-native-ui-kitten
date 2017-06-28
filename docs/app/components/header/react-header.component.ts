@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { List } from 'immutable';
 import { NgaMenuItem, NgaMenuService } from '@akveo/nga-theme/components/menu/menu.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -36,11 +36,15 @@ export class ReactHeaderComponent implements OnInit, OnDestroy {
   private menuSubscription: Subscription;
 
   constructor(private service: DocsService,
-              private menuService: NgaMenuService) {
+              private menuService: NgaMenuService,
+              private renderer: Renderer2) {
   }
 
   toggleMenu() {
     this.isMenuActive = !this.isMenuActive;
+    this.isMenuActive ?
+      this.renderer.addClass(document.body, 'scrolless') :
+      this.renderer.removeClass(document.body, 'scrolless');
   }
 
   ngOnInit() {
