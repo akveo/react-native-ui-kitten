@@ -1,88 +1,86 @@
 import React, {Component} from 'react';
-
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 import {
   StyleSheet,
   ListView,
   View,
-  Text,
-  TouchableOpacity,
-  Platform,
+  TouchableOpacity
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {RkText, RkTheme, RkStyleSheet} from 'react-native-ui-kitten';
 
-import {RkStyle} from 'react-native-ui-kitten';
-
-import {ButtonScreen} from './ButtonScreen';
-import {ChoiceScreen} from './ChoiceScreen';
-import {InputScreen} from './InputScreen';
-import {ImageScreen} from './ImageScreen';
-import {TabScreen} from './TabScreen';
-import {BoardUpScreen} from './BoardUpScreen';
-import {CardScreen} from './CardScreen';
 
 export class ComponentsScreen extends Component {
+  static navigationOptions = {
+    title: 'UI KIT'
+  };
+
 
   constructor(props) {
     super(props);
-    let ds = new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
-    });
-    let data = [
+    this.data = [
       {
-        title: "Buttons",
-        screenView: ButtonScreen
+        title: 'Buttons',
+        route: 'Button',
       },
       {
-        title: "Selectable Components",
-        screenView: ChoiceScreen
+        title: 'Selectable Components',
+        route: 'Choice'
       },
       {
-        title: "Inputs",
-        screenView: InputScreen
+        title: 'Inputs',
+        route: 'Input'
       },
       {
-        title: "Cards",
-        screenView: CardScreen
+        title: 'Cards',
+        route: 'Card'
       },
       {
-        title: "Board Up View",
-        screenView: BoardUpScreen
+        title: 'Image Viewer',
+        route: 'Image'
       },
       {
-        title: "Image Viewer",
-        screenView: ImageScreen
+        title: 'Tab View',
+        route: 'Tab'
       },
       {
-        title: "Tab View",
-        screenView: TabScreen
+        title: 'Custom Control View',
+        route: 'Avatar'
       }
     ];
     this.state = {
-      dataSource: ds.cloneWithRows(data)
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+      }).cloneWithRows(this.data),
+      theme: _.cloneDeep(RkTheme.current)
     };
   }
+
+  // componentWillReceiveProps() {
+  //   if (this.state.theme !== RkTheme.current) {
+  //     this.setState({
+  //       theme: _.cloneDeep(RkTheme.current),
+  //       dataSource: new ListView.DataSource({
+  //         rowHasChanged: (r1, r2) => r1 !== r2
+  //       }).cloneWithRows(this.data)
+  //     });
+  //   }
+  // }
 
   renderComponent(componentDefinition) {
     return (
       <TouchableOpacity onPress={() => this.selectComponent(componentDefinition)}>
         <View style={styles.componentRow}>
-          <Text style={[styles.titleText]}>{componentDefinition.title}</Text>
-          <Icon name={'angle-right'} size={18} style={RkStyle.grayText}/>
+          <RkText rkType='bold'>{componentDefinition.title}</RkText>
         </View>
       </TouchableOpacity>
     );
   }
 
   selectComponent(componentDefinition) {
-    if (componentDefinition.screenView === undefined) return;
-    this.props.navigator.push({
-      title: componentDefinition.title,
-      component: componentDefinition.screenView
-    });
-    if (Platform.OS == 'android') {
-      this.props.onSelect(componentDefinition);
-    }
+    const {navigate} = this.props.navigation;
+    navigate(componentDefinition.route);
   }
 
   renderSeparator(sectionID,
@@ -105,35 +103,31 @@ export class ComponentsScreen extends Component {
                 renderSeparator={this.renderSeparator}
                 automaticallyAdjustContentInsets={true}
                 keyboardDismissMode="on-drag"
-                keyboardShouldPersistTaps={true}
+                keyboardShouldPersistTaps='always'
                 showsVerticalScrollIndicator={false}
-        />
+      />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  componentRow: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  titleText: {
-    fontSize: 18,
-  },
-  rowSeparator: {
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    height: 1,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  rowSeparatorHide: {
-    opacity: 0.0,
-  },
-});
+const
+  styles = RkStyleSheet.create(theme => ({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.screen.base
+    },
+    componentRow: {
+      paddingHorizontal: 24,
+      paddingVertical: 18,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    },
+    rowSeparator: {
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      height: 1,
+    },
+    rowSeparatorHide: {
+      opacity: 0.0,
+    },
+  }));

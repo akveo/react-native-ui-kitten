@@ -1,0 +1,53 @@
+$sidebar-right-width: 280px;
+$color-primary: #ff241f;
+
+:host {
+
+  div ~ div {
+
+      width: $sidebar-right-width;
+      height: 500px;
+      position: relative;
+      background: url(../../../../assets/phoneImage.png) no-repeat;
+      margin-top: 1rem;
+      background-size: contain;
+      img {
+        position: absolute;
+        top: 57px;
+        left: 35px;
+        width: 208px;
+        height: 371px;
+      }
+
+      &.android {
+        background: url(../../../../assets/androidPhoneImage.png) no-repeat;
+        background-size: contain;
+        img {
+          top: 55px;
+          left: 30px;
+          width: 218px;
+          height: 385px;
+        }
+      }
+    }
+
+  div {
+    text-align: center;
+    width: $sidebar-right-width;
+
+    & > button {
+      padding: 0.5em 1em;
+      background: none;
+      border: none;
+      text-align: center;
+      &.active {
+        background: $color-primary;
+        border-radius: 1em;
+        color: #fff;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
