@@ -1,4 +1,5 @@
 # react-native-ui-kitten
+
 react-native-ui-kitten is a framework that contains set of commonly used UI components styled in similar way. 
 The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way.
 You just focus on business logic and it takes care of visual appearance. 
@@ -8,7 +9,7 @@ And the most awesome thing: you can change themes on the fly by just passing dif
 
 100% native. Give our kitten a try!
 
-![](https://cdn.rawgit.com/akveo/react-native-ui-kitten/1e2f2174/docs/assets/buttons.png)
+<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/ab511c86/docs/assets/buttons.png" width="350"/>
 
 ## Documentation
 A documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).
