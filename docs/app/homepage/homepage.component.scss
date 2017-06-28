@@ -54,7 +54,7 @@
     font-size: 1.375rem;
     border: 3px solid nga-theme(color-primary);
     padding: 0 3.5em;
-    line-height: 3.125rem;
+    line-height: 3.125em;
     border-radius: 1.625em;
     color: nga-theme(color-primary);
     margin: 0.625rem;
@@ -221,10 +221,9 @@
           width: 10.3rem;
           img.icon-socio {
             width: 8.15rem;
-            &:hover ~ .icon-cloud {
-              height: 95%;
-              width: 95%;
-            }
+          }
+          img.icon-cloud {
+            display: none;
           }
         }
       }
