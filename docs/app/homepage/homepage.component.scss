@@ -256,7 +256,7 @@
       font-size: 1rem;
     }
     .kitten {
-      background-image: linear-gradient(to top, rgb(255, 147, 30), rgb(255, 29, 37));
+      background-image: linear-gradient(to top, rgb(255, 147, 30) 60%, rgb(255, 29, 37) 100%);
       padding: 80px 0 0 0;
       img {
         display: inline;
