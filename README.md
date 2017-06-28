@@ -1,3 +1,5 @@
+<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png"/>
+
 # react-native-ui-kitten
 
 react-native-ui-kitten is a framework that contains set of commonly used UI components styled in similar way. 
