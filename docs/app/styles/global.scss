@@ -7,6 +7,10 @@
     text-decoration: none;
     color: nga-theme(color-fg);
   }
+  // TODO: remove once a new version of framework with this feature released
+  .layout {
+    font-family: nga-theme(font-main);
+  }
 }
 
 
