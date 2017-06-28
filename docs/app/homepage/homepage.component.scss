@@ -193,7 +193,7 @@
     }
     .kitten {
       background-size: 200%;
-      padding: 10% 0 55%;
+      padding: 15% 0 55%;
       margin-bottom: 0;
       .title-container {
         width: 62%;
@@ -232,10 +232,11 @@
   }
   @media screen and (max-width: 41.875rem) {// to avoid big bottom wwhitesapce
     .kitten {
-      padding: 10% 0 40%;
+      padding: 15% 0 40%;
     }
   }
   @media screen and (max-width: 37.5rem) {
+
     h2 {
       font-size: 3.125rem;
     }
@@ -256,7 +257,7 @@
     }
     .kitten {
       background-image: linear-gradient(to top, rgb(255, 147, 30), rgb(255, 29, 37));
-      padding: 0;
+      padding: 80px 0 0 0;
       img {
         display: inline;
       }
@@ -278,12 +279,9 @@
     }
     .demo {
       a.button {
-        margin-bottom: 0.625rem;
-        &:last-child {
-          margin-bottom: 3rem;
-        }
-        & ~ a.button {
-          margin-bottom: 3rem;
+        margin-bottom: 3rem;
+        &.platform-button {
+          margin-bottom: 0.625rem;
         }
       }
     }
