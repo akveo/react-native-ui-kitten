@@ -9,7 +9,6 @@ let id = 0;
  * `RkStyleSheet` - replace for regular `StyleSheet`.
  *
  * Can be helpful if there is need to use dynamic theme values in standard components.
- * @alias RkStyleSheet
  *
  * @example Usage sample
  *

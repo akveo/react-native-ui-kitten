@@ -6,7 +6,6 @@ import {RkTheme} from '../styles/themeManager.js';
 
 /**
  * `RkComponent` is base component for all components in `react-native-ui-kitten` library
- *
  * This component includes core logic for stylization and theming. All themable components should extend this component.
  * @extends React.Component
  */

@@ -4,8 +4,8 @@ import {RkComponent} from "../rkComponent";
 
 /**
  * `RkCard` component used to render card view in your application.
+ * It's usually being used with its props applied to standard react or custom components.
  *
- * It's usually being used with its props (described below) applied to standard react or custom components.
  * @extends RkComponent
  *
  *
@@ -27,17 +27,17 @@ import {RkComponent} from "../rkComponent";
  * ```
  *
  * @style There are 6 `RkCard` nested element props which can be applied to elements inside `RkCard`:
- * - `rkCardContainer` : Used for styling root card container.
- * - `rkCardHeader` : Used for styling header of card.
- * - `rkCardImg` : Used for styling image content in card.
- * - `rkCardImgOverlay` : Used for styling component which will be displayed over the image.
- * - `rkCardContent` : Used for styling content.
- * - `rkCardFooter` : Used for styling footer of card.
+ * - `rkCardContainer` : Used for styling root card container
+ * - `rkCardHeader` : Used for styling header of card
+ * - `rkCardImg` : Used for styling image content in card
+ * - `rkCardImgOverlay` : Used for styling component which will be displayed over the image
+ * - `rkCardContent` : Used for styling content
+ * - `rkCardFooter` : Used for styling footer of card
  *
- * @example Using `rkType`prop
+ * @example Using rkType prop
  *
  * `RkCard` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
- * There are already some predefined types. Here is example of how to use rkTyphttp://cs9.pikabu.ru/post_img/2017/06/14/5/1497421256176090883.jpge
+ * There are already some predefined types. Here is example of how to use rkType
  *
  * ```
  * <RkCard rkType='shadowed'>
@@ -79,7 +79,8 @@ import {RkComponent} from "../rkComponent";
  *   </View>
  *   <View rkCardContent>
  *     <RkText style={{textAlign:'center'}}>
- *       One morning, when Gregor Samsa woke from happy dreams, he found himself transformed in ...
+ *       One morning, when Gregor Samsa woke from happy dreams,
+ *       he found himself transformed in ...
  *     </RkText>
  *   </View>
  *   <View rkCardFooter>
@@ -89,12 +90,12 @@ import {RkComponent} from "../rkComponent";
  * </RkCard>
  *
  * @styles Nested element props available for styling:
- * - `container` : Style key for `rkCardContainer`.
- * - `header` : Style key for `rkCardHeader`.
- * - `content` : Style key for `rkCardContent`.
- * - `footer` : Style key for `rkCardFooter`.
- * - `img` : Style key for `rkCardImg`.
- * - `imgOverlay` : Style key for `rkCardImgOverlay`.
+ * - `container` : Style key for `rkCardContainer`
+ * - `header` : Style key for `rkCardHeader`
+ * - `content` : Style key for `rkCardContent`
+ * - `footer` : Style key for `rkCardFooter`
+ * - `img` : Style key for `rkCardImg`
+ * - `imgOverlay` : Style key for `rkCardImgOverlay`
  *
  * @property {string} rkType - Types for component stylization
  * By default `RkCard` supports following types: `shadowed`, `heroImage`

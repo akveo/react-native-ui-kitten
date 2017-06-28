@@ -17,10 +17,10 @@ import {RkComponent} from '../rkComponent';
  * <RkChoice selected={true}/>
  * ```
  *
- * @example Using `rkType`prop
+ * @example Using rkType prop
  *
  * `RkChoice` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
- * There are already some predefined types. Here is example of how to use rkType
+ * There are already some predefined types. Here is example of how to use `rkType`:
  *
  * ```
  * <RkChoice rkType='clear' selected={true}/>
@@ -39,13 +39,13 @@ import {RkComponent} from '../rkComponent';
  * Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
  * and `RkChoice` will apply them according to its state.
  * Use the following convention:
- * - `%name%` : Unselected state.
- * - `%name%Selected` : Selected state.
- * - `%name%Disabled` : Unselected & disabled state.
- * - `%name%SelectedDisabled`: Selected & disabled state.
- * Where `%name%` is name of yours `rkType`.
+ * - `~name` : Unselected state.
+ * - `~nameSelected` : Selected state.
+ * - `~nameDisabled` : Unselected & disabled state.
+ * - `~nameSelectedDisabled`: Selected & disabled state.
+ * Where `~name` is name of yours `rkType`.
  * One more note: during state change `RkChoice` not replace base `rkType` with new one. It just add correct.
- * So for example `disabled` component will have actually two `rkType`s - base and disabled.
+ * So for example `disabled` component will have actually two `rkTypes` - base and disabled.
  * To define new `rkType` you can use predefined properties which will passed to according element inside component:
  *
  * ```
@@ -76,17 +76,19 @@ import {RkComponent} from '../rkComponent';
  * ```
  *
  * @styles Available properties:
- * - `color` : Color of content in `RkChoice`. Applied for `content` property.
- * - `backgroundColor` : Background color of `RkChoice`.
- * - `borderWidth` : Width of outer border.
- * - `borderRadius` : Border radius of `RkChoice`.
- * - `borderColor` : Color of border.
- * - `width` : Width of `RkChoice`.
- * - `height` : Height of `RkChoice`.
- * - `content` : Component tree which will be set into `RkChoice`. As `content` you can use text, icon, image etc.
+ * - `color` : Color of content in `RkChoice`. Applied for `content` property
+ * - `backgroundColor` : Background color of `RkChoice`
+ * - `borderWidth` : Width of outer border
+ * - `borderRadius` : Border radius of `RkChoice`
+ * - `borderColor` : Color of border
+ * - `width` : Width of `RkChoice`
+ * - `height` : Height of `RkChoice`
+ * - `content` : Component tree which will be set into `RkChoice`. As `content` you can use text, icon, image etc
  *
  *
  * @example Custom content example
+ *
+ *
  *
  * ```
  * import Icon from 'react-native-vector-icons/Ionicons';
@@ -119,7 +121,7 @@ import {RkComponent} from '../rkComponent';
  *
  * It's also possible to implement more detailed styling. `RkChoice` consists from couple of base react component.
  * It's easy to set styles for each component.
- * For example you can add `disabled` and `disabled & selected` `rkType` for previous example
+ * For example you can add `disabled` and `disabled + selected` `rkType` for previous example
  *
  * ```
  * RkTheme.setType('RkChoice', 'micDisabled', {
@@ -151,8 +153,8 @@ import {RkComponent} from '../rkComponent';
  * ```
  *
  * @styles Available Components:
- * - `container` : Can be `View` or `TouchableOpacity` depending on using with `RkChoiceGroup` or without.
- * - `inner` : Applied to `content` property.
+ * - `container` : Can be `View` or `TouchableOpacity` depending on using with `RkChoiceGroup` or without
+ * - `inner` : Applied to `content` property
  *
  * @property {string} rkType - Types for component stylization
  * By default `RkChoice` supports following types: `clear`, `radio`, `posNeg`

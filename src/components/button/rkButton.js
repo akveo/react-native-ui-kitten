@@ -32,7 +32,7 @@ import {RkComponent} from '../rkComponent'
  * ```
  *
  *
- * @example Using `rkType`prop
+ * @example Using rkType prop
  *
  * `RkButton` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
  * There are already some predefined types. Here is example of how to use rkType
@@ -73,14 +73,14 @@ import {RkComponent} from '../rkComponent'
  * ```
  *
  * @styles Available properties:
- * - `color` : Color of content of `RkButton`. Applies only if content of `RkButton` is `string`.
- * - `backgroundColor` : Background color of `RkButton`.
- * - `borderWidth` : Width of outer border.
- * - `borderRadius` : Border radius of `RkButton`.
- * - `borderColor` : Color of border.
- * - `fontSize` : Size of content inside. Applied only for first level children of `RkButton`.
- * - `width` : Width of `RkButton`.
- * - `height` : Height of `RkButton`.
+ * - `color` : Color of content of `RkButton`. Applies only if content of `RkButton` is `string`
+ * - `backgroundColor` : Background color of `RkButton`
+ * - `borderWidth` : Width of outer border
+ * - `borderRadius` : Border radius of `RkButton`
+ * - `borderColor` : Color of border
+ * - `fontSize` : Size of content inside. Applied only for first level children of `RkButton`
+ * - `width` : Width of `RkButton`
+ * - `height` : Height of `RkButton`
  *
  *
  * @example Advanced Styling
@@ -98,9 +98,9 @@ import {RkComponent} from '../rkComponent'
  * });
  * ```
  *
- * @styles Available properties:
- * - `container` : `TouchableOpacity` - container of `RkButton`.
- * - `content` : If you use plain text then `RkText`. If you insert children - then style will not applied.
+ * @styles Available components:
+ * - `container` : `TouchableOpacity` - container of `RkButton`
+ * - `content` : If you use plain text then `RkText`. If you insert children - then style will not applied
  *
  * @example Inline styling
  *
@@ -109,7 +109,7 @@ import {RkComponent} from '../rkComponent'
  * ```
  * <RkButton
  *    style={{backgroundColor: 'red'}}
- *    contentStyle={{color: 'white'}}> Hello </RkButton>
+ *    contentStyle={{color: 'white'}}>Hello</RkButton>
  * ```
  *
  * @property {string} rkType - Types for component stylization
@@ -120,7 +120,7 @@ import {RkComponent} from '../rkComponent'
  * @property {function} onPress - Called when the touch is released, but not if cancelled.
  * @property {function} onPressIn - Same as `TouchableWithoutFeedback.onPressIn`
  * @property {function} onPressOut - Same as `TouchableWithoutFeedback.onPressOut`
- * @property {function} onLongPress - Called when the touch is released and is longer than usual press, but not if cancelled.
+ * @property {function} onLongPress - Called when the touch is released and is longer than usual press, but not if cancelled
  */
 
 export class RkButton extends RkComponent {

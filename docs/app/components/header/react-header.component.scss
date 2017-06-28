@@ -101,6 +101,7 @@
     }
   }
 
+<<<<<<< HEAD
   @media screen and (max-width: 1500px) and (min-width: 900px) {
     padding-right: 150px;
   }
@@ -125,8 +126,31 @@
     .mobile-menu.active {
       height: calc(100vh - #{nga-theme(header-height)});
       overflow: auto;
+=======
+  @media screen and (max-width: 900px) {
+    .menu {
+      display: none;
+    }
+    .menu-icon {
+      font-size: 40px;
+      display: block;
+      margin: 0 0 0 auto;
+      cursor: pointer;
+    }
+
+    .mobile-menu.active {
+      height: calc(100vh - #{nga-theme(header-height)});
+      overflow: auto;
     }
   }
+
+  @media screen and (max-width: 1140px) {
+    span {
+      display: none;
+>>>>>>> 0.2.0
+    }
+  }
+}
 
 }
 

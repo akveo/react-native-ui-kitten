@@ -84,16 +84,16 @@ import {RkTheme} from '../../styles/themeManager';
  *  <RkModalImg rkType='small' source={require('../img/cat.jpeg')}/>
  * ```
  *
- * @styles: Available components:
- * - `img` : `Image` - Image in regular (not modal) mode.
- * - `imgContainer` : `TouchableWithoutFeedback` - container of `img` in regular (not modal) mode.
- * - `modal` : `View` - Root view of `Modal` component.
- * - `modalImg` : `Image` - Image in modal mode.
- * - `header` : `View` - View container for header in modal mode. Here also will be set content returned form `renderHeader` function.
- * - `headerContent` : `View` - View container for header in modal mode (A child of `header` view). Only available if `renderHeader` not passed to component.
- * - `headerText`: `RkText` - Text that render page number in header. Only available if `renderHeader` not passed to component.
- * - `footer` : `View` - View container for footer in modal mode. Here also will be set content returned form `renderFooter` function.
- * - `footerContent` : `View` - View container for footer in modal mode (A child of `footer` view). Only available if `renderFooter` not passed to component.
+ * @styles Available components:
+ * - `img` : `Image` - Image in regular (not modal) mode
+ * - `imgContainer` : `TouchableWithoutFeedback` - container of `img` in regular (not modal) mode
+ * - `modal` : `View` - Root view of `Modal` component
+ * - `modalImg` : `Image` - Image in modal mode
+ * - `header` : `View` - View container for header in modal mode. Here also will be set content returned form `renderHeader`
+ * - `headerContent` : `View` - View container for header in modal mode (A child of `header` view). Only available if `renderHeader` not passed to component
+ * - `headerText`: `RkText` - Text that render page number in header. Only available if `renderHeader` not passed to component
+ * - `footer` : `View` - View container for footer in modal mode. Here also will be set content returned form `renderFooter` function
+ * - `footerContent` : `View` - View container for footer in modal mode (A child of `footer` view). Only available if `renderFooter` not passed to component
  *
  * @example Inline Styling
  *
@@ -105,10 +105,10 @@ import {RkTheme} from '../../styles/themeManager';
  * <RkModalImg imgContainerStyle={{backgroundColor:'green'}} source={require('../img/cat.jpeg')}/>
  * ```
  *
- * @styles `options` object passed to `renderHeader` and `renderFooter` functions
+ * @styles Options object passed to renderHeader and renderFooter functions
  * - `closeImage` : Function that closes modal
- * - `pageNumber` : Number of current page. Useful if component used as gallery.
- * - `totalPages`: Number of total pages. Useful if component used as gallery.
+ * - `pageNumber` : Number of current page. Useful if component used as gallery
+ * - `totalPages`: Number of total pages. Useful if component used as gallery
  *
  * @property {string} rkType - Types for component stylization
  * @property {style} style - Style for image in regular (not modal) mode
