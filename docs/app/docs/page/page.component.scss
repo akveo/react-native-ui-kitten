@@ -8,6 +8,14 @@ $text-color-active: rgba(255, 40, 36, 0.87);
 @include nga-install-component {
   /deep/ nga-card {
 
+    a {
+      color: nga-theme(color-fg-active);
+
+      @include hover-focus-active() {
+        color: nga-theme(color-primary);
+      }
+    }
+
     nga-card-header {
       font-size: nga-theme(font-size-lg);
       font-weight: bold;
