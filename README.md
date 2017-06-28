@@ -8,8 +8,18 @@ And the most awesome thing: you can change themes on the fly by just passing dif
 
 100% native. Give our kitten a try!
 
+![](https://cdn.rawgit.com/akveo/react-native-ui-kitten/1e2f2174/docs/assets/buttons.png)
+
 ## Documentation
 A documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).
+
+## Demo applications
+
+If you want to check how it works - just run explore app in *examples* folder.
+
+There is also [cool application](https://github.com/akveo/kittenTricks) built using our framework. It's open-source and free!
+
+Don't forget to check them!
 
 ## How can I support developers?
 - Star our GitHub repo
