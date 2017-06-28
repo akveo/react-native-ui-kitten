@@ -40,3 +40,13 @@ body {
 body.scrolless {
   overflow: hidden;
 }
+
+.github-fork-ribbon::before {
+  box-sizing: content-box;
+}
+
+@media screen and (max-width: 900px) {
+  .github-fork-ribbon{
+    display: none;
+  }
+}

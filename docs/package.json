@@ -26,7 +26,6 @@
     "marked": "^0.3.6"
   },
   "devDependencies": {
-    "@akveo/nga-auth": "^2.0.0-alpha.1-dev.2",
     "@akveo/nga-theme": "^2.0.0-alpha.1-dev.2",
     "@angular/cli": "1.1.0",
     "@angular/compiler-cli": "4.1.3",

@@ -61,7 +61,10 @@
   .menu-icon {
     display: none;
   }
-
+  .github-fork-ribbon:before {
+    background: nga-theme(color-primary);
+    box-sizing: content-box;
+  }
   /deep/ nga-menu.mobile-menu {
     position: fixed;
     top: nga-theme(header-height);
@@ -98,6 +101,16 @@
     }
   }
 
+  @media screen and (max-width: 1500px) and (min-width: 900px) {
+    padding-right: 150px;
+  }
+
+  @media screen and (max-width: 1140px) {
+    span {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 900px) {
     .menu {
       display: none;
@@ -115,10 +128,5 @@
     }
   }
 
-  @media screen and (max-width: 1140px) {
-    span {
-      display: none;
-    }
-  }
 }
 
