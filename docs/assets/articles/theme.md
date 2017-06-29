@@ -1,10 +1,10 @@
 ### Overview
-All components introduced in this framework depends on the application *theme*. Theme - is an object with base values: colors, font sizes etc. 
-They also organized in groups by purpose and also have inheritance.
+All components introduced in this framework depend on the application *theme*. Theme is an object with base values: colors, font sizes etc. 
+They're also organized in groups by purpose and also have inheritance.
  All interactions with the theme and other customizations should be done using `RkTheme` object.
 
 Theme has a definition for most of the base values like regular text color or size, success button color or color of subtitles.
-That means if you change a regular text color in theme - all *rk-components* which use this color will apply it. So you can easily 
+That means, if you change a regular text color in theme, all *rk-components* which use this color will apply it. So, you can easily 
 adjust color for the whole app.
 
 Here is an example from our default theme:
@@ -28,7 +28,7 @@ fonts: {
 ```
 
 This code defines base font size and also font sizes for different semantic values like *small*, *large* etc. Our *rk-components*
-use this theme values. So for example `RkButton` with predefined `rkType` small will use *small* value as font size for content.
+use this theme values. So, for example `RkButton` with predefined `rkType` small will use *small* value as a font size for the content.
 
 ### Overriding Theme
 
@@ -53,8 +53,8 @@ Now all *rk-components* which use *base* font size will have new size.
 
 ### Using theme in your own components
 
-During app development it can be necessary to use values of current theme for regular components: for example - set background
-for `View`. To get values of current theme you can use `RkTheme.current` property. It returns current theme for the application.
+During an app development it can be necessary to use values of current theme for regular components: for example a set background
+for `View`. To get values of the current theme you can use `RkTheme.current` property. It returns the current theme for the application.
 
 ```
 import {RkTheme} from 'react-native-ui-kitten'
