@@ -33,6 +33,7 @@ import { ReactDemoPhoneComponent } from './docs/page/blocks/react-demo-phone.com
 import { CodeHighlighterComponent } from './docs/utils/code-highlighter.component';
 import { ReactHeaderComponent } from './components/header/react-header.component';
 import { ReactFooterComponent } from './components/footer/react-footer.component';
+import { Analytics } from './docs/utils/analytics.service';
 
 @NgModule({
   imports: [
@@ -68,7 +69,10 @@ import { ReactFooterComponent } from './components/footer/react-footer.component
     ReactFooterComponent,
 
   ],
-  providers: [DocsService],
+  providers: [
+    DocsService,
+    Analytics
+  ],
   entryComponents: [
   ],
   bootstrap: [NgdAppComponent],
