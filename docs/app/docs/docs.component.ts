@@ -68,8 +68,7 @@ export class ReactDocsComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((event) => {
         this.menuService.getSelectedItem().subscribe((event: {tag: string, item: any}) => {
           if (event && event.item && event.item.data) {
-            this.titleService.setTitle(`React Native UI Kitten - ${event.item.data.name}`);
-            console.log(event.item.data);
+            this.titleService.setTitle(`React Native UI Kitten Documentation - ${event.item.data.name}`);
             if (event.item.data.demogif) {
               this.demoUrl = event.item.data.demogif;
               this.demoUrl = `https://raw.githubusercontent.com/akveo/react-native-ui-kitten/master/docs/assets/gif/${this.demoUrl}`;
