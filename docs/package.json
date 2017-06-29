@@ -3,9 +3,9 @@
   "scripts": {
     "docs:prepare": "documentation documentation.js build ../src/** -f json -o docs.json",
     "docs:parse": "prsr -g docjs -f react -i docs.json -o output.json",
-    "docs:gen": "docs:prepare && docs:pasre",
+    "docs:gen": "npm run docs:prepare && npm run docs:parse",
     "start": "ng serve --port 3000",
-    "docs:serve": "docs:gen && start",
+    "docs:serve": "npm run docs:gen && npm start start",
     "docs:build": "rimraf dist && ng build --base-href https://akveo.github.io/react-native-ui-kitten/ --prod --aot",
     "ngh": "ngh",
     "docs:gh-pages": "docs:build && ngh"
