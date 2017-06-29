@@ -1,15 +1,15 @@
 ### Overview
-Customization of `react-native-ui-kitten` is really easy and very extensible. 
+Customization of `react-native-ui-kitten` is quite easy and very extensible. 
 It allows you to build beautiful and flexible component styles in a simple and elegant way.
 
 ### rkType
 
 Most of the components in this framework contain *rkType* property.
-For those who familiar with web, you can think of it as an HTML *class* property.
+For those who is familiar with web, you can think of it as an HTML *class* property.
 Fundamentally, the idea is to separate styles definition from jsx templates.
 Our components already have a set of predefined rkTypes. 
-Moreover you can configure *rkType*s somewhere in your application and then you're able to reuse that style in your components by just passing it as an input property.
-As well, it's always possible to override types for some specific component.
+Moreover, you can configure *rkType*s somewhere in your application and then you're able to reuse that style in your components by just passing it as an input property.
+Also it's always possible to override types for some specific component.
 
 For example, consider this code: 
 
@@ -77,8 +77,8 @@ RkTheme.setType('RkButton','different',{
 ```
 
 ### Default values
-Sometimes it very useful to set default style for all components in whole application without need to set explicitly `rkType`
-for each component. All *rk-components* have a type which always applied. Name of this type is set in `RkComponent.defaultType` variable.
+Sometimes it is very useful to set a default style for all components in a whole application without need of setting explicitly `rkType`
+for each component. All *rk-components* have a type which always applied. The name of this type is set in `RkComponent.defaultType` variable.
 All standard *rk-components* has defaultType `basic`. In order to change the style for all components - just override this type.
 
 Let's change color and size for all `RkText` components in the app:
@@ -93,9 +93,9 @@ Let's change color and size for all `RkText` components in the app:
 ### Themes
 
 All base *rkTypes* depends on theme of application. *Theme* contains base values (colors, fontSizes etc) for all *rk-components*.
-You can easily override values in theme or even define your own theme using `RkTheme`.
+You can easily override values in a theme or even define your own theme using `RkTheme`.
 But user-defined *rkType*s should also be able to respond theme changes.
-For this purpose can be used property functions instead of values.
+For this purpose property functions can be used instead of values.
 Let's create `rkType` for `RkText` which will depend on some value from the theme.
 
 ```jsx
