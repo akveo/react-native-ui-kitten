@@ -14,6 +14,7 @@ import { NgaMenuService, NgaMenuItem } from '@akveo/nga-theme';
 import { NgaMenuInternalService } from '@akveo/nga-theme/components/menu/menu.service';
 
 import 'rxjs/add/operator/filter';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'react-docs',
@@ -48,7 +49,8 @@ export class ReactDocsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private service: DocsService,
               private router: Router,
               private menuInternalService: NgaMenuInternalService,
-              private menuService: NgaMenuService) {
+              private menuService: NgaMenuService,
+              private titleService: Title) {
   }
 
   ngOnInit() {
@@ -65,11 +67,15 @@ export class ReactDocsComponent implements OnInit, AfterViewInit, OnDestroy {
       .filter(event => event instanceof NavigationEnd)
       .subscribe((event) => {
         this.menuService.getSelectedItem().subscribe((event: {tag: string, item: any}) => {
-          if (event && event.item && event.item.data && event.item.data.demogif) {
-            this.demoUrl = event.item.data.demogif;
-            this.demoUrl = `https://raw.githubusercontent.com/akveo/react-native-ui-kitten/master/docs/assets/gif/${this.demoUrl}`;
-          } else {
+          if (event && event.item && event.item.data) {
+            this.titleService.setTitle(`React Native UI Kitten - ${event.item.data.name}`);
+            console.log(event.item.data);
+            if (event.item.data.demogif) {
+              this.demoUrl = event.item.data.demogif;
+              this.demoUrl = `https://raw.githubusercontent.com/akveo/react-native-ui-kitten/master/docs/assets/gif/${this.demoUrl}`;
+            } else {
               this.demoUrl = '';
+            }
           }
         });
 
