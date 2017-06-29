@@ -8,7 +8,7 @@
     "docs:serve": "npm run docs:gen && npm start",
     "docs:build": "rimraf dist && ng build --base-href https://akveo.github.io/react-native-ui-kitten/ --prod --aot",
     "ngh": "ngh",
-    "docs:gh-pages": "docs:build && ngh"
+    "docs:gh-pages": "npm run docs:build && npm run ngh"
   },
   "dependencies": {
     "@angular/common": "4.1.3",
