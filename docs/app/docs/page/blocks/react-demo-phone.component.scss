@@ -8,7 +8,7 @@
     position: relative;
     margin-top: 1rem;
     color: nga-theme(color-fg);
-    background: url(../../../../assets/phoneImage.png);
+    background: url(../../../../assets/pics/phoneImage.png);
     background-repeat: no-repeat;
     -o-background-size: cover;
     -moz-background-size: cover;
@@ -24,7 +24,7 @@
     }
 
     &.android {
-      background: url(../../../../assets/androidPhoneImage.png);
+      background: url(../../../../assets/pics/androidPhoneImage.png);
       background-size: contain;
       background-repeat: no-repeat;
       -o-background-size: cover;

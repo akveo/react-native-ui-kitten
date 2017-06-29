@@ -6,7 +6,7 @@
     "docs:gen": "docs:prepare && docs:pasre",
     "start": "ng serve --port 3000",
     "docs:serve": "docs:gen && start",
-    "docs:build": "rimraf dist && ng build --base-href https://akveo.github.io/react-native-ui-kitten/",
+    "docs:build": "rimraf dist && ng build --base-href https://akveo.github.io/react-native-ui-kitten/ --prod --aot",
     "ngh": "ngh",
     "docs:gh-pages": "docs:build && ngh"
   },

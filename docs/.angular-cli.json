@@ -5,7 +5,9 @@
       "root": "./",
       "outDir": "dist",
       "assets": [
-        "assets",
+        "assets/pics",
+        "assets/articles",
+        "assets/avatar",
         "favicon.png"
       ],
       "index": "index.html",
@@ -21,6 +23,7 @@
         "node_modules/prismjs/themes/prism.css"
       ],
       "scripts": [
+        "node_modules/prismjs/prism.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

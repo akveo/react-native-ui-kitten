@@ -67,7 +67,7 @@ export class ReactDocsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.menuService.getSelectedItem().subscribe((event: {tag: string, item: any}) => {
           if (event && event.item && event.item.data && event.item.data.demogif) {
             this.demoUrl = event.item.data.demogif;
-            this.demoUrl = require(`../../assets/gif/${this.demoUrl}`);
+            this.demoUrl = `https://raw.githubusercontent.com/akveo/react-native-ui-kitten/master/docs/assets/gif/${this.demoUrl}`;
           } else {
               this.demoUrl = '';
           }

@@ -6,13 +6,13 @@ import { Component } from '@angular/core';
   template: `
       <div class="socio">
         <a href="https://github.com/akveo/react-native-ui-kitten" target="_blank">
-          <img src="assets/githubBigLogo.png">
+          <img src="assets/pics/githubBigLogo.png">
         </a>
         <a href="https://twitter.com/akveo_inc" target="_blank" class="twitter">
-          <img src="assets/twitterLogoSilhouette.png">
+          <img src="assets/pics/twitterLogoSilhouette.png">
         </a>
         <a href="https://www.facebook.com/akveo" target="_blank">
-          <img src="assets/facebookLogo.png">
+          <img src="assets/pics/facebookLogo.png">
         </a>
       </div>
       <p>
