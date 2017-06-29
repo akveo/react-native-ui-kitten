@@ -174,22 +174,24 @@
       margin: 10px;
       border: 2px solid grey;
       border-radius: 10px;
-      color: nga-theme(color-fg);
       position: relative;
       line-height: 68px;
       font-weight: 500;
       font-size: 22px;
       padding: 0 10px 0 56px;
+      background-color: #000;
+      color: #fff;
+
       i {
         position: absolute;
         left: 10px;
         font-size: 50px;
       }
-      &:hover {
-        background-color: #000;
-        color: #fff;
-      }
     }
+  }
+
+  .platform-button {
+    transition: all ease-out .2s;
   }
 
   .contacts {
