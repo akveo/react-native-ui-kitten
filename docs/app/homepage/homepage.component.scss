@@ -146,11 +146,48 @@
   }
 
   .demo {
-    img {
+    .screens {
       margin: 1.625rem 0;
     }
     a.button {
       margin-bottom: 10rem;
+    }
+    .store-badge {
+      display: inline-block;
+      margin: 1rem;
+      img {
+        height: 72px;
+        margin: 0;
+      }
+    }
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 7rem;
+    }
+    a.github-btn {
+      width: 244.5px;
+      height: 72px;
+      margin: 10px;
+      border: 2px solid grey;
+      border-radius: 10px;
+      color: nga-theme(color-fg);
+      position: relative;
+      line-height: 68px;
+      font-weight: 500;
+      font-size: 22px;
+      padding: 0 10px 0 56px;
+      i {
+        position: absolute;
+        left: 10px;
+        font-size: 50px;
+      }
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
     }
   }
 
@@ -344,6 +381,9 @@
         &.platform-button {
           margin-bottom: 0.625rem;
         }
+      }
+      .button-container {
+        margin-bottom: 3rem;
       }
     }
     .contacts {
