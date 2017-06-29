@@ -4,9 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy, Renderer2 } from '@angular/core';
 
 import { NgaMenuService } from '@akveo/nga-theme';
+import { Subscription } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'ngd-page',
@@ -32,16 +34,31 @@ import { NgaMenuService } from '@akveo/nga-theme';
      </nga-card>
   `,
 })
-export class NgdPageComponent {
+export class NgdPageComponent implements OnDestroy {
 
   currentItem: any;
+  private routerSubscription: Subscription;
 
-  constructor(private menuService: NgaMenuService) {
-    this.menuService.onItemSelect().subscribe((event: {tag: string, item: any}) => {
-      // TODO: check the tag
-      if (event && event.item && event.item.data) {
-        this.currentItem = event.item.data;
-      }
-    });
+  constructor(private menuService: NgaMenuService,
+              private router: Router,
+              private renderer: Renderer2) {
+
+    this.routerSubscription = this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe((event) => {
+
+        this.menuService.getSelectedItem().subscribe((event: {tag: string, item: any}) => {
+          if (event && event.item && event.item.data) {
+            this.currentItem = event.item.data;
+
+            this.renderer.setProperty(document.body, 'scrollTop', 0);
+          }
+        });
+
+      });
+  }
+
+  ngOnDestroy() {
+    this.routerSubscription.unsubscribe();
   }
 }

@@ -1,12 +1,14 @@
 @import '../../styles/variables';
-$title-font-size: 32px;
-//;
-$code-background: rgb(245, 246, 252);
-$text-color: rgba(0, 0, 0, 0.87);
-$text-color-active: rgba(255, 40, 36, 0.87);
 
 @include nga-install-component {
   /deep/ nga-card {
+    a {
+      color: nga-theme(color-fg-active);
+
+      @include hover-focus-active() {
+        color: nga-theme(color-primary);
+      }
+    }
 
     nga-card-header {
       font-size: nga-theme(font-size-lg);
@@ -24,7 +26,7 @@ $text-color-active: rgba(255, 40, 36, 0.87);
         margin-bottom: 2rem;
       }
       .block-subtitle {
-        font-size: 20px; //1.25 rem
+        font-size: 1.25rem;
         font-weight: bold;
       }
       .block-container {
@@ -32,7 +34,6 @@ $text-color-active: rgba(255, 40, 36, 0.87);
       }
 
       img {
-        display: block;
         max-width: 100%;
         margin: 0.5rem 0;
       }
@@ -57,7 +58,7 @@ $text-color-active: rgba(255, 40, 36, 0.87);
         background: nga-theme(code-snippets-bg);
         padding: 0.75rem 1rem;
         code {
-          color: $text-color;
+          color: nga-theme(color-fg);
         }
       }
       react-code-highlighter {
@@ -89,8 +90,8 @@ $text-color-active: rgba(255, 40, 36, 0.87);
       }
       @media screen and (max-width: 600px) {
         .table {
-          td {
-            word-break: normal;
+          td:last-child {
+            word-break: break-all; // TODO: discuss this changes
           }
         }
       }

@@ -1,10 +1,10 @@
 ### What is react-native-ui-kitten?
 
-*React Native UI Kitten* is a mobile framework with set of easily customizable elements. 
+*React Native UI Kitten* is a mobile framework with a set of easily customizable elements. 
 It aims on boosting your mobile application development and allows you to focus on business logic instead of view composition. 
 It helps you to bring your MVP to life in shorter period of time.
 
-### What is main benefit of using this kitten?
+### What is a main benefit of using this kitten?
 
 Using React Native UI Kitten you will be able to create style configurations of components you use the most (buttons, inputs etc.). 
 These styles can be reused then in the process of development. Configure them once and use anywhere!
@@ -40,4 +40,4 @@ render() {
 
 ### Customization
 All components are flexible and can be customized.
-More detailed about stylization of components you can find [here](http://localhost:3000/#/docs/quick-start/customization)
+More detailed about stylization of components you can find [here](#/docs/quick-start/customization)

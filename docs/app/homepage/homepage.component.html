@@ -1,7 +1,8 @@
 <nga-layout>
-  <nga-layout-header fixed>
+  <nga-layout-header fixed [ngClass]="{ 'transparent': transparentHeader }">
     <react-header></react-header>
   </nga-layout-header>
+
   <nga-layout-column>
   <section class="kitten">
     <div class="wrapper">
@@ -10,8 +11,8 @@
           <h2>React Native</h2>
           <h1 class="ui-kitten">UI Kitten</h1>
           <p>Mobile framework with easily customizable elements</p>
-          <a href="https://github.com/akveo" class="button platform-button"><i class="ion-social-android"></i>ANDROID DEMO</a>
-          <a href="https://github.com/akveo" class="button platform-button"><i class="ion-social-apple"></i>IOS DEMO</a>
+          <a href="https://itunes.apple.com/us/app/kitten-tricks/id1246143230" class="button platform-button" target="_blank"><i class="ion-social-apple"></i>IOS DEMO</a>
+          <a href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks" class="button platform-button" target="_blank"><i class="ion-social-android"></i>ANDROID DEMO</a>
         </header>
       </div>
     </div>
@@ -20,23 +21,39 @@
 
   <section class="demo">
     <div class="wrapper">
-      <h3>KITTEN PADS</h3>
+      <h3>WHAT IS IT?</h3>
+      <p>React-native-ui-kitten is a framework that contains set of commonly used UI components styled in similar way.
+        Despite there are a lot of standalone react-native components nowadays there’s not so many frameworks that offer
+        you a bunch of commonly used ones as a single dependency with similar UI design.
+        For instance in Web Development there are CSS frameworks like Bootstrap that allows you to add a single include
+        and use dozens of nice-looking elements. You can also style them according to your corporate guidelines by just
+        changing variables.  Our framework attempts to fill this gap. You focus on business logic and it takes care of
+        visual appearance. We have also brought the concept similar to css classes that will save you time when styling
+        some particular elements. And the most awesome thing: you can <b>change themes on the</b> fly by just passing different
+        set of variables. <b>100% native</b>. Give our kitten a try!
+      </p>
+      <a class="button" href="#/docs/">READ MORE</a>
+      <h3>KITTEN TRICKS</h3>
       <h4>Framework Demo</h4>
-      <img src="assets/screensImage.png">
-      <p>React-native-ui-kitten is a framework that helps you to bootstrap
-        your mobile application development. You focus on business logic and
-        it takes care of visual appearence; it has brought some well known concepts
-        from web to make mobile components reusable and customizable</p>
+      <img class="screens" src="assets/screensImage.png">
+      <p> <b>Kitten Tricks</b> is a live demo of react-native-ui-kitten published on both App Store and Google Play.
+        You can use it as a <b>starter kit</b> for your next mobile application.
+        Download the sources, integrate it with backend and there you go!
+        You’ve got a cross-platform native application. Moreover it’s all <b>FREE</b> and open-source</p>
       <h4>Download Demo:</h4>
-      <a class="button platform-button" href="#"><i class="ion-social-android"></i>GOOGLE PLAY</a>
-      <a class="button platform-button" href="#"><i class="ion-social-apple"></i>APP STORE</a>
-      <h3>HOW DOES IT WORKS</h3>
-      <p>React-native-ui-kitten is a framework that helps you to bootstrap
-        your mobile application development. You focus on business logic and
-        it takes care of visual appearence; it has brought some well known concepts
-        from web to make mobile components reusable and customizable</p>
-      <a class="button" href="https://github.com">READ MORE</a>
-  </div>
+      <div class="button-container">
+        <a class="store-badge" href="https://itunes.apple.com/us/app/kitten-tricks/id1246143230" target="_blank">
+          <img alt="Download on the App Store" src="assets/appStore.svg">
+        </a>
+        <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks" target="_blank">
+          <img alt="Get it on Google Play" src="assets/googlePlay.svg">
+        </a>
+
+        <a href="https://github.com/akveo/kittenTricks" target="_blank" class="github-btn">
+           <i class="ion-social-github"></i>View it on Github
+        </a>
+      </div>
+    </div>
 </section>
 
   <section class="contacts">
@@ -46,37 +63,33 @@
       <p>Here's what you can do</p>
       <div class="contact-container">
         <div class="contact-button">
-          <a class="icons" href="https://github.com/akveo/react-native-ui-kitten">
+          <a class="icons" href="https://github.com/akveo/react-native-ui-kitten" target="_blank">
             <img class="icon-socio" src="assets/githubIcon.png" alt="github">
-            <img class="icon-cloud" src="assets/cloudIcon.png">
           </a>
           Star us
         </div>
         <div class="contact-button">
-            <a class="icons" href="https://twitter.com/akveo_inc">
+            <a class="icons" href="https://twitter.com/akveo_inc" target="_blank">
               <img class="icon-socio" src="assets/twitterIcon.png" alt="twitter">
-              <img class="icon-cloud" src="assets/cloudIcon.png" >
             </a>
           Follow us
         </div>
         <div class="contact-button">
-          <a class="icons" href="https://www.facebook.com/akveo">
+          <a class="icons" href="https://www.facebook.com/akveo" target="_blank">
             <img class="icon-socio" src="assets/facebookIcon.png" alt="facebook">
-            <img class="icon-cloud" src="assets/cloudIcon.png">
           </a>
           Like us
         </div>
       </div>
       <p>You're awesome!</p>
     </div>
-    <!--<div class="big-circle"></div>-->
     <img class="big-circle-img" src="assets/bigCircle.png">
   </section>
   <section class="hire-block">
     <div class="wrapper">
       <H4>CAN I HIRE YOU?</H4>
-      <p>Yes! We are available for hire. Visit our homepage or simply leave us a note
-        at <a href="mailto:contact@akveo.com"><b>contact@akveo.com</b></a>. We will be happy to work with you!</p>
+      <p>Yes! We are available for hire. Visit our <a href="http://akveo.com" target="_blank"><b>homepage</b></a> or simply leave us a note
+        at <a href="mailto:contact@akveo.com" target="_blank"><b>contact@akveo.com</b></a>. We will be happy to work with you!</p>
     </div>
   </section>
   <nga-layout-footer>

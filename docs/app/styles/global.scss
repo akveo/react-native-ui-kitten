@@ -7,6 +7,11 @@
     text-decoration: none;
     color: nga-theme(color-fg);
   }
+  // TODO: remove once a new version of framework with this feature released
+  .layout {
+    font-family: nga-theme(font-main);
+    font-weight: nga-theme(font-weight-light);
+  }
 }
 
 
@@ -30,4 +35,24 @@ body {
   scrollbar-face-color: rgba(0, 0, 0, 0.3);
   scrollbar-track-color: rgba(255, 255, 255, 0.7);
   min-width: 320px;
+}
+
+body.scrolless {
+  overflow: hidden;
+}
+
+
+.github-fork-ribbon {
+  &::before, &::after {
+    box-sizing: content-box;
+    background: #fff;
+    color: #000;
+    border-color: #000;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .github-fork-ribbon{
+    display: none;
+  }
 }

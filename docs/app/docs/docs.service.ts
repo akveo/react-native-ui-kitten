@@ -52,7 +52,7 @@ export class DocsService {
 
     let menuItems = structure.map((item: any) => {
       const menuItem: any = {};
-      const itemLink = `${parentLink ? parentLink : ''}/${item.name.replace(/\s/, '-').toLowerCase()}`;
+      const itemLink = `${parentLink ? parentLink : ''}/${item.name.replace(/\s/g, '-').toLowerCase()}`;
       if (item.type !== 'section') {
         menuItem['link'] = itemLink;
       }
