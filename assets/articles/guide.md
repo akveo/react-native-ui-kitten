@@ -1,5 +1,5 @@
 ### Overview
-React Native UI Kitten has strong customization implemented based on custom *rk-components*. This guide discovers how to create your own *rk-component* from scratch.
+React Native UI Kitten has strong customization implemented based on custom *rk-components*. This guide describes how to create your own *rk-component* from scratch.
 
 Let's create *avatar component* which will have an image of a user, text with the user name and optional user description.
 
@@ -37,7 +37,7 @@ export class Avatar extends RkComponent {
 
 ```
 
-Avatar component now looks like this:
+The avatar component now looks like this:
 
 ![](assets/avatar/avatar1.png)
 
@@ -48,7 +48,7 @@ So we need to add default styles for these components.
 These styles should include not only layout styles but also color and font styles. And also it would be nice to make this component
 dependent on a theme.
 
-Here we need to use method `registerComponent` from `RkTheme`. This method accepts name of a component and a function which returns an object with styles. Let's start with the first parameter. The name should be set in `componentName` property of your component.
+Here we need to use a method `registerComponent` from `RkTheme`. This method accepts the name of a component and function which returns an object with styles. Let's start with the first parameter. The name should be set in `componentName` property of your component.
 Let's stand with `Avatar` name:
 
 ```jsx
@@ -103,12 +103,12 @@ export const AvatarTypes = (theme) => {
 
 ```
 
-Here we export function which accepts the theme object. Using `theme` we can set values based on the current theme. If theme will change - 
-those values will be also changed.
+Here we export the function which accepts the theme object. Using `theme` we can set values based on the current theme. If the theme will change - 
+those values will also be changed.
 
 ### Register rk-component
 
-Now we have all parameters for `registerComponent` method. Let's call it. Best place to do this - some kind of bootstrap method 
+Now we have all parameters for `registerComponent` method. Let's call it. Best place to do this - some kind of a bootstrap method 
 which will be called on app startup.
 
 ```jsx
@@ -123,7 +123,7 @@ RkTheme.registerComponent('Avatar', AvatarTypes);
 
 ```
 
-After this step `RkTheme` knows about `Avatar` class. And can compile styles for it according to the current theme.
+After this step `RkTheme` knows about `Avatar` class, and can compile styles for it according to the current theme.
 Now we need to set computed styles in our controls.
 First, let's add a special mapping object to the component. It can be used in order to provide more user-friendly properties
 for your component. This will be described a bit later. Now you only need to create a skeleton of this mapping.
@@ -200,12 +200,12 @@ import {Avatar} from 'avatar.js'
 
 ```
 
-Component now looks much better:
+The component looks much better now:
 
 ![](assets/avatar/avatar2.png)
 
-Now if we change for example a color for a hint text in the theme -
-avatar's description color will be also changed.
+From this point if we change for example a color for a hint text in the theme -
+avatar's description color will also be changed.
 
 For example:
 ```jsx
@@ -222,14 +222,14 @@ RkTheme.setTheme({
 });
 ```
 
-Now avatar should look like this:
+Now the avatar should look like this:
 
 ![](assets/avatar/avatar3.png)
 
 ### Adding rkTypes to component.
 
 As long as `Avatar` is *rk-component* we can define rkTypes for it. As a base style, we may want to create types that also will depend on the current theme. In order to add such types, we need to make changes into `avatarTypes.js`.
-Let's add couple new types for `Avatar`:
+Let's add a couple of new types for `Avatar`:
 
 ```jsx
 // avatarTypes.js
@@ -280,7 +280,7 @@ import {Avatar} from 'avatar.js'
 
 ```
 
-Here is result of code above:
+Here is the result of the code above:
 
 ![](assets/avatar/avatar4.png)
 
@@ -292,7 +292,7 @@ React Native UI Kitten provides the ability to define simplified property and th
 
 Let's define properties `backgroundColor`, `color` and `descriptionColor` for `Avatar` component.
 There are only a few things to change in our component. 
-Currently in our component we have variable `typeMapping` which has next structure:
+Currently in our component we have variable `typeMapping` which has the following structure:
 
 ```jsx
 // avatar.js
@@ -378,4 +378,4 @@ export const AvatarTypes = (theme) => {
 };
 ```
 
-Now it's much cleaner and user-friendly.
+Now it's much cleaner and user-friendlier.
