@@ -78,7 +78,7 @@ RkTheme.setType('RkButton','different',{
 
 ### Default values
 Sometimes it is very useful to set default style for all components in a whole application without need to set explicitly `rkType`
-for each component. All *rk-components* have a type which always applied. Th name of this type is set in `RkComponent.defaultType` variable.
+for each component. All *rk-components* have a type which always applied. The name of this type is set in `RkComponent.defaultType` variable.
 All standard *rk-components* has defaultType `basic`. In order to change the style for all components - just override this type.
 
 Let's change color and size for all `RkText` components in the app:
