@@ -162,14 +162,21 @@
     }
     .big-circle-img {
       margin-bottom: -2px;
-
+    }
+    .wrapper {
+      margin-top: -100px;
+    }
+    h3 {
+      max-width: 80%;
+      margin: 0 auto 1.625rem;
     }
     .contact-container {
-       display: flex;
-       flex-direction: row;
-       justify-content: space-around;
-       margin-bottom: 4.5rem;
-       font-size: 2rem;
+      max-width: 45rem;
+      margin: 0 auto 4.5rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      font-size: 2rem;
       .icons {
         position: relative;
         display: flex;
@@ -205,7 +212,13 @@
       font-weight: 500;
     }
   }
-
+  @media screen and (max-width: 82rem) {
+    .contacts {
+      .wrapper {
+        margin-top: 0;
+      }
+    }
+  }
   @media screen and (max-width: 60.625rem) {
     h2 {
       $map: (37.5rem: 3.75rem, 60.625rem: 5.5rem);
@@ -255,6 +268,7 @@
     .contacts {
       .contact-container {
         font-size: 1.5rem;
+        max-width: 30rem;
         .icons {
           height: 10rem;
           width: 10.3rem;
@@ -324,6 +338,7 @@
 
     }
     .demo {
+      margin-bottom: 3rem;
       a.button {
         margin-bottom: 3rem;
         &.platform-button {
@@ -334,6 +349,7 @@
     .contacts {
       .contact-container {
         font-size: 1rem;
+        max-width: 15rem;
         .icons {
           height: 5rem;
           width: 5rem;
