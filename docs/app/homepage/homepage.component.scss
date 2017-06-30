@@ -225,7 +225,6 @@
         height: 12rem;
         width: 12.5rem;
         .icon-socio {
-            position: absolute;
             width: 10rem;
             &:hover ~ .icon-cloud {
               height: 98%;
@@ -324,6 +323,7 @@
 
   }
 
+  // TODO: let's remove this once we fix the cloud icons thingy
   @media screen and (-webkit-min-device-pixel-ratio:0) {
     img.icon-cloud {
       visibility: hidden;
