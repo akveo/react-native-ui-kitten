@@ -30,12 +30,16 @@
       }
 
       nga-menu {
-        & > ul > li > a:first-child {
-          font-weight: bold;
-          cursor: default;
+        & > ul > li {
+          padding: 0.5rem 0;
+          & > a:first-child {
+            font-weight: bold;
+            cursor: default;
+          }
         }
         a {
           padding-left: 0;
+          font-weight: 400;
           &.active {
             font-weight: bold;
           }

@@ -97,6 +97,7 @@
     border-radius: 1.625em;
     color: nga-theme(color-primary);
     margin: 0.625rem;
+    transition: all ease-out .2s;
     &:hover {
       color: nga-theme(color-fg-inverse);
       background: nga-theme(color-primary);
@@ -190,9 +191,7 @@
     }
   }
 
-  .platform-button {
-    transition: all ease-out .2s;
-  }
+
 
   .contacts {
     color: nga-theme(color-fg-inverse);
@@ -217,25 +216,10 @@
       flex-direction: row;
       justify-content: space-around;
       font-size: 2rem;
-      .icons {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 12rem;
-        width: 12.5rem;
-        .icon-socio {
-            width: 10rem;
-            &:hover ~ .icon-cloud {
-              height: 98%;
-              width: 98%;
-              margin-right: 3px;
-            }
-          }
-        .icon-cloud {
-          width: 75%;
-          height: 75%;
-          transition: all 0.2s ease-out;
+      .contact-button {
+        flex: 1;
+        .svg-button {
+          fill: #fff;
         }
       }
     }
@@ -308,26 +292,9 @@
       .contact-container {
         font-size: 1.5rem;
         max-width: 30rem;
-        .icons {
-          height: 10rem;
-          width: 10.3rem;
-          img.icon-socio {
-            width: 8.15rem;
-          }
-          img.icon-cloud {
-            display: none;
-          }
-        }
       }
     }
 
-  }
-
-  // TODO: let's remove this once we fix the cloud icons thingy
-  @media screen and (-webkit-min-device-pixel-ratio:0) {
-    img.icon-cloud {
-      visibility: hidden;
-    }
   }
 
   @media screen and (max-width: 41.875rem) {// to avoid big bottom wwhitesapce
@@ -393,13 +360,6 @@
       .contact-container {
         font-size: 1rem;
         max-width: 15rem;
-        .icons {
-          height: 5rem;
-          width: 5rem;
-          img.icon-socio {
-            width: 4rem;
-          }
-        }
       }
     }
   }

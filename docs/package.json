@@ -36,6 +36,7 @@
     "documentation": "^4.0.0-rc.1",
     "rimraf": "2.6.1",
     "roboto-fontface": "^0.7.0",
+    "socicon": "^3.0.5",
     "typeface-righteous": "0.0.22",
     "typescript": "2.3.3"
   }

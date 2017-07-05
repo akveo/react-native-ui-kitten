@@ -61,10 +61,7 @@
   .menu-icon {
     display: none;
   }
-  .github-fork-ribbon:before {
-    background: nga-theme(color-primary);
-    box-sizing: content-box;
-  }
+
   /deep/ nga-menu.mobile-menu {
     position: fixed;
     top: nga-theme(header-height);
@@ -74,17 +71,17 @@
     overflow: hidden;
     background: nga-theme(color-bg);
     transition: height 0.3s ease-out;
-    a, a:hover, a:focus, a:active {
+    a, a:hover {
       color: nga-theme(color-fg);
       font-weight: bold;
-      &.active {
-        color: nga-theme(menu-fg);
-        font-weight: bold;
-      }
+      padding: 0.375rem 1rem;
     }
-    & > ul > li > a:first-child {
-      &:not([ng-reflect-router-link]) {
-        pointer-events: none;
+    & > ul > li {
+      padding: 0.25rem 0;
+      & > a:first-child {
+        &:not([ng-reflect-router-link]) {
+          pointer-events: none;
+        }
       }
     }
     i {
@@ -97,6 +94,10 @@
       a {
         padding-left: 1rem;
         font-weight: normal;
+        &.active {
+          font-weight: bold;
+          color: nga-theme(color-fg-active);
+        }
       }
     }
   }

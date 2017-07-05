@@ -20,7 +20,8 @@
         "styles.scss",
         "node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
         "node_modules/typeface-righteous/index.css",
-        "node_modules/prismjs/themes/prism.css"
+        "node_modules/prismjs/themes/prism.css",
+        "node_modules/socicon/css/socicon.css"
       ],
       "scripts": [
         "node_modules/prismjs/prism.js"
