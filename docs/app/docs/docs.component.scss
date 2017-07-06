@@ -15,10 +15,12 @@
       min-width: 0;
       nga-layout-column {
         min-width: 0;
+        padding: 0 0 0 1rem;
       }
     }
 
     nga-sidebar {
+			z-index: auto;
       .scrollable {
         height: calc(100vh - #{nga-theme(header-height)} - #{nga-theme(docs-content-margin-top)}); // TODO: get rid of this hardcode 130px;
       }
@@ -62,6 +64,9 @@
     }
     /deep/ .layout-container {
       padding: 0;
+      .content nga-layout-column {
+        padding: 0;
+      }
     }
   }
 

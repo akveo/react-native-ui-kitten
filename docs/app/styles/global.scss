@@ -12,6 +12,11 @@
     font-family: nga-theme(font-main);
     font-weight: nga-theme(font-weight-light);
   }
+  nga-layout-header, nga-layout-footer {
+    nav {
+      display: block !important; //to fix ie header-footer issue;
+    }
+  }
 }
 
 

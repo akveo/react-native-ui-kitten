@@ -62,6 +62,7 @@ export class ReactHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.renderer.removeClass(document.body, 'scrolless');
     this.menuSubscription.unsubscribe();
   }
 }

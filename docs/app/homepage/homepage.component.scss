@@ -224,6 +224,18 @@
       }
     }
   }
+  //fallback for ie
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .contact-button svg:hover {
+        stroke: yellow;
+    }
+  }
+
+  @supports (-ms-ime-align: auto) {
+    .contact-button svg:hover {
+      stroke: yellow;
+    }
+  }
 
   .hire-block {
     padding: 2rem 0 4rem;
@@ -235,6 +247,7 @@
       font-weight: 500;
     }
   }
+
   @media screen and (max-width: 82rem) {
     .contacts {
       .wrapper {
