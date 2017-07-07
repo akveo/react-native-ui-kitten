@@ -70,5 +70,5 @@ render() {
 ```
 
 In other cases, you may need to create your own *rk-like* component with a support of `rkType`, theming and other features.
-Actually, it's quite easy to implement. [Here](/#/docs/quick-start/create-custom-component) is a guide of how to create such component.
+Actually, it's quite easy to implement. [Here](#/docs/quick-start/create-custom-component) is a guide of how to create such component.
 
