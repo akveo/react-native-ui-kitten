@@ -22,7 +22,7 @@ let id = 0;
  *   //...
  * </View>
  *
- * let styles = RkStyleSheer.create(theme => ({
+ * let styles = RkStyleSheet.create(theme => ({
  *     root: {
  *       backgroundColor: theme.colors.screen.base
  *     }
