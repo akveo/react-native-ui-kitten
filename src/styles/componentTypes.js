@@ -7,3 +7,4 @@ export * from '../components/image/types';
 export * from '../components/tab/types';
 export * from '../components/text/types';
 export * from '../components/textinput/types';
+export * from '../components/picker/types';

@@ -4,13 +4,16 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  TouchableHighlight,
+  Text,
 } from 'react-native';
 import {
   RkText,
   RkChoiceGroup,
   RkChoice,
   RkTheme,
-  RkSeparator
+  RkSeparator,
+  RkPicker
 } from 'react-native-ui-kitten';
 import {UtilStyles} from '../style/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,15 +30,50 @@ export class ChoiceScreen extends React.Component {
       settingsOption: {
         index: 0,
         name: 'Option 1'
-      }
+      },
+      pikerVisible: false,
+      pickedValue: 'Pick Value'
     };
+    this.hidePicker = this.hidePicker.bind(this)
+    this.handlePickedValue = this.handlePickedValue.bind(this)
   }
+
+  showPicker(){
+    this.setState({ pikerVisible: true })
+  };
+
+  hidePicker(){
+    this.setState({ pikerVisible: false });
+  }
+
+  handlePickedValue(date){
+    this.setState({pickedValue: date});
+    this.hidePicker();
+  };
+
 
   render() {
     return (
       <ScrollView
         style={UtilStyles.container}
         automaticallyAdjustContentInsets={true}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
+          <RkText rkType='header'>Picker Examples</RkText>
+          <View style={UtilStyles.columnContainer}>
+            <View style={styles.componentRow}>
+              <TouchableHighlight onPress={() => this.showPicker()}>
+                <Text>{this.state.pickedValue}</Text>
+              </TouchableHighlight>
+
+              <RkPicker title='Set Year'
+                        visible={this.state.pikerVisible}
+                        onConfirm={this.handlePickedValue}
+                        onCancel={this.hidePicker}/>
+
+              <RkText rkType='bold' style={styles.caption}>First</RkText>
+            </View>
+          </View>
+        </View>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Classic selectable components</RkText>
           <View style={UtilStyles.columnContainer}>
@@ -264,5 +302,10 @@ const styles = StyleSheet.create({
   typeText: {
     color: RkTheme.current.colors.grey500,
     textAlign: 'center'
+  },
+  text: {
+    fontSize: 30,
+    alignSelf: 'center',
+    color: 'red'
   }
 });
