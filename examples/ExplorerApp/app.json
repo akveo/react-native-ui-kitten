@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "ExplorerApp",
+    "slug": "kitten-explorer",
+    "description": "react-native-ui-kitten is a framework that contains set of commonly used UI components styled in similar way. The main idea of this framework is to move style definitions into specific place making components reusable and styled in a single way. You just focus on business logic and it takes care of visual appearance. https://github.com/akveo/react-native-ui-kitten",
+    "icon": "./icon.png",
+    "loading": {
+      "icon": "./icon.png"
+    },
+    "sdkVersion": "18.0.0",
+    "androidStatusBar": {
+      "backgroundColor": "#ffffff"
+    }
+  }
+}

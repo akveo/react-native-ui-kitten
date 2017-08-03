@@ -1,7 +1,9 @@
 import React from 'react';
+import { StatusBar, View } from 'react-native';
 import * as Screens from './screens';
 import {StackNavigator} from 'react-navigation';
 import {bootstrap} from './style/themeBootstrapper'
+import { AppLoading, Font } from 'expo';
 
 bootstrap();
 
@@ -23,4 +25,37 @@ const ExplorerApp = StackNavigator({
   }
 });
 
-export default () => <ExplorerApp />;
+export default class App extends React.Component {
+  state  = {
+    loaded: false,
+  }
+
+  componentWillMount() {
+    this._loadAssetsAsync();
+  }
+
+  _loadAssetsAsync = async () => {
+    await Font.loadAsync({
+      'Roboto-Light': require('./fonts/Roboto-Light.ttf'),
+      'Roboto-Medium': require('./fonts/Roboto-Medium.ttf'),
+      Borg: require('./fonts/Borg.ttf'),
+      Curely: require('./fonts/Curely.ttf'),
+    });
+
+    this.setState({loaded: true});
+  }
+
+  render() {
+    if (!this.state.loaded) {
+      return <AppLoading />;
+    }
+
+    return (
+      <View style={{flex: 1}}>
+        <ExplorerApp />
+        <StatusBar barStyle="default" />
+      </View>
+    );
+  }
+
+}
