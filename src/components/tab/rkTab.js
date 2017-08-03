@@ -5,8 +5,7 @@ import {
 } from 'react-native';
 
 export class RkTab extends React.Component {
-
-  static name = 'tab';
+  componentName = 'RkTab';
 
   constructor(props) {
     super(props);
