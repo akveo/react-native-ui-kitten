@@ -1,11 +1,11 @@
 ### Overview
-All components introduced in this framework depends on application *theme*. Theme - is an object with some base values: colors, font sizes etc. 
-They also organized in groups by meaning and also has inheritance.
- All interactions with theme and other customization work should be done using `RkTheme` object.
+All components introduced in this framework depend on the application *theme*. Theme is an object with base values: colors, font sizes etc. 
+They're also organized in groups by purpose and also have inheritance.
+ All interactions with the theme and other customizations should be done using `RkTheme` object.
 
-Theme has definition for most of base values like regular text color or size, success button color or color of subtitles.
-That means if you change regular text color in theme - all *rk-components* which use this color will apply it. So you can easily 
-adjust color or  for whole app.
+Theme has a definition for most of the base values like regular text color or size, success button color or color of subtitles.
+That means, if you change a regular text color in theme, all *rk-components* which use this color will apply it. So, you can easily 
+adjust color for the whole app.
 
 Here is an example from our default theme:
 ```javascript
@@ -28,13 +28,13 @@ fonts: {
 ```
 
 This code defines base font size and also font sizes for different semantic values like *small*, *large* etc. Our *rk-components*
-use this theme values. So for example `RkButton` with predefined `rkType` small will use *small* value as font size for content.
+use this theme values. So, for example `RkButton` with predefined `rkType` small will use *small* value as a font size for the content.
 
 ### Overriding Theme
 
-Default theme is just a set of predefined values. However it can be easily overridden using `RkTheme` object.
+Default theme is just a set of predefined values. However, it can be easily overridden using `RkTheme` object.
 
-Let's override base font size of text.
+Let's override base font size of the text.
 
 ```javascript
 import {RkTheme} from 'react-native-ui-kitten'
@@ -53,8 +53,8 @@ Now all *rk-components* which use *base* font size will have new size.
 
 ### Using theme in your own components
 
-During app development it can be necessary to use values of current theme for regular components: for example - set background
-for `View`. To get values of current theme you can use `RkTheme.current` property. It returns current theme for application.
+During an app development it can be necessary to use values of current theme for regular components: for example a set background
+for `View`. To get values of the current theme you can use `RkTheme.current` property. It returns the current theme for the application.
 
 ```
 import {RkTheme} from 'react-native-ui-kitten'
@@ -69,6 +69,6 @@ render() {
 }
 ```
 
-In other cases you may need to create your own *rk-like* component with support of `rkType`, theming and other features.
-Actually it's possible and easy to implement. Here is guide of how to create such component.
+In other cases, you may need to create your own *rk-like* component with a support of `rkType`, theming and other features.
+Actually, it's quite easy to implement. [Here](#/docs/quick-start/create-custom-component) is a guide of how to create such component.
 

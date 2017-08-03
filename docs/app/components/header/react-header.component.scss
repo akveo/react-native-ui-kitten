@@ -1,118 +1,137 @@
 @import '../../styles/variables';
 
 @include nga-install-component {
-
   display: flex;
-  flex: 1;
   max-width: nga-theme(content-width);
   margin: auto;
   padding: 0 1rem;
+
+  .logo-container {
+    font-size: 30px;
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+
     .logo {
-      font-size: 30px;
-      img {
-        margin-right: 12px;
-      }
+      display: inline-block;
+      background: url('../../../assets/pics/logo.svg') no-repeat center;
+      background-size: contain;
+      vertical-align: middle;
+      width: 65px;
+      height: 44px;
+      margin-right: 12px;
     }
 
-    .menu {
-      width: nga-theme(header-menu-width);
-      margin: auto;
-      font-size: 20px;
-      font-weight: bold;
-      hr {
-        width: 97px;
-        margin: -6px 0 0 0;
-        background: nga-theme(header-fg);
-        height: 6px;
-        border-radius: 2.5px;
+    .svg-logo {
+      width: 65px;
+      height: 44px;
+      margin-right: 20px;
+    }
+  }
+
+  .menu {
+    width: nga-theme(header-menu-width);
+    margin: auto;
+    font-size: 20px;
+    font-weight: bold;
+
+    a {
+      position: relative;
+      display: inline-block;
+      height: nga-theme(header-height);
+      padding: 0 20px;
+
+      &.active-link::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 4px;
+        background: rgba(nga-theme(color-primary), 0.8);
+        border-radius: 2px;
         transition: .3s ease-in-out;
-        border: none;
-      }
-      a {
-        padding: 0 20.5px;
-
-        &:nth-child(2) {
-          &:hover ~ hr {
-            margin-left: 100px;
-            width: 206px;
-          }
-        }
-         &.active-link ~ hr {
-           background: nga-theme(color-secondary);
-           margin-left: 100px;
-           width: 206px;
-         }
-
-        &:first-child {
-         &:hover ~ hr {
-           width: 97px;
-           margin: -6px 0 0 0;
-         }
-        }
+        bottom: 16px;
+        left: 0;
       }
     }
+  }
 
-    .menu-icon {
-      display: none;
+  .menu-icon {
+    display: none;
+  }
+
+  /deep/ nga-menu.mobile-menu {
+    position: fixed;
+    top: nga-theme(header-height);
+    left: 0;
+    width: 100vw;
+    height: 0;
+    overflow: hidden;
+    background: nga-theme(color-bg);
+    transition: height 0.3s ease-out;
+    a, a:hover {
+      color: nga-theme(color-fg);
+      font-weight: bold;
+      padding: 0.375rem 1rem;
     }
-
-    /deep/ nga-menu.mobile-menu {
-      position: fixed;
-      top: nga-theme(header-height);
-      left: 0;
-      width: 100vw;
-      height: 0;
-      overflow: hidden;
-      background: nga-theme(color-bg);
-      transition: height 0.5s ease;
-      a, a:hover, a:focus, a:active {
-        color: nga-theme(color-fg);
-        font-weight: bold;
-        &.active {
-          color: nga-theme(menu-fg);
-          font-weight: bold;
-        }
-      }
-      & > ul > li > a:first-child {
+    & > ul > li {
+      padding: 0.25rem 0;
+      & > a:first-child {
         &:not([ng-reflect-router-link]) {
           pointer-events: none;
         }
       }
-      i {
-        display: none;
-      }
-      .menu-collapsed, .menu-expanded {
-        visibility: visible;
-        opacity: 1;
-        height: 100%;
-        a {
-          padding-left: 1rem;
-          font-weight: normal;
+    }
+    i {
+      display: none;
+    }
+    .menu-collapsed, .menu-expanded {
+      visibility: visible;
+      opacity: 1;
+      height: 100%;
+      a {
+        padding-left: 1rem;
+        font-weight: normal;
+        &.active {
+          font-weight: bold;
+          color: nga-theme(color-fg-active);
         }
       }
     }
+  }
 
-    @media screen and (max-width: 900px) {
-      .menu {
-        display: none;
-      }
-      .menu-icon {
-        font-size: 40px;
-        display: block;
-        margin: 0 0 0 auto;
-        cursor: pointer;
-      }
+  @media screen and (max-width: 1500px) and (min-width: 900px) {
+    padding-right: 150px;
+  }
 
-      .mobile-menu.active {
-        height: calc(100vh - #{nga-theme(header-height)});
-        overflow: auto;
-      }
-    }
-
-    @media screen and (max-width: 1140px) {
-      span {
-        display: none;
-      }
+  @media screen and (max-width: 1140px) {
+    span {
+      display: none;
     }
   }
+
+  @media screen and (max-width: 900px) {
+    .menu {
+      display: none;
+    }
+    .menu-icon {
+      font-size: 40px;
+      display: block;
+      margin: 0 0 0 auto;
+      cursor: pointer;
+    }
+
+    .mobile-menu.active {
+      height: calc(100vh - #{nga-theme(header-height)});
+      overflow: auto;
+    }
+  }
+
+  @media screen and (max-width: 1140px) {
+    span {
+      display: none;
+    }
+  }
+}
 

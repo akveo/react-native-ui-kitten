@@ -1,39 +1,48 @@
-$sidebar-right-width: 280px;
-$color-primary: #ff241f;
+@import '../../../styles/variables';
 
-:host {
-
+@include nga-install-component {
   div ~ div {
 
-      width: $sidebar-right-width;
-      height: 500px;
-      position: relative;
-      background: url(../../../../assets/phoneImage.png) no-repeat;
-      margin-top: 1rem;
+    width: nga-theme(right-sidebar-width);
+    height: 500px;
+    position: relative;
+    margin-top: 1rem;
+    color: nga-theme(color-fg);
+    background: url(../../../../assets/pics/phoneImage.png);
+    background-repeat: no-repeat;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: contain;
+
+    img {
+      position: absolute;
+      top: 53px;
+      left: 33px;
+      width: 214px;
+      height: 378px;
+    }
+
+    &.android {
+      background: url(../../../../assets/pics/androidPhoneImage.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
       background-size: contain;
       img {
-        position: absolute;
-        top: 57px;
-        left: 35px;
-        width: 208px;
-        height: 371px;
-      }
-
-      &.android {
-        background: url(../../../../assets/androidPhoneImage.png) no-repeat;
-        background-size: contain;
-        img {
-          top: 55px;
-          left: 30px;
-          width: 218px;
-          height: 385px;
-        }
+        top: 55px;
+        left: 30px;
+        width: 218px;
+        height: 385px;
       }
     }
+  }
 
   div {
     text-align: center;
-    width: $sidebar-right-width;
+    width: nga-theme(right-sidebar-width);
 
     & > button {
       padding: 0.5em 1em;
@@ -41,7 +50,7 @@ $color-primary: #ff241f;
       border: none;
       text-align: center;
       &.active {
-        background: $color-primary;
+        background: nga-theme(color-primary);
         border-radius: 1em;
         color: #fff;
       }

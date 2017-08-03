@@ -5,8 +5,10 @@
       "root": "./",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "favicon.ico"
+        "assets/pics",
+        "assets/articles",
+        "assets/avatar",
+        "favicon.png"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -18,9 +20,11 @@
         "styles.scss",
         "node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
         "node_modules/typeface-righteous/index.css",
-        "node_modules/prismjs/themes/prism.css"
+        "node_modules/prismjs/themes/prism.css",
+        "node_modules/socicon/css/socicon.css"
       ],
       "scripts": [
+        "node_modules/prismjs/prism.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

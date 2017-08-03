@@ -26,13 +26,14 @@ $nga-themes: nga-register-theme((
   color-primary: #ff241f,
   color-secondary: rgb(253, 224, 32),
   layout-padding: 0,
-  header-bg: color-primary,
+  header-bg: white,
+  header-fg: rgba(black, 0.75),
 
   shadow: none,
   color-fg: rgba(0, 0, 0, 0.87),
   menu-font-size: 1.25rem,
   menu-fg: color-fg,
-  card-line-height: 1.5rem,
+  card-line-height: 1.25,
   sidebar-width: 12rem,
   layout-content-padding: 0 1rem,
   //just my vars
@@ -45,12 +46,11 @@ $nga-themes: nga-register-theme((
   right-sidebar-width: 17.5rem,
 	code-snippets-bg: rgb(245, 246, 252),
 
-  separator: color-bg,
   header-padding: 0,
   header-height: 80px,
   header-line-height: header-height,
   menu-active-bg: color-bg,
-  menu-active-fg: menu-fg,
+  menu-active-fg: color-fg-active,
   menu-submenu-active-fg: color-fg-active,
 	menu-submenu-padding: 0,
   menu-submenu-active-bg: color-bg,
@@ -64,4 +64,5 @@ $nga-themes: nga-register-theme((
   card-padding: 1rem,
   font-size-lg: 2rem,
   sidebar-padding: 0.5rem,
+	footer-separator: rgba(0, 0, 0, 0.1),
 ), default, default);

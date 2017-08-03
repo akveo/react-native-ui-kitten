@@ -2,6 +2,10 @@
 
 @include nga-install-root-component {
 
+  nga-layout-header {
+    border-bottom: 1px solid #eee;
+  }
+
   /deep/ .layout-container {
     max-width: nga-theme(content-width);
     width: 100%;
@@ -11,10 +15,12 @@
       min-width: 0;
       nga-layout-column {
         min-width: 0;
+        padding: 0 0 0 1rem;
       }
     }
 
     nga-sidebar {
+			z-index: auto;
       .scrollable {
         height: calc(100vh - #{nga-theme(header-height)} - #{nga-theme(docs-content-margin-top)}); // TODO: get rid of this hardcode 130px;
       }
@@ -26,12 +32,16 @@
       }
 
       nga-menu {
-        & > ul > li > a:first-child {
-          font-weight: bold;
-          cursor: default;
+        & > ul > li {
+          padding: 0.5rem 0;
+          & > a:first-child {
+            font-weight: bold;
+            cursor: default;
+          }
         }
         a {
           padding-left: 0;
+          font-weight: 400;
           &.active {
             font-weight: bold;
           }
@@ -54,6 +64,9 @@
     }
     /deep/ .layout-container {
       padding: 0;
+      .content nga-layout-column {
+        padding: 0;
+      }
     }
   }
 

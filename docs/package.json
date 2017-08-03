@@ -3,10 +3,12 @@
   "scripts": {
     "docs:prepare": "documentation documentation.js build ../src/** -f json -o docs.json",
     "docs:parse": "prsr -g docjs -f react -i docs.json -o output.json",
-    "docs:gen": "docs:prepare && docs:pasre",
-    "docs:serve": "documentation documentation.js build ../src/** -f json -o docs.json && prsr -g docjs -f react -i docs.json -o output.json && ng serve --port 3000",
+    "docs:gen": "npm run docs:prepare && npm run docs:parse",
     "start": "ng serve --port 3000",
-    "docs:build": "rimraf dist && ng build"
+    "docs:serve": "npm run docs:gen && npm start",
+    "docs:build": "rimraf dist && ng build --base-href https://akveo.github.io/react-native-ui-kitten/ --prod --aot",
+    "ngh": "ngh",
+    "docs:gh-pages": "npm run docs:build && npm run ngh"
   },
   "dependencies": {
     "@angular/common": "4.1.3",
@@ -25,8 +27,7 @@
     "marked": "^0.3.6"
   },
   "devDependencies": {
-    "@akveo/nga-auth": "^2.0.0-alpha.1-dev.2",
-    "@akveo/nga-theme": "^2.0.0-alpha.1-dev.2",
+    "@akveo/nga-theme": "2.0.0-alpha.1-dev.6",
     "@angular/cli": "1.1.0",
     "@angular/compiler-cli": "4.1.3",
     "@types/node": "6.0.74",
@@ -35,6 +36,7 @@
     "documentation": "^4.0.0-rc.1",
     "rimraf": "2.6.1",
     "roboto-fontface": "^0.7.0",
+    "socicon": "^3.0.5",
     "typeface-righteous": "0.0.22",
     "typescript": "2.3.3"
   }

@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -33,6 +33,7 @@ import { ReactDemoPhoneComponent } from './docs/page/blocks/react-demo-phone.com
 import { CodeHighlighterComponent } from './docs/utils/code-highlighter.component';
 import { ReactHeaderComponent } from './components/header/react-header.component';
 import { ReactFooterComponent } from './components/footer/react-footer.component';
+import { Analytics } from './docs/utils/analytics.service';
 
 @NgModule({
   imports: [
@@ -68,7 +69,11 @@ import { ReactFooterComponent } from './components/footer/react-footer.component
     ReactFooterComponent,
 
   ],
-  providers: [DocsService],
+  providers: [
+    DocsService,
+    Analytics,
+    Title
+  ],
   entryComponents: [
   ],
   bootstrap: [NgdAppComponent],

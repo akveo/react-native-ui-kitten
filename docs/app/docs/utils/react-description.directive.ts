@@ -1,5 +1,4 @@
 import { Directive, ElementRef } from '@angular/core';
-import 'prismjs/components/prism-jsx.js';
 import * as marked from 'marked';
 
 @Directive({

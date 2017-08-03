@@ -7,28 +7,21 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex:1;
   text-align: center;
-  a {
-    img {
-      height: 41px;
-    }
-    &:nth-child(2) img {
-      margin: 32.5px;
+  margin: auto;
+  .socio {
+    a, a:hover, a:focus, a:active {
+      font-size: 41px;
+      color: #ff2825;
+      &:first-child {
+        margin-right: 10px;
+      }
     }
   }
 
   @media screen and (max-width: 970px) {
     p {
       font-size: 0.75rem;
-    }
-    a {
-      img {
-        height: 30px;
-      }
-      &:nth-child(2) img {
-        margin: 0 10px;
-      }
     }
   }
 
