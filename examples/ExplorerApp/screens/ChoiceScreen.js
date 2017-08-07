@@ -61,24 +61,6 @@ export class ChoiceScreen extends React.Component {
         style={UtilStyles.container}
         automaticallyAdjustContentInsets={true}>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
-          <RkText rkType='header'>Picker Examples</RkText>
-          <View style={UtilStyles.columnContainer}>
-            <View style={styles.componentRow}>
-              <TouchableHighlight onPress={() => this.showPicker()}>
-                <Text>{this.state.pickedValue}</Text>
-              </TouchableHighlight>
-
-              <RkPicker title='Set Year'
-                        data={this.generateArrayFromRange(1985, 2025)}
-                        visible={this.state.pikerVisible}
-                        onConfirm={this.handlePickedValue}
-                        onCancel={this.hidePicker}/>
-
-              <RkText rkType='bold' style={styles.caption}>Year Picker</RkText>
-            </View>
-          </View>
-        </View>
-        <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Classic selectable components</RkText>
           <View style={UtilStyles.columnContainer}>
             <View style={styles.componentRow}>

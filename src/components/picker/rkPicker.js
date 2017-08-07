@@ -18,32 +18,10 @@ export class RkPicker extends RkComponent {
   constructor(props) {
     super(props);
     this.optionHeight = this.props.optionHeight || 30;
-    this.pickerHeight = 3 * this.optionHeight;
-    this.state = {selectedIndex: 0};
-  }
-
-  getItemLayout(data, index){
-    return {length: this.optionHeight, offset: this.optionHeight * index, index}
-  }
-
-  renderOption(option, index) {
-    return (
-      <View style={[styles.option, {height: this.optionHeight}]}>
-        <RkText rkType='subtitle xxlarge'>
-          {option}
-        </RkText>
-      </View>
-    )
-  }
-
-  fixScroll(e) {
-    let y = 0;
-    if (e.nativeEvent.contentOffset) {
-      y = e.nativeEvent.contentOffset.y;
-    }
-    let selectedIndex = Math.round(y / this.optionHeight);
-    this.flatListRef.scrollToIndex({animated: true, index: selectedIndex});
-    this.state.selectedIndex = selectedIndex+1;
+    this.optionNumberOnPicker = this.props.optionNumberOnPicker || 3;
+    this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
+    this.state = {selectedIndexes: this.props.selectedIndexes};
+    this.listRefs = new Array(this.props.data.length);
   }
 
   render() {
@@ -55,61 +33,95 @@ export class RkPicker extends RkComponent {
         onRequestClose={() => this.props.onCancel()}
       >
         <View style={[styles.modalContainer]}>
-          <View style={{flex: 0.1}}/>
-          <View style={{flex: 0.8}}>
-            <View style={{flex: 1, flexDirection: 'column'}}>
-              <View style={{flex: 0.2}}/>
-              <View style={[styles.modalContent]}>
-                <RkText rkType='xxlarge header' syle={[styles.modalElement]}>{this.props.title}</RkText>
-                <View style={[styles.modalElement, {height: this.pickerHeight}]}>
-                  <FlatList data={this.props.data}
-                            renderItem={({item, index}) => this.renderOption(item, index)}
-                            keyExtractor={(item, index) => index}
-                            showsVerticalScrollIndicator={false}
-                            ref={(flatListRef) => this.flatListRef = flatListRef}
-                            onScrollEndDrag={(e) => this.fixScroll(e)}
-                            getItemLayout={(data, index) => this.getItemLayout(data, index)}
-                  />
-                </View>
-                <View style={[styles.buttonsBlock, styles.modalElement]}>
-                  <RkButton rkType='xxlarge outline'
-                            style={[styles.button]}
-                            onPress={() => this.props.onCancel()}>
-                    CANCEL
-                  </RkButton>
-                  <RkButton rkType='xxlarge outline'
-                            style={[styles.button]}
-                            onPress={() => this.props.onConfirm(this.props.data[this.state.selectedIndex])}>
-                    OK
-                  </RkButton>
-                </View>
-              </View>
-              <View style={{flex: 0.4}}/>
+          <View style={[styles.modalContent]}>
+            <RkText rkType='xxlarge header' syle={styles.modalElement}>{this.props.title}</RkText>
+            <View style={[styles.listsContainer, styles.modalElement, {height: this.pickerHeight}]}
+                  componentDidMount={() => this.setInitialOptions()}>
+              {this.props.data.map(this.renderList.bind(this))}
+            </View>
+            <View style={[styles.buttonsBlock, styles.modalElement]}>
+              <RkButton rkType='xxlarge outline'
+                        style={[styles.button]}
+                        onPress={() => this.props.onCancel()}>
+                CANCEL
+              </RkButton>
+              <RkButton rkType='xxlarge outline'
+                        style={[styles.button]}
+                        onPress={() => this.props.onConfirm(this.state.selectedIndexes)}>
+                OK
+              </RkButton>
             </View>
           </View>
-          <View style={{flex: 0.1}}/>
         </View>
       </Modal>
     );
+  }
+
+  renderList(data, listIndex) {
+    return (
+      <FlatList data={data}
+                key={listIndex}
+                renderItem={({item, index}) => this.renderOption(item, index, listIndex)}
+                keyExtractor={(item, index) => index}
+                showsVerticalScrollIndicator={false}
+                ref={(flatListRef) => this.listRefs[listIndex] = flatListRef}
+                onScrollEndDrag={(e) => this.fixScroll(e, listIndex)}
+                getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}
+      />
+    );
+  }
+
+  renderOption(option, optionIndex, listIndex) {
+    return (
+      <View style={[styles.option, {height: this.optionHeight}]}>
+        <RkText rkType='subtitle xxlarge'>
+          {option}
+        </RkText>
+      </View>
+    )
+  }
+
+  setInitialOptions() {
+    this.state.selectedIndexes.forEach((item, index) => this.selectOption(item, index));
+  }
+
+  fixScroll(e, listIndex) {
+    let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
+    let selectedIndex = Math.round(y / this.optionHeight);
+    this.selectOption(selectedIndex, listIndex);
+  }
+
+  selectOption(optionIndex, listIndex) {
+    this.listRefs[listIndex].scrollToIndex({animated: true, index: optionIndex});
+    this.state.selectedIndexes[listIndex] = optionIndex + Math.floor(this.optionNumberOnPicker / 2);
+  }
+
+  getItemLayout(itemData, index) {
+    return {length: this.optionHeight, offset: this.optionHeight * index, index}
   }
 }
 
 let styles = RkStyleSheet.create(theme => ({
   modalContainer: {
-    flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'column',
+    marginHorizontal: 32
   },
   modalContent: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    flex: 0.4,
     backgroundColor: theme.colors.screen.base
   },
   buttonsBlock: {
     justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  listsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
   },
   button: {

@@ -9,6 +9,7 @@ const ExplorerApp = StackNavigator({
   Home: {screen: Screens.ComponentsScreen},
   Button: {screen: Screens.ButtonScreen},
   Choice: {screen: Screens.ChoiceScreen},
+  Picker: {screen: Screens.PickerScreen},
   Tab: {screen: Screens.TabScreen},
   Card: {screen: Screens.CardScreen},
   Avatar: {screen: Screens.AvatarScreen},
