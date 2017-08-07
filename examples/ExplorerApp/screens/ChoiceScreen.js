@@ -51,6 +51,9 @@ export class ChoiceScreen extends React.Component {
     this.hidePicker();
   };
 
+  generateArrayFromRange(start, finish){
+    return Array.apply(null, Array(finish-start+1)).map(function (_, i) {return start + i;});
+  }
 
   render() {
     return (
@@ -66,11 +69,12 @@ export class ChoiceScreen extends React.Component {
               </TouchableHighlight>
 
               <RkPicker title='Set Year'
+                        data={this.generateArrayFromRange(1985, 2025)}
                         visible={this.state.pikerVisible}
                         onConfirm={this.handlePickedValue}
                         onCancel={this.hidePicker}/>
 
-              <RkText rkType='bold' style={styles.caption}>First</RkText>
+              <RkText rkType='bold' style={styles.caption}>Year Picker</RkText>
             </View>
           </View>
         </View>
