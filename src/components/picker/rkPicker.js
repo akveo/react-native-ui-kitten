@@ -20,8 +20,31 @@ export class RkPicker extends RkComponent {
     this.optionHeight = this.props.optionHeight || 30;
     this.optionNumberOnPicker = this.props.optionNumberOnPicker || 3;
     this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
-    this.state = {selectedIndexes: this.props.selectedIndexes};
     this.listRefs = new Array(this.props.data.length);
+    this.state = {
+      selectedIndexes: this.props.selectedIndexes,
+      optionsData: this.updateOptionsData(this.props.data, this.optionNumberOnPicker)
+    };
+  }
+
+  updateOptionsData(optionsData, optionNumberOnPicker) {
+    let updatedOptionsData = new Array(optionsData.length);
+    optionsData.forEach((array, index) => {
+      updatedOptionsData[index] = this.createEmptyArray(optionNumberOnPicker / 2).concat(
+        array.concat(this.createEmptyArray(optionNumberOnPicker / 2))
+      );
+    });
+    return updatedOptionsData;
+  }
+
+  createEmptyArray(arrayLength) {
+    return Array.apply(null, new Array(Math.floor(arrayLength))).map((_, i) => ' ');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.visible !== prevProps.visible && this.props.visible) {
+      this.setInitialOptions();
+    }
   }
 
   render() {
@@ -35,9 +58,8 @@ export class RkPicker extends RkComponent {
         <View style={[styles.modalContainer]}>
           <View style={[styles.modalContent]}>
             <RkText rkType='xxlarge header' syle={styles.modalElement}>{this.props.title}</RkText>
-            <View style={[styles.listsContainer, styles.modalElement, {height: this.pickerHeight}]}
-                  componentDidMount={() => this.setInitialOptions()}>
-              {this.props.data.map(this.renderList.bind(this))}
+            <View style={[styles.listsContainer, styles.modalElement, {height: this.pickerHeight}]}>
+              {this.state.optionsData.map((array, index) => this.renderList(array, index))}
             </View>
             <View style={[styles.buttonsBlock, styles.modalElement]}>
               <RkButton rkType='xxlarge outline'
@@ -61,7 +83,7 @@ export class RkPicker extends RkComponent {
     return (
       <FlatList data={data}
                 key={listIndex}
-                renderItem={({item, index}) => this.renderOption(item, index, listIndex)}
+                renderItem={({item, index}) => this.renderOption(item)}
                 keyExtractor={(item, index) => index}
                 showsVerticalScrollIndicator={false}
                 ref={(flatListRef) => this.listRefs[listIndex] = flatListRef}
@@ -71,7 +93,7 @@ export class RkPicker extends RkComponent {
     );
   }
 
-  renderOption(option, optionIndex, listIndex) {
+  renderOption(option) {
     return (
       <View style={[styles.option, {height: this.optionHeight}]}>
         <RkText rkType='subtitle xxlarge'>
@@ -82,18 +104,22 @@ export class RkPicker extends RkComponent {
   }
 
   setInitialOptions() {
-    this.state.selectedIndexes.forEach((item, index) => this.selectOption(item, index));
+    this.state.selectedIndexes.forEach((optionIndex, listIndex) => {
+      setTimeout(()=>{
+        this.listRefs[listIndex].scrollToIndex({
+          animated: true,
+          index: optionIndex
+        });
+        this.state.selectedIndexes[listIndex] = optionIndex;
+      }, 0);
+    });
   }
 
   fixScroll(e, listIndex) {
     let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
-    let selectedIndex = Math.round(y / this.optionHeight);
-    this.selectOption(selectedIndex, listIndex);
-  }
-
-  selectOption(optionIndex, listIndex) {
+    let optionIndex = Math.round(y / this.optionHeight);
     this.listRefs[listIndex].scrollToIndex({animated: true, index: optionIndex});
-    this.state.selectedIndexes[listIndex] = optionIndex + Math.floor(this.optionNumberOnPicker / 2);
+    this.state.selectedIndexes[listIndex] = optionIndex;
   }
 
   getItemLayout(itemData, index) {

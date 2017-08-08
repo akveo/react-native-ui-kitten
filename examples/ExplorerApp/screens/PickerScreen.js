@@ -47,9 +47,7 @@ export class PickerScreen extends React.Component {
   };
 
   generateArrayFromRange(start, finish) {
-    return Array.apply(null, Array(finish - start + 1)).map(function (_, i) {
-      return start + i;
-    });
+    return Array.apply(null, Array(finish - start + 1)).map((_, i) => start + i);
   }
 
   render() {
