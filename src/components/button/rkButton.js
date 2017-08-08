@@ -170,7 +170,8 @@ export class RkButton extends RkComponent {
       onPress: this.props.onPress,
       onPressIn: this.props.onPressIn,
       onPressOut: this.props.onPressOut,
-      onLongPress: this.props.onLongPress
+      onLongPress: this.props.onLongPress,
+      disabled:this.props.disabled
     };
 
     return (
