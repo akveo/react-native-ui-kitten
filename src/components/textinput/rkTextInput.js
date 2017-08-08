@@ -195,7 +195,7 @@ export class RkTextInput extends RkComponent {
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
         {label && this._displayLabel(label, labelStyle)}
-        <TextInput underlineColorAndroid='transparent' ref={'input'} {...inputProps}/>
+        <TextInput underlineColorAndroid='transparent' ref={'input'} value={inputProps.value} {...inputProps}/>
       </TouchableOpacity>
     );
   }
