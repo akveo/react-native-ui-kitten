@@ -69,7 +69,8 @@ export class PickerScreen extends React.Component {
                   {years[this.state.pickedValue[2]]}
                 </Text>
               </TouchableHighlight>
-              <RkPicker title='Set Date'
+              <RkPicker rkType='rounded'
+                        title='Set Date'
                         data={[days, months, years]}
                         visible={this.state.pikerVisible}
                         onConfirm={this.handlePickedValue}

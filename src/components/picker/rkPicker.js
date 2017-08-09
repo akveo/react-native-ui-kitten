@@ -9,11 +9,24 @@ import {
 import {RkButton} from '../button/rkButton';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
-import {RkStyleSheet} from '../../styles/styleSheet';
 
 export class RkPicker extends RkComponent {
   componentName = 'RkPicker';
-  typeMapping = {};
+  typeMapping = {
+    modalContainerStyle: {
+    },
+    modalContentStyle: {
+      borderRadius: 'borderRadius',
+      borderWidth: 'borderWidth',
+      borderColor: 'borderColor',
+      underlineColor: 'underlineColor',
+    },
+    buttonsBlockStyle: {},
+    listsContainerStyle: {},
+    buttonStyle: {},
+    modalElementStyle: {},
+    optionStyle: {}
+  };
 
   constructor(props) {
     super(props);
@@ -48,6 +61,10 @@ export class RkPicker extends RkComponent {
   }
 
   render() {
+    let {
+      modalContainerStyle, modalContentStyle, modalElementStyle, buttonsBlockStyle, listsContainerStyle,
+      buttonStyle, optionStyle
+    } = super.defineStyles(this.props.rkType);
     return (
       <Modal
         visible={this.props.visible}
@@ -55,20 +72,20 @@ export class RkPicker extends RkComponent {
         transparent={true}
         onRequestClose={() => this.props.onCancel()}
       >
-        <View style={[styles.modalContainer]}>
-          <View style={[styles.modalContent]}>
-            <RkText rkType='xxlarge header' syle={styles.modalElement}>{this.props.title}</RkText>
-            <View style={[styles.listsContainer, styles.modalElement, {height: this.pickerHeight}]}>
-              {this.state.optionsData.map((array, index) => this.renderList(array, index))}
+        <View style={[modalContainerStyle]}>
+          <View style={[modalContentStyle]}>
+            <RkText rkType='xxlarge header' syle={modalElementStyle}>{this.props.title}</RkText>
+            <View style={[listsContainerStyle, modalElementStyle, {height: this.pickerHeight}]}>
+              {this.state.optionsData.map((array, index) => this.renderList(array, index, optionStyle))}
             </View>
-            <View style={[styles.buttonsBlock, styles.modalElement]}>
+            <View style={[buttonsBlockStyle, modalElementStyle]}>
               <RkButton rkType='xxlarge outline'
-                        style={[styles.button]}
+                        style={buttonStyle}
                         onPress={() => this.props.onCancel()}>
                 CANCEL
               </RkButton>
               <RkButton rkType='xxlarge outline'
-                        style={[styles.button]}
+                        style={buttonStyle}
                         onPress={() => this.props.onConfirm(this.state.selectedIndexes)}>
                 OK
               </RkButton>
@@ -79,23 +96,22 @@ export class RkPicker extends RkComponent {
     );
   }
 
-  renderList(data, listIndex) {
+  renderList(data, listIndex, optionStyle) {
     return (
       <FlatList data={data}
                 key={listIndex}
-                renderItem={({item, index}) => this.renderOption(item)}
+                renderItem={({item, index}) => this.renderOption(item, optionStyle)}
                 keyExtractor={(item, index) => index}
                 showsVerticalScrollIndicator={false}
                 ref={(flatListRef) => this.listRefs[listIndex] = flatListRef}
                 onScrollEndDrag={(e) => this.fixScroll(e, listIndex)}
-                getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}
-      />
+                getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}/>
     );
   }
 
-  renderOption(option) {
+  renderOption(option, optionStyle) {
     return (
-      <View style={[styles.option, {height: this.optionHeight}]}>
+      <View style={[optionStyle, {height: this.optionHeight}]}>
         <RkText rkType='subtitle xxlarge'>
           {option}
         </RkText>
@@ -105,7 +121,7 @@ export class RkPicker extends RkComponent {
 
   setInitialOptions() {
     this.state.selectedIndexes.forEach((optionIndex, listIndex) => {
-      setTimeout(()=>{
+      setTimeout(() => {
         this.listRefs[listIndex].scrollToIndex({
           animated: true,
           index: optionIndex
@@ -126,42 +142,3 @@ export class RkPicker extends RkComponent {
     return {length: this.optionHeight, offset: this.optionHeight * index, index}
   }
 }
-
-let styles = RkStyleSheet.create(theme => ({
-  modalContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'column',
-    marginHorizontal: 32
-  },
-  modalContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    backgroundColor: theme.colors.screen.base
-  },
-  buttonsBlock: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-  listsContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  button: {
-    flex: 0.5
-  },
-  modalElement: {
-    marginVertical: 10
-  },
-  option: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  test: {
-    borderWidth: 2,
-    borderColor: theme.colors.border.primary
-  }
-}));
