@@ -28,7 +28,9 @@ export class RkOptionsList extends RkComponent {
 
   updateOptionsData(optionsData, optionNumberOnPicker) {
     return this.createEmptyArray(optionNumberOnPicker / 2).concat(
-      optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2))
+      optionsData
+        .map((item, index) => item.value || item)
+        .concat(this.createEmptyArray(optionNumberOnPicker / 2))
     );
   }
 
@@ -50,14 +52,14 @@ export class RkOptionsList extends RkComponent {
         index: selectedIndex
       });
     }, 0);
-    this.state.selectedOption = this.props.data[selectedIndex];
+    this.state.selectedOption = this.props.data[selectedIndex].key || this.props.data[selectedIndex];
     this.props.onSelect(this.state.selectedOption, this.props.id);
   }
 
   findIndexByValue(expectableValue, array) {
-    let expectableIndex = 0;
+    let expectableIndex = Math.round(array.length / 2);
     array.forEach((value, index) => {
-      if (value === expectableValue) expectableIndex = index
+      if ((value.key || value) === expectableValue) expectableIndex = index
     });
     return expectableIndex;
   }
@@ -96,7 +98,7 @@ export class RkOptionsList extends RkComponent {
     let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
     let optionIndex = Math.round(y / this.optionHeight);
     this.listRef.scrollToIndex({animated: true, index: optionIndex});
-    this.state.selectedOption = this.props.data[optionIndex];
+    this.state.selectedOption = this.props.data[optionIndex].key || this.props.data[optionIndex];
   }
 
   getItemLayout(itemData, index) {

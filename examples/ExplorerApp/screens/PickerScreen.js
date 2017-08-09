@@ -52,8 +52,15 @@ export class PickerScreen extends React.Component {
 
   render() {
     let days = this.generateArrayFromRange(1, 31);
-    let months = this.generateArrayFromRange(1, 12);
     let years = this.generateArrayFromRange(1985, 2025);
+    let months = [
+      {key: 1, value: 'Jun'}, {key: 2, value: 'Feb'},
+      {key: 3, value: 'Mar'}, {key: 4, value: 'Apr'},
+      {key: 5, value: 'May'}, {key: 6, value: 'June'},
+      {key: 7, value: 'Jule'}, {key: 8, value: 'Aug'},
+      {key: 9, value: 'Sept'}, {key: 10, value: 'Oct'},
+      {key: 11, value: 'Nov'}, {key: 12, value: 'Dec'},
+    ];
     return (
       <ScrollView
         style={UtilStyles.container}
