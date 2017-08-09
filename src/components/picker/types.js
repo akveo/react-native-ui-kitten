@@ -30,10 +30,6 @@ export const RkPickerTypes = (theme) => {
       modalElementStyle: {
         marginVertical: 10,
         marginHorizontal: 10,
-      },
-      optionStyle: {
-        justifyContent: 'center',
-        alignItems: 'center'
       }
     },
     basic: {

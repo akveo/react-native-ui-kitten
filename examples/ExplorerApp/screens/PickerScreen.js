@@ -64,9 +64,9 @@ export class PickerScreen extends React.Component {
             <View style={styles.componentRow}>
               <TouchableHighlight onPress={() => this.showPicker()}>
                 <Text>
-                  {days[this.state.pickedValue[0]]}.
-                  {months[this.state.pickedValue[1]]}.
-                  {years[this.state.pickedValue[2]]}
+                  {this.state.pickedValue[0]}.
+                  {this.state.pickedValue[1]}.
+                  {this.state.pickedValue[2]}
                 </Text>
               </TouchableHighlight>
               <RkPicker rkType='rounded'
@@ -76,7 +76,7 @@ export class PickerScreen extends React.Component {
                         onConfirm={this.handlePickedValue}
                         onCancel={this.hidePicker}
                         optionNumberOnPicker={5}
-                        selectedIndexes={this.state.pickedValue}/>
+                        selectedOptions={this.state.pickedValue}/>
               <RkText rkType='bold' style={styles.caption}>Date Picker</RkText>
             </View>
           </View>
