@@ -27,7 +27,7 @@ export class PickerScreen extends React.Component {
         name: 'Option 1'
       },
       pikerVisible: false,
-      pickedValue: [0, 0, 0]
+      pickedValue: [8, 26, 2017]
     };
     this.hidePicker = this.hidePicker.bind(this)
     this.handlePickedValue = this.handlePickedValue.bind(this)
@@ -56,9 +56,9 @@ export class PickerScreen extends React.Component {
     let months = [
       {key: 1, value: 'Jun'}, {key: 2, value: 'Feb'},
       {key: 3, value: 'Mar'}, {key: 4, value: 'Apr'},
-      {key: 5, value: 'May'}, {key: 6, value: 'June'},
-      {key: 7, value: 'Jule'}, {key: 8, value: 'Aug'},
-      {key: 9, value: 'Sept'}, {key: 10, value: 'Oct'},
+      {key: 5, value: 'May'}, {key: 6, value: 'Jun'},
+      {key: 7, value: 'Jul'}, {key: 8, value: 'Aug'},
+      {key: 9, value: 'Sep'}, {key: 10, value: 'Oct'},
       {key: 11, value: 'Nov'}, {key: 12, value: 'Dec'},
     ];
     return (
@@ -76,14 +76,13 @@ export class PickerScreen extends React.Component {
                   {this.state.pickedValue[2]}
                 </Text>
               </TouchableHighlight>
-              <RkPicker rkType='rounded'
-                        title='Set Date'
-                        data={[days, months, years]}
+              <RkPicker title='Set Date'
+                        data={[months, days, years]}
                         visible={this.state.pikerVisible}
                         onConfirm={this.handlePickedValue}
                         onCancel={this.hidePicker}
-                        optionNumberOnPicker={5}
-                        selectedOptions={this.state.pickedValue}/>
+                        selectedOptions={this.state.pickedValue}
+                        optionHeight={50}/>
               <RkText rkType='bold' style={styles.caption}>Date Picker</RkText>
             </View>
           </View>

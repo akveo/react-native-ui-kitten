@@ -19,11 +19,12 @@ export class RkOption extends RkComponent {
   }
 
   render() {
-    let rkType = ((this.props.selectedOption.key || this.props.selectedOption) === this.optionKey)
-      ?'header xxlarge'
-      :'subtitle xxlarge';
+    let isSelected = (this.props.selectedOption.key || this.props.selectedOption) === this.optionKey;
+    let rkType = isSelected ? 'header xlarge' : 'subtitle large';
+    let styles = [this.props.style, {height: this.optionHeight}];
+    isSelected && styles.push(this.props.selectedStyle);
     return (
-      <View style={[this.props.style, {height: this.optionHeight}]}>
+      <View style={styles}>
         <RkText rkType={rkType}>
           {this.props.data.value || this.props.data}
         </RkText>

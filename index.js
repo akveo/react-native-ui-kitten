@@ -10,7 +10,6 @@ export {RkAvoidKeyboard} from './src/components/avoidKeyboard/rkAvoidKeyboard';
 export {RkComponent} from './src/components/rkComponent';
 export {RkPicker} from './src/components/picker/rkPicker';
 export {RkOptionsList} from './src/components/optionsList/rkOptionsList';
-export {RkOption} from './src/components/option/rkOption';
 export {withRkTheme} from './src/components/theme/rkThemeProvider';
 export {RkTheme} from './src/styles/themeManager';
 export {RkStyleSheet} from './src/styles/styleSheet';

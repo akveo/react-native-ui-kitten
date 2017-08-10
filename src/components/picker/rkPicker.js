@@ -23,9 +23,11 @@ export class RkPicker extends RkComponent {
     },
     buttonsBlockStyle: {},
     listsContainerStyle: {},
-    buttonStyle: {},
+    cancelButtonStyle: {},
+    okButtonStyle: {},
     modalElementStyle: {},
-    optionStyle: {}
+    optionStyle: {},
+    highlightConstStyle: {},
   };
 
   constructor(props) {
@@ -48,8 +50,9 @@ export class RkPicker extends RkComponent {
   render() {
     let {
       modalContainerStyle, modalContentStyle, modalElementStyle, buttonsBlockStyle, listsContainerStyle,
-      buttonStyle
+      cancelButtonStyle, okButtonStyle, highlightConstStyle
     } = super.defineStyles(this.props.rkType);
+
     return (
       <Modal
         visible={this.props.visible}
@@ -59,34 +62,44 @@ export class RkPicker extends RkComponent {
       >
         <View style={[modalContainerStyle]}>
           <View style={[modalContentStyle]}>
-            <RkText rkType='xxlarge header' syle={modalElementStyle}>{this.props.title}</RkText>
-            <View style={[listsContainerStyle, modalElementStyle, {height: this.pickerHeight}]}>
-              {this.props.data.map((array, index) =>
-                <RkOptionsList key={index}
-                               id={index}
-                               data={array}
-                               selectedOption={this.state.selectedOptions[index]}
-                               scrollToSelected={this.state.scrollToSelected}
-                               onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
-                               optionHeight={this.optionHeight}
-                               optionNumberOnPicker={this.optionNumberOnPicker}/>
-              )}
+            <RkText rkType='header' style={modalElementStyle}>{this.props.title}</RkText>
+            <View style={[listsContainerStyle, {height: this.pickerHeight}]}>
+              {this.props.data.map((array, index) => this.renderOptionList(array, index, highlightConstStyle))}
             </View>
-            <View style={[buttonsBlockStyle, modalElementStyle]}>
-              <RkButton rkType='xxlarge outline'
-                        style={buttonStyle}
+            <View style={[buttonsBlockStyle]}>
+              <RkButton rkType='transparent rectangle'
+                        style={cancelButtonStyle}
                         onPress={() => this.props.onCancel()}>
-                CANCEL
+                <RkText>CANCEL</RkText>
               </RkButton>
-              <RkButton rkType='xxlarge outline'
-                        style={buttonStyle}
+              <RkButton rkType='transparent rectangle'
+                        style={okButtonStyle}
                         onPress={() => this.props.onConfirm(this.state.selectedOptions)}>
-                OK
+                <RkText rkType='header'>OK</RkText>
               </RkButton>
             </View>
           </View>
         </View>
       </Modal>
+    );
+  }
+
+  renderOptionList(array, index, highlightConstStyle) {
+    let highlightVarStyle = {
+      top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
+      height: this.optionHeight,
+    };
+    return (
+      <View key={index}>
+        <View style={[highlightVarStyle, highlightConstStyle]}/>
+        <RkOptionsList id={index}
+                       data={array}
+                       selectedOption={this.state.selectedOptions[index]}
+                       scrollToSelected={this.state.scrollToSelected}
+                       onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
+                       optionHeight={this.optionHeight}
+                       optionNumberOnPicker={this.optionNumberOnPicker}/>
+      </View>
     );
   }
 

@@ -6,7 +6,7 @@ import {
   View,
   FlatList
 } from 'react-native';
-import {RkOption} from '../option/rkOption';
+import {RkOption} from './rkOption';
 import {RkComponent} from '../rkComponent';
 
 export class RkOptionsList extends RkComponent {
@@ -67,13 +67,12 @@ export class RkOptionsList extends RkComponent {
 
   render() {
     let {
-      optionStyle,
-      selectedOptionStyle
+      optionStyle
     } = super.defineStyles(this.props.rkType);
     return (
       <FlatList data={this.optionsData}
                 extraData={this.state}
-                renderItem={({item, index}) => this.renderOption(item, optionStyle, selectedOptionStyle)}
+                renderItem={({item, index}) => this.renderOption(item, optionStyle)}
                 keyExtractor={(item, index) => index}
                 showsVerticalScrollIndicator={false}
                 ref={(flatListRef) => this.listRef = flatListRef}
@@ -82,12 +81,11 @@ export class RkOptionsList extends RkComponent {
     );
   }
 
-  renderOption(option, optionStyle, selectedOptionStyle) {
+  renderOption(option, optionStyle) {
     return (
       <RkOption data={option}
                 selectedOption={this.state.selectedOption}
                 style={optionStyle}
-                selectedStyle={selectedOptionStyle}
                 optionHeight={this.optionHeight}/>
     );
   }

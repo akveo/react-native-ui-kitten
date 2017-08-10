@@ -22,6 +22,9 @@ export const RkButtonTypes = (theme) => {
       backgroundColor: theme.colors.button.primary,
       color: theme.colors.button.text
     },
+    transparent:{
+      backgroundColor: theme.colors.button.outline,
+    },
     primary: {
       backgroundColor: theme.colors.button.primary,
       color: theme.colors.button.text
@@ -53,6 +56,9 @@ export const RkButtonTypes = (theme) => {
     },
     circle: {
       borderRadius: 300
+    },
+    rectangle: {
+      borderRadius: 0
     },
     small: {
       fontSize: theme.fonts.sizes.small,
