@@ -4,6 +4,10 @@ export const RkOptionsListTypes = (theme) => {
       optionStyle: {
         justifyContent: 'center',
         alignItems: 'center'
+      },
+      selectedOptionStyle: {
+        borderColor: theme.colors.border.solid,
+        borderWidth: 2
       }
     },
     basic: {}

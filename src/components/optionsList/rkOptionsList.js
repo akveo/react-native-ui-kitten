@@ -6,13 +6,14 @@ import {
   View,
   FlatList
 } from 'react-native';
-import {RkText} from '../text/rkText';
+import {RkOption} from '../option/rkOption';
 import {RkComponent} from '../rkComponent';
 
 export class RkOptionsList extends RkComponent {
   componentName = 'RkOptionsList';
   typeMapping = {
-    optionStyle: {}
+    optionStyle: {},
+    selectedOptionStyle: {}
   };
 
   constructor(props) {
@@ -29,7 +30,7 @@ export class RkOptionsList extends RkComponent {
   updateOptionsData(optionsData, optionNumberOnPicker) {
     return this.createEmptyArray(optionNumberOnPicker / 2).concat(
       optionsData
-        .map((item, index) => item.value || item)
+        // .map((item, index) => item.value || item)
         .concat(this.createEmptyArray(optionNumberOnPicker / 2))
     );
   }
@@ -46,13 +47,13 @@ export class RkOptionsList extends RkComponent {
 
   setInitialOptions() {
     let selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
+    this.setState({selectedOption: this.props.data[selectedIndex].key || this.props.data[selectedIndex]});
     setTimeout(() => {
       this.listRef.scrollToIndex({
         animated: true,
         index: selectedIndex
       });
     }, 0);
-    this.state.selectedOption = this.props.data[selectedIndex].key || this.props.data[selectedIndex];
     this.props.onSelect(this.state.selectedOption, this.props.id);
   }
 
@@ -66,11 +67,13 @@ export class RkOptionsList extends RkComponent {
 
   render() {
     let {
-      optionStyle
+      optionStyle,
+      selectedOptionStyle
     } = super.defineStyles(this.props.rkType);
     return (
       <FlatList data={this.optionsData}
-                renderItem={({item, index}) => this.renderOption(item, optionStyle)}
+                extraData={this.state}
+                renderItem={({item, index}) => this.renderOption(item, optionStyle, selectedOptionStyle)}
                 keyExtractor={(item, index) => index}
                 showsVerticalScrollIndicator={false}
                 ref={(flatListRef) => this.listRef = flatListRef}
@@ -79,14 +82,14 @@ export class RkOptionsList extends RkComponent {
     );
   }
 
-  renderOption(option, optionStyle) {
+  renderOption(option, optionStyle, selectedOptionStyle) {
     return (
-      <View style={[optionStyle, {height: this.optionHeight}]}>
-        <RkText rkType='subtitle xxlarge'>
-          {option}
-        </RkText>
-      </View>
-    )
+      <RkOption data={option}
+                selectedOption={this.state.selectedOption}
+                style={optionStyle}
+                selectedStyle={selectedOptionStyle}
+                optionHeight={this.optionHeight}/>
+    );
   }
 
   selectOption(e, id) {
@@ -96,9 +99,9 @@ export class RkOptionsList extends RkComponent {
 
   fixScroll(e) {
     let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
-    let optionIndex = Math.round(y / this.optionHeight);
-    this.listRef.scrollToIndex({animated: true, index: optionIndex});
-    this.state.selectedOption = this.props.data[optionIndex].key || this.props.data[optionIndex];
+    let selectedIndex = Math.round(y / this.optionHeight);
+    this.setState({selectedOption: this.props.data[selectedIndex].key || this.props.data[selectedIndex]});
+    this.listRef.scrollToIndex({animated: true, index: selectedIndex});
   }
 
   getItemLayout(itemData, index) {
