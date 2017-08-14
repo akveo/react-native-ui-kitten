@@ -12,7 +12,7 @@ export const DefaultTypes = (theme) => {
     RkModalImg: ComponentTypes.RkModalImgTypes(theme),
     RkAvoidKeyboard: ComponentTypes.RkAvoidKeyboardTypes(theme),
     RkPicker: ComponentTypes.RkPickerTypes(theme),
-    RkOptionsList: ComponentTypes.RkOptionsListTypes(theme)
+    RkOptionsList: ComponentTypes.RkPickerTypes(theme),
   })
 
 };

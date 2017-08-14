@@ -9,7 +9,7 @@ import {
 import {RkButton} from '../button/rkButton';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
-import {RkOptionsList} from '../optionsList/rkOptionsList';
+import {RkOptionsList} from './rkOptionsList';
 
 export class RkPicker extends RkComponent {
   componentName = 'RkPicker';
@@ -50,7 +50,7 @@ export class RkPicker extends RkComponent {
   render() {
     let {
       modalContainerStyle, modalContentStyle, modalElementStyle, buttonsBlockStyle, listsContainerStyle,
-      cancelButtonStyle, okButtonStyle, highlightConstStyle
+      cancelButtonStyle, okButtonStyle
     } = super.defineStyles(this.props.rkType);
 
     return (
@@ -64,7 +64,7 @@ export class RkPicker extends RkComponent {
           <View style={[modalContentStyle]}>
             <RkText rkType='header' style={modalElementStyle}>{this.props.title}</RkText>
             <View style={[listsContainerStyle, {height: this.pickerHeight}]}>
-              {this.props.data.map((array, index) => this.renderOptionList(array, index, highlightConstStyle))}
+              {this.props.data.map((array, index) => this.renderOptionList(array, index))}
             </View>
             <View style={[buttonsBlockStyle]}>
               <RkButton rkType='transparent rectangle'
@@ -84,22 +84,16 @@ export class RkPicker extends RkComponent {
     );
   }
 
-  renderOptionList(array, index, highlightConstStyle) {
-    let highlightVarStyle = {
-      top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
-      height: this.optionHeight,
-    };
+  renderOptionList(array, index) {
     return (
-      <View key={index}>
-        <View style={[highlightVarStyle, highlightConstStyle]}/>
-        <RkOptionsList id={index}
-                       data={array}
-                       selectedOption={this.state.selectedOptions[index]}
-                       scrollToSelected={this.state.scrollToSelected}
-                       onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
-                       optionHeight={this.optionHeight}
-                       optionNumberOnPicker={this.optionNumberOnPicker}/>
-      </View>
+      <RkOptionsList key={index}
+                     id={index}
+                     data={array}
+                     selectedOption={this.state.selectedOptions[index]}
+                     scrollToSelected={this.state.scrollToSelected}
+                     onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
+                     optionHeight={this.optionHeight}
+                     optionNumberOnPicker={this.optionNumberOnPicker}/>
     );
   }
 

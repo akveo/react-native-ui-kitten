@@ -23,8 +23,7 @@ export const RkPickerTypes = (theme) => {
         marginTop: 20,
       },
       listsContainerStyle: {
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        justifyContent: 'center',
         flexDirection: 'row',
       },
       cancelButtonStyle: {
@@ -45,10 +44,18 @@ export const RkPickerTypes = (theme) => {
         position: 'absolute',
         borderTopColor: theme.colors.border.solid,
         borderBottomColor: theme.colors.border.solid,
-        width: 30,
         borderTopWidth: 2,
         borderBottomWidth: 2,
-      }
+      },
+      optionStyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      flatListContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
     },
     basic: {
       borderRadius: 7,

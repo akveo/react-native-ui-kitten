@@ -13,7 +13,9 @@ export class RkOptionsList extends RkComponent {
   componentName = 'RkOptionsList';
   typeMapping = {
     optionStyle: {},
-    selectedOptionStyle: {}
+    selectedOptionStyle: {},
+    highlightConstStyle: {},
+    flatListContainer: {},
   };
 
   constructor(props) {
@@ -29,9 +31,7 @@ export class RkOptionsList extends RkComponent {
 
   updateOptionsData(optionsData, optionNumberOnPicker) {
     return this.createEmptyArray(optionNumberOnPicker / 2).concat(
-      optionsData
-        // .map((item, index) => item.value || item)
-        .concat(this.createEmptyArray(optionNumberOnPicker / 2))
+      optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2))
     );
   }
 
@@ -67,17 +67,25 @@ export class RkOptionsList extends RkComponent {
 
   render() {
     let {
-      optionStyle
+      optionStyle, highlightConstStyle, flatListContainer
     } = super.defineStyles(this.props.rkType);
+    let highlightVarStyle = {
+      top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
+      height: this.optionHeight,
+      width: 70,
+    };
     return (
-      <FlatList data={this.optionsData}
-                extraData={this.state}
-                renderItem={({item, index}) => this.renderOption(item, optionStyle)}
-                keyExtractor={(item, index) => index}
-                showsVerticalScrollIndicator={false}
-                ref={(flatListRef) => this.listRef = flatListRef}
-                onScrollEndDrag={(e) => this.selectOption(e, this.props.id)}
-                getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}/>
+      <View style={flatListContainer}>
+        <View style={[highlightVarStyle, highlightConstStyle]}/>
+        <FlatList data={this.optionsData}
+                  extraData={this.state}
+                  renderItem={({item, index}) => this.renderOption(item, optionStyle)}
+                  keyExtractor={(item, index) => index}
+                  showsVerticalScrollIndicator={false}
+                  ref={(flatListRef) => this.listRef = flatListRef}
+                  onScrollEndDrag={(e) => this.selectOption(e, this.props.id)}
+                  getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}/>
+      </View>
     );
   }
 
