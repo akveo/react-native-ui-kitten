@@ -35,6 +35,8 @@ export class RkPicker extends RkComponent {
     this.optionHeight = this.props.optionHeight || 30;
     this.optionNumberOnPicker = this.props.optionNumberOnPicker || 3;
     this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
+    this.confirmButtonText = this.props.confirmButtonText || 'OK';
+    this.cancelButtonText = this.props.cancelButtonText || 'CANCEL';
     this.state = {
       scrollToSelected: false,
       selectedOptions: this.props.selectedOptions
@@ -45,6 +47,23 @@ export class RkPicker extends RkComponent {
     if (this.props.visible !== prevProps.visible) {
       this.setState({scrollToSelected: this.props.visible});
     }
+  }
+
+  selectOption(selectedOption, listIndex) {
+    this.state.selectedOptions[listIndex] = selectedOption;
+  }
+
+  renderOptionList(array, index) {
+    return (
+      <RkOptionsList key={index}
+                     id={index}
+                     data={array}
+                     selectedOption={this.state.selectedOptions[index]}
+                     scrollToSelected={this.state.scrollToSelected}
+                     onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
+                     optionHeight={this.optionHeight}
+                     optionNumberOnPicker={this.optionNumberOnPicker}/>
+    );
   }
 
   render() {
@@ -70,34 +89,17 @@ export class RkPicker extends RkComponent {
               <RkButton rkType='transparent rectangle'
                         style={cancelButtonStyle}
                         onPress={() => this.props.onCancel()}>
-                <RkText>CANCEL</RkText>
+                <RkText>{this.cancelButtonText}</RkText>
               </RkButton>
               <RkButton rkType='transparent rectangle'
                         style={okButtonStyle}
                         onPress={() => this.props.onConfirm(this.state.selectedOptions)}>
-                <RkText rkType='header'>OK</RkText>
+                <RkText rkType='header'>{this.confirmButtonText}</RkText>
               </RkButton>
             </View>
           </View>
         </View>
       </Modal>
     );
-  }
-
-  renderOptionList(array, index) {
-    return (
-      <RkOptionsList key={index}
-                     id={index}
-                     data={array}
-                     selectedOption={this.state.selectedOptions[index]}
-                     scrollToSelected={this.state.scrollToSelected}
-                     onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
-                     optionHeight={this.optionHeight}
-                     optionNumberOnPicker={this.optionNumberOnPicker}/>
-    );
-  }
-
-  selectOption(selectedOption, listIndex) {
-    this.state.selectedOptions[listIndex] = selectedOption;
   }
 }

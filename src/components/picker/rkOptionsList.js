@@ -29,16 +29,6 @@ export class RkOptionsList extends RkComponent {
     };
   }
 
-  updateOptionsData(optionsData, optionNumberOnPicker) {
-    return this.createEmptyArray(optionNumberOnPicker / 2).concat(
-      optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2))
-    );
-  }
-
-  createEmptyArray(arrayLength) {
-    return Array.apply(null, new Array(Math.floor(arrayLength))).map((_, i) => ' ');
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.props.scrollToSelected !== prevProps.scrollToSelected && this.props.scrollToSelected) {
       this.setInitialOptions();
@@ -65,37 +55,14 @@ export class RkOptionsList extends RkComponent {
     return expectableIndex;
   }
 
-  render() {
-    let {
-      optionStyle, highlightConstStyle, flatListContainer
-    } = super.defineStyles(this.props.rkType);
-    let highlightVarStyle = {
-      top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
-      height: this.optionHeight,
-      width: 70,
-    };
-    return (
-      <View style={flatListContainer}>
-        <View style={[highlightVarStyle, highlightConstStyle]}/>
-        <FlatList data={this.optionsData}
-                  extraData={this.state}
-                  renderItem={({item, index}) => this.renderOption(item, optionStyle)}
-                  keyExtractor={(item, index) => index}
-                  showsVerticalScrollIndicator={false}
-                  ref={(flatListRef) => this.listRef = flatListRef}
-                  onScrollEndDrag={(e) => this.selectOption(e, this.props.id)}
-                  getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}/>
-      </View>
+  updateOptionsData(optionsData, optionNumberOnPicker) {
+    return this.createEmptyArray(optionNumberOnPicker / 2).concat(
+      optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2))
     );
   }
 
-  renderOption(option, optionStyle) {
-    return (
-      <RkOption data={option}
-                selectedOption={this.state.selectedOption}
-                style={optionStyle}
-                optionHeight={this.optionHeight}/>
-    );
+  createEmptyArray(arrayLength) {
+    return Array.apply(null, new Array(Math.floor(arrayLength))).map((_, i) => ' ');
   }
 
   selectOption(e, id) {
@@ -112,5 +79,76 @@ export class RkOptionsList extends RkComponent {
 
   getItemLayout(itemData, index) {
     return {length: this.optionHeight, offset: this.optionHeight * index, index}
+  }
+
+  onScrollBeginDrag(){
+    this.dragStarted = true;
+    this.timer && clearTimeout(this.timer);
+  }
+
+  onScrollEndDrag(e, id){
+    this.dragStarted = false;
+    let _e = {
+      nativeEvent:{
+        contentOffset:{
+          y: e.nativeEvent.contentOffset.y,
+        },
+      },
+    };
+    this.timer && clearTimeout(this.timer);
+    this.timer = setTimeout(
+      () => {
+        if(!this.dragStarted){
+          this.selectOption(_e, id);
+        }
+      },
+      10
+    );
+  }
+
+  onMomentumScrollBegin(){
+    this.momentumStarted = true;
+    this.timer && clearTimeout(this.timer);
+  }
+  onMomentumScrollEnd(e, id){
+    this.momentumStarted = false;
+    if(!this.momentumStarted && !this.dragStarted){
+      this.selectOption(e, id);
+    }
+  }
+
+  renderOption(option, optionStyle) {
+    return (
+      <RkOption data={option}
+                selectedOption={this.state.selectedOption}
+                style={optionStyle}
+                optionHeight={this.optionHeight}/>
+    );
+  }
+
+  render() {
+    let {
+      optionStyle, highlightConstStyle, flatListContainer
+    } = super.defineStyles(this.props.rkType);
+    let highlightVarStyle = {
+      top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
+      height: this.optionHeight,
+    };
+    return (
+      <View style={flatListContainer}>
+        <View style={[highlightVarStyle, highlightConstStyle]}/>
+        <FlatList data={this.optionsData}
+                  extraData={this.state}
+                  renderItem={({item, index}) => this.renderOption(item, optionStyle)}
+                  keyExtractor={(item, index) => index}
+                  showsVerticalScrollIndicator={false}
+                  ref={(flatListRef) => this.listRef = flatListRef}
+                  onMomentumScrollBegin={(e) => this.onMomentumScrollBegin()}
+                  onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
+                  onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
+                  onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
+                  getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}/>
+      </View>
+    );
   }
 }
