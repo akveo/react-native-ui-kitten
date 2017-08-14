@@ -4,7 +4,7 @@ import {
   TouchableHighlight,
   Modal,
   View,
-  FlatList
+  ScrollView,
 } from 'react-native';
 import {RkOption} from './rkOption';
 import {RkComponent} from '../rkComponent';
@@ -39,10 +39,7 @@ export class RkOptionsList extends RkComponent {
     let selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
     this.setState({selectedOption: this.props.data[selectedIndex].key || this.props.data[selectedIndex]});
     setTimeout(() => {
-      this.listRef.scrollToIndex({
-        animated: true,
-        index: selectedIndex
-      });
+      this.scrollToIndex(selectedIndex);
     }, 0);
     this.props.onSelect(this.state.selectedOption, this.props.id);
   }
@@ -53,6 +50,10 @@ export class RkOptionsList extends RkComponent {
       if ((value.key || value) === expectableValue) expectableIndex = index
     });
     return expectableIndex;
+  }
+
+  scrollToIndex(index){
+    this.listRef.scrollTo({y: index * this.optionHeight})
   }
 
   updateOptionsData(optionsData, optionNumberOnPicker) {
@@ -74,23 +75,23 @@ export class RkOptionsList extends RkComponent {
     let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
     let selectedIndex = Math.round(y / this.optionHeight);
     this.setState({selectedOption: this.props.data[selectedIndex].key || this.props.data[selectedIndex]});
-    this.listRef.scrollToIndex({animated: true, index: selectedIndex});
+    this.scrollToIndex(selectedIndex);
   }
 
   getItemLayout(itemData, index) {
     return {length: this.optionHeight, offset: this.optionHeight * index, index}
   }
 
-  onScrollBeginDrag(){
+  onScrollBeginDrag() {
     this.dragStarted = true;
     this.timer && clearTimeout(this.timer);
   }
 
-  onScrollEndDrag(e, id){
+  onScrollEndDrag(e, id) {
     this.dragStarted = false;
     let _e = {
-      nativeEvent:{
-        contentOffset:{
+      nativeEvent: {
+        contentOffset: {
           y: e.nativeEvent.contentOffset.y,
         },
       },
@@ -98,7 +99,7 @@ export class RkOptionsList extends RkComponent {
     this.timer && clearTimeout(this.timer);
     this.timer = setTimeout(
       () => {
-        if(!this.dragStarted){
+        if (!this.dragStarted) {
           this.selectOption(_e, id);
         }
       },
@@ -106,20 +107,22 @@ export class RkOptionsList extends RkComponent {
     );
   }
 
-  onMomentumScrollBegin(){
+  onMomentumScrollBegin() {
     this.momentumStarted = true;
     this.timer && clearTimeout(this.timer);
   }
-  onMomentumScrollEnd(e, id){
+
+  onMomentumScrollEnd(e, id) {
     this.momentumStarted = false;
-    if(!this.momentumStarted && !this.dragStarted){
+    if (!this.momentumStarted && !this.dragStarted) {
       this.selectOption(e, id);
     }
   }
 
-  renderOption(option, optionStyle) {
+  renderOption(option, index, optionStyle) {
     return (
       <RkOption data={option}
+                key={index}
                 selectedOption={this.state.selectedOption}
                 style={optionStyle}
                 optionHeight={this.optionHeight}/>
@@ -137,17 +140,15 @@ export class RkOptionsList extends RkComponent {
     return (
       <View style={flatListContainer}>
         <View style={[highlightVarStyle, highlightConstStyle]}/>
-        <FlatList data={this.optionsData}
-                  extraData={this.state}
-                  renderItem={({item, index}) => this.renderOption(item, optionStyle)}
-                  keyExtractor={(item, index) => index}
-                  showsVerticalScrollIndicator={false}
-                  ref={(flatListRef) => this.listRef = flatListRef}
-                  onMomentumScrollBegin={(e) => this.onMomentumScrollBegin()}
-                  onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
-                  onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
-                  onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
-                  getItemLayout={(itemData, index) => this.getItemLayout(itemData, index)}/>
+        <ScrollView bounces={false}
+                    showsVerticalScrollIndicator={false}
+                    ref={(flatListRef) => this.listRef = flatListRef}
+                    onMomentumScrollBegin={(e) => this.onMomentumScrollBegin()}
+                    onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
+                    onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
+                    onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}>
+          {this.optionsData.map((item, index) => this.renderOption(item, index, optionStyle))}
+        </ScrollView>
       </View>
     );
   }
