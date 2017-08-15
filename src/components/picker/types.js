@@ -1,47 +1,49 @@
 export const RkPickerTypes = (theme) => {
   return ({
     _base:{
-      modalContainerStyle: {
+      modalContainerBlock: {
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
         flexDirection: 'column',
         backgroundColor: theme.colors.screen.modalBackground,
       },
-      modalContentStyle: {
+      modalContentBlock: {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         marginHorizontal: 32,
         backgroundColor: theme.colors.screen.base,
       },
-      buttonsBlockStyle: {
+      titleBlock: {
+        marginVertical: 10,
+        marginHorizontal: 10,
+      },
+      listsContainerBlock: {
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginHorizontal: 10,
+      },
+      buttonsBlockBlock: {
         justifyContent: 'space-between',
         flexDirection: 'row',
         borderColor: theme.colors.border.solid,
         borderTopWidth: 1,
         marginTop: 20,
       },
-      listsContainerStyle: {
-        justifyContent: 'center',
-        flexDirection: 'row',
-        marginHorizontal: 10,
-      },
-      cancelButtonStyle: {
+      cancelButtonBlock: {
         flex: 0.5,
         borderColor: theme.colors.border.solid,
         borderRightWidth: 0.5,
+        borderTopWidth: 1,
       },
-      okButtonStyle: {
+      confirmButtonBlock: {
         flex: 0.5,
         borderColor: theme.colors.border.solid,
         borderLeftWidth: 0.5,
+        borderTopWidth: 1,
       },
-      modalElementStyle: {
-        marginVertical: 10,
-        marginHorizontal: 10,
-      },
-      highlightConstStyle: {
+      highlightBlock: {
         position: 'absolute',
         borderTopColor: theme.colors.border.solid,
         borderBottomColor: theme.colors.border.solid,
@@ -50,11 +52,11 @@ export const RkPickerTypes = (theme) => {
         left: 0,
         right: 0,
       },
-      optionStyle: {
+      optionBlock: {
         justifyContent: 'center',
         alignItems: 'center',
       },
-      flatListContainer: {
+      optionListContainer: {
         flex: 1,
         marginHorizontal: 20,
       },

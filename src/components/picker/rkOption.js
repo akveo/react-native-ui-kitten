@@ -16,11 +16,13 @@ export class RkOption extends RkComponent {
     super(props);
     this.optionHeight = this.props.optionHeight || 30;
     this.optionKey = this.props.data.key || this.props.data;
+    this.optionRkType = this.props.optionRkType || 'subtitle large';
+    this.selectedOptionRkType = this.props.selectedOptionRkType || 'header xlarge';
   }
 
   render() {
     let isSelected = (this.props.selectedOption.key || this.props.selectedOption) === this.optionKey;
-    let rkType = isSelected ? 'header xlarge' : 'subtitle large';
+    let rkType = isSelected ? this.selectedOptionRkType : this.optionRkType;
     let styles = [this.props.style, {height: this.optionHeight}];
     isSelected && styles.push(this.props.selectedStyle);
     return (

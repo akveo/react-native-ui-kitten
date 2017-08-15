@@ -27,7 +27,7 @@ export class PickerScreen extends React.Component {
         name: 'Option 1'
       },
       pikerVisible: false,
-      pickedValue: [8, 26, 2017]
+      pickedValue: [{key: 8, value: 'Aug'}, 26, 2017]
     };
     this.hidePicker = this.hidePicker.bind(this)
     this.handlePickedValue = this.handlePickedValue.bind(this)
@@ -71,7 +71,7 @@ export class PickerScreen extends React.Component {
             <View style={styles.componentRow}>
               <TouchableHighlight onPress={() => this.showPicker()}>
                 <Text>
-                  {this.state.pickedValue[0]}.
+                  {this.state.pickedValue[0].value}.
                   {this.state.pickedValue[1]}.
                   {this.state.pickedValue[2]}
                 </Text>
@@ -81,8 +81,7 @@ export class PickerScreen extends React.Component {
                         visible={this.state.pikerVisible}
                         onConfirm={this.handlePickedValue}
                         onCancel={this.hidePicker}
-                        selectedOptions={this.state.pickedValue}
-                        optionHeight={50}/>
+                        selectedOptions={this.state.pickedValue}/>
               <RkText rkType='bold' style={styles.caption}>Date Picker</RkText>
             </View>
           </View>

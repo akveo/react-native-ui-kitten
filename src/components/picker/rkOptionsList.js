@@ -12,10 +12,12 @@ import {RkComponent} from '../rkComponent';
 export class RkOptionsList extends RkComponent {
   componentName = 'RkOptionsList';
   typeMapping = {
-    optionStyle: {},
-    selectedOptionStyle: {},
-    highlightConstStyle: {},
-    flatListContainer: {},
+    highlightBlock: {
+      highlightBorderTopColor: 'borderTopColor',
+      highlightBorderBottomColor: 'borderBottomColor',
+      highlightBorderTopWidth: 'borderTopWidth',
+      highlightBorderBottomWidth: 'borderBottomWidth',
+    },
   };
 
   constructor(props) {
@@ -33,53 +35,6 @@ export class RkOptionsList extends RkComponent {
     if (this.props.scrollToSelected !== prevProps.scrollToSelected && this.props.scrollToSelected) {
       this.setInitialOptions();
     }
-  }
-
-  setInitialOptions() {
-    let selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
-    this.setState({selectedOption: this.props.data[selectedIndex].key || this.props.data[selectedIndex]});
-    setTimeout(() => {
-      this.scrollToIndex(selectedIndex);
-    }, 0);
-    this.props.onSelect(this.state.selectedOption, this.props.id);
-  }
-
-  findIndexByValue(expectableValue, array) {
-    let expectableIndex = Math.round(array.length / 2);
-    array.forEach((value, index) => {
-      if ((value.key || value) === expectableValue) expectableIndex = index
-    });
-    return expectableIndex;
-  }
-
-  scrollToIndex(index){
-    this.listRef.scrollTo({y: index * this.optionHeight})
-  }
-
-  updateOptionsData(optionsData, optionNumberOnPicker) {
-    return this.createEmptyArray(optionNumberOnPicker / 2).concat(
-      optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2))
-    );
-  }
-
-  createEmptyArray(arrayLength) {
-    return Array.apply(null, new Array(Math.floor(arrayLength))).map((_, i) => ' ');
-  }
-
-  selectOption(e, id) {
-    this.fixScroll(e);
-    this.props.onSelect(this.state.selectedOption, id);
-  }
-
-  fixScroll(e) {
-    let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
-    let selectedIndex = Math.round(y / this.optionHeight);
-    this.setState({selectedOption: this.props.data[selectedIndex].key || this.props.data[selectedIndex]});
-    this.scrollToIndex(selectedIndex);
-  }
-
-  getItemLayout(itemData, index) {
-    return {length: this.optionHeight, offset: this.optionHeight * index, index}
   }
 
   onScrollBeginDrag() {
@@ -119,27 +74,70 @@ export class RkOptionsList extends RkComponent {
     }
   }
 
-  renderOption(option, index, optionStyle) {
+  setInitialOptions() {
+    let selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
+    this.setState({selectedOption: this.props.data[selectedIndex]});
+    setTimeout(() => {
+      this.scrollToIndex(selectedIndex);
+    }, 0);
+    this.props.onSelect(this.state.selectedOption, this.props.id);
+  }
+
+  findIndexByValue(expectableValue, array) {
+    let expectableIndex = Math.round(array.length / 2);
+
+    array.forEach((value, index) => {
+      if ((value.key && expectableValue.key && value.key === expectableValue.key)
+        || (!value.key && !expectableValue.key && value === expectableValue)) expectableIndex = index
+    });
+    return expectableIndex;
+  }
+
+  scrollToIndex(index) {
+    this.listRef.scrollTo({y: index * this.optionHeight})
+  }
+
+  updateOptionsData(optionsData, optionNumberOnPicker) {
+    return this.createEmptyArray(optionNumberOnPicker / 2).concat(
+      optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2))
+    );
+  }
+
+  createEmptyArray(arrayLength) {
+    return Array.apply(null, new Array(Math.floor(arrayLength))).map((_, i) => ' ');
+  }
+
+  selectOption(e, id) {
+    let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
+    let selectedIndex = Math.round(y / this.optionHeight);
+    this.setState({selectedOption: this.props.data[selectedIndex]});
+    this.scrollToIndex(selectedIndex);
+    this.props.onSelect(this.props.data[selectedIndex], id);
+  }
+
+  renderOption(option, index, optionBlock) {
     return (
       <RkOption data={option}
                 key={index}
                 selectedOption={this.state.selectedOption}
-                style={optionStyle}
-                optionHeight={this.optionHeight}/>
+                style={optionBlock}
+                optionHeight={this.optionHeight}
+                optionRkType={this.props.optionRkType}
+                selectedOptionRkType={this.props.selectedOptionRkType}/>
     );
   }
 
   render() {
     let {
-      optionStyle, highlightConstStyle, flatListContainer
+      optionBlock, highlightBlock, optionListContainer
     } = super.defineStyles(this.props.rkType);
     let highlightVarStyle = {
       top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
       height: this.optionHeight,
     };
     return (
-      <View style={flatListContainer}>
-        <View style={[highlightVarStyle, highlightConstStyle]}/>
+      <View style={optionListContainer}>
+        <View style={[highlightVarStyle, highlightBlock]}/>
         <ScrollView bounces={false}
                     showsVerticalScrollIndicator={false}
                     ref={(flatListRef) => this.listRef = flatListRef}
@@ -147,7 +145,7 @@ export class RkOptionsList extends RkComponent {
                     onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
                     onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
                     onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}>
-          {this.optionsData.map((item, index) => this.renderOption(item, index, optionStyle))}
+          {this.optionsData.map((item, index) => this.renderOption(item, index, optionBlock))}
         </ScrollView>
       </View>
     );
