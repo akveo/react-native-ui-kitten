@@ -76,12 +76,13 @@ export class PickerScreen extends React.Component {
                   {this.state.pickedValue[2]}
                 </Text>
               </TouchableHighlight>
-              <RkPicker title='Set Date'
-                        data={[months, days, years]}
-                        visible={this.state.pikerVisible}
-                        onConfirm={this.handlePickedValue}
-                        onCancel={this.hidePicker}
-                        selectedOptions={this.state.pickedValue}/>
+              <RkPicker
+                title='Set Date'
+                data={[months, days, years]}
+                visible={this.state.pikerVisible}
+                onConfirm={this.handlePickedValue}
+                onCancel={this.hidePicker}
+                selectedOptions={this.state.pickedValue}/>
               <RkText rkType='bold' style={styles.caption}>Date Picker</RkText>
             </View>
           </View>

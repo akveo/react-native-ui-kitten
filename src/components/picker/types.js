@@ -1,3 +1,7 @@
+import {
+  StyleSheet,
+} from 'react-native';
+
 export const RkPickerTypes = (theme) => {
   return ({
     _base:{
@@ -27,28 +31,26 @@ export const RkPickerTypes = (theme) => {
       buttonsBlockBlock: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderColor: theme.colors.border.solid,
-        borderTopWidth: 1,
         marginTop: 20,
       },
       cancelButtonBlock: {
         flex: 0.5,
         borderColor: theme.colors.border.solid,
         borderRightWidth: 0.5,
-        borderTopWidth: 1,
+        borderTopWidth: StyleSheet.hairlineWidth,
       },
       confirmButtonBlock: {
         flex: 0.5,
         borderColor: theme.colors.border.solid,
         borderLeftWidth: 0.5,
-        borderTopWidth: 1,
+        borderTopWidth: StyleSheet.hairlineWidth,
       },
       highlightBlock: {
         position: 'absolute',
         borderTopColor: theme.colors.border.solid,
         borderBottomColor: theme.colors.border.solid,
-        borderTopWidth: 2,
-        borderBottomWidth: 2,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderBottomWidth: StyleSheet.hairlineWidth,
         left: 0,
         right: 0,
       },
@@ -62,19 +64,9 @@ export const RkPickerTypes = (theme) => {
       },
     },
     basic: {
-      borderRadius: 7,
-      borderWidth: 0.5,
-      borderColor: theme.colors.border.solid,
+      windowBorderRadius: 7,
+      windowBorderWidth: StyleSheet.hairlineWidth,
+      windowBorderColor: theme.colors.border.solid,
     },
-    bordered: {
-      borderRadius: 1,
-      borderWidth: 0.5,
-      borderColor: theme.colors.border.solid,
-    },
-    rounded: {
-      borderRadius: 15,
-      borderWidth: 0.5,
-      borderColor: theme.colors.border.solid,
-    }
   });
 };

@@ -19,19 +19,23 @@ import {RkOptionsList} from './rkOptionsList';
  * @example Usage example:
  *
  * ```
- * <RkPicker title='Set Date'
- *           data={[
- *           [{key: 1, value: 'Jun'}, {key: 2, value: 'Feb'}, {key: 3, value: 'Mar'}, {key: 4, value: 'Apr'},],
- *           [1, 2, 3, 4, 5],
- *           [2017, 2018, 2019]
- *           ]}
- *           visible={this.state.pikerVisible}
- *           selectedOptions={this.state.pickedValue}
- *           onConfirm={(data) => {
- *              this.setState({pickedValue: data})
- *              this.setState({pikerVisible: false})
- *           };}
- *           onCancel={() => this.setState({pikerVisible: false})}/>
+ * let data = [
+ *      [{key: 1, value: 'Jun'}, {key: 2, value: 'Feb'}, {key: 3, value: 'Mar'}, {key: 4, value: 'Apr'}],
+ *      [1, 2, 3, 4, 5],
+ *      [2017, 2018, 2019]]
+ *
+ * //...
+ *
+ * <RkPicker
+ *   title='Set Date'
+ *   data={data}
+ *   visible={this.state.pikerVisible}
+ *   selectedOptions={this.state.pickedValue}
+ *   onConfirm={(data) => {
+ *      this.setState({pickedValue: data})
+ *      this.setState({pikerVisible: false})
+ *      };}
+ *   onCancel={() => this.setState({pikerVisible: false})}/>
  * ```
  *
  *
@@ -166,16 +170,17 @@ export class RkPicker extends RkComponent {
 
   renderOptionList(array, index) {
     return (
-      <RkOptionsList key={index}
-                     id={index}
-                     data={array}
-                     selectedOption={this.state.selectedOptions[index]}
-                     scrollToSelected={this.state.scrollToSelected}
-                     onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
-                     optionHeight={this.optionHeight}
-                     optionNumberOnPicker={this.optionNumberOnPicker}
-                     optionRkType={this.props.optionRkType}
-                     selectedOptionRkType={this.props.selectedOptionRkType}/>
+      <RkOptionsList
+        key={index}
+        id={index}
+        data={array}
+        selectedOption={this.state.selectedOptions[index]}
+        scrollToSelected={this.state.scrollToSelected}
+        onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
+        optionHeight={this.optionHeight}
+        optionNumberOnPicker={this.optionNumberOnPicker}
+        optionRkType={this.props.optionRkType}
+        selectedOptionRkType={this.props.selectedOptionRkType}/>
     );
   }
 
