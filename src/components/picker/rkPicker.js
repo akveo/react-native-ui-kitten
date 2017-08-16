@@ -154,13 +154,16 @@ export class RkPicker extends RkComponent {
     this.cancelButtonText = this.props.cancelButtonText || 'CANCEL';
     this.state = {
       scrollToSelected: false,
-      selectedOptions: this.props.selectedOptions
+      selectedOptions: this.props.selectedOptions.slice()
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.visible !== prevProps.visible) {
-      this.setState({scrollToSelected: this.props.visible});
+      this.setState({
+        scrollToSelected: this.props.visible,
+        selectedOptions: this.props.selectedOptions.slice()
+      });
     }
   }
 

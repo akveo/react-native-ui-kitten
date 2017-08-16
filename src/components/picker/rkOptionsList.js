@@ -126,11 +126,10 @@ export class RkOptionsList extends RkComponent {
     this.props.onSelect(this.props.data[selectedIndex], id);
   }
 
-  renderOption(option, sectionID, rowId, optionBlock) {
+  renderOption(option, optionBlock) {
     return (
       <RkOption
         data={option}
-        key={rowId}
         selectedOption={this.state.selectedOption}
         style={optionBlock}
         optionHeight={this.optionHeight}
@@ -159,7 +158,7 @@ export class RkOptionsList extends RkComponent {
           onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
           onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
           dataSource={this.state.dataSource}
-          renderRow={(item, sectionID, rowId) => this.renderOption(item, sectionID, rowId, optionBlock)}
+          renderRow={(item, sectionID, rowId) => this.renderOption(item, optionBlock)}
           enableEmptySections={true}
           initialListSize={this.optionsData.length}
         />
