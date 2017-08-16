@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  TouchableHighlight,
+  TouchableOpacity,
   Text,
 } from 'react-native';
 import {
@@ -29,8 +29,8 @@ export class PickerScreen extends React.Component {
       pikerVisible: false,
       pickedValue: [{key: 8, value: 'Aug'}, 26, 2017]
     };
-    this.hidePicker = this.hidePicker.bind(this)
-    this.handlePickedValue = this.handlePickedValue.bind(this)
+    this.hidePicker = this.hidePicker.bind(this);
+    this.handlePickedValue = this.handlePickedValue.bind(this);
   }
 
   showPicker() {
@@ -69,13 +69,13 @@ export class PickerScreen extends React.Component {
           <RkText rkType='header'>Picker Examples</RkText>
           <View style={UtilStyles.columnContainer}>
             <View style={styles.componentRow}>
-              <TouchableHighlight onPress={() => this.showPicker()}>
+              <TouchableOpacity onPress={() => this.showPicker()}>
                 <Text>
                   {this.state.pickedValue[0].value}.
                   {this.state.pickedValue[1]}.
                   {this.state.pickedValue[2]}
                 </Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
               <RkPicker
                 title='Set Date'
                 data={[months, days, years]}
