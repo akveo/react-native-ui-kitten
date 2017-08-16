@@ -102,7 +102,7 @@ import {RkOptionsList} from './rkOptionsList';
  * - `buttonsBlockBlock` : `View` component with Confirm and Cancel buttons. Container for `cancelButtonBlock` and `confirmButtonBlock`
  * - `cancelButtonBlock` : `RkButton` component for cancel functionality
  * - `confirmButtonBlock` : `RkButton` component for confirm functionality
- * - `optionListContainer` : `View` component with options list and highlight. Container for `highlightBlock` and `ScrollView` with `optionBlock`'s
+ * - `optionListContainer` : `View` component with options list and highlight. Container for `highlightBlock` and `ListView` with `optionBlock`'s
  * - `highlightBlock` : `View` component for highlight functionality
  * - `optionBlock` : `View` component with option text
  *
