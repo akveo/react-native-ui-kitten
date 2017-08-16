@@ -4,7 +4,8 @@ import {
   TouchableHighlight,
   Modal,
   View,
-  ScrollView,
+  ListView,
+  DataSource,
 } from 'react-native';
 import {RkOption} from './rkOption';
 import {RkComponent} from '../rkComponent';
@@ -22,11 +23,12 @@ export class RkOptionsList extends RkComponent {
 
   constructor(props) {
     super(props);
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.optionHeight = this.props.optionHeight || 30;
     this.optionNumberOnPicker = this.props.optionNumberOnPicker || 3;
     this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
-    this.optionsData = this.updateOptionsData(this.props.data, this.optionNumberOnPicker);
     this.state = {
+      optionsData: ds.cloneWithRows(this.updateOptionsData(this.props.data, this.optionNumberOnPicker)),
       selectedOption: this.props.selectedOption
     };
   }
@@ -94,6 +96,7 @@ export class RkOptionsList extends RkComponent {
   }
 
   scrollToIndex(index) {
+    alert(index);
     this.listRef.scrollTo({y: index * this.optionHeight})
   }
 
@@ -117,13 +120,14 @@ export class RkOptionsList extends RkComponent {
 
   renderOption(option, index, optionBlock) {
     return (
-      <RkOption data={option}
-                key={index}
-                selectedOption={this.state.selectedOption}
-                style={optionBlock}
-                optionHeight={this.optionHeight}
-                optionRkType={this.props.optionRkType}
-                selectedOptionRkType={this.props.selectedOptionRkType}/>
+      <RkOption
+        data={option}
+        key={index}
+        selectedOption={this.state.selectedOption}
+        style={optionBlock}
+        optionHeight={this.optionHeight}
+        optionRkType={this.props.optionRkType}
+        selectedOptionRkType={this.props.selectedOptionRkType}/>
     );
   }
 
@@ -138,15 +142,19 @@ export class RkOptionsList extends RkComponent {
     return (
       <View style={optionListContainer}>
         <View style={[highlightVarStyle, highlightBlock]}/>
-        <ScrollView bounces={false}
-                    showsVerticalScrollIndicator={false}
-                    ref={(flatListRef) => this.listRef = flatListRef}
-                    onMomentumScrollBegin={(e) => this.onMomentumScrollBegin()}
-                    onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
-                    onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
-                    onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}>
-          {this.optionsData.map((item, index) => this.renderOption(item, index, optionBlock))}
-        </ScrollView>
+        <ListView
+          key={this.state.selectedOption}
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          ref={(flatListRef) => this.listRef = flatListRef}
+          onMomentumScrollBegin={(e) => this.onMomentumScrollBegin()}
+          onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
+          onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
+          onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
+          dataSource={this.state.optionsData}
+          renderRow={(item, index) => this.renderOption(item, index, optionBlock)}
+          pageSize={this.optionNumberOnPicker}
+        />
       </View>
     );
   }
