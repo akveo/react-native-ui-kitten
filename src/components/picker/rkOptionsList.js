@@ -6,6 +6,7 @@ import {
   View,
   ListView,
   DataSource,
+  InteractionManager
 } from 'react-native';
 import {RkOption} from './rkOption';
 import {RkComponent} from '../rkComponent';
@@ -42,12 +43,16 @@ export class RkOptionsList extends RkComponent {
   }
 
   onScrollBeginDrag() {
-    this.dragStarted = true;
+    this.dragStart = true;
+    this.timer && clearTimeout(this.timer);
+  }
+
+  onMomentumScrollBegin() {
+    this.momentumStart = true;
     this.timer && clearTimeout(this.timer);
   }
 
   onScrollEndDrag(e, id) {
-    this.dragStarted = false;
     let _e = {
       nativeEvent: {
         contentOffset: {
@@ -55,35 +60,34 @@ export class RkOptionsList extends RkComponent {
         },
       },
     };
+    this.dragStart = false;
     this.timer && clearTimeout(this.timer);
-    this.timer = setTimeout(
-      () => {
-        if (!this.dragStarted) {
-          this.selectOption(_e, id);
-        }
-      },
-      10
-    );
-  }
-
-  onMomentumScrollBegin() {
-    this.momentumStarted = true;
-    this.timer && clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      if (!this.dragStart && !this.momentumStart) {
+        this.selectOption(_e, id);
+      }
+    }, 10);
   }
 
   onMomentumScrollEnd(e, id) {
-    this.momentumStarted = false;
-    if (!this.momentumStarted && !this.dragStarted) {
-      this.selectOption(e, id);
+    let _e = {
+      nativeEvent: {
+        contentOffset: {
+          y: e.nativeEvent.contentOffset.y,
+        },
+      },
+    };
+    this.momentumStart = false;
+    this.timer && clearTimeout(this.timer);
+    if (!this.dragStart) {
+      this.selectOption(_e, id);
     }
   }
 
   setInitialOptions() {
     let selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
     this.setState({selectedOption: this.props.data[selectedIndex]});
-    setTimeout(() => {
-      this.scrollToIndex(selectedIndex);
-    }, 0);
+    InteractionManager.runAfterInteractions(() => this.scrollToIndex(selectedIndex));
     this.props.onSelect(this.state.selectedOption, this.props.id);
   }
 
@@ -96,13 +100,13 @@ export class RkOptionsList extends RkComponent {
     return expectableIndex;
   }
 
-  compareOptions(option1, option2){
+  compareOptions(option1, option2) {
     return (option1.key && option2.key && option1.key === option2.key)
-    || (!option1.key && !option2.key && option1 === option2);
+      || (!option1.key && !option2.key && option1 === option2);
   }
 
   scrollToIndex(index) {
-    this.listRef.scrollTo({x: 0, y: index * this.optionHeight})
+    this.listRef.scrollTo({x: 0, y: index * this.optionHeight, animated: true})
   }
 
   updateOptionsData(optionsData, optionNumberOnPicker) {
