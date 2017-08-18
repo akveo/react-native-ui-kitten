@@ -123,6 +123,7 @@ import {RkOptionsList} from './rkOptionsList';
  * @property {string} cancelTextRkType - RkType of text for cancel button.
  * @property {string} confirmButtonRkType - RkType of confirm button. Default value: transparent rectangle
  * @property {string} cancelButtonRkType - RkType of cancel button. Default value: transparent rectangle
+ * @property {string} titleTextRkType - RkType of title text. Default value: header
  * @property {number} optionHeight - Height of option in options list. Default value: 50
  * @property {number} optionNumberOnPicker - Number of visible options on option list. Default value: 3
  * @property {string} optionRkType - Types for RkText component with option
@@ -160,6 +161,7 @@ export class RkPicker extends RkComponent {
     this.cancelTextRkType = this.props.cancelTextRkType || '';
     this.confirmButtonRkType = this.props.confirmButtonRkType || 'transparent rectangle';
     this.cancelButtonRkType = this.props.cancelButtonRkType || 'transparent rectangle';
+    this.titleTextRkType = this.props.titleTextRkType || 'header';
     this.state = {
       scrollToSelected: false,
       selectedOptions: this.props.selectedOptions.slice()
@@ -210,7 +212,7 @@ export class RkPicker extends RkComponent {
       >
         <View style={[modalContainerBlock]}>
           <View style={[modalContentBlock, this.props.style]}>
-            <RkText rkType='header' style={titleBlock}>{this.props.title}</RkText>
+            <RkText rkType={this.titleTextRkType} style={titleBlock}>{this.props.title}</RkText>
             <View style={[listsContainerBlock, {height: this.pickerHeight}]}>
               {this.props.data.map((array, index) => this.renderOptionList(array, index))}
             </View>
