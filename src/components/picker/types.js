@@ -18,6 +18,9 @@ export const RkPickerTypes = (theme) => {
         flexDirection: 'column',
         marginHorizontal: 32,
         backgroundColor: theme.colors.screen.base,
+        borderRadius: 7,
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: theme.colors.border.solid,
       },
       titleBlock: {
         marginVertical: 10,
@@ -62,11 +65,6 @@ export const RkPickerTypes = (theme) => {
         flex: 1,
         marginHorizontal: 20,
       },
-    },
-    basic: {
-      windowBorderRadius: 7,
-      windowBorderWidth: StyleSheet.hairlineWidth,
-      windowBorderColor: theme.colors.border.solid,
     },
   });
 };
