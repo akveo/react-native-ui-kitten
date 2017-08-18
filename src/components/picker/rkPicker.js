@@ -119,6 +119,10 @@ import {RkOptionsList} from './rkOptionsList';
  * @property {string} title - Text for title of window with options lists
  * @property {string} confirmButtonText - Text for confirm button. Default value: OK
  * @property {string} cancelButtonText - Text for cancel button. Default value: CANCEL
+ * @property {string} confirmTextRkType - RkType of text for confirm button. Default value: header
+ * @property {string} cancelTextRkType - RkType of text for cancel button.
+ * @property {string} confirmButtonRkType - RkType of confirm button. Default value: transparent rectangle
+ * @property {string} cancelButtonRkType - RkType of cancel button. Default value: transparent rectangle
  * @property {number} optionHeight - Height of option in options list. Default value: 50
  * @property {number} optionNumberOnPicker - Number of visible options on option list. Default value: 3
  * @property {string} optionRkType - Types for RkText component with option
@@ -152,6 +156,10 @@ export class RkPicker extends RkComponent {
     this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
     this.confirmButtonText = this.props.confirmButtonText || 'OK';
     this.cancelButtonText = this.props.cancelButtonText || 'CANCEL';
+    this.confirmTextRkType = this.props.confirmTextRkType || 'header';
+    this.cancelTextRkType = this.props.cancelTextRkType || '';
+    this.confirmButtonRkType = this.props.confirmButtonRkType || 'transparent rectangle';
+    this.cancelButtonRkType = this.props.cancelButtonRkType || 'transparent rectangle';
     this.state = {
       scrollToSelected: false,
       selectedOptions: this.props.selectedOptions.slice()
@@ -207,15 +215,15 @@ export class RkPicker extends RkComponent {
               {this.props.data.map((array, index) => this.renderOptionList(array, index))}
             </View>
             <View style={[buttonsBlockBlock]}>
-              <RkButton rkType='transparent rectangle'
+              <RkButton rkType={this.cancelButtonRkType}
                         style={cancelButtonBlock}
                         onPress={() => this.props.onCancel()}>
-                <RkText>{this.cancelButtonText}</RkText>
+                <RkText rkType={this.cancelTextRkType}>{this.cancelButtonText}</RkText>
               </RkButton>
-              <RkButton rkType='transparent rectangle'
+              <RkButton rkType={this.confirmButtonRkType}
                         style={confirmButtonBlock}
                         onPress={() => this.props.onConfirm(this.state.selectedOptions)}>
-                <RkText rkType='header'>{this.confirmButtonText}</RkText>
+                <RkText rkType={this.confirmTextRkType}>{this.confirmButtonText}</RkText>
               </RkButton>
             </View>
           </View>
