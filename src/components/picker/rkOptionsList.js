@@ -13,14 +13,6 @@ import {RkComponent} from '../rkComponent';
 
 export class RkOptionsList extends RkComponent {
   componentName = 'RkOptionsList';
-  typeMapping = {
-    highlightBlock: {
-      highlightBorderTopColor: 'borderTopColor',
-      highlightBorderBottomColor: 'borderBottomColor',
-      highlightBorderTopWidth: 'borderTopWidth',
-      highlightBorderBottomWidth: 'borderBottomWidth',
-    },
-  };
 
   constructor(props) {
     super(props);
@@ -143,16 +135,13 @@ export class RkOptionsList extends RkComponent {
   }
 
   render() {
-    let {
-      optionBlock, highlightBlock, optionListContainer
-    } = super.defineStyles(this.props.rkType);
     let highlightVarStyle = {
       top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
       height: this.optionHeight,
     };
     return (
-      <View style={optionListContainer}>
-        <View style={[highlightVarStyle, highlightBlock]}/>
+      <View style={this.props.optionListContainerStyle}>
+        <View style={[highlightVarStyle, this.props.highlightBlockStyle]}/>
         <ListView
           bounces={false}
           showsVerticalScrollIndicator={false}
@@ -162,7 +151,7 @@ export class RkOptionsList extends RkComponent {
           onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
           onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
           dataSource={this.state.dataSource}
-          renderRow={(item, sectionID, rowId) => this.renderOption(item, optionBlock)}
+          renderRow={(item, sectionID, rowId) => this.renderOption(item, this.props.optionBlockStyle)}
           enableEmptySections={true}
           initialListSize={this.optionsData.length}
         />

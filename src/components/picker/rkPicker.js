@@ -187,7 +187,7 @@ export class RkPicker extends RkComponent {
     this.state.selectedOptions[listIndex] = selectedOption;
   }
 
-  renderOptionList(array, index) {
+  renderOptionList(array, index, optionBlock, highlightBlock, optionListContainer) {
     return (
       <RkOptionsList
         rkType={this.props.rkType}
@@ -200,14 +200,18 @@ export class RkPicker extends RkComponent {
         optionHeight={this.optionHeight}
         optionNumberOnPicker={this.optionNumberOnPicker}
         optionRkType={this.props.optionRkType}
-        selectedOptionRkType={this.props.selectedOptionRkType}/>
+        selectedOptionRkType={this.props.selectedOptionRkType}
+        optionBlockStyle={optionBlock}
+        highlightBlockStyle={highlightBlock}
+        optionListContainerStyle={optionListContainer}
+      />
     );
   }
 
   render() {
     let {
       modalContainerBlock, modalContentBlock, titleBlock, buttonsBlockBlock, listsContainerBlock,
-      cancelButtonBlock, confirmButtonBlock
+      cancelButtonBlock, confirmButtonBlock, optionBlock, highlightBlock, optionListContainer
     } = super.defineStyles(this.props.rkType);
 
     return (
@@ -221,7 +225,7 @@ export class RkPicker extends RkComponent {
           <View style={[modalContentBlock, this.props.style]}>
             <RkText rkType={this.titleTextRkType} style={titleBlock}>{this.props.title}</RkText>
             <View style={[listsContainerBlock, {height: this.pickerHeight}]}>
-              {this.props.data.map((array, index) => this.renderOptionList(array, index))}
+              {this.props.data.map((array, index) => this.renderOptionList(array, index, optionBlock, highlightBlock, optionListContainer))}
             </View>
             <View style={[buttonsBlockBlock]}>
               <RkButton rkType={this.cancelButtonRkType}
