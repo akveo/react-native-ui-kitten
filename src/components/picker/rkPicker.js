@@ -148,6 +148,12 @@ export class RkPicker extends RkComponent {
     confirmButtonBlock: {
       confirmBorderColor: 'borderColor',
     },
+    highlightBlock: {
+      highlightBorderTopColor: 'borderTopColor',
+      highlightBorderBottomColor: 'borderBottomColor',
+      highlightBorderTopWidth: 'borderTopWidth',
+      highlightBorderBottomWidth: 'borderBottomWidth',
+    },
   };
 
   constructor(props) {
@@ -184,6 +190,7 @@ export class RkPicker extends RkComponent {
   renderOptionList(array, index) {
     return (
       <RkOptionsList
+        rkType={this.props.rkType}
         key={index}
         id={index}
         data={array}

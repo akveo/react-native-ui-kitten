@@ -13,14 +13,6 @@ import {RkComponent} from '../rkComponent';
 
 export class RkOptionsList extends RkComponent {
   componentName = 'RkOptionsList';
-  typeMapping = {
-    highlightBlock: {
-      highlightBorderTopColor: 'borderTopColor',
-      highlightBorderBottomColor: 'borderBottomColor',
-      highlightBorderTopWidth: 'borderTopWidth',
-      highlightBorderBottomWidth: 'borderBottomWidth',
-    },
-  };
 
   constructor(props) {
     super(props);
