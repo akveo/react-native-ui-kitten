@@ -6,17 +6,12 @@
   "homepage": "https://akveo.github.io/react-native-ui-kitten/",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "wintersmith build -C docs ",
-    "gh-pages": "wintersmith build -C docs && gh-pages -d docs/build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
   "dependencies": {
-    "gh-pages": "^0.12.0",
     "hoist-non-react-statics": "^2.0.0",
-    "markdown-it": "^8.2.0",
     "prop-types": "^15.5.10",
-    "wintersmith": "^2.3.3",
     "wolfy87-eventemitter": "^5.1.0"
   },
   "peerDependencies": {
