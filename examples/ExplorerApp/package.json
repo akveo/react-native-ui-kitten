@@ -5,14 +5,14 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "update-lib": "rm -r node_modules/react-native-ui-kitten && npm install && ./node_modules/react-native/packager/packager.sh  ."
+    "update-lib": "rm -r node_modules/react-native-ui-kitten && npm install && ./node_modules/react-native/scripts/packager.sh  ."
   },
   "dependencies": {
     "prop-types": "^15.5.10",
-    "react": "15.4.1",
-    "react-native": "^0.42.3",
+    "react": "^16.0.0-alpha.12",
+    "react-native": "^0.47.1",
     "react-native-ui-kitten": "file:../../",
-    "react-native-vector-icons": "^2.0.3",
+    "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {

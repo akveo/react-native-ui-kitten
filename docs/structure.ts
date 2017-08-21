@@ -284,6 +284,33 @@ export const STRUCTURE = [
           }
         ]
       },
+      {
+        type: 'page',
+        name: 'RkPicker',
+        demogif: 'picker.gif',
+        children: [
+          {
+            type: 'block',
+            block: 'rk-description',
+            klass: 'RkPicker',
+          },
+          {
+            type: 'block',
+            block: 'rk-examples',
+            klass: 'RkPicker',
+          },
+          {
+            type: 'block',
+            block: 'rk-props',
+            klass: 'RkPicker',
+          },
+          {
+            type: 'block',
+            block: 'rk-styles',
+            klass: 'RkPicker',
+          }
+        ]
+      },
     ],
   },
   {

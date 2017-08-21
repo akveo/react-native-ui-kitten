@@ -4,13 +4,16 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  TouchableHighlight,
+  Text,
 } from 'react-native';
 import {
   RkText,
   RkChoiceGroup,
   RkChoice,
   RkTheme,
-  RkSeparator
+  RkSeparator,
+  RkPicker
 } from 'react-native-ui-kitten';
 import {UtilStyles} from '../style/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,8 +30,29 @@ export class ChoiceScreen extends React.Component {
       settingsOption: {
         index: 0,
         name: 'Option 1'
-      }
+      },
+      pikerVisible: false,
+      pickedValue: 'Pick Value'
     };
+    this.hidePicker = this.hidePicker.bind(this)
+    this.handlePickedValue = this.handlePickedValue.bind(this)
+  }
+
+  showPicker(){
+    this.setState({ pikerVisible: true })
+  };
+
+  hidePicker(){
+    this.setState({ pikerVisible: false });
+  }
+
+  handlePickedValue(date){
+    this.setState({pickedValue: date});
+    this.hidePicker();
+  };
+
+  generateArrayFromRange(start, finish){
+    return Array.apply(null, Array(finish-start+1)).map(function (_, i) {return start + i;});
   }
 
   render() {
@@ -264,5 +288,10 @@ const styles = StyleSheet.create({
   typeText: {
     color: RkTheme.current.colors.grey500,
     textAlign: 'center'
+  },
+  text: {
+    fontSize: 30,
+    alignSelf: 'center',
+    color: 'red'
   }
 });

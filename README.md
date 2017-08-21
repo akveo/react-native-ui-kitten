@@ -11,7 +11,7 @@ And the most awesome thing: you can change themes on the fly by just passing a d
 
 100% native. Give our kitten a try!
 
-<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/ab511c86/docs/assets/buttons.png" width="350"/>
+<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/master/docs/assets/kittenKit.png"/>
 
 ## Documentation
 Documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).

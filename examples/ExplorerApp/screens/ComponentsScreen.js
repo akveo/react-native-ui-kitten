@@ -21,6 +21,10 @@ export class ComponentsScreen extends Component {
     super(props);
     this.data = [
       {
+        title: 'Pickers',
+        route: 'Picker',
+      },
+      {
         title: 'Buttons',
         route: 'Button',
       },
