@@ -171,10 +171,13 @@ export class RkButton extends RkComponent {
       onPressIn: this.props.onPressIn,
       onPressOut: this.props.onPressOut,
       onLongPress: this.props.onLongPress
+	};
+    let otherProps = {
+      disabled: this.props.disabled || false
     };
 
     return (
-      <TouchableOpacity style={[container, this.props.style]} {...touchableProps}>
+      <TouchableOpacity style={[container, this.props.style]} {...touchableProps} {...otherProps}>
         {this.props.children && this._renderChildren(content)}
       </TouchableOpacity>
     );
