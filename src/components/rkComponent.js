@@ -53,14 +53,12 @@ export class RkComponent extends React.Component {
    * @returns {object} value of extracted property
    */
   extractNonStyleValue(styles, property) {
-    let val = _.find(styles, (e) => e.hasOwnProperty(property));
-    if (val) {
-      styles.splice(styles.indexOf(val), 1);
-    }
-    else {
-      return val;
-    }
-    return val[property];
+    return styles.reduce((acc, style) => {
+      return Object.keys(style).reduce((obj, key) => {
+        obj[key] = style[key]
+        return obj
+      }, acc)
+    }, {})[property]
   }
 
   _getStyleValue(value) {
