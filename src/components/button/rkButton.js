@@ -173,7 +173,7 @@ export class RkButton extends RkComponent {
       onLongPress: this.props.onLongPress
     };
 		let otherProps = {
-      disabled: this.props.disabled || false
+			disabled: this.props.disabled || false
 		};
 
     return (
