@@ -30,7 +30,6 @@ export const RkCardTypes = (theme) => {
         borderBottomRightRadius: 1,
       },
       img: {
-        flex: 1,
         height: 200,
         width: null,
       },
