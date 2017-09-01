@@ -37,7 +37,7 @@ export class RkComponent extends React.Component {
    * For example - if component state is `selected` component may ask about `selected` type.
    * @returns {object} styles - Object with compiled styles for each internal component.
    */
-    defineStyles(additionalTypes) {
+  defineStyles(additionalTypes) {
     let rkTypes = this.props.rkType || '';
     let types = _.join([this.defaultType, rkTypes, additionalTypes], ' ');
     types = types && types.length ? types.split(' ') : [];
@@ -74,46 +74,43 @@ export class RkComponent extends React.Component {
     return value;
   }
 
-  _getTypes(types) {
-    let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
+  _getTypes(rkTypes) {
+    let usedTypes = this._getUsedTypes(rkTypes);
+    let styles = this._getDefaultStyles();
 
-    let styles = this._getDefaultStyles(componentTypes);
-
-    let usedTypes = [];
-    types.forEach(type => {
-      if (componentTypes[type])
-        usedTypes.push(componentTypes[type]);
-    });
-
-    for (let type in usedTypes) {
-      for (let key in usedTypes[type]) {
-        for (let element in this.typeMapping) {
-          if (this.typeMapping.hasOwnProperty(key)
-            || this.typeMapping[element].hasOwnProperty(key)) {
-
-            if (styles[element] === undefined) {
-              styles[element] = [];
-            }
-
-            //check if this is complex style
-            if (this.typeMapping[key]) {
-              for (let styleKey in usedTypes[type][key]) {
-                let value = this._getStyleValue(usedTypes[type][key][styleKey]);
-                this._mergeStyles(styles[key], styleKey, value);
-              }
-            } else {
-              let styleKey = this.typeMapping[element][key];
-              let value = this._getStyleValue(usedTypes[type][key]);
-
-              this._mergeStyles(styles[element], styleKey, value);
-            }
-            break;
+    usedTypes.forEach((usedType) => {
+      for (let key in usedType) {
+        if (this.typeMapping.hasOwnProperty(key)) {
+          styles[key] === undefined && (styles[key] = []);
+          for (let styleKey in usedType[key]) {
+            let value = this._getStyleValue(usedType[key][styleKey]);
+            this._mergeStyles(styles[key], styleKey, value);
+          }
+        } else {
+          let complexStyle = this._findComplexStyleByKey(key, this.typeMapping);
+          if (complexStyle){
+            styles[complexStyle] === undefined && (styles[complexStyle] = []);
+            let styleKey = this.typeMapping[complexStyle][key];
+            let value = this._getStyleValue(usedType[key]);
+            this._mergeStyles(styles[complexStyle], styleKey, value);
           }
         }
       }
-    }
+    });
+
     return styles;
   };
+
+  _findComplexStyleByKey(key, typeMapping){
+    let resultComplexStyle;
+    for (let complexStyle in typeMapping) {
+      if (typeMapping[complexStyle].hasOwnProperty(key)) {
+        resultComplexStyle = complexStyle;
+        break;
+      }
+    }
+    return resultComplexStyle;
+  }
 
   _mergeStyles(element, styleKey, value) {
     //merge styles in order to have only one value for each property
@@ -124,8 +121,9 @@ export class RkComponent extends React.Component {
       element.push({[styleKey]: value});
   }
 
-  _getDefaultStyles(componentTypes) {
+  _getDefaultStyles() {
     let styles = {};
+    let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
     let baseStyle = componentTypes[this.baseStyle];
     let self = this;
     for (let element in baseStyle) {
@@ -135,6 +133,15 @@ export class RkComponent extends React.Component {
       })
     }
     return styles;
-  };
+  }
 
+  _getUsedTypes(rkTypes){
+    let usedTypes = [];
+    let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
+    rkTypes.forEach(type => {
+      if (componentTypes[type])
+        usedTypes.push(componentTypes[type]);
+    });
+    return usedTypes;
+  }
 }
