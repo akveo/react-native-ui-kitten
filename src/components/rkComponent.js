@@ -39,8 +39,11 @@ export class RkComponent extends React.Component {
    */
   defineStyles(additionalTypes) {
     let rkTypes = this.props.rkType || '';
-    let types = _.join([this.defaultType, rkTypes, additionalTypes], ' ');
+    rkTypes = this._getTypesString(rkTypes);
+    additionalTypes = this._getTypesString(additionalTypes);
+    let types = this._getTypesString([this.defaultType, rkTypes, additionalTypes]);
     types = types && types.length ? types.split(' ') : [];
+    console.log(types);
     return this._getTypes(types);
   }
 
@@ -61,6 +64,14 @@ export class RkComponent extends React.Component {
       return val;
     }
     return val[property];
+  }
+
+  _getTypesString(types){
+    let typesString = types;
+    if (Array.isArray(types)) {
+      typesString = _.join(types, ' ');
+    }
+    return typesString;
   }
 
   _getStyleValue(value) {

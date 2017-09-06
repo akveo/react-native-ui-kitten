@@ -120,4 +120,15 @@ export let bootstrap = () => {
       marginVertical: 10
     }
   });
+
+  RkTheme.setType('RkText', 'testParentTypes', {
+    fontSize: 40,
+    text: {
+      fontFamily: robotoLight,
+      lineHeight: {
+        ios: 41,
+        android: 43
+      },
+    }
+  }, "basic danger header cardText");
 };

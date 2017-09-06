@@ -92,8 +92,8 @@ class ThemeManager {
    * @param {string} name - name of new rkType
    * @param {object} value - style object for new rkType
    */
-  setType(element, name, value) {
-    TypeManager.setType(element, name, value);
+  setType(element, name, value, parentTypes) {
+    TypeManager.setType(element, name, value, parentTypes);
   }
 
   /**
