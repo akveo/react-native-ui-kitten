@@ -38,12 +38,10 @@ export class RkComponent extends React.Component {
    * @returns {object} styles - Object with compiled styles for each internal component.
    */
   defineStyles(additionalTypes) {
-    let rkTypes = this.props.rkType || '';
-    rkTypes = this._getTypesString(rkTypes);
+    let rkTypes = this._getTypesString(this.props.rkType || '');
     additionalTypes = this._getTypesString(additionalTypes);
     let types = this._getTypesString([this.defaultType, rkTypes, additionalTypes]);
     types = types && types.length ? types.split(' ') : [];
-    console.log(types);
     return this._getTypes(types);
   }
 

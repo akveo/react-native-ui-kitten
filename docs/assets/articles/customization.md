@@ -108,3 +108,60 @@ Variable `theme` here is an example of the current theme. So, in case the theme 
  created above will also be changed and all components using this type will be updated as well.
 
 Sometimes there is a necessity to use their values for regular components. In this case, you need to use `RkStyleSheet`.
+
+### Inherit rkTypes
+
+You're able to create your custom *rkType*s that based on others *rkType*s.
+Fourth parameter of method *RkTheme.setType()* is array or string with parents *rkType*s.<br/>
+Array format: *['parentType1', 'parentType2']*.<br/>
+String format: *'parentType1 parentType2'*.<br/>
+The properties of *parentType2* override the properties of *parentType1*. Third parameter of method *RkTheme.setType()* using after parents types.
+
+
+Here is the example of creating *rkType* from parents types for rkText:
+
+```
+RkTheme.setType('RkText', 'inherited', {
+    fontSize: 40,
+    text: {
+      fontFamily: robotoLight,
+      lineHeight: {
+        ios: 41,
+        android: 43
+      },
+    }
+  }, "basic danger");
+```
+
+Where *basic* rkType:
+```
+
+basic: {
+    fontSize: theme.fonts.sizes.base,
+    color: theme.colors.text.base,
+    backgroundColor: 'transparent'
+}
+```
+
+And *danger* rkType:
+```
+danger: {
+    color: theme.colors.danger
+}
+```
+
+As result, we have *inherited* rkType:
+```
+inherited: {
+    fontSize: 40,
+    color: theme.colors.danger,
+    backgroundColor: 'transparent'
+    text: {
+      fontFamily: robotoLight,
+      lineHeight: {
+        ios: 45,
+        android: 43
+      },
+    }
+}
+```
