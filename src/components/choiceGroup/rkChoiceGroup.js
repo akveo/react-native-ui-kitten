@@ -124,10 +124,8 @@ export class RkChoiceGroup extends RkComponent {
   }
 
   render() {
-    console.log(this.values);
     let {container} = this.defineStyles();
     let children = this._processChildren();
-    console.log(this.values);
     this.state.selectionWasUpdated = false;
     return (
       <View style={[container, this.props.style]}>
@@ -155,32 +153,27 @@ export class RkChoiceGroup extends RkComponent {
     let index = 0;
 
     let appendChoiceProps = (props, child) => {
-      if (this.props.disabled !== undefined && child.props.disabled == undefined)
+      if (this.props.disabled !== undefined && child.props.disabled === undefined)
         props.disabled = this.props.disabled;
     };
 
     let processTrigger = (child, index) => {
       let props = {};
       if (child.type === RkChoice) {
-        props.inTrigger = true;
         if (!this.state.selectionWasUpdated) {
-          if (this.props.radio) {
-            if (child.props.selected){
-              for (let key in this.values) {
-                this.values[key] = false
-              }
-              this.values[index] = true;
-              this.props.onChange && this.props.onChange(index);
-            } else {
-              this.values[index] = index === this.props.selectedIndex ? true : child.props.selected;
-              this.props.onChange && child.props.selected && this.props.onChange(index);
+          let newSelectedValue = (index === this.props.selectedIndex) ? true : child.props.selected;
+          if (this.props.radio && child.props.selected){
+            for (let key in this.values) {
+              this.values[key] = false
             }
-          } else {
-            this.values[index] = index === this.props.selectedIndex ? true : child.props.selected;
-            this.props.onChange && this.values[index] && this.props.onChange(index);
           }
+          if (this.props.onChange && newSelectedValue !== this.values[index]){
+            this.props.onChange(index);
+          }
+          this.values[index] = newSelectedValue;
         }
         props.selected = this.values[index];
+        props.inTrigger = true;
         appendChoiceProps(props, child);
       } else if (child.props && child.props.children) {
         props.children =
