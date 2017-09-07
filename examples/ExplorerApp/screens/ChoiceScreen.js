@@ -4,8 +4,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  TouchableHighlight,
-  Text,
 } from 'react-native';
 import {
   RkText,
@@ -13,11 +11,10 @@ import {
   RkChoice,
   RkTheme,
   RkSeparator,
-  RkPicker
+  RkButton,
 } from 'react-native-ui-kitten';
 import {UtilStyles} from '../style/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 
 export class ChoiceScreen extends React.Component {
   static navigationOptions = {
@@ -32,34 +29,68 @@ export class ChoiceScreen extends React.Component {
         name: 'Option 1'
       },
       pikerVisible: false,
-      pickedValue: 'Pick Value'
+      pickedValue: 'Pick Value',
+      selectedOption: 0,
     };
+    this.options = [
+      {
+        id: 0,
+        name: "Option 0",
+      },
+      {
+        id: 1,
+        name: "Option 1",
+      },
+      {
+        id: 2,
+        name: "Option 2",
+      },
+      {
+        id: 3,
+        name: "Option 3",
+      },
+    ];
     this.hidePicker = this.hidePicker.bind(this)
     this.handlePickedValue = this.handlePickedValue.bind(this)
   }
 
-  showPicker(){
-    this.setState({ pikerVisible: true })
-  };
-
-  hidePicker(){
-    this.setState({ pikerVisible: false });
+  hidePicker() {
+    this.setState({pikerVisible: false});
   }
 
-  handlePickedValue(date){
+  handlePickedValue(date) {
     this.setState({pickedValue: date});
     this.hidePicker();
   };
-
-  generateArrayFromRange(start, finish){
-    return Array.apply(null, Array(finish-start+1)).map(function (_, i) {return start + i;});
-  }
 
   render() {
     return (
       <ScrollView
         style={UtilStyles.container}
         automaticallyAdjustContentInsets={true}>
+
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
+          <RkText rkType='header'>Choice from event</RkText>
+          <RkChoiceGroup style={UtilStyles.columnContainer} radio>
+            {
+              this.options.map((option) => {
+                return <TouchableOpacity choiceTrigger key={option.id}>
+                  <View style={styles.componentRow}>
+                    <RkChoice rkType='radio'
+                              selected={option.id === this.state.selectedOption}/>
+                    <RkText rkType='bold'>{option.name}</RkText>
+                  </View>
+                </TouchableOpacity>
+              })
+            }
+          </RkChoiceGroup>
+          <RkButton
+            rkType='outline'
+            onPress={() => this.setState({selectedOption: (this.state.selectedOption + 1) % this.options.length})}>
+            <RkText rkType='header'>Next</RkText>
+          </RkButton>
+        </View>
+
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Classic selectable components</RkText>
           <View style={UtilStyles.columnContainer}>

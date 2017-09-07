@@ -102,30 +102,33 @@ export class RkChoiceGroup extends RkComponent {
 
   constructor(props) {
     super(props);
-    let values = {};
+    this.values = {};
     if (props.selectedIndex !== undefined) {
-      values[+props.selectedIndex] = true;
+      this.values[+props.selectedIndex] = true;
     }
-    this.state = {values}
+    this.state = {
+      selectionWasUpdated: false,
+    }
   }
 
   componentWillMount() {
-    let values = this.state.values;
     let index = 0;
     let process = (child) => {
-      if (child.type === RkChoice && values[index] === undefined) {
-        values[index++] = !!child.props.selected;
+      if (child.type === RkChoice && this.values[index] === undefined) {
+        this.values[index++] = child.props.selected;
       } else if (child.props && child.props.children) {
         React.Children.map(child.props.children, process)
       }
     };
     React.Children.map(this.props.children, process);
-    this.setState({values});
   }
 
   render() {
+    console.log(this.values);
     let {container} = this.defineStyles();
     let children = this._processChildren();
+    console.log(this.values);
+    this.state.selectionWasUpdated = false;
     return (
       <View style={[container, this.props.style]}>
         {children}
@@ -134,20 +137,18 @@ export class RkChoiceGroup extends RkComponent {
   }
 
   _onSelect(index) {
-    let values = this.state.values;
-
     if (this.props.radio) {
-      for (let key in values) {
-        values[key] = false
+      for (let key in this.values) {
+        this.values[key] = false
       }
-      values[index] = true;
+      this.values[index] = true;
       this.props.onChange && this.props.onChange(index);
     }
     else {
-      values[index] = !values[index];
-      this.props.onChange && this.props.onChange(values);
+      this.values[index] = !this.values[index];
+      this.props.onChange && this.props.onChange(index);
     }
-    this.setState({values});
+    this.setState({selectionWasUpdated: true});
   }
 
   _processChildren() {
@@ -162,15 +163,32 @@ export class RkChoiceGroup extends RkComponent {
       let props = {};
       if (child.type === RkChoice) {
         props.inTrigger = true;
-        props.selected = this.state.values[index];
+        if (!this.state.selectionWasUpdated) {
+          if (this.props.radio) {
+            if (child.props.selected){
+              for (let key in this.values) {
+                this.values[key] = false
+              }
+              this.values[index] = true;
+              this.props.onChange && this.props.onChange(index);
+            } else {
+              this.values[index] = index === this.props.selectedIndex ? true : child.props.selected;
+              this.props.onChange && child.props.selected && this.props.onChange(index);
+            }
+          } else {
+            this.values[index] = index === this.props.selectedIndex ? true : child.props.selected;
+            this.props.onChange && this.values[index] && this.props.onChange(index);
+          }
+        }
+        props.selected = this.values[index];
         appendChoiceProps(props, child);
       } else if (child.props && child.props.children) {
-        props.children = _.isArray(child.props.children) ?
-          React.Children.map(child.props.children, (child) => processTrigger(child, index)) :
-          processTrigger(child.props.children, index);
+        props.children =
+          _.isArray(child.props.children)
+            ? React.Children.map(child.props.children, (child) => processTrigger(child, index))
+            : processTrigger(child.props.children, index);
       }
       return typeof child === 'string' ? child : React.cloneElement(child, props);
-
     };
 
     let process = (child) => {
@@ -178,16 +196,17 @@ export class RkChoiceGroup extends RkComponent {
       if (child.type === RkChoice) {
         let choiceIndex = index++;
         passProps.onPress = () => this._onSelect(choiceIndex);
-        passProps.selected = this.state.values[choiceIndex];
+        passProps.selected = this.values[choiceIndex];
         appendChoiceProps(passProps, child);
       } else if (child.props && child.props.choiceTrigger) {
         let choiceIndex = index++;
         passProps.onPress = () => this._onSelect(choiceIndex);
         passProps.children = processTrigger(child.props.children, choiceIndex)
       } else if (child.props && child.props.children) {
-        passProps.children = _.isArray(child.props.children) ?
-          React.Children.map(child.props.children, process) :
-          process(child.props.children);
+        passProps.children =
+          _.isArray(child.props.children)
+            ? React.Children.map(child.props.children, process)
+            : process(child.props.children);
       }
       return typeof child === 'string' ? child : React.cloneElement(child, passProps);
     };
