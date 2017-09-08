@@ -32,24 +32,6 @@ export class ChoiceScreen extends React.Component {
       pickedValue: 'Pick Value',
       selectedOption: 0,
     };
-    this.options = [
-      {
-        id: 0,
-        name: "Option 0",
-      },
-      {
-        id: 1,
-        name: "Option 1",
-      },
-      {
-        id: 2,
-        name: "Option 2",
-      },
-      {
-        id: 3,
-        name: "Option 3",
-      },
-    ];
     this.hidePicker = this.hidePicker.bind(this)
     this.handlePickedValue = this.handlePickedValue.bind(this)
   }
@@ -68,28 +50,6 @@ export class ChoiceScreen extends React.Component {
       <ScrollView
         style={UtilStyles.container}
         automaticallyAdjustContentInsets={true}>
-
-        <View style={[UtilStyles.section, UtilStyles.bordered]}>
-          <RkText rkType='header'>Choice from event</RkText>
-          <RkChoiceGroup style={UtilStyles.columnContainer} radio>
-            {
-              this.options.map((option) => {
-                return <TouchableOpacity choiceTrigger key={option.id}>
-                  <View style={styles.componentRow}>
-                    <RkChoice rkType='radio'
-                              selected={option.id === this.state.selectedOption}/>
-                    <RkText rkType='bold'>{option.name}</RkText>
-                  </View>
-                </TouchableOpacity>
-              })
-            }
-          </RkChoiceGroup>
-          <RkButton
-            rkType='outline'
-            onPress={() => this.setState({selectedOption: (this.state.selectedOption + 1) % this.options.length})}>
-            <RkText rkType='header'>Next</RkText>
-          </RkButton>
-        </View>
 
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Classic selectable components</RkText>
