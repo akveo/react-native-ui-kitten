@@ -165,3 +165,34 @@ inherited: {
     }
 }
 ```
+
+### Using extractNonStyleValue() method of RkComponent
+Style before method call:
+
+```
+style: {
+ flex: 1,
+ fontSize: 15,
+ alignSelf: 'center',
+ placeholderTextColor: '#0000008e',
+ marginVertical: 4,
+ marginLeft: 16
+}
+```
+Method call:
+```
+//...
+let placeholderColor = this.extractNonStyleValue(style, 'placeholderTextColor')
+//...
+```
+Style and placeholderColor after method call:
+```
+placeholderColor: '#0000008e'
+style: {
+ flex: 1,
+ fontSize: 15,
+ alignSelf: 'center',
+ marginVertical: 4,
+ marginLeft: 16
+}
+```
