@@ -47,24 +47,24 @@ export class RkComponent extends React.Component {
 
   /**
    * Extracts property value from type. Often used if need to control non-style properties using types.
-   * Example - `placeholderTextColor` of `TextInput` component. For some reason this setting should be passed separately from `style` prop.
-   * So we keep `placeholderTextColor` as style property of `RkTextInput` but before applying to internal `TextInput` - we extract this value and pass it to according prop.
-   * @param {object} styles - Styles which contains non-style property
+   * Example: `placeholderTextColor` of `TextInput` component. For some reason this setting should be passed separately from `style` prop.
+   * So we keep `placeholderTextColor` as style property of `RkTextInput` but before applying to internal `TextInput` - we extract this value and pass it to according prop. For more details, see Customization section.
+   *
+   * @param {object} style - Style which contains non-style property
    * @param {string} property - name of property that should be extracted.
    * @returns {object} value of extracted property
    */
-  extractNonStyleValue(styles, property) {
-    let val = _.find(styles, (e) => e.hasOwnProperty(property));
+  extractNonStyleValue(style, property) {
+    let val = _.find(style, (e) => e.hasOwnProperty(property));
     if (val) {
-      styles.splice(styles.indexOf(val), 1);
-    }
-    else {
+      style.splice(style.indexOf(val), 1);
+    } else {
       return val;
     }
     return val[property];
   }
 
-  _getTypesString(types){
+  _getTypesString(types) {
     let typesString = types;
     if (Array.isArray(types)) {
       typesString = _.join(types, ' ');
@@ -97,7 +97,7 @@ export class RkComponent extends React.Component {
           }
         } else {
           let complexStyle = this._findComplexStyleByKey(key, this.typeMapping);
-          if (complexStyle){
+          if (complexStyle) {
             styles[complexStyle] === undefined && (styles[complexStyle] = []);
             let styleKey = this.typeMapping[complexStyle][key];
             let value = this._getStyleValue(usedType[key]);
@@ -110,7 +110,7 @@ export class RkComponent extends React.Component {
     return styles;
   };
 
-  _findComplexStyleByKey(key, typeMapping){
+  _findComplexStyleByKey(key, typeMapping) {
     let resultComplexStyle;
     for (let complexStyle in typeMapping) {
       if (typeMapping[complexStyle].hasOwnProperty(key)) {
@@ -144,7 +144,7 @@ export class RkComponent extends React.Component {
     return styles;
   }
 
-  _getUsedTypes(rkTypes){
+  _getUsedTypes(rkTypes) {
     let usedTypes = [];
     let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
     rkTypes.forEach(type => {
