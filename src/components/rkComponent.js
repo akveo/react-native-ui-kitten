@@ -22,6 +22,11 @@ export class RkComponent extends React.Component {
   typeMapping = {};
 
   /**
+   * {string} Mapping type which will get all properties that were specified without type mapping. If typeMapping contain only one element, it will be used by default. Can be overridden in inherited component
+   */
+  mainMappingType = '';
+
+  /**
    * {string} Default component style name. Can be overridden in inherited component
    */
   baseStyle = '_base';
@@ -85,11 +90,18 @@ export class RkComponent extends React.Component {
         usedTypes.push(componentTypes[type]);
     });
 
+    let mainMappingType = this.mainMappingType;
+
+    if (!mainMappingType && _.keys(this.typeMapping).length == 1) {
+      mainMappingType = _.keys(this.typeMapping)[0];
+    }
+
     for (let type in usedTypes) {
       for (let key in usedTypes[type]) {
+        let isKeyInMap = false;
         for (let element in this.typeMapping) {
-          if (this.typeMapping.hasOwnProperty(key)
-            || this.typeMapping[element].hasOwnProperty(key)) {
+          isKeyInMap = this.typeMapping.hasOwnProperty(key) || this.typeMapping[element].hasOwnProperty(key);
+          if (isKeyInMap) {
 
             if (styles[element] === undefined) {
               styles[element] = [];
@@ -109,6 +121,16 @@ export class RkComponent extends React.Component {
             }
             break;
           }
+        }
+        if (!isKeyInMap && mainMappingType) {
+
+          if (styles[mainMappingType] === undefined) {
+            styles[mainMappingType] = [];
+          }
+
+          let value = this._getStyleValue(usedTypes[type][key]);
+          this._mergeStyles(styles[mainMappingType], key, value);
+
         }
       }
     }
