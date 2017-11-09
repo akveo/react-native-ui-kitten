@@ -87,9 +87,10 @@ export class RkComponent extends React.Component {
 
     for (let type in usedTypes) {
       for (let key in usedTypes[type]) {
+        let isKeyInMap = false;
         for (let element in this.typeMapping) {
-          if (this.typeMapping.hasOwnProperty(key)
-            || this.typeMapping[element].hasOwnProperty(key)) {
+          isKeyInMap = this.typeMapping.hasOwnProperty(key) || this.typeMapping[element].hasOwnProperty(key);
+          if (isKeyInMap) {
 
             if (styles[element] === undefined) {
               styles[element] = [];
@@ -109,6 +110,16 @@ export class RkComponent extends React.Component {
             }
             break;
           }
+        }
+        if (!isKeyInMap) {
+
+          if (styles['_default'] === undefined) {
+            styles['_default'] = [];
+          }
+
+          let value = this._getStyleValue(usedTypes[type][key]);
+          this._mergeStyles(styles['_default'], key, value);
+
         }
       }
     }
