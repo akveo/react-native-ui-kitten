@@ -52,7 +52,7 @@ export class RkAvoidKeyboard extends RkComponent {
 
   _onKeyboardWillShow(e) {
     Animated.timing(this.state.top, {
-      toValue: -(e.startCoordinates.height),
+      toValue: -(e.endCoordinates.height),
       duration: e.duration,
     }).start();
   }
