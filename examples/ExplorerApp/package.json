@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "prop-types": "^15.5.10",
-    "react": "^16.0.0-alpha.12",
-    "react-native": "^0.47.1",
+    "react": "^16.0.0",
+    "react-native": "^0.50.4",
     "react-native-ui-kitten": "file:../../",
     "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.11"
@@ -20,6 +20,9 @@
     "babel-preset-react-native": "1.9.0",
     "jest": "17.0.3",
     "react-test-renderer": "15.4.1"
+  },
+  "rnpm":{
+    "assets":["./assets"]
   },
   "jest": {
     "preset": "react-native"
