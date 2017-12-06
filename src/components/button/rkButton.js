@@ -117,10 +117,7 @@ import {RkComponent} from '../rkComponent'
  * `circle`, `small`, `medium`, `large`, `xlarge`, `clear`, `stretch`
  * @property {style} style - Style for button container
  * @property {style} contentStyle - Style for each button's children
- * @property {function} onPress - Called when the touch is released, but not if cancelled.
- * @property {function} onPressIn - Same as `TouchableWithoutFeedback.onPressIn`
- * @property {function} onPressOut - Same as `TouchableWithoutFeedback.onPressOut`
- * @property {function} onLongPress - Called when the touch is released and is longer than usual press, but not if cancelled
+ * @property {TouchableOpacity.props} props - All `TouchableOpacity` props also applied to `RkButton`
  */
 
 export class RkButton extends RkComponent {
@@ -164,17 +161,10 @@ export class RkButton extends RkComponent {
   }
 
   render() {
-    let a = this.context;
     let {container, content} = super.defineStyles();
-    let touchableProps = {
-      onPress: this.props.onPress,
-      onPressIn: this.props.onPressIn,
-      onPressOut: this.props.onPressOut,
-      onLongPress: this.props.onLongPress
-    };
-
+    let {style, ...touchableProps} = this.props;
     return (
-      <TouchableOpacity style={[container, this.props.style]} {...touchableProps}>
+      <TouchableOpacity style={[container, style]} {...touchableProps}>
         {this.props.children && this._renderChildren(content)}
       </TouchableOpacity>
     );
