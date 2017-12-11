@@ -57,18 +57,19 @@ import {RkOptionsList} from './rkOptionsList';
  * ```
  *
  *
- * @styles Available properties for defining new rkTypes:
- * - `backgroundColor` : Background color of full screen when modal window is visible
- * - `windowBackgroundColor` : Background color of modal window
- * - `windowBorderRadius` : Border radius of modal window
- * - `windowBorderWidth` : Border width of modal window
- * - `windowBorderColor` : Border color of modal window
- * - `cancelBorderColor` : Border color of cancel button
- * - `confirmBorderColor` : Border color of confirm button
- * - `highlightBorderTopColor` : Top border color of highlight option
- * - `highlightBorderBottomColor` : Bottom border color of highlight option
- * - `highlightBorderTopWidth` : Top border width of highlight option
- * - `highlightBorderBottomWidth` : Bottom border width of highlight option
+ * @styles Available style properties:
+ * - `backgroundColor` : Background color of full screen when modal window is visible. Applied for 'modalContentBlock' component.
+ * - `windowBackgroundColor` : Background color of modal window. Applied for 'modalContentBlock' component.
+ * - `windowBorderRadius` : Border radius of modal window. Applied for 'modalContentBlock' component.
+ * - `windowBorderWidth` : Border width of modal window. Applied for 'modalContentBlock' component.
+ * - `windowBorderColor` : Border color of modal window. Applied for 'modalContentBlock' component.
+ * - `cancelBorderColor` : Border color of cancel button. Applied for 'cancelButtonBlock' component.
+ * - `confirmBorderColor` : Border color of confirm button. Applied for 'confirmButtonBlock' component.
+ * - `highlightBorderTopColor` : Top border color of highlight option. Applied for 'highlightBlock' component.
+ * - `highlightBorderBottomColor` : Bottom border color of highlight option. Applied for 'highlightBlock' component.
+ * - `highlightBorderTopWidth` : Top border width of highlight option. Applied for 'highlightBlock' component.
+ * - `highlightBorderBottomWidth` : Bottom border width of highlight option. Applied for 'highlightBlock' component.
+ * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
  *
  * @example Advanced Styling
@@ -95,7 +96,7 @@ import {RkOptionsList} from './rkOptionsList';
  * ```
  *
  * @styles Available components for advanced styling:
- * - `modalContainerBlock` : `View` component on full screen. Container for `modalContentBlock`
+ * - `modalContainerBlock` (Default): `View` component on full screen. Container for `modalContentBlock`
  * - `modalContentBlock` : `View` component with modal content. Container for `titleBlock`, `listsContainerBlock` and `buttonsBlockBlock`
  * - `titleBlock` : `RkText` component with title text
  * - `listsContainerBlock` : `View` component with list of options list. Container for `optionListContainer`
@@ -133,15 +134,18 @@ import {RkOptionsList} from './rkOptionsList';
 export class RkPicker extends RkComponent {
   componentName = 'RkPicker';
   typeMapping = {
-    modalContainerBlock: {
-      backgroundColor: 'backgroundColor',
-    },
+    modalContainerBlock: {},
     modalContentBlock: {
       windowBackgroundColor: 'backgroundColor',
       windowBorderRadius: 'borderRadius',
       windowBorderWidth: 'borderWidth',
       windowBorderColor: 'borderColor',
     },
+    titleBlock: {},
+    listsContainerBlock: {},
+    buttonsBlockBlock: {},
+    optionBlock: {},
+    optionListContainer: {},
     cancelButtonBlock: {
       cancelBorderColor: 'borderColor',
     },
@@ -219,8 +223,8 @@ export class RkPicker extends RkComponent {
         visible={this.props.visible}
         animationType={'slide'}
         transparent={true}
-        onRequestClose={() => this.props.onCancel()}
-      >
+        onRequestClose={() => this.props.onCancel()}>
+
         <View style={[modalContainerBlock]}>
           <View style={[modalContentBlock, this.props.style]}>
             <RkText rkType={this.titleTextRkType} style={titleBlock}>{this.props.title}</RkText>

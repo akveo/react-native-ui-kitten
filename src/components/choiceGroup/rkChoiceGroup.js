@@ -7,7 +7,7 @@ import {RkChoice} from '../choice/rkChoice';
 import {RkComponent} from '../rkComponent';
 
 /**
- * `RkChoiceGroup` component is container for elements that can be used as checkboxes or radio buttons
+ * `RkChoiceGroup` component is container for elements that can be used as checkboxes or radio buttons.
  * Used usually in combination with `RkChoice` component.
  * @extends RkComponent
  *
@@ -83,9 +83,8 @@ import {RkComponent} from '../rkComponent';
  * });
  * ```
  *
- * @styles Available properties:
- * - `container` : `View` - root element of `RkChoiceGroup`
- *
+ * @styles Available components:
+ * - `container` (default) : `View` - root element of `RkChoiceGroup`
  *
  * @property {string} rkType - Types for component stylization
  * By default `RkChoiceGroups` supports following types: `bordered`

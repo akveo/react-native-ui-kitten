@@ -32,6 +32,11 @@ export class RkComponent extends React.Component {
   defaultType = 'basic';
 
   /**
+   * {string} Default typeMappingElement for component. Will be taken first element if not defined. Can be overridden in inherited component.
+   */
+  defaultTypeMappingElement = undefined;
+
+  /**
    * Used to collect and compile all rkTypes into styles. Returns object with styles for all internal components.
    * @param {string} additionalTypes - Sometimes inherited component need to apply additional type implicitly.
    * For example - if component state is `selected` component may ask about `selected` type.
@@ -85,24 +90,22 @@ export class RkComponent extends React.Component {
 
   _getTypes(rkTypes) {
     let usedTypes = this._getUsedTypes(rkTypes);
-    let styles = this._getDefaultStyles();
+    let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
+    let styles = {};
+    let baseStyle = componentTypes[this.baseStyle];
+
+    if (baseStyle) {
+        usedTypes = [baseStyle, ...usedTypes];
+    }
 
     usedTypes.forEach((usedType) => {
       for (let key in usedType) {
         if (this.typeMapping.hasOwnProperty(key)) {
-          styles[key] === undefined && (styles[key] = []);
-          for (let styleKey in usedType[key]) {
-            let value = this._getStyleValue(usedType[key][styleKey]);
-            this._mergeStyles(styles[key], styleKey, value);
-          }
+            this.fillElementStyles(styles, key, usedType[key]);
         } else {
-          let complexStyle = this._findComplexStyleByKey(key, this.typeMapping);
-          if (complexStyle) {
-            styles[complexStyle] === undefined && (styles[complexStyle] = []);
-            let styleKey = this.typeMapping[complexStyle][key];
-            let value = this._getStyleValue(usedType[key]);
-            this._mergeStyles(styles[complexStyle], styleKey, value);
-          }
+          let element = this.findTypeMappingElementByKey(key, this.typeMapping)
+              || this.defaultTypeMappingElement || _.keys(this.typeMapping)[0];
+          this.fillElementStyle(styles, element, key, usedType[key]);
         }
       }
     });
@@ -110,7 +113,26 @@ export class RkComponent extends React.Component {
     return styles;
   };
 
-  _findComplexStyleByKey(key, typeMapping) {
+  fillElementStyle(styles, element, key, value) {
+        this.createStyleIfNotExists(styles, element);
+        let styleKey = this.typeMapping[element][key];
+        if (!styleKey)
+          styleKey = key;
+        let styleValue = this._getStyleValue(value);
+        this._mergeStyles(styles[element], styleKey, styleValue);
+  }
+
+  fillElementStyles(styles, element, value) {
+     for (let styleKey in value) {
+         this.fillElementStyle(styles, element, styleKey, value[styleKey])
+     }
+  }
+
+  createStyleIfNotExists(styles, key) {
+    styles[key] === undefined && (styles[key] = []);
+  }
+
+  findTypeMappingElementByKey(key, typeMapping) {
     let resultComplexStyle;
     for (let complexStyle in typeMapping) {
       if (typeMapping[complexStyle].hasOwnProperty(key)) {
@@ -128,20 +150,6 @@ export class RkComponent extends React.Component {
       element[index][styleKey] = value;
     else
       element.push({[styleKey]: value});
-  }
-
-  _getDefaultStyles() {
-    let styles = {};
-    let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
-    let baseStyle = componentTypes[this.baseStyle];
-    let self = this;
-    for (let element in baseStyle) {
-      styles[element] = Object.keys(baseStyle[element]).map(function (key) {
-        let value = self._getStyleValue(baseStyle[element][key]);
-        return {[key]: value};
-      })
-    }
-    return styles;
   }
 
   _getUsedTypes(rkTypes) {

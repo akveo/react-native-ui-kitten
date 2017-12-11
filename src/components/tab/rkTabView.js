@@ -132,11 +132,12 @@ import {RkText} from '../text/rkText'
  *  </RkTabView>
  * ```
  *
- * @styles Available properties:
- *  - `color` : Color of content in header of `RkTabView`. Applied for `content` property
- *  - `backgroundColor` : Background color of tab in header
- *  - `borderWidth` : Width of tab border
- *  - `borderColor` : Color of tab border
+ * @styles Available style properties:
+ *  - `color` : Color of content in header of `RkTabView`. Applied for 'content' component.
+ *  - `backgroundColor` : Background color of tab in header. Applied for 'tabContainer' component.
+ *  - `borderWidth` : Width of tab border. Applied for 'tabContainer' component.
+ *  - `borderColor` : Color of tab border. Applied for 'tabContainer' component.
+ *  - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
  * @example Advanced Styling
  *
@@ -179,7 +180,7 @@ import {RkText} from '../text/rkText'
  * ```
  *
  * @styles Available components:
- * - `container` : `View` - root container of `RkTabView`
+ * - `container` (Default): `View` - root container of `RkTabView`
  * - `headerContainer` : `View` - container for tab headers
  * - `tabContainer` : `TouchableOpacity` - wraps each tab's header content
  * - `content` : `RkText` when `label` prop used as string

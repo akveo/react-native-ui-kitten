@@ -36,8 +36,12 @@ import {RkButton, RkTheme} from 'react-native-ui-kitten';
 let accent = '#ed1c4d';
 
 RkTheme.setType('RkButton', 'accent', {
-  backgroundColor: accent,
-  color: 'white'
+  container: {
+    backgroundColor: accent
+  }
+  content: {
+    color: 'white'
+  }
 });
 
 //...
@@ -45,6 +49,25 @@ RkTheme.setType('RkButton', 'accent', {
 <RkButton rkType='accent'>
   Click me.
 </RkButton>
+```
+
+### Default components, style aliases
+
+All Rk components consist of internal components. For example RkButton it is `TouchableOpacity` with some content. In order to you can control styling of each internal component all Rx components provide special style mapping elements.
+In case of RkButton they are 'container' and 'content'. And you can style them in an explicit way you can see above.
+
+But every Rk component also has a default internal component to which all non-explicit styles will be applied implicitly. Also there are can be defined aliases for some style property.
+In case of RkButton there is 'container' is default and there is exists alias 'color' for 'content'. With this in mind we can re-write code above:
+
+```
+...
+
+RkTheme.setType('RkButton', 'accent', {
+  backgroundColor: accent
+  color: 'white'
+});
+
+...
 ```
 
 ### Platform-dependent styles

@@ -35,8 +35,7 @@ import {RkComponent} from '../rkComponent';
  * - unselected (base)
  * - selected
  * - unselected & disabled
- * - selected & disabled
- * Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
+ * - selected & disabled. Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
  * and `RkChoice` will apply them according to its state.
  * Use the following convention:
  * - `~name` : Unselected state.
@@ -75,16 +74,12 @@ import {RkComponent} from '../rkComponent';
  * <RkChoice disabled selected rkType='semaphore'/>
  * ```
  *
- * @styles Available properties:
- * - `color` : Color of content in `RkChoice`. Applied for `content` property
- * - `backgroundColor` : Background color of `RkChoice`
- * - `borderWidth` : Width of outer border
- * - `borderRadius` : Border radius of `RkChoice`
- * - `borderColor` : Color of border
- * - `width` : Width of `RkChoice`
- * - `height` : Height of `RkChoice`
- * - `content` : Component tree which will be set into `RkChoice`. As `content` you can use text, icon, image etc
- *
+ * @styles Available style properties:
+ * - `color` : Color of content in `RkChoice`. Applied to `inner` component.
+ * - `width` : Width of `RkChoice`. Applied to `inner` component.
+ * - `height` : Height of `RkChoice`. Applied to `inner` component.
+ * - `content` : Component tree which will be set into `RkChoice`. As `content` you can use text, icon, image etc. Applied to `inner` component.
+ * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
  * @example Custom content example
  *
@@ -153,8 +148,8 @@ import {RkComponent} from '../rkComponent';
  * ```
  *
  * @styles Available Components:
- * - `container` : Can be `View` or `TouchableOpacity` depending on using with `RkChoiceGroup` or without
- * - `inner` : Applied to `content` property
+ * - `container` (default): Can be `View` or `TouchableOpacity` depending on using with `RkChoiceGroup` or without.
+ * - `inner` : Applied to components defined in `content` property
  *
  * @property {string} rkType - Types for component stylization
  * By default `RkChoice` supports following types: `clear`, `radio`, `posNeg`
@@ -168,12 +163,7 @@ import {RkComponent} from '../rkComponent';
 export class RkChoice extends RkComponent {
   componentName = 'RkChoice';
   typeMapping = {
-    container: {
-      backgroundColor: 'backgroundColor',
-      borderWidth: 'borderWidth',
-      borderColor: 'borderColor',
-      borderRadius: 'borderRadius',
-    },
+    container: {    },
     inner: {
       color: 'color',
       width: 'width',

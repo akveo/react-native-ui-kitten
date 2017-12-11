@@ -51,12 +51,20 @@ import {RkComponent} from '../rkComponent'
  * ```
  * import {RkTheme} from 'react-native-ui-kitten';
  *
- *  RkTheme.setType('RkButton', 'dark', {
+ * RkTheme.setType('RkButton', 'dark', {
+ *   container: {
+ *      backgroundColor: 'gray',
+ *      borderRadius: 10
+ *   }
+ * });
+ *
+ * // The same because 'container' is default component:
+ * RkTheme.setType('RkButton', 'dark', {
  *   backgroundColor: 'gray',
  *   borderRadius: 10,
  * });
  *
- *  RkTheme.setType('RkButton', 'icon', {
+ * RkTheme.setType('RkButton', 'icon', {
  *   fontSize: 24,
  *   width: 46,
  *   borderRadius: 25
@@ -72,16 +80,10 @@ import {RkComponent} from '../rkComponent'
  *
  * ```
  *
- * @styles Available properties:
- * - `color` : Color of content of `RkButton`. Applies only if content of `RkButton` is `string`
- * - `backgroundColor` : Background color of `RkButton`
- * - `borderWidth` : Width of outer border
- * - `borderRadius` : Border radius of `RkButton`
- * - `borderColor` : Color of border
- * - `fontSize` : Size of content inside. Applied only for first level children of `RkButton`
- * - `width` : Width of `RkButton`
- * - `height` : Height of `RkButton`
- *
+ * @styles Available style properties:
+ * - `color` : Color of content of `RkButton`. Applied to `content` component. Applies only if content of `RkButton` is `string`.
+ * - `fontSize` : Size of content inside. Applied to `content` component. Applies only if content of `RkButton` is `string`.
+ * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
  * @example Advanced Styling
  *
@@ -93,13 +95,13 @@ import {RkComponent} from '../rkComponent'
  * ```
  * RkTheme.setType('RkButton', 'faded', {
  *   content: {
- *     opacity: 0.6,
+ *     opacity: 0.6
  *   }
  * });
  * ```
  *
  * @styles Available components:
- * - `container` : `TouchableOpacity` - container of `RkButton`
+ * - `container` (default): `TouchableOpacity` - container of `RkButton`.
  * - `content` : If you use plain text then `RkText`. If you insert children - then style will not applied
  *
  * @example Inline styling
@@ -123,14 +125,7 @@ import {RkComponent} from '../rkComponent'
 export class RkButton extends RkComponent {
   componentName = 'RkButton';
   typeMapping = {
-    container: {
-      backgroundColor: 'backgroundColor',
-      borderColor: 'borderColor',
-      borderRadius: 'borderRadius',
-      borderWidth: 'borderWidth',
-      width: 'width',
-      height: 'height'
-    },
+    container: {},
     content: {
       color: 'color',
       fontSize: 'fontSize'

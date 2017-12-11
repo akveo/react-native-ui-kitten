@@ -56,21 +56,13 @@ import {RkComponent} from '../rkComponent.js';
  * <RkTextInput label='Login' rkType='success'/>
  * ```
  *
- * @styles Available properties:
- * - `color` : Color of typed text inside `RkTextInput`
- * - `inputBackgroundColor` : Background color of `TextInput` inside `RkTextInput`
- * - `placeholderTextColor` : Color of placeholder text
- * - `labelColor` : Color of label/icon
- * - `labelFontSize` : Font size of label
- * - `backgroundColor` : Background color of `RkTextInput`
- * - `borderWidth` : Width of outer border
- * - `borderRadius` : Border radius of `RkTextInput`
- * - `borderColor` : Color of border
- * - `underlineWidth` : Width of bottom border of component
- * - `underlineColor` : Color of bottom border of component
- * - `width` : Width of `RkTextInput`
- * - `height` : Height of `RkTextInput`
- *
+ * @styles Available style properties:
+ * - `color` : Color of typed text inside `RkTextInput`. Applied for 'input' component.
+ * - `inputBackgroundColor` : Background color of `TextInput` inside `RkTextInput`. Applied for 'input' component.
+ * - `placeholderTextColor` : Color of placeholder text. Applied for 'input' component.
+ * - `labelColor` : Color of label/icon. Applied for 'label' component.
+ * - `labelFontSize` : Font size of label. Applied for 'label' component.
+ * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
  * @example Advanced Styling
  *
@@ -99,7 +91,7 @@ import {RkComponent} from '../rkComponent.js';
  * ```
  *
  * @styles Available components:
- * - `container` : `TouchableOpacity` - container of `RkTextInput`.
+ * - `container` (Default): `TouchableOpacity` - container of `RkTextInput`.
  * - `input` : `TextInput`.
  * - `label` : `Text` or other View tree that you had specified in `label` props.
  *
@@ -132,16 +124,7 @@ export class RkTextInput extends RkComponent {
 
   componentName = 'RkTextInput';
   typeMapping = {
-    container: {
-      borderRadius: 'borderRadius',
-      backgroundColor: 'backgroundColor',
-      borderWidth: 'borderWidth',
-      borderColor: 'borderColor',
-      underlineWidth: 'borderBottomWidth',
-      underlineColor: 'borderBottomColor',
-      height: 'height',
-      width: 'width'
-    },
+    container: {},
     input: {
       color: 'color',
       inputBackgroundColor: 'backgroundColor',

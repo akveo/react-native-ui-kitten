@@ -43,11 +43,6 @@ import {RkComponent} from '../rkComponent.js';
  * <RkText rkType='hero'>Header</RkText>
  * ```
  *
- * @styles Available properties
- * - `color` : Color of text
- * - `backgroundColor` : Background color of `RkText`
- * - `fontSize` : Font size of text
- *
  * @example Advanced Styling
  *
  * It's also possible to implement more detailed styling. `RkText` wraps base `Text` component.
@@ -62,7 +57,7 @@ import {RkComponent} from '../rkComponent.js';
  * ```
  *
  * @styles Available components:
- * - `text` : `Text` - component used to show text.
+ * - `text` (Default): `Text` - component used to show text.
  *
  * @property {string} rkType - Types for component stylization
  * By default RkText supports following types: `primary`, `info`, `warning`, `danger`, `success`, `xxlarge`, `xlarge`,
@@ -73,12 +68,7 @@ import {RkComponent} from '../rkComponent.js';
 export class RkText extends RkComponent {
   componentName = 'RkText';
   typeMapping = {
-    text: {
-      color: 'color',
-      backgroundColor: 'backgroundColor',
-      fontSize: 'fontSize',
-      fontFamily: 'fontFamily'
-    }
+    text: {}
   };
 
   render() {

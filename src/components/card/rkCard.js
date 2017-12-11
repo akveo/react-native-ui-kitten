@@ -89,8 +89,8 @@ import {RkComponent} from "../rkComponent";
  *   </View>
  * </RkCard>
  *
- * @styles Nested element props available for styling:
- * - `container` : Style key for `rkCardContainer`
+ * @styles Nested components available for styling:
+ * - `container` (default): Style key for `rkCardContainer`.
  * - `header` : Style key for `rkCardHeader`
  * - `content` : Style key for `rkCardContent`
  * - `footer` : Style key for `rkCardFooter`

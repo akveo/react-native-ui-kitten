@@ -85,7 +85,7 @@ import {RkTheme} from '../../styles/themeManager';
  * ```
  *
  * @styles Available components:
- * - `img` : `Image` - Image in regular (not modal) mode
+ * - `img` (Default): `Image` - Image in regular (not modal) mode
  * - `imgContainer` : `TouchableWithoutFeedback` - container of `img` in regular (not modal) mode
  * - `modal` : `View` - Root view of `Modal` component
  * - `modalImg` : `Image` - Image in modal mode
