@@ -62,6 +62,8 @@ import {RkComponent} from '../rkComponent.js';
  * - `placeholderTextColor` : Color of placeholder text. Applied for 'input' component.
  * - `labelColor` : Color of label/icon. Applied for 'label' component.
  * - `labelFontSize` : Font size of label. Applied for 'label' component.
+ * - `underlineWidth` : Width of bottom border of component. Applied for 'container' component.
+ * - `underlineColor` : Color of bottom border of component. Applied for 'container' component.
  * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
  * @example Advanced Styling
@@ -124,7 +126,10 @@ export class RkTextInput extends RkComponent {
 
   componentName = 'RkTextInput';
   typeMapping = {
-    container: {},
+    container: {
+      underlineWidth: 'borderBottomWidth',
+      underlineColor: 'borderBottomColor',
+    },
     input: {
       color: 'color',
       inputBackgroundColor: 'backgroundColor',

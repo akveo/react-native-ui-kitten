@@ -24,6 +24,7 @@ export class TabScreen extends Component {
 
   constructor(props) {
     super(props);
+    this.state={text:'Tab 1 Selected'}
   }
 
   render() {
@@ -45,10 +46,16 @@ export class TabScreen extends Component {
         <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
           <RkText rkType='header' style={styles.header}>Material Theme Example</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkTabView rkType="material">
-              <RkTabView.Tab title={'TAB 1'}/>
-              <RkTabView.Tab title={'TAB 2'}/>
-              <RkTabView.Tab title={'TAB 3'}/>
+            <RkTabView rkType="material" tabsUnderContent index='1'>
+              <RkTabView.Tab title={'TAB 1'}>
+                <Image source={require('../img/river.jpeg')}/>
+              </RkTabView.Tab>
+              <RkTabView.Tab title={'TAB 2'}>
+                <Image source={require('../img/sea.jpg')}/>
+              </RkTabView.Tab>
+              <RkTabView.Tab title={'TAB 3'}>
+                <Image source={require('../img/sun.jpg')}/>
+              </RkTabView.Tab>
             </RkTabView>
           </View>
         </View>
@@ -57,8 +64,7 @@ export class TabScreen extends Component {
           <View >
             <RkTabView rkType="material">
               <RkTabView.Tab title={(selected) => {
-                return this._renderMaterialTab(selected, 'TAB 1', (<ImageIcon name='phone'/>))
-              }}/>
+                return this._renderMaterialTab(selected, 'TAB 1', (<ImageIcon name='phone'/>))}}/>
               <RkTabView.Tab title={(selected) => {
                 return this._renderMaterialTab(selected, 'TAB 2', (<ImageIcon name='heart'/>))
               }}/>
@@ -70,9 +76,9 @@ export class TabScreen extends Component {
         </View>
 
         <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
-          <RkText rkType='header' style={styles.header}>Custom Tab Title</RkText>
+          <RkText rkType='header' style={styles.header}>{this.state.text}</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkTabView>
+            <RkTabView onTabChanged={(id) => this.setState({text:'Tab ' + (id + 1) + ' Selected'})}>
               <RkTabView.Tab title={(selected) => {
                 return this._renderCustomTab(selected, 'Tab 1', 'paw')
               }}/>

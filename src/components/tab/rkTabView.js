@@ -183,8 +183,8 @@ import {RkText} from '../text/rkText'
  * - `container` (Default): `View` - root container of `RkTabView`
  * - `headerContainer` : `View` - container for tab headers
  * - `tabContainer` : `TouchableOpacity` - wraps each tab's header content
- * - `content` : `RkText` when `label` prop used as string
- *
+ * - `content` : `RkText` when `title` is simple text. Otherwise is not applied.
+ * - `contentContainer` : `View` - container for tab content
  *
  * @example Inline styling
  *
@@ -207,21 +207,38 @@ import {RkText} from '../text/rkText'
  *  </RkTabView>
  * ```
  *
+ * @example Event of changing of active tab
+ *
+ * You can handle event of active tab changing by using `onTabChanged` function:
+ *
+ * ```
+ *  <RkTabView onTabChanged={(index) => doSomething(index))}>
+ *    <RkTabView.Tab title={'Tab 1'}/>
+ *    <RkTabView.Tab title={'Tab 2'}/>
+ *    <RkTabView.Tab title={'Tab 3'}/>
+ *  </RkTabView>
+ * ```
+ *
  * @property {string} rkType - Types for component stylization. By default RkTabView supports following types: `material`
  * @property {style} style - Style applied to RkTabView container (tabs & content)
  * @property {style} headerContainerStyle - Style applied to container wrapping tabs (not for the content)
  * @property {number} maxVisibleTabs - If set - tabs will be scrollable and only specified number of tabs will be visible.
+ * @property {number} index - If set - index of tab which will be active by default (zero-based).
+ * @property {bool} tabsUnderContent - If set - content will be rendered above of the tabs.
  * @property {string} title - (RkTabView.Tab prop) When type of title is string, title is rendered like Text inside of View. Otherwise title is rendered using function passed to this prop, function can apply isSelected argument and should return React component
  * @property {style} style - (RkTabView.Tab prop) Style applied to RkTabView.Tab content container (used only when label is text)
  * @property {style} styleSelected - (RkTabView.Tab prop) Style applied to RkTabView.Tab label container when tab is selected (used only when label is text)
  * @property {style} innerStyle - (RkTabView.Tab prop) Style applied to RkTabView.Tab label (used only when label is text)
  * @property {style} innerStyleSelected - (RkTabView.Tab prop) Style applied to RkTabView.Tab label when tab is selected (used only when label is text)
+ * @property {function} onTabChanged - Called when active tab was changed
  */
 
 export class RkTabView extends RkComponent {
 
   static Tab = RkTab;
+
   componentName = 'RkTabView';
+
   typeMapping = {
     container: {},
     headerContainer: {},
@@ -233,7 +250,9 @@ export class RkTabView extends RkComponent {
     content: {
       color: 'color',
     },
+    contentContainer: {},
   };
+
   selectedType = 'selected';
 
   constructor(props) {
@@ -241,6 +260,7 @@ export class RkTabView extends RkComponent {
     this.state = {
       index: +props.index || 0
     };
+
     if (this.props.rkTypeSelected) {
       this.selectedType = this.props.rkTypeSelected
     }
@@ -258,32 +278,22 @@ export class RkTabView extends RkComponent {
     this.setState({tabWidth: tabWidth})
   }
 
+  _defineStyles(selected) {
+    if (selected)
+      return this.defineStyles(this.selectedType);
+    return this.defineStyles();
+  }
+
+  _selectTab(id) {
+    if (this.state.index != id) {
+      this.setState({index: +id});
+      this.props.onTabChanged && (typeof this.props.onTabChanged === 'function') && this.props.onTabChanged(id);
+    }
+  }
+
   _getTabs(child) {
     if (!Array.isArray(child)) child = [];
     return child.filter(elem => elem.type === RkTab)
-  }
-
-  _renderTabs(tabs, scrollableHeader) {
-    let contentContainerStyle = scrollableHeader ? {} : {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: scrollableHeader ? 'flex-start' : 'center',
-    };
-    return (
-      <ScrollView
-        onLayout={(e) => {
-          this._onContainerLayout(e, this.props.maxVisibleTabs)
-        }}
-        scrollEnabled={scrollableHeader}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        bounces={false}
-        horizontal={true}
-        contentContainerStyle={contentContainerStyle}
-      >
-        {tabs.map((tab, i) => this._renderTab(tab, i, scrollableHeader))}
-      </ScrollView>
-    )
   }
 
   _renderTab(tab, id, scrollableHeader) {
@@ -313,31 +323,48 @@ export class RkTabView extends RkComponent {
     )
   }
 
-  _defineStyles(selected) {
-    if (selected)
-      return this.defineStyles(this.selectedType);
-    return this.defineStyles();
-  }
-
-  _selectTab(id) {
-    this.setState({
-      index: +id
-    })
+  _renderTabs(tabs, scrollableHeader) {
+    let contentContainerStyle = scrollableHeader ? {} : {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: scrollableHeader ? 'flex-start' : 'center',
+    };
+    return (
+      <ScrollView
+        onLayout={(e) => {
+          this._onContainerLayout(e, this.props.maxVisibleTabs)
+        }}
+        scrollEnabled={scrollableHeader}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        horizontal={true}
+        contentContainerStyle={contentContainerStyle}>
+        {tabs.map((tab, i) => this._renderTab(tab, i, scrollableHeader))}
+      </ScrollView>
+    )
   }
 
   render() {
     let scrollableHeader = !!this.props.maxVisibleTabs;
+    let tabsUnderContent = !!this.props.tabsUnderContent;
     let tabs = this._getTabs(this.props.children);
-    let {headerContainer, container, ...otherStyles} = this.defineStyles();
+    let {headerContainer, container, contentContainer, ...otherStyles} = this.defineStyles();
+
+    let tabsView =
+      <View key='tabsView' style={[headerContainer, this.props.headerContainerStyle]}>
+        {this._renderTabs(tabs, scrollableHeader)}
+      </View>
+
+    let contentView =
+      <View key='contentView' style={contentContainer}>
+        {tabs[this.state.index]}
+      </View>
+
 
     return (
       <View style={[{flex: 1, justifyContent: 'flex-start'}, container, this.props.style]}>
-        <View style={[headerContainer, this.props.headerContainerStyle]}>
-          {this._renderTabs(tabs, scrollableHeader)}
-        </View>
-        <View>
-          {tabs[this.state.index]}
-        </View>
+        {tabsUnderContent ? [contentView, tabsView] : [tabsView, contentView]}
       </View>
     );
   }
