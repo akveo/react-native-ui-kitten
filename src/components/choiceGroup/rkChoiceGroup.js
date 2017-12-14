@@ -29,10 +29,10 @@ import {RkComponent} from '../rkComponent';
  *
  * @example Radio buttons example
  *
- * In order to create radio-like component for `RkChoiceGroup` should be set `radio` prop:
+ * In order to create radio-like component for `RkChoiceGroup` should be set `radio` prop. You can set default selected RkChoice with `selectedIndex` prop:
  *
  * ```
- * <RkChoiceGroup radio>
+ * <RkChoiceGroup selectedIndex={2} radio>
  *   <TouchableOpacity choiceTrigger>
  *     <View style={{flexDirection:'row', alignItems:'center'}}>
  *       <RkChoice rkType='radio'/>
@@ -83,6 +83,15 @@ import {RkComponent} from '../rkComponent';
  * });
  * ```
  *
+ * @example Event of changing of RkChoice state
+ *
+ * You can handle event of changing of RkChoice state by using `onChange` function ('index' arg is zero-based index of the changed RkChoice):
+ *
+ * ```
+ * <RkChoiceGroup radio onChange={(index) => doSomething(index))}>
+    ...
+ * ```
+ *
  * @styles Available components:
  * - `container` (default) : `View` - root element of `RkChoiceGroup`
  *
@@ -91,6 +100,7 @@ import {RkComponent} from '../rkComponent';
  * @property {style} style - Style for root container
  * @property {boolean} radio - Enable radio buttons mode
  * @property {number} selectedIndex - Determines which RkChoice component is checked from radio group
+ * @property {function} onChange - Called when state of RkChoice is changed.
  */
 export class RkChoiceGroup extends RkComponent {
 

@@ -31,6 +31,7 @@ export class ChoiceScreen extends React.Component {
       pikerVisible: false,
       pickedValue: 'Pick Value',
       selectedOption: 0,
+      onChangeHandleText: 'Option 3 selected'
     };
     this.hidePicker = this.hidePicker.bind(this)
     this.handlePickedValue = this.handlePickedValue.bind(this)
@@ -141,9 +142,9 @@ export class ChoiceScreen extends React.Component {
           </View>
         </View>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
-          <RkText rkType='header'>Radio components</RkText>
+          <RkText rkType='header'>{'Radio components - ' + this.state.onChangeHandleText}</RkText>
           <View style={UtilStyles.columnContainer}>
-            <RkChoiceGroup radio>
+            <RkChoiceGroup radio selectedIndex={2} onChange={(index) => this.setState({onChangeHandleText: 'Option ' + (index + 1) + ' selected'})}>
               <TouchableOpacity choiceTrigger>
                 <View style={[styles.radioRow, styles.spaceBottom]}>
                   <RkChoice rkType='radio'/>

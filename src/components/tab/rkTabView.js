@@ -209,7 +209,7 @@ import {RkText} from '../text/rkText'
  *
  * @example Event of changing of active tab
  *
- * You can handle event of active tab changing by using `onTabChanged` function:
+ * You can handle event of active tab changing by using `onTabChanged` function ('index' arg is zero-based index of the activated tab):
  *
  * ```
  *  <RkTabView onTabChanged={(index) => doSomething(index))}>
