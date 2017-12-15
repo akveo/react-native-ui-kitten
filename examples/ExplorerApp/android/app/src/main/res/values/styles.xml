@@ -1,8 +1,0 @@
-<resources>
-
-    <!-- Base application current. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your current here. -->
-    </style>
-
-</resources>

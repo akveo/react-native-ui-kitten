@@ -40,3 +40,5 @@ android/app/libs
 android/keystores/debug.keystore
 docs/docs.json
 docs/output.json
+
+.expo

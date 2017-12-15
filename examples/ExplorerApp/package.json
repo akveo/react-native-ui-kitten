@@ -1,30 +1,30 @@
 {
-  "name": "ExplorerApp",
-  "version": "0.0.1",
+  "name": "ExplorerAppExpo",
+  "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "react-native-scripts": "1.8.1",
+    "jest-expo": "23.0.0",
+    "react-test-renderer": "16.0.0"
+  },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "update-lib": "rm -r node_modules/react-native-ui-kitten && npm install"
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js --watch"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "dependencies": {
+    "expo": "^23.0.4",
+    "react": "16.0.0",
+    "react-native": "0.50.3",
     "prop-types": "^15.5.10",
-    "react": "^16.0.0",
-    "react-native": "^0.50.4",
     "react-native-ui-kitten": "file:../../",
     "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.11"
-  },
-  "devDependencies": {
-    "babel-jest": "17.0.2",
-    "babel-preset-react-native": "1.9.0",
-    "jest": "17.0.3",
-    "react-test-renderer": "15.4.1"
-  },
-  "rnpm":{
-    "assets":["./assets"]
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }
