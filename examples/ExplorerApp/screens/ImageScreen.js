@@ -4,7 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   ListView,
-  Dimensions
+  Dimensions, Alert
 } from 'react-native';
 import {
   RkButton,
@@ -54,7 +54,7 @@ export class ImageScreen extends Component {
         paddingHorizontal: 20
       }}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-          <RkButton rkType='clear small'>
+          <RkButton rkType='clear small' onPress={(x) => Alert.alert('I Like it!')}>
             <Icon name={'heart'} style={styles.buttonIcon}/>
             <RkText rkType='inverse'>18</RkText>
           </RkButton>

@@ -41,10 +41,18 @@ import {RkTheme} from '../../styles/themeManager';
  *    );
  * }
  *
+ * _renderFooter(options){
+ *   return (
+ *     <View>
+ *       <RkButton onPress={(x) => Alert.alert('I Like it!')}>Custom Footer</RkButton>
+ *     </View>
+ *    );
+ * }
+ *
  *  //...
  *
  *  <RkModalImg source={require('../img/river.jpeg')}
- *    renderHeader={this._renderHeader}/>
+ *    renderHeader={this._renderHeader} renderFooter={this._renderFooter}/>
  * ```
  *
  * @example Gallery
