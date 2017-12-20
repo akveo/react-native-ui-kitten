@@ -14,73 +14,106 @@ export const RkChoiceTypes = (theme) => {
         alignSelf: 'flex-start',
       },
       inner: {
-        width: 26,
-        height: 26,
+        width: 20,
+        height: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        content: (<View/>),
+        imageSource: () => require('../../assets/img/choice/empty.png'),
+        margin: 4
       },
     },
-    selected: {
+    Selected: {
       backgroundColor: theme.colors.screen.primary,
       borderColor: theme.colors.border.base,
-      content: (<View><Image source={require('../../assets/img/choice/whiteCheckMark.png')}/></View>)
+      inner: {
+        imageSource: () => require('../../assets/img/choice/checkMark.png'),
+        tintColor: 'white',
+      }
     },
-    disabled: {},
-    selectedDisabled: {
+    Disabled: {
+      borderColor: theme.colors.border.disabled,
+      inner: {
+        tintColor: theme.colors.border.disabled
+      }
+    },
+    SelectedDisabled: {
       borderColor: theme.colors.border.disabled,
       backgroundColor: theme.colors.screen.disabled,
-      content: (<View><Image source={require('../../assets/img/choice/grayCheckMark.png')}/></View>)
+      inner: {
+        imageSource: () => require('../../assets/img/choice/checkMark.png'),
+        tintColor: theme.colors.border.disabled
+      }
     },
+
     radio: {
       borderRadius: 20,
-      content: (<View/>)
     },
     radioSelected: {
-      borderColor: theme.colors.border.base,
+      borderRadius: 20,
+      backgroundColor: 'transparent',
       inner: {
-        width: 16,
-        height: 16,
-        margin: 5,
-        borderRadius: 10,
-        backgroundColor: theme.colors.screen.primary,
+        imageSource: () => require('../../assets/img/choice/circle.png'),
+        tintColor: theme.colors.screen.primary,
       }
     },
     radioDisabled: {
-      borderColor: theme.colors.border.disabled
+      borderRadius: 20,
     },
     radioSelectedDisabled: {
-      borderColor: theme.colors.border.disabled,
+      borderRadius: 20,
+      backgroundColor: 'transparent',
       inner: {
         width: 16,
         height: 16,
         margin: 5,
         borderRadius: 10,
-        backgroundColor: theme.colors.screen.disabled,
+        imageSource: () => require('../../assets/img/choice/circle.png'),
       }
     },
 
     posNeg: {
       borderWidth: 0,
-      content: (<View><Image source={require('../../assets/img/choice/crossMark.png')}/></View>),
+      inner: {
+        imageSource: () => require('../../assets/img/choice/crossMark.png'),
+        tintColor: '#ed1c4d'
+      }
     },
     posNegSelected: {
-      content: (<View><Image source={require('../../assets/img/choice/greenCheckMark.png')}/></View>),
+      borderWidth: 0,
+      backgroundColor: 'transparent',
+      inner: {
+        tintColor: '#22c93d'
+      }
     },
     posNegDisabled: {
-      content: (<View><Image source={require('../../assets/img/choice/grayCrossMark.png')}/></View>),
+      borderWidth: 0,
+      inner: {
+        imageSource: () => require('../../assets/img/choice/crossMark.png')
+      }
     },
     posNegSelectedDisabled: {
-      content: (<View><Image source={require('../../assets/img/choice/grayCheckMark.png')}/></View>),
+      borderWidth: 0,
+      backgroundColor: 'transparent',
     },
+
     clear: {
       borderWidth: 0,
     },
     clearSelected: {
-      content: (<View><Image source={require('../../assets/img/choice/greenCheckMark.png')}/></View>),
+      borderWidth: 0,
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      inner: {
+        tintColor: '#22c93d',
+      }
+    },
+    clearDisabled: {
+      borderWidth: 0,
     },
     clearSelectedDisabled: {
-      content: (<View><Image source={require('../../assets/img/choice/grayCheckMark.png')}/></View>),
+      borderWidth: 0,
+      borderColor: 'transparent',
+      backgroundColor: 'transparent',
     }
   });
 };

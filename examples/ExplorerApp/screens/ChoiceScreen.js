@@ -3,15 +3,13 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import {
   RkText,
   RkChoiceGroup,
   RkChoice,
-  RkTheme,
-  RkSeparator,
-  RkButton,
+  RkTheme
 } from 'react-native-ui-kitten';
 import {UtilStyles} from '../style/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -182,6 +180,14 @@ export class ChoiceScreen extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
+          <TouchableOpacity style={{padding: 23}} onPress={() => this.showCustomExamplesScreen()}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <RkText>Customization Examples</RkText>
+              <View style={{flexDirection: 'row'}}>
+                <Icon name={'angle-right'} size={20} style={{marginLeft: 16, opacity: 0.3}}/>
+              </View>
+            </View>
+          </TouchableOpacity>
 
         </View>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
@@ -224,6 +230,18 @@ export class ChoiceScreen extends React.Component {
   showSettingsScreen() {
     const {navigate} = this.props.navigation;
     navigate('Settings', {
+      option: this.state.settingsOption,
+      onChange: (option) => {
+        this.setState({
+          settingsOption: option
+        })
+      }
+    });
+  }
+
+  showCustomExamplesScreen() {
+    const {navigate} = this.props.navigation;
+    navigate('ChoiceCustomization', {
       option: this.state.settingsOption,
       onChange: (option) => {
         this.setState({

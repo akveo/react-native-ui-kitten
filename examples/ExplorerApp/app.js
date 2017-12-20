@@ -17,7 +17,8 @@ const ExplorerApp = StackNavigator({
   Avatar: {screen: Screens.AvatarScreen},
   Input: {screen: Screens.InputScreen},
   Image: {screen: Screens.ImageScreen},
-  Settings: {screen: Screens.SettingsScreen}
+  Settings: {screen: Screens.SettingsScreen},
+  ChoiceCustomization: {screen: Screens.ChoiceCustomizationScreen}
 }, {
   navigationOptions: {
     headerStyle: {

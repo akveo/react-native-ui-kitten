@@ -146,7 +146,7 @@ export class RkComponent extends React.Component {
   _mergeStyles(element, styleKey, value) {
     //merge styles in order to have only one value for each property
     let index = _.findIndex(element, (e) => e.hasOwnProperty(styleKey));
-    if (index > 0)
+    if (index >= 0)
       element[index][styleKey] = value;
     else
       element.push({[styleKey]: value});

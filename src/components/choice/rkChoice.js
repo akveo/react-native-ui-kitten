@@ -2,6 +2,7 @@ import React from 'react';
 import {
   TouchableOpacity,
   View,
+  Image
 } from 'react-native';
 import _ from 'lodash';
 import {RkComponent} from '../rkComponent';
@@ -20,144 +21,136 @@ import {RkComponent} from '../rkComponent';
  * @example Using rkType prop
  *
  * `RkChoice` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
- * There are already some predefined types. Here is example of how to use `rkType`:
+ * There are already some predefined types. Here is example of how to use predefined `rkTypes`:
  *
  * ```
  * <RkChoice rkType='clear' selected={true}/>
  * <RkChoice rkType='posNeg' selected={false}/>
+ * <RkChoice rkType='radio' selected />
  * ```
  *
- * @example Define new rkTypes
+ * @example Definition of new rkTypes
  *
- * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
+ * It's easy and very common to create new types. A starting point for all customization is `RkTheme` object.
  * New rkTypes are defined using `setType` method of `RkTheme`:
  * `RkChoice` is a component which style depends or it's internal state. There are 4 states for this component:
- * - unselected (base)
- * - selected
- * - unselected & disabled
- * - selected & disabled. Each of this state can be configured using `rkTypes`. That means you can define set of correctly named `RkType`s
+ * - `Unselected` (base)
+ * - `Selected`
+ * - `Unselected and disabled`
+ * - `Selected and disabled`. Each of this states can be configured using `rkTypes`. That means you can define set of correctly named `RkTypes`
  * and `RkChoice` will apply them according to its state.
  * Use the following convention:
- * - `~name` : Unselected state.
- * - `~nameSelected` : Selected state.
- * - `~nameDisabled` : Unselected & disabled state.
- * - `~nameSelectedDisabled`: Selected & disabled state.
- * Where `~name` is name of yours `rkType`.
- * One more note: during state change `RkChoice` not replace base `rkType` with new one. It just add correct.
- * So for example `disabled` component will have actually two `rkTypes` - base and disabled.
- * To define new `rkType` you can use predefined properties which will passed to according element inside component:
+ * - `yourRkType` - Unselected state.
+ * - `yourRkTypeSelected` - Selected state.
+ * - `yourRkTypeDisabled` - Unselected & disabled state.
+ * - `yourRkTypeSelectedDisabled` - Selected & disabled state.
+ * You can define just part of this types if you don't need to customize some of them. For example you can create 'myType' and 'myTypeSelected' `rkTypes` and not to define another two types. Those 2 state will be rendered by default (or in according to other RkTypes in your component)
+ * Note: during state change `RkChoice` doesn't replace base `rkType` with new state-based ones.
  *
  * ```
- * RkTheme.setType('RkChoice', 'semaphore', {
- *   backgroundColor:'crimson',
- *   borderWidth:0,
- *   borderRadius:20
+ * RkTheme.setType('RkChoice', 'redCheckMarkSelected', {
+ *   backgroundColor: 'transparent',
+ *   inner: {
+ *     tintColor: 'red',
+ *   }
  * });
  *
- * RkTheme.setType('RkChoice', 'semaphoreSelected', {
- *   backgroundColor: 'chartreuse',
+ * RkTheme.setType('RkChoice', 'magentaCyan', {
+ *   inner: {
+ *     tintColor: 'magenta',
+ *   }
  * });
  *
- * RkTheme.setType('RkChoice', 'semaphoreDisabled', {
- *   backgroundColor: 'darkgray',
+ * RkTheme.setType('RkChoice', 'magentaCyanSelected', {
+ *   inner: {
+ *     tintColor: 'cyan',
+ *   }
  * });
  *
- * RkTheme.setType('RkChoice', 'semaphoreSelectedDisabled', {
- *   backgroundColor: 'lightgray',
+ * RkTheme.setType('RkChoice', 'starSelected', {
+ *   backgroundColor: 'transparent',
+ *   inner: {
+ *     imageSource: () => require('../img/star.png'),
+ *     tintColor: 'green'
+ *   }
  * });
  *
  * //...
  *
- * <RkChoice rkType='semaphore'/>
- * <RkChoice selected rkType='semaphore'/>
- * <RkChoice disabled rkType='semaphore'/>
- * <RkChoice disabled selected rkType='semaphore'/>
+ * <RkChoice rkType='redCheckMark'/>
+ * <RkChoice selected rkType='posNeg magentaCyan'/>
+ * <RkChoice disabled rkType='star'/>
+ * <RkChoice disabled selected rkType='radio star'/>
  * ```
  *
  * @styles Available style properties:
- * - `color` : Color of content in `RkChoice`. Applied to `inner` component.
- * - `width` : Width of `RkChoice`. Applied to `inner` component.
- * - `height` : Height of `RkChoice`. Applied to `inner` component.
- * - `content` : Component tree which will be set into `RkChoice`. As `content` you can use text, icon, image etc. Applied to `inner` component.
+ * - `imageSource` : Source of `Image` component inside `RkChoice`.
  * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
- * @example Custom content example
+ * @example Content customization - replacing image
  *
- *
- *
- * ```
- * import Icon from 'react-native-vector-icons/Ionicons';
- *
- * RkTheme.setType('RkChoice', 'mic', {
- *   backgroundColor: 'darkred',
- *   borderWidth: 0,
- *   borderRadius: 20,
- *   content: (
- *     <View>
- *       <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic-off'}/>
- *     </View>
- *   )
- * });
- *
- * RkTheme.setType('RkChoice', 'micSelected', {
- *   content: (
- *     <View>
- *       <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/>
- *     </View>
- *   )
- * });
- *
- * //...
- *
- * <RkChoice rkType='mic'/>
- * ```
- *
- * @example Advanced Styling
- *
- * It's also possible to implement more detailed styling. `RkChoice` consists from couple of base react component.
- * It's easy to set styles for each component.
- * For example you can add `disabled` and `disabled + selected` `rkType` for previous example
+ * `RkChoice` component consist of `TouchableOpacity` (or `View` if your `RkChoice` is in other touchable component marked as 'choiceTrigger') and `Image` inside it.
+ *  It's possible to customize `RkChoice` to display your own content. It can be achieved in two ways.
+ *  The first one it's just defining your picture to display in `Image` component:
  *
  * ```
- * RkTheme.setType('RkChoice', 'micDisabled', {
- *   inner: {
- *     opacity: 0.7
- *   }
- * });
+ * RkTheme.setType('RkChoice', 'smileColorSelected', {
+ *    borderWidth: 0,
+ *    inner: {
+ *      imageSource: () => require('../img/smile_color.png'),
+ *      tintColor: null,
+ *      margin: 0,
+ *      width: 34,
+ *      height: 34
+ *    }
+ *  });
+ * ```
+ * @example Content customization - rendering your own content
  *
- * RkTheme.setType('RkChoice', 'micSelectedDisabled', {
- *   content: (
- *     <View>
- *       <Icon style={{fontSize: 16, color: 'white'}} name={'ios-mic'}/>
- *     </View>
- *   ),
- *   inner: {
- *     opacity: 0.7
- *   }
- * });
+ * Another way is defining `renderContentFunction` in props of `RkChoice`. This way you can render content of component as you wish,
+ * but the framework will be no longer control and apply rkTypes styling to your own rendered content.
+ * (But for 'container' rkTypes still will be applied).
+ * This function takes the following argument: `{isDisabled: bool, isSelected: bool, rkStyle: object}`. Pay attention to 'rkStyle'.
+ * Although the framework doesn't apply styles to your rendered content it calculates style from your rkTypes for you and passes it in that 'rkStyle' argument. You can apply this style yourself if you wish.
+ *
+ * ```
+ * <RkChoice selected style={{backgroundColor: 'transparent', borderWidth:0}} renderContentFunction={(args) => this._renderCustomContent(args)}/>
+ *
+ * _renderCustomContent(args) {
+ *    if (args.isSelected) {
+ *      return <View style={{flexDirection: 'row'}}>
+ *          <ActivityIndicator/>
+ *          <RkText style={{marginLeft: 4}}>
+ *            Hello custom content!
+ *          </RkText>
+ *        </View>;
+ *    } else {
+ *      <View/>
+ *    }
+ *  }
  * ```
  *
  * @example Inline styling
  *
- * It's possible to set styles inline. Use props `style` for `container` component and `contentStyle` for `content` component.
+ * It's possible to set styles inline. Use props `style` for `container` component and `contentStyle` for `inner` component.
  *
  * ```
  * <RkChoice style={{backgroundColor: 'green'}}
  *    contentStyle={{width: 50, height:50}}
- *    rkType='mic'/>
+ *    rkType='radio'/>
  * ```
  *
  * @styles Available Components:
  * - `container` (default): Can be `View` or `TouchableOpacity` depending on using with `RkChoiceGroup` or without.
- * - `inner` : Applied to components defined in `content` property
+ * - `inner` : `Image` or your own rendered content.
  *
- * @property {string} rkType - Types for component stylization
- * By default `RkChoice` supports following types: `clear`, `radio`, `posNeg`
+ * @property {string} rkType - Types for component stylization. By default `RkChoice` supports following types: `clear`, `radio`, `posNeg`. (And `checkbox` style by default if there is no types specified explicitly).
  * @property {bool} selected - Determines whether component is checked
  * @property {bool} disabled - Determines whether component is disabled
  * @property {function} onPress - Triggered on press
- * @property {style} style - Style for component container
- * @property {style} contentStyle - Style for content inside component
+ * @property {function} renderContentFunction - Function to rendering your own content
+ * @property {style} style - Style for `container` component
+ * @property {style} contentStyle - Style for `inner` component
  */
 
 export class RkChoice extends RkComponent {
@@ -165,16 +158,9 @@ export class RkChoice extends RkComponent {
   typeMapping = {
     container: {    },
     inner: {
-      color: 'color',
-      width: 'width',
-      height: 'height',
-      content: 'content',
+      imageSource: 'imageSource'
     }
   };
-
-  selectedType = 'selected';
-  disabledType = 'disabled';
-  selectedDisabledType = 'selectedDisabled';
 
   constructor(props) {
     super(props);
@@ -182,57 +168,11 @@ export class RkChoice extends RkComponent {
       selected: props.selected || false,
       disabled: props.disabled || false
     };
-
-    this._initStyles();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selected !== this.state.selected) {
       this.setState({selected: nextProps.selected});
-    }
-  }
-
-  render() {
-    let {container, content} = this._defineStyles();
-
-
-    if (this.props.inTrigger) {
-      return (
-        <View style={[container, this.props.style]}>
-          {content}
-        </View>
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          activeOpacity={this.props.disabled ? 1 : 0.2}
-          style={[container, this.props.style]}
-          onPress={(e) => {
-            this._onPress(e)
-          }}>
-          {content}
-        </TouchableOpacity>
-      );
-    }
-  }
-
-  _initStyles() {
-    let base = this.props.rkType ? this.props.rkType.split(" ")[0] : undefined;
-
-    if (base) {
-      this.selectedType = `${base}${_.upperFirst(this.selectedType)}`;
-      this.disabledType = `${base}${_.upperFirst(this.disabledType)}`;
-      this.selectedDisabledType = `${base}${_.upperFirst(this.selectedDisabledType)}`;
-    }
-
-    if (this.props.rkSelectedType) {
-      this.selectedType = this.props.rkSelectedType
-    }
-    if (this.props.rkDisabledType) {
-      this.disabledType = this.props.rkDisabledType
-    }
-    if (this.props.rkSelectedDisabledType) {
-      this.selectedDisabledType = this.props.rkSelectedDisabledType
     }
   }
 
@@ -244,40 +184,51 @@ export class RkChoice extends RkComponent {
     }
   }
 
-  _getContentFromProps() {
-    let propName = 'content';
-    if (this.state.selected) {
-      propName += 'Selected';
-    }
-    if (this.state.disabled) {
-      propName += 'Disabled';
-    }
-    return this.props[propName];
+  _defaultRenderContentFunction(renderArgs) {
+    let imageSource = this.extractNonStyleValue(renderArgs.rkStyle.inner, 'imageSource');
+    return <Image style={[renderArgs.rkStyle.inner, this.props.contentStyle]} source={imageSource}/>
   }
 
   _defineStyles() {
-    let computedTypes = [];
+    let computedTypes = this.props.rkType ? this.props.rkType.split(" ") : [];
+    computedTypes.unshift("");
+
     if (this.state.selected && this.state.disabled) {
-      computedTypes.push(this.selectedDisabledType)
+      computedTypes.forEach((v, k, a) => a[k] += 'SelectedDisabled')
     } else {
       if (this.state.selected)
-        computedTypes.push(this.selectedType);
+        computedTypes.forEach((v, k, a) => a[k] += 'Selected');
       if (this.state.disabled)
-        computedTypes.push(this.disabledType);
+        computedTypes.forEach((v, k, a) => a[k] += 'Disabled');
     }
 
     let {container, inner} = this.defineStyles(_.join(computedTypes, " "));
-    let propsContent = this._getContentFromProps();
-    let contentValue = this.extractNonStyleValue(inner, 'content');
+    let rkChoiceContent = this.props.renderContentFunction
+      ? this.props.renderContentFunction({isDisabled:this.state.disabled, isSelected:this.state.selected, rkStyle: {inner}})
+      : this._defaultRenderContentFunction({isDisabled:this.state.disabled, isSelected:this.state.selected, rkStyle: {inner}});
 
-    let content = React.cloneElement(contentValue, {
-        style: [inner, this.props.contentStyle]
-      }) || (<View/>);
+    return {container, rkChoiceContent};
+  }
 
-    if (propsContent) {
-      content = React.cloneElement(propsContent);
+
+  render() {
+    let {container, rkChoiceContent} = this._defineStyles();
+
+    if (this.props.inTrigger) {
+      return (
+        <View style={[container, this.props.style]}>
+          {rkChoiceContent}
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          activeOpacity={this.props.disabled ? 1 : 0.2}
+          style={[container, this.props.style]}
+          onPress={(e) => {this._onPress(e)}}>
+          {rkChoiceContent}
+        </TouchableOpacity>
+      );
     }
-
-    return {container, content};
   }
 }
