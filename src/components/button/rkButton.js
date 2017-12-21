@@ -54,7 +54,7 @@ import {RkComponent} from '../rkComponent'
  * RkTheme.setType('RkButton', 'dark', {
  *   container: {
  *      backgroundColor: 'gray',
- *      borderRadius: 10
+ *      borderRadius: 10,
  *   }
  * });
  *
@@ -67,7 +67,8 @@ import {RkComponent} from '../rkComponent'
  * RkTheme.setType('RkButton', 'icon', {
  *   fontSize: 24,
  *   width: 46,
- *   borderRadius: 25
+ *   borderRadius: 25,
+ *   hitSlop: {top: 5, left: 5, bottom: 5, right: 5}
  * });
  *
  * //...
@@ -83,6 +84,7 @@ import {RkComponent} from '../rkComponent'
  * @styles Available style properties:
  * - `color` : Color of content of `RkButton`. Applied to `content` component. Applies only if content of `RkButton` is `string`.
  * - `fontSize` : Size of content inside. Applied to `content` component. Applies only if content of `RkButton` is `string`.
+ * - `hitSlop` : hitSlop prop of `TouchableWithoutFeedback`. Will be extracted and applied to `container` props during rendering.
  * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
  *
  * @example Advanced Styling
@@ -125,7 +127,9 @@ import {RkComponent} from '../rkComponent'
 export class RkButton extends RkComponent {
   componentName = 'RkButton';
   typeMapping = {
-    container: {},
+    container: {
+      hitSlop: 'hitSlop'
+    },
     content: {
       color: 'color',
       fontSize: 'fontSize'
@@ -158,6 +162,9 @@ export class RkButton extends RkComponent {
   render() {
     let {container, content} = super.defineStyles();
     let {style, ...touchableProps} = this.props;
+    let hitSlop = this.extractNonStyleValue(container, 'hitSlop');
+    if (hitSlop) touchableProps.hitSlop = hitSlop;
+
     return (
       <TouchableOpacity style={[container, style]} {...touchableProps}>
         {this.props.children && this._renderChildren(content)}

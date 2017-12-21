@@ -82,7 +82,7 @@ export class ButtonScreen extends Component {
             <RkText>rkType props also allow you to define the mass of button.</RkText>
           </View>
           <View style={UtilStyles.columnContainer}>
-            <RkButton rkType='small outline' style={UtilStyles.spaceBottom}>Small</RkButton>
+            <RkButton rkType='small outline hitSlop' style={UtilStyles.spaceBottom}>Small</RkButton>
             <RkButton rkType='medium outline' style={UtilStyles.spaceVertical}>Medium</RkButton>
             <RkButton rkType='large outline' style={UtilStyles.spaceVertical}>Large</RkButton>
             <RkButton rkType='xlarge outline' style={UtilStyles.spaceTop}>Extra Large</RkButton>

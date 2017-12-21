@@ -191,6 +191,10 @@ export let bootstrap = () => {
     }
   });
 
+  RkTheme.setType('RkButton', 'hitSlop', {
+      hitSlop: {top: 5, left: 5, bottom: 5, right: 5}
+  });
+
   RkTheme.setType('RkButton', 'outline-success', {
     backgroundColor: 'transparent',
     borderColor: theme => theme.colors.success,
