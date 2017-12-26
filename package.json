@@ -14,9 +14,6 @@
     "prop-types": "^15.5.10",
     "wolfy87-eventemitter": "^5.1.0"
   },
-  "peerDependencies": {
-    "react-native": ">=0.42"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/akveo/react-native-ui-kitten.git"
