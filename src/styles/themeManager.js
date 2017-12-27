@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import EventEmitter from 'wolfy87-eventemitter'
 import {DefaultTheme} from './defaultTheme';
 import {RkColors} from './color';
 import {TypeManager} from './typeManager';
@@ -15,15 +14,15 @@ class ThemeManager {
     this._currentTheme = this._getDefault();
     this._colors = _.cloneDeep(RkColors);
     this._updatePredefinedStyles();
-    this.emitter = new EventEmitter();
+    this.listeners = [];
   }
 
-  _subscribe(listener) {
-    this.emitter.addListener(themeUpdated, listener);
+  subscribeComponent(obj) {
+    this.listeners.push(obj);
   }
 
-  _unSubscribe(listener) {
-    this.emitter.removeListener(themeUpdated, listener);
+  unsubscribeComponent(obj) {
+    _.pull(this.listeners, obj);
   }
 
   _updatePredefinedStyles() {
@@ -83,7 +82,8 @@ class ThemeManager {
 
     TypeManager.invalidateTypes();
     RkStyleSheet._invalidate();
-    this.emitter.emitEvent(themeUpdated);
+
+    this.listeners.forEach(t => t.forceUpdate());
   }
 
   /**

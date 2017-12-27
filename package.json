@@ -11,8 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "hoist-non-react-statics": "^2.0.0",
-    "prop-types": "^15.5.10",
-    "wolfy87-eventemitter": "^5.1.0"
+    "prop-types": "^15.5.10"
   },
   "repository": {
     "type": "git",

@@ -4629,7 +4629,6 @@ react-native-tab-view@^0.0.70:
   dependencies:
     hoist-non-react-statics "^2.0.0"
     prop-types "^15.5.10"
-    wolfy87-eventemitter "^5.1.0"
 
 react-native-vector-icons@4.3.0:
   version "4.3.0"
@@ -5951,10 +5950,6 @@ winchan@0.1.4:
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
-
-wolfy87-eventemitter@^5.1.0:
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/wolfy87-eventemitter/-/wolfy87-eventemitter-5.2.4.tgz#5021d2952d3611cbcd195149711d9b595cd11d48"
 
 wordwrap@0.0.2:
   version "0.0.2"
