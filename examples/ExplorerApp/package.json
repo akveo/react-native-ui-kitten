@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "expo": "23.0.4",
-    "prop-types": "^15.5.10",
+    "prop-types": "15.5.10",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-native-ui-kitten": "file:../..",

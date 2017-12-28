@@ -11,6 +11,9 @@ export const TabTypes = (theme) => {
         textAlign: 'center',
         color: theme.colors.primary,
         overflow: 'hidden'
+      },
+      contentContainer: {
+        flex: 1
       }
     },
     basic: {
