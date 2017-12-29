@@ -139,6 +139,7 @@ import {RkTheme} from '../../styles/themeManager';
 export class RkModalImg extends RkComponent {
 
   componentName = 'RkModalImg';
+
   typeMapping = {
     img: {},
     header: {},
@@ -150,24 +151,26 @@ export class RkModalImg extends RkComponent {
     modal: {}
   };
 
+  firstOrientationChange = true;
+  needUpdateScroll = false;
+
   constructor(props) {
     super(props);
-    let {height, width} = Dimensions.get('window');
     this.state = {
       opacity: new Animated.Value(1),
       visible: false,
-      width,
-      height,
+      width: undefined,
+      height: undefined,
       index: props.index || 0,
     }
   }
 
   componentDidUpdate() {
     let updateScroll = () => {
-      this.refs.listView.scrollTo({x: +this.props.index * this.state.width, animated: false});
-      this.setState({openUpdate: false, index: +this.props.index});
+      this.refs.listView.scrollTo({x: this.state.index * this.state.width, animated: false});
+      this.needUpdateScroll = false;
     };
-    if (this.state.openUpdate && this.refs.listView) {
+    if (this.needUpdateScroll && this.refs.listView) {
       if (Platform.OS === 'ios') {
         updateScroll();
       } else {
@@ -181,7 +184,6 @@ export class RkModalImg extends RkComponent {
     return <ListView
       ref='listView'
       onScroll={(e) => this._onScroll(e)}
-      style={RkTheme.styles.flex1}
       dataSource={ds.cloneWithRows(source.map((s) => {
         return {img: s}
       }))}
@@ -198,7 +200,7 @@ export class RkModalImg extends RkComponent {
 
   _renderImage(source, props) {
     return (
-      <TouchableWithoutFeedback style={{height: this.state.height, width: this.state.width}}
+      <TouchableWithoutFeedback style={{flex:1}}
                                 onPress={() => this._toggleControls()}>
         <Image source={source} {...props}/>
       </TouchableWithoutFeedback>
@@ -263,11 +265,24 @@ export class RkModalImg extends RkComponent {
     this.setState({visible: false})
   }
 
+  _onOrientationChange() {
+    if (!this.firstOrientationChange) {
+      this.needUpdateScroll = true;
+      this.forceUpdate();
+    } else {
+      this.firstOrientationChange = undefined;
+    }
+  }
+
+  _updateDimensionsState() {
+    let {height, width} = Dimensions.get('window');
+    this.state.height = height;
+    this.state.width = width;
+  }
+
   render() {
     let {
       imgContainerStyle,
-      renderHeader,
-      renderFooter,
       visible,
       animationType,
       transparent,
@@ -301,11 +316,13 @@ export class RkModalImg extends RkComponent {
       headerText
     };
 
-    renderHeader = renderHeader || this._renderHeader.bind(this);
-    renderFooter = renderFooter || this._renderFooter.bind(this);
+    let renderHeader = this.props.renderHeader || this._renderHeader.bind(this);
+    let renderFooter = this.props.renderFooter || this._renderFooter.bind(this);
     animationType = animationType || 'fade';
     transparent = transparent === undefined ? false : transparent;
     visible = visible === undefined ? this.state.visible : visible;
+
+    this._updateDimensionsState();
 
     if (visible) {
       imgProps.style = [imgProps.style,
@@ -323,14 +340,15 @@ export class RkModalImg extends RkComponent {
     return (
       <View>
         <TouchableWithoutFeedback style={[imgContainer, imgContainerStyle]}
-                                  onPress={() => this.setState({visible: true, openUpdate: true})}>
+                                  onPress={() => {this.needUpdateScroll = true; this.setState({visible: true});}}>
           <Image source={basicSource} style={[img, imgStyle]} {...imgProps}/>
         </TouchableWithoutFeedback>
-        <Modal
+        <Modal supportedOrientations={['portrait', 'landscape']}
           onRequestClose={closeImage}
           animationType={animationType}
           transparent={transparent}
-          visible={visible}>
+          visible={visible}
+               onOrientationChange={this._onOrientationChange.bind(this)}>
           <View style={[modal, modalStyle]}>
             { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
             <Animated.View style={[this.styles.header, {opacity: this.state.opacity}]}>
