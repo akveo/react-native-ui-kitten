@@ -11,15 +11,6 @@ import {RkTheme} from '../styles/themeManager.js';
  */
 export class RkComponent extends React.Component {
 
-  constructor(props) {
-    super(props);
-    RkTheme.subscribeComponent(this);
-  }
-
-  componentWillUnmount() {
-    RkTheme.unsubscribeComponent(this);
-  }
-
   /**
    * {string} Name of component. Should be overridden in inherited component.
    */
@@ -104,16 +95,16 @@ export class RkComponent extends React.Component {
     let baseStyle = componentTypes[this.baseStyle];
 
     if (baseStyle) {
-      usedTypes = [baseStyle, ...usedTypes];
+        usedTypes = [baseStyle, ...usedTypes];
     }
 
     usedTypes.forEach((usedType) => {
       for (let key in usedType) {
         if (this.typeMapping.hasOwnProperty(key)) {
-          this.fillElementStyles(styles, key, usedType[key]);
+            this.fillElementStyles(styles, key, usedType[key]);
         } else {
           let element = this.findTypeMappingElementByKey(key, this.typeMapping)
-            || this.defaultTypeMappingElement || _.keys(this.typeMapping)[0];
+              || this.defaultTypeMappingElement || _.keys(this.typeMapping)[0];
           this.fillElementStyle(styles, element, key, usedType[key]);
         }
       }
@@ -123,18 +114,18 @@ export class RkComponent extends React.Component {
   };
 
   fillElementStyle(styles, element, key, value) {
-    this.createStyleIfNotExists(styles, element);
-    let styleKey = this.typeMapping[element][key];
-    if (!styleKey)
-      styleKey = key;
-    let styleValue = this._getStyleValue(value);
-    this._mergeStyles(styles[element], styleKey, styleValue);
+        this.createStyleIfNotExists(styles, element);
+        let styleKey = this.typeMapping[element][key];
+        if (!styleKey)
+          styleKey = key;
+        let styleValue = this._getStyleValue(value);
+        this._mergeStyles(styles[element], styleKey, styleValue);
   }
 
   fillElementStyles(styles, element, value) {
-    for (let styleKey in value) {
-      this.fillElementStyle(styles, element, styleKey, value[styleKey])
-    }
+     for (let styleKey in value) {
+         this.fillElementStyle(styles, element, styleKey, value[styleKey])
+     }
   }
 
   createStyleIfNotExists(styles, key) {
