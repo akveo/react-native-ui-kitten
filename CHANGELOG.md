@@ -54,4 +54,6 @@
 * **rkTabView:** add possibility to place content of tabs above of the tabs. ([ac29043](https://github.com/akveo/react-native-ui-kitten/commit/ac29043))
 
 
+### BREAKING CHANGES
 
+* **rkChoice** specifying of content of component in style property was removed.
