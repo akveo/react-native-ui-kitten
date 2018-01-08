@@ -130,6 +130,7 @@ RkTheme.setType('RkText','primaryBackground',{
 Variable `theme` here is an example of the current theme. So, in case the theme has been switched using `RkTheme.setTheme` function, the `rkType`
  created above will also be changed and all components using this type will be updated as well.
 
+
 Sometimes there is a necessity to use their values for regular components. In this case, you need to use `RkStyleSheet`.
 
 ### Inherit rkTypes
