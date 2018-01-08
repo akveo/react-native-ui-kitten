@@ -11,4 +11,4 @@ If you have to try some your changes made in the library you can use 'update-lib
 Or you can use faster 'copy-lib' if your changes are not related to packages structure.
 ```
 
-You can also try it with the Expo app at https://expo.io/@community/kitten-explorer
+You can also try it with the Expo app at https://expo.io/@akveo/ui-kitten-explorer-app
