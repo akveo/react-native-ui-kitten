@@ -56,4 +56,4 @@
 
 ### BREAKING CHANGES
 
-* **rkChoice** specifying of content of component in style property was removed.
+* **rkChoice:** specifying of content of component in style property was removed.
