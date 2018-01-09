@@ -36,8 +36,12 @@ import {RkButton, RkTheme} from 'react-native-ui-kitten';
 let accent = '#ed1c4d';
 
 RkTheme.setType('RkButton', 'accent', {
-  backgroundColor: accent,
-  color: 'white'
+  container: {
+    backgroundColor: accent
+  }
+  content: {
+    color: 'white'
+  }
 });
 
 //...
@@ -45,6 +49,25 @@ RkTheme.setType('RkButton', 'accent', {
 <RkButton rkType='accent'>
   Click me.
 </RkButton>
+```
+
+### Default components, style aliases
+
+All Rk components consist of internal components. For example RkButton it is `TouchableOpacity` with some content. In order to you can control styling of each internal component all Rx components provide special style mapping elements.
+In case of RkButton they are 'container' and 'content'. And you can style them in an explicit way you can see above.
+
+But every Rk component also has a default internal component to which all non-explicit styles will be applied implicitly. Also there are can be defined aliases for some style property.
+In case of RkButton there is 'container' is default and there is exists alias 'color' for 'content'. With this in mind we can re-write code above:
+
+```
+...
+
+RkTheme.setType('RkButton', 'accent', {
+  backgroundColor: accent
+  color: 'white'
+});
+
+...
 ```
 
 ### Platform-dependent styles
@@ -107,4 +130,93 @@ RkTheme.setType('RkText','primaryBackground',{
 Variable `theme` here is an example of the current theme. So, in case the theme has been switched using `RkTheme.setTheme` function, the `rkType`
  created above will also be changed and all components using this type will be updated as well.
 
+
 Sometimes there is a necessity to use their values for regular components. In this case, you need to use `RkStyleSheet`.
+
+### Inherit rkTypes
+
+You're able to create your custom *rkType*s that based on others *rkType*s.
+Fourth parameter of method *RkTheme.setType()* is array or string with parents *rkType*s.<br/>
+Array format: *['parentType1', 'parentType2']*.<br/>
+String format: *'parentType1 parentType2'*.<br/>
+The properties of *parentType2* override the properties of *parentType1*. Third parameter of method *RkTheme.setType()* using after parents types.
+
+
+Here is the example of creating *rkType* from parents types for rkText:
+
+```
+RkTheme.setType('RkText', 'inherited', {
+    fontSize: 40,
+    text: {
+      fontFamily: robotoLight,
+      lineHeight: {
+        ios: 41,
+        android: 43
+      },
+    }
+  }, "basic danger");
+```
+
+Where *basic* rkType:
+```
+
+basic: {
+    fontSize: theme.fonts.sizes.base,
+    color: theme.colors.text.base,
+    backgroundColor: 'transparent'
+}
+```
+
+And *danger* rkType:
+```
+danger: {
+    color: theme.colors.danger
+}
+```
+
+As result, we have *inherited* rkType:
+```
+inherited: {
+    fontSize: 40,
+    color: theme.colors.danger,
+    backgroundColor: 'transparent'
+    text: {
+      fontFamily: robotoLight,
+      lineHeight: {
+        ios: 45,
+        android: 43
+      },
+    }
+}
+```
+
+### Using extractNonStyleValue() method of RkComponent
+Style before method call:
+
+```
+style: {
+ flex: 1,
+ fontSize: 15,
+ alignSelf: 'center',
+ placeholderTextColor: '#0000008e',
+ marginVertical: 4,
+ marginLeft: 16
+}
+```
+Method call:
+```
+//...
+let placeholderColor = this.extractNonStyleValue(style, 'placeholderTextColor')
+//...
+```
+Style and placeholderColor after method call:
+```
+placeholderColor: '#0000008e'
+style: {
+ flex: 1,
+ fontSize: 15,
+ alignSelf: 'center',
+ marginVertical: 4,
+ marginLeft: 16
+}
+```
