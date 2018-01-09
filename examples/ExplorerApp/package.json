@@ -27,6 +27,10 @@
     "react-native": "0.50.3",
     "react-native-ui-kitten": "file:../..",
     "react-native-vector-icons": "4.3.0",
-    "react-navigation": "1.0.0-beta.22"
+    "react-navigation": "1.0.0-beta.22",
+    "metro-bundler": "0.22.1"
+  },
+  "resolutions": {
+    "uglify-es": "3.2.2"
   }
 }
