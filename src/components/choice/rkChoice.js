@@ -111,7 +111,7 @@ import {RkComponent} from '../rkComponent';
  * but the framework will be no longer control and apply rkTypes styling to your own rendered content.
  * (But for 'container' rkTypes still will be applied).
  * This function takes the following argument: `{isDisabled: bool, isSelected: bool, rkStyle: object}`. Pay attention to 'rkStyle'.
- * Although the framework doesn't apply styles to your rendered content it calculates style from your rkTypes for you and passes it in that 'rkStyle' argument. You can apply this style yourself if you wish.
+ * Although the framework does not apply styles to custom rendered content it calculates style from rkTypes. It is passed to the 'rkStyle' argument and you can apply this style by yourself.
  *
  * ```
  * <RkChoice selected style={{backgroundColor: 'transparent', borderWidth:0}} renderContentFunction={(args) => this._renderCustomContent(args)}/>
