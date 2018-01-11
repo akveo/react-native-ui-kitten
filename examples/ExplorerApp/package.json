@@ -21,10 +21,10 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "23.0.4",
+    "expo": "24.0.2",
     "prop-types": "15.5.10",
     "react": "16.0.0",
-    "react-native": "0.50.3",
+    "react-native": "0.51.0",
     "react-native-ui-kitten": "file:../..",
     "react-native-vector-icons": "4.3.0",
     "react-navigation": "1.0.0-beta.22",
