@@ -201,16 +201,19 @@ export class RkModalImg extends RkComponent {
   _renderImage(source, props) {
     return (
       <TouchableWithoutFeedback style={{flex:1}}
-                                onPress={() => this._toggleControls()}>
+                                onPress={() => this._toggleControls()}
+                                onPressIn={() => this.pressActive = true}>
         <Image source={source} {...props}/>
       </TouchableWithoutFeedback>
     )
   }
 
   _toggleControls() {
-    Animated.timing(this.state.opacity, {
-      toValue: this.state.opacity._value ? 0 : 1
-    }).start()
+    if (this.pressActive) {
+      Animated.timing(this.state.opacity, {
+        toValue: this.state.opacity._value ? 0 : 1
+      }).start()
+    }
   }
 
   _renderFooter(options) {
@@ -259,6 +262,7 @@ export class RkModalImg extends RkComponent {
         index: imageIndex
       })
     }
+    this.pressActive = false;
   }
 
   _closeImage() {
@@ -348,8 +352,8 @@ export class RkModalImg extends RkComponent {
           animationType={animationType}
           transparent={transparent}
           visible={visible}
-               onOrientationChange={this._onOrientationChange.bind(this)}>
-          <View style={[modal, modalStyle]}>
+          onOrientationChange={this._onOrientationChange.bind(this)}>
+          <View style={[modal, modalStyle]} onLayout={Platform.OS === 'ios' ? null : this._onOrientationChange.bind(this)}>
             { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
             <Animated.View style={[this.styles.header, {opacity: this.state.opacity}]}>
               {renderHeader({closeImage, pageNumber, totalPages})}
