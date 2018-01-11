@@ -221,7 +221,7 @@ export class RkPicker extends RkComponent {
     return (
       <Modal
         visible={this.props.visible}
-        animationType={'slide'}
+        animationType={'fade'}
         transparent={true}
         onRequestClose={() => this.props.onCancel()}>
 
