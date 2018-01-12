@@ -37,13 +37,16 @@ import {RkComponent} from '../rkComponent';
  * - `Unselected` (base)
  * - `Selected`
  * - `Unselected and disabled`
- * - `Selected and disabled`. Each of this states can be configured using `rkTypes`. That means you can define set of correctly named `RkTypes`
+ * - `Selected and disabled`.
+ *
+ * Each of this states can be configured using `rkTypes`. That means you can define set of correctly named `RkTypes`
  * and `RkChoice` will apply them according to its state.
  * Use the following convention:
  * - `yourRkType` - Unselected state.
  * - `yourRkTypeSelected` - Selected state.
  * - `yourRkTypeDisabled` - Unselected & disabled state.
  * - `yourRkTypeSelectedDisabled` - Selected & disabled state.
+ *
  * You can define just part of this types if you don't need to customize some of them. For example you can create 'myType' and 'myTypeSelected' `rkTypes` and not to define another two types. Those 2 state will be rendered by default (or in according to other RkTypes in your component)
  * Note: during state change `RkChoice` doesn't replace base `rkType` with new state-based ones.
  *
