@@ -5,12 +5,11 @@ import {
   Image,
   Text,
   Modal,
-  ListView,
   Animated,
   Dimensions,
-  Platform
+  Platform,
+  FlatList
 } from 'react-native';
-import _ from 'lodash';
 import {RkButton} from '../button/rkButton';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
@@ -151,7 +150,6 @@ export class RkModalImg extends RkComponent {
     modal: {}
   };
 
-  firstOrientationChange = true;
   needUpdateScroll = false;
 
   constructor(props) {
@@ -166,54 +164,38 @@ export class RkModalImg extends RkComponent {
   }
 
   componentDidUpdate() {
-    let updateScroll = () => {
-      this.refs.listView.scrollTo({x: this.state.index * this.state.width, animated: false});
+    if (this.needUpdateScroll && this.refs.list) {
+      this.refs.list.scrollToOffset({offset: this.state.index * this.state.width, animated: false});
       this.needUpdateScroll = false;
-    };
-    if (this.needUpdateScroll && this.refs.listView) {
-      if (Platform.OS === 'ios') {
-        updateScroll();
-      } else {
-        _.delay(updateScroll, 100);
-      }
     }
   }
 
   _renderList(source, index, props) {
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    return <ListView
-      ref='listView'
-      onScroll={(e) => this._onScroll(e)}
-      dataSource={ds.cloneWithRows(source.map((s) => {
-        return {img: s}
-      }))}
-      renderRow={(source) => this._renderImage(source.img, props)}
+    return <FlatList
+      ref='list'
+      data={Array.from(this.props.source)}
+      renderItem={({item}) => this._renderImage(item, props)}
       horizontal
       pagingEnabled
-      renderSeparator={() => null}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
-      directionalLockEnabled
-      scrollEventThrottle={100}
+      keyExtractor={(item, index) => index}
+      extraData={this.state}
+      onScroll={(e) => this._onScroll(e)}
     />
   }
 
   _renderImage(source, props) {
     return (
       <TouchableWithoutFeedback style={{flex:1}}
-                                onPress={() => this._toggleControls()}
-                                onPressIn={() => this.pressActive = true}>
+                                onPress={() => this._toggleControls()}>
         <Image source={source} {...props}/>
       </TouchableWithoutFeedback>
     )
   }
 
   _toggleControls() {
-    if (this.pressActive) {
       Animated.timing(this.state.opacity, {
         toValue: this.state.opacity._value ? 0 : 1
       }).start()
-    }
   }
 
   _renderFooter(options) {
@@ -262,20 +244,15 @@ export class RkModalImg extends RkComponent {
         index: imageIndex
       })
     }
-    this.pressActive = false;
   }
 
   _closeImage() {
-    this.setState({visible: false})
+    this.setState({visible: false});
   }
 
   _onOrientationChange() {
-    if (!this.firstOrientationChange) {
       this.needUpdateScroll = true;
       this.forceUpdate();
-    } else {
-      this.firstOrientationChange = undefined;
-    }
   }
 
   _updateDimensionsState() {
