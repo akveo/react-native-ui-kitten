@@ -29,6 +29,10 @@ export class ComponentsScreen extends Component {
         route: 'Button',
       },
       {
+        title: 'Switches',
+        route: 'Switch',
+      },
+      {
         title: 'Selectable Components',
         route: 'Choice'
       },

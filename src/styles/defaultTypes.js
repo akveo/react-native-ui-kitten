@@ -13,6 +13,6 @@ export const DefaultTypes = (theme) => {
     RkAvoidKeyboard: ComponentTypes.RkAvoidKeyboardTypes(theme),
     RkPicker: ComponentTypes.RkPickerTypes(theme),
     RkOptionsList: ComponentTypes.RkPickerTypes(theme),
+    RkSwitch: ComponentTypes.RkSwitchTypes(theme),
   })
-
 };

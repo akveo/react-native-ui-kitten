@@ -227,6 +227,21 @@ export let bootstrap = () => {
 
   //endregion
 
+  // region RkSwitches Types
+
+  RkTheme.setType('RkSwitch', 'redTint', {
+      tintColor: theme => theme.colors.button.danger,
+      onTintColor: theme => theme.colors.button.danger,
+  });
+
+  RkTheme.setType('RkSwitch', 'lightGreenThumb', {
+      thumbTintColor: '#90ff6b',
+      margin: 10
+  });
+
+
+  //endregion
+
   RkTheme.setType('RkTab', 'basic', {
     inner: {
       fontFamily: robotoMed
