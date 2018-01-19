@@ -3,21 +3,21 @@ import {RkTheme} from './themeManager.js';
 import {Platform} from 'react-native';
 import _ from 'lodash'
 
-export const TypeManager = class {
+export class TypeManager {
   static _userTypes = [];
   static _themedTypes;
   static _themableTypes = {};
 
   static types = (theme) => {
-    if (!this._themedTypes) {
-      this._themedTypes = {};
+    if (!TypeManager._themedTypes) {
+      TypeManager._themedTypes = {};
       _.forOwn(TypeManager._themableTypes, (value, key) => {
-        _.set(this._themedTypes, key, value(theme))
+        _.set(TypeManager._themedTypes, key, value(theme))
       });
 
-      this._themedTypes = _.merge(DefaultTypes(theme), this._themedTypes, TypeManager._userTypes);
+      TypeManager._themedTypes = _.merge(DefaultTypes(theme), TypeManager._themedTypes, TypeManager._userTypes);
     }
-    return this._themedTypes;
+    return TypeManager._themedTypes;
   };
 
   static setType = (element, name, value, parentTypes) => {
@@ -34,7 +34,7 @@ export const TypeManager = class {
   };
 
   static invalidateTypes = () => {
-    this._themedTypes = undefined;
+    TypeManager._themedTypes = undefined;
   };
 
   static _createType = (type, parentTypes, componentName) => {

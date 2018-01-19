@@ -6,8 +6,6 @@ import {
 
 export class RkTab extends React.Component {
 
-  static name = 'tab';
-
   constructor(props) {
     super(props);
   }
