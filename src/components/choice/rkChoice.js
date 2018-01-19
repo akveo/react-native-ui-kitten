@@ -150,7 +150,7 @@ import {RkComponent} from '../rkComponent';
  * @property {string} rkType - Types for component stylization. By default `RkChoice` supports following types: `clear`, `radio`, `posNeg`. (And `checkbox` style by default if there is no types specified explicitly).
  * @property {bool} selected - Determines whether component is checked
  * @property {bool} disabled - Determines whether component is disabled
- * @property {function} onPress - Triggered on press
+ * @property {function} onChange - Triggered on change value
  * @property {function} renderContentFunction - Function to rendering your own content
  * @property {style} style - Style for `container` component
  * @property {style} contentStyle - Style for `inner` component
