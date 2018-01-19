@@ -77,9 +77,13 @@ export class RkSwitch extends RkComponent {
     let {style, onTintColor, thumbTintColor, tintColor, ...restProps} = this.props;
     let {component} = super.defineStyles();
 
-    onTintColor = onTintColor  || this.extractNonStyleValue(component, 'onTintColor');
-    thumbTintColor = thumbTintColor || this.extractNonStyleValue(component, 'thumbTintColor');
-    tintColor = tintColor || this.extractNonStyleValue(component, 'tintColor');
+    let extractedOnTintColor = this.extractNonStyleValue(component, 'onTintColor');
+    let extractedThumbTintColor = this.extractNonStyleValue(component, 'thumbTintColor');
+    let extractedTintColor = this.extractNonStyleValue(component, 'tintColor');
+
+    onTintColor = onTintColor || extractedOnTintColor;
+    thumbTintColor = thumbTintColor || extractedThumbTintColor;
+    tintColor = tintColor || extractedTintColor;
 
     return (
       <View style={[style, component]}>

@@ -13,6 +13,11 @@ const switchHeight = 32;
 const switchWidth = 52;
 const switchOffsetValue = 20;
 const thumbSize = switchHeight - switchBorderWidth * 2;
+const scaleMaxValue = 1;
+const scaleMinValue = 0.01;
+const thumbElevationValue = 5;
+const thumbTransformValue = 1.2;
+const gestureOffsetTresshold = 5;
 
 export class RkSwitch extends RkComponent {
   componentName = 'RkSwitch';
@@ -28,7 +33,7 @@ export class RkSwitch extends RkComponent {
     super(props, context);
     this.thumbAnimation = new Animated.Value(thumbSize);
     this.switchAnimation = new Animated.Value(0);
-    this.ellipseAnimation = props.value ? new Animated.Value(0.01) : new Animated.Value(1);
+    this.ellipseAnimation = props.value ? new Animated.Value(scaleMinValue) : new Animated.Value(scaleMaxValue);
     this.switchAnimationActive = false;
   }
 
@@ -53,20 +58,20 @@ export class RkSwitch extends RkComponent {
       this._stopAnimations();
       return;
     }
-    this._animateThumb(thumbSize * 1.2);
-    this._animateEllipse(this.props.value ? 1 : 0.01);
+    this._animateThumb(thumbSize * thumbTransformValue);
+    this._animateEllipse(this.props.value ? scaleMaxValue : scaleMinValue);
   };
 
   _onPanResponderRelease = (evt, gestureState) => {
     let {disabled, onValueChange} = this.props;
 
     if (!disabled) {
-      if ((!this.props.value && gestureState.dx > -5) || (this.props.value && gestureState.dx < 5)) {
+      if ((!this.props.value && gestureState.dx > -gestureOffsetTresshold) || (this.props.value && gestureState.dx < gestureOffsetTresshold)) {
         if (onValueChange) {
           this._toggleSwitch(onValueChange);
         }
       } else {
-        this._animateEllipse(this.props.value ? 0.01 : 1);
+        this._animateEllipse(this.props.value ? scaleMinValue : scaleMaxValue);
       }
     }
 
@@ -77,7 +82,7 @@ export class RkSwitch extends RkComponent {
     Animated.timing(this.switchAnimation).stop();
     Animated.timing(this.ellipseAnimation).stop();
     Animated.timing(this.thumbAnimation).stop();
-    this.ellipseAnimation.setValue(this.props.value ? 0.01 : 1);
+    this.ellipseAnimation.setValue(this.props.value ? scaleMinValue : scaleMaxValue);
   }
 
   _toggleSwitch = (callback = () => null) => {
@@ -123,8 +128,9 @@ export class RkSwitch extends RkComponent {
     ).start()
   };
 
-  _getSwitchColor(onTintColor, propName, component, defaultColor) {
-    return onTintColor || this.extractNonStyleValue(component, propName) || defaultColor;
+  _getSwitchColor(onTintColor, propName, component) {
+    let componentColor = this.extractNonStyleValue(component, propName);
+    return onTintColor || componentColor;
   }
 
   render() {
@@ -132,9 +138,9 @@ export class RkSwitch extends RkComponent {
     let {style, onTintColor, thumbTintColor, tintColor, ...restProps} = this.props;
     let {component} = this.defineStyles();
 
-    onTintColor = this._getSwitchColor(onTintColor, 'onTintColor', component, '#53d669');
-    thumbTintColor = this._getSwitchColor(thumbTintColor, 'thumbTintColor', component, '#ffffff');
-    tintColor = this._getSwitchColor(tintColor, 'tintColor', component, '#e5e5e5');
+    onTintColor = this._getSwitchColor(onTintColor, 'onTintColor', component);
+    thumbTintColor = this._getSwitchColor(thumbTintColor, 'thumbTintColor', component);
+    tintColor = this._getSwitchColor(tintColor, 'tintColor', component);
 
     let interpolatedTintColor = this.switchAnimation.interpolate({
       inputRange: value ? [-switchOffsetValue, 0] : [0, switchOffsetValue],
@@ -143,7 +149,7 @@ export class RkSwitch extends RkComponent {
 
     let returnScale = this.switchAnimation.interpolate({
       inputRange: [-switchOffsetValue, 0],
-      outputRange: [1, 0.01]
+      outputRange: [scaleMaxValue, scaleMinValue]
     });
 
     return (
@@ -163,7 +169,7 @@ export class RkSwitch extends RkComponent {
             transform: [{translateX: this.switchAnimation}],
             borderColor: interpolatedTintColor,
             backgroundColor: thumbTintColor,
-            elevation: this.props.disabled ? 0 : 5
+            elevation: this.props.disabled ? 0 : thumbElevationValue
           }]}/>
           <Animated.View style={[styles.disableBox, {
             backgroundColor: '#ffffff80',
@@ -200,6 +206,6 @@ const styles = StyleSheet.create({
     width: thumbSize,
     borderWidth: 0,
     borderRadius: thumbSize/2,
-    marginHorizontal: 1.5
+    marginHorizontal: switchBorderWidth
   }
 });
