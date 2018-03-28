@@ -1,9 +1,9 @@
 {
   "name": "react-ui-kitten",
   "version": "1.0.0",
-  "description": "React Native components",
-  "author": "akveo",
-  "homepage": "https://akveo.github.io/react-native-ui-kitten/",
+  "description": "React Native UI Kitten components for the web",
+  "author": "bukharim96",
+  "homepage": "https://github.com/bukharim96/react-ui-kitten/",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,17 @@
   "license": "MIT",
   "dependencies": {
     "hoist-non-react-statics": "^2.0.0",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-native-web": "^0.5.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.1"
   },
   "repository": {
     "type": "git",
