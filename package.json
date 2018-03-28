@@ -1,6 +1,6 @@
 {
-  "name": "react-native-ui-kitten",
-  "version": "3.0.0",
+  "name": "react-ui-kitten",
+  "version": "1.0.0",
   "description": "React Native components",
   "author": "akveo",
   "homepage": "https://akveo.github.io/react-native-ui-kitten/",
@@ -15,9 +15,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/akveo/react-native-ui-kitten.git"
+    "url": "git+https://github.com/bukharim96/react-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
-  }
+    "url": "https://github.com/bukharim96/react-ui-kitten/issues"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "keywords": [
+    "react",
+    "react-ui",
+    "ui",
+    "ui-kitten",
+    "for",
+    "web"
+  ]
 }
