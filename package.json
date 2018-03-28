@@ -1,9 +1,8 @@
 {
   "name": "react-ui-kitten",
   "version": "1.0.0",
-  "description": "React Native components",
-  "author": "akveo",
-  "homepage": "https://akveo.github.io/react-native-ui-kitten/",
+  "description": "React Native UI Kitten for the web",
+  "author": "bukharim96",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,6 +19,7 @@
   "bugs": {
     "url": "https://github.com/bukharim96/react-ui-kitten/issues"
   },
+  "homepage": "https://github.com/bukharim96/react-ui-kitten#readme",
   "directories": {
     "doc": "docs",
     "example": "examples"
