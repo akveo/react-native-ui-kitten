@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   TouchableOpacity,
-} from 'react-native';
+} from 'react-native-web';
 import _ from 'lodash';
 
 import {RkText} from '../text/rkText';

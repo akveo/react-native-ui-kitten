@@ -3,7 +3,7 @@ import {
   Animated,
   Platform,
   Keyboard
-} from 'react-native';
+} from 'react-native-web';
 import {RkComponent} from '../rkComponent';
 
 /**

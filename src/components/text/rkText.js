@@ -3,7 +3,7 @@ import React from 'react';
 
 import {
   Text,
-} from 'react-native';
+} from 'react-native-web';
 
 import {RkComponent} from '../rkComponent.js';
 

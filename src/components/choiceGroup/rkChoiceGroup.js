@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   View,
-} from 'react-native';
+} from 'react-native-web';
 import _ from 'lodash';
 import {RkChoice} from '../choice/rkChoice';
 import {RkComponent} from '../rkComponent';

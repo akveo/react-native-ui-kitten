@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform} from 'react-native-web';
 import _ from 'lodash';
 import {TypeManager} from '../styles/typeManager.js';
 import {RkTheme} from '../styles/themeManager.js';

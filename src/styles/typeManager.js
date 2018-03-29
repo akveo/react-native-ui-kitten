@@ -1,6 +1,6 @@
 import {DefaultTypes} from './defaultTypes.js';
 import {RkTheme} from './themeManager.js';
-import {Platform} from 'react-native';
+import {Platform} from 'react-native-web';
 import _ from 'lodash'
 
 export class TypeManager {

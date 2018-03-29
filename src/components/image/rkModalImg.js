@@ -9,7 +9,7 @@ import {
   Dimensions,
   Platform,
   FlatList
-} from 'react-native';
+} from 'react-native-web';
 import {RkButton} from '../button/rkButton';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
