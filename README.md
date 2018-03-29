@@ -1,43 +1,19 @@
-<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png"/>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bukharim96/pregx/master/assets/react-ui-kitten-banner-1.png" />
+</p>
 
-# react-native-ui-kitten
+<h1 align="center">react-ui-kitten</h1>
 
-react-native-ui-kitten is a framework that contains a set of commonly used UI components styled in a similar way. 
-The main idea of this framework is to move style definitions into a specific place making components reusable and styled in a single way.
-You just focus on business logic and it takes care of visual appearance. 
+`react-ui-kitten` is the web version of `react-native-ui-kitten`, the original project, developed by [Akveo](https://akveo.github.io/). It is an awesome framework that contains a set of commonly used UI components with constant styles across Android, IOS and now the web.
 
-We have also brought a concept similar to CSS classes that will save you time when styling elements. 
-And the most awesome thing: you can change themes on the fly by just passing a different set of variables. 
+I was such a fan of `react-native-ui-kitten`'s UI components, that I decided I'd like to make use of it not only in my `react-native` apps, but also in my web apps.
 
-100% native. Give our kitten a try!
+Great thanks to the `react-native-ui-kitten` developers whom without this project would not be possible.
 
 <img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/master/docs/assets/kittenKit.png"/>
 
 ## Documentation
-Documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).
+Documentation for `react-ui-kitten`  could both be found [here](https://akveo.github.io/react-native-ui-kitten/) at the `react-native-ui-kitten` developers' site.
+**Note**: I haven't altered the framework's core features, so the documentation of the original package will still be relevant to this as well.
 
-## Demo applications
-
-If you want to see how it works you can try [an expo explorer application](https://expo.io/@akveo/ui-kitten-explorer-app) or run it locally from *examples/explorerApp* folder.
-
-There is also [a cool application](https://github.com/akveo/kittenTricks) built using our framework. It's open-source and free!
-
-Don't forget to check them out!
-
-## How can I support the developers?
-- Star our GitHub repo
-- Create pull requests, submit bugs, suggest new features or documentation updates
-- Follow us on [Twitter](https://twitter.com/akveo_inc)
-- Like our page on [Facebook](https://www.facebook.com/akveo/)
-
-## Can I hire you guys?
-Yes! We are available for hire. Visit [our homepage](http://akveo.com/) or simply leave us a message at contact@akveo.com. We will be happy to work with you!
-
-License
--------------
-<a href=/LICENSE.txt target="_blank">MIT</a> license.
-
-### From akveo
-
-Enjoy!
-We're always happy to receive your feedback.
+Enjoy! :)
