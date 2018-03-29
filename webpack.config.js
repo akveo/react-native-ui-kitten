@@ -7,7 +7,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname) + '/dist',
 		publicPath: '/dist',
-		filename: 'react-ui-kitten.js'
+		filename: 'react-ui-kitten.min.js'
 	},
 	
 	module: {
@@ -35,11 +35,12 @@ module.exports = {
 		}
 	},
 
-	/*plugins: [
+	/* Uglify JS */
+	plugins: [
 		new webpack.optimize.UglifyJsPlugin({
 			include: /\.min\.js$/,
 			minimize: true,
 			compress: true
 		})
-	]*/
+	]
 };
