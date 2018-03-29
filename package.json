@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "React Native UI Kitten components for the web",
   "author": "bukharim96",
-  "homepage": "https://github.com/bukharim96/react-ui-kitten/",
+  "homepage": "https://github.com/bukharim96/react-ui-kitten#readme",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -36,7 +36,6 @@
   "bugs": {
     "url": "https://github.com/bukharim96/react-ui-kitten/issues"
   },
-  "homepage": "https://github.com/bukharim96/react-ui-kitten#readme",
   "directories": {
     "doc": "docs",
     "example": "examples"
