@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   View,
   Image
-} from 'react-native';
+} from 'react-native-web';
 import _ from 'lodash';
 import {RkComponent} from '../rkComponent';
 

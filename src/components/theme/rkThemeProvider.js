@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View} from 'react-native-web';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import {RkTheme} from '../../styles/themeManager';
 

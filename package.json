@@ -1,16 +1,33 @@
 {
   "name": "react-ui-kitten",
   "version": "1.0.0",
-  "description": "React Native UI Kitten for the web",
+  "description": "React Native UI Kitten components for the web",
   "author": "bukharim96",
+  "homepage": "https://github.com/bukharim96/react-ui-kitten/",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build",
+    "build": "webpack -d && webpack-dev-server --content-base examples/ --inline --hot --port 8080 --history-api-fallback"
   },
   "license": "MIT",
   "dependencies": {
     "hoist-non-react-statics": "^2.0.0",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-native-web": "^0.5.3"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "file-loader": "^1.1.11",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.1"
   },
   "repository": {
     "type": "git",

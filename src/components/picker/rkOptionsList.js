@@ -7,7 +7,7 @@ import {
   ListView,
   DataSource,
   InteractionManager
-} from 'react-native';
+} from 'react-native-web';
 import {RkOption} from './rkOption';
 import {RkComponent} from '../rkComponent';
 

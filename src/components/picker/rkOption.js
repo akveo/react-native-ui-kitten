@@ -5,7 +5,7 @@ import {
   Modal,
   View,
   FlatList
-} from 'react-native';
+} from 'react-native-web';
 import {RkText} from '../text/rkText';
 import {RkComponent} from '../rkComponent';
 

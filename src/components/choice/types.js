@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Image,
   View
-} from 'react-native';
+} from 'react-native-web';
 
 export const RkChoiceTypes = (theme) => {
   return ({
