@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bukharim96/pregx/master/assets/react-ui-kitten-banner-1.png" />
+  <img src="https://raw.githubusercontent.com/bukharim96/react-ui-kitten/master/assets/react-ui-kitten-banner-1.png" />
 </p>
 
 <h1 align="center">react-ui-kitten</h1>
