@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bukharim96/react-ui-kitten/master/assets/react-ui-kitten-banner-2.png" />
+  <img src="https://raw.githubusercontent.com/bukharim96/react-ui-kitten/master/resources/react-ui-kitten-banner-2.png" />
 </p>
 
 <h1 align="center">react-ui-kitten</h1>
@@ -11,9 +11,11 @@ I was such a fan of `react-native-ui-kitten`'s UI components, that I decided to 
 
 All who find this useful should start and thank the `react-native-ui-kitten` developers - whom without this project would not be possible.
 
-<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/master/docs/assets/kittenKit.png"/>
+I'll be sure to soon release a sample web app with `electron` and this framework in order to display its goodies. In the meantime, here's a desktop chat app built with `react-ui-kitten`:
 
-I'll be sure to soon write a sample web app with this framework in order to display its goodies.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bukharim96/react-ui-kitten/master/resources/react-ui-kitten-electron-app.png" />
+</p>
 
 ## Documentation
 Documentation for `react-ui-kitten`  could be found [here](https://akveo.github.io/react-native-ui-kitten/) at the `react-native-ui-kitten` developers' site.
