@@ -121,6 +121,7 @@ import {RkComponent} from '../rkComponent'
  * `circle`, `small`, `medium`, `large`, `xlarge`, `clear`, `stretch`
  * @property {style} style - Style for button container
  * @property {style} contentStyle - Style for each button's children
+ * @property {Touchable} touchable - Touchable component which'll be rendered instead of TouchableOpacity
  * @property {TouchableOpacity.props} props - All `TouchableOpacity` props also applied to `RkButton`
  */
 
@@ -161,14 +162,15 @@ export class RkButton extends RkComponent {
 
   render() {
     let {container, content} = super.defineStyles();
-    let {style, ...touchableProps} = this.props;
+    let {style, touchable, ...touchableProps} = this.props;
     let hitSlop = this.extractNonStyleValue(container, 'hitSlop');
     if (hitSlop) touchableProps.hitSlop = hitSlop;
+    let Touchable = touchable || TouchableOpacity;
 
     return (
-      <TouchableOpacity style={[container, style]} {...touchableProps}>
+      <Touchable style={[container, style]} {...touchableProps}>
         {this.props.children && this._renderChildren(content)}
-      </TouchableOpacity>
+      </Touchable>
     );
   }
 }
