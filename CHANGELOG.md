@@ -1,3 +1,21 @@
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.0...v3.0.1) (2018-04-25)
+
+
+### Bug Fixes
+
+* **docs:** upgrade docs devDependencies to fix docs AOT build issue ([7d77561](https://github.com/akveo/react-native-ui-kitten/commit/7d77561))
+* **rkModalImage:** images doesn't rotate on android ([d8054e2](https://github.com/akveo/react-native-ui-kitten/commit/d8054e2))
+* **rkModalImg:** fix swipe images in full screen mode on android ([4923bd2](https://github.com/akveo/react-native-ui-kitten/commit/4923bd2))
+* **rkPicker:** change animation type to 'fade' ([c9a9f5c](https://github.com/akveo/react-native-ui-kitten/commit/c9a9f5c))
+
+
+### Features
+
+* **rkButton:** add capability pass custom touchable ([0840df4](https://github.com/akveo/react-native-ui-kitten/commit/0840df4))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/akveo/react-native-ui-kitten/compare/v2.0.1...v3.0.0) (2018-01-08)
 
