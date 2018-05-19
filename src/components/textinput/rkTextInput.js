@@ -180,6 +180,15 @@ export class RkTextInput extends RkComponent {
     inputProps.style = [input, inputStyle];
     inputProps.placeholderTextColor = placeholderColor;
     boxStyle.push(style);
+    
+    let temp=[];
+    for(let i=0;i<boxStyle.length;i++){
+      if(boxStyle[i]!=undefined && !boxStyle[i].fontSize){
+        temp.push(boxStyle[i]); 
+      }
+    }
+    boxStyle = temp;
+    
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
         {label && this._displayLabel(label, labelStyle)}
