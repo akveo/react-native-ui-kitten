@@ -35,6 +35,9 @@ export class ImageScreen extends Component {
       require('../img/river.jpeg'),
       require('../img/sea.jpg'),
       require('../img/sun.jpg'),
+      require('../img/sea.jpg'),
+      require('../img/sun.jpg'),
+      require('../img/sun.jpg'),
     ];
     this.state = {
       ds: ds.cloneWithRows(this._images),
