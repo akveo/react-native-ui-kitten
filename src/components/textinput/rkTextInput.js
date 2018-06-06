@@ -141,13 +141,19 @@ export class RkTextInput extends RkComponent {
     }
   };
 
+  static defaultProps = {
+    editable: true
+  };
+
   constructor(props) {
     super(props);
     this.focusInput = this._focusInput.bind(this);
   }
 
   _focusInput() {
-    this.refs.input.focus();
+    if (this.props.editable) {
+      this.refs.input.focus();
+    }
   }
 
   _displayLabel(label, labelStyle) {
@@ -174,7 +180,7 @@ export class RkTextInput extends RkComponent {
       inputStyle,
       ...inputProps
     } = this.props;
-    let {container:boxStyle, input:input, label:labelS} = this.defineStyles();
+    let {container: boxStyle, input: input, label: labelS} = this.defineStyles();
     let placeholderColor = this.extractNonStyleValue(input, 'placeholderTextColor');
     labelStyle = [labelS, labelStyle];
     inputProps.style = [input, inputStyle];
