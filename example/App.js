@@ -2,8 +2,8 @@ import React from 'react';
 import * as Screens from './screens';
 import {StackNavigator} from 'react-navigation';
 import {bootstrap} from './style/themeBootstrapper'
-import { StatusBar, View, Platform } from 'react-native';
-import { AppLoading, Font } from 'expo';
+import {StatusBar, View, Platform} from 'react-native';
+import {AppLoading, Font} from 'expo';
 
 bootstrap();
 
@@ -29,7 +29,7 @@ const ExplorerApp = StackNavigator({
 });
 
 export default class App extends React.Component {
-  state  = {
+  state = {
     loaded: false,
   };
 
@@ -51,13 +51,13 @@ export default class App extends React.Component {
 
   render() {
     if (!this.state.loaded) {
-      return <AppLoading />;
+      return <AppLoading/>;
     }
 
     return (
       <View style={{flex: 1}}>
-        <ExplorerApp />
-        <StatusBar barStyle="default" />
+        <ExplorerApp/>
+        <StatusBar barStyle="default"/>
       </View>
     );
   }
