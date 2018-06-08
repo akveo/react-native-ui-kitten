@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-native-scripts": "1.14.0",
+    "gulp": "3.9.1",
+    "gulp-watch": "5.0.0",
     "jest-expo": "27.0.0",
+    "react-native-scripts": "1.14.0",
     "react-test-renderer": "16.3.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -20,12 +22,12 @@
   },
   "dependencies": {
     "expo": "27.0.1",
+    "metro-bundler": "0.22.1",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-native-ui-kitten": "3.0.1",
     "react-native-vector-icons": "4.3.0",
-    "react-navigation": "1.5.11",
-    "metro-bundler": "0.22.1"
+    "react-navigation": "1.5.11"
   },
   "resolutions": {
     "uglify-es": "3.2.2"
