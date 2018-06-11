@@ -1,22 +1,18 @@
 import React from 'react';
 import {
-  Text,
-  TouchableHighlight,
-  Modal,
   View,
   ListView,
-  DataSource,
-  InteractionManager
+  InteractionManager,
 } from 'react-native';
-import {RkOption} from './rkOption';
-import {RkComponent} from '../rkComponent';
+import { RkOption } from './rkOption';
+import { RkComponent } from '../rkComponent';
 
 export class RkOptionsList extends RkComponent {
   componentName = 'RkOptionsList';
 
   constructor(props) {
     super(props);
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => true});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => true });
     this.optionHeight = this.props.optionHeight || 30;
     this.optionNumberOnPicker = this.props.optionNumberOnPicker || 3;
     this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
@@ -24,7 +20,7 @@ export class RkOptionsList extends RkComponent {
     this.state = {
       dataSource: ds.cloneWithRows(this.optionsData),
       selectedOption: this.props.selectedOption,
-      ds: ds,
+      ds,
     };
   }
 
@@ -45,7 +41,7 @@ export class RkOptionsList extends RkComponent {
   }
 
   onScrollEndDrag(e, id) {
-    let _e = {
+    const el = {
       nativeEvent: {
         contentOffset: {
           y: e.nativeEvent.contentOffset.y,
@@ -56,13 +52,13 @@ export class RkOptionsList extends RkComponent {
     this.timer && clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       if (!this.dragStart && !this.momentumStart) {
-        this.selectOption(_e, id);
+        this.selectOption(el, id);
       }
     }, 10);
   }
 
   onMomentumScrollEnd(e, id) {
-    let _e = {
+    const _e = {
       nativeEvent: {
         contentOffset: {
           y: e.nativeEvent.contentOffset.y,
@@ -77,8 +73,8 @@ export class RkOptionsList extends RkComponent {
   }
 
   setInitialOptions() {
-    let selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
-    this.setState({selectedOption: this.props.data[selectedIndex]});
+    const selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
+    this.setState({ selectedOption: this.props.data[selectedIndex] });
     InteractionManager.runAfterInteractions(() => this.scrollToIndex(selectedIndex));
     this.props.onSelect(this.state.selectedOption, this.props.id);
   }
@@ -87,7 +83,7 @@ export class RkOptionsList extends RkComponent {
     let expectableIndex = Math.round(array.length / 2);
 
     array.forEach((value, index) => {
-      if (this.compareOptions(value, expectableValue)) expectableIndex = index
+      if (this.compareOptions(value, expectableValue)) expectableIndex = index;
     });
     return expectableIndex;
   }
@@ -98,22 +94,21 @@ export class RkOptionsList extends RkComponent {
   }
 
   scrollToIndex(index) {
-    this.listRef.scrollTo({x: 0, y: index * this.optionHeight, animated: true})
+    this.listRef.scrollTo({ x: 0, y: index * this.optionHeight, animated: true });
   }
 
   updateOptionsData(optionsData, optionNumberOnPicker) {
-    return this.createEmptyArray(optionNumberOnPicker / 2).concat(
-      optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2))
-    );
+    return this.createEmptyArray(optionNumberOnPicker / 2)
+      .concat(optionsData.concat(this.createEmptyArray(optionNumberOnPicker / 2)));
   }
 
   createEmptyArray(arrayLength) {
-    return Array.apply(null, new Array(Math.floor(arrayLength))).map((_, i) => ' ');
+    return Array(...new Array(Math.floor(arrayLength))).map((_, i) => ' ');
   }
 
   selectOption(e, id) {
-    let y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
-    let selectedIndex = Math.round(y / this.optionHeight);
+    const y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
+    const selectedIndex = Math.round(y / this.optionHeight);
     this.setState({
       selectedOption: this.props.data[selectedIndex],
       dataSource: this.state.ds.cloneWithRows(this.optionsData),
@@ -130,18 +125,19 @@ export class RkOptionsList extends RkComponent {
         style={optionBlock}
         optionHeight={this.optionHeight}
         optionRkType={this.props.optionRkType}
-        selectedOptionRkType={this.props.selectedOptionRkType}/>
+        selectedOptionRkType={this.props.selectedOptionRkType}
+      />
     );
   }
 
   render() {
-    let highlightVarStyle = {
+    const highlightVarStyle = {
       top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
       height: this.optionHeight,
     };
     return (
       <View style={this.props.optionListContainerStyle}>
-        <View style={[highlightVarStyle, this.props.highlightBlockStyle]}/>
+        <View style={[highlightVarStyle, this.props.highlightBlockStyle]} />
         <ListView
           bounces={false}
           showsVerticalScrollIndicator={false}
@@ -151,8 +147,9 @@ export class RkOptionsList extends RkComponent {
           onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
           onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
           dataSource={this.state.dataSource}
-          renderRow={(item, sectionID, rowId) => this.renderOption(item, this.props.optionBlockStyle)}
-          enableEmptySections={true}
+          renderRow={(item, sectionID, rowId) =>
+            this.renderOption(item, this.props.optionBlockStyle)}
+          enableEmptySections
           initialListSize={this.optionsData.length}
         />
       </View>

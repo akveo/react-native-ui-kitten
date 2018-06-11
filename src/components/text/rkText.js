@@ -1,11 +1,8 @@
-
 import React from 'react';
 
-import {
-  Text,
-} from 'react-native';
+import { Text } from 'react-native';
 
-import {RkComponent} from '../rkComponent.js';
+import { RkComponent } from '../rkComponent';
 
 /**
  * `RkText` is a component used to render text blocks
@@ -20,7 +17,8 @@ import {RkComponent} from '../rkComponent.js';
  *
  * @example Using rkType prop
  *
- * `RkText` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
+ * `RkText` has `rkType` prop. This prop works similar to CSS-class in web.
+ * It's possible to set more than one type.
  * There are already some predefined types. Here is example of how to use rkType
  *
  * ```
@@ -30,7 +28,8 @@ import {RkComponent} from '../rkComponent.js';
  *
  * @example Define new rkTypes
  *
- * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
+ * It's easy and very common to create new types.
+ * Main point for all customization is `RkTheme` object.
  * New rkTypes are defined using `setType` method of `RkTheme`:
  *
  * ```
@@ -60,7 +59,8 @@ import {RkComponent} from '../rkComponent.js';
  * - `text` (Default): `Text` - component used to show text.
  *
  * @property {string} rkType - Types for component stylization
- * By default RkText supports following types: `primary`, `info`, `warning`, `danger`, `success`, `xxlarge`, `xlarge`,
+ * By default RkText supports following types:
+ * `primary`, `info`, `warning`, `danger`, `success`, `xxlarge`, `xlarge`,
  `large`, `small`, `medium`, `header`, `subtitle`
  * @property {Text.props} props - All `Text` props also applied to `RkText`
  */
@@ -68,16 +68,16 @@ import {RkComponent} from '../rkComponent.js';
 export class RkText extends RkComponent {
   componentName = 'RkText';
   typeMapping = {
-    text: {}
+    text: {},
   };
 
   render() {
-    let {
+    const {
       style,
       children,
       ...textProps
     } = this.props;
-    let styles = this.defineStyles();
+    const styles = this.defineStyles();
     return (
       <Text style={[styles.text, style]} {...textProps}>{children}</Text>
     );

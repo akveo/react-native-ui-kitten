@@ -10,10 +10,10 @@ import {
   Platform,
   FlatList
 } from 'react-native';
-import {RkButton} from '../button/rkButton';
-import {RkText} from '../text/rkText';
-import {RkComponent} from '../rkComponent';
-import {RkTheme} from '../../styles/themeManager';
+import { RkButton } from '../button/rkButton';
+import { RkText } from '../text/rkText';
+import { RkComponent } from '../rkComponent';
+import { RkTheme } from '../../styles/themeManager';
 
 /**
  * `RkModalImg` is extension of basic `Image` that also opens it in full screen on tap.
@@ -165,7 +165,10 @@ export class RkModalImg extends RkComponent {
 
   componentDidUpdate() {
     if (this.needUpdateScroll && this.refs.list) {
-      this.refs.list.scrollToOffset({offset: this.state.index * this.state.width, animated: false});
+      this.refs.list.scrollToOffset({
+        offset: this.state.index * this.state.width,
+        animated: false
+      });
       this.needUpdateScroll = false;
     }
   }
@@ -174,7 +177,7 @@ export class RkModalImg extends RkComponent {
     return <FlatList
       ref='list'
       data={Array.from(this.props.source)}
-      renderItem={({item}) => this._renderImage(item, props)}
+      renderItem={({ item }) => this._renderImage(item, props)}
       horizontal
       pagingEnabled
       keyExtractor={(item, index) => index}
@@ -185,7 +188,7 @@ export class RkModalImg extends RkComponent {
 
   _renderImage(source, props) {
     return (
-      <TouchableWithoutFeedback style={{flex:1}}
+      <TouchableWithoutFeedback style={{ flex: 1 }}
                                 onPress={() => this._toggleControls()}>
         <Image source={source} {...props}/>
       </TouchableWithoutFeedback>
@@ -193,9 +196,9 @@ export class RkModalImg extends RkComponent {
   }
 
   _toggleControls() {
-      Animated.timing(this.state.opacity, {
-        toValue: this.state.opacity._value ? 0 : 1
-      }).start()
+    Animated.timing(this.state.opacity, {
+      toValue: this.state.opacity._value ? 0 : 1
+    }).start()
   }
 
   _renderFooter(options) {
@@ -211,13 +214,13 @@ export class RkModalImg extends RkComponent {
     let headerText = this.styles ? this.styles.headerText : {};
     return (
       <View style={headerContent}>
-        <View style={{flex: 1, alignItems: 'flex-start'}}>
+        <View style={{ flex: 1, alignItems: 'flex-start' }}>
           <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
         </View>
-        <View style={{flex: 1, alignItems: 'center'}}>
+        <View style={{ flex: 1, alignItems: 'center' }}>
           <RkText style={headerText}>{this._renderPageNumbers()}</RkText>
         </View>
-        <View style={{flex: 1}}/>
+        <View style={{ flex: 1 }}/>
       </View>
     );
   }
@@ -247,16 +250,16 @@ export class RkModalImg extends RkComponent {
   }
 
   _closeImage() {
-    this.setState({visible: false});
+    this.setState({ visible: false });
   }
 
   _onOrientationChange() {
-      this.needUpdateScroll = true;
-      this.forceUpdate();
+    this.needUpdateScroll = true;
+    this.forceUpdate();
   }
 
   _updateDimensionsState() {
-    let {height, width} = Dimensions.get('window');
+    let { height, width } = Dimensions.get('window');
     this.state.height = height;
     this.state.width = width;
   }
@@ -321,22 +324,26 @@ export class RkModalImg extends RkComponent {
     return (
       <View>
         <TouchableWithoutFeedback style={[imgContainer, imgContainerStyle]}
-                                  onPress={() => {this.needUpdateScroll = true; this.setState({visible: true});}}>
+                                  onPress={() => {
+                                    this.needUpdateScroll = true;
+                                    this.setState({ visible: true });
+                                  }}>
           <Image source={basicSource} style={[img, imgStyle]} {...imgProps}/>
         </TouchableWithoutFeedback>
         <Modal supportedOrientations={['portrait', 'landscape']}
-          onRequestClose={closeImage}
-          animationType={animationType}
-          transparent={transparent}
-          visible={visible}
-          onOrientationChange={this._onOrientationChange.bind(this)}>
-          <View style={[modal, modalStyle]} onLayout={Platform.OS === 'ios' ? null : this._onOrientationChange.bind(this)}>
-            { Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
-            <Animated.View style={[this.styles.header, {opacity: this.state.opacity}]}>
-              {renderHeader({closeImage, pageNumber, totalPages})}
+               onRequestClose={closeImage}
+               animationType={animationType}
+               transparent={transparent}
+               visible={visible}
+               onOrientationChange={this._onOrientationChange.bind(this)}>
+          <View style={[modal, modalStyle]}
+                onLayout={Platform.OS === 'ios' ? null : this._onOrientationChange.bind(this)}>
+            {Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
+            <Animated.View style={[this.styles.header, { opacity: this.state.opacity }]}>
+              {renderHeader({ closeImage, pageNumber, totalPages })}
             </Animated.View>
-            <Animated.View style={[this.styles.footer, {opacity: this.state.opacity}]}>
-              {renderFooter({closeImage, pageNumber, totalPages})}
+            <Animated.View style={[this.styles.footer, { opacity: this.state.opacity }]}>
+              {renderFooter({ closeImage, pageNumber, totalPages })}
             </Animated.View>
           </View>
         </Modal>

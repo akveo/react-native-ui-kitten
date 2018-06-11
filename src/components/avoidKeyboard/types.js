@@ -1,9 +1,7 @@
-export const RkAvoidKeyboardTypes = (theme) => {
-  return ({
-    _base: {
-      container: {
-        position: 'relative'
-      }
-    }
-  })
-};
+export const RkAvoidKeyboardTypes = () => ({
+  _base: {
+    container: {
+      position: 'relative',
+    },
+  },
+});

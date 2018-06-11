@@ -1,4 +1,4 @@
-export let RkColors = {
+export const RkColors = {
   transparent: 'transparent',
   white: '#fff',
   black: '#000',
@@ -191,5 +191,5 @@ export let RkColors = {
   blueGrey600: '#546e7a',
   blueGrey700: '#455a64',
   blueGrey800: '#37474f',
-  blueGrey900: '#263238'
+  blueGrey900: '#263238',
 };

@@ -1,0 +1,4 @@
+{
+  "extends": "eslint-config-akveo-react",
+  "parser": "babel-eslint"
+}
