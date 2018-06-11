@@ -18,7 +18,7 @@ Documentation for this framework is [here](https://akveo.github.io/react-native-
 
 ## Demo applications
 
-If you want to see how it works you can try [an expo explorer application](https://expo.io/@akveo/ui-kitten-explorer-app) or run it locally from *examples/explorerApp* folder.
+If you want to see how it works you can try [an expo explorer application](https://expo.io/@akveo/ui-kitten-explorer-app) or run it locally from [example](./example) folder.
 
 There is also [a cool application](https://github.com/akveo/kittenTricks) built using our framework. It's open-source and free!
 

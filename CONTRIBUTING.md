@@ -8,6 +8,7 @@ We would love for you to contribute to react-native-ui-kitten and help make it e
  - [Feature Requests](#feature)
  - [Submission Guidelines](#submit-pr)
  - [Coding Rules](#rules)
+ - [Debugging your changes](#debug)
  - [Commit Message Guidelines](#commit)
 
 ## <a name="coc"></a> Code of Conduct
@@ -132,6 +133,11 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
 * All public API methods **must be documented** following JsDoc notation.
+
+## <a name="debug"></a> Debugging your changes
+
+React-native-ui-kitten contains example project which allows you quickly debug your changes.
+See the project in `./example` folder and [guides](example/README.md) to know how we use it.
 
 ## <a name="commit"></a> Commit Message Guidelines
 
