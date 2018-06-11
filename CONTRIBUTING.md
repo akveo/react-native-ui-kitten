@@ -137,7 +137,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 ## <a name="debug"></a> Debugging your changes
 
 React-native-ui-kitten contains example project which allows you quickly debug your changes.
-See the project in `./example` folder and [guides](https://github.com/akveo/react-native-ui-kitten/example/README.md) to know how we use it.
+See the project in `./example` folder and [guides](example/README.md) to know how we use it.
 
 ## <a name="commit"></a> Commit Message Guidelines
 
