@@ -10,10 +10,6 @@ export class RkTab extends React.Component {
     children: undefined,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>{this.props.children}</View>
