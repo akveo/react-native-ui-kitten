@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import { RkTheme } from '../../styles/themeManager';
 
@@ -25,10 +24,6 @@ import { RkTheme } from '../../styles/themeManager';
  */
 export function withRkTheme(Wrapped) {
   class ThemeProvider extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
     componentDidMount() {
       RkTheme.subscribeComponent(this);
     }
@@ -45,5 +40,3 @@ export function withRkTheme(Wrapped) {
   hoistNonReactStatic(ThemeProvider, Wrapped);
   return ThemeProvider;
 }
-
-export var WithRkThemeView = withRkTheme(View);

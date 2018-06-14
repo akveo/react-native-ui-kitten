@@ -298,8 +298,8 @@ export class RkTabView extends RkComponent {
   }
 
   onContainerLayout(e, tabsCount) {
-    const width = e.nativeEvent.layout.width;
-    const tabWidth = width / tabsCount;
+    const { width: layoutWidth } = e.nativeEvent.layout;
+    const tabWidth = layoutWidth / tabsCount;
     this.setState({ tabWidth });
   }
 
@@ -311,15 +311,17 @@ export class RkTabView extends RkComponent {
   }
 
   selectTab(id) {
-    if (this.state.index != id) {
+    if (this.state.index !== id) {
       this.setState({ index: +id });
-      this.props.onTabChanged && (typeof this.props.onTabChanged === 'function') && this.props.onTabChanged(id);
+      if (this.props.onTabChanged && (typeof this.props.onTabChanged === 'function')) {
+        this.props.onTabChanged(id);
+      }
     }
   }
 
   getTabs(child) {
-    if (!Array.isArray(child)) child = [];
-    return child.filter(elem => elem.type === RkTab);
+    const tabs = Array.isArray(child) ? child : [];
+    return tabs.filter(elem => elem.type === RkTab);
   }
 
   renderTab(tab, id, scrollableHeader) {

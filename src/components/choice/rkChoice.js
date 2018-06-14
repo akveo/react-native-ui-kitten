@@ -221,13 +221,19 @@ export class RkChoice extends RkComponent {
     computedTypes.unshift('');
 
     if (this.state.selected && this.state.disabled) {
-      computedTypes.forEach((v, k, a) => a[k] += 'SelectedDisabled');
+      computedTypes.forEach((v, k, a) => {
+        a[k] += 'SelectedDisabled';
+      });
     } else {
       if (this.state.selected) {
-        computedTypes.forEach((v, k, a) => a[k] += 'Selected');
+        computedTypes.forEach((v, k, a) => {
+          a[k] += 'Selected';
+        });
       }
       if (this.state.disabled) {
-        computedTypes.forEach((v, k, a) => a[k] += 'Disabled');
+        computedTypes.forEach((v, k, a) => {
+          a[k] += 'Disabled';
+        });
       }
     }
 

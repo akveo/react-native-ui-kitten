@@ -25,10 +25,11 @@ export class TypeManager {
   };
 
   static setType = (element, name, value, parentTypes) => {
+    let parentTypesValue = parentTypes;
     if (typeof parentTypes === 'string') {
-      parentTypes = parentTypes.split(' ');
+      parentTypesValue = parentTypes.split(' ');
     }
-    const newType = TypeManager.createType(value, parentTypes, element);
+    const newType = TypeManager.createType(value, parentTypesValue, element);
     _.set(TypeManager.userTypes, [[element], [name]], newType);
     TypeManager.invalidateTypes();
   };
@@ -59,30 +60,35 @@ export class TypeManager {
   };
 
   static mergeTypes = (baseType, typeForMerge) => {
-    let typeForMergeValue,
-      baseTypeValue;
-    for (const key in typeForMerge) {
-      baseTypeValue = TypeManager.getStyleValue(baseType[key]);
-      typeForMergeValue = TypeManager.getStyleValue(typeForMerge[key]);
-      if (baseTypeValue) {
-        if (typeof typeForMergeValue === 'object') {
-          typeof baseTypeValue !== 'object' && (baseType[key] = {});
+    let baseStyleValue;
+    let mergeStyleValue;
+    Object.keys(typeForMerge).forEach(key => {
+      baseStyleValue = TypeManager.getStyleValue(baseType[key]);
+      mergeStyleValue = TypeManager.getStyleValue(typeForMerge[key]);
+      if (baseStyleValue) {
+        if (typeof mergeStyleValue === 'object') {
+          if (typeof baseStyleValue !== 'object') {
+            baseType[key] = {};
+          }
           TypeManager.mergeTypes(baseType[key], typeForMerge[key]);
         } else {
-          baseType[key] = typeForMergeValue;
+          baseType[key] = mergeStyleValue;
         }
       } else {
-        baseType[key] = typeForMergeValue;
+        baseType[key] = mergeStyleValue;
       }
-    }
+    });
   };
 
   static getStyleValue = (value) => {
     let styleValue = value;
     if (typeof value === 'object' && value !== null) {
-      styleValue = value.hasOwnProperty(Platform.OS)
-        ? TypeManager.getStyleValue(value[Platform.OS])
-        : Object.create(value);
+      const isPlatformSpecified = Object.prototype.hasOwnProperty.call(value, Platform.OS);
+      if (isPlatformSpecified) {
+        styleValue = TypeManager.getStyleValue(value[Platform.OS]);
+      } else {
+        styleValue = Object.create(value);
+      }
     } else if (typeof value === 'function') {
       styleValue = value(RkTheme.current);
     }

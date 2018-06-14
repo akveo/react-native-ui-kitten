@@ -22,9 +22,8 @@ export class RkOption extends RkComponent {
     const isSelected = this.compareOptions(this.props.data, this.props.selectedOption);
     const rkType = isSelected ? this.selectedOptionRkType : this.optionRkType;
     const styles = [this.props.style, { height: this.optionHeight }];
-    isSelected && styles.push(this.props.selectedStyle);
     if (isSelected) {
-      // alert(2 + ' ' + (this.props.data.value || this.props.data));
+      styles.push(this.props.selectedStyle);
     }
     return (
       <View style={styles}>

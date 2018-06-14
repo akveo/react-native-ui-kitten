@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  TouchableHighlight,
-  Modal,
-  View,
-  FlatList,
-} from 'react-native';
+import { Modal, View } from 'react-native';
 import { RkButton } from '../button/rkButton';
 import { RkText } from '../text/rkText';
 import { RkComponent } from '../rkComponent';
@@ -204,7 +198,7 @@ export class RkPicker extends RkComponent {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.visible !== prevProps.visible) {
       this.setState({
         scrollToSelected: this.props.visible,

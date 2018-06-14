@@ -29,17 +29,17 @@ class ThemeManager {
 
   createColorsStyles(colors) {
     const styleObject = {};
-    for (const colorName in colors) {
-      styleObject[`${colorName}Text`] = {
-        color: colors[colorName],
+    Object.keys(colors).forEach(key => {
+      styleObject[`${key}Text`] = {
+        color: colors[key],
       };
-      styleObject[`${colorName}Bg`] = {
-        backgroundColor: colors[colorName],
+      styleObject[`${key}Bg`] = {
+        backgroundColor: colors[key],
       };
-      styleObject[`${colorName}Border`] = {
-        borderColor: colors[colorName],
+      styleObject[`${key}Border`] = {
+        borderColor: colors[key],
       };
-    }
+    });
     return styleObject;
   }
 

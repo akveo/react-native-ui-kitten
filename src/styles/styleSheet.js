@@ -42,10 +42,10 @@ class ThemedStyleSheet {
   invalidate() {
     patternStyles.forEach((patternObj) => {
       const styles = this.getStyle(patternObj.style);
-      for (const key in styles) {
-        const { id } = _.find(patternObj.computedIds, (o) => o.key === key);
-        objects[id] = styles[key];
-      }
+      Object.keys(styles).forEach(key => {
+        const { id: styleId } = _.find(patternObj.computedIds, (o) => o.key === key);
+        objects[styleId] = styles[key];
+      });
     });
   }
 
@@ -69,12 +69,11 @@ class ThemedStyleSheet {
   create(style) {
     const styles = this.getStyle(style);
     const computedIds = [];
-
-    for (const key in styles) {
-      id++;
+    Object.keys(styles).forEach(key => {
+      id += 1;
       objects[id] = styles[key];
       computedIds.push({ key, id });
-    }
+    });
     patternStyles.push({ style, computedIds });
     return this.wrapToObject(computedIds);
   }

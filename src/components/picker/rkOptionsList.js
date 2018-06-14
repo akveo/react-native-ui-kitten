@@ -12,7 +12,7 @@ export class RkOptionsList extends RkComponent {
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => true });
+    const ds = new ListView.DataSource({ rowHasChanged: () => true });
     this.optionHeight = this.props.optionHeight || 30;
     this.optionNumberOnPicker = this.props.optionNumberOnPicker || 3;
     this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
@@ -24,7 +24,7 @@ export class RkOptionsList extends RkComponent {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.scrollToSelected !== prevProps.scrollToSelected && this.props.scrollToSelected) {
       this.setInitialOptions();
     }
@@ -32,12 +32,16 @@ export class RkOptionsList extends RkComponent {
 
   onScrollBeginDrag() {
     this.dragStart = true;
-    this.timer && clearTimeout(this.timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   }
 
   onMomentumScrollBegin() {
     this.momentumStart = true;
-    this.timer && clearTimeout(this.timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
   }
 
   onScrollEndDrag(e, id) {
@@ -49,7 +53,9 @@ export class RkOptionsList extends RkComponent {
       },
     };
     this.dragStart = false;
-    this.timer && clearTimeout(this.timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
     this.timer = setTimeout(() => {
       if (!this.dragStart && !this.momentumStart) {
         this.selectOption(el, id);
@@ -58,7 +64,7 @@ export class RkOptionsList extends RkComponent {
   }
 
   onMomentumScrollEnd(e, id) {
-    const _e = {
+    const selectionEvent = {
       nativeEvent: {
         contentOffset: {
           y: e.nativeEvent.contentOffset.y,
@@ -66,9 +72,11 @@ export class RkOptionsList extends RkComponent {
       },
     };
     this.momentumStart = false;
-    this.timer && clearTimeout(this.timer);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
     if (!this.dragStart) {
-      this.selectOption(_e, id);
+      this.selectOption(selectionEvent, id);
     }
   }
 
@@ -103,7 +111,7 @@ export class RkOptionsList extends RkComponent {
   }
 
   createEmptyArray(arrayLength) {
-    return Array(...new Array(Math.floor(arrayLength))).map((_, i) => ' ');
+    return Array(...new Array(Math.floor(arrayLength))).map(() => ' ');
   }
 
   selectOption(e, id) {
@@ -132,7 +140,7 @@ export class RkOptionsList extends RkComponent {
 
   render() {
     const highlightVarStyle = {
-      top: (this.optionNumberOnPicker - 1) / 2 * this.optionHeight,
+      top: (this.optionNumberOnPicker - 1) * 0.5 * this.optionHeight,
       height: this.optionHeight,
     };
     return (
@@ -141,14 +149,15 @@ export class RkOptionsList extends RkComponent {
         <ListView
           bounces={false}
           showsVerticalScrollIndicator={false}
-          ref={(flatListRef) => this.listRef = flatListRef}
-          onMomentumScrollBegin={(e) => this.onMomentumScrollBegin()}
+          ref={(ref) => {
+            this.listRef = ref;
+          }}
+          onMomentumScrollBegin={this.onMomentumScrollBegin}
           onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
-          onScrollBeginDrag={(e) => this.onScrollBeginDrag()}
+          onScrollBeginDrag={this.onScrollBeginDrag}
           onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
           dataSource={this.state.dataSource}
-          renderRow={(item, sectionID, rowId) =>
-            this.renderOption(item, this.props.optionBlockStyle)}
+          renderRow={(item) => this.renderOption(item, this.props.optionBlockStyle)}
           enableEmptySections
           initialListSize={this.optionsData.length}
         />

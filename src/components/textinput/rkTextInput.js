@@ -162,7 +162,7 @@ export class RkTextInput extends RkComponent {
 
   focusInput() {
     if (this.props.editable) {
-      this.refs.input.focus();
+      this.inputRef.focus();
     }
   }
 
@@ -174,7 +174,7 @@ export class RkTextInput extends RkComponent {
     }
     return React.cloneElement(label, {
       onPress: (e) => {
-        this.refs.input.focus();
+        this.inputRef.focus();
         label.props.onPress && label.props.onPress(e);
       },
       style: [labelStyle, label.props.style],
@@ -198,7 +198,13 @@ export class RkTextInput extends RkComponent {
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
         {label && this.displayLabel(label, labelStyle)}
-        <TextInput underlineColorAndroid='transparent' ref="input" {...inputProps} />
+        <TextInput
+          underlineColorAndroid='transparent'
+          ref={(inputValue) => {
+            this.inputRef = inputValue;
+          }}
+          {...inputProps}
+        />
       </TouchableOpacity>
     );
   }

@@ -117,22 +117,14 @@ export class RkCard extends RkComponent {
     imgOverlay: {},
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   process(elem, readyStyles) {
-    const isCardAttr = prop => prop.startsWith(RkCard.attrName);
-
-    const styles = [];
-
-    for (const prop in elem.props) {
-      if (isCardAttr(prop)) {
-        styles.push(readyStyles[this.convertAttrToStyle(prop)]);
-      }
+    const props = elem.props || {};
+    const styles = Object.keys(props)
+      .filter(prop => prop.startsWith(RkCard.attrName))
+      .map(prop => readyStyles[this.mapPropAttributeToStyle(prop)]);
+    if (elem.props) {
+      styles.push(elem.props.style);
     }
-
-    if (elem.props) styles.push(elem.props.style);
     return this.copyElement(elem, { style: styles }, readyStyles);
   }
 
@@ -149,7 +141,7 @@ export class RkCard extends RkComponent {
     return React.cloneElement(elem, propsToClone);
   }
 
-  convertAttrToStyle(prop) {
+  mapPropAttributeToStyle(prop) {
     const name = prop.substring(RkCard.attrName.length);
     return name.charAt(0).toLowerCase() + name.slice(1);
   }
@@ -157,8 +149,11 @@ export class RkCard extends RkComponent {
   render() {
     const { container, ...definedStyles } = this.defineStyles();
     const { style, ...viewProps } = this.props;
-    return this.process(<View rkCardContainer style={[container, style]} {...viewProps}>
-      {this.props.children}
-    </View>, definedStyles);
+    return this.process(
+      <View rkCardContainer style={[container, style]} {...viewProps}>
+        {this.props.children}
+      </View>,
+      definedStyles,
+    );
   }
 }
