@@ -1,34 +1,33 @@
-import {RkTheme} from 'react-native-ui-kitten';
-import {AvatarTypes} from '../components/avatarTypes';
+import { RkTheme } from 'react-native-ui-kitten';
+import { AvatarTypes } from '../components/avatarTypes';
 
-let robotoLight = 'Roboto-Light';
-let robotoMed = 'Roboto-Medium';
+const robotoLight = 'Roboto-Light';
+const robotoMed = 'Roboto-Medium';
 
-export let bootstrap = () => {
-
+export const bootstrap = () => {
   RkTheme.registerComponent('Avatar', AvatarTypes);
   RkTheme.setColor('accent', '#ed1c4d');
 
-  //region RkChoice Types
+  // region RkChoice Types
 
   RkTheme.setType('RkChoice', 'magentaCyan', {
     inner: {
       tintColor: 'magenta',
-    }
+    },
   });
 
   RkTheme.setType('RkChoice', 'magentaCyanSelected', {
     inner: {
       tintColor: 'cyan',
-    }
+    },
   });
 
   RkTheme.setType('RkChoice', 'starSelected', {
     backgroundColor: 'transparent',
     inner: {
       imageSource: () => require('../img/star.png'),
-      tintColor: '#00ad1c'
-    }
+      tintColor: '#00ad1c',
+    },
   });
 
   RkTheme.setType('RkChoice', 'kitten', {
@@ -36,8 +35,8 @@ export let bootstrap = () => {
     inner: {
       margin: 0,
       width: 28,
-      height: 28
-    }
+      height: 28,
+    },
   });
 
   RkTheme.setType('RkChoice', 'kittenSelected', {
@@ -47,8 +46,8 @@ export let bootstrap = () => {
       tintColor: null,
       margin: 0,
       width: 28,
-      height: 28
-    }
+      height: 28,
+    },
   });
 
   RkTheme.setType('RkChoice', 'squadRadio', {
@@ -59,8 +58,8 @@ export let bootstrap = () => {
     borderRadius: 4,
     inner: {
       backgroundColor: '#fc3630',
-      tintColor: '#fc3630'
-    }
+      tintColor: '#fc3630',
+    },
   });
 
   RkTheme.setType('RkChoice', 'smileColor', {
@@ -70,8 +69,8 @@ export let bootstrap = () => {
       tintColor: null,
       margin: 0,
       width: 28,
-      height: 28
-    }
+      height: 28,
+    },
   });
 
   RkTheme.setType('RkChoice', 'smileColorSelected', {
@@ -81,8 +80,8 @@ export let bootstrap = () => {
       tintColor: null,
       margin: 0,
       width: 34,
-      height: 34
-    }
+      height: 34,
+    },
   });
 
   RkTheme.setType('RkChoice', 'posNegClearCheck', {
@@ -91,7 +90,7 @@ export let bootstrap = () => {
   RkTheme.setType('RkChoice', 'posNegClearCheckSelected', {
     inner: {
       tintColor: 'transparent',
-    }
+    },
   }, 'posNegSelected');
 
   RkTheme.setType('RkChoice', 'rainbowCatSelected', {
@@ -101,7 +100,7 @@ export let bootstrap = () => {
       margin: 0,
       width: 50,
       height: 50,
-    }
+    },
   });
 
   RkTheme.setType('RkChoice', 'rainbowCat', {
@@ -109,7 +108,7 @@ export let bootstrap = () => {
       margin: 0,
       width: 50,
       height: 50,
-    }
+    },
   });
 
   RkTheme.setType('RkChoice', 'whiteGreenCheck', {
@@ -124,52 +123,52 @@ export let bootstrap = () => {
     backgroundColor: '#bbf6ff',
     inner: {
       tintColor: '#005b69',
-    }
+    },
   });
 
   RkTheme.setType('RkText', 'header', {
     text: {
-      fontFamily: robotoMed
-    }
+      fontFamily: robotoMed,
+    },
   });
 
-  //endregion
+  // endregion
 
-  //region RkText
+  // region RkText
 
   RkTheme.setType('RkText', 'basic', {
     text: {
       fontFamily: robotoLight,
-    }
+    },
   });
 
   RkTheme.setType('RkText', 'bold', {
     text: {
       fontFamily: robotoMed,
-    }
+    },
   });
 
   RkTheme.setType('RkText', 'caption', {
-    color: theme => theme.colors.text.inverse
+    color: theme => theme.colors.text.inverse,
   });
 
   RkTheme.setType('RkText', 'cardText', {
     fontSize: 16,
     text: {
       lineHeight: 20,
-    }
+    },
   });
 
   RkTheme.setType('RkText', 'accent', {
-    color: RkTheme.colors.accent
+    color: RkTheme.colors.accent,
   });
 
   RkTheme.setType('RkText', 'hint', {
-    color: RkTheme.current.colors.text.hint
+    color: RkTheme.current.colors.text.hint,
   });
 
   RkTheme.setType('RkText', 'inverse', {
-    color: RkTheme.current.colors.text.inverse
+    color: RkTheme.current.colors.text.inverse,
   });
 
 
@@ -177,22 +176,24 @@ export let bootstrap = () => {
     fontSize: 14,
     text: {
       lineHeight: 20,
-      letterSpacing: -0.1
-    }
+      letterSpacing: -0.1,
+    },
   });
 
-  //endregion Types
+  // endregion Types
 
-  //region RkButton Types
+  // region RkButton Types
 
   RkTheme.setType('RkButton', 'basic', {
     content: {
-      fontFamily: robotoMed
-    }
+      fontFamily: robotoMed,
+    },
   });
 
   RkTheme.setType('RkButton', 'hitSlop', {
-      hitSlop: {top: 5, left: 5, bottom: 5, right: 5}
+    hitSlop: {
+      top: 5, left: 5, bottom: 5, right: 5,
+    },
   });
 
   RkTheme.setType('RkButton', 'outline-success', {
@@ -205,45 +206,44 @@ export let bootstrap = () => {
   RkTheme.setType('RkButton', 'link', {
     fontSize: theme => theme.fonts.sizes.small,
     content: {
-      letterSpacing: -0.1
-    }
+      letterSpacing: -0.1,
+    },
   });
 
   RkTheme.setType('RkButton', 'action', {
     color: theme => theme.colors.warning,
     content: {
       fontFamily: robotoMed,
-    }
+    },
   });
 
 
   RkTheme.setType('RkButton', 'accent', {
-    color: RkTheme.colors.accent
+    color: RkTheme.colors.accent,
   });
 
   RkTheme.setType('RkButton', 'accent-bg', {
-    backgroundColor: RkTheme.colors.accent
+    backgroundColor: RkTheme.colors.accent,
   });
 
-  //endregion
+  // endregion
 
   RkTheme.setType('RkTab', 'basic', {
     inner: {
-      fontFamily: robotoMed
-    }
+      fontFamily: robotoMed,
+    },
   });
 
   RkTheme.setType('RkTab', 'noBorders', {
     container: {
       borderLeftWidth: 0,
       borderRightWidth: 0,
-    }
+    },
   });
 
   RkTheme.setType('RkCard', 'basic', {
     container: {
-      marginVertical: 10
-    }
+      marginVertical: 10,
+    },
   });
-
 };
