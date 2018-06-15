@@ -43,7 +43,7 @@ export class RkComponent extends React.Component {
    * {string} Default typeMappingElement for component. Will be taken first element if not defined.
    * Can be overridden in inherited component.
    */
-  defaultTypeMappingElement = undefined;
+  defaultTypeMappingStyleKey = undefined;
 
   /**
    * Used to collect and compile all rkTypes into styles.
@@ -54,9 +54,9 @@ export class RkComponent extends React.Component {
    * @returns {object} styles - Object with compiled styles for each internal component.
    */
   defineStyles(additionalTypes) {
-    const rkTypes = this.getTypesString(this.props.rkType);
-    additionalTypes = this.getTypesString(additionalTypes);
-    let types = this.getTypesString([this.defaultType, rkTypes, additionalTypes]);
+    const sourceTypes = this.getTypesString(this.props.rkType);
+    const customTypes = this.getTypesString(additionalTypes);
+    let types = this.getTypesString([this.defaultType, sourceTypes, customTypes]);
     types = types && types.length ? types.split(' ') : [];
     return this.getTypes(types);
   }
@@ -104,67 +104,55 @@ export class RkComponent extends React.Component {
   }
 
   getTypes(rkTypes) {
-    let usedTypes = this.getUsedTypes(rkTypes);
     const componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
-    const styles = {};
     const baseStyle = componentTypes[this.baseStyle];
 
-    if (baseStyle) {
-      usedTypes = [baseStyle, ...usedTypes];
-    }
+    let usedTypes = this.getUsedTypes(rkTypes);
+    usedTypes = baseStyle === undefined ? usedTypes : [baseStyle, ...usedTypes];
+
+    const styles = {};
 
     usedTypes.forEach((usedType) => {
       Object.keys(usedType).forEach(key => {
+        const usedTypeValue = usedType[key];
         if (Object.prototype.hasOwnProperty.call(this.typeMapping, key)) {
-          this.fillElementStyles(styles, key, usedType[key]);
+          Object.keys(usedTypeValue).forEach(typeKey => {
+            styles[key] = this.getElementStyle(styles, key, typeKey, usedType[key][typeKey]);
+          });
         } else {
-          const element = this.findTypeMappingElementByKey(key, this.typeMapping)
-            || this.defaultTypeMappingElement || _.keys(this.typeMapping)[0];
-          this.fillElementStyle(styles, element, key, usedType[key]);
+          let typeMappingKey = this.findTypeMappingKeyByStyleKey(this.typeMapping, key);
+          typeMappingKey = typeMappingKey || _.keys(this.typeMapping)[0];
+          styles[typeMappingKey] = this.getElementStyle(styles, typeMappingKey, key, usedTypeValue);
         }
       });
     });
-
     return styles;
   }
 
-  fillElementStyle(styles, element, key, value) {
-    this.createStyleIfNotExists(styles, element);
-    let styleKey = this.typeMapping[element][key];
-    if (!styleKey) {
-      styleKey = key;
-    }
-    const styleValue = this.getStyleValue(value);
-    this.mergeStyles(styles[element], styleKey, styleValue);
+  getElementStyle(styles, element, key, value) {
+    const style = styles[element] || [];
+    const styleKey = this.getElementStyleKey(element, style, key);
+    style[styleKey.index] = { [styleKey.name]: this.getStyleValue(value) };
+    return style;
   }
 
-  fillElementStyles(styles, element, value) {
-    Object.keys(value).forEach(key => {
-      this.fillElementStyle(styles, element, key, value[key]);
-    });
+  getElementStyleKey(element, style, key) {
+    const name = this.typeMapping[element][key] || key;
+    const index = this.findElementStyleKeyIndex(style, name);
+    return { name, index };
   }
 
-  createStyleIfNotExists(styles, key) {
-    if (styles[key] === undefined) {
-      styles[key] = [];
-    }
+  findElementStyleKeyIndex(element, style) {
+    const index = _.findIndex(element, (e) => Object.prototype.hasOwnProperty.call(e, style));
+    return index >= 0 ? index : element.length;
   }
 
-  findTypeMappingElementByKey(key, typeMapping) {
+  findTypeMappingKeyByStyleKey(typeMapping, styleKey) {
     // eslint-disable-next-line array-callback-return
-    return Object.keys(typeMapping).find(typeKey => {
-      Object.prototype.hasOwnProperty.call(typeMapping, typeKey);
+    const typeMappingKey = Object.keys(typeMapping).find(key => {
+      Object.prototype.hasOwnProperty.call(typeMapping[key], styleKey);
     });
-  }
-
-  mergeStyles(element, styleKey, value) {
-    // merge styles in order to have only one value for each property
-    const index = _.findIndex(element, (e) => Object.prototype.hasOwnProperty.call(e, styleKey));
-    if (index >= 0) {
-      element[index][styleKey] = value;
-    } else {
-      element.push({ [styleKey]: value });
-    }
+    return typeMappingKey || this.defaultTypeMappingStyleKey;
   }
 
   getUsedTypes(rkTypes) {
