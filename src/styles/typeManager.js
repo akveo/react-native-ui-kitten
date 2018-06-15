@@ -43,42 +43,44 @@ export class TypeManager {
     TypeManager.themedTypes = undefined;
   };
 
-  static createType = (type, parentTypes, componentName) => {
-    let newType = {};
+  static createType = (sourceType, parentTypes, componentName) => {
     if (parentTypes && parentTypes.length > 0) {
-      parentTypes.forEach((typeName) => {
-        TypeManager.mergeTypes(
-          newType,
-          TypeManager.types(RkTheme.current)[componentName][typeName],
-        );
+      let newType = {};
+      parentTypes.forEach(parentType => {
+        const componentTypes = TypeManager.types(RkTheme.current)[componentName][parentType];
+        newType = TypeManager.mergeTypes(newType, componentTypes);
       });
-      TypeManager.mergeTypes(newType, type);
-    } else {
-      newType = type;
+      return TypeManager.mergeTypes(newType, sourceType);
     }
-    return newType;
+    return sourceType;
   };
 
-  static mergeTypes = (baseType, typeForMerge) => {
-    let baseStyleValue;
-    let mergeStyleValue;
-    Object.keys(typeForMerge).forEach(key => {
-      baseStyleValue = TypeManager.getStyleValue(baseType[key]);
-      mergeStyleValue = TypeManager.getStyleValue(typeForMerge[key]);
-      if (baseStyleValue) {
-        if (typeof mergeStyleValue === 'object') {
-          if (typeof baseStyleValue !== 'object') {
-            baseType[key] = {};
-          }
-          TypeManager.mergeTypes(baseType[key], typeForMerge[key]);
-        } else {
-          baseType[key] = mergeStyleValue;
-        }
-      } else {
-        baseType[key] = mergeStyleValue;
-      }
+  static mergeTypes = (sourceType, mergeType) => {
+    const mergeResult = sourceType;
+    Object.keys(mergeType).forEach(key => {
+      mergeResult[key] = TypeManager.getBaseTypeMergeValue(sourceType, mergeType, key);
     });
+    return mergeResult;
   };
+
+  static getBaseTypeMergeValue(baseType, mergeType, key) {
+    const baseStyleValue = TypeManager.getStyleValue(baseType[key]);
+    const mergeStyleValue = TypeManager.getStyleValue(mergeType[key]);
+    let value = {};
+    if (baseStyleValue) {
+      if (typeof mergeStyleValue === 'object') {
+        if (typeof baseStyleValue !== 'object') {
+          value = {};
+        }
+        TypeManager.mergeTypes(baseType[key], mergeType[key]);
+      } else {
+        value = mergeStyleValue;
+      }
+    } else {
+      value = mergeStyleValue;
+    }
+    return value;
+  }
 
   static getStyleValue = (value) => {
     let styleValue = value;
