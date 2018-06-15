@@ -117,7 +117,7 @@ export class RkChoiceGroup extends RkComponent {
     super(props);
     this.choice = {};
     if (props.selectedIndex !== undefined) {
-      this.choice[+props.selectedIndex] = true;
+      this.choice[props.selectedIndex] = true;
     }
     this.state = {
       selectionWasUpdated: false,
@@ -198,8 +198,8 @@ export class RkChoiceGroup extends RkComponent {
       passProps.selected = this.choice[choiceIndex];
       this.appendChoiceProps(passProps, child);
     } else if (child.props && child.props.choiceTrigger) {
-      this.globalChoiceIndex += 1;
       const choiceIndex = this.globalChoiceIndex;
+      this.globalChoiceIndex += 1;
       passProps.onPress = () => this.onSelect(choiceIndex);
       passProps.children = this.processTrigger(child.props.children, choiceIndex);
     } else if (child.props && child.props.children) {
