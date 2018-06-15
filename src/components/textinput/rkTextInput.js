@@ -184,22 +184,21 @@ export class RkTextInput extends RkComponent {
   }
 
   render() {
-    let {
+    const {
       style,
       label,
-      labelStyle,
       inputStyle,
       ...inputProps
     } = this.props;
     const { container: boxStyle, input, label: labelS } = this.defineStyles();
     const placeholderColor = this.extractNonStyleValue(input, 'placeholderTextColor');
-    labelStyle = [labelS, labelStyle];
+    inputProps.labelStyle = [labelS, inputProps.labelStyle];
     inputProps.style = [input, inputStyle];
     inputProps.placeholderTextColor = placeholderColor;
     boxStyle.push(style);
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
-        {label && this.displayLabel(label, labelStyle)}
+        {label && this.displayLabel(label, inputProps.labelStyle)}
         <TextInput
           underlineColorAndroid='transparent'
           ref={(inputValue) => {
