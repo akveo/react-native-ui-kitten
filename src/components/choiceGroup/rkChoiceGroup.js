@@ -154,12 +154,6 @@ export class RkChoiceGroup extends RkComponent {
     });
   }
 
-  appendChoiceProps(props, child) {
-    if (this.props.disabled !== undefined && child.props.disabled === undefined) {
-      props.disabled = this.props.disabled;
-    }
-  }
-
   processNotClickTrigger(child, index) {
     const newSelectedValue = (index === this.props.selectedIndex) ? true : child.props.selected;
     if (this.props.onChange && newSelectedValue !== this.choice[index] && newSelectedValue) {
@@ -179,7 +173,7 @@ export class RkChoiceGroup extends RkComponent {
       }
       props.selected = this.choice[index];
       props.inTrigger = true;
-      this.appendChoiceProps(props, child);
+      props.disabled = this.props.disabled;
     } else if (child.props && child.props.children) {
       props.children =
         _.isArray(child.props.children) ?
@@ -190,25 +184,25 @@ export class RkChoiceGroup extends RkComponent {
   }
 
   processChild(child) {
-    const passProps = {};
+    const props = {};
     if (child.type === RkChoice) {
       this.globalChoiceIndex += 1;
       const choiceIndex = this.globalChoiceIndex;
-      passProps.onPress = () => this.onSelect(choiceIndex);
-      passProps.selected = this.choice[choiceIndex];
-      this.appendChoiceProps(passProps, child);
+      props.onPress = () => this.onSelect(choiceIndex);
+      props.selected = this.choice[choiceIndex];
+      props.disabled = this.props.disabled;
     } else if (child.props && child.props.choiceTrigger) {
       const choiceIndex = this.globalChoiceIndex;
       this.globalChoiceIndex += 1;
-      passProps.onPress = () => this.onSelect(choiceIndex);
-      passProps.children = this.processTrigger(child.props.children, choiceIndex);
+      props.onPress = () => this.onSelect(choiceIndex);
+      props.children = this.processTrigger(child.props.children, choiceIndex);
     } else if (child.props && child.props.children) {
-      passProps.children =
+      props.children =
         _.isArray(child.props.children) ?
           React.Children.map(child.props.children, (view) => this.processChild(view)) :
           this.processChild(child.props.children);
     }
-    return typeof child === 'string' ? child : React.cloneElement(child, passProps);
+    return typeof child === 'string' ? child : React.cloneElement(child, props);
   }
 
   processChildren() {
