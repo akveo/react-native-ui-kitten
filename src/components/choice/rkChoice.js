@@ -204,7 +204,9 @@ export class RkChoice extends RkComponent {
     if (!this.props.disabled) {
       const selected = !this.state.selected;
       this.setState({ selected });
-      this.props.onChange && this.props.onChange(selected, e);
+      if (this.props.onChange) {
+        this.props.onChange(selected, e);
+      }
     }
   }
 
@@ -220,22 +222,10 @@ export class RkChoice extends RkComponent {
     const computedTypes = this.props.rkType ? this.props.rkType.split(' ') : [];
     computedTypes.unshift('');
 
-    if (this.state.selected && this.state.disabled) {
-      computedTypes.forEach((v, k, a) => {
-        a[k] += 'SelectedDisabled';
-      });
-    } else {
-      if (this.state.selected) {
-        computedTypes.forEach((v, k, a) => {
-          a[k] += 'Selected';
-        });
-      }
-      if (this.state.disabled) {
-        computedTypes.forEach((v, k, a) => {
-          a[k] += 'Disabled';
-        });
-      }
-    }
+    computedTypes.forEach((v, k, state) => {
+      state[k] += this.state.selected ? 'Selected' : ''; // eslint-disable-line no-param-reassign
+      state[k] += this.state.disabled ? 'Disabled' : ''; // eslint-disable-line no-param-reassign
+    });
 
     const { container, inner } = this.defineStyles(_.join(computedTypes, ' '));
     const rkChoiceContent = this.props.renderContentFunction ?
@@ -251,7 +241,6 @@ export class RkChoice extends RkComponent {
       });
     return { container, rkChoiceContent };
   }
-
 
   render() {
     const { container, rkChoiceContent } = this.defineComponentStyles();
