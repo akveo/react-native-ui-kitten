@@ -95,10 +95,10 @@ export class RkComponent extends React.Component {
   getStyleValue(value) {
     if (typeof value === 'object' && value !== null) {
       if (Object.prototype.hasOwnProperty.call(value, Platform.OS)) {
-        value = this.getStyleValue(value[Platform.OS]);
+        return this.getStyleValue(value[Platform.OS]);
       }
     } else if (typeof value === 'function') {
-      value = value(RkTheme.current);
+      return value(RkTheme.current);
     }
     return value;
   }
