@@ -175,7 +175,9 @@ export class RkTextInput extends RkComponent {
     return React.cloneElement(label, {
       onPress: (e) => {
         this.inputRef.focus();
-        label.props.onPress && label.props.onPress(e);
+        if (label.props.onPress) {
+          label.props.onPress(e);
+        }
       },
       style: [labelStyle, label.props.style],
     });
