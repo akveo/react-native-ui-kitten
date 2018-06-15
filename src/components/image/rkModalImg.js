@@ -8,7 +8,7 @@ import {
   Animated,
   Dimensions,
   Platform,
-  FlatList
+  FlatList,
 } from 'react-native';
 import { RkButton } from '../button/rkButton';
 import { RkText } from '../text/rkText';
@@ -28,11 +28,13 @@ import { RkTheme } from '../../styles/themeManager';
  *
  * @example Custom header and footer
  *
- * It's possible to render custom header and footer when image is in fullscreen mode. There are special props for this:
- * `renderHeader` and `renderFooter`. Functions passed as this props can accept `options` object described below.
+ * It's possible to render custom header and footer when image is in fullscreen mode.
+ * There are special props for this:
+ * `renderHeader` and `renderFooter`.
+ * Functions passed as this props can accept `options` object described below.
  *
  * ```
- * _renderHeader(options){
+ * renderHeader(options){
  *   return (
  *     <View>
  *       <RkButton onPress={options.closeImage}>Custom Header</RkButton>
@@ -40,7 +42,7 @@ import { RkTheme } from '../../styles/themeManager';
  *    );
  * }
  *
- * _renderFooter(options){
+ * renderFooter(options){
  *   return (
  *     <View>
  *       <RkButton onPress={(x) => Alert.alert('I Like it!')}>Custom Footer</RkButton>
@@ -51,7 +53,7 @@ import { RkTheme } from '../../styles/themeManager';
  *  //...
  *
  *  <RkModalImg source={require('../img/river.jpeg')}
- *    renderHeader={this._renderHeader} renderFooter={this._renderFooter}/>
+ *    renderHeader={this.renderHeader} renderFooter={this.renderFooter}/>
  * ```
  *
  * @example Gallery
@@ -73,9 +75,12 @@ import { RkTheme } from '../../styles/themeManager';
  *
  * @example Define new rkTypes
  *
- * `RkModalImg` doesn't have predefined rkTypes. However, it's easy and very common to create new types.
- * Main point for all customization is `RkTheme` object. New rkTypes are defined using `setType` method of `RkTheme`.
- * `RkModalImg` consists from couple of base react component. Styles can be applied to each internal component:
+ * `RkModalImg` doesn't have predefined rkTypes.
+ * However, it's easy and very common to create new types.
+ * Main point for all customization is `RkTheme` object.
+ * New rkTypes are defined using `setType` method of `RkTheme`.
+ * `RkModalImg` consists from couple of base react component.
+ * Styles can be applied to each internal component:
  *
  * ```
  * RkTheme.setType('RkModalImg','small',{
@@ -96,16 +101,24 @@ import { RkTheme } from '../../styles/themeManager';
  * - `imgContainer` : `TouchableWithoutFeedback` - container of `img` in regular (not modal) mode
  * - `modal` : `View` - Root view of `Modal` component
  * - `modalImg` : `Image` - Image in modal mode
- * - `header` : `View` - View container for header in modal mode. Here also will be set content returned form `renderHeader`
- * - `headerContent` : `View` - View container for header in modal mode (A child of `header` view). Only available if `renderHeader` not passed to component
- * - `headerText`: `RkText` - Text that render page number in header. Only available if `renderHeader` not passed to component
- * - `footer` : `View` - View container for footer in modal mode. Here also will be set content returned form `renderFooter` function
- * - `footerContent` : `View` - View container for footer in modal mode (A child of `footer` view). Only available if `renderFooter` not passed to component
+ * - `header` : `View` - View container for header in modal mode.
+ * Here also will be set content returned form `renderHeader`
+ * - `headerContent` : `View` - View container for header in modal mode (A child of `header` view).
+ * Only available if `renderHeader` not passed to component
+ * - `headerText`: `RkText` - Text that render page number in header.
+ * Only available if `renderHeader` not passed to component
+ * - `footer` : `View` - View container for footer in modal mode.
+ * Here also will be set content returned form `renderFooter` function
+ * - `footerContent` : `View` - View container for footer in modal mode (A child of `footer` view).
+ * Only available if `renderFooter` not passed to component
  *
  * @example Inline Styling
  *
- * It's possible to set styles inline. Use props `style` for `img` component, `imgContainerStyle` for `imgContainer` component,
- * `modalStyle` for `modal` component, `modalImgStyle` for `modalImg` component, `headerStyle` for `header` component,
+ * It's possible to set styles inline.
+ * Use props `style` for `img` component, `imgContainerStyle` for `imgContainer` component,
+ * `modalStyle` for `modal` component,
+ * `modalImgStyle` for `modalImg` component,
+ * `headerStyle` for `header` component,
  * `footerStyle` for `footer` component.
  *
  * ```
@@ -123,10 +136,13 @@ import { RkTheme } from '../../styles/themeManager';
  * @property {style} imgContainerStyle - Style for wrapper of image in regular (not modal) mode
  * @property {style} modalStyle - Style for root view of modal component
  * @property {style} modalImgStyle - Style for image in modal mode
- * @property {style} headerStyle - Style for header container in modal mode. Applied only if renderHeader prop is not set
- * @property {style} footerStyle - Style for footer container in modal mode. Applied only if renderFooter prop is not set
+ * @property {style} headerStyle - Style for header container in modal mode.
+ * Applied only if renderHeader prop is not set
+ * @property {style} footerStyle - Style for footer container in modal mode.
+ * Applied only if renderFooter prop is not set
  * @property {bool} visible - true if modal is opened at the moment
- * @property {string} animationType - Type of animation for Modal component. Available values: 'none', 'slide', 'fade'
+ * @property {string} animationType - Type of animation for Modal component.
+ * Available values: 'none', 'slide', 'fade'
  * @property {bool} transparent - Prop will be passed to Modal component
  * @property {style} modalContainerStyle - Style passed to container inside of Modal component
  * @property {function} renderHeader - Function for rendering custom header
@@ -136,7 +152,6 @@ import { RkTheme } from '../../styles/themeManager';
  */
 
 export class RkModalImg extends RkComponent {
-
   componentName = 'RkModalImg';
 
   typeMapping = {
@@ -147,7 +162,7 @@ export class RkModalImg extends RkComponent {
     footer: {},
     headerText: {},
     imgContainer: {},
-    modal: {}
+    modal: {},
   };
 
   needUpdateScroll = false;
@@ -160,72 +175,76 @@ export class RkModalImg extends RkComponent {
       width: undefined,
       height: undefined,
       index: props.index || 0,
-    }
+    };
   }
 
   componentDidUpdate() {
     if (this.needUpdateScroll && this.refs.list) {
       this.refs.list.scrollToOffset({
         offset: this.state.index * this.state.width,
-        animated: false
+        animated: false,
       });
       this.needUpdateScroll = false;
     }
   }
 
-  _renderList(source, index, props) {
-    return <FlatList
-      ref='list'
+  renderList(source, index, props) {
+    return (<FlatList
+      ref={(ref) => {
+        this.refs.list = ref;
+      }}
       data={Array.from(this.props.source)}
-      renderItem={({ item }) => this._renderImage(item, props)}
+      renderItem={({ item }) => this.renderImage(item, props)}
       horizontal
       pagingEnabled
-      keyExtractor={(item, index) => index}
+      keyExtractor={() => index}
       extraData={this.state}
-      onScroll={(e) => this._onScroll(e)}
-    />
+      onScroll={(e) => this.onListScroll(e)}
+    />);
   }
 
-  _renderImage(source, props) {
+  renderImage(source, props) {
     return (
-      <TouchableWithoutFeedback style={{ flex: 1 }}
-                                onPress={() => this._toggleControls()}>
-        <Image source={source} {...props}/>
+      <TouchableWithoutFeedback
+        style={{ flex: 1 }}
+        onPress={() => this.toggleControls()}
+      >
+        <Image source={source} {...props} />
       </TouchableWithoutFeedback>
-    )
-  }
-
-  _toggleControls() {
-    Animated.timing(this.state.opacity, {
-      toValue: this.state.opacity._value ? 0 : 1
-    }).start()
-  }
-
-  _renderFooter(options) {
-    let footerStyle = this.styles ? this.styles.footerContent : {};
-
-    return (
-      <View style={footerStyle}/>
     );
   }
 
-  _renderHeader(options) {
-    let headerContent = this.styles ? this.styles.headerContent : {};
-    let headerText = this.styles ? this.styles.headerText : {};
+  toggleControls() {
+    Animated.timing(this.state.opacity, {
+      // eslint-disable-next-line no-underscore-dangle
+      toValue: this.state.opacity._value ? 0 : 1,
+    }).start();
+  }
+
+  renderFooter() {
+    const footerStyle = this.styles ? this.styles.footerContent : {};
+    return (
+      <View style={footerStyle} />
+    );
+  }
+
+  renderHeader(options) {
+    const headerContent = this.styles ? this.styles.headerContent : {};
+    const headerText = this.styles ? this.styles.headerText : {};
     return (
       <View style={headerContent}>
         <View style={{ flex: 1, alignItems: 'flex-start' }}>
           <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
         </View>
         <View style={{ flex: 1, alignItems: 'center' }}>
-          <RkText style={headerText}>{this._renderPageNumbers()}</RkText>
+          <RkText style={headerText}>{this.renderPageNumbers()}</RkText>
         </View>
-        <View style={{ flex: 1 }}/>
+        <View style={{ flex: 1 }} />
       </View>
     );
   }
 
-  _renderPageNumbers() {
+  renderPageNumbers() {
     if (Array.isArray(this.props.source)) {
       let pageText = +this.state.index + +1;
       pageText += '/';
@@ -234,42 +253,40 @@ export class RkModalImg extends RkComponent {
         <Text style={RkTheme.styles.whiteText}>
           {pageText}
         </Text>
-      )
-    } else return null;
+      );
+    }
+    return null;
   }
 
-  _onScroll(e) {
-    let imageIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.width);
+  onListScroll(e) {
+    const imageIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.width);
     if (imageIndex >= 0 &&
       imageIndex <= this.props.source.length &&
-      imageIndex != this.state.index) {
+      imageIndex !== this.state.index) {
       this.setState({
-        index: imageIndex
-      })
+        index: imageIndex,
+      });
     }
   }
 
-  _closeImage() {
+  closeImage() {
     this.setState({ visible: false });
   }
 
-  _onOrientationChange() {
+  onOrientationChange() {
     this.needUpdateScroll = true;
     this.forceUpdate();
   }
 
-  _updateDimensionsState() {
-    let { height, width } = Dimensions.get('window');
+  updateDimensionsState() {
+    const { height, width } = Dimensions.get('window');
     this.state.height = height;
     this.state.width = width;
   }
 
   render() {
-    let {
+    const {
       imgContainerStyle,
-      visible,
-      animationType,
-      transparent,
       modalStyle,
       modalImgStyle,
       headerStyle,
@@ -277,10 +294,10 @@ export class RkModalImg extends RkComponent {
       source,
       index,
       style: imgStyle,
-      ...imgProps,
+      ...imgProps
     } = this.props;
 
-    let {
+    const {
       header,
       footerContent,
       headerContent,
@@ -289,7 +306,7 @@ export class RkModalImg extends RkComponent {
       img,
       imgContainer,
       modal,
-      modalImg
+      modalImg,
     } = this.defineStyles();
 
     this.styles = {
@@ -297,48 +314,55 @@ export class RkModalImg extends RkComponent {
       footerContent,
       headerContent,
       footer: [footer, footerStyle],
-      headerText
+      headerText,
     };
 
-    let renderHeader = this.props.renderHeader || this._renderHeader.bind(this);
-    let renderFooter = this.props.renderFooter || this._renderFooter.bind(this);
-    animationType = animationType || 'fade';
-    transparent = transparent === undefined ? false : transparent;
-    visible = visible === undefined ? this.state.visible : visible;
+    const renderHeader = this.props.renderHeader || this.renderHeader.bind(this);
+    const renderFooter = this.props.renderFooter || this.renderFooter.bind(this);
+    const animationType = imgProps.animationType || 'fade';
+    const transparent = imgProps.transparent === undefined ? false : imgProps.transparent;
+    const visible = imgProps.visible === undefined ? this.state.visible : imgProps.visible;
 
-    this._updateDimensionsState();
+    this.updateDimensionsState();
 
     if (visible) {
       imgProps.style = [imgProps.style,
         {
           height: this.state.height,
-          width: this.state.width
+          width: this.state.width,
         },
         modalImg,
         modalImgStyle];
     }
-    let closeImage = this._closeImage.bind(this);
-    let pageNumber = +this.state.index + 1;
-    let totalPages = this.props.source.length;
-    let basicSource = Array.isArray(source) ? source[index] : source;
+    const closeImage = this.closeImage.bind(this);
+    const pageNumber = +this.state.index + 1;
+    const totalPages = this.props.source.length;
+    const basicSource = Array.isArray(source) ? source[index] : source;
     return (
       <View>
-        <TouchableWithoutFeedback style={[imgContainer, imgContainerStyle]}
-                                  onPress={() => {
-                                    this.needUpdateScroll = true;
-                                    this.setState({ visible: true });
-                                  }}>
-          <Image source={basicSource} style={[img, imgStyle]} {...imgProps}/>
+        <TouchableWithoutFeedback
+          style={[imgContainer, imgContainerStyle]}
+          onPress={() => {
+            this.needUpdateScroll = true;
+            this.setState({ visible: true });
+          }}
+        >
+          <Image source={basicSource} style={[img, imgStyle]} {...imgProps} />
         </TouchableWithoutFeedback>
-        <Modal supportedOrientations={['portrait', 'landscape']}
-               onRequestClose={closeImage}
-               animationType={animationType}
-               transparent={transparent}
-               visible={visible}
-               onOrientationChange={this._onOrientationChange.bind(this)}>
-          <View style={[modal, modalStyle]}
-                onLayout={Platform.OS === 'ios' ? null : this._onOrientationChange.bind(this)}>
-            {Array.isArray(source) ? this._renderList(source, index, imgProps) : this._renderImage(basicSource, imgProps)}
+        <Modal
+          supportedOrientations={['portrait', 'landscape']}
+          onRequestClose={closeImage}
+          animationType={animationType}
+          transparent={transparent}
+          visible={visible}
+          onOrientationChange={this.onOrientationChange.bind(this)}
+        >
+          <View
+            style={[modal, modalStyle]}
+            onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange.bind(this)}
+          >
+            {Array.isArray(source) ?
+              this.renderList(source, index, imgProps) : this.renderImage(basicSource, imgProps)}
             <Animated.View style={[this.styles.header, { opacity: this.state.opacity }]}>
               {renderHeader({ closeImage, pageNumber, totalPages })}
             </Animated.View>
