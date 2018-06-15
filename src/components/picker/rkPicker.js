@@ -198,17 +198,9 @@ export class RkPicker extends RkComponent {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.visible !== prevProps.visible) {
-      this.setState({
-        scrollToSelected: this.props.visible,
-        selectedOptions: this.props.selectedOptions.slice(),
-      });
-    }
-  }
-
-  selectOption(selectedOption, listIndex) {
-    this.state.selectedOptions[listIndex] = selectedOption;
+  optionListDidSelect(item, index) {
+    this.state.scrollToSelected = this.props.visible;
+    this.state.selectedOptions[index] = item;
   }
 
   renderOptionList(array, index, optionBlock, highlightBlock, optionListContainer) {
@@ -220,7 +212,7 @@ export class RkPicker extends RkComponent {
         data={array}
         selectedOption={this.state.selectedOptions[index]}
         scrollToSelected={this.state.scrollToSelected}
-        onSelect={(selectedOption, listIndex) => this.selectOption(selectedOption, listIndex)}
+        onSelect={(option, optionIndex) => this.optionListDidSelect(option, optionIndex)}
         optionHeight={this.optionHeight}
         optionNumberOnPicker={this.optionNumberOnPicker}
         optionRkType={this.props.optionRkType}

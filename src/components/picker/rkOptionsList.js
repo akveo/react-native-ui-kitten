@@ -24,6 +24,11 @@ export class RkOptionsList extends RkComponent {
     };
   }
 
+  componentDidMount() {
+    const selectedIndex = this.findIndexByValue(this.state.selectedOption, this.props.data);
+    this.scrollToIndex(selectedIndex);
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.scrollToSelected !== prevProps.scrollToSelected && this.props.scrollToSelected) {
       this.setInitialOptions();
