@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/**/*",
-    "prepush": "npm run flow && npm run lint",
+    "prepush": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm link eslint-config-akveo-react"
   },
@@ -26,7 +26,6 @@
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "0.67.1",
     "husky": "0.14.3",
     "react": "16.4.0",
     "react-native": "0.55.4"
