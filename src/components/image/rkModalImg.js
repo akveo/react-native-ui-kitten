@@ -188,22 +188,24 @@ export class RkModalImg extends RkComponent {
     }
   }
 
-  renderList(source, index, props) {
-    return (<FlatList
-      ref={(ref) => {
-        this.refs.list = ref;
-      }}
-      data={Array.from(this.props.source)}
-      renderItem={({ item }) => this.renderImage(item, props)}
-      horizontal
-      pagingEnabled
-      keyExtractor={() => index}
-      extraData={this.state}
-      onScroll={(e) => this.onListScroll(e)}
-    />);
+  onRenderImageContainer(source, index, props) {
+    return (
+      <FlatList
+        ref={(ref) => {
+          this.refs.list = ref;
+        }}
+        data={Array.from(this.props.source)}
+        renderItem={({ item }) => this.onRenderImage(item, props)}
+        horizontal
+        pagingEnabled
+        keyExtractor={() => index}
+        extraData={this.state}
+        onScroll={(e) => this.onListScroll(e)}
+      />
+    );
   }
 
-  renderImage(source, props) {
+  onRenderImage(source, props) {
     return (
       <TouchableWithoutFeedback
         style={{ flex: 1 }}
@@ -215,36 +217,56 @@ export class RkModalImg extends RkComponent {
   }
 
   toggleControls() {
+    // eslint-disable-next-line no-underscore-dangle
+    const endValue = this.state.opacity._value ? 0 : 1;
     Animated.timing(this.state.opacity, {
-      // eslint-disable-next-line no-underscore-dangle
-      toValue: this.state.opacity._value ? 0 : 1,
+      toValue: endValue,
     }).start();
   }
 
-  renderFooter() {
-    const footerStyle = this.styles ? this.styles.footerContent : {};
-    return (
-      <View style={footerStyle} />
-    );
+  onListScroll(e) {
+    const currentIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.width);
+    if (currentIndex >= 0 &&
+      currentIndex <= this.props.source.length &&
+      currentIndex !== this.state.index) {
+      this.setState({
+        index: currentIndex,
+      });
+    }
   }
 
-  renderHeader(options) {
-    const headerContent = this.styles ? this.styles.headerContent : {};
-    const headerText = this.styles ? this.styles.headerText : {};
+  onRenderHeader = (options) => {
+    const content = this.styles ? this.styles.headerContent : {};
+    const text = this.styles ? this.styles.headerText : {};
     return (
-      <View style={headerContent}>
-        <View style={{ flex: 1, alignItems: 'flex-start' }}>
-          <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
+      <View style={content}>
+        <View style={{
+          flex: 1,
+          alignItems: 'flex-start',
+        }}
+        >
+          <RkButton
+            rkType='clear'
+            onPress={options.closeImage}
+          >Close
+          </RkButton>
         </View>
-        <View style={{ flex: 1, alignItems: 'center' }}>
-          <RkText style={headerText}>{this.renderPageNumbers()}</RkText>
+        <View style={{
+          flex: 1,
+          alignItems: 'center',
+        }}
+        >
+          <RkText style={text}>{this.onRenderPageNumber()}</RkText>
         </View>
-        <View style={{ flex: 1 }} />
+        <View style={{
+          flex: 1,
+        }}
+        />
       </View>
     );
-  }
+  };
 
-  renderPageNumbers() {
+  onRenderPageNumber() {
     if (Array.isArray(this.props.source)) {
       let pageText = +this.state.index + +1;
       pageText += '/';
@@ -258,31 +280,27 @@ export class RkModalImg extends RkComponent {
     return null;
   }
 
-  onListScroll(e) {
-    const imageIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.width);
-    if (imageIndex >= 0 &&
-      imageIndex <= this.props.source.length &&
-      imageIndex !== this.state.index) {
-      this.setState({
-        index: imageIndex,
-      });
-    }
-  }
+  onRenderFooter = () => {
+    const style = this.styles ? this.styles.footerContent : {};
+    return (
+      <View style={style} />
+    );
+  };
 
-  closeImage() {
+  onCloseImage = () => {
     this.setState({ visible: false });
-  }
+  };
 
-  onOrientationChange() {
-    this.needUpdateScroll = true;
-    this.forceUpdate();
-  }
-
-  updateDimensionsState() {
+  onUpdateDimension() {
     const { height, width } = Dimensions.get('window');
     this.state.height = height;
     this.state.width = width;
   }
+
+  onOrientationChange = () => {
+    this.needUpdateScroll = true;
+    this.forceUpdate();
+  };
 
   render() {
     const {
@@ -317,13 +335,13 @@ export class RkModalImg extends RkComponent {
       headerText,
     };
 
-    const renderHeader = this.props.renderHeader || this.renderHeader.bind(this);
-    const renderFooter = this.props.renderFooter || this.renderFooter.bind(this);
+    const renderHeader = this.props.renderHeader || this.onRenderHeader;
+    const renderFooter = this.props.renderFooter || this.onRenderFooter;
     const animationType = imgProps.animationType || 'fade';
     const transparent = imgProps.transparent === undefined ? false : imgProps.transparent;
     const visible = imgProps.visible === undefined ? this.state.visible : imgProps.visible;
 
-    this.updateDimensionsState();
+    this.onUpdateDimension();
 
     if (visible) {
       imgProps.style = [imgProps.style,
@@ -334,7 +352,7 @@ export class RkModalImg extends RkComponent {
         modalImg,
         modalImgStyle];
     }
-    const closeImage = this.closeImage.bind(this);
+    const closeImage = this.onCloseImage;
     const pageNumber = +this.state.index + 1;
     const totalPages = this.props.source.length;
     const basicSource = Array.isArray(source) ? source[index] : source;
@@ -355,14 +373,15 @@ export class RkModalImg extends RkComponent {
           animationType={animationType}
           transparent={transparent}
           visible={visible}
-          onOrientationChange={this.onOrientationChange.bind(this)}
+          onOrientationChange={this.onOrientationChange}
         >
           <View
             style={[modal, modalStyle]}
-            onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange.bind(this)}
+            onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange}
           >
             {Array.isArray(source) ?
-              this.renderList(source, index, imgProps) : this.renderImage(basicSource, imgProps)}
+              this.onRenderImageContainer(source, index, imgProps) :
+              this.onRenderImage(basicSource, imgProps)}
             <Animated.View style={[this.styles.header, { opacity: this.state.opacity }]}>
               {renderHeader({ closeImage, pageNumber, totalPages })}
             </Animated.View>
