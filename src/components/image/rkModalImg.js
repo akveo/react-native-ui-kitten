@@ -179,8 +179,8 @@ export class RkModalImg extends RkComponent {
   }
 
   componentDidUpdate() {
-    if (this.needUpdateScroll && this.refs.list) {
-      this.refs.list.scrollToOffset({
+    if (this.needUpdateScroll && this.containerRef) {
+      this.containerRef.scrollToOffset({
         offset: this.state.index * this.state.width,
         animated: false,
       });
@@ -188,19 +188,30 @@ export class RkModalImg extends RkComponent {
     }
   }
 
+  onContainerScroll = (event) => {
+    const currentIndex = Math.round(event.nativeEvent.contentOffset.x / this.state.width);
+    if (currentIndex >= 0 &&
+      currentIndex <= this.props.source.length &&
+      currentIndex !== this.state.index) {
+      this.setState({
+        index: currentIndex,
+      });
+    }
+  };
+
   onRenderImageContainer(source, index, props) {
     return (
       <FlatList
         ref={(ref) => {
-          this.refs.list = ref;
+          this.containerRef = ref;
         }}
-        data={Array.from(this.props.source)}
+        data={Array.from(source)}
         renderItem={({ item }) => this.onRenderImage(item, props)}
         horizontal
         pagingEnabled
         keyExtractor={() => index}
         extraData={this.state}
-        onScroll={(e) => this.onListScroll(e)}
+        onScroll={this.onContainerScroll}
       />
     );
   }
@@ -209,30 +220,11 @@ export class RkModalImg extends RkComponent {
     return (
       <TouchableWithoutFeedback
         style={{ flex: 1 }}
-        onPress={() => this.toggleControls()}
+        onPress={this.onImageClicked}
       >
         <Image source={source} {...props} />
       </TouchableWithoutFeedback>
     );
-  }
-
-  toggleControls() {
-    // eslint-disable-next-line no-underscore-dangle
-    const endValue = this.state.opacity._value ? 0 : 1;
-    Animated.timing(this.state.opacity, {
-      toValue: endValue,
-    }).start();
-  }
-
-  onListScroll(e) {
-    const currentIndex = Math.round(e.nativeEvent.contentOffset.x / this.state.width);
-    if (currentIndex >= 0 &&
-      currentIndex <= this.props.source.length &&
-      currentIndex !== this.state.index) {
-      this.setState({
-        index: currentIndex,
-      });
-    }
   }
 
   onRenderHeader = (options) => {
@@ -287,8 +279,25 @@ export class RkModalImg extends RkComponent {
     );
   };
 
+  onImageClicked = () => {
+    // eslint-disable-next-line no-underscore-dangle
+    const endValue = this.state.opacity._value ? 0 : 1;
+    Animated.timing(this.state.opacity, {
+      toValue: endValue,
+    }).start();
+  };
+
+  onRootViewClicked = () => {
+    this.needUpdateScroll = true;
+    this.setState({
+      visible: true,
+    });
+  };
+
   onCloseImage = () => {
-    this.setState({ visible: false });
+    this.setState({
+      visible: false,
+    });
   };
 
   onUpdateDimension() {
@@ -344,13 +353,12 @@ export class RkModalImg extends RkComponent {
     this.onUpdateDimension();
 
     if (visible) {
-      imgProps.style = [imgProps.style,
-        {
-          height: this.state.height,
-          width: this.state.width,
-        },
-        modalImg,
-        modalImgStyle];
+      imgProps.style = [imgProps.style, {
+        height: this.state.height,
+        width: this.state.width,
+      },
+      modalImg,
+      modalImgStyle];
     }
     const closeImage = this.onCloseImage;
     const pageNumber = +this.state.index + 1;
@@ -359,13 +367,18 @@ export class RkModalImg extends RkComponent {
     return (
       <View>
         <TouchableWithoutFeedback
-          style={[imgContainer, imgContainerStyle]}
-          onPress={() => {
-            this.needUpdateScroll = true;
-            this.setState({ visible: true });
-          }}
+          style={[imgContainer,
+            imgContainerStyle,
+          ]}
+          onPress={this.onRootViewClicked}
         >
-          <Image source={basicSource} style={[img, imgStyle]} {...imgProps} />
+          <Image
+            source={basicSource}
+            style={[img,
+            imgStyle,
+          ]}
+            {...imgProps}
+          />
         </TouchableWithoutFeedback>
         <Modal
           supportedOrientations={['portrait', 'landscape']}
@@ -376,16 +389,28 @@ export class RkModalImg extends RkComponent {
           onOrientationChange={this.onOrientationChange}
         >
           <View
-            style={[modal, modalStyle]}
+            style={[modal,
+              modalStyle,
+            ]}
             onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange}
           >
             {Array.isArray(source) ?
               this.onRenderImageContainer(source, index, imgProps) :
               this.onRenderImage(basicSource, imgProps)}
-            <Animated.View style={[this.styles.header, { opacity: this.state.opacity }]}>
+            <Animated.View style={[
+              this.styles.header, {
+                opacity: this.state.opacity,
+              },
+              ]}
+            >
               {renderHeader({ closeImage, pageNumber, totalPages })}
             </Animated.View>
-            <Animated.View style={[this.styles.footer, { opacity: this.state.opacity }]}>
+            <Animated.View style={[
+              this.styles.footer, {
+                opacity: this.state.opacity,
+              },
+              ]}
+            >
               {renderFooter({ closeImage, pageNumber, totalPages })}
             </Animated.View>
           </View>
