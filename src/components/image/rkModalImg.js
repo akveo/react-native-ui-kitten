@@ -176,19 +176,20 @@ export class RkModalImg extends RkComponent {
       height: undefined,
       index: props.index || 0,
     };
+    this.onContainerScroll = this.onContainerScroll.bind(this);
   }
 
   componentDidUpdate() {
     if (this.needUpdateScroll && this.containerRef) {
       this.containerRef.scrollToOffset({
-        offset: this.state.index * this.state.width,
+        offset: this.props.index * this.state.width,
         animated: false,
       });
       this.needUpdateScroll = false;
     }
   }
 
-  onContainerScroll = (event) => {
+  onContainerScroll(event) {
     const currentIndex = Math.round(event.nativeEvent.contentOffset.x / this.state.width);
     if (currentIndex >= 0 &&
       currentIndex <= this.props.source.length &&
@@ -197,7 +198,7 @@ export class RkModalImg extends RkComponent {
         index: currentIndex,
       });
     }
-  };
+  }
 
   onRenderImageContainer(source, index, props) {
     return (
@@ -209,9 +210,9 @@ export class RkModalImg extends RkComponent {
         renderItem={({ item }) => this.onRenderImage(item, props)}
         horizontal
         pagingEnabled
-        keyExtractor={() => index}
+        keyExtractor={(item, srcIndex) => srcIndex}
         extraData={this.state}
-        onScroll={this.onContainerScroll}
+        onScroll={(event) => this.onContainerScroll(event)}
       />
     );
   }
