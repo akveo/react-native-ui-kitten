@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {RkComponent} from '../rkComponent.js';
+import { RkComponent } from '../rkComponent';
 
 /**
  * `RkTextInput` is a component to be used as a basic text input.
@@ -32,7 +32,8 @@ import {RkComponent} from '../rkComponent.js';
  *
  * @example Using rkType prop
  *
- * `RkTextInput` has `rkType` prop. This prop works similar to CSS-class in web. It's possible to set more than one type.
+ * `RkTextInput` has `rkType` prop. This prop works similar to CSS-class in web.
+ * It's possible to set more than one type.
  * There are already some predefined types. Here is example of how to use rkType
  *
  * ```
@@ -41,7 +42,8 @@ import {RkComponent} from '../rkComponent.js';
  *
  * @example Define new rkTypes
  *
- * It's easy and very common to create new types. Main point for all customization is `RkTheme` object.
+ * It's easy and very common to create new types.
+ * Main point for all customization is `RkTheme` object.
  * New rkTypes are defined using `setType` method of `RkTheme`:
  *
  * ```
@@ -58,17 +60,21 @@ import {RkComponent} from '../rkComponent.js';
  *
  * @styles Available style properties:
  * - `color` : Color of typed text inside `RkTextInput`. Applied for 'input' component.
- * - `inputBackgroundColor` : Background color of `TextInput` inside `RkTextInput`. Applied for 'input' component.
+ * - `inputBackgroundColor` : Background color of `TextInput` inside `RkTextInput`.
+ *    Applied for 'input' component.
  * - `placeholderTextColor` : Color of placeholder text. Applied for 'input' component.
  * - `labelColor` : Color of label/icon. Applied for 'label' component.
  * - `labelFontSize` : Font size of label. Applied for 'label' component.
- * - `underlineWidth` : Width of bottom border of component. Applied for 'container' component.
+ * - `underlineWidth` : Width of bottom border of component.
+ *    Applied for 'container' component.
  * - `underlineColor` : Color of bottom border of component. Applied for 'container' component.
- * - ...: Any other style properties defined without specifying component explicitly will be applied to the default one.
+ * - ...: Any other style properties defined without specifying component explicitly
+ *    will be applied to the default one.
  *
  * @example Advanced Styling
  *
- * It's also possible to implement more detailed styling. `RkTextInput` consists from couple of base react component.
+ * It's also possible to implement more detailed styling.
+ * `RkTextInput` consists from couple of base react component.
  * It's easy to set styles for each component.
  *
  * ```
@@ -100,7 +106,10 @@ import {RkComponent} from '../rkComponent.js';
  *
  * @example Inline styling:
  *
- * It's possible to set styles inline. Use prop `style` for `container` component, `labelStyle` for `label` component and `inputStyle` for `input`.
+ * It's possible to set styles inline.
+ * Use prop `style` for `container` component,
+ * `labelStyle` for `label` component,
+ * `inputStyle` for `input`.
  * Here is example of inline style usage:
  *
  * ```
@@ -115,15 +124,16 @@ import {RkComponent} from '../rkComponent.js';
  *
  * @property {string} rkType - Types for component stylization
  * By default `RkTextInput` supports following types: `bordered`, `rounded`, `form`, `topLabel`
- * @property {TextInput.props} props - Regular `TextInput` props will be passed to internal `TextInput` component
+ * @property {TextInput.props} props - Regular `TextInput` props
+ * will be passed to internal `TextInput` component
  * @property {style} style - Style for TouchableOpacity wrapping input and label
- * @property {string || function} label - Label displayed with input. When label is clicked input gets focus. function should return React component
+ * @property {string || function} label - Label displayed with input.
+ * When label is clicked input gets focus. function should return React component
  * @property {style} labelStyle - Style applied to label
  * @property {style} inputStyle - Style applied to text input
  */
 
 export class RkTextInput extends RkComponent {
-
   componentName = 'RkTextInput';
   typeMapping = {
     container: {
@@ -133,63 +143,69 @@ export class RkTextInput extends RkComponent {
     input: {
       color: 'color',
       inputBackgroundColor: 'backgroundColor',
-      placeholderTextColor: 'placeholderTextColor'
+      placeholderTextColor: 'placeholderTextColor',
     },
     label: {
       labelColor: 'color',
-      labelFontSize: 'fontSize'
-    }
+      labelFontSize: 'fontSize',
+    },
   };
 
   static defaultProps = {
-    editable: true
+    editable: true,
   };
 
   constructor(props) {
     super(props);
-    this.focusInput = this._focusInput.bind(this);
+    this.focusInput = this.focusInput.bind(this);
   }
 
-  _focusInput() {
+  focusInput() {
     if (this.props.editable) {
-      this.refs.input.focus();
+      this.inputRef.focus();
     }
   }
 
-  _displayLabel(label, labelStyle) {
+  displayLabel(label, labelStyle) {
     if (typeof label === 'string') {
       return (
         <Text style={labelStyle} onPress={this.focusInput}>{label}</Text>
-      )
-    } else {
-      return React.cloneElement(label, {
-        onPress: (e) => {
-          this.refs.input.focus();
-          label.props.onPress && label.props.onPress(e)
-        },
-        style: [labelStyle, label.props.style]
-      });
+      );
     }
+    return React.cloneElement(label, {
+      onPress: (e) => {
+        this.inputRef.focus();
+        if (label.props.onPress) {
+          label.props.onPress(e);
+        }
+      },
+      style: [labelStyle, label.props.style],
+    });
   }
 
   render() {
-    let {
+    const {
       style,
       label,
-      labelStyle,
       inputStyle,
       ...inputProps
     } = this.props;
-    let {container: boxStyle, input: input, label: labelS} = this.defineStyles();
-    let placeholderColor = this.extractNonStyleValue(input, 'placeholderTextColor');
-    labelStyle = [labelS, labelStyle];
+    const { container: boxStyle, input, label: labelS } = this.defineStyles();
+    const placeholderColor = this.extractNonStyleValue(input, 'placeholderTextColor');
+    inputProps.labelStyle = [labelS, inputProps.labelStyle];
     inputProps.style = [input, inputStyle];
     inputProps.placeholderTextColor = placeholderColor;
     boxStyle.push(style);
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
-        {label && this._displayLabel(label, labelStyle)}
-        <TextInput underlineColorAndroid='transparent' ref={'input'} {...inputProps}/>
+        {label && this.displayLabel(label, inputProps.labelStyle)}
+        <TextInput
+          underlineColorAndroid='transparent'
+          ref={(inputValue) => {
+            this.inputRef = inputValue;
+          }}
+          {...inputProps}
+        />
       </TouchableOpacity>
     );
   }

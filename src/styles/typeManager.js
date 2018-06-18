@@ -1,84 +1,99 @@
-import {DefaultTypes} from './defaultTypes.js';
-import {RkTheme} from './themeManager.js';
-import {Platform} from 'react-native';
-import _ from 'lodash'
+import { Platform } from 'react-native';
+import _ from 'lodash';
+import { DefaultTypes } from './defaultTypes';
+import { RkTheme } from './themeManager';
 
 export class TypeManager {
-  static _userTypes = [];
-  static _themedTypes;
-  static _themableTypes = {};
+  static userTypes = [];
+  static themedTypes;
+  static themableTypes = {};
 
   static types = (theme) => {
-    if (!TypeManager._themedTypes) {
-      TypeManager._themedTypes = {};
-      _.forOwn(TypeManager._themableTypes, (value, key) => {
-        _.set(TypeManager._themedTypes, key, value(theme))
+    if (!TypeManager.themedTypes) {
+      TypeManager.themedTypes = {};
+      _.forOwn(TypeManager.themableTypes, (value, key) => {
+        _.set(TypeManager.themedTypes, key, value(theme));
       });
 
-      TypeManager._themedTypes = _.merge(DefaultTypes(theme), TypeManager._themedTypes, TypeManager._userTypes);
+      TypeManager.themedTypes = _.merge(
+        DefaultTypes(theme),
+        TypeManager.themedTypes,
+        TypeManager.userTypes,
+      );
     }
-    return TypeManager._themedTypes;
+    return TypeManager.themedTypes;
   };
 
   static setType = (element, name, value, parentTypes) => {
-    if (typeof parentTypes === "string")
-      parentTypes = parentTypes.split(' ');
-    let newType = TypeManager._createType(value, parentTypes, element);
-    _.set(TypeManager._userTypes, [[element], [name]], newType);
+    let parentTypesValue = parentTypes;
+    if (typeof parentTypes === 'string') {
+      parentTypesValue = parentTypes.split(' ');
+    }
+    const newType = TypeManager.createType(value, parentTypesValue, element);
+    _.set(TypeManager.userTypes, [[element], [name]], newType);
     TypeManager.invalidateTypes();
   };
 
   static registerTypes = (element, types) => {
-    _.set(TypeManager._themableTypes, [element], types);
+    _.set(TypeManager.themableTypes, [element], types);
     TypeManager.invalidateTypes();
   };
 
   static invalidateTypes = () => {
-    TypeManager._themedTypes = undefined;
+    TypeManager.themedTypes = undefined;
   };
 
-  static _createType = (type, parentTypes, componentName) => {
-    let newType = {};
+  static createType = (sourceType, parentTypes, componentName) => {
     if (parentTypes && parentTypes.length > 0) {
-      parentTypes.forEach(
-        (typeName) => {
-          TypeManager._mergeTypes(newType, TypeManager.types(RkTheme.current)[componentName][typeName]);
-        }
-      );
-      TypeManager._mergeTypes(newType, type);
-    } else {
-      newType = type;
+      let newType = {};
+      parentTypes.forEach(parentType => {
+        const componentTypes = TypeManager.types(RkTheme.current)[componentName][parentType];
+        newType = TypeManager.mergeTypes(newType, componentTypes);
+      });
+      return TypeManager.mergeTypes(newType, sourceType);
     }
-    return newType
+    return sourceType;
   };
 
-  static _mergeTypes = (baseType, typeForMerge) => {
-    let typeForMergeValue, baseTypeValue;
-    for (let key in typeForMerge) {
-      baseTypeValue = TypeManager._getStyleValue(baseType[key]);
-      typeForMergeValue = TypeManager._getStyleValue(typeForMerge[key]);
-      if (baseTypeValue){
-        if (typeof typeForMergeValue === 'object'){
-          typeof baseTypeValue !== 'object' && (baseType[key] = {});
-          TypeManager._mergeTypes(baseType[key], typeForMerge[key]);
-        } else {
-          baseType[key] = typeForMergeValue;
+  static mergeTypes = (sourceType, mergeType) => {
+    const mergeResult = sourceType;
+    Object.keys(mergeType).forEach(key => {
+      mergeResult[key] = TypeManager.getBaseTypeMergeValue(sourceType, mergeType, key);
+    });
+    return mergeResult;
+  };
+
+  static getBaseTypeMergeValue(baseType, mergeType, key) {
+    const baseStyleValue = TypeManager.getStyleValue(baseType[key]);
+    const mergeStyleValue = TypeManager.getStyleValue(mergeType[key]);
+    let value = {};
+    if (baseStyleValue) {
+      if (typeof mergeStyleValue === 'object') {
+        if (typeof baseStyleValue !== 'object') {
+          value = {};
         }
+        TypeManager.mergeTypes(baseType[key], mergeType[key]);
       } else {
-        baseType[key] = typeForMergeValue;
+        value = mergeStyleValue;
       }
+    } else {
+      value = mergeStyleValue;
     }
-  };
+    return value;
+  }
 
-  static _getStyleValue = (value) => {
+  static getStyleValue = (value) => {
     let styleValue = value;
     if (typeof value === 'object' && value !== null) {
-      styleValue = value.hasOwnProperty(Platform.OS)
-        ? TypeManager._getStyleValue(value[Platform.OS])
-        : Object.create(value);
+      const isPlatformSpecified = Object.prototype.hasOwnProperty.call(value, Platform.OS);
+      if (isPlatformSpecified) {
+        styleValue = TypeManager.getStyleValue(value[Platform.OS]);
+      } else {
+        styleValue = Object.create(value);
+      }
     } else if (typeof value === 'function') {
       styleValue = value(RkTheme.current);
     }
     return styleValue;
   }
-};
+}

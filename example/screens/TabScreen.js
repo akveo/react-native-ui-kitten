@@ -61,10 +61,11 @@ export class TabScreen extends Component {
         </View>
 
         <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
-          <View >
+          <View>
             <RkTabView rkType="material">
               <RkTabView.Tab title={(selected) => {
-                return this._renderMaterialTab(selected, 'TAB 1', (<ImageIcon name='phone'/>))}}/>
+                return this._renderMaterialTab(selected, 'TAB 1', (<ImageIcon name='phone'/>))
+              }}/>
               <RkTabView.Tab title={(selected) => {
                 return this._renderMaterialTab(selected, 'TAB 2', (<ImageIcon name='heart'/>))
               }}/>
@@ -78,7 +79,8 @@ export class TabScreen extends Component {
         <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
           <RkText rkType='header' style={styles.header}>{this.state.text}</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkTabView onTabChanged={(id) => this.setState({text:'Tab ' + (id + 1) + ' Selected'})}>
+            <RkTabView
+              onTabChanged={(id) => this.setState({ text: 'Tab ' + (id + 1) + ' Selected' })}>
               <RkTabView.Tab title={(selected) => {
                 return this._renderCustomTab(selected, 'Tab 1', 'paw')
               }}/>

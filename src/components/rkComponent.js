@@ -1,23 +1,31 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
-import {TypeManager} from '../styles/typeManager.js';
-import {RkTheme} from '../styles/themeManager.js';
+import { TypeManager } from '../styles/typeManager';
+import { RkTheme } from '../styles/themeManager';
 
 /**
  * `RkComponent` is base component for all components in `react-native-ui-kitten` library
- * This component includes core logic for stylization and theming. All themable components should extend this component.
+ * This component includes core logic for stylization and theming.
+ * All themable components should extend this component.
  * @extends React.Component
  */
 export class RkComponent extends React.Component {
-
+  static propTypes = {
+    rkType: PropTypes.string,
+  };
+  static defaultProps = {
+    rkType: '',
+  };
   /**
    * {string} Name of component. Should be overridden in inherited component.
    */
   componentName = '';
 
   /**
-   * {object} Mapping which used for defining predefined properties such as `color` in `RkButton`. Can be overridden in inherited component
+   * {object} Mapping which used for defining predefined properties such as `color` in `RkButton`.
+   * Can be overridden in inherited component
    */
   typeMapping = {};
 
@@ -32,35 +40,42 @@ export class RkComponent extends React.Component {
   defaultType = 'basic';
 
   /**
-   * {string} Default typeMappingElement for component. Will be taken first element if not defined. Can be overridden in inherited component.
+   * {string} Default typeMappingElement for component. Will be taken first element if not defined.
+   * Can be overridden in inherited component.
    */
-  defaultTypeMappingElement = undefined;
+  defaultTypeMappingStyleKey = undefined;
 
   /**
-   * Used to collect and compile all rkTypes into styles. Returns object with styles for all internal components.
-   * @param {string} additionalTypes - Sometimes inherited component need to apply additional type implicitly.
+   * Used to collect and compile all rkTypes into styles.
+   * Returns object with styles for all internal components.
+   * @param {string} additionalTypes - Sometimes inherited component need
+   * to apply additional type implicitly.
    * For example - if component state is `selected` component may ask about `selected` type.
    * @returns {object} styles - Object with compiled styles for each internal component.
    */
   defineStyles(additionalTypes) {
-    let rkTypes = this._getTypesString(this.props.rkType || '');
-    additionalTypes = this._getTypesString(additionalTypes);
-    let types = this._getTypesString([this.defaultType, rkTypes, additionalTypes]);
+    const sourceTypes = this.getTypesString(this.props.rkType);
+    const customTypes = this.getTypesString(additionalTypes);
+    let types = this.getTypesString([this.defaultType, sourceTypes, customTypes]);
     types = types && types.length ? types.split(' ') : [];
-    return this._getTypes(types);
+    return this.getTypes(types);
   }
 
   /**
-   * Extracts property value from type. Often used if need to control non-style properties using types.
-   * Example: `placeholderTextColor` of `TextInput` component. For some reason this setting should be passed separately from `style` prop.
-   * So we keep `placeholderTextColor` as style property of `RkTextInput` but before applying to internal `TextInput` - we extract this value and pass it to according prop. For more details, see Customization section.
+   * Extracts property value from type.
+   * Often used if need to control non-style properties using types.
+   * Example: `placeholderTextColor` of `TextInput` component.
+   * For some reason this setting should be passed separately from `style` prop.
+   * So we keep `placeholderTextColor` as style property of `RkTextInput` but before applying to
+   * internal `TextInput` - we extract this value and pass it to according prop.
+   * For more details, see Customization section.
    *
    * @param {object} style - Style which contains non-style property
    * @param {string} property - name of property that should be extracted.
    * @returns {object} value of extracted property
    */
   extractNonStyleValue(style, property) {
-    let val = _.find(style, (e) => e.hasOwnProperty(property));
+    const val = _.find(style, (e) => Object.prototype.hasOwnProperty.call(e, property));
     if (val) {
       style.splice(style.indexOf(val), 1);
     } else {
@@ -69,7 +84,7 @@ export class RkComponent extends React.Component {
     return val[property];
   }
 
-  _getTypesString(types) {
+  getTypesString(types) {
     let typesString = types;
     if (Array.isArray(types)) {
       typesString = _.join(types, ' ');
@@ -77,87 +92,76 @@ export class RkComponent extends React.Component {
     return typesString;
   }
 
-  _getStyleValue(value) {
+  getStyleValue(value) {
     if (typeof value === 'object' && value !== null) {
-      if (value.hasOwnProperty(Platform.OS)) {
-        value = this._getStyleValue(value[Platform.OS]);
+      if (Object.prototype.hasOwnProperty.call(value, Platform.OS)) {
+        return this.getStyleValue(value[Platform.OS]);
       }
     } else if (typeof value === 'function') {
-      value = value(RkTheme.current);
+      return value(RkTheme.current);
     }
     return value;
   }
 
-  _getTypes(rkTypes) {
-    let usedTypes = this._getUsedTypes(rkTypes);
-    let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
-    let styles = {};
-    let baseStyle = componentTypes[this.baseStyle];
+  getTypes(rkTypes) {
+    const componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
+    const baseStyle = componentTypes[this.baseStyle];
 
-    if (baseStyle) {
-      usedTypes = [baseStyle, ...usedTypes];
-    }
+    let usedTypes = this.getUsedTypes(rkTypes);
+    usedTypes = baseStyle === undefined ? usedTypes : [baseStyle, ...usedTypes];
+
+    const styles = {};
 
     usedTypes.forEach((usedType) => {
-      for (let key in usedType) {
-        if (this.typeMapping.hasOwnProperty(key)) {
-          this.fillElementStyles(styles, key, usedType[key]);
+      Object.keys(usedType).forEach(key => {
+        const usedTypeValue = usedType[key];
+        if (Object.prototype.hasOwnProperty.call(this.typeMapping, key)) {
+          Object.keys(usedTypeValue).forEach(typeKey => {
+            styles[key] = this.getElementStyle(styles, key, typeKey, usedType[key][typeKey]);
+          });
         } else {
-          let element = this.findTypeMappingElementByKey(key, this.typeMapping)
-            || this.defaultTypeMappingElement || _.keys(this.typeMapping)[0];
-          this.fillElementStyle(styles, element, key, usedType[key]);
+          let typeMappingKey = this.findTypeMappingKeyByStyleKey(this.typeMapping, key);
+          typeMappingKey = typeMappingKey || _.keys(this.typeMapping)[0];
+          styles[typeMappingKey] = this.getElementStyle(styles, typeMappingKey, key, usedTypeValue);
         }
-      }
+      });
     });
-
     return styles;
-  };
-
-  fillElementStyle(styles, element, key, value) {
-    this.createStyleIfNotExists(styles, element);
-    let styleKey = this.typeMapping[element][key];
-    if (!styleKey)
-      styleKey = key;
-    let styleValue = this._getStyleValue(value);
-    this._mergeStyles(styles[element], styleKey, styleValue);
   }
 
-  fillElementStyles(styles, element, value) {
-    for (let styleKey in value) {
-      this.fillElementStyle(styles, element, styleKey, value[styleKey])
-    }
+  getElementStyle(styles, element, key, value) {
+    const style = styles[element] || [];
+    const styleKey = this.getElementStyleKey(element, style, key);
+    style[styleKey.index] = { [styleKey.name]: this.getStyleValue(value) };
+    return style;
   }
 
-  createStyleIfNotExists(styles, key) {
-    styles[key] === undefined && (styles[key] = []);
+  getElementStyleKey(element, style, key) {
+    const name = this.typeMapping[element][key] || key;
+    const index = this.findElementStyleKeyIndex(style, name);
+    return { name, index };
   }
 
-  findTypeMappingElementByKey(key, typeMapping) {
-    let resultComplexStyle;
-    for (let complexStyle in typeMapping) {
-      if (typeMapping[complexStyle].hasOwnProperty(key)) {
-        resultComplexStyle = complexStyle;
-        break;
-      }
-    }
-    return resultComplexStyle;
+  findElementStyleKeyIndex(element, style) {
+    const index = _.findIndex(element, (e) => Object.prototype.hasOwnProperty.call(e, style));
+    return index >= 0 ? index : element.length;
   }
 
-  _mergeStyles(element, styleKey, value) {
-    //merge styles in order to have only one value for each property
-    let index = _.findIndex(element, (e) => e.hasOwnProperty(styleKey));
-    if (index >= 0)
-      element[index][styleKey] = value;
-    else
-      element.push({[styleKey]: value});
+  findTypeMappingKeyByStyleKey(typeMapping, styleKey) {
+    // eslint-disable-next-line array-callback-return
+    const typeMappingKey = Object.keys(typeMapping).find(key => {
+      Object.prototype.hasOwnProperty.call(typeMapping[key], styleKey);
+    });
+    return typeMappingKey || this.defaultTypeMappingStyleKey;
   }
 
-  _getUsedTypes(rkTypes) {
-    let usedTypes = [];
-    let componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
+  getUsedTypes(rkTypes) {
+    const usedTypes = [];
+    const componentTypes = TypeManager.types(RkTheme.current)[this.componentName] || [];
     rkTypes.forEach(type => {
-      if (componentTypes[type])
+      if (componentTypes[type]) {
         usedTypes.push(componentTypes[type]);
+      }
     });
     return usedTypes;
   }

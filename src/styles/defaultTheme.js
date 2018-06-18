@@ -1,4 +1,4 @@
-import {RkColors} from './color'
+import { RkColors } from './color';
 
 export const Values = {
   primary: '#397edc',
@@ -14,12 +14,12 @@ export const Values = {
   foreground: '#000000dd',
   modalBackground: '#0000004d',
   background: '#fff',
-  inverseBackground:'#000000',
+  inverseBackground: '#000000',
   overlay: '#00000057',
   fontSize: 15,
   neutral: '#0000001A',
   hint: '#0000008e',
-  highlight: '#ececec'
+  highlight: '#ececec',
 };
 
 export const DefaultTheme = {
@@ -43,7 +43,7 @@ export const DefaultTheme = {
       base: Values.foreground,
       inverse: Values.background,
       subtitle: Values.foreground,
-      hint: Values.hint
+      hint: Values.hint,
     },
     button: {
       primary: Values.primary,
@@ -78,7 +78,7 @@ export const DefaultTheme = {
       background: Values.background,
       material: Values.primary,
       disabled: Values.neutral,
-      inverse: Values.inverseBackground
+      inverse: Values.inverseBackground,
     },
     border: {
       base: Values.neutral,
@@ -86,7 +86,7 @@ export const DefaultTheme = {
       solid: '#0000003B',
       material: Values.warning,
       disabled: Values.neutral,
-      card: '#00000014'
+      card: '#00000014',
     },
     input: {
       text: Values.foreground,
@@ -98,11 +98,11 @@ export const DefaultTheme = {
   fonts: {
     sizes: {
       base: Values.fontSize,
-      small: Values.fontSize * .8,
+      small: Values.fontSize * 0.8,
       medium: Values.fontSize,
       large: Values.fontSize * 1.2,
       xlarge: Values.fontSize / 0.75,
       xxlarge: Values.fontSize * 1.6,
-    }
-  }
+    },
+  },
 };

@@ -1,19 +1,17 @@
 import _ from 'lodash';
-import {DefaultTheme} from './defaultTheme';
-import {RkColors} from './color';
-import {TypeManager} from './typeManager';
-import {RkStyleSheet} from './styleSheet'
+import { DefaultTheme } from './defaultTheme';
+import { RkColors } from './color';
+import { TypeManager } from './typeManager';
+import { RkStyleSheet } from './styleSheet';
 
-const themeUpdated = 'themeUpdated';
 /**
  * `RkTheme` object is entry point for all manipulations with customization.
  */
 class ThemeManager {
-
   constructor() {
-    this._currentTheme = this._getDefault();
-    this._colors = _.cloneDeep(RkColors);
-    this._updatePredefinedStyles();
+    this.currentTheme = this.getDefault();
+    this.themeColors = _.cloneDeep(RkColors);
+    this.updatePredefinedStyles();
     this.listeners = [];
   }
 
@@ -25,27 +23,27 @@ class ThemeManager {
     _.pull(this.listeners, obj);
   }
 
-  _updatePredefinedStyles() {
-    this._predefinedStyles = this._createColorsStyles(this._colors);
+  updatePredefinedStyles() {
+    this.predefinedStyles = this.createColorsStyles(this.colors);
   }
 
-  _createColorsStyles(colors) {
-    let styleObject = {};
-    for (let colorName in colors) {
-      styleObject[colorName + 'Text'] = {
-        color: colors[colorName]
+  createColorsStyles(colors) {
+    const styleObject = {};
+    Object.keys(colors).forEach(key => {
+      styleObject[`${key}Text`] = {
+        color: colors[key],
       };
-      styleObject[colorName + 'Bg'] = {
-        backgroundColor: colors[colorName]
+      styleObject[`${key}Bg`] = {
+        backgroundColor: colors[key],
       };
-      styleObject[colorName + 'Border'] = {
-        borderColor: colors[colorName]
+      styleObject[`${key}Border`] = {
+        borderColor: colors[key],
       };
-    }
+    });
     return styleObject;
   }
 
-  _getDefault() {
+  getDefault() {
     return _.cloneDeep(DefaultTheme);
   }
 
@@ -53,21 +51,21 @@ class ThemeManager {
    * {object} Returns current theme object.
    */
   get current() {
-    return this._currentTheme;
+    return this.currentTheme;
   }
 
   /**
    * {object} Returns auto styles. Deprecated.
    */
   get styles() {
-    return this._predefinedStyles;
+    return this.predefinedStyles;
   }
 
   /**
    * {object} Returns object contains material colors.
    */
   get colors() {
-    return this._colors;
+    return this.themeColors;
   }
 
   /**
@@ -75,13 +73,13 @@ class ThemeManager {
    * @param {object} theme - new theme.
    */
   setTheme(theme) {
-    let baseTheme = this._getDefault();
+    const baseTheme = this.getDefault();
 
-    let newTheme = _.merge(baseTheme, theme);
-    _.merge(this._currentTheme, newTheme);
+    const newTheme = _.merge(baseTheme, theme);
+    _.merge(this.currentTheme, newTheme);
 
     TypeManager.invalidateTypes();
-    RkStyleSheet._invalidate();
+    RkStyleSheet.invalidate();
 
     this.listeners.forEach(t => t.forceUpdate());
   }
@@ -111,10 +109,9 @@ class ThemeManager {
    * @param {string} value - color value.
    */
   setColor(name, value) {
-    this._colors[name] = value;
-    this._updatePredefinedStyles();
+    this.colors[name] = value;
+    this.updatePredefinedStyles();
   }
 }
 
-
-export let RkTheme = new ThemeManager();
+export const RkTheme = new ThemeManager();

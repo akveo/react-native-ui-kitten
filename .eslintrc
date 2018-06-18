@@ -1,0 +1,16 @@
+{
+  "extends": "eslint-config-akveo-react",
+  "parser": "babel-eslint",
+  "rules": {
+    "react/sort-comp": [1, {
+      "order": [
+        "static-methods",
+        "instance-variables",
+        "instance-methods",
+        "lifecycle",
+        "everything-else",
+        "render"
+      ]
+    }]
+  }
+}

@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import {RkTheme} from './themeManager';
+import { RkTheme } from './themeManager';
 
-let objects = [];
-let patternStyles = [];
+const objects = [];
+const patternStyles = [];
 let id = 0;
 
 /**
@@ -32,54 +32,51 @@ let id = 0;
  *
  */
 class ThemedStyleSheet {
-
-  _getStyle(style) {
+  getStyle(style) {
     if (typeof style === 'function') {
       return style(RkTheme.current);
     }
     return style;
   }
 
-  _invalidate() {
+  invalidate() {
     patternStyles.forEach((patternObj) => {
-      let styles = this._getStyle(patternObj.style);
-      for (let key in styles) {
-        let {id} = _.find(patternObj.computedIds, (o) => {
-          return o.key === key
-        });
-        objects[id] = styles[key];
-      }
-    })
+      const styles = this.getStyle(patternObj.style);
+      Object.keys(styles).forEach(key => {
+        const { id: styleId } = _.find(patternObj.computedIds, (o) => o.key === key);
+        objects[styleId] = styles[key];
+      });
+    });
   }
 
-  _wrapToObject(computedIds) {
-    let obj = {};
+  wrapToObject(computedIds) {
+    const obj = {};
 
     computedIds.forEach((item) => {
       Object.defineProperty(obj, item.key, {
-        get: () => objects[item.id]
-      })
+        get: () => objects[item.id],
+      });
     });
     return obj;
   }
 
   /**
    * Creates a `RkStyleSheet` style object from the given object or function.
-   * @param {object | function} style - Object with styles or function which returns themed styles object.
+   * @param {object | function} style - Object with styles or function,
+   * which returns themed styles object.
    * @returns {object} styles
    */
   create(style) {
-    let styles = this._getStyle(style);
-    let computedIds = [];
-
-    for (let key in styles) {
-      id++;
+    const styles = this.getStyle(style);
+    const computedIds = [];
+    Object.keys(styles).forEach(key => {
+      id += 1;
       objects[id] = styles[key];
-      computedIds.push({key, id});
-    }
-    patternStyles.push({style, computedIds});
-    return this._wrapToObject(computedIds);
+      computedIds.push({ key, id });
+    });
+    patternStyles.push({ style, computedIds });
+    return this.wrapToObject(computedIds);
   }
 }
 
-export let RkStyleSheet = new ThemedStyleSheet();
+export const RkStyleSheet = new ThemedStyleSheet();

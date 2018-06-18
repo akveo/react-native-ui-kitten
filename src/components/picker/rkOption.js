@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Text,
-  TouchableHighlight,
-  Modal,
-  View,
-  FlatList
-} from 'react-native';
-import {RkText} from '../text/rkText';
-import {RkComponent} from '../rkComponent';
+import { View } from 'react-native';
+import { RkText } from '../text/rkText';
+import { RkComponent } from '../rkComponent';
 
 export class RkOption extends RkComponent {
   componentName = 'RkOption';
@@ -19,18 +13,17 @@ export class RkOption extends RkComponent {
     this.selectedOptionRkType = this.props.selectedOptionRkType || 'header xlarge';
   }
 
-  compareOptions(option1, option2){
+  compareOptions(option1, option2) {
     return (option1.key && option2.key && option1.key === option2.key)
       || (!option1.key && !option2.key && option1 === option2);
   }
 
   render() {
-    let isSelected = this.compareOptions(this.props.data, this.props.selectedOption);
-    let rkType = isSelected ? this.selectedOptionRkType : this.optionRkType;
-    let styles = [this.props.style, {height: this.optionHeight}];
-    isSelected && styles.push(this.props.selectedStyle);
-    if (isSelected){
-      // alert(2 + ' ' + (this.props.data.value || this.props.data));
+    const isSelected = this.compareOptions(this.props.data, this.props.selectedOption);
+    const rkType = isSelected ? this.selectedOptionRkType : this.optionRkType;
+    const styles = [this.props.style, { height: this.optionHeight }];
+    if (isSelected) {
+      styles.push(this.props.selectedStyle);
     }
     return (
       <View style={styles}>
@@ -38,6 +31,6 @@ export class RkOption extends RkComponent {
           {this.props.data.value || this.props.data}
         </RkText>
       </View>
-    )
+    );
   }
 }

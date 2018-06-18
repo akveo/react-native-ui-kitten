@@ -1,7 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
 import hoistNonReactStatic from 'hoist-non-react-statics';
-import {RkTheme} from '../../styles/themeManager';
+import { RkTheme } from '../../styles/themeManager';
 
 /**
  * Higher-Order Component (HOC) which wraps component in order to respond to dynamic theme changes.
@@ -25,25 +24,19 @@ import {RkTheme} from '../../styles/themeManager';
  */
 export function withRkTheme(Wrapped) {
   class ThemeProvider extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
     componentDidMount() {
-      RkTheme.subscribeComponent(this)
+      RkTheme.subscribeComponent(this);
     }
 
     componentWillUnmount() {
-      RkTheme.unsubscribeComponent(this)
+      RkTheme.unsubscribeComponent(this);
     }
 
     render() {
-      return <Wrapped {...this.props}/>
+      return <Wrapped {...this.props} />;
     }
   }
 
   hoistNonReactStatic(ThemeProvider, Wrapped);
-  return ThemeProvider
+  return ThemeProvider;
 }
-
-export var WithRkThemeView = withRkTheme(View);
