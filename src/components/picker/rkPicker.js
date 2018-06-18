@@ -198,21 +198,16 @@ export class RkPicker extends RkComponent {
     };
   }
 
-  optionListDidSelect(item, index) {
-    this.state.scrollToSelected = this.props.visible;
-    this.state.selectedOptions[index] = item;
-  }
-
-  renderOptionList(array, index, optionBlock, highlightBlock, optionListContainer) {
+  onRenderOptionContainer(items, index, optionBlock, highlightBlock, optionListContainer) {
     return (
       <RkOptionsList
         rkType={this.props.rkType}
         key={index}
         id={index}
-        data={array}
+        data={items}
         selectedOption={this.state.selectedOptions[index]}
         scrollToSelected={this.state.scrollToSelected}
-        onSelect={(option, optionIndex) => this.optionListDidSelect(option, optionIndex)}
+        onSelect={(option, optionIndex) => this.onOptionSelect(option, optionIndex)}
         optionHeight={this.optionHeight}
         optionNumberOnPicker={this.optionNumberOnPicker}
         optionRkType={this.props.optionRkType}
@@ -224,10 +219,23 @@ export class RkPicker extends RkComponent {
     );
   }
 
+  onOptionSelect(item, index) {
+    this.state.scrollToSelected = this.props.visible;
+    this.state.selectedOptions[index] = item;
+  }
+
   render() {
     const {
-      modalContainerBlock, modalContentBlock, titleBlock, buttonsBlockBlock, listsContainerBlock,
-      cancelButtonBlock, confirmButtonBlock, optionBlock, highlightBlock, optionListContainer,
+      modalContainerBlock,
+      modalContentBlock,
+      titleBlock,
+      buttonsBlockBlock,
+      listsContainerBlock,
+      cancelButtonBlock,
+      confirmButtonBlock,
+      optionBlock,
+      highlightBlock,
+      optionListContainer,
     } = super.defineStyles(this.props.rkType);
 
     return (
@@ -237,13 +245,22 @@ export class RkPicker extends RkComponent {
         transparent
         onRequestClose={() => this.props.onCancel()}
       >
-
         <View style={[modalContainerBlock]}>
-          <View style={[modalContentBlock, this.props.style]}>
-            <RkText rkType={this.titleTextRkType} style={titleBlock}>{this.props.title}</RkText>
-            <View style={[listsContainerBlock, { height: this.pickerHeight }]}>
+          <View style={[modalContentBlock,
+            this.props.style,
+          ]}
+          >
+            <RkText
+              rkType={this.titleTextRkType}
+              style={titleBlock}
+            >{this.props.title}
+            </RkText>
+            <View style={[listsContainerBlock, {
+              height: this.pickerHeight,
+            }]}
+            >
               {this.props.data.map((array, index) =>
-                this.renderOptionList(
+                this.onRenderOptionContainer(
                   array,
                   index,
                   optionBlock,

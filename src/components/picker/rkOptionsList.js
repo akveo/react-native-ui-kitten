@@ -49,11 +49,11 @@ export class RkOptionsList extends RkComponent {
     }
   }
 
-  onScrollEndDrag(e, id) {
+  onScrollEndDrag(event, id) {
     const el = {
       nativeEvent: {
         contentOffset: {
-          y: e.nativeEvent.contentOffset.y,
+          y: event.nativeEvent.contentOffset.y,
         },
       },
     };
@@ -68,11 +68,11 @@ export class RkOptionsList extends RkComponent {
     }, 10);
   }
 
-  onMomentumScrollEnd(e, id) {
+  onMomentumScrollEnd(event, id) {
     const selectionEvent = {
       nativeEvent: {
         contentOffset: {
-          y: e.nativeEvent.contentOffset.y,
+          y: event.nativeEvent.contentOffset.y,
         },
       },
     };
@@ -119,8 +119,8 @@ export class RkOptionsList extends RkComponent {
     return Array(...new Array(Math.floor(arrayLength))).map(() => ' ');
   }
 
-  selectOption(e, id) {
-    const y = e.nativeEvent.contentOffset ? e.nativeEvent.contentOffset.y : 0;
+  selectOption(event, id) {
+    const y = event.nativeEvent.contentOffset ? event.nativeEvent.contentOffset.y : 0;
     const selectedIndex = Math.round(y / this.optionHeight);
     this.setState({
       selectedOption: this.props.data[selectedIndex],
@@ -157,9 +157,9 @@ export class RkOptionsList extends RkComponent {
           ref={(ref) => {
             this.listRef = ref;
           }}
-          onMomentumScrollBegin={this.onMomentumScrollBegin}
+          onMomentumScrollBegin={() => this.onMomentumScrollBegin()}
           onMomentumScrollEnd={(e) => this.onMomentumScrollEnd(e, this.props.id)}
-          onScrollBeginDrag={this.onScrollBeginDrag}
+          onScrollBeginDrag={(e) => this.onScrollBeginDrag(e)}
           onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
           dataSource={this.state.dataSource}
           renderRow={(item) => this.renderOption(item, this.props.optionBlockStyle)}
