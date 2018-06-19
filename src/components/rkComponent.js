@@ -120,7 +120,7 @@ export class RkComponent extends React.Component {
             styles[key] = this.getElementStyle(styles, key, typeKey, usedType[key][typeKey]);
           });
         } else {
-          let typeMappingKey = this.findTypeMappingKeyByStyleKey(this.typeMapping, key);
+          let typeMappingKey = this.findTypeMappingKeyByStyleKey(key);
           typeMappingKey = typeMappingKey || _.keys(this.typeMapping)[0];
           styles[typeMappingKey] = this.getElementStyle(styles, typeMappingKey, key, usedTypeValue);
         }
@@ -147,10 +147,10 @@ export class RkComponent extends React.Component {
     return index >= 0 ? index : element.length;
   }
 
-  findTypeMappingKeyByStyleKey(typeMapping, styleKey) {
-    // eslint-disable-next-line array-callback-return
-    const typeMappingKey = Object.keys(typeMapping).find(key => {
-      Object.prototype.hasOwnProperty.call(typeMapping[key], styleKey);
+  findTypeMappingKeyByStyleKey(styleKey) {
+    // eslint-disable-next-line arrow-body-style
+    const typeMappingKey = Object.keys(this.typeMapping).find(style => {
+      return Object.prototype.hasOwnProperty.call(this.typeMapping[style], styleKey);
     });
     return typeMappingKey || this.defaultTypeMappingStyleKey;
   }
