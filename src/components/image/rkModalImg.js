@@ -176,6 +176,8 @@ export class RkModalImg extends RkComponent {
       height: undefined,
       index: props.index || 0,
     };
+    this.onRenderHeader = this.onRenderHeader.bind(this);
+    this.onRenderFooter = this.onRenderFooter.bind(this);
     this.onContainerScroll = this.onContainerScroll.bind(this);
   }
 
@@ -199,7 +201,7 @@ export class RkModalImg extends RkComponent {
         initialScrollIndex={index}
         horizontal
         pagingEnabled
-        keyExtractor={(item, srcIndex) => srcIndex}
+        keyExtractor={(item, srcIndex) => srcIndex.toString()}
         onScroll={(event) => this.onContainerScroll(event)}
       />
     );
@@ -207,9 +209,9 @@ export class RkModalImg extends RkComponent {
 
   onRenderItemLayout(item, index) {
     return {
-      index,
       length: this.state.width,
       offset: this.state.width * index,
+      index,
     };
   }
 
@@ -269,12 +271,12 @@ export class RkModalImg extends RkComponent {
     return null;
   }
 
-  onRenderFooter = () => {
+  onRenderFooter() {
     const style = this.styles ? this.styles.footerContent : {};
     return (
       <View style={style} />
     );
-  };
+  }
 
   onImageClicked = () => {
     // eslint-disable-next-line no-underscore-dangle
@@ -316,7 +318,7 @@ export class RkModalImg extends RkComponent {
       headerStyle,
       footerStyle,
       source,
-      index,
+      index: initialIndex,
       style: imgStyle,
       ...imgProps
     } = this.props;
@@ -360,7 +362,7 @@ export class RkModalImg extends RkComponent {
     const closeImage = this.onCloseImage;
     const pageNumber = +this.state.index + 1;
     const totalPages = this.props.source.length;
-    const basicSource = Array.isArray(source) ? source[index] : source;
+    const basicSource = Array.isArray(source) ? source[+initialIndex] : source;
     return (
       <View>
         <TouchableWithoutFeedback
@@ -372,8 +374,8 @@ export class RkModalImg extends RkComponent {
           <Image
             source={basicSource}
             style={[img,
-            imgStyle,
-          ]}
+              imgStyle,
+            ]}
             {...imgProps}
           />
         </TouchableWithoutFeedback>
@@ -392,13 +394,13 @@ export class RkModalImg extends RkComponent {
             onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange}
           >
             {Array.isArray(source) ?
-              this.onRenderImageContainer(source, index, imgProps) :
+              this.onRenderImageContainer(source, +initialIndex, imgProps) :
               this.onRenderImage(basicSource, imgProps)}
             <Animated.View style={[
               this.styles.header, {
                 opacity: this.state.opacity,
               },
-              ]}
+            ]}
             >
               {renderHeader({ closeImage, pageNumber, totalPages })}
             </Animated.View>
@@ -406,7 +408,7 @@ export class RkModalImg extends RkComponent {
               this.styles.footer, {
                 opacity: this.state.opacity,
               },
-              ]}
+            ]}
             >
               {renderFooter({ closeImage, pageNumber, totalPages })}
             </Animated.View>
