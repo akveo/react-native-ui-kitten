@@ -176,19 +176,12 @@ export class RkModalImg extends RkComponent {
       height: undefined,
       index: props.index || 0,
     };
+    this.onRenderHeader = this.onRenderHeader.bind(this);
+    this.onRenderFooter = this.onRenderFooter.bind(this);
+    this.onContainerScroll = this.onContainerScroll.bind(this);
   }
 
-  componentDidUpdate() {
-    if (this.needUpdateScroll && this.containerRef) {
-      this.containerRef.scrollToOffset({
-        offset: this.state.index * this.state.width,
-        animated: false,
-      });
-      this.needUpdateScroll = false;
-    }
-  }
-
-  onContainerScroll = (event) => {
+  onContainerScroll(event) {
     const currentIndex = Math.round(event.nativeEvent.contentOffset.x / this.state.width);
     if (currentIndex >= 0 &&
       currentIndex <= this.props.source.length &&
@@ -197,23 +190,29 @@ export class RkModalImg extends RkComponent {
         index: currentIndex,
       });
     }
-  };
+  }
 
   onRenderImageContainer(source, index, props) {
     return (
       <FlatList
-        ref={(ref) => {
-          this.containerRef = ref;
-        }}
         data={Array.from(source)}
+        getItemLayout={(item, itemIndex) => this.onRenderItemLayout(item, itemIndex)}
         renderItem={({ item }) => this.onRenderImage(item, props)}
+        initialScrollIndex={index}
         horizontal
         pagingEnabled
-        keyExtractor={() => index}
-        extraData={this.state}
-        onScroll={this.onContainerScroll}
+        keyExtractor={(item, srcIndex) => srcIndex.toString()}
+        onScroll={(event) => this.onContainerScroll(event)}
       />
     );
+  }
+
+  onRenderItemLayout(item, index) {
+    return {
+      length: this.state.width,
+      offset: this.state.width * index,
+      index,
+    };
   }
 
   onRenderImage(source, props) {
@@ -272,12 +271,12 @@ export class RkModalImg extends RkComponent {
     return null;
   }
 
-  onRenderFooter = () => {
+  onRenderFooter() {
     const style = this.styles ? this.styles.footerContent : {};
     return (
       <View style={style} />
     );
-  };
+  }
 
   onImageClicked = () => {
     // eslint-disable-next-line no-underscore-dangle
@@ -319,7 +318,7 @@ export class RkModalImg extends RkComponent {
       headerStyle,
       footerStyle,
       source,
-      index,
+      index: initialIndex,
       style: imgStyle,
       ...imgProps
     } = this.props;
@@ -363,7 +362,7 @@ export class RkModalImg extends RkComponent {
     const closeImage = this.onCloseImage;
     const pageNumber = +this.state.index + 1;
     const totalPages = this.props.source.length;
-    const basicSource = Array.isArray(source) ? source[index] : source;
+    const basicSource = Array.isArray(source) ? source[+initialIndex] : source;
     return (
       <View>
         <TouchableWithoutFeedback
@@ -375,8 +374,8 @@ export class RkModalImg extends RkComponent {
           <Image
             source={basicSource}
             style={[img,
-            imgStyle,
-          ]}
+              imgStyle,
+            ]}
             {...imgProps}
           />
         </TouchableWithoutFeedback>
@@ -395,13 +394,13 @@ export class RkModalImg extends RkComponent {
             onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange}
           >
             {Array.isArray(source) ?
-              this.onRenderImageContainer(source, index, imgProps) :
+              this.onRenderImageContainer(source, +initialIndex, imgProps) :
               this.onRenderImage(basicSource, imgProps)}
             <Animated.View style={[
               this.styles.header, {
                 opacity: this.state.opacity,
               },
-              ]}
+            ]}
             >
               {renderHeader({ closeImage, pageNumber, totalPages })}
             </Animated.View>
@@ -409,7 +408,7 @@ export class RkModalImg extends RkComponent {
               this.styles.footer, {
                 opacity: this.state.opacity,
               },
-              ]}
+            ]}
             >
               {renderFooter({ closeImage, pageNumber, totalPages })}
             </Animated.View>
