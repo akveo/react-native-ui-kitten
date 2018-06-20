@@ -117,43 +117,42 @@ export class RkCard extends RkComponent {
     imgOverlay: {},
   };
 
-  process(elem, readyStyles) {
-    const props = elem.props || {};
-    const styles = Object.keys(props)
-      .filter(prop => prop.startsWith(RkCard.attrName))
-      .map(prop => readyStyles[this.mapPropAttributeToStyle(prop)]);
-    if (elem.props) {
-      styles.push(elem.props.style);
-    }
-    return this.copyElement(elem, { style: styles }, readyStyles);
-  }
-
-  copyElement(elem, props, readyStyles) {
-    if (typeof elem === 'string') return elem;
-    const propsToClone = ({
-      ...props,
-    });
-    if (elem.props && elem.props.children) {
-      propsToClone.children = Array.isArray(elem.props.children) ?
-        React.Children.map(elem.props.children, (child) =>
-          this.process(child, readyStyles)) : this.process(elem.props.children, readyStyles);
-    }
-    return React.cloneElement(elem, propsToClone);
-  }
-
   mapPropAttributeToStyle(prop) {
     const name = prop.substring(RkCard.attrName.length);
     return name.charAt(0).toLowerCase() + name.slice(1);
   }
 
+  cloneView(view, props, styles) {
+    const cloneProps = { ...props };
+    if (view.props && view.props.children) {
+      const subviewMapping = subview => this.renderChildView(subview, styles);
+      cloneProps.children = React.Children.map(view.props.children, subviewMapping);
+    }
+    return React.cloneElement(view, cloneProps);
+  }
+
+  renderChildView(view, styles) {
+    return view ? this.renderView(view, styles) : null;
+  }
+
+  renderView(view, styles) {
+    const viewStyles = Object.keys(view.props || {})
+      .filter(prop => prop.startsWith(RkCard.attrName))
+      .map(prop => styles[this.mapPropAttributeToStyle(prop)]);
+    if (view.props) {
+      viewStyles.push(view.props.style);
+    }
+    return typeof view === 'string' ? view : this.cloneView(view, { style: viewStyles }, styles);
+  }
+
   render() {
-    const { container, ...definedStyles } = this.defineStyles();
+    const { container, ...containerStyles } = this.defineStyles();
     const { style, ...viewProps } = this.props;
-    return this.process(
+    return this.renderView(
       <View rkCardContainer style={[container, style]} {...viewProps}>
         {this.props.children}
       </View>,
-      definedStyles,
+      containerStyles,
     );
   }
 }
