@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   TouchableOpacity,
-  View,
   Image,
 } from 'react-native';
 import _ from 'lodash';
