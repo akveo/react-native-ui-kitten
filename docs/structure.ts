@@ -311,6 +311,33 @@ export const STRUCTURE = [
           }
         ]
       },
+      {
+        type: 'page',
+        name: 'RkSwitch',
+        demogif: 'switch.gif',
+        children: [
+          {
+            type: 'block',
+            block: 'rk-description',
+            klass: 'RkSwitch',
+          },
+          {
+            type: 'block',
+            block: 'rk-examples',
+            klass: 'RkSwitch',
+          },
+          {
+            type: 'block',
+            block: 'rk-props',
+            klass: 'RkSwitch',
+          },
+          {
+            type: 'block',
+            block: 'rk-styles',
+            klass: 'RkSwitch',
+          }
+        ]
+      },
     ],
   },
   {
