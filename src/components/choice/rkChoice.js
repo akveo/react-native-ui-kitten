@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   TouchableOpacity,
-  View,
   Image,
 } from 'react-native';
 import _ from 'lodash';
@@ -201,66 +200,52 @@ export class RkChoice extends RkComponent {
   }
 
   onPress(e) {
-    if (!this.props.disabled) {
-      const selected = !this.state.selected;
-      this.setState({ selected });
-      if (this.props.onChange) {
-        this.props.onChange(selected, e);
-      }
+    this.setState({ selected: !this.state.selected });
+    if (this.props.onChange) {
+      this.props.onChange(this.state.selected, e);
     }
   }
 
-  defaultRenderContentFunction(renderArgs) {
-    const imageSource = this.extractNonStyleValue(renderArgs.rkStyle.inner, 'imageSource');
-    return (<Image
-      style={[renderArgs.rkStyle.inner, this.props.contentStyle]}
-      source={imageSource}
-    />);
+  renderDefaultContentView(style) {
+    const image = this.extractNonStyleValue(style.rkStyle.inner, 'imageSource');
+    return (
+      <Image
+        style={[style.rkStyle.inner, this.props.contentStyle]}
+        source={image}
+      />
+    );
   }
 
-  defineComponentStyles() {
-    const computedTypes = this.props.rkType ? this.props.rkType.split(' ') : [];
-    computedTypes.unshift('');
-
-    computedTypes.forEach((v, k, state) => {
+  renderContentView() {
+    const styles = this.props.rkType ? this.props.rkType.split(' ') : [];
+    styles.unshift('');
+    styles.forEach((v, k, state) => {
       state[k] += this.state.selected ? 'Selected' : ''; // eslint-disable-line no-param-reassign
       state[k] += this.state.disabled ? 'Disabled' : ''; // eslint-disable-line no-param-reassign
     });
-
-    const { container, inner } = this.defineStyles(_.join(computedTypes, ' '));
-    const rkChoiceContent = this.props.renderContentFunction ?
-      this.props.renderContentFunction({
-        isDisabled: this.state.disabled,
-        isSelected: this.state.selected,
-        rkStyle: { inner },
-      }) :
-      this.defaultRenderContentFunction({
-        isDisabled: this.state.disabled,
-        isSelected: this.state.selected,
-        rkStyle: { inner },
-      });
-    return { container, rkChoiceContent };
+    const { container, inner } = this.defineStyles(_.join(styles, ' '));
+    const style = {
+      isDisabled: this.state.disabled,
+      isSelected: this.state.selected,
+      rkStyle: { inner },
+    };
+    const contentView = this.props.renderContentFunction ?
+      this.props.renderContentFunction(style) :
+      this.renderDefaultContentView(style);
+    return { container, contentView };
   }
 
   render() {
-    const { container, rkChoiceContent } = this.defineComponentStyles();
-
-    if (this.props.inTrigger) {
-      return (
-        <View style={[container, this.props.style]}>
-          {rkChoiceContent}
-        </View>
-      );
-    }
+    const { container, contentView } = this.renderContentView();
     return (
       <TouchableOpacity
-        activeOpacity={this.props.disabled ? 1 : 0.2}
         style={[container, this.props.style]}
-        onPress={(e) => {
+        activeOpacity={this.props.disabled ? 1 : 0.2}
+        onPress={this.props.disabled ? () => {
+        } : (e) => {
           this.onPress(e);
         }}
-      >
-        {rkChoiceContent}
+      >{contentView}
       </TouchableOpacity>
     );
   }

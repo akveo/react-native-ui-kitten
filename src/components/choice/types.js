@@ -39,10 +39,10 @@ export const RkChoiceTypes = (theme) => ({
   },
 
   radio: {
-    borderRadius: 20,
+    borderRadius: 15,
   },
   radioSelected: {
-    borderRadius: 20,
+    borderRadius: 15,
     backgroundColor: 'transparent',
     inner: {
       imageSource: () => require('../../assets/img/choice/circle.png'),
@@ -50,16 +50,12 @@ export const RkChoiceTypes = (theme) => ({
     },
   },
   radioDisabled: {
-    borderRadius: 20,
+    borderRadius: 15,
   },
   radioSelectedDisabled: {
-    borderRadius: 20,
+    borderRadius: 15,
     backgroundColor: 'transparent',
     inner: {
-      width: 16,
-      height: 16,
-      margin: 5,
-      borderRadius: 10,
       imageSource: () => require('../../assets/img/choice/circle.png'),
     },
   },
