@@ -1,12 +1,16 @@
-var gulp = require('gulp');
-var watch = require('gulp-watch');
+const gulp = require('gulp');
+const watch = require('gulp-watch');
 
-var source = '../src';
-var destination = './node_modules/react-native-ui-kitten/src';
+const source = '..';
+const destination = './node_modules/react-native-ui-kitten';
 
-gulp.task('watch-lib', function () {
-  gulp.src(source + '/**/*', {base: source})
-    .pipe(watch(source, {base: source}))
-    .pipe(gulp.dest(destination));
+gulp.task('watch-lib', () => {
+  gulp.src(`${source}/src/**/*`, { base: `${source}/src` })
+    .pipe(watch(`${source}/src`, { base: `${source}/src` }))
+    .pipe(gulp.dest(`${destination}/src`));
+
+  gulp.src(`${source}/index.js`, { base: `${source}/index.js` })
+    .pipe(watch(source, { base: `${source}/index.js` }))
+    .pipe(gulp.dest(`${destination}/index.js`));
 });
 

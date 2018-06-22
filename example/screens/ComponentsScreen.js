@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import {
   StyleSheet,
   ListView,
   View,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
-import {RkText, RkTheme, RkStyleSheet} from 'react-native-ui-kitten';
+import { RkText, RkTheme, RkStyleSheet } from 'react-native-ui-kitten';
 
 
 export class ComponentsScreen extends Component {
   static navigationOptions = {
-    title: 'UI KIT'
+    title: 'UI KIT',
   };
 
 
@@ -29,35 +29,39 @@ export class ComponentsScreen extends Component {
         route: 'Button',
       },
       {
+        title: 'Switches',
+        route: 'Switch',
+      },
+      {
         title: 'Selectable Components',
-        route: 'Choice'
+        route: 'Choice',
       },
       {
         title: 'Inputs',
-        route: 'Input'
+        route: 'Input',
       },
       {
         title: 'Cards',
-        route: 'Card'
+        route: 'Card',
       },
       {
         title: 'Image Viewer',
-        route: 'Image'
+        route: 'Image',
       },
       {
         title: 'Tab View',
-        route: 'Tab'
+        route: 'Tab',
       },
       {
         title: 'Custom Control View',
-        route: 'Avatar'
-      }
+        route: 'Avatar',
+      },
     ];
     this.state = {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
+        rowHasChanged: (r1, r2) => r1 !== r2,
       }).cloneWithRows(this.data),
-      theme: _.cloneDeep(RkTheme.current)
+      theme: _.cloneDeep(RkTheme.current),
     };
   }
 
@@ -83,32 +87,35 @@ export class ComponentsScreen extends Component {
   }
 
   selectComponent(componentDefinition) {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     navigate(componentDefinition.route);
   }
 
-  renderSeparator(sectionID,
-                  rowID,
-                  adjacentRowHighlighted) {
-    var style = styles.rowSeparator;
+  renderSeparator(
+    sectionID,
+    rowID,
+    adjacentRowHighlighted,
+  ) {
+    let style = styles.rowSeparator;
     if (adjacentRowHighlighted) {
       style = [style, styles.rowSeparatorHide];
     }
     return (
-      <View key={'SEP_' + sectionID + '_' + rowID} style={style}/>
+      <View key={`SEP_${sectionID}_${rowID}`} style={style} />
     );
   }
 
   render() {
     return (
-      <ListView style={styles.container}
-                dataSource={this.state.dataSource}
-                renderRow={(...params) => this.renderComponent(...params)}
-                renderSeparator={this.renderSeparator}
-                automaticallyAdjustContentInsets={true}
-                keyboardDismissMode="on-drag"
-                keyboardShouldPersistTaps='always'
-                showsVerticalScrollIndicator={false}
+      <ListView
+        style={styles.container}
+        dataSource={this.state.dataSource}
+        renderRow={(...params) => this.renderComponent(...params)}
+        renderSeparator={this.renderSeparator}
+        automaticallyAdjustContentInsets
+        keyboardDismissMode="on-drag"
+        keyboardShouldPersistTaps='always'
+        showsVerticalScrollIndicator={false}
       />
     );
   }
@@ -118,14 +125,14 @@ const
   styles = RkStyleSheet.create(theme => ({
     container: {
       flex: 1,
-      backgroundColor: theme.colors.screen.base
+      backgroundColor: theme.colors.screen.base,
     },
     componentRow: {
       paddingHorizontal: 24,
       paddingVertical: 18,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     rowSeparator: {
       backgroundColor: 'rgba(0, 0, 0, 0.1)',
