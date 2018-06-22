@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import {
   View,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
-
 import { RkText, RkSwitch } from 'react-native-ui-kitten';
 
 import { UtilStyles } from '../style/styles';
@@ -62,13 +62,7 @@ export class SwitchScreen extends Component {
           </View>
 
           <View style={[UtilStyles.columnContainer, UtilStyles.bordered]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>primary</RkText>
               <RkSwitch
                 rkType='primary'
@@ -79,13 +73,7 @@ export class SwitchScreen extends Component {
           </View>
 
           <View style={[UtilStyles.columnContainer, UtilStyles.bordered]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>success</RkText>
               <RkSwitch
                 rkType='success'
@@ -96,13 +84,7 @@ export class SwitchScreen extends Component {
           </View>
 
           <View style={[UtilStyles.columnContainer, UtilStyles.bordered]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>info</RkText>
               <RkSwitch
                 rkType='info'
@@ -113,13 +95,7 @@ export class SwitchScreen extends Component {
           </View>
 
           <View style={[UtilStyles.columnContainer, UtilStyles.bordered]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>warning</RkText>
               <RkSwitch
                 rkType='warning'
@@ -130,13 +106,7 @@ export class SwitchScreen extends Component {
           </View>
 
           <View style={[UtilStyles.columnContainer]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>danger</RkText>
               <RkSwitch
                 rkType='danger'
@@ -158,13 +128,7 @@ export class SwitchScreen extends Component {
           </View>
 
           <View style={[UtilStyles.columnContainer, UtilStyles.bordered]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>Example 1</RkText>
               <RkSwitch
                 rkType='redTint'
@@ -174,17 +138,11 @@ export class SwitchScreen extends Component {
             </View>
           </View>
 
-          <View style={[UtilStyles.columnContainer]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+          <View style={[UtilStyles.columnContainer, UtilStyles.bordered]}>
+            <View style={styles.componentRow}>
               <RkText>Example 2</RkText>
               <RkSwitch
-                rkType='lightGreenThumb'
+                thumbTintColor='yellow'
                 value={this.state.switch8State}
                 onValueChange={() => this.setState({ switch8State: !this.state.switch8State })}
               />
@@ -192,13 +150,7 @@ export class SwitchScreen extends Component {
           </View>
 
           <View style={[UtilStyles.columnContainer, UtilStyles.bordered]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>Example 3</RkText>
               <RkSwitch
                 tintColor='purple'
@@ -213,13 +165,7 @@ export class SwitchScreen extends Component {
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Disabled control</RkText>
           <View style={[UtilStyles.columnContainer]}>
-            <View style={{
-              paddingVertical: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-            >
+            <View style={styles.componentRow}>
               <RkText>I like UI Kitten!</RkText>
               <RkSwitch
                 disabled
@@ -233,3 +179,12 @@ export class SwitchScreen extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  componentRow: {
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+});
