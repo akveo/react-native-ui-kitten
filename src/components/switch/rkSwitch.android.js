@@ -5,6 +5,7 @@ import {
   PanResponder, StyleSheet,
   View,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { RkComponent } from '../rkComponent';
 
 const switchBorderWidth = 1.5;
@@ -16,22 +17,31 @@ const thumbSize = switchHeight - (switchBorderWidth * 2);
 export class RkSwitch extends RkComponent {
   componentName = 'RkSwitch';
   typeMapping = {
-    component: {
-      onTintColor: 'onTintColor',
-      thumbTintColor: 'thumbTintColor',
-      tintColor: 'tintColor',
-    },
+    component: {},
+  };
+  static propTypes = {
+    disabled: PropTypes.bool,
+    onTintColor: PropTypes.string,
+    onValueChange: PropTypes.func,
+    thumbTintColor: PropTypes.string,
+    tintColor: PropTypes.string,
+    value: PropTypes.bool,
+  };
+  static defaultProps = {
+    disabled: false,
+    onTintColor: '#53d669',
+    thumbTintColor: '#ffffff',
+    tintColor: '#e5e5e5',
+    value: false,
   };
 
   constructor(props, context) {
     super(props, context);
     this.thumbAnimation = new Animated.Value(thumbSize);
     this.switchAnimation = new Animated.Value(0);
-    this.ellipseAnimation = props.value ? new Animated.Value(0.01) : new Animated.Value(1);
+    this.ellipseAnimation = new Animated.Value(props.value ? 0.01 : 1.0);
     this.switchAnimationActive = false;
-  }
 
-  componentWillMount() {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: this.onStartShouldSetPanResponder,
       onStartShouldSetPanResponderCapture: this.onStartShouldSetPanResponderCapture,
@@ -42,6 +52,44 @@ export class RkSwitch extends RkComponent {
       onPanResponderMove: this.onPanResponderMove,
       onPanResponderRelease: this.onPanResponderRelease,
     });
+  }
+
+  animateSwitch = (value, callback = () => null) => {
+    this.switchAnimationActive = true;
+    Animated.timing(
+      this.switchAnimation,
+      {
+        toValue: value ? switchOffsetValue : -switchOffsetValue,
+        duration: 200,
+        easing: Easing.bezier(0.65, 0.12, 0.09, 1.26),
+      },
+    ).start(() => {
+      this.switchAnimationActive = false;
+      callback();
+    });
+  };
+
+  animateThumb = (value, callback = () => null) => {
+    Animated.timing(this.thumbAnimation, {
+      toValue: value,
+      duration: 150,
+      easing: Easing.linear,
+    }).start(callback);
+  };
+
+  animateEllipse = (value) => {
+    Animated.timing(this.ellipseAnimation, {
+      toValue: value,
+      duration: 200,
+      easing: Easing.linear,
+    }).start();
+  };
+
+  stopAnimations() {
+    Animated.timing(this.switchAnimation).stop();
+    Animated.timing(this.ellipseAnimation).stop();
+    Animated.timing(this.thumbAnimation).stop();
+    this.ellipseAnimation.setValue(this.props.value ? 0.01 : 1);
   }
 
   // eslint-disable-next-line arrow-body-style
@@ -91,9 +139,7 @@ export class RkSwitch extends RkComponent {
     if (!this.props.disabled) {
       const propValue = this.props.value;
       if ((!propValue && gestureState.dx > -5) || (propValue && gestureState.dx < 5)) {
-        if (this.props.onValueChange) {
-          this.toggle(this.props.onValueChange);
-        }
+        this.toggle(this.onValueChange);
       } else {
         this.animateEllipse(propValue ? 0.01 : 1);
       }
@@ -101,118 +147,77 @@ export class RkSwitch extends RkComponent {
     this.animateThumb(thumbSize);
   };
 
-  stopAnimations() {
-    Animated.timing(this.switchAnimation).stop();
-    Animated.timing(this.ellipseAnimation).stop();
-    Animated.timing(this.thumbAnimation).stop();
-    this.ellipseAnimation.setValue(this.props.value ? 0.01 : 1);
-  }
-
   toggle = (callback = () => null) => {
     const toValue = !this.props.value;
     this.animateSwitch(toValue, () => {
-      callback(toValue);
       this.switchAnimation.setValue(0);
+      callback(toValue);
     });
     this.animateThumb(thumbSize);
   };
 
-  animateSwitch = (value, callback = () => null) => {
-    this.switchAnimationActive = true;
-    Animated.timing(
-      this.switchAnimation,
-      {
-        toValue: value ? switchOffsetValue : -switchOffsetValue,
-        duration: 200,
-        easing: Easing.bezier(0.65, 0.12, 0.09, 1.26),
-      },
-    ).start(() => {
-      this.switchAnimationActive = false;
-      callback();
-    });
+  onValueChange = () => {
+    if (this.props.onValueChange) {
+      this.props.onValueChange();
+    }
   };
 
-  animateThumb = (value, callback = () => null) => {
-    Animated.timing(
-      this.thumbAnimation,
-      {
-        toValue: value,
-        duration: 150,
-        easing: Easing.linear,
-      },
-    ).start(callback);
-  };
-
-  animateEllipse = (value) => {
-    Animated.timing(
-      this.ellipseAnimation,
-      {
-        toValue: value,
-        duration: 200,
-        easing: Easing.linear,
-      },
-    ).start();
-  };
-
-  getSwitchColor(onTintColor, propName, component, defaultColor) {
-    return onTintColor || this.extractNonStyleValue(component, propName) || defaultColor;
+  defineStyles(additionalTypes) {
+    const { component } = super.defineStyles(additionalTypes);
+    const switchStyles = {
+      onTintColor: this.extractNonStyleValue(component, 'onTintColor'),
+      thumbTintColor: this.extractNonStyleValue(component, 'thumbTintColor'),
+      tintColor: this.extractNonStyleValue(component, 'tintColor'),
+    };
+    return { componentStyles: component, switchStyles };
   }
 
   render() {
     const {
-      style,
-      value,
-      ...restProps
-    } = this.props;
-    let {
+      disabled,
       onTintColor,
       thumbTintColor,
       tintColor,
-    } = restProps;
-    const { component } = this.defineStyles();
-
-    onTintColor = this.getSwitchColor(onTintColor, 'onTintColor', component, '#53d669');
-    thumbTintColor = this.getSwitchColor(thumbTintColor, 'thumbTintColor', component, '#ffffff');
-    tintColor = this.getSwitchColor(tintColor, 'tintColor', component, '#e5e5e5');
-
+      value,
+      rkType,
+      style,
+    } = this.props;
+    const { componentStyles, switchStyles } = this.defineStyles(rkType);
     const interpolatedTintColor = this.switchAnimation.interpolate({
       inputRange: value ? [-switchOffsetValue, 0] : [0, switchOffsetValue],
-      outputRange: [tintColor, onTintColor],
+      outputRange: [
+        switchStyles.tintColor || tintColor,
+        switchStyles.onTintColor || onTintColor,
+      ],
     });
-
     const returnScale = this.switchAnimation.interpolate({
       inputRange: [-switchOffsetValue, 0],
       outputRange: [1, 0.01],
     });
-
     return (
-      <View style={[style, component]}>
+      <View style={[componentStyles, style]}>
         <Animated.View
-          {...restProps}
+          style={[styles.container, { backgroundColor: interpolatedTintColor }]}
           {...this.panResponder.panHandlers}
-          style={[styles.container, {
-            backgroundColor: interpolatedTintColor,
-          }]}
         >
-          <Animated.View style={[styles.ellipse, {
-            backgroundColor: 'white',
-            transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
-          }]}
+          <Animated.View style={[
+            styles.ellipse,
+            { transform: [{ scale: value ? returnScale : this.ellipseAnimation }] },
+          ]}
           />
-          <Animated.View style={[styles.thumb, {
-            alignSelf: value ? 'flex-end' : 'flex-start',
-            width: this.thumbAnimation,
-            transform: [{ translateX: this.switchAnimation }],
-            borderColor: interpolatedTintColor,
-            backgroundColor: thumbTintColor,
-            elevation: this.props.disabled ? 0 : 5,
-          }]}
+          <Animated.View style={[
+            styles.thumb,
+            {
+              width: this.thumbAnimation,
+              alignSelf: value ? 'flex-end' : 'flex-start',
+              transform: [{ translateX: this.switchAnimation }],
+              borderColor: interpolatedTintColor,
+              backgroundColor: switchStyles.thumbTintColor || thumbTintColor,
+              elevation: disabled ? 0 : 5,
+            },
+          ]}
           />
-          <Animated.View style={[styles.disableBox, {
-            backgroundColor: '#ffffff80',
-            height: this.props.disabled ? switchHeight : 0,
-          }]}
-          />
+          <Animated.View style={[styles.disableBox, { height: disabled ? switchHeight : 0 }]} />
         </Animated.View>
       </View>
     );
@@ -230,12 +235,14 @@ const styles = StyleSheet.create({
   disableBox: {
     position: 'absolute',
     alignSelf: 'center',
+    backgroundColor: '#ffffff80',
     width: switchWidth,
     borderRadius: switchHeight / 2,
   },
   ellipse: {
     position: 'absolute',
     alignSelf: 'center',
+    backgroundColor: 'white',
     width: switchWidth - (switchBorderWidth * 2),
     height: switchHeight - (switchBorderWidth * 2),
     borderRadius: (switchHeight - (switchBorderWidth * 2)) / 2,

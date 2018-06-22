@@ -3,6 +3,7 @@ import {
   Switch,
   View,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { RkComponent } from '../rkComponent';
 
 /**
@@ -67,35 +68,50 @@ import { RkComponent } from '../rkComponent';
 export class RkSwitch extends RkComponent {
   componentName = 'RkSwitch';
   typeMapping = {
-    component: {
-      onTintColor: 'onTintColor',
-      thumbTintColor: 'thumbTintColor',
-      tintColor: 'tintColor',
-    },
+    component: {},
   };
+  static propTypes = {
+    disabled: PropTypes.bool,
+    onTintColor: PropTypes.string,
+    onValueChange: PropTypes.func,
+    thumbTintColor: PropTypes.string,
+    tintColor: PropTypes.string,
+    value: PropTypes.bool,
+  };
+  static defaultProps = {
+    disabled: false,
+    onTintColor: '#53d669',
+    thumbTintColor: '#ffffff',
+    tintColor: '#e5e5e5',
+    value: false,
+  };
+
+  defineStyles(additionalTypes) {
+    const { component } = super.defineStyles(additionalTypes);
+    const switchStyles = {
+      onTintColor: this.extractNonStyleValue(component, 'onTintColor'),
+      thumbTintColor: this.extractNonStyleValue(component, 'thumbTintColor'),
+      tintColor: this.extractNonStyleValue(component, 'tintColor'),
+    };
+    return { componentStyles: component, switchStyles };
+  }
 
   render() {
     const {
-      style,
-      ...restProps
-    } = this.props;
-    let {
       onTintColor,
       thumbTintColor,
       tintColor,
-    } = restProps;
-    const { component } = super.defineStyles();
-
-    onTintColor = onTintColor || this.extractNonStyleValue(component, 'onTintColor');
-    thumbTintColor = thumbTintColor || this.extractNonStyleValue(component, 'thumbTintColor');
-    tintColor = tintColor || this.extractNonStyleValue(component, 'tintColor');
-
+      rkType,
+      style,
+      ...restProps
+    } = this.props;
+    const { componentStyles, switchStyles } = this.defineStyles(rkType);
     return (
-      <View style={[style, component]}>
+      <View style={[componentStyles, style]}>
         <Switch
-          onTintColor={onTintColor}
-          thumbTintColor={thumbTintColor}
-          tintColor={tintColor}
+          onTintColor={switchStyles.onTintColor || onTintColor}
+          thumbTintColor={switchStyles.thumbTintColor || thumbTintColor}
+          tintColor={switchStyles.tintColor || tintColor}
           {...restProps}
         />
       </View>
