@@ -49,6 +49,10 @@ export class ComponentsScreen extends Component {
         route: 'Image',
       },
       {
+        title: 'Gallery',
+        route: 'Gallery',
+      },
+      {
         title: 'Tab View',
         route: 'Tab',
       },

@@ -4,6 +4,7 @@ export * from './CardScreen';
 export * from './ChoiceScreen';
 export * from './ComponentsScreen';
 export * from './ImageScreen';
+export * from './GalleryScreen';
 export * from './InputScreen';
 export * from './TabScreen';
 export * from './SettingsScreen';
