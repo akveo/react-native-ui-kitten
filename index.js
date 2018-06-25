@@ -4,6 +4,7 @@ export { RkChoice } from './src/components/choice/rkChoice';
 export { RkChoiceGroup } from './src/components/choiceGroup/rkChoiceGroup';
 export { RkTextInput } from './src/components/textinput/rkTextInput';
 export { RkModalImg } from './src/components/image/rkModalImg';
+export { RkGallery } from './src/components/image/rkGallery';
 export { RkTabView } from './src/components/tab/rkTabView';
 export { RkCard } from './src/components/card/rkCard';
 export { RkAvoidKeyboard } from './src/components/avoidKeyboard/rkAvoidKeyboard';
