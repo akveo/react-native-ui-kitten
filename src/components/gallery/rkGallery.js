@@ -1,72 +1,66 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
-import PropTypes from 'prop-types';
+import { Modal } from 'react-native';
 import { RkComponent } from '../rkComponent';
+import { RkGalleryGrid } from './rkGalleryGrid';
+import { RkGalleryViewer } from './rkGalleryViewer';
 
 export class RkGallery extends RkComponent {
   static propTypes = {
-    items: PropTypes.array,
-    spanCount: PropTypes.number,
-    itemMargin: PropTypes.number,
-    onItemClick: PropTypes.func,
+    items: RkGalleryGrid.propTypes.items,
+    spanCount: RkGalleryGrid.propTypes.spanCount,
+    itemMargin: RkGalleryGrid.propTypes.itemMargin,
+    onGridItemClick: RkGalleryGrid.propTypes.onItemClick,
   };
   static defaultProps = {
-    items: [],
-    spanCount: 3,
-    itemMargin: 2,
+    spanCount: RkGalleryGrid.defaultProps.spanCount,
+    itemMargin: RkGalleryGrid.defaultProps.itemMargin,
+    onGridItemClick: RkGalleryGrid.defaultProps.onItemClick,
   };
   componentName = 'RkGallery';
 
   constructor(props) {
     super(props);
-    const { width: screenWidth } = Dimensions.get('window');
     this.state = {
-      layout: {
-        item: {
-          size: {
-            width: (screenWidth / this.props.spanCount) - (this.props.itemMargin * 2),
-            height: (screenWidth / this.props.spanCount) - (this.props.itemMargin * 2),
-          },
-          margin: this.props.itemMargin,
-        },
-        spanCount: this.props.spanCount,
-      },
-      items: this.props.items,
+      previewImageIndex: undefined,
     };
   }
 
-  onItemViewClicked = (item, index) => {
-    const callee = this.props.onItemClick ? this.props.onItemClick : RkGallery.onItemViewRkClick;
-    callee(item, index);
+  onViewerItemClick = (item, index) => {
+    this.setState({
+      previewImageIndex: undefined,
+    });
   };
 
-  onItemKeyExtract = (item, index) => index.toString();
+  onGridItemClick = (item, index) => {
+    this.props.onGridItemClick(item, index);
+    this.setState({
+      previewImageIndex: index,
+    });
+  };
 
-  onRenderItemView = ({ item, index, separators }) => (
-    <TouchableOpacity onPress={() => this.onItemViewClicked(item, index)}>
-      <Image
-        style={{
-          width: this.state.layout.item.size.width,
-          height: this.state.layout.item.size.height,
-          margin: this.state.layout.item.margin,
-        }}
-        source={item}
+
+  renderViewer = () => (
+    <Modal>
+      <RkGalleryViewer
+        items={this.props.items}
+        initialIndex={this.state.previewImageIndex}
+        onItemClick={this.onViewerItemClick}
       />
-    </TouchableOpacity>
+    </Modal>
   );
 
+  renderGrid = () => (
+    <RkGalleryGrid
+      items={this.props.items}
+      spanCount={this.props.spanCount}
+      itemMargin={this.props.itemMargin}
+      onItemClick={this.onGridItemClick}
+    />
+  );
+
+  isPreview = () => this.state.previewImageIndex !== undefined;
+
   render() {
-    return (
-      <FlatList
-        data={this.state.items}
-        numColumns={this.state.layout.spanCount}
-        renderItem={this.onRenderItemView}
-        keyExtractor={this.onItemKeyExtract}
-      />
-    );
+    return this.isPreview() ? this.renderViewer() : this.renderGrid();
   }
 }
-
-RkGallery.onItemViewRkClick = (item, index) => {
-
-};
