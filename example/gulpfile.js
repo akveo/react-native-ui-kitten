@@ -6,7 +6,7 @@ const source = {
   index: '../index.js',
 };
 const destination = {
-  lib: './node_modules/react-native-ui-kitten',
+  lib: './node_modules/react-native-ui-kitten/src',
   index: './node_modules/react-native-ui-kitten/index.js',
 };
 
