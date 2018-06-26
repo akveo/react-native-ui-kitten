@@ -1,44 +1,67 @@
 import React from 'react';
 import {
   FlatList,
-  TouchableOpacity,
-  Image,
+  Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { RkGalleryImage } from './rkGalleryImage';
 
 export class RkGalleryGrid extends React.Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
-    layout: PropTypes.object.isRequired,
-    onItemClick: PropTypes.func.isRequired,
+    onItemClick: PropTypes.func,
+    spanCount: PropTypes.number,
+    itemMargin: PropTypes.number,
+  };
+  static defaultProps = {
+    spanCount: 3,
+    itemMargin: 2,
+    onItemClick: (() => null),
   };
 
-  onItemViewClicked = (item, index) => {
+  constructor(props) {
+    super(props);
+    const { width: screenWidth } = Dimensions.get('window');
+    this.state = {
+      layout: {
+        spanCount: this.props.spanCount,
+        item: {
+          size: {
+            width: (screenWidth / this.props.spanCount) - (this.props.itemMargin * 2),
+            height: (screenWidth / this.props.spanCount) - (this.props.itemMargin * 2),
+          },
+          margin: this.props.itemMargin,
+        },
+      },
+    };
+  }
+
+  extractItemKey = (item, index) => index.toString();
+
+  onItemViewClick = (item, index) => {
     this.props.onItemClick(item, index);
   };
 
-  onItemKeyExtract = (item, index) => index.toString();
 
-  onRenderItemView = ({ item, index, separators }) => (
-    <TouchableOpacity onPress={() => this.onItemViewClicked(item, index)}>
-      <Image
-        style={{
-          width: this.props.layout.item.size.width,
-          height: this.props.layout.item.size.height,
-          margin: this.props.layout.item.margin,
-        }}
-        source={item}
-      />
-    </TouchableOpacity>
+  renderItemView = ({ item, index }) => (
+    <RkGalleryImage
+      onClick={() => this.onItemViewClick(item, index)}
+      source={item}
+      style={{
+        width: this.state.layout.item.size.width,
+        height: this.state.layout.item.size.height,
+        margin: this.props.itemMargin,
+      }}
+    />
   );
 
   render() {
     return (
       <FlatList
-        data={this.state.items}
+        data={this.props.items}
         numColumns={this.state.layout.spanCount}
-        renderItem={this.onRenderItemView}
-        keyExtractor={this.onItemKeyExtract}
+        renderItem={this.renderItemView}
+        keyExtractor={this.extractItemKey}
       />
     );
   }
