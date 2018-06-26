@@ -36,9 +36,8 @@ export class RkGallery extends RkComponent {
   }
 
   onItemViewClicked = (item, index) => {
-    if (this.props.onItemClick) {
-      this.props.onItemClick(item, index);
-    }
+    const callee = this.props.onItemClick ? this.props.onItemClick : RkGallery.onItemViewRkClick;
+    callee(item, index);
   };
 
   onItemKeyExtract = (item, index) => index.toString();
@@ -67,3 +66,7 @@ export class RkGallery extends RkComponent {
     );
   }
 }
+
+RkGallery.onItemViewRkClick = (item, index) => {
+
+};
