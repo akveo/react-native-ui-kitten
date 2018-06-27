@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   FlatList,
+  TouchableWithoutFeedback,
+  Image,
   Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -42,17 +44,17 @@ export class RkGalleryGrid extends React.Component {
     this.props.onItemClick(item, index);
   };
 
-
   renderItemView = ({ item, index }) => (
-    <RkGalleryImage
-      onClick={() => this.onItemViewClick(item, index)}
-      source={item}
-      style={{
-        width: this.state.layout.item.size.width,
-        height: this.state.layout.item.size.height,
-        margin: this.props.itemMargin,
-      }}
-    />
+    <TouchableWithoutFeedback onPress={() => this.onItemViewClick(item, index)}>
+      <Image
+        source={item}
+        style={{
+          width: this.state.layout.item.size.width,
+          height: this.state.layout.item.size.height,
+          margin: this.props.itemMargin,
+        }}
+      />
+    </TouchableWithoutFeedback>
   );
 
   render() {
