@@ -1,29 +1,21 @@
 import React from 'react';
-import {
-  ScrollView,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkComponent } from '../rkComponent';
 import { DoubleTouchableWithoutFeedback } from './doubleTouchableWithoutFeedback';
+import { PinchZoomResponder } from './pinchZoomResponder';
 
 export class RkGalleryImage extends RkComponent {
   static propTypes = {
-    onClick: PropTypes.func.isRequired,
+    source: PropTypes.object.isRequired,
+    onClick: PropTypes.func,
+    scalable: PinchZoomResponder.propTypes.scalable,
+    onScaleChange: PinchZoomResponder.propTypes.onScaleChange,
+    onOffsetChange: PinchZoomResponder.propTypes.onOffsetChange,
   };
-
-  constructor(props) {
-    super(props);
-    this.container = {
-      size: {
-        width: 0,
-        height: 0,
-      },
-      scale: 1,
-      scrollResponder: undefined,
-    };
-  }
+  static defaultProps = {
+    scalable: PinchZoomResponder.defaultProps.scalable,
+  };
 
   isZoomed = () => this.container.scale !== 1;
 
@@ -38,7 +30,11 @@ export class RkGalleryImage extends RkComponent {
     }
   };
 
-  onImageSinglePress = (event) => this.props.onClick(event);
+  onImageSinglePress = (event) => {
+    if (this.props.onClick) {
+      this.props.onClick(event);
+    }
+  };
 
   onImageDoublePress = (event) => {
     const zoomRect = {
@@ -62,36 +58,27 @@ export class RkGalleryImage extends RkComponent {
   };
 
   render() {
-    const { onClick, ...imageProps } = this.props;
+    const {
+      scalable,
+      onScaleChange,
+      onOffsetChange,
+      ...restProps
+    } = this.props;
     return (
-      <ScrollView
-        contentContainerStyle={styles.scrollContentContainer}
-        centerContent
-        maximumZoomScale={2}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        onLayout={this.onContainerLayout}
-        onScroll={this.onContainerScroll}
-        ref={this.container.scrollResponder ? () => {} : this.setScrollResponderRef}
-        style={styles.container}
+      <PinchZoomResponder
+        scalable={scalable}
+        onScaleChange={onScaleChange}
+        onOffsetChange={onOffsetChange}
       >
         <DoubleTouchableWithoutFeedback
           onSinglePress={this.onImageSinglePress}
           onDoublePress={this.onImageDoublePress}
         >
-          <Image{...imageProps} />
+          <Image
+            {...restProps}
+          />
         </DoubleTouchableWithoutFeedback>
-      </ScrollView>
+      </PinchZoomResponder>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-  },
-  scrollContentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
