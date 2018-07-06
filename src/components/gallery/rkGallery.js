@@ -7,44 +7,49 @@ import { RkGalleryViewer } from './rkGalleryViewer';
 export class RkGallery extends RkComponent {
   static propTypes = {
     items: RkGalleryGrid.propTypes.items,
-    spanCount: RkGalleryGrid.propTypes.spanCount,
-    itemMargin: RkGalleryGrid.propTypes.itemMargin,
+    gridSpanCount: RkGalleryGrid.propTypes.spanCount,
+    gridItemMargin: RkGalleryGrid.propTypes.itemMargin,
+    galleryItemMaxScale: RkGalleryViewer.propTypes.itemMaxScale,
     onGridItemClick: RkGalleryGrid.propTypes.onItemClick,
+    onGalleryItemClick: RkGalleryGrid.propTypes.onItemClick,
+    onGalleryItemChange: RkGalleryViewer.propTypes.onItemChange,
+    onGalleryItemScaleChange: RkGalleryViewer.propTypes.onItemScaleChange,
   };
   static defaultProps = {
     spanCount: RkGalleryGrid.defaultProps.spanCount,
     itemMargin: RkGalleryGrid.defaultProps.itemMargin,
-    onGridItemClick: RkGalleryGrid.defaultProps.onItemClick,
   };
   componentName = 'RkGallery';
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      previewImageIndex: undefined,
-    };
-  }
+  state = {
+    viewerImageIndex: undefined,
+  };
 
-  onViewerItemClick = (item, index) => {
+  onModalRequestClose = () => {
     this.setState({
-      previewImageIndex: undefined,
+      viewerImageIndex: undefined,
     });
   };
 
   onGridItemClick = (item, index) => {
-    this.props.onGridItemClick(item, index);
     this.setState({
-      previewImageIndex: index,
+      viewerImageIndex: index,
     });
+    if (this.props.onGridItemClick) {
+      this.props.onGridItemClick(item, index);
+    }
   };
 
 
   renderViewer = () => (
-    <Modal>
+    <Modal onRequestClose={this.onModalRequestClose}>
       <RkGalleryViewer
+        initialIndex={this.state.viewerImageIndex}
         items={this.props.items}
-        initialIndex={this.state.previewImageIndex}
-        onItemClick={this.onViewerItemClick}
+        itemMaxScale={this.props.galleryItemMaxScale}
+        onItemClick={this.props.onGalleryItemClick}
+        onItemChange={this.props.onGalleryItemChange}
+        onItemScaleChange={this.props.onGalleryItemScaleChange}
       />
     </Modal>
   );
@@ -52,13 +57,13 @@ export class RkGallery extends RkComponent {
   renderGrid = () => (
     <RkGalleryGrid
       items={this.props.items}
-      spanCount={this.props.spanCount}
-      itemMargin={this.props.itemMargin}
+      spanCount={this.props.gridSpanCount}
+      itemMargin={this.props.gridItemMargin}
       onItemClick={this.onGridItemClick}
     />
   );
 
-  isPreview = () => this.state.previewImageIndex !== undefined;
+  isPreview = () => this.state.viewerImageIndex !== undefined;
 
   render() {
     return this.isPreview() ? this.renderViewer() : this.renderGrid();

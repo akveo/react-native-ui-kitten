@@ -8,13 +8,33 @@ import { PinchZoomResponder } from './pinchZoomResponder';
 export class RkGalleryImage extends RkComponent {
   static propTypes = {
     source: PropTypes.object.isRequired,
+    maxScale: PinchZoomResponder.propTypes.maxScale,
     onClick: PropTypes.func,
-    scalable: PinchZoomResponder.propTypes.scalable,
     onScaleChange: PinchZoomResponder.propTypes.onScaleChange,
     onOffsetChange: PinchZoomResponder.propTypes.onOffsetChange,
   };
   static defaultProps = {
-    scalable: PinchZoomResponder.defaultProps.scalable,
+    maxScale: PinchZoomResponder.defaultProps.maxScale,
+  };
+  componentName = 'RkGalleryImage';
+
+  imageState = {
+    scale: 1.0,
+  };
+
+  pinchResponderRef = undefined;
+
+  onImageScaleChange = (change) => {
+    this.imageState.scale = change.current;
+    if (this.props.onScaleChange) {
+      this.props.onScaleChange(change);
+    }
+  };
+
+  onImageOffsetChange = (change) => {
+    if (this.props.onOffsetChange) {
+      this.props.onOffsetChange(change);
+    }
   };
 
   onImageSinglePress = (event) => {
@@ -24,32 +44,24 @@ export class RkGalleryImage extends RkComponent {
   };
 
   onImageDoublePress = (event) => {
-    // zoom image
+    const scale = this.imageState.scale === 1.0 ? this.props.maxScale : 1.0;
+    this.pinchResponderRef.zoomTo(scale);
   };
 
-  onContainerLayout = (event) => {
-    this.container.size = {
-      width: event.nativeEvent.layout.widget,
-      height: event.nativeEvent.layout.height,
-    };
-  };
+  // Supporting functions
 
-  onContainerScroll = (event) => {
-    this.container.scale = event.nativeEvent.zoomScale;
+  setPinchResponderRef = (ref) => {
+    this.pinchResponderRef = ref;
   };
 
   render() {
-    const {
-      scalable,
-      onScaleChange,
-      onOffsetChange,
-      ...restProps
-    } = this.props;
+    const { scalable, ...restProps } = this.props;
     return (
       <PinchZoomResponder
+        ref={this.setPinchResponderRef}
         scalable={scalable}
-        onScaleChange={this.props.onScaleChange}
-        onOffsetChange={this.props.onOffsetChange}
+        onScaleChange={this.onImageScaleChange}
+        onOffsetChange={this.onImageOffsetChange}
       >
         <DoubleTouchableWithoutFeedback
           onSinglePress={this.onImageSinglePress}

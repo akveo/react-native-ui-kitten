@@ -8,32 +8,30 @@ import {
 
 export class PinchZoomResponder extends Component {
   static propTypes = {
-    scalable: PropTypes.bool,
     maxScale: PropTypes.number,
     onScaleChange: PropTypes.func,
     onOffsetChange: PropTypes.func,
   };
   static defaultProps = {
-    scalable: true,
     maxScale: 4.0,
   };
-
   state = {
-    scale: 1,
+    scale: 1.0,
     offset: {
-      x: 0,
-      y: 0,
+      x: 0.0,
+      y: 0.0,
     },
   };
   lastState = {
     scale: 1,
     offset: {
-      x: 0,
-      y: 0,
+      x: 0.0,
+      y: 0.0,
     },
     isPinch: false,
     pinchDistance: 150,
   };
+
 
   componentWillMount() {
     this.gestureHandlers = PanResponder.create({
@@ -46,6 +44,12 @@ export class PinchZoomResponder extends Component {
       onShouldBlockNativeResponder: this.onShouldBlockNativeResponder,
     });
   }
+
+  zoomTo = (scale) => {
+    const offset = scale === 1.0 ? { x: 0.0, y: 0.0 } : this.state.offset;
+    this.setState({ scale, offset }, this.onScaleChanged);
+  };
+
 
   // Pan Responder callbacks
 
@@ -61,14 +65,13 @@ export class PinchZoomResponder extends Component {
    * @returns {@code true} if pan or pinch gesture recognized.
    */
   onMoveShouldSetPanResponder = (event, state) => {
-    const commonGestureStartPredicate = this.props.scalable;
     if (this.isPanGesture(event, state)) {
       // start pan gesture handling predicate
-      return commonGestureStartPredicate && this.state.scale > 1.0;
+      return this.state.scale > 1.0;
     }
     if (this.isPinchGesture(event, state)) {
       // start pinch gesture handling predicate
-      return commonGestureStartPredicate;
+      return true;
     }
     return false;
   };

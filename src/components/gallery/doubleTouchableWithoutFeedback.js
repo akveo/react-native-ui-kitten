@@ -12,32 +12,31 @@ export class DoubleTouchableWithoutFeedback extends React.Component {
     delay: 300,
   };
 
-  constructor(props) {
-    super(props);
-    this.delayFlag = false;
-    this.eventCounter = 0;
-  }
+  delayFlag = false;
+  eventCounter = 0;
 
   handlePressEvent = (event) => {
+    this.delayFlag = true;
     if (this.eventCounter === 2) {
       this.props.onDoublePress(event);
     }
     if (this.eventCounter === 1) {
       this.props.onSinglePress(event);
     }
-    this.eventCounter = 0;
     this.delayFlag = false;
+    this.eventCounter = 0;
   };
 
   onPress = (event) => {
-    this.delayFlag = true;
-    this.eventCounter += 1;
-    setTimeout(() => this.handlePressEvent(event), this.props.delay);
+    if (!this.delayFlag) {
+      this.eventCounter += 1;
+      setTimeout(() => (this.handlePressEvent(event)), this.props.delay);
+    }
   };
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress={this.delayFlag ? () => {} : this.onPress}>
+      <TouchableWithoutFeedback onPress={this.onPress}>
         {this.props.children}
       </TouchableWithoutFeedback>
     );
