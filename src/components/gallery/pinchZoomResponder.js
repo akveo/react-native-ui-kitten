@@ -19,7 +19,7 @@ export class PinchZoomResponder extends Component {
   };
 
   state = {
-    scale: 0,
+    scale: 1,
     offset: {
       x: 0,
       y: 0,
@@ -53,7 +53,7 @@ export class PinchZoomResponder extends Component {
    * Does this view want to become responder on the start of a touch?
    * @returns {@code false} to block single touches
    */
-  onStartShouldSetPanResponder = () => false;
+  onStartShouldSetPanResponder = (event, state) => this.state.scale >= 1;
 
   /**
    * Called for every touch move on the View when it is not the responder

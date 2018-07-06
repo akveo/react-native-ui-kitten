@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkComponent } from '../rkComponent';
 import { DoubleTouchableWithoutFeedback } from './doubleTouchableWithoutFeedback';
@@ -17,19 +17,6 @@ export class RkGalleryImage extends RkComponent {
     scalable: PinchZoomResponder.defaultProps.scalable,
   };
 
-  isZoomed = () => this.container.scale !== 1;
-
-  zoomTo = (rect, animated = true) => {
-    const responderZoom = { ...rect, animated };
-    this.container.scrollResponder.scrollResponderZoomTo(responderZoom);
-  };
-
-  setScrollResponderRef = (ref) => {
-    if (ref) {
-      this.container.scrollResponder = ref.getScrollResponder();
-    }
-  };
-
   onImageSinglePress = (event) => {
     if (this.props.onClick) {
       this.props.onClick(event);
@@ -37,13 +24,7 @@ export class RkGalleryImage extends RkComponent {
   };
 
   onImageDoublePress = (event) => {
-    const zoomRect = {
-      x: event.nativeEvent.locationX,
-      y: event.nativeEvent.locationY,
-      width: this.isZoomed() ? this.container.size.width : 0,
-      height: this.isZoomed() ? this.container.size.height : 0,
-    };
-    this.zoomTo(zoomRect);
+    // zoom image
   };
 
   onContainerLayout = (event) => {
@@ -67,8 +48,8 @@ export class RkGalleryImage extends RkComponent {
     return (
       <PinchZoomResponder
         scalable={scalable}
-        onScaleChange={onScaleChange}
-        onOffsetChange={onOffsetChange}
+        onScaleChange={this.props.onScaleChange}
+        onOffsetChange={this.props.onOffsetChange}
       >
         <DoubleTouchableWithoutFeedback
           onSinglePress={this.onImageSinglePress}
