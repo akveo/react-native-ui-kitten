@@ -9,11 +9,16 @@ import { RkGalleryImage } from './rkGalleryImage';
 export class RkGalleryViewer extends React.Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
-    initialIndex: PropTypes.number,
     onItemClick: PropTypes.func,
+    onItemChange: PropTypes.func,
+    onItemScaleChange: PropTypes.func,
+    itemMaxScale: RkGalleryImage.propTypes.maxScale,
+
+    initialIndex: PropTypes.number,
   };
   static defaultProps = {
     initialIndex: 0,
+    itemMaxScale: RkGalleryImage.defaultProps.maxScale,
   };
 
   state = {
@@ -74,6 +79,9 @@ export class RkGalleryViewer extends React.Component {
         scrollEnabled: shouldEnableScroll,
       });
     }
+    if (this.props.onItemScaleChange) {
+      this.props.onItemScaleChange(item, index, change);
+    }
   };
 
   onItemOffsetChange = (item, index, change) => {
@@ -89,10 +97,17 @@ export class RkGalleryViewer extends React.Component {
   };
 
   onItemChange = (index) => {
+    const change = {
+      previous: this.selectedItem.index,
+      current: index,
+    };
     this.selectedItem.index = index;
+    if (this.props.onItemChange) {
+      this.props.onItemChange(change);
+    }
   };
 
-  onItemKeyExtract = (item, index) => index.toString();
+  extractItemKey = (item, index) => index.toString();
 
   renderItemLayout = (item, index) => ({
     length: this.state.itemSize.width,
@@ -103,6 +118,7 @@ export class RkGalleryViewer extends React.Component {
   renderItemView = ({ item, index }) => (
     <RkGalleryImage
       source={item}
+      maxScale={this.props.itemMaxScale}
       onClick={() => this.onItemViewClick(item, index)}
       onScaleChange={(change) => this.onItemScaleChange(item, index, change)}
       onOffsetChange={(change) => this.onItemOffsetChange(item, index, change)}
@@ -124,7 +140,7 @@ export class RkGalleryViewer extends React.Component {
         horizontal
         scrollEnabled={this.state.scrollEnabled}
         pagingEnabled
-        keyExtractor={this.onItemKeyExtract}
+        keyExtractor={this.extractItemKey}
         {...this.gestureHandlers.panHandlers}
       />
     );

@@ -6,19 +6,17 @@ import {
   Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { RkGalleryImage } from './rkGalleryImage';
 
 export class RkGalleryGrid extends React.Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
-    onItemClick: PropTypes.func,
     spanCount: PropTypes.number,
     itemMargin: PropTypes.number,
+    onItemClick: PropTypes.func,
   };
   static defaultProps = {
     spanCount: 3,
     itemMargin: 2,
-    onItemClick: (() => null),
   };
 
   constructor(props) {
@@ -41,7 +39,9 @@ export class RkGalleryGrid extends React.Component {
   extractItemKey = (item, index) => index.toString();
 
   onItemViewClick = (item, index) => {
-    this.props.onItemClick(item, index);
+    if (this.props.onItemClick) {
+      this.props.onItemClick(item, index);
+    }
   };
 
   renderItemView = ({ item, index }) => (
