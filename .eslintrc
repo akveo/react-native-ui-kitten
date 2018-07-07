@@ -4,13 +4,48 @@
   "rules": {
     "react/sort-comp": [1, {
       "order": [
-        "static-methods",
+        "prop-types",
+        "platform-refs",
         "instance-variables",
-        "instance-methods",
         "lifecycle",
+        "instance-methods",
+        "static-methods",
         "everything-else",
         "render"
-      ]
+      ],
+      "groups": {
+        "prop-types": [
+          "propTypes",
+          "defaultProps"
+        ],
+        "platform-refs": [
+          "displayName",
+          "statics",
+          "mixins",
+          "contextTypes",
+          "childContextTypes",
+          "state"
+        ],
+        "lifecycle": [
+          "constructor",
+          "getDefaultProps",
+          "getInitialState",
+          "getChildContext",
+          "getDerivedStateFromProps",
+          "componentWillMount",
+          "UNSAFE_componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "UNSAFE_componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "UNSAFE_componentWillUpdate",
+          "getSnapshotBeforeUpdate",
+          "componentDidUpdate",
+          "componentDidCatch",
+          "componentWillUnmount"
+        ]
+      }
     }]
   },
   "settings": {
