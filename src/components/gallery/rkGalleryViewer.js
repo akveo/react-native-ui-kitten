@@ -57,8 +57,8 @@ export class RkGalleryViewer extends React.Component {
   }
 
   onMoveShouldSetPanResponder = (event, state) => {
-    const shouldEnableScroll = this.selectedItem.state.scale === 1.0 && !this.state.scrollEnabled;
-    const shouldDisableScroll = this.selectedItem.state.scale > 1.0 && this.state.scrollEnabled;
+    const shouldEnableScroll = !this.state.scrollEnabled && this.selectedItem.state.scale === 1.0;
+    const shouldDisableScroll = this.state.scrollEnabled && this.selectedItem.state.scale > 1.0;
     if (state.numberActiveTouches === 2 && (shouldEnableScroll || shouldDisableScroll)) {
       this.setState({
         scrollEnabled: shouldEnableScroll,

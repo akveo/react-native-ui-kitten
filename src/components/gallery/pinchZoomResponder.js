@@ -29,7 +29,7 @@ export class PinchZoomResponder extends Component {
       y: 0.0,
     },
   };
-  lastState = {
+  prevState = {
     scale: 1,
     offset: {
       x: 0.0,
@@ -91,7 +91,7 @@ export class PinchZoomResponder extends Component {
         dy: Math.abs(event.nativeEvent.touches[0].pageY - event.nativeEvent.touches[1].pageY),
       };
       const powDistance = (distance.dx * distance.dx) + (distance.dy * distance.dy);
-      this.lastState.pinchDistance = Math.sqrt(powDistance);
+      this.prevState.pinchDistance = Math.sqrt(powDistance);
     }
   };
 
@@ -110,7 +110,7 @@ export class PinchZoomResponder extends Component {
    * End of the touch
    */
   onPanResponderRelease = () => {
-    this.lastState = {
+    this.prevState = {
       scale: this.state.scale,
       offset: this.state.offset,
     };
@@ -132,12 +132,12 @@ export class PinchZoomResponder extends Component {
 
   onPanResponderPan = (event, state) => {
     const distance = {
-      dx: this.lastState.isPinch ? 0 : state.dx,
-      dy: this.lastState.isPinch ? 0 : state.dy,
+      dx: this.prevState.isPinch ? 0 : state.dx,
+      dy: this.prevState.isPinch ? 0 : state.dy,
     };
     const offset = {
-      x: this.lastState.offset.x + (distance.dx / this.state.scale),
-      y: this.lastState.offset.y + (distance.dy / this.state.scale),
+      x: this.prevState.offset.x + (distance.dx / this.state.scale),
+      y: this.prevState.offset.y + (distance.dy / this.state.scale),
     };
     this.setState({ offset: this.getBoundedOffset(offset) }, this.onOffsetChanged);
   };
@@ -148,12 +148,12 @@ export class PinchZoomResponder extends Component {
       y: Math.abs(event.nativeEvent.touches[0].pageY - event.nativeEvent.touches[1].pageY),
     };
     const pinchDistance = Math.sqrt((touchDiff.x * touchDiff.x) + (touchDiff.y * touchDiff.y));
-    const scale = (pinchDistance / this.lastState.pinchDistance) * this.lastState.scale;
+    const scale = (pinchDistance / this.prevState.pinchDistance) * this.prevState.scale;
 
-    const isBackZoom = scale < this.lastState.scale;
+    const isBackZoom = scale < this.prevState.scale;
     const offset = {
-      x: isBackZoom ? this.state.offset.x * (scale / this.lastState.scale) : this.state.offset.x,
-      y: isBackZoom ? this.state.offset.y * (scale / this.lastState.scale) : this.state.offset.y,
+      x: isBackZoom ? this.state.offset.x * (scale / this.prevState.scale) : this.state.offset.x,
+      y: isBackZoom ? this.state.offset.y * (scale / this.prevState.scale) : this.state.offset.y,
     };
     this.setState({
       scale: this.getBoundedScale(scale),
@@ -191,10 +191,10 @@ export class PinchZoomResponder extends Component {
   };
 
   onScaleChanged = () => {
-    this.lastState.isPinch = true;
+    this.prevState.isPinch = true;
     if (this.props.onScaleChange) {
       const change = {
-        previous: this.lastState.scale,
+        previous: this.prevState.scale,
         current: this.state.scale,
       };
       this.props.onScaleChange(change);
@@ -202,10 +202,10 @@ export class PinchZoomResponder extends Component {
   };
 
   onOffsetChanged = () => {
-    this.lastState.isPinch = false;
+    this.prevState.isPinch = false;
     if (this.props.onOffsetChange) {
       const change = {
-        previous: this.lastState.offset,
+        previous: this.prevState.offset,
         current: this.state.offset,
       };
       this.props.onOffsetChange(change);
@@ -218,17 +218,18 @@ export class PinchZoomResponder extends Component {
   };
 
   render() {
+    const transform = {
+      transform: [
+        { scaleX: this.state.scale },
+        { scaleY: this.state.scale },
+        { translateX: this.state.offset.x },
+        { translateY: this.state.offset.y },
+      ],
+    };
     return (
       <View
         onLayout={this.onContainerLayout}
-        style={[styles.container, this.props.style, {
-          transform: [
-            { scaleX: this.state.scale },
-            { scaleY: this.state.scale },
-            { translateX: this.state.offset.x },
-            { translateY: this.state.offset.y },
-          ],
-        }]}
+        style={[styles.container, this.props.style, transform]}
         {...this.gestureHandlers.panHandlers}
       >
         {this.props.children}
