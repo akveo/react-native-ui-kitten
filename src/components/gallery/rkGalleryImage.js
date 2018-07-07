@@ -7,7 +7,7 @@ import { PinchZoomResponder } from './pinchZoomResponder';
 
 export class RkGalleryImage extends RkComponent {
   static propTypes = {
-    source: PropTypes.object.isRequired,
+    source: PropTypes.node.isRequired,
     maxScale: PinchZoomResponder.propTypes.maxScale,
     onClick: PropTypes.func,
     onScaleChange: PinchZoomResponder.propTypes.onScaleChange,
@@ -43,7 +43,7 @@ export class RkGalleryImage extends RkComponent {
     }
   };
 
-  onImageDoublePress = (event) => {
+  onImageDoublePress = () => {
     const scale = this.imageState.scale === 1.0 ? this.props.maxScale : 1.0;
     this.pinchResponderRef.zoomTo(scale);
   };

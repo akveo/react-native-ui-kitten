@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 export class RkGalleryGrid extends React.Component {
   static propTypes = {
-    items: PropTypes.array.isRequired,
+    items: PropTypes.node.isRequired,
     spanCount: PropTypes.number,
     itemMargin: PropTypes.number,
     onItemClick: PropTypes.func,
@@ -17,6 +17,7 @@ export class RkGalleryGrid extends React.Component {
   static defaultProps = {
     spanCount: 3,
     itemMargin: 2,
+    onItemClick: null,
   };
 
   constructor(props) {

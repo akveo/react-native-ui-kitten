@@ -11,9 +11,16 @@ export class PinchZoomResponder extends Component {
     maxScale: PropTypes.number,
     onScaleChange: PropTypes.func,
     onOffsetChange: PropTypes.func,
+
+    style: PropTypes.node,
+    children: PropTypes.node.isRequired,
   };
   static defaultProps = {
     maxScale: 4.0,
+    onScaleChange: null,
+    onOffsetChange: null,
+
+    style: null,
   };
   state = {
     scale: 1.0,
@@ -32,7 +39,6 @@ export class PinchZoomResponder extends Component {
     pinchDistance: 150,
   };
 
-
   componentWillMount() {
     this.gestureHandlers = PanResponder.create({
       onStartShouldSetPanResponder: this.onStartShouldSetPanResponder,
@@ -50,14 +56,13 @@ export class PinchZoomResponder extends Component {
     this.setState({ scale, offset }, this.onScaleChanged);
   };
 
-
   // Pan Responder callbacks
 
   /**
    * Does this view want to become responder on the start of a touch?
    * @returns {@code false} to block single touches
    */
-  onStartShouldSetPanResponder = (event, state) => this.state.scale >= 1;
+  onStartShouldSetPanResponder = () => this.state.scale >= 1;
 
   /**
    * Called for every touch move on the View when it is not the responder
@@ -85,7 +90,8 @@ export class PinchZoomResponder extends Component {
         dx: Math.abs(event.nativeEvent.touches[0].pageX - event.nativeEvent.touches[1].pageX),
         dy: Math.abs(event.nativeEvent.touches[0].pageY - event.nativeEvent.touches[1].pageY),
       };
-      this.lastState.pinchDistance = Math.sqrt((distance.dx * distance.dx) + (distance.dy * distance.dy));
+      const powDistance = (distance.dx * distance.dx) + (distance.dy * distance.dy);
+      this.lastState.pinchDistance = Math.sqrt(powDistance);
     }
   };
 
@@ -136,7 +142,7 @@ export class PinchZoomResponder extends Component {
     this.setState({ offset: this.getBoundedOffset(offset) }, this.onOffsetChanged);
   };
 
-  onPanResponderPinch = (event, state) => {
+  onPanResponderPinch = (event) => {
     const touchDiff = {
       x: Math.abs(event.nativeEvent.touches[0].pageX - event.nativeEvent.touches[1].pageX),
       y: Math.abs(event.nativeEvent.touches[0].pageY - event.nativeEvent.touches[1].pageY),
