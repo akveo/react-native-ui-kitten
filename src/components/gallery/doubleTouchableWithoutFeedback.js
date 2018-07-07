@@ -7,6 +7,8 @@ export class DoubleTouchableWithoutFeedback extends React.Component {
     onSinglePress: PropTypes.func.isRequired,
     onDoublePress: PropTypes.func.isRequired,
     delay: PropTypes.number,
+
+    children: PropTypes.node.isRequired,
   };
   static defaultProps = {
     delay: 300,

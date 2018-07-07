@@ -8,16 +8,21 @@ import { RkGalleryImage } from './rkGalleryImage';
 
 export class RkGalleryViewer extends React.Component {
   static propTypes = {
-    items: PropTypes.array.isRequired,
+    items: PropTypes.node.isRequired,
     onItemClick: PropTypes.func,
     onItemChange: PropTypes.func,
     onItemScaleChange: PropTypes.func,
+
     itemMaxScale: RkGalleryImage.propTypes.maxScale,
 
     initialIndex: PropTypes.number,
   };
   static defaultProps = {
     initialIndex: 0,
+    onItemClick: null,
+    onItemChange: null,
+    onItemScaleChange: null,
+
     itemMaxScale: RkGalleryImage.defaultProps.maxScale,
   };
 
@@ -91,7 +96,8 @@ export class RkGalleryViewer extends React.Component {
 
   onContainerScroll = (event) => {
     const selectedIndex = Math.round(event.nativeEvent.contentOffset.x / this.state.itemSize.width);
-    if (selectedIndex >= 0 && selectedIndex <= this.props.items.length && selectedIndex !== this.selectedItem.index) {
+    const isIndexInBounds = selectedIndex >= 0 && selectedIndex <= this.props.items.length;
+    if (isIndexInBounds && selectedIndex !== this.selectedItem.index) {
       this.onItemChange(selectedIndex);
     }
   };
