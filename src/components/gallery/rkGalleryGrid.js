@@ -19,23 +19,7 @@ export class RkGalleryGrid extends React.Component {
     itemMargin: 2,
     onItemClick: null,
   };
-
-  constructor(props) {
-    super(props);
-    const { width: screenWidth } = Dimensions.get('window');
-    this.state = {
-      layout: {
-        spanCount: this.props.spanCount,
-        item: {
-          size: {
-            width: (screenWidth / this.props.spanCount) - (this.props.itemMargin * 2),
-            height: (screenWidth / this.props.spanCount) - (this.props.itemMargin * 2),
-          },
-          margin: this.props.itemMargin,
-        },
-      },
-    };
-  }
+  static screenSize = Dimensions.get('window');
 
   extractItemKey = (item, index) => index.toString();
 
@@ -50,8 +34,8 @@ export class RkGalleryGrid extends React.Component {
       <Image
         source={item}
         style={{
-          width: this.state.layout.item.size.width,
-          height: this.state.layout.item.size.height,
+          width: this.itemSize.width,
+          height: this.itemSize.height,
           margin: this.props.itemMargin,
         }}
       />
@@ -59,10 +43,14 @@ export class RkGalleryGrid extends React.Component {
   );
 
   render() {
+    this.itemSize = {
+      width: (RkGalleryGrid.screenSize.width / this.props.spanCount) - (this.props.itemMargin * 2),
+      height: (RkGalleryGrid.screenSize.width / this.props.spanCount) - (this.props.itemMargin * 2),
+    };
     return (
       <FlatList
         data={this.props.items}
-        numColumns={this.state.layout.spanCount}
+        numColumns={this.props.spanCount}
         renderItem={this.renderItemView}
         keyExtractor={this.extractItemKey}
       />
