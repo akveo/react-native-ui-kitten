@@ -17,16 +17,14 @@ export class RkGalleryGrid extends React.Component {
   static defaultProps = {
     spanCount: 3,
     itemMargin: 2,
-    onItemClick: null,
+    onItemClick: (() => null),
   };
   static screenSize = Dimensions.get('window');
 
   extractItemKey = (item, index) => index.toString();
 
   onItemViewClick = (item, index) => {
-    if (this.props.onItemClick) {
-      this.props.onItemClick(item, index);
-    }
+    this.props.onItemClick(item, index);
   };
 
   renderItemView = ({ item, index }) => (
