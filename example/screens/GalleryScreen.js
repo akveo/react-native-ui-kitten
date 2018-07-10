@@ -56,16 +56,31 @@ export class GalleryScreen extends React.Component {
   };
 
   renderGalleryHeader = (onRequestClose) => (
-    <View style={styles.customizedGalleryHeader}>
+    <View style={customGalleryStyles.headerFooter}>
       <RkButton
         rkType='clear'
         onPress={onRequestClose}
       >Back
       </RkButton>
       <RkText
-        style={styles.customizedGalleryHeaderText}
+        style={customGalleryStyles.headerFooterText}
         rkType='header'
       >{this.state.customGallery.previewImageIndex + 1}/{GalleryScreen.items.length}
+      </RkText>
+    </View>
+  );
+
+  renderGalleryFooter = () => (
+    <View style={customGalleryStyles.headerFooter}>
+      <RkText
+        style={customGalleryStyles.headerFooterText}
+        rkType='header'
+      >Likes
+      </RkText>
+      <RkText
+        style={customGalleryStyles.headerFooterText}
+        rkType='header'
+      >Comments
       </RkText>
     </View>
   );
@@ -85,6 +100,7 @@ export class GalleryScreen extends React.Component {
               gridSpanCount={4}
               gridItemMargin={1}
               renderGalleryHeader={this.renderGalleryHeader}
+              renderGalleryFooter={this.renderGalleryFooter}
               onGridItemClick={this.onGridItemClick}
               onGalleryItemClick={this.onGalleryItemClick}
               onGalleryItemChange={this.onGalleryItemChange}
@@ -105,16 +121,16 @@ const styles = StyleSheet.create({
   section: {
     paddingHorizontal: 4,
   },
-  customizedGalleryHeader: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
+});
+
+const customGalleryStyles = StyleSheet.create({
+  headerFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 16,
   },
-  customizedGalleryHeaderText: {
+  headerFooterText: {
     fontSize: 16,
     color: 'white',
   },

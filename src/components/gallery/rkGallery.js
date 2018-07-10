@@ -10,6 +10,7 @@ export class RkGallery extends RkComponent {
   static propTypes = {
     items: RkGalleryGrid.propTypes.items,
     renderGalleryHeader: RkGalleryHeaderFooter.propTypes.onRenderComponent,
+    renderGalleryFooter: RkGalleryHeaderFooter.propTypes.onRenderComponent,
     gridSpanCount: RkGalleryGrid.propTypes.spanCount,
     gridItemMargin: RkGalleryGrid.propTypes.itemMargin,
     galleryItemMaxScale: RkGalleryViewer.propTypes.itemMaxScale,
@@ -20,6 +21,7 @@ export class RkGallery extends RkComponent {
   };
   static defaultProps = {
     renderGalleryHeader: null,
+    renderGalleryFooter: (() => null),
     gridSpanCount: RkGalleryGrid.defaultProps.spanCount,
     gridItemMargin: RkGalleryGrid.defaultProps.itemMargin,
     onGridItemClick: RkGalleryGrid.defaultProps.onItemClick,
@@ -31,6 +33,7 @@ export class RkGallery extends RkComponent {
 
   state = {
     previewImageIndex: undefined,
+    overlayVisible: false,
   };
 
   onModalRequestClose = () => {
@@ -42,6 +45,12 @@ export class RkGallery extends RkComponent {
       previewImageIndex: change.current,
     });
     this.props.onGalleryItemChange(change);
+  };
+
+  onViewerItemClick = () => {
+    this.setState({
+      overlayVisible: !this.state.overlayVisible,
+    });
   };
 
   onViewerItemChange = (change) => {
@@ -58,13 +67,14 @@ export class RkGallery extends RkComponent {
     };
     this.setState({
       previewImageIndex: change.current,
+      overlayVisible: true,
     });
     this.props.onGalleryItemChange(change);
     this.props.onGridItemClick(item, index);
   };
 
-  renderViewerHeader = (onRequestClose) => (
-    <View style={styles.viewerHeader}>
+  renderDefaultViewerHeader = (onRequestClose) => (
+    <View style={defaultComponentStyles.viewerHeader}>
       <RkButton
         rkType='clear'
         onPress={onRequestClose}
@@ -74,7 +84,8 @@ export class RkGallery extends RkComponent {
   );
 
   renderViewer = () => {
-    const onRenderHeader = this.props.renderGalleryHeader || this.renderViewerHeader;
+    const onRenderHeader = this.props.renderGalleryHeader || this.renderDefaultViewerHeader;
+    const headerFooterStateStyle = { opacity: this.state.overlayVisible ? 1 : 0 };
     return (
       <Modal onRequestClose={this.onModalRequestClose}>
         <View style={styles.containerViewer}>
@@ -82,12 +93,17 @@ export class RkGallery extends RkComponent {
             initialIndex={this.state.previewImageIndex}
             items={this.props.items}
             itemMaxScale={this.props.galleryItemMaxScale}
-            onItemClick={this.props.onGalleryItemClick}
+            onItemClick={this.onViewerItemClick}
             onItemChange={this.onViewerItemChange}
             onItemScaleChange={this.props.onGalleryItemScaleChange}
           />
           <RkGalleryHeaderFooter
+            style={[styles.viewerHeaderFooter, styles.viewerHeader, headerFooterStateStyle]}
             onRenderComponent={() => onRenderHeader(this.onModalRequestClose)}
+          />
+          <RkGalleryHeaderFooter
+            style={[styles.viewerHeaderFooter, styles.viewerFooter, headerFooterStateStyle]}
+            onRenderComponent={this.props.renderGalleryFooter}
           />
         </View>
       </Modal>
@@ -114,12 +130,20 @@ const styles = StyleSheet.create({
   containerViewer: {
     marginTop: 20,
   },
-  viewerHeader: {
-    position: 'absolute',
+  viewerHeaderFooter: {
     left: 0,
     right: 0,
+    position: 'absolute',
+  },
+  viewerHeader: {
+  },
+  viewerFooter: {
+    bottom: 0,
+  },
+});
+const defaultComponentStyles = StyleSheet.create({
+  viewerHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 16,
   },
