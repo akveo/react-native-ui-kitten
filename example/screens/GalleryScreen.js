@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { RkGallery, RkText } from 'react-native-ui-kitten';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
+import {
+  RkGallery,
+  RkText,
+  RkButton,
+} from 'react-native-ui-kitten';
+import { UtilStyles } from '../style/styles';
 
 export class GalleryScreen extends React.Component {
   static navigationOptions = {
     title: 'Gallery',
   };
-
   static items = [
     require('../img/flowers.jpeg'),
     require('../img/animal.jpeg'),
@@ -22,6 +30,14 @@ export class GalleryScreen extends React.Component {
     require('../img/tree.jpeg'),
   ];
 
+  state = {
+    customGallery: {
+      previewImageIndex: undefined,
+    },
+  };
+
+  // Customized gallery callbacks
+
   onGridItemClick = (item, index) => {
     console.log(`${this.constructor.name}: onGridItemClick: ${index}`);
   };
@@ -31,6 +47,7 @@ export class GalleryScreen extends React.Component {
   };
 
   onGalleryItemChange = (change) => {
+    this.state.customGallery.previewImageIndex = change.current;
     console.log(`${this.constructor.name}: onGalleryItemChange: ${JSON.stringify(change, null, 2)}`);
   };
 
@@ -38,19 +55,43 @@ export class GalleryScreen extends React.Component {
     console.log(`${this.constructor.name}: onGalleryItemScaleChange: ${JSON.stringify(change, null, 2)}`);
   };
 
+  renderGalleryHeader = (onRequestClose) => (
+    <View style={styles.customizedGalleryHeader}>
+      <RkButton
+        rkType='clear'
+        onPress={onRequestClose}
+      >Back
+      </RkButton>
+      <RkText
+        style={styles.customizedGalleryHeaderText}
+        rkType='header'
+      >{this.state.customGallery.previewImageIndex + 1}/{GalleryScreen.items.length}
+      </RkText>
+    </View>
+  );
+
   render() {
     return (
-      <View style={styles.section}>
-        <RkText style={styles.header} rkType='header'>Gallery Example</RkText>
-        <RkGallery
-          items={GalleryScreen.items}
-          gridSpanCount={4}
-          gridItemMargin={1}
-          onGridItemClick={this.onGridItemClick}
-          onGalleryItemClick={this.onGalleryItemClick}
-          onGalleryItemChange={this.onGalleryItemChange}
-          onGalleryItemScaleChange={this.onGalleryItemScaleChange}
-        />
+      <View style={{ flex: 1 }}>
+        <ScrollView style={UtilStyles.container}>
+          <View style={styles.section}>
+            <RkText style={styles.header} rkType='header'>Default implementation</RkText>
+            <RkGallery items={GalleryScreen.items} />
+          </View>
+          <View style={styles.section}>
+            <RkText style={styles.header} rkType='header'>Customized implementation</RkText>
+            <RkGallery
+              items={GalleryScreen.items}
+              gridSpanCount={4}
+              gridItemMargin={1}
+              renderGalleryHeader={this.renderGalleryHeader}
+              onGridItemClick={this.onGridItemClick}
+              onGalleryItemClick={this.onGalleryItemClick}
+              onGalleryItemChange={this.onGalleryItemChange}
+              onGalleryItemScaleChange={this.onGalleryItemScaleChange}
+            />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -59,8 +100,22 @@ export class GalleryScreen extends React.Component {
 const styles = StyleSheet.create({
   header: {
     paddingVertical: 8,
+    fontSize: 16,
   },
   section: {
     paddingHorizontal: 4,
+  },
+  customizedGalleryHeader: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 16,
+  },
+  customizedGalleryHeaderText: {
+    fontSize: 16,
+    color: 'white',
   },
 });
