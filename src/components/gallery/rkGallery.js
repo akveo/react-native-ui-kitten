@@ -24,6 +24,10 @@ export class RkGallery extends RkComponent {
     renderGalleryHeader: null,
     gridSpanCount: RkGalleryGrid.defaultProps.spanCount,
     gridItemMargin: RkGalleryGrid.defaultProps.itemMargin,
+    onGridItemClick: RkGalleryGrid.defaultProps.onItemClick,
+    onGalleryItemClick: RkGalleryViewer.defaultProps.onItemClick,
+    onGalleryItemChange: RkGalleryViewer.defaultProps.onItemChange,
+    onGalleryItemScaleChange: RkGalleryViewer.defaultProps.onItemScaleChange,
   };
   componentName = 'RkGallery';
 
