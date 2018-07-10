@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Modal, View, StyleSheet } from 'react-native';
 import { RkComponent } from '../rkComponent';
 import { RkGalleryGrid } from './rkGalleryGrid';
@@ -10,7 +9,6 @@ import { RkButton } from '../button/rkButton';
 export class RkGallery extends RkComponent {
   static propTypes = {
     items: RkGalleryGrid.propTypes.items,
-    previewIndex: PropTypes.number,
     renderGalleryHeader: RkGalleryHeaderFooter.propTypes.onRenderComponent,
     gridSpanCount: RkGalleryGrid.propTypes.spanCount,
     gridItemMargin: RkGalleryGrid.propTypes.itemMargin,
@@ -47,7 +45,9 @@ export class RkGallery extends RkComponent {
   };
 
   onViewerItemChange = (change) => {
-    this.state.previewImageIndex = change.current;
+    this.setState({
+      previewImageIndex: change.current,
+    });
     this.props.onGalleryItemChange(change);
   };
 
@@ -63,20 +63,18 @@ export class RkGallery extends RkComponent {
     this.props.onGridItemClick(item, index);
   };
 
-  renderViewerHeader = () => (
+  renderViewerHeader = (onRequestClose) => (
     <View style={styles.viewerHeader}>
       <RkButton
         rkType='clear'
-        onPress={this.onModalRequestClose}
-      >
-        Close
+        onPress={onRequestClose}
+      > Close
       </RkButton>
     </View>
   );
 
   renderViewer = () => {
     const onRenderHeader = this.props.renderGalleryHeader || this.renderViewerHeader;
-    this.state.previewImageIndex = this.state.previewImageIndex || (this.props.previewIndex || 0);
     return (
       <Modal onRequestClose={this.onModalRequestClose}>
         <View style={styles.containerViewer}>
@@ -88,7 +86,9 @@ export class RkGallery extends RkComponent {
             onItemChange={this.onViewerItemChange}
             onItemScaleChange={this.props.onGalleryItemScaleChange}
           />
-          <RkGalleryHeaderFooter onRenderComponent={onRenderHeader} />
+          <RkGalleryHeaderFooter
+            onRenderComponent={() => onRenderHeader(this.onModalRequestClose)}
+          />
         </View>
       </Modal>
     );
