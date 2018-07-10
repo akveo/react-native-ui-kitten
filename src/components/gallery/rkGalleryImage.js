@@ -15,6 +15,7 @@ export class RkGalleryImage extends RkComponent {
   };
   static defaultProps = {
     maxScale: PinchZoomResponder.defaultProps.maxScale,
+    onClick: (() => null),
   };
   componentName = 'RkGalleryImage';
 
@@ -26,21 +27,15 @@ export class RkGalleryImage extends RkComponent {
 
   onImageScaleChange = (change) => {
     this.imageState.scale = change.current;
-    if (this.props.onScaleChange) {
-      this.props.onScaleChange(change);
-    }
+    this.props.onScaleChange(change);
   };
 
   onImageOffsetChange = (change) => {
-    if (this.props.onOffsetChange) {
-      this.props.onOffsetChange(change);
-    }
+    this.props.onOffsetChange(change);
   };
 
   onImageSinglePress = (event) => {
-    if (this.props.onClick) {
-      this.props.onClick(event);
-    }
+    this.props.onClick(event);
   };
 
   onImageDoublePress = () => {

@@ -17,8 +17,8 @@ export class PinchZoomResponder extends Component {
   };
   static defaultProps = {
     maxScale: 4.0,
-    onScaleChange: null,
-    onOffsetChange: null,
+    onScaleChange: (() => null),
+    onOffsetChange: (() => null),
 
     style: null,
   };
@@ -192,24 +192,20 @@ export class PinchZoomResponder extends Component {
 
   onScaleChanged = () => {
     this.prevState.isPinch = true;
-    if (this.props.onScaleChange) {
-      const change = {
-        previous: this.prevState.scale,
-        current: this.state.scale,
-      };
-      this.props.onScaleChange(change);
-    }
+    const change = {
+      previous: this.prevState.scale,
+      current: this.state.scale,
+    };
+    this.props.onScaleChange(change);
   };
 
   onOffsetChanged = () => {
     this.prevState.isPinch = false;
-    if (this.props.onOffsetChange) {
-      const change = {
-        previous: this.prevState.offset,
-        current: this.state.offset,
-      };
-      this.props.onOffsetChange(change);
-    }
+    const change = {
+      previous: this.prevState.offset,
+      current: this.state.offset,
+    };
+    this.props.onOffsetChange(change);
   };
 
   onContainerLayout = (event) => {

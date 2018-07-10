@@ -9,19 +9,18 @@ import { RkGalleryImage } from './rkGalleryImage';
 export class RkGalleryViewer extends React.Component {
   static propTypes = {
     items: PropTypes.node.isRequired,
+    initialIndex: PropTypes.number,
     onItemClick: PropTypes.func,
     onItemChange: PropTypes.func,
     onItemScaleChange: PropTypes.func,
 
     itemMaxScale: RkGalleryImage.propTypes.maxScale,
-
-    initialIndex: PropTypes.number,
   };
   static defaultProps = {
     initialIndex: 0,
-    onItemClick: null,
-    onItemChange: null,
-    onItemScaleChange: null,
+    onItemClick: (() => null),
+    onItemChange: (() => null),
+    onItemScaleChange: (() => null),
 
     itemMaxScale: RkGalleryImage.defaultProps.maxScale,
   };
@@ -68,9 +67,7 @@ export class RkGalleryViewer extends React.Component {
   };
 
   onItemViewClick = (item, index) => {
-    if (this.props.onItemClick) {
-      this.props.onItemClick(item, index);
-    }
+    this.props.onItemClick(item, index);
   };
 
   onItemScaleChange = (item, index, change) => {
@@ -84,9 +81,7 @@ export class RkGalleryViewer extends React.Component {
         scrollEnabled: shouldEnableScroll,
       });
     }
-    if (this.props.onItemScaleChange) {
-      this.props.onItemScaleChange(item, index, change);
-    }
+    this.props.onItemScaleChange(item, index, change);
   };
 
   onItemOffsetChange = (item, index, change) => {
@@ -108,9 +103,7 @@ export class RkGalleryViewer extends React.Component {
       current: index,
     };
     this.selectedItem.index = index;
-    if (this.props.onItemChange) {
-      this.props.onItemChange(change);
-    }
+    this.props.onItemChange(change);
   };
 
   extractItemKey = (item, index) => index.toString();
