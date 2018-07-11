@@ -57,10 +57,11 @@ export class RkGallery extends RkComponent {
     this.props.onGalleryItemChange(change);
   };
 
-  onViewerItemClick = () => {
+  onViewerItemClick = (item, index) => {
     // eslint-disable-next-line no-underscore-dangle
     const opacityValue = this.state.overlayOpacity._value === 0 ? 1 : 0;
     this.getOverlayAnimation(opacityValue).start();
+    this.props.onGalleryItemClick(item, index);
   };
 
   onViewerItemChange = (change) => {
@@ -79,8 +80,8 @@ export class RkGallery extends RkComponent {
       previewImageIndex: change.current,
       overlayOpacity: new Animated.Value(1),
     });
-    this.props.onGalleryItemChange(change);
     this.props.onGridItemClick(item, index);
+    this.props.onGalleryItemChange(change);
   };
 
   renderDefaultViewerHeader = (onRequestClose) => (
@@ -147,8 +148,7 @@ const styles = StyleSheet.create({
     right: 0,
     position: 'absolute',
   },
-  viewerHeader: {
-  },
+  viewerHeader: {},
   viewerFooter: {
     bottom: 0,
   },
