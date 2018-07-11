@@ -1,5 +1,10 @@
 import React from 'react';
-import { Modal, View, StyleSheet } from 'react-native';
+import {
+  Modal,
+  View,
+  Animated,
+  StyleSheet,
+} from 'react-native';
 import { RkComponent } from '../rkComponent';
 import { RkGalleryGrid } from './rkGalleryGrid';
 import { RkGalleryViewer } from './rkGalleryViewer';
@@ -33,7 +38,12 @@ export class RkGallery extends RkComponent {
 
   state = {
     previewImageIndex: undefined,
-    overlayVisible: false,
+    overlayOpacity: new Animated.Value(0),
+  };
+
+  // eslint-disable-next-line arrow-body-style
+  getOverlayAnimation = (endValue) => {
+    return Animated.timing(this.state.overlayOpacity, { toValue: endValue, duration: 300 });
   };
 
   onModalRequestClose = () => {
@@ -48,9 +58,9 @@ export class RkGallery extends RkComponent {
   };
 
   onViewerItemClick = () => {
-    this.setState({
-      overlayVisible: !this.state.overlayVisible,
-    });
+    // eslint-disable-next-line no-underscore-dangle
+    const opacityValue = this.state.overlayOpacity._value === 0 ? 1 : 0;
+    this.getOverlayAnimation(opacityValue).start();
   };
 
   onViewerItemChange = (change) => {
@@ -67,7 +77,7 @@ export class RkGallery extends RkComponent {
     };
     this.setState({
       previewImageIndex: change.current,
-      overlayVisible: true,
+      overlayOpacity: new Animated.Value(1),
     });
     this.props.onGalleryItemChange(change);
     this.props.onGridItemClick(item, index);
@@ -85,11 +95,12 @@ export class RkGallery extends RkComponent {
 
   renderViewer = () => {
     const onRenderHeader = this.props.renderGalleryHeader || this.renderDefaultViewerHeader;
-    const headerFooterStateStyle = { opacity: this.state.overlayVisible ? 1 : 0 };
+    const headerFooterStateStyle = { opacity: this.state.overlayOpacity };
     return (
       <Modal onRequestClose={this.onModalRequestClose}>
         <View style={styles.containerViewer}>
           <RkGalleryViewer
+            style={this.props.style}
             initialIndex={this.state.previewImageIndex}
             items={this.props.items}
             itemMaxScale={this.props.galleryItemMaxScale}
@@ -112,6 +123,7 @@ export class RkGallery extends RkComponent {
 
   renderGrid = () => (
     <RkGalleryGrid
+      style={this.props.style}
       items={this.props.items}
       spanCount={this.props.gridSpanCount}
       itemMargin={this.props.gridItemMargin}
