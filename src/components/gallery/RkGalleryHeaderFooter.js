@@ -1,5 +1,8 @@
 import React from 'react';
-import { View, ViewPropTypes } from 'react-native';
+import {
+  Animated,
+  ViewPropTypes,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 export class RkGalleryHeaderFooter extends React.Component {
@@ -14,9 +17,9 @@ export class RkGalleryHeaderFooter extends React.Component {
 
   render() {
     return (
-      <View style={this.props.style}>
+      <Animated.View style={this.props.style}>
         {this.props.onRenderComponent()}
-      </View>
+      </Animated.View>
     );
   }
 }
