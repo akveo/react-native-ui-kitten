@@ -3,7 +3,9 @@ import {
   FlatList,
   TouchableWithoutFeedback,
   Image,
+  StyleSheet,
   Dimensions,
+  ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -13,11 +15,13 @@ export class RkGalleryGrid extends React.Component {
     spanCount: PropTypes.number,
     itemMargin: PropTypes.number,
     onItemClick: PropTypes.func,
+    style: ViewPropTypes.style,
   };
   static defaultProps = {
     spanCount: 3,
     itemMargin: 2,
     onItemClick: (() => null),
+    style: {},
   };
   static screenSize = Dimensions.get('window');
 
@@ -47,6 +51,7 @@ export class RkGalleryGrid extends React.Component {
     };
     return (
       <FlatList
+        style={[this.props.style, defaultComponentStyles.container]}
         data={this.props.items}
         numColumns={this.props.spanCount}
         renderItem={this.renderItemView}
@@ -55,3 +60,9 @@ export class RkGalleryGrid extends React.Component {
     );
   }
 }
+
+const defaultComponentStyles = StyleSheet.create({
+  container: {
+    backgroundColor: 'transparent',
+  },
+});
