@@ -258,7 +258,7 @@ export class PinchZoomResponder extends Component {
     return (
       <Animated.View
         onLayout={this.onContainerLayout}
-        style={[styles.container, this.props.style, transform]}
+        style={[this.props.style, defaultComponentStyles.container, transform]}
         {...this.gestureHandlers.panHandlers}
       >
         {this.props.children}
@@ -267,7 +267,7 @@ export class PinchZoomResponder extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const defaultComponentStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

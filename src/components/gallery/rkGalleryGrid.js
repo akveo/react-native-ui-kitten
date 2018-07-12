@@ -20,9 +20,7 @@ export class RkGalleryGrid extends React.Component {
     spanCount: 3,
     onItemClick: (() => null),
     style: null,
-    itemStyle: {
-      margin: 2,
-    },
+    itemStyle: null,
   };
 
   state = {
@@ -60,7 +58,7 @@ export class RkGalleryGrid extends React.Component {
   render() {
     return (
       <FlatList
-        style={[this.props.style, defaultComponentStyles.container]}
+        style={[this.props.style]}
         onLayout={this.onLayout}
         data={this.props.items}
         numColumns={this.props.spanCount}
@@ -70,9 +68,3 @@ export class RkGalleryGrid extends React.Component {
     );
   }
 }
-
-const defaultComponentStyles = StyleSheet.create({
-  container: {
-    backgroundColor: 'transparent',
-  },
-});

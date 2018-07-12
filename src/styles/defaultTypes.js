@@ -8,6 +8,7 @@ export const DefaultTypes = (theme) => ({
   RkChoiceGroup: ComponentTypes.RkChoiceGroupTypes(theme),
   RkCard: ComponentTypes.RkCardTypes(theme),
   RkTabView: ComponentTypes.TabTypes(theme),
+  RkGallery: ComponentTypes.RkGalleryTypes(theme),
   RkModalImg: ComponentTypes.RkModalImgTypes(theme),
   RkAvoidKeyboard: ComponentTypes.RkAvoidKeyboardTypes(theme),
   RkPicker: ComponentTypes.RkPickerTypes(theme),

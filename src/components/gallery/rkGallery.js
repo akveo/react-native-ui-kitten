@@ -26,7 +26,7 @@ export class RkGallery extends RkComponent {
   };
   static defaultProps = {
     renderGalleryHeader: null,
-    renderGalleryFooter: (() => null),
+    renderGalleryFooter: null,
     spanCount: RkGalleryGrid.defaultProps.spanCount,
     onGridItemClick: RkGalleryGrid.defaultProps.onItemClick,
     onGalleryItemClick: RkGalleryViewer.defaultProps.onItemClick,
@@ -34,11 +34,21 @@ export class RkGallery extends RkComponent {
     onGalleryItemScaleChange: RkGalleryViewer.defaultProps.onItemScaleChange,
   };
   componentName = 'RkGallery';
+  typeMapping = {
+    grid: {},
+    gridItem: {},
+    previewHeader: {},
+    previewFooter: {},
+  };
 
   state = {
     previewImageIndex: undefined,
     overlayOpacity: new Animated.Value(0),
   };
+
+  defineStyles(rkType) {
+    return super.defineStyles(rkType);
+  }
 
   // eslint-disable-next-line arrow-body-style
   getOverlayAnimation = (endValue) => {
@@ -84,7 +94,7 @@ export class RkGallery extends RkComponent {
   };
 
   renderDefaultViewerHeader = (onRequestClose) => (
-    <View style={defaultComponentStyles.viewerHeader}>
+    <View>
       <RkButton
         rkType='clear'
         onPress={onRequestClose}
@@ -93,12 +103,25 @@ export class RkGallery extends RkComponent {
     </View>
   );
 
+  renderDefaultViewerFooter = () => (
+    <View />
+  );
+
   renderViewer = () => {
-    const onRenderHeader = this.props.renderGalleryHeader || this.renderDefaultViewerHeader;
-    const headerFooterStateStyle = { opacity: this.state.overlayOpacity };
+    const { previewHeader, previewFooter } = this.defineStyles(this.props.rkType);
+    const header = {
+      onRenderComponent: this.props.renderGalleryHeader || this.renderDefaultViewerHeader,
+      definedStyle: this.props.renderGalleryHeader ? null : previewHeader,
+      stateStyle: { opacity: this.state.overlayOpacity },
+    };
+    const footer = {
+      onRenderComponent: this.props.renderGalleryFooter || this.renderDefaultViewerFooter,
+      definedStyle: this.props.renderGalleryFooter ? null : previewFooter,
+      stateStyle: { opacity: this.state.overlayOpacity },
+    };
     return (
       <Modal onRequestClose={this.onModalRequestClose}>
-        <View style={styles.containerViewer}>
+        <View style={defaultComponentStyles.viewerContainer}>
           <RkGalleryViewer
             initialIndex={this.state.previewImageIndex}
             items={this.props.items}
@@ -108,27 +131,30 @@ export class RkGallery extends RkComponent {
             onItemScaleChange={this.props.onGalleryItemScaleChange}
           />
           <RkGalleryHeaderFooter
-            style={[styles.viewerHeaderFooter, styles.viewerHeader, headerFooterStateStyle]}
-            onRenderComponent={() => onRenderHeader(this.onModalRequestClose)}
+            style={[header.definedStyle, defaultComponentStyles.viewerHeader, header.stateStyle]}
+            onRenderComponent={() => header.onRenderComponent(this.onModalRequestClose)}
           />
           <RkGalleryHeaderFooter
-            style={[styles.viewerHeaderFooter, styles.viewerFooter, headerFooterStateStyle]}
-            onRenderComponent={this.props.renderGalleryFooter}
+            style={[footer.definedStyle, defaultComponentStyles.viewerFooter, footer.stateStyle]}
+            onRenderComponent={footer.onRenderComponent}
           />
         </View>
       </Modal>
     );
   };
 
-  renderGrid = () => (
-    <RkGalleryGrid
-      style={this.props.style}
-      itemStyle={this.props.itemStyle}
-      items={this.props.items}
-      spanCount={this.props.spanCount}
-      onItemClick={this.onGridItemClick}
-    />
-  );
+  renderGrid = () => {
+    const { grid, gridItem } = this.defineStyles(this.props.rkType);
+    return (
+      <RkGalleryGrid
+        style={[grid, this.props.style]}
+        itemStyle={[gridItem, this.props.itemStyle]}
+        items={this.props.items}
+        spanCount={this.props.spanCount}
+        onItemClick={this.onGridItemClick}
+      />
+    );
+  };
 
   isPreview = () => this.state.previewImageIndex !== undefined;
 
@@ -137,24 +163,19 @@ export class RkGallery extends RkComponent {
   }
 }
 
-const styles = StyleSheet.create({
-  containerViewer: {
+const defaultComponentStyles = StyleSheet.create({
+  viewerContainer: {
     marginTop: 20,
   },
-  viewerHeaderFooter: {
+  viewerHeader: {
+    position: 'absolute',
     left: 0,
     right: 0,
-    position: 'absolute',
   },
-  viewerHeader: {},
   viewerFooter: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
     bottom: 0,
-  },
-});
-const defaultComponentStyles = StyleSheet.create({
-  viewerHeader: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    padding: 16,
   },
 });

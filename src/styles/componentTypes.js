@@ -3,6 +3,7 @@ export * from '../components/button/types';
 export * from '../components/card/types';
 export * from '../components/choice/types';
 export * from '../components/choiceGroup/types';
+export * from '../components/gallery/types';
 export * from '../components/image/types';
 export * from '../components/tab/types';
 export * from '../components/text/types';
