@@ -16,24 +16,21 @@ export class PinchZoomResponder extends Component {
     children: PropTypes.node.isRequired,
   };
   static defaultProps = {
-    maxScale: 2.0,
+    maxScale: 2,
     onScaleChange: (() => null),
     onOffsetChange: (() => null),
 
     style: null,
   };
   state = {
-    scale: new Animated.Value(1.0),
-    offset: {
-      x: new Animated.Value(0.0),
-      y: new Animated.Value(0.0),
-    },
+    scale: new Animated.Value(1),
+    offset: new Animated.ValueXY(),
   };
   prevState = {
     scale: 1,
     offset: {
-      x: 0.0,
-      y: 0.0,
+      x: 0,
+      y: 0,
     },
     isPinch: false,
     pinchDistance: 150,
@@ -52,8 +49,9 @@ export class PinchZoomResponder extends Component {
   }
 
   zoomTo = (scale) => {
-    const offset = scale === 1.0 ? { x: 0.0, y: 0.0 } : this.getOffsetValue();
-    this.getZoomAnimation(scale, offset).start(this.onScaleChanged);
+    // reset offset to { x: 0, y: 0 } if resetting scale
+    const offset = scale === 1.0 ? { x: 0, y: 0 } : this.getOffsetValue();
+    this.getZoomAnimation(scale, offset).start(this.onZoomAnimationCompleted);
   };
 
   // Pan Responder callbacks
@@ -140,12 +138,7 @@ export class PinchZoomResponder extends Component {
       y: this.prevState.offset.y + (distance.dy / this.getScaleValue()),
     };
     const boundedOffsetValue = this.getBoundedOffsetValue(offset);
-    this.setState({
-      offset: {
-        x: new Animated.Value(boundedOffsetValue.x),
-        y: new Animated.Value(boundedOffsetValue.y),
-      },
-    }, this.onOffsetChanged);
+    this.setState({ offset: new Animated.ValueXY(boundedOffsetValue) }, this.onOffsetChanged);
   };
 
   onPanResponderPinch = (event) => {
@@ -168,10 +161,7 @@ export class PinchZoomResponder extends Component {
     };
     this.setState({
       scale: new Animated.Value(boundedValue.scale),
-      offset: {
-        x: new Animated.Value(boundedValue.offset.x),
-        y: new Animated.Value(boundedValue.offset.y),
-      },
+      offset: new Animated.ValueXY(boundedValue.offset),
     }, this.onScaleChanged);
   };
 
@@ -221,17 +211,11 @@ export class PinchZoomResponder extends Component {
       toValue: scaleValue,
       duration: 300,
     });
-    const offsetAnim = {
-      x: Animated.timing(this.state.offset.x, {
-        toValue: offsetValue.x,
-        duration: 300,
-      }),
-      y: Animated.timing(this.state.offset.y, {
-        toValue: offsetValue.y,
-        duration: 300,
-      }),
-    };
-    return Animated.parallel([scaleAnim, offsetAnim.x, offsetAnim.y]);
+    const offsetAnim = Animated.timing(this.state.offset, {
+      toValue: offsetValue,
+      duration: 300,
+    });
+    return Animated.parallel([scaleAnim, offsetAnim]);
   };
 
   onScaleChanged = () => {
@@ -250,6 +234,11 @@ export class PinchZoomResponder extends Component {
       current: this.getOffsetValue(),
     };
     this.props.onOffsetChange(change);
+  };
+
+  onZoomAnimationCompleted = () => {
+    this.onScaleChanged();
+    this.prevState.offset = this.getOffsetValue();
   };
 
   onContainerLayout = (event) => {
