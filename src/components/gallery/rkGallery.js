@@ -14,10 +14,10 @@ import { RkButton } from '../button/rkButton';
 export class RkGallery extends RkComponent {
   static propTypes = {
     items: RkGalleryGrid.propTypes.items,
+    itemStyle: RkGalleryGrid.propTypes.itemStyle,
     renderGalleryHeader: RkGalleryHeaderFooter.propTypes.onRenderComponent,
     renderGalleryFooter: RkGalleryHeaderFooter.propTypes.onRenderComponent,
-    gridSpanCount: RkGalleryGrid.propTypes.spanCount,
-    gridItemMargin: RkGalleryGrid.propTypes.itemMargin,
+    spanCount: RkGalleryGrid.propTypes.spanCount,
     galleryItemMaxScale: RkGalleryViewer.propTypes.itemMaxScale,
     onGridItemClick: RkGalleryGrid.propTypes.onItemClick,
     onGalleryItemClick: RkGalleryViewer.propTypes.onItemClick,
@@ -27,8 +27,7 @@ export class RkGallery extends RkComponent {
   static defaultProps = {
     renderGalleryHeader: null,
     renderGalleryFooter: (() => null),
-    gridSpanCount: RkGalleryGrid.defaultProps.spanCount,
-    gridItemMargin: RkGalleryGrid.defaultProps.itemMargin,
+    spanCount: RkGalleryGrid.defaultProps.spanCount,
     onGridItemClick: RkGalleryGrid.defaultProps.onItemClick,
     onGalleryItemClick: RkGalleryViewer.defaultProps.onItemClick,
     onGalleryItemChange: RkGalleryViewer.defaultProps.onItemChange,
@@ -101,7 +100,6 @@ export class RkGallery extends RkComponent {
       <Modal onRequestClose={this.onModalRequestClose}>
         <View style={styles.containerViewer}>
           <RkGalleryViewer
-            style={this.props.style}
             initialIndex={this.state.previewImageIndex}
             items={this.props.items}
             itemMaxScale={this.props.galleryItemMaxScale}
@@ -125,9 +123,9 @@ export class RkGallery extends RkComponent {
   renderGrid = () => (
     <RkGalleryGrid
       style={this.props.style}
+      itemStyle={this.props.itemStyle}
       items={this.props.items}
-      spanCount={this.props.gridSpanCount}
-      itemMargin={this.props.gridItemMargin}
+      spanCount={this.props.spanCount}
       onItemClick={this.onGridItemClick}
     />
   );

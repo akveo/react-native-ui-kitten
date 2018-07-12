@@ -4,7 +4,6 @@ import {
   FlatList,
   PanResponder,
   StyleSheet,
-  ViewPropTypes,
   Dimensions,
 } from 'react-native';
 import { RkGalleryImage } from './rkGalleryImage';
@@ -16,7 +15,6 @@ export class RkGalleryViewer extends React.Component {
     onItemClick: PropTypes.func,
     onItemChange: PropTypes.func,
     onItemScaleChange: PropTypes.func,
-    style: ViewPropTypes.style,
 
     itemMaxScale: RkGalleryImage.propTypes.maxScale,
   };
@@ -25,7 +23,6 @@ export class RkGalleryViewer extends React.Component {
     onItemClick: (() => null),
     onItemChange: (() => null),
     onItemScaleChange: (() => null),
-    style: {},
 
     itemMaxScale: RkGalleryImage.defaultProps.maxScale,
   };
@@ -136,7 +133,7 @@ export class RkGalleryViewer extends React.Component {
   render() {
     return (
       <FlatList
-        style={[this.props.style, defaultComponentStyles.container]}
+        style={defaultComponentStyles.container}
         data={this.props.items}
         renderItem={this.renderItemView}
         getItemLayout={this.renderItemLayout}
