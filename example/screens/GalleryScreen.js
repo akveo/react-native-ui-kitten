@@ -96,9 +96,10 @@ export class GalleryScreen extends React.Component {
           <View style={styles.section}>
             <RkText style={styles.header} rkType='header'>Customized implementation</RkText>
             <RkGallery
+              style={customGalleryStyles.container}
+              itemStyle={customGalleryStyles.item}
               items={GalleryScreen.items}
-              gridSpanCount={4}
-              gridItemMargin={1}
+              spanCount={4}
               renderGalleryHeader={this.renderGalleryHeader}
               renderGalleryFooter={this.renderGalleryFooter}
               onGridItemClick={this.onGridItemClick}
@@ -124,6 +125,12 @@ const styles = StyleSheet.create({
 });
 
 const customGalleryStyles = StyleSheet.create({
+  container: {
+  },
+  item: {
+    borderRadius: 8,
+    margin: 1,
+  },
   headerFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
