@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   StyleSheet,
@@ -11,38 +12,48 @@ import {
   RkChoice,
   RkTheme,
 } from 'react-native-ui-kitten';
-import { UtilStyles } from '../style/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { UtilStyles } from '../style/styles';
 
 export class ChoiceScreen extends React.Component {
   static navigationOptions = {
     title: 'Selectable components',
   };
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      settingsOption: {
-        index: 0,
-        name: 'Option 1',
-      },
-      pikerVisible: false,
-      pickedValue: 'Pick Value',
-      selectedOption: 0,
-      onChangeHandleText: 'Option 3 selected',
-    };
-    this.hidePicker = this.hidePicker.bind(this);
-    this.handlePickedValue = this.handlePickedValue.bind(this);
-  }
+  state = {
+    settingsOption: {
+      index: 0,
+      name: 'Option 1',
+    },
+    onChangeHandleText: 'Option 3 selected',
+  };
 
-  hidePicker() {
-    this.setState({ pikerVisible: false });
-  }
+  onOptionsGroupValueChanged = (index) => {
+    this.setState({ onChangeHandleText: `Option ${index + 1} selected` });
+  };
 
-  handlePickedValue(date) {
-    this.setState({ pickedValue: date });
-    this.hidePicker();
-  }
+  onSettingsOptionChange = (option) => {
+    this.setState({ settingsOption: option });
+  };
+
+  onSettingsButtonPress = () => {
+    this.props.navigation.navigate('Settings', {
+      option: this.state.settingsOption,
+      onChange: this.onSettingsOptionChange,
+    });
+  };
+
+  onCustomizationButtonPress = () => {
+    this.props.navigation.navigate('ChoiceCustomization', {
+      option: this.state.settingsOption,
+      onChange: this.onSettingsOptionChange,
+    });
+  };
 
   render() {
     return (
@@ -50,7 +61,6 @@ export class ChoiceScreen extends React.Component {
         style={UtilStyles.container}
         automaticallyAdjustContentInsets
       >
-
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Classic selectable components</RkText>
           <View style={UtilStyles.columnContainer}>
@@ -117,35 +127,35 @@ export class ChoiceScreen extends React.Component {
                   <RkChoice rkType='clear' />
                 </View>
               </TouchableOpacity>
-
               <TouchableOpacity choiceTrigger>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 2</RkText>
                   <RkChoice rkType='clear' selected />
                 </View>
               </TouchableOpacity>
-
               <TouchableOpacity choiceTrigger>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 3</RkText>
                   <RkChoice rkType='clear' />
                 </View>
               </TouchableOpacity>
-
               <TouchableOpacity choiceTrigger>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 4</RkText>
                   <RkChoice rkType='clear' />
                 </View>
               </TouchableOpacity>
-
             </RkChoiceGroup>
           </View>
         </View>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>{`Radio components - ${this.state.onChangeHandleText}`}</RkText>
           <View style={UtilStyles.columnContainer}>
-            <RkChoiceGroup radio selectedIndex={2} onChange={(index) => this.setState({ onChangeHandleText: `Option ${index + 1} selected` })}>
+            <RkChoiceGroup
+              radio
+              selectedIndex={2}
+              onChange={this.onOptionsGroupValueChanged}
+            >
               <TouchableOpacity choiceTrigger>
                 <View style={[styles.radioRow, styles.spaceBottom]}>
                   <RkChoice rkType='radio' />
@@ -173,8 +183,9 @@ export class ChoiceScreen extends React.Component {
             </RkChoiceGroup>
           </View>
         </View>
+
         <View style={[UtilStyles.bordered]}>
-          <TouchableOpacity style={{ padding: 23 }} onPress={() => this.showSettingsScreen()}>
+          <TouchableOpacity style={{ padding: 23 }} onPress={this.onSettingsButtonPress}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <RkText>Setting Example</RkText>
               <View style={{ flexDirection: 'row' }}>
@@ -183,7 +194,7 @@ export class ChoiceScreen extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={{ padding: 23 }} onPress={() => this.showCustomExamplesScreen()}>
+          <TouchableOpacity style={{ padding: 23 }} onPress={this.onCustomizationButtonPress}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <RkText>Customization Examples</RkText>
               <View style={{ flexDirection: 'row' }}>
@@ -191,8 +202,8 @@ export class ChoiceScreen extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-
         </View>
+
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Disabled components</RkText>
           <View style={[UtilStyles.rowContainer]}>
@@ -228,30 +239,6 @@ export class ChoiceScreen extends React.Component {
         </View>
       </ScrollView>
     );
-  }
-
-  showSettingsScreen() {
-    const { navigate } = this.props.navigation;
-    navigate('Settings', {
-      option: this.state.settingsOption,
-      onChange: (option) => {
-        this.setState({
-          settingsOption: option,
-        });
-      },
-    });
-  }
-
-  showCustomExamplesScreen() {
-    const { navigate } = this.props.navigation;
-    navigate('ChoiceCustomization', {
-      option: this.state.settingsOption,
-      onChange: (option) => {
-        this.setState({
-          settingsOption: option,
-        });
-      },
-    });
   }
 }
 
