@@ -5,6 +5,96 @@ import { RkComponent } from '../rkComponent';
 import { DoubleTouchableWithoutFeedback } from './doubleTouchableWithoutFeedback';
 import { PinchZoomResponder } from './pinchZoomResponder';
 
+/**
+ * `RkGalleryImage` is a component which displays an image with pinch-zoom and double click support.
+ *
+ * @extends RkComponent
+ *
+ * @example Simple usage:
+ *
+ * ```
+ * <RkGalleryImage source={require('path/to/awesome-pic.jpg')}/>
+ * ```
+ *
+ * @example Handling component events:
+ *
+ * The following events can be handled outside the component:
+ *
+ * - Item click: use an onClick prop,
+ * - Item scale change (pinch-zoom effect): use an onScaleChange prop,
+ * - Item offset change (pinch-zoom effect): use an onOffsetChange prop.
+ *
+ * ```
+ * <RkGalleryImage
+ *  source={require('path/to/awesome-pic.jpg')}
+ *  onClick={this.onImageClick}
+ *  onScaleChange={this.onImageScaleChange}
+ *  onOffsetChange={this.onImageOffsetChange}
+ * />
+ * ```
+ *
+ * Item click:
+ * Do some work you need to be done on item click.
+ * @param event - default react-native click event object.
+ *
+ * ```
+ * onImageClick = (event) => {
+ *  // whatever
+ * };
+ * ```
+ *
+ * Item scale change:
+ * Called when:
+ * - pinch gesture is performed,
+ * - double click is performed
+ *
+ * @param change - object containing previous and current image scale args:
+ *
+ * Double click:
+ *
+ * {
+ *  previous: 1.0,
+ *  current: 2.0
+ * }
+ *
+ * ```
+ * onImageScaleChange = (change) => {
+ *  // whatever
+ * };
+ * ```
+ *
+ * Item offset change:
+ * Called when panning scaled image.
+ *
+ * @param change - object containing previous and current image offset args:
+ *
+ * Double click:
+ *
+ * {
+ *  previous: {
+ *    x: 0.0,
+ *    y: 0.0,
+ *  },
+ *  current: {
+ *    x: 32.0,
+ *    y: 64.0,
+ *  }
+ * }
+ *
+ * ```
+ * onImageOffsetChange = (change) => {
+ *  // whatever
+ * };
+ * ```
+ *
+ * @property {style} style - Style for container in grid mode,
+ * @property {number} maxScale - maximum scale of an item applied via pinch gesture
+ * or double click,
+ * @property {function} onClick - item click callback,
+ * @property {function} onScaleChange - item scale change callback,
+ * @property {function} onOffsetChange - item offset change callback.
+ */
+
 export class RkGalleryImage extends RkComponent {
   static propTypes = {
     source: PropTypes.node.isRequired,
