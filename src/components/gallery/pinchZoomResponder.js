@@ -138,7 +138,10 @@ export class PinchZoomResponder extends Component {
       y: this.prevState.offset.y + (distance.dy / this.getScaleValue()),
     };
     const boundedOffsetValue = this.getBoundedOffsetValue(offset);
-    this.setState({ offset: new Animated.ValueXY(boundedOffsetValue) }, this.onOffsetChanged);
+    this.setState({
+      offset: new Animated.ValueXY(boundedOffsetValue),
+    });
+    this.onOffsetChanged();
   };
 
   onPanResponderPinch = (event) => {
@@ -162,12 +165,8 @@ export class PinchZoomResponder extends Component {
     this.setState({
       scale: new Animated.Value(boundedValue.scale),
       offset: new Animated.ValueXY(boundedValue.offset),
-    }, this.onScaleChanged);
-  };
-
-  setState = (state, callback) => {
-    super.setState(state);
-    callback(state);
+    });
+    this.onScaleChanged();
   };
 
   getBoundedScaleValue = (value) => {
