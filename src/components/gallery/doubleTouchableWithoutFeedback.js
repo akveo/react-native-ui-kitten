@@ -16,6 +16,11 @@ export class DoubleTouchableWithoutFeedback extends React.Component {
 
   delayFlag = false;
   eventCounter = 0;
+  timeout = undefined;
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
 
   handlePressEvent = (event) => {
     this.delayFlag = true;
@@ -32,7 +37,7 @@ export class DoubleTouchableWithoutFeedback extends React.Component {
   onPress = (event) => {
     if (!this.delayFlag) {
       this.eventCounter += 1;
-      setTimeout(() => (this.handlePressEvent(event)), this.props.delay);
+      this.timeout = setTimeout(() => (this.handlePressEvent(event)), this.props.delay);
     }
   };
 
