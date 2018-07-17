@@ -1,69 +1,77 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   ScrollView,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
-import {UtilStyles} from '../style/styles';
 import {
   RkText,
   RkChoiceGroup,
   RkChoice,
-  RkTheme
+  RkTheme,
 } from 'react-native-ui-kitten';
+import { UtilStyles } from '../style/styles';
 
-export class SettingsScreen extends Component {
+export class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Settings example'
+    title: 'Settings example',
+  };
+  static propTypes = {
+    navigation: PropTypes.shape({
+      state: PropTypes.shape({
+        params: navigationParamsType,
+      }).isRequired,
+    }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: [
-        {
-          index: 0,
-          name: 'Option 1'
-        },
-        {
-          index: 1,
-          name: 'Option 2'
-        },
-        {
-          index: 2,
-          name: 'Option 3'
-        }
-      ]
-    }
-  }
+  options = [
+    {
+      index: 0,
+      name: 'Option 1',
+    }, {
+      index: 1,
+      name: 'Option 2',
+    }, {
+      index: 2,
+      name: 'Option 3',
+    },
+  ];
 
-  render() {
-    const {params} = this.props.navigation.state;
-    let renderOption = (option, i) => (
-      <View key={i}>
-        <TouchableOpacity choiceTrigger>
-          <View style={styles.checkRow}>
-            <RkText rkType='bold'>{option.name}</RkText>
-            <RkChoice rkType='clear'/>
-          </View>
-        </TouchableOpacity>
-      </View>);
+  onChoiceGroupValueChange = (index) => {
+    // const { params } = this.props.navigation.state;
+    this.props.navigation.state.params.onChange(this.options[index]);
+  };
 
-    return (
-      <ScrollView
-        style={UtilStyles.container}
-        automaticallyAdjustContentInsets={true}>
-
-        <View style={[UtilStyles.section,]}>
-          <RkChoiceGroup selectedIndex={params.option.index} radio rkType='stretch'
-                         onChange={(index) => params.onChange(this.state.options[index])}>
-            {this.state.options.map(renderOption)}
-          </RkChoiceGroup>
+  renderOption = (item, index) => (
+    <View key={index}>
+      <TouchableOpacity choiceTrigger>
+        <View style={styles.checkRow}>
+          <RkText rkType='bold'>{item.name}</RkText>
+          <RkChoice rkType='clear' />
         </View>
-      </ScrollView>
-    );
-  }
+      </TouchableOpacity>
+    </View>
+  );
+
+  render = () => (
+    <ScrollView
+      style={UtilStyles.container}
+      automaticallyAdjustContentInsets
+    >
+      <View style={[UtilStyles.section]}>
+        <RkChoiceGroup
+          rkType='stretch'
+          selectedIndex={this.props.navigation.state.params.option.index}
+          radio
+          onChange={this.onChoiceGroupValueChange}
+        >
+          {this.options.map(this.renderOption)}
+        </RkChoiceGroup>
+      </View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -74,6 +82,14 @@ const styles = StyleSheet.create({
     marginRight: 16,
     paddingLeft: 16,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: RkTheme.current.colors.border.base
+    borderColor: RkTheme.current.colors.border.base,
   },
+});
+
+const navigationParamsType = PropTypes.shape({
+  option: PropTypes.shape({
+    index: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  onChange: PropTypes.func.isRequired,
 });
