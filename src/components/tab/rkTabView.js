@@ -342,8 +342,8 @@ export class RkTabView extends RkComponent {
       }
       content = (
         <RkText
-          style={innerStyle}
-        >{inner}
+          style={innerStyle}>
+          {inner}
         </RkText>
       );
     }
@@ -353,8 +353,7 @@ export class RkTabView extends RkComponent {
       <TouchableOpacity
         style={[containerStyle, boxStyle]}
         key={id}
-        onPress={() => this.selectTab(id)}
-      >
+        onPress={() => this.selectTab(id)}>
         {content}
       </TouchableOpacity>
     );
@@ -376,8 +375,7 @@ export class RkTabView extends RkComponent {
         showsVerticalScrollIndicator={false}
         bounces={false}
         horizontal
-        contentContainerStyle={contentContainerStyle}
-      >
+        contentContainerStyle={contentContainerStyle}>
         {tabs.map((tab, i) => this.renderTab(tab, i, scrollableHeader))}
       </ScrollView>
     );

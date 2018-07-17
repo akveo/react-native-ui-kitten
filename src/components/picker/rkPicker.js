@@ -243,22 +243,14 @@ export class RkPicker extends RkComponent {
         visible={this.props.visible}
         animationType="fade"
         transparent
-        onRequestClose={() => this.props.onCancel()}
-      >
+        onRequestClose={() => this.props.onCancel()}>
         <View style={[modalContainerBlock]}>
-          <View style={[modalContentBlock,
-            this.props.style,
-          ]}
-          >
+          <View style={[modalContentBlock, this.props.style]}>
             <RkText
               rkType={this.titleTextRkType}
-              style={titleBlock}
-            >{this.props.title}
+              style={titleBlock}>{this.props.title}
             </RkText>
-            <View style={[listsContainerBlock, {
-              height: this.pickerHeight,
-            }]}
-            >
+            <View style={[listsContainerBlock, { height: this.pickerHeight }]}>
               {this.props.data.map((array, index) =>
                 this.onRenderOptionContainer(
                   array,
@@ -272,15 +264,13 @@ export class RkPicker extends RkComponent {
               <RkButton
                 rkType={this.cancelButtonRkType}
                 style={cancelButtonBlock}
-                onPress={() => this.props.onCancel()}
-              >
+                onPress={() => this.props.onCancel()}>
                 <RkText rkType={this.cancelTextRkType}>{this.cancelButtonText}</RkText>
               </RkButton>
               <RkButton
                 rkType={this.confirmButtonRkType}
                 style={confirmButtonBlock}
-                onPress={() => this.props.onConfirm(this.state.selectedOptions)}
-              >
+                onPress={() => this.props.onConfirm(this.state.selectedOptions)}>
                 <RkText rkType={this.confirmTextRkType}>{this.confirmButtonText}</RkText>
               </RkButton>
             </View>

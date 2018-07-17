@@ -258,8 +258,7 @@ export class PinchZoomResponder extends Component {
       <Animated.View
         onLayout={this.onContainerLayout}
         style={[this.props.style, defaultComponentStyles.container, transform]}
-        {...this.gestureHandlers.panHandlers}
-      >
+        {...this.gestureHandlers.panHandlers}>
         {this.props.children}
       </Animated.View>
     );

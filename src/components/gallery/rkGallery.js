@@ -312,8 +312,8 @@ export class RkGallery extends RkComponent {
     <View>
       <RkButton
         rkType='clear'
-        onPress={onRequestClose}
-      > Close
+        onPress={onRequestClose}>
+        Close
       </RkButton>
     </View>
   );
