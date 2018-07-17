@@ -68,8 +68,7 @@ export class PickerScreen extends React.Component {
   render = () => (
     <ScrollView
       style={UtilStyles.container}
-      automaticallyAdjustContentInsets
-    >
+      automaticallyAdjustContentInsets>
       <View style={[UtilStyles.section, UtilStyles.bordered]}>
         <RkText rkType='header'>Picker Examples</RkText>
         <View style={UtilStyles.columnContainer}>

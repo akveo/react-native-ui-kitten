@@ -19,8 +19,7 @@ export class InputScreen extends React.Component {
   render = () => (
     <ScrollView
       style={UtilStyles.container}
-      automaticallyAdjustContentInsets
-    >
+      automaticallyAdjustContentInsets>
       <View style={UtilStyles.section}>
         <RkText rkType='header'>Default input</RkText>
         <View style={UtilStyles.rowContainer}>

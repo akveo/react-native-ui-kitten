@@ -27,8 +27,7 @@ export class CardScreen extends React.Component {
       <View style={{ flex: 1 }}>
         <ScrollView
           automaticallyAdjustContentInsets
-          style={[UtilStyles.container, styles.screen]}
-        >
+          style={[UtilStyles.container, styles.screen]}>
           <RkCard>
             <View rkCardHeader>
               <View>

@@ -15,8 +15,7 @@ export class AvatarScreen extends React.Component {
   render = () => (
     <ScrollView
       automaticallyAdjustContentInsets
-      style={UtilStyles.container}
-    >
+      style={UtilStyles.container}>
       <View style={[UtilStyles.section, UtilStyles.bordered]}>
         <RkText rkType='header'>Base avatar</RkText>
         <View style={UtilStyles.columnContainer}>

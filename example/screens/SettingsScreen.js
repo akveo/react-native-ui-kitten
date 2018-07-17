@@ -58,15 +58,13 @@ export class SettingsScreen extends React.Component {
   render = () => (
     <ScrollView
       style={UtilStyles.container}
-      automaticallyAdjustContentInsets
-    >
+      automaticallyAdjustContentInsets>
       <View style={[UtilStyles.section]}>
         <RkChoiceGroup
           rkType='stretch'
           selectedIndex={this.props.navigation.state.params.option.index}
           radio
-          onChange={this.onChoiceGroupValueChange}
-        >
+          onChange={this.onChoiceGroupValueChange}>
           {this.options.map(this.renderOption)}
         </RkChoiceGroup>
       </View>

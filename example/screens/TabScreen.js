@@ -42,8 +42,7 @@ export class TabScreen extends React.Component {
         flexDirection: 'row',
         alignItems: 'center',
         padding: 17,
-      }}
-    >
+      }}>
       <Icon
         style={{
           color: selected ? 'white' : RkTheme.current.colors.primary,
@@ -55,8 +54,7 @@ export class TabScreen extends React.Component {
         style={{
           color: selected ? 'white' : RkTheme.current.colors.primary,
           marginLeft: 11,
-        }}
-      >{text}
+        }}>{text}
       </RkText>
     </View>
   );
@@ -69,8 +67,7 @@ export class TabScreen extends React.Component {
           flexDirection: 'row',
           alignItems: 'center',
           padding: 17,
-        }}
-    >
+        }}>
       <RkText style={{ color: selected ? 'white' : RkTheme.current.colors.primary }}>{text}</RkText>
     </View>
   );
@@ -78,8 +75,7 @@ export class TabScreen extends React.Component {
   render = () => (
     <ScrollView
       automaticallyAdjustContentInsets
-      style={UtilStyles.container}
-    >
+      style={UtilStyles.container}>
       <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
         <RkText rkType='header' style={styles.header}>Basic example</RkText>
         <View style={UtilStyles.rowContainer}>

@@ -30,8 +30,7 @@ export class SwitchScreen extends React.Component {
   render = () => (
     <ScrollView
       automaticallyAdjustContentInsets
-      style={UtilStyles.container}
-    >
+      style={UtilStyles.container}>
       <View style={[UtilStyles.section, UtilStyles.bordered]}>
         <RkText rkType='header'>Basic switch</RkText>
         <RkSwitch
