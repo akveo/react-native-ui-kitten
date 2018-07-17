@@ -1,7 +1,14 @@
 import React from 'react';
-import { AppLoading, Font } from 'expo';
+import {
+  StatusBar,
+  View,
+  Platform,
+} from 'react-native';
+import {
+  AppLoading,
+  Font,
+} from 'expo';
 import { StackNavigator } from 'react-navigation';
-import { StatusBar, View, Platform } from 'react-native';
 import * as Screens from './screens';
 import { bootstrap } from './style/themeBootstrapper';
 
@@ -36,10 +43,10 @@ export default class App extends React.Component {
   };
 
   componentWillMount() {
-    this._loadAssetsAsync();
+    this.loadAssets().then(this.onAssetsLoaded);
   }
 
-  _loadAssetsAsync = async () => {
+  loadAssets = async () => {
     await Font.loadAsync({
       'Roboto-Light': require('./fonts/Roboto-Light.ttf'),
       'Roboto-Medium': require('./fonts/Roboto-Medium.ttf'),
@@ -47,20 +54,22 @@ export default class App extends React.Component {
       Curely: require('./fonts/Curely.ttf'),
       FontAwesome: require('./fonts/FontAwesome.ttf'),
     });
+  };
 
+  onAssetsLoaded = () => {
     this.setState({ loaded: true });
   };
 
-  render() {
-    if (!this.state.loaded) {
-      return <AppLoading />;
-    }
+  renderLoading = () => (<AppLoading />);
 
-    return (
-      <View style={{ flex: 1 }}>
-        <ExplorerApp />
-        <StatusBar barStyle="default" />
-      </View>
-    );
+  renderApp = () => (
+    <View style={{ flex: 1 }}>
+      <ExplorerApp />
+      <StatusBar barStyle="default" />
+    </View>
+  );
+
+  render() {
+    return !this.state.loaded ? this.renderLoading() : this.renderApp();
   }
 }
