@@ -59,13 +59,12 @@ export class GalleryScreen extends React.Component {
     <View style={customGalleryStyles.headerFooter}>
       <RkButton
         rkType='clear'
-        onPress={onRequestClose}
-      >Back
+        onPress={onRequestClose}>
+        Back
       </RkButton>
       <RkText
         style={customGalleryStyles.headerFooterText}
-        rkType='header'
-      >{this.state.customGallery.previewImageIndex + 1}/{GalleryScreen.items.length}
+        rkType='header'>{this.state.customGallery.previewImageIndex + 1}/{GalleryScreen.items.length}
       </RkText>
     </View>
   );
@@ -73,14 +72,14 @@ export class GalleryScreen extends React.Component {
   renderGalleryFooter = () => (
     <View style={customGalleryStyles.headerFooter}>
       <RkText
-        style={customGalleryStyles.headerFooterText}
         rkType='header'
-      >Likes
+        style={customGalleryStyles.headerFooterText}>
+        Likes
       </RkText>
       <RkText
-        style={customGalleryStyles.headerFooterText}
         rkType='header'
-      >Comments
+        style={customGalleryStyles.headerFooterText}>
+        Comments
       </RkText>
     </View>
   );
@@ -125,8 +124,7 @@ const styles = StyleSheet.create({
 });
 
 const customGalleryStyles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   item: {
     borderRadius: 8,
     margin: 1,
