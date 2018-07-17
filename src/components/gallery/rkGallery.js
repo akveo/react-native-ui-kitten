@@ -259,6 +259,8 @@ export class RkGallery extends RkComponent {
     overlayOpacity: new Animated.Value(0),
   };
 
+  isPreview = () => this.state.previewImageIndex !== undefined;
+
   defineStyles(rkType) {
     return super.defineStyles(rkType);
   }
@@ -368,8 +370,6 @@ export class RkGallery extends RkComponent {
       />
     );
   };
-
-  isPreview = () => this.state.previewImageIndex !== undefined;
 
   render() {
     return this.isPreview() ? this.renderViewer() : this.renderGrid();
