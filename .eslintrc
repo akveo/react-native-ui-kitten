@@ -1,11 +1,7 @@
 {
-  "extends": "eslint-config-akveo-react",
+  "extends": "eslint-config-akveo-react-native",
   "parser": "babel-eslint",
   "rules": {
-    "react/jsx-closing-bracket-location": [1, {
-      "selfClosing": "tag-aligned",
-      "nonEmpty": "after-props"
-    }],
     "react/sort-comp": [1, {
       "order": [
         "prop-types",
@@ -51,16 +47,5 @@
         ]
       }
     }]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".android.js",
-          ".ios.js"
-        ]
-      }
-    }
   }
 }
