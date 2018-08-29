@@ -40,7 +40,6 @@ export class SettingsScreen extends React.Component {
   ];
 
   onChoiceGroupValueChange = (index) => {
-    // const { params } = this.props.navigation.state;
     this.props.navigation.state.params.onChange(this.options[index]);
   };
 
