@@ -65,35 +65,37 @@ export class PickerScreen extends React.Component {
     return Array(...Array((finish - start) + 1)).map((_, i) => start + i);
   };
 
-  render = () => (
-    <ScrollView
-      style={UtilStyles.container}
-      automaticallyAdjustContentInsets={true}>
-      <View style={[UtilStyles.section, UtilStyles.bordered]}>
-        <RkText rkType='header'>Picker Examples</RkText>
-        <View style={UtilStyles.columnContainer}>
-          <View style={styles.componentRow}>
-            <TouchableOpacity onPress={this.onDateTouchablePress}>
-              <Text>
-                {this.state.pickedValue[0].value}.
-                {this.state.pickedValue[1]}.
-                {this.state.pickedValue[2]}
-              </Text>
-            </TouchableOpacity>
-            <RkPicker
-              title='Set Date'
-              data={[this.pickerItems.months, this.pickerItems.days, this.pickerItems.years]}
-              selectedOptions={this.state.pickedValue}
-              visible={this.state.pickerVisible}
-              onConfirm={this.onPickerConfirmButtonPress}
-              onCancel={this.onPickerCancelButtonPress}
-            />
-            <RkText rkType='bold' style={styles.caption}>Date Picker</RkText>
+  render() {
+    return (
+      <ScrollView
+        style={UtilStyles.container}
+        automaticallyAdjustContentInsets={true}>
+        <View style={[UtilStyles.section, UtilStyles.bordered]}>
+          <RkText rkType='header'>Picker Examples</RkText>
+          <View style={UtilStyles.columnContainer}>
+            <View style={styles.componentRow}>
+              <TouchableOpacity onPress={this.onDateTouchablePress}>
+                <Text>
+                  {this.state.pickedValue[0].value}.
+                  {this.state.pickedValue[1]}.
+                  {this.state.pickedValue[2]}
+                </Text>
+              </TouchableOpacity>
+              <RkPicker
+                title='Set Date'
+                data={[this.pickerItems.months, this.pickerItems.days, this.pickerItems.years]}
+                selectedOptions={this.state.pickedValue}
+                visible={this.state.pickerVisible}
+                onConfirm={this.onPickerConfirmButtonPress}
+                onCancel={this.onPickerCancelButtonPress}
+              />
+              <RkText rkType='bold' style={styles.caption}>Date Picker</RkText>
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
-  );
+      </ScrollView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

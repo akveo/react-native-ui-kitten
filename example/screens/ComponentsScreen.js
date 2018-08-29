@@ -87,18 +87,20 @@ export class ComponentsScreen extends React.Component {
     </TouchableOpacity>
   );
 
-  render = () => (
-    <ListView
-      style={styles.container}
-      dataSource={this.state.dataSource}
-      renderRow={(...params) => this.renderComponent(...params)}
-      renderSeparator={this.renderSeparator}
-      automaticallyAdjustContentInsets={true}
-      keyboardDismissMode='on-drag'
-      keyboardShouldPersistTaps='always'
-      showsVerticalScrollIndicator={false}
-    />
-  )
+  render() {
+    return (
+      <ListView
+        style={styles.container}
+        dataSource={this.state.dataSource}
+        renderRow={(...params) => this.renderComponent(...params)}
+        renderSeparator={this.renderSeparator}
+        automaticallyAdjustContentInsets={true}
+        keyboardDismissMode='on-drag'
+        keyboardShouldPersistTaps='always'
+        showsVerticalScrollIndicator={false}
+      />
+    );
+  }
 }
 
 const styles = RkStyleSheet.create(theme => ({

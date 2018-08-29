@@ -72,95 +72,97 @@ export class TabScreen extends React.Component {
     </View>
   );
 
-  render = () => (
-    <ScrollView
-      automaticallyAdjustContentInsets={true}
-      style={UtilStyles.container}>
-      <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
-        <RkText rkType='header' style={styles.header}>Basic example</RkText>
-        <View style={UtilStyles.rowContainer}>
-          <RkTabView>
-            <RkTabView.Tab title="Tab 1" />
-            <RkTabView.Tab title="Tab 2" />
-            <RkTabView.Tab title="Tab 3" />
-          </RkTabView>
+  render() {
+    return (
+      <ScrollView
+        automaticallyAdjustContentInsets={true}
+        style={UtilStyles.container}>
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>Basic example</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkTabView>
+              <RkTabView.Tab title="Tab 1" />
+              <RkTabView.Tab title="Tab 2" />
+              <RkTabView.Tab title="Tab 3" />
+            </RkTabView>
+          </View>
         </View>
-      </View>
 
-      <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
-        <RkText rkType='header' style={styles.header}>Material Theme Example</RkText>
-        <View style={UtilStyles.rowContainer}>
-          <RkTabView rkType="material" tabsUnderContent={true} index='1'>
-            <RkTabView.Tab title="TAB 1">
-              <Image source={require('../img/river.jpeg')} />
-            </RkTabView.Tab>
-            <RkTabView.Tab title="TAB 2">
-              <Image source={require('../img/sea.jpg')} />
-            </RkTabView.Tab>
-            <RkTabView.Tab title="TAB 3">
-              <Image source={require('../img/sun.jpg')} />
-            </RkTabView.Tab>
-          </RkTabView>
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>Material Theme Example</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkTabView rkType="material" tabsUnderContent={true} index='1'>
+              <RkTabView.Tab title="TAB 1">
+                <Image source={require('../img/river.jpeg')} />
+              </RkTabView.Tab>
+              <RkTabView.Tab title="TAB 2">
+                <Image source={require('../img/sea.jpg')} />
+              </RkTabView.Tab>
+              <RkTabView.Tab title="TAB 3">
+                <Image source={require('../img/sun.jpg')} />
+              </RkTabView.Tab>
+            </RkTabView>
+          </View>
         </View>
-      </View>
 
-      <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
-        <View>
-          <RkTabView rkType="material">
-            <RkTabView.Tab title={(selected) => this.renderMaterialTab(
-              selected,
-              'TAB 1',
-              (<ImageIcon name='phone' />),
-            )}
-            />
-            <RkTabView.Tab title={(selected) => this.renderMaterialTab(
-              selected,
-              'TAB 2',
-              (<ImageIcon name='heart' />),
-            )}
-            />
-            <RkTabView.Tab title={(selected) => this.renderMaterialTab(
-              selected,
-              'TAB 3',
-              (<ImageIcon name='user' />),
-            )}
-            />
-          </RkTabView>
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <View>
+            <RkTabView rkType="material">
+              <RkTabView.Tab title={(selected) => this.renderMaterialTab(
+                selected,
+                'TAB 1',
+                (<ImageIcon name='phone' />),
+              )}
+              />
+              <RkTabView.Tab title={(selected) => this.renderMaterialTab(
+                selected,
+                'TAB 2',
+                (<ImageIcon name='heart' />),
+              )}
+              />
+              <RkTabView.Tab title={(selected) => this.renderMaterialTab(
+                selected,
+                'TAB 3',
+                (<ImageIcon name='user' />),
+              )}
+              />
+            </RkTabView>
+          </View>
         </View>
-      </View>
 
-      <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
-        <RkText rkType='header' style={styles.header}>{this.state.text}</RkText>
-        <View style={UtilStyles.rowContainer}>
-          <RkTabView onTabChanged={this.onCustomTabChanged}>
-            <RkTabView.Tab title={(selected) => this.renderCustomTab(selected, 'Tab 1', 'paw')} />
-            <RkTabView.Tab
-              title={(selected) => this.renderCustomTab(selected, 'Tab 2', 'leaf')}
-            />
-            <RkTabView.Tab
-              title={(selected) => this.renderCustomTab(selected, 'Tab 3', 'rocket')}
-            />
-          </RkTabView>
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>{this.state.text}</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkTabView onTabChanged={this.onCustomTabChanged}>
+              <RkTabView.Tab title={(selected) => this.renderCustomTab(selected, 'Tab 1', 'paw')} />
+              <RkTabView.Tab
+                title={(selected) => this.renderCustomTab(selected, 'Tab 2', 'leaf')}
+              />
+              <RkTabView.Tab
+                title={(selected) => this.renderCustomTab(selected, 'Tab 3', 'rocket')}
+              />
+            </RkTabView>
+          </View>
         </View>
-      </View>
 
-      <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
-        <RkText rkType='header' style={styles.header}>Scrollable Header</RkText>
-        <View style={UtilStyles.rowContainer}>
-          <RkTabView rkType='noBorders' maxVisibleTabs={3}>
-            <RkTabView.Tab
-              title={(selected) => this.renderScrollableTab(selected, 'Tab 1', 'first')}
-            />
-            <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 2')} />
-            <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 3')} />
-            <RkTabView.Tab
-              title={(selected) => this.renderScrollableTab(selected, 'Tab 4', 'last')}
-            />
-          </RkTabView>
+        <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
+          <RkText rkType='header' style={styles.header}>Scrollable Header</RkText>
+          <View style={UtilStyles.rowContainer}>
+            <RkTabView rkType='noBorders' maxVisibleTabs={3}>
+              <RkTabView.Tab
+                title={(selected) => this.renderScrollableTab(selected, 'Tab 1', 'first')}
+              />
+              <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 2')} />
+              <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 3')} />
+              <RkTabView.Tab
+                title={(selected) => this.renderScrollableTab(selected, 'Tab 4', 'last')}
+              />
+            </RkTabView>
+          </View>
         </View>
-      </View>
-    </ScrollView>
-  );
+      </ScrollView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

@@ -97,61 +97,63 @@ export class ImageScreen extends React.Component {
     />
   );
 
-  render = () => (
-    <View style={{ flex: 1 }}>
-      <ScrollView
-        automaticallyAdjustContentInsets={true}
-        style={UtilStyles.container}>
-        <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-          <RkText rkType='header' style={styles.header}>Basic example</RkText>
-          <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
-            <RkModalImg
-              style={{ width: this.imageSize, height: this.imageSize }}
-              source={require('../img/animal.jpeg')}
-            />
-            <RkModalImg
-              style={{ width: this.imageSize, height: this.imageSize }}
-              source={require('../img/clock.jpg')}
-            />
-            <RkModalImg
-              style={{ width: this.imageSize, height: this.imageSize }}
-              source={require('../img/post2.png')}
-            />
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          automaticallyAdjustContentInsets={true}
+          style={UtilStyles.container}>
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText rkType='header' style={styles.header}>Basic example</RkText>
+            <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
+              <RkModalImg
+                style={{ width: this.imageSize, height: this.imageSize }}
+                source={require('../img/animal.jpeg')}
+              />
+              <RkModalImg
+                style={{ width: this.imageSize, height: this.imageSize }}
+                source={require('../img/clock.jpg')}
+              />
+              <RkModalImg
+                style={{ width: this.imageSize, height: this.imageSize }}
+                source={require('../img/post2.png')}
+              />
+            </View>
           </View>
-        </View>
-        <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-          <RkText rkType='header' style={styles.header}>Custom header and footer</RkText>
-          <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
-            <RkModalImg
-              style={{ width: this.imageSize, height: this.imageSize }}
-              renderHeader={this.renderCustomHeader}
-              renderFooter={this.renderCustomFooter}
-              headerContentStyle={{ backgroundColor: 'red' }}
-              source={require('../img/post1.png')}
-            />
-            <RkModalImg
-              style={{ width: this.imageSize, height: this.imageSize }}
-              renderHeader={this.renderCustomHeader}
-              renderFooter={this.renderCustomFooter}
-              source={require('../img/river.jpeg')}
-            />
-            <RkModalImg
-              style={{ width: this.imageSize, height: this.imageSize }}
-              renderHeader={this.renderCustomHeader}
-              renderFooter={this.renderCustomFooter}
-              source={require('../img/post3.png')}
-            />
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText rkType='header' style={styles.header}>Custom header and footer</RkText>
+            <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
+              <RkModalImg
+                style={{ width: this.imageSize, height: this.imageSize }}
+                renderHeader={this.renderCustomHeader}
+                renderFooter={this.renderCustomFooter}
+                headerContentStyle={{ backgroundColor: 'red' }}
+                source={require('../img/post1.png')}
+              />
+              <RkModalImg
+                style={{ width: this.imageSize, height: this.imageSize }}
+                renderHeader={this.renderCustomHeader}
+                renderFooter={this.renderCustomFooter}
+                source={require('../img/river.jpeg')}
+              />
+              <RkModalImg
+                style={{ width: this.imageSize, height: this.imageSize }}
+                renderHeader={this.renderCustomHeader}
+                renderFooter={this.renderCustomFooter}
+                source={require('../img/post3.png')}
+              />
+            </View>
           </View>
-        </View>
-        <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-          <RkText rkType='header' style={styles.header}>Gallery Example</RkText>
-          <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
-            {this.renderGallery()}
+          <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
+            <RkText rkType='header' style={styles.header}>Gallery Example</RkText>
+            <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
+              {this.renderGallery()}
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </View>
-  );
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 let styles = RkStyleSheet.create(theme => ({

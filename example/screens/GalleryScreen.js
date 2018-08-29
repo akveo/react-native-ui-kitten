@@ -84,31 +84,33 @@ export class GalleryScreen extends React.Component {
     </View>
   );
 
-  render = () => (
-    <View style={{ flex: 1 }}>
-      <ScrollView style={UtilStyles.container}>
-        <View style={styles.section}>
-          <RkText style={styles.header} rkType='header'>Default implementation</RkText>
-          <RkGallery items={GalleryScreen.items} />
-        </View>
-        <View style={styles.section}>
-          <RkText style={styles.header} rkType='header'>Customized implementation</RkText>
-          <RkGallery
-            style={customGalleryStyles.container}
-            itemStyle={customGalleryStyles.item}
-            items={GalleryScreen.items}
-            spanCount={4}
-            renderGalleryHeader={this.renderGalleryHeader}
-            renderGalleryFooter={this.renderGalleryFooter}
-            onGridItemClick={this.onGridItemClick}
-            onGalleryItemClick={this.onGalleryItemClick}
-            onGalleryItemChange={this.onGalleryItemChange}
-            onGalleryItemScaleChange={this.onGalleryItemScaleChange}
-          />
-        </View>
-      </ScrollView>
-    </View>
-  );
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <ScrollView style={UtilStyles.container}>
+          <View style={styles.section}>
+            <RkText style={styles.header} rkType='header'>Default implementation</RkText>
+            <RkGallery items={GalleryScreen.items} />
+          </View>
+          <View style={styles.section}>
+            <RkText style={styles.header} rkType='header'>Customized implementation</RkText>
+            <RkGallery
+              style={customGalleryStyles.container}
+              itemStyle={customGalleryStyles.item}
+              items={GalleryScreen.items}
+              spanCount={4}
+              renderGalleryHeader={this.renderGalleryHeader}
+              renderGalleryFooter={this.renderGalleryFooter}
+              onGridItemClick={this.onGridItemClick}
+              onGalleryItemClick={this.onGalleryItemClick}
+              onGalleryItemChange={this.onGalleryItemChange}
+              onGalleryItemScaleChange={this.onGalleryItemScaleChange}
+            />
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
