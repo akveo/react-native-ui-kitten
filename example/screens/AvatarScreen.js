@@ -19,8 +19,8 @@ export class AvatarScreen extends React.Component {
       <View style={[UtilStyles.section, UtilStyles.bordered]}>
         <RkText rkType='header'>Base avatar</RkText>
         <View style={UtilStyles.columnContainer}>
-          <Avatar source={require('../img/avatars/image3.png')} name='Elena Zhukova' />
-          <Avatar source={require('../img/avatars/image6.png')} name='Nick Kuznetsov' />
+          <Avatar source={require('../img/avatars/image3.png')} name='Carole Blundon' />
+          <Avatar source={require('../img/avatars/image6.png')} name='Edward Storton' />
         </View>
 
       </View>
