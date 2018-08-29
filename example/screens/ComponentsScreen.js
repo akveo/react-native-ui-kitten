@@ -94,7 +94,7 @@ export class ComponentsScreen extends React.Component {
       renderRow={(...params) => this.renderComponent(...params)}
       renderSeparator={this.renderSeparator}
       automaticallyAdjustContentInsets={true}
-      keyboardDismissMode="on-drag"
+      keyboardDismissMode='on-drag'
       keyboardShouldPersistTaps='always'
       showsVerticalScrollIndicator={false}
     />
