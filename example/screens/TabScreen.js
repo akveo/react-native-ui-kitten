@@ -74,7 +74,7 @@ export class TabScreen extends React.Component {
 
   render = () => (
     <ScrollView
-      automaticallyAdjustContentInsets
+      automaticallyAdjustContentInsets={true}
       style={UtilStyles.container}>
       <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
         <RkText rkType='header' style={styles.header}>Basic example</RkText>
@@ -90,7 +90,7 @@ export class TabScreen extends React.Component {
       <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
         <RkText rkType='header' style={styles.header}>Material Theme Example</RkText>
         <View style={UtilStyles.rowContainer}>
-          <RkTabView rkType="material" tabsUnderContent index='1'>
+          <RkTabView rkType="material" tabsUnderContent={true} index='1'>
             <RkTabView.Tab title="TAB 1">
               <Image source={require('../img/river.jpeg')} />
             </RkTabView.Tab>

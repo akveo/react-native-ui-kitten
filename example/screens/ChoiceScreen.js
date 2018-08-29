@@ -58,7 +58,7 @@ export class ChoiceScreen extends React.Component {
   render = () => (
     <ScrollView
       style={UtilStyles.container}
-      automaticallyAdjustContentInsets>
+      automaticallyAdjustContentInsets={true}>
       <View style={[UtilStyles.section, UtilStyles.bordered]}>
         <RkText rkType='header'>Classic selectable components</RkText>
         <View style={UtilStyles.columnContainer}>
@@ -71,7 +71,7 @@ export class ChoiceScreen extends React.Component {
             <RkText rkType='bold' style={styles.caption}>Radio</RkText>
           </View>
           <View style={styles.componentRow}>
-            <RkChoice rkType='clear' selected />
+            <RkChoice rkType='clear' selected={true} />
             <RkText rkType='bold' style={styles.caption}>Clear</RkText>
           </View>
           <View style={styles.componentRow}>
@@ -84,7 +84,7 @@ export class ChoiceScreen extends React.Component {
         <RkText rkType='header'>Labels Example</RkText>
         <View style={[UtilStyles.columnContainer]}>
           <RkChoiceGroup rkType='bordered'>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View
                 style={{
                     flexDirection: 'row',
@@ -99,7 +99,7 @@ export class ChoiceScreen extends React.Component {
         </View>
         <View style={UtilStyles.columnContainer}>
           <RkChoiceGroup rkType='bordered stretch' style={UtilStyles.spaceTop}>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View
                 style={{
                     flexDirection: 'row',
@@ -117,25 +117,25 @@ export class ChoiceScreen extends React.Component {
 
         <View style={UtilStyles.columnContainer}>
           <RkChoiceGroup rkType='stretch' style={UtilStyles.spaceTop}>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={styles.checkRow}>
                 <RkText rkType='bold'>Label 1</RkText>
                 <RkChoice rkType='clear' />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={styles.checkRow}>
                 <RkText rkType='bold'>Label 2</RkText>
-                <RkChoice rkType='clear' selected />
+                <RkChoice rkType='clear' selected={true} />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={styles.checkRow}>
                 <RkText rkType='bold'>Label 3</RkText>
                 <RkChoice rkType='clear' />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={styles.checkRow}>
                 <RkText rkType='bold'>Label 4</RkText>
                 <RkChoice rkType='clear' />
@@ -148,28 +148,28 @@ export class ChoiceScreen extends React.Component {
         <RkText rkType='header'>{`Radio components - ${this.state.onChangeHandleText}`}</RkText>
         <View style={UtilStyles.columnContainer}>
           <RkChoiceGroup
-            radio
+            radio={true}
             selectedIndex={2}
             onChange={this.onOptionsGroupValueChanged}>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={[styles.radioRow, styles.spaceBottom]}>
                 <RkChoice rkType='radio' />
                 <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 1</RkText>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={styles.radioRow}>
                 <RkChoice rkType='radio' />
                 <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 2</RkText>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={styles.radioRow}>
                 <RkChoice rkType='radio' />
                 <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 3</RkText>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity choiceTrigger>
+            <TouchableOpacity choiceTrigger={true}>
               <View style={[styles.radioRow, styles.spaceTop]}>
                 <RkChoice rkType='radio' />
                 <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 4</RkText>
@@ -204,29 +204,29 @@ export class ChoiceScreen extends React.Component {
         <View style={[UtilStyles.rowContainer]}>
           <View style={[UtilStyles.columnContainer, { flex: 1 }]}>
             <View style={styles.componentRow}>
-              <RkChoice disabled />
+              <RkChoice disabled={true} />
               <RkText rkType='bold' style={styles.caption}>Default</RkText>
             </View>
             <View style={styles.componentRow}>
-              <RkChoice rkType='radio' disabled />
+              <RkChoice rkType='radio' disabled={true} />
               <RkText rkType='bold' style={styles.caption}>Radio</RkText>
             </View>
             <View style={styles.componentRow}>
-              <RkChoice rkType='posNeg' disabled />
+              <RkChoice rkType='posNeg' disabled={true} />
               <RkText rkType='bold' style={styles.caption}>Clear</RkText>
             </View>
           </View>
           <View style={[UtilStyles.columnContainer, { flex: 1 }]}>
             <View style={styles.componentRow}>
-              <RkChoice disabled selected />
+              <RkChoice disabled={true} selected={true} />
               <RkText rkType='bold' style={styles.caption}>Default</RkText>
             </View>
             <View style={styles.componentRow}>
-              <RkChoice rkType='radio' disabled selected />
+              <RkChoice rkType='radio' disabled={true} selected={true} />
               <RkText rkType='bold' style={styles.caption}>Radio</RkText>
             </View>
             <View style={styles.componentRow}>
-              <RkChoice rkType='clear' disabled selected />
+              <RkChoice rkType='clear' disabled={true} selected={true} />
               <RkText rkType='bold' style={styles.caption}>Clear</RkText>
             </View>
           </View>

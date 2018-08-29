@@ -93,7 +93,7 @@ export class ComponentsScreen extends React.Component {
       dataSource={this.state.dataSource}
       renderRow={(...params) => this.renderComponent(...params)}
       renderSeparator={this.renderSeparator}
-      automaticallyAdjustContentInsets
+      automaticallyAdjustContentInsets={true}
       keyboardDismissMode="on-drag"
       keyboardShouldPersistTaps='always'
       showsVerticalScrollIndicator={false}

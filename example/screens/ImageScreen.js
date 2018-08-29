@@ -100,7 +100,7 @@ export class ImageScreen extends React.Component {
   render = () => (
     <View style={{ flex: 1 }}>
       <ScrollView
-        automaticallyAdjustContentInsets
+        automaticallyAdjustContentInsets={true}
         style={UtilStyles.container}>
         <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
           <RkText rkType='header' style={styles.header}>Basic example</RkText>

@@ -46,7 +46,7 @@ export class SettingsScreen extends React.Component {
 
   renderOption = (item, index) => (
     <View key={index}>
-      <TouchableOpacity choiceTrigger>
+      <TouchableOpacity choiceTrigger={true}>
         <View style={styles.checkRow}>
           <RkText rkType='bold'>{item.name}</RkText>
           <RkChoice rkType='clear' />
@@ -58,12 +58,12 @@ export class SettingsScreen extends React.Component {
   render = () => (
     <ScrollView
       style={UtilStyles.container}
-      automaticallyAdjustContentInsets>
+      automaticallyAdjustContentInsets={true}>
       <View style={[UtilStyles.section]}>
         <RkChoiceGroup
           rkType='stretch'
           selectedIndex={this.props.navigation.state.params.option.index}
-          radio
+          radio={true}
           onChange={this.onChoiceGroupValueChange}>
           {this.options.map(this.renderOption)}
         </RkChoiceGroup>

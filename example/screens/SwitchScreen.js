@@ -29,7 +29,7 @@ export class SwitchScreen extends React.Component {
 
   render = () => (
     <ScrollView
-      automaticallyAdjustContentInsets
+      automaticallyAdjustContentInsets={true}
       style={UtilStyles.container}>
       <View style={[UtilStyles.section, UtilStyles.bordered]}>
         <RkText rkType='header'>Basic switch</RkText>
@@ -163,7 +163,7 @@ export class SwitchScreen extends React.Component {
           <View style={styles.componentRow}>
             <RkText>I like UI Kitten!</RkText>
             <RkSwitch
-              disabled
+              disabled={true}
               value={this.state.switch10State}
               onValueChange={() => this.setState({ switch10State: !this.state.switch10State })}
             />

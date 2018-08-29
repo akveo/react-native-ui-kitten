@@ -19,7 +19,7 @@ export class InputScreen extends React.Component {
   render = () => (
     <ScrollView
       style={UtilStyles.container}
-      automaticallyAdjustContentInsets>
+      automaticallyAdjustContentInsets={true}>
       <View style={UtilStyles.section}>
         <RkText rkType='header'>Default input</RkText>
         <View style={UtilStyles.rowContainer}>
@@ -30,7 +30,7 @@ export class InputScreen extends React.Component {
               placeholder='Login'
               clearButtonMode='always'
             />
-            <RkTextInput secureTextEntry placeholder='Password' clearButtonMode='always' />
+            <RkTextInput secureTextEntry={true} placeholder='Password' clearButtonMode='always' />
           </View>
         </View>
       </View>
@@ -41,7 +41,7 @@ export class InputScreen extends React.Component {
           <View style={{ flex: 1 }}>
             <RkTextInput rkType='rounded' placeholder='Login' />
             <RkTextInput
-              secureTextEntry
+              secureTextEntry={true}
               rkType='rounded'
               placeholder='Password'
             />
@@ -55,7 +55,7 @@ export class InputScreen extends React.Component {
           <View style={{ flex: 1 }}>
             <RkTextInput rkType='bordered' placeholder='Login' />
             <RkTextInput
-              secureTextEntry
+              secureTextEntry={true}
               rkType='bordered'
               placeholder='Password'
             />
@@ -69,7 +69,7 @@ export class InputScreen extends React.Component {
           <View style={{ flex: 1 }}>
             <RkTextInput label={<Icon style={styles.inputIcon} name='user' />} placeholder='Login' />
             <RkTextInput
-              secureTextEntry
+              secureTextEntry={true}
               label={<Icon style={styles.inputIcon} name='lock' />}
               placeholder='Password'
             />
@@ -87,7 +87,7 @@ export class InputScreen extends React.Component {
         <RkText rkType='header'>Labels</RkText>
         <View style={[UtilStyles.columnContainer]}>
           <RkTextInput label='Login' rkType='form' />
-          <RkTextInput rkType="form" secureTextEntry label='Password' />
+          <RkTextInput rkType="form" secureTextEntry={true} label='Password' />
         </View>
       </View>
 
@@ -97,7 +97,7 @@ export class InputScreen extends React.Component {
           <View style={{ flex: 1 }}>
             <RkTextInput rkType="topLabel" label='Login' />
             <RkTextInput
-              secureTextEntry
+              secureTextEntry={true}
               rkType="topLabel"
               containerStyle={{ marginTop: 15 }}
               label='Password'

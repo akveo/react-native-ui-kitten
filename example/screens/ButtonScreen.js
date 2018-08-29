@@ -28,7 +28,7 @@ export class ButtonScreen extends React.Component {
 
   render = () => (
     <ScrollView
-      automaticallyAdjustContentInsets
+      automaticallyAdjustContentInsets={true}
       style={UtilStyles.container}>
       <View style={[UtilStyles.section, UtilStyles.bordered]}>
         <RkText rkType='header'>Basic button</RkText>

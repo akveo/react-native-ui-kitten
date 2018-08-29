@@ -139,9 +139,9 @@ export class RkGalleryViewer extends React.Component {
         getItemLayout={this.renderItemLayout}
         onScroll={this.onContainerScroll}
         initialScrollIndex={this.props.initialIndex}
-        horizontal
+        horizontal={true}
         scrollEnabled={this.state.scrollEnabled}
-        pagingEnabled
+        pagingEnabled={true}
         keyExtractor={this.extractItemKey}
         {...this.gestureHandlers.panHandlers}
       />

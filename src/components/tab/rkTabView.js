@@ -374,7 +374,7 @@ export class RkTabView extends RkComponent {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         bounces={false}
-        horizontal
+        horizontal={true}
         contentContainerStyle={contentContainerStyle}>
         {tabs.map((tab, i) => this.renderTab(tab, i, scrollableHeader))}
       </ScrollView>

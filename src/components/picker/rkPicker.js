@@ -242,7 +242,7 @@ export class RkPicker extends RkComponent {
       <Modal
         visible={this.props.visible}
         animationType="fade"
-        transparent
+        transparent={true}
         onRequestClose={() => this.props.onCancel()}>
         <View style={[modalContainerBlock]}>
           <View style={[modalContentBlock, this.props.style]}>

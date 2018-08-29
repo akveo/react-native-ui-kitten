@@ -199,8 +199,8 @@ export class RkModalImg extends RkComponent {
         getItemLayout={(item, itemIndex) => this.onRenderItemLayout(item, itemIndex)}
         renderItem={({ item }) => this.onRenderImage(item, props)}
         initialScrollIndex={index}
-        horizontal
-        pagingEnabled
+        horizontal={true}
+        pagingEnabled={true}
         keyExtractor={(item, srcIndex) => srcIndex.toString()}
         onScroll={(event) => this.onContainerScroll(event)}
       />

@@ -2,6 +2,7 @@
   "extends": "eslint-config-akveo-react-native",
   "parser": "babel-eslint",
   "rules": {
+    "react/jsx-boolean-value": [1, "always"],
     "react/sort-comp": [1, {
       "order": [
         "prop-types",
