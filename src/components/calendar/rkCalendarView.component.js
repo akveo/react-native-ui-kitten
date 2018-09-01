@@ -11,15 +11,20 @@ export class RkCalendarView extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
-    onDaySelect: PropTypes.func.isRequired,
+    onSelect: PropTypes.func,
   };
   static defaultProps = {
     boundingMonth: true,
+    onSelect: (() => null),
   };
 
-  onDaySelect = () => {
-    // TODO: perform selection
-    this.props.onDaySelect();
+  state = {
+    date: undefined,
+  };
+
+  onDaySelect = (date) => {
+    this.setState({ date });
+    this.props.onSelect(date);
   };
 
   getItemKey = (index) => `${index}`;
@@ -44,8 +49,9 @@ export class RkCalendarView extends React.Component {
         min={this.props.min}
         max={this.props.max}
         date={item}
+        selected={this.state.date}
         boundingMonth={this.props.boundingMonth}
-        onDaySelect={this.onDaySelect}
+        onSelect={this.onDaySelect}
       />
     );
   };

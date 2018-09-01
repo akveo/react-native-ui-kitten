@@ -3,10 +3,10 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
-  StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import * as RkCalendarUtil from './services';
+import { RkStyleSheet } from '../../styles/styleSheet';
 
 const defaultDayValue = '';
 
@@ -15,16 +15,23 @@ export class RkCalendarDayComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-    onSelect: PropTypes.func.isRequired,
+    selected: PropTypes.instanceOf(Date),
+    onSelect: PropTypes.func,
+  };
+  static defaultProps = {
+    selected: RkCalendarUtil.today(),
+    onSelect: (() => null),
   };
 
   onPress = () => {
-    this.props.onSelect();
+    this.props.onSelect(this.props.date);
   };
 
   isSmallerThanMin = () => RkCalendarUtil.compareDates(this.props.date, this.props.min) < 0;
 
   isGreaterThanMax = () => RkCalendarUtil.compareDates(this.props.date, this.props.max) > 0;
+
+  isSelected = () => RkCalendarUtil.isSameDaySafe(this.props.date, this.props.selected);
 
   isDisabled = () => this.isEmpty() || this.isSmallerThanMin() || this.isGreaterThanMax();
 
@@ -32,21 +39,27 @@ export class RkCalendarDayComponent extends React.Component {
 
   getDate = () => (this.isEmpty() ? defaultDayValue : this.props.date.getDate());
 
+  renderText = () => {
+    const selectedStyle = this.isSelected() ? styles.textSelected : null;
+    const disabledStyle = this.isDisabled() ? styles.textDisabled : null;
+    return (
+      <Text
+        style={[styles.text, selectedStyle, disabledStyle]}>
+        {this.getDate()}
+      </Text>
+    );
+  };
+
   render = () => (
     <TouchableWithoutFeedback
       disabled={this.isDisabled()}
       onPress={this.onPress}>
-      <View style={[styles.container, this.props.style]}>
-        <Text
-          style={[styles.text, { backgroundColor: this.isDisabled() ? 'transparent' : 'green' }]}>
-          {this.getDate()}
-        </Text>
-      </View>
+      <View style={[styles.container, this.props.style]}>{this.renderText()}</View>
     </TouchableWithoutFeedback>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = RkStyleSheet.create(theme => ({
   container: {
     padding: 2,
   },
@@ -54,5 +67,13 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     textAlign: 'center',
+    color: theme.colors.button.text,
+    backgroundColor: theme.colors.button.primary,
   },
-});
+  textSelected: {
+    backgroundColor: theme.colors.button.primaryActive,
+  },
+  textDisabled: {
+    backgroundColor: 'transparent',
+  },
+}));

@@ -2,23 +2,26 @@ import React from 'react';
 import { RkCalendar } from 'react-native-ui-kitten';
 
 export class CalendarScreen extends React.Component {
-  static data = {
-    // min: new Date(2018, 0, 1),
-    // max: new Date(2030, 0, 1),
-    min: new Date(2018, 0, 1),
-    max: new Date(2018, 1, 13),
+  onDaySelect = (date) => {
   };
 
-  onDaySelect = () => {
-
+  getBounds = () => {
+    const now = new Date();
+    return {
+      min: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+      max: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate()),
+    };
   };
 
-  render = () => (
-    <RkCalendar
-      min={CalendarScreen.data.min}
-      max={CalendarScreen.data.max}
-      boundingMonth={false}
-      onDaySelect={this.onDaySelect}
-    />
-  );
+  render = () => {
+    const bounds = this.getBounds();
+    return (
+      <RkCalendar
+        min={bounds.min}
+        max={bounds.max}
+        boundingMonth={false}
+        onSelect={this.onDaySelect}
+      />
+    );
+  };
 }

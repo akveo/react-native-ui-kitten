@@ -4,21 +4,22 @@ import { RkCalendarView } from './rkCalendarView.component';
 import { RkCalendarMonthComponent } from './rkCalendarMonth.component';
 import { RkCalendarYearComponent } from './rkCalendarYear.component';
 import { RkCalendarDayComponent } from './rkCalendarDay.component';
+import * as RkCalendarUtil from './services';
 
 export class RkCalendar extends React.Component {
   static propTypes = {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
-    onDaySelect: PropTypes.func,
+    onSelect: PropTypes.func,
   };
   static defaultProps = {
     boundingMonth: true,
-    onDaySelect: (() => null),
+    onSelect: (() => null),
   };
 
-  onDaySelect = () => {
-    this.props.onDaySelect();
+  onDaySelect = (date) => {
+    this.props.onSelect(date);
   };
 
   render = () => (
@@ -29,7 +30,7 @@ export class RkCalendar extends React.Component {
       min={this.props.min}
       max={this.props.max}
       boundingMonth={this.props.boundingMonth}
-      onDaySelect={this.onDaySelect}
+      onSelect={this.onDaySelect}
     />
   );
 }

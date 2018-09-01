@@ -13,16 +13,18 @@ export class RkCalendarYearComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
+    selected: PropTypes.instanceOf(Date),
     boundingMonth: PropTypes.bool,
-    onDaySelect: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
   };
   static defaultProps = {
+    selected: RkCalendarUtil.today(),
     boundingMonth: true,
+    onSelect: (() => null),
   };
-  static MONTHS_IN_YEAR = 12;
 
-  onDaySelect = () => {
-    this.props.onDaySelect();
+  onDaySelect = (date) => {
+    this.props.onSelect(date);
   };
 
   createMonthDateByIndex = (index) => new Date(
@@ -33,8 +35,15 @@ export class RkCalendarYearComponent extends React.Component {
 
   getData = () => {
     const isMaxYear = RkCalendarUtil.isSameYearSafe(this.props.date, this.props.max);
-    const itemCount = isMaxYear ? this.props.max.getMonth() + 1 : RkCalendarYearComponent.MONTHS_IN_YEAR;
-    return RkCalendarUtil.range(itemCount).map(this.createMonthDateByIndex);
+    if (isMaxYear) {
+      const firstMonthIndex = this.props.min.getMonth();
+      const lastMonthIndex = this.props.max.getMonth();
+      const isOneInRangeYear = RkCalendarUtil.isSameYearSafe(this.props.min, this.props.max);
+      const itemCount = isOneInRangeYear ? (lastMonthIndex - firstMonthIndex) : lastMonthIndex;
+      const produceBounds = (index) => (isOneInRangeYear ? index + firstMonthIndex : index);
+      return RkCalendarUtil.range(itemCount + 1, produceBounds).map(this.createMonthDateByIndex);
+    }
+    return RkCalendarUtil.range(RkCalendarUtil.MONTHS_IN_YEAR).map(this.createMonthDateByIndex);
   };
 
   getChildComponents = () => this.getData().map(this.renderMonth);
@@ -47,8 +56,9 @@ export class RkCalendarYearComponent extends React.Component {
         min={this.props.min}
         max={this.props.max}
         date={item}
+        selected={this.props.selected}
         boundingMonth={this.props.boundingMonth}
-        onDaySelect={this.onDaySelect}
+        onSelect={this.onDaySelect}
       />
     );
   };

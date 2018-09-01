@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import * as CalendarUtil from './services';
+import { RkStyleSheet } from '../../styles/styleSheet';
+import * as RkCalendarUtil from './services';
 
 export class RkCalendarMonthComponent extends React.Component {
   static propTypes = {
@@ -12,28 +10,31 @@ export class RkCalendarMonthComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
+    selected: PropTypes.instanceOf(Date),
     boundingMonth: PropTypes.bool,
-    onDaySelect: PropTypes.func.isRequired,
+    onSelect: PropTypes.func,
   };
   static defaultProps = {
+    selected: RkCalendarUtil.today(),
     boundingMonth: true,
+    onSelect: (() => null),
   };
 
   state = {
     daySize: 0,
   };
 
-  onDaySelect = () => {
-    this.props.onDaySelect();
+  onDaySelect = (date) => {
+    this.props.onSelect(date);
   };
 
   onLayout = (event) => {
     this.setState({
-      daySize: event.nativeEvent.layout.width / CalendarUtil.DAYS_IN_WEEK,
+      daySize: event.nativeEvent.layout.width / RkCalendarUtil.DAYS_IN_WEEK,
     });
   };
 
-  getData = () => CalendarUtil.createDaysGrid(this.props.date, this.props.boundingMonth);
+  getData = () => RkCalendarUtil.createDaysGrid(this.props.date, this.props.boundingMonth);
 
   getWeekChildComponents = (week) => week.map(this.renderDay);
 
@@ -47,6 +48,7 @@ export class RkCalendarMonthComponent extends React.Component {
         min={this.props.min}
         max={this.props.max}
         date={item}
+        selected={this.props.selected}
         onSelect={this.onDaySelect}
       />
     );
@@ -65,12 +67,12 @@ export class RkCalendarMonthComponent extends React.Component {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = RkStyleSheet.create(theme => ({
   container: {
     margin: 4,
-    backgroundColor: 'yellow',
+    backgroundColor: theme.colors.overlay,
   },
   week: {
     flexDirection: 'row',
   },
-});
+}));

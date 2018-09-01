@@ -1,9 +1,15 @@
 import { range } from './helpers';
 
 export const DAYS_IN_WEEK = 7;
+export const MONTHS_IN_YEAR = 12;
 
 export const markIfHoliday = (name, i) => {
   return { name, isHoliday: i % 6 === 0 };
+};
+
+export const today = () => {
+  const now = new Date();
+  return createDate(now.getFullYear(), now.getMonth(), now.getDate());
 };
 
 export const createDate = (year, month, date) => {
