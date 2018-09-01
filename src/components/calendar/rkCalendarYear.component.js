@@ -19,6 +19,7 @@ export class RkCalendarYearComponent extends React.Component {
   static defaultProps = {
     boundingMonth: true,
   };
+  static MONTHS_IN_YEAR = 12;
 
   onDaySelect = () => {
     this.props.onDaySelect();
@@ -32,7 +33,7 @@ export class RkCalendarYearComponent extends React.Component {
 
   getData = () => {
     const isMaxYear = RkCalendarUtil.isSameYearSafe(this.props.date, this.props.max);
-    const itemCount = isMaxYear ? this.props.max.getMonth() : 12;
+    const itemCount = isMaxYear ? this.props.max.getMonth() + 1 : RkCalendarYearComponent.MONTHS_IN_YEAR;
     return RkCalendarUtil.range(itemCount).map(this.createMonthDateByIndex);
   };
 
