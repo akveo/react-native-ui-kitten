@@ -6,7 +6,7 @@ export class CalendarScreen extends React.Component {
     // min: new Date(2018, 0, 1),
     // max: new Date(2030, 0, 1),
     min: new Date(2018, 0, 1),
-    max: new Date(2018, 3, 24),
+    max: new Date(2018, 1, 13),
   };
 
   onDaySelect = () => {
@@ -17,6 +17,7 @@ export class CalendarScreen extends React.Component {
     <RkCalendar
       min={CalendarScreen.data.min}
       max={CalendarScreen.data.max}
+      boundingMonth={false}
       onDaySelect={this.onDaySelect}
     />
   );
