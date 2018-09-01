@@ -9,9 +9,11 @@ export class RkCalendar extends React.Component {
   static propTypes = {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
+    boundingMonth: PropTypes.bool,
     onDaySelect: PropTypes.func,
   };
   static defaultProps = {
+    boundingMonth: true,
     onDaySelect: (() => null),
   };
 
@@ -26,6 +28,7 @@ export class RkCalendar extends React.Component {
       yearComponent={RkCalendarYearComponent}
       min={this.props.min}
       max={this.props.max}
+      boundingMonth={this.props.boundingMonth}
       onDaySelect={this.onDaySelect}
     />
   );

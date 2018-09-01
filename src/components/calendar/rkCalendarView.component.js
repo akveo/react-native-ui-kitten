@@ -10,10 +10,11 @@ export class RkCalendarView extends React.Component {
     yearComponent: PropTypes.element.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
+    boundingMonth: PropTypes.bool,
     onDaySelect: PropTypes.func.isRequired,
   };
   static defaultProps = {
-    selected: new Date(),
+    boundingMonth: true,
   };
 
   onDaySelect = () => {
@@ -43,7 +44,7 @@ export class RkCalendarView extends React.Component {
         min={this.props.min}
         max={this.props.max}
         date={item}
-        selected={this.props.selected}
+        boundingMonth={this.props.boundingMonth}
         onDaySelect={this.onDaySelect}
       />
     );

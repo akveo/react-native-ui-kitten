@@ -12,7 +12,11 @@ export class RkCalendarMonthComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
+    boundingMonth: PropTypes.bool,
     onDaySelect: PropTypes.func.isRequired,
+  };
+  static defaultProps = {
+    boundingMonth: true,
   };
 
   state = {
@@ -29,7 +33,7 @@ export class RkCalendarMonthComponent extends React.Component {
     });
   };
 
-  getData = () => CalendarUtil.createDaysGrid(this.props.date, false);
+  getData = () => CalendarUtil.createDaysGrid(this.props.date, this.props.boundingMonth);
 
   getWeekChildComponents = (week) => week.map(this.renderDay);
 
