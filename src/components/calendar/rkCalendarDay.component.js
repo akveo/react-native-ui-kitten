@@ -50,13 +50,17 @@ export class RkCalendarDayComponent extends React.Component {
   getDate = () => (this.isEmpty() ? defaultDayValue : this.props.date.getDate());
 
   renderText = () => {
-    const selectedStyle = this.isSelected() ? styles.textSelected : null;
-    const disabledStyle = this.isDisabled() ? styles.textDisabled : null;
+    const containerSelectedStyle = this.isSelected() ? styles.textContainerSelected : null;
+    const containerDisabledStyle = this.isDisabled() ? styles.textContainerDisabled : null;
+    const textSelectedStyle = this.isSelected() ? styles.textSelected : null;
+    const textDisabledStyle = this.isDisabled() ? styles.textDisabled : null;
     return (
-      <Text
-        style={[styles.text, selectedStyle, disabledStyle]}>
-        {this.getDate()}
-      </Text>
+      <View style={[styles.textContainer, containerSelectedStyle, containerDisabledStyle]}>
+        <Text
+          style={[styles.text, textSelectedStyle, textDisabledStyle]}>
+          {this.getDate()}
+        </Text>
+      </View>
     );
   };
 
@@ -75,17 +79,28 @@ const styles = RkStyleSheet.create(theme => ({
   container: {
     padding: 2,
   },
-  text: {
+  textContainer: {
     flex: 1,
-    fontSize: 20,
-    textAlign: 'center',
-    color: theme.colors.button.text,
-    backgroundColor: theme.colors.button.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+  },
+  textContainerSelected: {
+    backgroundColor: theme.colors.button.success,
+  },
+  textContainerDisabled: {
+    backgroundColor: theme.colors.overlay,
+  },
+  text: {
+    fontSize: theme.fonts.sizes.large,
+    color: theme.colors.text.base,
+    fontWeight: '300',
   },
   textSelected: {
-    backgroundColor: theme.colors.button.primaryActive,
+    fontWeight: 'bold',
+    color: theme.colors.text.inverse,
   },
   textDisabled: {
-    backgroundColor: 'transparent',
+    color: theme.colors.text.inverse,
   },
 }));

@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import * as RkCalendarUtil from './services';
+import { RkStyleSheet } from '../../styles/styleSheet';
 
 export class RkCalendarView extends React.Component {
   static propTypes = {
@@ -66,6 +67,7 @@ export class RkCalendarView extends React.Component {
 
   render = () => (
     <FlatList
+      style={styles.container}
       data={this.getData()}
       renderItem={this.renderItem}
       keyExtractor={this.getItemKey}
@@ -73,3 +75,9 @@ export class RkCalendarView extends React.Component {
     />
   );
 }
+
+const styles = RkStyleSheet.create(theme => ({
+  container: {
+    backgroundColor: theme.colors.background,
+  },
+}));

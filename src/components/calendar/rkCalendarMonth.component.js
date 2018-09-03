@@ -77,7 +77,6 @@ export class RkCalendarMonthComponent extends React.Component {
 
 const styles = RkStyleSheet.create(theme => ({
   container: {
-    backgroundColor: theme.colors.overlay,
-    marginVertical: 4,
+    marginVertical: 8,
   },
 }));

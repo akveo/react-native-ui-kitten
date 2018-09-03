@@ -24,7 +24,7 @@ export class RkCalendarDaysNames extends React.Component {
 
   renderDayOfWeek = (item) => (
     <Text
-      style={[styles.text]}>
+      style={[styles.text, { width: this.props.daySize }]}>
       {item.toUpperCase()}
     </Text>
   );
@@ -40,9 +40,9 @@ const styles = RkStyleSheet.create(theme => ({
   },
   text: {
     flex: 1,
-    fontSize: theme.fonts.sizes.base,
     textAlign: 'center',
-    color: theme.colors.text.base,
+    fontSize: theme.fonts.sizes.base,
+    color: theme.colors.text.subtitle,
   },
 }));
 
