@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkStyleSheet } from '../../styles/styleSheet';
 import * as RkCalendarUtil from './services';
+import { RkCalendarWeek } from './rkCalendarWeek.component';
 
 export class RkCalendarMonthComponent extends React.Component {
   static propTypes = {
@@ -36,26 +37,18 @@ export class RkCalendarMonthComponent extends React.Component {
 
   getData = () => RkCalendarUtil.createDaysGrid(this.props.date, this.props.boundingMonth);
 
-  getWeekChildComponents = (week) => week.map(this.renderDay);
-
   getChildComponents = () => this.getData().map(this.renderWeek);
 
-  renderDay = (item) => {
-    const DayComponent = this.props.dayComponent;
-    return (
-      <DayComponent
-        style={{ width: this.state.daySize, height: this.state.daySize }}
-        min={this.props.min}
-        max={this.props.max}
-        date={item}
-        selected={this.props.selected}
-        onSelect={this.onDaySelect}
-      />
-    );
-  };
-
   renderWeek = (item) => (
-    <View style={styles.week}>{this.getWeekChildComponents(item)}</View>
+    <RkCalendarWeek
+      dayComponent={this.props.dayComponent}
+      min={this.props.min}
+      max={this.props.max}
+      dates={item}
+      selected={this.props.selected}
+      onSelect={this.onDaySelect}
+      daySize={this.state.daySize}
+    />
   );
 
   render = () => (
@@ -71,8 +64,5 @@ const styles = RkStyleSheet.create(theme => ({
   container: {
     margin: 4,
     backgroundColor: theme.colors.overlay,
-  },
-  week: {
-    flexDirection: 'row',
   },
 }));
