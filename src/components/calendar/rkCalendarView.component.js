@@ -10,22 +10,29 @@ export class RkCalendarView extends React.Component {
     yearComponent: PropTypes.element.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
+    selected: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
-    onSelect: PropTypes.func,
+    /**
+     * callback function describing selection date changes,
+     * which could not be handled by this component
+     */
+    onSelect: PropTypes.func.isRequired,
   };
   static defaultProps = {
     boundingMonth: true,
-    onSelect: (() => null),
   };
 
   state = {
-    date: undefined,
+    daySize: 0,
   };
 
   onDaySelect = (date) => {
-    this.setState({ date });
     this.props.onSelect(date);
   };
+
+  onLayout = (event) => this.setState({
+    daySize: event.nativeEvent.layout.width / RkCalendarUtil.DAYS_IN_WEEK,
+  });
 
   getItemKey = (index) => `${index}`;
 
@@ -48,9 +55,10 @@ export class RkCalendarView extends React.Component {
         dayComponent={this.props.dayComponent}
         min={this.props.min}
         max={this.props.max}
+        selected={this.props.selected}
         date={item}
-        selected={this.state.date}
         boundingMonth={this.props.boundingMonth}
+        daySize={this.state.daySize}
         onSelect={this.onDaySelect}
       />
     );
@@ -61,6 +69,7 @@ export class RkCalendarView extends React.Component {
       data={this.getData()}
       renderItem={this.renderItem}
       keyExtractor={this.getItemKey}
+      onLayout={this.onLayout}
     />
   );
 }

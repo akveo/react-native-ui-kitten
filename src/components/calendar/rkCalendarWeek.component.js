@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import * as RkCalendarUtil from './services';
 import { RkStyleSheet } from '../../styles/styleSheet';
 
 export class RkCalendarWeek extends React.Component {
@@ -9,18 +10,47 @@ export class RkCalendarWeek extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     dates: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date),
-    daySize: PropTypes.number,
-    onSelect: PropTypes.func,
+    selected: PropTypes.instanceOf(Date).isRequired,
+    /**
+     * callback function describing selection date changes,
+     * which could not be handled by this component
+     */
+    onSelect: PropTypes.func.isRequired,
+    /**
+     * day component style prop describing width and height of cell
+     */
+    daySize: PropTypes.number.isRequired,
   };
-  static defaultProps = {
-    daySize: 0,
-    onSelect: (() => null),
+
+  state = {
+    dates: [],
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      dates: this.getData(),
+    };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const isSizeChanged = nextProps.daySize !== this.props.daySize;
+    const isWasSelected = this.isInWeek(this.props.selected);
+    const isWillSelected = this.isInWeek(nextProps.selected);
+    return isSizeChanged || isWasSelected || isWillSelected;
+  }
 
   onDaySelect = (date) => {
     this.props.onSelect(date);
   };
+
+  isInWeek = (date) => {
+    const weekStart = this.state.dates[0];
+    const weekEnd = this.state.dates[this.state.dates.length - 1];
+    return RkCalendarUtil.isBetweenIncluding(date, weekStart, weekEnd);
+  };
+
+  getData = () => this.props.dates.filter(date => date !== RkCalendarUtil.defaultBoundingFallback);
 
   getChildComponents = () => this.props.dates.map(this.renderDay);
 
@@ -28,12 +58,12 @@ export class RkCalendarWeek extends React.Component {
     const DayComponent = this.props.dayComponent;
     return (
       <DayComponent
-        style={{ width: this.props.daySize, height: this.props.daySize }}
         min={this.props.min}
         max={this.props.max}
         date={item}
         selected={this.props.selected}
         onSelect={this.onDaySelect}
+        size={this.props.daySize}
       />
     );
   };

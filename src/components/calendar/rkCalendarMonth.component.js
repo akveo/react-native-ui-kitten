@@ -11,33 +11,49 @@ export class RkCalendarMonthComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date),
+    selected: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
-    onSelect: PropTypes.func,
+    /**
+     * callback function describing selection date changes,
+     * which could not be handled by this component
+     */
+    onSelect: PropTypes.func.isRequired,
+    /**
+     * day component style prop describing width and height of cell
+     */
+    daySize: PropTypes.number.isRequired,
   };
   static defaultProps = {
-    selected: RkCalendarUtil.today(),
     boundingMonth: true,
-    onSelect: (() => null),
   };
 
   state = {
-    daySize: 0,
+    dates: [],
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      dates: this.getData(),
+    };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const isSizeChanged = nextProps.daySize !== this.props.daySize;
+    const isWasSelected = this.isInMonth(this.props.selected);
+    const isWillSelected = this.isInMonth(nextProps.selected);
+    return isSizeChanged || isWasSelected || isWillSelected;
+  }
 
   onDaySelect = (date) => {
     this.props.onSelect(date);
   };
 
-  onLayout = (event) => {
-    this.setState({
-      daySize: event.nativeEvent.layout.width / RkCalendarUtil.DAYS_IN_WEEK,
-    });
-  };
+  isInMonth = (date) => RkCalendarUtil.isSameMonthSafe(date, this.props.date);
 
   getData = () => RkCalendarUtil.createDaysGrid(this.props.date, this.props.boundingMonth);
 
-  getChildComponents = () => this.getData().map(this.renderWeek);
+  getChildComponents = () => this.state.dates.map(this.renderWeek);
 
   renderWeek = (item) => (
     <RkCalendarWeek
@@ -46,18 +62,17 @@ export class RkCalendarMonthComponent extends React.Component {
       max={this.props.max}
       dates={item}
       selected={this.props.selected}
+      daySize={this.props.daySize}
       onSelect={this.onDaySelect}
-      daySize={this.state.daySize}
     />
   );
 
   render = () => (
     <View
-      style={styles.container}
-      onLayout={this.onLayout}>
+      style={styles.container}>
       {this.getChildComponents()}
     </View>
-  )
+  );
 }
 
 const styles = RkStyleSheet.create(theme => ({

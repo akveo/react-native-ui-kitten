@@ -57,6 +57,10 @@ export const isBetween = (date, start, end) => {
   return compareDates(date, start) > 0 && compareDates(date, end) < 0;
 };
 
+export const isBetweenIncluding = (date, start, end) => {
+  return compareDates(date, start) >= 0 && compareDates(date, end) <= 0;
+};
+
 export const clone = (date) => {
   return new Date(date.getTime());
 };

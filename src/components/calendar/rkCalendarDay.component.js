@@ -15,13 +15,23 @@ export class RkCalendarDayComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date),
+    selected: PropTypes.instanceOf(Date).isRequired,
     onSelect: PropTypes.func,
+    /**
+     * style prop describing width and height of cell
+     */
+    size: PropTypes.number.isRequired,
   };
   static defaultProps = {
-    selected: RkCalendarUtil.today(),
     onSelect: (() => null),
   };
+
+  shouldComponentUpdate(nextProps) {
+    const isSizeChanged = nextProps.size !== this.props.size;
+    const isWasSelected = RkCalendarUtil.isSameDaySafe(this.props.date, this.props.selected);
+    const isWillSelected = RkCalendarUtil.isSameDaySafe(this.props.date, nextProps.selected);
+    return isSizeChanged || isWasSelected || isWillSelected;
+  }
 
   onPress = () => {
     this.props.onSelect(this.props.date);
@@ -52,9 +62,11 @@ export class RkCalendarDayComponent extends React.Component {
 
   render = () => (
     <TouchableWithoutFeedback
-      disabled={this.isDisabled()}
+      disabled={this.isSelected() || this.isDisabled()}
       onPress={this.onPress}>
-      <View style={[styles.container, this.props.style]}>{this.renderText()}</View>
+      <View style={[styles.container, { width: this.props.size, height: this.props.size }]}>
+        {this.renderText()}
+      </View>
     </TouchableWithoutFeedback>
   );
 }

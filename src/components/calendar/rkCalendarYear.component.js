@@ -13,15 +13,39 @@ export class RkCalendarYearComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date),
+    selected: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
+    /**
+     * callback function describing selection date changes,
+     * which could not be handled by this component
+     */
     onSelect: PropTypes.func.isRequired,
+    /**
+     * day component style prop describing width and height of cell
+     */
+    daySize: PropTypes.number.isRequired,
   };
   static defaultProps = {
-    selected: RkCalendarUtil.today(),
     boundingMonth: true,
-    onSelect: (() => null),
   };
+
+  state = {
+    dates: [],
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      dates: this.getData(),
+    };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const isSizeChanged = nextProps.daySize !== this.props.daySize;
+    const isWasSelected = this.isInYear(this.props.selected);
+    const isWillSelected = this.isInYear(nextProps.selected);
+    return isSizeChanged || isWasSelected || isWillSelected;
+  }
 
   onDaySelect = (date) => {
     this.props.onSelect(date);
@@ -33,12 +57,13 @@ export class RkCalendarYearComponent extends React.Component {
     this.props.date.getDate(),
   );
 
+  isInYear = (date) => RkCalendarUtil.isSameYearSafe(date, this.props.date);
+
   getData = () => {
-    const isMaxYear = RkCalendarUtil.isSameYearSafe(this.props.date, this.props.max);
-    if (isMaxYear) {
+    if (this.isInYear(this.props.max)) {
       const firstMonthIndex = this.props.min.getMonth();
       const lastMonthIndex = this.props.max.getMonth();
-      const isOneInRangeYear = RkCalendarUtil.isSameYearSafe(this.props.min, this.props.max);
+      const isOneInRangeYear = this.isInYear(this.props.min, this.props.max);
       const itemCount = isOneInRangeYear ? (lastMonthIndex - firstMonthIndex) : lastMonthIndex;
       const produceBounds = (index) => (isOneInRangeYear ? index + firstMonthIndex : index);
       return RkCalendarUtil.range(itemCount + 1, produceBounds).map(this.createMonthDateByIndex);
@@ -46,7 +71,7 @@ export class RkCalendarYearComponent extends React.Component {
     return RkCalendarUtil.range(RkCalendarUtil.MONTHS_IN_YEAR).map(this.createMonthDateByIndex);
   };
 
-  getChildComponents = () => this.getData().map(this.renderMonth);
+  getChildComponents = () => this.state.dates.map(this.renderMonth);
 
   renderMonth = (item) => {
     const MonthComponent = this.props.monthComponent;
@@ -58,6 +83,7 @@ export class RkCalendarYearComponent extends React.Component {
         date={item}
         selected={this.props.selected}
         boundingMonth={this.props.boundingMonth}
+        daySize={this.props.daySize}
         onSelect={this.onDaySelect}
       />
     );

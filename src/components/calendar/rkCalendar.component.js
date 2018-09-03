@@ -18,7 +18,12 @@ export class RkCalendar extends React.Component {
     onSelect: (() => null),
   };
 
+  state = {
+    selected: RkCalendarUtil.today(),
+  };
+
   onDaySelect = (date) => {
+    this.setState({ selected: date });
     this.props.onSelect(date);
   };
 
@@ -29,6 +34,7 @@ export class RkCalendar extends React.Component {
       yearComponent={RkCalendarYearComponent}
       min={this.props.min}
       max={this.props.max}
+      selected={this.state.selected}
       boundingMonth={this.props.boundingMonth}
       onSelect={this.onDaySelect}
     />
