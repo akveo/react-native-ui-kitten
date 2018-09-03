@@ -6,6 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import * as RkCalendarUtil from './services';
 import { RkCalendarDaysNames } from './rkCalendarDaysNames.component';
+import { RkCalendarMonthHeader } from './rkCalendarMonthHeader.component';
 
 export class RkCalendarYearComponent extends React.Component {
   static propTypes = {
@@ -78,7 +79,13 @@ export class RkCalendarYearComponent extends React.Component {
     const MonthComponent = this.props.monthComponent;
     return (
       <View>
-        <RkCalendarDaysNames daySize={this.props.daySize} />
+        <RkCalendarMonthHeader
+          date={item}
+          selected={this.props.selected}
+        />
+        <RkCalendarDaysNames
+          daySize={this.props.daySize}
+        />
         <MonthComponent
           dayComponent={this.props.dayComponent}
           min={this.props.min}
