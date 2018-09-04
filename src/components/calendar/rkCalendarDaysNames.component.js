@@ -5,22 +5,20 @@ import {
   Text,
 } from 'react-native';
 import { RkStyleSheet } from '../../styles/styleSheet';
+import LocaleService from './services/locale.service';
 
 export class RkCalendarDaysNames extends React.Component {
   static propTypes = {
-    dayOfWeekNames: PropTypes.arrayOf(PropTypes.string),
     /**
      * day of week component style prop describing width of cell,
      * regularly is the same as rkCalendarDay component daySize prop.
      */
     daySize: PropTypes.number.isRequired,
   };
-  static defaultProps = {
-    // TODO: locale-dependent
-    dayOfWeekNames: ['s', 'm', 't', 'w', 't', 'f', 's'],
-  };
 
-  getChildComponents = () => this.props.dayOfWeekNames.map(this.renderDayOfWeek);
+  dayOfWeekNames = LocaleService.getDayOfWeekNames();
+
+  getChildComponents = () => this.dayOfWeekNames.map(this.renderDayOfWeek);
 
   renderDayOfWeek = (item) => (
     <Text

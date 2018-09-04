@@ -1,5 +1,6 @@
 import * as DateTimeUtil from './dateTimeUtil';
 import { batch } from './helpers';
+import LocaleService from './locale.service';
 
 /**
  * @param activeMonth - any date object of requested month
@@ -92,9 +93,7 @@ function getStartOfWeekDayDiff(date) {
 }
 
 function getWeekStartDiff(date) {
-  // TODO: locale-dependent
-  const firstDayOfWeek = 0;
-  return ((7 - firstDayOfWeek) + date.getDay()) % 7;
+  return ((7 - LocaleService.getFirstDayOfWeek()) + date.getDay()) % 7;
 }
 
 function isShouldAddPrevBoundingMonth(weeks) {

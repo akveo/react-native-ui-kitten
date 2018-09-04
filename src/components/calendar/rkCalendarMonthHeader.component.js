@@ -6,6 +6,7 @@ import {
 import PropTypes from 'prop-types';
 import { RkStyleSheet } from '../../styles/styleSheet';
 import * as RkCalendarUtil from './services';
+import LocaleService from './services/locale.service';
 
 export class RkCalendarMonthHeader extends React.Component {
   static propTypes = {
@@ -16,9 +17,9 @@ export class RkCalendarMonthHeader extends React.Component {
   isSelected = () => RkCalendarUtil.isSameMonthSafe(this.props.date, this.props.selected);
 
   renderText = () => {
-    const text = `${this.props.date.getMonth() + 1}, ${this.props.date.getFullYear()}`;
+    const text = `${LocaleService.getMonthName(this.props.date)}, ${this.props.date.getFullYear()}`;
     return (
-      <Text style={styles.text}>{text.toUpperCase()}</Text>
+      <Text style={styles.text}>{text}</Text>
     );
   };
 
