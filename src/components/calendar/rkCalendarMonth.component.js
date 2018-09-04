@@ -11,7 +11,7 @@ export class RkCalendarMonthComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date).isRequired,
+    selected: PropTypes.instanceOf(Date),
     boundingMonth: PropTypes.bool,
     /**
      * callback function describing selection date changes,

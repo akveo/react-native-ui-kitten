@@ -10,7 +10,7 @@ export class RkCalendarWeek extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     dates: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date).isRequired,
+    selected: PropTypes.instanceOf(Date),
     /**
      * callback function describing selection date changes,
      * which could not be handled by this component
@@ -47,7 +47,7 @@ export class RkCalendarWeek extends React.Component {
   isInWeek = (date) => {
     const weekStart = this.state.dates[0];
     const weekEnd = this.state.dates[this.state.dates.length - 1];
-    return RkCalendarUtil.isBetweenIncluding(date, weekStart, weekEnd);
+    return date && RkCalendarUtil.isBetweenIncluding(date, weekStart, weekEnd);
   };
 
   getData = () => this.props.dates.filter(date => date !== RkCalendarUtil.defaultBoundingFallback);

@@ -15,7 +15,7 @@ export class RkCalendarDayComponent extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date).isRequired,
+    selected: PropTypes.instanceOf(Date),
     onSelect: PropTypes.func,
     /**
      * style prop describing width and height of cell
