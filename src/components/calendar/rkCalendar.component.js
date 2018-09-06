@@ -11,10 +11,12 @@ export class RkCalendar extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
+    filter: PropTypes.func,
     onSelect: PropTypes.func,
   };
   static defaultProps = {
     boundingMonth: true,
+    filter: (() => true),
     onSelect: (() => null),
   };
 
@@ -36,6 +38,7 @@ export class RkCalendar extends React.Component {
       max={this.props.max}
       selected={this.state.selected}
       boundingMonth={this.props.boundingMonth}
+      filter={this.props.filter}
       onSelect={this.onDaySelect}
     />
   );

@@ -19,6 +19,7 @@ export class RkRangedCalendarDay extends React.Component {
       start: PropTypes.instanceOf(Date),
       end: PropTypes.instanceOf(Date),
     }),
+    filter: PropTypes.func,
     onSelect: PropTypes.func,
     /**
      * style prop describing width and height of cell
@@ -26,6 +27,7 @@ export class RkRangedCalendarDay extends React.Component {
     size: PropTypes.number.isRequired,
   };
   static defaultProps = {
+    filter: (() => true),
     onSelect: (() => null),
   };
 
@@ -60,9 +62,11 @@ export class RkRangedCalendarDay extends React.Component {
 
   isGreaterThanMax = () => RkCalendarUtil.compareDates(this.props.date, this.props.max) > 0;
 
+  isFitsFilter = () => this.props.filter(this.props.date);
+
   isSelected = () => this.isInRange(this.props.selected);
 
-  isDisabled = () => this.isEmpty() || this.isSmallerThanMin() || this.isGreaterThanMax();
+  isDisabled = () => this.isEmpty() || this.isSmallerThanMin() || this.isGreaterThanMax() || !this.isFitsFilter();
 
   isEmpty = () => this.props.date === RkCalendarUtil.defaultBoundingFallback;
 

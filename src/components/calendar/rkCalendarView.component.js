@@ -24,6 +24,7 @@ export class RkCalendarView extends React.Component {
       }),
     ]).isRequired,
     boundingMonth: PropTypes.bool,
+    filter: PropTypes.func,
     /**
      * callback function describing selection date changes,
      * which could not be handled by this component
@@ -32,6 +33,7 @@ export class RkCalendarView extends React.Component {
   };
   static defaultProps = {
     boundingMonth: true,
+    filter: (() => true),
   };
 
   state = {
@@ -70,8 +72,9 @@ export class RkCalendarView extends React.Component {
         selected={this.props.selected}
         date={item}
         boundingMonth={this.props.boundingMonth}
-        daySize={this.state.daySize}
+        filter={this.props.filter}
         onSelect={this.onDaySelect}
+        daySize={this.state.daySize}
       />
     );
   };
