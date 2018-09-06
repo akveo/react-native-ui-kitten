@@ -7,7 +7,7 @@ import { RkRangedCalendarWeek } from './rkRangedCalendarWeek.component';
 
 export class RkRangedCalendarMonth extends React.Component {
   static propTypes = {
-    dayComponent: PropTypes.element.isRequired,
+    dayComponent: PropTypes.func.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
@@ -103,6 +103,5 @@ export class RkRangedCalendarMonth extends React.Component {
 
 const styles = RkStyleSheet.create(theme => ({
   container: {
-    marginVertical: 8,
   },
 }));

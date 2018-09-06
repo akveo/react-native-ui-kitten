@@ -10,8 +10,8 @@ import { RkCalendarMonthHeader } from './rkCalendarMonthHeader.component';
 
 export class RkCalendarYearComponent extends React.Component {
   static propTypes = {
-    dayComponent: PropTypes.element.isRequired,
-    monthComponent: PropTypes.element.isRequired,
+    dayComponent: PropTypes.func.isRequired,
+    monthComponent: PropTypes.func.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
@@ -79,13 +79,7 @@ export class RkCalendarYearComponent extends React.Component {
     const MonthComponent = this.props.monthComponent;
     return (
       <View>
-        <RkCalendarMonthHeader
-          date={item}
-          selected={this.props.selected}
-        />
-        <RkCalendarDaysNames
-          daySize={this.props.daySize}
-        />
+        <RkCalendarMonthHeader date={item} daySize={this.props.daySize} />
         <MonthComponent
           dayComponent={this.props.dayComponent}
           min={this.props.min}

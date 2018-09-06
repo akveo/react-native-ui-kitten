@@ -35,6 +35,7 @@ export class RkCalendarDaysNames extends React.Component {
 const styles = RkStyleSheet.create(theme => ({
   container: {
     flexDirection: 'row',
+    paddingVertical: 4,
   },
   text: {
     flex: 1,

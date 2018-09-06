@@ -6,9 +6,9 @@ import { RkStyleSheet } from '../../styles/styleSheet';
 
 export class RkCalendarView extends React.Component {
   static propTypes = {
-    dayComponent: PropTypes.element.isRequired,
-    monthComponent: PropTypes.element.isRequired,
-    yearComponent: PropTypes.element.isRequired,
+    dayComponent: PropTypes.func.isRequired,
+    monthComponent: PropTypes.func.isRequired,
+    yearComponent: PropTypes.func.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     /**

@@ -5,13 +5,12 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import * as RkCalendarUtil from '../services';
-import { RkCalendarDaysNames } from '../rkCalendarDaysNames.component';
 import { RkCalendarMonthHeader } from '../rkCalendarMonthHeader.component';
 
 export class RkRangedCalendarYear extends React.Component {
   static propTypes = {
-    dayComponent: PropTypes.element.isRequired,
-    monthComponent: PropTypes.element.isRequired,
+    dayComponent: PropTypes.func.isRequired,
+    monthComponent: PropTypes.func.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
@@ -107,7 +106,8 @@ export class RkRangedCalendarYear extends React.Component {
     const MonthComponent = this.props.monthComponent;
     return (
       <View>
-        <RkCalendarDaysNames
+        <RkCalendarMonthHeader
+          date={this.props.date}
           daySize={this.props.daySize}
         />
         <MonthComponent

@@ -7,7 +7,7 @@ import { RkCalendarWeek } from './rkCalendarWeek.component';
 
 export class RkCalendarMonthComponent extends React.Component {
   static propTypes = {
-    dayComponent: PropTypes.element.isRequired,
+    dayComponent: PropTypes.func.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,

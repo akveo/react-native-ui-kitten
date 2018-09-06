@@ -66,15 +66,29 @@ export class RkRangedCalendarDay extends React.Component {
 
   getDate = () => (this.isEmpty() ? defaultDayValue : this.props.date.getDate());
 
+  getTextStyle = () => {
+    const isBetweenRangeBounds = RkCalendarUtil.isBetweenSafe(this.props.date, this.props.selected.start, this.props.selected.end);
+    const containerSelectedBaseStyle = isBetweenRangeBounds ? styles.textContainerSelectedBetween : styles.textContainerSelected;
+    return {
+      container: {
+        base: styles.textContainer,
+        selected: this.isSelected() ? containerSelectedBaseStyle : null,
+        disabled: this.isDisabled() ? styles.textContainerDisabled : null,
+      },
+      text: {
+        base: styles.text,
+        selected: this.isSelected() ? styles.textSelected : null,
+        disabled: this.isDisabled() ? styles.textDisabled : null,
+      },
+    };
+  };
+
   renderText = () => {
-    const containerSelectedStyle = this.isSelected() ? styles.textContainerSelected : null;
-    const containerDisabledStyle = this.isDisabled() ? styles.textContainerDisabled : null;
-    const textSelectedStyle = this.isSelected() ? styles.textSelected : null;
-    const textDisabledStyle = this.isDisabled() ? styles.textDisabled : null;
+    const { container, text } = this.getTextStyle();
     return (
-      <View style={[styles.textContainer, containerSelectedStyle, containerDisabledStyle]}>
+      <View style={[container.base, container.selected, container.disabled]}>
         <Text
-          style={[styles.text, textSelectedStyle, textDisabledStyle]}>
+          style={[text.base, text.selected, text.disabled]}>
           {this.getDate()}
         </Text>
       </View>
@@ -94,19 +108,23 @@ export class RkRangedCalendarDay extends React.Component {
 
 const styles = RkStyleSheet.create(theme => ({
   container: {
-    padding: 2,
   },
   textContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
   },
   textContainerSelected: {
     backgroundColor: theme.colors.button.success,
+    borderRadius: 4,
+  },
+  textContainerSelectedBetween: {
+    backgroundColor: theme.colors.button.success,
+    opacity: 0.25,
+    borderRadius: 0,
   },
   textContainerDisabled: {
-    backgroundColor: theme.colors.overlay,
+    opacity: 0.25,
   },
   text: {
     fontSize: theme.fonts.sizes.large,
@@ -118,6 +136,5 @@ const styles = RkStyleSheet.create(theme => ({
     color: theme.colors.text.inverse,
   },
   textDisabled: {
-    color: theme.colors.text.inverse,
   },
 }));
