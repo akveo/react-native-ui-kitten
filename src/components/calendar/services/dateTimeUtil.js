@@ -57,8 +57,16 @@ export const isBetween = (date, start, end) => {
   return compareDates(date, start) > 0 && compareDates(date, end) < 0;
 };
 
+export const isBetweenSafe = (date, start, end) => {
+  return date && start && end && isBetween(date, start, end);
+};
+
 export const isBetweenIncluding = (date, start, end) => {
   return compareDates(date, start) >= 0 && compareDates(date, end) <= 0;
+};
+
+export const isBetweenIncludingSafe = (date, start, end) => {
+  return date && start && end && isBetweenIncluding(date, start, end);
 };
 
 export const clone = (date) => {

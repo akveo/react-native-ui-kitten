@@ -11,7 +11,18 @@ export class RkCalendarView extends React.Component {
     yearComponent: PropTypes.element.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date).isRequired,
+    /**
+     * selected value prop describing one of:
+     * - date,
+     * - date range
+     */
+    selected: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.shape({
+        start: PropTypes.instanceOf(Date),
+        end: PropTypes.instanceOf(Date),
+      }),
+    ]).isRequired,
     boundingMonth: PropTypes.bool,
     /**
      * callback function describing selection date changes,

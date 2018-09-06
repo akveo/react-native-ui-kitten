@@ -7,6 +7,7 @@ export { RkModalImg } from './src/components/image/rkModalImg';
 export { RkGallery } from './src/components/gallery/rkGallery';
 export { RkGalleryImage } from './src/components/gallery/rkGalleryImage';
 export { RkCalendar } from './src/components/calendar/rkCalendar.component';
+export { RkRangedCalendar } from './src/components/calendar/rkRangedCalendar.component';
 export { RkTabView } from './src/components/tab/rkTabView';
 export { RkCard } from './src/components/card/rkCard';
 export { RkAvoidKeyboard } from './src/components/avoidKeyboard/rkAvoidKeyboard';
