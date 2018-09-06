@@ -37,6 +37,8 @@ export class RkCalendarDayComponent extends React.Component {
     this.props.onSelect(this.props.date);
   };
 
+  isToday = () => RkCalendarUtil.isSameDaySafe(this.props.date, RkCalendarUtil.today());
+
   isSmallerThanMin = () => RkCalendarUtil.compareDates(this.props.date, this.props.min) < 0;
 
   isGreaterThanMax = () => RkCalendarUtil.compareDates(this.props.date, this.props.max) > 0;
@@ -49,18 +51,22 @@ export class RkCalendarDayComponent extends React.Component {
 
   getDate = () => (this.isEmpty() ? defaultDayValue : this.props.date.getDate());
 
-  getTextStyle = () => ({
-    container: {
-      base: styles.textContainer,
-      selected: this.isSelected() ? styles.textContainerSelected : null,
-      disabled: this.isDisabled() ? styles.textContainerDisabled : null,
-    },
-    text: {
-      base: styles.text,
-      selected: this.isSelected() ? styles.textSelected : null,
-      disabled: this.isDisabled() ? styles.textDisabled : null,
-    },
-  });
+  getTextStyle = () => {
+    const containerBaseStyle = this.isToday() ? [styles.container, styles.containerToday] : styles.container;
+    const textBaseStyle = this.isToday() ? [styles.text, styles.textToday] : styles.text;
+    return {
+      container: {
+        base: containerBaseStyle,
+        selected: this.isSelected() ? styles.containerSelected : null,
+        disabled: this.isDisabled() ? styles.containerDisabled : null,
+      },
+      text: {
+        base: textBaseStyle,
+        selected: this.isSelected() ? styles.textSelected : null,
+        disabled: this.isDisabled() ? styles.textDisabled : null,
+      },
+    };
+  };
 
   renderText = () => {
     const { container, text } = this.getTextStyle();
@@ -78,7 +84,7 @@ export class RkCalendarDayComponent extends React.Component {
     <TouchableWithoutFeedback
       disabled={this.isSelected() || this.isDisabled()}
       onPress={this.onPress}>
-      <View style={[styles.container, { width: this.props.size, height: this.props.size }]}>
+      <View style={{ width: this.props.size, height: this.props.size }}>
         {this.renderText()}
       </View>
     </TouchableWithoutFeedback>
@@ -87,18 +93,18 @@ export class RkCalendarDayComponent extends React.Component {
 
 const styles = RkStyleSheet.create(theme => ({
   container: {
-    padding: 2,
-  },
-  textContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
   },
-  textContainerSelected: {
+  containerToday: {
+    backgroundColor: theme.colors.highlight,
+  },
+  containerSelected: {
     backgroundColor: theme.colors.button.success,
   },
-  textContainerDisabled: {
+  containerDisabled: {
     opacity: 0.25,
   },
   text: {
@@ -106,9 +112,12 @@ const styles = RkStyleSheet.create(theme => ({
     color: theme.colors.text.base,
     fontWeight: '300',
   },
-  textSelected: {
+  textToday: {
     fontWeight: 'bold',
+  },
+  textSelected: {
     color: theme.colors.text.inverse,
+    fontWeight: 'bold',
   },
   textDisabled: {
   },
