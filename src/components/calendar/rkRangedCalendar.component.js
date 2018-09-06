@@ -11,6 +11,7 @@ export class RkRangedCalendar extends React.Component {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
+    renderDay: PropTypes.func,
     filter: PropTypes.func,
     /**
      * callback function describing selection date range changes,
@@ -20,6 +21,7 @@ export class RkRangedCalendar extends React.Component {
   };
   static defaultProps = {
     boundingMonth: true,
+    renderDay: undefined,
     filter: (() => true),
     onSelect: (() => null),
   };
@@ -71,6 +73,7 @@ export class RkRangedCalendar extends React.Component {
       max={this.props.max}
       selected={this.state.selected}
       boundingMonth={this.props.boundingMonth}
+      renderDay={this.props.renderDay}
       filter={this.props.filter}
       onSelect={this.onDaySelect}
     />

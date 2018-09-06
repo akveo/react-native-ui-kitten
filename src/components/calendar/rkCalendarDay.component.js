@@ -16,6 +16,7 @@ export class RkCalendarDayComponent extends React.Component {
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
     selected: PropTypes.instanceOf(Date),
+    renderContent: PropTypes.func,
     filter: PropTypes.func,
     onSelect: PropTypes.func,
     /**
@@ -24,9 +25,20 @@ export class RkCalendarDayComponent extends React.Component {
     size: PropTypes.number.isRequired,
   };
   static defaultProps = {
+    renderContent: undefined,
     filter: (() => true),
     onSelect: (() => null),
   };
+
+  static getDerivedStateFromProps(props) {
+    const isFitsFilter = props.filter(props.date);
+    return {
+      isSelected: RkCalendarUtil.isSameDaySafe(props.date, props.selected) || false,
+      isDisabled: !isFitsFilter || (!RkCalendarUtil.isBetweenSafe(props.date, props.min, props.max) || false),
+      isToday: (RkCalendarUtil.isSameDaySafe(props.date, RkCalendarUtil.today()) || false),
+      isEmpty: props.date === RkCalendarUtil.defaultBoundingFallback,
+    };
+  }
 
   shouldComponentUpdate(nextProps) {
     const isSizeChanged = nextProps.size !== this.props.size;
@@ -39,60 +51,47 @@ export class RkCalendarDayComponent extends React.Component {
     this.props.onSelect(this.props.date);
   };
 
-  isToday = () => RkCalendarUtil.isSameDaySafe(this.props.date, RkCalendarUtil.today());
-
-  isSmallerThanMin = () => RkCalendarUtil.compareDates(this.props.date, this.props.min) < 0;
-
-  isGreaterThanMax = () => RkCalendarUtil.compareDates(this.props.date, this.props.max) > 0;
-
-  isFitsFilter = () => this.props.filter(this.props.date);
-
-  isSelected = () => RkCalendarUtil.isSameDaySafe(this.props.date, this.props.selected);
-
-  isDisabled = () => this.isEmpty() || this.isSmallerThanMin() || this.isGreaterThanMax() || !this.isFitsFilter();
-
-  isEmpty = () => this.props.date === RkCalendarUtil.defaultBoundingFallback;
-
-  getDate = () => (this.isEmpty() ? defaultDayValue : this.props.date.getDate());
-
   getTextStyle = () => {
-    const containerBaseStyle = this.isToday() ? [styles.container, styles.containerToday] : styles.container;
-    const textBaseStyle = this.isToday() ? [styles.text, styles.textToday] : styles.text;
+    const containerBaseStyle = this.state.isToday ? [styles.container, styles.containerToday] : styles.container;
+    const textBaseStyle = this.state.isToday ? [styles.text, styles.textToday] : styles.text;
     return {
       container: {
         base: containerBaseStyle,
-        selected: this.isSelected() ? styles.containerSelected : null,
-        disabled: this.isDisabled() ? styles.containerDisabled : null,
+        selected: this.state.isSelected ? styles.containerSelected : null,
+        disabled: this.state.isDisabled ? styles.containerDisabled : null,
       },
       text: {
         base: textBaseStyle,
-        selected: this.isSelected() ? styles.textSelected : null,
-        disabled: this.isDisabled() ? styles.textDisabled : null,
+        selected: this.state.isSelected ? styles.textSelected : null,
+        disabled: this.state.isDisabled ? styles.textDisabled : null,
       },
     };
   };
 
-  renderText = () => {
+  renderText = (date, state) => {
     const { container, text } = this.getTextStyle();
     return (
       <View style={[container.base, container.selected, container.disabled]}>
-        <Text
-          style={[text.base, text.selected, text.disabled]}>
-          {this.getDate()}
+        <Text style={[text.base, text.selected, text.disabled]}>
+          {state.isEmpty ? defaultDayValue : date.getDate()}
         </Text>
       </View>
     );
   };
 
-  render = () => (
-    <TouchableWithoutFeedback
-      disabled={this.isSelected() || this.isDisabled()}
-      onPress={this.onPress}>
-      <View style={{ width: this.props.size, height: this.props.size }}>
-        {this.renderText()}
-      </View>
-    </TouchableWithoutFeedback>
-  );
+  render = () => {
+    const contentHeight = this.props.renderContent === undefined ? this.props.size : undefined;
+    const renderContentFunction = this.props.renderContent || this.renderText;
+    return (
+      <TouchableWithoutFeedback
+        disabled={this.state.isSelected || this.state.isDisabled}
+        onPress={this.onPress}>
+        <View style={{ width: this.props.size, height: contentHeight }}>
+          {renderContentFunction(this.props.date, this.state)}
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  };
 }
 
 const styles = RkStyleSheet.create(theme => ({

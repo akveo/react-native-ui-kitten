@@ -14,6 +14,7 @@ export class RkCalendarMonthComponent extends React.Component {
     selected: PropTypes.instanceOf(Date),
     boundingMonth: PropTypes.bool,
     filter: PropTypes.func,
+    renderDay: PropTypes.func,
     /**
      * callback function describing selection date changes,
      * which could not be handled by this component
@@ -26,6 +27,7 @@ export class RkCalendarMonthComponent extends React.Component {
   };
   static defaultProps = {
     boundingMonth: true,
+    renderDay: undefined,
     filter: (() => true),
   };
 
@@ -64,6 +66,7 @@ export class RkCalendarMonthComponent extends React.Component {
       max={this.props.max}
       dates={item}
       selected={this.props.selected}
+      renderDay={this.props.renderDay}
       filter={this.props.filter}
       onSelect={this.onDaySelect}
       daySize={this.props.daySize}

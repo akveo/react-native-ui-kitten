@@ -19,6 +19,7 @@ export class RkRangedCalendarDay extends React.Component {
       start: PropTypes.instanceOf(Date),
       end: PropTypes.instanceOf(Date),
     }),
+    renderContent: PropTypes.func,
     filter: PropTypes.func,
     onSelect: PropTypes.func,
     /**
@@ -27,14 +28,40 @@ export class RkRangedCalendarDay extends React.Component {
     size: PropTypes.number.isRequired,
   };
   static defaultProps = {
+    renderContent: undefined,
     filter: (() => true),
     onSelect: (() => null),
   };
 
+  static getDerivedStateFromProps(props) {
+    const isFitsFilter = props.filter(props.date);
+    return {
+      isSelected: RkRangedCalendarDay.isInRange(props.date, props.selected),
+      isDisabled: !isFitsFilter || (!RkCalendarUtil.isBetweenSafe(props.date, props.min, props.max) || false),
+      isBetweenRangeBounds: RkCalendarUtil.isBetweenSafe(props.date, props.selected.start, props.selected.end),
+      isToday: (RkCalendarUtil.isSameDaySafe(props.date, RkCalendarUtil.today()) || false),
+      isEmpty: props.date === RkCalendarUtil.defaultBoundingFallback,
+    };
+  }
+
+  static isInRange(date, range) {
+    const isSelectionStart = range.start !== undefined;
+    const isSelectionEnd = range.end !== undefined;
+    if (isSelectionStart && !isSelectionEnd) {
+      return RkCalendarUtil.isSameDaySafe(date, range.start);
+    } else if (isSelectionStart && isSelectionEnd) {
+      const isRangeStart = RkCalendarUtil.isSameDaySafe(date, range.start);
+      const isRangeEnd = RkCalendarUtil.isSameDaySafe(date, range.end);
+      const isBetweenRange = RkCalendarUtil.isBetweenSafe(date, range.start, range.end);
+      return isRangeStart || isRangeEnd || isBetweenRange;
+    }
+    return false;
+  }
+
   shouldComponentUpdate(nextProps) {
     const isSizeChanged = nextProps.size !== this.props.size;
-    const isWasInRange = this.isInRange(this.props.selected);
-    const isWillInRange = this.isInRange(nextProps.selected);
+    const isWasInRange = RkRangedCalendarDay.isInRange(this.props.date, this.props.selected);
+    const isWillInRange = RkRangedCalendarDay.isInRange(this.props.date, nextProps.selected);
     return isSizeChanged || (!isWasInRange && isWillInRange) || (isWasInRange && !isWillInRange);
   }
 
@@ -42,76 +69,48 @@ export class RkRangedCalendarDay extends React.Component {
     this.props.onSelect(this.props.date);
   };
 
-  isInRange = (range) => {
-    const isSelectionStart = range.start !== undefined;
-    const isSelectionEnd = range.end !== undefined;
-    if (isSelectionStart && !isSelectionEnd) {
-      return RkCalendarUtil.isSameDaySafe(this.props.date, range.start);
-    } else if (isSelectionStart && isSelectionEnd) {
-      const isRangeStart = RkCalendarUtil.isSameDaySafe(this.props.date, range.start);
-      const isRangeEnd = RkCalendarUtil.isSameDaySafe(this.props.date, range.end);
-      const isBetweenRange = RkCalendarUtil.isBetweenSafe(this.props.date, range.start, range.end);
-      return isRangeStart || isRangeEnd || isBetweenRange;
-    }
-    return false;
-  };
-
-  isToday = () => RkCalendarUtil.isSameDaySafe(this.props.date, RkCalendarUtil.today());
-
-  isSmallerThanMin = () => RkCalendarUtil.compareDates(this.props.date, this.props.min) < 0;
-
-  isGreaterThanMax = () => RkCalendarUtil.compareDates(this.props.date, this.props.max) > 0;
-
-  isFitsFilter = () => this.props.filter(this.props.date);
-
-  isSelected = () => this.isInRange(this.props.selected);
-
-  isDisabled = () => this.isEmpty() || this.isSmallerThanMin() || this.isGreaterThanMax() || !this.isFitsFilter();
-
-  isEmpty = () => this.props.date === RkCalendarUtil.defaultBoundingFallback;
-
-  getDate = () => (this.isEmpty() ? defaultDayValue : this.props.date.getDate());
-
-  getTextStyle = () => {
-    const isBetweenRangeBounds = RkCalendarUtil.isBetweenSafe(this.props.date, this.props.selected.start, this.props.selected.end);
-    const containerBaseStyle = this.isToday() ? [styles.container, styles.containerToday] : styles.container;
-    const containerSelectedStyle = isBetweenRangeBounds ? styles.containerSelectedBetween : styles.containerSelected;
-    const textBaseStyle = this.isToday() ? [styles.text, styles.textToday] : styles.text;
+  getTextStyle = (state) => {
+    const containerBaseStyle = state.isToday ? [styles.container, styles.containerToday] : styles.container;
+    const containerSelectedStyle = state.isBetweenRangeBounds ? styles.containerSelectedBetween : styles.containerSelected;
+    const textBaseStyle = state.isToday ? [styles.text, styles.textToday] : styles.text;
     return {
       container: {
         base: containerBaseStyle,
-        selected: this.isSelected() ? containerSelectedStyle : null,
-        disabled: this.isDisabled() ? styles.containerDisabled : null,
+        selected: state.isSelected ? containerSelectedStyle : null,
+        disabled: state.isDisabled ? styles.containerDisabled : null,
       },
       text: {
         base: textBaseStyle,
-        selected: this.isSelected() ? styles.textSelected : null,
-        disabled: this.isDisabled() ? styles.textDisabled : null,
+        selected: state.isSelected ? styles.textSelected : null,
+        disabled: state.isDisabled ? styles.textDisabled : null,
       },
     };
   };
 
-  renderText = () => {
-    const { container, text } = this.getTextStyle();
+  renderText = (date, state) => {
+    const { container, text } = this.getTextStyle(state);
     return (
       <View style={[container.base, container.selected, container.disabled]}>
-        <Text
-          style={[text.base, text.selected, text.disabled]}>
-          {this.getDate()}
+        <Text style={[text.base, text.selected, text.disabled]}>
+          {state.isEmpty ? defaultDayValue : date.getDate()}
         </Text>
       </View>
     );
   };
 
-  render = () => (
-    <TouchableWithoutFeedback
-      disabled={this.isDisabled()}
-      onPress={this.onPress}>
-      <View style={{ width: this.props.size, height: this.props.size }}>
-        {this.renderText()}
-      </View>
-    </TouchableWithoutFeedback>
-  );
+  render = () => {
+    const contentHeight = this.props.renderContent === undefined ? this.props.size : undefined;
+    const renderContentFunction = this.props.renderContent || this.renderText;
+    return (
+      <TouchableWithoutFeedback
+        disabled={this.state.isDisabled}
+        onPress={this.onPress}>
+        <View style={{ width: this.props.size, height: contentHeight }}>
+          {renderContentFunction(this.props.date, this.state)}
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  };
 }
 
 const styles = RkStyleSheet.create(theme => ({

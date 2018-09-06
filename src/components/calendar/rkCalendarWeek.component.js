@@ -11,6 +11,7 @@ export class RkCalendarWeek extends React.Component {
     max: PropTypes.instanceOf(Date).isRequired,
     dates: PropTypes.instanceOf(Date).isRequired,
     selected: PropTypes.instanceOf(Date),
+    renderDay: PropTypes.func,
     filter: PropTypes.func,
     /**
      * callback function describing selection date changes,
@@ -24,6 +25,7 @@ export class RkCalendarWeek extends React.Component {
   };
   static defaultProps = {
     selected: undefined,
+    renderDay: undefined,
     filter: (() => true),
   };
 
@@ -67,6 +69,7 @@ export class RkCalendarWeek extends React.Component {
         max={this.props.max}
         date={item}
         selected={this.props.selected}
+        renderContent={this.props.renderDay}
         filter={this.props.filter}
         onSelect={this.onDaySelect}
         size={this.props.daySize}
