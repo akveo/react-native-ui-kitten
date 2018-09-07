@@ -12,7 +12,7 @@ class RangedSelectionStrategy {
   }
 
   getStateFromSelectionStart(state, start) {
-    return this.getStateFromSelectionRange({ start });
+    return this.getStateFromSelectionRange({ start, end: undefined });
   }
 
   getStateFromSelectionEnd(state, end) {
@@ -32,7 +32,8 @@ class RangedSelectionStrategy {
   }
 
   isDayHighlighted(props) {
-    return RkCalendarService.Date.isBetweenSafe(props.date, props.selected.start, props.selected.end);
+    const isBetweenRange = RkCalendarService.Date.isBetweenSafe(props.date, props.selected.start, props.selected.end);
+    return isBetweenRange || false;
   }
 
   isDayDisabled(props) {
@@ -52,7 +53,7 @@ class RangedSelectionStrategy {
   shouldUpdateDay(props, nextProps) {
     const isWasInRange = isDateInRange(props.date, props.selected);
     const isWillInRange = isDateInRange(props.date, nextProps.selected);
-    return (!isWasInRange && isWillInRange) || (isWasInRange && !isWillInRange);
+    return isWasInRange || isWillInRange;
   }
 
   shouldUpdateWeek(props, nextProps) {
@@ -90,11 +91,9 @@ class RangedSelectionStrategy {
 function isDateInRange(date, range) {
   // false as default is case when month starts/ends with null date
 
-  const isSelectionStart = range.start !== undefined;
-  const isSelectionEnd = range.end !== undefined;
-  if (isSelectionStart && !isSelectionEnd) {
+  if (range.start && !range.end) {
     return RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
-  } else if (isSelectionStart && isSelectionEnd) {
+  } else if (range.start && range.end) {
     const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
     const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, range.end) || false;
     const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, range.start, range.end) || false;

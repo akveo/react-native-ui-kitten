@@ -96,7 +96,7 @@ export class RkCalendarDay extends React.Component {
     const renderContentFunction = this.props.renderContent || this.renderText;
     return (
       <TouchableWithoutFeedback
-        disabled={this.state.isSelected || this.state.isDisabled}
+        disabled={this.state.isDisabled}
         onPress={this.onPress}>
         <View style={{ width: this.props.size, height: contentHeight }}>
           {renderContentFunction(this.props.date, this.state)}
