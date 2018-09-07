@@ -4,31 +4,40 @@ import {
   StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { RkCalendarMonth } from './rkCalendarMonth.component';
 import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
-import * as RkCalendarService from '../services/index';
+import * as RkCalendarService from '../services';
 
-export class RkCalendarYearComponent extends React.Component {
+export class RkCalendarYear extends React.Component {
   static propTypes = {
-    dayComponent: PropTypes.func.isRequired,
-    monthComponent: PropTypes.func.isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-    selected: PropTypes.instanceOf(Date).isRequired,
+    selected: PropTypes.shape({
+      start: PropTypes.instanceOf(Date),
+      end: PropTypes.instanceOf(Date),
+    }),
     boundingMonth: PropTypes.bool,
     renderDay: PropTypes.func,
     filter: PropTypes.func,
-    /**
-     * callback function describing selection date changes,
-     * which could not be handled by this component
-     */
     onSelect: PropTypes.func.isRequired,
-    /**
-     * day component style prop describing width and height of cell
-     */
+    selectionStrategy: PropTypes.shape({
+      getStateFromSelection: PropTypes.func.isRequired,
+      isDaySelected: PropTypes.func.isRequired,
+      isDayHighlighted: PropTypes.func.isRequired,
+      isDayDisabled: PropTypes.func.isRequired,
+      isDayToday: PropTypes.func.isRequired,
+      isDayEmpty: PropTypes.func.isRequired,
+      shouldUpdateDay: PropTypes.func.isRequired,
+      shouldUpdateWeek: PropTypes.func.isRequired,
+      shouldUpdateMonth: PropTypes.func.isRequired,
+      shouldUpdateYear: PropTypes.func.isRequired,
+    }).isRequired,
+
     daySize: PropTypes.number.isRequired,
   };
   static defaultProps = {
+    selected: undefined,
     boundingMonth: true,
     renderDay: undefined,
     filter: (() => true),
@@ -47,14 +56,8 @@ export class RkCalendarYearComponent extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     const isSizeChanged = nextProps.daySize !== this.props.daySize;
-    const isWasSelected = this.isInYear(this.props.selected);
-    const isWillSelected = this.isInYear(nextProps.selected);
-    return isSizeChanged || isWasSelected || isWillSelected;
+    return isSizeChanged || nextProps.selectionStrategy.shouldUpdateYear(this.props, nextProps);
   }
-
-  onDaySelect = (date) => {
-    this.props.onSelect(date);
-  };
 
   createMonthDateByIndex = (index) => new Date(
     this.props.date.getFullYear(),
@@ -78,26 +81,23 @@ export class RkCalendarYearComponent extends React.Component {
 
   getChildComponents = () => this.state.dates.map(this.renderMonth);
 
-  renderMonth = (item) => {
-    const MonthComponent = this.props.monthComponent;
-    return (
-      <View>
-        <RkCalendarMonthHeader date={item} daySize={this.props.daySize} />
-        <MonthComponent
-          dayComponent={this.props.dayComponent}
-          min={this.props.min}
-          max={this.props.max}
-          date={item}
-          selected={this.props.selected}
-          boundingMonth={this.props.boundingMonth}
-          renderDay={this.props.renderDay}
-          filter={this.props.filter}
-          onSelect={this.onDaySelect}
-          daySize={this.props.daySize}
-        />
-      </View>
-    );
-  };
+  renderMonth = (item) => (
+    <View>
+      <RkCalendarMonthHeader date={item} daySize={this.props.daySize} />
+      <RkCalendarMonth
+        min={this.props.min}
+        max={this.props.max}
+        date={item}
+        selected={this.props.selected}
+        boundingMonth={this.props.boundingMonth}
+        renderDay={this.props.renderDay}
+        filter={this.props.filter}
+        onSelect={this.props.onSelect}
+        selectionStrategy={this.props.selectionStrategy}
+        daySize={this.props.daySize}
+      />
+    </View>
+  );
 
   render = () => (
     <View style={styles.container}>{this.getChildComponents()}</View>

@@ -4,8 +4,8 @@ import {
   View,
   Text,
 } from 'react-native';
-import * as RkCalendarService from '../services/index';
 import { RkStyleSheet } from '../../../styles/styleSheet';
+import * as RkCalendarService from '../services';
 
 export class RkCalendarDaysNames extends React.Component {
   static propTypes = {

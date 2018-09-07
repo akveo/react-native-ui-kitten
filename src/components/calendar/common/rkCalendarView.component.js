@@ -1,14 +1,22 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarService from '../services/index';
 import { RkStyleSheet } from '../../../styles/styleSheet';
+import { RkCalendarYear } from '../cells/rkCalendarYear.component';
+import * as RkCalendarService from '../services';
 
 export class RkCalendarView extends React.Component {
   static propTypes = {
-    dayComponent: PropTypes.func.isRequired,
-    monthComponent: PropTypes.func.isRequired,
-    yearComponent: PropTypes.func.isRequired,
+    selectionStrategy: PropTypes.shape({
+      isDaySelected: PropTypes.func.isRequired,
+      isDayDisabled: PropTypes.func.isRequired,
+      isDayToday: PropTypes.func.isRequired,
+      isDayEmpty: PropTypes.func.isRequired,
+      shouldUpdateDay: PropTypes.func.isRequired,
+      shouldUpdateWeek: PropTypes.func.isRequired,
+      shouldUpdateMonth: PropTypes.func.isRequired,
+      shouldUpdateYear: PropTypes.func.isRequired,
+    }).isRequired,
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     /**
@@ -42,10 +50,6 @@ export class RkCalendarView extends React.Component {
     daySize: 0,
   };
 
-  onDaySelect = (date) => {
-    this.props.onSelect(date);
-  };
-
   onLayout = (event) => this.setState({
     daySize: event.nativeEvent.layout.width / RkCalendarService.Date.DAYS_IN_WEEK,
   });
@@ -63,24 +67,20 @@ export class RkCalendarView extends React.Component {
     return RkCalendarService.Util.range(itemCount).map(this.createYearDateByIndex);
   };
 
-  renderItem = ({ item }) => {
-    const YearComponent = this.props.yearComponent;
-    return (
-      <YearComponent
-        monthComponent={this.props.monthComponent}
-        dayComponent={this.props.dayComponent}
-        min={this.props.min}
-        max={this.props.max}
-        selected={this.props.selected}
-        date={item}
-        boundingMonth={this.props.boundingMonth}
-        renderDay={this.props.renderDay}
-        filter={this.props.filter}
-        onSelect={this.onDaySelect}
-        daySize={this.state.daySize}
-      />
-    );
-  };
+  renderItem = ({ item }) => (
+    <RkCalendarYear
+      selectionStrategy={this.props.selectionStrategy}
+      min={this.props.min}
+      max={this.props.max}
+      selected={this.props.selected}
+      date={item}
+      boundingMonth={this.props.boundingMonth}
+      renderDay={this.props.renderDay}
+      filter={this.props.filter}
+      onSelect={this.props.onSelect}
+      daySize={this.state.daySize}
+    />
+  );
 
   render = () => (
     <FlatList
