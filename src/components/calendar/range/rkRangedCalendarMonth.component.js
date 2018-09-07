@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkStyleSheet } from '../../../styles/styleSheet';
-import * as RkCalendarUtil from '../services';
+import * as RkCalendarService from '../services';
 import { RkRangedCalendarWeek } from './rkRangedCalendarWeek.component';
 
 export class RkRangedCalendarMonth extends React.Component {
@@ -57,7 +57,10 @@ export class RkRangedCalendarMonth extends React.Component {
   };
 
   isInRange = (range) => {
-    const month = { start: RkCalendarUtil.getMonthStart(this.props.date), end: RkCalendarUtil.getMonthEnd(this.props.date) };
+    const month = {
+      start: RkCalendarService.Date.getMonthStart(this.props.date),
+      end: RkCalendarService.Date.getMonthEnd(this.props.date),
+    };
     const isMonthStartInRange = this.isDateInRange(month.start, range);
     const isMonthEndInRange = this.isDateInRange(month.end, range);
     const isRangeStartInMonth = this.isDateInRange(range.start, month);
@@ -71,17 +74,17 @@ export class RkRangedCalendarMonth extends React.Component {
     const isSelectionStart = range.start !== undefined;
     const isSelectionEnd = range.end !== undefined;
     if (isSelectionStart && !isSelectionEnd) {
-      return RkCalendarUtil.isSameDaySafe(date, range.start) || false;
+      return RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
     } else if (isSelectionStart && isSelectionEnd) {
-      const isRangeStart = RkCalendarUtil.isSameDaySafe(date, range.start) || false;
-      const isRangeEnd = RkCalendarUtil.isSameDaySafe(date, range.end) || false;
-      const isBetweenRange = RkCalendarUtil.isBetweenSafe(date, range.start, range.end) || false;
+      const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
+      const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, range.end) || false;
+      const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, range.start, range.end) || false;
       return isRangeStart || isRangeEnd || isBetweenRange;
     }
     return false;
   };
 
-  getData = () => RkCalendarUtil.createDaysGrid(this.props.date, this.props.boundingMonth);
+  getData = () => RkCalendarService.Month.createDaysGrid(this.props.date, this.props.boundingMonth);
 
   getChildComponents = () => this.state.dates.map(this.renderWeek);
 

@@ -4,9 +4,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarUtil from './services';
-import { RkCalendarDaysNames } from './rkCalendarDaysNames.component';
-import { RkCalendarMonthHeader } from './rkCalendarMonthHeader.component';
+import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
+import * as RkCalendarService from '../services/index';
 
 export class RkCalendarYearComponent extends React.Component {
   static propTypes = {
@@ -63,7 +62,7 @@ export class RkCalendarYearComponent extends React.Component {
     this.props.date.getDate(),
   );
 
-  isInYear = (date) => RkCalendarUtil.isSameYearSafe(date, this.props.date);
+  isInYear = (date) => RkCalendarService.Date.isSameYearSafe(date, this.props.date);
 
   getData = () => {
     if (this.isInYear(this.props.max)) {
@@ -72,9 +71,9 @@ export class RkCalendarYearComponent extends React.Component {
       const isOneInRangeYear = this.isInYear(this.props.min, this.props.max);
       const itemCount = isOneInRangeYear ? (lastMonthIndex - firstMonthIndex) : lastMonthIndex;
       const produceBounds = (index) => (isOneInRangeYear ? index + firstMonthIndex : index);
-      return RkCalendarUtil.range(itemCount + 1, produceBounds).map(this.createMonthDateByIndex);
+      return RkCalendarService.Util.range(itemCount + 1, produceBounds).map(this.createMonthDateByIndex);
     }
-    return RkCalendarUtil.range(RkCalendarUtil.MONTHS_IN_YEAR).map(this.createMonthDateByIndex);
+    return RkCalendarService.Util.range(RkCalendarService.Date.MONTHS_IN_YEAR).map(this.createMonthDateByIndex);
   };
 
   getChildComponents = () => this.state.dates.map(this.renderMonth);

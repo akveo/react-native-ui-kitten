@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarUtil from './services';
-import { RkStyleSheet } from '../../styles/styleSheet';
+import * as RkCalendarService from '../services/index';
+import { RkStyleSheet } from '../../../styles/styleSheet';
 
 export class RkCalendarWeek extends React.Component {
   static propTypes = {
@@ -54,10 +54,10 @@ export class RkCalendarWeek extends React.Component {
   isInWeek = (date) => {
     const weekStart = this.state.dates[0];
     const weekEnd = this.state.dates[this.state.dates.length - 1];
-    return date && RkCalendarUtil.isBetweenIncluding(date, weekStart, weekEnd);
+    return date && RkCalendarService.Date.isBetweenIncluding(date, weekStart, weekEnd);
   };
 
-  getData = () => this.props.dates.filter(date => date !== RkCalendarUtil.defaultBoundingFallback);
+  getData = () => this.props.dates.filter(date => date !== RkCalendarService.Month.defaultBoundingFallback);
 
   getChildComponents = () => this.props.dates.map(this.renderDay);
 

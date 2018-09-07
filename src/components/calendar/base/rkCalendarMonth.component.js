@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { RkStyleSheet } from '../../styles/styleSheet';
-import * as RkCalendarUtil from './services';
+import { RkStyleSheet } from '../../../styles/styleSheet';
+import * as RkCalendarService from '../services/index';
 import { RkCalendarWeek } from './rkCalendarWeek.component';
 
 export class RkCalendarMonthComponent extends React.Component {
@@ -53,9 +53,9 @@ export class RkCalendarMonthComponent extends React.Component {
     this.props.onSelect(date);
   };
 
-  isInMonth = (date) => RkCalendarUtil.isSameMonthSafe(date, this.props.date);
+  isInMonth = (date) => RkCalendarService.Date.isSameMonthSafe(date, this.props.date);
 
-  getData = () => RkCalendarUtil.createDaysGrid(this.props.date, this.props.boundingMonth);
+  getData = () => RkCalendarService.Month.createDaysGrid(this.props.date, this.props.boundingMonth);
 
   getChildComponents = () => this.state.dates.map(this.renderWeek);
 

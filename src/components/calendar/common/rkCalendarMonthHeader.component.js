@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkCalendarDaysNames } from './rkCalendarDaysNames.component';
 import { RkCalendarMonthName } from './rkCalendarMonthName.component';
-import { RkStyleSheet } from '../../styles/styleSheet';
+import { RkStyleSheet } from '../../../styles/styleSheet';
 
 export class RkCalendarMonthHeader extends React.Component {
   static propTypes = {

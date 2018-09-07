@@ -4,8 +4,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarUtil from '../services';
-import { RkCalendarMonthHeader } from '../rkCalendarMonthHeader.component';
+import * as RkCalendarService from '../services';
+import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
 
 export class RkRangedCalendarYear extends React.Component {
   static propTypes = {
@@ -60,7 +60,10 @@ export class RkRangedCalendarYear extends React.Component {
   };
 
   isInRange = (range) => {
-    const year = { start: RkCalendarUtil.getYearStart(this.props.date), end: RkCalendarUtil.getYearEnd(this.props.date) };
+    const year = {
+      start: RkCalendarService.Date.getYearStart(this.props.date),
+      end: RkCalendarService.Date.getYearEnd(this.props.date),
+    };
     const isYearStartInRange = this.isDateInRange(year.start, range);
     const isYearEndInRange = this.isDateInRange(year.end, range);
     const isYearStartInMonth = this.isDateInRange(range.start, year);
@@ -74,11 +77,11 @@ export class RkRangedCalendarYear extends React.Component {
     const isSelectionStart = range.start !== undefined;
     const isSelectionEnd = range.end !== undefined;
     if (isSelectionStart && !isSelectionEnd) {
-      return RkCalendarUtil.isSameDaySafe(date, range.start) || false;
+      return RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
     } else if (isSelectionStart && isSelectionEnd) {
-      const isRangeStart = RkCalendarUtil.isSameDaySafe(date, range.start) || false;
-      const isRangeEnd = RkCalendarUtil.isSameDaySafe(date, range.end) || false;
-      const isBetweenRange = RkCalendarUtil.isBetweenSafe(date, range.start, range.end) || false;
+      const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
+      const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, range.end) || false;
+      const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, range.start, range.end) || false;
       return isRangeStart || isRangeEnd || isBetweenRange;
     }
     return false;
@@ -90,7 +93,7 @@ export class RkRangedCalendarYear extends React.Component {
     this.props.date.getDate(),
   );
 
-  isInYear = (date) => RkCalendarUtil.isSameYearSafe(date, this.props.date);
+  isInYear = (date) => RkCalendarService.Date.isSameYearSafe(date, this.props.date);
 
   getData = () => {
     if (this.isInYear(this.props.max)) {
@@ -99,9 +102,9 @@ export class RkRangedCalendarYear extends React.Component {
       const isOneInRangeYear = this.isInYear(this.props.min, this.props.max);
       const itemCount = isOneInRangeYear ? (lastMonthIndex - firstMonthIndex) : lastMonthIndex;
       const produceBounds = (index) => (isOneInRangeYear ? index + firstMonthIndex : index);
-      return RkCalendarUtil.range(itemCount + 1, produceBounds).map(this.createMonthDateByIndex);
+      return RkCalendarService.Util.range(itemCount + 1, produceBounds).map(this.createMonthDateByIndex);
     }
-    return RkCalendarUtil.range(RkCalendarUtil.MONTHS_IN_YEAR).map(this.createMonthDateByIndex);
+    return RkCalendarService.Util.range(RkCalendarService.Date.MONTHS_IN_YEAR).map(this.createMonthDateByIndex);
   };
 
   getChildComponents = () => this.state.dates.map(this.renderMonth);

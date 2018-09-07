@@ -4,8 +4,8 @@ import {
   View,
   Text,
 } from 'react-native';
-import { RkStyleSheet } from '../../styles/styleSheet';
-import LocaleService from './services/locale.service';
+import * as RkCalendarService from '../services/index';
+import { RkStyleSheet } from '../../../styles/styleSheet';
 
 export class RkCalendarDaysNames extends React.Component {
   static propTypes = {
@@ -16,7 +16,7 @@ export class RkCalendarDaysNames extends React.Component {
     daySize: PropTypes.number.isRequired,
   };
 
-  dayOfWeekNames = LocaleService.getDayOfWeekNames();
+  dayOfWeekNames = RkCalendarService.Locale.getDayOfWeekNames();
 
   getChildComponents = () => this.dayOfWeekNames.map(this.renderDayOfWeek);
 

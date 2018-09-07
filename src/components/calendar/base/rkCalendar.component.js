@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RkCalendarView } from './rkCalendarView.component';
+import { RkCalendarView } from '../common/rkCalendarView.component';
 import { RkCalendarMonthComponent } from './rkCalendarMonth.component';
 import { RkCalendarYearComponent } from './rkCalendarYear.component';
 import { RkCalendarDayComponent } from './rkCalendarDay.component';
-import * as RkCalendarUtil from './services';
+import * as RkCalendarService from '../services/index';
 
 export class RkCalendar extends React.Component {
   static propTypes = {
@@ -23,7 +23,7 @@ export class RkCalendar extends React.Component {
   };
 
   state = {
-    selected: RkCalendarUtil.today(),
+    selected: RkCalendarService.Date.today(),
   };
 
   onDaySelect = (date) => {

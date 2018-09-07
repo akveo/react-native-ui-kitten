@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RkCalendarView } from './rkCalendarView.component';
-import { RkRangedCalendarDay } from './range/rkRangedCalendarDay.component';
-import { RkRangedCalendarMonth } from './range/rkRangedCalendarMonth.component';
-import { RkRangedCalendarYear } from './range/rkRangedCalendarYear.component';
-import * as RkCalendarUtil from './services';
+import { RkCalendarView } from '../common/rkCalendarView.component';
+import { RkRangedCalendarDay } from './rkRangedCalendarDay.component';
+import { RkRangedCalendarMonth } from './rkRangedCalendarMonth.component';
+import { RkRangedCalendarYear } from './rkRangedCalendarYear.component';
+import * as RkCalendarService from '../services/index';
 
 export class RkRangedCalendar extends React.Component {
   static propTypes = {
@@ -52,7 +52,7 @@ export class RkRangedCalendar extends React.Component {
 
   selectEnd(date) {
     const { start } = this.state.selected;
-    if (RkCalendarUtil.compareDates(date, start) > 0) {
+    if (RkCalendarService.Date.compareDates(date, start) > 0) {
       this.selectRange({ start, end: date });
     } else {
       this.selectRange({ start: date, end: start });

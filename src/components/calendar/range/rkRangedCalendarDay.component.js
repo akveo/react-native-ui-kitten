@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarUtil from '../services';
+import * as RkCalendarService from '../services';
 import { RkStyleSheet } from '../../../styles/styleSheet';
 
 const defaultDayValue = '';
@@ -37,10 +37,10 @@ export class RkRangedCalendarDay extends React.Component {
     const isFitsFilter = props.filter(props.date);
     return {
       isSelected: RkRangedCalendarDay.isInRange(props.date, props.selected),
-      isDisabled: !isFitsFilter || (!RkCalendarUtil.isBetweenSafe(props.date, props.min, props.max) || false),
-      isBetweenRangeBounds: RkCalendarUtil.isBetweenSafe(props.date, props.selected.start, props.selected.end),
-      isToday: (RkCalendarUtil.isSameDaySafe(props.date, RkCalendarUtil.today()) || false),
-      isEmpty: props.date === RkCalendarUtil.defaultBoundingFallback,
+      isDisabled: !isFitsFilter || (!RkCalendarService.Date.isBetweenSafe(props.date, props.min, props.max) || false),
+      isBetweenRangeBounds: RkCalendarService.Date.isBetweenSafe(props.date, props.selected.start, props.selected.end),
+      isToday: (RkCalendarService.Date.isSameDaySafe(props.date, RkCalendarService.Date.today()) || false),
+      isEmpty: props.date === RkCalendarService.Month.defaultBoundingFallback,
     };
   }
 
@@ -48,11 +48,11 @@ export class RkRangedCalendarDay extends React.Component {
     const isSelectionStart = range.start !== undefined;
     const isSelectionEnd = range.end !== undefined;
     if (isSelectionStart && !isSelectionEnd) {
-      return RkCalendarUtil.isSameDaySafe(date, range.start);
+      return RkCalendarService.Date.isSameDaySafe(date, range.start);
     } else if (isSelectionStart && isSelectionEnd) {
-      const isRangeStart = RkCalendarUtil.isSameDaySafe(date, range.start);
-      const isRangeEnd = RkCalendarUtil.isSameDaySafe(date, range.end);
-      const isBetweenRange = RkCalendarUtil.isBetweenSafe(date, range.start, range.end);
+      const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, range.start);
+      const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, range.end);
+      const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, range.start, range.end);
       return isRangeStart || isRangeEnd || isBetweenRange;
     }
     return false;

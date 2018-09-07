@@ -5,8 +5,8 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarUtil from './services';
-import { RkStyleSheet } from '../../styles/styleSheet';
+import * as RkCalendarService from '../services/index';
+import { RkStyleSheet } from '../../../styles/styleSheet';
 
 const defaultDayValue = '';
 
@@ -33,17 +33,17 @@ export class RkCalendarDayComponent extends React.Component {
   static getDerivedStateFromProps(props) {
     const isFitsFilter = props.filter(props.date);
     return {
-      isSelected: RkCalendarUtil.isSameDaySafe(props.date, props.selected) || false,
-      isDisabled: !isFitsFilter || (!RkCalendarUtil.isBetweenSafe(props.date, props.min, props.max) || false),
-      isToday: (RkCalendarUtil.isSameDaySafe(props.date, RkCalendarUtil.today()) || false),
-      isEmpty: props.date === RkCalendarUtil.defaultBoundingFallback,
+      isSelected: RkCalendarService.Date.isSameDaySafe(props.date, props.selected) || false,
+      isDisabled: !isFitsFilter || (!RkCalendarService.Date.isBetweenSafe(props.date, props.min, props.max) || false),
+      isToday: (RkCalendarService.Date.isSameDaySafe(props.date, RkCalendarService.Date.today()) || false),
+      isEmpty: props.date === RkCalendarService.Month.defaultBoundingFallback,
     };
   }
 
   shouldComponentUpdate(nextProps) {
     const isSizeChanged = nextProps.size !== this.props.size;
-    const isWasSelected = RkCalendarUtil.isSameDaySafe(this.props.date, this.props.selected);
-    const isWillSelected = RkCalendarUtil.isSameDaySafe(this.props.date, nextProps.selected);
+    const isWasSelected = RkCalendarService.Date.isSameDaySafe(this.props.date, this.props.selected);
+    const isWillSelected = RkCalendarService.Date.isSameDaySafe(this.props.date, nextProps.selected);
     return isSizeChanged || isWasSelected || isWillSelected;
   }
 

@@ -1,4 +1,4 @@
-import { range } from './helpers';
+import { range } from './calendarUtil.service';
 
 export const DAYS_IN_WEEK = 7;
 export const MONTHS_IN_YEAR = 12;

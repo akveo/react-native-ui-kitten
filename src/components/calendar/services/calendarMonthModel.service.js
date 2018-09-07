@@ -1,6 +1,8 @@
-import * as DateTimeUtil from './dateTimeUtil';
-import { batch } from './helpers';
-import LocaleService from './locale.service';
+import * as DateTimeUtil from './calendarDate.service';
+import { batch } from './calendarUtil.service';
+import LocaleService from './calendarLocale.service';
+
+export const defaultBoundingFallback = null;
 
 /**
  * @param activeMonth - any date object of requested month
@@ -10,8 +12,6 @@ import LocaleService from './locale.service';
  *
  * @return 2-dim array of days of activeMonth
  */
-
-export const defaultBoundingFallback = null;
 
 export function createDaysGrid(activeMonth, boundingMonth = true, boundingFallback = defaultBoundingFallback) {
   const weeks = createDates(activeMonth);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { RkStyleSheet } from '../../styles/styleSheet';
-import LocaleService from './services/locale.service';
+import { RkStyleSheet } from '../../../styles/styleSheet';
+import LocaleService from '../services/calendarLocale.service';
 
 export class RkCalendarMonthName extends React.Component {
   static propTypes = {

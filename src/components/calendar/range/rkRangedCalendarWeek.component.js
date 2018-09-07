@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarUtil from '../services';
+import * as RkCalendarService from '../services';
 import { RkStyleSheet } from '../../../styles/styleSheet';
 
 export class RkRangedCalendarWeek extends React.Component {
@@ -54,7 +54,10 @@ export class RkRangedCalendarWeek extends React.Component {
   };
 
   isInRange = (range) => {
-    const week = { start: this.state.dates[0], end: this.state.dates[this.state.dates.length - 1] };
+    const week = {
+      start: this.state.dates[0],
+      end: this.state.dates[this.state.dates.length - 1],
+    };
     const isWeekStartInRange = this.isDateInRange(week.start, range);
     const isWeekEndInRange = this.isDateInRange(week.end, range);
     const isRangeStartInWeek = this.isDateInRange(range.start, week);
@@ -68,17 +71,17 @@ export class RkRangedCalendarWeek extends React.Component {
     const isSelectionStart = range.start !== undefined;
     const isSelectionEnd = range.end !== undefined;
     if (isSelectionStart && !isSelectionEnd) {
-      return RkCalendarUtil.isSameDaySafe(date, range.start) || false;
+      return RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
     } else if (isSelectionStart && isSelectionEnd) {
-      const isRangeStart = RkCalendarUtil.isSameDaySafe(date, range.start) || false;
-      const isRangeEnd = RkCalendarUtil.isSameDaySafe(date, range.end) || false;
-      const isBetweenRange = RkCalendarUtil.isBetweenSafe(date, range.start, range.end) || false;
+      const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
+      const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, range.end) || false;
+      const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, range.start, range.end) || false;
       return isRangeStart || isRangeEnd || isBetweenRange;
     }
     return false;
   };
 
-  getData = () => this.props.dates.filter(date => date !== RkCalendarUtil.defaultBoundingFallback);
+  getData = () => this.props.dates.filter(date => date !== RkCalendarService.Month.defaultBoundingFallback);
 
   getChildComponents = () => this.props.dates.map(this.renderDay);
 

@@ -1,4 +1,4 @@
-class LocaleService {
+class CalendarLocale {
   locale = '';
 
   weekDays = [];
@@ -34,4 +34,4 @@ class LocaleService {
   }
 }
 
-export default new LocaleService('en-US');
+export default new CalendarLocale('en-US');

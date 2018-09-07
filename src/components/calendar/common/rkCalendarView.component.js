@@ -1,8 +1,8 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarUtil from './services';
-import { RkStyleSheet } from '../../styles/styleSheet';
+import * as RkCalendarService from '../services/index';
+import { RkStyleSheet } from '../../../styles/styleSheet';
 
 export class RkCalendarView extends React.Component {
   static propTypes = {
@@ -47,7 +47,7 @@ export class RkCalendarView extends React.Component {
   };
 
   onLayout = (event) => this.setState({
-    daySize: event.nativeEvent.layout.width / RkCalendarUtil.DAYS_IN_WEEK,
+    daySize: event.nativeEvent.layout.width / RkCalendarService.Date.DAYS_IN_WEEK,
   });
 
   getItemKey = (index) => `${index}`;
@@ -60,7 +60,7 @@ export class RkCalendarView extends React.Component {
 
   getData = () => {
     const itemCount = (this.props.max.getFullYear() - this.props.min.getFullYear()) + 1;
-    return RkCalendarUtil.range(itemCount).map(this.createYearDateByIndex);
+    return RkCalendarService.Util.range(itemCount).map(this.createYearDateByIndex);
   };
 
   renderItem = ({ item }) => {
