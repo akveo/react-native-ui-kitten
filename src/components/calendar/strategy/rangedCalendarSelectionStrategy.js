@@ -24,40 +24,46 @@ class RangedSelectionStrategy {
   }
 
   getStateFromSelectionRange(range) {
-    return { selected: range };
+    return {
+      selected: range,
+    };
   }
 
   isDaySelected(props) {
-    return isDateInRange(props.date, props.selected);
+    const { date, selected: range } = props;
+    return isDateInRange(date, range);
   }
 
   isDayHighlighted(props) {
-    const isBetweenRange = RkCalendarService.Date.isBetweenSafe(props.date, props.selected.start, props.selected.end);
-    return isBetweenRange || false;
+    const { date, selected } = props;
+    return RkCalendarService.Date.isBetweenSafe(date, selected.start, selected.end) || false;
   }
 
   isDayDisabled(props) {
-    const isFitsFilter = props.filter(props.date);
-    const isBetweenRange = !RkCalendarService.Date.isBetweenSafe(props.date, props.min, props.max) || false;
-    return !isFitsFilter || isBetweenRange;
+    const { date, min, max } = props;
+    return !props.filter(date) || !(RkCalendarService.Date.isBetweenSafe(date, min, max) || false);
   }
 
   isDayToday(props) {
-    return (RkCalendarService.Date.isSameDaySafe(props.date, RkCalendarService.Date.today()) || false);
+    const { date } = props;
+    return (RkCalendarService.Date.isSameDaySafe(date, RkCalendarService.Date.today()) || false);
   }
 
   isDayEmpty(props) {
-    return props.date === RkCalendarService.Month.defaultBoundingFallback;
+    const { date } = props;
+    return date === RkCalendarService.Month.defaultBoundingFallback;
   }
 
   shouldUpdateDay(props, nextProps) {
-    const isWasInRange = isDateInRange(props.date, props.selected);
-    const isWillInRange = isDateInRange(props.date, nextProps.selected);
-    return isWasInRange || isWillInRange;
+    const { date, selected: currentSelected } = props;
+    const { selected: nextSelected } = nextProps;
+    const isWasSelected = isDateInRange(date, currentSelected);
+    const isWillSelected = isDateInRange(date, nextSelected);
+    return isWasSelected || isWillSelected;
   }
 
   shouldUpdateWeek(props, nextProps) {
-    const dates = nextProps.dates.filter(date => date !== RkCalendarService.Month.defaultBoundingFallback);
+    const dates = props.dates.filter(d => d !== RkCalendarService.Month.defaultBoundingFallback);
     const weekRange = {
       start: dates[0],
       end: dates[dates.length - 1],
@@ -90,13 +96,13 @@ class RangedSelectionStrategy {
 
 function isDateInRange(date, range) {
   // false as default is case when month starts/ends with null date
-
-  if (range.start && !range.end) {
-    return RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
-  } else if (range.start && range.end) {
-    const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, range.start) || false;
-    const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, range.end) || false;
-    const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, range.start, range.end) || false;
+  const { start, end } = range;
+  if (start && !end) {
+    return RkCalendarService.Date.isSameDaySafe(date, start) || false;
+  } else if (start && end) {
+    const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, start) || false;
+    const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, end) || false;
+    const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, start, end) || false;
     return isRangeStart || isRangeEnd || isBetweenRange;
   }
   return false;

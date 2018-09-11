@@ -6,16 +6,15 @@ export const defaultBoundingFallback = null;
 
 /**
  * @param activeMonth - any date object of requested month
- * @param boundingMonth - defines to include previous or next month dates in grid, or not.
+ * @param isBounding - defines to include previous or next month dates in grid, or not.
  * if @code{false} will include null.
- * @param boundingFallback - fallback value for bounding date if not included
+ * @param fallback - fallback value for bounding date if not included
  *
  * @return 2-dim array of days of activeMonth
  */
-
-export function createDaysGrid(activeMonth, boundingMonth = true, boundingFallback = defaultBoundingFallback) {
+export function createDaysGrid(activeMonth, isBounding = true, fallback = defaultBoundingFallback) {
   const weeks = createDates(activeMonth);
-  return withBoundingMonths(weeks, activeMonth, boundingMonth, boundingFallback);
+  return withBoundingMonths(weeks, activeMonth, isBounding, fallback);
 }
 
 function createDates(activeMonth) {
@@ -24,67 +23,44 @@ function createDates(activeMonth) {
   return batch(days, DateTimeUtil.DAYS_IN_WEEK, startOfWeekDayDiff);
 }
 
-function withBoundingMonths(weeks, activeMonth, boundingMonth, boundingFallback) {
-  let withBoundingMonths = weeks;
-
-  if (isShouldAddPrevBoundingMonth(withBoundingMonths)) {
-    withBoundingMonths = addPrevBoundingMonth(
-      withBoundingMonths,
-      activeMonth,
-      boundingMonth,
-      boundingFallback,
-    );
+function withBoundingMonths(weeks, activeMonth, isBounding, fallback) {
+  let boundedWeeks = weeks;
+  if (isShouldAddPrevBoundingMonth(boundedWeeks)) {
+    boundedWeeks = addPrevBoundingMonth(boundedWeeks, activeMonth, isBounding, fallback);
   }
-
-  if (isShouldAddNextBoundingMonth(withBoundingMonths)) {
-    withBoundingMonths = addNextBoundingMonth(
-      withBoundingMonths,
-      activeMonth,
-      boundingMonth,
-      boundingFallback,
-    );
+  if (isShouldAddNextBoundingMonth(boundedWeeks)) {
+    boundedWeeks = addNextBoundingMonth(boundedWeeks, activeMonth, isBounding, fallback);
   }
-
-  return withBoundingMonths;
+  return boundedWeeks;
 }
 
-function addPrevBoundingMonth(weeks, activeMonth, boundingMonth, boundingFallback) {
+function addPrevBoundingMonth(weeks, activeMonth, isBounding, fallback) {
   const firstWeek = weeks.shift();
   const requiredItems = DateTimeUtil.DAYS_IN_WEEK - firstWeek.length;
-  firstWeek.unshift(...createPrevBoundingDays(
-    activeMonth,
-    boundingMonth,
-    requiredItems,
-    boundingFallback,
-  ));
+  firstWeek.unshift(...createPrevBoundingDays(activeMonth, isBounding, requiredItems, fallback));
   return [firstWeek, ...weeks];
 }
 
-function addNextBoundingMonth(weeks, activeMonth, boundingMonth, boundingFallback) {
+function addNextBoundingMonth(weeks, activeMonth, isBounding, fallback) {
   const lastWeek = weeks.pop();
   const requiredItems = DateTimeUtil.DAYS_IN_WEEK - lastWeek.length;
-  lastWeek.push(...createNextBoundingDays(
-    activeMonth,
-    boundingMonth,
-    requiredItems,
-    boundingFallback,
-  ));
+  lastWeek.push(...createNextBoundingDays(activeMonth, isBounding, requiredItems, fallback));
   return [...weeks, lastWeek];
 }
 
-function createPrevBoundingDays(activeMonth, boundingMonth, requiredItems, boundingFallback) {
+function createPrevBoundingDays(activeMonth, isBounding, requiredItems, fallback) {
   const month = DateTimeUtil.addMonth(activeMonth, -1);
   const daysInMonth = DateTimeUtil.getNumberOfDaysInMonth(month);
   return DateTimeUtil.createDateRangeForMonth(month)
     .slice(daysInMonth - requiredItems)
-    .map(date => (boundingMonth ? date : boundingFallback));
+    .map(date => (isBounding ? date : fallback));
 }
 
-function createNextBoundingDays(activeMonth, boundingMonth, requiredItems, boundingFallback) {
+function createNextBoundingDays(activeMonth, isBounding, requiredItems, fallback) {
   const month = DateTimeUtil.addMonth(activeMonth, 1);
   return DateTimeUtil.createDateRangeForMonth(month)
     .slice(0, requiredItems)
-    .map(date => (boundingMonth ? date : boundingFallback));
+    .map(date => (isBounding ? date : fallback));
 }
 
 function getStartOfWeekDayDiff(date) {

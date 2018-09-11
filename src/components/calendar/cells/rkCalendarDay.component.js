@@ -6,12 +6,17 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkStyleSheet } from '../../../styles/styleSheet';
+import * as RkCalendarService from '../services';
 
 const defaultDayValue = '';
 
 export class RkCalendarDay extends React.Component {
   static propTypes = {
+    // used in selection-strategy
+    // eslint-disable-next-line react/no-unused-prop-types
     min: PropTypes.instanceOf(Date).isRequired,
+    // used in selection-strategy
+    // eslint-disable-next-line react/no-unused-prop-types
     max: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date),
     selected: PropTypes.shape({
@@ -19,6 +24,8 @@ export class RkCalendarDay extends React.Component {
       end: PropTypes.instanceOf(Date),
     }),
     renderContent: PropTypes.func,
+    // used in selection-strategy
+    // eslint-disable-next-line react/no-unused-prop-types
     filter: PropTypes.func,
     onSelect: PropTypes.func,
     selectionStrategy: PropTypes.shape({
@@ -37,6 +44,7 @@ export class RkCalendarDay extends React.Component {
     size: PropTypes.number.isRequired,
   };
   static defaultProps = {
+    date: RkCalendarService.Month.defaultBoundingFallback,
     selected: undefined,
     renderContent: undefined,
     filter: (() => true),
@@ -70,29 +78,26 @@ export class RkCalendarDay extends React.Component {
     this.props.onSelect(this.props.date);
   };
 
-  getTextStyle = (state) => {
-    const containerBaseStyle = state.isToday ? [styles.container, styles.containerToday] : styles.container;
-    const containerSelectedStyle = state.isHighlighted ? styles.containerHighlighted : styles.containerSelected;
-    const textBaseStyle = state.isToday ? [styles.text, styles.textToday] : styles.text;
-    return {
-      container: {
-        base: containerBaseStyle,
-        selected: state.isSelected ? containerSelectedStyle : null,
-        disabled: state.isDisabled ? styles.containerDisabled : null,
-      },
-      text: {
-        base: textBaseStyle,
-        selected: state.isSelected ? styles.textSelected : null,
-        disabled: state.isDisabled ? styles.textDisabled : null,
-      },
-    };
-  };
+  getContentStyle = (state) => ({
+    container: {
+      base: state.isToday ? [styles.container, styles.containerToday] : styles.container,
+      selected: state.isSelected ? styles.containerSelected : null,
+      highlighted: state.isHighlighted ? styles.containerHighlighted : null,
+      disabled: state.isDisabled ? styles.containerDisabled : null,
+    },
+    text: {
+      base: state.isToday ? [styles.text, styles.textToday] : styles.text,
+      selected: state.isSelected ? styles.textSelected : null,
+      highlighted: state.isHighlighted ? styles.textHighlighted : null,
+      disabled: state.isDisabled ? styles.textDisabled : null,
+    },
+  });
 
   renderText = (date, state) => {
-    const { container, text } = this.getTextStyle(state);
+    const { container, text } = this.getContentStyle(state);
     return (
-      <View style={[container.base, container.selected, container.disabled]}>
-        <Text style={[text.base, text.selected, text.disabled]}>
+      <View style={[container.base, container.selected, container.highlighted, container.disabled]}>
+        <Text style={[text.base, text.selected, text.highlighted, text.disabled]}>
           {state.isEmpty ? defaultDayValue : date.getDate()}
         </Text>
       </View>
@@ -148,6 +153,8 @@ const styles = RkStyleSheet.create(theme => ({
     color: theme.colors.text.inverse,
     fontWeight: 'bold',
   },
-  textDisabled: {
+  textHighlighted: {
+    fontWeight: '300',
   },
+  textDisabled: {},
 }));
