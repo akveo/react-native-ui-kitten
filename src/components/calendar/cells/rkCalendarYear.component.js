@@ -82,7 +82,7 @@ export class RkCalendarYear extends React.Component {
   getChildComponents = () => this.state.dates.map(this.renderMonth);
 
   renderMonth = (item) => (
-    <View>
+    <View key={`${item.getMonth()}`}>
       <RkCalendarMonthHeader date={item} daySize={this.props.daySize} />
       <RkCalendarMonth
         min={this.props.min}

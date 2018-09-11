@@ -43,6 +43,14 @@ export class RkCalendarDay extends React.Component {
     onSelect: (() => null),
   };
 
+  state = {
+    isSelected: false,
+    isHighlighted: false,
+    isDisabled: false,
+    isToday: false,
+    isEmpty: false,
+  };
+
   static getDerivedStateFromProps(props) {
     return {
       isSelected: props.selectionStrategy.isDaySelected(props),

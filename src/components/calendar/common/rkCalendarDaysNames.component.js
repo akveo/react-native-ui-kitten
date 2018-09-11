@@ -20,8 +20,9 @@ export class RkCalendarDaysNames extends React.Component {
 
   getChildComponents = () => this.dayOfWeekNames.map(this.renderDayOfWeek);
 
-  renderDayOfWeek = (item) => (
+  renderDayOfWeek = (item, index) => (
     <Text
+      key={`${index}`}
       style={[styles.text, { width: this.props.daySize }]}>
       {item.toUpperCase()}
     </Text>

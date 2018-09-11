@@ -57,8 +57,9 @@ export class RkCalendarMonth extends React.Component {
 
   getChildComponents = () => this.state.dates.map(this.renderWeek);
 
-  renderWeek = (item) => (
+  renderWeek = (item, index) => (
     <RkCalendarWeek
+      key={`${index}`}
       min={this.props.min}
       max={this.props.max}
       dates={item}
