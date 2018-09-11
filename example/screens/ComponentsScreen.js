@@ -22,15 +22,14 @@ export class ComponentsScreen extends React.Component {
   };
   static data = [
     {
-      title: 'Calendar',
-      route: 'Calendar',
-    },
-    {
       title: 'Pickers',
       route: 'Picker',
     }, {
       title: 'Buttons',
       route: 'Button',
+    }, {
+      title: 'Calendars',
+      route: 'Calendars',
     }, {
       title: 'Switches',
       route: 'Switch',

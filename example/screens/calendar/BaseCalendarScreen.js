@@ -5,15 +5,16 @@ import {
   RkStyleSheet,
 } from 'react-native-ui-kitten';
 
-export class CalendarScreen extends React.Component {
-  onDaySelect = (date) => {
+export class BaseCalendarScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Base Calendar',
   };
 
   getBounds = () => {
-    const now = new Date();
+    const min = new Date(2018, 1, 1);
     return {
-      min: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1),
-      max: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate()),
+      min,
+      max: new Date(min.getFullYear() + 1, min.getMonth(), min.getDate()),
     };
   };
 
@@ -22,11 +23,8 @@ export class CalendarScreen extends React.Component {
     return (
       <View style={styles.container}>
         <RkCalendar
-          type='range'
           min={bounds.min}
           max={bounds.max}
-          boundingMonth={false}
-          onSelect={this.onDaySelect}
         />
       </View>
     );

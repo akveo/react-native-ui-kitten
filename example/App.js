@@ -15,9 +15,14 @@ import { bootstrap } from './style/themeBootstrapper';
 bootstrap();
 
 const ExplorerApp = StackNavigator({
-  Home: { screen: Screens.CalendarScreen },
+  Home: { screen: Screens.ComponentsScreen },
   Picker: { screen: Screens.PickerScreen },
   Button: { screen: Screens.ButtonScreen },
+  Calendars: { screen: Screens.CalendarScreen },
+  BaseCalendar: { screen: Screens.BaseCalendarScreen },
+  RangeCalendar: { screen: Screens.RangeCalendarScreen },
+  BoundingCalendar: { screen: Screens.BoundingCalendarScreen },
+  CustomCalendar: { screen: Screens.CustomCalendarScreen },
   Switch: { screen: Screens.SwitchScreen },
   Choice: { screen: Screens.ChoiceScreen },
   Tab: { screen: Screens.TabScreen },
@@ -26,7 +31,6 @@ const ExplorerApp = StackNavigator({
   Input: { screen: Screens.InputScreen },
   Image: { screen: Screens.ImageScreen },
   Gallery: { screen: Screens.GalleryScreen },
-  Calendar: { screen: Screens.CalendarScreen },
   Settings: { screen: Screens.SettingsScreen },
   ChoiceCustomization: { screen: Screens.ChoiceCustomizationScreen },
 }, {
