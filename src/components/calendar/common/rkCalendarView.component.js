@@ -1,5 +1,8 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import {
+  View,
+  FlatList,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { RkStyleSheet } from '../../../styles/styleSheet';
 import { RkCalendarYear } from '../cells/rkCalendarYear.component';
@@ -47,7 +50,7 @@ export class RkCalendarView extends React.Component {
   };
 
   state = {
-    daySize: 0,
+    daySize: -1,
   };
 
   onLayout = (event) => this.setState({
@@ -78,15 +81,22 @@ export class RkCalendarView extends React.Component {
     />
   );
 
-  render = () => (
+  renderPlaceholder = () => (
+    <View onLayout={this.onLayout} />
+  );
+
+  renderView = () => (
     <FlatList
       style={styles.container}
       data={this.getData()}
       renderItem={this.renderItem}
       keyExtractor={this.getItemKey}
-      onLayout={this.onLayout}
     />
   );
+
+  render() {
+    return this.state.daySize < 0 ? this.renderPlaceholder() : this.renderView();
+  }
 }
 
 const styles = RkStyleSheet.create(theme => ({
