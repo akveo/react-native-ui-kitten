@@ -13,14 +13,6 @@ export class CustomCalendarScreen extends React.Component {
     title: 'Custom Calendar',
   };
 
-  getBounds = () => {
-    const min = new Date(2018, 1, 1);
-    return {
-      min,
-      max: new Date(min.getFullYear() + 1, min.getMonth(), min.getDate()),
-    };
-  };
-
   getContentStyle = (state) => ({
     container: {
       base: state.isToday ? [styles.dayContainer, styles.dayContainerToday] : styles.dayContainer,
@@ -54,18 +46,15 @@ export class CustomCalendarScreen extends React.Component {
     );
   };
 
-  render = () => {
-    const bounds = this.getBounds();
-    return (
-      <View style={styles.container}>
-        <RkCalendar
-          min={bounds.min}
-          max={bounds.max}
-          renderDay={this.renderDay}
-        />
-      </View>
-    );
-  };
+  render = () => (
+    <View style={styles.container}>
+      <RkCalendar
+        min={new Date(2018, 0, 1)}
+        max={new Date(2019, 0, 1)}
+        renderDay={this.renderDay}
+      />
+    </View>
+  );
 }
 
 const styles = RkStyleSheet.create(theme => ({

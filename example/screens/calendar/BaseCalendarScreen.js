@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import {
   RkCalendar,
+  RkCalendarMonth,
   RkStyleSheet,
 } from 'react-native-ui-kitten';
 
@@ -10,25 +11,14 @@ export class BaseCalendarScreen extends React.Component {
     title: 'Base Calendar',
   };
 
-  getBounds = () => {
-    const min = new Date(2018, 1, 1);
-    return {
-      min,
-      max: new Date(min.getFullYear() + 1, min.getMonth(), min.getDate()),
-    };
-  };
-
-  render = () => {
-    const bounds = this.getBounds();
-    return (
-      <View style={styles.container}>
-        <RkCalendar
-          min={bounds.min}
-          max={bounds.max}
-        />
-      </View>
-    );
-  };
+  render = () => (
+    <View style={styles.container}>
+      <RkCalendar
+        min={new Date(2018, 0, 1)}
+        max={new Date(2019, 0, 1)}
+      />
+    </View>
+  );
 }
 
 const styles = RkStyleSheet.create(theme => ({
