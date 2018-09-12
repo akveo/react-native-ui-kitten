@@ -56,15 +56,11 @@ export class RkCalendarView extends React.Component {
 
   getItemKey = (index) => `${index}`;
 
-  createYearDateByIndex = (index) => new Date(
-    this.props.min.getFullYear() + index,
-    this.props.min.getMonth(),
-    this.props.min.getDate(),
-  );
+  createYearDateByIndex = (index) => new Date(this.props.min.getFullYear() + index, 0, 1);
 
   getData = () => {
     const itemCount = (this.props.max.getFullYear() - this.props.min.getFullYear()) + 1;
-    return RkCalendarService.Util.range(itemCount).map(this.createYearDateByIndex);
+    return RkCalendarService.Util.range(itemCount, this.createYearDateByIndex);
   };
 
   renderItem = ({ item }) => (

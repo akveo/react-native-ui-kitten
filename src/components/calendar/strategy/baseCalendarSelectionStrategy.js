@@ -22,7 +22,9 @@ class BaseSelectionStrategy {
 
   isDayDisabled(props) {
     const { date, min, max } = props;
-    return !props.filter(date) || (!RkCalendarService.Date.isBetweenSafe(date, min, max) || false);
+    const isFitsFilter = props.filter(date);
+    const isBetweenRange = (RkCalendarService.Date.isBetweenIncludingSafe(date, min, max) || false);
+    return !isFitsFilter || !isBetweenRange;
   }
 
   isDayToday(props) {

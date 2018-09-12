@@ -59,25 +59,27 @@ export class RkCalendarYear extends React.Component {
     return isSizeChanged || nextProps.selectionStrategy.shouldUpdateYear(this.props, nextProps);
   }
 
-  createMonthDateByIndex = (index) => new Date(
-    this.props.date.getFullYear(),
-    index,
-    this.props.date.getDate(),
-  );
-
-  isInYear = (date) => RkCalendarService.Date.isSameYearSafe(date, this.props.date);
+  createMonthDateByIndex = (index) => new Date(this.props.date.getFullYear(), index, 1);
 
   getData = () => {
-    const produceItems = this.createMonthDateByIndex;
-    if (this.isInYear(this.props.max)) {
-      const firstMonthIndex = this.props.min.getMonth();
-      const lastMonthIndex = this.props.max.getMonth();
-      const isOneInRangeYear = this.isInYear(this.props.min, this.props.max);
-      const itemCount = isOneInRangeYear ? (lastMonthIndex - firstMonthIndex) : lastMonthIndex;
-      const produceBounds = index => (isOneInRangeYear ? index + firstMonthIndex : index);
-      return RkCalendarService.Util.range(itemCount + 1, produceBounds).map(produceItems);
+    const isFirstYear = RkCalendarService.Date.isSameYear(this.props.date, this.props.min);
+    const isLastYear = RkCalendarService.Date.isSameYear(this.props.date, this.props.max);
+    if (isFirstYear && isLastYear) {
+      const itemCount = this.props.max.getMonth() - this.props.min.getMonth();
+      const produceItem = index => this.createMonthDateByIndex(index + this.props.min.getMonth());
+      return RkCalendarService.Util.range(itemCount + 1, produceItem);
     }
-    return RkCalendarService.Util.range(RkCalendarService.Date.MONTHS_IN_YEAR).map(produceItems);
+    if (isFirstYear && !isLastYear) {
+      const itemCount = RkCalendarService.Date.MONTHS_IN_YEAR - this.props.min.getMonth();
+      const produceItem = index => this.createMonthDateByIndex(index + this.props.min.getMonth());
+      return RkCalendarService.Util.range(itemCount, produceItem);
+    }
+    if (!isFirstYear && isLastYear) {
+      const itemCount = this.props.max.getMonth();
+      return RkCalendarService.Util.range(itemCount + 1, this.createMonthDateByIndex);
+    }
+    const itemCount = RkCalendarService.Date.MONTHS_IN_YEAR;
+    return RkCalendarService.Util.range(itemCount, this.createMonthDateByIndex);
   };
 
   getChildComponents = () => this.state.dates.map(this.renderMonth);
