@@ -5,8 +5,9 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkStyleSheet } from '../../../styles/styleSheet';
-import { RkCalendarYear } from '../cells/rkCalendarYear.component';
 import * as RkCalendarService from '../services';
+import { RkCalendarMonth } from '../cells/rkCalendarMonth.component';
+import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
 
 export class RkCalendarView extends React.Component {
   static propTypes = {
@@ -59,26 +60,29 @@ export class RkCalendarView extends React.Component {
 
   getItemKey = (index) => `${index}`;
 
-  createYearDateByIndex = (index) => new Date(this.props.min.getFullYear() + index, 0, 1);
+  createMonthDateByIndex = (index) => new Date(this.props.min.getFullYear(), index, 1);
 
   getData = () => {
-    const itemCount = (this.props.max.getFullYear() - this.props.min.getFullYear()) + 1;
-    return RkCalendarService.Util.range(itemCount, this.createYearDateByIndex);
+    const itemCount = RkCalendarService.Date.getMonthDiff(this.props.min, this.props.max);
+    return RkCalendarService.Util.range(itemCount, this.createMonthDateByIndex);
   };
 
-  renderItem = ({ item }) => (
-    <RkCalendarYear
-      selectionStrategy={this.props.selectionStrategy}
-      min={this.props.min}
-      max={this.props.max}
-      selected={this.props.selected}
-      date={item}
-      boundingMonth={this.props.boundingMonth}
-      renderDay={this.props.renderDay}
-      filter={this.props.filter}
-      onSelect={this.props.onSelect}
-      daySize={this.state.daySize}
-    />
+  renderItem = ({ item, index }) => (
+    <View key={index.toString()}>
+      <RkCalendarMonthHeader date={item} daySize={this.state.daySize} />
+      <RkCalendarMonth
+        min={this.props.min}
+        max={this.props.max}
+        date={item}
+        selected={this.props.selected}
+        boundingMonth={this.props.boundingMonth}
+        renderDay={this.props.renderDay}
+        filter={this.props.filter}
+        onSelect={this.props.onSelect}
+        selectionStrategy={this.props.selectionStrategy}
+        daySize={this.state.daySize}
+      />
+    </View>
   );
 
   renderPlaceholder = () => (

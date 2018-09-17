@@ -87,6 +87,12 @@ export function getNumberOfDaysInMonth(date) {
   return getMonthEnd(date).getDate();
 }
 
+export function getMonthDiff(start, end) {
+  const yearCount = (end.getFullYear() - start.getFullYear());
+  const monthCount = yearCount * MONTHS_IN_YEAR;
+  return monthCount - (start.getMonth() - end.getMonth() - 1);
+}
+
 export function addDay(date, num) {
   return createDate(date.getFullYear(), date.getMonth(), date.getDate() + num);
 }
