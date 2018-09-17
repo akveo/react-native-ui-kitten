@@ -17,6 +17,12 @@ export function createDaysGrid(activeMonth, isBounding = true, fallback = defaul
   return withBoundingMonths(weeks, activeMonth, isBounding, fallback);
 }
 
+export function getNumberOfWeekRowsInMonth(activeMonth) {
+  const startOfWeekDayDiff = getStartOfWeekDayDiff(activeMonth);
+  const numberOfDays = DateTimeUtil.getNumberOfDaysInMonth(activeMonth);
+  return Math.ceil((startOfWeekDayDiff + numberOfDays) / DateTimeUtil.DAYS_IN_WEEK);
+}
+
 function createDates(activeMonth) {
   const days = DateTimeUtil.createDateRangeForMonth(activeMonth);
   const startOfWeekDayDiff = getStartOfWeekDayDiff(activeMonth);

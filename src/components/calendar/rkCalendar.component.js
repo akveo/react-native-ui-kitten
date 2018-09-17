@@ -4,6 +4,10 @@ import { RkCalendarView } from './common/rkCalendarView.component';
 import * as SelectionStrategy from './strategy';
 import * as RkCalendarService from './services';
 
+const defaultScrollParams = {
+  animated: true,
+};
+
 export class RkCalendar extends React.Component {
   static propTypes = {
     type: PropTypes.string,
@@ -30,9 +34,48 @@ export class RkCalendar extends React.Component {
     selectionStrategy: SelectionStrategy.Base,
   };
 
+  containerRef = undefined;
+
   constructor(props) {
     super(props);
     this.state.selectionStrategy = this.getSelectionStrategy(props.type);
+  }
+
+  setContainerRef = (ref) => {
+    this.containerRef = ref;
+  };
+
+  onContainerLayoutCompleted = () => {
+    this.scrollToToday({ animated: false });
+  };
+
+  /**
+   * @param params - object: { index: number, animated: boolean }
+   */
+  scrollToIndex(params) {
+    this.containerRef.scrollToIndex(params);
+  }
+
+  /**
+   * @param params - object, required by FlatList for scrollToOffset(params) function.
+   */
+  scrollToOffset(params) {
+    this.containerRef.scrollToOffset(params);
+  }
+
+  /**
+   * @param date - Date,
+   * @param params - object:
+   * {
+   *  ...scrollToIndex params,
+   * }
+   */
+  scrollToDate(date, params = defaultScrollParams) {
+    this.containerRef.scrollToIndex(date, params);
+  }
+
+  scrollToToday(params = defaultScrollParams) {
+    this.containerRef.scrollToDate(RkCalendarService.Date.today(), params);
   }
 
   onDaySelect = (date) => {
@@ -51,6 +94,7 @@ export class RkCalendar extends React.Component {
 
   render = () => (
     <RkCalendarView
+      ref={this.setContainerRef}
       selectionStrategy={this.getSelectionStrategy(this.props.type)}
       min={this.props.min}
       max={this.props.max}
@@ -59,6 +103,7 @@ export class RkCalendar extends React.Component {
       renderDay={this.props.renderDay}
       filter={this.props.filter}
       onSelect={this.onDaySelect}
+      onLayoutCompleted={this.onContainerLayoutCompleted}
     />
   );
 }

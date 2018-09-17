@@ -43,22 +43,77 @@ export class RkCalendarView extends React.Component {
      * which could not be handled by this component
      */
     onSelect: PropTypes.func.isRequired,
+    onLayoutCompleted: PropTypes.func,
   };
   static defaultProps = {
     boundingMonth: true,
     renderDay: undefined,
     filter: (() => true),
+    onLayoutCompleted: (() => null),
   };
 
   state = {
     daySize: -1,
   };
 
-  onLayout = (event) => this.setState({
-    daySize: event.nativeEvent.layout.width / RkCalendarService.Date.DAYS_IN_WEEK,
-  });
+  listRef = undefined;
+
+  /**
+   * @param params - object: { index: number, animated: boolean }
+   */
+  scrollToIndex(params) {
+    const { index, ...restParams } = params;
+    this.scrollToOffset({
+      offset: index * this.getItemHeight(index),
+      ...restParams,
+    });
+  }
+
+  /**
+   * @param params - object, required by FlatList for scrollToOffset(params) function.
+   */
+  scrollToOffset(params) {
+    this.listRef.scrollToOffset(params);
+  }
+
+  /**
+   * @param date - Date,
+   * @param params - object:
+   * {
+   *  ...scrollToIndex params,
+   * }
+   */
+  scrollToDate(date, params) {
+    const itemPosition = RkCalendarService.Date.getMonthDiff(this.props.min, date) - 1;
+    this.scrollToIndex({ index: itemPosition, ...params });
+  }
+
+  onLayout = (event) => {
+    const state = { daySize: event.nativeEvent.layout.width / RkCalendarService.Date.DAYS_IN_WEEK };
+    this.setState(state, this.props.onLayoutCompleted);
+  };
+
+  getItemLayout = (data, index) => {
+    const itemPosition = index < 0 ? 0 : index;
+    const itemHeight = this.getItemHeight(itemPosition);
+    return {
+      length: itemHeight,
+      offset: itemHeight * itemPosition,
+      index: itemPosition,
+    };
+  };
+
+  getItemHeight = (index) => {
+    const item = new Date(this.props.min.getFullYear(), this.props.min.getMonth() + index, 0);
+    const weekRowCount = RkCalendarService.Month.getNumberOfWeekRowsInMonth(item);
+    return (weekRowCount * this.state.daySize) + 58; // + header height
+  };
 
   getItemKey = (index) => `${index}`;
+
+  setListRef = (ref) => {
+    this.listRef = ref;
+  };
 
   createMonthDateByIndex = (index) => new Date(this.props.min.getFullYear(), index, 1);
 
@@ -91,9 +146,11 @@ export class RkCalendarView extends React.Component {
 
   renderView = () => (
     <FlatList
+      ref={this.setListRef}
       style={styles.container}
       data={this.getData()}
       renderItem={this.renderItem}
+      getItemLayout={this.getItemLayout}
       keyExtractor={this.getItemKey}
     />
   );

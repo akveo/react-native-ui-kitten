@@ -87,6 +87,11 @@ export function getNumberOfDaysInMonth(date) {
   return getMonthEnd(date).getDate();
 }
 
+export function getNumberOfWeeksInMonth(date) {
+  const numberOfDays = getMonthEnd(date).getDate();
+  return Math.ceil(numberOfDays / DAYS_IN_WEEK);
+}
+
 export function getMonthDiff(start, end) {
   const yearCount = (end.getFullYear() - start.getFullYear());
   const monthCount = yearCount * MONTHS_IN_YEAR;
