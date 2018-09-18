@@ -206,6 +206,60 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'RkGallery',
+        demogif: 'gallery.gif',
+        children: [
+          {
+            type: 'block',
+            block: 'rk-description',
+            klass: 'RkGallery',
+          },
+          {
+            type: 'block',
+            block: 'rk-examples',
+            klass: 'RkGallery',
+          },
+          {
+            type: 'block',
+            block: 'rk-props',
+            klass: 'RkGallery',
+          },
+          {
+            type: 'block',
+            block: 'rk-styles',
+            klass: 'RkGallery',
+          }
+        ]
+      },
+      {
+        type: 'page',
+        name: 'RkGalleryImage',
+        demogif: 'gallery.gif',
+        children: [
+          {
+            type: 'block',
+            block: 'rk-description',
+            klass: 'RkGalleryImage',
+          },
+          {
+            type: 'block',
+            block: 'rk-examples',
+            klass: 'RkGalleryImage',
+          },
+          {
+            type: 'block',
+            block: 'rk-props',
+            klass: 'RkGalleryImage',
+          },
+          {
+            type: 'block',
+            block: 'rk-styles',
+            klass: 'RkGalleryImage',
+          }
+        ]
+      },
+      {
+        type: 'page',
         name: 'RkTabView',
         demogif: 'tab.gif',
         children: [
