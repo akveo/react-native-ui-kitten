@@ -14,42 +14,62 @@ import { RkComponent } from '../rkComponent';
  * @example Simple usage example:
  *
  * ```
- * <RkSwitch value={this.state.value}
- *           onValueChange={() => this.setState({value: !this.state.value})}/>
+ * state = {
+ *   value: false, // switch is disabled by default
+ * };
+ *
+ * <RkSwitch
+ *   value={this.state.value}
+ *   onValueChange={this.onSwitchValueChange}
+ * />
+ *
+ * onSwitchValueChange = () => {
+ *   this.setState({value: !this.state.value}
+ * };
+
  * ```
  *
- * @example Color settings
+ * @example Custom colors
  *
  * As in a standard react-native's Switch,
  * colors of the control can be configured via appropriate props:
  *
  * ```
- * <RkSwitch tintColor='blue' onTintColor='yellow' thumbTintColor='purple'
- *           value={this.state.value}
- *           onValueChange={() => this.setState({value: !this.state.value})} />
+ * <RkSwitch
+ *   tintColor='blue'
+ *   onTintColor='yellow'
+ *   thumbTintColor='purple'
+ *   value={this.state.value}
+ *   onValueChange={this.onSwitchValueChange)}
+ * />
  * ```
- *
  *
  * @example Using rkType prop
  *
  * `RkSwitch` has `rkType` prop. This prop works similar to CSS-class in web.
  * It is possible to set more than one type.
- * There is a possibility to control tint colors via rkTypes.
- * The library already contains some predefined types and also it is possible to create new ones:
+ * There is a possibility to control tint colors via `rkType`s.
+ * Available `rkType`s: `primary`, `success`, `info`, `warning`, `danger`.
  *
  * ```
- * RkTheme.setType('RkSwitch', 'mySwitch', {
- *     tintColor: 'blue',
- *     onTintColor: 'yellow',
- *     thumbTintColor: 'purple',
- *     margin: 10
- * });
-
- * <RkSwitch rkType='danger' value={this.state.value}
- *           onValueChange={() => this.setState({value: !this.state.value})} />
- * <RkSwitch rkType='mySwitch' value={this.state.value}
- *           onValueChange={() => this.setState({value: !this.state.value})} />
+ * <RkSwitch
+ *   rkType='danger'
+ *   value={this.state.value}
+ *   onValueChange={this.onSwitchValueChange}
+ * />
+ * ```
  *
+ * @example Define new rkTypes
+ *
+ * New rkTypes are defined using `setType` method of `RkTheme`.
+ *
+ * ```
+ * RkTheme.setType('RkSwitch', 'projectDefault', {
+ *   tintColor: 'blue',
+ *   onTintColor: 'yellow',
+ *   thumbTintColor: 'purple',
+ *   margin: 10,
+ * });
  * ```
  *
  * @styles Available style properties:
@@ -58,13 +78,11 @@ import { RkComponent } from '../rkComponent';
  * - `thumbTintColor` : will be converted into `thumbTintColor` prop of `Switch`
  * - ...: Any other style properties will be applied to `View` container.
  *
- *
  * @property {string} rkType - Types for component stylization
  * By default `RkSwitch` supports following types: `primary`, `warning`, `danger`, `success`, `info`
  * @property {style} style - Style for `View` container
  * @property {Switch.props} props - All `Switch` props also applied to `RkSwitch`
  */
-
 export class RkSwitch extends RkComponent {
   componentName = 'RkSwitch';
   typeMapping = {
