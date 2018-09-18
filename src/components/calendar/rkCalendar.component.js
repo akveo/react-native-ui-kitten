@@ -46,7 +46,15 @@ export class RkCalendar extends React.Component {
   };
 
   onContainerLayoutCompleted = () => {
-    this.scrollToToday({ animated: false });
+    const today = RkCalendarService.Date.today();
+    const monthNumberTillToday = RkCalendarService.Date.getMonthDiff(this.props.min, today);
+    const scrollToToday = () => { this.scrollToDate(today, { animated: false }); };
+
+    if (monthNumberTillToday > RkCalendarService.Date.MONTHS_IN_YEAR) {
+      setTimeout(scrollToToday, 100);
+    } else {
+      scrollToToday();
+    }
   };
 
   /**
@@ -71,7 +79,7 @@ export class RkCalendar extends React.Component {
    * }
    */
   scrollToDate(date, params = defaultScrollParams) {
-    this.containerRef.scrollToIndex(date, params);
+    this.containerRef.scrollToDate(date, params);
   }
 
   scrollToToday(params = defaultScrollParams) {

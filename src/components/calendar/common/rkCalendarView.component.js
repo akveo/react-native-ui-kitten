@@ -64,7 +64,7 @@ export class RkCalendarView extends React.Component {
   scrollToIndex(params) {
     const { index, ...restParams } = params;
     this.scrollToOffset({
-      offset: index * this.getItemHeight(index),
+      offset: this.calculateItemOffset({ index }),
       ...restParams,
     });
   }
@@ -98,9 +98,20 @@ export class RkCalendarView extends React.Component {
     const itemHeight = this.getItemHeight(itemPosition);
     return {
       length: itemHeight,
-      offset: itemHeight * itemPosition,
+      offset: itemHeight + this.calculateItemOffset({ index: itemPosition }),
       index: itemPosition,
     };
+  };
+
+  calculateItemOffset = ({ currentValue = 0, currentIndex = 0, index }) => {
+    if (currentIndex === index) {
+      return currentValue;
+    }
+    return this.calculateItemOffset({
+      currentValue: currentValue + this.getItemHeight(currentIndex),
+      currentIndex: currentIndex + 1,
+      index,
+    });
   };
 
   getItemHeight = (index) => {
@@ -109,7 +120,7 @@ export class RkCalendarView extends React.Component {
     return (weekRowCount * this.state.daySize) + 58; // + header height
   };
 
-  getItemKey = (index) => `${index}`;
+  getItemKey = (index) => index.toString();
 
   setListRef = (ref) => {
     this.listRef = ref;
@@ -152,6 +163,7 @@ export class RkCalendarView extends React.Component {
       renderItem={this.renderItem}
       getItemLayout={this.getItemLayout}
       keyExtractor={this.getItemKey}
+      initialNumToRender={RkCalendarService.Date.MONTHS_IN_YEAR}
     />
   );
 
