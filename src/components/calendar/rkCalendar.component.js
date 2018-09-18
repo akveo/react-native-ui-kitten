@@ -8,6 +8,70 @@ const defaultScrollParams = {
   animated: true,
 };
 
+/**
+ * `RkCalendar` is a component which allows user to select date or date range.
+ *
+ * @extends React.Component
+ *
+ * @example Simple usage example:
+ *
+ * Simple usage allows user to select one day. This way of using means using component
+ * with `type='base'` prop provided.
+ *
+ * ```
+ * <RkCalendar
+ *   min={new Date(2018, 0, 1)}
+ *   max={new Date(2019, 0, 1)}
+ * />
+ * ```
+ *
+ * @example Ranged selection example:
+ *
+ * Ranged calendar allows user to select date range.
+ *
+ * ```
+ * <RkCalendar
+ *   type='range'
+ *   min={new Date(2018, 0, 1)}
+ *   max={new Date(2019, 0, 1)}
+ * />
+ * ```
+ *
+ * @example Handling component events:
+ *
+ * ```
+ * <RkCalendar
+ *   min={new Date(2018, 0, 1)}
+ *   max={new Date(2019, 0, 1)}
+ *   onSelect={this.onDateSelect}
+ * />
+ *
+ * // Date select:
+ * //
+ * // @param date - object, defining selection:
+ * // {
+ * //   selected: {
+ * //     start: Date,
+ * //     end: Date,
+ * //   },
+ * // }
+ * //
+ * // For ranged selection calendar, end prop is always undefined.
+ * //
+ * onDateSelect = (date) => {
+ *   // whatever
+ * };
+ *
+ * @property {string} type - Type of date selection. Available types: 'base' and 'range'.
+ * Default is 'base'
+ * @property {Date} min - Minimum date in calendar available for selection. Required
+ * @property {Date} max - Maximum date in calendar available for selection. Required
+ * @property {bool} boundingMonth - defines if we should render previous and next months
+ * in the current month view. Default is true.
+ * @property {function} filter - Predicate that decides which cells will be disabled
+ * @property {function} renderDay - Custom render day cell function
+ * @property {function} onSelect - Fired when date or date range is selected
+ * */
 export class RkCalendar extends React.Component {
   static propTypes = {
     type: PropTypes.string,
@@ -58,30 +122,39 @@ export class RkCalendar extends React.Component {
   };
 
   /**
-   * @param params - object: { index: number, animated: boolean }
+   * Scrolls to passed month index
+   *
+   * @param {object} params - should contain index property
+   * and additional scroll parameters (optional)
    */
   scrollToIndex(params) {
     this.containerRef.scrollToIndex(params);
   }
 
   /**
-   * @param params - object, required by FlatList for scrollToOffset(params) function.
+   * Scrolls to passed offset
+   *
+   * @param {object} params - additional scroll parameters (optional)
    */
   scrollToOffset(params) {
     this.containerRef.scrollToOffset(params);
   }
 
   /**
-   * @param date - Date,
-   * @param params - object:
-   * {
-   *  ...scrollToIndex params,
-   * }
+   * Scrolls to month containing passed date
+   *
+   * @param {Date} date - date to scroll to
+   * @param {object} params - additional scroll parameters (optional)
    */
   scrollToDate(date, params = defaultScrollParams) {
     this.containerRef.scrollToDate(date, params);
   }
 
+  /**
+   * Scrolls to month containing current date
+   *
+   * @param {object} params - additional scroll parameters (optional)
+   */
   scrollToToday(params = defaultScrollParams) {
     this.containerRef.scrollToDate(RkCalendarService.Date.today(), params);
   }
