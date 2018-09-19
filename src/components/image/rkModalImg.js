@@ -18,12 +18,21 @@ import { RkComponent } from '../rkComponent';
 import { RkTheme } from '../../styles/themeManager';
 
 /**
+ * `RkModalImg` is extension of basic `Image` that also opens it in full screen on tap.
+ *
  * @deprecated since version 3.1.0. Will be deleted in version 3.2.0.
  * Use `RkGallery` or `RkGalleryImage` instead.
  *
- * `RkModalImg` is extension of basic `Image` that also opens it in full screen on tap.
- *
  * @extends React.Component
+ *
+ * @example Important notes
+ *
+ * Deprecated since version 3.1.0. Will be deleted in version 3.2.0.
+ * Use `RkGallery` or `RkGalleryImage` instead.
+ *
+ * ```
+ * <RkGalleryImage source={require('path/to/my-awesome-pic.jpg')}/>
+ * ```
  *
  * @example Simple usage:
  *
