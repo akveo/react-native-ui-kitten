@@ -9,7 +9,9 @@ import {
   Dimensions,
   Platform,
   FlatList,
+  ViewPropTypes,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { RkButton } from '../button/rkButton';
 import { RkText } from '../text/rkText';
 import { RkComponent } from '../rkComponent';
@@ -21,7 +23,7 @@ import { RkTheme } from '../../styles/themeManager';
  *
  * `RkModalImg` is extension of basic `Image` that also opens it in full screen on tap.
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Simple usage:
  *
@@ -153,10 +155,35 @@ import { RkTheme } from '../../styles/themeManager';
  * @property {number} index - Function for rendering custom footer
  *
  */
-
 export class RkModalImg extends RkComponent {
-  componentName = 'RkModalImg';
+  static propTypes = {
+    index: PropTypes.number,
+    source: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]).isRequired,
+    style: ViewPropTypes.style,
+    imgContainerStyle: ViewPropTypes.style,
+    modalStyle: ViewPropTypes.style,
+    modalImgStyle: ViewPropTypes.style,
+    headerStyle: ViewPropTypes.style,
+    footerStyle: ViewPropTypes.style,
+    renderHeader: PropTypes.func,
+    renderFooter: PropTypes.func,
+  };
+  static defaultProps = {
+    index: 0,
+    style: null,
+    imgContainerStyle: null,
+    modalStyle: null,
+    modalImgStyle: null,
+    headerStyle: null,
+    footerStyle: null,
+    renderHeader: undefined,
+    renderFooter: undefined,
+  };
 
+  componentName = 'RkModalImg';
   typeMapping = {
     img: {},
     header: {},
@@ -168,23 +195,22 @@ export class RkModalImg extends RkComponent {
     modal: {},
   };
 
+  state = {
+    opacity: new Animated.Value(1),
+    visible: false,
+    width: undefined,
+    height: undefined,
+    index: 0,
+  };
+
   needUpdateScroll = false;
 
   constructor(props) {
     super(props);
-    this.state = {
-      opacity: new Animated.Value(1),
-      visible: false,
-      width: undefined,
-      height: undefined,
-      index: props.index || 0,
-    };
-    this.onRenderHeader = this.onRenderHeader.bind(this);
-    this.onRenderFooter = this.onRenderFooter.bind(this);
-    this.onContainerScroll = this.onContainerScroll.bind(this);
+    this.state.index = props.index;
   }
 
-  onContainerScroll(event) {
+  onContainerScroll = (event) => {
     const currentIndex = Math.round(event.nativeEvent.contentOffset.x / this.state.width);
     if (currentIndex >= 0 &&
       currentIndex <= this.props.source.length &&
@@ -193,40 +219,34 @@ export class RkModalImg extends RkComponent {
         index: currentIndex,
       });
     }
-  }
+  };
 
-  onRenderImageContainer(source, index, props) {
-    return (
-      <FlatList
-        data={Array.from(source)}
-        getItemLayout={(item, itemIndex) => this.onRenderItemLayout(item, itemIndex)}
-        renderItem={({ item }) => this.onRenderImage(item, props)}
-        initialScrollIndex={index}
-        horizontal={true}
-        pagingEnabled={true}
-        keyExtractor={(item, srcIndex) => srcIndex.toString()}
-        onScroll={(event) => this.onContainerScroll(event)}
-      />
-    );
-  }
+  onRenderImageContainer = (source, index, props) => (
+    <FlatList
+      data={Array.from(source)}
+      getItemLayout={this.onRenderItemLayout}
+      renderItem={({ item }) => this.onRenderImage(item, props)}
+      initialScrollIndex={index}
+      horizontal={true}
+      pagingEnabled={true}
+      keyExtractor={(item, srcIndex) => srcIndex.toString()}
+      onScroll={this.onContainerScroll}
+    />
+  );
 
-  onRenderItemLayout(item, index) {
-    return {
-      length: this.state.width,
-      offset: this.state.width * index,
-      index,
-    };
-  }
+  onRenderItemLayout = (item, index) => ({
+    length: this.state.width,
+    offset: this.state.width * index,
+    index,
+  });
 
-  onRenderImage(source, props) {
-    return (
-      <TouchableWithoutFeedback
-        style={{ flex: 1 }}
-        onPress={this.onImageClicked}>
-        <Image source={source} {...props} />
-      </TouchableWithoutFeedback>
-    );
-  }
+  onRenderImage = (source, props) => (
+    <TouchableWithoutFeedback
+      style={{ flex: 1 }}
+      onPress={this.onImageClicked}>
+      <Image source={source} {...props} />
+    </TouchableWithoutFeedback>
+  );
 
   onRenderHeader = (options) => {
     const content = this.styles ? this.styles.headerContent : {};
@@ -254,7 +274,7 @@ export class RkModalImg extends RkComponent {
     );
   };
 
-  onRenderPageNumber() {
+  onRenderPageNumber = () => {
     if (Array.isArray(this.props.source)) {
       let pageText = +this.state.index + +1;
       pageText += '/';
@@ -266,14 +286,14 @@ export class RkModalImg extends RkComponent {
       );
     }
     return null;
-  }
+  };
 
-  onRenderFooter() {
+  onRenderFooter = () => {
     const style = this.styles ? this.styles.footerContent : {};
     return (
       <View style={style} />
     );
-  }
+  };
 
   onImageClicked = () => {
     // eslint-disable-next-line no-underscore-dangle
@@ -290,11 +310,9 @@ export class RkModalImg extends RkComponent {
     });
   };
 
-  onCloseImage = () => {
-    this.setState({
-      visible: false,
-    });
-  };
+  onCloseImage = () => this.setState({
+    visible: false,
+  });
 
   onUpdateDimension() {
     const { height, width } = Dimensions.get('window');

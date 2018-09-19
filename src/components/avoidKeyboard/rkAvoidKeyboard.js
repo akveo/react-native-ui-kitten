@@ -7,6 +7,8 @@ import {
 import { RkComponent } from '../rkComponent';
 
 /**
+ * @extends React.Component
+ *
  * `RkAvoidKeyboard` is a component for handling keyboard appearing on the screen.
  * This component is just a container for other react components.
  * In order to avoid keyboard it just changes `top` value according to keyboard height.

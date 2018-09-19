@@ -8,7 +8,7 @@ import { PinchZoomResponder } from './pinchZoomResponder';
 /**
  * `RkGalleryImage` is a component which displays an image with pinch-zoom and double click support.
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Simple usage example:
  *
@@ -83,7 +83,6 @@ import { PinchZoomResponder } from './pinchZoomResponder';
  * @property {function} onScaleChange - item scale change callback,
  * @property {function} onOffsetChange - item offset change callback.
  */
-
 export class RkGalleryImage extends RkComponent {
   static propTypes = {
     source: PropTypes.node.isRequired,
@@ -95,6 +94,8 @@ export class RkGalleryImage extends RkComponent {
   static defaultProps = {
     maxScale: PinchZoomResponder.defaultProps.maxScale,
     onClick: (() => null),
+    onScaleChange: PinchZoomResponder.defaultProps.onScaleChange,
+    onOffsetChange: PinchZoomResponder.defaultProps.onOffsetChange,
   };
   componentName = 'RkGalleryImage';
 
@@ -129,17 +130,15 @@ export class RkGalleryImage extends RkComponent {
   };
 
   render() {
-    const { scalable, ...restProps } = this.props;
     return (
       <PinchZoomResponder
         ref={this.setPinchResponderRef}
-        scalable={scalable}
         onScaleChange={this.onImageScaleChange}
         onOffsetChange={this.onImageOffsetChange}>
         <DoubleTouchableWithoutFeedback
           onSinglePress={this.onImageSinglePress}
           onDoublePress={this.onImageDoublePress}>
-          <Image{...restProps} />
+          <Image{...this.props} />
         </DoubleTouchableWithoutFeedback>
       </PinchZoomResponder>
     );

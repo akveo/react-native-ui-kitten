@@ -3,13 +3,15 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  ViewPropTypes,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { RkComponent } from '../rkComponent';
 
 /**
  * `RkTextInput` is a component to be used as a basic text input.
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Usage sample:
  *
@@ -132,8 +134,22 @@ import { RkComponent } from '../rkComponent';
  * @property {style} labelStyle - Style applied to label
  * @property {style} inputStyle - Style applied to text input
  */
-
 export class RkTextInput extends RkComponent {
+  static propTypes = {
+    editable: PropTypes.bool,
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+    ]),
+    style: ViewPropTypes.style,
+    inputStyle: ViewPropTypes.style,
+  };
+  static defaultProps = {
+    editable: true,
+    label: null,
+    style: null,
+    inputStyle: null,
+  };
   componentName = 'RkTextInput';
   typeMapping = {
     container: {
@@ -151,22 +167,13 @@ export class RkTextInput extends RkComponent {
     },
   };
 
-  static defaultProps = {
-    editable: true,
-  };
-
-  constructor(props) {
-    super(props);
-    this.focusInput = this.focusInput.bind(this);
-  }
-
-  focusInput() {
+  focusInput = () => {
     if (this.props.editable) {
       this.inputRef.focus();
     }
-  }
+  };
 
-  displayLabel(label, labelStyle) {
+  renderLabel(label, labelStyle) {
     if (typeof label === 'string') {
       return (
         <Text style={labelStyle} onPress={this.focusInput}>{label}</Text>
@@ -198,7 +205,7 @@ export class RkTextInput extends RkComponent {
     boxStyle.push(style);
     return (
       <TouchableOpacity activeOpacity={1} onPress={this.focusInput} style={boxStyle}>
-        {label && this.displayLabel(label, inputProps.labelStyle)}
+        {label && this.renderLabel(label, inputProps.labelStyle)}
         <TextInput
           underlineColorAndroid='transparent'
           ref={(inputValue) => {
