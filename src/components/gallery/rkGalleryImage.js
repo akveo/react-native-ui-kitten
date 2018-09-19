@@ -146,15 +146,11 @@ export class RkGalleryImage extends RkComponent {
         ref={this.setPinchResponderRef}
         scalable={scalable}
         onScaleChange={this.onImageScaleChange}
-        onOffsetChange={this.onImageOffsetChange}
-      >
+        onOffsetChange={this.onImageOffsetChange}>
         <DoubleTouchableWithoutFeedback
           onSinglePress={this.onImageSinglePress}
-          onDoublePress={this.onImageDoublePress}
-        >
-          <Image
-            {...restProps}
-          />
+          onDoublePress={this.onImageDoublePress}>
+          <Image{...restProps} />
         </DoubleTouchableWithoutFeedback>
       </PinchZoomResponder>
     );

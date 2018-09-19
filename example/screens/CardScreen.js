@@ -26,24 +26,23 @@ export class CardScreen extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
-          automaticallyAdjustContentInsets
-          style={[UtilStyles.container, styles.screen]}
-        >
+          automaticallyAdjustContentInsets={true}
+          style={[UtilStyles.container, styles.screen]}>
           <RkCard>
-            <View rkCardHeader>
+            <View rkCardHeader={true}>
               <View>
                 <RkText rkType='header'>Header</RkText>
                 <RkText rkType='subtitle'>Subtitle</RkText>
               </View>
             </View>
-            <Image rkCardImg source={require('../img/post1.png')} />
-            <View rkCardContent>
+            <Image rkCardImg={true} source={require('../img/post1.png')} />
+            <View rkCardContent={true}>
               <RkText rkType='cardText'>
                 Far far away, behind the word mountains, far from the
                 countries Vokalia and Consonantia, there live the blind texts.
               </RkText>
             </View>
-            <View rkCardFooter>
+            <View rkCardFooter={true}>
               <RkButton rkType='clear link'>
                 <Icon name="heart" style={likeStyle} />
                 <RkText rkType='accent'>18 Likes</RkText>
@@ -59,20 +58,20 @@ export class CardScreen extends React.Component {
             </View>
           </RkCard>
           <RkCard>
-            <View rkCardHeader>
+            <View rkCardHeader={true}>
               <View>
                 <RkText rkType='header'>Header</RkText>
                 <RkText rkType='subtitle'>Subtitle</RkText>
               </View>
             </View>
-            <Image rkCardImg source={require('../img/post2.png')} />
-            <View rkCardContent>
+            <Image rkCardImg={true} source={require('../img/post2.png')} />
+            <View rkCardContent={true}>
               <RkText rkType='cardText'>
                 Far far away, behind the word mountains, far from the
                 countries Vokalia and Consonantia, there live the blind texts.
               </RkText>
             </View>
-            <View rkCardFooter style={styles.footer}>
+            <View rkCardFooter={true} style={styles.footer}>
               <RkButton rkType='clear link accent'>
                 <Icon name="heart" style={likeStyle} />
                 <RkText rkType='accent'>18</RkText>
@@ -88,7 +87,7 @@ export class CardScreen extends React.Component {
             </View>
           </RkCard>
           <RkCard>
-            <View rkCardHeader>
+            <View rkCardHeader={true}>
               <View style={{ flexDirection: 'row' }}>
                 <Image source={require('../img/avatar1.png')} style={styles.avatar} />
                 <View style={{}}>
@@ -102,13 +101,13 @@ export class CardScreen extends React.Component {
                 <Icon style={styles.dot} name="circle" />
               </RkButton>
             </View>
-            <View rkCardContent>
+            <View rkCardContent={true}>
               <RkText rkType='cardText'>
                 Far far away, behind the word mountains, far from the
                 countries Vokalia and Consonantia, there live the blind texts.
               </RkText>
             </View>
-            <View rkCardFooter style={styles.footer}>
+            <View rkCardFooter={true} style={styles.footer}>
               <RkButton rkType='clear link accent'>
                 <Icon name="heart" style={likeStyle} />
                 <RkText rkType='accent'>18</RkText>
@@ -125,25 +124,25 @@ export class CardScreen extends React.Component {
           </RkCard>
           <RkCard rkType='shadowed'>
             <View>
-              <Image rkCardImg source={require('../img/post3.png')} />
-              <View rkCardImgOverlay />
+              <Image rkCardImg={true} source={require('../img/post3.png')} />
+              <View rkCardImgOverlay={true} />
             </View>
             <RkButton rkType='circle accent-bg' style={styles.floating}>
               <ImageIcon name='plus' />
             </RkButton>
-            <View rkCardHeader style={{ paddingBottom: 2.5 }}>
+            <View rkCardHeader={true} style={{ paddingBottom: 2.5 }}>
               <View>
                 <RkText rkType='header xxlarge'>Header</RkText>
                 <RkText rkType='subtitle'>Subtitle</RkText>
               </View>
             </View>
-            <View rkCardContent>
+            <View rkCardContent={true}>
               <RkText rkType='compactCardText'>
                 Far far away, behind the word mountains, far from the
                 countries Vokalia and Consonantia, there live the blind texts.
               </RkText>
             </View>
-            <View rkCardFooter>
+            <View rkCardFooter={true}>
               <View style={styles.footerButtons}>
                 <RkButton rkType='clear action' style={{ marginRight: 16 }}>SHARE</RkButton>
                 <RkButton rkType='clear action'>EXPLORE</RkButton>
@@ -152,26 +151,26 @@ export class CardScreen extends React.Component {
           </RkCard>
           <RkCard rkType='shadowed'>
             <View>
-              <Image rkCardImg source={require('../img/post4.png')} />
-              <View rkCardImgOverlay style={styles.overlay}>
+              <Image rkCardImg={true} source={require('../img/post4.png')} />
+              <View rkCardImgOverlay={true} style={styles.overlay}>
                 <RkText rkType='header xxlarge' style={{ color: 'white' }}>Header</RkText>
               </View>
             </View>
             <RkButton rkType='circle accent-bg' style={styles.floating}>
               <ImageIcon name='plus' />
             </RkButton>
-            <View rkCardHeader style={{ paddingBottom: 2.5 }}>
+            <View rkCardHeader={true} style={{ paddingBottom: 2.5 }}>
               <View>
                 <RkText rkType='subtitle'>Subtitle</RkText>
               </View>
             </View>
-            <View rkCardContent>
+            <View rkCardContent={true}>
               <RkText rkType='compactCardText'>
                 Far far away, behind the word mountains, far from the
                 countries Vokalia and Consonantia, there live the blind texts.
               </RkText>
             </View>
-            <View rkCardFooter>
+            <View rkCardFooter={true}>
               <View style={styles.footerButtons}>
                 <RkButton rkType='clear action' style={{ marginRight: 16 }}>SHARE</RkButton>
                 <RkButton rkType='clear action'>EXPLORE</RkButton>
@@ -180,8 +179,8 @@ export class CardScreen extends React.Component {
           </RkCard>
           <RkCard rkType='heroImage shadowed'>
             <View>
-              <Image rkCardImg source={require('../img/post5.png')} />
-              <View rkCardImgOverlay style={styles.overlay}>
+              <Image rkCardImg={true} source={require('../img/post5.png')} />
+              <View rkCardImgOverlay={true} style={styles.overlay}>
                 <View style={{ marginBottom: 20 }}>
                   <RkText rkType='header xxlarge' style={{ color: 'white' }}>Header</RkText>
                   <RkText rkType='subtitle' style={{ color: 'white' }}>Subtitle</RkText>
@@ -194,20 +193,20 @@ export class CardScreen extends React.Component {
             </View>
           </RkCard>
           <RkCard>
-            <View rkCardHeader>
+            <View rkCardHeader={true}>
               <View>
                 <RkText rkType='header'>Header</RkText>
                 <RkText rkType='subtitle'>Subtitle</RkText>
               </View>
             </View>
-            <View rkCardContent style={{ paddingTop: 0 }}>
+            <View rkCardContent={true} style={{ paddingTop: 0 }}>
               <RkText rkType='compactCardText'>
                 The Big Oxmox advised her not to do so, because there were thousands of
                 bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text
                 didn’t listen.
               </RkText>
             </View>
-            <View rkCardFooter>
+            <View rkCardFooter={true}>
               <View style={styles.footerButtons}>
                 <RkButton rkType='clear action' style={{ marginRight: 16 }}>SHARE</RkButton>
                 <RkButton rkType='clear action'>EXPLORE</RkButton>

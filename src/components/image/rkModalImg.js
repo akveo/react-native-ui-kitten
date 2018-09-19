@@ -199,8 +199,8 @@ export class RkModalImg extends RkComponent {
         getItemLayout={(item, itemIndex) => this.onRenderItemLayout(item, itemIndex)}
         renderItem={({ item }) => this.onRenderImage(item, props)}
         initialScrollIndex={index}
-        horizontal
-        pagingEnabled
+        horizontal={true}
+        pagingEnabled={true}
         keyExtractor={(item, srcIndex) => srcIndex.toString()}
         onScroll={(event) => this.onContainerScroll(event)}
       />
@@ -219,8 +219,7 @@ export class RkModalImg extends RkComponent {
     return (
       <TouchableWithoutFeedback
         style={{ flex: 1 }}
-        onPress={this.onImageClicked}
-      >
+        onPress={this.onImageClicked}>
         <Image source={source} {...props} />
       </TouchableWithoutFeedback>
     );
@@ -231,22 +230,17 @@ export class RkModalImg extends RkComponent {
     const text = this.styles ? this.styles.headerText : {};
     return (
       <View style={content}>
-        <View style={{
-          flex: 1,
-          alignItems: 'flex-start',
-        }}
-        >
+        <View style={{ flex: 1, alignItems: 'flex-start' }}>
           <RkButton
             rkType='clear'
-            onPress={options.closeImage}
-          >Close
+            onPress={options.closeImage}>
+            Close
           </RkButton>
         </View>
         <View style={{
           flex: 1,
           alignItems: 'center',
-        }}
-        >
+        }}>
           <RkText style={text}>{this.onRenderPageNumber()}</RkText>
         </View>
         <View style={{
@@ -352,12 +346,12 @@ export class RkModalImg extends RkComponent {
     this.onUpdateDimension();
 
     if (visible) {
-      imgProps.style = [imgProps.style, {
-        height: this.state.height,
-        width: this.state.width,
-      },
-      modalImg,
-      modalImgStyle];
+      imgProps.style = [
+        imgProps.style,
+        { height: this.state.height, width: this.state.width },
+        modalImg,
+        modalImgStyle,
+      ];
     }
     const closeImage = this.onCloseImage;
     const pageNumber = +this.state.index + 1;
@@ -366,16 +360,11 @@ export class RkModalImg extends RkComponent {
     return (
       <View>
         <TouchableWithoutFeedback
-          style={[imgContainer,
-            imgContainerStyle,
-          ]}
-          onPress={this.onRootViewClicked}
-        >
+          style={[imgContainer, imgContainerStyle]}
+          onPress={this.onRootViewClicked}>
           <Image
+            style={[img, imgStyle]}
             source={basicSource}
-            style={[img,
-              imgStyle,
-            ]}
             {...imgProps}
           />
         </TouchableWithoutFeedback>
@@ -385,31 +374,17 @@ export class RkModalImg extends RkComponent {
           animationType={animationType}
           transparent={transparent}
           visible={visible}
-          onOrientationChange={this.onOrientationChange}
-        >
+          onOrientationChange={this.onOrientationChange}>
           <View
-            style={[modal,
-              modalStyle,
-            ]}
-            onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange}
-          >
+            style={[modal, modalStyle]}
+            onLayout={Platform.OS === 'ios' ? null : this.onOrientationChange}>
             {Array.isArray(source) ?
               this.onRenderImageContainer(source, +initialIndex, imgProps) :
               this.onRenderImage(basicSource, imgProps)}
-            <Animated.View style={[
-              this.styles.header, {
-                opacity: this.state.opacity,
-              },
-            ]}
-            >
+            <Animated.View style={[this.styles.header, { opacity: this.state.opacity }]}>
               {renderHeader({ closeImage, pageNumber, totalPages })}
             </Animated.View>
-            <Animated.View style={[
-              this.styles.footer, {
-                opacity: this.state.opacity,
-              },
-            ]}
-            >
+            <Animated.View style={[this.styles.footer, { opacity: this.state.opacity }]}>
               {renderFooter({ closeImage, pageNumber, totalPages })}
             </Animated.View>
           </View>

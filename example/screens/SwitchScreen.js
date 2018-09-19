@@ -1,41 +1,37 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import {
   View,
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import { RkText, RkSwitch } from 'react-native-ui-kitten';
-
+import {
+  RkText,
+  RkSwitch,
+} from 'react-native-ui-kitten';
 import { UtilStyles } from '../style/styles';
 
-export class SwitchScreen extends Component {
+export class SwitchScreen extends React.Component {
   static navigationOptions = {
     title: 'Switches',
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      switch1State: true,
-      switch2State: true,
-      switch3State: true,
-      switch4State: true,
-      switch5State: true,
-      switch6State: true,
-      switch7State: false,
-      switch8State: false,
-      switch9State: true,
-      switch10State: true,
-    };
-  }
+  state = {
+    switch1State: true,
+    switch2State: true,
+    switch3State: true,
+    switch4State: true,
+    switch5State: true,
+    switch6State: true,
+    switch7State: false,
+    switch8State: false,
+    switch9State: true,
+    switch10State: true,
+  };
 
   render() {
     return (
       <ScrollView
-        automaticallyAdjustContentInsets
-        style={UtilStyles.container}
-      >
+        automaticallyAdjustContentInsets={true}
+        style={UtilStyles.container}>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Basic switch</RkText>
           <RkSwitch
@@ -120,10 +116,10 @@ export class SwitchScreen extends Component {
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Color customization</RkText>
           <View style={UtilStyles.columnContainer}>
-            <RkText>
-              As in react-native's Switch it is possible to change 'onTintColor',
-              'thumbTintColor' and 'tintColor' on both platforms. The control allows you do that
-              through rkTypes and props.
+            <RkText>{
+              "As in react-native's Switch it is possible to change onTintColor," +
+              "'thumbTintColor' and 'tintColor' on both platforms." +
+              ' The control allows you do that through rkTypes and props.'}
             </RkText>
           </View>
 
@@ -168,7 +164,7 @@ export class SwitchScreen extends Component {
             <View style={styles.componentRow}>
               <RkText>I like UI Kitten!</RkText>
               <RkSwitch
-                disabled
+                disabled={true}
                 value={this.state.switch10State}
                 onValueChange={() => this.setState({ switch10State: !this.state.switch10State })}
               />

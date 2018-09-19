@@ -77,8 +77,7 @@ export class RkAvoidKeyboard extends RkComponent {
     return (
       <Animated.View
         style={[container, { top: this.state.top }, style]}
-        {...props}
-      >
+        {...props}>
         {children}
       </Animated.View>
     );

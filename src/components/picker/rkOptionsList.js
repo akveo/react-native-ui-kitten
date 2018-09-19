@@ -163,7 +163,7 @@ export class RkOptionsList extends RkComponent {
           onScrollEndDrag={(e) => this.onScrollEndDrag(e, this.props.id)}
           dataSource={this.state.dataSource}
           renderRow={(item) => this.renderOption(item, this.props.optionBlockStyle)}
-          enableEmptySections
+          enableEmptySections={true}
           initialListSize={this.optionsData.length}
         />
       </View>

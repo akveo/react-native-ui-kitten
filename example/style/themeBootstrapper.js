@@ -84,8 +84,7 @@ export const bootstrap = () => {
     },
   });
 
-  RkTheme.setType('RkChoice', 'posNegClearCheck', {
-  }, 'posNeg');
+  RkTheme.setType('RkChoice', 'posNegClearCheck', {}, 'posNeg');
 
   RkTheme.setType('RkChoice', 'posNegClearCheckSelected', {
     inner: {

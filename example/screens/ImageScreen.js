@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   ScrollView,
-  ListView,
-  Dimensions, Alert,
+  FlatList,
+  Alert,
+  Dimensions,
 } from 'react-native';
 import {
   RkButton,
@@ -11,162 +12,142 @@ import {
   RkText,
   RkStyleSheet,
 } from 'react-native-ui-kitten';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { UtilStyles } from '../style/styles';
 
-export class ImageScreen extends Component {
+export class ImageScreen extends React.Component {
   static navigationOptions = {
     title: 'Images',
   };
 
-  constructor(props) {
-    super(props);
+  items = [
+    require('../img/animal.jpeg'),
+    require('../img/bird.jpeg'),
+    require('../img/clock.jpg'),
+    require('../img/flowers.jpeg'),
+    require('../img/fireworks.jpeg'),
+    require('../img/night.jpeg'),
+    require('../img/river.jpeg'),
+    require('../img/sea.jpg'),
+    require('../img/sun.jpg'),
+    require('../img/wood.jpeg'),
+    require('../img/flowers.jpeg'),
+    require('../img/tree.jpeg'),
+  ];
+  imageSize = (Dimensions.get('window').width - 16) / 3;
 
-    const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id });
-    this.images = [
-      require('../img/animal.jpeg'),
-      require('../img/bird.jpeg'),
-      require('../img/clock.jpg'),
-      require('../img/flowers.jpeg'),
-      require('../img/fireworks.jpeg'),
-      require('../img/night.jpeg'),
-      require('../img/river.jpeg'),
-      require('../img/sea.jpg'),
-      require('../img/sun.jpg'),
-      require('../img/wood.jpeg'),
-      require('../img/flowers.jpeg'),
-      require('../img/tree.jpeg'),
-    ];
-    this.state = {
-      ds: dataSource.cloneWithRows(this.images),
-    };
+  extractGalleryItemKey = (item, index) => index.toString();
 
-    const { width } = Dimensions.get('window');
-    this.imgSize = (width - 16) / 3;
-  }
+  onFooterLikeButtonPress = () => {
+    Alert.alert('I Like it!');
+  };
 
-  onRenderCustomHeader(options) {
-    return (
-      <View style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
-        <RkButton rkType='clear' onPress={options.closeImage}>Close</RkButton>
-        <RkButton rkType='clear'>
-          <Icon style={styles.dot} name="circle" />
-          <Icon style={styles.dot} name="circle" />
-          <Icon style={styles.dot} name="circle" />
+  renderCustomHeader = (options) => (
+    <View style={styles.customHeader}>
+      <RkButton
+        rkType='clear'
+        onPress={options.closeImage}>Close
+      </RkButton>
+      <RkButton rkType='clear'>
+        <Icon style={styles.dot} name="circle" />
+        <Icon style={styles.dot} name="circle" />
+        <Icon style={styles.dot} name="circle" />
+      </RkButton>
+    </View>
+  );
+
+  renderCustomFooter = () => (
+    <View style={styles.customFooter}>
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+        <RkButton
+          rkType='clear small'
+          onPress={this.onFooterLikeButtonPress}>
+          <Icon style={styles.buttonIcon} name="heart" />
+          <RkText rkType='inverse'>18</RkText>
         </RkButton>
       </View>
-    );
-  }
-
-  onRenderCustomFooter() {
-    return (
-      <View style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-      }}
-      >
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <RkButton rkType='clear small' onPress={() => Alert.alert('I Like it!')}>
-            <Icon name="heart" style={styles.buttonIcon} />
-            <RkText rkType='inverse'>18</RkText>
-          </RkButton>
-        </View>
-        <View style={{ flex: 1 }}>
-          <RkButton rkType='clear small'>
-            <Icon name="comment-o" style={styles.buttonIcon} />
-            <RkText rkType='inverse'>2</RkText>
-          </RkButton>
-        </View>
-        <View style={{ flex: 1 }}>
-          <RkButton rkType='clear small'>
-            <Icon name="send-o" style={styles.buttonIcon} />
-            <RkText rkType='inverse'>7</RkText>
-          </RkButton>
-        </View>
+      <View style={{ flex: 1 }}>
+        <RkButton rkType='clear small'>
+          <Icon style={styles.buttonIcon} name="comment-o" />
+          <RkText rkType='inverse'>2</RkText>
+        </RkButton>
       </View>
-    );
-  }
+      <View style={{ flex: 1 }}>
+        <RkButton rkType='clear small'>
+          <Icon style={styles.buttonIcon} name="send-o" />
+          <RkText rkType='inverse'>7</RkText>
+        </RkButton>
+      </View>
+    </View>
+  );
 
+  renderGalleryItemView = ({ item }) => (
+    <RkModalImg
+      style={{ width: this.imageSize, height: this.imageSize }}
+      source={item}
+    />
+  );
 
-  onRenderGallery() {
-    return (
-      <ListView
-        pageSize={3}
-        contentContainerStyle={{
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-        }}
-        scrollRenderAheadDistance={500}
-        dataSource={this.state.ds}
-        renderRow={(rowData, sectionID, rowID) => (
-          <RkModalImg
-            style={{ width: this.imgSize, height: this.imgSize }}
-            source={this.images}
-            index={rowID}
-          />
-        )}
-      />
-    );
-  }
+  renderGallery = () => (
+    <FlatList
+      data={this.items}
+      numColumns={3}
+      renderItem={this.renderGalleryItemView}
+      keyExtractor={this.extractGalleryItemKey}
+    />
+  );
 
   render() {
     return (
       <View style={{ flex: 1 }}>
         <ScrollView
-          automaticallyAdjustContentInsets
-          style={UtilStyles.container}
-        >
+          automaticallyAdjustContentInsets={true}
+          style={UtilStyles.container}>
           <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-            <RkText style={styles.header} rkType='header'>Basic example</RkText>
+            <RkText rkType='header' style={styles.header}>Basic example</RkText>
             <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
               <RkModalImg
-                style={{ width: this.imgSize, height: this.imgSize }}
+                style={{ width: this.imageSize, height: this.imageSize }}
                 source={require('../img/animal.jpeg')}
               />
               <RkModalImg
-                style={{ width: this.imgSize, height: this.imgSize }}
+                style={{ width: this.imageSize, height: this.imageSize }}
                 source={require('../img/clock.jpg')}
               />
               <RkModalImg
-                style={{ width: this.imgSize, height: this.imgSize }}
+                style={{ width: this.imageSize, height: this.imageSize }}
                 source={require('../img/post2.png')}
               />
             </View>
           </View>
           <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-            <RkText style={styles.header} rkType='header'>Custom header and footer</RkText>
+            <RkText rkType='header' style={styles.header}>Custom header and footer</RkText>
             <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
               <RkModalImg
-                style={{ width: this.imgSize, height: this.imgSize }}
-                renderHeader={this.onRenderCustomHeader}
-                renderFooter={this.onRenderCustomFooter}
+                style={{ width: this.imageSize, height: this.imageSize }}
+                renderHeader={this.renderCustomHeader}
+                renderFooter={this.renderCustomFooter}
                 headerContentStyle={{ backgroundColor: 'red' }}
                 source={require('../img/post1.png')}
               />
               <RkModalImg
-                style={{ width: this.imgSize, height: this.imgSize }}
-                renderHeader={this.onRenderCustomHeader}
-                renderFooter={this.onRenderCustomFooter}
+                style={{ width: this.imageSize, height: this.imageSize }}
+                renderHeader={this.renderCustomHeader}
+                renderFooter={this.renderCustomFooter}
                 source={require('../img/river.jpeg')}
               />
               <RkModalImg
-                style={{ width: this.imgSize, height: this.imgSize }}
-                renderHeader={this.onRenderCustomHeader}
-                renderFooter={this.onRenderCustomFooter}
+                style={{ width: this.imageSize, height: this.imageSize }}
+                renderHeader={this.renderCustomHeader}
+                renderFooter={this.renderCustomFooter}
                 source={require('../img/post3.png')}
               />
             </View>
           </View>
           <View style={[UtilStyles.section, UtilStyles.bordered, styles.imagesContainer]}>
-            <RkText style={styles.header} rkType='header'>Gallery Example</RkText>
+            <RkText rkType='header' style={styles.header}>Gallery Example</RkText>
             <View style={[UtilStyles.rowContainer, { paddingLeft: 2 }]}>
-              {this.onRenderGallery()}
+              {this.renderGallery()}
             </View>
           </View>
         </ScrollView>
@@ -176,11 +157,28 @@ export class ImageScreen extends Component {
 }
 
 let styles = RkStyleSheet.create(theme => ({
+  listContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+  },
   imagesContainer: {
     paddingHorizontal: 0,
   },
   header: {
     paddingHorizontal: 24,
+  },
+  customHeader: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  customFooter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   dot: {
     fontSize: 6.5,

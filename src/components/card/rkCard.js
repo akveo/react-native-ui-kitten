@@ -149,7 +149,7 @@ export class RkCard extends RkComponent {
     const { container, ...containerStyles } = this.defineStyles();
     const { style, ...viewProps } = this.props;
     return this.renderView(
-      <View rkCardContainer style={[container, style]} {...viewProps}>
+      <View rkCardContainer={true} style={[container, style]} {...viewProps}>
         {this.props.children}
       </View>,
       containerStyles,

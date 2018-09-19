@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   StyleSheet,
@@ -11,46 +12,54 @@ import {
   RkChoice,
   RkTheme,
 } from 'react-native-ui-kitten';
-import { UtilStyles } from '../style/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { UtilStyles } from '../style/styles';
 
 export class ChoiceScreen extends React.Component {
   static navigationOptions = {
     title: 'Selectable components',
   };
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      settingsOption: {
-        index: 0,
-        name: 'Option 1',
-      },
-      pikerVisible: false,
-      pickedValue: 'Pick Value',
-      selectedOption: 0,
-      onChangeHandleText: 'Option 3 selected',
-    };
-    this.hidePicker = this.hidePicker.bind(this);
-    this.handlePickedValue = this.handlePickedValue.bind(this);
-  }
+  state = {
+    settingsOption: {
+      index: 0,
+      name: 'Option 1',
+    },
+    onChangeHandleText: 'Option 3 selected',
+  };
 
-  hidePicker() {
-    this.setState({ pikerVisible: false });
-  }
+  onOptionsGroupValueChanged = (index) => {
+    this.setState({ onChangeHandleText: `Option ${index + 1} selected` });
+  };
 
-  handlePickedValue(date) {
-    this.setState({ pickedValue: date });
-    this.hidePicker();
-  }
+  onSettingsOptionChange = (option) => {
+    this.setState({ settingsOption: option });
+  };
+
+  onSettingsButtonPress = () => {
+    this.props.navigation.navigate('Settings', {
+      option: this.state.settingsOption,
+      onChange: this.onSettingsOptionChange,
+    });
+  };
+
+  onCustomizationButtonPress = () => {
+    this.props.navigation.navigate('ChoiceCustomization', {
+      option: this.state.settingsOption,
+      onChange: this.onSettingsOptionChange,
+    });
+  };
 
   render() {
     return (
       <ScrollView
         style={UtilStyles.container}
-        automaticallyAdjustContentInsets
-      >
-
+        automaticallyAdjustContentInsets={true}>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Classic selectable components</RkText>
           <View style={UtilStyles.columnContainer}>
@@ -63,7 +72,7 @@ export class ChoiceScreen extends React.Component {
               <RkText rkType='bold' style={styles.caption}>Radio</RkText>
             </View>
             <View style={styles.componentRow}>
-              <RkChoice rkType='clear' selected />
+              <RkChoice rkType='clear' selected={true} />
               <RkText rkType='bold' style={styles.caption}>Clear</RkText>
             </View>
             <View style={styles.componentRow}>
@@ -76,13 +85,12 @@ export class ChoiceScreen extends React.Component {
           <RkText rkType='header'>Labels Example</RkText>
           <View style={[UtilStyles.columnContainer]}>
             <RkChoiceGroup rkType='bordered'>
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                  }}
-                >
+                  }}>
                   <RkText rkType='bold'>Label</RkText>
                   <RkChoice style={{ marginLeft: 17 }} rkType='posNeg' />
                 </View>
@@ -92,13 +100,12 @@ export class ChoiceScreen extends React.Component {
           </View>
           <View style={UtilStyles.columnContainer}>
             <RkChoiceGroup rkType='bordered stretch' style={UtilStyles.spaceTop}>
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
-                  }}
-                >
+                  }}>
                   <View>
                     <RkText rkType='bold'>Hello</RkText>
                     <RkText>Click me!</RkText>
@@ -111,60 +118,59 @@ export class ChoiceScreen extends React.Component {
 
           <View style={UtilStyles.columnContainer}>
             <RkChoiceGroup rkType='stretch' style={UtilStyles.spaceTop}>
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 1</RkText>
                   <RkChoice rkType='clear' />
                 </View>
               </TouchableOpacity>
-
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 2</RkText>
-                  <RkChoice rkType='clear' selected />
+                  <RkChoice rkType='clear' selected={true} />
                 </View>
               </TouchableOpacity>
-
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 3</RkText>
                   <RkChoice rkType='clear' />
                 </View>
               </TouchableOpacity>
-
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={styles.checkRow}>
                   <RkText rkType='bold'>Label 4</RkText>
                   <RkChoice rkType='clear' />
                 </View>
               </TouchableOpacity>
-
             </RkChoiceGroup>
           </View>
         </View>
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>{`Radio components - ${this.state.onChangeHandleText}`}</RkText>
           <View style={UtilStyles.columnContainer}>
-            <RkChoiceGroup radio selectedIndex={2} onChange={(index) => this.setState({ onChangeHandleText: `Option ${index + 1} selected` })}>
-              <TouchableOpacity choiceTrigger>
+            <RkChoiceGroup
+              radio={true}
+              selectedIndex={2}
+              onChange={this.onOptionsGroupValueChanged}>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={[styles.radioRow, styles.spaceBottom]}>
                   <RkChoice rkType='radio' />
                   <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 1</RkText>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={styles.radioRow}>
                   <RkChoice rkType='radio' />
                   <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 2</RkText>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={styles.radioRow}>
                   <RkChoice rkType='radio' />
                   <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 3</RkText>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity choiceTrigger>
+              <TouchableOpacity choiceTrigger={true}>
                 <View style={[styles.radioRow, styles.spaceTop]}>
                   <RkChoice rkType='radio' />
                   <RkText rkType='bold' style={{ marginLeft: 16.5 }}>Option 4</RkText>
@@ -173,8 +179,9 @@ export class ChoiceScreen extends React.Component {
             </RkChoiceGroup>
           </View>
         </View>
+
         <View style={[UtilStyles.bordered]}>
-          <TouchableOpacity style={{ padding: 23 }} onPress={() => this.showSettingsScreen()}>
+          <TouchableOpacity style={{ padding: 23 }} onPress={this.onSettingsButtonPress}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <RkText>Setting Example</RkText>
               <View style={{ flexDirection: 'row' }}>
@@ -183,7 +190,7 @@ export class ChoiceScreen extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={{ padding: 23 }} onPress={() => this.showCustomExamplesScreen()}>
+          <TouchableOpacity style={{ padding: 23 }} onPress={this.onCustomizationButtonPress}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <RkText>Customization Examples</RkText>
               <View style={{ flexDirection: 'row' }}>
@@ -191,36 +198,36 @@ export class ChoiceScreen extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-
         </View>
+
         <View style={[UtilStyles.section, UtilStyles.bordered]}>
           <RkText rkType='header'>Disabled components</RkText>
           <View style={[UtilStyles.rowContainer]}>
             <View style={[UtilStyles.columnContainer, { flex: 1 }]}>
               <View style={styles.componentRow}>
-                <RkChoice disabled />
+                <RkChoice disabled={true} />
                 <RkText rkType='bold' style={styles.caption}>Default</RkText>
               </View>
               <View style={styles.componentRow}>
-                <RkChoice rkType='radio' disabled />
+                <RkChoice rkType='radio' disabled={true} />
                 <RkText rkType='bold' style={styles.caption}>Radio</RkText>
               </View>
               <View style={styles.componentRow}>
-                <RkChoice rkType='posNeg' disabled />
+                <RkChoice rkType='posNeg' disabled={true} />
                 <RkText rkType='bold' style={styles.caption}>Clear</RkText>
               </View>
             </View>
             <View style={[UtilStyles.columnContainer, { flex: 1 }]}>
               <View style={styles.componentRow}>
-                <RkChoice disabled selected />
+                <RkChoice disabled={true} selected={true} />
                 <RkText rkType='bold' style={styles.caption}>Default</RkText>
               </View>
               <View style={styles.componentRow}>
-                <RkChoice rkType='radio' disabled selected />
+                <RkChoice rkType='radio' disabled={true} selected={true} />
                 <RkText rkType='bold' style={styles.caption}>Radio</RkText>
               </View>
               <View style={styles.componentRow}>
-                <RkChoice rkType='clear' disabled selected />
+                <RkChoice rkType='clear' disabled={true} selected={true} />
                 <RkText rkType='bold' style={styles.caption}>Clear</RkText>
               </View>
             </View>
@@ -228,30 +235,6 @@ export class ChoiceScreen extends React.Component {
         </View>
       </ScrollView>
     );
-  }
-
-  showSettingsScreen() {
-    const { navigate } = this.props.navigation;
-    navigate('Settings', {
-      option: this.state.settingsOption,
-      onChange: (option) => {
-        this.setState({
-          settingsOption: option,
-        });
-      },
-    });
-  }
-
-  showCustomExamplesScreen() {
-    const { navigate } = this.props.navigation;
-    navigate('ChoiceCustomization', {
-      option: this.state.settingsOption,
-      onChange: (option) => {
-        this.setState({
-          settingsOption: option,
-        });
-      },
-    });
   }
 }
 

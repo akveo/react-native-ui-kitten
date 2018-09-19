@@ -198,8 +198,7 @@ export class RkSwitch extends RkComponent {
       <View style={[componentStyles, style]}>
         <Animated.View
           style={[styles.container, { backgroundColor: interpolatedTintColor }]}
-          {...this.panResponder.panHandlers}
-        >
+          {...this.panResponder.panHandlers}>
           <Animated.View style={[
             styles.ellipse,
             { transform: [{ scale: value ? returnScale : this.ellipseAnimation }] },

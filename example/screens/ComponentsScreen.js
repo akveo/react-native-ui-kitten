@@ -1,113 +1,91 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import {
-  StyleSheet,
   ListView,
   View,
   TouchableOpacity,
 } from 'react-native';
+import {
+  RkText,
+  RkStyleSheet,
+} from 'react-native-ui-kitten';
 
-import { RkText, RkTheme, RkStyleSheet } from 'react-native-ui-kitten';
 
-
-export class ComponentsScreen extends Component {
+export class ComponentsScreen extends React.Component {
   static navigationOptions = {
     title: 'UI KIT',
   };
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+  static data = [
+    {
+      title: 'Pickers',
+      route: 'Picker',
+    }, {
+      title: 'Buttons',
+      route: 'Button',
+    }, {
+      title: 'Switches',
+      route: 'Switch',
+    }, {
+      title: 'Selectable Components',
+      route: 'Choice',
+    }, {
+      title: 'Inputs',
+      route: 'Input',
+    }, {
+      title: 'Cards',
+      route: 'Card',
+    }, {
+      title: 'Image Viewer',
+      route: 'Image',
+    }, {
+      title: 'Gallery',
+      route: 'Gallery',
+    }, {
+      title: 'Tab View',
+      route: 'Tab',
+    }, {
+      title: 'Custom Control View',
+      route: 'Avatar',
+    },
+  ];
 
+  state = {
+    dataSource: undefined,
+  };
 
   constructor(props) {
     super(props);
-    this.data = [
-      {
-        title: 'Pickers',
-        route: 'Picker',
-      },
-      {
-        title: 'Buttons',
-        route: 'Button',
-      },
-      {
-        title: 'Switches',
-        route: 'Switch',
-      },
-      {
-        title: 'Selectable Components',
-        route: 'Choice',
-      },
-      {
-        title: 'Inputs',
-        route: 'Input',
-      },
-      {
-        title: 'Cards',
-        route: 'Card',
-      },
-      {
-        title: 'Image Viewer',
-        route: 'Image',
-      },
-      {
-        title: 'Gallery',
-        route: 'Gallery',
-      },
-      {
-        title: 'Tab View',
-        route: 'Tab',
-      },
-      {
-        title: 'Custom Control View',
-        route: 'Avatar',
-      },
-    ];
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2,
-      }).cloneWithRows(this.data),
-      theme: _.cloneDeep(RkTheme.current),
-    };
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: this.onListViewRowChange,
+    });
+    this.state.dataSource = dataSource.cloneWithRows(ComponentsScreen.data);
   }
 
-  // componentWillReceiveProps() {
-  //   if (this.state.theme !== RkTheme.current) {
-  //     this.setState({
-  //       theme: _.cloneDeep(RkTheme.current),
-  //       dataSource: new ListView.DataSource({
-  //         rowHasChanged: (r1, r2) => r1 !== r2
-  //       }).cloneWithRows(this.data)
-  //     });
-  //   }
-  // }
+  onListViewRowChange = (lhs, rhs) => lhs !== rhs;
 
-  renderComponent(componentDefinition) {
-    return (
-      <TouchableOpacity onPress={() => this.selectComponent(componentDefinition)}>
-        <View style={styles.componentRow}>
-          <RkText rkType='bold'>{componentDefinition.title}</RkText>
-        </View>
-      </TouchableOpacity>
-    );
-  }
+  onComponentSelected = (componentDefinition) => {
+    this.props.navigation.navigate(componentDefinition.route);
+  };
 
-  selectComponent(componentDefinition) {
-    const { navigate } = this.props.navigation;
-    navigate(componentDefinition.route);
-  }
+  renderSeparator = (sectionID, rowID, adjacentRowHighlighted) => (
+    <View
+      style={[styles.rowSeparator, { opacity: adjacentRowHighlighted ? 0.0 : 1.0 }]}
+      key={`SEP_${sectionID}_${rowID}`}
+    />
+  );
 
-  renderSeparator(
-    sectionID,
-    rowID,
-    adjacentRowHighlighted,
-  ) {
-    let style = styles.rowSeparator;
-    if (adjacentRowHighlighted) {
-      style = [style, styles.rowSeparatorHide];
-    }
-    return (
-      <View key={`SEP_${sectionID}_${rowID}`} style={style} />
-    );
-  }
+  renderComponent = (componentDefinition) => (
+    <TouchableOpacity onPress={() => this.onComponentSelected(componentDefinition)}>
+      <View style={styles.componentRow}>
+        <RkText rkType='bold'>{componentDefinition.title}</RkText>
+      </View>
+    </TouchableOpacity>
+  );
 
   render() {
     return (
@@ -116,8 +94,8 @@ export class ComponentsScreen extends Component {
         dataSource={this.state.dataSource}
         renderRow={(...params) => this.renderComponent(...params)}
         renderSeparator={this.renderSeparator}
-        automaticallyAdjustContentInsets
-        keyboardDismissMode="on-drag"
+        automaticallyAdjustContentInsets={true}
+        keyboardDismissMode='on-drag'
         keyboardShouldPersistTaps='always'
         showsVerticalScrollIndicator={false}
       />
@@ -125,24 +103,20 @@ export class ComponentsScreen extends Component {
   }
 }
 
-const
-  styles = RkStyleSheet.create(theme => ({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.screen.base,
-    },
-    componentRow: {
-      paddingHorizontal: 24,
-      paddingVertical: 18,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    rowSeparator: {
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
-      height: 1,
-    },
-    rowSeparatorHide: {
-      opacity: 0.0,
-    },
-  }));
+const styles = RkStyleSheet.create(theme => ({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.screen.base,
+  },
+  componentRow: {
+    paddingHorizontal: 24,
+    paddingVertical: 18,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  rowSeparator: {
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    height: 1,
+  },
+}));

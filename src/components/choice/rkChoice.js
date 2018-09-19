@@ -241,11 +241,10 @@ export class RkChoice extends RkComponent {
       <TouchableOpacity
         style={[container, this.props.style]}
         activeOpacity={this.props.disabled ? 1 : 0.2}
-        onPress={this.props.disabled ? () => {
-        } : (e) => {
+        onPress={this.props.disabled ? () => {} : (e) => {
           this.onPress(e);
-        }}
-      >{contentView}
+        }}>
+        {contentView}
       </TouchableOpacity>
     );
   }
