@@ -1,3 +1,23 @@
+<a name="3.1.0"></a>
+## [3.1.0](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.1...v3.1.0) (2018-09-19)
+
+
+### Bug Fixes
+
+* **rkTextInput:** non-editable rkTextInput crash on Android ([e755ce1](https://github.com/akveo/react-native-ui-kitten/commit/e755ce1))
+* **rkModalImg:** more than 10 items render ([c98d45c](https://github.com/akveo/react-native-ui-kitten/commit/c98d45c))
+* **rkCard:** nullable subview render ([0275291](https://github.com/akveo/react-native-ui-kitten/commit/0275291))
+* **rkChoice:** antialiased render on Android ([c86d57c](https://github.com/akveo/react-native-ui-kitten/commit/c86d57c))
+
+
+### Features
+
+* **build:** eslint integration and project adopt ([24d268b](https://github.com/akveo/react-native-ui-kitten/commit/24d268b))
+* **build:** add expo 27 and RN 0.56 support ([8c8b987](https://github.com/akveo/react-native-ui-kitten/commit/8c8b987))
+* **rkSwitch:** component implementation ([08dd2df](https://github.com/akveo/react-native-ui-kitten/commit/08dd2df))
+* **rkGallery:** component implementation ([2a9f652](https://github.com/akveo/react-native-ui-kitten/commit/2a9f652))
+* **rkGalleryImage:** component implementation ([794b117](https://github.com/akveo/react-native-ui-kitten/commit/794b117))
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.0...v3.0.1) (2018-04-25)
 
