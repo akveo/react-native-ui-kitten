@@ -1,7 +1,6 @@
 <a name="3.1.0"></a>
 ## [3.1.0](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.1...v3.1.0) (2018-09-19)
 
-
 ### Bug Fixes
 
 * **rkTextInput:** non-editable rkTextInput crash on Android ([e755ce1](https://github.com/akveo/react-native-ui-kitten/commit/e755ce1))
@@ -17,6 +16,12 @@
 * **rkSwitch:** component implementation ([08dd2df](https://github.com/akveo/react-native-ui-kitten/commit/08dd2df))
 * **rkGallery:** component implementation ([2a9f652](https://github.com/akveo/react-native-ui-kitten/commit/2a9f652))
 * **rkGalleryImage:** component implementation ([794b117](https://github.com/akveo/react-native-ui-kitten/commit/794b117))
+
+
+### Notes
+
+* **rkModalImg:** this component is deprecated since 3.1.0 version. Will be completely deleted in 3.2.0 version.
+Use [rkGallery](https://akveo.github.io/react-native-ui-kitten/#/docs/ui-components/rkgallery) or [rkGalleryImage](https://akveo.github.io/react-native-ui-kitten/#/docs/ui-components/rkgalleryimage) instead.
 
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.0...v3.0.1) (2018-04-25)
