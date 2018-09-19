@@ -7,7 +7,7 @@ import { RkComponent } from '../rkComponent';
 /**
  * `RkText` is a component used to render text blocks
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Simple usage example:
  *

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity } from 'react-native';
+import {
+  TouchableOpacity,
+  ViewPropTypes,
+} from 'react-native';
 import _ from 'lodash';
 
 import { RkText } from '../text/rkText';
@@ -9,7 +12,7 @@ import { RkComponent } from '../rkComponent';
 /**
  * `RkButton` is a basic button component.
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Simple usage example:
  *
@@ -133,9 +136,27 @@ import { RkComponent } from '../rkComponent';
  * instead of TouchableOpacity
  * @property {TouchableOpacity.props} props - All `TouchableOpacity` props also
  * applied to `RkButton`
+ *
  */
-
 export class RkButton extends RkComponent {
+  static propTypes = {
+    style: ViewPropTypes.style,
+    contentStyle: ViewPropTypes.style,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]),
+    touchable: PropTypes.func,
+  };
+  static defaultProps = {
+    style: null,
+    contentStyle: null,
+    children: [],
+    touchable: TouchableOpacity,
+  };
+  static contextTypes = {
+    theme: PropTypes.object,
+  };
   componentName = 'RkButton';
   typeMapping = {
     container: {
@@ -145,10 +166,6 @@ export class RkButton extends RkComponent {
       color: 'color',
       fontSize: 'fontSize',
     },
-  };
-
-  static contextTypes = {
-    theme: PropTypes.object,
   };
 
   renderChildren(style) {
@@ -172,10 +189,9 @@ export class RkButton extends RkComponent {
 
   render() {
     const { container, content } = super.defineStyles();
-    const { style, touchable, ...touchableProps } = this.props;
+    const { style, touchable: Touchable, ...touchableProps } = this.props;
     const hitSlop = this.extractNonStyleValue(container, 'hitSlop');
     if (hitSlop) touchableProps.hitSlop = hitSlop;
-    const Touchable = touchable || TouchableOpacity;
 
     return (
       <Touchable style={[container, style]} {...touchableProps}>

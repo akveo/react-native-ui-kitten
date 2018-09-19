@@ -1,5 +1,10 @@
 import React from 'react';
-import { Modal, View } from 'react-native';
+import {
+  View,
+  Modal,
+  ViewPropTypes,
+} from 'react-native';
+import PropTypes from 'prop-types';
 import { RkButton } from '../button/rkButton';
 import { RkText } from '../text/rkText';
 import { RkComponent } from '../rkComponent';
@@ -8,7 +13,7 @@ import { RkOptionsList } from './rkOptionsList';
 /**
  * `RkPicker` is a modal window with lists of options that can be selected
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Usage example:
  *
@@ -149,9 +154,50 @@ import { RkOptionsList } from './rkOptionsList';
  * Default value: 3
  * @property {string} optionRkType - Types for RkText component with option
  * @property {string} selectedOptionRkType - Types for RkText component with selected option
-
  */
 export class RkPicker extends RkComponent {
+  static propTypes = {
+    rkType: RkComponent.propTypes.rkType,
+    // eslint-disable-next-line react/forbid-prop-types
+    data: PropTypes.array.isRequired,
+    optionRkType: RkComponent.propTypes.rkType,
+    selectedOptionRkType: RkComponent.propTypes.rkType,
+    // eslint-disable-next-line react/forbid-prop-types
+    selectedOptions: PropTypes.array,
+    optionHeight: PropTypes.number,
+    optionNumberOnPicker: PropTypes.number,
+    confirmButtonText: PropTypes.string,
+    cancelButtonText: PropTypes.string,
+    confirmTextRkType: PropTypes.string,
+    cancelTextRkType: PropTypes.string,
+    confirmButtonRkType: PropTypes.string,
+    cancelButtonRkType: PropTypes.string,
+    titleTextRkType: PropTypes.string,
+    onConfirm: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    style: ViewPropTypes.style,
+    title: PropTypes.string,
+    visible: PropTypes.bool,
+  };
+  static defaultProps = {
+    rkType: RkComponent.defaultProps.rkType,
+    optionRkType: RkComponent.defaultProps.rkType,
+    selectedOptionRkType: RkComponent.defaultProps.rkType,
+    selectedOptions: [],
+    optionHeight: 50,
+    optionNumberOnPicker: 3,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'CANCEL',
+    confirmTextRkType: 'header',
+    cancelTextRkType: '',
+    confirmButtonRkType: 'transparent rectangle',
+    cancelButtonRkType: 'transparent rectangle',
+    titleTextRkType: 'header',
+    style: null,
+    title: '',
+    visible: true,
+  };
+
   componentName = 'RkPicker';
   typeMapping = {
     modalContainerBlock: {},
@@ -180,49 +226,60 @@ export class RkPicker extends RkComponent {
     },
   };
 
+  state = {
+    scrollToSelected: false,
+    selectedOptions: [],
+  };
+
   constructor(props) {
     super(props);
-    this.optionHeight = this.props.optionHeight || 50;
-    this.optionNumberOnPicker = this.props.optionNumberOnPicker || 3;
-    this.pickerHeight = this.optionNumberOnPicker * this.optionHeight;
-    this.confirmButtonText = this.props.confirmButtonText || 'OK';
-    this.cancelButtonText = this.props.cancelButtonText || 'CANCEL';
-    this.confirmTextRkType = this.props.confirmTextRkType || 'header';
-    this.cancelTextRkType = this.props.cancelTextRkType || '';
-    this.confirmButtonRkType = this.props.confirmButtonRkType || 'transparent rectangle';
-    this.cancelButtonRkType = this.props.cancelButtonRkType || 'transparent rectangle';
-    this.titleTextRkType = this.props.titleTextRkType || 'header';
-    this.state = {
-      scrollToSelected: false,
-      selectedOptions: this.props.selectedOptions.slice(),
-    };
-  }
-
-  onRenderOptionContainer(items, index, optionBlock, highlightBlock, optionListContainer) {
-    return (
-      <RkOptionsList
-        rkType={this.props.rkType}
-        key={index}
-        id={index}
-        data={items}
-        selectedOption={this.state.selectedOptions[index]}
-        scrollToSelected={this.state.scrollToSelected}
-        onSelect={(option, optionIndex) => this.onOptionSelect(option, optionIndex)}
-        optionHeight={this.optionHeight}
-        optionNumberOnPicker={this.optionNumberOnPicker}
-        optionRkType={this.props.optionRkType}
-        selectedOptionRkType={this.props.selectedOptionRkType}
-        optionBlockStyle={optionBlock}
-        highlightBlockStyle={highlightBlock}
-        optionListContainerStyle={optionListContainer}
-      />
-    );
+    this.state.selectedOptions = this.props.selectedOptions.slice();
   }
 
   onOptionSelect(item, index) {
     this.state.scrollToSelected = this.props.visible;
     this.state.selectedOptions[index] = item;
   }
+
+  onConfirmButtonPress = () => {
+    this.props.onConfirm(this.state.selectedOptions);
+  };
+
+  onCancelButtonPress = () => {
+    this.props.onCancel();
+  };
+
+  onMondalRequestClose = () => {
+    this.props.onCancel();
+  };
+
+  renderOptions = (optionBlock, highlightBlock, container) => this.props.data.map((array, index) =>
+    this.renderOptionContainer(
+      array,
+      index,
+      optionBlock,
+      highlightBlock,
+      container,
+    ));
+
+  renderOptionContainer = (items, index, optionBlock, highlightBlock, optionListContainer) => (
+    <RkOptionsList
+      rkType={this.props.rkType}
+      key={index}
+      id={index}
+      data={items}
+      selectedOption={this.state.selectedOptions[index]}
+      scrollToSelected={this.state.scrollToSelected}
+      onSelect={(option, optionIndex) => this.onOptionSelect(option, optionIndex)}
+      optionHeight={this.props.optionHeight}
+      optionNumberOnPicker={this.props.optionNumberOnPicker}
+      optionRkType={this.props.optionRkType}
+      selectedOptionRkType={this.props.selectedOptionRkType}
+      optionBlockStyle={optionBlock}
+      highlightBlockStyle={highlightBlock}
+      optionListContainerStyle={optionListContainer}
+    />
+  );
 
   render() {
     const {
@@ -237,41 +294,39 @@ export class RkPicker extends RkComponent {
       highlightBlock,
       optionListContainer,
     } = super.defineStyles(this.props.rkType);
+    const { optionNumberOnPicker: optionCount, optionHeight } = this.props;
 
     return (
       <Modal
         visible={this.props.visible}
         animationType="fade"
         transparent={true}
-        onRequestClose={() => this.props.onCancel()}>
+        onRequestClose={this.onMondalRequestClose}>
         <View style={[modalContainerBlock]}>
           <View style={[modalContentBlock, this.props.style]}>
             <RkText
-              rkType={this.titleTextRkType}
+              rkType={this.props.titleTextRkType}
               style={titleBlock}>{this.props.title}
             </RkText>
-            <View style={[listsContainerBlock, { height: this.pickerHeight }]}>
-              {this.props.data.map((array, index) =>
-                this.onRenderOptionContainer(
-                  array,
-                  index,
-                  optionBlock,
-                  highlightBlock,
-                  optionListContainer,
-                ))}
+            <View style={[listsContainerBlock, { height: optionCount * optionHeight }]}>
+              {this.renderOptions(optionBlock, highlightBlock, optionListContainer)}
             </View>
             <View style={[buttonsBlockBlock]}>
               <RkButton
-                rkType={this.cancelButtonRkType}
+                rkType={this.props.cancelButtonRkType}
                 style={cancelButtonBlock}
-                onPress={() => this.props.onCancel()}>
-                <RkText rkType={this.cancelTextRkType}>{this.cancelButtonText}</RkText>
+                onPress={this.onCancelButtonPress}>
+                <RkText rkType={this.props.cancelTextRkType}>
+                  {this.props.cancelButtonText}
+                </RkText>
               </RkButton>
               <RkButton
-                rkType={this.confirmButtonRkType}
+                rkType={this.props.confirmButtonRkType}
                 style={confirmButtonBlock}
-                onPress={() => this.props.onConfirm(this.state.selectedOptions)}>
-                <RkText rkType={this.confirmTextRkType}>{this.confirmButtonText}</RkText>
+                onPress={this.onConfirmButtonPress}>
+                <RkText rkType={this.props.confirmTextRkType}>
+                  {this.props.confirmButtonText}
+                </RkText>
               </RkButton>
             </View>
           </View>
