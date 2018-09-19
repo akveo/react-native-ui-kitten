@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Switch,
   View,
+  ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkComponent } from '../rkComponent';
@@ -9,7 +10,7 @@ import { RkComponent } from '../rkComponent';
 /**
  * `RkSwitch` is a component which looks like a standard iOS switch on both platforms.
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Simple usage example:
  *
@@ -89,19 +90,24 @@ export class RkSwitch extends RkComponent {
     component: {},
   };
   static propTypes = {
+    rkType: RkComponent.propTypes.rkType,
     disabled: PropTypes.bool,
     onTintColor: PropTypes.string,
-    onValueChange: PropTypes.func,
     thumbTintColor: PropTypes.string,
     tintColor: PropTypes.string,
     value: PropTypes.bool,
+    onValueChange: PropTypes.func,
+    style: ViewPropTypes.style,
   };
   static defaultProps = {
+    rkType: RkComponent.defaultProps.rkType,
     disabled: false,
     onTintColor: '#53d669',
     thumbTintColor: '#ffffff',
     tintColor: '#e5e5e5',
     value: false,
+    onValueChange: (() => null),
+    style: null,
   };
 
   defineStyles(additionalTypes) {

@@ -1,5 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  ViewPropTypes,
+} from 'react-native';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { RkChoice } from '../choice/rkChoice';
 import { RkComponent } from '../rkComponent';
@@ -8,7 +12,8 @@ import { RkComponent } from '../rkComponent';
  * `RkChoiceGroup` component is container for elements
  * that can be used as checkboxes or radio buttons.
  * Used usually in combination with `RkChoice` component.
- * @extends RkComponent
+ *
+ * @extends React.Component
  *
  * @example Simple usage with labels
  *
@@ -108,9 +113,32 @@ import { RkComponent } from '../rkComponent';
  * @property {function} onChange - Called when state of RkChoice is changed.
  */
 export class RkChoiceGroup extends RkComponent {
+  static propTypes = {
+    selectedIndex: PropTypes.number,
+    radio: PropTypes.bool,
+    onChange: PropTypes.func,
+    disabled: PropTypes.bool,
+    style: ViewPropTypes.style,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]),
+  };
+  static defaultProps = {
+    selectedIndex: undefined,
+    radio: false,
+    onChange: (() => null),
+    disabled: false,
+    style: null,
+    children: [],
+  };
   componentName = 'RkChoiceGroup';
   typeMapping = {
     container: {},
+  };
+
+  state = {
+    selectionWasUpdated: false,
   };
 
   constructor(props) {
@@ -119,9 +147,6 @@ export class RkChoiceGroup extends RkComponent {
     if (props.selectedIndex !== undefined) {
       this.choice[props.selectedIndex] = true;
     }
-    this.state = {
-      selectionWasUpdated: false,
-    };
   }
 
   componentWillMount() {
@@ -142,9 +167,7 @@ export class RkChoiceGroup extends RkComponent {
       this.clearChoice();
     }
     this.choice[index] = this.props.radio ? true : !this.choice[index];
-    if (this.props.onChange) {
-      this.props.onChange(index);
-    }
+    this.props.onChange(index);
     this.setState({ selectionWasUpdated: true });
   }
 

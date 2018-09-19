@@ -4,6 +4,7 @@ import {
   View,
   Animated,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 import { RkComponent } from '../rkComponent';
 import { RkGalleryGrid } from './rkGalleryGrid';
@@ -18,7 +19,7 @@ import { RkButton } from '../button/rkButton';
  * Double tap a modal item to pinch-to-zoom image.
  * Swipe modal item right or left to switch next or previous image.
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Simple usage example:
  *
@@ -175,15 +176,16 @@ import { RkButton } from '../button/rkButton';
  * @property {function} renderGalleryFooter - Function for rendering custom footer
  * @property {number} spanCount - number of container columns in a grid mode
  * @property {number} galleryItemMaxScale - maximum scale of a modal item applied via pinch gesture
- * or double click
- * @property {function} onGridItemClick - Grid item click callback
- * @property {function} onGalleryItemClick - Gallery (modal) item click callback
- * @property {function} onGalleryItemChange - Gallery (modal) item change callback
- * @property {function} onGalleryItemScaleChange - Gallery (modal) item scale change callback
- * */
+ * or double click,
+ * @property {function} onGridItemClick - Grid item click callback,
+ * @property {function} onGalleryItemClick - Gallery (modal) item click callback,
+ * @property {function} onGalleryItemChange - Gallery (modal) item change callback,
+ * @property {function} onGalleryItemScaleChange - Gallery (modal) item scale change callback.
+ */
 export class RkGallery extends RkComponent {
   static propTypes = {
-    items: RkGalleryGrid.propTypes.items,
+    rkType: RkComponent.propTypes.rkType,
+    items: RkGalleryGrid.propTypes.items.isRequired,
     itemStyle: RkGalleryGrid.propTypes.itemStyle,
     renderGalleryHeader: RkGalleryHeaderFooter.propTypes.onRenderComponent,
     renderGalleryFooter: RkGalleryHeaderFooter.propTypes.onRenderComponent,
@@ -193,15 +195,20 @@ export class RkGallery extends RkComponent {
     onGalleryItemClick: RkGalleryViewer.propTypes.onItemClick,
     onGalleryItemChange: RkGalleryViewer.propTypes.onItemChange,
     onGalleryItemScaleChange: RkGalleryViewer.propTypes.onItemScaleChange,
+    style: ViewPropTypes.style,
   };
   static defaultProps = {
+    rkType: RkComponent.defaultProps.rkType,
+    itemStyle: RkGalleryGrid.defaultProps.itemStyle,
     renderGalleryHeader: null,
     renderGalleryFooter: null,
     spanCount: RkGalleryGrid.defaultProps.spanCount,
+    galleryItemMaxScale: RkGalleryViewer.defaultProps.itemMaxScale,
     onGridItemClick: RkGalleryGrid.defaultProps.onItemClick,
     onGalleryItemClick: RkGalleryViewer.defaultProps.onItemClick,
     onGalleryItemChange: RkGalleryViewer.defaultProps.onItemChange,
     onGalleryItemScaleChange: RkGalleryViewer.defaultProps.onItemScaleChange,
+    style: null,
   };
   componentName = 'RkGallery';
   typeMapping = {
@@ -217,10 +224,6 @@ export class RkGallery extends RkComponent {
   };
 
   isPreview = () => this.state.previewImageIndex !== undefined;
-
-  defineStyles(rkType) {
-    return super.defineStyles(rkType);
-  }
 
   // eslint-disable-next-line arrow-body-style
   getOverlayAnimation = (endValue) => {
@@ -316,7 +319,7 @@ export class RkGallery extends RkComponent {
   };
 
   renderGrid = () => {
-    const { grid, gridItem } = this.defineStyles(this.props.rkType);
+    const { grid, gridItem } = super.defineStyles(this.props.rkType);
     return (
       <RkGalleryGrid
         style={[grid, this.props.style]}

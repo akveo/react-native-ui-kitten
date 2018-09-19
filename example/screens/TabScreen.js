@@ -91,7 +91,7 @@ export class TabScreen extends React.Component {
         <View style={[UtilStyles.section, UtilStyles.bordered, styles.tabContainer]}>
           <RkText rkType='header' style={styles.header}>Material Theme Example</RkText>
           <View style={UtilStyles.rowContainer}>
-            <RkTabView rkType="material" tabsUnderContent={true} index='1'>
+            <RkTabView rkType="material" tabsUnderContent={true} index={1}>
               <RkTabView.Tab title="TAB 1">
                 <Image source={require('../img/river.jpeg')} />
               </RkTabView.Tab>
@@ -149,14 +149,10 @@ export class TabScreen extends React.Component {
           <RkText rkType='header' style={styles.header}>Scrollable Header</RkText>
           <View style={UtilStyles.rowContainer}>
             <RkTabView rkType='noBorders' maxVisibleTabs={3}>
-              <RkTabView.Tab
-                title={(selected) => this.renderScrollableTab(selected, 'Tab 1', 'first')}
-              />
+              <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 1', 'first')} />
               <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 2')} />
               <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 3')} />
-              <RkTabView.Tab
-                title={(selected) => this.renderScrollableTab(selected, 'Tab 4', 'last')}
-              />
+              <RkTabView.Tab title={(selected) => this.renderScrollableTab(selected, 'Tab 4', 'last')} />
             </RkTabView>
           </View>
         </View>

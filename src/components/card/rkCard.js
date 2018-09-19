@@ -1,13 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  ViewPropTypes,
+} from 'react-native';
+import PropTypes from 'prop-types';
 import { RkComponent } from '../rkComponent';
 
 /**
  * `RkCard` component used to render card view in your application.
  * It's usually being used with its props applied to standard react or custom components.
  *
- * @extends RkComponent
- *
+ * @extends React.Component
  *
  * @example Usage example:
  *
@@ -106,7 +109,17 @@ import { RkComponent } from '../rkComponent';
  */
 export class RkCard extends RkComponent {
   static attrName = 'rkCard';
-
+  static propTypes = {
+    style: ViewPropTypes.style,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]),
+  };
+  static defaultProps = {
+    style: null,
+    children: [],
+  };
   componentName = 'RkCard';
   typeMapping = {
     container: {},

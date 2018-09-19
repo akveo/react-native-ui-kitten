@@ -10,13 +10,14 @@ import PropTypes from 'prop-types';
 
 export class RkGalleryGrid extends React.Component {
   static propTypes = {
-    items: PropTypes.node.isRequired,
+    items: PropTypes.arrayOf(PropTypes.node),
     spanCount: PropTypes.number,
     onItemClick: PropTypes.func,
     style: ViewPropTypes.style,
     itemStyle: ViewPropTypes.style,
   };
   static defaultProps = {
+    items: [],
     spanCount: 3,
     onItemClick: (() => null),
     style: null,

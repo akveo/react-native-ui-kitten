@@ -2,14 +2,16 @@ import React from 'react';
 import {
   TouchableOpacity,
   Image,
+  ViewPropTypes,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { RkComponent } from '../rkComponent';
 
 /**
  * `RkChoice` component is an analog of html checkbox and radio buttons.
  *
- * @extends RkComponent
+ * @extends React.Component
  *
  * @example Simple usage example:
  *
@@ -175,8 +177,25 @@ import { RkComponent } from '../rkComponent';
  * @property {style} style - Style for `container` component
  * @property {style} contentStyle - Style for `inner` component
  */
-
 export class RkChoice extends RkComponent {
+  static propTypes = {
+    rkType: PropTypes.string,
+    style: ViewPropTypes.style,
+    contentStyle: ViewPropTypes.style,
+    selected: PropTypes.bool,
+    disabled: PropTypes.bool,
+    onChange: PropTypes.func,
+    renderContentFunction: PropTypes.func,
+  };
+  static defaultProps = {
+    rkType: '',
+    style: null,
+    contentStyle: null,
+    selected: false,
+    disabled: false,
+    onChange: (() => null),
+    renderContentFunction: undefined,
+  };
   componentName = 'RkChoice';
   typeMapping = {
     container: {},
@@ -188,8 +207,8 @@ export class RkChoice extends RkComponent {
   constructor(props) {
     super(props);
     this.state = {
-      selected: props.selected || false,
-      disabled: props.disabled || false,
+      selected: props.selected,
+      disabled: props.disabled,
     };
   }
 
@@ -201,9 +220,7 @@ export class RkChoice extends RkComponent {
 
   onPress(e) {
     this.setState({ selected: !this.state.selected });
-    if (this.props.onChange) {
-      this.props.onChange(this.state.selected, e);
-    }
+    this.props.onChange(this.state.selected, e);
   }
 
   renderDefaultContentView(style) {

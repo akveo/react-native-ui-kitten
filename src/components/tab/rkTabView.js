@@ -3,7 +3,9 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  ViewPropTypes,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { RkComponent } from '../rkComponent';
 import { RkTab } from './rkTab';
@@ -11,6 +13,8 @@ import { RkText } from '../text/rkText';
 
 /**
  * `RkTabView` is a component to display tabs in your application.
+ *
+ * @extends React.Component
  *
  * @example Usage example:
  *
@@ -259,12 +263,34 @@ import { RkText } from '../text/rkText';
  * (used only when label is text)
  * @property {function} onTabChanged - Called when active tab was changed
  */
-
 export class RkTabView extends RkComponent {
+  static propTypes = {
+    rkType: RkComponent.propTypes.rkType,
+    rkTypeSelected: RkComponent.propTypes.rkType,
+    index: PropTypes.number,
+    maxVisibleTabs: PropTypes.number,
+    tabsUnderContent: PropTypes.bool,
+    onTabChanged: PropTypes.func,
+    headerContainerStyle: ViewPropTypes.style,
+    style: ViewPropTypes.style,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]).isRequired,
+  };
+  static defaultProps = {
+    rkType: RkComponent.defaultProps.rkType,
+    rkTypeSelected: RkComponent.defaultProps.rkType,
+    index: 0,
+    maxVisibleTabs: undefined,
+    tabsUnderContent: false,
+    onTabChanged: (() => null),
+    style: null,
+    headerContainerStyle: null,
+  };
   static Tab = RkTab;
 
   componentName = 'RkTabView';
-
   typeMapping = {
     container: {},
     headerContainer: {},
@@ -279,14 +305,15 @@ export class RkTabView extends RkComponent {
     contentContainer: {},
   };
 
+  state = {
+    index: RkTabView.defaultProps.index,
+  };
+
   selectedType = 'selected';
 
   constructor(props) {
     super(props);
-    this.state = {
-      index: +props.index || 0,
-    };
-
+    this.state.index = props.index;
     if (this.props.rkTypeSelected) {
       this.selectedType = this.props.rkTypeSelected;
     } else {
@@ -297,11 +324,11 @@ export class RkTabView extends RkComponent {
     }
   }
 
-  onContainerLayout(e, tabsCount) {
-    const { width: layoutWidth } = e.nativeEvent.layout;
-    const tabWidth = layoutWidth / tabsCount;
-    this.setState({ tabWidth });
-  }
+  onContainerLayout = (e) => {
+    this.setState({
+      tabWidth: e.nativeEvent.layout.width / this.props.maxVisibleTabs,
+    });
+  };
 
   defineComponentStyles(selected) {
     if (selected) {
@@ -313,9 +340,7 @@ export class RkTabView extends RkComponent {
   selectTab(id) {
     if (this.state.index !== id) {
       this.setState({ index: +id });
-      if (this.props.onTabChanged && (typeof this.props.onTabChanged === 'function')) {
-        this.props.onTabChanged(id);
-      }
+      this.props.onTabChanged(id);
     }
   }
 
@@ -367,9 +392,7 @@ export class RkTabView extends RkComponent {
     };
     return (
       <ScrollView
-        onLayout={(e) => {
-          this.onContainerLayout(e, this.props.maxVisibleTabs);
-        }}
+        onLayout={this.onContainerLayout}
         scrollEnabled={scrollableHeader}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
