@@ -1,3 +1,14 @@
+<a name="3.1.1"></a>
+## [3.1.1](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.0...v3.1.1) (2018-09-20)
+
+### Features
+
+* **rkText:** add prop-types validation ([ea193cb](https://github.com/akveo/react-native-ui-kitten/commit/ea193cb))
+
+### Notes
+
+* **rkAvoidKeyboard:** this component is deprecated since 3.1.1 version. Will be completely deleted in 3.2.0 version.
+
 <a name="3.1.0"></a>
 ## [3.1.0](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.1...v3.1.0) (2018-09-19)
 
