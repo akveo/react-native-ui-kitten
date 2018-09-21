@@ -1,13 +1,17 @@
+<a name="3.1.2"></a>
+## [3.1.2](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.1...v3.1.2) (2018-09-21)
+
+### Bug Fixes
+
+* **rkSwitch:** onValueChange parameters not passed to android component ([d1db657](https://github.com/akveo/react-native-ui-kitten/commit/d1db657))
+
+
 <a name="3.1.1"></a>
 ## [3.1.1](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.0...v3.1.1) (2018-09-20)
 
 ### Features
 
 * **rkText:** add prop-types validation ([ea193cb](https://github.com/akveo/react-native-ui-kitten/commit/ea193cb))
-
-### Bug Fixes
-
-* **rkSwitch:** onValueChange parameters not passed to android component ([77b4fb0](https://github.com/akveo/react-native-ui-kitten/commit/77b4fb0))
 
 ### Notes
 
