@@ -5,6 +5,10 @@
 
 * **rkText:** add prop-types validation ([ea193cb](https://github.com/akveo/react-native-ui-kitten/commit/ea193cb))
 
+### Bug Fixes
+
+* **rkSwitch:** onValueChange parameters not passed to android component ([77b4fb0](https://github.com/akveo/react-native-ui-kitten/commit/77b4fb0))
+
 ### Notes
 
 * **rkAvoidKeyboard:** this component is deprecated since 3.1.1 version. Will be completely deleted in 3.2.0 version.
