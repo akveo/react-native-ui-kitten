@@ -24,8 +24,8 @@ import { RkComponent } from '../rkComponent';
  *   onValueChange={this.onSwitchValueChange}
  * />
  *
- * onSwitchValueChange = () => {
- *   this.setState({value: !this.state.value}
+ * onSwitchValueChange = (value) => {
+ *   this.setState({value: value});
  * };
 
  * ```
