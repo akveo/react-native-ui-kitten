@@ -31,8 +31,8 @@ const thumbSize = switchHeight - (switchBorderWidth * 2);
  *   onValueChange={this.onSwitchValueChange}
  * />
  *
- * onSwitchValueChange = () => {
- *   this.setState({value: !this.state.value}
+ * onSwitchValueChange = (value) => {
+ *   this.setState({value: value});
  * };
 
  * ```
