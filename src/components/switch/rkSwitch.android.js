@@ -234,9 +234,9 @@ export class RkSwitch extends RkComponent {
     this.animateThumb(thumbSize);
   };
 
-  onValueChange = () => {
+  onValueChange = (value) => {
     if (this.props.onValueChange) {
-      this.props.onValueChange();
+      this.props.onValueChange(value);
     }
   };
 

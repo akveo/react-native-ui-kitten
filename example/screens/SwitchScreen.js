@@ -27,6 +27,10 @@ export class SwitchScreen extends React.Component {
     switch10State: true,
   };
 
+  onBasicSwitchValueChange = (value) => {
+    this.setState({ switch1State: value });
+  };
+
   render() {
     return (
       <ScrollView
@@ -37,7 +41,7 @@ export class SwitchScreen extends React.Component {
           <RkSwitch
             value={this.state.switch1State}
             style={{ paddingVertical: 20 }}
-            onValueChange={() => this.setState({ switch1State: !this.state.switch1State })}
+            onValueChange={this.onBasicSwitchValueChange}
           />
           <View>
             <RkText>
@@ -63,7 +67,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 rkType='primary'
                 value={this.state.switch2State}
-                onValueChange={() => this.setState({ switch2State: !this.state.switch2State })}
+                onValueChange={(value) => this.setState({ switch2State: value })}
               />
             </View>
           </View>
@@ -74,7 +78,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 rkType='success'
                 value={this.state.switch3State}
-                onValueChange={() => this.setState({ switch3State: !this.state.switch3State })}
+                onValueChange={(value) => this.setState({ switch3State: value })}
               />
             </View>
           </View>
@@ -85,7 +89,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 rkType='info'
                 value={this.state.switch4State}
-                onValueChange={() => this.setState({ switch4State: !this.state.switch4State })}
+                onValueChange={(value) => this.setState({ switch4State: value })}
               />
             </View>
           </View>
@@ -96,7 +100,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 rkType='warning'
                 value={this.state.switch5State}
-                onValueChange={() => this.setState({ switch5State: !this.state.switch5State })}
+                onValueChange={(value) => this.setState({ switch5State: value })}
               />
             </View>
           </View>
@@ -107,7 +111,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 rkType='danger'
                 value={this.state.switch6State}
-                onValueChange={() => this.setState({ switch6State: !this.state.switch6State })}
+                onValueChange={(value) => this.setState({ switch6State: value })}
               />
             </View>
           </View>
@@ -129,7 +133,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 rkType='redTint'
                 value={this.state.switch7State}
-                onValueChange={() => this.setState({ switch7State: !this.state.switch7State })}
+                onValueChange={(value) => this.setState({ switch7State: value })}
               />
             </View>
           </View>
@@ -140,7 +144,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 thumbTintColor='yellow'
                 value={this.state.switch8State}
-                onValueChange={() => this.setState({ switch8State: !this.state.switch8State })}
+                onValueChange={(value) => this.setState({ switch8State: value })}
               />
             </View>
           </View>
@@ -152,7 +156,7 @@ export class SwitchScreen extends React.Component {
                 tintColor='purple'
                 onTintColor='purple'
                 value={this.state.switch9State}
-                onValueChange={() => this.setState({ switch9State: !this.state.switch9State })}
+                onValueChange={(value) => this.setState({ switch9State: value })}
               />
             </View>
           </View>
@@ -166,7 +170,7 @@ export class SwitchScreen extends React.Component {
               <RkSwitch
                 disabled={true}
                 value={this.state.switch10State}
-                onValueChange={() => this.setState({ switch10State: !this.state.switch10State })}
+                onValueChange={(value) => this.setState({ switch10State: value })}
               />
             </View>
           </View>
