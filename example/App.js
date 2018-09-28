@@ -23,6 +23,7 @@ const ExplorerApp = StackNavigator({
   RangeCalendar: { screen: Screens.RangeCalendarScreen },
   BoundingCalendar: { screen: Screens.BoundingCalendarScreen },
   CustomCalendar: { screen: Screens.CustomCalendarScreen },
+  HorizontalCalendar: { screen: Screens.HorizontalCalendarScreen },
   Switch: { screen: Screens.SwitchScreen },
   Choice: { screen: Screens.ChoiceScreen },
   Tab: { screen: Screens.TabScreen },

@@ -5,6 +5,7 @@ export * from './calendar/BaseCalendarScreen';
 export * from './calendar/RangeCalendarScreen';
 export * from './calendar/BoundingCalendarScreen';
 export * from './calendar/CustomCalendarScreen';
+export * from './calendar/HorizontalCalendarScreen';
 export * from './CardScreen';
 export * from './ChoiceScreen';
 export * from './ComponentsScreen';

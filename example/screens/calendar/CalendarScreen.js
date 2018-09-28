@@ -33,6 +33,10 @@ export class CalendarScreen extends React.Component {
       title: 'Custom Day Cell',
       route: 'CustomCalendar',
     },
+    {
+      title: 'Horizontal',
+      route: 'HorizontalCalendar',
+    },
   ];
 
   getItemKey = (item, index) => index.toString();
