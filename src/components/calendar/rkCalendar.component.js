@@ -169,6 +169,16 @@ export class RkCalendar extends React.Component {
     this.scrollToDate(RkCalendarService.Date.today(), params);
   }
 
+  scrollToPreviousMonth(params = defaultScrollParams) {
+    const currentMonth = this.state.visibleMonth;
+    this.scrollToDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1), params);
+  }
+
+  scrollToNextMonth(params = defaultScrollParams) {
+    const currentMonth = this.state.visibleMonth;
+    this.scrollToDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1), params);
+  }
+
   onDaySelect = (date) => {
     const selectionState = this.state.selectionStrategy.getStateFromSelection(this.state, date);
     this.setState(selectionState);
