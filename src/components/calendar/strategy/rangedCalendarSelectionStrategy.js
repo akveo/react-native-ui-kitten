@@ -1,7 +1,5 @@
 import * as RkCalendarService from '../services';
 
-export const description = 'range';
-
 class RangedSelectionStrategy {
   getStateFromSelection(state, selection) {
     const { start, end } = state.selected;
@@ -118,4 +116,5 @@ function isDateRangeInRange(range1, range2) {
   return isRange1StartInRange || isRange1EndInRange || isRange2StartInRange || isRange2EndInRange;
 }
 
-export default new RangedSelectionStrategy();
+export const strategy = new RangedSelectionStrategy();
+export const description = 'range';

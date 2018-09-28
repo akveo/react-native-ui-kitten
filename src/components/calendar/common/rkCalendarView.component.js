@@ -5,12 +5,17 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkStyleSheet } from '../../../styles/styleSheet';
-import * as RkCalendarService from '../services';
 import { RkCalendarMonth } from '../cells/rkCalendarMonth.component';
 import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
+import * as RkCalendarService from '../services';
 
 export class RkCalendarView extends React.Component {
   static propTypes = {
+    layout: PropTypes.shape({
+      getLayoutConfig: PropTypes.func.isRequired,
+      getItemSize: PropTypes.func.isRequired,
+      getPrimaryAxeOffset: PropTypes.func.isRequired,
+    }).isRequired,
     selectionStrategy: PropTypes.shape({
       isDaySelected: PropTypes.func.isRequired,
       isDayDisabled: PropTypes.func.isRequired,
@@ -44,36 +49,61 @@ export class RkCalendarView extends React.Component {
      */
     onSelect: PropTypes.func.isRequired,
     onLayoutCompleted: PropTypes.func,
+    /**
+     * callback function describing visible month item changes,
+     *
+     * DEV NOTES:
+     *
+     * 1) Scroll event called programmatically:
+     *    Fires inside scrollToIndex method to prevent redundant visible index calculations.
+     *
+     * 2) Scroll event called with { animated: false, ... } params:
+     *    onMomentumScrollEnd not fires in this case, so it will work as in first case.
+     *
+     * 3) Scroll event called by 'fling' gesture:
+     *    Fires inside onScrollEndFling. Calculates visible index by offset.
+     *
+     * 4) Scroll event called by 'drag' gesture:
+     *    Fires inside onScrollEndDrag. Calculates visible index by offset.
+     */
+    onVisibleMonthChanged: PropTypes.func,
   };
   static defaultProps = {
     boundingMonth: true,
     renderDay: undefined,
     filter: (() => true),
     onLayoutCompleted: (() => null),
+    onVisibleMonthChanged: (() => null),
   };
 
   state = {
+    items: [],
     daySize: -1,
+    visibleMonth: RkCalendarService.Date.today(),
   };
 
   listRef = undefined;
+
+  itemSizes = new Map();
+
+  static getDerivedStateFromProps(props) {
+    const itemCount = RkCalendarService.Date.getMonthDiff(props.min, props.max);
+    const createMonthDateByIndex = (index) => new Date(props.min.getFullYear(), index, 1);
+    return {
+      items: RkCalendarService.Util.range(itemCount, createMonthDateByIndex),
+    };
+  }
 
   /**
    * @param params - object: { index: number, animated: boolean }
    */
   scrollToIndex(params) {
     const { index, ...restParams } = params;
-    this.scrollToOffset({
+    this.listRef.scrollToOffset({
       offset: this.calculateItemOffset({ index }),
       ...restParams,
     });
-  }
-
-  /**
-   * @param params - object, required by FlatList for scrollToOffset(params) function.
-   */
-  scrollToOffset(params) {
-    this.listRef.scrollToOffset(params);
+    this.setVisibleMonthIfNeeded(this.createMonthDateByIndex(index));
   }
 
   /**
@@ -90,15 +120,35 @@ export class RkCalendarView extends React.Component {
 
   onLayout = (event) => {
     const state = { daySize: event.nativeEvent.layout.width / RkCalendarService.Date.DAYS_IN_WEEK };
-    this.setState(state, this.props.onLayoutCompleted);
+    this.setState(state, this.onLayoutCompleted);
+  };
+
+  onLayoutCompleted = () => {
+    this.state.items.forEach((item, index) => {
+      const itemSize = this.getItemSize(index);
+      this.itemSizes.set(index, itemSize);
+    });
+    this.props.onLayoutCompleted();
+  };
+
+  onScrollEndDrag = (event) => {
+    const primaryAxeOffset = this.props.layout.getPrimaryAxeOffset(event.nativeEvent.contentOffset);
+    const visibleMonthIndex = this.calculateItemIndex(primaryAxeOffset);
+    this.setVisibleMonthIfNeeded(this.createMonthDateByIndex(visibleMonthIndex));
+  };
+
+  onScrollEndFling = (event) => {
+    const primaryAxeOffset = this.props.layout.getPrimaryAxeOffset(event.nativeEvent.contentOffset);
+    const visibleMonthIndex = this.calculateItemIndex(primaryAxeOffset);
+    this.setVisibleMonthIfNeeded(this.createMonthDateByIndex(visibleMonthIndex));
   };
 
   getItemLayout = (data, index) => {
     const itemPosition = index < 0 ? 0 : index;
-    const itemHeight = this.getItemHeight(itemPosition);
+    const itemSize = this.getItemSize(itemPosition);
     return {
-      length: itemHeight,
-      offset: itemHeight + this.calculateItemOffset({ index: itemPosition }),
+      length: itemSize,
+      offset: itemSize + this.calculateItemOffset({ index: itemPosition }),
       index: itemPosition,
     };
   };
@@ -108,16 +158,34 @@ export class RkCalendarView extends React.Component {
       return currentValue;
     }
     return this.calculateItemOffset({
-      currentValue: currentValue + this.getItemHeight(currentIndex),
+      currentValue: currentValue + this.getItemSize(currentIndex),
       currentIndex: currentIndex + 1,
       index,
     });
   };
 
-  getItemHeight = (index) => {
-    const item = new Date(this.props.min.getFullYear(), this.props.min.getMonth() + index, 0);
-    const weekRowCount = RkCalendarService.Month.getNumberOfWeekRowsInMonth(item);
-    return (weekRowCount * this.state.daySize) + 58; // + header height
+  calculateItemIndex = (offset) => {
+    let calculatedOffset = 0;
+    for (let i = 0; i < this.itemSizes.size; i += 1) {
+      const itemSize = this.itemSizes.get(i);
+      calculatedOffset += this.itemSizes.get(i);
+      if (calculatedOffset >= offset) {
+        return calculatedOffset - offset <= itemSize / 2 ? i + 1 : i;
+      }
+    }
+    return 0;
+  };
+
+  /**
+   * returns item size if was calculated earlier or calculates it.
+   */
+  getItemSize = (index) => {
+    const cachedItemSize = this.itemSizes.get(index);
+    const calculateItemSize = () => {
+      const item = new Date(this.props.min.getFullYear(), this.props.min.getMonth() + index, 0);
+      return this.props.layout.getItemSize(item, index, this.state.daySize);
+    };
+    return cachedItemSize || calculateItemSize();
   };
 
   getItemKey = (index) => index.toString();
@@ -126,12 +194,14 @@ export class RkCalendarView extends React.Component {
     this.listRef = ref;
   };
 
-  createMonthDateByIndex = (index) => new Date(this.props.min.getFullYear(), index, 1);
+  setVisibleMonthIfNeeded(date) {
+    if (!RkCalendarService.Date.isSameMonth(this.state.visibleMonth, date)) {
+      this.state.visibleMonth = date;
+      this.props.onVisibleMonthChanged(date);
+    }
+  }
 
-  getData = () => {
-    const itemCount = RkCalendarService.Date.getMonthDiff(this.props.min, this.props.max);
-    return RkCalendarService.Util.range(itemCount, this.createMonthDateByIndex);
-  };
+  createMonthDateByIndex = (index) => new Date(this.props.min.getFullYear(), index, 1);
 
   renderItem = ({ item, index }) => (
     <View key={index.toString()}>
@@ -159,11 +229,14 @@ export class RkCalendarView extends React.Component {
     <FlatList
       ref={this.setListRef}
       style={styles.container}
-      data={this.getData()}
+      data={this.state.items}
       renderItem={this.renderItem}
       getItemLayout={this.getItemLayout}
       keyExtractor={this.getItemKey}
+      onScrollEndDrag={this.onScrollEndDrag}
+      onMomentumScrollEnd={this.onScrollEndFling}
       initialNumToRender={RkCalendarService.Date.MONTHS_IN_YEAR}
+      {...this.props.layout.getLayoutConfig()}
     />
   );
 

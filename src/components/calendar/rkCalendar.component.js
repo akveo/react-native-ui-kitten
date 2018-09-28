@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RkCalendarView } from './common/rkCalendarView.component';
 import * as SelectionStrategy from './strategy';
+import * as Layout from './layout';
 import * as RkCalendarService from './services';
 
 const defaultScrollParams = {
@@ -71,23 +72,34 @@ const defaultScrollParams = {
  * @property {function} filter - Predicate that decides which cells will be disabled
  * @property {function} renderDay - Custom render day cell function
  * @property {function} onSelect - Fired when date or date range is selected
+ * @property {function} onVisibleMonthChanged - Fired when on-screen month is changed
  * */
 export class RkCalendar extends React.Component {
   static propTypes = {
-    type: PropTypes.string,
+    type: PropTypes.oneOf([
+      SelectionStrategy.Base.description,
+      SelectionStrategy.Range.description,
+    ]),
+    layout: PropTypes.oneOf([
+      Layout.Vertical.description,
+      Layout.Horizontal.description,
+    ]),
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
     boundingMonth: PropTypes.bool,
     filter: PropTypes.func,
     renderDay: PropTypes.func,
     onSelect: PropTypes.func,
+    onVisibleMonthChanged: PropTypes.func,
   };
   static defaultProps = {
-    type: 'base',
+    type: SelectionStrategy.Base.description,
+    layout: Layout.Vertical.description,
     boundingMonth: true,
     renderDay: undefined,
     filter: (() => true),
     onSelect: (() => null),
+    onVisibleMonthChanged: (() => null),
   };
 
   state = {
@@ -95,7 +107,8 @@ export class RkCalendar extends React.Component {
       start: RkCalendarService.Date.today(),
       end: undefined,
     },
-    selectionStrategy: SelectionStrategy.Base,
+    visibleMonth: RkCalendarService.Date.today(),
+    selectionStrategy: SelectionStrategy.Base.strategy,
   };
 
   containerRef = undefined;
@@ -112,13 +125,19 @@ export class RkCalendar extends React.Component {
   onContainerLayoutCompleted = () => {
     const today = RkCalendarService.Date.today();
     const monthNumberTillToday = RkCalendarService.Date.getMonthDiff(this.props.min, today);
-    const scrollToToday = () => { this.scrollToDate(today, { animated: false }); };
-
+    const scrollToToday = () => {
+      this.scrollToDate(today, { animated: false });
+    };
     if (monthNumberTillToday > RkCalendarService.Date.MONTHS_IN_YEAR) {
       setTimeout(scrollToToday, 100);
     } else {
       scrollToToday();
     }
+  };
+
+  onVisibleMonthChanged = (date) => {
+    this.state.visibleMonth = date;
+    this.props.onVisibleMonthChanged(date);
   };
 
   /**
@@ -129,15 +148,6 @@ export class RkCalendar extends React.Component {
    */
   scrollToIndex(params) {
     this.containerRef.scrollToIndex(params);
-  }
-
-  /**
-   * Scrolls to passed offset
-   *
-   * @param {object} params - additional scroll parameters (optional)
-   */
-  scrollToOffset(params) {
-    this.containerRef.scrollToOffset(params);
   }
 
   /**
@@ -156,7 +166,7 @@ export class RkCalendar extends React.Component {
    * @param {object} params - additional scroll parameters (optional)
    */
   scrollToToday(params = defaultScrollParams) {
-    this.containerRef.scrollToDate(RkCalendarService.Date.today(), params);
+    this.scrollToDate(RkCalendarService.Date.today(), params);
   }
 
   onDaySelect = (date) => {
@@ -167,16 +177,25 @@ export class RkCalendar extends React.Component {
 
   getSelectionStrategy = (type) => {
     switch (type) {
-      case 'base': return SelectionStrategy.Base;
-      case 'range': return SelectionStrategy.Range;
-      default: return SelectionStrategy.Base;
+      case SelectionStrategy.Base.description: return SelectionStrategy.Base.strategy;
+      case SelectionStrategy.Range.description: return SelectionStrategy.Range.strategy;
+      default: return SelectionStrategy.Base.strategy;
+    }
+  };
+
+  getLayout = (type) => {
+    switch (type) {
+      case Layout.Vertical.description: return Layout.Vertical.layout;
+      case Layout.Horizontal.description: return Layout.Horizontal.layout;
+      default: return Layout.Vertical.layout;
     }
   };
 
   render = () => (
     <RkCalendarView
       ref={this.setContainerRef}
-      selectionStrategy={this.getSelectionStrategy(this.props.type)}
+      selectionStrategy={this.state.selectionStrategy}
+      layout={this.getLayout(this.props.layout)}
       min={this.props.min}
       max={this.props.max}
       selected={this.state.selected}
@@ -185,6 +204,7 @@ export class RkCalendar extends React.Component {
       filter={this.props.filter}
       onSelect={this.onDaySelect}
       onLayoutCompleted={this.onContainerLayoutCompleted}
+      onVisibleMonthChanged={this.onVisibleMonthChanged}
     />
   );
 }

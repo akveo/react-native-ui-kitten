@@ -77,4 +77,5 @@ class BaseSelectionStrategy {
   }
 }
 
-export default new BaseSelectionStrategy();
+export const strategy = new BaseSelectionStrategy();
+export const description = 'base';

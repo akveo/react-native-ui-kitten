@@ -1,2 +1,2 @@
-export { default as Base } from './baseCalendarSelectionStrategy';
-export { default as Range } from './rangedCalendarSelectionStrategy';
+export * as Base from './baseCalendarSelectionStrategy';
+export * as Range from './rangedCalendarSelectionStrategy';
