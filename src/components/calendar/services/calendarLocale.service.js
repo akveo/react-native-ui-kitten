@@ -1,16 +1,32 @@
+const weekDays = [
+  'S',
+  'M',
+  'T',
+  'W',
+  'T',
+  'F',
+  'S',
+];
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 class CalendarLocale {
   locale = '';
 
-  weekDays = [];
-
   constructor(locale) {
     this.locale = locale;
-
-    const first = new Date(2018, 8, 2 + this.getFirstDayOfWeek());
-    this.weekDays = [...new Array(7)].map((item, index) => {
-      const nextDay = first.getDate() + index;
-      return new Date(first.getFullYear(), first.getMonth(), nextDay);
-    });
   }
 
   /**
@@ -22,16 +38,27 @@ class CalendarLocale {
     return 0;
   }
 
-  getMonthName(date, style = 'long') {
-    return date.toLocaleString(this.locale, { month: style });
+  getMonthName(date) {
+    // TODO: locale-dependent
+    return months[date.getMonth()];
   }
 
-  getDayOfWeekNames(style = 'narrow') {
-    return this.weekDays.map(date => {
-      const options = { weekday: style };
-      return date.toLocaleString(this.locale, options);
-    });
+  getDayOfWeekNames() {
+    // TODO: locale-dependent
+    return this.shift(weekDays, 0, this.getFirstDayOfWeek());
+  }
+
+  /**
+   * shifts array on N positions depending on direction
+   *
+   * @param array - source array
+   * @param direction - shift direction. 0 for right, 1 for left
+   * @param n - number of positions to shift
+   */
+  shift(array, n, direction = 0) {
+    const times = n > array.length ? n % array.length : n;
+    return array.concat(array.splice(0, (direction > 0 ? array.length - times : times)));
   }
 }
 
-export default new CalendarLocale('en-US');
+export default new CalendarLocale();
