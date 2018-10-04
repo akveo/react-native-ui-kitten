@@ -62,6 +62,7 @@ export class RkCalendarMonth extends React.Component {
       key={`${index}`}
       min={this.props.min}
       max={this.props.max}
+      monthDate={this.props.date}
       dates={item}
       selected={this.props.selected}
       renderDay={this.props.renderDay}

@@ -21,10 +21,16 @@ class BaseSelectionStrategy {
   }
 
   isDayDisabled(props) {
-    const { date, min, max } = props;
+    const {
+      monthDate,
+      date,
+      min,
+      max,
+    } = props;
     const isFitsFilter = props.filter(date);
     const isBetweenRange = (RkCalendarService.Date.isBetweenIncludingSafe(date, min, max) || false);
-    return !isFitsFilter || !isBetweenRange;
+    const isBoundingDay = isBoundingDateSafe(date, monthDate) || false;
+    return isBoundingDay || !isFitsFilter || !isBetweenRange;
   }
 
   isDayToday(props) {
@@ -61,10 +67,15 @@ class BaseSelectionStrategy {
   }
 
   shouldUpdateMonth(props, nextProps) {
-    const { date, selected: currentSelected } = props;
+    const { date, selected: currentSelected, boundingMonth: isBoundingMonth } = props;
     const { selected: nextSelected } = nextProps;
     const isWasSelected = RkCalendarService.Date.isSameMonthSafe(date, currentSelected.start);
     const isWillSelected = RkCalendarService.Date.isSameMonthSafe(date, nextSelected.start);
+    if (isBoundingMonth) {
+      const isWasBoundingSelected = isBoundingDateSafe(currentSelected.start, date) || false;
+      const isWillBoundingSelected = isBoundingDateSafe(nextSelected.start, date) || false;
+      return (isWasBoundingSelected || isWillBoundingSelected) || (isWasSelected || isWillSelected);
+    }
     return isWasSelected || isWillSelected;
   }
 
@@ -75,6 +86,14 @@ class BaseSelectionStrategy {
     const isWillSelected = RkCalendarService.Date.isSameYearSafe(date, nextSelected.start);
     return isWasSelected || isWillSelected;
   }
+}
+
+function isBoundingDate(date, monthDate) {
+  return Math.abs(date.getMonth() - monthDate.getMonth()) === 1;
+}
+
+function isBoundingDateSafe(date, monthDate) {
+  return date && monthDate && isBoundingDate(date, monthDate);
 }
 
 export const strategy = new BaseSelectionStrategy();

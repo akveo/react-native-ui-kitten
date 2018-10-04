@@ -18,7 +18,12 @@ export class RkCalendarDay extends React.Component {
     // used in selection-strategy
     // eslint-disable-next-line react/no-unused-prop-types
     max: PropTypes.instanceOf(Date).isRequired,
+    // used in selection-strategy
+    // eslint-disable-next-line react/no-unused-prop-types
+    monthDate: PropTypes.instanceOf(Date).isRequired,
     date: PropTypes.instanceOf(Date),
+    // used in selection-strategy
+    // eslint-disable-next-line react/no-unused-prop-types
     selected: PropTypes.shape({
       start: PropTypes.instanceOf(Date),
       end: PropTypes.instanceOf(Date),

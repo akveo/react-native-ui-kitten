@@ -10,6 +10,7 @@ export class RkCalendarWeek extends React.Component {
   static propTypes = {
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
+    monthDate: PropTypes.instanceOf(Date).isRequired,
     dates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
     selected: PropTypes.shape({
       start: PropTypes.instanceOf(Date),
@@ -51,6 +52,7 @@ export class RkCalendarWeek extends React.Component {
       key={`${index}`}
       min={this.props.min}
       max={this.props.max}
+      monthDate={this.props.monthDate}
       date={item}
       selected={this.props.selected}
       renderContent={this.props.renderDay}

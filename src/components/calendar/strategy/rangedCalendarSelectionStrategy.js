@@ -38,10 +38,16 @@ class RangedSelectionStrategy {
   }
 
   isDayDisabled(props) {
-    const { date, min, max } = props;
+    const {
+      monthDate,
+      date,
+      min,
+      max,
+    } = props;
     const isFitsFilter = props.filter(date);
     const isBetweenRange = (RkCalendarService.Date.isBetweenIncludingSafe(date, min, max) || false);
-    return !isFitsFilter || !isBetweenRange;
+    const isBoundingDay = isBoundingDateSafe(date, monthDate) || false;
+    return isBoundingDay || !isFitsFilter || !isBetweenRange;
   }
 
   isDayToday(props) {
@@ -78,8 +84,15 @@ class RangedSelectionStrategy {
       start: RkCalendarService.Date.getMonthStart(props.date),
       end: RkCalendarService.Date.getMonthEnd(props.date),
     };
-    const isWasInRange = isDateRangeInRange(monthRange, props.selected);
-    const isWillInRange = isDateRangeInRange(monthRange, nextProps.selected);
+    const { date, selected: currentSelected, boundingMonth: isBoundingMonth } = props;
+    const { selected: nextSelected } = nextProps;
+    const isWasInRange = isDateRangeInRange(monthRange, currentSelected);
+    const isWillInRange = isDateRangeInRange(monthRange, nextSelected);
+    if (isBoundingMonth) {
+      const isWasBoundingSelected = isBoundingRange(currentSelected, date) || false;
+      const isWillBoundingSelected = isBoundingRange(nextSelected, date) || false;
+      return (isWasBoundingSelected || isWillBoundingSelected) || (isWasInRange || isWillInRange);
+    }
     return isWasInRange || isWillInRange;
   }
 
@@ -114,6 +127,20 @@ function isDateRangeInRange(range1, range2) {
   const isRange2StartInRange = isDateInRange(range2.start, range1);
   const isRange2EndInRange = isDateInRange(range2.end, range1);
   return isRange1StartInRange || isRange1EndInRange || isRange2StartInRange || isRange2EndInRange;
+}
+
+function isBoundingDate(date, monthDate) {
+  return Math.abs(date.getMonth() - monthDate.getMonth()) === 1;
+}
+
+function isBoundingDateSafe(date, monthDate) {
+  return date && monthDate && isBoundingDate(date, monthDate);
+}
+
+function isBoundingRange(range, monthDate) {
+  const isRangeStartBounding = isBoundingDateSafe(range.start, monthDate);
+  const isRangeEndBounding = isBoundingDateSafe(range.end, monthDate);
+  return isRangeStartBounding || isRangeEndBounding;
 }
 
 export const strategy = new RangedSelectionStrategy();
