@@ -63,8 +63,10 @@ const defaultScrollParams = {
  *   // whatever
  * };
  *
- * @property {string} type - Type of date selection. Available types: 'base' and 'range'.
- * Default is 'base'
+ * @property {string} type - Type of date selection.
+ * Available types: 'base' and 'range'. Default is 'base'.
+ * @property {string} layout - Layout type of calendar.
+ * Available types: 'vertical' and 'horizontal'. Default is 'vertical'.
  * @property {Date} min - Minimum date in calendar available for selection. Required
  * @property {Date} max - Maximum date in calendar available for selection. Required
  * @property {bool} boundingMonth - defines if we should render previous and next months
