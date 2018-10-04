@@ -124,15 +124,10 @@ export class RkCalendar extends React.Component {
 
   onContainerLayoutCompleted = () => {
     const today = RkCalendarService.Date.today();
-    const monthNumberTillToday = RkCalendarService.Date.getMonthDiff(this.props.min, today);
     const scrollToToday = () => {
       this.scrollToDate(today, { animated: false });
     };
-    if (monthNumberTillToday > RkCalendarService.Date.MONTHS_IN_YEAR) {
-      setTimeout(scrollToToday, 100);
-    } else {
-      scrollToToday();
-    }
+    setTimeout(scrollToToday, 100);
   };
 
   onVisibleMonthChanged = (date) => {
