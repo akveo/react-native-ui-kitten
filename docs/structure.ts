@@ -83,6 +83,7 @@ export const STRUCTURE = [
       {
         type: 'page',
         name: 'RkCalendar',
+        demogif: 'calendar-range.gif',
         children: [
           {
             type: 'block',
