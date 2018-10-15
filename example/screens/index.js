@@ -13,7 +13,7 @@ export * from './ImageScreen';
 export * from './GalleryScreen';
 export * from './InputScreen';
 export * from './TabScreen';
-export * from './TabSetScreen';
+export * from './tabset/TabSetScreen';
 export * from './SettingsScreen';
 export * from './ChoiceCustomizationScreen';
 export * from './PickerScreen';

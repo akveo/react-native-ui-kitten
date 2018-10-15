@@ -9,6 +9,7 @@ export { RkGalleryImage } from './src/components/gallery/rkGalleryImage';
 export { RkCalendar } from './src/components/calendar/rkCalendar.component';
 export { RkTabView } from './src/components/tab/rkTabView';
 export { RkTabSet } from './src/components/tabset/rkTabSet.component';
+export { RkTabSetItem } from './src/components/tabset/rkTabSetItem.component';
 export { RkCard } from './src/components/card/rkCard';
 export { RkAvoidKeyboard } from './src/components/avoidKeyboard/rkAvoidKeyboard';
 export { RkComponent } from './src/components/rkComponent';
