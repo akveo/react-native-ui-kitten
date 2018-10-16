@@ -8,7 +8,7 @@ import { RkTabPager } from './rkTabPager.component';
 /**
  * @extends React.Component
  *
- * @property {function} onGalleryItemChange - Gallery (modal) item change callback
+ * @property {function} onItemChange - tab content change callback
  */
 export class RkTabView extends React.Component {
   static propTypes = {
@@ -36,15 +36,25 @@ export class RkTabView extends React.Component {
     this.state.selectedIndex = this.tabViews.findIndex(child => child.props.isSelected);
   }
 
+  componentDidMount() {
+    this.props.onItemChange({
+      previous: null,
+      current: this.state.selectedIndex,
+    });
+  }
+
   onTabSelect = (index) => {
     this.tabPagerRef.scrollToIndex({ index });
   };
 
   onTabContentSelect = (index) => {
+    this.props.onItemChange({
+      previous: this.state.selectedIndex,
+      current: index,
+    });
     this.setState({
       selectedIndex: index,
     });
-    this.props.onItemChange(index);
   };
 
   setTabBarRef = (ref) => {

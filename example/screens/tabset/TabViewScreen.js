@@ -12,6 +12,10 @@ export class TabViewScreen extends React.Component {
     title: 'Tab Set',
   };
 
+  onItemChange = (change) => {
+    console.log(`onItemChange: ${JSON.stringify(change, null, 2)}`);
+  };
+
   render() {
     return (
       <View style={styles.container}>
