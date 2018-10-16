@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
-  Text,
+  Image,
 } from 'react-native';
+import { RkText } from '../text/rkText';
 import { RkStyleSheet } from '../../styles/styleSheet';
 
 export class RkTab extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
+    icon: PropTypes.node,
     isSelected: PropTypes.bool,
     isLazyLoad: PropTypes.bool,
   };
   static defaultProps = {
     title: '',
+    icon: undefined,
     isSelected: false,
     isLazyLoad: true,
   };
@@ -33,13 +36,18 @@ export class RkTab extends React.PureComponent {
       base: styles.title,
       selected: state.isSelected ? styles.titleSelected : null,
     },
+    icon: {
+      base: styles.icon,
+      selected: state.isSelected ? styles.iconSelected : null,
+    },
   });
 
   render() {
-    const { title } = this.getContentStyle(this.state);
+    const { title, icon } = this.getContentStyle(this.state);
     return (
       <View style={styles.container}>
-        <Text style={[title.base, title.selected]}>{this.props.title}</Text>
+        <Image style={[icon.base, icon.selected]} source={this.props.icon} />
+        <RkText rkType='large' style={[title.base, title.selected]}>{this.props.title}</RkText>
       </View>
     );
   }
@@ -48,11 +56,21 @@ export class RkTab extends React.PureComponent {
 const styles = RkStyleSheet.create(theme => ({
   container: {
     padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
-    fontWeight: '500',
+    color: theme.colors.overlay,
   },
   titleSelected: {
-    fontWeight: '700',
+    color: theme.colors.foreground,
+  },
+  icon: {
+    marginHorizontal: 8,
+    tintColor: theme.colors.overlay,
+  },
+  iconSelected: {
+    tintColor: theme.colors.foreground,
   },
 }));
