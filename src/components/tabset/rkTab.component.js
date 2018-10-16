@@ -6,18 +6,20 @@ import {
 } from 'react-native';
 import { RkStyleSheet } from '../../styles/styleSheet';
 
-export class RkTabSetItem extends React.PureComponent {
+export class RkTab extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
     isSelected: PropTypes.bool,
+    isLazyLoad: PropTypes.bool,
   };
   static defaultProps = {
     title: '',
     isSelected: false,
+    isLazyLoad: true,
   };
 
   state = {
-    isSelected: RkTabSetItem.defaultProps.isSelected,
+    isSelected: RkTab.defaultProps.isSelected,
   };
 
   static getDerivedStateFromProps(props) {

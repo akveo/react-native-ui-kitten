@@ -8,7 +8,7 @@ import { RkStyleSheet } from '../../styles/styleSheet';
 
 const defaultAnimationDuration = 200;
 
-export class RkTabSetIndicator extends React.PureComponent {
+export class RkTabBarIndicator extends React.PureComponent {
   static propTypes = {
     itemCount: PropTypes.number.isRequired,
     contentWidth: PropTypes.number.isRequired,
