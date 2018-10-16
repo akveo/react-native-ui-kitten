@@ -192,7 +192,7 @@ export class RkSwitch extends RkComponent {
 
   // eslint-disable-next-line arrow-body-style
   onPanResponderTerminationRequest = () => {
-    return true;
+    return false;
   };
 
   onPanResponderGrant = () => {
