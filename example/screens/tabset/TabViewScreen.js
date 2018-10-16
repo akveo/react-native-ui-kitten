@@ -1,32 +1,34 @@
 import React from 'react';
 import { View } from 'react-native';
 import {
-  RkTabSet,
-  RkTabSetItem,
+  RkTabView,
+  RkTab,
   RkStyleSheet,
 } from 'react-native-ui-kitten';
 import { TabContentScreen } from './TabContentScreen';
 
-export class TabSetScreen extends React.Component {
+export class TabViewScreen extends React.Component {
   static navigationOptions = {
     title: 'Tab Set',
   };
-  static propTypes = {};
 
   render() {
     return (
       <View style={styles.container}>
-        <RkTabSet>
-          <RkTabSetItem title="Tab #1">
+        <RkTabView style={styles.container} onItemChange={this.onItemChange}>
+          <RkTab title="Tab #1">
             <TabContentScreen style={styles.tabContent1} />
-          </RkTabSetItem>
-          <RkTabSetItem title="Tab #2" isSelected={true}>
-            <TabContentScreen style={styles.tabContent2} message='Tab 2 loves React Native UI Kitten' />
-          </RkTabSetItem>
-          <RkTabSetItem title="Tab #3">
+          </RkTab>
+          <RkTab title="Tab #2" isSelected={true}>
+            <TabContentScreen
+              style={styles.tabContent2}
+              message='Tab 2 loves React Native UI Kitten'
+            />
+          </RkTab>
+          <RkTab title="Tab #3">
             <TabContentScreen style={styles.tabContent3} />
-          </RkTabSetItem>
-        </RkTabSet>
+          </RkTab>
+        </RkTabView>
       </View>
     );
   }

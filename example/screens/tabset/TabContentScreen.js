@@ -16,13 +16,11 @@ export class TabContentScreen extends React.Component {
     message: 'I <3 React Native UI Kitten',
   };
 
-  render() {
-    return (
-      <View style={[styles.container, this.props.style]}>
-        <Text style={styles.text}>{this.props.message}</Text>
-      </View>
-    );
-  }
+  render = () => (
+    <View style={[styles.container, this.props.style]}>
+      <Text style={styles.text}>{this.props.message}</Text>
+    </View>
+  );
 }
 
 const styles = RkStyleSheet.create(theme => ({
