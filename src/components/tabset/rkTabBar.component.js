@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 import { RkTab } from './rkTab.component';
 
@@ -12,6 +13,7 @@ export class RkTabBar extends React.Component {
     children: PropTypes.arrayOf(PropTypes.instanceOf(RkTab)).isRequired,
     selectedIndex: PropTypes.number,
     onSelect: PropTypes.func,
+    ...ViewPropTypes,
   };
   static defaultProps = {
     selectedIndex: 0,
@@ -27,7 +29,10 @@ export class RkTabBar extends React.Component {
   };
 
   renderChild = (item, index) => (
-    <TouchableOpacity key={index.toString()} onPress={() => this.onChildPress(index)}>
+    <TouchableOpacity
+      key={index.toString()}
+      activeOpacity={0.5}
+      onPress={() => this.onChildPress(index)}>
       { React.cloneElement(item, { isSelected: this.props.selectedIndex === index }) }
     </TouchableOpacity>
   );
@@ -35,13 +40,13 @@ export class RkTabBar extends React.Component {
   renderChildComponents = () => this.props.children.map(this.renderChild);
 
   render = () => (
-    <View style={styles.container}>{this.renderChildComponents()}</View>
+    <View style={[this.props.style, styles.container]}>{this.renderChildComponents()}</View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
 });
