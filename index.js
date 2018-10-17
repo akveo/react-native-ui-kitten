@@ -1,4 +1,5 @@
 export { RkText } from './src/components/text/rkText';
+export { RkBadge } from './src/components/badge/rkBadge.component';
 export { RkButton } from './src/components/button/rkButton';
 export { RkChoice } from './src/components/choice/rkChoice';
 export { RkChoiceGroup } from './src/components/choiceGroup/rkChoiceGroup';

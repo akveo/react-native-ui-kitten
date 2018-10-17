@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import {
   View,
   TouchableOpacity,
-  StyleSheet,
   ViewPropTypes,
 } from 'react-native';
+import { RkComponent } from '../rkComponent';
 import { RkTab } from './rkTab.component';
 
-export class RkTabBar extends React.Component {
+/**
+ * @extends React.Component
+ */
+export class RkTabBar extends RkComponent {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.instanceOf(RkTab)).isRequired,
     selectedIndex: PropTypes.number,
@@ -18,6 +21,10 @@ export class RkTabBar extends React.Component {
   static defaultProps = {
     selectedIndex: 0,
     onSelect: (() => null),
+  };
+  componentName = 'RkTabBar';
+  typeMapping = {
+    container: {},
   };
 
   shouldComponentUpdate(nextProps) {
@@ -39,14 +46,10 @@ export class RkTabBar extends React.Component {
 
   renderChildComponents = () => this.props.children.map(this.renderChild);
 
-  render = () => (
-    <View style={[this.props.style, styles.container]}>{this.renderChildComponents()}</View>
-  );
+  render() {
+    const styles = super.defineStyles(this.props.rkType);
+    return (
+      <View style={[this.props.style, styles.container]}>{this.renderChildComponents()}</View>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-});
