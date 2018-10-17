@@ -46,7 +46,8 @@ export class RkTabView extends React.Component {
     super(props);
     this.tabViews = props.children;
     this.tabContentViews = React.Children.map(this.tabViews, child => child.props.children);
-    this.state.selectedIndex = this.tabViews.findIndex(child => child.props.isSelected);
+    const derivedSelectedIndex = this.tabViews.findIndex(child => child.props.isSelected);
+    this.state.selectedIndex = derivedSelectedIndex < 0 ? 0 : derivedSelectedIndex;
   }
 
   componentDidMount() {
