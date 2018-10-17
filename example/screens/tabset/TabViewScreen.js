@@ -12,25 +12,29 @@ export class TabViewScreen extends React.Component {
     title: 'Tab Set',
   };
 
-  onItemChange = (change) => {
-    console.log(`onItemChange: ${JSON.stringify(change, null, 2)}`);
-  };
-
   render() {
     return (
       <View style={styles.container}>
-        <RkTabView style={styles.container} onItemChange={this.onItemChange}>
-          <RkTab title="Tab #1">
+        <RkTabView style={styles.container}>
+          <RkTab
+            title='Calls'
+            icon={require('../../img/icons/phone.png')}>
             <TabContentScreen style={styles.tabContent1} />
           </RkTab>
-          <RkTab title="Tab #2" isSelected={true}>
+          <RkTab
+            title='Contacts'
+            icon={require('../../img/icons/user.png')}>
+            <TabContentScreen style={styles.tabContent2} />
+          </RkTab>
+          <RkTab
+            title="Favorites"
+            icon={require('../../img/icons/heart.png')}
+            badgeTitle='new'
+            isSelected={true}>
             <TabContentScreen
-              style={styles.tabContent2}
+              style={styles.tabContent3}
               message='Tab 2 loves React Native UI Kitten'
             />
-          </RkTab>
-          <RkTab title="Tab #3">
-            <TabContentScreen style={styles.tabContent3} />
           </RkTab>
         </RkTabView>
       </View>
