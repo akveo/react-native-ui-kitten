@@ -15,7 +15,7 @@ import { bootstrap } from './style/themeBootstrapper';
 bootstrap();
 
 const ExplorerApp = StackNavigator({
-  Home: { screen: Screens.TabViewScreen },
+  Home: { screen: Screens.ComponentsScreen },
   Picker: { screen: Screens.PickerScreen },
   Button: { screen: Screens.ButtonScreen },
   Calendars: { screen: Screens.CalendarScreen },
@@ -26,8 +26,10 @@ const ExplorerApp = StackNavigator({
   HorizontalCalendar: { screen: Screens.HorizontalCalendarScreen },
   Switch: { screen: Screens.SwitchScreen },
   Choice: { screen: Screens.ChoiceScreen },
-  // Tab: { screen: Screens.TabScreen },
-  TabSet: { screen: Screens.TabViewScreen },
+  TabView: { screen: Screens.TabsScreen },
+  BaseTabs: { screen: Screens.BaseTabViewScreen },
+  BadgeTabs: { screen: Screens.BadgeTabViewScreen },
+  IconTabs: { screen: Screens.IconTabsScreen },
   Card: { screen: Screens.CardScreen },
   Avatar: { screen: Screens.AvatarScreen },
   Input: { screen: Screens.InputScreen },

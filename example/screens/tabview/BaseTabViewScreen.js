@@ -7,34 +7,20 @@ import {
 } from 'react-native-ui-kitten';
 import { TabContentScreen } from './TabContentScreen';
 
-export class TabViewScreen extends React.Component {
+export class BaseTabViewScreen extends React.Component {
   static navigationOptions = {
-    title: 'Tab Set',
+    title: 'Base Tabs',
   };
 
   render() {
     return (
       <View style={styles.container}>
         <RkTabView style={styles.container}>
-          <RkTab
-            title='Calls'
-            icon={require('../../img/icons/phone.png')}>
+          <RkTab title='Calls'>
             <TabContentScreen style={styles.tabContent1} />
           </RkTab>
-          <RkTab
-            title='Contacts'
-            icon={require('../../img/icons/user.png')}>
+          <RkTab title='Contacts'>
             <TabContentScreen style={styles.tabContent2} />
-          </RkTab>
-          <RkTab
-            title="Favorites"
-            icon={require('../../img/icons/heart.png')}
-            badgeTitle='new'
-            isSelected={true}>
-            <TabContentScreen
-              style={styles.tabContent3}
-              message='Tab 2 loves React Native UI Kitten'
-            />
           </RkTab>
         </RkTabView>
       </View>
@@ -52,8 +38,5 @@ const styles = RkStyleSheet.create(theme => ({
   },
   tabContent2: {
     backgroundColor: 'green',
-  },
-  tabContent3: {
-    backgroundColor: 'blue',
   },
 }));

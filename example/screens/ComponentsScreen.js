@@ -50,10 +50,7 @@ export class ComponentsScreen extends React.Component {
       route: 'Gallery',
     }, {
       title: 'Tab View',
-      route: 'Tab',
-    }, {
-      title: 'Tab Set',
-      route: 'TabSet',
+      route: 'TabView',
     }, {
       title: 'Custom Control View',
       route: 'Avatar',
