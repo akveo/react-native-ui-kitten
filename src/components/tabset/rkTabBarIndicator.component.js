@@ -81,7 +81,7 @@ export class RkTabBarIndicator extends React.PureComponent {
   }
 }
 
-const styles = RkStyleSheet.create(theme => ({
+const styles = RkStyleSheet.create(({
   container: {
     height: 16,
     backgroundColor: 'black',

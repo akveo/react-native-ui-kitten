@@ -1,4 +1,4 @@
-export const RkTabBarTypes = (theme) => ({
+export const RkTabBarTypes = () => ({
   _base: {
     container: {
       base: {
