@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
+  ScrollView,
   TouchableOpacity,
   ViewPropTypes,
 } from 'react-native';
@@ -15,11 +16,13 @@ export class RkTabBar extends RkComponent {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.instanceOf(RkTab)).isRequired,
     selectedIndex: PropTypes.number,
+    isScrollable: PropTypes.bool,
     onSelect: PropTypes.func,
     ...ViewPropTypes,
   };
   static defaultProps = {
     selectedIndex: 0,
+    isScrollable: false,
     onSelect: (() => null),
   };
   componentName = 'RkTabBar';
@@ -27,29 +30,67 @@ export class RkTabBar extends RkComponent {
     container: {},
   };
 
+  containerRef = undefined;
+
   shouldComponentUpdate(nextProps) {
     return this.props.selectedIndex !== nextProps.selectedIndex;
   }
 
-  onChildPress = (index) => {
+  onItemPress = (index) => {
     this.props.onSelect(index);
   };
 
-  renderChild = (item, index) => (
+  /**
+   * @param params - object: { offset: number, animated: boolean }
+   */
+  scrollToOffset = (params) => {
+    this.containerRef.scrollTo({ x: params.offset, ...params });
+  };
+
+  /**
+   * @param params - object: { animated: boolean }
+   */
+  scrollToEnd = (params) => {
+    this.containerRef.scrollToEnd(params);
+  };
+
+  setContainerRef = (ref) => {
+    this.containerRef = ref;
+  };
+
+  defineStyles(additionalTypes) {
+    const derivedStyles = super.defineStyles(additionalTypes);
+    const containerStyleKey = this.props.isScrollable ? 'scrollable' : 'base';
+    return {
+      container: this.extractNonStyleValue(derivedStyles.container, containerStyleKey),
+    };
+  }
+
+  renderItem = (item, index) => (
     <TouchableOpacity
       key={index.toString()}
       activeOpacity={0.5}
-      onPress={() => this.onChildPress(index)}>
-      { React.cloneElement(item, { isSelected: this.props.selectedIndex === index }) }
+      onPress={() => this.onItemPress(index)}>
+      {React.cloneElement(item, { isSelected: this.props.selectedIndex === index })}
     </TouchableOpacity>
   );
 
-  renderChildComponents = () => this.props.children.map(this.renderChild);
+  renderChildComponents = () => this.props.children.map(this.renderItem);
 
   render() {
-    const styles = super.defineStyles(this.props.rkType);
+    const styles = this.defineStyles(this.props.rkType);
     return (
-      <View style={[this.props.style, styles.container]}>{this.renderChildComponents()}</View>
+      <View>
+        <ScrollView
+          contentContainerStyle={styles.container}
+          ref={this.setContainerRef}
+          horizontal={true}
+          bounces={false}
+          scrollEnabled={this.props.isScrollable}
+          showsHorizontalScrollIndicator={false}>
+          {this.renderChildComponents()}
+        </ScrollView>
+      </View>
     );
   }
 }

@@ -44,6 +44,10 @@ export class RkTab extends RkComponent {
     };
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.isSelected !== nextProps.isSelected;
+  }
+
   defineStyles(additionalTypes) {
     const { container, title, icon } = super.defineStyles(additionalTypes);
     return {

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import {
+  View,
+  Dimensions,
+} from 'react-native';
 import { RkTab } from './rkTab.component';
 import { RkTabBar } from './rkTabBar.component';
 import { RkTabPager } from './rkTabPager.component';
@@ -14,13 +17,16 @@ export class RkTabView extends React.Component {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.instanceOf(RkTab)).isRequired,
     onItemChange: PropTypes.func,
+    isScrollableHeader: PropTypes.bool,
   };
   static defaultProps = {
     onItemChange: (() => null),
+    isScrollableHeader: RkTabBar.defaultProps.isScrollable,
   };
 
   state = {
     selectedIndex: 0,
+    estimatedTabWidth: 0,
   };
 
   tabViews = [];
@@ -28,6 +34,13 @@ export class RkTabView extends React.Component {
 
   tabBarRef = undefined;
   tabPagerRef = undefined;
+
+  static getDerivedStateFromProps(props) {
+    const screenSize = Dimensions.get('window');
+    return {
+      estimatedTabWidth: screenSize.width / props.children.length,
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -44,7 +57,7 @@ export class RkTabView extends React.Component {
   }
 
   onTabSelect = (index) => {
-    this.tabPagerRef.scrollToIndex({ index });
+    this.scrollContentToIndex({ index });
   };
 
   onTabContentSelect = (index) => {
@@ -52,6 +65,9 @@ export class RkTabView extends React.Component {
       previous: this.state.selectedIndex,
       current: index,
     });
+    if (this.props.isScrollableHeader) {
+      this.scrollTabBarToIndex({ index });
+    }
     this.setState({
       selectedIndex: index,
     });
@@ -70,21 +86,35 @@ export class RkTabView extends React.Component {
   /**
    * @param params - object: { index: number, animated: boolean }
    */
-  scrollToIndex = (params) => {
-    this.containerRef.scrollToIndex(params);
+  scrollTabBarToIndex = (params) => {
+    const estimatedBarContentOffset = (this.state.estimatedTabWidth * params.index) / 3;
+    if (params.index === this.props.children.length - 1) {
+      this.tabBarRef.scrollToEnd(params);
+    } else {
+      this.tabBarRef.scrollToOffset({ offset: estimatedBarContentOffset });
+    }
   };
 
   /**
-   * @param params - object: { offset: number, animated: boolean }
+   * @param params - object: { index: number, animated: boolean }
    */
-  scrollToOffset = (params) => {
-    this.containerRef.scrollToIndex(params);
+  scrollContentToIndex = (params) => {
+    this.tabPagerRef.scrollToIndex(params);
+  };
+
+  /**
+   * @param params - object: { index: number, animated: boolean }
+   */
+  scrollToIndex = (params) => {
+    this.scrollTabBarToIndex(params);
+    this.scrollContentToIndex(params);
   };
 
   render = () => (
     <View style={{ flex: 1 }}>
       <RkTabBar
         ref={this.setTabBarRef}
+        isScrollable={this.props.isScrollableHeader}
         selectedIndex={this.state.selectedIndex}
         onSelect={this.onTabSelect}>
         {this.tabViews}

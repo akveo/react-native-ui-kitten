@@ -23,6 +23,16 @@ export class RkTabPager extends React.Component {
     componentWidth: -1,
   };
 
+  /**
+   * Support property to avoid sending 'onSelect' events in case like:
+   *
+   * selectedIndex === 0
+   * scrollToIndex === 2
+   *
+   * this helps avoid sending onSelect for index === 1
+   */
+  scrollRequestIndex = undefined;
+
   containerRef = undefined;
   lazyLoadItemMap = new Map();
 
@@ -50,33 +60,26 @@ export class RkTabPager extends React.Component {
   onContainerScroll = (event) => {
     const selectedIndex = Math.round(event.nativeEvent.contentOffset.x / this.state.componentWidth);
     const isIndexInBounds = selectedIndex >= 0 && selectedIndex <= this.props.children.length;
-
-    // TODO: scroll indicator on container gesture scroll
-    //
-    // const contentIndicatorOffset = event.nativeEvent.contentOffset.x / this.props.children.length;
-    // this.contentIndicatorRef.scrollToOffset({ offset: contentIndicatorOffset });
-
     if (isIndexInBounds && selectedIndex !== this.props.selectedIndex) {
       this.onItemChange(selectedIndex);
     }
   };
 
   onItemChange = (index) => {
-    this.props.onSelect(index);
+    if (this.scrollRequestIndex === undefined) {
+      this.props.onSelect(index);
+    } else if (index === this.scrollRequestIndex) {
+      this.props.onSelect(index);
+      this.scrollRequestIndex = undefined;
+    }
   };
 
   /**
-   * @param params - object: { index: number, animated: boolean }
+   * @param params - object: { index: number, animated: boolean, skipInnerItems: boolean }
    */
   scrollToIndex = (params) => {
+    this.scrollRequestIndex = params.index;
     this.containerRef.scrollToIndex(params);
-  };
-
-  /**
-   * @param params - object: { offset: number, animated: boolean }
-   */
-  scrollToOffset = (params) => {
-    this.containerRef.scrollToOffset(params);
   };
 
   setContainerRef = (ref) => {
