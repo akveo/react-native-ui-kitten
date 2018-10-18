@@ -9,7 +9,7 @@ import { RkTabBarIndicator } from './rkTabBarIndicator.component';
 import { RkTabPager } from './rkTabPager.component';
 
 /**
- * `RkCalendar`is a component which allows you to split your content into sub-contents.
+ * `RkTabView` is a component which allows you to split your content into sub-contents.
  *
  * @extends React.Component
  *
@@ -31,6 +31,7 @@ import { RkTabPager } from './rkTabPager.component';
  * @example Badged tabs example:
  *
  * You can use badges on tabs if you want notify user on something happens.
+ * You also can specify badge status and position using `badgeStatus` and `badgePosition` props.
  *
  * ```
  * <RkTabView>
@@ -88,7 +89,6 @@ import { RkTabPager } from './rkTabPager.component';
  * };
  *
  * @property {React.ReactNode} children - RkTab components with it's contents.
- * @property {boolean} isScrollableHeader - Allows tab container scrolling. For lot's of tabs case.
  * @property {function} onItemChange - Fired when visible tab is changed.
  * */
 export class RkTabView extends React.Component {

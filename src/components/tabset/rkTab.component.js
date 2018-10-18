@@ -4,21 +4,40 @@ import {
   View,
   Text,
   Image,
+  ViewPropTypes,
 } from 'react-native';
 import { RkBadge } from '../badge/rkBadge.component';
 import { RkComponent } from '../rkComponent';
 
+/**
+ * @extends React.Component
+ *
+ * @property {string} title - tab title.
+ * @property {React.ReactNode} icon - tab icon.
+ * @property {string} badgeTitle - tab badge title.
+ * @property {string} badgePosition - tab badge position. Should be one of:
+ * `top left`, `top right`, `bottom left`, `bottom right`.
+ * Default is `top right`.
+ * @property {boolean} isSelected - defines if tab is selected.
+ * @property {boolean} isLazyLoad - defines if tab should use content lazy loading.
+ * Default is `true`.
+ */
 export class RkTab extends RkComponent {
   static propTypes = {
+    rkType: RkComponent.propTypes.rkType,
     title: PropTypes.string,
     icon: PropTypes.node,
     badgeTitle: PropTypes.string,
     badgePosition: PropTypes.string,
     badgeStatus: PropTypes.string,
     isSelected: PropTypes.bool,
+    // used in RkTabView
+    // eslint-disable-next-line react/no-unused-prop-types,
     isLazyLoad: PropTypes.bool,
+    ...ViewPropTypes,
   };
   static defaultProps = {
+    rkType: RkComponent.defaultProps.rkType,
     title: '',
     icon: undefined,
     badgeTitle: '',
@@ -75,8 +94,10 @@ export class RkTab extends RkComponent {
     return (
       <View style={[styles.container.base, styles.container.selected, this.props.style]}>
         <RkBadge
+          rkType={this.props.badgeStatus}
           style={[styles.badge.base, styles.badge.selected]}
           title={this.props.badgeTitle}
+          position={this.props.badgePosition}
         />
         <Image
           style={[styles.icon.base, styles.icon.selected]}
