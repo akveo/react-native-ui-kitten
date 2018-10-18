@@ -11,6 +11,8 @@ export class RkTabPager extends React.Component {
     selectedIndex: PropTypes.number,
     onSelect: PropTypes.func,
     shouldUseLazyLoad: PropTypes.func,
+
+    componentWidth: PropTypes.number.isRequired,
   };
   static defaultProps = {
     selectedIndex: 0,
@@ -20,7 +22,6 @@ export class RkTabPager extends React.Component {
 
   state = {
     items: [],
-    componentWidth: -1,
   };
 
   /**
@@ -51,14 +52,8 @@ export class RkTabPager extends React.Component {
     });
   }
 
-  onLayout = (event) => {
-    this.setState({
-      componentWidth: event.nativeEvent.layout.width,
-    });
-  };
-
   onContainerScroll = (event) => {
-    const selectedIndex = Math.round(event.nativeEvent.contentOffset.x / this.state.componentWidth);
+    const selectedIndex = Math.round(event.nativeEvent.contentOffset.x / this.props.componentWidth);
     const isIndexInBounds = selectedIndex >= 0 && selectedIndex <= this.props.children.length;
     if (isIndexInBounds && selectedIndex !== this.props.selectedIndex) {
       this.onItemChange(selectedIndex);
@@ -89,8 +84,8 @@ export class RkTabPager extends React.Component {
   getItemKey = (item, index) => index.toString();
 
   getItemLayout = (item, index) => ({
-    length: this.state.componentWidth,
-    offset: this.state.componentWidth * index,
+    length: this.props.componentWidth,
+    offset: this.props.componentWidth * index,
     index,
   });
 
@@ -111,30 +106,23 @@ export class RkTabPager extends React.Component {
     this.setShouldUseLazyLoad(index, !isShouldLoadContentView);
 
     return (
-      <View style={{ width: this.state.componentWidth }}>{contentView}</View>
+      <View style={{ width: this.props.componentWidth }}>{contentView}</View>
     );
   };
 
-  renderPlaceholder = () => (
-    <View onLayout={this.onLayout} />
-  );
-
-  renderView = () => (
-    <FlatList
-      ref={this.setContainerRef}
-      horizontal={true}
-      pagingEnabled={true}
-      removeClippedSubviews={true}
-      initialScrollIndex={this.props.selectedIndex}
-      data={this.state.items}
-      onScroll={this.onContainerScroll}
-      renderItem={this.renderItem}
-      getItemLayout={this.getItemLayout}
-      keyExtractor={this.getItemKey}
-    />
-  );
-
   render() {
-    return this.state.componentWidth < 0 ? this.renderPlaceholder() : this.renderView();
+    return (
+      <FlatList
+        ref={this.setContainerRef}
+        horizontal={true}
+        pagingEnabled={true}
+        initialScrollIndex={this.props.selectedIndex}
+        data={this.state.items}
+        onScroll={this.onContainerScroll}
+        renderItem={this.renderItem}
+        getItemLayout={this.getItemLayout}
+        keyExtractor={this.getItemKey}
+      />
+    );
   }
 }

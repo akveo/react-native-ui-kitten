@@ -9,6 +9,7 @@ export * from '../components/gallery/types';
 export * from '../components/image/types';
 export * from '../components/tabset/types/types-tab';
 export * from '../components/tabset/types/types-tab-bar';
+export * from '../components/tabset/types/types-tab-indicator';
 // export * from '../components/tab/types';
 export * from '../components/text/types';
 export * from '../components/textinput/types';

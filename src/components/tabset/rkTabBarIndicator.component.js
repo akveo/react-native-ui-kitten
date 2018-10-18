@@ -4,46 +4,52 @@ import {
   View,
   Animated,
 } from 'react-native';
-import { RkStyleSheet } from '../../styles/styleSheet';
+import { RkComponent } from '../rkComponent';
 
 const defaultAnimationDuration = 200;
 
-export class RkTabBarIndicator extends React.PureComponent {
+/**
+ * @extends React.Component
+ */
+export class RkTabBarIndicator extends RkComponent {
   static propTypes = {
     itemCount: PropTypes.number.isRequired,
-    contentWidth: PropTypes.number.isRequired,
+
+    componentWidth: PropTypes.number.isRequired,
+  };
+  componentName = 'RkTabBarIndicator';
+  typeMapping = {
+    container: {},
+    content: {},
   };
 
   contentOffset = new Animated.Value(0);
 
   /**
    * @param params - object: { index: number, animated: boolean }
-   * @param onComplete - function: scroll completion callback
    */
-  scrollToIndex(params, onComplete = (() => null)) {
+  scrollToIndex(params) {
     this.scrollToOffset({
-      offset: (this.props.contentWidth / this.props.itemCount) * params.index,
+      offset: (this.props.componentWidth / this.props.itemCount) * params.index,
       ...params,
-    }, onComplete);
+    });
   }
 
   /**
    * @param params - object: { offset: number, animated: boolean }
-   * @param onComplete - function: scroll completion callback
    */
-  scrollByOffset(params, onComplete = (() => null)) {
+  scrollByOffset(params) {
     this.scrollToOffset({
       offset: this.contentOffset + params.offset,
       ...params,
-    }, onComplete);
+    });
   }
 
   /**
    * @param params - object: { offset: number, animated: boolean }
-   * @param onComplete - function: scroll completion callback
    */
-  scrollToOffset(params, onComplete = (() => null)) {
-    this.getContentOffsetAnimation(params).start(onComplete);
+  scrollToOffset(params) {
+    this.getContentOffsetAnimation(params).start();
   }
 
   /**
@@ -65,6 +71,7 @@ export class RkTabBarIndicator extends React.PureComponent {
   };
 
   render() {
+    const styles = super.defineStyles();
     const transform = {
       transform: [{ translateX: this.contentOffset }],
     };
@@ -72,7 +79,7 @@ export class RkTabBarIndicator extends React.PureComponent {
       <View style={styles.container}>
         <Animated.View style={[
           styles.content,
-          { width: this.props.contentWidth / this.props.itemCount },
+          { width: this.props.componentWidth / this.props.itemCount },
           transform,
         ]}
         />
@@ -80,15 +87,3 @@ export class RkTabBarIndicator extends React.PureComponent {
     );
   }
 }
-
-const styles = RkStyleSheet.create(({
-  container: {
-    height: 16,
-    backgroundColor: 'black',
-    paddingVertical: 2,
-  },
-  content: {
-    flex: 1,
-    backgroundColor: 'yellow',
-  },
-}));

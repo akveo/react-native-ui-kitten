@@ -4,8 +4,8 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import { RkTab } from './rkTab.component';
 import { RkTabBar } from './rkTabBar.component';
+import { RkTabBarIndicator } from './rkTabBarIndicator.component';
 import { RkTabPager } from './rkTabPager.component';
 
 /**
@@ -93,17 +93,20 @@ import { RkTabPager } from './rkTabPager.component';
  * */
 export class RkTabView extends React.Component {
   static propTypes = {
-    children: PropTypes.arrayOf(PropTypes.instanceOf(RkTab)).isRequired,
+    children: PropTypes.arrayOf(PropTypes.element).isRequired,
     onItemChange: PropTypes.func,
-    isScrollableHeader: PropTypes.bool,
+
+    // TODO: Scrollable header is temporary disabled
+    // isScrollableHeader: PropTypes.bool,
   };
   static defaultProps = {
     onItemChange: (() => null),
-    isScrollableHeader: RkTabBar.defaultProps.isScrollable,
+    // isScrollableHeader: RkTabBar.defaultProps.isScrollable,
   };
 
   state = {
     selectedIndex: 0,
+    componentWidth: -1,
     estimatedTabWidth: 0,
   };
 
@@ -111,6 +114,7 @@ export class RkTabView extends React.Component {
   tabContentViews = [];
 
   tabBarRef = undefined;
+  indicatorRef = undefined;
   tabPagerRef = undefined;
 
   static getDerivedStateFromProps(props) {
@@ -137,6 +141,7 @@ export class RkTabView extends React.Component {
 
   onTabSelect = (index) => {
     this.scrollContentToIndex({ index });
+    this.indicatorRef.scrollToIndex({ index });
   };
 
   onTabContentSelect = (index) => {
@@ -144,16 +149,32 @@ export class RkTabView extends React.Component {
       previous: this.state.selectedIndex,
       current: index,
     });
-    if (this.props.isScrollableHeader) {
-      this.scrollTabBarToIndex({ index });
-    }
+    // TODO: Scrollable header is temporary disabled
+    // if (this.props.isScrollableHeader) {
+    //   this.scrollTabBarToIndex({ index });
+    // }
+    this.scrollIndicatorToIndex({ index });
     this.setState({
       selectedIndex: index,
     });
   };
 
+  onLayout = (event) => {
+    this.setState({
+      componentWidth: event.nativeEvent.layout.width,
+    }, this.onLayoutCompleted);
+  };
+
+  onLayoutCompleted = () => {
+    this.scrollIndicatorToIndex({ index: this.state.selectedIndex, animated: false });
+  };
+
   setTabBarRef = (ref) => {
     this.tabBarRef = ref;
+  };
+
+  setIndicatorRef = (ref) => {
+    this.indicatorRef = ref;
   };
 
   setTabPagerRef = (ref) => {
@@ -177,6 +198,15 @@ export class RkTabView extends React.Component {
   };
 
   /**
+   * Scrolls tab indicator to passed index.
+   *
+   * @param params - object: { index: number, animated: boolean }
+   */
+  scrollIndicatorToIndex = (params) => {
+    this.indicatorRef.scrollToIndex(params);
+  };
+
+  /**
    * Scrolls content to passed index.
    *
    * @param params - object: { index: number, animated: boolean }
@@ -192,20 +222,33 @@ export class RkTabView extends React.Component {
    */
   scrollToIndex = (params) => {
     this.scrollTabBarToIndex(params);
+    this.scrollIndicatorToIndex(params);
     this.scrollContentToIndex(params);
   };
 
-  render = () => (
+  renderPlaceholder = () => (
+    <View onLayout={this.onLayout} />
+  );
+
+  renderView = () => (
     <View style={{ flex: 1 }}>
       <RkTabBar
         ref={this.setTabBarRef}
-        isScrollable={this.props.isScrollableHeader}
+        componentWidth={this.state.componentWidth}
+        isScrollable={false}
+        // isScrollable={this.props.isScrollableHeader}
         selectedIndex={this.state.selectedIndex}
         onSelect={this.onTabSelect}>
         {this.tabViews}
       </RkTabBar>
+      <RkTabBarIndicator
+        ref={this.setIndicatorRef}
+        itemCount={this.props.children.length}
+        componentWidth={this.state.componentWidth}
+      />
       <RkTabPager
         ref={this.setTabPagerRef}
+        componentWidth={this.state.componentWidth}
         selectedIndex={this.state.selectedIndex}
         shouldUseLazyLoad={this.isShouldUseLazyLoad}
         onSelect={this.onTabContentSelect}>
@@ -213,4 +256,8 @@ export class RkTabView extends React.Component {
       </RkTabPager>
     </View>
   );
+
+  render() {
+    return this.state.componentWidth < 0 ? this.renderPlaceholder() : this.renderView();
+  }
 }

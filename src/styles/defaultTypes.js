@@ -11,6 +11,7 @@ export const DefaultTypes = (theme) => ({
   RkCalendar: ComponentTypes.RkCalendarTypes(theme),
   RkTab: ComponentTypes.RkTabTypes(theme),
   RkTabBar: ComponentTypes.RkTabBarTypes(theme),
+  RkTabBarIndicator: ComponentTypes.RkTabBarIndicatorTypes(theme),
   RkGallery: ComponentTypes.RkGalleryTypes(theme),
   RkModalImg: ComponentTypes.RkModalImgTypes(theme),
   RkAvoidKeyboard: ComponentTypes.RkAvoidKeyboardTypes(theme),

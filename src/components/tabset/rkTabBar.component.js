@@ -7,17 +7,19 @@ import {
   ViewPropTypes,
 } from 'react-native';
 import { RkComponent } from '../rkComponent';
-import { RkTab } from './rkTab.component';
 
 /**
  * @extends React.Component
  */
 export class RkTabBar extends RkComponent {
   static propTypes = {
-    children: PropTypes.arrayOf(PropTypes.instanceOf(RkTab)).isRequired,
+    children: PropTypes.arrayOf(PropTypes.element).isRequired,
     selectedIndex: PropTypes.number,
     isScrollable: PropTypes.bool,
     onSelect: PropTypes.func,
+
+    componentWidth: PropTypes.number.isRequired,
+
     ...ViewPropTypes,
   };
   static defaultProps = {
@@ -33,11 +35,21 @@ export class RkTabBar extends RkComponent {
   containerRef = undefined;
 
   shouldComponentUpdate(nextProps) {
-    return this.props.selectedIndex !== nextProps.selectedIndex;
+    const isWidthChanged = this.props.componentWidth !== nextProps.componentWidth;
+    const isSelectionChanged = this.props.selectedIndex !== nextProps.selectedIndex;
+    return isWidthChanged || isSelectionChanged;
   }
 
   onItemPress = (index) => {
     this.props.onSelect(index);
+  };
+
+  /**
+   * @param params - object: { offset: number, animated: boolean }
+   */
+  scrollToIndex = (params) => {
+    const offset = (this.props.componentWidth / this.props.children.length) * params.index;
+    this.scrollToOffset({ offset });
   };
 
   /**
@@ -71,7 +83,12 @@ export class RkTabBar extends RkComponent {
       key={index.toString()}
       activeOpacity={0.5}
       onPress={() => this.onItemPress(index)}>
-      {React.cloneElement(item, { isSelected: this.props.selectedIndex === index })}
+      {React.cloneElement(item, {
+        style: {
+          width: this.props.componentWidth / this.props.children.length,
+        },
+        isSelected: this.props.selectedIndex === index,
+      })}
     </TouchableOpacity>
   );
 

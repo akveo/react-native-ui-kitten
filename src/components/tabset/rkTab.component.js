@@ -73,7 +73,7 @@ export class RkTab extends RkComponent {
   render() {
     const styles = this.defineStyles(this.props.rkType);
     return (
-      <View style={[styles.container.base, styles.container.selected]}>
+      <View style={[styles.container.base, styles.container.selected, this.props.style]}>
         <RkBadge
           style={[styles.badge.base, styles.badge.selected]}
           title={this.props.badgeTitle}
