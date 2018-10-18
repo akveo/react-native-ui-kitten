@@ -242,6 +242,7 @@ export class RkTabView extends React.Component {
         {this.tabViews}
       </RkTabBar>
       <RkTabBarIndicator
+        rkType='rounded'
         ref={this.setIndicatorRef}
         itemCount={this.props.children.length}
         componentWidth={this.state.componentWidth}

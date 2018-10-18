@@ -5,8 +5,12 @@ export const RkTabBarIndicatorTypes = (theme) => ({
     },
     content: {
       flex: 1,
-      borderRadius: 2,
       backgroundColor: theme.colors.success,
+    },
+  },
+  rounded: {
+    content: {
+      borderRadius: 2,
     },
   },
 });

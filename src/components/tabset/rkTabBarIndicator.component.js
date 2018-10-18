@@ -13,9 +13,13 @@ const defaultAnimationDuration = 200;
  */
 export class RkTabBarIndicator extends RkComponent {
   static propTypes = {
+    rkType: PropTypes.oneOf(['', 'rounded']),
     itemCount: PropTypes.number.isRequired,
 
     componentWidth: PropTypes.number.isRequired,
+  };
+  static defaultProps = {
+    rkType: RkComponent.defaultProps.rkType,
   };
   componentName = 'RkTabBarIndicator';
   typeMapping = {
@@ -71,7 +75,7 @@ export class RkTabBarIndicator extends RkComponent {
   };
 
   render() {
-    const styles = super.defineStyles();
+    const styles = super.defineStyles(this.props.rkType);
     const transform = {
       transform: [{ translateX: this.contentOffset }],
     };
