@@ -9,10 +9,88 @@ import { RkTabBar } from './rkTabBar.component';
 import { RkTabPager } from './rkTabPager.component';
 
 /**
+ * `RkCalendar`is a component which allows you to split your content into sub-contents.
+ *
  * @extends React.Component
  *
- * @property {function} onItemChange - tab content change callback
- */
+ * @example Simple usage example:
+ *
+ * You simply can use one of following contents in tab: title or icon. Or both of them:
+ *
+ * ```
+ * <RkTabView>
+ *  <RkTab title='Awesome'>
+ *    <AwesomeContentComponent />
+ *  </RkTab>
+ *  <RkTab title='Pretty Cool'>
+ *    <PrettyCoolComponent />
+ *  </RkTab>
+ * </RkTabView>
+ * ```
+ *
+ * @example Badged tabs example:
+ *
+ * You can use badges on tabs if you want notify user on something happens.
+ *
+ * ```
+ * <RkTabView>
+ *  <RkTab
+ *    title='Awesome'
+ *    badgeTitle='NEW'>
+ *    <AwesomeContentComponent />
+ *  </RkTab>
+ *  <RkTab title='Pretty Cool'>
+ *    <PrettyCoolComponent />
+ *  </RkTab>
+ * </RkTabView>
+ * ```
+ *
+ * @example Lazy load content example:
+ *
+ * Lazy load is enabled by default. But if you don't want use it, you can do it.
+ * Even for specified tab.
+ *
+ * ```
+ * <RkTabView>
+ *  <RkTab title='Awesome'>
+ *    <AwesomeContentComponent />
+ *  </RkTab>
+ *  <RkTab
+ *    title='Pretty Cool'
+ *    isLazyLoad={false}>
+ *    <PrettyCoolComponent />
+ *  </RkTab>
+ * </RkTabView>
+ * ```
+ *
+ * @example Handling component events:
+ *
+ * ```
+ * <RkTabView onItemChange={this.onTabChange}>
+ *  <RkTab title='Awesome'>
+ *    <AwesomeContentComponent />
+ *  </RkTab>
+ *  <RkTab title='Pretty Cool'>
+ *    <PrettyCoolComponent />
+ *  </RkTab>
+ * </RkTabView>
+ * ```
+ *
+ * // Tab change:
+ * //
+ * // @param change - object, defining tab change:
+ * // {
+ * //   previous: number,
+ * //   current: number,
+ * // }
+ * onTabChange = (change) => {
+ *   // whatever
+ * };
+ *
+ * @property {React.ReactNode} children - RkTab components with it's contents.
+ * @property {boolean} isScrollableHeader - Allows tab container scrolling. For lot's of tabs case.
+ * @property {function} onItemChange - Fired when visible tab is changed.
+ * */
 export class RkTabView extends React.Component {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.instanceOf(RkTab)).isRequired,
@@ -85,6 +163,8 @@ export class RkTabView extends React.Component {
   isShouldUseLazyLoad = (index) => this.tabViews[index].props.isLazyLoad;
 
   /**
+   * Scrolls tab container to passed index.
+   *
    * @param params - object: { index: number, animated: boolean }
    */
   scrollTabBarToIndex = (params) => {
@@ -97,6 +177,8 @@ export class RkTabView extends React.Component {
   };
 
   /**
+   * Scrolls content to passed index.
+   *
    * @param params - object: { index: number, animated: boolean }
    */
   scrollContentToIndex = (params) => {
@@ -104,6 +186,8 @@ export class RkTabView extends React.Component {
   };
 
   /**
+   * Scrolls both tab container and content to passed index.
+   *
    * @param params - object: { index: number, animated: boolean }
    */
   scrollToIndex = (params) => {
