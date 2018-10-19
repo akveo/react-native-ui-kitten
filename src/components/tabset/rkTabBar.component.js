@@ -62,7 +62,7 @@ export class RkTabBar extends RkComponent {
   scrollToIndex(params) {
     const offset = (this.props.componentWidth / this.props.children.length) * params.index;
     this.scrollToOffset({ offset });
-  };
+  }
 
   /**
    * scrolls container to passed offset
@@ -71,7 +71,7 @@ export class RkTabBar extends RkComponent {
    */
   scrollToOffset(params) {
     this.containerRef.scrollTo({ x: params.offset, ...params });
-  };
+  }
 
   /**
    * scrolls container to end
@@ -80,7 +80,7 @@ export class RkTabBar extends RkComponent {
    */
   scrollToEnd(params) {
     this.containerRef.scrollToEnd(params);
-  };
+  }
 
   setContainerRef = (ref) => {
     this.containerRef = ref;
