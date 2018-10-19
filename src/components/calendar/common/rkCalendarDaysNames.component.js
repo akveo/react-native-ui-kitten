@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {
   View,
   Text,
+  StyleSheet,
 } from 'react-native';
-import { RkStyleSheet } from '../../../styles/styleSheet';
 import * as RkCalendarService from '../services';
 
 export class RkCalendarDaysNames extends React.Component {
@@ -14,35 +14,48 @@ export class RkCalendarDaysNames extends React.Component {
      * regularly is the same as rkCalendarDay component daySize prop.
      */
     daySize: PropTypes.number.isRequired,
+    style: PropTypes.shape({
+      container: View.propTypes.style,
+      text: Text.propTypes.style,
+    }),
+  };
+  static defaultProps = {
+    style: {
+      container: {},
+      text: {},
+    },
   };
 
   dayOfWeekNames = RkCalendarService.Locale.getDayOfWeekNames();
 
-  getChildComponents = () => this.dayOfWeekNames.map(this.renderDayOfWeek);
+  // eslint-disable-next-line arrow-body-style
+  getChildComponents = (style) => {
+    return this.dayOfWeekNames.map((item, index) => this.renderDayOfWeek(item, index, style));
+  };
 
-  renderDayOfWeek = (item, index) => (
+  renderDayOfWeek = (item, index, style) => (
     <Text
       key={`${index}`}
-      style={[styles.text, { width: this.props.daySize }]}>
+      style={[styles.text, style, { width: this.props.daySize }]}>
       {item.toUpperCase()}
     </Text>
   );
 
-  render = () => (
-    <View style={styles.container}>{this.getChildComponents()}</View>
-  );
+  render() {
+    return (
+      <View style={[this.props.style.container, styles.container]}>
+        {this.getChildComponents(this.props.style.text)}
+      </View>
+    );
+  }
 }
 
-const styles = RkStyleSheet.create(theme => ({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingVertical: 4,
   },
   text: {
     flex: 1,
-    textAlign: 'center',
-    fontSize: theme.fonts.sizes.base,
-    color: theme.colors.text.subtitle,
   },
-}));
+});
 

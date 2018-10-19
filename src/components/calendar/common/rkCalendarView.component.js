@@ -4,7 +4,6 @@ import {
   FlatList,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { RkStyleSheet } from '../../../styles/styleSheet';
 import { RkCalendarMonth } from '../cells/rkCalendarMonth.component';
 import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
 import * as RkCalendarService from '../services';
@@ -67,6 +66,12 @@ export class RkCalendarView extends React.Component {
      *    Fires inside onScrollEndDrag. Calculates visible index by offset.
      */
     onVisibleMonthChanged: PropTypes.func,
+
+    style: PropTypes.shape({
+      container: View.propTypes.style,
+      header: RkCalendarMonthHeader.propTypes.style,
+      month: RkCalendarMonth.propTypes.style,
+    }),
   };
   static defaultProps = {
     boundingMonth: true,
@@ -74,6 +79,12 @@ export class RkCalendarView extends React.Component {
     filter: (() => true),
     onLayoutCompleted: (() => null),
     onVisibleMonthChanged: (() => null),
+
+    style: {
+      container: {},
+      header: RkCalendarMonthHeader.defaultProps.style,
+      month: RkCalendarMonth.defaultProps.style,
+    },
   };
 
   state = {
@@ -205,8 +216,13 @@ export class RkCalendarView extends React.Component {
 
   renderItem = ({ item, index }) => (
     <View key={index.toString()}>
-      <RkCalendarMonthHeader date={item} daySize={this.state.daySize} />
+      <RkCalendarMonthHeader
+        style={this.props.style.header}
+        date={item}
+        daySize={this.state.daySize}
+      />
       <RkCalendarMonth
+        style={this.props.style.month}
         min={this.props.min}
         max={this.props.max}
         date={item}
@@ -227,8 +243,8 @@ export class RkCalendarView extends React.Component {
 
   renderView = () => (
     <FlatList
+      style={this.props.style.container}
       ref={this.setListRef}
-      style={styles.container}
       data={this.state.items}
       renderItem={this.renderItem}
       getItemLayout={this.getItemLayout}
@@ -244,9 +260,3 @@ export class RkCalendarView extends React.Component {
     return this.state.daySize < 0 ? this.renderPlaceholder() : this.renderView();
   }
 }
-
-const styles = RkStyleSheet.create(theme => ({
-  container: {
-    backgroundColor: theme.colors.background,
-  },
-}));

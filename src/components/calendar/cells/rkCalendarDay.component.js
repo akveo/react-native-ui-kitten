@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { RkStyleSheet } from '../../../styles/styleSheet';
 import * as RkCalendarService from '../services';
 
 const defaultDayValue = '';
@@ -47,6 +46,23 @@ export class RkCalendarDay extends React.Component {
     }).isRequired,
 
     size: PropTypes.number.isRequired,
+
+    style: PropTypes.shape({
+      container: PropTypes.shape({
+        base: View.propTypes.style,
+        today: View.propTypes.style,
+        selected: View.propTypes.style,
+        highlighted: View.propTypes.style,
+        disabled: View.propTypes.style,
+      }),
+      text: PropTypes.shape({
+        base: Text.propTypes.style,
+        today: Text.propTypes.style,
+        selected: Text.propTypes.style,
+        highlighted: Text.propTypes.style,
+        disabled: Text.propTypes.style,
+      }),
+    }),
   };
   static defaultProps = {
     date: RkCalendarService.Month.defaultBoundingFallback,
@@ -54,6 +70,23 @@ export class RkCalendarDay extends React.Component {
     renderContent: undefined,
     filter: (() => true),
     onSelect: (() => null),
+
+    style: {
+      container: {
+        base: {},
+        today: {},
+        selected: {},
+        highlighted: {},
+        disabled: {},
+      },
+      text: {
+        base: {},
+        today: {},
+        selected: {},
+        highlighted: {},
+        disabled: {},
+      },
+    },
   };
 
   state = {
@@ -83,33 +116,44 @@ export class RkCalendarDay extends React.Component {
     this.props.onSelect(this.props.date);
   };
 
-  getContentStyle = (state) => ({
+  getContentStyle = (state, style) => ({
     container: {
-      base: state.isToday ? [styles.container, styles.containerToday] : styles.container,
-      selected: state.isSelected ? styles.containerSelected : null,
-      highlighted: state.isHighlighted ? styles.containerHighlighted : null,
-      disabled: state.isDisabled ? styles.containerDisabled : null,
+      base: state.isToday ? [style.container.base, style.container.today] : style.container.base,
+      selected: state.isSelected ? style.container.selected : null,
+      highlighted: state.isHighlighted ? style.container.highlighted : null,
+      disabled: state.isDisabled ? style.container.disabled : null,
     },
     text: {
-      base: state.isToday ? [styles.text, styles.textToday] : styles.text,
-      selected: state.isSelected ? styles.textSelected : null,
-      highlighted: state.isHighlighted ? styles.textHighlighted : null,
-      disabled: state.isDisabled ? styles.textDisabled : null,
+      base: state.isToday ? [style.text.base, style.text.today] : style.text.base,
+      selected: state.isSelected ? style.text.selected : null,
+      highlighted: state.isHighlighted ? style.text.highlighted : null,
+      disabled: state.isDisabled ? style.text.disabled : null,
     },
   });
 
   renderText = (date, state) => {
-    const { container, text } = this.getContentStyle(state);
+    const styles = this.getContentStyle(state, this.props.style);
     return (
-      <View style={[container.base, container.selected, container.highlighted, container.disabled]}>
-        <Text style={[text.base, text.selected, text.highlighted, text.disabled]}>
+      <View style={[
+        styles.container.base,
+        styles.container.selected,
+        styles.container.highlighted,
+        styles.container.disabled,
+        { flex: 1 },
+      ]}>
+        <Text style={[
+          styles.text.base,
+          styles.text.selected,
+          styles.text.highlighted,
+          styles.text.disabled,
+        ]}>
           {state.isEmpty ? defaultDayValue : date.getDate()}
         </Text>
       </View>
     );
   };
 
-  render = () => {
+  render() {
     const contentHeight = this.props.renderContent === undefined ? this.props.size : undefined;
     const renderContentFunction = this.props.renderContent || this.renderText;
     return (
@@ -121,45 +165,5 @@ export class RkCalendarDay extends React.Component {
         </View>
       </TouchableWithoutFeedback>
     );
-  };
+  }
 }
-
-const styles = RkStyleSheet.create(theme => ({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-  },
-  containerToday: {
-    backgroundColor: theme.colors.highlight,
-  },
-  containerSelected: {
-    backgroundColor: theme.colors.button.success,
-    borderRadius: 4,
-  },
-  containerHighlighted: {
-    backgroundColor: theme.colors.button.success,
-    opacity: 0.25,
-    borderRadius: 0,
-  },
-  containerDisabled: {
-    opacity: 0.25,
-  },
-  text: {
-    fontSize: theme.fonts.sizes.large,
-    color: theme.colors.text.base,
-    fontWeight: '300',
-  },
-  textToday: {
-    fontWeight: 'bold',
-  },
-  textSelected: {
-    color: theme.colors.text.inverse,
-    fontWeight: 'bold',
-  },
-  textHighlighted: {
-    fontWeight: '300',
-  },
-  textDisabled: {},
-}));

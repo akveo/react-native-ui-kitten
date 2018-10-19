@@ -3,7 +3,11 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import * as RkCalendarService from '../services';
 import { RkCalendarWeek } from './rkCalendarWeek.component';
+import { RkCalendarDay } from './rkCalendarDay.component';
 
+/**
+ * @extends React.Component
+ */
 export class RkCalendarMonth extends React.Component {
   static propTypes = {
     min: PropTypes.instanceOf(Date).isRequired,
@@ -31,12 +35,22 @@ export class RkCalendarMonth extends React.Component {
     }).isRequired,
 
     daySize: PropTypes.number.isRequired,
+
+    style: PropTypes.shape({
+      container: View.propTypes.style,
+      day: RkCalendarDay.propTypes.style,
+    }),
   };
   static defaultProps = {
     selected: undefined,
     boundingMonth: true,
     renderDay: undefined,
     filter: (() => true),
+
+    style: {
+      container: {},
+      day: RkCalendarDay.defaultProps.style,
+    },
   };
 
   state = {
@@ -55,10 +69,14 @@ export class RkCalendarMonth extends React.Component {
     return isSizeChanged || nextProps.selectionStrategy.shouldUpdateMonth(this.props, nextProps);
   }
 
-  getChildComponents = () => this.state.dates.map(this.renderWeek);
+  // eslint-disable-next-line arrow-body-style
+  getChildComponents = (styles) => {
+    return this.state.dates.map((item, index) => this.renderWeek(item, index, styles));
+  };
 
-  renderWeek = (item, index) => (
+  renderWeek = (item, index, styles) => (
     <RkCalendarWeek
+      style={{ container: {}, ...styles }}
       key={`${index}`}
       min={this.props.min}
       max={this.props.max}
@@ -73,7 +91,12 @@ export class RkCalendarMonth extends React.Component {
     />
   );
 
-  render = () => (
-    <View>{this.getChildComponents()}</View>
-  );
+  render() {
+    const { container, ...restStyles } = this.props.style;
+    return (
+      <View style={container}>
+        {this.getChildComponents(restStyles)}
+      </View>
+    );
+  }
 }

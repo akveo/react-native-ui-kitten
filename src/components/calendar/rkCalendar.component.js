@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { RkComponent } from '../rkComponent';
 import { RkCalendarView } from './common/rkCalendarView.component';
 import * as SelectionStrategy from './strategy';
 import * as Layout from './layout';
@@ -76,7 +77,7 @@ const defaultScrollParams = {
  * @property {function} onSelect - Fired when date or date range is selected
  * @property {function} onVisibleMonthChanged - Fired when on-screen month is changed
  * */
-export class RkCalendar extends React.Component {
+export class RkCalendar extends RkComponent {
   static propTypes = {
     type: PropTypes.oneOf([
       SelectionStrategy.Base.description,
@@ -104,6 +105,13 @@ export class RkCalendar extends React.Component {
     onVisibleMonthChanged: (() => null),
   };
 
+  componentName = 'RkCalendar';
+  typeMapping = {
+    container: {},
+    header: {},
+    month: {},
+  };
+
   state = {
     selected: {
       start: RkCalendarService.Date.today(),
@@ -118,6 +126,17 @@ export class RkCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.state.selectionStrategy = this.getSelectionStrategy(props.type);
+  }
+
+  /**
+   * Override point.
+   * Makes typeMapping keys be returned as objects instead of arrays
+   */
+  getElementStyle(styles, element, key, value) {
+    const style = styles[element] || {};
+    const styleKey = super.getElementStyleKey(element, style, key);
+    style[styleKey.name] = super.getStyleValue(value);
+    return style;
   }
 
   setContainerRef = (ref) => {
@@ -208,20 +227,23 @@ export class RkCalendar extends React.Component {
     }
   };
 
-  render = () => (
-    <RkCalendarView
-      ref={this.setContainerRef}
-      selectionStrategy={this.state.selectionStrategy}
-      layout={this.getLayout(this.props.layout)}
-      min={this.props.min}
-      max={this.props.max}
-      selected={this.state.selected}
-      boundingMonth={this.props.boundingMonth}
-      renderDay={this.props.renderDay}
-      filter={this.props.filter}
-      onSelect={this.onDaySelect}
-      onLayoutCompleted={this.onContainerLayoutCompleted}
-      onVisibleMonthChanged={this.onVisibleMonthChanged}
-    />
-  );
+  render() {
+    return (
+      <RkCalendarView
+        style={this.defineStyles()}
+        ref={this.setContainerRef}
+        selectionStrategy={this.state.selectionStrategy}
+        layout={this.getLayout(this.props.layout)}
+        min={this.props.min}
+        max={this.props.max}
+        selected={this.state.selected}
+        boundingMonth={this.props.boundingMonth}
+        renderDay={this.props.renderDay}
+        filter={this.props.filter}
+        onSelect={this.onDaySelect}
+        onLayoutCompleted={this.onContainerLayoutCompleted}
+        onVisibleMonthChanged={this.onVisibleMonthChanged}
+      />
+    );
+  }
 }

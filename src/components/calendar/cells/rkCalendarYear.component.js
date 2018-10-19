@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkCalendarMonth } from './rkCalendarMonth.component';
 import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
@@ -103,10 +100,6 @@ export class RkCalendarYear extends React.Component {
   );
 
   render = () => (
-    <View style={styles.container}>{this.getChildComponents()}</View>
+    <View>{this.getChildComponents()}</View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

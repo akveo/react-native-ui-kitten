@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkCalendarDay } from './rkCalendarDay.component';
 
@@ -33,11 +30,21 @@ export class RkCalendarWeek extends React.Component {
     }).isRequired,
 
     daySize: PropTypes.number.isRequired,
+
+    style: PropTypes.shape({
+      container: View.propTypes.style,
+      day: RkCalendarDay.propTypes.style,
+    }),
   };
   static defaultProps = {
     selected: undefined,
     renderDay: undefined,
     filter: (() => true),
+
+    style: {
+      container: {},
+      day: RkCalendarDay.defaultProps.style,
+    },
   };
 
   shouldComponentUpdate(nextProps) {
@@ -49,6 +56,7 @@ export class RkCalendarWeek extends React.Component {
 
   renderDay = (item, index) => (
     <RkCalendarDay
+      style={this.props.style.day}
       key={`${index}`}
       min={this.props.min}
       max={this.props.max}
@@ -63,14 +71,12 @@ export class RkCalendarWeek extends React.Component {
     />
   );
 
-  render = () => (
-    <View style={styles.container}>{this.getChildComponents()}</View>
-  );
+  render() {
+    return (
+      <View style={[this.props.style.container, { flexDirection: 'row' }]}>
+        {this.getChildComponents()}
+      </View>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-  },
-});
 
