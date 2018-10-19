@@ -56,7 +56,8 @@ export class TabsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <RkText>
-          {'TabView is a component which allows you to split your content into sub-contents'}
+          {'TabSet is a component which allows you to split your content into sub-contents.' +
+          ' We have lovely prepared some examples below to let you see what it can <3'}
         </RkText>
         <View style={styles.descriptionSeparator} />
         <FlatList
