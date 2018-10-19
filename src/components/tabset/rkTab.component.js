@@ -12,14 +12,14 @@ import { RkComponent } from '../rkComponent';
 /**
  * @extends React.Component
  *
- * @property {string} title - tab title.
- * @property {React.ReactNode} icon - tab icon.
- * @property {string} badgeTitle - tab badge title.
- * @property {string} badgePosition - tab badge position. Should be one of:
+ * @property {string} title - Tab title.
+ * @property {React.ReactNode} icon - Tab icon.
+ * @property {string} badgeTitle - Tab badge title.
+ * @property {string} badgePosition - Tab badge position. Should be one of:
  * `top left`, `top right`, `bottom left`, `bottom right`.
  * Default is `top right`.
- * @property {boolean} isSelected - defines if tab is selected.
- * @property {boolean} isLazyLoad - defines if tab should use content lazy loading.
+ * @property {boolean} isSelected - Defines if tab is selected.
+ * @property {boolean} isLazyLoad - Defines if tab should use content lazy loading.
  * Default is `true`.
  */
 export class RkTab extends RkComponent {

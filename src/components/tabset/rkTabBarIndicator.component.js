@@ -8,8 +8,15 @@ import { RkComponent } from '../rkComponent';
 
 const defaultAnimationDuration = 200;
 
+
 /**
+ * `RkTabBarIndicator` is a component that indicates `RkTabBar` current selection.
+ *
  * @extends React.Component
+ *
+ * @property {string} rkType - `RkTabBarIndicator` type.
+ * Should be one of: `` or `rounded`.
+ * @property {number} componentWidth - width of `RkTabBar`.
  */
 export class RkTabBarIndicator extends RkComponent {
   static propTypes = {
@@ -30,6 +37,8 @@ export class RkTabBarIndicator extends RkComponent {
   contentOffset = new Animated.Value(0);
 
   /**
+   * scrolls indicator to passed index
+   *
    * @param params - object: { index: number, animated: boolean }
    */
   scrollToIndex(params) {
@@ -40,6 +49,8 @@ export class RkTabBarIndicator extends RkComponent {
   }
 
   /**
+   * scrolls indicator by passed offset
+   *
    * @param params - object: { offset: number, animated: boolean }
    */
   scrollByOffset(params) {
@@ -50,6 +61,8 @@ export class RkTabBarIndicator extends RkComponent {
   }
 
   /**
+   * scrolls indicator to passed offset
+   *
    * @param params - object: { offset: number, animated: boolean }
    */
   scrollToOffset(params) {

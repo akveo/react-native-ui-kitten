@@ -5,6 +5,18 @@ import {
   FlatList,
 } from 'react-native';
 
+/**
+ * `RkTabPager` is a component that manages `RkTab`s content views.
+ *
+ * @extends React.Component
+ *
+ * @property {React.ReactNode} children - `RkTab` content views.
+ * @property {number} selectedIndex - Selected RkTab index.
+ * @property {function} onSelect - Fires when `RkTab`s content view is selected.
+ * @property {function} shouldUseLazyLoad - Fires to define if `RkTab`s content
+ * should be lazy loaded.
+ * @property {number} componentWidth - width of `RkTabBar`.
+ */
 export class RkTabPager extends React.Component {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.node).isRequired,
@@ -24,14 +36,12 @@ export class RkTabPager extends React.Component {
     items: [],
   };
 
-  /**
-   * Support property to avoid sending 'onSelect' events in case like:
-   *
-   * selectedIndex === 0
-   * scrollToIndex === 2
-   *
-   * this helps avoid sending onSelect for index === 1
-   */
+  // Support property to avoid sending 'onSelect' events in case like:
+  //
+  // selectedIndex === 0
+  // scrollToIndex === 2
+  //
+  // this helps avoid sending onSelect for index === 1
   scrollRequestIndex = undefined;
 
   containerRef = undefined;
@@ -70,12 +80,14 @@ export class RkTabPager extends React.Component {
   };
 
   /**
+   * Scrolls to tab content with passed index
+   *
    * @param params - object: { index: number, animated: boolean, skipInnerItems: boolean }
    */
-  scrollToIndex = (params) => {
+  scrollToIndex(params) {
     this.scrollRequestIndex = params.index;
     this.containerRef.scrollToIndex(params);
-  };
+  }
 
   setContainerRef = (ref) => {
     this.containerRef = ref;
@@ -116,6 +128,7 @@ export class RkTabPager extends React.Component {
         ref={this.setContainerRef}
         horizontal={true}
         pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
         initialScrollIndex={this.props.selectedIndex}
         data={this.state.items}
         onScroll={this.onContainerScroll}

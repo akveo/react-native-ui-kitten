@@ -9,6 +9,7 @@ export const DefaultTypes = (theme) => ({
   RkChoiceGroup: ComponentTypes.RkChoiceGroupTypes(theme),
   RkCard: ComponentTypes.RkCardTypes(theme),
   RkCalendar: ComponentTypes.RkCalendarTypes(theme),
+  RkTabView: ComponentTypes.TabTypes(theme),
   RkTab: ComponentTypes.RkTabTypes(theme),
   RkTabBar: ComponentTypes.RkTabBarTypes(theme),
   RkTabBarIndicator: ComponentTypes.RkTabBarIndicatorTypes(theme),
