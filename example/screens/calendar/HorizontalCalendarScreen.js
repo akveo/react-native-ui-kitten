@@ -81,18 +81,20 @@ export class HorizontalCalendarScreen extends React.Component {
     );
   };
 
-  render = () => (
-    <View style={styles.container}>
-      {this.renderControlButtons()}
-      <RkCalendar
-        ref={this.setCalendarRef}
-        layout='horizontal'
-        min={this.state.min}
-        max={this.state.max}
-        onVisibleMonthChanged={this.onVisibleMonthChanged}
-      />
-    </View>
-  );
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderControlButtons()}
+        <RkCalendar
+          ref={this.setCalendarRef}
+          layout='horizontal'
+          min={this.state.min}
+          max={this.state.max}
+          onVisibleMonthChanged={this.onVisibleMonthChanged}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = RkStyleSheet.create(theme => ({

@@ -99,7 +99,9 @@ export class RkCalendarYear extends React.Component {
     </View>
   );
 
-  render = () => (
-    <View>{this.getChildComponents()}</View>
-  );
+  render() {
+    return (
+      <View>{this.getChildComponents()}</View>
+    );
+  }
 }

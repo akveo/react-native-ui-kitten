@@ -10,15 +10,17 @@ export class BoundingCalendarScreen extends React.Component {
     title: 'Bounding Month Calendar',
   };
 
-  render = () => (
-    <View style={styles.container}>
-      <RkCalendar
-        min={new Date(2018, 0, 1)}
-        max={new Date(2019, 0, 1)}
-        boundingMonth={false}
-      />
-    </View>
-  );
+  render() {
+    return (
+      <View style={styles.container}>
+        <RkCalendar
+          min={new Date(2018, 0, 1)}
+          max={new Date(2019, 0, 1)}
+          boundingMonth={false}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = RkStyleSheet.create(theme => ({

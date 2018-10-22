@@ -12,10 +12,10 @@ export class RkCalendarMonthName extends React.Component {
     style: {},
   };
 
-  render = () => {
+  render() {
     const text = `${RkCalendarService.Locale.getMonthName(this.props.date)}, ${this.props.date.getFullYear()}`;
     return (
       <Text style={this.props.style}>{text}</Text>
     );
-  };
+  }
 }

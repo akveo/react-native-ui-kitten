@@ -10,14 +10,16 @@ export class BaseCalendarScreen extends React.Component {
     title: 'Base Calendar',
   };
 
-  render = () => (
-    <View style={styles.container}>
-      <RkCalendar
-        min={new Date(2018, 0, 1)}
-        max={new Date(2019, 0, 1)}
-      />
-    </View>
-  );
+  render() {
+    return (
+      <View style={styles.container}>
+        <RkCalendar
+          min={new Date(2018, 0, 1)}
+          max={new Date(2019, 0, 1)}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = RkStyleSheet.create(theme => ({

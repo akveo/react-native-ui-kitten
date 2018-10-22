@@ -10,15 +10,17 @@ export class RangeCalendarScreen extends React.Component {
     title: 'Range Calendar',
   };
 
-  render = () => (
-    <View style={styles.container}>
-      <RkCalendar
-        type='range'
-        min={new Date(2018, 0, 1)}
-        max={new Date(2019, 0, 1)}
-      />
-    </View>
-  );
+  render() {
+    return (
+      <View style={styles.container}>
+        <RkCalendar
+          type='range'
+          min={new Date(2018, 0, 1)}
+          max={new Date(2019, 0, 1)}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = RkStyleSheet.create(theme => ({
