@@ -46,9 +46,9 @@ class BaseSelectionStrategy {
   shouldUpdateDay(props, nextProps) {
     const { date, selected: currentSelected } = props;
     const { selected: nextSelected } = nextProps;
-    const isWasSelected = RkCalendarService.Date.isSameDaySafe(date, currentSelected.start);
-    const isWillSelected = RkCalendarService.Date.isSameDaySafe(date, nextSelected.start);
-    return isWasSelected || isWillSelected;
+    const wasSelected = RkCalendarService.Date.isSameDaySafe(date, currentSelected.start);
+    const willSelected = RkCalendarService.Date.isSameDaySafe(date, nextSelected.start);
+    return wasSelected || willSelected;
   }
 
   shouldUpdateWeek(props, nextProps) {
@@ -61,30 +61,30 @@ class BaseSelectionStrategy {
       const { start, end } = weekRange;
       return RkCalendarService.Date.isBetweenIncludingSafe(d, start, end);
     };
-    const isWasSelected = isInWeek(props.selected.start);
-    const isWillSelected = isInWeek(nextProps.selected.start);
-    return isWasSelected || isWillSelected;
+    const wasSelected = isInWeek(props.selected.start);
+    const willSelected = isInWeek(nextProps.selected.start);
+    return wasSelected || willSelected;
   }
 
   shouldUpdateMonth(props, nextProps) {
     const { date, selected: currentSelected, boundingMonth: isBoundingMonth } = props;
     const { selected: nextSelected } = nextProps;
-    const isWasSelected = RkCalendarService.Date.isSameMonthSafe(date, currentSelected.start);
-    const isWillSelected = RkCalendarService.Date.isSameMonthSafe(date, nextSelected.start);
+    const wasSelected = RkCalendarService.Date.isSameMonthSafe(date, currentSelected.start);
+    const willSelected = RkCalendarService.Date.isSameMonthSafe(date, nextSelected.start);
     if (isBoundingMonth) {
-      const isWasBoundingSelected = isBoundingDateSafe(currentSelected.start, date) || false;
-      const isWillBoundingSelected = isBoundingDateSafe(nextSelected.start, date) || false;
-      return (isWasBoundingSelected || isWillBoundingSelected) || (isWasSelected || isWillSelected);
+      const wasBoundingSelected = isBoundingDateSafe(currentSelected.start, date) || false;
+      const willBoundingSelected = isBoundingDateSafe(nextSelected.start, date) || false;
+      return (wasBoundingSelected || willBoundingSelected) || (wasSelected || willSelected);
     }
-    return isWasSelected || isWillSelected;
+    return wasSelected || willSelected;
   }
 
   shouldUpdateYear(props, nextProps) {
     const { date, selected: currentSelected } = props;
     const { selected: nextSelected } = nextProps;
-    const isWasSelected = RkCalendarService.Date.isSameYearSafe(date, currentSelected.start);
-    const isWillSelected = RkCalendarService.Date.isSameYearSafe(date, nextSelected.start);
-    return isWasSelected || isWillSelected;
+    const wasSelected = RkCalendarService.Date.isSameYearSafe(date, currentSelected.start);
+    const willSelected = RkCalendarService.Date.isSameYearSafe(date, nextSelected.start);
+    return wasSelected || willSelected;
   }
 }
 

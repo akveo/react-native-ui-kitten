@@ -63,9 +63,9 @@ class RangedSelectionStrategy {
   shouldUpdateDay(props, nextProps) {
     const { date, selected: currentSelected } = props;
     const { selected: nextSelected } = nextProps;
-    const isWasSelected = isDateInRange(date, currentSelected);
-    const isWillSelected = isDateInRange(date, nextSelected);
-    return isWasSelected || isWillSelected;
+    const wasSelected = isDateInRange(date, currentSelected);
+    const willSelected = isDateInRange(date, nextSelected);
+    return wasSelected || willSelected;
   }
 
   shouldUpdateWeek(props, nextProps) {
@@ -74,9 +74,9 @@ class RangedSelectionStrategy {
       start: dates[0],
       end: dates[dates.length - 1],
     };
-    const isWasInRange = isDateRangeInRange(weekRange, props.selected);
-    const isWillInRange = isDateRangeInRange(weekRange, nextProps.selected);
-    return isWasInRange || isWillInRange;
+    const wasInRange = isDateRangeInRange(weekRange, props.selected);
+    const willInRange = isDateRangeInRange(weekRange, nextProps.selected);
+    return wasInRange || willInRange;
   }
 
   shouldUpdateMonth(props, nextProps) {
@@ -86,14 +86,14 @@ class RangedSelectionStrategy {
     };
     const { date, selected: currentSelected, boundingMonth: isBoundingMonth } = props;
     const { selected: nextSelected } = nextProps;
-    const isWasInRange = isDateRangeInRange(monthRange, currentSelected);
-    const isWillInRange = isDateRangeInRange(monthRange, nextSelected);
+    const wasInRange = isDateRangeInRange(monthRange, currentSelected);
+    const willInRange = isDateRangeInRange(monthRange, nextSelected);
     if (isBoundingMonth) {
-      const isWasBoundingSelected = isBoundingRange(currentSelected, date) || false;
-      const isWillBoundingSelected = isBoundingRange(nextSelected, date) || false;
-      return (isWasBoundingSelected || isWillBoundingSelected) || (isWasInRange || isWillInRange);
+      const wasBoundingSelected = isBoundingRange(currentSelected, date) || false;
+      const willBoundingSelected = isBoundingRange(nextSelected, date) || false;
+      return (wasBoundingSelected || willBoundingSelected) || (wasInRange || willInRange);
     }
-    return isWasInRange || isWillInRange;
+    return wasInRange || willInRange;
   }
 
   shouldUpdateYear(props, nextProps) {
@@ -101,9 +101,9 @@ class RangedSelectionStrategy {
       start: RkCalendarService.Date.getYearStart(props.date),
       end: RkCalendarService.Date.getYearEnd(props.date),
     };
-    const isWasInRange = isDateRangeInRange(yearRange, props.selected);
-    const isWillInRange = isDateRangeInRange(yearRange, nextProps.selected);
-    return isWasInRange || isWillInRange;
+    const wasInRange = isDateRangeInRange(yearRange, props.selected);
+    const willInRange = isDateRangeInRange(yearRange, nextProps.selected);
+    return wasInRange || willInRange;
   }
 }
 

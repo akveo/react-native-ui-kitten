@@ -31,10 +31,10 @@ function createDates(activeMonth) {
 
 function withBoundingMonths(weeks, activeMonth, isBounding, fallback) {
   let boundedWeeks = weeks;
-  if (isShouldAddPrevBoundingMonth(boundedWeeks)) {
+  if (shouldAddPrevBoundingMonth(boundedWeeks)) {
     boundedWeeks = addPrevBoundingMonth(boundedWeeks, activeMonth, isBounding, fallback);
   }
-  if (isShouldAddNextBoundingMonth(boundedWeeks)) {
+  if (shouldAddNextBoundingMonth(boundedWeeks)) {
     boundedWeeks = addNextBoundingMonth(boundedWeeks, activeMonth, isBounding, fallback);
   }
   return boundedWeeks;
@@ -78,10 +78,10 @@ function getWeekStartDiff(date) {
   return ((7 - LocaleService.getFirstDayOfWeek()) + date.getDay()) % 7;
 }
 
-function isShouldAddPrevBoundingMonth(weeks) {
+function shouldAddPrevBoundingMonth(weeks) {
   return weeks[0].length < DateTimeUtil.DAYS_IN_WEEK;
 }
 
-function isShouldAddNextBoundingMonth(weeks) {
+function shouldAddNextBoundingMonth(weeks) {
   return weeks[weeks.length - 1].length < DateTimeUtil.DAYS_IN_WEEK;
 }
