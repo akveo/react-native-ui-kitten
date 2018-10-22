@@ -36,6 +36,7 @@ export class RkCalendarWeek extends React.Component {
       day: RkCalendarDay.propTypes.style,
     }),
   };
+
   static defaultProps = {
     selected: undefined,
     renderDay: undefined,

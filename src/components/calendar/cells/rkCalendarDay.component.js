@@ -64,6 +64,7 @@ export class RkCalendarDay extends React.Component {
       }),
     }),
   };
+
   static defaultProps = {
     date: RkCalendarService.Month.defaultBoundingFallback,
     selected: undefined,

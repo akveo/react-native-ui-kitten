@@ -33,6 +33,7 @@ export class RkCalendarYear extends React.Component {
 
     daySize: PropTypes.number.isRequired,
   };
+
   static defaultProps = {
     selected: undefined,
     boundingMonth: true,

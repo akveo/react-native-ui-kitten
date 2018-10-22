@@ -73,6 +73,7 @@ export class RkCalendarView extends React.Component {
       month: RkCalendarMonth.propTypes.style,
     }),
   };
+
   static defaultProps = {
     boundingMonth: true,
     renderDay: undefined,

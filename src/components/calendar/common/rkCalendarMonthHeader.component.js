@@ -21,6 +21,7 @@ export class RkCalendarMonthHeader extends React.Component {
       weekDays: RkCalendarDaysNames.propTypes.style,
     }),
   };
+
   static defaultProps = {
     style: {
       container: {},

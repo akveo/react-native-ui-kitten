@@ -14,11 +14,13 @@ export class CalendarScreen extends React.Component {
   static navigationOptions = {
     title: 'Calendars',
   };
+
   static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
     }).isRequired,
   };
+
   static data = [
     {
       title: 'Base',

@@ -19,6 +19,7 @@ export class RkCalendarDaysNames extends React.Component {
       text: Text.propTypes.style,
     }),
   };
+
   static defaultProps = {
     style: {
       container: {},

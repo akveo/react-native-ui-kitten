@@ -8,6 +8,7 @@ export class RkCalendarMonthName extends React.Component {
     date: PropTypes.instanceOf(Date).isRequired,
     style: Text.propTypes.style,
   };
+
   static defaultProps = {
     style: {},
   };

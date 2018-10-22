@@ -95,6 +95,7 @@ export class RkCalendar extends RkComponent {
     onSelect: PropTypes.func,
     onVisibleMonthChanged: PropTypes.func,
   };
+
   static defaultProps = {
     type: SelectionStrategy.Base.description,
     layout: Layout.Vertical.description,
