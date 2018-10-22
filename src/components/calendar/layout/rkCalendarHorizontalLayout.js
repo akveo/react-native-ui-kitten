@@ -16,7 +16,7 @@ class HorizontalLayout {
     return daySize * RkCalendarService.Date.DAYS_IN_WEEK;
   }
 
-  getPrimaryAxeOffset(offset) {
+  getPrimaryAxisOffset(offset) {
     return offset.x;
   }
 }

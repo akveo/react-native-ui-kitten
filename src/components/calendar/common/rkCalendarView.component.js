@@ -13,7 +13,7 @@ export class RkCalendarView extends React.Component {
     layout: PropTypes.shape({
       getLayoutConfig: PropTypes.func.isRequired,
       getItemSize: PropTypes.func.isRequired,
-      getPrimaryAxeOffset: PropTypes.func.isRequired,
+      getPrimaryAxisOffset: PropTypes.func.isRequired,
     }).isRequired,
     selectionStrategy: PropTypes.shape({
       isDaySelected: PropTypes.func.isRequired,
@@ -144,14 +144,14 @@ export class RkCalendarView extends React.Component {
   };
 
   onScrollEndDrag = (event) => {
-    const primaryAxeOffset = this.props.layout.getPrimaryAxeOffset(event.nativeEvent.contentOffset);
-    const visibleMonthIndex = this.calculateItemIndex(primaryAxeOffset);
+    const axisOffset = this.props.layout.getPrimaryAxisOffset(event.nativeEvent.contentOffset);
+    const visibleMonthIndex = this.calculateItemIndex(axisOffset);
     this.setVisibleMonthIfNeeded(this.createMonthDateByIndex(visibleMonthIndex));
   };
 
   onScrollEndFling = (event) => {
-    const primaryAxeOffset = this.props.layout.getPrimaryAxeOffset(event.nativeEvent.contentOffset);
-    const visibleMonthIndex = this.calculateItemIndex(primaryAxeOffset);
+    const axisOffset = this.props.layout.getPrimaryAxisOffset(event.nativeEvent.contentOffset);
+    const visibleMonthIndex = this.calculateItemIndex(axisOffset);
     this.setVisibleMonthIfNeeded(this.createMonthDateByIndex(visibleMonthIndex));
   };
 

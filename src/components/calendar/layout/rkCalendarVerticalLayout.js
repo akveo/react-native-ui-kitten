@@ -15,7 +15,7 @@ class VerticalLayout {
     return (weekRowCount * daySize) + 58; // + header height; TODO
   }
 
-  getPrimaryAxeOffset(offset) {
+  getPrimaryAxisOffset(offset) {
     return offset.y;
   }
 }
