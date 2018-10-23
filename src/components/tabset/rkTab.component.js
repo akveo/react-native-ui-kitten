@@ -4,10 +4,8 @@ import {
   View,
   Text,
   Image,
-  ViewPropTypes,
 } from 'react-native';
 import { RkBadge } from '../badge/rkBadge.component';
-import { RkComponent } from '../rkComponent';
 
 /**
  * @extends React.Component
@@ -22,9 +20,8 @@ import { RkComponent } from '../rkComponent';
  * @property {boolean} isLazyLoad - Defines if tab should use content lazy loading.
  * Default is `true`.
  */
-export class RkTab extends RkComponent {
+export class RkTab extends React.Component {
   static propTypes = {
-    rkType: RkComponent.propTypes.rkType,
     title: PropTypes.string,
     icon: PropTypes.node,
     badgeTitle: PropTypes.string,
@@ -34,10 +31,23 @@ export class RkTab extends RkComponent {
     // used in RkTabView
     // eslint-disable-next-line react/no-unused-prop-types,
     isLazyLoad: PropTypes.bool,
-    ...ViewPropTypes,
+
+    style: PropTypes.shape({
+      container: PropTypes.shape({
+        base: View.propTypes.style,
+        selected: View.propTypes.style,
+      }),
+      title: PropTypes.shape({
+        base: Text.propTypes.style,
+        selected: Text.propTypes.style,
+      }),
+      icon: PropTypes.shape({
+        base: Image.propTypes.style,
+        selected: Image.propTypes.style,
+      }),
+    }),
   };
   static defaultProps = {
-    rkType: RkComponent.defaultProps.rkType,
     title: '',
     icon: undefined,
     badgeTitle: '',
@@ -45,12 +55,21 @@ export class RkTab extends RkComponent {
     badgeStatus: RkBadge.defaultProps.rkType,
     isSelected: false,
     isLazyLoad: true,
-  };
-  componentName = 'RkTab';
-  typeMapping = {
-    container: {},
-    title: {},
-    icon: {},
+
+    style: {
+      container: {
+        base: {},
+        selected: {},
+      },
+      title: {
+        base: {},
+        selected: {},
+      },
+      icon: {
+        base: {},
+        selected: {},
+      },
+    },
   };
 
   state = {
@@ -67,32 +86,29 @@ export class RkTab extends RkComponent {
     return this.props.isSelected !== nextProps.isSelected;
   }
 
-  defineStyles(additionalTypes) {
-    const { container, title, icon } = super.defineStyles(additionalTypes);
-    return {
-      container: {
-        base: this.extractNonStyleValue(container, 'base'),
-        selected: this.state.isSelected ? this.extractNonStyleValue(container, 'selected') : null,
-      },
-      title: {
-        base: this.extractNonStyleValue(title, 'base'),
-        selected: this.state.isSelected ? this.extractNonStyleValue(title, 'selected') : null,
-      },
-      icon: {
-        base: this.extractNonStyleValue(icon, 'base'),
-        selected: this.state.isSelected ? this.extractNonStyleValue(icon, 'selected') : null,
-      },
-      badge: {
-        base: { opacity: this.props.badgeTitle.length > 0 ? 1 : 0 },
-        selected: {},
-      },
-    };
-  }
+  getContentStyle = (state, style) => ({
+    container: {
+      base: style.container.base,
+      selected: state.isSelected ? style.container.selected : null,
+    },
+    title: {
+      base: style.title.base,
+      selected: state.isSelected ? style.title.selected : null,
+    },
+    icon: {
+      base: style.icon.base,
+      selected: this.state.isSelected ? style.icon.selected : null,
+    },
+    badge: {
+      base: { opacity: this.props.badgeTitle.length > 0 ? 1 : 0 },
+      selected: {},
+    },
+  });
 
   render() {
-    const styles = this.defineStyles(this.props.rkType);
+    const styles = this.getContentStyle(this.state, this.props.style);
     return (
-      <View style={[styles.container.base, styles.container.selected, this.props.style]}>
+      <View style={[styles.container.base, styles.container.selected]}>
         <RkBadge
           rkType={this.props.badgeStatus}
           style={[styles.badge.base, styles.badge.selected]}

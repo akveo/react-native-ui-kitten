@@ -25,11 +25,19 @@ export class RkTabPager extends React.Component {
     shouldUseLazyLoad: PropTypes.func,
 
     componentWidth: PropTypes.number.isRequired,
+
+    style: PropTypes.shape({
+      container: View.propTypes.style,
+    }),
   };
   static defaultProps = {
     selectedIndex: 0,
     onSelect: (() => null),
     shouldUseLazyLoad: (() => true),
+
+    style: {
+      container: {},
+    },
   };
 
   state = {
@@ -125,6 +133,7 @@ export class RkTabPager extends React.Component {
   render() {
     return (
       <FlatList
+        style={this.props.style.container}
         ref={this.setContainerRef}
         horizontal={true}
         pagingEnabled={true}

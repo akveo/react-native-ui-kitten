@@ -7,6 +7,7 @@ import {
 import { RkTabBar } from './rkTabBar.component';
 import { RkTabBarIndicator } from './rkTabBarIndicator.component';
 import { RkTabPager } from './rkTabPager.component';
+import { RkComponent } from '../rkComponent';
 
 /**
  * `RkTabSet` is a component which allows you to split your content into sub-contents.
@@ -91,7 +92,7 @@ import { RkTabPager } from './rkTabPager.component';
  * @property {React.ReactNode} children - RkTab components with it's contents.
  * @property {function} onItemChange - Fired when visible tab is changed.
  * */
-export class RkTabSet extends React.Component {
+export class RkTabSet extends RkComponent {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     onItemChange: PropTypes.func,
@@ -102,6 +103,13 @@ export class RkTabSet extends React.Component {
   static defaultProps = {
     onItemChange: (() => null),
     // isScrollableHeader: RkTabBar.defaultProps.isScrollable,
+  };
+
+  componentName = 'RkTabSet';
+  typeMapping = {
+    tabBar: {},
+    indicator: {},
+    pager: {},
   };
 
   state = {
@@ -137,6 +145,17 @@ export class RkTabSet extends React.Component {
       previous: null,
       current: this.state.selectedIndex,
     });
+  }
+
+  /**
+   * Override point.
+   * Makes typeMapping keys be returned as objects instead of arrays
+   */
+  getElementStyle(styles, element, key, value) {
+    const style = styles[element] || {};
+    const styleKey = super.getElementStyleKey(element, style, key);
+    style[styleKey.name] = super.getStyleValue(value);
+    return style;
   }
 
   onTabSelect = (index) => {
@@ -230,33 +249,39 @@ export class RkTabSet extends React.Component {
     <View onLayout={this.onLayout} />
   );
 
-  renderView = () => (
-    <View style={{ flex: 1 }}>
-      <RkTabBar
-        ref={this.setTabBarRef}
-        componentWidth={this.state.componentWidth}
-        isScrollable={false}
-        // isScrollable={this.props.isScrollableHeader}
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onTabSelect}>
-        {this.tabViews}
-      </RkTabBar>
-      <RkTabBarIndicator
-        rkType='rounded'
-        ref={this.setIndicatorRef}
-        itemCount={this.props.children.length}
-        componentWidth={this.state.componentWidth}
-      />
-      <RkTabPager
-        ref={this.setTabPagerRef}
-        componentWidth={this.state.componentWidth}
-        selectedIndex={this.state.selectedIndex}
-        shouldUseLazyLoad={this.isShouldUseLazyLoad}
-        onSelect={this.onTabContentSelect}>
-        {this.tabContentViews}
-      </RkTabPager>
-    </View>
-  );
+  renderView = () => {
+    const styles = super.defineStyles();
+    return (
+      <View style={{ flex: 1 }}>
+        <RkTabBar
+          style={styles.tabBar}
+          ref={this.setTabBarRef}
+          componentWidth={this.state.componentWidth}
+          isScrollable={false}
+          // isScrollable={this.props.isScrollableHeader}
+          selectedIndex={this.state.selectedIndex}
+          onSelect={this.onTabSelect}>
+          {this.tabViews}
+        </RkTabBar>
+        <RkTabBarIndicator
+          style={styles.indicator}
+          rkType='rounded'
+          ref={this.setIndicatorRef}
+          itemCount={this.props.children.length}
+          componentWidth={this.state.componentWidth}
+        />
+        <RkTabPager
+          style={styles.pager}
+          ref={this.setTabPagerRef}
+          componentWidth={this.state.componentWidth}
+          selectedIndex={this.state.selectedIndex}
+          shouldUseLazyLoad={this.isShouldUseLazyLoad}
+          onSelect={this.onTabContentSelect}>
+          {this.tabContentViews}
+        </RkTabPager>
+      </View>
+    );
+  };
 
   render() {
     return this.state.componentWidth < 0 ? this.renderPlaceholder() : this.renderView();

@@ -4,9 +4,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  ViewPropTypes,
 } from 'react-native';
-import { RkComponent } from '../rkComponent';
+import { RkTab } from './rkTab.component';
 
 /**
  * `RkTabBar` is a component that manages `RkTab`s.
@@ -21,25 +20,34 @@ import { RkComponent } from '../rkComponent';
  * @property {number} componentWidth - width of `RkTabBar`.
  * Needed for `RkTab` equal distribution.
  */
-export class RkTabBar extends RkComponent {
+export class RkTabBar extends React.Component {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     selectedIndex: PropTypes.number,
     isScrollable: PropTypes.bool,
     onSelect: PropTypes.func,
-
     componentWidth: PropTypes.number.isRequired,
 
-    ...ViewPropTypes,
+    style: PropTypes.shape({
+      container: PropTypes.shape({
+        base: ScrollView.propTypes.contentContainerStyle,
+        scrollable: ScrollView.propTypes.contentContainerStyle,
+      }),
+      tab: RkTab.propTypes.style,
+    }),
   };
   static defaultProps = {
     selectedIndex: 0,
     isScrollable: false,
     onSelect: (() => null),
-  };
-  componentName = 'RkTabBar';
-  typeMapping = {
-    container: {},
+
+    style: {
+      container: {
+        base: {},
+        scrollable: {},
+      },
+      tab: RkTab.defaultProps.style,
+    },
   };
 
   containerRef = undefined;
@@ -86,24 +94,15 @@ export class RkTabBar extends RkComponent {
     this.containerRef = ref;
   };
 
-  defineStyles(additionalTypes) {
-    const derivedStyles = super.defineStyles(additionalTypes);
-    const containerStyleKey = this.props.isScrollable ? 'scrollable' : 'base';
-    return {
-      container: this.extractNonStyleValue(derivedStyles.container, containerStyleKey),
-    };
-  }
-
   renderItem = (item, index) => (
     <TouchableOpacity
+      style={{ width: this.props.componentWidth / this.props.children.length }}
       key={index.toString()}
       activeOpacity={0.5}
       onPress={() => this.onItemPress(index)}>
       {React.cloneElement(item, {
-        style: {
-          width: this.props.componentWidth / this.props.children.length,
-        },
         isSelected: this.props.selectedIndex === index,
+        style: this.props.style.tab,
       })}
     </TouchableOpacity>
   );
@@ -111,11 +110,11 @@ export class RkTabBar extends RkComponent {
   renderChildComponents = () => this.props.children.map(this.renderItem);
 
   render() {
-    const styles = this.defineStyles(this.props.rkType);
+    const { container } = this.props.style;
     return (
       <View>
         <ScrollView
-          contentContainerStyle={styles.container}
+          contentContainerStyle={this.props.isScrollable ? container.base : container.scrollable}
           ref={this.setContainerRef}
           horizontal={true}
           bounces={false}

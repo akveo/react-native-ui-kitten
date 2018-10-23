@@ -4,10 +4,8 @@ import {
   View,
   Animated,
 } from 'react-native';
-import { RkComponent } from '../rkComponent';
 
 const defaultAnimationDuration = 200;
-
 
 /**
  * `RkTabBarIndicator` is a component that indicates `RkTabBar` current selection.
@@ -18,20 +16,21 @@ const defaultAnimationDuration = 200;
  * Should be one of: `` or `rounded`.
  * @property {number} componentWidth - width of `RkTabBar`.
  */
-export class RkTabBarIndicator extends RkComponent {
+export class RkTabBarIndicator extends React.Component {
   static propTypes = {
-    rkType: PropTypes.oneOf(['', 'rounded']),
     itemCount: PropTypes.number.isRequired,
-
     componentWidth: PropTypes.number.isRequired,
+
+    style: PropTypes.shape({
+      container: View.propTypes.style,
+      content: View.propTypes.style,
+    }),
   };
   static defaultProps = {
-    rkType: RkComponent.defaultProps.rkType,
-  };
-  componentName = 'RkTabBarIndicator';
-  typeMapping = {
-    container: {},
-    content: {},
+    style: {
+      container: {},
+      content: {},
+    },
   };
 
   contentOffset = new Animated.Value(0);
@@ -88,14 +87,13 @@ export class RkTabBarIndicator extends RkComponent {
   };
 
   render() {
-    const styles = super.defineStyles(this.props.rkType);
     const transform = {
       transform: [{ translateX: this.contentOffset }],
     };
     return (
-      <View style={styles.container}>
+      <View style={this.props.style.container}>
         <Animated.View style={[
-          styles.content,
+          this.props.style.content,
           { width: this.props.componentWidth / this.props.itemCount },
           transform,
         ]}
