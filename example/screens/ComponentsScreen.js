@@ -28,6 +28,9 @@ export class ComponentsScreen extends React.Component {
       title: 'Buttons',
       route: 'Button',
     }, {
+      title: 'Calendars',
+      route: 'Calendars',
+    }, {
       title: 'Switches',
       route: 'Switch',
     }, {

@@ -82,6 +82,38 @@ export const STRUCTURE = [
       },
       {
         type: 'page',
+        name: 'RkCalendar',
+        demogif: 'calendar-range.gif',
+        children: [
+          {
+            type: 'block',
+            block: 'rk-description',
+            klass: 'RkCalendar',
+          },
+          {
+            type: 'block',
+            block: 'rk-examples',
+            klass: 'RkCalendar',
+          },
+          {
+            type: 'block',
+            block: 'rk-methods',
+            klass: 'RkCalendar',
+          },
+          {
+            type: 'block',
+            block: 'rk-props',
+            klass: 'RkCalendar',
+          },
+          {
+            type: 'block',
+            block: 'rk-styles',
+            klass: 'RkCalendar',
+          }
+        ]
+      },
+      {
+        type: 'page',
         name: 'RkCard',
         demogif: 'card.gif',
         children: [
