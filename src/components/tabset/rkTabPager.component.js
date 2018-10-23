@@ -44,12 +44,14 @@ export class RkTabPager extends React.Component {
     items: [],
   };
 
-  // Support property to avoid sending 'onSelect' events in case like:
-  //
-  // selectedIndex === 0
-  // scrollToIndex === 2
-  //
-  // this helps avoid sending onSelect for index === 1
+  /*
+    Support property to avoid sending 'onSelect' events in case like:
+
+    selectedIndex === 0
+    scrollToIndex === 2
+
+    this helps avoid sending onSelect for index === 1
+   */
   scrollRequestIndex = undefined;
 
   containerRef = undefined;
@@ -65,8 +67,8 @@ export class RkTabPager extends React.Component {
     super(props);
     props.children.forEach((item, index) => {
       const isDerivedSelection = props.selectedIndex === index;
-      const isShouldUseLazyLoad = isDerivedSelection ? false : props.shouldUseLazyLoad(index);
-      this.setShouldUseLazyLoad(index, isShouldUseLazyLoad);
+      const shouldUseLazyLoad = isDerivedSelection ? false : props.shouldUseLazyLoad(index);
+      this.setShouldUseLazyLoad(index, shouldUseLazyLoad);
     });
   }
 
@@ -109,7 +111,7 @@ export class RkTabPager extends React.Component {
     index,
   });
 
-  isShouldUseLazyLoad(index) {
+  shouldUseLazyLoad(index) {
     return this.lazyLoadItemMap.get(index);
   }
 
@@ -119,8 +121,8 @@ export class RkTabPager extends React.Component {
 
   renderItem = ({ item, index }) => {
     const isItemSelected = index === this.props.selectedIndex;
-    const isShouldUseLazyLoad = this.isShouldUseLazyLoad(index);
-    const isShouldLoadContentView = isItemSelected || !isShouldUseLazyLoad;
+    const shouldUseLazyLoad = this.shouldUseLazyLoad(index);
+    const isShouldLoadContentView = isItemSelected || !shouldUseLazyLoad;
     const contentView = isShouldLoadContentView ? item : null;
 
     this.setShouldUseLazyLoad(index, !isShouldLoadContentView);

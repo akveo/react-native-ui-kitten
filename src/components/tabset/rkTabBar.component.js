@@ -94,7 +94,12 @@ export class RkTabBar extends React.Component {
     this.containerRef = ref;
   };
 
-  renderItem = (item, index) => (
+  getContentStyle = (state, style) => ({
+    container: this.props.isScrollable ? style.container.scrollable : style.container.base,
+    tab: this.props.style.tab,
+  });
+
+  renderItem = (item, index, style) => (
     <TouchableOpacity
       style={{ width: this.props.componentWidth / this.props.children.length }}
       key={index.toString()}
@@ -102,25 +107,28 @@ export class RkTabBar extends React.Component {
       onPress={() => this.onItemPress(index)}>
       {React.cloneElement(item, {
         isSelected: this.props.selectedIndex === index,
-        style: this.props.style.tab,
+        style,
       })}
     </TouchableOpacity>
   );
 
-  renderChildComponents = () => this.props.children.map(this.renderItem);
+  renderChildComponents = (style) => {
+    const mapChild = (item, index) => this.renderItem(item, index, style);
+    return this.props.children.map(mapChild);
+  };
 
   render() {
-    const { container } = this.props.style;
+    const styles = this.getContentStyle(this.state, this.props.style);
     return (
       <View>
         <ScrollView
-          contentContainerStyle={this.props.isScrollable ? container.base : container.scrollable}
+          contentContainerStyle={styles.container}
           ref={this.setContainerRef}
           horizontal={true}
           bounces={false}
           scrollEnabled={this.props.isScrollable}
           showsHorizontalScrollIndicator={false}>
-          {this.renderChildComponents()}
+          {this.renderChildComponents(styles.tab)}
         </ScrollView>
       </View>
     );

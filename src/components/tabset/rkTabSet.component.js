@@ -188,20 +188,6 @@ export class RkTabSet extends RkComponent {
     this.scrollIndicatorToIndex({ index: this.state.selectedIndex, animated: false });
   };
 
-  setTabBarRef = (ref) => {
-    this.tabBarRef = ref;
-  };
-
-  setIndicatorRef = (ref) => {
-    this.indicatorRef = ref;
-  };
-
-  setTabPagerRef = (ref) => {
-    this.tabPagerRef = ref;
-  };
-
-  isShouldUseLazyLoad = (index) => this.tabViews[index].props.isLazyLoad;
-
   /**
    * Scrolls tab container to passed index.
    *
@@ -245,6 +231,23 @@ export class RkTabSet extends RkComponent {
     this.scrollContentToIndex(params);
   }
 
+  setTabBarRef = (ref) => {
+    this.tabBarRef = ref;
+  };
+
+  setIndicatorRef = (ref) => {
+    this.indicatorRef = ref;
+  };
+
+  setTabPagerRef = (ref) => {
+    this.tabPagerRef = ref;
+  };
+
+  shouldUseLazyLoad = (index) => {
+    const tabComponent = this.tabViews[index];
+    return tabComponent.props.isLazyLoad;
+  };
+
   renderPlaceholder = () => (
     <View onLayout={this.onLayout} />
   );
@@ -265,7 +268,6 @@ export class RkTabSet extends RkComponent {
         </RkTabBar>
         <RkTabBarIndicator
           style={styles.indicator}
-          rkType='rounded'
           ref={this.setIndicatorRef}
           itemCount={this.props.children.length}
           componentWidth={this.state.componentWidth}
@@ -275,7 +277,7 @@ export class RkTabSet extends RkComponent {
           ref={this.setTabPagerRef}
           componentWidth={this.state.componentWidth}
           selectedIndex={this.state.selectedIndex}
-          shouldUseLazyLoad={this.isShouldUseLazyLoad}
+          shouldUseLazyLoad={this.shouldUseLazyLoad}
           onSelect={this.onTabContentSelect}>
           {this.tabContentViews}
         </RkTabPager>
