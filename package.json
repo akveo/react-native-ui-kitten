@@ -1,48 +1,15 @@
 {
   "name": "react-native-ui-kitten",
   "version": "3.1.2",
-  "description": "React Native components",
-  "author": "akveo",
-  "homepage": "https://akveo.github.io/react-native-ui-kitten/",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint src/**/*",
-    "prepush": "npm run lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "license": "MIT",
-  "dependencies": {
-    "hoist-non-react-statics": "^2.0.0",
-    "prop-types": "^15.5.10",
-    "lodash": "4.17.10"
-  },
-  "devDependencies": {
-    "babel-eslint": "8.2.2",
-    "babel-plugin-transform-decorators-legacy": "1.3.4",
-    "babel-preset-react-native": "4.0.0",
-    "eslint": "4.19.1",
-    "eslint-config-akveo-react-native": "1.0.0",
-    "eslint-plugin-import": "2.11.0",
-    "eslint-plugin-jsx-a11y": "6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "husky": "0.14.3",
-    "react": "16.4.0",
-    "react-native": "0.55.4"
-  },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run prepush"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/akveo/react-native-ui-kitten.git"
-  },
+  "author": "akveo <contact@akveo.com>",
+  "main": "index.js",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+  },
+  "scripts": {
+
   }
 }
