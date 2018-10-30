@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "react-native-ui-kitten-playground",
+    "description": "react-native-ui-kitten-playground",
+    "slug": "playground",
+    "sdkVersion": "30.0.0",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "packagerOpts": {
+      "config": "./rn-cli.config.js"
+    }
+  }
+}

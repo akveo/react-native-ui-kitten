@@ -1,0 +1,16 @@
+{
+  "name": "react-native-ui-kitten-playground",
+  "main": "./node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "start": "expo start"
+  },
+  "dependencies": {
+    "expo": "^30.0.1",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz"
+  },
+  "devDependencies": {
+    "react-native-typescript-transformer": "^1.2.10"
+  }
+}

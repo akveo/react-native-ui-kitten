@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "../../dist",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "jsx": "react-native",
+    "module": "es2015",
+    "target": "es2017",
+    "lib": [
+      "es2017"
+    ]
+  },
+  "typeRoots": [
+    "../../node_modules/@types"
+  ]
+}
