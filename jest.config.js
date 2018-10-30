@@ -6,8 +6,7 @@ module.exports = {
     "js",
   ],
   "transform": {
-    "src\/.*.(js|jsx)$": "babel-jest",
-    "src\/.*.(ts|tsx)$": "ts-jest",
+    "src\/.*.(ts|tsx)$": "babel-jest",
   },
   "testRegex": "src\\/.*\\.spec\\.(ts|tsx)$",
 };
