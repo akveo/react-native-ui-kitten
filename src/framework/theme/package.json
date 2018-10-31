@@ -1,0 +1,13 @@
+{
+  "name": "@rk-kit/theme",
+  "version": "0.0.1",
+  "description": "rk-kit theme providing module",
+  "main": "index.ts",
+  "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
+  "author": "akveo <contact@akveo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+  },
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme"
+}

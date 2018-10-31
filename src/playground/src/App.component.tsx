@@ -1,5 +1,5 @@
 import React from 'react';
-import {Sample} from '../../framework/ui/sample/sample.component';
+import {Sample} from '@rk-kit/ui';
 
 export default class App extends React.Component {
   render() {

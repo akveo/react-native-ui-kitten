@@ -11,7 +11,10 @@
     "target": "es2017",
     "lib": [
       "es2017"
-    ]
+    ],
+    "paths": {
+      "@rk-kit/*": ["../framework/*"]
+    }
   },
   "typeRoots": [
     "../../node_modules/@types"
