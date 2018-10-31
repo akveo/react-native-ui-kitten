@@ -14,7 +14,7 @@ matrix:
 
 branches:
   only:
-  - feat/travis-ci
+  - next
   
 install:
   - npm install
