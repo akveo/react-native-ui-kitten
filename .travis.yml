@@ -1,0 +1,23 @@
+sudo: false
+language: node_js
+node_js:
+  - '8'
+
+env:
+  matrix:
+    - MODE=lint
+    - MODE=build
+    - MODE=test
+
+matrix:
+  fast_finish: true
+
+branches:
+  only:
+  - next
+  
+install:
+  - npm install
+
+script:
+  - scripts/ci/travis-ci-script.sh

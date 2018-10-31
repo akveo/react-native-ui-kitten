@@ -1,6 +1,6 @@
 <img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png"/>
 
-# react-native-ui-kitten
+# react-native-ui-kitten [![Build Status](https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=next)](https://travis-ci.com/akveo/react-native-ui-kitten)
 
 react-native-ui-kitten is a framework that contains a set of commonly used UI components styled in a similar way. 
 The main idea of this framework is to move style definitions into a specific place making components reusable and styled in a single way.
