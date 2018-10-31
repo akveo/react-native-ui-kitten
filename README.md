@@ -2,27 +2,15 @@
 
 # react-native-ui-kitten [![Build Status](https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=next)](https://travis-ci.com/akveo/react-native-ui-kitten)
 
-react-native-ui-kitten is a framework that contains a set of commonly used UI components styled in a similar way. 
-The main idea of this framework is to move style definitions into a specific place making components reusable and styled in a single way.
-You just focus on business logic and it takes care of visual appearance. 
+This branch contains sources of something really awesome.
+We do what we did before but in a new way.
 
-We have also brought a concept similar to CSS classes that will save you time when styling elements. 
-And the most awesome thing: you can change themes on the fly by just passing a different set of variables. 
-
-100% native. Give our kitten a try!
-
-<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/master/docs/assets/kittenKit.png"/>
-
-## Documentation
-Documentation for this framework is [here](https://akveo.github.io/react-native-ui-kitten/).
-
-## Demo applications
-
-If you want to see how it works you can try [an expo explorer application](https://expo.io/@akveo/ui-kitten-explorer-app) or run it locally from [example](./example) folder.
-
-There is also [a cool application](https://github.com/akveo/kittenTricks) built using our framework. It's open-source and free!
-
-Don't forget to check them out!
+## What's new will you have:
+- TypeScript support
+- Full test coverage of framework
+- Better code quality
+- Better development environment for contributors
+- Better theme system
 
 ## How can I support the developers?
 - Star our GitHub repo
