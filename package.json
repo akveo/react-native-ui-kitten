@@ -22,7 +22,9 @@
     "lint:pg-fix": "npm run lint:pg -- --fix",
     "lint": "npm run lint:src && npm run lint:pg",
     "lint:fix": "npm run lint:src-fix && npm run lint:pg-fix",
-    "ci:rebuild": "npm run clean && npm run build",
+    "ci:lint": "npm run lint",
+    "ci:build": "npm run build:pg",
+    "ci:test": "npm test",
     "test": "jest"
   },
   "devDependencies": {
