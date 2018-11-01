@@ -1,6 +1,6 @@
 <img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png"/>
 
-# react-native-ui-kitten [![Build Status](https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=next)](https://travis-ci.com/akveo/react-native-ui-kitten)
+# react-native-ui-kitten [![Build Status](https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=next)](https://travis-ci.com/akveo/react-native-ui-kitten) [![Dependency Status](https://david-dm.org/akveo/react-native-ui-kitten/status.svg)](https://david-dm.org/akveo/react-native-ui-kitten) [![npm](https://img.shields.io/npm/dt/react-native-ui-kitten.svg)](https://www.npmjs.com/package/react-native-ui-kitten) [![npm](https://img.shields.io/npm/l/react-native-ui-kitten.svg)]()
 
 This branch contains sources of something really awesome.
 We do what we did before but in a new way.
