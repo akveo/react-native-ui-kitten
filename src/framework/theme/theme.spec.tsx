@@ -4,28 +4,42 @@ import * as UITest from 'react-native-testing-library';
 import {ThemeProvider, withTheme, WithThemeProps} from './index';
 
 interface TestProps extends WithThemeProps {
-  name: string;
+  testId: string;
 }
 
 class TestComponent extends React.Component<TestProps> {
   render() {
-    const {theme, name} = this.props;
-
+    console.info(`TestComponent theme prop: ${JSON.stringify(this.props.theme)}`);
     return (
-      <View/>
+      <View testID={this.props.testId}/>
     );
   }
 }
 
-it('Checks simple Provider/Consumer theme pass', async () => {
+it('Checks theme consumer renders properly', async () => {
   const ThemedComponent = withTheme(TestComponent);
+  const themedComponentTestId = '@theme/root';
 
   const component = UITest.render(
-    <ThemeProvider>
-      <ThemedComponent name={'test'}/>
+    <ThemeProvider theme={{}}>
+      <ThemedComponent testId={themedComponentTestId}/>
     </ThemeProvider>,
   );
 
-  // TODO: finish test
+  const themedComponent = component.getByTestId(themedComponentTestId);
+  expect(themedComponent).not.toBeNull();
 });
 
+it('Checks theme consumer receives theme prop', async () => {
+  const ThemedComponent = withTheme(TestComponent);
+  const themedComponentTestId = '@theme/root';
+
+  const component = UITest.render(
+    <ThemeProvider theme={{}}>
+      <ThemedComponent testId={themedComponentTestId}/>
+    </ThemeProvider>,
+  );
+
+  const themedComponent = component.getByTestId(themedComponentTestId);
+  expect(themedComponent.props.theme).not.toBeNull();
+});
