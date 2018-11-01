@@ -184,8 +184,14 @@ Must be one of the following:
 * **relese**: Release version commit
 
 ### Scope
-The scope could be anything specifying place of the commit change. For example
-`menu`, `sidebar`, etc.
+* For [framework's ui module](src/framework/ui) the scope should be name of component that was affected:
+```
+style(button): add styles for pressed state
+```
+* For changes in other modules (like [theme](src/framework/theme) or [playground](src/playground)) the scope should be module name:
+```
+build(playground): react-navigation integration
+```
 
 ### Subject
 The subject contains succinct description of the change:
