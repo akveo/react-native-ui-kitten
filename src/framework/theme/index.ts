@@ -1,5 +1,5 @@
 export const description = '@rk-kit/theme';
-import getThemeProvider from './primitives/themeProvider';
-import withTheme from './primitives/themeConsumer';
+import ThemeProvider from './primitives/themeProvider';
+import {withTheme, WithThemeProps} from './primitives/themeConsumer';
 
-export {getThemeProvider, withTheme};
+export {ThemeProvider, withTheme, WithThemeProps};
