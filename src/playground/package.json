@@ -6,9 +6,9 @@
     "start": "expo start"
   },
   "dependencies": {
-    "expo": "^31.0.2",
+    "expo": "^31.0.4",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.1.tar.gz"
   },
   "devDependencies": {
     "react-native-typescript-transformer": "^1.2.10"
