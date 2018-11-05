@@ -1,12 +1,12 @@
 import React from 'react';
-import {Provider} from './createContext';
+import { Provider } from './createContext';
 
 interface PropsType {
   children: JSX.Element;
   theme: Object;
 }
 
-class ThemeProvider extends React.PureComponent<PropsType> {
+export default class ThemeProvider extends React.PureComponent<PropsType> {
 
   static defaultProps = {
     theme: {},
@@ -20,5 +20,3 @@ class ThemeProvider extends React.PureComponent<PropsType> {
     );
   }
 }
-
-export default ThemeProvider;

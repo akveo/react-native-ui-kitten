@@ -1,5 +1,5 @@
 import React from 'react';
-import {Consumer} from './createContext';
+import { Consumer } from './createContext';
 
 export interface WithThemeProps {
   theme: Object;

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {render} from 'react-native-testing-library';
-import {Sample} from './sample.component';
+import { render } from 'react-native-testing-library';
+import { Sample } from './sample.component';
 
 it('Checks Sample component passes correct text props', async () => {
   const text = 'Hello, World!';

@@ -1,7 +1,11 @@
-import * as React from 'react';
-import {View} from 'react-native';
-import {render} from 'react-native-testing-library';
-import {ThemeProvider, withTheme, WithThemeProps} from './index';
+import React from 'react';
+import { View } from 'react-native';
+import { render } from 'react-native-testing-library';
+import {
+  ThemeProvider,
+  withTheme,
+  WithThemeProps,
+} from './index';
 
 interface TestProps extends WithThemeProps {
   testId: string;
@@ -9,7 +13,6 @@ interface TestProps extends WithThemeProps {
 
 class TestComponent extends React.Component<TestProps> {
   render() {
-    console.info(`TestComponent theme prop: ${JSON.stringify(this.props.theme)}`);
     return (
       <View testID={this.props.testId}/>
     );

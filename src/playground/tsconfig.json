@@ -15,7 +15,9 @@
       "es2016"
     ],
     "paths": {
-      "@rk-kit/*": ["../framework/*"]
+      "@rk-kit/*": [
+        "../framework/*"
+      ]
     }
   },
   "typeRoots": [

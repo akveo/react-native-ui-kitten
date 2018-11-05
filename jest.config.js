@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   cacheDirectory: './dist/jest',
-  modulePathIgnorePatterns:[
+  modulePathIgnorePatterns: [
     '<rootDir>/src/playground/'
   ],
 };

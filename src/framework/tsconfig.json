@@ -15,8 +15,12 @@
       "es2016"
     ],
     "paths": {
-      "@rk-kit/theme": ["./theme"],
-      "@rk-kit/ui": ["./ui"]
+      "@rk-kit/theme": [
+        "./theme"
+      ],
+      "@rk-kit/ui": [
+        "./ui"
+      ]
     }
   },
   "typeRoots": [
