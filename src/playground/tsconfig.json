@@ -2,15 +2,17 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "../../dist",
+    "outDir": "../../dist/tsc-out",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "jsx": "react-native",
     "module": "es2015",
     "target": "es2017",
     "lib": [
-      "es2017"
+      "es2015",
+      "es2016"
     ],
     "paths": {
       "@rk-kit/*": ["../framework/*"]
@@ -18,5 +20,8 @@
   },
   "typeRoots": [
     "../../node_modules/@types"
+  ],
+  "exclude": [
+    "./node_modules"
   ]
 }

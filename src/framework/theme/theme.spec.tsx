@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {View} from 'react-native';
-import * as UITest from 'react-native-testing-library';
+import {render} from 'react-native-testing-library';
 import {ThemeProvider, withTheme, WithThemeProps} from './index';
 
 interface TestProps extends WithThemeProps {
@@ -20,7 +20,7 @@ it('Checks theme consumer renders properly', async () => {
   const ThemedComponent = withTheme(TestComponent);
   const themedComponentTestId = '@theme/root';
 
-  const component = UITest.render(
+  const component = render(
     <ThemeProvider theme={{}}>
       <ThemedComponent testId={themedComponentTestId}/>
     </ThemeProvider>,
@@ -34,7 +34,7 @@ it('Checks theme consumer receives theme prop', async () => {
   const ThemedComponent = withTheme(TestComponent);
   const themedComponentTestId = '@theme/root';
 
-  const component = UITest.render(
+  const component = render(
     <ThemeProvider theme={{}}>
       <ThemedComponent testId={themedComponentTestId}/>
     </ThemeProvider>,

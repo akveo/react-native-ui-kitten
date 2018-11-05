@@ -1,11 +1,11 @@
 module.exports = {
   presets: [
-    "babel-preset-expo"
+    'babel-preset-expo',
   ],
   env: {
     development: {
       plugins: [
-        "transform-react-jsx-source"
+        'transform-react-jsx-source',
       ]
     }
   }
