@@ -1,12 +1,20 @@
+const { defaults: tsJestConfig } = require('ts-jest/presets');
+
 module.exports = {
-  "preset": "react-native",
-  "moduleFileExtensions": [
-    "ts",
-    "tsx",
-    "js",
-  ],
-  "transform": {
-    "src\/.*.(ts|tsx)$": "babel-jest",
+  ...tsJestConfig,
+  preset: 'react-native',
+  transform: {
+    ...tsJestConfig.transform,
+    '\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
   },
-  "testRegex": "src\\/.*\\.spec\\.(ts|tsx)$",
+  globals: {
+    'ts-jest': {
+      babelConfig: true,
+      tsConfig: './tsconfig.jest.json',
+    },
+  },
+  cacheDirectory: './dist/jest',
+  modulePathIgnorePatterns:[
+    '<rootDir>/src/playground/'
+  ],
 };
