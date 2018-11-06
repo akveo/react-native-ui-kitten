@@ -1,13 +1,12 @@
 import React from 'react';
-import { Provider } from './createContext';
+import { Provider } from '../service';
 
-interface PropsType {
+interface ProviderProps {
   children: JSX.Element;
   theme: Object;
 }
 
-export default class ThemeProvider extends React.PureComponent<PropsType> {
-
+export class ThemeProvider extends React.PureComponent<ProviderProps> {
   static defaultProps = {
     theme: {},
   };
