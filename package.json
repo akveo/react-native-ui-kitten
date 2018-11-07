@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint src/**/*",
     "prepush": "npm run lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/jest/bin/jest.js tests --watchAll"
   },
   "license": "MIT",
   "dependencies": {
@@ -27,7 +27,9 @@
     "eslint-plugin-react": "^7.7.0",
     "husky": "0.14.3",
     "react": "16.4.0",
-    "react-native": "0.55.4"
+    "react-native": "0.55.4",
+    "jest": "23.6.0",
+    "jest-react-native": "18.0.0"
   },
   "peerDependencies": {
     "react": "*",
@@ -36,6 +38,12 @@
   "husky": {
     "hooks": {
       "pre-push": "npm run prepush"
+    }
+  },
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     }
   },
   "repository": {

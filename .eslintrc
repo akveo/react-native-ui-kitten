@@ -1,5 +1,8 @@
 {
   "extends": "eslint-config-akveo-react-native",
+  "env": {
+    "jest": true
+  },
   "parser": "babel-eslint",
   "rules": {
     "react/jsx-boolean-value": [1, "always"],
