@@ -1,4 +1,5 @@
 export { RkText } from './src/components/text/rkText';
+export { RkBadge } from './src/components/badge/rkBadge.component';
 export { RkButton } from './src/components/button/rkButton';
 export { RkChoice } from './src/components/choice/rkChoice';
 export { RkChoiceGroup } from './src/components/choiceGroup/rkChoiceGroup';
@@ -8,6 +9,8 @@ export { RkGallery } from './src/components/gallery/rkGallery';
 export { RkGalleryImage } from './src/components/gallery/rkGalleryImage';
 export { RkCalendar } from './src/components/calendar/rkCalendar.component';
 export { RkTabView } from './src/components/tab/rkTabView';
+export { RkTabSet } from './src/components/tabset/rkTabSet.component';
+export { RkTab } from './src/components/tabset/rkTab.component';
 export { RkCard } from './src/components/card/rkCard';
 export { RkAvoidKeyboard } from './src/components/avoidKeyboard/rkAvoidKeyboard';
 export { RkComponent } from './src/components/rkComponent';

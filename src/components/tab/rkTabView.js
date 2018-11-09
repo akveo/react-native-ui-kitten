@@ -16,6 +16,25 @@ import { RkText } from '../text/rkText';
  *
  * @extends React.Component
  *
+ * @deprecated since version 3.2.0. Will be deleted in version 3.3.0.
+ * Use `RkTabSet` instead.
+ *
+ * @example Important notes
+ *
+ * Deprecated since version 3.2.0. Will be deleted in version 3.3.0.
+ * Use `RkTabSet` instead.
+ *
+ * ```
+ * <RkTabSet>
+ *  <RkTab title='Awesome'>
+ *    <AwesomeContentComponent />
+ *  </RkTab>
+ *  <RkTab title='Pretty Cool'>
+ *    <PrettyCoolComponent />
+ *  </RkTab>
+ * </RkTabSet>
+ * ```
+ *
  * @example Usage example:
  *
  * ```
