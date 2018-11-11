@@ -18,74 +18,81 @@ class TestComponent extends React.Component<any> {
   }
 }
 
-it('Checks theme consumer renders properly', async () => {
-  const ThemedComponent = withTheme(TestComponent);
+describe('@theme: theme consumer checks', () => {
 
-  const component = render(
-    <ThemeProvider theme={{}}>
-      <ThemedComponent testId={themeConsumerTestId}/>
-    </ThemeProvider>,
-  );
+  it('renders properly', async () => {
+    const ThemedComponent = withTheme(TestComponent);
 
-  const themedComponent = component.getByTestId(themeConsumerTestId);
-  expect(themedComponent).not.toBeNull();
-});
+    const component = render(
+      <ThemeProvider theme={{}}>
+        <ThemedComponent testId={themeConsumerTestId}/>
+      </ThemeProvider>,
+    );
 
-it('Checks theme consumer receives theme prop', async () => {
-  const ThemedComponent = withTheme(TestComponent);
-
-  const component = render(
-    <ThemeProvider theme={{}}>
-      <ThemedComponent testId={themeConsumerTestId}/>
-    </ThemeProvider>,
-  );
-
-  const themedComponent = component.getByTestId(themeConsumerTestId);
-  expect(themedComponent.props.theme).not.toBeNull();
-});
-
-it('Checks styled theme consumer renders properly', async () => {
-  const ThemedComponent = withThemedStyles(TestComponent, (theme: ThemeShape) => {
-    return {};
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(themedComponent).not.toBeNull();
   });
 
-  const component = render(
-    <ThemeProvider theme={{}}>
-      <ThemedComponent testId={themeConsumerTestId}/>
-    </ThemeProvider>,
-  );
+  it('receives theme prop', async () => {
+    const ThemedComponent = withTheme(TestComponent);
 
-  const themedComponent = component.getByTestId(themeConsumerTestId);
-  expect(themedComponent).not.toBeNull();
-});
+    const component = render(
+      <ThemeProvider theme={{}}>
+        <ThemedComponent testId={themeConsumerTestId}/>
+      </ThemeProvider>,
+    );
 
-it('Checks styled theme consumer receives theme prop', async () => {
-  const ThemedComponent = withThemedStyles(TestComponent, (theme: ThemeShape) => {
-    return {};
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(themedComponent.props.theme).not.toBeNull();
   });
 
-  const component = render(
-    <ThemeProvider theme={{}}>
-      <ThemedComponent testId={themeConsumerTestId}/>
-    </ThemeProvider>,
-  );
-
-  const themedComponent = component.getByTestId(themeConsumerTestId);
-  expect(themedComponent.props.theme).not.toBeNull();
 });
 
-it('Checks styled theme consumer receives themedStyle prop', async () => {
-  const ThemedComponent = withThemedStyles(TestComponent, (theme: ThemeShape) => {
-    return {};
+describe('@theme: styled theme consumer checks', () => {
+
+  it('renders properly', async () => {
+    const ThemedComponent = withThemedStyles(TestComponent, (theme: ThemeShape) => {
+      return {};
+    });
+
+    const component = render(
+      <ThemeProvider theme={{}}>
+        <ThemedComponent testId={themeConsumerTestId}/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(themedComponent).not.toBeNull();
   });
 
-  const component = render(
-    <ThemeProvider theme={{}}>
-      <ThemedComponent testId={themeConsumerTestId}/>
-    </ThemeProvider>,
-  );
+  it('receives theme prop', async () => {
+    const ThemedComponent = withThemedStyles(TestComponent, (theme: ThemeShape) => {
+      return {};
+    });
 
-  const themedComponent = component.getByTestId(themeConsumerTestId);
-  expect(themedComponent.props.themedStyle).not.toBeNull();
+    const component = render(
+      <ThemeProvider theme={{}}>
+        <ThemedComponent testId={themeConsumerTestId}/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(themedComponent.props.theme).not.toBeNull();
+  });
+
+  it('receives themedStyle prop', async () => {
+    const ThemedComponent = withThemedStyles(TestComponent, (theme: ThemeShape) => {
+      return {};
+    });
+
+    const component = render(
+      <ThemeProvider theme={{}}>
+        <ThemedComponent testId={themeConsumerTestId}/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(themedComponent.props.themedStyle).not.toBeNull();
+  });
+
 });
-
