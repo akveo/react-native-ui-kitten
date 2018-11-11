@@ -1,26 +1,35 @@
-import React from 'react';
-import { Consumer } from '../service';
+import React, { ComponentType } from 'react';
+import {
+  Consumer,
+  forwardProps,
+} from '../service';
 import { ThemeShape } from './model';
 
-export interface Props {
+export interface Props<T> extends React.ClassAttributes<T> {
   theme: ThemeShape;
 }
 
-export function withTheme<T extends Props>(Component: React.ComponentType<T>) {
-
-  type TExcept = Exclude<keyof T, keyof Props>;
+export function withTheme<T extends Props<T>>(Component: ComponentType<T>) {
+  type TExcept = Exclude<keyof T, keyof Props<T>>;
   type ForwardedProps = Pick<T, TExcept>;
 
   class Shadow extends React.Component<ForwardedProps> {
+    wrappedComponentRef = undefined;
+    getWrappedInstance = undefined;
 
     constructor(props) {
       super(props);
-      this.renderWrappedComponent = this.renderWrappedComponent.bind(this);
+      this.setWrappedComponentRef = this.setWrappedComponentRef.bind(this);
+    }
+
+    setWrappedComponentRef(ref) {
+      this.wrappedComponentRef = ref;
     }
 
     renderWrappedComponent(theme: ThemeShape) {
       return (
         <Component
+          ref={this.setWrappedComponentRef}
           theme={theme}
           {...this.props}
         />
@@ -36,5 +45,11 @@ export function withTheme<T extends Props>(Component: React.ComponentType<T>) {
     }
   }
 
-  return Shadow;
+  const Result = Shadow;
+  Result.prototype.getWrappedInstance = function getWrappedInstance() {
+    const hasWrappedInstance = this.wrappedComponentRef && this.wrappedComponentRef.getWrappedInstance;
+    return hasWrappedInstance ? this.wrappedComponentRef.getWrappedInstance() : this.wrappedComponentRef;
+  };
+
+  return forwardProps(Component, Result);
 }
