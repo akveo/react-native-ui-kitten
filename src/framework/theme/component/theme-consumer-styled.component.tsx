@@ -43,6 +43,7 @@ export function withThemedStyles<P extends Props<P>>(
           ref={this.setWrappedComponentRef}
           theme={theme}
           themedStyle={styles}
+          {...this.props}
         />
       );
     }
