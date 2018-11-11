@@ -1,17 +1,26 @@
-import React, { ComponentType } from 'react';
-import { ThemeShape } from './model';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import {
+  ThemeShape,
+  ThemedStyleShape,
+  StyleSheetShape,
+} from './model';
 import {
   Consumer,
   forwardProps,
 } from '../service';
 
-export interface Props<T> extends React.ClassAttributes<T> {
+export interface Props<P> extends React.ClassAttributes<P> {
   theme: ThemeShape;
+  themedStyle: ThemedStyleShape;
 }
 
-export function withTheme<T extends Props<T>>(Component: ComponentType<T>) {
-  type TExcept = Exclude<keyof T, keyof Props<T>>;
-  type ForwardedProps = Pick<T, TExcept>;
+export function withThemedStyles<P extends Props<P>>(
+  Component: React.ComponentType<P>,
+  createStyles: (theme: ThemeShape) => StyleSheetShape,
+) {
+  type TExcept = Exclude<keyof P, keyof Props<P>>;
+  type ForwardedProps = Pick<P, TExcept>;
 
   class Shadow extends React.Component<ForwardedProps> {
     wrappedComponentRef = undefined;
@@ -28,11 +37,12 @@ export function withTheme<T extends Props<T>>(Component: ComponentType<T>) {
     }
 
     renderWrappedComponent(theme: ThemeShape) {
+      const styles = StyleSheet.create(createStyles(theme));
       return (
         <Component
           ref={this.setWrappedComponentRef}
           theme={theme}
-          {...this.props}
+          themedStyle={styles}
         />
       );
     }
