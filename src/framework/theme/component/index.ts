@@ -3,7 +3,8 @@ export {
 } from './theme-provider.component';
 export {
   withTheme,
-  Props,
+  withThemedStyles,
+  ThemedProps,
 } from './theme-consumer.component';
 export {
   ThemeShape,
