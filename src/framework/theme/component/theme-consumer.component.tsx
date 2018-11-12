@@ -1,41 +1,33 @@
 import React, { ComponentType } from 'react';
-import { ThemeShape } from './model';
+import { ThemeType } from './type';
 import {
   Consumer,
   forwardProps,
 } from '../service';
 
-export interface Props<T> extends React.ClassAttributes<T> {
-  theme: ThemeShape;
+export interface Props<P> extends React.ClassAttributes<P> {
+  theme: ThemeType;
 }
 
-export function withTheme<T extends Props<T>>(Component: ComponentType<T>) {
-  type TExcept = Exclude<keyof T, keyof Props<T>>;
-  type ForwardedProps = Pick<T, TExcept>;
+export function withTheme<P extends Props<P>>(Component: ComponentType<P>) {
+  type TExcept = Exclude<keyof P, keyof Props<P>>;
+  type ForwardedProps = Pick<P, TExcept>;
 
   class Shadow extends React.Component<ForwardedProps> {
     wrappedComponentRef = undefined;
     getWrappedInstance = undefined;
 
-    constructor(props) {
-      super(props);
-      this.renderWrappedComponent = this.renderWrappedComponent.bind(this);
-      this.setWrappedComponentRef = this.setWrappedComponentRef.bind(this);
-    }
-
-    setWrappedComponentRef(ref) {
+    setWrappedComponentRef = (ref) => {
       this.wrappedComponentRef = ref;
-    }
+    };
 
-    renderWrappedComponent(theme: ThemeShape) {
-      return (
-        <Component
-          ref={this.setWrappedComponentRef}
-          theme={theme}
-          {...this.props}
-        />
-      );
-    }
+    renderWrappedComponent = (theme: ThemeType) => (
+      <Component
+        ref={this.setWrappedComponentRef}
+        theme={theme}
+        {...this.props}
+      />
+    );
 
     render() {
       return (

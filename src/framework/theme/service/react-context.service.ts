@@ -1,7 +1,7 @@
 import React from 'react';
-import { ThemeShape } from '../component';
+import { ThemeType } from '../component';
 
-const defaultThemeValue: ThemeShape = {};
+const defaultThemeValue: ThemeType = {};
 
 const {
   Provider,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider } from '../service';
-import { ThemeShape } from './model';
+import { ThemeType } from './type';
 
 interface Props {
   children: JSX.Element;
-  theme: ThemeShape;
+  theme: ThemeType;
 }
 
 export class ThemeProvider extends React.PureComponent<Props> {
