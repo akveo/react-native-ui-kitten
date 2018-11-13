@@ -1,4 +1,4 @@
-export { ThemeProvider } from './theme-provider.component';
-export { withTheme } from './theme-consumer.component';
-export { withThemedStyles } from './theme-consumer-styled.component';
+export { ThemeProvider } from './themeProvider.component';
+export { withTheme } from './themeConsumer.component';
+export { withThemedStyles } from './themeConsumerStyled.component';
 export { ThemeType } from './type';
