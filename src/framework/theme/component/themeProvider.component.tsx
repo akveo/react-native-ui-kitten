@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Provider } from '../service';
 import { ThemeType } from './type';
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element | ReactNode;
   theme: ThemeType;
 }
 

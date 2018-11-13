@@ -18,7 +18,11 @@ import {
 const themeConsumerTestId = '@theme/consumer';
 const themeChangeTouchableTestId = '@theme/btnChangeTheme';
 
-class ConsumerComponent extends React.Component<any> {
+interface Theme extends ThemeType {
+  color: string;
+}
+
+class ThemedConsumer extends React.Component<any> {
   static defaultProps = {
     testID: themeConsumerTestId,
   };
@@ -30,22 +34,37 @@ class ConsumerComponent extends React.Component<any> {
   }
 }
 
-class ActionComponent extends React.Component<any> {
+class ThemedStyleConsumer extends React.Component<any> {
+  static defaultProps = {
+    testID: themeConsumerTestId,
+  };
+
+  render() {
+    return (
+      <View
+        testID={this.props.testID}
+        style={this.props.themedStyle.container}
+      />
+    );
+  }
+}
+
+class ActionedProvider extends React.Component<any> {
 
   static initialThemeColor = '#ffffff';
   static onChangeThemeColor = '#000000';
 
   state = {
     theme: {
-      backgroundColor: ActionComponent.initialThemeColor,
+      backgroundColor: ActionedProvider.initialThemeColor,
     },
   };
 
-  isInitialColor = (color: string): boolean => color === ActionComponent.initialThemeColor;
+  isInitialColor = (color: string): boolean => color === ActionedProvider.initialThemeColor;
 
   getInversedColor = (color: string): string => {
     const isInitialColor = this.isInitialColor(color);
-    return isInitialColor ? ActionComponent.onChangeThemeColor : ActionComponent.initialThemeColor;
+    return isInitialColor ? ActionedProvider.onChangeThemeColor : ActionedProvider.initialThemeColor;
   };
 
   onThemeChangeTouchablePress = () => {
@@ -57,7 +76,7 @@ class ActionComponent extends React.Component<any> {
   };
 
   render() {
-    const ThemedComponent = withTheme(ConsumerComponent);
+    const ThemedComponent = withTheme(ThemedConsumer);
     return (
       <View>
         <ThemeProvider theme={this.state.theme}>
@@ -72,10 +91,38 @@ class ActionComponent extends React.Component<any> {
   }
 }
 
+export class ThemedStyleProvider extends React.Component<any> {
+
+  createThemedComponent1Styles = (theme: Theme) => ({
+    container: {
+      backgroundColor: theme.color,
+    },
+  });
+
+  createThemedComponent2Styles = (theme: Theme) => ({
+    container: {
+      backgroundColor: theme.color,
+    },
+  });
+
+  render() {
+    const ThemedComponent1 = withThemedStyles(ThemedStyleConsumer, this.createThemedComponent1Styles);
+    const ThemedComponent2 = withThemedStyles(ThemedStyleConsumer, this.createThemedComponent2Styles);
+    return (
+      <ThemeProvider theme={this.props.theme1}>
+        <ThemedComponent1/>
+        <ThemeProvider theme={this.props.theme2}>
+          <ThemedComponent2/>
+        </ThemeProvider>
+      </ThemeProvider>
+    );
+  }
+}
+
 describe('@theme: theme consumer checks', () => {
 
   it('renders properly', async () => {
-    const ThemedComponent = withTheme(ConsumerComponent);
+    const ThemedComponent = withTheme(ThemedConsumer);
 
     const component = render(
       <ThemeProvider theme={{}}>
@@ -88,7 +135,7 @@ describe('@theme: theme consumer checks', () => {
   });
 
   it('receives theme prop', async () => {
-    const ThemedComponent = withTheme(ConsumerComponent);
+    const ThemedComponent = withTheme(ThemedConsumer);
 
     const component = render(
       <ThemeProvider theme={{}}>
@@ -102,7 +149,7 @@ describe('@theme: theme consumer checks', () => {
 
   it('receives theme prop on theme change', async () => {
     const component = render(
-      <ActionComponent/>,
+      <ActionedProvider/>,
     );
 
     const touchableComponent = component.getByTestId(themeChangeTouchableTestId);
@@ -113,7 +160,7 @@ describe('@theme: theme consumer checks', () => {
       return component.getByTestId(themeConsumerTestId);
     });
 
-    expect(themedComponent.props.theme.backgroundColor).toEqual(ActionComponent.onChangeThemeColor);
+    expect(themedComponent.props.theme.backgroundColor).toEqual(ActionedProvider.onChangeThemeColor);
   });
 
 });
@@ -121,7 +168,7 @@ describe('@theme: theme consumer checks', () => {
 describe('@theme: styled theme consumer checks', () => {
 
   it('renders properly', async () => {
-    const ThemedComponent = withThemedStyles(ConsumerComponent, (theme: ThemeType) => {
+    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
       return {};
     });
 
@@ -136,7 +183,7 @@ describe('@theme: styled theme consumer checks', () => {
   });
 
   it('receives theme prop', async () => {
-    const ThemedComponent = withThemedStyles(ConsumerComponent, (theme: ThemeType) => {
+    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
       return {};
     });
 
@@ -151,7 +198,7 @@ describe('@theme: styled theme consumer checks', () => {
   });
 
   it('receives themedStyle prop', async () => {
-    const ThemedComponent = withThemedStyles(ConsumerComponent, (theme: ThemeType) => {
+    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
       return {};
     });
 
@@ -163,6 +210,31 @@ describe('@theme: styled theme consumer checks', () => {
 
     const themedComponent = component.getByTestId(themeConsumerTestId);
     expect(themedComponent.props.themedStyle).not.toBeNull();
+  });
+
+  it('child theme provider overrides parent theme', async () => {
+    const theme1: Theme = {
+      color: '#3F51B5',
+    };
+    const theme2: Theme = {
+      color: '#009688',
+    };
+
+    const component = render(
+      <ThemedStyleProvider
+        theme1={theme1}
+        theme2={theme2}
+      />,
+    );
+
+    const themedComponents = component.getAllByName(ThemedStyleConsumer);
+
+    expect(themedComponents.length).toBeGreaterThan(1);
+
+    const themedComponent1Color = themedComponents[0].props.themedStyle.container.backgroundColor;
+    const themedComponent2Color = themedComponents[1].props.themedStyle.container.backgroundColor;
+
+    expect(themedComponent1Color).not.toEqual(themedComponent2Color);
   });
 
 });
