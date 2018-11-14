@@ -8,6 +8,7 @@ We would love for you to contribute to react-native-ui-kitten and help make it e
  - [Feature Requests](#feature)
  - [Submission Guidelines](#submit-pr)
  - [Coding Rules](#rules)
+ - [Run Playground](#run)
  - [Debugging your changes](#debug)
  - [Commit Message Guidelines](#commit)
 
@@ -134,10 +135,33 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
 * All public API methods **must be documented** following JsDoc notation.
 
+## <a name="run"></a> Run playground
+
+React-native-ui-kitten contains playground module which allows you quickly debug your changes.
+See the project in [playground directory](src/playground).
+To run it you should:
+* Clone this repo
+* Go to project root directory:
+```
+cd ./path-to/react-native-ui-kitten
+```
+* Install dependencies:
+```
+npm install
+```
+* That's it! You're ready to run:
+```
+npm start
+```
+* Now you will be prompted by CLI to select device you'd like to run.
+Just follow the CLI instructions. Normally you should hit `a` or `i` button
+to make Android or iOS device running.
+
 ## <a name="debug"></a> Debugging your changes
 
-React-native-ui-kitten contains example project which allows you quickly debug your changes.
-See the project in `./example` folder and [guides](example/README.md) to know how we use it.
+If you done with running playground on Android emulator or iOS simulator,
+you can observe all the changes you do inside [framework](src/framework)
+ on device you have started. That's where hot/live reload takes place.
 
 ## <a name="commit"></a> Commit Message Guidelines
 
@@ -184,8 +208,14 @@ Must be one of the following:
 * **relese**: Release version commit
 
 ### Scope
-The scope could be anything specifying place of the commit change. For example
-`menu`, `sidebar`, etc.
+* For [framework's ui module](src/framework/ui) the scope should be name of component that was affected:
+```
+style(button): add styles for pressed state
+```
+* For changes in other modules (like [theme](src/framework/theme) or [playground](src/playground)) the scope should be module name:
+```
+build(playground): react-navigation integration
+```
 
 ### Subject
 The subject contains succinct description of the change:
