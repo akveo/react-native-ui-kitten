@@ -1,0 +1,82 @@
+{
+  "config": [
+    {
+      "name": "Button",
+      "parameters": [
+        {
+          "name": "backgroundColor"
+        },
+        {
+          "name": "textColor"
+        }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "mapping": [
+            {
+              "parameter": "backgroundColor",
+              "token": "background-color-button-default"
+            },
+            {
+              "parameter": "textColor",
+              "token": "text-color-button-default"
+            }
+          ]
+        },
+        {
+          "name": "dark",
+          "mapping": [
+            {
+              "parameter": "backgroundColor",
+              "token": "background-color-button-dark"
+            },
+            {
+              "parameter": "textColor",
+              "token": "text-color-button-dark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CheckBox",
+      "parameters": [
+        {
+          "name": "borderColor"
+        },
+        {
+          "name": "tintColor"
+        }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "mapping": [
+            {
+              "parameter": "borderColor",
+              "token": "border-color-checkbox-default"
+            },
+            {
+              "parameter": "tintColor",
+              "token": "tint-color-checkbox-default"
+            }
+          ]
+        },
+        {
+          "name": "dark",
+          "mapping": [
+            {
+              "parameter": "borderColor",
+              "token": "border-color-checkbox-dark"
+            },
+            {
+              "parameter": "tintColor",
+              "token": "tint-color-checkbox-dark"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
