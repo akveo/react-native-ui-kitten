@@ -1,10 +1,34 @@
 import React from 'react';
-import { Sample } from '@rk-kit/ui';
+import {
+  DesignProvider,
+  Tokens,
+} from '@rk-kit/design';
+import { ThemeProvider } from '@rk-kit/theme';
+import {
+  Sample,
+  ThemeType,
+} from '@rk-kit/ui';
 
-export default class App extends React.Component {
+interface State {
+  theme: ThemeType;
+}
+
+export default class App extends React.Component<any, State> {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: Tokens,
+    };
+  }
+
   render() {
     return (
-      <Sample/>
+      <DesignProvider>
+        <ThemeProvider theme={this.state.theme}>
+          <Sample variant='dark'/>
+        </ThemeProvider>
+      </DesignProvider>
     );
   }
 }

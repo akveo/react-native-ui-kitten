@@ -4,23 +4,45 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { DesignType } from '@rk-kit/design';
+import { createFlatStyle } from '../service/themeUtil.service';
+import { ThemeType } from '../type';
 
 interface Props {
-  text: string;
+  design: DesignType;
+  theme: ThemeType;
+  variant?: string;
+  text?: string;
 }
 
 export class Sample extends React.Component<Props, {}> {
   static defaultProps = {
-    text: 'This is React Native UI Kitten playground.\n\n' +
-    'Create your awesome components inside ./src/framework dir ' +
-    'which will be automatically synchronized with npm package.\n\n' +
-    'Enjoy!',
+    text: `This is React Native UI Kitten playground.\n\n
+      Create your awesome components inside
+      ./src/framework dir
+      which will be automatically synchronized with playground.
+      Enjoy!`,
+    variant: 'default',
+  };
+
+  getThemedStyle = () => {
+    const { design, theme, variant } = this.props;
+    const style = createFlatStyle(theme, design, variant);
+    return {
+      container: {
+        backgroundColor: style.backgroundColor,
+      },
+      text: {
+        color: style.textColor,
+      },
+    };
   };
 
   render() {
+    const style = this.getThemedStyle();
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{this.props.text}</Text>
+      <View style={[styles.container, style.container]}>
+        <Text style={[styles.text, style.text]}>{this.props.text}</Text>
       </View>
     );
   }
