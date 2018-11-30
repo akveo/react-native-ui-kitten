@@ -1,10 +1,10 @@
 import React, { ComponentType } from 'react';
-import { DesignType } from './type';
+import { DesignType } from '@rk-kit/design';
+import DesignContext from './designContext';
 import {
-  Consumer,
-  forwardProps,
   getComponentDesign,
-} from '../service';
+  forwardProps,
+} from '../../service';
 
 export interface Props<P> extends React.ClassAttributes<P> {
   design: DesignType;
@@ -34,9 +34,9 @@ export function withDesign<P extends Props<P>>(Component: ComponentType<P>) {
 
     render() {
       return (
-        <Consumer>
+        <DesignContext.Consumer>
           {this.renderWrappedComponent}
-        </Consumer>
+        </DesignContext.Consumer>
       );
     }
   }

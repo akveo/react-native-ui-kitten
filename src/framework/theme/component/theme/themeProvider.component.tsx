@@ -1,24 +1,25 @@
 import React, { ReactNode } from 'react';
-import { Provider } from '../service';
+import { Tokens } from '@rk-kit/design';
 import { ThemeType } from './type';
+import ThemeContext from './themeContext';
 
-interface Props {
-  children: JSX.Element | ReactNode;
+export interface Props {
   theme: ThemeType;
+  children: JSX.Element | ReactNode;
 }
 
 export class ThemeProvider extends React.PureComponent<Props> {
 
   static defaultProps = {
-    theme: {},
+    theme: Tokens,
   };
 
   render() {
     return (
-      <Provider
+      <ThemeContext.Provider
         value={this.props.theme}>
         {this.props.children}
-      </Provider>
+      </ThemeContext.Provider>
     );
   }
 }

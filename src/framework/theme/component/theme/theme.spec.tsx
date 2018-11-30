@@ -13,14 +13,10 @@ import {
   withTheme,
   withThemedStyles,
   ThemeType,
-} from './component';
+} from './';
 
 const themeConsumerTestId = '@theme/consumer';
 const themeChangeTouchableTestId = '@theme/btnChangeTheme';
-
-interface Theme extends ThemeType {
-  color: string;
-}
 
 class ThemedConsumer extends React.Component<any> {
   static defaultProps = {
@@ -54,10 +50,14 @@ class ActionedProvider extends React.Component<any> {
   static initialThemeColor = '#ffffff';
   static onChangeThemeColor = '#000000';
 
+  // FIXME(@theme/test): this is not what theme should be like!
+  // Refactor to: { backgroundColor: '#ffffff' }
+
   state = {
-    theme: {
-      backgroundColor: ActionedProvider.initialThemeColor,
-    },
+    theme: [{
+      name: 'backgroundColor',
+      value: ActionedProvider.initialThemeColor,
+    }],
   };
 
   isInitialColor = (color: string): boolean => color === ActionedProvider.initialThemeColor;
@@ -69,9 +69,10 @@ class ActionedProvider extends React.Component<any> {
 
   onThemeChangeTouchablePress = () => {
     this.setState({
-      theme: {
-        backgroundColor: this.getInversedColor(this.state.theme.backgroundColor),
-      },
+      theme: [{
+        name: 'backgroundColor',
+        value: this.getInversedColor(this.state.theme[0].value),
+      }],
     });
   };
 
@@ -93,15 +94,15 @@ class ActionedProvider extends React.Component<any> {
 
 export class ThemedStyleProvider extends React.Component<any> {
 
-  createThemedComponent1Styles = (theme: Theme) => ({
+  createThemedComponent1Styles = (theme: ThemeType) => ({
     container: {
-      backgroundColor: theme.color,
+      backgroundColor: theme.find(option => option.name === 'color').value,
     },
   });
 
-  createThemedComponent2Styles = (theme: Theme) => ({
+  createThemedComponent2Styles = (theme: ThemeType) => ({
     container: {
-      backgroundColor: theme.color,
+      backgroundColor: theme.find(option => option.name === 'color').value,
     },
   });
 
@@ -125,7 +126,7 @@ describe('@theme: theme consumer checks', () => {
     const ThemedComponent = withTheme(ThemedConsumer);
 
     const component = render(
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={[]}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -138,7 +139,7 @@ describe('@theme: theme consumer checks', () => {
     const ThemedComponent = withTheme(ThemedConsumer);
 
     const component = render(
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={[]}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -160,7 +161,8 @@ describe('@theme: theme consumer checks', () => {
       return component.getByTestId(themeConsumerTestId);
     });
 
-    expect(themedComponent.props.theme.backgroundColor).toEqual(ActionedProvider.onChangeThemeColor);
+    const themeOption = themedComponent.props.theme.find(option => option.name === 'backgroundColor');
+    expect(themeOption.value).toEqual(ActionedProvider.onChangeThemeColor);
   });
 
 });
@@ -173,7 +175,7 @@ describe('@theme: styled theme consumer checks', () => {
     });
 
     const component = render(
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={[]}>
         <ThemedComponent testID={themeConsumerTestId}/>
       </ThemeProvider>,
     );
@@ -188,7 +190,7 @@ describe('@theme: styled theme consumer checks', () => {
     });
 
     const component = render(
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={[]}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -203,7 +205,7 @@ describe('@theme: styled theme consumer checks', () => {
     });
 
     const component = render(
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={[]}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -213,12 +215,14 @@ describe('@theme: styled theme consumer checks', () => {
   });
 
   it('child theme provider overrides parent theme', async () => {
-    const theme1: Theme = {
-      color: '#3F51B5',
-    };
-    const theme2: Theme = {
-      color: '#009688',
-    };
+    const theme1: ThemeType = [{
+      name: 'color',
+      value: '#3F51B5',
+    }];
+    const theme2: ThemeType = [{
+      name: 'color',
+      value: '#009688',
+    }];
 
     const component = render(
       <ThemedStyleProvider
@@ -238,3 +242,6 @@ describe('@theme: styled theme consumer checks', () => {
   });
 
 });
+
+// TODO(theme/test): write service methods tests
+

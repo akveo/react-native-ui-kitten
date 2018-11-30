@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import ThemeContext from './themeContext';
 import {
   ThemeType,
   ThemedStyleType,
   StyleSheetType,
 } from './type';
-import {
-  Consumer,
-  forwardProps,
-} from '../service';
+import { forwardProps } from '../../service';
 
 export interface Props<P> extends React.ClassAttributes<P> {
   theme: ThemeType;
@@ -44,9 +42,9 @@ export function withThemedStyles<P extends Props<P>>(
 
     render() {
       return (
-        <Consumer>
+        <ThemeContext.Consumer>
           {this.renderWrappedComponent}
-        </Consumer>
+        </ThemeContext.Consumer>
       );
     }
   }

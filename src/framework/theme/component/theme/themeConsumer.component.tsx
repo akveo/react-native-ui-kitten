@@ -1,9 +1,7 @@
 import React, { ComponentType } from 'react';
+import ThemeContext from './themeContext';
 import { ThemeType } from './type';
-import {
-  Consumer,
-  forwardProps,
-} from '../service';
+import { forwardProps } from '../../service';
 
 export interface Props<P> extends React.ClassAttributes<P> {
   theme: ThemeType;
@@ -31,9 +29,9 @@ export function withTheme<P extends Props<P>>(Component: ComponentType<P>) {
 
     render() {
       return (
-        <Consumer>
+        <ThemeContext.Consumer>
           {this.renderWrappedComponent}
-        </Consumer>
+        </ThemeContext.Consumer>
       );
     }
   }

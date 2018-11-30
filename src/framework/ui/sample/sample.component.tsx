@@ -5,8 +5,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import { DesignType } from '@rk-kit/design';
-import { createFlatStyle } from '../service/themeUtil.service';
-import { ThemeType } from '../type';
+import {
+  createFlatStyle,
+  ThemeType,
+} from '@rk-kit/theme';
 
 interface Props {
   design: DesignType;

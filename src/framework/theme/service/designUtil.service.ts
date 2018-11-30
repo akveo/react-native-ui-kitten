@@ -1,7 +1,7 @@
 import {
   DesignType,
   MappingType,
-} from '../component';
+} from '@rk-kit/design';
 
 /**
  * @param component: string - component name. Using displayName is recommended

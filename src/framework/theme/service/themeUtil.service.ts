@@ -1,9 +1,9 @@
 import {
-  getComponentMapping,
   DesignType,
   MappingType,
 } from '@rk-kit/design';
-import { ThemeType } from '../type';
+import { getComponentMapping } from './designUtil.service';
+import { ThemeType } from '../../theme';
 
 /**
  * Creates flat style object which can be used to create StyleSheet styles.
@@ -13,6 +13,8 @@ import { ThemeType } from '../type';
  * @param variant: string - variant name. Default is 'default'
  *
  * @return any.
+ *
+ * TODO(theme/service): handle variations like `dark success`
  */
 export function createFlatStyle(theme: ThemeType,
                                 design: DesignType,

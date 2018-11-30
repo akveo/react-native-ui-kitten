@@ -4,7 +4,7 @@ import { render } from 'react-native-testing-library';
 import {
   DesignProvider,
   withDesign,
-} from './component';
+} from '..';
 
 const designConsumerTestId = '@design/consumer';
 
