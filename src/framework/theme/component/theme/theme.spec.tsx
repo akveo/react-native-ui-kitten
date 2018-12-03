@@ -8,12 +8,14 @@ import {
   fireEvent,
   render,
 } from 'react-native-testing-library';
+import { DesignType } from '@rk-kit/design';
 import {
   ThemeProvider,
   withTheme,
   withThemedStyles,
   ThemeType,
 } from './';
+import { createFlatStyle } from '../../service';
 
 const themeConsumerTestId = '@theme/consumer';
 const themeChangeTouchableTestId = '@theme/btnChangeTheme';
@@ -243,5 +245,102 @@ describe('@theme: styled theme consumer checks', () => {
 
 });
 
-// TODO(theme/test): write service methods tests
+describe('@theme: service methods checks', () => {
+
+  const values = {
+    backgroundDefault: '#ffffff',
+    backgroundDark: '#000000',
+    textDefault: '#000000',
+    textDark: '#ffffff',
+    textSuccess: '#00E676',
+  };
+
+  const design: DesignType = {
+    name: 'Test',
+    parameters: [
+      {
+        name: 'backgroundColor',
+      },
+    ],
+    variants: [
+      {
+        name: 'default',
+        mapping: [
+          {
+            parameter: 'backgroundColor',
+            token: 'background-color-test-default',
+          },
+          {
+            parameter: 'textColor',
+            token: 'text-color-test-default',
+          },
+        ],
+      },
+      {
+        name: 'dark',
+        mapping: [
+          {
+            parameter: 'backgroundColor',
+            token: 'background-color-test-dark',
+          },
+        ],
+      },
+      {
+        name: 'success',
+        mapping: [
+          {
+            parameter: 'textColor',
+            token: 'text-color-test-success',
+          },
+        ],
+      },
+    ],
+  };
+
+  const theme: ThemeType = [
+    {
+      name: 'background-color-test-default',
+      value: values.backgroundDefault,
+    },
+    {
+      name: 'background-color-test-dark',
+      value: values.backgroundDark,
+    },
+    {
+      name: 'text-color-test-default',
+      value: values.textDefault,
+    },
+    {
+      name: 'text-color-test-dark',
+      value: values.textDark,
+    },
+    {
+      name: 'text-color-test-success',
+      value: values.textSuccess,
+    },
+  ];
+
+  it('style for default variant created properly', async () => {
+    const style = createFlatStyle(theme, design);
+
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
+    expect(style.backgroundColor).toEqual(values.backgroundDefault);
+  });
+
+  it('style for single non-default variant created properly', async () => {
+    const style = createFlatStyle(theme, design, 'dark');
+
+    expect(style.backgroundColor).toEqual(values.backgroundDark);
+    expect(style.textColor).toEqual(values.textDefault);
+  });
+
+  it('style for list of non-default variants created properly', async () => {
+    const style = createFlatStyle(theme, design, 'dark success');
+
+    expect(style.backgroundColor).toEqual(values.backgroundDark);
+    expect(style.textColor).toEqual(values.textSuccess);
+  });
+
+});
 
