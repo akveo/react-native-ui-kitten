@@ -3,7 +3,7 @@
  */
 
 import { config as Components } from './components.json';
-import { config as Tokens } from './tokens.json';
+import * as Tokens from './tokens.json';
 
 export * from './type';
 export {

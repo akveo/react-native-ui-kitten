@@ -18,7 +18,5 @@ export interface MappingType {
   token: string;
 }
 
-export interface TokenType {
-  name: string;
-  value: any;
-}
+// TODO(design/type): declare Token type
+export type TokenType = any;

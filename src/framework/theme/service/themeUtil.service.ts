@@ -1,6 +1,15 @@
-import { DesignType, MappingType } from '@rk-kit/design';
-import { getComponentMapping } from './designUtil.service';
-import { ThemeType } from '../../theme';
+import {
+  DesignType,
+  MappingType,
+} from '@rk-kit/design';
+import {
+  getComponentMappings,
+  defaultVariant,
+} from './designUtil.service';
+import {
+  ThemeType,
+  StyleType,
+} from '../../theme';
 
 const variantSeparator = ' ';
 
@@ -13,29 +22,35 @@ const variantSeparator = ' ';
  *
  * @return any.
  */
-
-// TODO(theme/@type): declare Style type
-type StyleType = any;
-
 export function createFlatStyle(theme: ThemeType,
                                 design: DesignType,
-                                variant: string = 'default'): StyleType {
+                                variant: string = defaultVariant): StyleType {
 
   const mapVariant = (v: string) => createStyleFromVariant(theme, design, v);
   const mergeStyles = (origin: StyleType, next: StyleType) => ({ ...origin, ...next });
 
-  const defaultStyle = createStyleFromVariant(theme, design, 'default');
+  const defaultStyle = createStyleFromVariant(theme, design, defaultVariant);
   return variant.split(variantSeparator).map(mapVariant).reduce(mergeStyles, defaultStyle);
 }
 
+/**
+ * @param name: ThemeOption - theme property name, like `backgroundColor`
+ * @param theme: ThemeType - theme
+ *
+ * @return any. ThemeOption value if it presents in theme, undefined otherwise
+ */
+export function getThemeValue(name: string, theme: ThemeType): any | undefined {
+  return theme[name];
+}
+
 function createStyleFromVariant(theme: ThemeType, design: DesignType, variant: string): StyleType {
-  const variantMapping = getComponentMapping(design, variant);
+  const variantMapping = getComponentMappings(design, variant);
   return createStyleFromMapping(variantMapping, theme);
 }
 
 function createStyleFromMapping(mapping: MappingType[], theme: ThemeType): StyleType {
   const assignParameter = (style: any, prop: MappingType) => {
-    style[prop.parameter] = theme.find(value => value.name === prop.token).value;
+    style[prop.parameter] = getThemeValue(prop.token, theme);
     return style;
   };
   return mapping.reduce(assignParameter, {});

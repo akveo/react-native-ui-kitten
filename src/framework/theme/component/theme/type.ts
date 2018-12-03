@@ -1,8 +1,6 @@
-import { TokenType } from '@rk-kit/design';
+// TODO(theme/type): declare Theme types
 
-// TODO(theme/type): declare `ThemedStyle` component props
-
-export type ThemeOption = TokenType;
-export type ThemeType = ThemeOption[];
+export type ThemeType = any;
+export type StyleType = any;
 export type ThemedStyleType = any;
 export type StyleSheetType = any;

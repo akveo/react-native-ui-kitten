@@ -52,14 +52,10 @@ class ActionedProvider extends React.Component<any> {
   static initialThemeColor = '#ffffff';
   static onChangeThemeColor = '#000000';
 
-  // FIXME(@theme/test): this is not what theme should be like!
-  // Refactor to: { backgroundColor: '#ffffff' }
-
   state = {
-    theme: [{
-      name: 'backgroundColor',
-      value: ActionedProvider.initialThemeColor,
-    }],
+    theme: {
+      backgroundColor: ActionedProvider.initialThemeColor,
+    },
   };
 
   isInitialColor = (color: string): boolean => color === ActionedProvider.initialThemeColor;
@@ -71,10 +67,9 @@ class ActionedProvider extends React.Component<any> {
 
   onThemeChangeTouchablePress = () => {
     this.setState({
-      theme: [{
-        name: 'backgroundColor',
-        value: this.getInversedColor(this.state.theme[0].value),
-      }],
+      theme: {
+        backgroundColor: this.getInversedColor(this.state.theme.backgroundColor),
+      },
     });
   };
 
@@ -98,13 +93,13 @@ export class ThemedStyleProvider extends React.Component<any> {
 
   createThemedComponent1Styles = (theme: ThemeType) => ({
     container: {
-      backgroundColor: theme.find(option => option.name === 'color').value,
+      backgroundColor: theme.color,
     },
   });
 
   createThemedComponent2Styles = (theme: ThemeType) => ({
     container: {
-      backgroundColor: theme.find(option => option.name === 'color').value,
+      backgroundColor: theme.color,
     },
   });
 
@@ -128,7 +123,7 @@ describe('@theme: theme consumer checks', () => {
     const ThemedComponent = withTheme(ThemedConsumer);
 
     const component = render(
-      <ThemeProvider theme={[]}>
+      <ThemeProvider theme={{}}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -141,7 +136,7 @@ describe('@theme: theme consumer checks', () => {
     const ThemedComponent = withTheme(ThemedConsumer);
 
     const component = render(
-      <ThemeProvider theme={[]}>
+      <ThemeProvider theme={{}}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -163,8 +158,7 @@ describe('@theme: theme consumer checks', () => {
       return component.getByTestId(themeConsumerTestId);
     });
 
-    const themeOption = themedComponent.props.theme.find(option => option.name === 'backgroundColor');
-    expect(themeOption.value).toEqual(ActionedProvider.onChangeThemeColor);
+    expect(themedComponent.props.theme.backgroundColor).toEqual(ActionedProvider.onChangeThemeColor);
   });
 
 });
@@ -177,7 +171,7 @@ describe('@theme: styled theme consumer checks', () => {
     });
 
     const component = render(
-      <ThemeProvider theme={[]}>
+      <ThemeProvider theme={{}}>
         <ThemedComponent testID={themeConsumerTestId}/>
       </ThemeProvider>,
     );
@@ -192,7 +186,7 @@ describe('@theme: styled theme consumer checks', () => {
     });
 
     const component = render(
-      <ThemeProvider theme={[]}>
+      <ThemeProvider theme={{}}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -207,7 +201,7 @@ describe('@theme: styled theme consumer checks', () => {
     });
 
     const component = render(
-      <ThemeProvider theme={[]}>
+      <ThemeProvider theme={{}}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
@@ -217,19 +211,10 @@ describe('@theme: styled theme consumer checks', () => {
   });
 
   it('child theme provider overrides parent theme', async () => {
-    const theme1: ThemeType = [{
-      name: 'color',
-      value: '#3F51B5',
-    }];
-    const theme2: ThemeType = [{
-      name: 'color',
-      value: '#009688',
-    }];
-
     const component = render(
       <ThemedStyleProvider
-        theme1={theme1}
-        theme2={theme2}
+        theme1={{ color: '#3F51B5'}}
+        theme2={{ color: '#009688'}}
       />,
     );
 
@@ -268,11 +253,11 @@ describe('@theme: service methods checks', () => {
         mapping: [
           {
             parameter: 'backgroundColor',
-            token: 'background-color-test-default',
+            token: 'backgroundColorTestDefault',
           },
           {
             parameter: 'textColor',
-            token: 'text-color-test-default',
+            token: 'textColorTestDefault',
           },
         ],
       },
@@ -281,7 +266,7 @@ describe('@theme: service methods checks', () => {
         mapping: [
           {
             parameter: 'backgroundColor',
-            token: 'background-color-test-dark',
+            token: 'backgroundColorTestDark',
           },
         ],
       },
@@ -290,37 +275,21 @@ describe('@theme: service methods checks', () => {
         mapping: [
           {
             parameter: 'textColor',
-            token: 'text-color-test-success',
+            token: 'textColorTestSuccess',
           },
         ],
       },
     ],
   };
 
-  const theme: ThemeType = [
-    {
-      name: 'background-color-test-default',
-      value: values.backgroundDefault,
-    },
-    {
-      name: 'background-color-test-dark',
-      value: values.backgroundDark,
-    },
-    {
-      name: 'text-color-test-default',
-      value: values.textDefault,
-    },
-    {
-      name: 'text-color-test-dark',
-      value: values.textDark,
-    },
-    {
-      name: 'text-color-test-success',
-      value: values.textSuccess,
-    },
-  ];
+  const theme: ThemeType = {
+    backgroundColorTestDefault: values.backgroundDefault,
+    backgroundColorTestDark: values.backgroundDark,
+    textColorTestDefault: values.textDefault,
+    textColorTestSuccess: values.textSuccess,
+  };
 
-  it('style for default variant created properly', async () => {
+  it('default variant styled properly', async () => {
     const style = createFlatStyle(theme, design);
 
     expect(style).not.toBeNull();
@@ -328,14 +297,14 @@ describe('@theme: service methods checks', () => {
     expect(style.backgroundColor).toEqual(values.backgroundDefault);
   });
 
-  it('style for single non-default variant created properly', async () => {
+  it('single non-default variant styled properly', async () => {
     const style = createFlatStyle(theme, design, 'dark');
 
     expect(style.backgroundColor).toEqual(values.backgroundDark);
     expect(style.textColor).toEqual(values.textDefault);
   });
 
-  it('style for list of non-default variants created properly', async () => {
+  it('list of non-default variants styled created properly', async () => {
     const style = createFlatStyle(theme, design, 'dark success');
 
     expect(style.backgroundColor).toEqual(values.backgroundDark);
