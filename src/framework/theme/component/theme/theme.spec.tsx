@@ -295,15 +295,29 @@ describe('@theme: service methods checks', () => {
     expect(style.backgroundColor).toEqual(values.backgroundDefault);
   });
 
-  it('single non-default variant styled properly', async () => {
+  it('single non-default variant styled properly (string type)', async () => {
     const style = createFlatStyle(theme, design, 'dark');
 
     expect(style.backgroundColor).toEqual(values.backgroundDark);
     expect(style.textColor).toEqual(values.textDefault);
   });
 
-  it('list of non-default variants styled created properly', async () => {
+  it('list of non-default variants styled created properly (string type)', async () => {
     const style = createFlatStyle(theme, design, 'dark success');
+
+    expect(style.backgroundColor).toEqual(values.backgroundDark);
+    expect(style.textColor).toEqual(values.textSuccess);
+  });
+
+  it('single non-default variant styled properly (string[] type)', async () => {
+    const style = createFlatStyle(theme, design, ['dark']);
+
+    expect(style.backgroundColor).toEqual(values.backgroundDark);
+    expect(style.textColor).toEqual(values.textDefault);
+  });
+
+  it('array of non-default variants styled created properly (string[] type)', async () => {
+    const style = createFlatStyle(theme, design, ['dark', 'success']);
 
     expect(style.backgroundColor).toEqual(values.backgroundDark);
     expect(style.textColor).toEqual(values.textSuccess);
