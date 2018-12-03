@@ -36,6 +36,15 @@
               "token": "text-color-button-dark"
             }
           ]
+        },
+        {
+          "name": "success",
+          "mapping": [
+            {
+              "parameter": "textColor",
+              "token": "text-color-button-success"
+            }
+          ]
         }
       ]
     },
@@ -73,6 +82,15 @@
             {
               "parameter": "tintColor",
               "token": "tint-color-checkbox-dark"
+            }
+          ]
+        },
+        {
+          "name": "success",
+          "mapping": [
+            {
+              "parameter": "tintColor",
+              "token": "tint-color-checkbox-success"
             }
           ]
         }
