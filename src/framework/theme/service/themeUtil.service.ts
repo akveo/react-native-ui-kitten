@@ -4,7 +4,7 @@ import {
 } from '@rk-kit/design';
 import {
   getComponentMappings,
-  defaultVariant,
+  VARIANT_DEFAULT,
 } from './designUtil.service';
 import {
   ThemeType,
@@ -14,7 +14,7 @@ import {
 const variantSeparator = ' ';
 
 /**
- * Creates flat style object which can be used to create StyleSheet styles.
+ * Creates style object which can be used to create StyleSheet styles.
  *
  * @param theme: ThemeType - theme object
  * @param design: DesignType - component design configuration
@@ -26,16 +26,16 @@ const variantSeparator = ' ';
  *
  * @return any.
  */
-export function createFlatStyle(theme: ThemeType,
-                                design: DesignType,
-                                variant: string[] | string = [defaultVariant]): StyleType {
+export function createStyle(theme: ThemeType,
+                            design: DesignType,
+                            variant: string[] | string = [VARIANT_DEFAULT]): StyleType {
 
   const variants: string[] = Array.isArray(variant) ? variant : variant.split(variantSeparator);
 
   const mapVariant = (v: string) => createStyleFromVariant(theme, design, v);
   const mergeStyles = (origin: StyleType, next: StyleType) => ({ ...origin, ...next });
 
-  const defaultStyle = createStyleFromVariant(theme, design, defaultVariant);
+  const defaultStyle = createStyleFromVariant(theme, design, VARIANT_DEFAULT);
   return variants.map(mapVariant).reduce(mergeStyles, defaultStyle);
 }
 

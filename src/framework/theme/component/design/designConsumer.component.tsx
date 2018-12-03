@@ -14,7 +14,7 @@ export function withDesign<P extends Props<P>>(Component: ComponentType<P>) {
   type TExcept = Exclude<keyof P, keyof Props<P>>;
   type ForwardedProps = Pick<P, TExcept>;
 
-  class Shadow extends React.Component<ForwardedProps> {
+  class Wrapper extends React.Component<ForwardedProps> {
     wrappedComponentRef = undefined;
     getWrappedInstance = undefined;
 
@@ -41,7 +41,7 @@ export function withDesign<P extends Props<P>>(Component: ComponentType<P>) {
     }
   }
 
-  const Result = Shadow;
+  const Result = Wrapper;
   Result.prototype.getWrappedInstance = function getWrappedInstance() {
     const hasWrappedInstance = this.wrappedComponentRef && this.wrappedComponentRef.getWrappedInstance;
     return hasWrappedInstance ? this.wrappedComponentRef.getWrappedInstance() : this.wrappedComponentRef;

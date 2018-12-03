@@ -5,7 +5,7 @@ import {
   TokenType,
 } from '@rk-kit/design';
 
-export const defaultVariant = 'default';
+export const VARIANT_DEFAULT = 'default';
 
 /**
  * @param component: string - component name. Using displayName is recommended
@@ -49,7 +49,7 @@ export function getComponentVariant(name: string, design: DesignType): VariantTy
  *
  * @return MappingType[] if presents in variant, undefined otherwise
  */
-export function getComponentMappings(design: DesignType, variant: string = defaultVariant): MappingType[] | undefined {
+export function getComponentMappings(design: DesignType, variant: string = VARIANT_DEFAULT): MappingType[] | undefined {
   const componentVariant = getComponentVariant(variant, design);
   return componentVariant && componentVariant.mapping;
 }
@@ -63,7 +63,7 @@ export function getComponentMappings(design: DesignType, variant: string = defau
  */
 export function getVariantTokens(tokens: TokenType,
                                  design: DesignType,
-                                 variant: string = defaultVariant): TokenType | undefined {
+                                 variant: string = VARIANT_DEFAULT): TokenType | undefined {
 
   const assignParameter = (origin: TokenType, prop: MappingType) => {
     return {

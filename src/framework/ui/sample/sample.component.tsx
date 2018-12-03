@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { DesignType } from '@rk-kit/design';
 import {
-  createFlatStyle,
+  createStyle,
   ThemeType,
 } from '@rk-kit/theme';
 
@@ -29,7 +29,7 @@ export class Sample extends React.Component<Props, {}> {
 
   getThemedStyle = () => {
     const { design, theme, variant } = this.props;
-    const style = createFlatStyle(theme, design, variant);
+    const style = createStyle(theme, design, variant);
     return {
       container: {
         backgroundColor: style.backgroundColor,
