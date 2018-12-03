@@ -1,11 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from 'react-native-testing-library';
-import {
-  DesignProvider, ThemeType,
-  withDesign,
-} from '..';
 import { DesignType } from '@rk-kit/design';
+import { DesignProvider } from './designProvider.component';
+import { withDesign } from './designConsumer.component';
+import { ThemeType } from '../theme';
 import {
   getComponentDesign,
   getComponentMappings,

@@ -9,12 +9,10 @@ import {
   render,
 } from 'react-native-testing-library';
 import { DesignType } from '@rk-kit/design';
-import {
-  ThemeProvider,
-  withTheme,
-  withThemedStyles,
-  ThemeType,
-} from './';
+import { ThemeProvider } from './themeProvider.component';
+import { withTheme } from './themeConsumer.component';
+import { withThemedStyles } from './themeConsumerStyled.component';
+import { ThemeType } from '../theme';
 import { createFlatStyle } from '../../service';
 
 const themeConsumerTestId = '@theme/consumer';
@@ -213,8 +211,8 @@ describe('@theme: styled theme consumer checks', () => {
   it('child theme provider overrides parent theme', async () => {
     const component = render(
       <ThemedStyleProvider
-        theme1={{ color: '#3F51B5'}}
-        theme2={{ color: '#009688'}}
+        theme1={{ color: '#3F51B5' }}
+        theme2={{ color: '#009688' }}
       />,
     );
 

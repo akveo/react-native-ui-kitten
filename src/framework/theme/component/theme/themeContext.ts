@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeType } from '..';
 import { Tokens } from '@rk-kit/design';
+import { ThemeType } from './type';
 
 const defaultValue: ThemeType = Tokens;
 const ThemeContext = React.createContext(defaultValue);
