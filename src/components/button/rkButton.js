@@ -141,7 +141,7 @@ import { RkComponent } from '../rkComponent';
 export class RkButton extends RkComponent {
   static propTypes = {
     style: ViewPropTypes.style,
-    contentStyle: ViewPropTypes.style,
+    contentStyle: RkText.propTypes.style,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,
