@@ -7,7 +7,3 @@ export {
   withTheme,
   Props as ThemeConsumerProps,
 } from './themeConsumer.component';
-export {
-  withThemedStyles,
-  Props as ThemeConsumerStyledProps,
-} from './themeConsumerStyled.component';

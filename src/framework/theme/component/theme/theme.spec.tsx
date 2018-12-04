@@ -11,7 +11,6 @@ import {
 import { DesignType } from '@rk-kit/design';
 import { ThemeProvider } from './themeProvider.component';
 import { withTheme } from './themeConsumer.component';
-import { withThemedStyles } from './themeConsumerStyled.component';
 import { ThemeType } from '../theme';
 import { createStyle } from '../../service';
 
@@ -102,8 +101,8 @@ export class ThemedStyleProvider extends React.Component<any> {
   });
 
   render() {
-    const ThemedComponent1 = withThemedStyles(ThemedStyleConsumer, this.createThemedComponent1Styles);
-    const ThemedComponent2 = withThemedStyles(ThemedStyleConsumer, this.createThemedComponent2Styles);
+    const ThemedComponent1 = withTheme(ThemedStyleConsumer, this.createThemedComponent1Styles);
+    const ThemedComponent2 = withTheme(ThemedStyleConsumer, this.createThemedComponent2Styles);
     return (
       <ThemeProvider theme={this.props.theme1}>
         <ThemedComponent1/>
@@ -143,6 +142,21 @@ describe('@theme: theme consumer checks', () => {
     expect(themedComponent.props.theme).not.toBeNull();
   });
 
+  it('receives themedStyle prop', async () => {
+    const ThemedComponent = withTheme(ThemedConsumer, (theme: ThemeType) => {
+      return {};
+    });
+
+    const component = render(
+      <ThemeProvider theme={{}}>
+        <ThemedComponent/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(themedComponent.props.themedStyle).not.toBeNull();
+  });
+
   it('receives theme prop on theme change', async () => {
     const component = render(
       <ActionedProvider/>,
@@ -157,55 +171,6 @@ describe('@theme: theme consumer checks', () => {
     });
 
     expect(themedComponent.props.theme.backgroundColor).toEqual(ActionedProvider.onChangeThemeColor);
-  });
-
-});
-
-describe('@theme: styled theme consumer checks', () => {
-
-  it('renders properly', async () => {
-    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
-      return {};
-    });
-
-    const component = render(
-      <ThemeProvider theme={{}}>
-        <ThemedComponent testID={themeConsumerTestId}/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
-    expect(themedComponent).not.toBeNull();
-  });
-
-  it('receives theme prop', async () => {
-    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
-      return {};
-    });
-
-    const component = render(
-      <ThemeProvider theme={{}}>
-        <ThemedComponent/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
-    expect(themedComponent.props.theme).not.toBeNull();
-  });
-
-  it('receives themedStyle prop', async () => {
-    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
-      return {};
-    });
-
-    const component = render(
-      <ThemeProvider theme={{}}>
-        <ThemedComponent/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
-    expect(themedComponent.props.themedStyle).not.toBeNull();
   });
 
   it('child theme provider overrides parent theme', async () => {
