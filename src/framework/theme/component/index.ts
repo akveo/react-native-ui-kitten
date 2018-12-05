@@ -1,2 +1,2 @@
-export * from './design';
+export * from './mapping';
 export * from './theme';

@@ -16,10 +16,6 @@
       "es2016"
     ],
     "paths": {
-
-      "@rk-kit/design": [
-        "./design"
-      ],
       "@rk-kit/theme": [
         "./theme"
       ],

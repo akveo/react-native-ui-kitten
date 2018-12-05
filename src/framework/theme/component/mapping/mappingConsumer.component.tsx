@@ -1,16 +1,16 @@
 import React, { ComponentType } from 'react';
-import { DesignType } from '@rk-kit/design';
-import DesignContext from './designContext';
+import MappingContext from './mappingContext';
+import { ThemeMappingType } from './type';
 import {
-  getComponentDesign,
+  getComponentThemeMapping,
   forwardProps,
 } from '../../service';
 
 export interface Props<P> extends React.ClassAttributes<P> {
-  design: DesignType;
+  mapping: ThemeMappingType;
 }
 
-export function withDesign<P extends Props<P>>(Component: ComponentType<P>) {
+export function withMapping<P extends Props<P>>(Component: ComponentType<P>) {
   type TExcept = Exclude<keyof P, keyof Props<P>>;
   type ForwardedProps = Pick<P, TExcept>;
 
@@ -24,19 +24,19 @@ export function withDesign<P extends Props<P>>(Component: ComponentType<P>) {
 
     getComponentName = () => Component.displayName || Component.name;
 
-    renderWrappedComponent = (design: DesignType[]) => (
+    renderWrappedComponent = (mapping: ThemeMappingType[]) => (
       <Component
         ref={this.setWrappedComponentRef}
-        design={getComponentDesign(this.getComponentName(), design)}
+        mapping={getComponentThemeMapping(this.getComponentName(), mapping)}
         {...this.props}
       />
     );
 
     render() {
       return (
-        <DesignContext.Consumer>
+        <MappingContext.Consumer>
           {this.renderWrappedComponent}
-        </DesignContext.Consumer>
+        </MappingContext.Consumer>
       );
     }
   }

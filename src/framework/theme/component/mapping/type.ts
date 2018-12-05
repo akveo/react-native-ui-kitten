@@ -1,4 +1,4 @@
-export interface DesignType {
+export interface ThemeMappingType {
   name: string;
   parameters: ParameterType[];
   variants: VariantType[];
@@ -18,5 +18,5 @@ export interface MappingType {
   token: string;
 }
 
-// TODO(design/type): declare Token type
+// TODO(mapping/type): declare Token type
 export type TokenType = any;

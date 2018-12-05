@@ -1,15 +1,13 @@
 import {
-  DesignType,
-  MappingType,
-} from '@rk-kit/design';
-import {
   getComponentMappings,
   VARIANT_DEFAULT,
-} from './designUtil.service';
+} from './mappingUtil.service';
 import {
+  ThemeMappingType,
+  MappingType,
   ThemeType,
   StyleType,
-} from '../../theme';
+} from '../component';
 
 const variantSeparator = ' ';
 
@@ -17,7 +15,7 @@ const variantSeparator = ' ';
  * Creates style object which can be used to create StyleSheet styles.
  *
  * @param theme: ThemeType - theme object
- * @param design: DesignType - component design configuration
+ * @param mapping: ThemeMappingType - component theme mapping configuration
  * @param variant: string | string[] - variant name. Default is 'default'.
  * Supported argument formats:
  * - 'dark'
@@ -27,30 +25,30 @@ const variantSeparator = ' ';
  * @return any.
  */
 export function createStyle(theme: ThemeType,
-                            design: DesignType,
+                            mapping: ThemeMappingType,
                             variant: string[] | string = [VARIANT_DEFAULT]): StyleType {
 
   const variants: string[] = Array.isArray(variant) ? variant : variant.split(variantSeparator);
 
-  const mapVariant = (v: string) => createStyleFromVariant(theme, design, v);
+  const mapVariant = (v: string) => createStyleFromVariant(theme, mapping, v);
   const mergeStyles = (origin: StyleType, next: StyleType) => ({ ...origin, ...next });
 
-  const defaultStyle = createStyleFromVariant(theme, design, VARIANT_DEFAULT);
+  const defaultStyle = createStyleFromVariant(theme, mapping, VARIANT_DEFAULT);
   return variants.map(mapVariant).reduce(mergeStyles, defaultStyle);
 }
 
 /**
- * @param name: ThemeOption - theme property name, like `backgroundColor`
+ * @param name: string - theme property name, like `backgroundColor`
  * @param theme: ThemeType - theme
  *
- * @return any. ThemeOption value if it presents in theme, undefined otherwise
+ * @return any. Theme property value if it presents in theme, undefined otherwise
  */
 export function getThemeValue(name: string, theme: ThemeType): any | undefined {
   return theme[name];
 }
 
-function createStyleFromVariant(theme: ThemeType, design: DesignType, variant: string): StyleType {
-  const variantMapping = getComponentMappings(design, variant);
+function createStyleFromVariant(theme: ThemeType, mapping: ThemeMappingType, variant: string): StyleType {
+  const variantMapping = getComponentMappings(mapping, variant);
   return createStyleFromMapping(variantMapping, theme);
 }
 

@@ -8,11 +8,13 @@ import {
   fireEvent,
   render,
 } from 'react-native-testing-library';
-import { DesignType } from '@rk-kit/design';
-import { ThemeProvider } from './themeProvider.component';
-import { withTheme } from './themeConsumer.component';
-import { ThemeType } from '../theme';
-import { createStyle } from '../../service';
+import {
+  ThemeProvider,
+  withTheme,
+  ThemeType,
+} from '../component';
+import { createStyle } from '../service';
+import * as config from './config';
 
 const themeConsumerTestId = '@theme/consumer';
 const themeChangeTouchableTestId = '@theme/btnChangeTheme';
@@ -195,97 +197,40 @@ describe('@theme: theme consumer checks', () => {
 
 describe('@theme: service methods checks', () => {
 
-  const values = {
-    backgroundDefault: '#ffffff',
-    backgroundDark: '#000000',
-    textDefault: '#000000',
-    textDark: '#ffffff',
-    textSuccess: '#00E676',
-  };
-
-  const design: DesignType = {
-    name: 'Test',
-    parameters: [
-      {
-        name: 'backgroundColor',
-      },
-    ],
-    variants: [
-      {
-        name: 'default',
-        mapping: [
-          {
-            parameter: 'backgroundColor',
-            token: 'backgroundColorTestDefault',
-          },
-          {
-            parameter: 'textColor',
-            token: 'textColorTestDefault',
-          },
-        ],
-      },
-      {
-        name: 'dark',
-        mapping: [
-          {
-            parameter: 'backgroundColor',
-            token: 'backgroundColorTestDark',
-          },
-        ],
-      },
-      {
-        name: 'success',
-        mapping: [
-          {
-            parameter: 'textColor',
-            token: 'textColorTestSuccess',
-          },
-        ],
-      },
-    ],
-  };
-
-  const theme: ThemeType = {
-    backgroundColorTestDefault: values.backgroundDefault,
-    backgroundColorTestDark: values.backgroundDark,
-    textColorTestDefault: values.textDefault,
-    textColorTestSuccess: values.textSuccess,
-  };
-
   it('default variant styled properly', async () => {
-    const style = createStyle(theme, design);
+    const style = createStyle(config.theme, config.themeMappings.test);
 
     expect(style).not.toBeNull();
     expect(style).not.toBeUndefined();
-    expect(style.backgroundColor).toEqual(values.backgroundDefault);
+    expect(style.backgroundColor).toEqual(config.values.backgroundDefault);
   });
 
   it('single non-default variant styled properly (string type)', async () => {
-    const style = createStyle(theme, design, 'dark');
+    const style = createStyle(config.theme, config.themeMappings.test, 'dark');
 
-    expect(style.backgroundColor).toEqual(values.backgroundDark);
-    expect(style.textColor).toEqual(values.textDefault);
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textDefault);
   });
 
   it('list of non-default variants styled created properly (string type)', async () => {
-    const style = createStyle(theme, design, 'dark success');
+    const style = createStyle(config.theme, config.themeMappings.test, 'dark success');
 
-    expect(style.backgroundColor).toEqual(values.backgroundDark);
-    expect(style.textColor).toEqual(values.textSuccess);
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textSuccess);
   });
 
   it('single non-default variant styled properly (string[] type)', async () => {
-    const style = createStyle(theme, design, ['dark']);
+    const style = createStyle(config.theme, config.themeMappings.test, ['dark']);
 
-    expect(style.backgroundColor).toEqual(values.backgroundDark);
-    expect(style.textColor).toEqual(values.textDefault);
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textDefault);
   });
 
   it('array of non-default variants styled created properly (string[] type)', async () => {
-    const style = createStyle(theme, design, ['dark', 'success']);
+    const style = createStyle(config.theme, config.themeMappings.test, ['dark', 'success']);
 
-    expect(style.backgroundColor).toEqual(values.backgroundDark);
-    expect(style.textColor).toEqual(values.textSuccess);
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textSuccess);
   });
 
 });

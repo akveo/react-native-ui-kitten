@@ -4,14 +4,15 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import { DesignType } from '@rk-kit/design';
 import {
-  createStyle, ThemedStyleType,
+  createStyle,
   ThemeType,
+  ThemedStyleType,
+  ThemeMappingType,
 } from '@rk-kit/theme';
 
 interface Props {
-  design: DesignType;
+  mapping: ThemeMappingType;
   theme: ThemeType;
   themedStyle: ThemedStyleType | undefined;
   variant?: string;
@@ -29,8 +30,8 @@ export class Sample extends React.Component<Props, {}> {
   };
 
   getThemedStyle = () => {
-    const { design, theme, variant } = this.props;
-    const style = createStyle(theme, design, variant);
+    const { mapping, theme, variant } = this.props;
+    const style = createStyle(theme, mapping, variant);
     return {
       container: {
         backgroundColor: style.backgroundColor,

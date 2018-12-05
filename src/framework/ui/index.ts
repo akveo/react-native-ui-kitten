@@ -1,11 +1,11 @@
 import {
-  withDesign,
+  withThemeMapping,
   withTheme,
 } from '@rk-kit/theme';
 import { Sample } from './sample/sample.component';
 
-const DesignedSample = withDesign(Sample);
-const ThemedSample = withTheme(DesignedSample);
+const MappedSample = withThemeMapping(Sample);
+const ThemedSample = withTheme(MappedSample);
 
 export {
   ThemedSample as Sample,
