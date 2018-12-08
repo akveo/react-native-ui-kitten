@@ -6,55 +6,64 @@ import {
   ThemedStyleType,
   StyleSheetType,
 } from './type';
-import { forwardProps } from '../../service';
 
-export interface Props<P> extends React.ClassAttributes<P> {
+interface PrivateProps<T> {
+  forwardedRef: React.RefObject<T>;
+}
+
+interface ConsumerProps {
+  theme: ThemeType;
+}
+
+export interface Props {
   theme: ThemeType;
   themedStyle: ThemedStyleType | undefined;
 }
 
-export function withTheme<P extends Props<P>>(
-  Component: React.ComponentType<P>,
-  createStyles?: (theme: ThemeType) => StyleSheetType,
-) {
-  type TExcept = Exclude<keyof P, keyof Props<P>>;
-  type ForwardedProps = Pick<P, TExcept>;
+export type CreateStylesFunction = (theme: ThemeType) => StyleSheetType;
 
-  class Shadow extends React.Component<ForwardedProps> {
-    wrappedComponentRef = undefined;
-    getWrappedInstance = undefined;
+export const withTheme = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>,
+                                                                       createStyles?: CreateStylesFunction) => {
 
-    setWrappedComponentRef = (ref) => {
-      this.wrappedComponentRef = ref;
+  type ComponentProps = Props & P;
+  type WrapperProps = PrivateProps<T> & ComponentProps;
+
+  class Wrapper extends React.Component<WrapperProps> {
+
+    createCustomProps = (props: ConsumerProps): Props => {
+      return ({
+        theme: props.theme,
+        themedStyle: createStyles ? StyleSheet.create(createStyles(props.theme)) : undefined,
+      });
     };
 
-    createThemedStyle = (theme: ThemeType): ThemedStyleType | undefined => {
-      return createStyles ? StyleSheet.create(createStyles(theme)) : undefined;
+    renderWrappedComponent = (props: ConsumerProps) => {
+      // TS issue: with spreading Generics https://github.com/Microsoft/TypeScript/issues/15792
+      const { forwardedRef, ...restProps } = this.props as PrivateProps<T>;
+      const componentProps = restProps as P & Props;
+      return (
+        <Component
+          ref={forwardedRef}
+          {...this.createCustomProps(props)}
+          {...componentProps}
+        />
+      );
     };
-
-    renderWrappedComponent = (theme: ThemeType) => (
-      <Component
-        ref={this.setWrappedComponentRef}
-        theme={theme}
-        themedStyle={this.createThemedStyle(theme)}
-        {...this.props}
-      />
-    );
 
     render() {
       return (
-        <ThemeContext.Consumer>
-          {this.renderWrappedComponent}
-        </ThemeContext.Consumer>
+        <ThemeContext.Consumer>{(theme: ThemeType) => {
+          return this.renderWrappedComponent({theme: theme});
+        }}</ThemeContext.Consumer>
       );
     }
   }
 
-  const Result = Shadow;
-  Result.prototype.getWrappedInstance = function getWrappedInstance() {
-    const hasWrappedInstance = this.wrappedComponentRef && this.wrappedComponentRef.getWrappedInstance;
-    return hasWrappedInstance ? this.wrappedComponentRef.getWrappedInstance() : this.wrappedComponentRef;
+  const RefForwardingFactory = (props: WrapperProps, ref: T) => {
+    return (
+      <Wrapper {...props} forwardedRef={ref}/>
+    );
   };
 
-  return forwardProps(Component, Result);
-}
+  return React.forwardRef<T, P>(RefForwardingFactory as any);
+};
