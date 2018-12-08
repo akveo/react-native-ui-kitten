@@ -1,11 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { render } from 'react-native-testing-library';
-import {
-  ThemeMappingProvider,
-  withThemeMapping,
-  ThemeMappingType,
-} from '../component';
+import { ThemeMappingType } from '../component';
 import {
   getComponentThemeMapping,
   getComponentMappings,
@@ -14,40 +8,6 @@ import {
   getVariantTokens,
 } from '../service';
 import * as config from './config';
-
-const mappingConsumerTestId = '@mapping/consumer';
-
-class Test extends React.Component<any> {
-  static defaultProps = {
-    testID: mappingConsumerTestId,
-  };
-
-  render() {
-    return (
-      <View testID={this.props.testID}/>
-    );
-  }
-}
-
-describe('@mapping: mapping consumer checks', () => {
-
-  const mappings = [config.themeMappings.test, config.themeMappings.mock];
-
-  it('receives mapping prop', async () => {
-    const MappedComponent = withThemeMapping(Test);
-
-    const component = render(
-      <ThemeMappingProvider mapping={mappings}>
-        <MappedComponent/>
-      </ThemeMappingProvider>,
-    );
-
-    const mappedComponent = component.getByTestId(mappingConsumerTestId);
-    expect(mappedComponent.props.mapping).not.toBeNull();
-    expect(mappedComponent.props.mapping).not.toBeUndefined();
-  });
-
-});
 
 describe('@mapping: service methods checks', () => {
 

@@ -5,6 +5,6 @@ export {
 
 export {
   withStyle,
-  GeneratedProps,
+  GeneratedProps as StyleConsumerGeneratedProps,
   Props as StyleConsumerProps,
 } from './styleConsumer.component';
