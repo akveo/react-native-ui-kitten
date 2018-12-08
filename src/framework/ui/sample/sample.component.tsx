@@ -4,23 +4,15 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import {
-  createStyle,
-  ThemeType,
-  ThemedStyleType,
-  ThemeMappingType,
-} from '@rk-kit/theme';
+import { StyleConsumerProps } from '@rk-kit/theme';
 
-interface Props {
-  mapping: ThemeMappingType;
-  theme: ThemeType;
-  themedStyle: ThemedStyleType | undefined;
-  variant?: string;
+interface SampleProps {
   text?: string;
 }
+export type Props = SampleProps & StyleConsumerProps;
 
 export class Sample extends React.Component<Props, {}> {
-  static defaultProps = {
+  static defaultProps: Props = {
     text: `This is React Native UI Kitten playground.\n\n
       Create your awesome components inside
       ./src/framework dir
@@ -29,24 +21,11 @@ export class Sample extends React.Component<Props, {}> {
     variant: 'default',
   };
 
-  getThemedStyle = () => {
-    const { mapping, theme, variant } = this.props;
-    const style = createStyle(theme, mapping, variant);
-    return {
-      container: {
-        backgroundColor: style.backgroundColor,
-      },
-      text: {
-        color: style.textColor,
-      },
-    };
-  };
-
   render() {
-    const style = this.getThemedStyle();
+    const { generated: gen } = this.props;
     return (
-      <View style={[styles.container, style.container]}>
-        <Text style={[styles.text, style.text]}>{this.props.text}</Text>
+      <View style={[styles.container, { backgroundColor: gen.style.backgroundColor }]}>
+        <Text style={[styles.text, { color: gen.style.textColor }]}>{this.props.text}</Text>
       </View>
     );
   }

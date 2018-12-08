@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-  ThemeMappingProvider,
-  ThemeProvider,
+  StyleProvider,
   ThemeMappingType,
   ThemeType,
 } from '@rk-kit/theme';
@@ -18,6 +17,8 @@ interface State {
 
 export default class App extends React.Component<any, State> {
 
+  sampleRef = undefined;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,13 +27,18 @@ export default class App extends React.Component<any, State> {
     };
   }
 
+  setSampleRef = (ref) => {
+    this.sampleRef = ref;
+  };
+
   render() {
     return (
-      <ThemeMappingProvider mapping={this.state.mappings}>
-        <ThemeProvider theme={this.state.theme}>
-          <Sample variant='dark'/>
-        </ThemeProvider>
-      </ThemeMappingProvider>
+      <StyleProvider theme={this.state.theme} mapping={this.state.mappings}>
+        <Sample
+          ref={this.setSampleRef}
+          variant='dark success'
+        />
+      </StyleProvider>
     );
   }
 }

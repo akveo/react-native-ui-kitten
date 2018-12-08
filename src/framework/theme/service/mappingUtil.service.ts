@@ -13,7 +13,7 @@ export const VARIANT_DEFAULT = 'default';
  *
  * @return ThemeMappingType if presents in theme mapping, undefined otherwise
  */
-export function getComponentThemeMapping(component: string, mapping: ThemeMappingType[]): ThemeMappingType {
+export function getComponentThemeMapping(component: string, mapping: ThemeMappingType[]): ThemeMappingType | undefined {
   return mapping.find(value => value.name === component);
 }
 

@@ -1,12 +1,9 @@
-import {
-  withThemeMapping,
-  withTheme,
-} from '@rk-kit/theme';
-import { Sample } from './sample/sample.component';
+import { withStyle } from '@rk-kit/theme';
+import { Sample, Props } from './sample/sample.component';
 
-const MappedSample = withThemeMapping(Sample);
-const ThemedSample = withTheme(MappedSample);
+export const StyledSample = withStyle<Sample, Props>(Sample);
 
 export {
-  ThemedSample as Sample,
+  StyledSample as Sample,
+  Props as SampleProps,
 };
