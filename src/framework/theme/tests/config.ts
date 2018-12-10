@@ -15,6 +15,13 @@ export const theme: ThemeType = {
   textColorTestSuccess: values.textSuccess,
 };
 
+export const themeInverse: ThemeType = {
+  backgroundColorTestDefault: values.backgroundDark,
+  backgroundColorTestDark: values.backgroundDefault,
+  textColorTestDefault: values.textDark,
+  textColorTestSuccess: values.textDefault,
+};
+
 export const mappings = {
   testDefault: [
     {
@@ -38,6 +45,16 @@ export const mappings = {
       token: 'textColorTestSuccess',
     },
   ],
+  testInverseDefault: [
+    {
+      parameter: 'backgroundColor',
+      token: 'backgroundColorTestDefault',
+    },
+    {
+      parameter: 'textColor',
+      token: 'textColorTestDefault',
+    },
+  ],
   mockBackground: [
     {
       parameter: 'backgroundColor',
@@ -59,6 +76,10 @@ export const variants = {
     name: 'success',
     mapping: mappings.testSuccess,
   },
+  testInverseDefault: {
+    name: 'default',
+    mapping: mappings.testInverseDefault,
+  },
   mockDefault: {
     name: 'default',
     mapping: mappings.mockBackground,
@@ -74,6 +95,15 @@ export const themeMappings = {
       },
     ],
     variants: [variants.testDefault, variants.testDark, variants.testSuccess],
+  },
+  testInverse: {
+    name: 'Test',
+    parameters: [
+      {
+        name: 'backgroundColor',
+      },
+    ],
+    variants: [variants.testInverseDefault],
   },
   mock: {
     name: 'Mock',
