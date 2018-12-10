@@ -4,13 +4,13 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 We use [Yarn](https://yarnpkg.com/) as Dependency Manager, so you can use all the scripts below with yarn instead of npm.
 
-* [npm start](#npm-start)
-* [npm start-dev](#npm-start-dev)
-* [npm ios](#npm-ios)
-* [npm android](#npm-android)
-* [npm watch-lib](#npm-watch-lib)
+* [start](#start)
+* [start-dev](#start-dev)
+* [ios](#ios)
+* [android](#android)
+* [watch-lib](#watch-lib)
 
-#### `npm start`
+#### `start`
 
 ```
 npm start
@@ -30,10 +30,10 @@ npm start --reset-cache
 yarn start --reset-cache
 ```
 
-#### `npm start-dev`
+#### `start-dev`
 
 ```
-npm start-dev
+npm run start-dev
 # or
 yarn start-dev
 ```
@@ -43,34 +43,34 @@ Runs your application in development with launching gulp script which watches [r
 
 This script might be very helpful if you're debugging or you would like to [contribute](https://github.com/akveo/react-native-ui-kitten/blob/master/CONTRIBUTING.md) our UI-Kit.
 
-#### `npm ios`
+#### `ios`
 
 ```
-npm ios
+npm run ios
 # or
 yarn ios
 ```
 
 Like `npm start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
 
-#### `npm android`
+#### `android`
 
 ```
-npm android
+npm run android
 # or
 yarn android
 ```
 
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup).
 
-#### `npm watch-lib`
+#### `watch-lib`
 
 ```
-npm watch-lib
+npm run watch-lib
 # or
 yarn watch-lib
 ```
 
 Starts gulp script witch watching for [react-native-ui-kitten](https://github.com/akveo/react-native-ui-kitten) library changes.
 
-Use this script before `npm start` or use `npm start-dev` which runs `npm start` and `npm watch-lib` both.
+Use this script before `npm start` or use `npm run start-dev` which runs `npm start` and `npm run watch-lib` both.
