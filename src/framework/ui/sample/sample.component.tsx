@@ -4,12 +4,12 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import { StyleConsumerProps } from '@rk-kit/theme';
+import { StyledComponentProps } from '@rk-kit/theme';
 
 interface SampleProps {
   text?: string;
 }
-export type Props = SampleProps & StyleConsumerProps;
+export type Props = SampleProps & StyledComponentProps;
 
 export class Sample extends React.Component<Props, {}> {
   static defaultProps: Props = {
@@ -22,10 +22,10 @@ export class Sample extends React.Component<Props, {}> {
   };
 
   render() {
-    const { generated: gen } = this.props;
+    const { themedStyle } = this.props;
     return (
-      <View style={[styles.container, { backgroundColor: gen.style.backgroundColor }]}>
-        <Text style={[styles.text, { color: gen.style.textColor }]}>{this.props.text}</Text>
+      <View style={[styles.container, { backgroundColor: themedStyle.backgroundColor }]}>
+        <Text style={[styles.text, { color: themedStyle.textColor }]}>{this.props.text}</Text>
       </View>
     );
   }

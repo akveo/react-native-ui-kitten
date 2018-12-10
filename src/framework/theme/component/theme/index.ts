@@ -4,6 +4,6 @@ export {
   Props as ThemeProviderProps,
 } from './themeProvider.component';
 export {
-  withTheme,
-  Props as ThemeConsumerProps,
+  withStyles,
+  Props as ThemedComponentProps,
 } from './themeConsumer.component';

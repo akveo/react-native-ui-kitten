@@ -22,8 +22,8 @@ export interface Props {
 
 export type CreateStylesFunction = (theme: ThemeType) => StyleSheetType;
 
-export const withTheme = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>,
-                                                                       createStyles?: CreateStylesFunction) => {
+export const withStyles = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>,
+                                                                        createStyles?: CreateStylesFunction) => {
 
   type ComponentProps = Props & P;
   type WrapperProps = PrivateProps<T> & ComponentProps;
@@ -33,7 +33,7 @@ export const withTheme = <T extends React.Component, P extends object>(Component
     createCustomProps = (props: ConsumerProps): Props => {
       return ({
         theme: props.theme,
-        themedStyle: createStyles ? StyleSheet.create(createStyles(props.theme)) : undefined,
+        themedStyle: createStyles ? createStyles(props.theme) : undefined,
       });
     };
 

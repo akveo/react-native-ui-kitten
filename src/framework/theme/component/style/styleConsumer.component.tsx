@@ -20,16 +20,13 @@ interface ConsumerProps {
   theme: ThemeType;
 }
 
-export interface GeneratedProps {
-  style?: StyleType;
-}
-
 export interface Props {
   variant: string;
-  generated?: GeneratedProps;
+  theme?: ThemeType;
+  themedStyle?: StyleType;
 }
 
-export const withStyle = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
+export const StyledComponent = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
 
   type ComponentProps = Props & P;
   type WrapperProps = PrivateProps<T> & ComponentProps;
@@ -40,12 +37,11 @@ export const withStyle = <T extends React.Component, P extends object>(Component
 
     createCustomProps = (props: ConsumerProps, variant: string): Props => {
       const mapping = getComponentThemeMapping(this.getComponentName(), props.mapping);
-      return ({
+      return {
         variant: variant,
-        generated: {
-          style: mapping && props.theme && createStyle(props.theme, mapping, variant),
-        },
-      });
+        theme: props.theme,
+        themedStyle: mapping && props.theme && createStyle(props.theme, mapping, variant),
+      };
     };
 
     renderWrappedComponent = (props: ConsumerProps) => {

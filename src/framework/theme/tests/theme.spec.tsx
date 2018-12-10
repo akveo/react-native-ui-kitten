@@ -10,7 +10,7 @@ import {
 } from 'react-native-testing-library';
 import {
   ThemeProvider,
-  withTheme,
+  withStyles,
   ThemeType,
 } from '../component';
 import { createStyle } from '../service';
@@ -73,7 +73,7 @@ class ActionedProvider extends React.Component<any> {
   };
 
   render() {
-    const ThemedComponent = withTheme(ThemedConsumer);
+    const ThemedComponent = withStyles(ThemedConsumer);
     return (
       <View>
         <ThemeProvider theme={this.state.theme}>
@@ -103,8 +103,8 @@ export class ThemedStyleProvider extends React.Component<any> {
   });
 
   render() {
-    const ThemedComponent1 = withTheme(ThemedStyleConsumer, this.createThemedComponent1Styles);
-    const ThemedComponent2 = withTheme(ThemedStyleConsumer, this.createThemedComponent2Styles);
+    const ThemedComponent1 = withStyles(ThemedStyleConsumer, this.createThemedComponent1Styles);
+    const ThemedComponent2 = withStyles(ThemedStyleConsumer, this.createThemedComponent2Styles);
     return (
       <ThemeProvider theme={this.props.theme1}>
         <ThemedComponent1/>
@@ -119,7 +119,7 @@ export class ThemedStyleProvider extends React.Component<any> {
 describe('@theme: theme consumer checks', () => {
 
   it('renders properly', async () => {
-    const ThemedComponent = withTheme(ThemedConsumer);
+    const ThemedComponent = withStyles(ThemedConsumer);
 
     const component = render(
       <ThemeProvider theme={{}}>
@@ -132,7 +132,7 @@ describe('@theme: theme consumer checks', () => {
   });
 
   it('receives theme prop', async () => {
-    const ThemedComponent = withTheme(ThemedConsumer);
+    const ThemedComponent = withStyles(ThemedConsumer);
 
     const component = render(
       <ThemeProvider theme={{}}>
@@ -145,7 +145,7 @@ describe('@theme: theme consumer checks', () => {
   });
 
   it('receives themedStyle prop', async () => {
-    const ThemedComponent = withTheme(ThemedConsumer, (theme: ThemeType) => {
+    const ThemedComponent = withStyles(ThemedConsumer, (theme: ThemeType) => {
       return {};
     });
 
