@@ -1,4 +1,5 @@
 import React from 'react';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 import {
   ThemeType,
   StyleType,
@@ -74,5 +75,8 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
     );
   };
 
-  return React.forwardRef<T, P>(RefForwardingFactory as any);
+  const RefForwardingComponent = React.forwardRef<T, P>(RefForwardingFactory as any);
+  hoistNonReactStatics(RefForwardingComponent, Component);
+
+  return RefForwardingComponent;
 };

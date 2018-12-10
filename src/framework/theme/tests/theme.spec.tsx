@@ -193,6 +193,15 @@ describe('@theme: theme consumer checks', () => {
     expect(themedComponent1Color).not.toEqual(themedComponent2Color);
   });
 
+  it('static methods are copied over', async () => {
+    // @ts-ignore: test-case
+    ThemedConsumer.staticMethod = function() {};
+    const ThemedComponent = withStyles(ThemedConsumer);
+
+    // @ts-ignore: test-case
+    expect(ThemedComponent.staticMethod).not.toBeUndefined();
+  });
+
 });
 
 describe('@theme: service methods checks', () => {
