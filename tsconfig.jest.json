@@ -1,6 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "jsx": "react"
+    "baseUrl": "./",
+    "jsx": "react",
+    "paths": {
+      "@rk-kit/*": ["./src/framework/*"]
+    }
   }
 }

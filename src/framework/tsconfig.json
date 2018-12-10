@@ -5,6 +5,7 @@
     "outDir": "../../dist/tsc-out",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "jsx": "react-native",

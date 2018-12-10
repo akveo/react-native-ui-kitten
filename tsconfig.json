@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "jsx": "react-native",
     "target": "es2017",

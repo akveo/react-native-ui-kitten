@@ -4,23 +4,28 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { StyledComponentProps } from '@rk-kit/theme';
 
-interface Props {
-  text: string;
+interface SampleProps {
+  text?: string;
 }
+export type Props = SampleProps & StyledComponentProps;
 
 export class Sample extends React.Component<Props, {}> {
-  static defaultProps = {
-    text: 'This is React Native UI Kitten playground.\n\n' +
-    'Create your awesome components inside ./src/framework dir ' +
-    'which will be automatically synchronized with npm package.\n\n' +
-    'Enjoy!',
+  static defaultProps: Props = {
+    text: `This is React Native UI Kitten playground.\n\n
+      Create your awesome components inside
+      ./src/framework dir
+      which will be automatically synchronized with playground.
+      Enjoy!`,
+    variant: 'default',
   };
 
   render() {
+    const { themedStyle } = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{this.props.text}</Text>
+      <View style={[styles.container, { backgroundColor: themedStyle.backgroundColor }]}>
+        <Text style={[styles.text, { color: themedStyle.textColor }]}>{this.props.text}</Text>
       </View>
     );
   }

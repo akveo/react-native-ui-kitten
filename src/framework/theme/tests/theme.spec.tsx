@@ -10,17 +10,14 @@ import {
 } from 'react-native-testing-library';
 import {
   ThemeProvider,
-  withTheme,
-  withThemedStyles,
+  withStyles,
   ThemeType,
-} from './component';
+} from '../component';
+import { createStyle } from '../service';
+import * as config from './config';
 
 const themeConsumerTestId = '@theme/consumer';
 const themeChangeTouchableTestId = '@theme/btnChangeTheme';
-
-interface Theme extends ThemeType {
-  color: string;
-}
 
 class ThemedConsumer extends React.Component<any> {
   static defaultProps = {
@@ -76,7 +73,7 @@ class ActionedProvider extends React.Component<any> {
   };
 
   render() {
-    const ThemedComponent = withTheme(ThemedConsumer);
+    const ThemedComponent = withStyles(ThemedConsumer);
     return (
       <View>
         <ThemeProvider theme={this.state.theme}>
@@ -93,21 +90,21 @@ class ActionedProvider extends React.Component<any> {
 
 export class ThemedStyleProvider extends React.Component<any> {
 
-  createThemedComponent1Styles = (theme: Theme) => ({
+  createThemedComponent1Styles = (theme: ThemeType) => ({
     container: {
       backgroundColor: theme.color,
     },
   });
 
-  createThemedComponent2Styles = (theme: Theme) => ({
+  createThemedComponent2Styles = (theme: ThemeType) => ({
     container: {
       backgroundColor: theme.color,
     },
   });
 
   render() {
-    const ThemedComponent1 = withThemedStyles(ThemedStyleConsumer, this.createThemedComponent1Styles);
-    const ThemedComponent2 = withThemedStyles(ThemedStyleConsumer, this.createThemedComponent2Styles);
+    const ThemedComponent1 = withStyles(ThemedStyleConsumer, this.createThemedComponent1Styles);
+    const ThemedComponent2 = withStyles(ThemedStyleConsumer, this.createThemedComponent2Styles);
     return (
       <ThemeProvider theme={this.props.theme1}>
         <ThemedComponent1/>
@@ -122,7 +119,7 @@ export class ThemedStyleProvider extends React.Component<any> {
 describe('@theme: theme consumer checks', () => {
 
   it('renders properly', async () => {
-    const ThemedComponent = withTheme(ThemedConsumer);
+    const ThemedComponent = withStyles(ThemedConsumer);
 
     const component = render(
       <ThemeProvider theme={{}}>
@@ -135,7 +132,7 @@ describe('@theme: theme consumer checks', () => {
   });
 
   it('receives theme prop', async () => {
-    const ThemedComponent = withTheme(ThemedConsumer);
+    const ThemedComponent = withStyles(ThemedConsumer);
 
     const component = render(
       <ThemeProvider theme={{}}>
@@ -145,6 +142,21 @@ describe('@theme: theme consumer checks', () => {
 
     const themedComponent = component.getByTestId(themeConsumerTestId);
     expect(themedComponent.props.theme).not.toBeNull();
+  });
+
+  it('receives themedStyle prop', async () => {
+    const ThemedComponent = withStyles(ThemedConsumer, (theme: ThemeType) => {
+      return {};
+    });
+
+    const component = render(
+      <ThemeProvider theme={{}}>
+        <ThemedComponent/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(themedComponent.props.themedStyle).not.toBeNull();
   });
 
   it('receives theme prop on theme change', async () => {
@@ -163,67 +175,11 @@ describe('@theme: theme consumer checks', () => {
     expect(themedComponent.props.theme.backgroundColor).toEqual(ActionedProvider.onChangeThemeColor);
   });
 
-});
-
-describe('@theme: styled theme consumer checks', () => {
-
-  it('renders properly', async () => {
-    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
-      return {};
-    });
-
-    const component = render(
-      <ThemeProvider theme={{}}>
-        <ThemedComponent testID={themeConsumerTestId}/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
-    expect(themedComponent).not.toBeNull();
-  });
-
-  it('receives theme prop', async () => {
-    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
-      return {};
-    });
-
-    const component = render(
-      <ThemeProvider theme={{}}>
-        <ThemedComponent/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
-    expect(themedComponent.props.theme).not.toBeNull();
-  });
-
-  it('receives themedStyle prop', async () => {
-    const ThemedComponent = withThemedStyles(ThemedConsumer, (theme: ThemeType) => {
-      return {};
-    });
-
-    const component = render(
-      <ThemeProvider theme={{}}>
-        <ThemedComponent/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
-    expect(themedComponent.props.themedStyle).not.toBeNull();
-  });
-
   it('child theme provider overrides parent theme', async () => {
-    const theme1: Theme = {
-      color: '#3F51B5',
-    };
-    const theme2: Theme = {
-      color: '#009688',
-    };
-
     const component = render(
       <ThemedStyleProvider
-        theme1={theme1}
-        theme2={theme2}
+        theme1={{ color: '#3F51B5' }}
+        theme2={{ color: '#009688' }}
       />,
     );
 
@@ -238,3 +194,44 @@ describe('@theme: styled theme consumer checks', () => {
   });
 
 });
+
+describe('@theme: service methods checks', () => {
+
+  it('default variant styled properly', async () => {
+    const style = createStyle(config.theme, config.themeMappings.test);
+
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
+    expect(style.backgroundColor).toEqual(config.values.backgroundDefault);
+  });
+
+  it('single non-default variant styled properly (string type)', async () => {
+    const style = createStyle(config.theme, config.themeMappings.test, 'dark');
+
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textDefault);
+  });
+
+  it('list of non-default variants styled created properly (string type)', async () => {
+    const style = createStyle(config.theme, config.themeMappings.test, 'dark success');
+
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textSuccess);
+  });
+
+  it('single non-default variant styled properly (string[] type)', async () => {
+    const style = createStyle(config.theme, config.themeMappings.test, ['dark']);
+
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textDefault);
+  });
+
+  it('array of non-default variants styled created properly (string[] type)', async () => {
+    const style = createStyle(config.theme, config.themeMappings.test, ['dark', 'success']);
+
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textSuccess);
+  });
+
+});
+

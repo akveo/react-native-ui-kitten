@@ -1,4 +1,6 @@
 const { defaults: tsJestConfig } = require('ts-jest/presets');
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const jestConfig = require('./tsconfig.jest');
 
 module.exports = {
   ...tsJestConfig,
@@ -14,6 +16,9 @@ module.exports = {
     },
   },
   cacheDirectory: './dist/jest',
+  moduleNameMapper: pathsToModuleNameMapper(jestConfig.compilerOptions.paths, {
+    prefix: '<rootDir>/',
+  }),
   modulePathIgnorePatterns: [
     '<rootDir>/src/playground/'
   ],
