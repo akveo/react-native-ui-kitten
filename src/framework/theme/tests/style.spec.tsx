@@ -1,10 +1,68 @@
 import React from 'react';
-import { View } from 'react-native';
-import { render } from 'react-native-testing-library';
-import { StyledComponentProps, StyleProvider, StyledComponent } from '@rk-kit/theme';
+import {
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  render,
+  fireEvent,
+  waitForElement,
+} from 'react-native-testing-library';
+import {
+  StyleProvider,
+  StyledComponent,
+  StyleProviderProps,
+  StyledComponentProps,
+  ThemeMappingType,
+  ThemeType,
+} from '../component';
+
 import * as config from './config';
 
 const styleConsumerTestId = '@style/consumer';
+const styleTouchableTestId = '@style/touchable';
+
+interface ComplexStyleProviderProps {
+  changedMappings: [ThemeMappingType];
+  changedTheme: ThemeType;
+}
+
+class ComplexStyleProvider extends React.Component<ComplexStyleProviderProps & StyleProviderProps> {
+
+  state = {
+    mappings: [],
+    theme: {},
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      mappings: this.props.mapping,
+      theme: this.props.theme,
+    };
+  }
+
+  onTouchablePress = () => {
+    this.setState({
+      mappings: this.props.changedMappings,
+      theme: this.props.changedTheme,
+    });
+  };
+
+  render() {
+    return (
+      <StyleProvider
+        mapping={this.state.mappings}
+        theme={this.state.theme}>
+        <TouchableOpacity
+          testID={styleTouchableTestId}
+          onPress={this.onTouchablePress}>
+          {this.props.children}
+        </TouchableOpacity>
+      </StyleProvider>
+    );
+  }
+}
 
 type TestComponentProps = any;
 
@@ -68,6 +126,39 @@ describe('@style: style consumer checks', () => {
     const styledComponent = component.getByTestId(styleConsumerTestId);
     expect(styledComponent.props.themedStyle.backgroundColor).toEqual(config.values.backgroundDark);
     expect(styledComponent.props.themedStyle.textColor).toEqual(config.values.textSuccess);
+  });
+
+});
+
+describe('@style: complex hierarchy checks', async () => {
+
+  it('@style: provides correct styles on mapping/theme change', async () => {
+    const StyleConsumer = StyledComponent(Test);
+
+    const component = render(
+      <ComplexStyleProvider
+        mapping={[config.themeMappings.test]}
+        theme={config.theme}
+        changedMappings={[config.themeMappings.testInverse]}
+        changedTheme={config.themeInverse}>
+        <StyleConsumer variant='default'/>
+      </ComplexStyleProvider>,
+    );
+    const styledComponent = component.getByTestId(styleConsumerTestId);
+
+    const { themedStyle: initialStyle } = styledComponent.props;
+    expect(initialStyle.backgroundColor).toEqual(config.theme.backgroundColorTestDefault);
+
+    const touchableComponent = component.getByTestId(styleTouchableTestId);
+
+    fireEvent.press(touchableComponent);
+
+    const styledComponentChanged = await waitForElement(() => {
+      return component.getByTestId(styleConsumerTestId);
+    });
+
+    const { themedStyle: changedStyle } = styledComponentChanged.props;
+    expect(changedStyle.backgroundColor).toEqual(config.themeInverse.backgroundColorTestDefault);
   });
 
 });
