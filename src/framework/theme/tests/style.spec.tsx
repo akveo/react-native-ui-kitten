@@ -128,6 +128,15 @@ describe('@style: style consumer checks', () => {
     expect(styledComponent.props.themedStyle.textColor).toEqual(config.values.textSuccess);
   });
 
+  it('static methods are copied over', async () => {
+    // @ts-ignore: test-case
+    Test.staticMethod = function() {};
+    const StyleConsumer = StyledComponent(Test);
+
+    // @ts-ignore: test-case
+    expect(StyleConsumer.staticMethod).not.toBeUndefined();
+  });
+
 });
 
 describe('@style: complex hierarchy checks', async () => {

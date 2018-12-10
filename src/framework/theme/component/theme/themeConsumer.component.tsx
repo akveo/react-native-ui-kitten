@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 import ThemeContext from './themeContext';
 import {
   ThemeType,
@@ -65,5 +65,8 @@ export const withStyles = <T extends React.Component, P extends object>(Componen
     );
   };
 
-  return React.forwardRef<T, P>(RefForwardingFactory as any);
+  const RefForwardingComponent = React.forwardRef<T, P>(RefForwardingFactory as any);
+  hoistNonReactStatics(RefForwardingComponent, Component);
+
+  return RefForwardingComponent;
 };
