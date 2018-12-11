@@ -40,7 +40,6 @@ class Home extends React.Component<Props> {
   );
 
   render() {
-    console.warn(`props: ${JSON.stringify(this.props, null, 2)}`);
     return (
       <FlatList
         keyExtractor={this.extractItemKey}

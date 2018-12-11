@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
+import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
 } from '@rk-kit/theme';
-import { Sample as SampleComponent } from '@rk-kit/ui';
-import { NavigationScreenProps } from 'react-navigation';
+import { Sample as SampleComponent } from '../component';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -19,7 +19,7 @@ class Sample extends React.Component<Props> {
   render() {
     return (
       <View style={this.props.themedStyle.container}>
-        <SampleComponent variant='default'/>
+        <SampleComponent variant='dark success'/>
       </View>
     );
   }
@@ -28,5 +28,7 @@ class Sample extends React.Component<Props> {
 export const SampleScreen = withStyles(Sample, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
