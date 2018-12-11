@@ -45,5 +45,45 @@
         }
       }
     }
+  },
+  "Radio": {
+    "parameters": [
+      "size",
+      "borderWidth",
+      "tintColor",
+      "borderColor"
+    ],
+    "variants": {
+      "default": {
+        "size": "size-radio-medium",
+        "borderWidth": "border-width-radio-medium",
+        "tintColor": "tint-color-radio-default",
+        "borderColor": "border-color-radio-default"
+      },
+      "small": {
+        "size": "size-radio-small",
+        "borderWidth": "border-width-radio-small"
+      },
+      "large": {
+        "size": "size-radio-large",
+        "borderWidth": "border-width-radio-large"
+      },
+      "success": {
+        "tintColor": "tint-color-radio-success",
+        "borderColor": "border-color-radio-success"
+      },
+      "info": {
+        "tintColor": "tint-color-radio-info",
+        "borderColor": "border-color-radio-info"
+      },
+      "warning": {
+        "tintColor": "tint-color-radio-warning",
+        "borderColor": "border-color-radio-warning"
+      },
+      "danger": {
+        "tintColor": "tint-color-radio-danger",
+        "borderColor": "border-color-radio-danger"
+      }
+    }
   }
 }
