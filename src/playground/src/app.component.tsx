@@ -4,11 +4,12 @@ import {
   ThemeMappingType,
   ThemeType,
 } from '@rk-kit/theme';
-import { Sample } from '@rk-kit/ui';
 import {
   Mappings,
   Theme,
 } from './theme-token';
+import { withNavigation } from './navigation';
+import * as Screens from './ui/screen';
 
 interface State {
   mappings: ThemeMappingType[];
@@ -16,8 +17,6 @@ interface State {
 }
 
 export default class App extends React.Component<any, State> {
-
-  sampleRef = undefined;
 
   constructor(props) {
     super(props);
@@ -27,17 +26,12 @@ export default class App extends React.Component<any, State> {
     };
   }
 
-  setSampleRef = (ref) => {
-    this.sampleRef = ref;
-  };
-
   render() {
+    const { HomeScreen: RootScreen, ...nestedScreens } = Screens;
+    const Router = withNavigation(RootScreen, nestedScreens);
     return (
       <StyleProvider theme={this.state.theme} mapping={this.state.mappings}>
-        <Sample
-          ref={this.setSampleRef}
-          variant='dark success'
-        />
+        <Router/>
       </StyleProvider>
     );
   }

@@ -76,6 +76,8 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
   };
 
   const RefForwardingComponent = React.forwardRef<T, P>(RefForwardingFactory as any);
+
+  RefForwardingComponent.displayName = Component.displayName || Component.name;
   hoistNonReactStatics(RefForwardingComponent, Component);
 
   return RefForwardingComponent;

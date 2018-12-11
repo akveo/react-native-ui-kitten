@@ -24,7 +24,7 @@ export class Sample extends React.Component<Props, {}> {
   render() {
     const { themedStyle } = this.props;
     return (
-      <View style={[styles.container, { backgroundColor: themedStyle.backgroundColor }]}>
+      <View style={{ backgroundColor: themedStyle.backgroundColor }}>
         <Text style={[styles.text, { color: themedStyle.textColor }]}>{this.props.text}</Text>
       </View>
     );
@@ -32,12 +32,6 @@ export class Sample extends React.Component<Props, {}> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
   text: {
     textAlign: 'center',
     fontSize: 16,
