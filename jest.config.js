@@ -15,7 +15,8 @@ module.exports = {
       tsConfig: './tsconfig.jest.json',
     },
   },
-  cacheDirectory: './dist/jest',
+  cacheDirectory: './dist/jest/cache',
+  coverageDirectory: './dist/jest/coverage',
   moduleNameMapper: pathsToModuleNameMapper(jestConfig.compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),

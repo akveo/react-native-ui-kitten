@@ -1,6 +1,6 @@
 <img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png"/>
 
-# react-native-ui-kitten [![Build Status](https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=next)](https://travis-ci.com/akveo/react-native-ui-kitten) [![Dependency Status](https://david-dm.org/akveo/react-native-ui-kitten/status.svg)](https://david-dm.org/akveo/react-native-ui-kitten) [![npm](https://img.shields.io/npm/dt/react-native-ui-kitten.svg)](https://www.npmjs.com/package/react-native-ui-kitten) [![npm](https://img.shields.io/npm/l/react-native-ui-kitten.svg)]()
+# react-native-ui-kitten [![Build Status][badge-travis]][link-travis] [![Coverage Status][badge-coveralls]][link-coveralls] [![Dependency Status][badge-david]][link-david] [![npm][badge-downloads]][link-downloads] [![npm][badge-license]]()
 
 This branch contains sources of something really awesome.
 We do what we did before but in a new way.
@@ -29,3 +29,14 @@ License
 
 Enjoy!
 We're always happy to receive your feedback.
+
+[badge-travis]: https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=next
+[badge-coveralls]: https://coveralls.io/repos/github/akveo/react-native-ui-kitten/badge.svg?branch=next
+[badge-david]: https://david-dm.org/akveo/react-native-ui-kitten/status.svg
+[badge-downloads]: https://img.shields.io/npm/dt/react-native-ui-kitten.svg
+[badge-license]: https://img.shields.io/npm/l/react-native-ui-kitten.svg
+
+[link-travis]: https://travis-ci.com/akveo/react-native-ui-kitten
+[link-coveralls]: https://coveralls.io/github/akveo/react-native-ui-kitten?branch=next
+[link-david]: https://david-dm.org/akveo/react-native-ui-kitten
+[link-downloads]: https://www.npmjs.com/package/react-native-ui-kitten
