@@ -31,12 +31,12 @@ Enjoy!
 We're always happy to receive your feedback.
 
 [badge-travis]: https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=next
-[badge-coveralls]: https://coveralls.io/repos/github/artyorsh/react-native-ui-kitten/badge.svg?branch=next
+[badge-coveralls]: https://coveralls.io/repos/github/akveo/react-native-ui-kitten/badge.svg?branch=next
 [badge-david]: https://david-dm.org/akveo/react-native-ui-kitten/status.svg
 [badge-downloads]: https://img.shields.io/npm/dt/react-native-ui-kitten.svg
 [badge-license]: https://img.shields.io/npm/l/react-native-ui-kitten.svg
 
 [link-travis]: https://travis-ci.com/akveo/react-native-ui-kitten
-[link-coveralls]: https://coveralls.io/github/artyorsh/react-native-ui-kitten?branch=next
+[link-coveralls]: https://coveralls.io/github/akveo/react-native-ui-kitten?branch=next
 [link-david]: https://david-dm.org/akveo/react-native-ui-kitten
 [link-downloads]: https://www.npmjs.com/package/react-native-ui-kitten
