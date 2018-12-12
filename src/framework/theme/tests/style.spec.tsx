@@ -1,3 +1,4 @@
+import * as config from './config';
 import React from 'react';
 import {
   View,
@@ -13,17 +14,15 @@ import {
   StyledComponent,
   StyleProviderProps,
   StyledComponentProps,
-  ThemeMappingType,
+  ThemeMappingConfigType,
   ThemeType,
 } from '../component';
-
-import * as config from './config';
 
 const styleConsumerTestId = '@style/consumer';
 const styleTouchableTestId = '@style/touchable';
 
 interface ComplexStyleProviderProps {
-  changedMappings: [ThemeMappingType];
+  changedMappings: ThemeMappingConfigType;
   changedTheme: ThemeType;
 }
 
@@ -80,13 +79,11 @@ class Test extends React.Component<TestComponentProps & StyledComponentProps> {
 
 describe('@style: style consumer checks', () => {
 
-  const mappings = [config.themeMappings.test, config.themeMappings.mock];
-
   it('receives custom props', async () => {
     const StyleConsumer = StyledComponent(Test);
 
     const component = render(
-      <StyleProvider mapping={mappings} theme={config.theme}>
+      <StyleProvider mapping={config.mappings} theme={config.theme}>
         <StyleConsumer variant='default'/>
       </StyleProvider>,
     );
@@ -96,7 +93,7 @@ describe('@style: style consumer checks', () => {
     expect(styledComponent.props.variant).not.toBeUndefined();
     expect(styledComponent.props.theme).not.toBeNull();
     expect(styledComponent.props.theme).not.toBeUndefined();
-    expect(styledComponent.props.themedStyle).not.toBeUndefined();
+    expect(styledComponent.props.themedStyle).not.toBeNull();
     expect(styledComponent.props.themedStyle).not.toBeUndefined();
   });
 
@@ -104,7 +101,7 @@ describe('@style: style consumer checks', () => {
     const StyleConsumer = StyledComponent(Test);
 
     const component = render(
-      <StyleProvider mapping={mappings} theme={config.theme}>
+      <StyleProvider mapping={config.mappings} theme={config.theme}>
         <StyleConsumer variant='default'/>
       </StyleProvider>,
     );
@@ -118,7 +115,7 @@ describe('@style: style consumer checks', () => {
     const StyleConsumer = StyledComponent(Test);
 
     const component = render(
-      <StyleProvider mapping={mappings} theme={config.theme}>
+      <StyleProvider mapping={config.mappings} theme={config.theme}>
         <StyleConsumer variant='dark success'/>
       </StyleProvider>,
     );
@@ -146,9 +143,9 @@ describe('@style: complex hierarchy checks', async () => {
 
     const component = render(
       <ComplexStyleProvider
-        mapping={[config.themeMappings.test]}
+        mapping={config.mappings}
         theme={config.theme}
-        changedMappings={[config.themeMappings.testInverse]}
+        changedMappings={config.mappings}
         changedTheme={config.themeInverse}>
         <StyleConsumer variant='default'/>
       </ComplexStyleProvider>,
