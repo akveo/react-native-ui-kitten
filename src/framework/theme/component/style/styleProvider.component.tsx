@@ -5,17 +5,17 @@ import {
 } from '../theme';
 import {
   ThemeMappingProvider,
-  ThemeMappingType,
+  ThemeMappingConfigType,
 } from '../mapping';
 
 export interface Props {
-  mapping: ThemeMappingType[];
+  mapping: ThemeMappingConfigType;
   theme: ThemeType;
   children: JSX.Element | React.ReactNode;
 }
 
 interface State {
-  mapping: ThemeMappingType[];
+  mapping: ThemeMappingConfigType;
   theme: ThemeType;
 }
 

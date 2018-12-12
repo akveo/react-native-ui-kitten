@@ -10,10 +10,8 @@ export {
   ThemedComponentProps,
 
   ThemeType,
+  ThemeMappingConfigType,
   ThemeMappingType,
-  ParameterType,
-  VariantType,
-  MappingType,
   TokenType,
   ThemedStyleType,
   StyleSheetType,

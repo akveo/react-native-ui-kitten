@@ -1,7 +1,5 @@
 import {
   ThemeMappingType,
-  VariantType,
-  MappingType,
   TokenType,
 } from '../component';
 
@@ -11,10 +9,10 @@ export const VARIANT_DEFAULT = 'default';
  * @param component: string - component name. Using displayName is recommended
  * @param mapping: ThemeMappingType[] - theme mapping configuration array
  *
- * @return ThemeMappingType if presents in theme mapping, undefined otherwise
+ * @return ThemeMappingType if presents in mapping, undefined otherwise
  */
-export function getComponentThemeMapping(component: string, mapping: ThemeMappingType[]): ThemeMappingType | undefined {
-  return mapping.find(value => value.name === component);
+export function getComponentThemeMapping(component: string, mapping: any): ThemeMappingType | undefined {
+  return mapping[component];
 }
 
 /**
@@ -34,25 +32,13 @@ export function getThemeMappingToken(token: string, tokens: TokenType): TokenTyp
 }
 
 /**
- * @param name: string - variant name. Default is 'default'
- * @param mapping: ThemeMappingType - component mapping configuration
- *
- * @return VariantType if presents in mapping, undefined otherwise
- */
-export function getComponentVariant(name: string, mapping: ThemeMappingType): VariantType | undefined {
-  return mapping.variants.find(value => value.name === name);
-}
-
-/**
- * @param mapping: ThemeMappingType - component mapping configuration
  * @param variant: string - variant name. Default is 'default'
+ * @param mapping: ThemeMappingType - component mapping configuration
  *
- * @return MappingType[] if presents in variant, undefined otherwise
+ * @return variant if presents in mapping, undefined otherwise
  */
-export function getComponentMappings(mapping: ThemeMappingType,
-                                     variant: string = VARIANT_DEFAULT): MappingType[] | undefined {
-  const componentVariant = getComponentVariant(variant, mapping);
-  return componentVariant && componentVariant.mapping;
+export function getComponentVariant(variant: string, mapping: ThemeMappingType): any | undefined {
+  return mapping.variants[variant];
 }
 
 /**
@@ -66,12 +52,12 @@ export function getVariantTokens(tokens: TokenType,
                                  mapping: ThemeMappingType,
                                  variant: string = VARIANT_DEFAULT): TokenType | undefined {
 
-  const assignParameter = (origin: TokenType, prop: MappingType) => {
+  const componentVariant = getComponentVariant(variant, mapping);
+  const assignParameter = (origin: TokenType, parameter: any) => {
     return {
       ...origin,
-      ...getThemeMappingToken(prop.token, tokens),
+      ...getThemeMappingToken(componentVariant[parameter], tokens),
     };
   };
-  const componentMappings = getComponentMappings(mapping, variant);
-  return componentMappings.reduce(assignParameter, {});
+  return Object.keys(componentVariant).reduce(assignParameter, {});
 }

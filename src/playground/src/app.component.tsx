@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   StyleProvider,
-  ThemeMappingType,
+  ThemeMappingConfigType,
   ThemeType,
 } from '@rk-kit/theme';
 import {
@@ -12,7 +12,7 @@ import { withNavigation } from './navigation';
 import * as Screens from './ui/screen';
 
 interface State {
-  mappings: ThemeMappingType[];
+  mappings: ThemeMappingConfigType;
   theme: ThemeType;
 }
 
@@ -27,7 +27,7 @@ export default class App extends React.Component<any, State> {
   }
 
   render() {
-    const { HomeScreen: RootScreen, ...nestedScreens } = Screens;
+    const { SampleScreen: RootScreen, ...nestedScreens } = Screens;
     const Router = withNavigation(RootScreen, nestedScreens);
     return (
       <StyleProvider theme={this.state.theme} mapping={this.state.mappings}>

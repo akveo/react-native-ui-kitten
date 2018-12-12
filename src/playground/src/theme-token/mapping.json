@@ -1,52 +1,21 @@
 {
-  "config": [
-    {
-      "name": "Sample",
-      "parameters": [
-        {
-          "name": "backgroundColor"
-        },
-        {
-          "name": "textColor"
-        }
-      ],
-      "variants": [
-        {
-          "name": "default",
-          "mapping": [
-            {
-              "parameter": "backgroundColor",
-              "token": "background-color-sample-default"
-            },
-            {
-              "parameter": "textColor",
-              "token": "text-color-sample-default"
-            }
-          ]
-        },
-        {
-          "name": "dark",
-          "mapping": [
-            {
-              "parameter": "backgroundColor",
-              "token": "background-color-sample-dark"
-            },
-            {
-              "parameter": "textColor",
-              "token": "text-color-sample-dark"
-            }
-          ]
-        },
-        {
-          "name": "success",
-          "mapping": [
-            {
-              "parameter": "textColor",
-              "token": "text-color-sample-success"
-            }
-          ]
-        }
-      ]
+  "Sample": {
+    "parameters": [
+      "backgroundColor",
+      "textColor"
+    ],
+    "variants": {
+      "default": {
+        "backgroundColor": "background-color-sample-default",
+        "textColor": "text-color-sample-default"
+      },
+      "dark": {
+        "backgroundColor": "background-color-sample-dark",
+        "textColor": "text-color-sample-dark"
+      },
+      "success": {
+        "textColor": "text-color-sample-success"
+      }
     }
-  ]
+  }
 }

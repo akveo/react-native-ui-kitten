@@ -1,10 +1,9 @@
 import {
-  getComponentMappings,
+  getComponentVariant,
   VARIANT_DEFAULT,
 } from './mappingUtil.service';
 import {
   ThemeMappingType,
-  MappingType,
   ThemeType,
   StyleType,
 } from '../component';
@@ -48,14 +47,10 @@ export function getThemeValue(name: string, theme: ThemeType): any | undefined {
 }
 
 function createStyleFromVariant(theme: ThemeType, mapping: ThemeMappingType, variant: string): StyleType {
-  const variantMapping = getComponentMappings(mapping, variant);
-  return createStyleFromMapping(variantMapping, theme);
-}
-
-function createStyleFromMapping(mapping: MappingType[], theme: ThemeType): StyleType {
-  const assignParameter = (style: any, prop: MappingType) => {
-    style[prop.parameter] = getThemeValue(prop.token, theme);
+  const componentVariant = getComponentVariant(variant, mapping);
+  const assignParameter = (style: any, parameter: any) => {
+    style[parameter] = getThemeValue(componentVariant[parameter], theme);
     return style;
   };
-  return mapping.reduce(assignParameter, {});
+  return Object.keys(componentVariant).reduce(assignParameter, {});
 }
