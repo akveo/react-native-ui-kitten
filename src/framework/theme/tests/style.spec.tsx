@@ -153,7 +153,7 @@ describe('@style: complex hierarchy checks', async () => {
     const styledComponent = component.getByTestId(styleConsumerTestId);
 
     const { themedStyle: initialStyle } = styledComponent.props;
-    expect(initialStyle.backgroundColor).toEqual(config.theme['background-color-test-default']);
+    expect(initialStyle.backgroundColor).toEqual(config.theme.backgroundColorTestDefault);
 
     const touchableComponent = component.getByTestId(styleTouchableTestId);
 
@@ -164,7 +164,7 @@ describe('@style: complex hierarchy checks', async () => {
     });
 
     const { themedStyle: changedStyle } = styledComponentChanged.props;
-    expect(changedStyle.backgroundColor).toEqual(config.themeInverse['background-color-test-default']);
+    expect(changedStyle.backgroundColor).toEqual(config.themeInverse.backgroundColorTestDefault);
   });
 
 });

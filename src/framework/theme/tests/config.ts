@@ -16,32 +16,32 @@ export const mappings = {
     ],
     variants: {
       default: {
-        backgroundColor: 'background-color-test-default',
-        textColor: 'text-color-test-default',
+        backgroundColor: 'backgroundColorTestDefault',
+        textColor: 'textColorTestDefault',
       },
       dark: {
-        backgroundColor: 'background-color-test-dark',
-        textColor: 'text-color-test-dark',
+        backgroundColor: 'backgroundColorTestDark',
+        textColor: 'textColorTestDark',
       },
       success: {
-        textColor: 'text-color-test-success',
+        textColor: 'textColorTestSuccess',
       },
     },
   },
 };
 
 export const theme: ThemeType = {
-  ['background-color-test-default']: values.backgroundDefault,
-  ['background-color-test-dark']: values.backgroundDark,
-  ['text-color-test-default']: values.textDefault,
-  ['text-color-test-dark']: values.textDark,
-  ['text-color-test-success']: values.textSuccess,
+  backgroundColorTestDefault: values.backgroundDefault,
+  backgroundColorTestDark: values.backgroundDark,
+  textColorTestDefault: values.textDefault,
+  textColorTestDark: values.textDark,
+  textColorTestSuccess: values.textSuccess,
 };
 
 export const themeInverse: ThemeType = {
-  ['background-color-test-default']: values.backgroundDark,
-  ['background-color-test-dark']: values.backgroundDefault,
-  ['text-color-test-default']: values.textDark,
-  ['text-color-test-dark']: values.textDefault,
-  ['text-color-test-success']: values.textDefault,
+  backgroundColorTestDefault: values.backgroundDark,
+  backgroundColorTestDark: values.backgroundDefault,
+  textColorTestDefault: values.textDark,
+  textColorTestDark: values.textDefault,
+  textColorTestSuccess: values.textDefault,
 };
