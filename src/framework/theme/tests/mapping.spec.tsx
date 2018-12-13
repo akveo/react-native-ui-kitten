@@ -4,7 +4,6 @@ import {
   getComponentVariant,
   getParameterValue,
   getThemeMappingToken,
-  getVariantTokens,
 } from '../service';
 
 describe('@mapping: service methods checks', () => {
@@ -21,21 +20,56 @@ describe('@mapping: service methods checks', () => {
 
   it('finds variant properly', async () => {
     const componentVariant = getComponentVariant('default', config.mappings.Test);
+    const componentStateVariant = getComponentVariant('default', config.mappings.Test, 'active');
     const undefinedVariant = getComponentVariant('undefined', config.mappings.Test);
+    const undefinedStateVariant = getComponentVariant('default', config.mappings.Test, 'undefined');
 
     expect(componentVariant).not.toBeNull();
     expect(componentVariant).not.toBeUndefined();
-    expect(JSON.stringify(componentVariant)).toEqual(JSON.stringify(config.mappings.Test.variants.default));
+    expect(componentStateVariant).not.toBeNull();
+    expect(componentStateVariant).not.toBeUndefined();
     expect(undefinedVariant).toBeUndefined();
+    expect(undefinedStateVariant).toBeUndefined();
+
+    const { state: variantState, ...variant } = config.mappings.Test.variants.default;
+    expect(JSON.stringify(componentVariant)).toEqual(JSON.stringify(variant));
+    expect(JSON.stringify(componentStateVariant)).toEqual(JSON.stringify(variantState.active));
   });
 
   it('finds parameter value properly', async () => {
-    const parameterValue = getParameterValue('backgroundColor', 'default', config.mappings.Test, config.theme);
-    const undefinedValue = getParameterValue('undefined', 'default', config.mappings.Test, config.theme);
+    const parameterValue = getParameterValue(
+      'backgroundColor',
+      'default',
+      config.mappings.Test,
+      config.theme,
+    );
+    const stateParameterValue = getParameterValue(
+      'backgroundColor',
+      'default',
+      config.mappings.Test,
+      config.theme,
+      'active',
+    );
+    const undefinedValue = getParameterValue(
+      'undefined',
+      'default',
+      config.mappings.Test,
+      config.theme,
+    );
+    const undefinedStateValue = getParameterValue(
+      'backgroundColor',
+      'default',
+      config.mappings.Test,
+      config.theme,
+      'undefined',
+    );
 
     expect(parameterValue).not.toBeNull();
     expect(parameterValue).not.toBeUndefined();
+    expect(stateParameterValue).not.toBeNull();
+    expect(stateParameterValue).not.toBeUndefined();
     expect(undefinedValue).toBeUndefined();
+    expect(undefinedStateValue).toBeUndefined();
   });
 
   it('finds token properly', async () => {
@@ -46,17 +80,6 @@ describe('@mapping: service methods checks', () => {
     expect(mappingToken).not.toBeUndefined();
     expect(mappingToken).not.toEqual(config.values.backgroundDefault);
     expect(undefinedToken).toBeUndefined();
-  });
-
-  it('finds default mapping tokens properly', async () => {
-    const variantTokens = getVariantTokens(config.theme, config.mappings.Test);
-    const undefinedTokens = getVariantTokens(config.theme, config.mappings.Test, 'undefined');
-
-    expect(variantTokens.backgroundColorTestDefault).not.toBeNull();
-    expect(variantTokens.backgroundColorTestDefault).not.toBeUndefined();
-    expect(variantTokens.textColorTestDefault).not.toBeNull();
-    expect(variantTokens.textColorTestDefault).not.toBeUndefined();
-    expect(undefinedTokens).toBeUndefined();
   });
 
 });

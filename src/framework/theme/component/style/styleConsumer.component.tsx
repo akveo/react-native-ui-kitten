@@ -25,6 +25,7 @@ export interface Props {
   variant: string;
   theme?: ThemeType;
   themedStyle?: StyleType;
+  requestStateStyle?: (state?: string) => StyleType;
 }
 
 export const StyledComponent = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
@@ -36,12 +37,21 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
 
     getComponentName = (): string => Component.displayName || Component.name;
 
+    createStyle = (mapping: ThemeMappingType,
+                   theme: ThemeType,
+                   variant: string,
+                   state?: string): StyleType | undefined => {
+
+      return createStyle(theme, mapping, variant, state);
+    };
+
     createCustomProps = (props: ConsumerProps, variant: string): Props => {
       const mapping = getComponentThemeMapping(this.getComponentName(), props.mapping);
       return {
         variant: variant,
         theme: props.theme,
-        themedStyle: mapping && props.theme && createStyle(props.theme, mapping, variant),
+        themedStyle: this.createStyle(mapping, props.theme, variant),
+        requestStateStyle: (state: string) => this.createStyle(mapping, props.theme, variant, state),
       };
     };
 

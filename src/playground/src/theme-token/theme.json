@@ -1,7 +1,8 @@
 {
-  "background-color-sample-default": "#c0c0c0",
+  "background-color-sample-default": "#ffffff",
   "background-color-sample-dark": "#000000",
-  "text-color-sample-default": "#ffffff",
+  "text-color-sample-default": "#000000",
   "text-color-sample-dark": "#ffffff",
-  "text-color-sample-success": "#00E676"
+  "text-color-sample-success": "#4CAF50",
+  "text-color-sample-success-active": "#81C784"
 }

@@ -1,17 +1,19 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
-import { StyledComponentProps } from '@rk-kit/theme';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { StyledComponentProps, StyleType } from '@rk-kit/theme';
 
 interface SampleProps {
   text?: string;
 }
+
 export type Props = SampleProps & StyledComponentProps;
 
-export class Sample extends React.Component<Props, {}> {
+interface State {
+  active: boolean;
+  description: string;
+}
+
+export class Sample extends React.Component<Props, State> {
   static defaultProps: Props = {
     text: `This is React Native UI Kitten playground.\n\n
       Create your awesome components inside
@@ -21,17 +23,53 @@ export class Sample extends React.Component<Props, {}> {
     variant: 'default',
   };
 
+  state: State = {
+    active: false,
+    description: undefined,
+  };
+
+  onPressIn = () => {
+    this.setState({
+      active: true,
+      description: 'active',
+    });
+  };
+
+  onPressOut = () => {
+    this.setState({
+      active: false,
+      description: undefined,
+    });
+  };
+
+  getComponentStyle = (): StyleType => {
+    const style = this.state.description === undefined ? this.props.themedStyle : this.getStateStyle();
+    return ({
+      container: {
+        backgroundColor: style.backgroundColor,
+      },
+      text: {
+        color: style.textColor,
+      },
+    });
+  };
+
+  getStateStyle = (): StyleType => this.props.requestStateStyle(this.state.description);
+
   render() {
-    const { themedStyle } = this.props;
+    const componentStyle = this.getComponentStyle();
     return (
-      <View style={{ backgroundColor: themedStyle.backgroundColor }}>
-        <Text style={[styles.text, { color: themedStyle.textColor }]}>{this.props.text}</Text>
-      </View>
+      <TouchableWithoutFeedback onPressIn={this.onPressIn} onPressOut={this.onPressOut}>
+        <View style={[styles.container, componentStyle.container]}>
+          <Text style={[styles.text, componentStyle.text]}>{this.props.text}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {},
   text: {
     textAlign: 'center',
     fontSize: 16,

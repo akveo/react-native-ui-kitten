@@ -4,17 +4,37 @@
       "backgroundColor",
       "textColor"
     ],
+    "states": [
+      "active",
+      "disabled"
+    ],
     "variants": {
       "default": {
         "backgroundColor": "background-color-sample-default",
-        "textColor": "text-color-sample-default"
+        "textColor": "text-color-sample-default",
+        "state": {
+          "active": {
+            "backgroundColor": "background-color-sample-dark",
+            "textColor": "text-color-sample-dark"
+          }
+        }
       },
       "dark": {
         "backgroundColor": "background-color-sample-dark",
-        "textColor": "text-color-sample-dark"
+        "textColor": "text-color-sample-dark",
+        "state": {
+          "active": {
+            "backgroundColor": "background-color-sample-default"
+          }
+        }
       },
       "success": {
-        "textColor": "text-color-sample-success"
+        "textColor": "text-color-sample-success",
+        "state": {
+          "active": {
+            "textColor": "text-color-sample-success-active"
+          }
+        }
       }
     }
   }
