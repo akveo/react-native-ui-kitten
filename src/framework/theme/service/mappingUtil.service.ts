@@ -49,7 +49,7 @@ export function getComponentVariant(variant: string,
   }
   const { state: variantStates, ...variantParameters } = componentVariant;
 
-  return state === undefined ? variantParameters : variantStates[state];
+  return state === undefined ? variantParameters : variantStates && variantStates[state];
 }
 
 /**

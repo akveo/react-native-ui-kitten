@@ -16,6 +16,9 @@
           "active": {
             "backgroundColor": "background-color-sample-dark",
             "textColor": "text-color-sample-dark"
+          },
+          "disabled": {
+            "textColor": "text-color-sample-default-disabled"
           }
         }
       },
@@ -24,7 +27,8 @@
         "textColor": "text-color-sample-dark",
         "state": {
           "active": {
-            "backgroundColor": "background-color-sample-default"
+            "backgroundColor": "background-color-sample-default",
+            "textColor": "text-color-sample-default"
           }
         }
       },
@@ -32,7 +36,11 @@
         "textColor": "text-color-sample-success",
         "state": {
           "active": {
+            "backgroundColor": "background-color-sample-default",
             "textColor": "text-color-sample-success-active"
+          },
+          "disabled": {
+            "backgroundColor": "background-color-sample-success-disabled"
           }
         }
       }

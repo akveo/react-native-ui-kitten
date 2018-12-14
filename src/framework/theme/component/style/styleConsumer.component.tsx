@@ -22,10 +22,10 @@ interface ConsumerProps {
 }
 
 export interface Props {
-  variant: string;
+  variant?: string;
   theme?: ThemeType;
   themedStyle?: StyleType;
-  requestStateStyle?: (state?: string) => StyleType;
+  requestStateStyle?: (state: string[] | string) => StyleType;
 }
 
 export const StyledComponent = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
@@ -37,11 +37,14 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
 
     getComponentName = (): string => Component.displayName || Component.name;
 
-    createStyle = (mapping: ThemeMappingType,
-                   theme: ThemeType,
-                   variant: string,
-                   state?: string): StyleType | undefined => {
+    createStyle = (theme: ThemeType,
+                   mapping: ThemeMappingType,
+                   variant: string[] | string,
+                   state: string[] | string): StyleType => {
 
+      if (state.length === 0) {
+        console.warn('Redundant `requestStateStyle` call! Use `this.props.themedStyle` instead!');
+      }
       return createStyle(theme, mapping, variant, state);
     };
 
@@ -50,8 +53,8 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
       return {
         variant: variant,
         theme: props.theme,
-        themedStyle: this.createStyle(mapping, props.theme, variant),
-        requestStateStyle: (state: string) => this.createStyle(mapping, props.theme, variant, state),
+        themedStyle: createStyle(props.theme, mapping, variant),
+        requestStateStyle: state => this.createStyle(props.theme, mapping, variant, state),
       };
     };
 

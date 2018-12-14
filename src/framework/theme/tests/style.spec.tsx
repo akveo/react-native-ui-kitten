@@ -137,7 +137,7 @@ describe('@style: style consumer checks', () => {
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);
-    const stateStyle = styledComponent.props.requestStateStyle('active');
+    const stateStyle = styledComponent.props.requestStateStyle(['active']);
     const undefinedStateStyle = styledComponent.props.requestStateStyle('undefined');
 
     expect(stateStyle).not.toBeNull();
@@ -149,6 +149,9 @@ describe('@style: style consumer checks', () => {
     expect(undefinedStateStyle).not.toBeUndefined();
     expect(undefinedStateStyle.backgroundColor).toEqual(config.values.backgroundDark);
     expect(undefinedStateStyle.textColor).toEqual(config.values.textSuccess);
+
+    styledComponent.props.requestStateStyle([]);
+    jest.spyOn(console, 'warn');
   });
 
   it('static methods are copied over', async () => {

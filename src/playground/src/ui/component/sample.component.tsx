@@ -1,49 +1,57 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { StyledComponentProps, StyleType } from '@rk-kit/theme';
+import {
+  TouchableWithoutFeedback,
+  Text,
+  View,
+  StyleSheet,
+} from 'react-native';
+import {
+  StyledComponentProps,
+  StyleType,
+} from '@rk-kit/theme';
 
 interface SampleProps {
   text?: string;
+  disabled?: boolean;
 }
 
 export type Props = SampleProps & StyledComponentProps;
 
 interface State {
   active: boolean;
-  description: string;
 }
 
 export class Sample extends React.Component<Props, State> {
   static defaultProps: Props = {
-    text: `This is React Native UI Kitten playground.\n\n
-      Create your awesome components inside
-      ./src/framework dir
-      which will be automatically synchronized with playground.
-      Enjoy!`,
-    variant: 'default',
+    text: `This is React Native UI Kitten playground`,
   };
 
   state: State = {
     active: false,
-    description: undefined,
   };
 
   onPressIn = () => {
     this.setState({
       active: true,
-      description: 'active',
     });
   };
 
   onPressOut = () => {
     this.setState({
       active: false,
-      description: undefined,
     });
   };
 
+  isStateStyle = (): boolean => this.state.active || this.props.disabled;
+
+  getStateStyle = (): StyleType => {
+    const activeDescription = this.state.active ? 'active' : undefined;
+    const disabledDescription = this.props.disabled ? 'disabled' : undefined;
+    return this.props.requestStateStyle([activeDescription, disabledDescription]);
+  };
+
   getComponentStyle = (): StyleType => {
-    const style = this.state.description === undefined ? this.props.themedStyle : this.getStateStyle();
+    const style = this.isStateStyle() ? this.getStateStyle() : this.props.themedStyle;
     return ({
       container: {
         backgroundColor: style.backgroundColor,
@@ -54,12 +62,13 @@ export class Sample extends React.Component<Props, State> {
     });
   };
 
-  getStateStyle = (): StyleType => this.props.requestStateStyle(this.state.description);
-
   render() {
     const componentStyle = this.getComponentStyle();
     return (
-      <TouchableWithoutFeedback onPressIn={this.onPressIn} onPressOut={this.onPressOut}>
+      <TouchableWithoutFeedback
+        disabled={this.props.disabled}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
         <View style={[styles.container, componentStyle.container]}>
           <Text style={[styles.text, componentStyle.text]}>{this.props.text}</Text>
         </View>
@@ -69,7 +78,9 @@ export class Sample extends React.Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    padding: 16,
+  },
   text: {
     textAlign: 'center',
     fontSize: 16,

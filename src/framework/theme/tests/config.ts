@@ -4,9 +4,11 @@ export const values = {
   backgroundDefault: '#ffffff',
   backgroundDark: '#000000',
   textDefault: '#000000',
+  textDefaultDisabled: '#9E9E9E',
   textDark: '#ffffff',
-  textSuccess: '#00E676',
+  textSuccess: '#4CAF50',
   textSuccessActive: '#81C784',
+  backgroundSuccessDisabled: '#F5F5F5',
 };
 
 export const mappings = {
@@ -17,6 +19,7 @@ export const mappings = {
     ],
     states: [
       'active',
+      'disabled',
     ],
     variants: {
       default: {
@@ -27,6 +30,9 @@ export const mappings = {
             backgroundColor: 'backgroundColorTestDark',
             textColor: 'textColorTestDark',
           },
+          disabled: {
+            textColor: 'textColorTestDefaultDisabled',
+          },
         },
       },
       dark: {
@@ -35,6 +41,7 @@ export const mappings = {
         state: {
           active: {
             backgroundColor: 'backgroundColorTestDefault',
+            textColor: 'textColorTestDefault',
           },
         },
       },
@@ -42,7 +49,11 @@ export const mappings = {
         textColor: 'textColorTestSuccess',
         state: {
           active: {
+            backgroundColor: 'backgroundColorTestDefault',
             textColor: 'textColorTestSuccessActive',
+          },
+          disabled: {
+            backgroundColor: 'backgroundColorTestSuccessDisabled',
           },
         },
       },
@@ -54,9 +65,11 @@ export const theme: ThemeType = {
   backgroundColorTestDefault: values.backgroundDefault,
   backgroundColorTestDark: values.backgroundDark,
   textColorTestDefault: values.textDefault,
+  textColorTestDefaultDisabled: values.textDefaultDisabled,
   textColorTestDark: values.textDark,
   textColorTestSuccess: values.textSuccess,
   textColorTestSuccessActive: values.textSuccessActive,
+  backgroundColorTestSuccessDisabled: values.backgroundSuccessDisabled,
 };
 
 export const themeInverse: ThemeType = {
