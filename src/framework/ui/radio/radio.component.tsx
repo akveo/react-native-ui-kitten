@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
   StyleSheet,
 } from 'react-native';
@@ -9,59 +9,90 @@ import {
   StyleType,
 } from '@rk-kit/theme';
 
+const STATE_SELECTED = 'selected';
+const STATE_ACTIVE = 'active';
+const STATE_DISABLED = 'disabled';
+
 interface RadioProps {
   onChange?: (selected: boolean) => void;
   selected?: boolean;
-  variant?: string | 'default' | 'small' | 'large' | 'success' | 'info' | 'warning' | 'danger';
+  disabled?: boolean;
+  variant?: string | 'default' | 'small' | 'large';
 }
 
 export type Props = RadioProps & StyledComponentProps;
 
-export class Radio extends React.Component<Props> {
+interface State {
+  active: boolean;
+}
+
+export class Radio extends React.Component<Props, State> {
 
   static defaultProps: Props = {
     selected: false,
-    variant: 'default',
+    disabled: false,
+  };
+
+  state: State = {
+    active: false,
   };
 
   onPress = () => {
-    if (this.props.onChange !== undefined) {
-      this.props.onChange(this.props.selected);
-    }
+    this.props.onChange && this.props.onChange(this.props.selected);
   };
 
-  getStateStyles = () => ({
-    container: {},
-    selection: {
-      opacity: this.props.selected ? 1 : 0,
-    },
-  });
+  onPressIn = () => {
+    this.setState({
+      active: true,
+    });
+  };
 
-  getThemedStyles = (themedStyle: StyleType) => ({
-    container: {
-      width: themedStyle.size,
-      height: themedStyle.size,
-      borderRadius: themedStyle.size / 2,
-      borderWidth: themedStyle.borderWidth,
-      borderColor: themedStyle.borderColor,
-    },
-    selection: {
-      width: themedStyle.size / 2,
-      height: themedStyle.size / 2,
-      borderRadius: themedStyle.size / 4,
-      backgroundColor: themedStyle.tintColor,
-    },
-  });
+  onPressOut = () => {
+    this.setState({
+      active: false,
+    });
+  };
+
+  isStateStyle = (): boolean => this.state.active || this.props.selected || this.props.disabled;
+
+  getStateStyle = (): StyleType => this.props.requestStateStyle([
+    this.props.selected && STATE_SELECTED,
+    this.state.active && STATE_ACTIVE,
+    this.props.disabled && STATE_DISABLED,
+  ]);
+
+  getComponentStyle = (): StyleType => {
+    const style = this.isStateStyle() ? this.getStateStyle() : this.props.themedStyle;
+    return ({
+      container: {
+        width: style.size,
+        height: style.size,
+        borderRadius: style.size / 2,
+        borderWidth: style.borderWidth,
+        borderColor: style.borderColor,
+      },
+      selection: {
+        width: style.size / 2,
+        height: style.size / 2,
+        borderRadius: style.size / 4,
+        backgroundColor: style.tintColor,
+        opacity: this.props.selected ? 1.0 : 0.0,
+      },
+    });
+  };
 
   render() {
-    const themedStyles = this.getThemedStyles(this.props.themedStyle);
-    const stateStyles = this.getStateStyles();
+    const componentStyle = this.getComponentStyle();
     return (
-      <TouchableOpacity activeOpacity={1.0} onPress={this.onPress}>
-        <View style={[styles.container, themedStyles.container, stateStyles.container]}>
-          <View style={[styles.selection, themedStyles.selection, stateStyles.selection]}/>
+      <TouchableWithoutFeedback
+        disabled={this.props.disabled}
+        onPress={this.onPress}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
+        <View style={[styles.container, componentStyle.container]}>
+          <View style={[styles.selection, componentStyle.selection]}/>
         </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
 }

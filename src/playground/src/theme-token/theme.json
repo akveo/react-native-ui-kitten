@@ -8,20 +8,17 @@
   "text-color-sample-success-active": "#81C784",
   "background-color-sample-success-disabled": "#F5F5F5",
 
-  "size-radio-medium": 28,
-  "border-width-radio-medium": 3,
-  "border-color-radio-default": "#0277BD",
-  "tint-color-radio-default": "#03A9F4",
-  "size-radio-small": 20,
-  "border-width-radio-small": 2,
+  "colorPrimary": "#039BE5",
+  "colorPrimaryDark": "#0277BD",
+  "colorPrimaryInactive": "#757575",
+  "colorPrimaryDarkInactive": "#424242",
+  "colorHighlight": "#039BE5",
+  "colorTransparent": "transparent",
+
+  "size-radio-default": 28,
+  "size-radio-small": 24,
   "size-radio-large": 36,
-  "border-width-radio-large": 4,
-  "tint-color-radio-success": "#4CAF50",
-  "tint-color-radio-info": "#FFEB3B",
-  "tint-color-radio-warning": "#FF9800",
-  "tint-color-radio-danger": "#F44336",
-  "border-color-radio-success": "#2E7D32",
-  "border-color-radio-info": "#F9A825",
-  "border-color-radio-warning": "#EF6C00",
-  "border-color-radio-danger": "#D84315"
+  "border-width-radio-default": 2.5,
+  "border-width-radio-small": 2,
+  "border-width-radio-large": 3
 }

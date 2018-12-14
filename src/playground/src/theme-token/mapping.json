@@ -53,12 +53,30 @@
       "tintColor",
       "borderColor"
     ],
+    "states": [
+      "active",
+      "selected",
+      "disabled"
+    ],
     "variants": {
       "default": {
-        "size": "size-radio-medium",
-        "borderWidth": "border-width-radio-medium",
-        "tintColor": "tint-color-radio-default",
-        "borderColor": "border-color-radio-default"
+        "size": "size-radio-default",
+        "borderWidth": "border-width-radio-default",
+        "borderColor": "colorPrimaryDark",
+        "tintColor": "colorTransparent",
+        "state": {
+          "active": {
+            "borderColor": "colorPrimary",
+            "tintColor": "colorHighlight"
+          },
+          "selected": {
+            "tintColor": "colorPrimary"
+          },
+          "disabled": {
+            "borderColor": "colorPrimaryDarkInactive",
+            "tintColor": "colorPrimaryInactive"
+          }
+        }
       },
       "small": {
         "size": "size-radio-small",
@@ -67,22 +85,6 @@
       "large": {
         "size": "size-radio-large",
         "borderWidth": "border-width-radio-large"
-      },
-      "success": {
-        "tintColor": "tint-color-radio-success",
-        "borderColor": "border-color-radio-success"
-      },
-      "info": {
-        "tintColor": "tint-color-radio-info",
-        "borderColor": "border-color-radio-info"
-      },
-      "warning": {
-        "tintColor": "tint-color-radio-warning",
-        "borderColor": "border-color-radio-warning"
-      },
-      "danger": {
-        "tintColor": "tint-color-radio-danger",
-        "borderColor": "border-color-radio-danger"
       }
     }
   }
