@@ -95,6 +95,8 @@ describe('@style: style consumer checks', () => {
     expect(styledComponent.props.theme).not.toBeUndefined();
     expect(styledComponent.props.themedStyle).not.toBeNull();
     expect(styledComponent.props.themedStyle).not.toBeUndefined();
+    expect(styledComponent.props.requestStateStyle).not.toBeNull();
+    expect(styledComponent.props.requestStateStyle).not.toBeUndefined();
   });
 
   it('default variant styled properly', async () => {
@@ -123,6 +125,33 @@ describe('@style: style consumer checks', () => {
     const styledComponent = component.getByTestId(styleConsumerTestId);
     expect(styledComponent.props.themedStyle.backgroundColor).toEqual(config.values.backgroundDark);
     expect(styledComponent.props.themedStyle.textColor).toEqual(config.values.textSuccess);
+  });
+
+  it('style request works properly', async () => {
+    const StyleConsumer = StyledComponent(Test);
+
+    const component = render(
+      <StyleProvider mapping={config.mappings} theme={config.theme}>
+        <StyleConsumer variant='dark success'/>
+      </StyleProvider>,
+    );
+
+    const styledComponent = component.getByTestId(styleConsumerTestId);
+    const stateStyle = styledComponent.props.requestStateStyle(['active']);
+    const undefinedStateStyle = styledComponent.props.requestStateStyle('undefined');
+
+    expect(stateStyle).not.toBeNull();
+    expect(stateStyle).not.toBeUndefined();
+    expect(stateStyle.backgroundColor).toEqual(config.values.backgroundDefault);
+    expect(stateStyle.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(undefinedStateStyle).not.toBeNull();
+    expect(undefinedStateStyle).not.toBeUndefined();
+    expect(undefinedStateStyle.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(undefinedStateStyle.textColor).toEqual(config.values.textSuccess);
+
+    styledComponent.props.requestStateStyle([]);
+    jest.spyOn(console, 'warn');
   });
 
   it('static methods are copied over', async () => {

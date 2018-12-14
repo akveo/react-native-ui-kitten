@@ -22,9 +22,10 @@ interface ConsumerProps {
 }
 
 export interface Props {
-  variant: string;
+  variant?: string;
   theme?: ThemeType;
   themedStyle?: StyleType;
+  requestStateStyle?: (state: string[] | string) => StyleType;
 }
 
 export const StyledComponent = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
@@ -36,12 +37,24 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
 
     getComponentName = (): string => Component.displayName || Component.name;
 
+    createStyle = (theme: ThemeType,
+                   mapping: ThemeMappingType,
+                   variant: string[] | string,
+                   state: string[] | string): StyleType => {
+
+      if (state.length === 0) {
+        console.warn('Redundant `requestStateStyle` call! Use `this.props.themedStyle` instead!');
+      }
+      return createStyle(theme, mapping, variant, state);
+    };
+
     createCustomProps = (props: ConsumerProps, variant: string): Props => {
       const mapping = getComponentThemeMapping(this.getComponentName(), props.mapping);
       return {
         variant: variant,
         theme: props.theme,
-        themedStyle: mapping && props.theme && createStyle(props.theme, mapping, variant),
+        themedStyle: createStyle(props.theme, mapping, variant),
+        requestStateStyle: state => this.createStyle(props.theme, mapping, variant, state),
       };
     };
 

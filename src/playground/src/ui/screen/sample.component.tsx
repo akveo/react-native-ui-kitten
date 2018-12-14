@@ -1,5 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import {
+  Button,
+  View,
+} from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
@@ -10,16 +13,39 @@ import { Sample as SampleComponent } from '../component';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-class Sample extends React.Component<Props> {
+interface State {
+  sampleDisabled: boolean;
+}
+
+class Sample extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Sample',
   };
 
+  state = {
+    sampleDisabled: false,
+  };
+
+  onDisableButtonPress = () => {
+    this.setState({
+      sampleDisabled: !this.state.sampleDisabled,
+    });
+  };
+
+  getDisableButtonTitle = () => this.state.sampleDisabled ? 'Enable' : 'Disable';
+
   render() {
     return (
       <View style={this.props.themedStyle.container}>
-        <SampleComponent variant='dark success'/>
+        <SampleComponent
+          variant='success'
+          disabled={this.state.sampleDisabled}
+        />
+        <Button
+          title={this.getDisableButtonTitle()}
+          onPress={this.onDisableButtonPress}
+        />
       </View>
     );
   }
@@ -32,3 +58,4 @@ export const SampleScreen = withStyles(Sample, (theme: ThemeType) => ({
     alignItems: 'center',
   },
 }));
+

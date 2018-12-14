@@ -7,4 +7,8 @@ export interface ThemeMappingType {
   variants: any;
 }
 
+export interface VariantType {
+  state: any;
+}
+
 export type TokenType = any;

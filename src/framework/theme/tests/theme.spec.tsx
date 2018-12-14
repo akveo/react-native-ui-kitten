@@ -195,7 +195,8 @@ describe('@theme: theme consumer checks', () => {
 
   it('static methods are copied over', async () => {
     // @ts-ignore: test-case
-    ThemedConsumer.staticMethod = function() {};
+    ThemedConsumer.staticMethod = function () {
+    };
     const ThemedComponent = withStyles(ThemedConsumer);
 
     // @ts-ignore: test-case
@@ -208,38 +209,120 @@ describe('@theme: service methods checks', () => {
 
   it('default variant styled properly', async () => {
     const style = createStyle(config.theme, config.mappings.Test);
+    const withState = createStyle(config.theme, config.mappings.Test, 'default', 'active');
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, 'default', 'undefined');
 
     expect(style).not.toBeNull();
     expect(style).not.toBeUndefined();
     expect(style.backgroundColor).toEqual(config.values.backgroundDefault);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundDark);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDefault);
   });
 
   it('single non-default variant styled properly (string type)', async () => {
     const style = createStyle(config.theme, config.mappings.Test, 'dark');
+    const withState = createStyle(config.theme, config.mappings.Test, 'dark', 'active');
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, 'dark', 'undefined');
 
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
     expect(style.backgroundColor).toEqual(config.values.backgroundDark);
-    expect(style.textColor).toEqual(config.values.textDark);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundDefault);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
   });
 
   it('list of non-default variants styled created properly (string type)', async () => {
     const style = createStyle(config.theme, config.mappings.Test, 'dark success');
+    const withState = createStyle(config.theme, config.mappings.Test, 'dark success', 'active disabled');
+    const withOneOfUndefined = createStyle(config.theme, config.mappings.Test, 'dark success', 'active ');
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, 'dark success', 'undefined');
 
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
     expect(style.backgroundColor).toEqual(config.values.backgroundDark);
     expect(style.textColor).toEqual(config.values.textSuccess);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundSuccessDisabled);
+    expect(withState.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withOneOfUndefined).not.toBeNull();
+    expect(withOneOfUndefined).not.toBeUndefined();
+    expect(withOneOfUndefined.backgroundColor).toEqual(config.values.backgroundDefault);
+    expect(withOneOfUndefined.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(withUndefinedState.textColor).toEqual(config.values.textSuccess);
   });
 
   it('single non-default variant styled properly (string[] type)', async () => {
     const style = createStyle(config.theme, config.mappings.Test, ['dark']);
+    const withState = createStyle(config.theme, config.mappings.Test, ['dark'], ['active']);
+    const withOneOfUndefined = createStyle(config.theme, config.mappings.Test, ['dark'], ['active', undefined]);
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, ['dark'], ['undefined']);
 
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
     expect(style.backgroundColor).toEqual(config.values.backgroundDark);
-    expect(style.textColor).toEqual(config.values.textDark);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundDefault);
+
+    expect(withOneOfUndefined).not.toBeNull();
+    expect(withOneOfUndefined).not.toBeUndefined();
+    expect(withOneOfUndefined.backgroundColor).toEqual(config.values.backgroundDefault);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
   });
 
-  it('array of non-default variants styled created properly (string[] type)', async () => {
+  it('array of non-default variants styled properly (string[] type)', async () => {
     const style = createStyle(config.theme, config.mappings.Test, ['dark', 'success']);
+    const withState = createStyle(config.theme, config.mappings.Test, ['dark', 'success'], ['active', 'disabled']);
+    const withOneOfUndefined = createStyle(
+      config.theme,
+      config.mappings.Test,
+      ['dark', 'success'],
+      ['active', undefined],
+    );
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, ['dark', 'success'], ['undefined']);
 
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
     expect(style.backgroundColor).toEqual(config.values.backgroundDark);
     expect(style.textColor).toEqual(config.values.textSuccess);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundSuccessDisabled);
+    expect(withState.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withOneOfUndefined).not.toBeNull();
+    expect(withOneOfUndefined).not.toBeUndefined();
+    expect(withOneOfUndefined.backgroundColor).toEqual(config.values.backgroundDefault);
+    expect(withOneOfUndefined.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(withUndefinedState.textColor).toEqual(config.values.textSuccess);
   });
 
 });
