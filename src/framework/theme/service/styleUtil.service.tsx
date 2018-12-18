@@ -52,7 +52,12 @@ export function createStyle(theme: ThemeType,
   };
   const mapVariantState = (v: string, s: string) => {
     const isEmpty = s === undefined || s.length === 0;
-    return isEmpty ? undefined : createStyleForVariant(theme, mapping, v, s);
+    if (isEmpty) {
+      return undefined;
+    } else {
+      const stateVariant = createStyleForVariant(theme, mapping, v, s);
+      return stateVariant || createStyleForVariant(theme, mapping, VARIANT_DEFAULT, s);
+    }
   };
   const mapVariantStates = (v: string) => {
     return states.map(s => mapVariantState(v, s)).reduce(mergeStyles, {});

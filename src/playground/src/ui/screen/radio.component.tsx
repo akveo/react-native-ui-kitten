@@ -14,10 +14,11 @@ import { Radio as RadioComponent } from '@rk-kit/ui';
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 interface State {
-  isRadio1Selected: boolean;
-  isRadio2Selected: boolean;
-  isRadio3Selected: boolean;
-  isRadio4Selected: boolean;
+  isRadio1Checked: boolean;
+  isRadio2Checked: boolean;
+  isRadio3Checked: boolean;
+  isRadio4Checked: boolean;
+  variant: string;
 }
 
 class Radio extends React.Component<Props, State> {
@@ -27,65 +28,86 @@ class Radio extends React.Component<Props, State> {
   };
 
   state: State = {
-    isRadio1Selected: false,
-    isRadio2Selected: true,
-    isRadio3Selected: false,
-    isRadio4Selected: true,
+    isRadio1Checked: false,
+    isRadio2Checked: true,
+    isRadio3Checked: false,
+    isRadio4Checked: true,
+    variant: 'default',
   };
 
   onRadio1Change = (selected: boolean) => {
-    this.setState({ isRadio1Selected: !this.state.isRadio1Selected });
+    this.setState({ isRadio1Checked: !selected });
   };
 
   onRadio2Change = (selected: boolean) => {
-    this.setState({ isRadio2Selected: !this.state.isRadio2Selected });
+    this.setState({ isRadio2Checked: !selected });
   };
 
   onRadio3Change = (selected: boolean) => {
-    this.setState({ isRadio3Selected: !this.state.isRadio3Selected });
+    this.setState({ isRadio3Checked: !selected });
   };
 
   onRadio4Change = (selected: boolean) => {
-    this.setState({ isRadio4Selected: !this.state.isRadio4Selected });
+    this.setState({ isRadio4Checked: !selected });
   };
 
   render() {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent onChange={this.onRadio1Change} selected={this.state.isRadio1Selected}/>
-            <RadioComponent onChange={this.onRadio2Change} selected={this.state.isRadio2Selected}/>
-            <RadioComponent onChange={this.onRadio3Change} selected={this.state.isRadio3Selected} disabled={true}/>
-            <RadioComponent onChange={this.onRadio4Change} selected={this.state.isRadio4Selected} disabled={true}/>
-          </View>
-        </View>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Small</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent variant='small'/>
-            <RadioComponent variant='small' selected={true}/>
-            <RadioComponent variant='small' disabled={true}/>
-            <RadioComponent variant='small' selected={true} disabled={true}/>
-          </View>
-        </View>
-        <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Default</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent/>
-            <RadioComponent selected={true}/>
-            <RadioComponent disabled={true}/>
-            <RadioComponent selected={true} disabled={true}/>
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='default'
+              checked={this.state.isRadio1Checked}
+              onChange={this.onRadio1Change}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='default'
+              checked={this.state.isRadio2Checked}
+              onChange={this.onRadio2Change}
+              />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='default'
+              checked={this.state.isRadio3Checked}
+              disabled={true}
+              onChange={this.onRadio3Change}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='default'
+              checked={this.state.isRadio4Checked}
+              disabled={true}
+              onChange={this.onRadio4Change}
+            />
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Large</Text>
+          <Text style={this.props.themedStyle.textDescription}>Error</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent variant='large'/>
-            <RadioComponent variant='large' selected={true}/>
-            <RadioComponent variant='large' disabled={true}/>
-            <RadioComponent variant='large' selected={true} disabled={true}/>
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='error'
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='error'
+              checked={true}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='error'
+              disabled={true}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              variant='error'
+              checked={true}
+              disabled={true}
+            />
           </View>
         </View>
       </View>
@@ -106,6 +128,9 @@ export const RadioScreen = withStyles(Radio, (theme: ThemeType) => ({
     marginTop: 4,
   },
   textDescription: {
-    fontSize: 20,
+    fontSize: 18,
+  },
+  component: {
+    marginHorizontal: 4,
   },
 }));

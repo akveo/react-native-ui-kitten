@@ -55,36 +55,50 @@
     ],
     "states": [
       "active",
-      "selected",
+      "checked",
       "disabled"
     ],
     "variants": {
       "default": {
-        "size": "size-radio-default",
-        "borderWidth": "border-width-radio-default",
-        "borderColor": "colorPrimaryDark",
-        "tintColor": "colorTransparent",
+        "size": 36,
+        "innerSize": 24,
+        "highlightSize": 54,
+        "borderWidth": 2,
+        "borderColor": "gray-primary",
+        "selectColor": "transparent",
         "state": {
-          "active": {
-            "borderColor": "colorPrimary",
-            "tintColor": "colorHighlight"
+          "checked": {
+            "borderColor": "blue-primary",
+            "selectColor": "blue-primary"
           },
-          "selected": {
-            "tintColor": "colorPrimary"
+          "active-unchecked": {
+            "borderColor": "gray-dark",
+            "highlightColor": "gray-highlight"
+          },
+          "active-checked": {
+            "borderColor": "blue-dark",
+            "highlightColor": "gray-highlight"
           },
           "disabled": {
-            "borderColor": "colorPrimaryDarkInactive",
-            "tintColor": "colorPrimaryInactive"
+            "borderColor": "gray-light",
+            "selectColor": "gray-primary"
           }
         }
       },
-      "small": {
-        "size": "size-radio-small",
-        "borderWidth": "border-width-radio-small"
-      },
-      "large": {
-        "size": "size-radio-large",
-        "borderWidth": "border-width-radio-large"
+      "error": {
+        "borderColor": "pink-primary",
+        "state": {
+          "checked": {
+            "borderColor": "pink-primary",
+            "selectColor": "pink-primary"
+          },
+          "active-unchecked": {
+            "borderColor": "pink-primary"
+          },
+          "active-checked": {
+            "borderColor": "pink-primary"
+          }
+        }
       }
     }
   }

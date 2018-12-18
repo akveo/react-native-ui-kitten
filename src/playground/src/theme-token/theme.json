@@ -8,17 +8,11 @@
   "text-color-sample-success-active": "#81C784",
   "background-color-sample-success-disabled": "#F5F5F5",
 
-  "colorPrimary": "#039BE5",
-  "colorPrimaryDark": "#0277BD",
-  "colorPrimaryInactive": "#757575",
-  "colorPrimaryDarkInactive": "#424242",
-  "colorHighlight": "#039BE5",
-  "colorTransparent": "transparent",
-
-  "size-radio-default": 28,
-  "size-radio-small": 24,
-  "size-radio-large": 36,
-  "border-width-radio-default": 2.5,
-  "border-width-radio-small": 2,
-  "border-width-radio-large": 3
+  "blue-primary": "#3366FF",
+  "blue-dark": "#2541CC",
+  "gray-light": "#DDE1EB",
+  "gray-primary": "#A6AEBD",
+  "gray-dark": "#8992A3",
+  "gray-highlight": "#EDF0F5",
+  "pink-primary": "#FF3D71"
 }
