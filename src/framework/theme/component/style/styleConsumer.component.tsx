@@ -9,7 +9,7 @@ import ThemeContext from '../theme/themeContext';
 import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
-  getComponentThemeMapping,
+  getThemeMapping,
 } from '../../service';
 
 interface PrivateProps<T> {
@@ -49,7 +49,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
     };
 
     createCustomProps = (props: ConsumerProps, variant: string): Props => {
-      const mapping = getComponentThemeMapping(this.getComponentName(), props.mapping);
+      const mapping = getThemeMapping(this.getComponentName(), props.mapping);
       return {
         variant: variant,
         theme: props.theme,

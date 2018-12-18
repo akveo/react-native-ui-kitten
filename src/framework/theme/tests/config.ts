@@ -9,6 +9,8 @@ export const values = {
   textSuccess: '#4CAF50',
   textSuccessActive: '#81C784',
   backgroundSuccessDisabled: '#F5F5F5',
+  sizeDefault: 16,
+  sizeDark: 32,
 };
 
 export const mappings = {
@@ -25,6 +27,7 @@ export const mappings = {
       default: {
         backgroundColor: 'backgroundColorTestDefault',
         textColor: 'textColorTestDefault',
+        size: values.sizeDefault,
         state: {
           active: {
             backgroundColor: 'backgroundColorTestDark',
@@ -38,6 +41,7 @@ export const mappings = {
       dark: {
         backgroundColor: 'backgroundColorTestDark',
         textColor: 'textColorTestDark',
+        size: values.sizeDark,
         state: {
           active: {
             backgroundColor: 'backgroundColorTestDefault',
