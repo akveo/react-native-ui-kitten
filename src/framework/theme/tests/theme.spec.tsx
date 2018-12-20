@@ -1,4 +1,3 @@
-import * as config from './config';
 import React from 'react';
 import {
   View,
@@ -13,6 +12,7 @@ import {
   ThemeProvider,
   withStyles,
   ThemeType,
+  StyleType,
 } from '../component';
 import { getThemeValue } from '../service';
 
@@ -140,37 +140,43 @@ describe('@theme: ui component checks', () => {
     expect(ThemedComponent.staticMethod).not.toBeUndefined();
   });
 
-  it('receives theme prop', async () => {
-    const ThemedComponent = withStyles(ThemedConsumer);
+});
+
+describe('@theme: ui component checks', () => {
+
+  it('receives custom props', async () => {
+    const ThemedComponent = withStyles(ComponentMock, createThemedStyleMock);
 
     const component = render(
-      <ThemeProvider theme={{}}>
+      <ThemeProvider theme={config.theme}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
 
     const themedComponent = component.getByTestId(themeConsumerTestId);
-    expect(themedComponent.props.theme).not.toBeNull();
-  });
 
-  it('receives themedStyle prop', async () => {
-    const ThemedComponent = withStyles(ThemedConsumer, (theme: ThemeType) => {
-      return {};
-    });
-
-    const component = render(
-      <ThemeProvider theme={{}}>
-        <ThemedComponent/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
+    expect(JSON.stringify(themedComponent.props.theme)).toEqual(JSON.stringify(config.theme));
     expect(themedComponent.props.themedStyle).not.toBeNull();
+    expect(themedComponent.props.themedStyle).not.toBeUndefined();
+    expect(themedComponent.props.themedStyle.color).toEqual(config.theme.backgroundColorTestDefault);
   });
 
-  it('receives theme prop on theme change', async () => {
+  it('static methods are copied over', async () => {
+    // @ts-ignore: test-case
+    ComponentMock.staticMethod = function () {
+    };
+    const ThemedComponent = withStyles(ComponentMock);
+
+    // @ts-ignore: test-case
+    expect(ThemedComponent.staticMethod).not.toBeUndefined();
+  });
+
+  it('able to change theme', async () => {
     const component = render(
-      <ActionedProvider/>,
+      <ActionMock
+        theme1={config.theme}
+        theme2={config.themeInverse}
+      />,
     );
 
     const touchableComponent = component.getByTestId(themeChangeTouchableTestId);
@@ -181,18 +187,19 @@ describe('@theme: ui component checks', () => {
       return component.getByTestId(themeConsumerTestId);
     });
 
-    expect(themedComponent.props.theme.backgroundColor).toEqual(ActionedProvider.onChangeThemeColor);
+    expect(JSON.stringify(themedComponent.props.theme)).toEqual(JSON.stringify(config.themeInverse));
   });
 
-  it('child theme provider overrides parent theme', async () => {
+  it('able to override theme', async () => {
     const component = render(
-      <ThemedStyleProvider
-        theme1={{ color: '#3F51B5' }}
-        theme2={{ color: '#009688' }}
+      <OverrideMock
+        theme1={config.theme}
+        theme2={config.themeInverse}
+        createStyle={createThemedStyleMock}
       />,
     );
 
-    const themedComponents = component.getAllByName(ThemedStyleConsumer);
+    const themedComponents = component.getAllByName(ComponentMock);
 
     expect(themedComponents.length).toBeGreaterThan(1);
 
@@ -203,4 +210,3 @@ describe('@theme: ui component checks', () => {
   });
 
 });
-

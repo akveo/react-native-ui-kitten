@@ -39,7 +39,6 @@ class Sample extends React.Component<Props, State> {
     return (
       <View style={this.props.themedStyle.container}>
         <SampleComponent
-          variant='success'
           disabled={this.state.sampleDisabled}
         />
         <Button

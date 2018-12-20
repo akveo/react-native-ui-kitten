@@ -27,7 +27,7 @@ export default class App extends React.Component<any, State> {
   }
 
   render() {
-    const { SampleScreen: RootScreen, ...nestedScreens } = Screens;
+    const { RadioScreen: RootScreen, ...nestedScreens } = Screens;
     const Router = withNavigation(RootScreen, nestedScreens);
     return (
       <StyleProvider theme={this.state.theme} mapping={this.state.mappings}>

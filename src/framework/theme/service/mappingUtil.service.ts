@@ -10,8 +10,8 @@ import {
 export const VARIANT_DEFAULT = 'default';
 
 /**
- * @param component: string - component name. Using displayName is recommended
- * @param mapping: ThemeMappingType[] - theme mapping configuration array
+ * @param component: string - component name
+ * @param mapping: ThemeMappingType - theme mapping configuration object
  *
  * @return ComponentMappingType if presents in mapping, undefined otherwise
  */
