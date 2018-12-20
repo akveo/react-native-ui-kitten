@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   StyleProvider,
-  ThemeMappingConfigType,
+  ThemeMappingType,
   ThemeType,
 } from '@rk-kit/theme';
 import {
@@ -12,7 +12,7 @@ import { withNavigation } from './navigation';
 import * as Screens from './ui/screen';
 
 interface State {
-  mappings: ThemeMappingConfigType;
+  mappings: ThemeMappingType;
   theme: ThemeType;
 }
 

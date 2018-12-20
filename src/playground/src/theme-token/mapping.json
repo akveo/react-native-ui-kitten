@@ -1,47 +1,80 @@
 {
   "Sample": {
-    "parameters": [
-      "backgroundColor",
-      "textColor"
-    ],
-    "states": [
-      "active",
-      "disabled"
-    ],
-    "variants": {
+    "appearance": {
       "default": {
-        "backgroundColor": "background-color-sample-default",
-        "textColor": "text-color-sample-default",
-        "state": {
-          "active": {
-            "backgroundColor": "background-color-sample-dark",
-            "textColor": "text-color-sample-dark"
+        "mapping": {
+          "size": 36,
+          "innerSize": 24,
+          "borderWidth": 2,
+          "borderColor": "gray-primary",
+          "selectColor": "transparent",
+          "state": {
+            "active": {
+              "borderColor": "gray-dark"
+            },
+            "checked": {
+              "borderColor": "blue-primary",
+              "selectColor": "blue-primary"
+            },
+            "disabled": {
+              "borderColor": "gray-light"
+            },
+            "active.checked": {
+              "borderColor": "blue-dark"
+            },
+            "checked.disabled": {
+              "selectColor": "gray-primary"
+            }
+          }
+        },
+        "variant": {
+          "status": {
+            "info": {
+              "mapping": {
+                "state": {
+                  "checked": {
+                    "borderColor": "orange-primary",
+                    "selectColor": "orange-primary"
+                  },
+                  "active.checked": {
+                    "borderColor": "orange-dark"
+                  }
+                }
+              }
+            },
+            "success": {
+              "mapping": {
+                "state": {
+                  "checked": {
+                    "borderColor": "teal-primary",
+                    "selectColor": "teal-primary"
+                  },
+                  "active.checked": {
+                    "borderColor": "teal-dark"
+                  }
+                }
+              }
+            }
           },
-          "disabled": {
-            "textColor": "text-color-sample-default-disabled"
+          "size": {
+            "big": {
+              "mapping": {
+                "size": 42,
+                "innerSize": 28
+              }
+            },
+            "small": {
+              "mapping": {
+                "size": 30,
+                "innerSize": 20
+              }
+            }
           }
         }
       },
-      "dark": {
-        "backgroundColor": "background-color-sample-dark",
-        "textColor": "text-color-sample-dark",
-        "state": {
-          "active": {
-            "backgroundColor": "background-color-sample-default",
-            "textColor": "text-color-sample-default"
-          }
-        }
-      },
-      "success": {
-        "textColor": "text-color-sample-success",
-        "state": {
-          "active": {
-            "backgroundColor": "background-color-sample-default",
-            "textColor": "text-color-sample-success-active"
-          },
-          "disabled": {
-            "backgroundColor": "background-color-sample-success-disabled"
-          }
+      "custom": {
+        "mapping": {
+          "borderWidth": 4
         }
       }
     }

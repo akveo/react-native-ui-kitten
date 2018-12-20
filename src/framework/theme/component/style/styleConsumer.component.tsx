@@ -4,12 +4,15 @@ import {
   ThemeType,
   StyleType,
 } from '../theme';
-import { ThemeMappingType } from '../mapping';
+import {
+  ThemeMappingType,
+  ComponentMappingType,
+} from '../mapping';
 import ThemeContext from '../theme/themeContext';
 import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
-  getComponentThemeMapping,
+  getComponentMapping,
 } from '../../service';
 
 interface PrivateProps<T> {
@@ -17,7 +20,7 @@ interface PrivateProps<T> {
 }
 
 interface ConsumerProps {
-  mapping: ThemeMappingType[];
+  mapping: ThemeMappingType;
   theme: ThemeType;
 }
 
@@ -38,7 +41,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
     getComponentName = (): string => Component.displayName || Component.name;
 
     createStyle = (theme: ThemeType,
-                   mapping: ThemeMappingType,
+                   mapping: ComponentMappingType,
                    variant: string[] | string,
                    state: string[] | string): StyleType => {
 
@@ -49,7 +52,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
     };
 
     createCustomProps = (props: ConsumerProps, variant: string): Props => {
-      const mapping = getComponentThemeMapping(this.getComponentName(), props.mapping);
+      const mapping = getComponentMapping(props.mapping, this.getComponentName());
       return {
         variant: variant,
         theme: props.theme,
@@ -73,7 +76,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
 
     render() {
       return (
-        <MappingContext.Consumer>{(mapping: ThemeMappingType[]) => (
+        <MappingContext.Consumer>{(mapping: ThemeMappingType) => (
           <ThemeContext.Consumer>{(theme: ThemeType) => {
             return this.renderWrappedComponent({ mapping: mapping, theme: theme });
           }}</ThemeContext.Consumer>

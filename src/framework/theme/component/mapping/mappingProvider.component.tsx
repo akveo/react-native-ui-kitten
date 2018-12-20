@@ -3,7 +3,7 @@ import MappingContext from './mappingContext';
 import { ThemeMappingType } from './type';
 
 export interface Props {
-  mapping: ThemeMappingType[];
+  mapping: ThemeMappingType;
   children: JSX.Element | React.ReactNode;
 }
 
