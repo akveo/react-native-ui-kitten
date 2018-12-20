@@ -17,67 +17,200 @@ import {
   ThemeMappingConfigType,
   ThemeType,
 } from '../component';
+import { createStyle } from '../service';
 
-const styleConsumerTestId = '@style/consumer';
-const styleTouchableTestId = '@style/touchable';
+describe('@style: service methods checks', () => {
 
-interface ComplexStyleProviderProps {
-  changedMappings: ThemeMappingConfigType;
-  changedTheme: ThemeType;
-}
+  it('default variant styled properly', async () => {
+    const style = createStyle(config.theme, config.mappings.Test);
+    const withState = createStyle(config.theme, config.mappings.Test, 'default', 'active');
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, 'default', 'undefined');
 
-class ComplexStyleProvider extends React.Component<ComplexStyleProviderProps & StyleProviderProps> {
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
+    expect(style.backgroundColor).toEqual(config.values.backgroundDefault);
 
-  state = {
-    mappings: [],
-    theme: {},
-  };
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundDark);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      mappings: this.props.mapping,
-      theme: this.props.theme,
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDefault);
+  });
+
+  it('single non-default variant styled properly (string type)', async () => {
+    const style = createStyle(config.theme, config.mappings.Test, 'dark');
+    const withState = createStyle(config.theme, config.mappings.Test, 'dark', 'active');
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, 'dark', 'undefined');
+
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundDefault);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
+  });
+
+  it('list of non-default variants styled created properly (string type)', async () => {
+    const style = createStyle(config.theme, config.mappings.Test, 'dark success');
+    const withState = createStyle(config.theme, config.mappings.Test, 'dark success', 'active disabled');
+    const withOneOfUndefined = createStyle(config.theme, config.mappings.Test, 'dark success', 'active ');
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, 'dark success', 'undefined');
+
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textSuccess);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundSuccessDisabled);
+    expect(withState.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withOneOfUndefined).not.toBeNull();
+    expect(withOneOfUndefined).not.toBeUndefined();
+    expect(withOneOfUndefined.backgroundColor).toEqual(config.values.backgroundDefault);
+    expect(withOneOfUndefined.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(withUndefinedState.textColor).toEqual(config.values.textSuccess);
+  });
+
+  it('single non-default variant styled properly (string[] type)', async () => {
+    const style = createStyle(config.theme, config.mappings.Test, ['dark']);
+    const withState = createStyle(config.theme, config.mappings.Test, ['dark'], ['active']);
+    const withOneOfUndefined = createStyle(config.theme, config.mappings.Test, ['dark'], ['active', undefined]);
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, ['dark'], ['undefined']);
+
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundDefault);
+
+    expect(withOneOfUndefined).not.toBeNull();
+    expect(withOneOfUndefined).not.toBeUndefined();
+    expect(withOneOfUndefined.backgroundColor).toEqual(config.values.backgroundDefault);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
+  });
+
+  it('array of non-default variants styled properly (string[] type)', async () => {
+    const style = createStyle(config.theme, config.mappings.Test, ['dark', 'success']);
+    const withState = createStyle(config.theme, config.mappings.Test, ['dark', 'success'], ['active', 'disabled']);
+    const withOneOfUndefined = createStyle(
+      config.theme,
+      config.mappings.Test,
+      ['dark', 'success'],
+      ['active', undefined],
+    );
+    const withUndefinedState = createStyle(config.theme, config.mappings.Test, ['dark', 'success'], ['undefined']);
+
+    expect(style).not.toBeNull();
+    expect(style).not.toBeUndefined();
+    expect(style.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(style.textColor).toEqual(config.values.textSuccess);
+
+    expect(withState).not.toBeNull();
+    expect(withState).not.toBeUndefined();
+    expect(withState.backgroundColor).toEqual(config.values.backgroundSuccessDisabled);
+    expect(withState.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withOneOfUndefined).not.toBeNull();
+    expect(withOneOfUndefined).not.toBeUndefined();
+    expect(withOneOfUndefined.backgroundColor).toEqual(config.values.backgroundDefault);
+    expect(withOneOfUndefined.textColor).toEqual(config.values.textSuccessActive);
+
+    expect(withUndefinedState).not.toBeNull();
+    expect(withUndefinedState).not.toBeUndefined();
+    expect(withUndefinedState.backgroundColor).toEqual(config.values.backgroundDark);
+    expect(withUndefinedState.textColor).toEqual(config.values.textSuccess);
+  });
+
+});
+
+describe('@style: ui component checks', () => {
+
+
+  const styleConsumerTestId = '@style/consumer';
+  const styleTouchableTestId = '@style/touchable';
+
+  interface ComplexStyleProviderProps {
+    changedMappings: ThemeMappingConfigType;
+    changedTheme: ThemeType;
+  }
+
+  class ComplexStyleProvider extends React.Component<ComplexStyleProviderProps & StyleProviderProps> {
+
+    state = {
+      mappings: [],
+      theme: {},
     };
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        mappings: this.props.mapping,
+        theme: this.props.theme,
+      };
+    }
+
+    onTouchablePress = () => {
+      this.setState({
+        mappings: this.props.changedMappings,
+        theme: this.props.changedTheme,
+      });
+    };
+
+    render() {
+      return (
+        <StyleProvider
+          mapping={this.state.mappings}
+          theme={this.state.theme}>
+          <TouchableOpacity
+            testID={styleTouchableTestId}
+            onPress={this.onTouchablePress}>
+            {this.props.children}
+          </TouchableOpacity>
+        </StyleProvider>
+      );
+    }
   }
 
-  onTouchablePress = () => {
-    this.setState({
-      mappings: this.props.changedMappings,
-      theme: this.props.changedTheme,
-    });
-  };
+  type TestComponentProps = any;
 
-  render() {
-    return (
-      <StyleProvider
-        mapping={this.state.mappings}
-        theme={this.state.theme}>
-        <TouchableOpacity
-          testID={styleTouchableTestId}
-          onPress={this.onTouchablePress}>
-          {this.props.children}
-        </TouchableOpacity>
-      </StyleProvider>
-    );
+  class Test extends React.Component<TestComponentProps & StyledComponentProps> {
+    static defaultProps = {
+      testID: styleConsumerTestId,
+    };
+
+    render() {
+      return (
+        <View testID={this.props.testID}/>
+      );
+    }
   }
-}
 
-type TestComponentProps = any;
+  it('static methods are copied over', async () => {
+    // @ts-ignore: test-case
+    Test.staticMethod = function() {};
+    const StyleConsumer = StyledComponent(Test);
 
-class Test extends React.Component<TestComponentProps & StyledComponentProps> {
-  static defaultProps = {
-    testID: styleConsumerTestId,
-  };
-
-  render() {
-    return (
-      <View testID={this.props.testID}/>
-    );
-  }
-}
-
-describe('@style: style consumer checks', () => {
+    // @ts-ignore: test-case
+    expect(StyleConsumer.staticMethod).not.toBeUndefined();
+  });
 
   it('receives custom props', async () => {
     const StyleConsumer = StyledComponent(Test);
@@ -153,19 +286,6 @@ describe('@style: style consumer checks', () => {
     styledComponent.props.requestStateStyle([]);
     jest.spyOn(console, 'warn');
   });
-
-  it('static methods are copied over', async () => {
-    // @ts-ignore: test-case
-    Test.staticMethod = function() {};
-    const StyleConsumer = StyledComponent(Test);
-
-    // @ts-ignore: test-case
-    expect(StyleConsumer.staticMethod).not.toBeUndefined();
-  });
-
-});
-
-describe('@style: complex hierarchy checks', async () => {
 
   it('@style: provides correct styles on mapping/theme change', async () => {
     const StyleConsumer = StyledComponent(Test);

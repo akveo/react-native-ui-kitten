@@ -1,7 +1,6 @@
 import {
   ThemeMappingType,
   VariantType,
-  TokenType,
 } from '../component';
 
 export const VARIANT_DEFAULT = 'default';
@@ -14,22 +13,6 @@ export const VARIANT_DEFAULT = 'default';
  */
 export function getComponentThemeMapping(component: string, mapping: any): ThemeMappingType | undefined {
   return mapping[component];
-}
-
-/**
- * @param token: string - theme mapping token name
- * @param tokens: TokenType - theme tokens
- *
- * @return TokenType if presents in tokens, undefined otherwise
- */
-export function getThemeMappingToken(token: string, tokens: TokenType): TokenType | undefined {
-  if (tokens[token] === undefined) {
-    return undefined;
-  }
-  const value = {};
-  value[token] = tokens[token];
-
-  return value;
 }
 
 /**
@@ -50,40 +33,4 @@ export function getComponentVariant(variant: string,
   const { state: variantStates, ...variantParameters } = componentVariant;
 
   return state === undefined ? variantParameters : variantStates && variantStates[state];
-}
-
-/**
- * @param parameter: string - parameter name.
- * @param variant: string - variant name.
- * @param mapping: ThemeMappingType - component mapping configuration
- * @param state: string - variant state name
- *
- * @return parameterMapping if presents in variant, undefined otherwise
- */
-export function getParameterMapping(parameter: string,
-                                    variant: string,
-                                    mapping: ThemeMappingType,
-                                    state?: string): any | undefined {
-
-  const componentVariant = getComponentVariant(variant, mapping, state);
-  return componentVariant && componentVariant[parameter];
-}
-
-/**
- * @param parameter: string - parameter name.
- * @param variant: string - variant name.
- * @param mapping: ThemeMappingType - component mapping configuration
- * @param tokens: TokenType - theme tokens
- * @param state: string - variant state name
- *
- * @return theme token if presents in variant, undefined otherwise
- */
-export function getParameterValue(parameter: string,
-                                  variant: string,
-                                  mapping: ThemeMappingType,
-                                  tokens: TokenType,
-                                  state?: string): any | undefined {
-
-  const parameterMapping = getParameterMapping(parameter, variant, mapping, state);
-  return parameterMapping && getThemeMappingToken(parameterMapping, tokens);
 }
