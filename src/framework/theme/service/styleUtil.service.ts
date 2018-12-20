@@ -7,6 +7,7 @@ import {
   ThemeType,
   StyleType,
 } from '../component';
+import { getThemeValue } from './themeUtil.service';
 
 const SEPARATOR_VARIANT = ' ';
 const SEPARATOR_STATE = ' ';
@@ -53,16 +54,6 @@ export function createStyle(theme: ThemeType,
   const variantStateStyle = variants.map(mapVariantStates).reduce(mergeStyles, defaultStateStyle);
 
   return mergeStyles(variantStyle, variantStateStyle);
-}
-
-/**
- * @param name: string - theme property name, like `backgroundColor`
- * @param theme: ThemeType - theme
- *
- * @return any. Theme property value if it presents in theme, undefined otherwise
- */
-export function getThemeValue(name: string, theme: ThemeType): any | undefined {
-  return theme[name];
 }
 
 export function createStyleFromVariant(theme: ThemeType,
