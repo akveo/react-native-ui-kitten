@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@radio: component checks default variant renders properly 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignSelf": "center",
+            "position": "absolute",
+          },
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 27,
+            "height": 54,
+            "opacity": 0.75,
+            "width": 54,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "borderColor": "#A6AEBD",
+            "borderRadius": 18,
+            "borderWidth": 2,
+            "height": 36,
+            "width": 36,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 12,
+            "height": 24,
+            "width": 24,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`@radio: component checks default variant renders properly 2`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignSelf": "center",
+            "position": "absolute",
+          },
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 27,
+            "height": 54,
+            "opacity": 0.75,
+            "width": 54,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "borderColor": "blurPrimary",
+            "borderRadius": 18,
+            "borderWidth": 2,
+            "height": 36,
+            "width": 36,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#3366FF",
+            "borderRadius": 12,
+            "height": 24,
+            "width": 24,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

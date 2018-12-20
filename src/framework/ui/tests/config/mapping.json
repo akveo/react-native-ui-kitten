@@ -19,6 +19,7 @@
         "borderWidth": 2,
         "borderColor": "grayPrimary",
         "selectColor": "transparent",
+        "highlightColor": "transparent",
         "state": {
           "checked": {
             "borderColor": "blurPrimary",
