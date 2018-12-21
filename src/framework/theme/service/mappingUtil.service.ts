@@ -8,6 +8,7 @@ import {
 } from '../component';
 
 export const VARIANT_DEFAULT = 'default';
+export const VARIANT_KEY_NAME: string = 'variant';
 
 /**
  * @param component: string - component name
@@ -59,6 +60,18 @@ export function getMappingState(mapping: MappingType,
                                 state: string): StateType | undefined {
 
   return mapping.state && mapping.state[state];
+}
+
+export function hasAppearanceMappingPropKey(appearance: AppearanceType, key: string): boolean {
+  return hasAppearanceVariant(appearance) && hasVariantPropKey(appearance[VARIANT_KEY_NAME], key)
+}
+
+function hasAppearanceVariant(appearance: AppearanceType): boolean {
+  return appearance.hasOwnProperty(VARIANT_KEY_NAME)
+}
+
+function hasVariantPropKey(variant: VariantGroupType, propKey: string): boolean {
+  return Object.keys(variant).some((variantKey: string) => variantKey === propKey)
 }
 
 // /**
