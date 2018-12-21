@@ -34,7 +34,7 @@ export function getCurrentComponentMappingsVariants<P extends Props>(
     .filter(String);
 }
 
-function hasComponentAppearance(appearanceProp: string): boolean {
+export function hasComponentAppearance(appearanceProp: string): boolean {
   return appearanceProp && appearanceProp.length !== 0;
 }
 
@@ -42,10 +42,10 @@ function hasAppearanceMappingPropKey(appearance: AppearanceType, key: string): b
   return hasAppearanceVariant(appearance) && hasVariantPropKey(appearance[VARIANT_KEY_NAME], key)
 }
 
-function hasAppearanceVariant(appearance: AppearanceType): boolean {
-  return appearance.hasOwnProperty(VARIANT_KEY_NAME)
+export function hasAppearanceVariant(appearance: AppearanceType): boolean {
+  return appearance && appearance.hasOwnProperty(VARIANT_KEY_NAME)
 }
 
-function hasVariantPropKey(variant: VariantGroupType, propKey: string): boolean {
+export function hasVariantPropKey(variant: VariantGroupType, propKey: string): boolean {
   return Object.keys(variant).some((variantKey: string) => variantKey === propKey)
 }
