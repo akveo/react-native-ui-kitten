@@ -8,14 +8,12 @@ import {
   ThemeMappingType,
   ComponentMappingType,
   AppearanceType,
-  VariantGroupType,
 } from '../mapping';
 import ThemeContext from '../theme/themeContext';
 import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
   getComponentMapping,
-  getAppearanceMapping,
   getAppearance,
   hasAppearanceMappingPropKey,
   VARIANT_DEFAULT,
@@ -42,7 +40,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
   type ComponentProps = Props & P;
   type WrapperProps = PrivateProps<T> & ComponentProps;
 
-  class Wrapper extends React.Component<WrapperProps, S> {
+  class Wrapper extends React.Component<WrapperProps> {
 
     getComponentName = (): string => Component.displayName || Component.name;
 
@@ -84,7 +82,6 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
     createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
       const mapping = getComponentMapping(props.mapping, this.getComponentName());
       const variants: string[] = this.getCurrentComponentMappingsVariants(mapping, componentProps);
-      // console.log(variants)
 
       return {
         appearance: componentProps.appearance,
