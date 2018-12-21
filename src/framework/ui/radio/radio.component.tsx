@@ -5,6 +5,7 @@ import {
   StyleSheet, ViewProps,
 } from 'react-native';
 import {
+  StyledComponent,
   StyledComponentProps,
   StyleType,
 } from '@rk-kit/theme';
@@ -29,6 +30,7 @@ interface State {
   active: boolean;
 }
 
+@StyledComponent
 export class Radio extends React.Component<Props, State> {
 
   static defaultProps: Props = {

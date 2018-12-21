@@ -32,6 +32,7 @@ export interface Props {
   requestStateStyle?: (state: string[] | string) => StyleType;
 }
 
+// todo: refactor other places with StyleComponent, rename to "styled" or "styleComponent"
 export const StyledComponent = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
 
   type ComponentProps = Props & P;
