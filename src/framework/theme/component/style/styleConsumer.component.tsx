@@ -7,16 +7,13 @@ import {
 import {
   ThemeMappingType,
   ComponentMappingType,
-  AppearanceType,
 } from '../mapping';
 import ThemeContext from '../theme/themeContext';
 import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
   getComponentMapping,
-  getAppearance,
-  hasAppearanceMappingPropKey,
-  VARIANT_DEFAULT,
+  getCurrentComponentMappingsVariants,
 } from '../../service';
 
 interface PrivateProps<T> {
@@ -56,32 +53,9 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
       return createStyle(theme, mapping, appearance, variant, state);
     };
 
-    hasComponentAppearance = (appearanceProp: string): boolean => appearanceProp && appearanceProp.length !== 0;
-
-    getCurrentComponentMappingsVariants = (mapping: ComponentMappingType, componentProps: P & Props): string[] => {
-      const defaultAppearance: AppearanceType = getAppearance(mapping, VARIANT_DEFAULT);
-      const currentAppearance: AppearanceType = this.hasComponentAppearance(componentProps.appearance) ?
-        getAppearance(mapping, componentProps.appearance) : getAppearance(mapping, VARIANT_DEFAULT);
-      const matchedVariantsPropsKeys: string[] = Object.keys(componentProps)
-        .map((key: string) => {
-          if (hasAppearanceMappingPropKey(currentAppearance, key)) {
-            return key;
-          } else if (hasAppearanceMappingPropKey(defaultAppearance, key)) {
-            return key;
-          }
-        })
-        .filter(String);
-
-      return Object.keys(componentProps)
-        .filter((propsKey: string) =>
-          matchedVariantsPropsKeys.some((foundKey: string) => foundKey === propsKey))
-        .map((key: string) => componentProps[key])
-        .filter(String);
-    };
-
     createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
       const mapping = getComponentMapping(props.mapping, this.getComponentName());
-      const variants: string[] = this.getCurrentComponentMappingsVariants(mapping, componentProps);
+      const variants: string[] = getCurrentComponentMappingsVariants<P & Props>(mapping, componentProps);
 
       return {
         appearance: componentProps.appearance,
