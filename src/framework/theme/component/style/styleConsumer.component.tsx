@@ -13,7 +13,7 @@ import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
   getComponentMapping,
-  getCurrentComponentMappingsVariants,
+  StyleConsumerService,
 } from '../../service';
 
 interface PrivateProps<T> {
@@ -40,6 +40,8 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
 
   class Wrapper extends React.Component<WrapperProps> {
 
+    service: StyleConsumerService = new StyleConsumerService();
+
     getComponentName = (): string => Component.displayName || Component.name;
 
     createComponentStyle = (theme: ThemeType,
@@ -56,7 +58,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
 
     createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
       const mapping = getComponentMapping(props.mapping, this.getComponentName());
-      const variants: string[] = getCurrentComponentMappingsVariants<P & Props>(mapping, componentProps);
+      const variants: string[] = this.service.getCurrentComponentMappingsVariants<P & Props>(mapping, componentProps);
 
       return {
         appearance: componentProps.appearance,
