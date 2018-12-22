@@ -4,6 +4,6 @@ export {
 } from './styleProvider.component';
 
 export {
-  StyledComponent,
+  styled,
   Props as StyledComponentProps,
 } from './styleConsumer.component';

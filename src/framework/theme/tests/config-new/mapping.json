@@ -74,7 +74,8 @@
       },
       "custom": {
         "mapping": {
-          "borderWidth": 4
+          "borderWidth": 4,
+          "state": {}
         }
       }
     }
