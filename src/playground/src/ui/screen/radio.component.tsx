@@ -55,15 +55,73 @@ class Radio extends React.Component<Props, State> {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Default</Text>
+          <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <RadioComponent
               style={this.props.themedStyle.component}
-              appearance='bold'
-              status='info'
-              size='small'
               checked={this.state.isRadio1Checked}
               onChange={this.onRadio1Change}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              checked={this.state.isRadio2Checked}
+              onChange={this.onRadio2Change}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              checked={this.state.isRadio3Checked}
+              disabled={true}
+              onChange={this.onRadio3Change}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              checked={this.state.isRadio4Checked}
+              disabled={true}
+              onChange={this.onRadio4Change}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Error</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <RadioComponent
+              status='error'
+              style={this.props.themedStyle.component}
+            />
+            <RadioComponent
+              status='error'
+              style={this.props.themedStyle.component}
+              checked={true}
+            />
+            <RadioComponent
+              status='error'
+              style={this.props.themedStyle.component}
+              disabled={true}
+            />
+            <RadioComponent
+              status='error'
+              style={this.props.themedStyle.component}
+              checked={true}
+              disabled={true}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Size</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <RadioComponent
+              size='big'
+              style={this.props.themedStyle.component}
+              checked={true}
+            />
+            <RadioComponent
+              style={this.props.themedStyle.component}
+              checked={true}
+            />
+            <RadioComponent
+              size='small'
+              style={this.props.themedStyle.component}
+              checked={true}
             />
           </View>
         </View>
