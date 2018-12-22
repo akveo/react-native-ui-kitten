@@ -12,17 +12,20 @@ import {
   ThemeProvider,
   withStyles,
   ThemeType,
-  StyleType,
 } from '../component';
 import { getThemeValue } from '../service';
+import {
+  theme,
+  themeInverse,
+} from './config';
 
 describe('@theme: service method checks', () => {
 
   it('finds theme value properly', async () => {
-    const themeValue = getThemeValue('backgroundColorTestDefault', config.theme);
-    const undefinedValue = getThemeValue('undefined', config.theme);
+    const themeValue = getThemeValue('grayPrimary', theme);
+    const undefinedValue = getThemeValue('undefined', theme);
 
-    expect(themeValue).toEqual(config.values.backgroundDefault);
+    expect(themeValue).toEqual(theme.grayPrimary);
     expect(undefinedValue).toBeUndefined();
   });
 
@@ -33,7 +36,9 @@ describe('@theme: ui component checks', () => {
   const themeConsumerTestId = '@theme/consumer';
   const themeChangeTouchableTestId = '@theme/btnChangeTheme';
 
-  class ThemedConsumer extends React.Component<any> {
+  const json = (object: any) => JSON.stringify(object);
+
+  class ComponentMock extends React.Component<any> {
     static defaultProps = {
       testID: themeConsumerTestId,
     };
@@ -45,49 +50,30 @@ describe('@theme: ui component checks', () => {
     }
   }
 
-  class ThemedStyleConsumer extends React.Component<any> {
-    static defaultProps = {
-      testID: themeConsumerTestId,
-    };
-
-    render() {
-      return (
-        <View
-          testID={this.props.testID}
-          style={this.props.themedStyle.container}
-        />
-      );
-    }
+  interface ActionMockProps {
+    theme: ThemeType;
+    themeInverse: ThemeType;
   }
 
-  class ActionedProvider extends React.Component<any> {
-
-    static initialThemeColor = '#ffffff';
-    static onChangeThemeColor = '#000000';
+  class ActionMock extends React.Component<ActionMockProps> {
 
     state = {
-      theme: {
-        backgroundColor: ActionedProvider.initialThemeColor,
-      },
+      theme: undefined,
     };
 
-    isInitialColor = (color: string): boolean => color === ActionedProvider.initialThemeColor;
-
-    getInversedColor = (color: string): string => {
-      const isInitialColor = this.isInitialColor(color);
-      return isInitialColor ? ActionedProvider.onChangeThemeColor : ActionedProvider.initialThemeColor;
-    };
+    constructor(props) {
+      super(props);
+      this.state.theme = this.props.theme;
+    }
 
     onThemeChangeTouchablePress = () => {
       this.setState({
-        theme: {
-          backgroundColor: this.getInversedColor(this.state.theme.backgroundColor),
-        },
+        theme: this.props.themeInverse,
       });
     };
 
     render() {
-      const ThemedComponent = withStyles(ThemedConsumer);
+      const ThemedComponent = withStyles(ComponentMock);
       return (
         <View>
           <ThemeProvider theme={this.state.theme}>
@@ -102,64 +88,26 @@ describe('@theme: ui component checks', () => {
     }
   }
 
-  class ThemedStyleProvider extends React.Component<any> {
+  interface OverrideMockProps {
+    theme: ThemeType;
+    themeInverse: ThemeType;
+  }
 
-    createThemedComponent1Styles = (theme: ThemeType) => ({
-      container: {
-        backgroundColor: theme.color,
-      },
-    });
-
-    createThemedComponent2Styles = (theme: ThemeType) => ({
-      container: {
-        backgroundColor: theme.color,
-      },
-    });
+  class OverrideMock extends React.Component<OverrideMockProps> {
 
     render() {
-      const ThemedComponent1 = withStyles(ThemedStyleConsumer, this.createThemedComponent1Styles);
-      const ThemedComponent2 = withStyles(ThemedStyleConsumer, this.createThemedComponent2Styles);
+      const ThemedComponent1 = withStyles(ComponentMock);
+      const ThemedComponent2 = withStyles(ComponentMock);
       return (
-        <ThemeProvider theme={this.props.theme1}>
+        <ThemeProvider theme={this.props.theme}>
           <ThemedComponent1/>
-          <ThemeProvider theme={this.props.theme2}>
+          <ThemeProvider theme={this.props.themeInverse}>
             <ThemedComponent2/>
           </ThemeProvider>
         </ThemeProvider>
       );
     }
   }
-
-  it('static methods are copied over', async () => {
-    // @ts-ignore: test-case
-    ThemedConsumer.staticMethod = function () {
-    };
-    const ThemedComponent = withStyles(ThemedConsumer);
-
-    // @ts-ignore: test-case
-    expect(ThemedComponent.staticMethod).not.toBeUndefined();
-  });
-
-});
-
-describe('@theme: ui component checks', () => {
-
-  it('receives custom props', async () => {
-    const ThemedComponent = withStyles(ComponentMock, createThemedStyleMock);
-
-    const component = render(
-      <ThemeProvider theme={config.theme}>
-        <ThemedComponent/>
-      </ThemeProvider>,
-    );
-
-    const themedComponent = component.getByTestId(themeConsumerTestId);
-
-    expect(JSON.stringify(themedComponent.props.theme)).toEqual(JSON.stringify(config.theme));
-    expect(themedComponent.props.themedStyle).not.toBeNull();
-    expect(themedComponent.props.themedStyle).not.toBeUndefined();
-    expect(themedComponent.props.themedStyle.color).toEqual(config.theme.backgroundColorTestDefault);
-  });
 
   it('static methods are copied over', async () => {
     // @ts-ignore: test-case
@@ -171,11 +119,32 @@ describe('@theme: ui component checks', () => {
     expect(ThemedComponent.staticMethod).not.toBeUndefined();
   });
 
+  it('receives custom props', async () => {
+    const ThemedComponent = withStyles(ComponentMock, (value: ThemeType) => ({
+      container: {
+        backgroundColor: value.grayPrimary,
+      },
+    }));
+
+    const component = render(
+      <ThemeProvider theme={theme}>
+        <ThemedComponent/>
+      </ThemeProvider>,
+    );
+
+    const themedComponent = component.getByTestId(themeConsumerTestId);
+
+    expect(json(themedComponent.props.theme)).toEqual(json(theme));
+    expect(themedComponent.props.themedStyle.container.backgroundColor).toEqual(theme.grayPrimary);
+    expect(themedComponent.props.themedStyle).not.toBeNull();
+    expect(themedComponent.props.themedStyle).not.toBeUndefined();
+  });
+
   it('able to change theme', async () => {
     const component = render(
       <ActionMock
-        theme1={config.theme}
-        theme2={config.themeInverse}
+        theme={theme}
+        themeInverse={themeInverse}
       />,
     );
 
@@ -187,15 +156,14 @@ describe('@theme: ui component checks', () => {
       return component.getByTestId(themeConsumerTestId);
     });
 
-    expect(JSON.stringify(themedComponent.props.theme)).toEqual(JSON.stringify(config.themeInverse));
+    expect(json(themedComponent.props.theme)).toEqual(json(themeInverse));
   });
 
   it('able to override theme', async () => {
     const component = render(
       <OverrideMock
-        theme1={config.theme}
-        theme2={config.themeInverse}
-        createStyle={createThemedStyleMock}
+        theme={theme}
+        themeInverse={themeInverse}
       />,
     );
 
@@ -203,10 +171,12 @@ describe('@theme: ui component checks', () => {
 
     expect(themedComponents.length).toBeGreaterThan(1);
 
-    const themedComponent1Color = themedComponents[0].props.themedStyle.container.backgroundColor;
-    const themedComponent2Color = themedComponents[1].props.themedStyle.container.backgroundColor;
+    const theme1 = themedComponents[0].props.theme;
+    const theme2 = themedComponents[1].props.theme;
 
-    expect(themedComponent1Color).not.toEqual(themedComponent2Color);
+    expect(theme1).not.toEqual(theme2);
+    expect(json(theme1)).toEqual(json(theme));
+    expect(json(theme2)).toEqual(json(themeInverse));
   });
 
 });

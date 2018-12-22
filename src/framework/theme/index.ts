@@ -19,6 +19,6 @@ export {
 } from './component';
 
 export {
-  VARIANT_DEFAULT,
+  APPEARANCE_DEFAULT,
 } from './service';
 

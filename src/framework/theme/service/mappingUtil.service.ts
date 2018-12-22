@@ -8,7 +8,6 @@ import {
 } from '../component';
 
 export const APPEARANCE_DEFAULT = 'default';
-export const VARIANT_DEFAULT = 'default';
 
 /**
  * @param component: string - component name

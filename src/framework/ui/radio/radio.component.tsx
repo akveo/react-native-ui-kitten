@@ -14,10 +14,10 @@ const STATE_ACTIVE = 'active';
 const STATE_CHECKED = 'checked';
 const STATE_DISABLED = 'disabled';
 
-interface RadioProps {
-  onChange?: (selected: boolean) => void;
+export interface RadioProps {
   checked?: boolean;
   disabled?: boolean;
+  onChange?: (selected: boolean) => void;
   appearance?: string | 'default';
   status?: string | 'error';
   size?: string | 'big' | 'small';

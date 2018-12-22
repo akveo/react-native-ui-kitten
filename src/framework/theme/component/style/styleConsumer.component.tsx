@@ -46,8 +46,8 @@ export const styled = <T extends React.Component, P extends object>(Component: R
     createComponentStyle = (theme: ThemeType,
                             mapping: ComponentMappingType,
                             appearance: string,
-                            variant: string[] = [],
-                            state: string[] = []): StyleType => {
+                            variant: string[],
+                            state: string[]): StyleType => {
 
       if (state.length === 0) {
         console.warn('Redundant `requestStateStyle` call! Use `this.props.themedStyle` instead!');

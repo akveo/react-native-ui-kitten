@@ -5,13 +5,16 @@ import {
 } from 'react-native-testing-library';
 import {
   StyleProvider,
-  VARIANT_DEFAULT,
+  APPEARANCE_DEFAULT,
 } from '@rk-kit/theme';
 import {
-  Mappings as mappings,
-  Theme as theme,
+  mapping,
+  theme,
 } from './config';
-import { Radio, RadioProps } from '@rk-kit/ui';
+import {
+  Radio,
+  RadioProps,
+} from '../radio';
 
 const componentTestId = '@radio/component';
 
@@ -20,12 +23,12 @@ class Mock extends React.Component<RadioProps> {
   static defaultProps: RadioProps = {
     checked: false,
     disabled: false,
-    variant: VARIANT_DEFAULT,
+    appearance: APPEARANCE_DEFAULT,
   };
 
   render() {
     return (
-      <StyleProvider mapping={mappings} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme}>
         <Radio
           testID={componentTestId}
           {...this.props}
@@ -36,15 +39,6 @@ class Mock extends React.Component<RadioProps> {
 }
 
 describe('@radio: component checks', () => {
-
-  it('default variant renders properly', async () => {
-    const component = render(
-      <Mock />,
-    );
-    const radioComponent = component.getByTestId(componentTestId);
-    expect(radioComponent).not.toBeNull();
-    expect(radioComponent).not.toBeUndefined();
-  });
 
   it('emits onChange', async () => {
     const onChange = jest.fn();

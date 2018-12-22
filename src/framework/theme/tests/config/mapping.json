@@ -6,24 +6,24 @@
           "size": 36,
           "innerSize": 24,
           "borderWidth": 2,
-          "borderColor": "gray-primary",
+          "borderColor": "grayPrimary",
           "selectColor": "transparent",
           "state": {
             "active": {
-              "borderColor": "gray-dark"
+              "borderColor": "grayDark"
             },
             "checked": {
-              "borderColor": "blue-primary",
-              "selectColor": "blue-primary"
+              "borderColor": "bluePrimary",
+              "selectColor": "bluePrimary"
             },
             "disabled": {
-              "borderColor": "gray-light"
+              "borderColor": "grayLight"
             },
             "active.checked": {
-              "borderColor": "blue-dark"
+              "borderColor": "blueDark"
             },
             "checked.disabled": {
-              "selectColor": "gray-primary"
+              "selectColor": "grayPrimary"
             }
           }
         },
@@ -33,11 +33,11 @@
               "mapping": {
                 "state": {
                   "checked": {
-                    "borderColor": "orange-primary",
-                    "selectColor": "orange-primary"
+                    "borderColor": "orangePrimary",
+                    "selectColor": "orangePrimary"
                   },
                   "active.checked": {
-                    "borderColor": "orange-dark"
+                    "borderColor": "orangeDark"
                   }
                 }
               }
@@ -46,11 +46,11 @@
               "mapping": {
                 "state": {
                   "checked": {
-                    "borderColor": "teal-primary",
-                    "selectColor": "teal-primary"
+                    "borderColor": "tealPrimary",
+                    "selectColor": "tealPrimary"
                   },
                   "active.checked": {
-                    "borderColor": "teal-dark"
+                    "borderColor": "tealDark"
                   }
                 }
               }
@@ -77,6 +77,13 @@
           "borderWidth": 4,
           "state": {}
         }
+      }
+    }
+  },
+  "Empty": {
+    "appearance": {
+      "default": {
+
       }
     }
   }
