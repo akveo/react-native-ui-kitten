@@ -213,14 +213,14 @@ describe('@style: service methods checks', () => {
 //   it('static methods are copied over', async () => {
 //     // @ts-ignore: test-case
 //     Test.staticMethod = function() {};
-//     const StyleConsumer = StyledComponent(Test);
+//     const StyleConsumer = styled(Test);
 //
 //     // @ts-ignore: test-case
 //     expect(StyleConsumer.staticMethod).not.toBeUndefined();
 //   });
 //
 //   it('receives custom props', async () => {
-//     const StyleConsumer = StyledComponent(Test);
+//     const StyleConsumer = styled(Test);
 //
 //     const component = render(
 //       <StyleProvider mapping={config.mappings} theme={config.theme}>
@@ -240,7 +240,7 @@ describe('@style: service methods checks', () => {
 //   });
 //
 //   it('default variant styled properly', async () => {
-//     const StyleConsumer = StyledComponent(Test);
+//     const StyleConsumer = styled(Test);
 //
 //     const component = render(
 //       <StyleProvider mapping={config.mappings} theme={config.theme}>
@@ -254,7 +254,7 @@ describe('@style: service methods checks', () => {
 //   });
 //
 //   it('list of non-default variants styled properly', async () => {
-//     const StyleConsumer = StyledComponent(Test);
+//     const StyleConsumer = styled(Test);
 //
 //     const component = render(
 //       <StyleProvider mapping={config.mappings} theme={config.theme}>
@@ -268,7 +268,7 @@ describe('@style: service methods checks', () => {
 //   });
 //
 //   it('style request works properly', async () => {
-//     const StyleConsumer = StyledComponent(Test);
+//     const StyleConsumer = styled(Test);
 //
 //     const component = render(
 //       <StyleProvider mapping={config.mappings} theme={config.theme}>
@@ -295,7 +295,7 @@ describe('@style: service methods checks', () => {
 //   });
 //
 //   it('@style: provides correct styles on mapping/theme change', async () => {
-//     const StyleConsumer = StyledComponent(Test);
+//     const StyleConsumer = styled(Test);
 //
 //     const component = render(
 //       <ComplexStyleProvider

@@ -1,6 +1,6 @@
 export {
   StyleProvider,
-  StyledComponent,
+  styled,
   ThemeProvider,
   withStyles,
 
