@@ -5,39 +5,31 @@ describe('@mapping: service methods checks', () => {
 
   const { Test: testMapping } = Mapping;
 
+  const json = (object: any) => JSON.stringify(object);
+
   it('finds appearance mapping properly', () => {
     const defaultMapping = Service.getAppearanceMapping(testMapping, 'default');
     const customMapping = Service.getAppearanceMapping(testMapping, 'custom');
     const undefinedMapping = Service.getAppearanceMapping(testMapping, 'undefined');
 
-    expect(JSON.stringify(defaultMapping)).toEqual(JSON.stringify(testMapping.appearance.default.mapping));
-    expect(JSON.stringify(customMapping)).toEqual(JSON.stringify(testMapping.appearance.custom.mapping));
+    expect(json(defaultMapping)).toEqual(json(testMapping.appearance.default.mapping));
+    expect(json(customMapping)).toEqual(json(testMapping.appearance.custom.mapping));
     expect(undefinedMapping).toBeUndefined();
   });
 
   it('finds variant mapping properly', () => {
     const variantMapping = Service.getVariantMapping(testMapping,
       'default',
-      'status',
       'info');
     const withUndefinedAppearance = Service.getVariantMapping(testMapping,
-      'undefined',
-      'status',
-      'info');
-    const withUndefinedGroup = Service.getVariantMapping(testMapping,
-      'default',
       'undefined',
       'info');
     const withUndefinedVariant = Service.getVariantMapping(testMapping,
       'default',
-      'status',
       'undefined');
 
-    const expectedValue = testMapping.appearance.default.variant.status.info.mapping;
-
-    expect(JSON.stringify(variantMapping)).toEqual(JSON.stringify(expectedValue));
+    expect(json(variantMapping)).toEqual(json(testMapping.appearance.default.variant.status.info.mapping));
     expect(withUndefinedAppearance).toBeUndefined();
-    expect(withUndefinedGroup).toBeUndefined();
     expect(withUndefinedVariant).toBeUndefined();
   });
 
@@ -50,8 +42,8 @@ describe('@mapping: service methods checks', () => {
     const undefinedAppearanceState = Service.getMappingState(appearanceMapping, 'undefined');
     const undefinedVariantState = Service.getMappingState(variantMapping, 'undefined');
 
-    expect(JSON.stringify(appearanceState)).toEqual(JSON.stringify(appearanceMapping.state.checked));
-    expect(JSON.stringify(variantState)).toEqual(JSON.stringify(variantMapping.state.checked));
+    expect(json(appearanceState)).toEqual(json(appearanceMapping.state.checked));
+    expect(json(variantState)).toEqual(json(variantMapping.state.checked));
     expect(undefinedAppearanceState).toBeUndefined();
     expect(undefinedVariantState).toBeUndefined();
   });
@@ -60,7 +52,7 @@ describe('@mapping: service methods checks', () => {
   //   const componentMappings = getComponentMapping(config.mappings, 'Test');
   //   const undefinedMappings = getComponentMapping(config.mappings, 'Undefined');
   //
-  //   expect(JSON.stringify(componentMappings)).toEqual(JSON.stringify(config.mappings.Test));
+  //   expect(json(componentMappings)).toEqual(json(config.mappings.Test));
   //   expect(undefinedMappings).toBeUndefined();
   // });
 
@@ -72,8 +64,8 @@ describe('@mapping: service methods checks', () => {
   //
   //   const { state: variantState, ...variant } = config.mappings.Test.variants.default;
   //
-  //   expect(JSON.stringify(componentVariant)).toEqual(JSON.stringify(variant));
-  //   expect(JSON.stringify(componentStateVariant)).toEqual(JSON.stringify(variantState.active));
+  //   expect(json(componentVariant)).toEqual(json(variant));
+  //   expect(json(componentStateVariant)).toEqual(json(variantState.active));
   //   expect(undefinedVariant).toBeUndefined();
   //   expect(undefinedStateVariant).toBeUndefined();
   // });

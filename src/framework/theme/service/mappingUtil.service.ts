@@ -7,6 +7,7 @@ import {
   StateType,
 } from '../component';
 
+export const APPEARANCE_DEFAULT = 'default';
 export const VARIANT_DEFAULT = 'default';
 
 /**
@@ -27,6 +28,21 @@ export function getAppearance(mapping: ComponentMappingType,
   return mapping.appearance[appearance];
 }
 
+export function getAppearanceMapping(mapping: ComponentMappingType,
+                                     appearance: string): MappingType | undefined {
+
+  const appearanceConfig = getAppearance(mapping, appearance);
+
+  return appearanceConfig && appearanceConfig.mapping;
+}
+
+export function getAppearanceMappingSafe(mapping: ComponentMappingType,
+                                         appearance: string,
+                                         fallback: MappingType): MappingType {
+
+  return getAppearanceMapping(mapping, appearance) || fallback;
+}
+
 export function getAppearanceVariants(mapping: ComponentMappingType,
                                       appearance: string): VariantGroupType | undefined {
 
@@ -35,24 +51,25 @@ export function getAppearanceVariants(mapping: ComponentMappingType,
   return appearanceConfig && appearanceConfig.variant;
 }
 
-export function getAppearanceMapping(mapping: ComponentMappingType,
-                                     appearance: string): MappingType {
-
-  const appearanceConfig = getAppearance(mapping, appearance);
-
-  return appearanceConfig && appearanceConfig.mapping;
-}
-
 export function getVariantMapping(mapping: ComponentMappingType,
                                   appearance: string,
-                                  group: string,
                                   variant: string): MappingType | undefined {
 
   const variantGroupConfig = getAppearanceVariants(mapping, appearance);
-  const variantGroup = variantGroupConfig && variantGroupConfig[group];
-  const variantConfig = variantGroup && variantGroup[variant];
+  const variantGroupName = variantGroupConfig && Object.keys(variantGroupConfig).find(group => {
+    return variantGroupConfig[group][variant] !== undefined;
+  });
+  const variantConfig = variantGroupName && variantGroupConfig[variantGroupName][variant];
 
   return variantConfig && variantConfig.mapping;
+}
+
+export function getVariantMappingSafe(mapping: ComponentMappingType,
+                                      appearance: string,
+                                      variant: string,
+                                      fallback: MappingType): MappingType {
+
+  return getVariantMapping(mapping, appearance, variant) || fallback;
 }
 
 export function getMappingState(mapping: MappingType,
@@ -60,23 +77,3 @@ export function getMappingState(mapping: MappingType,
 
   return mapping.state && mapping.state[state];
 }
-
-// /**
-//  * @param variant: string - variant name. Default is 'default'
-//  * @param mapping: ThemeMappingType - component mapping configuration
-//  * @param state: string - variant state name. Default is `undefined`
-//  *
-//  * @return variant if presents in mapping, undefined otherwise
-//  */
-// export function getComponentVariant(mapping: ComponentMappingType,
-//                                     variant: string,
-//                                     state?: string): any | undefined {
-//
-//   const componentVariant: VariantType = mapping.variants[variant];
-//   if (componentVariant === undefined) {
-//     return undefined;
-//   }
-//   const { state: variantStates, ...variantParameters } = componentVariant;
-//
-//   return state === undefined ? variantParameters : variantStates && variantStates[state];
-// }
