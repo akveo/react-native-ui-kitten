@@ -29,7 +29,7 @@
         },
         "variant": {
           "status": {
-            "info": {
+            "error": {
               "mapping": {
                 "state": {
                   "checked": {
@@ -109,28 +109,16 @@
         },
         "variant": {
           "status": {
-            "info": {
+            "error": {
               "mapping": {
+                "borderColor": "pink-primary",
                 "state": {
                   "checked": {
-                    "borderColor": "orange-primary",
-                    "selectColor": "orange-primary"
+                    "borderColor": "pink-primary",
+                    "selectColor": "pink-primary"
                   },
                   "active.checked": {
-                    "borderColor": "orange-dark"
-                  }
-                }
-              }
-            },
-            "success": {
-              "mapping": {
-                "state": {
-                  "checked": {
-                    "borderColor": "teal-primary",
-                    "selectColor": "teal-primary"
-                  },
-                  "active.checked": {
-                    "borderColor": "teal-dark"
+                    "borderColor": "pink-primary"
                   }
                 }
               }
@@ -150,11 +138,6 @@
               }
             }
           }
-        }
-      },
-      "bold": {
-        "mapping": {
-          "borderWidth": 4
         }
       }
     }

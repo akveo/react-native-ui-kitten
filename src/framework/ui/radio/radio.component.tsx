@@ -10,17 +10,16 @@ import {
   StyleType,
 } from '@rk-kit/theme';
 
+const STATE_ACTIVE = 'active';
 const STATE_CHECKED = 'checked';
 const STATE_DISABLED = 'disabled';
-const STATE_ACTIVE_UNCHECKED = 'active-unchecked';
-const STATE_ACTIVE_CHECKED = 'active-checked';
 
 interface RadioProps {
   onChange?: (selected: boolean) => void;
   checked?: boolean;
   disabled?: boolean;
-  appearance?: string | 'default' | 'bold';
-  status?: string | 'info' | 'success';
+  appearance?: string | 'default';
+  status?: string | 'error';
   size?: string | 'big' | 'small';
 }
 
@@ -71,10 +70,9 @@ export class Radio extends React.Component<Props, State> {
 
   getStateStyle = (): StyleType => {
     return this.props.requestStateStyle([
+      this.state.active && STATE_ACTIVE,
       this.props.checked && STATE_CHECKED,
       this.props.disabled && STATE_DISABLED,
-      this.state.active && this.props.checked && STATE_ACTIVE_CHECKED,
-      this.state.active && !this.props.checked && STATE_ACTIVE_UNCHECKED,
     ]);
   };
 
@@ -93,7 +91,6 @@ export class Radio extends React.Component<Props, State> {
         height: style.innerSize,
         borderRadius: style.innerSize / 2,
         backgroundColor: style.selectColor,
-        opacity: this.props.checked ? 1.0 : 0.0,
       },
       highlight: {
         width: style.highlightSize,
