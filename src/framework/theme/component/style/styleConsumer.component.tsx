@@ -29,7 +29,7 @@ export interface Props {
   appearance?: string;
   theme?: ThemeType;
   themedStyle?: StyleType;
-  requestStateStyle?: (state: string[] | string) => StyleType;
+  requestStateStyle?: (state: string[]) => StyleType;
 }
 
 export const styled = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
@@ -57,14 +57,15 @@ export const styled = <T extends React.Component, P extends object>(Component: R
 
     createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
       const mapping = getComponentMapping(props.mapping, this.getComponentName());
-      const variants: string[] = this.service.getCurrentComponentMappingsVariants<P & Props>(mapping, componentProps);
+      const variants = this.service.getVariantPropKeys<P & Props>(mapping, componentProps);
 
       return {
         appearance: componentProps.appearance,
         theme: props.theme,
-        themedStyle: createStyle(props.theme, mapping, componentProps.appearance, variants, []),
-        requestStateStyle: state =>
-          this.createComponentStyle(props.theme, mapping, componentProps.appearance, variants, []),
+        themedStyle: createStyle(props.theme, mapping, componentProps.appearance, variants),
+        requestStateStyle: state => {
+          return this.createComponentStyle(props.theme, mapping, componentProps.appearance, variants, state);
+        },
       };
     };
 

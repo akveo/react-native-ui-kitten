@@ -1,60 +1,35 @@
-import { Mapping } from './config-new'
-import { StyleConsumerService } from '../service';
+import { Mapping as mapping } from './config-new';
 import {
-  AppearanceType,
-  ComponentMappingType,
-  VariantGroupType,
-} from '../component'
+  StyleConsumerService,
+  APPEARANCE_DEFAULT,
+} from '../service';
 
-describe('@theme: service methods check', () => {
+describe('@style: service methods check', () => {
 
+  const { Test: testMapping } = mapping;
   const service: StyleConsumerService = new StyleConsumerService();
 
-  it('get current component mappings variants', () => {
-    const mapping: ComponentMappingType = Mapping.Test;
-    const componentPropsWithTargets: object = {
-      appearance: 'bold',
+  it('retrieves variant prop keys properly', () => {
+    const defaultAppearanceKeys = service.getVariantPropKeys(testMapping, {
+      appearance: APPEARANCE_DEFAULT,
       checked: false,
-      onChange: () => 1,
-      size: 'small',
       status: 'info',
-      style: { marginHorizontal: 4, },
-    };
-    const componentPropsWithoutTargets: object = {
+      size: 'small',
+    });
+    const customAppearanceKeys = service.getVariantPropKeys(testMapping, {
+      appearance: 'custom',
       checked: false,
-      onChange: () => 1,
-      style: { marginHorizontal: 4, },
-    };
+      size: 'small',
+    });
+    const undefinedAppearanceKeys = service.getVariantPropKeys(testMapping, {
+      appearance: 'undefined',
+      checked: false,
+      status: 'info',
+    });
 
-    expect(service.getCurrentComponentMappingsVariants(mapping, componentPropsWithTargets))
-      .toEqual (['small', 'info']);
-    expect(service.getCurrentComponentMappingsVariants(mapping, componentPropsWithoutTargets)).toEqual ([]);
-  });
-
-  it('has component appearance', () => {
-    const appearance: string = 'test';
-    const notAppearance: string = undefined;
-    const emptyAppearance: string = '';
-
-    expect(service.hasComponentAppearance(appearance)).toBe(true);
-    expect(service.hasComponentAppearance(notAppearance)).toBe(undefined);
-    expect(service.hasComponentAppearance(emptyAppearance)).toBe('');
-  });
-
-  it('has appearance variant', () => {
-    const appearanceWithVariant: AppearanceType = Mapping.Test.appearance.default;
-    const appearanceWithoutVariant: AppearanceType = Mapping.Test.appearance.custom;
-
-    expect(service.hasAppearanceVariant(appearanceWithVariant)).toBe(true);
-    expect(service.hasAppearanceVariant(appearanceWithoutVariant)).toBe(false);
-  });
-
-  it('has variant prop key', () => {
-    const variantGroup: VariantGroupType = Mapping.Test.appearance.default.variant;
-
-    expect(service.hasVariantPropKey(variantGroup, 'size')).toBe(true);
-    expect(service.hasVariantPropKey(variantGroup, '')).toBe(false);
-    expect(service.hasVariantPropKey(variantGroup, null)).toBe(false);
+    expect(defaultAppearanceKeys).toEqual(['info', 'small']);
+    expect(customAppearanceKeys).toEqual(['small']);
+    expect(undefinedAppearanceKeys).toEqual(['info']);
   });
 
 });
