@@ -1,40 +1,35 @@
 import React from 'react';
 import {
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
-  StyleSheet, ViewProps,
+  StyleSheet,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
-  styled,
+  APPEARANCE_DEFAULT,
   StyledComponentProps,
   StyleType,
 } from '@rk-kit/theme';
 
-const STATE_ACTIVE = 'active';
-const STATE_CHECKED = 'checked';
-const STATE_DISABLED = 'disabled';
-
-export interface RadioProps {
+interface RadioProps {
   checked?: boolean;
-  disabled?: boolean;
   onChange?: (selected: boolean) => void;
   appearance?: string | 'default';
   status?: string | 'error';
   size?: string | 'big' | 'small';
 }
 
-export type Props = RadioProps & StyledComponentProps & ViewProps;
+export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
 
 interface State {
   active: boolean;
 }
 
-@styled
 export class Radio extends React.Component<Props, State> {
 
   static defaultProps: Props = {
+    appearance: APPEARANCE_DEFAULT,
     checked: false,
-    disabled: false,
   };
 
   state: State = {
@@ -70,9 +65,9 @@ export class Radio extends React.Component<Props, State> {
 
   getStateStyle = (): StyleType => {
     return this.props.requestStateStyle([
-      this.state.active && STATE_ACTIVE,
-      this.props.checked && STATE_CHECKED,
-      this.props.disabled && STATE_DISABLED,
+      this.state.active && 'active',
+      this.props.checked && 'checked',
+      this.props.disabled && 'disabled',
     ]);
   };
 
@@ -97,28 +92,27 @@ export class Radio extends React.Component<Props, State> {
         height: style.highlightSize,
         borderRadius: style.highlightSize / 2,
         backgroundColor: style.highlightColor,
-        opacity: this.state.active ? 0.75 : 0.0,
+        opacity: this.state.active ? 0.4 : 0.0,
       },
     });
   };
 
   render() {
     const componentStyle = this.getComponentStyle();
-    const { style, ...props } = this.props;
     return (
-      <TouchableWithoutFeedback
-        testID='@radio/touchable'
-        disabled={this.props.disabled}
+      <TouchableOpacity
+        {...this.props}
+        activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={[styles.border, style]} {...props}>
+        <View style={styles.border}>
           <View style={[styles.highlight, componentStyle.highlight]}/>
           <View style={[styles.border, componentStyle.border]}>
             <View style={componentStyle.select}/>
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     );
   }
 }
