@@ -140,6 +140,7 @@ export const RadioScreen = withStyles(Radio, (theme: ThemeType) => ({
   },
   containerPreview: {
     flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 4,
   },
   textDescription: {
