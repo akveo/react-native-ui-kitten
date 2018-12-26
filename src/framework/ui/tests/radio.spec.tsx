@@ -1,107 +1,109 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import {
   render,
   fireEvent,
-  waitForElement, debug,
+  waitForElement,
+  shallow,
+  RenderAPI,
 } from 'react-native-testing-library';
 import {
+  styled,
   StyleProvider,
-  VARIANT_DEFAULT,
+  StyleProviderProps,
 } from '@rk-kit/theme';
 import {
   Radio,
-  RadioProps,
-} from '@rk-kit/ui';
+  Props,
+} from '../radio/radio.component';
 import {
-  Mappings as mappings,
-  Theme as theme,
+  mapping,
+  theme,
 } from './config';
-import { TouchableOpacity } from 'react-native';
 
-const componentTestId = '@radio/component';
+const StyledComponent = styled<Radio, Props>(Radio);
 
-class Mock extends React.Component<RadioProps> {
+const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
+  <StyleProvider mapping={mapping} theme={theme}>
+    <StyledComponent {...props} />
+  </StyleProvider>
+);
 
-  static defaultProps: RadioProps = {
-    checked: false,
-    disabled: false,
-    variant: VARIANT_DEFAULT,
-  };
+const renderComponent = (props?: Props): RenderAPI => render(<Mock {...props}/>);
 
-  render() {
-    return (
-      <StyleProvider mapping={mappings} theme={theme}>
-        <Radio {...this.props} />
-      </StyleProvider>
-    );
-  }
-}
+describe('@radio: matches snapshot', () => {
 
-describe('@radio: component checks', () => {
+  it('default', () => {
+    const component = renderComponent();
+    const { output } = shallow(component.getByType(Radio));
 
-  it('default variant renders properly', async () => {
-    const componentUnchecked = render(<Mock/>);
-    const componentChecked = render(<Mock checked={true}/>);
-
-    expect(componentUnchecked).toMatchSnapshot();
-    expect(componentChecked).toMatchSnapshot();
+    expect(output).toMatchSnapshot();
   });
 
-  it('is in active-* states when pressed in or pressed out', async () => {
-    const componentUnchecked = render(<Mock/>);
-    const componentChecked = render(<Mock checked={true}/>);
+  it('checked', () => {
+    const component = renderComponent({checked: true});
+    const { output } = shallow(component.getByType(Radio));
 
-    const touchableUnchecked = componentChecked.getByName(TouchableOpacity.name);
-    const touchableChecked = componentUnchecked.getByName(TouchableOpacity.name);
-
-    debug.deep(componentUnchecked.toJSON(), 'default');
-
-    fireEvent(touchableUnchecked, 'pressIn');
-    await waitForElement(() => {
-      debug.deep(componentUnchecked.toJSON(), 'pressin');
-    });
-    // TODO: expect element to match `active-unchecked` snapshot
-
-    fireEvent(touchableUnchecked, 'pressOut');
-    const radioDefault = await waitForElement(() => {
-      return componentUnchecked.getByName(TouchableOpacity.name);
-    });
-    // TODO: expect element to match `default` snapshot
-
-    fireEvent(touchableChecked, 'pressIn');
-    const radioActiveChecked = await waitForElement(() => {
-      return componentChecked.getByName(TouchableOpacity.name);
-    });
-    // TODO: expect element to match `active-checked` snapshot
-
-    fireEvent(touchableChecked, 'pressOut');
-    const radioChecked = await waitForElement(() => {
-      return componentChecked.getByName(TouchableOpacity.name);
-    });
-    // TODO: expect element to match `checked` snapshot
+    expect(output).toMatchSnapshot();
   });
 
-  it('is in disabled state', async () => {
-    const componentUnchecked = render(<Mock disabled={true}/>);
-    const componentChecked = render(<Mock checked={true} disabled={true}/>);
+  it('disabled', () => {
+    const component = renderComponent({disabled: true});
+    const { output } = shallow(component.getByType(Radio));
 
-    const radioDisabledUnchecked = componentUnchecked.getByName(TouchableOpacity.name);
-    // TODO: expect element to match `disabled-unchecked` snapshot
-
-    const radioDisabledChecked = componentChecked.getByName(TouchableOpacity.name);
-    // TODO: expect element to match `disabled-checked` snapshot
+    expect(output).toMatchSnapshot();
   });
 
-  it('emits onChange', async () => {
-    const onChangeMock = jest.fn();
-    const component = render(<Mock onChange={onChangeMock}/>);
+  it('checked disabled', () => {
+    const component = renderComponent({checked: true, disabled: true});
+    const { output } = shallow(component.getByType(Radio));
 
-    const radioComponent = component.getByName(TouchableOpacity.name);
+    expect(output).toMatchSnapshot();
+  });
 
-    fireEvent.press(radioComponent);
+  it('active', async () => {
+    const component = renderComponent();
 
-    expect(onChangeMock).toBeCalled();
+    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
+
+    const active = await waitForElement(() => component.getByType(Radio));
+    const { output: activeOutput } = shallow(active);
+
+    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
+
+    const inactive = await waitForElement(() => component.getByType(Radio));
+    const { output: inactiveOutput } = shallow(inactive);
+
+    expect(activeOutput).toMatchSnapshot();
+    expect(inactiveOutput).toMatchSnapshot('default');
+  });
+
+  it('active checked', async () => {
+    const component = renderComponent({checked: true});
+
+    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
+    const active = await waitForElement(() => component.getByType(Radio));
+    const { output: activeOutput } = shallow(active);
+
+    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
+
+    const inactive = await waitForElement(() => component.getByType(Radio));
+    const { output: inactiveOutput } = shallow(inactive);
+
+    expect(activeOutput).toMatchSnapshot();
+    expect(inactiveOutput).toMatchSnapshot('checked');
   });
 
 });
 
+describe('@radio: component checks', () => {
+
+  it('emits onChange', () => {
+    const onChange = jest.fn();
+    const component = renderComponent({ onChange: onChange });
+    fireEvent.press(component.getByType(TouchableOpacity));
+
+    expect(onChange).toBeCalled();
+  });
+
+});

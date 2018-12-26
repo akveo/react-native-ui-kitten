@@ -1,33 +1,78 @@
 import {
   ThemeMappingType,
-  VariantType,
+  ComponentMappingType,
+  AppearanceType,
+  VariantGroupType,
+  MappingType,
+  StateType,
 } from '../component';
 
-export const VARIANT_DEFAULT = 'default';
+export const APPEARANCE_DEFAULT = 'default';
 
 /**
  * @param component: string - component name
  * @param mapping: ThemeMappingType - theme mapping configuration object
  *
- * @return ThemeMappingType if presents in mapping, undefined otherwise
+ * @return ComponentMappingType if presents in mapping, undefined otherwise
  */
-export function getThemeMapping(component: string, mapping: any): ThemeMappingType | undefined {
+export function getComponentMapping(mapping: ThemeMappingType,
+                                    component: string): ComponentMappingType | undefined {
+
   return mapping[component];
 }
 
-/**
- * @param mapping: ThemeMappingType - component mapping configuration object
- * @param variant: string - variant name
- * @param state: string - variant state name. Optional
- *
- * @return variant mapping or it's state mapping if presents in component mapping, undefined otherwise
- */
-export function getMappingVariant(mapping: ThemeMappingType, variant: string, state?: string): any | undefined {
-  const componentVariant: VariantType = mapping.variants[variant];
-  if (componentVariant === undefined) {
-    return undefined;
-  }
-  const { state: variantStates, ...variantParameters } = componentVariant;
+export function getAppearance(mapping: ComponentMappingType,
+                              appearance: string): AppearanceType | undefined {
 
-  return state === undefined ? variantParameters : variantStates && variantStates[state];
+  return mapping.appearance[appearance];
+}
+
+export function getAppearanceMapping(mapping: ComponentMappingType,
+                                     appearance: string): MappingType | undefined {
+
+  const appearanceConfig = getAppearance(mapping, appearance);
+
+  return appearanceConfig && appearanceConfig.mapping;
+}
+
+export function getAppearanceMappingSafe(mapping: ComponentMappingType,
+                                         appearance: string,
+                                         fallback: MappingType): MappingType {
+
+  return getAppearanceMapping(mapping, appearance) || fallback;
+}
+
+export function getAppearanceVariants(mapping: ComponentMappingType,
+                                      appearance: string): VariantGroupType | undefined {
+
+  const appearanceConfig = getAppearance(mapping, appearance);
+
+  return appearanceConfig && appearanceConfig.variant;
+}
+
+export function getVariantMapping(mapping: ComponentMappingType,
+                                  appearance: string,
+                                  variant: string): MappingType | undefined {
+
+  const variantGroupConfig = getAppearanceVariants(mapping, appearance);
+  const variantGroupName = variantGroupConfig && Object.keys(variantGroupConfig).find(group => {
+    return variantGroupConfig[group][variant] !== undefined;
+  });
+  const variantConfig = variantGroupName && variantGroupConfig[variantGroupName][variant];
+
+  return variantConfig && variantConfig.mapping;
+}
+
+export function getVariantMappingSafe(mapping: ComponentMappingType,
+                                      appearance: string,
+                                      variant: string,
+                                      fallback: MappingType): MappingType {
+
+  return getVariantMapping(mapping, appearance, variant) || fallback;
+}
+
+export function getMappingState(mapping: MappingType,
+                                state: string): StateType | undefined {
+
+  return mapping.state && mapping.state[state];
 }

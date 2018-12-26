@@ -1,14 +1,25 @@
-// TODO(mapping/type): declare Config/Token type
+export type ThemeMappingType = any;
 
-export type ThemeMappingConfigType = any;
-
-export interface ThemeMappingType {
-  parameters: string[];
-  variants: any;
+export interface ComponentMappingType {
+  appearance: any;
 }
+
+export interface AppearanceType {
+  mapping: MappingType;
+  variant?: any;
+}
+
+export type VariantGroupType = any;
 
 export interface VariantType {
-  state: any;
+  mapping: MappingType;
 }
+
+export interface MappingType {
+  state?: StateType;
+}
+
+export type StateType = any;
+
 
 export type TokenType = any;

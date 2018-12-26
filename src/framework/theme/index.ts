@@ -1,6 +1,6 @@
 export {
   StyleProvider,
-  StyledComponent,
+  styled,
   ThemeProvider,
   withStyles,
 
@@ -10,8 +10,8 @@ export {
   ThemedComponentProps,
 
   ThemeType,
-  ThemeMappingConfigType,
   ThemeMappingType,
+  ComponentMappingType,
   TokenType,
   ThemedStyleType,
   StyleSheetType,
@@ -19,6 +19,6 @@ export {
 } from './component';
 
 export {
-  VARIANT_DEFAULT,
+  APPEARANCE_DEFAULT,
 } from './service';
 

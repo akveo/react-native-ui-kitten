@@ -6,19 +6,17 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import {
+  APPEARANCE_DEFAULT,
   StyledComponentProps,
   StyleType,
 } from '@rk-kit/theme';
 
-const STATE_CHECKED = 'checked';
-const STATE_DISABLED = 'disabled';
-const STATE_ACTIVE_UNCHECKED = 'active-unchecked';
-const STATE_ACTIVE_CHECKED = 'active-checked';
-
 interface RadioProps {
-  onChange?: (selected: boolean) => void;
   checked?: boolean;
-  variant?: string | 'default' | 'error';
+  onChange?: (selected: boolean) => void;
+  appearance?: string | 'default';
+  status?: string | 'error';
+  size?: string | 'big' | 'small';
 }
 
 export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
@@ -30,8 +28,8 @@ interface State {
 export class Radio extends React.Component<Props, State> {
 
   static defaultProps: Props = {
+    appearance: APPEARANCE_DEFAULT,
     checked: false,
-    disabled: false,
   };
 
   state: State = {
@@ -39,10 +37,10 @@ export class Radio extends React.Component<Props, State> {
   };
 
   shouldComponentUpdate(nextProps: Readonly<Props>, nextState: Readonly<State>, nextContext: any): boolean {
-    const checkedChanged = nextProps.checked !== this.props.checked;
+    const selectedChanged = nextProps.checked !== this.props.checked;
     const activeChanged = nextState.active !== this.state.active;
     const disabledChanged = nextProps.disabled !== this.props.disabled;
-    return checkedChanged || activeChanged || disabledChanged;
+    return selectedChanged || activeChanged || disabledChanged;
   }
 
   onPress = () => {
@@ -67,10 +65,9 @@ export class Radio extends React.Component<Props, State> {
 
   getStateStyle = (): StyleType => {
     return this.props.requestStateStyle([
-      this.props.checked && STATE_CHECKED,
-      this.props.disabled && STATE_DISABLED,
-      this.state.active && this.props.checked && STATE_ACTIVE_CHECKED,
-      this.state.active && !this.props.checked && STATE_ACTIVE_UNCHECKED,
+      this.state.active && 'active',
+      this.props.checked && 'checked',
+      this.props.disabled && 'disabled',
     ]);
   };
 
@@ -89,14 +86,13 @@ export class Radio extends React.Component<Props, State> {
         height: style.innerSize,
         borderRadius: style.innerSize / 2,
         backgroundColor: style.selectColor,
-        opacity: this.props.checked ? 1.0 : 0.0,
       },
       highlight: {
         width: style.highlightSize,
         height: style.highlightSize,
         borderRadius: style.highlightSize / 2,
         backgroundColor: style.highlightColor,
-        opacity: 0.75,
+        opacity: this.state.active ? 0.4 : 0.0,
       },
     });
   };

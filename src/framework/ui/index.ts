@@ -1,6 +1,6 @@
-import { StyledComponent } from '@rk-kit/theme';
+import { styled } from '@rk-kit/theme';
 import { Radio, Props } from './radio/radio.component';
 
-const StyledRadio = StyledComponent<Radio, Props>(Radio);
-
+const StyledRadio = styled<Radio, Props>(Radio);
 export { StyledRadio as Radio, Props as RadioProps };
+

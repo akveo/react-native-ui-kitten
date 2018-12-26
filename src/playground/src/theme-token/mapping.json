@@ -1,102 +1,67 @@
 {
-  "Sample": {
-    "parameters": [
-      "backgroundColor",
-      "textColor"
-    ],
-    "states": [
-      "active",
-      "disabled"
-    ],
-    "variants": {
-      "default": {
-        "backgroundColor": "background-color-sample-default",
-        "textColor": "text-color-sample-default",
-        "state": {
-          "active": {
-            "backgroundColor": "background-color-sample-dark",
-            "textColor": "text-color-sample-dark"
-          },
-          "disabled": {
-            "textColor": "text-color-sample-default-disabled"
-          }
-        }
-      },
-      "dark": {
-        "backgroundColor": "background-color-sample-dark",
-        "textColor": "text-color-sample-dark",
-        "state": {
-          "active": {
-            "backgroundColor": "background-color-sample-default",
-            "textColor": "text-color-sample-default"
-          }
-        }
-      },
-      "success": {
-        "textColor": "text-color-sample-success",
-        "state": {
-          "active": {
-            "backgroundColor": "background-color-sample-default",
-            "textColor": "text-color-sample-success-active"
-          },
-          "disabled": {
-            "backgroundColor": "background-color-sample-success-disabled"
-          }
-        }
-      }
-    }
-  },
   "Radio": {
-    "parameters": [
-      "size",
-      "borderWidth",
-      "tintColor",
-      "borderColor"
-    ],
-    "states": [
-      "active",
-      "checked",
-      "disabled"
-    ],
-    "variants": {
+    "appearance": {
       "default": {
-        "size": 36,
-        "innerSize": 24,
-        "highlightSize": 54,
-        "borderWidth": 2,
-        "borderColor": "gray-primary",
-        "selectColor": "transparent",
-        "state": {
-          "checked": {
-            "borderColor": "blue-primary",
-            "selectColor": "blue-primary"
-          },
-          "active-unchecked": {
-            "borderColor": "gray-dark",
-            "highlightColor": "gray-highlight"
-          },
-          "active-checked": {
-            "borderColor": "blue-dark",
-            "highlightColor": "gray-highlight"
-          },
-          "disabled": {
-            "borderColor": "gray-light",
-            "selectColor": "gray-primary"
+        "mapping": {
+          "size": 36,
+          "innerSize": 24,
+          "highlightSize": 60,
+          "borderWidth": 2,
+          "borderColor": "gray-primary",
+          "selectColor": "transparent",
+          "highlightColor": "transparent",
+          "state": {
+            "active": {
+              "borderColor": "gray-dark",
+              "highlightColor": "gray-light"
+            },
+            "checked": {
+              "borderColor": "blue-primary",
+              "selectColor": "blue-primary"
+            },
+            "disabled": {
+              "borderColor": "gray-light"
+            },
+            "active.checked": {
+              "borderColor": "blue-dark"
+            },
+            "checked.disabled": {
+              "selectColor": "gray-primary"
+            }
           }
-        }
-      },
-      "error": {
-        "borderColor": "pink-primary",
-        "state": {
-          "checked": {
-            "borderColor": "pink-primary",
-            "selectColor": "pink-primary"
+        },
+        "variant": {
+          "status": {
+            "error": {
+              "mapping": {
+                "borderColor": "pink-primary",
+                "state": {
+                  "checked": {
+                    "borderColor": "pink-primary",
+                    "selectColor": "pink-primary"
+                  },
+                  "active.checked": {
+                    "borderColor": "pink-primary"
+                  }
+                }
+              }
+            }
           },
-          "active-unchecked": {
-            "borderColor": "pink-primary"
-          },
-          "active-checked": {
-            "borderColor": "pink-primary"
+          "size": {
+            "big": {
+              "mapping": {
+                "size": 42,
+                "innerSize": 28,
+                "highlightSize": 70
+              }
+            },
+            "small": {
+              "mapping": {
+                "size": 30,
+                "innerSize": 20,
+                "highlightSize": 50
+              }
+            }
           }
         }
       }

@@ -1,13 +1,4 @@
 {
-  "background-color-sample-default": "#ffffff",
-  "background-color-sample-dark": "#000000",
-  "text-color-sample-default": "#000000",
-  "text-color-sample-default-disabled": "#9E9E9E",
-  "text-color-sample-dark": "#ffffff",
-  "text-color-sample-success": "#4CAF50",
-  "text-color-sample-success-active": "#81C784",
-  "background-color-sample-success-disabled": "#F5F5F5",
-
   "blue-primary": "#3366FF",
   "blue-dark": "#2541CC",
   "gray-light": "#DDE1EB",

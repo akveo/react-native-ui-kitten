@@ -1,10 +1,3 @@
-/**
- * Mocked component mapping configurations
- */
-import * as Mappings from './mapping.json';
-import * as Theme from './theme.json';
+export { default as mapping } from './mapping.json';
+export { default as theme } from './theme.json';
 
-export {
-  Mappings,
-  Theme,
-};
