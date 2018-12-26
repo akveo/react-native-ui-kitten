@@ -1,89 +1,78 @@
 import {
   ThemeMappingType,
-  VariantType,
-  TokenType,
+  ComponentMappingType,
+  AppearanceType,
+  VariantGroupType,
+  MappingType,
+  StateType,
 } from '../component';
 
-export const VARIANT_DEFAULT = 'default';
+export const APPEARANCE_DEFAULT = 'default';
 
 /**
- * @param component: string - component name. Using displayName is recommended
- * @param mapping: ThemeMappingType[] - theme mapping configuration array
+ * @param component: string - component name
+ * @param mapping: ThemeMappingType - theme mapping configuration object
  *
- * @return ThemeMappingType if presents in mapping, undefined otherwise
+ * @return ComponentMappingType if presents in mapping, undefined otherwise
  */
-export function getComponentThemeMapping(component: string, mapping: any): ThemeMappingType | undefined {
+export function getComponentMapping(mapping: ThemeMappingType,
+                                    component: string): ComponentMappingType | undefined {
+
   return mapping[component];
 }
 
-/**
- * @param token: string - theme mapping token name
- * @param tokens: TokenType - theme tokens
- *
- * @return TokenType if presents in tokens, undefined otherwise
- */
-export function getThemeMappingToken(token: string, tokens: TokenType): TokenType | undefined {
-  if (tokens[token] === undefined) {
-    return undefined;
-  }
-  const value = {};
-  value[token] = tokens[token];
+export function getAppearance(mapping: ComponentMappingType,
+                              appearance: string): AppearanceType | undefined {
 
-  return value;
+  return mapping.appearance[appearance];
 }
 
-/**
- * @param variant: string - variant name. Default is 'default'
- * @param mapping: ThemeMappingType - component mapping configuration
- * @param state: string - variant state name. Default is `undefined`
- *
- * @return variant if presents in mapping, undefined otherwise
- */
-export function getComponentVariant(variant: string,
-                                    mapping: ThemeMappingType,
-                                    state?: string): any | undefined {
+export function getAppearanceMapping(mapping: ComponentMappingType,
+                                     appearance: string): MappingType | undefined {
 
-  const componentVariant: VariantType = mapping.variants[variant];
-  if (componentVariant === undefined) {
-    return undefined;
-  }
-  const { state: variantStates, ...variantParameters } = componentVariant;
+  const appearanceConfig = getAppearance(mapping, appearance);
 
-  return state === undefined ? variantParameters : variantStates && variantStates[state];
+  return appearanceConfig && appearanceConfig.mapping;
 }
 
-/**
- * @param parameter: string - parameter name.
- * @param variant: string - variant name.
- * @param mapping: ThemeMappingType - component mapping configuration
- * @param state: string - variant state name
- *
- * @return parameterMapping if presents in variant, undefined otherwise
- */
-export function getParameterMapping(parameter: string,
-                                    variant: string,
-                                    mapping: ThemeMappingType,
-                                    state?: string): any | undefined {
+export function getAppearanceMappingSafe(mapping: ComponentMappingType,
+                                         appearance: string,
+                                         fallback: MappingType): MappingType {
 
-  const componentVariant = getComponentVariant(variant, mapping, state);
-  return componentVariant && componentVariant[parameter];
+  return getAppearanceMapping(mapping, appearance) || fallback;
 }
 
-/**
- * @param parameter: string - parameter name.
- * @param variant: string - variant name.
- * @param mapping: ThemeMappingType - component mapping configuration
- * @param tokens: TokenType - theme tokens
- * @param state: string - variant state name
- *
- * @return theme token if presents in variant, undefined otherwise
- */
-export function getParameterValue(parameter: string,
-                                  variant: string,
-                                  mapping: ThemeMappingType,
-                                  tokens: TokenType,
-                                  state?: string): any | undefined {
+export function getAppearanceVariants(mapping: ComponentMappingType,
+                                      appearance: string): VariantGroupType | undefined {
 
-  const parameterMapping = getParameterMapping(parameter, variant, mapping, state);
-  return parameterMapping && getThemeMappingToken(parameterMapping, tokens);
+  const appearanceConfig = getAppearance(mapping, appearance);
+
+  return appearanceConfig && appearanceConfig.variant;
+}
+
+export function getVariantMapping(mapping: ComponentMappingType,
+                                  appearance: string,
+                                  variant: string): MappingType | undefined {
+
+  const variantGroupConfig = getAppearanceVariants(mapping, appearance);
+  const variantGroupName = variantGroupConfig && Object.keys(variantGroupConfig).find(group => {
+    return variantGroupConfig[group][variant] !== undefined;
+  });
+  const variantConfig = variantGroupName && variantGroupConfig[variantGroupName][variant];
+
+  return variantConfig && variantConfig.mapping;
+}
+
+export function getVariantMappingSafe(mapping: ComponentMappingType,
+                                      appearance: string,
+                                      variant: string,
+                                      fallback: MappingType): MappingType {
+
+  return getVariantMapping(mapping, appearance, variant) || fallback;
+}
+
+export function getMappingState(mapping: MappingType,
+                                state: string): StateType | undefined {
+
+  return mapping.state && mapping.state[state];
 }

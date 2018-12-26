@@ -4,12 +4,16 @@ import {
   ThemeType,
   StyleType,
 } from '../theme';
-import { ThemeMappingType } from '../mapping';
+import {
+  ThemeMappingType,
+  ComponentMappingType,
+} from '../mapping';
 import ThemeContext from '../theme/themeContext';
 import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
-  getComponentThemeMapping,
+  getComponentMapping,
+  StyleConsumerService,
 } from '../../service';
 
 interface PrivateProps<T> {
@@ -17,44 +21,51 @@ interface PrivateProps<T> {
 }
 
 interface ConsumerProps {
-  mapping: ThemeMappingType[];
+  mapping: ThemeMappingType;
   theme: ThemeType;
 }
 
 export interface Props {
-  variant?: string;
+  appearance?: string;
   theme?: ThemeType;
   themedStyle?: StyleType;
-  requestStateStyle?: (state: string[] | string) => StyleType;
+  requestStateStyle?: (state: string[]) => StyleType;
 }
 
-export const StyledComponent = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
+export const styled = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
 
   type ComponentProps = Props & P;
   type WrapperProps = PrivateProps<T> & ComponentProps;
 
   class Wrapper extends React.Component<WrapperProps> {
 
+    service: StyleConsumerService = new StyleConsumerService();
+
     getComponentName = (): string => Component.displayName || Component.name;
 
-    createStyle = (theme: ThemeType,
-                   mapping: ThemeMappingType,
-                   variant: string[] | string,
-                   state: string[] | string): StyleType => {
+    createComponentStyle = (theme: ThemeType,
+                            mapping: ComponentMappingType,
+                            appearance: string,
+                            variant: string[],
+                            state: string[]): StyleType => {
 
       if (state.length === 0) {
         console.warn('Redundant `requestStateStyle` call! Use `this.props.themedStyle` instead!');
       }
-      return createStyle(theme, mapping, variant, state);
+      return createStyle(theme, mapping, appearance, variant, state);
     };
 
-    createCustomProps = (props: ConsumerProps, variant: string): Props => {
-      const mapping = getComponentThemeMapping(this.getComponentName(), props.mapping);
+    createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
+      const mapping = getComponentMapping(props.mapping, this.getComponentName());
+      const variants = this.service.getVariantPropKeys<P & Props>(mapping, componentProps);
+
       return {
-        variant: variant,
+        appearance: componentProps.appearance,
         theme: props.theme,
-        themedStyle: createStyle(props.theme, mapping, variant),
-        requestStateStyle: state => this.createStyle(props.theme, mapping, variant, state),
+        themedStyle: createStyle(props.theme, mapping, componentProps.appearance, variants),
+        requestStateStyle: state => {
+          return this.createComponentStyle(props.theme, mapping, componentProps.appearance, variants, state);
+        },
       };
     };
 
@@ -65,7 +76,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
       return (
         <Component
           ref={forwardedRef}
-          {...this.createCustomProps(props, componentProps.variant)}
+          {...this.createCustomProps(props, componentProps)}
           {...componentProps}
         />
       );
@@ -73,7 +84,7 @@ export const StyledComponent = <T extends React.Component, P extends object>(Com
 
     render() {
       return (
-        <MappingContext.Consumer>{(mapping: ThemeMappingType[]) => (
+        <MappingContext.Consumer>{(mapping: ThemeMappingType) => (
           <ThemeContext.Consumer>{(theme: ThemeType) => {
             return this.renderWrappedComponent({ mapping: mapping, theme: theme });
           }}</ThemeContext.Consumer>

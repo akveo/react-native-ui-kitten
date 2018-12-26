@@ -1,18 +1,18 @@
 import React from 'react';
 import {
   StyleProvider,
-  ThemeMappingConfigType,
+  ThemeMappingType,
   ThemeType,
 } from '@rk-kit/theme';
 import {
-  Mappings,
-  Theme,
+  mapping,
+  theme,
 } from './theme-token';
 import { withNavigation } from './navigation';
 import * as Screens from './ui/screen';
 
 interface State {
-  mappings: ThemeMappingConfigType;
+  mapping: ThemeMappingType;
   theme: ThemeType;
 }
 
@@ -21,16 +21,16 @@ export default class App extends React.Component<any, State> {
   constructor(props) {
     super(props);
     this.state = {
-      mappings: Mappings,
-      theme: Theme,
+      mapping: mapping,
+      theme: theme,
     };
   }
 
   render() {
-    const { SampleScreen: RootScreen, ...nestedScreens } = Screens;
+    const { HomeScreen: RootScreen, ...nestedScreens } = Screens;
     const Router = withNavigation(RootScreen, nestedScreens);
     return (
-      <StyleProvider theme={this.state.theme} mapping={this.state.mappings}>
+      <StyleProvider theme={this.state.theme} mapping={this.state.mapping}>
         <Router/>
       </StyleProvider>
     );

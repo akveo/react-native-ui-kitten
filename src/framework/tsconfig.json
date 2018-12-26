@@ -11,6 +11,7 @@
     "jsx": "react-native",
     "module": "es2015",
     "target": "es2017",
+    "experimentalDecorators": true,
     "lib": [
       "es2015",
       "es2016"

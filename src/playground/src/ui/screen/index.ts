@@ -1,2 +1,2 @@
 export { HomeScreen } from './home.component';
-export { SampleScreen } from './sample.component';
+export { RadioScreen } from './radio.component';
