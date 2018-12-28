@@ -66,27 +66,27 @@ export function createStyle(theme: ThemeType,
                             variants: string[] = [],
                             states: string[] = []): StyleType {
 
-  const appearanceDescription = normalizeAppearance(appearance);
-  const variantDescription = normalizeVariants(variants);
-  const stateDescription = normalizeStates(states);
+  const normalizedAppearance = normalizeAppearance(appearance);
+  const normalizedVariants = normalizeVariants(variants);
+  const normalizedStates = normalizeStates(states);
 
-  const appearanceMapping = reduce(appearanceDescription, apce => {
+  const appearanceMapping = reduce(normalizedAppearance, apce => {
     return getStatelessAppearanceMapping(mapping, apce);
   });
 
-  const variantMapping = reduce(variantDescription, variant => {
-    return reduce(appearanceDescription, apce => {
+  const variantMapping = reduce(normalizedVariants, variant => {
+    return reduce(normalizedAppearance, apce => {
       return getStatelessVariantMapping(mapping, apce, variant);
     });
   });
 
-  const stateMapping = reduce(stateDescription, state => {
-    const appearanceStateMapping = reduce(appearanceDescription, apce => {
+  const stateMapping = reduce(normalizedStates, state => {
+    const appearanceStateMapping = reduce(normalizedAppearance, apce => {
       return getStateAppearanceMapping(mapping, apce, state);
     });
 
-    const variantStateMapping = reduce(variantDescription, variant => {
-      return reduce(appearanceDescription, apce => {
+    const variantStateMapping = reduce(normalizedVariants, variant => {
+      return reduce(normalizedAppearance, apce => {
         return getStateVariantMapping(mapping, apce, variant, state);
       });
     });
