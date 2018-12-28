@@ -1,53 +1,56 @@
 import {
-  getAppearanceMappingSafe,
-  getVariantMappingSafe,
   APPEARANCE_DEFAULT,
+  getStatelessAppearanceMapping,
+  getStatelessVariantMapping,
+  getStateAppearanceMapping,
+  getStateVariantMapping,
 } from './mappingUtil.service';
 import {
   ComponentMappingType,
-  MappingType,
-  StateType,
   ThemeType,
   StyleType,
 } from '../component';
 
 const SEPARATOR_STATE = '.';
-const FALLBACK_MAPPING_APPEARANCE: MappingType = {};
-const FALLBACK_MAPPING_VARIANT: MappingType = {};
 
 /**
- * Creates style object for variant/list of variants and its state/list of states(optional)
+ * Creates style object for variant/list of variants(optional) and its state/list of states(optional)
  *
- * Examples
+ * Example
  *
- * 1. Default:
+ * appearance = 'outline';
+ * variants = ['success', 'large'];
+ * state = ['active', 'checked'];
  *
- * <Component />
+ * a = `default` + `outline`                    - acc appearance (apce) mapping
  *
- * - will return styles for `default` appearance
+ * v1 = `success` of `default`                  - `success` variant mapping of `default` apce
+ * v2 = `success` of `outline`                  - `success` variant mapping of `outline` apce
+ * v3 = `large` of `default`                    - `large` variant mapping of `default` apce
+ * v4 = `large` of `outline`                    - `large` variant mapping of `outline` apce
  *
- * 2. Custom appearance:
+ * s1 = `active` of `default`                   - `active` state mapping of `default` apce
+ * s2 = `active` of `outline`                   - `active` state mapping of `outline` apce
+ * s3 = `active` of `default success`           - `active` state mapping of `success` variant of `default` apce
+ * s4 = `active` of `outline success`           - `active` state mapping of `success` variant of `outline` apce
+ * s5 = `active` of `default large`             - `active` state mapping of `large` variant of `default` apce
+ * s6 = `active` of `outline large`             - `active` state mapping of `large` variant of `outline` apce
  *
- * <Component appearance='bold'/>
+ * s7 = `checked` of `default`                  - `checked` state mapping of `default` apce
+ * s8 = `checked` of `outline`                  - `checked` state mapping of `outline` apce
+ * s9 = `checked` of `default success`          - `checked` state mapping of `success` variant of `default` apce
+ * s10 = `checked` of `outline success`         - `checked` state mapping of `success` variant of `outline` apce
+ * s11 = `checked` of `default large`           - `checked` state mapping of `large` variant of `default` apce
+ * s12 = `checked` of `outline large`           - `checked` state mapping of `large` variant of `outline` apce
  *
- * - will return styles for `default` + `bold` appearances
+ * s13 = `active.checked` of `default`          - `active.checked` state mapping of `default` apce
+ * s14 = `active.checked` of `outline`          - `active.checked` state mapping of `outline` apce
+ * s15 = `active.checked` of `default success`  - `active.checked` state mapping of `success` variant of `default` apce
+ * s16 = `active.checked` of `outline success`  - `active.checked` state mapping of `success` variant of `outline` apce
+ * s17 = `active.checked` of `default large`    - `active.checked` state mapping of `large` variant of `default` apce
+ * s18 = `active.checked` of `outline large`    - `active.checked` state mapping of `large` variant of `outline` apce
  *
- * 3. With Variants:
- *
- * <Component status='success' size='tiny'>
- *
- * - will return styles for `default` appearance + (`success` + `tiny`) variants
- *
- * 4. With states:
- *
- * <Component status='success'> which is currently `active` and `checked`
- *
- * - will return styles for
- * `default` appearance + (`active` + `checked` + `active.checked`) states
- * + `success` variant + (`active` + `checked` + `active.checked`) variant states
- *
- * State merging is the same as variant merging
- * But state parameters override variant parameters
+ * res = a + (v1 + v2 + ... + vn) + (s1 + s2 + ... + sn)
  *
  * @param theme: ThemeType - theme object
  * @param mapping: ComponentMappingType - component theme mapping configuration
@@ -56,7 +59,6 @@ const FALLBACK_MAPPING_VARIANT: MappingType = {};
  * @param states: string[] - states in which component is. Default is []
  *
  * @return StyleType - compiled component styles declared in mappings, mapped to theme values
- *
  */
 export function createStyle(theme: ThemeType,
                             mapping: ComponentMappingType,
@@ -64,44 +66,35 @@ export function createStyle(theme: ThemeType,
                             variants: string[] = [],
                             states: string[] = []): StyleType {
 
-  const appearanceMapping = createAppearanceMapping(
-    mapping,
-    normalizeAppearance(appearance),
-    normalizeVariants(variants),
-    normalizeStates(states),
-  );
-  return createStyleFromMapping(appearanceMapping, theme);
-}
+  const normalizedAppearance = normalizeAppearance(appearance);
+  const normalizedVariants = normalizeVariants(variants);
+  const normalizedStates = normalizeStates(states);
 
-function createAppearanceMapping(mapping: ComponentMappingType,
-                                 appearances: string[],
-                                 variants: string[],
-                                 states: string[]): any {
+  const appearanceMapping = reduce(normalizedAppearance, apce => {
+    return getStatelessAppearanceMapping(mapping, apce);
+  });
 
-  return appearances.reduce((acc, current) => {
-    const { state, ...appearanceMapping } = getAppearanceMappingSafe(mapping, current, FALLBACK_MAPPING_APPEARANCE);
-    const stateMapping = state && createStateMapping(state, states);
-    const variantMapping = createVariantMapping(mapping, current, variants, states);
+  const variantMapping = reduce(normalizedVariants, variant => {
+    return reduce(normalizedAppearance, apce => {
+      return getStatelessVariantMapping(mapping, apce, variant);
+    });
+  });
 
-    return { ...acc, ...appearanceMapping, ...stateMapping, ...variantMapping };
-  }, {});
-}
+  const stateMapping = reduce(normalizedStates, state => {
+    const appearanceStateMapping = reduce(normalizedAppearance, apce => {
+      return getStateAppearanceMapping(mapping, apce, state);
+    });
 
-function createVariantMapping(mapping: ComponentMappingType,
-                              appearance: string,
-                              variants: string[],
-                              states: string[]): any {
+    const variantStateMapping = reduce(normalizedVariants, variant => {
+      return reduce(normalizedAppearance, apce => {
+        return getStateVariantMapping(mapping, apce, variant, state);
+      });
+    });
 
-  return variants.reduce((acc, current) => {
-    const { state, ...variantMapping } = getVariantMappingSafe(mapping, appearance, current, FALLBACK_MAPPING_VARIANT);
-    const stateMapping = state && createStateMapping(state, states);
+    return {...appearanceStateMapping, ...variantStateMapping};
+  });
 
-    return { ...acc, ...variantMapping, ...stateMapping };
-  }, {});
-}
-
-function createStateMapping(state: StateType, states: string[]): any {
-  return states.reduce((acc, current) => ({ ...acc, ...state[current] }), {});
+  return createStyleFromMapping({ ...appearanceMapping, ...variantMapping, ...stateMapping }, theme);
 }
 
 function createStyleFromMapping(mapping: any, theme: ThemeType): StyleType {
@@ -110,6 +103,10 @@ function createStyleFromMapping(mapping: any, theme: ThemeType): StyleType {
     acc[current] = theme[key] || key;
     return acc;
   }, {});
+}
+
+function reduce(items: string[], next: (item: string) => any): any {
+  return items.reduce((acc, current) => ({ ...acc, ...next(current) }), {});
 }
 
 /**

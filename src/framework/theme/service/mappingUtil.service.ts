@@ -9,6 +9,9 @@ import {
 
 export const APPEARANCE_DEFAULT = 'default';
 
+const FALLBACK_MAPPING_APPEARANCE = {};
+const FALLBACK_MAPPING_VARIANT = {};
+
 /**
  * @param component: string - component name
  * @param mapping: ThemeMappingType - theme mapping configuration object
@@ -42,6 +45,23 @@ export function getAppearanceMappingSafe(mapping: ComponentMappingType,
   return getAppearanceMapping(mapping, appearance) || fallback;
 }
 
+export function getStateAppearanceMapping(mapping: ComponentMappingType,
+                                          appearance: string,
+                                          state: string): any {
+
+  const appearanceMapping = getAppearanceMappingSafe(mapping, appearance, FALLBACK_MAPPING_APPEARANCE);
+
+  return getMappingState(appearanceMapping, state);
+}
+
+export function getStatelessAppearanceMapping(mapping: ComponentMappingType,
+                                              appearance: string): any {
+
+  const { state, ...params } = getAppearanceMappingSafe(mapping, appearance, FALLBACK_MAPPING_APPEARANCE);
+
+  return params;
+}
+
 export function getAppearanceVariants(mapping: ComponentMappingType,
                                       appearance: string): VariantGroupType | undefined {
 
@@ -70,6 +90,26 @@ export function getVariantMappingSafe(mapping: ComponentMappingType,
 
   return getVariantMapping(mapping, appearance, variant) || fallback;
 }
+
+export function getStateVariantMapping(mapping: ComponentMappingType,
+                                       appearance: string,
+                                       variant: string,
+                                       state: string): any {
+
+  const variantMapping = getVariantMappingSafe(mapping, appearance, variant, FALLBACK_MAPPING_VARIANT);
+
+  return getMappingState(variantMapping, state);
+}
+
+export function getStatelessVariantMapping(mapping: ComponentMappingType,
+                                           appearance: string,
+                                           variant: string): any {
+
+  const { state, ...params } = getVariantMappingSafe(mapping, appearance, variant, FALLBACK_MAPPING_VARIANT);
+
+  return params;
+}
+
 
 export function getMappingState(mapping: MappingType,
                                 state: string): StateType | undefined {
