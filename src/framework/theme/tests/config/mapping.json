@@ -75,16 +75,27 @@
       "custom": {
         "mapping": {
           "borderWidth": 4,
-          "state": {}
+          "state": {
+            "active": {
+              "borderColor": "grayLight"
+            }
+          }
+        },
+        "variant": {
+          "status": {
+            "success": {
+              "mapping": {
+                "borderColor": "tealPrimary"
+              }
+            }
+          }
         }
       }
     }
   },
   "Empty": {
     "appearance": {
-      "default": {
-
-      }
+      
     }
   }
 }
