@@ -9,7 +9,7 @@ import {
   APPEARANCE_DEFAULT,
   StyledComponentProps,
   StyleType,
-  Action,
+  Interaction,
 } from '@rk-kit/theme';
 
 interface RadioProps {
@@ -33,11 +33,11 @@ export class Radio extends React.Component<Props> {
   };
 
   onPressIn = () => {
-    this.props.dispatch(Action.STATE_ACTIVE);
+    this.props.dispatch([Interaction.ACTIVE]);
   };
 
   onPressOut = () => {
-    this.props.dispatch(Action.STATELESS);
+    this.props.dispatch([]);
   };
 
   getComponentStyle = (style: StyleType): StyleType => ({

@@ -15,7 +15,7 @@ import {
   StyleProvider,
   StyleProviderProps,
   ThemeType,
-  Action,
+  Interaction,
 } from '../component';
 import {
   StyleConsumerService,
@@ -72,13 +72,13 @@ describe('@style: service methods check', () => {
       appearance: APPEARANCE_DEFAULT,
       checked: true,
       disabled: true,
-    }, Action.STATELESS);
+    }, []);
 
     const activeKeys = service.getStatePropKeys(testMapping, {
       appearance: APPEARANCE_DEFAULT,
       checked: true,
       disabled: true,
-    }, Action.STATE_ACTIVE);
+    }, [Interaction.ACTIVE]);
 
     expect(falsyKeys).toEqual(['disabled']);
     expect(statelessKeys).toEqual(['checked', 'disabled']);
@@ -224,7 +224,7 @@ describe('@style: ui component checks', () => {
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);
-    styledComponent.props.dispatch(Action.STATE_ACTIVE);
+    styledComponent.props.dispatch([Interaction.ACTIVE]);
 
     const styledComponentChanged = await waitForElement(() => {
       return component.getByTestId(styleConsumerTestId);

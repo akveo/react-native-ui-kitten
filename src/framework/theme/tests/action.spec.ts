@@ -1,20 +1,31 @@
-import { Action } from '../component';
+import {
+  Interaction,
+  State,
+} from '../component';
 
-describe('@style: action type checks', () => {
+describe('@style: interaction type checks', () => {
 
   it('parses action properly', () => {
-    const stateless = Action.parse('');
-    const checked = Action.parse('checked');
-    const disabled = Action.parse('disabled');
-    const active = Action.parse('active');
-    const focus = Action.parse('focus');
-    const undefined = Action.parse('undefined');
+    const active = Interaction.parse('active');
+    const undefined = Interaction.parse('undefined');
 
-    expect(stateless).toEqual(Action.STATELESS);
-    expect(checked).toEqual(Action.STATE_CHECKED);
-    expect(disabled).toEqual(Action.STATE_DISABLED);
-    expect(active).toEqual(Action.STATE_ACTIVE);
-    expect(focus).toEqual(Action.STATE_FOCUS);
+    expect(active).toEqual(Interaction.ACTIVE);
+    expect(undefined).toBeUndefined();
+  });
+
+});
+
+describe('@style: configuration type checks', () => {
+
+  it('parses action properly', () => {
+    const checked = State.parse('checked');
+    const disabled = State.parse('disabled');
+    const focus = State.parse('focused');
+    const undefined = State.parse('undefined');
+
+    expect(checked).toEqual(State.CHECKED);
+    expect(disabled).toEqual(State.DISABLED);
+    expect(focus).toEqual(State.FOCUSED);
     expect(undefined).toBeUndefined();
   });
 

@@ -12,7 +12,7 @@ import {
   getComponentMapping,
   StyleConsumerService,
 } from '../../service';
-import { Action } from './type';
+import { Interaction } from './type';
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;
@@ -27,11 +27,11 @@ export interface Props {
   appearance?: string;
   theme?: ThemeType;
   themedStyle?: StyleType;
-  dispatch?: (action: Action) => void;
+  dispatch?: (interaction: Interaction[]) => void;
 }
 
 interface State {
-  action: Action;
+  interaction: Interaction[];
 }
 
 export const styled = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
@@ -44,12 +44,12 @@ export const styled = <T extends React.Component, P extends object>(Component: R
     service: StyleConsumerService = new StyleConsumerService();
 
     state: State = {
-      action: Action.STATELESS,
+      interaction: [],
     };
 
-    private onDispatch = (action: Action) => {
+    private onDispatch = (interaction: Interaction[]) => {
       this.setState({
-        action: action,
+        interaction: interaction,
       });
     };
 
@@ -63,7 +63,7 @@ export const styled = <T extends React.Component, P extends object>(Component: R
         mapping,
         componentProps.appearance,
         this.service.getVariantPropKeys(mapping, componentProps),
-        this.service.getStatePropKeys(mapping, componentProps, this.state.action),
+        this.service.getStatePropKeys(mapping, componentProps, this.state.interaction),
       );
 
       return {

@@ -1,6 +1,7 @@
 import {
   ComponentMappingType,
-  Action,
+  Interaction,
+  State,
 } from '../component';
 import { Props } from '../component/style/styleConsumer.component';
 import {
@@ -23,15 +24,15 @@ export class StyleConsumerService {
 
   public getStatePropKeys<P extends Props>(mapping: ComponentMappingType,
                                            props: P,
-                                           action: Action = Action.STATELESS): string[] {
+                                           interaction: Interaction[] = []): string[] {
 
     const appearance = getAppearanceMappingSafe(mapping, APPEARANCE_DEFAULT, {});
 
     const states = Object.keys(props)
       .filter((key: string) => appearance.state[key])
-      .map(state => props[state] && Action.parse(state))
+      .map(state => props[state] && State.parse(state))
       .filter(Boolean);
 
-    return action === Action.STATELESS ? states : [action, ...states];
+    return [...interaction, ...states];
   }
 }
