@@ -16,6 +16,7 @@ export {
   ThemedStyleType,
   StyleSheetType,
   StyleType,
+  Action,
 } from './component';
 
 export {

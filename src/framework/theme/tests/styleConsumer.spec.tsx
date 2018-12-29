@@ -15,6 +15,7 @@ import {
   StyleProvider,
   StyleProviderProps,
   ThemeType,
+  Action,
 } from '../component';
 import {
   StyleConsumerService,
@@ -58,6 +59,30 @@ describe('@style: service methods check', () => {
     expect(customAppearanceKeys).toEqual(['small']);
     expect(undefinedAppearanceKeys).toEqual(['info']);
     expect(emptyAppearanceKeys).toEqual([]);
+  });
+
+  it('retrieves state prop keys properly', () => {
+    const falsyKeys = service.getStatePropKeys(testMapping, {
+      appearance: APPEARANCE_DEFAULT,
+      checked: false,
+      disabled: true,
+    });
+
+    const statelessKeys = service.getStatePropKeys(testMapping, {
+      appearance: APPEARANCE_DEFAULT,
+      checked: true,
+      disabled: true,
+    }, Action.STATELESS);
+
+    const activeKeys = service.getStatePropKeys(testMapping, {
+      appearance: APPEARANCE_DEFAULT,
+      checked: true,
+      disabled: true,
+    }, Action.STATE_ACTIVE);
+
+    expect(falsyKeys).toEqual(['disabled']);
+    expect(statelessKeys).toEqual(['checked', 'disabled']);
+    expect(activeKeys).toEqual(['active', 'checked', 'disabled']);
   });
 
 });
@@ -152,8 +177,8 @@ describe('@style: ui component checks', () => {
     expect(styledComponent.props.theme).not.toBeUndefined();
     expect(styledComponent.props.themedStyle).not.toBeNull();
     expect(styledComponent.props.themedStyle).not.toBeUndefined();
-    expect(styledComponent.props.requestStateStyle).not.toBeNull();
-    expect(styledComponent.props.requestStateStyle).not.toBeUndefined();
+    expect(styledComponent.props.dispatch).not.toBeNull();
+    expect(styledComponent.props.dispatch).not.toBeUndefined();
   });
 
   it('default appearance styled properly', async () => {
@@ -189,39 +214,32 @@ describe('@style: ui component checks', () => {
     }));
   });
 
-  it('style request works properly', async () => {
+  it('dispatch action works properly', async () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
       <StyleProvider mapping={mapping} theme={theme}>
-        <StyleConsumer />
+        <StyleConsumer/>
       </StyleProvider>,
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);
-    const stateStyle = styledComponent.props.requestStateStyle(['active']);
-    const undefinedStateStyle = styledComponent.props.requestStateStyle('undefined');
+    styledComponent.props.dispatch(Action.STATE_ACTIVE);
 
-    expect(json(stateStyle)).toEqual(json({
+    const styledComponentChanged = await waitForElement(() => {
+      return component.getByTestId(styleConsumerTestId);
+    });
+
+    expect(json(styledComponentChanged.props.themedStyle)).toEqual(json({
       size: 36,
       innerSize: 24,
       borderWidth: 2,
       borderColor: theme.grayDark,
       selectColor: 'transparent',
     }));
-    expect(json(undefinedStateStyle)).toEqual(json({
-      size: 36,
-      innerSize: 24,
-      borderWidth: 2,
-      borderColor: theme.grayPrimary,
-      selectColor: 'transparent',
-    }));
-
-    styledComponent.props.requestStateStyle([]);
-    jest.spyOn(console, 'warn');
   });
 
-  it('@style: provides correct styles on theme change', async () => {
+  it('provides correct styles on theme change', async () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
@@ -229,7 +247,7 @@ describe('@style: ui component checks', () => {
         mapping={mapping}
         theme={theme}
         themeInverse={themeInverse}>
-        <StyleConsumer />
+        <StyleConsumer/>
       </ComplexStyleProvider>,
     );
     const styledComponent = component.getByTestId(styleConsumerTestId);
