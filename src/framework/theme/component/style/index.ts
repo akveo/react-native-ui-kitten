@@ -1,3 +1,4 @@
+export * from './type';
 export {
   StyleProvider,
   Props as StyleProviderProps,
@@ -7,5 +8,3 @@ export {
   styled,
   Props as StyledComponentProps,
 } from './styleConsumer.component';
-
-export * from './type';

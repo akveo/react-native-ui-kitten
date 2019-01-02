@@ -18,7 +18,7 @@ import {
   Interaction,
   State,
 } from '../../component';
-import { APPEARANCE_DEFAULT } from '../mapping/mapping.service';
+import { APPEARANCE_DEFAULT } from '../mapping';
 import { StyleConsumerService } from './styleConsumer.service';
 import {
   mapping,

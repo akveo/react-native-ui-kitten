@@ -1,18 +1,18 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ThemeMappingType } from '../mapping';
-import {
-  ThemeType,
-  StyleType,
-} from '../theme';
-import ThemeContext from '../theme/themeContext';
-import MappingContext from '../mapping/mappingContext';
+import { MappingContext } from '../mapping';
+import { ThemeContext } from '../theme';
+import { getComponentMapping } from '../../service/mapping';
 import {
   createStyle,
   StyleConsumerService,
 } from '../../service/style';
-import { getComponentMapping } from '../../service/mapping';
-import { Interaction } from './type';
+import {
+  ThemeMappingType,
+  ThemeType,
+  StyleType,
+  Interaction,
+} from '../../component';
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import ThemeContext from './themeContext';
+import { ThemeContext } from './themeContext';
 import {
   ThemeType,
   ThemedStyleType,

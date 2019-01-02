@@ -1,5 +1,6 @@
 export * from './type';
+export * from './mappingContext';
 export {
-  MappingProvider as ThemeMappingProvider,
-  Props as ThemeMappingProviderProps,
+  MappingProvider,
+  Props as MappingProviderProps,
 } from './mappingProvider.component';
