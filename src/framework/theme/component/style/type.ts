@@ -9,13 +9,13 @@ export enum State {
 }
 
 export namespace Interaction {
-  export function parse(description: string): Interaction | undefined {
-    return Interaction[description.toUpperCase()];
+  export function parse(interaction: string): Interaction | undefined {
+    return Interaction[interaction.toUpperCase()];
   }
 }
 
 export namespace State {
-  export function parse(description: string): State | undefined {
-    return State[description.toUpperCase()];
+  export function parse(state: string): State | undefined {
+    return State[state.toUpperCase()];
   }
 }
