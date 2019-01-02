@@ -39,7 +39,7 @@
     "babel-jest": "^23.6.0",
     "coveralls": "^3.0.2",
     "husky": "^1.1.2",
-    "jest": "^23.6.0",
+    "jest": "^24.0.0-alpha.9",
     "metro-react-native-babel-preset": "^0.49.0",
     "react": "^16.6.0",
     "react-addons-test-utils": "^15.6.2",
