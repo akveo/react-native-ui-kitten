@@ -4,11 +4,10 @@ exports[`@radio: matches snapshot active 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   appearance="default"
-  checked={false}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -22,9 +21,9 @@ exports[`@radio: matches snapshot active 1`] = `
   }
   themedStyle={
     Object {
-      "borderColor": "#A6AEBD",
+      "borderColor": "#8992A3",
       "borderWidth": 2,
-      "highlightColor": "transparent",
+      "highlightColor": "#DDE1EB",
       "highlightSize": 60,
       "innerSize": 24,
       "selectColor": "transparent",
@@ -48,10 +47,10 @@ exports[`@radio: matches snapshot active 1`] = `
             "position": "absolute",
           },
           Object {
-            "backgroundColor": "transparent",
+            "backgroundColor": "#DDE1EB",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]
@@ -65,7 +64,7 @@ exports[`@radio: matches snapshot active 1`] = `
             "justifyContent": "center",
           },
           Object {
-            "borderColor": "#A6AEBD",
+            "borderColor": "#8992A3",
             "borderRadius": 18,
             "borderWidth": 2,
             "height": 36,
@@ -94,10 +93,10 @@ exports[`@radio: matches snapshot active checked 1`] = `
   activeOpacity={1}
   appearance="default"
   checked={true}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -111,12 +110,12 @@ exports[`@radio: matches snapshot active checked 1`] = `
   }
   themedStyle={
     Object {
-      "borderColor": "#A6AEBD",
+      "borderColor": "#2541CC",
       "borderWidth": 2,
-      "highlightColor": "transparent",
+      "highlightColor": "#DDE1EB",
       "highlightSize": 60,
       "innerSize": 24,
-      "selectColor": "transparent",
+      "selectColor": "#3366FF",
       "size": 36,
     }
   }
@@ -137,10 +136,10 @@ exports[`@radio: matches snapshot active checked 1`] = `
             "position": "absolute",
           },
           Object {
-            "backgroundColor": "transparent",
+            "backgroundColor": "#DDE1EB",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]
@@ -154,7 +153,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
             "justifyContent": "center",
           },
           Object {
-            "borderColor": "#3366FF",
+            "borderColor": "#2541CC",
             "borderRadius": 18,
             "borderWidth": 2,
             "height": 36,
@@ -183,10 +182,10 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
   activeOpacity={1}
   appearance="default"
   checked={true}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -200,12 +199,12 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
   }
   themedStyle={
     Object {
-      "borderColor": "#A6AEBD",
+      "borderColor": "#3366FF",
       "borderWidth": 2,
       "highlightColor": "transparent",
       "highlightSize": 60,
       "innerSize": 24,
-      "selectColor": "transparent",
+      "selectColor": "#3366FF",
       "size": 36,
     }
   }
@@ -229,7 +228,7 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]
@@ -271,11 +270,10 @@ exports[`@radio: matches snapshot active: default 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   appearance="default"
-  checked={false}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -318,7 +316,7 @@ exports[`@radio: matches snapshot active: default 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]
@@ -361,10 +359,10 @@ exports[`@radio: matches snapshot checked 1`] = `
   activeOpacity={1}
   appearance="default"
   checked={true}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -378,12 +376,12 @@ exports[`@radio: matches snapshot checked 1`] = `
   }
   themedStyle={
     Object {
-      "borderColor": "#A6AEBD",
+      "borderColor": "#3366FF",
       "borderWidth": 2,
       "highlightColor": "transparent",
       "highlightSize": 60,
       "innerSize": 24,
-      "selectColor": "transparent",
+      "selectColor": "#3366FF",
       "size": 36,
     }
   }
@@ -407,7 +405,7 @@ exports[`@radio: matches snapshot checked 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]
@@ -451,10 +449,10 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
   appearance="default"
   checked={true}
   disabled={true}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -468,12 +466,12 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
   }
   themedStyle={
     Object {
-      "borderColor": "#A6AEBD",
+      "borderColor": "#DDE1EB",
       "borderWidth": 2,
       "highlightColor": "transparent",
       "highlightSize": 60,
       "innerSize": 24,
-      "selectColor": "transparent",
+      "selectColor": "#A6AEBD",
       "size": 36,
     }
   }
@@ -497,7 +495,7 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]
@@ -539,11 +537,10 @@ exports[`@radio: matches snapshot default 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   appearance="default"
-  checked={false}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -586,7 +583,7 @@ exports[`@radio: matches snapshot default 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]
@@ -628,12 +625,11 @@ exports[`@radio: matches snapshot disabled 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   appearance="default"
-  checked={false}
   disabled={true}
+  dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  requestStateStyle={[Function]}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -647,7 +643,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
   }
   themedStyle={
     Object {
-      "borderColor": "#A6AEBD",
+      "borderColor": "#DDE1EB",
       "borderWidth": 2,
       "highlightColor": "transparent",
       "highlightSize": 60,
@@ -676,7 +672,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
             "backgroundColor": "transparent",
             "borderRadius": 30,
             "height": 60,
-            "opacity": 0,
+            "opacity": undefined,
             "width": 60,
           },
         ]

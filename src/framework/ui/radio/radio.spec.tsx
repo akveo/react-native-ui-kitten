@@ -15,16 +15,13 @@ import {
 import {
   Radio,
   Props,
-} from '../radio/radio.component';
-import {
-  mapping,
-  theme,
-} from './config';
+} from './radio.component';
+import * as config from './radio.spec.config';
 
 const StyledComponent = styled<Radio, Props>(Radio);
 
 const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={mapping} theme={theme}>
+  <StyleProvider mapping={config.mapping} theme={config.theme}>
     <StyledComponent {...props} />
   </StyleProvider>
 );

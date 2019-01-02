@@ -7,3 +7,5 @@ export {
   styled,
   Props as StyledComponentProps,
 } from './styleConsumer.component';
+
+export * from './type';

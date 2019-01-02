@@ -17,6 +17,7 @@ module.exports = {
   },
   cacheDirectory: './dist/jest/cache',
   coverageDirectory: './dist/jest/coverage',
+  snapshotResolver: '<rootDir>/jest.config.snapshot',
   moduleNameMapper: pathsToModuleNameMapper(jestConfig.compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),

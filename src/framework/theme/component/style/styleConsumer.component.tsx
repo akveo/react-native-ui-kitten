@@ -1,20 +1,18 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import { ThemeMappingType } from '../mapping';
 import {
   ThemeType,
   StyleType,
 } from '../theme';
-import {
-  ThemeMappingType,
-  ComponentMappingType,
-} from '../mapping';
 import ThemeContext from '../theme/themeContext';
 import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
-  getComponentMapping,
   StyleConsumerService,
-} from '../../service';
+} from '../../service/style';
+import { getComponentMapping } from '../../service/mapping';
+import { Interaction } from './type';
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;
@@ -29,7 +27,11 @@ export interface Props {
   appearance?: string;
   theme?: ThemeType;
   themedStyle?: StyleType;
-  requestStateStyle?: (state: string[]) => StyleType;
+  dispatch?: (interaction: Interaction[]) => void;
+}
+
+interface State {
+  interaction: Interaction[];
 }
 
 export const styled = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
@@ -37,35 +39,38 @@ export const styled = <T extends React.Component, P extends object>(Component: R
   type ComponentProps = Props & P;
   type WrapperProps = PrivateProps<T> & ComponentProps;
 
-  class Wrapper extends React.Component<WrapperProps> {
+  class Wrapper extends React.Component<WrapperProps, State> {
 
     service: StyleConsumerService = new StyleConsumerService();
 
-    getComponentName = (): string => Component.displayName || Component.name;
-
-    createComponentStyle = (theme: ThemeType,
-                            mapping: ComponentMappingType,
-                            appearance: string,
-                            variant: string[],
-                            state: string[]): StyleType => {
-
-      if (state.length === 0) {
-        console.warn('Redundant `requestStateStyle` call! Use `this.props.themedStyle` instead!');
-      }
-      return createStyle(theme, mapping, appearance, variant, state);
+    state: State = {
+      interaction: [],
     };
 
-    createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
+    private onDispatch = (interaction: Interaction[]) => {
+      this.setState({
+        interaction: interaction,
+      });
+    };
+
+    private getComponentName = (): string => Component.displayName || Component.name;
+
+    private createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
       const mapping = getComponentMapping(props.mapping, this.getComponentName());
-      const variants = this.service.getVariantPropKeys<P & Props>(mapping, componentProps);
+
+      const style = createStyle(
+        props.theme,
+        mapping,
+        componentProps.appearance,
+        this.service.getVariantPropKeys(mapping, componentProps),
+        this.service.getStatePropKeys(mapping, componentProps, this.state.interaction),
+      );
 
       return {
         appearance: componentProps.appearance,
         theme: props.theme,
-        themedStyle: createStyle(props.theme, mapping, componentProps.appearance, variants),
-        requestStateStyle: state => {
-          return this.createComponentStyle(props.theme, mapping, componentProps.appearance, variants, state);
-        },
+        themedStyle: style,
+        dispatch: this.onDispatch,
       };
     };
 
@@ -73,6 +78,7 @@ export const styled = <T extends React.Component, P extends object>(Component: R
       // TS issue: with spreading Generics https://github.com/Microsoft/TypeScript/issues/15792
       const { forwardedRef, ...restProps } = this.props as PrivateProps<T>;
       const componentProps = restProps as P & Props;
+
       return (
         <Component
           ref={forwardedRef}

@@ -9,11 +9,12 @@
           "borderWidth": 2,
           "borderColor": "gray-primary",
           "selectColor": "transparent",
-          "highlightColor": "transparent",
+          "highlightColor": "gray-light",
+          "highlightOpacity": 0.0,
           "state": {
             "active": {
               "borderColor": "gray-dark",
-              "highlightColor": "gray-light"
+              "highlightOpacity": 0.4
             },
             "checked": {
               "borderColor": "blue-primary",

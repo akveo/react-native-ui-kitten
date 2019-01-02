@@ -1,4 +1,4 @@
-import { ThemeType } from '../component';
+import { ThemeType } from '../../component';
 
 /**
  * @param name: string - theme property name, like `backgroundColor`

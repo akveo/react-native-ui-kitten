@@ -16,6 +16,7 @@ export {
   ThemedStyleType,
   StyleSheetType,
   StyleType,
+  Interaction,
 } from './component';
 
 export {

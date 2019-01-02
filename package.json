@@ -39,7 +39,7 @@
     "babel-jest": "^23.6.0",
     "coveralls": "^3.0.2",
     "husky": "^1.1.2",
-    "jest": "^23.6.0",
+    "jest": "^24.0.0-alpha.9",
     "metro-react-native-babel-preset": "^0.49.0",
     "react": "^16.6.0",
     "react-addons-test-utils": "^15.6.2",
@@ -49,7 +49,7 @@
     "react-native-typescript-transformer": "^1.2.10",
     "react-test-renderer": "^16.6.0",
     "rimraf": "^2.6.2",
-    "ts-jest": "^23.10.4",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
   },

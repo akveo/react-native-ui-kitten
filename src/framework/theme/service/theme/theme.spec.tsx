@@ -12,20 +12,17 @@ import {
   ThemeProvider,
   withStyles,
   ThemeType,
-} from '../component';
-import { getThemeValue } from '../service';
-import {
-  theme,
-  themeInverse,
-} from './config';
+} from '../../component';
+import * as Service from './theme.service';
+import * as config from './theme.spec.config';
 
 describe('@theme: service method checks', () => {
 
   it('finds theme value properly', async () => {
-    const themeValue = getThemeValue('grayPrimary', theme);
-    const undefinedValue = getThemeValue('undefined', theme);
+    const themeValue = Service.getThemeValue('grayPrimary', config.theme);
+    const undefinedValue = Service.getThemeValue('undefined', config.theme);
 
-    expect(themeValue).toEqual(theme.grayPrimary);
+    expect(themeValue).toEqual(config.theme.grayPrimary);
     expect(undefinedValue).toBeUndefined();
   });
 
@@ -127,15 +124,15 @@ describe('@theme: ui component checks', () => {
     }));
 
     const component = render(
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={config.theme}>
         <ThemedComponent/>
       </ThemeProvider>,
     );
 
     const themedComponent = component.getByTestId(themeConsumerTestId);
 
-    expect(json(themedComponent.props.theme)).toEqual(json(theme));
-    expect(themedComponent.props.themedStyle.container.backgroundColor).toEqual(theme.grayPrimary);
+    expect(json(themedComponent.props.theme)).toEqual(json(config.theme));
+    expect(themedComponent.props.themedStyle.container.backgroundColor).toEqual(config.theme.grayPrimary);
     expect(themedComponent.props.themedStyle).not.toBeNull();
     expect(themedComponent.props.themedStyle).not.toBeUndefined();
   });
@@ -143,8 +140,8 @@ describe('@theme: ui component checks', () => {
   it('able to change theme', async () => {
     const component = render(
       <ActionMock
-        theme={theme}
-        themeInverse={themeInverse}
+        theme={config.theme}
+        themeInverse={config.themeInverse}
       />,
     );
 
@@ -156,18 +153,18 @@ describe('@theme: ui component checks', () => {
       return component.getByTestId(themeConsumerTestId);
     });
 
-    expect(json(themedComponent.props.theme)).toEqual(json(themeInverse));
+    expect(json(themedComponent.props.theme)).toEqual(json(config.themeInverse));
   });
 
   it('able to override theme', async () => {
     const component = render(
       <OverrideMock
-        theme={theme}
-        themeInverse={themeInverse}
+        theme={config.theme}
+        themeInverse={config.themeInverse}
       />,
     );
 
-    const themedComponents = component.getAllByName(ComponentMock);
+    const themedComponents = component.getAllByType(ComponentMock);
 
     expect(themedComponents.length).toBeGreaterThan(1);
 
@@ -175,8 +172,8 @@ describe('@theme: ui component checks', () => {
     const theme2 = themedComponents[1].props.theme;
 
     expect(theme1).not.toEqual(theme2);
-    expect(json(theme1)).toEqual(json(theme));
-    expect(json(theme2)).toEqual(json(themeInverse));
+    expect(json(theme1)).toEqual(json(config.theme));
+    expect(json(theme2)).toEqual(json(config.themeInverse));
   });
 
 });
