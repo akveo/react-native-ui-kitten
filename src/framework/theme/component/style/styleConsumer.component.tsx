@@ -9,9 +9,9 @@ import ThemeContext from '../theme/themeContext';
 import MappingContext from '../mapping/mappingContext';
 import {
   createStyle,
-  getComponentMapping,
   StyleConsumerService,
-} from '../../service';
+} from '../../service/style';
+import { getComponentMapping } from '../../service/mapping';
 import { Interaction } from './type';
 
 interface PrivateProps<T> {

@@ -16,16 +16,15 @@ import {
   StyleProviderProps,
   ThemeType,
   Interaction,
-} from '../component';
-import {
-  StyleConsumerService,
-  APPEARANCE_DEFAULT,
-} from '../service';
+  State,
+} from '../../component';
+import { APPEARANCE_DEFAULT } from '../mapping/mapping.service';
+import { StyleConsumerService } from './styleConsumer.service';
 import {
   mapping,
   theme,
   themeInverse,
-} from './config';
+} from './style.spec.config';
 
 describe('@style: service methods check', () => {
 
@@ -83,6 +82,27 @@ describe('@style: service methods check', () => {
     expect(falsyKeys).toEqual(['disabled']);
     expect(statelessKeys).toEqual(['checked', 'disabled']);
     expect(activeKeys).toEqual(['active', 'checked', 'disabled']);
+  });
+
+  it('parses action properly', () => {
+    const active = Interaction.parse('active');
+    const undefined = Interaction.parse('undefined');
+
+    expect(active).toEqual(Interaction.ACTIVE);
+    expect(undefined).toBeUndefined();
+  });
+
+
+  it('parses action properly', () => {
+    const checked = State.parse('checked');
+    const disabled = State.parse('disabled');
+    const focus = State.parse('focused');
+    const undefined = State.parse('undefined');
+
+    expect(checked).toEqual(State.CHECKED);
+    expect(disabled).toEqual(State.DISABLED);
+    expect(focus).toEqual(State.FOCUSED);
+    expect(undefined).toBeUndefined();
   });
 
 });

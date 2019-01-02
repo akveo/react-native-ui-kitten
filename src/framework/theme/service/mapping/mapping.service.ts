@@ -5,7 +5,7 @@ import {
   VariantGroupType,
   MappingType,
   StateType,
-} from '../component';
+} from '../../component';
 
 export const APPEARANCE_DEFAULT = 'default';
 

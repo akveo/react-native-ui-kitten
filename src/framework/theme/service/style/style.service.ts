@@ -4,12 +4,12 @@ import {
   getStatelessVariantMapping,
   getStateAppearanceMapping,
   getStateVariantMapping,
-} from './mappingUtil.service';
+} from '../mapping/mapping.service';
 import {
   ComponentMappingType,
   ThemeType,
   StyleType,
-} from '../component';
+} from '../../component';
 
 const SEPARATOR_STATE = '.';
 

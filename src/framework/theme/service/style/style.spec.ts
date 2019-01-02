@@ -1,9 +1,9 @@
+import { APPEARANCE_DEFAULT } from '../mapping';
 import {
   mapping,
   theme,
-} from './config';
-import * as Service from '../service/styleUtil.service';
-import { APPEARANCE_DEFAULT } from '../service';
+} from './style.spec.config';
+import * as Service from './style.service';
 
 describe('@style: service methods checks', () => {
 

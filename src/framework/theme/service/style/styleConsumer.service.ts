@@ -1,14 +1,14 @@
+import { ComponentMappingType } from '../../component/mapping';
+import { Props } from '../../component/style/styleConsumer.component';
 import {
-  ComponentMappingType,
   Interaction,
   State,
-} from '../component';
-import { Props } from '../component/style/styleConsumer.component';
+} from '../../component/style/type';
 import {
   APPEARANCE_DEFAULT,
   getAppearanceMappingSafe,
   getAppearanceVariants,
-} from './mappingUtil.service';
+} from '../mapping/mapping.service';
 
 export class StyleConsumerService {
 

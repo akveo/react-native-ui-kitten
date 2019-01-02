@@ -1,9 +1,9 @@
-import { mapping } from './config';
-import * as Service from '../service/mappingUtil.service';
+import * as Service from './mapping.service';
+import * as config from './mapping.spec.config';
 
 describe('@mapping: service methods checks', () => {
 
-  const { Test: testMapping } = mapping;
+  const { Test: testMapping } = config.mapping;
 
   const json = (object: any) => JSON.stringify(object);
 

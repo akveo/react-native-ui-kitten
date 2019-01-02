@@ -1,4 +1,3 @@
-export * from './mappingUtil.service';
-export * from './themeUtil.service';
-export * from './styleUtil.service';
-export * from './styleConsumer.service';
+export * from './mapping';
+export * from './theme';
+export * from './style';
