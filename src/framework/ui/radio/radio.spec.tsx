@@ -9,8 +9,8 @@ import {
 } from 'react-native-testing-library';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  AppContainer,
+  AppContainerProps,
 } from '@rk-kit/theme';
 import {
   Radio,
@@ -20,10 +20,10 @@ import * as config from './radio.spec.config';
 
 const StyledComponent = styled<Radio, Props>(Radio);
 
-const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme}>
+const Mock = (props?: Props): React.ReactElement<AppContainerProps> => (
+  <AppContainer mapping={config.mapping} theme={config.theme}>
     <StyledComponent {...props} />
-  </StyleProvider>
+  </AppContainer>
 );
 
 const renderComponent = (props?: Props): RenderAPI => render(<Mock {...props}/>);

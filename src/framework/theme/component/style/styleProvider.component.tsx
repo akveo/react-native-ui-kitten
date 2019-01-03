@@ -1,43 +1,62 @@
 import React from 'react';
+import { StyleContext } from './styleContext';
 import {
-  MappingProvider,
-  MappingProviderProps,
+  StyleType,
   ThemeMappingType,
-} from '../mapping';
-import {
-  ThemeProvider,
-  ThemeProviderProps,
   ThemeType,
-} from '../theme';
+} from '../../component';
+import { createStyle } from '../../service/style';
+import { getComponentMapping } from '../../service/mapping';
+import { StyleCacheService } from '../../service/style/cache.service';
+import { default as rawCache } from '../cache-app-tmp.json';
 
-export type Props = MappingProviderProps & ThemeProviderProps;
+type CreateStyleFunction = (component: string,
+                                   appearance: string,
+                                   variants: string[],
+                                   states: string[]) => StyleType;
 
-interface State {
+export interface Props {
   mapping: ThemeMappingType;
   theme: ThemeType;
+  children: JSX.Element | React.ReactNode;
 }
 
-export class StyleProvider extends React.Component<Props, State> {
+interface State {
+  createStyle: CreateStyleFunction;
+}
 
-  static getDerivedStateFromProps(props: Props): State {
-    return {
-      mapping: props.mapping,
-      theme: props.theme,
+export class StyleProvider extends React.PureComponent<Props, State> {
+
+  private cacheService = new StyleCacheService(rawCache);
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      createStyle: this.createComponentStyle,
     };
   }
 
-  state: State = {
-    mapping: [],
-    theme: {},
+  createComponentStyle = (component: string, appearance: string, variants: string[], states: string[]): StyleType => {
+    const styleCache = this.cacheService.getStyle(component, appearance, variants, states);
+
+    if (styleCache === undefined) {
+      return createStyle(
+        this.props.theme,
+        getComponentMapping(this.props.mapping, component),
+        appearance,
+        variants,
+        states,
+      );
+    }
+    return styleCache;
   };
 
   render() {
     return (
-      <MappingProvider mapping={this.state.mapping}>
-        <ThemeProvider theme={this.state.theme}>
-          {this.props.children}
-        </ThemeProvider>
-      </MappingProvider>
+      <StyleContext.Provider
+        value={this.state.createStyle}>
+        {this.props.children}
+      </StyleContext.Provider>
     );
   }
 }

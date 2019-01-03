@@ -2,16 +2,18 @@ import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { MappingContext } from '../mapping';
 import { ThemeContext } from '../theme';
-import { getComponentMapping } from '../../service/mapping';
+import { StyleContext } from './styleContext';
 import {
-  createStyle,
-  StyleConsumerService,
-} from '../../service/style';
+  APPEARANCE_DEFAULT,
+  getComponentMapping,
+} from '../../service/mapping';
+import { StyleConsumerService } from '../../service/style';
 import {
   ThemeMappingType,
   ThemeType,
   StyleType,
   Interaction,
+  CreateStyleFunction,
 } from '../../component';
 
 interface PrivateProps<T> {
@@ -21,6 +23,7 @@ interface PrivateProps<T> {
 interface ConsumerProps {
   mapping: ThemeMappingType;
   theme: ThemeType;
+  createStyle: CreateStyleFunction;
 }
 
 export interface Props {
@@ -58,16 +61,17 @@ export const styled = <T extends React.Component, P extends object>(Component: R
     private createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
       const mapping = getComponentMapping(props.mapping, this.getComponentName());
 
-      const style = createStyle(
-        props.theme,
-        mapping,
-        componentProps.appearance,
+      const appearance = componentProps.appearance || APPEARANCE_DEFAULT;
+
+      const style = props.createStyle(
+        this.getComponentName(),
+        appearance,
         this.service.getVariantPropKeys(mapping, componentProps),
         this.service.getStatePropKeys(mapping, componentProps, this.state.interaction),
       );
 
       return {
-        appearance: componentProps.appearance,
+        appearance: appearance,
         theme: props.theme,
         themedStyle: style,
         dispatch: this.onDispatch,
@@ -91,9 +95,11 @@ export const styled = <T extends React.Component, P extends object>(Component: R
     render() {
       return (
         <MappingContext.Consumer>{(mapping: ThemeMappingType) => (
-          <ThemeContext.Consumer>{(theme: ThemeType) => {
-            return this.renderWrappedComponent({ mapping: mapping, theme: theme });
-          }}</ThemeContext.Consumer>
+          <ThemeContext.Consumer>{(theme: ThemeType) => (
+            <StyleContext.Consumer>{(createStyle: CreateStyleFunction) => {
+              return this.renderWrappedComponent({ createStyle: createStyle, mapping: mapping, theme: theme });
+            }}</StyleContext.Consumer>
+          )}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
       );
     }
