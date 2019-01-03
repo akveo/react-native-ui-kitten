@@ -1,18 +1,16 @@
 import React from 'react';
 import {
-  ThemeProvider,
-  ThemeType,
-} from '../theme';
-import {
-  ThemeMappingProvider,
+  MappingProvider,
+  MappingProviderProps,
   ThemeMappingType,
 } from '../mapping';
+import {
+  ThemeProvider,
+  ThemeProviderProps,
+  ThemeType,
+} from '../theme';
 
-export interface Props {
-  mapping: ThemeMappingType;
-  theme: ThemeType;
-  children: JSX.Element | React.ReactNode;
-}
+export type Props = MappingProviderProps & ThemeProviderProps;
 
 interface State {
   mapping: ThemeMappingType;
@@ -35,11 +33,11 @@ export class StyleProvider extends React.Component<Props, State> {
 
   render() {
     return (
-      <ThemeMappingProvider mapping={this.state.mapping}>
+      <MappingProvider mapping={this.state.mapping}>
         <ThemeProvider theme={this.state.theme}>
           {this.props.children}
         </ThemeProvider>
-      </ThemeMappingProvider>
+      </MappingProvider>
     );
   }
 }

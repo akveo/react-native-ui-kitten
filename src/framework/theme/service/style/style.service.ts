@@ -4,7 +4,7 @@ import {
   getStatelessVariantMapping,
   getStateAppearanceMapping,
   getStateVariantMapping,
-} from '../mapping/mapping.service';
+} from '../mapping';
 import {
   ComponentMappingType,
   ThemeType,

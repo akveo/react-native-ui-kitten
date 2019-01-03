@@ -1,4 +1,5 @@
 export * from './type';
+export * from './themeContext';
 export {
   ThemeProvider,
   Props as ThemeProviderProps,

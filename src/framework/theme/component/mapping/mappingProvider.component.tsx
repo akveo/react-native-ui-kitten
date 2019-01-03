@@ -1,5 +1,5 @@
 import React from 'react';
-import MappingContext from './mappingContext';
+import { MappingContext } from './mappingContext';
 import { ThemeMappingType } from './type';
 
 export interface Props {

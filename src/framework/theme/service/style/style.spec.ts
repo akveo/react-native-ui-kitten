@@ -1,13 +1,10 @@
 import { APPEARANCE_DEFAULT } from '../mapping';
-import {
-  mapping,
-  theme,
-} from './style.spec.config';
 import * as Service from './style.service';
+import * as config from './style.spec.config';
 
 describe('@style: service methods checks', () => {
 
-  const { Test: testMapping } = mapping;
+  const { Test: testMapping } = config.mapping;
 
   describe('* preprocess', () => {
 
@@ -149,7 +146,7 @@ describe('@style: service methods checks', () => {
     describe('* default appearance', () => {
 
       it('* no variant and no state', () => {
-        const style = Service.createStyle(theme, testMapping);
+        const style = Service.createStyle(config.theme, testMapping);
         expect(style).toMatchSnapshot();
       });
 
@@ -157,7 +154,7 @@ describe('@style: service methods checks', () => {
 
         it('* single', () => {
           const style = Service.createStyle(
-            theme,
+            config.theme,
             testMapping,
             APPEARANCE_DEFAULT,
             [],
@@ -169,7 +166,7 @@ describe('@style: service methods checks', () => {
 
         it('* multiple', () => {
           const style = Service.createStyle(
-            theme,
+            config.theme,
             testMapping,
             APPEARANCE_DEFAULT,
             [],
@@ -186,7 +183,7 @@ describe('@style: service methods checks', () => {
 
           it('* no state', () => {
             const style = Service.createStyle(
-              theme,
+              config.theme,
               testMapping,
               APPEARANCE_DEFAULT,
               ['success'],
@@ -199,7 +196,7 @@ describe('@style: service methods checks', () => {
 
             it('* single implicit (should apply from appearance)', () => {
               const style = Service.createStyle(
-                theme,
+                config.theme,
                 testMapping,
                 APPEARANCE_DEFAULT,
                 ['success'],
@@ -211,7 +208,7 @@ describe('@style: service methods checks', () => {
 
             it('* single explicit (should apply own)', () => {
               const style = Service.createStyle(
-                theme,
+                config.theme,
                 testMapping,
                 APPEARANCE_DEFAULT,
                 ['success'],
@@ -223,7 +220,7 @@ describe('@style: service methods checks', () => {
 
             it('* multiple', () => {
               const style = Service.createStyle(
-                theme,
+                config.theme,
                 testMapping,
                 APPEARANCE_DEFAULT,
                 ['success'],
@@ -241,7 +238,7 @@ describe('@style: service methods checks', () => {
 
           it('* no state', () => {
             const style = Service.createStyle(
-              theme,
+              config.theme,
               testMapping,
               APPEARANCE_DEFAULT,
               ['success', 'big'],
@@ -254,7 +251,7 @@ describe('@style: service methods checks', () => {
 
             it('* single', () => {
               const style = Service.createStyle(
-                theme,
+                config.theme,
                 testMapping,
                 APPEARANCE_DEFAULT,
                 ['success', 'big'],
@@ -266,7 +263,7 @@ describe('@style: service methods checks', () => {
 
             it('* multiple', () => {
               const style = Service.createStyle(
-                theme,
+                config.theme,
                 testMapping,
                 APPEARANCE_DEFAULT,
                 ['success', 'big'],
@@ -287,7 +284,7 @@ describe('@style: service methods checks', () => {
     describe('* custom appearance', () => {
 
       it('* no variant and no state', () => {
-        const style = Service.createStyle(theme, testMapping, 'custom');
+        const style = Service.createStyle(config.theme, testMapping, 'custom');
 
         expect(style).toMatchSnapshot();
       });
@@ -296,7 +293,7 @@ describe('@style: service methods checks', () => {
 
         it('* implicit (should apply from default appearance)', () => {
           const style = Service.createStyle(
-            theme,
+            config.theme,
             testMapping,
             'custom',
             [],
@@ -308,7 +305,7 @@ describe('@style: service methods checks', () => {
 
         it('* explicit (should apply own)', () => {
           const style = Service.createStyle(
-            theme,
+            config.theme,
             testMapping,
             'custom',
             [],
@@ -324,7 +321,7 @@ describe('@style: service methods checks', () => {
 
         it('* implicit (should apply from default appearance)', () => {
           const style = Service.createStyle(
-            theme,
+            config.theme,
             testMapping,
             'custom',
             ['big'],
@@ -335,7 +332,7 @@ describe('@style: service methods checks', () => {
 
         it('* explicit (should apply own)', () => {
           const style = Service.createStyle(
-            theme,
+            config.theme,
             testMapping,
             'custom',
             ['success'],
@@ -351,7 +348,7 @@ describe('@style: service methods checks', () => {
     describe('* undefined appearance', () => {
 
       it('* no variant and no state (should apply default appearance)', () => {
-        const style = Service.createStyle(theme, testMapping, 'undefined');
+        const style = Service.createStyle(config.theme, testMapping, 'undefined');
 
         expect(style).toMatchSnapshot();
       });
