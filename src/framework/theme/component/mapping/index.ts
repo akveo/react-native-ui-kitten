@@ -1,4 +1,3 @@
-export * from './type';
 export * from './mappingContext';
 export {
   MappingProvider,

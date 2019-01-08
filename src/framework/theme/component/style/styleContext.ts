@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateStyleFunction } from './type';
+import { CreateStyleFunction } from './styleProvider.component';
 
 const defaultValue: CreateStyleFunction = () => {};
 

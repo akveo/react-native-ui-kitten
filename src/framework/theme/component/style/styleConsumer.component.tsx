@@ -1,15 +1,14 @@
 import React from 'react';
+import {
+  APPEARANCE_DEFAULT,
+  ThemeMappingType,
+} from 'eva';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { MappingContext } from '../mapping';
 import { ThemeContext } from '../theme';
 import { StyleContext } from './styleContext';
-import {
-  APPEARANCE_DEFAULT,
-  getComponentMapping,
-} from '../../service/mapping';
 import { StyleConsumerService } from '../../service/style';
 import {
-  ThemeMappingType,
   ThemeType,
   StyleType,
   Interaction,
@@ -59,15 +58,13 @@ export const styled = <T extends React.Component, P extends object>(Component: R
     private getComponentName = (): string => Component.displayName || Component.name;
 
     private createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
-      const mapping = getComponentMapping(props.mapping, this.getComponentName());
-
       const appearance = componentProps.appearance || APPEARANCE_DEFAULT;
 
       const style = props.createStyle(
         this.getComponentName(),
         appearance,
-        this.service.getVariantPropKeys(mapping, componentProps),
-        this.service.getStatePropKeys(mapping, componentProps, this.state.interaction),
+        this.service.getVariantPropKeys(props.mapping, this.getComponentName(), componentProps),
+        this.service.getStatePropKeys(props.mapping, this.getComponentName(), componentProps, this.state.interaction),
       );
 
       return {

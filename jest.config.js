@@ -22,6 +22,13 @@ module.exports = {
     prefix: '<rootDir>/',
   }),
   modulePathIgnorePatterns: [
-    '<rootDir>/src/playground/'
+    '<rootDir>/src/playground/',
+  ],
+  testPathIgnorePatterns: [
+    '<rootDir>/dist',
+    '<rootDir>/node_modules',
+  ],
+  transformIgnorePatterns: [
+    'node_modules/(?!(react-native|react-native-cookies|eva)/)'
   ],
 };

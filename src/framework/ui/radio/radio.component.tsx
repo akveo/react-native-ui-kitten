@@ -5,8 +5,8 @@ import {
   StyleSheet,
   TouchableOpacityProps,
 } from 'react-native';
+import { APPEARANCE_DEFAULT } from 'eva';
 import {
-  APPEARANCE_DEFAULT,
   StyledComponentProps,
   StyleType,
   Interaction,

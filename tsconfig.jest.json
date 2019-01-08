@@ -6,5 +6,8 @@
     "paths": {
       "@rk-kit/*": ["./src/framework/*"]
     }
-  }
+  },
+  "include": [
+    "./node_modules/eva"
+  ]
 }

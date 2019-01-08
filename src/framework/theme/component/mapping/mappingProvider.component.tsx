@@ -1,6 +1,6 @@
 import React from 'react';
+import { ThemeMappingType } from 'eva';
 import { MappingContext } from './mappingContext';
-import { ThemeMappingType } from './type';
 
 export interface Props {
   mapping: ThemeMappingType;

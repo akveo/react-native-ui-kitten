@@ -1,16 +1,17 @@
 import React from 'react';
+import {
+  createStyle,
+  getStyle,
+  ThemeMappingType,
+} from 'eva';
 import { StyleContext } from './styleContext';
 import {
-  StyleType,
-  ThemeMappingType,
   ThemeType,
+  StyleType,
 } from '../../component';
-import { createStyle } from '../../service/style';
-import { getComponentMapping } from '../../service/mapping';
-import { StyleCacheService } from '../../service/style/cache.service';
-import { default as rawCache } from '../cache-app-tmp.json';
+import { createThemedStyle } from '../../service/style';
 
-type CreateStyleFunction = (component: string,
+export type CreateStyleFunction = (component: string,
                                    appearance: string,
                                    variants: string[],
                                    states: string[]) => StyleType;
@@ -27,8 +28,6 @@ interface State {
 
 export class StyleProvider extends React.PureComponent<Props, State> {
 
-  private cacheService = new StyleCacheService(rawCache);
-
   constructor(props) {
     super(props);
     this.state = {
@@ -36,19 +35,19 @@ export class StyleProvider extends React.PureComponent<Props, State> {
     };
   }
 
-  createComponentStyle = (component: string, appearance: string, variants: string[], states: string[]): StyleType => {
-    const styleCache = this.cacheService.getStyle(component, appearance, variants, states);
+  private createComponentStyle = (component: string,
+                                  appearance: string,
+                                  variants: string[],
+                                  states: string[]): StyleType => {
 
-    if (styleCache === undefined) {
-      return createStyle(
-        this.props.theme,
-        getComponentMapping(this.props.mapping, component),
-        appearance,
-        variants,
-        states,
-      );
+    let styleMapping = getStyle(component, appearance, variants, states);
+
+    if (styleMapping) {
+      return createThemedStyle(styleMapping, this.props.theme);
+    } else {
+      styleMapping = createStyle(this.props.mapping, component, appearance, variants, states);
+      return createThemedStyle(styleMapping, this.props.theme);
     }
-    return styleCache;
   };
 
   render() {

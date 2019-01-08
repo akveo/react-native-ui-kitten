@@ -1,8 +1,10 @@
 import React from 'react';
 import {
+  ThemeMappingType,
+} from 'eva';
+import {
   MappingProvider,
   MappingProviderProps,
-  ThemeMappingType,
 } from './mapping';
 import {
   ThemeProvider,

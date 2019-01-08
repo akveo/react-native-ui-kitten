@@ -4,17 +4,17 @@ export const mapping = {
       default: {
         mapping: {
           size: 36,
-            innerSize: 24,
-            borderWidth: 2,
-            borderColor: 'grayPrimary',
-            selectColor: 'transparent',
-            state: {
+          innerSize: 24,
+          borderWidth: 2,
+          borderColor: 'grayPrimary',
+          selectColor: 'transparent',
+          state: {
             active: {
               borderColor: 'grayDark',
             },
             checked: {
               borderColor: 'bluePrimary',
-                selectColor: 'bluePrimary',
+              selectColor: 'bluePrimary',
             },
             disabled: {
               borderColor: 'grayLight',
@@ -34,7 +34,7 @@ export const mapping = {
                 state: {
                   checked: {
                     borderColor: 'orangePrimary',
-                      selectColor: 'orangePrimary',
+                    selectColor: 'orangePrimary',
                   },
                   'active.checked': {
                     borderColor: 'orangeDark',
@@ -47,7 +47,7 @@ export const mapping = {
                 state: {
                   checked: {
                     borderColor: 'tealPrimary',
-                      selectColor: 'tealPrimary',
+                    selectColor: 'tealPrimary',
                   },
                   'active.checked': {
                     borderColor: 'tealDark',
@@ -60,13 +60,13 @@ export const mapping = {
             big: {
               mapping: {
                 size: 42,
-                  innerSize: 28,
+                innerSize: 28,
               },
             },
             small: {
               mapping: {
                 size: 30,
-                  innerSize: 20,
+                innerSize: 20,
               },
             },
           },
@@ -75,7 +75,7 @@ export const mapping = {
       custom: {
         mapping: {
           borderWidth: 4,
-            state: {
+          state: {
             active: {
               borderColor: 'grayLight',
             },
@@ -96,4 +96,28 @@ export const mapping = {
   Empty: {
     appearance: {},
   },
+};
+
+export const theme = {
+  grayLight: '#E0E0E0',
+  grayPrimary: '#9E9E9E',
+  grayDark: '#616161',
+  bluePrimary: '#2196F3',
+  blueDark: '#1976D2',
+  orangePrimary: '#FF9800',
+  orangeDark: '#F57C00',
+  tealPrimary: '#009688',
+  tealDark: '#00796B',
+};
+
+export const themeInverse = {
+  grayLight: '#616161',
+  grayPrimary: '#9E9E9E',
+  grayDark: '#E0E0E0',
+  bluePrimary: '#2196F3',
+  blueDark: '#1976D2',
+  orangePrimary: '#FF9800',
+  orangeDark: '#F57C00',
+  tealPrimary: '#009688',
+  tealDark: '#00796B',
 };

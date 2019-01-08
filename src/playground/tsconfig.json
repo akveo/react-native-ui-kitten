@@ -15,15 +15,7 @@
       "es2016"
     ],
     "paths": {
-      "@rk-kit/*": [
-        "../framework/*"
-      ]
+      "@rk-kit/*": ["../framework/*"]
     }
-  },
-  "typeRoots": [
-    "../../node_modules/@types"
-  ],
-  "exclude": [
-    "./node_modules"
-  ]
+  }
 }

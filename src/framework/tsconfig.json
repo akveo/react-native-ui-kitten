@@ -18,15 +18,8 @@
       "es2017.object"
     ],
     "paths": {
-      "@rk-kit/theme": [
-        "./theme"
-      ],
-      "@rk-kit/ui": [
-        "./ui"
-      ]
+      "@rk-kit/theme": ["./theme"],
+      "@rk-kit/ui": ["./ui"]
     }
-  },
-  "typeRoots": [
-    "../../node_modules/@types"
-  ]
+  }
 }
