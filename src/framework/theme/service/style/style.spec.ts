@@ -3,7 +3,7 @@ import { APPEARANCE_DEFAULT } from 'eva';
 import {
   Interaction,
   State,
-} from '../../component';
+} from '../../type';
 import * as Service from './style.service';
 import * as config from './style.spec.config';
 

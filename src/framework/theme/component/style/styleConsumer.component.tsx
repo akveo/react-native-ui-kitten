@@ -8,12 +8,12 @@ import { MappingContext } from '../mapping';
 import { ThemeContext } from '../theme';
 import { StyleContext } from './styleContext';
 import { StyleConsumerService } from '../../service/style';
+import { CreateStyleFunction } from '../../component';
 import {
+  Interaction,
   ThemeType,
   StyleType,
-  Interaction,
-  CreateStyleFunction,
-} from '../../component';
+} from '../../type';
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;

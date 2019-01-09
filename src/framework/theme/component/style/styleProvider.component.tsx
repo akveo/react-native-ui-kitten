@@ -13,11 +13,11 @@ import {
   ThemeProviderProps,
 } from '../theme';
 import { StyleContext } from './styleContext';
+import { createThemedStyle } from '../../service';
 import {
   ThemeType,
   StyleType,
-} from '../../component';
-import { createThemedStyle } from '../../service';
+} from '../../type';
 
 export type CreateStyleFunction = (component: string,
                                    appearance: string,
@@ -62,8 +62,7 @@ export class StyleProvider extends React.PureComponent<Props, State> {
     return (
       <MappingContext.Provider value={this.state.mapping}>
         <ThemeContext.Provider value={this.state.theme}>
-          <StyleContext.Provider
-            value={this.state.createStyle}>
+          <StyleContext.Provider value={this.state.createStyle}>
             {this.props.children}
           </StyleContext.Provider>
         </ThemeContext.Provider>

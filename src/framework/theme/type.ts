@@ -19,3 +19,8 @@ export namespace State {
     return State[state.toUpperCase()];
   }
 }
+
+export type ThemeType = any;
+export type StyleType = any;
+export type ThemedStyleType = any;
+export type StyleSheetType = any;

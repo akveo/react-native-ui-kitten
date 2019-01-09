@@ -10,7 +10,7 @@ import {
 } from 'react-native-testing-library';
 import { ThemeProvider } from './themeProvider.component';
 import { withStyles } from './themeConsumer.component';
-import { ThemeType } from './type';
+import { ThemeType } from '../../type';
 import * as config from './theme.spec.config';
 
 describe('@theme: ui component checks', () => {

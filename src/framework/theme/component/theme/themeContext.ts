@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeType } from './type';
+import { ThemeType } from '../../type';
 
 const defaultValue: ThemeType = {};
 

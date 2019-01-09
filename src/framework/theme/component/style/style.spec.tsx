@@ -18,8 +18,10 @@ import {
   styled,
   Props as StyledComponentProps,
 } from './styleConsumer.component';
-import { Interaction } from './type';
-import { ThemeType } from '../../component';
+import {
+  Interaction,
+  ThemeType,
+} from '../../type';
 import {
   mapping,
   theme,

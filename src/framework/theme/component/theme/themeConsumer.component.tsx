@@ -5,7 +5,7 @@ import {
   ThemeType,
   ThemedStyleType,
   StyleSheetType,
-} from './type';
+} from '../../type';
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;

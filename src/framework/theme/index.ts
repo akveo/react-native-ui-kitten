@@ -8,11 +8,6 @@ export {
   StyledComponentProps,
   ThemeProviderProps,
   ThemedComponentProps,
-
-  ThemeType,
-  ThemedStyleType,
-  StyleSheetType,
-  StyleType,
-  Interaction,
 } from './component';
 
+export * from './type';

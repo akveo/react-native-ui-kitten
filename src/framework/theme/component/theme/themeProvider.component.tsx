@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { ThemeContext } from './themeContext';
-import { ThemeType } from './type';
+import { ThemeType } from '../../type';
 
 export interface Props {
   theme: ThemeType;

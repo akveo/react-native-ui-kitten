@@ -10,7 +10,7 @@ import { StyledComponentProps } from '../../component';
 import {
   Interaction,
   State,
-} from '../../component/style/type';
+} from '../../type';
 
 export class StyleConsumerService {
 

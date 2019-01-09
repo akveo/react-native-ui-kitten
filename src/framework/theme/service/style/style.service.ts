@@ -1,7 +1,7 @@
 import {
   ThemeType,
   StyleType,
-} from '../../component';
+} from '../../type';
 
 export function createThemedStyle(mapping: any, theme: ThemeType): StyleType {
   return Object.keys(mapping).reduce((acc, current) => {
