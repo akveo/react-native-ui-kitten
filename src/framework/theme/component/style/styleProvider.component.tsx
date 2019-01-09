@@ -4,6 +4,14 @@ import {
   getStyle,
   ThemeMappingType,
 } from 'eva';
+import {
+  MappingContext,
+  MappingProviderProps,
+} from '../mapping';
+import {
+  ThemeContext,
+  ThemeProviderProps,
+} from '../theme';
 import { StyleContext } from './styleContext';
 import {
   ThemeType,
@@ -16,13 +24,11 @@ export type CreateStyleFunction = (component: string,
                                    variants: string[],
                                    states: string[]) => StyleType;
 
-export interface Props {
-  mapping: ThemeMappingType;
-  theme: ThemeType;
-  children: JSX.Element | React.ReactNode;
-}
+export type Props = MappingProviderProps & ThemeProviderProps;
 
 interface State {
+  mapping: ThemeMappingType;
+  theme: ThemeType;
   createStyle: CreateStyleFunction;
 }
 
@@ -31,6 +37,8 @@ export class StyleProvider extends React.PureComponent<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
+      mapping: props.mapping,
+      theme: props.theme,
       createStyle: this.createComponentStyle,
     };
   }
@@ -52,10 +60,14 @@ export class StyleProvider extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <StyleContext.Provider
-        value={this.state.createStyle}>
-        {this.props.children}
-      </StyleContext.Provider>
+      <MappingContext.Provider value={this.state.mapping}>
+        <ThemeContext.Provider value={this.state.theme}>
+          <StyleContext.Provider
+            value={this.state.createStyle}>
+            {this.props.children}
+          </StyleContext.Provider>
+        </ThemeContext.Provider>
+      </MappingContext.Provider>
     );
   }
 }

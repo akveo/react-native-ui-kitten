@@ -1,10 +1,10 @@
 export {
-  AppContainer,
-  styled,
   ThemeProvider,
   withStyles,
+  styled,
+  StyleProvider,
 
-  AppContainerProps,
+  StyleProviderProps,
   StyledComponentProps,
   ThemeProviderProps,
   ThemedComponentProps,

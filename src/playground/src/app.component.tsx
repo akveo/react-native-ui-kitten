@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeMappingType } from 'eva';
 import {
-  AppContainer,
+  StyleProvider,
   ThemeType,
 } from '@rk-kit/theme';
 import {
@@ -30,9 +30,9 @@ export default class App extends React.Component<any, State> {
     const { RadioScreen: RootScreen, ...nestedScreens } = Screens;
     const Router = withNavigation(RootScreen, nestedScreens);
     return (
-      <AppContainer theme={this.state.theme} mapping={this.state.mapping}>
+      <StyleProvider theme={this.state.theme} mapping={this.state.mapping}>
         <Router/>
-      </AppContainer>
+      </StyleProvider>
     );
   }
 }
