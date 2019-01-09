@@ -44,9 +44,9 @@ export class StyleConsumerService {
   }
 
   private getAppearanceStates(mapping: ThemeMappingType, component: string, appearance: string): string[] {
-    const variantGroups: string[][] = getAppearanceVariants(mapping, component, appearance);
-
     const mappingStates: string[] = getAppearanceMappingStates(mapping, component, appearance) || [];
+
+    const variantGroups: string[][] = getAppearanceVariants(mapping, component, appearance) || [];
     const variantStates: string[] = this.flatten(variantGroups).reduce((acc, variant) => {
       const states = getVariantMappingStates(mapping, component, appearance, variant) || [];
       return [...acc, ...states];
@@ -55,16 +55,10 @@ export class StyleConsumerService {
     return this.noDuplicates([...mappingStates, ...variantStates]);
   }
 
-  /**
-   * TODO: used in eva
-   */
   private flatten<T>(params: T[][]): T[] {
     return [].concat(...params);
   }
 
-  /**
-   * TODO: used in eva
-   */
   private noDuplicates<T>(params: T[]): T[] {
     return [...new Set(params)];
   }

@@ -1,4 +1,10 @@
-export const mapping = {
+import {
+  ThemeMappingType,
+  StyleMappingType,
+} from 'eva';
+import { ThemeType } from '../../type';
+
+export const mapping: StyleMappingType = {
   prop1: 'grayLight',
   prop2: 'grayPrimary',
   prop3: 'grayDark',
@@ -12,7 +18,7 @@ export const mapping = {
   prop11: 42,
 };
 
-export const componentMapping = {
+export const componentMapping: ThemeMappingType = {
   Test: {
     appearance: {
       default: {
@@ -108,11 +114,15 @@ export const componentMapping = {
     },
   },
   Empty: {
-    appearance: {},
+    appearance: {
+      default: {
+        mapping: {},
+      },
+    },
   },
 };
 
-export const theme = {
+export const theme: ThemeType = {
   grayLight: '#E0E0E0',
   grayPrimary: '#9E9E9E',
   grayDark: '#616161',
@@ -124,7 +134,7 @@ export const theme = {
   tealDark: '#00796B',
 };
 
-export const themeInverse = {
+export const themeInverse: ThemeType = {
   grayLight: '#616161',
   grayPrimary: '#9E9E9E',
   grayDark: '#E0E0E0',

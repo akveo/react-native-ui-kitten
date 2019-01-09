@@ -5,11 +5,11 @@ import {
   ThemeMappingType,
 } from 'eva';
 import {
-  MappingContext,
+  MappingProvider,
   MappingProviderProps,
 } from '../mapping';
 import {
-  ThemeContext,
+  ThemeProvider,
   ThemeProviderProps,
 } from '../theme';
 import { StyleContext } from './styleContext';
@@ -60,13 +60,13 @@ export class StyleProvider extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <MappingContext.Provider value={this.state.mapping}>
-        <ThemeContext.Provider value={this.state.theme}>
+      <MappingProvider mapping={this.state.mapping}>
+        <ThemeProvider theme={this.state.theme}>
           <StyleContext.Provider value={this.state.createStyle}>
             {this.props.children}
           </StyleContext.Provider>
-        </ThemeContext.Provider>
-      </MappingContext.Provider>
+        </ThemeProvider>
+      </MappingProvider>
     );
   }
 }

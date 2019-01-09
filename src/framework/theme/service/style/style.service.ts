@@ -1,9 +1,10 @@
+import { StyleMappingType } from 'eva';
 import {
   ThemeType,
   StyleType,
 } from '../../type';
 
-export function createThemedStyle(mapping: any, theme: ThemeType): StyleType {
+export function createThemedStyle(mapping: StyleMappingType, theme: ThemeType): StyleType {
   return Object.keys(mapping).reduce((acc, current) => {
     const key = mapping[current];
     acc[current] = theme[key] || key;
