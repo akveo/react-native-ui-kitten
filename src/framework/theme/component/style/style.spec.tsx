@@ -33,8 +33,6 @@ describe('@style: ui component checks', () => {
   const styleConsumerTestId = '@style/consumer';
   const styleTouchableTestId = '@style/touchable';
 
-  const json = (object: any) => JSON.stringify(object);
-
   interface ComplexStyleProviderProps {
     themeInverse: ThemeType;
   }
@@ -139,20 +137,8 @@ describe('@style: ui component checks', () => {
     const styledComponent = component.getByTestId(styleConsumerTestId);
     const withAppearanceComponent = withAppearance.getByTestId(styleConsumerTestId);
 
-    expect(json(styledComponent.props.themedStyle)).toEqual(json({
-      size: 36,
-      innerSize: 24,
-      borderWidth: 2,
-      borderColor: theme.grayPrimary,
-      selectColor: 'transparent',
-    }));
-    expect(json(withAppearanceComponent.props.themedStyle)).toEqual(json({
-      size: 36,
-      innerSize: 24,
-      borderWidth: 2,
-      borderColor: theme.grayPrimary,
-      selectColor: 'transparent',
-    }));
+    expect(styledComponent.props.themedStyle).toMatchSnapshot();
+    expect(withAppearanceComponent.props.themedStyle).toMatchSnapshot();
   });
 
   it('dispatch action works properly', async () => {
@@ -171,13 +157,7 @@ describe('@style: ui component checks', () => {
       return component.getByTestId(styleConsumerTestId);
     });
 
-    expect(json(styledComponentChanged.props.themedStyle)).toEqual(json({
-      size: 36,
-      innerSize: 24,
-      borderWidth: 2,
-      borderColor: theme.grayDark,
-      selectColor: 'transparent',
-    }));
+    expect(styledComponentChanged.props.themedStyle).toMatchSnapshot();
   });
 
   it('provides correct styles on theme change', async () => {
@@ -193,13 +173,7 @@ describe('@style: ui component checks', () => {
     );
     const styledComponent = component.getByTestId(styleConsumerTestId);
 
-    expect(json(styledComponent.props.themedStyle)).toEqual(json({
-      size: 36,
-      innerSize: 24,
-      borderWidth: 2,
-      borderColor: theme.grayPrimary,
-      selectColor: 'transparent',
-    }));
+    expect(styledComponent.props.themedStyle).toMatchSnapshot();
 
     const touchableComponent = component.getByTestId(styleTouchableTestId);
 
@@ -209,13 +183,7 @@ describe('@style: ui component checks', () => {
       return component.getByTestId(styleConsumerTestId);
     });
 
-    expect(json(styledComponentChanged.props.themedStyle)).toEqual(json({
-      size: 36,
-      innerSize: 24,
-      borderWidth: 2,
-      borderColor: themeInverse.grayPrimary,
-      selectColor: 'transparent',
-    }));
+    expect(styledComponentChanged.props.themedStyle).toMatchSnapshot();
   });
 
 });
