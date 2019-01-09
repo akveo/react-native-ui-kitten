@@ -6,7 +6,7 @@ import {
   APPEARANCE_DEFAULT,
   ThemeMappingType,
 } from 'eva';
-import { Props } from '../../component/style/styleConsumer.component';
+import { StyledComponentProps } from '../../component';
 import {
   Interaction,
   State,
@@ -14,7 +14,10 @@ import {
 
 export class StyleConsumerService {
 
-  public getVariantPropKeys<P extends Props>(mapping: ThemeMappingType, component: string, props: P): string[] {
+  public getVariantPropKeys<P extends StyledComponentProps>(mapping: ThemeMappingType,
+                                                            component: string,
+                                                            props: P): string[] {
+
     const variantGroups: string[] = getAppearanceVariantGroups(mapping, component, APPEARANCE_DEFAULT);
     if (variantGroups === undefined) {
       return [];
@@ -25,11 +28,10 @@ export class StyleConsumerService {
       .map((key: string) => props[key]);
   }
 
-  public getStatePropKeys<P extends Props>(mapping: ThemeMappingType,
-                                           component: string,
-                                           props: P,
-                                           interaction: Interaction[] = []): string[] {
-
+  public getStatePropKeys<P extends StyledComponentProps>(mapping: ThemeMappingType,
+                                                          component: string,
+                                                          props: P,
+                                                          interaction: Interaction[] = []): string[] {
 
     const appearanceStates = this.getAppearanceStates(mapping, component, APPEARANCE_DEFAULT);
 

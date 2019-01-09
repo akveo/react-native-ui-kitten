@@ -1,106 +1,30 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-  View,
-  ViewProps,
-} from 'react-native';
-import {
   fireEvent,
   render,
   waitForElement,
 } from 'react-native-testing-library';
 import {
-  APPEARANCE_DEFAULT,
-} from 'eva';
+  TouchableOpacity,
+  View,
+  ViewProps,
+} from 'react-native';
+import { APPEARANCE_DEFAULT } from 'eva/rk-kit/src/service/mapping/mapping.service';
+import {
+  StyleProvider,
+  Props as StyleProviderProps,
+} from './styleProvider.component';
 import {
   styled,
-  StyledComponentProps,
-  StyleProviderProps,
-  ThemeType,
-  Interaction,
-  State,
-  AppContainer,
-} from '../../component';
-import { StyleConsumerService } from './styleConsumer.service';
+  Props as StyledComponentProps,
+} from './styleConsumer.component';
+import { Interaction } from './type';
+import { ThemeType } from '../../component';
 import {
   mapping,
   theme,
   themeInverse,
-} from './styleConsumer.spec.config';
-
-describe('@style: service methods check', () => {
-
-  const service: StyleConsumerService = new StyleConsumerService();
-
-  it('retrieves variant prop keys properly', () => {
-    const defaultAppearanceKeys = service.getVariantPropKeys(mapping, 'Test', {
-      appearance: APPEARANCE_DEFAULT,
-      checked: false,
-      status: 'info',
-      size: 'small',
-    });
-    const customAppearanceKeys = service.getVariantPropKeys(mapping, 'Test', {
-      appearance: 'custom',
-      checked: false,
-      size: 'small',
-    });
-    const undefinedAppearanceKeys = service.getVariantPropKeys(mapping, 'Test', {
-      appearance: 'undefined',
-      checked: false,
-      status: 'info',
-    });
-
-    expect(defaultAppearanceKeys).toEqual(['info', 'small']);
-    expect(customAppearanceKeys).toEqual(['small']);
-    expect(undefinedAppearanceKeys).toEqual(['info']);
-  });
-
-  it('retrieves state prop keys properly', () => {
-    const falsyKeys = service.getStatePropKeys(mapping, 'Test', {
-      appearance: APPEARANCE_DEFAULT,
-      checked: false,
-      disabled: true,
-    });
-
-    const statelessKeys = service.getStatePropKeys(mapping, 'Test', {
-      appearance: APPEARANCE_DEFAULT,
-      checked: true,
-      disabled: true,
-    }, []);
-
-    const activeKeys = service.getStatePropKeys(mapping, 'Test', {
-      appearance: APPEARANCE_DEFAULT,
-      checked: true,
-      disabled: true,
-    }, [Interaction.ACTIVE]);
-
-    expect(falsyKeys).toEqual(['disabled']);
-    expect(statelessKeys).toEqual(['checked', 'disabled']);
-    expect(activeKeys).toEqual(['active', 'checked', 'disabled']);
-  });
-
-  it('parses action properly', () => {
-    const active = Interaction.parse('active');
-    const undefined = Interaction.parse('undefined');
-
-    expect(active).toEqual(Interaction.ACTIVE);
-    expect(undefined).toBeUndefined();
-  });
-
-
-  it('parses action properly', () => {
-    const checked = State.parse('checked');
-    const disabled = State.parse('disabled');
-    const focus = State.parse('focused');
-    const undefined = State.parse('undefined');
-
-    expect(checked).toEqual(State.CHECKED);
-    expect(disabled).toEqual(State.DISABLED);
-    expect(focus).toEqual(State.FOCUSED);
-    expect(undefined).toBeUndefined();
-  });
-
-});
+} from './style.spec.config';
 
 describe('@style: ui component checks', () => {
 
@@ -136,7 +60,7 @@ describe('@style: ui component checks', () => {
 
     render() {
       return (
-        <AppContainer
+        <StyleProvider
           mapping={this.state.mappings}
           theme={this.state.theme}>
           <TouchableOpacity
@@ -144,7 +68,7 @@ describe('@style: ui component checks', () => {
             onPress={this.onTouchablePress}>
             {this.props.children}
           </TouchableOpacity>
-        </AppContainer>
+        </StyleProvider>
       );
     }
   }
@@ -180,9 +104,9 @@ describe('@style: ui component checks', () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
-      <AppContainer mapping={mapping} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme}>
         <StyleConsumer appearance={APPEARANCE_DEFAULT}/>
-      </AppContainer>,
+      </StyleProvider>,
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);
@@ -200,14 +124,14 @@ describe('@style: ui component checks', () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
-      <AppContainer mapping={mapping} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme}>
         <StyleConsumer/>
-      </AppContainer>,
+      </StyleProvider>,
     );
     const withAppearance = render(
-      <AppContainer mapping={mapping} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme}>
         <StyleConsumer status='success'/>
-      </AppContainer>,
+      </StyleProvider>,
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);
@@ -233,9 +157,9 @@ describe('@style: ui component checks', () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
-      <AppContainer mapping={mapping} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme}>
         <StyleConsumer/>
-      </AppContainer>,
+      </StyleProvider>,
     );
 
     const styledComponent = component.getByTestId(styleConsumerTestId);

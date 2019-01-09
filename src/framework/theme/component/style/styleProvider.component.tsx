@@ -17,7 +17,7 @@ import {
   ThemeType,
   StyleType,
 } from '../../component';
-import { createThemedStyle } from '../../service/style';
+import { createThemedStyle } from '../../service';
 
 export type CreateStyleFunction = (component: string,
                                    appearance: string,
