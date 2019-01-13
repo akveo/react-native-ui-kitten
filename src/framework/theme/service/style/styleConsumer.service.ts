@@ -5,7 +5,7 @@ import {
   getVariantMappingStates,
   APPEARANCE_DEFAULT,
   ThemeMappingType,
-} from 'eva';
+} from 'eva/rk-kit';
 import { StyledComponentProps } from '../../component';
 import {
   Interaction,

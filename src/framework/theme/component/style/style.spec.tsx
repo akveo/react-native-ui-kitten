@@ -9,7 +9,7 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { APPEARANCE_DEFAULT } from 'eva/rk-kit/src/service/mapping/mapping.service';
+import { APPEARANCE_DEFAULT } from 'eva/rk-kit';
 import {
   StyleProvider,
   Props as StyleProviderProps,

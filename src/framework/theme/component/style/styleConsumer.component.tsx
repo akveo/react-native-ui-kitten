@@ -2,7 +2,7 @@ import React from 'react';
 import {
   APPEARANCE_DEFAULT,
   ThemeMappingType,
-} from 'eva';
+} from 'eva/rk-kit';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { MappingContext } from '../mapping';
 import { ThemeContext } from '../theme';

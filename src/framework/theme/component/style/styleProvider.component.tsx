@@ -3,7 +3,7 @@ import {
   createStyle,
   getStyle,
   ThemeMappingType,
-} from 'eva';
+} from 'eva/rk-kit';
 import {
   MappingProvider,
   MappingProviderProps,
@@ -49,7 +49,6 @@ export class StyleProvider extends React.PureComponent<Props, State> {
                                   states: string[]): StyleType => {
 
     let styleMapping = getStyle(component, appearance, variants, states);
-
     if (styleMapping) {
       return createThemedStyle(styleMapping, this.props.theme);
     } else {

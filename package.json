@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "eva": "github:akveo/eva#temporary",
+    "eva": "github:akveo/eva#dev",
     "hoist-non-react-statics": "^3.2.1"
   },
   "devDependencies": {

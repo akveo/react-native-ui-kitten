@@ -1,4 +1,4 @@
-import { ThemeMappingType } from 'eva';
+import { ThemeMappingType } from 'eva/rk-kit';
 import { ThemeType } from '../../type';
 
 export const mapping: ThemeMappingType = {

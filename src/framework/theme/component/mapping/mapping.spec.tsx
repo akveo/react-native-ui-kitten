@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ThemeMappingType } from 'eva';
+import { ThemeMappingType } from 'eva/rk-kit';
 import { render } from 'react-native-testing-library';
 import { MappingContext } from './mappingContext';
 import {

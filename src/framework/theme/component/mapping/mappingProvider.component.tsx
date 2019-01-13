@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeMappingType } from 'eva';
+import { ThemeMappingType } from 'eva/rk-kit';
 import { MappingContext } from './mappingContext';
 
 export interface Props {
