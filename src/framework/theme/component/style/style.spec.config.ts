@@ -3,6 +3,23 @@ import { ThemeType } from '../../type';
 
 export const mapping: ThemeMappingType = {
   Test: {
+    meta: {
+      variants: {
+        status: [
+          'success',
+          'info',
+        ],
+        size: [
+          'small',
+          'big',
+        ],
+      },
+      states: [
+        'checked',
+        'disabled',
+        'active',
+      ],
+    },
     appearance: {
       default: {
         mapping: {
@@ -97,6 +114,10 @@ export const mapping: ThemeMappingType = {
     },
   },
   Empty: {
+    meta: {
+      variants: {},
+      states: [],
+    },
     appearance: {},
   },
 };

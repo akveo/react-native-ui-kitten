@@ -1,9 +1,6 @@
 import {
-  getAppearanceVariants,
-  getAppearanceVariantGroups,
-  getAppearanceMappingStates,
-  getVariantMappingStates,
-  APPEARANCE_DEFAULT,
+  getComponentStates,
+  getComponentVariantGroups,
   ThemeMappingType,
 } from 'eva/rk-kit';
 import { StyledComponentProps } from '../../component';
@@ -18,13 +15,13 @@ export class StyleConsumerService {
                                                             component: string,
                                                             props: P): string[] {
 
-    const variantGroups: string[] = getAppearanceVariantGroups(mapping, component, APPEARANCE_DEFAULT);
-    if (variantGroups === undefined) {
+    const componentVariantGroups: string[] = getComponentVariantGroups(mapping, component);
+    if (componentVariantGroups === undefined) {
       return [];
     }
 
     return Object.keys(props)
-      .filter((key: string) => variantGroups.includes(key))
+      .filter((key: string) => componentVariantGroups.includes(key))
       .map((key: string) => props[key]);
   }
 
@@ -33,33 +30,13 @@ export class StyleConsumerService {
                                                           props: P,
                                                           interaction: Interaction[] = []): string[] {
 
-    const appearanceStates = this.getAppearanceStates(mapping, component, APPEARANCE_DEFAULT);
+    const componentStates = getComponentStates(mapping, component);
 
     const states = Object.keys(props)
-      .filter((key: string) => appearanceStates.includes(key))
+      .filter((key: string) => componentStates.includes(key))
       .map(state => props[state] && State.parse(state))
       .filter(Boolean);
 
     return [...interaction, ...states];
-  }
-
-  private getAppearanceStates(mapping: ThemeMappingType, component: string, appearance: string): string[] {
-    const mappingStates: string[] = getAppearanceMappingStates(mapping, component, appearance) || [];
-
-    const variantGroups: string[][] = getAppearanceVariants(mapping, component, appearance) || [];
-    const variantStates: string[] = this.flatten(variantGroups).reduce((acc, variant) => {
-      const states = getVariantMappingStates(mapping, component, appearance, variant) || [];
-      return [...acc, ...states];
-    }, []);
-
-    return this.noDuplicates([...mappingStates, ...variantStates]);
-  }
-
-  private flatten<T>(params: T[][]): T[] {
-    return [].concat(...params);
-  }
-
-  private noDuplicates<T>(params: T[]): T[] {
-    return [...new Set(params)];
   }
 }

@@ -1,5 +1,21 @@
 export const mapping = {
   Radio: {
+    meta: {
+      variants: {
+        status: [
+          'error',
+        ],
+        size: [
+          'small',
+          'big',
+        ],
+      },
+      states: [
+        'checked',
+        'disabled',
+        'active',
+      ],
+    },
     appearance: {
       default: {
         mapping: {

@@ -20,6 +20,23 @@ export const mapping: StyleMappingType = {
 
 export const componentMapping: ThemeMappingType = {
   Test: {
+    meta: {
+      variants: {
+        status: [
+          'success',
+          'info',
+        ],
+        size: [
+          'small',
+          'big',
+        ],
+      },
+      states: [
+        'checked',
+        'disabled',
+        'active',
+      ],
+    },
     appearance: {
       default: {
         mapping: {
@@ -114,6 +131,10 @@ export const componentMapping: ThemeMappingType = {
     },
   },
   Empty: {
+    meta: {
+      variants: {},
+      states: [],
+    },
     appearance: {
       default: {
         mapping: {},
