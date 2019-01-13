@@ -1,7 +1,6 @@
 export {
   StyleProvider,
   Props as StyleProviderProps,
-  CreateStyleFunction,
 } from './styleProvider.component';
 
 export {

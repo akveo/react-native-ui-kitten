@@ -2,13 +2,15 @@ import React from 'react';
 import {
   APPEARANCE_DEFAULT,
   ThemeMappingType,
+  StyleMappingType,
 } from 'eva/rk-kit';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { MappingContext } from '../mapping';
 import { ThemeContext } from '../theme';
-import { StyleContext } from './styleContext';
-import { StyleConsumerService } from '../../service/style';
-import { CreateStyleFunction } from '../../component';
+import {
+  createThemedStyle,
+  StyleConsumerService,
+} from '../../service/style';
 import {
   Interaction,
   ThemeType,
@@ -17,12 +19,6 @@ import {
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;
-}
-
-interface ConsumerProps {
-  mapping: ThemeMappingType;
-  theme: ThemeType;
-  createStyle: CreateStyleFunction;
 }
 
 export interface Props {
@@ -55,27 +51,29 @@ export const styled = <T extends React.Component, P extends object>(Component: R
       });
     };
 
-    private getComponentName = (): string => Component.displayName || Component.name;
+    private createCustomProps = (mapping: ThemeMappingType, theme: ThemeType, componentProps: P & Props): Props => {
+      const component: string = Component.displayName || Component.name;
+      const appearance: string = componentProps.appearance || APPEARANCE_DEFAULT;
 
-    private createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
-      const appearance = componentProps.appearance || APPEARANCE_DEFAULT;
-
-      const style = props.createStyle(
-        this.getComponentName(),
+      const styleMapping: StyleMappingType = this.service.getComponentStyleMapping(
+        mapping,
+        component,
+        componentProps,
         appearance,
-        this.service.getVariantPropKeys(props.mapping, this.getComponentName(), componentProps),
-        this.service.getStatePropKeys(props.mapping, this.getComponentName(), componentProps, this.state.interaction),
+        this.state.interaction,
       );
+
+      const style: StyleType = createThemedStyle(styleMapping, theme);
 
       return {
         appearance: appearance,
-        theme: props.theme,
+        theme: theme,
         themedStyle: style,
         dispatch: this.onDispatch,
       };
     };
 
-    renderWrappedComponent = (props: ConsumerProps) => {
+    renderWrappedComponent = (mapping: ThemeMappingType, theme: ThemeType) => {
       // TS issue: with spreading Generics https://github.com/Microsoft/TypeScript/issues/15792
       const { forwardedRef, ...restProps } = this.props as PrivateProps<T>;
       const componentProps = restProps as P & Props;
@@ -83,7 +81,7 @@ export const styled = <T extends React.Component, P extends object>(Component: R
       return (
         <Component
           ref={forwardedRef}
-          {...this.createCustomProps(props, componentProps)}
+          {...this.createCustomProps(mapping, theme, componentProps)}
           {...componentProps}
         />
       );
@@ -92,11 +90,9 @@ export const styled = <T extends React.Component, P extends object>(Component: R
     render() {
       return (
         <MappingContext.Consumer>{(mapping: ThemeMappingType) => (
-          <ThemeContext.Consumer>{(theme: ThemeType) => (
-            <StyleContext.Consumer>{(createStyle: CreateStyleFunction) => {
-              return this.renderWrappedComponent({ createStyle: createStyle, mapping: mapping, theme: theme });
-            }}</StyleContext.Consumer>
-          )}</ThemeContext.Consumer>
+          <ThemeContext.Consumer>{(theme: ThemeType) => {
+            return this.renderWrappedComponent(mapping, theme);
+          }}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
       );
     }

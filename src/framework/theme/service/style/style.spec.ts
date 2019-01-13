@@ -56,6 +56,12 @@ describe('@style: consumer service methods check', () => {
         size: 'small',
       };
 
+      it('* config contains no expected component', () => {
+        const value = service.getVariantPropKeys(config.componentMapping, 'Undefined', props);
+
+        expect(value).toEqual([]);
+      });
+
       it('* config contains variant', () => {
         const value = service.getVariantPropKeys(config.componentMapping, 'Test', props);
 
@@ -144,6 +150,39 @@ describe('@style: consumer service methods check', () => {
       );
 
       expect(value).toEqual(['active']);
+    });
+
+  });
+
+  describe('* style mapping', () => {
+
+    const props: StyledComponentProps & any = {
+      checked: false,
+      disabled: true,
+    };
+
+    it('config contains pre-created mapping', () => {
+      const value = service.getComponentStyleMapping(
+        config.componentMapping,
+        'Test',
+        props,
+        'custom',
+        [],
+      );
+
+      expect(value).toMatchSnapshot();
+    });
+
+    it('config contains no pre-created mapping', () => {
+      const value = service.getComponentStyleMapping(
+        config.componentMapping,
+        'Test',
+        props,
+        'undefined',
+        [],
+      );
+
+      expect(value).toMatchSnapshot();
     });
 
   });

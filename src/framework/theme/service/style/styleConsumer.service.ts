@@ -1,7 +1,10 @@
 import {
+  getStyle,
+  createStyle,
   getComponentStates,
   getComponentVariantGroups,
   ThemeMappingType,
+  StyleMappingType,
 } from 'eva/rk-kit';
 import { StyledComponentProps } from '../../component';
 import {
@@ -10,6 +13,24 @@ import {
 } from '../../type';
 
 export class StyleConsumerService {
+
+  public getComponentStyleMapping<P extends StyledComponentProps>(mapping: ThemeMappingType,
+                                                                  component: string,
+                                                                  props: P,
+                                                                  appearance: string,
+                                                                  interaction: Interaction[]): StyleMappingType {
+
+    const variants: string[] = this.getVariantPropKeys(mapping, component, props);
+    const states: string[] = this.getStatePropKeys(mapping, component, props, interaction);
+
+    const styleMapping = getStyle(component, appearance, variants, states);
+
+    if (styleMapping === undefined) {
+      return createStyle(mapping, component, appearance, variants, states);
+    }
+
+    return styleMapping;
+  }
 
   public getVariantPropKeys<P extends StyledComponentProps>(mapping: ThemeMappingType,
                                                             component: string,
