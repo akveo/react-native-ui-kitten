@@ -1,13 +1,13 @@
 import React from 'react';
-import { ThemeMappingType } from 'eva';
+import {
+  DefaultScheme,
+  DefaultTheme,
+} from 'eva';
+import { ThemeMappingType } from 'eva/rk-kit';
 import {
   StyleProvider,
   ThemeType,
 } from '@rk-kit/theme';
-import {
-  mapping,
-  theme,
-} from './theme-token';
 import { withNavigation } from './navigation';
 import * as Screens from './ui/screen';
 
@@ -21,8 +21,8 @@ export default class App extends React.Component<any, State> {
   constructor(props) {
     super(props);
     this.state = {
-      mapping: mapping,
-      theme: theme,
+      mapping: DefaultScheme,
+      theme: DefaultTheme,
     };
   }
 
