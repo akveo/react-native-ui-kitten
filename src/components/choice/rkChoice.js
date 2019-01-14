@@ -219,8 +219,9 @@ export class RkChoice extends RkComponent {
   }
 
   onPress(e) {
-    this.setState({ selected: !this.state.selected });
-    this.props.onChange(this.state.selected, e);
+    this.setState({ selected: !this.state.selected }, () => {
+      this.props.onChange(this.state.selected, e);
+    });
   }
 
   renderDefaultContentView(style) {
