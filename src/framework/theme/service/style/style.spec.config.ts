@@ -1,7 +1,7 @@
 import {
   ThemeMappingType,
   StyleMappingType,
-} from 'eva/rk-kit';
+} from 'eva/packages/common';
 import { ThemeType } from '../../type';
 
 export const mapping: StyleMappingType = {

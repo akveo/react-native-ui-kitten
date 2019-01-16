@@ -9,7 +9,6 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { APPEARANCE_DEFAULT } from 'eva/rk-kit';
 import {
   StyleProvider,
   Props as StyleProviderProps,
@@ -41,6 +40,7 @@ describe('@style: ui component checks', () => {
 
     state = {
       mappings: [],
+      styles: {},
       theme: {},
     };
 
@@ -48,6 +48,7 @@ describe('@style: ui component checks', () => {
       super(props);
       this.state = {
         mappings: this.props.mapping,
+        styles: this.props.styles,
         theme: this.props.theme,
       };
     }
@@ -62,6 +63,7 @@ describe('@style: ui component checks', () => {
       return (
         <StyleProvider
           mapping={this.state.mappings}
+          styles={this.state.styles}
           theme={this.state.theme}>
           <TouchableOpacity
             testID={styleTouchableTestId}
@@ -104,8 +106,8 @@ describe('@style: ui component checks', () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
-      <StyleProvider mapping={mapping} theme={theme}>
-        <StyleConsumer appearance={APPEARANCE_DEFAULT}/>
+      <StyleProvider mapping={mapping} theme={theme} styles={{}}>
+        <StyleConsumer />
       </StyleProvider>,
     );
 
@@ -124,12 +126,12 @@ describe('@style: ui component checks', () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
-      <StyleProvider mapping={mapping} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme} styles={{}}>
         <StyleConsumer/>
       </StyleProvider>,
     );
     const withAppearance = render(
-      <StyleProvider mapping={mapping} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme} styles={{}}>
         <StyleConsumer status='success'/>
       </StyleProvider>,
     );
@@ -145,7 +147,7 @@ describe('@style: ui component checks', () => {
     const StyleConsumer = styled(Test);
 
     const component = render(
-      <StyleProvider mapping={mapping} theme={theme}>
+      <StyleProvider mapping={mapping} theme={theme} styles={{}}>
         <StyleConsumer/>
       </StyleProvider>,
     );
@@ -167,6 +169,7 @@ describe('@style: ui component checks', () => {
       <ComplexStyleProvider
         mapping={mapping}
         theme={theme}
+        styles={{}}
         themeInverse={themeInverse}>
         <StyleConsumer/>
       </ComplexStyleProvider>,

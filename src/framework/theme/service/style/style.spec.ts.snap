@@ -10,16 +10,6 @@ Object {
 }
 `;
 
-exports[`@style: consumer service methods check * style mapping config contains pre-created mapping 1`] = `
-Object {
-  "borderColor": "grayLight",
-  "borderWidth": 4,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
-}
-`;
-
 exports[`@style: service methods checks * styling * default theme 1`] = `
 Object {
   "prop1": "#E0E0E0",

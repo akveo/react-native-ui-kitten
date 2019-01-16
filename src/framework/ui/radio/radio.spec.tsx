@@ -11,7 +11,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
-} from '@rk-kit/theme';
+} from '@kitten/theme';
 import {
   Radio,
   Props,
@@ -21,7 +21,7 @@ import * as config from './radio.spec.config';
 const StyledComponent = styled<Radio, Props>(Radio);
 
 const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme}>
+  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
     <StyledComponent {...props} />
   </StyleProvider>
 );

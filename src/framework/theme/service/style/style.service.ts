@@ -1,4 +1,4 @@
-import { StyleMappingType } from 'eva/rk-kit';
+import { StyleMappingType } from 'eva/packages/common';
 import {
   ThemeType,
   StyleType,

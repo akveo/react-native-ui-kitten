@@ -1,8 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ThemeMappingType } from 'eva/rk-kit';
 import { render } from 'react-native-testing-library';
-import { MappingContext } from './mappingContext';
+import {
+  ThemeMappingType,
+  ThemeMapType,
+} from 'eva/packages/common';
+import {
+  MappingContext,
+  MappingContextValueType,
+} from './mappingContext';
 import {
   MappingProvider,
   Props as MappingProviderProps,
@@ -17,30 +23,40 @@ describe('@mapping: ui component checks', () => {
   );
 
   const withMapping = (Component: React.ComponentClass<any>): React.ReactElement<any> => (
-    <MappingContext.Consumer>{(receivedValue: ThemeMappingType) => (
-      <Component testID='@mapping/consumer' mapping={receivedValue}/>
+    <MappingContext.Consumer>{(receivedValue: MappingContextValueType) => (
+      <Component testID='@mapping/consumer' mapping={receivedValue.mapping} styles={receivedValue.styles}/>
     )}</MappingContext.Consumer>
   );
 
   interface Props {
     mapping: ThemeMappingType;
+    styles: any;
   }
 
   const Tree = (props: Props) => (
-    <Provider mapping={props.mapping}>
+    <Provider mapping={props.mapping} styles={props.styles}>
       {withMapping(View)}
     </Provider>
   );
 
   describe('* consumer', () => {
-    const mapping = {};
+    const mapping: ThemeMappingType = {};
+    const styles: ThemeMapType = {};
 
-    it('receives mapping value', () => {
+    it('receives mapping prop', () => {
 
-      const component = render(<Tree mapping={mapping}/>);
+      const component = render(<Tree mapping={mapping} styles={styles}/>);
       const consumerComponent = component.getByTestId('@mapping/consumer');
 
       expect(json(consumerComponent.props.mapping)).toEqual(json(mapping));
+    });
+
+    it('receives styles prop', () => {
+
+      const component = render(<Tree mapping={mapping} styles={styles}/>);
+      const consumerComponent = component.getByTestId('@mapping/consumer');
+
+      expect(json(consumerComponent.props.styles)).toEqual(json(styles));
     });
 
   });

@@ -1,7 +1,7 @@
 {
-  "name": "@rk-kit/ui",
+  "name": "@kitten/ui",
   "version": "0.0.1",
-  "description": "rk-kit ui components",
+  "description": "kitten ui components",
   "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
   "author": "akveo <contact@akveo.com>",
   "license": "MIT",
@@ -10,6 +10,6 @@
   },
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "peerDependencies": {
-    "@rk-kit/theme": "file:../theme"
+    "@kitten/theme": "file:../theme"
   }
 }

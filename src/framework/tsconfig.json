@@ -18,8 +18,7 @@
       "es2017.object"
     ],
     "paths": {
-      "@rk-kit/theme": ["./theme"],
-      "@rk-kit/ui": ["./ui"]
+      "@kitten/*": ["./*"]
     }
   }
 }

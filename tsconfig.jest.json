@@ -4,7 +4,8 @@
     "baseUrl": "./",
     "jsx": "react",
     "paths": {
-      "@rk-kit/*": ["./src/framework/*"]
+      "@eva/*": ["./node_modules/eva/packages/*"],
+      "@kitten/*": ["./src/framework/*"]
     }
   },
   "include": [

@@ -8,8 +8,8 @@ import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
-} from '@rk-kit/theme';
-import { Radio as RadioComponent } from '@rk-kit/ui';
+} from '@kitten/theme';
+import { Radio as RadioComponent } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
