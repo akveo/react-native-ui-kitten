@@ -10,7 +10,7 @@ import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
-} from '@rk-kit/theme';
+} from '@kitten/theme';
 import {
   NavigatorProps,
   RouteType,

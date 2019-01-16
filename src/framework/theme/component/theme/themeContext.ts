@@ -1,6 +1,8 @@
 import React from 'react';
-import { ThemeType } from './type';
+import { ThemeType } from '../../type';
 
-const defaultValue: ThemeType = {};
+export type ThemeContextValueType = ThemeType;
+
+const defaultValue: ThemeContextValueType = {};
 
 export const ThemeContext = React.createContext(defaultValue);

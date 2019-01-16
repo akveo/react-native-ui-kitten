@@ -6,11 +6,10 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import {
-  APPEARANCE_DEFAULT,
   StyledComponentProps,
   StyleType,
   Interaction,
-} from '@rk-kit/theme';
+} from '@kitten/theme';
 
 interface RadioProps {
   checked?: boolean;
@@ -23,10 +22,6 @@ interface RadioProps {
 export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
 
 export class Radio extends React.Component<Props> {
-
-  static defaultProps: Props = {
-    appearance: APPEARANCE_DEFAULT,
-  };
 
   onPress = () => {
     this.props.onChange && this.props.onChange(this.props.checked);

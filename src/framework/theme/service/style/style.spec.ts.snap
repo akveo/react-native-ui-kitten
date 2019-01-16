@@ -1,58 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@style: service methods checks * styling * custom appearance * no variant and no state 1`] = `
+exports[`@style: consumer service methods check * style mapping config contains no pre-created mapping 1`] = `
 Object {
-  "borderColor": "#9E9E9E",
-  "borderWidth": 4,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * custom appearance * with state * explicit (should apply own) 1`] = `
-Object {
-  "borderColor": "#E0E0E0",
-  "borderWidth": 4,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * custom appearance * with state * implicit (should apply from default appearance) 1`] = `
-Object {
-  "borderColor": "#2196F3",
-  "borderWidth": 4,
-  "innerSize": 24,
-  "selectColor": "#2196F3",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * custom appearance * with variant * explicit (should apply own) 1`] = `
-Object {
-  "borderColor": "#009688",
-  "borderWidth": 4,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * custom appearance * with variant * implicit (should apply from default appearance) 1`] = `
-Object {
-  "borderColor": "#9E9E9E",
-  "borderWidth": 4,
-  "innerSize": 28,
-  "selectColor": "transparent",
-  "size": 42,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * no variant and no state 1`] = `
-Object {
-  "borderColor": "#9E9E9E",
+  "borderColor": "grayLight",
   "borderWidth": 2,
   "innerSize": 24,
   "selectColor": "transparent",
@@ -60,102 +10,34 @@ Object {
 }
 `;
 
-exports[`@style: service methods checks * styling * default appearance * with state * multiple 1`] = `
+exports[`@style: service methods checks * styling * default theme 1`] = `
 Object {
-  "borderColor": "#1976D2",
-  "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "#2196F3",
-  "size": 36,
+  "prop1": "#E0E0E0",
+  "prop10": "transparent",
+  "prop11": 42,
+  "prop2": "#9E9E9E",
+  "prop3": "#616161",
+  "prop4": "#2196F3",
+  "prop5": "#1976D2",
+  "prop6": "#FF9800",
+  "prop7": "#F57C00",
+  "prop8": "#009688",
+  "prop9": "#00796B",
 }
 `;
 
-exports[`@style: service methods checks * styling * default appearance * with state * single 1`] = `
+exports[`@style: service methods checks * styling * inverse theme 1`] = `
 Object {
-  "borderColor": "#616161",
-  "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * with variant * multiple * no state 1`] = `
-Object {
-  "borderColor": "#9E9E9E",
-  "borderWidth": 2,
-  "innerSize": 28,
-  "selectColor": "transparent",
-  "size": 42,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * with variant * multiple * with state * multiple 1`] = `
-Object {
-  "borderColor": "#00796B",
-  "borderWidth": 2,
-  "innerSize": 28,
-  "selectColor": "#009688",
-  "size": 42,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * with variant * multiple * with state * single 1`] = `
-Object {
-  "borderColor": "#616161",
-  "borderWidth": 2,
-  "innerSize": 28,
-  "selectColor": "transparent",
-  "size": 42,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * with variant * single * no state 1`] = `
-Object {
-  "borderColor": "#9E9E9E",
-  "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * with variant * single * with state * multiple 1`] = `
-Object {
-  "borderColor": "#00796B",
-  "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "#009688",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * with variant * single * with state * single explicit (should apply own) 1`] = `
-Object {
-  "borderColor": "#009688",
-  "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "#009688",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * default appearance * with variant * single * with state * single implicit (should apply from appearance) 1`] = `
-Object {
-  "borderColor": "#616161",
-  "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
-}
-`;
-
-exports[`@style: service methods checks * styling * undefined appearance * no variant and no state (should apply default appearance) 1`] = `
-Object {
-  "borderColor": "#9E9E9E",
-  "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
+  "prop1": "#616161",
+  "prop10": "transparent",
+  "prop11": 42,
+  "prop2": "#9E9E9E",
+  "prop3": "#E0E0E0",
+  "prop4": "#2196F3",
+  "prop5": "#1976D2",
+  "prop6": "#FF9800",
+  "prop7": "#F57C00",
+  "prop8": "#009688",
+  "prop9": "#00796B",
 }
 `;

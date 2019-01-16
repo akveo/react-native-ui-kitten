@@ -31,7 +31,7 @@ exports[`@radio: matches snapshot active 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -39,7 +39,7 @@ exports[`@radio: matches snapshot active 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -56,7 +56,7 @@ exports[`@radio: matches snapshot active 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -73,7 +73,7 @@ exports[`@radio: matches snapshot active 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "transparent",
@@ -83,8 +83,8 @@ exports[`@radio: matches snapshot active 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;
 
@@ -120,7 +120,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -128,7 +128,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -145,7 +145,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -162,7 +162,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "#3366FF",
@@ -172,8 +172,8 @@ exports[`@radio: matches snapshot active checked 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;
 
@@ -209,7 +209,7 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -217,7 +217,7 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -234,7 +234,7 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -251,7 +251,7 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "#3366FF",
@@ -261,8 +261,8 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;
 
@@ -297,7 +297,7 @@ exports[`@radio: matches snapshot active: default 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -305,7 +305,7 @@ exports[`@radio: matches snapshot active: default 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -322,7 +322,7 @@ exports[`@radio: matches snapshot active: default 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -339,7 +339,7 @@ exports[`@radio: matches snapshot active: default 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "transparent",
@@ -349,8 +349,8 @@ exports[`@radio: matches snapshot active: default 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;
 
@@ -386,7 +386,7 @@ exports[`@radio: matches snapshot checked 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -394,7 +394,7 @@ exports[`@radio: matches snapshot checked 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -411,7 +411,7 @@ exports[`@radio: matches snapshot checked 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -428,7 +428,7 @@ exports[`@radio: matches snapshot checked 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "#3366FF",
@@ -438,8 +438,8 @@ exports[`@radio: matches snapshot checked 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;
 
@@ -476,7 +476,7 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -484,7 +484,7 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -501,7 +501,7 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -518,7 +518,7 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "#A6AEBD",
@@ -528,8 +528,8 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;
 
@@ -564,7 +564,7 @@ exports[`@radio: matches snapshot default 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -572,7 +572,7 @@ exports[`@radio: matches snapshot default 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -589,7 +589,7 @@ exports[`@radio: matches snapshot default 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -606,7 +606,7 @@ exports[`@radio: matches snapshot default 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "transparent",
@@ -616,8 +616,8 @@ exports[`@radio: matches snapshot default 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;
 
@@ -653,7 +653,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -661,7 +661,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
       }
     }
   >
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -678,7 +678,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
         ]
       }
     />
-    <Component
+    <View
       style={
         Array [
           Object {
@@ -695,7 +695,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
         ]
       }
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "transparent",
@@ -705,7 +705,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
           }
         }
       />
-    </Component>
-  </Component>
+    </View>
+  </View>
 </TouchableOpacity>
 `;

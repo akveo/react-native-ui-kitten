@@ -1,20 +1,57 @@
-export const mapping = {
+import {
+  ThemeMappingType,
+  StyleMappingType,
+} from 'eva/packages/common';
+import { ThemeType } from '../../type';
+
+export const mapping: StyleMappingType = {
+  prop1: 'grayLight',
+  prop2: 'grayPrimary',
+  prop3: 'grayDark',
+  prop4: 'bluePrimary',
+  prop5: 'blueDark',
+  prop6: 'orangePrimary',
+  prop7: 'orangeDark',
+  prop8: 'tealPrimary',
+  prop9: 'tealDark',
+  prop10: 'transparent',
+  prop11: 42,
+};
+
+export const componentMapping: ThemeMappingType = {
   Test: {
+    meta: {
+      variants: {
+        status: [
+          'success',
+          'info',
+        ],
+        size: [
+          'small',
+          'big',
+        ],
+      },
+      states: [
+        'checked',
+        'disabled',
+        'active',
+      ],
+    },
     appearance: {
       default: {
         mapping: {
           size: 36,
-            innerSize: 24,
-            borderWidth: 2,
-            borderColor: 'grayPrimary',
-            selectColor: 'transparent',
-            state: {
+          innerSize: 24,
+          borderWidth: 2,
+          borderColor: 'grayPrimary',
+          selectColor: 'transparent',
+          state: {
             active: {
               borderColor: 'grayDark',
             },
             checked: {
               borderColor: 'bluePrimary',
-                selectColor: 'bluePrimary',
+              selectColor: 'bluePrimary',
             },
             disabled: {
               borderColor: 'grayLight',
@@ -34,7 +71,7 @@ export const mapping = {
                 state: {
                   checked: {
                     borderColor: 'orangePrimary',
-                      selectColor: 'orangePrimary',
+                    selectColor: 'orangePrimary',
                   },
                   'active.checked': {
                     borderColor: 'orangeDark',
@@ -47,7 +84,7 @@ export const mapping = {
                 state: {
                   checked: {
                     borderColor: 'tealPrimary',
-                      selectColor: 'tealPrimary',
+                    selectColor: 'tealPrimary',
                   },
                   'active.checked': {
                     borderColor: 'tealDark',
@@ -60,13 +97,13 @@ export const mapping = {
             big: {
               mapping: {
                 size: 42,
-                  innerSize: 28,
+                innerSize: 28,
               },
             },
             small: {
               mapping: {
                 size: 30,
-                  innerSize: 20,
+                innerSize: 20,
               },
             },
           },
@@ -75,7 +112,7 @@ export const mapping = {
       custom: {
         mapping: {
           borderWidth: 4,
-            state: {
+          state: {
             active: {
               borderColor: 'grayLight',
             },
@@ -94,11 +131,19 @@ export const mapping = {
     },
   },
   Empty: {
-    appearance: {},
+    meta: {
+      variants: {},
+      states: [],
+    },
+    appearance: {
+      default: {
+        mapping: {},
+      },
+    },
   },
 };
 
-export const theme = {
+export const theme: ThemeType = {
   grayLight: '#E0E0E0',
   grayPrimary: '#9E9E9E',
   grayDark: '#616161',
@@ -110,7 +155,7 @@ export const theme = {
   tealDark: '#00796B',
 };
 
-export const themeInverse = {
+export const themeInverse: ThemeType = {
   grayLight: '#616161',
   grayPrimary: '#9E9E9E',
   grayDark: '#E0E0E0',

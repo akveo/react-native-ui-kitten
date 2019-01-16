@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@style: ui component checks default appearance styled properly 1`] = `
+Object {
+  "borderColor": "#9E9E9E",
+  "borderWidth": 2,
+  "innerSize": 24,
+  "selectColor": "transparent",
+  "size": 36,
+}
+`;
+
+exports[`@style: ui component checks default appearance styled properly 2`] = `
+Object {
+  "borderColor": "#9E9E9E",
+  "borderWidth": 2,
+  "innerSize": 24,
+  "selectColor": "transparent",
+  "size": 36,
+}
+`;
+
+exports[`@style: ui component checks dispatch action works properly 1`] = `
+Object {
+  "borderColor": "#616161",
+  "borderWidth": 2,
+  "innerSize": 24,
+  "selectColor": "transparent",
+  "size": 36,
+}
+`;
+
+exports[`@style: ui component checks provides correct styles on theme change 1`] = `
+Object {
+  "borderColor": "#9E9E9E",
+  "borderWidth": 2,
+  "innerSize": 24,
+  "selectColor": "transparent",
+  "size": 36,
+}
+`;
+
+exports[`@style: ui component checks provides correct styles on theme change 2`] = `
+Object {
+  "borderColor": "#9E9E9E",
+  "borderWidth": 2,
+  "innerSize": 24,
+  "selectColor": "transparent",
+  "size": 36,
+}
+`;

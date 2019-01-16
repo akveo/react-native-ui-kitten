@@ -27,6 +27,10 @@
     "ci:test": "npm test -- --coverage && cat ./dist/jest/coverage/lcov.info | coveralls",
     "test": "jest"
   },
+  "dependencies": {
+    "eva": "github:akveo/eva",
+    "hoist-non-react-statics": "^3.2.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
@@ -52,8 +56,5 @@
     "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
-  },
-  "dependencies": {
-    "hoist-non-react-statics": "^3.2.1"
   }
 }

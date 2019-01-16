@@ -14,18 +14,11 @@
     "experimentalDecorators": true,
     "lib": [
       "es2015",
-      "es2016"
+      "es2016",
+      "es2017.object"
     ],
     "paths": {
-      "@rk-kit/theme": [
-        "./theme"
-      ],
-      "@rk-kit/ui": [
-        "./ui"
-      ]
+      "@kitten/*": ["./*"]
     }
-  },
-  "typeRoots": [
-    "../../node_modules/@types"
-  ]
+  }
 }

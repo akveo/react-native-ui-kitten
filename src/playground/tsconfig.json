@@ -15,15 +15,8 @@
       "es2016"
     ],
     "paths": {
-      "@rk-kit/*": [
-        "../framework/*"
-      ]
+      "@eva/*": ["../../node_modules/eva/packages/*"],
+      "@kitten/*": ["../framework/*"]
     }
-  },
-  "typeRoots": [
-    "../../node_modules/@types"
-  ],
-  "exclude": [
-    "./node_modules"
-  ]
+  }
 }

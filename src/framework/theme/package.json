@@ -1,7 +1,7 @@
 {
-  "name": "@rk-kit/theme",
+  "name": "@kitten/theme",
   "version": "0.0.1",
-  "description": "rk-kit theme providing module",
+  "description": "kitten theme providing module",
   "main": "index.ts",
   "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
   "author": "akveo <contact@akveo.com>",

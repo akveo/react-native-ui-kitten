@@ -5,7 +5,7 @@ import {
   ThemeType,
   ThemedStyleType,
   StyleSheetType,
-} from './type';
+} from '../../type';
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;
@@ -53,7 +53,7 @@ export const withStyles = <T extends React.Component, P extends object>(Componen
     render() {
       return (
         <ThemeContext.Consumer>{(theme: ThemeType) => {
-          return this.renderWrappedComponent({theme: theme});
+          return this.renderWrappedComponent({ theme: theme });
         }}</ThemeContext.Consumer>
       );
     }

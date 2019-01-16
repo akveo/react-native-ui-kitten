@@ -1,25 +1,13 @@
 export {
-  StyleProvider,
-  styled,
   ThemeProvider,
   withStyles,
+  styled,
+  StyleProvider,
 
   StyleProviderProps,
   StyledComponentProps,
   ThemeProviderProps,
   ThemedComponentProps,
-
-  ThemeType,
-  ThemeMappingType,
-  ComponentMappingType,
-  TokenType,
-  ThemedStyleType,
-  StyleSheetType,
-  StyleType,
-  Interaction,
 } from './component';
 
-export {
-  APPEARANCE_DEFAULT,
-} from './service';
-
+export * from './type';

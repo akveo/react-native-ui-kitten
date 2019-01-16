@@ -1,26 +1,26 @@
 import React from 'react';
+import { StyleMappingType } from 'eva/packages/common';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { MappingContext } from '../mapping';
-import { ThemeContext } from '../theme';
-import { getComponentMapping } from '../../service/mapping';
 import {
-  createStyle,
+  MappingContext,
+  MappingContextValueType,
+} from '../mapping';
+import {
+  ThemeContext,
+  ThemeContextValueType,
+} from '../theme';
+import {
+  createThemedStyle,
   StyleConsumerService,
 } from '../../service/style';
 import {
-  ThemeMappingType,
+  Interaction,
   ThemeType,
   StyleType,
-  Interaction,
-} from '../../component';
+} from '../../type';
 
 interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;
-}
-
-interface ConsumerProps {
-  mapping: ThemeMappingType;
-  theme: ThemeType;
 }
 
 export interface Props {
@@ -53,62 +53,74 @@ export const styled = <T extends React.Component, P extends object>(Component: R
       });
     };
 
-    private getComponentName = (): string => Component.displayName || Component.name;
+    private createConsumerProps = (mappingValue: MappingContextValueType,
+                                   themeValue: ThemeContextValueType,
+                                   derivedProps: P & Props): Props => {
 
-    private createCustomProps = (props: ConsumerProps, componentProps: P & Props): Props => {
-      const mapping = getComponentMapping(props.mapping, this.getComponentName());
+      const component: string = Component.displayName || Component.name;
+      const appearance: string = derivedProps.appearance;
 
-      const style = createStyle(
-        props.theme,
-        mapping,
-        componentProps.appearance,
-        this.service.getVariantPropKeys(mapping, componentProps),
-        this.service.getStatePropKeys(mapping, componentProps, this.state.interaction),
+      const styleMapping: StyleMappingType = this.service.getComponentStyleMapping(
+        mappingValue.mapping,
+        mappingValue.styles,
+        component,
+        derivedProps,
+        this.state.interaction,
       );
 
+      const style: StyleType = createThemedStyle(styleMapping, themeValue);
+
       return {
-        appearance: componentProps.appearance,
-        theme: props.theme,
+        appearance: appearance,
+        theme: themeValue,
         themedStyle: style,
         dispatch: this.onDispatch,
       };
     };
 
-    renderWrappedComponent = (props: ConsumerProps) => {
+    renderWrappedComponent = (mappingValue: MappingContextValueType, themeValue: ThemeType): React.ReactElement<P> => {
       // TS issue: with spreading Generics https://github.com/Microsoft/TypeScript/issues/15792
       const { forwardedRef, ...restProps } = this.props as PrivateProps<T>;
-      const componentProps = restProps as P & Props;
+
+      const defaultProps: Props = {
+        appearance: 'default',
+      };
+
+      const derivedProps: P & Props = {
+        ...defaultProps,
+        ...(restProps as P & Props),
+      };
+
+      const consumerProps: Props = this.createConsumerProps(mappingValue, themeValue, derivedProps);
 
       return (
         <Component
           ref={forwardedRef}
-          {...this.createCustomProps(props, componentProps)}
-          {...componentProps}
+          {...consumerProps}
+          {...derivedProps}
         />
       );
     };
 
     render() {
       return (
-        <MappingContext.Consumer>{(mapping: ThemeMappingType) => (
-          <ThemeContext.Consumer>{(theme: ThemeType) => {
-            return this.renderWrappedComponent({ mapping: mapping, theme: theme });
+        <MappingContext.Consumer>{(mappingContextValue: MappingContextValueType) => (
+          <ThemeContext.Consumer>{(themeContextValue: ThemeContextValueType) => {
+            return this.renderWrappedComponent(mappingContextValue, themeContextValue);
           }}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
       );
     }
   }
 
-  const RefForwardingFactory = (props: WrapperProps, ref: T) => {
-    return (
-      <Wrapper {...props} forwardedRef={ref}/>
-    );
-  };
+  const renderComponent = (props: WrapperProps, ref: T): React.ReactElement<WrapperProps> => (
+    <Wrapper {...props} forwardedRef={ref}/>
+  );
 
-  const RefForwardingComponent = React.forwardRef<T, P>(RefForwardingFactory as any);
+  const StyledComponent = React.forwardRef<T, P>(renderComponent as any);
 
-  RefForwardingComponent.displayName = Component.displayName || Component.name;
-  hoistNonReactStatics(RefForwardingComponent, Component);
+  StyledComponent.displayName = Component.displayName || Component.name;
+  hoistNonReactStatics(StyledComponent, Component);
 
-  return RefForwardingComponent;
+  return StyledComponent;
 };

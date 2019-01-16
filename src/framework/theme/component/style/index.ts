@@ -1,4 +1,3 @@
-export * from './type';
 export {
   StyleProvider,
   Props as StyleProviderProps,
