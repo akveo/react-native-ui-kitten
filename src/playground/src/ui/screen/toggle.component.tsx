@@ -9,6 +9,7 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
+import { Toggle as ToggleComponent } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -25,7 +26,7 @@ class Toggle extends React.Component<Props, State> {
   render() {
     return (
       <View>
-        <Text>Toggle Component</Text>
+        <ToggleComponent/>
       </View>
     )
   }
