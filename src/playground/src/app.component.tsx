@@ -30,7 +30,7 @@ export default class App extends React.Component<any, State> {
   }
 
   render() {
-    const { RadioScreen: RootScreen, ...nestedScreens } = Screens;
+    const { ToggleScreen: RootScreen, ...nestedScreens } = Screens;
     const Router = withNavigation(RootScreen, nestedScreens);
 
     return (
