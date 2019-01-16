@@ -24,7 +24,10 @@ describe('@mapping: ui component checks', () => {
 
   const withMapping = (Component: React.ComponentClass<any>): React.ReactElement<any> => (
     <MappingContext.Consumer>{(receivedValue: MappingContextValueType) => (
-      <Component testID='@mapping/consumer' mapping={receivedValue.mapping} styles={receivedValue.styles}/>
+      <Component
+        testID='@mapping/consumer'
+        mapping={receivedValue.mapping}
+        styles={receivedValue.styles}/>
     )}</MappingContext.Consumer>
   );
 

@@ -6,7 +6,10 @@ import {
   ComponentMapMetaType,
 } from 'eva/packages/common';
 import { StyledComponentProps } from '../../component';
-import { Interaction, State } from '../../type';
+import {
+  Interaction,
+  State,
+} from '../../type';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
 

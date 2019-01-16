@@ -38,21 +38,21 @@ describe('@radio: matches snapshot', () => {
   });
 
   it('checked', () => {
-    const component = renderComponent({checked: true});
+    const component = renderComponent({ checked: true });
     const { output } = shallow(component.getByType(Radio));
 
     expect(output).toMatchSnapshot();
   });
 
   it('disabled', () => {
-    const component = renderComponent({disabled: true});
+    const component = renderComponent({ disabled: true });
     const { output } = shallow(component.getByType(Radio));
 
     expect(output).toMatchSnapshot();
   });
 
   it('checked disabled', () => {
-    const component = renderComponent({checked: true, disabled: true});
+    const component = renderComponent({ checked: true, disabled: true });
     const { output } = shallow(component.getByType(Radio));
 
     expect(output).toMatchSnapshot();
@@ -76,7 +76,7 @@ describe('@radio: matches snapshot', () => {
   });
 
   it('active checked', async () => {
-    const component = renderComponent({checked: true});
+    const component = renderComponent({ checked: true });
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
     const active = await waitForElement(() => component.getByType(Radio));

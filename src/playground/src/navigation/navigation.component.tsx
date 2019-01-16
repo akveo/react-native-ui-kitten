@@ -18,7 +18,7 @@ export interface Props {
 const ROUTE_INITIAL = 'root';
 
 export const withNavigation = <P extends object>(Root: React.ComponentType<P>,
-                                          routes: NavigationRouteConfigMap) => {
+                                                 routes: NavigationRouteConfigMap) => {
 
   type WrapperProps = Props & P;
 

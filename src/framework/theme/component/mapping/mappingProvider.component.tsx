@@ -16,7 +16,7 @@ export class MappingProvider extends React.PureComponent<Props> {
   render() {
     return (
       <MappingContext.Provider
-        value={{mapping: this.props.mapping, styles: this.props.styles}}>
+        value={{ mapping: this.props.mapping, styles: this.props.styles }}>
         {this.props.children}
       </MappingContext.Provider>
     );

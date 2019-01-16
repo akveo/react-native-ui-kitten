@@ -107,7 +107,7 @@ describe('@style: ui component checks', () => {
 
     const component = render(
       <StyleProvider mapping={mapping} theme={theme} styles={{}}>
-        <StyleConsumer />
+        <StyleConsumer/>
       </StyleProvider>,
     );
 
