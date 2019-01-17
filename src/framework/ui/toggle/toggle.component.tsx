@@ -180,6 +180,10 @@ export class Toggle extends React.Component<ToggleProps> {
   getComponentStyle = (style: StyleType): StyleType => {
     const thumbComponentSize: number = style.height - (style.borderWidth * 2);
     return {
+      wrapper: {
+        width: style.width,
+        height: style.height,
+      },
       componentContainer: {
         width: style.width,
         height: style.height,
@@ -208,7 +212,6 @@ export class Toggle extends React.Component<ToggleProps> {
         height: style.highlightHeight,
         borderRadius: style.highlightHeight / 2,
         backgroundColor: style.highlightColor,
-        opacity: 0.6,
       },
       switchOffsetValue: style.offsetValue,
       colors: {
@@ -239,7 +242,8 @@ export class Toggle extends React.Component<ToggleProps> {
       outputRange: [1, 0.01],
     });
     return (
-      <View style={style}>
+      <View style={[componentStyle.wrapper, styles.wrapper]}>
+        {!this.props.disabled && <View style={[styles.highlight, componentStyle.highlight]}/>}
         <Animated.View
           style={[
             styles.container,
@@ -247,7 +251,6 @@ export class Toggle extends React.Component<ToggleProps> {
             { backgroundColor: interpolatedTintColor },
           ]}
           {...this.panResponder.panHandlers}>
-          <View style={[styles.highlight, componentStyle.highlight]}/>
           <Animated.View style={[
             styles.ellipse,
             componentStyle.componentEllipse,
@@ -275,9 +278,14 @@ export class Toggle extends React.Component<ToggleProps> {
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     overflow: 'hidden',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   disableBox: {
     position: 'absolute',
@@ -289,5 +297,6 @@ const styles = StyleSheet.create({
   },
   highlight: {
     position: 'absolute',
+    alignSelf: 'center',
   },
 });
