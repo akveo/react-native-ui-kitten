@@ -33,6 +33,8 @@ class Toggle extends React.Component<Props, State> {
         <ToggleComponent
           value={this.state.value}
           onValueChange={(value: boolean) => this.setState({value: !this.state.value})}
+          status='error'
+          disabled={false}
         />
       </View>
     )

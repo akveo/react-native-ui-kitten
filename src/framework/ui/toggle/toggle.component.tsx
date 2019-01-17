@@ -61,12 +61,12 @@ export class Toggle extends React.Component<ToggleProps> {
     });
   }
 
-  animateSwitch = (value: boolean, callback: () => void = () => null, thumbSize: number) => {
+  animateSwitch = (value: boolean, callback: () => void = () => null) => {
     this.switchAnimationActive = true;
     Animated.timing(
       this.switchAnimation,
       {
-        toValue: value ? thumbSize : -thumbSize,
+        toValue: value ? 20 : -20,
         duration: 200,
         easing: Easing.bezier(0.65, 0.12, 0.09, 1.26),
       },
@@ -100,6 +100,14 @@ export class Toggle extends React.Component<ToggleProps> {
     this.ellipseAnimation.setValue(value);
   }
 
+  onPressIn = () => {
+    this.props.dispatch([Interaction.ACTIVE]);
+  };
+
+  onPressOut = () => {
+    this.props.dispatch([]);
+  };
+
   onStartShouldSetPanResponder = () => {
     return true;
   };
@@ -121,6 +129,7 @@ export class Toggle extends React.Component<ToggleProps> {
   };
 
   onPanResponderGrant = (thumbSize: number) => {
+    this.onPressIn();
     if (this.props.disabled) {
       return;
     }
@@ -150,26 +159,17 @@ export class Toggle extends React.Component<ToggleProps> {
       }
     }
     this.animateThumb(thumbSize);
+    this.onPressOut();
   };
 
   toggle = (callback = (value: boolean) => null, thumbSize: number) => {
-    // this.onToggleIn();
     const toValue = !this.props.value;
     this.animateSwitch(toValue, () => {
       this.switchAnimation.setValue(0);
       callback(toValue);
-    }, thumbSize);
+    });
     this.animateThumb(thumbSize);
-    // this.onToggleOut();
   };
-
-  // onToggleIn = () => {
-  //   this.props.dispatch([Interaction.ACTIVE]);
-  // };
-  //
-  // onToggleOut = () => {
-  //   this.props.dispatch([]);
-  // };
 
   onValueChange = (value: boolean) => {
     if (this.props.onValueChange) {
@@ -184,7 +184,6 @@ export class Toggle extends React.Component<ToggleProps> {
         width: style.width,
         height: style.height,
         borderRadius: style.height / 2,
-        borderColor: style.onTintColor,
       },
       componentDisabledBox: {
         backgroundColor: style.tintColor,
@@ -193,7 +192,6 @@ export class Toggle extends React.Component<ToggleProps> {
         height: this.props.disabled ? style.height : 0
       },
       componentEllipse: {
-        backgroundColor: style.thumbColor,
         width: style.width - (style.borderWidth * 2),
         height: style.height - (style.borderWidth * 2),
         borderRadius: (style.height - (style.borderWidth * 2)) / 2,
@@ -204,6 +202,13 @@ export class Toggle extends React.Component<ToggleProps> {
         borderWidth: style.borderWidth,
         borderRadius: thumbComponentSize / 2,
         marginHorizontal: 1.5,
+      },
+      highlight: {
+        width: style.highlightWidth,
+        height: style.highlightHeight,
+        borderRadius: style.highlightHeight / 2,
+        backgroundColor: style.highlightColor,
+        opacity: 0.6,
       },
       switchOffsetValue: style.offsetValue,
       colors: {
@@ -242,10 +247,12 @@ export class Toggle extends React.Component<ToggleProps> {
             { backgroundColor: interpolatedTintColor },
           ]}
           {...this.panResponder.panHandlers}>
+          <View style={[styles.highlight, componentStyle.highlight]}/>
           <Animated.View style={[
             styles.ellipse,
             componentStyle.componentEllipse,
-            { transform: [{ scale: value ? returnScale : this.ellipseAnimation }] },
+            { transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
+              backgroundColor: interpolatedTintColor, },
           ]}
           />
           <Animated.View style={[
@@ -260,10 +267,6 @@ export class Toggle extends React.Component<ToggleProps> {
             },
           ]}
           />
-          <Animated.View style={[
-            styles.disableBox,
-            componentStyle.componentDisabledBox,
-          ]}/>
         </Animated.View>
       </View>
     );
@@ -283,5 +286,8 @@ const styles = StyleSheet.create({
   ellipse: {
     position: 'absolute',
     alignSelf: 'center',
+  },
+  highlight: {
+    position: 'absolute',
   },
 });
