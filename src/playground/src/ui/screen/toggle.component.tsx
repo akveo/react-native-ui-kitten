@@ -14,7 +14,7 @@ import { Toggle as ToggleComponent } from '@kitten/ui';
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 interface State {
-
+  value: boolean;
 }
 
 class Toggle extends React.Component<Props, State> {
@@ -23,10 +23,17 @@ class Toggle extends React.Component<Props, State> {
     title: 'Toggle',
   };
 
+  state: State = {
+    value: false,
+  };
+
   render() {
     return (
-      <View>
-        <ToggleComponent/>
+      <View style={this.props.themedStyle.container}>
+        <ToggleComponent
+          value={this.state.value}
+          onValueChange={(value: boolean) => this.setState({value: !this.state.value})}
+        />
       </View>
     )
   }
@@ -34,5 +41,8 @@ class Toggle extends React.Component<Props, State> {
 }
 
 export const ToggleScreen = withStyles(Toggle, (theme: ThemeType) => ({
-
+  container: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
 }));

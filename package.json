@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "eva": "github:akveo/eva",
+    "eva": "github:akveo/eva#feat/toggle-mapping",
     "hoist-non-react-statics": "^3.2.1"
   },
   "devDependencies": {
