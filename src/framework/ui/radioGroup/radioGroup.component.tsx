@@ -3,6 +3,10 @@ import {
   View,
   ViewProps,
 } from 'react-native';
+import {
+  StyledComponentProps,
+  StyleType,
+} from '@kitten/theme';
 import { Props as ChildProps } from '../radio/radio.component';
 
 type Child = React.ReactElement<ChildProps>;
@@ -13,7 +17,7 @@ interface RadioGroupProps {
   children: Child | Child[];
 }
 
-export type Props = RadioGroupProps & ViewProps;
+export type Props = RadioGroupProps & StyledComponentProps & ViewProps;
 
 export class RadioGroup extends React.Component<Props> {
 
@@ -34,9 +38,9 @@ export class RadioGroup extends React.Component<Props> {
   // We need to apply Attributes props
   // because children provided by iterator should contain key prop
 
-  private createChildProps = (source: ChildProps, index: number): ChildProps & Attributes => {
+  private createChildProps = (props: ChildProps, index: number): ChildProps & Attributes => {
     return {
-      ...source,
+      ...props,
       key: index,
       checked: this.props.selectedIndex === index,
       onChange: () => this.onChildSelected(index),
@@ -55,9 +59,16 @@ export class RadioGroup extends React.Component<Props> {
     return children.map(this.renderChild);
   };
 
+  private getComponentStyle = (style: StyleType): StyleType => ({
+    container: {
+      padding: style.padding,
+    },
+  });
+
   render() {
+    const componentStyle = this.getComponentStyle(this.props.themedStyle);
     return (
-      <View style={this.props.style}>
+      <View style={[componentStyle.container, this.props.style]}>
         {this.renderChildren(this.props.children)}
       </View>
     );

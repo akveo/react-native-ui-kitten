@@ -17,13 +17,15 @@ import {
   Radio as RadioComponent,
   Props as RadioProps,
 } from '../radio/radio.component';
-import * as childConfig from '../radio/radio.spec.config';
+import * as config from './radioGroup.spec.config';
 
 const Mock = (props?: RadioGroupProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={childConfig.mapping} theme={childConfig.theme} styles={{}}>
-    <RadioGroup {...props}/>
+  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
+    <GroupMock {...props}/>
   </StyleProvider>
 );
+
+const GroupMock = styled<RadioGroup, RadioGroupProps>(RadioGroup);
 
 const ChildMock = styled<RadioComponent, RadioProps>(RadioComponent);
 
@@ -80,13 +82,14 @@ describe('@radioGroup: component checks', () => {
     const component = render(
       <Mock onChange={onChange}>
         <ChildMock testID={childTestId0}/>
+        <ChildMock testID={childTestId1}/>
       </Mock>,
     );
 
-    const childTouchable = component.getByTestId(childTestId0).findByType(TouchableOpacity);
+    const childTouchable = component.getByTestId(childTestId1).findByType(TouchableOpacity);
     fireEvent.press(childTouchable);
 
-    expect(onChange).toBeCalledWith(0);
+    expect(onChange).toBeCalledWith(1);
   });
 
 });
