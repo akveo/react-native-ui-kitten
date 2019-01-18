@@ -19,6 +19,6 @@ const StyledToggle = styled<Toggle, ToggleProps>(Toggle);
 export {
   Radio, RadioProps,
   RadioGroup, RadioGroupProps,
-  StyledToggle as Toggle, ToggleProps
+  StyledToggle as Toggle, ToggleProps,
 };
 
