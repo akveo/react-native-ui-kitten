@@ -19,7 +19,7 @@ export type LayoutProps = LayoutComponentProps & StyledComponentProps & ViewProp
 export class Layout extends React.Component<LayoutProps> {
 
   getComponentStyle = (style: StyleType): StyleType => ({
-    layout: style
+    layout: style,
   });
 
   render() {
@@ -29,7 +29,7 @@ export class Layout extends React.Component<LayoutProps> {
       <View style={[componentStyle.layout, this.props.style]}>
         {this.props.children}
       </View>
-    )
+    );
   }
 
 }
