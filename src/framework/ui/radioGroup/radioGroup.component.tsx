@@ -1,4 +1,4 @@
-import React, { Attributes } from 'react';
+import React from 'react';
 import {
   View,
   ViewProps,
@@ -38,7 +38,7 @@ export class RadioGroup extends React.Component<Props> {
   // We need to apply Attributes props
   // because children provided by iterator should contain key prop
 
-  private createChildProps = (props: ChildProps, index: number): ChildProps & Attributes => {
+  private createChildProps = (props: ChildProps, index: number): ChildProps & React.Attributes => {
     return {
       ...props,
       key: index,
@@ -48,7 +48,7 @@ export class RadioGroup extends React.Component<Props> {
   };
 
   private renderChild = (element: Child, index: number): Child => {
-    const props: ChildProps & Attributes = this.createChildProps(element.props, index);
+    const props: ChildProps & React.Attributes = this.createChildProps(element.props, index);
 
     return React.cloneElement(element, props);
   };
@@ -59,16 +59,21 @@ export class RadioGroup extends React.Component<Props> {
     return children.map(this.renderChild);
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => ({
-    container: {
-      padding: style.padding,
-    },
-  });
+  private getComponentStyle = (style: StyleType): StyleType => {
+    return {
+      container: {
+        padding: style.padding,
+      },
+    };
+  };
 
   render() {
-    const componentStyle = this.getComponentStyle(this.props.themedStyle);
+    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+
     return (
-      <View style={[componentStyle.container, this.props.style]}>
+      <View
+        {...this.props}
+        style={[componentStyle.container, this.props.style]}>
         {this.renderChildren(this.props.children)}
       </View>
     );
