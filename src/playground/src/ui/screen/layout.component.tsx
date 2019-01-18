@@ -9,12 +9,11 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
+import { Layout as LayoutComponent } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-interface State {}
-
-class Layout extends React.Component<Props, State> {
+class Layout extends React.Component<Props> {
 
   static navigationOptions = {
     title: 'Layout',
@@ -22,8 +21,10 @@ class Layout extends React.Component<Props, State> {
 
   render() {
     return (
-      <View>
-        <Text>Layout component</Text>
+      <View style={this.props.themedStyle.container}>
+        <LayoutComponent style={this.props.themedStyle.layout}>
+          <Text>Layout</Text>
+        </LayoutComponent>
       </View>
     )
   }
@@ -31,4 +32,11 @@ class Layout extends React.Component<Props, State> {
 }
 
 export const LayoutScreen = withStyles(Layout, (theme: ThemeType) => ({
+  container: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+  layout: {
+    height: 300,
+  },
 }));
