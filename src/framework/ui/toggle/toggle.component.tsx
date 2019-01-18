@@ -193,7 +193,7 @@ export class Toggle extends React.Component<ToggleProps> {
         backgroundColor: style.tintColor,
         width: style.width,
         borderRadius: style.width / 2,
-        height: this.props.disabled ? style.height : 0
+        height: this.props.disabled ? style.height : 0,
       },
       componentEllipse: {
         width: style.width - (style.borderWidth * 2),
@@ -219,7 +219,7 @@ export class Toggle extends React.Component<ToggleProps> {
         thumb: style.thumbColor,
         tint: style.tintColor,
       },
-    }
+    };
   };
 
   render() {
