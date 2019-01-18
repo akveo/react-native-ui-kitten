@@ -224,14 +224,10 @@ export class Toggle extends React.Component<ToggleProps> {
 
   render() {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const {
-      disabled,
-      value,
-      style,
-    } = this.props;
+    const { disabled, value, style } = this.props;
     const interpolatedTintColor = this.switchAnimation.interpolate({
       inputRange: value ?
-        [-componentStyle.switchOffsetValue, 0] :[0, componentStyle.switchOffsetValue],
+        [-componentStyle.switchOffsetValue, 0] : [0, componentStyle.switchOffsetValue],
       outputRange: [
         componentStyle.colors.tint,
         componentStyle.colors.onTint,
@@ -242,7 +238,7 @@ export class Toggle extends React.Component<ToggleProps> {
       outputRange: [1, 0.01],
     });
     return (
-      <View style={[componentStyle.wrapper, styles.wrapper]}>
+      <View style={[componentStyle.wrapper, styles.wrapper, style]}>
         {!this.props.disabled && <View style={[styles.highlight, componentStyle.highlight]}/>}
         <Animated.View
           style={[
@@ -254,8 +250,10 @@ export class Toggle extends React.Component<ToggleProps> {
           <Animated.View style={[
             styles.ellipse,
             componentStyle.componentEllipse,
-            { transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
-              backgroundColor: interpolatedTintColor, },
+            {
+              transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
+              backgroundColor: interpolatedTintColor,
+            },
           ]}
           />
           <Animated.View style={[
