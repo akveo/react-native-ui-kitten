@@ -15,6 +15,7 @@ import {
   StyleType,
   Interaction,
 } from '@kitten/theme';
+import { CheckMark } from '../common/checkmark.component';
 
 interface ToggleComponentProps {
   disabled?: boolean;
@@ -214,6 +215,7 @@ export class Toggle extends React.Component<ToggleProps> {
         backgroundColor: style.highlightColor,
       },
       switchOffsetValue: style.offsetValue,
+      thumbComponentSize: thumbComponentSize,
       colors: {
         onTint: style.onTintColor,
         thumb: style.thumbColor,
@@ -222,17 +224,32 @@ export class Toggle extends React.Component<ToggleProps> {
     };
   };
 
+  private getInterpolatedColor = (offsetValue: number,
+                                  outputColorStart: string,
+                                  outputColorEnd: string): Animated.AnimatedDiffClamp => {
+
+    return this.switchAnimation.interpolate({
+      inputRange: this.props.value ? [-offsetValue, 0] : [0, offsetValue],
+      outputRange: [
+        outputColorStart,
+        outputColorEnd,
+      ],
+    });
+  };
+
   render() {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
     const { disabled, value, style } = this.props;
-    const interpolatedTintColor = this.switchAnimation.interpolate({
-      inputRange: value ?
-        [-componentStyle.switchOffsetValue, 0] : [0, componentStyle.switchOffsetValue],
-      outputRange: [
-        componentStyle.colors.tint,
-        componentStyle.colors.onTint,
-      ],
-    });
+    const interpolatedTintColor = this.getInterpolatedColor(
+      componentStyle.switchOffsetValue,
+      componentStyle.colors.tint,
+      componentStyle.colors.onTint,
+    );
+    const interpolatedCheckColor = this.getInterpolatedColor(
+      componentStyle.switchOffsetValue,
+      componentStyle.colors.thumb,
+      componentStyle.colors.onTint,
+    );
     const returnScale = this.switchAnimation.interpolate({
       inputRange: [-componentStyle.switchOffsetValue, 0],
       outputRange: [1, 0.01],
@@ -258,6 +275,7 @@ export class Toggle extends React.Component<ToggleProps> {
           />
           <Animated.View style={[
             componentStyle.componentThumb,
+            styles.thumb,
             {
               width: this.thumbAnimation,
               alignSelf: value ? 'flex-end' : 'flex-start',
@@ -267,7 +285,13 @@ export class Toggle extends React.Component<ToggleProps> {
               elevation: disabled ? 0 : 5,
             },
           ]}
-          />
+          >
+            <CheckMark
+              size={componentStyle.thumbComponentSize}
+              color={interpolatedCheckColor}
+              isAnimated={true}
+            />
+          </Animated.View>
         </Animated.View>
       </View>
     );
@@ -296,5 +320,9 @@ const styles = StyleSheet.create({
   highlight: {
     position: 'absolute',
     alignSelf: 'center',
+  },
+  thumb: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
