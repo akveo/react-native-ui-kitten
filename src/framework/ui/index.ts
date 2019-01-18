@@ -1,13 +1,20 @@
 import { styled } from '@kitten/theme';
 import {
-  Radio,
-  Props,
+  Radio as RadioComponent,
+  Props as RadioProps,
 } from './radio/radio.component';
+import {
+  RadioGroup as RadioGroupComponent,
+  Props as RadioGroupProps,
+} from './radioGroup/radioGroup.component';
 
-const StyledRadio = styled<Radio, Props>(Radio);
+const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
+const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
 
 export {
-  StyledRadio as Radio,
-  Props as RadioProps,
+  Radio,
+  RadioGroup,
+  RadioProps,
+  RadioGroupProps,
 };
 
