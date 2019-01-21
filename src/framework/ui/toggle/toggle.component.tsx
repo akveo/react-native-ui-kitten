@@ -26,9 +26,9 @@ interface ToggleComponentProps {
   size?: string | 'big' | 'small';
 }
 
-export type ToggleProps = ToggleComponentProps & StyledComponentProps & ViewProps;
+export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
 
-export class Toggle extends React.Component<ToggleProps> {
+export class Toggle extends React.Component<Props> {
 
   static defaultProps = {
     disabled: false,
@@ -41,7 +41,7 @@ export class Toggle extends React.Component<ToggleProps> {
   switchAnimationActive: boolean;
   panResponder: PanResponderInstance;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     const thumbSize: number = props.themedStyle.height - (props.themedStyle.borderWidth * 2);
     this.thumbAnimation = new Animated.Value(thumbSize);
@@ -62,7 +62,7 @@ export class Toggle extends React.Component<ToggleProps> {
     });
   }
 
-  animateSwitch = (value: boolean, callback: () => void = () => null) => {
+  private animateSwitch = (value: boolean, callback: () => void = () => null) => {
     this.switchAnimationActive = true;
     Animated.timing(
       this.switchAnimation,
@@ -216,6 +216,7 @@ export class Toggle extends React.Component<ToggleProps> {
       },
       switchOffsetValue: style.offsetValue,
       thumbComponentSize: thumbComponentSize,
+      checkMarkSize: style.iconSize,
       colors: {
         onTint: style.onTintColor,
         thumb: style.thumbColor,
@@ -287,7 +288,7 @@ export class Toggle extends React.Component<ToggleProps> {
           ]}
           >
             <CheckMark
-              size={componentStyle.thumbComponentSize}
+              size={componentStyle.checkMarkSize}
               color={interpolatedCheckColor}
               isAnimated={true}
             />
@@ -296,7 +297,6 @@ export class Toggle extends React.Component<ToggleProps> {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

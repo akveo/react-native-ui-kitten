@@ -8,17 +8,17 @@ import {
   Props as RadioGroupProps,
 } from './radioGroup/radioGroup.component';
 import {
-  Toggle,
-  ToggleProps,
+  Toggle as ToggleComponent,
+  Props as ToggleProps,
 } from './toggle/toggle.component';
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
-const StyledToggle = styled<Toggle, ToggleProps>(Toggle);
+const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 
 export {
   Radio, RadioProps,
   RadioGroup, RadioGroupProps,
-  StyledToggle as Toggle, ToggleProps,
+  Toggle, ToggleProps,
 };
 
