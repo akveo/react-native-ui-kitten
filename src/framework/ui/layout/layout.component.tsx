@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   ViewProps,
+  StyleSheet,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -9,7 +10,7 @@ import {
 } from '@kitten/theme';
 
 interface LayoutProps {
-  appearance?: string | 'default';
+  appearance?: string;
   children?: any;
 }
 
@@ -25,9 +26,17 @@ export class Layout extends React.Component<Props> {
     const componentStyle = this.getComponentStyle(this.props.themedStyle);
 
     return (
-      <View style={[componentStyle.layout, this.props.style]}>
-        {this.props.children}
+      <View {...this.props}>
+        <View style={[componentStyle.layout, styles.layout]}>
+          {this.props.children}
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  layout: {
+    flex: 1,
+  },
+});

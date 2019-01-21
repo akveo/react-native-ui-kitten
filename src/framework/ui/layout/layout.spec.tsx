@@ -11,19 +11,19 @@ import {
 } from '@kitten/theme';
 import {
   Layout,
-  LayoutProps,
+  Props,
 } from './layout.component';
 import * as config from './layout.spec.config';
 
-const StyledComponent = styled<Layout, LayoutProps>(Layout);
+const StyledComponent = styled<Layout, Props>(Layout);
 
-const Mock = (props?: LayoutProps): React.ReactElement<StyleProviderProps> => (
+const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
   <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
     <StyledComponent {...props} />
   </StyleProvider>
 );
 
-const renderComponent = (props?: LayoutProps): RenderAPI => render(<Mock {...props}/>);
+const renderComponent = (props?: Props): RenderAPI => render(<Mock {...props}/>);
 
 describe('@layout: matches snapshot', () => {
 
