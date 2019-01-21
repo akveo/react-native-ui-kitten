@@ -103,4 +103,20 @@ describe('@toggle: component checks', () => {
     expect(onChange).toBeCalled();
   });
 
+  it('checking of value direct', () => {
+    let value: boolean = false;
+    const onChangeValue = (changed: boolean) => value = changed;
+    const component = renderComponent({ value: value, onValueChange: onChangeValue });
+    fireEvent.press(component.getByType(TouchableOpacity));
+    expect(value).toBe(true);
+  });
+
+  it('checking of value reverse', () => {
+    let value: boolean = true;
+    const onChangeValue = (changed: boolean) => value = changed;
+    const component = renderComponent({ value: value, onValueChange: onChangeValue });
+    fireEvent.press(component.getByType(TouchableOpacity));
+    expect(value).toBe(false);
+  });
+
 });

@@ -22,9 +22,9 @@ interface ToggleComponentProps {
   disabled?: boolean;
   onValueChange?: (value: boolean) => void;
   value?: boolean;
-  appearance?: string | 'default';
-  status?: string | 'error';
-  size?: string | 'big' | 'small';
+  appearance?: string;
+  status?: string;
+  size?: string;
 }
 
 export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
@@ -175,7 +175,7 @@ export class Toggle extends React.Component<Props> {
 
   onValueChange = () => {
     if (this.props.onValueChange) {
-      this.props.onValueChange(this.props.value);
+      this.props.onValueChange(!this.props.value);
     }
   };
 
