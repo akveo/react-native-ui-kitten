@@ -1,5 +1,529 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@toggle: matches snapshot active 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 32,
+        "width": 52,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#e5e7ea",
+          "borderRadius": 21,
+          "height": 42,
+          "width": 62,
+        },
+      ]
+    }
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
+  >
+    <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
+      style={
+        Array [
+          Object {
+            "alignSelf": "center",
+            "justifyContent": "center",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
+          },
+          Object {
+            "backgroundColor": "rgba(221, 225, 235, 1)",
+          },
+        ]
+      }
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(221, 225, 235, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-start",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(221, 225, 235, 1)",
+              "elevation": 5,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(255, 255, 255, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`@toggle: matches snapshot active checked 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 32,
+        "width": 52,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "#e5e7ea",
+          "borderRadius": 21,
+          "height": 42,
+          "width": 62,
+        },
+      ]
+    }
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
+  >
+    <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
+      style={
+        Array [
+          Object {
+            "alignSelf": "center",
+            "justifyContent": "center",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
+          },
+          Object {
+            "backgroundColor": "rgba(51, 102, 255, 1)",
+          },
+        ]
+      }
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(51, 102, 255, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 0.010000000000000009,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-end",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(51, 102, 255, 1)",
+              "elevation": 5,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(51, 102, 255, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`@toggle: matches snapshot active checked: checked 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 32,
+        "width": 52,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 21,
+          "height": 42,
+          "width": 62,
+        },
+      ]
+    }
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
+  >
+    <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
+      style={
+        Array [
+          Object {
+            "alignSelf": "center",
+            "justifyContent": "center",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
+          },
+          Object {
+            "backgroundColor": "rgba(51, 102, 255, 1)",
+          },
+        ]
+      }
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(51, 102, 255, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 0.010000000000000009,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-end",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(51, 102, 255, 1)",
+              "elevation": 5,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(51, 102, 255, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`@toggle: matches snapshot active: default 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "height": 32,
+        "width": 52,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 21,
+          "height": 42,
+          "width": 62,
+        },
+      ]
+    }
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
+  >
+    <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
+      style={
+        Array [
+          Object {
+            "alignSelf": "center",
+            "justifyContent": "center",
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
+          },
+          Object {
+            "backgroundColor": "rgba(221, 225, 235, 1)",
+          },
+        ]
+      }
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(221, 225, 235, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-start",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(221, 225, 235, 1)",
+              "elevation": 5,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(255, 255, 255, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
+</View>
+`;
+
 exports[`@toggle: matches snapshot checked 1`] = `
 <View
   style={
@@ -32,86 +556,102 @@ exports[`@toggle: matches snapshot checked 1`] = `
       ]
     }
   />
-  <AnimatedComponent
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderEnd={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderReject={[Function]}
-    onResponderRelease={[Function]}
-    onResponderStart={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "justifyContent": "center",
-          "overflow": "hidden",
-        },
-        Object {
-          "borderRadius": 16,
-          "height": 32,
-          "width": 52,
-        },
-        Object {
-          "backgroundColor": "rgba(51, 102, 255, 1)",
-        },
-      ]
-    }
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
   >
     <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
       style={
         Array [
           Object {
             "alignSelf": "center",
-            "position": "absolute",
+            "justifyContent": "center",
+            "overflow": "hidden",
           },
           Object {
-            "borderRadius": 14.5,
-            "height": 29,
-            "width": 49,
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
           },
           Object {
             "backgroundColor": "rgba(51, 102, 255, 1)",
-            "transform": Array [
-              Object {
-                "scale": 0.010000000000000009,
-              },
-            ],
           },
         ]
       }
-    />
-    <AnimatedComponent
-      style={
-        Array [
-          Object {
-            "borderRadius": 14.5,
-            "borderWidth": 1.5,
-            "height": 29,
-            "marginHorizontal": 1.5,
-            "width": 29,
-          },
-          Object {
-            "alignSelf": "flex-end",
-            "backgroundColor": "#ffffff",
-            "borderColor": "rgba(51, 102, 255, 1)",
-            "elevation": 5,
-            "transform": Array [
-              Object {
-                "translateX": 0,
-              },
-            ],
-            "width": 29,
-          },
-        ]
-      }
-    />
-  </AnimatedComponent>
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(51, 102, 255, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 0.010000000000000009,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-end",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(51, 102, 255, 1)",
+              "elevation": 5,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(51, 102, 255, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -131,86 +671,102 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
     ]
   }
 >
-  <AnimatedComponent
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderEnd={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderReject={[Function]}
-    onResponderRelease={[Function]}
-    onResponderStart={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "justifyContent": "center",
-          "overflow": "hidden",
-        },
-        Object {
-          "borderRadius": 16,
-          "height": 32,
-          "width": 52,
-        },
-        Object {
-          "backgroundColor": "rgba(137, 146, 163, 1)",
-        },
-      ]
-    }
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
   >
     <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
       style={
         Array [
           Object {
             "alignSelf": "center",
-            "position": "absolute",
+            "justifyContent": "center",
+            "overflow": "hidden",
           },
           Object {
-            "borderRadius": 14.5,
-            "height": 29,
-            "width": 49,
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
           },
           Object {
             "backgroundColor": "rgba(137, 146, 163, 1)",
-            "transform": Array [
-              Object {
-                "scale": 0.010000000000000009,
-              },
-            ],
           },
         ]
       }
-    />
-    <AnimatedComponent
-      style={
-        Array [
-          Object {
-            "borderRadius": 14.5,
-            "borderWidth": 1.5,
-            "height": 29,
-            "marginHorizontal": 1.5,
-            "width": 29,
-          },
-          Object {
-            "alignSelf": "flex-end",
-            "backgroundColor": "#ffffff",
-            "borderColor": "rgba(137, 146, 163, 1)",
-            "elevation": 0,
-            "transform": Array [
-              Object {
-                "translateX": 0,
-              },
-            ],
-            "width": 29,
-          },
-        ]
-      }
-    />
-  </AnimatedComponent>
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(137, 146, 163, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 0.010000000000000009,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-end",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(137, 146, 163, 1)",
+              "elevation": 0,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(137, 146, 163, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -246,86 +802,102 @@ exports[`@toggle: matches snapshot default 1`] = `
       ]
     }
   />
-  <AnimatedComponent
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderEnd={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderReject={[Function]}
-    onResponderRelease={[Function]}
-    onResponderStart={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "justifyContent": "center",
-          "overflow": "hidden",
-        },
-        Object {
-          "borderRadius": 16,
-          "height": 32,
-          "width": 52,
-        },
-        Object {
-          "backgroundColor": "rgba(221, 225, 235, 1)",
-        },
-      ]
-    }
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
   >
     <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
       style={
         Array [
           Object {
             "alignSelf": "center",
-            "position": "absolute",
+            "justifyContent": "center",
+            "overflow": "hidden",
           },
           Object {
-            "borderRadius": 14.5,
-            "height": 29,
-            "width": 49,
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
           },
           Object {
             "backgroundColor": "rgba(221, 225, 235, 1)",
-            "transform": Array [
-              Object {
-                "scale": 1,
-              },
-            ],
           },
         ]
       }
-    />
-    <AnimatedComponent
-      style={
-        Array [
-          Object {
-            "borderRadius": 14.5,
-            "borderWidth": 1.5,
-            "height": 29,
-            "marginHorizontal": 1.5,
-            "width": 29,
-          },
-          Object {
-            "alignSelf": "flex-start",
-            "backgroundColor": "#ffffff",
-            "borderColor": "rgba(221, 225, 235, 1)",
-            "elevation": 5,
-            "transform": Array [
-              Object {
-                "translateX": 0,
-              },
-            ],
-            "width": 29,
-          },
-        ]
-      }
-    />
-  </AnimatedComponent>
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(221, 225, 235, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-start",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(221, 225, 235, 1)",
+              "elevation": 5,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(255, 255, 255, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
 </View>
 `;
 
@@ -345,85 +917,101 @@ exports[`@toggle: matches snapshot disabled 1`] = `
     ]
   }
 >
-  <AnimatedComponent
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderEnd={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderReject={[Function]}
-    onResponderRelease={[Function]}
-    onResponderStart={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "justifyContent": "center",
-          "overflow": "hidden",
-        },
-        Object {
-          "borderRadius": 16,
-          "height": 32,
-          "width": 52,
-        },
-        Object {
-          "backgroundColor": "rgba(221, 225, 235, 1)",
-        },
-      ]
-    }
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
   >
     <AnimatedComponent
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
       style={
         Array [
           Object {
             "alignSelf": "center",
-            "position": "absolute",
+            "justifyContent": "center",
+            "overflow": "hidden",
           },
           Object {
-            "borderRadius": 14.5,
-            "height": 29,
-            "width": 49,
+            "borderRadius": 16,
+            "height": 32,
+            "width": 52,
           },
           Object {
             "backgroundColor": "rgba(221, 225, 235, 1)",
-            "transform": Array [
-              Object {
-                "scale": 1,
-              },
-            ],
           },
         ]
       }
-    />
-    <AnimatedComponent
-      style={
-        Array [
-          Object {
-            "borderRadius": 14.5,
-            "borderWidth": 1.5,
-            "height": 29,
-            "marginHorizontal": 1.5,
-            "width": 29,
-          },
-          Object {
-            "alignSelf": "flex-start",
-            "backgroundColor": "#ffffff",
-            "borderColor": "rgba(221, 225, 235, 1)",
-            "elevation": 0,
-            "transform": Array [
-              Object {
-                "translateX": 0,
-              },
-            ],
-            "width": 29,
-          },
-        ]
-      }
-    />
-  </AnimatedComponent>
+    >
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "position": "absolute",
+            },
+            Object {
+              "borderRadius": 14.5,
+              "height": 29,
+              "width": 49,
+            },
+            Object {
+              "backgroundColor": "rgba(221, 225, 235, 1)",
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+              ],
+            },
+          ]
+        }
+      />
+      <AnimatedComponent
+        style={
+          Array [
+            Object {
+              "borderRadius": 14.5,
+              "borderWidth": 1.5,
+              "height": 29,
+              "marginHorizontal": 1.5,
+              "width": 29,
+            },
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "alignSelf": "flex-start",
+              "backgroundColor": "#ffffff",
+              "borderColor": "rgba(221, 225, 235, 1)",
+              "elevation": 0,
+              "transform": Array [
+                Object {
+                  "translateX": 0,
+                },
+              ],
+              "width": 29,
+            },
+          ]
+        }
+      >
+        <CheckMark
+          color={"rgba(255, 255, 255, 1)"}
+          isAnimated={true}
+        />
+      </AnimatedComponent>
+    </AnimatedComponent>
+  </TouchableOpacity>
 </View>
 `;

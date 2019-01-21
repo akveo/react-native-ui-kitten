@@ -3,7 +3,10 @@ import {
   render,
   shallow,
   RenderAPI,
+  fireEvent,
+  waitForElement,
 } from 'react-native-testing-library';
+import { TouchableOpacity } from 'react-native';
 import {
   styled,
   StyleProvider,
@@ -11,19 +14,19 @@ import {
 } from '@kitten/theme';
 import {
   Toggle,
-  ToggleProps,
+  Props,
 } from './toggle.component';
 import * as config from './toggle.spec.config';
 
-const StyledComponent = styled<Toggle, ToggleProps>(Toggle);
+const StyledComponent = styled<Toggle, Props>(Toggle);
 
-const Mock = (props?: ToggleProps): React.ReactElement<StyleProviderProps> => (
+const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
   <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
     <StyledComponent {...props} />
   </StyleProvider>
 );
 
-const renderComponent = (props?: ToggleProps): RenderAPI => render(<Mock {...props}/>);
+const renderComponent = (props?: Props): RenderAPI => render(<Mock {...props}/>);
 
 describe('@toggle: matches snapshot', () => {
 
@@ -53,6 +56,51 @@ describe('@toggle: matches snapshot', () => {
     const { output } = shallow(component.getByType(Toggle));
 
     expect(output).toMatchSnapshot();
+  });
+
+  it('active', async () => {
+    const component = renderComponent();
+
+    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
+
+    const active = await waitForElement(() => component.getByType(Toggle));
+    const { output: activeOutput } = shallow(active);
+
+    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
+
+    const inactive = await waitForElement(() => component.getByType(Toggle));
+    const { output: inactiveOutput } = shallow(inactive);
+
+    expect(activeOutput).toMatchSnapshot();
+    expect(inactiveOutput).toMatchSnapshot('default');
+  });
+
+  it('active checked', async () => {
+    const component = renderComponent({ value: true });
+
+    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
+    const active = await waitForElement(() => component.getByType(Toggle));
+    const { output: activeOutput } = shallow(active);
+
+    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
+
+    const inactive = await waitForElement(() => component.getByType(Toggle));
+    const { output: inactiveOutput } = shallow(inactive);
+
+    expect(activeOutput).toMatchSnapshot();
+    expect(inactiveOutput).toMatchSnapshot('checked');
+  });
+
+});
+
+describe('@toggle: component checks', () => {
+
+  it('emits onValueChange', () => {
+    const onChange = jest.fn();
+    const component = renderComponent({ onValueChange: onChange });
+    fireEvent.press(component.getByType(TouchableOpacity));
+
+    expect(onChange).toBeCalled();
   });
 
 });

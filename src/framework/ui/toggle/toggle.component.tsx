@@ -9,6 +9,7 @@ import {
   PanResponderInstance,
   GestureResponderEvent,
   PanResponderGestureState,
+  TouchableOpacity,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -172,9 +173,9 @@ export class Toggle extends React.Component<Props> {
     this.animateThumb(thumbSize);
   };
 
-  onValueChange = (value: boolean) => {
+  onValueChange = () => {
     if (this.props.onValueChange) {
-      this.props.onValueChange(value);
+      this.props.onValueChange(this.props.value);
     }
   };
 
@@ -258,42 +259,48 @@ export class Toggle extends React.Component<Props> {
     return (
       <View style={[componentStyle.wrapper, styles.wrapper, style]}>
         {!this.props.disabled && <View style={[styles.highlight, componentStyle.highlight]}/>}
-        <Animated.View
-          style={[
-            styles.container,
-            componentStyle.componentContainer,
-            { backgroundColor: interpolatedTintColor },
-          ]}
-          {...this.panResponder.panHandlers}>
-          <Animated.View style={[
-            styles.ellipse,
-            componentStyle.componentEllipse,
-            {
-              transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
-              backgroundColor: interpolatedTintColor,
-            },
-          ]}
-          />
-          <Animated.View style={[
-            componentStyle.componentThumb,
-            styles.thumb,
-            {
-              width: this.thumbAnimation,
-              alignSelf: value ? 'flex-end' : 'flex-start',
-              transform: [{ translateX: this.switchAnimation }],
-              borderColor: interpolatedTintColor,
-              backgroundColor: componentStyle.colors.thumb,
-              elevation: disabled ? 0 : 5,
-            },
-          ]}
-          >
-            <CheckMark
-              size={componentStyle.checkMarkSize}
-              color={interpolatedCheckColor}
-              isAnimated={true}
+        <TouchableOpacity
+          onPressIn={this.onPressIn}
+          onPressOut={this.onPressOut}
+          onPress={this.onValueChange}
+        >
+          <Animated.View
+            style={[
+              styles.container,
+              componentStyle.componentContainer,
+              { backgroundColor: interpolatedTintColor },
+            ]}
+            {...this.panResponder.panHandlers}>
+            <Animated.View style={[
+              styles.ellipse,
+              componentStyle.componentEllipse,
+              {
+                transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
+                backgroundColor: interpolatedTintColor,
+              },
+            ]}
             />
+            <Animated.View style={[
+              componentStyle.componentThumb,
+              styles.thumb,
+              {
+                width: this.thumbAnimation,
+                alignSelf: value ? 'flex-end' : 'flex-start',
+                transform: [{ translateX: this.switchAnimation }],
+                borderColor: interpolatedTintColor,
+                backgroundColor: componentStyle.colors.thumb,
+                elevation: disabled ? 0 : 5,
+              },
+            ]}
+            >
+              <CheckMark
+                size={componentStyle.checkMarkSize}
+                color={interpolatedCheckColor}
+                isAnimated={true}
+              />
+            </Animated.View>
           </Animated.View>
-        </Animated.View>
+        </TouchableOpacity>
       </View>
     );
   }
