@@ -8,17 +8,17 @@ import {
   Props as RadioGroupProps,
 } from './radioGroup/radioGroup.component';
 import {
-  Layout,
-  LayoutProps,
+  Layout as LayoutComponent,
+  Props as LayoutProps,
 } from './layout/layout.component';
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
-const StyledLayout = styled<Layout, LayoutProps>(Layout);
+const Layout = styled<LayoutComponent, LayoutProps>(LayoutComponent);
 
 export {
   Radio, RadioProps,
   RadioGroup, RadioGroupProps,
-  StyledLayout as Layout, LayoutProps,
+  Layout, LayoutProps,
 };
 

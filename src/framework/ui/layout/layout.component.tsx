@@ -2,21 +2,20 @@ import React from 'react';
 import {
   View,
   ViewProps,
-  StyleSheet,
 } from 'react-native';
 import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 
-interface LayoutComponentProps {
+interface LayoutProps {
   appearance?: string | 'default';
   children?: any;
 }
 
-export type LayoutProps = LayoutComponentProps & StyledComponentProps & ViewProps;
+export type Props = LayoutProps & StyledComponentProps & ViewProps;
 
-export class Layout extends React.Component<LayoutProps> {
+export class Layout extends React.Component<Props> {
 
   getComponentStyle = (style: StyleType): StyleType => ({
     layout: style,
@@ -31,5 +30,4 @@ export class Layout extends React.Component<LayoutProps> {
       </View>
     );
   }
-
 }
