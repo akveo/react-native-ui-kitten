@@ -190,6 +190,8 @@ export class Toggle extends React.Component<Props> {
         width: style.width,
         height: style.height,
         borderRadius: style.height / 2,
+        borderWidth: style.borderWidth,
+        borderColor: style.onTintColor,
       },
       componentDisabledBox: {
         backgroundColor: style.tintColor,
@@ -257,7 +259,7 @@ export class Toggle extends React.Component<Props> {
       outputRange: [1, 0.01],
     });
     return (
-      <View style={[componentStyle.wrapper, styles.wrapper, style]}>
+      <View {...this.props} style={[componentStyle.wrapper, styles.wrapper, style]}>
         {!this.props.disabled && <View style={[styles.highlight, componentStyle.highlight]}/>}
         <TouchableOpacity
           onPressIn={this.onPressIn}

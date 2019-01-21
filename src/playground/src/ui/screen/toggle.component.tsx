@@ -18,6 +18,7 @@ interface State {
   toggle2Checked: boolean;
   toggle3Checked: boolean;
   toggle4Checked: boolean;
+  toggleErrorChecked: boolean;
 }
 
 class Toggle extends React.Component<Props, State> {
@@ -31,22 +32,27 @@ class Toggle extends React.Component<Props, State> {
     toggle2Checked: true,
     toggle3Checked: false,
     toggle4Checked: true,
+    toggleErrorChecked: false,
   };
 
-  onToggle1Change = () => {
-    this.setState({ toggle1Checked: !this.state.toggle1Checked });
+  onToggle1Change = (value: boolean) => {
+    this.setState({ toggle1Checked: value });
   };
 
-  onToggle2Change = () => {
-    this.setState({ toggle2Checked: !this.state.toggle2Checked });
+  onToggle2Change = (value: boolean) => {
+    this.setState({ toggle2Checked: value });
   };
 
-  onToggle3Change = () => {
-    this.setState({ toggle3Checked: !this.state.toggle3Checked });
+  onToggle3Change = (value: boolean) => {
+    this.setState({ toggle3Checked: value });
   };
 
-  onToggle4Change = () => {
-    this.setState({ toggle4Checked: !this.state.toggle4Checked });
+  onToggle4Change = (value: boolean) => {
+    this.setState({ toggle4Checked: value });
+  };
+
+  onToggleErrorChange = (value: boolean) => {
+    this.setState({ toggleErrorChecked: value });
   };
 
   render() {
@@ -85,6 +91,8 @@ class Toggle extends React.Component<Props, State> {
             <ToggleComponent
               status='error'
               style={this.props.themedStyle.component}
+              value={this.state.toggleErrorChecked}
+              onValueChange={this.onToggleErrorChange}
             />
             <ToggleComponent
               status='error'
