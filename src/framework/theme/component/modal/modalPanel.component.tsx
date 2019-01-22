@@ -2,29 +2,25 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Platform,
-  findNodeHandle,
 } from 'react-native';
-import { ModalService } from './modal.service';
+import { ModalComponent } from './modal.component';
+import { ModalService } from '../../service';
 
 interface ModalPanelProps {
-  children: any;
+  children: JSX.Element;
 }
 
 interface ModalPanelState {
-  dialogComponent: React.Component;
+  dialogComponent: JSX.Element | null;
   modalVisible: boolean;
-  viewRef: any; // todo: check if needed
   closeOnBackDrop: boolean;
 }
 
 export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> {
 
-  ref: any; // todo: add type
   state: ModalPanelState = {
     dialogComponent: null,
     modalVisible: false,
-    viewRef: null,
     closeOnBackDrop: false,
   };
 
@@ -40,13 +36,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     this.setState({ modalVisible: isVisible });
   }
 
-  onLayout(): void {
-    if (Platform.OS !== 'ios') {
-      this.setState({ viewRef: findNodeHandle(this.ref) });
-    }
-  }
-
-  showDialog(dialogComponent: any, closeOnBackDrop: boolean): void {
+  showDialog(dialogComponent: JSX.Element | null, closeOnBackDrop: boolean): void {
     this.setState({
       dialogComponent: dialogComponent,
       modalVisible: true,
@@ -54,22 +44,23 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     });
   }
 
-  onBackDrop(): void {
+  onBackDrop = (): void => {
     if (this.state.closeOnBackDrop) {
       this.setModalVisible(false);
     }
-  }
+  };
 
   render(): React.ReactNode {
-    // todo: add modal component to render
     return (
-      <View
-        style={styles.container}
-        pointerEvents='box-none'
-        ref={(component: any) => this.ref = component}
-        onLayout={() => this.onLayout()}
-      >
+      <View style={styles.container}>
         {this.props.children}
+        {this.state.dialogComponent &&
+        <ModalComponent
+          visible={this.state.modalVisible}
+          component={this.state.dialogComponent}
+          isBackDropAllowed={this.state.closeOnBackDrop}
+          onBackdrop={this.onBackDrop}
+        />}
       </View>
     );
   }

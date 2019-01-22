@@ -3,13 +3,12 @@ import {
   Modal,
   View,
   StyleSheet,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 interface ModalComponentProps {
   visible: boolean;
-  component: any;
-  backgroundRef: any;
+  component: JSX.Element | null;
   isBackDropAllowed: boolean;
   onBackdrop: () => void;
 }
@@ -17,33 +16,34 @@ interface ModalComponentProps {
 export class ModalComponent extends React.Component<ModalComponentProps> {
 
   renderBackground(): React.ReactNode {
-    return (
-      <View style={styles.background} />
-    );
+    return <View style={styles.background}/>;
   }
 
-  onBackDrop = (): void => {
-    if (this.props.isBackDropAllowed) {
-      this.props.onBackdrop();
-    }
-  };
+  renderComponent(): React.ReactNode {
+    return this.props.isBackDropAllowed ?
+      (
+        <TouchableWithoutFeedback onPress={this.props.onBackdrop}>
+          <View style={styles.componentContainer}>
+            {this.props.component}
+          </View>
+        </TouchableWithoutFeedback>
+      ) :
+      (
+        <View style={styles.componentContainer}>
+          {this.props.component}
+        </View>
+      );
+  }
 
   render(): React.ReactNode {
-    const { component, visible } = this.props;
-
     return (
       <Modal
         animationType='fade'
         transparent={true}
-        visible={visible}
+        visible={this.props.visible}
       >
         {this.renderBackground()}
-        <TouchableOpacity
-          style={styles.componentContainer}
-          onPress={this.onBackDrop}
-        >
-          {component}
-        </TouchableOpacity>
+        {this.renderComponent()}
       </Modal>
     );
   }

@@ -6,7 +6,7 @@ import {
 import { theme } from 'eva/packages/theme/eva';
 import { ThemeMappingType } from 'eva/packages/common';
 import {
-  StyleProvider,
+  ApplicationProvider,
   ThemeType,
 } from '@kitten/theme';
 import { withNavigation } from './navigation';
@@ -34,9 +34,13 @@ export default class App extends React.Component<any, State> {
     const Router = withNavigation(RootScreen, nestedScreens);
 
     return (
-      <StyleProvider styles={this.state.styles} theme={this.state.theme} mapping={mapping}>
+      <ApplicationProvider
+        styles={this.state.styles}
+        theme={this.state.theme}
+        mapping={mapping}
+      >
         <Router/>
-      </StyleProvider>
+      </ApplicationProvider>
     );
   }
 }

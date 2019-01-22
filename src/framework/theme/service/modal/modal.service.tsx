@@ -1,13 +1,14 @@
-// todo: add types
+import { ModalPanel } from '../../component';
+
 class ModalServiceType {
 
-  component: any = null;
+  component: ModalPanel | null = null;
 
-  setComponent(component: any) {
+  setComponent(component: ModalPanel | null) {
     this.component = component;
   }
 
-  showDialog(dialogComponent: any, closeOnBackDrop: boolean = false) {
+  showDialog(dialogComponent: JSX.Element, closeOnBackDrop: boolean = false) {
     if (this.component) {
       this.component.showDialog(dialogComponent, closeOnBackDrop);
     }
