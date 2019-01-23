@@ -1,25 +1,35 @@
-import {Injectable} from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
-import {Location} from '@angular/common';
-
-import {filter} from 'rxjs/operator/filter';
-
-declare const ga: any;
+import { Injectable } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class Analytics {
-	private _enabled: boolean;
+	private enabled: boolean;
 
-	constructor(private _location: Location, private _router: Router) {
-		this._enabled = window.location.href.indexOf('akveo.github.io') >= 0;
+	constructor(private location: Location,
+							private router: Router) {
+		this.enabled = window.location.href.indexOf('akveo.github.io') >= 0;
 	}
 
 	trackPageViews() {
-		if (this._enabled) {
-			filter.call(this._router.events, (event) => event instanceof NavigationEnd)
-					.subscribe(() => {
-						ga('send', {hitType: 'pageview', page: this._location.path()});
-					});
+		if (this.enabled) {
+			this.router.events
+				.filter((event) => event instanceof NavigationEnd)
+				.map(() => this.location.path())
+				.delay(50)
+				.subscribe((location: string) => {
+					this.gtmPushToDataLayer({event: 'pageView' , path: location});
+				});
 		}
+	}
+
+	trackEvent(eventName: string, eventVal: string = '') {
+		if (this.enabled) {
+			this.gtmPushToDataLayer({ event: eventName, eventValue: eventVal });
+		}
+	}
+
+	private gtmPushToDataLayer(params) {
+		(<any> window).dataLayer.push(params);
 	}
 }
