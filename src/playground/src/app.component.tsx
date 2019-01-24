@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  mapping,
-  style,
-} from 'eva/packages/mapping-kitten/eva';
-import { theme } from 'eva/packages/theme/eva';
-import { ThemeMappingType } from 'eva/packages/common';
+  ThemeMappingType,
+  ThemeMapType,
+} from 'eva/packages/common';
 import {
   ApplicationProvider,
   ThemeType,
@@ -14,7 +12,7 @@ import * as Screens from './ui/screen';
 
 interface State {
   mapping: ThemeMappingType;
-  styles: any;
+  styles: ThemeMapType;
   theme: ThemeType;
 }
 
@@ -23,9 +21,9 @@ export default class App extends React.Component<any, State> {
   constructor(props) {
     super(props);
     this.state = {
-      mapping: mapping,
-      styles: style,
-      theme: theme,
+      mapping: props.mapping,
+      styles: props.style,
+      theme: props.theme,
     };
   }
 
@@ -37,7 +35,7 @@ export default class App extends React.Component<any, State> {
       <ApplicationProvider
         styles={this.state.styles}
         theme={this.state.theme}
-        mapping={mapping}
+        mapping={this.state.mapping}
       >
         <Router/>
       </ApplicationProvider>
