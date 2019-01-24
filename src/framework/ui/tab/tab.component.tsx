@@ -1,9 +1,11 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
+  Text,
   ViewProps,
+  ImageProps,
+  TextProps,
   ImageSourcePropType,
 } from 'react-native';
 import {
@@ -32,21 +34,40 @@ export class Tab extends React.Component<Props> {
     };
   };
 
+  private createTextComponent = (style: StyleType): React.ReactElement<TextProps> => (
+    <Text
+      style={style}
+      key={1}>
+      {this.props.title}
+    </Text>
+  );
+
+  private createImageComponent = (style: StyleType): React.ReactElement<ImageProps> => (
+    <Image
+      style={style}
+      key={0}
+      source={this.props.icon}
+    />
+  );
+
+  private createComponentChildren = (style: StyleType) => {
+    const { icon, title } = this.props;
+
+    return [
+      icon ? this.createImageComponent(style.icon) : undefined,
+      title ? this.createTextComponent(style.title) : undefined,
+    ];
+  };
+
   render() {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+    const children = this.createComponentChildren(componentStyle);
 
     return (
       <View
         {...this.props}
         style={[this.props.style, componentStyle.container]}>
-        <Image
-          style={componentStyle.icon}
-          source={this.props.icon}
-        />
-        <Text
-          style={componentStyle.title}>
-          {this.props.title}
-        </Text>
+        {children}
       </View>
     );
   }

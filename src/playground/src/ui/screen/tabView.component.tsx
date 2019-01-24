@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
@@ -35,9 +36,15 @@ class TabView extends React.Component<Props, State> {
         style={this.props.themedStyle.container}
         selectedIndex={this.state.selectedIndex}
         onSelect={this.onSelect}>
-        <TabComponent title='❤️'>Tab 1</TabComponent>
-        <TabComponent title='💛️'>Tab 2</TabComponent>
-        <TabComponent title='💚️'>Tab 3</TabComponent>
+        <TabComponent title='❤️'>
+          <Text>Tab 1</Text>
+        </TabComponent>
+        <TabComponent title='💛️'>
+          <Text>Tab 2</Text>
+        </TabComponent>
+        <TabComponent title='💚️'>
+          <Text>Tab 3</Text>
+        </TabComponent>
       </TabViewComponent>
     );
   }
