@@ -24,15 +24,17 @@ export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps
 
 export class CheckBox extends React.Component<Props> {
 
-  onPress = () => {
-    this.props.onChange && this.props.onChange(this.props.checked);
+  private onPress = () => {
+    if (this.props.onChange) {
+      this.props.onChange(!this.props.checked);
+    }
   };
 
-  onPressIn = () => {
+  private onPressIn = () => {
     this.props.dispatch([Interaction.ACTIVE]);
   };
 
-  onPressOut = () => {
+  private onPressOut = () => {
     this.props.dispatch([]);
   };
 

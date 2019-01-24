@@ -36,7 +36,7 @@ describe('@checkbox: component checks', () => {
     });
     fireEvent.press(component.getByType(TouchableOpacity));
 
-    expect(onChange).toBeCalledWith(true);
+    expect(onChange).toBeCalledWith(false);
   });
 
 });

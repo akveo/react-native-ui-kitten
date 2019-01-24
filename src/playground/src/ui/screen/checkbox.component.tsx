@@ -26,27 +26,27 @@ class CheckBox extends React.Component<Props, State> {
     title: 'CheckBox',
   };
 
-  state: State = {
+  public state: State = {
     isCheckBox1Checked: false,
     isCheckBox2Checked: true,
     isCheckBox3Checked: false,
     isCheckBox4Checked: true,
   };
 
-  onCheckBox1Change = (checked: boolean) => {
-    this.setState({ isCheckBox1Checked: !checked });
+  private onCheckBox1Change = (checked: boolean) => {
+    this.setState({ isCheckBox1Checked: checked });
   };
 
-  onCheckBox2Change = (checked: boolean) => {
-    this.setState({ isCheckBox2Checked: !checked });
+  private onCheckBox2Change = (checked: boolean) => {
+    this.setState({ isCheckBox2Checked: checked });
   };
 
-  onCheckBox3Change = (checked: boolean) => {
-    this.setState({ isCheckBox3Checked: !checked });
+  private onCheckBox3Change = (checked: boolean) => {
+    this.setState({ isCheckBox3Checked: checked });
   };
 
-  onCheckBox4Change = (checked: boolean) => {
-    this.setState({ isCheckBox4Checked: !checked });
+  private onCheckBox4Change = (checked: boolean) => {
+    this.setState({ isCheckBox4Checked: checked });
   };
 
   render() {
