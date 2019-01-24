@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
   ViewProps,
 } from 'react-native';
@@ -22,34 +22,24 @@ interface TabBarProps {
 
 export type Props = TabBarProps & StyledComponentProps & ViewProps;
 
-interface State {
-  children: ChildElement[];
-}
-
-export class TabBar extends React.Component<Props, State> {
+export class TabBar extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
     selectedIndex: 0,
   };
 
-  static getDerivedStateFromProps(props: Props): Partial<State> {
-    return {
-      children: toArray(props.children),
-    };
-  }
-
-  public state: State = {
-    children: [],
-  };
-
-  private tabIndicator: React.RefObject<TabBarIndicator> = React.createRef();
+  private tabIndicatorRef: React.RefObject<TabBarIndicator> = React.createRef();
 
   public scrollToIndex(params: { index: number, animated?: boolean }) {
-    this.tabIndicator.current.scrollToIndex(params);
+    const { current: tabIndicator } = this.tabIndicatorRef;
+
+    tabIndicator.scrollToIndex(params);
   }
 
   public scrollToOffset(params: { offset: number, animated?: boolean }) {
-    this.tabIndicator.current.scrollToOffset(params);
+    const { current: tabIndicator } = this.tabIndicatorRef;
+
+    tabIndicator.scrollToOffset(params);
   }
 
   private onChildPress = (index: number) => {
@@ -58,20 +48,19 @@ export class TabBar extends React.Component<Props, State> {
     }
   };
 
-  private renderChild = (element: ChildElement, index: number) => {
+  private createComponentChild = (element: ChildElement, index: number) => {
     return (
-      <TouchableOpacity
+      <TouchableWithoutFeedback
         style={{ flex: 1 }}
         key={index}
-        activeOpacity={1.0}
         onPress={() => this.onChildPress(index)}>
-        {React.cloneElement(element, element.props)}
-      </TouchableOpacity>
+        {element}
+      </TouchableWithoutFeedback>
     );
   };
 
-  private renderChildren = (elements: ChildElement[]): ChildElement[] => {
-    return elements.map(this.renderChild);
+  private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
+    return toArray(source).map(this.createComponentChild);
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -90,19 +79,20 @@ export class TabBar extends React.Component<Props, State> {
 
   render() {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+    const children: ChildElement[] = this.createComponentChildren(this.props.children);
 
     return (
       <View>
         <View
           {...this.props}
           style={[this.props.style, componentStyle.bar]}>
-          {this.renderChildren(this.state.children)}
+          {children}
         </View>
         <TabBarIndicator
-          ref={this.tabIndicator}
+          ref={this.tabIndicatorRef}
           style={componentStyle.indicator}
           selectedPosition={this.props.selectedIndex}
-          positions={this.state.children.length}
+          positions={children.length}
         />
       </View>
     );

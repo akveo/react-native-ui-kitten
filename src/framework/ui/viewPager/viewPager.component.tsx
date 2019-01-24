@@ -4,15 +4,10 @@ import {
   ScrollView,
   ScrollViewProps,
 } from 'react-native';
-import {
-  toArray,
-  toReactElement,
-} from '../service/common.service';
+import { toArray } from '../service/common.service';
 import { ScrollEvent } from '../service/type';
 
-type ChildElement = React.ReactChild;
-type LazyChildElement = React.ReactElement<LazyChildElementProps>;
-type LazyChildElementProps = { loaded: boolean } & any;
+type ChildElement = React.ReactElement<any>;
 
 interface ViewPagerProps {
   contentWidth: number;
@@ -25,38 +20,14 @@ interface ViewPagerProps {
 
 export type Props = ScrollViewProps & ViewPagerProps;
 
-interface State {
-  children: LazyChildElement[];
-}
-
-export class ViewPager extends React.Component<Props, State> {
+export class ViewPager extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
     selectedIndex: 0,
     shouldLoadComponent: (): boolean => true,
   };
 
-  static getDerivedStateFromProps(props: Props, prevState: State): Partial<State> {
-    return {
-      children: lazify(prevState.children, (index: number): boolean => {
-        const element = prevState.children[index];
-        return !element.props.loaded || props.shouldLoadComponent(index);
-      }),
-    };
-  }
-
-  public state: State = {
-    children: [],
-  };
-
-  private scrollView: React.RefObject<ScrollView> = React.createRef();
-
-  constructor(props: Props) {
-    super(props);
-
-    const reactElements = toArray(props.children).map(toReactElement);
-    this.state.children = lazify(reactElements, this.props.shouldLoadComponent);
-  }
+  private scrollViewRef: React.RefObject<ScrollView> = React.createRef();
 
   public componentDidMount() {
     const { selectedIndex: index } = this.props;
@@ -64,10 +35,8 @@ export class ViewPager extends React.Component<Props, State> {
     this.scrollToIndex({ index });
   }
 
-  public shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
-    const selectionUpdated: boolean = this.props.selectedIndex !== nextProps.selectedIndex;
-
-    return selectionUpdated || nextState.children.some(this.shouldLoadElement);
+  public shouldComponentUpdate(nextProps: Props): boolean {
+    return this.props.selectedIndex !== nextProps.selectedIndex;
   }
 
   public componentDidUpdate() {
@@ -88,15 +57,10 @@ export class ViewPager extends React.Component<Props, State> {
 
   public scrollToOffset(params: { offset: number; animated?: boolean }) {
     const { offset, ...rest } = params;
+    const { current: scrollView } = this.scrollViewRef;
 
-    this.scrollView.current.scrollTo({ x: offset, ...rest });
+    scrollView.scrollTo({ x: offset, ...rest });
   }
-
-  private shouldLoadElement = (element: LazyChildElement, index: number): boolean => {
-    const currentElement: LazyChildElement = this.state.children[index];
-
-    return currentElement.props.loaded !== element.props.loaded;
-  };
 
   private onScroll = (event: ScrollEvent) => {
     if (this.props.onOffsetChange) {
@@ -116,24 +80,27 @@ export class ViewPager extends React.Component<Props, State> {
     }
   };
 
-  private renderChild = (element: LazyChildElement, index: number): LazyChildElement => {
-    const { loaded: isLoaded, ...restProps } = element.props;
+  private createComponentChild = (element: ChildElement, index: number): ChildElement => {
+    const { shouldLoadComponent: shouldLoad, contentWidth } = this.props;
 
-    return (
-      <View {...restProps} key={index} width={this.props.contentWidth}>
-        {isLoaded ? undefined : element}
-      </View>
-    );
+    return React.createElement(View, {
+      ...element.props,
+      key: index,
+      width: contentWidth,
+      children: shouldLoad(index) ? element : undefined,
+    });
   };
 
-  private renderChildren = (elements: LazyChildElement[]): LazyChildElement[] => {
-    return elements.map(this.renderChild);
+  private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
+    return toArray(source).map(this.createComponentChild);
   };
 
   render() {
+    const children: ChildElement[] = this.createComponentChildren(this.props.children);
+
     return (
       <ScrollView
-        ref={this.scrollView}
+        ref={this.scrollViewRef}
         bounces={false}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
@@ -141,16 +108,8 @@ export class ViewPager extends React.Component<Props, State> {
         pagingEnabled={true}
         onScroll={this.onScroll}
         onMomentumScrollEnd={this.onScrollEnd}>
-        {this.renderChildren(this.state.children)}
+        {children}
       </ScrollView>
     );
   }
-}
-
-function lazify(source: React.ReactElement<any>[], predicate: (index: number) => boolean): LazyChildElement[] {
-  const createLazyElement = (element: React.ReactElement<any>, index: number): LazyChildElement => {
-    const additionalProps = { loaded: !predicate(index) };
-    return React.cloneElement(element, { ...additionalProps, ...element.props });
-  };
-  return source.map(createLazyElement);
 }

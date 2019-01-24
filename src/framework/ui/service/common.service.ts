@@ -1,5 +1,3 @@
-import React from 'react';
-import { Text } from 'react-native';
 /**
  * Creates array from `source` parameter if needed
  *
@@ -13,12 +11,3 @@ export function toArray<T>(source: T | T[]): T[] {
   }
   return [source];
 }
-
-export function toReactElement(source: React.ReactChild): React.ReactElement<any> {
-  if (source.hasOwnProperty('props')) {
-    return source as React.ReactElement<any>;
-  }
-  // @ts-ignore - element is type of React.ReactText
-  return React.createElement(Text, { children: source });
-}
-
