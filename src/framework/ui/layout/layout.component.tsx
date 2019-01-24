@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   ViewProps,
-  StyleSheet,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -24,19 +23,12 @@ export class Layout extends React.Component<Props> {
 
   render() {
     const componentStyle = this.getComponentStyle(this.props.themedStyle);
+    const { style, ...restProps } = this.props;
 
     return (
-      <View {...this.props}>
-        <View style={[componentStyle.layout, styles.layout]}>
-          {this.props.children}
-        </View>
+      <View {...restProps} style={[componentStyle.layout, style]}>
+        {this.props.children}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  layout: {
-    flex: 1,
-  },
-});

@@ -38,5 +38,6 @@ export const LayoutScreen = withStyles(Layout, (theme: ThemeType) => ({
   },
   layout: {
     height: 300,
+    backgroundColor: '#fff8e0',
   },
 }));
