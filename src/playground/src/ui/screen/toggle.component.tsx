@@ -132,7 +132,7 @@ class Toggle extends React.Component<Props, State> {
           </View>
         </View>
       </View>
-    )
+    );
   }
 
 }

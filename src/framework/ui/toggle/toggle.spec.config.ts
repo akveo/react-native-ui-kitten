@@ -6,18 +6,18 @@ export const mapping: ThemeMappingType = {
     'meta': {
       'variants': {
         'status': [
-          'error'
+          'error',
         ],
         'size': [
           'small',
-          'big'
-        ]
+          'big',
+        ],
       },
       'states': [
         'checked',
         'disabled',
-        'active'
-      ]
+        'active',
+      ],
     },
     'appearance': {
       'default': {
@@ -34,12 +34,12 @@ export const mapping: ThemeMappingType = {
           'highlightColor': 'transparent',
           'state': {
             'active': {
-              'highlightColor': '#e5e7ea'
+              'highlightColor': '#e5e7ea',
             },
             'disabled': {
-              'onTintColor': 'gray-dark'
-            }
-          }
+              'onTintColor': 'gray-dark',
+            },
+          },
         },
         'variant': {
           'status': {
@@ -49,11 +49,11 @@ export const mapping: ThemeMappingType = {
                 'onTintColor': 'pink-primary',
                 'state': {
                   'disabled': {
-                    'tintColor': 'gray-light'
-                  }
-                }
-              }
-            }
+                    'tintColor': 'gray-light',
+                  },
+                },
+              },
+            },
           },
           'size': {
             'big': {
@@ -62,8 +62,8 @@ export const mapping: ThemeMappingType = {
                 'height': 42,
                 'width': 72,
                 'highlightWidth': 82,
-                'highlightHeight': 52
-              }
+                'highlightHeight': 52,
+              },
             },
             'small': {
               'mapping': {
@@ -71,14 +71,14 @@ export const mapping: ThemeMappingType = {
                 'height': 22,
                 'width': 38,
                 'highlightWidth': 48,
-                'highlightHeight': 32
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+                'highlightHeight': 32,
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 export const theme: ThemeType = {
@@ -88,5 +88,5 @@ export const theme: ThemeType = {
   'gray-primary': '#A6AEBD',
   'gray-dark': '#8992A3',
   'gray-highlight': '#EDF0F5',
-  'pink-primary': '#FF3D71'
+  'pink-primary': '#FF3D71',
 };
