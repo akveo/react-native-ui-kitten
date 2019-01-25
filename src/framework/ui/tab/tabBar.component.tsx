@@ -51,6 +51,7 @@ export class TabBar extends React.Component<Props> {
   private createComponentChild = (element: ChildElement, index: number) => {
     return (
       <TouchableWithoutFeedback
+        {...element.props}
         style={{ flex: 1 }}
         key={index}
         onPress={() => this.onChildPress(index)}>
