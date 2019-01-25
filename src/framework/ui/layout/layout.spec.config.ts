@@ -1,8 +1,11 @@
-export const mapping = {
+import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeType } from '@kitten/theme';
+
+export const mapping: ThemeMappingType = {
   Layout: {
     meta: {
       variants: {},
-      states: []
+      states: [],
     },
     appearance: {
       default: {
@@ -13,19 +16,19 @@ export const mapping = {
           borderColor: 'blue-primary',
           borderRadius: 3,
           borderWidth: 1,
-          state: {}
-        }
-      }
-    }
-  }
+          state: {},
+        },
+      },
+    },
+  },
 };
 
-export const theme = {
+export const theme: ThemeType = {
   'blue-primary': '#3366FF',
   'blue-dark': '#2541CC',
   'gray-light': '#DDE1EB',
   'gray-primary': '#A6AEBD',
   'gray-dark': '#8992A3',
   'gray-highlight': '#EDF0F5',
-  'pink-primary': '#FF3D71'
+  'pink-primary': '#FF3D71',
 };
