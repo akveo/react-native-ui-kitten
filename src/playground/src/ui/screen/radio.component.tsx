@@ -18,7 +18,6 @@ interface State {
   isRadio2Checked: boolean;
   isRadio3Checked: boolean;
   isRadio4Checked: boolean;
-  variant: string;
 }
 
 class Radio extends React.Component<Props, State> {
@@ -27,31 +26,30 @@ class Radio extends React.Component<Props, State> {
     title: 'Radio',
   };
 
-  state: State = {
+  public state: State = {
     isRadio1Checked: false,
     isRadio2Checked: true,
     isRadio3Checked: false,
     isRadio4Checked: true,
-    variant: 'default',
   };
 
-  onRadio1Change = (selected: boolean) => {
+  private onRadio1Change = (selected: boolean) => {
     this.setState({ isRadio1Checked: !selected });
   };
 
-  onRadio2Change = (selected: boolean) => {
+  private onRadio2Change = (selected: boolean) => {
     this.setState({ isRadio2Checked: !selected });
   };
 
-  onRadio3Change = (selected: boolean) => {
+  private onRadio3Change = (selected: boolean) => {
     this.setState({ isRadio3Checked: !selected });
   };
 
-  onRadio4Change = (selected: boolean) => {
+  private onRadio4Change = (selected: boolean) => {
     this.setState({ isRadio4Checked: !selected });
   };
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>

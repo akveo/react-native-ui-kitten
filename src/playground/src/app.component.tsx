@@ -18,20 +18,19 @@ interface State {
   theme: ThemeType;
 }
 
-export default class App extends React.Component<any, State> {
+type Props = any;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      mapping: mapping,
-      styles: style,
-      theme: theme,
-    };
-  }
+export default class App extends React.Component<Props, State> {
 
-  render() {
-    const { RadioScreen: RootScreen, ...nestedScreens } = Screens;
-    const Router = withNavigation(RootScreen, nestedScreens);
+  public state: State = {
+    mapping: mapping,
+    styles: style,
+    theme: theme,
+  };
+
+  public render(): React.ReactNode {
+    const { RadioScreen: RootScreen, ...screens } = Screens;
+    const Router: React.ComponentClass = withNavigation(RootScreen, screens);
 
     return (
       <StyleProvider styles={this.state.styles} theme={this.state.theme} mapping={mapping}>

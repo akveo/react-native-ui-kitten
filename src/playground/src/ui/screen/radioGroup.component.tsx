@@ -28,7 +28,7 @@ class RadioGroup extends React.Component<Props, State> {
     title: 'Radio Group',
   };
 
-  state: State = {
+  public state: State = {
     selectedIndexGroup1: 0,
     selectedIndexGroup2: 0,
     selectedIndexGroup3: 0,
@@ -52,7 +52,7 @@ class RadioGroup extends React.Component<Props, State> {
     });
   };
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>
