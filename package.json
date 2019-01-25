@@ -16,9 +16,9 @@
     "clean:src": "rimraf ./dist/src/framework",
     "clean:pg": "rimraf ./dist/src/playground",
     "clean": "rimraf ./dist",
-    "lint:src": "tslint --project ./src/framework/tsconfig.json ./src/framework/**/*.ts{,x}",
+    "lint:src": "tslint -p ./src/framework/tsconfig.json",
     "lint:src-fix": "npm run lint:src -- --fix",
-    "lint:pg": "tslint --project ./src/playground/tsconfig.json ./src/playground/**/*.ts{,x}",
+    "lint:pg": "tslint -p ./src/playground/tsconfig.json",
     "lint:pg-fix": "npm run lint:pg -- --fix",
     "lint": "npm run lint:src && npm run lint:pg",
     "lint:fix": "npm run lint:src-fix && npm run lint:pg-fix",
@@ -54,7 +54,7 @@
     "react-test-renderer": "^16.6.0",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
-    "tslint": "^5.11.0",
+    "tslint": "^5.12.1",
     "typescript": "^3.1.6"
   }
 }

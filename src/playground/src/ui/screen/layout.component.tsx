@@ -26,7 +26,7 @@ class Layout extends React.Component<Props> {
           <Text>Layout</Text>
         </LayoutComponent>
       </View>
-    )
+    );
   }
 
 }
