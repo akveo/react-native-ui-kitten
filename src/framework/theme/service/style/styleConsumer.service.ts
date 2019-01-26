@@ -49,7 +49,7 @@ export class StyleConsumerService {
     });
 
     if (generatedMapping === undefined && mapping[component] !== undefined) {
-      const meta = this.createStyleMeta(mapping[component].meta, props);
+      const meta: ComponentStyleMetaType = this.createStyleMeta(mapping[component].meta, props);
 
       return createStyle(mapping, component, meta.appearance, meta.variants, [...interaction, ...meta.states]);
     }
@@ -63,7 +63,9 @@ export class StyleConsumerService {
    *
    * @return meta (ComponentStyleMetaType) on style applied to component
    */
-  private createStyleMeta<P extends StyledComponentProps>(meta: ComponentMapMetaType, props: P): ComponentStyleMetaType {
+  private createStyleMeta<P extends StyledComponentProps>(meta: ComponentMapMetaType,
+                                                          props: P): ComponentStyleMetaType {
+
     return {
       appearance: props.appearance,
       variants: this.getDerivedVariants(Object.keys(meta.variants), props),
@@ -78,9 +80,11 @@ export class StyleConsumerService {
    * @return variants (string[]) included in derived props
    */
   private getDerivedVariants<P extends StyledComponentProps>(source: string[], props: P): string[] {
-    const derivedGroups: string[] = Object.keys(props).filter((prop: string) => source.includes(prop));
+    const derivedGroups: string[] = Object.keys(props).filter((prop: string): boolean => {
+      return source.includes(prop);
+    });
 
-    return derivedGroups.map((group: string) => props[group]);
+    return derivedGroups.map((group: string): string => props[group]);
   }
 
   /**
@@ -90,11 +94,11 @@ export class StyleConsumerService {
    * @return states (string[]) included in derived props
    */
   private getDerivedStates<P extends StyledComponentProps>(source: string[], props: P): string[] {
-    const derivedStates: string[] = Object.keys(props).filter((prop: string) => {
+    const derivedStates: string[] = Object.keys(props).filter((prop: string): boolean => {
       return props[prop] === true && source.includes(prop);
     });
 
-    return derivedStates.map((state: string) => State.parse(state));
+    return derivedStates.map((state: string): State => State.parse(state));
   }
 
   /**
@@ -113,7 +117,7 @@ export class StyleConsumerService {
    * @return (string | undefined) - key identical to some of `source` keys if presents
    */
   private findGeneratedQuery(source: string[], query: string[]): string | undefined {
-    const matches: string[] = source.filter((key: string) => {
+    const matches: string[] = source.filter((key: string): boolean => {
       const keyQuery: string[] = key.split(SEPARATOR_MAPPING_ENTRY);
       return this.compareArrays(query, keyQuery);
     });

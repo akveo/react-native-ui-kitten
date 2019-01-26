@@ -23,16 +23,13 @@ interface State {
 
 export class StyleProvider extends React.PureComponent<Props, State> {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      mapping: props.mapping,
-      styles: props.styles,
-      theme: props.theme,
-    };
-  }
+  public state: State = {
+    mapping: this.props.mapping,
+    styles: this.props.styles,
+    theme: this.props.theme,
+  };
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <MappingProvider mapping={this.state.mapping} styles={this.state.styles}>
         <ThemeProvider theme={this.state.theme}>
