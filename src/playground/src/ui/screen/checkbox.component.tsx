@@ -49,7 +49,7 @@ class CheckBox extends React.Component<Props, State> {
     this.setState({ isCheckBox4Checked: checked });
   };
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>

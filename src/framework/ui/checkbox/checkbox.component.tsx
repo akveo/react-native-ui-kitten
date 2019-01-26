@@ -10,14 +10,13 @@ import {
   StyleType,
   Interaction,
 } from '@kitten/theme';
-import { CheckMark } from '@kitten/ui/drawable/checkmark/checkmark.component';
+import { CheckMark } from '../drawable/checkmark/checkmark.component';
 
 interface CheckBoxProps {
   checked?: boolean;
+  status?: string;
+  size?: string;
   onChange?: (checked: boolean) => void;
-  appearance?: string | 'default';
-  status?: string | 'error';
-  size?: string | 'big' | 'small';
 }
 
 export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps;
@@ -38,11 +37,8 @@ export class CheckBox extends React.Component<Props> {
     this.props.dispatch([]);
   };
 
-  // We don't use `check-mark` icon currently
-  // FIXME: Use icon
-
   private getComponentStyle = (style: StyleType): StyleType => {
-    return ({
+    return {
       border: {
         width: style.size,
         height: style.size,
@@ -63,11 +59,12 @@ export class CheckBox extends React.Component<Props> {
         backgroundColor: style.highlightColor,
         opacity: style.highlightOpacity,
       },
-    });
+    };
   };
 
-  render() {
-    const componentStyle = this.getComponentStyle(this.props.themedStyle);
+  public render(): React.ReactNode {
+    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+
     return (
       <TouchableOpacity
         {...this.props}
