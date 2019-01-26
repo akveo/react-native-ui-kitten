@@ -49,7 +49,7 @@ class TabBar extends React.Component<Props, State> {
     backgroundColor: index === this.state.bar2SelectedIndex ? 'black' : 'transparent',
   });
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>

@@ -48,7 +48,21 @@ export class TabBar extends React.Component<Props> {
     }
   };
 
-  private createComponentChild = (element: ChildElement, index: number) => {
+  private getComponentStyle = (source: StyleType): StyleType => {
+    return {
+      bar: {
+        flexDirection: 'row',
+        height: source.barSize,
+      },
+      indicator: {
+        height: source.indicatorSize,
+        borderRadius: source.indicatorBorderRadius,
+        backgroundColor: source.indicatorColor,
+      },
+    };
+  };
+
+  private createComponentChild = (element: ChildElement, index: number): ChildElement => {
     return (
       <TouchableWithoutFeedback
         {...element.props}
@@ -64,21 +78,7 @@ export class TabBar extends React.Component<Props> {
     return toArray(source).map(this.createComponentChild);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    return {
-      bar: {
-        flexDirection: 'row',
-        height: source.barSize,
-      },
-      indicator: {
-        height: source.indicatorSize,
-        borderRadius: source.indicatorBorderRadius,
-        backgroundColor: source.indicatorColor,
-      },
-    };
-  };
-
-  render() {
+  public render(): React.ReactNode {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
     const children: ChildElement[] = this.createComponentChildren(this.props.children);
 

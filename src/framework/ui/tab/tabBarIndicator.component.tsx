@@ -108,7 +108,7 @@ export class TabBarIndicator extends React.Component<Props> {
     };
   };
 
-  render() {
+  public render(): React.ReactNode {
     const componentStyle: StyleType = this.getComponentStyle(this.props.style);
 
     return (

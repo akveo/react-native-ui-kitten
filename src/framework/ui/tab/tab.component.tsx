@@ -50,7 +50,7 @@ export class Tab extends React.Component<Props> {
     />
   );
 
-  private createComponentChildren = (style: StyleType) => {
+  private createComponentChildren = (style: StyleType): React.ReactNode => {
     const { icon, title } = this.props;
 
     return [
@@ -59,7 +59,7 @@ export class Tab extends React.Component<Props> {
     ];
   };
 
-  render() {
+  public render(): React.ReactNode {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
     const children = this.createComponentChildren(componentStyle);
 

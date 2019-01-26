@@ -30,7 +30,7 @@ class TabView extends React.Component<Props, State> {
     this.setState({ selectedIndex });
   };
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <TabViewComponent
         style={this.props.themedStyle.container}

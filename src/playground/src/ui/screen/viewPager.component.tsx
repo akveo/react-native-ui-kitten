@@ -24,7 +24,7 @@ class ViewPager extends React.Component<Props, State> {
     title: 'View Pager',
   };
 
-  state: State = {
+  public state: State = {
     selectedIndex: 0,
   };
 
@@ -32,7 +32,7 @@ class ViewPager extends React.Component<Props, State> {
     this.state.selectedIndex = index;
   };
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <ViewPagerComponent
         selectedIndex={this.state.selectedIndex}

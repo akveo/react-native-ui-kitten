@@ -95,7 +95,7 @@ export class ViewPager extends React.Component<Props> {
     return toArray(source).map(this.createComponentChild);
   };
 
-  render() {
+  public render(): React.ReactNode {
     const children: ChildElement[] = this.createComponentChildren(this.props.children);
 
     return (

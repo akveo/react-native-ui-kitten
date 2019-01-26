@@ -92,7 +92,7 @@ export class TabView extends React.Component<Props> {
     }, new TabViewChildren());
   };
 
-  render() {
+  public render(): React.ReactNode {
     const { tabs, content } = this.createComponentChildren(this.props.children);
 
     return (
