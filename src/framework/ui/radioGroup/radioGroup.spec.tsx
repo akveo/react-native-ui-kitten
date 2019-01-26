@@ -10,7 +10,7 @@ import {
   StyleProviderProps,
 } from '@kitten/theme';
 import {
-  RadioGroup,
+  RadioGroup as RadioGroupComponent,
   Props as RadioGroupProps,
 } from './radioGroup.component';
 import {
@@ -19,15 +19,16 @@ import {
 } from '../radio/radio.component';
 import * as config from './radioGroup.spec.config';
 
+const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
+const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
+
 const Mock = (props?: RadioGroupProps): React.ReactElement<StyleProviderProps> => (
   <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <GroupMock {...props}/>
+    <RadioGroup {...props}/>
   </StyleProvider>
 );
 
-const GroupMock = styled<RadioGroup, RadioGroupProps>(RadioGroup);
-
-const ChildMock = styled<RadioComponent, RadioProps>(RadioComponent);
+const ChildMock = Radio;
 
 describe('@radioGroup: component checks', () => {
 
