@@ -5,15 +5,17 @@ import {
 } from 'react-native';
 import { ModalComponent } from './modal.component';
 import { ModalService } from '../../service';
+import { ModalAnimationType } from '../../type';
 
-interface ModalPanelProps {
-  children: JSX.Element;
+export interface ModalPanelProps {
+  children: React.ReactElement<any> | React.ReactElement<any>[];
 }
 
 interface ModalPanelState {
-  dialogComponent: JSX.Element | null;
+  dialogComponent: React.ReactElement<any> | React.ReactElement<any>[] | null;
   modalVisible: boolean;
   closeOnBackDrop: boolean;
+  animationType: ModalAnimationType;
 }
 
 export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> {
@@ -22,6 +24,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     dialogComponent: null,
     modalVisible: false,
     closeOnBackDrop: false,
+    animationType: ModalAnimationType.fade,
   };
 
   componentDidMount(): void {
@@ -36,11 +39,14 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     this.setState({ modalVisible: isVisible });
   }
 
-  showDialog(dialogComponent: JSX.Element | null, closeOnBackDrop: boolean): void {
+  showDialog(dialogComponent: React.ReactElement<any> | React.ReactElement<any>[] | null,
+             closeOnBackDrop: boolean,
+             animationType: ModalAnimationType): void {
     this.setState({
       dialogComponent: dialogComponent,
       modalVisible: true,
       closeOnBackDrop: closeOnBackDrop,
+      animationType: animationType,
     });
   }
 
@@ -60,6 +66,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
           component={this.state.dialogComponent}
           isBackDropAllowed={this.state.closeOnBackDrop}
           onBackdrop={this.onBackDrop}
+          animationType={this.state.animationType}
         />}
       </View>
     );

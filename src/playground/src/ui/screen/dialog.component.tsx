@@ -10,6 +10,7 @@ import {
   ThemeType,
   withStyles,
   ModalService,
+  ModalAnimationType,
 } from '@kitten/theme';
 import { NavigationScreenProps } from 'react-navigation';
 
@@ -21,9 +22,13 @@ class Dialog extends React.Component<Props> {
     title: 'Modal',
   };
 
+  createModal = (): React.ReactElement<any> => (
+    <TestModal onCloseModal={() => ModalService.hideModal()}/>
+  );
+
   showModal = (): void => {
-    const component = <TestModal onCloseModal={() => ModalService.hideModal()}/>;
-    ModalService.showDialog(component);
+    const component = this.createModal();
+    ModalService.showDialog(component, false, ModalAnimationType.slide);
   };
 
   render() {
@@ -34,7 +39,7 @@ class Dialog extends React.Component<Props> {
           title='Show Modal'
         />
       </View>
-    )
+    );
   }
 
 }

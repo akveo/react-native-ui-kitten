@@ -1,20 +1,26 @@
-import { ModalPanel } from '../../component';
+import {
+  ModalPanel,
+} from '../../component';
+import React from 'react';
+import { ModalAnimationType } from '../../type';
 
 class ModalServiceType {
 
   component: ModalPanel | null = null;
 
-  setComponent(component: ModalPanel | null) {
+  setComponent(component: ModalPanel | null): void {
     this.component = component;
   }
 
-  showDialog(dialogComponent: JSX.Element, closeOnBackDrop: boolean = false) {
+  showDialog(dialogComponent: React.ReactElement<any> | React.ReactElement<any>[] | null,
+             closeOnBackDrop: boolean = false,
+             animationType: ModalAnimationType = ModalAnimationType.fade): void {
     if (this.component) {
-      this.component.showDialog(dialogComponent, closeOnBackDrop);
+      this.component.showDialog(dialogComponent, closeOnBackDrop, animationType);
     }
   }
 
-  hideModal() {
+  hideModal(): void {
     this.component.setModalVisible(false);
   }
 }

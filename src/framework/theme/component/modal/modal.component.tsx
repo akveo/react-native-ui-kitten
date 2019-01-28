@@ -2,43 +2,52 @@ import React from 'react';
 import {
   Modal,
   View,
+  ViewProps,
+  TouchableWithoutFeedbackProps,
   StyleSheet,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { ModalAnimationType } from '../../type';
 
 interface ModalComponentProps {
   visible: boolean;
-  component: JSX.Element | null;
+  component: React.ReactElement<any> | React.ReactElement<any>[];
   isBackDropAllowed: boolean;
+  animationType?: ModalAnimationType;
   onBackdrop: () => void;
 }
 
 export class ModalComponent extends React.Component<ModalComponentProps> {
 
-  renderBackground(): React.ReactNode {
+  static defaultProps: Partial<ModalComponentProps> = {
+    animationType: ModalAnimationType.fade,
+  };
+
+  renderBackground(): React.ReactElement<ViewProps> {
     return <View style={styles.background}/>;
   }
 
-  renderComponent(): React.ReactNode {
+  renderChild(): React.ReactElement<ViewProps> {
+    return (
+      <View style={styles.componentContainer}>
+        {this.props.component}
+      </View>
+    );
+  }
+
+  renderComponent(): React.ReactElement<ViewProps | TouchableWithoutFeedbackProps> {
     return this.props.isBackDropAllowed ?
       (
         <TouchableWithoutFeedback onPress={this.props.onBackdrop}>
-          <View style={styles.componentContainer}>
-            {this.props.component}
-          </View>
+          {this.renderChild()}
         </TouchableWithoutFeedback>
-      ) :
-      (
-        <View style={styles.componentContainer}>
-          {this.props.component}
-        </View>
-      );
+      ) : this.renderChild();
   }
 
-  render(): React.ReactNode {
+  render(): React.ReactElement<any> {
     return (
       <Modal
-        animationType='fade'
+        animationType={this.props.animationType}
         transparent={true}
         visible={this.props.visible}
       >

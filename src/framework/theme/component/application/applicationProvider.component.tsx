@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   ThemeMappingType,
   ThemeMapType,
@@ -10,7 +10,7 @@ import { ModalPanel } from '../modal';
 import { StyleProvider } from '../style';
 
 interface ApplicationProviderProps {
-  children: JSX.Element | ReactNode | null;
+  children: React.ReactElement<any> | React.ReactElement<any>[];
 }
 
 export type Props = MappingProviderProps & ThemeProviderProps & ApplicationProviderProps;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@ modal component/panel checks * modal component renders properly 1`] = `
+exports[`@modal component/panel checks * modal component renders properly 1`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
@@ -40,7 +40,7 @@ exports[`@ modal component/panel checks * modal component renders properly 1`] =
 </Modal>
 `;
 
-exports[`@ modal component/panel checks * modal component renders properly 2`] = `
+exports[`@modal component/panel checks * modal component renders properly 2`] = `
 <Modal
   animationType="fade"
   hardwareAccelerated={false}
@@ -80,7 +80,7 @@ exports[`@ modal component/panel checks * modal component renders properly 2`] =
 </Modal>
 `;
 
-exports[`@ modal component/panel checks * modal panel render with props / children checking 1`] = `
+exports[`@modal component/panel checks * modal panel render with props / children checking 1`] = `
 <View
   style={
     Object {
@@ -96,7 +96,7 @@ exports[`@ modal component/panel checks * modal panel render with props / childr
 </View>
 `;
 
-exports[`@ modal component/panel checks * modal panel renders properly 1`] = `
+exports[`@modal component/panel checks * modal panel renders properly 1`] = `
 <View
   style={
     Object {

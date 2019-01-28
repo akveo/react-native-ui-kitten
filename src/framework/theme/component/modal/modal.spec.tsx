@@ -7,9 +7,22 @@ import {
 import { ModalPanel } from './modalPanel.component';
 import { ModalComponent } from './modal.component';
 
-describe('@ modal component/panel checks', () => {
+describe('@modal component/panel checks', () => {
 
-  class ModalPanelTest extends React.PureComponent {
+  interface HooksProps {
+    componentDidMount?: () => void;
+    componentWillUnmount?: () => void;
+  }
+
+  class ModalPanelTest extends React.Component<HooksProps> {
+
+    componentDidMount(): void {
+      this.props.componentDidMount && this.props.componentDidMount();
+    }
+
+    componentWillUnmount() {
+      this.props.componentWillUnmount && this.props.componentWillUnmount();
+    }
 
     render() {
       return (
@@ -60,11 +73,7 @@ describe('@ modal component/panel checks', () => {
       isBackDropAllowed: false,
       onBackdrop: testOnBackDrop,
     };
-    const modal = <ModalComponent
-      visible={modalPassingProps.visible}
-      component={modalPassingProps.component}
-      isBackDropAllowed={modalPassingProps.isBackDropAllowed}
-      onBackdrop={modalPassingProps.onBackdrop}/>;
+    const modal = <ModalComponent {...modalPassingProps}/>;
 
     expect(modal.props.visible).toBe(modalPassingProps.visible);
     expect(modal.props.component).toBe(modalPassingProps.component);
@@ -76,20 +85,12 @@ describe('@ modal component/panel checks', () => {
     const componentDidMount = jest.fn();
     const componentWillUnmount = jest.fn();
 
-    class HooksTest extends ModalPanelTest {
-
-      constructor(props) {
-        super(props);
-        this.componentDidMount = componentDidMount;
-        this.componentWillUnmount = componentWillUnmount;
-      }
-
-      render() {
-        return <ModalPanelTest/>;
-      }
-    }
-
-    const wrapper = render(<HooksTest/>);
+    const wrapper = render(
+      <ModalPanelTest
+        componentDidMount={componentDidMount}
+        componentWillUnmount={componentWillUnmount}
+      />,
+    );
     expect(componentDidMount).toHaveBeenCalled();
     wrapper.unmount();
     expect(componentWillUnmount).toHaveBeenCalled();
