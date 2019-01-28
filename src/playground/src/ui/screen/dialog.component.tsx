@@ -10,7 +10,7 @@ import {
   ThemeType,
   withStyles,
   ModalService,
-  ModalAnimationType,
+  ModalComponentCloseProps,
 } from '@kitten/theme';
 import { NavigationScreenProps } from 'react-navigation';
 
@@ -22,13 +22,13 @@ class Dialog extends React.Component<Props> {
     title: 'Modal',
   };
 
-  createModal = (): React.ReactElement<any> => (
-    <TestModal onCloseModal={() => ModalService.hideModal()}/>
+  private createModal = (): React.ReactElement<any> => (
+    <TestModal/>
   );
 
-  showModal = (): void => {
+  private showModal = (): void => {
     const component = this.createModal();
-    ModalService.showDialog(component, false, ModalAnimationType.slide);
+    ModalService.showDialog(component, true);
   };
 
   render() {
@@ -46,16 +46,25 @@ class Dialog extends React.Component<Props> {
 
 export const DialogScreen = withStyles(Dialog, (theme: ThemeType) => ({}));
 
-interface TestModalProps {
-  onCloseModal: () => void;
-}
+class TestModal extends React.Component<ModalComponentCloseProps> {
 
-class TestModal extends React.Component<TestModalProps> {
+  private createModal = (): React.ReactElement<any> => (
+    <InnerTestModal/>
+  );
+
+  private showModal = (): void => {
+    const component = this.createModal();
+    ModalService.showDialog(component);
+  };
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>This is test Modal</Text>
+      <View style={styles.outerModal}>
+        <Text>This is test Outer Modal</Text>
+        <Button
+          title='Open Inner Modal'
+          onPress={this.showModal}
+        />
         <Button
           title='Close Modal'
           onPress={this.props.onCloseModal}
@@ -66,12 +75,38 @@ class TestModal extends React.Component<TestModalProps> {
 
 }
 
+class InnerTestModal extends React.Component<ModalComponentCloseProps> {
+
+  render(): React.ReactNode {
+    return (
+      <View style={styles.innerModal}>
+        <Text>This is test Inner Modal</Text>
+        <Button
+          title='Close Modal'
+          onPress={this.props.onCloseModal}
+        />
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
-  container: {
+  outerModal: {
     width: 300,
     height: 300,
-    backgroundColor: 'white',
+    backgroundColor: '#d87d8f',
     alignItems: 'center',
     justifyContent: 'center',
+    top: 200,
+    left: 50,
+  },
+  innerModal: {
+    width: 150,
+    height: 150,
+    backgroundColor: '#adbbd1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 450,
+    left: 100,
   },
 });

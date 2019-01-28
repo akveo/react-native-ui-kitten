@@ -1,8 +1,5 @@
-import {
-  ModalPanel,
-} from '../../component';
 import React from 'react';
-import { ModalAnimationType } from '../../type';
+import { ModalPanel } from '../../component';
 
 class ModalServiceType {
 
@@ -12,16 +9,10 @@ class ModalServiceType {
     this.component = component;
   }
 
-  showDialog(dialogComponent: React.ReactElement<any> | React.ReactElement<any>[] | null,
-             closeOnBackDrop: boolean = false,
-             animationType: ModalAnimationType = ModalAnimationType.fade): void {
+  showDialog(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean = false): void {
     if (this.component) {
-      this.component.showDialog(dialogComponent, closeOnBackDrop, animationType);
+      this.component.showDialog(dialogComponent, closeOnBackDrop);
     }
-  }
-
-  hideModal(): void {
-    this.component.setModalVisible(false);
   }
 }
 

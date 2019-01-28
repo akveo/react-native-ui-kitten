@@ -25,9 +25,6 @@ export type StyleType = any;
 export type ThemedStyleType = any;
 export type StyleSheetType = any;
 
-
-export enum ModalAnimationType {
-  none = 'none',
-  slide = 'slide',
-  fade = 'fade',
+export interface ModalComponentCloseProps {
+  onCloseModal?: () => void;
 }

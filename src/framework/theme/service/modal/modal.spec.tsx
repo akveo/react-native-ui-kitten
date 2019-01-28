@@ -8,7 +8,6 @@ import {
   View,
   Text,
   Button,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import { ModalService } from './modal.service';
 import { ModalPanel } from '../../../theme/component';
@@ -27,7 +26,8 @@ describe('@modal-service: service checks', () => {
       const component =
         <TestModal
           text={'Test Modal 1'}
-          onCloseModal={() => ModalService.hideModal()}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={ModalTextTestId}
         />;
       ModalService.showDialog(component);
     };
@@ -36,12 +36,14 @@ describe('@modal-service: service checks', () => {
       const component1 =
         <TestModal
           text={TestModal2Text}
-          onCloseModal={() => ModalService.hideModal()}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={`${ModalTextTestId}-1`}
         />;
       const component2 =
         <TestModal
           text={'Test Modal 2'}
-          onCloseModal={() => ModalService.hideModal()}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={`${ModalTextTestId}-2`}
         />;
       ModalService.showDialog(component1);
       ModalService.showDialog(component2);
@@ -51,7 +53,8 @@ describe('@modal-service: service checks', () => {
       const component =
         <TestModal
           text={'Test Modal Back Drop'}
-          onCloseModal={() => ModalService.hideModal()}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={ModalTextTestId}
         />;
       ModalService.showDialog(component, true);
     };
@@ -77,7 +80,8 @@ describe('@modal-service: service checks', () => {
 
   interface TestModalProps {
     text: string;
-    onCloseModal: () => void;
+    textTestId: string;
+    onCloseModal?: () => void;
   }
 
   class TestModal extends React.Component<TestModalProps> {
@@ -85,7 +89,7 @@ describe('@modal-service: service checks', () => {
     render() {
       return (
         <View style={{ width: 300, height: 300, backgroundColor: 'red' }}>
-          <Text testID={ModalTextTestId}>{this.props.text}</Text>
+          <Text testID={this.props.textTestId}>{this.props.text}</Text>
           <Button title={'Close Modal'} onPress={this.props.onCloseModal}/>
         </View>
       );
@@ -101,32 +105,12 @@ describe('@modal-service: service checks', () => {
     expect(application).toMatchSnapshot();
   });
 
-  it('* hideModal have been called', () => {
-    const spy = jest.spyOn(ModalService, 'hideModal');
-    const application = render(<TestApplication/>);
-    fireEvent.press(application.getByTestId(ShowSingleModalTestId));
-    fireEvent.press(application.getByType(Button));
-
-    expect(spy).toHaveBeenCalled();
-    expect(application).toMatchSnapshot();
-  });
-
-  it('* hide modal on back-drop', () => {
-    const spy = jest.spyOn(ModalService, 'hideModal');
-    const application = render(<TestApplication/>);
-    fireEvent.press(application.getByTestId(ShowModalWithBackDropAllowedId));
-    fireEvent.press(application.getByType(TouchableWithoutFeedback));
-
-    expect(spy).toHaveBeenCalled();
-  });
-
   it('* show multiple modals one by one', () => {
-    const spy = jest.spyOn(ModalService, 'hideModal');
     const application = render(<TestApplication/>);
     fireEvent.press(application.getByTestId(ShowMultipleModalTestId));
-    const expectedText: string = application.getByTestId(ModalTextTestId).props.children;
+    const expectedText: string = application
+      .getByTestId(`${ModalTextTestId}-2`).props.children;
 
-    expect(spy).toHaveBeenCalled();
     expect(expectedText).toBe(TestModal2Text);
     expect(application).toMatchSnapshot();
   });

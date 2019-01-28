@@ -1,13 +1,21 @@
 import React from 'react';
-import { render } from 'react-native-testing-library';
+import {
+  fireEvent,
+  render,
+} from 'react-native-testing-library';
 import {
   View,
   Text,
+  TouchableWithoutFeedback,
+  Button,
 } from 'react-native';
 import { ModalPanel } from './modalPanel.component';
 import { ModalComponent } from './modal.component';
 
 describe('@modal component/panel checks', () => {
+
+  const MODAL_TEST_IDENTIFIER: (substring: string) => string = (substring: string): string =>
+    `modal-test-identifier-${substring}`;
 
   interface HooksProps {
     componentDidMount?: () => void;
@@ -49,38 +57,6 @@ describe('@modal component/panel checks', () => {
     expect(renderedPanel).toMatchSnapshot();
   });
 
-  it('* modal component renders properly', () => {
-    const modal1 = render(<ModalComponent
-      visible={true}
-      component={<View><Text>Test1</Text></View>}
-      isBackDropAllowed={false}
-      onBackdrop={() => 1}/>);
-    const modal2 = render(<ModalComponent
-      visible={false}
-      component={<View><Text>Test2</Text></View>}
-      isBackDropAllowed={false}
-      onBackdrop={() => 1}/>);
-
-    expect(modal1).toMatchSnapshot();
-    expect(modal2).toMatchSnapshot();
-  });
-
-  it('modal component props checks', () => {
-    const testOnBackDrop = () => 1;
-    const modalPassingProps = {
-      visible: true,
-      component: <View><Text>Test1</Text></View>,
-      isBackDropAllowed: false,
-      onBackdrop: testOnBackDrop,
-    };
-    const modal = <ModalComponent {...modalPassingProps}/>;
-
-    expect(modal.props.visible).toBe(modalPassingProps.visible);
-    expect(modal.props.component).toBe(modalPassingProps.component);
-    expect(modal.props.isBackDropAllowed).toBe(modalPassingProps.isBackDropAllowed);
-    expect(modal.props.onBackdrop).toBe(modalPassingProps.onBackdrop);
-  });
-
   it('* modal panel l/c-hooks checks', () => {
     const componentDidMount = jest.fn();
     const componentWillUnmount = jest.fn();
@@ -94,6 +70,69 @@ describe('@modal component/panel checks', () => {
     expect(componentDidMount).toHaveBeenCalled();
     wrapper.unmount();
     expect(componentWillUnmount).toHaveBeenCalled();
+  });
+
+  it('* modal component renders properly', () => {
+    const modal1 = render(<ModalComponent
+      visible={true}
+      component={<View><Text>Test1</Text></View>}
+      isBackDropAllowed={false}
+      identifier={MODAL_TEST_IDENTIFIER('1')}
+      onCloseModal={() => 1}/>);
+    const modal2 = render(<ModalComponent
+      visible={false}
+      component={<View><Text>Test2</Text></View>}
+      isBackDropAllowed={false}
+      identifier={MODAL_TEST_IDENTIFIER('1')}
+      onCloseModal={() => 1}/>);
+
+    expect(modal1).toMatchSnapshot();
+    expect(modal2).toMatchSnapshot();
+  });
+
+  it('* modal component props checks', () => {
+    const modalPassingProps = {
+      visible: true,
+      component: <View><Text>Test1</Text></View>,
+      isBackDropAllowed: false,
+    };
+    const modal = <ModalComponent {...modalPassingProps}/>;
+
+    expect(modal.props.visible).toBe(modalPassingProps.visible);
+    expect(modal.props.component).toBe(modalPassingProps.component);
+    expect(modal.props.isBackDropAllowed).toBe(modalPassingProps.isBackDropAllowed);
+  });
+
+  it('* modal closes on passed prop', () => {
+    const onCloseModal = jest.fn();
+    const component = <ModalComponent
+      visible={true}
+      component={<View>
+        <Text>Test1</Text>
+        <Button title={'Close Modal'} onPress={onCloseModal}/>
+      </View>}
+      isBackDropAllowed={true}
+      identifier={MODAL_TEST_IDENTIFIER('1')}
+      onCloseModal={onCloseModal}/>;
+    const modal = render(component);
+    expect(modal).toMatchSnapshot();
+    fireEvent.press(modal.getByType(Button));
+    expect(onCloseModal).toHaveBeenCalled();
+    expect(modal).toMatchSnapshot();
+  });
+
+  it('* modal component close on backDrop checks', () => {
+    const onCloseModal = jest.fn();
+    const modal = render(<ModalComponent
+      visible={true}
+      component={<View><Text>Test1</Text></View>}
+      isBackDropAllowed={true}
+      identifier={MODAL_TEST_IDENTIFIER('1')}
+      onCloseModal={onCloseModal}/>);
+    expect(modal).toMatchSnapshot();
+    fireEvent.press(modal.getByType(TouchableWithoutFeedback));
+    expect(modal).toMatchSnapshot();
+    expect(onCloseModal).toHaveBeenCalled();
   });
 
 });

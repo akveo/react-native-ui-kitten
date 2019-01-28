@@ -2,29 +2,25 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  ViewProps,
 } from 'react-native';
 import { ModalComponent } from './modal.component';
 import { ModalService } from '../../service';
-import { ModalAnimationType } from '../../type';
 
 export interface ModalPanelProps {
   children: React.ReactElement<any> | React.ReactElement<any>[];
 }
 
 interface ModalPanelState {
-  dialogComponent: React.ReactElement<any> | React.ReactElement<any>[] | null;
-  modalVisible: boolean;
-  closeOnBackDrop: boolean;
-  animationType: ModalAnimationType;
+  dialogComponents: Map<string, React.ReactElement<any>>;
+  closeOnBackDropAllowed: boolean;
 }
 
 export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> {
 
   state: ModalPanelState = {
-    dialogComponent: null,
-    modalVisible: false,
-    closeOnBackDrop: false,
-    animationType: ModalAnimationType.fade,
+    dialogComponents: new Map(),
+    closeOnBackDropAllowed: false,
   };
 
   componentDidMount(): void {
@@ -35,39 +31,56 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     ModalService.setComponent(null);
   }
 
-  setModalVisible(isVisible: boolean): void {
-    this.setState({ modalVisible: isVisible });
-  }
+  private generateUniqComponentKey = (): string => {
+    return Math.random().toString(36).substring(2);
+  };
 
-  showDialog(dialogComponent: React.ReactElement<any> | React.ReactElement<any>[] | null,
-             closeOnBackDrop: boolean,
-             animationType: ModalAnimationType): void {
+  showDialog(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean): void {
+    const map: Map<string, React.ReactElement<any>> = this.state.dialogComponents
+      .set(this.generateUniqComponentKey(), dialogComponent);
     this.setState({
-      dialogComponent: dialogComponent,
-      modalVisible: true,
-      closeOnBackDrop: closeOnBackDrop,
-      animationType: animationType,
+      dialogComponents: map,
+      closeOnBackDropAllowed: closeOnBackDrop,
     });
   }
 
-  onBackDrop = (): void => {
-    if (this.state.closeOnBackDrop) {
-      this.setModalVisible(false);
-    }
+  private areThereAnyComponents(): boolean {
+    return this.state.dialogComponents && this.state.dialogComponents.size !== 0;
+  }
+
+  onCloseModal = (identifier: string) => {
+    const components: Map<string, React.ReactElement<any>> = this.state.dialogComponents;
+    components.delete(identifier);
+    this.setState({ dialogComponents: components });
   };
 
-  render(): React.ReactNode {
+  renderModal(modal: React.ReactElement<any>, index: number) {
+    const allModalKeys: string[] = Array.from(this.state.dialogComponents.keys());
+    const identifier: string = allModalKeys
+      .find(item => this.state.dialogComponents.get(item) === modal);
+    return (
+      <ModalComponent
+        visible={true}
+        component={modal}
+        isBackDropAllowed={this.state.closeOnBackDropAllowed}
+        key={index}
+        identifier={identifier}
+        onCloseModal={this.onCloseModal}
+      />
+    );
+  }
+
+  renderModals() {
+    return Array.from(this.state.dialogComponents.values())
+      .map((component: React.ReactElement<any>, i: number) =>
+        this.renderModal(component, i));
+  }
+
+  render(): React.ReactElement<ViewProps> {
     return (
       <View style={styles.container}>
         {this.props.children}
-        {this.state.dialogComponent &&
-        <ModalComponent
-          visible={this.state.modalVisible}
-          component={this.state.dialogComponent}
-          isBackDropAllowed={this.state.closeOnBackDrop}
-          onBackdrop={this.onBackDrop}
-          animationType={this.state.animationType}
-        />}
+        {this.areThereAnyComponents() && this.renderModals()}
       </View>
     );
   }
