@@ -9,44 +9,44 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Radio as RadioComponent } from '@kitten/ui';
+import { CheckBox as CheckBoxComponent } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 interface State {
-  isRadio1Checked: boolean;
-  isRadio2Checked: boolean;
-  isRadio3Checked: boolean;
-  isRadio4Checked: boolean;
+  isCheckBox1Checked: boolean;
+  isCheckBox2Checked: boolean;
+  isCheckBox3Checked: boolean;
+  isCheckBox4Checked: boolean;
 }
 
-class Radio extends React.Component<Props, State> {
+class CheckBox extends React.Component<Props, State> {
 
   static navigationOptions = {
-    title: 'Radio',
+    title: 'CheckBox',
   };
 
   public state: State = {
-    isRadio1Checked: false,
-    isRadio2Checked: true,
-    isRadio3Checked: false,
-    isRadio4Checked: true,
+    isCheckBox1Checked: false,
+    isCheckBox2Checked: true,
+    isCheckBox3Checked: false,
+    isCheckBox4Checked: true,
   };
 
-  private onRadio1Change = (selected: boolean) => {
-    this.setState({ isRadio1Checked: !selected });
+  private onCheckBox1Change = (checked: boolean) => {
+    this.setState({ isCheckBox1Checked: checked });
   };
 
-  private onRadio2Change = (selected: boolean) => {
-    this.setState({ isRadio2Checked: !selected });
+  private onCheckBox2Change = (checked: boolean) => {
+    this.setState({ isCheckBox2Checked: checked });
   };
 
-  private onRadio3Change = (selected: boolean) => {
-    this.setState({ isRadio3Checked: !selected });
+  private onCheckBox3Change = (checked: boolean) => {
+    this.setState({ isCheckBox3Checked: checked });
   };
 
-  private onRadio4Change = (selected: boolean) => {
-    this.setState({ isRadio4Checked: !selected });
+  private onCheckBox4Change = (checked: boolean) => {
+    this.setState({ isCheckBox4Checked: checked });
   };
 
   public render(): React.ReactNode {
@@ -55,48 +55,48 @@ class Radio extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent
+            <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isRadio1Checked}
-              onChange={this.onRadio1Change}
+              checked={this.state.isCheckBox1Checked}
+              onChange={this.onCheckBox1Change}
             />
-            <RadioComponent
+            <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isRadio2Checked}
-              onChange={this.onRadio2Change}
+              checked={this.state.isCheckBox2Checked}
+              onChange={this.onCheckBox2Change}
             />
-            <RadioComponent
+            <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isRadio3Checked}
+              checked={this.state.isCheckBox3Checked}
               disabled={true}
-              onChange={this.onRadio3Change}
+              onChange={this.onCheckBox3Change}
             />
-            <RadioComponent
+            <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isRadio4Checked}
+              checked={this.state.isCheckBox4Checked}
               disabled={true}
-              onChange={this.onRadio4Change}
+              onChange={this.onCheckBox4Change}
             />
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Error</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent
+            <CheckBoxComponent
               status='error'
               style={this.props.themedStyle.component}
             />
-            <RadioComponent
+            <CheckBoxComponent
               status='error'
               style={this.props.themedStyle.component}
               checked={true}
             />
-            <RadioComponent
+            <CheckBoxComponent
               status='error'
               style={this.props.themedStyle.component}
               disabled={true}
             />
-            <RadioComponent
+            <CheckBoxComponent
               status='error'
               style={this.props.themedStyle.component}
               checked={true}
@@ -107,16 +107,16 @@ class Radio extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent
+            <CheckBoxComponent
               size='big'
               style={this.props.themedStyle.component}
               checked={true}
             />
-            <RadioComponent
+            <CheckBoxComponent
               style={this.props.themedStyle.component}
               checked={true}
             />
-            <RadioComponent
+            <CheckBoxComponent
               size='small'
               style={this.props.themedStyle.component}
               checked={true}
@@ -128,7 +128,7 @@ class Radio extends React.Component<Props, State> {
   }
 }
 
-export const RadioScreen = withStyles(Radio, (theme: ThemeType) => ({
+export const CheckBoxScreen = withStyles(CheckBox, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,
