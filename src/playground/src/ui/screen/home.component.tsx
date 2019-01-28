@@ -1,16 +1,17 @@
+import {
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from '@kitten/theme';
 import React from 'react';
-import { NavigationScreenProps } from 'react-navigation';
 import {
   FlatList,
+  ListRenderItemInfo,
   Text,
   TouchableOpacity,
-  ListRenderItemInfo,
+  TouchableOpacityProps,
 } from 'react-native';
-import {
-  withStyles,
-  ThemeType,
-  ThemedComponentProps,
-} from '@kitten/theme';
+import { NavigationScreenProps } from 'react-navigation';
 import {
   NavigatorProps,
   RouteType,
@@ -24,13 +25,15 @@ class Home extends React.Component<Props> {
     title: 'Home',
   };
 
-  onItemPress = (route: RouteType) => {
+  private onItemPress = (route: RouteType) => {
     this.props.navigation.navigate(route.name);
   };
 
-  extractItemKey = (item: RouteType, index: number) => `${index}`;
+  private extractItemKey = (item: RouteType, index: number): string => {
+    return index.toString();
+  };
 
-  renderItem = (info: ListRenderItemInfo<any>) => (
+  private renderItem = (info: ListRenderItemInfo<RouteType>): React.ReactElement<TouchableOpacityProps> => (
     <TouchableOpacity
       style={this.props.themedStyle.itemContainer}
       key={info.index}
@@ -39,7 +42,7 @@ class Home extends React.Component<Props> {
     </TouchableOpacity>
   );
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <FlatList
         keyExtractor={this.extractItemKey}
