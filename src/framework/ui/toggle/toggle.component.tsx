@@ -63,7 +63,7 @@ export class Toggle extends React.Component<Props> {
     });
   }
 
-  private animateSwitch = (value: boolean, callback: () => void = () => null) => {
+  private animateSwitch = (value: boolean, callback: () => void = () => null): void => {
     this.switchAnimationActive = true;
     Animated.timing(
       this.switchAnimation,
@@ -78,7 +78,7 @@ export class Toggle extends React.Component<Props> {
     });
   };
 
-  animateThumb = (value, callback: () => void = () => null) => {
+  private animateThumb = (value: number, callback: () => void = () => null): void => {
     Animated.timing(this.thumbAnimation, {
       toValue: value,
       duration: 150,
@@ -86,7 +86,7 @@ export class Toggle extends React.Component<Props> {
     }).start(callback);
   };
 
-  animateEllipse = (value) => {
+  private animateEllipse: (value: number) => void = (value: number): void => {
     Animated.timing(this.ellipseAnimation, {
       toValue: value,
       duration: 200,
@@ -94,7 +94,7 @@ export class Toggle extends React.Component<Props> {
     }).start();
   };
 
-  stopAnimations() {
+  private stopAnimations(): void {
     const value: number = this.props.value ? 0.01 : 1;
     Animated.timing(this.switchAnimation, { toValue: value }).stop();
     Animated.timing(this.ellipseAnimation, { toValue: value }).stop();
@@ -102,35 +102,35 @@ export class Toggle extends React.Component<Props> {
     this.ellipseAnimation.setValue(value);
   }
 
-  onPressIn = () => {
+  private onPressIn: () => void = (): void => {
     this.props.dispatch([Interaction.ACTIVE]);
   };
 
-  onPressOut = () => {
+  private onPressOut: () => void = (): void => {
     this.props.dispatch([]);
   };
 
-  onStartShouldSetPanResponder = () => {
+  private onStartShouldSetPanResponder: () => boolean = (): boolean => {
     return true;
   };
 
-  onStartShouldSetPanResponderCapture = () => {
+  private onStartShouldSetPanResponderCapture: () => boolean = (): boolean => {
     return true;
   };
 
-  onMoveShouldSetPanResponder = () => {
+  private onMoveShouldSetPanResponder: () => boolean = (): boolean => {
     return true;
   };
 
-  onMoveShouldSetPanResponderCapture = () => {
+  private onMoveShouldSetPanResponderCapture: () => boolean = (): boolean => {
     return true;
   };
 
-  onPanResponderTerminationRequest = () => {
+  private onPanResponderTerminationRequest: () => boolean = (): boolean => {
     return false;
   };
 
-  onPanResponderGrant = (thumbSize: number) => {
+  private onPanResponderGrant: (size: number) => void = (thumbSize: number): void => {
     this.onPressIn();
     if (this.props.disabled) {
       return;
@@ -144,13 +144,13 @@ export class Toggle extends React.Component<Props> {
     this.animateEllipse(this.props.value ? 1 : 0.01);
   };
 
-  onPanResponderMove = () => {
+  private onPanResponderMove: () => boolean = (): boolean => {
     return true;
   };
 
-  onPanResponderRelease = (evt: GestureResponderEvent,
-                           gestureState: PanResponderGestureState,
-                           thumbSize: number) => {
+  private onPanResponderRelease = (evt: GestureResponderEvent,
+                                   gestureState: PanResponderGestureState,
+                                   thumbSize: number): void => {
 
     if (!this.props.disabled) {
       const propValue = this.props.value;
@@ -164,7 +164,7 @@ export class Toggle extends React.Component<Props> {
     this.onPressOut();
   };
 
-  toggle = (callback = (value: boolean) => null, thumbSize: number) => {
+  private toggle = (callback = (value: boolean) => null, thumbSize: number): void => {
     const toValue = !this.props.value;
     this.animateSwitch(toValue, () => {
       this.switchAnimation.setValue(0);
@@ -173,13 +173,13 @@ export class Toggle extends React.Component<Props> {
     this.animateThumb(thumbSize);
   };
 
-  onValueChange = () => {
+  onValueChange = (): void => {
     if (this.props.onValueChange) {
       this.props.onValueChange(!this.props.value);
     }
   };
 
-  getComponentStyle = (style: StyleType): StyleType => {
+  private getComponentStyle = (style: StyleType): StyleType => {
     const thumbComponentSize: number = style.height - (style.borderWidth * 2);
     return {
       wrapper: {
@@ -241,20 +241,20 @@ export class Toggle extends React.Component<Props> {
     });
   };
 
-  render() {
+  render(): React.ReactElement<ViewProps> {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
     const { disabled, value, style } = this.props;
-    const interpolatedTintColor = this.getInterpolatedColor(
+    const interpolatedTintColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
       componentStyle.switchOffsetValue,
       componentStyle.colors.tint,
       componentStyle.colors.onTint,
     );
-    const interpolatedCheckColor = this.getInterpolatedColor(
+    const interpolatedCheckColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
       componentStyle.switchOffsetValue,
       componentStyle.colors.thumb,
       componentStyle.colors.onTint,
     );
-    const returnScale = this.switchAnimation.interpolate({
+    const returnScale: Animated.AnimatedDiffClamp = this.switchAnimation.interpolate({
       inputRange: [-componentStyle.switchOffsetValue, 0],
       outputRange: [1, 0.01],
     });

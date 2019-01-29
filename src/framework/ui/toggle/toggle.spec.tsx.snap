@@ -2,6 +2,9 @@
 
 exports[`@toggle: matches snapshot active 1`] = `
 <View
+  appearance="default"
+  disabled={false}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -15,6 +18,32 @@ exports[`@toggle: matches snapshot active 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "#e5e7ea",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#3366FF",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={false}
 >
   <View
     style={
@@ -59,7 +88,9 @@ exports[`@toggle: matches snapshot active 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#3366FF",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
@@ -133,6 +164,9 @@ exports[`@toggle: matches snapshot active 1`] = `
 
 exports[`@toggle: matches snapshot active checked 1`] = `
 <View
+  appearance="default"
+  disabled={false}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -146,6 +180,32 @@ exports[`@toggle: matches snapshot active checked 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "#e5e7ea",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#3366FF",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={true}
 >
   <View
     style={
@@ -190,7 +250,9 @@ exports[`@toggle: matches snapshot active checked 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#3366FF",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
@@ -264,6 +326,9 @@ exports[`@toggle: matches snapshot active checked 1`] = `
 
 exports[`@toggle: matches snapshot active checked: checked 1`] = `
 <View
+  appearance="default"
+  disabled={false}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -277,6 +342,32 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "transparent",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#3366FF",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={true}
 >
   <View
     style={
@@ -321,7 +412,9 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#3366FF",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
@@ -395,6 +488,9 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
 
 exports[`@toggle: matches snapshot active: default 1`] = `
 <View
+  appearance="default"
+  disabled={false}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -408,6 +504,32 @@ exports[`@toggle: matches snapshot active: default 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "transparent",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#3366FF",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={false}
 >
   <View
     style={
@@ -452,7 +574,9 @@ exports[`@toggle: matches snapshot active: default 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#3366FF",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
@@ -526,6 +650,9 @@ exports[`@toggle: matches snapshot active: default 1`] = `
 
 exports[`@toggle: matches snapshot checked 1`] = `
 <View
+  appearance="default"
+  disabled={false}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -539,6 +666,32 @@ exports[`@toggle: matches snapshot checked 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "transparent",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#3366FF",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={true}
 >
   <View
     style={
@@ -583,7 +736,9 @@ exports[`@toggle: matches snapshot checked 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#3366FF",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
@@ -657,6 +812,9 @@ exports[`@toggle: matches snapshot checked 1`] = `
 
 exports[`@toggle: matches snapshot checked disabled 1`] = `
 <View
+  appearance="default"
+  disabled={true}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -670,6 +828,32 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "transparent",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#8992A3",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={true}
 >
   <TouchableOpacity
     activeOpacity={0.2}
@@ -698,7 +882,9 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#8992A3",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
@@ -772,6 +958,9 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
 
 exports[`@toggle: matches snapshot default 1`] = `
 <View
+  appearance="default"
+  disabled={false}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -785,6 +974,32 @@ exports[`@toggle: matches snapshot default 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "transparent",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#3366FF",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={false}
 >
   <View
     style={
@@ -829,7 +1044,9 @@ exports[`@toggle: matches snapshot default 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#3366FF",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
@@ -903,6 +1120,9 @@ exports[`@toggle: matches snapshot default 1`] = `
 
 exports[`@toggle: matches snapshot disabled 1`] = `
 <View
+  appearance="default"
+  disabled={true}
+  dispatch={[Function]}
   style={
     Array [
       Object {
@@ -916,6 +1136,32 @@ exports[`@toggle: matches snapshot disabled 1`] = `
       undefined,
     ]
   }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "borderWidth": 1.5,
+      "height": 32,
+      "highlightColor": "transparent",
+      "highlightHeight": 42,
+      "highlightWidth": 62,
+      "offsetValue": 20,
+      "onTintColor": "#8992A3",
+      "thumbColor": "#ffffff",
+      "tintColor": "#DDE1EB",
+      "width": 52,
+    }
+  }
+  value={false}
 >
   <TouchableOpacity
     activeOpacity={0.2}
@@ -944,7 +1190,9 @@ exports[`@toggle: matches snapshot disabled 1`] = `
             "overflow": "hidden",
           },
           Object {
+            "borderColor": "#8992A3",
             "borderRadius": 16,
+            "borderWidth": 1.5,
             "height": 32,
             "width": 52,
           },
