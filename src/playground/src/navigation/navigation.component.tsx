@@ -17,31 +17,38 @@ export interface Props {
 
 const ROUTE_INITIAL = 'root';
 
-export const withNavigation = <P extends object>(Root: React.ComponentType<P>,
-                                                 routes: NavigationRouteConfigMap) => {
+export const withNavigation = <P extends object>(Root: React.ComponentType<P>, routes: NavigationRouteConfigMap) => {
 
   type WrapperProps = Props & P;
 
   class RootWrapper extends React.Component<WrapperProps> {
 
-    getComponentName = (Component: React.ComponentType) => Component.displayName || Component.name;
+    private getComponentName = (Component: React.ComponentType): string => {
+      return Component.displayName || Component.name;
+    };
 
-    createCustomProps = (): Props => {
-      const toRoute = (key: string): RouteType => ({ name: key });
+    private isComponentRoute = (name: string): boolean => {
+      const rootRouteName: string = this.getComponentName(Root);
+      const componentRouteName: string = this.getComponentName(routes[name]);
+
+      return componentRouteName !== rootRouteName;
+    };
+
+    private createRoute = (name: string): RouteType => {
       return {
-        routes: Object.keys(routes).filter(key => {
-          const rootComponentName = this.getComponentName(Root);
-          const componentName = this.getComponentName(routes[key]);
-          return rootComponentName !== componentName;
-        }).map(toRoute),
+        name: name,
       };
     };
 
-    render() {
+    private createRoutes = (): RouteType[] => {
+      return Object.keys(routes).filter(this.isComponentRoute).map(this.createRoute);
+    };
+
+    public render(): React.ReactNode {
       return (
         <Root
-          {...this.createCustomProps()}
           {...this.props}
+          routes={this.createRoutes()}
         />
       );
     }
