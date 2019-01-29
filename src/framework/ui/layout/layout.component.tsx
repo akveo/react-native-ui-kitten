@@ -10,19 +10,19 @@ import {
 
 interface LayoutProps {
   appearance?: string;
-  children?: any;
+  children?: React.ReactElement<any>;
 }
 
 export type Props = LayoutProps & StyledComponentProps & ViewProps;
 
 export class Layout extends React.Component<Props> {
 
-  getComponentStyle = (style: StyleType): StyleType => ({
+  private getComponentStyle: (style: StyleType) => StyleType = (style: StyleType): StyleType => ({
     layout: style,
   });
 
-  render() {
-    const componentStyle = this.getComponentStyle(this.props.themedStyle);
+  render(): React.ReactElement<ViewProps> {
+    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
     const { style, ...restProps } = this.props;
 
     return (

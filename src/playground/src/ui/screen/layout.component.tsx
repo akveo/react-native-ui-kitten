@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   View,
+  ViewProps,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -19,7 +20,7 @@ class Layout extends React.Component<Props> {
     title: 'Layout',
   };
 
-  render() {
+  render(): React.ReactElement<ViewProps> {
     return (
       <View style={this.props.themedStyle.container}>
         <LayoutComponent style={this.props.themedStyle.layout}>
