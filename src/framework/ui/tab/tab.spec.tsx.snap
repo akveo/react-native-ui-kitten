@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@tab: component checks * empty 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      undefined,
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={Object {}}
+/>
+`;
+
+exports[`@tab: component checks * icon 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  icon={
+    Object {
+      "uri": "https://facebook.github.io/react-native/docs/assets/favicon.png",
+    }
+  }
+  style={
+    Array [
+      undefined,
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={Object {}}
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://facebook.github.io/react-native/docs/assets/favicon.png",
+      }
+    }
+    style={Object {}}
+  />
+</View>
+`;
+
+exports[`@tab: component checks * title 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      undefined,
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={Object {}}
+  title="title"
+>
+  <Text
+    style={Object {}}
+  >
+    title
+  </Text>
+</View>
+`;
