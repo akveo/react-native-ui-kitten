@@ -63,7 +63,8 @@ export class StyleConsumerService {
    *
    * @return meta (ComponentStyleMetaType) on style applied to component
    */
-  private createStyleMeta<P extends StyledComponentProps>(meta: ComponentMapMetaType, props: P): ComponentStyleMetaType {
+  private createStyleMeta<P extends StyledComponentProps>(meta: ComponentMapMetaType,
+                                                          props: P): ComponentStyleMetaType {
     return {
       appearance: props.appearance,
       variants: this.getDerivedVariants(Object.keys(meta.variants), props),
