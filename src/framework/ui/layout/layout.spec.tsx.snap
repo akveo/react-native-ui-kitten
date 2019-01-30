@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@layout: matches snapshot default 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "borderColor": "#3366FF",
+        "borderRadius": 3,
+        "borderWidth": 1,
+        "paddingHorizontal": 16,
+        "paddingVertical": 8,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "#3366FF",
+      "borderRadius": 3,
+      "borderWidth": 1,
+      "paddingHorizontal": 16,
+      "paddingVertical": 8,
+    }
+  }
+/>
+`;
+
+exports[`@layout: matches snapshot with styles 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "borderColor": "#3366FF",
+        "borderRadius": 3,
+        "borderWidth": 1,
+        "paddingHorizontal": 16,
+        "paddingVertical": 8,
+      },
+      Object {
+        "height": 300,
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "#3366FF",
+      "borderRadius": 3,
+      "borderWidth": 1,
+      "paddingHorizontal": 16,
+      "paddingVertical": 8,
+    }
+  }
+/>
+`;
