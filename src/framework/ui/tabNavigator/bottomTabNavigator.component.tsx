@@ -19,9 +19,11 @@ export interface TabRoute {
   routeImage?: React.ReactElement<any>;
 }
 
+export const TAB_TEST_ID = '@tab-navigator/tab-';
+
 interface TabNavigatorProps {
   appearance?: string;
-  routes?: TabRoute[];
+  routes: TabRoute[];
   currentIndex?: number;
   onTabChoose?: (routeName: string) => void;
 }
@@ -87,7 +89,11 @@ export class BottomTabNavigator extends React.Component<Props> {
     const contentStyle: StyleType = this.props.currentIndex === index ?
       themeStyles.tabContentSelected : themeStyles.tabContent;
     return (
-      <TouchableWithoutFeedback key={index} onPress={() => this.onTabChoose(index)}>
+      <TouchableWithoutFeedback
+        key={index}
+        onPress={() => this.onTabChoose(index)}
+        testID={TAB_TEST_ID + index}
+      >
         <View style={styles.tabItemContainer}>
           {this.renderTabIcon(index, themeStyles)}
           {themeStyles.showText && <Text style={contentStyle}>{route.routeName}</Text>}
