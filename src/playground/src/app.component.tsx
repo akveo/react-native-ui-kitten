@@ -29,7 +29,7 @@ export default class App extends React.Component<Props, State> {
   };
 
   public render(): React.ReactNode {
-    const { RadioScreen: RootScreen, ...screens } = Screens;
+    const { HomeScreen: RootScreen, ...screens } = Screens;
     const Router: React.ComponentClass = withNavigation(RootScreen, screens);
 
     return (
