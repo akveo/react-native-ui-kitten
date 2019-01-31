@@ -27,9 +27,9 @@ export default class App extends React.Component<any, State> {
     };
   }
 
-  render() {
-    const { HomeScreen: RootScreen, ...nestedScreens } = Screens;
-    const Router = withNavigation(RootScreen, nestedScreens);
+  public render(): React.ReactNode {
+    const { HomeScreen: RootScreen, ...screens } = Screens;
+    const Router: React.ComponentClass = withNavigation(RootScreen, screens);
 
     return (
       <ApplicationProvider

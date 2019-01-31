@@ -8,6 +8,14 @@ import {
   Props as RadioGroupProps,
 } from './radioGroup/radioGroup.component';
 import {
+  Layout as LayoutComponent,
+  Props as LayoutProps,
+} from './layout/layout.component';
+import {
+  Toggle as ToggleComponent,
+  Props as ToggleProps,
+} from './toggle/toggle.component';
+import {
   CheckBox as CheckBoxComponent,
   Props as CheckBoxProps,
 } from './checkbox/checkbox.component';
@@ -30,20 +38,26 @@ import {
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
+const Layout = styled<LayoutComponent, LayoutProps>(LayoutComponent);
+const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
 
 export {
+  Layout,
+  LayoutProps,
   Radio,
+  RadioProps,
   RadioGroup,
+  RadioGroupProps,
+  Toggle,
+  ToggleProps,
   CheckBox,
   Tab,
   TabBar,
   ViewPager,
   TabView,
-  RadioProps,
-  RadioGroupProps,
   CheckBoxProps,
   TabProps,
   TabBarProps,
