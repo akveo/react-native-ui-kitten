@@ -33,15 +33,16 @@ export class TopNavigationBar extends React.Component<Props> {
     this.props.onLeftControl && this.props.onLeftControl();
   };
 
-  private getLeftControlComponent(style: StyleType): React.ReactElement<any> {
-    const leftControl: React.ReactElement<any> =  React.cloneElement(this.props.leftControl, {
-      style: { ...this.props.leftControl.props.style, ...style },
-    });
-    return (
-      <TouchableOpacity onPress={this.onLeftControl}>
+  private getLeftControlComponent(style: StyleType): React.ReactElement<any> | null {
+    const leftControl: React.ReactElement<any> = this.props.leftControl ?
+      React.cloneElement(this.props.leftControl, {
+        style: { ...this.props.leftControl.props.style, ...style },
+      }) : null;
+    return this.props.leftControl ? (
+      <TouchableOpacity testID='@top-navbar-left' onPress={this.onLeftControl}>
         {leftControl}
       </TouchableOpacity>
-    );
+    ) : null;
   }
 
   private getComponentStyle = (style: StyleType): StyleType => {
@@ -61,7 +62,7 @@ export class TopNavigationBar extends React.Component<Props> {
         flex: 1,
         paddingHorizontal: 16,
       },
-      leftControlContainer: style.titleCentered ?  {
+      leftControlContainer: style.titleCentered ? {
         flex: 1,
       } : null,
       rightControlsContainer: style.titleCentered ? {
@@ -98,14 +99,18 @@ export class TopNavigationBar extends React.Component<Props> {
       },
     });
     return (
-      <TouchableOpacity key={index} onPress={this.props.onRightControls[index]}>
+      <TouchableOpacity
+        onPress={this.props.onRightControls[index]}
+        key={index}
+        testID={`@top-navbar-right-${index}`}
+      >
         {controlElement}
       </TouchableOpacity>
     );
   }
 
   private renderRightControls(controlsColors: StyleType[]): React.ReactElement<any>[] {
-    return this.props.rightControls
+    return this.props.rightControls && this.props.rightControls
       .map((control: React.ReactElement<any>, i: number) =>
         this.getRightControl(control, i, controlsColors));
   }
