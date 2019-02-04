@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-interface ModalComponentProps {
+interface ModalProps {
   visible: boolean;
   component: React.ReactElement<any>;
   isBackDropAllowed: boolean;
@@ -15,22 +15,24 @@ interface ModalComponentProps {
   onCloseModal: (index: string) => void;
 }
 
-interface ModalComponentState {
+export type Props = ViewProps & ModalProps;
+
+interface ModalState {
   isVisible: boolean;
 }
 
-export class ModalComponent extends React.Component<ModalComponentProps, ModalComponentState> {
+export class Modal extends React.Component<Props, ModalState> {
 
-  static defaultProps: Partial<ModalComponentProps> = {
+  static defaultProps: Partial<Props> = {
     visible: false,
     isBackDropAllowed: false,
   };
 
-  state: ModalComponentState = {
+  state: ModalState = {
     isVisible: false,
   };
 
-  constructor(props: ModalComponentProps) {
+  constructor(props: Props) {
     super(props);
     this.state = { isVisible: props.visible };
   }
@@ -54,7 +56,7 @@ export class ModalComponent extends React.Component<ModalComponentProps, ModalCo
           },
         ));
     return (
-      <View style={styles.componentContainer}>
+      <View {...this.props} style={[styles.componentContainer, this.props.style]}>
         {componentWithCloseProps}
       </View>
     );

@@ -4,7 +4,7 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import { ModalComponent } from './modal.component';
+import { Modal } from './modal.component';
 import { ModalService } from '../../service';
 
 export interface ModalPanelProps {
@@ -59,7 +59,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     const identifier: string = allModalKeys
       .find(item => this.state.dialogComponents.get(item) === modal);
     return (
-      <ModalComponent
+      <Modal
         visible={true}
         component={modal}
         isBackDropAllowed={this.state.closeOnBackDropAllowed}
