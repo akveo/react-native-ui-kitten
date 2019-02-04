@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 import {
   fireEvent,
   render,
@@ -10,14 +10,18 @@ import {
   StyleProviderProps,
 } from '@kitten/theme';
 import * as config from './bottomTabNavigator.spec.config';
+import * as tabsConfig from './bottomNavigatorTab.spec.config';
 import {
   BottomTabNavigator as BottomTabNavigatorComponent,
   Props as BottomTabNavigatorProps,
-  TabRoute,
-  TAB_TEST_ID,
 } from './bottomTabNavigator.component';
+import {
+  BottomNavigatorTab as BottomNavigatorTabComponent,
+  Props as BottomNavigatorTabProps,
+} from './bottomNavigatorTab.component';
 
 const BottomTabNavigator = styled<BottomTabNavigatorComponent, BottomTabNavigatorProps>(BottomTabNavigatorComponent);
+const BottomNavigatorTab = styled<BottomNavigatorTabComponent, BottomNavigatorTabProps>(BottomNavigatorTabComponent);
 
 describe('@bottom-tab-navigator: component checks', () => {
 
@@ -27,42 +31,96 @@ describe('@bottom-tab-navigator: component checks', () => {
     </StyleProvider>
   );
 
-  const routes: TabRoute[] = [
-    { routeName: 'Screen1', routeImage: <View style={{width: 20, height: 20, backgroundColor: 'red'}}/> },
-    { routeName: 'Screen2', routeImage: <View style={{width: 20, height: 20, backgroundColor: 'red'}}/> },
-    { routeName: 'Screen3', routeImage: <View style={{width: 20, height: 20, backgroundColor: 'red'}}/> },
-  ];
+  const MockTab = (props: BottomNavigatorTabProps): React.ReactElement<StyleProviderProps> => (
+    <StyleProvider mapping={tabsConfig.mapping} theme={tabsConfig.theme} styles={{}}>
+      <BottomNavigatorTab {...props} />
+    </StyleProvider>
+  );
+
+  const tab1Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png';
+  const tab2Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png';
+  const tab3Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png';
+
+  const getTab1Uri = (isSelected: boolean): ImageSourcePropType => ({ uri: tab1Uri });
+  const getTab2Uri = (isSelected: boolean): ImageSourcePropType => ({ uri: tab2Uri });
+  const getTab3Uri = (isSelected: boolean): ImageSourcePropType => ({ uri: tab3Uri });
+
+  const tabTestId: string = '@tab/last';
 
   it('* empty', () => {
-    const component = render(<Mock routes={[]}/>);
+    const component = render(<Mock children={[]}/>);
     expect(component).toMatchSnapshot();
   });
 
   it('* with routes', () => {
-    const component = render(<Mock routes={routes}/>);
+    const component = render(
+      <Mock children={[
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
+        <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
+        <MockTab getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
+      ]}/>,
+    );
     expect(component).toMatchSnapshot();
   });
 
   it('* current index', () => {
-    const component = render(<Mock routes={routes} currentIndex={1}/>);
-    expect(component).toMatchSnapshot();
+    const component = <Mock
+      children={[
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
+        <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
+        <MockTab getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
+      ]}
+      selectedIndex={1}/>;
+    const rendered = render(component);
+    expect(component.props.selectedIndex).toBe(1);
+    expect(rendered).toMatchSnapshot();
   });
 
   it('* tab choose', () => {
-    const onTabChoose = jest.fn();
-    const component = render(<Mock routes={routes} onTabChoose={onTabChoose}/>);
-    fireEvent.press(component.getByTestId(TAB_TEST_ID + '1'));
+    const onSelect = jest.fn();
+    const component = render(
+      <Mock
+        children={[
+          <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
+          <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
+          <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
+        ]}
+        selectedIndex={1}
+        onSelect={onSelect}
+      />,
+    );
+    fireEvent.press(component.getByTestId(tabTestId));
     expect(component).toMatchSnapshot();
-    expect(onTabChoose).toHaveBeenCalled();
+    expect(onSelect).toHaveBeenCalled();
   });
 
-  it('* different appearances', () => {
-    const component1 = render(<Mock routes={routes} appearance='text'/>);
-    const component2 = render(<Mock routes={routes} appearance='highlight'/>);
-    const component3 = render(<Mock routes={routes} appearance='text-highlight'/>);
-    expect(component1).toMatchSnapshot();
-    expect(component2).toMatchSnapshot();
-    expect(component3).toMatchSnapshot();
+  it('* choose selected tab', () => {
+    const onSelect = jest.fn();
+    const component = render(
+      <Mock
+        children={[
+          <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
+          <MockTab testID={tabTestId} getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
+          <MockTab getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
+        ]}
+        selectedIndex={1}
+        onSelect={onSelect}
+      />,
+    );
+    fireEvent.press(component.getByTestId(tabTestId));
+    expect(component).toMatchSnapshot();
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  it('* additional appearance', () => {
+    const component = render(<Mock
+      children={[
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
+        <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
+        <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
+      ]}
+      appearance='highlight'/>);
+    expect(component).toMatchSnapshot();
   });
 
 });

@@ -3,7 +3,7 @@ import { ThemeType } from '@kitten/theme';
 
 
 export const mapping: ThemeMappingType = {
-  BottomTabNavigator: {
+  BottomNavigatorTab: {
     meta: {
       variants: {},
       states: [],
@@ -11,19 +11,11 @@ export const mapping: ThemeMappingType = {
     appearance: {
       default: {
         mapping: {
-          backgroundColor: 'transparent',
-          paddingVertical: 16,
-          color: 'gray-dark',
-          selectedColor: 'blue-primary',
-          borderTopColor: 'gray-primary',
-          borderTopWidth: 1,
-          highlightHeight: 3,
-          showHighlight: false,
-        },
-      },
-      highlight: {
-        mapping: {
-          showHighlight: true,
+          'icon.marginBottom': 5,
+          'icon.width': 40,
+          'icon.height': 40,
+          'title.color': 'gray-dark',
+          'title.selectedColor': 'blue-primary',
         },
       },
     },

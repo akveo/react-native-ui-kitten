@@ -1,50 +1,536 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
+<View
+  appearance="highlight"
+  dispatch={[Function]}
+  selectedIndex={0}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": true,
+    }
+  }
+>
+  <View
+    animationDuration={200}
+    onLayout={[Function]}
+    positions={3}
+    selectedPosition={0}
+    style={
+      Object {
+        "backgroundColor": "#3366FF",
+        "height": 3,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+        "width": "33.333333333333336%",
+      }
+    }
+  />
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 2
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    testID="@tab/last"
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  onSelect={[MockFunction]}
+  selectedIndex={1}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": false,
+    }
+  }
+>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    testID="@tab/last"
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 2
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`@bottom-tab-navigator: component checks * current index 1`] = `
 <View
   appearance="default"
-  currentIndex={1}
   dispatch={[Function]}
-  routes={
-    Array [
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen1",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen2",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen3",
-      },
-    ]
-  }
+  selectedIndex={1}
   style={
     Array [
       Object {
@@ -82,12 +568,15 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       "paddingVertical": 16,
       "selectedColor": "#3366FF",
       "showHighlight": false,
-      "showText": false,
     }
   }
 >
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -95,55 +584,67 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-0"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
-  </View>
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-1"
-  >
-    <View
+    <Text
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
+          "color": "#8992A3",
         }
       }
-    />
+    >
+      Screen 1
+    </Text>
   </View>
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -151,138 +652,48 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-2"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
   >
-    <View
-      style={
+    <Image
+      source={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
         }
       }
-    />
-  </View>
-</View>
-`;
-
-exports[`@bottom-tab-navigator: component checks * different appearances 1`] = `
-<View
-  appearance="text"
-  currentIndex={0}
-  dispatch={[Function]}
-  routes={
-    Array [
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen1",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen2",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen3",
-      },
-    ]
-  }
-  style={
-    Array [
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
-        "backgroundColor": "transparent",
-        "borderTopColor": "#A6AEBD",
-        "borderTopWidth": 1,
-        "paddingVertical": 16,
-      },
-      undefined,
-    ]
-  }
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": false,
-      "showText": true,
-    }
-  }
->
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-0"
-  >
-    <View
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
@@ -293,11 +704,15 @@ exports[`@bottom-tab-navigator: component checks * different appearances 1`] = `
         }
       }
     >
-      Screen1
+      Screen 2
     </Text>
   </View>
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -305,21 +720,48 @@ exports[`@bottom-tab-navigator: component checks * different appearances 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-1"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
@@ -330,469 +772,7 @@ exports[`@bottom-tab-navigator: component checks * different appearances 1`] = `
         }
       }
     >
-      Screen2
-    </Text>
-  </View>
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-2"
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
-        }
-      }
-    />
-    <Text
-      style={
-        Object {
-          "color": "#8992A3",
-        }
-      }
-    >
-      Screen3
-    </Text>
-  </View>
-</View>
-`;
-
-exports[`@bottom-tab-navigator: component checks * different appearances 2`] = `
-<View
-  appearance="highlight"
-  currentIndex={0}
-  dispatch={[Function]}
-  routes={
-    Array [
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen1",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen2",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen3",
-      },
-    ]
-  }
-  style={
-    Array [
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
-        "backgroundColor": "transparent",
-        "borderTopColor": "#A6AEBD",
-        "borderTopWidth": 1,
-        "paddingVertical": 16,
-      },
-      undefined,
-    ]
-  }
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": true,
-      "showText": false,
-    }
-  }
->
-  <View
-    animationDuration={200}
-    onLayout={[Function]}
-    positions={3}
-    selectedPosition={0}
-    style={
-      Object {
-        "0": Object {
-          "position": "absolute",
-        },
-        "1": Object {
-          "backgroundColor": "#3366FF",
-          "height": 3,
-        },
-        "backgroundColor": "#3366FF",
-        "height": 3,
-        "position": "absolute",
-        "transform": Array [
-          Object {
-            "translateX": 0,
-          },
-        ],
-        "width": "33.333333333333336%",
-      }
-    }
-  />
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-0"
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
-        }
-      }
-    />
-  </View>
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-1"
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
-        }
-      }
-    />
-  </View>
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-2"
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
-        }
-      }
-    />
-  </View>
-</View>
-`;
-
-exports[`@bottom-tab-navigator: component checks * different appearances 3`] = `
-<View
-  appearance="text-highlight"
-  currentIndex={0}
-  dispatch={[Function]}
-  routes={
-    Array [
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen1",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen2",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen3",
-      },
-    ]
-  }
-  style={
-    Array [
-      Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
-        "backgroundColor": "transparent",
-        "borderTopColor": "#A6AEBD",
-        "borderTopWidth": 1,
-        "paddingVertical": 16,
-      },
-      undefined,
-    ]
-  }
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": true,
-      "showText": true,
-    }
-  }
->
-  <View
-    animationDuration={200}
-    onLayout={[Function]}
-    positions={3}
-    selectedPosition={0}
-    style={
-      Object {
-        "0": Object {
-          "position": "absolute",
-        },
-        "1": Object {
-          "backgroundColor": "#3366FF",
-          "height": 3,
-        },
-        "backgroundColor": "#3366FF",
-        "height": 3,
-        "position": "absolute",
-        "transform": Array [
-          Object {
-            "translateX": 0,
-          },
-        ],
-        "width": "33.333333333333336%",
-      }
-    }
-  />
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-0"
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
-        }
-      }
-    />
-    <Text
-      style={
-        Object {
-          "color": "#3366FF",
-        }
-      }
-    >
-      Screen1
-    </Text>
-  </View>
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-1"
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
-        }
-      }
-    />
-    <Text
-      style={
-        Object {
-          "color": "#8992A3",
-        }
-      }
-    >
-      Screen2
-    </Text>
-  </View>
-  <View
-    accessible={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-    testID="@tab-navigator/tab-2"
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "red",
-          "height": 20,
-          "marginBottom": 5,
-          "width": 20,
-        }
-      }
-    />
-    <Text
-      style={
-        Object {
-          "color": "#8992A3",
-        }
-      }
-    >
-      Screen3
+      Screen 3
     </Text>
   </View>
 </View>
@@ -801,9 +781,8 @@ exports[`@bottom-tab-navigator: component checks * different appearances 3`] = `
 exports[`@bottom-tab-navigator: component checks * empty 1`] = `
 <View
   appearance="default"
-  currentIndex={0}
   dispatch={[Function]}
-  routes={Array []}
+  selectedIndex={0}
   style={
     Array [
       Object {
@@ -841,7 +820,6 @@ exports[`@bottom-tab-navigator: component checks * empty 1`] = `
       "paddingVertical": 16,
       "selectedColor": "#3366FF",
       "showHighlight": false,
-      "showText": false,
     }
   }
 />
@@ -850,13 +828,12 @@ exports[`@bottom-tab-navigator: component checks * empty 1`] = `
 exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
 <View
   appearance="default"
-  currentIndex={0}
   dispatch={[Function]}
-  onTabChoose={
+  onSelect={
     [MockFunction] {
       "calls": Array [
         Array [
-          "Screen2",
+          2,
         ],
       ],
       "results": Array [
@@ -867,46 +844,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       ],
     }
   }
-  routes={
-    Array [
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen1",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen2",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen3",
-      },
-    ]
-  }
+  selectedIndex={1}
   style={
     Array [
       Object {
@@ -944,12 +882,15 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       "paddingVertical": 16,
       "selectedColor": "#3366FF",
       "showHighlight": false,
-      "showText": false,
     }
   }
 >
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -957,27 +898,67 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-0"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 1
+    </Text>
   </View>
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -985,27 +966,67 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-1"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 2
+    </Text>
   </View>
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1013,24 +1034,61 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    testID="@tab/last"
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-2"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
   </View>
 </View>
 `;
@@ -1038,48 +1096,8 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
 exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
 <View
   appearance="default"
-  currentIndex={0}
   dispatch={[Function]}
-  routes={
-    Array [
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen1",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen2",
-      },
-      Object {
-        "routeImage": <View
-          style={
-            Object {
-              "backgroundColor": "red",
-              "height": 20,
-              "width": 20,
-            }
-          }
-        />,
-        "routeName": "Screen3",
-      },
-    ]
-  }
+  selectedIndex={0}
   style={
     Array [
       Object {
@@ -1117,12 +1135,15 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       "paddingVertical": 16,
       "selectedColor": "#3366FF",
       "showHighlight": false,
-      "showText": false,
     }
   }
 >
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1130,27 +1151,67 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-0"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 1
+    </Text>
   </View>
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1158,27 +1219,67 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-1"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 2
+    </Text>
   </View>
   <View
     accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1186,24 +1287,60 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
-    testID="@tab-navigator/tab-2"
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
   >
-    <View
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
       style={
         Object {
-          "backgroundColor": "red",
-          "height": 20,
+          "height": 40,
           "marginBottom": 5,
-          "width": 20,
+          "width": 40,
         }
       }
     />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
   </View>
 </View>
 `;

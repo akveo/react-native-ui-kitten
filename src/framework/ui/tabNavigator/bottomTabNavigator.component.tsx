@@ -2,30 +2,28 @@ import React from 'react';
 import {
   Dimensions,
   View,
-  Text,
   ViewProps,
   StyleSheet,
   TouchableWithoutFeedback,
-  TouchableWithoutFeedbackProps,
 } from 'react-native';
 import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { TabBarIndicator } from '../tab/tabBarIndicator.component';
+import {
+  TabBarIndicator,
+  Props as TabBarIndicatorProps,
+} from '../tab/tabBarIndicator.component';
+import { Props as ChildProps } from './bottomNavigatorTab.component';
+import { toArray } from '../service/common.service';
 
-export interface TabRoute {
-  routeName: string;
-  routeImage?: React.ReactElement<any>;
-}
-
-export const TAB_TEST_ID = '@tab-navigator/tab-';
+type ChildElement = React.ReactElement<ChildProps>;
 
 interface TabNavigatorProps {
   appearance?: string;
-  routes: TabRoute[];
-  currentIndex?: number;
-  onTabChoose?: (routeName: string) => void;
+  selectedIndex?: number;
+  children: ChildElement | ChildElement[];
+  onSelect?: (index: number) => void;
 }
 
 export type Props = TabNavigatorProps & StyledComponentProps & ViewProps;
@@ -33,7 +31,7 @@ export type Props = TabNavigatorProps & StyledComponentProps & ViewProps;
 export class BottomTabNavigator extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
-    currentIndex: 0,
+    selectedIndex: 0,
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
@@ -50,78 +48,65 @@ export class BottomTabNavigator extends React.Component<Props> {
         height: style.highlightHeight,
         backgroundColor: style.selectedColor,
       },
-      tabContent: {
-        color: style.color,
-      },
-      tabContentSelected: {
-        color: style.selectedColor,
-      },
-      tabIcon: {
-        backgroundColor: style.color,
-      },
-      tabIconSelected: {
-        backgroundColor: style.selectedColor,
-      },
     };
   };
 
-  public onTabChoose = (index: number): void => {
-    if (index !== this.props.currentIndex) {
-      const routeName: string = this.props.routes
-        .find((route: TabRoute, i: number) => i === index).routeName;
-      this.props.onTabChoose && this.props.onTabChoose(routeName);
+  public onSelect = (index: number): void => {
+    if (this.props.selectedIndex !== index) {
+      this.props.onSelect && this.props.onSelect(index);
     }
   };
 
-  private renderTabIcon(index: number, themeStyles: StyleType): React.ReactElement<any> {
-    const icon: React.ReactElement<any> = this.props.routes[index].routeImage;
-    const iconStyle: StyleType = this.props.currentIndex === index ?
-      themeStyles.tabIconSelected : themeStyles.tabIcon;
-    return React.cloneElement(icon, {
-      style: {...iconStyle, ...styles.icon, ...icon.props.style},
+  private getComponentChild(item: ChildElement, index: number): ChildElement {
+    const component: ChildElement = React.cloneElement(item, {
+      isSelected: this.props.selectedIndex === index,
     });
-  }
 
-  private renderTab(route: TabRoute,
-                    index: number,
-                    themeStyles: StyleType): React.ReactElement<TouchableWithoutFeedbackProps> {
-
-    const contentStyle: StyleType = this.props.currentIndex === index ?
-      themeStyles.tabContentSelected : themeStyles.tabContent;
     return (
       <TouchableWithoutFeedback
+        {...item.props}
+        onPress={() => this.onSelect(index)}
         key={index}
-        onPress={() => this.onTabChoose(index)}
-        testID={TAB_TEST_ID + index}
       >
-        <View style={styles.tabItemContainer}>
-          {this.renderTabIcon(index, themeStyles)}
-          {themeStyles.showText && <Text style={contentStyle}>{route.routeName}</Text>}
-        </View>
+        {component}
       </TouchableWithoutFeedback>
     );
   }
 
-  private renderTabs(themeStyles: StyleType): React.ReactElement<TouchableWithoutFeedbackProps>[] {
-    return this.props.routes
-      .map((route: TabRoute, i: number) => this.renderTab(route, i, themeStyles));
+  private getNavigatorChildren(items: ChildElement | ChildElement[]): ChildElement[] {
+    return toArray(items).map((item: ChildElement, index: number) =>
+      this.getComponentChild(item, index));
+  }
+
+  private renderHighlight(showHighlight: boolean,
+                          style: StyleType,
+                          positions: number): React.ReactElement<TabBarIndicatorProps> {
+
+    return showHighlight ?
+      (
+        <TabBarIndicator
+          style={style}
+          selectedPosition={this.props.selectedIndex}
+          positions={positions}
+        />
+      ) : null;
   }
 
   public render(): React.ReactNode {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+    const children: ChildElement[] = this.getNavigatorChildren(this.props.children);
 
     return (
       <View
         {...this.props}
         style={[styles.container, componentStyle.container, this.props.style]}
       >
-        {componentStyle.showHighlight &&
-        <TabBarIndicator
-          style={[styles.highlight, componentStyle.highlight]}
-          selectedPosition={this.props.currentIndex}
-          positions={this.props.routes.length}
-        />}
-        {this.renderTabs(componentStyle)}
+        {this.renderHighlight(
+          componentStyle.showHighlight,
+          { ...componentStyle.highlight, ...styles.highlight },
+          children.length,
+        )}
+        {children}
       </View>
     );
   }
@@ -133,15 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: Dimensions.get('window').width,
   },
-  tabItemContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   highlight: {
     position: 'absolute',
-  },
-  icon: {
-    marginBottom: 5,
   },
 });

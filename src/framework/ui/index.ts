@@ -38,8 +38,11 @@ import {
 import {
   BottomTabNavigator as BottomTabNavigatorComponent,
   Props as BottomTabNavigatorProps,
-  TabRoute,
 } from './tabNavigator/bottomTabNavigator.component';
+import {
+  BottomNavigatorTab as BottomNavigatorTabComponent,
+  Props as BottomNavigatorTabProps,
+} from './tabNavigator/bottomNavigatorTab.component';
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
@@ -49,6 +52,7 @@ const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
 const BottomTabNavigator = styled<BottomTabNavigatorComponent, BottomTabNavigatorProps>(BottomTabNavigatorComponent);
+const BottomNavigatorTab = styled<BottomNavigatorTabComponent, BottomNavigatorTabProps>(BottomNavigatorTabComponent);
 
 export {
   Layout,
@@ -71,6 +75,7 @@ export {
   TabViewProps,
   BottomTabNavigator,
   BottomTabNavigatorProps,
-  TabRoute,
+  BottomNavigatorTab,
+  BottomNavigatorTabProps,
 };
 
