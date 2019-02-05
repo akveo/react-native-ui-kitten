@@ -28,6 +28,14 @@ import {
   Props as TabBarProps,
 } from './tab/tabBar.component';
 import {
+  Popover as Popover,
+  Props as PopoverProps,
+} from './popover/popover.component';
+import {
+  Tooltip as TooltipComponent,
+  Props as TooltipProps,
+} from './tooltip/tooltip.component';
+import {
   ViewPager,
   Props as ViewPagerProps,
 } from './viewPager/viewPager.component';
@@ -43,6 +51,7 @@ const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const Tooltip = styled<TooltipComponent, TooltipProps>(TooltipComponent);
 
 export {
   Layout,
@@ -56,11 +65,15 @@ export {
   CheckBox,
   Tab,
   TabBar,
+  Popover,
+  Tooltip,
   ViewPager,
   TabView,
   CheckBoxProps,
   TabProps,
   TabBarProps,
+  PopoverProps,
+  TooltipProps,
   ViewPagerProps,
   TabViewProps,
 };
