@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@modal component/panel checks * modal closes on passed prop 1`] = `
+<View
+  accessible={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onCloseModal={[Function]}
+  >
+    <Text>
+      Test1
+    </Text>
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Close Modal
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`@modal component/panel checks * modal closes on passed prop 2`] = `
+<View
+  accessible={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onCloseModal={[Function]}
+  >
+    <Text>
+      Test1
+    </Text>
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Close Modal
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`@modal component/panel checks * modal component close on backDrop checks 1`] = `
+<View
+  accessible={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onCloseModal={[Function]}
+  >
+    <Text>
+      Test1
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@modal component/panel checks * modal component close on backDrop checks 2`] = `
+<View
+  accessible={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onCloseModal={[Function]}
+  >
+    <Text>
+      Test1
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@modal component/panel checks * modal component renders properly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onCloseModal={[Function]}
+  >
+    <Text>
+      Test1
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@modal component/panel checks * modal component renders properly 2`] = `null`;
+
+exports[`@modal component/panel checks * modal panel render with props / children checking 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <Text>
+      Modal Panel Test
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@modal component/panel checks * modal panel renders properly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <Text>
+      Modal Panel Test
+    </Text>
+  </View>
+</View>
+`;
