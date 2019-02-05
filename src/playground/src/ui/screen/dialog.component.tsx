@@ -41,7 +41,6 @@ class Dialog extends React.Component<Props> {
       </View>
     );
   }
-
 }
 
 export const DialogScreen = withStyles(Dialog, (theme: ThemeType) => ({}));
@@ -72,7 +71,6 @@ class TestModal extends React.Component<ModalComponentCloseProps> {
       </View>
     );
   }
-
 }
 
 class InnerTestModal extends React.Component<ModalComponentCloseProps> {

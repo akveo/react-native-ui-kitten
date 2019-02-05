@@ -71,13 +71,26 @@ exports[`@modal-service: service checks * show multiple modals one by one 1`] = 
     </View>
   </View>
   <View
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-        "position": "absolute",
-      }
+    component={
+      <TestModal
+        text="Test Modal 2"
+        textTestId="@modal/modal-text-1"
+      />
     }
+    identifier="esre0dbv3e"
+    isBackDropAllowed={false}
+    onCloseModal={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "position": "absolute",
+        },
+        undefined,
+      ]
+    }
+    visible={true}
   >
     <View
       style={
@@ -136,13 +149,26 @@ exports[`@modal-service: service checks * show multiple modals one by one 1`] = 
     </View>
   </View>
   <View
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-        "position": "absolute",
-      }
+    component={
+      <TestModal
+        text="Test Modal 2"
+        textTestId="@modal/modal-text-2"
+      />
     }
+    identifier="qp836b8pg3"
+    isBackDropAllowed={false}
+    onCloseModal={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "position": "absolute",
+        },
+        undefined,
+      ]
+    }
+    visible={true}
   >
     <View
       style={
@@ -274,13 +300,26 @@ exports[`@modal-service: service checks * showDialog have been called 1`] = `
     </View>
   </View>
   <View
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-        "position": "absolute",
-      }
+    component={
+      <TestModal
+        text="Test Modal 1"
+        textTestId="@modal/modal-text"
+      />
     }
+    identifier="1ggdt8lflmz"
+    isBackDropAllowed={false}
+    onCloseModal={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "position": "absolute",
+        },
+        undefined,
+      ]
+    }
+    visible={true}
   >
     <View
       style={

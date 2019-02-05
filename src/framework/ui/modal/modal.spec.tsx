@@ -9,77 +9,21 @@ import {
   TouchableWithoutFeedback,
   Button,
 } from 'react-native';
-import { ModalPanel } from './modalPanel.component';
-import { ModalComponent } from './modal.component';
+import { Modal } from './modal.component';
 
-describe('@modal component/panel checks', () => {
+describe('@modal component checks', () => {
 
   const MODAL_TEST_IDENTIFIER: (substring: string) => string = (substring: string): string =>
     `modal-test-identifier-${substring}`;
 
-  interface HooksProps {
-    componentDidMount?: () => void;
-    componentWillUnmount?: () => void;
-  }
-
-  class ModalPanelTest extends React.Component<HooksProps> {
-
-    componentDidMount(): void {
-      this.props.componentDidMount && this.props.componentDidMount();
-    }
-
-    componentWillUnmount() {
-      this.props.componentWillUnmount && this.props.componentWillUnmount();
-    }
-
-    render() {
-      return (
-        <ModalPanel>
-          <View>
-            <Text>Modal Panel Test</Text>
-          </View>
-        </ModalPanel>
-      );
-    }
-  }
-
-  it('* modal panel renders properly', () => {
-    const panel = render(<ModalPanelTest/>);
-    expect(panel).toMatchSnapshot();
-  });
-
-  it('* modal panel render with props / children checking', () => {
-    const panelChild = <View><Text>Test</Text></View>;
-    const panel = <ModalPanelTest children={panelChild}/>;
-    const renderedPanel = render(panel);
-
-    expect(panel.props.children).toBe(panelChild);
-    expect(renderedPanel).toMatchSnapshot();
-  });
-
-  it('* modal panel l/c-hooks checks', () => {
-    const componentDidMount = jest.fn();
-    const componentWillUnmount = jest.fn();
-
-    const wrapper = render(
-      <ModalPanelTest
-        componentDidMount={componentDidMount}
-        componentWillUnmount={componentWillUnmount}
-      />,
-    );
-    expect(componentDidMount).toHaveBeenCalled();
-    wrapper.unmount();
-    expect(componentWillUnmount).toHaveBeenCalled();
-  });
-
   it('* modal component renders properly', () => {
-    const modal1 = render(<ModalComponent
+    const modal1 = render(<Modal
       visible={true}
       component={<View><Text>Test1</Text></View>}
       isBackDropAllowed={false}
       identifier={MODAL_TEST_IDENTIFIER('1')}
       onCloseModal={() => 1}/>);
-    const modal2 = render(<ModalComponent
+    const modal2 = render(<Modal
       visible={false}
       component={<View><Text>Test2</Text></View>}
       isBackDropAllowed={false}
@@ -96,7 +40,7 @@ describe('@modal component/panel checks', () => {
       component: <View><Text>Test1</Text></View>,
       isBackDropAllowed: false,
     };
-    const modal = <ModalComponent {...modalPassingProps}/>;
+    const modal = <Modal {...modalPassingProps}/>;
 
     expect(modal.props.visible).toBe(modalPassingProps.visible);
     expect(modal.props.component).toBe(modalPassingProps.component);
@@ -105,7 +49,7 @@ describe('@modal component/panel checks', () => {
 
   it('* modal closes on passed prop', () => {
     const onCloseModal = jest.fn();
-    const component = <ModalComponent
+    const component = <Modal
       visible={true}
       component={<View>
         <Text>Test1</Text>
@@ -123,7 +67,7 @@ describe('@modal component/panel checks', () => {
 
   it('* modal component close on backDrop checks', () => {
     const onCloseModal = jest.fn();
-    const modal = render(<ModalComponent
+    const modal = render(<Modal
       visible={true}
       component={<View><Text>Test1</Text></View>}
       isBackDropAllowed={true}

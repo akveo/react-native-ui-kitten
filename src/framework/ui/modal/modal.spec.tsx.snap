@@ -1,8 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@modal component/panel checks * modal closes on passed prop 1`] = `
+exports[`@modal component checks * modal closes on passed prop 1`] = `
 <View
   accessible={true}
+  component={
+    <View>
+      <Text>
+        Test1
+      </Text>
+      <Button
+        onPress={[MockFunction]}
+        title="Close Modal"
+      />
+    </View>
+  }
+  identifier="modal-test-identifier-1"
+  isBackDropAllowed={true}
+  onCloseModal={[MockFunction]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -10,12 +24,16 @@ exports[`@modal component/panel checks * modal closes on passed prop 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "justifyContent": "center",
-      "position": "absolute",
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "absolute",
+      },
+      undefined,
+    ]
   }
+  visible={true}
 >
   <View
     onCloseModal={[Function]}
@@ -67,9 +85,51 @@ exports[`@modal component/panel checks * modal closes on passed prop 1`] = `
 </View>
 `;
 
-exports[`@modal component/panel checks * modal closes on passed prop 2`] = `
+exports[`@modal component checks * modal closes on passed prop 2`] = `
 <View
   accessible={true}
+  component={
+    <View>
+      <Text>
+        Test1
+      </Text>
+      <Button
+        onPress={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                undefined,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        title="Close Modal"
+      />
+    </View>
+  }
+  identifier="modal-test-identifier-1"
+  isBackDropAllowed={true}
+  onCloseModal={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          undefined,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -77,12 +137,16 @@ exports[`@modal component/panel checks * modal closes on passed prop 2`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "justifyContent": "center",
-      "position": "absolute",
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "absolute",
+      },
+      undefined,
+    ]
   }
+  visible={true}
 >
   <View
     onCloseModal={[Function]}
@@ -134,9 +198,19 @@ exports[`@modal component/panel checks * modal closes on passed prop 2`] = `
 </View>
 `;
 
-exports[`@modal component/panel checks * modal component close on backDrop checks 1`] = `
+exports[`@modal component checks * modal component close on backDrop checks 1`] = `
 <View
   accessible={true}
+  component={
+    <View>
+      <Text>
+        Test1
+      </Text>
+    </View>
+  }
+  identifier="modal-test-identifier-1"
+  isBackDropAllowed={true}
+  onCloseModal={[MockFunction]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -144,12 +218,16 @@ exports[`@modal component/panel checks * modal component close on backDrop check
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "justifyContent": "center",
-      "position": "absolute",
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "absolute",
+      },
+      undefined,
+    ]
   }
+  visible={true}
 >
   <View
     onCloseModal={[Function]}
@@ -161,9 +239,33 @@ exports[`@modal component/panel checks * modal component close on backDrop check
 </View>
 `;
 
-exports[`@modal component/panel checks * modal component close on backDrop checks 2`] = `
+exports[`@modal component checks * modal component close on backDrop checks 2`] = `
 <View
   accessible={true}
+  component={
+    <View>
+      <Text>
+        Test1
+      </Text>
+    </View>
+  }
+  identifier="modal-test-identifier-1"
+  isBackDropAllowed={true}
+  onCloseModal={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "modal-test-identifier-1",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -171,12 +273,16 @@ exports[`@modal component/panel checks * modal component close on backDrop check
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "justifyContent": "center",
-      "position": "absolute",
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "absolute",
+      },
+      undefined,
+    ]
   }
+  visible={true}
 >
   <View
     onCloseModal={[Function]}
@@ -188,15 +294,29 @@ exports[`@modal component/panel checks * modal component close on backDrop check
 </View>
 `;
 
-exports[`@modal component/panel checks * modal component renders properly 1`] = `
+exports[`@modal component checks * modal component renders properly 1`] = `
 <View
-  style={
-    Object {
-      "alignItems": "center",
-      "justifyContent": "center",
-      "position": "absolute",
-    }
+  component={
+    <View>
+      <Text>
+        Test1
+      </Text>
+    </View>
   }
+  identifier="modal-test-identifier-1"
+  isBackDropAllowed={false}
+  onCloseModal={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "absolute",
+      },
+      undefined,
+    ]
+  }
+  visible={true}
 >
   <View
     onCloseModal={[Function]}
@@ -208,36 +328,4 @@ exports[`@modal component/panel checks * modal component renders properly 1`] = 
 </View>
 `;
 
-exports[`@modal component/panel checks * modal component renders properly 2`] = `null`;
-
-exports[`@modal component/panel checks * modal panel render with props / children checking 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View>
-    <Text>
-      Modal Panel Test
-    </Text>
-  </View>
-</View>
-`;
-
-exports[`@modal component/panel checks * modal panel renders properly 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View>
-    <Text>
-      Modal Panel Test
-    </Text>
-  </View>
-</View>
-`;
+exports[`@modal component checks * modal component renders properly 2`] = `null`;
