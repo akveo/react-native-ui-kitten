@@ -1,395 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@top-navigation-bar * actions checks 1`] = `
-<View
-  appearance="title-centered-subtitle"
-  dispatch={[Function]}
-  leftControl={
-    <View
-      style={
-        Object {
-          "backgroundColor": "white",
-          "height": 20,
-          "width": 20,
-        }
-      }
-    />
-  }
-  onLeftControl={[MockFunction]}
-  onRightControls={
-    Array [
-      [MockFunction],
-      [MockFunction],
-      [MockFunction],
-    ]
-  }
-  rightControls={
-    Array [
-      <View
-        style={
-          Object {
-            "backgroundColor": "white",
-            "height": 20,
-            "width": 20,
-          }
-        }
-      />,
-      <View
-        style={
-          Object {
-            "backgroundColor": "red",
-            "height": 20,
-            "width": 20,
-          }
-        }
-      />,
-      <View
-        style={
-          Object {
-            "backgroundColor": "green",
-            "height": 20,
-            "width": 20,
-          }
-        }
-      />,
-    ]
-  }
-  style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-      },
-      Object {
-        "backgroundColor": "#3366FF",
-        "height": 46,
-        "paddingBottom": 12,
-        "paddingHorizontal": 16,
-        "paddingTop": 4,
-      },
-      undefined,
-    ]
-  }
-  subtitle="Subtitle"
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "#3366FF",
-      "height": 46,
-      "leftControlColor": "white",
-      "paddingBottom": 12,
-      "paddingHorizontal": 16,
-      "paddingTop": 4,
-      "rightControlsColors": Array [
-        "white",
-        "white",
-      ],
-      "subtitleColor": "white",
-      "subtitleFontSize": 12,
-      "subtitleFontWeight": "400",
-      "titleCentered": true,
-      "titleColor": "white",
-      "titleFontSize": 16,
-      "titleFontWeight": "600",
-      "withSubtitle": true,
-    }
-  }
-  title="Test"
->
-  <View
-    style={
-      Array [
-        Object {
-          "flex": 1,
-        },
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        },
-      ]
-    }
-  >
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID="@top-navbar-left"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "white",
-            "height": 20,
-            "width": 20,
-          }
-        }
-      />
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 3,
-      }
-    }
-  >
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 16,
-          "fontWeight": "600",
-        }
-      }
-    >
-      Test
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 12,
-          "fontWeight": "400",
-        }
-      }
-    >
-      Subtitle
-    </Text>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
-    }
-  >
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID="@top-navbar-right-0"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "white",
-            "height": 20,
-            "marginRight": 5,
-            "width": 20,
-          }
-        }
-      />
-    </View>
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID="@top-navbar-right-1"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "white",
-            "height": 20,
-            "marginRight": 5,
-            "width": 20,
-          }
-        }
-      />
-    </View>
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID="@top-navbar-right-2"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": undefined,
-            "height": 20,
-            "width": 20,
-          }
-        }
-      />
-    </View>
-  </View>
-</View>
-`;
-
-exports[`@top-navigation-bar * appearance: subtitle 1`] = `
-<View
-  appearance="subtitle"
-  dispatch={[Function]}
-  style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-      },
-      Object {
-        "backgroundColor": "#3366FF",
-        "height": 46,
-        "paddingBottom": 12,
-        "paddingHorizontal": 16,
-        "paddingTop": 4,
-      },
-      undefined,
-    ]
-  }
-  subtitle="Subtitle"
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "#3366FF",
-      "height": 46,
-      "leftControlColor": "white",
-      "paddingBottom": 12,
-      "paddingHorizontal": 16,
-      "paddingTop": 4,
-      "rightControlsColors": Array [
-        "white",
-        "white",
-      ],
-      "subtitleColor": "white",
-      "subtitleFontSize": 12,
-      "subtitleFontWeight": "400",
-      "titleCentered": false,
-      "titleColor": "white",
-      "titleFontSize": 16,
-      "titleFontWeight": "600",
-      "withSubtitle": true,
-    }
-  }
-  title="Test"
->
-  <View
-    style={
-      Array [
-        null,
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        },
-      ]
-    }
-  />
-  <View
-    style={
-      Object {
-        "flex": 1,
-        "paddingHorizontal": 16,
-      }
-    }
-  >
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 16,
-          "fontWeight": "600",
-        }
-      }
-    >
-      Test
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 12,
-          "fontWeight": "400",
-        }
-      }
-    >
-      Subtitle
-    </Text>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        },
-        null,
-      ]
-    }
-  />
-</View>
-`;
-
 exports[`@top-navigation-bar * appearance: title-centered 1`] = `
 <View
   appearance="title-centered"
@@ -427,22 +37,16 @@ exports[`@top-navigation-bar * appearance: title-centered 1`] = `
     Object {
       "backgroundColor": "#3366FF",
       "height": 46,
-      "leftControlColor": "white",
       "paddingBottom": 12,
       "paddingHorizontal": 16,
       "paddingTop": 4,
-      "rightControlsColors": Array [
-        "white",
-        "white",
-      ],
-      "subtitleColor": "white",
-      "subtitleFontSize": 12,
-      "subtitleFontWeight": "400",
-      "titleCentered": true,
-      "titleColor": "white",
-      "titleFontSize": 16,
-      "titleFontWeight": "600",
-      "withSubtitle": false,
+      "subtitle.color": "white",
+      "subtitle.fontSize": 12,
+      "subtitle.fontWeight": "400",
+      "title.centered": true,
+      "title.color": "white",
+      "title.fontSize": 16,
+      "title.fontWeight": "600",
     }
   }
   title="Test"
@@ -496,9 +100,9 @@ exports[`@top-navigation-bar * appearance: title-centered 1`] = `
 </View>
 `;
 
-exports[`@top-navigation-bar * appearance: title-centered-subtitle 1`] = `
+exports[`@top-navigation-bar * subtitle 1`] = `
 <View
-  appearance="title-centered-subtitle"
+  appearance="default"
   dispatch={[Function]}
   style={
     Array [
@@ -534,22 +138,16 @@ exports[`@top-navigation-bar * appearance: title-centered-subtitle 1`] = `
     Object {
       "backgroundColor": "#3366FF",
       "height": 46,
-      "leftControlColor": "white",
       "paddingBottom": 12,
       "paddingHorizontal": 16,
       "paddingTop": 4,
-      "rightControlsColors": Array [
-        "white",
-        "white",
-      ],
-      "subtitleColor": "white",
-      "subtitleFontSize": 12,
-      "subtitleFontWeight": "400",
-      "titleCentered": true,
-      "titleColor": "white",
-      "titleFontSize": 16,
-      "titleFontWeight": "600",
-      "withSubtitle": true,
+      "subtitle.color": "white",
+      "subtitle.fontSize": 12,
+      "subtitle.fontWeight": "400",
+      "title.centered": false,
+      "title.color": "white",
+      "title.fontSize": 16,
+      "title.fontWeight": "600",
     }
   }
   title="Test"
@@ -557,9 +155,7 @@ exports[`@top-navigation-bar * appearance: title-centered-subtitle 1`] = `
   <View
     style={
       Array [
-        Object {
-          "flex": 1,
-        },
+        null,
         Object {
           "flexDirection": "row",
           "justifyContent": "flex-start",
@@ -570,8 +166,8 @@ exports[`@top-navigation-bar * appearance: title-centered-subtitle 1`] = `
   <View
     style={
       Object {
-        "alignItems": "center",
-        "flex": 3,
+        "flex": 1,
+        "paddingHorizontal": 16,
       }
     }
   >
@@ -605,9 +201,7 @@ exports[`@top-navigation-bar * appearance: title-centered-subtitle 1`] = `
           "flexDirection": "row",
           "justifyContent": "flex-end",
         },
-        Object {
-          "flex": 1,
-        },
+        null,
       ]
     }
   />
@@ -651,22 +245,16 @@ exports[`@top-navigation-bar * title 1`] = `
     Object {
       "backgroundColor": "#3366FF",
       "height": 46,
-      "leftControlColor": "white",
       "paddingBottom": 12,
       "paddingHorizontal": 16,
       "paddingTop": 4,
-      "rightControlsColors": Array [
-        "white",
-        "white",
-      ],
-      "subtitleColor": "white",
-      "subtitleFontSize": 12,
-      "subtitleFontWeight": "400",
-      "titleCentered": false,
-      "titleColor": "white",
-      "titleFontSize": 16,
-      "titleFontWeight": "600",
-      "withSubtitle": false,
+      "subtitle.color": "white",
+      "subtitle.fontSize": 12,
+      "subtitle.fontWeight": "400",
+      "title.centered": false,
+      "title.color": "white",
+      "title.fontSize": 16,
+      "title.fontWeight": "600",
     }
   }
   title="Test"
@@ -713,5 +301,393 @@ exports[`@top-navigation-bar * title 1`] = `
       ]
     }
   />
+</View>
+`;
+
+exports[`@top-navigation-bar * with actions 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  leftControl={
+    <ActionMock
+      iconSource={
+        Object {
+          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+        }
+      }
+      onPress={[MockFunction]}
+      testID="@top-navbar-left"
+    />
+  }
+  rightControls={
+    Array [
+      <ActionMock
+        iconSource={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        onPress={[MockFunction]}
+        testID="@top-navbar-right-1"
+      />,
+      <ActionMock
+        iconSource={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        onPress={[MockFunction]}
+        testID="@top-navbar-right-2"
+      />,
+      <ActionMock
+        iconSource={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        onPress={[MockFunction]}
+        testID="@top-navbar-right-3"
+      />,
+    ]
+  }
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      },
+      Object {
+        "backgroundColor": "#3366FF",
+        "height": 46,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 4,
+      },
+      undefined,
+    ]
+  }
+  subtitle="Subtitle"
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "#3366FF",
+      "height": 46,
+      "paddingBottom": 12,
+      "paddingHorizontal": 16,
+      "paddingTop": 4,
+      "subtitle.color": "white",
+      "subtitle.fontSize": 12,
+      "subtitle.fontWeight": "400",
+      "title.centered": false,
+      "title.color": "white",
+      "title.fontSize": 16,
+      "title.fontWeight": "600",
+    }
+  }
+  title="Test"
+>
+  <View
+    style={
+      Array [
+        null,
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      appearance="default"
+      dispatch={[Function]}
+      iconSource={
+        Object {
+          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+        }
+      }
+      isLastItem={false}
+      onPress={[MockFunction]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 25,
+            "marginRight": 8,
+            "width": 25,
+          },
+          undefined,
+        ]
+      }
+      theme={
+        Object {
+          "blue-dark": "#2541CC",
+          "blue-primary": "#3366FF",
+          "gray-dark": "#8992A3",
+          "gray-highlight": "#EDF0F5",
+          "gray-light": "#DDE1EB",
+          "gray-primary": "#A6AEBD",
+          "pink-primary": "#FF3D71",
+        }
+      }
+      themedStyle={
+        Object {
+          "height": 25,
+          "marginRight": 8,
+          "width": 25,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "paddingHorizontal": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 16,
+          "fontWeight": "600",
+        }
+      }
+    >
+      Test
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 12,
+          "fontWeight": "400",
+        }
+      }
+    >
+      Subtitle
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+        },
+        null,
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      appearance="default"
+      dispatch={[Function]}
+      iconSource={
+        Object {
+          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+        }
+      }
+      isLastItem={false}
+      onPress={[MockFunction]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 25,
+            "marginRight": 8,
+            "width": 25,
+          },
+          undefined,
+        ]
+      }
+      theme={
+        Object {
+          "blue-dark": "#2541CC",
+          "blue-primary": "#3366FF",
+          "gray-dark": "#8992A3",
+          "gray-highlight": "#EDF0F5",
+          "gray-light": "#DDE1EB",
+          "gray-primary": "#A6AEBD",
+          "pink-primary": "#FF3D71",
+        }
+      }
+      themedStyle={
+        Object {
+          "height": 25,
+          "marginRight": 8,
+          "width": 25,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      accessible={true}
+      appearance="default"
+      dispatch={[Function]}
+      iconSource={
+        Object {
+          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+        }
+      }
+      isLastItem={false}
+      onPress={[MockFunction]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 25,
+            "marginRight": 8,
+            "width": 25,
+          },
+          undefined,
+        ]
+      }
+      theme={
+        Object {
+          "blue-dark": "#2541CC",
+          "blue-primary": "#3366FF",
+          "gray-dark": "#8992A3",
+          "gray-highlight": "#EDF0F5",
+          "gray-light": "#DDE1EB",
+          "gray-primary": "#A6AEBD",
+          "pink-primary": "#FF3D71",
+        }
+      }
+      themedStyle={
+        Object {
+          "height": 25,
+          "marginRight": 8,
+          "width": 25,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      accessible={true}
+      appearance="default"
+      dispatch={[Function]}
+      iconSource={
+        Object {
+          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+        }
+      }
+      isLastItem={true}
+      onPress={[MockFunction]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 25,
+            "marginRight": 0,
+            "width": 25,
+          },
+          undefined,
+        ]
+      }
+      theme={
+        Object {
+          "blue-dark": "#2541CC",
+          "blue-primary": "#3366FF",
+          "gray-dark": "#8992A3",
+          "gray-highlight": "#EDF0F5",
+          "gray-light": "#DDE1EB",
+          "gray-primary": "#A6AEBD",
+          "pink-primary": "#FF3D71",
+        }
+      }
+      themedStyle={
+        Object {
+          "height": 25,
+          "marginRight": 8,
+          "width": 25,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+  </View>
 </View>
 `;

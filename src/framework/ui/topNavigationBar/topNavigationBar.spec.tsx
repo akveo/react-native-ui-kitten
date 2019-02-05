@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import {
   render,
   fireEvent,
@@ -13,15 +12,34 @@ import {
   TopNavigationBar as TopNavigationBarComponent,
   Props as TopNavigationBarProps,
 } from './topNavigationBar.component';
+import {
+  TopNavigationBarAction as TopNavigationBarActionComponent,
+  Props as TopNavigationBaActionProps,
+} from './topNavigationBarAction.component';
 import * as config from './topNavigationBar.spec.config';
+import * as actionConfig from './topNavigationBarAction.spec.config';
 
 const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
+const TopNavigationBarAction =
+  styled<TopNavigationBarActionComponent, TopNavigationBaActionProps>(TopNavigationBarActionComponent);
 
 const Mock = (props?: TopNavigationBarProps): React.ReactElement<StyleProviderProps> => (
   <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
     <TopNavigationBar {...props} />
   </StyleProvider>
 );
+
+const ActionMock = (props?: TopNavigationBaActionProps): React.ReactElement<StyleProviderProps> => (
+  <StyleProvider mapping={actionConfig.mapping} theme={actionConfig.theme} styles={{}}>
+    <TopNavigationBarAction {...props} />
+  </StyleProvider>
+);
+
+const iconSourceUri: string = 'https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png';
+const testIdLeftAction: string = '@top-navbar-left';
+const testIdRightAction1: string = '@top-navbar-right-1';
+const testIdRightAction2: string = '@top-navbar-right-2';
+const testIdRightAction3: string = '@top-navbar-right-3';
 
 describe('@top-navigation-bar', () => {
 
@@ -30,8 +48,8 @@ describe('@top-navigation-bar', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('* appearance: subtitle', () => {
-    const component = render(<Mock appearance='subtitle' title='Test' subtitle='Subtitle'/>);
+  it('* subtitle', () => {
+    const component = render(<Mock title='Test' subtitle='Subtitle'/>);
     expect(component).toMatchSnapshot();
   });
 
@@ -40,12 +58,7 @@ describe('@top-navigation-bar', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('* appearance: title-centered-subtitle', () => {
-    const component = render(<Mock appearance='title-centered-subtitle' title='Test' subtitle='Subtitle'/>);
-    expect(component).toMatchSnapshot();
-  });
-
-  it('* actions checks', () => {
+  it('* with actions', () => {
     const onLeftControl = jest.fn();
     const onRightControl1 = jest.fn();
     const onRightControl2 = jest.fn();
@@ -53,27 +66,24 @@ describe('@top-navigation-bar', () => {
 
     const component = render(
       <Mock
-        appearance='title-centered-subtitle'
         title='Test'
         subtitle='Subtitle'
-        leftControl={<View style={{ width: 20, height: 20, backgroundColor: 'white' }}/>}
+        leftControl={
+          <ActionMock testID={testIdLeftAction} iconSource={{ uri: iconSourceUri }} onPress={onLeftControl}/>
+        }
         rightControls={[
-          <View style={{ width: 20, height: 20, backgroundColor: 'white' }}/>,
-          <View style={{ width: 20, height: 20, backgroundColor: 'red' }}/>,
-          <View style={{ width: 20, height: 20, backgroundColor: 'green' }}/>,
+          <ActionMock testID={testIdRightAction1} iconSource={{ uri: iconSourceUri }} onPress={onRightControl1}/>,
+          <ActionMock testID={testIdRightAction2} iconSource={{ uri: iconSourceUri }} onPress={onRightControl2}/>,
+          <ActionMock testID={testIdRightAction3} iconSource={{ uri: iconSourceUri }} onPress={onRightControl3}/>,
         ]}
-        onLeftControl={onLeftControl}
-        onRightControls={[onRightControl1, onRightControl2, onRightControl3]}
       />,
     );
 
     expect(component).toMatchSnapshot();
-
-    fireEvent.press(component.getByTestId('@top-navbar-left'));
-    fireEvent.press(component.getByTestId('@top-navbar-right-0'));
-    fireEvent.press(component.getByTestId('@top-navbar-right-1'));
-    fireEvent.press(component.getByTestId('@top-navbar-right-2'));
-
+    fireEvent.press(component.getByTestId(testIdLeftAction));
+    fireEvent.press(component.getByTestId(testIdRightAction1));
+    fireEvent.press(component.getByTestId(testIdRightAction2));
+    fireEvent.press(component.getByTestId(testIdRightAction3));
     expect(onLeftControl).toHaveBeenCalled();
     expect(onRightControl1).toHaveBeenCalled();
     expect(onRightControl2).toHaveBeenCalled();

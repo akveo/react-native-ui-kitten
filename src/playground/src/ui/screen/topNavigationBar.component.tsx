@@ -14,9 +14,18 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { TopNavigationBar as TopNavigationBarComponent } from '@kitten/ui';
+import {
+  TopNavigationBar as TopNavigationBarComponent,
+  TopNavigationBarAction,
+} from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
+
+const leftControlUri: string = 'https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png';
+const rightControlUri1: string =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLai-QccSTB98vmP7dUigtL8F13cE6_0mmju_1m4mDQgzLd_Zq';
+const rightControlUri2: string =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt6ezD4tiscqX5g4AFKa0vFC0z7rLTlAJn53Jl65uZ5JfPq4Ot';
 
 class TopNavigationBar extends React.Component<Props> {
 
@@ -24,15 +33,24 @@ class TopNavigationBar extends React.Component<Props> {
     header: (props: NavigationScreenProps) => (
       <SafeAreaView style={styles.safeAreaView}>
         <TopNavigationBarComponent
-          appearance='title-centered-subtitle'
+          appearance='title-centered'
           title='Top Navigation Bar'
           subtitle='Subtitle'
-          leftControl={<View style={styles.circle}/>}
-          rightControls={[<View style={styles.square}/>, <View style={styles.rectangle}/>]}
-          onLeftControl={() => props.navigation.goBack(null)}
-          onRightControls={[
-            () => Alert.alert('On first right control'),
-            () => Alert.alert('On second right control'),
+          leftControl={
+            <TopNavigationBarAction
+              iconSource={{ uri: leftControlUri }}
+              onPress={() => props.navigation.goBack(null)}
+            />
+          }
+          rightControls={[
+            <TopNavigationBarAction
+              iconSource={{ uri: rightControlUri1 }}
+              onPress={() => Alert.alert('On first right action')}
+            />,
+            <TopNavigationBarAction
+              iconSource={{ uri: rightControlUri2 }}
+              onPress={() => Alert.alert('On second right action')}
+            />,
           ]}
         />
       </SafeAreaView>
@@ -58,17 +76,8 @@ const styles = StyleSheet.create({
   safeAreaView: {
     backgroundColor: '#3366FF',
   },
-  circle: {
+  icon: {
     width: 20,
-    height: 20,
-    borderRadius: 10,
-  },
-  square: {
-    width: 20,
-    height: 20,
-  },
-  rectangle: {
-    width: 30,
     height: 20,
   },
 });

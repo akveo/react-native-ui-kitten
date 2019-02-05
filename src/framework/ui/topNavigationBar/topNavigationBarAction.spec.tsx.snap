@@ -1,0 +1,258 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@top-navigation-bar-action * is last item check 1`] = `
+<View
+  accessible={true}
+  appearance="default"
+  dispatch={[Function]}
+  iconSource={
+    Object {
+      "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+    }
+  }
+  isLastItem={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "height": 25,
+        "marginRight": 0,
+        "width": 25,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "height": 25,
+      "marginRight": 8,
+      "width": 25,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`@top-navigation-bar-action * is last item check 2`] = `
+<View
+  accessible={true}
+  appearance="default"
+  dispatch={[Function]}
+  iconSource={
+    Object {
+      "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+    }
+  }
+  isLastItem={false}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "height": 25,
+        "marginRight": 8,
+        "width": 25,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "height": 25,
+      "marginRight": 8,
+      "width": 25,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`@top-navigation-bar-action * on press check 1`] = `
+<View
+  accessible={true}
+  appearance="default"
+  dispatch={[Function]}
+  iconSource={
+    Object {
+      "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+    }
+  }
+  isLastItem={false}
+  onPress={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "height": 25,
+        "marginRight": 8,
+        "width": 25,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "height": 25,
+      "marginRight": 8,
+      "width": 25,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`@top-navigation-bar-action * with icon uri 1`] = `
+<View
+  accessible={true}
+  appearance="default"
+  dispatch={[Function]}
+  iconSource={
+    Object {
+      "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+    }
+  }
+  isLastItem={false}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "height": 25,
+        "marginRight": 8,
+        "width": 25,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "height": 25,
+      "marginRight": 8,
+      "width": 25,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+</View>
+`;
