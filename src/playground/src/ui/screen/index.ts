@@ -3,6 +3,7 @@ export { RadioScreen } from './radio.component';
 export { LayoutScreen } from './layout.component';
 export { ToggleScreen } from './toggle.component';
 export { RadioGroupScreen } from './radioGroup.component';
+export { DialogScreen } from './dialog.component';
 export { CheckBoxScreen } from './checkbox.component';
 export { TabBarScreen } from './tabBar.component';
 export { ViewPagerScreen } from './viewPager.component';
