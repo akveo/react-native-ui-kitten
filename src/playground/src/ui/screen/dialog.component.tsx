@@ -63,7 +63,7 @@ class TestModal extends React.Component<ModalComponentCloseProps> {
   render() {
     return (
       <View style={styles.outerModal}>
-        <Text>This is test Outer Modal</Text>
+        <Text>This is Test Outer Modal</Text>
         <Button
           title='Open Inner Modal'
           onPress={this.showModal}
@@ -82,7 +82,7 @@ class InnerTestModal extends React.Component<ModalComponentCloseProps> {
   render(): React.ReactNode {
     return (
       <View style={styles.innerModal}>
-        <Text>This is test Inner Modal</Text>
+        <Text>This is Test Inner Modal</Text>
         <Button
           title='Close Modal'
           onPress={this.props.onCloseModal}

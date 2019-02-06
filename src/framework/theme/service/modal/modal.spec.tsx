@@ -102,7 +102,6 @@ describe('@modal-service: service checks', () => {
     fireEvent.press(application.getByTestId(ShowSingleModalTestId));
 
     expect(spy).toHaveBeenCalled();
-    expect(application).toMatchSnapshot();
   });
 
   it('* show multiple modals one by one', () => {
@@ -112,6 +111,13 @@ describe('@modal-service: service checks', () => {
       .getByTestId(`${ModalTextTestId}-2`).props.children;
 
     expect(expectedText).toBe(TestModal2Text);
+  });
+
+  it('* unexpected branch cover', () => {
+    const application = render(<TestApplication/>);
+    ModalService.setComponent(null);
+    expect(ModalService.component).toBe(null);
+    fireEvent.press(application.getByTestId(ShowSingleModalTestId));
     expect(application).toMatchSnapshot();
   });
 
