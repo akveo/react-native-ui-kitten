@@ -6,19 +6,25 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Dimensions,
+  Animated,
 } from 'react-native';
 import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import { ModalAnimationType } from '../../theme/service';
 
 interface ModalProps {
   visible: boolean;
   children: React.ReactElement<any> | React.ReactElement<any>[];
   isBackDropAllowed?: boolean;
   identifier?: string;
+  animationType?: ModalAnimationType;
+  animationDuration?: number;
   onCloseModal?: (index: string) => void;
 }
+
+const { width, height } = Dimensions.get('window');
 
 export type Props = StyledComponentProps & ViewProps & ModalProps;
 
@@ -27,7 +33,57 @@ export class Modal extends React.Component<Props> {
   static defaultProps: Partial<Props> = {
     visible: false,
     isBackDropAllowed: false,
+    animationType: 'none',
+    animationDuration: 300,
   };
+
+  private animation: Animated.Value;
+
+  constructor(props: Props) {
+    super(props);
+    this.setAnimation();
+  }
+
+  public componentDidMount(): void {
+    this.startAnimation();
+  }
+
+  public componentWillReceiveProps(nextProps: Readonly<Props>): void {
+    if (nextProps.visible !== this.props.visible) {
+      if (this.isNotNoneAnimation()) {
+        const initialValue: number = this.props.animationType === 'fade' ? 0 : height;
+        this.animation.setValue(initialValue);
+        this.startAnimation();
+      }
+    }
+  }
+
+  private isNotNoneAnimation(): boolean {
+    return this.props.animationType !== 'none';
+  }
+
+  private startAnimation(): void {
+    if (this.isNotNoneAnimation()) {
+      const value: number = this.props.animationType === 'fade' ? 1 : 0;
+      Animated.timing(
+        this.animation,
+        {
+          toValue: value,
+          duration: this.props.animationDuration,
+        },
+      ).start();
+    }
+  }
+
+  private setAnimation(): void {
+    if (this.props.animationType === 'slideInUp') {
+      this.animation = new Animated.Value(height);
+    } else if (this.props.animationType === 'fade') {
+      this.animation = new Animated.Value(0);
+    } else {
+      this.animation = new Animated.Value(0);
+    }
+  }
 
   private getComponentStyle = (style: StyleType): StyleType | null => ({
     container: style ? {
@@ -58,23 +114,35 @@ export class Modal extends React.Component<Props> {
     ) : null;
   }
 
+  private getAnimationStyle(): StyleType | undefined {
+    if (this.isNotNoneAnimation()) {
+      return this.props.animationType === 'fade' ?
+        { opacity: this.animation } :
+        { transform: [{ translateY: this.animation }] };
+    }
+  }
+
   private renderComponent(): React.ReactElement<ViewProps> {
     const { children } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const childrenWithCloseProps = React.Children
+    const childrenWithCloseProps: React.ReactElement<any>[] = React.Children
       .map(children, (child: React.ReactElement<any>) =>
         React.cloneElement(child, {
             onCloseModal: this.closeModal,
             pointerEvents: 'box-none',
           },
         ));
+    const animationStyle: StyleType = this.getAnimationStyle();
 
     return (
       <View style={styles.container}>
         {this.renderBackdrop()}
-        <View {...this.props} style={[componentStyle.container, this.props.style]}>
+        <Animated.View
+          {...this.props}
+          style={[componentStyle.container, this.props.style, animationStyle]}
+        >
           {childrenWithCloseProps}
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -91,8 +159,8 @@ const styles = StyleSheet.create({
     height: 0,
   },
   backdrop: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    width: width,
+    height: height,
     ...StyleSheet.absoluteFillObject,
   },
 });
