@@ -1,13 +1,6 @@
 import React from 'react';
 import { ModalPanel } from '../../component';
 
-export type ModalAnimationType = 'slideInUp' | 'fade' | 'none';
-
-export interface ModalAnimationConfig {
-  animationType: ModalAnimationType;
-  animationDuration: number;
-}
-
 class ModalServiceType {
 
   component: ModalPanel | null = null;
@@ -17,10 +10,10 @@ class ModalServiceType {
   }
 
   public showDialog(dialogComponent: React.ReactElement<any>,
-                    closeOnBackDrop: boolean = false,
-                    animationConfig?: ModalAnimationConfig): void {
+                    closeOnBackDrop: boolean = false): void {
+
     if (this.component) {
-      this.component.showDialog(dialogComponent, closeOnBackDrop, animationConfig);
+      this.component.showDialog(dialogComponent, closeOnBackDrop);
     }
   }
 }

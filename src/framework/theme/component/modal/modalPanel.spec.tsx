@@ -14,6 +14,8 @@ import {
   ModalService,
 } from '../../../theme';
 
+jest.useFakeTimers();
+
 describe('@modal panel checks', () => {
 
   const showModalTestId: string = '@modal/show';
@@ -35,10 +37,7 @@ describe('@modal panel checks', () => {
     }
 
     showModal() {
-      ModalService.showDialog(
-        <TestModal/>,
-        true,
-        { animationDuration: 500, animationType: 'fade' });
+      ModalService.showDialog(<TestModal/>, true);
     }
 
     render() {

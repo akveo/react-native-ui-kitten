@@ -12,14 +12,16 @@ import {
 import {
   Modal,
   Props as ModalProps,
+  ModalAnimationType,
 } from './modal.component';
-import { ModalAnimationType } from '../../theme/service';
 import {
   styled,
   StyleProvider,
   StyleProviderProps,
 } from '@kitten/theme';
 import * as config from './modal.spec.config';
+
+jest.useFakeTimers();
 
 const StyledModal = styled<Modal, ModalProps>(Modal);
 
@@ -100,7 +102,6 @@ describe('@modal component checks', () => {
   });
 
   it('* with animations', () => {
-    jest.useFakeTimers();
     const testApplication1 = render(<TestScreen modalAnimationType='slideInUp' buttonTestId='1'/>);
     const testApplication2 = render(<TestScreen modalAnimationType='fade' buttonTestId='2'/>);
     fireEvent.press(testApplication1.getByTestId('1'));

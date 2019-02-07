@@ -12,7 +12,13 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { ModalAnimationType } from '../../theme/service';
+
+export type ModalAnimationType = 'slideInUp' | 'fade' | 'none';
+
+export interface ModalAnimationConfig {
+  animationType: ModalAnimationType;
+  animationDuration: number;
+}
 
 interface ModalProps {
   visible: boolean;
@@ -50,7 +56,7 @@ export class Modal extends React.Component<Props> {
 
   public componentWillReceiveProps(nextProps: Readonly<Props>): void {
     if (nextProps.visible !== this.props.visible) {
-      if (this.isNotNoneAnimation()) {
+      if (this.hasAnimation()) {
         const initialValue: number = this.props.animationType === 'fade' ? 0 : height;
         this.animation.setValue(initialValue);
         this.startAnimation();
@@ -58,21 +64,19 @@ export class Modal extends React.Component<Props> {
     }
   }
 
-  private isNotNoneAnimation(): boolean {
+  private hasAnimation(): boolean {
     return this.props.animationType !== 'none';
   }
 
   private startAnimation(): void {
-    if (this.isNotNoneAnimation()) {
-      const value: number = this.props.animationType === 'fade' ? 1 : 0;
-      Animated.timing(
-        this.animation,
-        {
-          toValue: value,
-          duration: this.props.animationDuration,
-        },
-      ).start();
-    }
+    const value: number = this.props.animationType === 'fade' ? 1 : 0;
+    Animated.timing(
+      this.animation,
+      {
+        toValue: value,
+        duration: this.props.animationDuration,
+      },
+    ).start();
   }
 
   private setAnimation(): void {
@@ -115,7 +119,7 @@ export class Modal extends React.Component<Props> {
   }
 
   private getAnimationStyle(): StyleType | undefined {
-    if (this.isNotNoneAnimation()) {
+    if (this.hasAnimation()) {
       return this.props.animationType === 'fade' ?
         { opacity: this.animation } :
         { transform: [{ translateY: this.animation }] };

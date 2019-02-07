@@ -12,6 +12,8 @@ import {
 import { ModalService } from './modal.service';
 import { ModalPanel } from '../../../theme/component';
 
+jest.useFakeTimers();
+
 describe('@modal-service: service checks', () => {
 
   const ShowSingleModalTestId: string = '@modal/single';

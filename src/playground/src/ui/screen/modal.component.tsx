@@ -15,7 +15,8 @@ import { Modal as ModalComponent } from '@kitten/ui';
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 interface State {
-  modalVisible: boolean;
+  modal1Visible: boolean;
+  modal2Visible: boolean;
 }
 
 class ModalTest extends React.Component<Props, State> {
@@ -25,18 +26,32 @@ class ModalTest extends React.Component<Props, State> {
   };
 
   public state: State = {
-    modalVisible: false,
+    modal1Visible: false,
+    modal2Visible: false,
   };
 
-  public setModalVisible = (value: boolean): void => {
-    this.setState({ modalVisible: value });
+  public setModal1Visible = (value: boolean): void => {
+    this.setState({ modal1Visible: value });
   };
 
-  private renderModalComponent(): React.ReactElement<any> {
+  public setModal2Visible = (value: boolean): void => {
+    this.setState({ modal2Visible: value });
+  };
+
+  private renderModal1Component(): React.ReactElement<any> {
     return (
       <View>
-        <Text>This is modal content</Text>
-        <Button title={'Hide Modal'} onPress={() => this.setModalVisible(false)}/>
+        <Text>This is modal "fade" content</Text>
+        <Button title={'Hide Modal'} onPress={() => this.setModal1Visible(false)}/>
+      </View>
+    );
+  }
+
+  private renderModal2Component(): React.ReactElement<any> {
+    return (
+      <View>
+        <Text>This is modal "slide" content</Text>
+        <Button title={'Hide Modal'} onPress={() => this.setModal2Visible(false)}/>
       </View>
     );
   }
@@ -44,15 +59,28 @@ class ModalTest extends React.Component<Props, State> {
   public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
-        <Button title={'Show Modal'} onPress={() => this.setModalVisible(true)}/>
+        <Button title={'Show Modal 1'} onPress={() => this.setModal1Visible(true)}/>
+        <Button title={'Show Modal 2'} onPress={() => this.setModal2Visible(true)}/>
         <ModalComponent
-          identifier={'test'}
-          visible={this.state.modalVisible}
-          style={this.props.themedStyle.modal}
-          isBackDropAllowed={true}
-          onCloseModal={() => this.setModalVisible(false)}
+          identifier={'test1'}
+          visible={this.state.modal1Visible}
+          style={this.props.themedStyle.modal1}
+          onCloseModal={() => this.setModal1Visible(false)}
+          animationType='fade'
+          animationDuration={600}
         >
-          {this.renderModalComponent()}
+          {this.renderModal1Component()}
+        </ModalComponent>
+        <ModalComponent
+          identifier={'test2'}
+          visible={this.state.modal2Visible}
+          style={this.props.themedStyle.modal2}
+          isBackDropAllowed={true}
+          onCloseModal={() => this.setModal2Visible(false)}
+          animationType='slideInUp'
+          animationDuration={600}
+        >
+          {this.renderModal2Component()}
         </ModalComponent>
       </View>
     );
@@ -63,7 +91,7 @@ export const ModalScreen = withStyles(ModalTest, (theme: ThemeType) => ({
   container: {
     flex: 1,
   },
-  modal: {
+  modal1: {
     width: 300,
     height: 300,
     backgroundColor: 'green',
@@ -72,6 +100,17 @@ export const ModalScreen = withStyles(ModalTest, (theme: ThemeType) => ({
     borderColor: 'yellow',
     borderWidth: 2,
     top: 100,
+    left: 50,
+  },
+  modal2: {
+    width: 300,
+    height: 200,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'red',
+    borderWidth: 2,
+    top: 300,
     left: 50,
   },
 }));

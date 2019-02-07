@@ -53,11 +53,7 @@ class TestModal extends React.Component<ModalComponentCloseProps> {
 
   private showModal = (): void => {
     const component = this.createModal();
-    ModalService.showDialog(
-      component,
-      false,
-      { animationType: 'slideInUp', animationDuration: 1000 },
-    );
+    ModalService.showDialog(component, true);
   };
 
   render() {

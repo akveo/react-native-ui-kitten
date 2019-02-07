@@ -4,10 +4,7 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import {
-  ModalAnimationConfig,
-  ModalService,
-} from '../../service';
+import { ModalService } from '../../service';
 import { Modal } from '../../../ui/modal/modal.component';
 
 export interface ModalPanelProps {
@@ -16,19 +13,14 @@ export interface ModalPanelProps {
 
 interface ModalPanelState {
   dialogComponents: Map<string, React.ReactElement<any>>;
-  closeOnBackDropAllowed: boolean;
-  modalAnimationConfig: ModalAnimationConfig;
+  backdropValues: Map<string, boolean>;
 }
 
 export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> {
 
   public state: ModalPanelState = {
     dialogComponents: new Map(),
-    closeOnBackDropAllowed: false,
-    modalAnimationConfig: {
-      animationType: 'none',
-      animationDuration: 0,
-    },
+    backdropValues: new Map(),
   };
 
   public componentDidMount(): void {
@@ -42,30 +34,26 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   public onCloseModal = (identifier: string) => {
     const components: Map<string, React.ReactElement<any>> = this.state.dialogComponents;
     components.delete(identifier);
+    const backdropValues: Map<string, boolean> = this.state.backdropValues;
+    backdropValues.delete(identifier);
     this.setState({
       dialogComponents: components,
-      modalAnimationConfig: {
-        animationType: 'none',
-        animationDuration: 0,
-      },
+      backdropValues: backdropValues,
     });
   };
 
-  public showDialog(dialogComponent: React.ReactElement<any>,
-                    closeOnBackDrop: boolean,
-                    animationConfig?: ModalAnimationConfig): void {
-    const map: Map<string, React.ReactElement<any>> = this.state.dialogComponents
-      .set(this.generateUniqComponentKey(), dialogComponent);
-    const animConfig: ModalAnimationConfig = animationConfig ?
-      animationConfig : this.state.modalAnimationConfig;
+  public showDialog(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean): void {
+    const key: string = this.generateUniqueComponentKey();
+    const componentsMap: Map<string, React.ReactElement<any>> = this.state.dialogComponents
+      .set(key, dialogComponent);
+    const backdropsMap: Map<string, boolean> = this.state.backdropValues.set(key, closeOnBackDrop);
     this.setState({
-      dialogComponents: map,
-      closeOnBackDropAllowed: closeOnBackDrop,
-      modalAnimationConfig: animConfig,
+      dialogComponents: componentsMap,
+      backdropValues: backdropsMap,
     });
   }
 
-  private generateUniqComponentKey = (): string => {
+  private generateUniqueComponentKey = (): string => {
     return Math.random().toString(36).substring(2);
   };
 
@@ -77,14 +65,13 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     const allModalKeys: string[] = Array.from(this.state.dialogComponents.keys());
     const identifier: string = allModalKeys
       .find(item => this.state.dialogComponents.get(item) === modal);
+    const closeOnBackdrop: boolean = this.state.backdropValues.get(identifier);
     return (
       <Modal
         visible={true}
-        isBackDropAllowed={this.state.closeOnBackDropAllowed}
+        isBackDropAllowed={closeOnBackdrop}
         key={index}
         identifier={identifier}
-        animationType={this.state.modalAnimationConfig.animationType}
-        animationDuration={this.state.modalAnimationConfig.animationDuration}
         onCloseModal={this.onCloseModal}
       >
         {modal}
