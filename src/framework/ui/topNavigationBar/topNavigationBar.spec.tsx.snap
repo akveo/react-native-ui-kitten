@@ -1,27 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@top-navigation-bar * appearance: title-centered 1`] = `
-<View
-  appearance="title-centered"
-  dispatch={[Function]}
-  style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
+exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
       },
-      Object {
-        "backgroundColor": "#3366FF",
-        "height": 46,
-        "paddingBottom": 12,
-        "paddingHorizontal": 16,
-        "paddingTop": 4,
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
       },
-      undefined,
-    ]
+    }
   }
+  styles={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -33,96 +62,69 @@ exports[`@top-navigation-bar * appearance: title-centered 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "#3366FF",
-      "height": 46,
-      "paddingBottom": 12,
-      "paddingHorizontal": 16,
-      "paddingTop": 4,
-      "subtitle.color": "white",
-      "subtitle.fontSize": 12,
-      "subtitle.fontWeight": "400",
-      "title.centered": true,
-      "title.color": "white",
-      "title.fontSize": 16,
-      "title.fontWeight": "600",
-    }
-  }
-  title="Test"
 >
-  <View
-    style={
-      Array [
-        Object {
-          "flex": 1,
-        },
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        },
-      ]
-    }
-  />
-  <View
-    style={
+  <ForwardRef(renderComponent)
+    iconSource={
       Object {
-        "alignItems": "center",
-        "flex": 3,
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
       }
     }
-  >
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 16,
-          "fontWeight": "600",
-        }
-      }
-    >
-      Test
-    </Text>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
-    }
+    isLastItem={false}
   />
-</View>
+</StyleProvider>
 `;
 
-exports[`@top-navigation-bar * subtitle 1`] = `
-<View
-  appearance="default"
-  dispatch={[Function]}
-  style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
+exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
       },
-      Object {
-        "backgroundColor": "#3366FF",
-        "height": 46,
-        "paddingBottom": 12,
-        "paddingHorizontal": 16,
-        "paddingTop": 4,
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
       },
-      undefined,
-    ]
+    }
   }
-  subtitle="Subtitle"
+  styles={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -134,102 +136,69 @@ exports[`@top-navigation-bar * subtitle 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "#3366FF",
-      "height": 46,
-      "paddingBottom": 12,
-      "paddingHorizontal": 16,
-      "paddingTop": 4,
-      "subtitle.color": "white",
-      "subtitle.fontSize": 12,
-      "subtitle.fontWeight": "400",
-      "title.centered": false,
-      "title.color": "white",
-      "title.fontSize": 16,
-      "title.fontWeight": "600",
-    }
-  }
-  title="Test"
 >
-  <View
-    style={
-      Array [
-        null,
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        },
-      ]
-    }
-  />
-  <View
-    style={
+  <ForwardRef(renderComponent)
+    iconSource={
       Object {
-        "flex": 1,
-        "paddingHorizontal": 16,
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
       }
     }
-  >
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 16,
-          "fontWeight": "600",
-        }
-      }
-    >
-      Test
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 12,
-          "fontWeight": "400",
-        }
-      }
-    >
-      Subtitle
-    </Text>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        },
-        null,
-      ]
-    }
+    isLastItem={true}
   />
-</View>
+</StyleProvider>
 `;
 
-exports[`@top-navigation-bar * title 1`] = `
-<View
-  appearance="default"
-  dispatch={[Function]}
-  style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
+exports[`@top-navigation-bar/action * action/on press check 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
       },
-      Object {
-        "backgroundColor": "#3366FF",
-        "height": 46,
-        "paddingBottom": 12,
-        "paddingHorizontal": 16,
-        "paddingTop": 4,
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
       },
-      undefined,
-    ]
+    }
   }
+  styles={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -241,86 +210,377 @@ exports[`@top-navigation-bar * title 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "#3366FF",
-      "height": 46,
-      "paddingBottom": 12,
-      "paddingHorizontal": 16,
-      "paddingTop": 4,
-      "subtitle.color": "white",
-      "subtitle.fontSize": 12,
-      "subtitle.fontWeight": "400",
-      "title.centered": false,
-      "title.color": "white",
-      "title.fontSize": 16,
-      "title.fontWeight": "600",
-    }
-  }
-  title="Test"
 >
-  <View
-    style={
-      Array [
-        null,
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        },
-      ]
-    }
-  />
-  <View
-    style={
+  <ForwardRef(renderComponent)
+    iconSource={
       Object {
-        "flex": 1,
-        "paddingHorizontal": 16,
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
       }
     }
-  >
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 16,
-          "fontWeight": "600",
-        }
+    onPress={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
       }
-    >
-      Test
-    </Text>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        },
-        null,
-      ]
     }
   />
-</View>
+</StyleProvider>
 `;
 
-exports[`@top-navigation-bar * with actions 1`] = `
-<View
-  appearance="default"
-  dispatch={[Function]}
-  leftControl={
-    <ActionMock
-      iconSource={
-        Object {
-          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-        }
-      }
-      onPress={[MockFunction]}
-      testID="@top-navbar-left"
-    />
+exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
   }
-  rightControls={
-    Array [
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    iconSource={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    appearance="title-centered"
+    title="Test"
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    subtitle="Subtitle"
+    title="Test"
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/title 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    title="Test"
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/with actions 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    leftControl={
       <ActionMock
         iconSource={
           Object {
@@ -328,366 +588,42 @@ exports[`@top-navigation-bar * with actions 1`] = `
           }
         }
         onPress={[MockFunction]}
-        testID="@top-navbar-right-1"
-      />,
-      <ActionMock
-        iconSource={
-          Object {
-            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-          }
-        }
-        onPress={[MockFunction]}
-        testID="@top-navbar-right-2"
-      />,
-      <ActionMock
-        iconSource={
-          Object {
-            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-          }
-        }
-        onPress={[MockFunction]}
-        testID="@top-navbar-right-3"
-      />,
-    ]
-  }
-  style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-      },
-      Object {
-        "backgroundColor": "#3366FF",
-        "height": 46,
-        "paddingBottom": 12,
-        "paddingHorizontal": 16,
-        "paddingTop": 4,
-      },
-      undefined,
-    ]
-  }
-  subtitle="Subtitle"
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
+        testID="@top-navbar-left"
+      />
     }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "#3366FF",
-      "height": 46,
-      "paddingBottom": 12,
-      "paddingHorizontal": 16,
-      "paddingTop": 4,
-      "subtitle.color": "white",
-      "subtitle.fontSize": 12,
-      "subtitle.fontWeight": "400",
-      "title.centered": false,
-      "title.color": "white",
-      "title.fontSize": 16,
-      "title.fontWeight": "600",
-    }
-  }
-  title="Test"
->
-  <View
-    style={
+    rightControls={
       Array [
-        null,
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        },
+        <ActionMock
+          iconSource={
+            Object {
+              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+            }
+          }
+          onPress={[MockFunction]}
+          testID="@top-navbar-right-1"
+        />,
+        <ActionMock
+          iconSource={
+            Object {
+              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+            }
+          }
+          onPress={[MockFunction]}
+          testID="@top-navbar-right-2"
+        />,
+        <ActionMock
+          iconSource={
+            Object {
+              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+            }
+          }
+          onPress={[MockFunction]}
+          testID="@top-navbar-right-3"
+        />,
       ]
     }
-  >
-    <View
-      accessible={true}
-      appearance="default"
-      dispatch={[Function]}
-      iconSource={
-        Object {
-          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-        }
-      }
-      isLastItem={false}
-      onPress={[MockFunction]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "height": 25,
-            "marginRight": 8,
-            "width": 25,
-          },
-          undefined,
-        ]
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-primary": "#3366FF",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "pink-primary": "#FF3D71",
-        }
-      }
-      themedStyle={
-        Object {
-          "height": 25,
-          "marginRight": 8,
-          "width": 25,
-        }
-      }
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-          }
-        }
-        style={
-          Object {
-            "flex": 1,
-          }
-        }
-      />
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "flex": 1,
-        "paddingHorizontal": 16,
-      }
-    }
-  >
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 16,
-          "fontWeight": "600",
-        }
-      }
-    >
-      Test
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "white",
-          "fontSize": 12,
-          "fontWeight": "400",
-        }
-      }
-    >
-      Subtitle
-    </Text>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        },
-        null,
-      ]
-    }
-  >
-    <View
-      accessible={true}
-      appearance="default"
-      dispatch={[Function]}
-      iconSource={
-        Object {
-          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-        }
-      }
-      isLastItem={false}
-      onPress={[MockFunction]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "height": 25,
-            "marginRight": 8,
-            "width": 25,
-          },
-          undefined,
-        ]
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-primary": "#3366FF",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "pink-primary": "#FF3D71",
-        }
-      }
-      themedStyle={
-        Object {
-          "height": 25,
-          "marginRight": 8,
-          "width": 25,
-        }
-      }
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-          }
-        }
-        style={
-          Object {
-            "flex": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      accessible={true}
-      appearance="default"
-      dispatch={[Function]}
-      iconSource={
-        Object {
-          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-        }
-      }
-      isLastItem={false}
-      onPress={[MockFunction]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "height": 25,
-            "marginRight": 8,
-            "width": 25,
-          },
-          undefined,
-        ]
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-primary": "#3366FF",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "pink-primary": "#FF3D71",
-        }
-      }
-      themedStyle={
-        Object {
-          "height": 25,
-          "marginRight": 8,
-          "width": 25,
-        }
-      }
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-          }
-        }
-        style={
-          Object {
-            "flex": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      accessible={true}
-      appearance="default"
-      dispatch={[Function]}
-      iconSource={
-        Object {
-          "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-        }
-      }
-      isLastItem={true}
-      onPress={[MockFunction]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "height": 25,
-            "marginRight": 0,
-            "width": 25,
-          },
-          undefined,
-        ]
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-primary": "#3366FF",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "pink-primary": "#FF3D71",
-        }
-      }
-      themedStyle={
-        Object {
-          "height": 25,
-          "marginRight": 8,
-          "width": 25,
-        }
-      }
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-          }
-        }
-        style={
-          Object {
-            "flex": 1,
-          }
-        }
-      />
-    </View>
-  </View>
-</View>
+    subtitle="Subtitle"
+    title="Test"
+  />
+</StyleProvider>
 `;

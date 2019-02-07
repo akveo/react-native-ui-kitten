@@ -2,6 +2,7 @@ import React from 'react';
 import {
   render,
   fireEvent,
+  shallow,
 } from 'react-native-testing-library';
 import {
   styled,
@@ -17,7 +18,7 @@ import {
   Props as TopNavigationBaActionProps,
 } from './topNavigationBarAction.component';
 import * as config from './topNavigationBar.spec.config';
-import * as actionConfig from './topNavigationBarAction.spec.config';
+import { TouchableWithoutFeedback } from 'react-native';
 
 const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
 const TopNavigationBarAction =
@@ -30,7 +31,7 @@ const Mock = (props?: TopNavigationBarProps): React.ReactElement<StyleProviderPr
 );
 
 const ActionMock = (props?: TopNavigationBaActionProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={actionConfig.mapping} theme={actionConfig.theme} styles={{}}>
+  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
     <TopNavigationBarAction {...props} />
   </StyleProvider>
 );
@@ -41,30 +42,30 @@ const testIdRightAction1: string = '@top-navbar-right-1';
 const testIdRightAction2: string = '@top-navbar-right-2';
 const testIdRightAction3: string = '@top-navbar-right-3';
 
-describe('@top-navigation-bar', () => {
+describe('@top-navigation-bar/action', () => {
 
-  it('* title', () => {
-    const component = render(<Mock title='Test'/>);
-    expect(component).toMatchSnapshot();
+  it('* bar/title', () => {
+    const { output } = shallow(<Mock title='Test'/>);
+    expect(output).toMatchSnapshot();
   });
 
-  it('* subtitle', () => {
-    const component = render(<Mock title='Test' subtitle='Subtitle'/>);
-    expect(component).toMatchSnapshot();
+  it('* bar/subtitle', () => {
+    const { output } = shallow(<Mock title='Test' subtitle='Subtitle'/>);
+    expect(output).toMatchSnapshot();
   });
 
-  it('* appearance: title-centered', () => {
-    const component = render(<Mock appearance='title-centered' title='Test'/>);
-    expect(component).toMatchSnapshot();
+  it('* bar/appearance: title-centered', () => {
+    const { output } = shallow(<Mock appearance='title-centered' title='Test'/>);
+    expect(output).toMatchSnapshot();
   });
 
-  it('* with actions', () => {
+  it('* bar/with actions', () => {
     const onLeftControl = jest.fn();
     const onRightControl1 = jest.fn();
     const onRightControl2 = jest.fn();
     const onRightControl3 = jest.fn();
 
-    const component = render(
+    const component =
       <Mock
         title='Test'
         subtitle='Subtitle'
@@ -76,18 +77,45 @@ describe('@top-navigation-bar', () => {
           <ActionMock testID={testIdRightAction2} iconSource={{ uri: iconSourceUri }} onPress={onRightControl2}/>,
           <ActionMock testID={testIdRightAction3} iconSource={{ uri: iconSourceUri }} onPress={onRightControl3}/>,
         ]}
-      />,
-    );
+      />;
+    const renderedComponent = render(component);
+    const { output } = shallow(component);
 
-    expect(component).toMatchSnapshot();
-    fireEvent.press(component.getByTestId(testIdLeftAction));
-    fireEvent.press(component.getByTestId(testIdRightAction1));
-    fireEvent.press(component.getByTestId(testIdRightAction2));
-    fireEvent.press(component.getByTestId(testIdRightAction3));
+    expect(output).toMatchSnapshot();
+    fireEvent.press(renderedComponent.getByTestId(testIdLeftAction));
+    fireEvent.press(renderedComponent.getByTestId(testIdRightAction1));
+    fireEvent.press(renderedComponent.getByTestId(testIdRightAction2));
+    fireEvent.press(renderedComponent.getByTestId(testIdRightAction3));
     expect(onLeftControl).toHaveBeenCalled();
     expect(onRightControl1).toHaveBeenCalled();
     expect(onRightControl2).toHaveBeenCalled();
     expect(onRightControl3).toHaveBeenCalled();
+  });
+
+  it('* action/with icon uri', () => {
+    const { output } = shallow(<ActionMock iconSource={{uri: iconSourceUri}}/>);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('* action/is last item check (true)', () => {
+    const { output } = shallow(<ActionMock iconSource={{uri: iconSourceUri}} isLastItem={true}/>);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('* action/is last item check (false)', () => {
+    const { output } = shallow(<ActionMock iconSource={{uri: iconSourceUri}} isLastItem={false}/>);
+    expect(output).toMatchSnapshot();
+  });
+
+  it('* action/on press check', () => {
+    const onPress = jest.fn();
+    const component = <ActionMock iconSource={{uri: iconSourceUri}} onPress={onPress}/>;
+    const renderedComponent = render(component);
+    const { output } = shallow(component);
+
+    fireEvent.press(renderedComponent.getByType(TouchableWithoutFeedback));
+    expect(onPress).toHaveBeenCalled();
+    expect(output).toMatchSnapshot();
   });
 
 });

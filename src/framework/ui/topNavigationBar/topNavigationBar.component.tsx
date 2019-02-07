@@ -11,7 +11,6 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { Props as ActionProps } from './topNavigationBarAction.component';
-import { toArray } from '../service/common.service';
 
 interface TopNavigationBarProps {
   appearance?: string;
@@ -24,10 +23,6 @@ interface TopNavigationBarProps {
 export type Props = TopNavigationBarProps & StyledComponentProps & ViewProps;
 
 export class TopNavigationBar extends React.Component<Props> {
-
-  private hasText(text: string): boolean {
-    return text && text.length !== 0;
-  }
 
   private getComponentStyle = (style: StyleType): StyleType => ({
     container: {
@@ -62,6 +57,10 @@ export class TopNavigationBar extends React.Component<Props> {
     },
   });
 
+  private hasText(text: string): boolean {
+    return text && text.length !== 0;
+  }
+
   private renderText(text: string, style: StyleType): React.ReactElement<TextProps> | null {
     return this.hasText(text) ? <Text style={style}>{text}</Text> : null;
   }
@@ -71,13 +70,14 @@ export class TopNavigationBar extends React.Component<Props> {
 
     return item ? React.cloneElement(item, {
       key: index,
-      isLastItem: toArray(this.props.rightControls).length - 1 === index,
+      isLastItem: React.Children.count(this.props.rightControls) - 1 === index,
     }) : null;
   }
 
   private renderRightControls(): React.ReactElement<ActionProps>[] | null {
-    return toArray(this.props.rightControls)
-      .map((item: React.ReactElement<ActionProps>, i: number) => this.renderRightControl(item, i));
+    return React.Children
+      .map(this.props.rightControls, (item: React.ReactElement<ActionProps>, i: number) =>
+        this.renderRightControl(item, i));
   }
 
   public render(): React.ReactNode {

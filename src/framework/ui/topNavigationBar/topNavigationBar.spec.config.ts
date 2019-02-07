@@ -31,6 +31,21 @@ export const mapping: ThemeMappingType = {
       },
     },
   },
+  TopNavigationBarAction: {
+    meta: {
+      variants: {},
+      states: [],
+    },
+    appearance: {
+      default: {
+        mapping: {
+          width: 25,
+          height: 25,
+          marginRight: 8,
+        },
+      },
+    },
+  },
 };
 
 export const theme: ThemeType = {
