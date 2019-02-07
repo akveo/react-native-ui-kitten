@@ -1,5 +1,9 @@
 import { styled } from '@kitten/theme';
 import {
+  Text as TextComponent,
+  Props as TextProps,
+} from './text/text.component';
+import {
   Radio as RadioComponent,
   Props as RadioProps,
 } from './radio/radio.component';
@@ -36,6 +40,7 @@ import {
   Props as TabViewProps,
 } from './tab/tabView.component';
 
+const Text = styled<TextComponent, TextProps>(TextComponent);
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
 const Layout = styled<LayoutComponent, LayoutProps>(LayoutComponent);
@@ -45,6 +50,7 @@ const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
 
 export {
+  Text,
   Layout,
   LayoutProps,
   Radio,
