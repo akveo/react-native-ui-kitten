@@ -4,7 +4,6 @@ import {
   ScrollView,
   ScrollViewProps,
 } from 'react-native';
-import { toArray } from '../service/common.service';
 import { ScrollEvent } from '../service/type';
 
 type ChildElement = React.ReactElement<any>;
@@ -92,7 +91,7 @@ export class ViewPager extends React.Component<Props> {
   };
 
   private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
-    return toArray(source).map(this.createComponentChild);
+    return React.Children.toArray(source).map(this.createComponentChild);
   };
 
   public render(): React.ReactNode {

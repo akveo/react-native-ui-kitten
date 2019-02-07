@@ -8,7 +8,6 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { Props as ChildProps } from '../radio/radio.component';
-import { toArray } from '../service/common.service';
 
 type ChildElement = React.ReactElement<ChildProps>;
 
@@ -42,7 +41,7 @@ export class RadioGroup extends React.Component<Props> {
   };
 
   private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
-    return toArray(source).map(this.createComponentChild);
+    return React.Children.toArray(source).map(this.createComponentChild);
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {

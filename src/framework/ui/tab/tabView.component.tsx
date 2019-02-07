@@ -14,7 +14,6 @@ import {
   Props as TabBarProps,
 } from './tabBar.component';
 import { ViewPager } from '../viewPager/viewPager.component';
-import { toArray } from '../service/common.service';
 
 type TabElement = React.ReactElement<TabProps>;
 type ChildElement = React.ReactElement<ChildProps>;
@@ -83,7 +82,7 @@ export class TabView extends React.Component<Props> {
   };
 
   private createComponentChildren = (source: ChildElement | ChildElement[]): TabViewChildren => {
-    return toArray(source).reduce((acc: TabViewChildren, element: ChildElement, index: number) => {
+    return React.Children.toArray(source).reduce((acc: TabViewChildren, element: ChildElement, index: number) => {
       const { tab, content } = this.createComponentChild(element, index);
       return {
         tabs: [...acc.tabs, tab],

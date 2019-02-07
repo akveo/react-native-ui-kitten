@@ -10,7 +10,6 @@ import {
 } from '@kitten/theme';
 import { TabBarIndicator } from './tabBarIndicator.component';
 import { Props as ChildProps } from './tab.component';
-import { toArray } from '../service/common.service';
 
 type ChildElement = React.ReactElement<ChildProps>;
 
@@ -75,7 +74,7 @@ export class TabBar extends React.Component<Props> {
   };
 
   private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
-    return toArray(source).map(this.createComponentChild);
+    return React.Children.toArray(source).map(this.createComponentChild);
   };
 
   public render(): React.ReactNode {
