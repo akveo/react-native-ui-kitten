@@ -3,10 +3,11 @@ import {
   View,
   Image,
   Text,
-  ViewProps,
-  ImageProps,
+  TouchableWithoutFeedback,
   TextProps,
+  ImageProps,
   ImageSourcePropType,
+  TouchableWithoutFeedbackProps,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -16,11 +17,17 @@ import {
 interface TabProps {
   title?: string;
   icon?: ImageSourcePropType;
+  selected?: boolean;
+  onSelect?: (selected: boolean) => void;
 }
 
-export type Props = TabProps & StyledComponentProps & ViewProps;
+export type Props = TabProps & StyledComponentProps & TouchableWithoutFeedbackProps;
 
 export class Tab extends React.Component<Props> {
+
+  static defaultProps: Partial<Props> = {
+    selected: false,
+  };
 
   private getComponentStyle = (source: StyleType): StyleType => {
     return {
@@ -30,17 +37,25 @@ export class Tab extends React.Component<Props> {
         alignItems: 'center',
       },
       icon: {},
-      title: {},
+      title: source.text,
     };
   };
 
-  private createTextComponent = (style: StyleType): React.ReactElement<TextProps> => (
-    <Text
-      style={style}
-      key={1}>
-      {this.props.title}
-    </Text>
-  );
+  private onPress = () => {
+    if (this.props.onSelect) {
+      this.props.onSelect(!this.props.selected);
+    }
+  };
+
+  private createTextComponent = (style: StyleType): React.ReactElement<TextProps> => {
+    return (
+      <Text
+        style={style}
+        key={1}>
+        {this.props.title}
+      </Text>
+    );
+  };
 
   private createImageComponent = (style: StyleType): React.ReactElement<ImageProps> => (
     <Image
@@ -60,15 +75,19 @@ export class Tab extends React.Component<Props> {
   };
 
   public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const children = this.createComponentChildren(componentStyle);
+    const { style, themedStyle, ...derivedProps } = this.props;
+
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const children: React.ReactNode = this.createComponentChildren(componentStyle);
 
     return (
-      <View
-        {...this.props}
-        style={[this.props.style, componentStyle.container]}>
-        {children}
-      </View>
+      <TouchableWithoutFeedback
+        {...derivedProps}
+        onPress={this.onPress}>
+        <View style={[style, componentStyle.container]}>
+          {children}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

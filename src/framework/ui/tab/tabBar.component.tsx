@@ -62,15 +62,12 @@ export class TabBar extends React.Component<Props> {
   };
 
   private createComponentChild = (element: ChildElement, index: number): ChildElement => {
-    return (
-      <TouchableWithoutFeedback
-        {...element.props}
-        style={{ flex: 1 }}
-        key={index}
-        onPress={() => this.onChildPress(index)}>
-        {element}
-      </TouchableWithoutFeedback>
-    );
+    return React.cloneElement(element, {
+      key: index,
+      style: { flex: 1 },
+      selected: index === this.props.selectedIndex,
+      onSelect: () => this.onChildPress(index),
+    });
   };
 
   private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
@@ -78,21 +75,23 @@ export class TabBar extends React.Component<Props> {
   };
 
   public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const children: ChildElement[] = this.createComponentChildren(this.props.children);
+    const { style, themedStyle, selectedIndex, children, ...derivedProps } = this.props;
+
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const componentChildren: ChildElement[] = this.createComponentChildren(children);
 
     return (
       <View>
         <View
-          {...this.props}
-          style={[this.props.style, componentStyle.bar]}>
-          {children}
+          {...derivedProps}
+          style={[style, componentStyle.bar]}>
+          {componentChildren}
         </View>
         <TabBarIndicator
           ref={this.tabIndicatorRef}
           style={componentStyle.indicator}
-          selectedPosition={this.props.selectedIndex}
-          positions={children.length}
+          selectedPosition={selectedIndex}
+          positions={componentChildren.length}
         />
       </View>
     );
