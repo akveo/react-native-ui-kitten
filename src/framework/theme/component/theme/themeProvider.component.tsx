@@ -10,10 +10,12 @@ export interface Props {
 export class ThemeProvider extends React.PureComponent<Props> {
 
   public render(): React.ReactNode {
+    const { theme, children } = this.props;
+
     return (
       <ThemeContext.Provider
-        value={this.props.theme}>
-        {this.props.children}
+        value={theme}>
+        {children}
       </ThemeContext.Provider>
     );
   }

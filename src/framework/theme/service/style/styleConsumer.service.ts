@@ -37,21 +37,22 @@ export class StyleConsumerService {
                                                                   interaction: Interaction[]): StyleMappingType {
 
     const generatedMapping: StyleMappingType = this.safe(styles[component], (componentMapping) => {
-      const meta: ComponentStyleMetaType = this.createStyleMeta(componentMapping.meta, props);
+      const { appearance, variants, states } = this.createStyleMeta(componentMapping.meta, props);
+
       const query: string = this.findGeneratedQuery(Object.keys(componentMapping), [
-        meta.appearance,
-        ...meta.variants,
+        appearance,
+        ...variants,
         ...interaction,
-        ...meta.states,
+        ...states,
       ]);
 
       return componentMapping[query];
     });
 
     if (generatedMapping === undefined && mapping[component] !== undefined) {
-      const meta: ComponentStyleMetaType = this.createStyleMeta(mapping[component].meta, props);
+      const { appearance, variants, states } = this.createStyleMeta(mapping[component].meta, props);
 
-      return createStyle(mapping, component, meta.appearance, meta.variants, [...interaction, ...meta.states]);
+      return createStyle(mapping, component, appearance, variants, [...interaction, ...states]);
     }
 
     return generatedMapping;

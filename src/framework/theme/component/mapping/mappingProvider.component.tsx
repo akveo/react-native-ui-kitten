@@ -14,10 +14,12 @@ export interface Props {
 export class MappingProvider extends React.PureComponent<Props> {
 
   public render(): React.ReactNode {
+    const { mapping, styles, children } = this.props;
+
     return (
       <MappingContext.Provider
-        value={{ mapping: this.props.mapping, styles: this.props.styles }}>
-        {this.props.children}
+        value={{ mapping, styles }}>
+        {children}
       </MappingContext.Provider>
     );
   }
