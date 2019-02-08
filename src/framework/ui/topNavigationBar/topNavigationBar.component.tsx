@@ -13,7 +13,6 @@ import {
 import { Props as ActionProps } from './topNavigationBarAction.component';
 
 interface TopNavigationBarProps {
-  appearance?: string;
   title?: string;
   subtitle?: string;
   leftControl?: React.ReactElement<ActionProps>;

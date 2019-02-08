@@ -39,10 +39,6 @@ export class TopNavigationBarAction extends React.Component<Props> {
     },
   });
 
-  private renderIcon(): React.ReactElement<ImageProps> {
-    return <Image style={styles.image} source={this.props.iconSource}/>;
-  }
-
   public render(): React.ReactNode {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
 
@@ -50,9 +46,8 @@ export class TopNavigationBarAction extends React.Component<Props> {
       <TouchableWithoutFeedback onPress={this.onPress}>
         <View
           {...this.props}
-          style={[componentStyle.container, this.props.style]}
-        >
-          {this.renderIcon()}
+          style={[componentStyle.container, this.props.style]}>
+          <Image style={styles.image} source={this.props.iconSource}/>
         </View>
       </TouchableWithoutFeedback>
     );
