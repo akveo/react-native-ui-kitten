@@ -7,12 +7,12 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Props as ChildProps } from '../radio/radio.component';
+import { Props as RadioProps } from '../radio/radio.component';
 
-type ChildElement = React.ReactElement<ChildProps>;
+type RadioElement = React.ReactElement<RadioProps>;
 
 interface RadioGroupProps {
-  children: ChildElement | ChildElement[];
+  children: RadioElement | RadioElement[];
   selectedIndex?: number;
   onChange?: (index: number) => void;
 }
@@ -31,19 +31,6 @@ export class RadioGroup extends React.Component<Props> {
     }
   };
 
-  private createComponentChild = (element: ChildElement, index: number): ChildElement => {
-    return React.cloneElement(element, {
-      ...element.props,
-      key: index,
-      checked: this.props.selectedIndex === index,
-      onChange: () => this.onChildSelected(index),
-    });
-  };
-
-  private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
-    return React.Children.toArray(source).map(this.createComponentChild);
-  };
-
   private getComponentStyle = (style: StyleType): StyleType => {
     return {
       container: {
@@ -52,14 +39,30 @@ export class RadioGroup extends React.Component<Props> {
     };
   };
 
-  public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+  private createComponentChild = (element: RadioElement, index: number): RadioElement => {
+    return React.cloneElement(element, {
+      ...element.props,
+      key: index,
+      checked: this.props.selectedIndex === index,
+      onChange: () => this.onChildSelected(index),
+    });
+  };
+
+  private createComponentChildren = (source: RadioElement | RadioElement[]): RadioElement[] => {
+    return React.Children.map(source, this.createComponentChild);
+  };
+
+  public render(): React.ReactElement<ViewProps> {
+    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const { container }: StyleType = this.getComponentStyle(themedStyle);
+
+    const componentChildren: RadioElement[] = this.createComponentChildren(children);
 
     return (
       <View
-        {...this.props}
-        style={[componentStyle.container, this.props.style]}>
-        {this.createComponentChildren(this.props.children)}
+        {...derivedProps}
+        style={[style, container]}>
+        {componentChildren}
       </View>
     );
   }

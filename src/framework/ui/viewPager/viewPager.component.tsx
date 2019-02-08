@@ -91,14 +91,16 @@ export class ViewPager extends React.Component<Props> {
   };
 
   private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
-    return React.Children.toArray(source).map(this.createComponentChild);
+    return React.Children.map(source, this.createComponentChild);
   };
 
   public render(): React.ReactNode {
-    const children: ChildElement[] = this.createComponentChildren(this.props.children);
+    const { children, ...derivedProps } = this.props;
+    const componentChildren: ChildElement[] = this.createComponentChildren(children);
 
     return (
       <ScrollView
+        {...derivedProps}
         ref={this.scrollViewRef}
         bounces={false}
         showsHorizontalScrollIndicator={false}
@@ -107,7 +109,7 @@ export class ViewPager extends React.Component<Props> {
         pagingEnabled={true}
         onScroll={this.onScroll}
         onMomentumScrollEnd={this.onScrollEnd}>
-        {children}
+        {componentChildren}
       </ScrollView>
     );
   }

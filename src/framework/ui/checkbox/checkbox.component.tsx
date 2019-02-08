@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacityProps,
+  GestureResponderEvent,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -29,12 +30,20 @@ export class CheckBox extends React.Component<Props> {
     }
   };
 
-  private onPressIn = () => {
+  private onPressIn = (event: GestureResponderEvent) => {
     this.props.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event);
+    }
   };
 
-  private onPressOut = () => {
+  private onPressOut = (event: GestureResponderEvent) => {
     this.props.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event);
+    }
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
@@ -46,11 +55,13 @@ export class CheckBox extends React.Component<Props> {
         borderWidth: style.borderWidth,
         borderColor: style.borderColor,
         backgroundColor: style.backgroundColor,
+        ...strictStyles.border,
       },
       icon: {
         width: style.size / 2,
         height: style.size / 8,
         backgroundColor: style.selectColor,
+        ...strictStyles.icon,
       },
       highlight: {
         width: style.highlightSize,
@@ -58,24 +69,26 @@ export class CheckBox extends React.Component<Props> {
         borderRadius: style.highlightBorderRadius,
         backgroundColor: style.highlightColor,
         opacity: style.highlightOpacity,
+        ...strictStyles.highlight,
       },
     };
   };
 
-  public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+  public render(): React.ReactElement<TouchableOpacityProps> {
+    const { themedStyle, ...derivedProps } = this.props;
+    const { border, icon, highlight } = this.getComponentStyle(themedStyle);
 
     return (
       <TouchableOpacity
-        {...this.props}
+        {...derivedProps}
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={styles.border}>
-          <View style={[styles.highlight, componentStyle.highlight]}/>
-          <View style={[styles.border, componentStyle.border]}>
-            <CheckMark style={componentStyle.icon}/>
+        <View style={strictStyles.border}>
+          <View style={highlight}/>
+          <View style={border}>
+            <CheckMark style={icon}/>
           </View>
         </View>
       </TouchableOpacity>
@@ -83,11 +96,12 @@ export class CheckBox extends React.Component<Props> {
   }
 }
 
-const styles = StyleSheet.create({
+const strictStyles = StyleSheet.create({
   border: {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  icon: {},
   highlight: {
     position: 'absolute',
     alignSelf: 'center',

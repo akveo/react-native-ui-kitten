@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  View,
   Image,
   Text,
-  TouchableWithoutFeedback,
   TextProps,
   ImageProps,
   ImageSourcePropType,
-  TouchableWithoutFeedbackProps,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -21,12 +20,18 @@ interface TabProps {
   onSelect?: (selected: boolean) => void;
 }
 
-export type Props = TabProps & StyledComponentProps & TouchableWithoutFeedbackProps;
+export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
 
 export class Tab extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
     selected: false,
+  };
+
+  private onPress = () => {
+    if (this.props.onSelect) {
+      this.props.onSelect(!this.props.selected);
+    }
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -39,12 +44,6 @@ export class Tab extends React.Component<Props> {
       icon: {},
       title: source.text,
     };
-  };
-
-  private onPress = () => {
-    if (this.props.onSelect) {
-      this.props.onSelect(!this.props.selected);
-    }
   };
 
   private createTextComponent = (style: StyleType): React.ReactElement<TextProps> => {
@@ -74,20 +73,20 @@ export class Tab extends React.Component<Props> {
     ];
   };
 
-  public render(): React.ReactNode {
+  public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
+    const { container, ...componentStyles }: StyleType = this.getComponentStyle(themedStyle);
 
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-    const children: React.ReactNode = this.createComponentChildren(componentStyle);
+    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
 
     return (
-      <TouchableWithoutFeedback
+      <TouchableOpacity
         {...derivedProps}
+        style={[style, container]}
+        activeOpacity={1.0}
         onPress={this.onPress}>
-        <View style={[style, componentStyle.container]}>
-          {children}
-        </View>
-      </TouchableWithoutFeedback>
+        {componentChildren}
+      </TouchableOpacity>
     );
   }
 }

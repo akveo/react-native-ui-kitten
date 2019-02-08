@@ -100,7 +100,7 @@ export class TabBarIndicator extends React.Component<Props> {
     const widthPercent: number = 100 / this.props.positions;
 
     return {
-      component: {
+      container: {
         ...source,
         width: `${widthPercent}%`,
         transform: [{ translateX: this.contentOffset }],
@@ -108,14 +108,15 @@ export class TabBarIndicator extends React.Component<Props> {
     };
   };
 
-  public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.style);
+  public render(): React.ReactElement<ViewProps> {
+    const { style, ...derivedProps } = this.props;
+    const { container } = this.getComponentStyle(style);
 
     return (
       <Animated.View
-        {...this.props}
+        {...derivedProps}
         onLayout={this.onLayout}
-        style={[this.props.style, componentStyle.component]}
+        style={[style, container]}
       />
     );
   }
