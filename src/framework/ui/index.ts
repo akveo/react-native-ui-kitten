@@ -40,9 +40,21 @@ import {
   Props as BottomTabNavigatorProps,
 } from './tabNavigator/bottomTabNavigator.component';
 import {
+  TopNavigationBar as TopNavigationBarComponent,
+  Props as TopNavigationBarProps,
+} from './topNavigationBar/topNavigationBar.component';
+import {
+  TopNavigationBarAction as TopNavigationBarActionComponent,
+  Props as TopNavigationBarActionProps,
+} from './topNavigationBar/topNavigationBarAction.component';
+import {
   BottomNavigatorTab as BottomNavigatorTabComponent,
   Props as BottomNavigatorTabProps,
 } from './tabNavigator/bottomNavigatorTab.component';
+import {
+  Modal as ModalComponent,
+  Props as ModalProps,
+} from './modal/modal.component';
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
@@ -53,6 +65,10 @@ const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
 const BottomTabNavigator = styled<BottomTabNavigatorComponent, BottomTabNavigatorProps>(BottomTabNavigatorComponent);
 const BottomNavigatorTab = styled<BottomNavigatorTabComponent, BottomNavigatorTabProps>(BottomNavigatorTabComponent);
+const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
+const TopNavigationBarAction =
+  styled<TopNavigationBarActionComponent, TopNavigationBarActionProps>(TopNavigationBarActionComponent);
+const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
   Layout,
@@ -77,5 +93,10 @@ export {
   BottomTabNavigatorProps,
   BottomNavigatorTab,
   BottomNavigatorTabProps,
+  TopNavigationBar,
+  TopNavigationBarProps,
+  TopNavigationBarAction,
+  TopNavigationBarActionProps,
+  Modal,
+  ModalProps,
 };
-

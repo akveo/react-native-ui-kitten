@@ -1,0 +1,629 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    iconSource={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+    isLastItem={false}
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    iconSource={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+    isLastItem={true}
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * action/on press check 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    iconSource={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+    onPress={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    iconSource={
+      Object {
+        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+      }
+    }
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    appearance="title-centered"
+    title="Test"
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    subtitle="Subtitle"
+    title="Test"
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/title 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    title="Test"
+  />
+</StyleProvider>
+`;
+
+exports[`@top-navigation-bar/action * bar/with actions 1`] = `
+<StyleProvider
+  mapping={
+    Object {
+      "TopNavigationBar": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "backgroundColor": "blue-primary",
+              "height": 46,
+              "paddingBottom": 12,
+              "paddingHorizontal": 16,
+              "paddingTop": 4,
+              "subtitle.color": "white",
+              "subtitle.fontSize": 12,
+              "subtitle.fontWeight": "400",
+              "title.centered": false,
+              "title.color": "white",
+              "title.fontSize": 16,
+              "title.fontWeight": "600",
+            },
+          },
+          "title-centered": Object {
+            "mapping": Object {
+              "title.centered": true,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+      "TopNavigationBarAction": Object {
+        "appearance": Object {
+          "default": Object {
+            "mapping": Object {
+              "height": 25,
+              "marginRight": 8,
+              "width": 25,
+            },
+          },
+        },
+        "meta": Object {
+          "states": Array [],
+          "variants": Object {},
+        },
+      },
+    }
+  }
+  styles={Object {}}
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+>
+  <ForwardRef(renderComponent)
+    leftControl={
+      <ActionMock
+        iconSource={
+          Object {
+            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+          }
+        }
+        onPress={[MockFunction]}
+        testID="@top-navbar-left"
+      />
+    }
+    rightControls={
+      Array [
+        <ActionMock
+          iconSource={
+            Object {
+              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+            }
+          }
+          onPress={[MockFunction]}
+          testID="@top-navbar-right-1"
+        />,
+        <ActionMock
+          iconSource={
+            Object {
+              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+            }
+          }
+          onPress={[MockFunction]}
+          testID="@top-navbar-right-2"
+        />,
+        <ActionMock
+          iconSource={
+            Object {
+              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
+            }
+          }
+          onPress={[MockFunction]}
+          testID="@top-navbar-right-3"
+        />,
+      ]
+    }
+    subtitle="Subtitle"
+    title="Test"
+  />
+</StyleProvider>
+`;
