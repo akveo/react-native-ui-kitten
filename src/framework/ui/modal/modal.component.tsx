@@ -82,8 +82,6 @@ export class Modal extends React.Component<Props> {
   private setAnimation(): void {
     if (this.props.animationType === 'slideInUp') {
       this.animation = new Animated.Value(height);
-    } else if (this.props.animationType === 'fade') {
-      this.animation = new Animated.Value(0);
     } else {
       this.animation = new Animated.Value(0);
     }
