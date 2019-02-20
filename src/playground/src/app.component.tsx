@@ -9,6 +9,11 @@ import {
 } from '@kitten/theme';
 import { withNavigation } from './navigation';
 import * as Screens from './ui/screen';
+import {
+  mapping,
+  style,
+} from 'eva/packages/mapping-kitten/eva';
+import { theme } from 'eva/packages/theme/eva';
 
 interface State {
   mapping: ThemeMappingType;
@@ -18,14 +23,11 @@ interface State {
 
 export default class App extends React.Component<any, State> {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      mapping: props.mapping,
-      styles: props.style,
-      theme: props.theme,
-    };
-  }
+  state: State = {
+    mapping: mapping,
+    styles: style,
+    theme: theme,
+  };
 
   public render(): React.ReactNode {
     const { HomeScreen: RootScreen, ...screens } = Screens;

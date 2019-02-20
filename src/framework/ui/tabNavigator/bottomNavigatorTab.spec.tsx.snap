@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@bottom-navigator-tab: component checks * empty 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "icon.height": 40,
+      "icon.marginBottom": 5,
+      "icon.width": 40,
+      "title.color": "#8992A3",
+      "title.selectedColor": "#3366FF",
+    }
+  }
+/>
+`;
+
+exports[`@bottom-navigator-tab: component checks * text/selected 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  getIconSource={[Function]}
+  isSelected={true}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "icon.height": 40,
+      "icon.marginBottom": 5,
+      "icon.width": 40,
+      "title.color": "#8992A3",
+      "title.selectedColor": "#3366FF",
+    }
+  }
+  title="Test"
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+      }
+    }
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": 5,
+        "width": 40,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": "#3366FF",
+      }
+    }
+  >
+    Test
+  </Text>
+</View>
+`;
+
+exports[`@bottom-navigator-tab: component checks * text/unselected 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  getIconSource={[Function]}
+  isSelected={false}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "icon.height": 40,
+      "icon.marginBottom": 5,
+      "icon.width": 40,
+      "title.color": "#8992A3",
+      "title.selectedColor": "#3366FF",
+    }
+  }
+  title="Test"
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+      }
+    }
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": 5,
+        "width": 40,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": "#8992A3",
+      }
+    }
+  >
+    Test
+  </Text>
+</View>
+`;
+
+exports[`@bottom-navigator-tab: component checks * with icon 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  getIconSource={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "icon.height": 40,
+      "icon.marginBottom": 5,
+      "icon.width": 40,
+      "title.color": "#8992A3",
+      "title.selectedColor": "#3366FF",
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+      }
+    }
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": 5,
+        "width": 40,
+      }
+    }
+  />
+</View>
+`;

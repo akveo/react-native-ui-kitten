@@ -35,6 +35,26 @@ import {
   TabView,
   Props as TabViewProps,
 } from './tab/tabView.component';
+import {
+  BottomTabNavigator as BottomTabNavigatorComponent,
+  Props as BottomTabNavigatorProps,
+} from './tabNavigator/bottomTabNavigator.component';
+import {
+  TopNavigationBar as TopNavigationBarComponent,
+  Props as TopNavigationBarProps,
+} from './topNavigationBar/topNavigationBar.component';
+import {
+  TopNavigationBarAction as TopNavigationBarActionComponent,
+  Props as TopNavigationBarActionProps,
+} from './topNavigationBar/topNavigationBarAction.component';
+import {
+  BottomNavigatorTab as BottomNavigatorTabComponent,
+  Props as BottomNavigatorTabProps,
+} from './tabNavigator/bottomNavigatorTab.component';
+import {
+  Modal as ModalComponent,
+  Props as ModalProps,
+} from './modal/modal.component';
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
@@ -43,6 +63,12 @@ const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const BottomTabNavigator = styled<BottomTabNavigatorComponent, BottomTabNavigatorProps>(BottomTabNavigatorComponent);
+const BottomNavigatorTab = styled<BottomNavigatorTabComponent, BottomNavigatorTabProps>(BottomNavigatorTabComponent);
+const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
+const TopNavigationBarAction =
+  styled<TopNavigationBarActionComponent, TopNavigationBarActionProps>(TopNavigationBarActionComponent);
+const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
   Layout,
@@ -63,5 +89,14 @@ export {
   TabBarProps,
   ViewPagerProps,
   TabViewProps,
+  BottomTabNavigator,
+  BottomTabNavigatorProps,
+  BottomNavigatorTab,
+  BottomNavigatorTabProps,
+  TopNavigationBar,
+  TopNavigationBarProps,
+  TopNavigationBarAction,
+  TopNavigationBarActionProps,
+  Modal,
+  ModalProps,
 };
-
