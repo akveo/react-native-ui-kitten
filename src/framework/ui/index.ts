@@ -35,6 +35,10 @@ import {
   TabView,
   Props as TabViewProps,
 } from './tab/tabView.component';
+import {
+  Modal as ModalComponent,
+  Props as ModalProps,
+} from './modal/modal.component';
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
@@ -43,6 +47,7 @@ const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
   Layout,
@@ -63,5 +68,7 @@ export {
   TabBarProps,
   ViewPagerProps,
   TabViewProps,
+  Modal,
+  ModalProps,
 };
 
