@@ -3,6 +3,7 @@
 exports[`@tab: component checks * empty 1`] = `
 <View
   accessible={true}
+  isTVSelectable={true}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -10,14 +11,12 @@ exports[`@tab: component checks * empty 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "opacity": 1,
+    }
   }
 />
 `;
@@ -25,6 +24,7 @@ exports[`@tab: component checks * empty 1`] = `
 exports[`@tab: component checks * icon 1`] = `
 <View
   accessible={true}
+  isTVSelectable={true}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -32,14 +32,12 @@ exports[`@tab: component checks * icon 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "opacity": 1,
+    }
   }
 >
   <Image
@@ -56,6 +54,7 @@ exports[`@tab: component checks * icon 1`] = `
 exports[`@tab: component checks * title 1`] = `
 <View
   accessible={true}
+  isTVSelectable={true}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -63,14 +62,12 @@ exports[`@tab: component checks * title 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "opacity": 1,
+    }
   }
 >
   <Text>
