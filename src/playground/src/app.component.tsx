@@ -23,7 +23,7 @@ interface State {
 
 export default class App extends React.Component<any, State> {
 
-  state: State = {
+  public state: State = {
     mapping: mapping,
     styles: style,
     theme: theme,
@@ -37,8 +37,7 @@ export default class App extends React.Component<any, State> {
       <ApplicationProvider
         styles={this.state.styles}
         theme={this.state.theme}
-        mapping={this.state.mapping}
-      >
+        mapping={this.state.mapping}>
         <Router/>
       </ApplicationProvider>
     );

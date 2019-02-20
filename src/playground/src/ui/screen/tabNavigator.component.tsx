@@ -71,8 +71,7 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
       appearance='highlight'
       selectedIndex={index}
       onSelect={(selectedIndex: number) =>
-        navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}
-    >
+        navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>
       <BottomNavigatorTab
         title='Screen 1'
         getIconSource={(isSelected: boolean) => getIconSource(1, isSelected)}
