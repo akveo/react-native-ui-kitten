@@ -24,13 +24,17 @@ describe('@bottom-navigator-tab: component checks', () => {
   );
 
   it('* empty', () => {
-    const component = render(<Mock/>);
+    const component = render(
+      <Mock/>,
+    );
     expect(component).toMatchSnapshot();
   });
 
   it('* with icon', () => {
     const getImageSource = () => ({ uri: testTabUri });
-    const component = render(<Mock getIconSource={getImageSource}/>);
+    const component = render(
+      <Mock getIconSource={getImageSource}/>,
+    );
     expect(component).toMatchSnapshot();
   });
 
@@ -39,7 +43,7 @@ describe('@bottom-navigator-tab: component checks', () => {
     const component = render(
       <Mock
         getIconSource={getImageSource}
-        isSelected={true}
+        selected={true}
         title='Test'
       />,
     );
@@ -51,7 +55,7 @@ describe('@bottom-navigator-tab: component checks', () => {
     const component = render(
       <Mock
         getIconSource={getImageSource}
-        isSelected={false}
+        selected={false}
         title='Test'
       />,
     );

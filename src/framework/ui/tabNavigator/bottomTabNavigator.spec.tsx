@@ -41,9 +41,9 @@ describe('@bottom-tab-navigator: component checks', () => {
   const tab2Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png';
   const tab3Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png';
 
-  const getTab1Uri = (isSelected: boolean): ImageSourcePropType => ({ uri: tab1Uri });
-  const getTab2Uri = (isSelected: boolean): ImageSourcePropType => ({ uri: tab2Uri });
-  const getTab3Uri = (isSelected: boolean): ImageSourcePropType => ({ uri: tab3Uri });
+  const getTab1Uri = (selected: boolean): ImageSourcePropType => ({ uri: tab1Uri });
+  const getTab2Uri = (selected: boolean): ImageSourcePropType => ({ uri: tab2Uri });
+  const getTab3Uri = (selected: boolean): ImageSourcePropType => ({ uri: tab3Uri });
 
   const tabTestId: string = '@tab/last';
 
@@ -54,23 +54,22 @@ describe('@bottom-tab-navigator: component checks', () => {
 
   it('* with routes', () => {
     const component = render(
-      <Mock children={[
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
-        <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
-        <MockTab getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
-      ]}/>,
+      <Mock>
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
+        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
+        <MockTab getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+      </Mock>,
     );
     expect(component).toMatchSnapshot();
   });
 
   it('* current index', () => {
-    const component = <Mock
-      children={[
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
-        <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
-        <MockTab getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
-      ]}
-      selectedIndex={1}/>;
+    const component =
+      <Mock selectedIndex={1}>
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
+        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
+        <MockTab getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+      </Mock>;
     const rendered = render(component);
     expect(component.props.selectedIndex).toBe(1);
     expect(rendered).toMatchSnapshot();
@@ -80,16 +79,16 @@ describe('@bottom-tab-navigator: component checks', () => {
     const onSelect = jest.fn();
     const component = render(
       <Mock
-        children={[
-          <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
-          <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
-          <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
-        ]}
         selectedIndex={1}
-        onSelect={onSelect}
-      />,
+        onSelect={onSelect}>
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
+        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
+        <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+      </Mock>,
     );
-    fireEvent.press(component.getByTestId(tabTestId));
+
+    fireEvent(component.getByTestId(tabTestId), 'select');
+
     expect(component).toMatchSnapshot();
     expect(onSelect).toHaveBeenCalled();
   });
@@ -98,28 +97,26 @@ describe('@bottom-tab-navigator: component checks', () => {
     const onSelect = jest.fn();
     const component = render(
       <Mock
-        children={[
-          <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
-          <MockTab testID={tabTestId} getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
-          <MockTab getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
-        ]}
         selectedIndex={1}
-        onSelect={onSelect}
-      />,
+        onSelect={onSelect}>
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
+        <MockTab testID={tabTestId} getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
+        <MockTab getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+      </Mock>,
     );
-    fireEvent.press(component.getByTestId(tabTestId));
+    fireEvent(component.getByTestId(tabTestId), 'select');
     expect(component).toMatchSnapshot();
     expect(onSelect).not.toHaveBeenCalled();
   });
 
   it('* additional appearance', () => {
-    const component = render(<Mock
-      children={[
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' isSelected={false}/>,
-        <MockTab getIconSource={getTab2Uri} title='Screen 2' isSelected={true}/>,
-        <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' isSelected={false}/>,
-      ]}
-      appearance='highlight'/>);
+    const component = render(
+      <Mock appearance='highlight'>
+        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
+        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
+        <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+      </Mock>,
+    );
     expect(component).toMatchSnapshot();
   });
 
