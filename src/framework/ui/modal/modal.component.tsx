@@ -15,11 +15,6 @@ import {
 
 export type ModalAnimationType = 'slideInUp' | 'fade' | 'none';
 
-export interface ModalAnimationConfig {
-  animationType: ModalAnimationType;
-  animationDuration: number;
-}
-
 interface ModalProps {
   visible: boolean;
   children: React.ReactElement<any> | React.ReactElement<any>[];
@@ -47,6 +42,7 @@ export class Modal extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props);
+
     this.setAnimation();
   }
 
@@ -55,28 +51,40 @@ export class Modal extends React.Component<Props> {
   }
 
   public componentWillReceiveProps(nextProps: Readonly<Props>): void {
-    if (nextProps.visible !== this.props.visible) {
-      if (this.hasAnimation()) {
-        const initialValue: number = this.props.animationType === 'fade' ? 0 : height;
-        this.animation.setValue(initialValue);
-        this.startAnimation();
-      }
+    const { visible, animationType } = this.props;
+
+    const isVisibilityChanged: boolean = nextProps.visible !== visible;
+    const isAnimated: boolean = animationType !== 'none';
+
+    if (isVisibilityChanged && isAnimated) {
+      const initialValue: number = animationType === 'fade' ? 0 : height;
+      this.animation.setValue(initialValue);
+      this.startAnimation();
     }
   }
 
-  private hasAnimation(): boolean {
-    return this.props.animationType !== 'none';
-  }
+  private getComponentStyle = (style: StyleType): StyleType | null => {
+    return {
+      container: style ? {
+        paddingHorizontal: style.paddingHorizontal,
+        paddingVertical: style.paddingVertical,
+        backgroundColor: style.backgroundColor,
+        borderColor: style.borderColor,
+        borderRadius: style.borderRadius,
+        borderWidth: style.borderWidth,
+      } : null,
+    };
+  };
 
-  private startAnimation(): void {
-    const value: number = this.props.animationType === 'fade' ? 1 : 0;
-    Animated.timing(
-      this.animation,
-      {
-        toValue: value,
-        duration: this.props.animationDuration,
-      },
-    ).start();
+  private getAnimationStyle(type: ModalAnimationType): StyleType | undefined {
+    switch (type) {
+      case 'none':
+        return {};
+      case 'fade':
+        return { opacity: this.animation };
+      default:
+        return { transform: [{ translateY: this.animation }] };
+    }
   }
 
   private setAnimation(): void {
@@ -87,67 +95,66 @@ export class Modal extends React.Component<Props> {
     }
   }
 
-  private getComponentStyle = (style: StyleType): StyleType | null => ({
-    container: style ? {
-      paddingHorizontal: style.paddingHorizontal,
-      paddingVertical: style.paddingVertical,
-      backgroundColor: style.backgroundColor,
-      borderColor: style.borderColor,
-      borderRadius: style.borderRadius,
-      borderWidth: style.borderWidth,
-    } : null,
-  });
+  private startAnimation(): void {
+    const { animationType, animationDuration } = this.props;
+    const animationValue: number = animationType === 'fade' ? 1 : 0;
+
+    Animated.timing(this.animation, {
+      toValue: animationValue,
+      duration: animationDuration,
+    }).start();
+  }
 
   private closeModal: () => void = (): void => {
-    this.props.onCloseModal && this.props.onCloseModal(this.props.identifier);
+    if (this.props.onCloseModal) {
+      this.props.onCloseModal(this.props.identifier);
+    }
   };
 
-  private closeOnBackDrop: () => void = () => {
+  private closeOnBackdrop: () => void = () => {
     if (this.props.isBackDropAllowed) {
       this.closeModal();
     }
   };
 
-  private renderBackdrop(): React.ReactElement<TouchableWithoutFeedbackProps> {
+  private createComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
+    return React.cloneElement(source, {
+      onCloseModal: this.closeModal,
+      pointerEvents: 'box-none',
+    });
+  };
+
+  private createBackdropElement = (): React.ReactElement<TouchableWithoutFeedbackProps> => {
     return this.props.isBackDropAllowed ? (
-      <TouchableWithoutFeedback onPress={this.closeOnBackDrop}>
+      <TouchableWithoutFeedback onPress={this.closeOnBackdrop}>
         <View style={styles.backdrop}/>
       </TouchableWithoutFeedback>
     ) : null;
-  }
+  };
 
-  private getAnimationStyle(): StyleType | undefined {
-    if (this.hasAnimation()) {
-      return this.props.animationType === 'fade' ?
-        { opacity: this.animation } :
-        { transform: [{ translateY: this.animation }] };
-    }
-  }
+  private createComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
+    return React.Children.map(source, this.createComponentChild);
+  };
 
-  private renderComponent(): React.ReactElement<ViewProps> {
-    const { children } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const childrenWithCloseProps: React.ReactElement<any>[] = React.Children
-      .map(children, (child: React.ReactElement<any>) =>
-        React.cloneElement(child, {
-            onCloseModal: this.closeModal,
-            pointerEvents: 'box-none',
-          },
-        ));
-    const animationStyle: StyleType = this.getAnimationStyle();
+  private renderComponent = (): React.ReactElement<ViewProps> => {
+    const { style, themedStyle, animationType, children, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const animationStyle: StyleType = this.getAnimationStyle(animationType);
+
+    const backdropElement: React.ReactElement<any> = this.createBackdropElement();
+    const componentChildren: React.ReactElement<any>[] = this.createComponentChildren(children);
 
     return (
       <View style={styles.container}>
-        {this.renderBackdrop()}
+        {backdropElement}
         <Animated.View
-          {...this.props}
-          style={[componentStyle.container, this.props.style, animationStyle]}
-        >
-          {childrenWithCloseProps}
+          {...derivedProps}
+          style={[componentStyle.container, style, animationStyle]}>
+          {componentChildren}
         </Animated.View>
       </View>
     );
-  }
+  };
 
   public render(): React.ReactElement<ViewProps | TouchableWithoutFeedbackProps> {
     return this.props.visible ? this.renderComponent() : null;

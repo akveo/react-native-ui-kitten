@@ -44,6 +44,7 @@ export class Toggle extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props);
+
     const thumbSize: number = props.themedStyle.height - (props.themedStyle.borderWidth * 2);
     this.thumbAnimation = new Animated.Value(thumbSize);
     this.switchAnimation = new Animated.Value(0);
@@ -63,51 +64,18 @@ export class Toggle extends React.Component<Props> {
     });
   }
 
-  private animateSwitch = (value: boolean, callback: () => void = () => null): void => {
-    this.switchAnimationActive = true;
-    Animated.timing(
-      this.switchAnimation,
-      {
-        toValue: value ? 20 : -20,
-        duration: 200,
-        easing: Easing.bezier(0.65, 0.12, 0.09, 1.26),
-      },
-    ).start(() => {
-      this.switchAnimationActive = false;
-      callback();
-    });
-  };
-
-  private animateThumb = (value: number, callback: () => void = () => null): void => {
-    Animated.timing(this.thumbAnimation, {
-      toValue: value,
-      duration: 150,
-      easing: Easing.linear,
-    }).start(callback);
-  };
-
-  private animateEllipse: (value: number) => void = (value: number): void => {
-    Animated.timing(this.ellipseAnimation, {
-      toValue: value,
-      duration: 200,
-      easing: Easing.linear,
-    }).start();
-  };
-
-  private stopAnimations(): void {
-    const value: number = this.props.value ? 0.01 : 1;
-    Animated.timing(this.switchAnimation, { toValue: value }).stop();
-    Animated.timing(this.ellipseAnimation, { toValue: value }).stop();
-    Animated.timing(this.thumbAnimation, { toValue: value }).stop();
-    this.ellipseAnimation.setValue(value);
-  }
-
   private onPressIn: () => void = (): void => {
     this.props.dispatch([Interaction.ACTIVE]);
   };
 
   private onPressOut: () => void = (): void => {
     this.props.dispatch([]);
+  };
+
+  private onValueChange = (): void => {
+    if (this.props.onValueChange) {
+      this.props.onValueChange(!this.props.value);
+    }
   };
 
   private onStartShouldSetPanResponder: () => boolean = (): boolean => {
@@ -164,23 +132,9 @@ export class Toggle extends React.Component<Props> {
     this.onPressOut();
   };
 
-  private toggle = (callback = (value: boolean) => null, thumbSize: number): void => {
-    const toValue = !this.props.value;
-    this.animateSwitch(toValue, () => {
-      this.switchAnimation.setValue(0);
-      callback(toValue);
-    });
-    this.animateThumb(thumbSize);
-  };
-
-  onValueChange = (): void => {
-    if (this.props.onValueChange) {
-      this.props.onValueChange(!this.props.value);
-    }
-  };
-
   private getComponentStyle = (style: StyleType): StyleType => {
     const thumbComponentSize: number = style.height - (style.borderWidth * 2);
+
     return {
       wrapper: {
         width: style.width,
@@ -228,6 +182,54 @@ export class Toggle extends React.Component<Props> {
     };
   };
 
+  private animateSwitch = (value: boolean, callback: () => void = () => null): void => {
+    this.switchAnimationActive = true;
+    Animated.timing(
+      this.switchAnimation,
+      {
+        toValue: value ? 20 : -20,
+        duration: 200,
+        easing: Easing.bezier(0.65, 0.12, 0.09, 1.26),
+      },
+    ).start(() => {
+      this.switchAnimationActive = false;
+      callback();
+    });
+  };
+
+  private animateThumb = (value: number, callback: () => void = () => null): void => {
+    Animated.timing(this.thumbAnimation, {
+      toValue: value,
+      duration: 150,
+      easing: Easing.linear,
+    }).start(callback);
+  };
+
+  private animateEllipse: (value: number) => void = (value: number): void => {
+    Animated.timing(this.ellipseAnimation, {
+      toValue: value,
+      duration: 200,
+      easing: Easing.linear,
+    }).start();
+  };
+
+  private stopAnimations(): void {
+    const value: number = this.props.value ? 0.01 : 1;
+    Animated.timing(this.switchAnimation, { toValue: value }).stop();
+    Animated.timing(this.ellipseAnimation, { toValue: value }).stop();
+    Animated.timing(this.thumbAnimation, { toValue: value }).stop();
+    this.ellipseAnimation.setValue(value);
+  }
+
+  private toggle = (callback = (value: boolean) => null, thumbSize: number): void => {
+    const toValue = !this.props.value;
+    this.animateSwitch(toValue, () => {
+      this.switchAnimation.setValue(0);
+      callback(toValue);
+    });
+    this.animateThumb(thumbSize);
+  };
+
   private getInterpolatedColor = (offsetValue: number,
                                   outputColorStart: string,
                                   outputColorEnd: string): Animated.AnimatedDiffClamp => {
@@ -241,9 +243,9 @@ export class Toggle extends React.Component<Props> {
     });
   };
 
-  render(): React.ReactElement<ViewProps> {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const { disabled, value, style } = this.props;
+  public render(): React.ReactElement<ViewProps> {
+    const { style, themedStyle, disabled, value } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
     const interpolatedTintColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
       componentStyle.switchOffsetValue,
       componentStyle.colors.tint,
@@ -258,23 +260,23 @@ export class Toggle extends React.Component<Props> {
       inputRange: [-componentStyle.switchOffsetValue, 0],
       outputRange: [1, 0.01],
     });
+
     return (
-      <View {...this.props} style={[componentStyle.wrapper, styles.wrapper, style]}>
-        {!this.props.disabled && <View style={[styles.highlight, componentStyle.highlight]}/>}
+      <View {...this.props} style={[componentStyle.wrapper, strictStyles.wrapper, style]}>
+        {!this.props.disabled && <View style={[strictStyles.highlight, componentStyle.highlight]}/>}
         <TouchableOpacity
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
-          onPress={this.onValueChange}
-        >
+          onPress={this.onValueChange}>
           <Animated.View
             style={[
-              styles.container,
+              strictStyles.container,
               componentStyle.componentContainer,
               { backgroundColor: interpolatedTintColor },
             ]}
             {...this.panResponder.panHandlers}>
             <Animated.View style={[
-              styles.ellipse,
+              strictStyles.ellipse,
               componentStyle.componentEllipse,
               {
                 transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
@@ -284,7 +286,7 @@ export class Toggle extends React.Component<Props> {
             />
             <Animated.View style={[
               componentStyle.componentThumb,
-              styles.thumb,
+              strictStyles.thumb,
               {
                 width: this.thumbAnimation,
                 alignSelf: value ? 'flex-end' : 'flex-start',
@@ -293,8 +295,7 @@ export class Toggle extends React.Component<Props> {
                 backgroundColor: componentStyle.colors.thumb,
                 elevation: disabled ? 0 : 5,
               },
-            ]}
-            >
+            ]}>
               <CheckMark
                 size={componentStyle.checkMarkSize}
                 color={interpolatedCheckColor}
@@ -308,7 +309,7 @@ export class Toggle extends React.Component<Props> {
   }
 }
 
-const styles = StyleSheet.create({
+const strictStyles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',

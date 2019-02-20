@@ -4,7 +4,6 @@ import {
   View,
   ViewProps,
   StyleSheet,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -14,15 +13,13 @@ import {
   TabBarIndicator,
   Props as TabBarIndicatorProps,
 } from '../tab/tabBarIndicator.component';
-import { Props as ChildProps } from './bottomNavigatorTab.component';
-import { toArray } from '../service/common.service';
+import { Props as TabProps } from './bottomNavigatorTab.component';
 
-type ChildElement = React.ReactElement<ChildProps>;
+type ChildElement = React.ReactElement<TabProps>;
 
 interface TabNavigatorProps {
-  appearance?: string;
-  selectedIndex?: number;
   children: ChildElement | ChildElement[];
+  selectedIndex?: number;
   onSelect?: (index: number) => void;
 }
 
@@ -36,89 +33,83 @@ export class BottomTabNavigator extends React.Component<Props> {
 
   private getComponentStyle = (style: StyleType): StyleType => {
     return {
-      showText: style.showText,
-      showHighlight: style.showHighlight,
       container: {
         backgroundColor: style.backgroundColor,
         borderTopColor: style.borderTopColor,
         borderTopWidth: style.borderTopWidth,
         paddingVertical: style.paddingVertical,
       },
-      highlight: {
+      indicator: {
         height: style.highlightHeight,
         backgroundColor: style.selectedColor,
       },
+      showText: style.showText,
+      showHighlight: style.showHighlight,
     };
   };
 
-  public onSelect = (index: number): void => {
-    if (this.props.selectedIndex !== index) {
-      this.props.onSelect && this.props.onSelect(index);
+  private onChildPress = (index: number): void => {
+    if (this.props.onSelect && this.props.selectedIndex !== index) {
+      this.props.onSelect(index);
     }
   };
 
-  private getComponentChild(item: ChildElement, index: number): ChildElement {
-    const component: ChildElement = React.cloneElement(item, {
-      isSelected: this.props.selectedIndex === index,
-    });
-
+  private createIndicatorElement = (positions: number, style: StyleType): React.ReactElement<TabBarIndicatorProps> => {
     return (
-      <TouchableWithoutFeedback
-        {...item.props}
-        onPress={() => this.onSelect(index)}
-        key={index}
-      >
-        {component}
-      </TouchableWithoutFeedback>
+      <TabBarIndicator
+        key={0}
+        style={[style, strictStyles.indicator]}
+        selectedPosition={this.props.selectedIndex}
+        positions={positions}
+      />
     );
-  }
+  };
 
-  private getNavigatorChildren(items: ChildElement | ChildElement[]): ChildElement[] {
-    return toArray(items).map((item: ChildElement, index: number) =>
-      this.getComponentChild(item, index));
-  }
+  private createTabElement = (element: ChildElement, index: number): React.ReactElement<TabProps> => {
+    return React.cloneElement(element, {
+      key: index,
+      style: { flex: 1 },
+      selected: index === this.props.selectedIndex,
+      onSelect: () => this.onChildPress(index),
+    });
+  };
 
-  private renderHighlight(showHighlight: boolean,
-                          style: StyleType,
-                          positions: number): React.ReactElement<TabBarIndicatorProps> {
+  private createComponentChildren = (items: ChildElement | ChildElement[],
+                                     style: StyleType): React.ReactElement<any>[] => {
 
-    return showHighlight ?
-      (
-        <TabBarIndicator
-          style={style}
-          selectedPosition={this.props.selectedIndex}
-          positions={positions}
-        />
-      ) : null;
-  }
+    const { showHighlight, indicator } = style;
+
+    const tabElements: React.ReactElement<TabProps>[] = React.Children.map(items, this.createTabElement);
+
+    return [
+      showHighlight ? this.createIndicatorElement(tabElements.length, indicator) : undefined,
+      ...tabElements,
+    ];
+  };
 
   public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const children: ChildElement[] = this.getNavigatorChildren(this.props.children);
+    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+
+    const componentChildren: ChildElement[] = this.createComponentChildren(children, componentStyles);
 
     return (
       <View
-        {...this.props}
-        style={[styles.container, componentStyle.container, this.props.style]}
-      >
-        {this.renderHighlight(
-          componentStyle.showHighlight,
-          { ...componentStyle.highlight, ...styles.highlight },
-          children.length,
-        )}
-        {children}
+        {...derivedProps}
+        style={[container, style, strictStyles.container]}>
+        {componentChildren}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const strictStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: Dimensions.get('window').width,
   },
-  highlight: {
+  indicator: {
     position: 'absolute',
   },
 });

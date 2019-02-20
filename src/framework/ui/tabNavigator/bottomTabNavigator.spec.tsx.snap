@@ -8,17 +8,17 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
   style={
     Array [
       Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
         "backgroundColor": "transparent",
         "borderTopColor": "#A6AEBD",
         "borderTopWidth": 1,
         "paddingVertical": 16,
       },
       undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
     ]
   }
   theme={
@@ -32,18 +32,6 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": true,
-    }
-  }
 >
   <View
     animationDuration={200}
@@ -52,6 +40,13 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
     selectedPosition={0}
     style={
       Object {
+        "0": Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        "1": Object {
+          "position": "absolute",
+        },
         "backgroundColor": "#3366FF",
         "height": 3,
         "position": "absolute",
@@ -66,10 +61,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
   />
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={true}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -77,36 +69,13 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 1"
   >
     <Image
       source={
@@ -134,10 +103,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -145,36 +111,13 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 2"
   >
     <Image
       source={
@@ -202,10 +145,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -213,37 +153,14 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
+      }
     }
     testID="@tab/last"
-    theme={
-      Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-      }
-    }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 3"
   >
     <Image
       source={
@@ -281,17 +198,17 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
   style={
     Array [
       Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
         "backgroundColor": "transparent",
         "borderTopColor": "#A6AEBD",
         "borderTopWidth": 1,
         "paddingVertical": 16,
       },
       undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
     ]
   }
   theme={
@@ -305,25 +222,10 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": false,
-    }
-  }
 >
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -331,36 +233,13 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 1"
   >
     <Image
       source={
@@ -388,10 +267,7 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={true}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -399,37 +275,14 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
+      }
     }
     testID="@tab/last"
-    theme={
-      Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-      }
-    }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 2"
   >
     <Image
       source={
@@ -457,10 +310,7 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -468,36 +318,13 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 3"
   >
     <Image
       source={
@@ -534,17 +361,17 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
   style={
     Array [
       Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
         "backgroundColor": "transparent",
         "borderTopColor": "#A6AEBD",
         "borderTopWidth": 1,
         "paddingVertical": 16,
       },
       undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
     ]
   }
   theme={
@@ -558,25 +385,10 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": false,
-    }
-  }
 >
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -584,36 +396,13 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 1"
   >
     <Image
       source={
@@ -641,10 +430,7 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={true}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -652,36 +438,13 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 2"
   >
     <Image
       source={
@@ -709,10 +472,7 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -720,36 +480,13 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 3"
   >
     <Image
       source={
@@ -786,17 +523,17 @@ exports[`@bottom-tab-navigator: component checks * empty 1`] = `
   style={
     Array [
       Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
         "backgroundColor": "transparent",
         "borderTopColor": "#A6AEBD",
         "borderTopWidth": 1,
         "paddingVertical": 16,
       },
       undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
     ]
   }
   theme={
@@ -808,18 +545,6 @@ exports[`@bottom-tab-navigator: component checks * empty 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": false,
     }
   }
 />
@@ -848,17 +573,17 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
   style={
     Array [
       Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
         "backgroundColor": "transparent",
         "borderTopColor": "#A6AEBD",
         "borderTopWidth": 1,
         "paddingVertical": 16,
       },
       undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
     ]
   }
   theme={
@@ -872,25 +597,10 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": false,
-    }
-  }
 >
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -898,36 +608,13 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 1"
   >
     <Image
       source={
@@ -955,10 +642,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={true}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -966,36 +650,13 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 2"
   >
     <Image
       source={
@@ -1023,10 +684,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1034,37 +692,14 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
+      }
     }
     testID="@tab/last"
-    theme={
-      Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-      }
-    }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 3"
   >
     <Image
       source={
@@ -1101,17 +736,17 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
   style={
     Array [
       Object {
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-        "width": 750,
-      },
-      Object {
         "backgroundColor": "transparent",
         "borderTopColor": "#A6AEBD",
         "borderTopWidth": 1,
         "paddingVertical": 16,
       },
       undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
     ]
   }
   theme={
@@ -1125,25 +760,10 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderTopColor": "#A6AEBD",
-      "borderTopWidth": 1,
-      "color": "#8992A3",
-      "highlightHeight": 3,
-      "paddingVertical": 16,
-      "selectedColor": "#3366FF",
-      "showHighlight": false,
-    }
-  }
 >
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={true}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1151,36 +771,13 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 1"
   >
     <Image
       source={
@@ -1208,10 +805,7 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1219,36 +813,13 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 2"
   >
     <Image
       source={
@@ -1276,10 +847,7 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
   </View>
   <View
     accessible={true}
-    appearance="default"
-    dispatch={[Function]}
-    getIconSource={[Function]}
-    isSelected={false}
+    isTVSelectable={true}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1287,36 +855,13 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 1,
       }
     }
-    themedStyle={
-      Object {
-        "icon.height": 40,
-        "icon.marginBottom": 5,
-        "icon.width": 40,
-        "title.color": "#8992A3",
-        "title.selectedColor": "#3366FF",
-      }
-    }
-    title="Screen 3"
   >
     <Image
       source={

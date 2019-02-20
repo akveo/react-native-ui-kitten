@@ -3,6 +3,7 @@ import {
   Text,
   View,
   Button,
+  ViewProps,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -14,103 +15,100 @@ import { Modal as ModalComponent } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-interface State {
-  modal1Visible: boolean;
-  modal2Visible: boolean;
+interface ModalContentProps {
+  onDismiss: () => void;
 }
 
-class ModalTest extends React.Component<Props, State> {
+interface State {
+  fadeModalVisible: boolean;
+  slideModalVisible: boolean;
+}
+
+const ModalContent = (props: ModalContentProps & ViewProps): React.ReactElement<ViewProps> => (
+  <View {...props}>
+    <Text>Hi! I'm a modal</Text>
+    <Button
+      title='Dismiss'
+      onPress={props.onDismiss}
+    />
+  </View>
+);
+
+class Modal extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Modal Component',
   };
 
   public state: State = {
-    modal1Visible: false,
-    modal2Visible: false,
+    fadeModalVisible: false,
+    slideModalVisible: false,
   };
 
-  public setModal1Visible = (value: boolean): void => {
-    this.setState({ modal1Visible: value });
+  private onFadeButtonPress = () => {
+    this.setState({ fadeModalVisible: true });
   };
 
-  public setModal2Visible = (value: boolean): void => {
-    this.setState({ modal2Visible: value });
+  private onSlideButtonPress = () => {
+    this.setState({ slideModalVisible: true });
   };
 
-  private renderModal1Component(): React.ReactElement<any> {
-    return (
-      <View>
-        <Text>This is modal "fade" content</Text>
-        <Button title={'Hide Modal'} onPress={() => this.setModal1Visible(false)}/>
-      </View>
-    );
-  }
+  private onFadeModalDismiss = () => {
+    this.setState({ fadeModalVisible: false });
+  };
 
-  private renderModal2Component(): React.ReactElement<any> {
-    return (
-      <View>
-        <Text>This is modal "slide" content</Text>
-        <Button title={'Hide Modal'} onPress={() => this.setModal2Visible(false)}/>
-      </View>
-    );
-  }
+  private onSlideModalDismiss = () => {
+    this.setState({ slideModalVisible: false });
+  };
 
   public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
-        <Button title={'Show Modal 1'} onPress={() => this.setModal1Visible(true)}/>
-        <Button title={'Show Modal 2'} onPress={() => this.setModal2Visible(true)}/>
+        <Button
+          title='Fade'
+          onPress={this.onFadeButtonPress}
+        />
+        <Button
+          title='Slide Up'
+          onPress={this.onSlideButtonPress}
+        />
         <ModalComponent
-          identifier={'test1'}
-          visible={this.state.modal1Visible}
-          style={this.props.themedStyle.modal1}
-          onCloseModal={() => this.setModal1Visible(false)}
+          identifier='@modal/fade'
+          visible={this.state.fadeModalVisible}
+          style={this.props.themedStyle.modal}
+          onCloseModal={this.onFadeButtonPress}
           animationType='fade'
-          animationDuration={600}
-        >
-          {this.renderModal1Component()}
+          animationDuration={600}>
+          <ModalContent onDismiss={this.onFadeModalDismiss}/>
         </ModalComponent>
         <ModalComponent
-          identifier={'test2'}
-          visible={this.state.modal2Visible}
-          style={this.props.themedStyle.modal2}
+          identifier='@modal/slide'
+          visible={this.state.slideModalVisible}
+          style={this.props.themedStyle.modal}
           isBackDropAllowed={true}
-          onCloseModal={() => this.setModal2Visible(false)}
+          onCloseModal={this.onSlideButtonPress}
           animationType='slideInUp'
-          animationDuration={600}
-        >
-          {this.renderModal2Component()}
+          animationDuration={600}>
+          <ModalContent onDismiss={this.onSlideModalDismiss}/>
         </ModalComponent>
       </View>
     );
   }
 }
 
-export const ModalScreen = withStyles(ModalTest, (theme: ThemeType) => ({
+export const ModalScreen = withStyles(Modal, (theme: ThemeType) => ({
   container: {
     flex: 1,
   },
-  modal1: {
+  modal: {
     width: 300,
     height: 300,
-    backgroundColor: 'green',
+    backgroundColor: '#c0c0c0',
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: 'yellow',
-    borderWidth: 2,
+    borderColor: 'black',
+    borderWidth: 4,
     top: 100,
-    left: 50,
-  },
-  modal2: {
-    width: 300,
-    height: 200,
-    backgroundColor: 'blue',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'red',
-    borderWidth: 2,
-    top: 300,
     left: 50,
   },
 }));

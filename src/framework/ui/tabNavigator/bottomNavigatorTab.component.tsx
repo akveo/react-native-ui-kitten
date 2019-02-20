@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  View,
-  ViewProps,
+  TouchableOpacity,
   Text,
   StyleSheet,
   ImageSourcePropType,
   TextProps,
   ImageProps,
   Image,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -15,53 +15,83 @@ import {
 } from '@kitten/theme';
 
 interface BottomNavigatorTabProps {
-  appearance?: string;
   title?: string;
-  isSelected?: boolean;
-  getIconSource?: (isSelected: boolean) => ImageSourcePropType;
+  getIconSource?: (selected: boolean) => ImageSourcePropType;
+  selected?: boolean;
+  onSelect?: (selected: boolean) => void;
 }
 
-export type Props = BottomNavigatorTabProps & StyledComponentProps & ViewProps;
+export type Props = BottomNavigatorTabProps & StyledComponentProps & TouchableOpacityProps;
 
 export class BottomNavigatorTab extends React.Component<Props> {
 
-  private hasText(): boolean {
-    return this.props.title && this.props.title.length !== 0;
+  private onPress = () => {
+    if (this.props.onSelect) {
+      this.props.onSelect(!this.props.selected);
+    }
+  };
+
+  private getComponentStyle = (source: StyleType): StyleType => {
+    return {
+      container: {},
+      icon: {
+        width: source['icon.width'],
+        height: source['icon.height'],
+        marginBottom: source['icon.marginBottom'],
+      },
+      title: {
+        color: this.props.selected ? source['title.selectedColor'] : source['title.color'],
+      },
+    };
+  };
+
+  private createImageElement(style: StyleType): React.ReactElement<ImageProps> {
+    return (
+      <Image
+        key={0}
+        style={style}
+        source={this.props.getIconSource(this.props.selected)}
+      />
+    );
   }
 
-  private getComponentStyle = (source: StyleType): StyleType => ({
-    icon: {
-      width: source['icon.width'],
-      height: source['icon.height'],
-      marginBottom: source['icon.marginBottom'],
-    },
-    title: {
-      color: this.props.isSelected ? source['title.selectedColor'] : source['title.color'],
-    },
-  });
-
-  private renderTitle(style: StyleType): React.ReactElement<TextProps> | null {
-    return this.hasText() ? <Text style={style}>{this.props.title}</Text> : null;
+  private createTextElement(style: StyleType): React.ReactElement<TextProps> {
+    return (
+      <Text
+        key={1}
+        style={style}>
+        {this.props.title}
+      </Text>
+    );
   }
 
-  private renderIcon(style: StyleType): React.ReactElement<ImageProps> | null {
-    return this.props.getIconSource ?
-      <Image style={style} source={this.props.getIconSource(this.props.isSelected)}/> : null;
-  }
+  private createComponentChildren = (style: StyleType): React.ReactNode => {
+    const { getIconSource, title } = this.props;
+
+    return [
+      getIconSource ? this.createImageElement(style.icon) : undefined,
+      title && title.length !== 0 ? this.createTextElement(style.title) : undefined,
+    ];
+  };
 
   public render(): React.ReactNode {
-    const componentStyle = this.getComponentStyle(this.props.themedStyle);
+    const { style, themedStyle, ...derivedProps } = this.props;
+    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
 
     return (
-      <View {...this.props} style={[styles.container, this.props.style]}>
-        {this.renderIcon(componentStyle.icon)}
-        {this.renderTitle(componentStyle.title)}
-      </View>
+      <TouchableOpacity
+        {...derivedProps}
+        style={[style, container, strictStyles.container]}
+        activeOpacity={1.0}
+        onPress={this.onPress}>
+        {componentChildren}
+      </TouchableOpacity>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const strictStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

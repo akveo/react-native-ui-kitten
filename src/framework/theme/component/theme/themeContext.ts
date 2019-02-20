@@ -5,4 +5,4 @@ export type ThemeContextValueType = ThemeType;
 
 const defaultValue: ThemeContextValueType = {};
 
-export const ThemeContext = React.createContext(defaultValue);
+export const ThemeContext: React.Context<ThemeContextValueType> = React.createContext(defaultValue);

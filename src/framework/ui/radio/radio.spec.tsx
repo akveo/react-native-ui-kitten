@@ -13,62 +13,74 @@ import {
   StyleProviderProps,
 } from '@kitten/theme';
 import {
-  Radio,
-  Props,
+  Radio as RadioComponent,
+  Props as RadioProps,
 } from './radio.component';
 import * as config from './radio.spec.config';
+import { ReactTestInstance } from 'react-test-renderer';
 
-const StyledComponent = styled<Radio, Props>(Radio);
+const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 
-const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
+const Mock = (props?: RadioProps): React.ReactElement<StyleProviderProps> => (
   <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <StyledComponent {...props} />
+    <Radio {...props} />
   </StyleProvider>
 );
 
-const renderComponent = (props?: Props): RenderAPI => render(<Mock {...props}/>);
+const renderComponent = (props?: RadioProps): RenderAPI => {
+  return render(
+    <Mock {...props}/>,
+  );
+};
 
 describe('@radio: matches snapshot', () => {
 
   it('default', () => {
-    const component = renderComponent();
-    const { output } = shallow(component.getByType(Radio));
+    const component: RenderAPI = renderComponent();
+    const { output } = shallow(component.getByType(RadioComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('checked', () => {
-    const component = renderComponent({ checked: true });
-    const { output } = shallow(component.getByType(Radio));
+    const component: RenderAPI = renderComponent({ checked: true });
+    const { output } = shallow(component.getByType(RadioComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('disabled', () => {
-    const component = renderComponent({ disabled: true });
-    const { output } = shallow(component.getByType(Radio));
+    const component: RenderAPI = renderComponent({ disabled: true });
+    const { output } = shallow(component.getByType(RadioComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('checked disabled', () => {
-    const component = renderComponent({ checked: true, disabled: true });
-    const { output } = shallow(component.getByType(Radio));
+    const component: RenderAPI = renderComponent({
+      checked: true,
+      disabled: true,
+    });
+    const { output } = shallow(component.getByType(RadioComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('active', async () => {
-    const component = renderComponent();
+    const component: RenderAPI = renderComponent();
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
 
-    const active = await waitForElement(() => component.getByType(Radio));
+    const active: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(RadioComponent);
+    });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
-    const inactive = await waitForElement(() => component.getByType(Radio));
+    const inactive: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(RadioComponent);
+    });
     const { output: inactiveOutput } = shallow(inactive);
 
     expect(activeOutput).toMatchSnapshot();
@@ -76,15 +88,20 @@ describe('@radio: matches snapshot', () => {
   });
 
   it('active checked', async () => {
-    const component = renderComponent({ checked: true });
+    const component: RenderAPI = renderComponent({ checked: true });
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-    const active = await waitForElement(() => component.getByType(Radio));
+
+    const active: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(RadioComponent);
+    });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
-    const inactive = await waitForElement(() => component.getByType(Radio));
+    const inactive: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(RadioComponent);
+    });
     const { output: inactiveOutput } = shallow(inactive);
 
     expect(activeOutput).toMatchSnapshot();
@@ -95,12 +112,17 @@ describe('@radio: matches snapshot', () => {
 
 describe('@radio: component checks', () => {
 
-  it('emits onChange', () => {
+  it('* emits onChange with correct args', () => {
     const onChange = jest.fn();
-    const component = renderComponent({ onChange: onChange });
+
+    const component: RenderAPI = renderComponent({
+      checked: false,
+      onChange: onChange,
+    });
+
     fireEvent.press(component.getByType(TouchableOpacity));
 
-    expect(onChange).toBeCalled();
+    expect(onChange).toBeCalledWith(true);
   });
 
 });

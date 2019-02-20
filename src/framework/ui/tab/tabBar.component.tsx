@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  TouchableWithoutFeedback,
   View,
   ViewProps,
 } from 'react-native';
@@ -9,13 +8,12 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { TabBarIndicator } from './tabBarIndicator.component';
-import { Props as ChildProps } from './tab.component';
-import { toArray } from '../service/common.service';
+import { Props as TabProps } from './tab.component';
 
-type ChildElement = React.ReactElement<ChildProps>;
+type TabElement = React.ReactElement<TabProps>;
 
 interface TabBarProps {
-  children: ChildElement | ChildElement[];
+  children: TabElement | TabElement[];
   selectedIndex?: number;
   onSelect?: (index: number) => void;
 }
@@ -62,38 +60,37 @@ export class TabBar extends React.Component<Props> {
     };
   };
 
-  private createComponentChild = (element: ChildElement, index: number): ChildElement => {
-    return (
-      <TouchableWithoutFeedback
-        {...element.props}
-        style={{ flex: 1 }}
-        key={index}
-        onPress={() => this.onChildPress(index)}>
-        {element}
-      </TouchableWithoutFeedback>
-    );
+  private createComponentChild = (element: TabElement, index: number): TabElement => {
+    return React.cloneElement(element, {
+      key: index,
+      style: { flex: 1 },
+      selected: index === this.props.selectedIndex,
+      onSelect: () => this.onChildPress(index),
+    });
   };
 
-  private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
-    return toArray(source).map(this.createComponentChild);
+  private createComponentChildren = (source: TabElement | TabElement[]): TabElement[] => {
+    return React.Children.map(source, this.createComponentChild);
   };
 
-  public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const children: ChildElement[] = this.createComponentChildren(this.props.children);
+  public render(): React.ReactElement<ViewProps> {
+    const { style, themedStyle, selectedIndex, children, ...derivedProps } = this.props;
+    const { bar, indicator } = this.getComponentStyle(themedStyle);
+
+    const componentChildren: TabElement[] = this.createComponentChildren(children);
 
     return (
       <View>
         <View
-          {...this.props}
-          style={[this.props.style, componentStyle.bar]}>
-          {children}
+          {...derivedProps}
+          style={[style, bar]}>
+          {componentChildren}
         </View>
         <TabBarIndicator
           ref={this.tabIndicatorRef}
-          style={componentStyle.indicator}
-          selectedPosition={this.props.selectedIndex}
-          positions={children.length}
+          style={indicator}
+          selectedPosition={selectedIndex}
+          positions={componentChildren.length}
         />
       </View>
     );

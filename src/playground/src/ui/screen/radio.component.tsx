@@ -34,19 +34,19 @@ class Radio extends React.Component<Props, State> {
   };
 
   private onRadio1Change = (selected: boolean) => {
-    this.setState({ isRadio1Checked: !selected });
+    this.setState({ isRadio1Checked: selected });
   };
 
   private onRadio2Change = (selected: boolean) => {
-    this.setState({ isRadio2Checked: !selected });
+    this.setState({ isRadio2Checked: selected });
   };
 
   private onRadio3Change = (selected: boolean) => {
-    this.setState({ isRadio3Checked: !selected });
+    this.setState({ isRadio3Checked: selected });
   };
 
   private onRadio4Change = (selected: boolean) => {
-    this.setState({ isRadio4Checked: !selected });
+    this.setState({ isRadio4Checked: selected });
   };
 
   public render(): React.ReactNode {

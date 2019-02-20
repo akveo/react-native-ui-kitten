@@ -14,4 +14,4 @@ const defaultValue: MappingContextValueType = {
   styles: {},
 };
 
-export const MappingContext = React.createContext(defaultValue);
+export const MappingContext: React.Context<MappingContextValueType> = React.createContext(defaultValue);

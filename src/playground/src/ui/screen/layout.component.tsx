@@ -20,7 +20,7 @@ class Layout extends React.Component<Props> {
     title: 'Layout',
   };
 
-  render(): React.ReactElement<ViewProps> {
+  public render(): React.ReactElement<ViewProps> {
     return (
       <View style={this.props.themedStyle.container}>
         <LayoutComponent style={this.props.themedStyle.layout}>
@@ -29,7 +29,6 @@ class Layout extends React.Component<Props> {
       </View>
     );
   }
-
 }
 
 export const LayoutScreen = withStyles(Layout, (theme: ThemeType) => ({

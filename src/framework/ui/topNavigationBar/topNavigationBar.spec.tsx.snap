@@ -63,7 +63,7 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     iconSource={
       Object {
         "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
@@ -137,7 +137,7 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     iconSource={
       Object {
         "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
@@ -211,7 +211,7 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     iconSource={
       Object {
         "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
@@ -297,7 +297,7 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     iconSource={
       Object {
         "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
@@ -370,7 +370,7 @@ exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     appearance="title-centered"
     title="Test"
   />
@@ -440,7 +440,7 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     subtitle="Subtitle"
     title="Test"
   />
@@ -510,7 +510,7 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     title="Test"
   />
 </StyleProvider>
@@ -579,7 +579,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
     }
   }
 >
-  <ForwardRef(renderComponent)
+  <ForwardRef(createComponent)
     leftControl={
       <ActionMock
         iconSource={
