@@ -36,6 +36,14 @@ import {
   Props as TabViewProps,
 } from './tab/tabView.component';
 import {
+  TopNavigationBar as TopNavigationBarComponent,
+  Props as TopNavigationBarProps,
+} from './topNavigationBar/topNavigationBar.component';
+import {
+  TopNavigationBarAction as TopNavigationBarActionComponent,
+  Props as TopNavigationBarActionProps,
+} from './topNavigationBar/topNavigationBarAction.component';
+import {
   Modal as ModalComponent,
   Props as ModalProps,
 } from './modal/modal.component';
@@ -47,6 +55,9 @@ const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
+const TopNavigationBarAction =
+  styled<TopNavigationBarActionComponent, TopNavigationBarActionProps>(TopNavigationBarActionComponent);
 const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
@@ -68,7 +79,10 @@ export {
   TabBarProps,
   ViewPagerProps,
   TabViewProps,
+  TopNavigationBar,
+  TopNavigationBarProps,
+  TopNavigationBarAction,
+  TopNavigationBarActionProps,
   Modal,
   ModalProps,
 };
-
