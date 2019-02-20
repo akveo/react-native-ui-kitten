@@ -12,97 +12,103 @@ import {
 } from '@kitten/theme';
 import { Props as ActionProps } from './topNavigationBarAction.component';
 
+type ActionElement = React.ReactElement<ActionProps>;
+
 interface TopNavigationBarProps {
   title?: string;
   subtitle?: string;
-  leftControl?: React.ReactElement<ActionProps>;
-  rightControls?: React.ReactElement<ActionProps>[];
+  leftControl?: ActionElement;
+  rightControls?: ActionElement[];
 }
 
 export type Props = TopNavigationBarProps & StyledComponentProps & ViewProps;
 
 export class TopNavigationBar extends React.Component<Props> {
 
-  private getComponentStyle = (style: StyleType): StyleType => ({
-    container: {
-      backgroundColor: style.backgroundColor,
-      height: style.height,
-      paddingTop: style.paddingTop,
-      paddingBottom: style.paddingBottom,
-      paddingHorizontal: style.paddingHorizontal,
-    },
-    titleContainer: style['title.centered'] ? {
-      flex: 3,
-      alignItems: 'center',
-    } : {
-      flex: 1,
-      paddingHorizontal: style.paddingHorizontal,
-    },
-    leftControlContainer: style['title.centered'] ? {
-      flex: 1,
-    } : null,
-    rightControlsContainer: style['title.centered'] ? {
-      flex: 1,
-    } : null,
-    title: {
-      color: style['title.color'],
-      fontSize: style['title.fontSize'],
-      fontWeight: style['title.fontWeight'],
-    },
-    subtitle: {
-      color: style['subtitle.color'],
-      fontSize: style['subtitle.fontSize'],
-      fontWeight: style['subtitle.fontWeight'],
-    },
-  });
+  private getComponentStyle = (style: StyleType): StyleType => {
+    return {
+      container: {
+        backgroundColor: style.backgroundColor,
+        height: style.height,
+        paddingTop: style.paddingTop,
+        paddingBottom: style.paddingBottom,
+        paddingHorizontal: style.paddingHorizontal,
+      },
+      titleContainer: style['title.centered'] ? {
+        flex: 3,
+        alignItems: 'center',
+      } : {
+        flex: 1,
+        paddingHorizontal: style.paddingHorizontal,
+      },
+      leftControlContainer: style['title.centered'] ? {
+        flex: 1,
+      } : null,
+      rightControlsContainer: style['title.centered'] ? {
+        flex: 1,
+      } : null,
+      title: {
+        color: style['title.color'],
+        fontSize: style['title.fontSize'],
+        fontWeight: style['title.fontWeight'],
+      },
+      subtitle: {
+        color: style['subtitle.color'],
+        fontSize: style['subtitle.fontSize'],
+        fontWeight: style['subtitle.fontWeight'],
+      },
+    };
+  };
 
-  private hasText(text: string): boolean {
-    return text && text.length !== 0;
-  }
+  private createTextElement = (text: string, style: StyleType): React.ReactElement<TextProps> => {
+    return (
+      <Text style={style}>{text}</Text>
+    );
+  };
 
-  private renderText(text: string, style: StyleType): React.ReactElement<TextProps> | null {
-    return this.hasText(text) ? <Text style={style}>{text}</Text> : null;
-  }
+  private createTitleElement = (text: string, style: StyleType): React.ReactElement<TextProps> | undefined => {
+    const isValid: boolean = text && text.length !== 0;
 
-  private renderRightControl(item: React.ReactElement<ActionProps>,
-                             index: number): React.ReactElement<ActionProps> | null {
+    return isValid ? this.createTextElement(text, style) : undefined;
+  };
 
-    return item ? React.cloneElement(item, {
+  private createRightActionElement = (element: ActionElement, index: number): ActionElement | null => {
+    const isLast: boolean = React.Children.count(this.props.rightControls) - 1 === index;
+
+    return element ? React.cloneElement(element, {
       key: index,
-      isLastItem: React.Children.count(this.props.rightControls) - 1 === index,
+      isLastItem: isLast,
     }) : null;
-  }
+  };
 
-  private renderRightControls(): React.ReactElement<ActionProps>[] | null {
-    return React.Children
-      .map(this.props.rightControls, (item: React.ReactElement<ActionProps>, i: number) =>
-        this.renderRightControl(item, i));
+  private createRightActionElements(source: React.ReactElement<ActionProps>[]): ActionElement[] {
+    return source.map(this.createRightActionElement);
   }
 
   public render(): React.ReactNode {
-    const componentStyles: StyleType = this.getComponentStyle(this.props.themedStyle);
+    const { style, themedStyle, title, subtitle, leftControl, rightControls, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
       <View
-        {...this.props}
-        style={[styles.container, componentStyles.container, this.props.style]}
-      >
-        <View style={[componentStyles.leftControlContainer, styles.leftControlContainer]}>
-          {this.props.leftControl}
+        {...derivedProps}
+        style={[strictStyles.container, componentStyle.container, style]}>
+        <View style={[componentStyle.leftControlContainer, strictStyles.leftControlContainer]}>
+          {leftControl}
         </View>
-        <View style={componentStyles.titleContainer}>
-          {this.renderText(this.props.title, componentStyles.title)}
-          {this.renderText(this.props.subtitle, componentStyles.subtitle)}
+        <View style={componentStyle.titleContainer}>
+          {this.createTitleElement(title, componentStyle.title)}
+          {this.createTitleElement(subtitle, componentStyle.subtitle)}
         </View>
-        <View style={[styles.rightControlsContainer, componentStyles.rightControlsContainer]}>
-          {this.renderRightControls()}
+        <View style={[strictStyles.rightControlsContainer, componentStyle.rightControlsContainer]}>
+          {this.createRightActionElements(rightControls)}
         </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const strictStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
