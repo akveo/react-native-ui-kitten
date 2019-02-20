@@ -1,0 +1,1346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
+<View
+  appearance="highlight"
+  dispatch={[Function]}
+  selectedIndex={0}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": true,
+    }
+  }
+>
+  <View
+    animationDuration={200}
+    onLayout={[Function]}
+    positions={3}
+    selectedPosition={0}
+    style={
+      Object {
+        "backgroundColor": "#3366FF",
+        "height": 3,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+        "width": "33.333333333333336%",
+      }
+    }
+  />
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 2
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    testID="@tab/last"
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  onSelect={[MockFunction]}
+  selectedIndex={1}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": false,
+    }
+  }
+>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    testID="@tab/last"
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 2
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@bottom-tab-navigator: component checks * current index 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  selectedIndex={1}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": false,
+    }
+  }
+>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 2
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@bottom-tab-navigator: component checks * empty 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  selectedIndex={0}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": false,
+    }
+  }
+/>
+`;
+
+exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  onSelect={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          2,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  selectedIndex={1}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": false,
+    }
+  }
+>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 2
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    testID="@tab/last"
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  selectedIndex={0}
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+    }
+  }
+  themedStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "borderTopColor": "#A6AEBD",
+      "borderTopWidth": 1,
+      "color": "#8992A3",
+      "highlightHeight": 3,
+      "paddingVertical": 16,
+      "selectedColor": "#3366FF",
+      "showHighlight": false,
+    }
+  }
+>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 1"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#3366FF",
+        }
+      }
+    >
+      Screen 1
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 2"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 2
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    appearance="default"
+    dispatch={[Function]}
+    getIconSource={[Function]}
+    isSelected={false}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "icon.height": 40,
+        "icon.marginBottom": 5,
+        "icon.width": 40,
+        "title.color": "#8992A3",
+        "title.selectedColor": "#3366FF",
+      }
+    }
+    title="Screen 3"
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "marginBottom": 5,
+          "width": 40,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#8992A3",
+        }
+      }
+    >
+      Screen 3
+    </Text>
+  </View>
+</View>
+`;
