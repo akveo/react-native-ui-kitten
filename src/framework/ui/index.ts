@@ -43,6 +43,10 @@ import {
   TopNavigationBarAction as TopNavigationBarActionComponent,
   Props as TopNavigationBarActionProps,
 } from './topNavigationBar/topNavigationBarAction.component';
+import {
+  Modal as ModalComponent,
+  Props as ModalProps,
+} from './modal/modal.component';
 
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
@@ -54,6 +58,7 @@ const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
 const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
 const TopNavigationBarAction =
   styled<TopNavigationBarActionComponent, TopNavigationBarActionProps>(TopNavigationBarActionComponent);
+const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
   Layout,
@@ -78,4 +83,6 @@ export {
   TopNavigationBarProps,
   TopNavigationBarAction,
   TopNavigationBarActionProps,
+  Modal,
+  ModalProps,
 };
