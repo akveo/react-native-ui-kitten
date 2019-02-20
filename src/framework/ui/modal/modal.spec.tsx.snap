@@ -12,7 +12,6 @@ exports[`@modal component checks * component styled with mappings 1`] = `
 >
   <View
     animationDuration={300}
-    animationType="none"
     appearance="default"
     dispatch={[Function]}
     isBackDropAllowed={false}
@@ -35,16 +34,6 @@ exports[`@modal component checks * component styled with mappings 1`] = `
         "gray-light": "#DDE1EB",
         "gray-primary": "#A6AEBD",
         "pink-primary": "#FF3D71",
-      }
-    }
-    themedStyle={
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "#3366FF",
-        "borderRadius": 3,
-        "borderWidth": 1,
-        "paddingHorizontal": 16,
-        "paddingVertical": 8,
       }
     }
     visible={true}
@@ -91,7 +80,6 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
   />
   <View
     animationDuration={300}
-    animationType="none"
     identifier="modal-test-identifier-1"
     isBackDropAllowed={true}
     onCloseModal={[MockFunction]}
@@ -182,7 +170,6 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
   />
   <View
     animationDuration={300}
-    animationType="none"
     identifier="modal-test-identifier-1"
     isBackDropAllowed={true}
     onCloseModal={
@@ -287,7 +274,6 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
   />
   <View
     animationDuration={300}
-    animationType="none"
     identifier="modal-test-identifier-1"
     isBackDropAllowed={true}
     onCloseModal={[MockFunction]}
@@ -338,7 +324,6 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
   />
   <View
     animationDuration={300}
-    animationType="none"
     identifier="modal-test-identifier-1"
     isBackDropAllowed={true}
     onCloseModal={
@@ -383,7 +368,6 @@ exports[`@modal component checks * modal component renders properly 1`] = `
 >
   <View
     animationDuration={300}
-    animationType="none"
     identifier="modal-test-identifier-1"
     isBackDropAllowed={false}
     onCloseModal={[Function]}
@@ -478,7 +462,6 @@ exports[`@modal component checks * with animations 1`] = `
     />
     <View
       animationDuration={500}
-      animationType="slideInUp"
       identifier="modal-test-identifier-1"
       isBackDropAllowed={true}
       onCloseModal={[Function]}
@@ -581,7 +564,6 @@ exports[`@modal component checks * with animations 2`] = `
     />
     <View
       animationDuration={500}
-      animationType="fade"
       identifier="modal-test-identifier-1"
       isBackDropAllowed={true}
       onCloseModal={[Function]}
