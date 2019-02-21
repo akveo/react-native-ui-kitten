@@ -1,4 +1,5 @@
 export { HomeScreen } from './home.component';
+export { TextScreen } from './text.component';
 export { RadioScreen } from './radio.component';
 export { LayoutScreen } from './layout.component';
 export { ToggleScreen } from './toggle.component';

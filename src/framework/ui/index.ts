@@ -1,5 +1,9 @@
 import { styled } from '@kitten/theme';
 import {
+  Text as TextComponent,
+  Props as TextProps,
+} from './text/text.component';
+import {
   Radio as RadioComponent,
   Props as RadioProps,
 } from './radio/radio.component';
@@ -56,6 +60,7 @@ import {
   Props as ModalProps,
 } from './modal/modal.component';
 
+const Text = styled<TextComponent, TextProps>(TextComponent);
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
 const Layout = styled<LayoutComponent, LayoutProps>(LayoutComponent);
@@ -71,6 +76,7 @@ const TopNavigationBarAction =
 const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
+  Text,
   Layout,
   LayoutProps,
   Radio,
