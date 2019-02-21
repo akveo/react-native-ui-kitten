@@ -14,7 +14,6 @@ import {
   Props as TabBarProps,
 } from './tabBar.component';
 import { ViewPager } from '../viewPager/viewPager.component';
-import { toArray } from '../service/common.service';
 
 type TabElement = React.ReactElement<TabProps>;
 type ChildElement = React.ReactElement<ChildProps>;
@@ -39,8 +38,8 @@ interface TabViewProps {
   onSelect?: (index: number) => void;
 }
 
-const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
+const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
 
 export type Props = TabViewProps & ViewProps;
 export type ChildProps = TabProps & { children: ChildContentElement };
@@ -53,7 +52,7 @@ export class TabView extends React.Component<Props> {
   };
 
   private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
-  private tabBarRef: React.RefObject<any> = React.createRef();
+  private tabBarRef: React.RefObject<TabBarComponent> = React.createRef();
 
   private onBarSelect = (index: number) => {
     const { current: viewPager } = this.viewPagerRef;
@@ -63,8 +62,9 @@ export class TabView extends React.Component<Props> {
 
   private onPagerOffsetChange = (offset: number) => {
     const { current: tabBar } = this.tabBarRef;
+    const tabCount: number = React.Children.count(tabBar.props.children);
 
-    tabBar.scrollToOffset({ offset: offset / tabBar.props.children.length });
+    tabBar.scrollToOffset({ offset: offset / tabCount });
   };
 
   private onPagerSelect = (selectedIndex: number) => {
@@ -83,7 +83,7 @@ export class TabView extends React.Component<Props> {
   };
 
   private createComponentChildren = (source: ChildElement | ChildElement[]): TabViewChildren => {
-    return toArray(source).reduce((acc: TabViewChildren, element: ChildElement, index: number) => {
+    return React.Children.toArray(source).reduce((acc: TabViewChildren, element: ChildElement, index: number) => {
       const { tab, content } = this.createComponentChild(element, index);
       return {
         tabs: [...acc.tabs, tab],
@@ -92,21 +92,22 @@ export class TabView extends React.Component<Props> {
     }, new TabViewChildren());
   };
 
-  public render(): React.ReactNode {
-    const { tabs, content } = this.createComponentChildren(this.props.children);
+  public render(): React.ReactElement<ViewProps> {
+    const { selectedIndex, contentWidth, children, ...derivedProps } = this.props;
+    const { tabs, content } = this.createComponentChildren(children);
 
     return (
-      <View {...this.props}>
+      <View {...derivedProps}>
         <TabBar
           ref={this.tabBarRef}
-          selectedIndex={this.props.selectedIndex}
+          selectedIndex={selectedIndex}
           onSelect={this.onBarSelect}>
           {tabs}
         </TabBar>
         <ViewPager
           ref={this.viewPagerRef}
-          selectedIndex={this.props.selectedIndex}
-          contentWidth={this.props.contentWidth}
+          selectedIndex={selectedIndex}
+          contentWidth={contentWidth}
           shouldLoadComponent={this.props.shouldLoadComponent}
           onOffsetChange={this.onPagerOffsetChange}
           onSelect={this.onPagerSelect}>

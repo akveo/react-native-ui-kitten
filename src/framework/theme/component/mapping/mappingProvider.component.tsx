@@ -8,16 +8,18 @@ import { MappingContext } from './mappingContext';
 export interface Props {
   mapping: ThemeMappingType;
   styles: ThemeMapType;
-  children: JSX.Element | React.ReactNode;
+  children: React.ReactNode;
 }
 
 export class MappingProvider extends React.PureComponent<Props> {
 
-  render() {
+  public render(): React.ReactNode {
+    const { mapping, styles, children } = this.props;
+
     return (
       <MappingContext.Provider
-        value={{ mapping: this.props.mapping, styles: this.props.styles }}>
-        {this.props.children}
+        value={{ mapping, styles }}>
+        {children}
       </MappingContext.Provider>
     );
   }

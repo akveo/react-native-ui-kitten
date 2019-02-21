@@ -1,19 +1,21 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { ThemeContext } from './themeContext';
 import { ThemeType } from '../../type';
 
 export interface Props {
   theme: ThemeType;
-  children: JSX.Element | ReactNode;
+  children: React.ReactNode;
 }
 
 export class ThemeProvider extends React.PureComponent<Props> {
 
-  render() {
+  public render(): React.ReactNode {
+    const { theme, children } = this.props;
+
     return (
       <ThemeContext.Provider
-        value={this.props.theme}>
-        {this.props.children}
+        value={theme}>
+        {children}
       </ThemeContext.Provider>
     );
   }

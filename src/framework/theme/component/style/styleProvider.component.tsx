@@ -12,11 +12,15 @@ export type Props = MappingProviderProps & ThemeProviderProps;
 
 export class StyleProvider extends React.PureComponent<Props> {
 
-  render() {
+  public render(): React.ReactNode {
+    const { mapping, styles, theme, children } = this.props;
+
     return (
-      <MappingProvider mapping={this.props.mapping} styles={this.props.styles}>
-        <ThemeProvider theme={this.props.theme}>
-          {this.props.children}
+      <MappingProvider
+        mapping={mapping}
+        styles={styles}>
+        <ThemeProvider theme={theme}>
+          {children}
         </ThemeProvider>
       </MappingProvider>
     );

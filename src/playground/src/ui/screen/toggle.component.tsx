@@ -27,7 +27,7 @@ class Toggle extends React.Component<Props, State> {
     title: 'Toggle',
   };
 
-  state: State = {
+  public state: State = {
     toggle1Checked: false,
     toggle2Checked: true,
     toggle3Checked: false,
@@ -35,27 +35,27 @@ class Toggle extends React.Component<Props, State> {
     toggleErrorChecked: false,
   };
 
-  onToggle1Change = (value: boolean) => {
+  private onToggle1Change = (value: boolean) => {
     this.setState({ toggle1Checked: value });
   };
 
-  onToggle2Change = (value: boolean) => {
+  private onToggle2Change = (value: boolean) => {
     this.setState({ toggle2Checked: value });
   };
 
-  onToggle3Change = (value: boolean) => {
+  private onToggle3Change = (value: boolean) => {
     this.setState({ toggle3Checked: value });
   };
 
-  onToggle4Change = (value: boolean) => {
+  private onToggle4Change = (value: boolean) => {
     this.setState({ toggle4Checked: value });
   };
 
-  onToggleErrorChange = (value: boolean) => {
+  private onToggleErrorChange = (value: boolean) => {
     this.setState({ toggleErrorChecked: value });
   };
 
-  render() {
+  public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>
@@ -134,7 +134,6 @@ class Toggle extends React.Component<Props, State> {
       </View>
     );
   }
-
 }
 
 export const ToggleScreen = withStyles(Toggle, (theme: ThemeType) => ({

@@ -1,4 +1,5 @@
 export { HomeScreen } from './home.component';
+export { TextScreen } from './text.component';
 export { RadioScreen } from './radio.component';
 export { LayoutScreen } from './layout.component';
 export { ToggleScreen } from './toggle.component';
@@ -10,3 +11,6 @@ export { ViewPagerScreen } from './viewPager.component';
 export { TabViewScreen } from './tabView.component';
 export { PopoverScreen } from './popover.component';
 export { TooltipScreen } from './tooltip.component';
+export { TabNavigatorScreen } from './tabNavigator.component';
+export { TopNavigationBarScreen } from './topNavigationBar.component';
+export { ModalScreen } from './modal.component';

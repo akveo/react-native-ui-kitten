@@ -19,17 +19,6 @@ exports[`@radio: matches snapshot active 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#8992A3",
-      "borderWidth": 2,
-      "highlightColor": "#DDE1EB",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "transparent",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -41,36 +30,28 @@ exports[`@radio: matches snapshot active 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "#DDE1EB",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#DDE1EB",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#8992A3",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#8992A3",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View
@@ -108,17 +89,6 @@ exports[`@radio: matches snapshot active checked 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#2541CC",
-      "borderWidth": 2,
-      "highlightColor": "#DDE1EB",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "#3366FF",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -130,36 +100,28 @@ exports[`@radio: matches snapshot active checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "#DDE1EB",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#DDE1EB",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#2541CC",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#2541CC",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View
@@ -197,17 +159,6 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderWidth": 2,
-      "highlightColor": "transparent",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "#3366FF",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -219,36 +170,28 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "transparent",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#3366FF",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View
@@ -285,17 +228,6 @@ exports[`@radio: matches snapshot active: default 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#A6AEBD",
-      "borderWidth": 2,
-      "highlightColor": "transparent",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "transparent",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -307,36 +239,28 @@ exports[`@radio: matches snapshot active: default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "transparent",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#A6AEBD",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View
@@ -374,17 +298,6 @@ exports[`@radio: matches snapshot checked 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderWidth": 2,
-      "highlightColor": "transparent",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "#3366FF",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -396,36 +309,28 @@ exports[`@radio: matches snapshot checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "transparent",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#3366FF",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View
@@ -464,17 +369,6 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#DDE1EB",
-      "borderWidth": 2,
-      "highlightColor": "transparent",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "#A6AEBD",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -486,36 +380,28 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "transparent",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#DDE1EB",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#DDE1EB",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View
@@ -552,17 +438,6 @@ exports[`@radio: matches snapshot default 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#A6AEBD",
-      "borderWidth": 2,
-      "highlightColor": "transparent",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "transparent",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -574,36 +449,28 @@ exports[`@radio: matches snapshot default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "transparent",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#A6AEBD",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View
@@ -641,17 +508,6 @@ exports[`@radio: matches snapshot disabled 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#DDE1EB",
-      "borderWidth": 2,
-      "highlightColor": "transparent",
-      "highlightSize": 60,
-      "innerSize": 24,
-      "selectColor": "transparent",
-      "size": 36,
-    }
-  }
 >
   <View
     style={
@@ -663,36 +519,28 @@ exports[`@radio: matches snapshot disabled 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "position": "absolute",
-          },
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "opacity": undefined,
-            "width": 60,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "transparent",
+          "borderRadius": 30,
+          "height": 60,
+          "opacity": undefined,
+          "position": "absolute",
+          "width": 60,
+        }
       }
     />
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-          Object {
-            "borderColor": "#DDE1EB",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#DDE1EB",
+          "borderRadius": 18,
+          "borderWidth": 2,
+          "height": 36,
+          "justifyContent": "center",
+          "width": 36,
+        }
       }
     >
       <View

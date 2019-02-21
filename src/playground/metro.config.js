@@ -22,9 +22,10 @@ module.exports = {
   watchFolders: [
     path.resolve(__dirname, '../framework'),
     path.resolve(__dirname, '../../node_modules/@babel'),
-    path.resolve(__dirname, '../../node_modules/eva'),
 
-    // FIXME(playground): unable to resolve hoist-non-react-statics
+    // FIXME(playground): unable to resolve
+    path.resolve(__dirname, '../../node_modules/eva'),
+    path.resolve(__dirname, '../../node_modules/lodash'),
     path.resolve(__dirname, '../../node_modules/hoist-non-react-statics'),
     path.resolve(__dirname, '../../node_modules/react-is'),
   ],

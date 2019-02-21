@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacityProps,
+  GestureResponderEvent,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -13,64 +14,80 @@ import {
 
 interface RadioProps {
   checked?: boolean;
+  status?: string;
+  size?: string;
   onChange?: (selected: boolean) => void;
-  appearance?: string | 'default';
-  status?: string | 'error';
-  size?: string | 'big' | 'small';
 }
 
 export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
 
 export class Radio extends React.Component<Props> {
 
-  onPress = () => {
-    this.props.onChange && this.props.onChange(this.props.checked);
+  private onPress = () => {
+    if (this.props.onChange) {
+      this.props.onChange(!this.props.checked);
+    }
   };
 
-  onPressIn = () => {
+  private onPressIn = (event: GestureResponderEvent) => {
     this.props.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event);
+    }
   };
 
-  onPressOut = () => {
+  private onPressOut = (event: GestureResponderEvent) => {
     this.props.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event);
+    }
   };
 
-  getComponentStyle = (style: StyleType): StyleType => ({
-    border: {
-      width: style.size,
-      height: style.size,
-      borderRadius: style.size / 2,
-      borderWidth: style.borderWidth,
-      borderColor: style.borderColor,
-    },
-    select: {
-      width: style.innerSize,
-      height: style.innerSize,
-      borderRadius: style.innerSize / 2,
-      backgroundColor: style.selectColor,
-    },
-    highlight: {
-      width: style.highlightSize,
-      height: style.highlightSize,
-      borderRadius: style.highlightSize / 2,
-      backgroundColor: style.highlightColor,
-      opacity: style.highlightOpacity,
-    },
-  });
+  private getComponentStyle = (style: StyleType): StyleType => {
+    return {
+      border: {
+        width: style.size,
+        height: style.size,
+        borderRadius: style.size / 2,
+        borderWidth: style.borderWidth,
+        borderColor: style.borderColor,
+        ...strictStyles.border,
+      },
+      icon: {
+        width: style.innerSize,
+        height: style.innerSize,
+        borderRadius: style.innerSize / 2,
+        backgroundColor: style.selectColor,
+        ...strictStyles.icon,
+      },
+      highlight: {
+        width: style.highlightSize,
+        height: style.highlightSize,
+        borderRadius: style.highlightSize / 2,
+        backgroundColor: style.highlightColor,
+        opacity: style.highlightOpacity,
+        ...strictStyles.highlight,
+      },
+    };
+  };
 
-  render() {
-    const componentStyle = this.getComponentStyle(this.props.themedStyle);
+  public render(): React.ReactElement<TouchableOpacityProps> {
+    const { themedStyle, ...derivedProps } = this.props;
+    const { border, icon, highlight } = this.getComponentStyle(themedStyle);
+
     return (
       <TouchableOpacity
-        {...this.props}
+        {...derivedProps}
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={styles.border}>
-          <View style={[styles.highlight, componentStyle.highlight]}/>
-          <View style={[styles.border, componentStyle.border]}>
-            <View style={componentStyle.select}/>
+        <View style={strictStyles.border}>
+          <View style={highlight}/>
+          <View style={border}>
+            <View style={icon}/>
           </View>
         </View>
       </TouchableOpacity>
@@ -78,11 +95,12 @@ export class Radio extends React.Component<Props> {
   }
 }
 
-const styles = StyleSheet.create({
+const strictStyles = StyleSheet.create({
   border: {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  icon: {},
   highlight: {
     position: 'absolute',
     alignSelf: 'center',

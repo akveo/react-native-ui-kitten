@@ -9,7 +9,6 @@ import {
 } from '@kitten/theme';
 
 interface LayoutProps {
-  appearance?: string;
   children?: React.ReactElement<any>;
 }
 
@@ -17,17 +16,19 @@ export type Props = LayoutProps & StyledComponentProps & ViewProps;
 
 export class Layout extends React.Component<Props> {
 
-  private getComponentStyle: (style: StyleType) => StyleType = (style: StyleType): StyleType => ({
-    layout: style,
-  });
+  private getComponentStyle = (style: StyleType): StyleType => {
+    return {
+      container: style,
+    };
+  };
 
-  render(): React.ReactElement<ViewProps> {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const { style, ...restProps } = this.props;
+  public render(): React.ReactElement<ViewProps> {
+    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
-      <View {...restProps} style={[componentStyle.layout, style]}>
-        {this.props.children}
+      <View {...derivedProps} style={[componentStyle.container, style]}>
+        {children}
       </View>
     );
   }

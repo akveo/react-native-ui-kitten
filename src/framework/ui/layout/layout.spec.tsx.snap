@@ -28,16 +28,6 @@ exports[`@layout: matches snapshot default 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderColor": "#3366FF",
-      "borderRadius": 3,
-      "borderWidth": 1,
-      "paddingHorizontal": 16,
-      "paddingVertical": 8,
-    }
-  }
 />
 `;
 
@@ -69,16 +59,6 @@ exports[`@layout: matches snapshot with styles 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderColor": "#3366FF",
-      "borderRadius": 3,
-      "borderWidth": 1,
-      "paddingHorizontal": 16,
-      "paddingVertical": 8,
     }
   }
 />

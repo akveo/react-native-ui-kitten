@@ -7,14 +7,14 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Props as ChildProps } from '../radio/radio.component';
+import { Props as RadioProps } from '../radio/radio.component';
 
-type Child = React.ReactElement<ChildProps>;
+type RadioElement = React.ReactElement<RadioProps>;
 
 interface RadioGroupProps {
+  children: RadioElement | RadioElement[];
   selectedIndex?: number;
   onChange?: (index: number) => void;
-  children: Child | Child[];
 }
 
 export type Props = RadioGroupProps & StyledComponentProps & ViewProps;
@@ -31,34 +31,6 @@ export class RadioGroup extends React.Component<Props> {
     }
   };
 
-  private createChildrenArray = (source: Child | Child[]): Child[] => {
-    return Array.isArray(source) ? source : [source];
-  };
-
-  // We need to apply Attributes props
-  // because children provided by iterator should contain key prop
-
-  private createChildProps = (props: ChildProps, index: number): ChildProps & React.Attributes => {
-    return {
-      ...props,
-      key: index,
-      checked: this.props.selectedIndex === index,
-      onChange: () => this.onChildSelected(index),
-    };
-  };
-
-  private renderChild = (element: Child, index: number): Child => {
-    const props: ChildProps & React.Attributes = this.createChildProps(element.props, index);
-
-    return React.cloneElement(element, props);
-  };
-
-  private renderChildren = (source: Child | Child[]): Child[] => {
-    const children: Child[] = this.createChildrenArray(source);
-
-    return children.map(this.renderChild);
-  };
-
   private getComponentStyle = (style: StyleType): StyleType => {
     return {
       container: {
@@ -67,14 +39,30 @@ export class RadioGroup extends React.Component<Props> {
     };
   };
 
-  render() {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
+  private createComponentChild = (element: RadioElement, index: number): RadioElement => {
+    return React.cloneElement(element, {
+      ...element.props,
+      key: index,
+      checked: this.props.selectedIndex === index,
+      onChange: () => this.onChildSelected(index),
+    });
+  };
+
+  private createComponentChildren = (source: RadioElement | RadioElement[]): RadioElement[] => {
+    return React.Children.map(source, this.createComponentChild);
+  };
+
+  public render(): React.ReactElement<ViewProps> {
+    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const { container }: StyleType = this.getComponentStyle(themedStyle);
+
+    const componentChildren: RadioElement[] = this.createComponentChildren(children);
 
     return (
       <View
-        {...this.props}
-        style={[componentStyle.container, this.props.style]}>
-        {this.renderChildren(this.props.children)}
+        {...derivedProps}
+        style={[style, container]}>
+        {componentChildren}
       </View>
     );
   }

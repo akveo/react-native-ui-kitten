@@ -4,6 +4,7 @@ export enum Interaction {
 
 export enum State {
   CHECKED = 'checked',
+  SELECTED = 'selected',
   DISABLED = 'disabled',
   FOCUSED = 'focused',
 }

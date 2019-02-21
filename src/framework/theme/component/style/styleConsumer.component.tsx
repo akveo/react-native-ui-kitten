@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleMappingType } from 'eva/packages/common';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import { StyleMappingType } from 'eva/packages/common';
 import {
   MappingContext,
   MappingContextValueType,
@@ -41,9 +41,9 @@ export const styled = <T extends React.Component, P extends object>(Component: R
 
   class Wrapper extends React.Component<WrapperProps, State> {
 
-    service: StyleConsumerService = new StyleConsumerService();
+    private service: StyleConsumerService = new StyleConsumerService();
 
-    state: State = {
+    public state: State = {
       interaction: [],
     };
 
@@ -78,7 +78,7 @@ export const styled = <T extends React.Component, P extends object>(Component: R
       };
     };
 
-    renderWrappedComponent = (mappingValue: MappingContextValueType, themeValue: ThemeType): React.ReactElement<P> => {
+    private createWrappedComponent = (mapping: MappingContextValueType, theme: ThemeType): React.ReactElement<P> => {
       // TS issue: with spreading Generics https://github.com/Microsoft/TypeScript/issues/15792
       const { forwardedRef, ...restProps } = this.props as PrivateProps<T>;
 
@@ -91,7 +91,7 @@ export const styled = <T extends React.Component, P extends object>(Component: R
         ...(restProps as P & Props),
       };
 
-      const consumerProps: Props = this.createConsumerProps(mappingValue, themeValue, derivedProps);
+      const consumerProps: Props = this.createConsumerProps(mapping, theme, derivedProps);
 
       return (
         <Component
@@ -102,22 +102,22 @@ export const styled = <T extends React.Component, P extends object>(Component: R
       );
     };
 
-    render() {
+    public render(): React.ReactNode {
       return (
-        <MappingContext.Consumer>{(mappingContextValue: MappingContextValueType) => (
-          <ThemeContext.Consumer>{(themeContextValue: ThemeContextValueType) => {
-            return this.renderWrappedComponent(mappingContextValue, themeContextValue);
+        <MappingContext.Consumer>{(mapping: MappingContextValueType): React.ReactElement<P> => (
+          <ThemeContext.Consumer>{(theme: ThemeContextValueType): React.ReactElement<P> => {
+            return this.createWrappedComponent(mapping, theme);
           }}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
       );
     }
   }
 
-  const renderComponent = (props: WrapperProps, ref: T): React.ReactElement<WrapperProps> => (
+  const createComponent = (props: WrapperProps, ref: T): React.ReactElement<WrapperProps> => (
     <Wrapper {...props} forwardedRef={ref}/>
   );
 
-  const StyledComponent = React.forwardRef<T, P>(renderComponent as any);
+  const StyledComponent = React.forwardRef<T, P>(createComponent as any);
 
   StyledComponent.displayName = Component.displayName || Component.name;
   hoistNonReactStatics(StyledComponent, Component);

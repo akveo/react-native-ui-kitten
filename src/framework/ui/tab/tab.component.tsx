@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  View,
   Image,
   Text,
-  ViewProps,
-  ImageProps,
   TextProps,
+  ImageProps,
   ImageSourcePropType,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -16,11 +16,23 @@ import {
 interface TabProps {
   title?: string;
   icon?: ImageSourcePropType;
+  selected?: boolean;
+  onSelect?: (selected: boolean) => void;
 }
 
-export type Props = TabProps & StyledComponentProps & ViewProps;
+export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
 
 export class Tab extends React.Component<Props> {
+
+  static defaultProps: Partial<Props> = {
+    selected: false,
+  };
+
+  private onPress = () => {
+    if (this.props.onSelect) {
+      this.props.onSelect(!this.props.selected);
+    }
+  };
 
   private getComponentStyle = (source: StyleType): StyleType => {
     return {
@@ -30,17 +42,19 @@ export class Tab extends React.Component<Props> {
         alignItems: 'center',
       },
       icon: {},
-      title: {},
+      title: source.text,
     };
   };
 
-  private createTextComponent = (style: StyleType): React.ReactElement<TextProps> => (
-    <Text
-      style={style}
-      key={1}>
-      {this.props.title}
-    </Text>
-  );
+  private createTextComponent = (style: StyleType): React.ReactElement<TextProps> => {
+    return (
+      <Text
+        style={style}
+        key={1}>
+        {this.props.title}
+      </Text>
+    );
+  };
 
   private createImageComponent = (style: StyleType): React.ReactElement<ImageProps> => (
     <Image
@@ -59,16 +73,20 @@ export class Tab extends React.Component<Props> {
     ];
   };
 
-  public render(): React.ReactNode {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
-    const children = this.createComponentChildren(componentStyle);
+  public render(): React.ReactElement<TouchableOpacityProps> {
+    const { style, themedStyle, ...derivedProps } = this.props;
+    const { container, ...componentStyles }: StyleType = this.getComponentStyle(themedStyle);
+
+    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
 
     return (
-      <View
-        {...this.props}
-        style={[this.props.style, componentStyle.container]}>
-        {children}
-      </View>
+      <TouchableOpacity
+        {...derivedProps}
+        style={[style, container]}
+        activeOpacity={1.0}
+        onPress={this.onPress}>
+        {componentChildren}
+      </TouchableOpacity>
     );
   }
 }

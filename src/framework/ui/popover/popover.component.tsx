@@ -77,7 +77,7 @@ export class Popover extends React.Component<Props, State> {
 
       const popover: React.ReactElement<ViewProps> = React.cloneElement(popoverView, { style });
 
-      ModalService.showDialog(React.cloneElement(popover, { style: style }));
+      ModalService.showDialog(React.cloneElement(popover, { style: style }), true);
     }
   }
 

@@ -6,6 +6,7 @@ import {
 import {
   fireEvent,
   render,
+  shallow,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
@@ -94,7 +95,7 @@ describe('@tab-bar: component checks', () => {
 
     const child1 = component.getByTestId(childTestId1);
 
-    fireEvent.press(child1);
+    fireEvent(child1, 'select');
 
     expect(onSelect).toBeCalledWith(1);
   });

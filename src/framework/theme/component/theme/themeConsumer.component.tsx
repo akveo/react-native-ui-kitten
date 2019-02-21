@@ -1,6 +1,9 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ThemeContext } from './themeContext';
+import {
+  ThemeContext,
+  ThemeContextValueType,
+} from './themeContext';
 import {
   ThemeType,
   ThemedStyleType,
@@ -11,13 +14,9 @@ interface PrivateProps<T> {
   forwardedRef: React.RefObject<T>;
 }
 
-interface ConsumerProps {
-  theme: ThemeType;
-}
-
 export interface Props {
-  theme: ThemeType;
-  themedStyle: ThemedStyleType | undefined;
+  theme?: ThemeType;
+  themedStyle?: ThemedStyleType | undefined;
 }
 
 export type CreateStylesFunction = (theme: ThemeType) => StyleSheetType;
@@ -30,45 +29,46 @@ export const withStyles = <T extends React.Component, P extends object>(Componen
 
   class Wrapper extends React.Component<WrapperProps> {
 
-    createCustomProps = (props: ConsumerProps): Props => {
-      return ({
-        theme: props.theme,
-        themedStyle: createStyles ? createStyles(props.theme) : undefined,
-      });
+    private createConsumerProps = (theme: ThemeContextValueType): Props => {
+      return {
+        theme: theme,
+        themedStyle: createStyles ? createStyles(theme) : undefined,
+      };
     };
 
-    renderWrappedComponent = (props: ConsumerProps) => {
+    private createWrappedComponent = (theme: ThemeContextValueType): React.ReactElement<P> => {
       // TS issue: with spreading Generics https://github.com/Microsoft/TypeScript/issues/15792
       const { forwardedRef, ...restProps } = this.props as PrivateProps<T>;
-      const componentProps = restProps as P & Props;
+
+      const derivedProps: P & Props = restProps as P & Props;
+      const consumerProps: Props = this.createConsumerProps(theme);
+
       return (
         <Component
           ref={forwardedRef}
-          {...this.createCustomProps(props)}
-          {...componentProps}
+          {...consumerProps}
+          {...derivedProps}
         />
       );
     };
 
-    render() {
+    public render(): React.ReactNode {
       return (
-        <ThemeContext.Consumer>{(theme: ThemeType) => {
-          return this.renderWrappedComponent({ theme: theme });
+        <ThemeContext.Consumer>{(theme: ThemeType): React.ReactElement<P> => {
+          return this.createWrappedComponent(theme);
         }}</ThemeContext.Consumer>
       );
     }
   }
 
-  const RefForwardingFactory = (props: WrapperProps, ref: T) => {
-    return (
-      <Wrapper {...props} forwardedRef={ref}/>
-    );
-  };
+  const createComponent = (props: WrapperProps, ref: T): React.ReactElement<WrapperProps> => (
+    <Wrapper {...props} forwardedRef={ref}/>
+  );
 
-  const RefForwardingComponent = React.forwardRef<T, P>(RefForwardingFactory as any);
+  const ThemedComponent = React.forwardRef<T, P>(createComponent as any);
 
-  RefForwardingComponent.displayName = Component.displayName || Component.name;
-  hoistNonReactStatics(RefForwardingComponent, Component);
+  ThemedComponent.displayName = Component.displayName || Component.name;
+  hoistNonReactStatics(ThemedComponent, Component);
 
-  return RefForwardingComponent;
+  return ThemedComponent;
 };

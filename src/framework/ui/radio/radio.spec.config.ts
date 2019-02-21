@@ -1,4 +1,7 @@
-export const mapping = {
+import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeType } from '@kitten/theme';
+
+export const mapping: ThemeMappingType = {
   Radio: {
     meta: {
       variants: {
@@ -85,7 +88,7 @@ export const mapping = {
   },
 };
 
-export const theme = {
+export const theme: ThemeType = {
   'blue-primary': '#3366FF',
   'blue-dark': '#2541CC',
   'gray-light': '#DDE1EB',
