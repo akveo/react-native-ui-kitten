@@ -63,6 +63,10 @@ import {
   Modal as ModalComponent,
   Props as ModalProps,
 } from './modal/modal.component';
+import {
+  ButtonAlignment,
+  ButtonAlignments,
+} from './button/type';
 
 const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
 const Text = styled<TextComponent, TextProps>(TextComponent);
@@ -112,4 +116,6 @@ export {
   TopNavigationBarActionProps,
   Modal,
   ModalProps,
+  ButtonAlignment,
+  ButtonAlignments,
 };

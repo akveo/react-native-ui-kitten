@@ -27,7 +27,7 @@ interface ButtonProps {
   icon?: ImageSourcePropType;
   status?: string;
   size?: string;
-  alignment?: string;
+  alignment?: string | ButtonAlignment;
   children?: React.ReactText;
 }
 

@@ -23,7 +23,15 @@ export class ButtonAlignments {
     }
   };
 
-  static parse(rawValue: string, fallback?: ButtonAlignment): ButtonAlignment | undefined {
+  static parse(value: string | ButtonAlignment, fallback?: ButtonAlignment): ButtonAlignment | undefined {
+    if (ButtonAlignments.typeOf(value)) {
+      return value;
+    }
+
+    return ButtonAlignments.parseString(value, fallback);
+  }
+
+  private static parseString(rawValue: string, fallback?: ButtonAlignment): ButtonAlignment | undefined {
     switch (rawValue) {
       case ButtonAlignments.LEFT.rawValue:
         return ButtonAlignments.LEFT;
@@ -32,5 +40,11 @@ export class ButtonAlignments {
       default:
         return fallback;
     }
+  }
+
+  private static typeOf(value: any): value is ButtonAlignment {
+    const { rawValue } = (<ButtonAlignment>value);
+
+    return rawValue !== undefined;
   }
 }
