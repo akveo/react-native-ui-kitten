@@ -32,7 +32,7 @@ import {
   Props as TabBarProps,
 } from './tab/tabBar.component';
 import {
-  Popover as Popover,
+  Popover as PopoverComponent,
   Props as PopoverProps,
 } from './popover/popover.component';
 import {
@@ -80,6 +80,7 @@ const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
 const Tooltip = styled<TooltipComponent, TooltipProps>(TooltipComponent);
 const BottomTabNavigator = styled<BottomTabNavigatorComponent, BottomTabNavigatorProps>(BottomTabNavigatorComponent);
 const BottomNavigatorTab = styled<BottomNavigatorTabComponent, BottomNavigatorTabProps>(BottomNavigatorTabComponent);

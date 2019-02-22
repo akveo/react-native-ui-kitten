@@ -5,11 +5,12 @@ import {
   TextProps,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  Popover as Popover,
+  Popover as PopoverComponent,
   Props as PopoverProps,
 } from '../popover/popover.component';
 import { Omit } from '../service/type';
@@ -18,6 +19,8 @@ interface TooltipProps {
   text: string;
   children: React.ReactElement<any>;
 }
+
+const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
 
 export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'content'>;
 
@@ -28,15 +31,15 @@ export class Tooltip extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { textColor, ...derivedStyle } = source;
+    const { popover, text } = source;
 
     return {
       container: {
-        ...derivedStyle,
+        ...popover,
         ...strictStyles.container,
       },
       text: {
-        color: textColor,
+        ...text,
         ...strictStyles.text,
       },
     };

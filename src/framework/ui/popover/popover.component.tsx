@@ -6,7 +6,11 @@ import {
   ViewProps,
   StyleSheet,
 } from 'react-native';
-import { ModalService } from '@kitten/theme';
+import {
+  ModalService,
+  StyledComponentProps,
+  StyleType,
+} from '@kitten/theme';
 import {
   PopoverView,
   Props as PopoverViewProps,
@@ -37,7 +41,7 @@ interface State {
   layout: MeasureResult | undefined;
 }
 
-export type Props = PopoverProps & PopoverViewProps & ViewProps;
+export type Props = PopoverProps & StyledComponentProps & PopoverViewProps & ViewProps;
 
 const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
@@ -84,6 +88,13 @@ export class Popover extends React.Component<Props, State> {
     }
   }
 
+  private getComponentStyle = (source: StyleType): StyleType => {
+    return {
+      child: {},
+      popover: {},
+    };
+  };
+
   private getPopoverFrame = (rawPlacement: string | Placement): Frame => {
     const { layout } = this.state;
     const { [TAG_CONTENT]: popoverFrame, [TAG_CHILD]: childFrame } = layout;
@@ -97,7 +108,7 @@ export class Popover extends React.Component<Props, State> {
     this.setState({ layout });
   };
 
-  private createPopoverElement = (children: React.ReactElement<any>): MeasuringElement => {
+  private createPopoverElement = (children: React.ReactElement<any>, style: StyleType): MeasuringElement => {
     const { placement, ...derivedProps } = this.props;
 
     const measuringProps: MeasuringElementProps = { tag: TAG_CONTENT };
@@ -112,6 +123,7 @@ export class Popover extends React.Component<Props, State> {
         style={strictStyles.popover}>
         <PopoverView
           {...derivedProps}
+          style={[style, derivedProps.style]}
           placement={indicatorPlacement.rawValue}>
           {children}
         </PopoverView>
@@ -119,12 +131,13 @@ export class Popover extends React.Component<Props, State> {
     );
   };
 
-  private createChildElement = (source: React.ReactElement<any>): MeasuringElement => {
+  private createChildElement = (source: React.ReactElement<any>, style: StyleType): MeasuringElement => {
     const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
     return (
       <View
         {...measuringProps}
+        style={style}
         key={TAG_CHILD}>
         {source}
       </View>
@@ -155,10 +168,11 @@ export class Popover extends React.Component<Props, State> {
   };
 
   public render(): MeasuringNode | React.ReactNode {
-    const { content, children } = this.props;
+    const { themedStyle, content, children } = this.props;
 
-    const measuringChild: MeasuringElement = this.createChildElement(children);
-    const measuringPopover: MeasuringElement = this.createPopoverElement(content);
+    const { child, popover } = this.getComponentStyle(themedStyle);
+    const measuringChild: MeasuringElement = this.createChildElement(children, child);
+    const measuringPopover: MeasuringElement = this.createPopoverElement(content, popover);
 
     if (this.state.layout === undefined) {
       return this.createPlaceholderElement(measuringChild, measuringPopover);
