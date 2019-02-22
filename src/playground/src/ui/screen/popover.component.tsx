@@ -3,6 +3,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  TextProps,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -54,6 +55,14 @@ class Popover extends React.Component<Props, State> {
     });
   };
 
+  private createPopoverContentElement = (text?: string): React.ReactElement<TextProps> => {
+    const { text: textStyle } = this.props.themedStyle;
+
+    return (
+      <Text style={textStyle}>{text}</Text>
+    );
+  };
+
   public render(): React.ReactNode {
     const { container, componentContainer, component, tip, text } = this.props.themedStyle;
 
@@ -63,39 +72,39 @@ class Popover extends React.Component<Props, State> {
           <PopoverComponent
             style={component}
             placement={`${PLACEMENT} start`}
-            visible={this.state.startVisible}>
+            visible={this.state.startVisible}
+            content={this.createPopoverContentElement('❤️')}>
             <TouchableOpacity
               style={tip}
               onPress={this.onStartPress}>
               <Text style={text}>{`${PLACEMENT} start`.toUpperCase()}</Text>
             </TouchableOpacity>
-            <Text style={text}>❤️️</Text>
           </PopoverComponent>
         </View>
         <View style={componentContainer}>
           <PopoverComponent
             style={component}
             placement={`${PLACEMENT}`}
-            visible={this.state.centerVisible}>
+            visible={this.state.centerVisible}
+            content={this.createPopoverContentElement('💛️')}>
             <TouchableOpacity
               style={tip}
               onPress={this.onCenterPress}>
               <Text style={text}>{`${PLACEMENT}`.toUpperCase()}</Text>
             </TouchableOpacity>
-            <Text style={text}>💛️</Text>
           </PopoverComponent>
         </View>
         <View style={componentContainer}>
           <PopoverComponent
             style={component}
             placement={`${PLACEMENT} end`}
-            visible={this.state.endVisible}>
+            visible={this.state.endVisible}
+            content={this.createPopoverContentElement('💚')}>
             <TouchableOpacity
               style={tip}
               onPress={this.onEndPress}>
               <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
             </TouchableOpacity>
-            <Text style={text}>💚</Text>
           </PopoverComponent>
         </View>
       </View>

@@ -26,7 +26,8 @@ import {
 } from './type';
 
 interface PopoverProps {
-  children: React.ReactElement<any>[];
+  content: React.ReactElement<any>;
+  children: React.ReactElement<any>;
   visible?: boolean;
 }
 
@@ -147,10 +148,10 @@ export class Popover extends React.Component<Props, State> {
   };
 
   public render(): MeasuringNode | React.ReactNode {
-    const { [INDEX_CHILD]: child, [INDEX_POPOVER]: popoverChild } = this.props.children;
+    const { content, children } = this.props;
 
-    const measuringChild: MeasuringElement = this.createChildElement(child);
-    const measuringPopover: MeasuringElement = this.createPopoverElement(popoverChild);
+    const measuringChild: MeasuringElement = this.createChildElement(children);
+    const measuringPopover: MeasuringElement = this.createPopoverElement(content);
 
     if (this.state.layout === undefined) {
       return this.createPlaceholderElement(measuringChild, measuringPopover);

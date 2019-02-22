@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   StyleSheet,
+  TextProps,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -13,14 +14,12 @@ import {
 } from '../popover/popover.component';
 import { Omit } from '../service/type';
 
-type ChildElement<P> = React.ReactElement<P>;
-
 interface TooltipProps {
   text: string;
-  children: ChildElement<any>;
+  children: React.ReactElement<any>;
 }
 
-export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'children'>;
+export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'content'>;
 
 export class Tooltip extends React.Component<Props> {
 
@@ -43,19 +42,28 @@ export class Tooltip extends React.Component<Props> {
     };
   };
 
+  private createPopoverContentElement = (style: StyleType): React.ReactElement<TextProps> => {
+    const { text } = this.props;
+
+    return (
+      <Text
+        style={style}>
+        {text}
+      </Text>
+    );
+  };
+
   public render(): React.ReactElement<PopoverProps> {
-    const { text, children, themedStyle, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { children, themedStyle, ...derivedProps } = this.props;
+    const { container, text } = this.getComponentStyle(themedStyle);
+    const contentElement: React.ReactElement<TextProps> = this.createPopoverContentElement(text);
 
     return (
       <Popover
         {...derivedProps}
-        style={[componentStyle.container, derivedProps.style]}>
+        style={[container, derivedProps.style]}
+        content={contentElement}>
         {children}
-        <Text
-          style={componentStyle.text}>
-          {text}
-        </Text>
       </Popover>
     );
   }
