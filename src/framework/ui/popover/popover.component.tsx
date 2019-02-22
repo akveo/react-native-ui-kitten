@@ -84,7 +84,7 @@ export class Popover extends React.Component<Props, State> {
     }
   }
 
-  private getPopoverFrame = (rawPlacement: string): Frame => {
+  private getPopoverFrame = (rawPlacement: string | Placement): Frame => {
     const { layout } = this.state;
     const { [TAG_CONTENT]: popoverFrame, [TAG_CHILD]: childFrame } = layout;
 

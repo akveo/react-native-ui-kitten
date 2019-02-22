@@ -470,7 +470,11 @@ export class Placements {
     }
   };
 
-  static parse(rawValue: string, fallback?: Placement): Placement | undefined {
+  static parse(value: string | Placement, fallback?: Placement): Placement | undefined {
+    return Placements.typeOf(value) ? value : Placements.parseString(value, fallback);
+  }
+
+  private static parseString(rawValue: string, fallback?: Placement): Placement | undefined {
     switch (rawValue) {
       case Placements.LEFT.rawValue:
         return Placements.LEFT;
@@ -499,5 +503,11 @@ export class Placements {
       default:
         return fallback;
     }
+  }
+
+  private static typeOf(value: any): value is Placement {
+    const { rawValue } = (<Placement>value);
+
+    return rawValue !== undefined;
   }
 }

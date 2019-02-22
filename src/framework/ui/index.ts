@@ -67,6 +67,10 @@ import {
   Modal as ModalComponent,
   Props as ModalProps,
 } from './modal/modal.component';
+import {
+  Placement as PopoverPlacement,
+  Placements as PopoverPlacements,
+} from './popover/type';
 
 const Text = styled<TextComponent, TextProps>(TextComponent);
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
@@ -118,4 +122,6 @@ export {
   TopNavigationBarActionProps,
   Modal,
   ModalProps,
+  PopoverPlacement,
+  PopoverPlacements,
 };

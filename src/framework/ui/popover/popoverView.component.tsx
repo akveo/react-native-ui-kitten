@@ -14,7 +14,7 @@ import {
 import { number } from 'prop-types';
 
 interface PopoverViewProps {
-  placement?: string;
+  placement?: string | Placement;
   indicatorOffset?: number;
 }
 
