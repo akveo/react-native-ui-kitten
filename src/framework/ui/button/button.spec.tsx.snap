@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@button: matches snapshot * appearance * empty 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  size="medium"
+  status="primary"
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 6,
+        "flexDirection": "row",
+        "minHeight": 24,
+        "minWidth": 24,
+        "padding": 4,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "space-evenly",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+/>
+`;
+
+exports[`@button: matches snapshot * appearance * icon 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  icon={
+    Object {
+      "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+    }
+  }
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  size="medium"
+  status="primary"
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 6,
+        "flexDirection": "row",
+        "minHeight": 24,
+        "minWidth": 24,
+        "padding": 4,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "space-evenly",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <Component
+    source={
+      Object {
+        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "height": 14,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 14,
+        },
+        Object {},
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`@button: matches snapshot * appearance * icon and text 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  icon={
+    Object {
+      "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+    }
+  }
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  size="medium"
+  status="primary"
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 6,
+        "flexDirection": "row",
+        "minHeight": 24,
+        "minWidth": 24,
+        "padding": 4,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "space-evenly",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <Component
+    source={
+      Object {
+        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "height": 14,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 14,
+        },
+        Object {},
+      ]
+    }
+  />
+  <ForwardRef(createComponent)
+    style={
+      Array [
+        Object {
+          "color": "#ffffff",
+          "fontSize": 12,
+          "fontWeight": "800",
+          "marginHorizontal": 4,
+        },
+        Object {},
+      ]
+    }
+  >
+    BUTTON
+  </ForwardRef(createComponent)>
+</TouchableOpacity>
+`;
+
+exports[`@button: matches snapshot * appearance * text 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  size="medium"
+  status="primary"
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 6,
+        "flexDirection": "row",
+        "minHeight": 24,
+        "minWidth": 24,
+        "padding": 4,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "space-evenly",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <ForwardRef(createComponent)
+    style={
+      Array [
+        Object {
+          "color": "#ffffff",
+          "fontSize": 12,
+          "fontWeight": "800",
+          "marginHorizontal": 4,
+        },
+        Object {},
+      ]
+    }
+  >
+    BUTTON
+  </ForwardRef(createComponent)>
+</TouchableOpacity>
+`;
+
+exports[`@button: matches snapshot * interaction * stateless 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  size="medium"
+  status="primary"
+  style={
+    Array [
+      undefined,
+      Object {
+        "borderRadius": 6,
+        "flexDirection": "row",
+        "minHeight": 24,
+        "minWidth": 24,
+        "padding": 4,
+      },
+      Object {
+        "alignItems": "center",
+        "justifyContent": "space-evenly",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+/>
+`;
