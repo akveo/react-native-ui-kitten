@@ -11,6 +11,7 @@ import {
   Placement,
   Placements,
 } from './type';
+import { number } from 'prop-types';
 
 interface PopoverViewProps {
   placement?: string;
@@ -33,21 +34,30 @@ export class PopoverView extends React.Component<Props> {
     const { width: indicatorWidth } = strictStyles.indicator;
 
     const isVertical: boolean = direction.startsWith('column');
-    const isPrimaryReverse: boolean = direction.endsWith('reverse');
-    const isSecondaryStart: boolean = alignment.endsWith('start');
-    const isSecondaryEnd: boolean = alignment.endsWith('end');
+    const isStart: boolean = alignment.endsWith('start');
+    const isEnd: boolean = alignment.endsWith('end');
+    const isReverse: boolean = direction.endsWith('reverse');
 
+    // Rotate indicator by 90 deg if we have `row` direction (left/right placement)
+    // Rotate it again by 180 if we have `row-reverse` (bottom/right placement)
     const indicatorPrimaryRotate: number = isVertical ? 180 : 90;
-    const indicatorSecondaryRotate: number = isPrimaryReverse ? 0 : 180;
+    const indicatorSecondaryRotate: number = isReverse ? 0 : 180;
 
-    const containerTranslate: number = isVertical ? 0 : indicatorWidth / 2;
-    const indicatorTranslate: number = isPrimaryReverse ? containerTranslate : -containerTranslate;
+    // Translate container by half of `indicatorWidth`. Exactly half (because it has a square shape)
+    // Reverse if needed
+    let containerTranslate: number = isVertical ? 0 : indicatorWidth / 2;
+    containerTranslate = isReverse ? containerTranslate : -containerTranslate;
+
+    // Translate indicator by passed `indicatorOffset`
+    // Reverse if needed
+    let indicatorTranslate: number = isVertical ? -this.props.indicatorOffset : this.props.indicatorOffset;
+    indicatorTranslate = isReverse ? -indicatorTranslate : indicatorTranslate;
 
     const containerStyle: ViewStyle = {
       flexDirection: direction,
       alignItems: alignment,
       transform: [
-        { translateX: isPrimaryReverse ? containerTranslate : -containerTranslate },
+        { translateX: containerTranslate },
       ],
       ...strictStyles.container,
     };
@@ -55,7 +65,7 @@ export class PopoverView extends React.Component<Props> {
     const contentStyle: ViewStyle = {
       backgroundColor: 'black',
       transform: [
-        { translateX: isPrimaryReverse ? containerTranslate : -containerTranslate },
+        { translateX: containerTranslate },
       ],
       ...StyleSheet.flatten(source),
       ...strictStyles.content,
@@ -66,8 +76,11 @@ export class PopoverView extends React.Component<Props> {
       transform: [
         { rotate: `${indicatorPrimaryRotate}deg` },
         { rotate: `${indicatorSecondaryRotate}deg` },
-        { translateX: isSecondaryStart ? (indicatorTranslate + this.props.indicatorOffset) : 0 },
-        { translateX: isSecondaryEnd ? -(indicatorTranslate + this.props.indicatorOffset) : 0 },
+
+        // Translate indicator "to start" if we have `-start` alignment
+        // Or translate it "to end" if we have `-end` alignment
+        { translateX: isStart ? -indicatorTranslate : 0 },
+        { translateX: isEnd ? indicatorTranslate : 0 },
       ],
       ...strictStyles.indicator,
     };

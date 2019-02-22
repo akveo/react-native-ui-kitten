@@ -31,6 +31,21 @@ export interface MeasureNodeProps {
   children: MeasuringElement[];
 }
 
+/**
+ * Measures child element size and it's screen position asynchronously.
+ * Returns measure result in `onResult` callback.
+ *
+ * Usage:
+ *
+ * const onMeasure = (element: ElementToMeasure): void => {
+ *   const { x, y, width, height } = element.props.frame;
+ *   ...
+ * };
+ *
+ * <MeasureElement onResult={this.onMeasure}>
+ *   <ElementToMeasure tag='@measure/measure-me!'/>
+ * </MeasureElement>
+ */
 export const MeasureElement = (props: MeasureElementProps): MeasuringElement => {
 
   const ref: React.RefObject<any> = React.createRef();
@@ -71,6 +86,25 @@ export const MeasureElement = (props: MeasureElementProps): MeasuringElement => 
   });
 };
 
+/**
+ * Measures passed child elements size and it's screen position asynchronously.
+ * Returns measure result in `onResult` callback.
+ *
+ * Does the same as `MeasureElement` but calls `onResult` after all children are measured.
+ *
+ * Usage:
+ *
+ * const onMeasure = (result: MeasureResult): void => {
+ *   const { [0]: firstElementFrame, [1]: secondElementFrame } = result;
+ *   const { x, y, width, height } = firstElementFrame;
+ *   ...
+ * };
+ *
+ * <MeasureNode onResult={this.onMeasure}>
+ *   <ElementToMeasure tag={0}/>
+ *   <ElementToMeasure tag={1}/>
+ * </MeasureNode>
+ */
 export const MeasureNode = (props: MeasuringNodeProps): MeasuringNode => {
 
   const result: MeasureResult = {};

@@ -39,8 +39,8 @@ interface State {
 
 export type Props = PopoverProps & PopoverViewProps & ViewProps;
 
-const INDEX_CHILD: number = 0;
-const INDEX_POPOVER: number = 1;
+const TAG_CHILD: number = 0;
+const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
 
 export class Popover extends React.Component<Props, State> {
@@ -74,8 +74,10 @@ export class Popover extends React.Component<Props, State> {
       };
 
       const { current: container } = this.containerRef;
-      const { [INDEX_POPOVER]: popoverView } = container.props.children;
 
+      // Retrieve `content` from popover children
+      // and clone it with measured position
+      const { [TAG_CONTENT]: popoverView } = container.props.children;
       const popover: React.ReactElement<ViewProps> = React.cloneElement(popoverView, { style });
 
       ModalService.showDialog(popover, true);
@@ -84,7 +86,7 @@ export class Popover extends React.Component<Props, State> {
 
   private getPopoverFrame = (rawPlacement: string): Frame => {
     const { layout } = this.state;
-    const { [INDEX_POPOVER]: popoverFrame, [INDEX_CHILD]: childFrame } = layout;
+    const { [TAG_CONTENT]: popoverFrame, [TAG_CHILD]: childFrame } = layout;
 
     const placement: Placement = Placements.parse(rawPlacement, PLACEMENT_DEFAULT);
 
@@ -98,7 +100,7 @@ export class Popover extends React.Component<Props, State> {
   private createPopoverElement = (children: React.ReactElement<any>): MeasuringElement => {
     const { placement, ...derivedProps } = this.props;
 
-    const measuringProps: MeasuringElementProps = { tag: INDEX_POPOVER };
+    const measuringProps: MeasuringElementProps = { tag: TAG_CONTENT };
 
     const popoverPlacement: Placement = Placements.parse(placement, PLACEMENT_DEFAULT);
     const indicatorPlacement: Placement = popoverPlacement.reverse();
@@ -106,7 +108,7 @@ export class Popover extends React.Component<Props, State> {
     return (
       <View
         {...measuringProps}
-        key={INDEX_POPOVER}
+        key={TAG_CONTENT}
         style={strictStyles.popover}>
         <PopoverView
           {...derivedProps}
@@ -118,12 +120,12 @@ export class Popover extends React.Component<Props, State> {
   };
 
   private createChildElement = (source: React.ReactElement<any>): MeasuringElement => {
-    const measuringProps: MeasuringElementProps = { tag: INDEX_CHILD };
+    const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
     return (
       <View
         {...measuringProps}
-        key={INDEX_CHILD}>
+        key={TAG_CHILD}>
         {source}
       </View>
     );
@@ -140,6 +142,11 @@ export class Popover extends React.Component<Props, State> {
   };
 
   private createComponentElement = (...children: MeasuredElement[]): MeasuredNode => {
+    // Store `containerRef` for later usage.
+    // This is needed to retrieve `content` and position it in future
+    //
+    // Notes: No way (?) to store `View` ref, so we need to use `Animated.View`
+
     return (
       <Animated.View ref={this.containerRef}>
         {children}

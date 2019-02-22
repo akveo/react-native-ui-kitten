@@ -38,6 +38,9 @@ export class Frame {
     this.size = new Size(width, height);
   }
 
+  /**
+   * Creates new frame aligned to left of other
+   */
   public leftOf(other: Frame): Frame {
     return new Frame(
       other.origin.x - this.size.width,
@@ -47,6 +50,9 @@ export class Frame {
     );
   }
 
+  /**
+   * Creates new frame aligned to top of other
+   */
   public topOf(other: Frame): Frame {
     return new Frame(
       this.origin.x,
@@ -56,6 +62,9 @@ export class Frame {
     );
   }
 
+  /**
+   * Creates new frame aligned to right of other
+   */
   public rightOf(other: Frame): Frame {
     return new Frame(
       other.origin.x + other.size.width,
@@ -65,6 +74,9 @@ export class Frame {
     );
   }
 
+  /**
+   * Creates new frame aligned to bottom of other
+   */
   public bottomOf(other: Frame): Frame {
     return new Frame(
       this.origin.x,
@@ -74,6 +86,9 @@ export class Frame {
     );
   }
 
+  /**
+   * Creates new frame centered horizontally to other
+   */
   public centerHorizontalOf(other: Frame): Frame {
     return new Frame(
       other.origin.x + (other.size.width - this.size.width) / 2,
@@ -83,6 +98,9 @@ export class Frame {
     );
   }
 
+  /**
+   * Creates new frame centered vertically to other
+   */
   public centerVerticalOf(other: Frame): Frame {
     return new Frame(
       this.origin.x,
