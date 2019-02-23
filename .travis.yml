@@ -1,23 +1,26 @@
 sudo: false
 language: node_js
 node_js:
-  - '8'
-
+- '8'
 env:
   matrix:
-    - MODE=lint
-    - MODE=build
-    - MODE=test
-
+  - MODE=lint
+  - MODE=build
+  - MODE=test
 matrix:
   fast_finish: true
-
 branches:
   only:
   - next
-
+  - fix/travis
+before_install:
+- openssl aes-256-cbc -K $encrypted_d1ce48b9cbe6_key -iv $encrypted_d1ce48b9cbe6_iv
+  -in travis_deploy_key.enc -out /tmp/travis_deploy_key -d
+- chmod 600 /tmp/travis_deploy_key
+- echo 'echo ${SSH_PASSPHRASE}' > /tmp/askpass && chmod +x /tmp/askpass
+- eval "$(ssh-agent -s)"
+- DISPLAY=":0.0" SSH_ASKPASS="/tmp/askpass" setsid ssh-add /tmp/travis_deploy_key </dev/null
 install:
-  - npm install
-
+- npm install
 script:
-  - scripts/ci/travis-ci-script.sh
+- scripts/ci/travis-ci-script.sh
