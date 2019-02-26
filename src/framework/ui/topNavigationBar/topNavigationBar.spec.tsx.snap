@@ -64,11 +64,7 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
   }
 >
   <ForwardRef(createComponent)
-    iconSource={
-      Object {
-        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-      }
-    }
+    icon={[Function]}
     isLastItem={false}
   />
 </StyleProvider>
@@ -138,11 +134,7 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
   }
 >
   <ForwardRef(createComponent)
-    iconSource={
-      Object {
-        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-      }
-    }
+    icon={[Function]}
     isLastItem={true}
   />
 </StyleProvider>
@@ -212,11 +204,7 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
   }
 >
   <ForwardRef(createComponent)
-    iconSource={
-      Object {
-        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-      }
-    }
+    icon={[Function]}
     onPress={
       [MockFunction] {
         "calls": Array [
@@ -298,11 +286,7 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
   }
 >
   <ForwardRef(createComponent)
-    iconSource={
-      Object {
-        "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-      }
-    }
+    icon={[Function]}
   />
 </StyleProvider>
 `;
@@ -582,11 +566,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
   <ForwardRef(createComponent)
     leftControl={
       <ActionMock
-        iconSource={
-          Object {
-            "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-          }
-        }
+        icon={[Function]}
         onPress={[MockFunction]}
         testID="@top-navbar-left"
       />
@@ -594,29 +574,17 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
     rightControls={
       Array [
         <ActionMock
-          iconSource={
-            Object {
-              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-            }
-          }
+          icon={[Function]}
           onPress={[MockFunction]}
           testID="@top-navbar-right-1"
         />,
         <ActionMock
-          iconSource={
-            Object {
-              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-            }
-          }
+          icon={[Function]}
           onPress={[MockFunction]}
           testID="@top-navbar-right-2"
         />,
         <ActionMock
-          iconSource={
-            Object {
-              "uri": "https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png",
-            }
-          }
+          icon={[Function]}
           onPress={[MockFunction]}
           testID="@top-navbar-right-3"
         />,

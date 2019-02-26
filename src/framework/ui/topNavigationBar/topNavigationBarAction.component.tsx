@@ -2,10 +2,7 @@ import React from 'react';
 import {
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
-  Image,
   ImageProps,
-  ImageSourcePropType,
-  StyleSheet,
   View,
 } from 'react-native';
 import {
@@ -14,7 +11,7 @@ import {
 } from '@kitten/theme';
 
 interface TopNavigationBarActionProps {
-  iconSource: ImageSourcePropType;
+  icon: (width: number, height: number, color: string) => React.ReactElement<ImageProps>;
   isLastItem?: boolean;
   onPress?: () => void;
 }
@@ -33,11 +30,17 @@ export class TopNavigationBarAction extends React.Component<Props> {
 
   private getComponentStyle = (style: StyleType): StyleType => ({
     container: {
-      width: style.width,
-      height: style.height,
       marginRight: this.props.isLastItem ? 0 : style.marginRight,
     },
+    icon: {
+      flex: 1,
+      ...style.icon,
+    },
   });
+
+  private renderIcon(style: StyleType): React.ReactElement<ImageProps> {
+    return this.props.icon(style.width, style.height, style.color);
+  }
 
   public render(): React.ReactNode {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
@@ -47,15 +50,9 @@ export class TopNavigationBarAction extends React.Component<Props> {
         <View
           {...this.props}
           style={[componentStyle.container, this.props.style]}>
-          <Image style={styles.image} source={this.props.iconSource}/>
+          {this.renderIcon(componentStyle.icon)}
         </View>
       </TouchableWithoutFeedback>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-  },
-});
