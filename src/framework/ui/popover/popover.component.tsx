@@ -35,7 +35,7 @@ interface PopoverProps {
   visible?: boolean;
 }
 
-type MeasuredNode = React.ReactElement<{children: MeasuredElement[]}>;
+type MeasuredNode = React.ReactElement<{ children: MeasuredElement[] }>;
 
 interface State {
   layout: MeasureResult | undefined;
