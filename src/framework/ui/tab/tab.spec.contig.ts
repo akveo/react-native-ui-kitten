@@ -8,16 +8,29 @@ export const mapping: ThemeMappingType = {
       variants: {},
       states: [
         'selected',
-        'active',
       ],
     },
     appearance: {
       default: {
         mapping: {
+          text: {
+            color: 'gray-dark',
+            fontWeight: '600',
+          },
+          icon: {
+            color: 'gray-primary',
+            width: 20,
+            height: 20,
+          },
           state: {
-            selected: {},
-            active: {},
-            'selected.active': {},
+            selected: {
+              text: {
+                'color': 'blue-primary',
+              },
+              icon: {
+                color: 'blue-primary',
+              },
+            },
           },
         },
       },

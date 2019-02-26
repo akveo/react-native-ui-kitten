@@ -1,5 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {
+  Text,
+  Image,
+  ImageSourcePropType,
+} from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
@@ -11,6 +15,10 @@ import {
 } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
+
+const ICON1: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+const ICON2: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/email.png' };
+const ICON3: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/info.png' };
 
 interface State {
   selectedIndex: number;
@@ -36,13 +44,35 @@ class TabView extends React.Component<Props, State> {
         style={this.props.themedStyle.container}
         selectedIndex={this.state.selectedIndex}
         onSelect={this.onSelect}>
-        <TabComponent title='❤️'>
+        <TabComponent
+          title='Tab 1'
+          icon={(width: number, height: number, color: string) =>
+            (<Image source={ICON1} style={{
+              width: width,
+              height: height,
+              tintColor: color,
+              ...this.props.themedStyle.icon,
+            }}/>)}>
           <Text>Tab 1</Text>
         </TabComponent>
-        <TabComponent title='💛️'>
+        <TabComponent
+          title='Tab 2'
+          icon={(width: number, height: number, color: string) =>
+            (<Image source={ICON2} style={{
+              width: width,
+              height: height,
+              tintColor: color,
+            }}/>)}>
           <Text>Tab 2</Text>
         </TabComponent>
-        <TabComponent title='💚️'>
+        <TabComponent
+          title='Tab 3'
+          icon={(width: number, height: number, color: string) =>
+            (<Image source={ICON1} style={{
+              width: width,
+              height: height,
+              tintColor: color,
+            }}/>)}>
           <Text>Tab 3</Text>
         </TabComponent>
       </TabViewComponent>
@@ -53,6 +83,10 @@ class TabView extends React.Component<Props, State> {
 export const TabViewScreen = withStyles(TabView, () => ({
   container: {
     flex: 1,
+  },
+  icon: {
+    width: 30,
+    height: 30,
   },
 }));
 

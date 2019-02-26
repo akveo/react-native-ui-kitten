@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   ScrollView,
+  Image,
 } from 'react-native';
 import {
   fireEvent,
@@ -61,7 +62,16 @@ describe('@tab: component checks', () => {
   it('* icon', () => {
     const component = render(
       <Mock
-        icon={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+        icon={(width: number, height: number, color: string) => (
+          <Image
+            source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+            style={{
+              width: width,
+              height: height,
+              tintColor: color,
+            }}
+          />
+        )}
       />,
     );
 
