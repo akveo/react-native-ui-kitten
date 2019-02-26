@@ -3,6 +3,7 @@ import {
   ImageSourcePropType,
   Text,
   View,
+  Image,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -45,7 +46,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='giant'
               alignment={ALIGNMENT}
-              icon={ICON}
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}
             />
             <ButtonComponent
               appearance={APPEARANCE}
@@ -53,7 +62,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='large'
               alignment={ALIGNMENT}
-              icon={ICON}
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}
             />
             <ButtonComponent
               appearance={APPEARANCE}
@@ -61,7 +78,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='medium'
               alignment={ALIGNMENT}
-              icon={ICON}
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}
             />
             <ButtonComponent
               appearance={APPEARANCE}
@@ -69,7 +94,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='small'
               alignment={ALIGNMENT}
-              icon={ICON}
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}
             />
             <ButtonComponent
               appearance={APPEARANCE}
@@ -77,7 +110,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='tiny'
               alignment={ALIGNMENT}
-              icon={ICON}
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}
             />
           </View>
         </View>
@@ -135,7 +176,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='giant'
               alignment={ALIGNMENT}
-              icon={ICON}>
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}>
               {TEXT}
             </ButtonComponent>
             <ButtonComponent
@@ -143,7 +192,15 @@ class Button extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='large'
-              icon={ICON}
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}
               alignment={ALIGNMENT}>
               {TEXT}
             </ButtonComponent>
@@ -153,7 +210,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='medium'
               alignment={ALIGNMENT}
-              icon={ICON}>
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}>
               {TEXT}
             </ButtonComponent>
             <ButtonComponent
@@ -162,7 +227,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='small'
               alignment={ALIGNMENT}
-              icon={ICON}>
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}>
               {TEXT}
             </ButtonComponent>
             <ButtonComponent
@@ -171,7 +244,15 @@ class Button extends React.Component<Props, State> {
               status={STATUS}
               size='tiny'
               alignment={ALIGNMENT}
-              icon={ICON}>
+              icon={(width: number, height: number, color: string) => (
+                <Image
+                  source={ICON}
+                  style={{
+                    width: width,
+                    height: height,
+                    tintColor: color,
+                  }}/>
+              )}>
               {TEXT}
             </ButtonComponent>
           </View>

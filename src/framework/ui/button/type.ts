@@ -43,6 +43,9 @@ export class ButtonAlignments {
   }
 
   private static typeOf(value: any): value is ButtonAlignment {
+    if (!value) {
+      return false;
+    }
     const { rawValue } = (<ButtonAlignment>value);
 
     return rawValue !== undefined;

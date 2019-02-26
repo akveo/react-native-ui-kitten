@@ -47,11 +47,7 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   activeOpacity={1}
   appearance="default"
   dispatch={[Function]}
-  icon={
-    Object {
-      "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-    }
-  }
+  icon={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -94,15 +90,11 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
       }
     }
     style={
-      Array [
-        Object {
-          "height": 14,
-          "marginHorizontal": 4,
-          "tintColor": "#ffffff",
-          "width": 14,
-        },
-        Object {},
-      ]
+      Object {
+        "height": 14,
+        "tintColor": "#ffffff",
+        "width": 14,
+      }
     }
   />
 </TouchableOpacity>
@@ -113,11 +105,7 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   activeOpacity={1}
   appearance="default"
   dispatch={[Function]}
-  icon={
-    Object {
-      "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-    }
-  }
+  icon={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -160,15 +148,11 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
       }
     }
     style={
-      Array [
-        Object {
-          "height": 14,
-          "marginHorizontal": 4,
-          "tintColor": "#ffffff",
-          "width": 14,
-        },
-        Object {},
-      ]
+      Object {
+        "height": 14,
+        "tintColor": "#ffffff",
+        "width": 14,
+      }
     }
   />
   <ForwardRef(createComponent)

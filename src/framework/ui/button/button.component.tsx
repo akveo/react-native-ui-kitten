@@ -4,8 +4,6 @@ import {
   TouchableOpacityProps,
   GestureResponderEvent,
   StyleSheet,
-  ImageSourcePropType,
-  Image,
   ImageProps,
 } from 'react-native';
 import {
@@ -24,7 +22,7 @@ import {
 } from './type';
 
 interface ButtonProps {
-  icon?: ImageSourcePropType;
+  icon?: (width: number, height: number, color: string) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
   alignment?: string | ButtonAlignment;
@@ -93,15 +91,10 @@ export class Button extends React.Component<Props> {
   };
 
   private createImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
-    const { icon: image } = this.props;
-
-    return (
-      <Image
-        key={0}
-        style={[style, strictStyles.icon]}
-        source={image}
-      />
-    );
+    const { icon } = this.props;
+    return icon && React.cloneElement(icon(style.width, style.height, style.color), {
+      key: 2,
+    });
   };
 
   private createComponentChildren = (style: StyleType): React.ReactNode => {

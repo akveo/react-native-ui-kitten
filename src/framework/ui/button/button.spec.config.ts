@@ -39,7 +39,7 @@ export const mapping: ThemeMappingType = {
             'marginHorizontal': 4,
           },
           'icon': {
-            'tintColor': '#ffffff',
+            'color': '#ffffff',
             'width': 14,
             'height': 14,
             'marginHorizontal': 4,
@@ -196,7 +196,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#2196F3',
                 },
                 'icon': {
-                  'tintColor': '#2196F3',
+                  'color': '#2196F3',
                 },
                 'state': {
                   'active': {
@@ -206,7 +206,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#1E88E5',
                     },
                     'icon': {
-                      'tintColor': '#1E88E5',
+                      'color': '#1E88E5',
                     },
                   },
                 },
@@ -220,7 +220,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#4CAF50',
                 },
                 'icon': {
-                  'tintColor': '#4CAF50',
+                  'color': '#4CAF50',
                 },
                 'state': {
                   'active': {
@@ -230,7 +230,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#43A047',
                     },
                     'icon': {
-                      'tintColor': '#43A047',
+                      'color': '#43A047',
                     },
                   },
                 },
@@ -244,7 +244,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#03A9F4',
                 },
                 'icon': {
-                  'tintColor': '#03A9F4',
+                  'color': '#03A9F4',
                 },
                 'state': {
                   'active': {
@@ -254,7 +254,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#039BE5',
                     },
                     'icon': {
-                      'tintColor': '#039BE5',
+                      'color': '#039BE5',
                     },
                   },
                 },
@@ -268,7 +268,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#FFC107',
                 },
                 'icon': {
-                  'tintColor': '#FFC107',
+                  'color': '#FFC107',
                 },
                 'state': {
                   'active': {
@@ -278,7 +278,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#FFB300',
                     },
                     'icon': {
-                      'tintColor': '#FFB300',
+                      'color': '#FFB300',
                     },
                   },
                 },
@@ -292,7 +292,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#F44336',
                 },
                 'icon': {
-                  'tintColor': '#F44336',
+                  'color': '#F44336',
                 },
                 'state': {
                   'active': {
@@ -302,7 +302,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#E53935',
                     },
                     'icon': {
-                      'tintColor': '#E53935',
+                      'color': '#E53935',
                     },
                   },
                 },
@@ -322,7 +322,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#2196F3',
                 },
                 'icon': {
-                  'tintColor': '#2196F3',
+                  'color': '#2196F3',
                 },
                 'state': {
                   'active': {
@@ -331,7 +331,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#1E88E5',
                     },
                     'icon': {
-                      'tintColor': '#1E88E5',
+                      'color': '#1E88E5',
                     },
                   },
                 },
@@ -344,7 +344,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#4CAF50',
                 },
                 'icon': {
-                  'tintColor': '#4CAF50',
+                  'color': '#4CAF50',
                 },
                 'state': {
                   'active': {
@@ -353,7 +353,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#43A047',
                     },
                     'icon': {
-                      'tintColor': '#43A047',
+                      'color': '#43A047',
                     },
                   },
                 },
@@ -366,7 +366,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#03A9F4',
                 },
                 'icon': {
-                  'tintColor': '#03A9F4',
+                  'color': '#03A9F4',
                 },
                 'state': {
                   'active': {
@@ -375,7 +375,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#039BE5',
                     },
                     'icon': {
-                      'tintColor': '#039BE5',
+                      'color': '#039BE5',
                     },
                   },
                 },
@@ -388,7 +388,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#FFC107',
                 },
                 'icon': {
-                  'tintColor': '#FFC107',
+                  'color': '#FFC107',
                 },
                 'state': {
                   'active': {
@@ -397,7 +397,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#FFB300',
                     },
                     'icon': {
-                      'tintColor': '#FFB300',
+                      'color': '#FFB300',
                     },
                   },
                 },
@@ -410,7 +410,7 @@ export const mapping: ThemeMappingType = {
                   'color': '#F44336',
                 },
                 'icon': {
-                  'tintColor': '#F44336',
+                  'color': '#F44336',
                 },
                 'state': {
                   'active': {
@@ -419,7 +419,7 @@ export const mapping: ThemeMappingType = {
                       'color': '#E53935',
                     },
                     'icon': {
-                      'tintColor': '#E53935',
+                      'color': '#E53935',
                     },
                   },
                 },
