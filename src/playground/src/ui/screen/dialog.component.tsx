@@ -2,6 +2,8 @@ import React from 'react';
 import {
   View,
   Button,
+  ViewStyle,
+  ViewProps,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -9,7 +11,6 @@ import {
   withStyles,
   ModalService,
   ModalComponentCloseProps,
-  StyleType,
 } from '@kitten/theme';
 import { NavigationScreenProps } from 'react-navigation';
 
@@ -20,7 +21,7 @@ interface EndlessModalProps {
   onDismiss?: () => void;
 }
 
-const EndlessModal = (props?: EndlessModalProps & ModalComponentCloseProps) => {
+const EndlessModal = (props?: EndlessModalProps & ModalComponentCloseProps & ViewProps) => {
 
   const { onContinue, onDismiss, onCloseModal, ...derivedProps } = props;
 
@@ -67,7 +68,7 @@ class Dialog extends React.Component<Props> {
   private createModalElement = (): React.ReactElement<any> => {
     const color: string = this.modalCount % 2 === 0 ? '#C0C0C0' : '#A0A1A8';
 
-    const additionalProps: StyleType<View> = {
+    const additionalProps: ViewStyle = {
       left: this.modalCount * 20,
       top: 140 + this.modalCount * 20,
       backgroundColor: color,

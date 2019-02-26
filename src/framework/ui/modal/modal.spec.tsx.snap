@@ -4,9 +4,7 @@ exports[`@modal component checks * component styled with mappings 1`] = `
 <View
   style={
     Object {
-      "height": 0,
       "position": "absolute",
-      "width": 0,
     }
   }
 >
@@ -52,9 +50,7 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
 <View
   style={
     Object {
-      "height": 0,
       "position": "absolute",
-      "width": 0,
     }
   }
 >
@@ -142,9 +138,7 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
 <View
   style={
     Object {
-      "height": 0,
       "position": "absolute",
-      "width": 0,
     }
   }
 >
@@ -246,9 +240,7 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
 <View
   style={
     Object {
-      "height": 0,
       "position": "absolute",
-      "width": 0,
     }
   }
 >
@@ -296,9 +288,7 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
 <View
   style={
     Object {
-      "height": 0,
       "position": "absolute",
-      "width": 0,
     }
   }
 >
@@ -360,9 +350,7 @@ exports[`@modal component checks * modal component renders properly 1`] = `
 <View
   style={
     Object {
-      "height": 0,
       "position": "absolute",
-      "width": 0,
     }
   }
 >
@@ -434,9 +422,7 @@ exports[`@modal component checks * with animations 1`] = `
   <View
     style={
       Object {
-        "height": 0,
         "position": "absolute",
-        "width": 0,
       }
     }
   >
@@ -536,9 +522,7 @@ exports[`@modal component checks * with animations 2`] = `
   <View
     style={
       Object {
-        "height": 0,
         "position": "absolute",
-        "width": 0,
       }
     }
   >
