@@ -6,16 +6,33 @@ export const mapping: ThemeMappingType = {
   BottomNavigatorTab: {
     meta: {
       variants: {},
-      states: [],
+      states: [
+        'selected',
+      ],
     },
     appearance: {
       default: {
         mapping: {
-          'icon.marginBottom': 5,
-          'icon.width': 40,
-          'icon.height': 40,
-          'title.color': 'gray-dark',
-          'title.selectedColor': 'blue-primary',
+          icon: {
+            marginBottom: 5,
+            width: 40,
+            height: 40,
+            color: 'gray-dark',
+          },
+          text: {
+            color: 'gray-dark',
+            fontWeight: '600',
+          },
+          state: {
+            selected: {
+              icon: {
+                color: 'blue-primary',
+              },
+              text: {
+                color: 'blue-primary',
+              },
+            },
+          },
         },
       },
     },

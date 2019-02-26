@@ -1,5 +1,8 @@
 import React from 'react';
-import { ImageSourcePropType } from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+} from 'react-native';
 import {
   fireEvent,
   render,
@@ -41,9 +44,9 @@ describe('@bottom-tab-navigator: component checks', () => {
   const tab2Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png';
   const tab3Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png';
 
-  const getTab1Uri = (selected: boolean): ImageSourcePropType => ({ uri: tab1Uri });
-  const getTab2Uri = (selected: boolean): ImageSourcePropType => ({ uri: tab2Uri });
-  const getTab3Uri = (selected: boolean): ImageSourcePropType => ({ uri: tab3Uri });
+  const getTab1Uri = (): ImageSourcePropType => ({ uri: tab1Uri });
+  const getTab2Uri = (): ImageSourcePropType => ({ uri: tab2Uri });
+  const getTab3Uri = (): ImageSourcePropType => ({ uri: tab3Uri });
 
   const tabTestId: string = '@tab/last';
 
@@ -55,9 +58,45 @@ describe('@bottom-tab-navigator: component checks', () => {
   it('* with routes', () => {
     const component = render(
       <Mock>
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
-        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
-        <MockTab getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab1Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 1'
+          selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab2Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 2'
+          selected={true}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab3Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 3'
+          selected={false}/>
       </Mock>,
     );
     expect(component).toMatchSnapshot();
@@ -66,9 +105,45 @@ describe('@bottom-tab-navigator: component checks', () => {
   it('* current index', () => {
     const component =
       <Mock selectedIndex={1}>
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
-        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
-        <MockTab getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab1Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 1'
+          selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab2Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 2'
+          selected={true}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab3Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 3'
+          selected={false}/>
       </Mock>;
     const rendered = render(component);
     expect(component.props.selectedIndex).toBe(1);
@@ -81,9 +156,46 @@ describe('@bottom-tab-navigator: component checks', () => {
       <Mock
         selectedIndex={1}
         onSelect={onSelect}>
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
-        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
-        <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab1Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 1'
+          selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab2Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 2'
+          selected={true}/>
+        <MockTab
+          testID={tabTestId}
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab3Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 3'
+          selected={false}/>
       </Mock>,
     );
 
@@ -99,9 +211,46 @@ describe('@bottom-tab-navigator: component checks', () => {
       <Mock
         selectedIndex={1}
         onSelect={onSelect}>
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
-        <MockTab testID={tabTestId} getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
-        <MockTab getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab1Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 1'
+          selected={false}/>
+        <MockTab
+          testID={tabTestId}
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab2Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 2'
+          selected={true}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab3Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 3'
+          selected={false}/>
       </Mock>,
     );
     fireEvent(component.getByTestId(tabTestId), 'select');
@@ -112,9 +261,46 @@ describe('@bottom-tab-navigator: component checks', () => {
   it('* additional appearance', () => {
     const component = render(
       <Mock appearance='highlight'>
-        <MockTab getIconSource={getTab1Uri} title='Screen 1' selected={false}/>
-        <MockTab getIconSource={getTab2Uri} title='Screen 2' selected={true}/>
-        <MockTab testID={tabTestId} getIconSource={getTab3Uri} title='Screen 3' selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab1Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 1'
+          selected={false}/>
+        <MockTab
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab3Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 2'
+          selected={true}/>
+        <MockTab
+          testID={tabTestId}
+          icon={(width: number, height: number, color: string) => (
+            <Image
+              source={getTab3Uri()}
+              style={{
+                width: width,
+                height: height,
+                tintColor: color,
+              }}
+            />
+          )}
+          title='Screen 3'
+          selected={false}/>
       </Mock>,
     );
     expect(component).toMatchSnapshot();

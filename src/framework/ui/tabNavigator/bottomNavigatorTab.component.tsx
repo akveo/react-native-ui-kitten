@@ -3,10 +3,8 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  ImageSourcePropType,
   TextProps,
   ImageProps,
-  Image,
   TouchableOpacityProps,
 } from 'react-native';
 import {
@@ -16,7 +14,7 @@ import {
 
 interface BottomNavigatorTabProps {
   title?: string;
-  getIconSource?: (selected: boolean) => ImageSourcePropType;
+  icon?: (width: number, height: number, color: string) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -34,45 +32,38 @@ export class BottomNavigatorTab extends React.Component<Props> {
   private getComponentStyle = (source: StyleType): StyleType => {
     return {
       container: {},
-      icon: {
-        width: source['icon.width'],
-        height: source['icon.height'],
-        marginBottom: source['icon.marginBottom'],
-      },
-      title: {
-        color: this.props.selected ? source['title.selectedColor'] : source['title.color'],
-      },
+      icon: source.icon,
+      title: source.text,
     };
   };
 
-  private createImageElement(style: StyleType): React.ReactElement<ImageProps> {
-    return (
-      <Image
-        key={0}
-        style={style}
-        source={this.props.getIconSource(this.props.selected)}
-      />
-    );
+  private renderImageElement(style: StyleType): React.ReactElement<ImageProps> | null {
+    const icon: React.ReactElement<ImageProps> = this.props.icon ?
+      this.props.icon(style.width, style.height, style.color) : null;
+    return icon ? React.cloneElement(icon, {
+      style: {
+        ...(icon.props.style as object),
+        marginBottom: style.source,
+      },
+      key: 1,
+    }) : null;
   }
 
-  private createTextElement(style: StyleType): React.ReactElement<TextProps> {
-    return (
+  private renderTextElement(style: StyleType): React.ReactElement<TextProps> | null {
+    const { title } = this.props;
+    return title && title.length !== 0 ? (
       <Text
-        key={1}
+        key={2}
         style={style}>
         {this.props.title}
       </Text>
-    );
+    ) : null;
   }
 
-  private createComponentChildren = (style: StyleType): React.ReactNode => {
-    const { getIconSource, title } = this.props;
-
-    return [
-      getIconSource ? this.createImageElement(style.icon) : undefined,
-      title && title.length !== 0 ? this.createTextElement(style.title) : undefined,
-    ];
-  };
+  private createComponentChildren = (style: StyleType): React.ReactNode => ([
+    this.renderImageElement(style.icon),
+    this.renderTextElement(style.title),
+  ]);
 
   public render(): React.ReactNode {
     const { style, themedStyle, ...derivedProps } = this.props;

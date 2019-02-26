@@ -85,9 +85,10 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       }
       style={
         Object {
-          "height": 40,
-          "marginBottom": 5,
-          "width": 40,
+          "height": undefined,
+          "marginBottom": undefined,
+          "tintColor": "#3366FF",
+          "width": undefined,
         }
       }
     />
@@ -122,13 +123,14 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
     <Image
       source={
         Object {
-          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png",
+          "uri": "https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png",
         }
       }
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -137,6 +139,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -171,7 +174,8 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -180,6 +184,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -250,7 +255,8 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -259,6 +265,7 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -292,9 +299,10 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       }
       style={
         Object {
-          "height": 40,
-          "marginBottom": 5,
-          "width": 40,
+          "height": undefined,
+          "marginBottom": undefined,
+          "tintColor": "#3366FF",
+          "width": undefined,
         }
       }
     />
@@ -335,7 +343,8 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -344,6 +353,7 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -413,7 +423,8 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -422,6 +433,7 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -454,9 +466,10 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       }
       style={
         Object {
-          "height": 40,
-          "marginBottom": 5,
-          "width": 40,
+          "height": undefined,
+          "marginBottom": undefined,
+          "tintColor": "#3366FF",
+          "width": undefined,
         }
       }
     />
@@ -497,7 +510,8 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -506,6 +520,7 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -625,7 +640,8 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -634,6 +650,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -666,9 +683,10 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       }
       style={
         Object {
-          "height": 40,
-          "marginBottom": 5,
-          "width": 40,
+          "height": undefined,
+          "marginBottom": undefined,
+          "tintColor": "#3366FF",
+          "width": undefined,
         }
       }
     />
@@ -710,7 +728,8 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -719,6 +738,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -787,9 +807,10 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       }
       style={
         Object {
-          "height": 40,
-          "marginBottom": 5,
-          "width": 40,
+          "height": undefined,
+          "marginBottom": undefined,
+          "tintColor": "#3366FF",
+          "width": undefined,
         }
       }
     />
@@ -830,7 +851,8 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -839,6 +861,7 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -872,7 +895,8 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       style={
         Object {
           "height": 40,
-          "marginBottom": 5,
+          "marginBottom": undefined,
+          "tintColor": "#8992A3",
           "width": 40,
         }
       }
@@ -881,6 +905,7 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >

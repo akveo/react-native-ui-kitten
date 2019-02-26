@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { render } from 'react-native-testing-library';
 import {
   styled,
@@ -33,7 +34,17 @@ describe('@bottom-navigator-tab: component checks', () => {
   it('* with icon', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
-      <Mock getIconSource={getImageSource}/>,
+      <Mock
+        icon={(width: number, height: number, color: string) => (
+          <Image
+            source={getImageSource()}
+            style={{
+              width: width,
+              height: height,
+              tintColor: color,
+            }}
+          />
+        )}/>,
     );
     expect(component).toMatchSnapshot();
   });
@@ -42,7 +53,16 @@ describe('@bottom-navigator-tab: component checks', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
       <Mock
-        getIconSource={getImageSource}
+        icon={(width: number, height: number, color: string) => (
+          <Image
+            source={getImageSource()}
+            style={{
+              width: width,
+              height: height,
+              tintColor: color,
+            }}
+          />
+        )}
         selected={true}
         title='Test'
       />,
@@ -54,7 +74,16 @@ describe('@bottom-navigator-tab: component checks', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
       <Mock
-        getIconSource={getImageSource}
+        icon={(width: number, height: number, color: string) => (
+          <Image
+            source={getImageSource()}
+            style={{
+              width: width,
+              height: height,
+              tintColor: color,
+            }}
+          />
+        )}
         selected={false}
         title='Test'
       />,
@@ -64,7 +93,9 @@ describe('@bottom-navigator-tab: component checks', () => {
 
   it('* getIconSource', () => {
     const getImageSource = jest.fn();
-    const component = render(<Mock getIconSource={getImageSource}/>);
+    const component = render(
+      <Mock icon={getImageSource}/>,
+    );
     expect(getImageSource).toHaveBeenCalled();
   });
 
