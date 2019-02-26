@@ -36,6 +36,14 @@ import {
   Props as TabBarProps,
 } from './tab/tabBar.component';
 import {
+  Popover as PopoverComponent,
+  Props as PopoverProps,
+} from './popover/popover.component';
+import {
+  Tooltip as TooltipComponent,
+  Props as TooltipProps,
+} from './tooltip/tooltip.component';
+import {
   ViewPager,
   Props as ViewPagerProps,
 } from './viewPager/viewPager.component';
@@ -67,6 +75,10 @@ import {
   ButtonAlignment,
   ButtonAlignments,
 } from './button/type';
+import {
+  Placement as PopoverPlacement,
+  Placements as PopoverPlacements,
+} from './popover/type';
 
 const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
 const Text = styled<TextComponent, TextProps>(TextComponent);
@@ -77,6 +89,8 @@ const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
 const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
 const Tab = styled<TabComponent, TabProps>(TabComponent);
 const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
+const Tooltip = styled<TooltipComponent, TooltipProps>(TooltipComponent);
 const BottomTabNavigator = styled<BottomTabNavigatorComponent, BottomTabNavigatorProps>(BottomTabNavigatorComponent);
 const BottomNavigatorTab = styled<BottomNavigatorTabComponent, BottomNavigatorTabProps>(BottomNavigatorTabComponent);
 const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
@@ -98,12 +112,16 @@ export {
   CheckBox,
   Tab,
   TabBar,
+  Popover,
+  Tooltip,
   ViewPager,
   TabView,
   ButtonProps,
   CheckBoxProps,
   TabProps,
   TabBarProps,
+  PopoverProps,
+  TooltipProps,
   ViewPagerProps,
   TabViewProps,
   BottomTabNavigator,
@@ -118,4 +136,6 @@ export {
   ModalProps,
   ButtonAlignment,
   ButtonAlignments,
+  PopoverPlacement,
+  PopoverPlacements,
 };

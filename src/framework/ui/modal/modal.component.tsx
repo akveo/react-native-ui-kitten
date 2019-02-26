@@ -164,8 +164,6 @@ export class Modal extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    width: 0,
-    height: 0,
   },
   backdrop: {
     width: width,
