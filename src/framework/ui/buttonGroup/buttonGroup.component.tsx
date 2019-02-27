@@ -55,12 +55,15 @@ export class ButtonGroup extends React.Component<Props> {
   };
 
   private createComponentChild = (element: ButtonElement, index: number, style: StyleType): ButtonElement => {
-    const { appearance, size } = this.props;
-    const positionedStyle: StyleType = this.getChildComponentStyle(index, style);
+    const { appearance, size, children } = this.props;
+    const { style: elementStyle, ...derivedProps } = element.props;
+
+    const isSingle: boolean = React.Children.count(children) === 1;
+    const positionedStyle: StyleType = isSingle ? style : this.getChildComponentStyle(index, style);
 
     return React.cloneElement(element, {
-      ...element.props,
-      style: positionedStyle,
+      ...derivedProps,
+      style: [elementStyle, positionedStyle],
       key: index,
       appearance: appearance,
       size: size,

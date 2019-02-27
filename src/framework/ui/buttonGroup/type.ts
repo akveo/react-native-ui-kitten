@@ -11,7 +11,7 @@ export interface ButtonStyleProvider {
 export class ButtonStyleProviders {
   static DEFAULT: ButtonStyleProvider = new class implements ButtonStyleProvider {
 
-    defaults(): StyleType {
+    defaults(source: StyleType): StyleType {
       return {
         borderRadius: 0,
       };
@@ -21,7 +21,7 @@ export class ButtonStyleProviders {
       const { borderRadius, margin } = source;
 
       return {
-        ...this.defaults(),
+        ...this.defaults(source),
         borderTopStartRadius: borderRadius,
         borderBottomStartRadius: borderRadius,
         marginRight: margin / 2,
@@ -32,9 +32,8 @@ export class ButtonStyleProviders {
       const { margin } = source;
 
       return {
-        ...this.defaults(),
-        marginLeft: margin / 2,
-        marginRight: margin / 2,
+        ...this.defaults(source),
+        marginHorizontal: margin / 2,
       };
     }
 
@@ -42,7 +41,7 @@ export class ButtonStyleProviders {
       const { borderRadius, margin } = source;
 
       return {
-        ...this.defaults(),
+        ...this.defaults(source),
         borderTopEndRadius: borderRadius,
         borderBottomEndRadius: borderRadius,
         marginLeft: margin / 2,
