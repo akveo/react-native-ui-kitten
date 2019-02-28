@@ -27,5 +27,6 @@ export type ThemedStyleType = any;
 export type StyleSheetType = any;
 
 export interface ModalComponentCloseProps {
-  onCloseModal?: () => void;
+  [key: string]: any;
+  onRequestClose: () => void;
 }

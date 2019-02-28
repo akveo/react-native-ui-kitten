@@ -76,7 +76,8 @@ class Modal extends React.Component<Props, State> {
           identifier='@modal/fade'
           visible={this.state.fadeModalVisible}
           style={this.props.themedStyle.modal}
-          onCloseModal={this.onFadeButtonPress}
+          onCloseModal={this.onFadeModalDismiss}
+          isBackDropAllowed={true}
           animationType='fade'
           animationDuration={600}>
           <ModalContent onDismiss={this.onFadeModalDismiss}/>
@@ -86,7 +87,7 @@ class Modal extends React.Component<Props, State> {
           visible={this.state.slideModalVisible}
           style={this.props.themedStyle.modal}
           isBackDropAllowed={true}
-          onCloseModal={this.onSlideButtonPress}
+          onCloseModal={this.onSlideModalDismiss}
           animationType='slideInUp'
           animationDuration={600}>
           <ModalContent onDismiss={this.onSlideModalDismiss}/>

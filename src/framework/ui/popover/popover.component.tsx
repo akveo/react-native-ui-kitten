@@ -82,9 +82,9 @@ export class Popover extends React.Component<Props, State> {
       // Retrieve `content` from popover children
       // and clone it with measured position
       const { [TAG_CONTENT]: popoverView } = container.props.children;
-      const popover: React.ReactElement<ViewProps> = React.cloneElement(popoverView, { style });
+      const popover: React.ReactElement<any> = React.cloneElement(popoverView, { style });
 
-      ModalService.showDialog(popover, true);
+      ModalService.show(popover, true);
     }
   }
 

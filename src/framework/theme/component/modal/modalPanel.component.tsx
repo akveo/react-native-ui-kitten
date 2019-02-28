@@ -4,19 +4,23 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import { ModalService } from '../../service';
+import {
+  ModalPresenting,
+  ModalService,
+} from '../../service';
 import { Modal } from '../../../ui/modal/modal.component';
+import { ModalComponentCloseProps } from '@kitten/theme';
 
 export interface ModalPanelProps {
   children: React.ReactElement<any> | React.ReactElement<any>[];
 }
 
 interface ModalPanelState {
-  dialogComponents: Map<string, React.ReactElement<any>>;
+  dialogComponents: Map<string, React.ReactElement<ModalComponentCloseProps>>;
   backdropValues: Map<string, boolean>;
 }
 
-export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> {
+export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> implements ModalPresenting {
 
   public state: ModalPanelState = {
     dialogComponents: new Map(),
@@ -24,33 +28,40 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   };
 
   public componentDidMount(): void {
-    ModalService.setComponent(this);
+    ModalService.mount(this);
   }
 
   public componentWillUnmount(): void {
-    ModalService.setComponent(null);
+    ModalService.unmount();
   }
 
-  public onCloseModal = (identifier: string) => {
+  public hide = (identifier: string): void => {
+    const component: React.ReactElement<ModalComponentCloseProps> = this.state.dialogComponents
+      .get(identifier);
+    if (component) {
+      component.props.onRequestClose && component.props.onRequestClose();
+    }
     const components: Map<string, React.ReactElement<any>> = this.state.dialogComponents;
     components.delete(identifier);
-    const backdropValues: Map<string, boolean> = this.state.backdropValues;
-    backdropValues.delete(identifier);
+    const backdrops: Map<string, boolean> = this.state.backdropValues;
+    backdrops.delete(identifier);
     this.setState({
       dialogComponents: components,
-      backdropValues: backdropValues,
+      backdropValues: backdrops,
     });
   };
 
-  public showDialog(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean): void {
+  public show(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean): string {
     const key: string = this.generateUniqueComponentKey();
     const componentsMap: Map<string, React.ReactElement<any>> = this.state.dialogComponents
       .set(key, dialogComponent);
-    const backdropsMap: Map<string, boolean> = this.state.backdropValues.set(key, closeOnBackDrop);
+    const backdrops: Map<string, boolean> = this.state.backdropValues
+      .set(key, closeOnBackDrop);
     this.setState({
       dialogComponents: componentsMap,
-      backdropValues: backdropsMap,
+      backdropValues: backdrops,
     });
+    return key;
   }
 
   private generateUniqueComponentKey = (): string => {
@@ -72,7 +83,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
         isBackDropAllowed={closeOnBackdrop}
         key={index}
         identifier={identifier}
-        onCloseModal={this.onCloseModal}
+        onCloseModal={this.hide}
       >
         {modal}
       </Modal>

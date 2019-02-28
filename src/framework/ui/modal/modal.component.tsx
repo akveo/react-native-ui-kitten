@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  View,
   ViewProps,
   TouchableWithoutFeedbackProps,
   StyleSheet,
-  TouchableWithoutFeedback,
   Dimensions,
   Animated,
 } from 'react-native';
@@ -63,19 +61,6 @@ export class Modal extends React.Component<Props> {
     }
   }
 
-  private getComponentStyle = (style: StyleType): StyleType | null => {
-    return {
-      container: style ? {
-        paddingHorizontal: style.paddingHorizontal,
-        paddingVertical: style.paddingVertical,
-        backgroundColor: style.backgroundColor,
-        borderColor: style.borderColor,
-        borderRadius: style.borderRadius,
-        borderWidth: style.borderWidth,
-      } : null,
-    };
-  };
-
   private getAnimationStyle(type: ModalAnimationType): StyleType | undefined {
     switch (type) {
       case 'none':
@@ -117,19 +102,17 @@ export class Modal extends React.Component<Props> {
     }
   };
 
+  private onStartShouldSetResponder = (): boolean => true;
+
+  private onStartShouldSetResponderCapture = (): boolean => false;
+
   private createComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
     return React.cloneElement(source, {
+      ...source.props,
       onCloseModal: this.closeModal,
-      pointerEvents: 'box-none',
+      onStartShouldSetResponder: () => true,
+      onResponderRelease: () => {},
     });
-  };
-
-  private createBackdropElement = (): React.ReactElement<TouchableWithoutFeedbackProps> => {
-    return this.props.isBackDropAllowed ? (
-      <TouchableWithoutFeedback onPress={this.closeOnBackdrop}>
-        <View style={styles.backdrop}/>
-      </TouchableWithoutFeedback>
-    ) : null;
   };
 
   private createComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
@@ -137,22 +120,27 @@ export class Modal extends React.Component<Props> {
   };
 
   private renderComponent = (): React.ReactElement<ViewProps> => {
-    const { style, themedStyle, animationType, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { style, animationType, children, isBackDropAllowed, ...derivedProps } = this.props;
     const animationStyle: StyleType = this.getAnimationStyle(animationType);
-
-    const backdropElement: React.ReactElement<any> = this.createBackdropElement();
     const componentChildren: React.ReactElement<any>[] = this.createComponentChildren(children);
 
-    return (
-      <View style={styles.container}>
-        {backdropElement}
-        <Animated.View
-          {...derivedProps}
-          style={[componentStyle.container, style, animationStyle]}>
-          {componentChildren}
-        </Animated.View>
-      </View>
+    const dialog: React.ReactElement<ViewProps> =
+      <Animated.View
+        {...derivedProps}
+        style={[styles.container, style, animationStyle]}>
+        {componentChildren}
+      </Animated.View>;
+
+    return isBackDropAllowed ? (
+      React.cloneElement(dialog, {
+        onStartShouldSetResponder: this.onStartShouldSetResponder,
+        onResponderRelease: this.closeOnBackdrop,
+        onStartShouldSetResponderCapture: this.onStartShouldSetResponderCapture,
+      })
+    ) : (
+      React.cloneElement(dialog, {
+        pointerEvents: 'box-none',
+      })
     );
   };
 
@@ -163,11 +151,6 @@ export class Modal extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-  },
-  backdrop: {
-    width: width,
-    height: height,
     ...StyleSheet.absoluteFillObject,
   },
 });
