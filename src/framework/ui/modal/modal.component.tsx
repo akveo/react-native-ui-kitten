@@ -112,6 +112,10 @@ export class Modal extends React.Component<Props> {
       onCloseModal: this.closeModal,
       onStartShouldSetResponder: () => true,
       onResponderRelease: () => {},
+      style: {
+        ...source.props.style,
+        ...(this.props.style as object),
+      },
     });
   };
 
@@ -127,7 +131,7 @@ export class Modal extends React.Component<Props> {
     const dialog: React.ReactElement<ViewProps> =
       <Animated.View
         {...derivedProps}
-        style={[styles.container, style, animationStyle]}>
+        style={[styles.container, animationStyle]}>
         {componentChildren}
       </Animated.View>;
 

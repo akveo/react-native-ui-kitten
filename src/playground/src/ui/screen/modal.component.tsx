@@ -77,7 +77,6 @@ class Modal extends React.Component<Props, State> {
           visible={this.state.fadeModalVisible}
           style={this.props.themedStyle.modal}
           onCloseModal={this.onFadeModalDismiss}
-          isBackDropAllowed={true}
           animationType='fade'
           animationDuration={600}>
           <ModalContent onDismiss={this.onFadeModalDismiss}/>

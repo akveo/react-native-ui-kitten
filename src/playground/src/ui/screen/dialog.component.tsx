@@ -26,12 +26,12 @@ class Dialog extends React.Component<Props> {
   private modalId: string | undefined = undefined;
 
   private createModal = (): React.ReactElement<any> => (
-    <TestModal onRequestClose={() => console.log('Dialog close')}/>
+    <TestModal onRequestClose={() => Alert.alert('Dialog close')}/>
   );
 
   private showModal = (): void => {
     const component = this.createModal();
-    this.modalId = ModalService.show(component, true);
+    this.modalId = ModalService.show(component, false);
   };
 
   private hideModal = () => {
@@ -61,7 +61,7 @@ export const DialogScreen = withStyles(Dialog, (theme: ThemeType) => ({}));
 class TestModal extends React.Component<ModalComponentCloseProps> {
 
   private createModal = (): React.ReactElement<any> => (
-    <InnerTestModal onRequestClose={() => console.log('Inner dialog close')}/>
+    <InnerTestModal onRequestClose={() => Alert.alert('Inner dialog close')}/>
   );
 
   private showModal = (): void => {
