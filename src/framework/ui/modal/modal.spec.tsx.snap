@@ -2,119 +2,163 @@
 
 exports[`@modal component checks * component styled with mappings 1`] = `
 <View
-  animationDuration={300}
-  appearance="default"
-  dispatch={[Function]}
-  pointerEvents="box-none"
   style={
     Object {
-      "bottom": 0,
-      "left": 0,
+      "height": 0,
       "position": "absolute",
-      "right": 0,
-      "top": 0,
+      "width": 0,
     }
   }
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-    }
-  }
-  themedStyle={
-    Object {
-      "backgroundColor": "transparent",
-      "borderColor": "#3366FF",
-      "borderRadius": 3,
-      "borderWidth": 1,
-      "paddingHorizontal": 16,
-      "paddingVertical": 8,
-    }
-  }
-  visible={true}
 >
-  <Text
-    onCloseModal={[Function]}
-    onResponderRelease={[Function]}
-    onStartShouldSetResponder={[Function]}
+  <View
+    animationDuration={300}
+    appearance="default"
+    dispatch={[Function]}
+    pointerEvents="none"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "backgroundColor": "transparent",
+        "borderColor": "#3366FF",
+        "borderRadius": 3,
+        "borderWidth": 1,
+        "paddingHorizontal": 16,
+        "paddingVertical": 8,
+      }
+    }
+    visible={true}
+  />
+  <View
+    animationDuration={300}
+    appearance="default"
+    dispatch={[Function]}
     style={Object {}}
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+      }
+    }
+    themedStyle={
+      Object {
+        "backgroundColor": "transparent",
+        "borderColor": "#3366FF",
+        "borderRadius": 3,
+        "borderWidth": 1,
+        "paddingHorizontal": 16,
+        "paddingVertical": 8,
+      }
+    }
+    visible={true}
   >
-    Test
-  </Text>
+    <Text
+      onCloseModal={[Function]}
+      style={Object {}}
+    >
+      Test
+    </Text>
+  </View>
 </View>
 `;
 
 exports[`@modal component checks * modal closes on passed prop 1`] = `
 <View
-  animationDuration={300}
-  identifier="modal-test-identifier-1"
-  onCloseModal={[MockFunction]}
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
   onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  onStartShouldSetResponderCapture={[Function]}
   style={
     Object {
       "bottom": 0,
       "left": 0,
+      "opacity": 1,
       "position": "absolute",
       "right": 0,
       "top": 0,
     }
   }
-  visible={true}
 >
   <View
-    onCloseModal={[Function]}
-    onResponderRelease={[Function]}
-    onStartShouldSetResponder={[Function]}
+    animationDuration={300}
+    identifier="modal-test-identifier-1"
+    onCloseModal={[MockFunction]}
     style={Object {}}
+    visible={true}
   >
-    <Text>
-      Test1
-    </Text>
     <View
-      accessibilityRole="button"
-      accessibilityStates={Array []}
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
+      onCloseModal={[Function]}
+      style={Object {}}
     >
+      <Text>
+        Test1
+      </Text>
       <View
+        accessibilityRole="button"
+        accessibilityStates={Array []}
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
-          Array [
-            Object {},
-          ]
+          Object {
+            "opacity": 1,
+          }
         }
       >
-        <Text
+        <View
           style={
             Array [
-              Object {
-                "color": "#007AFF",
-                "fontSize": 18,
-                "padding": 8,
-                "textAlign": "center",
-              },
+              Object {},
             ]
           }
         >
-          Close Modal
-        </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#007AFF",
+                  "fontSize": 18,
+                  "padding": 8,
+                  "textAlign": "center",
+                },
+              ]
+            }
+          >
+            Close Modal
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -123,85 +167,187 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
 
 exports[`@modal component checks * modal closes on passed prop 2`] = `
 <View
-  animationDuration={300}
-  identifier="modal-test-identifier-1"
-  onCloseModal={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          undefined,
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
   onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  onStartShouldSetResponderCapture={[Function]}
   style={
     Object {
       "bottom": 0,
       "left": 0,
+      "opacity": 1,
       "position": "absolute",
       "right": 0,
       "top": 0,
     }
   }
-  visible={true}
 >
   <View
-    onCloseModal={[Function]}
-    onResponderRelease={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={Object {}}
-  >
-    <Text>
-      Test1
-    </Text>
-    <View
-      accessibilityRole="button"
-      accessibilityStates={Array []}
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-    >
-      <View
-        style={
+    animationDuration={300}
+    identifier="modal-test-identifier-1"
+    onCloseModal={
+      [MockFunction] {
+        "calls": Array [
           Array [
-            Object {},
-          ]
+            undefined,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    style={Object {}}
+    visible={true}
+  >
+    <View
+      onCloseModal={[Function]}
+      style={Object {}}
+    >
+      <Text>
+        Test1
+      </Text>
+      <View
+        accessibilityRole="button"
+        accessibilityStates={Array []}
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
         }
       >
-        <Text
+        <View
           style={
             Array [
-              Object {
-                "color": "#007AFF",
-                "fontSize": 18,
-                "padding": 8,
-                "textAlign": "center",
-              },
+              Object {},
             ]
           }
         >
-          Close Modal
-        </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#007AFF",
+                  "fontSize": 18,
+                  "padding": 8,
+                  "textAlign": "center",
+                },
+              ]
+            }
+          >
+            Close Modal
+          </Text>
+        </View>
       </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`@modal component checks * modal component close on backDrop checks 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "opacity": 1,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View
+    animationDuration={300}
+    identifier="modal-test-identifier-1"
+    onCloseModal={[MockFunction]}
+    style={Object {}}
+    visible={true}
+  >
+    <View
+      onCloseModal={[Function]}
+      style={Object {}}
+    >
+      <Text>
+        Test1
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`@modal component checks * modal component close on backDrop checks 2`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "opacity": 1,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View
+    animationDuration={300}
+    identifier="modal-test-identifier-1"
+    onCloseModal={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "modal-test-identifier-1",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    style={Object {}}
+    visible={true}
+  >
+    <View
+      onCloseModal={[Function]}
+      style={Object {}}
+    >
+      <Text>
+        Test1
+      </Text>
     </View>
   </View>
 </View>
@@ -209,30 +355,45 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
 
 exports[`@modal component checks * modal component renders properly 1`] = `
 <View
-  animationDuration={300}
-  identifier="modal-test-identifier-1"
-  onCloseModal={[Function]}
-  pointerEvents="box-none"
   style={
     Object {
-      "bottom": 0,
-      "left": 0,
+      "height": 0,
       "position": "absolute",
-      "right": 0,
-      "top": 0,
+      "width": 0,
     }
   }
-  visible={true}
 >
   <View
+    animationDuration={300}
+    identifier="modal-test-identifier-1"
     onCloseModal={[Function]}
-    onResponderRelease={[Function]}
-    onStartShouldSetResponder={[Function]}
+    pointerEvents="none"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    visible={true}
+  />
+  <View
+    animationDuration={300}
+    identifier="modal-test-identifier-1"
+    onCloseModal={[Function]}
     style={Object {}}
+    visible={true}
   >
-    <Text>
-      Test1
-    </Text>
+    <View
+      onCloseModal={[Function]}
+      style={Object {}}
+    >
+      <Text>
+        Test1
+      </Text>
+    </View>
   </View>
 </View>
 `;
@@ -283,37 +444,48 @@ exports[`@modal component checks * with animations 1`] = `
     </View>
   </View>
   <View
-    animationDuration={500}
-    identifier="modal-test-identifier-1"
-    onCloseModal={[Function]}
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
     onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
       Object {
         "bottom": 0,
         "left": 0,
+        "opacity": 1,
         "position": "absolute",
         "right": 0,
         "top": 0,
-        "transform": Array [
-          Object {
-            "translateY": 1334,
-          },
-        ],
       }
     }
-    visible={true}
   >
     <View
+      animationDuration={500}
+      identifier="modal-test-identifier-1"
       onCloseModal={[Function]}
-      onResponderRelease={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={Object {}}
+      style={
+        Object {
+          "transform": Array [
+            Object {
+              "translateY": 1334,
+            },
+          ],
+        }
+      }
+      visible={true}
     >
-      <Text>
-        Test2
-      </Text>
+      <View
+        onCloseModal={[Function]}
+        style={Object {}}
+      >
+        <Text>
+          Test2
+        </Text>
+      </View>
     </View>
   </View>
   ,
@@ -364,33 +536,44 @@ exports[`@modal component checks * with animations 2`] = `
     </View>
   </View>
   <View
-    animationDuration={500}
-    identifier="modal-test-identifier-1"
-    onCloseModal={[Function]}
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
     onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
       Object {
         "bottom": 0,
         "left": 0,
-        "opacity": 0,
+        "opacity": 1,
         "position": "absolute",
         "right": 0,
         "top": 0,
       }
     }
-    visible={true}
   >
     <View
+      animationDuration={500}
+      identifier="modal-test-identifier-1"
       onCloseModal={[Function]}
-      onResponderRelease={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={Object {}}
+      style={
+        Object {
+          "opacity": 0,
+        }
+      }
+      visible={true}
     >
-      <Text>
-        Test2
-      </Text>
+      <View
+        onCloseModal={[Function]}
+        style={Object {}}
+      >
+        <Text>
+          Test2
+        </Text>
+      </View>
     </View>
   </View>
   ,

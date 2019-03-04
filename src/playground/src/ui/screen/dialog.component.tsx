@@ -31,7 +31,7 @@ class Dialog extends React.Component<Props> {
 
   private showModal = (): void => {
     const component = this.createModal();
-    this.modalId = ModalService.show(component, true);
+    this.modalId = ModalService.show(component, false);
   };
 
   private hideModal = () => {

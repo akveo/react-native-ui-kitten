@@ -1,10 +1,12 @@
 import React from 'react';
 import {
+  View,
   ViewProps,
-  TouchableWithoutFeedbackProps,
   StyleSheet,
   Dimensions,
   Animated,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -104,17 +106,17 @@ export class Modal extends React.Component<Props> {
 
   private onStartShouldSetResponder = (): boolean => true;
 
+  private onResponderRelease = (): void => { return; };
+
   private onStartShouldSetResponderCapture = (): boolean => false;
 
   private renderComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
     return React.cloneElement(source, {
       ...source.props,
       onCloseModal: this.closeModal,
-      onStartShouldSetResponder: () => true,
-      onResponderRelease: () => {},
       style: {
         ...source.props.style,
-        ...(this.props.style as object),
+        ...StyleSheet.flatten(this.props.style),
       },
     });
   };
@@ -123,7 +125,25 @@ export class Modal extends React.Component<Props> {
     return React.Children.map(source, this.renderComponentChild);
   };
 
-  private renderComponent = (): React.ReactElement<ViewProps> => {
+  private renderWithBackDrop = (component: React.ReactElement<ViewProps>) => (
+    <TouchableOpacity
+      style={styles.container}
+      onPress={this.closeOnBackdrop}
+      activeOpacity={1}>
+      {component}
+    </TouchableOpacity>
+  );
+
+  private renderWithoutBackDrop = (component: React.ReactElement<ViewProps>) => (
+    <View style={styles.notVisibleWrapper}>
+      <View
+        style={styles.container}
+        pointerEvents='none'/>
+      {component}
+    </View>
+  );
+
+  private renderComponent = (): React.ReactElement<TouchableOpacityProps | ViewProps> => {
     const { animationType, children, isBackDropAllowed, ...derivedProps } = this.props;
     const animationStyle: StyleType = this.getAnimationStyle(animationType);
     const componentChildren: React.ReactElement<any>[] = this.renderComponentChildren(children);
@@ -131,23 +151,19 @@ export class Modal extends React.Component<Props> {
     const dialog: React.ReactElement<ViewProps> =
       <Animated.View
         {...derivedProps}
-        style={[styles.container, animationStyle]}>
+        style={animationStyle}
+        onStartShouldSetResponder={this.onStartShouldSetResponder}
+        onResponderRelease={this.onResponderRelease}
+        onStartShouldSetResponderCapture={this.onStartShouldSetResponderCapture}
+        pointerEvents='box-none'>
         {componentChildren}
       </Animated.View>;
-    return isBackDropAllowed ? (
-      React.cloneElement(dialog, {
-        onStartShouldSetResponder: this.onStartShouldSetResponder,
-        onResponderRelease: this.closeOnBackdrop,
-        onStartShouldSetResponderCapture: this.onStartShouldSetResponderCapture,
-      })
-    ) : (
-      React.cloneElement(dialog, {
-        pointerEvents: 'box-none',
-      })
-    );
+
+    return isBackDropAllowed ?
+      this.renderWithBackDrop(dialog) : this.renderWithoutBackDrop(dialog);
   };
 
-  public render(): React.ReactElement<ViewProps | TouchableWithoutFeedbackProps> {
+  public render(): React.ReactElement<ViewProps | TouchableOpacityProps> | null {
     return this.props.visible ? this.renderComponent() : null;
   }
 }
@@ -155,5 +171,10 @@ export class Modal extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
+  },
+  notVisibleWrapper: {
+    position: 'absolute',
+    width: 0,
+    height: 0,
   },
 });

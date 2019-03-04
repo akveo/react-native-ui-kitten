@@ -7,6 +7,7 @@ import {
   View,
   Text,
   Button,
+  TouchableOpacity,
 } from 'react-native';
 import {
   Modal,
@@ -142,23 +143,22 @@ describe('@modal component checks', () => {
     expect(modal).toMatchSnapshot();
   });
 
-  // TODO: find a way to fire gesture event
-  // it('* modal component close on backDrop checks', () => {
-  //   const onCloseModal = jest.fn();
-  //   const modal = render(
-  //     <Modal
-  //       visible={true}
-  //       isBackDropAllowed={true}
-  //       identifier={MODAL_TEST_IDENTIFIER('1')}
-  //       onCloseModal={onCloseModal}>
-  //       <View><Text>Test1</Text></View>
-  //     </Modal>,
-  //   );
-  //   expect(modal).toMatchSnapshot();
-  //   fireEvent.press(modal.getByType(TouchableWithoutFeedback));
-  //   expect(modal).toMatchSnapshot();
-  //   expect(onCloseModal).toHaveBeenCalled();
-  // });
+  it('* modal component close on backDrop checks', () => {
+    const onCloseModal = jest.fn();
+    const modal = render(
+      <Modal
+        visible={true}
+        isBackDropAllowed={true}
+        identifier={MODAL_TEST_IDENTIFIER('1')}
+        onCloseModal={onCloseModal}>
+        <View><Text>Test1</Text></View>
+      </Modal>,
+    );
+    expect(modal).toMatchSnapshot();
+    fireEvent.press(modal.getByType(TouchableOpacity));
+    expect(modal).toMatchSnapshot();
+    expect(onCloseModal).toHaveBeenCalled();
+  });
 
   it('* component styled with mappings', () => {
     const component = render(

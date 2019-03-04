@@ -79,6 +79,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     const closeOnBackdrop: boolean = this.state.backdropValues.get(identifier);
     return (
       <Modal
+        {...modal.props}
         visible={true}
         isBackDropAllowed={closeOnBackdrop}
         key={index}
