@@ -11,7 +11,6 @@ import {
   Placement,
   Placements,
 } from './type';
-import { number } from 'prop-types';
 
 interface PopoverViewProps {
   placement?: string | Placement;
@@ -115,6 +114,7 @@ export class PopoverView extends React.Component<Props> {
 const strictStyles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
+    alignSelf: 'flex-start',
   },
   content: {
     justifyContent: 'center',
