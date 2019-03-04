@@ -31,7 +31,7 @@ class Dialog extends React.Component<Props> {
 
   private showModal = (): void => {
     const component = this.createModal();
-    this.modalId = ModalService.show(component, false);
+    this.modalId = ModalService.show(component, true);
   };
 
   private hideModal = () => {
@@ -71,7 +71,7 @@ class TestModal extends React.Component<ModalComponentCloseProps> {
 
   render() {
     return (
-      <View {...this.props} style={styles.outerModal}>
+      <View style={styles.outerModal}>
         <Text>This is Test Outer Modal</Text>
         <Button
           title='Open Inner Modal'
@@ -90,7 +90,7 @@ class InnerTestModal extends React.Component<ModalComponentCloseProps> {
 
   render(): React.ReactNode {
     return (
-      <View {...this.props} style={styles.innerModal}>
+      <View style={styles.innerModal}>
         <Text>This is Test Inner Modal</Text>
         <Button
           title='Close Modal'

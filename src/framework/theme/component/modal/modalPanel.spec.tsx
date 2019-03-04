@@ -37,7 +37,7 @@ describe('@modal panel checks', () => {
     }
 
     showModal() {
-      ModalService.showDialog(<TestModal/>, true);
+      ModalService.show(<TestModal onRequestClose={() => 1}/>, true);
     }
 
     render() {

@@ -31,7 +31,7 @@ describe('@modal-service: service checks', () => {
           onCloseModal={this.props.onCloseModal}
           textTestId={ModalTextTestId}
         />;
-      ModalService.showDialog(component);
+      ModalService.show(component);
     };
 
     showMultipleModals: () => void = () => {
@@ -47,8 +47,8 @@ describe('@modal-service: service checks', () => {
           onCloseModal={this.props.onCloseModal}
           textTestId={`${ModalTextTestId}-2`}
         />;
-      ModalService.showDialog(component1);
-      ModalService.showDialog(component2);
+      ModalService.show(component1);
+      ModalService.show(component2);
     };
 
     showBackDropAllowedModal: () => void = () => {
@@ -58,7 +58,7 @@ describe('@modal-service: service checks', () => {
           onCloseModal={this.props.onCloseModal}
           textTestId={ModalTextTestId}
         />;
-      ModalService.showDialog(component, true);
+      ModalService.show(component, true);
     };
 
     render() {
@@ -99,7 +99,7 @@ describe('@modal-service: service checks', () => {
   }
 
   it('* showDialog have been called', () => {
-    const spy = jest.spyOn(ModalService, 'showDialog');
+    const spy = jest.spyOn(ModalService, 'show');
     const application = render(<TestApplication/>);
     fireEvent.press(application.getByTestId(ShowSingleModalTestId));
 
@@ -117,8 +117,8 @@ describe('@modal-service: service checks', () => {
 
   it('* unexpected branch cover', () => {
     const application = render(<TestApplication/>);
-    ModalService.setComponent(null);
-    expect(ModalService.component).toBe(null);
+    ModalService.mount(null);
+    expect(ModalService.panel).toBe(null);
     fireEvent.press(application.getByTestId(ShowSingleModalTestId));
     expect(application).toMatchSnapshot();
   });

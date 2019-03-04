@@ -106,7 +106,7 @@ export class Modal extends React.Component<Props> {
 
   private onStartShouldSetResponderCapture = (): boolean => false;
 
-  private createComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
+  private renderComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
     return React.cloneElement(source, {
       ...source.props,
       onCloseModal: this.closeModal,
@@ -119,14 +119,14 @@ export class Modal extends React.Component<Props> {
     });
   };
 
-  private createComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
-    return React.Children.map(source, this.createComponentChild);
+  private renderComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
+    return React.Children.map(source, this.renderComponentChild);
   };
 
   private renderComponent = (): React.ReactElement<ViewProps> => {
-    const { style, animationType, children, isBackDropAllowed, ...derivedProps } = this.props;
+    const { animationType, children, isBackDropAllowed, ...derivedProps } = this.props;
     const animationStyle: StyleType = this.getAnimationStyle(animationType);
-    const componentChildren: React.ReactElement<any>[] = this.createComponentChildren(children);
+    const componentChildren: React.ReactElement<any>[] = this.renderComponentChildren(children);
 
     const dialog: React.ReactElement<ViewProps> =
       <Animated.View
@@ -134,7 +134,6 @@ export class Modal extends React.Component<Props> {
         style={[styles.container, animationStyle]}>
         {componentChildren}
       </Animated.View>;
-
     return isBackDropAllowed ? (
       React.cloneElement(dialog, {
         onStartShouldSetResponder: this.onStartShouldSetResponder,
