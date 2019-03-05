@@ -4,16 +4,15 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   alignment="left"
-  appearance="default"
+  appearance="filled"
   dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
-  status="primary"
   style={
     Array [
       Object {
+        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
@@ -47,7 +46,7 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   alignment="left"
-  appearance="default"
+  appearance="filled"
   dispatch={[Function]}
   icon={
     Object {
@@ -57,11 +56,10 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
-  status="primary"
   style={
     Array [
       Object {
+        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
@@ -98,10 +96,10 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
     style={
       Array [
         Object {
-          "height": 14,
+          "height": 13,
           "marginHorizontal": 4,
           "tintColor": "#ffffff",
-          "width": 14,
+          "width": 13,
         },
         Object {},
       ]
@@ -114,7 +112,7 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   alignment="left"
-  appearance="default"
+  appearance="filled"
   dispatch={[Function]}
   icon={
     Object {
@@ -124,11 +122,10 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
-  status="primary"
   style={
     Array [
       Object {
+        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
@@ -165,10 +162,10 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
     style={
       Array [
         Object {
-          "height": 14,
+          "height": 13,
           "marginHorizontal": 4,
           "tintColor": "#ffffff",
-          "width": 14,
+          "width": 13,
         },
         Object {},
       ]
@@ -196,16 +193,15 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   alignment="left"
-  appearance="default"
+  appearance="filled"
   dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
-  status="primary"
   style={
     Array [
       Object {
+        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
@@ -255,16 +251,15 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   alignment="left"
-  appearance="default"
+  appearance="filled"
   dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
-  status="primary"
   style={
     Array [
       Object {
+        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,

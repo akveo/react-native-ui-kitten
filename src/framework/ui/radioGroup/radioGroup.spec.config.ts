@@ -5,7 +5,23 @@ export const mapping: ThemeMappingType = {
   'Radio': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'mapping': {
+        'width': {
+          'type': 'number',
+        },
+        'height': {
+          'type': 'number',
+        },
+        'borderRadius': {
+          'type': 'number',
+        },
+        'borderWidth': {
+          'type': 'number',
+        },
+        'borderColor': {
+          'type': 'color',
+        },
+      },
       'appearances': {
         'default': {
           'default': true,
@@ -52,16 +68,24 @@ export const mapping: ThemeMappingType = {
         'mapping': {
           'borderWidth': 2,
           'borderColor': 'gray-primary',
-          'selectColor': 'transparent',
-          'highlightColor': 'transparent',
+          'select': {
+            'backgroundColor': 'transparent',
+          },
+          'highlight': {
+            'backgroundColor': 'transparent',
+          },
           'state': {
             'active': {
               'borderColor': 'gray-dark',
-              'highlightColor': 'gray-light',
+              'highlight': {
+                'backgroundColor': 'gray-light',
+              },
             },
             'checked': {
               'borderColor': 'blue-primary',
-              'selectColor': 'blue-primary',
+              'select': {
+                'backgroundColor': 'blue-primary',
+              },
             },
             'disabled': {
               'borderColor': 'gray-light',
@@ -70,7 +94,9 @@ export const mapping: ThemeMappingType = {
               'borderColor': 'blue-dark',
             },
             'checked.disabled': {
-              'selectColor': 'gray-primary',
+              'select': {
+                'backgroundColor': 'gray-primary',
+              },
             },
           },
         },
@@ -82,7 +108,9 @@ export const mapping: ThemeMappingType = {
                 'state': {
                   'checked': {
                     'borderColor': 'pink-primary',
-                    'selectColor': 'pink-primary',
+                    'select': {
+                      'backgroundColor': 'pink-primary',
+                    },
                   },
                   'checked.active': {
                     'borderColor': 'pink-primary',
@@ -94,23 +122,53 @@ export const mapping: ThemeMappingType = {
           'size': {
             'small': {
               'mapping': {
-                'size': 30,
-                'innerSize': 20,
-                'highlightSize': 50,
+                'width': 30,
+                'height': 30,
+                'borderRadius': 15,
+                'select': {
+                  'width': 20,
+                  'height': 20,
+                  'borderRadius': 10,
+                },
+                'highlight': {
+                  'width': 50,
+                  'height': 50,
+                  'borderRadius': 25,
+                },
               },
             },
             'medium': {
               'mapping': {
-                'size': 36,
-                'innerSize': 24,
-                'highlightSize': 60,
+                'width': 36,
+                'height': 36,
+                'borderRadius': 18,
+                'select': {
+                  'width': 24,
+                  'height': 24,
+                  'borderRadius': 12,
+                },
+                'highlight': {
+                  'width': 60,
+                  'height': 60,
+                  'borderRadius': 30,
+                },
               },
             },
             'large': {
               'mapping': {
-                'size': 42,
-                'innerSize': 28,
-                'highlightSize': 70,
+                'width': 42,
+                'height': 42,
+                'borderRadius': 21,
+                'select': {
+                  'width': 28,
+                  'height': 28,
+                  'borderRadius': 14,
+                },
+                'highlight': {
+                  'width': 70,
+                  'height': 70,
+                  'borderRadius': 35,
+                },
               },
             },
           },

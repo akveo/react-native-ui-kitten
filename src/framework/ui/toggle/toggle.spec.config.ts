@@ -5,7 +5,29 @@ export const mapping: ThemeMappingType = {
   'Toggle': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'mapping': {
+        'width': {
+          'type': 'number',
+        },
+        'height': {
+          'type': 'number',
+        },
+        'borderRadius': {
+          'type': 'number',
+        },
+        'borderWidth': {
+          'type': 'number',
+        },
+        'offsetValue': {
+          'type': 'number',
+        },
+        'tintColor': {
+          'type': 'color',
+        },
+        'borderColor': {
+          'type': 'color',
+        },
+      },
       'appearances': {
         'default': {
           'default': true,
@@ -51,16 +73,22 @@ export const mapping: ThemeMappingType = {
       'default': {
         'mapping': {
           'offsetValue': 20,
-          'thumbColor': '#ffffff',
           'tintColor': 'gray-light',
-          'onTintColor': 'blue-primary',
-          'highlightColor': 'transparent',
+          'borderColor': 'blue-primary',
+          'thumb': {
+            'backgroundColor': '#ffffff',
+          },
+          'highlight': {
+            'backgroundColor': 'transparent',
+          },
           'state': {
             'active': {
-              'highlightColor': '#e5e7ea',
+              'highlight': {
+                'backgroundColor': '#e5e7ea',
+              },
             },
             'disabled': {
-              'onTintColor': 'gray-dark',
+              'borderColor': 'gray-dark',
             },
           },
         },
@@ -69,7 +97,7 @@ export const mapping: ThemeMappingType = {
             'error': {
               'mapping': {
                 'tintColor': '#FFD6D9',
-                'onTintColor': 'pink-primary',
+                'borderColor': 'pink-primary',
                 'state': {
                   'disabled': {
                     'tintColor': 'gray-light',
@@ -81,29 +109,41 @@ export const mapping: ThemeMappingType = {
           'size': {
             'small': {
               'mapping': {
-                'borderWidth': 0.5,
-                'height': 22,
                 'width': 38,
-                'highlightWidth': 48,
-                'highlightHeight': 32,
+                'height': 22,
+                'borderRadius': 11,
+                'borderWidth': 0.5,
+                'highlight': {
+                  'width': 48,
+                  'height': 32,
+                  'borderRadius': 16,
+                },
               },
             },
             'medium': {
               'mapping': {
-                'borderWidth': 1.5,
-                'height': 32,
                 'width': 52,
-                'highlightWidth': 62,
-                'highlightHeight': 42,
+                'height': 32,
+                'borderRadius': 16,
+                'borderWidth': 1.5,
+                'highlight': {
+                  'width': 62,
+                  'height': 42,
+                  'borderRadius': 21,
+                },
               },
             },
             'large': {
               'mapping': {
-                'borderWidth': 2,
-                'height': 42,
                 'width': 72,
-                'highlightWidth': 82,
-                'highlightHeight': 52,
+                'height': 42,
+                'borderRadius': 21,
+                'borderWidth': 2,
+                'highlight': {
+                  'width': 82,
+                  'height': 52,
+                  'borderRadius': 26,
+                },
               },
             },
           },

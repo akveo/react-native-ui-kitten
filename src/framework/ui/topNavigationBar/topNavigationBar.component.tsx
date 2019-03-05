@@ -26,36 +26,31 @@ export type Props = TopNavigationBarProps & StyledComponentProps & ViewProps;
 export class TopNavigationBar extends React.Component<Props> {
 
   private getComponentStyle = (style: StyleType): StyleType => {
+    const { title, subtitle, textAlign, ...container } = style;
+    const isCentered: boolean = textAlign === 'center';
+
     return {
       container: {
-        backgroundColor: style.backgroundColor,
-        height: style.height,
-        paddingTop: style.paddingTop,
-        paddingBottom: style.paddingBottom,
-        paddingHorizontal: style.paddingHorizontal,
+        ...container,
       },
-      titleContainer: style['title.centered'] ? {
+      titleContainer: isCentered ? {
         flex: 3,
         alignItems: 'center',
       } : {
         flex: 1,
-        paddingHorizontal: style.paddingHorizontal,
+        paddingHorizontal: container.paddingHorizontal,
       },
-      leftControlContainer: style['title.centered'] ? {
+      leftControlContainer: isCentered ? {
         flex: 1,
       } : null,
-      rightControlsContainer: style['title.centered'] ? {
+      rightControlsContainer: isCentered ? {
         flex: 1,
       } : null,
       title: {
-        color: style['title.color'],
-        fontSize: style['title.fontSize'],
-        fontWeight: style['title.fontWeight'],
+        ...title,
       },
       subtitle: {
-        color: style['subtitle.color'],
-        fontSize: style['subtitle.fontSize'],
-        fontWeight: style['subtitle.fontWeight'],
+        ...subtitle,
       },
     };
   };
@@ -111,6 +106,7 @@ export class TopNavigationBar extends React.Component<Props> {
 const strictStyles = StyleSheet.create({
   container: {
     flex: 1,
+    textAlign: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

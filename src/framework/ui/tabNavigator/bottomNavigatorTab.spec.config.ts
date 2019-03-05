@@ -18,11 +18,15 @@ export const mapping: ThemeMappingType = {
     'appearance': {
       'default': {
         'mapping': {
-          'icon.marginBottom': 5,
-          'icon.width': 40,
-          'icon.height': 40,
-          'title.color': 'gray-dark',
-          'title.selectedColor': 'blue-primary',
+          'icon': {
+            'width': 40,
+            'height': 40,
+            'marginBottom': 5,
+          },
+          'text': {
+            'color': 'gray-dark',
+            'selectedColor': 'blue-primary',
+          },
         },
       },
     },

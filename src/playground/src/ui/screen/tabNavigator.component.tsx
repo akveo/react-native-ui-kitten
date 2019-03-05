@@ -18,6 +18,8 @@ import {
   BottomNavigatorTab,
 } from '@kitten/ui';
 
+const APPEARANCE: string = 'default';
+
 const TabScreen1 = (): React.ReactElement<{}> => <View><Text>Tab Screen 1</Text></View>;
 const TabScreen2 = (): React.ReactElement<{}> => <View><Text>Tab Screen 2</Text></View>;
 const TabScreen3 = (): React.ReactElement<{}> => <View><Text>Tab Screen 3</Text></View>;
@@ -68,7 +70,7 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
 
   return (
     <BottomTabNavigatorComponent
-      appearance='highlight'
+      appearance={APPEARANCE}
       selectedIndex={index}
       onSelect={(selectedIndex: number) =>
         navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>

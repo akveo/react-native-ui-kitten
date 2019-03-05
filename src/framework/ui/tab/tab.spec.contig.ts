@@ -43,17 +43,8 @@ export const mapping: ThemeMappingType = {
     'meta': {
       'scope': 'all',
       'mapping': {
-        'barSize': {
+        'height': {
           'type': 'number',
-        },
-        'indicatorSize': {
-          'type': 'number',
-        },
-        'indicatorBorderRadius': {
-          'type': 'number',
-        },
-        'indicatorColor': {
-          'type': 'color',
         },
       },
       'appearances': {
@@ -67,10 +58,12 @@ export const mapping: ThemeMappingType = {
     'appearance': {
       'default': {
         'mapping': {
-          'barSize': 42,
-          'indicatorSize': 4,
-          'indicatorBorderRadius': 2,
-          'indicatorColor': 'blue-primary',
+          'height': 42,
+          'indicator': {
+            'height': 4,
+            'borderRadius': 2,
+            'backgroundColor': 'blue-primary',
+          },
         },
       },
     },

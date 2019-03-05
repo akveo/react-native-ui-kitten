@@ -41,18 +41,22 @@ export const mapping: ThemeMappingType = {
           'paddingBottom': 12,
           'paddingHorizontal': 16,
           'backgroundColor': 'blue-primary',
-          'title.centered': false,
-          'title.color': 'white',
-          'title.fontSize': 16,
-          'title.fontWeight': '600',
-          'subtitle.color': 'white',
-          'subtitle.fontSize': 12,
-          'subtitle.fontWeight': '400',
+          'title': {
+            'color': 'text-primary-inverse',
+            'fontSize': 16,
+            'fontWeight': '600',
+          },
+          'subtitle': {
+            'color': 'text-primary-inverse',
+            'fontSize': 12,
+            'fontWeight': '400',
+          },
+          'textAlign': 'start',
         },
       },
       'title-centered': {
         'mapping': {
-          'title.centered': true,
+          'textAlign': 'center',
         },
       },
     },
@@ -99,4 +103,5 @@ export const theme: ThemeType = {
   'gray-dark': '#8992A3',
   'gray-highlight': '#EDF0F5',
   'pink-primary': '#FF3D71',
+  'text-primary-inverse': '#ffffff',
 };

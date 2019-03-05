@@ -5,8 +5,7 @@ export const mapping: ThemeMappingType = {
   'Layout': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {
-      },
+      'mapping': {},
       'appearances': {
         'default': {
           'default': true,
