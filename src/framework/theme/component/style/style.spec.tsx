@@ -39,7 +39,7 @@ describe('@style: ui component checks', () => {
   class ComplexStyleProvider extends React.Component<ComplexStyleProviderProps & StyleProviderProps> {
 
     state = {
-      mappings: [],
+      mappings: {},
       styles: {},
       theme: {},
     };

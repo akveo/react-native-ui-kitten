@@ -115,7 +115,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "borderColor": "#2541CC",
+          "borderColor": "#3366FF",
           "borderRadius": 18,
           "borderWidth": 2,
           "height": 36,

@@ -14,15 +14,15 @@ import {
 } from './application.spec.config';
 import {
   ThemeMappingType,
-  ThemeMapType,
-} from 'eva/packages/common';
+  ThemeStyleType,
+} from 'eva/packages/types';
 import { ThemeType } from '../../type';
 
 describe('@app: application wrapper check', () => {
 
   interface ApplicationState {
     mapping: ThemeMappingType;
-    styles: ThemeMapType;
+    styles: ThemeStyleType;
     theme: ThemeType;
   }
 

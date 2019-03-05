@@ -1,29 +1,36 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 
 export const mapping: ThemeMappingType = {
-  BottomTabNavigator: {
-    meta: {
-      variants: {},
-      states: [],
-    },
-    appearance: {
-      default: {
-        mapping: {
-          backgroundColor: 'transparent',
-          paddingVertical: 16,
-          color: 'gray-dark',
-          selectedColor: 'blue-primary',
-          borderTopColor: 'gray-primary',
-          borderTopWidth: 1,
-          highlightHeight: 3,
-          showHighlight: false,
+  'BottomTabNavigator': {
+    'meta': {
+      'scope': 'mobile',
+      'mapping': {},
+      'appearances': {
+        'default': {
+          'default': true,
         },
       },
-      highlight: {
-        mapping: {
-          showHighlight: true,
+      'variants': {},
+      'states': {},
+    },
+    'appearance': {
+      'default': {
+        'mapping': {
+          'backgroundColor': 'transparent',
+          'paddingVertical': 16,
+          'color': 'gray-dark',
+          'selectedColor': 'blue-primary',
+          'borderTopColor': 'gray-primary',
+          'borderTopWidth': 1,
+          'highlightHeight': 3,
+          'showHighlight': false,
+        },
+      },
+      'highlight': {
+        'mapping': {
+          'showHighlight': true,
         },
       },
     },

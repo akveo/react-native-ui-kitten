@@ -1,47 +1,100 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
   'Button': {
     'meta': {
-      'variants': {
-        'size': [
-          'tiny',
-          'small',
-          'medium',
-          'large',
-          'giant',
-        ],
-        'status': [
-          'primary',
-          'success',
-          'info',
-          'warning',
-          'danger',
-        ],
+      'scope': 'all',
+      'mapping': {
+        'highlightColor': {
+          'type': 'color',
+        },
+        'innerSize': {
+          'type': 'number',
+        },
+        'selectColor': {
+          'type': 'color',
+        },
+        'borderColor': {
+          'type': 'color',
+        },
+        'highlightSize': {
+          'type': 'number',
+        },
+        'borderWidth': {
+          'type': 'color',
+        },
+        'size': {
+          'type': 'number',
+        },
       },
-      'states': [
-        'disabled',
-        'active',
-      ],
+      'appearances': {
+        'filled': {
+          'default': true,
+        },
+        'outline': {
+          'default': false,
+        },
+      },
+      'variants': {
+        'status': {
+          'primary': {
+            'default': true,
+          },
+          'success': {
+            'default': false,
+          },
+          'info': {
+            'default': false,
+          },
+          'warning': {
+            'default': false,
+          },
+          'danger': {
+            'default': false,
+          },
+        },
+        'size': {
+          'tiny': {
+            'default': false,
+          },
+          'small': {
+            'default': false,
+          },
+          'medium': {
+            'default': true,
+          },
+          'large': {
+            'default': false,
+          },
+          'giant': {
+            'default': true,
+          },
+        },
+      },
+      'states': {
+        'disabled': {
+          'default': false,
+          'priority': 0,
+          'scope': 'all',
+        },
+        'active': {
+          'default': false,
+          'priority': 1,
+          'scope': 'all',
+        },
+      },
     },
     'appearance': {
-      'default': {
+      'filled': {
         'mapping': {
-          'minHeight': 24,
-          'minWidth': 24,
-          'padding': 4,
           'borderRadius': 6,
           'text': {
             'color': 'text-primary-inverse',
-            'fontSize': 12,
             'fontWeight': '800',
-            'marginHorizontal': 4,
           },
           'icon': {
             'tintColor': '#ffffff',
-            'width': 14,
-            'height': 14,
             'marginHorizontal': 4,
           },
         },
@@ -156,11 +209,11 @@ export const mapping: ThemeMappingType = {
                   'fontSize': 13,
                   'marginHorizontal': 4.5,
                 },
-              },
-              'icon': {
-                'width': 14,
-                'height': 14,
-                'marginHorizontal': 4.5,
+                'icon': {
+                  'width': 14,
+                  'height': 14,
+                  'marginHorizontal': 4.5,
+                },
               },
             },
             'giant': {
@@ -311,145 +364,55 @@ export const mapping: ThemeMappingType = {
           },
         },
       },
-      'ghost': {
-        'mapping': {},
-        'variant': {
-          'status': {
-            'primary': {
-              'mapping': {
-                'backgroundColor': 'transparent',
-                'text': {
-                  'color': '#2196F3',
-                },
-                'icon': {
-                  'tintColor': '#2196F3',
-                },
-                'state': {
-                  'active': {
-                    'backgroundColor': 'transparent',
-                    'text': {
-                      'color': '#1E88E5',
-                    },
-                    'icon': {
-                      'tintColor': '#1E88E5',
-                    },
-                  },
-                },
-              },
-            },
-            'success': {
-              'mapping': {
-                'backgroundColor': 'transparent',
-                'text': {
-                  'color': '#4CAF50',
-                },
-                'icon': {
-                  'tintColor': '#4CAF50',
-                },
-                'state': {
-                  'active': {
-                    'backgroundColor': 'transparent',
-                    'text': {
-                      'color': '#43A047',
-                    },
-                    'icon': {
-                      'tintColor': '#43A047',
-                    },
-                  },
-                },
-              },
-            },
-            'info': {
-              'mapping': {
-                'backgroundColor': 'transparent',
-                'text': {
-                  'color': '#03A9F4',
-                },
-                'icon': {
-                  'tintColor': '#03A9F4',
-                },
-                'state': {
-                  'active': {
-                    'backgroundColor': 'transparent',
-                    'text': {
-                      'color': '#039BE5',
-                    },
-                    'icon': {
-                      'tintColor': '#039BE5',
-                    },
-                  },
-                },
-              },
-            },
-            'warning': {
-              'mapping': {
-                'backgroundColor': 'transparent',
-                'text': {
-                  'color': '#FFC107',
-                },
-                'icon': {
-                  'tintColor': '#FFC107',
-                },
-                'state': {
-                  'active': {
-                    'backgroundColor': 'transparent',
-                    'text': {
-                      'color': '#FFB300',
-                    },
-                    'icon': {
-                      'tintColor': '#FFB300',
-                    },
-                  },
-                },
-              },
-            },
-            'danger': {
-              'mapping': {
-                'backgroundColor': 'transparent',
-                'text': {
-                  'color': '#F44336',
-                },
-                'icon': {
-                  'tintColor': '#F44336',
-                },
-                'state': {
-                  'active': {
-                    'backgroundColor': 'transparent',
-                    'text': {
-                      'color': '#E53935',
-                    },
-                    'icon': {
-                      'tintColor': '#E53935',
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
     },
   },
   'Text': {
     'meta': {
-      'variants': {
-        'category': [
-          'h1',
-          'h2',
-          'h3',
-          'h4',
-          'h5',
-          'h6',
-          'body',
-        ],
+      'scope': 'all',
+      'mapping': {
+        'color': {
+          'type': 'color',
+        },
+        'fontSize': {
+          'type': 'number',
+        },
       },
-      'states': [],
+      'appearances': {
+        'primary': {
+          'default': true,
+        },
+      },
+      'variants': {
+        'category': {
+          'h1': {
+            'default': false,
+          },
+          'h2': {
+            'default': false,
+          },
+          'h3': {
+            'default': false,
+          },
+          'h4': {
+            'default': false,
+          },
+          'h5': {
+            'default': false,
+          },
+          'h6': {
+            'default': false,
+          },
+          'body': {
+            'default': true,
+          },
+        },
+      },
+      'states': {},
     },
     'appearance': {
-      'default': {
+      'primary': {
         'mapping': {
           'color': 'text-primary',
-          'fontSize': 16,
         },
         'variant': {
           'category': {

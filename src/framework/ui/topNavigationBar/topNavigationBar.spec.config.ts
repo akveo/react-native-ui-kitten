@@ -1,20 +1,46 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
-  TopNavigationBar: {
-    meta: {
-      variants: {},
-      states: [],
+  'TopNavigationBar': {
+    'meta': {
+      'scope': 'mobile',
+      'mapping': {
+        'height': {
+          'type': 'number',
+        },
+        'paddingTop': {
+          'type': 'number',
+        },
+        'paddingBottom': {
+          'type': 'number',
+        },
+        'paddingHorizontal': {
+          'type': 'number',
+        },
+        'backgroundColor': {
+          'type': 'color',
+        },
+      },
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+        'title-centered': {
+          'default': false,
+        },
+      },
+      'variants': {},
+      'states': {},
     },
-    appearance: {
-      default: {
-        mapping: {
-          height: 46,
-          paddingTop: 4,
-          paddingBottom: 12,
-          paddingHorizontal: 16,
-          backgroundColor: 'blue-primary',
+    'appearance': {
+      'default': {
+        'mapping': {
+          'height': 46,
+          'paddingTop': 4,
+          'paddingBottom': 12,
+          'paddingHorizontal': 16,
+          'backgroundColor': 'blue-primary',
           'title.centered': false,
           'title.color': 'white',
           'title.fontSize': 16,
@@ -25,23 +51,40 @@ export const mapping: ThemeMappingType = {
         },
       },
       'title-centered': {
-        mapping: {
+        'mapping': {
           'title.centered': true,
         },
       },
     },
   },
-  TopNavigationBarAction: {
-    meta: {
-      variants: {},
-      states: [],
+  'TopNavigationBarAction': {
+    'meta': {
+      'scope': 'mobile',
+      'mapping': {
+        'width': {
+          'type': 'number',
+        },
+        'height': {
+          'type': 'number',
+        },
+        'marginRight': {
+          'type': 'number',
+        },
+      },
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {},
+      'states': {},
     },
-    appearance: {
-      default: {
-        mapping: {
-          width: 25,
-          height: 25,
-          marginRight: 8,
+    'appearance': {
+      'default': {
+        'mapping': {
+          'width': 25,
+          'height': 25,
+          'marginRight': 8,
         },
       },
     },

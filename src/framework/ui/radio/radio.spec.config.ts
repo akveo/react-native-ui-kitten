@@ -1,84 +1,116 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
-  Radio: {
-    meta: {
-      variants: {
-        status: [
-          'error',
-        ],
-        size: [
-          'small',
-          'big',
-        ],
+  'Radio': {
+    'meta': {
+      'scope': 'all',
+      'mapping': {},
+      'appearances': {
+        'default': {
+          'default': true,
+        },
       },
-      states: [
-        'checked',
-        'disabled',
-        'active',
-      ],
+      'variants': {
+        'status': {
+          'error': {
+            'default': false,
+          },
+        },
+        'size': {
+          'small': {
+            'default': false,
+          },
+          'medium': {
+            'default': true,
+          },
+          'large': {
+            'default': false,
+          },
+        },
+      },
+      'states': {
+        'checked': {
+          'default': false,
+          'priority': 0,
+          'scope': 'all',
+        },
+        'disabled': {
+          'default': false,
+          'priority': 1,
+          'scope': 'all',
+        },
+        'active': {
+          'default': false,
+          'priority': 2,
+          'scope': 'all',
+        },
+      },
     },
-    appearance: {
-      default: {
-        mapping: {
-          size: 36,
-          innerSize: 24,
-          highlightSize: 60,
-          borderWidth: 2,
-          borderColor: 'gray-primary',
-          selectColor: 'transparent',
-          highlightColor: 'transparent',
-          state: {
-            active: {
-              borderColor: 'gray-dark',
-              highlightColor: 'gray-light',
+    'appearance': {
+      'default': {
+        'mapping': {
+          'borderWidth': 2,
+          'borderColor': 'gray-primary',
+          'selectColor': 'transparent',
+          'highlightColor': 'transparent',
+          'state': {
+            'active': {
+              'borderColor': 'gray-dark',
+              'highlightColor': 'gray-light',
             },
-            checked: {
-              borderColor: 'blue-primary',
-              selectColor: 'blue-primary',
+            'checked': {
+              'borderColor': 'blue-primary',
+              'selectColor': 'blue-primary',
             },
-            disabled: {
-              borderColor: 'gray-light',
+            'disabled': {
+              'borderColor': 'gray-light',
             },
-            'active.checked': {
-              borderColor: 'blue-dark',
+            'checked.active': {
+              'borderColor': 'blue-dark',
             },
             'checked.disabled': {
-              selectColor: 'gray-primary',
+              'selectColor': 'gray-primary',
             },
           },
         },
-        variant: {
-          status: {
-            error: {
-              mapping: {
-                borderColor: 'pink-primary',
-                state: {
-                  checked: {
-                    borderColor: 'pink-primary',
-                    selectColor: 'pink-primary',
+        'variant': {
+          'status': {
+            'error': {
+              'mapping': {
+                'borderColor': 'pink-primary',
+                'state': {
+                  'checked': {
+                    'borderColor': 'pink-primary',
+                    'selectColor': 'pink-primary',
                   },
-                  'active.checked': {
-                    borderColor: 'pink-primary',
+                  'checked.active': {
+                    'borderColor': 'pink-primary',
                   },
                 },
               },
             },
           },
-          size: {
-            big: {
-              mapping: {
-                size: 42,
-                innerSize: 28,
-                highlightSize: 70,
+          'size': {
+            'small': {
+              'mapping': {
+                'size': 30,
+                'innerSize': 20,
+                'highlightSize': 50,
               },
             },
-            small: {
-              mapping: {
-                size: 30,
-                innerSize: 20,
-                highlightSize: 50,
+            'medium': {
+              'mapping': {
+                'size': 36,
+                'innerSize': 24,
+                'highlightSize': 60,
+              },
+            },
+            'large': {
+              'mapping': {
+                'size': 42,
+                'innerSize': 28,
+                'highlightSize': 70,
               },
             },
           },
