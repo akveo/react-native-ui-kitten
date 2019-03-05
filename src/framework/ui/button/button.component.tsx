@@ -42,6 +42,7 @@ export class Button extends React.Component<Props> {
   static defaultProps: Partial<Props> = {
     status: 'primary',
     size: 'medium',
+    alignment: 'left',
   };
 
   private onPress = (event: GestureResponderEvent) => {
@@ -124,7 +125,7 @@ export class Button extends React.Component<Props> {
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[style, container, strictStyles.container]}
+        style={[container, style, strictStyles.container]}
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
