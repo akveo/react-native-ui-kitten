@@ -11,9 +11,6 @@ exports[`@modal component checks * component styled with mappings 1`] = `
   }
 >
   <View
-    animationDuration={300}
-    appearance="default"
-    dispatch={[Function]}
     pointerEvents="none"
     style={
       Object {
@@ -24,33 +21,15 @@ exports[`@modal component checks * component styled with mappings 1`] = `
         "top": 0,
       }
     }
-    theme={
-      Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-      }
-    }
-    themedStyle={
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "#3366FF",
-        "borderRadius": 3,
-        "borderWidth": 1,
-        "paddingHorizontal": 16,
-        "paddingVertical": 8,
-      }
-    }
-    visible={true}
   />
   <View
     animationDuration={300}
     appearance="default"
     dispatch={[Function]}
+    onResponderRelease={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={Object {}}
     theme={
       Object {
@@ -110,6 +89,10 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={[MockFunction]}
+    onResponderRelease={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={Object {}}
     visible={true}
   >
@@ -204,6 +187,10 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
         ],
       }
     }
+    onResponderRelease={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={Object {}}
     visible={true}
   >
@@ -284,6 +271,10 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={[MockFunction]}
+    onResponderRelease={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={Object {}}
     visible={true}
   >
@@ -338,6 +329,10 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
         ],
       }
     }
+    onResponderRelease={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={Object {}}
     visible={true}
   >
@@ -364,9 +359,6 @@ exports[`@modal component checks * modal component renders properly 1`] = `
   }
 >
   <View
-    animationDuration={300}
-    identifier="modal-test-identifier-1"
-    onCloseModal={[Function]}
     pointerEvents="none"
     style={
       Object {
@@ -377,12 +369,15 @@ exports[`@modal component checks * modal component renders properly 1`] = `
         "top": 0,
       }
     }
-    visible={true}
   />
   <View
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={[Function]}
+    onResponderRelease={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={Object {}}
     visible={true}
   >
@@ -467,6 +462,10 @@ exports[`@modal component checks * with animations 1`] = `
       animationDuration={500}
       identifier="modal-test-identifier-1"
       onCloseModal={[Function]}
+      onResponderRelease={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
+      pointerEvents="box-none"
       style={
         Object {
           "transform": Array [
@@ -559,6 +558,10 @@ exports[`@modal component checks * with animations 2`] = `
       animationDuration={500}
       identifier="modal-test-identifier-1"
       onCloseModal={[Function]}
+      onResponderRelease={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
+      pointerEvents="box-none"
       style={
         Object {
           "opacity": 0,

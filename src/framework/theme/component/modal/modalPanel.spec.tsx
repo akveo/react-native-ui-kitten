@@ -19,7 +19,8 @@ jest.useFakeTimers();
 describe('@modal panel checks', () => {
 
   const showModalTestId: string = '@modal/show';
-  const hideModalTestId: string = '@modal/hide';
+  const hideModalTestIdInner: string = '@modal/hide-inner';
+  const hideModalTestIdOuter: string = '@modal/hide-outer';
 
   interface HooksProps {
     componentDidMount?: () => void;
@@ -27,6 +28,8 @@ describe('@modal panel checks', () => {
   }
 
   class ModalPanelTest extends React.Component<HooksProps> {
+
+    private modalId: string = '';
 
     componentDidMount(): void {
       this.props.componentDidMount && this.props.componentDidMount();
@@ -37,7 +40,11 @@ describe('@modal panel checks', () => {
     }
 
     showModal() {
-      ModalService.show(<TestModal onRequestClose={() => 1}/>, true);
+      this.modalId = ModalService.show(<TestModal onRequestClose={() => 1}/>, true);
+    }
+
+    hideModal() {
+      ModalService.hide(this.modalId);
     }
 
     render() {
@@ -50,6 +57,11 @@ describe('@modal panel checks', () => {
             title='Open Modal'
             onPress={() => this.showModal()}
             testID={showModalTestId}
+          />
+          <Button
+            title='Hide Modal'
+            onPress={() => this.hideModal()}
+            testID={hideModalTestIdOuter}
           />
         </ModalPanel>
       );
@@ -65,7 +77,7 @@ describe('@modal panel checks', () => {
           <Button
             title='Close Modal'
             onPress={this.props.onCloseModal}
-            testID={hideModalTestId}
+            testID={hideModalTestIdInner}
           />
         </View>
       );
@@ -101,10 +113,17 @@ describe('@modal panel checks', () => {
     expect(componentWillUnmount).toHaveBeenCalled();
   });
 
-  it('* close modal checking', () => {
+  it('* close modal checking inner', () => {
     const application = render(<ModalPanelTest/>);
     fireEvent.press(application.getByTestId(showModalTestId));
-    fireEvent.press(application.getByTestId(hideModalTestId));
+    fireEvent.press(application.getByTestId(hideModalTestIdInner));
+    expect(application).toMatchSnapshot();
+  });
+
+  it('* close modal checking outer', () => {
+    const application = render(<ModalPanelTest/>);
+    fireEvent.press(application.getByTestId(showModalTestId));
+    fireEvent.press(application.getByTestId(hideModalTestIdOuter));
     expect(application).toMatchSnapshot();
   });
 
