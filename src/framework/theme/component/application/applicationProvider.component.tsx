@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   ThemeMappingType,
-  ThemeMapType,
-} from 'eva/packages/common';
+  ThemeStyleType,
+} from 'eva/packages/types';
 import { MappingProviderProps } from '../mapping';
 import { ThemeProviderProps } from '../theme';
 import { ThemeType } from '../../type';
@@ -17,7 +17,7 @@ export type Props = MappingProviderProps & ThemeProviderProps & ApplicationProvi
 
 interface State {
   mapping: ThemeMappingType;
-  styles: ThemeMapType;
+  styles: ThemeStyleType;
   theme: ThemeType;
 }
 

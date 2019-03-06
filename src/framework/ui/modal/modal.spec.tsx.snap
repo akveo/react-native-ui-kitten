@@ -16,7 +16,7 @@ exports[`@modal component checks * component styled with mappings 1`] = `
     style={
       Object {
         "backgroundColor": "transparent",
-        "borderColor": "#3366FF",
+        "borderColor": "#2541CC",
         "borderRadius": 3,
         "borderWidth": 1,
         "paddingHorizontal": 16,

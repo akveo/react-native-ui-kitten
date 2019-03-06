@@ -1,30 +1,77 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '../../type';
 
 export const mapping: ThemeMappingType = {
   Test: {
     meta: {
-      variants: {
-        status: [
-          'success',
-          'info',
-        ],
-        size: [
-          'small',
-          'big',
-        ],
+      scope: 'mobile',
+      mapping: {
+        size: {
+          type: 'number',
+        },
+        innerSize: {
+          type: 'number',
+        },
+        borderWidth: {
+          type: 'number',
+        },
+        borderColor: {
+          type: 'color',
+        },
+        selectColor: {
+          type: 'color',
+        },
       },
-      states: [
-        'checked',
-        'disabled',
-        'active',
-      ],
+      appearances: {
+        default: {
+          default: true,
+        },
+        custom: {
+          default: false,
+        },
+      },
+      variants: {
+        status: {
+          success: {
+            default: false,
+          },
+          info: {
+            default: false,
+          },
+        },
+        size: {
+          small: {
+            default: false,
+          },
+          medium: {
+            default: true,
+          },
+          large: {
+            default: false,
+          },
+        },
+      },
+      states: {
+        checked: {
+          default: false,
+          priority: 0,
+          scope: 'mobile',
+        },
+        disabled: {
+          default: false,
+          priority: 1,
+          scope: 'mobile',
+        },
+        active: {
+          default: false,
+          priority: 2,
+          scope: 'mobile',
+        },
+      },
     },
     appearance: {
       default: {
         mapping: {
-          size: 36,
-          innerSize: 24,
           borderWidth: 2,
           borderColor: 'grayPrimary',
           selectColor: 'transparent',
@@ -77,16 +124,22 @@ export const mapping: ThemeMappingType = {
             },
           },
           size: {
-            big: {
-              mapping: {
-                size: 42,
-                innerSize: 28,
-              },
-            },
             small: {
               mapping: {
                 size: 30,
                 innerSize: 20,
+              },
+            },
+            medium: {
+              mapping: {
+                size: 36,
+                innerSize: 24,
+              },
+            },
+            large: {
+              mapping: {
+                size: 42,
+                innerSize: 28,
               },
             },
           },
@@ -115,8 +168,11 @@ export const mapping: ThemeMappingType = {
   },
   Empty: {
     meta: {
+      scope: 'mobile',
+      mapping: {},
+      appearances: {},
       variants: {},
-      states: [],
+      states: {},
     },
     appearance: {},
   },

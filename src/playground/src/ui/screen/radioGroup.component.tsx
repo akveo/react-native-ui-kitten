@@ -96,7 +96,7 @@ class RadioGroup extends React.Component<Props, State> {
               <RadioComponent
                 style={this.props.themedStyle.component}
                 status='error'
-                size='big'
+                size='large'
               />
             </RadioGroupComponent>
           </View>
