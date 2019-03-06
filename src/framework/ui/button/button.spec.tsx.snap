@@ -3,6 +3,7 @@
 exports[`@button: matches snapshot * appearance * empty 1`] = `
 <TouchableOpacity
   activeOpacity={1}
+  alignment="left"
   appearance="default"
   dispatch={[Function]}
   onPress={[Function]}
@@ -12,7 +13,6 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
   status="primary"
   style={
     Array [
-      undefined,
       Object {
         "borderRadius": 6,
         "flexDirection": "row",
@@ -20,6 +20,7 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
         "minWidth": 24,
         "padding": 4,
       },
+      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -45,6 +46,7 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
 exports[`@button: matches snapshot * appearance * icon 1`] = `
 <TouchableOpacity
   activeOpacity={1}
+  alignment="left"
   appearance="default"
   dispatch={[Function]}
   icon={
@@ -59,7 +61,6 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   status="primary"
   style={
     Array [
-      undefined,
       Object {
         "borderRadius": 6,
         "flexDirection": "row",
@@ -67,6 +68,7 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
         "minWidth": 24,
         "padding": 4,
       },
+      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -111,6 +113,7 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
 exports[`@button: matches snapshot * appearance * icon and text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
+  alignment="left"
   appearance="default"
   dispatch={[Function]}
   icon={
@@ -125,7 +128,6 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   status="primary"
   style={
     Array [
-      undefined,
       Object {
         "borderRadius": 6,
         "flexDirection": "row",
@@ -133,6 +135,7 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
         "minWidth": 24,
         "padding": 4,
       },
+      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -192,6 +195,7 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
 exports[`@button: matches snapshot * appearance * text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
+  alignment="left"
   appearance="default"
   dispatch={[Function]}
   onPress={[Function]}
@@ -201,7 +205,6 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
   status="primary"
   style={
     Array [
-      undefined,
       Object {
         "borderRadius": 6,
         "flexDirection": "row",
@@ -209,6 +212,7 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
         "minWidth": 24,
         "padding": 4,
       },
+      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -250,6 +254,7 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
 exports[`@button: matches snapshot * interaction * stateless 1`] = `
 <TouchableOpacity
   activeOpacity={1}
+  alignment="left"
   appearance="default"
   dispatch={[Function]}
   onPress={[Function]}
@@ -259,7 +264,6 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
   status="primary"
   style={
     Array [
-      undefined,
       Object {
         "borderRadius": 6,
         "flexDirection": "row",
@@ -267,6 +271,7 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
         "minWidth": 24,
         "padding": 4,
       },
+      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",

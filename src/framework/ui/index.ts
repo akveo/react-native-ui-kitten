@@ -4,6 +4,10 @@ import {
   Props as ButtonProps,
 } from './button/button.component';
 import {
+  ButtonGroup as ButtonGroupComponent,
+  Props as ButtonGroupProps,
+} from './buttonGroup/buttonGroup.component';
+import {
   Input as InputComponent,
   Props as InputProps,
 } from './input/input.component';
@@ -85,6 +89,7 @@ import {
 } from './popover/type';
 
 const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
+const ButtonGroup = styled<ButtonGroupComponent, ButtonGroupProps>(ButtonGroupComponent);
 const Input = styled<InputComponent, InputProps>(InputComponent);
 const Text = styled<TextComponent, TextProps>(TextComponent);
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
@@ -105,6 +110,7 @@ const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
   Button,
+  ButtonGroup,
   Input,
   Text,
   Layout,
@@ -124,6 +130,7 @@ export {
   TabView,
   ButtonProps,
   InputProps,
+  ButtonGroupProps,
   CheckBoxProps,
   TabProps,
   TabBarProps,
