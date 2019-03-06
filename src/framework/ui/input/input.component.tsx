@@ -21,7 +21,7 @@ import {
 interface InputProps {
   icon?: ImageSourcePropType;
   status?: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export type Props = InputProps & StyledComponentProps & TextInputProps;
@@ -63,7 +63,7 @@ export class Input extends React.Component<Props> {
       fontWeight,
       letterSpacing,
       textAlign,
-      ...container,
+      ...container
     } = style;
 
     return {
