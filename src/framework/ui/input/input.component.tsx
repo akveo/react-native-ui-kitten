@@ -80,7 +80,7 @@ export class Input extends React.Component<Props> {
     };
   };
 
-  private createImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
+  private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
     const { icon: image } = this.props;
 
     return (
@@ -92,13 +92,13 @@ export class Input extends React.Component<Props> {
     );
   };
 
-  private createComponentChildren = (style: StyleType): React.ReactNode => {
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
     const { icon } = this.props;
 
     const hasIcon: boolean = icon !== undefined;
 
     return [
-      hasIcon ? this.createImageElement(style) : undefined,
+      hasIcon ? this.renderImageElement(style) : undefined,
     ];
   };
 
@@ -107,7 +107,7 @@ export class Input extends React.Component<Props> {
 
     const derivedStyle: StyleType = this.getDerivedStyle(style);
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyle.icon);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyle.icon);
 
     return (
       <View style={[componentStyle.container, derivedStyle.container, strictStyles.container]}>
