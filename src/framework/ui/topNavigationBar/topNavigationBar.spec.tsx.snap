@@ -13,23 +13,53 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -44,7 +74,24 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -60,6 +107,7 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
@@ -83,23 +131,53 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -114,7 +192,24 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -130,6 +225,7 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
@@ -153,23 +249,53 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -184,7 +310,24 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -200,6 +343,7 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
@@ -235,23 +379,53 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -266,7 +440,24 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -282,6 +473,7 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
@@ -304,23 +496,53 @@ exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -335,7 +557,24 @@ exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -351,6 +590,7 @@ exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
@@ -374,23 +614,53 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -405,7 +675,24 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -421,6 +708,7 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
@@ -444,23 +732,53 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -475,7 +793,24 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -491,6 +826,7 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
@@ -513,23 +849,53 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle.color": "white",
-              "subtitle.fontSize": 12,
-              "subtitle.fontWeight": "400",
-              "title.centered": false,
-              "title.color": "white",
-              "title.fontSize": 16,
-              "title.fontWeight": "600",
+              "subtitle": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 12,
+                "fontWeight": "400",
+              },
+              "textAlign": "start",
+              "title": Object {
+                "color": "text-primary-inverse",
+                "fontSize": 16,
+                "fontWeight": "600",
+              },
             },
           },
           "title-centered": Object {
             "mapping": Object {
-              "title.centered": true,
+              "textAlign": "center",
             },
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+            "title-centered": Object {
+              "default": false,
+            },
+          },
+          "mapping": Object {
+            "backgroundColor": Object {
+              "type": "color",
+            },
+            "height": Object {
+              "type": "number",
+            },
+            "paddingBottom": Object {
+              "type": "number",
+            },
+            "paddingHorizontal": Object {
+              "type": "number",
+            },
+            "paddingTop": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -544,7 +910,24 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
           },
         },
         "meta": Object {
-          "states": Array [],
+          "appearances": Object {
+            "default": Object {
+              "default": true,
+            },
+          },
+          "mapping": Object {
+            "height": Object {
+              "type": "number",
+            },
+            "marginRight": Object {
+              "type": "number",
+            },
+            "width": Object {
+              "type": "number",
+            },
+          },
+          "scope": "mobile",
+          "states": Object {},
           "variants": Object {},
         },
       },
@@ -560,6 +943,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >

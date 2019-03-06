@@ -229,6 +229,32 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
   }
 >
   <View
+    animationDuration={200}
+    onLayout={[Function]}
+    positions={3}
+    selectedPosition={1}
+    style={
+      Object {
+        "0": Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        "1": Object {
+          "position": "absolute",
+        },
+        "backgroundColor": "#3366FF",
+        "height": 3,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+        "width": "33.333333333333336%",
+      }
+    }
+  />
+  <View
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -397,6 +423,32 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
   }
 >
   <View
+    animationDuration={200}
+    onLayout={[Function]}
+    positions={3}
+    selectedPosition={1}
+    style={
+      Object {
+        "0": Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        "1": Object {
+          "position": "absolute",
+        },
+        "backgroundColor": "#3366FF",
+        "height": 3,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+        "width": "33.333333333333336%",
+      }
+    }
+  />
+  <View
     accessible={true}
     isTVSelectable={true}
     onResponderGrant={[Function]}
@@ -562,7 +614,34 @@ exports[`@bottom-tab-navigator: component checks * empty 1`] = `
       "pink-primary": "#FF3D71",
     }
   }
-/>
+>
+  <View
+    animationDuration={200}
+    onLayout={[Function]}
+    positions={0}
+    selectedPosition={0}
+    style={
+      Object {
+        "0": Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        "1": Object {
+          "position": "absolute",
+        },
+        "backgroundColor": "#3366FF",
+        "height": 3,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+        "width": "Infinity%",
+      }
+    }
+  />
+</View>
 `;
 
 exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
@@ -613,6 +692,32 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
     }
   }
 >
+  <View
+    animationDuration={200}
+    onLayout={[Function]}
+    positions={3}
+    selectedPosition={1}
+    style={
+      Object {
+        "0": Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        "1": Object {
+          "position": "absolute",
+        },
+        "backgroundColor": "#3366FF",
+        "height": 3,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+        "width": "33.333333333333336%",
+      }
+    }
+  />
   <View
     accessible={true}
     isTVSelectable={true}
@@ -781,6 +886,32 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
     }
   }
 >
+  <View
+    animationDuration={200}
+    onLayout={[Function]}
+    positions={3}
+    selectedPosition={0}
+    style={
+      Object {
+        "0": Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        "1": Object {
+          "position": "absolute",
+        },
+        "backgroundColor": "#3366FF",
+        "height": 3,
+        "position": "absolute",
+        "transform": Array [
+          Object {
+            "translateX": 0,
+          },
+        ],
+        "width": "33.333333333333336%",
+      }
+    }
+  />
   <View
     accessible={true}
     isTVSelectable={true}

@@ -2,6 +2,91 @@ import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
+  'ButtonGroup': {
+    'meta': {
+      'scope': 'all',
+      'mapping': {},
+      'appearances': {
+        'primary': {
+          'default': true,
+        },
+        'outline': {
+          'default': false,
+        },
+      },
+      'variants': {
+        'size': {
+          'tiny': {
+            'default': false,
+          },
+          'small': {
+            'default': false,
+          },
+          'medium': {
+            'default': true,
+          },
+          'large': {
+            'default': false,
+          },
+          'giant': {
+            'default': false,
+          },
+        },
+      },
+      'states': {},
+    },
+    'appearance': {
+      'primary': {
+        'mapping': {
+          'button': {
+            'borderRadius': 6,
+          },
+        },
+        'variant': {
+          'size': {
+            'tiny': {
+              'mapping': {
+                'button': {
+                  'margin': 12,
+                },
+              },
+            },
+            'small': {
+              'mapping': {
+                'button': {
+                  'margin': 8,
+                },
+              },
+            },
+            'medium': {
+              'mapping': {
+                'button': {
+                  'margin': 4,
+                },
+              },
+            },
+            'large': {
+              'mapping': {
+                'button': {
+                  'margin': 4,
+                },
+              },
+            },
+            'giant': {
+              'mapping': {
+                'button': {
+                  'margin': 4,
+                },
+              },
+            },
+          },
+        },
+      },
+      'outline': {
+        'mapping': {},
+      },
+    },
+  },
   'Button': {
     'meta': {
       'scope': 'all',

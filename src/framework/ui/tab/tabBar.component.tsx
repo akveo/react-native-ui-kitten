@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  StyleSheet,
   View,
   ViewProps,
 } from 'react-native';
@@ -47,15 +48,16 @@ export class TabBar extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { indicator, ...container } = source;
+
     return {
-      bar: {
-        flexDirection: 'row',
-        height: source.barSize,
+      container: {
+        ...container,
+        ...strictStyles.container,
       },
       indicator: {
-        height: source.indicatorSize,
-        borderRadius: source.indicatorBorderRadius,
-        backgroundColor: source.indicatorColor,
+        ...indicator,
+        ...strictStyles.indicator,
       },
     };
   };
@@ -75,7 +77,7 @@ export class TabBar extends React.Component<Props> {
 
   public render(): React.ReactElement<ViewProps> {
     const { style, themedStyle, selectedIndex, children, ...derivedProps } = this.props;
-    const { bar, indicator } = this.getComponentStyle(themedStyle);
+    const { container, indicator } = this.getComponentStyle(themedStyle);
 
     const componentChildren: TabElement[] = this.createComponentChildren(children);
 
@@ -83,7 +85,7 @@ export class TabBar extends React.Component<Props> {
       <View>
         <View
           {...derivedProps}
-          style={[style, bar]}>
+          style={[style, container]}>
           {componentChildren}
         </View>
         <TabBarIndicator
@@ -96,3 +98,10 @@ export class TabBar extends React.Component<Props> {
     );
   }
 }
+
+const strictStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+  },
+  indicator: {},
+});

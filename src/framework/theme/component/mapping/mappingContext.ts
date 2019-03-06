@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   ThemeMappingType,
-  ThemeMapType,
-} from 'eva/packages/common';
+  ThemeStyleType,
+} from 'eva/packages/types';
 
 export interface MappingContextValueType {
   mapping: ThemeMappingType;
-  styles: ThemeMapType;
+  styles: ThemeStyleType;
 }
 
 const defaultValue: MappingContextValueType = {

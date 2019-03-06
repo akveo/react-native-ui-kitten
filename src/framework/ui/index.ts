@@ -4,6 +4,10 @@ import {
   Props as ButtonProps,
 } from './button/button.component';
 import {
+  ButtonGroup as ButtonGroupComponent,
+  Props as ButtonGroupProps,
+} from './buttonGroup/buttonGroup.component';
+import {
   Text as TextComponent,
   Props as TextProps,
 } from './text/text.component';
@@ -81,6 +85,7 @@ import {
 } from './popover/type';
 
 const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
+const ButtonGroup = styled<ButtonGroupComponent, ButtonGroupProps>(ButtonGroupComponent);
 const Text = styled<TextComponent, TextProps>(TextComponent);
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
@@ -100,6 +105,7 @@ const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
   Button,
+  ButtonGroup,
   Text,
   Layout,
   LayoutProps,
@@ -117,6 +123,7 @@ export {
   ViewPager,
   TabView,
   ButtonProps,
+  ButtonGroupProps,
   CheckBoxProps,
   TabProps,
   TabBarProps,

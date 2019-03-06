@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   ThemeMappingType,
-  ThemeMapType,
-} from 'eva/packages/common';
+  ThemeStyleType,
+} from 'eva/packages/types';
 import {
   ApplicationProvider,
   ThemeType,
@@ -17,7 +17,7 @@ import { theme } from 'eva/packages/theme/eva';
 
 interface State {
   mapping: ThemeMappingType;
-  styles: ThemeMapType;
+  styles: ThemeStyleType;
   theme: ThemeType;
 }
 
@@ -43,3 +43,4 @@ export default class App extends React.Component<any, State> {
     );
   }
 }
+

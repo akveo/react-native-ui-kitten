@@ -32,19 +32,11 @@ export class BottomTabNavigator extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
+    const { indicator, ...container } = style;
+
     return {
-      container: {
-        backgroundColor: style.backgroundColor,
-        borderTopColor: style.borderTopColor,
-        borderTopWidth: style.borderTopWidth,
-        paddingVertical: style.paddingVertical,
-      },
-      indicator: {
-        height: style.highlightHeight,
-        backgroundColor: style.selectedColor,
-      },
-      showText: style.showText,
-      showHighlight: style.showHighlight,
+      container: container,
+      indicator: indicator,
     };
   };
 
@@ -77,12 +69,15 @@ export class BottomTabNavigator extends React.Component<Props> {
   private createComponentChildren = (items: ChildElement | ChildElement[],
                                      style: StyleType): React.ReactElement<any>[] => {
 
-    const { showHighlight, indicator } = style;
+    const { indicator } = style;
 
     const tabElements: React.ReactElement<TabProps>[] = React.Children.map(items, this.createTabElement);
 
+    // FIXME:
+    const shouldShowIndicator: boolean = indicator.backgroundColor !== 'transparent';
+
     return [
-      showHighlight ? this.createIndicatorElement(tabElements.length, indicator) : undefined,
+      shouldShowIndicator ? this.createIndicatorElement(tabElements.length, indicator) : undefined,
       ...tabElements,
     ];
   };

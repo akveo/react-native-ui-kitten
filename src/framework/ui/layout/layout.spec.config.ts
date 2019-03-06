@@ -1,22 +1,28 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
-  Layout: {
-    meta: {
-      variants: {},
-      states: [],
+  'Layout': {
+    'meta': {
+      'scope': 'mobile',
+      'mapping': {},
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {},
+      'states': {},
     },
-    appearance: {
-      default: {
-        mapping: {
-          paddingHorizontal: 16,
-          paddingVertical: 8,
-          backgroundColor: 'transparent',
-          borderColor: 'blue-primary',
-          borderRadius: 3,
-          borderWidth: 1,
-          state: {},
+    'appearance': {
+      'default': {
+        'mapping': {
+          'paddingHorizontal': 16,
+          'paddingVertical': 8,
+          'backgroundColor': 'transparent',
+          'borderColor': 'blue-primary',
+          'borderRadius': 3,
+          'borderWidth': 1,
         },
       },
     },

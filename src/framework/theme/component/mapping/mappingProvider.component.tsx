@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   ThemeMappingType,
-  ThemeMapType,
-} from 'eva/packages/common';
+  ThemeStyleType,
+} from 'eva/packages/types';
 import { MappingContext } from './mappingContext';
 
 export interface Props {
   mapping: ThemeMappingType;
-  styles: ThemeMapType;
+  styles: ThemeStyleType;
   children: React.ReactNode;
 }
 
