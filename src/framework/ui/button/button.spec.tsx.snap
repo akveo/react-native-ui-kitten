@@ -90,6 +90,24 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
       }
     }
     style={
+      Array [
+        Object {
+          "height": 14,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 14,
+        },
+        Object {},
+      ]
+      Array [
+        Object {
+          "height": 13,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 13,
+        },
+        Object {},
+      ]
       Object {
         "height": 14,
         "tintColor": "#ffffff",
@@ -153,6 +171,24 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
         "tintColor": "#ffffff",
         "width": 14,
       }
+      Array [
+        Object {
+          "height": 14,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 14,
+        },
+        Object {},
+      ]
+      Array [
+        Object {
+          "height": 13,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 13,
+        },
+        Object {},
+      ]
     }
   />
   <ForwardRef(createComponent)
