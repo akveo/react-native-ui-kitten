@@ -1,15 +1,16 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  ImageSourcePropType,
-  TextProps,
-  ImageProps,
   Image,
+  ImageProps,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TextProps,
+  TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
 import {
+  Interaction,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
@@ -32,15 +33,15 @@ export class BottomNavigatorTab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { icon, text, ...container } = source;
+    const { color, selectedColor, ...textStyle } = text;
+
     return {
-      container: {},
-      icon: {
-        width: source['icon.width'],
-        height: source['icon.height'],
-        marginBottom: source['icon.marginBottom'],
-      },
+      container: container,
+      icon: icon,
       title: {
-        color: this.props.selected ? source['title.selectedColor'] : source['title.color'],
+        ...textStyle,
+        color: this.props.selected ? selectedColor : color,
       },
     };
   };

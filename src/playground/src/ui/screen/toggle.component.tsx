@@ -116,16 +116,16 @@ class Toggle extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <ToggleComponent
-              size='big'
-              style={this.props.themedStyle.component}
-              value={true}
-            />
-            <ToggleComponent
-              style={this.props.themedStyle.component}
-              value={true}
-            />
-            <ToggleComponent
               size='small'
+              style={this.props.themedStyle.component}
+              value={true}
+            />
+            <ToggleComponent
+              style={this.props.themedStyle.component}
+              value={true}
+            />
+            <ToggleComponent
+              size='large'
               style={this.props.themedStyle.component}
               value={true}
             />

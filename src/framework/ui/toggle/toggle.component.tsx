@@ -133,51 +133,45 @@ export class Toggle extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const thumbComponentSize: number = style.height - (style.borderWidth * 2);
+    const { thumb, highlight, ...container } = style;
+    const thumbComponentSize: number = container.height - (container.borderWidth * 2);
 
     return {
       wrapper: {
-        width: style.width,
-        height: style.height,
+        width: container.width,
+        height: container.height,
       },
       componentContainer: {
-        width: style.width,
-        height: style.height,
-        borderRadius: style.height / 2,
-        borderWidth: style.borderWidth,
-        borderColor: style.onTintColor,
+        ...container,
       },
       componentDisabledBox: {
+        width: container.width,
+        height: this.props.disabled ? container.height : 0,
         backgroundColor: style.tintColor,
-        width: style.width,
         borderRadius: style.width / 2,
-        height: this.props.disabled ? style.height : 0,
       },
       componentEllipse: {
-        width: style.width - (style.borderWidth * 2),
-        height: style.height - (style.borderWidth * 2),
-        borderRadius: (style.height - (style.borderWidth * 2)) / 2,
+        width: container.width - (container.borderWidth * 2),
+        height: container.height - (container.borderWidth * 2),
+        borderRadius: (container.height - (container.borderWidth * 2)) / 2,
       },
       componentThumb: {
         height: thumbComponentSize,
         width: thumbComponentSize,
-        borderWidth: style.borderWidth,
+        borderWidth: container.borderWidth,
         borderRadius: thumbComponentSize / 2,
         marginHorizontal: 1.5,
       },
       highlight: {
-        width: style.highlightWidth,
-        height: style.highlightHeight,
-        borderRadius: style.highlightHeight / 2,
-        backgroundColor: style.highlightColor,
+        ...highlight,
       },
-      switchOffsetValue: style.offsetValue,
+      switchOffsetValue: container.offsetValue,
       thumbComponentSize: thumbComponentSize,
-      checkMarkSize: style.iconSize,
+      checkMarkSize: container.iconSize,
       colors: {
-        onTint: style.onTintColor,
-        thumb: style.thumbColor,
-        tint: style.tintColor,
+        onTint: container.borderColor,
+        thumb: thumb.backgroundColor,
+        tint: container.tintColor,
       },
     };
   };

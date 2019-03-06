@@ -108,7 +108,7 @@ class CheckBox extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <CheckBoxComponent
-              size='big'
+              size='large'
               style={this.props.themedStyle.component}
               checked={true}
             />

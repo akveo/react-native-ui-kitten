@@ -1,15 +1,12 @@
 import { createStyle } from 'eva/packages/processor/kitten';
 import {
-  StyleMappingType,
+  ComponentMappingType,
+  ThemedStyleType,
   ThemeMappingType,
-  ThemeMapType,
-  ComponentMapMetaType,
-} from 'eva/packages/common';
+  ThemeStyleType,
+} from 'eva/packages/types';
 import { StyledComponentProps } from '../../component';
-import {
-  Interaction,
-  State,
-} from '../../type';
+import { Interaction } from '../../type';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
 
@@ -21,6 +18,21 @@ interface ComponentStyleMetaType {
 
 export class StyleConsumerService {
 
+  public withDefaultProps<P extends StyledComponentProps>(mapping: ThemeMappingType,
+                                                          component: string,
+                                                          props: P): P {
+
+    const defaultProps = this.safe(mapping[component], (componentMapping: ComponentMappingType) => {
+      const appearance: string = this.getDefaultAppearance(componentMapping);
+      const variants: { [key: string]: string } = this.getDefaultVariants(componentMapping);
+      const states: { [key: string]: boolean } = this.getDefaultStates(componentMapping);
+
+      return { appearance, ...variants, ...states };
+    });
+
+    return { ...defaultProps, ...props };
+  }
+
   /**
    * @param mapping (ThemeMappingType) - theme mapping configuration
    * @param styles (ThemeMappingType) - styles theme mapping configuration
@@ -31,75 +43,108 @@ export class StyleConsumerService {
    * @return pre-processed style if exists, creates it otherwise
    */
   public getComponentStyleMapping<P extends StyledComponentProps>(mapping: ThemeMappingType,
-                                                                  styles: ThemeMapType,
+                                                                  styles: ThemeStyleType,
                                                                   component: string,
                                                                   props: P,
-                                                                  interaction: Interaction[]): StyleMappingType {
+                                                                  interaction: Interaction[]): ThemedStyleType {
 
-    const generatedMapping: StyleMappingType = this.safe(styles[component], (componentMapping) => {
-      const { appearance, variants, states } = this.createStyleMeta(componentMapping.meta, props);
+    return this.safe(mapping[component], (componentMapping: ComponentMappingType): ThemedStyleType => {
+      const { appearance, variants, states } = this.getDerivedStyleMeta(componentMapping, props);
 
-      const query: string = this.findGeneratedQuery(Object.keys(componentMapping), [
-        appearance,
-        ...variants,
-        ...interaction,
-        ...states,
-      ]);
+      const generatedStyles: ThemedStyleType = this.safe(styles[component], (componentStyles) => {
+        const query: string = this.findGeneratedQuery(Object.keys(componentStyles), [
+          appearance,
+          ...variants,
+          ...interaction,
+          ...states,
+        ]);
 
-      return componentMapping[query];
+        return componentStyles[query];
+      });
+
+      if (generatedStyles === undefined) {
+        return createStyle(mapping, component, appearance, variants, [...interaction, ...states]);
+      }
+
+      return generatedStyles;
     });
-
-    if (generatedMapping === undefined && mapping[component] !== undefined) {
-      const { appearance, variants, states } = this.createStyleMeta(mapping[component].meta, props);
-
-      return createStyle(mapping, component, appearance, variants, [...interaction, ...states]);
-    }
-
-    return generatedMapping;
   }
 
-  /**
-   * @param meta (ComponentMapMetaType) - component configuration meta
-   * @param props (P extends StyledComponentProps) - derived props
-   *
-   * @return meta (ComponentStyleMetaType) on style applied to component
-   */
-  private createStyleMeta<P extends StyledComponentProps>(meta: ComponentMapMetaType,
-                                                          props: P): ComponentStyleMetaType {
+  private getDerivedStyleMeta<P extends StyledComponentProps>(mapping: ComponentMappingType,
+                                                              props: P): ComponentStyleMetaType {
+
+    const variantProps: Partial<P> = this.getDerivedVariants(mapping, props);
+    const stateProps: Partial<P> = this.getDerivedStates(mapping, props);
+
+    const variants: string[] = Object.keys(variantProps).map((variant: string): string => {
+      return variantProps[variant];
+    });
+    const states: string[] = Object.keys(stateProps);
 
     return {
       appearance: props.appearance,
-      variants: this.getDerivedVariants(Object.keys(meta.variants), props),
-      states: this.getDerivedStates(meta.states, props),
+      variants,
+      states,
     };
   }
 
-  /**
-   * @param source (string[]) - array containing possible variant groups
-   * @param props (P extends StyledComponentProps) - derived props
-   *
-   * @return variants (string[]) included in derived props
-   */
-  private getDerivedVariants<P extends StyledComponentProps>(source: string[], props: P): string[] {
-    const derivedGroups: string[] = Object.keys(props).filter((prop: string): boolean => {
-      return source.includes(prop);
+  private getDefaultAppearance(mapping: ComponentMappingType): string {
+    return Object.keys(mapping.meta.appearances).find((appearance: string): boolean => {
+      return mapping.meta.appearances[appearance].default === true;
     });
+  }
 
-    return derivedGroups.map((group: string): string => props[group]);
+  private getDefaultVariants(mapping: ComponentMappingType): { [key: string]: any } {
+    return this.transformObject(mapping.meta.variants, (variants, group: string): string | undefined => {
+      return Object.keys(variants[group]).find((variant: string): boolean => {
+
+        return variants[group][variant].default === true;
+      });
+    });
+  }
+
+  private getDefaultStates(mapping: ComponentMappingType): { [key: string]: any } {
+    return this.transformObject(mapping.meta.states, (states, state: string): boolean | undefined => {
+      const isDefault: boolean = states[state].default === true;
+
+      return isDefault ? isDefault : undefined;
+    });
+  }
+
+  private getDerivedVariants<P extends StyledComponentProps>(mapping: ComponentMappingType,
+                                                             props: P): Partial<P> {
+
+    return this.transformObject(props, (p: P, prop: string): string | undefined => {
+      const isVariant: boolean = Object.keys(mapping.meta.variants).includes(prop);
+
+      return isVariant ? p[prop] : undefined;
+    });
+  }
+
+  private getDerivedStates<P extends StyledComponentProps>(mapping: ComponentMappingType,
+                                                           props: P): Partial<P> {
+
+    return this.transformObject(props, (p: P, prop: string): boolean => {
+      const isState: boolean = Object.keys(mapping.meta.states).includes(prop);
+      const isAssigned: boolean = p[prop] === true;
+
+      return isState && isAssigned;
+    });
   }
 
   /**
-   * @param source (string[]) - array containing possible states
-   * @param props (P extends StyledComponentProps) - derived props
+   * Iterates throw `value` object keys and fills it values with values provided by `transform` callback
+   * If `transform` returns `undefined`, then appends nothing
    *
-   * @return states (string[]) included in derived props
+   * @param value (V extends object) - object to transform
+   * @param transform - object key transformation callback
    */
-  private getDerivedStates<P extends StyledComponentProps>(source: string[], props: P): string[] {
-    const derivedStates: string[] = Object.keys(props).filter((prop: string): boolean => {
-      return props[prop] === true && source.includes(prop);
-    });
+  private transformObject<V extends object>(value: V, transform: (value: V, key: string) => any): Partial<V> {
+    return Object.keys(value).reduce((acc: Partial<V>, key: string) => {
+      const nextValue: any = transform(value, key);
 
-    return derivedStates.map((state: string): State => State.parse(state));
+      return nextValue ? { ...acc, [key]: nextValue } : acc;
+    }, {});
   }
 
   /**
@@ -120,6 +165,7 @@ export class StyleConsumerService {
   private findGeneratedQuery(source: string[], query: string[]): string | undefined {
     const matches: string[] = source.filter((key: string): boolean => {
       const keyQuery: string[] = key.split(SEPARATOR_MAPPING_ENTRY);
+
       return this.compareArrays(query, keyQuery);
     });
 

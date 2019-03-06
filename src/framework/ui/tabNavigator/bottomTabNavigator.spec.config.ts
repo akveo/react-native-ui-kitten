@@ -1,29 +1,55 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 
 export const mapping: ThemeMappingType = {
-  BottomTabNavigator: {
-    meta: {
-      variants: {},
-      states: [],
-    },
-    appearance: {
-      default: {
-        mapping: {
-          backgroundColor: 'transparent',
-          paddingVertical: 16,
-          color: 'gray-dark',
-          selectedColor: 'blue-primary',
-          borderTopColor: 'gray-primary',
-          borderTopWidth: 1,
-          highlightHeight: 3,
-          showHighlight: false,
+  'BottomTabNavigator': {
+    'meta': {
+      'scope': 'mobile',
+      'mapping': {
+        'backgroundColor': {
+          'type': 'color',
+        },
+        'paddingVertical': {
+          'type': 'number',
+        },
+        'borderTopColor': {
+          'type': 'color',
+        },
+        'borderTopWidth': {
+          'type': 'number',
         },
       },
-      highlight: {
-        mapping: {
-          showHighlight: true,
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+        'no-indicator': {
+          'default': false,
+        },
+      },
+      'variants': {},
+      'states': {},
+    },
+    'appearance': {
+      'default': {
+        'mapping': {
+          'backgroundColor': 'transparent',
+          'paddingVertical': 16,
+          'borderTopColor': 'gray-primary',
+          'borderTopWidth': 1,
+          'indicator': {
+            'height': 3,
+            'backgroundColor': 'blue-primary',
+          },
+        },
+      },
+      'no-indicator': {
+        'mapping': {
+          'indicator': {
+            'height': 0,
+            'backgroundColor': 'transparent',
+          },
         },
       },
     },

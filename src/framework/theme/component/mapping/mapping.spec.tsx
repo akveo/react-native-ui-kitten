@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import { render } from 'react-native-testing-library';
 import {
   ThemeMappingType,
-  ThemeMapType,
-} from 'eva/packages/common';
+  ThemeStyleType,
+} from 'eva/packages/types';
 import {
   MappingContext,
   MappingContextValueType,
@@ -44,7 +44,7 @@ describe('@mapping: ui component checks', () => {
 
   describe('* consumer', () => {
     const mapping: ThemeMappingType = {};
-    const styles: ThemeMapType = {};
+    const styles: ThemeStyleType = {};
 
     it('receives mapping prop', () => {
 

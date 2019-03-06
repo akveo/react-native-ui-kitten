@@ -1,40 +1,69 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 
 export const mapping: ThemeMappingType = {
-  Tab: {
-    meta: {
-      variants: {},
-      states: [
-        'selected',
-        'active',
-      ],
+  'Tab': {
+    'meta': {
+      'scope': 'all',
+      'mapping': {},
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {},
+      'states': {
+        'selected': {
+          'default': false,
+          'priority': 0,
+          'scope': 'all',
+        },
+      },
     },
-    appearance: {
-      default: {
-        mapping: {
-          state: {
-            selected: {},
-            active: {},
-            'selected.active': {},
+    'appearance': {
+      'default': {
+        'mapping': {
+          'text': {
+            'color': 'gray-dark',
+            'fontWeight': '600',
+          },
+          'state': {
+            'selected': {
+              'text': {
+                'color': 'blue-primary',
+              },
+            },
           },
         },
       },
     },
   },
-  TabBar: {
-    meta: {
-      variants: {},
-      states: [],
+  'TabBar': {
+    'meta': {
+      'scope': 'all',
+      'mapping': {
+        'height': {
+          'type': 'number',
+        },
+      },
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {},
+      'states': {},
     },
-    appearance: {
-      default: {
-        mapping: {
-          barSize: 42,
-          indicatorSize: 4,
-          indicatorBorderRadius: 2,
-          indicatorColor: 'pink-primary',
+    'appearance': {
+      'default': {
+        'mapping': {
+          'height': 42,
+          'indicator': {
+            'height': 4,
+            'borderRadius': 2,
+            'backgroundColor': 'blue-primary',
+          },
         },
       },
     },

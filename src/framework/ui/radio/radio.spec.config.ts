@@ -1,84 +1,174 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
-  Radio: {
-    meta: {
-      variants: {
-        status: [
-          'error',
-        ],
-        size: [
-          'small',
-          'big',
-        ],
+  'Radio': {
+    'meta': {
+      'scope': 'all',
+      'mapping': {
+        'width': {
+          'type': 'number',
+        },
+        'height': {
+          'type': 'number',
+        },
+        'borderRadius': {
+          'type': 'number',
+        },
+        'borderWidth': {
+          'type': 'number',
+        },
+        'borderColor': {
+          'type': 'color',
+        },
       },
-      states: [
-        'checked',
-        'disabled',
-        'active',
-      ],
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {
+        'status': {
+          'error': {
+            'default': false,
+          },
+        },
+        'size': {
+          'small': {
+            'default': false,
+          },
+          'medium': {
+            'default': true,
+          },
+          'large': {
+            'default': false,
+          },
+        },
+      },
+      'states': {
+        'checked': {
+          'default': false,
+          'priority': 0,
+          'scope': 'all',
+        },
+        'disabled': {
+          'default': false,
+          'priority': 1,
+          'scope': 'all',
+        },
+        'active': {
+          'default': false,
+          'priority': 2,
+          'scope': 'all',
+        },
+      },
     },
-    appearance: {
-      default: {
-        mapping: {
-          size: 36,
-          innerSize: 24,
-          highlightSize: 60,
-          borderWidth: 2,
-          borderColor: 'gray-primary',
-          selectColor: 'transparent',
-          highlightColor: 'transparent',
-          state: {
-            active: {
-              borderColor: 'gray-dark',
-              highlightColor: 'gray-light',
+    'appearance': {
+      'default': {
+        'mapping': {
+          'borderWidth': 2,
+          'borderColor': 'gray-primary',
+          'select': {
+            'backgroundColor': 'transparent',
+          },
+          'highlight': {
+            'backgroundColor': 'transparent',
+          },
+          'state': {
+            'active': {
+              'borderColor': 'gray-dark',
+              'highlight': {
+                'backgroundColor': 'gray-light',
+              },
             },
-            checked: {
-              borderColor: 'blue-primary',
-              selectColor: 'blue-primary',
+            'checked': {
+              'borderColor': 'blue-primary',
+              'select': {
+                'backgroundColor': 'blue-primary',
+              },
             },
-            disabled: {
-              borderColor: 'gray-light',
+            'disabled': {
+              'borderColor': 'gray-light',
             },
-            'active.checked': {
-              borderColor: 'blue-dark',
+            'checked.active': {
+              'borderColor': 'blue-dark',
             },
             'checked.disabled': {
-              selectColor: 'gray-primary',
+              'select': {
+                'backgroundColor': 'gray-primary',
+              },
             },
           },
         },
-        variant: {
-          status: {
-            error: {
-              mapping: {
-                borderColor: 'pink-primary',
-                state: {
-                  checked: {
-                    borderColor: 'pink-primary',
-                    selectColor: 'pink-primary',
+        'variant': {
+          'status': {
+            'error': {
+              'mapping': {
+                'borderColor': 'pink-primary',
+                'state': {
+                  'checked': {
+                    'borderColor': 'pink-primary',
+                    'select': {
+                      'backgroundColor': 'pink-primary',
+                    },
                   },
-                  'active.checked': {
-                    borderColor: 'pink-primary',
+                  'checked.active': {
+                    'borderColor': 'pink-primary',
                   },
                 },
               },
             },
           },
-          size: {
-            big: {
-              mapping: {
-                size: 42,
-                innerSize: 28,
-                highlightSize: 70,
+          'size': {
+            'small': {
+              'mapping': {
+                'width': 30,
+                'height': 30,
+                'borderRadius': 15,
+                'select': {
+                  'width': 20,
+                  'height': 20,
+                  'borderRadius': 10,
+                },
+                'highlight': {
+                  'width': 50,
+                  'height': 50,
+                  'borderRadius': 25,
+                },
               },
             },
-            small: {
-              mapping: {
-                size: 30,
-                innerSize: 20,
-                highlightSize: 50,
+            'medium': {
+              'mapping': {
+                'width': 36,
+                'height': 36,
+                'borderRadius': 18,
+                'select': {
+                  'width': 24,
+                  'height': 24,
+                  'borderRadius': 12,
+                },
+                'highlight': {
+                  'width': 60,
+                  'height': 60,
+                  'borderRadius': 30,
+                },
+              },
+            },
+            'large': {
+              'mapping': {
+                'width': 42,
+                'height': 42,
+                'borderRadius': 21,
+                'select': {
+                  'width': 28,
+                  'height': 28,
+                  'borderRadius': 14,
+                },
+                'highlight': {
+                  'width': 70,
+                  'height': 70,
+                  'borderRadius': 35,
+                },
               },
             },
           },

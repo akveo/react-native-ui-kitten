@@ -1,43 +1,94 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
   'Toggle': {
     'meta': {
-      'variants': {
-        'status': [
-          'error',
-        ],
-        'size': [
-          'small',
-          'big',
-        ],
+      'scope': 'all',
+      'mapping': {
+        'width': {
+          'type': 'number',
+        },
+        'height': {
+          'type': 'number',
+        },
+        'borderRadius': {
+          'type': 'number',
+        },
+        'borderWidth': {
+          'type': 'number',
+        },
+        'offsetValue': {
+          'type': 'number',
+        },
+        'tintColor': {
+          'type': 'color',
+        },
+        'borderColor': {
+          'type': 'color',
+        },
       },
-      'states': [
-        'checked',
-        'disabled',
-        'active',
-      ],
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {
+        'status': {
+          'error': {
+            'default': false,
+          },
+        },
+        'size': {
+          'small': {
+            'default': false,
+          },
+          'medium': {
+            'default': true,
+          },
+          'large': {
+            'default': false,
+          },
+        },
+      },
+      'states': {
+        'checked': {
+          'default': false,
+          'priority': 0,
+          'scope': 'all',
+        },
+        'disabled': {
+          'default': false,
+          'priority': 1,
+          'scope': 'all',
+        },
+        'active': {
+          'default': false,
+          'priority': 1,
+          'scope': 'all',
+        },
+      },
     },
     'appearance': {
       'default': {
         'mapping': {
-          'borderWidth': 1.5,
-          'height': 32,
-          'width': 52,
           'offsetValue': 20,
-          'thumbColor': '#ffffff',
           'tintColor': 'gray-light',
-          'onTintColor': 'blue-primary',
-          'highlightWidth': 62,
-          'highlightHeight': 42,
-          'highlightColor': 'transparent',
+          'borderColor': 'blue-primary',
+          'thumb': {
+            'backgroundColor': '#ffffff',
+          },
+          'highlight': {
+            'backgroundColor': 'transparent',
+          },
           'state': {
             'active': {
-              'highlightColor': '#e5e7ea',
+              'highlight': {
+                'backgroundColor': '#e5e7ea',
+              },
             },
             'disabled': {
-              'onTintColor': 'gray-dark',
+              'borderColor': 'gray-dark',
             },
           },
         },
@@ -46,7 +97,7 @@ export const mapping: ThemeMappingType = {
             'error': {
               'mapping': {
                 'tintColor': '#FFD6D9',
-                'onTintColor': 'pink-primary',
+                'borderColor': 'pink-primary',
                 'state': {
                   'disabled': {
                     'tintColor': 'gray-light',
@@ -56,22 +107,43 @@ export const mapping: ThemeMappingType = {
             },
           },
           'size': {
-            'big': {
-              'mapping': {
-                'borderWidth': 2,
-                'height': 42,
-                'width': 72,
-                'highlightWidth': 82,
-                'highlightHeight': 52,
-              },
-            },
             'small': {
               'mapping': {
-                'borderWidth': 0.5,
-                'height': 22,
                 'width': 38,
-                'highlightWidth': 48,
-                'highlightHeight': 32,
+                'height': 22,
+                'borderRadius': 11,
+                'borderWidth': 0.5,
+                'highlight': {
+                  'width': 48,
+                  'height': 32,
+                  'borderRadius': 16,
+                },
+              },
+            },
+            'medium': {
+              'mapping': {
+                'width': 52,
+                'height': 32,
+                'borderRadius': 16,
+                'borderWidth': 1.5,
+                'highlight': {
+                  'width': 62,
+                  'height': 42,
+                  'borderRadius': 21,
+                },
+              },
+            },
+            'large': {
+              'mapping': {
+                'width': 72,
+                'height': 42,
+                'borderRadius': 21,
+                'borderWidth': 2,
+                'highlight': {
+                  'width': 82,
+                  'height': 52,
+                  'borderRadius': 26,
+                },
               },
             },
           },
