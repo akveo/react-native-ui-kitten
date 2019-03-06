@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "eva": "github:akveo/eva#feat/meta-structure",
+    "eva": "github:akveo/eva",
     "hoist-non-react-statics": "^3.2.1"
   },
   "devDependencies": {
