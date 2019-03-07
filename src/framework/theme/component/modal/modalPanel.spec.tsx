@@ -31,23 +31,27 @@ describe('@modal panel checks', () => {
 
     private modalId: string = '';
 
-    componentDidMount(): void {
-      this.props.componentDidMount && this.props.componentDidMount();
+    public componentDidMount(): void {
+      if (this.props.componentDidMount) {
+        this.props.componentDidMount();
+      }
     }
 
-    componentWillUnmount() {
-      this.props.componentWillUnmount && this.props.componentWillUnmount();
+    public componentWillUnmount() {
+      if (this.props.componentWillUnmount) {
+        this.props.componentWillUnmount();
+      }
     }
 
-    showModal() {
+    public showModal() {
       this.modalId = ModalService.show(<TestModal onRequestClose={() => 1}/>, true);
     }
 
-    hideModal() {
+    public hideModal() {
       ModalService.hide(this.modalId);
     }
 
-    render() {
+    public render() {
       return (
         <ModalPanel>
           <View>
