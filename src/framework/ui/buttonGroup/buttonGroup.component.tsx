@@ -25,10 +25,6 @@ export type Props = ButtonGroupProps & StyledComponentProps & ViewProps;
 
 export class ButtonGroup extends React.Component<Props> {
 
-  static defaultProps: Partial<Props> = {
-    size: 'medium',
-  };
-
   private styleProvider: ButtonStyleProvider = ButtonStyleProviders.DEFAULT;
 
   private getComponentStyle = (style: StyleType): StyleType => {
