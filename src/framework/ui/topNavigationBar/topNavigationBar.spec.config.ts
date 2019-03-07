@@ -1,47 +1,94 @@
-import { ThemeMappingType } from 'eva/packages/common';
+import { ThemeMappingType } from 'eva/packages/types';
 import { ThemeType } from '@kitten/theme';
 
 export const mapping: ThemeMappingType = {
-  TopNavigationBar: {
-    meta: {
-      variants: {},
-      states: [],
+  'TopNavigationBar': {
+    'meta': {
+      'scope': 'mobile',
+      'mapping': {
+        'height': {
+          'type': 'number',
+        },
+        'paddingTop': {
+          'type': 'number',
+        },
+        'paddingBottom': {
+          'type': 'number',
+        },
+        'paddingHorizontal': {
+          'type': 'number',
+        },
+        'backgroundColor': {
+          'type': 'color',
+        },
+      },
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+        'title-centered': {
+          'default': false,
+        },
+      },
+      'variants': {},
+      'states': {},
     },
-    appearance: {
-      default: {
-        mapping: {
-          height: 46,
-          paddingTop: 4,
-          paddingBottom: 12,
-          paddingHorizontal: 16,
-          backgroundColor: 'blue-primary',
-          'title.centered': false,
-          'title.color': 'white',
-          'title.fontSize': 16,
-          'title.fontWeight': '600',
-          'subtitle.color': 'white',
-          'subtitle.fontSize': 12,
-          'subtitle.fontWeight': '400',
+    'appearance': {
+      'default': {
+        'mapping': {
+          'height': 46,
+          'paddingTop': 4,
+          'paddingBottom': 12,
+          'paddingHorizontal': 16,
+          'backgroundColor': 'blue-primary',
+          'title': {
+            'color': 'text-primary-inverse',
+            'fontSize': 16,
+            'fontWeight': '600',
+          },
+          'subtitle': {
+            'color': 'text-primary-inverse',
+            'fontSize': 12,
+            'fontWeight': '400',
+          },
+          'textAlign': 'start',
         },
       },
       'title-centered': {
-        mapping: {
-          'title.centered': true,
+        'mapping': {
+          'textAlign': 'center',
         },
       },
     },
   },
-  TopNavigationBarAction: {
-    meta: {
-      variants: {},
-      states: [],
+  'TopNavigationBarAction': {
+    'meta': {
+      'scope': 'mobile',
+      'mapping': {
+        'width': {
+          'type': 'number',
+        },
+        'height': {
+          'type': 'number',
+        },
+        'marginRight': {
+          'type': 'number',
+        },
+      },
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {},
+      'states': {},
     },
-    appearance: {
-      default: {
-        mapping: {
-          width: 25,
-          height: 25,
-          marginRight: 8,
+    'appearance': {
+      'default': {
+        'mapping': {
+          'width': 25,
+          'height': 25,
+          'marginRight': 8,
         },
       },
     },
@@ -56,4 +103,5 @@ export const theme: ThemeType = {
   'gray-dark': '#8992A3',
   'gray-highlight': '#EDF0F5',
   'pink-primary': '#FF3D71',
+  'text-primary-inverse': '#ffffff',
 };

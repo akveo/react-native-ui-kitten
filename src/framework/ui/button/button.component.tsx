@@ -40,8 +40,6 @@ const ALIGNMENT_DEFAULT: ButtonAlignment = ButtonAlignments.LEFT;
 export class Button extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
-    status: 'primary',
-    size: 'medium',
     alignment: 'left',
   };
 

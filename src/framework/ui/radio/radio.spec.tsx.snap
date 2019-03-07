@@ -35,7 +35,6 @@ exports[`@radio: matches snapshot active 1`] = `
           "backgroundColor": "#DDE1EB",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }
@@ -105,7 +104,6 @@ exports[`@radio: matches snapshot active checked 1`] = `
           "backgroundColor": "#DDE1EB",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }
@@ -115,7 +113,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "borderColor": "#2541CC",
+          "borderColor": "#3366FF",
           "borderRadius": 18,
           "borderWidth": 2,
           "height": 36,
@@ -175,7 +173,6 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }
@@ -244,7 +241,6 @@ exports[`@radio: matches snapshot active: default 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }
@@ -314,7 +310,6 @@ exports[`@radio: matches snapshot checked 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }
@@ -385,7 +380,6 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }
@@ -454,7 +448,6 @@ exports[`@radio: matches snapshot default 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }
@@ -524,7 +517,6 @@ exports[`@radio: matches snapshot disabled 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 30,
           "height": 60,
-          "opacity": undefined,
           "position": "absolute",
           "width": 60,
         }

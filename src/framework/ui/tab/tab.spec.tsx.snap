@@ -70,7 +70,14 @@ exports[`@tab: component checks * title 1`] = `
     }
   }
 >
-  <Text>
+  <Text
+    style={
+      Object {
+        "color": "#8992A3",
+        "fontWeight": "600",
+      }
+    }
+  >
     title
   </Text>
 </View>

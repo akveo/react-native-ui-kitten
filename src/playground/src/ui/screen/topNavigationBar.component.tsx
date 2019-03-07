@@ -21,6 +21,8 @@ import {
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
+const APPEARANCE: string = 'title-centered';
+
 const leftControlUri: string = 'https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png';
 const rightControlUri1: string =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLai-QccSTB98vmP7dUigtL8F13cE6_0mmju_1m4mDQgzLd_Zq';
@@ -33,7 +35,7 @@ class TopNavigationBar extends React.Component<Props> {
     header: (props: NavigationScreenProps) => (
       <SafeAreaView style={styles.safeAreaView}>
         <TopNavigationBarComponent
-          appearance='title-centered'
+          appearance={APPEARANCE}
           title='Top Navigation Bar'
           subtitle='Subtitle'
           leftControl={

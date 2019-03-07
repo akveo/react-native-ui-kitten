@@ -14,7 +14,7 @@ import { Button as ButtonComponent } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-const APPEARANCE: string = 'default';
+const APPEARANCE: string = 'filled';
 const STATUS: string = 'primary';
 const ALIGNMENT: string = 'left';
 const TEXT: React.ReactText = 'BUTTON';
