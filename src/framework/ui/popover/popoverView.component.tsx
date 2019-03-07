@@ -114,6 +114,7 @@ export class PopoverView extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
+    alignSelf: 'flex-start',
   },
   content: {
     justifyContent: 'center',

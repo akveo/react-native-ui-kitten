@@ -1,9 +1,10 @@
 import React from 'react';
 import {
   View,
+  Text,
   Button,
-  ViewStyle,
-  ViewProps,
+  StyleSheet,
+  Alert,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -16,92 +17,107 @@ import { NavigationScreenProps } from 'react-navigation';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-interface EndlessModalProps {
-  onContinue?: () => void;
-  onDismiss?: () => void;
-}
-
-const EndlessModal = (props?: EndlessModalProps & ModalComponentCloseProps & ViewProps) => {
-
-  const { onContinue, onDismiss, onCloseModal, ...derivedProps } = props;
-
-  const onCloseButtonPress = () => {
-    if (onDismiss) {
-      onDismiss();
-    }
-    onCloseModal();
-  };
-
-  return (
-    <View {...derivedProps}>
-      <Button
-        title='Next'
-        onPress={onContinue}
-      />
-      <Button
-        title='Close'
-        onPress={onCloseButtonPress}
-      />
-    </View>
-  );
-};
-
 class Dialog extends React.Component<Props> {
 
   static navigationOptions = {
-    title: 'Dialog',
+    title: 'Modal',
   };
 
-  private modalCount: number = 0;
+  private modalId: string | undefined = undefined;
 
-  private onNext = (): void => {
-    this.modalCount += 1;
+  private createModal = (): React.ReactElement<any> => (
+    <TestModal onRequestClose={() => Alert.alert('Dialog close')}/>
+  );
 
-    const component = this.createModalElement();
-    ModalService.showDialog(component, true);
+  private showModal = (): void => {
+    const component = this.createModal();
+    this.modalId = ModalService.show(component, false);
   };
 
-  private onClose = (): void => {
-    this.modalCount -= 1;
+  private hideModal = () => {
+    if (this.modalId) {
+      ModalService.hide(this.modalId);
+    }
   };
 
-  private createModalElement = (): React.ReactElement<any> => {
-    const color: string = this.modalCount % 2 === 0 ? '#C0C0C0' : '#A0A1A8';
-
-    const additionalProps: ViewStyle = {
-      left: this.modalCount * 20,
-      top: 140 + this.modalCount * 20,
-      backgroundColor: color,
-    };
-
-    return (
-      <EndlessModal
-        style={[this.props.themedStyle.modal, additionalProps]}
-        onContinue={this.onNext}
-        onDismiss={this.onClose}
-      />
-    );
-  };
-
-  public render(): React.ReactNode {
+  render() {
     return (
       <View>
         <Button
-          onPress={this.onNext}
-          title='Click me!'
+          onPress={this.showModal}
+          title='Show Modal'
+        />
+        <Button
+          onPress={this.hideModal}
+          title='Hide Modal'
         />
       </View>
     );
   }
 }
 
-export const DialogScreen = withStyles(Dialog, (theme: ThemeType) => {
-  return {
-    modal: {
-      width: 128,
-      height: 128,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+export const DialogScreen = withStyles(Dialog, (theme: ThemeType) => ({}));
+
+class TestModal extends React.Component<ModalComponentCloseProps> {
+
+  private createModal = (): React.ReactElement<any> => (
+    <InnerTestModal onRequestClose={() => Alert.alert('Inner dialog close')}/>
+  );
+
+  private showModal = (): void => {
+    const component = this.createModal();
+    ModalService.show(component, true);
   };
+
+  render() {
+    return (
+      <View style={styles.outerModal}>
+        <Text>This is Test Outer Modal</Text>
+        <Button
+          title='Open Inner Modal'
+          onPress={this.showModal}
+        />
+        <Button
+          title='Close Modal'
+          onPress={this.props.onCloseModal}
+        />
+      </View>
+    );
+  }
+}
+
+class InnerTestModal extends React.Component<ModalComponentCloseProps> {
+
+  render(): React.ReactNode {
+    return (
+      <View style={styles.innerModal}>
+        <Text>This is Test Inner Modal</Text>
+        <Button
+          title='Close Modal'
+          onPress={this.props.onCloseModal}
+        />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  outerModal: {
+    width: 300,
+    height: 300,
+    backgroundColor: '#d87d8f',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 200,
+    left: 50,
+  },
+  innerModal: {
+    width: 150,
+    height: 150,
+    backgroundColor: '#adbbd1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 450,
+    left: 100,
+  },
 });

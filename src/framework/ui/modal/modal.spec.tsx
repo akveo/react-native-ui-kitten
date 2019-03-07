@@ -6,8 +6,8 @@ import {
 import {
   View,
   Text,
-  TouchableWithoutFeedback,
   Button,
+  TouchableOpacity,
 } from 'react-native';
 import {
   Modal,
@@ -155,7 +155,7 @@ describe('@modal component checks', () => {
       </Modal>,
     );
     expect(modal).toMatchSnapshot();
-    fireEvent.press(modal.getByType(TouchableWithoutFeedback));
+    fireEvent.press(modal.getByType(TouchableOpacity));
     expect(modal).toMatchSnapshot();
     expect(onCloseModal).toHaveBeenCalled();
   });

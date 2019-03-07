@@ -2,11 +2,11 @@ import React from 'react';
 import {
   View,
   ViewProps,
-  TouchableWithoutFeedbackProps,
   StyleSheet,
-  TouchableWithoutFeedback,
   Dimensions,
   Animated,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -63,19 +63,6 @@ export class Modal extends React.Component<Props> {
     }
   }
 
-  private getComponentStyle = (style: StyleType): StyleType | null => {
-    return {
-      container: style ? {
-        paddingHorizontal: style.paddingHorizontal,
-        paddingVertical: style.paddingVertical,
-        backgroundColor: style.backgroundColor,
-        borderColor: style.borderColor,
-        borderRadius: style.borderRadius,
-        borderWidth: style.borderWidth,
-      } : null,
-    };
-  };
-
   private getAnimationStyle(type: ModalAnimationType): StyleType | undefined {
     switch (type) {
       case 'none':
@@ -117,57 +104,77 @@ export class Modal extends React.Component<Props> {
     }
   };
 
-  private createComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
+  private onStartShouldSetResponder = (): boolean => true;
+
+  private onResponderRelease = (): void => { return; };
+
+  private onStartShouldSetResponderCapture = (): boolean => false;
+
+  private renderComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
     return React.cloneElement(source, {
+      ...source.props,
       onCloseModal: this.closeModal,
-      pointerEvents: 'box-none',
+      style: {
+        ...source.props.style,
+        ...StyleSheet.flatten(this.props.style),
+      },
     });
   };
 
-  private createBackdropElement = (): React.ReactElement<TouchableWithoutFeedbackProps> => {
-    return this.props.isBackDropAllowed ? (
-      <TouchableWithoutFeedback onPress={this.closeOnBackdrop}>
-        <View style={styles.backdrop}/>
-      </TouchableWithoutFeedback>
-    ) : null;
+  private renderComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
+    return React.Children.map(source, this.renderComponentChild);
   };
 
-  private createComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
-    return React.Children.map(source, this.createComponentChild);
-  };
+  private renderWithBackDrop = (component: React.ReactElement<ViewProps>) => (
+    <TouchableOpacity
+      style={styles.container}
+      onPress={this.closeOnBackdrop}
+      activeOpacity={1}>
+      {component}
+    </TouchableOpacity>
+  );
 
-  private renderComponent = (): React.ReactElement<ViewProps> => {
-    const { style, themedStyle, animationType, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+  private renderWithoutBackDrop = (component: React.ReactElement<ViewProps>) => (
+    <View style={styles.notVisibleWrapper}>
+      <View
+        style={styles.container}
+        pointerEvents='none'/>
+      {component}
+    </View>
+  );
+
+  private renderComponent = (): React.ReactElement<TouchableOpacityProps | ViewProps> => {
+    const { animationType, children, isBackDropAllowed, ...derivedProps } = this.props;
     const animationStyle: StyleType = this.getAnimationStyle(animationType);
+    const componentChildren: React.ReactElement<any>[] = this.renderComponentChildren(children);
 
-    const backdropElement: React.ReactElement<any> = this.createBackdropElement();
-    const componentChildren: React.ReactElement<any>[] = this.createComponentChildren(children);
+    const dialog: React.ReactElement<ViewProps> =
+      <Animated.View
+        {...derivedProps}
+        style={animationStyle}
+        onStartShouldSetResponder={this.onStartShouldSetResponder}
+        onResponderRelease={this.onResponderRelease}
+        onStartShouldSetResponderCapture={this.onStartShouldSetResponderCapture}
+        pointerEvents='box-none'>
+        {componentChildren}
+      </Animated.View>;
 
-    return (
-      <View style={styles.container}>
-        {backdropElement}
-        <Animated.View
-          {...derivedProps}
-          style={[componentStyle.container, style, animationStyle]}>
-          {componentChildren}
-        </Animated.View>
-      </View>
-    );
+    return isBackDropAllowed ?
+      this.renderWithBackDrop(dialog) : this.renderWithoutBackDrop(dialog);
   };
 
-  public render(): React.ReactElement<ViewProps | TouchableWithoutFeedbackProps> {
+  public render(): React.ReactElement<ViewProps | TouchableOpacityProps> | null {
     return this.props.visible ? this.renderComponent() : null;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-  },
-  backdrop: {
-    width: width,
-    height: height,
     ...StyleSheet.absoluteFillObject,
+  },
+  notVisibleWrapper: {
+    position: 'absolute',
+    width: 0,
+    height: 0,
   },
 });
