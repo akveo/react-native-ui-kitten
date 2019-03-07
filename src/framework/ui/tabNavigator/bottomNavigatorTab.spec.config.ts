@@ -13,7 +13,13 @@ export const mapping: ThemeMappingType = {
         },
       },
       'variants': {},
-      'states': {},
+      'states': {
+        'selected': {
+          'default': false,
+          'priority': 1,
+          'scope': 'mobile',
+        },
+      },
     },
     'appearance': {
       'default': {
@@ -22,10 +28,20 @@ export const mapping: ThemeMappingType = {
             'width': 40,
             'height': 40,
             'marginBottom': 5,
+            'tintColor': 'gray-dark',
           },
           'text': {
             'color': 'gray-dark',
-            'selectedColor': 'blue-primary',
+          },
+          'state': {
+            'selected': {
+              'icon': {
+                'tintColor': 'blue-primary',
+              },
+              'text': {
+                'color': 'blue-primary',
+              },
+            },
           },
         },
       },

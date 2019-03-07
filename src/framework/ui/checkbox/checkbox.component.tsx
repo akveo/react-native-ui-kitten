@@ -52,24 +52,24 @@ export class CheckBox extends React.Component<Props> {
     return {
       container: {
         ...container,
-        ...strictStyles.container,
+        ...styles.container,
       },
       select: {
         width: container.width / 2,
         height: container.height / 8,
         ...select,
-        ...strictStyles.select,
+        ...styles.select,
       },
       highlight: {
         ...highlight,
-        ...strictStyles.highlight,
+        ...styles.highlight,
       },
     };
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { themedStyle, ...derivedProps } = this.props;
-    const { container, select, highlight } = this.getComponentStyle(themedStyle);
+    const { container, select, highlight, checkMark } = this.getComponentStyle(themedStyle);
 
     return (
       <TouchableOpacity
@@ -78,7 +78,7 @@ export class CheckBox extends React.Component<Props> {
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={strictStyles.container}>
+        <View style={styles.container}>
           <View style={highlight}/>
           <View style={container}>
             <CheckMark style={select}/>
@@ -89,7 +89,7 @@ export class CheckBox extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',

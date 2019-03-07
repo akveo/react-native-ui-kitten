@@ -256,21 +256,21 @@ export class Toggle extends React.Component<Props> {
     });
 
     return (
-      <View {...this.props} style={[componentStyle.wrapper, strictStyles.wrapper, style]}>
-        {!this.props.disabled && <View style={[strictStyles.highlight, componentStyle.highlight]}/>}
+      <View {...this.props} style={[componentStyle.wrapper, styles.wrapper, style]}>
+        {!this.props.disabled && <View style={[styles.highlight, componentStyle.highlight]}/>}
         <TouchableOpacity
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
           onPress={this.onValueChange}>
           <Animated.View
             style={[
-              strictStyles.container,
+              styles.container,
               componentStyle.componentContainer,
               { backgroundColor: interpolatedTintColor },
             ]}
             {...this.panResponder.panHandlers}>
             <Animated.View style={[
-              strictStyles.ellipse,
+              styles.ellipse,
               componentStyle.componentEllipse,
               {
                 transform: [{ scale: value ? returnScale : this.ellipseAnimation }],
@@ -280,7 +280,7 @@ export class Toggle extends React.Component<Props> {
             />
             <Animated.View style={[
               componentStyle.componentThumb,
-              strictStyles.thumb,
+              styles.thumb,
               {
                 width: this.thumbAnimation,
                 alignSelf: value ? 'flex-end' : 'flex-start',
@@ -303,7 +303,7 @@ export class Toggle extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',

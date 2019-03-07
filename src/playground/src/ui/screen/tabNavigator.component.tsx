@@ -4,6 +4,7 @@ import {
   ImageSourcePropType,
   View,
   Text,
+  Image,
 } from 'react-native';
 import {
   createBottomTabNavigator,
@@ -17,6 +18,7 @@ import {
   BottomTabNavigator as BottomTabNavigatorComponent,
   BottomNavigatorTab,
 } from '@kitten/ui';
+import { StyleType } from '@kitten/theme';
 
 const APPEARANCE: string = 'default';
 
@@ -44,11 +46,11 @@ function getRouteName(routes: NavigationRoute[], index: number): string {
 }
 
 function getIconSource(tabNumber: number, isSelected: boolean): ImageSourcePropType {
-  const unexpectedIconUri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/stop.png';
-  const tab1Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/examples.png';
-  const tab2Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/attachment.png';
-  const tab3Uri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/announcements.png';
-  const selectedTabUri: string = 'https://cdn0.iconfinder.com/data/icons/customicondesignoffice5/256/refresh.png';
+  const unexpectedIconUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/close-circle.png';
+  const tab1Uri: string = 'https://akveo.github.io/eva-icons/fill/png/128/linkedin.png';
+  const tab2Uri: string = 'https://akveo.github.io/eva-icons/fill/png/128/facebook.png';
+  const tab3Uri: string = 'https://akveo.github.io/eva-icons/fill/png/128/twitter.png';
+  const selectedTabUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/star.png';
 
   if (tabNumber === 1) {
     return isSelected ? { uri: selectedTabUri } : { uri: tab1Uri };
@@ -76,15 +78,30 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
         navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>
       <BottomNavigatorTab
         title='Screen 1'
-        getIconSource={(isSelected: boolean) => getIconSource(1, isSelected)}
+        icon={(style: StyleType) => (
+          <Image
+            source={getIconSource(1, index === 0)}
+            style={style}
+          />
+        )}
       />
       <BottomNavigatorTab
         title='Screen 2'
-        getIconSource={(isSelected: boolean) => getIconSource(2, isSelected)}
+        icon={(style: StyleType) => (
+          <Image
+            source={getIconSource(2, index === 1)}
+            style={style}
+          />
+        )}
       />
       <BottomNavigatorTab
         title='Screen 3'
-        getIconSource={(isSelected: boolean) => getIconSource(3, isSelected)}
+        icon={(style: StyleType) => (
+          <Image
+            source={getIconSource(3, index === 2)}
+            style={style}
+          />
+        )}
       />
     </BottomTabNavigatorComponent>
   );

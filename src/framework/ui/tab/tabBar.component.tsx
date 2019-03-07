@@ -53,16 +53,16 @@ export class TabBar extends React.Component<Props> {
     return {
       container: {
         ...container,
-        ...strictStyles.container,
+        ...styles.container,
       },
       indicator: {
         ...indicator,
-        ...strictStyles.indicator,
+        ...styles.indicator,
       },
     };
   };
 
-  private createComponentChild = (element: TabElement, index: number): TabElement => {
+  private renderComponentChild = (element: TabElement, index: number): TabElement => {
     return React.cloneElement(element, {
       key: index,
       style: { flex: 1 },
@@ -71,15 +71,15 @@ export class TabBar extends React.Component<Props> {
     });
   };
 
-  private createComponentChildren = (source: TabElement | TabElement[]): TabElement[] => {
-    return React.Children.map(source, this.createComponentChild);
+  private renderComponentChildren = (source: TabElement | TabElement[]): TabElement[] => {
+    return React.Children.map(source, this.renderComponentChild);
   };
 
   public render(): React.ReactElement<ViewProps> {
     const { style, themedStyle, selectedIndex, children, ...derivedProps } = this.props;
     const { container, indicator } = this.getComponentStyle(themedStyle);
 
-    const componentChildren: TabElement[] = this.createComponentChildren(children);
+    const componentChildren: TabElement[] = this.renderComponentChildren(children);
 
     return (
       <View>
@@ -99,7 +99,7 @@ export class TabBar extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
   },

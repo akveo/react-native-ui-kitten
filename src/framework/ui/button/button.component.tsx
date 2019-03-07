@@ -4,8 +4,6 @@ import {
   TouchableOpacityProps,
   GestureResponderEvent,
   StyleSheet,
-  ImageSourcePropType,
-  Image,
   ImageProps,
 } from 'react-native';
 import {
@@ -24,7 +22,7 @@ import {
 } from './type';
 
 interface ButtonProps {
-  icon?: ImageSourcePropType;
+  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
   alignment?: string | ButtonAlignment;
@@ -79,51 +77,44 @@ export class Button extends React.Component<Props> {
     };
   };
 
-  private createTextElement = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
     const { children: text } = this.props;
 
     return (
       <Text
-        style={[style, strictStyles.text]}
+        style={[style, styles.text]}
         key={1}>
         {text}
       </Text>
     );
   };
 
-  private createImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
-    const { icon: image } = this.props;
-
-    return (
-      <Image
-        key={0}
-        style={[style, strictStyles.icon]}
-        source={image}
-      />
-    );
+  private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> | null => {
+    const { icon } = this.props;
+    return icon ? React.cloneElement(icon(style), { key: 2 }) : null;
   };
 
-  private createComponentChildren = (style: StyleType): React.ReactNode => {
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
     const { icon, children } = this.props;
 
     const hasIcon: boolean = icon !== undefined;
     const hasText: boolean = children !== undefined;
 
     return [
-      hasIcon ? this.createImageElement(style.icon) : undefined,
-      hasText ? this.createTextElement(style.text) : undefined,
+      hasIcon ? this.renderImageElement(style.icon) : undefined,
+      hasText ? this.renderTextElement(style.text) : undefined,
     ];
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[container, style, strictStyles.container]}
+        style={[container, style, styles.container]}
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
@@ -134,7 +125,7 @@ export class Button extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-evenly',
     alignItems: 'center',

@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {
+  ModalComponentCloseProps,
   ModalService,
   StyledComponentProps,
   StyleType,
@@ -41,7 +42,7 @@ interface State {
   layout: MeasureResult | undefined;
 }
 
-export type Props = PopoverProps & StyledComponentProps & PopoverViewProps & ViewProps;
+export type Props = PopoverProps & ModalComponentCloseProps & StyledComponentProps & PopoverViewProps & ViewProps;
 
 const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
@@ -59,6 +60,7 @@ export class Popover extends React.Component<Props, State> {
   };
 
   private containerRef: React.RefObject<MeasuredNode> = React.createRef();
+  private componentId: string = '';
 
   public shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
     const isLayoutChanged: boolean = nextState.layout !== undefined;
@@ -67,25 +69,36 @@ export class Popover extends React.Component<Props, State> {
     return isLayoutChanged || isVisibilityChanged;
   }
 
-  public componentDidUpdate(prevProps: Props, prevState: State) {
-    const { visible, placement } = this.props;
+  public componentDidUpdate(prevProps: Props, prevState: State): void {
+    const { visible, placement, onRequestClose } = this.props;
 
-    if (visible) {
-      const { origin: popoverPosition } = this.getPopoverFrame(placement);
-      const style: FlexStyle = {
-        left: popoverPosition.x,
-        top: popoverPosition.y,
-      };
+    if (prevProps.visible !== visible) {
+      if (visible) {
+        const { origin: popoverPosition } = this.getPopoverFrame(placement);
+        const style: FlexStyle = {
+          left: popoverPosition.x,
+          top: popoverPosition.y,
+        };
 
-      const { current: container } = this.containerRef;
+        const { current: container } = this.containerRef;
 
-      // Retrieve `content` from popover children
-      // and clone it with measured position
-      const { [TAG_CONTENT]: popoverView } = container.props.children;
-      const popover: React.ReactElement<ViewProps> = React.cloneElement(popoverView, { style });
-
-      ModalService.showDialog(popover, true);
+        // Retrieve `content` from popover children
+        // and clone it with measured position
+        const { [TAG_CONTENT]: popoverView } = container.props.children;
+        const popover: React.ReactElement<ModalComponentCloseProps> =
+          React.cloneElement(popoverView, {
+            style: style,
+            onRequestClose: onRequestClose,
+          });
+        this.componentId = ModalService.show(popover, true);
+      } else {
+        ModalService.hide(this.componentId);
+      }
     }
+  }
+
+  public componentWillUnmount(): void {
+    this.componentId = '';
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -108,7 +121,7 @@ export class Popover extends React.Component<Props, State> {
     this.setState({ layout });
   };
 
-  private createPopoverElement = (children: React.ReactElement<any>, style: StyleType): MeasuringElement => {
+  private renderPopoverElement = (children: React.ReactElement<any>, style: StyleType): MeasuringElement => {
     const { placement, ...derivedProps } = this.props;
 
     const measuringProps: MeasuringElementProps = { tag: TAG_CONTENT };
@@ -120,7 +133,7 @@ export class Popover extends React.Component<Props, State> {
       <View
         {...measuringProps}
         key={TAG_CONTENT}
-        style={strictStyles.popover}>
+        style={styles.popover}>
         <PopoverView
           {...derivedProps}
           style={[style, derivedProps.style]}
@@ -131,7 +144,7 @@ export class Popover extends React.Component<Props, State> {
     );
   };
 
-  private createChildElement = (source: React.ReactElement<any>, style: StyleType): MeasuringElement => {
+  private renderChildElement = (source: React.ReactElement<any>, style: StyleType): MeasuringElement => {
     const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
     return (
@@ -144,17 +157,17 @@ export class Popover extends React.Component<Props, State> {
     );
   };
 
-  private createPlaceholderElement = (...children: MeasuringElement[]): MeasuringNode => {
+  private renderPlaceholderElement = (...children: MeasuringElement[]): MeasuringNode => {
     return (
       <MeasureNode
-        style={strictStyles.placeholder}
+        style={styles.placeholder}
         onResult={this.onMeasure}>
         {children}
       </MeasureNode>
     );
   };
 
-  private createComponentElement = (...children: MeasuredElement[]): MeasuredNode => {
+  private renderComponentElement = (...children: MeasuredElement[]): MeasuredNode => {
     // Store `containerRef` for later usage.
     // This is needed to retrieve `content` and position it in future
     //
@@ -171,18 +184,18 @@ export class Popover extends React.Component<Props, State> {
     const { themedStyle, content, children } = this.props;
 
     const { child, popover } = this.getComponentStyle(themedStyle);
-    const measuringChild: MeasuringElement = this.createChildElement(children, child);
-    const measuringPopover: MeasuringElement = this.createPopoverElement(content, popover);
+    const measuringChild: MeasuringElement = this.renderChildElement(children, child);
+    const measuringPopover: MeasuringElement = this.renderPopoverElement(content, popover);
 
     if (this.state.layout === undefined) {
-      return this.createPlaceholderElement(measuringChild, measuringPopover);
+      return this.renderPlaceholderElement(measuringChild, measuringPopover);
     }
 
-    return this.createComponentElement(measuringChild, measuringPopover);
+    return this.renderComponentElement(measuringChild, measuringPopover);
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   popover: {
     position: 'absolute',
     opacity: 0,

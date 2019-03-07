@@ -4,53 +4,63 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import { ModalService } from '../../service';
+import {
+  ModalPresenting,
+  ModalService,
+} from '../../service';
 import { Modal } from '../../../ui/modal/modal.component';
+import { ModalComponentCloseProps } from '@kitten/theme';
 
 export interface ModalPanelProps {
   children: React.ReactElement<any> | React.ReactElement<any>[];
 }
 
 interface ModalPanelState {
-  dialogComponents: Map<string, React.ReactElement<any>>;
-  backdropValues: Map<string, boolean>;
+  components: Map<string, React.ReactElement<ModalComponentCloseProps>>;
+  backdrops: Map<string, boolean>;
 }
 
-export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> {
+export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> implements ModalPresenting {
 
   public state: ModalPanelState = {
-    dialogComponents: new Map(),
-    backdropValues: new Map(),
+    components: new Map(),
+    backdrops: new Map(),
   };
 
   public componentDidMount(): void {
-    ModalService.setComponent(this);
+    ModalService.mount(this);
   }
 
   public componentWillUnmount(): void {
-    ModalService.setComponent(null);
+    ModalService.unmount();
   }
 
-  public onCloseModal = (identifier: string) => {
-    const components: Map<string, React.ReactElement<any>> = this.state.dialogComponents;
+  public hide = (identifier: string): void => {
+    const component: React.ReactElement<ModalComponentCloseProps> = this.state.components
+      .get(identifier);
+    if (component) {
+      component.props.onRequestClose && component.props.onRequestClose();
+    }
+    const components: Map<string, React.ReactElement<any>> = this.state.components;
     components.delete(identifier);
-    const backdropValues: Map<string, boolean> = this.state.backdropValues;
-    backdropValues.delete(identifier);
+    const backdrops: Map<string, boolean> = this.state.backdrops;
+    backdrops.delete(identifier);
     this.setState({
-      dialogComponents: components,
-      backdropValues: backdropValues,
+      components: components,
+      backdrops: backdrops,
     });
   };
 
-  public showDialog(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean): void {
+  public show(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean): string {
     const key: string = this.generateUniqueComponentKey();
-    const componentsMap: Map<string, React.ReactElement<any>> = this.state.dialogComponents
+    const componentsMap: Map<string, React.ReactElement<any>> = this.state.components
       .set(key, dialogComponent);
-    const backdropsMap: Map<string, boolean> = this.state.backdropValues.set(key, closeOnBackDrop);
+    const backdrops: Map<string, boolean> = this.state.backdrops.set(key, closeOnBackDrop);
     this.setState({
-      dialogComponents: componentsMap,
-      backdropValues: backdropsMap,
+      components: componentsMap,
+      backdrops: backdrops,
     });
+    return key;
   }
 
   private generateUniqueComponentKey = (): string => {
@@ -58,21 +68,22 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   };
 
   private areThereAnyComponents(): boolean {
-    return this.state.dialogComponents && this.state.dialogComponents.size !== 0;
+    return this.state.components && this.state.components.size !== 0;
   }
 
   private renderModal(modal: React.ReactElement<any>, index: number) {
-    const allModalKeys: string[] = Array.from(this.state.dialogComponents.keys());
+    const allModalKeys: string[] = Array.from(this.state.components.keys());
     const identifier: string = allModalKeys
-      .find(item => this.state.dialogComponents.get(item) === modal);
-    const closeOnBackdrop: boolean = this.state.backdropValues.get(identifier);
+      .find(item => this.state.components.get(item) === modal);
+    const closeOnBackdrop: boolean = this.state.backdrops.get(identifier);
     return (
       <Modal
+        {...modal.props}
         visible={true}
         isBackDropAllowed={closeOnBackdrop}
         key={index}
         identifier={identifier}
-        onCloseModal={this.onCloseModal}
+        onCloseModal={this.hide}
       >
         {modal}
       </Modal>
@@ -80,7 +91,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   }
 
   private renderModals() {
-    return Array.from(this.state.dialogComponents.values())
+    return Array.from(this.state.components.values())
       .map((component: React.ReactElement<any>, i: number) =>
         this.renderModal(component, i));
   }

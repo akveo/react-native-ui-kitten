@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Group,
   StyleSheet,
   View,
   ViewProps,
@@ -54,7 +53,7 @@ export class ButtonGroup extends React.Component<Props> {
     }
   };
 
-  private createComponentChild = (element: ButtonElement, index: number, style: StyleType): ButtonElement => {
+  private renderComponentChild = (element: ButtonElement, index: number, style: StyleType): ButtonElement => {
     const { appearance, size, children } = this.props;
     const { style: elementStyle, ...derivedProps } = element.props;
 
@@ -70,9 +69,11 @@ export class ButtonGroup extends React.Component<Props> {
     });
   };
 
-  private createComponentChildren = (source: ButtonElement | ButtonElement[], style: StyleType): ButtonElement[] => {
+  private renderComponentChildren = (source: ButtonElement | ButtonElement[],
+                                     style: StyleType): ButtonElement[] => {
+
     return React.Children.map(source, (element: ButtonElement, index: number): ButtonElement => {
-      return this.createComponentChild(element, index, style);
+      return this.renderComponentChild(element, index, style);
     });
   };
 
@@ -80,19 +81,19 @@ export class ButtonGroup extends React.Component<Props> {
     const { style, themedStyle, children, ...derivedProps } = this.props;
     const { container, button } = this.getComponentStyle(themedStyle);
 
-    const componentChildren: ButtonElement[] = this.createComponentChildren(children, button);
+    const componentChildren: ButtonElement[] = this.renderComponentChildren(children, button);
 
     return (
       <View
         {...derivedProps}
-        style={[container, style, strictStyles.container]}>
+        style={[container, style, styles.container]}>
         {componentChildren}
       </View>
     );
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
   },

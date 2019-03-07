@@ -62,7 +62,8 @@ class Tooltip extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT} start`}
             visible={this.state.startVisible}
-            text='❤️'>
+            text='❤️'
+            onRequestClose={this.onStartPress}>
             <TouchableOpacity
               style={tip}
               onPress={this.onStartPress}>
@@ -75,7 +76,8 @@ class Tooltip extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT}`}
             visible={this.state.centerVisible}
-            text='💛️'>
+            text='💛️'
+            onRequestClose={this.onCenterPress}>
             <TouchableOpacity
               style={tip}
               onPress={this.onCenterPress}>
@@ -88,7 +90,8 @@ class Tooltip extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT} end`}
             visible={this.state.endVisible}
-            text='💚'>
+            text='💚'
+            onRequestClose={this.onEndPress}>
             <TouchableOpacity
               style={tip}
               onPress={this.onEndPress}>

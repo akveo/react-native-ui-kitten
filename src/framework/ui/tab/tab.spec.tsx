@@ -2,17 +2,18 @@ import React from 'react';
 import {
   View,
   ScrollView,
+  Image,
 } from 'react-native';
 import {
   fireEvent,
   render,
-  shallow,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Tab as TabComponent,
@@ -61,7 +62,11 @@ describe('@tab: component checks', () => {
   it('* icon', () => {
     const component = render(
       <Mock
-        icon={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+        icon={(style: StyleType) =>
+          <Image
+            source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+            style={style}
+          />}
       />,
     );
 
@@ -166,6 +171,5 @@ describe('@tab-view: component checks', () => {
 
     expect(unloadedChild.props.children).toEqual(undefined);
   });
-
 });
 

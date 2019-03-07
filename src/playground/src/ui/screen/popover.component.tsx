@@ -73,7 +73,8 @@ class Popover extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT} start`}
             visible={this.state.startVisible}
-            content={this.createPopoverContentElement('❤️')}>
+            content={this.createPopoverContentElement('❤️')}
+            onRequestClose={this.onStartPress}>
             <TouchableOpacity
               style={tip}
               onPress={this.onStartPress}>
@@ -86,7 +87,8 @@ class Popover extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT}`}
             visible={this.state.centerVisible}
-            content={this.createPopoverContentElement('💛️')}>
+            content={this.createPopoverContentElement('💛️')}
+            onRequestClose={this.onCenterPress}>
             <TouchableOpacity
               style={tip}
               onPress={this.onCenterPress}>
@@ -99,7 +101,8 @@ class Popover extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT} end`}
             visible={this.state.endVisible}
-            content={this.createPopoverContentElement('💚')}>
+            content={this.createPopoverContentElement('💚')}
+            onRequestClose={this.onEndPress}>
             <TouchableOpacity
               style={tip}
               onPress={this.onEndPress}>

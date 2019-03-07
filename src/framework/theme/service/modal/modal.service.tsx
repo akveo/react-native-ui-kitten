@@ -1,21 +1,37 @@
 import React from 'react';
-import { ModalPanel } from '../../component';
+import { ModalComponentCloseProps } from '@kitten/theme';
 
 class ModalServiceType {
 
-  component: ModalPanel | null = null;
+  panel: ModalPresenting | null = null;
 
-  public setComponent(component: ModalPanel | null): void {
-    this.component = component;
+  public mount(panel: ModalPresenting | null): void {
+    this.panel = panel;
   }
 
-  public showDialog(dialogComponent: React.ReactElement<any>,
-                    closeOnBackDrop: boolean = false): void {
+  public unmount(): void {
+    this.panel = null;
+  }
 
-    if (this.component) {
-      this.component.showDialog(dialogComponent, closeOnBackDrop);
+  public show(element: React.ReactElement<ModalComponentCloseProps>,
+              closeOnBackDrop: boolean = false): string {
+    if (this.panel) {
+      return this.panel.show(element, closeOnBackDrop);
     }
   }
+
+  public hide(identifier: string): void {
+    if (this.panel) {
+      this.panel.hide(identifier);
+    }
+  }
+}
+
+export interface ModalPresenting {
+  show(element: React.ReactElement<ModalComponentCloseProps>,
+       closeOnBackDrop: boolean): string;
+
+  hide(identifier: string): void;
 }
 
 export const ModalService = new ModalServiceType();

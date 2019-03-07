@@ -73,7 +73,7 @@ export class TabView extends React.Component<Props> {
     }
   };
 
-  private createComponentChild = (element: ChildElement, index: number): TabViewChildElement => {
+  private renderComponentChild = (element: ChildElement, index: number): TabViewChildElement => {
     const { children, ...elementProps } = element.props;
 
     return {
@@ -82,9 +82,9 @@ export class TabView extends React.Component<Props> {
     };
   };
 
-  private createComponentChildren = (source: ChildElement | ChildElement[]): TabViewChildren => {
+  private renderComponentChildren = (source: ChildElement | ChildElement[]): TabViewChildren => {
     return React.Children.toArray(source).reduce((acc: TabViewChildren, element: ChildElement, index: number) => {
-      const { tab, content } = this.createComponentChild(element, index);
+      const { tab, content } = this.renderComponentChild(element, index);
       return {
         tabs: [...acc.tabs, tab],
         content: [...acc.content, content],
@@ -94,7 +94,7 @@ export class TabView extends React.Component<Props> {
 
   public render(): React.ReactElement<ViewProps> {
     const { selectedIndex, contentWidth, children, ...derivedProps } = this.props;
-    const { tabs, content } = this.createComponentChildren(children);
+    const { tabs, content } = this.renderComponentChildren(children);
 
     return (
       <View {...derivedProps}>
