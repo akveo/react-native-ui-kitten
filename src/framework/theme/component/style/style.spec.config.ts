@@ -97,50 +97,40 @@ export const mapping: ThemeMappingType = {
         variant: {
           status: {
             info: {
-              mapping: {
-                state: {
-                  checked: {
-                    borderColor: 'orangePrimary',
-                    selectColor: 'orangePrimary',
-                  },
-                  'active.checked': {
-                    borderColor: 'orangeDark',
-                  },
+              state: {
+                checked: {
+                  borderColor: 'orangePrimary',
+                  selectColor: 'orangePrimary',
+                },
+                'active.checked': {
+                  borderColor: 'orangeDark',
                 },
               },
             },
             success: {
-              mapping: {
-                state: {
-                  checked: {
-                    borderColor: 'tealPrimary',
-                    selectColor: 'tealPrimary',
-                  },
-                  'active.checked': {
-                    borderColor: 'tealDark',
-                  },
+              state: {
+                checked: {
+                  borderColor: 'tealPrimary',
+                  selectColor: 'tealPrimary',
+                },
+                'active.checked': {
+                  borderColor: 'tealDark',
                 },
               },
             },
           },
           size: {
             small: {
-              mapping: {
-                size: 30,
-                innerSize: 20,
-              },
+              size: 30,
+              innerSize: 20,
             },
             medium: {
-              mapping: {
-                size: 36,
-                innerSize: 24,
-              },
+              size: 36,
+              innerSize: 24,
             },
             large: {
-              mapping: {
-                size: 42,
-                innerSize: 28,
-              },
+              size: 42,
+              innerSize: 28,
             },
           },
         },
@@ -153,11 +143,9 @@ export const mapping: ThemeMappingType = {
               borderColor: 'grayLight',
             },
           },
-        },
-        variant: {
-          status: {
-            success: {
-              mapping: {
+          variant: {
+            status: {
+              success: {
                 borderColor: 'tealPrimary',
               },
             },

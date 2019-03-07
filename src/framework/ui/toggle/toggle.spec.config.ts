@@ -95,55 +95,47 @@ export const mapping: ThemeMappingType = {
         'variant': {
           'status': {
             'error': {
-              'mapping': {
-                'tintColor': '#FFD6D9',
-                'borderColor': 'pink-primary',
-                'state': {
-                  'disabled': {
-                    'tintColor': 'gray-light',
-                  },
+              'tintColor': '#FFD6D9',
+              'borderColor': 'pink-primary',
+              'state': {
+                'disabled': {
+                  'tintColor': 'gray-light',
                 },
               },
             },
           },
           'size': {
             'small': {
-              'mapping': {
-                'width': 38,
-                'height': 22,
-                'borderRadius': 11,
-                'borderWidth': 0.5,
-                'highlight': {
-                  'width': 48,
-                  'height': 32,
-                  'borderRadius': 16,
-                },
+              'width': 38,
+              'height': 22,
+              'borderRadius': 11,
+              'borderWidth': 0.5,
+              'highlight': {
+                'width': 48,
+                'height': 32,
+                'borderRadius': 16,
               },
             },
             'medium': {
-              'mapping': {
-                'width': 52,
-                'height': 32,
-                'borderRadius': 16,
-                'borderWidth': 1.5,
-                'highlight': {
-                  'width': 62,
-                  'height': 42,
-                  'borderRadius': 21,
-                },
+              'width': 52,
+              'height': 32,
+              'borderRadius': 16,
+              'borderWidth': 1.5,
+              'highlight': {
+                'width': 62,
+                'height': 42,
+                'borderRadius': 21,
               },
             },
             'large': {
-              'mapping': {
-                'width': 72,
-                'height': 42,
-                'borderRadius': 21,
-                'borderWidth': 2,
-                'highlight': {
-                  'width': 82,
-                  'height': 52,
-                  'borderRadius': 26,
-                },
+              'width': 72,
+              'height': 42,
+              'borderRadius': 21,
+              'borderWidth': 2,
+              'highlight': {
+                'width': 82,
+                'height': 52,
+                'borderRadius': 26,
               },
             },
           },
