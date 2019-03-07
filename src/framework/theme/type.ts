@@ -1,12 +1,12 @@
 export enum Interaction {
   ACTIVE = 'active',
+  FOCUSED = 'focused',
 }
 
 export enum State {
   CHECKED = 'checked',
   SELECTED = 'selected',
   DISABLED = 'disabled',
-  FOCUSED = 'focused',
 }
 
 export namespace Interaction {

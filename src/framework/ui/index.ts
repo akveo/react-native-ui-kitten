@@ -8,6 +8,10 @@ import {
   Props as ButtonGroupProps,
 } from './buttonGroup/buttonGroup.component';
 import {
+  Input as InputComponent,
+  Props as InputProps,
+} from './input/input.component';
+import {
   Text as TextComponent,
   Props as TextProps,
 } from './text/text.component';
@@ -86,6 +90,7 @@ import {
 
 const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
 const ButtonGroup = styled<ButtonGroupComponent, ButtonGroupProps>(ButtonGroupComponent);
+const Input = styled<InputComponent, InputProps>(InputComponent);
 const Text = styled<TextComponent, TextProps>(TextComponent);
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
@@ -106,6 +111,7 @@ const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 export {
   Button,
   ButtonGroup,
+  Input,
   Text,
   Layout,
   LayoutProps,
@@ -123,6 +129,7 @@ export {
   ViewPager,
   TabView,
   ButtonProps,
+  InputProps,
   ButtonGroupProps,
   CheckBoxProps,
   TabProps,
