@@ -26,11 +26,7 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
     appearance="default"
     dispatch={[Function]}
     editable={true}
-    icon={
-      Object {
-        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-      }
-    }
+    icon={[Function]}
     onEndEditing={[Function]}
     onFocus={[Function]}
     style={
@@ -79,17 +75,12 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
       }
     }
     style={
-      Array [
-        Object {
-          "marginHorizontal": 6,
-          "maxHeight": 24,
-          "maxWidth": 24,
-          "tintColor": "#a6aebd",
-        },
-        Object {
-          "flexGrow": 1,
-        },
-      ]
+      Object {
+        "height": 24,
+        "marginHorizontal": 6,
+        "tintColor": "#a6aebd",
+        "width": 24,
+      }
     }
   />
 </View>

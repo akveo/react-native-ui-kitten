@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Image,
+  ImageProps,
   ImageSourcePropType,
   TextInput,
 } from 'react-native';
@@ -13,6 +15,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Input as InputComponent,
@@ -53,7 +56,12 @@ describe('@input: matches snapshot', () => {
     const icon: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
     it('* icon', () => {
-      const component: RenderAPI = renderComponent({ icon });
+      const iconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+        return (
+          <Image style={style} source={icon}/>
+        );
+      };
+      const component: RenderAPI = renderComponent({ icon: iconElement });
       const { output } = shallow(component.getByType(InputComponent));
 
       expect(output).toMatchSnapshot();

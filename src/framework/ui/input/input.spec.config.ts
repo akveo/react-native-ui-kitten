@@ -58,8 +58,8 @@ export const mapping: ThemeMappingType = {
             'color': 'gray-400',
           },
           'icon': {
-            'maxWidth': 24,
-            'maxHeight': 24,
+            'width': 24,
+            'height': 24,
             'marginHorizontal': 6,
             'tintColor': 'gray-400',
           },
@@ -78,61 +78,51 @@ export const mapping: ThemeMappingType = {
         'variant': {
           'status': {
             'primary': {
-              'mapping': {
-                'state': {
-                  'focused': {
-                    'borderColor': 'blue-primary',
-                    'icon': {
-                      'tintColor': 'blue-primary',
-                    },
+              'state': {
+                'focused': {
+                  'borderColor': 'blue-primary',
+                  'icon': {
+                    'tintColor': 'blue-primary',
                   },
                 },
               },
             },
             'success': {
-              'mapping': {
-                'state': {
-                  'focused': {
-                    'borderColor': '#4CAF50',
-                    'icon': {
-                      'tintColor': '#4CAF50',
-                    },
+              'state': {
+                'focused': {
+                  'borderColor': '#4CAF50',
+                  'icon': {
+                    'tintColor': '#4CAF50',
                   },
                 },
               },
             },
             'info': {
-              'mapping': {
-                'state': {
-                  'focused': {
-                    'borderColor': '#03A9F4',
-                    'icon': {
-                      'tintColor': '#03A9F4',
-                    },
+              'state': {
+                'focused': {
+                  'borderColor': '#03A9F4',
+                  'icon': {
+                    'tintColor': '#03A9F4',
                   },
                 },
               },
             },
             'warning': {
-              'mapping': {
-                'state': {
-                  'focused': {
-                    'borderColor': '#FFC107',
-                    'icon': {
-                      'tintColor': '#FFC107',
-                    },
+              'state': {
+                'focused': {
+                  'borderColor': '#FFC107',
+                  'icon': {
+                    'tintColor': '#FFC107',
                   },
                 },
               },
             },
             'error': {
-              'mapping': {
-                'state': {
-                  'focused': {
-                    'borderColor': '#F44336',
-                    'icon': {
-                      'tintColor': '#F44336',
-                    },
+              'state': {
+                'focused': {
+                  'borderColor': '#F44336',
+                  'icon': {
+                    'tintColor': '#F44336',
                   },
                 },
               },
@@ -193,39 +183,25 @@ export const mapping: ThemeMappingType = {
         'variant': {
           'category': {
             'h1': {
-              'mapping': {
-                'fontSize': 64,
-              },
+              'fontSize': 64,
             },
             'h2': {
-              'mapping': {
-                'fontSize': 40,
-              },
+              'fontSize': 40,
             },
             'h3': {
-              'mapping': {
-                'fontSize': 32,
-              },
+              'fontSize': 32,
             },
             'h4': {
-              'mapping': {
-                'fontSize': 24,
-              },
+              'fontSize': 24,
             },
             'h5': {
-              'mapping': {
-                'fontSize': 16,
-              },
+              'fontSize': 16,
             },
             'h6': {
-              'mapping': {
-                'fontSize': 14,
-              },
+              'fontSize': 14,
             },
             'body': {
-              'mapping': {
-                'fontSize': 16,
-              },
+              'fontSize': 16,
             },
           },
         },
