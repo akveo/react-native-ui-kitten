@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-  Image,
   ImageProps,
-  ImageSourcePropType,
   StyleSheet,
   TextInput,
   TextInputProps,
@@ -19,7 +17,7 @@ import {
 } from '../service/type';
 
 interface InputProps {
-  icon?: ImageSourcePropType;
+  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   status?: string;
   disabled?: boolean;
 }
@@ -81,15 +79,9 @@ export class Input extends React.Component<Props> {
   };
 
   private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
-    const { icon: image } = this.props;
+    const { icon } = this.props;
 
-    return (
-      <Image
-        key={0}
-        style={[style, strictStyles.icon]}
-        source={image}
-      />
-    );
+    return React.cloneElement(icon(style), { key: 0 });
   };
 
   private renderComponentChildren = (style: StyleType): React.ReactNode => {

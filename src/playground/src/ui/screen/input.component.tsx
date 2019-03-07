@@ -7,12 +7,15 @@ import {
   TouchableWithoutFeedback,
   ViewProps,
   TouchableWithoutFeedbackProps,
+  ImageProps,
+  Image,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import { Input as InputComponent } from '@kitten/ui';
 
@@ -48,6 +51,15 @@ class Input extends React.Component<Props, State> {
     this.setState({ input });
   };
 
+  private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+    return (
+      <Image
+        style={style}
+        source={ICON}
+      />
+    );
+  };
+
   public render(): React.ReactNode {
     return (
       <AvoidKeyboard style={this.props.themedStyle.container}>
@@ -58,7 +70,7 @@ class Input extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               onChangeText={this.onInputChange}
               value={this.state.input}
-              icon={ICON}
+              icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
           </View>
@@ -69,7 +81,7 @@ class Input extends React.Component<Props, State> {
             <InputComponent
               style={this.props.themedStyle.component}
               disabled={true}
-              icon={ICON}
+              icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
           </View>
@@ -80,25 +92,25 @@ class Input extends React.Component<Props, State> {
             <InputComponent
               status='success'
               style={this.props.themedStyle.component}
-              icon={ICON}
+              icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
             <InputComponent
               status='info'
               style={this.props.themedStyle.component}
-              icon={ICON}
+              icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
             <InputComponent
               status='warning'
               style={this.props.themedStyle.component}
-              icon={ICON}
+              icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
             <InputComponent
               status='error'
               style={this.props.themedStyle.component}
-              icon={ICON}
+              icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
           </View>
