@@ -28,10 +28,18 @@ export const mapping: ThemeMappingType = {
             'color': 'gray-dark',
             'fontWeight': '600',
           },
+          'icon': {
+            'width': 20,
+            'height': 20,
+            'tintColor': 'gray-dark',
+          },
           'state': {
             'selected': {
               'text': {
                 'color': 'blue-primary',
+              },
+              'icon': {
+                'tintColor': 'blue-primary',
               },
             },
           },

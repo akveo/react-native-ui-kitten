@@ -39,7 +39,7 @@ export class RadioGroup extends React.Component<Props> {
     };
   };
 
-  private createComponentChild = (element: RadioElement, index: number): RadioElement => {
+  private renderComponentChild = (element: RadioElement, index: number): RadioElement => {
     return React.cloneElement(element, {
       ...element.props,
       key: index,
@@ -48,15 +48,15 @@ export class RadioGroup extends React.Component<Props> {
     });
   };
 
-  private createComponentChildren = (source: RadioElement | RadioElement[]): RadioElement[] => {
-    return React.Children.map(source, this.createComponentChild);
+  private renderComponentChildren = (source: RadioElement | RadioElement[]): RadioElement[] => {
+    return React.Children.map(source, this.renderComponentChild);
   };
 
   public render(): React.ReactElement<ViewProps> {
     const { style, themedStyle, children, ...derivedProps } = this.props;
     const { container }: StyleType = this.getComponentStyle(themedStyle);
 
-    const componentChildren: RadioElement[] = this.createComponentChildren(children);
+    const componentChildren: RadioElement[] = this.renderComponentChildren(children);
 
     return (
       <View

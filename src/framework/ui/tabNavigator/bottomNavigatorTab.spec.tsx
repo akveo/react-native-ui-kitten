@@ -1,9 +1,11 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { render } from 'react-native-testing-library';
 import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import * as config from './bottomNavigatorTab.spec.config';
 import {
@@ -33,7 +35,8 @@ describe('@bottom-navigator-tab: component checks', () => {
   it('* with icon', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
-      <Mock getIconSource={getImageSource}/>,
+      <Mock
+        icon={(style: StyleType) => <Image source={getImageSource()} style={style}/>}/>,
     );
     expect(component).toMatchSnapshot();
   });
@@ -42,7 +45,7 @@ describe('@bottom-navigator-tab: component checks', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
       <Mock
-        getIconSource={getImageSource}
+        icon={(style: StyleType) => <Image source={getImageSource()} style={style}/>}
         selected={true}
         title='Test'
       />,
@@ -54,7 +57,7 @@ describe('@bottom-navigator-tab: component checks', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
       <Mock
-        getIconSource={getImageSource}
+        icon={(style: StyleType) => <Image source={getImageSource()} style={style}/>}
         selected={false}
         title='Test'
       />,
@@ -64,7 +67,9 @@ describe('@bottom-navigator-tab: component checks', () => {
 
   it('* getIconSource', () => {
     const getImageSource = jest.fn();
-    const component = render(<Mock getIconSource={getImageSource}/>);
+    const component = render(
+      <Mock icon={getImageSource}/>,
+    );
     expect(getImageSource).toHaveBeenCalled();
   });
 

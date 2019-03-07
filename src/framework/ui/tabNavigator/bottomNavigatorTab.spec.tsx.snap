@@ -49,7 +49,8 @@ exports[`@bottom-navigator-tab: component checks * text/selected 1`] = `
     style={
       Object {
         "height": 40,
-        "marginBottom": 5,
+        "marginBottom": undefined,
+        "tintColor": "#3366FF",
         "width": 40,
       }
     }
@@ -94,7 +95,8 @@ exports[`@bottom-navigator-tab: component checks * text/unselected 1`] = `
     style={
       Object {
         "height": 40,
-        "marginBottom": 5,
+        "marginBottom": undefined,
+        "tintColor": "#8992A3",
         "width": 40,
       }
     }
@@ -139,7 +141,8 @@ exports[`@bottom-navigator-tab: component checks * with icon 1`] = `
     style={
       Object {
         "height": 40,
-        "marginBottom": 5,
+        "marginBottom": undefined,
+        "tintColor": "#8992A3",
         "width": 40,
       }
     }

@@ -3,12 +3,14 @@ import {
   ImageSourcePropType,
   Text,
   View,
+  Image,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Button,
@@ -43,41 +45,41 @@ class ButtonGroup extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               appearance={APPEARANCE}
               size='giant'>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroupComponent>
             <ButtonGroupComponent
               style={this.props.themedStyle.component}
               appearance={APPEARANCE}
               size='large'>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroupComponent>
             <ButtonGroupComponent
               style={this.props.themedStyle.component}
               appearance={APPEARANCE}
               size='medium'>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroupComponent>
             <ButtonGroupComponent
               style={this.props.themedStyle.component}
               appearance={APPEARANCE}
               size='small'>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroupComponent>
             <ButtonGroupComponent
               style={this.props.themedStyle.component}
               appearance={APPEARANCE}
               size='tiny'>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
-              <Button icon={ICON}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroupComponent>
           </View>
         </View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ImageSourcePropType,
+  Image,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -13,6 +13,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Button as ButtonComponent,
@@ -49,7 +50,11 @@ describe('@button: matches snapshot', () => {
 
   describe('* appearance', () => {
 
-    const icon: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+    const icon = (style: StyleType) => (
+      <Image
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+        style={style}/>
+    );
     const text: React.ReactText = 'BUTTON';
 
     it('* empty', () => {

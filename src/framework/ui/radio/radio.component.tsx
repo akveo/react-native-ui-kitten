@@ -51,15 +51,15 @@ export class Radio extends React.Component<Props> {
     return {
       container: {
         ...container,
-        ...strictStyles.container,
+        ...styles.container,
       },
       select: {
         ...select,
-        ...strictStyles.select,
+        ...styles.select,
       },
       highlight: {
         ...highlight,
-        ...strictStyles.highlight,
+        ...styles.highlight,
       },
     };
   };
@@ -75,7 +75,7 @@ export class Radio extends React.Component<Props> {
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={strictStyles.container}>
+        <View style={styles.container}>
           <View style={highlight}/>
           <View style={container}>
             <View style={select}/>
@@ -86,7 +86,7 @@ export class Radio extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',

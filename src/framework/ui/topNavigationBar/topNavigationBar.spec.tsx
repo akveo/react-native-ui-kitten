@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableWithoutFeedback, Image } from 'react-native';
 import {
   render,
   fireEvent,
@@ -8,6 +9,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   TopNavigationBar as TopNavigationBarComponent,
@@ -18,7 +20,6 @@ import {
   Props as TopNavigationBaActionProps,
 } from './topNavigationBarAction.component';
 import * as config from './topNavigationBar.spec.config';
-import { TouchableWithoutFeedback } from 'react-native';
 
 const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
 const TopNavigationBarAction =
@@ -70,12 +71,24 @@ describe('@top-navigation-bar/action', () => {
         title='Test'
         subtitle='Subtitle'
         leftControl={
-          <ActionMock testID={testIdLeftAction} iconSource={{ uri: iconSourceUri }} onPress={onLeftControl}/>
+          <ActionMock
+            testID={testIdLeftAction}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
+            onPress={onLeftControl}/>
         }
         rightControls={[
-          <ActionMock testID={testIdRightAction1} iconSource={{ uri: iconSourceUri }} onPress={onRightControl1}/>,
-          <ActionMock testID={testIdRightAction2} iconSource={{ uri: iconSourceUri }} onPress={onRightControl2}/>,
-          <ActionMock testID={testIdRightAction3} iconSource={{ uri: iconSourceUri }} onPress={onRightControl3}/>,
+          <ActionMock
+            testID={testIdRightAction1}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
+            onPress={onRightControl1}/>,
+          <ActionMock
+            testID={testIdRightAction2}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
+            onPress={onRightControl2}/>,
+          <ActionMock
+            testID={testIdRightAction3}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
+            onPress={onRightControl3}/>,
         ]}
       />;
     const renderedComponent = render(component);
@@ -93,23 +106,37 @@ describe('@top-navigation-bar/action', () => {
   });
 
   it('* action/with icon uri', () => {
-    const { output } = shallow(<ActionMock iconSource={{uri: iconSourceUri}}/>);
+    const { output } = shallow(
+      <ActionMock
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}/>,
+    );
     expect(output).toMatchSnapshot();
   });
 
   it('* action/is last item check (true)', () => {
-    const { output } = shallow(<ActionMock iconSource={{uri: iconSourceUri}} isLastItem={true}/>);
+    const { output } = shallow(
+      <ActionMock
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
+        isLastItem={true}/>,
+    );
     expect(output).toMatchSnapshot();
   });
 
   it('* action/is last item check (false)', () => {
-    const { output } = shallow(<ActionMock iconSource={{uri: iconSourceUri}} isLastItem={false}/>);
+    const { output } = shallow(
+      <ActionMock
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
+        isLastItem={false}/>,
+    );
     expect(output).toMatchSnapshot();
   });
 
   it('* action/on press check', () => {
     const onPress = jest.fn();
-    const component = <ActionMock iconSource={{uri: iconSourceUri}} onPress={onPress}/>;
+    const component =
+      <ActionMock
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
+        onPress={onPress}/>;
     const renderedComponent = render(component);
     const { output } = shallow(component);
 

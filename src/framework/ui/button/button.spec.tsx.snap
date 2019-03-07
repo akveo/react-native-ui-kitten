@@ -3,23 +3,23 @@
 exports[`@button: matches snapshot * appearance * empty 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
-  appearance="filled"
+  appearance="default"
   dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
+      undefined,
       Object {
-        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
         "minWidth": 24,
         "padding": 4,
       },
-      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -45,28 +45,24 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
 exports[`@button: matches snapshot * appearance * icon 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
-  appearance="filled"
+  appearance="default"
   dispatch={[Function]}
-  icon={
-    Object {
-      "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-    }
-  }
+  icon={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
+      undefined,
       Object {
-        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
         "minWidth": 24,
         "padding": 4,
       },
-      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -96,6 +92,15 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
     style={
       Array [
         Object {
+          "height": 14,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 14,
+        },
+        Object {},
+      ]
+      Array [
+        Object {
           "height": 13,
           "marginHorizontal": 4,
           "tintColor": "#ffffff",
@@ -103,6 +108,11 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
         },
         Object {},
       ]
+      Object {
+        "height": 14,
+        "tintColor": "#ffffff",
+        "width": 14,
+      }
     }
   />
 </TouchableOpacity>
@@ -111,28 +121,24 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
 exports[`@button: matches snapshot * appearance * icon and text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
-  appearance="filled"
+  appearance="default"
   dispatch={[Function]}
-  icon={
-    Object {
-      "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-    }
-  }
+  icon={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
+      undefined,
       Object {
-        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
         "minWidth": 24,
         "padding": 4,
       },
-      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -160,6 +166,20 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
       }
     }
     style={
+      Object {
+        "height": 14,
+        "tintColor": "#ffffff",
+        "width": 14,
+      }
+      Array [
+        Object {
+          "height": 14,
+          "marginHorizontal": 4,
+          "tintColor": "#ffffff",
+          "width": 14,
+        },
+        Object {},
+      ]
       Array [
         Object {
           "height": 13,
@@ -192,23 +212,23 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
 exports[`@button: matches snapshot * appearance * text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
-  appearance="filled"
+  appearance="default"
   dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
+      undefined,
       Object {
-        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
         "minWidth": 24,
         "padding": 4,
       },
-      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",
@@ -250,23 +270,23 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
 exports[`@button: matches snapshot * interaction * stateless 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
-  appearance="filled"
+  appearance="default"
   dispatch={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
+      undefined,
       Object {
-        "backgroundColor": "#2196F3",
         "borderRadius": 6,
         "flexDirection": "row",
         "minHeight": 24,
         "minWidth": 24,
         "padding": 4,
       },
-      undefined,
       Object {
         "alignItems": "center",
         "justifyContent": "space-evenly",

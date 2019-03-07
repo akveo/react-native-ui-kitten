@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Alert,
+  Image,
 } from 'react-native';
 import {
   NavigationScreenProps,
@@ -13,6 +14,7 @@ import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   TopNavigationBar as TopNavigationBarComponent,
@@ -21,13 +23,9 @@ import {
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-const APPEARANCE: string = 'title-centered';
-
-const leftControlUri: string = 'https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png';
-const rightControlUri1: string =
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLai-QccSTB98vmP7dUigtL8F13cE6_0mmju_1m4mDQgzLd_Zq';
-const rightControlUri2: string =
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt6ezD4tiscqX5g4AFKa0vFC0z7rLTlAJn53Jl65uZ5JfPq4Ot';
+const leftControlUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-back.png';
+const rightControlUri1: string = 'https://akveo.github.io/eva-icons/fill/png/128/at.png';
+const rightControlUri2: string = 'https://akveo.github.io/eva-icons/fill/png/128/flash.png';
 
 class TopNavigationBar extends React.Component<Props> {
 
@@ -35,22 +33,25 @@ class TopNavigationBar extends React.Component<Props> {
     header: (props: NavigationScreenProps) => (
       <SafeAreaView style={styles.safeAreaView}>
         <TopNavigationBarComponent
-          appearance={APPEARANCE}
+          appearance='title-centered'
           title='Top Navigation Bar'
           subtitle='Subtitle'
           leftControl={
             <TopNavigationBarAction
-              iconSource={{ uri: leftControlUri }}
+              icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
               onPress={() => props.navigation.goBack(null)}
             />
           }
           rightControls={[
             <TopNavigationBarAction
-              iconSource={{ uri: rightControlUri1 }}
+              icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}
               onPress={() => Alert.alert('On first right action')}
             />,
             <TopNavigationBarAction
-              iconSource={{ uri: rightControlUri2 }}
+              icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={[
+                style,
+                styles.icon,
+              ]}/>}
               onPress={() => Alert.alert('On second right action')}
             />,
           ]}
@@ -79,7 +80,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#3366FF',
   },
   icon: {
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
+    tintColor: 'red',
   },
 });

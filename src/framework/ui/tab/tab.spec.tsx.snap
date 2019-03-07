@@ -46,7 +46,13 @@ exports[`@tab: component checks * icon 1`] = `
         "uri": "https://facebook.github.io/react-native/docs/assets/favicon.png",
       }
     }
-    style={Object {}}
+    style={
+      Object {
+        "height": 20,
+        "tintColor": "#8992A3",
+        "width": 20,
+      }
+    }
   />
 </View>
 `;

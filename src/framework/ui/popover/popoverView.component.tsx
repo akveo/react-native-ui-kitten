@@ -11,7 +11,6 @@ import {
   Placement,
   Placements,
 } from './type';
-import { number } from 'prop-types';
 
 interface PopoverViewProps {
   placement?: string | Placement;
@@ -31,7 +30,7 @@ export class PopoverView extends React.Component<Props> {
 
   private getComponentStyle = (source: StyleType, placement: Placement): StyleType => {
     const { direction, alignment } = placement.flex();
-    const { width: indicatorWidth } = strictStyles.indicator;
+    const { width: indicatorWidth } = styles.indicator;
 
     const isVertical: boolean = direction.startsWith('column');
     const isStart: boolean = alignment.endsWith('start');
@@ -59,7 +58,7 @@ export class PopoverView extends React.Component<Props> {
       transform: [
         { translateX: containerTranslate },
       ],
-      ...strictStyles.container,
+      ...styles.container,
     };
 
     const contentStyle: ViewStyle = {
@@ -68,7 +67,7 @@ export class PopoverView extends React.Component<Props> {
         { translateX: containerTranslate },
       ],
       ...StyleSheet.flatten(source),
-      ...strictStyles.content,
+      ...styles.content,
     };
 
     const indicatorStyle: ViewStyle = {
@@ -82,7 +81,7 @@ export class PopoverView extends React.Component<Props> {
         { translateX: isStart ? -indicatorTranslate : 0 },
         { translateX: isEnd ? indicatorTranslate : 0 },
       ],
-      ...strictStyles.indicator,
+      ...styles.indicator,
     };
 
     return {
@@ -112,7 +111,7 @@ export class PopoverView extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
   },

@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  Image,
   Text,
   TextProps,
   ImageProps,
-  ImageSourcePropType,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
@@ -15,7 +13,7 @@ import {
 
 interface TabProps {
   title?: string;
-  icon?: ImageSourcePropType;
+  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -41,43 +39,36 @@ export class Tab extends React.Component<Props> {
         justifyContent: 'center',
         alignItems: 'center',
       },
-      icon: {},
+      icon: source.icon,
       title: source.text,
     };
   };
 
-  private createTextComponent = (style: StyleType): React.ReactElement<TextProps> => {
-    return (
+  private renderTextComponent = (style: StyleType): React.ReactElement<TextProps> | null => {
+    return this.props.title ? (
       <Text
         style={style}
         key={1}>
         {this.props.title}
       </Text>
-    );
+    ) : null;
   };
 
-  private createImageComponent = (style: StyleType): React.ReactElement<ImageProps> => (
-    <Image
-      style={style}
-      key={0}
-      source={this.props.icon}
-    />
-  );
-
-  private createComponentChildren = (style: StyleType): React.ReactNode => {
-    const { icon, title } = this.props;
-
-    return [
-      icon ? this.createImageComponent(style.icon) : undefined,
-      title ? this.createTextComponent(style.title) : undefined,
-    ];
+  private renderImageComponent = (style: StyleType): React.ReactElement<ImageProps> | null => {
+    const icon: React.ReactElement<ImageProps> = this.props.icon && this.props.icon(style);
+    return icon ? React.cloneElement(icon, { key: 2 }) : null;
   };
+
+  private renderComponentChildren = (style: StyleType): React.ReactNode => ([
+    this.renderImageComponent(style.icon),
+    this.renderTextComponent(style.title),
+  ]);
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles }: StyleType = this.getComponentStyle(themedStyle);
 
-    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity

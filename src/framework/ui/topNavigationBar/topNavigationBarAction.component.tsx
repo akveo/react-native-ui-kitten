@@ -2,10 +2,7 @@ import React from 'react';
 import {
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
-  Image,
   ImageProps,
-  ImageSourcePropType,
-  StyleSheet,
   View,
 } from 'react-native';
 import {
@@ -14,7 +11,7 @@ import {
 } from '@kitten/theme';
 
 interface TopNavigationBarActionProps {
-  iconSource: ImageSourcePropType;
+  icon: (style: StyleType) => React.ReactElement<ImageProps>;
   isLastItem?: boolean;
   onPress?: () => void;
 }
@@ -31,13 +28,22 @@ export class TopNavigationBarAction extends React.Component<Props> {
     this.props.onPress && this.props.onPress();
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => ({
-    container: {
-      width: style.width,
-      height: style.height,
-      marginRight: this.props.isLastItem ? 0 : style.marginRight,
-    },
-  });
+  private getComponentStyle = (style: StyleType): StyleType => {
+    const { marginRight, ...icon } = style;
+    return {
+      container: {
+        marginRight: this.props.isLastItem ? 0 : marginRight,
+        flex: 1,
+      },
+      icon: {
+        ...icon,
+      },
+    };
+  };
+
+  private renderIcon(style: StyleType): React.ReactElement<ImageProps> {
+    return this.props.icon(style);
+  }
 
   public render(): React.ReactNode {
     const componentStyle: StyleType = this.getComponentStyle(this.props.themedStyle);
@@ -46,16 +52,10 @@ export class TopNavigationBarAction extends React.Component<Props> {
       <TouchableWithoutFeedback onPress={this.onPress}>
         <View
           {...this.props}
-          style={[componentStyle.container, this.props.style]}>
-          <Image style={styles.image} source={this.props.iconSource}/>
+          style={componentStyle.container}>
+          {this.renderIcon(componentStyle.icon)}
         </View>
       </TouchableWithoutFeedback>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-  },
-});
