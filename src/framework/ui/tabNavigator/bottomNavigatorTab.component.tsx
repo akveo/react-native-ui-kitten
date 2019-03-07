@@ -3,21 +3,18 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  Image,
   ImageProps,
-  ImageSourcePropType,
   TextProps,
   TouchableOpacityProps,
 } from 'react-native';
 import {
-  Interaction,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 
 interface BottomNavigatorTabProps {
   title?: string;
-  icon?: (width: number, height: number, color: string) => React.ReactElement<ImageProps>;
+  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -33,22 +30,17 @@ export class BottomNavigatorTab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { icon, text, ...container } = source;
-    const { color, selectedColor, ...textStyle } = text;
+    const { icon, text } = source;
 
     return {
-      container: container,
       icon: icon,
-      title: {
-        ...textStyle,
-        color: this.props.selected ? selectedColor : color,
-      },
+      title: text,
     };
   };
 
   private renderImageElement(style: StyleType): React.ReactElement<ImageProps> | null {
     const icon: React.ReactElement<ImageProps> = this.props.icon ?
-      this.props.icon(style.width, style.height, style.color) : null;
+      this.props.icon(style) : null;
     return icon ? React.cloneElement(icon, {
       style: {
         ...(icon.props.style as object),
@@ -69,20 +61,20 @@ export class BottomNavigatorTab extends React.Component<Props> {
     ) : null;
   }
 
-  private createComponentChildren = (style: StyleType): React.ReactNode => ([
+  private renderComponentChildren = (style: StyleType): React.ReactNode => ([
     this.renderImageElement(style.icon),
     this.renderTextElement(style.title),
   ]);
 
   public render(): React.ReactNode {
     const { style, themedStyle, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
+    const componentStyles: StyleType = this.getComponentStyle(themedStyle);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[style, container, strictStyles.container]}
+        style={[style, styles.container]}
         activeOpacity={1.0}
         onPress={this.onPress}>
         {componentChildren}
@@ -91,7 +83,7 @@ export class BottomNavigatorTab extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

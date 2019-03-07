@@ -7,13 +7,13 @@ import {
 import {
   fireEvent,
   render,
-  shallow,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Tab as TabComponent,
@@ -62,16 +62,11 @@ describe('@tab: component checks', () => {
   it('* icon', () => {
     const component = render(
       <Mock
-        icon={(width: number, height: number, color: string) => (
+        icon={(style: StyleType) =>
           <Image
             source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}
-          />
-        )}
+            style={style}
+          />}
       />,
     );
 
@@ -176,6 +171,5 @@ describe('@tab-view: component checks', () => {
 
     expect(unloadedChild.props.children).toEqual(undefined);
   });
-
 });
 

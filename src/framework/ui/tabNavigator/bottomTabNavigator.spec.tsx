@@ -11,6 +11,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import * as config from './bottomTabNavigator.spec.config';
 import * as tabsConfig from './bottomNavigatorTab.spec.config';
@@ -59,42 +60,15 @@ describe('@bottom-tab-navigator: component checks', () => {
     const component = render(
       <Mock>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab1Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab1Uri()} style={style}/>}
           title='Screen 1'
           selected={false}/>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab2Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab2Uri()} style={style}/>}
           title='Screen 2'
           selected={true}/>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab3Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab3Uri()} style={style}/>}
           title='Screen 3'
           selected={false}/>
       </Mock>,
@@ -106,42 +80,15 @@ describe('@bottom-tab-navigator: component checks', () => {
     const component =
       <Mock selectedIndex={1}>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab1Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab1Uri()} style={style}/>}
           title='Screen 1'
           selected={false}/>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab2Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab2Uri()} style={style}/>}
           title='Screen 2'
           selected={true}/>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab3Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab3Uri()} style={style}/>}
           title='Screen 3'
           selected={false}/>
       </Mock>;
@@ -157,43 +104,16 @@ describe('@bottom-tab-navigator: component checks', () => {
         selectedIndex={1}
         onSelect={onSelect}>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab1Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab1Uri()} style={style}/>}
           title='Screen 1'
           selected={false}/>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab2Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab2Uri()} style={style}/>}
           title='Screen 2'
           selected={true}/>
         <MockTab
           testID={tabTestId}
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab3Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab3Uri()} style={style}/>}
           title='Screen 3'
           selected={false}/>
       </Mock>,
@@ -212,43 +132,16 @@ describe('@bottom-tab-navigator: component checks', () => {
         selectedIndex={1}
         onSelect={onSelect}>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab1Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab1Uri()} style={style}/>}
           title='Screen 1'
           selected={false}/>
         <MockTab
           testID={tabTestId}
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab2Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab2Uri()} style={style}/>}
           title='Screen 2'
           selected={true}/>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab3Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab3Uri()} style={style}/>}
           title='Screen 3'
           selected={false}/>
       </Mock>,
@@ -262,43 +155,16 @@ describe('@bottom-tab-navigator: component checks', () => {
     const component = render(
       <Mock appearance='highlight'>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab1Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab1Uri()} style={style}/>}
           title='Screen 1'
           selected={false}/>
         <MockTab
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab3Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab2Uri()} style={style}/>}
           title='Screen 2'
           selected={true}/>
         <MockTab
           testID={tabTestId}
-          icon={(width: number, height: number, color: string) => (
-            <Image
-              source={getTab3Uri()}
-              style={{
-                width: width,
-                height: height,
-                tintColor: color,
-              }}
-            />
-          )}
+          icon={(style: StyleType) => <Image source={getTab3Uri()} style={style}/>}
           title='Screen 3'
           selected={false}/>
       </Mock>,

@@ -9,6 +9,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   TopNavigationBar as TopNavigationBarComponent,
@@ -72,53 +73,21 @@ describe('@top-navigation-bar/action', () => {
         leftControl={
           <ActionMock
             testID={testIdLeftAction}
-            icon={(width: number, height: number, color: string) => (
-              <Image
-                source={{ uri: iconSourceUri }}
-                style={{
-                  width: width,
-                  height: height,
-                  tintColor: color,
-                }}/>
-            )}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
             onPress={onLeftControl}/>
         }
         rightControls={[
           <ActionMock
             testID={testIdRightAction1}
-            icon={(width: number, height: number, color: string) => (
-              <Image
-                source={{ uri: iconSourceUri }}
-                style={{
-                  width: width,
-                  height: height,
-                  tintColor: color,
-                }}/>
-            )}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
             onPress={onRightControl1}/>,
           <ActionMock
             testID={testIdRightAction2}
-            icon={(width: number, height: number, color: string) => (
-              <Image
-                source={{ uri: iconSourceUri }}
-                style={{
-                  width: width,
-                  height: height,
-                  tintColor: color,
-                }}/>
-            )}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
             onPress={onRightControl2}/>,
           <ActionMock
             testID={testIdRightAction3}
-            icon={(width: number, height: number, color: string) => (
-              <Image
-                source={{ uri: iconSourceUri }}
-                style={{
-                  width: width,
-                  height: height,
-                  tintColor: color,
-                }}/>
-            )}
+            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
             onPress={onRightControl3}/>,
         ]}
       />;
@@ -139,15 +108,7 @@ describe('@top-navigation-bar/action', () => {
   it('* action/with icon uri', () => {
     const { output } = shallow(
       <ActionMock
-        icon={(width: number, height: number, color: string) => (
-          <Image
-            source={{ uri: iconSourceUri }}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}/>
-        )}/>,
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}/>,
     );
     expect(output).toMatchSnapshot();
   });
@@ -155,15 +116,7 @@ describe('@top-navigation-bar/action', () => {
   it('* action/is last item check (true)', () => {
     const { output } = shallow(
       <ActionMock
-        icon={(width: number, height: number, color: string) => (
-          <Image
-            source={{ uri: iconSourceUri }}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}/>
-        )}
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
         isLastItem={true}/>,
     );
     expect(output).toMatchSnapshot();
@@ -172,15 +125,7 @@ describe('@top-navigation-bar/action', () => {
   it('* action/is last item check (false)', () => {
     const { output } = shallow(
       <ActionMock
-        icon={(width: number, height: number, color: string) => (
-          <Image
-            source={{ uri: iconSourceUri }}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}/>
-        )}
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
         isLastItem={false}/>,
     );
     expect(output).toMatchSnapshot();
@@ -190,15 +135,7 @@ describe('@top-navigation-bar/action', () => {
     const onPress = jest.fn();
     const component =
       <ActionMock
-        icon={(width: number, height: number, color: string) => (
-          <Image
-            source={{ uri: iconSourceUri }}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}/>
-        )}
+        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
         onPress={onPress}/>;
     const renderedComponent = render(component);
     const { output } = shallow(component);

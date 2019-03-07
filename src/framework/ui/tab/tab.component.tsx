@@ -13,7 +13,7 @@ import {
 
 interface TabProps {
   title?: string;
-  icon?: (width: number, height: number, color: string) => React.ReactElement<ImageProps>;
+  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -56,7 +56,7 @@ export class Tab extends React.Component<Props> {
 
   private createImageComponent = (style: StyleType): React.ReactElement<ImageProps> | null => {
     const icon: React.ReactElement<ImageProps> =
-      this.props.icon && this.props.icon(style.width, style.height, style.color);
+      this.props.icon && this.props.icon(style);
     return icon ? React.cloneElement(icon, { key: 2 }) : null;
   };
 

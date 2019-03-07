@@ -5,6 +5,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import * as config from './bottomNavigatorTab.spec.config';
 import {
@@ -35,16 +36,7 @@ describe('@bottom-navigator-tab: component checks', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
       <Mock
-        icon={(width: number, height: number, color: string) => (
-          <Image
-            source={getImageSource()}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}
-          />
-        )}/>,
+        icon={(style: StyleType) => <Image source={getImageSource()} style={style}/>}/>,
     );
     expect(component).toMatchSnapshot();
   });
@@ -53,16 +45,7 @@ describe('@bottom-navigator-tab: component checks', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
       <Mock
-        icon={(width: number, height: number, color: string) => (
-          <Image
-            source={getImageSource()}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}
-          />
-        )}
+        icon={(style: StyleType) => <Image source={getImageSource()} style={style}/>}
         selected={true}
         title='Test'
       />,
@@ -74,16 +57,7 @@ describe('@bottom-navigator-tab: component checks', () => {
     const getImageSource = () => ({ uri: testTabUri });
     const component = render(
       <Mock
-        icon={(width: number, height: number, color: string) => (
-          <Image
-            source={getImageSource()}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}
-          />
-        )}
+        icon={(style: StyleType) => <Image source={getImageSource()} style={style}/>}
         selected={false}
         title='Test'
       />,

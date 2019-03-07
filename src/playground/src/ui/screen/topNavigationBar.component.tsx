@@ -14,6 +14,7 @@ import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   TopNavigationBar as TopNavigationBarComponent,
@@ -37,42 +38,20 @@ class TopNavigationBar extends React.Component<Props> {
           subtitle='Subtitle'
           leftControl={
             <TopNavigationBarAction
-              icon={(width: number, height: number, color: string) => (
-                <Image
-                  source={{ uri: leftControlUri }}
-                  style={{
-                    width: width,
-                    height: height,
-                    tintColor: color,
-                  }}/>
-              )}
+              icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
               onPress={() => props.navigation.goBack(null)}
             />
           }
           rightControls={[
             <TopNavigationBarAction
-              icon={(width: number, height: number, color: string) => (
-                <Image
-                  source={{ uri: rightControlUri1 }}
-                  style={{
-                    width: width,
-                    height: height,
-                    tintColor: color,
-                    ...styles.icon,
-                  }}/>
-              )}
+              icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}
               onPress={() => Alert.alert('On first right action')}
             />,
             <TopNavigationBarAction
-              icon={(width: number, height: number, color: string) => (
-                <Image
-                  source={{ uri: rightControlUri2 }}
-                  style={{
-                    width: width,
-                    height: height,
-                    tintColor: color,
-                  }}/>
-              )}
+              icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={[
+                style,
+                styles.icon,
+              ]}/>}
               onPress={() => Alert.alert('On second right action')}
             />,
           ]}

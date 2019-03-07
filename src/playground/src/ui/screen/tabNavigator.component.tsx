@@ -18,6 +18,7 @@ import {
   BottomTabNavigator as BottomTabNavigatorComponent,
   BottomNavigatorTab,
 } from '@kitten/ui';
+import { StyleType } from '@kitten/theme';
 
 const APPEARANCE: string = 'default';
 
@@ -77,40 +78,28 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
         navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>
       <BottomNavigatorTab
         title='Screen 1'
-        icon={(width: number, height: number, color: string) => (
+        icon={(style: StyleType) => (
           <Image
             source={getIconSource(1, index === 0)}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}
+            style={style}
           />
         )}
       />
       <BottomNavigatorTab
         title='Screen 2'
-        icon={(width: number, height: number, color: string) => (
+        icon={(style: StyleType) => (
           <Image
             source={getIconSource(2, index === 1)}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}
+            style={style}
           />
         )}
       />
       <BottomNavigatorTab
         title='Screen 3'
-        icon={(width: number, height: number, color: string) => (
+        icon={(style: StyleType) => (
           <Image
             source={getIconSource(3, index === 2)}
-            style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}
+            style={style}
           />
         )}
       />

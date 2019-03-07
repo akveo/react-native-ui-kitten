@@ -11,7 +11,7 @@ import {
 } from '@kitten/theme';
 
 interface TopNavigationBarActionProps {
-  icon: (width: number, height: number, color: string) => React.ReactElement<ImageProps>;
+  icon: (style: StyleType) => React.ReactElement<ImageProps>;
   isLastItem?: boolean;
   onPress?: () => void;
 }
@@ -28,18 +28,21 @@ export class TopNavigationBarAction extends React.Component<Props> {
     this.props.onPress && this.props.onPress();
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => ({
-    container: {
-      marginRight: this.props.isLastItem ? 0 : style.marginRight,
-    },
-    icon: {
-      flex: 1,
-      ...style.icon,
-    },
-  });
+  private getComponentStyle = (style: StyleType): StyleType => {
+    const { marginRight, ...icon } = style;
+    return {
+      container: {
+        marginRight: this.props.isLastItem ? 0 : marginRight,
+        flex: 1,
+      },
+      icon: {
+        ...icon,
+      },
+    };
+  };
 
   private renderIcon(style: StyleType): React.ReactElement<ImageProps> {
-    return this.props.icon(style.width, style.height, style.color);
+    return this.props.icon(style);
   }
 
   public render(): React.ReactNode {
@@ -49,7 +52,7 @@ export class TopNavigationBarAction extends React.Component<Props> {
       <TouchableWithoutFeedback onPress={this.onPress}>
         <View
           {...this.props}
-          style={[componentStyle.container, this.props.style]}>
+          style={componentStyle.container}>
           {this.renderIcon(componentStyle.icon)}
         </View>
       </TouchableWithoutFeedback>

@@ -74,6 +74,9 @@ export const mapping: ThemeMappingType = {
         'marginRight': {
           'type': 'number',
         },
+        'tintColor': {
+          'type': 'color',
+        },
       },
       'appearances': {
         'default': {
@@ -89,6 +92,7 @@ export const mapping: ThemeMappingType = {
           'width': 25,
           'height': 25,
           'marginRight': 8,
+          'tintColor': 'white',
         },
       },
     },

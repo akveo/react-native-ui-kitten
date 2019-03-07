@@ -8,6 +8,7 @@ import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
   ThemedComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Tab as TabComponent,
@@ -46,33 +47,17 @@ class TabView extends React.Component<Props, State> {
         onSelect={this.onSelect}>
         <TabComponent
           title='Tab 1'
-          icon={(width: number, height: number, color: string) =>
-            (<Image source={ICON1} style={{
-              width: width,
-              height: height,
-              tintColor: color,
-              ...this.props.themedStyle.icon,
-            }}/>)}>
+          icon={(style: StyleType) => <Image source={ICON1} style={style}/>}>
           <Text>Tab 1</Text>
         </TabComponent>
         <TabComponent
           title='Tab 2'
-          icon={(width: number, height: number, color: string) =>
-            (<Image source={ICON2} style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}/>)}>
+          icon={(style: StyleType) => <Image source={ICON2} style={style}/>}>
           <Text>Tab 2</Text>
         </TabComponent>
         <TabComponent
           title='Tab 3'
-          icon={(width: number, height: number, color: string) =>
-            (<Image source={ICON1} style={{
-              width: width,
-              height: height,
-              tintColor: color,
-            }}/>)}>
+          icon={(style: StyleType) => <Image source={ICON3} style={style}/>}>
           <Text>Tab 3</Text>
         </TabComponent>
       </TabViewComponent>

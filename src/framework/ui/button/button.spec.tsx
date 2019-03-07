@@ -13,6 +13,7 @@ import {
   styled,
   StyleProvider,
   StyleProviderProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Button as ButtonComponent,
@@ -49,14 +50,10 @@ describe('@button: matches snapshot', () => {
 
   describe('* appearance', () => {
 
-    const icon = (width: number, height: number, color: string) => (
+    const icon = (style: StyleType) => (
       <Image
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-        style={{
-          width: width,
-          height: height,
-          tintColor: color,
-        }}/>
+        style={style}/>
     );
     const text: React.ReactText = 'BUTTON';
 

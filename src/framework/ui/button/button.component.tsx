@@ -22,7 +22,7 @@ import {
 } from './type';
 
 interface ButtonProps {
-  icon?: (width: number, height: number, color: string) => React.ReactElement<ImageProps>;
+  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
   alignment?: string | ButtonAlignment;
@@ -91,12 +91,12 @@ export class Button extends React.Component<Props> {
 
   private createImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
     const { icon } = this.props;
-    return icon && React.cloneElement(icon(style.width, style.height, style.color), {
+    return icon && React.cloneElement(icon(style), {
       key: 2,
     });
   };
 
-  private createComponentChildren = (style: StyleType): React.ReactNode => {
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
     const { icon, children } = this.props;
 
     const hasIcon: boolean = icon !== undefined;
@@ -111,7 +111,7 @@ export class Button extends React.Component<Props> {
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
