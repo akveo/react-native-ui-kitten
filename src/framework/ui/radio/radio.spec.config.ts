@@ -103,72 +103,64 @@ export const mapping: ThemeMappingType = {
         'variant': {
           'status': {
             'error': {
-              'mapping': {
-                'borderColor': 'pink-primary',
-                'state': {
-                  'checked': {
-                    'borderColor': 'pink-primary',
-                    'select': {
-                      'backgroundColor': 'pink-primary',
-                    },
+              'borderColor': 'pink-primary',
+              'state': {
+                'checked': {
+                  'borderColor': 'pink-primary',
+                  'select': {
+                    'backgroundColor': 'pink-primary',
                   },
-                  'checked.active': {
-                    'borderColor': 'pink-primary',
-                  },
+                },
+                'checked.active': {
+                  'borderColor': 'pink-primary',
                 },
               },
             },
           },
           'size': {
             'small': {
-              'mapping': {
-                'width': 30,
-                'height': 30,
-                'borderRadius': 15,
-                'select': {
-                  'width': 20,
-                  'height': 20,
-                  'borderRadius': 10,
-                },
-                'highlight': {
-                  'width': 50,
-                  'height': 50,
-                  'borderRadius': 25,
-                },
+              'width': 30,
+              'height': 30,
+              'borderRadius': 15,
+              'select': {
+                'width': 20,
+                'height': 20,
+                'borderRadius': 10,
+              },
+              'highlight': {
+                'width': 50,
+                'height': 50,
+                'borderRadius': 25,
               },
             },
             'medium': {
-              'mapping': {
-                'width': 36,
-                'height': 36,
-                'borderRadius': 18,
-                'select': {
-                  'width': 24,
-                  'height': 24,
-                  'borderRadius': 12,
-                },
-                'highlight': {
-                  'width': 60,
-                  'height': 60,
-                  'borderRadius': 30,
-                },
+              'width': 36,
+              'height': 36,
+              'borderRadius': 18,
+              'select': {
+                'width': 24,
+                'height': 24,
+                'borderRadius': 12,
+              },
+              'highlight': {
+                'width': 60,
+                'height': 60,
+                'borderRadius': 30,
               },
             },
             'large': {
-              'mapping': {
-                'width': 42,
-                'height': 42,
-                'borderRadius': 21,
-                'select': {
-                  'width': 28,
-                  'height': 28,
-                  'borderRadius': 14,
-                },
-                'highlight': {
-                  'width': 70,
-                  'height': 70,
-                  'borderRadius': 35,
-                },
+              'width': 42,
+              'height': 42,
+              'borderRadius': 21,
+              'select': {
+                'width': 28,
+                'height': 28,
+                'borderRadius': 14,
+              },
+              'highlight': {
+                'width': 70,
+                'height': 70,
+                'borderRadius': 35,
               },
             },
           },
