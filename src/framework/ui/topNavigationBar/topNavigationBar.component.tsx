@@ -87,15 +87,15 @@ export class TopNavigationBar extends React.Component<Props> {
     return (
       <View
         {...restProps}
-        style={[strictStyles.container, componentStyle.container, style]}>
-        <View style={[componentStyle.leftControlContainer, strictStyles.leftControlContainer]}>
+        style={[styles.container, componentStyle.container, style]}>
+        <View style={[componentStyle.leftControlContainer, styles.leftControlContainer]}>
           {leftControl}
         </View>
         <View style={componentStyle.titleContainer}>
           {this.renderTitleElement(title, componentStyle.title)}
           {this.renderTitleElement(subtitle, componentStyle.subtitle)}
         </View>
-        <View style={[strictStyles.rightControlsContainer, componentStyle.rightControlsContainer]}>
+        <View style={[styles.rightControlsContainer, componentStyle.rightControlsContainer]}>
           {this.renderRightActionElements(rightControls)}
         </View>
       </View>
@@ -103,7 +103,7 @@ export class TopNavigationBar extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     textAlign: 'center',

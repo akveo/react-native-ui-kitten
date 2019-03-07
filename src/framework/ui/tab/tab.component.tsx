@@ -44,7 +44,7 @@ export class Tab extends React.Component<Props> {
     };
   };
 
-  private createTextComponent = (style: StyleType): React.ReactElement<TextProps> | null => {
+  private renderTextComponent = (style: StyleType): React.ReactElement<TextProps> | null => {
     return this.props.title ? (
       <Text
         style={style}
@@ -54,22 +54,21 @@ export class Tab extends React.Component<Props> {
     ) : null;
   };
 
-  private createImageComponent = (style: StyleType): React.ReactElement<ImageProps> | null => {
-    const icon: React.ReactElement<ImageProps> =
-      this.props.icon && this.props.icon(style);
+  private renderImageComponent = (style: StyleType): React.ReactElement<ImageProps> | null => {
+    const icon: React.ReactElement<ImageProps> = this.props.icon && this.props.icon(style);
     return icon ? React.cloneElement(icon, { key: 2 }) : null;
   };
 
-  private createComponentChildren = (style: StyleType): React.ReactNode => ([
-    this.createImageComponent(style.icon),
-    this.createTextComponent(style.title),
+  private renderComponentChildren = (style: StyleType): React.ReactNode => ([
+    this.renderImageComponent(style.icon),
+    this.renderTextComponent(style.title),
   ]);
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles }: StyleType = this.getComponentStyle(themedStyle);
 
-    const componentChildren: React.ReactNode = this.createComponentChildren(componentStyles);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity

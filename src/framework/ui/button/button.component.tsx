@@ -77,23 +77,21 @@ export class Button extends React.Component<Props> {
     };
   };
 
-  private createTextElement = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
     const { children: text } = this.props;
 
     return (
       <Text
-        style={[style, strictStyles.text]}
+        style={[style, styles.text]}
         key={1}>
         {text}
       </Text>
     );
   };
 
-  private createImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
+  private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> | null => {
     const { icon } = this.props;
-    return icon && React.cloneElement(icon(style), {
-      key: 2,
-    });
+    return icon ? React.cloneElement(icon(style), { key: 2 }) : null;
   };
 
   private renderComponentChildren = (style: StyleType): React.ReactNode => {
@@ -103,8 +101,8 @@ export class Button extends React.Component<Props> {
     const hasText: boolean = children !== undefined;
 
     return [
-      hasIcon ? this.createImageElement(style.icon) : undefined,
-      hasText ? this.createTextElement(style.text) : undefined,
+      hasIcon ? this.renderImageElement(style.icon) : undefined,
+      hasText ? this.renderTextElement(style.text) : undefined,
     ];
   };
 
@@ -116,7 +114,7 @@ export class Button extends React.Component<Props> {
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[container, style, strictStyles.container]}
+        style={[container, style, styles.container]}
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
@@ -127,7 +125,7 @@ export class Button extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-evenly',
     alignItems: 'center',

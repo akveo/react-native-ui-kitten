@@ -79,7 +79,7 @@ export class ViewPager extends React.Component<Props> {
     }
   };
 
-  private createComponentChild = (element: ChildElement, index: number): ChildElement => {
+  private renderComponentChild = (element: ChildElement, index: number): ChildElement => {
     const { shouldLoadComponent: shouldLoad, contentWidth } = this.props;
 
     return React.createElement(View, {
@@ -90,13 +90,13 @@ export class ViewPager extends React.Component<Props> {
     });
   };
 
-  private createComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
-    return React.Children.map(source, this.createComponentChild);
+  private renderComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
+    return React.Children.map(source, this.renderComponentChild);
   };
 
   public render(): React.ReactNode {
     const { children, ...derivedProps } = this.props;
-    const componentChildren: ChildElement[] = this.createComponentChildren(children);
+    const componentChildren: ChildElement[] = this.renderComponentChildren(children);
 
     return (
       <ScrollView

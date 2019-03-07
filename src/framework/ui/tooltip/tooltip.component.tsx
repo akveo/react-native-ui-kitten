@@ -36,16 +36,16 @@ export class Tooltip extends React.Component<Props> {
     return {
       container: {
         ...popover,
-        ...strictStyles.container,
+        ...styles.container,
       },
       text: {
         ...text,
-        ...strictStyles.text,
+        ...styles.text,
       },
     };
   };
 
-  private createPopoverContentElement = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderPopoverContentElement = (style: StyleType): React.ReactElement<TextProps> => {
     const { text } = this.props;
 
     return (
@@ -59,7 +59,7 @@ export class Tooltip extends React.Component<Props> {
   public render(): React.ReactElement<PopoverProps> {
     const { children, themedStyle, ...derivedProps } = this.props;
     const { container, text } = this.getComponentStyle(themedStyle);
-    const contentElement: React.ReactElement<TextProps> = this.createPopoverContentElement(text);
+    const contentElement: React.ReactElement<TextProps> = this.renderPopoverContentElement(text);
 
     return (
       <Popover
@@ -72,7 +72,7 @@ export class Tooltip extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {},
   text: {
     alignSelf: 'center',

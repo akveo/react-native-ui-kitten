@@ -46,18 +46,18 @@ export class BottomTabNavigator extends React.Component<Props> {
     }
   };
 
-  private createIndicatorElement = (positions: number, style: StyleType): React.ReactElement<TabBarIndicatorProps> => {
+  private renderIndicatorElement = (positions: number, style: StyleType): React.ReactElement<TabBarIndicatorProps> => {
     return (
       <TabBarIndicator
         key={0}
-        style={[style, strictStyles.indicator]}
+        style={[style, styles.indicator]}
         selectedPosition={this.props.selectedIndex}
         positions={positions}
       />
     );
   };
 
-  private createTabElement = (element: ChildElement, index: number): React.ReactElement<TabProps> => {
+  private renderTabElement = (element: ChildElement, index: number): React.ReactElement<TabProps> => {
     return React.cloneElement(element, {
       key: index,
       style: { flex: 1 },
@@ -66,18 +66,18 @@ export class BottomTabNavigator extends React.Component<Props> {
     });
   };
 
-  private createComponentChildren = (items: ChildElement | ChildElement[],
+  private renderComponentChildren = (items: ChildElement | ChildElement[],
                                      style: StyleType): React.ReactElement<any>[] => {
 
     const { indicator } = style;
 
-    const tabElements: React.ReactElement<TabProps>[] = React.Children.map(items, this.createTabElement);
+    const tabElements: React.ReactElement<TabProps>[] = React.Children.map(items, this.renderTabElement);
 
     // FIXME:
     const shouldShowIndicator: boolean = indicator.backgroundColor !== 'transparent';
 
     return [
-      shouldShowIndicator ? this.createIndicatorElement(tabElements.length, indicator) : undefined,
+      shouldShowIndicator ? this.renderIndicatorElement(tabElements.length, indicator) : undefined,
       ...tabElements,
     ];
   };
@@ -86,19 +86,19 @@ export class BottomTabNavigator extends React.Component<Props> {
     const { style, themedStyle, children, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
-    const componentChildren: ChildElement[] = this.createComponentChildren(children, componentStyles);
+    const componentChildren: ChildElement[] = this.renderComponentChildren(children, componentStyles);
 
     return (
       <View
         {...derivedProps}
-        style={[container, style, strictStyles.container]}>
+        style={[container, style, styles.container]}>
         {componentChildren}
       </View>
     );
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',

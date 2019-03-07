@@ -121,7 +121,7 @@ export const MeasureNode = (props: MeasuringNodeProps): MeasuringNode => {
     }
   };
 
-  const createMeasuringElement = (element: MeasuringElement, index: number): MeasuringElement => {
+  const renderMeasuringElement = (element: MeasuringElement, index: number): MeasuringElement => {
     return (
       <MeasureElement
         key={index}
@@ -134,7 +134,7 @@ export const MeasureNode = (props: MeasuringNodeProps): MeasuringNode => {
   return (
     <View
       {...derivedProps}>
-      {children.map(createMeasuringElement)}
+      {children.map(renderMeasuringElement)}
     </View>
   );
 };
