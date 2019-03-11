@@ -110,53 +110,45 @@ export const mapping: ThemeMappingType = {
         'variant': {
           'status': {
             'error': {
-              'mapping': {
-                'borderColor': 'pink-primary',
-                'backgroundColor': '#FFC9D9',
-                'state': {
-                  'active': {
-                    'borderColor': 'pink-primary',
-                  },
-                  'checked': {
-                    'borderColor': 'pink-primary',
-                    'backgroundColor': 'pink-primary',
-                  },
-                  'checked.active': {
-                    'borderColor': 'pink-primary',
-                  },
+              'borderColor': 'pink-primary',
+              'backgroundColor': '#FFC9D9',
+              'state': {
+                'active': {
+                  'borderColor': 'pink-primary',
+                },
+                'checked': {
+                  'borderColor': 'pink-primary',
+                  'backgroundColor': 'pink-primary',
+                },
+                'checked.active': {
+                  'borderColor': 'pink-primary',
                 },
               },
             },
           },
           'size': {
             'small': {
-              'mapping': {
-                'width': 24,
-                'height': 24,
-                'highlight': {
-                  'width': 40,
-                  'height': 40,
-                },
+              'width': 24,
+              'height': 24,
+              'highlight': {
+                'width': 40,
+                'height': 40,
               },
             },
             'medium': {
-              'mapping': {
-                'width': 30,
-                'height': 30,
-                'highlight': {
-                  'width': 50,
-                  'height': 50,
-                },
+              'width': 30,
+              'height': 30,
+              'highlight': {
+                'width': 50,
+                'height': 50,
               },
             },
             'large': {
-              'mapping': {
-                'width': 36,
-                'height': 36,
-                'highlight': {
-                  'width': 60,
-                  'height': 60,
-                },
+              'width': 36,
+              'height': 36,
+              'highlight': {
+                'width': 60,
+                'height': 60,
               },
             },
           },

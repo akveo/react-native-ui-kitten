@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@input: matches snapshot * appearance * icon 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#f7f8fa",
+        "borderColor": "transparent",
+        "borderRadius": 6,
+        "borderWidth": 2,
+        "minHeight": 48,
+        "paddingHorizontal": 6,
+        "paddingVertical": 12,
+      },
+      Object {},
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+      },
+    ]
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    appearance="default"
+    dispatch={[Function]}
+    editable={true}
+    icon={[Function]}
+    onEndEditing={[Function]}
+    onFocus={[Function]}
+    style={
+      Array [
+        Object {
+          "color": "#a6aebd",
+          "marginHorizontal": 6,
+        },
+        Object {
+          "color": undefined,
+          "fontFamily": undefined,
+          "fontSize": undefined,
+          "fontStyle": undefined,
+          "fontWeight": undefined,
+          "letterSpacing": undefined,
+          "textAlign": undefined,
+        },
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-100": "#f7f8fa",
+        "gray-200": "#edf0f5",
+        "gray-300": "#c8cedb",
+        "gray-400": "#a6aebd",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+        "text-primary": "#000000",
+        "text-primary-inverse": "#ffffff",
+      }
+    }
+    underlineColorAndroid="transparent"
+  />
+  <Component
+    source={
+      Object {
+        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+      }
+    }
+    style={
+      Object {
+        "height": 24,
+        "marginHorizontal": 6,
+        "tintColor": "#a6aebd",
+        "width": 24,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`@input: matches snapshot * interaction * stateless 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#f7f8fa",
+        "borderColor": "transparent",
+        "borderRadius": 6,
+        "borderWidth": 2,
+        "minHeight": 48,
+        "paddingHorizontal": 6,
+        "paddingVertical": 12,
+      },
+      Object {},
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+      },
+    ]
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    appearance="default"
+    dispatch={[Function]}
+    editable={true}
+    onEndEditing={[Function]}
+    onFocus={[Function]}
+    style={
+      Array [
+        Object {
+          "color": "#a6aebd",
+          "marginHorizontal": 6,
+        },
+        Object {
+          "color": undefined,
+          "fontFamily": undefined,
+          "fontSize": undefined,
+          "fontStyle": undefined,
+          "fontWeight": undefined,
+          "letterSpacing": undefined,
+          "textAlign": undefined,
+        },
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-100": "#f7f8fa",
+        "gray-200": "#edf0f5",
+        "gray-300": "#c8cedb",
+        "gray-400": "#a6aebd",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+        "text-primary": "#000000",
+        "text-primary-inverse": "#ffffff",
+      }
+    }
+    underlineColorAndroid="transparent"
+  />
+</View>
+`;

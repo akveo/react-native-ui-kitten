@@ -19,7 +19,7 @@ import {
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-const APPEARANCE: string = 'default';
+const APPEARANCE: string = 'filled';
 const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
 interface State {
