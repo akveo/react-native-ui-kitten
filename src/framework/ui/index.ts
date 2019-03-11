@@ -83,6 +83,15 @@ import {
   Placement as PopoverPlacement,
   Placements as PopoverPlacements,
 } from './popover/type';
+import {
+  OverflowMenuItem as OverflowMenuItemComponent,
+  Props as OverflowMenuItemProps,
+  OverflowMenuItemType,
+} from './overflowMenu/overflowMenuItem.component';
+import {
+  OverflowMenu as OverflowMenuComponent,
+  Props as OverflowMenuProps,
+} from './overflowMenu/overflowMenu.component';
 
 const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
 const ButtonGroup = styled<ButtonGroupComponent, ButtonGroupProps>(ButtonGroupComponent);
@@ -102,6 +111,8 @@ const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps
 const TopNavigationBarAction =
   styled<TopNavigationBarActionComponent, TopNavigationBarActionProps>(TopNavigationBarActionComponent);
 const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
+const OverflowMenuItem = styled<OverflowMenuItemComponent, OverflowMenuItemProps>(OverflowMenuItemComponent);
+const OverflowMenu = styled<OverflowMenuComponent, OverflowMenuProps>(OverflowMenuComponent);
 
 export {
   Button,
@@ -145,4 +156,9 @@ export {
   ButtonAlignments,
   PopoverPlacement,
   PopoverPlacements,
+  OverflowMenuItem,
+  OverflowMenuItemProps,
+  OverflowMenuItemType,
+  OverflowMenu,
+  OverflowMenuProps,
 };

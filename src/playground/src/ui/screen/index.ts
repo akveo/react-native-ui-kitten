@@ -16,3 +16,4 @@ export { TooltipScreen } from './tooltip.component';
 export { TabNavigatorScreen } from './tabNavigator.component';
 export { TopNavigationBarScreen } from './topNavigationBar.component';
 export { ModalScreen } from './modal.component';
+export { OverflowMenuScreen } from './overflowMenu.component';
