@@ -199,6 +199,7 @@ const styles = StyleSheet.create({
   popover: {
     position: 'absolute',
     opacity: 0,
+    zIndex: -1,
   },
   placeholder: {
     opacity: 0,

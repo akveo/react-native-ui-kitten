@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StyleSheet,
   ViewProps,
   View,
 } from 'react-native';
@@ -43,7 +42,7 @@ export class OverflowMenu extends React.Component<Props> {
   };
 
   private onSelect = (index: number): void => {
-    if (this.props.onSelect) {
+    if (this.props.onSelect && this.props.visible) {
       this.props.onSelect(index);
     }
   };
@@ -123,6 +122,7 @@ export class OverflowMenu extends React.Component<Props> {
     return (
       <Popover
         {...restProps}
+        indicatorOffset={2}
         content={menu}
         style={[popoverStyle, restProps.style]}>
         {children}
@@ -130,5 +130,3 @@ export class OverflowMenu extends React.Component<Props> {
     );
   }
 }
-
-const styles = StyleSheet.create({});

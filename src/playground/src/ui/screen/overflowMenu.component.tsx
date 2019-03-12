@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  ImageSourcePropType,
-  Text,
   View,
   Image,
   TouchableOpacity,
-  Button,
+  Alert,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -25,6 +23,7 @@ interface State {
   overflowMenu1Visible: boolean;
   overflowMenu2Visible: boolean;
   overflowMenu3Visible: boolean;
+  overflowMenu4Visible: boolean;
 }
 
 const iconUri1: string = 'https://akveo.github.io/eva-icons/fill/png/128/star.png';
@@ -32,7 +31,7 @@ const iconUri2: string = 'https://akveo.github.io/eva-icons/fill/png/128/alert-t
 const iconUri3: string = 'https://akveo.github.io/eva-icons/fill/png/128/book-open.png';
 const menuIconUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/menu.png';
 
-const menu1Items: OverflowMenuItemType[] = [
+const menuItems: OverflowMenuItemType[] = [
   {
     text: 'Menu Item 1',
     icon: (style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>,
@@ -53,7 +52,6 @@ const menu1Items: OverflowMenuItemType[] = [
 
 class OverflowMenu extends React.Component<Props, State> {
 
-
   static navigationOptions = {
     title: 'Overflow Menu',
   };
@@ -62,34 +60,92 @@ class OverflowMenu extends React.Component<Props, State> {
     overflowMenu1Visible: false,
     overflowMenu2Visible: false,
     overflowMenu3Visible: false,
+    overflowMenu4Visible: false,
   };
 
   private setMenu1Visible = (): void => {
     this.setState({ overflowMenu1Visible: !this.state.overflowMenu1Visible });
   };
 
+  private setMenu2Visible = (): void => {
+    this.setState({ overflowMenu2Visible: !this.state.overflowMenu2Visible });
+  };
+
+  private setMenu3Visible = (): void => {
+    this.setState({ overflowMenu3Visible: !this.state.overflowMenu3Visible });
+  };
+
+  private setMenu4Visible = (): void => {
+    this.setState({ overflowMenu4Visible: !this.state.overflowMenu4Visible });
+  };
+
   private onSelectItem = (index: number): void => {
-    console.log('Selected item\'s index: ', index);
+    Alert.alert(`Selected item\'s index: ${index}`);
   };
 
   public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
-        <Button title={'Show menu'} onPress={this.setMenu1Visible}/>
-        <OverflowMenuComponent
-          items={menu1Items}
-          placement='bottom end'
-          visible={this.state.overflowMenu1Visible}
-          style={this.props.themedStyle.menu}
-          onSelect={(index: number) => this.onSelectItem(index)}
-          onRequestClose={this.setMenu1Visible}
-        >
-          <TouchableOpacity
-            onPress={this.setMenu1Visible}
-            style={this.props.themedStyle.menuContainer}>
-            <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
-          </TouchableOpacity>
-        </OverflowMenuComponent>
+        <View style={this.props.themedStyle.innerContainer}>
+          <OverflowMenuComponent
+            items={menuItems}
+            placement='bottom start'
+            visible={this.state.overflowMenu1Visible}
+            style={this.props.themedStyle.menu}
+            onSelect={(index: number) => this.onSelectItem(index)}
+            onRequestClose={this.setMenu1Visible}
+          >
+            <TouchableOpacity
+              onPress={this.setMenu1Visible}
+              style={this.props.themedStyle.menuContainer}>
+              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+            </TouchableOpacity>
+          </OverflowMenuComponent>
+          <OverflowMenuComponent
+            items={menuItems}
+            placement='bottom end'
+            visible={this.state.overflowMenu2Visible}
+            style={this.props.themedStyle.menu}
+            onSelect={(index: number) => this.onSelectItem(index)}
+            onRequestClose={this.setMenu2Visible}
+          >
+            <TouchableOpacity
+              onPress={this.setMenu2Visible}
+              style={this.props.themedStyle.menuContainer}>
+              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+            </TouchableOpacity>
+          </OverflowMenuComponent>
+        </View>
+        <View style={[this.props.themedStyle.innerContainer, this.props.themedStyle.bottomContainer]}>
+          <OverflowMenuComponent
+            items={menuItems}
+            placement='top start'
+            visible={this.state.overflowMenu3Visible}
+            style={this.props.themedStyle.menu}
+            onSelect={(index: number) => this.onSelectItem(index)}
+            onRequestClose={this.setMenu3Visible}
+          >
+            <TouchableOpacity
+              onPress={this.setMenu3Visible}
+              style={this.props.themedStyle.menuContainer}>
+              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+            </TouchableOpacity>
+          </OverflowMenuComponent>
+          <OverflowMenuComponent
+            items={menuItems}
+            placement='top end'
+            visible={this.state.overflowMenu4Visible}
+            style={this.props.themedStyle.menu}
+            onSelect={(index: number) => this.onSelectItem(index)}
+            onRequestClose={this.setMenu4Visible}
+          >
+            <TouchableOpacity
+              onPress={this.setMenu4Visible}
+              style={this.props.themedStyle.menuContainer}>
+              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+            </TouchableOpacity>
+          </OverflowMenuComponent>
+        </View>
       </View>
     );
   }
@@ -102,6 +158,14 @@ export const OverflowMenuScreen = withStyles(OverflowMenu, (theme: ThemeType) =>
     paddingHorizontal: 16,
     backgroundColor: '#DDE1EB',
   },
+  innerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  bottomContainer: {
+    alignItems: 'flex-end',
+  },
   menu: {
     width: 300,
   },
@@ -111,7 +175,7 @@ export const OverflowMenuScreen = withStyles(OverflowMenu, (theme: ThemeType) =>
     tintColor: '#3366FF',
   },
   menuContainer: {
-    alignItems: 'flex-end',
+    alignSelf: 'flex-start',
   },
 }));
 
