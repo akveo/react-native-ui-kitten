@@ -60,9 +60,9 @@ export class Popover extends React.Component<Props, State> {
   };
 
   private containerRef: React.RefObject<MeasuredNode> = React.createRef();
-  private componentId: string = '';
+  private modalIdentifier: string = '';
 
-  public shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
+  public shouldComponentUpdate(nextProps: Props, nextState: State, nextContext: any): boolean {
     const isLayoutChanged: boolean = nextState.layout !== undefined;
     const isVisibilityChanged: boolean = this.props.visible !== nextProps.visible;
 
@@ -82,23 +82,23 @@ export class Popover extends React.Component<Props, State> {
 
         const { current: container } = this.containerRef;
 
-        // Retrieve `content` from popover children
-        // and clone it with measured position
+        // Retrieve `content` from popover children and clone it with measured position
         const { [TAG_CONTENT]: popoverView } = container.props.children;
-        const popover: React.ReactElement<ModalComponentCloseProps> =
-          React.cloneElement(popoverView, {
-            style: style,
-            onRequestClose: onRequestClose,
-          });
-        this.componentId = ModalService.show(popover, true);
+
+        const popover: React.ReactElement<ModalComponentCloseProps> = React.cloneElement(popoverView, {
+          style: style,
+          onRequestClose: onRequestClose,
+        });
+
+        this.modalIdentifier = ModalService.show(popover, true);
       } else {
-        ModalService.hide(this.componentId);
+        ModalService.hide(this.modalIdentifier);
       }
     }
   }
 
   public componentWillUnmount(): void {
-    this.componentId = '';
+    this.modalIdentifier = '';
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {
