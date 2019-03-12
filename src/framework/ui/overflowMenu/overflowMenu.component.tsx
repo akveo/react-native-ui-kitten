@@ -1,17 +1,12 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-  TouchableOpacityProps,
-  GestureResponderEvent,
   StyleSheet,
-  ImageProps,
   ViewProps,
   View,
 } from 'react-native';
 import {
   StyledComponentProps,
   StyleType,
-  Interaction,
   styled,
 } from '@kitten/theme';
 import {
@@ -65,15 +60,20 @@ export class OverflowMenu extends React.Component<Props> {
     return this.props.items.length === 1;
   };
 
+  private getPopoverStyle = (style: StyleType): StyleType => ({
+    ...style.popover,
+    borderRadius: style.borderRadius,
+  });
+
   private getMenuItemStyle = (style: StyleType, index: number): StyleType => {
     const borderRadius: number = style.menuItem.borderRadius;
 
-    if (this.isFirstItem(index)) {
+    if (this.isFirstItem(index) && !this.isSingleItem()) {
       return {
         borderTopLeftRadius: borderRadius,
         borderTopRightRadius: borderRadius,
       };
-    } else if (this.isLastItem(index)) {
+    } else if (this.isLastItem(index) && !this.isSingleItem()) {
       return {
         borderBottomLeftRadius: borderRadius,
         borderBottomRightRadius: borderRadius,
@@ -93,8 +93,7 @@ export class OverflowMenu extends React.Component<Props> {
 
     return (
       <OverflowMenuItem
-        text={item.text}
-        icon={item.icon}
+        {...item}
         size={size}
         isLastItem={this.isLastItem(index)}
         style={itemStyle}
@@ -119,12 +118,13 @@ export class OverflowMenu extends React.Component<Props> {
   public render(): React.ReactNode {
     const { children, themedStyle, ...restProps } = this.props;
     const menu: React.ReactElement<ViewProps> = this.renderMenuContent();
+    const popoverStyle: StyleType = this.getPopoverStyle(themedStyle);
 
     return (
       <Popover
         {...restProps}
         content={menu}
-        style={themedStyle.borderRadius}>
+        style={[popoverStyle, restProps.style]}>
         {children}
       </Popover>
     );

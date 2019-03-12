@@ -22,6 +22,7 @@ export interface OverflowMenuItemType {
   text: React.ReactText;
   size?: string;
   isLastItem?: boolean;
+  disabled?: boolean;
   onPress?: () => void;
 }
 

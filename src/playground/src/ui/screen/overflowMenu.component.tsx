@@ -5,6 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -39,9 +40,13 @@ const menu1Items: OverflowMenuItemType[] = [
   {
     text: 'Menu Item 2',
     icon: (style: StyleType) => <Image source={{ uri: iconUri2 }} style={style}/>,
+    disabled: true,
   },
   {
     text: 'Menu Item 3',
+  },
+  {
+    text: 'Menu Item 4',
     icon: (style: StyleType) => <Image source={{ uri: iconUri3 }} style={style}/>,
   },
 ];
@@ -70,17 +75,18 @@ class OverflowMenu extends React.Component<Props, State> {
   public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
-        <TouchableOpacity onPress={this.setMenu1Visible}>
-          <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
-        </TouchableOpacity>
+        <Button title={'Show menu'} onPress={this.setMenu1Visible}/>
         <OverflowMenuComponent
           items={menu1Items}
           placement='bottom end'
           visible={this.state.overflowMenu1Visible}
-          // onSelect={(index: number) => this.onSelectItem(index)}
+          style={this.props.themedStyle.menu}
+          onSelect={(index: number) => this.onSelectItem(index)}
           onRequestClose={this.setMenu1Visible}
         >
-          <TouchableOpacity onPress={this.setMenu1Visible}>
+          <TouchableOpacity
+            onPress={this.setMenu1Visible}
+            style={this.props.themedStyle.menuContainer}>
             <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
           </TouchableOpacity>
         </OverflowMenuComponent>
@@ -91,18 +97,21 @@ class OverflowMenu extends React.Component<Props, State> {
 
 export const OverflowMenuScreen = withStyles(OverflowMenu, (theme: ThemeType) => ({
   container: {
+    flex: 1,
     paddingVertical: 8,
     paddingHorizontal: 16,
+    backgroundColor: '#DDE1EB',
+  },
+  menu: {
+    width: 300,
   },
   menuIcon: {
     width: 30,
     height: 30,
     tintColor: '#3366FF',
   },
-  test: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'yellow',
+  menuContainer: {
+    alignItems: 'flex-end',
   },
 }));
 
