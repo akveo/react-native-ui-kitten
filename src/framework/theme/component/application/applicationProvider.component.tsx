@@ -23,27 +23,19 @@ interface State {
 
 export class ApplicationProvider extends React.Component<Props, State> {
 
-  state: State;
+  public state: State = {
+    mapping: this.props.mapping,
+    styles: this.props.styles,
+    theme: this.props.theme,
+  };
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      mapping: props.mapping,
-      styles: props.styles,
-      theme: props.theme,
-    };
-  }
-
-  render() {
-   return (
-     <ModalPanel>
-       <StyleProvider
-         mapping={this.state.mapping}
-         styles={this.state.styles}
-         theme={this.state.theme}
-         children={this.props.children}
-       />
-     </ModalPanel>
-   );
+  public render(): React.ReactNode {
+    return (
+      <StyleProvider {...this.state}>
+        <ModalPanel>
+          {this.props.children}
+        </ModalPanel>
+      </StyleProvider>
+    );
   }
 }
