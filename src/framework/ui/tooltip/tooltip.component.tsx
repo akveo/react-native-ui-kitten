@@ -1,14 +1,14 @@
 import React from 'react';
-import {
-  Text,
-  StyleSheet,
-  TextProps,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import {
+  Text as TextComponent,
+  Props as TextProps,
+} from '../text/text.component';
 import {
   Popover as PopoverComponent,
   Props as PopoverProps,
@@ -21,6 +21,7 @@ interface TooltipProps {
 }
 
 const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
+const Text = styled<TextComponent, TextProps>(TextComponent);
 
 export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'content'>;
 
