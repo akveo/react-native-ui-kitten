@@ -161,8 +161,18 @@ exports[`@toggle: matches snapshot active 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(255, 255, 255, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(255, 255, 255, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
@@ -331,8 +341,18 @@ exports[`@toggle: matches snapshot active checked 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(51, 102, 255, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(51, 102, 255, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
@@ -501,8 +521,18 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(51, 102, 255, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(51, 102, 255, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
@@ -671,8 +701,18 @@ exports[`@toggle: matches snapshot active: default 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(255, 255, 255, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(255, 255, 255, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
@@ -841,8 +881,18 @@ exports[`@toggle: matches snapshot checked 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(51, 102, 255, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(51, 102, 255, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
@@ -995,8 +1045,18 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(137, 146, 163, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(137, 146, 163, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
@@ -1165,8 +1225,18 @@ exports[`@toggle: matches snapshot default 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(255, 255, 255, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(255, 255, 255, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
@@ -1319,8 +1389,18 @@ exports[`@toggle: matches snapshot disabled 1`] = `
         }
       >
         <CheckMark
-          color={"rgba(255, 255, 255, 1)"}
           isAnimated={true}
+          style={
+            Array [
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              Object {
+                "backgroundColor": "rgba(255, 255, 255, 1)",
+              },
+            ]
+          }
         />
       </AnimatedComponent>
     </AnimatedComponent>
