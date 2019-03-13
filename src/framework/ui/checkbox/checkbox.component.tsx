@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  TouchableOpacity,
   View,
+  TouchableOpacity,
   StyleSheet,
   TouchableOpacityProps,
   GestureResponderEvent,
@@ -10,15 +10,23 @@ import {
   StyledComponentProps,
   StyleType,
   Interaction,
+  styled,
 } from '@kitten/theme';
+import {
+  Text as TextComponent,
+  Props as TextProps,
+} from '../text/text.component';
 import { CheckMark } from '../drawable/checkmark/checkmark.component';
 
 interface CheckBoxProps {
+  text?: string;
   checked?: boolean;
   status?: string;
   size?: string;
   onChange?: (checked: boolean) => void;
 }
+
+const Text = styled<TextComponent, TextProps>(TextComponent);
 
 export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps;
 
@@ -47,56 +55,73 @@ export class CheckBox extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { select, highlight, ...container } = style;
+    const { text, select, highlight, ...container } = style;
 
     return {
-      container: {
-        ...container,
-        ...styles.container,
-      },
-      select: {
-        width: container.width / 2,
-        height: container.height / 8,
-        ...select,
-        ...styles.select,
-      },
-      highlight: {
-        ...highlight,
-        ...styles.highlight,
-      },
+      selectContainer: container,
+      select: select,
+      highlight: highlight,
+      text: text,
     };
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, ...derivedProps } = this.props;
-    const { container, select, highlight, checkMark } = this.getComponentStyle(themedStyle);
+  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
+    const { text } = this.props;
 
     return (
-      <TouchableOpacity
-        {...derivedProps}
-        activeOpacity={1.0}
-        onPress={this.onPress}
-        onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
-        <View style={styles.container}>
-          <View style={highlight}/>
-          <View style={container}>
-            <CheckMark style={select}/>
-          </View>
+      <Text style={[style, styles.text]} key={0}>{text}</Text>
+    );
+  };
+
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+    const { text } = this.props;
+
+    return [
+      text ? this.renderTextElement(style.text) : undefined,
+    ];
+  };
+
+  public render(): React.ReactElement<TouchableOpacityProps> {
+    const { style, themedStyle, ...derivedProps } = this.props;
+    const { selectContainer, select, highlight, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
+
+    return (
+      <View style={[style, styles.container]}>
+        <View style={styles.highlightContainer}>
+          <View style={[highlight, styles.highlight]}/>
+          <TouchableOpacity
+            {...derivedProps}
+            style={[selectContainer, styles.selectContainer]}
+            activeOpacity={1.0}
+            onPress={this.onPress}
+            onPressIn={this.onPressIn}
+            onPressOut={this.onPressOut}>
+            <CheckMark style={[select, styles.select]}/>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+        {componentChildren}
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  highlightContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   select: {},
   highlight: {
     position: 'absolute',
-    alignSelf: 'center',
   },
+  text: {},
 });

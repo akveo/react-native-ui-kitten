@@ -14,39 +14,41 @@ import { CheckBox as CheckBoxComponent } from '@kitten/ui';
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 interface State {
-  isCheckBox1Checked: boolean;
-  isCheckBox2Checked: boolean;
-  isCheckBox3Checked: boolean;
-  isCheckBox4Checked: boolean;
+  isRadio1Checked: boolean;
+  isRadio2Checked: boolean;
+  isRadio3Checked: boolean;
+  isRadio4Checked: boolean;
 }
+
+const STATUS: string = '';
 
 class CheckBox extends React.Component<Props, State> {
 
   static navigationOptions = {
-    title: 'CheckBox',
+    title: 'Radio',
   };
 
   public state: State = {
-    isCheckBox1Checked: false,
-    isCheckBox2Checked: true,
-    isCheckBox3Checked: false,
-    isCheckBox4Checked: true,
+    isRadio1Checked: false,
+    isRadio2Checked: true,
+    isRadio3Checked: false,
+    isRadio4Checked: true,
   };
 
-  private onCheckBox1Change = (checked: boolean) => {
-    this.setState({ isCheckBox1Checked: checked });
+  private onRadio1Change = (selected: boolean) => {
+    this.setState({ isRadio1Checked: selected });
   };
 
-  private onCheckBox2Change = (checked: boolean) => {
-    this.setState({ isCheckBox2Checked: checked });
+  private onRadio2Change = (selected: boolean) => {
+    this.setState({ isRadio2Checked: selected });
   };
 
-  private onCheckBox3Change = (checked: boolean) => {
-    this.setState({ isCheckBox3Checked: checked });
+  private onRadio3Change = (selected: boolean) => {
+    this.setState({ isRadio3Checked: selected });
   };
 
-  private onCheckBox4Change = (checked: boolean) => {
-    this.setState({ isCheckBox4Checked: checked });
+  private onRadio4Change = (selected: boolean) => {
+    this.setState({ isRadio4Checked: selected });
   };
 
   public render(): React.ReactNode {
@@ -57,50 +59,29 @@ class CheckBox extends React.Component<Props, State> {
           <View style={this.props.themedStyle.containerPreview}>
             <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox1Checked}
-              onChange={this.onCheckBox1Change}
+              checked={this.state.isRadio1Checked}
+              status={STATUS}
+              onChange={this.onRadio1Change}
             />
             <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox2Checked}
-              onChange={this.onCheckBox2Change}
+              checked={this.state.isRadio2Checked}
+              status={STATUS}
+              onChange={this.onRadio2Change}
             />
             <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox3Checked}
+              checked={this.state.isRadio3Checked}
               disabled={true}
-              onChange={this.onCheckBox3Change}
+              status={STATUS}
+              onChange={this.onRadio3Change}
             />
             <CheckBoxComponent
               style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox4Checked}
+              checked={this.state.isRadio4Checked}
               disabled={true}
-              onChange={this.onCheckBox4Change}
-            />
-          </View>
-        </View>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Error</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <CheckBoxComponent
-              status='error'
-              style={this.props.themedStyle.component}
-            />
-            <CheckBoxComponent
-              status='error'
-              style={this.props.themedStyle.component}
-              checked={true}
-            />
-            <CheckBoxComponent
-              status='error'
-              style={this.props.themedStyle.component}
-              disabled={true}
-            />
-            <CheckBoxComponent
-              status='error'
-              style={this.props.themedStyle.component}
-              checked={true}
-              disabled={true}
+              status={STATUS}
+              onChange={this.onRadio4Change}
             />
           </View>
         </View>
@@ -108,18 +89,51 @@ class CheckBox extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <CheckBoxComponent
+              style={this.props.themedStyle.component}
+              checked={true}
+              status={STATUS}
               size='large'
-              style={this.props.themedStyle.component}
-              checked={true}
             />
             <CheckBoxComponent
               style={this.props.themedStyle.component}
               checked={true}
+              status={STATUS}
+              size='medium'
             />
             <CheckBoxComponent
+              style={this.props.themedStyle.component}
+              checked={true}
+              status={STATUS}
               size='small'
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Text</Text>
+          <View style={this.props.themedStyle.containerPreviewColumn}>
+            <CheckBoxComponent
+              style={this.props.themedStyle.component}
+              status={STATUS}
+              text='Place your text'
+            />
+            <CheckBoxComponent
               style={this.props.themedStyle.component}
               checked={true}
+              status={STATUS}
+              text='Place your text'
+            />
+            <CheckBoxComponent
+              style={this.props.themedStyle.component}
+              disabled={true}
+              status={STATUS}
+              text='Place your text'
+            />
+            <CheckBoxComponent
+              style={this.props.themedStyle.component}
+              checked={true}
+              disabled={true}
+              status={STATUS}
+              text='Place your text'
             />
           </View>
         </View>
@@ -141,10 +155,13 @@ export const CheckBoxScreen = withStyles(CheckBox, (theme: ThemeType) => ({
     alignItems: 'center',
     marginTop: 4,
   },
+  containerPreviewColumn: {
+    marginTop: 4,
+  },
   textDescription: {
     fontSize: 18,
   },
   component: {
-    marginHorizontal: 4,
+    margin: 4,
   },
 }));
