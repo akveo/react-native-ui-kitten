@@ -161,12 +161,9 @@ export class ListItem extends React.Component<Props> {
     // @ts-ignore: will be not executed if any of properties below is provided
     const { title, description } = this.props;
 
-    const hasTitle: boolean = title !== undefined;
-    const hasDescription: boolean = description !== undefined;
-
     return [
-      hasTitle ? this.renderTitleElement(style.title) : undefined,
-      hasDescription ? this.renderDescriptionElement(style.description) : undefined,
+      title ? this.renderTitleElement(style.title) : undefined,
+      description ? this.renderDescriptionElement(style.description) : undefined,
     ];
   };
 
@@ -174,14 +171,10 @@ export class ListItem extends React.Component<Props> {
     // @ts-ignore: following props could not be provided
     const { icon, title, description, accessory } = this.props;
 
-    const hasIcon: boolean = icon !== undefined;
-    const hasContent: boolean = title !== undefined || description !== undefined;
-    const hasAccessory: boolean = accessory !== undefined;
-
     return [
-      hasIcon ? this.renderIconElement(style.icon) : undefined,
-      hasContent ? this.renderContentElement(style) : undefined,
-      hasAccessory ? this.renderAccessoryElement(style.accessory) : undefined,
+      icon ? this.renderIconElement(style.icon) : undefined,
+      title || description ? this.renderContentElement(style) : undefined,
+      accessory ? this.renderAccessoryElement(style.accessory) : undefined,
     ];
   };
 
