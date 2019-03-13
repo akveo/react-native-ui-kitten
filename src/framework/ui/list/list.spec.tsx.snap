@@ -1,0 +1,475 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@list-item: template matches snapshot * description 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  index={0}
+  onLongPress={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  style={
+    Array [
+      Object {
+        "paddingHorizontal": 6,
+        "paddingVertical": 12,
+      },
+      Array [
+        Object {},
+        undefined,
+        Object {},
+      ],
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  title="Title"
+>
+  <View
+    style={
+      Array [
+        Object {
+          "accessory": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "description": Object {
+            "color": "#a6aebd",
+            "fontSize": 14,
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          "icon": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "title": Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+        },
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <ForwardRef(createComponent)
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          Object {},
+        ]
+      }
+    >
+      Title
+    </ForwardRef(createComponent)>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`@list-item: template matches snapshot * title 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  index={0}
+  onLongPress={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  style={
+    Array [
+      Object {
+        "paddingHorizontal": 6,
+        "paddingVertical": 12,
+      },
+      Array [
+        Object {},
+        undefined,
+        Object {},
+      ],
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  title="Title"
+>
+  <View
+    style={
+      Array [
+        Object {
+          "accessory": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "description": Object {
+            "color": "#a6aebd",
+            "fontSize": 14,
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          "icon": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "title": Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+        },
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <ForwardRef(createComponent)
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          Object {},
+        ]
+      }
+    >
+      Title
+    </ForwardRef(createComponent)>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`@list-item: template matches snapshot * with accessory 1`] = `
+<TouchableOpacity
+  accessory={[Function]}
+  activeOpacity={1}
+  appearance="default"
+  description="Description"
+  dispatch={[Function]}
+  index={0}
+  onLongPress={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  style={
+    Array [
+      Object {
+        "paddingHorizontal": 6,
+        "paddingVertical": 12,
+      },
+      Array [
+        Object {},
+        undefined,
+        Object {},
+      ],
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  title="Title"
+>
+  <View
+    style={
+      Array [
+        Object {
+          "accessory": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "description": Object {
+            "color": "#a6aebd",
+            "fontSize": 14,
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          "icon": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "title": Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+        },
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <ForwardRef(createComponent)
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          Object {},
+        ]
+      }
+    >
+      Title
+    </ForwardRef(createComponent)>
+    <ForwardRef(createComponent)
+      style={
+        Array [
+          Object {
+            "color": "#a6aebd",
+            "fontSize": 14,
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          Object {},
+        ]
+      }
+    >
+      Description
+    </ForwardRef(createComponent)>
+  </View>
+  <Component
+    source={
+      Object {
+        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+      }
+    }
+    style={
+      Array [
+        0,
+        Object {
+          "height": 48,
+          "marginHorizontal": 6,
+          "width": 48,
+        },
+        Object {},
+      ]
+    }
+  />
+</TouchableOpacity>
+`;
+
+exports[`@list-item: template matches snapshot * with icon 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  description="Description"
+  dispatch={[Function]}
+  icon={[Function]}
+  index={0}
+  onLongPress={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  style={
+    Array [
+      Object {
+        "paddingHorizontal": 6,
+        "paddingVertical": 12,
+      },
+      Array [
+        Object {},
+        undefined,
+        Object {},
+      ],
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  title="Title"
+>
+  <Component
+    source={
+      Object {
+        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "height": 48,
+          "marginHorizontal": 6,
+          "width": 48,
+        },
+        0,
+        Object {},
+      ]
+    }
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "accessory": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "description": Object {
+            "color": "#a6aebd",
+            "fontSize": 14,
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          "icon": Object {
+            "height": 48,
+            "marginHorizontal": 6,
+            "width": 48,
+          },
+          "title": Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+        },
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <ForwardRef(createComponent)
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "fontWeight": "600",
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          Object {},
+        ]
+      }
+    >
+      Title
+    </ForwardRef(createComponent)>
+    <ForwardRef(createComponent)
+      style={
+        Array [
+          Object {
+            "color": "#a6aebd",
+            "fontSize": 14,
+            "marginHorizontal": 6,
+            "marginVertical": 4,
+          },
+          Object {},
+        ]
+      }
+    >
+      Description
+    </ForwardRef(createComponent)>
+  </View>
+</TouchableOpacity>
+`;
