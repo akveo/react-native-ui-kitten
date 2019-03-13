@@ -1,4 +1,5 @@
 export { HomeScreen } from './home.component';
+export { AvatarScreen } from './avatar.component';
 export { ButtonScreen } from './button.component';
 export { ButtonGroupScreen } from './buttonGroup.component';
 export { InputScreen } from './input.component';

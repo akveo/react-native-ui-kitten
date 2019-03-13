@@ -1,5 +1,9 @@
 import { styled } from '@kitten/theme';
 import {
+  Avatar as AvatarComponent,
+  Props as AvatarProps,
+} from './avatar/avatar.component';
+import {
   Button as ButtonComponent,
   Props as ButtonProps,
 } from './button/button.component';
@@ -88,6 +92,7 @@ import {
   Placements as PopoverPlacements,
 } from './popover/type';
 
+const Avatar = styled<AvatarComponent, AvatarProps>(AvatarComponent);
 const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
 const ButtonGroup = styled<ButtonGroupComponent, ButtonGroupProps>(ButtonGroupComponent);
 const Input = styled<InputComponent, InputProps>(InputComponent);
@@ -109,6 +114,7 @@ const TopNavigationBarAction =
 const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 
 export {
+  Avatar,
   Button,
   ButtonGroup,
   Input,
@@ -128,6 +134,7 @@ export {
   Tooltip,
   ViewPager,
   TabView,
+  AvatarProps,
   ButtonProps,
   InputProps,
   ButtonGroupProps,

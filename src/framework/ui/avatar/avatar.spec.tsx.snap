@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@avatar: matches snapshot * appearance * default 1`] = `
+<Image
+  appearance="default"
+  dispatch={[Function]}
+  source={
+    Object {
+      "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+    }
+  }
+  style={
+    Array [
+      Object {
+        "borderRadius": 24,
+        "height": 48,
+        "margin": 16,
+        "width": 48,
+      },
+      Object {},
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+/>
+`;
