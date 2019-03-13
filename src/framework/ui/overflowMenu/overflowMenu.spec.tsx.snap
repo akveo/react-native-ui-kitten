@@ -217,12 +217,13 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
               }
             />
             <Text
+              appearance="primary"
               dispatch={[Function]}
               style={
                 Array [
                   Object {
-                    "color": undefined,
-                    "fontSize": undefined,
+                    "color": "#000000",
+                    "fontSize": 16,
                   },
                   Object {
                     "color": "#0D1C2E",
@@ -292,12 +293,13 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
               }
             />
             <Text
+              appearance="primary"
               dispatch={[Function]}
               style={
                 Array [
                   Object {
-                    "color": undefined,
-                    "fontSize": undefined,
+                    "color": "#000000",
+                    "fontSize": 16,
                   },
                   Object {
                     "color": "#0D1C2E",
@@ -352,12 +354,13 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
             }
           >
             <Text
+              appearance="primary"
               dispatch={[Function]}
               style={
                 Array [
                   Object {
-                    "color": undefined,
-                    "fontSize": undefined,
+                    "color": "#000000",
+                    "fontSize": 16,
                   },
                   Object {
                     "color": "#0D1C2E",
@@ -429,12 +432,13 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
               }
             />
             <Text
+              appearance="primary"
               dispatch={[Function]}
               style={
                 Array [
                   Object {
-                    "color": undefined,
-                    "fontSize": undefined,
+                    "color": "#000000",
+                    "fontSize": 16,
                   },
                   Object {
                     "color": "#0D1C2E",
@@ -652,12 +656,13 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
               }
             />
             <Text
+              appearance="primary"
               dispatch={[Function]}
               style={
                 Array [
                   Object {
-                    "color": undefined,
-                    "fontSize": undefined,
+                    "color": "#000000",
+                    "fontSize": 16,
                   },
                   Object {
                     "color": "#0D1C2E",
@@ -871,9 +876,9 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
       "borderBottomColor": "#DDE1EB",
       "borderBottomWidth": 1.2,
       "flexDirection": "row",
-      "minHeight": 40,
+      "minHeight": 48,
       "opacity": 1,
-      "padding": 10,
+      "padding": 12,
     }
   }
 >
@@ -885,26 +890,27 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
     }
     style={
       Object {
-        "height": 20,
-        "marginHorizontal": 6,
+        "height": 24,
+        "marginHorizontal": 8,
         "tintColor": "#0D1C2E",
-        "width": 20,
+        "width": 24,
       }
     }
   />
   <Text
+    appearance="primary"
     dispatch={[Function]}
     style={
       Array [
         Object {
-          "color": undefined,
-          "fontSize": undefined,
+          "color": "#000000",
+          "fontSize": 16,
         },
         Object {
           "color": "#0D1C2E",
-          "fontSize": 13,
+          "fontSize": 15,
           "fontWeight": "600",
-          "marginHorizontal": 6,
+          "marginHorizontal": 8,
         },
       ]
     }
@@ -956,12 +962,13 @@ exports[`@overflow-menu-item: component checks * menu item with "set-2" props 1`
   }
 >
   <Text
+    appearance="primary"
     dispatch={[Function]}
     style={
       Array [
         Object {
-          "color": undefined,
-          "fontSize": undefined,
+          "color": "#000000",
+          "fontSize": 16,
         },
         Object {
           "color": "#0D1C2E",

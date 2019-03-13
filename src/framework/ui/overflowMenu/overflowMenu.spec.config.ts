@@ -150,6 +150,100 @@ export const mapping: ThemeMappingType = {
       },
     },
   },
+  'Text': {
+    'meta': {
+      'scope': 'all',
+      'mapping': {
+        'color': {
+          'type': 'color',
+        },
+        'fontSize': {
+          'type': 'number',
+        },
+      },
+      'appearances': {
+        'primary': {
+          'default': true,
+        },
+      },
+      'variants': {
+        'category': {
+          'h1': {
+            'default': false,
+          },
+          'h2': {
+            'default': false,
+          },
+          'h3': {
+            'default': false,
+          },
+          'h4': {
+            'default': false,
+          },
+          'h5': {
+            'default': false,
+          },
+          'h6': {
+            'default': false,
+          },
+          'body': {
+            'default': true,
+          },
+        },
+      },
+      'states': {},
+    },
+    'appearance': {
+      'primary': {
+        'mapping': {
+          'color': 'text-primary',
+        },
+        'variant': {
+          'category': {
+            'h1': {
+              'fontSize': 64,
+            },
+            'h2': {
+              'fontSize': 40,
+            },
+            'h3': {
+              'fontSize': 32,
+            },
+            'h4': {
+              'fontSize': 24,
+            },
+            'h5': {
+              'fontSize': 16,
+            },
+            'h6': {
+              'fontSize': 14,
+            },
+            'body': {
+              'fontSize': 16,
+            },
+          },
+        },
+      },
+    },
+  },
+  'Popover': {
+    'meta': {
+      'scope': 'all',
+      'mapping': {},
+      'appearances': {
+        'default': {
+          'default': true,
+        },
+      },
+      'variants': {},
+      'states': {},
+    },
+    'appearance': {
+      'default': {
+        'mapping': {},
+      },
+    },
+  },
 };
 
 export const theme: ThemeType = {

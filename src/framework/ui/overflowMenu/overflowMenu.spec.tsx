@@ -49,8 +49,6 @@ const MockMenuItem = (props?: OverflowMenuItemComponentProps): React.ReactElemen
 const iconUri1: string = 'https://akveo.github.io/eva-icons/fill/png/128/star.png';
 const iconUri2: string = 'https://akveo.github.io/eva-icons/fill/png/128/alert-triangle.png';
 const iconUri3: string = 'https://akveo.github.io/eva-icons/fill/png/128/book-open.png';
-const menuIconUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/menu.png';
-const MenuAppShowTestId: string = '@app/show-menu';
 
 const menuItems: OverflowMenuItemType[] = [
   {
@@ -83,7 +81,7 @@ describe('@overflow-menu-item: component checks', () => {
       <MockMenuItem
         text='Test Menu Item'
         icon={(style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>}
-        size='small'
+        // size='small'
         isLastItem={false}
         disabled={true}
         onPress={() => 1}
