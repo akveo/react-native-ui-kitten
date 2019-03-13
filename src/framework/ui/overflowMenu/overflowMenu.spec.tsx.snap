@@ -32,9 +32,8 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
         <View>
           <ForwardRef(createComponent)
             icon={[Function]}
+            index={0}
             isLastItem={false}
-            onPress={[Function]}
-            size="medium"
             style={
               Object {
                 "borderTopLeftRadius": 6,
@@ -46,24 +45,19 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
           <ForwardRef(createComponent)
             disabled={true}
             icon={[Function]}
+            index={1}
             isLastItem={false}
-            onPress={[Function]}
-            size="medium"
-            style={null}
             text="Menu Item 2"
           />
           <ForwardRef(createComponent)
+            index={2}
             isLastItem={false}
-            onPress={[Function]}
-            size="medium"
-            style={null}
             text="Menu Item 3"
           />
           <ForwardRef(createComponent)
             icon={[Function]}
+            index={3}
             isLastItem={true}
-            onPress={[Function]}
-            size="medium"
             style={
               Object {
                 "borderBottomLeftRadius": 6,
@@ -97,7 +91,6 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
         ]
       }
       onRequestClose={[Function]}
-      size="medium"
       style={
         Object {
           "alignItems": "center",
@@ -512,9 +505,8 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
         <View>
           <ForwardRef(createComponent)
             icon={[Function]}
+            index={0}
             isLastItem={true}
-            onPress={[Function]}
-            size="medium"
             style={
               Object {
                 "borderRadius": 6,
@@ -535,7 +527,6 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
         ]
       }
       onRequestClose={[Function]}
-      size="medium"
       style={
         Object {
           "alignItems": "center",
@@ -705,84 +696,6 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
 </View>
 `;
 
-exports[`@overflow-menu-item: component checks * disabled item 1`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#8992A3",
-      "borderBottomColor": "#DDE1EB",
-      "borderBottomWidth": 1.2,
-      "flexDirection": "row",
-      "minHeight": 40,
-      "opacity": 1,
-      "padding": 10,
-    }
-  }
->
-  <Image
-    source={
-      Object {
-        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-      }
-    }
-    style={
-      Object {
-        "height": 20,
-        "marginHorizontal": 6,
-        "tintColor": "#0D1C2E",
-        "width": 20,
-      }
-    }
-  />
-  <Text
-    dispatch={[Function]}
-    style={
-      Array [
-        Object {
-          "color": undefined,
-          "fontSize": undefined,
-        },
-        Object {
-          "color": "#0D1C2E",
-          "fontSize": 13,
-          "fontWeight": "600",
-          "marginHorizontal": 6,
-        },
-      ]
-    }
-    theme={
-      Object {
-        "blue-dark": "#2541CC",
-        "blue-pitch-dark": "#0D1C2E",
-        "blue-primary": "#3366FF",
-        "gray-100": "#f7f8fa",
-        "gray-200": "#edf0f5",
-        "gray-300": "#c8cedb",
-        "gray-400": "#a6aebd",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-        "text-primary": "#000000",
-        "text-primary-inverse": "#ffffff",
-      }
-    }
-  >
-    Test Menu Item
-  </Text>
-</View>
-`;
-
 exports[`@overflow-menu-item: component checks * menu item active checks 1`] = `
 <TouchableOpacity
   activeOpacity={1}
@@ -791,6 +704,7 @@ exports[`@overflow-menu-item: component checks * menu item active checks 1`] = `
   dispatch={[Function]}
   icon={[Function]}
   isLastItem={false}
+  onLongPress={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -869,6 +783,7 @@ exports[`@overflow-menu-item: component checks * menu item active checks 2`] = `
   dispatch={[Function]}
   icon={[Function]}
   isLastItem={false}
+  onLongPress={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}

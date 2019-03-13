@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ViewProps,
   View,
+  GestureResponderEvent,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -20,13 +21,12 @@ import {
 import { Omit } from '../service/type';
 
 type MenuItemElement = React.ReactElement<OverflowMenuItemProps>;
-export type MenuItemType = Omit<OverflowMenuItemType, 'size'>;
 
 interface OverflowMenuProps {
   children: React.ReactElement<any>;
-  items: MenuItemType[];
+  items: OverflowMenuItemType[];
   size?: string;
-  onSelect?: (index: number) => void;
+  onSelect?: (event: GestureResponderEvent, index: number) => void;
 }
 
 const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
@@ -36,16 +36,6 @@ const OverflowMenuItem =
 export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverProps, 'content'>;
 
 export class OverflowMenu extends React.Component<Props> {
-
-  static defaultProps: Partial<Props> = {
-    size: 'medium',
-  };
-
-  private onSelect = (index: number): void => {
-    if (this.props.onSelect && this.props.visible) {
-      this.props.onSelect(index);
-    }
-  };
 
   private isFirstItem = (index: number): boolean => {
     return index === 0;
@@ -81,12 +71,10 @@ export class OverflowMenu extends React.Component<Props> {
       return {
         borderRadius: borderRadius,
       };
-    } else {
-      return null;
     }
   };
 
-  private renderMenuItem = (item: MenuItemType, index: number): MenuItemElement => {
+  private renderMenuItem = (item: OverflowMenuItemType, index: number): MenuItemElement => {
     const { size, themedStyle } = this.props;
     const itemStyle: StyleType = this.getMenuItemStyle(themedStyle, index);
 
@@ -97,18 +85,22 @@ export class OverflowMenu extends React.Component<Props> {
         isLastItem={this.isLastItem(index)}
         style={itemStyle}
         key={index}
-        onPress={() => this.onSelect(index)}
+        index={index}
+        onPress={this.props.onSelect}
       />
     );
   };
 
+  private renderComponentChildren = (): MenuItemElement[] => {
+    return this.props.items.map((item: OverflowMenuItemType, index: number) =>
+      this.renderMenuItem(item, index));
+  };
+
   private renderMenuContent = (): React.ReactElement<ViewProps> => {
-    const { items, style } = this.props;
-    const menuItems: MenuItemElement[] = items
-      .map((item: MenuItemType, index: number) => this.renderMenuItem(item, index));
+    const menuItems: MenuItemElement[] = this.renderComponentChildren();
 
     return (
-      <View style={style}>
+      <View style={this.props.style}>
         {menuItems}
       </View>
     );

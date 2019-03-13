@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   TouchableOpacity,
-  TouchableOpacityProps,
   GestureResponderEvent,
   StyleSheet,
   ImageProps,
@@ -16,6 +15,7 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
+import { TouchableOpacityIndexedProps } from '../service/type';
 
 export interface OverflowMenuItemType {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
@@ -23,12 +23,12 @@ export interface OverflowMenuItemType {
   size?: string;
   isLastItem?: boolean;
   disabled?: boolean;
-  onPress?: () => void;
+  index?: number;
 }
 
 const Text = styled<TextComponent, TextProps>(TextComponent);
 
-export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpacityProps;
+export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpacityIndexedProps;
 
 export class OverflowMenuItem extends React.Component<Props> {
 
@@ -37,30 +37,30 @@ export class OverflowMenuItem extends React.Component<Props> {
   };
 
   private onPress = (event: GestureResponderEvent) => {
-    if (!this.props.disabled) {
-      if (this.props.onPress) {
-        this.props.onPress(event);
-      }
+    if (this.props.onPress) {
+      this.props.onPress(event, this.props.index);
     }
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
-    if (!this.props.disabled) {
-      this.props.dispatch([Interaction.ACTIVE]);
+    this.props.dispatch([Interaction.ACTIVE]);
 
-      if (this.props.onPressIn) {
-        this.props.onPressIn(event);
-      }
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event, this.props.index);
     }
   };
 
   private onPressOut = (event: GestureResponderEvent) => {
-    if (!this.props.disabled) {
-      this.props.dispatch([]);
+    this.props.dispatch([]);
 
-      if (this.props.onPressOut) {
-        this.props.onPressOut(event);
-      }
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event, this.props.index);
+    }
+  };
+
+  private onLongPress = (event: GestureResponderEvent) => {
+    if (this.props.onLongPress) {
+      this.props.onLongPress(event, this.props.index);
     }
   };
 
@@ -80,13 +80,15 @@ export class OverflowMenuItem extends React.Component<Props> {
     };
   };
 
-  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => (
-    <Text
-      style={style}
-      key={2}>
-      {this.props.text}
-    </Text>
-  );
+  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
+    return (
+      <Text
+        style={style}
+        key={2}>
+        {this.props.text}
+      </Text>
+    );
+  };
 
   private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> | null => {
     const { icon } = this.props;
@@ -110,7 +112,8 @@ export class OverflowMenuItem extends React.Component<Props> {
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+        onLongPress={this.onLongPress}>
         {componentChildren}
       </TouchableOpacity>
     );

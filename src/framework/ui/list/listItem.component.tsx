@@ -18,6 +18,7 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
+import { TouchableOpacityIndexedProps } from '../service/type';
 
 interface ListDerivedProps {
   index?: number;
@@ -39,14 +40,6 @@ interface TemplateDescriptionProps extends Partial<TemplateBaseProps> {
   description: string;
 }
 
-// @ts-ignore: props override
-interface TouchableOpacityIndexedProps extends TouchableOpacityProps {
-  onPress?: (index: number, event: GestureResponderEvent) => void;
-  onPressIn?: (index: number, event: GestureResponderEvent) => void;
-  onPressOut?: (index: number, event: GestureResponderEvent) => void;
-  onLongPress?: (index: number, event: GestureResponderEvent) => void;
-}
-
 type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps) & ListDerivedProps;
 
 const Text = styled<TextComponent, TextProps>(TextComponent);
@@ -57,7 +50,7 @@ export class ListItem extends React.Component<Props> {
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
-      this.props.onPress(this.props.index, event);
+      this.props.onPress(event, this.props.index);
     }
   };
 
@@ -65,7 +58,7 @@ export class ListItem extends React.Component<Props> {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(this.props.index, event);
+      this.props.onPressIn(event, this.props.index);
     }
   };
 
@@ -73,13 +66,13 @@ export class ListItem extends React.Component<Props> {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(this.props.index, event);
+      this.props.onPressOut(event, this.props.index);
     }
   };
 
   private onLongPress = (event: GestureResponderEvent) => {
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.props.index, event);
+      this.props.onLongPress(event, this.props.index);
     }
   };
 

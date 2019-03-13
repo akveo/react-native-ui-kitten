@@ -19,11 +19,11 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
+  OverflowMenuItemType,
   OverflowMenuItem as OverflowMenuItemComponent,
   Props as OverflowMenuItemComponentProps,
 } from './overflowMenuItem.component';
 import {
-  MenuItemType,
   OverflowMenu as OverflowMenuComponent,
   Props as OverflowMenuComponentProps,
 } from './overflowMenu.component';
@@ -52,7 +52,7 @@ const iconUri3: string = 'https://akveo.github.io/eva-icons/fill/png/128/book-op
 const menuIconUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/menu.png';
 const MenuAppShowTestId: string = '@app/show-menu';
 
-const menuItems: MenuItemType[] = [
+const menuItems: OverflowMenuItemType[] = [
   {
     text: 'Menu Item 1',
     icon: (style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>,
@@ -71,7 +71,7 @@ const menuItems: MenuItemType[] = [
   },
 ];
 
-const menuItemsSingle: MenuItemType[] = [{
+const menuItemsSingle: OverflowMenuItemType[] = [{
   text: 'Menu Item 1',
   icon: (style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>,
 }];
@@ -140,6 +140,7 @@ describe('@overflow-menu-item: component checks', () => {
   it('* menu item active checks', async () => {
     const onPressIn = jest.fn();
     const onPressOut = jest.fn();
+    const onLongPress = jest.fn();
     const component: RenderAPI = render(
       <MockMenuItem
         text='Test Menu Item'
@@ -149,7 +150,7 @@ describe('@overflow-menu-item: component checks', () => {
         onPress={() => 1}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
-      />,
+        onLongPress={onLongPress}/>,
     );
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
@@ -168,30 +169,6 @@ describe('@overflow-menu-item: component checks', () => {
     expect(inactiveOutput).toMatchSnapshot();
     expect(onPressIn).toHaveBeenCalled();
     expect(onPressOut).toHaveBeenCalled();
-  });
-
-  it('* disabled item', () => {
-    const onPress = jest.fn();
-    const onPressIn = jest.fn();
-    const onPressOut = jest.fn();
-    const component: RenderAPI = render(
-      <MockMenuItem
-        text='Test Menu Item'
-        icon={(style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>}
-        size='small'
-        disabled={true}
-        onPress={onPress}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}
-      />,
-    );
-    fireEvent.press(component.getByType(TouchableOpacity));
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-    expect(component).toMatchSnapshot();
-    expect(onPress).toBeCalledTimes(0);
-    expect(onPressIn).toBeCalledTimes(0);
-    expect(onPressOut).toBeCalledTimes(0);
   });
 
 });
@@ -216,44 +193,12 @@ describe('@overflow-menu: component checks', () => {
       <MockMenu
         visible={true}
         items={menuItemsSingle}
-        onRequestClose={() => {}}>
+        onRequestClose={() => {
+        }}>
         <View/>
       </MockMenu>,
     );
     expect(component).toMatchSnapshot();
-  });
-
-  it('* component onSelect checks visible', () => {
-    const onSelect = jest.fn();
-    const component: RenderAPI = render(
-      <MockMenu
-        visible={true}
-        items={menuItems}
-        onRequestClose={() => {}}
-        onSelect={onSelect}>
-        <View/>
-      </MockMenu>,
-    );
-    const items: ReactTestInstance[] = component.getAllByType(TouchableOpacity);
-    fireEvent.press(items[0]);
-    fireEvent.press(items[1]);
-    expect(onSelect).toBeCalledTimes(1);
-  });
-
-  it('* component onSelect checks invisible', () => {
-    const onSelect = jest.fn();
-    const component: RenderAPI = render(
-      <MockMenu
-        visible={false}
-        items={menuItems}
-        onRequestClose={() => {}}
-        onSelect={onSelect}>
-        <View/>
-      </MockMenu>,
-    );
-    const items: ReactTestInstance[] = component.getAllByType(TouchableOpacity);
-    fireEvent.press(items[0]);
-    expect(onSelect).toBeCalledTimes(0);
   });
 
 });

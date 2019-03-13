@@ -4,6 +4,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  GestureResponderEvent,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -79,7 +80,7 @@ class OverflowMenu extends React.Component<Props, State> {
     this.setState({ overflowMenu4Visible: !this.state.overflowMenu4Visible });
   };
 
-  private onSelectItem = (index: number): void => {
+  private onSelectItem = (event: GestureResponderEvent, index: number): void => {
     Alert.alert(`Selected item\'s index: ${index}`);
   };
 
@@ -92,9 +93,8 @@ class OverflowMenu extends React.Component<Props, State> {
             placement='bottom start'
             visible={this.state.overflowMenu1Visible}
             style={this.props.themedStyle.menu}
-            onSelect={(index: number) => this.onSelectItem(index)}
-            onRequestClose={this.setMenu1Visible}
-          >
+            onSelect={this.onSelectItem}
+            onRequestClose={this.setMenu1Visible}>
             <TouchableOpacity
               onPress={this.setMenu1Visible}
               style={this.props.themedStyle.menuContainer}>
@@ -106,9 +106,8 @@ class OverflowMenu extends React.Component<Props, State> {
             placement='bottom end'
             visible={this.state.overflowMenu2Visible}
             style={this.props.themedStyle.menu}
-            onSelect={(index: number) => this.onSelectItem(index)}
-            onRequestClose={this.setMenu2Visible}
-          >
+            onSelect={this.onSelectItem}
+            onRequestClose={this.setMenu2Visible}>
             <TouchableOpacity
               onPress={this.setMenu2Visible}
               style={this.props.themedStyle.menuContainer}>
@@ -122,9 +121,8 @@ class OverflowMenu extends React.Component<Props, State> {
             placement='top start'
             visible={this.state.overflowMenu3Visible}
             style={this.props.themedStyle.menu}
-            onSelect={(index: number) => this.onSelectItem(index)}
-            onRequestClose={this.setMenu3Visible}
-          >
+            onSelect={this.onSelectItem}
+            onRequestClose={this.setMenu3Visible}>
             <TouchableOpacity
               onPress={this.setMenu3Visible}
               style={this.props.themedStyle.menuContainer}>
@@ -136,9 +134,8 @@ class OverflowMenu extends React.Component<Props, State> {
             placement='top end'
             visible={this.state.overflowMenu4Visible}
             style={this.props.themedStyle.menu}
-            onSelect={(index: number) => this.onSelectItem(index)}
-            onRequestClose={this.setMenu4Visible}
-          >
+            onSelect={this.onSelectItem}
+            onRequestClose={this.setMenu4Visible}>
             <TouchableOpacity
               onPress={this.setMenu4Visible}
               style={this.props.themedStyle.menuContainer}>
