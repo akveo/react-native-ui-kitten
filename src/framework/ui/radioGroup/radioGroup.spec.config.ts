@@ -68,6 +68,10 @@ export const mapping: ThemeMappingType = {
         'mapping': {
           'borderWidth': 2,
           'borderColor': 'gray-primary',
+          'text': {
+            'color': 'text-primary',
+            'fontWeight': '500',
+          },
           'select': {
             'backgroundColor': 'transparent',
           },
@@ -89,6 +93,9 @@ export const mapping: ThemeMappingType = {
             },
             'disabled': {
               'borderColor': 'gray-light',
+              'text': {
+                'color': 'gray-300',
+              },
             },
             'checked.active': {
               'borderColor': 'blue-dark',
@@ -132,6 +139,10 @@ export const mapping: ThemeMappingType = {
                 'height': 50,
                 'borderRadius': 25,
               },
+              'text': {
+                'marginLeft': 10,
+                'fontSize': 14,
+              },
             },
             'medium': {
               'width': 36,
@@ -147,6 +158,10 @@ export const mapping: ThemeMappingType = {
                 'height': 60,
                 'borderRadius': 30,
               },
+              'text': {
+                'marginLeft': 12,
+                'fontSize': 16,
+              },
             },
             'large': {
               'width': 42,
@@ -161,6 +176,10 @@ export const mapping: ThemeMappingType = {
                 'width': 70,
                 'height': 70,
                 'borderRadius': 35,
+              },
+              'text': {
+                'marginLeft': 14,
+                'fontSize': 18,
               },
             },
           },
@@ -202,4 +221,11 @@ export const theme: ThemeType = {
   'gray-dark': '#8992A3',
   'gray-highlight': '#EDF0F5',
   'pink-primary': '#FF3D71',
+  'text-primary': '#000000',
+  'text-primary-inverse': '#ffffff',
+
+  'gray-100': '#f7f8fa',
+  'gray-200': '#edf0f5',
+  'gray-300': '#c8cedb',
+  'gray-400': '#a6aebd',
 };
