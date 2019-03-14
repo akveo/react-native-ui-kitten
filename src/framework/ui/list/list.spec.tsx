@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  GestureResponderEvent,
   Image,
   ImageProps,
   TouchableOpacity,
@@ -145,8 +146,8 @@ describe('@list-item: component checks', () => {
   it('* emits onPress with correct args', async () => {
     const pressIndex: number = 0;
 
-    const onPress = jest.fn((args: any[]) => {
-      expect(args).toEqual(pressIndex);
+    const onPress = jest.fn((event: GestureResponderEvent, index: number) => {
+      expect(index).toEqual(pressIndex);
     });
 
     const item = () => (

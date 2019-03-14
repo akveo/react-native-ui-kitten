@@ -151,7 +151,7 @@ export class Modal extends React.Component<Props> {
     const dialog: React.ReactElement<ViewProps> =
       <Animated.View
         {...derivedProps}
-        style={animationStyle}
+        style={[animationStyle, styles.animatedWrapper]}
         onStartShouldSetResponder={this.onStartShouldSetResponder}
         onResponderRelease={this.onResponderRelease}
         onStartShouldSetResponderCapture={this.onStartShouldSetResponderCapture}
@@ -176,5 +176,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 0,
     height: 0,
+  },
+  animatedWrapper: {
+    alignSelf: 'flex-start',
   },
 });

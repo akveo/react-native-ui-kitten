@@ -48,6 +48,7 @@ const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
 
+// FIXME: re-implement somehow "visibility" behavior
 export class Popover extends React.Component<Props, State> {
 
   static defaultProps: Partial<Props> = {
@@ -199,6 +200,7 @@ const styles = StyleSheet.create({
   popover: {
     position: 'absolute',
     opacity: 0,
+    zIndex: -1,
   },
   placeholder: {
     opacity: 0,

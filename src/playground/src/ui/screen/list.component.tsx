@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Alert,
+  GestureResponderEvent,
   ListRenderItemInfo,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
@@ -35,7 +36,7 @@ export class ListScreen extends React.Component<Props> {
     ].join(' '),
   });
 
-  private onItemPress = (index: number) => {
+  private onItemPress = (event: GestureResponderEvent, index: number) => {
     const { title, description } = this.items[index];
 
     Alert.alert(`${title} ${index + 1} says`, `${description}`);
