@@ -59,7 +59,7 @@ class Toggle extends React.Component<Props, State> {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
+          <Text style={this.props.themedStyle.textDescription}>Primary</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <ToggleComponent
               value={this.state.toggle1Checked}
@@ -86,26 +86,107 @@ class Toggle extends React.Component<Props, State> {
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Error</Text>
+          <Text style={this.props.themedStyle.textDescription}>Danger</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <ToggleComponent
-              status='error'
+              status='danger'
               style={this.props.themedStyle.component}
               value={this.state.toggleErrorChecked}
               onValueChange={this.onToggleErrorChange}
             />
             <ToggleComponent
-              status='error'
+              status='danger'
               style={this.props.themedStyle.component}
               value={true}
             />
             <ToggleComponent
-              status='error'
+              status='danger'
               style={this.props.themedStyle.component}
               disabled={true}
             />
             <ToggleComponent
-              status='error'
+              status='danger'
+              style={this.props.themedStyle.component}
+              value={true}
+              disabled={true}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Success</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <ToggleComponent
+              status='success'
+              style={this.props.themedStyle.component}
+              value={this.state.toggleErrorChecked}
+              onValueChange={this.onToggleErrorChange}
+            />
+            <ToggleComponent
+              status='success'
+              style={this.props.themedStyle.component}
+              value={true}
+            />
+            <ToggleComponent
+              status='success'
+              style={this.props.themedStyle.component}
+              disabled={true}
+            />
+            <ToggleComponent
+              status='success'
+              style={this.props.themedStyle.component}
+              value={true}
+              disabled={true}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Warning</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <ToggleComponent
+              status='warning'
+              style={this.props.themedStyle.component}
+              value={this.state.toggleErrorChecked}
+              onValueChange={this.onToggleErrorChange}
+            />
+            <ToggleComponent
+              status='warning'
+              style={this.props.themedStyle.component}
+              value={true}
+            />
+            <ToggleComponent
+              status='warning'
+              style={this.props.themedStyle.component}
+              disabled={true}
+            />
+            <ToggleComponent
+              status='warning'
+              style={this.props.themedStyle.component}
+              value={true}
+              disabled={true}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Info</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <ToggleComponent
+              status='info'
+              style={this.props.themedStyle.component}
+              value={this.state.toggleErrorChecked}
+              onValueChange={this.onToggleErrorChange}
+            />
+            <ToggleComponent
+              status='info'
+              style={this.props.themedStyle.component}
+              value={true}
+            />
+            <ToggleComponent
+              status='info'
+              style={this.props.themedStyle.component}
+              disabled={true}
+            />
+            <ToggleComponent
+              status='info'
               style={this.props.themedStyle.component}
               value={true}
               disabled={true}

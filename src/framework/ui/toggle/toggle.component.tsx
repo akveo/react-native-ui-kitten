@@ -167,15 +167,14 @@ export class Toggle extends React.Component<Props> {
       },
       switchOffsetValue: container.offsetValue,
       thumbComponentSize: thumbComponentSize,
-      checkMarkSize: container.iconSize,
       colors: {
         onTint: container.borderColor,
         thumb: thumb.backgroundColor,
         tint: container.tintColor,
       },
-      checkmark: {
-        width: container.iconSize,
-        height: container.iconSize,
+      checkMark: {
+        width: thumbComponentSize / 2,
+        height: thumbComponentSize / 2,
       },
     };
   };
@@ -295,7 +294,7 @@ export class Toggle extends React.Component<Props> {
               },
             ]}>
               <CheckMark
-                style={[componentStyle.checkmark, { backgroundColor: interpolatedCheckColor }]}
+                style={[componentStyle.checkMark, { backgroundColor: interpolatedCheckColor }]}
                 isAnimated={true}
               />
             </Animated.View>
