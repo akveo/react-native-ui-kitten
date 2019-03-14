@@ -16,7 +16,7 @@ import {
   StyleType,
   Interaction,
 } from '@kitten/theme';
-import { CheckMark } from '../common/checkmark.component';
+import { CheckMark } from '../drawable/checkmark/checkmark.component';
 
 interface ToggleComponentProps {
   disabled?: boolean;
@@ -173,6 +173,10 @@ export class Toggle extends React.Component<Props> {
         thumb: thumb.backgroundColor,
         tint: container.tintColor,
       },
+      checkmark: {
+        width: container.iconSize,
+        height: container.iconSize,
+      },
     };
   };
 
@@ -291,8 +295,7 @@ export class Toggle extends React.Component<Props> {
               },
             ]}>
               <CheckMark
-                size={componentStyle.checkMarkSize}
-                color={interpolatedCheckColor}
+                style={[componentStyle.checkmark, { backgroundColor: interpolatedCheckColor }]}
                 isAnimated={true}
               />
             </Animated.View>
