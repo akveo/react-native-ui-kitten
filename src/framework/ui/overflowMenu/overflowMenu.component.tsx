@@ -54,6 +54,15 @@ export class OverflowMenu extends React.Component<Props> {
     borderRadius: style.borderRadius,
   });
 
+  private onSelect = (event: GestureResponderEvent, index: number): void => {
+    const { visible, onSelect } = this.props;
+    // FIXME: this is due to popover renders always with the "opacity": 0,
+    //  so popover can listen events even it's "invisible"
+    if (visible && onSelect) {
+      onSelect(event, index);
+    }
+  };
+
   private getMenuItemStyle = (style: StyleType, index: number): StyleType => {
     const borderRadius: number = style.menuItem.borderRadius;
 
@@ -86,7 +95,7 @@ export class OverflowMenu extends React.Component<Props> {
         style={itemStyle}
         key={index}
         index={index}
-        onPress={this.props.onSelect}
+        onPress={this.onSelect}
       />
     );
   };

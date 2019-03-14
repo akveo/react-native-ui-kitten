@@ -34,6 +34,7 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
             icon={[Function]}
             index={0}
             isLastItem={false}
+            onPress={[Function]}
             style={
               Object {
                 "borderTopLeftRadius": 6,
@@ -47,17 +48,20 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
             icon={[Function]}
             index={1}
             isLastItem={false}
+            onPress={[Function]}
             text="Menu Item 2"
           />
           <ForwardRef(createComponent)
             index={2}
             isLastItem={false}
+            onPress={[Function]}
             text="Menu Item 3"
           />
           <ForwardRef(createComponent)
             icon={[Function]}
             index={3}
             isLastItem={true}
+            onPress={[Function]}
             style={
               Object {
                 "borderBottomLeftRadius": 6,
@@ -511,6 +515,7 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
             icon={[Function]}
             index={0}
             isLastItem={true}
+            onPress={[Function]}
             style={
               Object {
                 "borderRadius": 6,
