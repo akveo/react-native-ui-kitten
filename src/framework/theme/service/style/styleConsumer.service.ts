@@ -14,6 +14,7 @@ interface ComponentStyleMetaType {
   appearance: string;
   variants: string[];
   states: string[];
+  params: string[];
 }
 
 export class StyleConsumerService {
@@ -70,6 +71,13 @@ export class StyleConsumerService {
     });
   }
 
+  public getValidComponentStyles<P extends StyledComponentProps>(mapping: ThemeMappingType,
+                                                                 component: string,
+                                                                 props: P): string[] {
+
+    return this.getDerivedStyleMeta(mapping[component], props).params;
+  }
+
   private getDerivedStyleMeta<P extends StyledComponentProps>(mapping: ComponentMappingType,
                                                               props: P): ComponentStyleMetaType {
 
@@ -80,11 +88,13 @@ export class StyleConsumerService {
       return variantProps[variant];
     });
     const states: string[] = Object.keys(stateProps);
+    const params: string[] = this.getDerivedParams(mapping);
 
     return {
       appearance: props.appearance,
       variants,
       states,
+      params: params,
     };
   }
 
@@ -130,6 +140,10 @@ export class StyleConsumerService {
 
       return isState && isAssigned;
     });
+  }
+
+  private getDerivedParams(mapping: ComponentMappingType): string[] {
+    return Object.keys(mapping.meta.mapping);
   }
 
   /**
