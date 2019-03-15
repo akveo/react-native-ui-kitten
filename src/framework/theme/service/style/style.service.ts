@@ -14,8 +14,7 @@ export function createThemedStyle(mapping: ThemedStyleType,
     const mappingValue: any = mapping[current];
 
     if (mappingValue instanceof Object) {
-      // FIXME: think about strict typing of "nested" styles
-      acc[current] = createThemedStyle(mappingValue, theme, Object.keys(mappingValue));
+      acc[current] = createThemedStyle(mappingValue, theme, validParams);
     } else {
       acc[current] = getThemeValue(mappingValue, theme, mappingValue);
     }
@@ -24,8 +23,8 @@ export function createThemedStyle(mapping: ThemedStyleType,
   }, {});
 }
 
-function getReducedMapping(mapping: ThemedStyleType,
-                           validParams: string[]): ThemedStyleType {
+export function getReducedMapping(mapping: ThemedStyleType,
+                                  validParams: string[]): ThemedStyleType {
 
   const mappingKeys: string[] = Object.keys(mapping);
   const redundantKeys: string[] = validate(mappingKeys, validParams);
@@ -34,7 +33,7 @@ function getReducedMapping(mapping: ThemedStyleType,
   return mapping;
 }
 
-function validate(lhs: string[], rhs: string[]): string[] {
+export function validate(lhs: string[], rhs: string[]): string[] {
   return lhs.filter((value: string) => !rhs.includes(value));
 }
 
