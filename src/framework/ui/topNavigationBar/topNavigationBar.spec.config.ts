@@ -21,12 +21,33 @@ export const mapping: ThemeMappingType = {
         'backgroundColor': {
           'type': 'color',
         },
+        'textAlign': {
+          'type': 'string',
+        },
+        'titleColor': {
+          'type': 'color',
+        },
+        'titleFontSize': {
+          'type': 'number',
+        },
+        'titleFontWeight': {
+          'type': 'string',
+        },
+        'subtitleColor': {
+          'type': 'color',
+        },
+        'subtitleFontSize': {
+          'type': 'number',
+        },
+        'subtitleFontWeight': {
+          'type': 'string',
+        },
       },
       'appearances': {
         'default': {
           'default': true,
         },
-        'title-centered': {
+        'titleCentered': {
           'default': false,
         },
       },
@@ -41,20 +62,16 @@ export const mapping: ThemeMappingType = {
           'paddingBottom': 12,
           'paddingHorizontal': 16,
           'backgroundColor': 'blue-primary',
-          'title': {
-            'color': 'text-primary-inverse',
-            'fontSize': 16,
-            'fontWeight': '600',
-          },
-          'subtitle': {
-            'color': 'text-primary-inverse',
-            'fontSize': 12,
-            'fontWeight': '400',
-          },
+          'titleColor': 'text-primary-inverse',
+          'titleFontSize': 16,
+          'titleFontWeight': '600',
+          'subtitleColor': 'text-primary-inverse',
+          'subtitleFontSize': 12,
+          'subtitleFontWeight': '400',
           'textAlign': 'start',
         },
       },
-      'title-centered': {
+      'titleCentered': {
         'mapping': {
           'textAlign': 'center',
         },

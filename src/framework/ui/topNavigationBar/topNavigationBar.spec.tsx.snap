@@ -13,20 +13,16 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -37,7 +33,7 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -56,6 +52,27 @@ exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",
@@ -135,20 +152,16 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -159,7 +172,7 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -178,6 +191,27 @@ exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",
@@ -257,20 +291,16 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -281,7 +311,7 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -300,6 +330,27 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",
@@ -391,20 +442,16 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -415,7 +462,7 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -434,6 +481,27 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",
@@ -512,20 +580,16 @@ exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -536,7 +600,7 @@ exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -555,6 +619,27 @@ exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",
@@ -634,20 +719,16 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -658,7 +739,7 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -677,6 +758,27 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",
@@ -756,20 +858,16 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -780,7 +878,7 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -799,6 +897,27 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",
@@ -877,20 +996,16 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
               "paddingBottom": 12,
               "paddingHorizontal": 16,
               "paddingTop": 4,
-              "subtitle": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 12,
-                "fontWeight": "400",
-              },
+              "subtitleColor": "text-primary-inverse",
+              "subtitleFontSize": 12,
+              "subtitleFontWeight": "400",
               "textAlign": "start",
-              "title": Object {
-                "color": "text-primary-inverse",
-                "fontSize": 16,
-                "fontWeight": "600",
-              },
+              "titleColor": "text-primary-inverse",
+              "titleFontSize": 16,
+              "titleFontWeight": "600",
             },
           },
-          "title-centered": Object {
+          "titleCentered": Object {
             "mapping": Object {
               "textAlign": "center",
             },
@@ -901,7 +1016,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
             "default": Object {
               "default": true,
             },
-            "title-centered": Object {
+            "titleCentered": Object {
               "default": false,
             },
           },
@@ -920,6 +1035,27 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
             },
             "paddingTop": Object {
               "type": "number",
+            },
+            "subtitleColor": Object {
+              "type": "color",
+            },
+            "subtitleFontSize": Object {
+              "type": "number",
+            },
+            "subtitleFontWeight": Object {
+              "type": "string",
+            },
+            "textAlign": Object {
+              "type": "string",
+            },
+            "titleColor": Object {
+              "type": "color",
+            },
+            "titleFontSize": Object {
+              "type": "number",
+            },
+            "titleFontWeight": Object {
+              "type": "string",
             },
           },
           "scope": "mobile",

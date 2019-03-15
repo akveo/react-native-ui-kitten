@@ -26,19 +26,23 @@ export type Props = TopNavigationBarProps & StyledComponentProps & ViewProps;
 export class TopNavigationBar extends React.Component<Props> {
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { title, subtitle, textAlign, ...container } = style;
+    const { textAlign, ...restStyles } = style;
     const isCentered: boolean = textAlign === 'center';
 
     return {
       container: {
-        ...container,
+        height: restStyles.height,
+        paddingTop: restStyles.paddingTop,
+        paddingBottom: restStyles.paddingBottom,
+        paddingHorizontal: restStyles.paddingHorizontal,
+        backgroundColor: restStyles.backgroundColor,
       },
       titleContainer: isCentered ? {
         flex: 3,
         alignItems: 'center',
       } : {
         flex: 1,
-        paddingHorizontal: container.paddingHorizontal,
+        paddingHorizontal: restStyles.paddingHorizontal,
       },
       leftControlContainer: isCentered ? {
         flex: 1,
@@ -47,10 +51,14 @@ export class TopNavigationBar extends React.Component<Props> {
         flex: 1,
       } : null,
       title: {
-        ...title,
+        color: restStyles.titleColor,
+        fontSize: restStyles.titleFontSize,
+        fontWeight: restStyles.titleFontWeight,
       },
       subtitle: {
-        ...subtitle,
+        color: restStyles.subtitleColor,
+        fontSize: restStyles.subtitleFontSize,
+        fontWeight: restStyles.subtitleFontWeight,
       },
     };
   };
