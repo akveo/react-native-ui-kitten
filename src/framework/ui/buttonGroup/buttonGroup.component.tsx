@@ -28,11 +28,16 @@ export class ButtonGroup extends React.Component<Props> {
   private styleProvider: ButtonStyleProvider = ButtonStyleProviders.DEFAULT;
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { button, ...container } = style;
+    const {
+      buttonBorderRadius,
+      ...containerParameters
+    } = style;
 
     return {
-      container: container,
-      button: button,
+      container: containerParameters,
+      button: {
+        borderRadius: buttonBorderRadius,
+      },
     };
   };
 

@@ -5,33 +5,86 @@ export const mapping: ThemeMappingType = {
   'List': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'parameters': {},
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
-        'mapping': {
-          'item': {},
-        },
+        'mapping': {},
       },
     },
   },
   'ListItem': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'parameters': {
+        'paddingVertical': {
+          'type': 'number',
+        },
+        'paddingHorizontal': {
+          'type': 'number',
+        },
+        'iconWidth': {
+          'type': 'number',
+        },
+        'iconHeight': {
+          'type': 'number',
+        },
+        'iconMarginHorizontal': {
+          'type': 'number',
+        },
+        'iconTintColor': {
+          'type': 'string',
+        },
+        'titleColor': {
+          'type': 'string',
+        },
+        'titleFontSize': {
+          'type': 'number',
+        },
+        'titleFontWeight': {
+          'type': 'string',
+        },
+        'titleMarginHorizontal': {
+          'type': 'number',
+        },
+        'titleMarginVertical': {
+          'type': 'number',
+        },
+        'descriptionColor': {
+          'type': 'string',
+        },
+        'descriptionFontSize': {
+          'type': 'number',
+        },
+        'descriptionMarginHorizontal': {
+          'type': 'number',
+        },
+        'descriptionMarginVertical': {
+          'type': 'number',
+        },
+        'accessoryWidth': {
+          'type': 'number',
+        },
+        'accessoryHeight': {
+          'type': 'number',
+        },
+        'accessoryMarginHorizontal': {
+          'type': 'number',
+        },
+      },
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {
         'active': {
           'default': false,
@@ -40,34 +93,27 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'paddingVertical': 12,
           'paddingHorizontal': 6,
-          'icon': {
-            'width': 48,
-            'height': 48,
-            'marginHorizontal': 6,
-          },
-          'title': {
-            'color': 'text-primary',
-            'fontSize': 20,
-            'fontWeight': '600',
-            'marginHorizontal': 6,
-            'marginVertical': 4,
-          },
-          'description': {
-            'marginHorizontal': 6,
-            'marginVertical': 4,
-            'color': 'gray-400',
-            'fontSize': 14,
-          },
-          'accessory': {
-            'width': 48,
-            'height': 48,
-            'marginHorizontal': 6,
-          },
+          'iconWidth': 48,
+          'iconHeight': 48,
+          'iconMarginHorizontal': 6,
+          'iconTintColor': 'gray-primary',
+          'titleColor': 'text-primary',
+          'titleFontSize': 20,
+          'titleFontWeight': '600',
+          'titleMarginHorizontal': 6,
+          'titleMarginVertical': 4,
+          'descriptionColor': 'gray-400',
+          'descriptionFontSize': 14,
+          'descriptionMarginHorizontal': 6,
+          'descriptionMarginVertical': 4,
+          'accessoryWidth': 48,
+          'accessoryHeight': 48,
+          'accessoryMarginHorizontal': 6,
           'state': {
             'active': {
               'backgroundColor': 'gray-100',
@@ -80,9 +126,9 @@ export const mapping: ThemeMappingType = {
   'Text': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'color': {
-          'type': 'color',
+          'type': 'string',
         },
         'fontSize': {
           'type': 'number',
@@ -93,7 +139,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'category': {
           'h1': {
             'default': false,
@@ -120,12 +166,12 @@ export const mapping: ThemeMappingType = {
       },
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'primary': {
         'mapping': {
           'color': 'text-primary',
         },
-        'variant': {
+        'variantGroups': {
           'category': {
             'h1': {
               'fontSize': 64,

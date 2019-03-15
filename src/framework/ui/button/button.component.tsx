@@ -64,16 +64,37 @@ export class Button extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { text, icon, ...container } = style;
+    const {
+      textColor,
+      textFontSize,
+      textFontWeight,
+      textMarginHorizontal,
+      iconWidth,
+      iconHeight,
+      iconTintColor,
+      iconMarginHorizontal,
+      ...containerParameters
+    } = style;
+
     const alignment: ButtonAlignment = ButtonAlignments.parse(this.props.alignment, ALIGNMENT_DEFAULT);
 
     return {
       container: {
-        ...container,
+        ...containerParameters,
         flexDirection: alignment.flex(),
       },
-      text: text,
-      icon: icon,
+      text: {
+        color: textColor,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
+        marginHorizontal: textMarginHorizontal,
+      },
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        tintColor: iconTintColor,
+        marginHorizontal: iconMarginHorizontal,
+      },
     };
   };
 

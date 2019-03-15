@@ -43,12 +43,28 @@ export class Input extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { text, icon, ...container } = style;
+    const {
+      textMarginHorizontal,
+      textColor,
+      iconWidth,
+      iconHeight,
+      iconMarginHorizontal,
+      iconTintColor,
+      ...containerParameters
+    } = style;
 
     return {
-      container: container,
-      text: text,
-      icon: icon,
+      container: containerParameters,
+      text: {
+        marginHorizontal: textMarginHorizontal,
+        color: textColor,
+      },
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        marginHorizontal: iconMarginHorizontal,
+        tintColor: iconTintColor,
+      },
     };
   };
 

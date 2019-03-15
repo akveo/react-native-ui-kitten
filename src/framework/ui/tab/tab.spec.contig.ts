@@ -6,13 +6,29 @@ export const mapping: ThemeMappingType = {
   'Tab': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'parameters': {
+        'textColor': {
+          'type': 'string',
+        },
+        'textFontWeight': {
+          'type': 'number',
+        },
+        'iconWidth': {
+          'type': 'number',
+        },
+        'iconHeight': {
+          'type': 'number',
+        },
+        'iconTintColor': {
+          'type': 'string',
+        },
+      },
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {
         'selected': {
           'default': false,
@@ -21,26 +37,18 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
-          'text': {
-            'color': 'gray-dark',
-            'fontWeight': '600',
-          },
-          'icon': {
-            'width': 20,
-            'height': 20,
-            'tintColor': 'gray-dark',
-          },
+          'textColor': 'gray-dark',
+          'textFontWeight': '600',
+          'iconWidth': 20,
+          'iconHeight': 20,
+          'iconTintColor': 'gray-dark',
           'state': {
             'selected': {
-              'text': {
-                'color': 'blue-primary',
-              },
-              'icon': {
-                'tintColor': 'blue-primary',
-              },
+              'textColor': 'blue-primary',
+              'iconTintColor': 'blue-primary',
             },
           },
         },
@@ -50,9 +58,18 @@ export const mapping: ThemeMappingType = {
   'TabBar': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'height': {
           'type': 'number',
+        },
+        'indicatorHeight': {
+          'type': 'number',
+        },
+        'indicatorBorderRadius': {
+          'type': 'number',
+        },
+        'indicatorBackgroundColor': {
+          'type': 'string',
         },
       },
       'appearances': {
@@ -60,17 +77,91 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'height': 42,
-          'indicator': {
-            'height': 4,
-            'borderRadius': 2,
-            'backgroundColor': 'blue-primary',
+          'indicatorHeight': 4,
+          'indicatorBorderRadius': 2,
+          'indicatorBackgroundColor': 'blue-primary',
+        },
+      },
+    },
+  },
+  'Text': {
+    'meta': {
+      'scope': 'all',
+      'parameters': {
+        'color': {
+          'type': 'string',
+        },
+        'fontSize': {
+          'type': 'number',
+        },
+      },
+      'appearances': {
+        'primary': {
+          'default': true,
+        },
+      },
+      'variantGroups': {
+        'category': {
+          'h1': {
+            'default': false,
+          },
+          'h2': {
+            'default': false,
+          },
+          'h3': {
+            'default': false,
+          },
+          'h4': {
+            'default': false,
+          },
+          'h5': {
+            'default': false,
+          },
+          'h6': {
+            'default': false,
+          },
+          'body': {
+            'default': true,
+          },
+        },
+      },
+      'states': {},
+    },
+    'appearances': {
+      'primary': {
+        'mapping': {
+          'color': 'text-primary',
+        },
+        'variantGroups': {
+          'category': {
+            'h1': {
+              'fontSize': 64,
+            },
+            'h2': {
+              'fontSize': 40,
+            },
+            'h3': {
+              'fontSize': 32,
+            },
+            'h4': {
+              'fontSize': 24,
+            },
+            'h5': {
+              'fontSize': 16,
+            },
+            'h6': {
+              'fontSize': 14,
+            },
+            'body': {
+              'fontSize': 16,
+            },
           },
         },
       },

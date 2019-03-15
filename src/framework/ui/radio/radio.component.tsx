@@ -54,13 +54,42 @@ export class Radio extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { text, select, highlight, ...container } = style;
+    const {
+      textColor,
+      textMarginLeft,
+      textFontSize,
+      textFontWeight,
+      selectWidth,
+      selectHeight,
+      selectBorderRadius,
+      selectBackgroundColor,
+      highlightWidth,
+      highlightHeight,
+      highlightBorderRadius,
+      highlightBackgroundColor,
+      ...containerParameters
+    } = style;
 
     return {
-      selectContainer: container,
-      select: select,
-      highlight: highlight,
-      text: text,
+      selectContainer: containerParameters,
+      text: {
+        color: textColor,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
+        marginLeft: textMarginLeft,
+      },
+      select: {
+        width: selectWidth,
+        height: selectHeight,
+        borderRadius: selectBorderRadius,
+        backgroundColor: selectBackgroundColor,
+      },
+      highlight: {
+        width: highlightWidth,
+        height: highlightHeight,
+        borderRadius: highlightBorderRadius,
+        backgroundColor: highlightBackgroundColor,
+      },
     };
   };
 

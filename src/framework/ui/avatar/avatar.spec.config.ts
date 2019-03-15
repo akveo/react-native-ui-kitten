@@ -5,7 +5,7 @@ export const mapping: ThemeMappingType = {
   'Avatar': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'roundCoefficient': {
           'type': 'number',
         },
@@ -24,7 +24,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'shape': {
           'round': {
             'default': true,
@@ -50,12 +50,12 @@ export const mapping: ThemeMappingType = {
       },
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'margin': 16,
         },
-        'variant': {
+        'variantGroups': {
           'shape': {
             'round': {
               'roundCoefficient': 0.5,

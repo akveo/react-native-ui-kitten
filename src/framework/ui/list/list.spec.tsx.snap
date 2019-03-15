@@ -17,7 +17,7 @@ exports[`@list-item: template matches snapshot * description 1`] = `
         "paddingVertical": 12,
       },
       Array [
-        Object {},
+        undefined,
         undefined,
         Object {},
       ],
@@ -65,6 +65,7 @@ exports[`@list-item: template matches snapshot * description 1`] = `
           "icon": Object {
             "height": 48,
             "marginHorizontal": 6,
+            "tintColor": "#A6AEBD",
             "width": 48,
           },
           "title": Object {
@@ -118,7 +119,7 @@ exports[`@list-item: template matches snapshot * title 1`] = `
         "paddingVertical": 12,
       },
       Array [
-        Object {},
+        undefined,
         undefined,
         Object {},
       ],
@@ -166,6 +167,7 @@ exports[`@list-item: template matches snapshot * title 1`] = `
           "icon": Object {
             "height": 48,
             "marginHorizontal": 6,
+            "tintColor": "#A6AEBD",
             "width": 48,
           },
           "title": Object {
@@ -221,7 +223,7 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
         "paddingVertical": 12,
       },
       Array [
-        Object {},
+        undefined,
         undefined,
         Object {},
       ],
@@ -269,6 +271,7 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
           "icon": Object {
             "height": 48,
             "marginHorizontal": 6,
+            "tintColor": "#A6AEBD",
             "width": 48,
           },
           "title": Object {
@@ -357,7 +360,7 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
         "paddingVertical": 12,
       },
       Array [
-        Object {},
+        undefined,
         undefined,
         Object {},
       ],
@@ -398,6 +401,7 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
         Object {
           "height": 48,
           "marginHorizontal": 6,
+          "tintColor": "#A6AEBD",
           "width": 48,
         },
         0,
@@ -423,6 +427,7 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
           "icon": Object {
             "height": 48,
             "marginHorizontal": 6,
+            "tintColor": "#A6AEBD",
             "width": 48,
           },
           "title": Object {

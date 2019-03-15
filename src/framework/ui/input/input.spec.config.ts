@@ -5,13 +5,53 @@ export const mapping: ThemeMappingType = {
   'Input': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'parameters': {
+        'paddingVertical': {
+          'type': 'number',
+        },
+        'paddingHorizontal': {
+          'type': 'number',
+        },
+        'minHeight': {
+          'type': 'number',
+        },
+        'borderRadius': {
+          'type': 'number',
+        },
+        'borderWidth': {
+          'type': 'number',
+        },
+        'borderColor': {
+          'type': 'string',
+        },
+        'backgroundColor': {
+          'type': 'string',
+        },
+        'textMarginHorizontal': {
+          'type': 'number',
+        },
+        'textColor': {
+          'type': 'string',
+        },
+        'iconWidth': {
+          'type': 'number',
+        },
+        'iconHeight': {
+          'type': 'number',
+        },
+        'iconMarginHorizontal': {
+          'type': 'number',
+        },
+        'iconTintColor': {
+          'type': 'string',
+        },
+      },
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'status': {
           'primary': {
             'default': true,
@@ -43,7 +83,7 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'paddingVertical': 12,
@@ -51,39 +91,29 @@ export const mapping: ThemeMappingType = {
           'minHeight': 48,
           'borderRadius': 6,
           'borderWidth': 2,
-          'backgroundColor': 'gray-100',
           'borderColor': 'transparent',
-          'text': {
-            'marginHorizontal': 6,
-            'color': 'gray-400',
-          },
-          'icon': {
-            'width': 24,
-            'height': 24,
-            'marginHorizontal': 6,
-            'tintColor': 'gray-400',
-          },
+          'backgroundColor': 'gray-100',
+          'textMarginHorizontal': 6,
+          'textColor': 'gray-400',
+          'iconWidth': 24,
+          'iconHeight': 24,
+          'iconMarginHorizontal': 6,
+          'iconTintColor': 'gray-400',
           'state': {
             'disabled': {
               'backgroundColor': 'gray-200',
-              'text': {
-                'color': 'gray-300',
-              },
-              'icon': {
-                'tintColor': 'gray-300',
-              },
+              'textColor': 'gray-300',
+              'iconTintColor': 'gray-300',
             },
           },
         },
-        'variant': {
+        'variantGroups': {
           'status': {
             'primary': {
               'state': {
                 'focused': {
                   'borderColor': 'blue-primary',
-                  'icon': {
-                    'tintColor': 'blue-primary',
-                  },
+                  'iconTintColor': 'blue-primary',
                 },
               },
             },
@@ -91,9 +121,7 @@ export const mapping: ThemeMappingType = {
               'state': {
                 'focused': {
                   'borderColor': '#4CAF50',
-                  'icon': {
-                    'tintColor': '#4CAF50',
-                  },
+                  'iconTintColor': '#4CAF50',
                 },
               },
             },
@@ -101,9 +129,7 @@ export const mapping: ThemeMappingType = {
               'state': {
                 'focused': {
                   'borderColor': '#03A9F4',
-                  'icon': {
-                    'tintColor': '#03A9F4',
-                  },
+                  'iconTintColor': '#03A9F4',
                 },
               },
             },
@@ -111,9 +137,7 @@ export const mapping: ThemeMappingType = {
               'state': {
                 'focused': {
                   'borderColor': '#FFC107',
-                  'icon': {
-                    'tintColor': '#FFC107',
-                  },
+                  'iconTintColor': '#FFC107',
                 },
               },
             },
@@ -121,9 +145,7 @@ export const mapping: ThemeMappingType = {
               'state': {
                 'focused': {
                   'borderColor': '#F44336',
-                  'icon': {
-                    'tintColor': '#F44336',
-                  },
+                  'iconTintColor': '#F44336',
                 },
               },
             },
@@ -135,9 +157,9 @@ export const mapping: ThemeMappingType = {
   'Text': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'color': {
-          'type': 'color',
+          'type': 'string',
         },
         'fontSize': {
           'type': 'number',
@@ -148,7 +170,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'category': {
           'h1': {
             'default': false,
@@ -175,12 +197,12 @@ export const mapping: ThemeMappingType = {
       },
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'primary': {
         'mapping': {
           'color': 'text-primary',
         },
-        'variant': {
+        'variantGroups': {
           'category': {
             'h1': {
               'fontSize': 64,
