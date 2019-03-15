@@ -165,8 +165,8 @@ exports[`@toggle: matches snapshot active 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(255, 255, 255, 1)",
@@ -345,8 +345,8 @@ exports[`@toggle: matches snapshot active checked 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(51, 102, 255, 1)",
@@ -525,8 +525,8 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(51, 102, 255, 1)",
@@ -705,8 +705,8 @@ exports[`@toggle: matches snapshot active: default 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(255, 255, 255, 1)",
@@ -885,8 +885,8 @@ exports[`@toggle: matches snapshot checked 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(51, 102, 255, 1)",
@@ -1049,8 +1049,8 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(137, 146, 163, 1)",
@@ -1229,8 +1229,8 @@ exports[`@toggle: matches snapshot default 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(255, 255, 255, 1)",
@@ -1393,8 +1393,8 @@ exports[`@toggle: matches snapshot disabled 1`] = `
           style={
             Array [
               Object {
-                "height": undefined,
-                "width": undefined,
+                "height": 14.5,
+                "width": 14.5,
               },
               Object {
                 "backgroundColor": "rgba(255, 255, 255, 1)",

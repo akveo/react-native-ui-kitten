@@ -27,7 +27,7 @@ export class CheckMark extends React.Component<Props> {
       },
       // the dependence of the variables was determined experimentally. Changes may be needed later.
       shape: {
-        width: source.width * 0.25,
+        width: source.width * 0.2,
         height: source.height * 0.833,
         borderTopLeftRadius: source.height * 0.333,
         borderTopRightRadius: source.height * 0.333,
