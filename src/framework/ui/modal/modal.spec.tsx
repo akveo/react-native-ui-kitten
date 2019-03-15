@@ -11,25 +11,10 @@ import {
 } from 'react-native';
 import {
   Modal,
-  Props as ModalProps,
   ModalAnimationType,
 } from './modal.component';
-import {
-  styled,
-  StyleProvider,
-  StyleProviderProps,
-} from '@kitten/theme';
-import * as config from './modal.spec.config';
 
 jest.useFakeTimers();
-
-const StyledModal = styled<Modal, ModalProps>(Modal);
-
-const Mock = (props?: ModalProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <StyledModal {...props} />
-  </StyleProvider>
-);
 
 describe('@modal component checks', () => {
 
@@ -162,9 +147,9 @@ describe('@modal component checks', () => {
 
   it('* component styled with mappings', () => {
     const component = render(
-      <Mock visible={true}>
+      <Modal visible={true}>
         <Text>Test</Text>
-      </Mock>,
+      </Modal>,
     );
     expect(component).toMatchSnapshot();
   });
