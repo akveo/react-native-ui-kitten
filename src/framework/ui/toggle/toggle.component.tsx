@@ -133,44 +133,47 @@ export class Toggle extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { thumb, highlight, ...container } = style;
-    const thumbComponentSize: number = container.height - (container.borderWidth * 2);
+    // const { thumb, highlight, ...container } = style;
+    const thumbComponentSize: number = style.height - (style.borderWidth * 2);
 
     return {
       wrapper: {
-        width: container.width,
-        height: container.height,
+        width: style.width,
+        height: style.height,
       },
       componentContainer: {
-        ...container,
+        ...style,
       },
       componentDisabledBox: {
-        width: container.width,
-        height: this.props.disabled ? container.height : 0,
+        width: style.width,
+        height: this.props.disabled ? style.height : 0,
         backgroundColor: style.tintColor,
         borderRadius: style.width / 2,
       },
       componentEllipse: {
-        width: container.width - (container.borderWidth * 2),
-        height: container.height - (container.borderWidth * 2),
-        borderRadius: (container.height - (container.borderWidth * 2)) / 2,
+        width: style.width - (style.borderWidth * 2),
+        height: style.height - (style.borderWidth * 2),
+        borderRadius: (style.height - (style.borderWidth * 2)) / 2,
       },
       componentThumb: {
         height: thumbComponentSize,
         width: thumbComponentSize,
-        borderWidth: container.borderWidth,
+        borderWidth: style.borderWidth,
         borderRadius: thumbComponentSize / 2,
         marginHorizontal: 1.5,
       },
       highlight: {
-        ...highlight,
+        backgroundColor: style.highlightColor,
+        width: style.highlightWidth,
+        height: style.highlightHeight,
+        borderRadius: style.highlightBorderRadius,
       },
-      switchOffsetValue: container.offsetValue,
+      switchOffsetValue: style.offsetValue,
       thumbComponentSize: thumbComponentSize,
       colors: {
-        onTint: container.borderColor,
-        thumb: thumb.backgroundColor,
-        tint: container.tintColor,
+        onTint: style.borderColor,
+        thumb: style.thumbColor,
+        tint: style.tintColor,
       },
       checkMark: {
         width: thumbComponentSize / 2,

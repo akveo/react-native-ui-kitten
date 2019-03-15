@@ -27,6 +27,21 @@ export const mapping: ThemeMappingType = {
         'borderColor': {
           'type': 'color',
         },
+        'thumbColor': {
+          'type': 'color',
+        },
+        'highlightColor': {
+          'type': 'color',
+        },
+        'highlightWidth': {
+          'type': 'number',
+        },
+        'highlightHeight': {
+          'type': 'number',
+        },
+        'highlightBorderRadius': {
+          'type': 'number',
+        },
       },
       'appearances': {
         'default': {
@@ -35,7 +50,19 @@ export const mapping: ThemeMappingType = {
       },
       'variants': {
         'status': {
-          'error': {
+          'primary': {
+            'default': true,
+          },
+          'success': {
+            'default': false,
+          },
+          'info': {
+            'default': false,
+          },
+          'warning': {
+            'default': false,
+          },
+          'danger': {
             'default': false,
           },
         },
@@ -73,35 +100,39 @@ export const mapping: ThemeMappingType = {
       'default': {
         'mapping': {
           'offsetValue': 20,
-          'tintColor': 'gray-light',
-          'borderColor': 'blue-primary',
-          'thumb': {
-            'backgroundColor': '#ffffff',
-          },
-          'highlight': {
-            'backgroundColor': 'transparent',
-          },
+          'thumbColor': '#ffffff',
+          'highlightColor': 'transparent',
           'state': {
             'active': {
-              'highlight': {
-                'backgroundColor': '#e5e7ea',
-              },
+              'highlightColor': '#e5e7ea',
             },
             'disabled': {
               'borderColor': 'gray-dark',
+              'tintColor': 'gray-light',
             },
           },
         },
         'variant': {
           'status': {
-            'error': {
+            'primary': {
+              'tintColor': '#d9e4ff',
+              'borderColor': 'blue-primary',
+            },
+            'success': {
+              'tintColor': '#b3ffd6',
+              'borderColor': '#00e096',
+            },
+            'info': {
+              'tintColor': '#c7e2ff',
+              'borderColor': '#0095ff',
+            },
+            'warning': {
+              'tintColor': '#fff1c2',
+              'borderColor': '#ffaa00',
+            },
+            'danger': {
               'tintColor': '#FFD6D9',
               'borderColor': 'pink-primary',
-              'state': {
-                'disabled': {
-                  'tintColor': 'gray-light',
-                },
-              },
             },
           },
           'size': {
@@ -110,33 +141,27 @@ export const mapping: ThemeMappingType = {
               'height': 22,
               'borderRadius': 11,
               'borderWidth': 0.5,
-              'highlight': {
-                'width': 48,
-                'height': 32,
-                'borderRadius': 16,
-              },
+              'highlightWidth': 48,
+              'highlightHeight': 32,
+              'highlightBorderRadius': 16,
             },
             'medium': {
               'width': 52,
               'height': 32,
               'borderRadius': 16,
               'borderWidth': 1.5,
-              'highlight': {
-                'width': 62,
-                'height': 42,
-                'borderRadius': 21,
-              },
+              'highlightWidth': 62,
+              'highlightHeight': 42,
+              'highlightBorderRadius': 21,
             },
             'large': {
               'width': 72,
               'height': 42,
               'borderRadius': 21,
               'borderWidth': 2,
-              'highlight': {
-                'width': 82,
-                'height': 52,
-                'borderRadius': 26,
-              },
+              'highlightWidth': 82,
+              'highlightHeight': 52,
+              'highlightBorderRadius': 26,
             },
           },
         },
