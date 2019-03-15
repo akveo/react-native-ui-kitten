@@ -19,12 +19,18 @@ export const mapping: ThemeMappingType = {
         'borderTopWidth': {
           'type': 'number',
         },
+        'indicatorHeight': {
+          'type': 'number',
+        },
+        'indicatorColor': {
+          'type': 'color',
+        },
       },
       'appearances': {
         'default': {
           'default': true,
         },
-        'no-indicator': {
+        'noIndicator': {
           'default': false,
         },
       },
@@ -38,18 +44,14 @@ export const mapping: ThemeMappingType = {
           'paddingVertical': 16,
           'borderTopColor': 'gray-primary',
           'borderTopWidth': 1,
-          'indicator': {
-            'height': 3,
-            'backgroundColor': 'blue-primary',
-          },
+          'indicatorHeight': 3,
+          'indicatorColor': 'blue-primary',
         },
       },
-      'no-indicator': {
+      'noIndicator': {
         'mapping': {
-          'indicator': {
-            'height': 0,
-            'backgroundColor': 'transparent',
-          },
+          'indicatorHeight': 0,
+          'indicatorColor': 'transparent',
         },
       },
     },

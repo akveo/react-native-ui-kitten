@@ -133,7 +133,6 @@ export class Toggle extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    // const { thumb, highlight, ...container } = style;
     const thumbComponentSize: number = style.height - (style.borderWidth * 2);
 
     return {
