@@ -5,7 +5,7 @@ export const mapping: ThemeMappingType = {
   'OverflowMenu': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'borderRadius': {
           'type': 'number',
         },
@@ -13,7 +13,7 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'popoverBackgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
       },
       'appearances': {
@@ -22,9 +22,9 @@ export const mapping: ThemeMappingType = {
         },
       },
       'states': {},
-      'variants': {},
+      'variantGroups': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'borderRadius': 6,
@@ -37,7 +37,7 @@ export const mapping: ThemeMappingType = {
   'OverflowMenuItem': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'minHeight': {
           'type': 'number',
         },
@@ -45,16 +45,16 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'backgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'borderColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'borderWidth': {
           'type': 'number',
         },
         'textColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'textFontWeight': {
           'type': 'string',
@@ -66,7 +66,7 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'iconTintColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'iconWidth': {
           'type': 'number',
@@ -83,7 +83,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'size': {
           'small': {
             'default': false,
@@ -109,7 +109,7 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'backgroundColor': 'white',
@@ -128,7 +128,7 @@ export const mapping: ThemeMappingType = {
             },
           },
         },
-        'variant': {
+        'variantGroups': {
           'size': {
             'small': {
               'minHeight': 40,
@@ -165,9 +165,9 @@ export const mapping: ThemeMappingType = {
   'Text': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'color': {
-          'type': 'color',
+          'type': 'string',
         },
         'fontSize': {
           'type': 'number',
@@ -178,7 +178,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'category': {
           'h1': {
             'default': false,
@@ -205,12 +205,12 @@ export const mapping: ThemeMappingType = {
       },
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'primary': {
         'mapping': {
           'color': 'text-primary',
         },
-        'variant': {
+        'variantGroups': {
           'category': {
             'h1': {
               'fontSize': 64,
@@ -241,16 +241,16 @@ export const mapping: ThemeMappingType = {
   'Popover': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'parameters': {},
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {},
       },

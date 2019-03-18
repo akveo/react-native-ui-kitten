@@ -6,7 +6,7 @@ export const mapping: ThemeMappingType = {
   'BottomNavigatorTab': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {
+      'parameters': {
         'iconWidth': {
           'type': 'number',
         },
@@ -17,10 +17,10 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'iconTintColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'textColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'textFontWeight': {
           'type': 'string',
@@ -31,7 +31,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {
         'selected': {
           'default': false,
@@ -40,7 +40,7 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'iconWidth': 40,

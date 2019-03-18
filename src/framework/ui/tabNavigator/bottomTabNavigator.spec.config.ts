@@ -6,15 +6,15 @@ export const mapping: ThemeMappingType = {
   'BottomTabNavigator': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {
+      'parameters': {
         'backgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'paddingVertical': {
           'type': 'number',
         },
         'borderTopColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'borderTopWidth': {
           'type': 'number',
@@ -23,7 +23,7 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'indicatorBackgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
       },
       'appearances': {
@@ -34,10 +34,10 @@ export const mapping: ThemeMappingType = {
           'default': false,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'backgroundColor': 'transparent',

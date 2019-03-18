@@ -5,7 +5,7 @@ export const mapping: ThemeMappingType = {
   'TopNavigationBar': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {
+      'parameters': {
         'height': {
           'type': 'number',
         },
@@ -19,13 +19,13 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'backgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'textAlign': {
           'type': 'string',
         },
         'titleColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'titleFontSize': {
           'type': 'number',
@@ -34,7 +34,7 @@ export const mapping: ThemeMappingType = {
           'type': 'string',
         },
         'subtitleColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'subtitleFontSize': {
           'type': 'number',
@@ -51,10 +51,10 @@ export const mapping: ThemeMappingType = {
           'default': false,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'height': 46,
@@ -81,7 +81,7 @@ export const mapping: ThemeMappingType = {
   'TopNavigationBarAction': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {
+      'parameters': {
         'width': {
           'type': 'number',
         },
@@ -92,7 +92,7 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'tintColor': {
-          'type': 'color',
+          'type': 'string',
         },
       },
       'appearances': {
@@ -100,10 +100,10 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'width': 25,

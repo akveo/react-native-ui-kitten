@@ -5,7 +5,7 @@ export const mapping: ThemeMappingType = {
   Test: {
     meta: {
       scope: 'mobile',
-      mapping: {
+      parameters: {
         size: {
           type: 'number',
         },
@@ -16,10 +16,10 @@ export const mapping: ThemeMappingType = {
           type: 'number',
         },
         borderColor: {
-          type: 'color',
+          type: 'string',
         },
         selectColor: {
-          type: 'color',
+          type: 'string',
         },
       },
       appearances: {
@@ -30,7 +30,7 @@ export const mapping: ThemeMappingType = {
           default: false,
         },
       },
-      variants: {
+      variantGroups: {
         status: {
           success: {
             default: false,
@@ -69,7 +69,7 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    appearance: {
+    appearances: {
       default: {
         mapping: {
           borderWidth: 2,
@@ -94,7 +94,7 @@ export const mapping: ThemeMappingType = {
             },
           },
         },
-        variant: {
+        variantGroups: {
           status: {
             info: {
               state: {
@@ -157,12 +157,12 @@ export const mapping: ThemeMappingType = {
   Empty: {
     meta: {
       scope: 'mobile',
-      mapping: {},
+      parameters: {},
       appearances: {},
-      variants: {},
+      variantGroups: {},
       states: {},
     },
-    appearance: {},
+    appearances: {},
   },
 };
 

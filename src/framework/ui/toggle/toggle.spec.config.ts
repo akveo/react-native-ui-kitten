@@ -5,7 +5,7 @@ export const mapping: ThemeMappingType = {
   'Toggle': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'width': {
           'type': 'number',
         },
@@ -22,16 +22,16 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'tintBackgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'borderColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'thumbBackgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'highlightBackgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'highlightWidth': {
           'type': 'number',
@@ -48,7 +48,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'status': {
           'primary': {
             'default': true,
@@ -96,7 +96,7 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'offsetValue': 20,
@@ -112,7 +112,7 @@ export const mapping: ThemeMappingType = {
             },
           },
         },
-        'variant': {
+        'variantGroups': {
           'status': {
             'primary': {
               'tintBackgroundColor': '#d9e4ff',
