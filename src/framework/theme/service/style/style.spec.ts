@@ -101,11 +101,8 @@ describe('@style: service methods checks', () => {
       checked: false,
       disabled: true,
     };
-    const validParams: string[] = styleConsumerService.getValidComponentStyles(
-      config.componentMapping,
-      'Test',
-      props,
-    );
+
+    const validParams: string[] = Object.keys(config.mapping);
 
     it('* default theme', () => {
       const style = Service.createThemedStyle(config.mapping, config.theme, validParams);

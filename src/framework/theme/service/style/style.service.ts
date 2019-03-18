@@ -12,12 +12,7 @@ export function createThemedStyle(mapping: ThemedStyleType,
   const reducedMapping: ThemedStyleType = getReducedMapping(mapping, validParams);
   return Object.keys(reducedMapping).reduce((acc: StyleType, current: string): StyleType => {
     const mappingValue: any = mapping[current];
-
-    if (mappingValue instanceof Object) {
-      acc[current] = createThemedStyle(mappingValue, theme, validParams);
-    } else {
-      acc[current] = getThemeValue(mappingValue, theme, mappingValue);
-    }
+    acc[current] = getThemeValue(mappingValue, theme, mappingValue);
 
     return acc;
   }, {});

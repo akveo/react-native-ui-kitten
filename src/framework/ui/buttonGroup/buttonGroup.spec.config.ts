@@ -75,6 +75,9 @@ export const mapping: ThemeMappingType = {
         'borderRadius': {
           'type': 'number',
         },
+        'borderColor': {
+          'type': 'string',
+        },
         'borderWidth': {
           'type': 'number',
         },

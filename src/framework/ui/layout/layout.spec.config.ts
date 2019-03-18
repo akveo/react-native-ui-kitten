@@ -5,7 +5,26 @@ export const mapping: ThemeMappingType = {
   'Layout': {
     'meta': {
       'scope': 'mobile',
-      'parameters': {},
+      'parameters': {
+        'paddingHorizontal': {
+          'type': 'number',
+        },
+        'paddingVertical': {
+          'type': 'number',
+        },
+        'backgroundColor': {
+          'type': 'string',
+        },
+        'borderColor': {
+          'type': 'number',
+        },
+        'borderRadius': {
+          'type': 'number',
+        },
+        'borderWidth': {
+          'type': 'number',
+        },
+      },
       'appearances': {
         'default': {
           'default': true,
