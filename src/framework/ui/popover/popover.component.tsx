@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Animated,
   View,
   FlexStyle,
   ViewProps,
@@ -36,8 +35,6 @@ interface PopoverProps {
   visible?: boolean;
 }
 
-type MeasuredNode = React.ReactElement<{ children: MeasuredElement[] }>;
-
 interface State {
   layout: MeasureResult | undefined;
 }
@@ -48,7 +45,6 @@ const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
 
-// FIXME: re-implement somehow "visibility" behavior
 export class Popover extends React.Component<Props, State> {
 
   static defaultProps: Partial<Props> = {
@@ -60,7 +56,7 @@ export class Popover extends React.Component<Props, State> {
     layout: undefined,
   };
 
-  private containerRef: React.RefObject<MeasuredNode> = React.createRef();
+  private popoverElement: MeasuredElement = undefined;
   private modalIdentifier: string = '';
 
   public shouldComponentUpdate(nextProps: Props, nextState: State, nextContext: any): boolean {
@@ -81,12 +77,7 @@ export class Popover extends React.Component<Props, State> {
           top: popoverPosition.y,
         };
 
-        const { current: container } = this.containerRef;
-
-        // Retrieve `content` from popover children and clone it with measured position
-        const { [TAG_CONTENT]: popoverView } = container.props.children;
-
-        const popover: React.ReactElement<ModalComponentCloseProps> = React.cloneElement(popoverView, {
+        const popover: React.ReactElement<ModalComponentCloseProps> = React.cloneElement(this.popoverElement, {
           style: style,
           onRequestClose: onRequestClose,
         });
@@ -168,23 +159,10 @@ export class Popover extends React.Component<Props, State> {
     );
   };
 
-  private renderComponentElement = (...children: MeasuredElement[]): MeasuredNode => {
-    // Store `containerRef` for later usage.
-    // This is needed to retrieve `content` and position it in future
-    //
-    // Notes: No way (?) to store `View` ref, so we need to use `Animated.View`
-
-    return (
-      <Animated.View ref={this.containerRef}>
-        {children}
-      </Animated.View>
-    );
-  };
-
   public render(): MeasuringNode | React.ReactNode {
     const { themedStyle, content, children } = this.props;
-
     const { child, popover } = this.getComponentStyle(themedStyle);
+
     const measuringChild: MeasuringElement = this.renderChildElement(children, child);
     const measuringPopover: MeasuringElement = this.renderPopoverElement(content, popover);
 
@@ -192,15 +170,15 @@ export class Popover extends React.Component<Props, State> {
       return this.renderPlaceholderElement(measuringChild, measuringPopover);
     }
 
-    return this.renderComponentElement(measuringChild, measuringPopover);
+    this.popoverElement = measuringPopover;
+
+    return measuringChild;
   }
 }
 
 const styles = StyleSheet.create({
   popover: {
     position: 'absolute',
-    opacity: 0,
-    zIndex: -1,
   },
   placeholder: {
     opacity: 0,
