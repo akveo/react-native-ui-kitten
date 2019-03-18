@@ -70,9 +70,7 @@ export const styled = <T extends React.Component, P extends object>(Component: R
       );
 
       const appearance: string = props.appearance;
-      const validParams: string[] =
-        this.service.getValidComponentStyles(mappingValue.mapping, componentName, props);
-      const style: StyleType = createThemedStyle(styleMapping, themeValue, validParams);
+      const style: StyleType = createThemedStyle(styleMapping, themeValue);
 
       return {
         appearance: appearance,

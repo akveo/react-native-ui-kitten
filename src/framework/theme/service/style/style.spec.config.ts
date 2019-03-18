@@ -181,6 +181,31 @@ export const componentMapping: ThemeMappingType = {
     },
     appearances: {},
   },
+  Invalid: {
+    meta: {
+      scope: 'mobile',
+      parameters: {
+        backgroundColor: {
+          type: 'string',
+        },
+      },
+      appearances: {
+        default: {
+          default: true,
+        },
+      },
+      variantGroups: {},
+      states: {},
+    },
+    appearances: {
+      default: {
+        mapping: {
+          backgroundColor: 'black',
+          foregroundColor: 'white',
+        },
+      },
+    },
+  },
 };
 
 export const theme: ThemeType = {

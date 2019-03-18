@@ -14,7 +14,6 @@ interface ComponentStyleMetaType {
   appearance: string;
   variants: string[];
   states: string[];
-  params: string[];
 }
 
 export class StyleConsumerService {
@@ -50,32 +49,53 @@ export class StyleConsumerService {
                                                                   interaction: Interaction[]): ThemedStyleType {
 
     return this.safe(mapping[component], (componentMapping: ControlMappingType): ThemedStyleType => {
-      const { appearance, variants, states } = this.getDerivedStyleMeta(componentMapping, props);
+      const meta: ComponentStyleMetaType = this.getDerivedStyleMeta(componentMapping, props);
+      const validParameters: string[] = Object.keys(componentMapping.meta.parameters);
 
       const generatedStyles: ThemedStyleType = this.safe(styles[component], (componentStyles) => {
         const query: string = this.findGeneratedQuery(Object.keys(componentStyles), [
-          appearance,
-          ...variants,
+          meta.appearance,
+          ...meta.variants,
           ...interaction,
-          ...states,
+          ...meta.states,
         ]);
 
         return componentStyles[query];
       });
 
       if (generatedStyles === undefined) {
-        return createStyle(mapping, component, appearance, variants, [...interaction, ...states]);
+        const createdStyles: ThemedStyleType = createStyle(
+          mapping,
+          component,
+          meta.appearance,
+          meta.variants,
+          [...interaction, ...meta.states],
+        );
+
+        return this.validateComponentStyleMapping(createdStyles, validParameters);
       }
 
-      return generatedStyles;
+      return this.validateComponentStyleMapping(generatedStyles, validParameters);
     });
   }
 
-  public getValidComponentStyles<P extends StyledComponentProps>(mapping: ThemeMappingType,
-                                                                 component: string,
-                                                                 props: P): string[] {
+  private validateComponentStyleMapping(mapping: ThemedStyleType, parameters: string[]): ThemedStyleType {
+    const redundantKeys: string[] = [];
 
-    return this.getDerivedStyleMeta(mapping[component], props).params;
+    Object.keys(mapping).forEach((key: string) => {
+      if (!parameters.includes(key)) {
+        redundantKeys.push(key);
+        delete mapping[key];
+      }
+    });
+
+    if (redundantKeys.length !== 0) {
+      console.warn(
+        `Before using these variables, describe them in the component configuration: ${redundantKeys}`,
+      );
+    }
+
+    return mapping;
   }
 
   private getDerivedStyleMeta<P extends StyledComponentProps>(mapping: ControlMappingType,
@@ -88,13 +108,11 @@ export class StyleConsumerService {
       return variantProps[variant];
     });
     const states: string[] = Object.keys(stateProps);
-    const params: string[] = this.getDerivedParams(mapping);
 
     return {
       appearance: props.appearance,
       variants,
       states,
-      params: params,
     };
   }
 
@@ -140,10 +158,6 @@ export class StyleConsumerService {
 
       return isState && isAssigned;
     });
-  }
-
-  private getDerivedParams(mapping: ControlMappingType): string[] {
-    return Object.keys(mapping.meta.parameters);
   }
 
   /**
