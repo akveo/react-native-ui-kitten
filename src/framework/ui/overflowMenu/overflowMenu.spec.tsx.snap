@@ -19,9 +19,7 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
     onLayout={[Function]}
     style={
       Object {
-        "opacity": 0,
         "position": "absolute",
-        "zIndex": -1,
       }
     }
     tag={1}
@@ -500,9 +498,7 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
     onLayout={[Function]}
     style={
       Object {
-        "opacity": 0,
         "position": "absolute",
-        "zIndex": -1,
       }
     }
     tag={1}
