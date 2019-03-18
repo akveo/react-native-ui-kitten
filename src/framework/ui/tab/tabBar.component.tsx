@@ -48,16 +48,19 @@ export class TabBar extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { indicator, ...container } = source;
+    const {
+      indicatorHeight,
+      indicatorBorderRadius,
+      indicatorBackgroundColor,
+      ...containerParameters
+    } = source;
 
     return {
-      container: {
-        ...container,
-        ...styles.container,
-      },
+      container: containerParameters,
       indicator: {
-        ...indicator,
-        ...styles.indicator,
+        height: indicatorHeight,
+        borderRadius: indicatorBorderRadius,
+        backgroundColor: indicatorBackgroundColor,
       },
     };
   };
@@ -85,12 +88,12 @@ export class TabBar extends React.Component<Props> {
       <View>
         <View
           {...derivedProps}
-          style={[style, container]}>
+          style={[style, container, styles.container]}>
           {componentChildren}
         </View>
         <TabBarIndicator
           ref={this.tabIndicatorRef}
-          style={indicator}
+          style={[indicator, styles.indicator]}
           selectedPosition={selectedIndex}
           positions={componentChildren.length}
         />

@@ -5,16 +5,16 @@ export const mapping: ThemeMappingType = {
   'Layout': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {},
+      'parameters': {},
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'paddingHorizontal': 16,

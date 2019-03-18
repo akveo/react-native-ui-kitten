@@ -1,15 +1,19 @@
 import React from 'react';
 import {
-  Text,
-  TextProps,
   ImageProps,
   TouchableOpacity,
   TouchableOpacityProps,
+  StyleSheet,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import {
+  Text as TextComponent,
+  Props as TextProps,
+} from '../text/text.component';
 
 interface TabProps {
   title?: string;
@@ -17,6 +21,8 @@ interface TabProps {
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
+
+const Text = styled<TextComponent, TextProps>(TextComponent);
 
 export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
 
@@ -33,36 +39,57 @@ export class Tab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const {
+      textColor,
+      textFontWeight,
+      iconWidth,
+      iconHeight,
+      iconTintColor,
+      ...containerParameters
+    } = source;
+
     return {
-      container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+      container: containerParameters,
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        tintColor: iconTintColor,
       },
-      icon: source.icon,
-      title: source.text,
+      title: {
+        color: textColor,
+        fontWeight: textFontWeight,
+      },
     };
   };
 
-  private renderTextComponent = (style: StyleType): React.ReactElement<TextProps> | null => {
-    return this.props.title ? (
+  private renderTextComponent = (style: StyleType): React.ReactElement<TextProps> => {
+    const { title: text } = this.props;
+
+    return (
       <Text
         style={style}
         key={1}>
-        {this.props.title}
+        {text}
       </Text>
-    ) : null;
+    );
   };
 
-  private renderImageComponent = (style: StyleType): React.ReactElement<ImageProps> | null => {
-    const icon: React.ReactElement<ImageProps> = this.props.icon && this.props.icon(style);
-    return icon ? React.cloneElement(icon, { key: 2 }) : null;
+  private renderImageComponent = (style: StyleType): React.ReactElement<ImageProps> => {
+    const { icon } = this.props;
+
+    const iconElement: React.ReactElement<ImageProps> = icon(style);
+
+    return React.cloneElement(iconElement, { key: 2 });
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => ([
-    this.renderImageComponent(style.icon),
-    this.renderTextComponent(style.title),
-  ]);
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+    const { title, icon } = this.props;
+
+    return [
+      icon ? this.renderImageComponent(style.icon) : undefined,
+      title ? this.renderTextComponent(style.title) : undefined,
+    ];
+  };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
@@ -73,7 +100,7 @@ export class Tab extends React.Component<Props> {
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[style, container]}
+        style={[style, container, styles.container]}
         activeOpacity={1.0}
         onPress={this.onPress}>
         {componentChildren}
@@ -81,3 +108,13 @@ export class Tab extends React.Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {},
+  title: {},
+});

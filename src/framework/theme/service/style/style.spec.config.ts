@@ -22,7 +22,7 @@ export const componentMapping: ThemeMappingType = {
   Test: {
     meta: {
       scope: 'mobile',
-      mapping: {
+      parameters: {
         size: {
           type: 'number',
         },
@@ -33,10 +33,10 @@ export const componentMapping: ThemeMappingType = {
           type: 'number',
         },
         borderColor: {
-          type: 'color',
+          type: 'string',
         },
         selectColor: {
-          type: 'color',
+          type: 'string',
         },
       },
       appearances: {
@@ -47,7 +47,7 @@ export const componentMapping: ThemeMappingType = {
           default: false,
         },
       },
-      variants: {
+      variantGroups: {
         status: {
           success: {
             default: false,
@@ -86,7 +86,7 @@ export const componentMapping: ThemeMappingType = {
         },
       },
     },
-    appearance: {
+    appearances: {
       default: {
         mapping: {
           borderWidth: 2,
@@ -111,7 +111,7 @@ export const componentMapping: ThemeMappingType = {
             },
           },
         },
-        variant: {
+        variantGroups: {
           status: {
             info: {
               state: {
@@ -174,12 +174,12 @@ export const componentMapping: ThemeMappingType = {
   Empty: {
     meta: {
       scope: 'mobile',
-      mapping: {},
+      parameters: {},
       appearances: {},
-      variants: {},
+      variantGroups: {},
       states: {},
     },
-    appearance: {},
+    appearances: {},
   },
 };
 

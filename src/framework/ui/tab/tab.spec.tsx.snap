@@ -77,10 +77,29 @@ exports[`@tab: component checks * title 1`] = `
   }
 >
   <Text
+    appearance="primary"
+    dispatch={[Function]}
     style={
+      Array [
+        Object {
+          "color": "text-primary",
+          "fontSize": 16,
+        },
+        Object {
+          "color": "#8992A3",
+          "fontWeight": "600",
+        },
+      ]
+    }
+    theme={
       Object {
-        "color": "#8992A3",
-        "fontWeight": "600",
+        "blue-dark": "#2541CC",
+        "blue-primary": "#3366FF",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
       }
     }
   >

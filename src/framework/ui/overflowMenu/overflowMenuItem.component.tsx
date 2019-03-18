@@ -66,17 +66,27 @@ export class OverflowMenuItem extends React.Component<Props> {
 
   private getComponentStyle = (style: StyleType): StyleType => {
     const { isLastItem } = this.props;
-    const { text, icon, ...container } = style;
-    const { borderColor, borderWidth, ...restContainerProps } = container;
 
     return {
       container: {
-        borderBottomColor: !isLastItem ? borderColor : null,
-        borderBottomWidth: !isLastItem ? borderWidth : null,
-        ...restContainerProps,
+        minHeight: style.minHeight,
+        padding: style.padding,
+        backgroundColor: style.backgroundColor,
+        borderBottomColor: !isLastItem ? style.borderColor : null,
+        borderBottomWidth: !isLastItem ? style.borderWidth : null,
       },
-      text: text,
-      icon: icon,
+      text: {
+        color: style.textColor,
+        fontWeight: style.textFontWeight,
+        fontSize: style.textFontSize,
+        marginHorizontal: style.textMarginHorizontal,
+      },
+      icon: {
+        tintColor: style.iconTintColor,
+        width: style.iconWidth,
+        height: style.iconHeight,
+        marginHorizontal: style.iconMarginHorizontal,
+      },
     };
   };
 

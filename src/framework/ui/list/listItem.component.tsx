@@ -77,14 +77,52 @@ export class ListItem extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { icon, title, description, accessory, ...container } = source;
+    const {
+      iconWidth,
+      iconHeight,
+      iconMarginHorizontal,
+      iconTintColor,
+      titleColor,
+      titleFontSize,
+      titleFontWeight,
+      titleMarginHorizontal,
+      titleMarginVertical,
+      descriptionColor,
+      descriptionFontSize,
+      descriptionMarginHorizontal,
+      descriptionMarginVertical,
+      accessoryWidth,
+      accessoryHeight,
+      accessoryMarginHorizontal,
+      ...containerParameters
+    } = source;
 
     return {
-      container: container,
-      icon: icon,
-      title: title,
-      description: description,
-      accessory: accessory,
+      container: containerParameters,
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        marginHorizontal: iconMarginHorizontal,
+        tintColor: iconTintColor,
+      },
+      title: {
+        color: titleColor,
+        fontSize: titleFontSize,
+        fontWeight: titleFontWeight,
+        marginHorizontal: titleMarginHorizontal,
+        marginVertical: titleMarginVertical,
+      },
+      description: {
+        color: descriptionColor,
+        fontSize: descriptionFontSize,
+        marginHorizontal: descriptionMarginHorizontal,
+        marginVertical: descriptionMarginVertical,
+      },
+      accessory: {
+        width: accessoryWidth,
+        height: accessoryHeight,
+        marginHorizontal: accessoryMarginHorizontal,
+      },
     };
   };
 
