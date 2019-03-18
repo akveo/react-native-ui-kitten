@@ -49,10 +49,6 @@ export class OverflowMenu extends React.Component<Props> {
     return this.props.items.length === 1;
   };
 
-  private getPopoverStyle = (style: StyleType): StyleType => ({
-    ...style.popover,
-    borderRadius: style.borderRadius,
-  });
 
   private onSelect = (event: GestureResponderEvent, index: number): void => {
     const { visible, onSelect } = this.props;
@@ -63,8 +59,13 @@ export class OverflowMenu extends React.Component<Props> {
     }
   };
 
+  private getPopoverStyle = (style: StyleType): StyleType => ({
+    backgroundColor: style.popoverBackgroundColor,
+    borderRadius: style.borderRadius,
+  });
+
   private getMenuItemStyle = (style: StyleType, index: number): StyleType => {
-    const borderRadius: number = style.menuItem.borderRadius;
+    const borderRadius: number = style.itemBorderRadius;
 
     if (this.isFirstItem(index) && !this.isSingleItem()) {
       return {

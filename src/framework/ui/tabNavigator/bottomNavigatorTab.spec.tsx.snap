@@ -59,6 +59,7 @@ exports[`@bottom-navigator-tab: component checks * text/selected 1`] = `
     style={
       Object {
         "color": "#3366FF",
+        "fontWeight": "600",
       }
     }
   >
@@ -105,6 +106,7 @@ exports[`@bottom-navigator-tab: component checks * text/unselected 1`] = `
     style={
       Object {
         "color": "#8992A3",
+        "fontWeight": "600",
       }
     }
   >

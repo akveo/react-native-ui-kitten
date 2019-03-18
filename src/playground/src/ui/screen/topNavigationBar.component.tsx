@@ -33,7 +33,7 @@ class TopNavigationBar extends React.Component<Props> {
     header: (props: NavigationScreenProps) => (
       <SafeAreaView style={styles.safeAreaView}>
         <TopNavigationBarComponent
-          appearance='title-centered'
+          appearance='titleCentered'
           title='Top Navigation Bar'
           subtitle='Subtitle'
           leftControl={

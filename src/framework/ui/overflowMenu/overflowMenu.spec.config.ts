@@ -9,6 +9,12 @@ export const mapping: ThemeMappingType = {
         'borderRadius': {
           'type': 'number',
         },
+        'itemBorderRadius': {
+          'type': 'number',
+        },
+        'popoverBackgroundColor': {
+          'type': 'color',
+        },
       },
       'appearances': {
         'default': {
@@ -22,12 +28,8 @@ export const mapping: ThemeMappingType = {
       'default': {
         'mapping': {
           'borderRadius': 6,
-          'menuItem': {
-            'borderRadius': 6,
-          },
-          'popover': {
-            'backgroundColor': 'white',
-          },
+          'itemBorderRadius': 6,
+          'popoverBackgroundColor': 'white',
         },
       },
     },
@@ -36,6 +38,12 @@ export const mapping: ThemeMappingType = {
     'meta': {
       'scope': 'all',
       'mapping': {
+        'minHeight': {
+          'type': 'number',
+        },
+        'padding': {
+          'type': 'number',
+        },
         'backgroundColor': {
           'type': 'color',
         },
@@ -43,6 +51,30 @@ export const mapping: ThemeMappingType = {
           'type': 'color',
         },
         'borderWidth': {
+          'type': 'number',
+        },
+        'textColor': {
+          'type': 'color',
+        },
+        'textFontWeight': {
+          'type': 'string',
+        },
+        'textFontSize': {
+          'type': 'number',
+        },
+        'textMarginHorizontal': {
+          'type': 'number',
+        },
+        'iconTintColor': {
+          'type': 'color',
+        },
+        'iconWidth': {
+          'type': 'number',
+        },
+        'iconHeight': {
+          'type': 'number',
+        },
+        'iconMarginHorizontal': {
           'type': 'number',
         },
       },
@@ -83,24 +115,16 @@ export const mapping: ThemeMappingType = {
           'backgroundColor': 'white',
           'borderColor': 'gray-light',
           'borderWidth': 1.2,
-          'text': {
-            'color': 'blue-pitch-dark',
-            'fontWeight': '600',
-          },
-          'icon': {
-            'tintColor': 'blue-pitch-dark',
-          },
+          'textColor': 'blue-pitch-dark',
+          'textFontWeight': '600',
+          'iconTintColor': 'blue-pitch-dark',
           'state': {
             'disabled': {
               'backgroundColor': 'gray-dark',
             },
             'active': {
-              'text': {
-                'color': 'blue-primary',
-              },
-              'icon': {
-                'tintColor': 'blue-primary',
-              },
+              'textColor': 'blue-primary',
+              'iconTintColor': 'blue-primary',
             },
           },
         },
@@ -109,41 +133,29 @@ export const mapping: ThemeMappingType = {
             'small': {
               'minHeight': 40,
               'padding': 10,
-              'text': {
-                'fontSize': 13,
-                'marginHorizontal': 6,
-              },
-              'icon': {
-                'width': 20,
-                'height': 20,
-                'marginHorizontal': 6,
-              },
+              'textFontSize': 13,
+              'textMarginHorizontal': 6,
+              'iconWidth': 20,
+              'iconHeight': 20,
+              'iconMarginHorizontal': 6,
             },
             'medium': {
               'minHeight': 48,
               'padding': 12,
-              'text': {
-                'fontSize': 15,
-                'marginHorizontal': 8,
-              },
-              'icon': {
-                'width': 24,
-                'height': 24,
-                'marginHorizontal': 8,
-              },
+              'textFontSize': 15,
+              'textMarginHorizontal': 8,
+              'iconWidth': 24,
+              'iconHeight': 24,
+              'iconMarginHorizontal': 8,
             },
             'large': {
               'minHeight': 56,
               'padding': 14,
-              'text': {
-                'fontSize': 17,
-                'marginHorizontal': 10,
-              },
-              'icon': {
-                'width': 28,
-                'height': 28,
-                'marginHorizontal': 10,
-              },
+              'textFontSize': 17,
+              'textMarginHorizontal': 10,
+              'iconWidth': 28,
+              'iconHeight': 28,
+              'iconMarginHorizontal': 10,
             },
           },
         },

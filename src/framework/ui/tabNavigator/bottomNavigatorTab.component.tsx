@@ -30,11 +30,17 @@ export class BottomNavigatorTab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { icon, text } = source;
-
     return {
-      icon: icon,
-      title: text,
+      icon: {
+        width: source.iconWidth,
+        height: source.iconHeight,
+        marginBottom: source.iconMarginBottom,
+        tintColor: source.iconTintColor,
+      },
+      title: {
+        color: source.textColor,
+        fontWeight: source.textFontWeight,
+      },
     };
   };
 

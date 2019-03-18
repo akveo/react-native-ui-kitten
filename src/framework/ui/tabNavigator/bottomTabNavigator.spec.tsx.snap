@@ -96,6 +96,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       style={
         Object {
           "color": "#3366FF",
+          "fontWeight": "600",
         }
       }
     >
@@ -139,6 +140,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -183,6 +185,7 @@ exports[`@bottom-tab-navigator: component checks * additional appearance 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -289,6 +292,7 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -333,6 +337,7 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       style={
         Object {
           "color": "#3366FF",
+          "fontWeight": "600",
         }
       }
     >
@@ -376,6 +381,7 @@ exports[`@bottom-tab-navigator: component checks * choose selected tab 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -481,6 +487,7 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -524,6 +531,7 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       style={
         Object {
           "color": "#3366FF",
+          "fontWeight": "600",
         }
       }
     >
@@ -567,6 +575,7 @@ exports[`@bottom-tab-navigator: component checks * current index 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -749,6 +758,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -792,6 +802,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       style={
         Object {
           "color": "#3366FF",
+          "fontWeight": "600",
         }
       }
     >
@@ -836,6 +847,7 @@ exports[`@bottom-tab-navigator: component checks * tab choose 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -941,6 +953,7 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       style={
         Object {
           "color": "#3366FF",
+          "fontWeight": "600",
         }
       }
     >
@@ -984,6 +997,7 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >
@@ -1027,6 +1041,7 @@ exports[`@bottom-tab-navigator: component checks * with routes 1`] = `
       style={
         Object {
           "color": "#8992A3",
+          "fontWeight": "600",
         }
       }
     >

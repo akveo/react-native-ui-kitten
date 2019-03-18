@@ -21,11 +21,26 @@ export const mapping: ThemeMappingType = {
         'offsetValue': {
           'type': 'number',
         },
-        'tintColor': {
+        'tintBackgroundColor': {
           'type': 'color',
         },
         'borderColor': {
           'type': 'color',
+        },
+        'thumbBackgroundColor': {
+          'type': 'color',
+        },
+        'highlightBackgroundColor': {
+          'type': 'color',
+        },
+        'highlightWidth': {
+          'type': 'number',
+        },
+        'highlightHeight': {
+          'type': 'number',
+        },
+        'highlightBorderRadius': {
+          'type': 'number',
         },
       },
       'appearances': {
@@ -35,7 +50,19 @@ export const mapping: ThemeMappingType = {
       },
       'variants': {
         'status': {
-          'error': {
+          'primary': {
+            'default': true,
+          },
+          'success': {
+            'default': false,
+          },
+          'info': {
+            'default': false,
+          },
+          'warning': {
+            'default': false,
+          },
+          'danger': {
             'default': false,
           },
         },
@@ -73,35 +100,39 @@ export const mapping: ThemeMappingType = {
       'default': {
         'mapping': {
           'offsetValue': 20,
-          'tintColor': 'gray-light',
-          'borderColor': 'blue-primary',
-          'thumb': {
-            'backgroundColor': '#ffffff',
-          },
-          'highlight': {
-            'backgroundColor': 'transparent',
-          },
+          'thumbBackgroundColor': '#ffffff',
+          'highlightBackgroundColor': 'transparent',
           'state': {
             'active': {
-              'highlight': {
-                'backgroundColor': '#e5e7ea',
-              },
+              'highlightBackgroundColor': '#e5e7ea',
             },
             'disabled': {
               'borderColor': 'gray-dark',
+              'tintBackgroundColor': 'gray-light',
             },
           },
         },
         'variant': {
           'status': {
-            'error': {
-              'tintColor': '#FFD6D9',
+            'primary': {
+              'tintBackgroundColor': '#d9e4ff',
+              'borderColor': 'blue-primary',
+            },
+            'success': {
+              'tintBackgroundColor': '#b3ffd6',
+              'borderColor': '#00e096',
+            },
+            'info': {
+              'tintBackgroundColor': '#c7e2ff',
+              'borderColor': '#0095ff',
+            },
+            'warning': {
+              'tintBackgroundColor': '#fff1c2',
+              'borderColor': '#ffaa00',
+            },
+            'danger': {
+              'tintBackgroundColor': '#FFD6D9',
               'borderColor': 'pink-primary',
-              'state': {
-                'disabled': {
-                  'tintColor': 'gray-light',
-                },
-              },
             },
           },
           'size': {
@@ -110,33 +141,27 @@ export const mapping: ThemeMappingType = {
               'height': 22,
               'borderRadius': 11,
               'borderWidth': 0.5,
-              'highlight': {
-                'width': 48,
-                'height': 32,
-                'borderRadius': 16,
-              },
+              'highlightWidth': 48,
+              'highlightHeight': 32,
+              'highlightBorderRadius': 16,
             },
             'medium': {
               'width': 52,
               'height': 32,
               'borderRadius': 16,
               'borderWidth': 1.5,
-              'highlight': {
-                'width': 62,
-                'height': 42,
-                'borderRadius': 21,
-              },
+              'highlightWidth': 62,
+              'highlightHeight': 42,
+              'highlightBorderRadius': 21,
             },
             'large': {
               'width': 72,
               'height': 42,
               'borderRadius': 21,
               'borderWidth': 2,
-              'highlight': {
-                'width': 82,
-                'height': 52,
-                'borderRadius': 26,
-              },
+              'highlightWidth': 82,
+              'highlightHeight': 52,
+              'highlightBorderRadius': 26,
             },
           },
         },
