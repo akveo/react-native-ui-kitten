@@ -65,7 +65,7 @@ export const mapping: ThemeMappingType = {
         'textMarginHorizontal': {
           'type': 'number',
         },
-        'iconColor': {
+        'iconTintColor': {
           'type': 'color',
         },
         'iconWidth': {
@@ -117,14 +117,14 @@ export const mapping: ThemeMappingType = {
           'borderWidth': 1.2,
           'textColor': 'blue-pitch-dark',
           'textFontWeight': '600',
-          'iconColor': 'blue-pitch-dark',
+          'iconTintColor': 'blue-pitch-dark',
           'state': {
             'disabled': {
               'backgroundColor': 'gray-dark',
             },
             'active': {
               'textColor': 'blue-primary',
-              'iconColor': 'blue-primary',
+              'iconTintColor': 'blue-primary',
             },
           },
         },

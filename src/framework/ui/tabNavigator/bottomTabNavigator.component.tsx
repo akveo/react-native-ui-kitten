@@ -41,7 +41,7 @@ export class BottomTabNavigator extends React.Component<Props> {
       },
       indicator: {
         height: style.indicatorHeight,
-        backgroundColor: style.indicatorColor,
+        backgroundColor: style.indicatorBackgroundColor,
       },
     };
   };

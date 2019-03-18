@@ -21,16 +21,16 @@ export const mapping: ThemeMappingType = {
         'offsetValue': {
           'type': 'number',
         },
-        'tintColor': {
+        'tintBackgroundColor': {
           'type': 'color',
         },
         'borderColor': {
           'type': 'color',
         },
-        'thumbColor': {
+        'thumbBackgroundColor': {
           'type': 'color',
         },
-        'highlightColor': {
+        'highlightBackgroundColor': {
           'type': 'color',
         },
         'highlightWidth': {
@@ -100,38 +100,38 @@ export const mapping: ThemeMappingType = {
       'default': {
         'mapping': {
           'offsetValue': 20,
-          'thumbColor': '#ffffff',
-          'highlightColor': 'transparent',
+          'thumbBackgroundColor': '#ffffff',
+          'highlightBackgroundColor': 'transparent',
           'state': {
             'active': {
-              'highlightColor': '#e5e7ea',
+              'highlightBackgroundColor': '#e5e7ea',
             },
             'disabled': {
               'borderColor': 'gray-dark',
-              'tintColor': 'gray-light',
+              'tintBackgroundColor': 'gray-light',
             },
           },
         },
         'variant': {
           'status': {
             'primary': {
-              'tintColor': '#d9e4ff',
+              'tintBackgroundColor': '#d9e4ff',
               'borderColor': 'blue-primary',
             },
             'success': {
-              'tintColor': '#b3ffd6',
+              'tintBackgroundColor': '#b3ffd6',
               'borderColor': '#00e096',
             },
             'info': {
-              'tintColor': '#c7e2ff',
+              'tintBackgroundColor': '#c7e2ff',
               'borderColor': '#0095ff',
             },
             'warning': {
-              'tintColor': '#fff1c2',
+              'tintBackgroundColor': '#fff1c2',
               'borderColor': '#ffaa00',
             },
             'danger': {
-              'tintColor': '#FFD6D9',
+              'tintBackgroundColor': '#FFD6D9',
               'borderColor': 'pink-primary',
             },
           },

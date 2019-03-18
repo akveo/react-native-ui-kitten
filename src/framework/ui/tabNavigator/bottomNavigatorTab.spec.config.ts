@@ -16,7 +16,7 @@ export const mapping: ThemeMappingType = {
         'iconMarginBottom': {
           'type': 'number',
         },
-        'iconColor': {
+        'iconTintColor': {
           'type': 'color',
         },
         'textColor': {
@@ -46,12 +46,12 @@ export const mapping: ThemeMappingType = {
           'iconWidth': 40,
           'iconHeight': 40,
           'iconMarginBottom': 5,
-          'iconColor': 'gray-dark',
+          'iconTintColor': 'gray-dark',
           'textColor': 'gray-dark',
           'textFontWeight': '600',
           'state': {
             'selected': {
-              'iconColor': 'blue-primary',
+              'iconTintColor': 'blue-primary',
               'textColor': 'blue-primary',
             },
           },

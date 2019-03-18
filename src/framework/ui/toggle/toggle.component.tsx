@@ -136,17 +136,14 @@ export class Toggle extends React.Component<Props> {
     const thumbComponentSize: number = style.height - (style.borderWidth * 2);
 
     return {
-      wrapper: {
-        width: style.width,
-        height: style.height,
-      },
       componentContainer: {
+        // FIXME: until the params parser will be implemented
         ...style,
       },
       componentDisabledBox: {
         width: style.width,
         height: this.props.disabled ? style.height : 0,
-        backgroundColor: style.tintColor,
+        backgroundColor: style.tintBackgroundColor,
         borderRadius: style.width / 2,
       },
       componentEllipse: {
@@ -171,8 +168,8 @@ export class Toggle extends React.Component<Props> {
       thumbComponentSize: thumbComponentSize,
       colors: {
         onTint: style.borderColor,
-        thumb: style.thumbColor,
-        tint: style.tintColor,
+        thumb: style.thumbBackgroundColor,
+        tint: style.tintBackgroundColor,
       },
       checkMark: {
         width: thumbComponentSize / 2,
@@ -261,8 +258,8 @@ export class Toggle extends React.Component<Props> {
     });
 
     return (
-      <View {...this.props} style={[componentStyle.wrapper, styles.wrapper, style]}>
-        {!this.props.disabled && <View style={[styles.highlight, componentStyle.highlight]}/>}
+      <View {...this.props} style={[styles.wrapper, style]}>
+        {<View style={[styles.highlight, componentStyle.highlight]}/>}
         <TouchableOpacity
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}

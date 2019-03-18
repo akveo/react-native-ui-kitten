@@ -35,7 +35,7 @@ export class BottomNavigatorTab extends React.Component<Props> {
         width: source.iconWidth,
         height: source.iconHeight,
         marginBottom: source.iconMarginBottom,
-        tintColor: source.iconColor,
+        tintColor: source.iconTintColor,
       },
       title: {
         color: source.textColor,

@@ -8,10 +8,6 @@ exports[`@toggle: matches snapshot active 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -35,13 +31,13 @@ exports[`@toggle: matches snapshot active 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "#e5e7ea",
       "highlightBorderRadius": 21,
-      "highlightColor": "#e5e7ea",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#d9e4ff",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#d9e4ff",
       "width": 52,
     }
   }
@@ -55,7 +51,7 @@ exports[`@toggle: matches snapshot active 1`] = `
           "position": "absolute",
         },
         Object {
-          "backgroundColor": "#e5e7ea",
+          "backgroundColor": undefined,
           "borderRadius": 21,
           "height": 42,
           "width": 62,
@@ -94,13 +90,13 @@ exports[`@toggle: matches snapshot active 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "#e5e7ea",
             "highlightBorderRadius": 21,
-            "highlightColor": "#e5e7ea",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#d9e4ff",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#d9e4ff",
             "width": 52,
           },
           Object {
@@ -189,10 +185,6 @@ exports[`@toggle: matches snapshot active checked 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -216,13 +208,13 @@ exports[`@toggle: matches snapshot active checked 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "#e5e7ea",
       "highlightBorderRadius": 21,
-      "highlightColor": "#e5e7ea",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#d9e4ff",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#d9e4ff",
       "width": 52,
     }
   }
@@ -236,7 +228,7 @@ exports[`@toggle: matches snapshot active checked 1`] = `
           "position": "absolute",
         },
         Object {
-          "backgroundColor": "#e5e7ea",
+          "backgroundColor": undefined,
           "borderRadius": 21,
           "height": 42,
           "width": 62,
@@ -275,13 +267,13 @@ exports[`@toggle: matches snapshot active checked 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "#e5e7ea",
             "highlightBorderRadius": 21,
-            "highlightColor": "#e5e7ea",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#d9e4ff",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#d9e4ff",
             "width": 52,
           },
           Object {
@@ -370,10 +362,6 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -397,13 +385,13 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "transparent",
       "highlightBorderRadius": 21,
-      "highlightColor": "transparent",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#d9e4ff",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#d9e4ff",
       "width": 52,
     }
   }
@@ -417,7 +405,7 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
           "position": "absolute",
         },
         Object {
-          "backgroundColor": "transparent",
+          "backgroundColor": undefined,
           "borderRadius": 21,
           "height": 42,
           "width": 62,
@@ -456,13 +444,13 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "transparent",
             "highlightBorderRadius": 21,
-            "highlightColor": "transparent",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#d9e4ff",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#d9e4ff",
             "width": 52,
           },
           Object {
@@ -551,10 +539,6 @@ exports[`@toggle: matches snapshot active: default 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -578,13 +562,13 @@ exports[`@toggle: matches snapshot active: default 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "transparent",
       "highlightBorderRadius": 21,
-      "highlightColor": "transparent",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#d9e4ff",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#d9e4ff",
       "width": 52,
     }
   }
@@ -598,7 +582,7 @@ exports[`@toggle: matches snapshot active: default 1`] = `
           "position": "absolute",
         },
         Object {
-          "backgroundColor": "transparent",
+          "backgroundColor": undefined,
           "borderRadius": 21,
           "height": 42,
           "width": 62,
@@ -637,13 +621,13 @@ exports[`@toggle: matches snapshot active: default 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "transparent",
             "highlightBorderRadius": 21,
-            "highlightColor": "transparent",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#d9e4ff",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#d9e4ff",
             "width": 52,
           },
           Object {
@@ -732,10 +716,6 @@ exports[`@toggle: matches snapshot checked 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -759,13 +739,13 @@ exports[`@toggle: matches snapshot checked 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "transparent",
       "highlightBorderRadius": 21,
-      "highlightColor": "transparent",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#d9e4ff",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#d9e4ff",
       "width": 52,
     }
   }
@@ -779,7 +759,7 @@ exports[`@toggle: matches snapshot checked 1`] = `
           "position": "absolute",
         },
         Object {
-          "backgroundColor": "transparent",
+          "backgroundColor": undefined,
           "borderRadius": 21,
           "height": 42,
           "width": 62,
@@ -818,13 +798,13 @@ exports[`@toggle: matches snapshot checked 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "transparent",
             "highlightBorderRadius": 21,
-            "highlightColor": "transparent",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#d9e4ff",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#d9e4ff",
             "width": 52,
           },
           Object {
@@ -913,10 +893,6 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -940,18 +916,34 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "transparent",
       "highlightBorderRadius": 21,
-      "highlightColor": "transparent",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#DDE1EB",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#DDE1EB",
       "width": 52,
     }
   }
   value={true}
 >
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": undefined,
+          "borderRadius": 21,
+          "height": 42,
+          "width": 62,
+        },
+      ]
+    }
+  />
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
@@ -983,13 +975,13 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "transparent",
             "highlightBorderRadius": 21,
-            "highlightColor": "transparent",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#DDE1EB",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#DDE1EB",
             "width": 52,
           },
           Object {
@@ -1078,10 +1070,6 @@ exports[`@toggle: matches snapshot default 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -1105,13 +1093,13 @@ exports[`@toggle: matches snapshot default 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "transparent",
       "highlightBorderRadius": 21,
-      "highlightColor": "transparent",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#d9e4ff",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#d9e4ff",
       "width": 52,
     }
   }
@@ -1125,7 +1113,7 @@ exports[`@toggle: matches snapshot default 1`] = `
           "position": "absolute",
         },
         Object {
-          "backgroundColor": "transparent",
+          "backgroundColor": undefined,
           "borderRadius": 21,
           "height": 42,
           "width": 62,
@@ -1164,13 +1152,13 @@ exports[`@toggle: matches snapshot default 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "transparent",
             "highlightBorderRadius": 21,
-            "highlightColor": "transparent",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#d9e4ff",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#d9e4ff",
             "width": 52,
           },
           Object {
@@ -1259,10 +1247,6 @@ exports[`@toggle: matches snapshot disabled 1`] = `
   style={
     Array [
       Object {
-        "height": 32,
-        "width": 52,
-      },
-      Object {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -1286,18 +1270,34 @@ exports[`@toggle: matches snapshot disabled 1`] = `
       "borderRadius": 16,
       "borderWidth": 1.5,
       "height": 32,
+      "highlightBackgroundColor": "transparent",
       "highlightBorderRadius": 21,
-      "highlightColor": "transparent",
       "highlightHeight": 42,
       "highlightWidth": 62,
       "offsetValue": 20,
-      "thumbColor": "#ffffff",
-      "tintColor": "#DDE1EB",
+      "thumbBackgroundColor": "#ffffff",
+      "tintBackgroundColor": "#DDE1EB",
       "width": 52,
     }
   }
   value={false}
 >
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "position": "absolute",
+        },
+        Object {
+          "backgroundColor": undefined,
+          "borderRadius": 21,
+          "height": 42,
+          "width": 62,
+        },
+      ]
+    }
+  />
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
@@ -1329,13 +1329,13 @@ exports[`@toggle: matches snapshot disabled 1`] = `
             "borderRadius": 16,
             "borderWidth": 1.5,
             "height": 32,
+            "highlightBackgroundColor": "transparent",
             "highlightBorderRadius": 21,
-            "highlightColor": "transparent",
             "highlightHeight": 42,
             "highlightWidth": 62,
             "offsetValue": 20,
-            "thumbColor": "#ffffff",
-            "tintColor": "#DDE1EB",
+            "thumbBackgroundColor": "#ffffff",
+            "tintBackgroundColor": "#DDE1EB",
             "width": 52,
           },
           Object {

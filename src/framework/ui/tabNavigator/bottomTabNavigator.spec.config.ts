@@ -22,7 +22,7 @@ export const mapping: ThemeMappingType = {
         'indicatorHeight': {
           'type': 'number',
         },
-        'indicatorColor': {
+        'indicatorBackgroundColor': {
           'type': 'color',
         },
       },
@@ -45,13 +45,13 @@ export const mapping: ThemeMappingType = {
           'borderTopColor': 'gray-primary',
           'borderTopWidth': 1,
           'indicatorHeight': 3,
-          'indicatorColor': 'blue-primary',
+          'indicatorBackgroundColor': 'blue-primary',
         },
       },
       'noIndicator': {
         'mapping': {
           'indicatorHeight': 0,
-          'indicatorColor': 'transparent',
+          'indicatorBackgroundColor': 'transparent',
         },
       },
     },

@@ -82,7 +82,7 @@ export class OverflowMenuItem extends React.Component<Props> {
         marginHorizontal: style.textMarginHorizontal,
       },
       icon: {
-        tintColor: style.iconColor,
+        tintColor: style.iconTintColor,
         width: style.iconWidth,
         height: style.iconHeight,
         marginHorizontal: style.iconMarginHorizontal,
