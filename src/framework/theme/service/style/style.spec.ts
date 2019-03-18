@@ -66,6 +66,18 @@ describe('@style: consumer service methods check', () => {
       expect(value).toMatchSnapshot();
     });
 
+    it('throws warning for undeclared mapping keys', () => {
+      service.getComponentStyleMapping(
+        config.componentMapping,
+        {},
+        'Invalid',
+        props,
+        [],
+      );
+
+      jest.spyOn(console, 'warn');
+    });
+
   });
 
 });

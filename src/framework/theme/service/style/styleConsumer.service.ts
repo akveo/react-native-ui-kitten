@@ -49,25 +49,53 @@ export class StyleConsumerService {
                                                                   interaction: Interaction[]): ThemedStyleType {
 
     return this.safe(mapping[component], (componentMapping: ControlMappingType): ThemedStyleType => {
-      const { appearance, variants, states } = this.getDerivedStyleMeta(componentMapping, props);
+      const meta: ComponentStyleMetaType = this.getDerivedStyleMeta(componentMapping, props);
+      const validParameters: string[] = Object.keys(componentMapping.meta.parameters);
 
       const generatedStyles: ThemedStyleType = this.safe(styles[component], (componentStyles) => {
         const query: string = this.findGeneratedQuery(Object.keys(componentStyles), [
-          appearance,
-          ...variants,
+          meta.appearance,
+          ...meta.variants,
           ...interaction,
-          ...states,
+          ...meta.states,
         ]);
 
         return componentStyles[query];
       });
 
       if (generatedStyles === undefined) {
-        return createStyle(mapping, component, appearance, variants, [...interaction, ...states]);
+        const createdStyles: ThemedStyleType = createStyle(
+          mapping,
+          component,
+          meta.appearance,
+          meta.variants,
+          [...interaction, ...meta.states],
+        );
+
+        return this.validateComponentStyleMapping(createdStyles, validParameters);
       }
 
-      return generatedStyles;
+      return this.validateComponentStyleMapping(generatedStyles, validParameters);
     });
+  }
+
+  private validateComponentStyleMapping(mapping: ThemedStyleType, parameters: string[]): ThemedStyleType {
+    const redundantKeys: string[] = [];
+
+    Object.keys(mapping).forEach((key: string) => {
+      if (!parameters.includes(key)) {
+        redundantKeys.push(key);
+        delete mapping[key];
+      }
+    });
+
+    if (redundantKeys.length !== 0) {
+      console.warn(
+        `Before using these variables, describe them in the component configuration: ${redundantKeys}`,
+      );
+    }
+
+    return mapping;
   }
 
   private getDerivedStyleMeta<P extends StyledComponentProps>(mapping: ControlMappingType,
