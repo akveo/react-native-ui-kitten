@@ -5,9 +5,15 @@ export const mapping: ThemeMappingType = {
   'OverflowMenu': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'borderRadius': {
           'type': 'number',
+        },
+        'itemBorderRadius': {
+          'type': 'number',
+        },
+        'popoverBackgroundColor': {
+          'type': 'string',
         },
       },
       'appearances': {
@@ -16,18 +22,14 @@ export const mapping: ThemeMappingType = {
         },
       },
       'states': {},
-      'variants': {},
+      'variantGroups': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'borderRadius': 6,
-          'menuItem': {
-            'borderRadius': 6,
-          },
-          'popover': {
-            'backgroundColor': 'white',
-          },
+          'itemBorderRadius': 6,
+          'popoverBackgroundColor': 'white',
         },
       },
     },
@@ -35,14 +37,44 @@ export const mapping: ThemeMappingType = {
   'OverflowMenuItem': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
+        'minHeight': {
+          'type': 'number',
+        },
+        'padding': {
+          'type': 'number',
+        },
         'backgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'borderColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'borderWidth': {
+          'type': 'number',
+        },
+        'textColor': {
+          'type': 'string',
+        },
+        'textFontWeight': {
+          'type': 'string',
+        },
+        'textFontSize': {
+          'type': 'number',
+        },
+        'textMarginHorizontal': {
+          'type': 'number',
+        },
+        'iconTintColor': {
+          'type': 'string',
+        },
+        'iconWidth': {
+          'type': 'number',
+        },
+        'iconHeight': {
+          'type': 'number',
+        },
+        'iconMarginHorizontal': {
           'type': 'number',
         },
       },
@@ -51,7 +83,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'size': {
           'small': {
             'default': false,
@@ -77,73 +109,53 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'backgroundColor': 'white',
           'borderColor': 'gray-light',
           'borderWidth': 1.2,
-          'text': {
-            'color': 'blue-pitch-dark',
-            'fontWeight': '600',
-          },
-          'icon': {
-            'tintColor': 'blue-pitch-dark',
-          },
+          'textColor': 'blue-pitch-dark',
+          'textFontWeight': '600',
+          'iconTintColor': 'blue-pitch-dark',
           'state': {
             'disabled': {
               'backgroundColor': 'gray-dark',
             },
             'active': {
-              'text': {
-                'color': 'blue-primary',
-              },
-              'icon': {
-                'tintColor': 'blue-primary',
-              },
+              'textColor': 'blue-primary',
+              'iconTintColor': 'blue-primary',
             },
           },
         },
-        'variant': {
+        'variantGroups': {
           'size': {
             'small': {
               'minHeight': 40,
               'padding': 10,
-              'text': {
-                'fontSize': 13,
-                'marginHorizontal': 6,
-              },
-              'icon': {
-                'width': 20,
-                'height': 20,
-                'marginHorizontal': 6,
-              },
+              'textFontSize': 13,
+              'textMarginHorizontal': 6,
+              'iconWidth': 20,
+              'iconHeight': 20,
+              'iconMarginHorizontal': 6,
             },
             'medium': {
               'minHeight': 48,
               'padding': 12,
-              'text': {
-                'fontSize': 15,
-                'marginHorizontal': 8,
-              },
-              'icon': {
-                'width': 24,
-                'height': 24,
-                'marginHorizontal': 8,
-              },
+              'textFontSize': 15,
+              'textMarginHorizontal': 8,
+              'iconWidth': 24,
+              'iconHeight': 24,
+              'iconMarginHorizontal': 8,
             },
             'large': {
               'minHeight': 56,
               'padding': 14,
-              'text': {
-                'fontSize': 17,
-                'marginHorizontal': 10,
-              },
-              'icon': {
-                'width': 28,
-                'height': 28,
-                'marginHorizontal': 10,
-              },
+              'textFontSize': 17,
+              'textMarginHorizontal': 10,
+              'iconWidth': 28,
+              'iconHeight': 28,
+              'iconMarginHorizontal': 10,
             },
           },
         },
@@ -153,9 +165,9 @@ export const mapping: ThemeMappingType = {
   'Text': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'color': {
-          'type': 'color',
+          'type': 'string',
         },
         'fontSize': {
           'type': 'number',
@@ -166,7 +178,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'category': {
           'h1': {
             'default': false,
@@ -193,12 +205,12 @@ export const mapping: ThemeMappingType = {
       },
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'primary': {
         'mapping': {
           'color': 'text-primary',
         },
-        'variant': {
+        'variantGroups': {
           'category': {
             'h1': {
               'fontSize': 64,
@@ -229,16 +241,16 @@ export const mapping: ThemeMappingType = {
   'Popover': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'parameters': {},
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {},
       },

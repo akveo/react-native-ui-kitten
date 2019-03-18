@@ -8,10 +8,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import {
-  StyledComponentProps,
-  StyleType,
-} from '@kitten/theme';
+import { StyleType } from '@kitten/theme';
 
 export type ModalAnimationType = 'slideInUp' | 'fade' | 'none';
 
@@ -27,7 +24,7 @@ interface ModalProps {
 
 const { width, height } = Dimensions.get('window');
 
-export type Props = StyledComponentProps & ViewProps & ModalProps;
+export type Props = ViewProps & ModalProps;
 
 export class Modal extends React.Component<Props> {
 

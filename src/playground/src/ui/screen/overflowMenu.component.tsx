@@ -104,6 +104,7 @@ class OverflowMenu extends React.Component<Props, State> {
           <OverflowMenuComponent
             items={menuItems}
             placement='bottom end'
+            size='small'
             visible={this.state.overflowMenu2Visible}
             style={this.props.themedStyle.menu}
             onSelect={this.onSelectItem}
@@ -119,6 +120,7 @@ class OverflowMenu extends React.Component<Props, State> {
           <OverflowMenuComponent
             items={menuItems}
             placement='top start'
+            size='large'
             visible={this.state.overflowMenu3Visible}
             style={this.props.themedStyle.menu}
             onSelect={this.onSelectItem}

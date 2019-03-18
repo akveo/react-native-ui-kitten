@@ -5,7 +5,7 @@ export const mapping: ThemeMappingType = {
   'CheckBox': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'width': {
           'type': 'number',
         },
@@ -19,10 +19,43 @@ export const mapping: ThemeMappingType = {
           'type': 'number',
         },
         'borderColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'backgroundColor': {
-          'type': 'color',
+          'type': 'string',
+        },
+        'textColor': {
+          'type': 'string',
+        },
+        'textFontSize': {
+          'type': 'number',
+        },
+        'textFontWeight': {
+          'type': 'string',
+        },
+        'textMarginLeft': {
+          'type': 'number',
+        },
+        'selectWidth': {
+          'type': 'number',
+        },
+        'selectHeight': {
+          'type': 'number',
+        },
+        'selectBackgroundColor': {
+          'type': 'string',
+        },
+        'highlightWidth': {
+          'type': 'number',
+        },
+        'highlightHeight': {
+          'type': 'number',
+        },
+        'highlightBorderRadius': {
+          'type': 'number',
+        },
+        'highlightBackgroundColor': {
+          'type': 'string',
         },
       },
       'appearances': {
@@ -30,7 +63,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'status': {
           'error': {
             'default': false,
@@ -66,37 +99,32 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'borderWidth': 2,
           'borderRadius': 4,
           'borderColor': 'gray-primary',
           'backgroundColor': 'gray-light',
-          'highlight': {
-            'borderRadius': 8,
-            'backgroundColor': 'transparent',
-          },
-          'select': {
-            'backgroundColor': 'transparent',
-          },
+          'textColor': 'text-primary',
+          'textFontWeight': '500',
+          'selectBackgroundColor': 'transparent',
+          'highlightBorderRadius': 8,
+          'highlightBackgroundColor': 'transparent',
           'state': {
             'active': {
               'borderColor': 'gray-dark',
-              'highlight': {
-                'backgroundColor': 'gray-light',
-              },
+              'highlightBackgroundColor': 'gray-light',
             },
             'checked': {
               'borderColor': 'transparent',
               'backgroundColor': 'blue-primary',
-              'select': {
-                'backgroundColor': '#FFFFFF',
-              },
+              'selectBackgroundColor': '#FFFFFF',
             },
             'disabled': {
               'borderColor': 'gray-light',
               'backgroundColor': '#F1F5F5',
+              'textColor': 'gray-300',
             },
             'checked.active': {
               'borderColor': 'blue-dark',
@@ -107,7 +135,7 @@ export const mapping: ThemeMappingType = {
             },
           },
         },
-        'variant': {
+        'variantGroups': {
           'status': {
             'error': {
               'borderColor': 'pink-primary',
@@ -130,26 +158,108 @@ export const mapping: ThemeMappingType = {
             'small': {
               'width': 24,
               'height': 24,
-              'highlight': {
-                'width': 40,
-                'height': 40,
-              },
+              'textMarginLeft': 10,
+              'textFontSize': 14,
+              'selectWidth': 12,
+              'selectHeight': 12,
+              'highlightWidth': 40,
+              'highlightHeight': 40,
             },
             'medium': {
               'width': 30,
               'height': 30,
-              'highlight': {
-                'width': 50,
-                'height': 50,
-              },
+              'textMarginLeft': 12,
+              'textFontSize': 16,
+              'selectWidth': 14,
+              'selectHeight': 14,
+              'highlightWidth': 50,
+              'highlightHeight': 50,
             },
             'large': {
               'width': 36,
               'height': 36,
-              'highlight': {
-                'width': 60,
-                'height': 60,
-              },
+              'textMarginLeft': 14,
+              'textFontSize': 18,
+              'selectWidth': 16,
+              'selectHeight': 16,
+              'highlightWidth': 60,
+              'highlightHeight': 60,
+            },
+          },
+        },
+      },
+    },
+  },
+  'Text': {
+    'meta': {
+      'scope': 'all',
+      'parameters': {
+        'color': {
+          'type': 'string',
+        },
+        'fontSize': {
+          'type': 'number',
+        },
+      },
+      'appearances': {
+        'primary': {
+          'default': true,
+        },
+      },
+      'variantGroups': {
+        'category': {
+          'h1': {
+            'default': false,
+          },
+          'h2': {
+            'default': false,
+          },
+          'h3': {
+            'default': false,
+          },
+          'h4': {
+            'default': false,
+          },
+          'h5': {
+            'default': false,
+          },
+          'h6': {
+            'default': false,
+          },
+          'body': {
+            'default': true,
+          },
+        },
+      },
+      'states': {},
+    },
+    'appearances': {
+      'primary': {
+        'mapping': {
+          'color': 'text-primary',
+        },
+        'variantGroups': {
+          'category': {
+            'h1': {
+              'fontSize': 64,
+            },
+            'h2': {
+              'fontSize': 40,
+            },
+            'h3': {
+              'fontSize': 32,
+            },
+            'h4': {
+              'fontSize': 24,
+            },
+            'h5': {
+              'fontSize': 16,
+            },
+            'h6': {
+              'fontSize': 14,
+            },
+            'body': {
+              'fontSize': 16,
             },
           },
         },

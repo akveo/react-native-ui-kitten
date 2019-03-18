@@ -40,7 +40,7 @@ import {
   Props as ListItemProps,
 } from './list/listItem.component';
 import {
-  Modal as ModalComponent,
+  Modal,
   Props as ModalProps,
 } from './modal/modal.component';
 import {
@@ -119,7 +119,6 @@ const Input = styled<InputComponent, InputProps>(InputComponent);
 const Layout = styled<LayoutComponent, LayoutProps>(LayoutComponent);
 const List = styled<ListComponent, ListProps>(ListComponent);
 const ListItem = styled<ListItemComponent, ListItemProps>(ListItemComponent);
-const Modal = styled<ModalComponent, ModalProps>(ModalComponent);
 const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
 const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);

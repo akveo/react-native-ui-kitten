@@ -6,50 +6,52 @@ export const mapping: ThemeMappingType = {
   'BottomTabNavigator': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {
+      'parameters': {
         'backgroundColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'paddingVertical': {
           'type': 'number',
         },
         'borderTopColor': {
-          'type': 'color',
+          'type': 'string',
         },
         'borderTopWidth': {
           'type': 'number',
+        },
+        'indicatorHeight': {
+          'type': 'number',
+        },
+        'indicatorBackgroundColor': {
+          'type': 'string',
         },
       },
       'appearances': {
         'default': {
           'default': true,
         },
-        'no-indicator': {
+        'noIndicator': {
           'default': false,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
           'backgroundColor': 'transparent',
           'paddingVertical': 16,
           'borderTopColor': 'gray-primary',
           'borderTopWidth': 1,
-          'indicator': {
-            'height': 3,
-            'backgroundColor': 'blue-primary',
-          },
+          'indicatorHeight': 3,
+          'indicatorBackgroundColor': 'blue-primary',
         },
       },
-      'no-indicator': {
+      'noIndicator': {
         'mapping': {
-          'indicator': {
-            'height': 0,
-            'backgroundColor': 'transparent',
-          },
+          'indicatorHeight': 0,
+          'indicatorBackgroundColor': 'transparent',
         },
       },
     },

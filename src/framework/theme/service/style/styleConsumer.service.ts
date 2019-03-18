@@ -1,6 +1,6 @@
 import { createStyle } from 'eva/packages/processor/kitten';
 import {
-  ComponentMappingType,
+  ControlMappingType,
   ThemedStyleType,
   ThemeMappingType,
   ThemeStyleType,
@@ -22,7 +22,7 @@ export class StyleConsumerService {
                                                           component: string,
                                                           props: P): P {
 
-    const defaultProps = this.safe(mapping[component], (componentMapping: ComponentMappingType) => {
+    const defaultProps = this.safe(mapping[component], (componentMapping: ControlMappingType) => {
       const appearance: string = this.getDefaultAppearance(componentMapping);
       const variants: { [key: string]: string } = this.getDefaultVariants(componentMapping);
       const states: { [key: string]: boolean } = this.getDefaultStates(componentMapping);
@@ -48,7 +48,7 @@ export class StyleConsumerService {
                                                                   props: P,
                                                                   interaction: Interaction[]): ThemedStyleType {
 
-    return this.safe(mapping[component], (componentMapping: ComponentMappingType): ThemedStyleType => {
+    return this.safe(mapping[component], (componentMapping: ControlMappingType): ThemedStyleType => {
       const { appearance, variants, states } = this.getDerivedStyleMeta(componentMapping, props);
 
       const generatedStyles: ThemedStyleType = this.safe(styles[component], (componentStyles) => {
@@ -70,7 +70,7 @@ export class StyleConsumerService {
     });
   }
 
-  private getDerivedStyleMeta<P extends StyledComponentProps>(mapping: ComponentMappingType,
+  private getDerivedStyleMeta<P extends StyledComponentProps>(mapping: ControlMappingType,
                                                               props: P): ComponentStyleMetaType {
 
     const variantProps: Partial<P> = this.getDerivedVariants(mapping, props);
@@ -88,14 +88,14 @@ export class StyleConsumerService {
     };
   }
 
-  private getDefaultAppearance(mapping: ComponentMappingType): string {
+  private getDefaultAppearance(mapping: ControlMappingType): string {
     return Object.keys(mapping.meta.appearances).find((appearance: string): boolean => {
       return mapping.meta.appearances[appearance].default === true;
     });
   }
 
-  private getDefaultVariants(mapping: ComponentMappingType): { [key: string]: any } {
-    return this.transformObject(mapping.meta.variants, (variants, group: string): string | undefined => {
+  private getDefaultVariants(mapping: ControlMappingType): { [key: string]: any } {
+    return this.transformObject(mapping.meta.variantGroups, (variants, group: string): string | undefined => {
       return Object.keys(variants[group]).find((variant: string): boolean => {
 
         return variants[group][variant].default === true;
@@ -103,7 +103,7 @@ export class StyleConsumerService {
     });
   }
 
-  private getDefaultStates(mapping: ComponentMappingType): { [key: string]: any } {
+  private getDefaultStates(mapping: ControlMappingType): { [key: string]: any } {
     return this.transformObject(mapping.meta.states, (states, state: string): boolean | undefined => {
       const isDefault: boolean = states[state].default === true;
 
@@ -111,17 +111,17 @@ export class StyleConsumerService {
     });
   }
 
-  private getDerivedVariants<P extends StyledComponentProps>(mapping: ComponentMappingType,
+  private getDerivedVariants<P extends StyledComponentProps>(mapping: ControlMappingType,
                                                              props: P): Partial<P> {
 
     return this.transformObject(props, (p: P, prop: string): string | undefined => {
-      const isVariant: boolean = Object.keys(mapping.meta.variants).includes(prop);
+      const isVariant: boolean = Object.keys(mapping.meta.variantGroups).includes(prop);
 
       return isVariant ? p[prop] : undefined;
     });
   }
 
-  private getDerivedStates<P extends StyledComponentProps>(mapping: ComponentMappingType,
+  private getDerivedStates<P extends StyledComponentProps>(mapping: ControlMappingType,
                                                            props: P): Partial<P> {
 
     return this.transformObject(props, (p: P, prop: string): boolean => {

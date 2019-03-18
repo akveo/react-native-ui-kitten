@@ -5,7 +5,11 @@ export const mapping: ThemeMappingType = {
   'ButtonGroup': {
     'meta': {
       'scope': 'all',
-      'mapping': {},
+      'parameters': {
+        'buttonBorderRadius': {
+          'type': 'number',
+        },
+      },
       'appearances': {
         'filled': {
           'default': true,
@@ -14,7 +18,7 @@ export const mapping: ThemeMappingType = {
           'default': false,
         },
       },
-      'variants': {
+      'variantGroups': {
         'size': {
           'tiny': {
             'default': false,
@@ -35,14 +39,12 @@ export const mapping: ThemeMappingType = {
       },
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'filled': {
         'mapping': {
-          'button': {
-            'borderRadius': 6,
-          },
+          'buttonBorderRadius': 6,
         },
-        'variant': {
+        'variantGroups': {
           'size': {
             'tiny': {},
             'small': {},
@@ -60,26 +62,47 @@ export const mapping: ThemeMappingType = {
   'Button': {
     'meta': {
       'scope': 'all',
-      'mapping': {
-        'highlightColor': {
-          'type': 'color',
-        },
-        'innerSize': {
+      'parameters': {
+        'minWidth': {
           'type': 'number',
         },
-        'selectColor': {
-          'type': 'color',
+        'minHeight': {
+          'type': 'number',
         },
-        'borderColor': {
-          'type': 'color',
+        'padding': {
+          'type': 'number',
         },
-        'highlightSize': {
+        'borderRadius': {
           'type': 'number',
         },
         'borderWidth': {
-          'type': 'color',
+          'type': 'number',
         },
-        'size': {
+        'backgroundColor': {
+          'type': 'string',
+        },
+        'textColor': {
+          'type': 'string',
+        },
+        'textFontSize': {
+          'type': 'number',
+        },
+        'textFontWeight': {
+          'type': 'string',
+        },
+        'textMarginHorizontal': {
+          'type': 'number',
+        },
+        'iconWidth': {
+          'type': 'number',
+        },
+        'iconHeight': {
+          'type': 'number',
+        },
+        'iconTintColor': {
+          'type': 'string',
+        },
+        'iconMarginHorizontal': {
           'type': 'number',
         },
       },
@@ -91,7 +114,7 @@ export const mapping: ThemeMappingType = {
           'default': false,
         },
       },
-      'variants': {
+      'variantGroups': {
         'status': {
           'primary': {
             'default': true,
@@ -140,20 +163,16 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'filled': {
         'mapping': {
           'borderRadius': 6,
-          'text': {
-            'color': 'text-primary-inverse',
-            'fontWeight': '800',
-          },
-          'icon': {
-            'tintColor': '#ffffff',
-            'marginHorizontal': 4,
-          },
+          'textColor': 'text-primary-inverse',
+          'textFontWeight': '800',
+          'iconTintColor': '#ffffff',
+          'iconMarginHorizontal': 4,
         },
-        'variant': {
+        'variantGroups': {
           'status': {
             'primary': {
               'backgroundColor': '#2196F3',
@@ -198,74 +217,54 @@ export const mapping: ThemeMappingType = {
           },
           'size': {
             'tiny': {
-              'minHeight': 16,
               'minWidth': 16,
+              'minHeight': 16,
               'padding': 3,
-              'text': {
-                'fontSize': 10,
-                'marginHorizontal': 3,
-              },
-              'icon': {
-                'width': 11,
-                'height': 11,
-                'marginHorizontal': 3,
-              },
+              'textFontSize': 10,
+              'textMarginHorizontal': 3,
+              'iconWidth': 11,
+              'iconHeight': 11,
+              'iconMarginHorizontal': 3,
             },
             'small': {
               'minHeight': 20,
               'minWidth': 20,
               'padding': 3.5,
-              'text': {
-                'fontSize': 11,
-                'marginHorizontal': 3.5,
-              },
-              'icon': {
-                'width': 12,
-                'height': 12,
-                'marginHorizontal': 3.5,
-              },
+              'textFontSize': 11,
+              'textMarginHorizontal': 3.5,
+              'iconWidth': 12,
+              'iconHeight': 12,
+              'iconMarginHorizontal': 3.5,
             },
             'medium': {
               'minHeight': 24,
               'minWidth': 24,
               'padding': 4,
-              'text': {
-                'fontSize': 12,
-                'marginHorizontal': 4,
-              },
-              'icon': {
-                'width': 13,
-                'height': 13,
-                'marginHorizontal': 4,
-              },
+              'textFontSize': 12,
+              'textMarginHorizontal': 4,
+              'iconWidth': 13,
+              'iconHeight': 13,
+              'iconMarginHorizontal': 4,
             },
             'large': {
               'minHeight': 30,
               'minWidth': 30,
               'padding': 4.5,
-              'text': {
-                'fontSize': 13,
-                'marginHorizontal': 4.5,
-              },
-              'icon': {
-                'width': 14,
-                'height': 14,
-                'marginHorizontal': 4.5,
-              },
+              'textFontSize': 13,
+              'textMarginHorizontal': 4.5,
+              'iconWidth': 14,
+              'iconHeight': 14,
+              'iconMarginHorizontal': 4.5,
             },
             'giant': {
               'minHeight': 36,
               'minWidth': 36,
               'padding': 5,
-              'text': {
-                'fontSize': 14,
-                'marginHorizontal': 5,
-              },
-              'icon': {
-                'width': 15,
-                'height': 15,
-                'marginHorizontal': 5,
-              },
+              'textFontSize': 14,
+              'textMarginHorizontal': 5,
+              'iconWidth': 15,
+              'iconHeight': 15,
+              'iconMarginHorizontal': 5,
             },
           },
         },
@@ -274,115 +273,75 @@ export const mapping: ThemeMappingType = {
         'mapping': {
           'borderWidth': 2,
         },
-        'variant': {
+        'variantGroups': {
           'status': {
             'primary': {
               'backgroundColor': 'transparent',
               'borderColor': '#2196F3',
-              'text': {
-                'color': '#2196F3',
-              },
-              'icon': {
-                'tintColor': '#2196F3',
-              },
+              'textColor': '#2196F3',
+              'iconTintColor': '#2196F3',
               'state': {
                 'active': {
                   'backgroundColor': 'transparent',
                   'borderColor': '#1E88E5',
-                  'text': {
-                    'color': '#1E88E5',
-                  },
-                  'icon': {
-                    'tintColor': '#1E88E5',
-                  },
+                  'textColor': '#1E88E5',
+                  'iconTintColor': '#1E88E5',
                 },
               },
             },
             'success': {
               'backgroundColor': 'transparent',
               'borderColor': '#4CAF50',
-              'text': {
-                'color': '#4CAF50',
-              },
-              'icon': {
-                'tintColor': '#4CAF50',
-              },
+              'textColor': '#4CAF50',
+              'iconTintColor': '#4CAF50',
               'state': {
                 'active': {
                   'backgroundColor': 'transparent',
                   'borderColor': '#43A047',
-                  'text': {
-                    'color': '#43A047',
-                  },
-                  'icon': {
-                    'tintColor': '#43A047',
-                  },
+                  'textColor': '#43A047',
+                  'iconTintColor': '#43A047',
                 },
               },
             },
             'info': {
               'backgroundColor': 'transparent',
               'borderColor': '#03A9F4',
-              'text': {
-                'color': '#03A9F4',
-              },
-              'icon': {
-                'tintColor': '#03A9F4',
-              },
+              'textColor': '#03A9F4',
+              'iconTintColor': '#03A9F4',
               'state': {
                 'active': {
                   'backgroundColor': 'transparent',
                   'borderColor': '#039BE5',
-                  'text': {
-                    'color': '#039BE5',
-                  },
-                  'icon': {
-                    'tintColor': '#039BE5',
-                  },
+                  'textColor': '#039BE5',
+                  'iconTintColor': '#039BE5',
                 },
               },
             },
             'warning': {
               'backgroundColor': 'transparent',
               'borderColor': '#FFC107',
-              'text': {
-                'color': '#FFC107',
-              },
-              'icon': {
-                'tintColor': '#FFC107',
-              },
+              'textColor': '#FFC107',
+              'iconTintColor': '#FFC107',
               'state': {
                 'active': {
                   'backgroundColor': 'transparent',
                   'borderColor': '#FFB300',
-                  'text': {
-                    'color': '#FFB300',
-                  },
-                  'icon': {
-                    'tintColor': '#FFB300',
-                  },
+                  'textColor': '#FFB300',
+                  'iconTintColor': '#FFB300',
                 },
               },
             },
             'danger': {
               'backgroundColor': 'transparent',
               'borderColor': '#F44336',
-              'text': {
-                'color': '#F44336',
-              },
-              'icon': {
-                'tintColor': '#F44336',
-              },
+              'textColor': '#F44336',
+              'iconTintColor': '#F44336',
               'state': {
                 'active': {
                   'backgroundColor': 'transparent',
                   'borderColor': '#E53935',
-                  'text': {
-                    'color': '#E53935',
-                  },
-                  'icon': {
-                    'tintColor': '#E53935',
-                  },
+                  'textColor': '#E53935',
+                  'iconTintColor': '#E53935',
                 },
               },
             },
@@ -394,9 +353,9 @@ export const mapping: ThemeMappingType = {
   'Text': {
     'meta': {
       'scope': 'all',
-      'mapping': {
+      'parameters': {
         'color': {
-          'type': 'color',
+          'type': 'string',
         },
         'fontSize': {
           'type': 'number',
@@ -407,7 +366,7 @@ export const mapping: ThemeMappingType = {
           'default': true,
         },
       },
-      'variants': {
+      'variantGroups': {
         'category': {
           'h1': {
             'default': false,
@@ -434,12 +393,12 @@ export const mapping: ThemeMappingType = {
       },
       'states': {},
     },
-    'appearance': {
+    'appearances': {
       'primary': {
         'mapping': {
           'color': 'text-primary',
         },
-        'variant': {
+        'variantGroups': {
           'category': {
             'h1': {
               'fontSize': 64,

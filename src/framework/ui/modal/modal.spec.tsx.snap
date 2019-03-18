@@ -24,8 +24,6 @@ exports[`@modal component checks * component styled with mappings 1`] = `
   />
   <View
     animationDuration={300}
-    appearance="default"
-    dispatch={[Function]}
     onResponderRelease={[Function]}
     onStartShouldSetResponder={[Function]}
     onStartShouldSetResponderCapture={[Function]}
@@ -33,27 +31,6 @@ exports[`@modal component checks * component styled with mappings 1`] = `
     style={
       Object {
         "alignSelf": "flex-start",
-      }
-    }
-    theme={
-      Object {
-        "blue-dark": "#2541CC",
-        "blue-primary": "#3366FF",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-      }
-    }
-    themedStyle={
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "#2541CC",
-        "borderRadius": 3,
-        "borderWidth": 1,
-        "paddingHorizontal": 16,
-        "paddingVertical": 8,
       }
     }
     visible={true}

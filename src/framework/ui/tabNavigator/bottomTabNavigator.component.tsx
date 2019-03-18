@@ -32,11 +32,17 @@ export class BottomTabNavigator extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { indicator, ...container } = style;
-
     return {
-      container: container,
-      indicator: indicator,
+      container: {
+        backgroundColor: style.backgroundColor,
+        paddingVertical: style.paddingVertical,
+        borderTopColor: style.borderTopColor,
+        borderTopWidth: style.borderTopWidth,
+      },
+      indicator: {
+        height: style.indicatorHeight,
+        backgroundColor: style.indicatorBackgroundColor,
+      },
     };
   };
 

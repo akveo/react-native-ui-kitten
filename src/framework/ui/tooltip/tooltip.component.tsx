@@ -32,16 +32,23 @@ export class Tooltip extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { popover, text } = source;
+    const {
+      popoverPaddingHorizontal,
+      popoverPaddingVertical,
+      popoverBorderRadius,
+      popoverBackgroundColor,
+      textColor,
+    } = source;
 
     return {
-      container: {
-        ...popover,
-        ...styles.container,
+      popover: {
+        paddingHorizontal: popoverPaddingHorizontal,
+        paddingVertical: popoverPaddingVertical,
+        borderRadius: popoverBorderRadius,
+        backgroundColor: popoverBackgroundColor,
       },
       text: {
-        ...text,
-        ...styles.text,
+        color: textColor,
       },
     };
   };
@@ -51,21 +58,21 @@ export class Tooltip extends React.Component<Props> {
 
     return (
       <Text
-        style={style}>
+        style={[style, styles.text]}>
         {text}
       </Text>
     );
   };
 
   public render(): React.ReactElement<PopoverProps> {
-    const { children, themedStyle, ...derivedProps } = this.props;
-    const { container, text } = this.getComponentStyle(themedStyle);
+    const { style, children, themedStyle, ...derivedProps } = this.props;
+    const { popover, text } = this.getComponentStyle(themedStyle);
     const contentElement: React.ReactElement<TextProps> = this.renderPopoverContentElement(text);
 
     return (
       <Popover
         {...derivedProps}
-        style={[container, derivedProps.style]}
+        style={[popover, style, styles.popover]}
         content={contentElement}>
         {children}
       </Popover>
@@ -74,7 +81,7 @@ export class Tooltip extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  popover: {},
   text: {
     alignSelf: 'center',
   },

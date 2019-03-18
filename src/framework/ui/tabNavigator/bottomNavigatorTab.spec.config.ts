@@ -6,13 +6,32 @@ export const mapping: ThemeMappingType = {
   'BottomNavigatorTab': {
     'meta': {
       'scope': 'mobile',
-      'mapping': {},
+      'parameters': {
+        'iconWidth': {
+          'type': 'number',
+        },
+        'iconHeight': {
+          'type': 'number',
+        },
+        'iconMarginBottom': {
+          'type': 'number',
+        },
+        'iconTintColor': {
+          'type': 'string',
+        },
+        'textColor': {
+          'type': 'string',
+        },
+        'textFontWeight': {
+          'type': 'string',
+        },
+      },
       'appearances': {
         'default': {
           'default': true,
         },
       },
-      'variants': {},
+      'variantGroups': {},
       'states': {
         'selected': {
           'default': false,
@@ -21,26 +40,19 @@ export const mapping: ThemeMappingType = {
         },
       },
     },
-    'appearance': {
+    'appearances': {
       'default': {
         'mapping': {
-          'icon': {
-            'width': 40,
-            'height': 40,
-            'marginBottom': 5,
-            'tintColor': 'gray-dark',
-          },
-          'text': {
-            'color': 'gray-dark',
-          },
+          'iconWidth': 40,
+          'iconHeight': 40,
+          'iconMarginBottom': 5,
+          'iconTintColor': 'gray-dark',
+          'textColor': 'gray-dark',
+          'textFontWeight': '600',
           'state': {
             'selected': {
-              'icon': {
-                'tintColor': 'blue-primary',
-              },
-              'text': {
-                'color': 'blue-primary',
-              },
+              'iconTintColor': 'blue-primary',
+              'textColor': 'blue-primary',
             },
           },
         },
