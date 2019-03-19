@@ -59,11 +59,11 @@ export const styled = <T extends React.Component, P extends object>(Component: R
 
       const componentName: string = Component.displayName || Component.name;
 
-      const props: Props = this.service.withDefaultProps(mappingValue.mapping, componentName, derivedProps);
+      const props: Props = this.service.withDefaultProps(mappingValue.style, componentName, derivedProps);
 
       const styleMapping: ThemedStyleType = this.service.getComponentStyleMapping(
+        mappingValue.style,
         mappingValue.mapping,
-        mappingValue.styles,
         componentName,
         props,
         this.state.interaction,

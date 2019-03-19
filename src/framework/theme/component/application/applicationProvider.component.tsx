@@ -13,20 +13,20 @@ interface ApplicationProviderProps {
   children: React.ReactElement<any> | React.ReactElement<any>[];
 }
 
-export type Props = MappingProviderProps & ThemeProviderProps & ApplicationProviderProps;
+export type Props = ApplicationProviderProps & MappingProviderProps & ThemeProviderProps;
 
 interface State {
-  mapping: ThemeMappingType;
-  styles: ThemeStyleType;
+  style: ThemeStyleType;
   theme: ThemeType;
+  mapping: ThemeMappingType;
 }
 
 export class ApplicationProvider extends React.Component<Props, State> {
 
   public state: State = {
-    mapping: this.props.mapping,
-    styles: this.props.styles,
+    style: this.props.style,
     theme: this.props.theme,
+    mapping: this.props.mapping,
   };
 
   public render(): React.ReactNode {
