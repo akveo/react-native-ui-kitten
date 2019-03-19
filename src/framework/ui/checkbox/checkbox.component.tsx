@@ -1,26 +1,27 @@
 import React from 'react';
 import {
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  TouchableOpacityProps,
   GestureResponderEvent,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
 } from 'react-native';
 import {
-  StyledComponentProps,
-  StyleType,
   Interaction,
   styled,
+  StyledComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
   Props as TextProps,
+  Text as TextComponent,
 } from '../text/text.component';
-import { CheckMark } from '../drawable/checkmark/checkmark.component';
+import { CheckMark } from '../drawable';
 
 interface CheckBoxProps {
   text?: string;
   checked?: boolean;
+  indeterminate?: boolean;
   status?: string;
   size?: string;
   onChange?: (checked: boolean) => void;
@@ -33,7 +34,11 @@ export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps
 export class CheckBox extends React.Component<Props> {
 
   private onPress = () => {
-    if (this.props.onChange) {
+    const { onChange, indeterminate } = this.props;
+
+    if (indeterminate && onChange) {
+      this.props.onChange(false);
+    } else if (!indeterminate && onChange) {
       this.props.onChange(!this.props.checked);
     }
   };
@@ -54,21 +59,34 @@ export class CheckBox extends React.Component<Props> {
     }
   };
 
+  private getSelectSize = (indeterminate: boolean, width: number, height: number): StyleType => {
+    if (indeterminate) {
+      return {
+        width: width - width * 0.18,
+        height: height * 0.18,
+      };
+    } else {
+      return {
+        width: width * 0.5,
+        height: height * 0.5,
+      };
+    }
+  };
+
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
       textColor,
       textFontSize,
       textFontWeight,
-      textMarginLeft,
-      selectWidth,
-      selectHeight,
-      selectBackgroundColor,
+      textLineHeight,
+      checkMarkColor,
       highlightWidth,
       highlightHeight,
       highlightBorderRadius,
       highlightBackgroundColor,
       ...containerParameters
     } = style;
+    const { indeterminate } = this.props;
 
     return {
       selectContainer: containerParameters,
@@ -76,12 +94,11 @@ export class CheckBox extends React.Component<Props> {
         color: textColor,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
-        marginLeft: textMarginLeft,
+        lineHeight: textLineHeight,
       },
       select: {
-        width: selectWidth,
-        height: selectHeight,
-        backgroundColor: selectBackgroundColor,
+        ...this.getSelectSize(indeterminate, containerParameters.width, containerParameters.height),
+        backgroundColor: checkMarkColor,
       },
       highlight: {
         width: highlightWidth,
@@ -108,10 +125,27 @@ export class CheckBox extends React.Component<Props> {
     ];
   };
 
+  private renderSelectIcon = (style: StyleType): React.ReactNode => {
+    return <CheckMark style={[style, styles.select]}/>;
+  };
+
+  private renderIndeterminateIcon = (style: StyleType): React.ReactNode => {
+    return <View style={[style, styles.indeterminate]}/>;
+  };
+
+  private renderIcon = (style: StyleType): React.ReactNode => {
+    if (this.props.indeterminate) {
+      return this.renderIndeterminateIcon(style);
+    } else {
+      return this.renderSelectIcon(style);
+    }
+  };
+
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
     const { selectContainer, select, highlight, ...componentStyles } = this.getComponentStyle(themedStyle);
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
+    const icon: React.ReactNode = this.renderIcon(select);
 
     return (
       <View style={[style, styles.container]}>
@@ -124,7 +158,7 @@ export class CheckBox extends React.Component<Props> {
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
-            <CheckMark style={[select, styles.select]}/>
+            {icon}
           </TouchableOpacity>
         </View>
         {componentChildren}
@@ -147,8 +181,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   select: {},
+  indeterminate: {
+    borderRadius: 6,
+  },
   highlight: {
     position: 'absolute',
   },
-  text: {},
+  text: {
+    marginLeft: 12,
+  },
 });
