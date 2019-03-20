@@ -30,7 +30,7 @@ export default class App extends React.Component<any, State> {
   };
 
   public render(): React.ReactNode {
-    const { CheckBoxScreen: RootScreen, ...screens } = Screens;
+    const { HomeScreen: RootScreen, ...screens } = Screens;
     const Router: React.ComponentClass = withNavigation(RootScreen, screens);
 
     return (

@@ -96,7 +96,7 @@ export class CheckBox extends React.Component<Props> {
         fontWeight: textFontWeight,
         lineHeight: textLineHeight,
       },
-      select: {
+      icon: {
         ...this.getSelectSize(indeterminate, containerParameters.width, containerParameters.height),
         backgroundColor: checkMarkColor,
       },
@@ -126,11 +126,15 @@ export class CheckBox extends React.Component<Props> {
   };
 
   private renderSelectIcon = (style: StyleType): React.ReactNode => {
-    return <CheckMark style={[style, styles.select]}/>;
+    return (
+      <CheckMark style={[style, styles.selectIcon]}/>
+    );
   };
 
   private renderIndeterminateIcon = (style: StyleType): React.ReactNode => {
-    return <View style={[style, styles.indeterminate]}/>;
+    return (
+      <View style={[style, styles.indeterminateIcon]}/>
+    );
   };
 
   private renderIcon = (style: StyleType): React.ReactNode => {
@@ -143,9 +147,9 @@ export class CheckBox extends React.Component<Props> {
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
-    const { selectContainer, select, highlight, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { selectContainer, icon, highlight, ...componentStyles } = this.getComponentStyle(themedStyle);
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
-    const icon: React.ReactNode = this.renderIcon(select);
+    const checkboxIcon: React.ReactNode = this.renderIcon(icon);
 
     return (
       <View style={[style, styles.container]}>
@@ -158,7 +162,7 @@ export class CheckBox extends React.Component<Props> {
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
-            {icon}
+            {checkboxIcon}
           </TouchableOpacity>
         </View>
         {componentChildren}
@@ -180,8 +184,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  select: {},
-  indeterminate: {
+  selectIcon: {},
+  indeterminateIcon: {
     borderRadius: 6,
   },
   highlight: {

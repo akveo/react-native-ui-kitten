@@ -98,34 +98,6 @@ describe('@checkbox: component checks', () => {
     expect(onChange).toBeCalledWith(false);
   });
 
-  it('* indeterminate state checks 1', () => {
-    const onChange = jest.fn();
-
-    const component: RenderAPI = renderComponent({
-      indeterminate: true,
-      checked: true,
-      onChange: onChange,
-    });
-
-    fireEvent.press(component.getByType(TouchableOpacity));
-
-    expect(onChange).toBeCalledWith(false);
-  });
-
-  it('* indeterminate state checks 2', () => {
-    const onChange = jest.fn();
-
-    const component: RenderAPI = renderComponent({
-      indeterminate: true,
-      checked: false,
-      onChange: onChange,
-    });
-
-    fireEvent.press(component.getByType(TouchableOpacity));
-
-    expect(onChange).toBeCalledWith(false);
-  });
-
   it('* touchable other props', () => {
     const onPressIn = jest.fn();
     const onPressOut = jest.fn();
