@@ -1,3 +1,9 @@
+/*
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   View,
@@ -9,6 +15,80 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
+
+/**
+ * The `Modal` component is a wrapper than presents content above an enclosing view.
+ * This component is not styled from the mapping(theme) of the system.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} visible - Determines whether component is visible.
+ * By default is false.
+ *
+ * @property {React.ReactElement<any> | React.ReactElement<any>[]} children -
+ * Determines component's children. Can be passed as JSX template.
+ *
+ * @property {boolean} isBackDropAllowed - Determines whether user can close
+ * modal by tapping on backdrop. This feature works in pair with the
+ * 'onCloseModal' property. By default is false.
+ *
+ * @property {() => void} onCloseModal - Allows passing a function that will
+ * be called once the modal has been dismissed.
+ *
+ * @property {ModalAnimationType} animationType - Controls how the modal showing animates.
+ * Can be 'slideInUp' | 'fade' | 'none'. By default is 'none'.
+ *
+ * @property {number} animationDuration - Time of the animation duration.
+ *
+ * @example Simple usage example
+ *
+ * ```tsx
+ * import { Modal } from '@kitten/ui';
+ * <Modal visible={true}>
+ *  <View><Text>Hello! I'm modal!</Text></View>
+ * </Modal>
+ * ```
+ *
+ * ### Usage
+ *
+ * @example
+ *
+ * ```tsx
+ * import { Modal } from '@kitten/ui';
+ *
+ * state: State = {
+ *   visible: false,
+ * };
+ *
+ * private setVisible = (): void => {
+ *   this.setState({ visible: !this.state.visible });
+ * };
+ *
+ * private onModalDismiss = (): void => {
+ *   this.setState({ visible: false });
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <View>
+ *       <Button title='Show Modal' onPress={this.setVisible}/>
+ *       <Modal
+ *        visible={this.state.visible}
+ *        animationType='fade'
+ *        animationDuration={600}
+ *        isBackDropAllowed={true}
+ *        onCloseModal={this.onModalDismiss}
+ *        onValueChange={this.onChange}>
+ *        <View>
+ *          <Text>Hi! This is modal component!</Test>
+ *          <Button title='Close Modal' onPress={this.setVisible}/>
+ *        <View/>
+ *       </Modal>
+ *     </View>
+ *   )
+ * }
+ * ```
+ * */
 
 export type ModalAnimationType = 'slideInUp' | 'fade' | 'none';
 
@@ -103,7 +183,9 @@ export class Modal extends React.Component<Props> {
 
   private onStartShouldSetResponder = (): boolean => true;
 
-  private onResponderRelease = (): void => { return; };
+  private onResponderRelease = (): void => {
+    return;
+  };
 
   private onStartShouldSetResponderCapture = (): boolean => false;
 
