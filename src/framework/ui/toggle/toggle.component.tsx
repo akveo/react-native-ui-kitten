@@ -38,7 +38,7 @@ import { CheckMark } from '../drawable/checkmark/checkmark.component';
  * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
  * By default status='primary'.
  *
- * @property {string} size - Determines whether component is disabled.
+ * @property {string} size - Determines the size of the component.
  * Can be 'small' | 'medium' | 'large'.
  * By default size='medium'.
  *
