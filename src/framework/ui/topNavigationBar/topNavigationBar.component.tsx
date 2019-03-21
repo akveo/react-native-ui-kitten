@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   View,
@@ -11,6 +17,50 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { Props as ActionProps } from './topNavigationBarAction.component';
+
+/**
+ * The `TopNavigationBar` component is a component that work like AppBar component.
+ * Can be used for navigation for example.
+ *
+ * @extends React.Component
+ *
+ * @property {string} title - Determines the title of the component.
+ *
+ * @property {string} subtitle - Determines the subtitle of the component.
+ *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be 'default' | 'titleCentered'.
+ * By default appearance is 'default'.
+ *
+ * @property {React.ReactElement<ActionProps>} leftControl - Determines the left control
+ * of the component.
+ *
+ * @property {React.ReactElement<ActionProps>[]} rightControls - Determines the right controls
+ * of the component.
+ *
+ * ### Usage
+ *
+ * @example TopNavigationBar usage example
+ *
+ * ```tsx
+ * <TopNavigationBarComponent
+ *   appearance='titleCentered'
+ *   title='Top Navigation Bar'
+ *   subtitle='Subtitle'
+ *   leftControl={
+ *                 <TopNavigationBarAction
+ *                   icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
+ *                   onPress={() => {...}/>
+ *               }
+ *   rightControls={[
+ *            <TopNavigationBarAction
+ *              icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}
+ *              onPress={() => {...}}/>,
+ *            <TopNavigationBarAction
+ *              icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={style}/>}
+ *              onPress={() => Alert.alert('On second right action')}/>]}/>
+ * ```
+ * */
 
 type ActionElement = React.ReactElement<ActionProps>;
 

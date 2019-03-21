@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   TouchableWithoutFeedback,
@@ -9,6 +15,30 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+
+/**
+ * The `TopNavigationBarAction` component is a component that uses as
+ * a control (part) of a `TopNavigationBar` component
+ *
+ * @extends React.Component
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon -
+ * Determines icon of the component
+ *
+ * @property {boolean} isLastItem - Determines whether this item is the last one in AppBar.
+ *
+ * @property {() => void} onPress - Triggered on press.
+ *
+ * ### Usage
+ *
+ * @example Simple example
+ *
+ * ```tsx
+ * <TopNavigationBarAction
+ *   icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
+ *   onPress={() => props.navigation.goBack(null)}/>
+ * ```
+ * */
 
 interface TopNavigationBarActionProps {
   icon: (style: StyleType) => React.ReactElement<ImageProps>;
