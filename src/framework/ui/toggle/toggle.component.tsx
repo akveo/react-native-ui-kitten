@@ -1,3 +1,9 @@
+/*
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Animated,
@@ -18,13 +24,64 @@ import {
 } from '@kitten/theme';
 import { CheckMark } from '../drawable/checkmark/checkmark.component';
 
+/**
+ * The `Toggle` component is an analog of html checkbox and radio buttons.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} value - Determines whether component is checked.
+ *
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * By default is false.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
+ * By default status='primary'.
+ *
+ * @property {string} size - Determines whether component is disabled.
+ * Can be 'small' | 'medium' | 'large'.
+ * By default size='medium'.
+ *
+ * @property {(value: boolean) => void} - Triggered on change value.
+ *
+ * @example Simple usage example
+ *
+ * ```tsx
+ * import { Toggle } from '@kitten/ui';
+ * <Toggle value={true}/>
+ * ```
+ *
+ * ### Usage
+ *
+ * @example
+ *
+ * ```tsx
+ * import { Toggle } from '@kitten/ui';
+ *
+ * state: State = {
+ *   toggled: false,
+ * };
+ *
+ * private onChange = (value: boolean): void => {
+ *   this.setState({ toggled: value });
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <Toggle
+ *       value={this.state.toggled}
+ *       size='small'
+ *       status='danger'
+ *       onValueChange={this.onChange}/>
+ *   )
+ * }
+ * ```
+ * */
+
 interface ToggleComponentProps {
   disabled?: boolean;
   onValueChange?: (value: boolean) => void;
   value?: boolean;
-  appearance?: string;
-  status?: string;
-  size?: string;
 }
 
 export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
