@@ -38,6 +38,8 @@ import { CheckMark } from '../drawable/checkmark/checkmark.component';
  * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
  * By default status is 'primary'.
  *
+ * @property {string} text - Determines text of the component.
+ *
  * @property {(checked: boolean) => void} onChange - Triggered on change value.
  *
  * @example Simple usage example
@@ -67,6 +69,7 @@ import { CheckMark } from '../drawable/checkmark/checkmark.component';
  *     <Checkbox
  *       checked={this.state.toggled}
  *       status='info'
+ *       text='Place your text'
  *       onChange={this.onChange}/>
  *   );
  * }
