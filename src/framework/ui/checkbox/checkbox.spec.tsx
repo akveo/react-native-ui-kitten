@@ -95,7 +95,7 @@ describe('@checkbox: component checks', () => {
 
     fireEvent.press(component.getByType(TouchableOpacity));
 
-    expect(onChange).toBeCalledWith(false);
+    expect(onChange).toBeCalledWith(false, false);
   });
 
   it('* touchable other props', () => {

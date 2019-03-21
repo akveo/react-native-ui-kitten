@@ -22,11 +22,13 @@ interface State {
   isCheckBoxWhiteChecked: boolean;
   isCheckBoxDisabled1Checked: boolean;
   isCheckBoxDisabled2Checked: boolean;
-  isIndeterminate: boolean;
+  isIndeterminateTree: boolean;
   indeterminateValue: boolean;
   treeCheckbox1Value: boolean;
   treeCheckbox2Value: boolean;
   treeCheckbox3Value: boolean;
+  indeterminateSingleValue: boolean;
+  isIndeterminateSingle: boolean;
 }
 
 const STATUS: string = '';
@@ -46,15 +48,17 @@ class CheckBox extends React.Component<Props, State> {
     isCheckBoxWhiteChecked: true,
     isCheckBoxDisabled1Checked: true,
     isCheckBoxDisabled2Checked: false,
-    isIndeterminate: false,
+    isIndeterminateTree: false,
     indeterminateValue: undefined,
     treeCheckbox1Value: true,
     treeCheckbox2Value: false,
     treeCheckbox3Value: false,
+    indeterminateSingleValue: true,
+    isIndeterminateSingle: true,
   };
 
   public componentWillMount(): void {
-    this.changeIndeterminate();
+    this.changeIndeterminateTree();
   }
 
   private onCheckBoxPrimaryChange = (selected: boolean) => {
@@ -89,16 +93,16 @@ class CheckBox extends React.Component<Props, State> {
     this.setState({ isCheckBoxDisabled2Checked: selected });
   };
 
-  private onIndeterminateValue = (selected: boolean) => {
+  private onIndeterminateValue = (selected: boolean, indeterminate: boolean) => {
     this.setState({
       indeterminateValue: selected,
       treeCheckbox1Value: selected,
       treeCheckbox2Value: selected,
       treeCheckbox3Value: selected,
-    }, this.changeIndeterminate);
+    }, this.changeIndeterminateTree);
   };
 
-  private changeIndeterminate = () => {
+  private changeIndeterminateTree = () => {
     const {
       treeCheckbox1Value,
       treeCheckbox2Value,
@@ -110,30 +114,37 @@ class CheckBox extends React.Component<Props, State> {
     const everyUnchecked: boolean = statesArray.every((value: boolean) => !value);
 
     if (someChecked && !everyChecked) {
-      this.setState({ isIndeterminate: true });
+      this.setState({ isIndeterminateTree: true });
     } else if (everyChecked) {
       this.setState({
-        isIndeterminate: false,
+        isIndeterminateTree: false,
         indeterminateValue: true,
       });
     } else if (everyUnchecked) {
       this.setState({
-        isIndeterminate: false,
+        isIndeterminateTree: false,
         indeterminateValue: false,
       });
     }
   };
 
   private onTreeCheckbox1ValueChange = (selected: boolean) => {
-    this.setState({ treeCheckbox1Value: selected }, this.changeIndeterminate);
+    this.setState({ treeCheckbox1Value: selected }, this.changeIndeterminateTree);
   };
 
   private onTreeCheckbox2ValueChange = (selected: boolean) => {
-    this.setState({ treeCheckbox2Value: selected }, this.changeIndeterminate);
+    this.setState({ treeCheckbox2Value: selected }, this.changeIndeterminateTree);
   };
 
   private onTreeCheckbox3ValueChange = (selected: boolean) => {
-    this.setState({ treeCheckbox3Value: selected }, this.changeIndeterminate);
+    this.setState({ treeCheckbox3Value: selected }, this.changeIndeterminateTree);
+  };
+
+  private onIndeterminateSingle = (selected: boolean, indeterminate: boolean) => {
+    this.setState({
+      indeterminateSingleValue: selected,
+      isIndeterminateSingle: indeterminate,
+    });
   };
 
   public render(): React.ReactNode {
@@ -224,13 +235,13 @@ class CheckBox extends React.Component<Props, State> {
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Indeterminate</Text>
+          <Text style={this.props.themedStyle.textDescription}>Indeterminate Tree</Text>
           <View style={this.props.themedStyle.containerPreviewColumn}>
             <CheckBoxComponent
               style={this.props.themedStyle.component}
               checked={this.state.indeterminateValue}
               status={STATUS}
-              indeterminate={this.state.isIndeterminate}
+              isIndeterminate={this.state.isIndeterminateTree}
               onChange={this.onIndeterminateValue}
             />
             <View style={this.props.themedStyle.treeContainer}>
@@ -253,6 +264,18 @@ class CheckBox extends React.Component<Props, State> {
                 onChange={this.onTreeCheckbox3ValueChange}
               />
             </View>
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Indeterminate Single</Text>
+          <View style={this.props.themedStyle.containerPreviewColumn}>
+            <CheckBoxComponent
+              style={this.props.themedStyle.component}
+              checked={this.state.indeterminateSingleValue}
+              status={STATUS}
+              isIndeterminate={this.state.isIndeterminateSingle}
+              onChange={this.onIndeterminateSingle}
+            />
           </View>
         </View>
       </View>

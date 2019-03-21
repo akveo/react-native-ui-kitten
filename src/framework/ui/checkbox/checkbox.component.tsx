@@ -21,25 +21,52 @@ import { CheckMark } from '../drawable';
 interface CheckBoxProps {
   text?: string;
   checked?: boolean;
-  indeterminate?: boolean;
+  isIndeterminate?: boolean;
   status?: string;
   size?: string;
-  onChange?: (checked: boolean) => void;
+  onChange?: (checked: boolean, indeterminate?: boolean) => void;
 }
 
 const Text = styled<TextComponent, TextProps>(TextComponent);
 
 export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps;
 
-export class CheckBox extends React.Component<Props> {
+interface State {
+  indeterminate: boolean;
+}
+
+export class CheckBox extends React.Component<Props, State> {
+
+  state: State = {
+    indeterminate: false,
+  };
+
+  public componentWillMount(): void {
+    if (this.props.isIndeterminate) {
+      this.setState({ indeterminate: this.props.isIndeterminate });
+      this.props.dispatch([Interaction.INDETERMINATE]);
+    }
+  }
+
+  public componentWillUpdate(nextProps: Readonly<Props>): void {
+    if (nextProps.isIndeterminate !== this.state.indeterminate) {
+      this.setState({ indeterminate: nextProps.isIndeterminate });
+      if (nextProps.isIndeterminate) {
+        this.props.dispatch([Interaction.INDETERMINATE]);
+      } else {
+        this.props.dispatch([]);
+      }
+    }
+  }
 
   private onPress = () => {
-    const { onChange, indeterminate } = this.props;
+    const { onChange, checked } = this.props;
 
-    if (indeterminate && onChange) {
-      this.props.onChange(false);
-    } else if (!indeterminate && onChange) {
-      this.props.onChange(!this.props.checked);
+    if (onChange) {
+      this.setState({ indeterminate: false }, () => {
+        this.props.dispatch([]);
+        this.props.onChange(!checked, this.state.indeterminate);
+      });
     }
   };
 
@@ -86,7 +113,7 @@ export class CheckBox extends React.Component<Props> {
       highlightBackgroundColor,
       ...containerParameters
     } = style;
-    const { indeterminate } = this.props;
+    const { indeterminate } = this.state;
 
     return {
       selectContainer: containerParameters,
@@ -138,7 +165,7 @@ export class CheckBox extends React.Component<Props> {
   };
 
   private renderIcon = (style: StyleType): React.ReactNode => {
-    if (this.props.indeterminate) {
+    if (this.state.indeterminate) {
       return this.renderIndeterminateIcon(style);
     } else {
       return this.renderSelectIcon(style);

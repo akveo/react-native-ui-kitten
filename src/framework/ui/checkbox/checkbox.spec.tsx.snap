@@ -24,7 +24,7 @@ exports[`@checkbox matches snapshots * active 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "#DDE1EB",
+            "backgroundColor": "transparent",
             "borderRadius": 6,
             "height": 40,
             "width": 40,
@@ -45,8 +45,8 @@ exports[`@checkbox matches snapshots * active 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "#284DE0",
-            "borderColor": "#284DE0",
+            "backgroundColor": "#D9E4FF",
+            "borderColor": "#3366FF",
             "borderRadius": 3,
             "borderWidth": 1,
             "height": 24,
