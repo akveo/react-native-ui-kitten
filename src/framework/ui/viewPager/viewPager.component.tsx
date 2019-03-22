@@ -4,7 +4,7 @@ import {
   ScrollView,
   ScrollViewProps,
 } from 'react-native';
-import { ScrollEvent } from '../service/type';
+import { ScrollEvent } from '../common/type';
 
 type ChildElement = React.ReactElement<any>;
 

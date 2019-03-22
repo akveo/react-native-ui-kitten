@@ -15,7 +15,7 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import { TouchableOpacityIndexedProps } from '../service/type';
+import { TouchableOpacityIndexedProps } from '../common/type';
 
 export interface OverflowMenuItemType {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;

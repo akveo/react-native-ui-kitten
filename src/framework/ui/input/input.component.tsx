@@ -14,7 +14,7 @@ import {
 import {
   InputFocusEvent,
   InputEndEditEvent,
-} from '../service/type';
+} from '../common/type';
 
 interface InputProps {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;

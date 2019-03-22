@@ -18,7 +18,7 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import { TouchableOpacityIndexedProps } from '../service/type';
+import { TouchableOpacityIndexedProps } from '../common/type';
 
 interface ListDerivedProps {
   index?: number;

@@ -13,7 +13,7 @@ import {
   Popover as PopoverComponent,
   Props as PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../service/type';
+import { Omit } from '../common/type';
 
 interface TooltipProps {
   text: string;
