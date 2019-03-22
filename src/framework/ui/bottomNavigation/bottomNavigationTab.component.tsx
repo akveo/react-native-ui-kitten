@@ -21,7 +21,7 @@ interface BottomNavigatorTabProps {
 
 export type Props = BottomNavigatorTabProps & StyledComponentProps & TouchableOpacityProps;
 
-export class BottomNavigatorTab extends React.Component<Props> {
+export class BottomNavigationTab extends React.Component<Props> {
 
   private onPress = () => {
     if (this.props.onSelect) {

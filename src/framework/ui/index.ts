@@ -4,13 +4,13 @@ import {
   Props as AvatarProps,
 } from './avatar/avatar.component';
 import {
-  BottomNavigatorTab as BottomNavigatorTabComponent,
+  BottomNavigationTab as BottomNavigationTabComponent,
   Props as BottomNavigatorTabProps,
-} from './tabNavigator/bottomNavigatorTab.component';
+} from './bottomNavigation/bottomNavigationTab.component';
 import {
-  BottomTabNavigator as BottomTabNavigatorComponent,
+  BottomNavigation as BottomNavigationComponent,
   Props as BottomTabNavigatorProps,
-} from './tabNavigator/bottomTabNavigator.component';
+} from './bottomNavigation/bottomNavigation.component';
 import {
   Button as ButtonComponent,
   Props as ButtonProps,
@@ -110,8 +110,8 @@ import {
 } from './overflowMenu/overflowMenu.component';
 
 const Avatar = styled<AvatarProps>(AvatarComponent);
-const BottomNavigatorTab = styled<BottomNavigatorTabProps>(BottomNavigatorTabComponent);
-const BottomTabNavigator = styled<BottomTabNavigatorProps>(BottomTabNavigatorComponent);
+const BottomNavigationTab = styled<BottomNavigatorTabProps>(BottomNavigationTabComponent);
+const BottomNavigation = styled<BottomTabNavigatorProps>(BottomNavigationComponent);
 const Button = styled<ButtonProps>(ButtonComponent);
 const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);
 const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);
@@ -134,8 +134,8 @@ const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);
 
 export {
   Avatar,
-  BottomNavigatorTab,
-  BottomTabNavigator,
+  BottomNavigationTab,
+  BottomNavigation,
   Button,
   ButtonGroup,
   CheckBox,

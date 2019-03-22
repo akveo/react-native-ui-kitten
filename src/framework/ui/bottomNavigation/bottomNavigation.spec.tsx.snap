@@ -1,0 +1,414 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@bottom-navigation: component checks * additional appearance 1`] = `
+<View
+  appearance="noIndicator"
+  dispatch={[Function]}
+  selectedIndex={0}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <ChildMock
+    onSelect={[Function]}
+    selected={true}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    title="Screen 1"
+  />
+  <ChildMock
+    onSelect={[Function]}
+    selected={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    title="Screen 2"
+  />
+  <ChildMock
+    onSelect={[Function]}
+    selected={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    testID="@tab/last"
+    title="Screen 3"
+  />
+</View>
+`;
+
+exports[`@bottom-navigation: component checks * empty 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  selectedIndex={0}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <TabBarIndicator
+    animationDuration={200}
+    positions={0}
+    selectedPosition={0}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        Object {
+          "position": "absolute",
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`@bottom-navigation: component checks * with routes 1`] = `
+<View
+  appearance="default"
+  dispatch={[Function]}
+  selectedIndex={0}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "borderTopColor": "#A6AEBD",
+        "borderTopWidth": 1,
+        "paddingVertical": 16,
+      },
+      undefined,
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "width": 750,
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <TabBarIndicator
+    animationDuration={200}
+    positions={3}
+    selectedPosition={0}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#3366FF",
+          "height": 3,
+        },
+        Object {
+          "position": "absolute",
+        },
+      ]
+    }
+  />
+  <ChildMock
+    onSelect={[Function]}
+    selected={true}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    title="Screen 1"
+  />
+  <ChildMock
+    onSelect={[Function]}
+    selected={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    title="Screen 2"
+  />
+  <ChildMock
+    onSelect={[Function]}
+    selected={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+    title="Screen 3"
+  />
+</View>
+`;
+
+exports[`@bottom-navigation-tab: component checks * empty 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  onPress={[Function]}
+  style={
+    Array [
+      undefined,
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+/>
+`;
+
+exports[`@bottom-navigation-tab: component checks * text/selected 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  onPress={[Function]}
+  selected={true}
+  style={
+    Array [
+      undefined,
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  title="Test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#3366FF",
+        "fontWeight": "600",
+      }
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`@bottom-navigation-tab: component checks * text/unselected 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  onPress={[Function]}
+  selected={false}
+  style={
+    Array [
+      undefined,
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  title="Test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#8992A3",
+        "fontWeight": "600",
+      }
+    }
+  >
+    Test
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`@bottom-navigation-tab: component checks * with icon 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  dispatch={[Function]}
+  icon={[Function]}
+  onPress={[Function]}
+  style={
+    Array [
+      undefined,
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <Component
+    source={
+      Object {
+        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+      }
+    }
+    style={
+      Object {
+        "height": 40,
+        "marginBottom": undefined,
+        "tintColor": "#8992A3",
+        "width": 40,
+      }
+    }
+  />
+</TouchableOpacity>
+`;

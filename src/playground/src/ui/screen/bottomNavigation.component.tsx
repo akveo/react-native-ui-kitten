@@ -15,8 +15,8 @@ import {
   NavigationRoute,
 } from 'react-navigation';
 import {
-  BottomTabNavigator as BottomTabNavigatorComponent,
-  BottomNavigatorTab,
+  BottomNavigation,
+  BottomNavigationTab,
 } from '@kitten/ui';
 import { StyleType } from '@kitten/theme';
 
@@ -32,7 +32,7 @@ interface NavigationProps {
 
 type CommonNavigationProps = NavigationProps & NavigationContainerProps;
 
-export const TabNavigatorScreen: NavigationContainer = createBottomTabNavigator({
+export const BottomNavigationScreen: NavigationContainer = createBottomTabNavigator({
   Screen1: TabScreen1,
   Screen2: TabScreen2,
   Screen3: TabScreen3,
@@ -71,12 +71,12 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
   const index: number = props.navigation.state.index;
 
   return (
-    <BottomTabNavigatorComponent
+    <BottomNavigation
       appearance={APPEARANCE}
       selectedIndex={index}
       onSelect={(selectedIndex: number) =>
         navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>
-      <BottomNavigatorTab
+      <BottomNavigationTab
         title='Screen 1'
         icon={(style: StyleType) => (
           <Image
@@ -85,7 +85,7 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
           />
         )}
       />
-      <BottomNavigatorTab
+      <BottomNavigationTab
         title='Screen 2'
         icon={(style: StyleType) => (
           <Image
@@ -94,7 +94,7 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
           />
         )}
       />
-      <BottomNavigatorTab
+      <BottomNavigationTab
         title='Screen 3'
         icon={(style: StyleType) => (
           <Image
@@ -103,6 +103,6 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
           />
         )}
       />
-    </BottomTabNavigatorComponent>
+    </BottomNavigation>
   );
 }
