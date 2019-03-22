@@ -1,62 +1,39 @@
 import React from 'react';
-import { render } from 'react-native-testing-library';
 import {
-  View,
-  Text,
-} from 'react-native';
+  render,
+  RenderAPI,
+  shallow,
+} from 'react-native-testing-library';
+import { Text } from 'react-native';
 import {
   ApplicationProvider,
   Props as ApplicationProps,
 } from './applicationProvider.component';
-import {
-  mapping,
-  theme,
-} from './application.spec.config';
-import {
-  ThemeMappingType,
-  ThemeStyleType,
-} from 'eva/packages/types';
-import { ThemeType } from '../../type';
+import { default as styles } from '../../common/mapping.json';
+import { default as theme } from '../../common/theme.json';
 
 describe('@app: application wrapper check', () => {
 
-  interface ApplicationState {
-    mapping: ThemeMappingType;
-    styles: ThemeStyleType;
-    theme: ThemeType;
-  }
-
-  class TestApplicationWrapper extends React.Component<ApplicationProps, ApplicationState> {
-
-    constructor(props) {
-      super(props);
-      this.state = {
-        mapping: props.mapping,
-        styles: props.style,
-        theme: props.theme,
-      };
-    }
-
-    render() {
-     return (
-       <ApplicationProvider
-         mapping={this.state.mapping}
-         styles={this.state.styles}
-         theme={this.state.theme}>
-         <View><Text>Application Provider</Text></View>
-       </ApplicationProvider>
-     );
-    }
-  }
+  const Mock = (props?: ApplicationProps): React.ReactElement<ApplicationProps> => {
+    return (
+      <ApplicationProvider {...props} />
+    );
+  };
 
   it('* renders properly', () => {
-    const component = render(
-      <TestApplicationWrapper mapping={mapping} styles={{}} theme={theme}>
-        <View><Text>Test</Text></View>
-      </TestApplicationWrapper>,
+    const component: RenderAPI = render(
+      <Mock
+        styles={styles}
+        theme={theme}>
+        <Text>
+          Test
+        </Text>
+      </Mock>,
     );
 
-    expect(component).toMatchSnapshot();
+    const { output } = shallow(component.getByType(ApplicationProvider));
+
+    expect(output).toMatchSnapshot();
   });
 
 });

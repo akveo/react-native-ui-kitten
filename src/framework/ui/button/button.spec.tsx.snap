@@ -9,6 +9,8 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
       Object {
@@ -29,7 +31,12 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
@@ -52,6 +59,8 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
       Object {
@@ -72,7 +81,12 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
@@ -111,6 +125,8 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
       Object {
@@ -131,7 +147,12 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
@@ -157,7 +178,7 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
       }
     }
   />
-  <ForwardRef(createComponent)
+  <ForwardRef(WrappingElement)
     style={
       Array [
         Object {
@@ -171,7 +192,7 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
     }
   >
     BUTTON
-  </ForwardRef(createComponent)>
+  </ForwardRef(WrappingElement)>
 </TouchableOpacity>
 `;
 
@@ -184,6 +205,8 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
       Object {
@@ -204,7 +227,12 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
@@ -215,7 +243,7 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
     }
   }
 >
-  <ForwardRef(createComponent)
+  <ForwardRef(WrappingElement)
     style={
       Array [
         Object {
@@ -229,7 +257,7 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
     }
   >
     BUTTON
-  </ForwardRef(createComponent)>
+  </ForwardRef(WrappingElement)>
 </TouchableOpacity>
 `;
 
@@ -242,6 +270,8 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+  size="medium"
+  status="primary"
   style={
     Array [
       Object {
@@ -262,7 +292,12 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",

@@ -7,6 +7,7 @@ import {
 import {
   fireEvent,
   render,
+  RenderAPI,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
@@ -27,8 +28,10 @@ describe('@view-pager: component checks', () => {
   it('* emits onSelect with correct args', () => {
     const onSelect = jest.fn();
 
-    const component = render(
-      <Mock contentWidth={375} onSelect={onSelect}>
+    const component: RenderAPI = render(
+      <Mock
+        contentWidth={375}
+        onSelect={onSelect}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,
@@ -36,9 +39,9 @@ describe('@view-pager: component checks', () => {
     const scrollView: ReactTestInstance = component.getByType(ScrollView);
 
     fireEvent(scrollView, 'momentumScrollEnd', {
-      nativeEvent:  {
-        contentOffset:  {
-          x:  375,
+      nativeEvent: {
+        contentOffset: {
+          x: 375,
         },
       },
     });
@@ -49,8 +52,10 @@ describe('@view-pager: component checks', () => {
   it('* emits onOffsetChange with correct args', () => {
     const onOffsetChange = jest.fn();
 
-    const component = render(
-      <Mock contentWidth={375} onOffsetChange={onOffsetChange}>
+    const component: RenderAPI = render(
+      <Mock
+        contentWidth={375}
+        onOffsetChange={onOffsetChange}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,
@@ -58,9 +63,9 @@ describe('@view-pager: component checks', () => {
     const scrollView: ReactTestInstance = component.getByType(ScrollView);
 
     fireEvent.scroll(scrollView, {
-      nativeEvent:  {
-        contentOffset:  {
-          x:  375,
+      nativeEvent: {
+        contentOffset: {
+          x: 375,
         },
       },
     });
@@ -72,7 +77,9 @@ describe('@view-pager: component checks', () => {
     const shouldLoadComponent = jest.fn();
 
     render(
-      <Mock contentWidth={375} shouldLoadComponent={shouldLoadComponent}>
+      <Mock
+        contentWidth={375}
+        shouldLoadComponent={shouldLoadComponent}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,
@@ -89,8 +96,10 @@ describe('@view-pager: component checks', () => {
       return index !== disabledComponentIndex;
     });
 
-    const component = render(
-      <Mock contentWidth={375} shouldLoadComponent={shouldLoadComponent}>
+    const component: RenderAPI = render(
+      <Mock
+        contentWidth={375}
+        shouldLoadComponent={shouldLoadComponent}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,

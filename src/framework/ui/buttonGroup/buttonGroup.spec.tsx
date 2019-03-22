@@ -17,16 +17,21 @@ import {
   Button as ButtonComponent,
   Props as ButtonProps,
 } from '../button/button.component';
-import * as config from './buttonGroup.spec.config';
+import { default as styles } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
-const ButtonGroup = styled<ButtonGroupComponent, ButtonGroupProps>(ButtonGroupComponent);
+const Button = styled<ButtonProps>(ButtonComponent);
+const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);
 
-const Mock = (props?: ButtonGroupProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <ButtonGroup {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: ButtonGroupProps): React.ReactElement<StyleProviderProps> => {
+  return (
+    <StyleProvider
+      styles={styles}
+      theme={theme}>
+      <ButtonGroup {...props} />
+    </StyleProvider>
+  );
+};
 
 describe('@button-group: component checks', () => {
 

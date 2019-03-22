@@ -10,33 +10,44 @@ import {
   StyleProviderProps,
 } from '@kitten/theme';
 import {
-  Layout,
-  Props,
+  Layout as LayoutComponent,
+  Props as LayoutProps,
 } from './layout.component';
-import * as config from './layout.spec.config';
+import { default as styles } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const StyledComponent = styled<Layout, Props>(Layout);
+const Layout = styled<LayoutProps>(LayoutComponent);
 
-const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <StyledComponent {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: LayoutProps): React.ReactElement<StyleProviderProps> => {
+  return (
+    <StyleProvider
+      styles={styles}
+      theme={theme}>
+      <Layout {...props} />
+    </StyleProvider>
+  );
+};
 
-const renderComponent = (props?: Props): RenderAPI => render(<Mock {...props}/>);
+const renderComponent = (props?: LayoutProps): RenderAPI => {
+  return render(
+    <Mock {...props}/>,
+  );
+};
 
 describe('@layout: matches snapshot', () => {
 
   it('default', () => {
-    const component = renderComponent();
-    const { output } = shallow(component.getByType(Layout));
+    const component: RenderAPI = renderComponent();
+
+    const { output } = shallow(component.getByType(LayoutComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('with styles', () => {
-    const component = renderComponent({ style: { height: 300 }});
-    const { output } = shallow(component.getByType(Layout));
+    const component: RenderAPI = renderComponent({ style: { height: 300 } });
+
+    const { output } = shallow(component.getByType(LayoutComponent));
 
     expect(output).toMatchSnapshot();
   });

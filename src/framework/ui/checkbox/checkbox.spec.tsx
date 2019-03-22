@@ -14,17 +14,26 @@ import {
   CheckBox as CheckBoxComponent,
   Props as CheckBoxProps,
 } from './checkbox.component';
-import * as config from './checkbox.spec.config';
+import { default as styles } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
+const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);
 
-const Mock = (props?: CheckBoxProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <CheckBox {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: CheckBoxProps): React.ReactElement<StyleProviderProps> => {
+  return (
+    <StyleProvider
+      styles={styles}
+      theme={theme}>
+      <CheckBox {...props} />
+    </StyleProvider>
+  );
+};
 
-const renderComponent = (props?: CheckBoxProps): RenderAPI => render(<Mock {...props}/>);
+const renderComponent = (props?: CheckBoxProps): RenderAPI => {
+  return render(
+    <Mock {...props}/>,
+  );
+};
 
 describe('@checkbox: component checks', () => {
 

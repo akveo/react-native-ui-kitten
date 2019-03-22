@@ -42,6 +42,7 @@ exports[`@radio: matches snapshot active 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
@@ -60,6 +61,7 @@ exports[`@radio: matches snapshot active 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",
@@ -136,10 +138,11 @@ exports[`@radio: matches snapshot active checked 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
-            "borderColor": "#3366FF",
+            "borderColor": "#2541CC",
             "borderRadius": 18,
             "borderWidth": 2,
             "height": 36,
@@ -154,6 +157,7 @@ exports[`@radio: matches snapshot active checked 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",
@@ -230,6 +234,7 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
@@ -248,6 +253,7 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",
@@ -323,6 +329,7 @@ exports[`@radio: matches snapshot active: default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
@@ -341,6 +348,7 @@ exports[`@radio: matches snapshot active: default 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",
@@ -417,6 +425,7 @@ exports[`@radio: matches snapshot checked 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
@@ -435,6 +444,7 @@ exports[`@radio: matches snapshot checked 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",
@@ -512,6 +522,7 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
@@ -530,6 +541,7 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",
@@ -605,6 +617,7 @@ exports[`@radio: matches snapshot default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
@@ -623,6 +636,7 @@ exports[`@radio: matches snapshot default 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",
@@ -699,6 +713,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       style={
         Array [
           Object {
@@ -717,6 +732,7 @@ exports[`@radio: matches snapshot disabled 1`] = `
       theme={
         Object {
           "blue-dark": "#2541CC",
+          "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
           "gray-100": "#f7f8fa",
           "gray-200": "#edf0f5",

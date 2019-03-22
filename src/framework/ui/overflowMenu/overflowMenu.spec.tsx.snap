@@ -1,728 +1,190 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@overflow-menu: component checks * component renders properly 1`] = `
-<View
-  style={
-    Object {
-      "opacity": 0,
-    }
-  }
->
-  <View
-    onLayout={[Function]}
-    style={Object {}}
-    tag={0}
-  >
-    <View />
-  </View>
-  <View
-    onLayout={[Function]}
-    style={
-      Object {
-        "position": "absolute",
-      }
-    }
-    tag={1}
-  >
-    <View
-      appearance="default"
-      content={
-        <View>
-          <ForwardRef(createComponent)
-            icon={[Function]}
-            index={0}
-            isLastItem={false}
-            onPress={[Function]}
-            style={
-              Object {
-                "borderTopLeftRadius": 6,
-                "borderTopRightRadius": 6,
-              }
-            }
-            text="Menu Item 1"
-          />
-          <ForwardRef(createComponent)
-            disabled={true}
-            icon={[Function]}
-            index={1}
-            isLastItem={false}
-            onPress={[Function]}
-            text="Menu Item 2"
-          />
-          <ForwardRef(createComponent)
-            index={2}
-            isLastItem={false}
-            onPress={[Function]}
-            text="Menu Item 3"
-          />
-          <ForwardRef(createComponent)
-            icon={[Function]}
-            index={3}
-            isLastItem={true}
-            onPress={[Function]}
-            style={
-              Object {
-                "borderBottomLeftRadius": 6,
-                "borderBottomRightRadius": 6,
-              }
-            }
-            text="Menu Item 4"
-          />
-        </View>
-      }
-      dispatch={[Function]}
-      indicatorOffset={2}
-      items={
-        Array [
-          Object {
-            "icon": [Function],
-            "text": "Menu Item 1",
-          },
-          Object {
-            "disabled": true,
-            "icon": [Function],
-            "text": "Menu Item 2",
-          },
-          Object {
-            "text": "Menu Item 3",
-          },
-          Object {
-            "icon": [Function],
-            "text": "Menu Item 4",
-          },
-        ]
-      }
-      onRequestClose={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "flex-start",
-          "backgroundColor": "transparent",
-          "flexDirection": "column",
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-pitch-dark": "#0D1C2E",
-          "blue-primary": "#3366FF",
-          "gray-100": "#f7f8fa",
-          "gray-200": "#edf0f5",
-          "gray-300": "#c8cedb",
-          "gray-400": "#a6aebd",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "pink-primary": "#FF3D71",
-          "text-primary": "#000000",
-          "text-primary-inverse": "#ffffff",
-        }
-      }
-      themedStyle={Object {}}
-      visible={true}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "backgroundColor": "white",
-              "height": 6,
-              "transform": Array [
-                Object {
-                  "rotate": "180deg",
-                },
-                Object {
-                  "rotate": "180deg",
-                },
-                Object {
-                  "translateX": 0,
-                },
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 6,
-            },
-            Object {
-              "backgroundColor": "transparent",
-              "borderBottomColor": "white",
-              "borderBottomWidth": 6,
-              "borderLeftColor": "transparent",
-              "borderLeftWidth": 6,
-              "borderRightColor": "transparent",
-              "borderRightWidth": 6,
-            },
-          ]
-        }
-      />
-      <View
+<ForwardRef(WrappingElement)
+  appearance="default"
+  content={
+    <View>
+      <ForwardRef(WrappingElement)
+        icon={[Function]}
+        index={0}
+        isLastItem={false}
+        onPress={[Function]}
         style={
           Object {
-            "backgroundColor": "white",
-            "borderRadius": 6,
-            "justifyContent": "center",
-            "maxWidth": 300,
-            "minHeight": 28,
-            "minWidth": 64,
-            "transform": Array [
-              Object {
-                "translateX": -0,
-              },
-            ],
+            "borderTopLeftRadius": 6,
+            "borderTopRightRadius": 6,
           }
         }
-      >
-        <View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "white",
-                "borderBottomColor": "#DDE1EB",
-                "borderBottomWidth": 1.2,
-                "borderTopLeftRadius": 6,
-                "borderTopRightRadius": 6,
-                "flexDirection": "row",
-                "minHeight": 48,
-                "opacity": 1,
-                "padding": 12,
-              }
-            }
-          >
-            <Image
-              source={
-                Object {
-                  "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-                }
-              }
-              style={
-                Object {
-                  "height": 24,
-                  "marginHorizontal": 8,
-                  "tintColor": "#0D1C2E",
-                  "width": 24,
-                }
-              }
-            />
-            <Text
-              appearance="primary"
-              dispatch={[Function]}
-              style={
-                Array [
-                  Object {
-                    "color": "#000000",
-                    "fontSize": 16,
-                  },
-                  Object {
-                    "color": "#0D1C2E",
-                    "fontSize": 15,
-                    "fontWeight": "600",
-                    "marginHorizontal": 8,
-                  },
-                ]
-              }
-              theme={
-                Object {
-                  "blue-dark": "#2541CC",
-                  "blue-pitch-dark": "#0D1C2E",
-                  "blue-primary": "#3366FF",
-                  "gray-100": "#f7f8fa",
-                  "gray-200": "#edf0f5",
-                  "gray-300": "#c8cedb",
-                  "gray-400": "#a6aebd",
-                  "gray-dark": "#8992A3",
-                  "gray-highlight": "#EDF0F5",
-                  "gray-light": "#DDE1EB",
-                  "gray-primary": "#A6AEBD",
-                  "pink-primary": "#FF3D71",
-                  "text-primary": "#000000",
-                  "text-primary-inverse": "#ffffff",
-                }
-              }
-            >
-              Menu Item 1
-            </Text>
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#8992A3",
-                "borderBottomColor": "#DDE1EB",
-                "borderBottomWidth": 1.2,
-                "flexDirection": "row",
-                "minHeight": 48,
-                "opacity": 1,
-                "padding": 12,
-              }
-            }
-          >
-            <Image
-              source={
-                Object {
-                  "uri": "https://akveo.github.io/eva-icons/fill/png/128/alert-triangle.png",
-                }
-              }
-              style={
-                Object {
-                  "height": 24,
-                  "marginHorizontal": 8,
-                  "tintColor": "#0D1C2E",
-                  "width": 24,
-                }
-              }
-            />
-            <Text
-              appearance="primary"
-              dispatch={[Function]}
-              style={
-                Array [
-                  Object {
-                    "color": "#000000",
-                    "fontSize": 16,
-                  },
-                  Object {
-                    "color": "#0D1C2E",
-                    "fontSize": 15,
-                    "fontWeight": "600",
-                    "marginHorizontal": 8,
-                  },
-                ]
-              }
-              theme={
-                Object {
-                  "blue-dark": "#2541CC",
-                  "blue-pitch-dark": "#0D1C2E",
-                  "blue-primary": "#3366FF",
-                  "gray-100": "#f7f8fa",
-                  "gray-200": "#edf0f5",
-                  "gray-300": "#c8cedb",
-                  "gray-400": "#a6aebd",
-                  "gray-dark": "#8992A3",
-                  "gray-highlight": "#EDF0F5",
-                  "gray-light": "#DDE1EB",
-                  "gray-primary": "#A6AEBD",
-                  "pink-primary": "#FF3D71",
-                  "text-primary": "#000000",
-                  "text-primary-inverse": "#ffffff",
-                }
-              }
-            >
-              Menu Item 2
-            </Text>
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "white",
-                "borderBottomColor": "#DDE1EB",
-                "borderBottomWidth": 1.2,
-                "flexDirection": "row",
-                "minHeight": 48,
-                "opacity": 1,
-                "padding": 12,
-              }
-            }
-          >
-            <Text
-              appearance="primary"
-              dispatch={[Function]}
-              style={
-                Array [
-                  Object {
-                    "color": "#000000",
-                    "fontSize": 16,
-                  },
-                  Object {
-                    "color": "#0D1C2E",
-                    "fontSize": 15,
-                    "fontWeight": "600",
-                    "marginHorizontal": 8,
-                  },
-                ]
-              }
-              theme={
-                Object {
-                  "blue-dark": "#2541CC",
-                  "blue-pitch-dark": "#0D1C2E",
-                  "blue-primary": "#3366FF",
-                  "gray-100": "#f7f8fa",
-                  "gray-200": "#edf0f5",
-                  "gray-300": "#c8cedb",
-                  "gray-400": "#a6aebd",
-                  "gray-dark": "#8992A3",
-                  "gray-highlight": "#EDF0F5",
-                  "gray-light": "#DDE1EB",
-                  "gray-primary": "#A6AEBD",
-                  "pink-primary": "#FF3D71",
-                  "text-primary": "#000000",
-                  "text-primary-inverse": "#ffffff",
-                }
-              }
-            >
-              Menu Item 3
-            </Text>
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "white",
-                "borderBottomColor": null,
-                "borderBottomLeftRadius": 6,
-                "borderBottomRightRadius": 6,
-                "borderBottomWidth": null,
-                "flexDirection": "row",
-                "minHeight": 48,
-                "opacity": 1,
-                "padding": 12,
-              }
-            }
-          >
-            <Image
-              source={
-                Object {
-                  "uri": "https://akveo.github.io/eva-icons/fill/png/128/book-open.png",
-                }
-              }
-              style={
-                Object {
-                  "height": 24,
-                  "marginHorizontal": 8,
-                  "tintColor": "#0D1C2E",
-                  "width": 24,
-                }
-              }
-            />
-            <Text
-              appearance="primary"
-              dispatch={[Function]}
-              style={
-                Array [
-                  Object {
-                    "color": "#000000",
-                    "fontSize": 16,
-                  },
-                  Object {
-                    "color": "#0D1C2E",
-                    "fontSize": 15,
-                    "fontWeight": "600",
-                    "marginHorizontal": 8,
-                  },
-                ]
-              }
-              theme={
-                Object {
-                  "blue-dark": "#2541CC",
-                  "blue-pitch-dark": "#0D1C2E",
-                  "blue-primary": "#3366FF",
-                  "gray-100": "#f7f8fa",
-                  "gray-200": "#edf0f5",
-                  "gray-300": "#c8cedb",
-                  "gray-400": "#a6aebd",
-                  "gray-dark": "#8992A3",
-                  "gray-highlight": "#EDF0F5",
-                  "gray-light": "#DDE1EB",
-                  "gray-primary": "#A6AEBD",
-                  "pink-primary": "#FF3D71",
-                  "text-primary": "#000000",
-                  "text-primary-inverse": "#ffffff",
-                }
-              }
-            >
-              Menu Item 4
-            </Text>
-          </View>
-        </View>
-      </View>
+        text="Menu Item 1"
+      />
+      <ForwardRef(WrappingElement)
+        disabled={true}
+        icon={[Function]}
+        index={1}
+        isLastItem={false}
+        onPress={[Function]}
+        text="Menu Item 2"
+      />
+      <ForwardRef(WrappingElement)
+        index={2}
+        isLastItem={false}
+        onPress={[Function]}
+        text="Menu Item 3"
+      />
+      <ForwardRef(WrappingElement)
+        icon={[Function]}
+        index={3}
+        isLastItem={true}
+        onPress={[Function]}
+        style={
+          Object {
+            "borderBottomLeftRadius": 6,
+            "borderBottomRightRadius": 6,
+          }
+        }
+        text="Menu Item 4"
+      />
     </View>
-  </View>
-</View>
+  }
+  dispatch={[Function]}
+  indicatorOffset={2}
+  items={
+    Array [
+      Object {
+        "icon": [Function],
+        "text": "Menu Item 1",
+      },
+      Object {
+        "disabled": true,
+        "icon": [Function],
+        "text": "Menu Item 2",
+      },
+      Object {
+        "text": "Menu Item 3",
+      },
+      Object {
+        "icon": [Function],
+        "text": "Menu Item 4",
+      },
+    ]
+  }
+  onRequestClose={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "borderRadius": 6,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  visible={true}
+>
+  <View />
+</ForwardRef(WrappingElement)>
 `;
 
 exports[`@overflow-menu: component checks * single menu-item 1`] = `
-<View
-  style={
-    Object {
-      "opacity": 0,
-    }
-  }
->
-  <View
-    onLayout={[Function]}
-    style={Object {}}
-    tag={0}
-  >
-    <View />
-  </View>
-  <View
-    onLayout={[Function]}
-    style={
-      Object {
-        "position": "absolute",
-      }
-    }
-    tag={1}
-  >
-    <View
-      appearance="default"
-      content={
-        <View>
-          <ForwardRef(createComponent)
-            icon={[Function]}
-            index={0}
-            isLastItem={true}
-            onPress={[Function]}
-            style={
-              Object {
-                "borderRadius": 6,
-              }
-            }
-            text="Menu Item 1"
-          />
-        </View>
-      }
-      dispatch={[Function]}
-      indicatorOffset={2}
-      items={
-        Array [
-          Object {
-            "icon": [Function],
-            "text": "Menu Item 1",
-          },
-        ]
-      }
-      onRequestClose={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "flex-start",
-          "backgroundColor": "transparent",
-          "flexDirection": "column",
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-pitch-dark": "#0D1C2E",
-          "blue-primary": "#3366FF",
-          "gray-100": "#f7f8fa",
-          "gray-200": "#edf0f5",
-          "gray-300": "#c8cedb",
-          "gray-400": "#a6aebd",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "pink-primary": "#FF3D71",
-          "text-primary": "#000000",
-          "text-primary-inverse": "#ffffff",
-        }
-      }
-      themedStyle={Object {}}
-      visible={true}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "backgroundColor": "white",
-              "height": 6,
-              "transform": Array [
-                Object {
-                  "rotate": "180deg",
-                },
-                Object {
-                  "rotate": "180deg",
-                },
-                Object {
-                  "translateX": 0,
-                },
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 6,
-            },
-            Object {
-              "backgroundColor": "transparent",
-              "borderBottomColor": "white",
-              "borderBottomWidth": 6,
-              "borderLeftColor": "transparent",
-              "borderLeftWidth": 6,
-              "borderRightColor": "transparent",
-              "borderRightWidth": 6,
-            },
-          ]
-        }
-      />
-      <View
+<ForwardRef(WrappingElement)
+  appearance="default"
+  content={
+    <View>
+      <ForwardRef(WrappingElement)
+        icon={[Function]}
+        index={0}
+        isLastItem={true}
+        onPress={[Function]}
         style={
           Object {
-            "backgroundColor": "white",
             "borderRadius": 6,
-            "justifyContent": "center",
-            "maxWidth": 300,
-            "minHeight": 28,
-            "minWidth": 64,
-            "transform": Array [
-              Object {
-                "translateX": -0,
-              },
-            ],
           }
         }
-      >
-        <View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "white",
-                "borderBottomColor": null,
-                "borderBottomWidth": null,
-                "borderRadius": 6,
-                "flexDirection": "row",
-                "minHeight": 48,
-                "opacity": 1,
-                "padding": 12,
-              }
-            }
-          >
-            <Image
-              source={
-                Object {
-                  "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-                }
-              }
-              style={
-                Object {
-                  "height": 24,
-                  "marginHorizontal": 8,
-                  "tintColor": "#0D1C2E",
-                  "width": 24,
-                }
-              }
-            />
-            <Text
-              appearance="primary"
-              dispatch={[Function]}
-              style={
-                Array [
-                  Object {
-                    "color": "#000000",
-                    "fontSize": 16,
-                  },
-                  Object {
-                    "color": "#0D1C2E",
-                    "fontSize": 15,
-                    "fontWeight": "600",
-                    "marginHorizontal": 8,
-                  },
-                ]
-              }
-              theme={
-                Object {
-                  "blue-dark": "#2541CC",
-                  "blue-pitch-dark": "#0D1C2E",
-                  "blue-primary": "#3366FF",
-                  "gray-100": "#f7f8fa",
-                  "gray-200": "#edf0f5",
-                  "gray-300": "#c8cedb",
-                  "gray-400": "#a6aebd",
-                  "gray-dark": "#8992A3",
-                  "gray-highlight": "#EDF0F5",
-                  "gray-light": "#DDE1EB",
-                  "gray-primary": "#A6AEBD",
-                  "pink-primary": "#FF3D71",
-                  "text-primary": "#000000",
-                  "text-primary-inverse": "#ffffff",
-                }
-              }
-            >
-              Menu Item 1
-            </Text>
-          </View>
-        </View>
-      </View>
+        text="Menu Item 1"
+      />
     </View>
-  </View>
-</View>
+  }
+  dispatch={[Function]}
+  indicatorOffset={2}
+  items={
+    Array [
+      Object {
+        "icon": [Function],
+        "text": "Menu Item 1",
+      },
+    ]
+  }
+  onRequestClose={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "borderRadius": 6,
+      },
+      undefined,
+    ]
+  }
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+  visible={true}
+>
+  <View />
+</ForwardRef(WrappingElement)>
 `;
 
 exports[`@overflow-menu-item: component checks * menu item active checks 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   appearance="default"
-  disabled={false}
   dispatch={[Function]}
-  icon={[Function]}
   isLastItem={false}
   onLongPress={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="small"
+  size="medium"
   style={
     Array [
       Object {
         "backgroundColor": "white",
         "borderBottomColor": "#DDE1EB",
         "borderBottomWidth": 1.2,
-        "minHeight": 40,
-        "padding": 10,
+        "minHeight": 48,
+        "padding": 12,
       },
       Object {
         "alignItems": "center",
@@ -751,33 +213,18 @@ exports[`@overflow-menu-item: component checks * menu item active checks 1`] = `
     }
   }
 >
-  <Component
-    source={
-      Object {
-        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-      }
-    }
-    style={
-      Object {
-        "height": 20,
-        "marginHorizontal": 6,
-        "tintColor": "#3366FF",
-        "width": 20,
-      }
-    }
-  />
-  <ForwardRef(createComponent)
+  <ForwardRef(WrappingElement)
     style={
       Object {
         "color": "#3366FF",
-        "fontSize": 13,
+        "fontSize": 15,
         "fontWeight": "600",
-        "marginHorizontal": 6,
+        "marginHorizontal": 8,
       }
     }
   >
     Test Menu Item
-  </ForwardRef(createComponent)>
+  </ForwardRef(WrappingElement)>
 </TouchableOpacity>
 `;
 
@@ -785,7 +232,69 @@ exports[`@overflow-menu-item: component checks * menu item active checks 2`] = `
 <TouchableOpacity
   activeOpacity={1}
   appearance="default"
-  disabled={false}
+  dispatch={[Function]}
+  isLastItem={false}
+  onLongPress={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  size="medium"
+  style={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "borderBottomColor": "#DDE1EB",
+        "borderBottomWidth": 1.2,
+        "minHeight": 48,
+        "padding": 12,
+      },
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+  text="Test Menu Item"
+  theme={
+    Object {
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
+    }
+  }
+>
+  <ForwardRef(WrappingElement)
+    style={
+      Object {
+        "color": "#0D1C2E",
+        "fontSize": 15,
+        "fontWeight": "600",
+        "marginHorizontal": 8,
+      }
+    }
+  >
+    Test Menu Item
+  </ForwardRef(WrappingElement)>
+</TouchableOpacity>
+`;
+
+exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`] = `
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  disabled={true}
   dispatch={[Function]}
   icon={[Function]}
   isLastItem={false}
@@ -793,15 +302,15 @@ exports[`@overflow-menu-item: component checks * menu item active checks 2`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="small"
+  size="medium"
   style={
     Array [
       Object {
-        "backgroundColor": "white",
+        "backgroundColor": "#8992A3",
         "borderBottomColor": "#DDE1EB",
         "borderBottomWidth": 1.2,
-        "minHeight": 40,
-        "padding": 10,
+        "minHeight": 48,
+        "padding": 12,
       },
       Object {
         "alignItems": "center",
@@ -831,59 +340,6 @@ exports[`@overflow-menu-item: component checks * menu item active checks 2`] = `
   }
 >
   <Component
-    source={
-      Object {
-        "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
-      }
-    }
-    style={
-      Object {
-        "height": 20,
-        "marginHorizontal": 6,
-        "tintColor": "#0D1C2E",
-        "width": 20,
-      }
-    }
-  />
-  <ForwardRef(createComponent)
-    style={
-      Object {
-        "color": "#0D1C2E",
-        "fontSize": 13,
-        "fontWeight": "600",
-        "marginHorizontal": 6,
-      }
-    }
-  >
-    Test Menu Item
-  </ForwardRef(createComponent)>
-</TouchableOpacity>
-`;
-
-exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#8992A3",
-      "borderBottomColor": "#DDE1EB",
-      "borderBottomWidth": 1.2,
-      "flexDirection": "row",
-      "minHeight": 48,
-      "opacity": 1,
-      "padding": 12,
-    }
-  }
->
-  <Image
     source={
       Object {
         "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
@@ -898,107 +354,80 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
       }
     }
   />
-  <Text
-    appearance="primary"
-    dispatch={[Function]}
+  <ForwardRef(WrappingElement)
     style={
-      Array [
-        Object {
-          "color": "#000000",
-          "fontSize": 16,
-        },
-        Object {
-          "color": "#0D1C2E",
-          "fontSize": 15,
-          "fontWeight": "600",
-          "marginHorizontal": 8,
-        },
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-pitch-dark": "#0D1C2E",
-        "blue-primary": "#3366FF",
-        "gray-100": "#f7f8fa",
-        "gray-200": "#edf0f5",
-        "gray-300": "#c8cedb",
-        "gray-400": "#a6aebd",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-        "text-primary": "#000000",
-        "text-primary-inverse": "#ffffff",
+        "color": "#0D1C2E",
+        "fontSize": 15,
+        "fontWeight": "600",
+        "marginHorizontal": 8,
       }
     }
   >
     Test Menu Item
-  </Text>
-</View>
+  </ForwardRef(WrappingElement)>
+</TouchableOpacity>
 `;
 
 exports[`@overflow-menu-item: component checks * menu item with "set-2" props 1`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+<TouchableOpacity
+  activeOpacity={1}
+  appearance="default"
+  disabled={false}
+  dispatch={[Function]}
+  isLastItem={true}
+  onLongPress={[Function]}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
+  size="medium"
   style={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "borderBottomColor": null,
+        "borderBottomWidth": null,
+        "minHeight": 48,
+        "padding": 12,
+      },
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
+  }
+  text="Test Menu Item"
+  theme={
     Object {
-      "alignItems": "center",
-      "backgroundColor": "white",
-      "borderBottomColor": null,
-      "borderBottomWidth": null,
-      "flexDirection": "row",
-      "minHeight": 48,
-      "opacity": 1,
-      "padding": 12,
+      "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
+      "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
+      "gray-dark": "#8992A3",
+      "gray-highlight": "#EDF0F5",
+      "gray-light": "#DDE1EB",
+      "gray-primary": "#A6AEBD",
+      "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
+      "text-primary-inverse": "#ffffff",
     }
   }
 >
-  <Text
-    appearance="primary"
-    dispatch={[Function]}
+  <ForwardRef(WrappingElement)
     style={
-      Array [
-        Object {
-          "color": "#000000",
-          "fontSize": 16,
-        },
-        Object {
-          "color": "#0D1C2E",
-          "fontSize": 15,
-          "fontWeight": "600",
-          "marginHorizontal": 8,
-        },
-      ]
-    }
-    theme={
       Object {
-        "blue-dark": "#2541CC",
-        "blue-pitch-dark": "#0D1C2E",
-        "blue-primary": "#3366FF",
-        "gray-100": "#f7f8fa",
-        "gray-200": "#edf0f5",
-        "gray-300": "#c8cedb",
-        "gray-400": "#a6aebd",
-        "gray-dark": "#8992A3",
-        "gray-highlight": "#EDF0F5",
-        "gray-light": "#DDE1EB",
-        "gray-primary": "#A6AEBD",
-        "pink-primary": "#FF3D71",
-        "text-primary": "#000000",
-        "text-primary-inverse": "#ffffff",
+        "color": "#0D1C2E",
+        "fontSize": 15,
+        "fontWeight": "600",
+        "marginHorizontal": 8,
       }
     }
   >
     Test Menu Item
-  </Text>
-</View>
+  </ForwardRef(WrappingElement)>
+</TouchableOpacity>
 `;

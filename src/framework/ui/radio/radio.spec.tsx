@@ -7,6 +7,7 @@ import {
   shallow,
   RenderAPI,
 } from 'react-native-testing-library';
+import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
   StyleProvider,
@@ -16,16 +17,20 @@ import {
   Radio as RadioComponent,
   Props as RadioProps,
 } from './radio.component';
-import * as config from './radio.spec.config';
-import { ReactTestInstance } from 'react-test-renderer';
+import { default as styles } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
+const Radio = styled<RadioProps>(RadioComponent);
 
-const Mock = (props?: RadioProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <Radio {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: RadioProps): React.ReactElement<StyleProviderProps> => {
+  return (
+    <StyleProvider
+      styles={styles}
+      theme={theme}>
+      <Radio {...props} />
+    </StyleProvider>
+  );
+};
 
 const renderComponent = (props?: RadioProps): RenderAPI => {
   return render(

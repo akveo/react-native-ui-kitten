@@ -2,6 +2,8 @@ import React from 'react';
 import {
   fireEvent,
   render,
+  RenderAPI,
+  shallow,
 } from 'react-native-testing-library';
 import {
   View,
@@ -44,18 +46,22 @@ describe('@modal panel checks', () => {
     }
 
     public showModal() {
-      this.modalId = ModalService.show(<TestModal onRequestClose={() => 1}/>, true);
+      this.modalId = ModalService.show(
+        <TestModal onRequestClose={() => 1}/>, true,
+      );
     }
 
     public hideModal() {
       ModalService.hide(this.modalId);
     }
 
-    public render() {
+    public render(): React.ReactNode {
       return (
         <ModalPanel>
           <View>
-            <Text>Modal Panel Test</Text>
+            <Text>
+              Modal Panel Test
+            </Text>
           </View>
           <Button
             title='Open Modal'
@@ -74,10 +80,9 @@ describe('@modal panel checks', () => {
 
   class TestModal extends React.Component<ModalComponentCloseProps> {
 
-    render(): React.ReactNode {
+    public render(): React.ReactNode {
       return (
         <View>
-          <Text>This is Test Modal</Text>
           <Button
             title='Close Modal'
             onPress={this.props.onCloseModal}
@@ -89,17 +94,27 @@ describe('@modal panel checks', () => {
   }
 
   it('* modal panel renders properly', () => {
-    const panel = render(<ModalPanelTest/>);
-    expect(panel).toMatchSnapshot();
+    const component: RenderAPI = render(
+      <ModalPanelTest/>,
+    );
+
+    const { output } = shallow(component.getByType(ModalPanel));
+
+    expect(output).toMatchSnapshot();
   });
 
   it('* modal panel render with props / children checking', () => {
-    const panelChild = <View><Text>Test</Text></View>;
-    const panel = <ModalPanelTest children={panelChild}/>;
-    const renderedPanel = render(panel);
+    const component: RenderAPI = render(
+      <ModalPanelTest>
+        <Text>
+          Test
+        </Text>
+      </ModalPanelTest>,
+    );
 
-    expect(panel.props.children).toBe(panelChild);
-    expect(renderedPanel).toMatchSnapshot();
+    const { output } = shallow(component.getByType(ModalPanel));
+
+    expect(output).toMatchSnapshot();
   });
 
   it('* modal panel l/c-hooks checks', () => {
@@ -112,23 +127,38 @@ describe('@modal panel checks', () => {
         componentWillUnmount={componentWillUnmount}
       />,
     );
+
     expect(componentDidMount).toHaveBeenCalled();
+
     wrapper.unmount();
+
     expect(componentWillUnmount).toHaveBeenCalled();
   });
 
   it('* close modal checking inner', () => {
-    const application = render(<ModalPanelTest/>);
-    fireEvent.press(application.getByTestId(showModalTestId));
-    fireEvent.press(application.getByTestId(hideModalTestIdInner));
-    expect(application).toMatchSnapshot();
+    const component: RenderAPI = render(
+      <ModalPanelTest/>,
+    );
+
+    fireEvent.press(component.getByTestId(showModalTestId));
+    fireEvent.press(component.getByTestId(hideModalTestIdInner));
+
+    const { output } = shallow(component.getByType(ModalPanel));
+
+    expect(output).toMatchSnapshot();
   });
 
   it('* close modal checking outer', () => {
-    const application = render(<ModalPanelTest/>);
-    fireEvent.press(application.getByTestId(showModalTestId));
-    fireEvent.press(application.getByTestId(hideModalTestIdOuter));
-    expect(application).toMatchSnapshot();
+    const component: RenderAPI = render(
+      <ModalPanelTest/>,
+    );
+
+    fireEvent.press(component.getByTestId(showModalTestId));
+    fireEvent.press(component.getByTestId(hideModalTestIdOuter));
+
+    const { output } = shallow(component.getByType(ModalPanel));
+
+    expect(output).toMatchSnapshot();
   });
 
 });
