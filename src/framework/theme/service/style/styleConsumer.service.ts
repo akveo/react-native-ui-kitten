@@ -9,10 +9,7 @@ import {
   StyledComponentProps,
 } from '../../component';
 import { createThemedStyle } from './style.service';
-import {
-  Interaction,
-  StyleType,
-} from '../../type';
+import { Interaction } from '../../type';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
 
@@ -52,9 +49,11 @@ export class StyleConsumerService {
     const generatedMapping: ThemedStyleType = this.getGeneratedStyleMapping(context.style, styleInfo);
     const mapping = this.withValidParameters(generatedMapping);
 
-    const themedStyle: StyleType = createThemedStyle(mapping, context.theme);
-
-    return { ...source, themedStyle };
+    return {
+      ...source,
+      theme: context.theme,
+      themedStyle: createThemedStyle(mapping, context.theme),
+    };
   }
 
   private getGeneratedStyleMapping<P extends StyledComponentProps>(style: ThemeStyleType,
