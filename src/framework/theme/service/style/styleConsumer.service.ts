@@ -1,17 +1,22 @@
-import { createStyle } from 'eva/packages/processor/kitten';
 import {
   ControlThemedStyleType,
   ControlMetaType,
   ThemedStyleType,
-  ThemeMappingType,
   ThemeStyleType,
 } from 'eva/packages/types';
-import { StyledComponentProps } from '../../component';
-import { Interaction } from '../../type';
+import {
+  ContextProps,
+  StyledComponentProps,
+} from '../../component';
+import { createThemedStyle } from './style.service';
+import {
+  Interaction,
+  StyleType,
+} from '../../type';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
 
-interface ComponentStyleMetaType {
+interface StyleInfo {
   appearance: string;
   variants: string[];
   states: string[];
@@ -19,70 +24,55 @@ interface ComponentStyleMetaType {
 
 export class StyleConsumerService {
 
-  public withDefaultProps<P extends StyledComponentProps>(style: ThemeStyleType,
-                                                          component: string,
-                                                          props: P): P {
+  private readonly name: string;
+  private readonly meta: ControlMetaType;
 
-    const defaultProps = this.safe(style[component], (componentStyles: ControlThemedStyleType) => {
-      const appearance: string = this.getDefaultAppearance(componentStyles.meta);
-      const variants: { [key: string]: string } = this.getDefaultVariants(componentStyles.meta);
-      const states: { [key: string]: boolean } = this.getDefaultStates(componentStyles.meta);
+  constructor(name: string, context: ContextProps) {
+    this.name = name;
 
-      return { appearance, ...variants, ...states };
-    });
-
-    return { ...defaultProps, ...props };
-  }
-
-  /**
-   * @param style (ThemeMappingType) - styles theme mapping configuration
-   * @param mapping (ThemeMappingType) - theme mapping configuration
-   * @param component (string) - component name
-   * @param props (StyledComponentProps) - component props
-   * @param interaction (Interaction[]) - component interaction
-   *
-   * @return pre-processed style if exists, creates it otherwise
-   */
-  public getComponentStyleMapping<P extends StyledComponentProps>(style: ThemeStyleType,
-                                                                  mapping: ThemeMappingType,
-                                                                  component: string,
-                                                                  props: P,
-                                                                  interaction: Interaction[]): ThemedStyleType {
-
-    return this.safe(style[component], (componentStyles: ControlThemedStyleType): ThemedStyleType => {
-      const meta: ComponentStyleMetaType = this.getDerivedStyleMeta(componentStyles.meta, props);
-      const validParameters: string[] = this.getValidParameters(componentStyles.meta);
-
-      const query: string = this.findGeneratedQuery(Object.keys(componentStyles.styles), [
-        meta.appearance,
-        ...meta.variants,
-        ...interaction,
-        ...meta.states,
-      ]);
-
-      const generatedStyles: ThemedStyleType = componentStyles.styles[query];
-
-      if (generatedStyles === undefined) {
-        const createdStyles: ThemedStyleType = createStyle(
-          mapping,
-          component,
-          meta.appearance,
-          meta.variants,
-          [...interaction, ...meta.states],
-        );
-
-        return this.validateComponentStyleMapping(createdStyles, validParameters);
-      }
-
-      return this.validateComponentStyleMapping(generatedStyles, validParameters);
+    this.meta = this.safe(context.style[name], (generatedConfig): ControlMetaType => {
+      return generatedConfig.meta;
     });
   }
 
-  private validateComponentStyleMapping(mapping: ThemedStyleType, parameters: string[]): ThemedStyleType {
+  public createDefaultProps<P extends object>(): StyledComponentProps {
+    const appearance: string = this.getDefaultAppearance();
+    const variants: { [key: string]: string } = this.getDefaultVariants();
+    const states: { [key: string]: boolean } = this.getDefaultStates();
+
+    return { appearance, ...variants, ...states };
+  }
+
+  public withStyledProps<P extends object>(source: P,
+                                           context: ContextProps,
+                                           interaction: Interaction[]): P & StyledComponentProps {
+
+    const styleInfo: StyleInfo = this.getStyleInfo(source, interaction);
+
+    const generatedMapping: ThemedStyleType = this.getGeneratedStyleMapping(context.style, styleInfo);
+    const mapping = this.withValidParameters(generatedMapping);
+
+    const themedStyle: StyleType = createThemedStyle(mapping, context.theme);
+
+    return { ...source, themedStyle };
+  }
+
+  private getGeneratedStyleMapping<P extends StyledComponentProps>(style: ThemeStyleType,
+                                                                   info: StyleInfo): ThemedStyleType {
+
+    return this.safe(style[this.name], (componentStyles: ControlThemedStyleType): ThemedStyleType => {
+      const styleKeys: string[] = Object.keys(componentStyles.styles);
+      const query: string = this.findGeneratedQuery(info, styleKeys);
+
+      return componentStyles.styles[query];
+    });
+  }
+
+  private withValidParameters(mapping: ThemedStyleType): ThemedStyleType {
     const invalidParameters: string[] = [];
 
     Object.keys(mapping).forEach((key: string) => {
-      if (!parameters.includes(key)) {
+      if (!Object.keys(this.meta.parameters).includes(key)) {
         invalidParameters.push(key);
         delete mapping[key];
       }
@@ -97,30 +87,33 @@ export class StyleConsumerService {
     return mapping;
   }
 
-  private getDerivedStyleMeta<P extends StyledComponentProps>(meta: ControlMetaType, props: P): ComponentStyleMetaType {
-    const variantProps: Partial<P> = this.getDerivedVariants(meta, props);
-    const stateProps: Partial<P> = this.getDerivedStates(meta, props);
+  private getStyleInfo<P extends StyledComponentProps>(props: P, interaction: Interaction[]): StyleInfo {
+    const variantProps: Partial<P> = this.getDerivedVariants(this.meta, props);
+    const stateProps: Partial<P> = this.getDerivedStates(this.meta, props);
 
     const variants: string[] = Object.keys(variantProps).map((variant: string): string => {
       return variantProps[variant];
     });
+
     const states: string[] = Object.keys(stateProps);
 
     return {
       appearance: props.appearance,
-      variants,
-      states,
+      variants: variants,
+      states: [...states, ...interaction],
     };
   }
 
-  private getDefaultAppearance(meta: ControlMetaType): string {
-    return Object.keys(meta.appearances).find((appearance: string): boolean => {
-      return meta.appearances[appearance].default === true;
+  private getDefaultAppearance(): string {
+    const matches: string[] = Object.keys(this.meta.appearances).filter((appearance: string): boolean => {
+      return this.meta.appearances[appearance].default === true;
     });
+
+    return matches[matches.length - 1];
   }
 
-  private getDefaultVariants(meta: ControlMetaType): { [key: string]: any } {
-    return this.transformObject(meta.variantGroups, (variants, group: string): string | undefined => {
+  private getDefaultVariants(): { [key: string]: any } {
+    return this.transformObject(this.meta.variantGroups, (variants, group: string): string | undefined => {
       return Object.keys(variants[group]).find((variant: string): boolean => {
 
         return variants[group][variant].default === true;
@@ -128,8 +121,8 @@ export class StyleConsumerService {
     });
   }
 
-  private getDefaultStates(meta: ControlMetaType): { [key: string]: any } {
-    return this.transformObject(meta.states, (states, state: string): boolean | undefined => {
+  private getDefaultStates(): { [key: string]: any } {
+    return this.transformObject(this.meta.states, (states, state: string): boolean | undefined => {
       const isDefault: boolean = states[state].default === true;
 
       return isDefault ? isDefault : undefined;
@@ -153,10 +146,6 @@ export class StyleConsumerService {
     });
   }
 
-  private getValidParameters(meta: ControlMetaType): string[] {
-    return Object.keys(meta.parameters);
-  }
-
   /**
    * Iterates throw `value` object keys and fills it values with values provided by `transform` callback
    * If `transform` returns `undefined`, then appends nothing
@@ -165,13 +154,10 @@ export class StyleConsumerService {
    * @param transform - object key transformation callback
    */
   private transformObject<V extends object>(value: V, transform: (value: V, key: string) => any): Partial<V> {
-    return Object.keys(value).reduce((acc: Partial<V>, key: string) => {
+    return Object.keys(value).reduce((acc: Partial<V>, key: string): any => {
       const nextValue: any = transform(value, key);
 
-      return nextValue ? {
-        ...acc,
-        [key]: nextValue,
-      } : acc;
+      return nextValue ? { ...acc, [key]: nextValue } : acc;
     }, {});
   }
 
@@ -181,16 +167,22 @@ export class StyleConsumerService {
    * Example:
    *
    * source = ['default.error.small.checked', ...]
-   * query = ['default', 'small', 'error', 'checked']
+   * info = { appearance: 'default', variants: ['small', 'error'], states: ['checked'] }
    *
    * will return ['default', 'error', 'small', 'checked']
    *
+   * @param info (StyleInfo) - component style info
    * @param source (string[]) - array of style keys
-   * @param query (string[]) - array of key parts to search
    *
    * @return (string | undefined) - key identical to some of `source` keys if presents
    */
-  private findGeneratedQuery(source: string[], query: string[]): string | undefined {
+  private findGeneratedQuery(info: StyleInfo, source: string[]): string | undefined {
+    const query: string[] = [
+      info.appearance,
+      ...info.variants,
+      ...info.states,
+    ];
+
     const matches: string[] = source.filter((key: string): boolean => {
       const keyQuery: string[] = key.split(SEPARATOR_MAPPING_ENTRY);
 
@@ -219,14 +211,15 @@ export class StyleConsumerService {
    *
    * @param value (T | undefined) - unsafe object which should be processed
    * @param reducer ((T) => R) - `value` processing lambda. Called if `value` is not `undefined`
+   * @param fallback (R) - fallback value to return. Optional
    *
-   * @return (R | undefined) - object returned by `reducer` if `value` is not `undefined`, `undefined` otherwise
+   * @return (R | undefined) - object returned by `reducer` if `value` is not `undefined`, `fallback` otherwise
    **/
-  private safe<T, R>(value: T | undefined, reducer: (value: T) => R): R | undefined {
+  private safe<T, R>(value: T | undefined, reducer: (value: T) => R, fallback?: R): R | undefined {
     if (value) {
       return reducer(value);
     }
 
-    return undefined;
+    return fallback;
   }
 }

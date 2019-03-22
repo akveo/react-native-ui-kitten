@@ -42,7 +42,7 @@ interface TemplateDescriptionProps extends Partial<TemplateBaseProps> {
 
 type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps) & ListDerivedProps;
 
-const Text = styled<TextComponent, TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndexedProps;
 

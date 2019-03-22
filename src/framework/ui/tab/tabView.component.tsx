@@ -38,8 +38,8 @@ interface TabViewProps {
   onSelect?: (index: number) => void;
 }
 
-const Tab = styled<TabComponent, TabProps>(TabComponent);
-const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const Tab = styled<TabProps>(TabComponent);
+const TabBar = styled<TabBarProps>(TabBarComponent);
 
 export type Props = TabViewProps & ViewProps;
 export type ChildProps = TabProps & { children: ChildContentElement };

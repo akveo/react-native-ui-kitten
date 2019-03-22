@@ -55,7 +55,7 @@ describe('@style: consumer service methods check', () => {
     };
 
     it('config contains no pre-created mapping', () => {
-      const value = service.getComponentStyleMapping(
+      const value = service.getGeneratedStyle(
         config.componentMapping,
         {},
         'Test',
@@ -67,7 +67,7 @@ describe('@style: consumer service methods check', () => {
     });
 
     it('throws warning for undeclared mapping keys', () => {
-      service.getComponentStyleMapping(
+      service.getGeneratedStyle(
         config.componentMapping,
         {},
         'Invalid',

@@ -13,11 +13,10 @@ export default class App extends React.Component {
 
     return (
       <ApplicationProvider
-        style={style}
+        styles={style}
         theme={theme}>
         <Router/>
       </ApplicationProvider>
     );
   }
 }
-
