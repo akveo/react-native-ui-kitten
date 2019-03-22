@@ -8,7 +8,7 @@ import {
 } from '../../type';
 
 interface PrivateProps<T> {
-  forwardedRef: React.RefObject<T>;
+  forwardedRef?: React.RefObject<T>;
 }
 
 export interface Props {

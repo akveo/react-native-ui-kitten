@@ -4,7 +4,7 @@ import { MappingContext } from './mappingContext';
 
 interface MappingProviderProps {
   styles: ThemeStyleType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export type Props = MappingProviderProps;
