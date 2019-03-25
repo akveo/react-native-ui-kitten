@@ -1,17 +1,6 @@
 import React from 'react';
-import {
-  ThemeMappingType,
-  ThemeStyleType,
-} from 'eva/packages/types';
+import { ThemeStyleType } from 'eva/packages/types';
 
-export interface MappingContextValueType {
-  mapping: ThemeMappingType;
-  styles: ThemeStyleType;
-}
+const defaultValue: ThemeStyleType = {};
 
-const defaultValue: MappingContextValueType = {
-  mapping: {},
-  styles: {},
-};
-
-export const MappingContext: React.Context<MappingContextValueType> = React.createContext(defaultValue);
+export const MappingContext: React.Context<ThemeStyleType> = React.createContext(defaultValue);

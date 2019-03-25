@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Image,
+  ImageSourcePropType,
   StyleSheet,
 } from 'react-native';
 import {
@@ -11,22 +12,27 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   Avatar as AvatarComponent,
   Props as AvatarProps,
 } from './avatar.component';
-import * as config from './avatar.spec.config';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const Avatar = styled<AvatarComponent, AvatarProps>(AvatarComponent);
+const Avatar = styled<AvatarProps>(AvatarComponent);
 
-const Mock = (props?: AvatarProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <Avatar {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: AvatarProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <Avatar {...props} />
+    </ApplicationProvider>
+  );
+};
 
 const renderComponent = (props?: AvatarProps): RenderAPI => {
   return render(
@@ -34,16 +40,20 @@ const renderComponent = (props?: AvatarProps): RenderAPI => {
   );
 };
 
+const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+
 describe('@avatar: matches snapshot', () => {
 
   describe('* appearance', () => {
 
     it('* default', () => {
       const component: RenderAPI = renderComponent({
-        source: { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' },
+        source: iconSource,
       });
 
-      expect(component).toMatchSnapshot();
+      const { output } = shallow(component.getByType(AvatarComponent));
+
+      expect(output).toMatchSnapshot();
     });
 
   });
@@ -54,7 +64,7 @@ describe('@avatar: component checks', () => {
 
   it('* round shape styled properly', () => {
     const component: RenderAPI = renderComponent({
-      source: { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' },
+      source: iconSource,
       shape: 'round',
     });
 
@@ -67,7 +77,7 @@ describe('@avatar: component checks', () => {
 
   it('* rounded shape styled properly', () => {
     const component: RenderAPI = renderComponent({
-      source: { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' },
+      source: iconSource,
       shape: 'rounded',
     });
 
@@ -80,7 +90,7 @@ describe('@avatar: component checks', () => {
 
   it('* square shape', () => {
     const component: RenderAPI = renderComponent({
-      source: { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' },
+      source: iconSource,
       shape: 'square',
     });
 

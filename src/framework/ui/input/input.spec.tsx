@@ -11,26 +11,34 @@ import {
   shallow,
   RenderAPI,
 } from 'react-native-testing-library';
+import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
   Input as InputComponent,
   Props as InputProps,
 } from './input.component';
-import * as config from './input.spec.config';
-import { ReactTestInstance } from 'react-test-renderer';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const Input = styled<InputComponent, InputProps>(InputComponent);
+const Input = styled<InputProps>(InputComponent);
 
-const Mock = (props?: InputProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <Input style={{}} {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: InputProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <Input
+        {...props}
+        style={{}}
+      />
+    </ApplicationProvider>
+  );
+};
 
 const renderComponent = (props?: InputProps): RenderAPI => {
   return render(
@@ -44,6 +52,7 @@ describe('@input: matches snapshot', () => {
 
     it('* stateless', () => {
       const component: RenderAPI = renderComponent();
+
       const { output } = shallow(component.getByType(InputComponent));
 
       expect(output).toMatchSnapshot();
@@ -53,15 +62,20 @@ describe('@input: matches snapshot', () => {
 
   describe('* appearance', () => {
 
-    const icon: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+    const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
     it('* icon', () => {
-      const iconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+      const icon = (style: StyleType): React.ReactElement<ImageProps> => {
         return (
-          <Image style={style} source={icon}/>
+          <Image
+            style={style}
+            source={iconSource}
+          />
         );
       };
-      const component: RenderAPI = renderComponent({ icon: iconElement });
+
+      const component: RenderAPI = renderComponent({ icon });
+
       const { output } = shallow(component.getByType(InputComponent));
 
       expect(output).toMatchSnapshot();
@@ -101,9 +115,7 @@ describe('@input: component checks', () => {
   it('* emits onChangeText', () => {
     const onChangeText = jest.fn();
 
-    const component: RenderAPI = renderComponent({
-      onChangeText: onChangeText,
-    });
+    const component: RenderAPI = renderComponent({ onChangeText });
 
     fireEvent.changeText(component.getByType(TextInput), 'it works!');
 
@@ -113,9 +125,7 @@ describe('@input: component checks', () => {
   it('* emits onFocus', () => {
     const onFocus = jest.fn();
 
-    const component: RenderAPI = renderComponent({
-      onFocus: onFocus,
-    });
+    const component: RenderAPI = renderComponent({ onFocus });
 
     fireEvent(component.getByType(TextInput), 'focus');
 
@@ -125,9 +135,7 @@ describe('@input: component checks', () => {
   it('* emits onEndEditing', () => {
     const onEndEditing = jest.fn();
 
-    const component: RenderAPI = renderComponent({
-      onEndEditing: onEndEditing,
-    });
+    const component: RenderAPI = renderComponent({ onEndEditing });
 
     fireEvent(component.getByType(TextInput), 'endEditing');
 
@@ -135,7 +143,10 @@ describe('@input: component checks', () => {
   });
 
   it('* changes text', () => {
-    const component: RenderAPI = render(<InputListener/>);
+    const component: RenderAPI = render(
+      <InputListener/>,
+    );
+
     const input: ReactTestInstance = component.getByType(TextInput);
 
     fireEvent.changeText(input, 'it works!');

@@ -1,11 +1,19 @@
+import { style } from 'eva/packages/mapping-kitten/eva';
+import { ThemedStyleType } from 'eva/packages/types';
 import { StyleConsumerService } from './styleConsumer.service';
-import { StyledComponentProps } from '../../component';
+import {
+  StyledComponentProps,
+  ContextProps,
+} from '../../component';
 import {
   Interaction,
   State,
+  StyleType,
 } from '../../type';
 import * as Service from './style.service';
-import * as config from './style.spec.config';
+import { default as theme } from '../../common/theme.json';
+
+const json = (value: any): string => JSON.stringify(value);
 
 describe('@style: state type checks', () => {
 
@@ -45,37 +53,40 @@ describe('@style: state type checks', () => {
 
 describe('@style: consumer service methods check', () => {
 
-  const service: StyleConsumerService = new StyleConsumerService();
+  const context: ContextProps = {
+    style: style,
+    theme: theme,
+  };
+
+  const service: StyleConsumerService = new StyleConsumerService('Radio', context);
 
   describe('* style mapping', () => {
 
-    const props: StyledComponentProps & any = {
-      checked: false,
+    const derivedProps: StyledComponentProps & any = {
+      appearance: 'default',
       disabled: true,
     };
 
-    it('config contains no pre-created mapping', () => {
-      const value = service.getComponentStyleMapping(
-        config.componentMapping,
-        {},
-        'Test',
-        props,
-        [],
-      );
+    it('creates valid default props', () => {
+      const value: StyledComponentProps = service.createDefaultProps();
 
-      expect(value).toMatchSnapshot();
+      expect(json(value)).toEqual(json({
+        appearance: 'default',
+        size: 'medium',
+      }));
     });
 
-    it('throws warning for undeclared mapping keys', () => {
-      service.getComponentStyleMapping(
-        config.componentMapping,
-        {},
-        'Invalid',
-        props,
-        [],
-      );
+    it('creates valid themedStyle prop', () => {
+      const defaultProps: StyledComponentProps = service.createDefaultProps();
 
-      jest.spyOn(console, 'warn');
+      const props: StyledComponentProps = {
+        ...defaultProps,
+        ...derivedProps,
+      };
+
+      const value: StyledComponentProps = service.withStyledProps(props, context, [Interaction.ACTIVE]);
+
+      expect(value.themedStyle).toMatchSnapshot();
     });
 
   });
@@ -86,16 +97,17 @@ describe('@style: service methods checks', () => {
 
   describe('* styling', () => {
 
+    const mapping: ThemedStyleType = {
+      prop1: 'blue-primary',
+      prop2: 'blue-dark',
+      prop3: 'gray-primary',
+      prop4: 42,
+    };
+
     it('* default theme', () => {
-      const style = Service.createThemedStyle(config.mapping, config.theme);
+      const value: StyleType = Service.createThemedStyle(mapping, theme);
 
-      expect(style).toMatchSnapshot();
-    });
-
-    it('* inverse theme', () => {
-      const style = Service.createThemedStyle(config.mapping, config.themeInverse);
-
-      expect(style).toMatchSnapshot();
+      expect(value).toMatchSnapshot();
     });
 
   });

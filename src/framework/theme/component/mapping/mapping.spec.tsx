@@ -1,63 +1,61 @@
 import React from 'react';
-import { View } from 'react-native';
-import { render } from 'react-native-testing-library';
 import {
-  ThemeMappingType,
-  ThemeStyleType,
-} from 'eva/packages/types';
+  View,
+  ViewProps,
+} from 'react-native';
 import {
-  MappingContext,
-  MappingContextValueType,
-} from './mappingContext';
+  render,
+  RenderAPI,
+} from 'react-native-testing-library';
+import { ReactTestInstance } from 'react-test-renderer';
+import { ThemeStyleType } from 'eva/packages/types';
+import { MappingContext } from './mappingContext';
 import {
   MappingProvider,
   Props as MappingProviderProps,
 } from './mappingProvider.component';
+import { default as styles } from '../../common/styles.json';
 
 describe('@mapping: ui component checks', () => {
 
-  const json = (object: any) => JSON.stringify(object);
+  const json = (object: any): string => JSON.stringify(object);
 
-  const Provider = (props: MappingProviderProps): React.ReactElement<MappingProviderProps> => (
-    <MappingProvider {...props}/>
-  );
+  const Provider = (props: MappingProviderProps): React.ReactElement<MappingProviderProps> => {
+    return (
+      <MappingProvider {...props}/>
+    );
+  };
 
-  const withMapping = (Component: React.ComponentClass<any>): React.ReactElement<any> => (
-    <MappingContext.Consumer>{(receivedValue: MappingContextValueType) => (
-      <Component
-        testID='@mapping/consumer'
-        mapping={receivedValue.mapping}
-        styles={receivedValue.styles}/>
-    )}</MappingContext.Consumer>
-  );
+  const Consumer = (): React.ReactElement<ViewProps> => {
+    return withMapping(View);
+  };
 
-  interface Props {
-    mapping: ThemeMappingType;
-    styles: any;
-  }
+  const withMapping = (Component: React.ComponentClass<any>): React.ReactElement<any> => {
+    return (
+      <MappingContext.Consumer>{(style: ThemeStyleType) => (
+        <Component
+          testID='@mapping/consumer'
+          styles={style}
+        />
+      )}</MappingContext.Consumer>
+    );
+  };
 
-  const Tree = (props: Props) => (
-    <Provider mapping={props.mapping} styles={props.styles}>
-      {withMapping(View)}
-    </Provider>
-  );
+  const Tree = (props: MappingProviderProps): React.ReactElement<MappingProviderProps> => {
+    return (
+      <Provider {...props}>
+        <Consumer/>
+      </Provider>
+    );
+  };
 
   describe('* consumer', () => {
-    const mapping: ThemeMappingType = {};
-    const styles: ThemeStyleType = {};
-
-    it('receives mapping prop', () => {
-
-      const component = render(<Tree mapping={mapping} styles={styles}/>);
-      const consumerComponent = component.getByTestId('@mapping/consumer');
-
-      expect(json(consumerComponent.props.mapping)).toEqual(json(mapping));
-    });
-
     it('receives styles prop', () => {
+      const component: RenderAPI = render(
+        <Tree styles={styles}/>,
+      );
 
-      const component = render(<Tree mapping={mapping} styles={styles}/>);
-      const consumerComponent = component.getByTestId('@mapping/consumer');
+      const consumerComponent: ReactTestInstance = component.getByTestId('@mapping/consumer');
 
       expect(json(consumerComponent.props.styles)).toEqual(json(styles));
     });

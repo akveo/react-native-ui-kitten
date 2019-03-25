@@ -1,0 +1,192 @@
+{
+  "version": 1.0,
+  "components": {
+    "Radio": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "textMarginLeft": {
+            "type": "number"
+          },
+          "textFontSize": {
+            "type": "number"
+          },
+          "textFontWeight": {
+            "type": "string"
+          },
+          "selectWidth": {
+            "type": "number"
+          },
+          "selectHeight": {
+            "type": "number"
+          },
+          "selectBorderRadius": {
+            "type": "number"
+          },
+          "selectBackgroundColor": {
+            "type": "string"
+          },
+          "highlightWidth": {
+            "type": "number"
+          },
+          "highlightHeight": {
+            "type": "number"
+          },
+          "highlightBorderRadius": {
+            "type": "number"
+          },
+          "highlightBackgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "error": {
+              "default": false
+            }
+          },
+          "size": {
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "checked": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "disabled": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 2,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "borderWidth": 2,
+            "borderColor": "gray-primary",
+            "textColor": "text-primary",
+            "textFontWeight": "500",
+            "selectBackgroundColor": "transparent",
+            "highlightBackgroundColor": "transparent",
+            "state": {
+              "active": {
+                "borderColor": "gray-dark",
+                "highlightBackgroundColor": "gray-light"
+              },
+              "checked": {
+                "borderColor": "blue-primary",
+                "selectBackgroundColor": "blue-primary"
+              },
+              "disabled": {
+                "borderColor": "gray-light",
+                "textColor": "gray-300"
+              },
+              "checked.active": {
+                "borderColor": "blue-dark"
+              },
+              "checked.disabled": {
+                "selectBackgroundColor": "gray-primary"
+              }
+            }
+          },
+          "variantGroups": {
+            "status": {
+              "error": {
+                "borderColor": "pink-primary",
+                "state": {
+                  "checked": {
+                    "borderColor": "pink-primary",
+                    "selectBackgroundColor": "pink-primary"
+                  },
+                  "checked.active": {
+                    "borderColor": "pink-primary"
+                  }
+                }
+              }
+            },
+            "size": {
+              "small": {
+                "width": 30,
+                "height": 30,
+                "borderRadius": 15,
+                "textMarginLeft": 10,
+                "textFontSize": 14,
+                "selectWidth": 20,
+                "selectHeight": 20,
+                "selectBorderRadius": 10,
+                "highlightWidth": 50,
+                "highlightHeight": 50,
+                "highlightBorderRadius": 25
+              },
+              "medium": {
+                "width": 36,
+                "height": 36,
+                "borderRadius": 18,
+                "textMarginLeft": 12,
+                "textFontSize": 16,
+                "selectWidth": 24,
+                "selectHeight": 24,
+                "selectBorderRadius": 12,
+                "highlightWidth": 60,
+                "highlightHeight": 60,
+                "highlightBorderRadius": 30
+              },
+              "large": {
+                "width": 42,
+                "height": 42,
+                "borderRadius": 21,
+                "textMarginLeft": 14,
+                "textFontSize": 18,
+                "selectWidth": 28,
+                "selectHeight": 28,
+                "selectBorderRadius": 14,
+                "highlightWidth": 70,
+                "highlightHeight": 70,
+                "highlightBorderRadius": 35
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

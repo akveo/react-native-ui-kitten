@@ -1,14 +1,20 @@
 import React from 'react';
-import { TouchableWithoutFeedback, Image } from 'react-native';
+import {
+  TouchableWithoutFeedback,
+  Image,
+  ImageProps,
+  ImageSourcePropType,
+} from 'react-native';
 import {
   render,
   fireEvent,
   shallow,
+  RenderAPI,
 } from 'react-native-testing-library';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -19,25 +25,42 @@ import {
   TopNavigationBarAction as TopNavigationBarActionComponent,
   Props as TopNavigationBaActionProps,
 } from './topNavigationBarAction.component';
-import * as config from './topNavigationBar.spec.config';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
-const TopNavigationBarAction =
-  styled<TopNavigationBarActionComponent, TopNavigationBaActionProps>(TopNavigationBarActionComponent);
+const TopNavigationBar = styled<TopNavigationBarProps>(TopNavigationBarComponent);
+const TopNavigationBarAction = styled<TopNavigationBaActionProps>(TopNavigationBarActionComponent);
 
-const Mock = (props?: TopNavigationBarProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <TopNavigationBar {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: TopNavigationBarProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <TopNavigationBar {...props} />
+    </ApplicationProvider>
+  );
+};
 
-const ActionMock = (props?: TopNavigationBaActionProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <TopNavigationBarAction {...props} />
-  </StyleProvider>
-);
+const ActionMock = (props?: TopNavigationBaActionProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <TopNavigationBarAction {...props} />
+    </ApplicationProvider>
+  );
+};
 
-const iconSourceUri: string = 'https://pngimage.net/wp-content/uploads/2018/05/back-icon-png-6.png';
+const icon = (style: StyleType): React.ReactElement<ImageProps> => {
+  return (
+    <Image
+      style={style}
+      source={iconSource}
+    />
+  );
+};
+
+const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 const testIdLeftAction: string = '@top-navbar-left';
 const testIdRightAction1: string = '@top-navbar-right-1';
 const testIdRightAction2: string = '@top-navbar-right-2';
@@ -46,17 +69,38 @@ const testIdRightAction3: string = '@top-navbar-right-3';
 describe('@top-navigation-bar/action', () => {
 
   it('* bar/title', () => {
-    const { output } = shallow(<Mock title='Test'/>);
+    const component: RenderAPI = render(
+      <Mock title='Test'/>,
+    );
+
+    const { output } = shallow(component.getByType(TopNavigationBarComponent));
+
     expect(output).toMatchSnapshot();
   });
 
   it('* bar/subtitle', () => {
-    const { output } = shallow(<Mock title='Test' subtitle='Subtitle'/>);
+    const component: RenderAPI = render(
+      <Mock
+        title='Test'
+        subtitle='Subtitle'
+      />,
+    );
+
+    const { output } = shallow(component.getByType(TopNavigationBarComponent));
+
     expect(output).toMatchSnapshot();
   });
 
   it('* bar/appearance: title-centered', () => {
-    const { output } = shallow(<Mock appearance='title-centered' title='Test'/>);
+    const component: RenderAPI = render(
+      <Mock
+        appearance='titleCentered'
+        title='Test'
+      />,
+    );
+
+    const { output } = shallow(component.getByType(TopNavigationBarComponent));
+
     expect(output).toMatchSnapshot();
   });
 
@@ -66,39 +110,46 @@ describe('@top-navigation-bar/action', () => {
     const onRightControl2 = jest.fn();
     const onRightControl3 = jest.fn();
 
-    const component =
+
+    const component: RenderAPI = render(
       <Mock
         title='Test'
         subtitle='Subtitle'
         leftControl={
           <ActionMock
             testID={testIdLeftAction}
-            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
-            onPress={onLeftControl}/>
+            icon={icon}
+            onPress={onLeftControl}
+          />
         }
         rightControls={[
           <ActionMock
             testID={testIdRightAction1}
-            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
-            onPress={onRightControl1}/>,
+            icon={icon}
+            onPress={onRightControl1}
+          />,
           <ActionMock
             testID={testIdRightAction2}
-            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
-            onPress={onRightControl2}/>,
+            icon={icon}
+            onPress={onRightControl2}
+          />,
           <ActionMock
             testID={testIdRightAction3}
-            icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
-            onPress={onRightControl3}/>,
+            icon={icon}
+            onPress={onRightControl3}
+          />,
         ]}
-      />;
-    const renderedComponent = render(component);
-    const { output } = shallow(component);
+      />,
+    );
+    const { output } = shallow(component.getByType(TopNavigationBarComponent));
 
     expect(output).toMatchSnapshot();
-    fireEvent.press(renderedComponent.getByTestId(testIdLeftAction));
-    fireEvent.press(renderedComponent.getByTestId(testIdRightAction1));
-    fireEvent.press(renderedComponent.getByTestId(testIdRightAction2));
-    fireEvent.press(renderedComponent.getByTestId(testIdRightAction3));
+
+    fireEvent.press(component.getByTestId(testIdLeftAction));
+    fireEvent.press(component.getByTestId(testIdRightAction1));
+    fireEvent.press(component.getByTestId(testIdRightAction2));
+    fireEvent.press(component.getByTestId(testIdRightAction3));
+
     expect(onLeftControl).toHaveBeenCalled();
     expect(onRightControl1).toHaveBeenCalled();
     expect(onRightControl2).toHaveBeenCalled();
@@ -106,41 +157,57 @@ describe('@top-navigation-bar/action', () => {
   });
 
   it('* action/with icon uri', () => {
-    const { output } = shallow(
+    const component: RenderAPI = render(
       <ActionMock
-        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}/>,
+        icon={icon}
+      />,
     );
+
+    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
+
     expect(output).toMatchSnapshot();
   });
 
   it('* action/is last item check (true)', () => {
-    const { output } = shallow(
+    const component: RenderAPI = render(
       <ActionMock
-        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
-        isLastItem={true}/>,
+        icon={icon}
+        isLastItem={true}
+      />,
     );
+
+    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
+
     expect(output).toMatchSnapshot();
   });
 
   it('* action/is last item check (false)', () => {
-    const { output } = shallow(
+    const component: RenderAPI = render(
       <ActionMock
-        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
-        isLastItem={false}/>,
+        icon={icon}
+        isLastItem={false}
+      />,
     );
+
+    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
+
     expect(output).toMatchSnapshot();
   });
 
   it('* action/on press check', () => {
     const onPress = jest.fn();
-    const component =
-      <ActionMock
-        icon={(style: StyleType) => <Image source={{ uri: iconSourceUri }} style={style}/>}
-        onPress={onPress}/>;
-    const renderedComponent = render(component);
-    const { output } = shallow(component);
 
-    fireEvent.press(renderedComponent.getByType(TouchableWithoutFeedback));
+    const component: RenderAPI = render(
+      <ActionMock
+        icon={icon}
+        onPress={onPress}
+      />,
+    );
+
+    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
+
+    fireEvent.press(component.getByType(TouchableWithoutFeedback));
+
     expect(onPress).toHaveBeenCalled();
     expect(output).toMatchSnapshot();
   });

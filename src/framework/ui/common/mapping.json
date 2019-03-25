@@ -1,0 +1,1924 @@
+{
+  "version": 1.0,
+  "components": {
+    "Avatar": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "roundCoefficient": {
+            "type": "number"
+          },
+          "margin": {
+            "type": "number"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "shape": {
+            "round": {
+              "default": true
+            },
+            "rounded": {
+              "default": false
+            },
+            "square": {
+              "default": false
+            }
+          },
+          "size": {
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            }
+          }
+        },
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "margin": 16
+          },
+          "variantGroups": {
+            "shape": {
+              "round": {
+                "roundCoefficient": 0.5
+              },
+              "rounded": {
+                "roundCoefficient": 0.3
+              },
+              "square": {
+                "roundCoefficient": 0.0
+              }
+            },
+            "size": {
+              "small": {
+                "width": 40,
+                "height": 40
+              },
+              "medium": {
+                "width": 48,
+                "height": 48
+              },
+              "large": {
+                "width": 64,
+                "height": 64
+              }
+            }
+          }
+        }
+      }
+    },
+    "BottomNavigationTab": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconMarginBottom": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "textFontWeight": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {
+          "selected": {
+            "default": false,
+            "priority": 1,
+            "scope": "mobile"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "iconWidth": 40,
+            "iconHeight": 40,
+            "iconMarginBottom": 5,
+            "iconTintColor": "gray-dark",
+            "textColor": "gray-dark",
+            "textFontWeight": "600",
+            "state": {
+              "selected": {
+                "iconTintColor": "blue-primary",
+                "textColor": "blue-primary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "BottomNavigation": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "backgroundColor": {
+            "type": "string"
+          },
+          "paddingVertical": {
+            "type": "number"
+          },
+          "borderTopColor": {
+            "type": "string"
+          },
+          "borderTopWidth": {
+            "type": "number"
+          },
+          "indicatorHeight": {
+            "type": "number"
+          },
+          "indicatorBackgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          },
+          "noIndicator": {
+            "default": false
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "backgroundColor": "transparent",
+            "paddingVertical": 16,
+            "borderTopColor": "gray-primary",
+            "borderTopWidth": 1,
+            "indicatorHeight": 3,
+            "indicatorBackgroundColor": "blue-primary"
+          }
+        },
+        "noIndicator": {
+          "mapping": {
+            "indicatorHeight": 0,
+            "indicatorBackgroundColor": "transparent"
+          }
+        }
+      }
+    },
+    "Button": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "minWidth": {
+            "type": "number"
+          },
+          "minHeight": {
+            "type": "number"
+          },
+          "padding": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "textFontSize": {
+            "type": "number"
+          },
+          "textFontWeight": {
+            "type": "string"
+          },
+          "textMarginHorizontal": {
+            "type": "number"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          },
+          "iconMarginHorizontal": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "filled": {
+            "default": true
+          },
+          "outline": {
+            "default": false
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "primary": {
+              "default": true
+            },
+            "success": {
+              "default": false
+            },
+            "info": {
+              "default": false
+            },
+            "warning": {
+              "default": false
+            },
+            "danger": {
+              "default": false
+            }
+          },
+          "size": {
+            "tiny": {
+              "default": false
+            },
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            },
+            "giant": {
+              "default": true
+            }
+          }
+        },
+        "states": {
+          "disabled": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "filled": {
+          "mapping": {
+            "borderRadius": 6,
+            "textColor": "text-primary-inverse",
+            "textFontWeight": "800",
+            "iconTintColor": "#ffffff",
+            "iconMarginHorizontal": 4
+          },
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "backgroundColor": "#2196F3",
+                "state": {
+                  "active": {
+                    "backgroundColor": "#1E88E5"
+                  }
+                }
+              },
+              "success": {
+                "backgroundColor": "#4CAF50",
+                "state": {
+                  "active": {
+                    "backgroundColor": "#43A047"
+                  }
+                }
+              },
+              "info": {
+                "backgroundColor": "#03A9F4",
+                "state": {
+                  "active": {
+                    "backgroundColor": "#039BE5"
+                  }
+                }
+              },
+              "warning": {
+                "backgroundColor": "#FFC107",
+                "state": {
+                  "active": {
+                    "backgroundColor": "#FFB300"
+                  }
+                }
+              },
+              "danger": {
+                "backgroundColor": "#F44336",
+                "state": {
+                  "active": {
+                    "backgroundColor": "#E53935"
+                  }
+                }
+              }
+            },
+            "size": {
+              "tiny": {
+                "minWidth": 16,
+                "minHeight": 16,
+                "padding": 3,
+                "textFontSize": 10,
+                "textMarginHorizontal": 3,
+                "iconWidth": 11,
+                "iconHeight": 11,
+                "iconMarginHorizontal": 3
+              },
+              "small": {
+                "minHeight": 20,
+                "minWidth": 20,
+                "padding": 3.5,
+                "textFontSize": 11,
+                "textMarginHorizontal": 3.5,
+                "iconWidth": 12,
+                "iconHeight": 12,
+                "iconMarginHorizontal": 3.5
+              },
+              "medium": {
+                "minHeight": 24,
+                "minWidth": 24,
+                "padding": 4,
+                "textFontSize": 12,
+                "textMarginHorizontal": 4,
+                "iconWidth": 13,
+                "iconHeight": 13,
+                "iconMarginHorizontal": 4
+              },
+              "large": {
+                "minHeight": 30,
+                "minWidth": 30,
+                "padding": 4.5,
+                "textFontSize": 13,
+                "textMarginHorizontal": 4.5,
+                "iconWidth": 14,
+                "iconHeight": 14,
+                "iconMarginHorizontal": 4.5
+              },
+              "giant": {
+                "minHeight": 36,
+                "minWidth": 36,
+                "padding": 5,
+                "textFontSize": 14,
+                "textMarginHorizontal": 5,
+                "iconWidth": 15,
+                "iconHeight": 15,
+                "iconMarginHorizontal": 5
+              }
+            }
+          }
+        },
+        "outline": {
+          "mapping": {
+            "borderWidth": 2
+          },
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "backgroundColor": "transparent",
+                "borderColor": "#2196F3",
+                "textColor": "#2196F3",
+                "iconTintColor": "#2196F3",
+                "state": {
+                  "active": {
+                    "backgroundColor": "transparent",
+                    "borderColor": "#1E88E5",
+                    "textColor": "#1E88E5",
+                    "iconTintColor": "#1E88E5"
+                  }
+                }
+              },
+              "success": {
+                "backgroundColor": "transparent",
+                "borderColor": "#4CAF50",
+                "textColor": "#4CAF50",
+                "iconTintColor": "#4CAF50",
+                "state": {
+                  "active": {
+                    "backgroundColor": "transparent",
+                    "borderColor": "#43A047",
+                    "textColor": "#43A047",
+                    "iconTintColor": "#43A047"
+                  }
+                }
+              },
+              "info": {
+                "backgroundColor": "transparent",
+                "borderColor": "#03A9F4",
+                "textColor": "#03A9F4",
+                "iconTintColor": "#03A9F4",
+                "state": {
+                  "active": {
+                    "backgroundColor": "transparent",
+                    "borderColor": "#039BE5",
+                    "textColor": "#039BE5",
+                    "iconTintColor": "#039BE5"
+                  }
+                }
+              },
+              "warning": {
+                "backgroundColor": "transparent",
+                "borderColor": "#FFC107",
+                "textColor": "#FFC107",
+                "iconTintColor": "#FFC107",
+                "state": {
+                  "active": {
+                    "backgroundColor": "transparent",
+                    "borderColor": "#FFB300",
+                    "textColor": "#FFB300",
+                    "iconTintColor": "#FFB300"
+                  }
+                }
+              },
+              "danger": {
+                "backgroundColor": "transparent",
+                "borderColor": "#F44336",
+                "textColor": "#F44336",
+                "iconTintColor": "#F44336",
+                "state": {
+                  "active": {
+                    "backgroundColor": "transparent",
+                    "borderColor": "#E53935",
+                    "textColor": "#E53935",
+                    "iconTintColor": "#E53935"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ButtonGroup": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "buttonBorderRadius": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "filled": {
+            "default": true
+          },
+          "outline": {
+            "default": false
+          }
+        },
+        "variantGroups": {
+          "size": {
+            "tiny": {
+              "default": false
+            },
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            },
+            "giant": {
+              "default": false
+            }
+          }
+        },
+        "states": {}
+      },
+      "appearances": {
+        "filled": {
+          "mapping": {
+            "buttonBorderRadius": 6
+          },
+          "variantGroups": {
+            "size": {
+              "tiny": {},
+              "small": {},
+              "medium": {},
+              "large": {},
+              "giant": {}
+            }
+          }
+        },
+        "outline": {
+          "mapping": {}
+        }
+      }
+    },
+    "CheckBox": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "textFontSize": {
+            "type": "number"
+          },
+          "textFontWeight": {
+            "type": "string"
+          },
+          "textMarginLeft": {
+            "type": "number"
+          },
+          "selectWidth": {
+            "type": "number"
+          },
+          "selectHeight": {
+            "type": "number"
+          },
+          "selectBackgroundColor": {
+            "type": "string"
+          },
+          "highlightWidth": {
+            "type": "number"
+          },
+          "highlightHeight": {
+            "type": "number"
+          },
+          "highlightBorderRadius": {
+            "type": "number"
+          },
+          "highlightBackgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "error": {
+              "default": false
+            }
+          },
+          "size": {
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "checked": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "disabled": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 2,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "borderWidth": 2,
+            "borderRadius": 4,
+            "borderColor": "gray-primary",
+            "backgroundColor": "gray-light",
+            "textColor": "text-primary",
+            "textFontWeight": "500",
+            "selectBackgroundColor": "transparent",
+            "highlightBorderRadius": 8,
+            "highlightBackgroundColor": "transparent",
+            "state": {
+              "active": {
+                "borderColor": "gray-dark",
+                "highlightBackgroundColor": "gray-light"
+              },
+              "checked": {
+                "borderColor": "transparent",
+                "backgroundColor": "blue-primary",
+                "selectBackgroundColor": "#FFFFFF"
+              },
+              "disabled": {
+                "borderColor": "gray-light",
+                "backgroundColor": "#F1F5F5",
+                "textColor": "gray-300"
+              },
+              "checked.active": {
+                "borderColor": "blue-dark"
+              },
+              "checked.disabled": {
+                "borderColor": "transparent",
+                "backgroundColor": "gray-primary"
+              }
+            }
+          },
+          "variantGroups": {
+            "status": {
+              "error": {
+                "borderColor": "pink-primary",
+                "backgroundColor": "#FFC9D9",
+                "state": {
+                  "active": {
+                    "borderColor": "pink-primary"
+                  },
+                  "checked": {
+                    "borderColor": "pink-primary",
+                    "backgroundColor": "pink-primary"
+                  },
+                  "checked.active": {
+                    "borderColor": "pink-primary"
+                  }
+                }
+              }
+            },
+            "size": {
+              "small": {
+                "width": 24,
+                "height": 24,
+                "textMarginLeft": 10,
+                "textFontSize": 14,
+                "selectWidth": 12,
+                "selectHeight": 12,
+                "highlightWidth": 40,
+                "highlightHeight": 40
+              },
+              "medium": {
+                "width": 30,
+                "height": 30,
+                "textMarginLeft": 12,
+                "textFontSize": 16,
+                "selectWidth": 14,
+                "selectHeight": 14,
+                "highlightWidth": 50,
+                "highlightHeight": 50
+              },
+              "large": {
+                "width": 36,
+                "height": 36,
+                "textMarginLeft": 14,
+                "textFontSize": 18,
+                "selectWidth": 16,
+                "selectHeight": 16,
+                "highlightWidth": 60,
+                "highlightHeight": 60
+              }
+            }
+          }
+        }
+      }
+    },
+    "Input": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "paddingVertical": {
+            "type": "number"
+          },
+          "paddingHorizontal": {
+            "type": "number"
+          },
+          "minHeight": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "textMarginHorizontal": {
+            "type": "number"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconMarginHorizontal": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "primary": {
+              "default": true
+            },
+            "success": {
+              "default": false
+            },
+            "info": {
+              "default": false
+            },
+            "warning": {
+              "default": false
+            },
+            "error": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "disabled": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "focused": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "paddingVertical": 12,
+            "paddingHorizontal": 6,
+            "minHeight": 48,
+            "borderRadius": 6,
+            "borderWidth": 2,
+            "borderColor": "transparent",
+            "backgroundColor": "gray-100",
+            "textMarginHorizontal": 6,
+            "textColor": "gray-400",
+            "iconWidth": 24,
+            "iconHeight": 24,
+            "iconMarginHorizontal": 6,
+            "iconTintColor": "gray-400",
+            "state": {
+              "disabled": {
+                "backgroundColor": "gray-200",
+                "textColor": "gray-300",
+                "iconTintColor": "gray-300"
+              }
+            }
+          },
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "state": {
+                  "focused": {
+                    "borderColor": "blue-primary",
+                    "iconTintColor": "blue-primary"
+                  }
+                }
+              },
+              "success": {
+                "state": {
+                  "focused": {
+                    "borderColor": "#4CAF50",
+                    "iconTintColor": "#4CAF50"
+                  }
+                }
+              },
+              "info": {
+                "state": {
+                  "focused": {
+                    "borderColor": "#03A9F4",
+                    "iconTintColor": "#03A9F4"
+                  }
+                }
+              },
+              "warning": {
+                "state": {
+                  "focused": {
+                    "borderColor": "#FFC107",
+                    "iconTintColor": "#FFC107"
+                  }
+                }
+              },
+              "error": {
+                "state": {
+                  "focused": {
+                    "borderColor": "#F44336",
+                    "iconTintColor": "#F44336"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Layout": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "paddingHorizontal": {
+            "type": "number"
+          },
+          "paddingVertical": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "borderColor": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderWidth": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+            "backgroundColor": "transparent",
+            "borderColor": "blue-primary",
+            "borderRadius": 3,
+            "borderWidth": 1
+          }
+        }
+      }
+    },
+    "List": {
+      "meta": {
+        "scope": "all",
+        "parameters": {},
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {}
+        }
+      }
+    },
+    "ListItem": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "paddingVertical": {
+            "type": "number"
+          },
+          "paddingHorizontal": {
+            "type": "number"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconMarginHorizontal": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          },
+          "titleColor": {
+            "type": "string"
+          },
+          "titleFontSize": {
+            "type": "number"
+          },
+          "titleFontWeight": {
+            "type": "string"
+          },
+          "titleMarginHorizontal": {
+            "type": "number"
+          },
+          "titleMarginVertical": {
+            "type": "number"
+          },
+          "descriptionColor": {
+            "type": "string"
+          },
+          "descriptionFontSize": {
+            "type": "number"
+          },
+          "descriptionMarginHorizontal": {
+            "type": "number"
+          },
+          "descriptionMarginVertical": {
+            "type": "number"
+          },
+          "accessoryWidth": {
+            "type": "number"
+          },
+          "accessoryHeight": {
+            "type": "number"
+          },
+          "accessoryMarginHorizontal": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {
+          "active": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "paddingVertical": 12,
+            "paddingHorizontal": 6,
+            "iconWidth": 48,
+            "iconHeight": 48,
+            "iconMarginHorizontal": 6,
+            "iconTintColor": "gray-primary",
+            "titleColor": "text-primary",
+            "titleFontSize": 20,
+            "titleFontWeight": "600",
+            "titleMarginHorizontal": 6,
+            "titleMarginVertical": 4,
+            "descriptionColor": "gray-400",
+            "descriptionFontSize": 14,
+            "descriptionMarginHorizontal": 6,
+            "descriptionMarginVertical": 4,
+            "accessoryWidth": 48,
+            "accessoryHeight": 48,
+            "accessoryMarginHorizontal": 6,
+            "state": {
+              "active": {
+                "backgroundColor": "gray-100"
+              }
+            }
+          }
+        }
+      }
+    },
+    "OverflowMenu": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "borderRadius": {
+            "type": "number"
+          },
+          "itemBorderRadius": {
+            "type": "number"
+          },
+          "popoverBackgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "states": {},
+        "variantGroups": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "borderRadius": 6,
+            "itemBorderRadius": 6,
+            "popoverBackgroundColor": "white"
+          }
+        }
+      }
+    },
+    "OverflowMenuItem": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "minHeight": {
+            "type": "number"
+          },
+          "padding": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "textFontWeight": {
+            "type": "string"
+          },
+          "textFontSize": {
+            "type": "number"
+          },
+          "textMarginHorizontal": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconMarginHorizontal": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "size": {
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "disabled": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "backgroundColor": "white",
+            "borderColor": "gray-light",
+            "borderWidth": 1.2,
+            "textColor": "blue-pitch-dark",
+            "textFontWeight": "600",
+            "iconTintColor": "blue-pitch-dark",
+            "state": {
+              "disabled": {
+                "backgroundColor": "gray-dark"
+              },
+              "active": {
+                "textColor": "blue-primary",
+                "iconTintColor": "blue-primary"
+              }
+            }
+          },
+          "variantGroups": {
+            "size": {
+              "small": {
+                "minHeight": 40,
+                "padding": 10,
+                "textFontSize": 13,
+                "textMarginHorizontal": 6,
+                "iconWidth": 20,
+                "iconHeight": 20,
+                "iconMarginHorizontal": 6
+              },
+              "medium": {
+                "minHeight": 48,
+                "padding": 12,
+                "textFontSize": 15,
+                "textMarginHorizontal": 8,
+                "iconWidth": 24,
+                "iconHeight": 24,
+                "iconMarginHorizontal": 8
+              },
+              "large": {
+                "minHeight": 56,
+                "padding": 14,
+                "textFontSize": 17,
+                "textMarginHorizontal": 10,
+                "iconWidth": 28,
+                "iconHeight": 28,
+                "iconMarginHorizontal": 10
+              }
+            }
+          }
+        }
+      }
+    },
+    "Popover": {
+      "meta": {
+        "scope": "all",
+        "parameters": {},
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {}
+        }
+      }
+    },
+    "Radio": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "textMarginLeft": {
+            "type": "number"
+          },
+          "textFontSize": {
+            "type": "number"
+          },
+          "textFontWeight": {
+            "type": "string"
+          },
+          "selectWidth": {
+            "type": "number"
+          },
+          "selectHeight": {
+            "type": "number"
+          },
+          "selectBorderRadius": {
+            "type": "number"
+          },
+          "selectBackgroundColor": {
+            "type": "string"
+          },
+          "highlightWidth": {
+            "type": "number"
+          },
+          "highlightHeight": {
+            "type": "number"
+          },
+          "highlightBorderRadius": {
+            "type": "number"
+          },
+          "highlightBackgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "error": {
+              "default": false
+            }
+          },
+          "size": {
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "checked": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "disabled": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 2,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "borderWidth": 2,
+            "borderColor": "gray-primary",
+            "textColor": "text-primary",
+            "textFontWeight": "500",
+            "selectBackgroundColor": "transparent",
+            "highlightBackgroundColor": "transparent",
+            "state": {
+              "active": {
+                "borderColor": "gray-dark",
+                "highlightBackgroundColor": "gray-light"
+              },
+              "checked": {
+                "borderColor": "blue-primary",
+                "selectBackgroundColor": "blue-primary"
+              },
+              "disabled": {
+                "borderColor": "gray-light",
+                "textColor": "gray-300"
+              },
+              "checked.active": {
+                "borderColor": "blue-dark"
+              },
+              "checked.disabled": {
+                "selectBackgroundColor": "gray-primary"
+              }
+            }
+          },
+          "variantGroups": {
+            "status": {
+              "error": {
+                "borderColor": "pink-primary",
+                "state": {
+                  "checked": {
+                    "borderColor": "pink-primary",
+                    "selectBackgroundColor": "pink-primary"
+                  },
+                  "checked.active": {
+                    "borderColor": "pink-primary"
+                  }
+                }
+              }
+            },
+            "size": {
+              "small": {
+                "width": 30,
+                "height": 30,
+                "borderRadius": 15,
+                "textMarginLeft": 10,
+                "textFontSize": 14,
+                "selectWidth": 20,
+                "selectHeight": 20,
+                "selectBorderRadius": 10,
+                "highlightWidth": 50,
+                "highlightHeight": 50,
+                "highlightBorderRadius": 25
+              },
+              "medium": {
+                "width": 36,
+                "height": 36,
+                "borderRadius": 18,
+                "textMarginLeft": 12,
+                "textFontSize": 16,
+                "selectWidth": 24,
+                "selectHeight": 24,
+                "selectBorderRadius": 12,
+                "highlightWidth": 60,
+                "highlightHeight": 60,
+                "highlightBorderRadius": 30
+              },
+              "large": {
+                "width": 42,
+                "height": 42,
+                "borderRadius": 21,
+                "textMarginLeft": 14,
+                "textFontSize": 18,
+                "selectWidth": 28,
+                "selectHeight": 28,
+                "selectBorderRadius": 14,
+                "highlightWidth": 70,
+                "highlightHeight": 70,
+                "highlightBorderRadius": 35
+              }
+            }
+          }
+        }
+      }
+    },
+    "RadioGroup": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "padding": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "padding": 0
+          }
+        }
+      }
+    },
+    "Tab": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "textColor": {
+            "type": "string"
+          },
+          "textFontWeight": {
+            "type": "number"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {
+          "selected": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "textColor": "gray-dark",
+            "textFontWeight": "600",
+            "iconWidth": 20,
+            "iconHeight": 20,
+            "iconTintColor": "gray-dark",
+            "state": {
+              "selected": {
+                "textColor": "blue-primary",
+                "iconTintColor": "blue-primary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "TabBar": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "height": {
+            "type": "number"
+          },
+          "indicatorHeight": {
+            "type": "number"
+          },
+          "indicatorBorderRadius": {
+            "type": "number"
+          },
+          "indicatorBackgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "height": 42,
+            "indicatorHeight": 4,
+            "indicatorBorderRadius": 2,
+            "indicatorBackgroundColor": "blue-primary"
+          }
+        }
+      }
+    },
+    "Text": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "color": {
+            "type": "string"
+          },
+          "fontSize": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "primary": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "category": {
+            "h1": {
+              "default": false
+            },
+            "h2": {
+              "default": false
+            },
+            "h3": {
+              "default": false
+            },
+            "h4": {
+              "default": false
+            },
+            "h5": {
+              "default": false
+            },
+            "h6": {
+              "default": false
+            },
+            "body": {
+              "default": true
+            }
+          }
+        },
+        "states": {}
+      },
+      "appearances": {
+        "primary": {
+          "mapping": {
+            "color": "text-primary"
+          },
+          "variantGroups": {
+            "category": {
+              "h1": {
+                "fontSize": 64
+              },
+              "h2": {
+                "fontSize": 40
+              },
+              "h3": {
+                "fontSize": 32
+              },
+              "h4": {
+                "fontSize": 24
+              },
+              "h5": {
+                "fontSize": 16
+              },
+              "h6": {
+                "fontSize": 14
+              },
+              "body": {
+                "fontSize": 16
+              }
+            }
+          }
+        }
+      }
+    },
+    "Toggle": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "offsetValue": {
+            "type": "number"
+          },
+          "tintBackgroundColor": {
+            "type": "string"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "thumbBackgroundColor": {
+            "type": "string"
+          },
+          "highlightBackgroundColor": {
+            "type": "string"
+          },
+          "highlightWidth": {
+            "type": "number"
+          },
+          "highlightHeight": {
+            "type": "number"
+          },
+          "highlightBorderRadius": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "primary": {
+              "default": true
+            },
+            "success": {
+              "default": false
+            },
+            "info": {
+              "default": false
+            },
+            "warning": {
+              "default": false
+            },
+            "danger": {
+              "default": false
+            }
+          },
+          "size": {
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "checked": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "disabled": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "offsetValue": 20,
+            "thumbBackgroundColor": "#ffffff",
+            "highlightBackgroundColor": "transparent",
+            "state": {
+              "active": {
+                "highlightBackgroundColor": "#e5e7ea"
+              },
+              "disabled": {
+                "borderColor": "gray-dark",
+                "tintBackgroundColor": "gray-light"
+              }
+            }
+          },
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "tintBackgroundColor": "#d9e4ff",
+                "borderColor": "blue-primary"
+              },
+              "success": {
+                "tintBackgroundColor": "#b3ffd6",
+                "borderColor": "#00e096"
+              },
+              "info": {
+                "tintBackgroundColor": "#c7e2ff",
+                "borderColor": "#0095ff"
+              },
+              "warning": {
+                "tintBackgroundColor": "#fff1c2",
+                "borderColor": "#ffaa00"
+              },
+              "danger": {
+                "tintBackgroundColor": "#FFD6D9",
+                "borderColor": "pink-primary"
+              }
+            },
+            "size": {
+              "small": {
+                "width": 38,
+                "height": 22,
+                "borderRadius": 11,
+                "borderWidth": 0.5,
+                "highlightWidth": 48,
+                "highlightHeight": 32,
+                "highlightBorderRadius": 16
+              },
+              "medium": {
+                "width": 52,
+                "height": 32,
+                "borderRadius": 16,
+                "borderWidth": 1.5,
+                "highlightWidth": 62,
+                "highlightHeight": 42,
+                "highlightBorderRadius": 21
+              },
+              "large": {
+                "width": 72,
+                "height": 42,
+                "borderRadius": 21,
+                "borderWidth": 2,
+                "highlightWidth": 82,
+                "highlightHeight": 52,
+                "highlightBorderRadius": 26
+              }
+            }
+          }
+        }
+      }
+    },
+    "Tooltip": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "popoverPaddingHorizontal": {
+            "type": "number"
+          },
+          "popoverPaddingVertical": {
+            "type": "number"
+          },
+          "popoverBorderRadius": {
+            "type": "number"
+          },
+          "popoverBackgroundColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "popoverPaddingHorizontal": 8,
+            "popoverPaddingVertical": 4,
+            "popoverBorderRadius": 8,
+            "popoverBackgroundColor": "#0D1C2F",
+            "textColor": "text-primary-inverse"
+          }
+        }
+      }
+    },
+    "TopNavigationBar": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "height": {
+            "type": "number"
+          },
+          "paddingTop": {
+            "type": "number"
+          },
+          "paddingBottom": {
+            "type": "number"
+          },
+          "paddingHorizontal": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "textAlign": {
+            "type": "string"
+          },
+          "titleColor": {
+            "type": "string"
+          },
+          "titleFontSize": {
+            "type": "number"
+          },
+          "titleFontWeight": {
+            "type": "string"
+          },
+          "subtitleColor": {
+            "type": "string"
+          },
+          "subtitleFontSize": {
+            "type": "number"
+          },
+          "subtitleFontWeight": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          },
+          "titleCentered": {
+            "default": false
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "height": 46,
+            "paddingTop": 4,
+            "paddingBottom": 12,
+            "paddingHorizontal": 16,
+            "backgroundColor": "blue-primary",
+            "titleColor": "text-primary-inverse",
+            "titleFontSize": 16,
+            "titleFontWeight": "600",
+            "subtitleColor": "text-primary-inverse",
+            "subtitleFontSize": 12,
+            "subtitleFontWeight": "400",
+            "textAlign": "start"
+          }
+        },
+        "titleCentered": {
+          "mapping": {
+            "textAlign": "center"
+          }
+        }
+      }
+    },
+    "TopNavigationBarAction": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "marginRight": {
+            "type": "number"
+          },
+          "tintColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "width": 25,
+            "height": 25,
+            "marginRight": 8,
+            "tintColor": "white"
+          }
+        }
+      }
+    }
+  }
+}

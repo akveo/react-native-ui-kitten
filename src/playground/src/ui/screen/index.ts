@@ -1,4 +1,5 @@
 export { AvatarScreen } from './avatar.component';
+export { BottomNavigationScreen } from './bottomNavigation.component';
 export { ButtonScreen } from './button.component';
 export { ButtonGroupScreen } from './buttonGroup.component';
 export { CheckBoxScreen } from './checkbox.component';
@@ -16,7 +17,6 @@ export { TooltipScreen } from './tooltip.component';
 export { TextScreen } from './text.component';
 export { ToggleScreen } from './toggle.component';
 export { ViewPagerScreen } from './viewPager.component';
-export { TabNavigatorScreen } from './tabNavigator.component';
 export { TopNavigationBarScreen } from './topNavigationBar.component';
 export { ModalScreen } from './modal.component';
 export { OverflowMenuScreen } from './overflowMenu.component';

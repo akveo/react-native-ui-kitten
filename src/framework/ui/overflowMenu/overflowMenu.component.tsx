@@ -18,7 +18,7 @@ import {
   Popover as PopoverComponent,
   Props as PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../service/type';
+import { Omit } from '../common/type';
 
 type MenuItemElement = React.ReactElement<OverflowMenuItemProps>;
 
@@ -29,9 +29,8 @@ interface OverflowMenuProps {
   onSelect?: (event: GestureResponderEvent, index: number) => void;
 }
 
-const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
-const OverflowMenuItem =
-  styled<OverflowMenuItemComponent, OverflowMenuItemProps>(OverflowMenuItemComponent);
+const Popover = styled<PopoverProps>(PopoverComponent);
+const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
 
 export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverProps, 'content'>;
 

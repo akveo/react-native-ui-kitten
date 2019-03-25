@@ -29,6 +29,7 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
     icon={[Function]}
     onEndEditing={[Function]}
     onFocus={[Function]}
+    status="primary"
     style={
       Array [
         Object {
@@ -52,6 +53,7 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
     theme={
       Object {
         "blue-dark": "#2541CC",
+        "blue-pitch-dark": "#0D1C2E",
         "blue-primary": "#3366FF",
         "gray-100": "#f7f8fa",
         "gray-200": "#edf0f5",
@@ -114,6 +116,7 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
     editable={true}
     onEndEditing={[Function]}
     onFocus={[Function]}
+    status="primary"
     style={
       Array [
         Object {
@@ -137,6 +140,7 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
     theme={
       Object {
         "blue-dark": "#2541CC",
+        "blue-pitch-dark": "#0D1C2E",
         "blue-primary": "#3366FF",
         "gray-100": "#f7f8fa",
         "gray-200": "#edf0f5",

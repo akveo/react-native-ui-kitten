@@ -3,6 +3,7 @@ import {
   GestureResponderEvent,
   Image,
   ImageProps,
+  ImageSourcePropType,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -14,8 +15,8 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -26,32 +27,44 @@ import {
   ListItem as ListItemComponent,
   Props as ListItemProps,
 } from './listItem.component';
-import * as config from './list.spec.config';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const List = styled<ListComponent, ListProps>(ListComponent);
-const ListItem = styled<ListItemComponent, ListItemProps>(ListItemComponent);
+const List = styled<ListProps>(ListComponent);
+const ListItem = styled<ListItemProps>(ListItemComponent);
 
 const data: any[] = Array(8);
 
-const Mock = (props?: ListProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <List {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: ListProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <List {...props} />
+    </ApplicationProvider>
+  );
+};
 
-const ItemMock = (props?: ListItemProps): React.ReactElement<ListItemProps> => (
-  <ListItem {...props} />
-);
+const ItemMock = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+  return (
+    <ListItem {...props} />
+  );
+};
 
 describe('@list: component checks', () => {
 
   it('* renders proper amount of data', () => {
-    const item = () => (
-      <ItemMock title='Title'/>
-    );
+    const item = () => {
+      return (
+        <ItemMock title='Title'/>
+      );
+    };
 
     const component: RenderAPI = render(
-      <Mock data={data} renderItem={item}/>,
+      <Mock
+        data={data}
+        renderItem={item}
+      />,
     );
 
     const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
@@ -63,13 +76,20 @@ describe('@list: component checks', () => {
 
 describe('@list-item: template matches snapshot', () => {
 
+  const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+
   it('* title', () => {
-    const item = () => (
-      <ItemMock title='Title'/>
-    );
+    const item = () => {
+      return (
+        <ItemMock title='Title'/>
+      );
+    };
 
     const component: RenderAPI = render(
-      <Mock data={data} renderItem={item}/>,
+      <Mock
+        data={data}
+        renderItem={item}
+      />,
     );
 
     const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
@@ -79,12 +99,17 @@ describe('@list-item: template matches snapshot', () => {
   });
 
   it('* description', () => {
-    const item = () => (
-      <ItemMock title='Title'/>
-    );
+    const item = () => {
+      return (
+        <ItemMock title='Title'/>
+      );
+    };
 
     const component: RenderAPI = render(
-      <Mock data={data} renderItem={item}/>,
+      <Mock
+        data={data}
+        renderItem={item}
+      />,
     );
 
     const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
@@ -94,20 +119,30 @@ describe('@list-item: template matches snapshot', () => {
   });
 
   it('* with icon', () => {
-    const item = () => (
-      <ItemMock
-        title='Title'
-        description='Description'
-        icon={icon}
-      />
-    );
+    const item = () => {
+      return (
+        <ItemMock
+          title='Title'
+          description='Description'
+          icon={icon}
+        />
+      );
+    };
 
-    const icon = (style: StyleType): React.ReactElement<ImageProps> => (
-      <Image style={style} source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
-    );
+    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
+      return (
+        <Image
+          style={style}
+          source={iconSource}
+        />
+      );
+    };
 
     const component: RenderAPI = render(
-      <Mock data={data} renderItem={item}/>,
+      <Mock
+        data={data}
+        renderItem={item}
+      />,
     );
 
     const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
@@ -117,20 +152,30 @@ describe('@list-item: template matches snapshot', () => {
   });
 
   it('* with accessory', () => {
-    const item = () => (
-      <ItemMock
-        title='Title'
-        description='Description'
-        accessory={accessory}
-      />
-    );
+    const item = () => {
+      return (
+        <ItemMock
+          title='Title'
+          description='Description'
+          accessory={accessory}
+        />
+      );
+    };
 
-    const accessory = (style: StyleType): React.ReactElement<ImageProps> => (
-      <Image style={style} source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
-    );
+    const accessory = (style: StyleType): React.ReactElement<ImageProps> => {
+      return (
+        <Image
+          style={style}
+          source={iconSource}
+        />
+      );
+    };
 
     const component: RenderAPI = render(
-      <Mock data={data} renderItem={item}/>,
+      <Mock
+        data={data}
+        renderItem={item}
+      />,
     );
 
     const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
@@ -150,15 +195,20 @@ describe('@list-item: component checks', () => {
       expect(index).toEqual(pressIndex);
     });
 
-    const item = () => (
-      <ItemMock
-        title='Title'
-        onPress={onPress}
-      />
-    );
+    const item = () => {
+      return (
+        <ItemMock
+          title='Title'
+          onPress={onPress}
+        />
+      );
+    };
 
     const component: RenderAPI = render(
-      <Mock data={data} renderItem={item}/>,
+      <Mock
+        data={data}
+        renderItem={item}
+      />,
     );
 
     const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);

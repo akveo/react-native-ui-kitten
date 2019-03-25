@@ -22,7 +22,7 @@ interface TabProps {
   onSelect?: (selected: boolean) => void;
 }
 
-const Text = styled<TextComponent, TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
 

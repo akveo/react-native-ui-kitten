@@ -7,25 +7,30 @@ import {
   shallow,
   RenderAPI,
 } from 'react-native-testing-library';
+import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   Radio as RadioComponent,
   Props as RadioProps,
 } from './radio.component';
-import * as config from './radio.spec.config';
-import { ReactTestInstance } from 'react-test-renderer';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
+const Radio = styled<RadioProps>(RadioComponent);
 
-const Mock = (props?: RadioProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <Radio {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: RadioProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <Radio {...props} />
+    </ApplicationProvider>
+  );
+};
 
 const renderComponent = (props?: RadioProps): RenderAPI => {
   return render(

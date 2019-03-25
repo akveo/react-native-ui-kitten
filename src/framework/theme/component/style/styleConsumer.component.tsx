@@ -1,27 +1,14 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ThemedStyleType } from 'eva/packages/types';
-import {
-  MappingContext,
-  MappingContextValueType,
-} from '../mapping';
-import {
-  ThemeContext,
-  ThemeContextValueType,
-} from '../theme';
-import {
-  createThemedStyle,
-  StyleConsumerService,
-} from '../../service/style';
+import { ThemeStyleType } from 'eva/packages/types';
+import { MappingContext } from '../mapping';
+import { ThemeContext } from '../theme';
+import { StyleConsumerService } from '../../service/style';
 import {
   Interaction,
   ThemeType,
   StyleType,
 } from '../../type';
-
-interface PrivateProps<T> {
-  forwardedRef: React.RefObject<T>;
-}
 
 export interface Props {
   appearance?: string;
@@ -30,88 +17,100 @@ export interface Props {
   dispatch?: (interaction: Interaction[]) => void;
 }
 
+interface PrivateProps<T> {
+  forwardedRef?: React.RefObject<T>;
+}
+
 interface State {
   interaction: Interaction[];
 }
 
-export const styled = <T extends React.Component, P extends object>(Component: React.ComponentClass<P>) => {
+export interface Context {
+  style: ThemeStyleType;
+  theme: ThemeType;
+}
 
-  type ComponentProps = Props & P;
-  type WrapperProps = PrivateProps<T> & ComponentProps;
+export const styled = <P extends object>(Component: React.ComponentClass<P>) => {
 
-  class Wrapper extends React.Component<WrapperProps, State> {
+  type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
+  type WrappedProps = P & Props;
+  type WrappingElement = React.ReactElement<WrappingProps>;
+  type WrappedElement = React.ReactElement<WrappedProps>;
+  type WrappedElementInstance = React.ReactInstance;
 
-    private service: StyleConsumerService = new StyleConsumerService();
+  class Wrapper extends React.Component<WrappingProps, State> {
 
     public state: State = {
       interaction: [],
     };
 
+    private init: boolean = false;
+
+    // Yes. This is not static because it is calculated once we got some meta from style context.
+    private defaultProps: Props;
+    private service: StyleConsumerService;
+
+    private onInit = (context: Context) => {
+      const displayName: string = Component.displayName || Component.name;
+
+      this.service = new StyleConsumerService(displayName, context);
+      this.defaultProps = this.service.createDefaultProps();
+
+      this.init = true;
+    };
+
     private onDispatch = (interaction: Interaction[]) => {
-      this.setState({
-        interaction: interaction,
-      });
+      this.setState({ interaction });
     };
 
-    private createConsumerProps = (mappingValue: MappingContextValueType,
-                                   themeValue: ThemeContextValueType,
-                                   derivedProps: P & Props): Props => {
+    private withStyledProps = (source: P, context: Context): WrappedProps => {
+      const { interaction } = this.state;
 
-      const componentName: string = Component.displayName || Component.name;
+      const props: WrappingProps = { ...this.defaultProps, ...source };
 
-      const props: Props = this.service.withDefaultProps(mappingValue.mapping, componentName, derivedProps);
-
-      const styleMapping: ThemedStyleType = this.service.getComponentStyleMapping(
-        mappingValue.mapping,
-        mappingValue.styles,
-        componentName,
-        props,
-        this.state.interaction,
-      );
-
-      const appearance: string = props.appearance;
-      const style: StyleType = createThemedStyle(styleMapping, themeValue);
-
-      return {
-        appearance: appearance,
-        theme: themeValue,
-        themedStyle: style,
-        dispatch: this.onDispatch,
-      };
+      return this.service.withStyledProps(props, context, interaction);
     };
 
-    private createWrappedComponent = (mapping: MappingContextValueType, theme: ThemeType): React.ReactElement<P> => {
-      // TS issue: with spreading Generics https://github.com/Microsoft/TypeScript/issues/15792
-      const { forwardedRef, ...restProps } = this.props as PrivateProps<T>;
+    private renderWrappedElement = (context: Context): WrappedElement => {
+      if (!this.init) {
+        this.onInit(context);
+      }
 
-      const derivedProps: P & Props = restProps as P & Props;
-      const consumerProps: Props = this.createConsumerProps(mapping, theme, derivedProps);
+      const { forwardedRef, ...restProps } = this.props;
+      const props: P & Props = this.withStyledProps(restProps as P, context);
 
       return (
         <Component
+          {...props}
           ref={forwardedRef}
-          {...consumerProps}
-          {...derivedProps}
+          dispatch={this.onDispatch}
         />
       );
     };
 
     public render(): React.ReactNode {
+      const StyledElement = this.renderWrappedElement;
+
       return (
-        <MappingContext.Consumer>{(mapping: MappingContextValueType): React.ReactElement<P> => (
-          <ThemeContext.Consumer>{(theme: ThemeContextValueType): React.ReactElement<P> => {
-            return this.createWrappedComponent(mapping, theme);
-          }}</ThemeContext.Consumer>
+        <MappingContext.Consumer>{(styles: ThemeStyleType): WrappedElement => (
+          <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => (
+            <StyledElement style={styles} theme={theme}/>
+          )}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
       );
     }
   }
 
-  const createComponent = (props: WrapperProps, ref: T): React.ReactElement<WrapperProps> => (
-    <Wrapper {...props} forwardedRef={ref}/>
-  );
+  const WrappingElement = (props: WrappingProps, ref: WrappedElementInstance): WrappingElement => {
+    return (
+      <Wrapper
+        {...props}
+        forwardedRef={ref}
+      />
+    );
+  };
 
-  const StyledComponent = React.forwardRef<T, P>(createComponent as any);
+  const StyledComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
 
   StyledComponent.displayName = Component.displayName || Component.name;
   hoistNonReactStatics(StyledComponent, Component);

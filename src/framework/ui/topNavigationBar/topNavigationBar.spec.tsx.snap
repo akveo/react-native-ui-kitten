@@ -1,417 +1,134 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@top-navigation-bar/action * action/is last item check (false) 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-    }
-  }
-  styles={Object {}}
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-      "text-primary-inverse": "#ffffff",
-    }
-  }
+<TouchableWithoutFeedback
+  onPress={[Function]}
 >
-  <ForwardRef(createComponent)
+  <View
+    appearance="default"
+    dispatch={[Function]}
     icon={[Function]}
     isLastItem={false}
-  />
-</StyleProvider>
+    style={
+      Object {
+        "flex": 1,
+        "marginRight": 8,
+      }
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-pitch-dark": "#0D1C2E",
+        "blue-primary": "#3366FF",
+        "gray-100": "#f7f8fa",
+        "gray-200": "#edf0f5",
+        "gray-300": "#c8cedb",
+        "gray-400": "#a6aebd",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+        "text-primary": "#000000",
+        "text-primary-inverse": "#ffffff",
+      }
+    }
+    themedStyle={
+      Object {
+        "height": 25,
+        "marginRight": 8,
+        "tintColor": "white",
+        "width": 25,
+      }
+    }
+  >
+    <Component
+      source={
+        Object {
+          "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+        }
+      }
+      style={
+        Object {
+          "height": 25,
+          "tintColor": "white",
+          "width": 25,
+        }
+      }
+    />
+  </View>
+</TouchableWithoutFeedback>
 `;
 
 exports[`@top-navigation-bar/action * action/is last item check (true) 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-    }
-  }
-  styles={Object {}}
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-      "text-primary-inverse": "#ffffff",
-    }
-  }
+<TouchableWithoutFeedback
+  onPress={[Function]}
 >
-  <ForwardRef(createComponent)
+  <View
+    appearance="default"
+    dispatch={[Function]}
     icon={[Function]}
     isLastItem={true}
-  />
-</StyleProvider>
+    style={
+      Object {
+        "flex": 1,
+        "marginRight": 0,
+      }
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-pitch-dark": "#0D1C2E",
+        "blue-primary": "#3366FF",
+        "gray-100": "#f7f8fa",
+        "gray-200": "#edf0f5",
+        "gray-300": "#c8cedb",
+        "gray-400": "#a6aebd",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+        "text-primary": "#000000",
+        "text-primary-inverse": "#ffffff",
+      }
+    }
+    themedStyle={
+      Object {
+        "height": 25,
+        "marginRight": 8,
+        "tintColor": "white",
+        "width": 25,
+      }
+    }
+  >
+    <Component
+      source={
+        Object {
+          "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+        }
+      }
+      style={
+        Object {
+          "height": 25,
+          "tintColor": "white",
+          "width": 25,
+        }
+      }
+    />
+  </View>
+</TouchableWithoutFeedback>
 `;
 
 exports[`@top-navigation-bar/action * action/on press check 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-    }
-  }
-  styles={Object {}}
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-      "text-primary-inverse": "#ffffff",
-    }
-  }
+<TouchableWithoutFeedback
+  onPress={[Function]}
 >
-  <ForwardRef(createComponent)
+  <View
+    appearance="default"
+    dispatch={[Function]}
     icon={[Function]}
+    isLastItem={false}
     onPress={
       [MockFunction] {
         "calls": Array [
@@ -425,725 +142,512 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
         ],
       }
     }
-  />
-</StyleProvider>
+    style={
+      Object {
+        "flex": 1,
+        "marginRight": 8,
+      }
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-pitch-dark": "#0D1C2E",
+        "blue-primary": "#3366FF",
+        "gray-100": "#f7f8fa",
+        "gray-200": "#edf0f5",
+        "gray-300": "#c8cedb",
+        "gray-400": "#a6aebd",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+        "text-primary": "#000000",
+        "text-primary-inverse": "#ffffff",
+      }
+    }
+    themedStyle={
+      Object {
+        "height": 25,
+        "marginRight": 8,
+        "tintColor": "white",
+        "width": 25,
+      }
+    }
+  >
+    <Component
+      source={
+        Object {
+          "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+        }
+      }
+      style={
+        Object {
+          "height": 25,
+          "tintColor": "white",
+          "width": 25,
+        }
+      }
+    />
+  </View>
+</TouchableWithoutFeedback>
 `;
 
 exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
-      },
-    }
-  }
-  styles={Object {}}
-  theme={
-    Object {
-      "blue-dark": "#2541CC",
-      "blue-primary": "#3366FF",
-      "gray-dark": "#8992A3",
-      "gray-highlight": "#EDF0F5",
-      "gray-light": "#DDE1EB",
-      "gray-primary": "#A6AEBD",
-      "pink-primary": "#FF3D71",
-      "text-primary-inverse": "#ffffff",
-    }
-  }
+<TouchableWithoutFeedback
+  onPress={[Function]}
 >
-  <ForwardRef(createComponent)
+  <View
+    appearance="default"
+    dispatch={[Function]}
     icon={[Function]}
-  />
-</StyleProvider>
+    isLastItem={false}
+    style={
+      Object {
+        "flex": 1,
+        "marginRight": 8,
+      }
+    }
+    theme={
+      Object {
+        "blue-dark": "#2541CC",
+        "blue-pitch-dark": "#0D1C2E",
+        "blue-primary": "#3366FF",
+        "gray-100": "#f7f8fa",
+        "gray-200": "#edf0f5",
+        "gray-300": "#c8cedb",
+        "gray-400": "#a6aebd",
+        "gray-dark": "#8992A3",
+        "gray-highlight": "#EDF0F5",
+        "gray-light": "#DDE1EB",
+        "gray-primary": "#A6AEBD",
+        "pink-primary": "#FF3D71",
+        "text-primary": "#000000",
+        "text-primary-inverse": "#ffffff",
+      }
+    }
+    themedStyle={
+      Object {
+        "height": 25,
+        "marginRight": 8,
+        "tintColor": "white",
+        "width": 25,
+      }
+    }
+  >
+    <Component
+      source={
+        Object {
+          "uri": "https://akveo.github.io/eva-icons/fill/png/128/star.png",
+        }
+      }
+      style={
+        Object {
+          "height": 25,
+          "tintColor": "white",
+          "width": 25,
+        }
+      }
+    />
+  </View>
+</TouchableWithoutFeedback>
 `;
 
 exports[`@top-navigation-bar/action * bar/appearance: title-centered 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+<View
+  appearance="titleCentered"
+  dispatch={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "textAlign": "center",
       },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+      Object {
+        "backgroundColor": "#3366FF",
+        "height": 46,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 4,
       },
-    }
+      undefined,
+    ]
   }
-  styles={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
       "text-primary-inverse": "#ffffff",
     }
   }
 >
-  <ForwardRef(createComponent)
-    appearance="title-centered"
-    title="Test"
+  <View
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        },
+      ]
+    }
   />
-</StyleProvider>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 3,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontSize": 16,
+          "fontWeight": "600",
+        }
+      }
+    >
+      Test
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+        },
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+  />
+</View>
 `;
 
 exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "textAlign": "center",
       },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+      Object {
+        "backgroundColor": "#3366FF",
+        "height": 46,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 4,
       },
-    }
+      undefined,
+    ]
   }
-  styles={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
       "text-primary-inverse": "#ffffff",
     }
   }
 >
-  <ForwardRef(createComponent)
-    subtitle="Subtitle"
-    title="Test"
+  <View
+    style={
+      Array [
+        null,
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        },
+      ]
+    }
   />
-</StyleProvider>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "paddingHorizontal": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontSize": 16,
+          "fontWeight": "600",
+        }
+      }
+    >
+      Test
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontSize": 12,
+          "fontWeight": "400",
+        }
+      }
+    >
+      Subtitle
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+        },
+        null,
+      ]
+    }
+  />
+</View>
 `;
 
 exports[`@top-navigation-bar/action * bar/title 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "textAlign": "center",
       },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+      Object {
+        "backgroundColor": "#3366FF",
+        "height": 46,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 4,
       },
-    }
+      undefined,
+    ]
   }
-  styles={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
       "text-primary-inverse": "#ffffff",
     }
   }
 >
-  <ForwardRef(createComponent)
-    title="Test"
+  <View
+    style={
+      Array [
+        null,
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        },
+      ]
+    }
   />
-</StyleProvider>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "paddingHorizontal": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontSize": 16,
+          "fontWeight": "600",
+        }
+      }
+    >
+      Test
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+        },
+        null,
+      ]
+    }
+  />
+</View>
 `;
 
 exports[`@top-navigation-bar/action * bar/with actions 1`] = `
-<StyleProvider
-  mapping={
-    Object {
-      "TopNavigationBar": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "backgroundColor": "blue-primary",
-              "height": 46,
-              "paddingBottom": 12,
-              "paddingHorizontal": 16,
-              "paddingTop": 4,
-              "subtitleColor": "text-primary-inverse",
-              "subtitleFontSize": 12,
-              "subtitleFontWeight": "400",
-              "textAlign": "start",
-              "titleColor": "text-primary-inverse",
-              "titleFontSize": 16,
-              "titleFontWeight": "600",
-            },
-          },
-          "titleCentered": Object {
-            "mapping": Object {
-              "textAlign": "center",
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-            "titleCentered": Object {
-              "default": false,
-            },
-          },
-          "parameters": Object {
-            "backgroundColor": Object {
-              "type": "string",
-            },
-            "height": Object {
-              "type": "number",
-            },
-            "paddingBottom": Object {
-              "type": "number",
-            },
-            "paddingHorizontal": Object {
-              "type": "number",
-            },
-            "paddingTop": Object {
-              "type": "number",
-            },
-            "subtitleColor": Object {
-              "type": "string",
-            },
-            "subtitleFontSize": Object {
-              "type": "number",
-            },
-            "subtitleFontWeight": Object {
-              "type": "string",
-            },
-            "textAlign": Object {
-              "type": "string",
-            },
-            "titleColor": Object {
-              "type": "string",
-            },
-            "titleFontSize": Object {
-              "type": "number",
-            },
-            "titleFontWeight": Object {
-              "type": "string",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+<View
+  appearance="default"
+  dispatch={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "textAlign": "center",
       },
-      "TopNavigationBarAction": Object {
-        "appearances": Object {
-          "default": Object {
-            "mapping": Object {
-              "height": 25,
-              "marginRight": 8,
-              "tintColor": "white",
-              "width": 25,
-            },
-          },
-        },
-        "meta": Object {
-          "appearances": Object {
-            "default": Object {
-              "default": true,
-            },
-          },
-          "parameters": Object {
-            "height": Object {
-              "type": "number",
-            },
-            "marginRight": Object {
-              "type": "number",
-            },
-            "tintColor": Object {
-              "type": "string",
-            },
-            "width": Object {
-              "type": "number",
-            },
-          },
-          "scope": "mobile",
-          "states": Object {},
-          "variantGroups": Object {},
-        },
+      Object {
+        "backgroundColor": "#3366FF",
+        "height": 46,
+        "paddingBottom": 12,
+        "paddingHorizontal": 16,
+        "paddingTop": 4,
       },
-    }
+      undefined,
+    ]
   }
-  styles={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "gray-100": "#f7f8fa",
+      "gray-200": "#edf0f5",
+      "gray-300": "#c8cedb",
+      "gray-400": "#a6aebd",
       "gray-dark": "#8992A3",
       "gray-highlight": "#EDF0F5",
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "text-primary": "#000000",
       "text-primary-inverse": "#ffffff",
     }
   }
 >
-  <ForwardRef(createComponent)
-    leftControl={
-      <ActionMock
-        icon={[Function]}
-        onPress={[MockFunction]}
-        testID="@top-navbar-left"
-      />
-    }
-    rightControls={
+  <View
+    style={
       Array [
-        <ActionMock
-          icon={[Function]}
-          onPress={[MockFunction]}
-          testID="@top-navbar-right-1"
-        />,
-        <ActionMock
-          icon={[Function]}
-          onPress={[MockFunction]}
-          testID="@top-navbar-right-2"
-        />,
-        <ActionMock
-          icon={[Function]}
-          onPress={[MockFunction]}
-          testID="@top-navbar-right-3"
-        />,
+        null,
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        },
       ]
     }
-    subtitle="Subtitle"
-    title="Test"
-  />
-</StyleProvider>
+  >
+    <ActionMock
+      icon={[Function]}
+      onPress={[MockFunction]}
+      testID="@top-navbar-left"
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "paddingHorizontal": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontSize": 16,
+          "fontWeight": "600",
+        }
+      }
+    >
+      Test
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontSize": 12,
+          "fontWeight": "400",
+        }
+      }
+    >
+      Subtitle
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+        },
+        null,
+      ]
+    }
+  >
+    <ActionMock
+      icon={[Function]}
+      isLastItem={false}
+      onPress={[MockFunction]}
+      testID="@top-navbar-right-1"
+    />
+    <ActionMock
+      icon={[Function]}
+      isLastItem={false}
+      onPress={[MockFunction]}
+      testID="@top-navbar-right-2"
+    />
+    <ActionMock
+      icon={[Function]}
+      isLastItem={true}
+      onPress={[MockFunction]}
+      testID="@top-navbar-right-3"
+    />
+  </View>
+</View>
 `;

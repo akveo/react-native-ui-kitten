@@ -4,7 +4,7 @@ import { ThemeType } from '../../type';
 
 export interface Props {
   theme: ThemeType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export class ThemeProvider extends React.PureComponent<Props> {

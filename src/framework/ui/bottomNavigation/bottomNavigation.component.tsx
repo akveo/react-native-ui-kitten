@@ -13,7 +13,7 @@ import {
   TabBarIndicator,
   Props as TabBarIndicatorProps,
 } from '../tab/tabBarIndicator.component';
-import { Props as TabProps } from './bottomNavigatorTab.component';
+import { Props as TabProps } from './bottomNavigationTab.component';
 
 type ChildElement = React.ReactElement<TabProps>;
 
@@ -25,7 +25,7 @@ interface TabNavigatorProps {
 
 export type Props = TabNavigatorProps & StyledComponentProps & ViewProps;
 
-export class BottomTabNavigator extends React.Component<Props> {
+export class BottomNavigation extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
     selectedIndex: 0,

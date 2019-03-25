@@ -31,6 +31,7 @@ exports[`@list-item: template matches snapshot * description 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
       "gray-100": "#f7f8fa",
       "gray-200": "#edf0f5",
@@ -82,7 +83,7 @@ exports[`@list-item: template matches snapshot * description 1`] = `
       ]
     }
   >
-    <ForwardRef(createComponent)
+    <ForwardRef(WrappingElement)
       style={
         Array [
           Object {
@@ -97,7 +98,7 @@ exports[`@list-item: template matches snapshot * description 1`] = `
       }
     >
       Title
-    </ForwardRef(createComponent)>
+    </ForwardRef(WrappingElement)>
   </View>
 </TouchableOpacity>
 `;
@@ -133,6 +134,7 @@ exports[`@list-item: template matches snapshot * title 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
       "gray-100": "#f7f8fa",
       "gray-200": "#edf0f5",
@@ -184,7 +186,7 @@ exports[`@list-item: template matches snapshot * title 1`] = `
       ]
     }
   >
-    <ForwardRef(createComponent)
+    <ForwardRef(WrappingElement)
       style={
         Array [
           Object {
@@ -199,7 +201,7 @@ exports[`@list-item: template matches snapshot * title 1`] = `
       }
     >
       Title
-    </ForwardRef(createComponent)>
+    </ForwardRef(WrappingElement)>
   </View>
 </TouchableOpacity>
 `;
@@ -237,6 +239,7 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
       "gray-100": "#f7f8fa",
       "gray-200": "#edf0f5",
@@ -288,7 +291,7 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
       ]
     }
   >
-    <ForwardRef(createComponent)
+    <ForwardRef(WrappingElement)
       style={
         Array [
           Object {
@@ -303,8 +306,8 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
       }
     >
       Title
-    </ForwardRef(createComponent)>
-    <ForwardRef(createComponent)
+    </ForwardRef(WrappingElement)>
+    <ForwardRef(WrappingElement)
       style={
         Array [
           Object {
@@ -318,7 +321,7 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
       }
     >
       Description
-    </ForwardRef(createComponent)>
+    </ForwardRef(WrappingElement)>
   </View>
   <Component
     source={
@@ -374,6 +377,7 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
   theme={
     Object {
       "blue-dark": "#2541CC",
+      "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
       "gray-100": "#f7f8fa",
       "gray-200": "#edf0f5",
@@ -444,7 +448,7 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
       ]
     }
   >
-    <ForwardRef(createComponent)
+    <ForwardRef(WrappingElement)
       style={
         Array [
           Object {
@@ -459,8 +463,8 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
       }
     >
       Title
-    </ForwardRef(createComponent)>
-    <ForwardRef(createComponent)
+    </ForwardRef(WrappingElement)>
+    <ForwardRef(WrappingElement)
       style={
         Array [
           Object {
@@ -474,7 +478,7 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
       }
     >
       Description
-    </ForwardRef(createComponent)>
+    </ForwardRef(WrappingElement)>
   </View>
 </TouchableOpacity>
 `;

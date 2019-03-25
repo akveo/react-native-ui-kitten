@@ -1,43 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@style: consumer service methods check * style mapping config contains no pre-created mapping 1`] = `
+exports[`@style: consumer service methods check * style mapping creates valid themedStyle prop 1`] = `
 Object {
-  "borderColor": "grayLight",
+  "borderColor": "#8992A3",
+  "borderRadius": 18,
   "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
+  "height": 36,
+  "highlightBackgroundColor": "#DDE1EB",
+  "highlightBorderRadius": 30,
+  "highlightHeight": 60,
+  "highlightWidth": 60,
+  "selectBackgroundColor": "transparent",
+  "selectBorderRadius": 12,
+  "selectHeight": 24,
+  "selectWidth": 24,
+  "textColor": "#c8cedb",
+  "textFontSize": 16,
+  "textFontWeight": "500",
+  "textMarginLeft": 12,
+  "width": 36,
 }
 `;
 
 exports[`@style: service methods checks * styling * default theme 1`] = `
 Object {
-  "prop1": "#E0E0E0",
-  "prop10": "transparent",
-  "prop11": 42,
-  "prop2": "#9E9E9E",
-  "prop3": "#616161",
-  "prop4": "#2196F3",
-  "prop5": "#1976D2",
-  "prop6": "#FF9800",
-  "prop7": "#F57C00",
-  "prop8": "#009688",
-  "prop9": "#00796B",
-}
-`;
-
-exports[`@style: service methods checks * styling * inverse theme 1`] = `
-Object {
-  "prop1": "#616161",
-  "prop10": "transparent",
-  "prop11": 42,
-  "prop2": "#9E9E9E",
-  "prop3": "#E0E0E0",
-  "prop4": "#2196F3",
-  "prop5": "#1976D2",
-  "prop6": "#FF9800",
-  "prop7": "#F57C00",
-  "prop8": "#009688",
-  "prop9": "#00796B",
+  "prop1": "#3366FF",
+  "prop2": "#2541CC",
+  "prop3": "#A6AEBD",
+  "prop4": 42,
 }
 `;

@@ -18,7 +18,7 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import { TouchableOpacityIndexedProps } from '../service/type';
+import { TouchableOpacityIndexedProps } from '../common/type';
 
 interface ListDerivedProps {
   index?: number;
@@ -42,7 +42,7 @@ interface TemplateDescriptionProps extends Partial<TemplateBaseProps> {
 
 type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps) & ListDerivedProps;
 
-const Text = styled<TextComponent, TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndexedProps;
 

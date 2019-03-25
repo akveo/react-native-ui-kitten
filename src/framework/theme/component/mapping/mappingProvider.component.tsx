@@ -1,24 +1,22 @@
 import React from 'react';
-import {
-  ThemeMappingType,
-  ThemeStyleType,
-} from 'eva/packages/types';
+import { ThemeStyleType } from 'eva/packages/types';
 import { MappingContext } from './mappingContext';
 
-export interface Props {
-  mapping: ThemeMappingType;
+interface MappingProviderProps {
   styles: ThemeStyleType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
+
+export type Props = MappingProviderProps;
 
 export class MappingProvider extends React.PureComponent<Props> {
 
   public render(): React.ReactNode {
-    const { mapping, styles, children } = this.props;
+    const { styles, children } = this.props;
 
     return (
       <MappingContext.Provider
-        value={{ mapping, styles }}>
+        value={styles}>
         {children}
       </MappingContext.Provider>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import {
   render,
   shallow,
@@ -6,69 +7,85 @@ import {
   fireEvent,
   waitForElement,
 } from 'react-native-testing-library';
-import { TouchableOpacity } from 'react-native';
+import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  Toggle,
+  Toggle as ToggleComponent,
   Props,
 } from './toggle.component';
-import * as config from './toggle.spec.config';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const StyledComponent = styled<Toggle, Props>(Toggle);
+const Toggle = styled<Props>(ToggleComponent);
 
-const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <StyledComponent {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: Props): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <Toggle {...props} />
+    </ApplicationProvider>
+  );
+};
 
-const renderComponent = (props?: Props): RenderAPI => render(<Mock {...props}/>);
+const renderComponent = (props?: Props): RenderAPI => {
+  return render(
+    <Mock {...props}/>,
+  );
+};
 
 describe('@toggle: matches snapshot', () => {
 
   it('default', () => {
-    const component = renderComponent();
-    const { output } = shallow(component.getByType(Toggle));
+    const component: RenderAPI = renderComponent();
+    const { output } = shallow(component.getByType(ToggleComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('checked', () => {
-    const component = renderComponent({ value: true });
-    const { output } = shallow(component.getByType(Toggle));
+    const component: RenderAPI = renderComponent({ value: true });
+    const { output } = shallow(component.getByType(ToggleComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('disabled', () => {
-    const component = renderComponent({ disabled: true });
-    const { output } = shallow(component.getByType(Toggle));
+    const component: RenderAPI = renderComponent({ disabled: true });
+    const { output } = shallow(component.getByType(ToggleComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('checked disabled', () => {
-    const component = renderComponent({ value: true, disabled: true });
-    const { output } = shallow(component.getByType(Toggle));
+    const component: RenderAPI = renderComponent({
+      value: true,
+      disabled: true,
+    });
+    const { output } = shallow(component.getByType(ToggleComponent));
 
     expect(output).toMatchSnapshot();
   });
 
   it('active', async () => {
-    const component = renderComponent();
+    const component: RenderAPI = renderComponent();
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
 
-    const active = await waitForElement(() => component.getByType(Toggle));
+    const active: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(ToggleComponent);
+    });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
-    const inactive = await waitForElement(() => component.getByType(Toggle));
+    const inactive: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(ToggleComponent);
+    });
     const { output: inactiveOutput } = shallow(inactive);
 
     expect(activeOutput).toMatchSnapshot();
@@ -76,15 +93,19 @@ describe('@toggle: matches snapshot', () => {
   });
 
   it('active checked', async () => {
-    const component = renderComponent({ value: true });
+    const component: RenderAPI = renderComponent({ value: true });
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-    const active = await waitForElement(() => component.getByType(Toggle));
+    const active: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(ToggleComponent);
+    });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
-    const inactive = await waitForElement(() => component.getByType(Toggle));
+    const inactive: ReactTestInstance = await waitForElement(() => {
+      return component.getByType(ToggleComponent);
+    });
     const { output: inactiveOutput } = shallow(inactive);
 
     expect(activeOutput).toMatchSnapshot();
@@ -97,7 +118,9 @@ describe('@toggle: component checks', () => {
 
   it('emits onValueChange', () => {
     const onChange = jest.fn();
-    const component = renderComponent({ onValueChange: onChange });
+
+    const component: RenderAPI = renderComponent({ onValueChange: onChange });
+
     fireEvent.press(component.getByType(TouchableOpacity));
 
     expect(onChange).toBeCalled();
@@ -105,17 +128,33 @@ describe('@toggle: component checks', () => {
 
   it('checking of value direct', () => {
     let value: boolean = false;
-    const onChangeValue = (changed: boolean) => value = changed;
-    const component = renderComponent({ value: value, onValueChange: onChangeValue });
+    const onChangeValue = (changed: boolean) => {
+      value = changed;
+    };
+
+    const component: RenderAPI = renderComponent({
+      value: value,
+      onValueChange: onChangeValue,
+    });
+
     fireEvent.press(component.getByType(TouchableOpacity));
+
     expect(value).toBe(true);
   });
 
   it('checking of value reverse', () => {
     let value: boolean = true;
-    const onChangeValue = (changed: boolean) => value = changed;
-    const component = renderComponent({ value: value, onValueChange: onChangeValue });
+    const onChangeValue = (changed: boolean) => {
+      value = changed;
+    };
+
+    const component: RenderAPI = renderComponent({
+      value: value,
+      onValueChange: onChangeValue,
+    });
+
     fireEvent.press(component.getByType(TouchableOpacity));
+
     expect(value).toBe(false);
   });
 

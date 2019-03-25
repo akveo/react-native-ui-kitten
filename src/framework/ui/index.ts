@@ -4,13 +4,13 @@ import {
   Props as AvatarProps,
 } from './avatar/avatar.component';
 import {
-  BottomNavigatorTab as BottomNavigatorTabComponent,
+  BottomNavigationTab as BottomNavigationTabComponent,
   Props as BottomNavigatorTabProps,
-} from './tabNavigator/bottomNavigatorTab.component';
+} from './bottomNavigation/bottomNavigationTab.component';
 import {
-  BottomTabNavigator as BottomTabNavigatorComponent,
+  BottomNavigation as BottomNavigationComponent,
   Props as BottomTabNavigatorProps,
-} from './tabNavigator/bottomTabNavigator.component';
+} from './bottomNavigation/bottomNavigation.component';
 import {
   Button as ButtonComponent,
   Props as ButtonProps,
@@ -109,34 +109,33 @@ import {
   Props as OverflowMenuProps,
 } from './overflowMenu/overflowMenu.component';
 
-const Avatar = styled<AvatarComponent, AvatarProps>(AvatarComponent);
-const BottomNavigatorTab = styled<BottomNavigatorTabComponent, BottomNavigatorTabProps>(BottomNavigatorTabComponent);
-const BottomTabNavigator = styled<BottomTabNavigatorComponent, BottomTabNavigatorProps>(BottomTabNavigatorComponent);
-const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
-const ButtonGroup = styled<ButtonGroupComponent, ButtonGroupProps>(ButtonGroupComponent);
-const CheckBox = styled<CheckBoxComponent, CheckBoxProps>(CheckBoxComponent);
-const Input = styled<InputComponent, InputProps>(InputComponent);
-const Layout = styled<LayoutComponent, LayoutProps>(LayoutComponent);
-const List = styled<ListComponent, ListProps>(ListComponent);
-const ListItem = styled<ListItemComponent, ListItemProps>(ListItemComponent);
-const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
-const Radio = styled<RadioComponent, RadioProps>(RadioComponent);
-const RadioGroup = styled<RadioGroupComponent, RadioGroupProps>(RadioGroupComponent);
-const Tab = styled<TabComponent, TabProps>(TabComponent);
-const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
-const Text = styled<TextComponent, TextProps>(TextComponent);
-const Toggle = styled<ToggleComponent, ToggleProps>(ToggleComponent);
-const Tooltip = styled<TooltipComponent, TooltipProps>(TooltipComponent);
-const TopNavigationBar = styled<TopNavigationBarComponent, TopNavigationBarProps>(TopNavigationBarComponent);
-const TopNavigationBarAction =
-  styled<TopNavigationBarActionComponent, TopNavigationBarActionProps>(TopNavigationBarActionComponent);
-const OverflowMenuItem = styled<OverflowMenuItemComponent, OverflowMenuItemProps>(OverflowMenuItemComponent);
-const OverflowMenu = styled<OverflowMenuComponent, OverflowMenuProps>(OverflowMenuComponent);
+const Avatar = styled<AvatarProps>(AvatarComponent);
+const BottomNavigationTab = styled<BottomNavigatorTabProps>(BottomNavigationTabComponent);
+const BottomNavigation = styled<BottomTabNavigatorProps>(BottomNavigationComponent);
+const Button = styled<ButtonProps>(ButtonComponent);
+const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);
+const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);
+const Input = styled<InputProps>(InputComponent);
+const Layout = styled<LayoutProps>(LayoutComponent);
+const List = styled<ListProps>(ListComponent);
+const ListItem = styled<ListItemProps>(ListItemComponent);
+const Popover = styled<PopoverProps>(PopoverComponent);
+const Radio = styled<RadioProps>(RadioComponent);
+const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);
+const Tab = styled<TabProps>(TabComponent);
+const TabBar = styled<TabBarProps>(TabBarComponent);
+const Text = styled<TextProps>(TextComponent);
+const Toggle = styled<ToggleProps>(ToggleComponent);
+const Tooltip = styled<TooltipProps>(TooltipComponent);
+const TopNavigationBar = styled<TopNavigationBarProps>(TopNavigationBarComponent);
+const TopNavigationBarAction = styled<TopNavigationBarActionProps>(TopNavigationBarActionComponent);
+const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
+const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);
 
 export {
   Avatar,
-  BottomNavigatorTab,
-  BottomTabNavigator,
+  BottomNavigationTab,
+  BottomNavigation,
   Button,
   ButtonGroup,
   CheckBox,

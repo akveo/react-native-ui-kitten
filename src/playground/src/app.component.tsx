@@ -1,33 +1,11 @@
 import React from 'react';
-import {
-  ThemeMappingType,
-  ThemeStyleType,
-} from 'eva/packages/types';
-import {
-  ApplicationProvider,
-  ThemeType,
-} from '@kitten/theme';
+import { default as mapping } from 'eva/packages/mapping/eva';
+import { theme } from 'eva/packages/theme/eva';
+import { ApplicationProvider } from '@kitten/theme';
 import { withNavigation } from './navigation';
 import * as Screens from './ui/screen';
-import {
-  mapping,
-  style,
-} from 'eva/packages/mapping-kitten/eva';
-import { theme } from 'eva/packages/theme/eva';
 
-interface State {
-  mapping: ThemeMappingType;
-  styles: ThemeStyleType;
-  theme: ThemeType;
-}
-
-export default class App extends React.Component<any, State> {
-
-  public state: State = {
-    mapping: mapping,
-    styles: style,
-    theme: theme,
-  };
+export default class App extends React.Component {
 
   public render(): React.ReactNode {
     const { HomeScreen: RootScreen, ...screens } = Screens;
@@ -35,12 +13,10 @@ export default class App extends React.Component<any, State> {
 
     return (
       <ApplicationProvider
-        styles={this.state.styles}
-        theme={this.state.theme}
-        mapping={this.state.mapping}>
+        mapping={mapping}
+        theme={theme}>
         <Router/>
       </ApplicationProvider>
     );
   }
 }
-

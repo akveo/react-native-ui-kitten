@@ -29,7 +29,7 @@ interface ButtonProps {
   children?: React.ReactText;
 }
 
-const Text = styled<TextComponent, TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = ButtonProps & StyledComponentProps & TouchableOpacityProps;
 
