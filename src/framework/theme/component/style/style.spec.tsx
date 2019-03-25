@@ -23,7 +23,7 @@ import {
   Interaction,
   ThemeType,
 } from '../../type';
-import { default as styles } from '../../common/mapping.json';
+import { default as styles } from '../../common/styles.json';
 import { default as theme } from '../../common/theme.json';
 import { default as themeInverse } from '../../common/themeInverse.json';
 
@@ -121,7 +121,7 @@ describe('@style: ui component checks', () => {
     );
 
     const withStateProp: RenderAPI = render(
-      <StyleProvider theme={theme} styles={styles}>
+      <StyleProvider styles={styles} theme={theme}>
         <StyleConsumer disabled={true}/>
       </StyleProvider>,
     );

@@ -13,26 +13,26 @@ import {
 } from 'react-native-testing-library';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
   Button as ButtonComponent,
   Props as ButtonProps,
 } from './button.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Button = styled<ButtonProps>(ButtonComponent);
 
-const Mock = (props?: ButtonProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: ButtonProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <Button {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

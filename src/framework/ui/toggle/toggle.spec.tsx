@@ -10,25 +10,25 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   Toggle as ToggleComponent,
   Props,
 } from './toggle.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Toggle = styled<Props>(ToggleComponent);
 
-const Mock = (props?: Props): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: Props): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <Toggle {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

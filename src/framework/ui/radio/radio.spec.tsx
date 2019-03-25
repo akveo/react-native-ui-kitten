@@ -10,25 +10,25 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   Radio as RadioComponent,
   Props as RadioProps,
 } from './radio.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Radio = styled<RadioProps>(RadioComponent);
 
-const Mock = (props?: RadioProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: RadioProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <Radio {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

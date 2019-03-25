@@ -15,8 +15,8 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -32,7 +32,7 @@ import {
   Props as TabViewProps,
   ChildProps as TabViewChildProps,
 } from './tabView.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Tab = styled<TabProps>(TabComponent);
@@ -40,13 +40,13 @@ const TabBar = styled<TabBarProps>(TabBarComponent);
 
 describe('@tab: component checks', () => {
 
-  const Mock = (props?: TabProps): React.ReactElement<StyleProviderProps> => {
+  const Mock = (props?: TabProps): React.ReactElement<ApplicationProviderProps> => {
     return (
-      <StyleProvider
-        styles={styles}
+      <ApplicationProvider
+        mapping={mapping}
         theme={theme}>
         <Tab {...props} />
-      </StyleProvider>
+      </ApplicationProvider>
     );
   };
 
@@ -98,15 +98,15 @@ describe('@tab-bar: component checks', () => {
   const childTestId0: string = '@tab-bar/child-0';
   const childTestId1: string = '@tab-bar/child-1';
 
-  const Mock = (props?: TabBarProps): React.ReactElement<StyleProviderProps> => {
+  const Mock = (props?: TabBarProps): React.ReactElement<ApplicationProviderProps> => {
     return (
-      <StyleProvider
-        styles={styles}
+      <ApplicationProvider
+        mapping={mapping}
         theme={theme}>
         <TabBar {...props}>
           {props.children}
         </TabBar>
-      </StyleProvider>
+      </ApplicationProvider>
     );
   };
 
@@ -133,15 +133,15 @@ describe('@tab-bar: component checks', () => {
 
 describe('@tab-view: component checks', () => {
 
-  const Mock = (props?: TabViewProps): React.ReactElement<TabViewProps> => {
+  const Mock = (props?: TabViewProps): React.ReactElement<ApplicationProviderProps> => {
     return (
-      <StyleProvider
-        styles={styles}
+      <ApplicationProvider
+        mapping={mapping}
         theme={theme}>
         <TabView {...props}>
           {props.children}
         </TabView>
-      </StyleProvider>
+      </ApplicationProvider>
     );
   };
 

@@ -16,8 +16,8 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -29,29 +29,29 @@ import {
   OverflowMenu as OverflowMenuComponent,
   Props as OverflowMenuComponentProps,
 } from './overflowMenu.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const OverflowMenuItem = styled<OverflowMenuItemComponentProps>(OverflowMenuItemComponent);
 const OverflowMenu = styled<OverflowMenuComponentProps>(OverflowMenuComponent);
 
-const MockMenu = (props?: OverflowMenuComponentProps): React.ReactElement<StyleProviderProps> => {
+const MockMenu = (props?: OverflowMenuComponentProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <OverflowMenu {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 
-const MockMenuItem = (props?: OverflowMenuItemComponentProps): React.ReactElement<StyleProviderProps> => {
+const MockMenuItem = (props?: OverflowMenuItemComponentProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <OverflowMenuItem {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

@@ -13,8 +13,8 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -25,23 +25,23 @@ import {
   BottomNavigationTab as BottomNavigatorTabComponent,
   Props as BottomNavigatorTabProps,
 } from './bottomNavigationTab.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
-const BottomTabNavigator = styled<BottomTabNavigatorProps>(BottomTabNavigatorComponent);
-const BottomNavigatorTab = styled<BottomNavigatorTabProps>(BottomNavigatorTabComponent);
+const BottomNavigation = styled<BottomTabNavigatorProps>(BottomTabNavigatorComponent);
+const BottomNavigationTab = styled<BottomNavigatorTabProps>(BottomNavigatorTabComponent);
 
 describe('@bottom-navigation-tab: component checks', () => {
 
   const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
-  const Mock = (props?: BottomNavigatorTabProps): React.ReactElement<StyleProviderProps> => {
+  const Mock = (props?: BottomNavigatorTabProps): React.ReactElement<ApplicationProviderProps> => {
     return (
-      <StyleProvider
-        styles={styles}
+      <ApplicationProvider
+        mapping={mapping}
         theme={theme}>
-        <BottomNavigatorTab {...props}/>
-      </StyleProvider>
+        <BottomNavigationTab {...props}/>
+      </ApplicationProvider>
     );
   };
 
@@ -104,19 +104,19 @@ describe('@bottom-navigation-tab: component checks', () => {
 
 describe('@bottom-navigation: component checks', () => {
 
-  const Mock = (props?: BottomTabNavigatorProps): React.ReactElement<StyleProviderProps> => {
+  const Mock = (props?: BottomTabNavigatorProps): React.ReactElement<ApplicationProviderProps> => {
     return (
-      <StyleProvider
-        styles={styles}
+      <ApplicationProvider
+        mapping={mapping}
         theme={theme}>
-        <BottomTabNavigator {...props} />
-      </StyleProvider>
+        <BottomNavigation {...props} />
+      </ApplicationProvider>
     );
   };
 
-  const ChildMock = (props: BottomNavigatorTabProps): React.ReactElement<StyleProviderProps> => {
+  const ChildMock = (props: BottomNavigatorTabProps): React.ReactElement<BottomNavigatorTabProps> => {
     return (
-      <BottomNavigatorTab {...props} />
+      <BottomNavigationTab {...props} />
     );
   };
 

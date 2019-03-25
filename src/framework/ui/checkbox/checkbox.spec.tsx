@@ -7,25 +7,25 @@ import {
 } from 'react-native-testing-library';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   CheckBox as CheckBoxComponent,
   Props as CheckBoxProps,
 } from './checkbox.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);
 
-const Mock = (props?: CheckBoxProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: CheckBoxProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <CheckBox {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

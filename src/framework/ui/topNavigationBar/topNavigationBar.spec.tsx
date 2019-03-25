@@ -13,8 +13,8 @@ import {
 } from 'react-native-testing-library';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -25,29 +25,29 @@ import {
   TopNavigationBarAction as TopNavigationBarActionComponent,
   Props as TopNavigationBaActionProps,
 } from './topNavigationBarAction.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const TopNavigationBar = styled<TopNavigationBarProps>(TopNavigationBarComponent);
 const TopNavigationBarAction = styled<TopNavigationBaActionProps>(TopNavigationBarActionComponent);
 
-const Mock = (props?: TopNavigationBarProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: TopNavigationBarProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <TopNavigationBar {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 
-const ActionMock = (props?: TopNavigationBaActionProps): React.ReactElement<StyleProviderProps> => {
+const ActionMock = (props?: TopNavigationBaActionProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <TopNavigationBarAction {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

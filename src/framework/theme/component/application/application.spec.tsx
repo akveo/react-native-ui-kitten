@@ -4,17 +4,17 @@ import {
   RenderAPI,
   shallow,
 } from 'react-native-testing-library';
-import { Text } from 'react-native';
+import { ReactTestInstance } from 'react-test-renderer';
 import {
   ApplicationProvider,
-  Props as ApplicationProps,
+  Props as ApplicationProviderProps,
 } from './applicationProvider.component';
-import { default as styles } from '../../common/mapping.json';
+import { default as mapping } from '../../common/mapping.json';
 import { default as theme } from '../../common/theme.json';
 
 describe('@app: application wrapper check', () => {
 
-  const Mock = (props?: ApplicationProps): React.ReactElement<ApplicationProps> => {
+  const Mock = (props?: ApplicationProviderProps): React.ReactElement<ApplicationProviderProps> => {
     return (
       <ApplicationProvider {...props} />
     );
@@ -23,17 +23,28 @@ describe('@app: application wrapper check', () => {
   it('* renders properly', () => {
     const component: RenderAPI = render(
       <Mock
-        styles={styles}
-        theme={theme}>
-        <Text>
-          Test
-        </Text>
-      </Mock>,
+        mapping={mapping}
+        theme={theme}
+      />,
     );
 
     const { output } = shallow(component.getByType(ApplicationProvider));
 
     expect(output).toMatchSnapshot();
+  });
+
+  it('* contains style property in state', () => {
+    const component: RenderAPI = render(
+      <Mock
+        mapping={mapping}
+        theme={theme}
+      />,
+    );
+
+    const componentInstance: ReactTestInstance = component.getByType(ApplicationProvider);
+    const { state } = componentInstance.instance;
+
+    expect(state.styles).toMatchSnapshot();
   });
 
 });

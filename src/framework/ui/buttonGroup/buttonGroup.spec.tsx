@@ -6,8 +6,8 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   ButtonGroup as ButtonGroupComponent,
@@ -17,19 +17,19 @@ import {
   Button as ButtonComponent,
   Props as ButtonProps,
 } from '../button/button.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Button = styled<ButtonProps>(ButtonComponent);
 const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);
 
-const Mock = (props?: ButtonGroupProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: ButtonGroupProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <ButtonGroup {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { style } from 'eva/packages/mapping-kitten/eva';
+import { mapping } from 'eva/packages/mapping/eva';
 import { theme } from 'eva/packages/theme/eva';
 import { ApplicationProvider } from '@kitten/theme';
 import { withNavigation } from './navigation';
@@ -13,7 +13,7 @@ export default class App extends React.Component {
 
     return (
       <ApplicationProvider
-        styles={style}
+        mapping={mapping}
         theme={theme}>
         <Router/>
       </ApplicationProvider>

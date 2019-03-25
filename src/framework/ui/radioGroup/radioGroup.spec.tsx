@@ -8,8 +8,8 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   RadioGroup as RadioGroupComponent,
@@ -19,19 +19,19 @@ import {
   Radio as RadioComponent,
   Props as RadioProps,
 } from '../radio/radio.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);
 const Radio = styled<RadioProps>(RadioComponent);
 
-const Mock = (props?: RadioGroupProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: RadioGroupProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <RadioGroup {...props}/>
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

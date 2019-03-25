@@ -15,8 +15,8 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -27,7 +27,7 @@ import {
   ListItem as ListItemComponent,
   Props as ListItemProps,
 } from './listItem.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const List = styled<ListProps>(ListComponent);
@@ -35,13 +35,13 @@ const ListItem = styled<ListItemProps>(ListItemComponent);
 
 const data: any[] = Array(8);
 
-const Mock = (props?: ListProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: ListProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <List {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

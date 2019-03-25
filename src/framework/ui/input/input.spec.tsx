@@ -14,29 +14,31 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
   Input as InputComponent,
   Props as InputProps,
 } from './input.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Input = styled<InputProps>(InputComponent);
 
-const Mock = (props?: InputProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider
-    styles={styles}
-    theme={theme}>
-    <Input
-      {...props}
-      style={{}}
-    />
-  </StyleProvider>
-);
+const Mock = (props?: InputProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <Input
+        {...props}
+        style={{}}
+      />
+    </ApplicationProvider>
+  );
+};
 
 const renderComponent = (props?: InputProps): RenderAPI => {
   return render(

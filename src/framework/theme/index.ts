@@ -5,6 +5,7 @@ export {
 } from './component';
 
 export {
+  ApplicationProviderProps,
   StyleProviderProps,
   StyledComponentProps,
   ThemeProviderProps,

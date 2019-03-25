@@ -6,25 +6,25 @@ import {
 } from 'react-native-testing-library';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   Layout as LayoutComponent,
   Props as LayoutProps,
 } from './layout.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Layout = styled<LayoutProps>(LayoutComponent);
 
-const Mock = (props?: LayoutProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: LayoutProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <Layout {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

@@ -12,25 +12,25 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
 } from '@kitten/theme';
 import {
   Avatar as AvatarComponent,
   Props as AvatarProps,
 } from './avatar.component';
-import { default as styles } from '../common/mapping.json';
+import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
 const Avatar = styled<AvatarProps>(AvatarComponent);
 
-const Mock = (props?: AvatarProps): React.ReactElement<StyleProviderProps> => {
+const Mock = (props?: AvatarProps): React.ReactElement<ApplicationProviderProps> => {
   return (
-    <StyleProvider
-      styles={styles}
+    <ApplicationProvider
+      mapping={mapping}
       theme={theme}>
       <Avatar {...props} />
-    </StyleProvider>
+    </ApplicationProvider>
   );
 };
 

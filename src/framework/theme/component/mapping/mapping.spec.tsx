@@ -14,7 +14,7 @@ import {
   MappingProvider,
   Props as MappingProviderProps,
 } from './mappingProvider.component';
-import { default as styles } from '../../common/mapping.json';
+import { default as styles } from '../../common/styles.json';
 
 describe('@mapping: ui component checks', () => {
 
