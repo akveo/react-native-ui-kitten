@@ -6,10 +6,12 @@
     "start": "expo start"
   },
   "dependencies": {
-    "expo": "^31.0.4",
+    "expo": "^32.0.0",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.1.tar.gz",
-    "react-navigation": "^3.0.7"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-navigation": "^3.0.7",
+    "@eva/eva": "github:akveo/eva#package/mapping-eva",
+    "@eva/theme-eva": "github:akveo/eva#package/theme-eva"
   },
   "devDependencies": {
     "react-native-typescript-transformer": "^1.2.10"

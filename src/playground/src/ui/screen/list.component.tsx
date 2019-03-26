@@ -20,7 +20,7 @@ interface ListItemModel {
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-export class ListScreen extends React.Component<Props> {
+class ListScreen extends React.Component<Props> {
 
   static navigationOptions = {
     title: 'List',
@@ -49,8 +49,8 @@ export class ListScreen extends React.Component<Props> {
       <ListItem
         title={`${item.title} ${index + 1}`}
         description={item.description}
-        onPress={this.onItemPress}>
-      </ListItem>
+        onPress={this.onItemPress}
+      />
     );
   };
 
@@ -63,3 +63,5 @@ export class ListScreen extends React.Component<Props> {
     );
   }
 }
+
+export default ListScreen;

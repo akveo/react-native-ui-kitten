@@ -1,4 +1,4 @@
-import { ThemedStyleType } from 'eva/packages/types';
+import { ThemedStyleType } from '@eva/core';
 import {
   ThemeType,
   StyleType,

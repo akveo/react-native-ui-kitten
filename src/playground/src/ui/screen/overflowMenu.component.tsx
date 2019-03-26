@@ -14,7 +14,7 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  OverflowMenu as OverflowMenuComponent,
+  OverflowMenu,
   OverflowMenuItemType,
 } from '@kitten/ui';
 
@@ -51,7 +51,7 @@ const menuItems: OverflowMenuItemType[] = [
   },
 ];
 
-class OverflowMenu extends React.Component<Props, State> {
+class OverflowMenuScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Overflow Menu',
@@ -88,7 +88,7 @@ class OverflowMenu extends React.Component<Props, State> {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.innerContainer}>
-          <OverflowMenuComponent
+          <OverflowMenu
             items={menuItems}
             placement='bottom start'
             visible={this.state.overflowMenu1Visible}
@@ -100,8 +100,8 @@ class OverflowMenu extends React.Component<Props, State> {
               style={this.props.themedStyle.menuContainer}>
               <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
             </TouchableOpacity>
-          </OverflowMenuComponent>
-          <OverflowMenuComponent
+          </OverflowMenu>
+          <OverflowMenu
             items={menuItems}
             placement='bottom end'
             size='small'
@@ -114,10 +114,10 @@ class OverflowMenu extends React.Component<Props, State> {
               style={this.props.themedStyle.menuContainer}>
               <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
             </TouchableOpacity>
-          </OverflowMenuComponent>
+          </OverflowMenu>
         </View>
         <View style={[this.props.themedStyle.innerContainer, this.props.themedStyle.bottomContainer]}>
-          <OverflowMenuComponent
+          <OverflowMenu
             items={menuItems}
             placement='top start'
             size='large'
@@ -130,8 +130,8 @@ class OverflowMenu extends React.Component<Props, State> {
               style={this.props.themedStyle.menuContainer}>
               <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
             </TouchableOpacity>
-          </OverflowMenuComponent>
-          <OverflowMenuComponent
+          </OverflowMenu>
+          <OverflowMenu
             items={menuItems}
             placement='top end'
             visible={this.state.overflowMenu4Visible}
@@ -143,14 +143,14 @@ class OverflowMenu extends React.Component<Props, State> {
               style={this.props.themedStyle.menuContainer}>
               <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
             </TouchableOpacity>
-          </OverflowMenuComponent>
+          </OverflowMenu>
         </View>
       </View>
     );
   }
 }
 
-export const OverflowMenuScreen = withStyles(OverflowMenu, (theme: ThemeType) => ({
+export default withStyles(OverflowMenuScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingVertical: 8,

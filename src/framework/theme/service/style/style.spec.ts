@@ -1,5 +1,4 @@
-import { style } from 'eva/packages/mapping-kitten/eva';
-import { ThemedStyleType } from 'eva/packages/types';
+import { ThemedStyleType } from '@eva/core';
 import { StyleConsumerService } from './styleConsumer.service';
 import {
   StyledComponentProps,
@@ -11,6 +10,7 @@ import {
   StyleType,
 } from '../../type';
 import * as Service from './style.service';
+import { default as style } from '../../common/styles.json';
 import { default as theme } from '../../common/theme.json';
 
 const json = (value: any): string => JSON.stringify(value);

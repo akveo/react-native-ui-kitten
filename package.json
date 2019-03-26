@@ -28,7 +28,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "eva": "github:akveo/eva",
+    "@eva/core": "github:akveo/eva#package/core",
+    "@eva/processor-kitten": "github:akveo/eva#package/processor-kitten",
     "hoist-non-react-statics": "^3.2.1",
     "lodash.merge": "^4.6.1"
   },

@@ -4,11 +4,11 @@
     "baseUrl": "./",
     "jsx": "react",
     "paths": {
-      "@eva/*": ["./node_modules/eva/packages/*"],
+      "@eva/*": ["./node_modules/@eva/*"],
       "@kitten/*": ["./src/framework/*"]
     }
   },
   "include": [
-    "./node_modules/eva"
+    "./node_modules/@eva"
   ]
 }

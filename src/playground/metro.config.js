@@ -24,7 +24,7 @@ module.exports = {
     path.resolve(__dirname, '../../node_modules/@babel'),
 
     // FIXME(playground): unable to resolve
-    path.resolve(__dirname, '../../node_modules/eva'),
+    path.resolve(__dirname, '../../node_modules/@eva'),
     path.resolve(__dirname, '../../node_modules/hoist-non-react-statics'),
     path.resolve(__dirname, '../../node_modules/react-is'),
     path.resolve(__dirname, '../../node_modules/lodash.merge'),

@@ -6,11 +6,11 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Text as TextComponent } from '@kitten/ui';
+import { Text } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-class Text extends React.Component<Props> {
+class TextScreen extends React.Component<Props> {
 
   static navigationOptions = {
     title: 'Text',
@@ -21,23 +21,22 @@ class Text extends React.Component<Props> {
 
     return (
       <View style={container}>
-        <TextComponent style={component} category='h1'>H1</TextComponent>
-        <TextComponent style={component} category='h2'>H2</TextComponent>
-        <TextComponent style={component} category='h3'>H3</TextComponent>
-        <TextComponent style={component} category='h4'>H4</TextComponent>
-        <TextComponent style={component} category='h5'>H5</TextComponent>
-        <TextComponent style={component} category='h6'>H6</TextComponent>
-        <TextComponent style={component} category='body'>Body</TextComponent>
+        <Text style={component} category='h1'>H1</Text>
+        <Text style={component} category='h2'>H2</Text>
+        <Text style={component} category='h3'>H3</Text>
+        <Text style={component} category='h4'>H4</Text>
+        <Text style={component} category='h5'>H5</Text>
+        <Text style={component} category='h6'>H6</Text>
+        <Text style={component} category='body'>Body</Text>
       </View>
     );
   }
 }
 
-export const TextScreen = withStyles(Text, (theme: ThemeType) => ({
+export default withStyles(TextScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
-  component: {
-  },
+  component: {},
 }));

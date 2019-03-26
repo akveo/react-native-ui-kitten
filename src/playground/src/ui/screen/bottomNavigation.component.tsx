@@ -32,7 +32,7 @@ interface NavigationProps {
 
 type CommonNavigationProps = NavigationProps & NavigationContainerProps;
 
-export const BottomNavigationScreen: NavigationContainer = createBottomTabNavigator({
+const BottomNavigationScreen: NavigationContainer = createBottomTabNavigator({
   Screen1: TabScreen1,
   Screen2: TabScreen2,
   Screen3: TabScreen3,
@@ -106,3 +106,5 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
     </BottomNavigation>
   );
 }
+
+export default BottomNavigationScreen;

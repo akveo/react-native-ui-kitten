@@ -9,7 +9,7 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Radio as RadioComponent } from '@kitten/ui';
+import { Radio } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -22,7 +22,7 @@ interface State {
 
 const STATUS: string = '';
 
-class Radio extends React.Component<Props, State> {
+class RadioScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Radio',
@@ -57,26 +57,26 @@ class Radio extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio1Checked}
               status={STATUS}
               onChange={this.onRadio1Change}
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio2Checked}
               status={STATUS}
               onChange={this.onRadio2Change}
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio3Checked}
               disabled={true}
               status={STATUS}
               onChange={this.onRadio3Change}
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio4Checked}
               disabled={true}
@@ -88,19 +88,19 @@ class Radio extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
               size='large'
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
               size='medium'
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
@@ -111,24 +111,24 @@ class Radio extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Text</Text>
           <View style={this.props.themedStyle.containerPreviewColumn}>
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               status={STATUS}
               text='Place your text'
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
               text='Place your text'
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               disabled={true}
               status={STATUS}
               text='Place your text'
             />
-            <RadioComponent
+            <Radio
               style={this.props.themedStyle.component}
               checked={true}
               disabled={true}
@@ -142,7 +142,7 @@ class Radio extends React.Component<Props, State> {
   }
 }
 
-export const RadioScreen = withStyles(Radio, (theme: ThemeType) => ({
+export default withStyles(RadioScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,

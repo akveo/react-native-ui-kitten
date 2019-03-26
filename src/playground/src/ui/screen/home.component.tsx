@@ -1,8 +1,3 @@
-import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
-} from '@kitten/theme';
 import React from 'react';
 import {
   FlatList,
@@ -13,13 +8,18 @@ import {
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from '@kitten/theme';
+import {
   NavigatorProps,
   RouteType,
 } from '../../navigation';
 
 type Props = NavigatorProps & ThemedComponentProps & NavigationScreenProps;
 
-class Home extends React.Component<Props> {
+class HomeScreen extends React.Component<Props> {
 
   static navigationOptions = {
     title: 'Home',
@@ -54,7 +54,7 @@ class Home extends React.Component<Props> {
   }
 }
 
-export const HomeScreen = withStyles(Home, (theme: ThemeType) => ({
+export default withStyles(HomeScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: 16,

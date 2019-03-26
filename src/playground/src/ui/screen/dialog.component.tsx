@@ -17,10 +17,10 @@ import { NavigationScreenProps } from 'react-navigation';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-class Dialog extends React.Component<Props> {
+class DialogScreen extends React.Component<Props> {
 
   static navigationOptions = {
-    title: 'Modal',
+    title: 'Dialog',
   };
 
   private modalId: string | undefined = undefined;
@@ -55,8 +55,6 @@ class Dialog extends React.Component<Props> {
     );
   }
 }
-
-export const DialogScreen = withStyles(Dialog, (theme: ThemeType) => ({}));
 
 class TestModal extends React.Component<ModalComponentCloseProps> {
 
@@ -100,6 +98,8 @@ class InnerTestModal extends React.Component<ModalComponentCloseProps> {
     );
   }
 }
+
+export default withStyles(DialogScreen, (theme: ThemeType) => ({}));
 
 const styles = StyleSheet.create({
   outerModal: {

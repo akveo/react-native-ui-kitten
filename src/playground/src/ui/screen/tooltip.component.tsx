@@ -10,7 +10,7 @@ import {
   ThemedComponentProps,
   ThemeType,
 } from '@kitten/theme';
-import { Tooltip as TooltipComponent } from '@kitten/ui';
+import { Tooltip } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -22,7 +22,7 @@ interface State {
   endVisible: boolean;
 }
 
-class Tooltip extends React.Component<Props, State> {
+class TooltipScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Tooltip',
@@ -58,7 +58,7 @@ class Tooltip extends React.Component<Props, State> {
     return (
       <View style={container}>
         <View style={componentContainer}>
-          <TooltipComponent
+          <Tooltip
             style={component}
             placement={`${PLACEMENT} start`}
             visible={this.state.startVisible}
@@ -69,10 +69,10 @@ class Tooltip extends React.Component<Props, State> {
               onPress={this.onStartPress}>
               <Text style={text}>{`${PLACEMENT} start`.toUpperCase()}</Text>
             </TouchableOpacity>
-          </TooltipComponent>
+          </Tooltip>
         </View>
         <View style={componentContainer}>
-          <TooltipComponent
+          <Tooltip
             style={component}
             placement={`${PLACEMENT}`}
             visible={this.state.centerVisible}
@@ -83,10 +83,10 @@ class Tooltip extends React.Component<Props, State> {
               onPress={this.onCenterPress}>
               <Text style={text}>{`${PLACEMENT}`.toUpperCase()}</Text>
             </TouchableOpacity>
-          </TooltipComponent>
+          </Tooltip>
         </View>
         <View style={componentContainer}>
-          <TooltipComponent
+          <Tooltip
             style={component}
             placement={`${PLACEMENT} end`}
             visible={this.state.endVisible}
@@ -97,14 +97,14 @@ class Tooltip extends React.Component<Props, State> {
               onPress={this.onEndPress}>
               <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
             </TouchableOpacity>
-          </TooltipComponent>
+          </Tooltip>
         </View>
       </View>
     );
   }
 }
 
-export const TooltipScreen = withStyles(Tooltip, (theme: ThemeType) => ({
+export default withStyles(TooltipScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
     alignItems: 'center',

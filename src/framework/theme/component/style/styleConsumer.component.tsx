@@ -1,6 +1,6 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ThemeStyleType } from 'eva/packages/types';
+import { ThemeStyleType } from '@eva/core';
 import { MappingContext } from '../mapping';
 import { ThemeContext } from '../theme';
 import { StyleConsumerService } from '../../service/style';

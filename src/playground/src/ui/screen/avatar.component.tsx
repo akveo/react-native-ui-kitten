@@ -10,7 +10,7 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Avatar as AvatarComponent } from '@kitten/ui';
+import { Avatar } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -25,7 +25,7 @@ const SIZE: string = 'large';
 const SHAPE: string = 'rounded';
 const SOURCE: ImageSourcePropType = { uri: 'https://randomuser.me/api/portraits/men/3.jpg' };
 
-class Avatar extends React.Component<Props, State> {
+class AvatarScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Avatar',
@@ -37,15 +37,15 @@ class Avatar extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Default</Text>
           <View style={this.props.themedStyle.containerPreviewRow}>
-            <AvatarComponent
+            <Avatar
               size={SIZE}
               source={SOURCE}
             />
-            <AvatarComponent
+            <Avatar
               size={SIZE}
               source={SOURCE}
             />
-            <AvatarComponent
+            <Avatar
               size={SIZE}
               source={SOURCE}
             />
@@ -54,19 +54,19 @@ class Avatar extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Custom</Text>
           <View style={this.props.themedStyle.containerPreviewRow}>
-            <AvatarComponent
+            <Avatar
               style={this.props.themedStyle.component}
               size={SIZE}
               shape={SHAPE}
               source={SOURCE}
             />
-            <AvatarComponent
+            <Avatar
               style={this.props.themedStyle.component}
               size={SIZE}
               shape={SHAPE}
               source={SOURCE}
             />
-            <AvatarComponent
+            <Avatar
               style={this.props.themedStyle.component}
               size={SIZE}
               shape={SHAPE}
@@ -79,7 +79,7 @@ class Avatar extends React.Component<Props, State> {
   }
 }
 
-export const AvatarScreen = withStyles(Avatar, (theme: ThemeType) => ({
+export default withStyles(AvatarScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,

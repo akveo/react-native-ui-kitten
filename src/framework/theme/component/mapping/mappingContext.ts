@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeStyleType } from 'eva/packages/types';
+import { ThemeStyleType } from '@eva/core';
 
 const defaultValue: ThemeStyleType = {};
 

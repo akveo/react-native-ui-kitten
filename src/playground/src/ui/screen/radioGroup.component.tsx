@@ -10,8 +10,8 @@ import {
   ThemedComponentProps,
 } from '@kitten/theme';
 import {
-  RadioGroup as RadioGroupComponent,
-  Radio as RadioComponent,
+  RadioGroup,
+  Radio,
 } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
@@ -22,7 +22,7 @@ interface State {
   selectedIndexGroup3: number;
 }
 
-class RadioGroup extends React.Component<Props, State> {
+class RadioGroupScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Radio Group',
@@ -58,47 +58,47 @@ class RadioGroup extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Vertical</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioGroupComponent
+            <RadioGroup
               selectedIndex={this.state.selectedIndexGroup2}
               onChange={this.onGroup2SelectionChange}>
-              <RadioComponent style={this.props.themedStyle.component}/>
-              <RadioComponent style={this.props.themedStyle.component}/>
-            </RadioGroupComponent>
+              <Radio style={this.props.themedStyle.component}/>
+              <Radio style={this.props.themedStyle.component}/>
+            </RadioGroup>
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Horizontal</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioGroupComponent
+            <RadioGroup
               style={{ flexDirection: 'row' }}
               selectedIndex={this.state.selectedIndexGroup1}
               onChange={this.onGroup1SelectionChange}>
-              <RadioComponent style={this.props.themedStyle.component}/>
-              <RadioComponent style={this.props.themedStyle.component}/>
-            </RadioGroupComponent>
+              <Radio style={this.props.themedStyle.component}/>
+              <Radio style={this.props.themedStyle.component}/>
+            </RadioGroup>
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Error</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <RadioGroupComponent
+            <RadioGroup
               selectedIndex={this.state.selectedIndexGroup3}
               onChange={this.onGroup3SelectionChange}>
-              <RadioComponent
+              <Radio
                 style={this.props.themedStyle.component}
                 status='error'
                 size='small'
               />
-              <RadioComponent
+              <Radio
                 style={this.props.themedStyle.component}
                 status='error'
               />
-              <RadioComponent
+              <Radio
                 style={this.props.themedStyle.component}
                 status='error'
                 size='large'
               />
-            </RadioGroupComponent>
+            </RadioGroup>
           </View>
         </View>
       </View>
@@ -106,7 +106,7 @@ class RadioGroup extends React.Component<Props, State> {
   }
 }
 
-export const RadioGroupScreen = withStyles(RadioGroup, (theme: ThemeType) => ({
+export default withStyles(RadioGroupScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,

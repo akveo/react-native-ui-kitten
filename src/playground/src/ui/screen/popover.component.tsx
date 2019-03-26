@@ -11,9 +11,7 @@ import {
   ThemedComponentProps,
   ThemeType,
 } from '@kitten/theme';
-import {
-  Popover as PopoverComponent,
-} from '@kitten/ui';
+import { Popover } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -25,7 +23,7 @@ interface State {
   endVisible: boolean;
 }
 
-class Popover extends React.Component<Props, State> {
+class PopoverScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Popover',
@@ -69,7 +67,7 @@ class Popover extends React.Component<Props, State> {
     return (
       <View style={container}>
         <View style={componentContainer}>
-          <PopoverComponent
+          <Popover
             style={component}
             placement={`${PLACEMENT} start`}
             visible={this.state.startVisible}
@@ -80,10 +78,10 @@ class Popover extends React.Component<Props, State> {
               onPress={this.onStartPress}>
               <Text style={text}>{`${PLACEMENT} start`.toUpperCase()}</Text>
             </TouchableOpacity>
-          </PopoverComponent>
+          </Popover>
         </View>
         <View style={componentContainer}>
-          <PopoverComponent
+          <Popover
             style={component}
             placement={`${PLACEMENT}`}
             visible={this.state.centerVisible}
@@ -94,10 +92,10 @@ class Popover extends React.Component<Props, State> {
               onPress={this.onCenterPress}>
               <Text style={text}>{`${PLACEMENT}`.toUpperCase()}</Text>
             </TouchableOpacity>
-          </PopoverComponent>
+          </Popover>
         </View>
         <View style={componentContainer}>
-          <PopoverComponent
+          <Popover
             style={component}
             placement={`${PLACEMENT} end`}
             visible={this.state.endVisible}
@@ -108,41 +106,39 @@ class Popover extends React.Component<Props, State> {
               onPress={this.onEndPress}>
               <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
             </TouchableOpacity>
-          </PopoverComponent>
+          </Popover>
         </View>
       </View>
     );
   }
 }
 
-export const PopoverScreen = withStyles(Popover, (theme: ThemeType) => {
-  return ({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    componentContainer: {
-      margin: 32,
-    },
-    component: {
-      // popover customization place
-    },
-    tip: {
-      justifyContent: 'center',
-      borderWidth: 4,
-      borderRadius: 2,
-      minWidth: 256,
-      minHeight: 64,
-      borderColor: 'black',
-    },
-    text: {
-      alignSelf: 'center',
-      color: 'black',
-      fontWeight: '800',
-    },
-  });
-});
+export default withStyles(PopoverScreen, (theme: ThemeType) => ({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  componentContainer: {
+    margin: 32,
+  },
+  component: {
+    // popover customization place
+  },
+  tip: {
+    justifyContent: 'center',
+    borderWidth: 4,
+    borderRadius: 2,
+    minWidth: 256,
+    minHeight: 64,
+    borderColor: 'black',
+  },
+  text: {
+    alignSelf: 'center',
+    color: 'black',
+    fontWeight: '800',
+  },
+}));
 
 
 
