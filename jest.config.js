@@ -29,6 +29,6 @@ module.exports = {
     '<rootDir>/node_modules',
   ],
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|react-native-cookies|eva)/)'
+    'node_modules/(?!(react-native|react-native-cookies|@eva)/)'
   ],
 };

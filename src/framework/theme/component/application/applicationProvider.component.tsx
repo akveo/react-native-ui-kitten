@@ -1,10 +1,10 @@
 import React from 'react';
-import { SchemaProcessor } from 'eva/packages/processor/kitten';
+import { SchemaProcessor } from '@eva/processor-kitten';
 import {
   ThemeStyleType,
   SchemaType,
   CustomSchemaType,
-} from 'eva/packages/types';
+} from '@eva/core';
 import merge from 'lodash.merge';
 import { ModalPanel } from '../modal';
 import { StyleProvider } from '../style';
