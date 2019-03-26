@@ -10,8 +10,8 @@ import {
   ThemeType,
 } from '@kitten/theme';
 import {
-  Tab as TabComponent,
-  TabBar as TabBarComponent,
+  TabBar as TabBar,
+  Tab as Tab,
 } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
@@ -21,7 +21,7 @@ interface State {
   bar2SelectedIndex: number;
 }
 
-class TabBar extends React.Component<Props, State> {
+class TabBarScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Tab Bar',
@@ -55,32 +55,32 @@ class TabBar extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Default</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <TabBarComponent
+            <TabBar
               onSelect={this.onBar1Select}
               selectedIndex={this.state.bar1SelectedIndex}>
-              <TabComponent title='❤️'/>
-              <TabComponent title='💛️'/>
-              <TabComponent title='💚️'/>
-            </TabBarComponent>
+              <Tab title='❤️'/>
+              <Tab title='💛️'/>
+              <Tab title='💚️'/>
+            </TabBar>
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Custom</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <TabBarComponent
+            <TabBar
               style={this.props.themedStyle.customBar}
               onSelect={this.onBar2Select}
               selectedIndex={this.state.bar2SelectedIndex}>
-              <TabComponent
+              <Tab
                 style={this.createCustomTabStyle(0)}
                 title='❤️'/>
-              <TabComponent
+              <Tab
                 style={this.createCustomTabStyle(1)}
                 title='💛️'/>
-              <TabComponent
+              <Tab
                 style={this.createCustomTabStyle(2)}
                 title='💚️'/>
-            </TabBarComponent>
+            </TabBar>
           </View>
         </View>
       </View>
@@ -88,7 +88,7 @@ class TabBar extends React.Component<Props, State> {
   }
 }
 
-export const TabBarScreen = withStyles(TabBar, (theme: ThemeType) => ({
+export default withStyles(TabBarScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,

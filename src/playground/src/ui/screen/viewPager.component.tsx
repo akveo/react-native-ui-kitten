@@ -10,7 +10,7 @@ import {
   ThemedComponentProps,
   ThemeType,
 } from '@kitten/theme';
-import { ViewPager as ViewPagerComponent } from '@kitten/ui';
+import { ViewPager } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -18,7 +18,7 @@ interface State {
   selectedIndex: number;
 }
 
-class ViewPager extends React.Component<Props, State> {
+class ViewPagerScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'View Pager',
@@ -34,7 +34,7 @@ class ViewPager extends React.Component<Props, State> {
 
   public render(): React.ReactNode {
     return (
-      <ViewPagerComponent
+      <ViewPager
         selectedIndex={this.state.selectedIndex}
         contentWidth={Dimensions.get('window').width}
         onSelect={this.onIndexChange}>
@@ -47,12 +47,12 @@ class ViewPager extends React.Component<Props, State> {
         <View style={this.props.themedStyle.tabContainer}>
           <Text>Tab 3</Text>
         </View>
-      </ViewPagerComponent>
+      </ViewPager>
     );
   }
 }
 
-export const ViewPagerScreen = withStyles(ViewPager, (theme: ThemeType) => ({
+export default withStyles(ViewPagerScreen, (theme: ThemeType) => ({
   tabContainer: {
     flex: 1,
     justifyContent: 'center',

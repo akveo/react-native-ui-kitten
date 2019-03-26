@@ -9,7 +9,7 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Toggle as ToggleComponent } from '@kitten/ui';
+import { Toggle } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -21,7 +21,7 @@ interface State {
   toggleErrorChecked: boolean;
 }
 
-class Toggle extends React.Component<Props, State> {
+class ToggleScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Toggle',
@@ -61,23 +61,23 @@ class Toggle extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Primary</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ToggleComponent
+            <Toggle
               value={this.state.toggle1Checked}
               onValueChange={this.onToggle1Change}
               style={this.props.themedStyle.component}
             />
-            <ToggleComponent
+            <Toggle
               value={this.state.toggle2Checked}
               onValueChange={this.onToggle2Change}
               style={this.props.themedStyle.component}
             />
-            <ToggleComponent
+            <Toggle
               value={this.state.toggle3Checked}
               onValueChange={this.onToggle3Change}
               disabled={true}
               style={this.props.themedStyle.component}
             />
-            <ToggleComponent
+            <Toggle
               value={this.state.toggle4Checked}
               onValueChange={this.onToggle4Change}
               disabled={true}
@@ -88,23 +88,23 @@ class Toggle extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Danger</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ToggleComponent
+            <Toggle
               status='danger'
               style={this.props.themedStyle.component}
               value={this.state.toggleErrorChecked}
               onValueChange={this.onToggleErrorChange}
             />
-            <ToggleComponent
+            <Toggle
               status='danger'
               style={this.props.themedStyle.component}
               value={true}
             />
-            <ToggleComponent
+            <Toggle
               status='danger'
               style={this.props.themedStyle.component}
               disabled={true}
             />
-            <ToggleComponent
+            <Toggle
               status='danger'
               style={this.props.themedStyle.component}
               value={true}
@@ -115,23 +115,23 @@ class Toggle extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Success</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ToggleComponent
+            <Toggle
               status='success'
               style={this.props.themedStyle.component}
               value={this.state.toggleErrorChecked}
               onValueChange={this.onToggleErrorChange}
             />
-            <ToggleComponent
+            <Toggle
               status='success'
               style={this.props.themedStyle.component}
               value={true}
             />
-            <ToggleComponent
+            <Toggle
               status='success'
               style={this.props.themedStyle.component}
               disabled={true}
             />
-            <ToggleComponent
+            <Toggle
               status='success'
               style={this.props.themedStyle.component}
               value={true}
@@ -142,23 +142,23 @@ class Toggle extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Warning</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ToggleComponent
+            <Toggle
               status='warning'
               style={this.props.themedStyle.component}
               value={this.state.toggleErrorChecked}
               onValueChange={this.onToggleErrorChange}
             />
-            <ToggleComponent
+            <Toggle
               status='warning'
               style={this.props.themedStyle.component}
               value={true}
             />
-            <ToggleComponent
+            <Toggle
               status='warning'
               style={this.props.themedStyle.component}
               disabled={true}
             />
-            <ToggleComponent
+            <Toggle
               status='warning'
               style={this.props.themedStyle.component}
               value={true}
@@ -169,23 +169,23 @@ class Toggle extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Info</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ToggleComponent
+            <Toggle
               status='info'
               style={this.props.themedStyle.component}
               value={this.state.toggleErrorChecked}
               onValueChange={this.onToggleErrorChange}
             />
-            <ToggleComponent
+            <Toggle
               status='info'
               style={this.props.themedStyle.component}
               value={true}
             />
-            <ToggleComponent
+            <Toggle
               status='info'
               style={this.props.themedStyle.component}
               disabled={true}
             />
-            <ToggleComponent
+            <Toggle
               status='info'
               style={this.props.themedStyle.component}
               value={true}
@@ -196,16 +196,16 @@ class Toggle extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ToggleComponent
+            <Toggle
               size='small'
               style={this.props.themedStyle.component}
               value={true}
             />
-            <ToggleComponent
+            <Toggle
               style={this.props.themedStyle.component}
               value={true}
             />
-            <ToggleComponent
+            <Toggle
               size='large'
               style={this.props.themedStyle.component}
               value={true}
@@ -217,7 +217,7 @@ class Toggle extends React.Component<Props, State> {
   }
 }
 
-export const ToggleScreen = withStyles(Toggle, (theme: ThemeType) => ({
+export default withStyles(ToggleScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,

@@ -9,7 +9,7 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { CheckBox as CheckBoxComponent } from '@kitten/ui';
+import { CheckBox } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -22,7 +22,7 @@ interface State {
 
 const STATUS: string = '';
 
-class CheckBox extends React.Component<Props, State> {
+class CheckBoxScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'CheckBox',
@@ -57,26 +57,26 @@ class CheckBox extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={this.state.isCheckBox1Checked}
               status={STATUS}
               onChange={this.onCheckBox1Change}
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={this.state.isCheckBox2Checked}
               status={STATUS}
               onChange={this.onCheckBox2Change}
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={this.state.isCheckBox3Checked}
               disabled={true}
               status={STATUS}
               onChange={this.onCheckBox3Change}
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={this.state.isCheckBox4Checked}
               disabled={true}
@@ -88,19 +88,19 @@ class CheckBox extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
               size='large'
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
               size='medium'
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
@@ -111,24 +111,24 @@ class CheckBox extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Text</Text>
           <View style={this.props.themedStyle.containerPreviewColumn}>
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               status={STATUS}
               text='Place your text'
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={true}
               status={STATUS}
               text='Place your text'
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               disabled={true}
               status={STATUS}
               text='Place your text'
             />
-            <CheckBoxComponent
+            <CheckBox
               style={this.props.themedStyle.component}
               checked={true}
               disabled={true}
@@ -142,7 +142,7 @@ class CheckBox extends React.Component<Props, State> {
   }
 }
 
-export const CheckBoxScreen = withStyles(CheckBox, (theme: ThemeType) => ({
+export default withStyles(CheckBoxScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,

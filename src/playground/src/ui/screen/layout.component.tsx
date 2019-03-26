@@ -10,11 +10,11 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Layout as LayoutComponent } from '@kitten/ui';
+import { Layout } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-class Layout extends React.Component<Props> {
+class LayoutScreen extends React.Component<Props> {
 
   static navigationOptions = {
     title: 'Layout',
@@ -23,15 +23,15 @@ class Layout extends React.Component<Props> {
   public render(): React.ReactElement<ViewProps> {
     return (
       <View style={this.props.themedStyle.container}>
-        <LayoutComponent style={this.props.themedStyle.layout}>
+        <Layout style={this.props.themedStyle.layout}>
           <Text>Layout</Text>
-        </LayoutComponent>
+        </Layout>
       </View>
     );
   }
 }
 
-export const LayoutScreen = withStyles(Layout, (theme: ThemeType) => ({
+export default withStyles(LayoutScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,
