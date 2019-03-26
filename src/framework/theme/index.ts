@@ -17,8 +17,6 @@ export {
   withStyles,
 } from './component';
 
-export {
-  ModalService,
-} from './service';
+export { ModalService } from './service';
 
 export * from './type';

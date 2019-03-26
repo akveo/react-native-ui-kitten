@@ -20,6 +20,7 @@ interface TabProps {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
+  children?: React.ReactElement<any>;
 }
 
 const Text = styled<TextProps>(TextComponent);
