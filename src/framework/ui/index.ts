@@ -178,6 +178,7 @@ export {
   TabProps,
   TabBarProps,
   TabViewProps,
+  TextProps,
   TooltipProps,
   ToggleProps,
   TopNavigationBarProps,
