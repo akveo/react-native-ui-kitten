@@ -31,7 +31,7 @@ export class Avatar extends React.Component<Props> {
     // @ts-ignore: rhs operator is restricted to be number
     const borderRadius: number = roundCoefficient * baseStyle.height;
 
-    return { ...baseStyle, borderRadius };
+    return { borderRadius, ...baseStyle };
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
