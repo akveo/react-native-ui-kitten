@@ -78,7 +78,7 @@ export class Input extends React.Component<Props> {
       letterSpacing,
       textAlign,
       ...container
-    } = style;
+    } = StyleSheet.flatten(style);
 
     return {
       container: container,
@@ -134,7 +134,6 @@ export class Input extends React.Component<Props> {
 
 const strictStyles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
   },
   text: {
