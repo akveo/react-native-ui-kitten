@@ -26,8 +26,8 @@ interface ListDerivedProps {
 
 interface TemplateBaseProps {
   index: number;
-  icon: (index: number, style: StyleType) => React.ReactElement<ImageProps>;
-  accessory: (index: number, style: StyleType) => React.ReactElement<any>;
+  icon: (style: StyleType, index: number) => React.ReactElement<ImageProps>;
+  accessory: (style: StyleType, index: number) => React.ReactElement<any>;
 }
 
 interface TemplateTitleProps extends Partial<TemplateBaseProps> {
@@ -130,7 +130,7 @@ export class ListItem extends React.Component<Props> {
     // @ts-ignore: will be not executed if `icon` prop is provided
     const { index, icon } = this.props;
 
-    const iconElement: React.ReactElement<ImageProps> = icon(index, style);
+    const iconElement: React.ReactElement<ImageProps> = icon(style, index);
 
     return React.cloneElement(iconElement, {
       key: 0,
@@ -180,7 +180,7 @@ export class ListItem extends React.Component<Props> {
     // @ts-ignore: will be not executed if `accessory` property is provided
     const { index, accessory } = this.props;
 
-    const accessoryElement: React.ReactElement<any> = accessory(index, style);
+    const accessoryElement: React.ReactElement<any> = accessory(style, index);
 
     return React.cloneElement(accessoryElement, {
       key: 4,
