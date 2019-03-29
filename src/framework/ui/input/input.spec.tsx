@@ -32,10 +32,7 @@ const Mock = (props?: InputProps): React.ReactElement<ApplicationProviderProps> 
     <ApplicationProvider
       mapping={mapping}
       theme={theme}>
-      <Input
-        {...props}
-        style={{}}
-      />
+      <Input {...props}/>
     </ApplicationProvider>
   );
 };
