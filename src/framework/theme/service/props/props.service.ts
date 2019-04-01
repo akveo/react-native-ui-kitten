@@ -19,7 +19,7 @@ export type AllWithRestProps = Partial<Props> & RestProps;
  * @return (Partial<Props>) - object with keys contained in `from` array
  */
 export function all(source: Props | undefined, from: string[]): AllOfProps {
-  if(!source) {
+  if (!source) {
     return {};
   }
 
@@ -32,7 +32,7 @@ export function all(source: Props | undefined, from: string[]): AllOfProps {
  * Retrieves all props included in `from` array, rest props includes in under the `rest` key
  */
 export function allWithRest(source: Props | undefined, from: string[]): AllWithRestProps {
-  if(!source) {
+  if (!source) {
     return { rest: {} };
   }
 
