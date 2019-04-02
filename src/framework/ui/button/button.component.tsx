@@ -5,11 +5,14 @@ import {
   GestureResponderEvent,
   StyleSheet,
   ImageProps,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
   StyleType,
   Interaction,
+  allWithRest,
   styled,
 } from '@kitten/theme';
 import {
@@ -20,8 +23,10 @@ import {
   ButtonAlignment,
   ButtonAlignments,
 } from './type';
+import { TextStyleProps } from '../common/props';
 
 interface ButtonProps {
+  style?: StyleProp<TextStyle>;
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
@@ -64,6 +69,9 @@ export class Button extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
+    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
+    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+
     const {
       textColor,
       textFontSize,
@@ -81,6 +89,8 @@ export class Button extends React.Component<Props> {
     return {
       container: {
         ...containerParameters,
+        ...derivedContainerStyle,
+        ...styles.container,
         flexDirection: alignment.flex(),
       },
       text: {
@@ -88,6 +98,7 @@ export class Button extends React.Component<Props> {
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         marginHorizontal: textMarginHorizontal,
+        ...derivedTextStyle,
       },
       icon: {
         width: iconWidth,
@@ -128,15 +139,15 @@ export class Button extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
+    const { themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
-        {...derivedProps}
-        style={[container, style, styles.container]}
         activeOpacity={1.0}
+        {...derivedProps}
+        style={container}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>

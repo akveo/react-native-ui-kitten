@@ -4,9 +4,11 @@ import {
   StyleSheet,
   TextInput,
   TextInputProps,
+  TextStyle,
   View,
 } from 'react-native';
 import {
+  allWithRest,
   Interaction,
   StyledComponentProps,
   StyleType,
@@ -15,6 +17,7 @@ import {
   InputFocusEvent,
   InputEndEditEvent,
 } from '../common/type';
+import { TextStyleProps } from '@kitten/ui/common/props';
 
 interface InputProps {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
@@ -43,6 +46,9 @@ export class Input extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
+    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
+    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+
     const {
       textMarginHorizontal,
       textColor,
@@ -54,42 +60,23 @@ export class Input extends React.Component<Props> {
     } = style;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+        ...derivedContainerStyle,
+        ...styles.container,
+      },
       text: {
         marginHorizontal: textMarginHorizontal,
         color: textColor,
+        ...derivedTextStyle,
+        ...styles.text,
       },
       icon: {
         width: iconWidth,
         height: iconHeight,
         marginHorizontal: iconMarginHorizontal,
         tintColor: iconTintColor,
-      },
-    };
-  };
-
-  private getDerivedStyle = (style: StyleType): StyleType => {
-    const {
-      color,
-      fontFamily,
-      fontSize,
-      fontStyle,
-      fontWeight,
-      letterSpacing,
-      textAlign,
-      ...container
-    } = style;
-
-    return {
-      container: container,
-      text: {
-        color,
-        fontFamily,
-        fontSize,
-        fontStyle,
-        fontWeight,
-        letterSpacing,
-        textAlign,
+        ...styles.icon,
       },
     };
   };
@@ -111,20 +98,18 @@ export class Input extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<TextInputProps> {
-    const { style, themedStyle, disabled, ...derivedProps } = this.props;
-
-    const derivedStyle: StyleType = this.getDerivedStyle(style);
+    const { themedStyle, disabled, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyle.icon);
 
     return (
-      <View style={[componentStyle.container, derivedStyle.container, strictStyles.container]}>
+      <View style={componentStyle.container}>
         <TextInput
           {...derivedProps}
           editable={!disabled}
           onFocus={this.onFocus}
           onEndEditing={this.onEndEditing}
-          style={[componentStyle.text, derivedStyle.text, strictStyles.text]}
+          style={componentStyle.text}
         />
         {componentChildren}
       </View>
@@ -132,15 +117,13 @@ export class Input extends React.Component<Props> {
   }
 }
 
-const strictStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
   },
   text: {
     flex: 1,
   },
   icon: {
-    flexGrow: 1,
   },
 });

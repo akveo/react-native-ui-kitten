@@ -17,6 +17,10 @@ export {
   withStyles,
 } from './component';
 
-export { ModalService } from './service';
+export {
+  all,
+  allWithRest,
+  ModalService,
+} from './service';
 
 export * from './type';

@@ -26,8 +26,8 @@ interface ListDerivedProps {
 
 interface TemplateBaseProps {
   index: number;
-  icon: (index: number, style: StyleType) => React.ReactElement<ImageProps>;
-  accessory: (index: number, style: StyleType) => React.ReactElement<any>;
+  icon: (style: StyleType, index: number) => React.ReactElement<ImageProps>;
+  accessory: (style: StyleType, index: number) => React.ReactElement<any>;
 }
 
 interface TemplateTitleProps extends Partial<TemplateBaseProps> {
@@ -40,7 +40,11 @@ interface TemplateDescriptionProps extends Partial<TemplateBaseProps> {
   description: string;
 }
 
-type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps) & ListDerivedProps;
+interface CustomContentProps {
+  children?: React.ReactNode;
+}
+
+type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
 
 const Text = styled<TextProps>(TextComponent);
 
@@ -50,7 +54,7 @@ export class ListItem extends React.Component<Props> {
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
-      this.props.onPress(event, this.props.index);
+      this.props.onPress(this.props.index, event);
     }
   };
 
@@ -58,7 +62,7 @@ export class ListItem extends React.Component<Props> {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(event, this.props.index);
+      this.props.onPressIn(this.props.index, event);
     }
   };
 
@@ -66,13 +70,13 @@ export class ListItem extends React.Component<Props> {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(event, this.props.index);
+      this.props.onPressOut(this.props.index, event);
     }
   };
 
   private onLongPress = (event: GestureResponderEvent) => {
     if (this.props.onLongPress) {
-      this.props.onLongPress(event, this.props.index);
+      this.props.onLongPress(this.props.index, event);
     }
   };
 
@@ -130,7 +134,7 @@ export class ListItem extends React.Component<Props> {
     // @ts-ignore: will be not executed if `icon` prop is provided
     const { index, icon } = this.props;
 
-    const iconElement: React.ReactElement<ImageProps> = icon(index, style);
+    const iconElement: React.ReactElement<ImageProps> = icon(style, index);
 
     return React.cloneElement(iconElement, {
       key: 0,
@@ -180,7 +184,7 @@ export class ListItem extends React.Component<Props> {
     // @ts-ignore: will be not executed if `accessory` property is provided
     const { index, accessory } = this.props;
 
-    const accessoryElement: React.ReactElement<any> = accessory(index, style);
+    const accessoryElement: React.ReactElement<any> = accessory(style, index);
 
     return React.cloneElement(accessoryElement, {
       key: 4,
@@ -209,10 +213,16 @@ export class ListItem extends React.Component<Props> {
     ];
   };
 
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+    const { children } = this.props;
+
+    return children ? children : this.renderTemplateChildren(style);
+  };
+
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.renderTemplateChildren(componentStyles);
+    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
