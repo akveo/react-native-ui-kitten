@@ -15,8 +15,8 @@ export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 // @ts-ignore: props override
 export interface TouchableOpacityIndexedProps extends TouchableOpacityProps {
-  onPress?: (event: GestureResponderEvent, index: number) => void;
-  onPressIn?: (event: GestureResponderEvent, index: number) => void;
-  onPressOut?: (event: GestureResponderEvent, index: number) => void;
-  onLongPress?: (event: GestureResponderEvent, index: number) => void;
+  onPress?: (index: number, event: GestureResponderEvent) => void;
+  onPressIn?: (index: number, event: GestureResponderEvent) => void;
+  onPressOut?: (index: number, event: GestureResponderEvent) => void;
+  onLongPress?: (index: number, event: GestureResponderEvent) => void;
 }
