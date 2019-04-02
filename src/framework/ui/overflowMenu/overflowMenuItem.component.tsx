@@ -38,7 +38,7 @@ export class OverflowMenuItem extends React.Component<Props> {
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
-      this.props.onPress(event, this.props.index);
+      this.props.onPress(this.props.index, event);
     }
   };
 
@@ -46,7 +46,7 @@ export class OverflowMenuItem extends React.Component<Props> {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(event, this.props.index);
+      this.props.onPressIn(this.props.index, event);
     }
   };
 
@@ -54,13 +54,13 @@ export class OverflowMenuItem extends React.Component<Props> {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(event, this.props.index);
+      this.props.onPressOut(this.props.index, event);
     }
   };
 
   private onLongPress = (event: GestureResponderEvent) => {
     if (this.props.onLongPress) {
-      this.props.onLongPress(event, this.props.index);
+      this.props.onLongPress(this.props.index, event);
     }
   };
 
