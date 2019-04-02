@@ -15,8 +15,8 @@ export class RangeCalendarScreen extends React.Component {
       <View style={styles.container}>
         <RkCalendar
           type='range'
-          min={new Date(2018, 0, 1)}
-          max={new Date(2019, 0, 1)}
+          min={new Date(2019, 0, 1)}
+          max={new Date(2025, 0, 1)}
         />
       </View>
     );

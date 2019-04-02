@@ -12,8 +12,8 @@ export class HorizontalCalendarScreen extends React.Component {
   };
 
   state = {
-    min: new Date(2018, 0, 1),
-    max: new Date(2019, 0, 1),
+    min: new Date(2019, 0, 1),
+    max: new Date(2025, 0, 1),
     visibleMonth: undefined,
   };
 
