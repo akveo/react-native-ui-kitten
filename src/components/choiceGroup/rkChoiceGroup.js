@@ -153,8 +153,8 @@ export class RkChoiceGroup extends RkComponent {
     let index = 0;
     const process = (child) => {
       if (child.type === RkChoice && this.choice[index] === undefined) {
-        index += 1;
         this.choice[index] = child.props.selected;
+        index += 1;
       } else if (child.props && child.props.children) {
         React.Children.map(child.props.children, process);
       }
