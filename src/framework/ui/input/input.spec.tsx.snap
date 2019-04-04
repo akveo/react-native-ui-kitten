@@ -3,22 +3,16 @@
 exports[`@input: matches snapshot * appearance * icon 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#f7f8fa",
-        "borderColor": "transparent",
-        "borderRadius": 6,
-        "borderWidth": 2,
-        "minHeight": 48,
-        "paddingHorizontal": 6,
-        "paddingVertical": 12,
-      },
-      Object {},
-      Object {
-        "flex": 1,
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "backgroundColor": "#f7f8fa",
+      "borderColor": "transparent",
+      "borderRadius": 6,
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "minHeight": 48,
+      "paddingHorizontal": 6,
+      "paddingVertical": 12,
+    }
   }
 >
   <TextInput
@@ -31,24 +25,11 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
     onFocus={[Function]}
     status="primary"
     style={
-      Array [
-        Object {
-          "color": "#a6aebd",
-          "marginHorizontal": 6,
-        },
-        Object {
-          "color": undefined,
-          "fontFamily": undefined,
-          "fontSize": undefined,
-          "fontStyle": undefined,
-          "fontWeight": undefined,
-          "letterSpacing": undefined,
-          "textAlign": undefined,
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
+      Object {
+        "color": "#a6aebd",
+        "flex": 1,
+        "marginHorizontal": 6,
+      }
     }
     theme={
       Object {
@@ -91,22 +72,16 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
 exports[`@input: matches snapshot * interaction * stateless 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#f7f8fa",
-        "borderColor": "transparent",
-        "borderRadius": 6,
-        "borderWidth": 2,
-        "minHeight": 48,
-        "paddingHorizontal": 6,
-        "paddingVertical": 12,
-      },
-      Object {},
-      Object {
-        "flex": 1,
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "backgroundColor": "#f7f8fa",
+      "borderColor": "transparent",
+      "borderRadius": 6,
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "minHeight": 48,
+      "paddingHorizontal": 6,
+      "paddingVertical": 12,
+    }
   }
 >
   <TextInput
@@ -118,24 +93,11 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
     onFocus={[Function]}
     status="primary"
     style={
-      Array [
-        Object {
-          "color": "#a6aebd",
-          "marginHorizontal": 6,
-        },
-        Object {
-          "color": undefined,
-          "fontFamily": undefined,
-          "fontSize": undefined,
-          "fontStyle": undefined,
-          "fontWeight": undefined,
-          "letterSpacing": undefined,
-          "textAlign": undefined,
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
+      Object {
+        "color": "#a6aebd",
+        "flex": 1,
+        "marginHorizontal": 6,
+      }
     }
     theme={
       Object {
