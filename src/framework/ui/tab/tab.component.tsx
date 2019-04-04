@@ -20,9 +20,10 @@ interface TabProps {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
+  children?: React.ReactElement<any>;
 }
 
-const Text = styled<TextComponent, TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
 

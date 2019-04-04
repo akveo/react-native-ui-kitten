@@ -10,6 +10,7 @@ import {
 
 interface TextProps {
   category?: string;
+  children?: React.ReactText;
 }
 
 export type Props = TextProps & StyledComponentProps & TextComponentProps;

@@ -3,16 +3,20 @@ import {
   View,
   ScrollView,
   Image,
+  ImageProps,
+  ImageSourcePropType,
 } from 'react-native';
 import {
   fireEvent,
   render,
+  RenderAPI,
+  shallow,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
@@ -28,49 +32,63 @@ import {
   Props as TabViewProps,
   ChildProps as TabViewChildProps,
 } from './tabView.component';
-import * as config from './tab.spec.contig';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const Tab = styled<TabComponent, TabProps>(TabComponent);
-const TabBar = styled<TabBarComponent, TabBarProps>(TabBarComponent);
+const Tab = styled<TabProps>(TabComponent);
+const TabBar = styled<TabBarProps>(TabBarComponent);
 
 describe('@tab: component checks', () => {
 
-  const Mock = (props?: TabProps): React.ReactElement<StyleProviderProps> => (
-    <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-      <Tab {...props} />
-    </StyleProvider>
-  );
+  const Mock = (props?: TabProps): React.ReactElement<ApplicationProviderProps> => {
+    return (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={theme}>
+        <Tab {...props} />
+      </ApplicationProvider>
+    );
+  };
 
   it('* empty', () => {
-    const component = render(
+    const component: RenderAPI = render(
       <Mock/>,
     );
 
-    expect(component).toMatchSnapshot();
+    const { output } = shallow(component.getByType(TabComponent));
+
+    expect(output).toMatchSnapshot();
   });
 
   it('* title', () => {
-    const component = render(
-      <Mock
-        title='title'
-      />,
+    const component: RenderAPI = render(
+      <Mock title='title'/>,
     );
 
-    expect(component).toMatchSnapshot();
+    const { output } = shallow(component.getByType(TabComponent));
+
+    expect(output).toMatchSnapshot();
   });
 
   it('* icon', () => {
-    const component = render(
-      <Mock
-        icon={(style: StyleType) =>
-          <Image
-            source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
-            style={style}
-          />}
-      />,
+    const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+
+    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
+      return (
+        <Image
+          style={style}
+          source={iconSource}
+        />
+      );
+    };
+
+    const component: RenderAPI = render(
+      <Mock icon={icon}/>,
     );
 
-    expect(component).toMatchSnapshot();
+    const { output } = shallow(component.getByType(TabComponent));
+
+    expect(output).toMatchSnapshot();
   });
 
 });
@@ -80,11 +98,17 @@ describe('@tab-bar: component checks', () => {
   const childTestId0: string = '@tab-bar/child-0';
   const childTestId1: string = '@tab-bar/child-1';
 
-  const Mock = (props?: TabBarProps): React.ReactElement<StyleProviderProps> => (
-    <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-      <TabBar {...props}>{props.children}</TabBar>
-    </StyleProvider>
-  );
+  const Mock = (props?: TabBarProps): React.ReactElement<ApplicationProviderProps> => {
+    return (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={theme}>
+        <TabBar {...props}>
+          {props.children}
+        </TabBar>
+      </ApplicationProvider>
+    );
+  };
 
   const ChildMock = Tab;
 
@@ -109,21 +133,31 @@ describe('@tab-bar: component checks', () => {
 
 describe('@tab-view: component checks', () => {
 
-  const Mock = (props?: TabViewProps): React.ReactElement<TabViewProps> => (
-    <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-      <TabView {...props}>{props.children}</TabView>
-    </StyleProvider>
-  );
+  const Mock = (props?: TabViewProps): React.ReactElement<ApplicationProviderProps> => {
+    return (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={theme}>
+        <TabView {...props}>
+          {props.children}
+        </TabView>
+      </ApplicationProvider>
+    );
+  };
 
-  const ChildMock = (props?: TabViewChildProps): React.ReactElement<TabViewChildProps> => (
-    <Tab {...props} />
-  );
+  const ChildMock = (props?: TabViewChildProps): React.ReactElement<TabViewChildProps> => {
+    return (
+      <Tab {...props} />
+    );
+  };
 
   it('* emits onSelect with correct args', () => {
     const onSelect = jest.fn();
 
     const component = render(
-      <Mock contentWidth={375} onSelect={onSelect}>
+      <Mock
+        contentWidth={375}
+        onSelect={onSelect}>
         <ChildMock>
           <View/>
         </ChildMock>
@@ -154,7 +188,7 @@ describe('@tab-view: component checks', () => {
       return index !== disabledComponentIndex;
     });
 
-    const component = render(
+    const component: RenderAPI = render(
       <Mock contentWidth={375} shouldLoadComponent={shouldLoadComponent}>
         <ChildMock>
           <View/>
@@ -166,8 +200,7 @@ describe('@tab-view: component checks', () => {
     );
 
     const scrollView: ReactTestInstance = component.getByType(ScrollView);
-
-    const unloadedChild = scrollView.props.children[disabledComponentIndex];
+    const unloadedChild: ReactTestInstance = scrollView.props.children[disabledComponentIndex];
 
     expect(unloadedChild.props.children).toEqual(undefined);
   });

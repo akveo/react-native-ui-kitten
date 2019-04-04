@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   Image,
+  ImageProps,
+  ImageSourcePropType,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -11,23 +13,28 @@ import {
 } from 'react-native-testing-library';
 import {
   styled,
-  StyleProvider,
-  StyleProviderProps,
+  ApplicationProvider,
+  ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
   Button as ButtonComponent,
   Props as ButtonProps,
 } from './button.component';
-import * as config from './button.spec.config';
+import { default as mapping } from '../common/mapping.json';
+import { default as theme } from '../common/theme.json';
 
-const Button = styled<ButtonComponent, ButtonProps>(ButtonComponent);
+const Button = styled<ButtonProps>(ButtonComponent);
 
-const Mock = (props?: ButtonProps): React.ReactElement<StyleProviderProps> => (
-  <StyleProvider mapping={config.mapping} theme={config.theme} styles={{}}>
-    <Button {...props} />
-  </StyleProvider>
-);
+const Mock = (props?: ButtonProps): React.ReactElement<ApplicationProviderProps> => {
+  return (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={theme}>
+      <Button {...props} />
+    </ApplicationProvider>
+  );
+};
 
 const renderComponent = (props?: ButtonProps): RenderAPI => {
   return render(
@@ -50,11 +57,17 @@ describe('@button: matches snapshot', () => {
 
   describe('* appearance', () => {
 
-    const icon = (style: StyleType) => (
-      <Image
-        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-        style={style}/>
-    );
+    const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+
+    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
+      return (
+        <Image
+          source={iconSource}
+          style={style}
+        />
+      );
+    };
+
     const text: React.ReactText = 'BUTTON';
 
     it('* empty', () => {

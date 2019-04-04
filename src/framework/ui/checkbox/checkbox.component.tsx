@@ -1,72 +1,49 @@
 import React from 'react';
 import {
-  GestureResponderEvent,
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
+  GestureResponderEvent,
+  StyleProp,
+  TextStyle,
+  ViewProps,
 } from 'react-native';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
+  allWithRest,
 } from '@kitten/theme';
 import {
   Props as TextProps,
   Text as TextComponent,
 } from '../text/text.component';
 import { CheckMark } from '../drawable';
+import { TextStyleProps } from '../common/props';
 
 interface CheckBoxProps {
+  style?: StyleProp<TextStyle>;
   text?: string;
   checked?: boolean;
-  isIndeterminate?: boolean;
+  indeterminate?: boolean;
   status?: string;
   size?: string;
-  onChange?: (checked: boolean, indeterminate?: boolean) => void;
+  onChange?: (checked: boolean, indeterminate: boolean) => void;
 }
 
-const Text = styled<TextComponent, TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps;
 
-interface State {
-  indeterminate: boolean;
-}
-
-export class CheckBox extends React.Component<Props, State> {
-
-  state: State = {
-    indeterminate: false,
-  };
-
-  public componentWillMount(): void {
-    if (this.props.isIndeterminate) {
-      this.setState({ indeterminate: this.props.isIndeterminate });
-      this.props.dispatch([Interaction.INDETERMINATE]);
-    }
-  }
-
-  public componentWillUpdate(nextProps: Readonly<Props>): void {
-    if (nextProps.isIndeterminate !== this.state.indeterminate) {
-      this.setState({ indeterminate: nextProps.isIndeterminate });
-      if (nextProps.isIndeterminate) {
-        this.props.dispatch([Interaction.INDETERMINATE]);
-      } else {
-        this.props.dispatch([]);
-      }
-    }
-  }
+export class CheckBox extends React.Component<Props> {
 
   private onPress = () => {
-    const { onChange, checked } = this.props;
+    this.props.dispatch([]);
 
-    if (onChange) {
-      this.setState({ indeterminate: false }, () => {
-        this.props.dispatch([]);
-        this.props.onChange(!checked, this.state.indeterminate);
-      });
+    if (this.props.onChange) {
+      this.props.onChange(!this.props.checked, false);
     }
   };
 
@@ -86,52 +63,58 @@ export class CheckBox extends React.Component<Props, State> {
     }
   };
 
-  private getSelectSize = (indeterminate: boolean, width: number, height: number): StyleType => {
-    if (indeterminate) {
-      return {
-        width: width - width * 0.18,
-        height: height * 0.18,
-      };
-    } else {
-      return {
-        width: width * 0.5,
-        height: height * 0.5,
-      };
-    }
-  };
-
   private getComponentStyle = (style: StyleType): StyleType => {
+    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
+    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+
     const {
+      textMarginHorizontal,
       textColor,
       textFontSize,
       textFontWeight,
       textLineHeight,
-      checkMarkColor,
+      iconWidth,
+      iconHeight,
+      iconBorderRadius,
+      iconTintColor,
       highlightWidth,
       highlightHeight,
       highlightBorderRadius,
       highlightBackgroundColor,
       ...containerParameters
     } = style;
-    const { indeterminate } = this.state;
 
     return {
-      selectContainer: containerParameters,
+      container: {
+        ...derivedContainerStyle,
+        ...styles.container,
+      },
+      highlightContainer: styles.highlightContainer,
+      selectContainer: {
+        ...containerParameters,
+        ...styles.selectContainer,
+      },
       text: {
+        marginHorizontal: textMarginHorizontal,
         color: textColor,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         lineHeight: textLineHeight,
+        ...styles.text,
+        ...derivedTextStyle,
       },
       icon: {
-        ...this.getSelectSize(indeterminate, containerParameters.width, containerParameters.height),
-        backgroundColor: checkMarkColor,
+        width: iconWidth,
+        height: iconHeight,
+        borderRadius: iconBorderRadius,
+        backgroundColor: iconTintColor,
       },
       highlight: {
         width: highlightWidth,
         height: highlightHeight,
         borderRadius: highlightBorderRadius,
         backgroundColor: highlightBackgroundColor,
+        ...styles.highlight,
       },
     };
   };
@@ -140,59 +123,67 @@ export class CheckBox extends React.Component<Props, State> {
     const { text } = this.props;
 
     return (
-      <Text style={[style, styles.text]} key={0}>{text}</Text>
+      <Text style={style}>{text}</Text>
     );
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => {
-    const { text } = this.props;
-
-    return [
-      text ? this.renderTextElement(style.text) : undefined,
-    ];
-  };
-
-  private renderSelectIcon = (style: StyleType): React.ReactNode => {
+  private renderSelectIconElement = (style: StyleType): React.ReactElement<ViewProps> => {
     return (
       <CheckMark style={[style, styles.selectIcon]}/>
     );
   };
 
-  private renderIndeterminateIcon = (style: StyleType): React.ReactNode => {
+  private renderIndeterminateIconElement = (style: StyleType): React.ReactElement<ViewProps> => {
     return (
       <View style={[style, styles.indeterminateIcon]}/>
     );
   };
 
-  private renderIcon = (style: StyleType): React.ReactNode => {
-    if (this.state.indeterminate) {
-      return this.renderIndeterminateIcon(style);
+  private renderIconElement = (style: StyleType): React.ReactElement<ViewProps> => {
+    if (this.props.indeterminate) {
+      return this.renderIndeterminateIconElement(style);
     } else {
-      return this.renderSelectIcon(style);
+      return this.renderSelectIconElement(style);
     }
   };
 
+  private renderComponentChildren = (style: StyleType): React.ReactElement<ViewProps>[] => {
+    const { text } = this.props;
+
+    return [
+      this.renderIconElement(style.icon),
+      text ? this.renderTextElement(style.text) : null,
+    ];
+  };
+
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
-    const { selectContainer, icon, highlight, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
-    const checkboxIcon: React.ReactNode = this.renderIcon(icon);
+    const { style, themedStyle, text, ...derivedProps } = this.props;
+
+    const {
+      container,
+      highlightContainer,
+      highlight,
+      selectContainer,
+      ...componentStyle
+    }: StyleType = this.getComponentStyle(themedStyle);
+
+    const [iconElement, textElement] = this.renderComponentChildren(componentStyle);
 
     return (
-      <View style={[style, styles.container]}>
-        <View style={styles.highlightContainer}>
-          <View style={[highlight, styles.highlight]}/>
+      <View style={container}>
+        <View style={highlightContainer}>
+          <View style={highlight}/>
           <TouchableOpacity
             {...derivedProps}
-            style={[selectContainer, styles.selectContainer]}
+            style={selectContainer}
             activeOpacity={1.0}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
-            {checkboxIcon}
+            {iconElement}
           </TouchableOpacity>
         </View>
-        {componentChildren}
+        {textElement}
       </View>
     );
   }
@@ -218,7 +209,5 @@ const styles = StyleSheet.create({
   highlight: {
     position: 'absolute',
   },
-  text: {
-    marginLeft: 12,
-  },
+  text: {},
 });

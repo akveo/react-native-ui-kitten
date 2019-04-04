@@ -3,13 +3,10 @@
 exports[`@checkbox matches snapshots * active 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -22,17 +19,13 @@ exports[`@checkbox matches snapshots * active 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 6,
-            "height": 40,
-            "width": 40,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "#DDE1EB",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -42,31 +35,24 @@ exports[`@checkbox matches snapshots * active 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      status="primary"
       style={
-        Array [
-          Object {
-            "backgroundColor": "#D9E4FF",
-            "borderColor": "#3366FF",
-            "borderRadius": 3,
-            "borderWidth": 1,
-            "height": 24,
-            "width": 24,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#284DE0",
+          "borderColor": "#284DE0",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
           "blue-dark": "#2541CC",
           "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
-          "checkbox-border-radius": 3,
-          "checkbox-border-width": 1,
-          "checkbox-height": 24,
-          "checkbox-width": 24,
           "color-basic-100": "#F7F8FA",
           "color-basic-200": "#EDF0F5",
           "color-basic-300": "#DDE1EB",
@@ -172,6 +158,7 @@ exports[`@checkbox matches snapshots * active 1`] = `
           Array [
             Object {
               "backgroundColor": "transparent",
+              "borderRadius": undefined,
               "height": 12,
               "width": 12,
             },
@@ -187,13 +174,10 @@ exports[`@checkbox matches snapshots * active 1`] = `
 exports[`@checkbox matches snapshots * active: default 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -206,17 +190,13 @@ exports[`@checkbox matches snapshots * active: default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 6,
-            "height": 40,
-            "width": 40,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -226,31 +206,24 @@ exports[`@checkbox matches snapshots * active: default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      status="primary"
       style={
-        Array [
-          Object {
-            "backgroundColor": "#D9E4FF",
-            "borderColor": "#3366FF",
-            "borderRadius": 3,
-            "borderWidth": 1,
-            "height": 24,
-            "width": 24,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#D9E4FF",
+          "borderColor": "#3366FF",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
           "blue-dark": "#2541CC",
           "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
-          "checkbox-border-radius": 3,
-          "checkbox-border-width": 1,
-          "checkbox-height": 24,
-          "checkbox-width": 24,
           "color-basic-100": "#F7F8FA",
           "color-basic-200": "#EDF0F5",
           "color-basic-300": "#DDE1EB",
@@ -356,6 +329,7 @@ exports[`@checkbox matches snapshots * active: default 1`] = `
           Array [
             Object {
               "backgroundColor": "transparent",
+              "borderRadius": undefined,
               "height": 12,
               "width": 12,
             },
@@ -371,13 +345,10 @@ exports[`@checkbox matches snapshots * active: default 1`] = `
 exports[`@checkbox matches snapshots * checked.disabled 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -390,17 +361,13 @@ exports[`@checkbox matches snapshots * checked.disabled 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 6,
-            "height": 40,
-            "width": 40,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -412,31 +379,24 @@ exports[`@checkbox matches snapshots * checked.disabled 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      status="primary"
       style={
-        Array [
-          Object {
-            "backgroundColor": "#C8CEDB",
-            "borderColor": "#C8CEDB",
-            "borderRadius": 3,
-            "borderWidth": 1,
-            "height": 24,
-            "width": 24,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#C8CEDB",
+          "borderColor": "#C8CEDB",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
           "blue-dark": "#2541CC",
           "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
-          "checkbox-border-radius": 3,
-          "checkbox-border-width": 1,
-          "checkbox-height": 24,
-          "checkbox-width": 24,
           "color-basic-100": "#F7F8FA",
           "color-basic-200": "#EDF0F5",
           "color-basic-300": "#DDE1EB",
@@ -542,6 +502,7 @@ exports[`@checkbox matches snapshots * checked.disabled 1`] = `
           Array [
             Object {
               "backgroundColor": "#FFFFFF",
+              "borderRadius": undefined,
               "height": 12,
               "width": 12,
             },
@@ -557,13 +518,10 @@ exports[`@checkbox matches snapshots * checked.disabled 1`] = `
 exports[`@checkbox matches snapshots * default 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -576,17 +534,13 @@ exports[`@checkbox matches snapshots * default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 6,
-            "height": 40,
-            "width": 40,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -596,31 +550,24 @@ exports[`@checkbox matches snapshots * default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      status="primary"
       style={
-        Array [
-          Object {
-            "backgroundColor": "#D9E4FF",
-            "borderColor": "#3366FF",
-            "borderRadius": 3,
-            "borderWidth": 1,
-            "height": 24,
-            "width": 24,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#D9E4FF",
+          "borderColor": "#3366FF",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
           "blue-dark": "#2541CC",
           "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
-          "checkbox-border-radius": 3,
-          "checkbox-border-width": 1,
-          "checkbox-height": 24,
-          "checkbox-width": 24,
           "color-basic-100": "#F7F8FA",
           "color-basic-200": "#EDF0F5",
           "color-basic-300": "#DDE1EB",
@@ -726,6 +673,7 @@ exports[`@checkbox matches snapshots * default 1`] = `
           Array [
             Object {
               "backgroundColor": "transparent",
+              "borderRadius": undefined,
               "height": 12,
               "width": 12,
             },
@@ -741,13 +689,10 @@ exports[`@checkbox matches snapshots * default 1`] = `
 exports[`@checkbox matches snapshots * with text 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -760,17 +705,13 @@ exports[`@checkbox matches snapshots * with text 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 6,
-            "height": 40,
-            "width": 40,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -781,32 +722,24 @@ exports[`@checkbox matches snapshots * with text 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      status="primary"
       style={
-        Array [
-          Object {
-            "backgroundColor": "#3366FF",
-            "borderColor": "#3366FF",
-            "borderRadius": 3,
-            "borderWidth": 1,
-            "height": 24,
-            "width": 24,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#3366FF",
+          "borderColor": "#3366FF",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
-      text="Text"
       theme={
         Object {
           "blue-dark": "#2541CC",
           "blue-pitch-dark": "#0D1C2E",
           "blue-primary": "#3366FF",
-          "checkbox-border-radius": 3,
-          "checkbox-border-width": 1,
-          "checkbox-height": 24,
-          "checkbox-width": 24,
           "color-basic-100": "#F7F8FA",
           "color-basic-200": "#EDF0F5",
           "color-basic-300": "#DDE1EB",
@@ -912,6 +845,7 @@ exports[`@checkbox matches snapshots * with text 1`] = `
           Array [
             Object {
               "backgroundColor": "#FFFFFF",
+              "borderRadius": undefined,
               "height": 12,
               "width": 12,
             },
@@ -921,22 +855,18 @@ exports[`@checkbox matches snapshots * with text 1`] = `
       />
     </TouchableOpacity>
   </View>
-  <ForwardRef(createComponent)
+  <ForwardRef(WrappingElement)
     style={
-      Array [
-        Object {
-          "color": "#0D1C2E",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "lineHeight": 16,
-        },
-        Object {
-          "marginLeft": 12,
-        },
-      ]
+      Object {
+        "color": "#0D1C2E",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "lineHeight": 16,
+        "marginHorizontal": 12,
+      }
     }
   >
     Text
-  </ForwardRef(createComponent)>
+  </ForwardRef(WrappingElement)>
 </View>
 `;

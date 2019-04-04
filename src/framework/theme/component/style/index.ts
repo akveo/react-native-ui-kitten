@@ -5,5 +5,6 @@ export {
 
 export {
   styled,
+  Context as ContextProps,
   Props as StyledComponentProps,
 } from './styleConsumer.component';

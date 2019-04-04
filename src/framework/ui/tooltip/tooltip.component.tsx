@@ -13,15 +13,15 @@ import {
   Popover as PopoverComponent,
   Props as PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../service/type';
+import { Omit } from '../common/type';
 
 interface TooltipProps {
   text: string;
   children: React.ReactElement<any>;
 }
 
-const Popover = styled<PopoverComponent, PopoverProps>(PopoverComponent);
-const Text = styled<TextComponent, TextProps>(TextComponent);
+const Popover = styled<PopoverProps>(PopoverComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'content'>;
 

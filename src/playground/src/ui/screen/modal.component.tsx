@@ -11,7 +11,7 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Modal as ModalComponent } from '@kitten/ui';
+import { Modal } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -34,10 +34,10 @@ const ModalContent = (props: ModalContentProps & ViewProps): React.ReactElement<
   </View>
 );
 
-class Modal extends React.Component<Props, State> {
+class ModalScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
-    title: 'Modal Component',
+    title: 'Modal',
   };
 
   public state: State = {
@@ -72,7 +72,7 @@ class Modal extends React.Component<Props, State> {
           title='Slide Up'
           onPress={this.onSlideButtonPress}
         />
-        <ModalComponent
+        <Modal
           identifier='@modal/fade'
           visible={this.state.fadeModalVisible}
           style={this.props.themedStyle.modal}
@@ -80,8 +80,8 @@ class Modal extends React.Component<Props, State> {
           animationType='fade'
           animationDuration={600}>
           <ModalContent onDismiss={this.onFadeModalDismiss}/>
-        </ModalComponent>
-        <ModalComponent
+        </Modal>
+        <Modal
           identifier='@modal/slide'
           visible={this.state.slideModalVisible}
           style={this.props.themedStyle.modal}
@@ -90,13 +90,13 @@ class Modal extends React.Component<Props, State> {
           animationType='slideInUp'
           animationDuration={600}>
           <ModalContent onDismiss={this.onSlideModalDismiss}/>
-        </ModalComponent>
+        </Modal>
       </View>
     );
   }
 }
 
-export const ModalScreen = withStyles(Modal, (theme: ThemeType) => ({
+export default withStyles(ModalScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
   },

@@ -8,8 +8,5 @@
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
-  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
-  "peerDependencies": {
-    "@kitten/theme": "file:../theme"
-  }
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme"
 }

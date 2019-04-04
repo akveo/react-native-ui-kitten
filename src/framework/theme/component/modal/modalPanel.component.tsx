@@ -12,7 +12,7 @@ import { Modal } from '../../../ui/modal/modal.component';
 import { ModalComponentCloseProps } from '@kitten/theme';
 
 export interface ModalPanelProps {
-  children: React.ReactElement<any> | React.ReactElement<any>[];
+  children: React.ReactNode;
 }
 
 interface ModalPanelState {

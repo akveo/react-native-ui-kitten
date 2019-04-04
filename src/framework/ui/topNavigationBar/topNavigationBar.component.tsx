@@ -85,7 +85,7 @@ export class TopNavigationBar extends React.Component<Props> {
   };
 
   private renderRightActionElements(source: React.ReactElement<ActionProps>[]): ActionElement[] {
-    return source.map(this.renderRightActionElement);
+    return source && source.map(this.renderRightActionElement);
   }
 
   public render(): React.ReactNode {

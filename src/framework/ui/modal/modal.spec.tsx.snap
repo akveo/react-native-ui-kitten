@@ -22,16 +22,19 @@ exports[`@modal component checks * component styled with mappings 1`] = `
       }
     }
   />
-  <View
+  <AnimatedComponent
     animationDuration={300}
     onResponderRelease={[Function]}
     onStartShouldSetResponder={[Function]}
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Object {
-        "alignSelf": "flex-start",
-      }
+      Array [
+        Object {},
+        Object {
+          "alignSelf": "flex-start",
+        },
+      ]
     }
     visible={true}
   >
@@ -41,32 +44,25 @@ exports[`@modal component checks * component styled with mappings 1`] = `
     >
       Test
     </Text>
-  </View>
+  </AnimatedComponent>
 </View>
 `;
 
 exports[`@modal component checks * modal closes on passed prop 1`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
   style={
     Object {
       "bottom": 0,
       "left": 0,
-      "opacity": 1,
       "position": "absolute",
       "right": 0,
       "top": 0,
     }
   }
 >
-  <View
+  <AnimatedComponent
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={[MockFunction]}
@@ -75,9 +71,12 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Object {
-        "alignSelf": "flex-start",
-      }
+      Array [
+        Object {},
+        Object {
+          "alignSelf": "flex-start",
+        },
+      ]
     }
     visible={true}
   >
@@ -88,73 +87,30 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
       <Text>
         Test1
       </Text>
-      <View
-        accessibilityRole="button"
-        accessibilityStates={Array []}
-        accessible={true}
-        isTVSelectable={true}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "opacity": 1,
-          }
-        }
-      >
-        <View
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        >
-          <Text
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "padding": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Close Modal
-          </Text>
-        </View>
-      </View>
+      <Button
+        onPress={[MockFunction]}
+        title="Close Modal"
+      />
     </View>
-  </View>
-</View>
+  </AnimatedComponent>
+</TouchableOpacity>
 `;
 
 exports[`@modal component checks * modal closes on passed prop 2`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
   style={
     Object {
       "bottom": 0,
       "left": 0,
-      "opacity": 1,
       "position": "absolute",
       "right": 0,
       "top": 0,
     }
   }
 >
-  <View
+  <AnimatedComponent
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={
@@ -177,9 +133,12 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Object {
-        "alignSelf": "flex-start",
-      }
+      Array [
+        Object {},
+        Object {
+          "alignSelf": "flex-start",
+        },
+      ]
     }
     visible={true}
   >
@@ -190,73 +149,44 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
       <Text>
         Test1
       </Text>
-      <View
-        accessibilityRole="button"
-        accessibilityStates={Array []}
-        accessible={true}
-        isTVSelectable={true}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "opacity": 1,
+      <Button
+        onPress={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                undefined,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
           }
         }
-      >
-        <View
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        >
-          <Text
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "padding": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Close Modal
-          </Text>
-        </View>
-      </View>
+        title="Close Modal"
+      />
     </View>
-  </View>
-</View>
+  </AnimatedComponent>
+</TouchableOpacity>
 `;
 
 exports[`@modal component checks * modal component close on backDrop checks 1`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
   style={
     Object {
       "bottom": 0,
       "left": 0,
-      "opacity": 1,
       "position": "absolute",
       "right": 0,
       "top": 0,
     }
   }
 >
-  <View
+  <AnimatedComponent
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={[MockFunction]}
@@ -265,9 +195,12 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Object {
-        "alignSelf": "flex-start",
-      }
+      Array [
+        Object {},
+        Object {
+          "alignSelf": "flex-start",
+        },
+      ]
     }
     visible={true}
   >
@@ -279,32 +212,25 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
         Test1
       </Text>
     </View>
-  </View>
-</View>
+  </AnimatedComponent>
+</TouchableOpacity>
 `;
 
 exports[`@modal component checks * modal component close on backDrop checks 2`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
   style={
     Object {
       "bottom": 0,
       "left": 0,
-      "opacity": 1,
       "position": "absolute",
       "right": 0,
       "top": 0,
     }
   }
 >
-  <View
+  <AnimatedComponent
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={
@@ -327,9 +253,12 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Object {
-        "alignSelf": "flex-start",
-      }
+      Array [
+        Object {},
+        Object {
+          "alignSelf": "flex-start",
+        },
+      ]
     }
     visible={true}
   >
@@ -341,8 +270,8 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
         Test1
       </Text>
     </View>
-  </View>
-</View>
+  </AnimatedComponent>
+</TouchableOpacity>
 `;
 
 exports[`@modal component checks * modal component renders properly 1`] = `
@@ -367,7 +296,7 @@ exports[`@modal component checks * modal component renders properly 1`] = `
       }
     }
   />
-  <View
+  <AnimatedComponent
     animationDuration={300}
     identifier="modal-test-identifier-1"
     onCloseModal={[Function]}
@@ -376,9 +305,12 @@ exports[`@modal component checks * modal component renders properly 1`] = `
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Object {
-        "alignSelf": "flex-start",
-      }
+      Array [
+        Object {},
+        Object {
+          "alignSelf": "flex-start",
+        },
+      ]
     }
     visible={true}
   >
@@ -390,198 +322,104 @@ exports[`@modal component checks * modal component renders properly 1`] = `
         Test1
       </Text>
     </View>
-  </View>
+  </AnimatedComponent>
 </View>
 `;
 
 exports[`@modal component checks * modal component renders properly 2`] = `null`;
 
 exports[`@modal component checks * with animations 1`] = `
-<View>
-  <View
-    accessibilityRole="button"
-    accessibilityStates={Array []}
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "opacity": 1,
-      }
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
     }
-    testID="1"
-  >
-    <View
-      style={
-        Array [
-          Object {},
-        ]
-      }
-    >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "padding": 8,
-              "textAlign": "center",
-            },
-          ]
-        }
-      >
-        Open Modal
-      </Text>
-    </View>
-  </View>
-  <View
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
+  }
+>
+  <AnimatedComponent
+    animationDuration={500}
+    identifier="modal-test-identifier-1"
+    onCloseModal={[Function]}
     onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={
-      Object {
-        "bottom": 0,
-        "left": 0,
-        "opacity": 1,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <View
-      animationDuration={500}
-      identifier="modal-test-identifier-1"
-      onCloseModal={[Function]}
-      onResponderRelease={[Function]}
-      onStartShouldSetResponder={[Function]}
-      onStartShouldSetResponderCapture={[Function]}
-      pointerEvents="box-none"
-      style={
+      Array [
         Object {
-          "alignSelf": "flex-start",
           "transform": Array [
             Object {
               "translateY": 1334,
             },
           ],
-        }
-      }
-      visible={true}
+        },
+        Object {
+          "alignSelf": "flex-start",
+        },
+      ]
+    }
+    visible={true}
+  >
+    <View
+      onCloseModal={[Function]}
+      style={Object {}}
     >
-      <View
-        onCloseModal={[Function]}
-        style={Object {}}
-      >
-        <Text>
-          Test2
-        </Text>
-      </View>
+      <Text>
+        Test2
+      </Text>
     </View>
-  </View>
-  ,
-</View>
+  </AnimatedComponent>
+</TouchableOpacity>
 `;
 
 exports[`@modal component checks * with animations 2`] = `
-<View>
-  <View
-    accessibilityRole="button"
-    accessibilityStates={Array []}
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "opacity": 1,
-      }
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
     }
-    testID="2"
-  >
-    <View
-      style={
-        Array [
-          Object {},
-        ]
-      }
-    >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "padding": 8,
-              "textAlign": "center",
-            },
-          ]
-        }
-      >
-        Open Modal
-      </Text>
-    </View>
-  </View>
-  <View
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
+  }
+>
+  <AnimatedComponent
+    animationDuration={500}
+    identifier="modal-test-identifier-1"
+    onCloseModal={[Function]}
     onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
     style={
-      Object {
-        "bottom": 0,
-        "left": 0,
-        "opacity": 1,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <View
-      animationDuration={500}
-      identifier="modal-test-identifier-1"
-      onCloseModal={[Function]}
-      onResponderRelease={[Function]}
-      onStartShouldSetResponder={[Function]}
-      onStartShouldSetResponderCapture={[Function]}
-      pointerEvents="box-none"
-      style={
+      Array [
+        Object {
+          "opacity": 0,
+        },
         Object {
           "alignSelf": "flex-start",
-          "opacity": 0,
-        }
-      }
-      visible={true}
+        },
+      ]
+    }
+    visible={true}
+  >
+    <View
+      onCloseModal={[Function]}
+      style={Object {}}
     >
-      <View
-        onCloseModal={[Function]}
-        style={Object {}}
-      >
-        <Text>
-          Test2
-        </Text>
-      </View>
+      <Text>
+        Test2
+      </Text>
     </View>
-  </View>
-  ,
-</View>
+  </AnimatedComponent>
+</TouchableOpacity>
 `;

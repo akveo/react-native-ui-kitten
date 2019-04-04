@@ -12,7 +12,7 @@ import {
   ThemedComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Button as ButtonComponent } from '@kitten/ui';
+import { Button } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -29,7 +29,7 @@ interface State {
   isRadio4Checked: boolean;
 }
 
-class Button extends React.Component<Props, State> {
+class ButtonScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Button',
@@ -41,7 +41,7 @@ class Button extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Icon</Text>
           <View style={this.props.themedStyle.containerPreviewRow}>
-            <ButtonComponent
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -49,7 +49,7 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
-            <ButtonComponent
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -57,7 +57,7 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
-            <ButtonComponent
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -65,7 +65,7 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
-            <ButtonComponent
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -73,7 +73,7 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
-            <ButtonComponent
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -86,52 +86,52 @@ class Button extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Text</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ButtonComponent
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='giant'
               alignment={ALIGNMENT}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='large'
               alignment={ALIGNMENT}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='medium'
               alignment={ALIGNMENT}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='small'
               alignment={ALIGNMENT}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='tiny'
               alignment={ALIGNMENT}>
               {TEXT}
-            </ButtonComponent>
+            </Button>
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Icon and Text</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <ButtonComponent
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -139,8 +139,8 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -148,8 +148,8 @@ class Button extends React.Component<Props, State> {
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
               alignment={ALIGNMENT}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -157,8 +157,8 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -166,8 +166,8 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
-            </ButtonComponent>
-            <ButtonComponent
+            </Button>
+            <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
@@ -175,7 +175,7 @@ class Button extends React.Component<Props, State> {
               alignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
-            </ButtonComponent>
+            </Button>
           </View>
         </View>
       </View>
@@ -183,7 +183,7 @@ class Button extends React.Component<Props, State> {
   }
 }
 
-export const ButtonScreen = withStyles(Button, (theme: ThemeType) => ({
+export default withStyles(ButtonScreen, (theme: ThemeType) => ({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,

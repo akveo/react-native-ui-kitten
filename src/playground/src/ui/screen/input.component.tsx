@@ -17,12 +17,16 @@ import {
   ThemedComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Input as InputComponent } from '@kitten/ui';
+import { Input } from '@kitten/ui';
 
 const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 const PLACEHOLDER: string = 'Placeholder';
 
-const AvoidKeyboard = (props?: ViewProps): React.ReactElement<TouchableWithoutFeedbackProps> => {
+interface AvoidKeyboardProps {
+  children: React.ReactNode;
+}
+
+const AvoidKeyboard = (props?: ViewProps & AvoidKeyboardProps): React.ReactElement<TouchableWithoutFeedbackProps> => {
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}>
@@ -37,7 +41,7 @@ interface State {
   input: string;
 }
 
-class Input extends React.Component<Props, State> {
+class InputScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
     title: 'Input',
@@ -66,7 +70,7 @@ class Input extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <InputComponent
+            <Input
               style={this.props.themedStyle.component}
               onChangeText={this.onInputChange}
               value={this.state.input}
@@ -78,7 +82,7 @@ class Input extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Disabled</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <InputComponent
+            <Input
               style={this.props.themedStyle.component}
               disabled={true}
               icon={this.renderIcon}
@@ -89,25 +93,25 @@ class Input extends React.Component<Props, State> {
         <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Status</Text>
           <View style={this.props.themedStyle.containerPreview}>
-            <InputComponent
+            <Input
               status='success'
               style={this.props.themedStyle.component}
               icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
-            <InputComponent
+            <Input
               status='info'
               style={this.props.themedStyle.component}
               icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
-            <InputComponent
+            <Input
               status='warning'
               style={this.props.themedStyle.component}
               icon={this.renderIcon}
               placeholder={PLACEHOLDER}
             />
-            <InputComponent
+            <Input
               status='error'
               style={this.props.themedStyle.component}
               icon={this.renderIcon}
@@ -120,7 +124,7 @@ class Input extends React.Component<Props, State> {
   }
 }
 
-export const InputScreen = withStyles(Input, (theme: ThemeType) => ({
+export default withStyles(InputScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingVertical: 8,

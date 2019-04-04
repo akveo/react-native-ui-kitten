@@ -17,7 +17,7 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  TopNavigationBar as TopNavigationBarComponent,
+  TopNavigationBar,
   TopNavigationBarAction,
 } from '@kitten/ui';
 
@@ -27,12 +27,12 @@ const leftControlUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/a
 const rightControlUri1: string = 'https://akveo.github.io/eva-icons/fill/png/128/at.png';
 const rightControlUri2: string = 'https://akveo.github.io/eva-icons/fill/png/128/flash.png';
 
-class TopNavigationBar extends React.Component<Props> {
+class TopNavigationBarScreen extends React.Component<Props> {
 
   static navigationOptions = {
     header: (props: NavigationScreenProps) => (
       <SafeAreaView style={styles.safeAreaView}>
-        <TopNavigationBarComponent
+        <TopNavigationBar
           appearance='titleCentered'
           title='Top Navigation Bar'
           subtitle='Subtitle'
@@ -69,7 +69,7 @@ class TopNavigationBar extends React.Component<Props> {
   }
 }
 
-export const TopNavigationBarScreen = withStyles(TopNavigationBar, (theme: ThemeType) => ({
+export default withStyles(TopNavigationBarScreen, (theme: ThemeType) => ({
   container: {
     padding: 22,
   },

@@ -1,51 +1,111 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@style: ui component checks default appearance styled properly 1`] = `
+exports[`@style: ui component checks * default appearance styled properly 1`] = `
 Object {
-  "borderColor": "#9E9E9E",
+  "borderColor": "#A6AEBD",
+  "borderRadius": 18,
   "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
+  "height": 36,
+  "highlightBackgroundColor": "transparent",
+  "highlightBorderRadius": 30,
+  "highlightHeight": 60,
+  "highlightWidth": 60,
+  "selectBackgroundColor": "transparent",
+  "selectBorderRadius": 12,
+  "selectHeight": 24,
+  "selectWidth": 24,
+  "textColor": "#000000",
+  "textFontSize": 16,
+  "textFontWeight": "500",
+  "textMarginLeft": 12,
+  "width": 36,
 }
 `;
 
-exports[`@style: ui component checks default appearance styled properly 2`] = `
+exports[`@style: ui component checks * default appearance styled properly 2`] = `
 Object {
-  "borderColor": "#9E9E9E",
+  "borderColor": "#DDE1EB",
+  "borderRadius": 18,
   "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
+  "height": 36,
+  "highlightBackgroundColor": "transparent",
+  "highlightBorderRadius": 30,
+  "highlightHeight": 60,
+  "highlightWidth": 60,
+  "selectBackgroundColor": "transparent",
+  "selectBorderRadius": 12,
+  "selectHeight": 24,
+  "selectWidth": 24,
+  "textColor": "#c8cedb",
+  "textFontSize": 16,
+  "textFontWeight": "500",
+  "textMarginLeft": 12,
+  "width": 36,
 }
 `;
 
-exports[`@style: ui component checks dispatch action works properly 1`] = `
+exports[`@style: ui component checks * dispatch action works properly 1`] = `
 Object {
-  "borderColor": "#616161",
+  "borderColor": "#8992A3",
+  "borderRadius": 18,
   "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
+  "height": 36,
+  "highlightBackgroundColor": "#DDE1EB",
+  "highlightBorderRadius": 30,
+  "highlightHeight": 60,
+  "highlightWidth": 60,
+  "selectBackgroundColor": "transparent",
+  "selectBorderRadius": 12,
+  "selectHeight": 24,
+  "selectWidth": 24,
+  "textColor": "#000000",
+  "textFontSize": 16,
+  "textFontWeight": "500",
+  "textMarginLeft": 12,
+  "width": 36,
 }
 `;
 
-exports[`@style: ui component checks provides correct styles on theme change 1`] = `
+exports[`@style: ui component checks * provides correct styles on theme change 1`] = `
 Object {
-  "borderColor": "#9E9E9E",
+  "borderColor": "#A6AEBD",
+  "borderRadius": 18,
   "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
+  "height": 36,
+  "highlightBackgroundColor": "transparent",
+  "highlightBorderRadius": 30,
+  "highlightHeight": 60,
+  "highlightWidth": 60,
+  "selectBackgroundColor": "transparent",
+  "selectBorderRadius": 12,
+  "selectHeight": 24,
+  "selectWidth": 24,
+  "textColor": "#000000",
+  "textFontSize": 16,
+  "textFontWeight": "500",
+  "textMarginLeft": 12,
+  "width": 36,
 }
 `;
 
-exports[`@style: ui component checks provides correct styles on theme change 2`] = `
+exports[`@style: ui component checks * provides correct styles on theme change 2`] = `
 Object {
-  "borderColor": "#9E9E9E",
+  "borderColor": "#A6AEBD",
+  "borderRadius": 18,
   "borderWidth": 2,
-  "innerSize": 24,
-  "selectColor": "transparent",
-  "size": 36,
+  "height": 36,
+  "highlightBackgroundColor": "transparent",
+  "highlightBorderRadius": 30,
+  "highlightHeight": 60,
+  "highlightWidth": 60,
+  "selectBackgroundColor": "transparent",
+  "selectBorderRadius": 12,
+  "selectHeight": 24,
+  "selectWidth": 24,
+  "textColor": "#000000",
+  "textFontSize": 16,
+  "textFontWeight": "500",
+  "textMarginLeft": 12,
+  "width": 36,
 }
 `;
