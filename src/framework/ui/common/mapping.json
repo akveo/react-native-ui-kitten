@@ -566,6 +566,9 @@
           "backgroundColor": {
             "type": "string"
           },
+          "textMarginHorizontal": {
+            "type": "number"
+          },
           "textColor": {
             "type": "string"
           },
@@ -575,16 +578,19 @@
           "textFontWeight": {
             "type": "string"
           },
-          "textMarginLeft": {
+          "textLineHeight": {
             "type": "number"
           },
-          "selectWidth": {
+          "iconWidth": {
             "type": "number"
           },
-          "selectHeight": {
+          "iconHeight": {
             "type": "number"
           },
-          "selectBackgroundColor": {
+          "iconBorderRadius": {
+            "type": "number"
+          },
+          "iconTintColor": {
             "type": "string"
           },
           "highlightWidth": {
@@ -607,18 +613,22 @@
         },
         "variantGroups": {
           "status": {
-            "error": {
-              "default": false
-            }
-          },
-          "size": {
-            "small": {
-              "default": false
-            },
-            "medium": {
+            "primary": {
               "default": true
             },
-            "large": {
+            "success": {
+              "default": false
+            },
+            "warning": {
+              "default": false
+            },
+            "danger": {
+              "default": false
+            },
+            "info": {
+              "default": false
+            },
+            "white": {
               "default": false
             }
           }
@@ -638,94 +648,184 @@
             "default": false,
             "priority": 2,
             "scope": "all"
+          },
+          "indeterminate": {
+            "default": false,
+            "priority": 3,
+            "scope": "all"
           }
         }
       },
       "appearances": {
         "default": {
           "mapping": {
-            "borderWidth": 2,
-            "borderRadius": 4,
-            "borderColor": "gray-primary",
-            "backgroundColor": "gray-light",
-            "textColor": "text-primary",
-            "textFontWeight": "500",
-            "selectBackgroundColor": "transparent",
-            "highlightBorderRadius": 8,
+            "width": 24,
+            "height": 24,
+            "borderWidth": 1,
+            "borderRadius": 3,
+            "textMarginHorizontal": 12,
+            "textFontWeight": "font-primary-regular-text-weight",
+            "textLineHeight": "font-primary-regular-text-line-height",
+            "textColor": "font-primary-color",
+            "iconWidth": 12,
+            "iconHeight": 12,
+            "iconTintColor": "opacity-transparent",
+            "textFontSize": "font-primary-regular-text-size",
+            "highlightWidth": 40,
+            "highlightHeight": 40,
+            "highlightBorderRadius": 6,
             "highlightBackgroundColor": "transparent",
             "state": {
               "active": {
-                "borderColor": "gray-dark",
                 "highlightBackgroundColor": "gray-light"
               },
               "checked": {
-                "borderColor": "transparent",
-                "backgroundColor": "blue-primary",
-                "selectBackgroundColor": "#FFFFFF"
+                "iconTintColor": "color-white"
+              },
+              "indeterminate": {
+                "iconHeight": 4,
+                "iconBorderRadius": 6,
+                "iconTintColor": "color-white"
               },
               "disabled": {
-                "borderColor": "gray-light",
-                "backgroundColor": "#F1F5F5",
-                "textColor": "gray-300"
-              },
-              "checked.active": {
-                "borderColor": "blue-dark"
+                "borderColor": "color-basic-600",
+                "backgroundColor": "color-basic-400",
+                "textColor": "font-primary-disabled-color"
               },
               "checked.disabled": {
-                "borderColor": "transparent",
-                "backgroundColor": "gray-primary"
+                "borderColor": "color-basic-400",
+                "backgroundColor": "color-basic-400"
               }
             }
           },
           "variantGroups": {
             "status": {
-              "error": {
-                "borderColor": "pink-primary",
-                "backgroundColor": "#FFC9D9",
+              "primary": {
+                "borderColor": "color-primary-500",
+                "backgroundColor": "color-primary-200",
                 "state": {
                   "active": {
-                    "borderColor": "pink-primary"
+                    "borderColor": "color-primary-600",
+                    "backgroundColor": "color-primary-600"
                   },
                   "checked": {
-                    "borderColor": "pink-primary",
-                    "backgroundColor": "pink-primary"
+                    "borderColor": "color-primary-500",
+                    "backgroundColor": "color-primary-500"
+                  },
+                  "indeterminate": {
+                    "borderColor": "color-primary-500",
+                    "backgroundColor": "color-primary-500"
                   },
                   "checked.active": {
-                    "borderColor": "pink-primary"
+                    "borderColor": "color-primary-600"
                   }
                 }
-              }
-            },
-            "size": {
-              "small": {
-                "width": 24,
-                "height": 24,
-                "textMarginLeft": 10,
-                "textFontSize": 14,
-                "selectWidth": 12,
-                "selectHeight": 12,
-                "highlightWidth": 40,
-                "highlightHeight": 40
               },
-              "medium": {
-                "width": 30,
-                "height": 30,
-                "textMarginLeft": 12,
-                "textFontSize": 16,
-                "selectWidth": 14,
-                "selectHeight": 14,
-                "highlightWidth": 50,
-                "highlightHeight": 50
+              "success": {
+                "borderColor": "color-success-500",
+                "backgroundColor": "color-success-200",
+                "state": {
+                  "active": {
+                    "borderColor": "color-success-600",
+                    "backgroundColor": "color-success-600"
+                  },
+                  "checked": {
+                    "borderColor": "color-success-500",
+                    "backgroundColor": "color-success-500"
+                  },
+                  "indeterminate": {
+                    "borderColor": "color-success-500",
+                    "backgroundColor": "color-success-500"
+                  },
+                  "checked.active": {
+                    "borderColor": "color-success-600"
+                  }
+                }
               },
-              "large": {
-                "width": 36,
-                "height": 36,
-                "textMarginLeft": 14,
-                "textFontSize": 18,
-                "selectWidth": 16,
-                "selectHeight": 16,
-                "highlightWidth": 60,
-                "highlightHeight": 60
+              "warning": {
+                "borderColor": "color-warning-500",
+                "backgroundColor": "color-warning-200",
+                "state": {
+                  "active": {
+                    "borderColor": "color-warning-600",
+                    "backgroundColor": "color-warning-600"
+                  },
+                  "checked": {
+                    "borderColor": "color-warning-500",
+                    "backgroundColor": "color-warning-500"
+                  },
+                  "indeterminate": {
+                    "borderColor": "color-warning-500",
+                    "backgroundColor": "color-warning-500"
+                  },
+                  "checked.active": {
+                    "borderColor": "color-warning-600"
+                  }
+                }
+              },
+              "danger": {
+                "borderColor": "color-danger-500",
+                "backgroundColor": "color-danger-200",
+                "state": {
+                  "active": {
+                    "borderColor": "color-danger-600",
+                    "backgroundColor": "color-danger-600"
+                  },
+                  "checked": {
+                    "borderColor": "color-danger-500",
+                    "backgroundColor": "color-danger-500"
+                  },
+                  "indeterminate": {
+                    "borderColor": "color-danger-500",
+                    "backgroundColor": "color-danger-500"
+                  },
+                  "checked.active": {
+                    "borderColor": "color-danger-600"
+                  }
+                }
+              },
+              "info": {
+                "borderColor": "color-info-500",
+                "backgroundColor": "color-info-200",
+                "state": {
+                  "active": {
+                    "borderColor": "color-info-600",
+                    "backgroundColor": "color-info-600"
+                  },
+                  "checked": {
+                    "borderColor": "color-info-500",
+                    "backgroundColor": "color-info-500"
+                  },
+                  "indeterminate": {
+                    "borderColor": "color-info-500",
+                    "backgroundColor": "color-info-500"
+                  },
+                  "checked.active": {
+                    "borderColor": "color-info-600"
+                  }
+                }
+              },
+              "white": {
+                "borderColor": "color-white",
+                "backgroundColor": "color-white",
+                "iconTintColor": "opacity-transparent",
+                "state": {
+                  "active": {
+                    "borderColor": "color-white",
+                    "backgroundColor": "color-white"
+                  },
+                  "checked": {
+                    "backgroundColor": "color-white",
+                    "borderColor": "color-white",
+                    "iconTintColor": "color-primary-500"
+                  },
+                  "indeterminate": {
+                    "iconTintColor": "color-primary-500"
+                  },
+                  "checked.active": {
+                    "borderColor": "color-white"
+                  }
+                }
               }
             }
           }

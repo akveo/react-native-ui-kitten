@@ -1,15 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@radio: matches snapshot active 1`] = `
+exports[`@checkbox matches snapshots * active 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -22,17 +19,13 @@ exports[`@radio: matches snapshot active 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "#DDE1EB",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "#DDE1EB",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -42,21 +35,18 @@ exports[`@radio: matches snapshot active 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
-      size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#8992A3",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#284DE0",
+          "borderColor": "#284DE0",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -162,14 +152,15 @@ exports[`@radio: matches snapshot active 1`] = `
         }
       }
     >
-      <View
+      <CheckMark
+        isAnimated={false}
         style={
           Array [
             Object {
               "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
+              "borderRadius": undefined,
+              "height": 12,
+              "width": 12,
             },
             Object {},
           ]
@@ -180,16 +171,13 @@ exports[`@radio: matches snapshot active 1`] = `
 </View>
 `;
 
-exports[`@radio: matches snapshot active checked 1`] = `
+exports[`@checkbox matches snapshots * active: default 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -202,42 +190,34 @@ exports[`@radio: matches snapshot active checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "#DDE1EB",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
       activeOpacity={1}
       appearance="default"
-      checked={true}
       dispatch={[Function]}
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
-      size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#2541CC",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#D9E4FF",
+          "borderColor": "#3366FF",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -343,375 +323,15 @@ exports[`@radio: matches snapshot active checked 1`] = `
         }
       }
     >
-      <View
-        style={
-          Array [
-            Object {
-              "backgroundColor": "#3366FF",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
-        }
-      />
-    </TouchableOpacity>
-  </View>
-</View>
-`;
-
-exports[`@radio: matches snapshot active checked: checked 1`] = `
-<View
-  style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
-  }
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View
-      style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
-      }
-    />
-    <TouchableOpacity
-      activeOpacity={1}
-      appearance="default"
-      checked={true}
-      dispatch={[Function]}
-      onPress={[Function]}
-      onPressIn={[Function]}
-      onPressOut={[Function]}
-      size="medium"
-      style={
-        Array [
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-pitch-dark": "#0D1C2E",
-          "blue-primary": "#3366FF",
-          "color-basic-100": "#F7F8FA",
-          "color-basic-200": "#EDF0F5",
-          "color-basic-300": "#DDE1EB",
-          "color-basic-400": "#C8CEDB",
-          "color-basic-500": "#A6AEBD",
-          "color-basic-600": "#8992A3",
-          "color-basic-700": "#6A7385",
-          "color-basic-800": "#4B5466",
-          "color-basic-900": "#2C3547",
-          "color-black": "#0D1C2E",
-          "color-danger-100": "#FFF2F2",
-          "color-danger-200": "#FFD6D9",
-          "color-danger-300": "#FFA8B4",
-          "color-danger-400": "#FF708D",
-          "color-danger-500": "#FF3D71",
-          "color-danger-600": "#DB2C66",
-          "color-danger-700": "#B81D5B",
-          "color-danger-800": "#94124E",
-          "color-danger-900": "#700940",
-          "color-info-100": "#F2F8FF",
-          "color-info-200": "#C7E2FF",
-          "color-info-300": "#94CBFF",
-          "color-info-400": "#42AAFF",
-          "color-info-500": "#0095FF",
-          "color-info-600": "#006FD6",
-          "color-info-700": "#0057C2",
-          "color-info-800": "#0041A8",
-          "color-info-900": "#002885",
-          "color-primary-100": "#F2F6FF",
-          "color-primary-200": "#D9E4FF",
-          "color-primary-300": "#A6C1FF",
-          "color-primary-400": "#598BFF",
-          "color-primary-500": "#3366FF",
-          "color-primary-600": "#284DE0",
-          "color-primary-700": "#2541CC",
-          "color-primary-800": "#192F9E",
-          "color-primary-900": "#14236E",
-          "color-secondary-100": "#F7F2FF",
-          "color-secondary-200": "#E0D1FF",
-          "color-secondary-300": "#C5A8FF",
-          "color-secondary-400": "#A375FF",
-          "color-secondary-500": "#884DFF",
-          "color-secondary-600": "#6A39DB",
-          "color-secondary-700": "#4F28B8",
-          "color-secondary-800": "#371B94",
-          "color-secondary-900": "#26117A",
-          "color-success-100": "#EDFFF3",
-          "color-success-200": "#B3FFD6",
-          "color-success-300": "#8CFAC7",
-          "color-success-400": "#51F0B0",
-          "color-success-500": "#00E096",
-          "color-success-600": "#00B383",
-          "color-success-700": "#008F72",
-          "color-success-800": "#007566",
-          "color-success-900": "#00524C",
-          "color-tertiary-100": "#FFDED6",
-          "color-tertiary-200": "#FFDED6",
-          "color-tertiary-300": "#FFDED6",
-          "color-tertiary-400": "#FFDED6",
-          "color-tertiary-500": "#FFDED6",
-          "color-tertiary-600": "#FFDED6",
-          "color-tertiary-700": "#FFDED6",
-          "color-tertiary-800": "#FFDED6",
-          "color-tertiary-900": "#FFDED6",
-          "color-warning-100": "#FFFDF2",
-          "color-warning-200": "#FFF1C2",
-          "color-warning-300": "#FFE59E",
-          "color-warning-400": "#FFC94D",
-          "color-warning-500": "#FFAA00",
-          "color-warning-600": "#DB8B00",
-          "color-warning-700": "#B86E00",
-          "color-warning-800": "#945400",
-          "color-warning-900": "#703C00",
-          "color-white": "#FFFFFF",
-          "font-primary-color": "#0D1C2E",
-          "font-primary-disabled-color": "#C8CEDB",
-          "font-primary-family": "",
-          "font-primary-regular-text-line-height": 16,
-          "font-primary-regular-text-size": 14,
-          "font-primary-regular-text-weight": "600",
-          "gray-100": "#f7f8fa",
-          "gray-200": "#edf0f5",
-          "gray-300": "#c8cedb",
-          "gray-400": "#a6aebd",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "opacity-transparent": "transparent",
-          "outline-color": "#DDE1EB",
-          "outline-disabled-color": "transparent",
-          "outline-disabled-width": 0,
-          "outline-width": 11,
-          "pink-primary": "#FF3D71",
-          "text-primary": "#000000",
-          "text-primary-inverse": "#ffffff",
-        }
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "backgroundColor": "#3366FF",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
-        }
-      />
-    </TouchableOpacity>
-  </View>
-</View>
-`;
-
-exports[`@radio: matches snapshot active: default 1`] = `
-<View
-  style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
-  }
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View
-      style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
-      }
-    />
-    <TouchableOpacity
-      activeOpacity={1}
-      appearance="default"
-      dispatch={[Function]}
-      onPress={[Function]}
-      onPressIn={[Function]}
-      onPressOut={[Function]}
-      size="medium"
-      style={
-        Array [
-          Object {
-            "borderColor": "#A6AEBD",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
-      }
-      theme={
-        Object {
-          "blue-dark": "#2541CC",
-          "blue-pitch-dark": "#0D1C2E",
-          "blue-primary": "#3366FF",
-          "color-basic-100": "#F7F8FA",
-          "color-basic-200": "#EDF0F5",
-          "color-basic-300": "#DDE1EB",
-          "color-basic-400": "#C8CEDB",
-          "color-basic-500": "#A6AEBD",
-          "color-basic-600": "#8992A3",
-          "color-basic-700": "#6A7385",
-          "color-basic-800": "#4B5466",
-          "color-basic-900": "#2C3547",
-          "color-black": "#0D1C2E",
-          "color-danger-100": "#FFF2F2",
-          "color-danger-200": "#FFD6D9",
-          "color-danger-300": "#FFA8B4",
-          "color-danger-400": "#FF708D",
-          "color-danger-500": "#FF3D71",
-          "color-danger-600": "#DB2C66",
-          "color-danger-700": "#B81D5B",
-          "color-danger-800": "#94124E",
-          "color-danger-900": "#700940",
-          "color-info-100": "#F2F8FF",
-          "color-info-200": "#C7E2FF",
-          "color-info-300": "#94CBFF",
-          "color-info-400": "#42AAFF",
-          "color-info-500": "#0095FF",
-          "color-info-600": "#006FD6",
-          "color-info-700": "#0057C2",
-          "color-info-800": "#0041A8",
-          "color-info-900": "#002885",
-          "color-primary-100": "#F2F6FF",
-          "color-primary-200": "#D9E4FF",
-          "color-primary-300": "#A6C1FF",
-          "color-primary-400": "#598BFF",
-          "color-primary-500": "#3366FF",
-          "color-primary-600": "#284DE0",
-          "color-primary-700": "#2541CC",
-          "color-primary-800": "#192F9E",
-          "color-primary-900": "#14236E",
-          "color-secondary-100": "#F7F2FF",
-          "color-secondary-200": "#E0D1FF",
-          "color-secondary-300": "#C5A8FF",
-          "color-secondary-400": "#A375FF",
-          "color-secondary-500": "#884DFF",
-          "color-secondary-600": "#6A39DB",
-          "color-secondary-700": "#4F28B8",
-          "color-secondary-800": "#371B94",
-          "color-secondary-900": "#26117A",
-          "color-success-100": "#EDFFF3",
-          "color-success-200": "#B3FFD6",
-          "color-success-300": "#8CFAC7",
-          "color-success-400": "#51F0B0",
-          "color-success-500": "#00E096",
-          "color-success-600": "#00B383",
-          "color-success-700": "#008F72",
-          "color-success-800": "#007566",
-          "color-success-900": "#00524C",
-          "color-tertiary-100": "#FFDED6",
-          "color-tertiary-200": "#FFDED6",
-          "color-tertiary-300": "#FFDED6",
-          "color-tertiary-400": "#FFDED6",
-          "color-tertiary-500": "#FFDED6",
-          "color-tertiary-600": "#FFDED6",
-          "color-tertiary-700": "#FFDED6",
-          "color-tertiary-800": "#FFDED6",
-          "color-tertiary-900": "#FFDED6",
-          "color-warning-100": "#FFFDF2",
-          "color-warning-200": "#FFF1C2",
-          "color-warning-300": "#FFE59E",
-          "color-warning-400": "#FFC94D",
-          "color-warning-500": "#FFAA00",
-          "color-warning-600": "#DB8B00",
-          "color-warning-700": "#B86E00",
-          "color-warning-800": "#945400",
-          "color-warning-900": "#703C00",
-          "color-white": "#FFFFFF",
-          "font-primary-color": "#0D1C2E",
-          "font-primary-disabled-color": "#C8CEDB",
-          "font-primary-family": "",
-          "font-primary-regular-text-line-height": 16,
-          "font-primary-regular-text-size": 14,
-          "font-primary-regular-text-weight": "600",
-          "gray-100": "#f7f8fa",
-          "gray-200": "#edf0f5",
-          "gray-300": "#c8cedb",
-          "gray-400": "#a6aebd",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "opacity-transparent": "transparent",
-          "outline-color": "#DDE1EB",
-          "outline-disabled-color": "transparent",
-          "outline-disabled-width": 0,
-          "outline-width": 11,
-          "pink-primary": "#FF3D71",
-          "text-primary": "#000000",
-          "text-primary-inverse": "#ffffff",
-        }
-      }
-    >
-      <View
+      <CheckMark
+        isAnimated={false}
         style={
           Array [
             Object {
               "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
+              "borderRadius": undefined,
+              "height": 12,
+              "width": 12,
             },
             Object {},
           ]
@@ -722,16 +342,13 @@ exports[`@radio: matches snapshot active: default 1`] = `
 </View>
 `;
 
-exports[`@radio: matches snapshot checked 1`] = `
+exports[`@checkbox matches snapshots * checked.disabled 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -744,198 +361,13 @@ exports[`@radio: matches snapshot checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
-      }
-    />
-    <TouchableOpacity
-      activeOpacity={1}
-      appearance="default"
-      checked={true}
-      dispatch={[Function]}
-      onPress={[Function]}
-      onPressIn={[Function]}
-      onPressOut={[Function]}
-      size="medium"
-      style={
-        Array [
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
-      }
-      theme={
         Object {
-          "blue-dark": "#2541CC",
-          "blue-pitch-dark": "#0D1C2E",
-          "blue-primary": "#3366FF",
-          "color-basic-100": "#F7F8FA",
-          "color-basic-200": "#EDF0F5",
-          "color-basic-300": "#DDE1EB",
-          "color-basic-400": "#C8CEDB",
-          "color-basic-500": "#A6AEBD",
-          "color-basic-600": "#8992A3",
-          "color-basic-700": "#6A7385",
-          "color-basic-800": "#4B5466",
-          "color-basic-900": "#2C3547",
-          "color-black": "#0D1C2E",
-          "color-danger-100": "#FFF2F2",
-          "color-danger-200": "#FFD6D9",
-          "color-danger-300": "#FFA8B4",
-          "color-danger-400": "#FF708D",
-          "color-danger-500": "#FF3D71",
-          "color-danger-600": "#DB2C66",
-          "color-danger-700": "#B81D5B",
-          "color-danger-800": "#94124E",
-          "color-danger-900": "#700940",
-          "color-info-100": "#F2F8FF",
-          "color-info-200": "#C7E2FF",
-          "color-info-300": "#94CBFF",
-          "color-info-400": "#42AAFF",
-          "color-info-500": "#0095FF",
-          "color-info-600": "#006FD6",
-          "color-info-700": "#0057C2",
-          "color-info-800": "#0041A8",
-          "color-info-900": "#002885",
-          "color-primary-100": "#F2F6FF",
-          "color-primary-200": "#D9E4FF",
-          "color-primary-300": "#A6C1FF",
-          "color-primary-400": "#598BFF",
-          "color-primary-500": "#3366FF",
-          "color-primary-600": "#284DE0",
-          "color-primary-700": "#2541CC",
-          "color-primary-800": "#192F9E",
-          "color-primary-900": "#14236E",
-          "color-secondary-100": "#F7F2FF",
-          "color-secondary-200": "#E0D1FF",
-          "color-secondary-300": "#C5A8FF",
-          "color-secondary-400": "#A375FF",
-          "color-secondary-500": "#884DFF",
-          "color-secondary-600": "#6A39DB",
-          "color-secondary-700": "#4F28B8",
-          "color-secondary-800": "#371B94",
-          "color-secondary-900": "#26117A",
-          "color-success-100": "#EDFFF3",
-          "color-success-200": "#B3FFD6",
-          "color-success-300": "#8CFAC7",
-          "color-success-400": "#51F0B0",
-          "color-success-500": "#00E096",
-          "color-success-600": "#00B383",
-          "color-success-700": "#008F72",
-          "color-success-800": "#007566",
-          "color-success-900": "#00524C",
-          "color-tertiary-100": "#FFDED6",
-          "color-tertiary-200": "#FFDED6",
-          "color-tertiary-300": "#FFDED6",
-          "color-tertiary-400": "#FFDED6",
-          "color-tertiary-500": "#FFDED6",
-          "color-tertiary-600": "#FFDED6",
-          "color-tertiary-700": "#FFDED6",
-          "color-tertiary-800": "#FFDED6",
-          "color-tertiary-900": "#FFDED6",
-          "color-warning-100": "#FFFDF2",
-          "color-warning-200": "#FFF1C2",
-          "color-warning-300": "#FFE59E",
-          "color-warning-400": "#FFC94D",
-          "color-warning-500": "#FFAA00",
-          "color-warning-600": "#DB8B00",
-          "color-warning-700": "#B86E00",
-          "color-warning-800": "#945400",
-          "color-warning-900": "#703C00",
-          "color-white": "#FFFFFF",
-          "font-primary-color": "#0D1C2E",
-          "font-primary-disabled-color": "#C8CEDB",
-          "font-primary-family": "",
-          "font-primary-regular-text-line-height": 16,
-          "font-primary-regular-text-size": 14,
-          "font-primary-regular-text-weight": "600",
-          "gray-100": "#f7f8fa",
-          "gray-200": "#edf0f5",
-          "gray-300": "#c8cedb",
-          "gray-400": "#a6aebd",
-          "gray-dark": "#8992A3",
-          "gray-highlight": "#EDF0F5",
-          "gray-light": "#DDE1EB",
-          "gray-primary": "#A6AEBD",
-          "opacity-transparent": "transparent",
-          "outline-color": "#DDE1EB",
-          "outline-disabled-color": "transparent",
-          "outline-disabled-width": 0,
-          "outline-width": 11,
-          "pink-primary": "#FF3D71",
-          "text-primary": "#000000",
-          "text-primary-inverse": "#ffffff",
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
         }
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "backgroundColor": "#3366FF",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
-        }
-      />
-    </TouchableOpacity>
-  </View>
-</View>
-`;
-
-exports[`@radio: matches snapshot checked disabled 1`] = `
-<View
-  style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
-  }
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View
-      style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
       }
     />
     <TouchableOpacity
@@ -947,21 +379,18 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
-      size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#DDE1EB",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#C8CEDB",
+          "borderColor": "#C8CEDB",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -1067,14 +496,15 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
         }
       }
     >
-      <View
+      <CheckMark
+        isAnimated={false}
         style={
           Array [
             Object {
-              "backgroundColor": "#A6AEBD",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": undefined,
+              "height": 12,
+              "width": 12,
             },
             Object {},
           ]
@@ -1085,16 +515,13 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
 </View>
 `;
 
-exports[`@radio: matches snapshot default 1`] = `
+exports[`@checkbox matches snapshots * default 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -1107,17 +534,13 @@ exports[`@radio: matches snapshot default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -1127,21 +550,18 @@ exports[`@radio: matches snapshot default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
-      size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#A6AEBD",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#D9E4FF",
+          "borderColor": "#3366FF",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -1247,14 +667,15 @@ exports[`@radio: matches snapshot default 1`] = `
         }
       }
     >
-      <View
+      <CheckMark
+        isAnimated={false}
         style={
           Array [
             Object {
               "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
+              "borderRadius": undefined,
+              "height": 12,
+              "width": 12,
             },
             Object {},
           ]
@@ -1265,16 +686,13 @@ exports[`@radio: matches snapshot default 1`] = `
 </View>
 `;
 
-exports[`@radio: matches snapshot disabled 1`] = `
+exports[`@checkbox matches snapshots * with text 1`] = `
 <View
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -1287,42 +705,35 @@ exports[`@radio: matches snapshot disabled 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 6,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
       activeOpacity={1}
       appearance="default"
-      disabled={true}
+      checked={true}
       dispatch={[Function]}
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
-      size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#DDE1EB",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#3366FF",
+          "borderColor": "#3366FF",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -1428,14 +839,15 @@ exports[`@radio: matches snapshot disabled 1`] = `
         }
       }
     >
-      <View
+      <CheckMark
+        isAnimated={false}
         style={
           Array [
             Object {
-              "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": undefined,
+              "height": 12,
+              "width": 12,
             },
             Object {},
           ]
@@ -1443,5 +855,18 @@ exports[`@radio: matches snapshot disabled 1`] = `
       />
     </TouchableOpacity>
   </View>
+  <ForwardRef(WrappingElement)
+    style={
+      Object {
+        "color": "#0D1C2E",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "lineHeight": 16,
+        "marginHorizontal": 12,
+      }
+    }
+  >
+    Text
+  </ForwardRef(WrappingElement)>
 </View>
 `;

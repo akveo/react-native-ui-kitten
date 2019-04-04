@@ -5,22 +5,24 @@ import {
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
-  withStyles,
-  ThemeType,
   ThemedComponentProps,
+  ThemeType,
+  withStyles,
 } from '@kitten/theme';
 import { CheckBox } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 interface State {
-  isCheckBox1Checked: boolean;
-  isCheckBox2Checked: boolean;
-  isCheckBox3Checked: boolean;
-  isCheckBox4Checked: boolean;
+  isCheckBoxIndeterminateIndeterminate: boolean;
+  isCheckBoxIndeterminateChecked: boolean;
+  isCheckBoxPrimaryChecked: boolean;
+  isCheckBoxSuccessChecked: boolean;
+  isCheckBoxWarningChecked: boolean;
+  isCheckBoxDangerChecked: boolean;
+  isCheckBoxInfoChecked: boolean;
+  isCheckBoxWhiteChecked: boolean;
 }
-
-const STATUS: string = '';
 
 class CheckBoxScreen extends React.Component<Props, State> {
 
@@ -29,82 +31,99 @@ class CheckBoxScreen extends React.Component<Props, State> {
   };
 
   public state: State = {
-    isCheckBox1Checked: false,
-    isCheckBox2Checked: true,
-    isCheckBox3Checked: false,
-    isCheckBox4Checked: true,
+    isCheckBoxIndeterminateIndeterminate: true,
+    isCheckBoxIndeterminateChecked: true,
+    isCheckBoxPrimaryChecked: true,
+    isCheckBoxSuccessChecked: true,
+    isCheckBoxWarningChecked: true,
+    isCheckBoxDangerChecked: true,
+    isCheckBoxInfoChecked: true,
+    isCheckBoxWhiteChecked: true,
   };
 
-  private onCheckBox1Change = (selected: boolean) => {
-    this.setState({ isCheckBox1Checked: selected });
+  private onIndeterminateChange = (selected: boolean, indeterminate: boolean) => {
+    this.setState({
+      isCheckBoxIndeterminateChecked: selected,
+      isCheckBoxIndeterminateIndeterminate: indeterminate,
+    });
   };
 
-  private onCheckBox2Change = (selected: boolean) => {
-    this.setState({ isCheckBox2Checked: selected });
+  private onCheckBoxPrimaryChange = (selected: boolean) => {
+    this.setState({ isCheckBoxPrimaryChecked: selected });
   };
 
-  private onCheckBox3Change = (selected: boolean) => {
-    this.setState({ isCheckBox3Checked: selected });
+  private onCheckBoxSuccessChange = (selected: boolean) => {
+    this.setState({ isCheckBoxSuccessChecked: selected });
   };
 
-  private onCheckBox4Change = (selected: boolean) => {
-    this.setState({ isCheckBox4Checked: selected });
+  private onCheckBoxWarningChange = (selected: boolean) => {
+    this.setState({ isCheckBoxWarningChecked: selected });
+  };
+
+  private onCheckBoxDangerChange = (selected: boolean) => {
+    this.setState({ isCheckBoxDangerChecked: selected });
+  };
+
+  private onCheckBoxInfoChange = (selected: boolean) => {
+    this.setState({ isCheckBoxInfoChecked: selected });
+  };
+
+  private onCheckBoxWhiteChange = (selected: boolean) => {
+    this.setState({ isCheckBoxWhiteChecked: selected });
   };
 
   public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Interactive</Text>
+          <Text style={this.props.themedStyle.textDescription}>Indeterminate</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <CheckBox
               style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox1Checked}
-              status={STATUS}
-              onChange={this.onCheckBox1Change}
-            />
-            <CheckBox
-              style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox2Checked}
-              status={STATUS}
-              onChange={this.onCheckBox2Change}
-            />
-            <CheckBox
-              style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox3Checked}
-              disabled={true}
-              status={STATUS}
-              onChange={this.onCheckBox3Change}
-            />
-            <CheckBox
-              style={this.props.themedStyle.component}
-              checked={this.state.isCheckBox4Checked}
-              disabled={true}
-              status={STATUS}
-              onChange={this.onCheckBox4Change}
+              checked={this.state.isCheckBoxIndeterminateChecked}
+              indeterminate={this.state.isCheckBoxIndeterminateIndeterminate}
+              onChange={this.onIndeterminateChange}
             />
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Size</Text>
+          <Text style={this.props.themedStyle.textDescription}>Status</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <CheckBox
               style={this.props.themedStyle.component}
-              checked={true}
-              status={STATUS}
-              size='large'
+              checked={this.state.isCheckBoxPrimaryChecked}
+              status='primary'
+              onChange={this.onCheckBoxPrimaryChange}
             />
             <CheckBox
               style={this.props.themedStyle.component}
-              checked={true}
-              status={STATUS}
-              size='medium'
+              checked={this.state.isCheckBoxSuccessChecked}
+              status='success'
+              onChange={this.onCheckBoxSuccessChange}
             />
             <CheckBox
               style={this.props.themedStyle.component}
-              checked={true}
-              status={STATUS}
-              size='small'
+              checked={this.state.isCheckBoxInfoChecked}
+              status='info'
+              onChange={this.onCheckBoxInfoChange}
+            />
+            <CheckBox
+              style={this.props.themedStyle.component}
+              checked={this.state.isCheckBoxWarningChecked}
+              status='warning'
+              onChange={this.onCheckBoxWarningChange}
+            />
+            <CheckBox
+              style={this.props.themedStyle.component}
+              checked={this.state.isCheckBoxDangerChecked}
+              status='danger'
+              onChange={this.onCheckBoxDangerChange}
+            />
+            <CheckBox
+              style={this.props.themedStyle.component}
+              checked={this.state.isCheckBoxWhiteChecked}
+              status='white'
+              onChange={this.onCheckBoxWhiteChange}
             />
           </View>
         </View>
@@ -113,26 +132,22 @@ class CheckBoxScreen extends React.Component<Props, State> {
           <View style={this.props.themedStyle.containerPreviewColumn}>
             <CheckBox
               style={this.props.themedStyle.component}
-              status={STATUS}
               text='Place your text'
             />
             <CheckBox
               style={this.props.themedStyle.component}
               checked={true}
-              status={STATUS}
               text='Place your text'
             />
             <CheckBox
               style={this.props.themedStyle.component}
               disabled={true}
-              status={STATUS}
               text='Place your text'
             />
             <CheckBox
               style={this.props.themedStyle.component}
               checked={true}
               disabled={true}
-              status={STATUS}
               text='Place your text'
             />
           </View>
