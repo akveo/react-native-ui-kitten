@@ -1,6 +1,6 @@
 import React from 'react';
 import { default as mapping } from '@eva/eva';
-import { default as theme } from '@eva/theme-eva';
+import { theme } from '@eva/theme-eva';
 import { ApplicationProvider } from '@kitten/theme';
 import { withNavigation } from './navigation';
 import * as Screens from './ui/screen';

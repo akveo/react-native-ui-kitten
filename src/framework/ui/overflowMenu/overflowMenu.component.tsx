@@ -26,7 +26,7 @@ interface OverflowMenuProps {
   children: React.ReactElement<any>;
   items: OverflowMenuItemType[];
   size?: string;
-  onSelect?: (event: GestureResponderEvent, index: number) => void;
+  onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
 const Popover = styled<PopoverProps>(PopoverComponent);
@@ -49,9 +49,9 @@ export class OverflowMenu extends React.Component<Props> {
   };
 
 
-  private onSelect = (event: GestureResponderEvent, index: number): void => {
+  private onSelect = (index: number, event: GestureResponderEvent): void => {
     if (this.props.onSelect) {
-      this.props.onSelect(event, index);
+      this.props.onSelect(index, event);
     }
   };
 

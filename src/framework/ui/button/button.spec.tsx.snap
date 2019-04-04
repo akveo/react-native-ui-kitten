@@ -12,21 +12,16 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "backgroundColor": "#2196F3",
-        "borderRadius": 6,
-        "flexDirection": "row",
-        "minHeight": 24,
-        "minWidth": 24,
-        "padding": 4,
-      },
-      undefined,
-      Object {
-        "alignItems": "center",
-        "justifyContent": "space-evenly",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#2196F3",
+      "borderRadius": 6,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+      "minHeight": 24,
+      "minWidth": 24,
+      "padding": 4,
+    }
   }
   theme={
     Object {
@@ -62,21 +57,16 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "backgroundColor": "#2196F3",
-        "borderRadius": 6,
-        "flexDirection": "row",
-        "minHeight": 24,
-        "minWidth": 24,
-        "padding": 4,
-      },
-      undefined,
-      Object {
-        "alignItems": "center",
-        "justifyContent": "space-evenly",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#2196F3",
+      "borderRadius": 6,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+      "minHeight": 24,
+      "minWidth": 24,
+      "padding": 4,
+    }
   }
   theme={
     Object {
@@ -128,21 +118,16 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "backgroundColor": "#2196F3",
-        "borderRadius": 6,
-        "flexDirection": "row",
-        "minHeight": 24,
-        "minWidth": 24,
-        "padding": 4,
-      },
-      undefined,
-      Object {
-        "alignItems": "center",
-        "justifyContent": "space-evenly",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#2196F3",
+      "borderRadius": 6,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+      "minHeight": 24,
+      "minWidth": 24,
+      "padding": 4,
+    }
   }
   theme={
     Object {
@@ -208,21 +193,16 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "backgroundColor": "#2196F3",
-        "borderRadius": 6,
-        "flexDirection": "row",
-        "minHeight": 24,
-        "minWidth": 24,
-        "padding": 4,
-      },
-      undefined,
-      Object {
-        "alignItems": "center",
-        "justifyContent": "space-evenly",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#2196F3",
+      "borderRadius": 6,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+      "minHeight": 24,
+      "minWidth": 24,
+      "padding": 4,
+    }
   }
   theme={
     Object {
@@ -273,21 +253,16 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "backgroundColor": "#2196F3",
-        "borderRadius": 6,
-        "flexDirection": "row",
-        "minHeight": 24,
-        "minWidth": 24,
-        "padding": 4,
-      },
-      undefined,
-      Object {
-        "alignItems": "center",
-        "justifyContent": "space-evenly",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#2196F3",
+      "borderRadius": 6,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+      "minHeight": 24,
+      "minWidth": 24,
+      "padding": 4,
+    }
   }
   theme={
     Object {

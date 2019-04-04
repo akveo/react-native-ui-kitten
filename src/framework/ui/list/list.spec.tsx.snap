@@ -331,7 +331,11 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
     }
     style={
       Array [
-        0,
+        Object {
+          "height": 48,
+          "marginHorizontal": 6,
+          "width": 48,
+        },
         Object {
           "height": 48,
           "marginHorizontal": 6,
@@ -408,7 +412,12 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
           "tintColor": "#A6AEBD",
           "width": 48,
         },
-        0,
+        Object {
+          "height": 48,
+          "marginHorizontal": 6,
+          "tintColor": "#A6AEBD",
+          "width": 48,
+        },
         Object {},
       ]
     }
