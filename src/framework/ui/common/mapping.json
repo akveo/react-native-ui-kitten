@@ -8,9 +8,6 @@
           "roundCoefficient": {
             "type": "number"
           },
-          "margin": {
-            "type": "number"
-          },
           "width": {
             "type": "number"
           },
@@ -36,6 +33,9 @@
             }
           },
           "size": {
+            "tiny": {
+              "default": false
+            },
             "small": {
               "default": false
             },
@@ -43,6 +43,9 @@
               "default": true
             },
             "large": {
+              "default": false
+            },
+            "giant": {
               "default": false
             }
           }
@@ -52,7 +55,6 @@
       "appearances": {
         "default": {
           "mapping": {
-            "margin": 16
           },
           "variantGroups": {
             "shape": {
@@ -67,17 +69,25 @@
               }
             },
             "size": {
+              "tiny": {
+                "width": 24,
+                "height": 24
+              },
               "small": {
+                "width": 32,
+                "height": 32
+              },
+              "medium": {
                 "width": 40,
                 "height": 40
               },
-              "medium": {
+              "large": {
                 "width": 48,
                 "height": 48
               },
-              "large": {
-                "width": 64,
-                "height": 64
+              "giant": {
+                "width": 56,
+                "height": 56
               }
             }
           }

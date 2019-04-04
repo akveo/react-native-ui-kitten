@@ -21,8 +21,6 @@ interface State {
   isRadio4Checked: boolean;
 }
 
-const SIZE: string = 'large';
-const SHAPE: string = 'rounded';
 const SOURCE: ImageSourcePropType = { uri: 'https://randomuser.me/api/portraits/men/3.jpg' };
 
 class AvatarScreen extends React.Component<Props, State> {
@@ -38,15 +36,65 @@ class AvatarScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Default</Text>
           <View style={this.props.themedStyle.containerPreviewRow}>
             <Avatar
-              size={SIZE}
+              style={this.props.themedStyle.component}
               source={SOURCE}
             />
             <Avatar
-              size={SIZE}
+              style={this.props.themedStyle.component}
               source={SOURCE}
             />
             <Avatar
-              size={SIZE}
+              style={this.props.themedStyle.component}
+              source={SOURCE}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Size</Text>
+          <View style={this.props.themedStyle.containerPreviewRow}>
+            <Avatar
+              style={this.props.themedStyle.component}
+              size='giant'
+              source={SOURCE}
+            />
+            <Avatar
+              style={this.props.themedStyle.component}
+              size='large'
+              source={SOURCE}
+            />
+            <Avatar
+              style={this.props.themedStyle.component}
+              size='medium'
+              source={SOURCE}
+            />
+            <Avatar
+              style={this.props.themedStyle.component}
+              size='small'
+              source={SOURCE}
+            />
+            <Avatar
+              style={this.props.themedStyle.component}
+              size='tiny'
+              source={SOURCE}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Shape</Text>
+          <View style={this.props.themedStyle.containerPreviewRow}>
+            <Avatar
+              style={this.props.themedStyle.component}
+              shape='square'
+              source={SOURCE}
+            />
+            <Avatar
+              style={this.props.themedStyle.component}
+              shape='rounded'
+              source={SOURCE}
+            />
+            <Avatar
+              style={this.props.themedStyle.component}
+              shape='rounded'
               source={SOURCE}
             />
           </View>
@@ -55,21 +103,7 @@ class AvatarScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Custom</Text>
           <View style={this.props.themedStyle.containerPreviewRow}>
             <Avatar
-              style={this.props.themedStyle.component}
-              size={SIZE}
-              shape={SHAPE}
-              source={SOURCE}
-            />
-            <Avatar
-              style={this.props.themedStyle.component}
-              size={SIZE}
-              shape={SHAPE}
-              source={SOURCE}
-            />
-            <Avatar
-              style={this.props.themedStyle.component}
-              size={SIZE}
-              shape={SHAPE}
+              style={this.props.themedStyle.customComponent}
               source={SOURCE}
             />
           </View>
@@ -97,7 +131,9 @@ export default withStyles(AvatarScreen, (theme: ThemeType) => ({
     fontSize: 18,
   },
   component: {
-    backgroundColor: 'gray',
+    marginHorizontal: 4,
+  },
+  customComponent: {
     width: 80,
     height: 80,
   },
