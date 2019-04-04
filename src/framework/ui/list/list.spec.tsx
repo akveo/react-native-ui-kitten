@@ -191,7 +191,7 @@ describe('@list-item: component checks', () => {
   it('* emits onPress with correct args', async () => {
     const pressIndex: number = 0;
 
-    const onPress = jest.fn((event: GestureResponderEvent, index: number) => {
+    const onPress = jest.fn((index: number) => {
       expect(index).toEqual(pressIndex);
     });
 
