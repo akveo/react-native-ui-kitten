@@ -30,57 +30,78 @@ export class BottomNavigationTab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const {
+      iconWidth,
+      iconHeight,
+      iconMarginVertical,
+      iconTintColor,
+      textMarginVertical,
+      textFontSize,
+      textLineHeight,
+      textFontWeight,
+      textColor,
+      ...containerStyle
+    } = source;
+
     return {
-      icon: {
-        width: source.iconWidth,
-        height: source.iconHeight,
-        marginBottom: source.iconMarginBottom,
-        tintColor: source.iconTintColor,
+      container: {
+        ...containerStyle,
+        ...styles.container,
       },
-      title: {
-        color: source.textColor,
-        fontWeight: source.textFontWeight,
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        marginVertical: iconMarginVertical,
+        tintColor: iconTintColor,
+        ...styles.icon,
+      },
+      text: {
+        marginVertical: textMarginVertical,
+        fontSize: textFontSize,
+        lineHeight: textLineHeight,
+        fontWeight: textFontWeight,
+        color: textColor,
+        ...styles.text,
       },
     };
   };
 
-  private renderImageElement(style: StyleType): React.ReactElement<ImageProps> | null {
-    const icon: React.ReactElement<ImageProps> = this.props.icon ?
-      this.props.icon(style) : null;
-    return icon ? React.cloneElement(icon, {
-      style: {
-        ...(icon.props.style as object),
-        marginBottom: style.source,
-      },
-      key: 1,
-    }) : null;
+  private renderImageElement(style: StyleType): React.ReactElement<ImageProps> {
+    const icon: React.ReactElement<ImageProps> = this.props.icon(style);
+
+    return React.cloneElement(icon, { key: 1 });
   }
 
-  private renderTextElement(style: StyleType): React.ReactElement<TextProps> | null {
+  private renderTextElement(style: StyleType): React.ReactElement<TextProps> {
     const { title } = this.props;
-    return title && title.length !== 0 ? (
+
+    return (
       <Text
         key={2}
         style={style}>
-        {this.props.title}
+        {title}
       </Text>
-    ) : null;
+    );
   }
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => ([
-    this.renderImageElement(style.icon),
-    this.renderTextElement(style.title),
-  ]);
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+    const { icon, title } = this.props;
+
+    return [
+      icon ? this.renderImageElement(style.icon) : null,
+      title ? this.renderTextElement(style.text) : null,
+    ];
+  };
 
   public render(): React.ReactNode {
     const { style, themedStyle, ...derivedProps } = this.props;
-    const componentStyles: StyleType = this.getComponentStyle(themedStyle);
+    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[style, styles.container]}
+        style={container}
         activeOpacity={1.0}
         onPress={this.onPress}>
         {componentChildren}
@@ -95,4 +116,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  icon: {},
+  text: {},
 });

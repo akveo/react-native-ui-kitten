@@ -32,16 +32,17 @@ export class BottomNavigation extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
+    const { indicatorHeight, indicatorBackgroundColor, ...containerStyle } = style;
+
     return {
       container: {
-        backgroundColor: style.backgroundColor,
-        paddingVertical: style.paddingVertical,
-        borderTopColor: style.borderTopColor,
-        borderTopWidth: style.borderTopWidth,
+        ...containerStyle,
+        ...styles.container,
       },
       indicator: {
-        height: style.indicatorHeight,
-        backgroundColor: style.indicatorBackgroundColor,
+        height: indicatorHeight,
+        backgroundColor: indicatorBackgroundColor,
+        ...styles.indicator,
       },
     };
   };
