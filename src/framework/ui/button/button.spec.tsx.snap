@@ -14,13 +14,14 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#2196F3",
-      "borderRadius": 6,
+      "backgroundColor": "#3366FF",
+      "borderRadius": 8,
       "flexDirection": "row",
       "justifyContent": "space-evenly",
-      "minHeight": 24,
-      "minWidth": 24,
-      "padding": 4,
+      "minHeight": 40,
+      "minWidth": 40,
+      "paddingHorizontal": 10,
+      "paddingVertical": 12,
     }
   }
   theme={
@@ -144,13 +145,14 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#2196F3",
-      "borderRadius": 6,
+      "backgroundColor": "#3366FF",
+      "borderRadius": 8,
       "flexDirection": "row",
       "justifyContent": "space-evenly",
-      "minHeight": 24,
-      "minWidth": 24,
-      "padding": 4,
+      "minHeight": 40,
+      "minWidth": 40,
+      "paddingHorizontal": 10,
+      "paddingVertical": 12,
     }
   }
   theme={
@@ -265,10 +267,10 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
     }
     style={
       Object {
-        "height": 13,
-        "marginHorizontal": 4,
-        "tintColor": "#ffffff",
-        "width": 13,
+        "height": 16,
+        "marginHorizontal": 10,
+        "tintColor": "#FFFFFF",
+        "width": 16,
       }
     }
   />
@@ -290,13 +292,14 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#2196F3",
-      "borderRadius": 6,
+      "backgroundColor": "#3366FF",
+      "borderRadius": 8,
       "flexDirection": "row",
       "justifyContent": "space-evenly",
-      "minHeight": 24,
-      "minWidth": 24,
-      "padding": 4,
+      "minHeight": 40,
+      "minWidth": 40,
+      "paddingHorizontal": 10,
+      "paddingVertical": 12,
     }
   }
   theme={
@@ -411,10 +414,10 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
     }
     style={
       Object {
-        "height": 13,
-        "marginHorizontal": 4,
-        "tintColor": "#ffffff",
-        "width": 13,
+        "height": 16,
+        "marginHorizontal": 10,
+        "tintColor": "#FFFFFF",
+        "width": 16,
       }
     }
   />
@@ -423,9 +426,10 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
       Array [
         Object {
           "color": "#ffffff",
-          "fontSize": 12,
+          "fontSize": 14,
           "fontWeight": "800",
-          "marginHorizontal": 4,
+          "lineHeight": 16,
+          "marginHorizontal": 10,
         },
         Object {},
       ]
@@ -450,13 +454,14 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#2196F3",
-      "borderRadius": 6,
+      "backgroundColor": "#3366FF",
+      "borderRadius": 8,
       "flexDirection": "row",
       "justifyContent": "space-evenly",
-      "minHeight": 24,
-      "minWidth": 24,
-      "padding": 4,
+      "minHeight": 40,
+      "minWidth": 40,
+      "paddingHorizontal": 10,
+      "paddingVertical": 12,
     }
   }
   theme={
@@ -568,9 +573,10 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
       Array [
         Object {
           "color": "#ffffff",
-          "fontSize": 12,
+          "fontSize": 14,
           "fontWeight": "800",
-          "marginHorizontal": 4,
+          "lineHeight": 16,
+          "marginHorizontal": 10,
         },
         Object {},
       ]
@@ -595,13 +601,14 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#2196F3",
-      "borderRadius": 6,
+      "backgroundColor": "#3366FF",
+      "borderRadius": 8,
       "flexDirection": "row",
       "justifyContent": "space-evenly",
-      "minHeight": 24,
-      "minWidth": 24,
-      "padding": 4,
+      "minHeight": 40,
+      "minWidth": 40,
+      "paddingHorizontal": 10,
+      "paddingVertical": 12,
     }
   }
   theme={

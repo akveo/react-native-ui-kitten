@@ -8,7 +8,7 @@ import * as Screens from './ui/screen';
 export default class App extends React.Component {
 
   public render(): React.ReactNode {
-    const { CheckBox: RootScreen, ...screens } = Screens;
+    const { Home: RootScreen, ...screens } = Screens;
     const Router: React.ComponentClass = withNavigation(RootScreen, screens);
 
     return (
