@@ -13,19 +13,18 @@ exports[`@list-item: template matches snapshot * description 1`] = `
   style={
     Array [
       Object {
-        "paddingHorizontal": 6,
-        "paddingVertical": 12,
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "paddingHorizontal": 8,
+        "paddingVertical": 8,
       },
       Array [
         undefined,
         undefined,
         Object {},
       ],
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "justifyContent": "center",
-      },
     ]
   }
   theme={
@@ -138,28 +137,26 @@ exports[`@list-item: template matches snapshot * description 1`] = `
       Array [
         Object {
           "accessory": Object {
-            "height": 48,
-            "marginHorizontal": 6,
-            "width": 48,
+            "marginHorizontal": 8,
           },
           "description": Object {
-            "color": "#a6aebd",
-            "fontSize": 14,
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "color": "#8992A3",
+            "fontSize": 11,
+            "lineHeight": 16,
+            "marginHorizontal": 8,
           },
           "icon": Object {
-            "height": 48,
-            "marginHorizontal": 6,
+            "height": 40,
+            "marginHorizontal": 8,
             "tintColor": "#A6AEBD",
-            "width": 48,
+            "width": 40,
           },
           "title": Object {
-            "color": "#000000",
-            "fontSize": 20,
+            "color": "#0D1C2E",
+            "fontSize": 13,
             "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "lineHeight": 24,
+            "marginHorizontal": 8,
           },
         },
         Object {
@@ -170,16 +167,13 @@ exports[`@list-item: template matches snapshot * description 1`] = `
   >
     <ForwardRef(WrappingElement)
       style={
-        Array [
-          Object {
-            "color": "#000000",
-            "fontSize": 20,
-            "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
-          },
-          Object {},
-        ]
+        Object {
+          "color": "#0D1C2E",
+          "fontSize": 13,
+          "fontWeight": "600",
+          "lineHeight": 24,
+          "marginHorizontal": 8,
+        }
       }
     >
       Title
@@ -201,19 +195,18 @@ exports[`@list-item: template matches snapshot * title 1`] = `
   style={
     Array [
       Object {
-        "paddingHorizontal": 6,
-        "paddingVertical": 12,
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "paddingHorizontal": 8,
+        "paddingVertical": 8,
       },
       Array [
         undefined,
         undefined,
         Object {},
       ],
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "justifyContent": "center",
-      },
     ]
   }
   theme={
@@ -326,28 +319,26 @@ exports[`@list-item: template matches snapshot * title 1`] = `
       Array [
         Object {
           "accessory": Object {
-            "height": 48,
-            "marginHorizontal": 6,
-            "width": 48,
+            "marginHorizontal": 8,
           },
           "description": Object {
-            "color": "#a6aebd",
-            "fontSize": 14,
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "color": "#8992A3",
+            "fontSize": 11,
+            "lineHeight": 16,
+            "marginHorizontal": 8,
           },
           "icon": Object {
-            "height": 48,
-            "marginHorizontal": 6,
+            "height": 40,
+            "marginHorizontal": 8,
             "tintColor": "#A6AEBD",
-            "width": 48,
+            "width": 40,
           },
           "title": Object {
-            "color": "#000000",
-            "fontSize": 20,
+            "color": "#0D1C2E",
+            "fontSize": 13,
             "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "lineHeight": 24,
+            "marginHorizontal": 8,
           },
         },
         Object {
@@ -358,16 +349,13 @@ exports[`@list-item: template matches snapshot * title 1`] = `
   >
     <ForwardRef(WrappingElement)
       style={
-        Array [
-          Object {
-            "color": "#000000",
-            "fontSize": 20,
-            "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
-          },
-          Object {},
-        ]
+        Object {
+          "color": "#0D1C2E",
+          "fontSize": 13,
+          "fontWeight": "600",
+          "lineHeight": 24,
+          "marginHorizontal": 8,
+        }
       }
     >
       Title
@@ -391,19 +379,18 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
   style={
     Array [
       Object {
-        "paddingHorizontal": 6,
-        "paddingVertical": 12,
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "paddingHorizontal": 8,
+        "paddingVertical": 8,
       },
       Array [
         undefined,
         undefined,
         Object {},
       ],
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "justifyContent": "center",
-      },
     ]
   }
   theme={
@@ -516,28 +503,26 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
       Array [
         Object {
           "accessory": Object {
-            "height": 48,
-            "marginHorizontal": 6,
-            "width": 48,
+            "marginHorizontal": 8,
           },
           "description": Object {
-            "color": "#a6aebd",
-            "fontSize": 14,
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "color": "#8992A3",
+            "fontSize": 11,
+            "lineHeight": 16,
+            "marginHorizontal": 8,
           },
           "icon": Object {
-            "height": 48,
-            "marginHorizontal": 6,
+            "height": 40,
+            "marginHorizontal": 8,
             "tintColor": "#A6AEBD",
-            "width": 48,
+            "width": 40,
           },
           "title": Object {
-            "color": "#000000",
-            "fontSize": 20,
+            "color": "#0D1C2E",
+            "fontSize": 13,
             "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "lineHeight": 24,
+            "marginHorizontal": 8,
           },
         },
         Object {
@@ -548,31 +533,25 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
   >
     <ForwardRef(WrappingElement)
       style={
-        Array [
-          Object {
-            "color": "#000000",
-            "fontSize": 20,
-            "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
-          },
-          Object {},
-        ]
+        Object {
+          "color": "#0D1C2E",
+          "fontSize": 13,
+          "fontWeight": "600",
+          "lineHeight": 24,
+          "marginHorizontal": 8,
+        }
       }
     >
       Title
     </ForwardRef(WrappingElement)>
     <ForwardRef(WrappingElement)
       style={
-        Array [
-          Object {
-            "color": "#a6aebd",
-            "fontSize": 14,
-            "marginHorizontal": 6,
-            "marginVertical": 4,
-          },
-          Object {},
-        ]
+        Object {
+          "color": "#8992A3",
+          "fontSize": 11,
+          "lineHeight": 16,
+          "marginHorizontal": 8,
+        }
       }
     >
       Description
@@ -587,16 +566,11 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
     style={
       Array [
         Object {
-          "height": 48,
-          "marginHorizontal": 6,
-          "width": 48,
+          "marginHorizontal": 8,
         },
         Object {
-          "height": 48,
-          "marginHorizontal": 6,
-          "width": 48,
+          "marginHorizontal": 8,
         },
-        Object {},
       ]
     }
   />
@@ -618,19 +592,18 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
   style={
     Array [
       Object {
-        "paddingHorizontal": 6,
-        "paddingVertical": 12,
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "paddingHorizontal": 8,
+        "paddingVertical": 8,
       },
       Array [
         undefined,
         undefined,
         Object {},
       ],
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "justifyContent": "center",
-      },
     ]
   }
   theme={
@@ -747,16 +720,16 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
     style={
       Array [
         Object {
-          "height": 48,
-          "marginHorizontal": 6,
+          "height": 40,
+          "marginHorizontal": 8,
           "tintColor": "#A6AEBD",
-          "width": 48,
+          "width": 40,
         },
         Object {
-          "height": 48,
-          "marginHorizontal": 6,
+          "height": 40,
+          "marginHorizontal": 8,
           "tintColor": "#A6AEBD",
-          "width": 48,
+          "width": 40,
         },
         Object {},
       ]
@@ -767,28 +740,26 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
       Array [
         Object {
           "accessory": Object {
-            "height": 48,
-            "marginHorizontal": 6,
-            "width": 48,
+            "marginHorizontal": 8,
           },
           "description": Object {
-            "color": "#a6aebd",
-            "fontSize": 14,
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "color": "#8992A3",
+            "fontSize": 11,
+            "lineHeight": 16,
+            "marginHorizontal": 8,
           },
           "icon": Object {
-            "height": 48,
-            "marginHorizontal": 6,
+            "height": 40,
+            "marginHorizontal": 8,
             "tintColor": "#A6AEBD",
-            "width": 48,
+            "width": 40,
           },
           "title": Object {
-            "color": "#000000",
-            "fontSize": 20,
+            "color": "#0D1C2E",
+            "fontSize": 13,
             "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
+            "lineHeight": 24,
+            "marginHorizontal": 8,
           },
         },
         Object {
@@ -799,31 +770,25 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
   >
     <ForwardRef(WrappingElement)
       style={
-        Array [
-          Object {
-            "color": "#000000",
-            "fontSize": 20,
-            "fontWeight": "600",
-            "marginHorizontal": 6,
-            "marginVertical": 4,
-          },
-          Object {},
-        ]
+        Object {
+          "color": "#0D1C2E",
+          "fontSize": 13,
+          "fontWeight": "600",
+          "lineHeight": 24,
+          "marginHorizontal": 8,
+        }
       }
     >
       Title
     </ForwardRef(WrappingElement)>
     <ForwardRef(WrappingElement)
       style={
-        Array [
-          Object {
-            "color": "#a6aebd",
-            "fontSize": 14,
-            "marginHorizontal": 6,
-            "marginVertical": 4,
-          },
-          Object {},
-        ]
+        Object {
+          "color": "#8992A3",
+          "fontSize": 11,
+          "lineHeight": 16,
+          "marginHorizontal": 8,
+        }
       }
     >
       Description
