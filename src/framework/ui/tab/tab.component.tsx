@@ -41,24 +41,37 @@ export class Tab extends React.Component<Props> {
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      textColor,
+      textMarginVertical,
+      textFontSize,
+      textLineHeight,
       textFontWeight,
+      textColor,
       iconWidth,
       iconHeight,
+      iconMarginVertical,
       iconTintColor,
       ...containerParameters
     } = source;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+        ...styles.container,
+      },
       icon: {
         width: iconWidth,
         height: iconHeight,
+        marginVertical: iconMarginVertical,
         tintColor: iconTintColor,
+        ...styles.icon,
       },
       title: {
-        color: textColor,
+        marginVertical: textMarginVertical,
+        fontSize: textFontSize,
+        lineHeight: textLineHeight,
         fontWeight: textFontWeight,
+        color: textColor,
+        ...styles.title,
       },
     };
   };
@@ -101,7 +114,7 @@ export class Tab extends React.Component<Props> {
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[style, container, styles.container]}
+        style={[container, style]}
         activeOpacity={1.0}
         onPress={this.onPress}>
         {componentChildren}
