@@ -4,14 +4,14 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#f7f8fa",
+      "backgroundColor": "#F7F8FA",
       "borderColor": "transparent",
-      "borderRadius": 6,
+      "borderRadius": 8,
       "borderWidth": 2,
       "flexDirection": "row",
       "minHeight": 48,
-      "paddingHorizontal": 6,
-      "paddingVertical": 12,
+      "paddingHorizontal": 8,
+      "paddingVertical": 14,
     }
   }
 >
@@ -26,9 +26,11 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
     status="primary"
     style={
       Object {
-        "color": "#a6aebd",
+        "color": "#8992A3",
         "flex": 1,
-        "marginHorizontal": 6,
+        "fontSize": 15,
+        "lineHeight": 20,
+        "marginHorizontal": 8,
       }
     }
     theme={
@@ -145,8 +147,8 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
     style={
       Object {
         "height": 24,
-        "marginHorizontal": 6,
-        "tintColor": "#a6aebd",
+        "marginHorizontal": 8,
+        "tintColor": "#A6AEBD",
         "width": 24,
       }
     }
@@ -158,14 +160,14 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#f7f8fa",
+      "backgroundColor": "#F7F8FA",
       "borderColor": "transparent",
-      "borderRadius": 6,
+      "borderRadius": 8,
       "borderWidth": 2,
       "flexDirection": "row",
       "minHeight": 48,
-      "paddingHorizontal": 6,
-      "paddingVertical": 12,
+      "paddingHorizontal": 8,
+      "paddingVertical": 14,
     }
   }
 >
@@ -179,9 +181,11 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
     status="primary"
     style={
       Object {
-        "color": "#a6aebd",
+        "color": "#8992A3",
         "flex": 1,
-        "marginHorizontal": 6,
+        "fontSize": 15,
+        "lineHeight": 20,
+        "marginHorizontal": 8,
       }
     }
     theme={
