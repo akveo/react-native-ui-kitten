@@ -20,7 +20,7 @@ exports[`@checkbox matches snapshots * active 1`] = `
     <View
       style={
         Object {
-          "backgroundColor": "#DDE1EB",
+          "backgroundColor": "#EDF0F5",
           "borderRadius": 6,
           "height": 40,
           "position": "absolute",
@@ -35,12 +35,13 @@ exports[`@checkbox matches snapshots * active 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       status="primary"
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#284DE0",
-          "borderColor": "#284DE0",
+          "backgroundColor": "#D9E4FF",
+          "borderColor": "#2541CC",
           "borderRadius": 3,
           "borderWidth": 1,
           "height": 24,
@@ -206,6 +207,7 @@ exports[`@checkbox matches snapshots * active: default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       status="primary"
       style={
         Object {
@@ -379,6 +381,7 @@ exports[`@checkbox matches snapshots * checked.disabled 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       status="primary"
       style={
         Object {
@@ -550,6 +553,7 @@ exports[`@checkbox matches snapshots * default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       status="primary"
       style={
         Object {
@@ -722,6 +726,7 @@ exports[`@checkbox matches snapshots * with text 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
+      size="medium"
       status="primary"
       style={
         Object {
@@ -859,9 +864,9 @@ exports[`@checkbox matches snapshots * with text 1`] = `
     style={
       Object {
         "color": "#0D1C2E",
-        "fontSize": 14,
+        "fontSize": 13,
         "fontWeight": "600",
-        "lineHeight": 16,
+        "lineHeight": 24,
         "marginHorizontal": 12,
       }
     }
