@@ -96,7 +96,7 @@ export class Popover extends React.Component<Props, State> {
   private getComponentStyle = (source: StyleType): StyleType => {
     return {
       child: {},
-      popover: {},
+      popover: source,
     };
   };
 

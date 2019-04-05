@@ -25,7 +25,7 @@ export class PopoverView extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
     placement: PLACEMENT_DEFAULT.rawValue,
-    indicatorOffset: 0,
+    indicatorOffset: 8,
   };
 
   private getComponentStyle = (source: StyleType, placement: Placement): StyleType => {
