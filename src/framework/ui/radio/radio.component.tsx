@@ -5,19 +5,24 @@ import {
   TouchableOpacityProps,
   GestureResponderEvent,
   StyleSheet,
+  TextStyle,
+  StyleProp,
 } from 'react-native';
 import {
   styled,
   StyledComponentProps,
   StyleType,
   Interaction,
+  allWithRest,
 } from '@kitten/theme';
 import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
+import { TextStyleProps } from '@kitten/ui/common/props';
 
 interface RadioProps {
+  style?: StyleProp<TextStyle>;
   text?: string;
   checked?: boolean;
   status?: string;
@@ -54,15 +59,20 @@ export class Radio extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
+
+    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
+    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+
     const {
-      textColor,
-      textMarginLeft,
+      textMarginHorizontal,
       textFontSize,
       textFontWeight,
-      selectWidth,
-      selectHeight,
-      selectBorderRadius,
-      selectBackgroundColor,
+      textLineHeight,
+      textColor,
+      iconWidth,
+      iconHeight,
+      iconBorderRadius,
+      iconTintColor,
       highlightWidth,
       highlightHeight,
       highlightBorderRadius,
@@ -71,24 +81,36 @@ export class Radio extends React.Component<Props> {
     } = style;
 
     return {
-      selectContainer: containerParameters,
-      text: {
-        color: textColor,
-        fontSize: textFontSize,
-        fontWeight: textFontWeight,
-        marginLeft: textMarginLeft,
+      container: {
+        ...derivedContainerStyle,
+        ...styles.container,
       },
-      select: {
-        width: selectWidth,
-        height: selectHeight,
-        borderRadius: selectBorderRadius,
-        backgroundColor: selectBackgroundColor,
+      highlightContainer: styles.highlightContainer,
+      selectContainer: {
+        ...containerParameters,
+        ...styles.iconContainer,
+      },
+      text: {
+        marginHorizontal: textMarginHorizontal,
+        fontSize: textFontSize,
+        lineHeight: textLineHeight,
+        fontWeight: textFontWeight,
+        color: textColor,
+        ...styles.text,
+        ...derivedTextStyle,
+      },
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        borderRadius: iconBorderRadius,
+        backgroundColor: iconTintColor,
       },
       highlight: {
         width: highlightWidth,
         height: highlightHeight,
         borderRadius: highlightBorderRadius,
         backgroundColor: highlightBackgroundColor,
+        ...styles.highlight,
       },
     };
   };
@@ -97,7 +119,7 @@ export class Radio extends React.Component<Props> {
     const { text } = this.props;
 
     return (
-      <Text style={[style, styles.text]} key={0}>{text}</Text>
+      <Text style={style} key={0}>{text}</Text>
     );
   };
 
@@ -110,26 +132,41 @@ export class Radio extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
-    const { selectContainer, select, highlight, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { style, themedStyle, disabled, ...derivedProps } = this.props;
+    const {
+      container,
+      highlightContainer,
+      selectContainer,
+      icon,
+      highlight,
+      ...componentStyles
+    } = this.getComponentStyle(themedStyle);
+
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
-      <View style={[style, styles.container]}>
-        <View style={styles.highlightContainer}>
-          <View style={[highlight, styles.highlight]}/>
+      <TouchableOpacity
+        style={container}
+        activeOpacity={1.0}
+        disabled={disabled}
+        onPress={this.onPress}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
+        <View style={highlightContainer}>
+          <View style={highlight}/>
           <TouchableOpacity
-            {...derivedProps}
-            style={[selectContainer, styles.selectContainer]}
             activeOpacity={1.0}
+            {...derivedProps}
+            disabled={disabled}
+            style={selectContainer}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
-            <View style={[select, styles.select]}/>
+            <View style={icon}/>
           </TouchableOpacity>
         </View>
         {componentChildren}
-      </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -143,11 +180,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  selectContainer: {
+  iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  select: {},
+  icon: {},
   highlight: {
     position: 'absolute',
   },

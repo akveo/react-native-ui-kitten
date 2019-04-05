@@ -20,8 +20,6 @@ interface State {
   isRadio4Checked: boolean;
 }
 
-const STATUS: string = '';
-
 class RadioScreen extends React.Component<Props, State> {
 
   static navigationOptions = {
@@ -60,28 +58,54 @@ class RadioScreen extends React.Component<Props, State> {
             <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio1Checked}
-              status={STATUS}
               onChange={this.onRadio1Change}
             />
             <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio2Checked}
-              status={STATUS}
               onChange={this.onRadio2Change}
             />
             <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio3Checked}
               disabled={true}
-              status={STATUS}
               onChange={this.onRadio3Change}
             />
             <Radio
               style={this.props.themedStyle.component}
               checked={this.state.isRadio4Checked}
               disabled={true}
-              status={STATUS}
               onChange={this.onRadio4Change}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Status</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              status='primary'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              status='success'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              status='info'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              status='warning'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              status='danger'
             />
           </View>
         </View>
@@ -91,20 +115,62 @@ class RadioScreen extends React.Component<Props, State> {
             <Radio
               style={this.props.themedStyle.component}
               checked={true}
-              status={STATUS}
+              size='giant'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
               size='large'
             />
             <Radio
               style={this.props.themedStyle.component}
               checked={true}
-              status={STATUS}
               size='medium'
             />
             <Radio
               style={this.props.themedStyle.component}
               checked={true}
-              status={STATUS}
               size='small'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              size='tiny'
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Size</Text>
+          <View style={this.props.themedStyle.containerPreviewColumn}>
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              size='giant'
+              text='Place your text'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              size='large'
+              text='Place your text'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              size='medium'
+              text='Place your text'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              size='small'
+              text='Place your text'
+            />
+            <Radio
+              style={this.props.themedStyle.component}
+              checked={true}
+              size='tiny'
+              text='Place your text'
             />
           </View>
         </View>
@@ -113,26 +179,22 @@ class RadioScreen extends React.Component<Props, State> {
           <View style={this.props.themedStyle.containerPreviewColumn}>
             <Radio
               style={this.props.themedStyle.component}
-              status={STATUS}
               text='Place your text'
             />
             <Radio
               style={this.props.themedStyle.component}
               checked={true}
-              status={STATUS}
               text='Place your text'
             />
             <Radio
               style={this.props.themedStyle.component}
               disabled={true}
-              status={STATUS}
               text='Place your text'
             />
             <Radio
               style={this.props.themedStyle.component}
               checked={true}
               disabled={true}
-              status={STATUS}
               text='Place your text'
             />
           </View>
