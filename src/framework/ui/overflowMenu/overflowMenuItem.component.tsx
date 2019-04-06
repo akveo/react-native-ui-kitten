@@ -20,8 +20,6 @@ import { TouchableOpacityIndexedProps } from '../common/type';
 export interface OverflowMenuItemType {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   text: React.ReactText;
-  size?: string;
-  isLastItem?: boolean;
   disabled?: boolean;
   index?: number;
 }
@@ -31,10 +29,6 @@ const Text = styled<TextProps>(TextComponent);
 export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpacityIndexedProps;
 
 export class OverflowMenuItem extends React.Component<Props> {
-
-  static defaultProps: Partial<Props> = {
-    isLastItem: false,
-  };
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -65,50 +59,67 @@ export class OverflowMenuItem extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { isLastItem } = this.props;
+    const {
+      textMarginHorizontal,
+      textFontSize,
+      textLineHeight,
+      textFontWeight,
+      textColor,
+      iconWidth,
+      iconHeight,
+      iconMarginHorizontal,
+      iconTintColor,
+      ...containerStyle
+    } = style;
 
     return {
       container: {
-        minHeight: style.minHeight,
-        padding: style.padding,
-        backgroundColor: style.backgroundColor,
-        borderBottomColor: !isLastItem ? style.borderColor : null,
-        borderBottomWidth: !isLastItem ? style.borderWidth : null,
+        ...containerStyle,
+        ...styles.container,
+        borderBottomColor: 'red',
       },
       text: {
-        color: style.textColor,
-        fontWeight: style.textFontWeight,
+        marginHorizontal: textMarginHorizontal,
         fontSize: style.textFontSize,
-        marginHorizontal: style.textMarginHorizontal,
+        lineHeight: textLineHeight,
+        fontWeight: textFontWeight,
+        color: textColor,
       },
       icon: {
-        tintColor: style.iconTintColor,
-        width: style.iconWidth,
-        height: style.iconHeight,
-        marginHorizontal: style.iconMarginHorizontal,
+        width: iconWidth,
+        height: iconHeight,
+        marginHorizontal: iconMarginHorizontal,
+        tintColor: iconTintColor,
       },
     };
   };
 
   private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
+    const { text } = this.props;
+
     return (
       <Text
-        style={style}
-        key={2}>
-        {this.props.text}
+        key={2}
+        style={style}>
+        {text}
       </Text>
     );
   };
 
-  private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> | null => {
+  private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
     const { icon } = this.props;
-    return icon ? React.cloneElement(icon(style), { key: 1 }) : null;
+
+    return React.cloneElement(icon(style), { key: 1 });
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => ([
-    this.props.icon ? this.renderImageElement(style.icon) : null,
-    this.renderTextElement(style.text),
-  ]);
+  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+    const { icon } = this.props;
+
+    return [
+      icon ? this.renderImageElement(style.icon) : null,
+      this.renderTextElement(style.text),
+    ];
+  };
 
   public render(): React.ReactNode {
     const { style, themedStyle, ...restProps } = this.props;
@@ -118,7 +129,7 @@ export class OverflowMenuItem extends React.Component<Props> {
     return (
       <TouchableOpacity
         {...restProps}
-        style={[container, styles.container, style]}
+        style={[container, style]}
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}

@@ -8,13 +8,17 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
       <ForwardRef(WrappingElement)
         icon={[Function]}
         index={0}
-        isLastItem={false}
         onPress={[Function]}
         style={
-          Object {
-            "borderTopLeftRadius": 6,
-            "borderTopRightRadius": 6,
-          }
+          Array [
+            Object {
+              "borderBottomColor": "#EDF0F5",
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "borderBottomWidth": 1,
+            },
+          ]
         }
         text="Menu Item 1"
       />
@@ -22,33 +26,57 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
         disabled={true}
         icon={[Function]}
         index={1}
-        isLastItem={false}
         onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "borderBottomColor": "#EDF0F5",
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "borderBottomWidth": 1,
+            },
+          ]
+        }
         text="Menu Item 2"
       />
       <ForwardRef(WrappingElement)
         index={2}
-        isLastItem={false}
         onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "borderBottomColor": "#EDF0F5",
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "borderBottomWidth": 1,
+            },
+          ]
+        }
         text="Menu Item 3"
       />
       <ForwardRef(WrappingElement)
         icon={[Function]}
         index={3}
-        isLastItem={true}
         onPress={[Function]}
         style={
-          Object {
-            "borderBottomLeftRadius": 6,
-            "borderBottomRightRadius": 6,
-          }
+          Array [
+            Object {
+              "borderBottomColor": "#EDF0F5",
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "borderBottomWidth": 0,
+            },
+          ]
         }
         text="Menu Item 4"
       />
     </View>
   }
   dispatch={[Function]}
-  indicatorOffset={2}
+  indicatorOffset={12}
   items={
     Array [
       Object {
@@ -71,13 +99,11 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
   }
   onRequestClose={[Function]}
   style={
-    Array [
-      Object {
-        "backgroundColor": "white",
-        "borderRadius": 6,
-      },
-      undefined,
-    ]
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "borderRadius": 12,
+      "overflow": "hidden",
+    }
   }
   theme={
     Object {
@@ -196,19 +222,24 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
       <ForwardRef(WrappingElement)
         icon={[Function]}
         index={0}
-        isLastItem={true}
         onPress={[Function]}
         style={
-          Object {
-            "borderRadius": 6,
-          }
+          Array [
+            Object {
+              "borderBottomColor": "#EDF0F5",
+              "borderBottomWidth": 1,
+            },
+            Object {
+              "borderBottomWidth": 0,
+            },
+          ]
         }
         text="Menu Item 1"
       />
     </View>
   }
   dispatch={[Function]}
-  indicatorOffset={2}
+  indicatorOffset={12}
   items={
     Array [
       Object {
@@ -219,13 +250,11 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
   }
   onRequestClose={[Function]}
   style={
-    Array [
-      Object {
-        "backgroundColor": "white",
-        "borderRadius": 6,
-      },
-      undefined,
-    ]
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "borderRadius": 12,
+      "overflow": "hidden",
+    }
   }
   theme={
     Object {
@@ -341,24 +370,19 @@ exports[`@overflow-menu-item: component checks * menu item active checks 1`] = `
   activeOpacity={1}
   appearance="default"
   dispatch={[Function]}
-  isLastItem={false}
   onLongPress={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
   style={
     Array [
       Object {
-        "backgroundColor": "white",
-        "borderBottomColor": "#DDE1EB",
-        "borderBottomWidth": 1.2,
-        "minHeight": 48,
-        "padding": 12,
-      },
-      Object {
         "alignItems": "center",
+        "borderBottomColor": "red",
         "flexDirection": "row",
+        "minHeight": 48,
+        "paddingHorizontal": 8,
+        "paddingVertical": 12,
       },
       undefined,
     ]
@@ -472,8 +496,9 @@ exports[`@overflow-menu-item: component checks * menu item active checks 1`] = `
     style={
       Object {
         "color": "#3366FF",
-        "fontSize": 15,
+        "fontSize": 13,
         "fontWeight": "600",
+        "lineHeight": 24,
         "marginHorizontal": 8,
       }
     }
@@ -488,24 +513,19 @@ exports[`@overflow-menu-item: component checks * menu item active checks 2`] = `
   activeOpacity={1}
   appearance="default"
   dispatch={[Function]}
-  isLastItem={false}
   onLongPress={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
   style={
     Array [
       Object {
-        "backgroundColor": "white",
-        "borderBottomColor": "#DDE1EB",
-        "borderBottomWidth": 1.2,
-        "minHeight": 48,
-        "padding": 12,
-      },
-      Object {
         "alignItems": "center",
+        "borderBottomColor": "red",
         "flexDirection": "row",
+        "minHeight": 48,
+        "paddingHorizontal": 8,
+        "paddingVertical": 12,
       },
       undefined,
     ]
@@ -619,8 +639,9 @@ exports[`@overflow-menu-item: component checks * menu item active checks 2`] = `
     style={
       Object {
         "color": "#0D1C2E",
-        "fontSize": 15,
+        "fontSize": 13,
         "fontWeight": "600",
+        "lineHeight": 24,
         "marginHorizontal": 8,
       }
     }
@@ -637,24 +658,19 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
   disabled={true}
   dispatch={[Function]}
   icon={[Function]}
-  isLastItem={false}
   onLongPress={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
   style={
     Array [
       Object {
-        "backgroundColor": "#8992A3",
-        "borderBottomColor": "#DDE1EB",
-        "borderBottomWidth": 1.2,
-        "minHeight": 48,
-        "padding": 12,
-      },
-      Object {
         "alignItems": "center",
+        "borderBottomColor": "red",
         "flexDirection": "row",
+        "minHeight": 48,
+        "paddingHorizontal": 8,
+        "paddingVertical": 12,
       },
       undefined,
     ]
@@ -774,7 +790,7 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
       Object {
         "height": 24,
         "marginHorizontal": 8,
-        "tintColor": "#0D1C2E",
+        "tintColor": "#DDE1EB",
         "width": 24,
       }
     }
@@ -782,9 +798,10 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
   <ForwardRef(WrappingElement)
     style={
       Object {
-        "color": "#0D1C2E",
-        "fontSize": 15,
+        "color": "#C8CEDB",
+        "fontSize": 13,
         "fontWeight": "600",
+        "lineHeight": 24,
         "marginHorizontal": 8,
       }
     }
@@ -800,24 +817,19 @@ exports[`@overflow-menu-item: component checks * menu item with "set-2" props 1`
   appearance="default"
   disabled={false}
   dispatch={[Function]}
-  isLastItem={true}
   onLongPress={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  size="medium"
   style={
     Array [
       Object {
-        "backgroundColor": "white",
-        "borderBottomColor": null,
-        "borderBottomWidth": null,
-        "minHeight": 48,
-        "padding": 12,
-      },
-      Object {
         "alignItems": "center",
+        "borderBottomColor": "red",
         "flexDirection": "row",
+        "minHeight": 48,
+        "paddingHorizontal": 8,
+        "paddingVertical": 12,
       },
       undefined,
     ]
@@ -931,8 +943,9 @@ exports[`@overflow-menu-item: component checks * menu item with "set-2" props 1`
     style={
       Object {
         "color": "#0D1C2E",
-        "fontSize": 15,
+        "fontSize": 13,
         "fontWeight": "600",
+        "lineHeight": 24,
         "marginHorizontal": 8,
       }
     }
