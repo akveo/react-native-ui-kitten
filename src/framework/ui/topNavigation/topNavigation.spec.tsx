@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  TouchableWithoutFeedback,
   Image,
   ImageProps,
   ImageSourcePropType,
+  TouchableOpacity,
 } from 'react-native';
 import {
   render,
@@ -18,35 +18,35 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  TopNavigationBar as TopNavigationBarComponent,
-  Props as TopNavigationBarProps,
-} from './topNavigationBar.component';
+  TopNavigation as TopNavigationComponent,
+  Props as TopNavigationProps,
+} from './topNavigation.component';
 import {
-  TopNavigationBarAction as TopNavigationBarActionComponent,
-  Props as TopNavigationBaActionProps,
-} from './topNavigationBarAction.component';
+  TopNavigationAction as TopNavigationActionComponent,
+  Props as TopNavigationActionProps,
+} from './topNavigationAction.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
-const TopNavigationBar = styled<TopNavigationBarProps>(TopNavigationBarComponent);
-const TopNavigationBarAction = styled<TopNavigationBaActionProps>(TopNavigationBarActionComponent);
+const TopNavigation = styled<TopNavigationProps>(TopNavigationComponent);
+const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);
 
-const Mock = (props?: TopNavigationBarProps): React.ReactElement<ApplicationProviderProps> => {
+const Mock = (props?: TopNavigationProps): React.ReactElement<ApplicationProviderProps> => {
   return (
     <ApplicationProvider
       mapping={mapping}
       theme={theme}>
-      <TopNavigationBar {...props} />
+      <TopNavigation {...props} />
     </ApplicationProvider>
   );
 };
 
-const ActionMock = (props?: TopNavigationBaActionProps): React.ReactElement<ApplicationProviderProps> => {
+const ActionMock = (props?: TopNavigationActionProps): React.ReactElement<ApplicationProviderProps> => {
   return (
     <ApplicationProvider
       mapping={mapping}
       theme={theme}>
-      <TopNavigationBarAction {...props} />
+      <TopNavigationAction {...props} />
     </ApplicationProvider>
   );
 };
@@ -73,7 +73,7 @@ describe('@top-navigation-bar/action', () => {
       <Mock title='Test'/>,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationBarComponent));
+    const { output } = shallow(component.getByType(TopNavigationComponent));
 
     expect(output).toMatchSnapshot();
   });
@@ -86,20 +86,20 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationBarComponent));
+    const { output } = shallow(component.getByType(TopNavigationComponent));
 
     expect(output).toMatchSnapshot();
   });
 
-  it('* bar/appearance: title-centered', () => {
+  it('* bar/alignment: center', () => {
     const component: RenderAPI = render(
       <Mock
-        appearance='titleCentered'
+        alignment='center'
         title='Test'
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationBarComponent));
+    const { output } = shallow(component.getByType(TopNavigationComponent));
 
     expect(output).toMatchSnapshot();
   });
@@ -141,7 +141,7 @@ describe('@top-navigation-bar/action', () => {
         ]}
       />,
     );
-    const { output } = shallow(component.getByType(TopNavigationBarComponent));
+    const { output } = shallow(component.getByType(TopNavigationComponent));
 
     expect(output).toMatchSnapshot();
 
@@ -163,33 +163,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* action/is last item check (true)', () => {
-    const component: RenderAPI = render(
-      <ActionMock
-        icon={icon}
-        isLastItem={true}
-      />,
-    );
-
-    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* action/is last item check (false)', () => {
-    const component: RenderAPI = render(
-      <ActionMock
-        icon={icon}
-        isLastItem={false}
-      />,
-    );
-
-    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
+    const { output } = shallow(component.getByType(TopNavigationActionComponent));
 
     expect(output).toMatchSnapshot();
   });
@@ -204,9 +178,9 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationBarActionComponent));
+    const { output } = shallow(component.getByType(TopNavigationActionComponent));
 
-    fireEvent.press(component.getByType(TouchableWithoutFeedback));
+    fireEvent.press(component.getByType(TouchableOpacity));
 
     expect(onPress).toHaveBeenCalled();
     expect(output).toMatchSnapshot();
