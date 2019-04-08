@@ -14,10 +14,9 @@ exports[`@avatar: matches snapshot * appearance * default 1`] = `
   style={
     Array [
       Object {
-        "borderRadius": 24,
-        "height": 48,
-        "margin": 16,
-        "width": 48,
+        "borderRadius": 20,
+        "height": 40,
+        "width": 40,
       },
       Object {},
     ]
