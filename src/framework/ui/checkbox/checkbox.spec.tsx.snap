@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@checkbox matches snapshots * active 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -169,11 +173,15 @@ exports[`@checkbox matches snapshots * active 1`] = `
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@checkbox matches snapshots * active: default 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -341,11 +349,16 @@ exports[`@checkbox matches snapshots * active: default 1`] = `
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@checkbox matches snapshots * checked.disabled 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  disabled={true}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -515,11 +528,15 @@ exports[`@checkbox matches snapshots * checked.disabled 1`] = `
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@checkbox matches snapshots * default 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -687,11 +704,15 @@ exports[`@checkbox matches snapshots * default 1`] = `
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@checkbox matches snapshots * with text 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -873,5 +894,5 @@ exports[`@checkbox matches snapshots * with text 1`] = `
   >
     Text
   </ForwardRef(WrappingElement)>
-</View>
+</TouchableOpacity>
 `;
