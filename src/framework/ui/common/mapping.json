@@ -227,9 +227,6 @@
           "textFontSize": {
             "type": "number"
           },
-          "textLineHeight": {
-            "type": "number"
-          },
           "textFontWeight": {
             "type": "string"
           },
@@ -400,8 +397,9 @@
               "tiny": {
                 "minWidth": 24,
                 "minHeight": 24,
+                "paddingHorizontal": 6,
+                "paddingVertical": 6,
                 "textFontSize": 10,
-                "textLineHeight": 12,
                 "textMarginHorizontal": 6,
                 "iconWidth": 12,
                 "iconHeight": 12,
@@ -413,7 +411,6 @@
                 "paddingHorizontal": 8,
                 "paddingVertical": 8,
                 "textFontSize": 12,
-                "textLineHeight": 16,
                 "textMarginHorizontal": 8,
                 "iconWidth": 16,
                 "iconHeight": 16,
@@ -425,7 +422,6 @@
                 "paddingHorizontal": 10,
                 "paddingVertical": 12,
                 "textFontSize": 14,
-                "textLineHeight": 16,
                 "textMarginHorizontal": 10,
                 "iconWidth": 16,
                 "iconHeight": 16,
@@ -437,7 +433,6 @@
                 "paddingHorizontal": 10,
                 "paddingVertical": 14,
                 "textFontSize": 16,
-                "textLineHeight": 20,
                 "textMarginHorizontal": 10,
                 "iconWidth": 20,
                 "iconHeight": 20,
@@ -449,7 +444,6 @@
                 "paddingHorizontal": 12,
                 "paddingVertical": 16,
                 "textFontSize": 18,
-                "textLineHeight": 24,
                 "textMarginHorizontal": 12,
                 "iconWidth": 24,
                 "iconHeight": 24,
