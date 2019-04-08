@@ -761,6 +761,23 @@
             "white": {
               "default": false
             }
+          },
+          "size": {
+            "tiny": {
+              "default": false
+            },
+            "small": {
+              "default": false
+            },
+            "medium": {
+              "default": true
+            },
+            "large": {
+              "default": false
+            },
+            "giant": {
+              "default": false
+            }
           }
         },
         "states": {
@@ -789,32 +806,21 @@
       "appearances": {
         "default": {
           "mapping": {
-            "width": 24,
-            "height": 24,
             "borderWidth": 1,
             "borderRadius": 3,
-            "textMarginHorizontal": 12,
-            "textFontWeight": "font-primary-regular-text-weight",
-            "textLineHeight": "font-primary-regular-text-line-height",
+            "textFontWeight": "600",
             "textColor": "font-primary-color",
-            "iconWidth": 12,
-            "iconHeight": 12,
             "iconTintColor": "opacity-transparent",
-            "textFontSize": "font-primary-regular-text-size",
-            "highlightWidth": 40,
-            "highlightHeight": 40,
             "highlightBorderRadius": 6,
-            "highlightBackgroundColor": "transparent",
+            "highlightBackgroundColor": "opacity-transparent",
             "state": {
               "active": {
-                "highlightBackgroundColor": "gray-light"
+                "highlightBackgroundColor": "color-basic-200"
               },
               "checked": {
                 "iconTintColor": "color-white"
               },
               "indeterminate": {
-                "iconHeight": 4,
-                "iconBorderRadius": 6,
                 "iconTintColor": "color-white"
               },
               "disabled": {
@@ -835,19 +841,10 @@
                 "backgroundColor": "color-primary-200",
                 "state": {
                   "active": {
-                    "borderColor": "color-primary-600",
-                    "backgroundColor": "color-primary-600"
+                    "borderColor": "color-primary-700"
                   },
                   "checked": {
-                    "borderColor": "color-primary-500",
                     "backgroundColor": "color-primary-500"
-                  },
-                  "indeterminate": {
-                    "borderColor": "color-primary-500",
-                    "backgroundColor": "color-primary-500"
-                  },
-                  "checked.active": {
-                    "borderColor": "color-primary-600"
                   }
                 }
               },
@@ -856,61 +853,10 @@
                 "backgroundColor": "color-success-200",
                 "state": {
                   "active": {
-                    "borderColor": "color-success-600",
-                    "backgroundColor": "color-success-600"
+                    "borderColor": "color-success-700"
                   },
                   "checked": {
-                    "borderColor": "color-success-500",
                     "backgroundColor": "color-success-500"
-                  },
-                  "indeterminate": {
-                    "borderColor": "color-success-500",
-                    "backgroundColor": "color-success-500"
-                  },
-                  "checked.active": {
-                    "borderColor": "color-success-600"
-                  }
-                }
-              },
-              "warning": {
-                "borderColor": "color-warning-500",
-                "backgroundColor": "color-warning-200",
-                "state": {
-                  "active": {
-                    "borderColor": "color-warning-600",
-                    "backgroundColor": "color-warning-600"
-                  },
-                  "checked": {
-                    "borderColor": "color-warning-500",
-                    "backgroundColor": "color-warning-500"
-                  },
-                  "indeterminate": {
-                    "borderColor": "color-warning-500",
-                    "backgroundColor": "color-warning-500"
-                  },
-                  "checked.active": {
-                    "borderColor": "color-warning-600"
-                  }
-                }
-              },
-              "danger": {
-                "borderColor": "color-danger-500",
-                "backgroundColor": "color-danger-200",
-                "state": {
-                  "active": {
-                    "borderColor": "color-danger-600",
-                    "backgroundColor": "color-danger-600"
-                  },
-                  "checked": {
-                    "borderColor": "color-danger-500",
-                    "backgroundColor": "color-danger-500"
-                  },
-                  "indeterminate": {
-                    "borderColor": "color-danger-500",
-                    "backgroundColor": "color-danger-500"
-                  },
-                  "checked.active": {
-                    "borderColor": "color-danger-600"
                   }
                 }
               },
@@ -919,26 +865,40 @@
                 "backgroundColor": "color-info-200",
                 "state": {
                   "active": {
-                    "borderColor": "color-info-600",
-                    "backgroundColor": "color-info-600"
+                    "borderColor": "color-info-700"
                   },
                   "checked": {
-                    "borderColor": "color-info-500",
                     "backgroundColor": "color-info-500"
+                  }
+                }
+              },
+              "warning": {
+                "borderColor": "color-warning-500",
+                "backgroundColor": "color-warning-200",
+                "state": {
+                  "active": {
+                    "borderColor": "color-warning-700"
                   },
-                  "indeterminate": {
-                    "borderColor": "color-info-500",
-                    "backgroundColor": "color-info-500"
+                  "checked": {
+                    "backgroundColor": "color-warning-500"
+                  }
+                }
+              },
+              "danger": {
+                "borderColor": "color-danger-500",
+                "backgroundColor": "color-danger-200",
+                "state": {
+                  "active": {
+                    "borderColor": "color-danger-700"
                   },
-                  "checked.active": {
-                    "borderColor": "color-info-600"
+                  "checked": {
+                    "backgroundColor": "color-danger-500"
                   }
                 }
               },
               "white": {
                 "borderColor": "color-white",
                 "backgroundColor": "color-white",
-                "iconTintColor": "opacity-transparent",
                 "state": {
                   "active": {
                     "borderColor": "color-white",
@@ -951,9 +911,93 @@
                   },
                   "indeterminate": {
                     "iconTintColor": "color-primary-500"
-                  },
-                  "checked.active": {
-                    "borderColor": "color-white"
+                  }
+                }
+              }
+            },
+            "size": {
+              "tiny": {
+                "width": 16,
+                "height": 16,
+                "iconWidth": 8,
+                "iconHeight": 8,
+                "highlightWidth": 24,
+                "highlightHeight": 24,
+                "textFontSize": 11,
+                "textLineHeight": 16,
+                "textMarginHorizontal": 8,
+                "state": {
+                  "indeterminate": {
+                    "iconHeight": 2,
+                    "iconBorderRadius": 1
+                  }
+                }
+              },
+              "small": {
+                "width": 20,
+                "height": 20,
+                "iconWidth": 10,
+                "iconHeight": 10,
+                "highlightWidth": 32,
+                "highlightHeight": 32,
+                "textFontSize": 13,
+                "textLineHeight": 20,
+                "textMarginHorizontal": 10,
+                "state": {
+                  "indeterminate": {
+                    "iconHeight": 2,
+                    "iconBorderRadius": 1
+                  }
+                }
+              },
+              "medium": {
+                "width": 24,
+                "height": 24,
+                "iconWidth": 12,
+                "iconHeight": 12,
+                "highlightWidth": 40,
+                "highlightHeight": 40,
+                "textFontSize": 13,
+                "textLineHeight": 24,
+                "textMarginHorizontal": 12,
+                "state": {
+                  "indeterminate": {
+                    "iconHeight": 3,
+                    "iconBorderRadius": 1.5
+                  }
+                }
+              },
+              "large": {
+                "width": 32,
+                "height": 32,
+                "iconWidth": 16,
+                "iconHeight": 16,
+                "highlightWidth": 48,
+                "highlightHeight": 48,
+                "textFontSize": 15,
+                "textLineHeight": 32,
+                "textMarginHorizontal": 12,
+                "state": {
+                  "indeterminate": {
+                    "iconHeight": 4,
+                    "iconBorderRadius": 2
+                  }
+                }
+              },
+              "giant": {
+                "width": 40,
+                "height": 40,
+                "iconWidth": 20,
+                "iconHeight": 20,
+                "highlightWidth": 56,
+                "highlightHeight": 56,
+                "textFontSize": 17,
+                "textLineHeight": 40,
+                "textMarginHorizontal": 12,
+                "state": {
+                  "indeterminate": {
+                    "iconHeight": 4,
+                    "iconBorderRadius": 2
                   }
                 }
               }

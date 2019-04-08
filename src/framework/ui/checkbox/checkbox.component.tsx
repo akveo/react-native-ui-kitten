@@ -157,7 +157,7 @@ export class CheckBox extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, text, ...derivedProps } = this.props;
+    const { style, themedStyle, disabled, text, ...derivedProps } = this.props;
 
     const {
       container,
@@ -170,13 +170,20 @@ export class CheckBox extends React.Component<Props> {
     const [iconElement, textElement] = this.renderComponentChildren(componentStyle);
 
     return (
-      <View style={container}>
+      <TouchableOpacity
+        style={container}
+        activeOpacity={1.0}
+        disabled={disabled}
+        onPress={this.onPress}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
         <View style={highlightContainer}>
           <View style={highlight}/>
           <TouchableOpacity
-            {...derivedProps}
-            style={selectContainer}
             activeOpacity={1.0}
+            {...derivedProps}
+            disabled={disabled}
+            style={selectContainer}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
@@ -184,7 +191,7 @@ export class CheckBox extends React.Component<Props> {
           </TouchableOpacity>
         </View>
         {textElement}
-      </View>
+      </TouchableOpacity>
     );
   }
 }

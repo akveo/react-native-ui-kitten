@@ -20,27 +20,31 @@ export class CheckMark extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { width, height, backgroundColor } = source;
+
     return {
       container: {
-        width: source.width,
-        height: source.height,
+        width: width,
+        height: height,
       },
       // the dependence of the variables was determined experimentally. Changes may be needed later.
       shape: {
-        width: source.width * 0.2,
-        height: source.height * 0.833,
-        borderTopLeftRadius: source.height * 0.333,
-        borderTopRightRadius: source.height * 0.333,
+        borderWidth: width * 0.125,
+        borderTopLeftRadius: height * 0.5,
+        borderTopRightRadius: height * 0.5,
+        borderBottomLeftRadius: height * 0.5,
+        borderBottomRightRadius: height * 0.5,
+        borderColor: backgroundColor,
+        backgroundColor: backgroundColor,
       },
       left: {
-        height: source.height * 0.667,
-        left: source.width * 0.167,
-        top: source.width * 0.167,
-        backgroundColor: source.backgroundColor,
+        left: width * 0.125,
+        top: width * 0.25,
+        height: height * 0.65,
       },
       right: {
-        right: source.width * 0.167,
-        backgroundColor: source.backgroundColor,
+        right: width * 0.175,
+        height: height * 0.875,
       },
     };
   };
@@ -53,8 +57,8 @@ export class CheckMark extends React.Component<Props> {
 
     return (
       <Component style={[container, styles.container]}>
-        <Component style={[left, shape, styles.left, styles.shape]}/>
-        <Component style={[right, shape, styles.right, styles.shape]}/>
+        <Component style={[shape, left, styles.shape, styles.left]}/>
+        <Component style={[shape, right, styles.shape, styles.right]}/>
       </Component>
     );
   }
@@ -66,12 +70,11 @@ const styles = StyleSheet.create({
   },
   shape: {
     position: 'absolute',
-    top: 0,
   },
   left: {
-    transform: [{ rotate: '-35deg' }],
+    transform: [{ rotate: '-40deg' }, { translateY: 1 }],
   },
   right: {
-    transform: [{ rotate: '45deg' }],
+    transform: [{ rotate: '40deg' }, { translateY: 1 }],
   },
 });
