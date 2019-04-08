@@ -8,10 +8,13 @@ exports[`@bottom-navigation: component checks * additional appearance 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "transparent",
-        "borderTopColor": "#A6AEBD",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#C8CEDB",
         "borderTopWidth": 1,
-        "paddingVertical": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingVertical": 4,
+        "width": 750,
       },
       undefined,
       Object {
@@ -167,10 +170,13 @@ exports[`@bottom-navigation: component checks * empty 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "transparent",
-        "borderTopColor": "#A6AEBD",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#C8CEDB",
         "borderTopWidth": 1,
-        "paddingVertical": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingVertical": 4,
+        "width": 750,
       },
       undefined,
       Object {
@@ -292,7 +298,8 @@ exports[`@bottom-navigation: component checks * empty 1`] = `
       Array [
         Object {
           "backgroundColor": "#3366FF",
-          "height": 3,
+          "height": 4,
+          "position": "absolute",
         },
         Object {
           "position": "absolute",
@@ -311,10 +318,13 @@ exports[`@bottom-navigation: component checks * with routes 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "transparent",
-        "borderTopColor": "#A6AEBD",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#C8CEDB",
         "borderTopWidth": 1,
-        "paddingVertical": 16,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingVertical": 4,
+        "width": 750,
       },
       undefined,
       Object {
@@ -436,7 +446,8 @@ exports[`@bottom-navigation: component checks * with routes 1`] = `
       Array [
         Object {
           "backgroundColor": "#3366FF",
-          "height": 3,
+          "height": 4,
+          "position": "absolute",
         },
         Object {
           "position": "absolute",
@@ -484,14 +495,11 @@ exports[`@bottom-navigation-tab: component checks * empty 1`] = `
   dispatch={[Function]}
   onPress={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -607,14 +615,11 @@ exports[`@bottom-navigation-tab: component checks * text/selected 1`] = `
   onPress={[Function]}
   selected={true}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -725,7 +730,10 @@ exports[`@bottom-navigation-tab: component checks * text/selected 1`] = `
     style={
       Object {
         "color": "#3366FF",
+        "fontSize": 13,
         "fontWeight": "600",
+        "lineHeight": 16,
+        "marginVertical": 4,
       }
     }
   >
@@ -742,14 +750,11 @@ exports[`@bottom-navigation-tab: component checks * text/unselected 1`] = `
   onPress={[Function]}
   selected={false}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -860,7 +865,10 @@ exports[`@bottom-navigation-tab: component checks * text/unselected 1`] = `
     style={
       Object {
         "color": "#8992A3",
+        "fontSize": 13,
         "fontWeight": "600",
+        "lineHeight": 16,
+        "marginVertical": 4,
       }
     }
   >
@@ -877,14 +885,11 @@ exports[`@bottom-navigation-tab: component checks * with icon 1`] = `
   icon={[Function]}
   onPress={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -998,10 +1003,10 @@ exports[`@bottom-navigation-tab: component checks * with icon 1`] = `
     }
     style={
       Object {
-        "height": 40,
-        "marginBottom": undefined,
-        "tintColor": "#8992A3",
-        "width": 40,
+        "height": 32,
+        "marginVertical": 4,
+        "tintColor": "#A6AEBD",
+        "width": 32,
       }
     }
   />
