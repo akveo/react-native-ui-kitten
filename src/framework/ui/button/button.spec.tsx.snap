@@ -423,16 +423,12 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   />
   <ForwardRef(WrappingElement)
     style={
-      Array [
-        Object {
-          "color": "#ffffff",
-          "fontSize": 14,
-          "fontWeight": "800",
-          "lineHeight": 16,
-          "marginHorizontal": 10,
-        },
-        Object {},
-      ]
+      Object {
+        "color": "#ffffff",
+        "fontSize": 14,
+        "fontWeight": "800",
+        "marginHorizontal": 10,
+      }
     }
   >
     BUTTON
@@ -570,16 +566,12 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
 >
   <ForwardRef(WrappingElement)
     style={
-      Array [
-        Object {
-          "color": "#ffffff",
-          "fontSize": 14,
-          "fontWeight": "800",
-          "lineHeight": 16,
-          "marginHorizontal": 10,
-        },
-        Object {},
-      ]
+      Object {
+        "color": "#ffffff",
+        "fontSize": 14,
+        "fontWeight": "800",
+        "marginHorizontal": 10,
+      }
     }
   >
     BUTTON

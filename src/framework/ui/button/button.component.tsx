@@ -75,7 +75,6 @@ export class Button extends React.Component<Props> {
     const {
       textColor,
       textFontSize,
-      textLineHeight,
       textFontWeight,
       textMarginHorizontal,
       iconWidth,
@@ -97,16 +96,17 @@ export class Button extends React.Component<Props> {
       text: {
         color: textColor,
         fontSize: textFontSize,
-        lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         marginHorizontal: textMarginHorizontal,
         ...derivedTextStyle,
+        ...styles.text,
       },
       icon: {
         width: iconWidth,
         height: iconHeight,
         tintColor: iconTintColor,
         marginHorizontal: iconMarginHorizontal,
+        ...styles.icon,
       },
     };
   };
@@ -116,7 +116,7 @@ export class Button extends React.Component<Props> {
 
     return (
       <Text
-        style={[style, styles.text]}
+        style={style}
         key={1}>
         {text}
       </Text>
