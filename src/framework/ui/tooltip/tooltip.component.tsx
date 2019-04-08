@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  ImageProps,
+  StyleSheet,
+  View,
+  ViewProps,
+} from 'react-native';
 import {
   styled,
   StyledComponentProps,
@@ -17,6 +22,7 @@ import { Omit } from '../common/type';
 
 interface TooltipProps {
   text: string;
+  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   children: React.ReactElement<any>;
 }
 
@@ -37,6 +43,13 @@ export class Tooltip extends React.Component<Props> {
       popoverPaddingVertical,
       popoverBorderRadius,
       popoverBackgroundColor,
+      iconWidth,
+      iconHeight,
+      iconMarginHorizontal,
+      iconTintColor,
+      textMarginHorizontal,
+      textFontSize,
+      textLineHeight,
       textColor,
     } = source;
 
@@ -46,33 +59,76 @@ export class Tooltip extends React.Component<Props> {
         paddingVertical: popoverPaddingVertical,
         borderRadius: popoverBorderRadius,
         backgroundColor: popoverBackgroundColor,
+        ...styles.popover,
+      },
+      content: styles.content,
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        marginHorizontal: iconMarginHorizontal,
+        tintColor: iconTintColor,
+        ...styles.icon,
       },
       text: {
+        marginHorizontal: textMarginHorizontal,
+        fontSize: textFontSize,
+        lineHeight: textLineHeight,
         color: textColor,
+        ...styles.text,
       },
     };
   };
 
-  private renderPopoverContentElement = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
     const { text } = this.props;
 
     return (
       <Text
-        style={[style, styles.text]}>
+        key={1}
+        style={style}>
         {text}
       </Text>
     );
   };
 
+  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+    const { icon } = this.props;
+
+    const iconElement: React.ReactElement<ImageProps> = icon(style);
+
+    return React.cloneElement(iconElement, { key: 0 });
+  };
+
+  private renderContentElementChildren = (style: StyleType): React.ReactNode => {
+    const { icon } = this.props;
+
+    return [
+      icon ? this.renderIconElement(style.icon) : null,
+      this.renderTextElement(style.text),
+    ];
+  };
+
+  private renderPopoverContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
+    const { content, ...childrenStyle } = style;
+
+    const contentChildren: React.ReactNode = this.renderContentElementChildren(childrenStyle);
+
+    return (
+      <View style={content}>
+        {contentChildren}
+      </View>
+    );
+  };
+
   public render(): React.ReactElement<PopoverProps> {
     const { style, children, themedStyle, ...derivedProps } = this.props;
-    const { popover, text } = this.getComponentStyle(themedStyle);
-    const contentElement: React.ReactElement<TextProps> = this.renderPopoverContentElement(text);
+    const { popover, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const contentElement: React.ReactElement<TextProps> = this.renderPopoverContentElement(componentStyle);
 
     return (
       <Popover
         {...derivedProps}
-        style={[popover, style, styles.popover]}
+        style={[popover, style]}
         content={contentElement}>
         {children}
       </Popover>
@@ -82,6 +138,10 @@ export class Tooltip extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   popover: {},
+  content: {
+    flexDirection: 'row',
+  },
+  icon: {},
   text: {
     alignSelf: 'center',
   },

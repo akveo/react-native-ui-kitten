@@ -3,23 +3,29 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ImageProps,
+  Image,
+  ImageSourcePropType,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   withStyles,
   ThemedComponentProps,
   ThemeType,
+  StyleType,
 } from '@kitten/theme';
 import { Tooltip } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 const PLACEMENT: string = 'bottom';
+const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
 interface State {
   startVisible: boolean;
   centerVisible: boolean;
   endVisible: boolean;
+  withIconVisible: boolean;
 }
 
 class TooltipScreen extends React.Component<Props, State> {
@@ -32,6 +38,7 @@ class TooltipScreen extends React.Component<Props, State> {
     startVisible: false,
     centerVisible: false,
     endVisible: false,
+    withIconVisible: false,
   };
 
   private onStartPress = () => {
@@ -52,6 +59,21 @@ class TooltipScreen extends React.Component<Props, State> {
     });
   };
 
+  private onWithIconPress = () => {
+    this.setState({
+      withIconVisible: !this.state.withIconVisible,
+    });
+  };
+
+  private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+    return (
+      <Image
+        style={style}
+        source={ICON}
+      />
+    );
+  };
+
   public render(): React.ReactNode {
     const { container, componentContainer, component, tip, text } = this.props.themedStyle;
 
@@ -62,7 +84,7 @@ class TooltipScreen extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT} start`}
             visible={this.state.startVisible}
-            text='❤️'
+            text='Place your text here️'
             onRequestClose={this.onStartPress}>
             <TouchableOpacity
               style={tip}
@@ -76,7 +98,7 @@ class TooltipScreen extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT}`}
             visible={this.state.centerVisible}
-            text='💛️'
+            text='Place your text here'
             onRequestClose={this.onCenterPress}>
             <TouchableOpacity
               style={tip}
@@ -90,12 +112,26 @@ class TooltipScreen extends React.Component<Props, State> {
             style={component}
             placement={`${PLACEMENT} end`}
             visible={this.state.endVisible}
-            text='💚'
+            text='Place your text here'
             onRequestClose={this.onEndPress}>
             <TouchableOpacity
               style={tip}
               onPress={this.onEndPress}>
               <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
+            </TouchableOpacity>
+          </Tooltip>
+        </View>
+        <View style={componentContainer}>
+          <Tooltip
+            style={component}
+            visible={this.state.withIconVisible}
+            text='Place your text here'
+            icon={this.renderIcon}
+            onRequestClose={this.onWithIconPress}>
+            <TouchableOpacity
+              style={tip}
+              onPress={this.onWithIconPress}>
+              <Text style={text}>WITH ICON</Text>
             </TouchableOpacity>
           </Tooltip>
         </View>
