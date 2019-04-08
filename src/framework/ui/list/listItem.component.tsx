@@ -86,46 +86,49 @@ export class ListItem extends React.Component<Props> {
       iconHeight,
       iconMarginHorizontal,
       iconTintColor,
-      titleColor,
-      titleFontSize,
-      titleFontWeight,
       titleMarginHorizontal,
-      titleMarginVertical,
-      descriptionColor,
+      titleFontSize,
+      titleLineHeight,
+      titleFontWeight,
+      titleColor,
       descriptionFontSize,
+      descriptionLineHeight,
+      descriptionColor,
       descriptionMarginHorizontal,
-      descriptionMarginVertical,
-      accessoryWidth,
-      accessoryHeight,
       accessoryMarginHorizontal,
       ...containerParameters
     } = source;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+        ...styles.container,
+      },
       icon: {
         width: iconWidth,
         height: iconHeight,
         marginHorizontal: iconMarginHorizontal,
         tintColor: iconTintColor,
+        ...styles.icon,
       },
       title: {
-        color: titleColor,
-        fontSize: titleFontSize,
-        fontWeight: titleFontWeight,
         marginHorizontal: titleMarginHorizontal,
-        marginVertical: titleMarginVertical,
+        fontSize: titleFontSize,
+        lineHeight: titleLineHeight,
+        fontWeight: titleFontWeight,
+        color: titleColor,
+        ...styles.title,
       },
       description: {
         color: descriptionColor,
         fontSize: descriptionFontSize,
+        lineHeight: descriptionLineHeight,
         marginHorizontal: descriptionMarginHorizontal,
-        marginVertical: descriptionMarginVertical,
+        ...styles.description,
       },
       accessory: {
-        width: accessoryWidth,
-        height: accessoryHeight,
         marginHorizontal: accessoryMarginHorizontal,
+        ...styles.accessory,
       },
     };
   };
@@ -160,7 +163,7 @@ export class ListItem extends React.Component<Props> {
 
     return (
       <Text
-        style={[style, styles.title]}
+        style={style}
         key={2}>
         {title}
       </Text>
@@ -174,7 +177,7 @@ export class ListItem extends React.Component<Props> {
     return (
       <Text
         key={3}
-        style={[style, styles.description]}>
+        style={style}>
         {description}
       </Text>
     );
@@ -188,7 +191,7 @@ export class ListItem extends React.Component<Props> {
 
     return React.cloneElement(accessoryElement, {
       key: 4,
-      style: [accessoryElement.props.style, style, styles.accessory],
+      style: [style, accessoryElement.props.style],
     });
   };
 
@@ -227,7 +230,7 @@ export class ListItem extends React.Component<Props> {
     return (
       <TouchableOpacity
         {...derivedProps}
-        style={[container, style, styles.container]}
+        style={[container, style]}
         activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
