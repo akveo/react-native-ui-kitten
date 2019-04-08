@@ -118,6 +118,7 @@ export default withStyles(PopoverScreen, (theme: ThemeType) => ({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'lightgray',
   },
   componentContainer: {
     margin: 32,
