@@ -145,8 +145,10 @@ const styles = StyleSheet.create({
   subtitle: {},
   leftControlContainer: {
     flexDirection: 'row',
+    zIndex: 1,
   },
   rightControlsContainer: {
     flexDirection: 'row',
+    zIndex: 1,
   },
 });

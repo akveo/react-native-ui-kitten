@@ -19,7 +19,7 @@ export class TopNavigationAlignments {
     margin(leftActionCount: number, rightActionCount: number, actionWidth: number): number {
       const diff: number = rightActionCount - leftActionCount;
 
-      return (rightActionCount - leftActionCount) * diff;
+      return actionWidth * diff;
     }
   };
 

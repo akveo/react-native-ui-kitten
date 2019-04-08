@@ -393,6 +393,7 @@ exports[`@top-navigation-bar/action * bar/alignment: center 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   />
@@ -422,6 +423,7 @@ exports[`@top-navigation-bar/action * bar/alignment: center 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   />
@@ -553,6 +555,7 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   />
@@ -594,6 +597,7 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   />
@@ -725,6 +729,7 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   />
@@ -754,6 +759,7 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   />
@@ -885,6 +891,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   >
@@ -942,6 +949,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "zIndex": 1,
       }
     }
   >
