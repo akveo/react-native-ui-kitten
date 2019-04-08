@@ -46,17 +46,17 @@ class TabViewScreen extends React.Component<Props, State> {
         selectedIndex={this.state.selectedIndex}
         onSelect={this.onSelect}>
         <Tab
-          title='Tab 1'
+          title='TAB 1'
           icon={(style: StyleType) => <Image source={ICON1} style={style}/>}>
           <Text>Tab 1</Text>
         </Tab>
         <Tab
-          title='Tab 2'
+          title='TAB 2'
           icon={(style: StyleType) => <Image source={ICON2} style={style}/>}>
           <Text>Tab 2</Text>
         </Tab>
         <Tab
-          title='Tab 3'
+          title='TAB 3'
           icon={(style: StyleType) => <Image source={ICON3} style={style}/>}>
           <Text>Tab 3</Text>
         </Tab>

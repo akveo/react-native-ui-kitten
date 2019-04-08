@@ -9,13 +9,12 @@ exports[`@tab: component checks * empty 1`] = `
   selected={false}
   style={
     Array [
-      undefined,
-      Object {},
       Object {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
       },
+      undefined,
     ]
   }
   theme={
@@ -134,13 +133,12 @@ exports[`@tab: component checks * icon 1`] = `
   selected={false}
   style={
     Array [
-      undefined,
-      Object {},
       Object {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
       },
+      undefined,
     ]
   }
   theme={
@@ -255,9 +253,10 @@ exports[`@tab: component checks * icon 1`] = `
     }
     style={
       Object {
-        "height": 20,
-        "tintColor": "#8992A3",
-        "width": 20,
+        "height": 24,
+        "marginVertical": 2,
+        "tintColor": "#A6AEBD",
+        "width": 24,
       }
     }
   />
@@ -273,13 +272,12 @@ exports[`@tab: component checks * title 1`] = `
   selected={false}
   style={
     Array [
-      undefined,
-      Object {},
       Object {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
       },
+      undefined,
     ]
   }
   theme={
@@ -391,7 +389,10 @@ exports[`@tab: component checks * title 1`] = `
     style={
       Object {
         "color": "#8992A3",
-        "fontWeight": "600",
+        "fontSize": 14,
+        "fontWeight": "800",
+        "lineHeight": 16,
+        "marginVertical": 2,
       }
     }
   >
