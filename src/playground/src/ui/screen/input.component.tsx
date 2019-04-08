@@ -112,7 +112,7 @@ class InputScreen extends React.Component<Props, State> {
               placeholder={PLACEHOLDER}
             />
             <Input
-              status='error'
+              status='danger'
               style={this.props.themedStyle.component}
               icon={this.renderIcon}
               placeholder={PLACEHOLDER}

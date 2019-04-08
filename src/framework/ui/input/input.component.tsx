@@ -51,6 +51,8 @@ export class Input extends React.Component<Props> {
 
     const {
       textMarginHorizontal,
+      textFontSize,
+      textLineHeight,
       textColor,
       iconWidth,
       iconHeight,
@@ -67,6 +69,8 @@ export class Input extends React.Component<Props> {
       },
       text: {
         marginHorizontal: textMarginHorizontal,
+        fontSize: textFontSize,
+        lineHeight: textLineHeight,
         color: textColor,
         ...derivedTextStyle,
         ...styles.text,
