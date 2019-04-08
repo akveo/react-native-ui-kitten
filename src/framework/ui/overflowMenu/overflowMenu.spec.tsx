@@ -89,7 +89,6 @@ describe('@overflow-menu-item: component checks', () => {
       <MockMenuItem
         text='Test Menu Item'
         icon={icon}
-        isLastItem={false}
         disabled={true}
         onPress={() => 1}
       />,
@@ -104,7 +103,6 @@ describe('@overflow-menu-item: component checks', () => {
     const component: RenderAPI = render(
       <MockMenuItem
         text='Test Menu Item'
-        isLastItem={true}
         disabled={false}
         onPress={() => 2}
       />,

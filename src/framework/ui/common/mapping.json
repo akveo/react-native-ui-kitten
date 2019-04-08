@@ -1285,14 +1285,17 @@
       "meta": {
         "scope": "all",
         "parameters": {
-          "borderRadius": {
-            "type": "number"
-          },
-          "itemBorderRadius": {
+          "popoverBorderRadius": {
             "type": "number"
           },
           "popoverBackgroundColor": {
             "type": "string"
+          },
+          "itemBorderBottomWidth": {
+            "type": "number"
+          },
+          "itemBorderBottomColor": {
+            "type": "number"
           }
         },
         "appearances": {
@@ -1306,9 +1309,10 @@
       "appearances": {
         "default": {
           "mapping": {
-            "borderRadius": 6,
-            "itemBorderRadius": 6,
-            "popoverBackgroundColor": "white"
+            "popoverBorderRadius": 12,
+            "popoverBackgroundColor": "color-white",
+            "itemBorderBottomWidth": 1,
+            "itemBorderBottomColor": "color-basic-200"
           }
         }
       }
@@ -1320,31 +1324,25 @@
           "minHeight": {
             "type": "number"
           },
-          "padding": {
+          "paddingVertical": {
             "type": "number"
           },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "borderColor": {
-            "type": "string"
-          },
-          "borderWidth": {
-            "type": "number"
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "textFontWeight": {
-            "type": "string"
-          },
-          "textFontSize": {
+          "paddingHorizontal": {
             "type": "number"
           },
           "textMarginHorizontal": {
             "type": "number"
           },
-          "iconTintColor": {
+          "textFontSize": {
+            "type": "number"
+          },
+          "textLineHeight": {
+            "type": "number"
+          },
+          "textFontWeight": {
+            "type": "string"
+          },
+          "textColor": {
             "type": "string"
           },
           "iconWidth": {
@@ -1355,6 +1353,9 @@
           },
           "iconMarginHorizontal": {
             "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
           }
         },
         "appearances": {
@@ -1362,19 +1363,7 @@
             "default": true
           }
         },
-        "variantGroups": {
-          "size": {
-            "small": {
-              "default": false
-            },
-            "medium": {
-              "default": true
-            },
-            "large": {
-              "default": false
-            }
-          }
-        },
+        "variantGroups": {},
         "states": {
           "disabled": {
             "default": false,
@@ -1391,50 +1380,26 @@
       "appearances": {
         "default": {
           "mapping": {
-            "backgroundColor": "white",
-            "borderColor": "gray-light",
-            "borderWidth": 1.2,
-            "textColor": "blue-pitch-dark",
+            "minHeight": 48,
+            "paddingVertical": 12,
+            "paddingHorizontal": 8,
+            "textMarginHorizontal": 8,
+            "textFontSize": 13,
+            "textLineHeight": 24,
             "textFontWeight": "600",
+            "textColor": "font-primary-color",
+            "iconWidth": 24,
+            "iconHeight": 24,
+            "iconMarginHorizontal": 8,
             "iconTintColor": "blue-pitch-dark",
             "state": {
               "disabled": {
-                "backgroundColor": "gray-dark"
+                "textColor": "color-basic-400",
+                "iconTintColor": "color-basic-300"
               },
               "active": {
-                "textColor": "blue-primary",
-                "iconTintColor": "blue-primary"
-              }
-            }
-          },
-          "variantGroups": {
-            "size": {
-              "small": {
-                "minHeight": 40,
-                "padding": 10,
-                "textFontSize": 13,
-                "textMarginHorizontal": 6,
-                "iconWidth": 20,
-                "iconHeight": 20,
-                "iconMarginHorizontal": 6
-              },
-              "medium": {
-                "minHeight": 48,
-                "padding": 12,
-                "textFontSize": 15,
-                "textMarginHorizontal": 8,
-                "iconWidth": 24,
-                "iconHeight": 24,
-                "iconMarginHorizontal": 8
-              },
-              "large": {
-                "minHeight": 56,
-                "padding": 14,
-                "textFontSize": 17,
-                "textMarginHorizontal": 10,
-                "iconWidth": 28,
-                "iconHeight": 28,
-                "iconMarginHorizontal": 10
+                "textColor": "color-primary-500",
+                "iconTintColor": "color-primary-500"
               }
             }
           }
