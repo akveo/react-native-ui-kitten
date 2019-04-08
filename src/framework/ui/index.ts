@@ -44,6 +44,15 @@ import {
   Props as ModalProps,
 } from './modal/modal.component';
 import {
+  OverflowMenu as OverflowMenuComponent,
+  Props as OverflowMenuProps,
+} from './overflowMenu/overflowMenu.component';
+import {
+  OverflowMenuItem as OverflowMenuItemComponent,
+  Props as OverflowMenuItemProps,
+  OverflowMenuItemType,
+} from './overflowMenu/overflowMenuItem.component';
+import {
   Popover as PopoverComponent,
   Props as PopoverProps,
 } from './popover/popover.component';
@@ -80,13 +89,13 @@ import {
   Props as TooltipProps,
 } from './tooltip/tooltip.component';
 import {
-  TopNavigationBar as TopNavigationBarComponent,
+  TopNavigation as TopNavigationComponent,
   Props as TopNavigationBarProps,
-} from './topNavigationBar/topNavigationBar.component';
+} from './topNavigation/topNavigation.component';
 import {
-  TopNavigationBarAction as TopNavigationBarActionComponent,
+  TopNavigationAction as TopNavigationActionComponent,
   Props as TopNavigationBarActionProps,
-} from './topNavigationBar/topNavigationBarAction.component';
+} from './topNavigation/topNavigationAction.component';
 import {
   ViewPager,
   Props as ViewPagerProps,
@@ -100,14 +109,9 @@ import {
   Placements as PopoverPlacements,
 } from './popover/type';
 import {
-  OverflowMenuItem as OverflowMenuItemComponent,
-  Props as OverflowMenuItemProps,
-  OverflowMenuItemType,
-} from './overflowMenu/overflowMenuItem.component';
-import {
-  OverflowMenu as OverflowMenuComponent,
-  Props as OverflowMenuProps,
-} from './overflowMenu/overflowMenu.component';
+  TopNavigationAlignment,
+  TopNavigationAlignments,
+} from './topNavigation/type';
 
 const Avatar = styled<AvatarProps>(AvatarComponent);
 const BottomNavigationTab = styled<BottomNavigatorTabProps>(BottomNavigationTabComponent);
@@ -127,8 +131,8 @@ const TabBar = styled<TabBarProps>(TabBarComponent);
 const Text = styled<TextProps>(TextComponent);
 const Toggle = styled<ToggleProps>(ToggleComponent);
 const Tooltip = styled<TooltipProps>(TooltipComponent);
-const TopNavigationBar = styled<TopNavigationBarProps>(TopNavigationBarComponent);
-const TopNavigationBarAction = styled<TopNavigationBarActionProps>(TopNavigationBarActionComponent);
+const TopNavigation = styled<TopNavigationBarProps>(TopNavigationComponent);
+const TopNavigationAction = styled<TopNavigationBarActionProps>(TopNavigationActionComponent);
 const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
 const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);
 
@@ -153,8 +157,8 @@ export {
   Text,
   Toggle,
   Tooltip,
-  TopNavigationBar,
-  TopNavigationBarAction,
+  TopNavigation,
+  TopNavigationAction,
   ViewPager,
   OverflowMenu,
   OverflowMenuItem,
@@ -193,5 +197,7 @@ export {
   ButtonAlignments,
   PopoverPlacement,
   PopoverPlacements,
+  TopNavigationAlignment,
+  TopNavigationAlignments,
   OverflowMenuItemType,
 };

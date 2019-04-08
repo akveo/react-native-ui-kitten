@@ -17,6 +17,6 @@ export { default as Tooltip } from './tooltip.component';
 export { default as Text } from './text.component';
 export { default as Toggle } from './toggle.component';
 export { default as ViewPager } from './viewPager.component';
-export { default as TopNavigationBar } from './topNavigationBar.component';
+export { default as TopNavigation } from './topNavigation.component';
 export { default as Modal } from './modal.component';
 export { default as OverflowMenu } from './overflowMenu.component';
