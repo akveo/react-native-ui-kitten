@@ -1,15 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@radio: matches snapshot active 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -22,17 +23,13 @@ exports[`@radio: matches snapshot active 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "#DDE1EB",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "#EDF0F5",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -43,20 +40,17 @@ exports[`@radio: matches snapshot active 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#8992A3",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#8992A3",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -164,32 +158,30 @@ exports[`@radio: matches snapshot active 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@radio: matches snapshot active checked 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -202,17 +194,13 @@ exports[`@radio: matches snapshot active checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "#DDE1EB",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "#EDF0F5",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -224,20 +212,17 @@ exports[`@radio: matches snapshot active checked 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#2541CC",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#2541CC",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -345,32 +330,30 @@ exports[`@radio: matches snapshot active checked 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#3366FF",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "#3366FF",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@radio: matches snapshot active checked: checked 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -383,17 +366,13 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -405,20 +384,17 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#3366FF",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -526,32 +502,30 @@ exports[`@radio: matches snapshot active checked: checked 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#3366FF",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "#3366FF",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@radio: matches snapshot active: default 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -564,17 +538,13 @@ exports[`@radio: matches snapshot active: default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -585,20 +555,17 @@ exports[`@radio: matches snapshot active: default 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#A6AEBD",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -706,32 +673,30 @@ exports[`@radio: matches snapshot active: default 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@radio: matches snapshot checked 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -744,17 +709,13 @@ exports[`@radio: matches snapshot checked 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -766,20 +727,17 @@ exports[`@radio: matches snapshot checked 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#3366FF",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -887,32 +845,31 @@ exports[`@radio: matches snapshot checked 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#3366FF",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "#3366FF",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@radio: matches snapshot checked disabled 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  disabled={true}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -925,17 +882,13 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -948,20 +901,17 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#DDE1EB",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -1069,32 +1019,30 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "#A6AEBD",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "#A6AEBD",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@radio: matches snapshot default 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -1107,17 +1055,13 @@ exports[`@radio: matches snapshot default 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -1128,20 +1072,17 @@ exports[`@radio: matches snapshot default 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#A6AEBD",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -1249,32 +1190,31 @@ exports[`@radio: matches snapshot default 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`@radio: matches snapshot disabled 1`] = `
-<View
+<TouchableOpacity
+  activeOpacity={1}
+  disabled={true}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
-    Array [
-      undefined,
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+    }
   }
 >
   <View
@@ -1287,17 +1227,13 @@ exports[`@radio: matches snapshot disabled 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 30,
-            "height": 60,
-            "width": 60,
-          },
-          Object {
-            "position": "absolute",
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "width": 40,
+        }
       }
     />
     <TouchableOpacity
@@ -1309,20 +1245,17 @@ exports[`@radio: matches snapshot disabled 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
+      status="primary"
       style={
-        Array [
-          Object {
-            "borderColor": "#DDE1EB",
-            "borderRadius": 18,
-            "borderWidth": 2,
-            "height": 36,
-            "width": 36,
-          },
-          Object {
-            "alignItems": "center",
-            "justifyContent": "center",
-          },
-        ]
+        Object {
+          "alignItems": "center",
+          "borderColor": "#DDE1EB",
+          "borderRadius": 12,
+          "borderWidth": 2,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        }
       }
       theme={
         Object {
@@ -1430,18 +1363,15 @@ exports[`@radio: matches snapshot disabled 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "transparent",
-              "borderRadius": 12,
-              "height": 24,
-              "width": 24,
-            },
-            Object {},
-          ]
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 7,
+            "height": 14,
+            "width": 14,
+          }
         }
       />
     </TouchableOpacity>
   </View>
-</View>
+</TouchableOpacity>
 `;
