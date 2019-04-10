@@ -1,4 +1,19 @@
 <a name="3.1.2"></a>
+## [3.1.3](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.2...v3.1.3) (2019-04-10)
+
+* **rkChoiceGroup:** incorrect children selection ([27f5c49](https://github.com/akveo/react-native-ui-kitten/commit/27f5c49))
+
+ * **rkChoice:** incorrect `onChange` args ([ef5bf27](https://github.com/akveo/react-native-ui-kitten/commit/ef5bf27))
+
+ * **rkTextInput:** focus behavior when `onPress` called ([3598613](https://github.com/akveo/react-native-ui-kitten/commit/3598613))
+
+ * **rkSwitch:** thumb animation ([1492f41](https://github.com/akveo/react-native-ui-kitten/commit/1492f41))
+
+### Bug Fixes
+
+* **rkSwitch:** onValueChange parameters not passed to android component ([d1db657](https://github.com/akveo/react-native-ui-kitten/commit/d1db657))
+
+<a name="3.1.2"></a>
 ## [3.1.2](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.1...v3.1.2) (2018-09-21)
 
 ### Bug Fixes
