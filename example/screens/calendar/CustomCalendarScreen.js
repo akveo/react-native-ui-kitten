@@ -50,8 +50,8 @@ export class CustomCalendarScreen extends React.Component {
     return (
       <View style={styles.container}>
         <RkCalendar
-          min={new Date(2018, 0, 1)}
-          max={new Date(2019, 0, 1)}
+          min={new Date(2019, 0, 1)}
+          max={new Date(2025, 0, 1)}
           renderDay={this.renderDay}
         />
       </View>
