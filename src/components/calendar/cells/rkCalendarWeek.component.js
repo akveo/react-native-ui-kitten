@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkCalendarDay } from './rkCalendarDay.component';
 
@@ -32,7 +32,7 @@ export class RkCalendarWeek extends React.Component {
     daySize: PropTypes.number.isRequired,
 
     style: PropTypes.shape({
-      container: View.propTypes.style,
+      container: ViewPropTypes.style,
       day: RkCalendarDay.propTypes.style,
     }),
   };

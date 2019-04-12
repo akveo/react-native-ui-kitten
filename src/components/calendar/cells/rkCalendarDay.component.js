@@ -3,6 +3,7 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
+  ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import * as RkCalendarService from '../services';
@@ -49,11 +50,11 @@ export class RkCalendarDay extends React.Component {
 
     style: PropTypes.shape({
       container: PropTypes.shape({
-        base: View.propTypes.style,
-        today: View.propTypes.style,
-        selected: View.propTypes.style,
-        highlighted: View.propTypes.style,
-        disabled: View.propTypes.style,
+        base: ViewPropTypes.style,
+        today: ViewPropTypes.style,
+        selected: ViewPropTypes.style,
+        highlighted: ViewPropTypes.style,
+        disabled: ViewPropTypes.style,
       }),
       text: PropTypes.shape({
         base: Text.propTypes.style,

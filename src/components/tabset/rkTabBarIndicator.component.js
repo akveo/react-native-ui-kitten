@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   View,
   Animated,
+  ViewPropTypes,
 } from 'react-native';
 
 const defaultAnimationDuration = 200;
@@ -22,8 +23,8 @@ export class RkTabBarIndicator extends React.Component {
     componentWidth: PropTypes.number.isRequired,
 
     style: PropTypes.shape({
-      container: View.propTypes.style,
-      content: View.propTypes.style,
+      container: ViewPropTypes.style,
+      content: ViewPropTypes.style,
     }),
   };
   static defaultProps = {

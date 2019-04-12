@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkCalendarDaysNames } from './rkCalendarDaysNames.component';
 import { RkCalendarMonthName } from './rkCalendarMonthName.component';
@@ -16,7 +16,7 @@ export class RkCalendarMonthHeader extends React.Component {
      */
     daySize: PropTypes.number.isRequired,
     style: PropTypes.shape({
-      container: View.propTypes.style,
+      container: ViewPropTypes.style,
       monthName: RkCalendarMonthName.propTypes.style,
       weekDays: RkCalendarDaysNames.propTypes.style,
     }),

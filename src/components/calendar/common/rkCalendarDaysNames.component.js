@@ -4,6 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 import * as RkCalendarService from '../services';
 
@@ -15,7 +16,7 @@ export class RkCalendarDaysNames extends React.Component {
      */
     daySize: PropTypes.number.isRequired,
     style: PropTypes.shape({
-      container: View.propTypes.style,
+      container: ViewPropTypes.style,
       text: Text.propTypes.style,
     }),
   };
