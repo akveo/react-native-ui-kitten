@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   View,
   FlatList,
+  ViewPropTypes,
 } from 'react-native';
 
 /**
@@ -27,7 +28,7 @@ export class RkTabPager extends React.Component {
     componentWidth: PropTypes.number.isRequired,
 
     style: PropTypes.shape({
-      container: View.propTypes.style,
+      container: ViewPropTypes.style,
     }),
   };
   static defaultProps = {
