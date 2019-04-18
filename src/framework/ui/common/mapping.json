@@ -685,7 +685,7 @@
       "appearances": {
         "filled": {
           "mapping": {
-            "buttonBorderRadius": 6
+            "buttonBorderRadius": 8
           },
           "variantGroups": {
             "size": {
@@ -698,6 +698,9 @@
           }
         },
         "outline": {
+          "mapping": {}
+        },
+        "ghost": {
           "mapping": {}
         }
       }
@@ -1082,6 +1085,48 @@
           },
           "iconTintColor": {
             "type": "string"
+          },
+          "labelColor": {
+            "type": "string"
+          },
+          "labelFontSize": {
+            "type": "number"
+          },
+          "labelLineHeight": {
+            "type": "number"
+          },
+          "labelMarginBottom": {
+            "type": "number"
+          },
+          "labelFontWeight": {
+            "type": "string"
+          },
+          "captionMarginTop": {
+            "type": "number"
+          },
+          "captionTextColor": {
+            "type": "string"
+          },
+          "captionTextFontSize": {
+            "type": "number"
+          },
+          "captionTextLineHeight": {
+            "type": "number"
+          },
+          "captionTextFontWeight": {
+            "type": "string"
+          },
+          "captionIconWidth": {
+            "type": "number"
+          },
+          "captionIconHeight": {
+            "type": "number"
+          },
+          "captionIconMarginRight": {
+            "type": "number"
+          },
+          "captionIconTintColor": {
+            "type": "string"
           }
         },
         "appearances": {
@@ -1139,6 +1184,20 @@
             "iconHeight": 24,
             "iconMarginHorizontal": 8,
             "iconTintColor": "color-basic-500",
+            "labelColor": "color-basic-600",
+            "labelFontSize": 12,
+            "labelLineHeight": 16,
+            "labelMarginBottom": 4,
+            "labelFontWeight": "700",
+            "captionMarginTop": 4,
+            "captionTextColor": "color-basic-600",
+            "captionTextFontSize": 11,
+            "captionTextLineHeight": 16,
+            "captionTextFontWeight": "normal",
+            "captionIconWidth": 10,
+            "captionIconHeight": 10,
+            "captionIconMarginRight": 8,
+            "captionIconTintColor": "color-basic-500",
             "state": {
               "disabled": {
                 "backgroundColor": "color-basic-200",
@@ -1153,7 +1212,9 @@
                 "state": {
                   "focused": {
                     "borderColor": "color-primary-500",
-                    "iconTintColor": "color-primary-500"
+                    "iconTintColor": "color-primary-500",
+                    "captionTextColor": "color-primary-500",
+                    "captionIconTintColor": "color-primary-500"
                   }
                 }
               },
@@ -1161,7 +1222,9 @@
                 "state": {
                   "focused": {
                     "borderColor": "color-success-500",
-                    "iconTintColor": "color-success-500"
+                    "iconTintColor": "color-success-500",
+                    "captionTextColor": "color-success-500",
+                    "captionIconTintColor": "color-success-500"
                   }
                 }
               },
@@ -1169,7 +1232,9 @@
                 "state": {
                   "focused": {
                     "borderColor": "color-info-500",
-                    "iconTintColor": "color-info-500"
+                    "iconTintColor": "color-info-500",
+                    "captionTextColor": "color-info-500",
+                    "captionIconTintColor": "color-info-500"
                   }
                 }
               },
@@ -1177,7 +1242,9 @@
                 "state": {
                   "focused": {
                     "borderColor": "color-warning-500",
-                    "iconTintColor": "color-warning-500"
+                    "iconTintColor": "color-warning-500",
+                    "captionTextColor": "color-warning-500",
+                    "captionIconTintColor": "color-warning-500"
                   }
                 }
               },
@@ -1185,7 +1252,9 @@
                 "state": {
                   "focused": {
                     "borderColor": "color-danger-500",
-                    "iconTintColor": "color-danger-500"
+                    "iconTintColor": "color-danger-500",
+                    "captionTextColor": "color-danger-500",
+                    "captionIconTintColor": "color-danger-500"
                   }
                 }
               }
