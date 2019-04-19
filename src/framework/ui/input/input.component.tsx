@@ -96,13 +96,13 @@ export class Input extends React.Component<Props> {
     } = style;
 
     return {
-      wrapper: {
-        ...derivedContainerStyle,
-        ...styles.wrapper,
-      },
       container: {
-        ...containerParameters,
+        ...derivedContainerStyle,
         ...styles.container,
+      },
+      inputContainer: {
+        ...containerParameters,
+        ...styles.inputContainer,
       },
       text: {
         marginHorizontal: textMarginHorizontal,
@@ -142,7 +142,7 @@ export class Input extends React.Component<Props> {
         },
         container: {
           marginTop: captionMarginTop,
-          ...styles.caption,
+          ...styles.captionContainer,
         },
       },
     };
@@ -188,9 +188,9 @@ export class Input extends React.Component<Props> {
       this.renderCaptionElement(componentStyle.caption);
 
     return (
-      <View style={componentStyle.wrapper}>
+      <View style={componentStyle.container}>
         {inputLabel}
-        <View style={componentStyle.container}>
+        <View style={componentStyle.inputContainer}>
           <TextInput
             {...restProps}
             editable={!disabled}
@@ -207,10 +207,10 @@ export class Input extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flexGrow: 1,
   },
-  container: {
+  inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   },
   icon: {},
   label: {},
-  caption: {
+  captionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
