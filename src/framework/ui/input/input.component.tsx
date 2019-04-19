@@ -23,7 +23,10 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import { TextStyleProps } from '@kitten/ui/common/props';
+import {
+  TextStyleProps,
+  FlexStyleProps,
+} from '@kitten/ui/common/props';
 
 const Text = styled<TextProps>(TextComponent);
 
@@ -67,7 +70,9 @@ export class Input extends React.Component<Props> {
 
   private getComponentStyle = (style: StyleType): StyleType => {
     const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
-    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+    const { rest: preparedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+    const { rest: derivedInputContainerStyle, ...derivedContainerStyle } =
+      allWithRest(preparedContainerStyle, FlexStyleProps);
 
     const {
       textMarginHorizontal,
@@ -97,12 +102,13 @@ export class Input extends React.Component<Props> {
 
     return {
       container: {
-        ...derivedContainerStyle,
         ...styles.container,
+        ...derivedContainerStyle,
       },
       inputContainer: {
         ...containerParameters,
         ...styles.inputContainer,
+        ...derivedInputContainerStyle,
       },
       text: {
         marginHorizontal: textMarginHorizontal,
