@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedbackProps,
   ImageProps,
   Image,
+  ScrollView,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -21,6 +22,8 @@ import { Input } from '@kitten/ui';
 
 const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 const PLACEHOLDER: string = 'Placeholder';
+const LABEL: string = 'This Is Input Label';
+const CAPTION: string = 'Caption text, description, error notification';
 
 interface AvoidKeyboardProps {
   children: React.ReactNode;
@@ -30,7 +33,7 @@ const AvoidKeyboard = (props?: ViewProps & AvoidKeyboardProps): React.ReactEleme
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}>
-      <View {...props}/>
+      <ScrollView {...props}/>
     </TouchableWithoutFeedback>
   );
 };
@@ -119,6 +122,42 @@ class InputScreen extends React.Component<Props, State> {
             />
           </View>
         </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Label</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <Input
+              style={this.props.themedStyle.component}
+              onChangeText={this.onInputChange}
+              value={this.state.input}
+              icon={this.renderIcon}
+              placeholder={PLACEHOLDER}
+              label={LABEL}
+            />
+          </View>
+        </View>
+        <View style={this.props.themedStyle.containerSection}>
+          <Text style={this.props.themedStyle.textDescription}>Caption</Text>
+          <View style={this.props.themedStyle.containerPreview}>
+            <Input
+              style={this.props.themedStyle.component}
+              onChangeText={this.onInputChange}
+              value={this.state.input}
+              icon={this.renderIcon}
+              placeholder={PLACEHOLDER}
+              caption={CAPTION}
+            />
+            <Input
+              status='danger'
+              style={this.props.themedStyle.component}
+              onChangeText={this.onInputChange}
+              value={this.state.input}
+              icon={this.renderIcon}
+              placeholder={PLACEHOLDER}
+              caption={CAPTION}
+              captionIcon={this.renderIcon}
+            />
+          </View>
+        </View>
       </AvoidKeyboard>
     );
   }
@@ -126,7 +165,6 @@ class InputScreen extends React.Component<Props, State> {
 
 export default withStyles(InputScreen, (theme: ThemeType) => ({
   container: {
-    flex: 1,
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
@@ -134,7 +172,6 @@ export default withStyles(InputScreen, (theme: ThemeType) => ({
     marginVertical: 16,
   },
   containerPreview: {
-    alignItems: 'center',
     marginTop: 4,
   },
   textDescription: {

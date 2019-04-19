@@ -78,6 +78,29 @@ describe('@input: matches snapshot', () => {
       expect(output).toMatchSnapshot();
     });
 
+    it('* label + caption', () => {
+      const captionIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+        return (
+          <Image
+            style={style}
+            source={iconSource}
+          />
+        );
+      };
+      const label: string = 'Label';
+      const caption: string = 'Caption Text';
+
+      const component: RenderAPI = renderComponent({
+        label,
+        caption,
+        captionIcon,
+      });
+
+      const { output } = shallow(component.getByType(InputComponent));
+
+      expect(output).toMatchSnapshot();
+    });
+
   });
 
 });
