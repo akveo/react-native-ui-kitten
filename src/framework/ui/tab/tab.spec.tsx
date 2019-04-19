@@ -152,12 +152,12 @@ describe('@tab-view: component checks', () => {
   };
 
   it('* emits onSelect with correct args', () => {
+    const screenWidth: number = 375;
+
     const onSelect = jest.fn();
 
     const component = render(
-      <Mock
-        contentWidth={375}
-        onSelect={onSelect}>
+      <Mock onSelect={onSelect}>
         <ChildMock>
           <View/>
         </ChildMock>
@@ -169,10 +169,18 @@ describe('@tab-view: component checks', () => {
 
     const scrollView: ReactTestInstance = component.getByType(ScrollView);
 
+    fireEvent(scrollView, 'layout', {
+      nativeEvent: {
+        layout: {
+          width: screenWidth,
+        },
+      },
+    });
+
     fireEvent(scrollView, 'momentumScrollEnd', {
       nativeEvent: {
         contentOffset: {
-          x: 375,
+          x: screenWidth,
         },
       },
     });
@@ -189,7 +197,7 @@ describe('@tab-view: component checks', () => {
     });
 
     const component: RenderAPI = render(
-      <Mock contentWidth={375} shouldLoadComponent={shouldLoadComponent}>
+      <Mock shouldLoadComponent={shouldLoadComponent}>
         <ChildMock>
           <View/>
         </ChildMock>
@@ -202,7 +210,7 @@ describe('@tab-view: component checks', () => {
     const scrollView: ReactTestInstance = component.getByType(ScrollView);
     const unloadedChild: ReactTestInstance = scrollView.props.children[disabledComponentIndex];
 
-    expect(unloadedChild.props.children).toEqual(undefined);
+    expect(unloadedChild.props.children).toBeNull();
   });
 });
 

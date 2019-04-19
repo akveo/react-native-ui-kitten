@@ -4,8 +4,11 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   StyleSheet,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
+  allWithRest,
   styled,
   StyledComponentProps,
   StyleType,
@@ -14,8 +17,10 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
+import { TextStyleProps } from '../common/props';
 
 interface TabProps {
+  style?: StyleProp<TextStyle>;
   title?: string;
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
@@ -40,6 +45,9 @@ export class Tab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
+    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+
     const {
       textMarginVertical,
       textFontSize,
@@ -56,6 +64,7 @@ export class Tab extends React.Component<Props> {
     return {
       container: {
         ...containerParameters,
+        ...derivedContainerStyle,
         ...styles.container,
       },
       icon: {
@@ -71,6 +80,7 @@ export class Tab extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
+        ...derivedTextStyle,
         ...styles.title,
       },
     };
