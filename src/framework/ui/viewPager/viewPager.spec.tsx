@@ -26,22 +26,31 @@ describe('@view-pager: component checks', () => {
   );
 
   it('* emits onSelect with correct args', () => {
+    const screenWidth: number = 375;
+
     const onSelect = jest.fn();
 
     const component: RenderAPI = render(
-      <Mock
-        contentWidth={375}
-        onSelect={onSelect}>
+      <Mock onSelect={onSelect}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,
     );
+
     const scrollView: ReactTestInstance = component.getByType(ScrollView);
+
+    fireEvent(scrollView, 'layout', {
+      nativeEvent: {
+        layout: {
+          width: screenWidth,
+        },
+      },
+    });
 
     fireEvent(scrollView, 'momentumScrollEnd', {
       nativeEvent: {
         contentOffset: {
-          x: 375,
+          x: screenWidth,
         },
       },
     });
@@ -50,12 +59,11 @@ describe('@view-pager: component checks', () => {
   });
 
   it('* emits onOffsetChange with correct args', () => {
+
     const onOffsetChange = jest.fn();
 
     const component: RenderAPI = render(
-      <Mock
-        contentWidth={375}
-        onOffsetChange={onOffsetChange}>
+      <Mock onOffsetChange={onOffsetChange}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,
@@ -77,9 +85,7 @@ describe('@view-pager: component checks', () => {
     const shouldLoadComponent = jest.fn();
 
     render(
-      <Mock
-        contentWidth={375}
-        shouldLoadComponent={shouldLoadComponent}>
+      <Mock shouldLoadComponent={shouldLoadComponent}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,
@@ -97,9 +103,7 @@ describe('@view-pager: component checks', () => {
     });
 
     const component: RenderAPI = render(
-      <Mock
-        contentWidth={375}
-        shouldLoadComponent={shouldLoadComponent}>
+      <Mock shouldLoadComponent={shouldLoadComponent}>
         <ChildMock/>
         <ChildMock/>
       </Mock>,
@@ -109,7 +113,7 @@ describe('@view-pager: component checks', () => {
 
     const unloadedChild = scrollView.props.children[disabledComponentIndex];
 
-    expect(unloadedChild.props.children).toEqual(undefined);
+    expect(unloadedChild.props.children).toBeNull();
   });
 
 });

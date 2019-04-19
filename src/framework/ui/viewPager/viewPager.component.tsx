@@ -3,13 +3,15 @@ import {
   View,
   ScrollView,
   ScrollViewProps,
+  LayoutChangeEvent,
+  StyleSheet,
+  ViewProps,
 } from 'react-native';
 import { ScrollEvent } from '../common/type';
 
 type ChildElement = React.ReactElement<any>;
 
 interface ViewPagerProps {
-  contentWidth: number;
   children: ChildElement | ChildElement[];
   selectedIndex?: number;
   shouldLoadComponent?: (index: number) => boolean;
@@ -27,6 +29,7 @@ export class ViewPager extends React.Component<Props> {
   };
 
   private scrollViewRef: React.RefObject<ScrollView> = React.createRef();
+  private contentWidth: number = 0;
 
   public componentDidMount() {
     const { selectedIndex: index } = this.props;
@@ -41,15 +44,12 @@ export class ViewPager extends React.Component<Props> {
   public componentDidUpdate() {
     const { selectedIndex: index } = this.props;
 
-    this.scrollToIndex({
-      index,
-      animated: true,
-    });
+    this.scrollToIndex({ index, animated: true });
   }
 
   public scrollToIndex(params: { index: number; animated?: boolean }) {
     const { index, ...rest } = params;
-    const offset: number = this.props.contentWidth * index;
+    const offset: number = this.contentWidth * index;
 
     this.scrollToOffset({ offset, ...rest });
   }
@@ -70,24 +70,33 @@ export class ViewPager extends React.Component<Props> {
 
   private onScrollEnd = (event: ScrollEvent) => {
     const { x: offset } = event.nativeEvent.contentOffset;
-    const { selectedIndex: derivedSelectedIndex, contentWidth } = this.props;
+    const { selectedIndex: derivedSelectedIndex } = this.props;
 
-    const selectedIndex: number = offset / contentWidth;
+    const selectedIndex: number = offset / this.contentWidth;
 
     if (selectedIndex !== derivedSelectedIndex && this.props.onSelect) {
-      this.props.onSelect(selectedIndex);
+      this.props.onSelect(Math.round(selectedIndex));
+    }
+  };
+
+  private onLayout = (event: LayoutChangeEvent) => {
+    const { width } = event.nativeEvent.layout;
+    this.contentWidth = width;
+
+    if (this.props.onLayout) {
+      this.props.onLayout(event);
     }
   };
 
   private renderComponentChild = (element: ChildElement, index: number): ChildElement => {
-    const { shouldLoadComponent: shouldLoad, contentWidth } = this.props;
+    const { shouldLoadComponent } = this.props;
+
+    const contentView: ChildElement | null = shouldLoadComponent(index) ? element : null;
 
     return React.createElement(View, {
-      ...element.props,
       key: index,
-      width: contentWidth,
-      children: shouldLoad(index) ? element : undefined,
-    });
+      style: styles.contentViewContainer,
+    }, contentView);
   };
 
   private renderComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
@@ -95,22 +104,33 @@ export class ViewPager extends React.Component<Props> {
   };
 
   public render(): React.ReactNode {
-    const { children, ...derivedProps } = this.props;
+    const { contentContainerStyle, children, ...derivedProps } = this.props;
     const componentChildren: ChildElement[] = this.renderComponentChildren(children);
 
     return (
       <ScrollView
+        bounces={false}
+        contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
+        showsHorizontalScrollIndicator={false}
         {...derivedProps}
         ref={this.scrollViewRef}
-        bounces={false}
-        showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
         horizontal={true}
         pagingEnabled={true}
         onScroll={this.onScroll}
-        onMomentumScrollEnd={this.onScrollEnd}>
+        onMomentumScrollEnd={this.onScrollEnd}
+        onLayout={this.onLayout}>
         {componentChildren}
       </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    flex: 1,
+  },
+  contentViewContainer: {
+    width: '100%',
+  },
+});
