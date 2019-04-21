@@ -212,8 +212,6 @@ exports[`@input: matches snapshot * appearance * label + caption 1`] = `
     <TextInput
       allowFontScaling={true}
       appearance="default"
-      caption="Caption Text"
-      captionIcon={[Function]}
       dispatch={[Function]}
       editable={true}
       onEndEditing={[Function]}
