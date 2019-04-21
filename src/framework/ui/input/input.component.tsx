@@ -6,7 +6,6 @@ import {
   TextInputProps,
   TextStyle,
   View,
-  ViewProps,
 } from 'react-native';
 import {
   allWithRest,
@@ -23,26 +22,24 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import { TextStyleProps } from '@kitten/ui/common/props';
+import {
+  TextStyleProps,
+  FlexStyleProps,
+} from '../common/props';
 
 const Text = styled<TextProps>(TextComponent);
 
 type IconElement = React.ReactElement<ImageProps>;
-type LabelElement = React.ReactElement<TextProps>;
-
-interface CaptionStyles {
-  container: StyleType;
-  text: StyleType;
-  icon: StyleType;
-}
+type TextElement = React.ReactElement<TextProps>;
+type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 
 interface InputProps {
   status?: string;
   disabled?: boolean;
   label?: string;
   caption?: string;
-  captionIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
-  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
+  captionIcon?: IconProp;
+  icon?: IconProp;
 }
 
 export type Props = InputProps & StyledComponentProps & TextInputProps;
@@ -67,7 +64,8 @@ export class Input extends React.Component<Props> {
 
   private getComponentStyle = (style: StyleType): StyleType => {
     const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
-    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+    const { rest: containerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+    const { rest: inputContainerStyle, ...derivedContainerStyle } = allWithRest(containerStyle, FlexStyleProps);
 
     const {
       textMarginHorizontal,
@@ -97,12 +95,17 @@ export class Input extends React.Component<Props> {
 
     return {
       container: {
-        ...derivedContainerStyle,
         ...styles.container,
+        ...derivedContainerStyle,
       },
       inputContainer: {
         ...containerParameters,
         ...styles.inputContainer,
+        ...inputContainerStyle,
+      },
+      captionContainer: {
+        marginTop: captionMarginTop,
+        ...styles.captionContainer,
       },
       text: {
         marginHorizontal: textMarginHorizontal,
@@ -127,80 +130,59 @@ export class Input extends React.Component<Props> {
         fontWeight: labelFontWeight,
         ...styles.label,
       },
-      caption: {
-        text: {
-          color: captionTextColor,
-          fontSize: captionTextFontSize,
-          fontWeight: captionTextFontWeight,
-          lineHeight: captionTextLineHeight,
-        },
-        icon: {
-          width: captionIconWidth,
-          height: captionIconHeight,
-          tintColor: captionIconTintColor,
-          marginRight: captionIconMarginRight,
-        },
-        container: {
-          marginTop: captionMarginTop,
-          ...styles.captionContainer,
-        },
+      captionIcon: {
+        width: captionIconWidth,
+        height: captionIconHeight,
+        tintColor: captionIconTintColor,
+        marginRight: captionIconMarginRight,
+        ...styles.captionIcon,
+      },
+      captionLabel: {
+        fontSize: captionTextFontSize,
+        fontWeight: captionTextFontWeight,
+        lineHeight: captionTextLineHeight,
+        color: captionTextColor,
+        ...styles.captionLabel,
       },
     };
   };
 
-  private renderIconElement = (style: StyleType,
-                               icon: (style: StyleType) => IconElement): IconElement | null => {
-
-    return icon ? icon(style) : null;
+  private renderIconElement = (style: StyleType, icon: IconProp): IconElement => {
+    return icon(style);
   };
 
-  private renderTextElement = (style: StyleType, text: string): LabelElement => {
+  private renderTextElement = (style: StyleType, text: string): TextElement => {
     return (
       <Text style={style}>{text}</Text>
     );
   };
 
-  private renderText = (style: StyleType, text: string): LabelElement | null => {
-    const hasText: boolean = text && text.length !== 0;
+  public render(): React.ReactElement<TextInputProps> {
+    const { themedStyle, disabled, label, icon, caption, captionIcon, ...restProps } = this.props;
+    const style: StyleType = this.getComponentStyle(themedStyle);
 
-    return hasText ? this.renderTextElement(style, text) : null;
-  };
-
-  private renderCaptionElement = (style: CaptionStyles): React.ReactElement<ViewProps> | null => {
-    const { caption, captionIcon } = this.props;
-    const icon: IconElement | null = this.renderIconElement(style.icon, captionIcon);
-    const text: LabelElement | null = this.renderText(style.text, caption);
+    const iconElement: IconElement = icon ? this.renderIconElement(style.icon, icon) : null;
+    const labelElement: TextElement = label ? this.renderTextElement(style.label, label) : null;
+    const captionIconElement: IconElement = captionIcon ? this.renderIconElement(style.captionIcon, captionIcon) : null;
+    const captionLabelElement: TextElement = caption ? this.renderTextElement(style.captionLabel, caption) : null;
 
     return (
       <View style={style.container}>
-        {icon}
-        {text}
-      </View>
-    );
-  };
-
-  public render(): React.ReactElement<TextInputProps> {
-    const { themedStyle, disabled, label, icon, ...restProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-    const inputIcon: IconElement | null = this.renderIconElement(componentStyle.icon, icon);
-    const inputLabel: LabelElement | null = this.renderText(componentStyle.label, label);
-    const caption: React.ReactElement<ViewProps> | null =
-      this.renderCaptionElement(componentStyle.caption);
-
-    return (
-      <View style={componentStyle.container}>
-        {inputLabel}
-        <View style={componentStyle.inputContainer}>
+        {labelElement}
+        <View style={style.inputContainer}>
           <TextInput
             {...restProps}
+            style={style.text}
             editable={!disabled}
             onFocus={this.onFocus}
             onEndEditing={this.onEndEditing}
-            style={componentStyle.text}
           />
-          {inputIcon}
+          {iconElement}
         </View>
-        {caption}
+        <View style={style.captionContainer}>
+          {captionIconElement}
+          {captionLabelElement}
+        </View>
       </View>
     );
   }
@@ -214,13 +196,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  captionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   text: {
     flex: 1,
   },
   icon: {},
   label: {},
-  captionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+  captionIcon: {},
+  captionLabel: {},
 });
