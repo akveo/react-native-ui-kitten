@@ -1,4 +1,4 @@
-export interface ButtonAlignment {
+export interface ButtonIconAlignment {
   rawValue: string;
 
   flex(): FlexAlignment;
@@ -6,8 +6,8 @@ export interface ButtonAlignment {
 
 export type FlexAlignment = 'row' | 'row-reverse';
 
-export class ButtonAlignments {
-  static LEFT: ButtonAlignment = new class implements ButtonAlignment {
+export class ButtonIconAlignments {
+  static LEFT: ButtonIconAlignment = new class implements ButtonIconAlignment {
     rawValue: string = 'left';
 
     flex(): FlexAlignment {
@@ -15,7 +15,7 @@ export class ButtonAlignments {
     }
   };
 
-  static RIGHT: ButtonAlignment = new class implements ButtonAlignment {
+  static RIGHT: ButtonIconAlignment = new class implements ButtonIconAlignment {
     rawValue: string = 'right';
 
     flex(): FlexAlignment {
@@ -23,27 +23,27 @@ export class ButtonAlignments {
     }
   };
 
-  static parse(value: string | ButtonAlignment, fallback?: ButtonAlignment): ButtonAlignment | undefined {
-    if (ButtonAlignments.typeOf(value)) {
+  static parse(value: string | ButtonIconAlignment, fallback?: ButtonIconAlignment): ButtonIconAlignment | undefined {
+    if (ButtonIconAlignments.typeOf(value)) {
       return value;
     }
 
-    return ButtonAlignments.parseString(value, fallback);
+    return ButtonIconAlignments.parseString(value, fallback);
   }
 
-  private static parseString(rawValue: string, fallback?: ButtonAlignment): ButtonAlignment | undefined {
+  private static parseString(rawValue: string, fallback?: ButtonIconAlignment): ButtonIconAlignment | undefined {
     switch (rawValue) {
-      case ButtonAlignments.LEFT.rawValue:
-        return ButtonAlignments.LEFT;
-      case ButtonAlignments.RIGHT.rawValue:
-        return ButtonAlignments.RIGHT;
+      case ButtonIconAlignments.LEFT.rawValue:
+        return ButtonIconAlignments.LEFT;
+      case ButtonIconAlignments.RIGHT.rawValue:
+        return ButtonIconAlignments.RIGHT;
       default:
         return fallback;
     }
   }
 
-  private static typeOf(value: any): value is ButtonAlignment {
-    const { rawValue } = (<ButtonAlignment>value);
+  private static typeOf(value: any): value is ButtonIconAlignment {
+    const { rawValue } = (<ButtonIconAlignment>value);
 
     return rawValue !== undefined;
   }

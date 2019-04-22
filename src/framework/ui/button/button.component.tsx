@@ -20,8 +20,8 @@ import {
   Props as TextProps,
 } from '../text/text.component';
 import {
-  ButtonAlignment,
-  ButtonAlignments,
+  ButtonIconAlignment,
+  ButtonIconAlignments,
 } from './type';
 import { TextStyleProps } from '../common/props';
 
@@ -30,7 +30,7 @@ interface ButtonProps {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
-  iconAlignment?: string | ButtonAlignment;
+  iconAlignment?: string | ButtonIconAlignment;
   children?: React.ReactText;
 }
 
@@ -38,7 +38,7 @@ const Text = styled<TextProps>(TextComponent);
 
 export type Props = ButtonProps & StyledComponentProps & TouchableOpacityProps;
 
-const ALIGNMENT_DEFAULT: ButtonAlignment = ButtonAlignments.LEFT;
+const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
 
 export class Button extends React.Component<Props> {
 
@@ -86,7 +86,7 @@ export class Button extends React.Component<Props> {
 
     const { iconAlignment } = this.props;
 
-    const alignment: ButtonAlignment = ButtonAlignments.parse(iconAlignment, ALIGNMENT_DEFAULT);
+    const alignment: ButtonIconAlignment = ButtonIconAlignments.parse(iconAlignment, ALIGNMENT_DEFAULT);
 
     return {
       container: {
