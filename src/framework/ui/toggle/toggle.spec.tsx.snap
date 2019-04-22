@@ -3,7 +3,6 @@
 exports[`@toggle: matches snapshot active 1`] = `
 <View
   appearance="default"
-  disabled={false}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -119,38 +118,17 @@ exports[`@toggle: matches snapshot active 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "#e5e7ea",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#d9e4ff",
-      "width": 52,
-    }
-  }
-  value={false}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EDF0F5",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -173,96 +151,63 @@ exports[`@toggle: matches snapshot active 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "#e5e7ea",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#d9e4ff",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(217, 228, 255, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(221, 225, 235, 1)",
+          "borderColor": "#8992A3",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(217, 228, 255, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 1,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(221, 225, 235, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 1,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-start",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(217, 228, 255, 1)",
-              "elevation": 5,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 5,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(255, 255, 255, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(255, 255, 255, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>
@@ -274,7 +219,6 @@ exports[`@toggle: matches snapshot active 1`] = `
 exports[`@toggle: matches snapshot active checked 1`] = `
 <View
   appearance="default"
-  disabled={false}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -390,38 +334,17 @@ exports[`@toggle: matches snapshot active checked 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "#e5e7ea",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#d9e4ff",
-      "width": 52,
-    }
-  }
-  value={true}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#EDF0F5",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -444,96 +367,63 @@ exports[`@toggle: matches snapshot active checked 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "#e5e7ea",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#d9e4ff",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(51, 102, 255, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(40, 77, 224, 1)",
+          "borderColor": "#284DE0",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(51, 102, 255, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 0.010000000000000009,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(40, 77, 224, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 0.010000000000000009,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-end",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(51, 102, 255, 1)",
-              "elevation": 5,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-end",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 5,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(51, 102, 255, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(51, 102, 255, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>
@@ -545,7 +435,6 @@ exports[`@toggle: matches snapshot active checked 1`] = `
 exports[`@toggle: matches snapshot active checked: checked 1`] = `
 <View
   appearance="default"
-  disabled={false}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -661,38 +550,17 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "transparent",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#d9e4ff",
-      "width": 52,
-    }
-  }
-  value={true}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -715,96 +583,63 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "transparent",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#d9e4ff",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(51, 102, 255, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(51, 102, 255, 1)",
+          "borderColor": "#3366FF",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(51, 102, 255, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 0.010000000000000009,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(51, 102, 255, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 0.010000000000000009,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-end",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(51, 102, 255, 1)",
-              "elevation": 5,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-end",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 5,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(51, 102, 255, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(51, 102, 255, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>
@@ -816,7 +651,6 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
 exports[`@toggle: matches snapshot active: default 1`] = `
 <View
   appearance="default"
-  disabled={false}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -932,38 +766,17 @@ exports[`@toggle: matches snapshot active: default 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "transparent",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#d9e4ff",
-      "width": 52,
-    }
-  }
-  value={false}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -986,96 +799,63 @@ exports[`@toggle: matches snapshot active: default 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "transparent",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#d9e4ff",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(217, 228, 255, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(221, 225, 235, 1)",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(217, 228, 255, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 1,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(221, 225, 235, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 1,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-start",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(217, 228, 255, 1)",
-              "elevation": 5,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 5,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(255, 255, 255, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(255, 255, 255, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>
@@ -1087,7 +867,6 @@ exports[`@toggle: matches snapshot active: default 1`] = `
 exports[`@toggle: matches snapshot checked 1`] = `
 <View
   appearance="default"
-  disabled={false}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -1203,38 +982,17 @@ exports[`@toggle: matches snapshot checked 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "transparent",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#d9e4ff",
-      "width": 52,
-    }
-  }
-  value={true}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -1257,96 +1015,63 @@ exports[`@toggle: matches snapshot checked 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "transparent",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#d9e4ff",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(51, 102, 255, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(51, 102, 255, 1)",
+          "borderColor": "#3366FF",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(51, 102, 255, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 0.010000000000000009,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(51, 102, 255, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 0.010000000000000009,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-end",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(51, 102, 255, 1)",
-              "elevation": 5,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-end",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 5,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(51, 102, 255, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(51, 102, 255, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>
@@ -1358,7 +1083,6 @@ exports[`@toggle: matches snapshot checked 1`] = `
 exports[`@toggle: matches snapshot checked disabled 1`] = `
 <View
   appearance="default"
-  disabled={true}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -1474,38 +1198,17 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#8992A3",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "transparent",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#DDE1EB",
-      "width": 52,
-    }
-  }
-  value={true}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -1528,96 +1231,63 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#8992A3",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "transparent",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#DDE1EB",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(137, 146, 163, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(200, 206, 219, 1)",
+          "borderColor": "#C8CEDB",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(137, 146, 163, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 0.010000000000000009,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(200, 206, 219, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 0.010000000000000009,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-end",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(137, 146, 163, 1)",
-              "elevation": 0,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-end",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 0,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(137, 146, 163, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(200, 206, 219, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>
@@ -1629,7 +1299,6 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
 exports[`@toggle: matches snapshot default 1`] = `
 <View
   appearance="default"
-  disabled={false}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -1745,38 +1414,17 @@ exports[`@toggle: matches snapshot default 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#3366FF",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "transparent",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#d9e4ff",
-      "width": 52,
-    }
-  }
-  value={false}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -1799,96 +1447,63 @@ exports[`@toggle: matches snapshot default 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#3366FF",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "transparent",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#d9e4ff",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(217, 228, 255, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(221, 225, 235, 1)",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(217, 228, 255, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 1,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(221, 225, 235, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 1,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-start",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(217, 228, 255, 1)",
-              "elevation": 5,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 5,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(255, 255, 255, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(255, 255, 255, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>
@@ -1900,7 +1515,6 @@ exports[`@toggle: matches snapshot default 1`] = `
 exports[`@toggle: matches snapshot disabled 1`] = `
 <View
   appearance="default"
-  disabled={true}
   dispatch={[Function]}
   size="medium"
   status="primary"
@@ -2016,38 +1630,17 @@ exports[`@toggle: matches snapshot disabled 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
-  themedStyle={
-    Object {
-      "borderColor": "#8992A3",
-      "borderRadius": 16,
-      "borderWidth": 1.5,
-      "height": 32,
-      "highlightBackgroundColor": "transparent",
-      "highlightBorderRadius": 21,
-      "highlightHeight": 42,
-      "highlightWidth": 62,
-      "offsetValue": 20,
-      "thumbBackgroundColor": "#ffffff",
-      "tintBackgroundColor": "#DDE1EB",
-      "width": 52,
-    }
-  }
-  value={false}
 >
   <View
     style={
-      Array [
-        Object {
-          "alignSelf": "center",
-          "position": "absolute",
-        },
-        Object {
-          "backgroundColor": undefined,
-          "borderRadius": 21,
-          "height": 42,
-          "width": 62,
-        },
-      ]
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 22,
+        "height": 44,
+        "position": "absolute",
+        "width": 64,
+      }
     }
   />
   <TouchableOpacity
@@ -2070,96 +1663,63 @@ exports[`@toggle: matches snapshot disabled 1`] = `
       onStartShouldSetResponder={[Function]}
       onStartShouldSetResponderCapture={[Function]}
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "overflow": "hidden",
-          },
-          Object {
-            "borderColor": "#8992A3",
-            "borderRadius": 16,
-            "borderWidth": 1.5,
-            "height": 32,
-            "highlightBackgroundColor": "transparent",
-            "highlightBorderRadius": 21,
-            "highlightHeight": 42,
-            "highlightWidth": 62,
-            "offsetValue": 20,
-            "thumbBackgroundColor": "#ffffff",
-            "tintBackgroundColor": "#DDE1EB",
-            "width": 52,
-          },
-          Object {
-            "backgroundColor": "rgba(221, 225, 235, 1)",
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "rgba(221, 225, 235, 1)",
+          "borderColor": "#A6AEBD",
+          "borderRadius": 16,
+          "borderWidth": 1.5,
+          "height": 32,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 52,
+        }
       }
     >
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "position": "absolute",
-            },
-            Object {
-              "borderRadius": 14.5,
-              "height": 29,
-              "width": 49,
-            },
-            Object {
-              "backgroundColor": "rgba(221, 225, 235, 1)",
-              "transform": Array [
-                Object {
-                  "scale": 1,
-                },
-              ],
-            },
-          ]
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "rgba(221, 225, 235, 1)",
+            "borderRadius": 14.5,
+            "height": 29,
+            "position": "absolute",
+            "transform": Array [
+              Object {
+                "scale": 1,
+              },
+            ],
+            "width": 49,
+          }
         }
       />
       <AnimatedComponent
         style={
-          Array [
-            Object {
-              "borderRadius": 14.5,
-              "borderWidth": 1.5,
-              "height": 29,
-              "marginHorizontal": 1.5,
-              "width": 29,
-            },
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "alignSelf": "flex-start",
-              "backgroundColor": "#ffffff",
-              "borderColor": "rgba(221, 225, 235, 1)",
-              "elevation": 0,
-              "transform": Array [
-                Object {
-                  "translateX": 0,
-                },
-              ],
-              "width": 29,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 15,
+            "elevation": 0,
+            "height": 30,
+            "justifyContent": "center",
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+            "width": 30,
+          }
         }
       >
         <CheckMark
           isAnimated={true}
           style={
-            Array [
-              Object {
-                "height": 14.5,
-                "width": 14.5,
-              },
-              Object {
-                "backgroundColor": "rgba(255, 255, 255, 1)",
-              },
-            ]
+            Object {
+              "backgroundColor": "rgba(255, 255, 255, 1)",
+              "height": 15,
+              "width": 15,
+            }
           }
         />
       </AnimatedComponent>

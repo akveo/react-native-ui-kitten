@@ -48,7 +48,7 @@ describe('@toggle: matches snapshot', () => {
   });
 
   it('checked', () => {
-    const component: RenderAPI = renderComponent({ value: true });
+    const component: RenderAPI = renderComponent({ checked: true });
     const { output } = shallow(component.getByType(ToggleComponent));
 
     expect(output).toMatchSnapshot();
@@ -63,7 +63,7 @@ describe('@toggle: matches snapshot', () => {
 
   it('checked disabled', () => {
     const component: RenderAPI = renderComponent({
-      value: true,
+      checked: true,
       disabled: true,
     });
     const { output } = shallow(component.getByType(ToggleComponent));
@@ -93,7 +93,7 @@ describe('@toggle: matches snapshot', () => {
   });
 
   it('active checked', async () => {
-    const component: RenderAPI = renderComponent({ value: true });
+    const component: RenderAPI = renderComponent({ checked: true });
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
     const active: ReactTestInstance = await waitForElement(() => {
@@ -116,10 +116,10 @@ describe('@toggle: matches snapshot', () => {
 
 describe('@toggle: component checks', () => {
 
-  it('emits onValueChange', () => {
+  it('emits onChange', () => {
     const onChange = jest.fn();
 
-    const component: RenderAPI = renderComponent({ onValueChange: onChange });
+    const component: RenderAPI = renderComponent({ onChange: onChange });
 
     fireEvent.press(component.getByType(TouchableOpacity));
 
@@ -127,35 +127,35 @@ describe('@toggle: component checks', () => {
   });
 
   it('checking of value direct', () => {
-    let value: boolean = false;
+    let checked: boolean = false;
     const onChangeValue = (changed: boolean) => {
-      value = changed;
+      checked = changed;
     };
 
     const component: RenderAPI = renderComponent({
-      value: value,
-      onValueChange: onChangeValue,
+      checked: checked,
+      onChange: onChangeValue,
     });
 
     fireEvent.press(component.getByType(TouchableOpacity));
 
-    expect(value).toBe(true);
+    expect(checked).toBe(true);
   });
 
   it('checking of value reverse', () => {
-    let value: boolean = true;
+    let checked: boolean = true;
     const onChangeValue = (changed: boolean) => {
-      value = changed;
+      checked = changed;
     };
 
     const component: RenderAPI = renderComponent({
-      value: value,
-      onValueChange: onChangeValue,
+      checked: checked,
+      onChange: onChangeValue,
     });
 
     fireEvent.press(component.getByType(TouchableOpacity));
 
-    expect(value).toBe(false);
+    expect(checked).toBe(false);
   });
 
 });
