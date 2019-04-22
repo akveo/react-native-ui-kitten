@@ -189,19 +189,20 @@ export class Input extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-  },
+  container: {},
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '100%',
   },
   captionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   text: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 'auto',
   },
   icon: {},
   label: {},

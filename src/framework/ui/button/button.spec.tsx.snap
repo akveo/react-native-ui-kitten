@@ -3,9 +3,9 @@
 exports[`@button: matches snapshot * appearance * empty 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
   appearance="filled"
   dispatch={[Function]}
+  iconAlignment="left"
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -133,10 +133,10 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
 exports[`@button: matches snapshot * appearance * icon 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
   appearance="filled"
   dispatch={[Function]}
   icon={[Function]}
+  iconAlignment="left"
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -280,10 +280,10 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
 exports[`@button: matches snapshot * appearance * icon and text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
   appearance="filled"
   dispatch={[Function]}
   icon={[Function]}
+  iconAlignment="left"
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -425,9 +425,11 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "flexGrow": 1,
         "fontSize": 14,
         "fontWeight": "800",
         "marginHorizontal": 10,
+        "textAlign": "center",
       }
     }
   >
@@ -439,9 +441,9 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
 exports[`@button: matches snapshot * appearance * text 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
   appearance="filled"
   dispatch={[Function]}
+  iconAlignment="left"
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -568,9 +570,11 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "flexGrow": 1,
         "fontSize": 14,
         "fontWeight": "800",
         "marginHorizontal": 10,
+        "textAlign": "center",
       }
     }
   >
@@ -582,9 +586,9 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
 exports[`@button: matches snapshot * interaction * stateless 1`] = `
 <TouchableOpacity
   activeOpacity={1}
-  alignment="left"
   appearance="filled"
   dispatch={[Function]}
+  iconAlignment="left"
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}

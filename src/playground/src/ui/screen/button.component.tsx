@@ -46,7 +46,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='giant'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
             <Button
@@ -54,7 +54,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='large'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
             <Button
@@ -62,7 +62,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='medium'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
             <Button
@@ -70,7 +70,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='small'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
             <Button
@@ -78,7 +78,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='tiny'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
             />
           </View>
@@ -91,7 +91,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='giant'
-              alignment={ALIGNMENT}>
+              iconAlignment={ALIGNMENT}>
               {TEXT}
             </Button>
             <Button
@@ -99,7 +99,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='large'
-              alignment={ALIGNMENT}>
+              iconAlignment={ALIGNMENT}>
               {TEXT}
             </Button>
             <Button
@@ -107,7 +107,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='medium'
-              alignment={ALIGNMENT}>
+              iconAlignment={ALIGNMENT}>
               {TEXT}
             </Button>
             <Button
@@ -115,7 +115,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='small'
-              alignment={ALIGNMENT}>
+              iconAlignment={ALIGNMENT}>
               {TEXT}
             </Button>
             <Button
@@ -123,7 +123,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='tiny'
-              alignment={ALIGNMENT}>
+              iconAlignment={ALIGNMENT}>
               {TEXT}
             </Button>
           </View>
@@ -136,7 +136,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='giant'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
             </Button>
@@ -146,7 +146,7 @@ class ButtonScreen extends React.Component<Props, State> {
               status={STATUS}
               size='large'
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}
-              alignment={ALIGNMENT}>
+              iconAlignment={ALIGNMENT}>
               {TEXT}
             </Button>
             <Button
@@ -154,7 +154,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='medium'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
             </Button>
@@ -163,7 +163,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='small'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
             </Button>
@@ -172,7 +172,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='tiny'
-              alignment={ALIGNMENT}
+              iconAlignment={ALIGNMENT}
               icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
               {TEXT}
             </Button>

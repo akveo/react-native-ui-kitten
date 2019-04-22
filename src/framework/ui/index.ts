@@ -101,8 +101,8 @@ import {
   Props as ViewPagerProps,
 } from './viewPager/viewPager.component';
 import {
-  ButtonAlignment,
-  ButtonAlignments,
+  ButtonIconAlignment,
+  ButtonIconAlignments,
 } from './button/type';
 import {
   Placement as PopoverPlacement,
@@ -193,8 +193,8 @@ export {
 };
 
 export {
-  ButtonAlignment,
-  ButtonAlignments,
+  ButtonIconAlignment,
+  ButtonIconAlignments,
   PopoverPlacement,
   PopoverPlacements,
   TopNavigationAlignment,

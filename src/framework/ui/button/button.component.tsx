@@ -20,8 +20,8 @@ import {
   Props as TextProps,
 } from '../text/text.component';
 import {
-  ButtonAlignment,
-  ButtonAlignments,
+  ButtonIconAlignment,
+  ButtonIconAlignments,
 } from './type';
 import { TextStyleProps } from '../common/props';
 
@@ -30,7 +30,7 @@ interface ButtonProps {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
-  alignment?: string | ButtonAlignment;
+  iconAlignment?: string | ButtonIconAlignment;
   children?: React.ReactText;
 }
 
@@ -38,12 +38,12 @@ const Text = styled<TextProps>(TextComponent);
 
 export type Props = ButtonProps & StyledComponentProps & TouchableOpacityProps;
 
-const ALIGNMENT_DEFAULT: ButtonAlignment = ButtonAlignments.LEFT;
+const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
 
 export class Button extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
-    alignment: 'left',
+    iconAlignment: 'left',
   };
 
   private onPress = (event: GestureResponderEvent) => {
@@ -84,7 +84,9 @@ export class Button extends React.Component<Props> {
       ...containerParameters
     } = style;
 
-    const alignment: ButtonAlignment = ButtonAlignments.parse(this.props.alignment, ALIGNMENT_DEFAULT);
+    const { iconAlignment } = this.props;
+
+    const alignment: ButtonIconAlignment = ButtonIconAlignments.parse(iconAlignment, ALIGNMENT_DEFAULT);
 
     return {
       container: {
@@ -164,6 +166,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
-  text: {},
+  text: {
+    flexGrow: 1,
+    textAlign: 'center',
+  },
   icon: {},
 });

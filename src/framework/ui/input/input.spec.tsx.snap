@@ -2,11 +2,7 @@
 
 exports[`@input: matches snapshot * appearance * icon 1`] = `
 <View
-  style={
-    Object {
-      "flexGrow": 1,
-    }
-  }
+  style={Object {}}
 >
   <View
     style={
@@ -20,6 +16,7 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
         "minHeight": 48,
         "paddingHorizontal": 8,
         "paddingVertical": 14,
+        "width": "100%",
       }
     }
   >
@@ -34,7 +31,9 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
       style={
         Object {
           "color": "#8992A3",
-          "flex": 1,
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
           "fontSize": 15,
           "lineHeight": 20,
           "marginHorizontal": 8,
@@ -175,11 +174,7 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
 
 exports[`@input: matches snapshot * appearance * label + caption 1`] = `
 <View
-  style={
-    Object {
-      "flexGrow": 1,
-    }
-  }
+  style={Object {}}
 >
   <ForwardRef(WrappingElement)
     style={
@@ -206,6 +201,7 @@ exports[`@input: matches snapshot * appearance * label + caption 1`] = `
         "minHeight": 48,
         "paddingHorizontal": 8,
         "paddingVertical": 14,
+        "width": "100%",
       }
     }
   >
@@ -220,7 +216,9 @@ exports[`@input: matches snapshot * appearance * label + caption 1`] = `
       style={
         Object {
           "color": "#8992A3",
-          "flex": 1,
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
           "fontSize": 15,
           "lineHeight": 20,
           "marginHorizontal": 8,
@@ -374,11 +372,7 @@ exports[`@input: matches snapshot * appearance * label + caption 1`] = `
 
 exports[`@input: matches snapshot * interaction * stateless 1`] = `
 <View
-  style={
-    Object {
-      "flexGrow": 1,
-    }
-  }
+  style={Object {}}
 >
   <View
     style={
@@ -392,6 +386,7 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
         "minHeight": 48,
         "paddingHorizontal": 8,
         "paddingVertical": 14,
+        "width": "100%",
       }
     }
   >
@@ -406,7 +401,9 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
       style={
         Object {
           "color": "#8992A3",
-          "flex": 1,
+          "flexBasis": "auto",
+          "flexGrow": 1,
+          "flexShrink": 1,
           "fontSize": 15,
           "lineHeight": 20,
           "marginHorizontal": 8,
