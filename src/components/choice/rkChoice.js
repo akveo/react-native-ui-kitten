@@ -185,6 +185,7 @@ export class RkChoice extends RkComponent {
     selected: PropTypes.bool,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
+    onPress: PropTypes.func,
     renderContentFunction: PropTypes.func,
   };
   static defaultProps = {
@@ -194,6 +195,7 @@ export class RkChoice extends RkComponent {
     selected: false,
     disabled: false,
     onChange: (() => null),
+    onPress: null,
     renderContentFunction: undefined,
   };
   componentName = 'RkChoice';
@@ -219,9 +221,14 @@ export class RkChoice extends RkComponent {
   }
 
   onPress(e) {
-    this.setState({ selected: !this.state.selected }, () => {
-      this.props.onChange(this.state.selected, e);
-    });
+    const { onPress } = this.props;
+    if (onPress) {
+      onPress(e);
+    } else {
+      this.setState({ selected: !this.state.selected }, () => {
+        this.props.onChange(this.state.selected, e);
+      });
+    }
   }
 
   renderDefaultContentView(style) {
