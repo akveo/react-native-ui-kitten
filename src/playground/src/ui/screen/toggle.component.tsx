@@ -35,24 +35,24 @@ class ToggleScreen extends React.Component<Props, State> {
     toggleErrorChecked: false,
   };
 
-  private onToggle1Change = (value: boolean) => {
-    this.setState({ toggle1Checked: value });
+  private onToggle1Change = (checked: boolean) => {
+    this.setState({ toggle1Checked: checked });
   };
 
-  private onToggle2Change = (value: boolean) => {
-    this.setState({ toggle2Checked: value });
+  private onToggle2Change = (checked: boolean) => {
+    this.setState({ toggle2Checked: checked });
   };
 
-  private onToggle3Change = (value: boolean) => {
-    this.setState({ toggle3Checked: value });
+  private onToggle3Change = (checked: boolean) => {
+    this.setState({ toggle3Checked: checked });
   };
 
-  private onToggle4Change = (value: boolean) => {
-    this.setState({ toggle4Checked: value });
+  private onToggle4Change = (checked: boolean) => {
+    this.setState({ toggle4Checked: checked });
   };
 
-  private onToggleErrorChange = (value: boolean) => {
-    this.setState({ toggleErrorChecked: value });
+  private onToggleErrorChange = (checked: boolean) => {
+    this.setState({ toggleErrorChecked: checked });
   };
 
   public render(): React.ReactNode {
@@ -62,26 +62,26 @@ class ToggleScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Primary</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <Toggle
-              value={this.state.toggle1Checked}
-              onValueChange={this.onToggle1Change}
               style={this.props.themedStyle.component}
+              checked={this.state.toggle1Checked}
+              onChange={this.onToggle1Change}
             />
             <Toggle
-              value={this.state.toggle2Checked}
-              onValueChange={this.onToggle2Change}
               style={this.props.themedStyle.component}
+              checked={this.state.toggle2Checked}
+              onChange={this.onToggle2Change}
             />
             <Toggle
-              value={this.state.toggle3Checked}
-              onValueChange={this.onToggle3Change}
+              style={this.props.themedStyle.component}
+              checked={this.state.toggle3Checked}
+              onChange={this.onToggle3Change}
               disabled={true}
-              style={this.props.themedStyle.component}
             />
             <Toggle
-              value={this.state.toggle4Checked}
-              onValueChange={this.onToggle4Change}
-              disabled={true}
               style={this.props.themedStyle.component}
+              checked={this.state.toggle4Checked}
+              onChange={this.onToggle4Change}
+              disabled={true}
             />
           </View>
         </View>
@@ -89,25 +89,25 @@ class ToggleScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Danger</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <Toggle
-              status='danger'
               style={this.props.themedStyle.component}
-              value={this.state.toggleErrorChecked}
-              onValueChange={this.onToggleErrorChange}
+              status='danger'
+              checked={this.state.toggleErrorChecked}
+              onChange={this.onToggleErrorChange}
             />
             <Toggle
-              status='danger'
               style={this.props.themedStyle.component}
-              value={true}
+              status='danger'
+              checked={true}
             />
             <Toggle
-              status='danger'
               style={this.props.themedStyle.component}
+              status='danger'
               disabled={true}
             />
             <Toggle
-              status='danger'
               style={this.props.themedStyle.component}
-              value={true}
+              status='danger'
+              checked={true}
               disabled={true}
             />
           </View>
@@ -116,25 +116,25 @@ class ToggleScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Success</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <Toggle
-              status='success'
               style={this.props.themedStyle.component}
-              value={this.state.toggleErrorChecked}
-              onValueChange={this.onToggleErrorChange}
+              status='success'
+              checked={this.state.toggleErrorChecked}
+              onChange={this.onToggleErrorChange}
             />
             <Toggle
-              status='success'
               style={this.props.themedStyle.component}
-              value={true}
+              status='success'
+              checked={true}
             />
             <Toggle
-              status='success'
               style={this.props.themedStyle.component}
+              status='success'
               disabled={true}
             />
             <Toggle
-              status='success'
               style={this.props.themedStyle.component}
-              value={true}
+              status='success'
+              checked={true}
               disabled={true}
             />
           </View>
@@ -143,25 +143,25 @@ class ToggleScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Warning</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <Toggle
-              status='warning'
               style={this.props.themedStyle.component}
-              value={this.state.toggleErrorChecked}
-              onValueChange={this.onToggleErrorChange}
+              status='warning'
+              checked={this.state.toggleErrorChecked}
+              onChange={this.onToggleErrorChange}
             />
             <Toggle
-              status='warning'
               style={this.props.themedStyle.component}
-              value={true}
+              status='warning'
+              checked={true}
             />
             <Toggle
-              status='warning'
               style={this.props.themedStyle.component}
+              status='warning'
               disabled={true}
             />
             <Toggle
-              status='warning'
               style={this.props.themedStyle.component}
-              value={true}
+              status='warning'
+              checked={true}
               disabled={true}
             />
           </View>
@@ -170,25 +170,25 @@ class ToggleScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Info</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <Toggle
-              status='info'
               style={this.props.themedStyle.component}
-              value={this.state.toggleErrorChecked}
-              onValueChange={this.onToggleErrorChange}
+              status='info'
+              checked={this.state.toggleErrorChecked}
+              onChange={this.onToggleErrorChange}
             />
             <Toggle
-              status='info'
               style={this.props.themedStyle.component}
-              value={true}
+              status='info'
+              checked={true}
             />
             <Toggle
-              status='info'
               style={this.props.themedStyle.component}
+              status='info'
               disabled={true}
             />
             <Toggle
-              status='info'
               style={this.props.themedStyle.component}
-              value={true}
+              status='info'
+              checked={true}
               disabled={true}
             />
           </View>
@@ -197,18 +197,18 @@ class ToggleScreen extends React.Component<Props, State> {
           <Text style={this.props.themedStyle.textDescription}>Size</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <Toggle
+              style={this.props.themedStyle.component}
               size='small'
-              style={this.props.themedStyle.component}
-              value={true}
+              checked={true}
             />
             <Toggle
               style={this.props.themedStyle.component}
-              value={true}
+              checked={true}
             />
             <Toggle
+              style={this.props.themedStyle.component}
               size='large'
-              style={this.props.themedStyle.component}
-              value={true}
+              checked={true}
             />
           </View>
         </View>
