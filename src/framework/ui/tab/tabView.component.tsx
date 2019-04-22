@@ -77,7 +77,7 @@ export class TabView extends React.Component<Props> {
     const { children, ...elementProps } = element.props;
 
     return {
-      tab: React.createElement(Tab, { key: index, ...elementProps }),
+      tab: React.cloneElement(element, { key: index, ...elementProps }),
       content: children,
     };
   };
@@ -107,7 +107,6 @@ export class TabView extends React.Component<Props> {
         <ViewPager
           ref={this.viewPagerRef}
           selectedIndex={selectedIndex}
-          contentWidth={contentWidth}
           shouldLoadComponent={this.props.shouldLoadComponent}
           onOffsetChange={this.onPagerOffsetChange}
           onSelect={this.onPagerSelect}>

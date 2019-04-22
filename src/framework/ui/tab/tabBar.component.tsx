@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   StyleSheet,
+  TextStyle,
   View,
   ViewProps,
 } from 'react-native';
@@ -66,9 +67,11 @@ export class TabBar extends React.Component<Props> {
   };
 
   private renderComponentChild = (element: TabElement, index: number): TabElement => {
+    const derivedStyle: TextStyle = StyleSheet.flatten(element.props.style);
+
     return React.cloneElement(element, {
       key: index,
-      style: { flex: 1 },
+      style: { ...derivedStyle, flex: 1 },
       selected: index === this.props.selectedIndex,
       onSelect: () => this.onChildPress(index),
     });

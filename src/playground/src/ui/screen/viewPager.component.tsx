@@ -36,7 +36,6 @@ class ViewPagerScreen extends React.Component<Props, State> {
     return (
       <ViewPager
         selectedIndex={this.state.selectedIndex}
-        contentWidth={Dimensions.get('window').width}
         onSelect={this.onIndexChange}>
         <View style={this.props.themedStyle.tabContainer}>
           <Text>Tab 1</Text>

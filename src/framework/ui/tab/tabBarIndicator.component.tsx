@@ -37,10 +37,7 @@ export class TabBarIndicator extends React.Component<Props> {
   public componentDidUpdate() {
     const { selectedPosition: index } = this.props;
 
-    this.scrollToIndex({
-      index,
-      animated: true,
-    });
+    this.scrollToIndex({ index, animated: true });
   }
 
   /**
