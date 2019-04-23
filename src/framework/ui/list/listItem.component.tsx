@@ -46,11 +46,13 @@ interface CustomContentProps {
 
 type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
 
-const Text = styled<TextProps>(TextComponent, 'Text');
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndexedProps;
 
 export class ListItem extends React.Component<Props> {
+
+  static styledComponentName: string = 'ListItem';
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {

@@ -22,6 +22,8 @@ export type Props = ListProps<ItemType> & StyledComponentProps & FlatListProps<I
 
 export class List extends React.Component<Props> {
 
+  static styledComponentName: string = 'List';
+
   private listRef: React.RefObject<FlatList<ItemType>> = React.createRef();
 
   public scrollToEnd = (params?: { animated?: boolean }) => {

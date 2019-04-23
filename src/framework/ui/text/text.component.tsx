@@ -17,6 +17,8 @@ export type Props = TextProps & StyledComponentProps & TextComponentProps;
 
 export class Text extends React.Component<Props> {
 
+  static styledComponentName: string = 'Text';
+
   private getComponentStyle = (source: StyleType): StyleType => {
     return {
       color: source.color,

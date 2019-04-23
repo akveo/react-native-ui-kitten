@@ -113,28 +113,28 @@ import {
   TopNavigationAlignments,
 } from './topNavigation/type';
 
-const Avatar = styled<AvatarProps>(AvatarComponent, 'Avatar');
-const BottomNavigationTab = styled<BottomNavigatorTabProps>(BottomNavigationTabComponent, 'BottomNavigationTab');
-const BottomNavigation = styled<BottomTabNavigatorProps>(BottomNavigationComponent, 'BottomNavigation');
-const Button = styled<ButtonProps>(ButtonComponent, 'Button');
-const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent, 'ButtonGroup');
-const CheckBox = styled<CheckBoxProps>(CheckBoxComponent, 'CheckBox');
-const Input = styled<InputProps>(InputComponent, 'Input');
-const Layout = styled<LayoutProps>(LayoutComponent, 'Layout');
-const List = styled<ListProps>(ListComponent, 'List');
-const ListItem = styled<ListItemProps>(ListItemComponent, 'ListItem');
-const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent, 'OverflowMenu');
-const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent, 'OverflowMenuItem');
-const Popover = styled<PopoverProps>(PopoverComponent, 'Popover');
-const Radio = styled<RadioProps>(RadioComponent, 'Radio');
-const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent, 'RadioGroup');
-const Tab = styled<TabProps>(TabComponent, 'Tab');
-const TabBar = styled<TabBarProps>(TabBarComponent, 'TabBar');
-const Text = styled<TextProps>(TextComponent, 'Text');
-const Toggle = styled<ToggleProps>(ToggleComponent, 'Toggle');
-const Tooltip = styled<TooltipProps>(TooltipComponent, 'Tooltip');
-const TopNavigation = styled<TopNavigationBarProps>(TopNavigationComponent, 'TopNavigation');
-const TopNavigationAction = styled<TopNavigationBarActionProps>(TopNavigationActionComponent, 'TopNavigationAction');
+const Avatar = styled<AvatarProps>(AvatarComponent);
+const BottomNavigationTab = styled<BottomNavigatorTabProps>(BottomNavigationTabComponent);
+const BottomNavigation = styled<BottomTabNavigatorProps>(BottomNavigationComponent);
+const Button = styled<ButtonProps>(ButtonComponent);
+const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);
+const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);
+const Input = styled<InputProps>(InputComponent);
+const Layout = styled<LayoutProps>(LayoutComponent);
+const List = styled<ListProps>(ListComponent);
+const ListItem = styled<ListItemProps>(ListItemComponent);
+const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);
+const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
+const Popover = styled<PopoverProps>(PopoverComponent);
+const Radio = styled<RadioProps>(RadioComponent);
+const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);
+const Tab = styled<TabProps>(TabComponent);
+const TabBar = styled<TabBarProps>(TabBarComponent);
+const Text = styled<TextProps>(TextComponent);
+const Toggle = styled<ToggleProps>(ToggleComponent);
+const Tooltip = styled<TooltipProps>(TooltipComponent);
+const TopNavigation = styled<TopNavigationBarProps>(TopNavigationComponent);
+const TopNavigationAction = styled<TopNavigationBarActionProps>(TopNavigationActionComponent);
 
 export {
   Avatar,

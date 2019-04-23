@@ -16,6 +16,8 @@ export type Props = LayoutProps & StyledComponentProps & ViewProps;
 
 export class Layout extends React.Component<Props> {
 
+  static styledComponentName: string = 'Layout';
+
   private getComponentStyle = (style: StyleType): StyleType => {
     return {
       container: style,

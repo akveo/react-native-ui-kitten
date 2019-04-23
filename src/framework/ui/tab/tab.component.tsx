@@ -28,11 +28,13 @@ interface TabProps {
   children?: React.ReactElement<any>;
 }
 
-const Text = styled<TextProps>(TextComponent, 'Text');
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
 
 export class Tab extends React.Component<Props> {
+
+  static styledComponentName: string = 'Tab';
 
   static defaultProps: Partial<Props> = {
     selected: false,

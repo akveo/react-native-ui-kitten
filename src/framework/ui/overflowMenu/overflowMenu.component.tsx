@@ -29,12 +29,14 @@ interface OverflowMenuProps {
   onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
-const Popover = styled<PopoverProps>(PopoverComponent, 'Popover');
-const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent, 'OverflowMenuItem');
+const Popover = styled<PopoverProps>(PopoverComponent);
+const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
 
 export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverProps, 'content'>;
 
 export class OverflowMenu extends React.Component<Props> {
+
+  static styledComponentName: string = 'OverflowMenu';
 
   static defaultProps: Partial<Props> = {
     indicatorOffset: 12,

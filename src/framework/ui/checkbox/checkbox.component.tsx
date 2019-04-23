@@ -33,11 +33,13 @@ interface CheckBoxProps {
   onChange?: (checked: boolean, indeterminate: boolean) => void;
 }
 
-const Text = styled<TextProps>(TextComponent, 'Text');
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps;
 
 export class CheckBox extends React.Component<Props> {
+
+  static styledComponentName: string = 'CheckBox';
 
   private onPress = () => {
     this.props.dispatch([]);

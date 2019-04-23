@@ -20,6 +20,8 @@ export type Props = StyledComponentProps & TouchableOpacityProps & TopNavigation
 
 export class TopNavigationAction extends React.Component<Props> {
 
+  static styledComponentName: string = 'TopNavigationAction';
+
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
       this.props.onPress(event);

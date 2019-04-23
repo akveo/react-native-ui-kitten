@@ -26,12 +26,14 @@ interface TooltipProps {
   children: React.ReactElement<any>;
 }
 
-const Popover = styled<PopoverProps>(PopoverComponent, 'Popover');
-const Text = styled<TextProps>(TextComponent, 'Text');
+const Popover = styled<PopoverProps>(PopoverComponent);
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'content'>;
 
 export class Tooltip extends React.Component<Props> {
+
+  static styledComponentName: string = 'Tooltip';
 
   static defaultProps: Partial<Props> = {
     indicatorOffset: 8,

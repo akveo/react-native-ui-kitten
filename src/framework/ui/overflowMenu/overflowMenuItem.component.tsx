@@ -24,11 +24,13 @@ export interface OverflowMenuItemType {
   index?: number;
 }
 
-const Text = styled<TextProps>(TextComponent, 'Text');
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpacityIndexedProps;
 
 export class OverflowMenuItem extends React.Component<Props> {
+
+  static styledComponentName: string = 'OverflowMenuItem';
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {

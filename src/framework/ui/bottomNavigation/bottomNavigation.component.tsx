@@ -27,6 +27,8 @@ export type Props = TabNavigatorProps & StyledComponentProps & ViewProps;
 
 export class BottomNavigation extends React.Component<Props> {
 
+  static styledComponentName: string = 'BottomNavigation';
+
   static defaultProps: Partial<Props> = {
     selectedIndex: 0,
   };

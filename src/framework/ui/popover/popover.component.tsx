@@ -47,6 +47,8 @@ const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
 
 export class Popover extends React.Component<Props, State> {
 
+  static styledComponentName: string = 'Popover';
+
   static defaultProps: Partial<Props> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     visible: false,

@@ -30,11 +30,13 @@ interface RadioProps {
   onChange?: (selected: boolean) => void;
 }
 
-const Text = styled<TextProps>(TextComponent, 'Text');
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
 
 export class Radio extends React.Component<Props> {
+
+  static styledComponentName: string = 'Radio';
 
   private onPress = () => {
     if (this.props.onChange) {

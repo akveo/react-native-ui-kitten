@@ -34,13 +34,15 @@ interface ButtonProps {
   children?: React.ReactText;
 }
 
-const Text = styled<TextProps>(TextComponent, 'Text');
+const Text = styled<TextProps>(TextComponent);
 
 export type Props = ButtonProps & StyledComponentProps & TouchableOpacityProps;
 
 const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
 
 export class Button extends React.Component<Props> {
+
+  static styledComponentName: string = 'Button';
 
   static defaultProps: Partial<Props> = {
     iconAlignment: 'left',
