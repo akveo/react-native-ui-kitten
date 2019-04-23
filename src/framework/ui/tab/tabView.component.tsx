@@ -48,7 +48,6 @@ export class TabView extends React.Component<Props> {
 
   static defaultProps: Partial<Props> = {
     selectedIndex: 0,
-    contentWidth: Dimensions.get('window').width,
   };
 
   private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
