@@ -27,8 +27,6 @@ import {
   FlexStyleProps,
 } from '../common/props';
 
-const Text = styled<TextProps>(TextComponent);
-
 type IconElement = React.ReactElement<ImageProps>;
 type TextElement = React.ReactElement<TextProps>;
 type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
@@ -44,7 +42,11 @@ interface InputProps {
 
 export type Props = InputProps & StyledComponentProps & TextInputProps;
 
+const Text = styled<TextProps>(TextComponent);
+
 export class Input extends React.Component<Props> {
+
+  static styledComponentName: string = 'Input';
 
   private onFocus = (event: InputFocusEvent) => {
     this.props.dispatch([Interaction.FOCUSED]);

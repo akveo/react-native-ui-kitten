@@ -123,6 +123,8 @@ const Input = styled<InputProps>(InputComponent);
 const Layout = styled<LayoutProps>(LayoutComponent);
 const List = styled<ListProps>(ListComponent);
 const ListItem = styled<ListItemProps>(ListItemComponent);
+const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);
+const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
 const Popover = styled<PopoverProps>(PopoverComponent);
 const Radio = styled<RadioProps>(RadioComponent);
 const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);
@@ -133,8 +135,6 @@ const Toggle = styled<ToggleProps>(ToggleComponent);
 const Tooltip = styled<TooltipProps>(TooltipComponent);
 const TopNavigation = styled<TopNavigationBarProps>(TopNavigationComponent);
 const TopNavigationAction = styled<TopNavigationBarActionProps>(TopNavigationActionComponent);
-const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
-const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);
 
 export {
   Avatar,

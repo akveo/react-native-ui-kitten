@@ -21,6 +21,8 @@ export type Props = RadioGroupProps & StyledComponentProps & ViewProps;
 
 export class RadioGroup extends React.Component<Props> {
 
+  static styledComponentName: string = 'RadioGroup';
+
   static defaultProps: Partial<Props> = {
     selectedIndex: -1,
   };

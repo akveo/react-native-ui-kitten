@@ -42,6 +42,8 @@ const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
 
 export class Button extends React.Component<Props> {
 
+  static styledComponentName: string = 'Button';
+
   static defaultProps: Partial<Props> = {
     iconAlignment: 'left',
   };

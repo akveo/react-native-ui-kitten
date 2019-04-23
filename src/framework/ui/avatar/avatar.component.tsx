@@ -20,6 +20,8 @@ export type Props = AvatarProps & StyledComponentProps & ImageProps;
 
 export class Avatar extends React.Component<Props> {
 
+  static styledComponentName: string = 'Avatar';
+
   private getComponentStyle = (source: StyleType): StyleType => {
     const { roundCoefficient, ...componentStyle } = source;
 

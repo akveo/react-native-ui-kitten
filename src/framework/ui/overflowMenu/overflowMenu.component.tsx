@@ -36,6 +36,8 @@ export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverPro
 
 export class OverflowMenu extends React.Component<Props> {
 
+  static styledComponentName: string = 'OverflowMenu';
+
   static defaultProps: Partial<Props> = {
     indicatorOffset: 12,
   };

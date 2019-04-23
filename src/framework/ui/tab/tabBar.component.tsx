@@ -24,6 +24,8 @@ export type Props = TabBarProps & StyledComponentProps & ViewProps;
 
 export class TabBar extends React.Component<Props> {
 
+  static styledComponentName: string = 'TabBar';
+
   static defaultProps: Partial<Props> = {
     selectedIndex: 0,
   };

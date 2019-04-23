@@ -32,6 +32,12 @@ export interface Context {
 
 export const styled = <P extends object>(Component: React.ComponentClass<P>) => {
 
+  // @ts-ignore
+  if (!Component.styledComponentName) {
+    console.warn('Styled components should specify corresponding style name.');
+    return null;
+  }
+
   type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
   type WrappedProps = P & Props;
   type WrappingElement = React.ReactElement<WrappingProps>;
@@ -51,9 +57,9 @@ export const styled = <P extends object>(Component: React.ComponentClass<P>) => 
     private service: StyleConsumerService;
 
     private onInit = (context: Context) => {
-      const displayName: string = Component.displayName || Component.name;
 
-      this.service = new StyleConsumerService(displayName, context);
+      // @ts-ignore
+      this.service = new StyleConsumerService(Component.styledComponentName, context);
       this.defaultProps = this.service.createDefaultProps();
 
       this.init = true;

@@ -52,6 +52,8 @@ export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndex
 
 export class ListItem extends React.Component<Props> {
 
+  static styledComponentName: string = 'ListItem';
+
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
       this.props.onPress(this.props.index, event);

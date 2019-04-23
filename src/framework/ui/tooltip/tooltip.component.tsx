@@ -33,6 +33,8 @@ export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'co
 
 export class Tooltip extends React.Component<Props> {
 
+  static styledComponentName: string = 'Tooltip';
+
   static defaultProps: Partial<Props> = {
     indicatorOffset: 8,
   };

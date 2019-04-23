@@ -30,6 +30,8 @@ export type Props = TopNavigationProps & StyledComponentProps & ViewProps;
 
 export class TopNavigation extends React.Component<Props> {
 
+  static styledComponentName: string = 'TopNavigation';
+
   private getComponentStyle = (style: StyleType): StyleType => {
     const { alignment: alignmentValue, leftControl, rightControls } = this.props;
 

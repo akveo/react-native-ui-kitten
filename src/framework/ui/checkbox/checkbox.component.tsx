@@ -39,6 +39,8 @@ export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps
 
 export class CheckBox extends React.Component<Props> {
 
+  static styledComponentName: string = 'CheckBox';
+
   private onPress = () => {
     this.props.dispatch([]);
 

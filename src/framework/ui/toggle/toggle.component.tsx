@@ -31,6 +31,8 @@ export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
 
 export class Toggle extends React.Component<Props> implements PanResponderCallbacks {
 
+  static styledComponentName: string = 'Toggle';
+
   private panResponder: PanResponderInstance;
   private thumbWidthAnimation: Animated.Value;
   private thumbTranslateAnimation: Animated.Value;

@@ -36,6 +36,8 @@ export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
 
 export class Radio extends React.Component<Props> {
 
+  static styledComponentName: string = 'Radio';
+
   private onPress = () => {
     if (this.props.onChange) {
       this.props.onChange(!this.props.checked);

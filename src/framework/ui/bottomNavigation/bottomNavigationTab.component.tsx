@@ -23,6 +23,8 @@ export type Props = BottomNavigatorTabProps & StyledComponentProps & TouchableOp
 
 export class BottomNavigationTab extends React.Component<Props> {
 
+  static styledComponentName: string = 'BottomNavigationTab';
+
   private onPress = () => {
     if (this.props.onSelect) {
       this.props.onSelect(!this.props.selected);

@@ -30,6 +30,8 @@ export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpaci
 
 export class OverflowMenuItem extends React.Component<Props> {
 
+  static styledComponentName: string = 'OverflowMenuItem';
+
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
       this.props.onPress(this.props.index, event);
