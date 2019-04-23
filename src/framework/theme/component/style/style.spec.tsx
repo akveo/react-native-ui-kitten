@@ -65,7 +65,7 @@ interface TestComponentProps extends StyledComponentProps, ViewProps {
 }
 
 class Test extends React.Component<TestComponentProps> {
-  static displayName: string = 'Radio';
+  static styledComponentName: string = 'Radio';
 
   static defaultProps: Partial<TestComponentProps> = {
     testID: styleConsumerTestId,
@@ -78,7 +78,19 @@ class Test extends React.Component<TestComponentProps> {
   }
 }
 
+class NonStyledComponent extends React.Component<TestComponentProps> {
+  public render(): React.ReactElement<ViewProps> {
+    return undefined;
+  }
+}
+
 describe('@style: ui component checks', () => {
+
+  it('* returns null if has no static `styledComponentName` property', () => {
+    const styledComponent = styled(NonStyledComponent);
+
+    expect(styledComponent).toBeNull();
+  });
 
   it('* static methods are copied over', async () => {
     // @ts-ignore: test-case
