@@ -30,7 +30,7 @@ interface RadioProps {
   onChange?: (selected: boolean) => void;
 }
 
-const Text = styled<TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent, 'Text');
 
 export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
 

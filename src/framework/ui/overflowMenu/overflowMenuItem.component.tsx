@@ -24,7 +24,7 @@ export interface OverflowMenuItemType {
   index?: number;
 }
 
-const Text = styled<TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent, 'Text');
 
 export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpacityIndexedProps;
 

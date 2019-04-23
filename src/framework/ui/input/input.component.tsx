@@ -27,7 +27,7 @@ import {
   FlexStyleProps,
 } from '../common/props';
 
-const Text = styled<TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent, 'Text');
 
 type IconElement = React.ReactElement<ImageProps>;
 type TextElement = React.ReactElement<TextProps>;

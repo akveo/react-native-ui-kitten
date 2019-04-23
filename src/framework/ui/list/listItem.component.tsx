@@ -46,7 +46,7 @@ interface CustomContentProps {
 
 type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
 
-const Text = styled<TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent, 'Text');
 
 export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndexedProps;
 

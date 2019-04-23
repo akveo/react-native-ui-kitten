@@ -30,7 +30,7 @@ export interface Context {
   theme: ThemeType;
 }
 
-export const styled = <P extends object>(Component: React.ComponentClass<P>) => {
+export const styled = <P extends object>(Component: React.ComponentClass<P>, name: string) => {
 
   type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
   type WrappedProps = P & Props;
@@ -51,9 +51,7 @@ export const styled = <P extends object>(Component: React.ComponentClass<P>) => 
     private service: StyleConsumerService;
 
     private onInit = (context: Context) => {
-      const displayName: string = Component.displayName || Component.name;
-
-      this.service = new StyleConsumerService(displayName, context);
+      this.service = new StyleConsumerService(name, context);
       this.defaultProps = this.service.createDefaultProps();
 
       this.init = true;

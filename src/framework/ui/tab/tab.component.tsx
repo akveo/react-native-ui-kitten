@@ -28,7 +28,7 @@ interface TabProps {
   children?: React.ReactElement<any>;
 }
 
-const Text = styled<TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent, 'Text');
 
 export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
 

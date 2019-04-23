@@ -26,8 +26,8 @@ interface TooltipProps {
   children: React.ReactElement<any>;
 }
 
-const Popover = styled<PopoverProps>(PopoverComponent);
-const Text = styled<TextProps>(TextComponent);
+const Popover = styled<PopoverProps>(PopoverComponent, 'Popover');
+const Text = styled<TextProps>(TextComponent, 'Text');
 
 export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'content'>;
 

@@ -29,8 +29,8 @@ interface OverflowMenuProps {
   onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
-const Popover = styled<PopoverProps>(PopoverComponent);
-const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
+const Popover = styled<PopoverProps>(PopoverComponent, 'Popover');
+const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent, 'OverflowMenuItem');
 
 export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverProps, 'content'>;
 

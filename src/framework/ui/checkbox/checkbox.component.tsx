@@ -33,7 +33,7 @@ interface CheckBoxProps {
   onChange?: (checked: boolean, indeterminate: boolean) => void;
 }
 
-const Text = styled<TextProps>(TextComponent);
+const Text = styled<TextProps>(TextComponent, 'Text');
 
 export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps;
 
