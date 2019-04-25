@@ -27,6 +27,8 @@ import {
   Frame,
   Placement,
   Placements,
+  MarginOffsets,
+  getMarginOffsets,
 } from './type';
 
 interface PopoverProps {
@@ -52,6 +54,7 @@ export class Popover extends React.Component<Props, State> {
   static defaultProps: Partial<Props> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     visible: false,
+    scrollOffset: 0,
   };
 
   public state: State = {
@@ -69,11 +72,17 @@ export class Popover extends React.Component<Props, State> {
   }
 
   public componentDidUpdate(prevProps: Props, prevState: State): void {
-    const { visible, placement, onRequestClose } = this.props;
+    const {
+      visible,
+      placement,
+      onRequestClose,
+      children,
+    } = this.props;
 
     if (prevProps.visible !== visible) {
       if (visible) {
-        const { origin: popoverPosition } = this.getPopoverFrame(placement);
+        const marginOffsets: MarginOffsets = getMarginOffsets(children.props.style);
+        const { origin: popoverPosition } = this.getPopoverFrame(placement, marginOffsets);
         const style: FlexStyle = {
           left: popoverPosition.x,
           top: popoverPosition.y,
@@ -102,13 +111,13 @@ export class Popover extends React.Component<Props, State> {
     };
   };
 
-  private getPopoverFrame = (rawPlacement: string | Placement): Frame => {
+  private getPopoverFrame = (rawPlacement: string | Placement, offsets: MarginOffsets): Frame => {
     const { layout } = this.state;
     const { [TAG_CONTENT]: popoverFrame, [TAG_CHILD]: childFrame } = layout;
 
     const placement: Placement = Placements.parse(rawPlacement, PLACEMENT_DEFAULT);
 
-    return placement.frame(popoverFrame, childFrame);
+    return placement.frame(popoverFrame, childFrame, offsets);
   };
 
   private onMeasure = (layout: MeasureResult) => {
@@ -118,7 +127,7 @@ export class Popover extends React.Component<Props, State> {
   private renderPopoverElement = (children: React.ReactElement<any>, style: StyleType): MeasuringElement => {
     const { placement, ...derivedProps } = this.props;
 
-    const measuringProps: MeasuringElementProps = { tag: TAG_CONTENT };
+    const measuringProps: MeasuringElementProps = { tag: TAG_CONTENT, scrollOffset: this.props.scrollOffset };
 
     const popoverPlacement: Placement = Placements.parse(placement, PLACEMENT_DEFAULT);
     const indicatorPlacement: Placement = popoverPlacement.reverse();

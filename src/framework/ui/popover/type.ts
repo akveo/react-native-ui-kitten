@@ -1,3 +1,29 @@
+import { StyleType } from '@kitten/theme';
+
+export interface MarginOffsets {
+  offsetRight: number;
+  offsetLeft: number;
+  offsetTop: number;
+  offsetBottom: number;
+}
+
+const emptyMarginOffsets: MarginOffsets = {
+  offsetBottom: 0,
+  offsetRight: 0,
+  offsetTop: 0,
+  offsetLeft: 0,
+};
+
+const marginKeys: string[] = [
+  'marginHorizontal',
+  'marginLeft',
+  'marginRight',
+  'marginVertical',
+  'marginBottom',
+  'marginTop',
+  'margin',
+];
+
 export class Point {
 
   readonly x: number;
@@ -41,9 +67,9 @@ export class Frame {
   /**
    * Creates new frame aligned to left of other
    */
-  public leftOf(other: Frame): Frame {
+  public leftOf(other: Frame, leftOffset: number): Frame {
     return new Frame(
-      other.origin.x - this.size.width,
+      other.origin.x - this.size.width + leftOffset,
       this.origin.y,
       this.size.width,
       this.size.height,
@@ -53,10 +79,10 @@ export class Frame {
   /**
    * Creates new frame aligned to top of other
    */
-  public topOf(other: Frame): Frame {
+  public topOf(other: Frame, topOffset: number): Frame {
     return new Frame(
       this.origin.x,
-      other.origin.y - this.size.height,
+      other.origin.y - this.size.height + topOffset,
       this.size.width,
       this.size.height,
     );
@@ -65,9 +91,9 @@ export class Frame {
   /**
    * Creates new frame aligned to right of other
    */
-  public rightOf(other: Frame): Frame {
+  public rightOf(other: Frame, rightOffset: number): Frame {
     return new Frame(
-      other.origin.x + other.size.width,
+      other.origin.x + other.size.width - rightOffset,
       this.origin.y,
       this.size.width,
       this.size.height,
@@ -77,10 +103,10 @@ export class Frame {
   /**
    * Creates new frame aligned to bottom of other
    */
-  public bottomOf(other: Frame): Frame {
+  public bottomOf(other: Frame, bottomOffset: number): Frame {
     return new Frame(
       this.origin.x,
-      other.origin.y + other.size.height,
+      other.origin.y + other.size.height - bottomOffset,
       this.size.width,
       this.size.height,
     );
@@ -122,7 +148,7 @@ export class Frame {
 export interface Placement {
   rawValue: string;
 
-  frame(source: Frame, other: Frame): Frame;
+  frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame;
 
   flex(): FlexPlacement;
 
@@ -141,8 +167,8 @@ export class Placements {
   static LEFT: Placement = new class implements Placement {
     rawValue: string = 'left';
 
-    frame(source: Frame, other: Frame): Frame {
-      return source.leftOf(other).centerVerticalOf(other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      return source.leftOf(other, marginOffsets.offsetLeft).centerVerticalOf(other);
     }
 
     flex(): FlexPlacement {
@@ -164,12 +190,12 @@ export class Placements {
   static LEFT_START: Placement = new class implements Placement {
     rawValue: string = 'left start';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x,
-        origin.y - (other.size.height - size.height) / 2,
+        origin.x + marginOffsets.offsetLeft,
+        origin.y - (other.size.height - size.height) / 2 + marginOffsets.offsetTop,
         size.width,
         size.height,
       );
@@ -194,12 +220,12 @@ export class Placements {
   static LEFT_END: Placement = new class implements Placement {
     rawValue = 'left end';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x,
-        origin.y + (other.size.height - size.height) / 2,
+        origin.x + marginOffsets.offsetLeft,
+        origin.y + (other.size.height - size.height) / 2 - marginOffsets.offsetBottom,
         size.width,
         size.height,
       );
@@ -224,8 +250,8 @@ export class Placements {
   static TOP: Placement = new class implements Placement {
     rawValue = 'top';
 
-    frame(source: Frame, other: Frame): Frame {
-      return source.topOf(other).centerHorizontalOf(other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      return source.topOf(other, marginOffsets.offsetTop).centerHorizontalOf(other);
     }
 
     flex(): FlexPlacement {
@@ -247,12 +273,12 @@ export class Placements {
   static TOP_START: Placement = new class implements Placement {
     rawValue = 'top start';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x - (other.size.width - size.width) / 2,
-        origin.y,
+        origin.x - (other.size.width - size.width) / 2 + marginOffsets.offsetLeft,
+        origin.y + marginOffsets.offsetTop,
         size.width,
         size.height,
       );
@@ -277,12 +303,12 @@ export class Placements {
   static TOP_END: Placement = new class implements Placement {
     rawValue = 'top end';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x + (other.size.width - size.width) / 2,
-        origin.y,
+        origin.x + (other.size.width - size.width) / 2 - marginOffsets.offsetRight,
+        origin.y + marginOffsets.offsetTop,
         size.width,
         size.height,
       );
@@ -307,8 +333,8 @@ export class Placements {
   static RIGHT: Placement = new class implements Placement {
     rawValue = 'right';
 
-    frame(source: Frame, other: Frame): Frame {
-      return source.rightOf(other).centerVerticalOf(other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      return source.rightOf(other, marginOffsets.offsetRight).centerVerticalOf(other);
     }
 
     flex(): FlexPlacement {
@@ -330,12 +356,12 @@ export class Placements {
   static RIGHT_START: Placement = new class implements Placement {
     rawValue = 'right start';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x,
-        origin.y - (other.size.height - size.height) / 2,
+        origin.x - marginOffsets.offsetRight,
+        origin.y - (other.size.height - size.height) / 2 + marginOffsets.offsetTop,
         size.width,
         size.height,
       );
@@ -360,12 +386,12 @@ export class Placements {
   static RIGHT_END: Placement = new class implements Placement {
     rawValue = 'right end';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x,
-        origin.y + (other.size.height - size.height) / 2,
+        origin.x - marginOffsets.offsetRight,
+        origin.y + (other.size.height - size.height) / 2 - marginOffsets.offsetBottom,
         size.width,
         size.height,
       );
@@ -390,8 +416,8 @@ export class Placements {
   static BOTTOM: Placement = new class implements Placement {
     rawValue = 'bottom';
 
-    frame(source: Frame, other: Frame): Frame {
-      return source.bottomOf(other).centerHorizontalOf(other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      return source.bottomOf(other, marginOffsets.offsetBottom).centerHorizontalOf(other);
     }
 
     flex(): FlexPlacement {
@@ -413,12 +439,12 @@ export class Placements {
   static BOTTOM_START: Placement = new class implements Placement {
     rawValue = 'bottom start';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x - (other.size.width - size.width) / 2,
-        origin.y,
+        origin.x - (other.size.width - size.width) / 2 + marginOffsets.offsetLeft,
+        origin.y - marginOffsets.offsetBottom,
         size.width,
         size.height,
       );
@@ -443,12 +469,12 @@ export class Placements {
   static BOTTOM_END: Placement = new class implements Placement {
     rawValue = 'bottom end';
 
-    frame(source: Frame, other: Frame): Frame {
-      const { origin, size } = this.parent().frame(source, other);
+    frame(source: Frame, other: Frame, marginOffsets: MarginOffsets): Frame {
+      const { origin, size } = this.parent().frame(source, other, emptyMarginOffsets);
 
       return new Frame(
-        origin.x + (other.size.width - size.width) / 2,
-        origin.y,
+        origin.x + (other.size.width - size.width) / 2 - marginOffsets.offsetRight,
+        origin.y - marginOffsets.offsetBottom,
         size.width,
         size.height,
       );
@@ -510,4 +536,52 @@ export class Placements {
 
     return rawValue !== undefined;
   }
+}
+
+export function getMarginOffsets(originStyle: StyleType): MarginOffsets {
+  const margins: StyleType = Object.keys(originStyle)
+    .reduce((acc: StyleType, key: string) => {
+      if (marginKeys.some((style: string) => style === key)) {
+        acc[key] = originStyle[key];
+      }
+      return acc;
+    }, {});
+
+  return Object.keys(margins)
+    .reduce((acc: MarginOffsets, key: string) => {
+      switch (key) {
+        case 'margin':
+          acc.offsetBottom = acc.offsetBottom + margins[key];
+          acc.offsetTop = acc.offsetTop + margins[key];
+          acc.offsetLeft = acc.offsetLeft + margins[key];
+          acc.offsetRight = acc.offsetRight + margins[key];
+          break;
+        case 'marginVertical':
+          acc.offsetBottom = acc.offsetBottom + margins[key];
+          acc.offsetTop = acc.offsetTop + margins[key];
+          break;
+        case 'marginHorizontal':
+          acc.offsetLeft = acc.offsetLeft + margins[key];
+          acc.offsetRight = acc.offsetRight + margins[key];
+          break;
+        case 'marginLeft':
+          acc.offsetLeft = acc.offsetLeft + margins[key];
+          break;
+        case 'marginRight':
+          acc.offsetRight = acc.offsetRight + margins[key];
+          break;
+        case 'marginTop':
+          acc.offsetTop = acc.offsetTop + margins[key];
+          break;
+        case 'marginBottom':
+          acc.offsetBottom = acc.offsetBottom + margins[key];
+          break;
+      }
+      return acc;
+    }, {
+      offsetBottom: 0,
+      offsetTop: 0,
+      offsetLeft: 0,
+      offsetRight: 0,
+    });
 }

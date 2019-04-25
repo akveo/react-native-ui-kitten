@@ -1,10 +1,18 @@
 import {
   Frame,
+  MarginOffsets,
   Placement,
   Placements,
 } from './type';
 
 describe('@type: popover model checks', () => {
+
+  const marginOffsets: MarginOffsets = {
+    offsetLeft: 2,
+    offsetTop: 2,
+    offsetRight: 2,
+    offsetBottom: 2,
+  };
 
   describe('* frame', () => {
 
@@ -12,31 +20,31 @@ describe('@type: popover model checks', () => {
     const rhsFrame: Frame = new Frame(4, 4, 2, 2);
 
     it('* left of', () => {
-      const { origin: { x, y } } = rhsFrame.leftOf(lhsFrame);
+      const { origin: { x, y } } = rhsFrame.leftOf(lhsFrame, marginOffsets.offsetLeft);
 
-      expect(x).toEqual(0);
+      expect(x).toEqual(2);
       expect(y).toEqual(4);
     });
 
     it('* top of', () => {
-      const { origin: { x, y } } = rhsFrame.topOf(lhsFrame);
+      const { origin: { x, y } } = rhsFrame.topOf(lhsFrame, marginOffsets.offsetTop);
 
       expect(x).toEqual(4);
-      expect(y).toEqual(0);
+      expect(y).toEqual(2);
     });
 
     it('* right of', () => {
-      const { origin: { x, y } } = rhsFrame.rightOf(lhsFrame);
+      const { origin: { x, y } } = rhsFrame.rightOf(lhsFrame, marginOffsets.offsetRight);
 
-      expect(x).toEqual(4);
+      expect(x).toEqual(2);
       expect(y).toEqual(4);
     });
 
     it('* bottom of', () => {
-      const { origin: { x, y } } = rhsFrame.bottomOf(lhsFrame);
+      const { origin: { x, y } } = rhsFrame.bottomOf(lhsFrame, marginOffsets.offsetBottom);
 
       expect(x).toEqual(4);
-      expect(y).toEqual(4);
+      expect(y).toEqual(2);
     });
 
     it('* center horizontal of', () => {
@@ -61,87 +69,87 @@ describe('@type: popover model checks', () => {
     const rhsFrame: Frame = new Frame(6, 6, 2, 2);
 
     it('* left', () => {
-      const { origin: { x, y } } = Placements.LEFT.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.LEFT.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(0);
+      expect(x).toEqual(2);
       expect(y).toEqual(3);
     });
 
     it('* left start', () => {
-      const { origin: { x, y } } = Placements.LEFT_START.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.LEFT_START.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(0);
-      expect(y).toEqual(2);
-    });
-
-    it('* left end', () => {
-      const { origin: { x, y } } = Placements.LEFT_END.frame(rhsFrame, lhsFrame);
-
-      expect(x).toEqual(0);
+      expect(x).toEqual(2);
       expect(y).toEqual(4);
     });
 
+    it('* left end', () => {
+      const { origin: { x, y } } = Placements.LEFT_END.frame(rhsFrame, lhsFrame, marginOffsets);
+
+      expect(x).toEqual(2);
+      expect(y).toEqual(2);
+    });
+
     it('* top', () => {
-      const { origin: { x, y } } = Placements.TOP.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.TOP.frame(rhsFrame, lhsFrame, marginOffsets);
 
       expect(x).toEqual(3);
-      expect(y).toEqual(0);
+      expect(y).toEqual(2);
     });
 
     it('* top start', () => {
-      const { origin: { x, y } } = Placements.TOP_START.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.TOP_START.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(2);
-      expect(y).toEqual(0);
+      expect(x).toEqual(4);
+      expect(y).toEqual(2);
     });
 
     it('* top end', () => {
-      const { origin: { x, y } } = Placements.TOP_END.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.TOP_END.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(4);
-      expect(y).toEqual(0);
+      expect(x).toEqual(2);
+      expect(y).toEqual(2);
     });
 
     it('* right', () => {
-      const { origin: { x, y } } = Placements.RIGHT.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.RIGHT.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(6);
+      expect(x).toEqual(4);
       expect(y).toEqual(3);
     });
 
     it('* right start', () => {
-      const { origin: { x, y } } = Placements.RIGHT_START.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.RIGHT_START.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(6);
-      expect(y).toEqual(2);
-    });
-
-    it('* right end', () => {
-      const { origin: { x, y } } = Placements.RIGHT_END.frame(rhsFrame, lhsFrame);
-
-      expect(x).toEqual(6);
+      expect(x).toEqual(4);
       expect(y).toEqual(4);
     });
 
+    it('* right end', () => {
+      const { origin: { x, y } } = Placements.RIGHT_END.frame(rhsFrame, lhsFrame, marginOffsets);
+
+      expect(x).toEqual(4);
+      expect(y).toEqual(2);
+    });
+
     it('* bottom', () => {
-      const { origin: { x, y } } = Placements.BOTTOM.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.BOTTOM.frame(rhsFrame, lhsFrame, marginOffsets);
 
       expect(x).toEqual(3);
-      expect(y).toEqual(6);
+      expect(y).toEqual(4);
     });
 
     it('* bottom start', () => {
-      const { origin: { x, y } } = Placements.BOTTOM_START.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.BOTTOM_START.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(2);
-      expect(y).toEqual(6);
+      expect(x).toEqual(4);
+      expect(y).toEqual(4);
     });
 
     it('* bottom end', () => {
-      const { origin: { x, y } } = Placements.BOTTOM_END.frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.BOTTOM_END.frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(4);
-      expect(y).toEqual(6);
+      expect(x).toEqual(2);
+      expect(y).toEqual(4);
     });
 
   });
@@ -152,87 +160,87 @@ describe('@type: popover model checks', () => {
     const rhsFrame: Frame = new Frame(6, 6, 2, 2);
 
     it('* left', () => {
-      const { origin: { x, y } } = Placements.LEFT.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.LEFT.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(6);
+      expect(x).toEqual(4);
       expect(y).toEqual(3);
     });
 
     it('* left start', () => {
-      const { origin: { x, y } } = Placements.LEFT_START.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.LEFT_START.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(6);
-      expect(y).toEqual(2);
-    });
-
-    it('* left end', () => {
-      const { origin: { x, y } } = Placements.LEFT_END.reverse().frame(rhsFrame, lhsFrame);
-
-      expect(x).toEqual(6);
+      expect(x).toEqual(4);
       expect(y).toEqual(4);
     });
 
+    it('* left end', () => {
+      const { origin: { x, y } } = Placements.LEFT_END.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
+
+      expect(x).toEqual(4);
+      expect(y).toEqual(2);
+    });
+
     it('* top', () => {
-      const { origin: { x, y } } = Placements.TOP.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.TOP.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
       expect(x).toEqual(3);
-      expect(y).toEqual(6);
+      expect(y).toEqual(4);
     });
 
     it('* top start', () => {
-      const { origin: { x, y } } = Placements.TOP_START.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.TOP_START.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(2);
-      expect(y).toEqual(6);
+      expect(x).toEqual(4);
+      expect(y).toEqual(4);
     });
 
     it('* top end', () => {
-      const { origin: { x, y } } = Placements.TOP_END.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.TOP_END.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(4);
-      expect(y).toEqual(6);
+      expect(x).toEqual(2);
+      expect(y).toEqual(4);
     });
 
     it('* right', () => {
-      const { origin: { x, y } } = Placements.RIGHT.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.RIGHT.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(0);
+      expect(x).toEqual(2);
       expect(y).toEqual(3);
     });
 
     it('* right start', () => {
-      const { origin: { x, y } } = Placements.RIGHT_START.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.RIGHT_START.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(0);
-      expect(y).toEqual(2);
-    });
-
-    it('* right end', () => {
-      const { origin: { x, y } } = Placements.RIGHT_END.reverse().frame(rhsFrame, lhsFrame);
-
-      expect(x).toEqual(0);
+      expect(x).toEqual(2);
       expect(y).toEqual(4);
     });
 
+    it('* right end', () => {
+      const { origin: { x, y } } = Placements.RIGHT_END.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
+
+      expect(x).toEqual(2);
+      expect(y).toEqual(2);
+    });
+
     it('* bottom', () => {
-      const { origin: { x, y } } = Placements.BOTTOM.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.BOTTOM.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
       expect(x).toEqual(3);
-      expect(y).toEqual(0);
+      expect(y).toEqual(2);
     });
 
     it('* bottom start', () => {
-      const { origin: { x, y } } = Placements.BOTTOM_START.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.BOTTOM_START.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(2);
-      expect(y).toEqual(0);
+      expect(x).toEqual(4);
+      expect(y).toEqual(2);
     });
 
     it('* bottom end', () => {
-      const { origin: { x, y } } = Placements.BOTTOM_END.reverse().frame(rhsFrame, lhsFrame);
+      const { origin: { x, y } } = Placements.BOTTOM_END.reverse().frame(rhsFrame, lhsFrame, marginOffsets);
 
-      expect(x).toEqual(4);
-      expect(y).toEqual(0);
+      expect(x).toEqual(2);
+      expect(y).toEqual(2);
     });
 
   });
