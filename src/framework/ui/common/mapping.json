@@ -1169,7 +1169,7 @@
       "appearances": {
         "default": {
           "mapping": {
-            "paddingVertical": 14,
+            "paddingVertical": 8,
             "paddingHorizontal": 8,
             "minHeight": 48,
             "borderRadius": 8,
