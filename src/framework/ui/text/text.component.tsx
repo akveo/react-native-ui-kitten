@@ -10,6 +10,7 @@ import {
 
 interface TextProps {
   category?: string;
+  status?: string;
   children?: React.ReactText;
 }
 
@@ -21,8 +22,10 @@ export class Text extends React.Component<Props> {
 
   private getComponentStyle = (source: StyleType): StyleType => {
     return {
-      color: source.color,
       fontSize: source.fontSize,
+      lineHeight: source.lineHeight,
+      fontWeight: source.fontWeight,
+      color: source.color,
     };
   };
 
