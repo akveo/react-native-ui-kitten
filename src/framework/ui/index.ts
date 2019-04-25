@@ -75,6 +75,7 @@ import {
 import {
   TabView,
   Props as TabViewProps,
+  ChildProps as TabViewChildProps,
 } from './tab/tabView.component';
 import {
   Text as TextComponent,
@@ -182,6 +183,7 @@ export {
   TabProps,
   TabBarProps,
   TabViewProps,
+  TabViewChildProps,
   TextProps,
   TooltipProps,
   ToggleProps,
