@@ -2008,8 +2008,17 @@
           }
         },
         "appearances": {
-          "default": {
+          "dark": {
             "default": true
+          },
+          "light": {
+            "default": false
+          },
+          "hintLight": {
+            "default": false
+          },
+          "hintDark": {
+            "default": false
           }
         },
         "variantGroups": {
@@ -2078,10 +2087,9 @@
         "states": {}
       },
       "appearances": {
-        "default": {
+        "dark": {
           "mapping": {
-            "color": "text-primary",
-            "fontWeight": "normal"
+            "color": "font-primary-color"
           },
           "variantGroups": {
             "category": {
@@ -2127,15 +2135,18 @@
               },
               "p1": {
                 "fontSize": 15,
-                "lineHeight": 20
+                "lineHeight": 20,
+                "fontWeight": "normal"
               },
               "p2": {
                 "fontSize": 13,
-                "lineHeight": 16
+                "lineHeight": 16,
+                "fontWeight": "normal"
               },
               "c1": {
                 "fontSize": 11,
-                "lineHeight": 16
+                "lineHeight": 16,
+                "fontWeight": "normal"
               },
               "c2": {
                 "fontSize": 11,
@@ -2171,6 +2182,17 @@
               }
             }
           }
+        },
+        "light": {
+          "mapping": {
+            "color": "font-light-color"
+          }
+        },
+        "hintLight": {
+          "color": "color-basic-400"
+        },
+        "hintDark": {
+          "color": "color-basic-600"
         }
       }
     },
