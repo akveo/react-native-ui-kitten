@@ -5,11 +5,9 @@ import {
   ScrollViewProps,
   LayoutChangeEvent,
   StyleSheet,
-  Dimensions,
+  ViewProps,
 } from 'react-native';
 import { ScrollEvent } from '../common/type';
-
-const { width: screenWidth } = Dimensions.get('window');
 
 type ChildElement = React.ReactElement<any>;
 
@@ -91,13 +89,13 @@ export class ViewPager extends React.Component<Props> {
   };
 
   private renderComponentChild = (element: ChildElement, index: number): ChildElement => {
-    const { shouldLoadComponent, style } = this.props;
+    const { shouldLoadComponent } = this.props;
 
     const contentView: ChildElement | null = shouldLoadComponent(index) ? element : null;
 
     return React.createElement(View, {
       key: index,
-      style: { ...styles.contentViewContainer, ...StyleSheet.flatten(style) },
+      style: styles.contentViewContainer,
     }, contentView);
   };
 
@@ -106,13 +104,15 @@ export class ViewPager extends React.Component<Props> {
   };
 
   public render(): React.ReactNode {
-    const { contentContainerStyle, children, style, ...derivedProps } = this.props;
+    const { contentContainerStyle, children, ...derivedProps } = this.props;
     const componentChildren: ChildElement[] = this.renderComponentChildren(children);
+
+    const widthPercent: number = 100 * componentChildren.length;
 
     return (
       <ScrollView
         bounces={false}
-        contentContainerStyle={contentContainerStyle}
+        contentContainerStyle={[{ width: `${widthPercent}%` }, contentContainerStyle]}
         showsHorizontalScrollIndicator={false}
         {...derivedProps}
         ref={this.scrollViewRef}
@@ -131,6 +131,6 @@ export class ViewPager extends React.Component<Props> {
 const styles = StyleSheet.create({
   contentViewContainer: {
     flex: 1,
-    width: screenWidth,
+    width: '100%',
   },
 });
