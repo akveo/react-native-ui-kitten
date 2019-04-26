@@ -2189,10 +2189,14 @@
           }
         },
         "hintLight": {
-          "color": "color-basic-400"
+          "mapping": {
+            "color": "color-basic-400"
+          }
         },
         "hintDark": {
-          "color": "color-basic-600"
+          "mapping": {
+            "color": "color-basic-600"
+          }
         }
       }
     },
