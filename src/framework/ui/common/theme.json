@@ -96,6 +96,7 @@
   "outline-disabled-color":	"transparent",
   "font-primary-family": "",
   "font-primary-color": "#0D1C2E",
+  "font-light-color": "#FFFFFF",
   "font-primary-disabled-color": "#C8CEDB",
   "font-primary-regular-text-size": 14,
   "font-primary-regular-text-weight": "600",

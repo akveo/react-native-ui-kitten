@@ -1994,16 +1994,31 @@
       "meta": {
         "scope": "all",
         "parameters": {
-          "color": {
-            "type": "string"
-          },
           "fontSize": {
             "type": "number"
+          },
+          "lineHeight": {
+            "type": "number"
+          },
+          "fontWeight": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
           }
         },
         "appearances": {
-          "primary": {
+          "dark": {
             "default": true
+          },
+          "light": {
+            "default": false
+          },
+          "hintLight": {
+            "default": false
+          },
+          "hintDark": {
+            "default": false
           }
         },
         "variantGroups": {
@@ -2026,42 +2041,161 @@
             "h6": {
               "default": false
             },
-            "body": {
+            "s1": {
+              "default": false
+            },
+            "s2": {
+              "default": false
+            },
+            "p1": {
               "default": true
+            },
+            "p2": {
+              "default": false
+            },
+            "c1": {
+              "default": false
+            },
+            "c2": {
+              "default": false
+            },
+            "overline": {
+              "default": false
+            },
+            "label": {
+              "default": false
+            }
+          },
+          "status": {
+            "primary": {
+              "default": false
+            },
+            "success": {
+              "default": false
+            },
+            "info": {
+              "default": false
+            },
+            "warning": {
+              "default": false
+            },
+            "danger": {
+              "default": false
             }
           }
         },
         "states": {}
       },
       "appearances": {
-        "primary": {
+        "dark": {
           "mapping": {
-            "color": "text-primary"
+            "color": "font-primary-color"
           },
           "variantGroups": {
             "category": {
               "h1": {
-                "fontSize": 64
+                "fontSize": 72,
+                "lineHeight": 80,
+                "fontWeight": "800"
               },
               "h2": {
-                "fontSize": 40
+                "fontSize": 60,
+                "lineHeight": 72,
+                "fontWeight": "800"
               },
               "h3": {
-                "fontSize": 32
+                "fontSize": 48,
+                "lineHeight": 56,
+                "fontWeight": "800"
               },
               "h4": {
-                "fontSize": 24
+                "fontSize": 32,
+                "lineHeight": 40,
+                "fontWeight": "800"
               },
               "h5": {
-                "fontSize": 16
+                "fontSize": 24,
+                "lineHeight": 32,
+                "fontWeight": "800"
               },
               "h6": {
-                "fontSize": 14
+                "fontSize": 20,
+                "lineHeight": 28,
+                "fontWeight": "800"
               },
-              "body": {
-                "fontSize": 16
+              "s1": {
+                "fontSize": 15,
+                "lineHeight": 24,
+                "fontWeight": "600"
+              },
+              "s2": {
+                "fontSize": 13,
+                "lineHeight": 24,
+                "fontWeight": "600"
+              },
+              "p1": {
+                "fontSize": 15,
+                "lineHeight": 20,
+                "fontWeight": "normal"
+              },
+              "p2": {
+                "fontSize": 13,
+                "lineHeight": 16,
+                "fontWeight": "normal"
+              },
+              "c1": {
+                "fontSize": 11,
+                "lineHeight": 16,
+                "fontWeight": "normal"
+              },
+              "c2": {
+                "fontSize": 11,
+                "lineHeight": 16,
+                "fontWeight": "600"
+              },
+              "overline": {
+                "fontSize": 11,
+                "lineHeight": 16,
+                "fontWeight": "bold"
+              },
+              "label": {
+                "fontSize": 12,
+                "lineHeight": 16,
+                "fontWeight": "bold"
+              }
+            },
+            "status": {
+              "primary": {
+                "color": "color-primary-500"
+              },
+              "success": {
+                "color": "color-success-500"
+              },
+              "info": {
+                "color": "color-info-500"
+              },
+              "warning": {
+                "color": "color-warning-500"
+              },
+              "danger": {
+                "color": "color-danger-500"
               }
             }
+          }
+        },
+        "light": {
+          "mapping": {
+            "color": "font-light-color"
+          }
+        },
+        "hintLight": {
+          "mapping": {
+            "color": "color-basic-400"
+          }
+        },
+        "hintDark": {
+          "mapping": {
+            "color": "color-basic-600"
           }
         }
       }

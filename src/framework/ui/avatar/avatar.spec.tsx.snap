@@ -100,6 +100,7 @@ exports[`@avatar: matches snapshot * appearance * default 1`] = `
       "color-warning-800": "#945400",
       "color-warning-900": "#703C00",
       "color-white": "#FFFFFF",
+      "font-light-color": "#FFFFFF",
       "font-primary-color": "#0D1C2E",
       "font-primary-disabled-color": "#C8CEDB",
       "font-primary-family": "",
