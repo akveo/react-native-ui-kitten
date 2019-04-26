@@ -91,13 +91,13 @@ export class ViewPager extends React.Component<Props> {
   };
 
   private renderComponentChild = (element: ChildElement, index: number): ChildElement => {
-    const { shouldLoadComponent } = this.props;
+    const { shouldLoadComponent, style } = this.props;
 
     const contentView: ChildElement | null = shouldLoadComponent(index) ? element : null;
 
     return React.createElement(View, {
       key: index,
-      style: styles.contentViewContainer,
+      style: { ...styles.contentViewContainer, ...StyleSheet.flatten(style) },
     }, contentView);
   };
 
@@ -106,7 +106,7 @@ export class ViewPager extends React.Component<Props> {
   };
 
   public render(): React.ReactNode {
-    const { contentContainerStyle, children, ...derivedProps } = this.props;
+    const { contentContainerStyle, children, style, ...derivedProps } = this.props;
     const componentChildren: ChildElement[] = this.renderComponentChildren(children);
 
     return (
