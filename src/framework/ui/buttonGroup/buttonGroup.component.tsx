@@ -9,10 +9,6 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { Props as ButtonProps } from '../button/button.component';
-import {
-  ButtonStyleProvider,
-  ButtonStyleProviders,
-} from './type';
 
 type ButtonElement = React.ReactElement<ButtonProps>;
 
@@ -27,45 +23,34 @@ export class ButtonGroup extends React.Component<Props> {
 
   static styledComponentName: string = 'ButtonGroup';
 
-  private styleProvider: ButtonStyleProvider = ButtonStyleProviders.DEFAULT;
-
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
-      buttonBorderRadius,
+      buttonBorderRightColor,
+      buttonBorderRightWidth,
       ...containerParameters
     } = style;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+      },
       button: {
-        borderRadius: buttonBorderRadius,
+        borderRightColor: buttonBorderRightColor,
+        borderRightWidth: buttonBorderRightWidth,
       },
     };
-  };
-
-  private getChildComponentStyle = (index: number, source: StyleType): StyleType => {
-    const { children } = this.props;
-
-    switch (index) {
-      case 0:
-        return this.styleProvider.start(source);
-      case React.Children.count(children) - 1:
-        return this.styleProvider.end(source);
-      default:
-        return this.styleProvider.center(source);
-    }
   };
 
   private renderComponentChild = (element: ButtonElement, index: number, style: StyleType): ButtonElement => {
     const { appearance, size, children } = this.props;
     const { style: elementStyle, ...derivedProps } = element.props;
 
-    const isSingle: boolean = React.Children.count(children) === 1;
-    const positionedStyle: StyleType = isSingle ? style : this.getChildComponentStyle(index, style);
+    const isLast: boolean = React.Children.count(children) - 1 === index;
+    const testStyle = isLast ? styles.lastButton : { ...styles.button, ...style };
 
     return React.cloneElement(element, {
       ...derivedProps,
-      style: [elementStyle, positionedStyle],
+      style: [elementStyle, testStyle],
       key: index,
       appearance: appearance,
       size: size,
@@ -99,5 +84,16 @@ export class ButtonGroup extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    overflow: 'hidden',
+  },
+  button: {
+    borderRadius: 0,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+  },
+  lastButton: {
+    borderWidth: 0,
+    borderRadius: 0,
   },
 });

@@ -42,7 +42,7 @@ describe('@button-group: component checks', () => {
       <Mock appearance={groupAppearance}>
         <Button appearance='default'/>
         <Button/>
-        <Button size='outline'/>
+        <Button appearance='outline'/>
       </Mock>,
     );
 

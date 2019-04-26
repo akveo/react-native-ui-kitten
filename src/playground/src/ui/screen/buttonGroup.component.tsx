@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Image,
+  ScrollView,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -20,6 +21,7 @@ import {
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
 const APPEARANCE: string = 'filled';
+const APPEARANCE_OUTLINE: string = 'outline';
 const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
 interface State {
@@ -36,13 +38,17 @@ class ButtonGroupScreen extends React.Component<Props, State> {
   };
 
   public render(): React.ReactNode {
+    const { themedStyle } = this.props;
+
     return (
-      <View style={this.props.themedStyle.container}>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Icon</Text>
-          <View style={this.props.themedStyle.containerPreview}>
+      <ScrollView
+        style={themedStyle.container}
+        contentContainerStyle={themedStyle.content}>
+        <View style={themedStyle.containerSection}>
+          <Text style={themedStyle.textDescription}>Icon</Text>
+          <View style={themedStyle.containerPreview}>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='giant'>
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
@@ -50,7 +56,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='large'>
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
@@ -58,7 +64,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='medium'>
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
@@ -66,7 +72,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='small'>
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
@@ -74,7 +80,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='tiny'>
               <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}/>
@@ -83,11 +89,11 @@ class ButtonGroupScreen extends React.Component<Props, State> {
             </ButtonGroup>
           </View>
         </View>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Text</Text>
-          <View style={this.props.themedStyle.containerPreview}>
+        <View style={themedStyle.containerSection}>
+          <Text style={themedStyle.textDescription}>Text</Text>
+          <View style={themedStyle.containerPreview}>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='giant'>
               <Button>L</Button>
@@ -95,7 +101,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button>R</Button>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='large'>
               <Button>L</Button>
@@ -103,7 +109,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button>R</Button>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='medium'>
               <Button>L</Button>
@@ -111,7 +117,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button>R</Button>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='small'>
               <Button>L</Button>
@@ -119,7 +125,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               <Button>R</Button>
             </ButtonGroup>
             <ButtonGroup
-              style={this.props.themedStyle.component}
+              style={themedStyle.component}
               appearance={APPEARANCE}
               size='tiny'>
               <Button>L</Button>
@@ -128,13 +134,61 @@ class ButtonGroupScreen extends React.Component<Props, State> {
             </ButtonGroup>
           </View>
         </View>
-      </View>
+        <View style={themedStyle.containerSection}>
+          <Text style={themedStyle.textDescription}>Outline Icon + Text</Text>
+          <View style={themedStyle.containerPreview}>
+            <ButtonGroup
+              style={themedStyle.component}
+              appearance={APPEARANCE_OUTLINE}
+              size='giant'>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>L</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>M</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>R</Button>
+            </ButtonGroup>
+            <ButtonGroup
+              style={themedStyle.component}
+              appearance={APPEARANCE_OUTLINE}
+              size='large'>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>L</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>M</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>R</Button>
+            </ButtonGroup>
+            <ButtonGroup
+              style={themedStyle.component}
+              appearance={APPEARANCE_OUTLINE}
+              size='medium'>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>L</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>M</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>R</Button>
+            </ButtonGroup>
+            <ButtonGroup
+              style={themedStyle.component}
+              appearance={APPEARANCE_OUTLINE}
+              size='small'>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>L</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>M</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>R</Button>
+            </ButtonGroup>
+            <ButtonGroup
+              style={themedStyle.component}
+              appearance={APPEARANCE_OUTLINE}
+              size='tiny'>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>L</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>M</Button>
+              <Button icon={(style: StyleType) => <Image source={ICON} style={style}/>}>R</Button>
+            </ButtonGroup>
+          </View>
+        </View>
+      </ScrollView>
     );
   }
 }
 
 export default withStyles(ButtonGroupScreen, (theme: ThemeType) => ({
   container: {
+    flex: 1,
+  },
+  content: {
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
