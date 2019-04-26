@@ -15,7 +15,7 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
         "flexDirection": "row",
         "minHeight": 48,
         "paddingHorizontal": 8,
-        "paddingVertical": 14,
+        "paddingVertical": 8,
         "width": "100%",
       }
     }
@@ -200,7 +200,7 @@ exports[`@input: matches snapshot * appearance * label + caption 1`] = `
         "flexDirection": "row",
         "minHeight": 48,
         "paddingHorizontal": 8,
-        "paddingVertical": 14,
+        "paddingVertical": 8,
         "width": "100%",
       }
     }
@@ -385,7 +385,7 @@ exports[`@input: matches snapshot * interaction * stateless 1`] = `
         "flexDirection": "row",
         "minHeight": 48,
         "paddingHorizontal": 8,
-        "paddingVertical": 14,
+        "paddingVertical": 8,
         "width": "100%",
       }
     }
