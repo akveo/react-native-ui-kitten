@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  Dimensions,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {

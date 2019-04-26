@@ -5,9 +5,11 @@ import {
   ScrollViewProps,
   LayoutChangeEvent,
   StyleSheet,
-  ViewProps,
+  Dimensions,
 } from 'react-native';
 import { ScrollEvent } from '../common/type';
+
+const { width: screenWidth } = Dimensions.get('window');
 
 type ChildElement = React.ReactElement<any>;
 
@@ -110,7 +112,7 @@ export class ViewPager extends React.Component<Props> {
     return (
       <ScrollView
         bounces={false}
-        contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
+        contentContainerStyle={contentContainerStyle}
         showsHorizontalScrollIndicator={false}
         {...derivedProps}
         ref={this.scrollViewRef}
@@ -127,10 +129,8 @@ export class ViewPager extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-  },
   contentViewContainer: {
-    width: '100%',
+    flex: 1,
+    width: screenWidth,
   },
 });
