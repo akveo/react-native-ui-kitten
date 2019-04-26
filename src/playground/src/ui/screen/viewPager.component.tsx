@@ -35,7 +35,7 @@ class ViewPagerScreen extends React.Component<Props, State> {
     return (
       <ViewPager
         selectedIndex={this.state.selectedIndex}
-        style={this.props.themedStyle.container}
+        contentContainerStyle={this.props.themedStyle.container}
         onSelect={this.onIndexChange}>
         <View style={this.props.themedStyle.tabContainer}>
           <Text>Tab 1</Text>
