@@ -17,7 +17,7 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
       "backgroundColor": "#3366FF",
       "borderRadius": 8,
       "flexDirection": "row",
-      "justifyContent": "space-evenly",
+      "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 40,
       "paddingHorizontal": 10,
@@ -149,7 +149,7 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
       "backgroundColor": "#3366FF",
       "borderRadius": 8,
       "flexDirection": "row",
-      "justifyContent": "space-evenly",
+      "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 40,
       "paddingHorizontal": 10,
@@ -297,7 +297,7 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
       "backgroundColor": "#3366FF",
       "borderRadius": 8,
       "flexDirection": "row",
-      "justifyContent": "space-evenly",
+      "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 40,
       "paddingHorizontal": 10,
@@ -428,11 +428,10 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "flexGrow": 1,
         "fontSize": 14,
         "fontWeight": "800",
+        "lineHeight": 16,
         "marginHorizontal": 10,
-        "textAlign": "center",
       }
     }
   >
@@ -458,7 +457,7 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
       "backgroundColor": "#3366FF",
       "borderRadius": 8,
       "flexDirection": "row",
-      "justifyContent": "space-evenly",
+      "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 40,
       "paddingHorizontal": 10,
@@ -574,11 +573,10 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "flexGrow": 1,
         "fontSize": 14,
         "fontWeight": "800",
+        "lineHeight": 16,
         "marginHorizontal": 10,
-        "textAlign": "center",
       }
     }
   >
@@ -604,7 +602,7 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
       "backgroundColor": "#3366FF",
       "borderRadius": 8,
       "flexDirection": "row",
-      "justifyContent": "space-evenly",
+      "justifyContent": "center",
       "minHeight": 40,
       "minWidth": 40,
       "paddingHorizontal": 10,
