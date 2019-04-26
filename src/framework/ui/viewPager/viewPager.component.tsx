@@ -89,13 +89,13 @@ export class ViewPager extends React.Component<Props> {
   };
 
   private renderComponentChild = (element: ChildElement, index: number): ChildElement => {
-    const { shouldLoadComponent } = this.props;
+    const { shouldLoadComponent, contentContainerStyle } = this.props;
 
     const contentView: ChildElement | null = shouldLoadComponent(index) ? element : null;
 
     return React.createElement(View, {
       key: index,
-      style: styles.contentViewContainer,
+      style: [styles.contentViewContainer, contentContainerStyle],
     }, contentView);
   };
 
@@ -107,10 +107,12 @@ export class ViewPager extends React.Component<Props> {
     const { contentContainerStyle, children, ...derivedProps } = this.props;
     const componentChildren: ChildElement[] = this.renderComponentChildren(children);
 
+    const widthPercent: number = 100 * componentChildren.length;
+
     return (
       <ScrollView
         bounces={false}
-        contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
+        contentContainerStyle={{ width: `${widthPercent}%` }}
         showsHorizontalScrollIndicator={false}
         {...derivedProps}
         ref={this.scrollViewRef}
@@ -127,10 +129,8 @@ export class ViewPager extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-  },
   contentViewContainer: {
+    flex: 1,
     width: '100%',
   },
 });
