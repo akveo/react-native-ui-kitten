@@ -21,6 +21,12 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
           ]
         }
         text="Menu Item 1"
+        textStyle={
+          Object {
+            "color": "blue",
+            "fontSize": 24,
+          }
+        }
       />
       <ForwardRef(WrappingElement)
         disabled={true}
@@ -82,6 +88,10 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
       Object {
         "icon": [Function],
         "text": "Menu Item 1",
+        "textStyle": Object {
+          "color": "blue",
+          "fontSize": 24,
+        },
       },
       Object {
         "disabled": true,
@@ -236,6 +246,12 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
           ]
         }
         text="Menu Item 1"
+        textStyle={
+          Object {
+            "color": "blue",
+            "fontSize": 24,
+          }
+        }
       />
     </View>
   }
@@ -246,6 +262,10 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
       Object {
         "icon": [Function],
         "text": "Menu Item 1",
+        "textStyle": Object {
+          "color": "blue",
+          "fontSize": 24,
+        },
       },
     ]
   }
