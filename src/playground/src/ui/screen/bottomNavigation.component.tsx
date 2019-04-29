@@ -69,11 +69,13 @@ function navigateToTab(routeName: string, navigate: (routeName: string) => void)
 function renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {
   const routes: NavigationRoute[] = props.navigation.state.routes;
   const index: number = props.navigation.state.index;
+  const indicatorStyle: StyleType | null = index === 1 ? { backgroundColor: 'red' } : null;
 
   return (
     <BottomNavigation
       appearance={APPEARANCE}
       selectedIndex={index}
+      indicatorStyle={indicatorStyle}
       onSelect={(selectedIndex: number) =>
         navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>
       <BottomNavigationTab
