@@ -1164,7 +1164,7 @@ exports[`@top-navigation-bar/action * texts (styled) 1`] = `
           "color": "#0D1C2E",
           "fontSize": 24,
           "fontWeight": "600",
-          "lineHeight": 29.28,
+          "lineHeight": 24,
           "textAlign": "left",
         }
       }

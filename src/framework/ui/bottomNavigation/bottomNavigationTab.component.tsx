@@ -13,7 +13,6 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { processTextStyles } from '../common/utils';
 
 interface BottomNavigatorTabProps {
   title?: string;
@@ -36,10 +35,7 @@ export class BottomNavigationTab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const {
-      style: derivedContainerStyle,
-      titleStyle: derivedTitleStyle,
-    } = this.props;
+    const { style, titleStyle } = this.props;
     const {
       iconWidth,
       iconHeight,
@@ -53,12 +49,10 @@ export class BottomNavigationTab extends React.Component<Props> {
       ...containerStyle
     } = source;
 
-    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle);
-
     return {
       container: {
         ...containerStyle,
-        ...StyleSheet.flatten(derivedContainerStyle),
+        ...StyleSheet.flatten(style),
         ...styles.container,
       },
       icon: {
@@ -74,7 +68,7 @@ export class BottomNavigationTab extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...titleStyle,
+        ...StyleSheet.flatten(titleStyle),
         ...styles.text,
       },
     };

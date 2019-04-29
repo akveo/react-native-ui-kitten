@@ -21,7 +21,6 @@ import {
   Props as PopoverProps,
 } from '../popover/popover.component';
 import { Omit } from '../common/type';
-import { processTextStyles } from '../common/utils';
 
 interface TooltipProps {
   text: string;
@@ -44,7 +43,7 @@ export class Tooltip extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { textStyle: derivedTextStyle } = this.props;
+    const { textStyle } = this.props;
     const {
       popoverPaddingHorizontal,
       popoverPaddingVertical,
@@ -59,8 +58,6 @@ export class Tooltip extends React.Component<Props> {
       textLineHeight,
       textColor,
     } = source;
-
-    const textStyle: StyleType | null = processTextStyles(derivedTextStyle);
 
     return {
       popover: {
@@ -83,7 +80,7 @@ export class Tooltip extends React.Component<Props> {
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,
-        ...textStyle,
+        ...StyleSheet.flatten(textStyle),
         ...styles.text,
       },
     };

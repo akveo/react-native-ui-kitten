@@ -17,7 +17,6 @@ import {
   TopNavigationAlignment,
   TopNavigationAlignments,
 } from './type';
-import { processTextStyles } from '@kitten/ui/common/utils';
 
 type ActionElement = React.ReactElement<ActionProps>;
 
@@ -42,8 +41,8 @@ export class TopNavigation extends React.Component<Props> {
       alignment: alignmentValue,
       leftControl,
       rightControls,
-      titleStyle: derivedTitleStyle,
-      subtitleStyle: derivedSubtitleStyle,
+      titleStyle,
+      subtitleStyle,
     } = this.props;
 
     const {
@@ -66,8 +65,6 @@ export class TopNavigation extends React.Component<Props> {
     const leftControlsCount: number = React.Children.count(leftControl);
     const rightControlsCount: number = React.Children.count(rightControls);
     const actionFrameWidth: number = actionWidth + actionMarginHorizontal;
-    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle);
-    const subtitleStyle: StyleType | null = processTextStyles(derivedSubtitleStyle);
 
     const alignment: TopNavigationAlignment = TopNavigationAlignments.parse(alignmentValue);
 
@@ -86,7 +83,7 @@ export class TopNavigation extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
-        ...titleStyle,
+        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
       },
       subtitle: {
@@ -95,7 +92,7 @@ export class TopNavigation extends React.Component<Props> {
         color: subtitleColor,
         fontWeight: subtitleFontWeight,
         lineHeight: subtitleLineHeight,
-        ...subtitleStyle,
+        ...StyleSheet.flatten(subtitleStyle),
         ...styles.subtitle,
       },
       action: {

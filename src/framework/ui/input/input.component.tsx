@@ -24,7 +24,6 @@ import {
   Props as TextProps,
 } from '../text/text.component';
 import { FlexStyleProps } from '../common/props';
-import { processTextStyles } from '../common/utils';
 
 type IconElement = React.ReactElement<ImageProps>;
 type TextElement = React.ReactElement<TextProps>;
@@ -69,15 +68,10 @@ export class Input extends React.Component<Props> {
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
       style: derivedContainerStyle,
-      textStyle: derivedTextStyle,
-      labelStyle: derivedLabelStyle,
-      captionTextStyle: derivedCaptionTextStyle,
+      textStyle,
+      labelStyle,
+      captionTextStyle,
     } = this.props;
-
-    // TODO: ask somebody about this case
-    const textStyle: StyleType | null = processTextStyles(derivedTextStyle, true);
-    const labelStyle: StyleType | null = processTextStyles(derivedLabelStyle, true);
-    const captionTextStyle: StyleType | null = processTextStyles(derivedCaptionTextStyle, true);
 
     const {
       rest: inputContainerStyle,
@@ -129,7 +123,7 @@ export class Input extends React.Component<Props> {
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,
-        ...textStyle,
+        ...StyleSheet.flatten(textStyle),
         ...styles.text,
       },
       icon: {
@@ -145,7 +139,7 @@ export class Input extends React.Component<Props> {
         lineHeight: labelLineHeight,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
-        ...labelStyle,
+        ...StyleSheet.flatten(labelStyle),
         ...styles.label,
       },
       captionIcon: {
@@ -160,7 +154,7 @@ export class Input extends React.Component<Props> {
         fontWeight: captionTextFontWeight,
         lineHeight: captionTextLineHeight,
         color: captionTextColor,
-        ...captionTextStyle,
+        ...StyleSheet.flatten(captionTextStyle),
         ...styles.captionLabel,
       },
     };

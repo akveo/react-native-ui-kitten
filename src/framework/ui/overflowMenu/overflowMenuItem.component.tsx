@@ -18,7 +18,6 @@ import {
   Props as TextProps,
 } from '../text/text.component';
 import { TouchableOpacityIndexedProps } from '../common/type';
-import { processTextStyles } from '../common/utils';
 
 export interface OverflowMenuItemType {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
@@ -65,7 +64,7 @@ export class OverflowMenuItem extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { textStyle: derivedTextStyle } = this.props;
+    const { textStyle } = this.props;
     const {
       textMarginHorizontal,
       textFontSize,
@@ -79,8 +78,6 @@ export class OverflowMenuItem extends React.Component<Props> {
       ...containerStyle
     } = style;
 
-    const textStyle: StyleType | null = processTextStyles(derivedTextStyle);
-
     return {
       container: {
         ...containerStyle,
@@ -93,7 +90,7 @@ export class OverflowMenuItem extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...textStyle,
+        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,

@@ -16,7 +16,6 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import { processTextStyles } from '../common/utils';
 
 interface TabProps {
   title?: string;
@@ -46,8 +45,7 @@ export class Tab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { titleStyle: derivedTitleStyle } = this.props;
-    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle);
+    const { titleStyle } = this.props;
 
     const {
       textMarginVertical,
@@ -80,7 +78,7 @@ export class Tab extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...titleStyle,
+        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
       },
     };

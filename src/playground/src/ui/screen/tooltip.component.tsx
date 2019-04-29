@@ -161,7 +161,7 @@ export default withStyles(TooltipScreen, (theme: ThemeType) => ({
     // tooltip customization place
   },
   bottomStartText: {
-    fontSize: 24,
+    fontSize: 16,
   },
   tip: {
     justifyContent: 'center',

@@ -21,7 +21,6 @@ import {
   Props as TextProps,
 } from '../text/text.component';
 import { TouchableOpacityIndexedProps } from '../common/type';
-import { processTextStyles } from '../common/utils';
 
 interface ListDerivedProps {
   index?: number;
@@ -89,7 +88,7 @@ export class ListItem extends React.Component<Props> {
 
   private getComponentStyle = (source: StyleType): StyleType => {
     // @ts-ignore: will be not executed if `titleStyle` and `descriptionStyle` properties are provided
-    const { titleStyle: derivedTitleStyle, descriptionStyle: derivedDescriptionStyle } = this.props;
+    const { titleStyle, descriptionStyle } = this.props;
     const {
       iconWidth,
       iconHeight,
@@ -107,9 +106,6 @@ export class ListItem extends React.Component<Props> {
       accessoryMarginHorizontal,
       ...containerParameters
     } = source;
-
-    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle);
-    const descriptionStyle: StyleType | null = processTextStyles(derivedDescriptionStyle);
 
     return {
       container: {
@@ -129,7 +125,7 @@ export class ListItem extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
-        ...titleStyle,
+        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
       },
       description: {
@@ -137,7 +133,7 @@ export class ListItem extends React.Component<Props> {
         fontSize: descriptionFontSize,
         lineHeight: descriptionLineHeight,
         marginHorizontal: descriptionMarginHorizontal,
-        ...descriptionStyle,
+        ...StyleSheet.flatten(descriptionStyle),
         ...styles.description,
       },
       accessory: {
