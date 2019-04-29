@@ -1,9 +1,11 @@
 import React from 'react';
 import {
+  StyleProp,
   StyleSheet,
   TextStyle,
   View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -17,6 +19,7 @@ type TabElement = React.ReactElement<TabProps>;
 interface TabBarProps {
   children: TabElement | TabElement[];
   selectedIndex?: number;
+  indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
 }
 
@@ -51,6 +54,7 @@ export class TabBar extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { indicatorStyle } = this.props;
     const {
       indicatorHeight,
       indicatorBorderRadius,
@@ -64,6 +68,7 @@ export class TabBar extends React.Component<Props> {
         height: indicatorHeight,
         borderRadius: indicatorBorderRadius,
         backgroundColor: indicatorBackgroundColor,
+        ...StyleSheet.flatten(indicatorStyle),
       },
     };
   };
