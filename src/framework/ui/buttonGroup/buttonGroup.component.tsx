@@ -3,16 +3,13 @@ import {
   StyleSheet,
   View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import { Props as ButtonProps } from '../button/button.component';
-import {
-  ButtonStyleProvider,
-  ButtonStyleProviders,
-} from './type';
 
 type ButtonElement = React.ReactElement<ButtonProps>;
 
@@ -27,54 +24,46 @@ export class ButtonGroup extends React.Component<Props> {
 
   static styledComponentName: string = 'ButtonGroup';
 
-  private styleProvider: ButtonStyleProvider = ButtonStyleProviders.DEFAULT;
-
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
-      buttonBorderRadius,
+      buttonBorderRightColor,
+      buttonBorderRightWidth,
       ...containerParameters
     } = style;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+        ...styles.container,
+      },
       button: {
-        borderRadius: buttonBorderRadius,
+        borderRightColor: buttonBorderRightColor,
+        borderRightWidth: buttonBorderRightWidth,
+        ...styles.button,
       },
     };
   };
 
-  private getChildComponentStyle = (index: number, source: StyleType): StyleType => {
+  private isLastElement = (index: number): boolean => {
     const { children } = this.props;
 
-    switch (index) {
-      case 0:
-        return this.styleProvider.start(source);
-      case React.Children.count(children) - 1:
-        return this.styleProvider.end(source);
-      default:
-        return this.styleProvider.center(source);
-    }
+    return index === React.Children.count(children) - 1;
   };
 
   private renderComponentChild = (element: ButtonElement, index: number, style: StyleType): ButtonElement => {
-    const { appearance, size, children } = this.props;
-    const { style: elementStyle, ...derivedProps } = element.props;
+    const { appearance, size } = this.props;
 
-    const isSingle: boolean = React.Children.count(children) === 1;
-    const positionedStyle: StyleType = isSingle ? style : this.getChildComponentStyle(index, style);
+    const additionalStyle: ViewStyle = this.isLastElement(index) ? styles.lastButton : style;
 
     return React.cloneElement(element, {
-      ...derivedProps,
-      style: [elementStyle, positionedStyle],
       key: index,
+      style: [element.props.style, additionalStyle],
       appearance: appearance,
       size: size,
     });
   };
 
-  private renderComponentChildren = (source: ButtonElement | ButtonElement[],
-                                     style: StyleType): ButtonElement[] => {
-
+  private renderComponentChildren = (source: ButtonElement | ButtonElement[], style: StyleType): ButtonElement[] => {
     return React.Children.map(source, (element: ButtonElement, index: number): ButtonElement => {
       return this.renderComponentChild(element, index, style);
     });
@@ -89,7 +78,7 @@ export class ButtonGroup extends React.Component<Props> {
     return (
       <View
         {...derivedProps}
-        style={[container, style, styles.container]}>
+        style={[container, style]}>
         {componentChildren}
       </View>
     );
@@ -99,5 +88,16 @@ export class ButtonGroup extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    overflow: 'hidden',
+  },
+  button: {
+    borderRadius: 0,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+  },
+  lastButton: {
+    borderWidth: 0,
+    borderRadius: 0,
   },
 });

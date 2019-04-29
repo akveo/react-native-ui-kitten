@@ -649,8 +649,20 @@
       "meta": {
         "scope": "all",
         "parameters": {
-          "buttonBorderRadius": {
+          "borderRadius": {
             "type": "number"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "buttonBorderRightColor": {
+            "type": "string"
+          },
+          "buttonBorderRightWidth": {
+            "type": "string"
           }
         },
         "appearances": {
@@ -685,7 +697,10 @@
       "appearances": {
         "filled": {
           "mapping": {
-            "buttonBorderRadius": 8
+            "borderRadius": 8,
+            "borderColor": "opacity-transparent",
+            "buttonBorderRightColor": "color-primary-600",
+            "buttonBorderRightWidth": 1
           },
           "variantGroups": {
             "size": {
@@ -698,7 +713,12 @@
           }
         },
         "outline": {
-          "mapping": {}
+          "mapping": {
+            "borderWidth": 2,
+            "borderColor": "color-primary-500",
+            "buttonBorderRightColor": "color-primary-500",
+            "buttonBorderRightWidth": 2
+          }
         },
         "ghost": {
           "mapping": {}
