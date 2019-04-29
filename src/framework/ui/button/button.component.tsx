@@ -77,6 +77,7 @@ export class Button extends React.Component<Props> {
     const {
       textColor,
       textFontSize,
+      textLineHeight,
       textFontWeight,
       textMarginHorizontal,
       iconWidth,
@@ -100,6 +101,7 @@ export class Button extends React.Component<Props> {
       text: {
         color: textColor,
         fontSize: textFontSize,
+        lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         marginHorizontal: textMarginHorizontal,
         ...derivedTextStyle,
@@ -165,12 +167,9 @@ export class Button extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    flexGrow: 1,
-    textAlign: 'center',
-  },
+  text: {},
   icon: {},
 });
