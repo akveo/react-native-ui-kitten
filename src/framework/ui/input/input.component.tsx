@@ -24,11 +24,11 @@ import {
   Props as TextProps,
 } from '../text/text.component';
 import { FlexStyleProps } from '../common/props';
+import { processTextStyles } from '../common/utils';
 
 type IconElement = React.ReactElement<ImageProps>;
 type TextElement = React.ReactElement<TextProps>;
 type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
-const DEFAULT_TEXT_SIZE_DEPENDENCY_COEFFICIENT: number = 1.22;
 
 interface InputProps {
   status?: string;
@@ -66,25 +66,6 @@ export class Input extends React.Component<Props> {
     }
   };
 
-  private processTextStyles = (style: StyleType): StyleType | null => {
-    if (!style) {
-      return null;
-    }
-    if (!('fontSize' in style) && ('lineHeight' in style)) {
-      return {
-        ...style,
-        fontSize: style.lineHeight / DEFAULT_TEXT_SIZE_DEPENDENCY_COEFFICIENT,
-      };
-    } else if (('fontSize' in style) && !('lineHeight' in style)) {
-      return {
-        ...style,
-        lineHeight: style.fontSize * DEFAULT_TEXT_SIZE_DEPENDENCY_COEFFICIENT,
-      };
-    } else {
-      return style;
-    }
-  };
-
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
       style: derivedContainerStyle,
@@ -94,9 +75,9 @@ export class Input extends React.Component<Props> {
     } = this.props;
 
     // TODO: ask somebody about this case
-    const textStyle: StyleType | null = this.processTextStyles(derivedTextStyle);
-    const labelStyle: StyleType | null = this.processTextStyles(derivedLabelStyle);
-    const captionTextStyle: StyleType | null = this.processTextStyles(derivedCaptionTextStyle);
+    const textStyle: StyleType | null = processTextStyles(derivedTextStyle);
+    const labelStyle: StyleType | null = processTextStyles(derivedLabelStyle);
+    const captionTextStyle: StyleType | null = processTextStyles(derivedCaptionTextStyle);
 
     const {
       rest: inputContainerStyle,

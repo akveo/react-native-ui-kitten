@@ -6,14 +6,18 @@ import {
   ImageProps,
   TextProps,
   TouchableOpacityProps,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import { processTextStyles } from '../common/utils';
 
 interface BottomNavigatorTabProps {
   title?: string;
+  titleStyle?: StyleProp<TextStyle>;
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
@@ -33,6 +37,10 @@ export class BottomNavigationTab extends React.Component<Props> {
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
+      style: derivedContainerStyle,
+      titleStyle: derivedTitleStyle,
+    } = this.props;
+    const {
       iconWidth,
       iconHeight,
       iconMarginVertical,
@@ -45,9 +53,12 @@ export class BottomNavigationTab extends React.Component<Props> {
       ...containerStyle
     } = source;
 
+    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle, false);
+
     return {
       container: {
         ...containerStyle,
+        ...StyleSheet.flatten(derivedContainerStyle),
         ...styles.container,
       },
       icon: {
@@ -63,6 +74,7 @@ export class BottomNavigationTab extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
+        ...titleStyle,
         ...styles.text,
       },
     };

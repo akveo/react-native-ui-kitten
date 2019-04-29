@@ -78,6 +78,10 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
         navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>
       <BottomNavigationTab
         title='Screen 1'
+        titleStyle={{
+          fontSize: 22,
+          lineHeight: 24,
+        }}
         icon={(style: StyleType) => (
           <Image
             source={getIconSource(1, index === 0)}
