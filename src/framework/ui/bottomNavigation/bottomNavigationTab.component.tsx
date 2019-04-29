@@ -53,7 +53,7 @@ export class BottomNavigationTab extends React.Component<Props> {
       ...containerStyle
     } = source;
 
-    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle, false);
+    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle);
 
     return {
       container: {

@@ -7,6 +7,8 @@ import {
   ImageProps,
   GestureResponderEvent,
   StyleSheet,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   styled,
@@ -19,6 +21,7 @@ import {
   Props as TextProps,
 } from '../text/text.component';
 import { TouchableOpacityIndexedProps } from '../common/type';
+import { processTextStyles } from '../common/utils';
 
 interface ListDerivedProps {
   index?: number;
@@ -32,12 +35,14 @@ interface TemplateBaseProps {
 
 interface TemplateTitleProps extends Partial<TemplateBaseProps> {
   title: string;
+  titleStyle?: StyleProp<TextStyle>;
   description?: string;
 }
 
 interface TemplateDescriptionProps extends Partial<TemplateBaseProps> {
   title?: string;
   description: string;
+  descriptionStyle?: StyleProp<TextStyle>;
 }
 
 interface CustomContentProps {
@@ -83,6 +88,8 @@ export class ListItem extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    // @ts-ignore: will be not executed if `titleStyle` and `descriptionStyle` properties are provided
+    const { titleStyle: derivedTitleStyle, descriptionStyle: derivedDescriptionStyle } = this.props;
     const {
       iconWidth,
       iconHeight,
@@ -100,6 +107,9 @@ export class ListItem extends React.Component<Props> {
       accessoryMarginHorizontal,
       ...containerParameters
     } = source;
+
+    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle);
+    const descriptionStyle: StyleType | null = processTextStyles(derivedDescriptionStyle);
 
     return {
       container: {
@@ -119,6 +129,7 @@ export class ListItem extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
+        ...titleStyle,
         ...styles.title,
       },
       description: {
@@ -126,6 +137,7 @@ export class ListItem extends React.Component<Props> {
         fontSize: descriptionFontSize,
         lineHeight: descriptionLineHeight,
         marginHorizontal: descriptionMarginHorizontal,
+        ...descriptionStyle,
         ...styles.description,
       },
       accessory: {

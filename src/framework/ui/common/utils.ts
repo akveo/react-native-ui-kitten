@@ -3,7 +3,7 @@ import { StyleType } from '@kitten/theme';
 const DEFAULT_TEXT_SIZE_DEPENDENCY_COEFFICIENT: number = 1.22;
 
 export const processTextStyles = (style: StyleType,
-                                  allowSizeFormatting: boolean = true): StyleType | null => {
+                                  allowSizeFormatting: boolean = false): StyleType | null => {
 
   if (!style) {
     return null;

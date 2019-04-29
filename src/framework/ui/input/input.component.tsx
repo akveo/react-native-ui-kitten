@@ -75,9 +75,9 @@ export class Input extends React.Component<Props> {
     } = this.props;
 
     // TODO: ask somebody about this case
-    const textStyle: StyleType | null = processTextStyles(derivedTextStyle);
-    const labelStyle: StyleType | null = processTextStyles(derivedLabelStyle);
-    const captionTextStyle: StyleType | null = processTextStyles(derivedCaptionTextStyle);
+    const textStyle: StyleType | null = processTextStyles(derivedTextStyle, true);
+    const labelStyle: StyleType | null = processTextStyles(derivedLabelStyle, true);
+    const captionTextStyle: StyleType | null = processTextStyles(derivedCaptionTextStyle, true);
 
     const {
       rest: inputContainerStyle,
