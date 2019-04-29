@@ -130,7 +130,7 @@ export class Radio extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, disabled, ...derivedProps } = this.props;
+    const { style, themedStyle, disabled, ...derivedProps } = this.props;
     const {
       container,
       highlightContainer,

@@ -765,6 +765,12 @@ exports[`@checkbox matches snapshots * with text 1`] = `
           "width": 24,
         }
       }
+      textStyle={
+        Object {
+          "color": "red",
+          "fontSize": 18,
+        }
+      }
       theme={
         Object {
           "blue-dark": "#2541CC",
@@ -889,8 +895,8 @@ exports[`@checkbox matches snapshots * with text 1`] = `
   <ForwardRef(WrappingElement)
     style={
       Object {
-        "color": "#0D1C2E",
-        "fontSize": 13,
+        "color": "red",
+        "fontSize": 18,
         "fontWeight": "600",
         "lineHeight": 24,
         "marginHorizontal": 12,
