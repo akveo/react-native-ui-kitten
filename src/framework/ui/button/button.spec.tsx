@@ -101,6 +101,18 @@ describe('@button: matches snapshot', () => {
       expect(output).toMatchSnapshot();
     });
 
+    it('* icon and text (styled)', () => {
+      const component: RenderAPI = renderComponent({
+        icon,
+        children: text,
+        size: 'giant',
+        textStyle: { fontSize: 32, lineHeight: 34 },
+      });
+      const { output } = shallow(component.getByType(ButtonComponent));
+
+      expect(output).toMatchSnapshot();
+    });
+
   });
 
 });

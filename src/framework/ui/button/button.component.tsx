@@ -12,7 +12,6 @@ import {
   StyledComponentProps,
   StyleType,
   Interaction,
-  allWithRest,
   styled,
 } from '@kitten/theme';
 import {
@@ -23,10 +22,9 @@ import {
   ButtonIconAlignment,
   ButtonIconAlignments,
 } from './type';
-import { TextStyleProps } from '../common/props';
 
 interface ButtonProps {
-  style?: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
@@ -71,8 +69,7 @@ export class Button extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
-    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+    const { style: containerStyle, textStyle } = this.props;
 
     const {
       textColor,
@@ -94,7 +91,7 @@ export class Button extends React.Component<Props> {
     return {
       container: {
         ...containerParameters,
-        ...derivedContainerStyle,
+        ...StyleSheet.flatten(containerStyle),
         ...styles.container,
         flexDirection: alignment.flex(),
       },
@@ -104,7 +101,7 @@ export class Button extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         marginHorizontal: textMarginHorizontal,
-        ...derivedTextStyle,
+        ...StyleSheet.flatten(textStyle),
         ...styles.text,
       },
       icon: {
