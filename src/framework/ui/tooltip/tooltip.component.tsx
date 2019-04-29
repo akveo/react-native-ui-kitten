@@ -21,7 +21,7 @@ import {
   Props as PopoverProps,
 } from '../popover/popover.component';
 import { Omit } from '../common/type';
-import { processTextStyles } from '@kitten/ui/common/utils';
+import { processTextStyles } from '../common/utils';
 
 interface TooltipProps {
   text: string;

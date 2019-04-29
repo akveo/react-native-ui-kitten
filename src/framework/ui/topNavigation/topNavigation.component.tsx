@@ -5,6 +5,8 @@ import {
   ViewProps,
   Text,
   TextProps,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -15,12 +17,15 @@ import {
   TopNavigationAlignment,
   TopNavigationAlignments,
 } from './type';
+import { processTextStyles } from '@kitten/ui/common/utils';
 
 type ActionElement = React.ReactElement<ActionProps>;
 
 interface TopNavigationProps {
   title?: string;
+  titleStyle?: StyleProp<TextStyle>;
   subtitle?: string;
+  subtitleStyle?: StyleProp<TextStyle>;
   alignment?: string | TopNavigationAlignment;
   leftControl?: ActionElement;
   rightControls?: ActionElement[];
@@ -33,7 +38,13 @@ export class TopNavigation extends React.Component<Props> {
   static styledComponentName: string = 'TopNavigation';
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { alignment: alignmentValue, leftControl, rightControls } = this.props;
+    const {
+      alignment: alignmentValue,
+      leftControl,
+      rightControls,
+      titleStyle: derivedTitleStyle,
+      subtitleStyle: derivedSubtitleStyle,
+    } = this.props;
 
     const {
       titleTextAlign,
@@ -55,6 +66,8 @@ export class TopNavigation extends React.Component<Props> {
     const leftControlsCount: number = React.Children.count(leftControl);
     const rightControlsCount: number = React.Children.count(rightControls);
     const actionFrameWidth: number = actionWidth + actionMarginHorizontal;
+    const titleStyle: StyleType | null = processTextStyles(derivedTitleStyle);
+    const subtitleStyle: StyleType | null = processTextStyles(derivedSubtitleStyle);
 
     const alignment: TopNavigationAlignment = TopNavigationAlignments.parse(alignmentValue);
 
@@ -73,6 +86,7 @@ export class TopNavigation extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
+        ...titleStyle,
         ...styles.title,
       },
       subtitle: {
@@ -80,6 +94,8 @@ export class TopNavigation extends React.Component<Props> {
         fontSize: subtitleFontSize,
         color: subtitleColor,
         fontWeight: subtitleFontWeight,
+        lineHeight: subtitleLineHeight,
+        ...subtitleStyle,
         ...styles.subtitle,
       },
       action: {
