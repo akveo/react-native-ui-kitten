@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Platform,
+  StatusBar,
   StyleProp,
   StyleSheet,
   View,
@@ -97,7 +99,10 @@ export class Popover extends React.Component<Props> {
 
     const additionalStyle: ViewStyle = {
       left: popoverPosition.x,
-      top: popoverPosition.y,
+      top: Platform.select({
+        android: popoverPosition.y + StatusBar.currentHeight,
+        default: popoverPosition.y,
+      }),
       opacity: 1,
     };
 
