@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ImageProps,
+  StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
@@ -22,14 +23,12 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import {
-  TextStyleProps,
-  FlexStyleProps,
-} from '../common/props';
+import { FlexStyleProps } from '../common/props';
 
 type IconElement = React.ReactElement<ImageProps>;
 type TextElement = React.ReactElement<TextProps>;
 type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
+const DEFAULT_TEXT_SIZE_DEPENDENCY_COEFFICIENT: number = 1.22;
 
 interface InputProps {
   status?: string;
@@ -38,6 +37,9 @@ interface InputProps {
   caption?: string;
   captionIcon?: IconProp;
   icon?: IconProp;
+  textStyle?: StyleProp<TextStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+  captionTextStyle?: StyleProp<TextStyle>;
 }
 
 export type Props = InputProps & StyledComponentProps & TextInputProps;
@@ -64,10 +66,42 @@ export class Input extends React.Component<Props> {
     }
   };
 
+  private processTextStyles = (style: StyleType): StyleType | null => {
+    if (!style) {
+      return null;
+    }
+    if (!('fontSize' in style) && ('lineHeight' in style)) {
+      return {
+        ...style,
+        fontSize: style.lineHeight / DEFAULT_TEXT_SIZE_DEPENDENCY_COEFFICIENT,
+      };
+    } else if (('fontSize' in style) && !('lineHeight' in style)) {
+      return {
+        ...style,
+        lineHeight: style.fontSize * DEFAULT_TEXT_SIZE_DEPENDENCY_COEFFICIENT,
+      };
+    } else {
+      return style;
+    }
+  };
+
   private getComponentStyle = (style: StyleType): StyleType => {
-    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
-    const { rest: containerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
-    const { rest: inputContainerStyle, ...derivedContainerStyle } = allWithRest(containerStyle, FlexStyleProps);
+    const {
+      style: derivedContainerStyle,
+      textStyle: derivedTextStyle,
+      labelStyle: derivedLabelStyle,
+      captionTextStyle: derivedCaptionTextStyle,
+    } = this.props;
+
+    // TODO: ask somebody about this case
+    const textStyle: StyleType | null = this.processTextStyles(derivedTextStyle);
+    const labelStyle: StyleType | null = this.processTextStyles(derivedLabelStyle);
+    const captionTextStyle: StyleType | null = this.processTextStyles(derivedCaptionTextStyle);
+
+    const {
+      rest: inputContainerStyle,
+      ...containerStyle
+    } = allWithRest(StyleSheet.flatten(derivedContainerStyle), FlexStyleProps);
 
     const {
       textMarginHorizontal,
@@ -98,7 +132,7 @@ export class Input extends React.Component<Props> {
     return {
       container: {
         ...styles.container,
-        ...derivedContainerStyle,
+        ...containerStyle,
       },
       inputContainer: {
         ...containerParameters,
@@ -114,7 +148,7 @@ export class Input extends React.Component<Props> {
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,
-        ...derivedTextStyle,
+        ...textStyle,
         ...styles.text,
       },
       icon: {
@@ -130,6 +164,7 @@ export class Input extends React.Component<Props> {
         lineHeight: labelLineHeight,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
+        ...labelStyle,
         ...styles.label,
       },
       captionIcon: {
@@ -144,6 +179,7 @@ export class Input extends React.Component<Props> {
         fontWeight: captionTextFontWeight,
         lineHeight: captionTextLineHeight,
         color: captionTextColor,
+        ...captionTextStyle,
         ...styles.captionLabel,
       },
     };
