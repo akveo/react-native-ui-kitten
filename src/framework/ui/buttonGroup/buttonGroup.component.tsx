@@ -32,7 +32,10 @@ export class ButtonGroup extends React.Component<Props> {
     } = style;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+        ...styles.container,
+      },
       button: {
         borderRightColor: buttonBorderRightColor,
         borderRightWidth: buttonBorderRightWidth,
@@ -75,7 +78,7 @@ export class ButtonGroup extends React.Component<Props> {
     return (
       <View
         {...derivedProps}
-        style={[container, style, styles.container]}>
+        style={[container, style]}>
         {componentChildren}
       </View>
     );
