@@ -7,6 +7,8 @@ import {
   ImageProps,
   GestureResponderEvent,
   StyleSheet,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   styled,
@@ -32,12 +34,14 @@ interface TemplateBaseProps {
 
 interface TemplateTitleProps extends Partial<TemplateBaseProps> {
   title: string;
+  titleStyle?: StyleProp<TextStyle>;
   description?: string;
 }
 
 interface TemplateDescriptionProps extends Partial<TemplateBaseProps> {
   title?: string;
   description: string;
+  descriptionStyle?: StyleProp<TextStyle>;
 }
 
 interface CustomContentProps {
@@ -83,6 +87,8 @@ export class ListItem extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    // @ts-ignore: will be not executed if `titleStyle` and `descriptionStyle` properties are provided
+    const { titleStyle, descriptionStyle } = this.props;
     const {
       iconWidth,
       iconHeight,
@@ -119,6 +125,7 @@ export class ListItem extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
+        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
       },
       description: {
@@ -126,6 +133,7 @@ export class ListItem extends React.Component<Props> {
         fontSize: descriptionFontSize,
         lineHeight: descriptionLineHeight,
         marginHorizontal: descriptionMarginHorizontal,
+        ...StyleSheet.flatten(descriptionStyle),
         ...styles.description,
       },
       accessory: {

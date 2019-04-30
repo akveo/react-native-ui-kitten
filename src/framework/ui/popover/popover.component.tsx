@@ -1,9 +1,12 @@
 import React from 'react';
 import {
-  View,
-  FlexStyle,
-  ViewProps,
+  Platform,
+  StatusBar,
+  StyleProp,
   StyleSheet,
+  View,
+  ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   ModalComponentCloseProps,
@@ -16,19 +19,19 @@ import {
   Props as PopoverViewProps,
 } from './popoverView.component';
 import {
+  MeasuredElement,
   MeasureNode,
   MeasureResult,
   MeasuringElement,
-  MeasuringNode,
-  MeasuredElement,
   MeasuringElementProps,
+  MeasuringNode,
 } from './measure.component';
 import {
   Frame,
+  OffsetRect,
+  Offsets,
   Placement,
   Placements,
-  MarginOffsets,
-  getMarginOffsets,
 } from './type';
 
 interface PopoverProps {
@@ -37,71 +40,39 @@ interface PopoverProps {
   visible?: boolean;
 }
 
-interface State {
-  layout: MeasureResult | undefined;
-}
-
 export type Props = PopoverProps & ModalComponentCloseProps & StyledComponentProps & PopoverViewProps & ViewProps;
 
 const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
 
-export class Popover extends React.Component<Props, State> {
+export class Popover extends React.Component<Props> {
 
   static styledComponentName: string = 'Popover';
 
   static defaultProps: Partial<Props> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     visible: false,
-    scrollOffset: 0,
-  };
-
-  public state: State = {
-    layout: undefined,
   };
 
   private popoverElement: MeasuredElement = undefined;
-  private modalIdentifier: string = '';
+  private popoverModalId: string = '';
 
-  public shouldComponentUpdate(nextProps: Props, nextState: State, nextContext: any): boolean {
-    const isLayoutChanged: boolean = nextState.layout !== undefined;
-    const isVisibilityChanged: boolean = this.props.visible !== nextProps.visible;
-
-    return isLayoutChanged || isVisibilityChanged;
-  }
-
-  public componentDidUpdate(prevProps: Props, prevState: State): void {
-    const {
-      visible,
-      placement,
-      onRequestClose,
-      children,
-    } = this.props;
+  public componentDidUpdate(prevProps: Props): void {
+    const { visible } = this.props;
 
     if (prevProps.visible !== visible) {
       if (visible) {
-        const marginOffsets: MarginOffsets = getMarginOffsets(children.props.style);
-        const { origin: popoverPosition } = this.getPopoverFrame(placement, marginOffsets);
-        const style: FlexStyle = {
-          left: popoverPosition.x,
-          top: popoverPosition.y,
-        };
-
-        const popover: React.ReactElement<ModalComponentCloseProps> = React.cloneElement(this.popoverElement, {
-          style: style,
-          onRequestClose: onRequestClose,
-        });
-
-        this.modalIdentifier = ModalService.show(popover, true);
+        // Toggles re-measuring
+        this.setState({ layout: undefined });
       } else {
-        ModalService.hide(this.modalIdentifier);
+        ModalService.hide(this.popoverModalId);
       }
     }
   }
 
-  public componentWillUnmount(): void {
-    this.modalIdentifier = '';
+  public componentWillUnmount() {
+    this.popoverModalId = '';
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -111,23 +82,54 @@ export class Popover extends React.Component<Props, State> {
     };
   };
 
-  private getPopoverFrame = (rawPlacement: string | Placement, offsets: MarginOffsets): Frame => {
-    const { layout } = this.state;
+  private onMeasure = (layout: MeasureResult) => {
+    const { visible } = this.props;
+
+    if (visible) {
+      this.popoverModalId = this.showPopoverModal(this.popoverElement, layout);
+    }
+  };
+
+  private showPopoverModal = (element: MeasuredElement, layout: MeasureResult): string => {
+    const { placement, onRequestClose } = this.props;
+
+    const popoverFrame: Frame = this.getPopoverFrame(layout, placement);
+
+    const { origin: popoverPosition } = popoverFrame;
+
+    const additionalStyle: ViewStyle = {
+      left: popoverPosition.x,
+      top: Platform.select({
+        android: popoverPosition.y + StatusBar.currentHeight,
+        default: popoverPosition.y,
+      }),
+      opacity: 1,
+    };
+
+    const popover: React.ReactElement<ModalComponentCloseProps> = React.cloneElement(element, {
+      style: additionalStyle,
+      onRequestClose: onRequestClose,
+    });
+
+    return ModalService.show(popover, true);
+  };
+
+  private getPopoverFrame = (layout: MeasureResult, rawPlacement: string | Placement): Frame => {
+    const { children } = this.props;
     const { [TAG_CONTENT]: popoverFrame, [TAG_CHILD]: childFrame } = layout;
 
+    const offsetRect: OffsetRect = Offsets.find(children.props.style);
     const placement: Placement = Placements.parse(rawPlacement, PLACEMENT_DEFAULT);
 
-    return placement.frame(popoverFrame, childFrame, offsets);
+    return placement.frame(popoverFrame, childFrame, offsetRect);
   };
 
-  private onMeasure = (layout: MeasureResult) => {
-    this.setState({ layout });
-  };
-
-  private renderPopoverElement = (children: React.ReactElement<any>, style: StyleType): MeasuringElement => {
+  private renderPopoverElement = (children: React.ReactElement<any>, style: StyleProp<ViewStyle>): MeasuringElement => {
     const { placement, ...derivedProps } = this.props;
 
-    const measuringProps: MeasuringElementProps = { tag: TAG_CONTENT, scrollOffset: this.props.scrollOffset };
+    const measuringProps: MeasuringElementProps = {
+      tag: TAG_CONTENT,
+    };
 
     const popoverPlacement: Placement = Placements.parse(placement, PLACEMENT_DEFAULT);
     const indicatorPlacement: Placement = popoverPlacement.reverse();
@@ -147,23 +149,22 @@ export class Popover extends React.Component<Props, State> {
     );
   };
 
-  private renderChildElement = (source: React.ReactElement<any>, style: StyleType): MeasuringElement => {
+  private renderChildElement = (source: React.ReactElement<any>, style: StyleProp<ViewStyle>): MeasuringElement => {
     const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
     return (
       <View
         {...measuringProps}
-        style={style}
-        key={TAG_CHILD}>
+        key={TAG_CHILD}
+        style={style}>
         {source}
       </View>
     );
   };
 
-  private renderPlaceholderElement = (...children: MeasuringElement[]): MeasuringNode => {
+  private renderMeasuringElement = (...children: MeasuringElement[]): MeasuringNode => {
     return (
       <MeasureNode
-        style={styles.placeholder}
         onResult={this.onMeasure}>
         {children}
       </MeasureNode>
@@ -171,27 +172,23 @@ export class Popover extends React.Component<Props, State> {
   };
 
   public render(): MeasuringNode | React.ReactNode {
-    const { themedStyle, content, children } = this.props;
+    const { themedStyle, content, visible, children } = this.props;
     const { child, popover } = this.getComponentStyle(themedStyle);
 
-    const measuringChild: MeasuringElement = this.renderChildElement(children, child);
-    const measuringPopover: MeasuringElement = this.renderPopoverElement(content, popover);
+    if (visible) {
+      this.popoverElement = this.renderPopoverElement(content, popover);
+      const childElement: MeasuringElement = this.renderChildElement(children, child);
 
-    if (this.state.layout === undefined) {
-      return this.renderPlaceholderElement(measuringChild, measuringPopover);
+      return this.renderMeasuringElement(childElement, this.popoverElement);
     }
 
-    this.popoverElement = measuringPopover;
-
-    return measuringChild;
+    return children;
   }
 }
 
 const styles = StyleSheet.create({
   popover: {
     position: 'absolute',
-  },
-  placeholder: {
     opacity: 0,
   },
 });

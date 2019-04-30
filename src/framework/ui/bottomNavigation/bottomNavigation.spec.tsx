@@ -100,6 +100,19 @@ describe('@bottom-navigation-tab: component checks', () => {
     expect(output).toMatchSnapshot();
   });
 
+  it('* text (styled)', () => {
+    const component: RenderAPI = render(
+      <Mock
+        title='Test'
+        titleStyle={{ fontSize: 22, color: 'yellow' }}
+      />,
+    );
+
+    const { output } = shallow(component.getByType(BottomNavigatorTabComponent));
+
+    expect(output).toMatchSnapshot();
+  });
+
 });
 
 describe('@bottom-navigation: component checks', () => {
@@ -133,8 +146,9 @@ describe('@bottom-navigation: component checks', () => {
   });
 
   it('* with routes', () => {
+    const indicatorStyle: StyleType = { backgroundColor: 'red' };
     const component: RenderAPI = render(
-      <Mock>
+      <Mock indicatorStyle={indicatorStyle}>
         <ChildMock
           title='Screen 1'
           selected={false}

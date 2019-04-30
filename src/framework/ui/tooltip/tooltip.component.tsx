@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   ImageProps,
+  StyleProp,
   StyleSheet,
+  TextStyle,
   View,
   ViewProps,
 } from 'react-native';
@@ -22,6 +24,7 @@ import { Omit } from '../common/type';
 
 interface TooltipProps {
   text: string;
+  textStyle?: StyleProp<TextStyle>;
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   children: React.ReactElement<any>;
 }
@@ -40,6 +43,7 @@ export class Tooltip extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { textStyle } = this.props;
     const {
       popoverPaddingHorizontal,
       popoverPaddingVertical,
@@ -76,6 +80,7 @@ export class Tooltip extends React.Component<Props> {
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,
+        ...StyleSheet.flatten(textStyle),
         ...styles.text,
       },
     };

@@ -91,6 +91,21 @@ describe('@top-navigation-bar/action', () => {
     expect(output).toMatchSnapshot();
   });
 
+  it('* texts (styled)', () => {
+    const component: RenderAPI = render(
+      <Mock
+        title='Test'
+        titleStyle={{ fontSize: 24 }}
+        subtitle='Subtitle'
+        subtitleStyle={{ color: 'red' }}
+      />,
+    );
+
+    const { output } = shallow(component.getByType(TopNavigationComponent));
+
+    expect(output).toMatchSnapshot();
+  });
+
   it('* bar/alignment: center', () => {
     const component: RenderAPI = render(
       <Mock

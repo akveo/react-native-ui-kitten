@@ -91,6 +91,22 @@ describe('@tab: component checks', () => {
     expect(output).toMatchSnapshot();
   });
 
+  it('* title (styled)', () => {
+    const component: RenderAPI = render(
+      <Mock
+        title='title'
+        titleStyle={{
+          fontSize: 24,
+          color: 'tomato',
+        }}
+      />,
+    );
+
+    const { output } = shallow(component.getByType(TabComponent));
+
+    expect(output).toMatchSnapshot();
+  });
+
 });
 
 describe('@tab-bar: component checks', () => {

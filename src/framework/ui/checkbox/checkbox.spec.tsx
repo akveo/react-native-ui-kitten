@@ -84,6 +84,7 @@ describe('@checkbox matches snapshots', () => {
     const component: RenderAPI = renderComponent({
       checked: true,
       text: text,
+      textStyle: { fontSize: 18, color: 'red' },
     });
     const { output } = shallow(component.getByType(CheckBoxComponent));
     expect(component.getByType(TextComponent).props.children).toBe(text);

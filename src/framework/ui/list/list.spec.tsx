@@ -101,7 +101,32 @@ describe('@list-item: template matches snapshot', () => {
   it('* description', () => {
     const item = () => {
       return (
-        <ItemMock title='Title'/>
+        <ItemMock description='Description'/>
+      );
+    };
+
+    const component: RenderAPI = render(
+      <Mock
+        data={data}
+        renderItem={item}
+      />,
+    );
+
+    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const { output } = shallow(items[0]);
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('* text styles', () => {
+    const item = () => {
+      return (
+        <ItemMock
+          title='Title'
+          titleStyle={{ fontSize: 22, lineHeight: 24 }}
+          description='Description'
+          descriptionStyle={{ color: 'blue', letterSpacing: 6 }}
+        />
       );
     };
 

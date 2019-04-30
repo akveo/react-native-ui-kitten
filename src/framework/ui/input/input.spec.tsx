@@ -101,6 +101,32 @@ describe('@input: matches snapshot', () => {
       expect(output).toMatchSnapshot();
     });
 
+    it('* text styled', () => {
+      const captionIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+        return (
+          <Image
+            style={style}
+            source={iconSource}
+          />
+        );
+      };
+      const label: string = 'Label';
+      const caption: string = 'Caption Text';
+
+      const component: RenderAPI = renderComponent({
+        label,
+        caption,
+        captionIcon,
+        textStyle: { fontSize: 24, lineHeight: 26 },
+        labelStyle: { color: 'blue' },
+        captionTextStyle: { letterSpacing: 8, fontFamily: 'opensans-bold' },
+      });
+
+      const { output } = shallow(component.getByType(InputComponent));
+
+      expect(output).toMatchSnapshot();
+    });
+
   });
 
 });

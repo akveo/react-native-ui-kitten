@@ -4,6 +4,8 @@ import {
   View,
   ViewProps,
   StyleSheet,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -20,6 +22,7 @@ type ChildElement = React.ReactElement<TabProps>;
 interface TabNavigatorProps {
   children: ChildElement | ChildElement[];
   selectedIndex?: number;
+  indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
 }
 
@@ -34,6 +37,7 @@ export class BottomNavigation extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
+    const { indicatorStyle } = this.props;
     const { indicatorHeight, indicatorBackgroundColor, ...containerStyle } = style;
 
     return {
@@ -44,6 +48,7 @@ export class BottomNavigation extends React.Component<Props> {
       indicator: {
         height: indicatorHeight,
         backgroundColor: indicatorBackgroundColor,
+        ...StyleSheet.flatten(indicatorStyle),
         ...styles.indicator,
       },
     };

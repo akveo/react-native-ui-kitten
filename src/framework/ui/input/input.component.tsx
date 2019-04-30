@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ImageProps,
+  StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
@@ -22,10 +23,7 @@ import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import {
-  TextStyleProps,
-  FlexStyleProps,
-} from '../common/props';
+import { FlexStyleProps } from '../common/props';
 
 type IconElement = React.ReactElement<ImageProps>;
 type TextElement = React.ReactElement<TextProps>;
@@ -38,6 +36,9 @@ interface InputProps {
   caption?: string;
   captionIcon?: IconProp;
   icon?: IconProp;
+  textStyle?: StyleProp<TextStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+  captionTextStyle?: StyleProp<TextStyle>;
 }
 
 export type Props = InputProps & StyledComponentProps & TextInputProps;
@@ -65,9 +66,17 @@ export class Input extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
-    const { rest: containerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
-    const { rest: inputContainerStyle, ...derivedContainerStyle } = allWithRest(containerStyle, FlexStyleProps);
+    const {
+      style: derivedContainerStyle,
+      textStyle,
+      labelStyle,
+      captionTextStyle,
+    } = this.props;
+
+    const {
+      rest: inputContainerStyle,
+      ...containerStyle
+    } = allWithRest(StyleSheet.flatten(derivedContainerStyle), FlexStyleProps);
 
     const {
       textMarginHorizontal,
@@ -98,7 +107,7 @@ export class Input extends React.Component<Props> {
     return {
       container: {
         ...styles.container,
-        ...derivedContainerStyle,
+        ...containerStyle,
       },
       inputContainer: {
         ...containerParameters,
@@ -114,7 +123,7 @@ export class Input extends React.Component<Props> {
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,
-        ...derivedTextStyle,
+        ...StyleSheet.flatten(textStyle),
         ...styles.text,
       },
       icon: {
@@ -130,6 +139,7 @@ export class Input extends React.Component<Props> {
         lineHeight: labelLineHeight,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
+        ...StyleSheet.flatten(labelStyle),
         ...styles.label,
       },
       captionIcon: {
@@ -144,6 +154,7 @@ export class Input extends React.Component<Props> {
         fontWeight: captionTextFontWeight,
         lineHeight: captionTextLineHeight,
         color: captionTextColor,
+        ...StyleSheet.flatten(captionTextStyle),
         ...styles.captionLabel,
       },
     };
