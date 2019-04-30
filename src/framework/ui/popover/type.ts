@@ -216,7 +216,7 @@ export class Offsets {
       Offsets.MARGIN_BOTTOM.rawValue,
     ];
 
-    const flatStyle: FlexStyle = StyleSheet.flatten(source);
+    const flatStyle: FlexStyle = StyleSheet.flatten(source) || {};
 
     return Object.keys(flatStyle).filter((key: string) => {
       return keys.includes(key);
