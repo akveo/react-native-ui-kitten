@@ -682,6 +682,26 @@
           }
         },
         "variantGroups": {
+          "status": {
+            "primary": {
+              "default": true
+            },
+            "success": {
+              "default": false
+            },
+            "info": {
+              "default": false
+            },
+            "warning": {
+              "default": false
+            },
+            "danger": {
+              "default": false
+            },
+            "white": {
+              "default": false
+            }
+          },
           "size": {
             "tiny": {
               "default": false
@@ -707,7 +727,6 @@
           "mapping": {
             "borderRadius": 8,
             "borderColor": "opacity-transparent",
-            "buttonBorderRightColor": "color-primary-600",
             "buttonBorderRightWidth": 1
           },
           "variantGroups": {
@@ -717,15 +736,60 @@
               "medium": {},
               "large": {},
               "giant": {}
+            },
+            "status": {
+              "primary": {
+                "buttonBorderRightColor": "color-primary-600"
+              },
+              "success": {
+                "buttonBorderRightColor": "color-success-600"
+              },
+              "info": {
+                "buttonBorderRightColor": "color-info-600"
+              },
+              "warning": {
+                "buttonBorderRightColor": "color-warning-600"
+              },
+              "danger": {
+                "buttonBorderRightColor": "color-danger-600"
+              },
+              "white": {
+                "buttonBorderRightColor": "color-white"
+              }
             }
           }
         },
         "outline": {
           "mapping": {
-            "borderWidth": 2,
-            "borderColor": "color-primary-500",
-            "buttonBorderRightColor": "color-primary-500",
-            "buttonBorderRightWidth": 2
+            "borderWidth": 2
+          },
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "borderColor": "color-primary-500",
+                "buttonBorderRightColor": "color-primary-500"
+              },
+              "success": {
+                "borderColor": "color-success-500",
+                "buttonBorderRightColor": "color-success-500"
+              },
+              "info": {
+                "borderColor": "color-info-500",
+                "buttonBorderRightColor": "color-info-500"
+              },
+              "warning": {
+                "borderColor": "color-warning-500",
+                "buttonBorderRightColor": "color-warning-500"
+              },
+              "danger": {
+                "borderColor": "color-danger-500",
+                "buttonBorderRightColor": "color-danger-500"
+              },
+              "white": {
+                "borderColor": "color-white",
+                "buttonBorderRightColor": "color-white"
+              }
+            }
           }
         },
         "ghost": {
