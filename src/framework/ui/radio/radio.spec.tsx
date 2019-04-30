@@ -113,6 +113,16 @@ describe('@radio: matches snapshot', () => {
     expect(inactiveOutput).toMatchSnapshot('checked');
   });
 
+  it('with text (styled)', () => {
+    const component: RenderAPI = renderComponent({
+      text: 'Place your text',
+      textStyle: { fontSize: 22, lineHeight: 24 },
+    });
+    const { output } = shallow(component.getByType(RadioComponent));
+
+    expect(output).toMatchSnapshot();
+  });
+
 });
 
 describe('@radio: component checks', () => {

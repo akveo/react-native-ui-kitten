@@ -35,6 +35,7 @@ const menuIconUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/menu
 const menuItems: OverflowMenuItemType[] = [
   {
     text: 'Menu Item 1',
+    textStyle: { fontSize: 24, color: 'blue' },
     icon: (style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>,
   },
   {
@@ -80,7 +81,7 @@ class OverflowMenuScreen extends React.Component<Props, State> {
     this.setState({ overflowMenu4Visible: !this.state.overflowMenu4Visible });
   };
 
-  private onSelectItem = (event: GestureResponderEvent, index: number): void => {
+  private onSelectItem = (index: number, event: GestureResponderEvent): void => {
     Alert.alert(`Selected item\'s index: ${index}`);
   };
 

@@ -13,16 +13,14 @@ import {
   StyledComponentProps,
   StyleType,
   Interaction,
-  allWithRest,
 } from '@kitten/theme';
 import {
   Text as TextComponent,
   Props as TextProps,
 } from '../text/text.component';
-import { TextStyleProps } from '@kitten/ui/common/props';
 
 interface RadioProps {
-  style?: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
   text?: string;
   checked?: boolean;
   status?: string;
@@ -61,9 +59,7 @@ export class Radio extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
-
-    const derivedStyle: TextStyle = StyleSheet.flatten(this.props.style);
-    const { rest: derivedContainerStyle, ...derivedTextStyle } = allWithRest(derivedStyle, TextStyleProps);
+    const { style: containerStyle, textStyle } = this.props;
 
     const {
       textMarginHorizontal,
@@ -84,7 +80,7 @@ export class Radio extends React.Component<Props> {
 
     return {
       container: {
-        ...derivedContainerStyle,
+        ...StyleSheet.flatten(containerStyle),
         ...styles.container,
       },
       highlightContainer: styles.highlightContainer,
@@ -99,7 +95,7 @@ export class Radio extends React.Component<Props> {
         fontWeight: textFontWeight,
         color: textColor,
         ...styles.text,
-        ...derivedTextStyle,
+        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,

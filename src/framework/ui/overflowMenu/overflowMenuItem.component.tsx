@@ -4,6 +4,8 @@ import {
   GestureResponderEvent,
   StyleSheet,
   ImageProps,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -20,6 +22,7 @@ import { TouchableOpacityIndexedProps } from '../common/type';
 export interface OverflowMenuItemType {
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   text: React.ReactText;
+  textStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
   index?: number;
 }
@@ -61,6 +64,7 @@ export class OverflowMenuItem extends React.Component<Props> {
   };
 
   private getComponentStyle = (style: StyleType): StyleType => {
+    const { textStyle } = this.props;
     const {
       textMarginHorizontal,
       textFontSize,
@@ -82,10 +86,11 @@ export class OverflowMenuItem extends React.Component<Props> {
       },
       text: {
         marginHorizontal: textMarginHorizontal,
-        fontSize: style.textFontSize,
+        fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
+        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,

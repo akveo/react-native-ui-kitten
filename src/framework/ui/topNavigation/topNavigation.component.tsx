@@ -5,6 +5,8 @@ import {
   ViewProps,
   Text,
   TextProps,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -20,7 +22,9 @@ type ActionElement = React.ReactElement<ActionProps>;
 
 interface TopNavigationProps {
   title?: string;
+  titleStyle?: StyleProp<TextStyle>;
   subtitle?: string;
+  subtitleStyle?: StyleProp<TextStyle>;
   alignment?: string | TopNavigationAlignment;
   leftControl?: ActionElement;
   rightControls?: ActionElement[];
@@ -33,7 +37,13 @@ export class TopNavigation extends React.Component<Props> {
   static styledComponentName: string = 'TopNavigation';
 
   private getComponentStyle = (style: StyleType): StyleType => {
-    const { alignment: alignmentValue, leftControl, rightControls } = this.props;
+    const {
+      alignment: alignmentValue,
+      leftControl,
+      rightControls,
+      titleStyle,
+      subtitleStyle,
+    } = this.props;
 
     const {
       titleTextAlign,
@@ -73,6 +83,7 @@ export class TopNavigation extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
+        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
       },
       subtitle: {
@@ -80,6 +91,8 @@ export class TopNavigation extends React.Component<Props> {
         fontSize: subtitleFontSize,
         color: subtitleColor,
         fontWeight: subtitleFontWeight,
+        lineHeight: subtitleLineHeight,
+        ...StyleSheet.flatten(subtitleStyle),
         ...styles.subtitle,
       },
       action: {

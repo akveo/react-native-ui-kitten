@@ -6,6 +6,8 @@ import {
   ImageProps,
   TextProps,
   TouchableOpacityProps,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -14,6 +16,7 @@ import {
 
 interface BottomNavigatorTabProps {
   title?: string;
+  titleStyle?: StyleProp<TextStyle>;
   icon?: (style: StyleType) => React.ReactElement<ImageProps>;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
@@ -32,6 +35,7 @@ export class BottomNavigationTab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, titleStyle } = this.props;
     const {
       iconWidth,
       iconHeight,
@@ -48,6 +52,7 @@ export class BottomNavigationTab extends React.Component<Props> {
     return {
       container: {
         ...containerStyle,
+        ...StyleSheet.flatten(style),
         ...styles.container,
       },
       icon: {
@@ -63,6 +68,7 @@ export class BottomNavigationTab extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
+        ...StyleSheet.flatten(titleStyle),
         ...styles.text,
       },
     };

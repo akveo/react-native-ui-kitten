@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  Dimensions,
+  StyleProp,
   View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import { styled } from '@kitten/theme';
 import {
@@ -33,6 +34,7 @@ interface TabViewProps {
   children: ChildElement | ChildElement[];
   selectedIndex?: number;
   contentWidth?: number;
+  indicatorStyle?: StyleProp<ViewStyle>;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
   onSelect?: (index: number) => void;
@@ -92,7 +94,13 @@ export class TabView extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { selectedIndex, contentWidth, children, ...derivedProps } = this.props;
+    const {
+      selectedIndex,
+      contentWidth,
+      children,
+      indicatorStyle,
+      ...derivedProps
+    } = this.props;
     const { tabs, content } = this.renderComponentChildren(children);
 
     return (
@@ -100,6 +108,7 @@ export class TabView extends React.Component<Props> {
         <TabBar
           ref={this.tabBarRef}
           selectedIndex={selectedIndex}
+          indicatorStyle={indicatorStyle}
           onSelect={this.onBarSelect}>
           {tabs}
         </TabBar>

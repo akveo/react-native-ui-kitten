@@ -66,6 +66,7 @@ const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icon
 const menuItems: OverflowMenuItemType[] = [
   {
     text: 'Menu Item 1',
+    textStyle: { fontSize: 24, color: 'blue' },
     icon: icon,
   },
   {

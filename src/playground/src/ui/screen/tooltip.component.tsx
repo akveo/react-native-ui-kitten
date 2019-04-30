@@ -75,7 +75,14 @@ class TooltipScreen extends React.Component<Props, State> {
   };
 
   public render(): React.ReactNode {
-    const { container, componentContainer, component, tip, text } = this.props.themedStyle;
+    const {
+      container,
+      componentContainer,
+      component,
+      tip,
+      text,
+      bottomStartText,
+    } = this.props.themedStyle;
 
     return (
       <View style={container}>
@@ -85,6 +92,7 @@ class TooltipScreen extends React.Component<Props, State> {
             placement={`${PLACEMENT} start`}
             visible={this.state.startVisible}
             text='Place your text here️'
+            textStyle={bottomStartText}
             onRequestClose={this.onStartPress}>
             <TouchableOpacity
               style={tip}
@@ -151,6 +159,9 @@ export default withStyles(TooltipScreen, (theme: ThemeType) => ({
   },
   component: {
     // tooltip customization place
+  },
+  bottomStartText: {
+    fontSize: 16,
   },
   tip: {
     justifyContent: 'center',
