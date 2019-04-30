@@ -16,6 +16,7 @@ type ButtonElement = React.ReactElement<ButtonProps>;
 interface ButtonGroupProps {
   children: ButtonElement | ButtonElement[];
   size?: string;
+  status?: string;
 }
 
 export type Props = ButtonGroupProps & StyledComponentProps & ViewProps;
@@ -51,15 +52,16 @@ export class ButtonGroup extends React.Component<Props> {
   };
 
   private renderComponentChild = (element: ButtonElement, index: number, style: StyleType): ButtonElement => {
-    const { appearance, size } = this.props;
+    const { appearance, size, status } = this.props;
 
     const additionalStyle: ViewStyle = this.isLastElement(index) ? styles.lastButton : style;
 
     return React.cloneElement(element, {
-      key: index,
-      style: [element.props.style, additionalStyle],
       appearance: appearance,
       size: size,
+      status: status,
+      key: index,
+      style: [element.props.style, additionalStyle],
     });
   };
 
