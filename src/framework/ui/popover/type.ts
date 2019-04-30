@@ -145,7 +145,7 @@ export class OffsetRect {
 export class Offsets {
 
   static MARGIN: OffsetValue = new class implements OffsetValue {
-    rawValue: 'margin';
+    rawValue: string = 'margin';
 
     applyToRect(rect: OffsetRect, value: number): OffsetRect {
       return {
@@ -158,7 +158,7 @@ export class Offsets {
   };
 
   static MARGIN_HORIZONTAL: OffsetValue = new class implements OffsetValue {
-    rawValue: 'marginHorizontal';
+    rawValue: string = 'marginHorizontal';
 
     applyToRect(rect: OffsetRect, value: number): OffsetRect {
       return { ...rect, left: value, right: value };
@@ -166,7 +166,7 @@ export class Offsets {
   };
 
   static MARGIN_VERTICAL: OffsetValue = new class implements OffsetValue {
-    rawValue: 'marginVertical';
+    rawValue: string = 'marginVertical';
 
     applyToRect(rect: OffsetRect, value: number): OffsetRect {
       return { ...rect, top: value, bottom: value };
@@ -174,7 +174,7 @@ export class Offsets {
   };
 
   static MARGIN_LEFT: OffsetValue = new class implements OffsetValue {
-    rawValue: 'marginLeft';
+    rawValue: string = 'marginLeft';
 
     applyToRect(rect: OffsetRect, value: number): OffsetRect {
       return { ...rect, left: value };
@@ -182,7 +182,7 @@ export class Offsets {
   };
 
   static MARGIN_TOP: OffsetValue = new class implements OffsetValue {
-    rawValue: 'marginTop';
+    rawValue: string = 'marginTop';
 
     applyToRect(rect: OffsetRect, value: number): OffsetRect {
       return { ...rect, top: value };
@@ -190,7 +190,7 @@ export class Offsets {
   };
 
   static MARGIN_RIGHT: OffsetValue = new class implements OffsetValue {
-    rawValue: 'marginRight';
+    rawValue: string = 'marginRight';
 
     applyToRect(rect: OffsetRect, value: number): OffsetRect {
       return { ...rect, right: value };
@@ -198,7 +198,7 @@ export class Offsets {
   };
 
   static MARGIN_BOTTOM: OffsetValue = new class implements OffsetValue {
-    rawValue: 'marginBottom';
+    rawValue: string = 'marginBottom';
 
     applyToRect(rect: OffsetRect, value: number): OffsetRect {
       return { ...rect, bottom: value };
@@ -207,13 +207,13 @@ export class Offsets {
 
   static find(source: StyleProp<FlexStyle>): OffsetRect {
     const keys: string[] = [
-      'margin',
-      'marginHorizontal',
-      'marginVertical',
-      'marginLeft',
-      'marginTop',
-      'marginRight',
-      'marginBottom',
+      Offsets.MARGIN.rawValue,
+      Offsets.MARGIN_HORIZONTAL.rawValue,
+      Offsets.MARGIN_VERTICAL.rawValue,
+      Offsets.MARGIN_LEFT.rawValue,
+      Offsets.MARGIN_TOP.rawValue,
+      Offsets.MARGIN_RIGHT.rawValue,
+      Offsets.MARGIN_BOTTOM.rawValue,
     ];
 
     const flatStyle: FlexStyle = StyleSheet.flatten(source);
@@ -222,26 +222,26 @@ export class Offsets {
       return keys.includes(key);
     }).reduce((acc: OffsetRect, key: string) => {
       const value: number = flatStyle[key];
-      const offsetValue: OffsetValue | undefined = this.parseString(key);
+      const offsetValue: OffsetValue | undefined = Offsets.parseString(key);
       return offsetValue ? offsetValue.applyToRect(acc, value) : acc;
     }, OffsetRect.zero());
   }
 
   private static parseString(rawValue: string, fallback?: OffsetValue): OffsetValue | undefined {
     switch (rawValue) {
-      case 'margin':
+      case Offsets.MARGIN.rawValue:
         return Offsets.MARGIN;
-      case 'marginHorizontal':
+      case Offsets.MARGIN_HORIZONTAL.rawValue:
         return Offsets.MARGIN_HORIZONTAL;
-      case 'marginVertical':
+      case Offsets.MARGIN_VERTICAL.rawValue:
         return Offsets.MARGIN_VERTICAL;
-      case 'marginLeft':
+      case Offsets.MARGIN_LEFT.rawValue:
         return Offsets.MARGIN_LEFT;
-      case 'marginTop':
+      case Offsets.MARGIN_TOP.rawValue:
         return Offsets.MARGIN_TOP;
-      case 'marginRight':
+      case Offsets.MARGIN_RIGHT.rawValue:
         return Offsets.MARGIN_RIGHT;
-      case 'marginBottom':
+      case Offsets.MARGIN_BOTTOM.rawValue:
         return Offsets.MARGIN_BOTTOM;
       default:
         return fallback;
