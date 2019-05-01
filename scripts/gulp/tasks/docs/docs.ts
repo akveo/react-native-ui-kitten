@@ -23,6 +23,7 @@ const exec = require('child_process').execSync;
 
 task('docs', ['generate-doc-json']);
 task('generate-doc-json', generateDocJson);
+task('process-type-doc', ['generate-doc-json'], processTypeDoc);
 
 // task('create-docs-dirs', () => {
 //   const docsStructure = flatten('docs', routesTree(DOCS));
@@ -30,7 +31,7 @@ task('generate-doc-json', generateDocJson);
 // });
 
 function generateDocJson() {
-  return src(['src/framework/ui/**/*.tsx', '!src/framework/ui/**/*.spec.tsx'])
+  src(['src/framework/ui/**/*.tsx', '!src/framework/ui/**/*.spec.tsx'])
     .pipe(typedoc({
       allowSyntheticDefaultImports: true,
       esModuleInterop: true,
@@ -45,18 +46,14 @@ function generateDocJson() {
       },
       excludeExternals: true,
       exclude: './node_modules/**/*',
-      out: './docs/out',
-      // json: './docs/docs.json',
+      json: './docs/docs.json',
     }));
+  exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
 }
 
-// function parseThemes() {
-//   exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
-//   return src('docs/themes.scss')
-//     .pipe(sass({
-//       functions: exportThemes('docs/', ''),
-//     }));
-// }
+function processTypeDoc() {
+  return exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
+}
 
 // function routesTree(structure) {
 //   return structure
@@ -79,52 +76,52 @@ function generateDocJson() {
 //     });
 // }
 
-function prepareSlag(name) {
-  return name.replace(/[^a-zA-Z0-9\s]+/g, '')
-             .replace(/\s/g, '-')
-             .toLowerCase();
-}
-
-function flatten(root, arr) {
-  let res: any[] = [];
-  arr.forEach((item: any) => {
-    const path = `${root}/${item.path}`;
-    res.push(path);
-    if (item.children) {
-      res = res.concat(flatten(path, item.children));
-    }
-  });
-
-  return res;
-}
-
-function createDirsStructure(dirs) {
-  const index = readFileSync(join(DOCS_DIST, 'index.html'), 'utf8');
-  dirs.forEach((dir: any) => {
-    const fullPath = join(DOCS_DIST, dir);
-    if (!existsSync(fullPath)) {
-      mkDirByPathSync(fullPath);
-    }
-
-    writeFileSync(join(fullPath, 'index.html'), index);
-  });
-}
-
-function mkDirByPathSync(targetDir, { isRelativeToScript = false } = {}) {
-  const initDir = isAbsolute(targetDir) ? sep : '';
-  const baseDir = isRelativeToScript ? __dirname : '.';
-
-  targetDir.split(sep)
-           .reduce((parentDir, childDir) => {
-             const curDir = resolve(baseDir, parentDir, childDir);
-             try {
-               mkdirSync(curDir);
-             } catch (err) {
-               if (err.code !== 'EEXIST') {
-                 throw err;
-               }
-             }
-
-             return curDir;
-           }, initDir);
-}
+// function prepareSlag(name) {
+//   return name.replace(/[^a-zA-Z0-9\s]+/g, '')
+//              .replace(/\s/g, '-')
+//              .toLowerCase();
+// }
+//
+// function flatten(root, arr) {
+//   let res: any[] = [];
+//   arr.forEach((item: any) => {
+//     const path = `${root}/${item.path}`;
+//     res.push(path);
+//     if (item.children) {
+//       res = res.concat(flatten(path, item.children));
+//     }
+//   });
+//
+//   return res;
+// }
+//
+// function createDirsStructure(dirs) {
+//   const index = readFileSync(join(DOCS_DIST, 'index.html'), 'utf8');
+//   dirs.forEach((dir: any) => {
+//     const fullPath = join(DOCS_DIST, dir);
+//     if (!existsSync(fullPath)) {
+//       mkDirByPathSync(fullPath);
+//     }
+//
+//     writeFileSync(join(fullPath, 'index.html'), index);
+//   });
+// }
+//
+// function mkDirByPathSync(targetDir, { isRelativeToScript = false } = {}) {
+//   const initDir = isAbsolute(targetDir) ? sep : '';
+//   const baseDir = isRelativeToScript ? __dirname : '.';
+//
+//   targetDir.split(sep)
+//            .reduce((parentDir, childDir) => {
+//              const curDir = resolve(baseDir, parentDir, childDir);
+//              try {
+//                mkdirSync(curDir);
+//              } catch (err) {
+//                if (err.code !== 'EEXIST') {
+//                  throw err;
+//                }
+//              }
+//
+//              return curDir;
+//            }, initDir);
+// }

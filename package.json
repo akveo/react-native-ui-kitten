@@ -65,6 +65,7 @@
     "ts-node": "^3.2.2",
     "tslint": "^5.12.1",
     "typedoc": "^0.14.2",
-    "typescript": "^3.1.6"
+    "typescript": "^3.1.6",
+    "doc-prsr": "2.2.0"
   }
 }
