@@ -29,6 +29,61 @@ interface ToggleComponentProps {
 
 export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
 
+/**
+ * The `Toggle` component is an analog of html checkbox and radio buttons.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} value - Determines whether component is checked.
+ *
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * By default is false.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
+ * By default status='primary'.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be 'small' | 'medium' | 'large'.
+ * By default size='medium'.
+ *
+ * @property {(value: boolean) => void} onChange - Triggered on change value.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Simple usage example
+ *
+ * ```tsx
+ * import { Toggle } from '@kitten/ui';
+ * <Toggle value={true}/>
+ * ```
+ *
+ * @example
+ *
+ * ```tsx
+ * import { Toggle } from '@kitten/ui';
+ *
+ * state: State = {
+ *   toggled: false,
+ * };
+ *
+ * private onChange = (value: boolean): void => {
+ *   this.setState({ toggled: value });
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <Toggle
+ *       value={this.state.toggled}
+ *       size='small'
+ *       status='danger'
+ *       onValueChange={this.onChange}/>
+ *   )
+ * }
+ * ```
+ * */
 export class Toggle extends React.Component<Props> implements PanResponderCallbacks {
 
   static styledComponentName: string = 'Toggle';

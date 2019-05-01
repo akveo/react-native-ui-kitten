@@ -31,13 +31,14 @@ task('process-type-doc', ['generate-doc-json'], processTypeDoc);
 // });
 
 function generateDocJson() {
-  src(['src/framework/ui/**/*.tsx', '!src/framework/ui/**/*.spec.tsx'])
+  return src(['src/framework/ui/**/*.tsx', '!src/framework/ui/**/*.spec.tsx'])
     .pipe(typedoc({
       allowSyntheticDefaultImports: true,
       esModuleInterop: true,
       resolveJsonModule: true,
       moduleResolution: 'node',
       jsx: 'react',
+      tsx: 'react',
       target: 'ES6',
       module: 'commonjs',
       baseUrl: './',
@@ -48,7 +49,6 @@ function generateDocJson() {
       exclude: './node_modules/**/*',
       json: './docs/docs.json',
     }));
-  exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
 }
 
 function processTypeDoc() {
