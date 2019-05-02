@@ -31,7 +31,7 @@ task('process-type-doc', ['generate-doc-json'], processTypeDoc);
 // });
 
 function generateDocJson() {
-  return src(['src/framework/ui/**/*.tsx', '!src/framework/ui/**/*.spec.tsx'])
+  return src(['src/framework/**/*.tsx', '!src/framework/**/*.spec.tsx'])
     .pipe(typedoc({
       allowSyntheticDefaultImports: true,
       esModuleInterop: true,
