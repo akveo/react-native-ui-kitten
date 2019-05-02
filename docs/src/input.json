@@ -1,0 +1,1029 @@
+{
+  "classes": [
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "with React Navigation usage example",
+          "code": "```tsx\nimport { Image } from 'react-native';\nimport {\n  BottomNavigatorTab,\n  BottomTabNavigator,\n} from '@kitten/ui';\nimport {\n  createBottomTabNavigator,\n  NavigationContainer,\n  NavigationContainerProps,\n  NavigationScreenProp,\n  NavigationState,\n  NavigationRoute,\n} from 'react-navigation';\n\ntype CommonNavigationProps = NavigationProps & NavigationContainerProps;\n\nexport const TabNavigatorScreen: NavigationContainer = createBottomTabNavigator({\n  ...screens,\n}, {\n  initialRouteName: 'Screen1',\n  tabBarComponent: (props: CommonNavigationProps) => renderBottomNavigation(props),\n});\n\nfunction renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {\n const routes: NavigationRoute[] = props.navigation.state.routes;\n const index: number = props.navigation.state.index;\n\n return (\n  <BottomTabNavigatorComponent\n    selectedIndex={index}\n    onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>\n    <BottomNavigatorTab\n      title='Screen 1'\n      icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>\n    <BottomNavigatorTab\n      title='Screen 2'\n      icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>\n      <BottomNavigatorTab\n      title='Screen 3'\n      icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>\n   </BottomTabNavigatorComponent>\n );\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "number",
+          "required": null,
+          "name": "selectedIndex",
+          "shortDescription": "",
+          "description": "Determines index of the selected tab."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "React.ReactElement<TabProps> | React.ReactElement<TabProps>[]",
+          "required": null,
+          "name": "children",
+          "shortDescription": "",
+          "description": "Determines tabs of the navigator. Can be passed through JSX."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(index: number) => void",
+          "required": null,
+          "name": "onSelect",
+          "shortDescription": "",
+          "description": "Triggered on select value."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "ViewProps",
+          "required": null,
+          "name": "ViewProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "BottomNavigation",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Simple usage example",
+          "code": "```tsx\nimport { BottomNavigatorTab } from '@kitten/ui';\n<BottomNavigatorTab selected={true}/>\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "with React Navigation usage example",
+          "code": "```tsx\nimport { Image } from 'react-native';\nimport {\n  BottomNavigatorTab,\n  BottomTabNavigator,\n} from '@kitten/ui';\nimport {\n  createBottomTabNavigator,\n  NavigationContainer,\n  NavigationContainerProps,\n  NavigationScreenProp,\n  NavigationState,\n  NavigationRoute,\n} from 'react-navigation';\n\ntype CommonNavigationProps = NavigationProps & NavigationContainerProps;\n\nexport const TabNavigatorScreen: NavigationContainer = createBottomTabNavigator({\n  ...screens,\n}, {\n  initialRouteName: 'Screen1',\n  tabBarComponent: (props: CommonNavigationProps) => renderBottomNavigation(props),\n});\n\nfunction renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {\n const routes: NavigationRoute[] = props.navigation.state.routes;\n const index: number = props.navigation.state.index;\n\n return (\n  <BottomTabNavigatorComponent\n    selectedIndex={index}\n    onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>\n    <BottomNavigatorTab\n      title='Screen 1'\n      icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>\n    <BottomNavigatorTab\n      title='Screen 2'\n      icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>\n      <BottomNavigatorTab\n      title='Screen 3'\n      icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>\n   </BottomTabNavigatorComponent>\n );\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "selected",
+          "shortDescription": "",
+          "description": "Determines whether component is selected."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "title",
+          "shortDescription": "",
+          "description": "Determines the title of the tab."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "titleStyle",
+          "shortDescription": "",
+          "description": "Customizes title style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(style: StyleType) => React.ReactElement<ImageProps>",
+          "required": null,
+          "name": "icon",
+          "shortDescription": "",
+          "description": "Determines the icon of the tab."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(selected: boolean) => void",
+          "required": null,
+          "name": "onSelect",
+          "shortDescription": "",
+          "description": "Triggered on select value."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "TouchableOpacityProps",
+          "required": null,
+          "name": "TouchableOpacityProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "BottomNavigationTab",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Simple usage example",
+          "code": "```tsx\nimport { Toggle } from '@kitten/ui';\n<Checkbox checked={true}/>\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "Checkbox API example",
+          "code": "```tsx\nimport { Checkbox } from '@kitten/ui';\n\nstate: State = {\n  checked: false,\n};\n\nprivate onChange = (checked: boolean): void => {\n  this.setState({ checked: checked });\n};\n\npublic render(): React.ReactNode {\n  return (\n    <Checkbox\n      checked={this.state.toggled}\n      status='info'\n      size='large'\n      text='Place your text'\n      textStyle={styles.checkboxText}\n      onChange={this.onChange}/>\n  );\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "checked",
+          "shortDescription": "",
+          "description": "Determines whether component is checked."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "disabled",
+          "shortDescription": "",
+          "description": "Determines whether component is disabled.\nBy default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "status",
+          "shortDescription": "",
+          "description": "Determines the status of the component.\nCan be 'primary' | 'success' | 'info' | 'warning' | 'danger'.\nBy default status is 'primary'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines the size of the component.\nCan be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.\nBy default size is 'medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "text",
+          "shortDescription": "",
+          "description": "Determines text of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "textStyle",
+          "shortDescription": "",
+          "description": "Customizes text style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(checked: boolean) => void",
+          "required": null,
+          "name": "onChange",
+          "shortDescription": "",
+          "description": "Triggered on change value."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "TouchableOpacityProps",
+          "required": null,
+          "name": "TouchableOpacityProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "CheckBox",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": [
+        {
+          "type": "text",
+          "content": "text"
+        }
+      ]
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Simple usage example",
+          "code": "```tsx\nimport { Modal } from '@kitten/ui';\n<Modal visible={true}>\n <View><Text>Hello! I'm modal!</Text></View>\n</Modal>\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "Modal API example",
+          "code": "```tsx\nimport { Modal } from '@kitten/ui';\n\nstate: State = {\n  visible: false,\n};\n\nprivate setVisible = (): void => {\n  this.setState({ visible: !this.state.visible });\n};\n\nprivate onModalDismiss = (): void => {\n  this.setState({ visible: false });\n};\n\npublic render(): React.ReactNode {\n  return (\n    <View>\n      <Button title='Show Modal' onPress={this.setVisible}/>\n      <Modal\n       visible={this.state.visible}\n       animationType='fade'\n       animationDuration={600}\n       isBackDropAllowed={true}\n       onCloseModal={this.onModalDismiss}\n       onValueChange={this.onChange}>\n       <View>\n         <Text>Hi! This is modal component!</Test>\n         <Button title='Close Modal' onPress={this.setVisible}/>\n       <View/>\n      </Modal>\n    </View>\n  )\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "visible",
+          "shortDescription": "",
+          "description": "Determines whether component is visible. By default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "React.ReactElement<any> | React.ReactElement<any>[]",
+          "required": null,
+          "name": "children",
+          "shortDescription": "",
+          "description": "Determines component's children. Can be passed as JSX template."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isBackDropAllowed",
+          "shortDescription": "",
+          "description": "Determines whether user can close\nmodal by tapping on backdrop. This feature works in pair with the\n'onCloseModal' property. By default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "() => void",
+          "required": null,
+          "name": "onCloseModal",
+          "shortDescription": "",
+          "description": "Allows passing a function that will\nbe called once the modal has been dismissed."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "ModalAnimationType",
+          "required": null,
+          "name": "animationType",
+          "shortDescription": "",
+          "description": "Controls how the modal showing animates.\nCan be 'slideInUp' | 'fade' | 'none'. By default is 'none'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "ViewProps",
+          "required": null,
+          "name": "ViewProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "number",
+          "required": null,
+          "name": "animationDuration",
+          "shortDescription": "",
+          "description": "Time of the animation duration."
+        }
+      ],
+      "methods": [],
+      "name": "Modal",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Overflow menu items config example",
+          "code": "```ts\nconst menuItems: OverflowMenuItemType[] = [\n  {\n    text: 'Menu Item 1',\n    icon: (style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>,\n  },\n  {\n    text: 'Menu Item 2',\n    icon: (style: StyleType) => <Image source={{ uri: iconUri2 }} style={style}/>,\n    disabled: true,\n  },\n  {\n    text: 'Menu Item 3',\n  },\n];\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "OverflowMenu usage example",
+          "code": "```tsx\n<OverflowMenu\n  items={menuItems}\n  placement='bottom start'\n  visible={this.state.overflowMenuVisible}\n  onSelect={this.onSelectItem}\n  onRequestClose={this.setMenu1Visible}>\n  <TouchableOpacity onPress={this.setMenuVisible}>\n    <Image style={styles.icon} source={{ uri: menuIconUri }}/>\n  </TouchableOpacity>\n</OverflowMenu>\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "React.ReactElement<any>",
+          "required": null,
+          "name": "children",
+          "shortDescription": "",
+          "description": "Determines the element above\nwhich the menu will be rendered."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "OverflowMenuItemType[]",
+          "required": null,
+          "name": "items",
+          "shortDescription": "",
+          "description": "Determines menu items."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines the size of the menu items components.\nCan be 'small' | 'medium' | 'large'. By default size='medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(event: GestureResponderEvent, index: number) => void",
+          "required": null,
+          "name": "onSelect",
+          "shortDescription": "",
+          "description": "Triggered on select value."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "Omit<PopoverProps, 'content'>",
+          "required": null,
+          "name": "{Omit<PopoverProps, 'content'>}",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "OverflowMenu",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "text",
+          "shortDescription": "",
+          "description": "Determines title of the menu item."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "textStyle",
+          "shortDescription": "",
+          "description": "Customizes text style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines size of the component.\nCan be 'small' | 'medium' | 'large'. By default size='medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "isLastItem",
+          "shortDescription": "",
+          "description": "Determines whether this menu item is the last one in menu."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "disabled",
+          "shortDescription": "",
+          "description": "Determines whether component is disabled.\nBy default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "number",
+          "required": null,
+          "name": "index",
+          "shortDescription": "",
+          "description": "Determines index of the menu item."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(style: StyleType) => React.ReactElement<ImageProps>",
+          "required": null,
+          "name": "icon",
+          "shortDescription": "",
+          "description": "Determines the icon of the menu item."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "TouchableOpacityIndexedProps",
+          "required": null,
+          "name": "TouchableOpacityIndexedProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps\n",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "OverflowMenuItem",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Simple usage example",
+          "code": "```tsx\nimport { Radio } from '@kitten/ui';\n<Radio checked={true}/>\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "Radio API example",
+          "code": "```tsx\nimport { Radio } from '@kitten/ui';\n\nstate: State = {\n  checked: false,\n};\n\nprivate onChange = (checked: boolean): void => {\n  this.setState({ checked: value });\n};\n\npublic render(): React.ReactNode {\n  return (\n    <Radio\n      checked={this.state.checked}\n      size='small'\n      status='warning'\n      text='Place your text'\n      textStyle={styles.radioText}\n      onChange={this.onChange}/>\n  )\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "checked",
+          "shortDescription": "",
+          "description": "Determines whether component is checked."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "disabled",
+          "shortDescription": "",
+          "description": "Determines whether component is disabled.\nBy default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "status",
+          "shortDescription": "",
+          "description": "Determines the status of the component.\nCan be 'primary' | 'success' | 'info' | 'warning' | 'danger'.\nBy default status='primary'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines whether component is disabled.\nCan be 'small' | 'medium' | 'large'.\nBy default size='medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "text",
+          "shortDescription": "",
+          "description": "Determines text of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "textStyle",
+          "shortDescription": "",
+          "description": "Customizes text style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(selected: boolean) => void",
+          "required": null,
+          "name": "onChange",
+          "shortDescription": "",
+          "description": "Triggered on change value."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "TouchableOpacityProps",
+          "required": null,
+          "name": "TouchableOpacityProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "Radio",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Simple usage example",
+          "code": "```tsx\nimport { Toggle } from '@kitten/ui';\n<Toggle value={true}/>\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "",
+          "code": "```tsx\nimport { Toggle } from '@kitten/ui';\n\nstate: State = {\n  toggled: false,\n};\n\nprivate onChange = (value: boolean): void => {\n  this.setState({ toggled: value });\n};\n\npublic render(): React.ReactNode {\n  return (\n    <Toggle\n      value={this.state.toggled}\n      size='small'\n      status='danger'\n      onValueChange={this.onChange}/>\n  )\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "value",
+          "shortDescription": "",
+          "description": "Determines whether component is checked."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "disabled",
+          "shortDescription": "",
+          "description": "Determines whether component is disabled.\nBy default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "status",
+          "shortDescription": "",
+          "description": "Determines the status of the component.\nCan be 'primary' | 'success' | 'info' | 'warning' | 'danger'.\nBy default status='primary'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines the size of the component.\nCan be 'small' | 'medium' | 'large'.\nBy default size='medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(value: boolean) => void",
+          "required": null,
+          "name": "onChange",
+          "shortDescription": "",
+          "description": "Triggered on change value."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "TouchableOpacityProps",
+          "required": null,
+          "name": "TouchableOpacityProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "Toggle",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "TopNavigationBar usage example",
+          "code": "```tsx\n<TopNavigationBarComponent\n  appearance='titleCentered'\n  title='Top Navigation Bar'\n  subtitle='Subtitle'\n  leftControl={\n                <TopNavigationBarAction\n                  icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}\n                  onPress={() => {...}/>\n              }\n  rightControls={[\n           <TopNavigationBarAction\n             icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}\n             onPress={() => {...}}/>,\n           <TopNavigationBarAction\n             icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={style}/>}\n             onPress={() => Alert.alert('On second right action')}/>]}/>\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "title",
+          "shortDescription": "",
+          "description": "Determines the title of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "subtitle",
+          "shortDescription": "",
+          "description": "Determines the subtitle of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string | TopNavigationAlignment",
+          "required": null,
+          "name": "alignment",
+          "shortDescription": "",
+          "description": "Determines the appearance of the component.\nCan be 'default' | 'titleCentered'. By default appearance is 'default'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "React.ReactElement<ActionProps>",
+          "required": null,
+          "name": "leftControl",
+          "shortDescription": "",
+          "description": "Determines the left control\nof the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "React.ReactElement<ActionProps>[]",
+          "required": null,
+          "name": "rightControls",
+          "shortDescription": "",
+          "description": "Determines the right controls\nof the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "titleStyle",
+          "shortDescription": "",
+          "description": "Customizes text style of title"
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "subtitleStyle",
+          "shortDescription": "",
+          "description": "Customizes text style of title"
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "ViewProps",
+          "required": null,
+          "name": "ViewProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "TopNavigation",
+      "description": "",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    }
+  ]
+}

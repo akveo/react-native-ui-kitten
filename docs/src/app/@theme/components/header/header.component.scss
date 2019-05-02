@@ -1,0 +1,242 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  $left-section-width: nb-theme(sidebar-width);
+  $right-section-width: nb-theme(settings-col-width);
+  $logo-fg: nb-theme(header-fg);
+  $version-fg: nb-theme(color-fg-heading-light);
+  $menu-item-fg: nb-theme(color-fg-heading-light);
+  $menu-item-fg-active: nb-theme(header-menu-fg-active);
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: row;
+  align-items: center;
+  margin-left: -15px;
+  margin-right: -15px;
+
+  .sidebar-toggle {
+    border: none;
+    background-color: transparent;
+    font-size: 2.5rem;
+    line-height: 1rem;
+    flex: 1 0 auto;
+    padding: 0 0.5rem;
+
+    nb-icon {
+      vertical-align: middle;
+      font-size: 1.75rem;
+      color: $version-fg;
+    }
+  }
+
+  .section {
+    display: flex;
+    padding: 0.875rem 0.5rem;
+
+    &.left {
+      width: $left-section-width;
+    }
+
+    &.middle {
+      flex: 1;
+    }
+  }
+
+  ::ng-deep nb-menu {
+    flex: 1;
+    .menu-items {
+      display: flex;
+      justify-content: flex-end;
+
+      .menu-item {
+        border: none;
+
+        &:first-child a {
+          padding-left: 0;
+        }
+
+        a {
+          color: $menu-item-fg;
+          display: block;
+
+          &:hover, &.active, &:focus {
+            color: $menu-item-fg-active;
+            outline: none!important;
+          }
+        }
+      }
+
+      li:not(:first-child) {
+        display: none;
+      }
+    }
+  }
+
+  .logo {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+
+    a {
+      font-size: 1.275rem;
+      color: $logo-fg;
+      text-decoration: none !important;
+      font-weight: bold;
+    }
+
+    .version {
+      display: none;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: $version-fg;
+    }
+  }
+
+  .stars {
+    width: 95px;
+    height: 20px;
+    margin-left: auto;
+  }
+
+  @include media-breakpoint-up(is) {
+    .section {
+      padding: 0.875rem 1.125rem;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    .logo {
+      align-items: baseline;
+      flex: 1 0 auto;
+
+      a {
+        margin-right: 0.5rem;
+      }
+      .version {
+        display: inline;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .logo {
+      flex: 1 0 auto;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .version {
+        margin-left: 0;
+      }
+    }
+    ::ng-deep nb-menu .menu-items li:nth-child(2) {
+      display: list-item;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    ::ng-deep nb-menu .menu-items {
+      justify-content: flex-start;
+
+      li:not(:first-child) {
+        display: list-item;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .sidebar-toggle {
+      display: none;
+    }
+  }
+
+  &.docs-page {
+    margin-left: 0;
+    margin-right: 0;
+    .section {
+      &.left {
+        align-items: center;
+        padding-left: 0;
+        width: auto;
+      }
+      &.middle {
+        justify-content: space-between;
+      }
+      &.right {
+        display: none;
+        margin-left: 0;
+        width: auto;
+      }
+    }
+    ::ng-deep nb-menu {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+
+      .menu-items {
+        li {
+          margin-top: 0.25rem;
+          display: none;
+        }
+      }
+    }
+    ngd-search {
+      display: none;
+    }
+
+    @include media-breakpoint-up(is) {
+      ::ng-deep nb-menu .menu-items li:first-child {
+        display: list-item;
+      }
+    }
+
+    @include media-breakpoint-up(sm) {
+      ngd-search {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      .section.right {
+        display: block;
+      }
+      .stars {
+        width: 95px;
+        height: 20px;
+        margin-left: auto;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      .section.middle {
+        justify-content: space-around;
+      }
+      ::ng-deep nb-menu {
+        min-width: 28rem;
+
+        .menu-items li {
+          display: list-item;
+        }
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      .section.left {
+        padding-left: 1.125rem;
+        width: nb-theme(sidebar-width);
+      }
+      ::ng-deep nb-menu {
+        flex: 1;
+      }
+    }
+
+    @include media-breakpoint-up(macpro) {
+      .section.right {
+        margin-left: 1.875rem;
+        width: $right-section-width;
+      }
+    }
+  }
+}

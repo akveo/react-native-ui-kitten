@@ -1,0 +1,42 @@
+@mixin nbd-common() {
+  :focus {
+    outline: 1px dashed nb-theme(color-fg-heading-light) !important;
+  }
+
+  .ds-dropdown-menu {
+    box-shadow: nb-theme(shadow);
+    border-radius: nb-theme(radius);
+  }
+
+  .algolia-autocomplete {
+    > input {
+      width: 100%;
+
+      &.ds-input {
+        padding-right: 1rem !important;
+      }
+    }
+
+    .ds-dropdown-menu [class^=ds-dataset-] {
+      border: none;
+    }
+  }
+
+  .algolia-docsearch-suggestion--highlight {
+    color: nb-theme(color-fg-highlight);
+    background: none;
+  }
+
+  .algolia-docsearch-suggestion--category-header {
+    background-color: transparent;
+  }
+
+  .visually-hidden { /* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+}

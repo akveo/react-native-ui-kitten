@@ -1,0 +1,99 @@
+@import '../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  $content-width: nb-theme(content-width);
+  $settings-width: nb-theme(settings-col-width);
+  $settings-margin: nb-theme(settings-col-margin);
+  $layout-background-color: nb-theme(layout-background-color);
+
+  .menu-sidebar {
+    background-color: $layout-background-color;
+
+    &.fixed {
+      box-shadow: 8px 0 20px 0 rgba(218, 224, 235, 0.6);
+    }
+  }
+
+  .content-center {
+    max-width: $content-width;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .contact-us {
+    padding: 5rem 1rem;
+
+    h2 {
+      font-family: nb-theme(text-heading-4-font-family);
+      font-size: nb-theme(text-heading-4-font-size);
+      font-weight: normal;
+      line-height: nb-theme(text-heading-4-line-height);
+    }
+  }
+
+  .collapse-all {
+    position: absolute;
+    right: 0.5rem;
+    top: 1.05rem;
+    font-size: 0.75rem;
+    color: nb-theme(text-hint-color);
+    appearance: none;
+    background: none;
+    border: none;
+  }
+
+  ::ng-deep nb-layout .main-container {
+    padding-top: 3rem;
+
+    .scrollable {
+      padding-top: 0;
+    }
+  }
+
+  ::ng-deep nb-layout .layout-container {
+    max-width: $content-width;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  ::ng-deep nb-sidebar nb-menu {
+    .menu-group {
+      padding-left: 0;
+    }
+
+    nb-icon {
+      display: none;
+    }
+
+    .menu-item {
+      border: none!important;
+    }
+
+    .menu-items .menu-item .menu-item a {
+      &:hover, &.active, &:focus {
+        outline: none!important;
+      }
+    }
+  }
+
+  ::ng-deep nb-layout-footer ngd-footer .contact {
+    display: none;
+  }
+
+  @include media-breakpoint-up(xl) {
+    .contact-us {
+      padding: 5rem 0;
+    }
+  }
+
+  @include media-breakpoint-up(macpro) {
+    ::ng-deep nb-layout-footer {
+      margin-right: $settings-width + $settings-margin;
+    }
+  }
+}
