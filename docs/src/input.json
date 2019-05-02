@@ -1,6 +1,141 @@
 {
   "classes": [
     {
+      "kind": "service",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Usage example",
+          "code": "```tsx\nimport { ModalService } from '@kitten/theme';\n\nprivate identifier: string = '';\n\nprivate show = (): void => {\n  const component: React.ReactElement<ModalComponentCloseProps> =\n    <View onRequestClose={() => Alert.alert('Dialog close')}>\n      <Text>Hi! I'm modal in modal panel!</Text>\n    </View>;\n  this.identifier = ModalService.show(component);\n};\n\nprivate hide = (): void => {\n  ModalService.hide(this.identifier);\n};\n\npublic render(): React.ReactNode {\n  return (\n    <View>\n      <Button title='Show Modal' onPress={this.show}/>\n      <Button title='Hide Modal' onPress={this.hide}/>\n    </View>\n  )\n}\n```"
+        }
+      ],
+      "props": [],
+      "methods": [
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "element",
+              "type": "React.ReactElement<ModalComponentCloseProps>",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            },
+            {
+              "name": "closeOnBackDrop",
+              "type": "boolean",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "show",
+          "type": [
+            "string"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": "Takes component, returns it's identifier."
+        },
+        {
+          "examples": [],
+          "params": [
+            {
+              "name": "identifier",
+              "type": "string",
+              "required": null,
+              "shortDescription": "",
+              "description": ""
+            }
+          ],
+          "platform": null,
+          "name": "hide",
+          "type": [
+            "void"
+          ],
+          "isStatic": false,
+          "shortDescription": "",
+          "description": "Hide dialog component with this identifier and removes it from Modal Panel."
+        }
+      ],
+      "name": "ModalServiceType",
+      "description": "The `ModalService` singleton service than has 2 methods (show/hide).\nThis service takes React.ReactElement<ModalComponentCloseProps> and\npushes it to the DialogPanel.",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Avatar API example",
+          "code": "```tsx\nimport { Avatar } from '@kitten/ui';\n\npublic render(): React.ReactNode {\n  return (\n    <Avatar\n      style={styles.avatar}\n      size='small'\n      shape='rounded'\n      source={{ uri: '...' }}\n    />\n  );\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "shape",
+          "shortDescription": "",
+          "description": "Determines the shape of the component.\nCan be 'round' | 'rounded' | 'square'.\nBy default status is 'round'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines the size of the component.\nCan be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.\nBy default size is 'medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "ImageProps",
+          "required": null,
+          "name": "ImageProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "Avatar",
+      "description": "The `Avatar` component is component for styling Image Component.",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
       "kind": "component",
       "platform": null,
       "examples": [
@@ -74,7 +209,7 @@
       ],
       "methods": [],
       "name": "BottomNavigation",
-      "description": "",
+      "description": "The `BottomNavigator` component is a component for tab navigation.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
@@ -183,7 +318,244 @@
       ],
       "methods": [],
       "name": "BottomNavigationTab",
-      "description": "",
+      "description": "The `BottomNavigatorTab` component is a part of the BottomTabNavigator component.\nBottom Navigator Tabs should be wrapped in BottomTabNavigator to provide usable component.",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "Simple usage example",
+          "code": "```tsx\nimport { Button } from '@kitten/ui';\n<Button>Test Button</Button>\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "Button API example",
+          "code": "```tsx\nimport { Button } from '@kitten/ui';\n\nprivate onButtonPress = (event: GestureResponderEvent): void => {\n  console.log('Button press);\n};\n\npublic render(): React.ReactNode {\n  return (\n    <Button\n      appearance='outline'\n      style={styles.button}\n      status='success'\n      size='large'\n      iconAlignment='left'\n      icon={(style: StyleType) => <Image source={{ uri: '...' }} style={style}/>}\n      onPress={this.onButtonPress}>\n      TEST BUTTON\n    </Button>\n  );\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "disabled",
+          "shortDescription": "",
+          "description": "Determines whether component is disabled. By default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "status",
+          "shortDescription": "",
+          "description": "Determines the status of the component.\nCan be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.\nBy default status is 'primary'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines the size of the component.\nCan be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.\nBy default size is 'medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "React.ReactText",
+          "required": null,
+          "name": "children",
+          "shortDescription": "",
+          "description": "Determines text of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "textStyle",
+          "shortDescription": "",
+          "description": "Customizes text style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(style: StyleType) => React.ReactElement<ImageProps>",
+          "required": null,
+          "name": "icon",
+          "shortDescription": "",
+          "description": "Determines icon of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string | ButtonIconAlignment",
+          "required": null,
+          "name": "iconAlignment",
+          "shortDescription": "",
+          "description": "Determines icon alignment of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "appearance",
+          "shortDescription": "",
+          "description": "Determines the appearance of the component.\nCan be 'filled' | 'outline' | 'ghost'.\nBy default appearance is 'filled'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "TouchableOpacityProps",
+          "required": null,
+          "name": "TouchableOpacityProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "Button",
+      "description": "The `Button` component is an analog of html button.",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
+        {
+          "shortDescription": "",
+          "description": "ButtonGroup API example",
+          "code": "```tsx\nimport { Button, ButtonGroup } from '@kitten/ui';\n\npublic render(): React.ReactNode {\n  return (\n    <ButtonGroup\n      style={styles.buttonGroup}\n      appearance='filled'\n      status='danger'\n      size='large'>\n      <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>L</Button>\n      <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>M</Button>\n      <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>R</Button>\n    </ButtonGroup>\n  );\n}\n```"
+        }
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "status",
+          "shortDescription": "",
+          "description": "Determines the status of the component.\nCan be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.\nBy default status is 'primary'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "size",
+          "shortDescription": "",
+          "description": "Determines the size of the component.\nCan be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.\nBy default size is 'medium'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "React.ReactElement<ButtonProps>[]",
+          "required": null,
+          "name": "children",
+          "shortDescription": "",
+          "description": "Determines buttons in group. Can be passed through jsx."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "appearance",
+          "shortDescription": "",
+          "description": "Determines the appearance of the component.\nCan be 'filled' | 'outline'.\nBy default appearance is 'filled'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "ViewProps",
+          "required": null,
+          "name": "ViewProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "ButtonGroup",
+      "description": "The `ButtonGroup` component is a component for placing buttons in row.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
@@ -316,16 +688,168 @@
       ],
       "methods": [],
       "name": "CheckBox",
-      "description": "",
+      "description": "The `Checkbox` component is an analog of html checkbox button.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
-      "overview": [
+      "overview": []
+    },
+    {
+      "kind": "component",
+      "platform": null,
+      "examples": [
         {
-          "type": "text",
-          "content": "text"
+          "shortDescription": "",
+          "description": "Simple usage example",
+          "code": "```tsx\nimport { Input } from '@kitten/ui';\n<Input/>\n```"
+        },
+        {
+          "shortDescription": "",
+          "description": "Input API example",
+          "code": "```tsx\nimport { Input } from '@kitten/ui';\n\npublic state: State = {\n  input: '',\n};\n\nprivate onInputChange = (input: string) => {\n  this.setState({ input });\n};\n\nprivate renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {\n  return (\n    <Image\n      style={style}\n      source={ICON}\n    />\n  );\n};\n\npublic render(): React.ReactNode {\n  return (\n    <Input\n      style={styles.input}\n      onChangeText={this.onInputChange}\n      value={this.state.input}\n      icon={this.renderIcon}\n      status='warning'\n      placeholder='Placeholder'\n      label='Label'\n      caption='Caption'\n      captionIcon={this.renderIcon}\n    />\n  );\n}\n```"
         }
-      ]
+      ],
+      "props": [
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "boolean",
+          "required": null,
+          "name": "disabled",
+          "shortDescription": "",
+          "description": "Determines whether component is disabled. By default is false."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "status",
+          "shortDescription": "",
+          "description": "Determines the status of the component.\nCan be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.\nBy default status is 'primary'."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "label",
+          "shortDescription": "",
+          "description": "Determines label of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "labelStyle",
+          "shortDescription": "",
+          "description": "Customizes label style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "string",
+          "required": null,
+          "name": "caption",
+          "shortDescription": "",
+          "description": "Determines caption of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "captionStyle",
+          "shortDescription": "",
+          "description": "Customizes caption style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyleProp<TextStyle>",
+          "required": null,
+          "name": "textStyle",
+          "shortDescription": "",
+          "description": "Customizes text style."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(style: StyleType) => React.ReactElement<ImageProps>",
+          "required": null,
+          "name": "icon",
+          "shortDescription": "",
+          "description": "Determines icon of the component."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "(style: StyleType) => React.ReactElement<ImageProps>",
+          "required": null,
+          "name": "captionIcon",
+          "shortDescription": "",
+          "description": "Determines caption icon."
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "TextInputProps",
+          "required": null,
+          "name": "TextInputProps",
+          "shortDescription": "",
+          "description": ""
+        },
+        {
+          "isDocsPrivate": false,
+          "inherited": false,
+          "kind": "prop",
+          "platform": null,
+          "isStatic": false,
+          "type": "StyledComponentProps",
+          "required": null,
+          "name": "StyledComponentProps",
+          "shortDescription": "",
+          "description": ""
+        }
+      ],
+      "methods": [],
+      "name": "Input",
+      "description": "The `Input` component is an analog of html input.",
+      "shortDescription": "",
+      "styles": [],
+      "liveExamples": [],
+      "overview": []
     },
     {
       "kind": "component",
@@ -430,7 +954,7 @@
       ],
       "methods": [],
       "name": "Modal",
-      "description": "",
+      "description": "The `Modal` component is a wrapper than presents content above an enclosing view.\nThis component is not styled from the mapping(theme) of the system.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
@@ -527,7 +1051,7 @@
       ],
       "methods": [],
       "name": "OverflowMenu",
-      "description": "",
+      "description": "The `OverflowMenu` component is a component for showing menu content over the screen.\nComponent uses Popover -> ModalPanel -> Modal components \"chain\"",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
@@ -649,7 +1173,7 @@
       ],
       "methods": [],
       "name": "OverflowMenuItem",
-      "description": "",
+      "description": "The `OverflowMenuItem` component is a part of the OverflowMenu component.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
@@ -782,7 +1306,7 @@
       ],
       "methods": [],
       "name": "Radio",
-      "description": "",
+      "description": "The `Radio` component is an analog of html radio button.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
@@ -891,7 +1415,7 @@
       ],
       "methods": [],
       "name": "Toggle",
-      "description": "",
+      "description": "The `Toggle` component is an analog of html checkbox and radio buttons.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],
@@ -1019,7 +1543,7 @@
       ],
       "methods": [],
       "name": "TopNavigation",
-      "description": "",
+      "description": "The `TopNavigation` component is a component that work like AppBar component.\nCan be used for navigation for example.",
       "shortDescription": "",
       "styles": [],
       "liveExamples": [],

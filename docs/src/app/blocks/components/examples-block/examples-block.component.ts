@@ -13,7 +13,7 @@ import { NgdTabbedService } from '../../../@theme/services';
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
-        <ngd-stacked-example-block *ngFor="let example of source.liveExamples" [content]="example.content"
+        <ngd-stacked-example-block *ngFor="let example of examples" [content]="example"
                                    class="widget-block">
         </ngd-stacked-example-block>
       </nb-card-body>
@@ -23,6 +23,18 @@ import { NgdTabbedService } from '../../../@theme/services';
 })
 export class NgdExamplesBlockComponent {
 
-  @Input('source') source;
+  source: any;
+  examples: any[];
+
+  @Input('source')
+  set setExamples(source: any) {
+    this.source = source;
+    this.examples = source.examples;
+  }
+
+  protected hasExamples(): boolean {
+    return this.examples.length !== 0;
+  }
+
 
 }

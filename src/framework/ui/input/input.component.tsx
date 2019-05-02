@@ -45,6 +45,82 @@ export type Props = InputProps & StyledComponentProps & TextInputProps;
 
 const Text = styled<TextProps>(TextComponent);
 
+/**
+ * The `Input` component is an analog of html input.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} disabled - Determines whether component is disabled. By default is false.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
+ * By default status is 'primary'.
+ *
+ * @property {string} label - Determines label of the component.
+ *
+ * @property {StyleProp<TextStyle>} labelStyle - Customizes label style.
+ *
+ * @property {string} caption - Determines caption of the component.
+ *
+ * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
+ *
+ * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} captionIcon - Determines caption icon.
+ *
+ * @property TextInputProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Simple usage example
+ *
+ * ```tsx
+ * import { Input } from '@kitten/ui';
+ * <Input/>
+ * ```
+ *
+ * @example Input API example
+ *
+ * ```tsx
+ * import { Input } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   input: '',
+ * };
+ *
+ * private onInputChange = (input: string) => {
+ *   this.setState({ input });
+ * };
+ *
+ * private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+ *   return (
+ *     <Image
+ *       style={style}
+ *       source={ICON}
+ *     />
+ *   );
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <Input
+ *       style={styles.input}
+ *       onChangeText={this.onInputChange}
+ *       value={this.state.input}
+ *       icon={this.renderIcon}
+ *       status='warning'
+ *       placeholder='Placeholder'
+ *       label='Label'
+ *       caption='Caption'
+ *       captionIcon={this.renderIcon}
+ *     />
+ *   );
+ * }
+ * ```
+ * */
+
 export class Input extends React.Component<Props> {
 
   static styledComponentName: string = 'Input';

@@ -1,4 +1,3 @@
-
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -11,20 +10,6 @@ import { NgdMetadataService } from '../../../@theme/services';
 @Component({
   selector: 'ngd-props-block',
   template: `
-    <ngd-prop-block *ngIf="inputs.length > 0"
-                    [properties]="inputs"
-                    name="Inputs"
-                    [slag]="slag"
-                    class="widget-block">
-    </ngd-prop-block>
-
-    <ngd-prop-block *ngIf="outputs.length > 0"
-                    [properties]="outputs"
-                    name="Outputs"
-                    [slag]="slag"
-                    class="widget-block">
-    </ngd-prop-block>
-
     <ngd-prop-block *ngIf="props.length > 0"
                     [properties]="props"
                     name="Properties"
@@ -43,12 +28,11 @@ export class NgdPropsBlockComponent {
 
   @Input('source')
   set setSource(source: any) {
-    this.inputs = source.props.filter(item => item.kind === 'input').filter(m => this.metadataService.isPublic(m));
-    this.outputs = source.props.filter(item => item.kind === 'output').filter(m => this.metadataService.isPublic(m));
-    this.props = source.props.filter(item => item.kind === 'property').filter(m => this.metadataService.isPublic(m));
+    this.props = source.props.filter(item => item.kind === 'prop');
     this.name = source.name;
     this.slag = source.slag;
   }
 
-  constructor(private metadataService: NgdMetadataService) {}
+  constructor(private metadataService: NgdMetadataService) {
+  }
 }

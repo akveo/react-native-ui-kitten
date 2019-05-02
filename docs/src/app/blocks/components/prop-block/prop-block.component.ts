@@ -15,7 +15,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       <thead>
       <tr>
         <td width="25%">Name</td>
-        <td width="20%">Type</td>
+        <td width="40%">Type</td>
         <td>Description</td>
       </tr>
       </thead>

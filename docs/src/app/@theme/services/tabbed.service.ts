@@ -37,9 +37,7 @@ export class NgdTabbedService {
   }
 
   componentHasProps(component): boolean {
-    return component &&
-      component.props &&
-      component.props.filter(m => this.metadataService.isPublic(m)).length > 0;
+    return component && component.props;
   }
 
   componentHasMethods(component): boolean {
@@ -52,10 +50,10 @@ export class NgdTabbedService {
   }
 
   componentHasOverview(component): boolean {
-    return component && component.overview && component.overview.length > 0;
+    return component && component.description && component.description.length > 0;
   }
 
   componentHasExamples(component): boolean {
-    return component.liveExamples && component.liveExamples.length > 0;
+    return component.examples && component.examples.length > 0;
   }
 }

@@ -6,8 +6,6 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { forkJoin,  of as observableOf,  Observable } from 'rxjs';
-import { map,  catchError } from 'rxjs/operators';
 import { NgdCodeLoaderService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
@@ -22,31 +20,16 @@ export class NgdTabbedExampleBlockComponent {
 
   @Input() hasViewSwitch = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
-  examples = [];
+  example: any;
 
   @Input()
-  set content({ files }) {
-    forkJoin(files.map(file => this.load(file)))
-      .subscribe(files => {
-        (files[0] as any).active = true;
-        this.examples = files;
-        this.cd.detectChanges();
-      });
+  set content(content: any) {
+    this.example = content;
+    this.example.path = 'path';
+    this.example.active = true;
   }
 
   constructor(private codeLoader: NgdCodeLoaderService, private cd: ChangeDetectorRef) {
   }
 
-  switchToLiveView() {
-    this.changeView.emit(NgdExampleView.LIVE);
-  }
-
-  private load(path): Observable<any> {
-    const extension = path.split('.').pop();
-    return this.codeLoader.load(path)
-      .pipe(
-        map(code => ({ code, path, extension })),
-        catchError(e => observableOf('')),
-      );
-  }
 }
