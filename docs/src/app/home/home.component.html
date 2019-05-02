@@ -1,0 +1,37 @@
+<nb-layout>
+  <nb-layout-column>
+    <section class="hero-image">
+      <div class="content-center">
+        <ngd-header [showSearch]="false"></ngd-header>
+        <ngd-hero></ngd-hero>
+      </div>
+      <svg class="concave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 222" preserveAspectRatio="xMidYMin slice">
+        <g>
+          <path fill="#fff" d="M1920,0c-248.44,93.45-587.33,151.09-960.52,151.09S248.44,93.45,0,0V222H1920Z"/>
+        </g>
+      </svg>
+    </section>
+
+    <section class="features content-center">
+      <ngd-icon-card *ngFor="let feature of features"
+                     [routerLink]="feature.link"
+                     [title]="feature.title"
+                     [icon]="feature.icon"
+                     [description]="feature.description">
+      </ngd-icon-card>
+    </section>
+
+    <section class="advantages">
+      <div class="content-center">
+        <ngd-text-card *ngFor="let advantage of advantages"
+                       [title]="advantage.title"
+                       [description]="advantage.description"
+                       [icon]="advantage.icon">
+        </ngd-text-card>
+      </div>
+    </section>
+
+    <ngd-footer></ngd-footer>
+
+  </nb-layout-column>
+</nb-layout>

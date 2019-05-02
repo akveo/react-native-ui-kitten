@@ -1,0 +1,35 @@
+<div class="middle-column docSearch-content">
+
+  <nb-card *ngIf="currentItem?.tabs" class="horizontal-nav">
+    <nb-card-header>
+      <h1 class="page-header h4">
+        {{ currentItem?.name }}
+        <span class="visually-hidden">{{ currentTabName }}</span>
+      </h1>
+    </nb-card-header>
+    <nb-card-body>
+      <ngd-page-tabs [tabs]="currentItem?.tabs" horizontal></ngd-page-tabs>
+    </nb-card-body>
+  </nb-card>
+
+  <ng-container *ngFor="let block of currentItem?.children">
+    <ng-container [ngSwitch]="block.block">
+      <ngd-md-block *ngSwitchCase="'markdown'" [source]="block.children"></ngd-md-block>
+      <ngd-component-block *ngSwitchCase="'component'" [source]="block.source"></ngd-component-block>
+      <ngd-tabbed-block *ngSwitchCase="'tabbed'" [source]="block.children" [tabs]="currentItem.tabs"></ngd-tabbed-block>
+      <ngd-theme-block *ngSwitchCase="'theme'" [block]="block"></ngd-theme-block>
+      <ngd-components-overview-block *ngSwitchCase="'components-overview'"></ngd-components-overview-block>
+    </ng-container>
+  </ng-container>
+
+  <p class="not-found" *ngIf="!currentItem">Page does not exist.</p>
+
+  <ngd-pager-block [currentItemSlag]="currentItem?.slag"></ngd-pager-block>
+</div>
+
+<div class="settings-column" *ngIf="showSettings">
+  <div class="fixed-panel">
+    <ngd-page-tabs [tabs]="currentItem?.tabs"></ngd-page-tabs>
+    <ngd-page-toc [toc]="currentItem?.toc"></ngd-page-toc>
+  </div>
+</div>

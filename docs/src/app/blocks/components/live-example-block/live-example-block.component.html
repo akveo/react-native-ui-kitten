@@ -1,0 +1,25 @@
+<section class="header" >
+  <strong class="title">{{ content.name }}</strong>
+  <div class="actions">
+
+    <div class="action-selector">
+      <select class="action-item" [(ngModel)]="currentTheme"  (change)="switchTheme($event.target.value)">
+        <option *ngFor="let theme of themes" [value]="theme.value">{{theme.label}}</option>
+      </select>
+      <nb-icon icon="color-palette-outline"></nb-icon>
+    </div>
+    <a class="btn action-item action-button" target="_blank" [href]="url">
+      <nb-icon icon="external-link-outline"></nb-icon>
+    </a>
+    <button type="button"
+            *ngIf="hasViewSwitch"
+            class="btn action-item action-button"
+            (click)="switchToInlineVew()">
+      <nb-icon icon="code-outline"></nb-icon>
+    </button>
+  </div>
+</section>
+<div class="iframe-container">
+  <iframe #iframe *ngIf="content.id" [style.height.px]="iframeHeight" [class.loading]="loading"></iframe>
+</div>
+<nb-icon class="icon-loading" icon="more-vertical-outline" *ngIf="loading"></nb-icon>
