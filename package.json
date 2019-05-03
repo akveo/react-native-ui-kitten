@@ -17,6 +17,8 @@
     "clean:pg": "rimraf ./dist/src/playground",
     "clean": "rimraf ./dist",
     "docs:parse": "gulp docs",
+    "docs:serve": "cd docs && npm start",
+    "docs:start": "npm run docs:parse && npm run docs:serve",
     "lint:src": "tslint -p ./src/framework/tsconfig.json",
     "lint:src-fix": "npm run lint:src -- --fix",
     "lint:pg": "tslint -p ./src/playground/tsconfig.json",
@@ -65,7 +67,6 @@
     "ts-node": "^3.2.2",
     "tslint": "^5.12.1",
     "typedoc": "^0.14.2",
-    "typescript": "^3.1.6",
-    "doc-prsr": "2.2.0"
+    "typescript": "^3.1.6"
   }
 }
