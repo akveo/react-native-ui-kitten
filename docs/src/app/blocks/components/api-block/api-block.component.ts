@@ -13,6 +13,7 @@ import { NgdTabbedService } from '../../../@theme/services';
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
+        <ngd-types-block [source]="source" *ngIf="hasTypes(source)"></ngd-types-block>
         <ngd-props-block [source]="source" *ngIf="hasProps(source)"></ngd-props-block>
         <ngd-methods-block [source]="source" *ngIf="hasMethods(source)"></ngd-methods-block>
       </nb-card-body>
@@ -28,11 +29,15 @@ export class NgdApiBlockComponent {
   }
 
 
-  hasMethods(component) {
+  hasMethods(component): boolean {
     return this.tabbedService.componentHasMethods(component);
   }
 
-  hasProps(component) {
+  hasProps(component): boolean {
     return this.tabbedService.componentHasProps(component);
+  }
+
+  hasTypes(component): boolean {
+    return this.tabbedService.componentHasTypes(component);
   }
 }

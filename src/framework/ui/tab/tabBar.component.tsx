@@ -31,6 +31,53 @@ interface TabBarProps {
 
 export type Props = TabBarProps & StyledComponentProps & ViewProps;
 
+/**
+ * The `TabBar` component that manages Tab components.
+ *
+ * @extends React.Component
+ *
+ * @property {number} selectedIndex - Determines current tab index.
+ *
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
+ *
+ * @property {(index: number) => void} onSelect - Fires on onPress event and returns tab index.
+ *
+ * @property {React.ReactElement<TabProps>} children - Determines tabs.
+ *
+ * @property ViewProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example TabBar usage and API example
+ *
+ * ```
+ * import {
+ *   TabBar,
+ *   Tab,
+ * } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   barSelectedIndex: 0,
+ * };
+ *
+ * private onBarSelect = (index: number) => {
+ *   this.setState({ barSelectedIndex: index });
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <TabBar
+ *       onSelect={this.onBarSelect}
+ *       selectedIndex={this.state.barSelectedIndex}>
+ *       <Tab title='❤'/>
+ *       <Tab title='💛️'/>
+ *       <Tab title='💚️'/>
+ *     </TabBar>
+ *   );
+ * }
+ * ```
+ * */
+
 export class TabBar extends React.Component<Props> {
 
   static styledComponentName: string = 'TabBar';

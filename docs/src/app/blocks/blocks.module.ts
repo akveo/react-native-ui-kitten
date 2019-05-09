@@ -30,6 +30,7 @@ import {
   NgdExamplesBlockComponent,
   NgdPagerBlockComponent,
   NgdComponentsOverviewBlockComponent,
+  NgdTypesBlockComponent,
 } from './components/';
 
 const blocks = [
@@ -53,6 +54,7 @@ const blocks = [
   NgdExamplesBlockComponent,
   NgdPagerBlockComponent,
   NgdComponentsOverviewBlockComponent,
+  NgdTypesBlockComponent,
 ];
 
 @NgModule({

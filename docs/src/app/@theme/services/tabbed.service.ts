@@ -4,7 +4,8 @@ import { NgdMetadataService } from './metadata.service';
 @Injectable()
 export class NgdTabbedService {
 
-  constructor(private metadataService: NgdMetadataService) {}
+  constructor(private metadataService: NgdMetadataService) {
+  }
 
   determineTabs(tabs: any): { [tab: string]: boolean } {
     return {
@@ -38,6 +39,10 @@ export class NgdTabbedService {
 
   componentHasProps(component): boolean {
     return component && component.props;
+  }
+
+  componentHasTypes(component: any): boolean {
+    return component.types && component.types.length > 0;
   }
 
   componentHasMethods(component): boolean {

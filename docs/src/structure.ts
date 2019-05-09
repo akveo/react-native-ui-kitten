@@ -141,6 +141,16 @@ export const structure = [
           'ListItem',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Tab Set',
+        icon: 'button.svg',
+        source: [
+          'TabView',
+          'TabBar',
+          'Tab',
+        ],
+      },
     ],
   },
   {
