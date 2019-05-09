@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   ImageProps,
@@ -76,14 +82,14 @@ const Text = styled<TextProps>(TextComponent);
  *
  * @example Simple usage example
  *
- * ```tsx
+ * ```
  * import { Input } from '@kitten/ui';
  * <Input/>
  * ```
  *
  * @example Input API example
  *
- * ```tsx
+ * ```
  * import { Input } from '@kitten/ui';
  *
  * public state: State = {

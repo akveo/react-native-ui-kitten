@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   View,
@@ -53,7 +59,7 @@ export type Props = ViewProps & ModalProps;
  *
  * @example Simple usage example
  *
- * ```tsx
+ * ```
  * import { Modal } from '@kitten/ui';
  * <Modal visible={true}>
  *  <View><Text>Hello! I'm modal!</Text></View>
@@ -61,7 +67,7 @@ export type Props = ViewProps & ModalProps;
  * ```
  * @example Modal API example
  *
- * ```tsx
+ * ```
  * import { Modal } from '@kitten/ui';
  *
  * state: State = {

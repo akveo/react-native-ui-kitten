@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Dimensions,
@@ -46,7 +52,7 @@ export type Props = TabNavigatorProps & StyledComponentProps & ViewProps;
  *
  * @example with React Navigation usage example
  *
- * ```tsx
+ * ```
  * import { Image } from 'react-native';
  * import {
  *   BottomNavigatorTab,

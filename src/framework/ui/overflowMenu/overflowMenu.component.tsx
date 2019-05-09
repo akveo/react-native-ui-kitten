@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   ViewProps,
@@ -56,7 +62,7 @@ export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverPro
  *
  * @example Overflow menu items config example
  *
- * ```ts
+ * ```
  * const menuItems: OverflowMenuItemType[] = [
  *   {
  *     text: 'Menu Item 1',
@@ -75,7 +81,7 @@ export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverPro
  *
  * @example OverflowMenu usage example
  *
- * ```tsx
+ * ```
  * <OverflowMenu
  *   items={menuItems}
  *   placement='bottom start'

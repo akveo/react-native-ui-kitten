@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   TouchableOpacity,
@@ -71,14 +77,14 @@ const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
  *
  * @example Simple usage example
  *
- * ```tsx
+ * ```
  * import { Button } from '@kitten/ui';
  * <Button>Test Button</Button>
  * ```
  *
  * @example Button API example
  *
- * ```tsx
+ * ```
  * import { Button } from '@kitten/ui';
  *
  * private onButtonPress = (event: GestureResponderEvent): void => {

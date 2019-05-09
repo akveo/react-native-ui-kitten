@@ -124,6 +124,14 @@ export const structure = [
           'Avatar',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'ViewPager',
+        icon: 'button.svg',
+        source: [
+          'ViewPager',
+        ],
+      },
     ],
   },
   {

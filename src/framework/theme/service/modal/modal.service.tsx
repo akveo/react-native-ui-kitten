@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import { ModalComponentCloseProps } from '@kitten/theme';
 
@@ -16,7 +22,7 @@ import { ModalComponentCloseProps } from '@kitten/theme';
  *
  * @example Usage example
  *
- * ```tsx
+ * ```
  * import { ModalService } from '@kitten/theme';
  *
  * private identifier: string = '';

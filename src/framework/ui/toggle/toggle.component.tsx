@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Animated,
@@ -55,14 +61,14 @@ export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
  *
  * @example Simple usage example
  *
- * ```tsx
+ * ```
  * import { Toggle } from '@kitten/ui';
  * <Toggle value={true}/>
  * ```
  *
  * @example
  *
- * ```tsx
+ * ```
  * import { Toggle } from '@kitten/ui';
  *
  * state: State = {

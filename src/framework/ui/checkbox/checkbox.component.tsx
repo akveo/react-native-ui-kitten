@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   StyleSheet,
@@ -65,14 +71,14 @@ export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps
  *
  * @example Simple usage example
  *
- * ```tsx
+ * ```
  * import { Toggle } from '@kitten/ui';
  * <Checkbox checked={true}/>
  * ```
  *
  * @example Checkbox API example
  *
- * ```tsx
+ * ```
  * import { Checkbox } from '@kitten/ui';
  *
  * state: State = {
