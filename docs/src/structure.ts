@@ -132,6 +132,15 @@ export const structure = [
           'ViewPager',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'List',
+        icon: 'button.svg',
+        source: [
+          'List',
+          'ListItem',
+        ],
+      },
     ],
   },
   {

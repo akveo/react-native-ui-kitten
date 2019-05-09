@@ -20,16 +20,24 @@ export class NgdTabbedExampleBlockComponent {
 
   @Input() hasViewSwitch = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
-  example: any;
+  examples: any[];
 
   @Input()
   set content(content: any) {
-    this.example = content;
-    this.example.path = 'path';
-    this.example.active = true;
+    this.examples = content;
+    this.examples.map((item: any) => {
+      item.code = this.prepareCode(item.code);
+      item.path = 'path';
+      return item;
+    });
+    this.examples[0].active = true;
   }
 
   constructor(private codeLoader: NgdCodeLoaderService, private cd: ChangeDetectorRef) {
+  }
+
+  private prepareCode(code: string): string {
+    return code.replace(/`/g, '');
   }
 
 }

@@ -13,7 +13,7 @@ import { NgdTabbedService } from '../../../@theme/services';
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
-        <ngd-stacked-example-block *ngFor="let example of examples" [content]="example"
+        <ngd-stacked-example-block *ngIf="hasExamples()" [content]="examples"
                                    class="widget-block">
         </ngd-stacked-example-block>
       </nb-card-body>

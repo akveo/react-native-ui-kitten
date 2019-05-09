@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+
 import React from 'react';
 import {
   View,
@@ -53,6 +60,57 @@ type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps | CustomCont
 const Text = styled<TextProps>(TextComponent);
 
 export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndexedProps;
+
+/**
+ * The `ListItem` component is the "support" component for List.
+ *
+ * @extends React.Component
+ *
+ * @property {string} title - Determines the title of the ListItem.
+ *
+ * @property {string} description - Determines the description of the ListItem's title.
+ *
+ * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
+ *
+ * @property {StyleProp<TextStyle>} descriptionStyle - Customizes description style.
+ *
+ * @property {React.ReactNode} children - Determines React Children of the component.
+ *
+ * @property {number} index - Determines index of the ListItem.
+ *
+ * @property {(style: StyleType, index: number) => React.ReactElement<any>} accessory - Determines the accessory of the
+ * component.
+ *
+ * @property {(style: StyleType, index: number) => React.ReactElement<ImageProps>} icon - Determines the icon of the
+ * component.
+ *
+ * @example ListItem usage and API example
+ *
+ * ```
+ * import { ListItem } from '@kitten/ui';
+ *
+ * private renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
+ *    const { item, index } = info;
+ *    const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
+ *      <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
+ *    );
+ *
+ *    const Accessory = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
+ *      <CheckBox checked={index % 2 === 0}/>
+ *    );
+ *
+ *    return (
+ *      <ListItem
+ *        title={`${item.title} ${index + 1}`}
+ *        description={item.description}
+ *        icon={Icon}
+ *        accessory={Accessory}
+ *        onPress={this.onItemPress}
+ *      />
+ *    );
+ *  };
+ * ```
+ * */
 
 export class ListItem extends React.Component<Props> {
 
