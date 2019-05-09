@@ -151,6 +151,14 @@ export const structure = [
           'Tab',
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Text',
+        icon: 'button.svg',
+        source: [
+          'Text',
+        ],
+      },
     ],
   },
   {
