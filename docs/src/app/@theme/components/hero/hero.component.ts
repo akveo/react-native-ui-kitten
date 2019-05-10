@@ -5,43 +5,29 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./hero.component.scss'],
   template: `
     <div class="block">
-      <h1>Angular 8: UI Kit, Auth&nbsp;&&nbsp;Security</h1>
+      <h1>React Native: UI Kit, Theming and so on</h1>
       <div class="btns-wrapper">
         <a class="btn get-started" routerLink="docs">Get Started</a>
-        <a class="btn" href="http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=demo_button"
-           target="_blank">Demo</a>
+        <a class="btn" href="https://itunes.apple.com/us/app/kitten-tricks/id1246143230"
+           target="_blank">IOS Demo</a>
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks"
+           target="_blank">Android Demo</a>
       </div>
       <div class="hero-features">
         <div class="hero-feature">
           <div class="feature-key">
-            35+
+            15+
           </div>
           <h3 class="feature-title">
-            Angular Components
+            React Native Components
           </h3>
         </div>
         <div class="hero-feature">
           <div class="feature-key">
-            3
+            <nb-icon icon="star"></nb-icon>
           </div>
           <h3 class="feature-title">
-            Visual themes
-          </h3>
-        </div>
-        <div class="hero-feature">
-          <div class="feature-key">
-            3
-          </div>
-          <h3 class="feature-title">
-            Auth strategies
-          </h3>
-        </div>
-        <div class="hero-feature">
-          <div class="feature-key">
-            <nb-icon icon="lock"></nb-icon>
-          </div>
-          <h3 class="feature-title">
-            Security
+            Theming System
           </h3>
         </div>
       </div>

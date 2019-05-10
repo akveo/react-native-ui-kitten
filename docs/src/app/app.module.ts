@@ -3,7 +3,10 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { BrowserModule, Title } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  Title,
+} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +27,10 @@ import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import { structure  } from '../structure';
-import { DOCS, STRUCTURE } from './app.options';
+import {
+  DOCS,
+  STRUCTURE,
+} from './app.options';
 const docs = require('../input.json');
 
 @NgModule({

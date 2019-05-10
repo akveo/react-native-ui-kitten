@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
+import {
+  Observable,
+  BehaviorSubject,
+  of as observableOf,
+} from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { ThemeBlockModel } from './theme-block.model';

@@ -66,7 +66,7 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
         }),
         filter(item => item),
         tap((item: any) => {
-          this.titleService.setTitle(`Nebular - ${item.name}`);
+          this.titleService.setTitle(`RNUK - ${item.name}`);
         }),
         publishReplay(),
         refCount(),

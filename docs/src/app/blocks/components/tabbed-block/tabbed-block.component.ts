@@ -4,10 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { BehaviorSubject,  combineLatest } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+} from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NgdTabbedService } from '../../../@theme/services';
 

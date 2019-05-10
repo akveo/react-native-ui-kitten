@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+} from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgdHighlightService } from '../../../@theme/services';
 

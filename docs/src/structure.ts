@@ -32,7 +32,67 @@ export const structure = [
       },
       {
         type: 'group',
-        name: 'All Components',
+        name: 'Global',
+      },
+      {
+        type: 'tabs',
+        name: 'Layout',
+        icon: 'layout.svg',
+        source: [
+          'Layout',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'List',
+        icon: 'list.svg',
+        source: [
+          'List',
+          'ListItem',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Navigation',
+      },
+      {
+        type: 'tabs',
+        name: 'Top Navigation',
+        icon: 'actions.svg',
+        source: [
+          'TopNavigation',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Bottom Navigation',
+        icon: 'tab.svg',
+        source: [
+          'BottomNavigation',
+          'BottomNavigationTab',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'ViewPager',
+        icon: 'button.svg',
+        source: [
+          'ViewPager',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tab Set',
+        icon: 'tab.svg',
+        source: [
+          'TabView',
+          'TabBar',
+          'Tab',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Forms',
       },
       {
         type: 'tabs',
@@ -60,36 +120,10 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Bottom Navigation',
-        icon: 'checkbox.svg',
+        name: 'Input',
+        icon: 'input.svg',
         source: [
-          'BottomNavigation',
-          'BottomNavigationTab',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Overflow Menu',
-        icon: 'checkbox.svg',
-        source: [
-          'OverflowMenu',
-          'OverflowMenuItem',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Modal',
-        icon: 'checkbox.svg',
-        source: [
-          'Modal',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Top Navigation',
-        icon: 'checkbox.svg',
-        source: [
-          'TopNavigation',
+          'Input',
         ],
       },
       {
@@ -109,52 +143,58 @@ export const structure = [
         ],
       },
       {
+        type: 'group',
+        name: 'Modals & Overlays',
+      },
+      {
         type: 'tabs',
-        name: 'Input',
-        icon: 'button.svg',
+        name: 'Overflow Menu',
+        icon: 'menu.svg',
         source: [
-          'Input',
+          'OverflowMenu',
+          'OverflowMenuItem',
         ],
       },
       {
         type: 'tabs',
-        name: 'Avatar',
-        icon: 'button.svg',
+        name: 'Modal',
+        icon: 'dialog.svg',
+        source: [
+          'Modal',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Popover',
+        icon: 'popover.svg',
+        source: [
+          'Popover',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tooltip',
+        icon: 'tooltip.svg',
+        source: [
+          'Tooltip',
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Extra',
+      },
+      {
+        type: 'tabs',
+        name: 'User (Avatar)',
+        icon: 'user.svg',
         source: [
           'Avatar',
         ],
       },
       {
         type: 'tabs',
-        name: 'ViewPager',
-        icon: 'button.svg',
-        source: [
-          'ViewPager',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'List',
-        icon: 'button.svg',
-        source: [
-          'List',
-          'ListItem',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Tab Set',
-        icon: 'button.svg',
-        source: [
-          'TabView',
-          'TabBar',
-          'Tab',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Text',
-        icon: 'button.svg',
+        icon: 'input.svg',
         source: [
           'Text',
         ],

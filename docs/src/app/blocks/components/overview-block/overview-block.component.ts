@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'ngd-overview-block',

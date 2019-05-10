@@ -1,5 +1,14 @@
-import {Component, ChangeDetectionStrategy, Input} from '@angular/core';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+} from '@angular/core';
 import { NgdPaginationService } from '../../../@theme/services';
 
 @Component({

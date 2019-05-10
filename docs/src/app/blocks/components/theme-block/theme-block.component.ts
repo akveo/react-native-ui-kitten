@@ -4,11 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ElementRef, Input, Renderer2, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { takeWhile, skip, distinctUntilChanged, debounceTime } from 'rxjs/operators';
-
+import {
+  takeWhile,
+  skip,
+  distinctUntilChanged,
+  debounceTime,
+} from 'rxjs/operators';
 import { ThemeBlockModel } from './theme-block.model';
 import { ThemeBlockViewModel } from './theme-block.viewmodel';
 
@@ -32,7 +41,8 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
     this.vm.themeProperties = block.source.data;
   }
 
-  constructor(public vm: ThemeBlockViewModel) {}
+  constructor(public vm: ThemeBlockViewModel) {
+  }
 
   ngOnInit() {
     this.searchControl.valueChanges

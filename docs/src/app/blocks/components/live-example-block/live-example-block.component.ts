@@ -14,7 +14,10 @@ import {
 } from '@angular/core';
 import { Location } from '@angular/common';
 import { takeWhile } from 'rxjs/operators';
-import { NgdAnalytics, NgdIframeCommunicatorService } from '../../../@theme/services';
+import {
+  NgdAnalytics,
+  NgdIframeCommunicatorService,
+} from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
 @Component({

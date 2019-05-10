@@ -1,9 +1,30 @@
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { of as observableOf } from 'rxjs';
-import { takeWhile, delay } from 'rxjs/operators';
-import { NB_DOCUMENT, NbThemeService } from '@nebular/theme';
-import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
+import {
+  takeWhile,
+  delay,
+} from 'rxjs/operators';
+import {
+  NB_DOCUMENT,
+  NbThemeService,
+} from '@nebular/theme';
+import {
+  NgdAnalytics,
+  NgdIframeCommunicatorService,
+} from '../@theme/services';
 
 @Component({
   selector: 'ngd-example',

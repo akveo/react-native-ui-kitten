@@ -4,8 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgdTabbedService } from '../../../@theme/services';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'ngd-examples-block',
@@ -35,6 +38,4 @@ export class NgdExamplesBlockComponent {
   protected hasExamples(): boolean {
     return this.examples.length !== 0;
   }
-
-
 }

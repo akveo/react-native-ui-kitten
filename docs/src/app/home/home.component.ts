@@ -41,18 +41,6 @@ export class NgdHomeComponent {
       icon: 'assets/img/themes.svg',
       link: 'docs/guides/theme-system',
     },
-    {
-      title: 'Auth',
-      description: 'Authentication layer with configurable Strategies',
-      icon: 'assets/img/auth.svg',
-      link: 'docs/auth/introduction',
-    },
-    {
-      title: 'Security',
-      description: 'ACL list with helpful directives',
-      icon: 'assets/img/security.svg',
-      link: 'docs/security/introduction',
-    },
   ];
 
   advantages = [
@@ -62,8 +50,8 @@ export class NgdHomeComponent {
       icon: 'assets/img/modular.svg',
     },
     {
-      title: 'Angular',
-      description: `Components are written in pure Angular without 3rd-party dependencies.`,
+      title: 'React Native',
+      description: `Components are written in pure React Native without 3rd-party dependencies.`,
       icon: 'assets/img/native.svg',
     },
     {

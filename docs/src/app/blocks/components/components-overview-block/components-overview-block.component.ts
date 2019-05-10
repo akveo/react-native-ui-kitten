@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { NgdMenuService } from '../../../@theme/services/menu.service';
 
 @Component({
@@ -10,7 +12,8 @@ import { NgdMenuService } from '../../../@theme/services/menu.service';
 export class NgdComponentsOverviewBlockComponent implements OnInit {
   components: { name: string; icon: string; link: string }[];
 
-  constructor(private menu: NgdMenuService) {}
+  constructor(private menu: NgdMenuService) {
+  }
 
   ngOnInit() {
     this.components = this.menu

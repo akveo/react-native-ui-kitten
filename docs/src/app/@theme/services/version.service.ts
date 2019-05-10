@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NgdVersionService {
 
-  getNebularVersion() {
+  getKittenVersion() {
     return require('../../../../../package.json').version;
   }
 }

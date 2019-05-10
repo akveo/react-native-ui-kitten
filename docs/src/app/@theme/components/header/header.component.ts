@@ -11,7 +11,7 @@ import { NgdVersionService } from '../../services';
         <nb-icon icon="menu-2"></nb-icon>
       </button>
       <div class="logo">
-        <a routerLink="/">Nebular</a>
+        <a routerLink="/">React Native UI Kitten</a>
         <span class="version">v{{ currentVersion }}</span>
       </div>
     </div>
@@ -21,7 +21,7 @@ import { NgdVersionService } from '../../services';
     </div>
     <div class="section right">
       <iframe class="stars"
-              src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
+              src="https://ghbtns.com/github-btn.html?user=akveo&repo=react-native-ui-kitten&type=star&count=true"
               frameborder="0"
               scrolling="0">
       </iframe>
@@ -49,14 +49,6 @@ export class NgdHeaderComponent implements OnInit {
       title: 'Theme System',
       link: '/docs/guides/theme-system',
     },
-    {
-      title: 'Auth',
-      link: '/docs/auth/introduction',
-    },
-    {
-      title: 'Security',
-      link: '/docs/security/introduction',
-    },
   ];
 
   @Input() sidebarTag: string;
@@ -65,7 +57,7 @@ export class NgdHeaderComponent implements OnInit {
     versionService: NgdVersionService,
     private sidebarService: NbSidebarService,
   ) {
-    this.currentVersion = versionService.getNebularVersion();
+    this.currentVersion = versionService.getKittenVersion();
   }
 
   ngOnInit() {
