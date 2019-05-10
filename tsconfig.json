@@ -8,6 +8,7 @@
     "target": "es2017",
     "module": "es2015",
     "experimentalDecorators": true,
+    "types": ["react", "react-native", "jest"],
     "lib": [
       "es2015",
       "es2016",
