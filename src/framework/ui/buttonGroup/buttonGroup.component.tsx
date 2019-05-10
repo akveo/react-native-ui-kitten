@@ -6,10 +6,16 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  styled,
+  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { ButtonProps } from '../button/button.component';
+import {
+  Button,
+  ButtonElementStaticProps,
+  ButtonProps,
+} from '../button/button.component';
 
 type ButtonElement = React.ReactElement<ButtonProps>;
 type ChildrenProp = ButtonElement | ButtonElement[];
@@ -20,11 +26,17 @@ interface ComponentProps {
   status?: string;
 }
 
+interface ButtonGroupElementStaticProps {
+  Button: StyledComponentClass<ButtonProps, ButtonElementStaticProps>;
+}
+
 export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class ButtonGroup extends React.Component<ButtonGroupProps> {
+class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 
   static styledComponentName: string = 'ButtonGroup';
+
+  static Button = Button;
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const { style } = this.props;
@@ -107,3 +119,5 @@ const styles = StyleSheet.create({
     borderRadius: 0,
   },
 });
+
+export const ButtonGroup = styled<ButtonGroupProps, ButtonGroupElementStaticProps>(ButtonGroupComponent);

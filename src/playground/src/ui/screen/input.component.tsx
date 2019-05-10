@@ -60,7 +60,7 @@ class InputScreen extends React.Component<Props, State> {
 
   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
     return (
-      <Image
+      <Input.Icon
         style={style}
         source={ICON}
       />

@@ -5,12 +5,12 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { styled } from '@kitten/theme';
-import { TabProps } from './tab.component';
+import { StyledComponentClass } from '@kitten/theme';
 import {
-  TabBar as TabBarComponent,
-  TabBarProps,
-} from './tabBar.component';
+  TabProps,
+  TabElementStaticProps,
+} from './tab.component';
+import { TabBar } from './tabBar.component';
 import { ViewPager } from '../viewPager/viewPager.component';
 
 type TabContentElement = React.ReactElement<any>;
@@ -36,8 +36,6 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
-const TabBar = styled<TabBarProps>(TabBarComponent);
-
 export type TabViewProps = ViewProps & ComponentProps;
 
 export class TabView extends React.Component<TabViewProps> {
@@ -46,8 +44,10 @@ export class TabView extends React.Component<TabViewProps> {
     selectedIndex: 0,
   };
 
+  static Tab: StyledComponentClass<TabProps, TabElementStaticProps> = TabBar.Tab;
+
   private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
-  private tabBarRef: React.RefObject<TabBarComponent> = React.createRef();
+  private tabBarRef: React.RefObject<any> = React.createRef();
 
   private onBarSelect = (index: number) => {
     const { current: viewPager } = this.viewPagerRef;

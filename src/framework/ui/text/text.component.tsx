@@ -1,10 +1,11 @@
 import React from 'react';
 import {
+  Text as RNText,
+  TextProps as RNTextProps,
   StyleSheet,
-  Text as TextComponent,
-  TextProps as TextComponentProps,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
@@ -15,9 +16,9 @@ interface ComponentProps {
   children?: React.ReactText;
 }
 
-export type TextProps = StyledComponentProps & TextComponentProps & ComponentProps;
+export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
 
-export class Text extends React.Component<TextProps> {
+export class TextComponent extends React.Component<TextProps> {
 
   static styledComponentName: string = 'Text';
 
@@ -33,15 +34,17 @@ export class Text extends React.Component<TextProps> {
     };
   };
 
-  public render(): React.ReactElement<ComponentProps> {
+  public render(): React.ReactElement<RNTextProps> {
     const { themedStyle, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
-      <TextComponent
+      <RNText
         {...derivedProps}
         style={componentStyle}
       />
     );
   }
 }
+
+export const Text = styled<TextProps>(TextComponent);

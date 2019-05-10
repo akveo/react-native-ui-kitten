@@ -5,23 +5,17 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  ButtonGroup as ButtonGroupComponent,
-  ButtonGroupProps as ButtonGroupProps,
+  ButtonGroup,
+  ButtonGroupProps,
 } from './buttonGroup.component';
 import {
-  Button as ButtonComponent,
-  ButtonProps,
-} from '../button/button.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const Button = styled<ButtonProps>(ButtonComponent);
-const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);
+  mapping,
+  theme,
+} from '../support/tests';
 
 const Mock = (props?: ButtonGroupProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -40,13 +34,13 @@ describe('@button-group: component checks', () => {
 
     const component: RenderAPI = render(
       <Mock appearance={groupAppearance}>
-        <Button appearance='default'/>
-        <Button/>
-        <Button appearance='outline'/>
+        <ButtonGroup.Button appearance='default'/>
+        <ButtonGroup.Button/>
+        <ButtonGroup.Button appearance='outline'/>
       </Mock>,
     );
 
-    const children: ReactTestInstance[] = component.getAllByType(Button);
+    const children: ReactTestInstance[] = component.getAllByType(ButtonGroup.Button);
     const childrenSize: string = children.reduce((current: string, child: ReactTestInstance): string => {
       return child.props.appearance;
     }, groupAppearance);
@@ -59,14 +53,14 @@ describe('@button-group: component checks', () => {
 
     const component: RenderAPI = render(
       <Mock size={groupSize}>
-        <Button size='large'/>
-        <Button/>
-        <Button size='small'/>
-        <Button size='tiny'/>
+        <ButtonGroup.Button size='large'/>
+        <ButtonGroup.Button/>
+        <ButtonGroup.Button size='small'/>
+        <ButtonGroup.Button size='tiny'/>
       </Mock>,
     );
 
-    const children: ReactTestInstance[] = component.getAllByType(Button);
+    const children: ReactTestInstance[] = component.getAllByType(ButtonGroup.Button);
     const childrenSize: string = children.reduce((current: string, child: ReactTestInstance): string => {
       return child.props.size;
     }, groupSize);

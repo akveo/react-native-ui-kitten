@@ -5,9 +5,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
+  Image,
 } from 'react-native';
 import {
   Interaction,
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
@@ -19,11 +21,17 @@ interface ComponentProps {
   icon: IconProp;
 }
 
+export interface TopNavigationActionElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
+
 export type TopNavigationActionProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class TopNavigationAction extends React.Component<TopNavigationActionProps> {
+class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 
   static styledComponentName: string = 'TopNavigationAction';
+
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -96,3 +104,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export const TopNavigationAction =
+  styled<TopNavigationActionProps, TopNavigationActionElementStaticProps>(TopNavigationActionComponent);

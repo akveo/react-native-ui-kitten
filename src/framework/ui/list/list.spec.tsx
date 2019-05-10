@@ -13,24 +13,19 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  List as ListComponent,
+  List,
   ListProps,
 } from './list.component';
+import { ListItemProps } from './listItem.component';
 import {
-  ListItem as ListItemComponent,
-  ListItemProps as ListItemProps,
-} from './listItem.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const List = styled<ListProps>(ListComponent);
-const ListItem = styled<ListItemProps>(ListItemComponent);
+  mapping,
+  theme,
+} from '../support/tests';
 
 const data: any[] = Array(8);
 
@@ -46,7 +41,7 @@ const Mock = (props?: ListProps): React.ReactElement<ApplicationProviderProps> =
 
 const ItemMock = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
   return (
-    <ListItem {...props} />
+    <List.Item {...props} />
   );
 };
 
@@ -66,7 +61,7 @@ describe('@list: component checks', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const items: ReactTestInstance[] = component.getAllByType(List.Item);
 
     expect(items.length).toEqual(8);
   });
@@ -91,7 +86,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const items: ReactTestInstance[] = component.getAllByType(List.Item);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -111,7 +106,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const items: ReactTestInstance[] = component.getAllByType(List.Item);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -122,9 +117,15 @@ describe('@list-item: template matches snapshot', () => {
       return (
         <ItemMock
           title='Title'
-          titleStyle={{ fontSize: 22, lineHeight: 24 }}
+          titleStyle={{
+            fontSize: 22,
+            lineHeight: 24,
+          }}
           description='Description'
-          descriptionStyle={{ color: 'blue', letterSpacing: 6 }}
+          descriptionStyle={{
+            color: 'blue',
+            letterSpacing: 6,
+          }}
         />
       );
     };
@@ -136,7 +137,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const items: ReactTestInstance[] = component.getAllByType(List.Item);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -169,7 +170,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const items: ReactTestInstance[] = component.getAllByType(List.Item);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -202,7 +203,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const items: ReactTestInstance[] = component.getAllByType(List.Item);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -235,7 +236,7 @@ describe('@list-item: component checks', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(ListItemComponent);
+    const items: ReactTestInstance[] = component.getAllByType(List.Item);
     const touchable: ReactTestInstance = items[pressIndex].findByType(TouchableOpacity);
 
     fireEvent.press(touchable);

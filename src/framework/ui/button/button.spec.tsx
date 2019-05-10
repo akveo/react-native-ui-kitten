@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Image,
   ImageProps,
   ImageSourcePropType,
   TouchableOpacity,
@@ -12,19 +11,18 @@ import {
   RenderAPI,
 } from 'react-native-testing-library';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  Button as ButtonComponent,
-  ButtonProps as ButtonProps,
+  Button,
+  ButtonProps,
 } from './button.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const Button = styled<ButtonProps>(ButtonComponent);
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
 const Mock = (props?: ButtonProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -48,7 +46,7 @@ describe('@button: matches snapshot', () => {
 
     it('* stateless', () => {
       const component: RenderAPI = renderComponent();
-      const { output } = shallow(component.getByType(ButtonComponent));
+      const { output } = shallow(component.getByType(Button));
 
       expect(output).toMatchSnapshot();
     });
@@ -61,7 +59,7 @@ describe('@button: matches snapshot', () => {
 
     const icon = (style: StyleType): React.ReactElement<ImageProps> => {
       return (
-        <Image
+        <Button.Icon
           source={iconSource}
           style={style}
         />
@@ -72,21 +70,21 @@ describe('@button: matches snapshot', () => {
 
     it('* empty', () => {
       const component: RenderAPI = renderComponent();
-      const { output } = shallow(component.getByType(ButtonComponent));
+      const { output } = shallow(component.getByType(Button));
 
       expect(output).toMatchSnapshot();
     });
 
     it('* icon', () => {
       const component: RenderAPI = renderComponent({ icon });
-      const { output } = shallow(component.getByType(ButtonComponent));
+      const { output } = shallow(component.getByType(Button));
 
       expect(output).toMatchSnapshot();
     });
 
     it('* text', () => {
       const component: RenderAPI = renderComponent({ children: text });
-      const { output } = shallow(component.getByType(ButtonComponent));
+      const { output } = shallow(component.getByType(Button));
 
       expect(output).toMatchSnapshot();
     });
@@ -96,7 +94,7 @@ describe('@button: matches snapshot', () => {
         icon,
         children: text,
       });
-      const { output } = shallow(component.getByType(ButtonComponent));
+      const { output } = shallow(component.getByType(Button));
 
       expect(output).toMatchSnapshot();
     });
@@ -106,9 +104,12 @@ describe('@button: matches snapshot', () => {
         icon,
         children: text,
         size: 'giant',
-        textStyle: { fontSize: 32, lineHeight: 34 },
+        textStyle: {
+          fontSize: 32,
+          lineHeight: 34,
+        },
       });
-      const { output } = shallow(component.getByType(ButtonComponent));
+      const { output } = shallow(component.getByType(Button));
 
       expect(output).toMatchSnapshot();
     });

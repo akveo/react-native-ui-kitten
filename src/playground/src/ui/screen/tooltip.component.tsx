@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   ImageProps,
-  Image,
   ImageSourcePropType,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
@@ -67,7 +66,7 @@ class TooltipScreen extends React.Component<Props, State> {
 
   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
     return (
-      <Image
+      <Tooltip.Icon
         style={style}
         source={ICON}
       />

@@ -7,17 +7,23 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  styled,
+  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { BottomNavigationTabProps } from './bottomNavigationTab.component';
 import {
-  TabBarIndicator,
-  TabBarIndicatorProps as TabBarIndicatorProps,
-} from '../tab/tabBarIndicator.component';
+  BottomNavigationTab,
+  BottomNavigationTabElementStaticProps,
+  BottomNavigationTabProps,
+} from './bottomNavigationTab.component';
+import {
+  TabIndicator,
+  TabIndicatorProps,
+} from '../support/components';
 
 type TabElement = React.ReactElement<BottomNavigationTabProps>;
-type IndicatorElement = React.ReactElement<TabBarIndicatorProps>;
+type IndicatorElement = React.ReactElement<TabIndicatorProps>;
 type ChildrenProp = TabElement | TabElement[];
 
 interface ComponentProps {
@@ -27,15 +33,21 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
+interface BottomNavigationElementStaticProps {
+  Tab: StyledComponentClass<BottomNavigationTabProps, BottomNavigationTabElementStaticProps>;
+}
+
 export type BottomNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class BottomNavigation extends React.Component<BottomNavigationProps> {
+class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 
   static styledComponentName: string = 'BottomNavigation';
 
   static defaultProps: Partial<BottomNavigationProps> = {
     selectedIndex: 0,
   };
+
+  static Tab = BottomNavigationTab;
 
   private onTabSelect = (index: number) => {
     if (this.props.onSelect && this.props.selectedIndex !== index) {
@@ -64,7 +76,7 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
 
   private renderIndicatorElement = (positions: number, style: StyleType): IndicatorElement => {
     return (
-      <TabBarIndicator
+      <TabIndicator
         key={0}
         style={style}
         selectedPosition={this.props.selectedIndex}
@@ -125,3 +137,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
+
+export const BottomNavigation =
+  styled<BottomNavigationProps, BottomNavigationElementStaticProps>(BottomNavigationComponent);

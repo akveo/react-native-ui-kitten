@@ -16,10 +16,10 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
-import { CheckMark } from '../drawable';
+import { CheckMark } from '../support/components';
 
 type IconElement = React.ReactElement<ViewProps>;
 type TextElement = React.ReactElement<TextProps>;
@@ -34,11 +34,9 @@ interface ComponentProps {
   onChange?: (checked: boolean, indeterminate: boolean) => void;
 }
 
-const Text = styled<TextProps>(TextComponent);
-
 export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class CheckBox extends React.Component<CheckBoxProps> {
+class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
   static styledComponentName: string = 'CheckBox';
 
@@ -220,3 +218,5 @@ const styles = StyleSheet.create({
   },
   text: {},
 });
+
+export const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);

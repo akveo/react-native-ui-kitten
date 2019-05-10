@@ -3,6 +3,7 @@ import {
   Text,
   Image,
   ImageSourcePropType,
+  ImageProps,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -10,16 +11,11 @@ import {
   ThemedComponentProps,
   StyleType,
 } from '@kitten/theme';
-import {
-  TabView,
-  Tab,
-} from '@kitten/ui';
+import { TabView } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
-const ICON1: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-const ICON2: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/email.png' };
-const ICON3: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/info.png' };
+const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
 interface State {
   selectedIndex: number;
@@ -39,27 +35,33 @@ class TabViewScreen extends React.Component<Props, State> {
     this.setState({ selectedIndex });
   };
 
+  private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+    return (
+      <TabView.Tab.Icon source={ICON} style={style}/>
+    );
+  };
+
   public render(): React.ReactNode {
     return (
       <TabView
         style={this.props.themedStyle.container}
         selectedIndex={this.state.selectedIndex}
         onSelect={this.onSelect}>
-        <Tab
+        <TabView.Tab
           title='TAB 1'
-          icon={(style: StyleType) => <Image source={ICON1} style={style}/>}>
+          icon={this.renderIcon}>
           <Text>Tab 1</Text>
-        </Tab>
-        <Tab
+        </TabView.Tab>
+        <TabView.Tab
           title='TAB 2'
-          icon={(style: StyleType) => <Image source={ICON2} style={style}/>}>
+          icon={this.renderIcon}>
           <Text>Tab 2</Text>
-        </Tab>
-        <Tab
+        </TabView.Tab>
+        <TabView.Tab
           title='TAB 3'
-          icon={(style: StyleType) => <Image source={ICON3} style={style}/>}>
+          icon={this.renderIcon}>
           <Text>Tab 3</Text>
-        </Tab>
+        </TabView.Tab>
       </TabView>
     );
   }

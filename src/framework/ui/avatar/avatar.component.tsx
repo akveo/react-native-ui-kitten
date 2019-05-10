@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
@@ -18,7 +19,7 @@ interface ComponentProps {
 
 export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
 
-export class Avatar extends React.Component<AvatarProps> {
+class AvatarComponent extends React.Component<AvatarProps> {
 
   static styledComponentName: string = 'Avatar';
 
@@ -56,3 +57,5 @@ export class Avatar extends React.Component<AvatarProps> {
 const styles = StyleSheet.create({
   container: {},
 });
+
+export const Avatar = styled<AvatarProps>(AvatarComponent);

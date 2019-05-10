@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Image,
   ImageProps,
   ImageSourcePropType,
 } from 'react-native';
@@ -12,24 +11,19 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  BottomNavigation as BottomNavigationComponent,
+  BottomNavigation,
   BottomNavigationProps,
 } from './bottomNavigation.component';
+import { BottomNavigationTabProps } from './bottomNavigationTab.component';
 import {
-  BottomNavigationTab as BottomNavigationTabComponent,
-  BottomNavigationTabProps,
-} from './bottomNavigationTab.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const BottomNavigation = styled<BottomNavigationProps>(BottomNavigationComponent);
-const BottomNavigationTab = styled<BottomNavigationTabProps>(BottomNavigationTabComponent);
+  mapping,
+  theme,
+} from '../support/tests';
 
 describe('@bottom-navigation-tab: component checks', () => {
 
@@ -40,14 +34,14 @@ describe('@bottom-navigation-tab: component checks', () => {
       <ApplicationProvider
         mapping={mapping}
         theme={theme}>
-        <BottomNavigationTab {...props}/>
+        <BottomNavigation.Tab {...props}/>
       </ApplicationProvider>
     );
   };
 
   const icon = (style: StyleType): React.ReactElement<ImageProps> => {
     return (
-      <Image
+      <BottomNavigation.Tab.Icon
         style={style}
         source={iconSource}
       />
@@ -59,7 +53,7 @@ describe('@bottom-navigation-tab: component checks', () => {
       <Mock/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const { output } = shallow(component.getByType(BottomNavigation.Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -69,7 +63,7 @@ describe('@bottom-navigation-tab: component checks', () => {
       <Mock icon={icon}/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const { output } = shallow(component.getByType(BottomNavigation.Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -82,7 +76,7 @@ describe('@bottom-navigation-tab: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const { output } = shallow(component.getByType(BottomNavigation.Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -95,7 +89,7 @@ describe('@bottom-navigation-tab: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const { output } = shallow(component.getByType(BottomNavigation.Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -104,11 +98,14 @@ describe('@bottom-navigation-tab: component checks', () => {
     const component: RenderAPI = render(
       <Mock
         title='Test'
-        titleStyle={{ fontSize: 22, color: 'yellow' }}
+        titleStyle={{
+          fontSize: 22,
+          color: 'yellow',
+        }}
       />,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const { output } = shallow(component.getByType(BottomNavigation.Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -129,7 +126,7 @@ describe('@bottom-navigation: component checks', () => {
 
   const ChildMock = (props: BottomNavigationTabProps): React.ReactElement<BottomNavigationTabProps> => {
     return (
-      <BottomNavigationTab {...props} />
+      <BottomNavigation.Tab {...props} />
     );
   };
 
@@ -140,7 +137,7 @@ describe('@bottom-navigation: component checks', () => {
       <Mock children={[]}/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationComponent));
+    const { output } = shallow(component.getByType(BottomNavigation));
 
     expect(output).toMatchSnapshot();
   });
@@ -164,9 +161,10 @@ describe('@bottom-navigation: component checks', () => {
       </Mock>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationComponent));
+    const { output } = shallow(component.getByType(BottomNavigation));
 
-    expect(output).toMatchSnapshot();
+    expect(output)
+      .toMatchSnapshot();
   });
 
   it('* current index', () => {
@@ -187,7 +185,7 @@ describe('@bottom-navigation: component checks', () => {
       </Mock>,
     );
 
-    const componentInstance: ReactTestInstance = component.getByType(BottomNavigationComponent);
+    const componentInstance: ReactTestInstance = component.getByType(BottomNavigation);
 
     expect(componentInstance.props.selectedIndex).toBe(1);
   });
@@ -267,7 +265,7 @@ describe('@bottom-navigation: component checks', () => {
       </Mock>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationComponent));
+    const { output } = shallow(component.getByType(BottomNavigation));
 
     expect(output).toMatchSnapshot();
   });

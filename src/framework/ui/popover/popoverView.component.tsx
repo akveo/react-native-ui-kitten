@@ -6,11 +6,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
-import { Arrow } from '../drawable/arrow/arrow.component';
 import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
+import { Arrow } from '../support/components';
 
 interface ComponentProps {
   placement?: string | PopoverPlacement;

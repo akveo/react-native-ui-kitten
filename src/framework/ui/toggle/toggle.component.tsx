@@ -16,8 +16,9 @@ import {
   StyledComponentProps,
   StyleType,
   Interaction,
+  styled,
 } from '@kitten/theme';
-import { CheckMark } from '../drawable/checkmark/checkmark.component';
+import { CheckMark } from '../support/components';
 
 interface ComponentProps {
   checked?: boolean;
@@ -29,7 +30,7 @@ interface ComponentProps {
 
 export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class Toggle extends React.Component<ToggleProps> implements PanResponderCallbacks {
+class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
 
   static styledComponentName: string = 'Toggle';
 
@@ -322,3 +323,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export const Toggle = styled<ToggleProps>(ToggleComponent);

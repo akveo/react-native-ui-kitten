@@ -7,11 +7,17 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  styled,
+  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { TabProps } from './tab.component';
-import { TabBarIndicator } from './tabBarIndicator.component';
+import {
+  Tab,
+  TabProps,
+  TabElementStaticProps,
+} from './tab.component';
+import { TabIndicator } from '../support/components';
 
 type TabElement = React.ReactElement<TabProps>;
 type ChildrenProp = TabElement | TabElement[];
@@ -23,17 +29,23 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
+interface TabBarElementStaticProps {
+  Tab: StyledComponentClass<TabProps, TabElementStaticProps>;
+}
+
 export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class TabBar extends React.Component<TabBarProps> {
+class TabBarComponent extends React.Component<TabBarProps> {
 
   static styledComponentName: string = 'TabBar';
+
+  static Tab: StyledComponentClass<TabProps, TabElementStaticProps> = Tab;
 
   static defaultProps: Partial<TabBarProps> = {
     selectedIndex: 0,
   };
 
-  private tabIndicatorRef: React.RefObject<TabBarIndicator> = React.createRef();
+  private tabIndicatorRef: React.RefObject<TabIndicator> = React.createRef();
 
   public scrollToIndex(params: { index: number, animated?: boolean }) {
     const { current: tabIndicator } = this.tabIndicatorRef;
@@ -111,7 +123,7 @@ export class TabBar extends React.Component<TabBarProps> {
           style={componentStyle.container}>
           {tabElements}
         </View>
-        <TabBarIndicator
+        <TabIndicator
           ref={this.tabIndicatorRef}
           style={componentStyle.indicator}
           selectedPosition={selectedIndex}
@@ -131,3 +143,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export const TabBar = styled<TabBarProps, TabBarElementStaticProps>(TabBarComponent);

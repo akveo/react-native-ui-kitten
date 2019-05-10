@@ -7,6 +7,7 @@ import {
   ImageProps,
   StyleProp,
   TextStyle,
+  Image,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -15,11 +16,7 @@ import {
   styled,
 } from '@kitten/theme';
 import {
-  ButtonIconAlignment,
-  ButtonIconAlignments,
-} from './type';
-import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
 
@@ -32,23 +29,20 @@ interface ComponentProps {
   icon?: IconProp;
   status?: string;
   size?: string;
-  iconAlignment?: string | ButtonIconAlignment;
   children?: React.ReactText;
 }
 
-const Text = styled<TextProps>(TextComponent);
+export interface ButtonElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
 
 export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
-
-export class Button extends React.Component<ButtonProps> {
+class ButtonComponent extends React.Component<ButtonProps> {
 
   static styledComponentName: string = 'Button';
 
-  static defaultProps: Partial<ButtonProps> = {
-    iconAlignment: ALIGNMENT_DEFAULT,
-  };
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -73,7 +67,7 @@ export class Button extends React.Component<ButtonProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, textStyle, iconAlignment } = this.props;
+    const { style, textStyle } = this.props;
 
     const {
       textColor,
@@ -88,14 +82,11 @@ export class Button extends React.Component<ButtonProps> {
       ...containerParameters
     } = source;
 
-    const alignment: ButtonIconAlignment = ButtonIconAlignments.parse(iconAlignment, ALIGNMENT_DEFAULT);
-
     return {
       container: {
         ...containerParameters,
         ...styles.container,
         ...StyleSheet.flatten(style),
-        flexDirection: alignment.flex(),
       },
       text: {
         color: textColor,
@@ -167,9 +158,12 @@ export class Button extends React.Component<ButtonProps> {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {},
   icon: {},
 });
+
+export const Button = styled<ButtonProps, ButtonElementStaticProps>(ButtonComponent);

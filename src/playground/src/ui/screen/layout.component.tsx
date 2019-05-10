@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Text,
   View,
   ViewProps,
 } from 'react-native';
@@ -10,7 +9,10 @@ import {
   ThemeType,
   ThemedComponentProps,
 } from '@kitten/theme';
-import { Layout } from '@kitten/ui';
+import {
+  Layout,
+  Text,
+} from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 

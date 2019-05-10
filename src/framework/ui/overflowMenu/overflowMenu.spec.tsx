@@ -15,27 +15,25 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
   OverflowMenuItemType,
-  OverflowMenuItem as OverflowMenuItemComponent,
-  OverflowMenuItemProps as OverflowMenuItemComponentProps,
+  OverflowMenuItemProps,
 } from './overflowMenuItem.component';
 import {
-  OverflowMenu as OverflowMenuComponent,
-  OverflowMenuProps as OverflowMenuComponentProps,
+  OverflowMenu,
+  OverflowMenuProps,
 } from './overflowMenu.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
-const OverflowMenuItem = styled<OverflowMenuItemComponentProps>(OverflowMenuItemComponent);
-const OverflowMenu = styled<OverflowMenuComponentProps>(OverflowMenuComponent);
 
-const MockMenu = (props?: OverflowMenuComponentProps): React.ReactElement<ApplicationProviderProps> => {
+const MockMenu = (props?: OverflowMenuProps): React.ReactElement<ApplicationProviderProps> => {
   return (
     <ApplicationProvider
       mapping={mapping}
@@ -45,12 +43,12 @@ const MockMenu = (props?: OverflowMenuComponentProps): React.ReactElement<Applic
   );
 };
 
-const MockMenuItem = (props?: OverflowMenuItemComponentProps): React.ReactElement<ApplicationProviderProps> => {
+const MockMenuItem = (props?: OverflowMenuItemProps): React.ReactElement<ApplicationProviderProps> => {
   return (
     <ApplicationProvider
       mapping={mapping}
       theme={theme}>
-      <OverflowMenuItem {...props} />
+      <OverflowMenu.Item {...props} />
     </ApplicationProvider>
   );
 };
@@ -66,7 +64,10 @@ const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icon
 const menuItems: OverflowMenuItemType[] = [
   {
     text: 'Menu Item 1',
-    textStyle: { fontSize: 24, color: 'blue' },
+    textStyle: {
+      fontSize: 24,
+      color: 'blue',
+    },
     icon: icon,
   },
   {
@@ -95,7 +96,7 @@ describe('@overflow-menu-item: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenuItemComponent));
+    const { output } = shallow(component.getByType(OverflowMenu.Item));
 
     expect(output).toMatchSnapshot();
   });
@@ -109,7 +110,7 @@ describe('@overflow-menu-item: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenuItemComponent));
+    const { output } = shallow(component.getByType(OverflowMenu.Item));
 
     expect(output).toMatchSnapshot();
   });
@@ -162,14 +163,14 @@ describe('@overflow-menu-item: component checks', () => {
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
     const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(OverflowMenuItemComponent);
+      return component.getByType(OverflowMenu.Item);
     });
 
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
     const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(OverflowMenuItemComponent);
+      return component.getByType(OverflowMenu.Item);
     });
 
     const { output: inactiveOutput } = shallow(inactive);
@@ -197,7 +198,7 @@ describe('@overflow-menu: component checks', () => {
       </MockMenu>,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenuComponent));
+    const { output } = shallow(component.getByType(OverflowMenu));
 
     expect(output).toMatchSnapshot();
   });
@@ -215,7 +216,7 @@ describe('@overflow-menu: component checks', () => {
       </MockMenu>,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenuComponent));
+    const { output } = shallow(component.getByType(OverflowMenu));
 
     expect(output).toMatchSnapshot();
   });

@@ -11,6 +11,7 @@ import {
 import {
   ModalComponentCloseProps,
   ModalService,
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
@@ -49,7 +50,7 @@ const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
 
-export class Popover extends React.Component<PopoverProps> {
+class PopoverComponent extends React.Component<PopoverProps> {
 
   static styledComponentName: string = 'Popover';
 
@@ -195,3 +196,5 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
 });
+
+export const Popover = styled<PopoverProps>(PopoverComponent);

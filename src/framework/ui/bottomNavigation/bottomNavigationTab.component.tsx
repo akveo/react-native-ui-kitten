@@ -2,6 +2,7 @@ import React from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
+  Image,
   ImageProps,
   TouchableOpacityProps,
   StyleProp,
@@ -13,7 +14,7 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
 
@@ -29,13 +30,17 @@ interface ComponentProps {
   onSelect?: (selected: boolean) => void;
 }
 
-const Text = styled<TextProps>(TextComponent);
+export interface BottomNavigationTabElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
 
 export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class BottomNavigationTab extends React.Component<BottomNavigationTabProps> {
+class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
 
   static styledComponentName: string = 'BottomNavigationTab';
+
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onPress = () => {
     if (this.props.onSelect) {
@@ -141,3 +146,6 @@ const styles = StyleSheet.create({
   icon: {},
   text: {},
 });
+
+export const BottomNavigationTab =
+  styled<StyledComponentProps, BottomNavigationTabElementStaticProps>(BottomNavigationTabComponent);

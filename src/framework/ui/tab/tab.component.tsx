@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  Image,
 } from 'react-native';
 import {
   styled,
@@ -13,7 +14,7 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
 
@@ -31,13 +32,17 @@ interface ComponentProps {
   children?: ContentElement;
 }
 
-const Text = styled<TextProps>(TextComponent);
+export interface TabElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
 
 export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class Tab extends React.Component<TabProps> {
+class TabComponent extends React.Component<TabProps> {
 
   static styledComponentName: string = 'Tab';
+
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   static defaultProps: Partial<TabProps> = {
     selected: false,
@@ -149,3 +154,5 @@ const styles = StyleSheet.create({
   icon: {},
   title: {},
 });
+
+export const Tab = styled<TabProps, TabElementStaticProps>(TabComponent);

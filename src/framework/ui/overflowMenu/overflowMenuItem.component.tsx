@@ -14,10 +14,10 @@ import {
   styled,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
-import { TouchableOpacityIndexedProps } from '../common/type';
+import { TouchableIndexedProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -34,13 +34,17 @@ export interface OverflowMenuItemType extends ListDerivedProps {
   disabled?: boolean;
 }
 
-const Text = styled<TextProps>(TextComponent);
+export interface OverflowMenuItemElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
 
-export type OverflowMenuItemProps = StyledComponentProps & TouchableOpacityIndexedProps & OverflowMenuItemType;
+export type OverflowMenuItemProps = StyledComponentProps & TouchableIndexedProps & OverflowMenuItemType;
 
-export class OverflowMenuItem extends React.Component<OverflowMenuItemProps> {
+class OverflowMenuItemComponent extends React.Component<OverflowMenuItemProps> {
 
   static styledComponentName: string = 'OverflowMenuItem';
+
+  static Icon: React.ComponentClass<ImageProps>;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -165,3 +169,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export const OverflowMenuItem =
+  styled<OverflowMenuItemProps, OverflowMenuItemElementStaticProps>(OverflowMenuItemComponent);

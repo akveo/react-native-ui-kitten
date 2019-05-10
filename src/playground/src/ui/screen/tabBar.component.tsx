@@ -58,9 +58,9 @@ class TabBarScreen extends React.Component<Props, State> {
             <TabBar
               onSelect={this.onBar1Select}
               selectedIndex={this.state.bar1SelectedIndex}>
-              <Tab title='❤️'/>
-              <Tab title='💛️'/>
-              <Tab title='💚️'/>
+              <TabBar.Tab title='❤️'/>
+              <TabBar.Tab title='💛️'/>
+              <TabBar.Tab title='💚️'/>
             </TabBar>
           </View>
         </View>
@@ -71,13 +71,13 @@ class TabBarScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.customBar}
               onSelect={this.onBar2Select}
               selectedIndex={this.state.bar2SelectedIndex}>
-              <Tab
+              <TabBar.Tab
                 style={this.createCustomTabStyle(0)}
                 title='❤️'/>
-              <Tab
+              <TabBar.Tab
                 style={this.createCustomTabStyle(1)}
                 title='💛️'/>
-              <Tab
+              <TabBar.Tab
                 style={this.createCustomTabStyle(2)}
                 title='💚️'/>
             </TabBar>

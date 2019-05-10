@@ -61,8 +61,8 @@ class RadioGroupScreen extends React.Component<Props, State> {
             <RadioGroup
               selectedIndex={this.state.selectedIndexGroup2}
               onChange={this.onGroup2SelectionChange}>
-              <Radio style={this.props.themedStyle.component}/>
-              <Radio style={this.props.themedStyle.component}/>
+              <RadioGroup.Radio style={this.props.themedStyle.component}/>
+              <RadioGroup.Radio style={this.props.themedStyle.component}/>
             </RadioGroup>
           </View>
         </View>
@@ -73,29 +73,29 @@ class RadioGroupScreen extends React.Component<Props, State> {
               style={{ flexDirection: 'row' }}
               selectedIndex={this.state.selectedIndexGroup1}
               onChange={this.onGroup1SelectionChange}>
-              <Radio style={this.props.themedStyle.component}/>
-              <Radio style={this.props.themedStyle.component}/>
+              <RadioGroup.Radio style={this.props.themedStyle.component}/>
+              <RadioGroup.Radio style={this.props.themedStyle.component}/>
             </RadioGroup>
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Error</Text>
+          <Text style={this.props.themedStyle.textDescription}>Danger</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <RadioGroup
               selectedIndex={this.state.selectedIndexGroup3}
               onChange={this.onGroup3SelectionChange}>
               <Radio
                 style={this.props.themedStyle.component}
-                status='error'
+                status='danger'
                 size='small'
               />
               <Radio
                 style={this.props.themedStyle.component}
-                status='error'
+                status='danger'
               />
               <Radio
                 style={this.props.themedStyle.component}
-                status='error'
+                status='danger'
                 size='large'
               />
             </RadioGroup>

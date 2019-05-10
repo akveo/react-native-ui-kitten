@@ -9,10 +9,16 @@ import {
   TextStyle,
 } from 'react-native';
 import {
+  styled,
+  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { TopNavigationActionProps } from './topNavigationAction.component';
+import {
+  TopNavigationAction,
+  TopNavigationActionElementStaticProps,
+  TopNavigationActionProps,
+} from './topNavigationAction.component';
 import {
   TopNavigationAlignment,
   TopNavigationAlignments,
@@ -32,11 +38,17 @@ interface ComponentProps {
   rightControls?: ActionElementProp;
 }
 
+interface TopNavigationElementStaticProps {
+  Action: StyledComponentClass<TopNavigationActionProps, TopNavigationActionElementStaticProps>;
+}
+
 export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class TopNavigation extends React.Component<TopNavigationProps> {
+class TopNavigationComponent extends React.Component<TopNavigationProps> {
 
   static styledComponentName: string = 'TopNavigation';
+
+  static Action = TopNavigationAction;
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
@@ -192,3 +204,5 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
 });
+
+export const TopNavigation = styled<TopNavigationProps, TopNavigationElementStaticProps>(TopNavigationComponent);

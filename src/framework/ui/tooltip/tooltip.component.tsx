@@ -6,42 +6,49 @@ import {
   TextStyle,
   View,
   ViewProps,
+  Image,
 } from 'react-native';
 import {
+  ModalComponentCloseProps,
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
 import {
-  Popover as PopoverComponent,
+  Popover,
   PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../common/type';
+import { Omit } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
 type WrappingElement = React.ReactElement<any>;
 
-interface ComponentProps {
+type PopoverContentProps = Omit<PopoverProps, 'content'>;
+
+interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
   text: React.ReactText;
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
   children: WrappingElement;
 }
 
-const Popover = styled<PopoverProps>(PopoverComponent);
-const Text = styled<TextProps>(TextComponent);
+interface TooltipElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
 
-export type TooltipProps = StyledComponentProps & Omit<PopoverProps, 'content'> & ComponentProps;
+export type TooltipProps = StyledComponentProps & ComponentProps;
 
-export class Tooltip extends React.Component<TooltipProps> {
+class TooltipComponent extends React.Component<TooltipProps> {
 
   static styledComponentName: string = 'Tooltip';
+
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   static defaultProps: Partial<TooltipProps> = {
     indicatorOffset: 8,
@@ -160,3 +167,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+
+export const Tooltip = styled<TooltipProps, TooltipElementStaticProps>(TooltipComponent);

@@ -9,6 +9,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  Image,
 } from 'react-native';
 import {
   styled,
@@ -17,10 +18,10 @@ import {
   Interaction,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
-import { TouchableOpacityIndexedProps } from '../common/type';
+import { TouchableIndexedProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -53,15 +54,19 @@ interface CustomContentProps {
   children?: React.ReactNode;
 }
 
+export interface ListItemElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
+
 type ComponentProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
 
-const Text = styled<TextProps>(TextComponent);
+export type ListItemProps = StyledComponentProps & TouchableIndexedProps & ComponentProps;
 
-export type ListItemProps = StyledComponentProps & TouchableOpacityIndexedProps & ComponentProps;
-
-export class ListItem extends React.Component<ListItemProps> {
+class ListItemComponent extends React.Component<ListItemProps> {
 
   static styledComponentName: string = 'ListItem';
+
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -275,3 +280,5 @@ const styles = StyleSheet.create({
   description: {},
   accessory: {},
 });
+
+export const ListItem = styled<ListItemProps, ListItemElementStaticProps>(ListItemComponent);

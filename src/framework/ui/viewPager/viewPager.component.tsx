@@ -6,7 +6,7 @@ import {
   LayoutChangeEvent,
   StyleSheet,
 } from 'react-native';
-import { ScrollEvent } from '../common/type';
+import { ScrollEvent } from '../support/typings';
 
 type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
@@ -44,7 +44,10 @@ export class ViewPager extends React.Component<ViewPagerProps> {
   public componentDidUpdate() {
     const { selectedIndex: index } = this.props;
 
-    this.scrollToIndex({ index, animated: true });
+    this.scrollToIndex({
+      index,
+      animated: true,
+    });
   }
 
   public scrollToIndex(params: { index: number; animated?: boolean }) {

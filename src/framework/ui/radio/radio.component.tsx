@@ -15,7 +15,7 @@ import {
   Interaction,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
 
@@ -30,11 +30,9 @@ interface ComponentProps {
   onChange?: (selected: boolean) => void;
 }
 
-const Text = styled<TextProps>(TextComponent);
-
 export type RadioProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class Radio extends React.Component<RadioProps> {
+class RadioComponent extends React.Component<RadioProps> {
 
   static styledComponentName: string = 'Radio';
 
@@ -193,3 +191,5 @@ const styles = StyleSheet.create({
   },
   text: {},
 });
+
+export const Radio = styled<RadioProps>(RadioComponent);

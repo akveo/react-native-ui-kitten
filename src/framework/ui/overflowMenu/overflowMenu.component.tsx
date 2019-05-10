@@ -9,33 +9,41 @@ import {
   StyledComponentProps,
   StyleType,
   styled,
+  StyledComponentClass,
+  ModalComponentCloseProps,
 } from '@kitten/theme';
 import {
-  OverflowMenuItem as OverflowMenuItemComponent,
+  OverflowMenuItem,
+  OverflowMenuItemElementStaticProps,
   OverflowMenuItemProps,
 } from './overflowMenuItem.component';
 import {
-  Popover as PopoverComponent,
-  PopoverProps as PopoverProps,
+  Popover,
+  PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../common/type';
+import { Omit } from '../support/typings';
 
 type MenuItemElement = React.ReactElement<OverflowMenuItemProps>;
 
-interface ComponentProps {
+type PopoverContentProps = Omit<PopoverProps, 'content'>;
+
+interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
   children: React.ReactElement<any>;
   items: OverflowMenuItemProps[];
   onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
-const Popover = styled<PopoverProps>(PopoverComponent);
-const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
+interface OverflowMenuElementStaticProps {
+  Item: StyledComponentClass<OverflowMenuItemProps, OverflowMenuItemElementStaticProps>;
+}
 
-export type OverflowMenuProps = & StyledComponentProps & ComponentProps & Omit<PopoverProps, 'content'>;
+export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
 
-export class OverflowMenu extends React.Component<OverflowMenuProps> {
+class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   static styledComponentName: string = 'OverflowMenu';
+
+  static Item = OverflowMenuItem;
 
   static defaultProps: Partial<OverflowMenuProps> = {
     indicatorOffset: 12,
@@ -130,3 +138,5 @@ const styles = StyleSheet.create({
   },
   item: {},
 });
+
+export const OverflowMenu = styled<OverflowMenuProps, OverflowMenuElementStaticProps>(OverflowMenuComponent);

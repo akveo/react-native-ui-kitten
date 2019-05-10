@@ -5,6 +5,7 @@ import {
   ViewProps,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
@@ -18,7 +19,7 @@ interface ComponentProps {
 
 export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class Layout extends React.Component<LayoutProps> {
+class LayoutComponent extends React.Component<LayoutProps> {
 
   static styledComponentName: string = 'Layout';
 
@@ -41,3 +42,5 @@ export class Layout extends React.Component<LayoutProps> {
     );
   }
 }
+
+export const Layout = styled<LayoutProps>(LayoutComponent);

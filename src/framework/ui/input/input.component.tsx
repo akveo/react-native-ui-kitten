@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   ImageProps,
   StyleProp,
   StyleSheet,
@@ -9,21 +10,21 @@ import {
   View,
 } from 'react-native';
 import {
-  allWithRest,
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
+  Text,
   TextProps,
 } from '../text/text.component';
+import { allWithRest } from '../support/services';
 import {
   InputFocusEvent,
   InputEndEditEvent,
-} from '../common/type';
-import { FlexStyleProps } from '../common/props';
+  FlexStyleProps,
+} from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -41,13 +42,17 @@ interface ComponentProps {
   captionTextStyle?: StyleProp<TextStyle>;
 }
 
+interface InputElementStaticProps {
+  Icon: React.ComponentClass<ImageProps>;
+}
+
 export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
 
-const Text = styled<TextProps>(TextComponent);
-
-export class Input extends React.Component<InputProps> {
+class InputComponent extends React.Component<InputProps> {
 
   static styledComponentName: string = 'Input';
+
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onFocus = (event: InputFocusEvent) => {
     this.props.dispatch([Interaction.FOCUSED]);
@@ -260,3 +265,5 @@ const styles = StyleSheet.create({
   captionIcon: {},
   captionLabel: {},
 });
+
+export const Input = styled<InputProps, InputElementStaticProps>(InputComponent);

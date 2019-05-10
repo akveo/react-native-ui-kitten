@@ -5,10 +5,15 @@ import {
   ViewProps,
 } from 'react-native';
 import {
+  styled,
+  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { RadioProps } from '../radio/radio.component';
+import {
+  Radio,
+  RadioProps,
+} from '../radio/radio.component';
 
 type RadioElement = React.ReactElement<RadioProps>;
 type ChildrenProp = RadioElement | RadioElement[];
@@ -19,11 +24,17 @@ interface ComponentProps {
   onChange?: (index: number) => void;
 }
 
+interface RadioGroupElementStaticProps {
+  Radio: StyledComponentClass<RadioProps>;
+}
+
 export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class RadioGroup extends React.Component<RadioGroupProps> {
+class RadioGroupComponent extends React.Component<RadioGroupProps> {
 
   static styledComponentName: string = 'RadioGroup';
+
+  static Radio = Radio;
 
   static defaultProps: Partial<RadioGroupProps> = {
     selectedIndex: -1,
@@ -71,3 +82,5 @@ export class RadioGroup extends React.Component<RadioGroupProps> {
     );
   }
 }
+
+export const RadioGroup = styled<RadioGroupProps, RadioGroupElementStaticProps>(RadioGroupComponent);
