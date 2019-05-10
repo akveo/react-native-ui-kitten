@@ -5,9 +5,9 @@ import {
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 
-export type Props = ViewProps;
+export type ArrowProps = ViewProps;
 
-export class Arrow extends React.Component<Props> {
+export class Arrow extends React.Component<ArrowProps> {
 
   private getComponentStyle = (source: StyleType): StyleType => {
     return {

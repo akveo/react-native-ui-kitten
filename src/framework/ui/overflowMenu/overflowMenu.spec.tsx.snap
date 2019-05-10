@@ -397,17 +397,13 @@ exports[`@overflow-menu-item: component checks * menu item active checks 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "borderBottomColor": "red",
-        "flexDirection": "row",
-        "minHeight": 48,
-        "paddingHorizontal": 8,
-        "paddingVertical": 12,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "minHeight": 48,
+      "paddingHorizontal": 8,
+      "paddingVertical": 12,
+    }
   }
   text="Test Menu Item"
   theme={
@@ -541,17 +537,13 @@ exports[`@overflow-menu-item: component checks * menu item active checks 2`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "borderBottomColor": "red",
-        "flexDirection": "row",
-        "minHeight": 48,
-        "paddingHorizontal": 8,
-        "paddingVertical": 12,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "minHeight": 48,
+      "paddingHorizontal": 8,
+      "paddingVertical": 12,
+    }
   }
   text="Test Menu Item"
   theme={
@@ -687,17 +679,13 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "borderBottomColor": "red",
-        "flexDirection": "row",
-        "minHeight": 48,
-        "paddingHorizontal": 8,
-        "paddingVertical": 12,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "minHeight": 48,
+      "paddingHorizontal": 8,
+      "paddingVertical": 12,
+    }
   }
   text="Test Menu Item"
   theme={
@@ -812,12 +800,20 @@ exports[`@overflow-menu-item: component checks * menu item with "set-1" props 1`
       }
     }
     style={
-      Object {
-        "height": 24,
-        "marginHorizontal": 8,
-        "tintColor": "#DDE1EB",
-        "width": 24,
-      }
+      Array [
+        Object {
+          "height": 24,
+          "marginHorizontal": 8,
+          "tintColor": "#DDE1EB",
+          "width": 24,
+        },
+        Object {
+          "height": 24,
+          "marginHorizontal": 8,
+          "tintColor": "#DDE1EB",
+          "width": 24,
+        },
+      ]
     }
   />
   <ForwardRef(WrappingElement)
@@ -847,17 +843,13 @@ exports[`@overflow-menu-item: component checks * menu item with "set-2" props 1`
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "borderBottomColor": "red",
-        "flexDirection": "row",
-        "minHeight": 48,
-        "paddingHorizontal": 8,
-        "paddingVertical": 12,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "minHeight": 48,
+      "paddingHorizontal": 8,
+      "paddingVertical": 12,
+    }
   }
   text="Test Menu Item"
   theme={

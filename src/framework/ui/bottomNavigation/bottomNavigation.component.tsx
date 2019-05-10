@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Dimensions,
   View,
   ViewProps,
   StyleSheet,
@@ -11,87 +10,89 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import { BottomNavigationTabProps } from './bottomNavigationTab.component';
 import {
   TabBarIndicator,
-  Props as TabBarIndicatorProps,
+  TabBarIndicatorProps as TabBarIndicatorProps,
 } from '../tab/tabBarIndicator.component';
-import { Props as TabProps } from './bottomNavigationTab.component';
 
-type ChildElement = React.ReactElement<TabProps>;
+type TabElement = React.ReactElement<BottomNavigationTabProps>;
+type IndicatorElement = React.ReactElement<TabBarIndicatorProps>;
+type ChildrenProp = TabElement | TabElement[];
 
-interface TabNavigatorProps {
-  children: ChildElement | ChildElement[];
+interface ComponentProps {
+  children: ChildrenProp;
   selectedIndex?: number;
   indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
 }
 
-export type Props = TabNavigatorProps & StyledComponentProps & ViewProps;
+export type BottomNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class BottomNavigation extends React.Component<Props> {
+export class BottomNavigation extends React.Component<BottomNavigationProps> {
 
   static styledComponentName: string = 'BottomNavigation';
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<BottomNavigationProps> = {
     selectedIndex: 0,
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
-    const { indicatorStyle } = this.props;
-    const { indicatorHeight, indicatorBackgroundColor, ...containerStyle } = style;
-
-    return {
-      container: {
-        ...containerStyle,
-        ...styles.container,
-      },
-      indicator: {
-        height: indicatorHeight,
-        backgroundColor: indicatorBackgroundColor,
-        ...StyleSheet.flatten(indicatorStyle),
-        ...styles.indicator,
-      },
-    };
-  };
-
-  private onChildPress = (index: number): void => {
+  private onTabSelect = (index: number) => {
     if (this.props.onSelect && this.props.selectedIndex !== index) {
       this.props.onSelect(index);
     }
   };
 
-  private renderIndicatorElement = (positions: number, style: StyleType): React.ReactElement<TabBarIndicatorProps> => {
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, indicatorStyle } = this.props;
+    const { indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
+
+    return {
+      container: {
+        ...containerParameters,
+        ...styles.container,
+        ...StyleSheet.flatten(style),
+      },
+      indicator: {
+        height: indicatorHeight,
+        backgroundColor: indicatorBackgroundColor,
+        ...styles.indicator,
+        ...StyleSheet.flatten(indicatorStyle),
+      },
+    };
+  };
+
+  private renderIndicatorElement = (positions: number, style: StyleType): IndicatorElement => {
     return (
       <TabBarIndicator
         key={0}
-        style={[style, styles.indicator]}
+        style={style}
         selectedPosition={this.props.selectedIndex}
         positions={positions}
       />
     );
   };
 
-  private renderTabElement = (element: ChildElement, index: number): React.ReactElement<TabProps> => {
+  private renderTabElement = (element: TabElement, index: number): TabElement => {
     return React.cloneElement(element, {
       key: index,
-      style: { flex: 1 },
+      style: [styles.item, element.props.style],
       selected: index === this.props.selectedIndex,
-      onSelect: () => this.onChildPress(index),
+      onSelect: () => this.onTabSelect(index),
     });
   };
 
-  private renderComponentChildren = (items: ChildElement | ChildElement[],
-                                     style: StyleType): React.ReactElement<any>[] => {
+  private renderTabElements = (source: ChildrenProp): TabElement[] => {
+    return React.Children.map(source, this.renderTabElement);
+  };
 
-    const { indicator } = style;
+  private renderComponentChildren = (source: ChildrenProp, style: StyleType): React.ReactNodeArray => {
+    const tabElements: TabElement[] = this.renderTabElements(source);
 
-    const tabElements: React.ReactElement<TabProps>[] = React.Children.map(items, this.renderTabElement);
-
-    // FIXME:
-    const shouldShowIndicator: boolean = indicator.backgroundColor !== 'transparent';
+    const hasIndicator: boolean = style.indicator.height > 0;
 
     return [
-      shouldShowIndicator ? this.renderIndicatorElement(tabElements.length, indicator) : undefined,
+      hasIndicator ? this.renderIndicatorElement(tabElements.length, style.indicator) : null,
       ...tabElements,
     ];
   };
@@ -100,13 +101,14 @@ export class BottomNavigation extends React.Component<Props> {
     const { style, themedStyle, children, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
-    const componentChildren: ChildElement[] = this.renderComponentChildren(children, componentStyles);
+    const [indicatorElement, ...tabElements] = this.renderComponentChildren(children, componentStyles);
 
     return (
       <View
         {...derivedProps}
-        style={[container, style, styles.container]}>
-        {componentChildren}
+        style={container}>
+        {indicatorElement}
+        {tabElements}
       </View>
     );
   }
@@ -115,8 +117,9 @@ export class BottomNavigation extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: Dimensions.get('window').width,
+  },
+  item: {
+    flex: 1,
   },
   indicator: {
     position: 'absolute',

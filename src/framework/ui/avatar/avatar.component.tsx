@@ -11,29 +11,33 @@ import {
   StyleType,
 } from '@kitten/theme';
 
-interface AvatarProps {
+interface ComponentProps {
   shape?: string;
   size?: string;
 }
 
-export type Props = AvatarProps & StyledComponentProps & ImageProps;
+export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
 
-export class Avatar extends React.Component<Props> {
+export class Avatar extends React.Component<AvatarProps> {
 
   static styledComponentName: string = 'Avatar';
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { roundCoefficient, ...componentStyle } = source;
+    const { roundCoefficient, ...containerParameters } = source;
 
     const baseStyle: ImageStyle = {
-      ...componentStyle,
+      ...containerParameters,
+      ...styles.container,
       ...StyleSheet.flatten(this.props.style),
     };
 
     // @ts-ignore: rhs operator is restricted to be number
     const borderRadius: number = roundCoefficient * baseStyle.height;
 
-    return { borderRadius, ...baseStyle };
+    return {
+      ...baseStyle,
+      borderRadius,
+    };
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
@@ -43,7 +47,7 @@ export class Avatar extends React.Component<Props> {
     return (
       <Image
         {...derivedProps}
-        style={[componentStyle, styles.container]}
+        style={componentStyle}
       />
     );
   }

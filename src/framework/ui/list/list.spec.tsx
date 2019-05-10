@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  GestureResponderEvent,
   Image,
   ImageProps,
   ImageSourcePropType,
@@ -21,11 +20,11 @@ import {
 } from '@kitten/theme';
 import {
   List as ListComponent,
-  Props as ListProps,
+  ListProps,
 } from './list.component';
 import {
   ListItem as ListItemComponent,
-  Props as ListItemProps,
+  ListItemProps as ListItemProps,
 } from './listItem.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

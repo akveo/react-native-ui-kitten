@@ -15,7 +15,7 @@ import {
 } from '@kitten/theme';
 import {
   CheckBox as CheckBoxComponent,
-  Props as CheckBoxProps,
+  CheckBoxProps,
 } from './checkbox.component';
 import { Text as TextComponent } from '../text/text.component';
 import { default as mapping } from '../common/mapping.json';

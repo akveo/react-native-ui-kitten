@@ -15,23 +15,30 @@ import {
 } from '@kitten/theme';
 import {
   Text as TextComponent,
-  Props as TextProps,
+  TextProps,
 } from '../text/text.component';
 import { TouchableOpacityIndexedProps } from '../common/type';
 
-export interface OverflowMenuItemType {
-  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
+type TextElement = React.ReactElement<TextProps>;
+type IconElement = React.ReactElement<ImageProps>;
+type IconProp = (style: StyleType) => IconElement;
+
+interface ListDerivedProps {
+  index?: number;
+}
+
+export interface OverflowMenuItemType extends ListDerivedProps {
+  icon?: IconProp;
   text: React.ReactText;
   textStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
-  index?: number;
 }
 
 const Text = styled<TextProps>(TextComponent);
 
-export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpacityIndexedProps;
+export type OverflowMenuItemProps = StyledComponentProps & TouchableOpacityIndexedProps & OverflowMenuItemType;
 
-export class OverflowMenuItem extends React.Component<Props> {
+export class OverflowMenuItem extends React.Component<OverflowMenuItemProps> {
 
   static styledComponentName: string = 'OverflowMenuItem';
 
@@ -63,8 +70,9 @@ export class OverflowMenuItem extends React.Component<Props> {
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
-    const { textStyle } = this.props;
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, textStyle } = this.props;
+
     const {
       textMarginHorizontal,
       textFontSize,
@@ -76,13 +84,13 @@ export class OverflowMenuItem extends React.Component<Props> {
       iconMarginHorizontal,
       iconTintColor,
       ...containerStyle
-    } = style;
+    } = source;
 
     return {
       container: {
         ...containerStyle,
         ...styles.container,
-        borderBottomColor: 'red',
+        ...StyleSheet.flatten(style),
       },
       text: {
         marginHorizontal: textMarginHorizontal,
@@ -101,29 +109,30 @@ export class OverflowMenuItem extends React.Component<Props> {
     };
   };
 
-  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
-    const { text } = this.props;
-
+  private renderTextElement = (style: StyleType): TextElement => {
     return (
       <Text
         key={2}
         style={style}>
-        {text}
+        {this.props.text}
       </Text>
     );
   };
 
-  private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> => {
-    const { icon } = this.props;
+  private renderIconElement = (style: StyleType): IconElement => {
+    const iconElement: IconElement = this.props.icon(style);
 
-    return React.cloneElement(icon(style), { key: 1 });
+    return React.cloneElement(iconElement, {
+      key: 1,
+      style: [style, iconElement.props.style],
+    });
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { icon } = this.props;
 
     return [
-      icon ? this.renderImageElement(style.icon) : null,
+      icon && this.renderIconElement(style.icon),
       this.renderTextElement(style.text),
     ];
   };
@@ -131,18 +140,20 @@ export class OverflowMenuItem extends React.Component<Props> {
   public render(): React.ReactNode {
     const { style, themedStyle, ...restProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
+
+    const [iconElement, textElement] = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
-        {...restProps}
-        style={[container, style]}
         activeOpacity={1.0}
+        {...restProps}
+        style={container}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
         onLongPress={this.onLongPress}>
-        {componentChildren}
+        {iconElement}
+        {textElement}
       </TouchableOpacity>
     );
   }

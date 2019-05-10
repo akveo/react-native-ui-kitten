@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 
-interface CheckMarkProps {
+interface ComponentProps {
   isAnimated?: boolean;
 }
 
-export type Props = CheckMarkProps & ViewProps;
+export type CheckMarkProps = ViewProps & ComponentProps;
 
-export class CheckMark extends React.Component<Props> {
+export class CheckMark extends React.Component<CheckMarkProps> {
 
   static defaultProps = {
     isAnimated: false,

@@ -5,17 +5,14 @@ exports[`@layout: matches snapshot default 1`] = `
   appearance="default"
   dispatch={[Function]}
   style={
-    Array [
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "#3366FF",
-        "borderRadius": 3,
-        "borderWidth": 1,
-        "paddingHorizontal": 16,
-        "paddingVertical": 8,
-      },
-      undefined,
-    ]
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "#3366FF",
+      "borderRadius": 3,
+      "borderWidth": 1,
+      "paddingHorizontal": 16,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -129,19 +126,15 @@ exports[`@layout: matches snapshot with styles 1`] = `
   appearance="default"
   dispatch={[Function]}
   style={
-    Array [
-      Object {
-        "backgroundColor": "transparent",
-        "borderColor": "#3366FF",
-        "borderRadius": 3,
-        "borderWidth": 1,
-        "paddingHorizontal": 16,
-        "paddingVertical": 8,
-      },
-      Object {
-        "height": 300,
-      },
-    ]
+    Object {
+      "backgroundColor": "transparent",
+      "borderColor": "#3366FF",
+      "borderRadius": 3,
+      "borderWidth": 1,
+      "height": 300,
+      "paddingHorizontal": 16,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {

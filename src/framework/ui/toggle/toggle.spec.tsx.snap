@@ -7,13 +7,10 @@ exports[`@toggle: matches snapshot active 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -224,13 +221,10 @@ exports[`@toggle: matches snapshot active checked 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -441,13 +435,10 @@ exports[`@toggle: matches snapshot active checked: checked 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -658,13 +649,10 @@ exports[`@toggle: matches snapshot active: default 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -875,13 +863,10 @@ exports[`@toggle: matches snapshot checked 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -1092,13 +1077,10 @@ exports[`@toggle: matches snapshot checked disabled 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -1309,13 +1291,10 @@ exports[`@toggle: matches snapshot default 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -1526,13 +1505,10 @@ exports[`@toggle: matches snapshot disabled 1`] = `
   size="medium"
   status="primary"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {

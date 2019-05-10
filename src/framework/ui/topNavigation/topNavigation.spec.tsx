@@ -19,11 +19,11 @@ import {
 } from '@kitten/theme';
 import {
   TopNavigation as TopNavigationComponent,
-  Props as TopNavigationProps,
+  TopNavigationProps,
 } from './topNavigation.component';
 import {
   TopNavigationAction as TopNavigationActionComponent,
-  Props as TopNavigationActionProps,
+  TopNavigationActionProps,
 } from './topNavigationAction.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

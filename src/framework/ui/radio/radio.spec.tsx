@@ -15,7 +15,7 @@ import {
 } from '@kitten/theme';
 import {
   Radio as RadioComponent,
-  Props as RadioProps,
+  RadioProps,
 } from './radio.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

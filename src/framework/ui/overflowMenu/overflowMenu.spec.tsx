@@ -23,11 +23,11 @@ import {
 import {
   OverflowMenuItemType,
   OverflowMenuItem as OverflowMenuItemComponent,
-  Props as OverflowMenuItemComponentProps,
+  OverflowMenuItemProps as OverflowMenuItemComponentProps,
 } from './overflowMenuItem.component';
 import {
   OverflowMenu as OverflowMenuComponent,
-  Props as OverflowMenuComponentProps,
+  OverflowMenuProps as OverflowMenuComponentProps,
 } from './overflowMenu.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

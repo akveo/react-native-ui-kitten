@@ -11,38 +11,37 @@ import {
   styled,
 } from '@kitten/theme';
 import {
-  OverflowMenuItemType,
   OverflowMenuItem as OverflowMenuItemComponent,
-  Props as OverflowMenuItemProps,
+  OverflowMenuItemProps,
 } from './overflowMenuItem.component';
 import {
   Popover as PopoverComponent,
-  Props as PopoverProps,
+  PopoverProps as PopoverProps,
 } from '../popover/popover.component';
 import { Omit } from '../common/type';
 
 type MenuItemElement = React.ReactElement<OverflowMenuItemProps>;
 
-interface OverflowMenuProps {
+interface ComponentProps {
   children: React.ReactElement<any>;
-  items: OverflowMenuItemType[];
+  items: OverflowMenuItemProps[];
   onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
 const Popover = styled<PopoverProps>(PopoverComponent);
 const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
 
-export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverProps, 'content'>;
+export type OverflowMenuProps = & StyledComponentProps & ComponentProps & Omit<PopoverProps, 'content'>;
 
-export class OverflowMenu extends React.Component<Props> {
+export class OverflowMenu extends React.Component<OverflowMenuProps> {
 
   static styledComponentName: string = 'OverflowMenu';
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<OverflowMenuProps> = {
     indicatorOffset: 12,
   };
 
-  private onSelect = (index: number, event: GestureResponderEvent): void => {
+  private onItemSelect = (index: number, event: GestureResponderEvent): void => {
     if (this.props.onSelect) {
       this.props.onSelect(index, event);
     }
@@ -70,26 +69,27 @@ export class OverflowMenu extends React.Component<Props> {
     };
   };
 
-  private renderItemElement = (item: OverflowMenuItemType, index: number, style: StyleType): MenuItemElement => {
+  private isLastItem = (index: number): boolean => {
+    return index === this.props.items.length - 1;
+  };
+
+  private renderItemElement = (item: OverflowMenuItemProps, index: number, style: StyleType): MenuItemElement => {
     return (
       <OverflowMenuItem
+        key={index}
         style={style}
         {...item}
-        key={index}
         index={index}
-        onPress={this.onSelect}
+        onPress={this.onItemSelect}
       />
     );
   };
 
   private renderContentElementChildren = (style: StyleType): MenuItemElement[] => {
-    const { items } = this.props;
-
-    return this.props.items.map((item: OverflowMenuItemType, index: number) => {
+    return this.props.items.map((item: OverflowMenuItemProps, index: number) => {
       const itemElement: MenuItemElement = this.renderItemElement(item, index, style);
 
-      const isLast: boolean = index === items.length - 1;
-      const borderBottomWidth: number = isLast ? 0 : style.borderBottomWidth;
+      const borderBottomWidth: number = this.isLastItem(index) ? 0 : style.borderBottomWidth;
 
       return React.cloneElement(itemElement, {
         style: [itemElement.props.style, { borderBottomWidth }],
@@ -110,6 +110,7 @@ export class OverflowMenu extends React.Component<Props> {
   public render(): React.ReactNode {
     const { style, themedStyle, children, ...restProps } = this.props;
     const { popover, ...componentStyle } = this.getComponentStyle(themedStyle);
+
     const contentElement: React.ReactElement<ViewProps> = this.renderPopoverContentElement(componentStyle);
 
     return (

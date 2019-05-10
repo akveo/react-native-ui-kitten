@@ -14,36 +14,42 @@ import {
 } from '@kitten/theme';
 import {
   Text as TextComponent,
-  Props as TextProps,
+  TextProps,
 } from '../text/text.component';
 import {
   Popover as PopoverComponent,
-  Props as PopoverProps,
+  PopoverProps,
 } from '../popover/popover.component';
 import { Omit } from '../common/type';
 
-interface TooltipProps {
-  text: string;
+type TextElement = React.ReactElement<TextProps>;
+type IconElement = React.ReactElement<ImageProps>;
+type IconProp = (style: StyleType) => IconElement;
+type WrappingElement = React.ReactElement<any>;
+
+interface ComponentProps {
+  text: React.ReactText;
   textStyle?: StyleProp<TextStyle>;
-  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
-  children: React.ReactElement<any>;
+  icon?: IconProp;
+  children: WrappingElement;
 }
 
 const Popover = styled<PopoverProps>(PopoverComponent);
 const Text = styled<TextProps>(TextComponent);
 
-export type Props = TooltipProps & StyledComponentProps & Omit<PopoverProps, 'content'>;
+export type TooltipProps = StyledComponentProps & Omit<PopoverProps, 'content'> & ComponentProps;
 
-export class Tooltip extends React.Component<Props> {
+export class Tooltip extends React.Component<TooltipProps> {
 
   static styledComponentName: string = 'Tooltip';
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<TooltipProps> = {
     indicatorOffset: 8,
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { textStyle } = this.props;
+    const { style, textStyle } = this.props;
+
     const {
       popoverPaddingHorizontal,
       popoverPaddingVertical,
@@ -66,6 +72,7 @@ export class Tooltip extends React.Component<Props> {
         borderRadius: popoverBorderRadius,
         backgroundColor: popoverBackgroundColor,
         ...styles.popover,
+        ...StyleSheet.flatten(style),
       },
       content: styles.content,
       icon: {
@@ -80,37 +87,36 @@ export class Tooltip extends React.Component<Props> {
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,
-        ...StyleSheet.flatten(textStyle),
         ...styles.text,
+        ...StyleSheet.flatten(textStyle),
       },
     };
   };
 
-  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
-    const { text } = this.props;
-
+  private renderTextElement = (style: StyleType): TextElement => {
     return (
       <Text
         key={1}
         style={style}>
-        {text}
+        {this.props.text}
       </Text>
     );
   };
 
-  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
-    const { icon } = this.props;
+  private renderIconElement = (style: StyleType): IconElement => {
+    const iconElement: IconElement = this.props.icon(style);
 
-    const iconElement: React.ReactElement<ImageProps> = icon(style);
-
-    return React.cloneElement(iconElement, { key: 0 });
+    return React.cloneElement(iconElement, {
+      key: 0,
+      style: [style, iconElement.props.style],
+    });
   };
 
-  private renderContentElementChildren = (style: StyleType): React.ReactNode => {
+  private renderContentElementChildren = (style: StyleType): React.ReactNodeArray => {
     const { icon } = this.props;
 
     return [
-      icon ? this.renderIconElement(style.icon) : null,
+      icon && this.renderIconElement(style.icon),
       this.renderTextElement(style.text),
     ];
   };
@@ -130,12 +136,13 @@ export class Tooltip extends React.Component<Props> {
   public render(): React.ReactElement<PopoverProps> {
     const { style, children, themedStyle, ...derivedProps } = this.props;
     const { popover, ...componentStyle } = this.getComponentStyle(themedStyle);
+
     const contentElement: React.ReactElement<TextProps> = this.renderPopoverContentElement(componentStyle);
 
     return (
       <Popover
         {...derivedProps}
-        style={[popover, style]}
+        style={popover}
         content={contentElement}>
         {children}
       </Popover>

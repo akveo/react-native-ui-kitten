@@ -15,14 +15,14 @@ import {
 } from '@kitten/theme';
 import {
   Toggle as ToggleComponent,
-  Props,
+  ToggleProps,
 } from './toggle.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
 
-const Toggle = styled<Props>(ToggleComponent);
+const Toggle = styled<ToggleProps>(ToggleComponent);
 
-const Mock = (props?: Props): React.ReactElement<ApplicationProviderProps> => {
+const Mock = (props?: ToggleProps): React.ReactElement<ApplicationProviderProps> => {
   return (
     <ApplicationProvider
       mapping={mapping}
@@ -32,7 +32,7 @@ const Mock = (props?: Props): React.ReactElement<ApplicationProviderProps> => {
   );
 };
 
-const renderComponent = (props?: Props): RenderAPI => {
+const renderComponent = (props?: ToggleProps): RenderAPI => {
   return render(
     <Mock {...props}/>,
   );

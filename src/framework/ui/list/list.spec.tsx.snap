@@ -12,21 +12,14 @@ exports[`@list-item: template matches snapshot * description 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "transparent",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      Array [
-        undefined,
-        undefined,
-        Object {},
-      ],
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "transparent",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -135,35 +128,9 @@ exports[`@list-item: template matches snapshot * description 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
-          "accessory": Object {
-            "marginHorizontal": 8,
-          },
-          "description": Object {
-            "color": "#8992A3",
-            "fontSize": 11,
-            "lineHeight": 16,
-            "marginHorizontal": 8,
-          },
-          "icon": Object {
-            "height": 40,
-            "marginHorizontal": 8,
-            "tintColor": "#A6AEBD",
-            "width": 40,
-          },
-          "title": Object {
-            "color": "#0D1C2E",
-            "fontSize": 13,
-            "fontWeight": "600",
-            "lineHeight": 24,
-            "marginHorizontal": 8,
-          },
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
+      Object {
+        "flex": 1,
+      }
     }
   >
     <ForwardRef(WrappingElement)
@@ -200,21 +167,14 @@ exports[`@list-item: template matches snapshot * text styles 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "transparent",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      Array [
-        undefined,
-        undefined,
-        Object {},
-      ],
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "transparent",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -330,36 +290,9 @@ exports[`@list-item: template matches snapshot * text styles 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
-          "accessory": Object {
-            "marginHorizontal": 8,
-          },
-          "description": Object {
-            "color": "blue",
-            "fontSize": 11,
-            "letterSpacing": 6,
-            "lineHeight": 16,
-            "marginHorizontal": 8,
-          },
-          "icon": Object {
-            "height": 40,
-            "marginHorizontal": 8,
-            "tintColor": "#A6AEBD",
-            "width": 40,
-          },
-          "title": Object {
-            "color": "#0D1C2E",
-            "fontSize": 22,
-            "fontWeight": "600",
-            "lineHeight": 24,
-            "marginHorizontal": 8,
-          },
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
+      Object {
+        "flex": 1,
+      }
     }
   >
     <ForwardRef(WrappingElement)
@@ -403,21 +336,14 @@ exports[`@list-item: template matches snapshot * title 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "transparent",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      Array [
-        undefined,
-        undefined,
-        Object {},
-      ],
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "transparent",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -527,35 +453,9 @@ exports[`@list-item: template matches snapshot * title 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
-          "accessory": Object {
-            "marginHorizontal": 8,
-          },
-          "description": Object {
-            "color": "#8992A3",
-            "fontSize": 11,
-            "lineHeight": 16,
-            "marginHorizontal": 8,
-          },
-          "icon": Object {
-            "height": 40,
-            "marginHorizontal": 8,
-            "tintColor": "#A6AEBD",
-            "width": 40,
-          },
-          "title": Object {
-            "color": "#0D1C2E",
-            "fontSize": 13,
-            "fontWeight": "600",
-            "lineHeight": 24,
-            "marginHorizontal": 8,
-          },
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
+      Object {
+        "flex": 1,
+      }
     }
   >
     <ForwardRef(WrappingElement)
@@ -588,21 +488,14 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "transparent",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      Array [
-        undefined,
-        undefined,
-        Object {},
-      ],
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "transparent",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -712,35 +605,9 @@ exports[`@list-item: template matches snapshot * with accessory 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
-          "accessory": Object {
-            "marginHorizontal": 8,
-          },
-          "description": Object {
-            "color": "#8992A3",
-            "fontSize": 11,
-            "lineHeight": 16,
-            "marginHorizontal": 8,
-          },
-          "icon": Object {
-            "height": 40,
-            "marginHorizontal": 8,
-            "tintColor": "#A6AEBD",
-            "width": 40,
-          },
-          "title": Object {
-            "color": "#0D1C2E",
-            "fontSize": 13,
-            "fontWeight": "600",
-            "lineHeight": 24,
-            "marginHorizontal": 8,
-          },
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
+      Object {
+        "flex": 1,
+      }
     }
   >
     <ForwardRef(WrappingElement)
@@ -802,21 +669,14 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "transparent",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      Array [
-        undefined,
-        undefined,
-        Object {},
-      ],
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "transparent",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -938,47 +798,21 @@ exports[`@list-item: template matches snapshot * with icon 1`] = `
           "tintColor": "#A6AEBD",
           "width": 40,
         },
+        Object {},
         Object {
           "height": 40,
           "marginHorizontal": 8,
           "tintColor": "#A6AEBD",
           "width": 40,
         },
-        Object {},
       ]
     }
   />
   <View
     style={
-      Array [
-        Object {
-          "accessory": Object {
-            "marginHorizontal": 8,
-          },
-          "description": Object {
-            "color": "#8992A3",
-            "fontSize": 11,
-            "lineHeight": 16,
-            "marginHorizontal": 8,
-          },
-          "icon": Object {
-            "height": 40,
-            "marginHorizontal": 8,
-            "tintColor": "#A6AEBD",
-            "width": 40,
-          },
-          "title": Object {
-            "color": "#0D1C2E",
-            "fontSize": 13,
-            "fontWeight": "600",
-            "lineHeight": 24,
-            "marginHorizontal": 8,
-          },
-        },
-        Object {
-          "flex": 1,
-        },
-      ]
+      Object {
+        "flex": 1,
+      }
     }
   >
     <ForwardRef(WrappingElement)

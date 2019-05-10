@@ -12,14 +12,11 @@ exports[`@avatar: matches snapshot * appearance * default 1`] = `
     }
   }
   style={
-    Array [
-      Object {
-        "borderRadius": 20,
-        "height": 40,
-        "width": 40,
-      },
-      Object {},
-    ]
+    Object {
+      "borderRadius": 20,
+      "height": 40,
+      "width": 40,
+    }
   }
   theme={
     Object {

@@ -16,14 +16,17 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Props as TextProps,
   Text as TextComponent,
+  TextProps,
 } from '../text/text.component';
 import { CheckMark } from '../drawable';
 
-interface CheckBoxProps {
+type IconElement = React.ReactElement<ViewProps>;
+type TextElement = React.ReactElement<TextProps>;
+
+interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
-  text?: string;
+  text?: React.ReactText;
   checked?: boolean;
   indeterminate?: boolean;
   status?: string;
@@ -33,9 +36,9 @@ interface CheckBoxProps {
 
 const Text = styled<TextProps>(TextComponent);
 
-export type Props = CheckBoxProps & StyledComponentProps & TouchableOpacityProps;
+export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class CheckBox extends React.Component<Props> {
+export class CheckBox extends React.Component<CheckBoxProps> {
 
   static styledComponentName: string = 'CheckBox';
 
@@ -63,8 +66,8 @@ export class CheckBox extends React.Component<Props> {
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
-    const { style: containerStyle, textStyle } = this.props;
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, textStyle } = this.props;
 
     const {
       textMarginHorizontal,
@@ -81,11 +84,11 @@ export class CheckBox extends React.Component<Props> {
       highlightBorderRadius,
       highlightBackgroundColor,
       ...containerParameters
-    } = style;
+    } = source;
 
     return {
       container: {
-        ...StyleSheet.flatten(containerStyle),
+        ...StyleSheet.flatten(style),
         ...styles.container,
       },
       highlightContainer: styles.highlightContainer,
@@ -118,7 +121,7 @@ export class CheckBox extends React.Component<Props> {
     };
   };
 
-  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderTextElement = (style: StyleType): TextElement => {
     const { text } = this.props;
 
     return (
@@ -126,19 +129,19 @@ export class CheckBox extends React.Component<Props> {
     );
   };
 
-  private renderSelectIconElement = (style: StyleType): React.ReactElement<ViewProps> => {
+  private renderSelectIconElement = (style: StyleType): IconElement => {
     return (
       <CheckMark style={[style, styles.selectIcon]}/>
     );
   };
 
-  private renderIndeterminateIconElement = (style: StyleType): React.ReactElement<ViewProps> => {
+  private renderIndeterminateIconElement = (style: StyleType): IconElement => {
     return (
       <View style={[style, styles.indeterminateIcon]}/>
     );
   };
 
-  private renderIconElement = (style: StyleType): React.ReactElement<ViewProps> => {
+  private renderIconElement = (style: StyleType): IconElement => {
     if (this.props.indeterminate) {
       return this.renderIndeterminateIconElement(style);
     } else {
@@ -146,12 +149,12 @@ export class CheckBox extends React.Component<Props> {
     }
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactElement<ViewProps>[] => {
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { text } = this.props;
 
     return [
       this.renderIconElement(style.icon),
-      text ? this.renderTextElement(style.text) : null,
+      text && this.renderTextElement(style.text),
     ];
   };
 

@@ -13,11 +13,11 @@ import {
 } from '@kitten/theme';
 import {
   RadioGroup as RadioGroupComponent,
-  Props as RadioGroupProps,
+  RadioGroupProps as RadioGroupProps,
 } from './radioGroup.component';
 import {
   Radio as RadioComponent,
-  Props as RadioProps,
+  RadioProps,
 } from '../radio/radio.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

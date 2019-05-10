@@ -15,17 +15,21 @@ import {
   styled,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
-  Props as TextProps,
-} from '../text/text.component';
-import {
   ButtonIconAlignment,
   ButtonIconAlignments,
 } from './type';
+import {
+  Text as TextComponent,
+  TextProps,
+} from '../text/text.component';
 
-interface ButtonProps {
+type TextElement = React.ReactElement<TextProps>;
+type IconElement = React.ReactElement<ImageProps>;
+type IconProp = (style: StyleType) => IconElement;
+
+interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
-  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
+  icon?: IconProp;
   status?: string;
   size?: string;
   iconAlignment?: string | ButtonIconAlignment;
@@ -34,16 +38,16 @@ interface ButtonProps {
 
 const Text = styled<TextProps>(TextComponent);
 
-export type Props = ButtonProps & StyledComponentProps & TouchableOpacityProps;
+export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
 
-export class Button extends React.Component<Props> {
+export class Button extends React.Component<ButtonProps> {
 
   static styledComponentName: string = 'Button';
 
-  static defaultProps: Partial<Props> = {
-    iconAlignment: 'left',
+  static defaultProps: Partial<ButtonProps> = {
+    iconAlignment: ALIGNMENT_DEFAULT,
   };
 
   private onPress = (event: GestureResponderEvent) => {
@@ -68,8 +72,8 @@ export class Button extends React.Component<Props> {
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
-    const { style: containerStyle, textStyle } = this.props;
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, textStyle, iconAlignment } = this.props;
 
     const {
       textColor,
@@ -82,17 +86,15 @@ export class Button extends React.Component<Props> {
       iconTintColor,
       iconMarginHorizontal,
       ...containerParameters
-    } = style;
-
-    const { iconAlignment } = this.props;
+    } = source;
 
     const alignment: ButtonIconAlignment = ButtonIconAlignments.parse(iconAlignment, ALIGNMENT_DEFAULT);
 
     return {
       container: {
         ...containerParameters,
-        ...StyleSheet.flatten(containerStyle),
         ...styles.container,
+        ...StyleSheet.flatten(style),
         flexDirection: alignment.flex(),
       },
       text: {
@@ -101,8 +103,8 @@ export class Button extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         marginHorizontal: textMarginHorizontal,
-        ...StyleSheet.flatten(textStyle),
         ...styles.text,
+        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,
@@ -114,39 +116,39 @@ export class Button extends React.Component<Props> {
     };
   };
 
-  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
-    const { children: text } = this.props;
-
+  private renderTextElement = (style: StyleType): TextElement => {
     return (
       <Text
-        style={style}
-        key={1}>
-        {text}
+        key={1}
+        style={style}>
+        {this.props.children}
       </Text>
     );
   };
 
-  private renderImageElement = (style: StyleType): React.ReactElement<ImageProps> | null => {
-    const { icon } = this.props;
-    return icon ? React.cloneElement(icon(style), { key: 2 }) : null;
+  private renderIconElement = (style: StyleType): IconElement => {
+    const iconElement: IconElement = this.props.icon(style);
+
+    return React.cloneElement(iconElement, {
+      key: 2,
+      style: [style, iconElement.props.style],
+    });
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { icon, children } = this.props;
 
-    const hasIcon: boolean = icon !== undefined;
-    const hasText: boolean = children !== undefined;
-
     return [
-      hasIcon ? this.renderImageElement(style.icon) : undefined,
-      hasText ? this.renderTextElement(style.text) : undefined,
+      icon && this.renderIconElement(style.icon),
+      children && this.renderTextElement(style.text),
     ];
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
+
+    const [iconElement, textElement] = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
@@ -156,7 +158,8 @@ export class Button extends React.Component<Props> {
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {componentChildren}
+        {iconElement}
+        {textElement}
       </TouchableOpacity>
     );
   }

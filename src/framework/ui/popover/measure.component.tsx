@@ -10,7 +10,7 @@ import {
 import { Frame } from './type';
 
 export type MeasuringElement = React.ReactElement<MeasuringElementProps>;
-export type MeasuringElementProps = { tag: string | number } & any;
+export type MeasuringElementProps = { tag: React.ReactText } & any;
 export type MeasuringNode = React.ReactElement<MeasureNodeProps>;
 export type MeasuringNodeProps = MeasureNodeProps & ViewProps;
 

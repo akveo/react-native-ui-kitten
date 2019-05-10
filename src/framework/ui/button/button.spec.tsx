@@ -19,7 +19,7 @@ import {
 } from '@kitten/theme';
 import {
   Button as ButtonComponent,
-  Props as ButtonProps,
+  ButtonProps as ButtonProps,
 } from './button.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

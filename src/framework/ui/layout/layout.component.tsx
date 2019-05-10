@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  StyleSheet,
   View,
   ViewProps,
 } from 'react-native';
@@ -8,30 +9,35 @@ import {
   StyleType,
 } from '@kitten/theme';
 
-interface LayoutProps {
-  children?: React.ReactElement<any>;
+type ChildElement = React.ReactElement<any>;
+type ChildrenProp = ChildElement | ChildElement[];
+
+interface ComponentProps {
+  children?: ChildrenProp;
 }
 
-export type Props = LayoutProps & StyledComponentProps & ViewProps;
+export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class Layout extends React.Component<Props> {
+export class Layout extends React.Component<LayoutProps> {
 
   static styledComponentName: string = 'Layout';
 
-  private getComponentStyle = (style: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     return {
-      container: style,
+      ...source,
+      ...StyleSheet.flatten(this.props.style),
     };
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const { style, themedStyle, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
-      <View {...derivedProps} style={[componentStyle.container, style]}>
-        {children}
-      </View>
+      <View
+        {...derivedProps}
+        style={componentStyle}
+      />
     );
   }
 }

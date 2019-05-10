@@ -17,7 +17,7 @@ import {
 } from '@kitten/theme';
 import {
   Avatar as AvatarComponent,
-  Props as AvatarProps,
+  AvatarProps,
 } from './avatar.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

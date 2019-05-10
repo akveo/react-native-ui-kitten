@@ -16,12 +16,14 @@ import {
 } from '@kitten/theme';
 import {
   Text as TextComponent,
-  Props as TextProps,
+  TextProps,
 } from '../text/text.component';
 
-interface RadioProps {
+type TextElement = React.ReactElement<TextProps>;
+
+interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
-  text?: string;
+  text?: React.ReactText;
   checked?: boolean;
   status?: string;
   size?: string;
@@ -30,9 +32,9 @@ interface RadioProps {
 
 const Text = styled<TextProps>(TextComponent);
 
-export type Props = RadioProps & StyledComponentProps & TouchableOpacityProps;
+export type RadioProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class Radio extends React.Component<Props> {
+export class Radio extends React.Component<RadioProps> {
 
   static styledComponentName: string = 'Radio';
 
@@ -58,8 +60,8 @@ export class Radio extends React.Component<Props> {
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
-    const { style: containerStyle, textStyle } = this.props;
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, textStyle } = this.props;
 
     const {
       textMarginHorizontal,
@@ -76,12 +78,12 @@ export class Radio extends React.Component<Props> {
       highlightBorderRadius,
       highlightBackgroundColor,
       ...containerParameters
-    } = style;
+    } = source;
 
     return {
       container: {
-        ...StyleSheet.flatten(containerStyle),
         ...styles.container,
+        ...StyleSheet.flatten(style),
       },
       highlightContainer: styles.highlightContainer,
       selectContainer: {
@@ -113,24 +115,27 @@ export class Radio extends React.Component<Props> {
     };
   };
 
-  private renderTextElement = (style: StyleType): React.ReactElement<TextProps> => {
-    const { text } = this.props;
-
+  private renderTextElement = (style: StyleType): TextElement => {
     return (
-      <Text style={style} key={0}>{text}</Text>
+      <Text
+        key={0}
+        style={style}>
+        {this.props.text}
+      </Text>
     );
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { text } = this.props;
 
     return [
-      text ? this.renderTextElement(style.text) : undefined,
+      text && this.renderTextElement(style.text),
     ];
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, disabled, ...derivedProps } = this.props;
+
     const {
       container,
       highlightContainer,
@@ -140,7 +145,7 @@ export class Radio extends React.Component<Props> {
       ...componentStyles
     } = this.getComponentStyle(themedStyle);
 
-    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
+    const [textElement] = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
@@ -163,7 +168,7 @@ export class Radio extends React.Component<Props> {
             <View style={icon}/>
           </TouchableOpacity>
         </View>
-        {componentChildren}
+        {textElement}
       </TouchableOpacity>
     );
   }

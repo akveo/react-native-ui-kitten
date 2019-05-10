@@ -11,11 +11,11 @@ import {
 } from '@kitten/theme';
 import {
   ButtonGroup as ButtonGroupComponent,
-  Props as ButtonGroupProps,
+  ButtonGroupProps as ButtonGroupProps,
 } from './buttonGroup.component';
 import {
   Button as ButtonComponent,
-  Props as ButtonProps,
+  ButtonProps,
 } from '../button/button.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

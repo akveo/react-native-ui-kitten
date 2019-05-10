@@ -6,49 +6,43 @@ import {
   ViewStyle,
 } from 'react-native';
 import { styled } from '@kitten/theme';
-import {
-  Tab as TabComponent,
-  Props as TabProps,
-} from './tab.component';
+import { TabProps } from './tab.component';
 import {
   TabBar as TabBarComponent,
-  Props as TabBarProps,
+  TabBarProps,
 } from './tabBar.component';
 import { ViewPager } from '../viewPager/viewPager.component';
 
+type TabContentElement = React.ReactElement<any>;
 type TabElement = React.ReactElement<TabProps>;
-type ChildElement = React.ReactElement<ChildProps>;
-type ChildContentElement = React.ReactElement<any>;
+type ChildrenProp = TabElement | TabElement[];
 
 class TabViewChildElement {
   tab: TabElement;
-  content: ChildContentElement;
+  content: TabContentElement;
 }
 
 class TabViewChildren {
   tabs: TabElement[] = [];
-  content: ChildContentElement[] = [];
+  content: TabContentElement[] = [];
 }
 
-interface TabViewProps {
-  children: ChildElement | ChildElement[];
+interface ComponentProps {
+  children: ChildrenProp;
   selectedIndex?: number;
-  contentWidth?: number;
   indicatorStyle?: StyleProp<ViewStyle>;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
   onSelect?: (index: number) => void;
 }
 
-const Tab = styled<TabProps>(TabComponent);
 const TabBar = styled<TabBarProps>(TabBarComponent);
 
-export type Props = TabViewProps & ViewProps;
-export type ChildProps = TabProps & { children: ChildContentElement };
+export type TabViewProps = ViewProps & ComponentProps;
 
-export class TabView extends React.Component<Props> {
+export class TabView extends React.Component<TabViewProps> {
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<TabViewProps> = {
     selectedIndex: 0,
   };
 
@@ -74,17 +68,15 @@ export class TabView extends React.Component<Props> {
     }
   };
 
-  private renderComponentChild = (element: ChildElement, index: number): TabViewChildElement => {
-    const { children, ...elementProps } = element.props;
-
+  private renderComponentChild = (element: TabElement, index: number): TabViewChildElement => {
     return {
-      tab: React.cloneElement(element, { key: index, ...elementProps }),
-      content: children,
+      tab: React.cloneElement(element, { key: index }),
+      content: element.props.children,
     };
   };
 
-  private renderComponentChildren = (source: ChildElement | ChildElement[]): TabViewChildren => {
-    return React.Children.toArray(source).reduce((acc: TabViewChildren, element: ChildElement, index: number) => {
+  private renderComponentChildren = (source: ChildrenProp): TabViewChildren => {
+    return React.Children.toArray(source).reduce((acc: TabViewChildren, element: TabElement, index: number) => {
       const { tab, content } = this.renderComponentChild(element, index);
       return {
         tabs: [...acc.tabs, tab],
@@ -94,13 +86,8 @@ export class TabView extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const {
-      selectedIndex,
-      contentWidth,
-      children,
-      indicatorStyle,
-      ...derivedProps
-    } = this.props;
+    const { selectedIndex, children, indicatorStyle, ...derivedProps } = this.props;
+
     const { tabs, content } = this.renderComponentChildren(children);
 
     return (

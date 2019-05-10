@@ -8,12 +8,7 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  style={
-    Array [
-      Object {},
-      undefined,
-    ]
-  }
+  style={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -126,10 +121,16 @@ exports[`@top-navigation-bar/action * action/on press check 1`] = `
       }
     }
     style={
-      Object {
-        "flex": 1,
-        "tintColor": "#0D1C2E",
-      }
+      Array [
+        Object {
+          "flex": 1,
+          "tintColor": "#0D1C2E",
+        },
+        Object {
+          "flex": 1,
+          "tintColor": "#0D1C2E",
+        },
+      ]
     }
   />
 </TouchableOpacity>
@@ -143,12 +144,7 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
-  style={
-    Array [
-      Object {},
-      undefined,
-    ]
-  }
+  style={Object {}}
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -261,10 +257,16 @@ exports[`@top-navigation-bar/action * action/with icon uri 1`] = `
       }
     }
     style={
-      Object {
-        "flex": 1,
-        "tintColor": "#0D1C2E",
-      }
+      Array [
+        Object {
+          "flex": 1,
+          "tintColor": "#0D1C2E",
+        },
+        Object {
+          "flex": 1,
+          "tintColor": "#0D1C2E",
+        },
+      ]
     }
   />
 </TouchableOpacity>
@@ -276,16 +278,13 @@ exports[`@top-navigation-bar/action * bar/alignment: center 1`] = `
   appearance="default"
   dispatch={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#FFFFFF",
-        "flexDirection": "row",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFFF",
+      "flexDirection": "row",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -391,6 +390,7 @@ exports[`@top-navigation-bar/action * bar/alignment: center 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
+  title="Test"
 >
   <View
     style={
@@ -439,17 +439,15 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
   appearance="default"
   dispatch={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#FFFFFF",
-        "flexDirection": "row",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFFF",
+      "flexDirection": "row",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
+  subtitle="Subtitle"
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -554,6 +552,7 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
+  title="Test"
 >
   <View
     style={
@@ -595,7 +594,7 @@ exports[`@top-navigation-bar/action * bar/subtitle 1`] = `
         }
       }
     >
-      Subtitle
+      Test
     </Text>
   </View>
   <View
@@ -615,16 +614,13 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
   appearance="default"
   dispatch={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#FFFFFF",
-        "flexDirection": "row",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFFF",
+      "flexDirection": "row",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
   theme={
     Object {
@@ -730,6 +726,7 @@ exports[`@top-navigation-bar/action * bar/title 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
+  title="Test"
 >
   <View
     style={
@@ -777,18 +774,42 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
   alignment="start"
   appearance="default"
   dispatch={[Function]}
-  style={
+  leftControl={
+    <ActionMock
+      icon={[Function]}
+      onPress={[MockFunction]}
+      testID="@top-navbar-left"
+    />
+  }
+  rightControls={
     Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#FFFFFF",
-        "flexDirection": "row",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      undefined,
+      <ActionMock
+        icon={[Function]}
+        onPress={[MockFunction]}
+        testID="@top-navbar-right-1"
+      />,
+      <ActionMock
+        icon={[Function]}
+        onPress={[MockFunction]}
+        testID="@top-navbar-right-2"
+      />,
+      <ActionMock
+        icon={[Function]}
+        onPress={[MockFunction]}
+        testID="@top-navbar-right-3"
+      />,
     ]
   }
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFFF",
+      "flexDirection": "row",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
+  }
+  subtitle="Subtitle"
   theme={
     Object {
       "blue-dark": "#2541CC",
@@ -893,6 +914,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
+  title="Test"
 >
   <View
     style={
@@ -950,7 +972,7 @@ exports[`@top-navigation-bar/action * bar/with actions 1`] = `
         }
       }
     >
-      Subtitle
+      Test
     </Text>
   </View>
   <View
@@ -1016,17 +1038,15 @@ exports[`@top-navigation-bar/action * texts (styled) 1`] = `
   appearance="default"
   dispatch={[Function]}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#FFFFFF",
-        "flexDirection": "row",
-        "paddingHorizontal": 8,
-        "paddingVertical": 8,
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFFF",
+      "flexDirection": "row",
+      "paddingHorizontal": 8,
+      "paddingVertical": 8,
+    }
   }
+  subtitle="Subtitle"
   subtitleStyle={
     Object {
       "color": "red",
@@ -1136,6 +1156,7 @@ exports[`@top-navigation-bar/action * texts (styled) 1`] = `
       "text-primary-inverse": "#ffffff",
     }
   }
+  title="Test"
   titleStyle={
     Object {
       "fontSize": 24,
@@ -1182,7 +1203,7 @@ exports[`@top-navigation-bar/action * texts (styled) 1`] = `
         }
       }
     >
-      Subtitle
+      Test
     </Text>
   </View>
   <View

@@ -1,8 +1,8 @@
 export {
   Arrow,
-  Props as ArrowProps,
+  ArrowProps as ArrowProps,
 } from './arrow/arrow.component';
 export {
   CheckMark,
-  Props as CheckMarkProps,
+  CheckMarkProps as CheckMarkProps,
 } from './checkmark/checkmark.component';

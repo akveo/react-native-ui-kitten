@@ -8,27 +8,27 @@ import {
 import { StyleType } from '@kitten/theme';
 import { Arrow } from '../drawable/arrow/arrow.component';
 import {
-  Placement,
-  Placements,
+  PopoverPlacement,
+  PopoverPlacements,
 } from './type';
 
-interface PopoverViewProps {
-  placement?: string | Placement;
+interface ComponentProps {
+  placement?: string | PopoverPlacement;
   indicatorOffset?: number;
 }
 
-const PLACEMENT_DEFAULT: Placement = Placements.TOP;
+const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.TOP;
 
-export type Props = PopoverViewProps & ViewProps;
+export type PopoverViewProps = ViewProps & ComponentProps;
 
-export class PopoverView extends React.Component<Props> {
+export class PopoverView extends React.Component<PopoverViewProps> {
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<PopoverViewProps> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     indicatorOffset: 8,
   };
 
-  private getComponentStyle = (source: StyleType, placement: Placement): StyleType => {
+  private getComponentStyle = (source: StyleType, placement: PopoverPlacement): StyleType => {
     const { direction, alignment } = placement.flex();
     const { width: indicatorWidth } = styles.indicator;
 
@@ -93,7 +93,7 @@ export class PopoverView extends React.Component<Props> {
 
   public render(): React.ReactElement<ViewProps> {
     const { style, placement: rawPlacement, children, ...derivedProps } = this.props;
-    const placement: Placement = Placements.parse(rawPlacement, PLACEMENT_DEFAULT);
+    const placement: PopoverPlacement = PopoverPlacements.parse(rawPlacement, PLACEMENT_DEFAULT);
 
     const { container, indicator, content } = this.getComponentStyle(style, placement);
 
@@ -113,7 +113,6 @@ export class PopoverView extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
     alignSelf: 'flex-start',
   },
   content: {

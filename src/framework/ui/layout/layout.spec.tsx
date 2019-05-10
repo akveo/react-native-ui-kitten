@@ -11,7 +11,7 @@ import {
 } from '@kitten/theme';
 import {
   Layout as LayoutComponent,
-  Props as LayoutProps,
+  LayoutProps as LayoutProps,
 } from './layout.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';

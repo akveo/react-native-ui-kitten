@@ -21,16 +21,15 @@ import {
 } from '@kitten/theme';
 import {
   Tab as TabComponent,
-  Props as TabProps,
+  TabProps,
 } from './tab.component';
 import {
   TabBar as TabBarComponent,
-  Props as TabBarProps,
+  TabBarProps as TabBarProps,
 } from './tabBar.component';
 import {
   TabView,
-  Props as TabViewProps,
-  ChildProps as TabViewChildProps,
+  TabViewProps,
 } from './tabView.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
@@ -161,7 +160,7 @@ describe('@tab-view: component checks', () => {
     );
   };
 
-  const ChildMock = (props?: TabViewChildProps): React.ReactElement<TabViewChildProps> => {
+  const ChildMock = (props?: TabProps): React.ReactElement<TabProps> => {
     return (
       <Tab {...props} />
     );

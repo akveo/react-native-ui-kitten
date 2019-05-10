@@ -25,6 +25,7 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
       appearance="default"
       dispatch={[Function]}
       editable={true}
+      icon={[Function]}
       onEndEditing={[Function]}
       onFocus={[Function]}
       status="primary"
@@ -152,12 +153,20 @@ exports[`@input: matches snapshot * appearance * icon 1`] = `
         }
       }
       style={
-        Object {
-          "height": 24,
-          "marginHorizontal": 8,
-          "tintColor": "#A6AEBD",
-          "width": 24,
-        }
+        Array [
+          Object {
+            "height": 24,
+            "marginHorizontal": 8,
+            "tintColor": "#A6AEBD",
+            "width": 24,
+          },
+          Object {
+            "height": 24,
+            "marginHorizontal": 8,
+            "tintColor": "#A6AEBD",
+            "width": 24,
+          },
+        ]
       }
     />
   </View>
@@ -209,8 +218,11 @@ exports[`@input: matches snapshot * appearance * label + caption 1`] = `
     <TextInput
       allowFontScaling={true}
       appearance="default"
+      caption="Caption Text"
+      captionIcon={[Function]}
       dispatch={[Function]}
       editable={true}
+      label="Label"
       onEndEditing={[Function]}
       onFocus={[Function]}
       status="primary"
@@ -348,12 +360,20 @@ exports[`@input: matches snapshot * appearance * label + caption 1`] = `
         }
       }
       style={
-        Object {
-          "height": 10,
-          "marginRight": 8,
-          "tintColor": "#A6AEBD",
-          "width": 10,
-        }
+        Array [
+          Object {
+            "height": 10,
+            "marginRight": 8,
+            "tintColor": "#A6AEBD",
+            "width": 10,
+          },
+          Object {
+            "height": 10,
+            "marginRight": 8,
+            "tintColor": "#A6AEBD",
+            "width": 10,
+          },
+        ]
       }
     />
     <ForwardRef(WrappingElement)
@@ -408,6 +428,8 @@ exports[`@input: matches snapshot * appearance * text styled 1`] = `
     <TextInput
       allowFontScaling={true}
       appearance="default"
+      caption="Caption Text"
+      captionIcon={[Function]}
       captionTextStyle={
         Object {
           "fontFamily": "opensans-bold",
@@ -416,6 +438,7 @@ exports[`@input: matches snapshot * appearance * text styled 1`] = `
       }
       dispatch={[Function]}
       editable={true}
+      label="Label"
       labelStyle={
         Object {
           "color": "blue",
@@ -564,12 +587,20 @@ exports[`@input: matches snapshot * appearance * text styled 1`] = `
         }
       }
       style={
-        Object {
-          "height": 10,
-          "marginRight": 8,
-          "tintColor": "#A6AEBD",
-          "width": 10,
-        }
+        Array [
+          Object {
+            "height": 10,
+            "marginRight": 8,
+            "tintColor": "#A6AEBD",
+            "width": 10,
+          },
+          Object {
+            "height": 10,
+            "marginRight": 8,
+            "tintColor": "#A6AEBD",
+            "width": 10,
+          },
+        ]
       }
     />
     <ForwardRef(WrappingElement)

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   StyleProp,
   StyleSheet,
-  TextStyle,
   View,
   ViewProps,
   ViewStyle,
@@ -11,25 +10,26 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import { TabProps } from './tab.component';
 import { TabBarIndicator } from './tabBarIndicator.component';
-import { Props as TabProps } from './tab.component';
 
 type TabElement = React.ReactElement<TabProps>;
+type ChildrenProp = TabElement | TabElement[];
 
-interface TabBarProps {
-  children: TabElement | TabElement[];
+interface ComponentProps {
+  children: ChildrenProp;
   selectedIndex?: number;
   indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
 }
 
-export type Props = TabBarProps & StyledComponentProps & ViewProps;
+export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
 
-export class TabBar extends React.Component<Props> {
+export class TabBar extends React.Component<TabBarProps> {
 
   static styledComponentName: string = 'TabBar';
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<TabBarProps> = {
     selectedIndex: 0,
   };
 
@@ -47,14 +47,15 @@ export class TabBar extends React.Component<Props> {
     tabIndicator.scrollToOffset(params);
   }
 
-  private onChildPress = (index: number) => {
+  private onTabSelect = (index: number) => {
     if (this.props.onSelect) {
       this.props.onSelect(index);
     }
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { indicatorStyle } = this.props;
+    const { style, indicatorStyle } = this.props;
+
     const {
       indicatorHeight,
       indicatorBorderRadius,
@@ -63,49 +64,58 @@ export class TabBar extends React.Component<Props> {
     } = source;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+        ...styles.container,
+        ...StyleSheet.flatten(style),
+      },
       indicator: {
         height: indicatorHeight,
         borderRadius: indicatorBorderRadius,
         backgroundColor: indicatorBackgroundColor,
+        ...styles.indicator,
         ...StyleSheet.flatten(indicatorStyle),
       },
     };
   };
 
-  private renderComponentChild = (element: TabElement, index: number): TabElement => {
-    const derivedStyle: TextStyle = StyleSheet.flatten(element.props.style);
+  private isTabSelected = (index: number): boolean => {
+    const { selectedIndex } = this.props;
 
+    return index === selectedIndex;
+  };
+
+  private renderTabElement = (element: TabElement, index: number): TabElement => {
     return React.cloneElement(element, {
       key: index,
-      style: { ...derivedStyle, flex: 1 },
-      selected: index === this.props.selectedIndex,
-      onSelect: () => this.onChildPress(index),
+      style: [styles.item, element.props.style],
+      selected: this.isTabSelected(index),
+      onSelect: () => this.onTabSelect(index),
     });
   };
 
-  private renderComponentChildren = (source: TabElement | TabElement[]): TabElement[] => {
-    return React.Children.map(source, this.renderComponentChild);
+  private renderTabElements = (source: ChildrenProp): TabElement[] => {
+    return React.Children.map(source, this.renderTabElement);
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, selectedIndex, children, ...derivedProps } = this.props;
-    const { container, indicator } = this.getComponentStyle(themedStyle);
+    const { themedStyle, selectedIndex, children, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
-    const componentChildren: TabElement[] = this.renderComponentChildren(children);
+    const tabElements: TabElement[] = this.renderTabElements(children);
 
     return (
       <View>
         <View
           {...derivedProps}
-          style={[style, container, styles.container]}>
-          {componentChildren}
+          style={componentStyle.container}>
+          {tabElements}
         </View>
         <TabBarIndicator
           ref={this.tabIndicatorRef}
-          style={[indicator, styles.indicator]}
+          style={componentStyle.indicator}
           selectedPosition={selectedIndex}
-          positions={componentChildren.length}
+          positions={tabElements.length}
         />
       </View>
     );
@@ -117,4 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   indicator: {},
+  item: {
+    flex: 1,
+  },
 });

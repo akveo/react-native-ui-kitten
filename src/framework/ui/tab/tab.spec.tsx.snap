@@ -8,14 +8,10 @@ exports[`@tab: component checks * empty 1`] = `
   onPress={[Function]}
   selected={false}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -133,14 +129,10 @@ exports[`@tab: component checks * icon 1`] = `
   onPress={[Function]}
   selected={false}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -254,12 +246,20 @@ exports[`@tab: component checks * icon 1`] = `
       }
     }
     style={
-      Object {
-        "height": 24,
-        "marginVertical": 2,
-        "tintColor": "#A6AEBD",
-        "width": 24,
-      }
+      Array [
+        Object {
+          "height": 24,
+          "marginVertical": 2,
+          "tintColor": "#A6AEBD",
+          "width": 24,
+        },
+        Object {
+          "height": 24,
+          "marginVertical": 2,
+          "tintColor": "#A6AEBD",
+          "width": 24,
+        },
+      ]
     }
   />
 </TouchableOpacity>
@@ -273,14 +273,10 @@ exports[`@tab: component checks * title (styled) 1`] = `
   onPress={[Function]}
   selected={false}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {
@@ -418,14 +414,10 @@ exports[`@tab: component checks * title 1`] = `
   onPress={[Function]}
   selected={false}
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      },
-      undefined,
-    ]
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
   }
   theme={
     Object {

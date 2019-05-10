@@ -3,21 +3,22 @@ import {
   Animated,
   Easing,
   LayoutChangeEvent,
+  StyleSheet,
   ViewProps,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 
-interface TabBarIndicatorProps {
+interface ComponentProps {
   positions: number;
   selectedPosition?: number;
   animationDuration?: number;
 }
 
-export type Props = TabBarIndicatorProps & ViewProps;
+export type TabBarIndicatorProps = ViewProps & ComponentProps;
 
-export class TabBarIndicator extends React.Component<Props> {
+export class TabBarIndicator extends React.Component<TabBarIndicatorProps> {
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<TabBarIndicatorProps> = {
     selectedPosition: 0,
     animationDuration: 200,
   };
@@ -25,19 +26,25 @@ export class TabBarIndicator extends React.Component<Props> {
   private contentOffset: Animated.Value = new Animated.Value(0);
   private indicatorWidth: number;
 
-  constructor(props: Props) {
-    super(props);
+  public componentDidMount() {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
   }
 
-  public shouldComponentUpdate(nextProps: Props): boolean {
+  public shouldComponentUpdate(nextProps: TabBarIndicatorProps): boolean {
     return this.props.selectedPosition !== nextProps.selectedPosition;
   }
 
   public componentDidUpdate() {
     const { selectedPosition: index } = this.props;
 
-    this.scrollToIndex({ index, animated: true });
+    this.scrollToIndex({
+      index,
+      animated: true,
+    });
+  }
+
+  public componentWillUnmount() {
+    this.contentOffset.removeAllListeners();
   }
 
   /**
@@ -94,26 +101,26 @@ export class TabBarIndicator extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const widthPercent: number = 100 / this.props.positions;
+    const { style, positions } = this.props;
+
+    const widthPercent: number = 100 / positions;
 
     return {
-      container: {
-        ...source,
-        width: `${widthPercent}%`,
-        transform: [{ translateX: this.contentOffset }],
-      },
+      ...source,
+      ...StyleSheet.flatten(style),
+      width: `${widthPercent}%`,
+      transform: [{ translateX: this.contentOffset }],
     };
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, ...derivedProps } = this.props;
-    const { container } = this.getComponentStyle(style);
+    const componentStyle: StyleType = this.getComponentStyle(this.props.style);
 
     return (
       <Animated.View
-        {...derivedProps}
+        {...this.props}
         onLayout={this.onLayout}
-        style={[style, container]}
+        style={componentStyle}
       />
     );
   }

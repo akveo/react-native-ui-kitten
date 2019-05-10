@@ -5,7 +5,11 @@ exports[`@button: matches snapshot * appearance * empty 1`] = `
   activeOpacity={1}
   appearance="filled"
   dispatch={[Function]}
-  iconAlignment="left"
+  iconAlignment={
+    _class {
+      "rawValue": "left",
+    }
+  }
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -137,7 +141,11 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
   appearance="filled"
   dispatch={[Function]}
   icon={[Function]}
-  iconAlignment="left"
+  iconAlignment={
+    _class {
+      "rawValue": "left",
+    }
+  }
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -268,12 +276,20 @@ exports[`@button: matches snapshot * appearance * icon 1`] = `
       }
     }
     style={
-      Object {
-        "height": 16,
-        "marginHorizontal": 10,
-        "tintColor": "#FFFFFF",
-        "width": 16,
-      }
+      Array [
+        Object {
+          "height": 16,
+          "marginHorizontal": 10,
+          "tintColor": "#FFFFFF",
+          "width": 16,
+        },
+        Object {
+          "height": 16,
+          "marginHorizontal": 10,
+          "tintColor": "#FFFFFF",
+          "width": 16,
+        },
+      ]
     }
   />
 </TouchableOpacity>
@@ -285,7 +301,11 @@ exports[`@button: matches snapshot * appearance * icon and text (styled) 1`] = `
   appearance="filled"
   dispatch={[Function]}
   icon={[Function]}
-  iconAlignment="left"
+  iconAlignment={
+    _class {
+      "rawValue": "left",
+    }
+  }
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -422,12 +442,20 @@ exports[`@button: matches snapshot * appearance * icon and text (styled) 1`] = `
       }
     }
     style={
-      Object {
-        "height": 24,
-        "marginHorizontal": 12,
-        "tintColor": "#FFFFFF",
-        "width": 24,
-      }
+      Array [
+        Object {
+          "height": 24,
+          "marginHorizontal": 12,
+          "tintColor": "#FFFFFF",
+          "width": 24,
+        },
+        Object {
+          "height": 24,
+          "marginHorizontal": 12,
+          "tintColor": "#FFFFFF",
+          "width": 24,
+        },
+      ]
     }
   />
   <ForwardRef(WrappingElement)
@@ -452,7 +480,11 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
   appearance="filled"
   dispatch={[Function]}
   icon={[Function]}
-  iconAlignment="left"
+  iconAlignment={
+    _class {
+      "rawValue": "left",
+    }
+  }
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -583,12 +615,20 @@ exports[`@button: matches snapshot * appearance * icon and text 1`] = `
       }
     }
     style={
-      Object {
-        "height": 16,
-        "marginHorizontal": 10,
-        "tintColor": "#FFFFFF",
-        "width": 16,
-      }
+      Array [
+        Object {
+          "height": 16,
+          "marginHorizontal": 10,
+          "tintColor": "#FFFFFF",
+          "width": 16,
+        },
+        Object {
+          "height": 16,
+          "marginHorizontal": 10,
+          "tintColor": "#FFFFFF",
+          "width": 16,
+        },
+      ]
     }
   />
   <ForwardRef(WrappingElement)
@@ -612,7 +652,11 @@ exports[`@button: matches snapshot * appearance * text 1`] = `
   activeOpacity={1}
   appearance="filled"
   dispatch={[Function]}
-  iconAlignment="left"
+  iconAlignment={
+    _class {
+      "rawValue": "left",
+    }
+  }
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -757,7 +801,11 @@ exports[`@button: matches snapshot * interaction * stateless 1`] = `
   activeOpacity={1}
   appearance="filled"
   dispatch={[Function]}
-  iconAlignment="left"
+  iconAlignment={
+    _class {
+      "rawValue": "left",
+    }
+  }
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}

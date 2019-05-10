@@ -20,7 +20,7 @@ import {
 } from '@kitten/theme';
 import {
   Input as InputComponent,
-  Props as InputProps,
+  InputProps,
 } from './input.component';
 import { default as mapping } from '../common/mapping.json';
 import { default as theme } from '../common/theme.json';
