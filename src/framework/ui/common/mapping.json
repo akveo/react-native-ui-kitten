@@ -149,12 +149,12 @@
       "appearances": {
         "default": {
           "mapping": {
-            "iconWidth": 32,
-            "iconHeight": 32,
-            "iconMarginVertical": 4,
+            "iconWidth": 24,
+            "iconHeight": 24,
+            "iconMarginVertical": 2,
             "iconTintColor": "color-basic-500",
-            "textMarginVertical": 4,
-            "textFontSize": 13,
+            "textMarginVertical": 2,
+            "textFontSize": 11,
             "textLineHeight": 16,
             "textFontWeight": "600",
             "textColor": "color-basic-600",
@@ -207,8 +207,6 @@
           "mapping": {
             "paddingVertical": 4,
             "backgroundColor": "color-white",
-            "borderTopColor": "color-basic-400",
-            "borderTopWidth": 1,
             "indicatorHeight": 4,
             "indicatorBackgroundColor": "color-primary-500"
           }

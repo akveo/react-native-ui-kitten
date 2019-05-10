@@ -8,8 +8,6 @@ exports[`@bottom-navigation: component checks * additional appearance 1`] = `
   style={
     Object {
       "backgroundColor": "#FFFFFF",
-      "borderTopColor": "#C8CEDB",
-      "borderTopWidth": 1,
       "flexDirection": "row",
       "paddingVertical": 4,
     }
@@ -170,8 +168,6 @@ exports[`@bottom-navigation: component checks * empty 1`] = `
   style={
     Object {
       "backgroundColor": "#FFFFFF",
-      "borderTopColor": "#C8CEDB",
-      "borderTopWidth": 1,
       "flexDirection": "row",
       "paddingVertical": 4,
     }
@@ -309,8 +305,6 @@ exports[`@bottom-navigation: component checks * with routes 1`] = `
   style={
     Object {
       "backgroundColor": "#FFFFFF",
-      "borderTopColor": "#C8CEDB",
-      "borderTopWidth": 1,
       "flexDirection": "row",
       "paddingVertical": 4,
     }
