@@ -18,7 +18,7 @@ type Props = & ThemedComponentProps & NavigationScreenProps;
 
 const APPEARANCE: string = 'filled';
 const STATUS: string = 'primary';
-const TEXT: React.ReactText = 'BUTTON';
+const TEXT: string = 'BUTTON';
 const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
 interface State {
