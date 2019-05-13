@@ -19,22 +19,26 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
-  Props as TextProps,
+  Text,
+  TextProps,
 } from '../text/text.component';
+import { isValidString } from '../support/services';
 
-interface TabProps {
+type TitleElement = React.ReactElement<TextProps>;
+type IconElement = React.ReactElement<ImageProps>;
+type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
+type ContentElement = React.ReactElement<any>;
+
+interface ComponentProps {
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
-  icon?: (style: StyleType) => React.ReactElement<ImageProps>;
+  icon?: IconProp;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
-  children?: React.ReactElement<any>;
+  children?: ContentElement;
 }
 
-const Text = styled<TextProps>(TextComponent);
-
-export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
+export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
  * The `Tab` component is a part of TabBar or TabView component.
@@ -71,11 +75,11 @@ export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
  * ```
  * */
 
-export class Tab extends React.Component<Props> {
+export class TabComponent extends React.Component<TabProps> {
 
   static styledComponentName: string = 'Tab';
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<TabProps> = {
     selected: false,
   };
 
@@ -86,7 +90,7 @@ export class Tab extends React.Component<Props> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { titleStyle } = this.props;
+    const { style, titleStyle } = this.props;
 
     const {
       textMarginVertical,
@@ -105,6 +109,7 @@ export class Tab extends React.Component<Props> {
       container: {
         ...containerParameters,
         ...styles.container,
+        ...StyleSheet.flatten(style),
       },
       icon: {
         width: iconWidth,
@@ -119,54 +124,58 @@ export class Tab extends React.Component<Props> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
+        ...StyleSheet.flatten(titleStyle),
       },
     };
   };
 
-  private renderTextComponent = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderTitleElement = (style: StyleType): TitleElement => {
     const { title: text } = this.props;
 
     return (
       <Text
-        style={style}
-        key={1}>
+        key={1}
+        style={style}>
         {text}
       </Text>
     );
   };
 
-  private renderImageComponent = (style: StyleType): React.ReactElement<ImageProps> => {
+  private renderIconElement = (style: StyleType): IconElement => {
     const { icon } = this.props;
 
     const iconElement: React.ReactElement<ImageProps> = icon(style);
 
-    return React.cloneElement(iconElement, { key: 2 });
+    return React.cloneElement(iconElement, {
+      key: 2,
+      style: [style, iconElement.props.style],
+    });
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNode => {
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { title, icon } = this.props;
 
     return [
-      icon ? this.renderImageComponent(style.icon) : undefined,
-      title ? this.renderTextComponent(style.title) : undefined,
+      icon && this.renderIconElement(style.icon),
+      isValidString(title) && this.renderTitleElement(style.title),
     ];
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
-    const { container, ...componentStyles }: StyleType = this.getComponentStyle(themedStyle);
+    const { themedStyle, ...derivedProps } = this.props;
+    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
-    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
+    const [iconElement, titleElement] = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
-        {...derivedProps}
-        style={[container, style]}
         activeOpacity={1.0}
+        {...derivedProps}
+        style={container}
         onPress={this.onPress}>
-        {componentChildren}
+        {iconElement}
+        {titleElement}
       </TouchableOpacity>
     );
   }
@@ -174,10 +183,11 @@ export class Tab extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   icon: {},
   title: {},
 });
+
+export const Tab = styled<TabProps>(TabComponent);

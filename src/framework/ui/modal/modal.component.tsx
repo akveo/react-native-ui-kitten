@@ -18,9 +18,12 @@ import { StyleType } from '@kitten/theme';
 
 export type ModalAnimationType = 'slideInUp' | 'fade' | 'none';
 
-interface ModalProps {
+type ChildElement = React.ReactElement<any>;
+type ChildrenProp = ChildElement | ChildElement[];
+
+interface ComponentProps {
   visible: boolean;
-  children: React.ReactElement<any> | React.ReactElement<any>[];
+  children: ChildrenProp;
   isBackDropAllowed?: boolean;
   identifier?: string;
   animationType?: ModalAnimationType;
@@ -30,7 +33,7 @@ interface ModalProps {
 
 const { width, height } = Dimensions.get('window');
 
-export type Props = ViewProps & ModalProps;
+export type ModalProps = ViewProps & ComponentProps;
 
 /**
  * The `Modal` component is a wrapper than presents content above an enclosing view.
@@ -104,9 +107,9 @@ export type Props = ViewProps & ModalProps;
  * ```
  * */
 
-export class Modal extends React.Component<Props> {
+export class Modal extends React.Component<ModalProps> {
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<ModalProps> = {
     visible: false,
     isBackDropAllowed: false,
     animationType: 'none',
@@ -115,7 +118,7 @@ export class Modal extends React.Component<Props> {
 
   private animation: Animated.Value;
 
-  constructor(props: Props) {
+  constructor(props: ModalProps) {
     super(props);
 
     this.setAnimation();
@@ -125,7 +128,7 @@ export class Modal extends React.Component<Props> {
     this.startAnimation();
   }
 
-  public componentWillReceiveProps(nextProps: Readonly<Props>): void {
+  public componentWillReceiveProps(nextProps: Readonly<ModalProps>): void {
     const { visible, animationType } = this.props;
 
     const isVisibilityChanged: boolean = nextProps.visible !== visible;

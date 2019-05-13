@@ -10,8 +10,8 @@ import {
   ThemeType,
 } from '@kitten/theme';
 import {
-  TabBar as TabBar,
-  Tab as Tab,
+  TabBar,
+  Tab,
 } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;

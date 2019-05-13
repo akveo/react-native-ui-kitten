@@ -1,18 +1,18 @@
 import React from 'react';
 import {
-  ViewProps,
-  ImageSourcePropType,
-  View,
-  Text,
   Image,
+  ImageSourcePropType,
+  Text,
+  View,
+  ViewProps,
 } from 'react-native';
 import {
   createBottomTabNavigator,
   NavigationContainer,
   NavigationContainerProps,
+  NavigationRoute,
   NavigationScreenProp,
   NavigationState,
-  NavigationRoute,
 } from 'react-navigation';
 import {
   BottomNavigation,

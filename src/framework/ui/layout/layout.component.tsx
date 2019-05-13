@@ -6,19 +6,24 @@
 
 import React from 'react';
 import {
+  StyleSheet,
   View,
   ViewProps,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 
-interface LayoutProps {
-  children?: React.ReactElement<any>;
+type ChildElement = React.ReactElement<any>;
+type ChildrenProp = ChildElement | ChildElement[];
+
+interface ComponentProps {
+  children?: ChildrenProp;
 }
 
-export type Props = LayoutProps & StyledComponentProps & ViewProps;
+export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
  * The `Layout` component is component which behaves like React Native View.
@@ -49,24 +54,28 @@ export type Props = LayoutProps & StyledComponentProps & ViewProps;
  * ```
  * */
 
-export class Layout extends React.Component<Props> {
+export class LayoutComponent extends React.Component<LayoutProps> {
 
   static styledComponentName: string = 'Layout';
 
-  private getComponentStyle = (style: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     return {
-      container: style,
+      ...source,
+      ...StyleSheet.flatten(this.props.style),
     };
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, children, ...restProps } = this.props;
+    const { style, themedStyle, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
-      <View {...restProps} style={[componentStyle.container, style]}>
-        {children}
-      </View>
+      <View
+        {...derivedProps}
+        style={componentStyle}
+      />
     );
   }
 }
+
+export const Layout = styled<LayoutProps>(LayoutComponent);

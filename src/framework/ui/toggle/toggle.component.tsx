@@ -22,10 +22,11 @@ import {
   StyledComponentProps,
   StyleType,
   Interaction,
+  styled,
 } from '@kitten/theme';
-import { CheckMark } from '../drawable/checkmark/checkmark.component';
+import { CheckMark } from '../support/components';
 
-interface ToggleComponentProps {
+interface ComponentProps {
   checked?: boolean;
   disabled?: boolean;
   status?: string;
@@ -33,7 +34,7 @@ interface ToggleComponentProps {
   onChange?: (checked: boolean) => void;
 }
 
-export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
+export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
  * The `Toggle` component is an analog of html checkbox and radio buttons.
@@ -90,7 +91,7 @@ export type Props = ToggleComponentProps & StyledComponentProps & ViewProps;
  * }
  * ```
  * */
-export class Toggle extends React.Component<Props> implements PanResponderCallbacks {
+export class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
 
   static styledComponentName: string = 'Toggle';
 
@@ -100,7 +101,7 @@ export class Toggle extends React.Component<Props> implements PanResponderCallba
   private ellipseScaleAnimation: Animated.Value;
   private thumbTranslateAnimationActive: boolean;
 
-  constructor(props: Props) {
+  constructor(props: ToggleProps) {
     super(props);
 
     const { checked, themedStyle } = props;
@@ -185,8 +186,8 @@ export class Toggle extends React.Component<Props> implements PanResponderCallba
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
-    const { checked, disabled } = this.props;
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, checked, disabled } = this.props;
 
     const {
       highlightWidth,
@@ -204,7 +205,7 @@ export class Toggle extends React.Component<Props> implements PanResponderCallba
       backgroundColor,
       borderColor,
       ...containerParameters
-    } = style;
+    } = source;
 
     const interpolatedBackgroundColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
       backgroundColor,
@@ -221,6 +222,7 @@ export class Toggle extends React.Component<Props> implements PanResponderCallba
     return {
       container: {
         ...styles.container,
+        ...StyleSheet.flatten(style),
       },
       componentContainer: {
         borderColor: borderColor,
@@ -238,7 +240,7 @@ export class Toggle extends React.Component<Props> implements PanResponderCallba
       ellipse: {
         width: containerParameters.width - (containerParameters.borderWidth * 2),
         height: containerParameters.height - (containerParameters.borderWidth * 2),
-        borderRadius: (style.height - (style.borderWidth * 2)) / 2,
+        borderRadius: (source.height - (source.borderWidth * 2)) / 2,
         backgroundColor: interpolatedBackgroundColor,
         transform: [{ scale: checked ? thumbScale : this.ellipseScaleAnimation }],
         ...styles.ellipse,
@@ -254,8 +256,8 @@ export class Toggle extends React.Component<Props> implements PanResponderCallba
         ...styles.thumb,
       },
       icon: {
-        width: style.iconWidth,
-        height: style.iconHeight,
+        width: source.iconWidth,
+        height: source.iconHeight,
         backgroundColor: interpolatedIconColor,
       },
     };
@@ -330,11 +332,13 @@ export class Toggle extends React.Component<Props> implements PanResponderCallba
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, disabled, checked, ...restProps } = this.props;
+    const { themedStyle, disabled, checked, ...restProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
-      <View {...restProps} style={[componentStyle.container, style]}>
+      <View
+        {...restProps}
+        style={componentStyle.container}>
         <View style={componentStyle.highlight}/>
         <TouchableOpacity
           onPressIn={this.onPressIn}
@@ -380,3 +384,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export const Toggle = styled<ToggleProps>(ToggleComponent);

@@ -9,18 +9,18 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  Radio as RadioComponent,
-  Props as RadioProps,
+  Radio,
+  RadioComponent,
+  RadioProps,
 } from './radio.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const Radio = styled<RadioProps>(RadioComponent);
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
 const Mock = (props?: RadioProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -49,14 +49,14 @@ describe('@radio: matches snapshot', () => {
 
   it('checked', () => {
     const component: RenderAPI = renderComponent({ checked: true });
-    const { output } = shallow(component.getByType(RadioComponent));
+    const { output } = shallow(component.getByType(Radio));
 
     expect(output).toMatchSnapshot();
   });
 
   it('disabled', () => {
     const component: RenderAPI = renderComponent({ disabled: true });
-    const { output } = shallow(component.getByType(RadioComponent));
+    const { output } = shallow(component.getByType(Radio));
 
     expect(output).toMatchSnapshot();
   });
@@ -66,7 +66,7 @@ describe('@radio: matches snapshot', () => {
       checked: true,
       disabled: true,
     });
-    const { output } = shallow(component.getByType(RadioComponent));
+    const { output } = shallow(component.getByType(Radio));
 
     expect(output).toMatchSnapshot();
   });
@@ -77,14 +77,14 @@ describe('@radio: matches snapshot', () => {
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
 
     const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(RadioComponent);
+      return component.getByType(Radio);
     });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
     const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(RadioComponent);
+      return component.getByType(Radio);
     });
     const { output: inactiveOutput } = shallow(inactive);
 
@@ -98,14 +98,14 @@ describe('@radio: matches snapshot', () => {
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
 
     const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(RadioComponent);
+      return component.getByType(Radio);
     });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
     const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(RadioComponent);
+      return component.getByType(Radio);
     });
     const { output: inactiveOutput } = shallow(inactive);
 
@@ -116,9 +116,12 @@ describe('@radio: matches snapshot', () => {
   it('with text (styled)', () => {
     const component: RenderAPI = renderComponent({
       text: 'Place your text',
-      textStyle: { fontSize: 22, lineHeight: 24 },
+      textStyle: {
+        fontSize: 22,
+        lineHeight: 24,
+      },
     });
-    const { output } = shallow(component.getByType(RadioComponent));
+    const { output } = shallow(component.getByType(Radio));
 
     expect(output).toMatchSnapshot();
   });

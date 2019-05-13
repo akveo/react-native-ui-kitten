@@ -12,19 +12,20 @@ import {
   LayoutChangeEvent,
   StyleSheet,
 } from 'react-native';
-import { ScrollEvent } from '../common/type';
+import { ScrollEvent } from '../support/typings';
 
 type ChildElement = React.ReactElement<any>;
+type ChildrenProp = ChildElement | ChildElement[];
 
-interface ViewPagerProps {
-  children: ChildElement | ChildElement[];
+interface ComponentProps {
+  children: ChildrenProp;
   selectedIndex?: number;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
   onSelect?: (index: number) => void;
 }
 
-export type Props = ScrollViewProps & ViewPagerProps;
+export type ViewPagerProps = ScrollViewProps & ComponentProps;
 
 /**
  * The `ViewPager` is the component that allows flipping through the "pages". Extends ScrollView.
@@ -77,9 +78,9 @@ export type Props = ScrollViewProps & ViewPagerProps;
  * ```
  * */
 
-export class ViewPager extends React.Component<Props> {
+export class ViewPager extends React.Component<ViewPagerProps> {
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<ViewPagerProps> = {
     selectedIndex: 0,
     shouldLoadComponent: (): boolean => true,
   };
@@ -93,14 +94,17 @@ export class ViewPager extends React.Component<Props> {
     this.scrollToIndex({ index });
   }
 
-  public shouldComponentUpdate(nextProps: Props): boolean {
+  public shouldComponentUpdate(nextProps: ViewPagerProps): boolean {
     return this.props.selectedIndex !== nextProps.selectedIndex;
   }
 
   public componentDidUpdate() {
     const { selectedIndex: index } = this.props;
 
-    this.scrollToIndex({ index, animated: true });
+    this.scrollToIndex({
+      index,
+      animated: true,
+    });
   }
 
   public scrollToIndex(params: { index: number; animated?: boolean }) {

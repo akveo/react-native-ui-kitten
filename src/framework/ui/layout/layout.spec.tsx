@@ -5,18 +5,17 @@ import {
   RenderAPI,
 } from 'react-native-testing-library';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  Layout as LayoutComponent,
-  Props as LayoutProps,
+  Layout,
+  LayoutProps,
 } from './layout.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const Layout = styled<LayoutProps>(LayoutComponent);
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
 const Mock = (props?: LayoutProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -39,7 +38,7 @@ describe('@layout: matches snapshot', () => {
   it('default', () => {
     const component: RenderAPI = renderComponent();
 
-    const { output } = shallow(component.getByType(LayoutComponent));
+    const { output } = shallow(component.getByType(Layout));
 
     expect(output).toMatchSnapshot();
   });
@@ -47,7 +46,7 @@ describe('@layout: matches snapshot', () => {
   it('with styles', () => {
     const component: RenderAPI = renderComponent({ style: { height: 300 } });
 
-    const { output } = shallow(component.getByType(LayoutComponent));
+    const { output } = shallow(component.getByType(Layout));
 
     expect(output).toMatchSnapshot();
   });

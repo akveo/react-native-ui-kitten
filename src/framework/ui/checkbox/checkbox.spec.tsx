@@ -9,19 +9,18 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  CheckBox as CheckBoxComponent,
-  Props as CheckBoxProps,
+  CheckBox,
+  CheckBoxProps,
 } from './checkbox.component';
-import { Text as TextComponent } from '../text/text.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);
+import { Text } from '../text/text.component';
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
 const Mock = (props?: CheckBoxProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -43,7 +42,7 @@ describe('@checkbox matches snapshots', () => {
 
   it('* default', () => {
     const component: RenderAPI = renderComponent();
-    const { output } = shallow(component.getByType(CheckBoxComponent));
+    const { output } = shallow(component.getByType(CheckBox));
 
     expect(output).toMatchSnapshot();
   });
@@ -53,7 +52,7 @@ describe('@checkbox matches snapshots', () => {
       checked: true,
       disabled: true,
     });
-    const { output } = shallow(component.getByType(CheckBoxComponent));
+    const { output } = shallow(component.getByType(CheckBox));
 
     expect(output).toMatchSnapshot();
   });
@@ -64,14 +63,14 @@ describe('@checkbox matches snapshots', () => {
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
 
     const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(CheckBoxComponent);
+      return component.getByType(CheckBox);
     });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
     const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(CheckBoxComponent);
+      return component.getByType(CheckBox);
     });
     const { output: inactiveOutput } = shallow(inactive);
 
@@ -84,10 +83,13 @@ describe('@checkbox matches snapshots', () => {
     const component: RenderAPI = renderComponent({
       checked: true,
       text: text,
-      textStyle: { fontSize: 18, color: 'red' },
+      textStyle: {
+        fontSize: 18,
+        color: 'red',
+      },
     });
-    const { output } = shallow(component.getByType(CheckBoxComponent));
-    expect(component.getByType(TextComponent).props.children).toBe(text);
+    const { output } = shallow(component.getByType(CheckBox));
+    expect(component.getByType(Text).props.children).toBe(text);
     expect(output).toMatchSnapshot();
   });
 

@@ -6,37 +6,43 @@
 
 import React from 'react';
 import {
-  View,
-  StyleSheet,
-  ViewProps,
-  Text,
-  TextProps,
   StyleProp,
+  StyleSheet,
   TextStyle,
+  View,
+  ViewProps,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Props as ActionProps } from './topNavigationAction.component';
+import { TopNavigationActionProps } from './topNavigationAction.component';
 import {
   TopNavigationAlignment,
   TopNavigationAlignments,
 } from './type';
+import {
+  Text,
+  TextProps,
+} from '../text/text.component';
+import { isValidString } from '../support/services';
 
-type ActionElement = React.ReactElement<ActionProps>;
+type TextElement = React.ReactElement<TextProps>;
+type ActionElement = React.ReactElement<TopNavigationActionProps>;
+type ActionElementProp = ActionElement | ActionElement[];
 
-interface TopNavigationProps {
+interface ComponentProps {
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
   subtitle?: string;
   subtitleStyle?: StyleProp<TextStyle>;
   alignment?: string | TopNavigationAlignment;
   leftControl?: ActionElement;
-  rightControls?: ActionElement[];
+  rightControls?: ActionElementProp;
 }
 
-export type Props = TopNavigationProps & StyledComponentProps & ViewProps;
+export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
  * The `TopNavigation` component is a component that work like AppBar component.
@@ -87,12 +93,13 @@ export type Props = TopNavigationProps & StyledComponentProps & ViewProps;
  * ```
  * */
 
-export class TopNavigation extends React.Component<Props> {
+export class TopNavigationComponent extends React.Component<TopNavigationProps> {
 
   static styledComponentName: string = 'TopNavigation';
 
-  private getComponentStyle = (style: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
+      style,
       alignment: alignmentValue,
       leftControl,
       rightControls,
@@ -115,7 +122,7 @@ export class TopNavigation extends React.Component<Props> {
       actionHeight,
       actionMarginHorizontal,
       ...containerStyle
-    } = style;
+    } = source;
 
     const leftControlsCount: number = React.Children.count(leftControl);
     const rightControlsCount: number = React.Children.count(rightControls);
@@ -127,6 +134,7 @@ export class TopNavigation extends React.Component<Props> {
       container: {
         ...containerStyle,
         ...styles.container,
+        ...StyleSheet.flatten(style),
       },
       titleContainer: {
         ...styles.titleContainer,
@@ -138,8 +146,8 @@ export class TopNavigation extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
-        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
+        ...StyleSheet.flatten(titleStyle),
       },
       subtitle: {
         textAlign: subtitleTextAlign,
@@ -147,8 +155,8 @@ export class TopNavigation extends React.Component<Props> {
         color: subtitleColor,
         fontWeight: subtitleFontWeight,
         lineHeight: subtitleLineHeight,
-        ...StyleSheet.flatten(subtitleStyle),
         ...styles.subtitle,
+        ...StyleSheet.flatten(subtitleStyle),
       },
       action: {
         width: actionWidth,
@@ -160,19 +168,15 @@ export class TopNavigation extends React.Component<Props> {
     };
   };
 
-  private renderTextElement = (text: string, style: StyleType): React.ReactElement<TextProps> => {
+  private renderTextElement = (text: string, style: StyleType): TextElement => {
     return (
-      <Text style={style}>{text}</Text>
+      <Text style={style}>
+        {text}
+      </Text>
     );
   };
 
-  private renderTitleElement = (text: string, style: StyleType): React.ReactElement<TextProps> | null => {
-    const isValid: boolean = text && text.length !== 0;
-
-    return isValid ? this.renderTextElement(text, style) : null;
-  };
-
-  private renderActionElements(source: React.ReactNode, style: StyleType): ActionElement[] {
+  private renderActionElements(source: ActionElementProp, style: StyleType): ActionElement[] {
     return React.Children.map(source, (element: ActionElement): ActionElement => {
       return React.cloneElement(element, {
         style: [style, element.props.style],
@@ -180,23 +184,47 @@ export class TopNavigation extends React.Component<Props> {
     });
   }
 
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
+    const { title, subtitle, leftControl, rightControls } = this.props;
+
+    return [
+      isValidString('Loh Pidr') && this.renderTextElement(title, style.title),
+      isValidString(subtitle) && this.renderTextElement(subtitle, style.subtitle),
+      leftControl && this.renderActionElements(leftControl, style.action),
+      rightControls && this.renderActionElements(rightControls, style.action),
+    ];
+  };
+
   public render(): React.ReactNode {
-    const { style, themedStyle, title, subtitle, leftControl, rightControls, ...restProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { themedStyle, ...restProps } = this.props;
+
+    const {
+      container,
+      leftControlContainer,
+      titleContainer,
+      rightControlsContainer,
+      ...componentStyles
+    } = this.getComponentStyle(themedStyle);
+
+    const [
+      titleElement,
+      subtitleElement,
+      leftControlElement,
+      rightControlElements,
+    ] = this.renderComponentChildren(componentStyles);
 
     return (
       <View
-        {...restProps}
-        style={[componentStyle.container, style]}>
-        <View style={componentStyle.leftControlContainer}>
-          {this.renderActionElements(leftControl, componentStyle.action)}
+        style={container}>
+        <View style={leftControlContainer}>
+          {leftControlElement}
         </View>
-        <View style={componentStyle.titleContainer}>
-          {this.renderTitleElement(title, componentStyle.title)}
-          {this.renderTitleElement(subtitle, componentStyle.subtitle)}
+        <View style={titleContainer}>
+          {titleElement}
+          {subtitleElement}
         </View>
-        <View style={componentStyle.rightControlsContainer}>
-          {this.renderActionElements(rightControls, componentStyle.action)}
+        <View style={rightControlsContainer}>
+          {rightControlElements}
         </View>
       </View>
     );
@@ -222,3 +250,5 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
 });
+
+export const TopNavigation = styled<TopNavigationProps>(TopNavigationComponent);

@@ -3,6 +3,7 @@ import {
   ImageSourcePropType,
   Text,
   View,
+  ImageProps,
   Image,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
@@ -10,7 +11,6 @@ import {
   withStyles,
   ThemeType,
   ThemedComponentProps,
-  StyleType,
 } from '@kitten/theme';
 import { Button } from '@kitten/ui';
 
@@ -18,8 +18,7 @@ type Props = & ThemedComponentProps & NavigationScreenProps;
 
 const APPEARANCE: string = 'filled';
 const STATUS: string = 'primary';
-const ALIGNMENT: string = 'left';
-const TEXT: React.ReactText = 'BUTTON';
+const TEXT: string = 'BUTTON';
 const ICON: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
 interface State {
@@ -35,6 +34,12 @@ class ButtonScreen extends React.Component<Props, State> {
     title: 'Button',
   };
 
+  private renderIcon = (): React.ReactElement<ImageProps> => {
+    return (
+      <Image source={ICON}/>
+    );
+  };
+
   public render(): React.ReactNode {
     return (
       <View style={this.props.themedStyle.container}>
@@ -46,40 +51,35 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='giant'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}
+              icon={this.renderIcon}
             />
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='large'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}
+              icon={this.renderIcon}
             />
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='medium'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}
+              icon={this.renderIcon}
             />
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='small'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}
+              icon={this.renderIcon}
             />
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
               size='tiny'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}
+              icon={this.renderIcon}
             />
           </View>
         </View>
@@ -90,40 +90,35 @@ class ButtonScreen extends React.Component<Props, State> {
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
-              size='giant'
-              iconAlignment={ALIGNMENT}>
+              size='giant'>
               {TEXT}
             </Button>
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
-              size='large'
-              iconAlignment={ALIGNMENT}>
+              size='large'>
               {TEXT}
             </Button>
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
-              size='medium'
-              iconAlignment={ALIGNMENT}>
+              size='medium'>
               {TEXT}
             </Button>
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
-              size='small'
-              iconAlignment={ALIGNMENT}>
+              size='small'>
               {TEXT}
             </Button>
             <Button
               appearance={APPEARANCE}
               style={this.props.themedStyle.component}
               status={STATUS}
-              size='tiny'
-              iconAlignment={ALIGNMENT}>
+              size='tiny'>
               {TEXT}
             </Button>
           </View>
@@ -136,8 +131,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='giant'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
+              icon={this.renderIcon}>
               {TEXT}
             </Button>
             <Button
@@ -145,8 +139,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='large'
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}
-              iconAlignment={ALIGNMENT}>
+              icon={this.renderIcon}>
               {TEXT}
             </Button>
             <Button
@@ -154,8 +147,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='medium'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
+              icon={this.renderIcon}>
               {TEXT}
             </Button>
             <Button
@@ -163,8 +155,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='small'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
+              icon={this.renderIcon}>
               {TEXT}
             </Button>
             <Button
@@ -172,8 +163,7 @@ class ButtonScreen extends React.Component<Props, State> {
               style={this.props.themedStyle.component}
               status={STATUS}
               size='tiny'
-              iconAlignment={ALIGNMENT}
-              icon={(style: StyleType) => <Image source={ICON} style={style}/>}>
+              icon={this.renderIcon}>
               {TEXT}
             </Button>
           </View>

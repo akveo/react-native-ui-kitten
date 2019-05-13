@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
   ImageProps,
-  Image,
   ImageSourcePropType,
+  Image,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {

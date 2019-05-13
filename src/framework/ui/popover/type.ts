@@ -249,16 +249,16 @@ export class Offsets {
   }
 }
 
-export interface Placement {
+export interface PopoverPlacement {
   rawValue: string;
 
   frame(source: Frame, other: Frame, offset?: OffsetRect): Frame;
 
   flex(): FlexPlacement;
 
-  parent(): Placement;
+  parent(): PopoverPlacement;
 
-  reverse(): Placement;
+  reverse(): PopoverPlacement;
 }
 
 export interface FlexPlacement {
@@ -266,9 +266,9 @@ export interface FlexPlacement {
   alignment: 'flex-start' | 'flex-end' | 'center';
 }
 
-export class Placements {
+export class PopoverPlacements {
 
-  static LEFT: Placement = new class implements Placement {
+  static LEFT: PopoverPlacement = new class implements PopoverPlacement {
     rawValue: string = 'left';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -289,16 +289,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
+    parent(): PopoverPlacement {
       return this;
     }
 
-    reverse(): Placement {
-      return Placements.RIGHT;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.RIGHT;
     }
   };
 
-  static LEFT_START: Placement = new class implements Placement {
+  static LEFT_START: PopoverPlacement = new class implements PopoverPlacement {
     rawValue: string = 'left start';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -319,16 +319,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.LEFT;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.LEFT;
     }
 
-    reverse(): Placement {
-      return Placements.RIGHT_START;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.RIGHT_START;
     }
   };
 
-  static LEFT_END: Placement = new class implements Placement {
+  static LEFT_END: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'left end';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -349,16 +349,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.LEFT;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.LEFT;
     }
 
-    reverse(): Placement {
-      return Placements.RIGHT_END;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.RIGHT_END;
     }
   };
 
-  static TOP: Placement = new class implements Placement {
+  static TOP: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'top';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -379,16 +379,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
+    parent(): PopoverPlacement {
       return this;
     }
 
-    reverse(): Placement {
-      return Placements.BOTTOM;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM;
     }
   };
 
-  static TOP_START: Placement = new class implements Placement {
+  static TOP_START: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'top start';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -409,16 +409,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.TOP;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.TOP;
     }
 
-    reverse(): Placement {
-      return Placements.BOTTOM_START;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM_START;
     }
   };
 
-  static TOP_END: Placement = new class implements Placement {
+  static TOP_END: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'top end';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -439,16 +439,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.TOP;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.TOP;
     }
 
-    reverse(): Placement {
-      return Placements.BOTTOM_END;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM_END;
     }
   };
 
-  static RIGHT: Placement = new class implements Placement {
+  static RIGHT: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'right';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -469,16 +469,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
+    parent(): PopoverPlacement {
       return this;
     }
 
-    reverse(): Placement {
-      return Placements.LEFT;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.LEFT;
     }
   };
 
-  static RIGHT_START: Placement = new class implements Placement {
+  static RIGHT_START: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'right start';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -499,16 +499,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.RIGHT;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.RIGHT;
     }
 
-    reverse(): Placement {
-      return Placements.LEFT_START;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.LEFT_START;
     }
   };
 
-  static RIGHT_END: Placement = new class implements Placement {
+  static RIGHT_END: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'right end';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -529,16 +529,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.RIGHT;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.RIGHT;
     }
 
-    reverse(): Placement {
-      return Placements.LEFT_END;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.LEFT_END;
     }
   };
 
-  static BOTTOM: Placement = new class implements Placement {
+  static BOTTOM: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'bottom';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -559,16 +559,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
+    parent(): PopoverPlacement {
       return this;
     }
 
-    reverse(): Placement {
-      return Placements.TOP;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.TOP;
     }
   };
 
-  static BOTTOM_START: Placement = new class implements Placement {
+  static BOTTOM_START: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'bottom start';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -589,16 +589,16 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.BOTTOM;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM;
     }
 
-    reverse(): Placement {
-      return Placements.TOP_START;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.TOP_START;
     }
   };
 
-  static BOTTOM_END: Placement = new class implements Placement {
+  static BOTTOM_END: PopoverPlacement = new class implements PopoverPlacement {
     rawValue = 'bottom end';
 
     frame(source: Frame, other: Frame, offset: OffsetRect = OffsetRect.zero()): Frame {
@@ -619,52 +619,52 @@ export class Placements {
       };
     }
 
-    parent(): Placement {
-      return Placements.BOTTOM;
+    parent(): PopoverPlacement {
+      return PopoverPlacements.BOTTOM;
     }
 
-    reverse(): Placement {
-      return Placements.TOP_END;
+    reverse(): PopoverPlacement {
+      return PopoverPlacements.TOP_END;
     }
   };
 
-  static parse(value: string | Placement, fallback?: Placement): Placement | undefined {
-    return Placements.typeOf(value) ? value : Placements.parseString(value, fallback);
+  static parse(value: string | PopoverPlacement, fallback?: PopoverPlacement): PopoverPlacement | undefined {
+    return PopoverPlacements.typeOf(value) ? value : PopoverPlacements.parseString(value, fallback);
   }
 
-  private static parseString(rawValue: string, fallback?: Placement): Placement | undefined {
+  private static parseString(rawValue: string, fallback?: PopoverPlacement): PopoverPlacement | undefined {
     switch (rawValue) {
-      case Placements.LEFT.rawValue:
-        return Placements.LEFT;
-      case Placements.TOP.rawValue:
-        return Placements.TOP;
-      case Placements.RIGHT.rawValue:
-        return Placements.RIGHT;
-      case Placements.BOTTOM.rawValue:
-        return Placements.BOTTOM;
-      case Placements.LEFT_START.rawValue:
-        return Placements.LEFT_START;
-      case Placements.LEFT_END.rawValue:
-        return Placements.LEFT_END;
-      case Placements.TOP_START.rawValue:
-        return Placements.TOP_START;
-      case Placements.TOP_END.rawValue:
-        return Placements.TOP_END;
-      case Placements.RIGHT_START.rawValue:
-        return Placements.RIGHT_START;
-      case Placements.RIGHT_END.rawValue:
-        return Placements.RIGHT_END;
-      case Placements.BOTTOM_START.rawValue:
-        return Placements.BOTTOM_START;
-      case Placements.BOTTOM_END.rawValue:
-        return Placements.BOTTOM_END;
+      case PopoverPlacements.LEFT.rawValue:
+        return PopoverPlacements.LEFT;
+      case PopoverPlacements.TOP.rawValue:
+        return PopoverPlacements.TOP;
+      case PopoverPlacements.RIGHT.rawValue:
+        return PopoverPlacements.RIGHT;
+      case PopoverPlacements.BOTTOM.rawValue:
+        return PopoverPlacements.BOTTOM;
+      case PopoverPlacements.LEFT_START.rawValue:
+        return PopoverPlacements.LEFT_START;
+      case PopoverPlacements.LEFT_END.rawValue:
+        return PopoverPlacements.LEFT_END;
+      case PopoverPlacements.TOP_START.rawValue:
+        return PopoverPlacements.TOP_START;
+      case PopoverPlacements.TOP_END.rawValue:
+        return PopoverPlacements.TOP_END;
+      case PopoverPlacements.RIGHT_START.rawValue:
+        return PopoverPlacements.RIGHT_START;
+      case PopoverPlacements.RIGHT_END.rawValue:
+        return PopoverPlacements.RIGHT_END;
+      case PopoverPlacements.BOTTOM_START.rawValue:
+        return PopoverPlacements.BOTTOM_START;
+      case PopoverPlacements.BOTTOM_END.rawValue:
+        return PopoverPlacements.BOTTOM_END;
       default:
         return fallback;
     }
   }
 
-  private static typeOf(value: any): value is Placement {
-    const { rawValue } = (<Placement>value);
+  private static typeOf(value: any): value is PopoverPlacement {
+    const { rawValue } = (<PopoverPlacement>value);
 
     return rawValue !== undefined;
   }

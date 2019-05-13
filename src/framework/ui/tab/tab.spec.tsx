@@ -2,9 +2,9 @@ import React from 'react';
 import {
   View,
   ScrollView,
-  Image,
   ImageProps,
   ImageSourcePropType,
+  Image,
 } from 'react-native';
 import {
   fireEvent,
@@ -14,29 +14,26 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  Tab as TabComponent,
-  Props as TabProps,
+  Tab,
+  TabProps,
 } from './tab.component';
 import {
-  TabBar as TabBarComponent,
-  Props as TabBarProps,
+  TabBar,
+  TabBarProps,
 } from './tabBar.component';
 import {
   TabView,
-  Props as TabViewProps,
-  ChildProps as TabViewChildProps,
+  TabViewProps,
 } from './tabView.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const Tab = styled<TabProps>(TabComponent);
-const TabBar = styled<TabBarProps>(TabBarComponent);
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
 describe('@tab: component checks', () => {
 
@@ -55,7 +52,7 @@ describe('@tab: component checks', () => {
       <Mock/>,
     );
 
-    const { output } = shallow(component.getByType(TabComponent));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -65,7 +62,7 @@ describe('@tab: component checks', () => {
       <Mock title='title'/>,
     );
 
-    const { output } = shallow(component.getByType(TabComponent));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -86,7 +83,7 @@ describe('@tab: component checks', () => {
       <Mock icon={icon}/>,
     );
 
-    const { output } = shallow(component.getByType(TabComponent));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -102,7 +99,7 @@ describe('@tab: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TabComponent));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -161,7 +158,7 @@ describe('@tab-view: component checks', () => {
     );
   };
 
-  const ChildMock = (props?: TabViewChildProps): React.ReactElement<TabViewChildProps> => {
+  const ChildMock = (props?: TabProps): React.ReactElement<TabProps> => {
     return (
       <Tab {...props} />
     );

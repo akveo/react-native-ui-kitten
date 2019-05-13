@@ -12,24 +12,23 @@ import {
   RenderAPI,
 } from 'react-native-testing-library';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  TopNavigation as TopNavigationComponent,
-  Props as TopNavigationProps,
+  TopNavigation,
+  TopNavigationProps,
 } from './topNavigation.component';
 import {
-  TopNavigationAction as TopNavigationActionComponent,
-  Props as TopNavigationActionProps,
+  TopNavigationAction,
+  TopNavigationActionProps,
 } from './topNavigationAction.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
-const TopNavigation = styled<TopNavigationProps>(TopNavigationComponent);
-const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);
 
 const Mock = (props?: TopNavigationProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -73,7 +72,7 @@ describe('@top-navigation-bar/action', () => {
       <Mock title='Test'/>,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationComponent));
+    const { output } = shallow(component.getByType(TopNavigation));
 
     expect(output).toMatchSnapshot();
   });
@@ -86,7 +85,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationComponent));
+    const { output } = shallow(component.getByType(TopNavigation));
 
     expect(output).toMatchSnapshot();
   });
@@ -101,7 +100,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationComponent));
+    const { output } = shallow(component.getByType(TopNavigation));
 
     expect(output).toMatchSnapshot();
   });
@@ -114,7 +113,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationComponent));
+    const { output } = shallow(component.getByType(TopNavigation));
 
     expect(output).toMatchSnapshot();
   });
@@ -156,7 +155,7 @@ describe('@top-navigation-bar/action', () => {
         ]}
       />,
     );
-    const { output } = shallow(component.getByType(TopNavigationComponent));
+    const { output } = shallow(component.getByType(TopNavigation));
 
     expect(output).toMatchSnapshot();
 
@@ -178,7 +177,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationActionComponent));
+    const { output } = shallow(component.getByType(TopNavigationAction));
 
     expect(output).toMatchSnapshot();
   });
@@ -193,7 +192,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigationActionComponent));
+    const { output } = shallow(component.getByType(TopNavigationAction));
 
     fireEvent.press(component.getByType(TouchableOpacity));
 

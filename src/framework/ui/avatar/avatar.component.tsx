@@ -7,22 +7,23 @@
 import React from 'react';
 import {
   Image,
-  TouchableOpacityProps,
   ImageProps,
   ImageStyle,
   StyleSheet,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 
-interface AvatarProps {
+interface ComponentProps {
   shape?: string;
   size?: string;
 }
 
-export type Props = AvatarProps & StyledComponentProps & ImageProps;
+export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
 
 /**
  * The `Avatar` component is component for styling Image Component.
@@ -31,11 +32,11 @@ export type Props = AvatarProps & StyledComponentProps & ImageProps;
  *
  * @property {string} shape - Determines the shape of the component.
  * Can be 'round' | 'rounded' | 'square'.
- * By default status is 'round'.
+ * Default is 'round'.
  *
  * @property {string} size - Determines the size of the component.
  * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
- * By default size is 'medium'.
+ * Default is 'medium'.
  *
  * @property ImageProps
  *
@@ -44,9 +45,12 @@ export type Props = AvatarProps & StyledComponentProps & ImageProps;
  * @example Avatar API example
  *
  * ```
- * import { Avatar } from '@kitten/ui';
+ * import {
+ *  Avatar,
+ *  AvatarProps,
+ * } from '@kitten/ui';
  *
- * public render(): React.ReactNode {
+ * public render(): React.ReactElement<AvatarProps> {
  *   return (
  *     <Avatar
  *       style={styles.avatar}
@@ -59,22 +63,26 @@ export type Props = AvatarProps & StyledComponentProps & ImageProps;
  * ```
  * */
 
-export class Avatar extends React.Component<Props> {
+export class AvatarComponent extends React.Component<AvatarProps> {
 
   static styledComponentName: string = 'Avatar';
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { roundCoefficient, ...componentStyle } = source;
+    const { roundCoefficient, ...containerParameters } = source;
 
     const baseStyle: ImageStyle = {
-      ...componentStyle,
+      ...containerParameters,
+      ...styles.container,
       ...StyleSheet.flatten(this.props.style),
     };
 
     // @ts-ignore: rhs operator is restricted to be number
     const borderRadius: number = roundCoefficient * baseStyle.height;
 
-    return { borderRadius, ...baseStyle };
+    return {
+      ...baseStyle,
+      borderRadius,
+    };
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
@@ -84,7 +92,7 @@ export class Avatar extends React.Component<Props> {
     return (
       <Image
         {...derivedProps}
-        style={[componentStyle, styles.container]}
+        style={componentStyle}
       />
     );
   }
@@ -93,3 +101,5 @@ export class Avatar extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {},
 });
+
+export const Avatar = styled<AvatarProps>(AvatarComponent);

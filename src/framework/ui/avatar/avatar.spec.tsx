@@ -11,18 +11,17 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  Avatar as AvatarComponent,
-  Props as AvatarProps,
+  Avatar,
+  AvatarProps,
 } from './avatar.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const Avatar = styled<AvatarProps>(AvatarComponent);
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
 const Mock = (props?: AvatarProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -51,7 +50,7 @@ describe('@avatar: matches snapshot', () => {
         source: iconSource,
       });
 
-      const { output } = shallow(component.getByType(AvatarComponent));
+      const { output } = shallow(component.getByType(Avatar));
 
       expect(output).toMatchSnapshot();
     });

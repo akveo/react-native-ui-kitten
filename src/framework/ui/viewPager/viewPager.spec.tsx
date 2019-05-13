@@ -12,7 +12,7 @@ import {
 import { ReactTestInstance } from 'react-test-renderer';
 import {
   ViewPager,
-  Props as ViewPagerProps,
+  ViewPagerProps,
 } from './viewPager.component';
 
 describe('@view-pager: component checks', () => {

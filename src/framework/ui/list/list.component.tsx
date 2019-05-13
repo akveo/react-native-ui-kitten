@@ -12,19 +12,22 @@ import {
   StyleSheet,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Props as ListItemProps } from './listItem.component';
+import { ListItemProps } from './listItem.component';
 
 // this is basically needed to avoid generics in required props
 type ItemType = any;
+type ListItemElement = React.ReactElement<any>;
+type RenderItemProp = (info: ListRenderItemInfo<ItemType>, style: StyleType) => ListItemElement;
 
-interface ListProps<ItemT> {
-  renderItem: (info: ListRenderItemInfo<ItemT>, style: StyleType) => React.ReactElement<any>;
+interface ComponentProps {
+  renderItem: RenderItemProp;
 }
 
-export type Props = ListProps<ItemType> & StyledComponentProps & FlatListProps<ItemType>;
+export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
 
 /**
  * The `List` component is a performant interface for rendering simple, flat lists. Extends FlatList. Renders list of
@@ -113,7 +116,7 @@ export type Props = ListProps<ItemType> & StyledComponentProps & FlatListProps<I
  * ```
  * */
 
-export class List extends React.Component<Props> {
+class ListComponent extends React.Component<ListProps> {
 
   static styledComponentName: string = 'List';
 
@@ -144,10 +147,12 @@ export class List extends React.Component<Props> {
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { item, ...container } = source;
+    const { style } = this.props;
 
     return {
-      container: container,
+      ...source,
+      ...styles.container,
+      ...StyleSheet.flatten(style),
     };
   };
 
@@ -157,33 +162,30 @@ export class List extends React.Component<Props> {
     return item;
   };
 
-  private extractItemKey = (item: ItemType, index: number): string => {
+  private keyExtractor = (item: ItemType, index: number): string => {
     return index.toString();
   };
 
-  private renderItem = (info: ListRenderItemInfo<ItemType>): React.ReactElement<ListItemProps> => {
-    const { renderItem, themedStyle } = this.props;
-    const { index } = info;
-
-    const itemStyle: StyleType = this.getItemStyle(themedStyle, index);
-    const itemElement: React.ReactElement<ListItemProps> = renderItem(info, itemStyle);
+  private renderItem = (info: ListRenderItemInfo<ItemType>): ListItemElement => {
+    const itemStyle: StyleType = this.getItemStyle(this.props.themedStyle, info.index);
+    const itemElement: React.ReactElement<ListItemProps> = this.props.renderItem(info, itemStyle);
 
     return React.cloneElement(itemElement, {
-      style: [itemStyle, itemElement.props.style, styles.item],
-      index: index,
+      style: [itemStyle, styles.item, itemElement.props.style],
+      index: info.index,
     });
   };
 
   public render(): React.ReactElement<FlatListProps<ItemType>> {
     const { style, themedStyle, ...derivedProps } = this.props;
-    const { container } = this.getComponentStyle(themedStyle);
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
       <FlatList
         {...derivedProps}
         ref={this.listRef}
-        style={[container, style, styles.container]}
-        keyExtractor={this.extractItemKey}
+        style={componentStyle}
+        keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
       />
     );
@@ -194,3 +196,5 @@ const styles = StyleSheet.create({
   container: {},
   item: {},
 });
+
+export const List = styled<ListProps>(ListComponent);

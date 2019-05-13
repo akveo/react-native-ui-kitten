@@ -7,23 +7,19 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  RadioGroup as RadioGroupComponent,
-  Props as RadioGroupProps,
+  RadioGroup,
+  RadioGroupProps,
 } from './radioGroup.component';
+import { Radio } from '../radio/radio.component';
 import {
-  Radio as RadioComponent,
-  Props as RadioProps,
-} from '../radio/radio.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
+  mapping,
+  theme,
+} from '../support/tests';
 
-const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);
-const Radio = styled<RadioProps>(RadioComponent);
 
 const Mock = (props?: RadioGroupProps): React.ReactElement<ApplicationProviderProps> => {
   return (

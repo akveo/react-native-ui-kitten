@@ -6,21 +6,23 @@
 
 import React from 'react';
 import {
-  Text as TextComponent,
-  TextProps as TextComponentProps,
+  Text as RNText,
+  TextProps as RNTextProps,
+  StyleSheet,
 } from 'react-native';
 import {
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 
-interface TextProps {
+interface ComponentProps {
   category?: string;
   status?: string;
-  children?: React.ReactText;
+  children?: string;
 }
 
-export type Props = TextProps & StyledComponentProps & TextComponentProps;
+export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
 
 /**
  * The `Text` component is a component used to render text blocks.
@@ -31,7 +33,7 @@ export type Props = TextProps & StyledComponentProps & TextComponentProps;
  * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
  * By default status is 'primary'.
  *
- * @property {React.ReactText} children - Determines text of the component.
+ * @property {string} children - Determines text of the component.
  *
  * @property {string} category - Determines the category of the component.
  * Can be 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 's1' | 's2' | 'p1' | 'p2' | 'c1' | 'c2' | 'overline' | 'label'.
@@ -71,28 +73,33 @@ export type Props = TextProps & StyledComponentProps & TextComponentProps;
  * ```
  * */
 
-export class Text extends React.Component<Props> {
+export class TextComponent extends React.Component<TextProps> {
 
   static styledComponentName: string = 'Text';
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { style } = this.props;
+
     return {
       fontSize: source.fontSize,
       lineHeight: source.lineHeight,
       fontWeight: source.fontWeight,
       color: source.color,
+      ...StyleSheet.flatten(style),
     };
   };
 
-  public render(): React.ReactElement<TextProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
+  public render(): React.ReactElement<RNTextProps> {
+    const { themedStyle, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
-      <TextComponent
+      <RNText
         {...derivedProps}
-        style={[componentStyle, style]}
+        style={componentStyle}
       />
     );
   }
 }
+
+export const Text = styled<TextProps>(TextComponent);

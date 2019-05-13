@@ -24,28 +24,34 @@ import {
   Interaction,
 } from '@kitten/theme';
 import {
-  Text as TextComponent,
-  Props as TextProps,
+  Text,
+  TextProps,
 } from '../text/text.component';
-import { TouchableOpacityIndexedProps } from '../common/type';
+import { TouchableIndexedProps } from '../support/typings';
+import { isValidString } from '../support/services';
+
+type TextElement = React.ReactElement<TextProps>;
+type IconElement = React.ReactElement<ImageProps>;
+type AccessoryElement = React.ReactElement<any>;
+type IconProp = (style: StyleType, index: number) => IconElement;
+type AccessoryProp = (style: StyleType, index: number) => AccessoryElement;
 
 interface ListDerivedProps {
   index?: number;
 }
 
 interface TemplateBaseProps {
-  index: number;
-  icon: (style: StyleType, index: number) => React.ReactElement<ImageProps>;
-  accessory: (style: StyleType, index: number) => React.ReactElement<any>;
+  icon?: IconProp;
+  accessory?: AccessoryProp;
 }
 
-interface TemplateTitleProps extends Partial<TemplateBaseProps> {
+interface TemplateTitleProps extends TemplateBaseProps {
   title: string;
-  titleStyle?: StyleProp<TextStyle>;
   description?: string;
+  titleStyle?: StyleProp<TextStyle>;
 }
 
-interface TemplateDescriptionProps extends Partial<TemplateBaseProps> {
+interface TemplateDescriptionProps extends TemplateBaseProps {
   title?: string;
   description: string;
   descriptionStyle?: StyleProp<TextStyle>;
@@ -55,11 +61,9 @@ interface CustomContentProps {
   children?: React.ReactNode;
 }
 
-type ListItemProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
+type ComponentProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
 
-const Text = styled<TextProps>(TextComponent);
-
-export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndexedProps;
+export type ListItemProps = StyledComponentProps & TouchableIndexedProps & ComponentProps;
 
 /**
  * The `ListItem` component is the "support" component for List.
@@ -112,7 +116,7 @@ export type Props = ListItemProps & StyledComponentProps & TouchableOpacityIndex
  * ```
  * */
 
-export class ListItem extends React.Component<Props> {
+export class ListItemComponent extends React.Component<ListItemProps> {
 
   static styledComponentName: string = 'ListItem';
 
@@ -146,7 +150,8 @@ export class ListItem extends React.Component<Props> {
 
   private getComponentStyle = (source: StyleType): StyleType => {
     // @ts-ignore: will be not executed if `titleStyle` and `descriptionStyle` properties are provided
-    const { titleStyle, descriptionStyle } = this.props;
+    const { style, titleStyle, descriptionStyle } = this.props;
+
     const {
       iconWidth,
       iconHeight,
@@ -169,6 +174,7 @@ export class ListItem extends React.Component<Props> {
       container: {
         ...containerParameters,
         ...styles.container,
+        ...StyleSheet.flatten(style),
       },
       icon: {
         width: iconWidth,
@@ -183,16 +189,16 @@ export class ListItem extends React.Component<Props> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
-        ...StyleSheet.flatten(titleStyle),
         ...styles.title,
+        ...StyleSheet.flatten(titleStyle),
       },
       description: {
         color: descriptionColor,
         fontSize: descriptionFontSize,
         lineHeight: descriptionLineHeight,
         marginHorizontal: descriptionMarginHorizontal,
-        ...StyleSheet.flatten(descriptionStyle),
         ...styles.description,
+        ...StyleSheet.flatten(descriptionStyle),
       },
       accessory: {
         marginHorizontal: accessoryMarginHorizontal,
@@ -201,44 +207,45 @@ export class ListItem extends React.Component<Props> {
     };
   };
 
-  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+  private renderIconElement = (style: StyleType): IconElement => {
     // @ts-ignore: will be not executed if `icon` prop is provided
     const { index, icon } = this.props;
 
-    const iconElement: React.ReactElement<ImageProps> = icon(style, index);
+    const iconElement: IconElement = icon(style, index);
 
     return React.cloneElement(iconElement, {
       key: 0,
-      style: [style, iconElement.props.style, styles.icon],
+      style: [style, styles.icon, iconElement.props.style],
     });
   };
 
   private renderContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const contentChildren: React.ReactNode = this.renderContentElementChildren(style);
+    const [titleElement, descriptionElement] = this.renderContentElementChildren(style);
 
     return (
       <View
         key={1}
-        style={[style, styles.contentContainer]}>
-        {contentChildren}
+        style={styles.contentContainer}>
+        {titleElement}
+        {descriptionElement}
       </View>
     );
   };
 
-  private renderTitleElement = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderTitleElement = (style: StyleType): TextElement => {
     // @ts-ignore: will be not executed if `title` property is provided
     const { title } = this.props;
 
     return (
       <Text
-        style={style}
-        key={2}>
+        key={2}
+        style={style}>
         {title}
       </Text>
     );
   };
 
-  private renderDescriptionElement = (style: StyleType): React.ReactElement<TextProps> => {
+  private renderDescriptionElement = (style: StyleType): TextElement => {
     // @ts-ignore: will be not executed if `description` property is provided
     const { description } = this.props;
 
@@ -251,11 +258,11 @@ export class ListItem extends React.Component<Props> {
     );
   };
 
-  private renderAccessoryElement = (style: StyleType): React.ReactElement<any> => {
+  private renderAccessoryElement = (style: StyleType): AccessoryElement => {
     // @ts-ignore: will be not executed if `accessory` property is provided
     const { index, accessory } = this.props;
 
-    const accessoryElement: React.ReactElement<any> = accessory(style, index);
+    const accessoryElement: AccessoryElement = accessory(style, index);
 
     return React.cloneElement(accessoryElement, {
       key: 4,
@@ -263,24 +270,24 @@ export class ListItem extends React.Component<Props> {
     });
   };
 
-  private renderContentElementChildren = (style: StyleType): React.ReactNode => {
+  private renderContentElementChildren = (style: StyleType): React.ReactNodeArray => {
     // @ts-ignore: will be not executed if any of properties below is provided
     const { title, description } = this.props;
 
     return [
-      title ? this.renderTitleElement(style.title) : undefined,
-      description ? this.renderDescriptionElement(style.description) : undefined,
+      isValidString(title) && this.renderTitleElement(style.title),
+      isValidString(description) && this.renderDescriptionElement(style.description),
     ];
   };
 
-  private renderTemplateChildren = (style: StyleType): React.ReactNode => {
+  private renderTemplateChildren = (style: StyleType): React.ReactNodeArray => {
     // @ts-ignore: following props could not be provided
     const { icon, title, description, accessory } = this.props;
 
     return [
-      icon ? this.renderIconElement(style.icon) : undefined,
-      title || description ? this.renderContentElement(style) : undefined,
-      accessory ? this.renderAccessoryElement(style.accessory) : undefined,
+      icon && this.renderIconElement(style.icon),
+      (title || description) && this.renderContentElement(style),
+      accessory && this.renderAccessoryElement(style.accessory),
     ];
   };
 
@@ -291,15 +298,16 @@ export class ListItem extends React.Component<Props> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
+    const { themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
         {...derivedProps}
-        style={[container, style]}
+        style={container}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
@@ -324,3 +332,5 @@ const styles = StyleSheet.create({
   description: {},
   accessory: {},
 });
+
+export const ListItem = styled<ListItemProps>(ListItemComponent);

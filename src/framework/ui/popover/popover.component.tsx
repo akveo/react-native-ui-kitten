@@ -17,12 +17,13 @@ import {
 import {
   ModalComponentCloseProps,
   ModalService,
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
   PopoverView,
-  Props as PopoverViewProps,
+  PopoverViewProps,
 } from './popoverView.component';
 import {
   MeasuredElement,
@@ -36,21 +37,24 @@ import {
   Frame,
   OffsetRect,
   Offsets,
-  Placement,
-  Placements,
+  PopoverPlacement,
+  PopoverPlacements,
 } from './type';
 
-interface PopoverProps {
-  content: React.ReactElement<any>;
-  children: React.ReactElement<any>;
+type ContentElement = React.ReactElement<any>;
+type ChildElement = React.ReactElement<any>;
+
+interface ComponentProps extends PopoverViewProps, ModalComponentCloseProps {
+  content: ContentElement;
+  children: ChildElement;
   visible?: boolean;
 }
 
-export type Props = PopoverProps & ModalComponentCloseProps & StyledComponentProps & PopoverViewProps & ViewProps;
+export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
 
 const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
-const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
+const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
 
 /**
  * The `Popover` component is a component that displays content when users focus on or tap an element.
@@ -121,19 +125,19 @@ const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
  * ```
  * */
 
-export class Popover extends React.Component<Props> {
+export class PopoverComponent extends React.Component<PopoverProps> {
 
   static styledComponentName: string = 'Popover';
 
-  static defaultProps: Partial<Props> = {
+  static defaultProps: Partial<PopoverProps> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     visible: false,
   };
 
-  private popoverElement: MeasuredElement = undefined;
+  private popoverElement: MeasuredElement;
   private popoverModalId: string = '';
 
-  public componentDidUpdate(prevProps: Props): void {
+  public componentDidUpdate(prevProps: PopoverProps) {
     const { visible } = this.props;
 
     if (prevProps.visible !== visible) {
@@ -189,25 +193,25 @@ export class Popover extends React.Component<Props> {
     return ModalService.show(popover, true);
   };
 
-  private getPopoverFrame = (layout: MeasureResult, rawPlacement: string | Placement): Frame => {
+  private getPopoverFrame = (layout: MeasureResult, rawPlacement: string | PopoverPlacement): Frame => {
     const { children } = this.props;
     const { [TAG_CONTENT]: popoverFrame, [TAG_CHILD]: childFrame } = layout;
 
     const offsetRect: OffsetRect = Offsets.find(children.props.style);
-    const placement: Placement = Placements.parse(rawPlacement, PLACEMENT_DEFAULT);
+    const placement: PopoverPlacement = PopoverPlacements.parse(rawPlacement, PLACEMENT_DEFAULT);
 
     return placement.frame(popoverFrame, childFrame, offsetRect);
   };
 
-  private renderPopoverElement = (children: React.ReactElement<any>, style: StyleProp<ViewStyle>): MeasuringElement => {
+  private renderPopoverElement = (children: ContentElement, style: StyleProp<ViewStyle>): MeasuringElement => {
     const { placement, ...derivedProps } = this.props;
 
     const measuringProps: MeasuringElementProps = {
       tag: TAG_CONTENT,
     };
 
-    const popoverPlacement: Placement = Placements.parse(placement, PLACEMENT_DEFAULT);
-    const indicatorPlacement: Placement = popoverPlacement.reverse();
+    const popoverPlacement: PopoverPlacement = PopoverPlacements.parse(placement, PLACEMENT_DEFAULT);
+    const indicatorPlacement: PopoverPlacement = popoverPlacement.reverse();
 
     return (
       <View
@@ -224,7 +228,7 @@ export class Popover extends React.Component<Props> {
     );
   };
 
-  private renderChildElement = (source: React.ReactElement<any>, style: StyleProp<ViewStyle>): MeasuringElement => {
+  private renderChildElement = (source: ChildElement, style: StyleProp<ViewStyle>): MeasuringElement => {
     const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
     return (
@@ -267,3 +271,5 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
 });
+
+export const Popover = styled<PopoverProps>(PopoverComponent);

@@ -14,17 +14,21 @@ import {
 } from 'react-native';
 import {
   Interaction,
+  styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 
-interface TopNavigationActionProps {
-  icon: (style: StyleType) => React.ReactElement<ImageProps>;
+type IconElement = React.ReactElement<ImageProps>;
+type IconProp = (style: StyleType) => IconElement;
+
+interface ComponentProps {
+  icon: IconProp;
 }
 
-export type Props = StyledComponentProps & TouchableOpacityProps & TopNavigationActionProps;
+export type TopNavigationActionProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-export class TopNavigationAction extends React.Component<Props> {
+class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 
   static styledComponentName: string = 'TopNavigationAction';
 
@@ -50,13 +54,14 @@ export class TopNavigationAction extends React.Component<Props> {
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
-    const { iconTintColor, ...containerStyle } = style;
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { iconTintColor, ...containerParameters } = source;
 
     return {
       container: {
-        ...containerStyle,
+        ...containerParameters,
         ...styles.container,
+        ...StyleSheet.flatten(this.props.style),
       },
       icon: {
         tintColor: iconTintColor,
@@ -65,12 +70,16 @@ export class TopNavigationAction extends React.Component<Props> {
     };
   };
 
-  private renderIcon(style: StyleType): React.ReactElement<ImageProps> {
-    return this.props.icon(style);
-  }
+  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+    const iconElement = this.props.icon(style);
+
+    return React.cloneElement(iconElement, {
+      style: [style, iconElement.props.style],
+    });
+  };
 
   public render(): React.ReactNode {
-    const { style, themedStyle, icon, ...touchableProps } = this.props;
+    const { themedStyle, icon, ...touchableProps } = this.props;
 
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
@@ -78,11 +87,11 @@ export class TopNavigationAction extends React.Component<Props> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...touchableProps}
-        style={[componentStyle.container, style]}
+        style={componentStyle.container}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {this.renderIcon(componentStyle.icon)}
+        {this.renderIconElement(componentStyle.icon)}
       </TouchableOpacity>
     );
   }
@@ -94,3 +103,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);

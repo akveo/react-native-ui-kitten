@@ -79,23 +79,23 @@ class RadioGroupScreen extends React.Component<Props, State> {
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Error</Text>
+          <Text style={this.props.themedStyle.textDescription}>Danger</Text>
           <View style={this.props.themedStyle.containerPreview}>
             <RadioGroup
               selectedIndex={this.state.selectedIndexGroup3}
               onChange={this.onGroup3SelectionChange}>
               <Radio
                 style={this.props.themedStyle.component}
-                status='error'
+                status='danger'
                 size='small'
               />
               <Radio
                 style={this.props.themedStyle.component}
-                status='error'
+                status='danger'
               />
               <Radio
                 style={this.props.themedStyle.component}
-                status='error'
+                status='danger'
                 size='large'
               />
             </RadioGroup>

@@ -9,20 +9,19 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';
 import {
-  Toggle as ToggleComponent,
-  Props,
+  Toggle,
+  ToggleProps,
 } from './toggle.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
-const Toggle = styled<Props>(ToggleComponent);
-
-const Mock = (props?: Props): React.ReactElement<ApplicationProviderProps> => {
+const Mock = (props?: ToggleProps): React.ReactElement<ApplicationProviderProps> => {
   return (
     <ApplicationProvider
       mapping={mapping}
@@ -32,7 +31,7 @@ const Mock = (props?: Props): React.ReactElement<ApplicationProviderProps> => {
   );
 };
 
-const renderComponent = (props?: Props): RenderAPI => {
+const renderComponent = (props?: ToggleProps): RenderAPI => {
   return render(
     <Mock {...props}/>,
   );
@@ -42,21 +41,21 @@ describe('@toggle: matches snapshot', () => {
 
   it('default', () => {
     const component: RenderAPI = renderComponent();
-    const { output } = shallow(component.getByType(ToggleComponent));
+    const { output } = shallow(component.getByType(Toggle));
 
     expect(output).toMatchSnapshot();
   });
 
   it('checked', () => {
     const component: RenderAPI = renderComponent({ checked: true });
-    const { output } = shallow(component.getByType(ToggleComponent));
+    const { output } = shallow(component.getByType(Toggle));
 
     expect(output).toMatchSnapshot();
   });
 
   it('disabled', () => {
     const component: RenderAPI = renderComponent({ disabled: true });
-    const { output } = shallow(component.getByType(ToggleComponent));
+    const { output } = shallow(component.getByType(Toggle));
 
     expect(output).toMatchSnapshot();
   });
@@ -66,7 +65,7 @@ describe('@toggle: matches snapshot', () => {
       checked: true,
       disabled: true,
     });
-    const { output } = shallow(component.getByType(ToggleComponent));
+    const { output } = shallow(component.getByType(Toggle));
 
     expect(output).toMatchSnapshot();
   });
@@ -77,14 +76,14 @@ describe('@toggle: matches snapshot', () => {
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
 
     const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(ToggleComponent);
+      return component.getByType(Toggle);
     });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
     const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(ToggleComponent);
+      return component.getByType(Toggle);
     });
     const { output: inactiveOutput } = shallow(inactive);
 
@@ -97,14 +96,14 @@ describe('@toggle: matches snapshot', () => {
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
     const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(ToggleComponent);
+      return component.getByType(Toggle);
     });
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
 
     const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(ToggleComponent);
+      return component.getByType(Toggle);
     });
     const { output: inactiveOutput } = shallow(inactive);
 

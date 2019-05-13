@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  Image,
   ImageProps,
   StyleProp,
   StyleSheet,
@@ -15,27 +16,30 @@ import {
   View,
 } from 'react-native';
 import {
-  allWithRest,
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
+  Text,
+  TextProps,
+} from '../text/text.component';
+import {
+  allWithRest,
+  isValidString,
+} from '../support/services';
+import {
   InputFocusEvent,
   InputEndEditEvent,
-} from '../common/type';
-import {
-  Text as TextComponent,
-  Props as TextProps,
-} from '../text/text.component';
-import { FlexStyleProps } from '../common/props';
+  FlexStyleProps,
+} from '../support/typings';
 
-type IconElement = React.ReactElement<ImageProps>;
 type TextElement = React.ReactElement<TextProps>;
-type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
+type IconElement = React.ReactElement<ImageProps>;
+type IconProp = (style: StyleType) => IconElement;
 
-interface InputProps {
+interface ComponentProps {
   status?: string;
   disabled?: boolean;
   label?: string;
@@ -47,9 +51,7 @@ interface InputProps {
   captionTextStyle?: StyleProp<TextStyle>;
 }
 
-export type Props = InputProps & StyledComponentProps & TextInputProps;
-
-const Text = styled<TextProps>(TextComponent);
+export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
 
 /**
  * The `Input` component is an analog of html input.
@@ -127,9 +129,11 @@ const Text = styled<TextProps>(TextComponent);
  * ```
  * */
 
-export class Input extends React.Component<Props> {
+export class InputComponent extends React.Component<InputProps> {
 
   static styledComponentName: string = 'Input';
+
+  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onFocus = (event: InputFocusEvent) => {
     this.props.dispatch([Interaction.FOCUSED]);
@@ -147,18 +151,15 @@ export class Input extends React.Component<Props> {
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      style: derivedContainerStyle,
+      style,
       textStyle,
       labelStyle,
       captionTextStyle,
     } = this.props;
 
-    const {
-      rest: inputContainerStyle,
-      ...containerStyle
-    } = allWithRest(StyleSheet.flatten(derivedContainerStyle), FlexStyleProps);
+    const { rest: inputContainerStyle, ...containerStyle } = allWithRest(StyleSheet.flatten(style), FlexStyleProps);
 
     const {
       textMarginHorizontal,
@@ -184,7 +185,7 @@ export class Input extends React.Component<Props> {
       captionIconMarginRight,
       captionIconTintColor,
       ...containerParameters
-    } = style;
+    } = source;
 
     return {
       container: {
@@ -205,8 +206,8 @@ export class Input extends React.Component<Props> {
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,
-        ...StyleSheet.flatten(textStyle),
         ...styles.text,
+        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,
@@ -221,8 +222,8 @@ export class Input extends React.Component<Props> {
         lineHeight: labelLineHeight,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
-        ...StyleSheet.flatten(labelStyle),
         ...styles.label,
+        ...StyleSheet.flatten(labelStyle),
       },
       captionIcon: {
         width: captionIconWidth,
@@ -236,47 +237,88 @@ export class Input extends React.Component<Props> {
         fontWeight: captionTextFontWeight,
         lineHeight: captionTextLineHeight,
         color: captionTextColor,
-        ...StyleSheet.flatten(captionTextStyle),
         ...styles.captionLabel,
+        ...StyleSheet.flatten(captionTextStyle),
       },
     };
   };
 
-  private renderIconElement = (style: StyleType, icon: IconProp): IconElement => {
-    return icon(style);
+  private renderIconElement = (style: StyleType): IconElement => {
+    const iconElement: IconElement = this.props.icon(style);
+
+    return React.cloneElement(iconElement, {
+      key: 0,
+      style: [style, iconElement.props.style],
+    });
   };
 
-  private renderTextElement = (style: StyleType, text: string): TextElement => {
+  private renderLabelElement = (style: StyleType): TextElement => {
     return (
-      <Text style={style}>{text}</Text>
+      <Text
+        key={1}
+        style={style}>
+        {this.props.label}
+      </Text>
     );
   };
 
-  public render(): React.ReactElement<TextInputProps> {
-    const { themedStyle, disabled, label, icon, caption, captionIcon, ...restProps } = this.props;
-    const style: StyleType = this.getComponentStyle(themedStyle);
+  private renderCaptionElement = (style: StyleType): TextElement => {
+    return (
+      <Text
+        key={2}
+        style={style}>
+        {this.props.caption}
+      </Text>
+    );
+  };
 
-    const iconElement: IconElement = icon ? this.renderIconElement(style.icon, icon) : null;
-    const labelElement: TextElement = label ? this.renderTextElement(style.label, label) : null;
-    const captionIconElement: IconElement = captionIcon ? this.renderIconElement(style.captionIcon, captionIcon) : null;
-    const captionLabelElement: TextElement = caption ? this.renderTextElement(style.captionLabel, caption) : null;
+  private renderCaptionIconElement = (style: StyleType): IconElement => {
+    const iconElement: IconElement = this.props.captionIcon(style);
+
+    return React.cloneElement(iconElement, {
+      key: 3,
+      style: [style, iconElement.props.style],
+    });
+  };
+
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
+    const { icon, label, captionIcon, caption } = this.props;
+
+    return [
+      icon && this.renderIconElement(style.icon),
+      isValidString(label) && this.renderLabelElement(style.label),
+      isValidString(caption) && this.renderCaptionElement(style.captionLabel),
+      captionIcon && this.renderCaptionIconElement(style.captionIcon),
+    ];
+  };
+
+  public render(): React.ReactElement<TextInputProps> {
+    const { themedStyle, disabled, ...restProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+
+    const [
+      iconElement,
+      labelElement,
+      captionElement,
+      captionIconElement,
+    ] = this.renderComponentChildren(componentStyle);
 
     return (
-      <View style={style.container}>
+      <View style={componentStyle.container}>
         {labelElement}
-        <View style={style.inputContainer}>
+        <View style={componentStyle.inputContainer}>
           <TextInput
             {...restProps}
-            style={style.text}
+            style={componentStyle.text}
             editable={!disabled}
             onFocus={this.onFocus}
             onEndEditing={this.onEndEditing}
           />
           {iconElement}
         </View>
-        <View style={style.captionContainer}>
+        <View style={componentStyle.captionContainer}>
           {captionIconElement}
-          {captionLabelElement}
+          {captionElement}
         </View>
       </View>
     );
@@ -304,3 +346,5 @@ const styles = StyleSheet.create({
   captionIcon: {},
   captionLabel: {},
 });
+
+export const Input = styled<InputProps>(InputComponent);

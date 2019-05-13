@@ -27,7 +27,14 @@ class TextScreen extends React.Component<Props> {
         <Text style={component} category='h4'>H4</Text>
         <Text style={component} category='h5'>H5</Text>
         <Text style={component} category='h6'>H6</Text>
-        <Text style={component} category='body'>Body</Text>
+        <Text style={component} category='s1'>S1</Text>
+        <Text style={component} category='s2'>S2</Text>
+        <Text style={component} category='c1'>C1</Text>
+        <Text style={component} category='c2'>C2</Text>
+        <Text style={component} category='p1'>P1</Text>
+        <Text style={component} category='p2'>P2</Text>
+        <Text style={component} category='overline'>OVERLINE</Text>
+        <Text style={component} category='label'>LABEL</Text>
       </View>
     );
   }

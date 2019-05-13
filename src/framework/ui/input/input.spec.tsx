@@ -13,19 +13,18 @@ import {
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  Input as InputComponent,
-  Props as InputProps,
+  Input,
+  InputProps,
 } from './input.component';
-import { default as mapping } from '../common/mapping.json';
-import { default as theme } from '../common/theme.json';
-
-const Input = styled<InputProps>(InputComponent);
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 
 const Mock = (props?: InputProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -50,7 +49,7 @@ describe('@input: matches snapshot', () => {
     it('* stateless', () => {
       const component: RenderAPI = renderComponent();
 
-      const { output } = shallow(component.getByType(InputComponent));
+      const { output } = shallow(component.getByType(Input));
 
       expect(output).toMatchSnapshot();
     });
@@ -73,7 +72,7 @@ describe('@input: matches snapshot', () => {
 
       const component: RenderAPI = renderComponent({ icon });
 
-      const { output } = shallow(component.getByType(InputComponent));
+      const { output } = shallow(component.getByType(Input));
 
       expect(output).toMatchSnapshot();
     });
@@ -96,7 +95,7 @@ describe('@input: matches snapshot', () => {
         captionIcon,
       });
 
-      const { output } = shallow(component.getByType(InputComponent));
+      const { output } = shallow(component.getByType(Input));
 
       expect(output).toMatchSnapshot();
     });
@@ -117,12 +116,18 @@ describe('@input: matches snapshot', () => {
         label,
         caption,
         captionIcon,
-        textStyle: { fontSize: 24, lineHeight: 26 },
+        textStyle: {
+          fontSize: 24,
+          lineHeight: 26,
+        },
         labelStyle: { color: 'blue' },
-        captionTextStyle: { letterSpacing: 8, fontFamily: 'opensans-bold' },
+        captionTextStyle: {
+          letterSpacing: 8,
+          fontFamily: 'opensans-bold',
+        },
       });
 
-      const { output } = shallow(component.getByType(InputComponent));
+      const { output } = shallow(component.getByType(Input));
 
       expect(output).toMatchSnapshot();
     });
