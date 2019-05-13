@@ -9,7 +9,6 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
-  Image,
 } from 'react-native';
 import {
   styled,
@@ -22,6 +21,7 @@ import {
   TextProps,
 } from '../text/text.component';
 import { TouchableIndexedProps } from '../support/typings';
+import { isValidString } from '@kitten/ui/support/services';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -39,14 +39,14 @@ interface TemplateBaseProps {
 }
 
 interface TemplateTitleProps extends TemplateBaseProps {
-  title: React.ReactText;
-  description?: React.ReactText;
+  title: string;
+  description?: string;
   titleStyle?: StyleProp<TextStyle>;
 }
 
 interface TemplateDescriptionProps extends TemplateBaseProps {
-  title?: React.ReactText;
-  description: React.ReactText;
+  title?: string;
+  description: string;
   descriptionStyle?: StyleProp<TextStyle>;
 }
 
@@ -217,8 +217,8 @@ class ListItemComponent extends React.Component<ListItemProps> {
     const { title, description } = this.props;
 
     return [
-      title && this.renderTitleElement(style.title),
-      description && this.renderDescriptionElement(style.description),
+      isValidString(title) && this.renderTitleElement(style.title),
+      isValidString(description) && this.renderDescriptionElement(style.description),
     ];
   };
 

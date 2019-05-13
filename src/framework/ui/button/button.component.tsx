@@ -19,6 +19,7 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
+import { isValidString } from '@kitten/ui/support/services';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -29,7 +30,7 @@ interface ComponentProps {
   icon?: IconProp;
   status?: string;
   size?: string;
-  children?: React.ReactText;
+  children?: string;
 }
 
 export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
@@ -125,7 +126,7 @@ class ButtonComponent extends React.Component<ButtonProps> {
 
     return [
       icon && this.renderIconElement(style.icon),
-      children && this.renderTextElement(style.text),
+      isValidString(children) && this.renderTextElement(style.text),
     ];
   };
 

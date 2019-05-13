@@ -1,35 +1,35 @@
 import React from 'react';
 import {
-  View,
-  StyleSheet,
-  ViewProps,
-  Text,
-  TextProps,
   StyleProp,
+  StyleSheet,
   TextStyle,
+  View,
+  ViewProps,
 } from 'react-native';
 import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import {
-  TopNavigationAction,
-  TopNavigationActionProps,
-} from './topNavigationAction.component';
+import { TopNavigationActionProps } from './topNavigationAction.component';
 import {
   TopNavigationAlignment,
   TopNavigationAlignments,
 } from './type';
+import {
+  Text,
+  TextProps,
+} from '../text/text.component';
+import { isValidString } from '../support/services';
 
 type TextElement = React.ReactElement<TextProps>;
 type ActionElement = React.ReactElement<TopNavigationActionProps>;
 type ActionElementProp = ActionElement | ActionElement[];
 
 interface ComponentProps {
-  title?: React.ReactText;
+  title?: string;
   titleStyle?: StyleProp<TextStyle>;
-  subtitle?: React.ReactText;
+  subtitle?: string;
   subtitleStyle?: StyleProp<TextStyle>;
   alignment?: string | TopNavigationAlignment;
   leftControl?: ActionElement;
@@ -41,8 +41,6 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
 class TopNavigationComponent extends React.Component<TopNavigationProps> {
 
   static styledComponentName: string = 'TopNavigation';
-
-  static Action = TopNavigationAction;
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
@@ -115,7 +113,7 @@ class TopNavigationComponent extends React.Component<TopNavigationProps> {
     };
   };
 
-  private renderTextElement = (text: React.ReactText, style: StyleType): TextElement => {
+  private renderTextElement = (text: string, style: StyleType): TextElement => {
     return (
       <Text style={style}>
         {text}
@@ -135,8 +133,8 @@ class TopNavigationComponent extends React.Component<TopNavigationProps> {
     const { title, subtitle, leftControl, rightControls } = this.props;
 
     return [
-      title && this.renderTextElement(title, style.title),
-      subtitle && this.renderTextElement(title, style.subtitle),
+      isValidString('Loh Pidr') && this.renderTextElement(title, style.title),
+      isValidString(subtitle) && this.renderTextElement(subtitle, style.subtitle),
       leftControl && this.renderActionElements(leftControl, style.action),
       rightControls && this.renderActionElements(rightControls, style.action),
     ];
@@ -162,7 +160,6 @@ class TopNavigationComponent extends React.Component<TopNavigationProps> {
 
     return (
       <View
-        {...restProps}
         style={container}>
         <View style={leftControlContainer}>
           {leftControlElement}

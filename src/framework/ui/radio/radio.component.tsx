@@ -18,12 +18,13 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
+import { isValidString } from '@kitten/ui/support/services';
 
 type TextElement = React.ReactElement<TextProps>;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
-  text?: React.ReactText;
+  text?: string;
   checked?: boolean;
   status?: string;
   size?: string;
@@ -127,7 +128,7 @@ export class RadioComponent extends React.Component<RadioProps> {
     const { text } = this.props;
 
     return [
-      text && this.renderTextElement(style.text),
+      isValidString(text) && this.renderTextElement(style.text),
     ];
   };
 

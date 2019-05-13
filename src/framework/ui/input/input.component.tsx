@@ -19,7 +19,10 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
-import { allWithRest } from '../support/services';
+import {
+  allWithRest,
+  isValidString,
+} from '../support/services';
 import {
   InputFocusEvent,
   InputEndEditEvent,
@@ -33,8 +36,8 @@ type IconProp = (style: StyleType) => IconElement;
 interface ComponentProps {
   status?: string;
   disabled?: boolean;
-  label?: React.ReactText;
-  caption?: React.ReactText;
+  label?: string;
+  caption?: string;
   captionIcon?: IconProp;
   icon?: IconProp;
   textStyle?: StyleProp<TextStyle>;
@@ -201,8 +204,8 @@ class InputComponent extends React.Component<InputProps> {
 
     return [
       icon && this.renderIconElement(style.icon),
-      label && this.renderLabelElement(style.label),
-      caption && this.renderCaptionElement(style.captionLabel),
+      isValidString(label) && this.renderLabelElement(style.label),
+      isValidString(caption) && this.renderCaptionElement(style.captionLabel),
       captionIcon && this.renderCaptionIconElement(style.captionIcon),
     ];
   };

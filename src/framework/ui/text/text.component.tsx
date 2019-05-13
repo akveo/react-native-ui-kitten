@@ -13,7 +13,7 @@ import {
 interface ComponentProps {
   category?: string;
   status?: string;
-  children?: React.ReactText;
+  children?: string;
 }
 
 export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;

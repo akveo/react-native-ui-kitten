@@ -20,13 +20,14 @@ import {
   TextProps,
 } from '../text/text.component';
 import { CheckMark } from '../support/components';
+import { isValidString } from '@kitten/ui/support/services';
 
 type IconElement = React.ReactElement<ViewProps>;
 type TextElement = React.ReactElement<TextProps>;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
-  text?: React.ReactText;
+  text?: string;
   checked?: boolean;
   indeterminate?: boolean;
   status?: string;
@@ -152,7 +153,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
     return [
       this.renderIconElement(style.icon),
-      text && this.renderTextElement(style.text),
+      isValidString(text) && this.renderTextElement(style.text),
     ];
   };
 

@@ -16,13 +16,14 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
+import { isValidString } from '@kitten/ui/support/services';
 
 type TitleElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
 
 interface ComponentProps {
-  title?: React.ReactText;
+  title?: string;
   titleStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
   selected?: boolean;
@@ -108,7 +109,7 @@ class BottomNavigationTabComponent extends React.Component<BottomNavigationTabPr
 
     return [
       icon && this.renderIconElement(style.icon),
-      title && this.renderTitleElement(style.text),
+      isValidString(title) && this.renderTitleElement(style.text),
     ];
   };
 

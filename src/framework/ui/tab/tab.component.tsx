@@ -17,6 +17,7 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
+import { isValidString } from '@kitten/ui/support/services';
 
 type TitleElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -24,7 +25,7 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 type ContentElement = React.ReactElement<any>;
 
 interface ComponentProps {
-  title?: React.ReactText;
+  title?: string;
   titleStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
   selected?: boolean;
@@ -117,7 +118,7 @@ class TabComponent extends React.Component<TabProps> {
 
     return [
       icon && this.renderIconElement(style.icon),
-      title && this.renderTitleElement(style.title),
+      isValidString(title) && this.renderTitleElement(style.title),
     ];
   };
 

@@ -29,7 +29,7 @@ interface ListDerivedProps {
 
 export interface OverflowMenuItemType extends ListDerivedProps {
   icon?: IconProp;
-  text: React.ReactText;
+  text: string;
   textStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
 }

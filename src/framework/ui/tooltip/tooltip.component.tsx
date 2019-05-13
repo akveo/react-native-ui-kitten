@@ -31,7 +31,7 @@ type WrappingElement = React.ReactElement<any>;
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
 
 interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
-  text: React.ReactText;
+  text: string;
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
   children: WrappingElement;
