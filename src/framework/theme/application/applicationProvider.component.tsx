@@ -30,7 +30,7 @@ interface State {
 }
 
 /**
- * The `ApplicationProvider` component is designed to be a root of application.
+ * The `ApplicationProvider`  component is designed to be a root of the application.
  *
  * This does basically two things:
  *
