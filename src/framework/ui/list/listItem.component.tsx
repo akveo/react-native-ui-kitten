@@ -298,7 +298,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
+    const { themedStyle, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
