@@ -1,25 +1,30 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
-  TouchableOpacity,
-  TouchableOpacityProps,
   GestureResponderEvent,
-  StyleSheet,
   ImageProps,
   StyleProp,
+  StyleSheet,
   TextStyle,
-  Image,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
-  StyledComponentProps,
-  StyleType,
   Interaction,
   styled,
+  StyledComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Text,
   TextProps,
 } from '../text/text.component';
-import { isValidString } from '@kitten/ui/support/services';
+import { isValidString } from '../support/services';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -35,7 +40,71 @@ interface ComponentProps {
 
 export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-class ButtonComponent extends React.Component<ButtonProps> {
+/**
+ * The `Button` component is an analog of html button.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} disabled - Determines whether component is disabled. Default is false.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'. Default is 'primary'.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'. Default is 'medium'.
+ *
+ * @property {string} children - Determines text of the component.
+ *
+ * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be 'filled' | 'outline' | 'ghost'. Default is 'filled'.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Simple usage example
+ *
+ * ```
+ * import {
+ *  Button,
+ *  ButtonProps,
+ * } from '@kitten/ui';
+ * <Button>Test Button</Button>
+ * ```
+ *
+ * @example Button API example
+ *
+ * ```
+ * import {
+ *  Button,
+ *  ButtonProps,
+ * } from '@kitten/ui';
+ *
+ * private onButtonPress = () => {
+ *   console.log('Button press');
+ * };
+ *
+ * public render(): React.ReactElement<ButtonProps> {
+ *   return (
+ *     <Button
+ *       appearance='outline'
+ *       style={styles.button}
+ *       status='success'
+ *       size='large'
+ *       icon={(style: StyleType) => <Image source={{ uri: '...' }} style={style}/>}
+ *       onPress={this.onButtonPress}>
+ *       BUTTON
+ *     </Button>
+ *   );
+ * }
+ * ```
+ * */
+
+export class ButtonComponent extends React.Component<ButtonProps> {
 
   static styledComponentName: string = 'Button';
 

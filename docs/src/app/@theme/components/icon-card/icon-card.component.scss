@@ -1,0 +1,72 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  $shadow-hover: 0 8px 24px 0 rgba(0, 31, 97, 0.07);
+  $text-fg: nb-theme(color-fg-text);
+  $title-fg: nb-theme(color-fg-heading);
+
+  border-radius: 7px;
+  background-color: #ffffff;
+  display: flex;
+  padding: 3rem 1rem 3.625rem;
+  flex-grow: 1;
+  width: 100%;
+  margin: 1.25rem 0;
+  flex-direction: column;
+  cursor: pointer;
+  max-width: 30rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: $shadow-hover;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  h2 {
+    color: rgba($title-fg, 0.5);
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.8125rem;
+    text-align: center;
+    transition: color 0.25s ease;
+  }
+
+  p {
+    color: $text-fg;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    text-align: center;
+  }
+
+  &:hover, &:active {
+
+    &::before {
+      opacity: 1;
+    }
+
+    h2 {
+      color: rgba($title-fg, 1);
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    margin: 1.25rem;
+    width: calc(50% - 2.5rem);
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: calc(33% - 2.5rem);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+

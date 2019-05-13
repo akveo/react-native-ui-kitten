@@ -1,0 +1,30 @@
+@import 'themes';
+@import 'common';
+@import 'small-social';
+
+@import '~@nebular/theme/styles/global/normalize';
+@import '~@nebular/theme/styles/global/components';
+@import '~@nebular/theme/styles/global/typography/typography';
+@import '~@nebular/bootstrap/styles/globals';
+
+@include nb-install-global() {
+  @include nb-layout-theme();
+  @include nb-sidebar-theme();
+  @include nb-card-theme();
+  @include nb-menu-theme();
+  @include nb-actions-theme();
+  @include nb-search-theme();
+  @include nb-bootstrap-global();
+  @include nb-icon-theme();
+
+  @include nb-typography();
+
+  @include nbd-common();
+};
+
+body {
+  scrollbar-face-color: rgba(0, 0, 0, 0.3);
+  scrollbar-track-color: rgba(255, 255, 255, 0.7);
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+}

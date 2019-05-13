@@ -1,0 +1,76 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  $accent-line-bg: linear-gradient(180deg, #3366ff 0%, #7396ff 100%);
+  $title-fg: nb-theme(color-fg-heading);
+  $text-fg: nb-theme(color-fg-text);
+
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  margin: 2rem 0;
+  flex-direction: column;
+  font-size: 0.75rem;
+  text-align: center;
+
+  @include media-breakpoint-up(md) {
+    margin: 0;
+
+    &:nth-child(odd) {
+      border-right: 1px solid #d9e4ff;
+    }
+
+    &:nth-child(1), &:nth-child(2) {
+      border-bottom: 1px solid #d9e4ff;
+    }
+  }
+
+  .icon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 3.25rem;
+      margin-bottom: 3.25rem;
+    }
+  }
+
+  h2 {
+    color: $title-fg;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #6e82a9;
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    width: 50%;
+    font-size: 1rem;
+    padding: 2rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 50%;
+    font-size: 1rem;
+    padding: 2rem 4rem;
+  }
+}

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   StyleSheet,
@@ -25,6 +31,50 @@ interface ComponentProps {
 }
 
 export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps;
+
+/**
+ * The `ButtonGroup` component is a component for placing buttons in row.
+ *
+ * @extends React.Component
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
+ * By default status is 'primary'.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
+ * By default size is 'medium'.
+ *
+ * @property {React.ReactElement<ButtonProps>[]} children - Determines buttons in group. Can be passed through jsx.
+ *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be 'filled' | 'outline'.
+ * By default appearance is 'filled'.
+ *
+ * @property ViewProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example ButtonGroup API example
+ *
+ * ```
+ * import { Button, ButtonGroup } from '@kitten/ui';
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <ButtonGroup
+ *       style={styles.buttonGroup}
+ *       appearance='filled'
+ *       status='danger'
+ *       size='large'>
+ *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>L</Button>
+ *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>M</Button>
+ *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>R</Button>
+ *     </ButtonGroup>
+ *   );
+ * }
+ * ```
+ * */
 
 class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 

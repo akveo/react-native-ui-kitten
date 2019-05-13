@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2016"
+      "es2017"
     ],
     "outDir": "../out-tsc/spec",
     "module": "commonjs",
@@ -18,7 +18,8 @@
     ]
   },
   "files": [
-    "test.ts"
+    "src/test.ts",
+    "src/polyfills.ts"
   ],
   "include": [
     "**/*.spec.ts"

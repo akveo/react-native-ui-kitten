@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   StyleProp,
@@ -26,7 +32,54 @@ interface ComponentProps {
 
 export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
 
-class TabBarComponent extends React.Component<TabBarProps> {
+/**
+ * The `TabBar` component that manages Tab components.
+ *
+ * @extends React.Component
+ *
+ * @property {number} selectedIndex - Determines current tab index.
+ *
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
+ *
+ * @property {(index: number) => void} onSelect - Fires on onPress event and returns tab index.
+ *
+ * @property {React.ReactElement<TabProps>} children - Determines tabs.
+ *
+ * @property ViewProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example TabBar usage and API example
+ *
+ * ```
+ * import {
+ *   TabBar,
+ *   Tab,
+ * } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   barSelectedIndex: 0,
+ * };
+ *
+ * private onBarSelect = (index: number) => {
+ *   this.setState({ barSelectedIndex: index });
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <TabBar
+ *       onSelect={this.onBarSelect}
+ *       selectedIndex={this.state.barSelectedIndex}>
+ *       <Tab title='Tab 1'/>
+ *       <Tab title='Tab 2'/>
+ *       <Tab title='Tab 3'/>
+ *     </TabBar>
+ *   );
+ * }
+ * ```
+ * */
+
+export class TabBarComponent extends React.Component<TabBarProps> {
 
   static styledComponentName: string = 'TabBar';
 

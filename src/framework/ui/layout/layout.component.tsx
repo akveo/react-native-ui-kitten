@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   StyleSheet,
@@ -19,7 +25,36 @@ interface ComponentProps {
 
 export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 
-class LayoutComponent extends React.Component<LayoutProps> {
+/**
+ * The `Layout` component is component which behaves like React Native View.
+ *
+ * @extends React.Component
+ *
+ * @property {React.ReactElement<any>} children - Determines the children of the component.
+ *
+ * @property ViewProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Layout API example
+ *
+ * ```
+ * import {
+ *   Layout,
+ *   Text,
+ * } from '@kitten/ui';
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <Layout style={this.props.themedStyle.layout}>
+ *       <Text>Layout</Text>
+ *     </Layout>
+ *   );
+ * }
+ * ```
+ * */
+
+export class LayoutComponent extends React.Component<LayoutProps> {
 
   static styledComponentName: string = 'Layout';
 

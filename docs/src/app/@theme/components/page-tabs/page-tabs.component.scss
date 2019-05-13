@@ -1,0 +1,98 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  display: flex;
+  flex-wrap: wrap;
+
+  $tabs-fg: nb-theme(color-fg-heading-light);
+  $tabs-fg-active: nb-theme(color-fg-heading);
+  $tabs-bg-active: nb-theme(color-white);
+  $tabs-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+  $tabs-accent-line: nb-theme(color-fg-highlight);
+
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    width: 50%;
+    height: 7.5rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    color: $tabs-fg;
+    margin-bottom: 1rem;
+
+    .title {
+      padding-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    ::ng-deep nb-icon {
+      font-size: 1.875rem;
+      margin-bottom: 1rem;
+    }
+
+    &.selected {
+      background: white;
+      color: $tabs-fg-active;
+      box-shadow: $tabs-shadow;
+
+      .line {
+        height: 0.1875rem;
+        width: 60%;
+        background: $tabs-accent-line;
+        border-radius: 1.5px;
+      }
+    }
+  }
+}
+
+:host(.horizontal) {
+  a {
+    flex: 0 0 50%;
+    height: auto;
+    margin-bottom: 0;
+    padding: 0 1rem;
+
+    .title,
+    ::ng-deep nb-icon {
+      margin-bottom: 1rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .text-container {
+    flex-direction: row;
+    padding-bottom: 0;
+  }
+
+  .line {
+    order: -1;
+    margin-bottom: 1.3rem;
+  }
+
+  @media screen and (min-width: 40em) {
+    flex: 1 1 0;
+
+    a {
+      flex: 1 1 0;
+      margin-bottom: 0;
+
+      &.selected::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        border-left: 1rem solid transparent;
+        border-right: 1rem solid transparent;
+        border-top: 1rem solid #fff;
+      }
+    }
+  }
+}

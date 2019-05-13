@@ -27,6 +27,7 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/dist',
     '<rootDir>/node_modules',
+    '<rootDir>/docs',
   ],
   transformIgnorePatterns: [
     'node_modules/(?!(react-native|react-native-cookies|@eva)/)'

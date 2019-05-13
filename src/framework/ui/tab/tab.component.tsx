@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   ImageProps,
@@ -6,7 +12,6 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
-  Image,
 } from 'react-native';
 import {
   styled,
@@ -17,7 +22,7 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
-import { isValidString } from '@kitten/ui/support/services';
+import { isValidString } from '../support/services';
 
 type TitleElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -35,7 +40,42 @@ interface ComponentProps {
 
 export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-class TabComponent extends React.Component<TabProps> {
+/**
+ * The `Tab` component is a part of TabBar or TabView component.
+ *
+ * @extends React.Component
+ *
+ * @property {string} title - Determines the title of the component.
+ *
+ * @property {StyleProp<TextStyle>} titleStyle - Determines style of the title.
+ *
+ * @property {React.ReactElement<any>} children - Determines content of the tab.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ *
+ * @property {boolean} selected - Determines whether selected tab or not.
+ *
+ * @property {(selected: boolean) => void} onSelect = Fires on onSelect event.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Tab usage and API example
+ *
+ * ```
+ * import { Tab } from '@kitten/ui';
+ *
+ * <Tab
+ *   title='Tab'
+ *   titleStyle={styles.tabTitle}
+ *   icon={(style: StyleType) => <Image source={{ uri: ... }} style={style}/>}
+ *   selected={false}
+ * />
+ * ```
+ * */
+
+export class TabComponent extends React.Component<TabProps> {
 
   static styledComponentName: string = 'Tab';
 
