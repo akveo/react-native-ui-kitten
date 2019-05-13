@@ -297,9 +297,9 @@ export class ListItem extends React.Component<Props> {
 
     return (
       <TouchableOpacity
+        activeOpacity={1.0}
         {...derivedProps}
         style={[container, style]}
-        activeOpacity={1.0}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
