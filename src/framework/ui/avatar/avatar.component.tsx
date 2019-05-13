@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
@@ -17,6 +23,41 @@ interface AvatarProps {
 }
 
 export type Props = AvatarProps & StyledComponentProps & ImageProps;
+
+/**
+ * The `Avatar` component is component for styling Image Component.
+ *
+ * @extends React.Component
+ *
+ * @property {string} shape - Determines the shape of the component.
+ * Can be 'round' | 'rounded' | 'square'.
+ * By default status is 'round'.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
+ * By default size is 'medium'.
+ *
+ * @property ImageProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Avatar API example
+ *
+ * ```
+ * import { Avatar } from '@kitten/ui';
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <Avatar
+ *       style={styles.avatar}
+ *       size='small'
+ *       shape='rounded'
+ *       source={{ uri: '...' }}
+ *     />
+ *   );
+ * }
+ * ```
+ * */
 
 export class Avatar extends React.Component<Props> {
 

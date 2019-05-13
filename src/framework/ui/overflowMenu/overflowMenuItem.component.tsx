@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   TouchableOpacity,
@@ -30,6 +36,34 @@ export interface OverflowMenuItemType {
 const Text = styled<TextProps>(TextComponent);
 
 export type Props = OverflowMenuItemType & StyledComponentProps & TouchableOpacityIndexedProps;
+
+/**
+ * The `OverflowMenuItem` component is a part of the OverflowMenu component.
+ *
+ * @extends React.Component
+ *
+ * @property {string} text - Determines title of the menu item.
+ *
+ * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ *
+ * @property {string} size - Determines size of the component.
+ * Can be 'small' | 'medium' | 'large'. By default size='medium'.
+ *
+ * @property {boolean} isLastItem - Determines whether this menu item is the last one in menu.
+ *
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * By default is false.
+ *
+ * @property {number} index - Determines index of the menu item.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon -
+ * Determines the icon of the menu item.
+ *
+ * @property TouchableOpacityIndexedProps
+ *
+ * @property StyledComponentProps
+ *
+ * */
 
 export class OverflowMenuItem extends React.Component<Props> {
 

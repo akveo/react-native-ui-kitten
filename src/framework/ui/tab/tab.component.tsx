@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   ImageProps,
@@ -29,6 +35,41 @@ interface TabProps {
 const Text = styled<TextProps>(TextComponent);
 
 export type Props = TabProps & StyledComponentProps & TouchableOpacityProps;
+
+/**
+ * The `Tab` component is a part of TabBar or TabView component.
+ *
+ * @extends React.Component
+ *
+ * @property {string} title - Determines the title of the component.
+ *
+ * @property {StyleProp<TextStyle>} titleStyle - Determines style of the title.
+ *
+ * @property {React.ReactElement<any>} children - Determines content of the tab.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ *
+ * @property {boolean} selected - Determines whether selected tab or not.
+ *
+ * @property {(selected: boolean) => void} onSelect = Fires on onSelect event.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Tab usage and API example
+ *
+ * ```
+ * import { Tab } from '@kitten/ui';
+ *
+ * <Tab
+ *   title='Tab'
+ *   titleStyle={styles.tabTitle}
+ *   icon={(style: StyleType) => <Image source={{ uri: ... }} style={style}/>}
+ *   selected={false}
+ * />
+ * ```
+ * */
 
 export class Tab extends React.Component<Props> {
 

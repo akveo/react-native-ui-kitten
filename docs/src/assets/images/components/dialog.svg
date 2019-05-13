@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/component/modal</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 51.8031 51.803 51.8031 51.803 0.0001 0 0.0001"></polygon>
+    </defs>
+    <g id="icon/component/modal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Page-1" transform="translate(6.000000, 6.000000)">
+            <path d="M50.0154,50.803 L1.7874,50.803 C1.3524,50.803 0.9994,50.45 0.9994,50.015 L0.9994,1.787 C0.9994,1.353 1.3524,1 1.7874,1 L50.0154,1 C50.4504,1 50.8034,1.353 50.8034,1.787 L50.8034,50.015 C50.8034,50.45 50.4504,50.803 50.0154,50.803" id="Fill-1" fill="#CADEFF"></path>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Clip-4"></g>
+            <polygon id="Fill-3" fill="#97BDFF" mask="url(#mask-2)" points="26.101 50.8031 50.015 50.8031 50.015 39.8321 26.101 39.8321"></polygon>
+            <polygon id="Fill-5" fill="#97BDFF" mask="url(#mask-2)" points="1.164 50.8031 25.078 50.8031 25.078 39.8321 1.164 39.8321"></polygon>
+            <polygon id="Fill-6" fill="#6DA3F2" mask="url(#mask-2)" points="1.583 50.8031 50.015 50.8031 50.015 47.9341 1.583 47.9341"></polygon>
+            <path d="M47.989,39.6936 L4.959,39.6936 C4.563,39.6936 4.242,39.3736 4.242,38.9776 L4.242,1.5196 C4.242,1.1236 4.563,0.8026 4.959,0.8026 L47.989,0.8026 C48.385,0.8026 48.706,1.1236 48.706,1.5196 L48.706,38.9776 C48.706,39.3736 48.385,39.6936 47.989,39.6936" id="Fill-8" fill="#FFFFFF" mask="url(#mask-2)"></path>
+            <path d="M49.8034,49.803 L49.8034,2 L1.9994,2 L1.9994,49.803 L49.8034,49.803 Z M50.0154,51.803 L1.7874,51.803 C0.80011525,51.803 -0.0006,51.0022847 -0.0006,50.015 L-0.0006,1.787 C-0.0006,0.800364186 0.80046626,-7.10542736e-15 1.7874,-7.10542736e-15 L50.0154,-7.10542736e-15 C51.0023337,-7.10542736e-15 51.8034,0.800364186 51.8034,1.787 L51.8034,50.015 C51.8034,51.0022847 51.0026847,51.803 50.0154,51.803 Z" id="Stroke-9" fill="#457AE6" fill-rule="nonzero" mask="url(#mask-2)"></path>
+            <polygon id="Stroke-10" fill="#457AE6" fill-rule="nonzero" mask="url(#mask-2)" points="5.9958 24.181 5.9958 22.181 16.5388 22.181 16.5388 24.181"></polygon>
+            <polygon id="Stroke-11" fill="#457AE6" fill-rule="nonzero" mask="url(#mask-2)" points="5.9958 19.1438 5.9958 17.1438 38.6918 17.1438 38.6918 19.1438"></polygon>
+            <polygon id="Stroke-12" fill="#457AE6" fill-rule="nonzero" mask="url(#mask-2)" points="0.4821 10.6604 0.4821 8.6604 46.7261 8.6604 46.7261 10.6604"></polygon>
+            <polygon id="Stroke-13" fill="#457AE6" fill-rule="nonzero" mask="url(#mask-2)" points="1.1599 40.4153 1.1599 38.4153 50.6319 38.4153 50.6319 40.4153"></polygon>
+            <polygon id="Stroke-14" fill="#457AE6" fill-rule="nonzero" mask="url(#mask-2)" points="12.1091 28.514 12.1091 26.514 22.6521 26.514 22.6521 28.514"></polygon>
+            <polygon id="Stroke-15" fill="#457AE6" fill-rule="nonzero" mask="url(#mask-2)" points="25.0066 38.7464 27.0066 38.7464 27.0066 49.9884 25.0066 49.9884"></polygon>
+        </g>
+    </g>
+</svg>

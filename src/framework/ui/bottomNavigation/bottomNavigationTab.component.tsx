@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   TouchableOpacity,
@@ -23,6 +29,82 @@ interface BottomNavigatorTabProps {
 }
 
 export type Props = BottomNavigatorTabProps & StyledComponentProps & TouchableOpacityProps;
+
+/**
+ * The `BottomNavigatorTab` component is a part of the BottomTabNavigator component.
+ * Bottom Navigator Tabs should be wrapped in BottomTabNavigator to provide usable component.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} selected - Determines whether component is selected.
+ *
+ * @property {string} title - Determines the title of the tab.
+ *
+ * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the tab.
+ *
+ * @property {(selected: boolean) => void} onSelect - Triggered on select value.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Simple usage example
+ *
+ * ```tsx
+ * import { BottomNavigatorTab } from '@kitten/ui';
+ * <BottomNavigatorTab selected={true}/>
+ * ```
+ *
+ * @example with React Navigation usage example
+ *
+ * ```tsx
+ * import { Image } from 'react-native';
+ * import {
+ *   BottomNavigatorTab,
+ *   BottomTabNavigator,
+ * } from '@kitten/ui';
+ * import {
+ *   createBottomTabNavigator,
+ *   NavigationContainer,
+ *   NavigationContainerProps,
+ *   NavigationScreenProp,
+ *   NavigationState,
+ *   NavigationRoute,
+ * } from 'react-navigation';
+ *
+ * type CommonNavigationProps = NavigationProps & NavigationContainerProps;
+ *
+ * export const TabNavigatorScreen: NavigationContainer = createBottomTabNavigator({
+ *   ...screens,
+ * }, {
+ *   initialRouteName: 'Screen1',
+ *   tabBarComponent: (props: CommonNavigationProps) => renderBottomNavigation(props),
+ * });
+ *
+ *function renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {
+ *  const routes: NavigationRoute[] = props.navigation.state.routes;
+ *  const index: number = props.navigation.state.index;
+ *
+ *  return (
+ *   <BottomTabNavigatorComponent
+ *     selectedIndex={index}
+ *     onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>
+ *     <BottomNavigatorTab
+ *       title='Screen 1'
+ *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *     <BottomNavigatorTab
+ *       title='Screen 2'
+ *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *       <BottomNavigatorTab
+ *       title='Screen 3'
+ *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *    </BottomTabNavigatorComponent>
+ *  );
+ * }
+ * ```
+ * */
 
 export class BottomNavigationTab extends React.Component<Props> {
 

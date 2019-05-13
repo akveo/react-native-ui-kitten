@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   ViewProps,
@@ -33,6 +39,61 @@ const Popover = styled<PopoverProps>(PopoverComponent);
 const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);
 
 export type Props = & StyledComponentProps & OverflowMenuProps & Omit<PopoverProps, 'content'>;
+
+/**
+ * The `OverflowMenu` component is a component for showing menu content over the screen.
+ * Component uses Popover -> ModalPanel -> Modal components "chain"
+ *
+ * @extends React.Component
+ *
+ * @property {React.ReactElement<any>} children - Determines the element above
+ * which the menu will be rendered.
+ *
+ * @property {OverflowMenuItemType[]} items - Determines menu items.
+ *
+ * @property {string} size - Determines the size of the menu items components.
+ * Can be 'small' | 'medium' | 'large'. By default size='medium'.
+ *
+ * @property {(event: GestureResponderEvent, index: number) => void} onSelect - Triggered on select value.
+ *
+ * @property {Omit<PopoverProps, 'content'>}
+ *
+ * @property StyledComponentProps
+ *
+ * @example Overflow menu items config example
+ *
+ * ```
+ * const menuItems: OverflowMenuItemType[] = [
+ *   {
+ *     text: 'Menu Item 1',
+ *     icon: (style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>,
+ *   },
+ *   {
+ *     text: 'Menu Item 2',
+ *     icon: (style: StyleType) => <Image source={{ uri: iconUri2 }} style={style}/>,
+ *     disabled: true,
+ *   },
+ *   {
+ *     text: 'Menu Item 3',
+ *   },
+ * ];
+ * ```
+ *
+ * @example OverflowMenu usage example
+ *
+ * ```
+ * <OverflowMenu
+ *   items={menuItems}
+ *   placement='bottom start'
+ *   visible={this.state.overflowMenuVisible}
+ *   onSelect={this.onSelectItem}
+ *   onRequestClose={this.setMenu1Visible}>
+ *   <TouchableOpacity onPress={this.setMenuVisible}>
+ *     <Image style={styles.icon} source={{ uri: menuIconUri }}/>
+ *   </TouchableOpacity>
+ * </OverflowMenu>
+ * ```
+ * */
 
 export class OverflowMenu extends React.Component<Props> {
 

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Platform,
@@ -45,6 +51,75 @@ export type Props = PopoverProps & ModalComponentCloseProps & StyledComponentPro
 const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: Placement = Placements.BOTTOM;
+
+/**
+ * The `Popover` component is a component that displays content when users focus on or tap an element.
+ *
+ * @extends React.Component
+ *
+ * @property {React.ReactElement<any>} content - Determines the content of the popover.
+ *
+ * @property {React.ReactElement<any>} children - Determines the element "above" which popover will be shown.
+ *
+ * @property {boolean} visible - Determines whether popover is visible or not.
+ *
+ * @property {string | Placement} placement - Determines the placement of the popover.
+ * Can be 'left' | 'top' | 'right' | 'bottom' | 'left start' | 'left end' | 'top start' | 'top end' | 'right start' |
+ * 'right end' | 'bottom start' | 'bottom end'.
+ * By default placement is 'top'.
+ *
+ * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
+ *
+ * @property ViewProps
+ *
+ * @property ModalComponentCloseProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Popover usage API example
+ *
+ * ```
+ * import {
+ *   Popover,
+ *   Button,
+ *   Text,
+ * } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   popoverVisible: false,
+ * };
+ *
+ * private onShowPress = () => {
+ *   this.setState({ popoverVisible: !this.state.popoverVisible });
+ * };
+ *
+ * private renderPopoverContentElement = (): React.ReactElement<ViewProps> => {
+ *    return (
+ *      <View style={styles.popoverContent}>
+ *        <Text>Hi! This is popover.</Text>
+ *        <Button>Some Action</Button>
+ *      </View>
+ *    );
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <Popover
+ *       style={styles.popoverContainer}
+ *       placement='top start'
+ *       visible={this.state.popoverVisible}
+ *       content={this.renderPopoverContentElement()}
+ *       onRequestClose={this.onShowPress}>
+ *       <TouchableOpacity
+ *         style={styles.popoverChild}
+ *         onPress={this.onShowPress}>
+ *         <Text style={text}>Top Start</Text>
+ *       </TouchableOpacity>
+ *     </Popover>
+ *   );
+ * }
+ * ```
+ * */
 
 export class Popover extends React.Component<Props> {
 

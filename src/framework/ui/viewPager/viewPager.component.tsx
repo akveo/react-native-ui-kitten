@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   View,
@@ -5,7 +11,6 @@ import {
   ScrollViewProps,
   LayoutChangeEvent,
   StyleSheet,
-  ViewProps,
 } from 'react-native';
 import { ScrollEvent } from '../common/type';
 
@@ -20,6 +25,57 @@ interface ViewPagerProps {
 }
 
 export type Props = ScrollViewProps & ViewPagerProps;
+
+/**
+ * The `ViewPager` is the component that allows flipping through the "pages". Extends ScrollView.
+ *
+ * @extends React.Component
+ *
+ * @property {React.ReactElement<any>} children - Determines children of the component.
+ *
+ * @property {number} selectedIndex - Determines the index of selected "page".
+ *
+ * @property {(index: number) => boolean} shouldLoadComponent - Determines loading particular page.
+ *
+ * @property {(offset: number) => void} onOffsetChange - Returns "offset" value on Scroll event.
+ *
+ * @property {string} onSelect - Calls on onScrollEnd event and returns an index of the current "page"
+ *
+ * @property ScrollViewProps
+ *
+ * @example ViewPager API example
+ *
+ * ```
+ * import { ViewPager } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   selectedIndex: 0,
+ * };
+ *
+ * private onIndexChange = (index: number) => {
+ *   this.state.selectedIndex = index;
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <ViewPager
+ *       selectedIndex={this.state.selectedIndex}
+ *       contentContainerStyle={styles.container}
+ *       onSelect={this.onIndexChange}>
+ *       <View style={styles.tabContainer}>
+ *         <Text>Tab 1</Text>
+ *       </View>
+ *       <View style={styles.tabContainer}>
+ *         <Text>Tab 2</Text>
+ *       </View>
+ *       <View style={styles.tabContainer}>
+ *         <Text>Tab 3</Text>
+ *       </View>
+ *     </ViewPager>
+ *   );
+ * }
+ * ```
+ * */
 
 export class ViewPager extends React.Component<Props> {
 

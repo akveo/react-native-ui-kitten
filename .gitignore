@@ -11,7 +11,7 @@ npm-debug.log
 
 # docs
 docs/docs.json
-docs/output.json
+docs/src/input.json
 
 .expo
 dist

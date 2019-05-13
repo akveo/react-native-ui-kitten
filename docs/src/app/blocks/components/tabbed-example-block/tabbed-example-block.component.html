@@ -1,0 +1,7 @@
+<nb-tabset class="tabs-container">
+  <nb-tab *ngFor="let example of examples"
+          tabTitle="{{ example.description }}"
+          [active]="example.active">
+    <ngd-code-block [path]="example.path" [code]="example.code"></ngd-code-block>
+  </nb-tab>
+</nb-tabset>

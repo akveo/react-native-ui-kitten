@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   View,
@@ -31,6 +37,55 @@ interface TopNavigationProps {
 }
 
 export type Props = TopNavigationProps & StyledComponentProps & ViewProps;
+
+/**
+ * The `TopNavigation` component is a component that work like AppBar component.
+ * Can be used for navigation for example.
+ *
+ * @extends React.Component
+ *
+ * @property {string} title - Determines the title of the component.
+ *
+ * @property {string} subtitle - Determines the subtitle of the component.
+ *
+ * @property {string | TopNavigationAlignment} alignment - Determines the appearance of the component.
+ * Can be 'default' | 'titleCentered'. By default appearance is 'default'.
+ *
+ * @property {React.ReactElement<ActionProps>} leftControl - Determines the left control
+ * of the component.
+ *
+ * @property {React.ReactElement<ActionProps>[]} rightControls - Determines the right controls
+ * of the component.
+ *
+ * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title
+ *
+ * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of title
+ *
+ * @property ViewProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example TopNavigationBar usage example
+ *
+ * ```
+ * <TopNavigationBarComponent
+ *   appearance='titleCentered'
+ *   title='Top Navigation Bar'
+ *   subtitle='Subtitle'
+ *   leftControl={
+ *                 <TopNavigationBarAction
+ *                   icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
+ *                   onPress={() => {...}/>
+ *               }
+ *   rightControls={[
+ *            <TopNavigationBarAction
+ *              icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}
+ *              onPress={() => {...}}/>,
+ *            <TopNavigationBarAction
+ *              icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={style}/>}
+ *              onPress={() => Alert.alert('On second right action')}/>]}/>
+ * ```
+ * */
 
 export class TopNavigation extends React.Component<Props> {
 

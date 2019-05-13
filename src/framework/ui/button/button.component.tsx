@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   TouchableOpacity,
@@ -37,6 +43,70 @@ const Text = styled<TextProps>(TextComponent);
 export type Props = ButtonProps & StyledComponentProps & TouchableOpacityProps;
 
 const ALIGNMENT_DEFAULT: ButtonIconAlignment = ButtonIconAlignments.LEFT;
+
+/**
+ * The `Button` component is an analog of html button.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} disabled - Determines whether component is disabled. By default is false.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
+ * By default status is 'primary'.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
+ * By default size is 'medium'.
+ *
+ * @property {React.ReactText} children - Determines text of the component.
+ *
+ * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ *
+ * @property {string | ButtonIconAlignment} iconAlignment - Determines icon alignment of the component.
+ *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be 'filled' | 'outline' | 'ghost'.
+ * By default appearance is 'filled'.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example Simple usage example
+ *
+ * ```
+ * import { Button } from '@kitten/ui';
+ * <Button>Test Button</Button>
+ * ```
+ *
+ * @example Button API example
+ *
+ * ```
+ * import { Button } from '@kitten/ui';
+ *
+ * private onButtonPress = (event: GestureResponderEvent): void => {
+ *   console.log('Button press);
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <Button
+ *       appearance='outline'
+ *       style={styles.button}
+ *       status='success'
+ *       size='large'
+ *       iconAlignment='left'
+ *       icon={(style: StyleType) => <Image source={{ uri: '...' }} style={style}/>}
+ *       onPress={this.onButtonPress}>
+ *       TEST BUTTON
+ *     </Button>
+ *   );
+ * }
+ * ```
+ * */
 
 export class Button extends React.Component<Props> {
 

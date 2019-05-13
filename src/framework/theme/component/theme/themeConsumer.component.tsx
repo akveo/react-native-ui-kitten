@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ThemeContext } from './themeContext';
@@ -64,7 +70,7 @@ export const withStyles = <P extends object>(Component: React.ComponentClass<P>,
     }
   }
 
-  const WrappingElement = (props: WrappingProps, ref: WrappedElementInstance): WrappingElement => {
+  const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElement => {
     return (
       <Wrapper
         {...props}
