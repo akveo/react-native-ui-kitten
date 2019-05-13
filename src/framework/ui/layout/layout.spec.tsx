@@ -5,7 +5,6 @@ import {
   RenderAPI,
 } from 'react-native-testing-library';
 import {
-  styled,
   ApplicationProvider,
   ApplicationProviderProps,
 } from '@kitten/theme';

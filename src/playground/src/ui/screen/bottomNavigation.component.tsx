@@ -1,20 +1,23 @@
 import React from 'react';
 import {
-  ViewProps,
-  ImageSourcePropType,
-  View,
-  Text,
   Image,
+  ImageSourcePropType,
+  Text,
+  View,
+  ViewProps,
 } from 'react-native';
 import {
   createBottomTabNavigator,
   NavigationContainer,
   NavigationContainerProps,
+  NavigationRoute,
   NavigationScreenProp,
   NavigationState,
-  NavigationRoute,
 } from 'react-navigation';
-import { BottomNavigation } from '@kitten/ui';
+import {
+  BottomNavigation,
+  BottomNavigationTab,
+} from '@kitten/ui';
 import { StyleType } from '@kitten/theme';
 
 const APPEARANCE: string = 'default';
@@ -75,32 +78,32 @@ function renderBottomNavigation(props: CommonNavigationProps): React.ReactElemen
       indicatorStyle={indicatorStyle}
       onSelect={(selectedIndex: number) =>
         navigateToTab(getRouteName(routes, selectedIndex), props.navigation.navigate)}>
-      <BottomNavigation.Tab
+      <BottomNavigationTab
         title='Screen 1'
         titleStyle={{
           fontSize: 22,
           lineHeight: 24,
         }}
         icon={(style: StyleType) => (
-          <BottomNavigation.Tab.Icon
+          <Image
             source={getIconSource(1, index === 0)}
             style={style}
           />
         )}
       />
-      <BottomNavigation.Tab
+      <BottomNavigationTab
         title='Screen 2'
         icon={(style: StyleType) => (
-          <BottomNavigation.Tab.Icon
+          <Image
             source={getIconSource(2, index === 1)}
             style={style}
           />
         )}
       />
-      <BottomNavigation.Tab
+      <BottomNavigationTab
         title='Screen 3'
         icon={(style: StyleType) => (
-          <BottomNavigation.Tab.Icon
+          <Image
             source={getIconSource(3, index === 2)}
             style={style}
           />

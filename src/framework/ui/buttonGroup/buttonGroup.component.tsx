@@ -7,13 +7,11 @@ import {
 } from 'react-native';
 import {
   styled,
-  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
   Button,
-  ButtonElementStaticProps,
   ButtonProps,
 } from '../button/button.component';
 
@@ -24,10 +22,6 @@ interface ComponentProps {
   children: ChildrenProp;
   size?: string;
   status?: string;
-}
-
-interface ButtonGroupElementStaticProps {
-  Button: StyledComponentClass<ButtonProps, ButtonElementStaticProps>;
 }
 
 export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps;
@@ -120,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ButtonGroup = styled<ButtonGroupProps, ButtonGroupElementStaticProps>(ButtonGroupComponent);
+export const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);

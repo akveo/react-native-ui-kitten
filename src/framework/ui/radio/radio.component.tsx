@@ -32,7 +32,7 @@ interface ComponentProps {
 
 export type RadioProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
-class RadioComponent extends React.Component<RadioProps> {
+export class RadioComponent extends React.Component<RadioProps> {
 
   static styledComponentName: string = 'Radio';
 

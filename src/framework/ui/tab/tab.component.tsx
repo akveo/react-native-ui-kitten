@@ -32,17 +32,11 @@ interface ComponentProps {
   children?: ContentElement;
 }
 
-export interface TabElementStaticProps {
-  Icon: React.ComponentClass<ImageProps>;
-}
-
 export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 class TabComponent extends React.Component<TabProps> {
 
   static styledComponentName: string = 'Tab';
-
-  static Icon: React.ComponentClass<ImageProps> = Image;
 
   static defaultProps: Partial<TabProps> = {
     selected: false,
@@ -155,4 +149,4 @@ const styles = StyleSheet.create({
   title: {},
 });
 
-export const Tab = styled<TabProps, TabElementStaticProps>(TabComponent);
+export const Tab = styled<TabProps>(TabComponent);

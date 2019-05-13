@@ -9,12 +9,10 @@ import {
   StyledComponentProps,
   StyleType,
   styled,
-  StyledComponentClass,
   ModalComponentCloseProps,
 } from '@kitten/theme';
 import {
   OverflowMenuItem,
-  OverflowMenuItemElementStaticProps,
   OverflowMenuItemProps,
 } from './overflowMenuItem.component';
 import {
@@ -33,17 +31,11 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
   onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
-interface OverflowMenuElementStaticProps {
-  Item: StyledComponentClass<OverflowMenuItemProps, OverflowMenuItemElementStaticProps>;
-}
-
 export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
 
 class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   static styledComponentName: string = 'OverflowMenu';
-
-  static Item = OverflowMenuItem;
 
   static defaultProps: Partial<OverflowMenuProps> = {
     indicatorOffset: 12,
@@ -139,4 +131,4 @@ const styles = StyleSheet.create({
   item: {},
 });
 
-export const OverflowMenu = styled<OverflowMenuProps, OverflowMenuElementStaticProps>(OverflowMenuComponent);
+export const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);

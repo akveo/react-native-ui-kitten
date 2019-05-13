@@ -42,10 +42,6 @@ interface ComponentProps {
   captionTextStyle?: StyleProp<TextStyle>;
 }
 
-interface InputElementStaticProps {
-  Icon: React.ComponentClass<ImageProps>;
-}
-
 export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
 
 class InputComponent extends React.Component<InputProps> {
@@ -266,4 +262,4 @@ const styles = StyleSheet.create({
   captionLabel: {},
 });
 
-export const Input = styled<InputProps, InputElementStaticProps>(InputComponent);
+export const Input = styled<InputProps>(InputComponent);

@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
-  Image,
 } from 'react-native';
 import {
   Interaction,
@@ -21,17 +20,11 @@ interface ComponentProps {
   icon: IconProp;
 }
 
-export interface TopNavigationActionElementStaticProps {
-  Icon: React.ComponentClass<ImageProps>;
-}
-
 export type TopNavigationActionProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 
   static styledComponentName: string = 'TopNavigationAction';
-
-  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -105,5 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TopNavigationAction =
-  styled<TopNavigationActionProps, TopNavigationActionElementStaticProps>(TopNavigationActionComponent);
+export const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);

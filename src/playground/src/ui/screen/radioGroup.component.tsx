@@ -61,8 +61,8 @@ class RadioGroupScreen extends React.Component<Props, State> {
             <RadioGroup
               selectedIndex={this.state.selectedIndexGroup2}
               onChange={this.onGroup2SelectionChange}>
-              <RadioGroup.Radio style={this.props.themedStyle.component}/>
-              <RadioGroup.Radio style={this.props.themedStyle.component}/>
+              <Radio style={this.props.themedStyle.component}/>
+              <Radio style={this.props.themedStyle.component}/>
             </RadioGroup>
           </View>
         </View>
@@ -73,8 +73,8 @@ class RadioGroupScreen extends React.Component<Props, State> {
               style={{ flexDirection: 'row' }}
               selectedIndex={this.state.selectedIndexGroup1}
               onChange={this.onGroup1SelectionChange}>
-              <RadioGroup.Radio style={this.props.themedStyle.component}/>
-              <RadioGroup.Radio style={this.props.themedStyle.component}/>
+              <Radio style={this.props.themedStyle.component}/>
+              <Radio style={this.props.themedStyle.component}/>
             </RadioGroup>
           </View>
         </View>

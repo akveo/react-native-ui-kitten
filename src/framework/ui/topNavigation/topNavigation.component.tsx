@@ -10,13 +10,11 @@ import {
 } from 'react-native';
 import {
   styled,
-  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
   TopNavigationAction,
-  TopNavigationActionElementStaticProps,
   TopNavigationActionProps,
 } from './topNavigationAction.component';
 import {
@@ -36,10 +34,6 @@ interface ComponentProps {
   alignment?: string | TopNavigationAlignment;
   leftControl?: ActionElement;
   rightControls?: ActionElementProp;
-}
-
-interface TopNavigationElementStaticProps {
-  Action: StyledComponentClass<TopNavigationActionProps, TopNavigationActionElementStaticProps>;
 }
 
 export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
@@ -205,4 +199,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TopNavigation = styled<TopNavigationProps, TopNavigationElementStaticProps>(TopNavigationComponent);
+export const TopNavigation = styled<TopNavigationProps>(TopNavigationComponent);

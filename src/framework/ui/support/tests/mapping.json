@@ -2646,6 +2646,9 @@
       "meta": {
         "scope": "mobile",
         "parameters": {
+          "minHeight": {
+            "type": "number"
+          },
           "paddingVertical": {
             "type": "number"
           },
@@ -2715,6 +2718,7 @@
       "appearances": {
         "default": {
           "mapping": {
+            "minHeight": 56,
             "paddingVertical": 8,
             "paddingHorizontal": 8,
             "backgroundColor": "color-white",

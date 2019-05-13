@@ -19,7 +19,7 @@ interface ComponentProps {
 
 export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
 
-class AvatarComponent extends React.Component<AvatarProps> {
+export class AvatarComponent extends React.Component<AvatarProps> {
 
   static styledComponentName: string = 'Avatar';
 

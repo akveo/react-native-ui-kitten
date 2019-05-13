@@ -14,6 +14,7 @@ import {
   RadioGroup,
   RadioGroupProps,
 } from './radioGroup.component';
+import { Radio } from '../radio/radio.component';
 import {
   mapping,
   theme,
@@ -30,7 +31,7 @@ const Mock = (props?: RadioGroupProps): React.ReactElement<ApplicationProviderPr
   );
 };
 
-const ChildMock = RadioGroup.Radio;
+const ChildMock = Radio;
 
 describe('@radioGroup: component checks', () => {
 

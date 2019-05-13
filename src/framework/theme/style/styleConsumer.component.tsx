@@ -30,11 +30,9 @@ export interface ContextProps {
   theme: ThemeType;
 }
 
-// `P` is for component-specific props which could be passed into jsx element
-// `T` is for component-specific static props like `TabView.Tab`
-export type StyledComponentClass<P, T = {}> = React.ComponentClass<StyledComponentProps & P> & T;
+export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps & P>;
 
-export const styled = <P, T = {}>(Component: React.ComponentClass<P>): StyledComponentClass<P, T> => {
+export const styled = <P, T = {}>(Component: React.ComponentClass<P>): StyledComponentClass<P> => {
 
   // @ts-ignore
   if (!Component.styledComponentName) {

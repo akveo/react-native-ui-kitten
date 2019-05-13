@@ -12,17 +12,16 @@ import {
   ListItemProps,
   CheckBoxProps,
   Button,
-  List,
 } from '@kitten/ui';
 
 export const ListItemIconShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
 
   const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
-    <List.Item.Icon source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
+    <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
   );
 
   return (
-    <List.Item {...props} icon={Icon}/>
+    <ListItem {...props} icon={Icon}/>
   );
 };
 
@@ -33,14 +32,14 @@ export const ListItemAccessoryShowcase = (props?: ListItemProps): React.ReactEle
   );
 
   return (
-    <List.Item {...props} accessory={Accessory}/>
+    <ListItem {...props} accessory={Accessory}/>
   );
 };
 
 export const ListItemIconAccessoryShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
 
   const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
-    <List.Item.Icon source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
+    <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
   );
 
   const Accessory = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
@@ -48,7 +47,7 @@ export const ListItemIconAccessoryShowcase = (props?: ListItemProps): React.Reac
   );
 
   return (
-    <List.Item {...props} icon={Icon} accessory={Accessory}/>
+    <ListItem {...props} icon={Icon} accessory={Accessory}/>
   );
 };
 

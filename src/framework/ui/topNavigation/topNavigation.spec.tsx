@@ -20,7 +20,10 @@ import {
   TopNavigation,
   TopNavigationProps,
 } from './topNavigation.component';
-import { TopNavigationActionProps } from './topNavigationAction.component';
+import {
+  TopNavigationAction,
+  TopNavigationActionProps,
+} from './topNavigationAction.component';
 import {
   mapping,
   theme,
@@ -42,7 +45,7 @@ const ActionMock = (props?: TopNavigationActionProps): React.ReactElement<Applic
     <ApplicationProvider
       mapping={mapping}
       theme={theme}>
-      <TopNavigation.Action {...props} />
+      <TopNavigationAction {...props} />
     </ApplicationProvider>
   );
 };
@@ -174,7 +177,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigation.Action));
+    const { output } = shallow(component.getByType(TopNavigationAction));
 
     expect(output).toMatchSnapshot();
   });
@@ -189,7 +192,7 @@ describe('@top-navigation-bar/action', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TopNavigation.Action));
+    const { output } = shallow(component.getByType(TopNavigationAction));
 
     fireEvent.press(component.getByType(TouchableOpacity));
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   ImageProps,
   ImageSourcePropType,
   TouchableOpacity,
@@ -59,7 +60,7 @@ describe('@button: matches snapshot', () => {
 
     const icon = (style: StyleType): React.ReactElement<ImageProps> => {
       return (
-        <Button.Icon
+        <Image
           source={iconSource}
           style={style}
         />

@@ -22,6 +22,7 @@ import {
 import {
   OverflowMenuItemType,
   OverflowMenuItemProps,
+  OverflowMenuItem,
 } from './overflowMenuItem.component';
 import {
   OverflowMenu,
@@ -48,7 +49,7 @@ const MockMenuItem = (props?: OverflowMenuItemProps): React.ReactElement<Applica
     <ApplicationProvider
       mapping={mapping}
       theme={theme}>
-      <OverflowMenu.Item {...props} />
+      <OverflowMenuItem {...props} />
     </ApplicationProvider>
   );
 };
@@ -96,7 +97,7 @@ describe('@overflow-menu-item: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenu.Item));
+    const { output } = shallow(component.getByType(OverflowMenuItem));
 
     expect(output).toMatchSnapshot();
   });
@@ -110,7 +111,7 @@ describe('@overflow-menu-item: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenu.Item));
+    const { output } = shallow(component.getByType(OverflowMenuItem));
 
     expect(output).toMatchSnapshot();
   });
@@ -163,14 +164,14 @@ describe('@overflow-menu-item: component checks', () => {
 
     fireEvent(component.getByType(TouchableOpacity), 'pressIn');
     const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(OverflowMenu.Item);
+      return component.getByType(OverflowMenuItem);
     });
 
     const { output: activeOutput } = shallow(active);
 
     fireEvent(component.getByType(TouchableOpacity), 'pressOut');
     const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(OverflowMenu.Item);
+      return component.getByType(OverflowMenuItem);
     });
 
     const { output: inactiveOutput } = shallow(inactive);

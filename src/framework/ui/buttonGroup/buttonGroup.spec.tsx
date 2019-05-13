@@ -12,6 +12,7 @@ import {
   ButtonGroup,
   ButtonGroupProps,
 } from './buttonGroup.component';
+import { Button } from '../button/button.component';
 import {
   mapping,
   theme,
@@ -34,13 +35,13 @@ describe('@button-group: component checks', () => {
 
     const component: RenderAPI = render(
       <Mock appearance={groupAppearance}>
-        <ButtonGroup.Button appearance='default'/>
-        <ButtonGroup.Button/>
-        <ButtonGroup.Button appearance='outline'/>
+        <Button appearance='default'/>
+        <Button/>
+        <Button appearance='outline'/>
       </Mock>,
     );
 
-    const children: ReactTestInstance[] = component.getAllByType(ButtonGroup.Button);
+    const children: ReactTestInstance[] = component.getAllByType(Button);
     const childrenSize: string = children.reduce((current: string, child: ReactTestInstance): string => {
       return child.props.appearance;
     }, groupAppearance);
@@ -53,14 +54,14 @@ describe('@button-group: component checks', () => {
 
     const component: RenderAPI = render(
       <Mock size={groupSize}>
-        <ButtonGroup.Button size='large'/>
-        <ButtonGroup.Button/>
-        <ButtonGroup.Button size='small'/>
-        <ButtonGroup.Button size='tiny'/>
+        <Button size='large'/>
+        <Button/>
+        <Button size='small'/>
+        <Button size='tiny'/>
       </Mock>,
     );
 
-    const children: ReactTestInstance[] = component.getAllByType(ButtonGroup.Button);
+    const children: ReactTestInstance[] = component.getAllByType(Button);
     const childrenSize: string = children.reduce((current: string, child: ReactTestInstance): string => {
       return child.props.size;
     }, groupSize);

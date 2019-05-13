@@ -6,7 +6,6 @@ import {
   TextStyle,
   View,
   ViewProps,
-  Image,
 } from 'react-native';
 import {
   ModalComponentCloseProps,
@@ -38,17 +37,11 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
   children: WrappingElement;
 }
 
-interface TooltipElementStaticProps {
-  Icon: React.ComponentClass<ImageProps>;
-}
-
 export type TooltipProps = StyledComponentProps & ComponentProps;
 
 class TooltipComponent extends React.Component<TooltipProps> {
 
   static styledComponentName: string = 'Tooltip';
-
-  static Icon: React.ComponentClass<ImageProps> = Image;
 
   static defaultProps: Partial<TooltipProps> = {
     indicatorOffset: 8,
@@ -168,4 +161,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Tooltip = styled<TooltipProps, TooltipElementStaticProps>(TooltipComponent);
+export const Tooltip = styled<TooltipProps>(TooltipComponent);

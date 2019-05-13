@@ -7,15 +7,10 @@ import {
 } from 'react-native';
 import {
   styled,
-  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import {
-  ListItem,
-  ListItemProps,
-  ListItemElementStaticProps,
-} from './listItem.component';
+import { ListItemProps } from './listItem.component';
 
 // this is basically needed to avoid generics in required props
 type ItemType = any;
@@ -26,17 +21,11 @@ interface ComponentProps {
   renderItem: RenderItemProp;
 }
 
-interface ListElementStaticProps {
-  Item: StyledComponentClass<ListItemProps, ListItemElementStaticProps>;
-}
-
 export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
 
 class ListComponent extends React.Component<ListProps> {
 
   static styledComponentName: string = 'List';
-
-  static Item = ListItem;
 
   private listRef: React.RefObject<FlatList<ItemType>> = React.createRef();
 
@@ -115,4 +104,4 @@ const styles = StyleSheet.create({
   item: {},
 });
 
-export const List = styled<ListProps, ListElementStaticProps>(ListComponent);
+export const List = styled<ListProps>(ListComponent);

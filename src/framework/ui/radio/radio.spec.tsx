@@ -14,6 +14,7 @@ import {
 } from '@kitten/theme';
 import {
   Radio,
+  RadioComponent,
   RadioProps,
 } from './radio.component';
 import {
@@ -41,7 +42,7 @@ describe('@radio: matches snapshot', () => {
 
   it('default', () => {
     const component: RenderAPI = renderComponent();
-    const { output } = shallow(component.getByType(Radio));
+    const { output } = shallow(component.getByType(RadioComponent));
 
     expect(output).toMatchSnapshot();
   });

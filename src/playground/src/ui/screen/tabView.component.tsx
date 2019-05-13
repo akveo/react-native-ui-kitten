@@ -11,7 +11,10 @@ import {
   ThemedComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { TabView } from '@kitten/ui';
+import {
+  Tab,
+  TabView,
+} from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -37,7 +40,7 @@ class TabViewScreen extends React.Component<Props, State> {
 
   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
     return (
-      <TabView.Tab.Icon source={ICON} style={style}/>
+      <Image source={ICON} style={style}/>
     );
   };
 
@@ -47,21 +50,21 @@ class TabViewScreen extends React.Component<Props, State> {
         style={this.props.themedStyle.container}
         selectedIndex={this.state.selectedIndex}
         onSelect={this.onSelect}>
-        <TabView.Tab
+        <Tab
           title='TAB 1'
           icon={this.renderIcon}>
           <Text>Tab 1</Text>
-        </TabView.Tab>
-        <TabView.Tab
+        </Tab>
+        <Tab
           title='TAB 2'
           icon={this.renderIcon}>
           <Text>Tab 2</Text>
-        </TabView.Tab>
-        <TabView.Tab
+        </Tab>
+        <Tab
           title='TAB 3'
           icon={this.renderIcon}>
           <Text>Tab 3</Text>
-        </TabView.Tab>
+        </Tab>
       </TabView>
     );
   }

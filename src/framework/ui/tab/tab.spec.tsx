@@ -4,6 +4,7 @@ import {
   ScrollView,
   ImageProps,
   ImageSourcePropType,
+  Image,
 } from 'react-native';
 import {
   fireEvent,
@@ -17,7 +18,10 @@ import {
   ApplicationProviderProps,
   StyleType,
 } from '@kitten/theme';
-import { TabProps } from './tab.component';
+import {
+  Tab,
+  TabProps,
+} from './tab.component';
 import {
   TabBar,
   TabBarProps,
@@ -38,7 +42,7 @@ describe('@tab: component checks', () => {
       <ApplicationProvider
         mapping={mapping}
         theme={theme}>
-        <TabView.Tab {...props} />
+        <Tab {...props} />
       </ApplicationProvider>
     );
   };
@@ -48,7 +52,7 @@ describe('@tab: component checks', () => {
       <Mock/>,
     );
 
-    const { output } = shallow(component.getByType(TabView.Tab));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -58,7 +62,7 @@ describe('@tab: component checks', () => {
       <Mock title='title'/>,
     );
 
-    const { output } = shallow(component.getByType(TabView.Tab));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -68,7 +72,7 @@ describe('@tab: component checks', () => {
 
     const icon = (style: StyleType): React.ReactElement<ImageProps> => {
       return (
-        <TabView.Tab.Icon
+        <Image
           style={style}
           source={iconSource}
         />
@@ -79,7 +83,7 @@ describe('@tab: component checks', () => {
       <Mock icon={icon}/>,
     );
 
-    const { output } = shallow(component.getByType(TabView.Tab));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -95,7 +99,7 @@ describe('@tab: component checks', () => {
       />,
     );
 
-    const { output } = shallow(component.getByType(TabView.Tab));
+    const { output } = shallow(component.getByType(Tab));
 
     expect(output).toMatchSnapshot();
   });
@@ -119,7 +123,7 @@ describe('@tab-bar: component checks', () => {
     );
   };
 
-  const ChildMock = TabView.Tab;
+  const ChildMock = Tab;
 
   it('* emits onSelect with correct args', () => {
     const onSelect = jest.fn();
@@ -156,7 +160,7 @@ describe('@tab-view: component checks', () => {
 
   const ChildMock = (props?: TabProps): React.ReactElement<TabProps> => {
     return (
-      <TabView.Tab {...props} />
+      <Tab {...props} />
     );
   };
 

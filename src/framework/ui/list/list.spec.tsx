@@ -21,7 +21,10 @@ import {
   List,
   ListProps,
 } from './list.component';
-import { ListItemProps } from './listItem.component';
+import {
+  ListItem,
+  ListItemProps,
+} from './listItem.component';
 import {
   mapping,
   theme,
@@ -41,7 +44,7 @@ const Mock = (props?: ListProps): React.ReactElement<ApplicationProviderProps> =
 
 const ItemMock = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
   return (
-    <List.Item {...props} />
+    <ListItem {...props} />
   );
 };
 
@@ -61,7 +64,7 @@ describe('@list: component checks', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(List.Item);
+    const items: ReactTestInstance[] = component.getAllByType(ListItem);
 
     expect(items.length).toEqual(8);
   });
@@ -86,7 +89,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(List.Item);
+    const items: ReactTestInstance[] = component.getAllByType(ListItem);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -106,7 +109,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(List.Item);
+    const items: ReactTestInstance[] = component.getAllByType(ListItem);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -137,7 +140,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(List.Item);
+    const items: ReactTestInstance[] = component.getAllByType(ListItem);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -170,7 +173,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(List.Item);
+    const items: ReactTestInstance[] = component.getAllByType(ListItem);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -203,7 +206,7 @@ describe('@list-item: template matches snapshot', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(List.Item);
+    const items: ReactTestInstance[] = component.getAllByType(ListItem);
     const { output } = shallow(items[0]);
 
     expect(output).toMatchSnapshot();
@@ -236,7 +239,7 @@ describe('@list-item: component checks', () => {
       />,
     );
 
-    const items: ReactTestInstance[] = component.getAllByType(List.Item);
+    const items: ReactTestInstance[] = component.getAllByType(ListItem);
     const touchable: ReactTestInstance = items[pressIndex].findByType(TouchableOpacity);
 
     fireEvent.press(touchable);

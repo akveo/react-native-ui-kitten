@@ -8,15 +8,10 @@ import {
 } from 'react-native';
 import {
   styled,
-  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import {
-  Tab,
-  TabProps,
-  TabElementStaticProps,
-} from './tab.component';
+import { TabProps } from './tab.component';
 import { TabIndicator } from '../support/components';
 
 type TabElement = React.ReactElement<TabProps>;
@@ -29,17 +24,11 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
-interface TabBarElementStaticProps {
-  Tab: StyledComponentClass<TabProps, TabElementStaticProps>;
-}
-
 export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
 
 class TabBarComponent extends React.Component<TabBarProps> {
 
   static styledComponentName: string = 'TabBar';
-
-  static Tab: StyledComponentClass<TabProps, TabElementStaticProps> = Tab;
 
   static defaultProps: Partial<TabBarProps> = {
     selectedIndex: 0,
@@ -144,4 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TabBar = styled<TabBarProps, TabBarElementStaticProps>(TabBarComponent);
+export const TabBar = styled<TabBarProps>(TabBarComponent);

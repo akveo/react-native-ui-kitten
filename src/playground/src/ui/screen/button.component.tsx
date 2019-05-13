@@ -4,6 +4,7 @@ import {
   Text,
   View,
   ImageProps,
+  Image,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -35,7 +36,7 @@ class ButtonScreen extends React.Component<Props, State> {
 
   private renderIcon = (): React.ReactElement<ImageProps> => {
     return (
-      <Button.Icon source={ICON}/>
+      <Image source={ICON}/>
     );
   };
 

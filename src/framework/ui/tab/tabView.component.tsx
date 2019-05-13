@@ -5,11 +5,7 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { StyledComponentClass } from '@kitten/theme';
-import {
-  TabProps,
-  TabElementStaticProps,
-} from './tab.component';
+import { TabProps } from './tab.component';
 import { TabBar } from './tabBar.component';
 import { ViewPager } from '../viewPager/viewPager.component';
 
@@ -43,8 +39,6 @@ export class TabView extends React.Component<TabViewProps> {
   static defaultProps: Partial<TabViewProps> = {
     selectedIndex: 0,
   };
-
-  static Tab: StyledComponentClass<TabProps, TabElementStaticProps> = TabBar.Tab;
 
   private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
   private tabBarRef: React.RefObject<any> = React.createRef();

@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   ImageProps,
+  Image,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
@@ -38,7 +39,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
 
   private renderIcon = (): React.ReactElement<ImageProps> => {
     return (
-      <Button.Icon source={ICON} />
+      <Image source={ICON} />
     );
   };
 
@@ -56,41 +57,41 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='giant'>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='large'>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='medium'>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='small'>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='tiny'>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
-              <ButtonGroup.Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
+              <Button icon={this.renderIcon}/>
             </ButtonGroup>
           </View>
         </View>
@@ -101,41 +102,41 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='giant'>
-              <ButtonGroup.Button>Left</ButtonGroup.Button>
-              <ButtonGroup.Button>Mid</ButtonGroup.Button>
-              <ButtonGroup.Button>Right</ButtonGroup.Button>
+              <Button>Left</Button>
+              <Button>Mid</Button>
+              <Button>Right</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='large'>
-              <ButtonGroup.Button>Left</ButtonGroup.Button>
-              <ButtonGroup.Button>Mid</ButtonGroup.Button>
-              <ButtonGroup.Button>Right</ButtonGroup.Button>
+              <Button>Left</Button>
+              <Button>Mid</Button>
+              <Button>Right</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='medium'>
-              <ButtonGroup.Button>Left</ButtonGroup.Button>
-              <ButtonGroup.Button>Mid</ButtonGroup.Button>
-              <ButtonGroup.Button>Right</ButtonGroup.Button>
+              <Button>Left</Button>
+              <Button>Mid</Button>
+              <Button>Right</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='small'>
-              <ButtonGroup.Button>Left</ButtonGroup.Button>
-              <ButtonGroup.Button>Mid</ButtonGroup.Button>
-              <ButtonGroup.Button>Right</ButtonGroup.Button>
+              <Button>Left</Button>
+              <Button>Mid</Button>
+              <Button>Right</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               size='tiny'>
-              <ButtonGroup.Button>Left</ButtonGroup.Button>
-              <ButtonGroup.Button>Mid</ButtonGroup.Button>
-              <ButtonGroup.Button>Right</ButtonGroup.Button>
+              <Button>Left</Button>
+              <Button>Mid</Button>
+              <Button>Right</Button>
             </ButtonGroup>
           </View>
         </View>
@@ -146,41 +147,41 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               style={themedStyle.component}
               appearance={APPEARANCE_OUTLINE}
               size='giant'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE_OUTLINE}
               size='large'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE_OUTLINE}
               size='medium'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE_OUTLINE}
               size='small'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE_OUTLINE}
               size='tiny'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
           </View>
         </View>
@@ -191,41 +192,41 @@ class ButtonGroupScreen extends React.Component<Props, State> {
               style={themedStyle.component}
               appearance={APPEARANCE}
               status='primary'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               status='success'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               status='info'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               status='warning'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
             <ButtonGroup
               style={themedStyle.component}
               appearance={APPEARANCE}
               status='danger'>
-              <ButtonGroup.Button icon={this.renderIcon}>L</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>M</ButtonGroup.Button>
-              <ButtonGroup.Button icon={this.renderIcon}>R</ButtonGroup.Button>
+              <Button icon={this.renderIcon}>L</Button>
+              <Button icon={this.renderIcon}>M</Button>
+              <Button icon={this.renderIcon}>R</Button>
             </ButtonGroup>
           </View>
         </View>

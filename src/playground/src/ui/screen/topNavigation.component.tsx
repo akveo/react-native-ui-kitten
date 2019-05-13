@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Alert,
+  Image,
 } from 'react-native';
 import {
   NavigationScreenProps,
@@ -15,7 +16,10 @@ import {
   ThemedComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { TopNavigation } from '@kitten/ui';
+import {
+  TopNavigation,
+  TopNavigationAction,
+} from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -31,18 +35,18 @@ class TopNavigationScreen extends React.Component<Props> {
           title='Title'
           subtitle='Secondary Text'
           leftControl={
-            <TopNavigation.Action
-              icon={(style: StyleType) => <TopNavigation.Action.Icon source={{ uri: leftControlUri }} style={style}/>}
+            <TopNavigationAction
+              icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
               onPress={() => props.navigation.goBack(null)}
             />
           }
           rightControls={[
-            <TopNavigation.Action
-              icon={(style: StyleType) => <TopNavigation.Action.Icon source={{ uri: rightControlUri }} style={style}/>}
+            <TopNavigationAction
+              icon={(style: StyleType) => <Image source={{ uri: rightControlUri }} style={style}/>}
               onPress={() => Alert.alert('On first right action')}
             />,
-            <TopNavigation.Action
-              icon={(style: StyleType) => <TopNavigation.Action.Icon source={{ uri: rightControlUri }} style={style}/>}
+            <TopNavigationAction
+              icon={(style: StyleType) => <Image source={{ uri: rightControlUri }} style={style}/>}
               onPress={() => Alert.alert('On second right action')}
             />,
           ]}

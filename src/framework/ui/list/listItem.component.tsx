@@ -54,10 +54,6 @@ interface CustomContentProps {
   children?: React.ReactNode;
 }
 
-export interface ListItemElementStaticProps {
-  Icon: React.ComponentClass<ImageProps>;
-}
-
 type ComponentProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
 
 export type ListItemProps = StyledComponentProps & TouchableIndexedProps & ComponentProps;
@@ -65,8 +61,6 @@ export type ListItemProps = StyledComponentProps & TouchableIndexedProps & Compo
 class ListItemComponent extends React.Component<ListItemProps> {
 
   static styledComponentName: string = 'ListItem';
-
-  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -281,4 +275,4 @@ const styles = StyleSheet.create({
   accessory: {},
 });
 
-export const ListItem = styled<ListItemProps, ListItemElementStaticProps>(ListItemComponent);
+export const ListItem = styled<ListItemProps>(ListItemComponent);

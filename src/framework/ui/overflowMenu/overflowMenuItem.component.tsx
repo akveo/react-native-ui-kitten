@@ -34,17 +34,11 @@ export interface OverflowMenuItemType extends ListDerivedProps {
   disabled?: boolean;
 }
 
-export interface OverflowMenuItemElementStaticProps {
-  Icon: React.ComponentClass<ImageProps>;
-}
-
 export type OverflowMenuItemProps = StyledComponentProps & TouchableIndexedProps & OverflowMenuItemType;
 
 class OverflowMenuItemComponent extends React.Component<OverflowMenuItemProps> {
 
   static styledComponentName: string = 'OverflowMenuItem';
-
-  static Icon: React.ComponentClass<ImageProps>;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -170,5 +164,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const OverflowMenuItem =
-  styled<OverflowMenuItemProps, OverflowMenuItemElementStaticProps>(OverflowMenuItemComponent);
+export const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);

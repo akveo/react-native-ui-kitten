@@ -32,17 +32,11 @@ interface ComponentProps {
   children?: React.ReactText;
 }
 
-export interface ButtonElementStaticProps {
-  Icon: React.ComponentClass<ImageProps>;
-}
-
 export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 class ButtonComponent extends React.Component<ButtonProps> {
 
   static styledComponentName: string = 'Button';
-
-  static Icon: React.ComponentClass<ImageProps> = Image;
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
@@ -166,4 +160,4 @@ const styles = StyleSheet.create({
   icon: {},
 });
 
-export const Button = styled<ButtonProps, ButtonElementStaticProps>(ButtonComponent);
+export const Button = styled<ButtonProps>(ButtonComponent);

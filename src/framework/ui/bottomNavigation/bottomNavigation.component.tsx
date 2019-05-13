@@ -8,15 +8,10 @@ import {
 } from 'react-native';
 import {
   styled,
-  StyledComponentClass,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import {
-  BottomNavigationTab,
-  BottomNavigationTabElementStaticProps,
-  BottomNavigationTabProps,
-} from './bottomNavigationTab.component';
+import { BottomNavigationTabProps } from './bottomNavigationTab.component';
 import {
   TabIndicator,
   TabIndicatorProps,
@@ -33,21 +28,15 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
-interface BottomNavigationElementStaticProps {
-  Tab: StyledComponentClass<BottomNavigationTabProps, BottomNavigationTabElementStaticProps>;
-}
-
 export type BottomNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
-class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
+export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 
   static styledComponentName: string = 'BottomNavigation';
 
   static defaultProps: Partial<BottomNavigationProps> = {
     selectedIndex: 0,
   };
-
-  static Tab = BottomNavigationTab;
 
   private onTabSelect = (index: number) => {
     if (this.props.onSelect && this.props.selectedIndex !== index) {
@@ -138,5 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const BottomNavigation =
-  styled<BottomNavigationProps, BottomNavigationElementStaticProps>(BottomNavigationComponent);
+export const BottomNavigation = styled<BottomNavigationProps>(BottomNavigationComponent);
