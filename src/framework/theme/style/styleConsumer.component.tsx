@@ -58,6 +58,12 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * @example Declaring Styled Component
  *
  * ```
+ * import {
+ *   styled,
+ *   StyledComponentProps,
+ *   Interaction,
+ * } from '@kitten/theme';
+ *
  * type StyledButtonProps = ButtonProps & StyledComponentProps;
  *
  * class Button extends React.Component<StyledButtonProps> {
