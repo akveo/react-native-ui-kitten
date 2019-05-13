@@ -30,10 +30,9 @@ interface State {
 }
 
 /**
- * The `ApplicationProvider`  component is designed to be a root of the application.
+ * The `ApplicationProvider` component is designed to be a root of the application.
  *
  * This does basically two things:
- *
  * - Provides styles for react-native-ui-kitten basic components (e.g `Button`);
  * - Renders modal window which is used to be common for all elements presented as modal;
  *
@@ -63,16 +62,17 @@ interface State {
  *
  * export default class App extends React.Component {
  *
- * public render(): React.ReactNode {
- *  return (
- *   <ApplicationProvider
- *    mapping={mapping}
- *    theme={theme}>
- *    <Application/>
- *   </ApplicationProvider>
- *  );
- *  }
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <ApplicationProvider
+ *         mapping={mapping}
+ *         theme={theme}>
+ *         <Application/>
+ *       </ApplicationProvider>
+ *     );
+ *   }
  * }
+ * ```
  */
 
 export class ApplicationProvider extends React.Component<ApplicationProviderProps, State> {
