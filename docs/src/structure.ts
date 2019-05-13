@@ -112,6 +112,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'RadioGroup',
+        icon: 'radio.svg',
+        source: [
+          'RadioGroup',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Toggle',
         icon: 'checkbox.svg',
         source: [

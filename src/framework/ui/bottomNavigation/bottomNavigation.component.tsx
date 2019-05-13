@@ -46,13 +46,27 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  * @property {React.ReactElement<TabProps> | React.ReactElement<TabProps>[]} children -
  * Determines tabs of the navigator. Can be passed through JSX.
  *
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Determines styles of the indicator.
+ *
  * @property {(index: number) => void} onSelect - Triggered on select value.
  *
  * @property ViewProps
  *
  * @property StyledComponentProps
  *
- * @example with React Navigation usage example
+ * @example Inline styling example
+ *
+ * ```
+ *   <BottomNavigation
+ *     style={styles.bottomBar}
+ *     indicatorStyle={styles.indicator}
+ *     selectedIndex={index}
+ *     onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>
+ *     {this.renderTabs()}
+ *    </BottomNavigation>
+ * ```
+ *
+ * @example With React Navigation API and usage example
  *
  * ```
  * import { Image } from 'react-native';
@@ -79,24 +93,24 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  * });
  *
  * function renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {
- *  const routes: NavigationRoute[] = props.navigation.state.routes;
- *  const index: number = props.navigation.state.index;
+ *   const routes: NavigationRoute[] = props.navigation.state.routes;
+ *   const index: number = props.navigation.state.index;
  *
- *  return (
- *   <BottomNavigation
- *     selectedIndex={index}
- *     onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>
- *     <BottomNavigationTab
- *       title='Screen 1'
- *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *     <BottomNavigationTab
- *       title='Screen 2'
- *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *     <BottomNavigationTab
- *       title='Screen 3'
- *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *    </BottomNavigation>
- *  );
+ *   return (
+ *    <BottomNavigation
+ *      selectedIndex={index}
+ *      onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>
+ *      <BottomNavigationTab
+ *        title='Screen 1'
+ *        icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *      <BottomNavigationTab
+ *        title='Screen 2'
+ *        icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *      <BottomNavigationTab
+ *        title='Screen 3'
+ *        icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *     </BottomNavigation>
+ *   );
  * }
  * ```
  * */

@@ -78,7 +78,7 @@ export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
  * ];
  * ```
  *
- * @example OverflowMenu usage example
+ * @example OverflowMenu usage and API example
  *
  * ```
  * <OverflowMenu

@@ -44,7 +44,7 @@ export type ViewPagerProps = ScrollViewProps & ComponentProps;
  *
  * @property ScrollViewProps
  *
- * @example ViewPager API example
+ * @example ViewPager usage and API example
  *
  * ```
  * import { ViewPager } from '@kitten/ui';
@@ -62,6 +62,44 @@ export type ViewPagerProps = ScrollViewProps & ComponentProps;
  *     <ViewPager
  *       selectedIndex={this.state.selectedIndex}
  *       contentContainerStyle={styles.container}
+ *       onSelect={this.onIndexChange}>
+ *       <View style={styles.tabContainer}>
+ *         <Text>Tab 1</Text>
+ *       </View>
+ *       <View style={styles.tabContainer}>
+ *         <Text>Tab 2</Text>
+ *       </View>
+ *       <View style={styles.tabContainer}>
+ *         <Text>Tab 3</Text>
+ *       </View>
+ *     </ViewPager>
+ *   );
+ * }
+ * ```
+ *
+ * @example ViewPager lazy loading example
+ *
+ * ```
+ * import { ViewPager } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   selectedIndex: 0,
+ * };
+ *
+ * private onIndexChange = (index: number) => {
+ *   this.state.selectedIndex = index;
+ * };
+ *
+ * private shouldLoadPageContent = (index: number): boolean => {
+ *   return index === this.state.selectedIndex;
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <ViewPager
+ *       selectedIndex={this.state.selectedIndex}
+ *       contentContainerStyle={styles.container}
+ *       shouldLoadComponent={this.shouldLoadPageContent}
  *       onSelect={this.onIndexChange}>
  *       <View style={styles.tabContainer}>
  *         <Text>Tab 1</Text>

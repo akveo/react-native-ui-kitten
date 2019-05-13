@@ -75,10 +75,11 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  *
  * ```
  * import { Toggle } from '@kitten/ui';
+ *
  * <Checkbox checked={true}/>
  * ```
  *
- * @example Checkbox API example
+ * @example Checkbox usage and API example
  *
  * ```
  * import { Checkbox } from '@kitten/ui';
@@ -99,9 +100,21 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  *       size='large'
  *       text='Place your text'
  *       textStyle={styles.checkboxText}
- *       onChange={this.onChange}/>
+ *       onChange={this.onChange}
+ *     />
  *   );
  * }
+ * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * <Checkbox
+ *   checked={this.state.toggled}
+ *   text='Place your text'
+ *   textStyle={styles.checkboxText}
+ *   onChange={this.onChange}
+ * />
  * ```
  * */
 

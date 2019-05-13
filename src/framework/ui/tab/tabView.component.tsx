@@ -103,6 +103,69 @@ export type TabViewProps = ViewProps & ComponentProps;
  *   );
  * }
  * ```
+ *
+ * @example TabView lazy loading usage
+ *
+ * ```
+ * import {
+ *   TabView,
+ *   Tab,
+ * } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   selectedIndex: 0,
+ * };
+ *
+ * private onSelect = (selectedIndex: number) => {
+ *   this.setState({ selectedIndex });
+ * };
+ *
+ * private shouldLoadTabContent = (index: number): boolean => {
+ *   return index === this.state.selectedIndex;
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <TabView
+ *       style={styles.container}
+ *       selectedIndex={this.state.selectedIndex}
+ *       shouldLoadComponent={this.shouldLoadTabContent}
+ *       onSelect={this.onSelect}>
+ *       <Tab
+ *         title='TAB 1'
+ *         icon={(style: StyleType) => <Image source={ICON1} style={style}/>}>
+ *         <Text>Tab 1</Text>
+ *       </Tab>
+ *       <Tab
+ *         title='TAB 2'
+ *         icon={(style: StyleType) => <Image source={ICON2} style={style}/>}>
+ *         <Text>Tab 2</Text>
+ *       </Tab>
+ *       <Tab
+ *         title='TAB 3'
+ *         icon={(style: StyleType) => <Image source={ICON3} style={style}/>}>
+ *         <Text>Tab 3</Text>
+ *       </Tab>
+ *     </TabView>
+ *   );
+ * }
+ * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * public render(): React.ReactNode {
+ *   return (
+ *     <TabView
+ *       style={styles.container}
+ *       indicatorStyle={styles.indicator}
+ *       selectedIndex={this.state.selectedIndex}
+ *       onSelect={this.onSelect}>
+ *       {this.renderTabs()}
+ *     </TabView>
+ *   );
+ * }
+ * ```
  * */
 
 export class TabView extends React.Component<TabViewProps> {

@@ -77,6 +77,18 @@ export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
  *   );
  * }
  * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * <TabBar
+ *   selectedIndex={this.state.barSelectedIndex}
+ *   style={styles.tabBar}
+ *   indicatorStyle={styles.indicator}
+ *   onSelect={this.onBarSelect}>
+ *   {this.renderTabs()}
+ * </TabBar>
+ * ```
  * */
 
 export class TabBarComponent extends React.Component<TabBarProps> {

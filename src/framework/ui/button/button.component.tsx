@@ -70,18 +70,19 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  *
  * ```
  * import {
- *  Button,
- *  ButtonProps,
+ *   Button,
+ *   ButtonProps,
  * } from '@kitten/ui';
+ *
  * <Button>Test Button</Button>
  * ```
  *
- * @example Button API example
+ * @example Button usage and API example
  *
  * ```
  * import {
- *  Button,
- *  ButtonProps,
+ *   Button,
+ *   ButtonProps,
  * } from '@kitten/ui';
  *
  * private onButtonPress = () => {
@@ -101,6 +102,18 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  *     </Button>
  *   );
  * }
+ * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * <Button
+ *   style={styles.button}
+ *   textStyle={styles.buttonText}
+ *   icon={(style: StyleType) => <Image source={{ uri: '...' }} style={style}/>}
+ *   onPress={this.onButtonPress}>
+ *   BUTTON
+ * </Button>
  * ```
  * */
 

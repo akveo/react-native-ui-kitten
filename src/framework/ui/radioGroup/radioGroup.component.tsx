@@ -28,6 +28,59 @@ interface ComponentProps {
 
 export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 
+/**
+ * The `RadioGroup` component is a component for rendering group of radio-buttons.
+ *
+ * @extends React.Component
+ *
+ * @property {React.ReactElement<RadioProps>[]} children - Determines radio buttons in group. Can be passed through jsx.
+ *
+ * @property {number} selectedIndex - Determines the index of selected button
+ *
+ * @property {(index: number) => void} onChange - Triggered on onChange event.
+ *
+ * @property ViewProps
+ *
+ * @property StyledComponentProps
+ *
+ * @example RadioGroup API and usage example
+ *
+ * ```
+ * import { Radio, RadioGroup } from '@kitten/ui';
+ *
+ * public state: State = {
+ *   selectedIndexGroup: 0,
+ * };
+ *
+ * private onGroupSelectionChange = (index: number) => {
+ *   this.setState({ selectedIndexGroup: index });
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <RadioGroup
+ *       selectedIndex={this.state.selectedIndexGroup}
+ *       onChange={this.onGroupSelectionChange}>
+ *       <Radio
+ *         style={styles.radioButton}
+ *         status='danger'
+ *         size='small'
+ *       />
+ *       <Radio
+ *         style={styles.radioButton}
+ *         status='danger'
+ *       />
+ *       <Radio
+ *         style={styles.radioButton}
+ *         status='danger'
+ *         size='large'
+ *       />
+ *     </RadioGroup>
+ *   );
+ * }
+ * ```
+ * */
+
 class RadioGroupComponent extends React.Component<RadioGroupProps> {
 
   static styledComponentName: string = 'RadioGroup';

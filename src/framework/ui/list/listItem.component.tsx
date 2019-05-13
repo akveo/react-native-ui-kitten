@@ -114,6 +114,18 @@ export type ListItemProps = StyledComponentProps & TouchableIndexedProps & Compo
  *    );
  *  };
  * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * <ListItem
+ *   title={`${item.title} ${index + 1}`}
+ *   description={item.description}
+ *   style={styles.listItem}
+ *   titleStyle={styles.listItemTitle}
+ *   descriptionStyle={styles.listItemDescription}
+ * />
+ * ```
  * */
 
 export class ListItemComponent extends React.Component<ListItemProps> {

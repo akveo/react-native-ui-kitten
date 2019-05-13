@@ -60,7 +60,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
- * @property {string | Placement} placement - Determines the placement of the popover.
+ * @property {string | PopoverPlacement} placement - Determines the placement of the tooltip.
  * Can be 'left' | 'top' | 'right' | 'bottom' | 'left start' | 'left end' | 'top start' | 'top end' | 'right start' |
  * 'right end' | 'bottom start' | 'bottom end'.
  * By default placement is 'top'.
@@ -73,7 +73,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *
  * @property StyledComponentProps
  *
- * @example Tooltip usage API example
+ * @example Tooltip usage and API example
  *
  * ```
  * import {

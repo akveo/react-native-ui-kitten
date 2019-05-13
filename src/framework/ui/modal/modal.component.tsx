@@ -56,9 +56,9 @@ export type ModalProps = ViewProps & ComponentProps;
  * @property {ModalAnimationType} animationType - Controls how the modal showing animates.
  * Can be 'slideInUp' | 'fade' | 'none'. By default is 'none'.
  *
- * @property ViewProps
- *
  * @property {number} animationDuration - Time of the animation duration.
+ *
+ * @property ViewProps
  *
  * @example Simple usage example
  *
@@ -68,7 +68,7 @@ export type ModalProps = ViewProps & ComponentProps;
  *  <View><Text>Hello! I'm modal!</Text></View>
  * </Modal>
  * ```
- * @example Modal API example
+ * @example Modal usage and API example
  *
  * ```
  * import { Modal } from '@kitten/ui';
@@ -90,16 +90,16 @@ export type ModalProps = ViewProps & ComponentProps;
  *     <View>
  *       <Button title='Show Modal' onPress={this.setVisible}/>
  *       <Modal
- *        visible={this.state.visible}
- *        animationType='fade'
- *        animationDuration={600}
- *        isBackDropAllowed={true}
- *        onCloseModal={this.onModalDismiss}
- *        onValueChange={this.onChange}>
- *        <View>
- *          <Text>Hi! This is modal component!</Test>
- *          <Button title='Close Modal' onPress={this.setVisible}/>
- *        <View/>
+ *         visible={this.state.visible}
+ *         animationType='fade'
+ *         animationDuration={600}
+ *         isBackDropAllowed={true}
+ *         onCloseModal={this.onModalDismiss}
+ *         onValueChange={this.onChange}>
+ *         <View>
+ *           <Text>Hi! This is modal component!</Test>
+ *           <Button title='Close Modal' onPress={this.setVisible}/>
+ *         <View/>
  *       </Modal>
  *     </View>
  *   )

@@ -61,7 +61,18 @@ export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentP
  *
  * @property StyledComponentProps
  *
- * @example Tab usage and API example
+ * @example Tab simple usage example
+ *
+ * ```
+ * import { Tab } from '@kitten/ui';
+ *
+ * <Tab
+ *   title='Tab'
+ *   selected={false}
+ * />
+ * ```
+ *
+ * @example Inline styling and API example
  *
  * ```
  * import { Tab } from '@kitten/ui';

@@ -57,39 +57,76 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
  * @property {string | TopNavigationAlignment} alignment - Determines the appearance of the component.
  * Can be 'default' | 'titleCentered'. By default appearance is 'default'.
  *
- * @property {React.ReactElement<ActionProps>} leftControl - Determines the left control
+ * @property {React.ReactElement<TopNavigationActionProps>} leftControl - Determines the left control
  * of the component.
  *
- * @property {React.ReactElement<ActionProps>[]} rightControls - Determines the right controls
+ * @property {React.ReactElement<TopNavigationActionProps>[]} rightControls - Determines the right controls
  * of the component.
  *
  * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title
  *
- * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of title
+ * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of subtitle
  *
  * @property ViewProps
  *
  * @property StyledComponentProps
  *
- * @example TopNavigationBar usage example
+ * @example TopNavigationBar usage and API example
+ *
+ * ```
+ * import {
+ *   TopNavigation,
+ *   TopNavigationAction,
+ *   TopNavigationActionProps,
+ * } from '@kitten/ui';
+ *
+ * private renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
+ *   return (
+ *     <TopNavigationBarAction
+ *       icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
+ *       onPress={() => {...}
+ *     />
+ *   );
+ * };
+ *
+ * private renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {
+ *   return ([
+ *     <TopNavigationBarAction
+ *       icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}
+ *       onPress={() => {...}}
+ *     />,
+ *     <TopNavigationBarAction
+ *       icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={style}/>}
+ *       onPress={() => {...}}
+ *     />
+ *   ]);
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <TopNavigationBarComponent
+ *       appearance='titleCentered'
+ *       title='Top Navigation Bar'
+ *       subtitle='Subtitle'
+ *       leftControl={this.renderLeftControl()}
+ *       rightControls={this.renderRightControls()}
+ *     />
+ *   );
+ * }
+ * ```
+ *
+ * @example Inline styling example
  *
  * ```
  * <TopNavigationBarComponent
  *   appearance='titleCentered'
  *   title='Top Navigation Bar'
  *   subtitle='Subtitle'
- *   leftControl={
- *                 <TopNavigationBarAction
- *                   icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
- *                   onPress={() => {...}/>
- *               }
- *   rightControls={[
- *            <TopNavigationBarAction
- *              icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}
- *              onPress={() => {...}}/>,
- *            <TopNavigationBarAction
- *              icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={style}/>}
- *              onPress={() => Alert.alert('On second right action')}/>]}/>
+ *   titleStyle={styles.title}
+ *   subtitleStyle={styles.subtitle}
+ *   leftControl={this.renderLeftControl()}
+ *   rightControls={this.renderRightControls()}
+ * />
  * ```
  * */
 

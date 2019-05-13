@@ -42,12 +42,12 @@ export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
  *
  * @property StyledComponentProps
  *
- * @example Avatar API example
+ * @example Avatar API and usage example
  *
  * ```
  * import {
- *  Avatar,
- *  AvatarProps,
+ *   Avatar,
+ *   AvatarProps,
  * } from '@kitten/ui';
  *
  * public render(): React.ReactElement<AvatarProps> {

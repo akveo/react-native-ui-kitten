@@ -83,7 +83,7 @@ export const ListItemCustomContentShowcase = (props?: ListItemProps): React.Reac
   };
 
   return (
-    <View style={styles.container}>
+    <ListItem style={styles.container}>
       <Image
         style={styles.icon}
         source={{ uri: 'https://akveo.github.io/eva-icons/outline/png/128/play-circle-outline.png' }}
@@ -93,6 +93,6 @@ export const ListItemCustomContentShowcase = (props?: ListItemProps): React.Reac
         <Text style={styles.description}>Guns N'Roses</Text>
       </View>
       <Button style={styles.button} status='success'>$2.99</Button>
-    </View>
+    </ListItem>
   );
 };

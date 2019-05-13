@@ -64,10 +64,11 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * ```
  * import { Toggle } from '@kitten/ui';
+ *
  * <Toggle value={true}/>
  * ```
  *
- * @example
+ * @example Toggle usage and API example
  *
  * ```
  * import { Toggle } from '@kitten/ui';
@@ -86,7 +87,8 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
  *       value={this.state.toggled}
  *       size='small'
  *       status='danger'
- *       onValueChange={this.onChange}/>
+ *       onValueChange={this.onChange}
+ *     />
  *   )
  * }
  * ```

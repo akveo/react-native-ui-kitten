@@ -42,7 +42,7 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
  *
  * @property StyledComponentProps
  *
- * @example With ListItem Example
+ * @example With ListItem example
  *
  * ```
  * import {
@@ -83,15 +83,15 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
  *  }
  * ```
  *
- * @example With Custom List Item Example
+ * @example With custom list item example
  *
  * ```
- * import { List } from '@kitten/ui';
+ * import { List, ListItem } from '@kitten/ui';
  *
  * private renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
  *
  *    return (
- *      <View style={styles.container}>
+ *      <ListItem style={styles.container}>
  *        <Image
  *          style={styles.icon}
  *          source={{ uri: 'https://akveo.github.io/eva-icons/outline/png/128/play-circle-outline.png' }}
@@ -101,9 +101,9 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
  *          <Text style={styles.description}>Guns N'Roses</Text>
  *        </View>
  *        <Button style={styles.button} status='success'>$2.99</Button>
- *      </View>
+ *      </ListItem>
  *    );
- *  };
+ * };
  *
  * public render(): React.ReactNode {
  *    return (
@@ -112,7 +112,7 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
  *        renderItem={this.renderItem}
  *      />
  *    );
- *  }
+ * }
  * ```
  * */
 
