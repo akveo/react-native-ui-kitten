@@ -8,9 +8,9 @@ import React from 'react';
 import merge from 'lodash.merge';
 import { SchemaProcessor } from '@eva/processor-kitten';
 import {
-  ThemeStyleType,
-  SchemaType,
   CustomSchemaType,
+  SchemaType,
+  ThemeStyleType,
 } from '@eva/core';
 import { StyleProvider } from '../style/styleProvider.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
@@ -28,6 +28,52 @@ interface State {
   styles: ThemeStyleType;
   theme: ThemeType;
 }
+
+/**
+ * The `ApplicationProvider` component is designed to be a root of the application.
+ *
+ * This does basically two things:
+ * - Provides styles for react-native-ui-kitten basic components (e.g `Button`);
+ * - Renders modal window which is used to be common for all elements presented as modal;
+ *
+ * @extends React.Component
+ *
+ * @property {SchemaType} mapping - Determines the mapping for basic components.
+ * This is designed to be provided by developers team and can be imported from npm package (e.g `@eva/eva`).
+ *
+ * @property {CustomSchemaType} customMapping - Determines the customization mapping.
+ * This is merged with `mapping` property and designed to be used components customization.
+ * Optional.
+ *
+ * @property {ThemeType} theme - Determines the theme for basic components.
+ * This is designed to be provided by developers team and can be imported from npm package (e.v `@eva/theme-eva`).
+ *
+ * @property {React.ReactNode} children - Determines application root component.
+ *
+ * @property ThemeProviderProps
+ *
+ * @example ApplicationProvider API example
+ *
+ * ```
+ * import { mapping } from '@eva/eva';
+ * import { theme } from '@eva/theme-eva';
+ * import { ApplicationProvider } from '@kitten/theme';
+ * import { Application } from './path-to/root.component';
+ *
+ * export default class App extends React.Component {
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <ApplicationProvider
+ *         mapping={mapping}
+ *         theme={theme}>
+ *         <Application/>
+ *       </ApplicationProvider>
+ *     );
+ *   }
+ * }
+ * ```
+ */
 
 export class ApplicationProvider extends React.Component<ApplicationProviderProps, State> {
 
