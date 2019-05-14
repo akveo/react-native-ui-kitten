@@ -5,12 +5,73 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'What is Kitten?',
+        name: 'What is React Native UI Kitten?',
         children: [
           {
             type: 'block',
             block: 'markdown',
             source: 'index.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Where to start?',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'start.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Guides',
+    children: [
+      {
+        type: 'page',
+        name: 'Add into existing project',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'install-into-existing.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Theme System',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'theme-system.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Creating Styled Components',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'theme-using-mapping.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Creating Themed Components',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'theme-using-variables.md',
           },
         ],
       },

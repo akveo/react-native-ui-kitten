@@ -2,9 +2,11 @@
 
 React Native UI Kitten allows you using theme you have provided in application root. This allows you easily create themed components.
 
-As a first step, you need to declare your custom component.
+<hr>
 
-### Declare custom component
+### Declare Custom Component
+
+As a first step, you need to declare your custom component.
 
 ```tsx
 import React from 'react';
@@ -41,7 +43,9 @@ export const AwesomeComponent = withStyles(ThemedAwesomeComponent, (theme: Theme
 
 That's it! Now you're done and able to use your themed component.
 
-### Themed component usage
+<hr>
+
+### Themed Component Usage
 
 ```tsx
 import React from 'react';

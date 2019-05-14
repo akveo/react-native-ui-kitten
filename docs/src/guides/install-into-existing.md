@@ -2,6 +2,7 @@
 
 If you don't have any code yet, please consider checking <a href="https://facebook.github.io/react-native/docs/getting-started" target="_blank">React Native Getting Started</a> documentation for help creating your app.
 
+<hr>
 
 ### Installation
 
@@ -10,6 +11,7 @@ We recommend to develop React Native with expo-cli, you can install it with the 
 ```bash
 npm i -g expo-cli
 ```
+
 <hr>
 
 ### Create a New Project
@@ -27,13 +29,16 @@ expo init PROJECT-NAME
 npm i react-native-ui-kitten
 ```
 
+<hr>
+
 ### Install Eva Design System and theme
 
 ```bash
 npm i @eva/eva @eva/theme-eva
 ```
 
-That's it. React Native UI Kitten has to be ready to go now.
+That's it! React Native UI Kitten has to be ready to go now.
+
 <hr>
 
 ### Configure Application Root
@@ -60,12 +65,14 @@ export default class App extends React.Component {
 }
 ```
 
+<hr>
+
 ### Configure Application Routing
 
 We assume you have some navigation between screens in your application.
 React Native UI Kitten has some components to support it.
 
-Let's try configure basic routes with React Native UI Kitten TopNavigation component and <a href="https://reactnavigation.org/" target="_blank">React Navigation</a>
+Let's try configure basic routes with React Native UI Kitten TopNavigation component and <a href="https://reactnavigation.org/" target="_blank">React Navigation</a>.
 
 ```tsx
 import React from 'react';
@@ -128,6 +135,8 @@ const AppNavigator: NavigationContainer = createStackNavigator({
 export const Application: NavigationContainer = createAppContainer(AppNavigator);
 
 ```
+
+<hr>
 
 ## Related Articles
 - [Top Navigation](docs/components/top-navigation)

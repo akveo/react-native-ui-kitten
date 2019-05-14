@@ -1,10 +1,12 @@
-# Creating styled components
+# Creating Styled Components
 
 React Native UI Kitten allows you creating your own components powered by Eva Design System. This helps you to have less *StyleSheet*-based styles and keeps your React components more clean and organized.
 
-As a first step, you need to declare your custom component.
+<hr>
 
-### Declare custom component
+### Declare Custom Component
+
+As a first step, you need to declare your custom component.
 
 ```tsx
 import React from 'react';
@@ -58,10 +60,12 @@ class StyledAwesomeComponent extends React.Component<AwesomeComponentProps> {
 export const AwesomeComponent = styled(StyledAwesomeComponent);
 ```
 
+<hr>
+
+### Declare Custom Mappings
+
 Now you have your own styled component that can use all of the Eva Design System power. 
 The next step would be to let Eva know about your component.
-
-### Declare custom mappings
 
 ```json
 {
@@ -105,13 +109,15 @@ The next step would be to let Eva know about your component.
 }
 ```
 
+<hr>
+
+### Provide Custom Mappings
+
 The code above presents your custom mapping configuration JSON.
 It says you have AwesomeComponent which can be styled with `backgroundColor`.
 The `backgroundColor` is `red` by default. But when your component becomes `active`, it would be changed to `pink`.
 
 All that you have to do is to provide a custom mapping to ApplicationProvider.
-
-### Provide custom mappings
 
 ```tsx
 import React from 'react';
@@ -141,7 +147,9 @@ export default class App extends React.Component<ApplicationProviderProps> {
 
 That's it! Now you're done and able to use your styled component.
 
-### Styled component usage
+<hr>
+
+### Styled Component Usage
 
 ```tsx
 import React from 'react';

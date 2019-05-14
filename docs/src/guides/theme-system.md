@@ -11,13 +11,16 @@ There are two main configuration files needed to style your app:
 
 Both of them are presented as JSON maps and distributed as separated `npm` packages.
 We don't provide styling configuration files out of the box to let you choose a set of style rules yourself.
+
 <hr>
 
-### Theme System installation
+### Theme System Installation
 
 ```bash
 npm i @eva/eva @eva/theme-eva
 ```
+
+<hr>
 
 ### Applying Theme System
 
@@ -41,7 +44,9 @@ export default class App extends React.Component {
 }
 ```
 
-## Theme Configuration File
+<hr>
+
+## Theme Configuration
 
 Each theme is represented as a JSON map with a list of key-value pairs.
 
@@ -63,6 +68,8 @@ Each theme is represented as a JSON map with a list of key-value pairs.
 }
 ```
 Where *key* - is a variable name, and *value* - is a raw style value (color, string, etc).
+
+<hr>
 
 ## Mapping Configuration
 
@@ -186,6 +193,10 @@ Let's take a look at how Avatar component is configured.
   
   The `tiny` key in `variantGroups` meta means that component has `tiny` size, and is configured to contain special `width` and `height` style variables.
   
+<hr>
+  
+# Configuring Components
+  
 Let's assume we need to render `tiny` Avatar component. With React Native UI Kitten it could be done with the following code:
 
 ```tsx
@@ -204,6 +215,8 @@ export const TinyAvatar = (props?: AvatarProps): React.ReactElement<AvatarProps>
 ```
 
 That's it! All the magic is done by React Native UI Kitten style system and we don't have to inline some styles to achieve this.
+
+<hr>
 
 ## Related Articles
 
