@@ -31,22 +31,7 @@ export class NgdOverviewBlockComponent {
 
   @Input('source')
   set setSource(source: any) {
-    this.source = this.prepareDescription(source);
+    this.source = source;
   }
 
-  private prepareDescription(source: any): any {
-    const description: string = source.description;
-    source.description = description
-      .replace(/./g, (character: string, index: number) => {
-        if (index === description.indexOf('`')) {
-          return '<code>';
-        } else if (index === description.lastIndexOf('`')) {
-          return '</code>';
-        } else {
-          return character;
-
-        }
-      });
-    return source;
-  }
 }

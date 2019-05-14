@@ -43,17 +43,19 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *
  * To be styled, source component class should have static `styledComponentName` property which defines
  * corresponding component name in `mapping`. (e.g 'Button' for `Button` class).
- *
- * Passes following props to `Component` when it is rendered:
+ * Returns `StyledComponentClass` - component class which can be used as styled component.
  *
  * @property {string} appearance - Determines style appearance of component. Default is provided by mapping.
+ *
  * @property {ThemeType} theme - Determines theme used to style component.
+ *
  * @property {StyleType} themedStyle - Determines component style for it's current state.
+ *
  * @property {(interaction: Interaction[]) => void} - Determines function
  * for dispatching current state of component. This is designed to be used as style request function.
  * Calls component re-render if style for requested state differ from current.
  *
- * @param {React.ComponentClass} Component - Determines class of component to be styled.
+ * @param Component - Type: {React.ComponentClass}. Determines class of component to be styled.
  *
  * @example Declaring Styled Component
  *
@@ -115,8 +117,8 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *
  * ```
  * import {
- *  StyledButton,
- *  StyledButtonProps,
+ *   StyledButton,
+ *   StyledButtonProps,
  * } from './path-to/styledButton.component';
  *
  * public render(): React.ReactElement<StyledButtonProps> {
@@ -125,8 +127,6 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *   );
  * }
  * ```
- *
- * @returns {StyledComponentClass} - component class which can be used as styled component
  */
 export const styled = <P extends object>(Component: React.ComponentClass<P>): StyledComponentClass<P> => {
 

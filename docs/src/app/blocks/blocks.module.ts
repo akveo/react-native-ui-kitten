@@ -31,6 +31,7 @@ import {
   NgdPagerBlockComponent,
   NgdComponentsOverviewBlockComponent,
   NgdTypesBlockComponent,
+  NgdHocParamsBlockComponent,
 } from './components/';
 
 const blocks = [
@@ -55,6 +56,7 @@ const blocks = [
   NgdPagerBlockComponent,
   NgdComponentsOverviewBlockComponent,
   NgdTypesBlockComponent,
+  NgdHocParamsBlockComponent,
 ];
 
 @NgModule({

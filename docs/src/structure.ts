@@ -32,6 +32,34 @@ export const structure = [
       },
       {
         type: 'group',
+        name: 'Styling & Theming',
+      },
+      {
+        type: 'tabs',
+        name: 'ApplicationProvider',
+        icon: 'layout.svg',
+        source: [
+          'ApplicationProvider',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'styled',
+        icon: 'layout.svg',
+        source: [
+          'styled',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'withStyles',
+        icon: 'layout.svg',
+        source: [
+          'withStyles',
+        ],
+      },
+      {
+        type: 'group',
         name: 'Global',
       },
       {

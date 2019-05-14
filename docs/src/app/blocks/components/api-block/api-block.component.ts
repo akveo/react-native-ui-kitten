@@ -20,6 +20,7 @@ import { NgdTabbedService } from '../../../@theme/services';
         <ngd-types-block [source]="source" *ngIf="hasTypes(source)"></ngd-types-block>
         <ngd-props-block [source]="source" *ngIf="hasProps(source)"></ngd-props-block>
         <ngd-methods-block [source]="source" *ngIf="hasMethods(source)"></ngd-methods-block>
+        <ngd-hoc-params-block [source]="source" *ngIf="hasParams(source)"></ngd-hoc-params-block>
       </nb-card-body>
     </nb-card>
   `,
@@ -43,5 +44,9 @@ export class NgdApiBlockComponent {
 
   hasTypes(component): boolean {
     return this.tabbedService.componentHasTypes(component);
+  }
+
+  hasParams(component: any): boolean {
+    return this.tabbedService.componentHasParams(component);
   }
 }
