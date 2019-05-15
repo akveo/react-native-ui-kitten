@@ -60,14 +60,15 @@ export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityPr
  *
  * @example Simple usage example
  *
- * ```tsx
+ * ```
  * import { BottomNavigatorTab } from '@kitten/ui';
+ *
  * <BottomNavigatorTab selected={true}/>
  * ```
  *
- * @example with React Navigation usage example
+ * @example With React Navigation usage and API example
  *
- * ```tsx
+ * ```
  * import { Image } from 'react-native';
  * import {
  *   BottomNavigation,
@@ -91,26 +92,37 @@ export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityPr
  *   tabBarComponent: (props: CommonNavigationProps) => renderBottomNavigation(props),
  * });
  *
- *function renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {
- *  const routes: NavigationRoute[] = props.navigation.state.routes;
- *  const index: number = props.navigation.state.index;
+ * function renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {
+ *   const routes: NavigationRoute[] = props.navigation.state.routes;
+ *   const index: number = props.navigation.state.index;
  *
- *  return (
- *   <BottomNavigation
- *     selectedIndex={index}
- *     onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>
- *     <BottomNavigationTab
- *       title='Screen 1'
- *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *     <BottomNavigationTab
- *       title='Screen 2'
- *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *     <BottomNavigationTab
- *       title='Screen 3'
- *       icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *    </BottomNavigation>
- *  );
+ *   return (
+ *     <BottomNavigation
+ *       selectedIndex={index}
+ *       onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>
+ *       <BottomNavigationTab
+ *         title='Screen 1'
+ *         icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *       <BottomNavigationTab
+ *         title='Screen 2'
+ *         icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *       <BottomNavigationTab
+ *         title='Screen 3'
+ *         icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
+ *     </BottomNavigation>
+ *   );
  * }
+ * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * <BottomNavigationTab
+ *   title='Screen 3'
+ *   style={styles.tab}
+ *   titleStyle={styles.tabTitle}
+ *   icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}
+ * />
  * ```
  * */
 

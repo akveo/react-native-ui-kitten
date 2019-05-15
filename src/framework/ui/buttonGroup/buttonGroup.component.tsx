@@ -48,14 +48,13 @@ export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps
  * @property {React.ReactElement<ButtonProps>[]} children - Determines buttons in group. Can be passed through jsx.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be 'filled' | 'outline'.
- * By default appearance is 'filled'.
+ * Can be 'filled' | 'outline'. By default appearance is 'filled'.
  *
  * @property ViewProps
  *
  * @property StyledComponentProps
  *
- * @example ButtonGroup API example
+ * @example ButtonGroup API and usage example
  *
  * ```
  * import { Button, ButtonGroup } from '@kitten/ui';
@@ -67,9 +66,9 @@ export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps
  *       appearance='filled'
  *       status='danger'
  *       size='large'>
- *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>L</Button>
- *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>M</Button>
- *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>R</Button>
+ *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>Left</Button>
+ *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>Mid</Button>
+ *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>Right</Button>
  *     </ButtonGroup>
  *   );
  * }

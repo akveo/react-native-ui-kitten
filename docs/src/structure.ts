@@ -75,6 +75,17 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Theme Switching',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'theme-switching.md',
+          },
+        ],
+      },
     ],
   },
   {
@@ -89,6 +100,34 @@ export const structure = [
             type: 'block',
             block: 'components-overview',
           },
+        ],
+      },
+      {
+        type: 'group',
+        name: 'Styling & Theming',
+      },
+      {
+        type: 'tabs',
+        name: 'ApplicationProvider',
+        icon: 'layout.svg',
+        source: [
+          'ApplicationProvider',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'styled',
+        icon: 'layout.svg',
+        source: [
+          'styled',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'withStyles',
+        icon: 'layout.svg',
+        source: [
+          'withStyles',
         ],
       },
       {
@@ -169,6 +208,14 @@ export const structure = [
         icon: 'radio.svg',
         source: [
           'Radio',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'RadioGroup',
+        icon: 'radio.svg',
+        source: [
+          'RadioGroup',
         ],
       },
       {

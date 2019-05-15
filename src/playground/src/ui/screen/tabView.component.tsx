@@ -44,11 +44,16 @@ class TabViewScreen extends React.Component<Props, State> {
     );
   };
 
+  private shouldLoadTabContent = (index: number): boolean => {
+    return index === this.state.selectedIndex;
+  };
+
   public render(): React.ReactNode {
     return (
       <TabView
         style={this.props.themedStyle.container}
         selectedIndex={this.state.selectedIndex}
+        shouldLoadComponent={this.shouldLoadTabContent}
         onSelect={this.onSelect}>
         <Tab
           title='TAB 1'

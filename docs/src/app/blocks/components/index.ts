@@ -19,3 +19,4 @@ export * from './examples-block/examples-block.component';
 export * from './pager-block/pager-block.component';
 export * from './components-overview-block/components-overview-block.component';
 export * from './types-block/types-block.component';
+export * from './hoc-params-block/hoc-params-block.component';

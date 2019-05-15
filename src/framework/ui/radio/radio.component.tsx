@@ -61,7 +61,7 @@ export type RadioProps = StyledComponentProps & TouchableOpacityProps & Componen
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
- * @property {(selected: boolean) => void} onChange - Triggered on change value.
+ * @property {(selected: boolean) => void} onChange - Triggered on onChange value.
  *
  * @property TouchableOpacityProps
  *
@@ -69,13 +69,14 @@ export type RadioProps = StyledComponentProps & TouchableOpacityProps & Componen
  *
  * @example Simple usage example
  *
- * ```tsx
+ * ```
  * import { Radio } from '@kitten/ui';
+ *
  * <Radio checked={true}/>
  * ```
- * @example Radio API example
+ * @example Radio usage and API example
  *
- * ```tsx
+ * ```
  * import { Radio } from '@kitten/ui';
  *
  * state: State = {
@@ -94,9 +95,20 @@ export type RadioProps = StyledComponentProps & TouchableOpacityProps & Componen
  *       status='warning'
  *       text='Place your text'
  *       textStyle={styles.radioText}
- *       onChange={this.onChange}/>
+ *       onChange={this.onChange}
+ *     />
  *   )
  * }
+ * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * <Radio
+ *   checked={true}
+ *   text='Place your text'
+ *   textStyle={styles.radioText}
+ * />
  * ```
  * */
 

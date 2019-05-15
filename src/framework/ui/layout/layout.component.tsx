@@ -36,7 +36,7 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * @property StyledComponentProps
  *
- * @example Layout API example
+ * @example Layout usage and API example
  *
  * ```
  * import {
@@ -46,7 +46,7 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * public render(): React.ReactNode {
  *   return (
- *     <Layout style={this.props.themedStyle.layout}>
+ *     <Layout style={styles.layout}>
  *       <Text>Layout</Text>
  *     </Layout>
  *   );

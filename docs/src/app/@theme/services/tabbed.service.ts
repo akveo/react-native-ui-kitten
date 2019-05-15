@@ -45,6 +45,10 @@ export class NgdTabbedService {
     return component.types && component.types.length > 0;
   }
 
+  componentHasParams(component: any): boolean {
+    return component.params && component.params.length > 0;
+  }
+
   componentHasMethods(component): boolean {
     return component &&
       component.methods &&

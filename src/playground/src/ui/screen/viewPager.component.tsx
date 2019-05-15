@@ -28,7 +28,11 @@ class ViewPagerScreen extends React.Component<Props, State> {
   };
 
   private onIndexChange = (index: number) => {
-    this.state.selectedIndex = index;
+    this.setState({ selectedIndex: index });
+  };
+
+  private shouldLoadPageContent = (index: number): boolean => {
+    return index === this.state.selectedIndex;
   };
 
   public render(): React.ReactNode {
@@ -36,6 +40,7 @@ class ViewPagerScreen extends React.Component<Props, State> {
       <ViewPager
         selectedIndex={this.state.selectedIndex}
         contentContainerStyle={this.props.themedStyle.container}
+        shouldLoadComponent={this.shouldLoadPageContent}
         onSelect={this.onIndexChange}>
         <View style={this.props.themedStyle.tabContainer}>
           <Text>Tab 1</Text>

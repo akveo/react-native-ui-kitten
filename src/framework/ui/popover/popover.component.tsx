@@ -67,7 +67,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
- * @property {string | Placement} placement - Determines the placement of the popover.
+ * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
  * Can be 'left' | 'top' | 'right' | 'bottom' | 'left start' | 'left end' | 'top start' | 'top end' | 'right start' |
  * 'right end' | 'bottom start' | 'bottom end'.
  * By default placement is 'top'.
@@ -80,7 +80,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @property StyledComponentProps
  *
- * @example Popover usage API example
+ * @example Popover usage and API example
  *
  * ```
  * import {

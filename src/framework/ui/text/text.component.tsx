@@ -51,10 +51,11 @@ export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
  *
  * ```
  * import { Text } from '@kitten/ui';
+ *
  * <Text>Test Text</Text>
  * ```
  *
- * @example Text API example
+ * @example Text usage and API example
  *
  * ```
  * import { Text } from '@kitten/ui';

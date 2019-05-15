@@ -86,10 +86,11 @@ export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
  *
  * ```
  * import { Input } from '@kitten/ui';
+ *
  * <Input/>
  * ```
  *
- * @example Input API example
+ * @example Input usage and API example
  *
  * ```
  * import { Input } from '@kitten/ui';
@@ -126,6 +127,20 @@ export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
  *     />
  *   );
  * }
+ * ```
+ *
+ * @example Inline styling example
+ *
+ * ```
+ * <Input
+ *   style={styles.input}
+ *   placeholder='Placeholder'
+ *   label='Label'
+ *   caption='Caption'
+ *   textStyle={styles.inputText}
+ *   labelStyle={styles.inputLabel}
+ *   captionStyle={styles.inputCaption}
+ * />
  * ```
  * */
 
