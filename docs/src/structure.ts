@@ -75,6 +75,17 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Theme Switching',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'theme-switching.md',
+          },
+        ],
+      },
     ],
   },
   {
