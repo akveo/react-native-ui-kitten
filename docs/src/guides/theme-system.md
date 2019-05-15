@@ -67,27 +67,26 @@ Each theme is represented as a JSON map with a list of key-value pairs.
   "opacity-transparent": "transparent"
 }
 ```
-Where *key* - is a variable name, and *value* - is a raw style value (color, string, etc).
+Where **key** - is a variable name, and **value** - is a raw style value (color, string, etc).
 
 <hr>
 
 ## Mapping Configuration
 
-Then, for each React Native UI Kitten component, there is a single configuration file we call *mapping*. It presents a JSON map strictly structured by Eva Configuration Schema.
+Then, for each React Native UI Kitten component, there is a single configuration file we call **mapping**. It presents a JSON map strictly structured by Eva Configuration Schema.
 
-
-Let's take a look at how Avatar component is configured.
+Let's say we have the following mapping configuration for `Button` component.
 
 ```json
 {
-  "Avatar": {
+  "Button": {
     "meta": {
-      "scope": "all",
+      "scope": "mobile",
       "parameters": {
-        "roundCoefficient": {
+        "backgroundColor": {
           "type": "number"
         },
-        "width": {
+        "borderRadius": {
           "type": "number"
         },
         "height": {
@@ -95,80 +94,56 @@ Let's take a look at how Avatar component is configured.
         }
       },
       "appearances": {
-        "default": {
+        "rounded": {
           "default": true
+        },
+        "square": {
+          "default": false
         }
       },
       "variantGroups": {
-        "shape": {
-          "round": {
-            "default": true
-          },
-          "rounded": {
-            "default": false
-          },
-          "square": {
-            "default": false
-          }
-        },
         "size": {
-          "tiny": {
-            "default": false
-          },
-          "small": {
-            "default": false
-          },
           "medium": {
             "default": true
           },
           "large": {
             "default": false
-          },
-          "giant": {
-            "default": false
           }
         }
       },
-      "states": {}
+      "states": {
+        "active": {
+          "default": false,
+          "priority": 0,
+          "scope": "mobile"
+        }
+      }
     },
     "appearances": {
-      "default": {
+      "rounded": {
         "mapping": {
+          "borderRadius": 8,
+          "backgroundColor": "red",
+          "state": {
+            "active": {
+              "backgroundColor": "pink"
+            }
+          }
         },
         "variantGroups": {
-          "shape": {
-            "round": {
-              "roundCoefficient": 0.5
-            },
-            "rounded": {
-              "roundCoefficient": 0.3
-            },
-            "square": {
-              "roundCoefficient": 0.0
-            }
-          },
           "size": {
-            "tiny": {
-              "width": 24,
-              "height": 24
-            },
-            "small": {
-              "width": 32,
-              "height": 32
-            },
             "medium": {
-              "width": 40,
               "height": 40
             },
             "large": {
-              "width": 48,
               "height": 48
-            },
-            "giant": {
-              "width": 56,
-              "height": 56
             }
           }
+        }
+      },
+      "square": {
+        "mapping": {
+          "borderRadius": 0
         }
       }
     }
@@ -176,28 +151,62 @@ Let's take a look at how Avatar component is configured.
 }
 ```
 
-* The `meta` key contains meta-information about component itself:
-  * The `scope` key describes where a component can be used (`web`, `mobile` or `all`)
-  
-  * The `parameters` key describes what component style keys are provided by Eva Design System and applied to a component. These keys regularly have the same names as CSS style variables, but sometimes we have exceptions (e.g `roundCoefficient`)
-  
-  * The `appearances` key describes a list of component *appearances* that could be applied to a component. *Appearance* itself is a set of *mappings* that define at the high-level view of related component: it's size, shape and main colors. Each *appearance* could be configured to be used by default with `default` key.
-  
-  * The `variantGroups` key describes a list of *variants* that could be applied to component (e.g `size`). *Variant* itself is a set of *mappings* that define component's appearance. Variants are combined into `variantGroups` key by the logic of how they affect controls appearance (e.g `shape` or `size`). Each *variant* could be configured to be used by default with `default` key.
-  
-  * The `state` key describes a list of states in which component could be displayed (e.g `active`, `checked`, `disabled`). *State* itself defines how control looks like, depending on the actions that are made with it. Each *state* could be configured to be used by default with `default` key.
-  
-* The `appearances` key describes the *mapping* process for each *appearance* and *variant* supported by the component.
+<hr>
 
-  The `default` key in `appearances` meta means that component has `default` appearance, so we need to configure it. `Avatar` itself has no special high-level configuration, so we leave it empty.
+### Mapping Configuration Glossary
+
+Before you think what's is going on in the code above, let's go through some terminology:
+
+* **Meta**
+
+  Defines meta-information about the component itself. It describes the platforms component is distributed, style parameters provided by Eva Design System and it's pre-defined properties.
   
-  The `tiny` key in `variantGroups` meta means that component has `tiny` size, and is configured to contain special `width` and `height` style variables.
+    <div class="note note-warning">
+      <div class="note-title">**IMPORTANT**</div>
+      <div class="note-body">
+      Any **appearance**, **variant**, **state** or **parameter** that is not defined in meta will not be applied to component.
+      </div>
+    </div>
+
+  
+* **Scope** 
+  
+  Defines where a component can be used (`web`, `mobile` or `all`).
+  
+  <div class="note note-warning">
+    <div class="note-title">**IMPORTANT**</div>
+    <div class="note-body">
+    The **all** and **web** scopes do not mean component can be used with frameworks like **react-native-web**. This only means Eva Design System provides the same style configuration for component for both **React Native UI Kitten** and <a href="https://akveo.github.io/nebular/" target="_blank">**Nebular**</a> frameworks.
+    </div>
+  </div>
+  
+* **Parameters**  
+
+  Defines a set of style variables provided by Eva Design System.
+  
+* **Appearances**
+ 
+  Defines a list of component **appearances** that could be applied to a component.
+  
+  **Appearance** itself is a set of parameters that define at the high-level view of component: it's size, shape and main colors.
+  
+* **Variant Groups** 
+
+  Defines a list of **variants** that could be applied to a component.
+   
+  **Variant** itself is a set of parameters that define a view of the component.
+  Variants are combined into groups by the logic of how they affect controls appearance (e.g `shape` or `size`).
+  
+* **States**
+
+  Defines a list of **states** in which component could be displayed (e.g `active`, `checked`, `disabled`).
+  **State** itself defines how the control looks like, depending on the user actions that are made with it. Each state could be configured to be used by default with `default` key.
   
 <hr>
-  
+
 # Configuring Components
   
-Let's assume we need to render `tiny` Avatar component. With React Native UI Kitten it could be done with the following code:
+Let's assume we need to render a `tiny` Avatar component. With React Native UI Kitten it could be done with the following code:
 
 ```tsx
 import React from 'react';
@@ -220,5 +229,5 @@ That's it! All the magic is done by React Native UI Kitten style system and we d
 
 ## Related Articles
 
-- [Creating Custom Styled Components](docs/guides/theme-using-mapping)
-- [Using theme inside Custom Components](docs/guides/theme-using-variables)
+- [Creating Custom Styled Components](docs/guides/creating-styled-components)
+- [Using theme inside Custom Components](docs/guides/creating-themed-components)

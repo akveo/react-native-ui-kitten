@@ -1,6 +1,6 @@
 # Creating Styled Components
 
-React Native UI Kitten allows you creating your own components powered by Eva Design System. This helps you to have less *StyleSheet*-based styles and keeps your React components more clean and organized.
+React Native UI Kitten allows you creating your own components powered by Eva Design System. This helps you to have less StyleSheet-based styles and keeps your React components more clean and organized.
 
 <hr>
 
@@ -162,3 +162,10 @@ export const AwesomeComponentShowcase = (props?: AwesomeComponentProps): React.R
   <AwesomeComponent {...props}/>
 );
 ```
+
+<hr>
+
+## Related Articles
+
+- [React Native UI Kitten Theme System](docs/guides/theme-system)
+
