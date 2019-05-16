@@ -217,6 +217,8 @@ export const styled = <P extends object>(Component: React.ComponentClass<P>): St
   const ResultComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
 
   ResultComponent.displayName = Component.displayName || Component.name;
+
+  // @ts-ignore
   hoistNonReactStatics(ResultComponent, Component);
 
   // @ts-ignore
