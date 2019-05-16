@@ -54,7 +54,7 @@ exports[`@radio: matches snapshot default 1`] = `
     }
   }
 >
-  <View
+  <Component
     style={
       Object {
         "alignItems": "center",
@@ -62,7 +62,7 @@ exports[`@radio: matches snapshot default 1`] = `
       }
     }
   >
-    <View
+    <Component
       style={
         Object {
           "backgroundColor": "transparent",
@@ -198,7 +198,7 @@ exports[`@radio: matches snapshot default 1`] = `
         }
       }
     >
-      <View
+      <Component
         style={
           Object {
             "backgroundColor": "transparent",
@@ -209,7 +209,7 @@ exports[`@radio: matches snapshot default 1`] = `
         }
       />
     </TouchableOpacity>
-  </View>
+  </Component>
 </TouchableOpacity>
 `;
 
