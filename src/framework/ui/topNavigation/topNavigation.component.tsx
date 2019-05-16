@@ -11,6 +11,7 @@ import {
   TextStyle,
   View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   styled,
@@ -205,7 +206,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     };
   };
 
-  private renderTextElement = (text: string, style: StyleType): TextElement => {
+  private renderTextElement = (text: string, style: StyleProp<TextStyle>): TextElement => {
     return (
       <Text style={style}>
         {text}
@@ -213,7 +214,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     );
   };
 
-  private renderActionElements(source: ActionElementProp, style: StyleType): ActionElement[] {
+  private renderActionElements(source: ActionElementProp, style: StyleProp<ViewStyle>): ActionElement[] {
     return React.Children.map(source, (element: ActionElement): ActionElement => {
       return React.cloneElement(element, {
         style: [style, element.props.style],
@@ -225,7 +226,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     const { title, subtitle, leftControl, rightControls } = this.props;
 
     return [
-      isValidString('Loh Pidr') && this.renderTextElement(title, style.title),
+      isValidString(title) && this.renderTextElement(title, style.title),
       isValidString(subtitle) && this.renderTextElement(subtitle, style.subtitle),
       leftControl && this.renderActionElements(leftControl, style.action),
       rightControls && this.renderActionElements(rightControls, style.action),
@@ -252,7 +253,8 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
     return (
       <View
-        style={container}>
+        style={container}
+        {...restProps}>
         <View style={leftControlContainer}>
           {leftControlElement}
         </View>
