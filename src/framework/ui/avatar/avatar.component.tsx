@@ -80,8 +80,8 @@ export class AvatarComponent extends React.Component<AvatarProps> {
     const borderRadius: number = roundCoefficient * baseStyle.height;
 
     return {
-      ...baseStyle,
       borderRadius,
+      ...baseStyle,
     };
   };
 
