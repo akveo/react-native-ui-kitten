@@ -1,22 +1,38 @@
 const path = require('path');
 
 const kittenPath = path.resolve('../framework');
-const evaPath = path.resolve(__dirname, '../../../eva/packages');
 
 // FIXME: Resolve `transform[stderr]: Could not resolve` command-line warnings.
 // FIXME: Reproducible when starting with clearing cache (npm start -- -c)
 
-const moduleResolverConfig = {
-  root: path.resolve('./'),
-  alias: {
-    '@kitten/theme': path.resolve(kittenPath, 'theme'),
-    '@kitten/ui': path.resolve(kittenPath, 'ui'),
-    '@eva/eva': path.resolve(evaPath, 'mapping/eva'),
-    '@eva/theme-eva': path.resolve(evaPath, 'theme/eva'),
-  },
+const productionConfig = {
+  mappingPath: path.resolve('./node_modules/@eva/eva'),
+  themePath: path.resolve('./node_modules/@eva/theme-eva'),
 };
 
-module.exports = function(api) {
+const developmentConfig = {
+  mappingPath: path.resolve(__dirname, '../../../eva/packages/mapping/eva'),
+  themePath: path.resolve(__dirname, '../../../eva/packages/theme/eva'),
+};
+
+const environment = {
+  prod: productionConfig,
+  dev: developmentConfig,
+};
+
+function moduleResolverConfig(env) {
+  return {
+    root: path.resolve('./'),
+    alias: {
+      '@kitten/theme': path.resolve(kittenPath, 'theme'),
+      '@kitten/ui': path.resolve(kittenPath, 'ui'),
+      '@eva/eva': path.resolve(env.mappingPath),
+      '@eva/theme-eva': path.resolve(env.themePath),
+    },
+  }
+}
+
+module.exports = function (api) {
   api.cache(true);
 
   const presets = [
@@ -24,7 +40,7 @@ module.exports = function(api) {
   ];
 
   const plugins = [
-    ['module-resolver', moduleResolverConfig],
+    ['module-resolver', moduleResolverConfig(environment.prod)],
   ];
 
   const devPlugins = [

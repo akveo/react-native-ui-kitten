@@ -1,7 +1,31 @@
 const path = require('path');
 
 const kittenPath = path.resolve('../framework');
-const evaPath = path.resolve(__dirname, '../../../eva/packages');
+
+// FIXME: Resolve `transform[stderr]: Could not resolve` command-line warnings.
+// FIXME: Reproducible when starting with clearing cache (npm start -- -c)
+
+const productionConfig = {
+  mappingPath: path.resolve('./node_modules/@eva/eva'),
+  themePath: path.resolve('./node_modules/@eva/theme-eva'),
+};
+
+const developmentConfig = {
+  mappingPath: path.resolve(__dirname, '../../../eva/packages/mapping/eva'),
+  themePath: path.resolve(__dirname, '../../../eva/packages/theme/eva'),
+};
+
+const environment = {
+  prod: productionConfig,
+  dev: developmentConfig,
+};
+
+function envWatchFolders(env) {
+  return [
+    env.mappingPath,
+    env.themePath,
+  ];
+}
 
 module.exports = {
   resolver: {
@@ -21,10 +45,9 @@ module.exports = {
   },
   projectRoot: path.resolve(__dirname),
   watchFolders: [
+    ...envWatchFolders(environment.prod),
     path.resolve(kittenPath, 'ui'),
     path.resolve(kittenPath, 'theme'),
-    path.resolve(evaPath, 'mapping/eva'),
-    path.resolve(evaPath, 'theme/eva'),
 
     // FIXME(playground): unable to resolve
     path.resolve(__dirname, '../../node_modules/@eva/processor-kitten'),
