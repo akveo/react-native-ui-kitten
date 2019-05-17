@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../../../node_modules/@eva/core/schema/schema.json",
   "version": 1.0,
   "components": {
     "Avatar": {

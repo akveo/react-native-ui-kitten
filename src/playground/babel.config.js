@@ -1,6 +1,7 @@
 const path = require('path');
 
-const frameworkModulePath = path.resolve('../framework');
+const kittenPath = path.resolve('../framework');
+const evaPath = path.resolve(__dirname, '../../../eva/packages');
 
 // FIXME: Resolve `transform[stderr]: Could not resolve` command-line warnings.
 // FIXME: Reproducible when starting with clearing cache (npm start -- -c)
@@ -8,8 +9,10 @@ const frameworkModulePath = path.resolve('../framework');
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
-    '@kitten/theme': path.resolve(frameworkModulePath, 'theme'),
-    '@kitten/ui': path.resolve(frameworkModulePath, 'ui'),
+    '@kitten/theme': path.resolve(kittenPath, 'theme'),
+    '@kitten/ui': path.resolve(kittenPath, 'ui'),
+    '@eva/eva': path.resolve(evaPath, 'mapping/eva'),
+    '@eva/theme-eva': path.resolve(evaPath, 'theme/eva'),
   },
 };
 
