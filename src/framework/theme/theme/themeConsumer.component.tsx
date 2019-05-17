@@ -144,6 +144,8 @@ export const withStyles = <P extends object>(Component: React.ComponentClass<P>,
   const ThemedComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
 
   ThemedComponent.displayName = Component.displayName || Component.name;
+
+  // @ts-ignore
   hoistNonReactStatics(ThemedComponent, Component);
 
   // @ts-ignore
