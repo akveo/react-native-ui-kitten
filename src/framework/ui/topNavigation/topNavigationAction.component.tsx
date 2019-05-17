@@ -102,9 +102,7 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
 
 const styles = StyleSheet.create({
   container: {},
-  icon: {
-    flex: 1,
-  },
+  icon: {},
 });
 
 export const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);
