@@ -55,16 +55,23 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { iconTintColor, ...containerParameters } = source;
+    const {
+      iconTintColor,
+      iconWidth,
+      iconHeight,
+      iconMarginHorizontal,
+    } = source;
 
     return {
       container: {
-        ...containerParameters,
+        marginHorizontal: iconMarginHorizontal,
         ...styles.container,
         ...StyleSheet.flatten(this.props.style),
       },
       icon: {
         tintColor: iconTintColor,
+        width: iconWidth,
+        height: iconHeight,
         ...styles.icon,
       },
     };

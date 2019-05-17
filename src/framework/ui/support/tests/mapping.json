@@ -1,5 +1,4 @@
 {
-  "$schema": "./node_modules/@eva/core/schema/schema.json",
   "version": 1.0,
   "components": {
     "Avatar": {
@@ -2688,15 +2687,6 @@
           },
           "subtitleColor": {
             "type": "string"
-          },
-          "actionWidth": {
-            "type": "number"
-          },
-          "actionHeight": {
-            "type": "number"
-          },
-          "actionMarginHorizontal": {
-            "type": "number"
           }
         },
         "appearances": {
@@ -2730,10 +2720,7 @@
             "subtitleFontSize": 11,
             "subtitleLineHeight": 16,
             "subtitleFontWeight": "400",
-            "subtitleColor": "color-basic-600",
-            "actionWidth": 24,
-            "actionHeight": 24,
-            "actionMarginHorizontal": 8
+            "subtitleColor": "color-basic-600"
           },
           "variantGroups": {
             "alignment": {
@@ -2763,7 +2750,7 @@
           "iconTintColor": {
             "type": "string"
           },
-          "marginHorizontal": {
+          "iconMarginHorizontal": {
             "type": "number"
           }
         },
@@ -2785,6 +2772,9 @@
         "default": {
           "mapping": {
             "iconTintColor": "font-primary-color",
+            "iconWidth": 24,
+            "iconHeight": 24,
+            "iconMarginHorizontal": 8,
             "state": {
               "active": {
                 "iconTintColor": "color-basic-900"
