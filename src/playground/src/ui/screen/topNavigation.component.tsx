@@ -19,6 +19,7 @@ import {
 import {
   TopNavigation,
   TopNavigationAction,
+  TopNavigationActionProps,
 } from '@kitten/ui';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
@@ -29,30 +30,41 @@ const rightControlUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/
 class TopNavigationScreen extends React.Component<Props> {
 
   static navigationOptions = {
-    header: (props: NavigationScreenProps) => (
-      <SafeAreaView style={styles.safeAreaView}>
-        <TopNavigation
-          title='Title'
-          subtitle='Secondary Text'
-          leftControl={
-            <TopNavigationAction
-              icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
-              onPress={() => props.navigation.goBack(null)}
-            />
-          }
-          rightControls={[
-            <TopNavigationAction
-              icon={(style: StyleType) => <Image source={{ uri: rightControlUri }} style={style}/>}
-              onPress={() => Alert.alert('On first right action')}
-            />,
-            <TopNavigationAction
-              icon={(style: StyleType) => <Image source={{ uri: rightControlUri }} style={style}/>}
-              onPress={() => Alert.alert('On second right action')}
-            />,
-          ]}
-        />
-      </SafeAreaView>
-    ),
+    header: (props: NavigationScreenProps) => {
+      const renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
+        return (
+          <TopNavigationAction
+            icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
+            onPress={() => props.navigation.goBack(null)}
+          />
+        );
+      };
+
+      const renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {
+        return ([
+          <TopNavigationAction
+            icon={(style: StyleType) => <Image source={{ uri: rightControlUri }} style={style}/>}
+            onPress={() => Alert.alert('On first right action')}
+          />,
+          <TopNavigationAction
+            icon={(style: StyleType) => <Image source={{ uri: rightControlUri }} style={style}/>}
+            onPress={() => Alert.alert('On second right action')}
+          />,
+        ]);
+      };
+
+      return (
+        <SafeAreaView style={styles.safeAreaView}>
+          <TopNavigation
+            title='Title'
+            alignment='center'
+            subtitle='Secondary Text'
+            leftControl={renderLeftControl()}
+            rightControls={renderRightControls()}
+          />
+        </SafeAreaView>
+      );
+    },
   };
 
   public render(): React.ReactNode {

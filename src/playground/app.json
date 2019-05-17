@@ -12,6 +12,11 @@
     "orientation": "portrait",
     "packagerOpts": {
       "config": "./metro.config.js"
+    },
+    "androidStatusBarColor": "#3366FF",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#3366FF"
     }
   }
 }

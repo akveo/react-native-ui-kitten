@@ -20,10 +20,6 @@ import {
 } from '@kitten/theme';
 import { TopNavigationActionProps } from './topNavigationAction.component';
 import {
-  TopNavigationAlignment,
-  TopNavigationAlignments,
-} from './type';
-import {
   Text,
   TextProps,
 } from '../text/text.component';
@@ -38,7 +34,7 @@ interface ComponentProps {
   titleStyle?: StyleProp<TextStyle>;
   subtitle?: string;
   subtitleStyle?: StyleProp<TextStyle>;
-  alignment?: string | TopNavigationAlignment;
+  alignment?: 'start' | 'center';
   leftControl?: ActionElement;
   rightControls?: ActionElementProp;
 }
@@ -55,8 +51,8 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
  *
  * @property {string} subtitle - Determines the subtitle of the component.
  *
- * @property {string | TopNavigationAlignment} alignment - Determines the appearance of the component.
- * Can be 'default' | 'titleCentered'. By default appearance is 'default'.
+ * @property {string} alignment - Determines the appearance of the component.
+ * Can be 'center' | 'start'. By default appearance is 'start'.
  *
  * @property {React.ReactElement<TopNavigationActionProps>} leftControl - Determines the left control
  * of the component.
@@ -135,12 +131,24 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
   static styledComponentName: string = 'TopNavigation';
 
+  private getAlignmentDependentStyles = (): StyleType | null => {
+    const { alignment } = this.props;
+
+    if (alignment === 'center') {
+      return {
+        container: styles.containerCentered,
+        titleContainer: styles.titleContainerCentered,
+      };
+    } else {
+      return {
+        rightControlsContainer: styles.rightControlsContainerStart,
+      };
+    }
+  };
+
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       style,
-      alignment: alignmentValue,
-      leftControl,
-      rightControls,
       titleStyle,
       subtitleStyle,
     } = this.props;
@@ -156,27 +164,21 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       subtitleLineHeight,
       subtitleFontWeight,
       subtitleColor,
-      actionWidth,
-      actionHeight,
-      actionMarginHorizontal,
       ...containerStyle
     } = source;
 
-    const leftControlsCount: number = React.Children.count(leftControl);
-    const rightControlsCount: number = React.Children.count(rightControls);
-    const actionFrameWidth: number = actionWidth + actionMarginHorizontal;
-
-    const alignment: TopNavigationAlignment = TopNavigationAlignments.parse(alignmentValue);
+    const alignmentDependentStyles: StyleType = this.getAlignmentDependentStyles();
 
     return {
       container: {
         ...containerStyle,
         ...styles.container,
+        ...alignmentDependentStyles.container,
         ...StyleSheet.flatten(style),
       },
       titleContainer: {
         ...styles.titleContainer,
-        marginLeft: alignment.margin(leftControlsCount, rightControlsCount, actionFrameWidth),
+        ...alignmentDependentStyles.titleContainer,
       },
       title: {
         textAlign: titleTextAlign,
@@ -196,13 +198,11 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
         ...styles.subtitle,
         ...StyleSheet.flatten(subtitleStyle),
       },
-      action: {
-        width: actionWidth,
-        height: actionHeight,
-        marginHorizontal: actionMarginHorizontal,
-      },
       leftControlContainer: styles.leftControlContainer,
-      rightControlsContainer: styles.rightControlsContainer,
+      rightControlsContainer: {
+        ...styles.rightControlsContainer,
+        ...alignmentDependentStyles.rightControlsContainer,
+      },
     };
   };
 
@@ -214,10 +214,10 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     );
   };
 
-  private renderActionElements(source: ActionElementProp, style: StyleProp<ViewStyle>): ActionElement[] {
-    return React.Children.map(source, (element: ActionElement): ActionElement => {
+  private renderActionElements(source: ActionElementProp): ActionElement[] {
+    return React.Children.map(source, (element: ActionElement, index: number): ActionElement => {
       return React.cloneElement(element, {
-        style: [style, element.props.style],
+        key: index,
       });
     });
   }
@@ -228,8 +228,8 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     return [
       isValidString(title) && this.renderTextElement(title, style.title),
       isValidString(subtitle) && this.renderTextElement(subtitle, style.subtitle),
-      leftControl && this.renderActionElements(leftControl, style.action),
-      rightControls && this.renderActionElements(rightControls, style.action),
+      leftControl && this.renderActionElements(leftControl),
+      rightControls && this.renderActionElements(rightControls),
     ];
   };
 
@@ -275,8 +275,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  titleContainer: {
-    flex: 1,
+  containerCentered: {
+    justifyContent: 'space-between',
+  },
+  titleContainer: {},
+  titleContainerCentered: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {},
   subtitle: {},
@@ -287,6 +293,10 @@ const styles = StyleSheet.create({
   rightControlsContainer: {
     flexDirection: 'row',
     zIndex: 1,
+  },
+  rightControlsContainerStart: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
 });
 
