@@ -15,7 +15,8 @@
       "es2016"
     ],
     "paths": {
-      "@eva/*": ["../../node_modules/eva/packages/*"],
+      "@eva/eva": ["../../../eva/packages/mapping/eva"],
+      "@eva/theme-eva": ["../../../eva/packages/theme/eva"],
       "@kitten/*": ["../framework/*"]
     }
   }
