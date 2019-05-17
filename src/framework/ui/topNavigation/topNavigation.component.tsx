@@ -134,17 +134,15 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
   private getAlignmentDependentStyles = (): StyleType | null => {
     const { alignment } = this.props;
 
-    if (alignment === 'start') {
-      return {
-        rightControlsContainer: styles.rightControlsContainerStart,
-      };
-    } else if (alignment === 'center') {
+    if (alignment === 'center') {
       return {
         container: styles.containerCentered,
         titleContainer: styles.titleContainerCentered,
       };
     } else {
-      return null;
+      return {
+        rightControlsContainer: styles.rightControlsContainerStart,
+      };
     }
   };
 
@@ -166,9 +164,6 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       subtitleLineHeight,
       subtitleFontWeight,
       subtitleColor,
-      actionWidth,
-      actionHeight,
-      actionMarginHorizontal,
       ...containerStyle
     } = source;
 
@@ -220,9 +215,9 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
   };
 
   private renderActionElements(source: ActionElementProp): ActionElement[] {
-    return React.Children.map(source, (element: ActionElement): ActionElement => {
+    return React.Children.map(source, (element: ActionElement, index: number): ActionElement => {
       return React.cloneElement(element, {
-        style: element.props.style,
+        key: index,
       });
     });
   }
