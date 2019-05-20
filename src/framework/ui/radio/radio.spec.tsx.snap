@@ -81,13 +81,12 @@ exports[`@radio: matches snapshot default 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       size="medium"
-      status="primary"
       style={
         Object {
           "alignItems": "center",
           "borderColor": "#A6AEBD",
           "borderRadius": 12,
-          "borderWidth": 2,
+          "borderWidth": 1,
           "height": 24,
           "justifyContent": "center",
           "width": 24,
@@ -202,9 +201,9 @@ exports[`@radio: matches snapshot default 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "borderRadius": 7,
-            "height": 14,
-            "width": 14,
+            "borderRadius": 8,
+            "height": 16,
+            "width": 16,
           }
         }
       />

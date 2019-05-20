@@ -1854,7 +1854,7 @@
         "variantGroups": {
           "status": {
             "primary": {
-              "default": true
+              "default": false
             },
             "success": {
               "default": false
@@ -1908,7 +1908,7 @@
       "appearances": {
         "default": {
           "mapping": {
-            "borderWidth": 2,
+            "borderWidth": 1,
             "borderColor": "color-basic-500",
             "textColor": "font-primary-color",
             "textFontWeight": "600",
@@ -1919,9 +1919,16 @@
                 "borderColor": "color-basic-600",
                 "highlightBackgroundColor": "color-basic-200"
               },
+              "checked": {
+                "borderColor": "color-primary-500",
+                "iconTintColor": "color-primary-500"
+              },
               "disabled": {
                 "borderColor": "color-basic-300",
                 "textColor": "color-basic-400"
+              },
+              "checked.active": {
+                "borderColor": "color-primary-700"
               },
               "checked.disabled": {
                 "borderColor": "color-basic-500",
@@ -1933,7 +1940,11 @@
           "variantGroups": {
             "status": {
               "primary": {
+                "borderColor": "color-primary-500",
                 "state": {
+                  "active": {
+                    "borderColor": "color-primary-600"
+                  },
                   "checked": {
                     "borderColor": "color-primary-500",
                     "iconTintColor": "color-primary-500"
@@ -1944,7 +1955,11 @@
                 }
               },
               "success": {
+                "borderColor": "color-success-500",
                 "state": {
+                  "active": {
+                    "borderColor": "color-success-700"
+                  },
                   "checked": {
                     "borderColor": "color-success-500",
                     "iconTintColor": "color-success-500"
@@ -1955,7 +1970,11 @@
                 }
               },
               "info": {
+                "borderColor": "color-info-500",
                 "state": {
+                  "active": {
+                    "borderColor": "color-info-700"
+                  },
                   "checked": {
                     "borderColor": "color-info-500",
                     "iconTintColor": "color-info-500"
@@ -1966,7 +1985,11 @@
                 }
               },
               "warning": {
+                "borderColor": "color-warning-500",
                 "state": {
+                  "active": {
+                    "borderColor": "color-warning-700"
+                  },
                   "checked": {
                     "borderColor": "color-warning-500",
                     "iconTintColor": "color-warning-500"
@@ -1977,7 +2000,11 @@
                 }
               },
               "danger": {
+                "borderColor": "color-danger-500",
                 "state": {
+                  "active": {
+                    "borderColor": "color-danger-700"
+                  },
                   "checked": {
                     "borderColor": "color-danger-500",
                     "iconTintColor": "color-danger-500"
@@ -1992,12 +2019,12 @@
               "tiny": {
                 "width": 16,
                 "height": 16,
-                "iconWidth": 7.5,
-                "iconHeight": 7.5,
+                "iconWidth": 9,
+                "iconHeight": 9,
                 "highlightWidth": 24,
                 "highlightHeight": 24,
                 "borderRadius": 8,
-                "iconBorderRadius": 3.75,
+                "iconBorderRadius": 4.5,
                 "highlightBorderRadius": 12,
                 "textMarginHorizontal": 8,
                 "textFontSize": 11,
@@ -2006,12 +2033,12 @@
               "small": {
                 "width": 20,
                 "height": 20,
-                "iconWidth": 11,
-                "iconHeight": 11,
+                "iconWidth": 12,
+                "iconHeight": 12,
                 "highlightWidth": 32,
                 "highlightHeight": 32,
                 "borderRadius": 10,
-                "iconBorderRadius": 5.5,
+                "iconBorderRadius": 6,
                 "highlightBorderRadius": 16,
                 "textMarginHorizontal": 10,
                 "textFontSize": 13,
@@ -2020,12 +2047,12 @@
               "medium": {
                 "width": 24,
                 "height": 24,
-                "iconWidth": 14,
-                "iconHeight": 14,
+                "iconWidth": 16,
+                "iconHeight": 16,
                 "highlightWidth": 40,
                 "highlightHeight": 40,
                 "borderRadius": 12,
-                "iconBorderRadius": 7,
+                "iconBorderRadius": 8,
                 "highlightBorderRadius": 20,
                 "textMarginHorizontal": 12,
                 "textFontSize": 13,
@@ -2034,12 +2061,12 @@
               "large": {
                 "width": 32,
                 "height": 32,
-                "iconWidth": 20,
-                "iconHeight": 20,
+                "iconWidth": 22,
+                "iconHeight": 22,
                 "highlightWidth": 48,
                 "highlightHeight": 48,
                 "borderRadius": 16,
-                "iconBorderRadius": 10,
+                "iconBorderRadius": 11,
                 "highlightBorderRadius": 24,
                 "textMarginHorizontal": 12,
                 "textFontSize": 15,
@@ -2048,12 +2075,12 @@
               "giant": {
                 "width": 40,
                 "height": 40,
-                "iconWidth": 26,
-                "iconHeight": 26,
+                "iconWidth": 28,
+                "iconHeight": 28,
                 "highlightWidth": 56,
                 "highlightHeight": 56,
                 "borderRadius": 20,
-                "iconBorderRadius": 13,
+                "iconBorderRadius": 14,
                 "highlightBorderRadius": 28,
                 "textMarginHorizontal": 12,
                 "textFontSize": 17,
