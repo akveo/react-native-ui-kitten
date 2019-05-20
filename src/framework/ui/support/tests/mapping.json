@@ -2690,16 +2690,16 @@
       "meta": {
         "scope": "all",
         "parameters": {
-          "popoverPaddingHorizontal": {
+          "paddingHorizontal": {
             "type": "number"
           },
-          "popoverPaddingVertical": {
+          "paddingVertical": {
             "type": "number"
           },
-          "popoverBorderRadius": {
+          "borderRadius": {
             "type": "number"
           },
-          "popoverBackgroundColor": {
+          "backgroundColor": {
             "type": "string"
           },
           "iconWidth": {
@@ -2738,10 +2738,10 @@
       "appearances": {
         "default": {
           "mapping": {
-            "popoverPaddingHorizontal": 4,
-            "popoverPaddingVertical": 6,
-            "popoverBorderRadius": 8,
-            "popoverBackgroundColor": "font-primary-color",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+            "borderRadius": 8,
+            "backgroundColor": "color-black",
             "iconWidth": 16,
             "iconHeight": 16,
             "iconMarginHorizontal": 4,
