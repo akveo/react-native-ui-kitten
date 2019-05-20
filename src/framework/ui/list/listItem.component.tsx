@@ -175,6 +175,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
       titleFontWeight,
       titleColor,
       descriptionFontSize,
+      descriptionFontWeight,
       descriptionLineHeight,
       descriptionColor,
       descriptionMarginHorizontal,
@@ -207,6 +208,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
       description: {
         color: descriptionColor,
         fontSize: descriptionFontSize,
+        fontWeight: descriptionFontWeight,
         lineHeight: descriptionLineHeight,
         marginHorizontal: descriptionMarginHorizontal,
         ...styles.description,
