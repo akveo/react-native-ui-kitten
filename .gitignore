@@ -13,5 +13,8 @@ npm-debug.log
 docs/docs.json
 docs/src/input.json
 
+# config
+config/index.js
+
 .expo
 dist
