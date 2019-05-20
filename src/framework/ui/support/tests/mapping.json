@@ -1630,16 +1630,16 @@
       "meta": {
         "scope": "all",
         "parameters": {
-          "popoverBorderRadius": {
+          "borderRadius": {
             "type": "number"
           },
-          "popoverBackgroundColor": {
+          "backgroundColor": {
             "type": "string"
           },
-          "itemBorderBottomWidth": {
+          "dividerHeight": {
             "type": "number"
           },
-          "itemBorderBottomColor": {
+          "dividerBackgroundColor": {
             "type": "number"
           }
         },
@@ -1654,10 +1654,10 @@
       "appearances": {
         "default": {
           "mapping": {
-            "popoverBorderRadius": 12,
-            "popoverBackgroundColor": "color-white",
-            "itemBorderBottomWidth": 1,
-            "itemBorderBottomColor": "color-basic-200"
+            "borderRadius": 12,
+            "backgroundColor": "color-white",
+            "dividerHeight": 1,
+            "dividerBackgroundColor": "color-basic-200"
           }
         }
       }
