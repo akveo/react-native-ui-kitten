@@ -30,9 +30,9 @@ import {
   isValidString,
 } from '../support/services';
 import {
-  InputFocusEvent,
-  InputEndEditEvent,
   FlexStyleProps,
+  InputEndEditEvent,
+  InputFocusEvent,
 } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
@@ -220,7 +220,8 @@ export class InputComponent extends React.Component<InputProps> {
       text: {
         marginHorizontal: textMarginHorizontal,
         fontSize: textFontSize,
-        lineHeight: textLineHeight,
+        // FIXME: RN issue (https://github.com/facebook/react-native/issues/7823)
+        // lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
         ...styles.text,
