@@ -342,7 +342,9 @@
       "appearances": {
         "filled": {
           "mapping": {
-            "borderRadius": 8,
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "borderColor": "opacity-transparent",
             "textColor": "text-primary-inverse",
             "textFontWeight": "800",
             "iconTintColor": "color-white",
@@ -489,7 +491,6 @@
         },
         "outline": {
           "mapping": {
-            "borderWidth": 2
           },
           "variantGroups": {
             "status": {
@@ -504,6 +505,11 @@
                     "borderColor": "color-primary-600",
                     "textColor": "color-primary-600",
                     "iconTintColor": "color-primary-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "borderColor": "color-primary-300",
+                    "textColor": "color-primary-400"
                   }
                 }
               },
@@ -518,6 +524,11 @@
                     "borderColor": "color-success-600",
                     "textColor": "color-success-600",
                     "iconTintColor": "color-success-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "borderColor": "color-success-300",
+                    "textColor": "color-success-400"
                   }
                 }
               },
@@ -532,6 +543,11 @@
                     "borderColor": "color-info-600",
                     "textColor": "color-info-600",
                     "iconTintColor": "color-info-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "borderColor": "color-info-300",
+                    "textColor": "color-info-400"
                   }
                 }
               },
@@ -546,6 +562,11 @@
                     "borderColor": "color-warning-600",
                     "textColor": "color-warning-600",
                     "iconTintColor": "color-warning-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "borderColor": "color-warning-300",
+                    "textColor": "color-warning-400"
                   }
                 }
               },
@@ -560,6 +581,11 @@
                     "borderColor": "color-danger-600",
                     "textColor": "color-danger-600",
                     "iconTintColor": "color-danger-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "borderColor": "color-danger-300",
+                    "textColor": "color-danger-400"
                   }
                 }
               },
@@ -568,6 +594,11 @@
                 "state": {
                   "active": {
                     "backgroundColor": "opacity-transparent"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "borderColor": "opacity-transparent",
+                    "textColor": "color-primary-400"
                   }
                 }
               }
@@ -588,6 +619,10 @@
                     "backgroundColor": "opacity-transparent",
                     "textColor": "color-primary-600",
                     "iconTintColor": "color-primary-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "textColor": "color-primary-400"
                   }
                 }
               },
@@ -600,6 +635,10 @@
                     "backgroundColor": "opacity-transparent",
                     "textColor": "color-success-600",
                     "iconTintColor": "color-success-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "textColor": "color-success-400"
                   }
                 }
               },
@@ -612,6 +651,10 @@
                     "backgroundColor": "opacity-transparent",
                     "textColor": "color-info-600",
                     "iconTintColor": "color-info-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "textColor": "color-info-400"
                   }
                 }
               },
@@ -624,6 +667,10 @@
                     "backgroundColor": "opacity-transparent",
                     "textColor": "color-warning-600",
                     "iconTintColor": "color-warning-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "textColor": "color-warning-400"
                   }
                 }
               },
@@ -636,6 +683,10 @@
                     "backgroundColor": "opacity-transparent",
                     "textColor": "color-danger-600",
                     "iconTintColor": "color-danger-600"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "textColor": "color-danger-400"
                   }
                 }
               },
@@ -644,6 +695,10 @@
                 "state": {
                   "active": {
                     "backgroundColor": "opacity-transparent"
+                  },
+                  "disabled": {
+                    "backgroundColor": "opacity-transparent",
+                    "textColor": "color-primary-400"
                   }
                 }
               }
