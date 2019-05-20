@@ -1,6 +1,6 @@
 const path = require('path');
 
-const frameworkModulePath = path.resolve('./src/framework');
+const kittenPath = path.resolve('./src/framework');
 
 // FIXME: Resolve `transform[stderr]: Could not resolve` command-line warnings.
 // FIXME: Reproducible when starting with clearing cache (npm start -- -c)
@@ -8,8 +8,8 @@ const frameworkModulePath = path.resolve('./src/framework');
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
-    '@kitten/theme': path.resolve(frameworkModulePath, 'theme'),
-    '@kitten/ui': path.resolve(frameworkModulePath, 'ui'),
+    '@kitten/theme': path.resolve(kittenPath, 'theme'),
+    '@kitten/ui': path.resolve(kittenPath, 'ui'),
   },
 };
 

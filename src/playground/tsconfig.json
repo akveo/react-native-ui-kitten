@@ -15,7 +15,6 @@
       "es2016"
     ],
     "paths": {
-      "@eva/*": ["../../node_modules/eva/packages/*"],
       "@kitten/*": ["../framework/*"]
     }
   }

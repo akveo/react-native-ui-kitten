@@ -1,19 +1,23 @@
 const path = require('path');
-
-const frameworkModulePath = path.resolve('../framework');
+const Config = require('../../config');
 
 // FIXME: Resolve `transform[stderr]: Could not resolve` command-line warnings.
 // FIXME: Reproducible when starting with clearing cache (npm start -- -c)
+//
+// TODO: Framework path aliasing even not needed here. Replace?
+// TODO: Replace nested package.json-s with aliases
 
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
-    '@kitten/theme': path.resolve(frameworkModulePath, 'theme'),
-    '@kitten/ui': path.resolve(frameworkModulePath, 'ui'),
+    '@kitten/theme': path.resolve(Config.KITTEN_PATH, 'theme'),
+    '@kitten/ui': path.resolve(Config.KITTEN_PATH, 'ui'),
+    '@eva/eva': path.resolve(Config.MAPPING_PATH),
+    '@eva/theme-eva': path.resolve(Config.THEME_PATH),
   },
 };
 
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
 
   const presets = [
@@ -34,5 +38,5 @@ module.exports = function(api) {
     },
   };
 
-  return { presets, env, plugins };
+  return { presets, plugins, env };
 };

@@ -3,7 +3,7 @@
   "main": "./node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "start": "expo start"
+    "start": "expo start -c"
   },
   "dependencies": {
     "@eva/eva": "github:akveo/eva#package/mapping-eva",
