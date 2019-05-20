@@ -7,4 +7,5 @@ module.exports = {
   KITTEN_PATH: path.resolve(__dirname, '../src/framework'),
   MAPPING_PATH: path.resolve(playgroundPath, 'node_modules/@eva/eva'),
   THEME_PATH: path.resolve(playgroundPath, 'node_modules/@eva/theme-eva'),
+  PROCESSOR_PATH: path.resolve(__dirname, '../node_modules/@eva/processor-kitten')
 };
