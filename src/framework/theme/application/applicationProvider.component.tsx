@@ -26,7 +26,6 @@ export type ApplicationProviderProps = ComponentProps & ThemeProviderProps;
 
 interface State {
   styles: ThemeStyleType;
-  theme: ThemeType;
 }
 
 /**
@@ -85,10 +84,7 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
 
     const styles: ThemeStyleType = this.createStyles(mapping, customMapping);
 
-    this.state = {
-      styles,
-      theme,
-    };
+    this.state = { styles };
   }
 
   private createStyles = (mapping: SchemaType, custom: CustomSchemaType): ThemeStyleType => {
@@ -99,7 +95,9 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
 
   public render(): React.ReactNode {
     return (
-      <StyleProvider {...this.state}>
+      <StyleProvider
+        theme={this.props.theme}
+        styles={this.state.styles}>
         <ModalPanel>
           {this.props.children}
         </ModalPanel>
