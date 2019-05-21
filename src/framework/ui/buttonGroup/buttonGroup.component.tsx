@@ -25,9 +25,9 @@ type ButtonElement = React.ReactElement<ButtonProps>;
 type ChildrenProp = ButtonElement | ButtonElement[];
 
 interface ComponentProps {
-  children: ChildrenProp;
   size?: string;
   status?: string;
+  children: ChildrenProp;
 }
 
 export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps;
@@ -85,8 +85,8 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
     const { style } = this.props;
 
     const {
-      buttonBorderRightColor,
-      buttonBorderRightWidth,
+      dividerBackgroundColor,
+      dividerWidth,
       ...containerParameters
     } = source;
 
@@ -97,8 +97,8 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
         ...StyleSheet.flatten(style),
       },
       button: {
-        borderRightColor: buttonBorderRightColor,
-        borderRightWidth: buttonBorderRightWidth,
+        borderRightColor: dividerBackgroundColor,
+        borderRightWidth: dividerWidth,
         ...styles.button,
       },
     };

@@ -1,20 +1,4 @@
 {
-  "blue-primary": "#3366FF",
-  "blue-dark": "#2541CC",
-  "blue-pitch-dark": "#0D1C2E",
-  "gray-light": "#DDE1EB",
-  "gray-primary": "#A6AEBD",
-  "gray-dark": "#8992A3",
-  "gray-highlight": "#EDF0F5",
-  "pink-primary": "#FF3D71",
-  "text-primary": "#000000",
-  "text-primary-inverse": "#ffffff",
-
-  "gray-100": "#f7f8fa",
-  "gray-200": "#edf0f5",
-  "gray-300": "#c8cedb",
-  "gray-400": "#a6aebd",
-
   "color-primary-100": "#F2F6FF",
   "color-primary-200": "#D9E4FF",
   "color-primary-300": "#A6C1FF",
@@ -89,16 +73,6 @@
   "color-basic-900": "#2C3547",
   "color-white": "#FFFFFF",
   "color-black": "#0D1C2E",
-  "opacity-transparent": "transparent",
-  "outline-width":	11,
-  "outline-color":	"#DDE1EB",
-  "outline-disabled-width":	0,
-  "outline-disabled-color":	"transparent",
-  "font-primary-family": "",
   "font-primary-color": "#0D1C2E",
-  "font-light-color": "#FFFFFF",
-  "font-primary-disabled-color": "#C8CEDB",
-  "font-primary-regular-text-size": 14,
-  "font-primary-regular-text-weight": "600",
-  "font-primary-regular-text-line-height": 16
+  "font-primary-inverse-color": "#FFFFFF"
 }

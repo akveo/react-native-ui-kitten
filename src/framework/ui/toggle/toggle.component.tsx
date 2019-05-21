@@ -192,10 +192,10 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     const { style, checked, disabled } = this.props;
 
     const {
-      highlightWidth,
-      highlightHeight,
-      highlightBorderRadius,
-      highlightBackgroundColor,
+      outlineWidth,
+      outlineHeight,
+      outlineBorderRadius,
+      outlineBackgroundColor,
       thumbWidth,
       thumbHeight,
       thumbBorderRadius,
@@ -233,10 +233,10 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         ...styles.componentContainer,
       },
       highlight: {
-        width: highlightWidth,
-        height: highlightHeight,
-        borderRadius: highlightBorderRadius,
-        backgroundColor: highlightBackgroundColor,
+        width: outlineWidth,
+        height: outlineHeight,
+        borderRadius: outlineBorderRadius,
+        backgroundColor: outlineBackgroundColor,
         ...styles.highlight,
       },
       ellipse: {

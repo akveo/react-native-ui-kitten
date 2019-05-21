@@ -159,10 +159,10 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       iconHeight,
       iconBorderRadius,
       iconTintColor,
-      highlightWidth,
-      highlightHeight,
-      highlightBorderRadius,
-      highlightBackgroundColor,
+      outlineWidth,
+      outlineHeight,
+      outlineBorderRadius,
+      outlineBackgroundColor,
       ...containerParameters
     } = source;
 
@@ -192,10 +192,10 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         backgroundColor: iconTintColor,
       },
       highlight: {
-        width: highlightWidth,
-        height: highlightHeight,
-        borderRadius: highlightBorderRadius,
-        backgroundColor: highlightBackgroundColor,
+        width: outlineWidth,
+        height: outlineHeight,
+        borderRadius: outlineBorderRadius,
+        backgroundColor: outlineBackgroundColor,
         ...styles.highlight,
       },
     };

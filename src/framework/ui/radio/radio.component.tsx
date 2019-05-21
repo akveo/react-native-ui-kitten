@@ -151,10 +151,10 @@ export class RadioComponent extends React.Component<RadioProps> {
       iconHeight,
       iconBorderRadius,
       iconTintColor,
-      highlightWidth,
-      highlightHeight,
-      highlightBorderRadius,
-      highlightBackgroundColor,
+      outlineWidth,
+      outlineHeight,
+      outlineBorderRadius,
+      outlineBackgroundColor,
       ...containerParameters
     } = source;
 
@@ -184,10 +184,10 @@ export class RadioComponent extends React.Component<RadioProps> {
         backgroundColor: iconTintColor,
       },
       highlight: {
-        width: highlightWidth,
-        height: highlightHeight,
-        borderRadius: highlightBorderRadius,
-        backgroundColor: highlightBackgroundColor,
+        width: outlineWidth,
+        height: outlineHeight,
+        borderRadius: outlineBorderRadius,
+        backgroundColor: outlineBackgroundColor,
         ...styles.highlight,
       },
     };
