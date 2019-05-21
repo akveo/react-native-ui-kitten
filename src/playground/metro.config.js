@@ -23,6 +23,7 @@ module.exports = {
     path.resolve(Config.KITTEN_PATH, 'ui'),
     path.resolve(Config.MAPPING_PATH),
     path.resolve(Config.THEME_PATH),
+    path.resolve(Config.PROCESSOR_PATH),
 
     // FIXME(playground): unable to resolve
     path.resolve(__dirname, '../../node_modules/@eva/processor-kitten'),

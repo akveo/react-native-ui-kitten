@@ -21,6 +21,6 @@ before_install:
 - eval "$(ssh-agent -s)"
 - DISPLAY=":0.0" SSH_ASKPASS="/tmp/askpass" setsid ssh-add /tmp/travis_deploy_key </dev/null
 install:
-- npm install
+- npm run ci:install
 script:
 - scripts/ci/travis-ci-script.sh

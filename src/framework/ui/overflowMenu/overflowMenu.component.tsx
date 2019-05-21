@@ -10,6 +10,7 @@ import {
   View,
   GestureResponderEvent,
   StyleSheet,
+  ViewStyle,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -110,22 +111,20 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
-      popoverBorderRadius,
-      popoverBackgroundColor,
-      itemBorderBottomWidth,
-      itemBorderBottomColor,
+      dividerHeight,
+      dividerBackgroundColor,
+      ...containerParameters
     } = style;
 
     return {
       popover: {
-        borderRadius: popoverBorderRadius,
-        backgroundColor: popoverBackgroundColor,
+        ...containerParameters,
         ...styles.popover,
       },
-      item: {
-        borderBottomWidth: itemBorderBottomWidth,
-        borderBottomColor: itemBorderBottomColor,
-        ...styles.item,
+      item: styles.item,
+      divider: {
+        height: dividerHeight,
+        backgroundColor: dividerBackgroundColor,
       },
     };
   };
@@ -148,18 +147,23 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   private renderContentElementChildren = (style: StyleType): MenuItemElement[] => {
     return this.props.items.map((item: OverflowMenuItemProps, index: number) => {
-      const itemElement: MenuItemElement = this.renderItemElement(item, index, style);
+      const itemElement: MenuItemElement = this.renderItemElement(item, index, style.item);
 
-      const borderBottomWidth: number = this.isLastItem(index) ? 0 : style.borderBottomWidth;
+      const isLastItem: boolean = this.isLastItem(index);
+
+      const borderStyle: ViewStyle = {
+        borderBottomColor: style.divider.backgroundColor,
+        borderBottomWidth: isLastItem ? 0 : style.divider.height,
+      };
 
       return React.cloneElement(itemElement, {
-        style: [itemElement.props.style, { borderBottomWidth }],
+        style: [itemElement.props.style, borderStyle],
       });
     });
   };
 
   private renderPopoverContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const menuItems: MenuItemElement[] = this.renderContentElementChildren(style.item);
+    const menuItems: MenuItemElement[] = this.renderContentElementChildren(style);
 
     return (
       <View style={this.props.style}>

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "npm run start:pg:dev",
-    "start:pg": "npm start --prefix ./src/playground",
+    "start:pg": "npm run install:pg && npm start --prefix ./src/playground",
     "start:pg:prod": "npm run env:set -- prod && npm run start:pg",
     "start:pg:dev": "npm run env:set -- dev && npm run start:pg",
     "env:set": "sh ./scripts/environment/set-env.sh",
@@ -24,11 +24,11 @@
     "lint": "npm run lint:src && npm run lint:pg",
     "lint:src": "tslint -p ./src/framework/tsconfig.json --fix",
     "lint:pg": "tslint -p ./src/playground/tsconfig.json --fix",
+    "ci:install": "npm i && npm run install:pg",
     "ci:lint": "npm run lint",
     "ci:build": "npm run build:src && npm run build:pg",
     "ci:test": "npm t -- --coverage && cat ./dist/jest/coverage/lcov.info | coveralls",
     "install:pg": "( cd ./src/playground && npm i )",
-    "install": "npm run install:pg",
     "test": "jest"
   },
   "dependencies": {

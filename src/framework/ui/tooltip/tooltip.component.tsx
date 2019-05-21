@@ -123,10 +123,6 @@ export class TooltipComponent extends React.Component<TooltipProps> {
     const { style, textStyle } = this.props;
 
     const {
-      popoverPaddingHorizontal,
-      popoverPaddingVertical,
-      popoverBorderRadius,
-      popoverBackgroundColor,
       iconWidth,
       iconHeight,
       iconMarginHorizontal,
@@ -135,14 +131,12 @@ export class TooltipComponent extends React.Component<TooltipProps> {
       textFontSize,
       textLineHeight,
       textColor,
+      ...containerParameters
     } = source;
 
     return {
       popover: {
-        paddingHorizontal: popoverPaddingHorizontal,
-        paddingVertical: popoverPaddingVertical,
-        borderRadius: popoverBorderRadius,
-        backgroundColor: popoverBackgroundColor,
+        ...containerParameters,
         ...styles.popover,
         ...StyleSheet.flatten(style),
       },
