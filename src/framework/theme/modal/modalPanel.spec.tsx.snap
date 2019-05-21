@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@modal panel checks * close modal checking inner 1`] = `
-<Component
+<View
   style={
     Object {
       "flex": 1,
     }
   }
 >
-  <Component>
-    <Component>
+  <View>
+    <Text>
       Modal Panel Test
-    </Component>
-  </Component>
+    </Text>
+  </View>
   <Button
     onPress={[Function]}
     testID="@modal/show"
@@ -23,22 +23,22 @@ exports[`@modal panel checks * close modal checking inner 1`] = `
     testID="@modal/hide-outer"
     title="Hide Modal"
   />
-</Component>
+</View>
 `;
 
 exports[`@modal panel checks * close modal checking outer 1`] = `
-<Component
+<View
   style={
     Object {
       "flex": 1,
     }
   }
 >
-  <Component>
-    <Component>
+  <View>
+    <Text>
       Modal Panel Test
-    </Component>
-  </Component>
+    </Text>
+  </View>
   <Button
     onPress={[Function]}
     testID="@modal/show"
@@ -49,22 +49,22 @@ exports[`@modal panel checks * close modal checking outer 1`] = `
     testID="@modal/hide-outer"
     title="Hide Modal"
   />
-</Component>
+</View>
 `;
 
 exports[`@modal panel checks * modal panel render with props / children checking 1`] = `
-<Component
+<View
   style={
     Object {
       "flex": 1,
     }
   }
 >
-  <Component>
-    <Component>
+  <View>
+    <Text>
       Modal Panel Test
-    </Component>
-  </Component>
+    </Text>
+  </View>
   <Button
     onPress={[Function]}
     testID="@modal/show"
@@ -75,22 +75,22 @@ exports[`@modal panel checks * modal panel render with props / children checking
     testID="@modal/hide-outer"
     title="Hide Modal"
   />
-</Component>
+</View>
 `;
 
 exports[`@modal panel checks * modal panel renders properly 1`] = `
-<Component
+<View
   style={
     Object {
       "flex": 1,
     }
   }
 >
-  <Component>
-    <Component>
+  <View>
+    <Text>
       Modal Panel Test
-    </Component>
-  </Component>
+    </Text>
+  </View>
   <Button
     onPress={[Function]}
     testID="@modal/show"
@@ -101,7 +101,7 @@ exports[`@modal panel checks * modal panel renders properly 1`] = `
     testID="@modal/hide-outer"
     title="Hide Modal"
   />
-</Component>
+</View>
 `;
 
 exports[`@modal-service: service checks * unexpected branch cover 1`] = `

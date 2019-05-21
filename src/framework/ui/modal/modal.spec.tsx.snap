@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@modal component checks * component styled with mappings 1`] = `
-<Component
+<View
   style={
     Object {
       "height": 0,
@@ -10,7 +10,7 @@ exports[`@modal component checks * component styled with mappings 1`] = `
     }
   }
 >
-  <Component
+  <View
     pointerEvents="none"
     style={
       Object {
@@ -38,14 +38,14 @@ exports[`@modal component checks * component styled with mappings 1`] = `
     }
     visible={true}
   >
-    <Component
+    <Text
       onCloseModal={[Function]}
       style={Object {}}
     >
       Test
-    </Component>
+    </Text>
   </AnimatedComponent>
-</Component>
+</View>
 `;
 
 exports[`@modal component checks * modal closes on passed prop 1`] = `
@@ -80,18 +80,18 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
     }
     visible={true}
   >
-    <Component
+    <View
       onCloseModal={[Function]}
       style={Object {}}
     >
-      <Component>
+      <Text>
         Test1
-      </Component>
+      </Text>
       <Button
         onPress={[MockFunction]}
         title="Close Modal"
       />
-    </Component>
+    </View>
   </AnimatedComponent>
 </TouchableOpacity>
 `;
@@ -142,13 +142,13 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
     }
     visible={true}
   >
-    <Component
+    <View
       onCloseModal={[Function]}
       style={Object {}}
     >
-      <Component>
+      <Text>
         Test1
-      </Component>
+      </Text>
       <Button
         onPress={
           [MockFunction] {
@@ -167,7 +167,7 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
         }
         title="Close Modal"
       />
-    </Component>
+    </View>
   </AnimatedComponent>
 </TouchableOpacity>
 `;
@@ -204,14 +204,14 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
     }
     visible={true}
   >
-    <Component
+    <View
       onCloseModal={[Function]}
       style={Object {}}
     >
-      <Component>
+      <Text>
         Test1
-      </Component>
-    </Component>
+      </Text>
+    </View>
   </AnimatedComponent>
 </TouchableOpacity>
 `;
@@ -262,20 +262,20 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
     }
     visible={true}
   >
-    <Component
+    <View
       onCloseModal={[Function]}
       style={Object {}}
     >
-      <Component>
+      <Text>
         Test1
-      </Component>
-    </Component>
+      </Text>
+    </View>
   </AnimatedComponent>
 </TouchableOpacity>
 `;
 
 exports[`@modal component checks * modal component renders properly 1`] = `
-<Component
+<View
   style={
     Object {
       "height": 0,
@@ -284,7 +284,7 @@ exports[`@modal component checks * modal component renders properly 1`] = `
     }
   }
 >
-  <Component
+  <View
     pointerEvents="none"
     style={
       Object {
@@ -314,16 +314,16 @@ exports[`@modal component checks * modal component renders properly 1`] = `
     }
     visible={true}
   >
-    <Component
+    <View
       onCloseModal={[Function]}
       style={Object {}}
     >
-      <Component>
+      <Text>
         Test1
-      </Component>
-    </Component>
+      </Text>
+    </View>
   </AnimatedComponent>
-</Component>
+</View>
 `;
 
 exports[`@modal component checks * modal component renders properly 2`] = `null`;
@@ -366,14 +366,14 @@ exports[`@modal component checks * with animations 1`] = `
     }
     visible={true}
   >
-    <Component
+    <View
       onCloseModal={[Function]}
       style={Object {}}
     >
-      <Component>
+      <Text>
         Test2
-      </Component>
-    </Component>
+      </Text>
+    </View>
   </AnimatedComponent>
 </TouchableOpacity>
 `;
@@ -412,14 +412,14 @@ exports[`@modal component checks * with animations 2`] = `
     }
     visible={true}
   >
-    <Component
+    <View
       onCloseModal={[Function]}
       style={Object {}}
     >
-      <Component>
+      <Text>
         Test2
-      </Component>
-    </Component>
+      </Text>
+    </View>
   </AnimatedComponent>
 </TouchableOpacity>
 `;
