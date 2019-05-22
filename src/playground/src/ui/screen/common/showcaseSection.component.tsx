@@ -58,7 +58,6 @@ export const ShowcaseSection = withStyles(ShowcaseSectionComponent, (theme: Them
     marginVertical: 8,
     fontSize: 20,
     lineHeight: 28,
-    color: theme['font-primary-color'],
   },
   item: {
     marginVertical: 8,

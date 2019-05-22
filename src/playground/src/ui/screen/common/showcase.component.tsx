@@ -1,16 +1,13 @@
 import React from 'react';
 import {
-  View,
   ScrollView,
   ViewStyle,
-  ViewProps,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Button } from '@kitten/ui';
 import {
   ShowcaseSection,
   ShowcaseSectionProps,
@@ -19,7 +16,7 @@ import {
   ComponentShowcase,
   ComponentShowcaseSection,
 } from './type';
-import { ThemeContext } from '../../themeContext';
+import { ThemeConsumer } from '../../themeConsumer';
 
 interface ComponentProps {
   showcase: ComponentShowcase;
@@ -54,41 +51,15 @@ class ShowcaseComponent extends React.Component<ShowcaseProps> {
     });
   };
 
-  private isThemeButtonDisabled = (currentTheme: string, buttonResponsibility: string): boolean => {
-    if (currentTheme === 'light' && buttonResponsibility === 'light') {
-      return true;
-    } else if (currentTheme === 'dark' && buttonResponsibility === 'light') {
-      return false;
-    } else if (currentTheme === 'light' && buttonResponsibility === 'dark') {
-      return false;
-    } else if (currentTheme === 'dark' && buttonResponsibility === 'dark') {
-      return true;
-    }
-  };
-
   public render(): React.ReactNode {
     const { themedStyle, showcase } = this.props;
 
     return (
-      <ThemeContext.Consumer>{({ currentTheme, toggleTheme}): React.ReactElement<ViewProps> => (
-        <View style={themedStyle.container}>
-          <View style={themedStyle.themeButtonsContainer}>
-            <Button
-              disabled={this.isThemeButtonDisabled(currentTheme, 'light')}
-              onPress={() => toggleTheme('light')}>
-              Light
-            </Button>
-            <Button
-              disabled={this.isThemeButtonDisabled(currentTheme, 'dark')}
-              onPress={() => toggleTheme('dark')}>
-              Dark
-            </Button>
-          </View>
-          <ScrollView style={themedStyle.container}>
-            {showcase.sections.map(this.renderItem)}
-          </ScrollView>
-        </View>
-      )}</ThemeContext.Consumer>
+      <ThemeConsumer>
+        <ScrollView style={themedStyle.container}>
+          {showcase.sections.map(this.renderItem)}
+        </ScrollView>
+      </ThemeConsumer>
     );
   }
 }
@@ -96,11 +67,7 @@ class ShowcaseComponent extends React.Component<ShowcaseProps> {
 export const Showcase = withStyles(ShowcaseComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-  },
-  themeButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginTop: 16,
+    backgroundColor: theme['background-color-default-1'],
   },
   item: {
     paddingHorizontal: 24,
@@ -108,6 +75,7 @@ export const Showcase = withStyles(ShowcaseComponent, (theme: ThemeType) => ({
   },
   itemBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: theme['color-basic-200'],
+    borderBottomColor: theme['border-color-default-2'],
   },
 }));
+

@@ -35,7 +35,7 @@ class ShowcaseItemComponent extends React.Component<ShowcaseItemProps> {
 
     return (
       <View style={[themedStyle.container, style]}>
-        <Text style={themedStyle.titleLabel}>{item.title}</Text>
+        <Text appearance='hint' style={themedStyle.titleLabel}>{item.title}</Text>
         {this.renderElement()}
       </View>
     );
@@ -51,7 +51,6 @@ export const ShowcaseItem = withStyles(ShowcaseItemComponent, (theme: ThemeType)
   titleLabel: {
     minWidth: 128,
     fontSize: 13,
-    color: theme['color-basic-600'],
   },
   element: {},
 }));

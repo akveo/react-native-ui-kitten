@@ -1,5 +1,5 @@
 export {
-  withNavigation,
-  Props as NavigatorProps,
   RouteType,
+  Router,
+  routes,
 } from './navigation.component';

@@ -12,6 +12,7 @@ import {
   ThemeType,
 } from '@kitten/theme';
 import { Popover } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -65,50 +66,52 @@ class PopoverScreen extends React.Component<Props, State> {
     const { container, componentContainer, component, tip, text } = this.props.themedStyle;
 
     return (
-      <View style={container}>
-        <View style={componentContainer}>
-          <Popover
-            style={component}
-            placement={`${PLACEMENT} start`}
-            visible={this.state.startVisible}
-            content={this.createPopoverContentElement('❤️')}
-            onRequestClose={this.onStartPress}>
-            <TouchableOpacity
-              style={tip}
-              onPress={this.onStartPress}>
-              <Text style={text}>{`${PLACEMENT} start`.toUpperCase()}</Text>
-            </TouchableOpacity>
-          </Popover>
+      <ThemeConsumer>
+        <View style={container}>
+          <View style={componentContainer}>
+            <Popover
+              style={component}
+              placement={`${PLACEMENT} start`}
+              visible={this.state.startVisible}
+              content={this.createPopoverContentElement('❤️')}
+              onRequestClose={this.onStartPress}>
+              <TouchableOpacity
+                style={tip}
+                onPress={this.onStartPress}>
+                <Text style={text}>{`${PLACEMENT} start`.toUpperCase()}</Text>
+              </TouchableOpacity>
+            </Popover>
+          </View>
+          <View style={componentContainer}>
+            <Popover
+              style={component}
+              placement={`${PLACEMENT}`}
+              visible={this.state.centerVisible}
+              content={this.createPopoverContentElement('💛️')}
+              onRequestClose={this.onCenterPress}>
+              <TouchableOpacity
+                style={tip}
+                onPress={this.onCenterPress}>
+                <Text style={text}>{`${PLACEMENT}`.toUpperCase()}</Text>
+              </TouchableOpacity>
+            </Popover>
+          </View>
+          <View style={componentContainer}>
+            <Popover
+              style={component}
+              placement={`${PLACEMENT} end`}
+              visible={this.state.endVisible}
+              content={this.createPopoverContentElement('💚')}
+              onRequestClose={this.onEndPress}>
+              <TouchableOpacity
+                style={tip}
+                onPress={this.onEndPress}>
+                <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
+              </TouchableOpacity>
+            </Popover>
+          </View>
         </View>
-        <View style={componentContainer}>
-          <Popover
-            style={component}
-            placement={`${PLACEMENT}`}
-            visible={this.state.centerVisible}
-            content={this.createPopoverContentElement('💛️')}
-            onRequestClose={this.onCenterPress}>
-            <TouchableOpacity
-              style={tip}
-              onPress={this.onCenterPress}>
-              <Text style={text}>{`${PLACEMENT}`.toUpperCase()}</Text>
-            </TouchableOpacity>
-          </Popover>
-        </View>
-        <View style={componentContainer}>
-          <Popover
-            style={component}
-            placement={`${PLACEMENT} end`}
-            visible={this.state.endVisible}
-            content={this.createPopoverContentElement('💚')}
-            onRequestClose={this.onEndPress}>
-            <TouchableOpacity
-              style={tip}
-              onPress={this.onEndPress}>
-              <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
-            </TouchableOpacity>
-          </Popover>
-        </View>
-      </View>
+      </ThemeConsumer>
     );
   }
 }
@@ -116,9 +119,9 @@ class PopoverScreen extends React.Component<Props, State> {
 export default withStyles(PopoverScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    backgroundColor: theme['background-color-default-1'],
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'lightgray',
   },
   componentContainer: {
     margin: 32,

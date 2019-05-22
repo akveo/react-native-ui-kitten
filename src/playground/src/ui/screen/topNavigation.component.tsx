@@ -21,6 +21,7 @@ import {
   TopNavigationAction,
   TopNavigationActionProps,
 } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -69,9 +70,11 @@ class TopNavigationScreen extends React.Component<Props> {
 
   public render(): React.ReactNode {
     return (
-      <View style={this.props.themedStyle.container}>
-        <Text>Top Navigation Bar Demo</Text>
-      </View>
+      <ThemeConsumer>
+        <View style={this.props.themedStyle.container}>
+          <Text>Top Navigation Bar Demo</Text>
+        </View>
+      </ThemeConsumer>
     );
   }
 }

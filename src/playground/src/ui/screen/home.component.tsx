@@ -13,11 +13,11 @@ import {
   withStyles,
 } from '@kitten/theme';
 import {
-  NavigatorProps,
+  routes,
   RouteType,
 } from '../../navigation';
 
-type Props = NavigatorProps & ThemedComponentProps & NavigationScreenProps;
+type Props = ThemedComponentProps & NavigationScreenProps;
 
 class HomeScreen extends React.Component<Props> {
 
@@ -47,7 +47,7 @@ class HomeScreen extends React.Component<Props> {
       <FlatList
         keyExtractor={this.extractItemKey}
         style={this.props.themedStyle.container}
-        data={this.props.routes}
+        data={routes}
         renderItem={this.renderItem}
       />
     );

@@ -13,6 +13,7 @@ import {
   TabBar,
   Tab,
 } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -51,45 +52,49 @@ class TabBarScreen extends React.Component<Props, State> {
 
   public render(): React.ReactNode {
     return (
-      <View style={this.props.themedStyle.container}>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Default</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <TabBar
-              onSelect={this.onBar1Select}
-              selectedIndex={this.state.bar1SelectedIndex}>
-              <Tab title='❤️'/>
-              <Tab title='💛️'/>
-              <Tab title='💚️'/>
-            </TabBar>
+      <ThemeConsumer>
+        <View style={this.props.themedStyle.container}>
+          <View style={this.props.themedStyle.containerSection}>
+            <Text style={this.props.themedStyle.textDescription}>Default</Text>
+            <View style={this.props.themedStyle.containerPreview}>
+              <TabBar
+                onSelect={this.onBar1Select}
+                selectedIndex={this.state.bar1SelectedIndex}>
+                <Tab title='❤️'/>
+                <Tab title='💛️'/>
+                <Tab title='💚️'/>
+              </TabBar>
+            </View>
+          </View>
+          <View style={this.props.themedStyle.containerSection}>
+            <Text style={this.props.themedStyle.textDescription}>Custom</Text>
+            <View style={this.props.themedStyle.containerPreview}>
+              <TabBar
+                style={this.props.themedStyle.customBar}
+                onSelect={this.onBar2Select}
+                selectedIndex={this.state.bar2SelectedIndex}>
+                <Tab
+                  style={this.createCustomTabStyle(0)}
+                  title='❤️'/>
+                <Tab
+                  style={this.createCustomTabStyle(1)}
+                  title='💛️'/>
+                <Tab
+                  style={this.createCustomTabStyle(2)}
+                  title='💚️'/>
+              </TabBar>
+            </View>
           </View>
         </View>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Custom</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <TabBar
-              style={this.props.themedStyle.customBar}
-              onSelect={this.onBar2Select}
-              selectedIndex={this.state.bar2SelectedIndex}>
-              <Tab
-                style={this.createCustomTabStyle(0)}
-                title='❤️'/>
-              <Tab
-                style={this.createCustomTabStyle(1)}
-                title='💛️'/>
-              <Tab
-                style={this.createCustomTabStyle(2)}
-                title='💚️'/>
-            </TabBar>
-          </View>
-        </View>
-      </View>
+      </ThemeConsumer>
     );
   }
 }
 
 export default withStyles(TabBarScreen, (theme: ThemeType) => ({
   container: {
+    flex: 1,
+    backgroundColor: theme['background-color-default-1'],
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
