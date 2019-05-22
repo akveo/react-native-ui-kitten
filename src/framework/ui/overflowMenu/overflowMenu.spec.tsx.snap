@@ -30,7 +30,7 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
   onRequestClose={[Function]}
   visible={true}
 >
-  <Component />
+  <View />
 </Wrapper>
 `;
 
@@ -52,7 +52,7 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
   onRequestClose={[Function]}
   visible={true}
 >
-  <Component />
+  <View />
 </Wrapper>
 `;
 

@@ -7,8 +7,8 @@
   "gray-dark": "#8992A3",
   "gray-highlight": "#EDF0F5",
   "pink-primary": "#FF3D71",
-  "text-primary": "#000000",
-  "text-primary-inverse": "#ffffff",
+  "text-primary": "#FFFFFF",
+  "text-primary-inverse": "#000000",
 
   "gray-100": "#f7f8fa",
   "gray-200": "#edf0f5",
