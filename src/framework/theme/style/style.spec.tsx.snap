@@ -133,7 +133,7 @@ Object {
   "selectBorderRadius": 12,
   "selectHeight": 24,
   "selectWidth": 24,
-  "textColor": "#000000",
+  "textColor": "#FFFFFF",
   "textFontSize": 16,
   "textFontWeight": "500",
   "textMarginLeft": 12,
