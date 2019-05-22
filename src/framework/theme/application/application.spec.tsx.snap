@@ -2657,6 +2657,7 @@ exports[`@app: application wrapper check * renders properly 1`] = `
       "gray-light": "#DDE1EB",
       "gray-primary": "#A6AEBD",
       "pink-primary": "#FF3D71",
+      "referencing": "$gray-100",
       "text-primary": "#000000",
       "text-primary-inverse": "#ffffff",
     }
