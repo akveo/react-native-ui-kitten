@@ -106,6 +106,12 @@ describe('@theme: service method checks', () => {
     expect(undefinedValue).toBeUndefined();
   });
 
+  it('finds referencing theme value properly', async () => {
+    const themeValue = getThemeValue('referencing', theme);
+
+    expect(themeValue).toEqual(theme['gray-100']);
+  });
+
 });
 
 describe('@theme: ui component checks', () => {

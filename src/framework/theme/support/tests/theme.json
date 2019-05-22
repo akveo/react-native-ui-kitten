@@ -13,5 +13,7 @@
   "gray-100": "#f7f8fa",
   "gray-200": "#edf0f5",
   "gray-300": "#c8cedb",
-  "gray-400": "#a6aebd"
+  "gray-400": "#a6aebd",
+
+  "referencing": "$gray-100"
 }
