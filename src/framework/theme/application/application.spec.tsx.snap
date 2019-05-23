@@ -2648,6 +2648,7 @@ exports[`@app: application wrapper check * renders properly 1`] = `
       "blue-dark": "#2541CC",
       "blue-pitch-dark": "#0D1C2E",
       "blue-primary": "#3366FF",
+      "double-referencing": "$referencing",
       "gray-100": "#f7f8fa",
       "gray-200": "#edf0f5",
       "gray-300": "#c8cedb",

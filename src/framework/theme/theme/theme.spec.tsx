@@ -112,6 +112,19 @@ describe('@theme: service method checks', () => {
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
+  it('finds multiple referencing theme value properly', async () => {
+    const themeValue = getThemeValue('double-referencing', theme);
+
+    expect(themeValue).toEqual(theme['gray-100']);
+  });
+
+  it('finds referencing theme value properly (initial reference)', async () => {
+    const themeValue = getThemeValue('referencing', theme);
+
+    expect(themeValue).toEqual(theme['gray-100']);
+  });
+
+
 });
 
 describe('@theme: ui component checks', () => {

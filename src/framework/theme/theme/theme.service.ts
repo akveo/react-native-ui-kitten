@@ -10,6 +10,12 @@ const SYMBOL_REFERENCE: string = '$';
  * @return any. Theme property value if it presents in theme, fallback otherwise
  */
 export function getThemeValue(name: string, theme: ThemeType, fallback?: any): any | undefined {
+  if (isReferenceKey(name)) {
+    const themeKey: string = toThemeKey(name);
+
+    return findThemeValue(themeKey, theme) || fallback;
+  }
+
   return findThemeValue(name, theme) || fallback;
 }
 

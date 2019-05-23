@@ -182,6 +182,7 @@ export class InputComponent extends React.Component<InputProps> {
       textLineHeight,
       textFontWeight,
       textColor,
+      placeholderColor,
       iconWidth,
       iconHeight,
       iconMarginHorizontal,
@@ -226,6 +227,9 @@ export class InputComponent extends React.Component<InputProps> {
         color: textColor,
         ...styles.text,
         ...StyleSheet.flatten(textStyle),
+      },
+      placeholder: {
+        color: placeholderColor,
       },
       icon: {
         width: iconWidth,
@@ -328,6 +332,7 @@ export class InputComponent extends React.Component<InputProps> {
           <TextInput
             {...restProps}
             style={componentStyle.text}
+            placeholderTextColor={componentStyle.placeholder.color}
             editable={!disabled}
             onFocus={this.onFocus}
             onEndEditing={this.onEndEditing}
