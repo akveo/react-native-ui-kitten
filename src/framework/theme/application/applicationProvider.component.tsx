@@ -45,7 +45,7 @@ interface State {
  * Optional.
  *
  * @property {ThemeType} theme - Determines the theme for basic components.
- * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva/theme-eva`).
+ * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva/themes`).
  *
  * @property {React.ReactNode} children - Determines application root component.
  *
@@ -55,7 +55,7 @@ interface State {
  *
  * ```
  * import { mapping } from '@eva/eva';
- * import { theme } from '@eva/theme-eva';
+ * import { theme } from '@eva/themes';
  * import { ApplicationProvider } from '@kitten/theme';
  * import { Application } from './path-to/root.component';
  *

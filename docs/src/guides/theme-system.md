@@ -17,7 +17,7 @@ We don't provide styling configuration files out of the box to let you choose a 
 ### Theme System Installation
 
 ```bash
-npm i @eva/eva @eva/theme-eva
+npm i @eva/eva @eva/themes
 ```
 
 <hr>
@@ -26,7 +26,7 @@ npm i @eva/eva @eva/theme-eva
 
 ```tsx
 import { mapping } from '@eva/eva';
-import { theme } from '@eva/theme-eva';
+import { theme } from '@eva/themes';
 import { ApplicationProvider } from '@kitten/theme';
 import { Application } from './path-to/root.component';
 

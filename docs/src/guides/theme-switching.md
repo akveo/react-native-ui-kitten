@@ -10,7 +10,7 @@ through the property into the `ApplicationProvider`.
 
 ```tsx
 import { mapping } from '@eva/eva';
-import { theme } from '@eva/theme-eva';
+import { theme } from '@eva/themes';
 import { customTheme } from './path-to/custom-theme;
 import {
   ApplicationProvider,

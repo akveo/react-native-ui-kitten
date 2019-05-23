@@ -34,7 +34,7 @@ npm i react-native-ui-kitten
 ### Install Eva Design System and theme
 
 ```bash
-npm i @eva/eva @eva/theme-eva
+npm i @eva/eva @eva/themes
 ```
 
 That's it! React Native UI Kitten has to be ready to go now.
@@ -47,7 +47,7 @@ At this stage you have everything in place, let's configure React Native UI Kitt
 
 ```tsx
 import { mapping } from '@eva/eva';
-import { theme } from '@eva/theme-eva';
+import { theme } from '@eva/themes';
 import { ApplicationProvider } from '@kitten/theme';
 import { Application } from './path-to/root.component';
 

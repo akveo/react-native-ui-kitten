@@ -122,7 +122,7 @@ All that you have to do is to provide a custom mapping to ApplicationProvider.
 ```tsx
 import React from 'react';
 import { mapping } from '@eva/eva';
-import { theme } from '@eva/theme-eva';
+import { theme } from '@eva/themes';
 import { 
   ApplicationProvider,
   ApplicationProviderProps,

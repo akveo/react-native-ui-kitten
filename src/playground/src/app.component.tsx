@@ -1,6 +1,6 @@
 import React from 'react';
 import { default as mapping } from '@eva/eva';
-import { theme } from '@eva/theme-eva';
+import { theme } from '@eva/themes';
 import {
   ApplicationProvider,
   ThemeType,

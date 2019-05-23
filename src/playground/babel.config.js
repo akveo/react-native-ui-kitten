@@ -13,7 +13,7 @@ const moduleResolverConfig = {
     '@kitten/theme': path.resolve(Config.KITTEN_PATH, 'theme'),
     '@kitten/ui': path.resolve(Config.KITTEN_PATH, 'ui'),
     '@eva/eva': path.resolve(Config.MAPPING_PATH),
-    '@eva/theme-eva': path.resolve(Config.THEME_PATH),
+    '@eva/themes': path.resolve(Config.THEME_PATH),
     '@eva/processor-kitten': path.resolve(Config.PROCESSOR_PATH),
   },
 };
