@@ -12,6 +12,8 @@ import {
   ThemedStyleType,
   ThemeType,
 } from './type';
+import { createThemedStyle } from '../style/style.service';
+import { StyleType } from '@kitten/theme';
 
 interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;
@@ -101,11 +103,19 @@ export const withStyles = <P extends object>(Component: React.ComponentClass<P>,
 
   class Wrapper extends React.Component<WrappingProps> {
 
+    private createThemedStyles = (style: ThemedStyleType, theme: ThemeType): ThemedStyleType => {
+      return Object.keys(style).reduce((acc: StyleType, current: string): ThemedStyleType => {
+        return { ...acc, [current]: createThemedStyle(style[current], theme) };
+      }, {});
+    };
+
     private withThemedProps = (source: P, context: Context): WrappedProps => {
+      const style: ThemedStyleType = createStyles ? createStyles(context.theme) : {};
+
       return {
         ...source,
         theme: context.theme,
-        themedStyle: createStyles ? createStyles(context.theme) : undefined,
+        themedStyle: this.createThemedStyles(style, context.theme),
       };
     };
 
