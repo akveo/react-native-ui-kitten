@@ -19,12 +19,13 @@ import {
   BottomNavigationTab,
 } from '@kitten/ui';
 import { StyleType } from '@kitten/theme';
+import { ThemeConsumer } from '../themeConsumer';
 
 const APPEARANCE: string = 'default';
 
-const TabScreen1 = (): React.ReactElement<{}> => <View><Text>Tab Screen 1</Text></View>;
-const TabScreen2 = (): React.ReactElement<{}> => <View><Text>Tab Screen 2</Text></View>;
-const TabScreen3 = (): React.ReactElement<{}> => <View><Text>Tab Screen 3</Text></View>;
+const TabScreen1 = (): React.ReactElement<{}> => <ThemeConsumer><View><Text>Tab Screen 1</Text></View></ThemeConsumer>;
+const TabScreen2 = (): React.ReactElement<{}> => <ThemeConsumer><View><Text>Tab Screen 2</Text></View></ThemeConsumer>;
+const TabScreen3 = (): React.ReactElement<{}> => <ThemeConsumer><View><Text>Tab Screen 3</Text></View></ThemeConsumer>;
 
 interface NavigationProps {
   navigation: NavigationScreenProp<NavigationState>;

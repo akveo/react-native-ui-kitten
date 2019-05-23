@@ -17,6 +17,7 @@ import {
   Button,
   ButtonGroup,
 } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -47,190 +48,192 @@ class ButtonGroupScreen extends React.Component<Props, State> {
     const { themedStyle } = this.props;
 
     return (
-      <ScrollView
-        style={themedStyle.container}
-        contentContainerStyle={themedStyle.content}>
-        <View style={themedStyle.containerSection}>
-          <Text style={themedStyle.textDescription}>Icon</Text>
-          <View style={themedStyle.containerPreview}>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='giant'>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='large'>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='medium'>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='small'>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='tiny'>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-              <Button icon={this.renderIcon}/>
-            </ButtonGroup>
+      <ThemeConsumer>
+        <ScrollView
+          style={themedStyle.container}
+          contentContainerStyle={themedStyle.content}>
+          <View style={themedStyle.containerSection}>
+            <Text style={themedStyle.textDescription}>Icon</Text>
+            <View style={themedStyle.containerPreview}>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='giant'>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='large'>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='medium'>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='small'>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='tiny'>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+                <Button icon={this.renderIcon}/>
+              </ButtonGroup>
+            </View>
           </View>
-        </View>
-        <View style={themedStyle.containerSection}>
-          <Text style={themedStyle.textDescription}>Text</Text>
-          <View style={themedStyle.containerPreview}>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='giant'>
-              <Button>Left</Button>
-              <Button>Mid</Button>
-              <Button>Right</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='large'>
-              <Button>Left</Button>
-              <Button>Mid</Button>
-              <Button>Right</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='medium'>
-              <Button>Left</Button>
-              <Button>Mid</Button>
-              <Button>Right</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='small'>
-              <Button>Left</Button>
-              <Button>Mid</Button>
-              <Button>Right</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              size='tiny'>
-              <Button>Left</Button>
-              <Button>Mid</Button>
-              <Button>Right</Button>
-            </ButtonGroup>
+          <View style={themedStyle.containerSection}>
+            <Text style={themedStyle.textDescription}>Text</Text>
+            <View style={themedStyle.containerPreview}>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='giant'>
+                <Button>Left</Button>
+                <Button>Mid</Button>
+                <Button>Right</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='large'>
+                <Button>Left</Button>
+                <Button>Mid</Button>
+                <Button>Right</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='medium'>
+                <Button>Left</Button>
+                <Button>Mid</Button>
+                <Button>Right</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='small'>
+                <Button>Left</Button>
+                <Button>Mid</Button>
+                <Button>Right</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                size='tiny'>
+                <Button>Left</Button>
+                <Button>Mid</Button>
+                <Button>Right</Button>
+              </ButtonGroup>
+            </View>
           </View>
-        </View>
-        <View style={themedStyle.containerSection}>
-          <Text style={themedStyle.textDescription}>Outline Icon + Text</Text>
-          <View style={themedStyle.containerPreview}>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE_OUTLINE}
-              size='giant'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE_OUTLINE}
-              size='large'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE_OUTLINE}
-              size='medium'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE_OUTLINE}
-              size='small'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE_OUTLINE}
-              size='tiny'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
+          <View style={themedStyle.containerSection}>
+            <Text style={themedStyle.textDescription}>Outline Icon + Text</Text>
+            <View style={themedStyle.containerPreview}>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE_OUTLINE}
+                size='giant'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE_OUTLINE}
+                size='large'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE_OUTLINE}
+                size='medium'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE_OUTLINE}
+                size='small'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE_OUTLINE}
+                size='tiny'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+            </View>
           </View>
-        </View>
-        <View style={themedStyle.containerSection}>
-          <Text style={themedStyle.textDescription}>Status</Text>
-          <View style={themedStyle.containerPreview}>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              status='primary'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              status='success'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              status='info'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              status='warning'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
-            <ButtonGroup
-              style={themedStyle.component}
-              appearance={APPEARANCE}
-              status='danger'>
-              <Button icon={this.renderIcon}>L</Button>
-              <Button icon={this.renderIcon}>M</Button>
-              <Button icon={this.renderIcon}>R</Button>
-            </ButtonGroup>
+          <View style={themedStyle.containerSection}>
+            <Text style={themedStyle.textDescription}>Status</Text>
+            <View style={themedStyle.containerPreview}>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                status='primary'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                status='success'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                status='info'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                status='warning'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+              <ButtonGroup
+                style={themedStyle.component}
+                appearance={APPEARANCE}
+                status='danger'>
+                <Button icon={this.renderIcon}>L</Button>
+                <Button icon={this.renderIcon}>M</Button>
+                <Button icon={this.renderIcon}>R</Button>
+              </ButtonGroup>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </ThemeConsumer>
     );
   }
 }
@@ -238,6 +241,7 @@ class ButtonGroupScreen extends React.Component<Props, State> {
 export default withStyles(ButtonGroupScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    backgroundColor: theme['background-color-default-1'],
   },
   content: {
     paddingVertical: 8,

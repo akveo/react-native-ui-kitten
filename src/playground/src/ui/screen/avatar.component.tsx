@@ -115,6 +115,8 @@ class AvatarScreen extends React.Component<Props, State> {
 
 export default withStyles(AvatarScreen, (theme: ThemeType) => ({
   container: {
+    flex: 1,
+    backgroundColor: theme['background-color-default-1'],
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

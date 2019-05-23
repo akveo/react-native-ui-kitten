@@ -10,6 +10,7 @@ import {
   ThemeType,
 } from '@kitten/theme';
 import { ViewPager } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -37,21 +38,23 @@ class ViewPagerScreen extends React.Component<Props, State> {
 
   public render(): React.ReactNode {
     return (
-      <ViewPager
-        selectedIndex={this.state.selectedIndex}
-        contentContainerStyle={this.props.themedStyle.container}
-        shouldLoadComponent={this.shouldLoadPageContent}
-        onSelect={this.onIndexChange}>
-        <View style={this.props.themedStyle.tabContainer}>
-          <Text>Tab 1</Text>
-        </View>
-        <View style={this.props.themedStyle.tabContainer}>
-          <Text>Tab 2</Text>
-        </View>
-        <View style={this.props.themedStyle.tabContainer}>
-          <Text>Tab 3</Text>
-        </View>
-      </ViewPager>
+      <ThemeConsumer>
+        <ViewPager
+          selectedIndex={this.state.selectedIndex}
+          contentContainerStyle={this.props.themedStyle.container}
+          shouldLoadComponent={this.shouldLoadPageContent}
+          onSelect={this.onIndexChange}>
+          <View style={this.props.themedStyle.tabContainer}>
+            <Text>Tab 1</Text>
+          </View>
+          <View style={this.props.themedStyle.tabContainer}>
+            <Text>Tab 2</Text>
+          </View>
+          <View style={this.props.themedStyle.tabContainer}>
+            <Text>Tab 3</Text>
+          </View>
+        </ViewPager>
+      </ThemeConsumer>
     );
   }
 }
@@ -59,6 +62,8 @@ class ViewPagerScreen extends React.Component<Props, State> {
 export default withStyles(ViewPagerScreen, (theme: ThemeType) => ({
   container: {
     padding: 16,
+    flex: 1,
+    backgroundColor: theme['background-color-default-1'],
   },
   tabContainer: {
     flex: 1,

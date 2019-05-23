@@ -13,6 +13,7 @@ import {
   RadioGroup,
   Radio,
 } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -54,60 +55,64 @@ class RadioGroupScreen extends React.Component<Props, State> {
 
   public render(): React.ReactNode {
     return (
-      <View style={this.props.themedStyle.container}>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Vertical</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <RadioGroup
-              selectedIndex={this.state.selectedIndexGroup2}
-              onChange={this.onGroup2SelectionChange}>
-              <Radio style={this.props.themedStyle.component}/>
-              <Radio style={this.props.themedStyle.component}/>
-            </RadioGroup>
+      <ThemeConsumer>
+        <View style={this.props.themedStyle.container}>
+          <View style={this.props.themedStyle.containerSection}>
+            <Text style={this.props.themedStyle.textDescription}>Vertical</Text>
+            <View style={this.props.themedStyle.containerPreview}>
+              <RadioGroup
+                selectedIndex={this.state.selectedIndexGroup2}
+                onChange={this.onGroup2SelectionChange}>
+                <Radio style={this.props.themedStyle.component}/>
+                <Radio style={this.props.themedStyle.component}/>
+              </RadioGroup>
+            </View>
+          </View>
+          <View style={this.props.themedStyle.containerSection}>
+            <Text style={this.props.themedStyle.textDescription}>Horizontal</Text>
+            <View style={this.props.themedStyle.containerPreview}>
+              <RadioGroup
+                style={{ flexDirection: 'row' }}
+                selectedIndex={this.state.selectedIndexGroup1}
+                onChange={this.onGroup1SelectionChange}>
+                <Radio style={this.props.themedStyle.component}/>
+                <Radio style={this.props.themedStyle.component}/>
+              </RadioGroup>
+            </View>
+          </View>
+          <View style={this.props.themedStyle.containerSection}>
+            <Text style={this.props.themedStyle.textDescription}>Danger</Text>
+            <View style={this.props.themedStyle.containerPreview}>
+              <RadioGroup
+                selectedIndex={this.state.selectedIndexGroup3}
+                onChange={this.onGroup3SelectionChange}>
+                <Radio
+                  style={this.props.themedStyle.component}
+                  status='danger'
+                  size='small'
+                />
+                <Radio
+                  style={this.props.themedStyle.component}
+                  status='danger'
+                />
+                <Radio
+                  style={this.props.themedStyle.component}
+                  status='danger'
+                  size='large'
+                />
+              </RadioGroup>
+            </View>
           </View>
         </View>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Horizontal</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <RadioGroup
-              style={{ flexDirection: 'row' }}
-              selectedIndex={this.state.selectedIndexGroup1}
-              onChange={this.onGroup1SelectionChange}>
-              <Radio style={this.props.themedStyle.component}/>
-              <Radio style={this.props.themedStyle.component}/>
-            </RadioGroup>
-          </View>
-        </View>
-        <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Danger</Text>
-          <View style={this.props.themedStyle.containerPreview}>
-            <RadioGroup
-              selectedIndex={this.state.selectedIndexGroup3}
-              onChange={this.onGroup3SelectionChange}>
-              <Radio
-                style={this.props.themedStyle.component}
-                status='danger'
-                size='small'
-              />
-              <Radio
-                style={this.props.themedStyle.component}
-                status='danger'
-              />
-              <Radio
-                style={this.props.themedStyle.component}
-                status='danger'
-                size='large'
-              />
-            </RadioGroup>
-          </View>
-        </View>
-      </View>
+      </ThemeConsumer>
     );
   }
 }
 
 export default withStyles(RadioGroupScreen, (theme: ThemeType) => ({
   container: {
+    flex: 1,
+    backgroundColor: theme['background-color-default-1'],
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

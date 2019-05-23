@@ -11,6 +11,7 @@ import {
   ListItemProps,
 } from '@kitten/ui';
 import { ListItemIconAccessoryShowcase as ListItem } from './listItem.showcase.component';
+import { ThemeConsumer } from '../themeConsumer';
 
 interface ListItemModel {
   title: string;
@@ -55,10 +56,12 @@ class ListScreen extends React.Component<Props> {
 
   public render(): React.ReactNode {
     return (
-      <List
-        data={this.items}
-        renderItem={this.renderItem}
-      />
+      <ThemeConsumer>
+        <List
+          data={this.items}
+          renderItem={this.renderItem}
+        />
+      </ThemeConsumer>
     );
   }
 }

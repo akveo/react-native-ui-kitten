@@ -15,6 +15,7 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { Tooltip } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -85,65 +86,67 @@ class TooltipScreen extends React.Component<Props, State> {
     } = this.props.themedStyle;
 
     return (
-      <View style={container}>
-        <View style={componentContainer}>
-          <Tooltip
-            style={component}
-            placement={`${PLACEMENT} start`}
-            visible={this.state.startVisible}
-            text='Place your text here️'
-            textStyle={bottomStartText}
-            onRequestClose={this.onStartPress}>
-            <TouchableOpacity
-              style={tip}
-              onPress={this.onStartPress}>
-              <Text style={text}>{`${PLACEMENT} start`.toUpperCase()}</Text>
-            </TouchableOpacity>
-          </Tooltip>
+      <ThemeConsumer>
+        <View style={container}>
+          <View style={componentContainer}>
+            <Tooltip
+              style={component}
+              placement={`${PLACEMENT} start`}
+              visible={this.state.startVisible}
+              text='Place your text here️'
+              textStyle={bottomStartText}
+              onRequestClose={this.onStartPress}>
+              <TouchableOpacity
+                style={tip}
+                onPress={this.onStartPress}>
+                <Text style={text}>{`${PLACEMENT} start`.toUpperCase()}</Text>
+              </TouchableOpacity>
+            </Tooltip>
+          </View>
+          <View style={componentContainer}>
+            <Tooltip
+              style={component}
+              placement={`${PLACEMENT}`}
+              visible={this.state.centerVisible}
+              text='Place your text here'
+              onRequestClose={this.onCenterPress}>
+              <TouchableOpacity
+                style={tip}
+                onPress={this.onCenterPress}>
+                <Text style={text}>{`${PLACEMENT}`.toUpperCase()}</Text>
+              </TouchableOpacity>
+            </Tooltip>
+          </View>
+          <View style={componentContainer}>
+            <Tooltip
+              style={component}
+              placement={`${PLACEMENT} end`}
+              visible={this.state.endVisible}
+              text='Place your text here'
+              onRequestClose={this.onEndPress}>
+              <TouchableOpacity
+                style={tip}
+                onPress={this.onEndPress}>
+                <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
+              </TouchableOpacity>
+            </Tooltip>
+          </View>
+          <View style={componentContainer}>
+            <Tooltip
+              style={component}
+              visible={this.state.withIconVisible}
+              text='Place your text here'
+              icon={this.renderIcon}
+              onRequestClose={this.onWithIconPress}>
+              <TouchableOpacity
+                style={tip}
+                onPress={this.onWithIconPress}>
+                <Text style={text}>WITH ICON</Text>
+              </TouchableOpacity>
+            </Tooltip>
+          </View>
         </View>
-        <View style={componentContainer}>
-          <Tooltip
-            style={component}
-            placement={`${PLACEMENT}`}
-            visible={this.state.centerVisible}
-            text='Place your text here'
-            onRequestClose={this.onCenterPress}>
-            <TouchableOpacity
-              style={tip}
-              onPress={this.onCenterPress}>
-              <Text style={text}>{`${PLACEMENT}`.toUpperCase()}</Text>
-            </TouchableOpacity>
-          </Tooltip>
-        </View>
-        <View style={componentContainer}>
-          <Tooltip
-            style={component}
-            placement={`${PLACEMENT} end`}
-            visible={this.state.endVisible}
-            text='Place your text here'
-            onRequestClose={this.onEndPress}>
-            <TouchableOpacity
-              style={tip}
-              onPress={this.onEndPress}>
-              <Text style={text}>{`${PLACEMENT} end`.toUpperCase()}</Text>
-            </TouchableOpacity>
-          </Tooltip>
-        </View>
-        <View style={componentContainer}>
-          <Tooltip
-            style={component}
-            visible={this.state.withIconVisible}
-            text='Place your text here'
-            icon={this.renderIcon}
-            onRequestClose={this.onWithIconPress}>
-            <TouchableOpacity
-              style={tip}
-              onPress={this.onWithIconPress}>
-              <Text style={text}>WITH ICON</Text>
-            </TouchableOpacity>
-          </Tooltip>
-        </View>
-      </View>
+      </ThemeConsumer>
     );
   }
 }
@@ -151,6 +154,7 @@ class TooltipScreen extends React.Component<Props, State> {
 export default withStyles(TooltipScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    backgroundColor: theme['background-color-default-1'],
     alignItems: 'center',
     justifyContent: 'center',
   },

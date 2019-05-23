@@ -17,6 +17,7 @@ import {
   OverflowMenu,
   OverflowMenuItemType,
 } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -87,66 +88,68 @@ class OverflowMenuScreen extends React.Component<Props, State> {
 
   public render(): React.ReactNode {
     return (
-      <View style={this.props.themedStyle.container}>
-        <View style={this.props.themedStyle.innerContainer}>
-          <OverflowMenu
-            items={menuItems}
-            placement='bottom start'
-            visible={this.state.overflowMenu1Visible}
-            style={this.props.themedStyle.menu}
-            onSelect={this.onSelectItem}
-            onRequestClose={this.setMenu1Visible}>
-            <TouchableOpacity
-              onPress={this.setMenu1Visible}
-              style={this.props.themedStyle.menuContainer}>
-              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
-            </TouchableOpacity>
-          </OverflowMenu>
-          <OverflowMenu
-            items={menuItems}
-            placement='bottom end'
-            size='small'
-            visible={this.state.overflowMenu2Visible}
-            style={this.props.themedStyle.menu}
-            onSelect={this.onSelectItem}
-            onRequestClose={this.setMenu2Visible}>
-            <TouchableOpacity
-              onPress={this.setMenu2Visible}
-              style={this.props.themedStyle.menuContainer}>
-              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
-            </TouchableOpacity>
-          </OverflowMenu>
+      <ThemeConsumer>
+        <View style={this.props.themedStyle.container}>
+          <View style={this.props.themedStyle.innerContainer}>
+            <OverflowMenu
+              items={menuItems}
+              placement='bottom start'
+              visible={this.state.overflowMenu1Visible}
+              style={this.props.themedStyle.menu}
+              onSelect={this.onSelectItem}
+              onRequestClose={this.setMenu1Visible}>
+              <TouchableOpacity
+                onPress={this.setMenu1Visible}
+                style={this.props.themedStyle.menuContainerStart}>
+                <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+              </TouchableOpacity>
+            </OverflowMenu>
+            <OverflowMenu
+              items={menuItems}
+              placement='bottom end'
+              size='small'
+              visible={this.state.overflowMenu2Visible}
+              style={this.props.themedStyle.menu}
+              onSelect={this.onSelectItem}
+              onRequestClose={this.setMenu2Visible}>
+              <TouchableOpacity
+                onPress={this.setMenu2Visible}
+                style={this.props.themedStyle.menuContainerStart}>
+                <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+              </TouchableOpacity>
+            </OverflowMenu>
+          </View>
+          <View style={this.props.themedStyle.innerContainer}>
+            <OverflowMenu
+              items={menuItems}
+              placement='top start'
+              size='large'
+              visible={this.state.overflowMenu3Visible}
+              style={this.props.themedStyle.menu}
+              onSelect={this.onSelectItem}
+              onRequestClose={this.setMenu3Visible}>
+              <TouchableOpacity
+                onPress={this.setMenu3Visible}
+                style={this.props.themedStyle.menuContainerEnd}>
+                <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+              </TouchableOpacity>
+            </OverflowMenu>
+            <OverflowMenu
+              items={menuItems}
+              placement='top end'
+              visible={this.state.overflowMenu4Visible}
+              style={this.props.themedStyle.menu}
+              onSelect={this.onSelectItem}
+              onRequestClose={this.setMenu4Visible}>
+              <TouchableOpacity
+                onPress={this.setMenu4Visible}
+                style={this.props.themedStyle.menuContainerEnd}>
+                <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
+              </TouchableOpacity>
+            </OverflowMenu>
+          </View>
         </View>
-        <View style={[this.props.themedStyle.innerContainer, this.props.themedStyle.bottomContainer]}>
-          <OverflowMenu
-            items={menuItems}
-            placement='top start'
-            size='large'
-            visible={this.state.overflowMenu3Visible}
-            style={this.props.themedStyle.menu}
-            onSelect={this.onSelectItem}
-            onRequestClose={this.setMenu3Visible}>
-            <TouchableOpacity
-              onPress={this.setMenu3Visible}
-              style={this.props.themedStyle.menuContainer}>
-              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
-            </TouchableOpacity>
-          </OverflowMenu>
-          <OverflowMenu
-            items={menuItems}
-            placement='top end'
-            visible={this.state.overflowMenu4Visible}
-            style={this.props.themedStyle.menu}
-            onSelect={this.onSelectItem}
-            onRequestClose={this.setMenu4Visible}>
-            <TouchableOpacity
-              onPress={this.setMenu4Visible}
-              style={this.props.themedStyle.menuContainer}>
-              <Image style={this.props.themedStyle.menuIcon} source={{ uri: menuIconUri }}/>
-            </TouchableOpacity>
-          </OverflowMenu>
-        </View>
-      </View>
+      </ThemeConsumer>
     );
   }
 }
@@ -156,15 +159,12 @@ export default withStyles(OverflowMenuScreen, (theme: ThemeType) => ({
     flex: 1,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: '#DDE1EB',
+    backgroundColor: theme['background-color-default-1'],
   },
   innerContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  bottomContainer: {
-    alignItems: 'flex-end',
   },
   menu: {
     width: 300,
@@ -174,8 +174,11 @@ export default withStyles(OverflowMenuScreen, (theme: ThemeType) => ({
     height: 30,
     tintColor: '#3366FF',
   },
-  menuContainer: {
+  menuContainerStart: {
     alignSelf: 'flex-start',
+  },
+  menuContainerEnd: {
+    alignSelf: 'flex-end',
   },
 }));
 

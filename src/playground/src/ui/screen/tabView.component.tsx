@@ -10,11 +10,13 @@ import {
   withStyles,
   ThemedComponentProps,
   StyleType,
+  ThemeType,
 } from '@kitten/theme';
 import {
   Tab,
   TabView,
 } from '@kitten/ui';
+import { ThemeConsumer } from '../themeConsumer';
 
 type Props = & ThemedComponentProps & NavigationScreenProps;
 
@@ -50,34 +52,37 @@ class TabViewScreen extends React.Component<Props, State> {
 
   public render(): React.ReactNode {
     return (
-      <TabView
-        style={this.props.themedStyle.container}
-        selectedIndex={this.state.selectedIndex}
-        shouldLoadComponent={this.shouldLoadTabContent}
-        onSelect={this.onSelect}>
-        <Tab
-          title='TAB 1'
-          icon={this.renderIcon}>
-          <Text>Tab 1</Text>
-        </Tab>
-        <Tab
-          title='TAB 2'
-          icon={this.renderIcon}>
-          <Text>Tab 2</Text>
-        </Tab>
-        <Tab
-          title='TAB 3'
-          icon={this.renderIcon}>
-          <Text>Tab 3</Text>
-        </Tab>
-      </TabView>
+      <ThemeConsumer>
+        <TabView
+          style={this.props.themedStyle.container}
+          selectedIndex={this.state.selectedIndex}
+          shouldLoadComponent={this.shouldLoadTabContent}
+          onSelect={this.onSelect}>
+          <Tab
+            title='TAB 1'
+            icon={this.renderIcon}>
+            <Text>Tab 1</Text>
+          </Tab>
+          <Tab
+            title='TAB 2'
+            icon={this.renderIcon}>
+            <Text>Tab 2</Text>
+          </Tab>
+          <Tab
+            title='TAB 3'
+            icon={this.renderIcon}>
+            <Text>Tab 3</Text>
+          </Tab>
+        </TabView>
+      </ThemeConsumer>
     );
   }
 }
 
-export default withStyles(TabViewScreen, () => ({
+export default withStyles(TabViewScreen, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    backgroundColor: theme['background-color-default-1'],
   },
   icon: {
     width: 30,
