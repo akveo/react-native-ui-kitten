@@ -11,7 +11,6 @@ import {
   TextStyle,
   View,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   styled,
@@ -234,7 +233,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
   };
 
   public render(): React.ReactNode {
-    const { themedStyle, ...restProps } = this.props;
+    const { style, themedStyle, ...restProps } = this.props;
 
     const {
       container,
@@ -253,7 +252,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
     return (
       <View
-        style={container}
+        style={[container, style]}
         {...restProps}>
         <View style={leftControlContainer}>
           {leftControlElement}
