@@ -32,6 +32,7 @@ class TabViewChildren {
 interface ComponentProps {
   children: ChildrenProp;
   selectedIndex?: number;
+  tabBarStyle?: StyleProp<ViewStyle>;
   indicatorStyle?: StyleProp<ViewStyle>;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
@@ -214,13 +215,14 @@ export class TabView extends React.Component<TabViewProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { selectedIndex, children, indicatorStyle, ...derivedProps } = this.props;
+    const { selectedIndex, children, tabBarStyle, indicatorStyle, ...derivedProps } = this.props;
 
     const { tabs, content } = this.renderComponentChildren(children);
 
     return (
       <View {...derivedProps}>
         <TabBar
+          style={tabBarStyle}
           ref={this.tabBarRef}
           selectedIndex={selectedIndex}
           indicatorStyle={indicatorStyle}
