@@ -163,6 +163,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       outlineHeight,
       outlineBorderRadius,
       outlineBackgroundColor,
+      hitSlop,
       ...containerParameters
     } = source;
 
@@ -197,6 +198,12 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         borderRadius: outlineBorderRadius,
         backgroundColor: outlineBackgroundColor,
         ...styles.highlight,
+      },
+      hitSlop: {
+        top: hitSlop,
+        left: hitSlop,
+        bottom: hitSlop,
+        right: hitSlop,
       },
     };
   };
@@ -246,6 +253,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       highlightContainer,
       highlight,
       selectContainer,
+      hitSlop,
       ...componentStyle
     }: StyleType = this.getComponentStyle(themedStyle);
 
@@ -256,6 +264,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         style={container}
         activeOpacity={1.0}
         disabled={disabled}
+        hitSlop={hitSlop}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>

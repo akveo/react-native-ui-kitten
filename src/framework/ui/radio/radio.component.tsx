@@ -155,6 +155,7 @@ export class RadioComponent extends React.Component<RadioProps> {
       outlineHeight,
       outlineBorderRadius,
       outlineBackgroundColor,
+      hitSlop,
       ...containerParameters
     } = source;
 
@@ -190,6 +191,12 @@ export class RadioComponent extends React.Component<RadioProps> {
         backgroundColor: outlineBackgroundColor,
         ...styles.highlight,
       },
+      hitSlop: {
+        top: hitSlop,
+        left: hitSlop,
+        bottom: hitSlop,
+        right: hitSlop,
+      },
     };
   };
 
@@ -220,6 +227,7 @@ export class RadioComponent extends React.Component<RadioProps> {
       selectContainer,
       icon,
       highlight,
+      hitSlop,
       ...componentStyles
     } = this.getComponentStyle(themedStyle);
 
@@ -230,6 +238,7 @@ export class RadioComponent extends React.Component<RadioProps> {
         style={container}
         activeOpacity={1.0}
         disabled={disabled}
+        hitSlop={hitSlop}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
