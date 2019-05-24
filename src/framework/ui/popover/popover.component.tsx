@@ -176,12 +176,11 @@ export class PopoverComponent extends React.Component<PopoverProps> {
 
     const { origin: popoverPosition } = popoverFrame;
 
+    console.warn(StatusBar.currentHeight)
+
     const additionalStyle: ViewStyle = {
       left: popoverPosition.x,
-      top: Platform.select({
-        android: popoverPosition.y + StatusBar.currentHeight,
-        default: popoverPosition.y,
-      }),
+      top: popoverPosition.y,
       opacity: 1,
     };
 
