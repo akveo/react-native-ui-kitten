@@ -214,6 +214,9 @@
       "meta": {
         "scope": "mobile",
         "parameters": {
+          "minHeight": {
+            "type": "number"
+          },
           "paddingVertical": {
             "type": "number"
           },
@@ -247,6 +250,7 @@
       "appearances": {
         "default": {
           "mapping": {
+            "minHeight": 56,
             "paddingVertical": 4,
             "backgroundColor": "background-color-default-1",
             "indicatorHeight": 4,
@@ -887,6 +891,9 @@
           "height": {
             "type": "number"
           },
+          "hitSlop": {
+            "type": "number"
+          },
           "borderWidth": {
             "type": "number"
           },
@@ -1145,6 +1152,7 @@
               "tiny": {
                 "width": 16,
                 "height": 16,
+                "hitSlop": 24,
                 "iconWidth": 9,
                 "iconHeight": 9,
                 "outlineWidth": 24,
@@ -1163,6 +1171,7 @@
               "small": {
                 "width": 20,
                 "height": 20,
+                "hitSlop": 20,
                 "iconWidth": 10,
                 "iconHeight": 10,
                 "outlineWidth": 32,
@@ -1181,6 +1190,7 @@
               "medium": {
                 "width": 24,
                 "height": 24,
+                "hitSlop": 16,
                 "iconWidth": 12,
                 "iconHeight": 12,
                 "outlineWidth": 40,
@@ -1199,6 +1209,7 @@
               "large": {
                 "width": 32,
                 "height": 32,
+                "hitSlop": 8,
                 "iconWidth": 16,
                 "iconHeight": 16,
                 "outlineWidth": 48,
@@ -1217,6 +1228,7 @@
               "giant": {
                 "width": 40,
                 "height": 40,
+                "hitSlop": 0,
                 "iconWidth": 20,
                 "iconHeight": 20,
                 "outlineWidth": 56,
@@ -1851,6 +1863,9 @@
           "height": {
             "type": "number"
           },
+          "hitSlop": {
+            "type": "number"
+          },
           "borderRadius": {
             "type": "number"
           },
@@ -2071,6 +2086,7 @@
               "tiny": {
                 "width": 16,
                 "height": 16,
+                "hitSlop": 24,
                 "iconWidth": 9,
                 "iconHeight": 9,
                 "outlineWidth": 24,
@@ -2086,6 +2102,7 @@
               "small": {
                 "width": 20,
                 "height": 20,
+                "hitSlop": 20,
                 "iconWidth": 12,
                 "iconHeight": 12,
                 "outlineWidth": 32,
@@ -2101,6 +2118,7 @@
               "medium": {
                 "width": 24,
                 "height": 24,
+                "hitSlop": 16,
                 "iconWidth": 16,
                 "iconHeight": 16,
                 "outlineWidth": 40,
@@ -2116,6 +2134,7 @@
               "large": {
                 "width": 32,
                 "height": 32,
+                "hitSlop": 0,
                 "iconWidth": 22,
                 "iconHeight": 22,
                 "outlineWidth": 48,
@@ -2131,6 +2150,7 @@
               "giant": {
                 "width": 40,
                 "height": 40,
+                "hitSlop": 0,
                 "iconWidth": 28,
                 "iconHeight": 28,
                 "outlineWidth": 56,

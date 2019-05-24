@@ -44,6 +44,14 @@ exports[`@radio: matches snapshot checked disabled 1`] = `
 exports[`@radio: matches snapshot default 1`] = `
 <TouchableOpacity
   activeOpacity={1}
+  hitSlop={
+    Object {
+      "bottom": 16,
+      "left": 16,
+      "right": 16,
+      "top": 16,
+    }
+  }
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
