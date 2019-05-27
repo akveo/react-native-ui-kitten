@@ -12,10 +12,31 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {
-  routes,
-  RouteType,
-} from '../../navigation';
+import { RouteType } from '../../navigation';
+
+export const routes: RouteType[] = [
+  { name: 'Avatar' },
+  { name: 'Bottom Navigation' },
+  { name: 'Button' },
+  { name: 'Button Group' },
+  { name: 'Checkbox' },
+  { name: 'Dialog' },
+  { name: 'Input' },
+  { name: 'Layout' },
+  { name: 'List' },
+  { name: 'Popover' },
+  { name: 'Radio' },
+  { name: 'Radio Group' },
+  { name: 'Tab Bar' },
+  { name: 'Tab View' },
+  { name: 'Tooltip' },
+  { name: 'Text' },
+  { name: 'Toggle' },
+  { name: 'View Pager' },
+  { name: 'Top Navigation' },
+  { name: 'Modal' },
+  { name: 'Overflow Menu' },
+];
 
 type Props = ThemedComponentProps & NavigationScreenProps;
 

@@ -39,41 +39,6 @@ const textCheckBox: ComponentShowcaseItem = {
   },
 };
 
-const giantCheckBox: ComponentShowcaseItem = {
-  title: 'Giant',
-  props: {
-    size: 'giant',
-  },
-};
-
-const largeCheckBox: ComponentShowcaseItem = {
-  title: 'Large',
-  props: {
-    size: 'large',
-  },
-};
-
-const mediumCheckBox: ComponentShowcaseItem = {
-  title: 'Medium',
-  props: {
-    size: 'medium',
-  },
-};
-
-const smallCheckBox: ComponentShowcaseItem = {
-  title: 'Small',
-  props: {
-    size: 'small',
-  },
-};
-
-const tinyCheckBox: ComponentShowcaseItem = {
-  title: 'Tiny',
-  props: {
-    size: 'tiny',
-  },
-};
-
 const primaryCheckBox: ComponentShowcaseItem = {
   title: 'Primary',
   props: {
@@ -126,17 +91,6 @@ const accessoriesSection: ComponentShowcaseSection = {
   ],
 };
 
-const sizeSection: ComponentShowcaseSection = {
-  title: 'Size',
-  items: [
-    giantCheckBox,
-    largeCheckBox,
-    mediumCheckBox,
-    smallCheckBox,
-    tinyCheckBox,
-  ],
-};
-
 const statusSection: ComponentShowcaseSection = {
   title: 'Status',
   items: [
@@ -152,7 +106,6 @@ export const checkboxShowcase: ComponentShowcase = {
   sections: [
     stateSection,
     accessoriesSection,
-    sizeSection,
     statusSection,
   ],
 };

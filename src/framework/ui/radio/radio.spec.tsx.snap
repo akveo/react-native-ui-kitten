@@ -88,7 +88,6 @@ exports[`@radio: matches snapshot default 1`] = `
       onPress={[Function]}
       onPressIn={[Function]}
       onPressOut={[Function]}
-      size="medium"
       style={
         Object {
           "alignItems": "center",

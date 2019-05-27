@@ -33,7 +33,6 @@ interface ComponentProps {
   text?: string;
   checked?: boolean;
   status?: string;
-  size?: string;
   onChange?: (selected: boolean) => void;
 }
 
@@ -52,10 +51,6 @@ export type RadioProps = StyledComponentProps & TouchableOpacityProps & Componen
  * @property {string} status - Determines the status of the component.
  * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
  * By default status='primary'.
- *
- * @property {string} size - Determines whether component is disabled.
- * Can be 'small' | 'medium' | 'large'.
- * By default size='medium'.
  *
  * @property {string} text - Determines text of the component.
  *
@@ -155,9 +150,10 @@ export class RadioComponent extends React.Component<RadioProps> {
       outlineHeight,
       outlineBorderRadius,
       outlineBackgroundColor,
-      hitSlop,
       ...containerParameters
     } = source;
+
+    const hitSlop: number = 40 - containerParameters.width;
 
     return {
       container: {

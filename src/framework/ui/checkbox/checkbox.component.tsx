@@ -37,7 +37,6 @@ interface ComponentProps {
   checked?: boolean;
   indeterminate?: boolean;
   status?: string;
-  size?: string;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
 }
 
@@ -56,10 +55,6 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  * @property {string} status - Determines the status of the component.
  * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
  * By default status is 'primary'.
- *
- * @property {string} size - Determines the size of the component.
- * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
- * By default size is 'medium'.
  *
  * @property {string} text - Determines text of the component.
  *
@@ -97,7 +92,6 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  *     <Checkbox
  *       checked={this.state.toggled}
  *       status='info'
- *       size='large'
  *       text='Place your text'
  *       textStyle={styles.checkboxText}
  *       onChange={this.onChange}
@@ -163,9 +157,10 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       outlineHeight,
       outlineBorderRadius,
       outlineBackgroundColor,
-      hitSlop,
       ...containerParameters
     } = source;
+
+    const hitSlop: number = 40 - containerParameters.width;
 
     return {
       container: {

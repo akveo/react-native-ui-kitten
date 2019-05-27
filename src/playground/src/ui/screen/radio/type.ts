@@ -32,41 +32,6 @@ const textRadio: ComponentShowcaseItem = {
   },
 };
 
-const giantRadio: ComponentShowcaseItem = {
-  title: 'Giant',
-  props: {
-    size: 'giant',
-  },
-};
-
-const largeRadio: ComponentShowcaseItem = {
-  title: 'Large',
-  props: {
-    size: 'large',
-  },
-};
-
-const mediumRadio: ComponentShowcaseItem = {
-  title: 'Medium',
-  props: {
-    size: 'medium',
-  },
-};
-
-const smallRadio: ComponentShowcaseItem = {
-  title: 'Small',
-  props: {
-    size: 'small',
-  },
-};
-
-const tinyRadio: ComponentShowcaseItem = {
-  title: 'Tiny',
-  props: {
-    size: 'tiny',
-  },
-};
-
 const primaryRadio: ComponentShowcaseItem = {
   title: 'Primary',
   props: {
@@ -118,17 +83,6 @@ const accessoriesSection: ComponentShowcaseSection = {
   ],
 };
 
-const sizeSection: ComponentShowcaseSection = {
-  title: 'Size',
-  items: [
-    giantRadio,
-    largeRadio,
-    mediumRadio,
-    smallRadio,
-    tinyRadio,
-  ],
-};
-
 const statusSection: ComponentShowcaseSection = {
   title: 'Status',
   items: [
@@ -144,7 +98,6 @@ export const radioShowcase: ComponentShowcase = {
   sections: [
     stateSection,
     accessoriesSection,
-    sizeSection,
     statusSection,
   ],
 };
