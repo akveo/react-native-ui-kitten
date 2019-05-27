@@ -128,41 +128,6 @@ class CheckBoxScreen extends React.Component<Props, State> {
           </View>
         </View>
         <View style={this.props.themedStyle.containerSection}>
-          <Text style={this.props.themedStyle.textDescription}>Size</Text>
-          <View style={this.props.themedStyle.containerPreviewColumn}>
-            <CheckBox
-              style={this.props.themedStyle.component}
-              size='giant'
-              checked={true}
-              text='Place your text'
-            />
-            <CheckBox
-              style={this.props.themedStyle.component}
-              size='large'
-              checked={true}
-              text='Place your text'
-            />
-            <CheckBox
-              style={this.props.themedStyle.component}
-              size='medium'
-              checked={true}
-              text='Place your text'
-            />
-            <CheckBox
-              style={this.props.themedStyle.component}
-              size='small'
-              checked={true}
-              text='Place your text'
-            />
-            <CheckBox
-              style={this.props.themedStyle.component}
-              size='tiny'
-              checked={true}
-              text='Place your text'
-            />
-          </View>
-        </View>
-        <View style={this.props.themedStyle.containerSection}>
           <Text style={this.props.themedStyle.textDescription}>Text</Text>
           <View style={this.props.themedStyle.containerPreviewColumn}>
             <CheckBox

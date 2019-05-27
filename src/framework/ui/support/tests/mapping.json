@@ -891,9 +891,6 @@
           "height": {
             "type": "number"
           },
-          "hitSlop": {
-            "type": "number"
-          },
           "borderWidth": {
             "type": "number"
           },
@@ -971,23 +968,6 @@
             "white": {
               "default": false
             }
-          },
-          "size": {
-            "tiny": {
-              "default": false
-            },
-            "small": {
-              "default": false
-            },
-            "medium": {
-              "default": true
-            },
-            "large": {
-              "default": false
-            },
-            "giant": {
-              "default": false
-            }
           }
         },
         "states": {
@@ -1024,6 +1004,16 @@
             "iconTintColor": "transparent",
             "outlineBorderRadius": 6,
             "outlineBackgroundColor": "transparent",
+            "width": 24,
+            "height": 24,
+            "iconWidth": 12,
+            "iconHeight": 12,
+            "outlineWidth": 40,
+            "outlineHeight": 40,
+            "textFontSize": "text-subtitle-2-font-size",
+            "textLineHeight": "text-subtitle-2-line-height",
+            "textFontWeight": "text-subtitle-2-font-weight",
+            "textMarginHorizontal": 12,
             "state": {
               "active": {
                 "borderColor": "border-color-default-4",
@@ -1038,7 +1028,9 @@
                 "borderColor": "color-primary-focus"
               },
               "indeterminate": {
-                "iconTintColor": "text-color-control"
+                "iconTintColor": "text-color-control",
+                "iconHeight": 3,
+                "iconBorderRadius": 1.5
               },
               "disabled": {
                 "borderColor": "border-color-default-4",
@@ -1144,103 +1136,6 @@
                   },
                   "indeterminate": {
                     "iconTintColor": "color-primary-default"
-                  }
-                }
-              }
-            },
-            "size": {
-              "tiny": {
-                "width": 16,
-                "height": 16,
-                "hitSlop": 24,
-                "iconWidth": 9,
-                "iconHeight": 9,
-                "outlineWidth": 24,
-                "outlineHeight": 24,
-                "textFontSize": 11,
-                "textLineHeight": 16,
-                "textFontWeight": "text-subtitle-2-font-weight",
-                "textMarginHorizontal": 8,
-                "state": {
-                  "indeterminate": {
-                    "iconHeight": 2,
-                    "iconBorderRadius": 1
-                  }
-                }
-              },
-              "small": {
-                "width": 20,
-                "height": 20,
-                "hitSlop": 20,
-                "iconWidth": 10,
-                "iconHeight": 10,
-                "outlineWidth": 32,
-                "outlineHeight": 32,
-                "textFontSize": 13,
-                "textLineHeight": 20,
-                "textFontWeight": "text-subtitle-2-font-weight",
-                "textMarginHorizontal": 10,
-                "state": {
-                  "indeterminate": {
-                    "iconHeight": 2,
-                    "iconBorderRadius": 1
-                  }
-                }
-              },
-              "medium": {
-                "width": 24,
-                "height": 24,
-                "hitSlop": 16,
-                "iconWidth": 12,
-                "iconHeight": 12,
-                "outlineWidth": 40,
-                "outlineHeight": 40,
-                "textFontSize": "text-subtitle-2-font-size",
-                "textLineHeight": "text-subtitle-2-line-height",
-                "textFontWeight": "text-subtitle-2-font-weight",
-                "textMarginHorizontal": 12,
-                "state": {
-                  "indeterminate": {
-                    "iconHeight": 3,
-                    "iconBorderRadius": 1.5
-                  }
-                }
-              },
-              "large": {
-                "width": 32,
-                "height": 32,
-                "hitSlop": 8,
-                "iconWidth": 16,
-                "iconHeight": 16,
-                "outlineWidth": 48,
-                "outlineHeight": 48,
-                "textFontSize": 15,
-                "textLineHeight": 32,
-                "textFontWeight": "text-subtitle-2-font-weight",
-                "textMarginHorizontal": 12,
-                "state": {
-                  "indeterminate": {
-                    "iconHeight": 4,
-                    "iconBorderRadius": 2
-                  }
-                }
-              },
-              "giant": {
-                "width": 40,
-                "height": 40,
-                "hitSlop": 0,
-                "iconWidth": 20,
-                "iconHeight": 20,
-                "outlineWidth": 56,
-                "outlineHeight": 56,
-                "textFontSize": 17,
-                "textLineHeight": 40,
-                "textFontWeight": "text-subtitle-2-font-weight",
-                "textMarginHorizontal": 12,
-                "state": {
-                  "indeterminate": {
-                    "iconHeight": 4,
-                    "iconBorderRadius": 2
                   }
                 }
               }
@@ -1704,6 +1599,9 @@
           },
           "dividerBackgroundColor": {
             "type": "number"
+          },
+          "indicatorBackgroundColor": {
+            "type": "string"
           }
         },
         "appearances": {
@@ -1720,7 +1618,8 @@
             "borderRadius": 12,
             "backgroundColor": "background-color-default-1",
             "dividerHeight": 1,
-            "dividerBackgroundColor": "border-color-default-3"
+            "dividerBackgroundColor": "border-color-default-3",
+            "indicatorBackgroundColor": "transparent"
           }
         }
       }
@@ -1832,6 +1731,15 @@
           },
           "backgroundColor": {
             "type": "string"
+          },
+          "indicatorWidth": {
+            "type": "number"
+          },
+          "indicatorHeight": {
+            "type": "number"
+          },
+          "indicatorBackgroundColor": {
+            "type": "string"
           }
         },
         "appearances": {
@@ -1847,8 +1755,12 @@
           "mapping": {
             "minWidth": 56,
             "minHeight": 32,
+            "maxWidth": 256,
             "borderRadius": 8,
-            "backgroundColor": "background-color-default-1"
+            "backgroundColor": "background-color-default-1",
+            "indicatorWidth": 6,
+            "indicatorHeight": 6,
+            "indicatorBackgroundColor": "background-color-default-1"
           }
         }
       }
@@ -1861,9 +1773,6 @@
             "type": "number"
           },
           "height": {
-            "type": "number"
-          },
-          "hitSlop": {
             "type": "number"
           },
           "borderRadius": {
@@ -1937,23 +1846,6 @@
             "danger": {
               "default": false
             }
-          },
-          "size": {
-            "tiny": {
-              "default": false
-            },
-            "small": {
-              "default": false
-            },
-            "medium": {
-              "default": true
-            },
-            "large": {
-              "default": false
-            },
-            "giant": {
-              "default": false
-            }
           }
         },
         "states": {
@@ -1982,6 +1874,19 @@
             "textColor": "text-color-default",
             "iconTintColor": "transparent",
             "outlineBackgroundColor": "transparent",
+            "width": 24,
+            "height": 24,
+            "iconWidth": 16,
+            "iconHeight": 16,
+            "outlineWidth": 40,
+            "outlineHeight": 40,
+            "borderRadius": 12,
+            "iconBorderRadius": 8,
+            "outlineBorderRadius": 20,
+            "textMarginHorizontal": 12,
+            "textFontSize": "text-subtitle-2-font-size",
+            "textLineHeight": "text-subtitle-2-line-height",
+            "textFontWeight": "text-subtitle-2-font-weight",
             "state": {
               "active": {
                 "borderColor": "border-color-default-4",
@@ -2080,88 +1985,6 @@
                     "borderColor": "color-danger-focus"
                   }
                 }
-              }
-            },
-            "size": {
-              "tiny": {
-                "width": 16,
-                "height": 16,
-                "hitSlop": 24,
-                "iconWidth": 9,
-                "iconHeight": 9,
-                "outlineWidth": 24,
-                "outlineHeight": 24,
-                "borderRadius": 8,
-                "iconBorderRadius": 4.5,
-                "outlineBorderRadius": 12,
-                "textMarginHorizontal": 8,
-                "textFontSize": 11,
-                "textLineHeight": 16,
-                "textFontWeight": "text-subtitle-2-font-weight"
-              },
-              "small": {
-                "width": 20,
-                "height": 20,
-                "hitSlop": 20,
-                "iconWidth": 12,
-                "iconHeight": 12,
-                "outlineWidth": 32,
-                "outlineHeight": 32,
-                "borderRadius": 10,
-                "iconBorderRadius": 6,
-                "outlineBorderRadius": 16,
-                "textMarginHorizontal": 10,
-                "textFontSize": 13,
-                "textLineHeight": 20,
-                "textFontWeight": "text-subtitle-2-font-weight"
-              },
-              "medium": {
-                "width": 24,
-                "height": 24,
-                "hitSlop": 16,
-                "iconWidth": 16,
-                "iconHeight": 16,
-                "outlineWidth": 40,
-                "outlineHeight": 40,
-                "borderRadius": 12,
-                "iconBorderRadius": 8,
-                "outlineBorderRadius": 20,
-                "textMarginHorizontal": 12,
-                "textFontSize": "text-subtitle-2-font-size",
-                "textLineHeight": "text-subtitle-2-line-height",
-                "textFontWeight": "text-subtitle-2-font-weight"
-              },
-              "large": {
-                "width": 32,
-                "height": 32,
-                "hitSlop": 0,
-                "iconWidth": 22,
-                "iconHeight": 22,
-                "outlineWidth": 48,
-                "outlineHeight": 48,
-                "borderRadius": 16,
-                "iconBorderRadius": 11,
-                "outlineBorderRadius": 24,
-                "textMarginHorizontal": 12,
-                "textFontSize": 15,
-                "textLineHeight": 32,
-                "textFontWeight": "text-subtitle-2-font-weight"
-              },
-              "giant": {
-                "width": 40,
-                "height": 40,
-                "hitSlop": 0,
-                "iconWidth": 28,
-                "iconHeight": 28,
-                "outlineWidth": 56,
-                "outlineHeight": 56,
-                "borderRadius": 20,
-                "iconBorderRadius": 14,
-                "outlineBorderRadius": 28,
-                "textMarginHorizontal": 12,
-                "textFontSize": 17,
-                "textLineHeight": 40,
-                "textFontWeight": "text-subtitle-2-font-weight"
               }
             }
           }
@@ -2799,6 +2622,9 @@
           "backgroundColor": {
             "type": "string"
           },
+          "indicatorBackgroundColor": {
+            "type": "string"
+          },
           "iconWidth": {
             "type": "number"
           },
@@ -2842,6 +2668,7 @@
             "paddingVertical": 8,
             "borderRadius": 4,
             "backgroundColor": "background-color-alternative-3",
+            "indicatorBackgroundColor": "background-color-alternative-3",
             "iconWidth": 16,
             "iconHeight": 16,
             "iconMarginHorizontal": 4,
