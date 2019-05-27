@@ -64,7 +64,6 @@ export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
  *       <Radio
  *         style={styles.radioButton}
  *         status='danger'
- *         size='small'
  *       />
  *       <Radio
  *         style={styles.radioButton}
@@ -73,7 +72,6 @@ export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
  *       <Radio
  *         style={styles.radioButton}
  *         status='danger'
- *         size='large'
  *       />
  *     </RadioGroup>
  *   );

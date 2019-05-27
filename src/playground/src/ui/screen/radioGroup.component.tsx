@@ -89,7 +89,6 @@ class RadioGroupScreen extends React.Component<Props, State> {
                 <Radio
                   style={this.props.themedStyle.component}
                   status='danger'
-                  size='small'
                 />
                 <Radio
                   style={this.props.themedStyle.component}
@@ -98,7 +97,6 @@ class RadioGroupScreen extends React.Component<Props, State> {
                 <Radio
                   style={this.props.themedStyle.component}
                   status='danger'
-                  size='large'
                 />
               </RadioGroup>
             </View>

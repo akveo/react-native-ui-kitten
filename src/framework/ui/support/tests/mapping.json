@@ -1599,6 +1599,9 @@
           },
           "dividerBackgroundColor": {
             "type": "number"
+          },
+          "indicatorBackgroundColor": {
+            "type": "string"
           }
         },
         "appearances": {
@@ -1615,7 +1618,8 @@
             "borderRadius": 12,
             "backgroundColor": "background-color-default-1",
             "dividerHeight": 1,
-            "dividerBackgroundColor": "border-color-default-3"
+            "dividerBackgroundColor": "border-color-default-3",
+            "indicatorBackgroundColor": "transparent"
           }
         }
       }
@@ -1727,6 +1731,15 @@
           },
           "backgroundColor": {
             "type": "string"
+          },
+          "indicatorWidth": {
+            "type": "number"
+          },
+          "indicatorHeight": {
+            "type": "number"
+          },
+          "indicatorBackgroundColor": {
+            "type": "string"
           }
         },
         "appearances": {
@@ -1742,8 +1755,12 @@
           "mapping": {
             "minWidth": 56,
             "minHeight": 32,
+            "maxWidth": 256,
             "borderRadius": 8,
-            "backgroundColor": "background-color-default-1"
+            "backgroundColor": "background-color-default-1",
+            "indicatorWidth": 6,
+            "indicatorHeight": 6,
+            "indicatorBackgroundColor": "background-color-default-1"
           }
         }
       }
@@ -2605,6 +2622,9 @@
           "backgroundColor": {
             "type": "string"
           },
+          "indicatorBackgroundColor": {
+            "type": "string"
+          },
           "iconWidth": {
             "type": "number"
           },
@@ -2648,6 +2668,7 @@
             "paddingVertical": 8,
             "borderRadius": 4,
             "backgroundColor": "background-color-alternative-3",
+            "indicatorBackgroundColor": "background-color-alternative-3",
             "iconWidth": 16,
             "iconHeight": 16,
             "iconMarginHorizontal": 4,
