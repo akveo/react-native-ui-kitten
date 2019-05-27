@@ -4,17 +4,22 @@ import {
   ViewProps,
   ViewStyle,
   StyleSheet,
+  StyleProp,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
-import { Arrow } from '../support/components';
+import {
+  Arrow,
+  ArrowProps,
+} from '../support/components';
 
 interface ComponentProps {
   placement?: string | PopoverPlacement;
   indicatorOffset?: number;
+  indicatorStyle?: StyleProp<ViewStyle>;
 }
 
 const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.TOP;
@@ -28,9 +33,10 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     indicatorOffset: 8,
   };
 
-  private getComponentStyle = (source: StyleType, placement: PopoverPlacement): StyleType => {
+  private getComponentStyle = (source: StyleProp<ViewStyle>, placement: PopoverPlacement): StyleType => {
+    const derivedIndicatorStyle = StyleSheet.flatten(this.props.indicatorStyle);
+
     const { direction, alignment } = placement.flex();
-    const { width: indicatorWidth } = styles.indicator;
 
     const isVertical: boolean = direction.startsWith('column');
     const isStart: boolean = alignment.endsWith('start');
@@ -44,7 +50,9 @@ export class PopoverView extends React.Component<PopoverViewProps> {
 
     // Translate container by half of `indicatorWidth`. Exactly half (because it has a square shape)
     // Reverse if needed
-    let containerTranslate: number = isVertical ? 0 : indicatorWidth / 2;
+
+    // @ts-ignore: indicatorWidth type is always number
+    let containerTranslate: number = isVertical ? 0 : derivedIndicatorStyle.width / 2;
     containerTranslate = isReverse ? containerTranslate : -containerTranslate;
 
     // Translate indicator by passed `indicatorOffset`
@@ -71,7 +79,6 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     };
 
     const indicatorStyle: ViewStyle = {
-      backgroundColor: contentStyle.backgroundColor,
       transform: [
         { rotate: `${indicatorPrimaryRotate}deg` },
         { rotate: `${indicatorSecondaryRotate}deg` },
@@ -81,6 +88,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
         { translateX: isStart ? -indicatorTranslate : 0 },
         { translateX: isEnd ? indicatorTranslate : 0 },
       ],
+      ...derivedIndicatorStyle,
       ...styles.indicator,
     };
 
@@ -117,12 +125,6 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: 'center',
-    minWidth: 64,
-    minHeight: 28,
-    maxWidth: 300,
   },
-  indicator: {
-    width: 6,
-    height: 6,
-  },
+  indicator: {},
 });

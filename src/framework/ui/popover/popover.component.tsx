@@ -73,6 +73,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  * By default placement is 'top'.
  *
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
  *
  * @property ViewProps
  *
@@ -93,7 +94,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *   popoverVisible: false,
  * };
  *
- * private onShowPress = () => {
+ * private togglePopover = () => {
  *   this.setState({ popoverVisible: !this.state.popoverVisible });
  * };
  *
@@ -113,10 +114,10 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *       placement='top start'
  *       visible={this.state.popoverVisible}
  *       content={this.renderPopoverContentElement()}
- *       onRequestClose={this.onShowPress}>
+ *       onRequestClose={this.togglePopover}>
  *       <TouchableOpacity
  *         style={styles.popoverChild}
- *         onPress={this.onShowPress}>
+ *         onPress={this.togglePopover}>
  *         <Text style={text}>Top Start</Text>
  *       </TouchableOpacity>
  *     </Popover>
@@ -155,9 +156,27 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, indicatorStyle } = this.props;
+
+    const {
+      indicatorWidth,
+      indicatorHeight,
+      indicatorBackgroundColor,
+      ...containerParameters
+    } = source;
+
     return {
       child: {},
-      popover: source,
+      popover: {
+        ...containerParameters,
+        ...StyleSheet.flatten(style),
+      },
+      popoverIndicator: {
+        width: indicatorWidth,
+        height: indicatorHeight,
+        backgroundColor: indicatorBackgroundColor,
+        ...StyleSheet.flatten(indicatorStyle),
+      },
     };
   };
 
@@ -175,8 +194,6 @@ export class PopoverComponent extends React.Component<PopoverProps> {
     const popoverFrame: Frame = this.getPopoverFrame(layout, placement);
 
     const { origin: popoverPosition } = popoverFrame;
-
-    console.warn(StatusBar.currentHeight)
 
     const additionalStyle: ViewStyle = {
       left: popoverPosition.x,
@@ -202,7 +219,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
     return placement.frame(popoverFrame, childFrame, offsetRect);
   };
 
-  private renderPopoverElement = (children: ContentElement, style: StyleProp<ViewStyle>): MeasuringElement => {
+  private renderPopoverElement = (children: ContentElement, style: StyleType): MeasuringElement => {
     const { placement, ...derivedProps } = this.props;
 
     const measuringProps: MeasuringElementProps = {
@@ -219,7 +236,8 @@ export class PopoverComponent extends React.Component<PopoverProps> {
         style={styles.popover}>
         <PopoverView
           {...derivedProps}
-          style={[style, derivedProps.style]}
+          style={style.popover}
+          indicatorStyle={style.popoverIndicator}
           placement={indicatorPlacement.rawValue}>
           {children}
         </PopoverView>
@@ -251,10 +269,10 @@ export class PopoverComponent extends React.Component<PopoverProps> {
 
   public render(): MeasuringNode | React.ReactNode {
     const { themedStyle, content, visible, children } = this.props;
-    const { child, popover } = this.getComponentStyle(themedStyle);
+    const { child, ...popoverStyles } = this.getComponentStyle(themedStyle);
 
     if (visible) {
-      this.popoverElement = this.renderPopoverElement(content, popover);
+      this.popoverElement = this.renderPopoverElement(content, popoverStyles);
       const childElement: MeasuringElement = this.renderChildElement(children, child);
 
       return this.renderMeasuringElement(childElement, this.popoverElement);
