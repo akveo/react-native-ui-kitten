@@ -66,6 +66,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  * By default placement is 'top'.
  *
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
  *
  * @property ViewProps
  *
@@ -120,9 +121,10 @@ export class TooltipComponent extends React.Component<TooltipProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, textStyle } = this.props;
+    const { style, indicatorStyle, textStyle } = this.props;
 
     const {
+      indicatorBackgroundColor,
       iconWidth,
       iconHeight,
       iconMarginHorizontal,
@@ -141,6 +143,10 @@ export class TooltipComponent extends React.Component<TooltipProps> {
         ...StyleSheet.flatten(style),
       },
       content: styles.content,
+      indicator: {
+        backgroundColor: indicatorBackgroundColor,
+        ...StyleSheet.flatten(indicatorStyle),
+      },
       icon: {
         width: iconWidth,
         height: iconHeight,
@@ -200,8 +206,8 @@ export class TooltipComponent extends React.Component<TooltipProps> {
   };
 
   public render(): React.ReactElement<PopoverProps> {
-    const { style, children, themedStyle, ...derivedProps } = this.props;
-    const { popover, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const { style, themedStyle, indicatorStyle, children, ...derivedProps } = this.props;
+    const { popover, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
 
     const contentElement: React.ReactElement<TextProps> = this.renderPopoverContentElement(componentStyle);
 
@@ -209,6 +215,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
       <Popover
         {...derivedProps}
         style={popover}
+        indicatorStyle={indicator}
         content={contentElement}>
         {children}
       </Popover>

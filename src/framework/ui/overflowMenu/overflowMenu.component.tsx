@@ -109,23 +109,31 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     }
   };
 
-  private getComponentStyle = (style: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType): StyleType => {
+    const { style, indicatorStyle } = this.props;
+
     const {
       dividerHeight,
       dividerBackgroundColor,
+      indicatorBackgroundColor,
       ...containerParameters
-    } = style;
+    } = source;
 
     return {
       popover: {
         ...containerParameters,
         ...styles.popover,
+        ...StyleSheet.flatten(style),
       },
-      item: styles.item,
       divider: {
         height: dividerHeight,
         backgroundColor: dividerBackgroundColor,
       },
+      indicator: {
+        backgroundColor: indicatorBackgroundColor,
+        ...StyleSheet.flatten(indicatorStyle),
+      },
+      item: styles.item,
     };
   };
 
@@ -174,7 +182,7 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   public render(): React.ReactNode {
     const { style, themedStyle, children, ...restProps } = this.props;
-    const { popover, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const { popover, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
 
     const contentElement: React.ReactElement<ViewProps> = this.renderPopoverContentElement(componentStyle);
 
@@ -182,6 +190,7 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
       <Popover
         {...restProps}
         style={popover}
+        indicatorStyle={indicator}
         content={contentElement}>
         {children}
       </Popover>
