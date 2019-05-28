@@ -8,7 +8,7 @@ import {
   RenderAPI,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
-import { ThemeStyleType } from '@eva/core';
+import { ThemeStyleType } from '@eva-design/dss';
 import { MappingContext } from './mappingContext';
 import {
   MappingProvider,

@@ -6,8 +6,7 @@
     "start": "expo start -c"
   },
   "dependencies": {
-    "@eva/eva": "github:akveo/eva#package/mapping-eva",
-    "@eva/themes": "github:akveo/eva#package/themes",
+    "@eva-design/eva": "github:akveo/eva#package/eva",
     "expo": "^32.0.6",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",

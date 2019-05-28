@@ -1,7 +1,7 @@
 import {
   dark,
   light,
-} from '@eva/themes';
+} from '@eva-design/eva';
 import { ThemeType } from '@kitten/theme';
 
 export interface ThemeRegistry {

@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../../../node_modules/@eva/core/schema/schema.json",
+  "$schema": "../../../../../node_modules/@eva-design/dss/schema/schema.json",
   "version": 1.0,
   "strict": {
     "text-heading-1-font-size": 36,

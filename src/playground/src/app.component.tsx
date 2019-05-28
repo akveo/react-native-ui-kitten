@@ -1,5 +1,5 @@
 import React from 'react';
-import { default as mapping } from '@eva/eva';
+import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from '@kitten/theme';
 import { Router } from './navigation';
 import {

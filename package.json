@@ -32,8 +32,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@eva/core": "github:akveo/eva#package/core",
-    "@eva/processor-kitten": "github:akveo/eva#package/processor-kitten",
+    "@eva-design/dss": "github:akveo/eva#package/dss",
+    "@eva-design/processor": "github:akveo/eva#package/processor",
     "hoist-non-react-statics": "^3.2.1",
     "lodash.merge": "^4.6.1"
   },

@@ -3,7 +3,7 @@ import {
   ControlMetaType,
   ThemedStyleType,
   ThemeStyleType,
-} from '@eva/core';
+} from '@eva-design/dss';
 import {
   ContextProps,
   StyledComponentProps,
