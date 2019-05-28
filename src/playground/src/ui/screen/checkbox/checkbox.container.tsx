@@ -1,24 +1,25 @@
 import React from 'react';
-import { NavigationScreenProps } from 'react-navigation';
+import { CheckBoxProps } from '@kitten/ui';
+import { CheckBoxShowcase } from './checkboxShowcase.component';
 import {
-  CheckBox,
-  CheckBoxProps,
-} from '@kitten/ui';
-import { Showcase } from '../common/showcase.component';
-import { checkboxShowcase } from './type';
+  checkboxSettings,
+  checkboxShowcase,
+} from './type';
+import { ShowcaseContainer } from '../common/showcase.container';
 
-export class CheckBoxContainer extends React.Component<NavigationScreenProps> {
+export class CheckBoxContainer extends React.Component {
 
   private renderItem = (props: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
     return (
-      <CheckBox checked={true} {...props}/>
+      <CheckBoxShowcase {...props}/>
     );
   };
 
   public render(): React.ReactNode {
     return (
-      <Showcase
+      <ShowcaseContainer
         showcase={checkboxShowcase}
+        settings={checkboxSettings}
         renderItem={this.renderItem}
       />
     );

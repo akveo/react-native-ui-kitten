@@ -2,6 +2,7 @@ import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
+  ComponentShowcaseSetting,
 } from '../common/type';
 
 const checkedCheckBox: ComponentShowcaseItem = {
@@ -39,38 +40,11 @@ const textCheckBox: ComponentShowcaseItem = {
   },
 };
 
-const primaryCheckBox: ComponentShowcaseItem = {
-  title: 'Primary',
+const textDisabledCheckBox: ComponentShowcaseItem = {
+  title: 'Disabled Text',
   props: {
-    status: 'primary',
-  },
-};
-
-const successCheckBox: ComponentShowcaseItem = {
-  title: 'Success',
-  props: {
-    status: 'success',
-  },
-};
-
-const warningCheckBox: ComponentShowcaseItem = {
-  title: 'Warning',
-  props: {
-    status: 'warning',
-  },
-};
-
-const dangerCheckBox: ComponentShowcaseItem = {
-  title: 'Danger',
-  props: {
-    status: 'danger',
-  },
-};
-
-const infoCheckBox: ComponentShowcaseItem = {
-  title: 'info',
-  props: {
-    status: 'info',
+    disabled: true,
+    text: 'Place your text',
   },
 };
 
@@ -88,17 +62,7 @@ const accessoriesSection: ComponentShowcaseSection = {
   title: 'Accessories',
   items: [
     textCheckBox,
-  ],
-};
-
-const statusSection: ComponentShowcaseSection = {
-  title: 'Status',
-  items: [
-    primaryCheckBox,
-    successCheckBox,
-    warningCheckBox,
-    dangerCheckBox,
-    infoCheckBox,
+    textDisabledCheckBox,
   ],
 };
 
@@ -106,6 +70,32 @@ export const checkboxShowcase: ComponentShowcase = {
   sections: [
     stateSection,
     accessoriesSection,
-    statusSection,
   ],
 };
+
+export const checkboxSettings: ComponentShowcaseSetting[] = [
+  {
+    propertyName: 'status',
+    value: 'primary',
+  },
+  {
+    propertyName: 'status',
+    value: 'success',
+  },
+  {
+    propertyName: 'status',
+    value: 'info',
+  },
+  {
+    propertyName: 'status',
+    value: 'warning',
+  },
+  {
+    propertyName: 'status',
+    value: 'danger',
+  },
+  {
+    propertyName: 'status',
+    value: 'white',
+  },
+];

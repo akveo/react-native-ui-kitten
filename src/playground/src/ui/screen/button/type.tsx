@@ -1,11 +1,22 @@
 import React from 'react';
-import { Image } from 'react-native';
+import {
+  Image,
+  ImageProps,
+} from 'react-native';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
+  ComponentShowcaseSetting,
 } from '../common/type';
 import { StyleType } from '@kitten/theme';
+
+const IconElement = (style: StyleType): React.ReactElement<ImageProps> => (
+  <Image
+    source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+    style={style}
+  />
+);
 
 const defaultButton: ComponentShowcaseItem = {
   title: 'Default',
@@ -22,47 +33,25 @@ const disabledButton: ComponentShowcaseItem = {
 const leftIconButton: ComponentShowcaseItem = {
   title: 'Left Icon',
   props: {
-    icon: (style: StyleType) =>
-      <Image
-        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-        style={style}
-      />,
+    icon: IconElement,
   },
 };
 
 const rightIconButton: ComponentShowcaseItem = {
   title: 'Right Icon',
   props: {
-    icon: (style: StyleType) =>
-      <Image
-        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-        style={style}
-      />,
+    icon: IconElement,
     style: {
-      flex: 1,
       flexDirection: 'row-reverse',
     },
   },
 };
 
-const filledButton: ComponentShowcaseItem = {
-  title: 'Filled',
+const disabledIconButton: ComponentShowcaseItem = {
+  title: 'Disabled',
   props: {
-    appearance: 'filled',
-  },
-};
-
-const outlineButton: ComponentShowcaseItem = {
-  title: 'Outline',
-  props: {
-    appearance: 'outline',
-  },
-};
-
-const ghostButton: ComponentShowcaseItem = {
-  title: 'Ghost',
-  props: {
-    appearance: 'ghost',
+    icon: IconElement,
+    disabled: true,
   },
 };
 
@@ -100,71 +89,20 @@ const tinyButton: ComponentShowcaseItem = {
     size: 'tiny',
   },
 };
-
-const primaryButton: ComponentShowcaseItem = {
-  title: 'Primary',
-  props: {
-    status: 'primary',
-  },
-};
-
-const successButton: ComponentShowcaseItem = {
-  title: 'Success',
-  props: {
-    status: 'success',
-  },
-};
-
-const warningButton: ComponentShowcaseItem = {
-  title: 'Warning',
-  props: {
-    status: 'warning',
-  },
-};
-
-const dangerButton: ComponentShowcaseItem = {
-  title: 'Danger',
-  props: {
-    status: 'danger',
-  },
-};
-
-const infoButton: ComponentShowcaseItem = {
-  title: 'Info',
-  props: {
-    status: 'info',
-  },
-};
-
-const whiteButton: ComponentShowcaseItem = {
-  title: 'White',
-  props: {
-    status: 'white',
-  },
-};
-
-const stateSection: ComponentShowcaseSection = {
-  title: 'State',
+const textSection: ComponentShowcaseSection = {
+  title: 'Text',
   items: [
     defaultButton,
     disabledButton,
   ],
 };
 
-const accessoriesSection: ComponentShowcaseSection = {
-  title: 'Accessories',
+const iconSection: ComponentShowcaseSection = {
+  title: 'Icon',
   items: [
     leftIconButton,
     rightIconButton,
-  ],
-};
-
-const appearanceSection: ComponentShowcaseSection = {
-  title: 'Appearance',
-  items: [
-    filledButton,
-    outlineButton,
-    ghostButton,
+    disabledIconButton,
   ],
 };
 
@@ -179,24 +117,50 @@ const sizeSection: ComponentShowcaseSection = {
   ],
 };
 
-const statusSection: ComponentShowcaseSection = {
-  title: 'Status',
-  items: [
-    primaryButton,
-    successButton,
-    warningButton,
-    dangerButton,
-    infoButton,
-    whiteButton,
+export const buttonShowcase: ComponentShowcase = {
+  sections: [
+    textSection,
+    iconSection,
+    sizeSection,
   ],
 };
 
-export const buttonShowcase: ComponentShowcase = {
-  sections: [
-    stateSection,
-    accessoriesSection,
-    appearanceSection,
-    sizeSection,
-    statusSection,
-  ],
-};
+export const buttonSettings: ComponentShowcaseSetting[] = [
+  {
+    propertyName: 'appearance',
+    value: 'filled',
+  },
+  {
+    propertyName: 'appearance',
+    value: 'outline',
+  },
+  {
+    propertyName: 'appearance',
+    value: 'ghost',
+  },
+  {
+    propertyName: 'status',
+    value: 'primary',
+  },
+  {
+    propertyName: 'status',
+    value: 'success',
+  },
+  {
+    propertyName: 'status',
+    value: 'info',
+  },
+  {
+    propertyName: 'status',
+    value: 'warning',
+  },
+  {
+    propertyName: 'status',
+    value: 'danger',
+  },
+  {
+    propertyName: 'status',
+    value: 'white',
+  },
+];
+

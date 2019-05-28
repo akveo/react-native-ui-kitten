@@ -1,24 +1,25 @@
 import React from 'react';
-import { NavigationScreenProps } from 'react-navigation';
+import { ToggleProps } from '@kitten/ui';
+import { ToggleShowcase } from './toggleShowcase.component';
 import {
-  Toggle,
-  ToggleProps,
-} from '@kitten/ui';
-import { Showcase } from '../common/showcase.component';
-import { toggleShowcase } from './type';
+  toggleSettings,
+  toggleShowcase,
+} from './type';
+import { ShowcaseContainer } from '../common/showcase.container';
 
-export class ToggleContainer extends React.Component<NavigationScreenProps> {
+export class ToggleContainer extends React.Component {
 
   private renderItem = (props: ToggleProps): React.ReactElement<ToggleProps> => {
     return (
-      <Toggle checked={true} {...props} />
+      <ToggleShowcase {...props} />
     );
   };
 
   public render(): React.ReactNode {
     return (
-      <Showcase
+      <ShowcaseContainer
         showcase={toggleShowcase}
+        settings={toggleSettings}
         renderItem={this.renderItem}
       />
     );

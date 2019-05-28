@@ -2,6 +2,7 @@ import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
+  ComponentShowcaseSetting,
 } from '../common/type';
 
 const checkedToggle: ComponentShowcaseItem = {
@@ -25,76 +26,6 @@ const disabledToggle: ComponentShowcaseItem = {
   },
 };
 
-const giantToggle: ComponentShowcaseItem = {
-  title: 'Giant',
-  props: {
-    size: 'giant',
-  },
-};
-
-const largeToggle: ComponentShowcaseItem = {
-  title: 'Large',
-  props: {
-    size: 'large',
-  },
-};
-
-const mediumToggle: ComponentShowcaseItem = {
-  title: 'Medium',
-  props: {
-    size: 'medium',
-  },
-};
-
-const smallToggle: ComponentShowcaseItem = {
-  title: 'Small',
-  props: {
-    size: 'small',
-  },
-};
-
-const tinyToggle: ComponentShowcaseItem = {
-  title: 'Tiny',
-  props: {
-    size: 'tiny',
-  },
-};
-
-const primaryToggle: ComponentShowcaseItem = {
-  title: 'Primary',
-  props: {
-    status: 'primary',
-  },
-};
-
-const successToggle: ComponentShowcaseItem = {
-  title: 'Success',
-  props: {
-    status: 'success',
-  },
-};
-
-const warningToggle: ComponentShowcaseItem = {
-  title: 'Warning',
-  props: {
-    status: 'warning',
-  },
-};
-
-const dangerToggle: ComponentShowcaseItem = {
-  title: 'Danger',
-  props: {
-    status: 'danger',
-  },
-};
-
-const infoToggle: ComponentShowcaseItem = {
-  title: 'Info',
-  props: {
-    status: 'info',
-  },
-};
-
 const stateSection: ComponentShowcaseSection = {
   title: 'State',
   items: [
@@ -104,32 +35,31 @@ const stateSection: ComponentShowcaseSection = {
   ],
 };
 
-const sizeSection: ComponentShowcaseSection = {
-  title: 'Size',
-  items: [
-    giantToggle,
-    largeToggle,
-    mediumToggle,
-    smallToggle,
-    tinyToggle,
-  ],
-};
-
-const statusSection: ComponentShowcaseSection = {
-  title: 'Status',
-  items: [
-    primaryToggle,
-    successToggle,
-    warningToggle,
-    dangerToggle,
-    infoToggle,
-  ],
-};
-
 export const toggleShowcase: ComponentShowcase = {
   sections: [
     stateSection,
-    sizeSection,
-    statusSection,
   ],
 };
+
+export const toggleSettings: ComponentShowcaseSetting[] = [
+  {
+    propertyName: 'status',
+    value: 'primary',
+  },
+  {
+    propertyName: 'status',
+    value: 'success',
+  },
+  {
+    propertyName: 'status',
+    value: 'info',
+  },
+  {
+    propertyName: 'status',
+    value: 'warning',
+  },
+  {
+    propertyName: 'status',
+    value: 'danger',
+  },
+];
