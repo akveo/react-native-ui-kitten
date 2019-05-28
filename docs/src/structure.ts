@@ -189,6 +189,16 @@ export const structure = [
           'TabBar',
           'Tab',
         ],
+        overview: [
+          {
+            name: 'TabBar',
+            images: ['tab-bar.png'],
+          },
+          {
+            name: 'Tab',
+            images: ['tab.gif'],
+          },
+        ],
       },
       {
         type: 'group',
