@@ -1,31 +1,31 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
+import { ButtonProps } from '@kitten/ui';
+import { ButtonShowcase } from './buttonShowcase.component';
 import {
-  Button,
-  ButtonProps,
-} from '@kitten/ui';
-import { Showcase } from '../common/showcase.component';
-import { buttonShowcase } from './type';
+  buttonShowcase,
+  buttonSettings,
+} from './type';
+import { ShowcaseContainer } from '../common/showcase.container';
 
-export class ButtonContainer extends React.Component<NavigationScreenProps> {
+export class ButtonContainer extends React.Component {
 
   private renderItem = (props: ButtonProps): React.ReactElement<ButtonProps> => {
     return (
-      <Button
-        style={styles.component}
-        {...props}>
-        BUTTON
-      </Button>
+      <ButtonShowcase
+        {...props}
+        style={[styles.component, props.style]}
+      />
     );
   };
 
   public render(): React.ReactNode {
     return (
-      <Showcase
+      <ShowcaseContainer
         showcase={buttonShowcase}
-        renderItem={this.renderItem}
-      />
+        settings={buttonSettings}
+        renderItem={this.renderItem}>
+      </ShowcaseContainer>
     );
   }
 }

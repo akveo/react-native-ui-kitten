@@ -46,7 +46,7 @@ That's it! React Native UI Kitten has to be ready to go now.
 At this stage you have everything in place, let's configure React Native UI Kitten to be used in your app.
 
 ```tsx
-import { mapping } from '@eva/eva';
+import { mapping } from '@eva-design/eva';
 import { theme } from '@eva/themes';
 import { ApplicationProvider } from '@kitten/theme';
 import { Application } from './path-to/root.component';

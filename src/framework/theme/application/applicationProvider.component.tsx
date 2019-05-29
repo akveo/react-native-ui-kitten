@@ -6,12 +6,12 @@
 
 import React from 'react';
 import merge from 'lodash.merge';
-import { SchemaProcessor } from '@eva/processor-kitten';
+import { SchemaProcessor } from '@eva-design/processor';
 import {
   CustomSchemaType,
   SchemaType,
   ThemeStyleType,
-} from '@eva/core';
+} from '@eva-design/dss';
 import { StyleProvider } from '../style/styleProvider.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
 import { ModalPanel } from '../modal/modalPanel.component';
@@ -38,14 +38,14 @@ interface State {
  * @extends React.Component
  *
  * @property {SchemaType} mapping - Determines the mapping for basic components.
- * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva/eva`).
+ * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva-design/eva`).
  *
  * @property {CustomSchemaType} customMapping - Determines the customization mapping.
  * This is merged with `mapping` property and designed to be used components customization.
  * Optional.
  *
  * @property {ThemeType} theme - Determines the theme for basic components.
- * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva/themes`).
+ * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva-design/eva`).
  *
  * @property {React.ReactNode} children - Determines application root component.
  *
@@ -54,8 +54,7 @@ interface State {
  * @example ApplicationProvider API example
  *
  * ```
- * import { mapping } from '@eva/eva';
- * import { theme } from '@eva/themes';
+ * import { mapping, theme } from '@eva-design/eva';
  * import { ApplicationProvider } from '@kitten/theme';
  * import { Application } from './path-to/root.component';
  *

@@ -1,4 +1,4 @@
-import { ThemedStyleType } from '@eva/core';
+import { ThemedStyleType } from '@eva-design/dss';
 import { StyleType } from './type';
 import { getThemeValue } from '../theme/theme.service';
 import { ThemeType } from '../theme/type';

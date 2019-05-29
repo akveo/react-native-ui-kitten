@@ -1,26 +1,19 @@
 import React from 'react';
-import { NavigationScreenProps } from 'react-navigation';
-import {
-  Avatar,
-  AvatarProps,
-} from '@kitten/ui';
-import { Showcase } from '../common/showcase.component';
+import { AvatarProps } from '@kitten/ui';
+import { AvatarShowcase } from './avatarShowcase.component';
 import { avatarShowcase } from './type';
+import { ShowcaseContainer } from '../common/showcase.container';
 
-export class AvatarContainer extends React.Component<NavigationScreenProps> {
+export class AvatarContainer extends React.Component {
 
   private renderItem = (props: AvatarProps): React.ReactElement<AvatarProps> => {
     return (
-      <Avatar
-        source={{uri: 'https://cdn.vox-cdn.com/uploads/chorus_asset/file/7790309/cena.jpg'}}
-        {...props}
-      />
+      <AvatarShowcase {...props}/>
     );
   };
-
   public render(): React.ReactNode {
     return (
-      <Showcase
+      <ShowcaseContainer
         showcase={avatarShowcase}
         renderItem={this.renderItem}
       />

@@ -152,7 +152,7 @@ The one thing to apply custom mapping is to provide it to `ApplicationProvider` 
 
 ```tsx
 import React from 'react';
-import { mapping } from '@eva/eva';
+import { mapping } from '@eva-design/eva';
 import { theme } from '@eva/themes';
 import { 
   ApplicationProvider,

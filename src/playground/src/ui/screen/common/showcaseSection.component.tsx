@@ -8,18 +8,21 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Text } from '@kitten/ui';
+import {
+  Text,
+  TextProps,
+} from '@kitten/ui';
 import {
   ShowcaseItem,
   ShowcaseItemProps,
 } from './showcaseItem.component';
 import {
   ComponentShowcaseItem,
-  ComponentShowcaseSection as ComponentShowcaseSectionModel,
+  ComponentShowcaseSection,
 } from './type';
 
 interface ComponentProps {
-  section: ComponentShowcaseSectionModel;
+  section: ComponentShowcaseSection;
   renderItem: (props: any) => React.ReactElement<any>;
 }
 
@@ -40,12 +43,24 @@ class ShowcaseSectionComponent extends React.Component<ShowcaseSectionProps> {
     );
   };
 
+  private renderTitleElement = (): React.ReactElement<TextProps> => {
+    const { themedStyle, section } = this.props;
+
+    return (
+      <Text style={themedStyle.titleLabel}>
+        {section.title}
+      </Text>
+    );
+  };
+
   public render(): React.ReactNode {
     const { style, themedStyle, section } = this.props;
 
+    const titleElement: React.ReactElement<TextProps> = section.title && this.renderTitleElement();
+
     return (
       <View style={[themedStyle.container, style]}>
-        <Text style={themedStyle.titleLabel}>{section.title}</Text>
+        {titleElement}
         {section.items.map(this.renderItem)}
       </View>
     );

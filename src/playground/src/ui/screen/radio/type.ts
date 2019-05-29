@@ -2,6 +2,7 @@ import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
+  ComponentShowcaseSetting,
 } from '../common/type';
 
 const checkedRadio: ComponentShowcaseItem = {
@@ -32,38 +33,11 @@ const textRadio: ComponentShowcaseItem = {
   },
 };
 
-const primaryRadio: ComponentShowcaseItem = {
-  title: 'Primary',
+const textDisabledRadio: ComponentShowcaseItem = {
+  title: 'Text Disabled',
   props: {
-    status: 'primary',
-  },
-};
-
-const successRadio: ComponentShowcaseItem = {
-  title: 'Success',
-  props: {
-    status: 'success',
-  },
-};
-
-const warningRadio: ComponentShowcaseItem = {
-  title: 'Warning',
-  props: {
-    status: 'warning',
-  },
-};
-
-const dangerRadio: ComponentShowcaseItem = {
-  title: 'Danger',
-  props: {
-    status: 'danger',
-  },
-};
-
-const infoRadio: ComponentShowcaseItem = {
-  title: 'Info',
-  props: {
-    status: 'info',
+    disabled: true,
+    text: 'Place your text',
   },
 };
 
@@ -80,17 +54,7 @@ const accessoriesSection: ComponentShowcaseSection = {
   title: 'Accessories',
   items: [
     textRadio,
-  ],
-};
-
-const statusSection: ComponentShowcaseSection = {
-  title: 'Status',
-  items: [
-    primaryRadio,
-    successRadio,
-    warningRadio,
-    dangerRadio,
-    infoRadio,
+    textDisabledRadio,
   ],
 };
 
@@ -98,6 +62,32 @@ export const radioShowcase: ComponentShowcase = {
   sections: [
     stateSection,
     accessoriesSection,
-    statusSection,
   ],
 };
+
+export const radioSettings: ComponentShowcaseSetting[] = [
+  {
+    propertyName: 'status',
+    value: 'primary',
+  },
+  {
+    propertyName: 'status',
+    value: 'success',
+  },
+  {
+    propertyName: 'status',
+    value: 'info',
+  },
+  {
+    propertyName: 'status',
+    value: 'warning',
+  },
+  {
+    propertyName: 'status',
+    value: 'danger',
+  },
+  {
+    propertyName: 'checked',
+    value: true,
+  },
+];

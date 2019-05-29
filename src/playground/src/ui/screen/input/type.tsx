@@ -5,6 +5,7 @@ import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
+  ComponentShowcaseSetting,
 } from '../common/type';
 
 
@@ -57,41 +58,6 @@ const captionIconInput: ComponentShowcaseItem = {
   },
 };
 
-const primaryInput: ComponentShowcaseItem = {
-  title: 'Primary',
-  props: {
-    status: 'primary',
-  },
-};
-
-const successInput: ComponentShowcaseItem = {
-  title: 'Success',
-  props: {
-    status: 'success',
-  },
-};
-
-const warningInput: ComponentShowcaseItem = {
-  title: 'Warning',
-  props: {
-    status: 'warning',
-  },
-};
-
-const dangerInput: ComponentShowcaseItem = {
-  title: 'Danger',
-  props: {
-    status: 'danger',
-  },
-};
-
-const infoInput: ComponentShowcaseItem = {
-  title: 'Info',
-  props: {
-    status: 'info',
-  },
-};
-
 const stateSection: ComponentShowcaseSection = {
   title: 'State',
   items: [
@@ -110,21 +76,32 @@ const accessoriesSection: ComponentShowcaseSection = {
   ],
 };
 
-const statusSection: ComponentShowcaseSection = {
-  title: 'Status',
-  items: [
-    primaryInput,
-    successInput,
-    warningInput,
-    dangerInput,
-    infoInput,
-  ],
-};
-
 export const inputShowcase: ComponentShowcase = {
   sections: [
     stateSection,
     accessoriesSection,
-    statusSection,
   ],
 };
+
+export const inputSettings: ComponentShowcaseSetting[] = [
+  {
+    propertyName: 'status',
+    value: 'primary',
+  },
+  {
+    propertyName: 'status',
+    value: 'success',
+  },
+  {
+    propertyName: 'status',
+    value: 'info',
+  },
+  {
+    propertyName: 'status',
+    value: 'warning',
+  },
+  {
+    propertyName: 'status',
+    value: 'danger',
+  },
+];

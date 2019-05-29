@@ -25,7 +25,7 @@ npm i @eva/eva @eva/themes
 ### Applying Theme System
 
 ```tsx
-import { mapping } from '@eva/eva';
+import { mapping } from '@eva-design/eva';
 import { theme } from '@eva/themes';
 import { ApplicationProvider } from '@kitten/theme';
 import { Application } from './path-to/root.component';
