@@ -998,8 +998,8 @@
           "mapping": {
             "borderWidth": 1,
             "borderRadius": 3,
-            "backgroundColor": "background-color-default-2",
-            "borderColor": "border-color-default-3",
+            "backgroundColor": "background-color-default-3",
+            "borderColor": "border-color-default-4",
             "textColor": "text-color-default",
             "iconTintColor": "transparent",
             "outlineBorderRadius": 6,
@@ -1033,8 +1033,8 @@
                 "iconBorderRadius": 1.5
               },
               "disabled": {
-                "borderColor": "border-color-default-4",
-                "backgroundColor": "background-color-default-3",
+                "borderColor": "border-color-default-3",
+                "backgroundColor": "background-color-default-2",
                 "textColor": "text-color-disabled"
               }
             }
@@ -1784,6 +1784,9 @@
           "borderColor": {
             "type": "string"
           },
+          "backgroundColor": {
+            "type": "string"
+          },
           "textColor": {
             "type": "string"
           },
@@ -1870,7 +1873,8 @@
         "default": {
           "mapping": {
             "borderWidth": 1,
-            "borderColor": "border-color-default-3",
+            "backgroundColor": "background-color-default-3",
+            "borderColor": "border-color-default-4",
             "textColor": "text-color-default",
             "iconTintColor": "transparent",
             "outlineBackgroundColor": "transparent",
@@ -1897,7 +1901,8 @@
                 "iconTintColor": "color-primary-default"
               },
               "disabled": {
-                "borderColor": "border-color-default-4",
+                "backgroundColor": "background-color-default-2",
+                "borderColor": "border-color-default-3",
                 "textColor": "text-color-disabled"
               },
               "checked.active": {
