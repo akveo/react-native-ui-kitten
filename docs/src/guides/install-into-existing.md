@@ -48,7 +48,7 @@ At this stage you have everything in place, let's configure React Native UI Kitt
 ```tsx
 import { mapping } from '@eva-design/eva';
 import { theme } from '@eva/themes';
-import { ApplicationProvider } from '@kitten/theme';
+import { ApplicationProvider } from 'react-native-ui-kitten';
 import { Application } from './path-to/root.component';
 
 export default class App extends React.Component {
@@ -87,7 +87,7 @@ import {
   TopNavigationAction,
   TopNavigationProps,
   TopNavigationActionProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { Screen1Container } from './path-to/screen-1.component';
 
 const TopNavigationOptions = ({ navigation }) => {

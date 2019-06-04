@@ -1,6 +1,6 @@
 # Using Theme Variables
 
-React Native UI Kitten allows you using theme you have provided in application root. This allows you easily create themed components.
+React Native UI Kitten allows you using the theme you have provided in the application root. This allows you to easily create themed components.
 
 <hr>
 
@@ -18,7 +18,7 @@ import {
   withStyles,
   ThemedComponentProps,
   ThemeType,
-} from '@kitten/theme';
+} from 'react-native-ui-kitten';
 
 type AwesomeComponentProps = TouchableOpacityProps & ThemedComponentProps;
 

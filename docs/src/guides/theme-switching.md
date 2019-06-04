@@ -9,13 +9,12 @@ through the property into the `ApplicationProvider`.
 ### Changing Theme Example
 
 ```tsx
-import { mapping } from '@eva-design/eva';
-import { theme } from '@eva/themes';
+import { mapping, theme } from '@eva-design/eva';
 import { customTheme } from './path-to/custom-theme;
 import {
   ApplicationProvider,
   ThemeType,
-} from '@kitten/theme';
+} from 'react-native-ui-kitten';
 import { Application } from './path-to/root.component';
 
 interface AppState {
@@ -28,7 +27,7 @@ export default class App extends React.Component<any, State> {
     theme: theme,
   };
   
-  private changeTheme = (): void => {
+  private changeTheme = () => {
     this.setState({ theme: customTheme });
   }
 
@@ -36,7 +35,7 @@ export default class App extends React.Component<any, State> {
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={theme}>
+        theme={this.state.theme}>
         <Application/>
       </ApplicationProvider>
     );

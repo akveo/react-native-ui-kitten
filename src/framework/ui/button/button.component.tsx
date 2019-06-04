@@ -48,10 +48,12 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  * @property {boolean} disabled - Determines whether component is disabled. Default is false.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'. Default is 'primary'.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
+ * Default is 'primary'.
  *
  * @property {string} size - Determines the size of the component.
- * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'. Default is 'medium'.
+ * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
+ * Default is 'medium'.
  *
  * @property {string} children - Determines text of the component.
  *
@@ -60,7 +62,8 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be 'filled' | 'outline' | 'ghost'. Default is 'filled'.
+ * Can be 'filled' | 'outline' | 'ghost'.
+ * Default is 'filled'.
  *
  * @property TouchableOpacityProps
  *
@@ -69,53 +72,46 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  * @example Simple usage example
  *
  * ```
+ * import React from 'react';
  * import {
  *   Button,
  *   ButtonProps,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * <Button>Test Button</Button>
- * ```
+ * export const ButtonShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
  *
- * @example Button usage and API example
+ *   const onPress = () => {
+ *     // Handle Button press
+ *   };
  *
- * ```
- * import {
- *   Button,
- *   ButtonProps,
- * } from '@kitten/ui';
- *
- * private onButtonPress = () => {
- *   console.log('Button press');
- * };
- *
- * public render(): React.ReactElement<ButtonProps> {
  *   return (
- *     <Button
- *       appearance='outline'
- *       style={styles.button}
- *       status='success'
- *       size='large'
- *       icon={(style: StyleType) => <Image source={{ uri: '...' }} style={style}/>}
- *       onPress={this.onButtonPress}>
+ *     <Button onPress={onPress}>
  *       BUTTON
  *     </Button>
  *   );
- * }
+ * };
  * ```
  *
  * @example Inline styling example
  *
  * ```
- * <Button
- *   style={styles.button}
- *   textStyle={styles.buttonText}
- *   icon={(style: StyleType) => <Image source={{ uri: '...' }} style={style}/>}
- *   onPress={this.onButtonPress}>
- *   BUTTON
- * </Button>
+ * import React from 'react';
+ * import {
+ *   Button,
+ *   ButtonProps,
+ * } from 'react-native-ui-kitten';
+ *
+ * export const ButtonShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
+ *   return (
+ *     <Button
+ *       style={styles.button}
+ *       textStyle={styles.buttonText}>
+ *       BUTTON
+ *     </Button>
+ *   );
+ * };
  * ```
- * */
+ */
 
 export class ButtonComponent extends React.Component<ButtonProps> {
 
