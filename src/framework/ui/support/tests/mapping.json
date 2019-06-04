@@ -1298,7 +1298,7 @@
             "iconWidth": 24,
             "iconHeight": 24,
             "iconMarginHorizontal": 8,
-            "iconTintColor": "icon-color-hint",
+            "iconTintColor": "icon-hint-color",
             "labelColor": "text-hint-color",
             "labelFontSize": "text-label-font-size",
             "labelLineHeight": "text-label-line-height",
@@ -1312,18 +1312,18 @@
             "captionIconWidth": 10,
             "captionIconHeight": 10,
             "captionIconMarginRight": 8,
-            "captionIconTintColor": "icon-color-hint",
+            "captionIconTintColor": "icon-hint-color",
             "state": {
               "focused": {
                 "textColor": "text-basic-color",
                 "borderColor": "border-primary-color-1",
-                "iconTintColor": "icon-color-active"
+                "iconTintColor": "icon-active-color"
               },
               "disabled": {
                 "borderColor": "border-basic-color-3",
                 "textColor": "text-disabled-color",
                 "placeholderColor": "text-disabled-color",
-                "iconTintColor": "icon-color-disabled"
+                "iconTintColor": "icon-disabled-color"
               }
             }
           },

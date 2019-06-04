@@ -170,11 +170,11 @@
   "text-danger-active-color": "$color-danger-active",
   "text-danger-disabled-color": "$color-danger-disabled",
 
-  "icon-color-default": "$color-basic-700",
-  "icon-color-active": "$color-primary-500",
-  "icon-color-control": "$color-basic-100",
-  "icon-color-disabled": "$color-basic-400",
-  "icon-color-hint": "$color-basic-500",
+  "icon-basic-color": "$color-basic-700",
+  "icon-active-color": "$color-primary-500",
+  "icon-control-color": "$color-basic-100",
+  "icon-disabled-color": "$color-basic-400",
+  "icon-hint-color": "$color-basic-500",
 
   "outline-color": "$color-basic-400"
 }
