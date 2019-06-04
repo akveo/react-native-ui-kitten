@@ -6,7 +6,7 @@
 
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { ThemeStyleType } from '@eva/core';
+import { ThemeStyleType } from '@eva-design/dss';
 import { StyleConsumerService } from './styleConsumer.service';
 import {
   Interaction,
@@ -128,7 +128,7 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * }
  * ```
  */
-export const styled = <P extends object>(Component: React.ComponentClass<P>): StyledComponentClass<P> => {
+export const styled = <P extends object>(Component: React.ComponentType<P>): StyledComponentClass<P> => {
 
   // @ts-ignore
   if (!Component.styledComponentName) {

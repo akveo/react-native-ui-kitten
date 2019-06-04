@@ -1,13 +1,25 @@
+import { ThemeType } from '@kitten/theme';
+
 export interface ComponentShowcase {
   sections: ComponentShowcaseSection[];
 }
 
 export interface ComponentShowcaseSection {
-  title: string;
+  title?: string;
   items: ComponentShowcaseItem[];
 }
 
 export interface ComponentShowcaseItem {
-  title: string;
+  title?: string;
   props: any;
+}
+
+export interface ComponentShowcaseSetting {
+  propertyName: string;
+  value: any;
+  description?: string;
+}
+
+export interface ShowcaseThemes {
+  [name: string]: ThemeType;
 }

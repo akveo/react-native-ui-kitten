@@ -16,10 +16,10 @@ import {
   ComponentShowcase,
   ComponentShowcaseSection,
 } from './type';
-import { ThemeConsumer } from '../../themeConsumer';
 
 interface ComponentProps {
   showcase: ComponentShowcase;
+  settings?: { [prop: string]: any };
   renderItem: (props: any) => React.ReactElement<any>;
 }
 
@@ -29,16 +29,23 @@ type ListItemElement = React.ReactElement<ShowcaseSectionProps>;
 
 class ShowcaseComponent extends React.Component<ShowcaseProps> {
 
+  private renderShowcaseElement = (props: any): React.ReactElement<any> => {
+    return this.props.renderItem({
+      ...props,
+      ...this.props.settings,
+    });
+  };
+
   private renderSectionElement = (item: ComponentShowcaseSection): ListItemElement => {
     return (
       <ShowcaseSection
         section={item}
-        renderItem={this.props.renderItem}
+        renderItem={this.renderShowcaseElement}
       />
     );
   };
 
-  private renderItem = (item: ComponentShowcaseSection, index: number): ListItemElement => {
+  private renderSectionItem = (item: ComponentShowcaseSection, index: number): ListItemElement => {
     const { themedStyle, showcase } = this.props;
 
     const listItemElement: ListItemElement = this.renderSectionElement(item);
@@ -55,27 +62,29 @@ class ShowcaseComponent extends React.Component<ShowcaseProps> {
     const { themedStyle, showcase } = this.props;
 
     return (
-      <ThemeConsumer>
-        <ScrollView style={themedStyle.container}>
-          {showcase.sections.map(this.renderItem)}
-        </ScrollView>
-      </ThemeConsumer>
+      <ScrollView
+        style={themedStyle.container}
+        bounces={false}>
+        {showcase.sections.map(this.renderSectionItem)}
+      </ScrollView>
     );
   }
 }
 
-export const Showcase = withStyles(ShowcaseComponent, (theme: ThemeType) => ({
-  container: {
-    flex: 1,
-    backgroundColor: theme['background-color-default-1'],
-  },
-  item: {
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-  },
-  itemBorder: {
-    borderBottomWidth: 1,
-    borderBottomColor: theme['border-color-default-2'],
-  },
-}));
+export const Showcase = withStyles(ShowcaseComponent, (theme: ThemeType) => {
+  return {
+    container: {
+      flex: 1,
+      backgroundColor: theme['background-color-default-2'],
+    },
+    item: {
+      paddingHorizontal: 24,
+      paddingVertical: 16,
+    },
+    itemBorder: {
+      borderBottomWidth: 1,
+      borderBottomColor: theme['border-color-default-3'],
+    },
+  };
+});
 

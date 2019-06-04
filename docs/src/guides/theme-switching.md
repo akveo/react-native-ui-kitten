@@ -9,7 +9,7 @@ through the property into the `ApplicationProvider`.
 ### Changing Theme Example
 
 ```tsx
-import { mapping } from '@eva/eva';
+import { mapping } from '@eva-design/eva';
 import { theme } from '@eva/themes';
 import { customTheme } from './path-to/custom-theme;
 import {

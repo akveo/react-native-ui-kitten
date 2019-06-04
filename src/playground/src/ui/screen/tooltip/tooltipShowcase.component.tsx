@@ -1,0 +1,35 @@
+import React from 'react';
+import {
+  Button,
+  Tooltip,
+  TooltipProps,
+} from '@kitten/ui';
+
+interface State {
+  tooltipVisible: boolean;
+}
+
+export class TooltipShowcase extends React.Component<TooltipProps, State> {
+
+  public state: State = {
+    tooltipVisible: false,
+  };
+
+  private toggleTooltip = () => {
+    const tooltipVisible: boolean = !this.state.tooltipVisible;
+
+    this.setState({ tooltipVisible });
+  };
+
+  public render(): React.ReactElement<TooltipProps> {
+    return (
+      <Tooltip
+        {...this.props}
+        visible={this.state.tooltipVisible}
+        text='Hi! I am Tooltip!'
+        onRequestClose={this.toggleTooltip}>
+        <Button onPress={this.toggleTooltip}>SHOW TOOLTIP</Button>
+      </Tooltip>
+    );
+  }
+}

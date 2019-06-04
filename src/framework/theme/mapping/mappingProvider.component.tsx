@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeStyleType } from '@eva/core';
+import { ThemeStyleType } from '@eva-design/dss';
 import { MappingContext } from './mappingContext';
 
 export interface MappingProviderProps {

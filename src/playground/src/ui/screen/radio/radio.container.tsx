@@ -1,24 +1,25 @@
 import React from 'react';
-import { NavigationScreenProps } from 'react-navigation';
+import { RadioProps } from '@kitten/ui';
+import { RadioShowcase } from './radioShowcase.component';
 import {
-  Radio,
-  RadioProps,
-} from '@kitten/ui';
-import { Showcase } from '../common/showcase.component';
-import { radioShowcase } from './type';
+  radioSettings,
+  radioShowcase,
+} from './type';
+import { ShowcaseContainer } from '../common/showcase.container';
 
-export class RadioContainer extends React.Component<NavigationScreenProps> {
+export class RadioContainer extends React.Component {
 
   private renderItem = (props: RadioProps): React.ReactElement<RadioProps> => {
     return (
-      <Radio checked={true} {...props}/>
+      <RadioShowcase {...props}/>
     );
   };
 
   public render(): React.ReactNode {
     return (
-      <Showcase
+      <ShowcaseContainer
         showcase={radioShowcase}
+        settings={radioSettings}
         renderItem={this.renderItem}
       />
     );
