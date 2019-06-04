@@ -109,7 +109,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'ApplicationProvider',
-        icon: 'layout.svg',
+        icon: 'stepper.svg',
         source: [
           'ApplicationProvider',
         ],
@@ -117,7 +117,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'styled',
-        icon: 'layout.svg',
+        icon: 'stepper.svg',
         source: [
           'styled',
         ],
@@ -125,7 +125,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'withStyles',
-        icon: 'layout.svg',
+        icon: 'stepper.svg',
         source: [
           'withStyles',
         ],
@@ -158,7 +158,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Top Navigation',
-        icon: 'actions.svg',
+        icon: 'stepper.svg',
         source: [
           'TopNavigation',
         ],
@@ -166,7 +166,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Bottom Navigation',
-        icon: 'tab.svg',
+        icon: 'stepper.svg',
         source: [
           'BottomNavigation',
           'BottomNavigationTab',
@@ -175,7 +175,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'ViewPager',
-        icon: 'button.svg',
+        icon: 'stepper.svg',
         source: [
           'ViewPager',
         ],
@@ -223,7 +223,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'RadioGroup',
-        icon: 'radio.svg',
+        icon: 'stepper.svg',
         source: [
           'RadioGroup',
         ],
@@ -231,7 +231,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Toggle',
-        icon: 'checkbox.svg',
+        icon: 'toggle.svg',
         source: [
           'Toggle',
         ],
@@ -255,7 +255,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Button Group',
-        icon: 'button.svg',
+        icon: 'stepper.svg',
         source: [
           'ButtonGroup',
         ],
@@ -312,7 +312,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Text',
-        icon: 'input.svg',
+        icon: 'stepper.svg',
         source: [
           'Text',
         ],
