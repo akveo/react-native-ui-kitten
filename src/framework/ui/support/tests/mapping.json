@@ -587,8 +587,8 @@
               },
               "warning": {
                 "backgroundColor": "background-basic-color-2",
-                "textColor": " text-warning-color",
-                "iconTintColor": " text-warning-color",
+                "textColor": "text-warning-color",
+                "iconTintColor": "text-warning-color",
                 "state": {
                   "active": {
                     "backgroundColor": "background-basic-color-2",
@@ -604,8 +604,8 @@
                 "state": {
                   "active": {
                     "backgroundColor": "background-basic-color-2",
-                    "textColor": " text-danger-active-color",
-                    "iconTintColor": " text-danger-active-color"
+                    "textColor": "text-danger-active-color",
+                    "iconTintColor": "text-danger-active-color"
                   }
                 }
               },
@@ -689,8 +689,8 @@
               "warning": {
                 "borderColor": "transparent",
                 "backgroundColor": "transparent",
-                "textColor": " text-warning-color",
-                "iconTintColor": " text-warning-color",
+                "textColor": "text-warning-color",
+                "iconTintColor": "text-warning-color",
                 "state": {
                   "active": {
                     "borderColor": "transparent",
@@ -712,8 +712,8 @@
                   "active": {
                     "borderColor": "transparent",
                     "backgroundColor": "transparent",
-                    "textColor": " text-danger-active-color",
-                    "iconTintColor": " text-danger-active-color"
+                    "textColor": "text-danger-active-color",
+                    "iconTintColor": "text-danger-active-color"
                   },
                   "disabled": {
                     "borderColor": "transparent"
@@ -2308,7 +2308,7 @@
                 "color": "text-info-color"
               },
               "warning": {
-                "color": " text-warning-color"
+                "color": "text-warning-color"
               },
               "danger": {
                 "color": "text-danger-color"
