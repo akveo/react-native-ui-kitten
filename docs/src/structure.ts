@@ -158,7 +158,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Top Navigation',
-        icon: 'stepper.svg',
+        icon: 'top-navigation.svg',
         source: [
           'TopNavigation',
         ],
@@ -166,7 +166,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Bottom Navigation',
-        icon: 'stepper.svg',
+        icon: 'bottom-navigation.svg',
         source: [
           'BottomNavigation',
           'BottomNavigationTab',
@@ -175,7 +175,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'ViewPager',
-        icon: 'stepper.svg',
+        icon: 'view-pager.svg',
         source: [
           'ViewPager',
         ],
@@ -223,7 +223,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'RadioGroup',
-        icon: 'stepper.svg',
+        icon: 'radio-group.svg',
         source: [
           'RadioGroup',
         ],
@@ -255,7 +255,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Button Group',
-        icon: 'stepper.svg',
+        icon: 'button-group.svg',
         source: [
           'ButtonGroup',
         ],
@@ -312,7 +312,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Text',
-        icon: 'stepper.svg',
+        icon: 'text.svg',
         source: [
           'Text',
         ],
