@@ -91,7 +91,8 @@ exports[`@radio: matches snapshot default 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "borderColor": "#EDF0F4",
+          "backgroundColor": "#EDF0F4",
+          "borderColor": "#DDE1EB",
           "borderRadius": 12,
           "borderWidth": 1,
           "height": 24,
