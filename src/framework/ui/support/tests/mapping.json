@@ -203,7 +203,7 @@
             "state": {
               "selected": {
                 "iconTintColor": "color-primary-default",
-                "textColor": "text-color-primary"
+                "textColor": "text-primary-color"
               }
             }
           }
@@ -252,7 +252,7 @@
           "mapping": {
             "minHeight": 56,
             "paddingVertical": 4,
-            "backgroundColor": "background-color-default-1",
+            "backgroundColor": "background-basic-color-1",
             "indicatorHeight": 4,
             "indicatorBackgroundColor": "color-primary-default"
           }
@@ -389,15 +389,15 @@
           "mapping": {
             "borderRadius": 4,
             "borderWidth": 2,
-            "textColor": "text-color-control",
-            "iconTintColor": "text-color-control",
+            "textColor": "text-control-color",
+            "iconTintColor": "text-control-color",
             "iconMarginHorizontal": 4,
             "state": {
               "disabled": {
-                "borderColor": "border-color-default-3",
-                "backgroundColor": "border-color-default-3",
-                "textColor": "text-color-disabled",
-                "iconTintColor": "text-color-disabled"
+                "borderColor": "border-basic-color-3",
+                "backgroundColor": "border-basic-color-3",
+                "textColor": "text-disabled-color",
+                "iconTintColor": "text-disabled-color"
               }
             }
           },
@@ -543,69 +543,69 @@
           "mapping": {
             "state": {
               "disabled": {
-                "backgroundColor": "background-color-default-2"
+                "backgroundColor": "background-basic-color-2"
               }
             }
           },
           "variantGroups": {
             "status": {
               "primary": {
-                "backgroundColor": "background-color-default-2",
-                "textColor": "text-color-primary",
-                "iconTintColor": "text-color-primary",
+                "backgroundColor": "background-basic-color-2",
+                "textColor": "text-primary-color",
+                "iconTintColor": "text-primary-color",
                 "state": {
                   "active": {
-                    "backgroundColor": "background-color-default-2",
-                    "textColor": "text-color-primary-active",
-                    "iconTintColor": "text-color-primary-active"
+                    "backgroundColor": "background-basic-color-2",
+                    "textColor": "text-primary-active-color",
+                    "iconTintColor": "text-primary-active-color"
                   }
                 }
               },
               "success": {
-                "backgroundColor": "background-color-default-2",
-                "textColor": "text-color-success",
-                "iconTintColor": "text-color-success",
+                "backgroundColor": "background-basic-color-2",
+                "textColor": "text-success-color",
+                "iconTintColor": "text-success-color",
                 "state": {
                   "active": {
-                    "backgroundColor": "background-color-default-2",
-                    "textColor": "text-color-success-active",
-                    "iconTintColor": "text-color-success-active"
+                    "backgroundColor": "background-basic-color-2",
+                    "textColor": "text-success-active-color",
+                    "iconTintColor": "text-success-active-color"
                   }
                 }
               },
               "info": {
-                "backgroundColor": "background-color-default-2",
-                "textColor": "text-color-info",
-                "iconTintColor": "text-color-info",
+                "backgroundColor": "background-basic-color-2",
+                "textColor": "text-info-color",
+                "iconTintColor": "text-info-color",
                 "state": {
                   "active": {
-                    "backgroundColor": "background-color-default-2",
-                    "textColor": "text-color-info-active",
-                    "iconTintColor": "text-color-info-active"
+                    "backgroundColor": "background-basic-color-2",
+                    "textColor": "text-info-active-color",
+                    "iconTintColor": "text-info-active-color"
                   }
                 }
               },
               "warning": {
-                "backgroundColor": "background-color-default-2",
-                "textColor": "text-color-warning",
-                "iconTintColor": "text-color-warning",
+                "backgroundColor": "background-basic-color-2",
+                "textColor": " text-warning-color",
+                "iconTintColor": " text-warning-color",
                 "state": {
                   "active": {
-                    "backgroundColor": "background-color-default-2",
-                    "textColor": "text-color-warning-active",
-                    "iconTintColor": "text-color-warning-active"
+                    "backgroundColor": "background-basic-color-2",
+                    "textColor": "text-warning-active-color",
+                    "iconTintColor": "text-warning-active-color"
                   }
                 }
               },
               "danger": {
-                "backgroundColor": "background-color-default-2",
-                "textColor": "text-color-danger",
-                "iconTintColor": "text-color-danger",
+                "backgroundColor": "background-basic-color-2",
+                "textColor": "text-danger-color",
+                "iconTintColor": "text-danger-color",
                 "state": {
                   "active": {
-                    "backgroundColor": "background-color-default-2",
-                    "textColor": "text-color-danger-active",
-                    "iconTintColor": "text-color-danger-active"
+                    "backgroundColor": "background-basic-color-2",
+                    "textColor": " text-danger-active-color",
+                    "iconTintColor": " text-danger-active-color"
                   }
                 }
               },
@@ -618,7 +618,7 @@
                   "disabled": {
                     "backgroundColor": "transparent",
                     "borderColor": "transparent",
-                    "textColor": "text-color-primary-disabled"
+                    "textColor": "text-primary-disabled-color"
                   }
                 }
               }
@@ -638,14 +638,14 @@
               "primary": {
                 "borderColor": "transparent",
                 "backgroundColor": "transparent",
-                "textColor": "text-color-primary",
-                "iconTintColor": "text-color-primary",
+                "textColor": "text-primary-color",
+                "iconTintColor": "text-primary-color",
                 "state": {
                   "active": {
                     "borderColor": "transparent",
                     "backgroundColor": "transparent",
-                    "textColor": "text-color-primary-active",
-                    "iconTintColor": "text-color-primary-active"
+                    "textColor": "text-primary-active-color",
+                    "iconTintColor": "text-primary-active-color"
                   },
                   "disabled": {
                     "borderColor": "transparent"
@@ -655,14 +655,14 @@
               "success": {
                 "borderColor": "transparent",
                 "backgroundColor": "transparent",
-                "textColor": "text-color-success",
-                "iconTintColor": "text-color-success",
+                "textColor": "text-success-color",
+                "iconTintColor": "text-success-color",
                 "state": {
                   "active": {
                     "borderColor": "transparent",
                     "backgroundColor": "transparent",
-                    "textColor": "text-color-success-active",
-                    "iconTintColor": "text-color-success-active"
+                    "textColor": "text-success-active-color",
+                    "iconTintColor": "text-success-active-color"
                   },
                   "disabled": {
                     "borderColor": "transparent"
@@ -672,14 +672,14 @@
               "info": {
                 "borderColor": "transparent",
                 "backgroundColor": "transparent",
-                "textColor": "text-color-info",
-                "iconTintColor": "text-color-info",
+                "textColor": "text-info-color",
+                "iconTintColor": "text-info-color",
                 "state": {
                   "active": {
                     "borderColor": "transparent",
                     "backgroundColor": "transparent",
-                    "textColor": "text-color-info-active",
-                    "iconTintColor": "text-color-info-active"
+                    "textColor": "text-info-active-color",
+                    "iconTintColor": "text-info-active-color"
                   },
                   "disabled": {
                     "borderColor": "transparent"
@@ -689,14 +689,14 @@
               "warning": {
                 "borderColor": "transparent",
                 "backgroundColor": "transparent",
-                "textColor": "text-color-warning",
-                "iconTintColor": "text-color-warning",
+                "textColor": " text-warning-color",
+                "iconTintColor": " text-warning-color",
                 "state": {
                   "active": {
                     "borderColor": "transparent",
                     "backgroundColor": "transparent",
-                    "textColor": "text-color-warning-active",
-                    "iconTintColor": "text-color-warning-active"
+                    "textColor": "text-warning-active-color",
+                    "iconTintColor": "text-warning-active-color"
                   },
                   "disabled": {
                     "borderColor": "transparent"
@@ -706,14 +706,14 @@
               "danger": {
                 "borderColor": "transparent",
                 "backgroundColor": "transparent",
-                "textColor": "text-color-danger",
-                "iconTintColor": "text-color-danger",
+                "textColor": "text-danger-color",
+                "iconTintColor": "text-danger-color",
                 "state": {
                   "active": {
                     "borderColor": "transparent",
                     "backgroundColor": "transparent",
-                    "textColor": "text-color-danger-active",
-                    "iconTintColor": "text-color-danger-active"
+                    "textColor": " text-danger-active-color",
+                    "iconTintColor": " text-danger-active-color"
                   },
                   "disabled": {
                     "borderColor": "transparent"
@@ -728,7 +728,7 @@
                   },
                   "disabled": {
                     "backgroundColor": "transparent",
-                    "textColor": "text-color-primary-disabled"
+                    "textColor": "text-primary-disabled-color"
                   }
                 }
               }
@@ -823,7 +823,7 @@
             },
             "status": {
               "primary": {
-                "dividerBackgroundColor": "border-color-primary-2"
+                "dividerBackgroundColor": "border-primary-color-2"
               },
               "success": {
                 "dividerBackgroundColor": "border-color-success-2"
@@ -998,9 +998,9 @@
           "mapping": {
             "borderWidth": 1,
             "borderRadius": 3,
-            "backgroundColor": "background-color-default-3",
-            "borderColor": "border-color-default-4",
-            "textColor": "text-color-default",
+            "backgroundColor": "background-basic-color-3",
+            "borderColor": "border-basic-color-4",
+            "textColor": "text-basic-color",
             "iconTintColor": "transparent",
             "outlineBorderRadius": 6,
             "outlineBackgroundColor": "transparent",
@@ -1016,26 +1016,26 @@
             "textMarginHorizontal": 12,
             "state": {
               "active": {
-                "borderColor": "border-color-default-4",
+                "borderColor": "border-basic-color-4",
                 "outlineBackgroundColor": "outline-color"
               },
               "checked": {
                 "borderColor": "color-primary-default",
                 "backgroundColor": "color-primary-default",
-                "iconTintColor": "text-color-control"
+                "iconTintColor": "text-control-color"
               },
               "checked.active": {
                 "borderColor": "color-primary-focus"
               },
               "indeterminate": {
-                "iconTintColor": "text-color-control",
+                "iconTintColor": "text-control-color",
                 "iconHeight": 3,
                 "iconBorderRadius": 1.5
               },
               "disabled": {
-                "borderColor": "border-color-default-3",
-                "backgroundColor": "background-color-default-2",
-                "textColor": "text-color-disabled"
+                "borderColor": "border-basic-color-3",
+                "backgroundColor": "background-basic-color-2",
+                "textColor": "text-disabled-color"
               }
             }
           },
@@ -1287,25 +1287,25 @@
             "minHeight": 48,
             "borderRadius": 4,
             "borderWidth": 2,
-            "borderColor": "border-color-default-3",
-            "backgroundColor": "background-color-default-2",
+            "borderColor": "border-basic-color-3",
+            "backgroundColor": "background-basic-color-2",
             "textMarginHorizontal": 8,
             "textFontSize": "text-subtitle-1-font-size",
             "textLineHeight": "text-subtitle-1-line-height",
             "textFontWeight": "normal",
-            "textColor": "text-color-hint",
-            "placeholderColor": "text-color-hint",
+            "textColor": "text-hint-color",
+            "placeholderColor": "text-hint-color",
             "iconWidth": 24,
             "iconHeight": 24,
             "iconMarginHorizontal": 8,
             "iconTintColor": "icon-color-hint",
-            "labelColor": "text-color-hint",
+            "labelColor": "text-hint-color",
             "labelFontSize": "text-label-font-size",
             "labelLineHeight": "text-label-line-height",
             "labelFontWeight": "text-label-font-weight",
             "labelMarginBottom": 4,
             "captionMarginTop": 4,
-            "captionColor": "text-color-hint",
+            "captionColor": "text-hint-color",
             "captionFontSize": "text-caption-1-font-size",
             "captionLineHeight": "text-caption-1-line-height",
             "captionFontWeight": "text-caption-1-font-weight",
@@ -1315,14 +1315,14 @@
             "captionIconTintColor": "icon-color-hint",
             "state": {
               "focused": {
-                "textColor": "text-color-default",
-                "borderColor": "border-color-primary-1",
+                "textColor": "text-basic-color",
+                "borderColor": "border-primary-color-1",
                 "iconTintColor": "icon-color-active"
               },
               "disabled": {
-                "borderColor": "border-color-default-3",
-                "textColor": "text-color-disabled",
-                "placeholderColor": "text-color-disabled",
+                "borderColor": "border-basic-color-3",
+                "textColor": "text-disabled-color",
+                "placeholderColor": "text-disabled-color",
                 "iconTintColor": "icon-color-disabled"
               }
             }
@@ -1441,16 +1441,16 @@
           "variantGroups": {
             "level": {
               "1": {
-                "backgroundColor": "background-color-default-1"
+                "backgroundColor": "background-basic-color-1"
               },
               "2": {
-                "backgroundColor": "background-color-default-2"
+                "backgroundColor": "background-basic-color-2"
               },
               "3": {
-                "backgroundColor": "background-color-default-3"
+                "backgroundColor": "background-basic-color-3"
               },
               "4": {
-                "backgroundColor": "background-color-default-4"
+                "backgroundColor": "background-basic-color-4"
               }
             }
           }
@@ -1476,7 +1476,7 @@
       "appearances": {
         "default": {
           "mapping": {
-            "backgroundColor": "background-color-default-2"
+            "backgroundColor": "background-basic-color-2"
           }
         }
       }
@@ -1559,25 +1559,25 @@
           "mapping": {
             "paddingHorizontal": 8,
             "paddingVertical": 8,
-            "backgroundColor": "background-color-default-1",
+            "backgroundColor": "background-basic-color-1",
             "iconWidth": 40,
             "iconHeight": 40,
             "iconMarginHorizontal": 8,
-            "iconTintColor": "text-color-hint",
+            "iconTintColor": "text-hint-color",
             "titleMarginHorizontal": 8,
             "titleFontSize": "text-subtitle-2-font-size",
             "titleFontWeight": "text-subtitle-2-font-weight",
             "titleLineHeight": "text-subtitle-2-line-height",
-            "titleColor": "text-color-default",
+            "titleColor": "text-basic-color",
             "descriptionMarginHorizontal": 8,
             "descriptionFontSize": "text-caption-1-font-size",
             "descriptionFontWeight": "text-caption-1-font-weight",
             "descriptionLineHeight": "text-caption-1-line-height",
-            "descriptionColor": "text-color-hint",
+            "descriptionColor": "text-hint-color",
             "accessoryMarginHorizontal": 8,
             "state": {
               "active": {
-                "backgroundColor": "background-color-default-3"
+                "backgroundColor": "background-basic-color-3"
               }
             }
           }
@@ -1616,9 +1616,9 @@
         "default": {
           "mapping": {
             "borderRadius": 12,
-            "backgroundColor": "background-color-default-1",
+            "backgroundColor": "background-basic-color-1",
             "dividerHeight": 1,
-            "dividerBackgroundColor": "border-color-default-3",
+            "dividerBackgroundColor": "border-basic-color-3",
             "indicatorBackgroundColor": "transparent"
           }
         }
@@ -1694,19 +1694,19 @@
             "textFontSize": "text-subtitle-2-font-size",
             "textLineHeight": "text-subtitle-2-line-height",
             "textFontWeight": "text-subtitle-2-font-weight",
-            "textColor": "text-color-default",
+            "textColor": "text-basic-color",
             "iconWidth": 24,
             "iconHeight": 24,
             "iconMarginHorizontal": 8,
-            "iconTintColor": "text-color-default",
+            "iconTintColor": "text-basic-color",
             "state": {
               "active": {
-                "textColor": "text-color-primary",
-                "iconTintColor": "text-color-primary"
+                "textColor": "text-primary-color",
+                "iconTintColor": "text-primary-color"
               },
               "disabled": {
-                "textColor": "text-color-disabled",
-                "iconTintColor": "text-color-disabled"
+                "textColor": "text-disabled-color",
+                "iconTintColor": "text-disabled-color"
               }
             }
           }
@@ -1757,10 +1757,10 @@
             "minHeight": 32,
             "maxWidth": 256,
             "borderRadius": 8,
-            "backgroundColor": "background-color-default-1",
+            "backgroundColor": "background-basic-color-1",
             "indicatorWidth": 6,
             "indicatorHeight": 6,
-            "indicatorBackgroundColor": "background-color-default-1"
+            "indicatorBackgroundColor": "background-basic-color-1"
           }
         }
       }
@@ -1873,9 +1873,9 @@
         "default": {
           "mapping": {
             "borderWidth": 1,
-            "backgroundColor": "background-color-default-3",
-            "borderColor": "border-color-default-4",
-            "textColor": "text-color-default",
+            "backgroundColor": "background-basic-color-3",
+            "borderColor": "border-basic-color-4",
+            "textColor": "text-basic-color",
             "iconTintColor": "transparent",
             "outlineBackgroundColor": "transparent",
             "width": 24,
@@ -1893,7 +1893,7 @@
             "textFontWeight": "text-subtitle-2-font-weight",
             "state": {
               "active": {
-                "borderColor": "border-color-default-4",
+                "borderColor": "border-basic-color-4",
                 "outlineBackgroundColor": "outline-color"
               },
               "checked": {
@@ -1901,16 +1901,16 @@
                 "iconTintColor": "color-primary-default"
               },
               "disabled": {
-                "backgroundColor": "background-color-default-2",
-                "borderColor": "border-color-default-3",
-                "textColor": "text-color-disabled"
+                "backgroundColor": "background-basic-color-2",
+                "borderColor": "border-basic-color-3",
+                "textColor": "text-disabled-color"
               },
               "checked.active": {
                 "borderColor": "color-primary-focus"
               },
               "checked.disabled": {
-                "iconTintColor": "background-color-default-4",
-                "textColor": "text-color-disabled"
+                "iconTintColor": "background-basic-color-4",
+                "textColor": "text-disabled-color"
               }
             }
           },
@@ -2073,15 +2073,15 @@
             "textFontSize": 14,
             "textLineHeight": 16,
             "textFontWeight": "bold",
-            "textColor": "text-color-hint",
+            "textColor": "text-hint-color",
             "iconWidth": 24,
             "iconHeight": 24,
             "iconMarginVertical": 2,
-            "iconTintColor": "text-color-hint",
+            "iconTintColor": "text-hint-color",
             "state": {
               "selected": {
-                "textColor": "text-color-primary",
-                "iconTintColor": "text-color-primary"
+                "textColor": "text-primary-color",
+                "iconTintColor": "text-primary-color"
               }
             }
           }
@@ -2120,7 +2120,7 @@
         "default": {
           "mapping": {
             "paddingVertical": 4,
-            "backgroundColor": "background-color-default-1",
+            "backgroundColor": "background-basic-color-1",
             "indicatorHeight": 4,
             "indicatorBorderRadius": 2,
             "indicatorBackgroundColor": "color-primary-default"
@@ -2227,7 +2227,7 @@
       "appearances": {
         "default": {
           "mapping": {
-            "color": "text-color-default"
+            "color": "text-basic-color"
           },
           "variantGroups": {
             "category": {
@@ -2299,31 +2299,31 @@
             },
             "status": {
               "primary": {
-                "color": "text-color-primary"
+                "color": "text-primary-color"
               },
               "success": {
-                "color": "text-color-success"
+                "color": "text-success-color"
               },
               "info": {
-                "color": "text-color-info"
+                "color": "text-info-color"
               },
               "warning": {
-                "color": "text-color-warning"
+                "color": " text-warning-color"
               },
               "danger": {
-                "color": "text-color-danger"
+                "color": "text-danger-color"
               }
             }
           }
         },
         "alternative": {
           "mapping": {
-            "color": "text-color-alternative"
+            "color": "text-alternate-color"
           }
         },
         "hint": {
           "mapping": {
-            "color": "text-color-hint"
+            "color": "text-hint-color"
           }
         }
       }
@@ -2449,21 +2449,21 @@
       "appearances": {
         "default": {
           "mapping": {
-            "borderColor": "border-color-default-3",
-            "backgroundColor": "background-color-default-2",
-            "thumbBackgroundColor": "background-color-default-1",
+            "borderColor": "border-basic-color-3",
+            "backgroundColor": "background-basic-color-2",
+            "thumbBackgroundColor": "background-basic-color-1",
             "outlineBackgroundColor": "transparent",
             "state": {
               "active": {
-                "borderColor": "border-color-default-4",
+                "borderColor": "border-basic-color-4",
                 "outlineBackgroundColor": "outline-color"
               },
               "disabled": {
-                "borderColor": "border-color-default-4",
-                "backgroundColor": "background-color-default-3"
+                "borderColor": "border-basic-color-4",
+                "backgroundColor": "background-basic-color-3"
               },
               "checked.disabled": {
-                "iconTintColor": "background-color-default-4"
+                "iconTintColor": "background-basic-color-4"
               }
             }
           },
@@ -2672,17 +2672,17 @@
             "paddingHorizontal": 16,
             "paddingVertical": 8,
             "borderRadius": 4,
-            "backgroundColor": "background-color-alternative-3",
-            "indicatorBackgroundColor": "background-color-alternative-3",
+            "backgroundColor": "background-alternative-color-3",
+            "indicatorBackgroundColor": "background-alternative-color-3",
             "iconWidth": 16,
             "iconHeight": 16,
             "iconMarginHorizontal": 4,
-            "iconTintColor": "text-color-alternative",
+            "iconTintColor": "text-alternate-color",
             "textMarginHorizontal": 4,
             "textFontSize": "text-caption-2-font-size",
             "textLineHeight": "text-caption-2-line-height",
             "textFontWeight": "text-caption-2-font-weight",
-            "textColor": "text-color-alternative"
+            "textColor": "text-alternate-color"
           }
         }
       }
@@ -2757,15 +2757,15 @@
             "minHeight": 56,
             "paddingVertical": 8,
             "paddingHorizontal": 8,
-            "backgroundColor": "background-color-default-1",
+            "backgroundColor": "background-basic-color-1",
             "titleFontSize": "text-subtitle-1-font-size",
             "titleLineHeight": "text-subtitle-1-line-height",
             "titleFontWeight": "text-subtitle-1-font-weight",
-            "titleColor": "text-color-default",
+            "titleColor": "text-basic-color",
             "subtitleFontSize": "text-caption-1-font-size",
             "subtitleLineHeight": "text-caption-1-line-height",
             "subtitleFontWeight": "text-caption-1-font-weight",
-            "subtitleColor": "text-color-hint"
+            "subtitleColor": "text-hint-color"
           },
           "variantGroups": {
             "alignment": {
@@ -2819,7 +2819,7 @@
             "iconWidth": 24,
             "iconHeight": 24,
             "iconMarginHorizontal": 8,
-            "iconTintColor": "text-color-default",
+            "iconTintColor": "text-basic-color",
             "state": {
               "active": {
                 "iconTintColor": "color-basic-900"
