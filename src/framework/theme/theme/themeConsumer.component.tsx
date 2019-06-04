@@ -92,7 +92,7 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  * }
  * ```
  */
-export const withStyles = <P extends object>(Component: React.ComponentClass<P>,
+export const withStyles = <P extends object>(Component: React.ComponentType<P>,
                                              createStyles?: CreateStylesFunction): ThemedComponentClass<P> => {
 
   type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
