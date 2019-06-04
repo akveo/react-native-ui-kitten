@@ -1,6 +1,6 @@
 {
   "name": "react-native-ui-kitten",
-  "version": "3.1.2",
+  "version": "4.0.0-beta.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
@@ -8,6 +8,7 @@
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
+  "main": "index.js",
   "scripts": {
     "start": "npm run start:pg:dev",
     "start:pg": "npm run install:pg && npm start --prefix ./src/playground",
@@ -21,6 +22,8 @@
     "docs:parse": "gulp docs",
     "docs:serve": "cd docs && npm start",
     "docs:start": "npm run docs:parse && npm run docs:serve",
+    "conventional-changelog": "conventional-changelog",
+    "version:changelog": "npm run conventional-changelog -- -i CHANGELOG.md -s",
     "lint": "npm run lint:src && npm run lint:pg",
     "lint:src": "tslint -p ./src/framework/tsconfig.json --fix",
     "lint:pg": "tslint -p ./src/playground/tsconfig.json --fix",
@@ -29,6 +32,10 @@
     "ci:build": "npm run build:src && npm run build:pg",
     "ci:test": "npm t -- --coverage && cat ./dist/jest/coverage/lcov.info | coveralls",
     "install:pg": "( cd ./src/playground && npm i )",
+    "publish": "./scripts/publish/publish.sh",
+    "release:prepare": "npm run clean && npm run build",
+    "release:validate": "npm run lint && npm run test",
+    "release": "npm run release:prepare && npm run release:validate && npm run publish",
     "test": "jest"
   },
   "dependencies": {
@@ -47,6 +54,7 @@
     "@types/react-native": "^0.57.57",
     "@types/react-navigation": "^3.0.7",
     "@types/react-test-renderer": "^16.8.1",
+    "conventional-changelog-cli": "^2.0.21",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-module-resolver": "^3.2.0",
