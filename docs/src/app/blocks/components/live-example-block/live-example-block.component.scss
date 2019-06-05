@@ -6,10 +6,12 @@
   // colors
   $action-bg: white;
   $action-fg: nb-theme(color-fg-heading-light);
-  $block-bg-default: #ebeff5;
-  $block-bg-cosmic: #2f296b;
-  $block-fg-cosmic: #7d838b;
-  $block-bg-corporate: #f1f5f8;
+  $block-bg-default: #edf0f4;
+  $block-bg-cosmic: #1b1b38;
+  $block-fg-cosmic: #e8e9fa;
+  $block-bg-corporate: #edf0f4;
+  $block-bg-dark: #151a30;
+  $block-fg-dark: #f7f8fa;
 
   display: flex;
   flex-direction: column;
@@ -102,8 +104,13 @@
     .title {
       color: white;
     }
-    .action-item {
-      color: $block-fg-cosmic;
+  }
+
+  &.theme-dark {
+    background-color: $block-bg-dark;
+
+    .title {
+      color: white;
     }
   }
 

@@ -2,6 +2,8 @@
 @import '~@nebular/theme/styles/themes/default';
 @import '~@nebular/theme/styles/global/breakpoints';
 
+$nb-enable-css-custom-properties: false;
+
 /*
 We have to overwrite breakpoints because we need to add *macpro* breakpoint.
 But if we add it using *map-merge* function we'll get the warning and *media-breakpoint-down* will stop working.
@@ -25,6 +27,16 @@ $nb-themes: nb-register-theme((
   font-family-primary: unquote('-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'),
   font-family-secondary: font-family-primary,
 
+  color-primary-100: #FFF6F2,
+  color-primary-200: #FFE1D4,
+  color-primary-300: #FFBD9E,
+  color-primary-400: #FF854D,
+  color-primary-500: #FF6721,
+  color-primary-600: #E05E15,
+  color-primary-700: #BD4C0D,
+  color-primary-800: #9D370A,
+  color-primary-900: #652704,
+
   // custom
   content-width: 1140px,
   settings-col-width: 0,
@@ -32,12 +44,16 @@ $nb-themes: nb-register-theme((
   color-fg-heading-light: #ffffff,
   header-menu-fg-active: color-fg,
   footer-menu-fg: color-fg-text,
+  code-block-bg: linear-gradient(225deg, #333c66 0%, #1d2447 100%),
+  color-gray-light: #ced5dd,
+  radius: 0.375rem,
+  color-fg-highlight: #40dc7e,
 
   color-fg: white,
   color-fg-heading: #0d1c2e,
   color-fg-text: #919fb1,
   shadow: none,
-  layout-bg: transparent,
+  layout-background-color: transparent,
   layout-padding: 0,
   layout-medium-padding: 0,
   layout-small-padding: 0,
@@ -77,13 +93,13 @@ $nb-themes: nb-register-theme((
   color-fg-text: #494949,
   color-fg-heading: rgba(0, 0, 0, 0.88),
   shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6),
-  layout-bg: #fafafa,
+  layout-background-color: #fafafa,
   layout-padding: 3.25rem 1.25rem 3.25rem 1rem,
   header-bg: white,
   sidebar-padding: 2rem,
   sidebar-shadow: none,
-  color-fg-highlight: #4479e7,
-  link-color:	color-fg-highlight,
+  color-fg-highlight: color-primary-default,
+  link-color: color-fg-highlight,
   link-color-hover: color-fg-highlight,
   link-color-visited: color-fg-highlight,
   header-padding: 0,

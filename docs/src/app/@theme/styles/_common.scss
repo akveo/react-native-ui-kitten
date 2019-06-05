@@ -1,11 +1,8 @@
 @mixin nbd-common() {
-  :focus {
-    outline: 1px dashed nb-theme(color-fg-heading-light) !important;
-  }
 
   .ds-dropdown-menu {
     box-shadow: nb-theme(shadow);
-    border-radius: nb-theme(radius);
+    border-radius: nb-theme(border-radius);
   }
 
   .algolia-autocomplete {

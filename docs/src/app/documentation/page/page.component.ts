@@ -24,7 +24,7 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
 
   currentTabName: string = '';
 
-  @ViewChild(NgdTabbedBlockComponent) tabbedBlock: NgdTabbedBlockComponent;
+  @ViewChild(NgdTabbedBlockComponent, { static: false }) tabbedBlock: NgdTabbedBlockComponent;
 
   constructor(@Inject(NB_WINDOW) private window,
               private ngZone: NgZone,
