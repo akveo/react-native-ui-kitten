@@ -7,7 +7,7 @@
 @import '~@nebular/theme/styles/global/typography/typography';
 @import '~@nebular/bootstrap/styles/globals';
 
-@include nb-install-global() {
+@include nb-install() {
   @include nb-layout-theme();
   @include nb-sidebar-theme();
   @include nb-card-theme();

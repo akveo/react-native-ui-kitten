@@ -6,6 +6,7 @@
   $text-fg: nb-theme(color-fg-text);
   $title-fg: nb-theme(color-fg-heading);
 
+  border: 1px solid nb-theme(border-basic-color-3);
   border-radius: 7px;
   background-color: #ffffff;
   display: flex;
@@ -19,6 +20,7 @@
   position: relative;
 
   &::before {
+    border-radius: 7px;
     content: '';
     display: block;
     position: absolute;

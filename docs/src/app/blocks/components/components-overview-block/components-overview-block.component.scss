@@ -23,13 +23,13 @@
 
     .component-icon {
       margin-bottom: 1rem;
-      width: 4rem;
       height: 4rem;
+      width: auto;
     }
 
     .component-name {
       color: nb-theme(color-fg-heading-light);
-      font-weight: nb-theme(font-weight-bolder);
+      font-weight: 500;
     }
 
     .component-navigate-link {
@@ -74,6 +74,7 @@
 
   @include media-breakpoint-up(md) {
     .components-list {
+      margin: 0 -1.5rem;
 
       .component-card-wrapper {
         flex: 1 0 auto;

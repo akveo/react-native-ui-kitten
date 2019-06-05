@@ -4,11 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgdStylesService } from '../../../@theme/services';
 
 @Component({
@@ -18,14 +14,16 @@ import { NgdStylesService } from '../../../@theme/services';
       <thead>
       <tr>
         <td>Name</td>
-        <td *ngFor="let themedValue of style.styles[0].themedValues">{{ themedValue.theme }}</td>
+        <td>Theme Variable</td>
+        <td>Default Value</td>
         <td>Description</td>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of style.styles">
+      <tr *ngFor="let item of style">
         <td>{{ item.name }}</td>
-        <td *ngFor="let themedValue of item.themedValues" ngdColorSwatch>{{ themedValue.value }}</td>
+        <td>{{ item.parent || '' }}</td>
+        <td ngdColorSwatch>{{ item.value || 'unknown' }}</td>
         <td>
           <p *ngIf="item.shortDescription" ngdDescription>{{ item.shortDescription}}</p>
           <p *ngIf="item.description" ngdDescription>{{ item.description }}</p>
