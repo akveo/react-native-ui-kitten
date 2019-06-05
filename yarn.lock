@@ -1862,9 +1862,36 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-"eslint-config-akveo-react@git+https://github.com/akveo/eslint-config-akveo.git":
+eslint-config-airbnb-base@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-12.1.0.tgz#386441e54a12ccd957b0a92564a4bafebd747944"
+  dependencies:
+    eslint-restricted-globals "^0.1.1"
+
+eslint-config-airbnb@^16.1.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb/-/eslint-config-airbnb-16.1.0.tgz#2546bfb02cc9fe92284bf1723ccf2e87bc45ca46"
+  dependencies:
+    eslint-config-airbnb-base "^12.1.0"
+
+eslint-config-akveo-base@1.0.0:
   version "1.0.0"
-  resolved "git+https://github.com/akveo/eslint-config-akveo.git#edf438d79cafc46847a3fa520af4321789345839"
+  resolved "https://registry.yarnpkg.com/eslint-config-akveo-base/-/eslint-config-akveo-base-1.0.0.tgz#2d4079df8214692ee0700de8bc95fa0c9ced2b96"
+  dependencies:
+    eslint-config-airbnb-base "^12.1.0"
+
+eslint-config-akveo-react-native@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-akveo-react-native/-/eslint-config-akveo-react-native-1.0.0.tgz#51ffed2a0680c7ba5f0b91f2f8cd9cdcd4fc2748"
+  dependencies:
+    eslint-config-akveo-react "1.0.0"
+
+eslint-config-akveo-react@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-akveo-react/-/eslint-config-akveo-react-1.0.0.tgz#5eca94437af0889beaa4cefb12cabd66e93e187e"
+  dependencies:
+    eslint-config-airbnb "^16.1.0"
+    eslint-config-akveo-base "1.0.0"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
@@ -1925,6 +1952,10 @@ eslint-plugin-react@^7.7.0:
     has "^1.0.2"
     jsx-ast-utils "^2.0.1"
     prop-types "^15.6.1"
+
+eslint-restricted-globals@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.1.1.tgz#35f0d5cbc64c2e3ed62e93b4b1a7af05ba7ed4d7"
 
 eslint-scope@^3.7.1, eslint-scope@~3.7.1:
   version "3.7.1"
@@ -1988,8 +2019,8 @@ espree@^3.5.4:
     acorn-jsx "^3.0.0"
 
 esprima@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
 
 esquery@^1.0.0:
   version "1.0.1"
@@ -2817,8 +2848,8 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
 js-yaml@^3.9.1:
-  version "3.12.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
