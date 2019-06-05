@@ -27,6 +27,16 @@ $nb-themes: nb-register-theme((
   font-family-primary: unquote('-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'),
   font-family-secondary: font-family-primary,
 
+  color-primary-100: #FFF6F2,
+  color-primary-200: #FFE1D4,
+  color-primary-300: #FFBD9E,
+  color-primary-400: #FF854D,
+  color-primary-500: #FF6721,
+  color-primary-600: #E05E15,
+  color-primary-700: #BD4C0D,
+  color-primary-800: #9D370A,
+  color-primary-900: #652704,
+
   // custom
   content-width: 1140px,
   settings-col-width: 0,
