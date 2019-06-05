@@ -48,6 +48,7 @@ interface ComponentProps extends PopoverViewProps, ModalComponentCloseProps {
   content: ContentElement;
   children: ChildElement;
   visible?: boolean;
+  indicatorOffset?: number;
 }
 
 export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
@@ -73,6 +74,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  * By default placement is 'top'.
  *
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
+ *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
  *
  * @property ViewProps
@@ -133,6 +135,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   static defaultProps: Partial<PopoverProps> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     visible: false,
+    indicatorOffset: 8,
   };
 
   private popoverElement: MeasuredElement;
@@ -220,7 +223,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   };
 
   private renderPopoverElement = (children: ContentElement, style: StyleType): MeasuringElement => {
-    const { placement, ...derivedProps } = this.props;
+    const { placement, indicatorOffset, ...derivedProps } = this.props;
 
     const measuringProps: MeasuringElementProps = {
       tag: TAG_CONTENT,
@@ -238,6 +241,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
           {...derivedProps}
           style={style.popover}
           indicatorStyle={style.popoverIndicator}
+          indicatorOffset={indicatorOffset}
           placement={indicatorPlacement.rawValue}>
           {children}
         </PopoverView>
