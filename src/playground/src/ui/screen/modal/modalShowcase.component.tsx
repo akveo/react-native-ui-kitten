@@ -62,8 +62,8 @@ export const ModalShowcase = withStyles(ModalShowcaseComponent, (theme: ThemeTyp
     alignItems: 'center',
     width: 256,
     height: 256,
-    backgroundColor: theme['background-color-default-1'],
-    borderColor: theme['border-color-default-2'],
+    backgroundColor: theme['background-basic-color-1'],
+    borderColor: theme['border-basic-color-2'],
     borderWidth: 1,
   },
 }));

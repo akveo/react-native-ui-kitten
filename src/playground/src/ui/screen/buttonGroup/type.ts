@@ -6,7 +6,7 @@ import {
 } from '../common/type';
 
 const defaultButtonGroup: ComponentShowcaseItem = {
-  title: 'Filled',
+  title: 'Default',
   props: {},
 };
 
@@ -78,10 +78,6 @@ export const buttonGroupSettings: ComponentShowcaseSetting[] = [
   {
     propertyName: 'appearance',
     value: 'outline',
-  },
-  {
-    propertyName: 'appearance',
-    value: 'ghost',
   },
   {
     propertyName: 'status',

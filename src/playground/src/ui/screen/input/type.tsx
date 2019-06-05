@@ -104,4 +104,16 @@ export const inputSettings: ComponentShowcaseSetting[] = [
     propertyName: 'status',
     value: 'danger',
   },
+  {
+    propertyName: 'size',
+    value: 'small',
+  },
+  {
+    propertyName: 'size',
+    value: 'medium',
+  },
+  {
+    propertyName: 'size',
+    value: 'large',
+  },
 ];

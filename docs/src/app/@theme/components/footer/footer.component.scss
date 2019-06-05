@@ -55,10 +55,12 @@
       display: flex;
       flex-direction: row;
       a {
-        font-size: 3rem;
-        text-decoration: none;
         color: $icon-color;
         margin-right: 1rem;
+
+        nb-icon {
+          font-size: 3rem;
+        }
       }
     }
   }

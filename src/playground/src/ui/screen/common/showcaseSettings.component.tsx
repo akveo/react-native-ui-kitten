@@ -143,6 +143,6 @@ export const ShowcaseSettings = withStyles(ShowcaseSettingsComponent, (theme: Th
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingVertical: 16,
-    backgroundColor: theme['background-color-default-1'],
+    backgroundColor: theme['background-basic-color-1'],
   },
 }));

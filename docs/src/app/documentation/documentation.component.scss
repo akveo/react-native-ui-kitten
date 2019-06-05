@@ -72,6 +72,10 @@
 
     .menu-item {
       border: none!important;
+
+      .menu-title {
+        flex: 1 1 auto;
+      }
     }
 
     .menu-items .menu-item .menu-item a {
