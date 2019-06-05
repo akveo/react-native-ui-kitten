@@ -61,7 +61,7 @@ export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
  * @property {boolean} disabled - Determines whether component is disabled. By default is false.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
  * By default status is 'primary'.
  *
  * @property {string} label - Determines label of the component.

@@ -57,7 +57,7 @@ class ShowcaseComponent extends React.Component<ShowcaseProps> {
       style: [themedStyle.item, borderStyle, listItemElement.props.style],
     });
   };
-
+O
   public render(): React.ReactNode {
     const { themedStyle, showcase } = this.props;
 
@@ -75,7 +75,7 @@ export const Showcase = withStyles(ShowcaseComponent, (theme: ThemeType) => {
   return {
     container: {
       flex: 1,
-      backgroundColor: theme['background-color-default-2'],
+      backgroundColor: theme['background-basic-color-1'],
     },
     item: {
       paddingHorizontal: 24,
@@ -83,7 +83,7 @@ export const Showcase = withStyles(ShowcaseComponent, (theme: ThemeType) => {
     },
     itemBorder: {
       borderBottomWidth: 1,
-      borderBottomColor: theme['border-color-default-3'],
+      borderBottomColor: theme['border-basic-color-3'],
     },
   };
 });

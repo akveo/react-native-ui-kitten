@@ -48,10 +48,12 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  * @property {boolean} disabled - Determines whether component is disabled. Default is false.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'. Default is 'primary'.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
+ * Default is 'primary'.
  *
  * @property {string} size - Determines the size of the component.
- * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'. Default is 'medium'.
+ * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
+ * Default is 'medium'.
  *
  * @property {string} children - Determines text of the component.
  *
