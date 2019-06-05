@@ -57,7 +57,7 @@ class ShowcaseComponent extends React.Component<ShowcaseProps> {
       style: [themedStyle.item, borderStyle, listItemElement.props.style],
     });
   };
-O
+O;
   public render(): React.ReactNode {
     const { themedStyle, showcase } = this.props;
 
