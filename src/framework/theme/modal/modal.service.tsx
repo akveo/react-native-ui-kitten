@@ -19,35 +19,48 @@ import React from 'react';
  * @method {(identifier: string) => void} hide - Hide dialog component with
  * this identifier and removes it from Modal Panel.
  *
- * @example Usage example
+ * @example Simple Usage example
  *
  * ```
- * import { ModalService } from '@kitten/theme';
+ * import React from 'react';
+ * import { View, ViewProps } from 'react-native';
+ * import { Button, Text, ModalService } from 'react-native-ui-kitten';
  *
- * private identifier: string = '';
+ * export const ModalServiceShowcase = (): React.ReactElement<ViewProps> => {
  *
- * private show = (): void => {
- *   const component: React.ReactElement<ModalComponentCloseProps> =
- *     <View onRequestClose={() => Alert.alert('Dialog close')}>
- *       <Text>Hi! I'm modal in modal panel!</Text>
- *     </View>;
- *   this.identifier = ModalService.show(component);
- * };
+ *   const modalID: string = '';
  *
- * private hide = (): void => {
- *   ModalService.hide(this.identifier);
- * };
+ *   const showModal = () => {
+ *     const component: React.ReactElement<ViewProps> =
  *
- * public render(): React.ReactNode {
+ *     this.modalID = ModalService.show(this.renderModalContentElement);
+ *   };
+ *
+ *   const hideModal = () => {
+ *     ModalService.hide(this.modalID);
+ *   };
+ *
+ *   const renderModalContentElement = (): React.ReactElement<ViewProps> => {
+ *     return (
+ *       <View>
+ *         <Text>Hi, I'm modal!</Text>
+ *       </View>
+ *     );
+ *   };
+ *
  *   return (
  *     <View>
- *       <Button title='Show Modal' onPress={this.show}/>
- *       <Button title='Hide Modal' onPress={this.hide}/>
+ *       <Button onPress={this.showModal}>
+ *         SHOW MODAL
+ *       </Button>
+ *       <Button onPress={this.hideModal}>
+ *         HIDE MODAL
+ *       </Button>
  *     </View>
- *   )
+ *   );
  * }
  * ```
- * */
+ */
 
 class ModalServiceType {
 

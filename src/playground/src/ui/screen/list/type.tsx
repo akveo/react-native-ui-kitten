@@ -5,10 +5,7 @@ import {
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '../common/type';
-import {
-  ImageProps,
-  ListRenderItemInfo,
-} from 'react-native';
+import { ListRenderItemInfo } from 'react-native';
 import { ListItemProps } from '@kitten/ui';
 import {
   ListItemAccessoryShowcase,

@@ -28,6 +28,20 @@ interface ComponentProps {
 
 export type TopNavigationActionProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
+/**
+ * The `TopNavigationAction` component is a part of the TopNavigation component.
+ * Top Navigation Actions should be used in TopNavigation to provide usable component.
+ * See usage examples at TopNavigation component documentation.
+ *
+ * @extends React.Component
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the tab.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ */
+
 class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 
   static styledComponentName: string = 'TopNavigationAction';

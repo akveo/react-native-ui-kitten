@@ -54,8 +54,9 @@ interface State {
  * @example ApplicationProvider API example
  *
  * ```
+ * import React from 'react';
  * import { mapping, theme } from '@eva-design/eva';
- * import { ApplicationProvider } from '@kitten/theme';
+ * import { ApplicationProvider } from 'react-native-ui-kitten';
  * import { Application } from './path-to/root.component';
  *
  * export default class App extends React.Component {

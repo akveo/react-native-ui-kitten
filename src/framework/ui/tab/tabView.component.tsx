@@ -46,15 +46,15 @@ export type TabViewProps = ViewProps & ComponentProps;
  *
  * @extends React.Component
  **
- * @type {React.ReactElement<TabProps>} ChildElement - Determines child of the component.
- *
  * @property {number} selectedIndex - Determines current tab index.
+ *
+ * @property {StyleProp<ViewStyle>} tabBarStyle - Determines style TabBar component.
  *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
  *
  * @property {(index: number) => void} onSelect - Fires on onPress event and returns tab index.
  *
- * @property {ChildElement | ChildElement[]} children - Determines children of the component.
+ * @property {TabElement | TabElement[]} children - Determines children of the component.
  *
  * @property {(index: number) => boolean} shouldLoadComponent - Determines should child mount before it
  * will be selected.
@@ -63,109 +63,112 @@ export type TabViewProps = ViewProps & ComponentProps;
  *
  * @property ViewProps
  *
- * @example TabView usage and API example
+ * @example Simple usage example
  *
  * ```
+ * import React from 'react';
  * import {
  *   TabView,
  *   Tab,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   selectedIndex: 0,
- * };
+ * export class TabViewShowcase extends React.Component {
+ *   public state: State = {
+ *     selectedIndex: 0,
+ *   };
  *
- * private onSelect = (selectedIndex: number) => {
- *   this.setState({ selectedIndex });
- * };
+ *   private onSelect = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <TabView
- *       style={styles.container}
- *       selectedIndex={this.state.selectedIndex}
- *       onSelect={this.onSelect}>
- *       <Tab
- *         title='TAB 1'
- *         icon={(style: StyleType) => <Image source={ICON1} style={style}/>}>
- *         <Text>Tab 1</Text>
- *       </Tab>
- *       <Tab
- *         title='TAB 2'
- *         icon={(style: StyleType) => <Image source={ICON2} style={style}/>}>
- *         <Text>Tab 2</Text>
- *       </Tab>
- *       <Tab
- *         title='TAB 3'
- *         icon={(style: StyleType) => <Image source={ICON3} style={style}/>}>
- *         <Text>Tab 3</Text>
- *       </Tab>
- *     </TabView>
- *   );
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <TabView
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onSelect}>
+ *         <Tab title='TAB 1'
+ *           <Text>Tab 1</Text>
+ *         </Tab>
+ *         <Tab title='TAB 2'
+ *           <Text>Tab 2</Text>
+ *         </Tab>
+ *         <Tab title='TAB 3'
+ *           <Text>Tab 3</Text>
+ *         </Tab>
+ *       </TabView>
+ *     );
+ *   }
  * }
  * ```
  *
- * @example TabView lazy loading usage
+ * @example Lazy loading usage example
  *
  * ```
+ * import React from 'react';
  * import {
  *   TabView,
  *   Tab,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   selectedIndex: 0,
- * };
+ * export class TabViewShowcase extends React.Component {
  *
- * private onSelect = (selectedIndex: number) => {
- *   this.setState({ selectedIndex });
- * };
+ *   public state = {
+ *     selectedIndex: 0,
+ *   };
  *
- * private shouldLoadTabContent = (index: number): boolean => {
- *   return index === this.state.selectedIndex;
- * };
+ *   private onSelect = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <TabView
- *       style={styles.container}
- *       selectedIndex={this.state.selectedIndex}
- *       shouldLoadComponent={this.shouldLoadTabContent}
- *       onSelect={this.onSelect}>
- *       <Tab
- *         title='TAB 1'
- *         icon={(style: StyleType) => <Image source={ICON1} style={style}/>}>
- *         <Text>Tab 1</Text>
- *       </Tab>
- *       <Tab
- *         title='TAB 2'
- *         icon={(style: StyleType) => <Image source={ICON2} style={style}/>}>
- *         <Text>Tab 2</Text>
- *       </Tab>
- *       <Tab
- *         title='TAB 3'
- *         icon={(style: StyleType) => <Image source={ICON3} style={style}/>}>
- *         <Text>Tab 3</Text>
- *       </Tab>
- *     </TabView>
- *   );
+ *   private shouldLoadTabContent = (index: number): boolean => {
+ *     return index === this.state.selectedIndex;
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <TabView
+ *         selectedIndex={this.state.selectedIndex}
+ *         shouldLoadComponent={this.shouldLoadTabContent}
+ *         onSelect={this.onSelect}>
+ *         <Tab title='TAB 1'>
+ *           <Text>Tab 1</Text>
+ *         </Tab>
+ *         <Tab title='TAB 2'>
+ *           <Text>Tab 2</Text>
+ *         </Tab>
+ *         <Tab title='TAB 3'>
+ *           <Text>Tab 3</Text>
+ *         </Tab>
+ *       </TabView>
+ *     );
+ *   }
  * }
  * ```
  *
  * @example Inline styling example
  *
  * ```
- * public render(): React.ReactNode {
+ * import React from 'react';
+ * import { TabView, Tab, TabViewProps } from 'react-native-ui-kitten';
+ *
+ * export const TabViewShowcase = (props?: TabViewProps): React.ReactElement<TabViewProps> => {
  *   return (
  *     <TabView
- *       style={styles.container}
- *       indicatorStyle={styles.indicator}
- *       selectedIndex={this.state.selectedIndex}
- *       onSelect={this.onSelect}>
- *       {this.renderTabs()}
+ *       style={styles.tabView}
+ *       tabBarStyle={styles.tabBar}
+ *       indicatorStyle={styles.tabViewIndicator}>
+ *       <Tab titleStyle={styles.tabTitle} title='TAB 1'>
+ *         <Text>Tab 1</Text>
+ *       </Tab>
+ *       <Tab titleStyle={styles.tabTitle} title='TAB 2'>
+ *         <Text>Tab 2</Text>
+ *       </Tab>
+ *       <Tab titleStyle={styles.tabTitle} title='TAB 3'>
+ *         <Text>Tab 3</Text>
+ *       </Tab>
  *     </TabView>
  *   );
- * }
+ * };
  * ```
  * */
 

@@ -42,24 +42,17 @@ export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
  *
  * @property StyledComponentProps
  *
- * @example Avatar API and usage example
+ * @example Simple usage example
  *
  * ```
- * import {
- *   Avatar,
- *   AvatarProps,
- * } from '@kitten/ui';
+ * import React from 'react';
+ * import { Avatar, AvatarProps } from 'react-native-ui-kitten';
  *
- * public render(): React.ReactElement<AvatarProps> {
+ * export const AvatarShowcase = (props?: AvatarProps): React.ReactElement<AvatarProps> => {
  *   return (
- *     <Avatar
- *       style={styles.avatar}
- *       size='small'
- *       shape='rounded'
- *       source={{ uri: '...' }}
- *     />
+ *     <Avatar source={{uri: 'https://path-to/awesome-image.png'}} />
  *   );
- * }
+ * };
  * ```
  * */
 

@@ -43,41 +43,36 @@ export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * @property StyledComponentProps
  *
- * @example RadioGroup API and usage example
+ * @example Simple usage example
  *
  * ```
- * import { Radio, RadioGroup } from '@kitten/ui';
+ * import React from 'react';
+ * import { Radio, RadioGroup } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   selectedIndexGroup: 0,
- * };
+ * export class RadioGroupShowcase extends React.Component {
  *
- * private onGroupSelectionChange = (index: number) => {
- *   this.setState({ selectedIndexGroup: index });
- * };
+ *   public state = {
+ *     selectedIndex: 0,
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <RadioGroup
- *       selectedIndex={this.state.selectedIndexGroup}
- *       onChange={this.onGroupSelectionChange}>
- *       <Radio
- *         style={styles.radioButton}
- *         status='danger'
- *       />
- *       <Radio
- *         style={styles.radioButton}
- *         status='danger'
- *       />
- *       <Radio
- *         style={styles.radioButton}
- *         status='danger'
- *       />
- *     </RadioGroup>
- *   );
+ *   private onGroupSelectionChange = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <RadioGroup
+ *         selectedIndex={this.state.selectedIndex}
+ *         onChange={this.onGroupSelectionChange}>
+ *         <Radio />
+ *         <Radio />
+ *         <Radio />
+ *       </RadioGroup>
+ *     );
+ *   }
  * }
  * ```
- * */
+ */
 
 class RadioGroupComponent extends React.Component<RadioGroupProps> {
 

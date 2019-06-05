@@ -61,14 +61,13 @@ export type OverflowMenuItemProps = StyledComponentProps & TouchableIndexedProps
  *
  * @property {number} index - Determines index of the menu item.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon -
- * Determines the icon of the menu item.
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the menu item.
  *
  * @property TouchableOpacityIndexedProps
  *
  * @property StyledComponentProps
  *
- * */
+ */
 
 export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemProps> {
 

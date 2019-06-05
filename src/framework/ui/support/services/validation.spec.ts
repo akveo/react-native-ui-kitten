@@ -1,4 +1,4 @@
-import { isValidString } from '@kitten/ui/support/services/validation.service';
+import { isValidString } from './validation.service';
 
 describe('@validation: service checks', () => {
 

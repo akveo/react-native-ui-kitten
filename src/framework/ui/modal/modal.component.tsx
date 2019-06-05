@@ -63,7 +63,7 @@ export type ModalProps = ViewProps & ComponentProps;
  * @example Simple usage example
  *
  * ```
- * import { Modal } from '@kitten/ui';
+ * import { Modal } from 'react-native-ui-kitten';
  * <Modal visible={true}>
  *  <View><Text>Hello! I'm modal!</Text></View>
  * </Modal>
@@ -71,7 +71,7 @@ export type ModalProps = ViewProps & ComponentProps;
  * @example Modal usage and API example
  *
  * ```
- * import { Modal } from '@kitten/ui';
+ * import { Modal } from 'react-native-ui-kitten';
  *
  * state: State = {
  *   visible: false,

@@ -20,6 +20,7 @@ type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
 
 interface ComponentProps {
+  level?: string;
   children?: ChildrenProp;
 }
 
@@ -30,6 +31,10 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * @extends React.Component
  *
+ * @property {string} level - Determines background color level of component.
+ * Can be '1' | '2' | '3' | '4'.
+ * Default is '1'.
+ *
  * @property {React.ReactElement<any>} children - Determines the children of the component.
  *
  * @property ViewProps
@@ -39,14 +44,15 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
  * @example Layout usage and API example
  *
  * ```
+ * import React from 'react';
  * import {
  *   Layout,
  *   Text,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * public render(): React.ReactNode {
  *   return (
- *     <Layout style={styles.layout}>
+ *     <Layout>
  *       <Text>Layout</Text>
  *     </Layout>
  *   );

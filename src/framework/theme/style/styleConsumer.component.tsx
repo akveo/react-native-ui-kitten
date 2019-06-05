@@ -60,13 +60,11 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * @example Declaring Styled Component
  *
  * ```
- * import {
- *   styled,
- *   StyledComponentProps,
- *   Interaction,
- * } from '@kitten/theme';
+ * import React from 'react';
+ * import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+ * import { styled, StyledComponentProps, Interaction } from 'react-native-ui-kitten';
  *
- * type StyledButtonProps = ButtonProps & StyledComponentProps;
+ * type StyledButtonProps = TouchableOpacityProps & StyledComponentProps;
  *
  * class Button extends React.Component<StyledButtonProps> {
  *
@@ -116,16 +114,17 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * @example Styled Component Usage
  *
  * ```
+ * import React from 'react';
  * import {
  *   StyledButton,
  *   StyledButtonProps,
  * } from './path-to/styledButton.component';
  *
- * public render(): React.ReactElement<StyledButtonProps> {
+ * export const StyledButtonShowcase = (props?: StyledButtonProps): React.ReactElement<StyledButtonProps> => {
  *   return (
- *     <StyledButton/>
+ *     <StyledButton {...props}/>
  *   );
- * }
+ * };
  * ```
  */
 export const styled = <P extends object>(Component: React.ComponentType<P>): StyledComponentClass<P> => {
