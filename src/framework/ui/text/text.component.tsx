@@ -30,7 +30,7 @@ export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
  * @extends React.Component
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
+ * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
  * By default status is 'primary'.
  *
  * @property {string} children - Determines text of the component.

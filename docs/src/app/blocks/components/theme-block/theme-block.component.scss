@@ -3,10 +3,11 @@
 @include nb-install-component() {
 
   $inherited-fg: nb-theme(color-fg);
-  $search-fg: nb-theme(color-fg);
-  $search-bg: nb-theme(color-white);
-  $search-border: 1px solid nb-theme(color-gray-light);
   $selected-row-bg: nb-theme(color-gray-light);
+
+  h2 {
+    text-transform: capitalize;
+  }
 
   .inheritance-icon {
     font-size: 1rem;
@@ -26,17 +27,8 @@
     background-color: $selected-row-bg !important;
   }
 
-  .search-control {
-    display: block;
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: $search-fg;
-    background-color: $search-bg;
-    background-clip: padding-box;
-    border: $search-border;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  nb-card table.striped tbody tr.not-found {
+    background: nb-theme(background-basic-color-1);
+    color: nb-theme(text-disabled-color);
   }
 }

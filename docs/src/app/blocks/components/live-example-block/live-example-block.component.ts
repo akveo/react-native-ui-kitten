@@ -14,10 +14,7 @@ import {
 } from '@angular/core';
 import { Location } from '@angular/common';
 import { takeWhile } from 'rxjs/operators';
-import {
-  NgdAnalytics,
-  NgdIframeCommunicatorService,
-} from '../../../@theme/services';
+import { NgdAnalytics, NgdIframeCommunicatorService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
 @Component({
@@ -28,7 +25,7 @@ import { NgdExampleView } from '../../enum.example-view';
 })
 export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('iframe') iframe: ElementRef;
+  @ViewChild('iframe', { static: false }) iframe: ElementRef;
   @Input() content: any;
   @Input() hasViewSwitch: boolean = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
