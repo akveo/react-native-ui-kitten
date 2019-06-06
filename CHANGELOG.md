@@ -1,121 +1,155 @@
-<a name="3.1.2"></a>
-## [3.1.2](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.1...v3.1.2) (2018-09-21)
+## 4.0.0-beta.1 (2019-06-06)
 
-### Bug Fixes
-
-* **rkSwitch:** onValueChange parameters not passed to android component ([d1db657](https://github.com/akveo/react-native-ui-kitten/commit/d1db657))
-
-
-<a name="3.1.1"></a>
-## [3.1.1](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.0...v3.1.1) (2018-09-20)
-
-### Features
-
-* **rkText:** add prop-types validation ([ea193cb](https://github.com/akveo/react-native-ui-kitten/commit/ea193cb))
-
-### Notes
-
-* **rkAvoidKeyboard:** this component is deprecated since 3.1.1 version. Will be completely deleted in 3.2.0 version.
-
-<a name="3.1.0"></a>
-## [3.1.0](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.1...v3.1.0) (2018-09-19)
-
-### Bug Fixes
-
-* **rkTextInput:** non-editable rkTextInput crash on Android ([e755ce1](https://github.com/akveo/react-native-ui-kitten/commit/e755ce1))
-* **rkModalImg:** more than 10 items render ([c98d45c](https://github.com/akveo/react-native-ui-kitten/commit/c98d45c))
-* **rkCard:** nullable subview render ([0275291](https://github.com/akveo/react-native-ui-kitten/commit/0275291))
-* **rkChoice:** antialiased render on Android ([c86d57c](https://github.com/akveo/react-native-ui-kitten/commit/c86d57c))
-
-
-### Features
-
-* **build:** eslint integration and project adopt ([24d268b](https://github.com/akveo/react-native-ui-kitten/commit/24d268b))
-* **build:** add expo 27 and RN 0.56 support ([8c8b987](https://github.com/akveo/react-native-ui-kitten/commit/8c8b987))
-* **rkSwitch:** component implementation ([08dd2df](https://github.com/akveo/react-native-ui-kitten/commit/08dd2df))
-* **rkGallery:** component implementation ([2a9f652](https://github.com/akveo/react-native-ui-kitten/commit/2a9f652))
-* **rkGalleryImage:** component implementation ([794b117](https://github.com/akveo/react-native-ui-kitten/commit/794b117))
-
-
-### Notes
-
-* **rkModalImg:** this component is deprecated since 3.1.0 version. Will be completely deleted in 3.2.0 version.
-Use [rkGallery](https://akveo.github.io/react-native-ui-kitten/#/docs/ui-components/rkgallery) or [rkGalleryImage](https://akveo.github.io/react-native-ui-kitten/#/docs/ui-components/rkgalleryimage) instead.
-
-<a name="3.0.1"></a>
-## [3.0.1](https://github.com/akveo/react-native-ui-kitten/compare/v3.0.0...v3.0.1) (2018-04-25)
-
-
-### Bug Fixes
-
-* **docs:** upgrade docs devDependencies to fix docs AOT build issue ([7d77561](https://github.com/akveo/react-native-ui-kitten/commit/7d77561))
-* **rkModalImage:** images doesn't rotate on android ([d8054e2](https://github.com/akveo/react-native-ui-kitten/commit/d8054e2))
-* **rkModalImg:** fix swipe images in full screen mode on android ([4923bd2](https://github.com/akveo/react-native-ui-kitten/commit/4923bd2))
-* **rkPicker:** change animation type to 'fade' ([c9a9f5c](https://github.com/akveo/react-native-ui-kitten/commit/c9a9f5c))
-
-
-### Features
-
-* **rkButton:** add capability pass custom touchable ([0840df4](https://github.com/akveo/react-native-ui-kitten/commit/0840df4))
-
-
-
-<a name="3.0.0"></a>
-# [3.0.0](https://github.com/akveo/react-native-ui-kitten/compare/v2.0.1...v3.0.0) (2018-01-08)
-
-
-### Bug Fixes
-
-* **button:** add TouchableOpacity props support ([d29f627](https://github.com/akveo/react-native-ui-kitten/commit/d29f627))
-* **common:** rewrite rkChoice ([d0a5a4a](https://github.com/akveo/react-native-ui-kitten/commit/d0a5a4a))
-* **common:** rewrite rkChoice. Refactoring ([ddafac3](https://github.com/akveo/react-native-ui-kitten/commit/ddafac3))
-* **common:** rewrite rkChoice. Will be refactored ([1cfeceb](https://github.com/akveo/react-native-ui-kitten/commit/1cfeceb))
-* **common:** small style changes ([6f3a8d2](https://github.com/akveo/react-native-ui-kitten/commit/6f3a8d2))
-* **docs:** fix [#17](https://github.com/akveo/react-native-ui-kitten/issues/17) contact icons ([258b14d](https://github.com/akveo/react-native-ui-kitten/commit/258b14d))
-* **docs:** fix demo phone ([924ca2a](https://github.com/akveo/react-native-ui-kitten/commit/924ca2a))
-* **docs:** fix footer social icons ([7c63461](https://github.com/akveo/react-native-ui-kitten/commit/7c63461))
-* **docs:** fix google analytics ([41e3b98](https://github.com/akveo/react-native-ui-kitten/commit/41e3b98))
-* **docs:** fix header styles ([d691756](https://github.com/akveo/react-native-ui-kitten/commit/d691756))
-* **docs:** fix home page copy ([75fe65d](https://github.com/akveo/react-native-ui-kitten/commit/75fe65d))
-* **docs:** fix main font ([2e079ad](https://github.com/akveo/react-native-ui-kitten/commit/2e079ad))
-* **docs:** fix package.json commands ([04459ec](https://github.com/akveo/react-native-ui-kitten/commit/04459ec))
-* **docs:** fix prod build ([409b2b2](https://github.com/akveo/react-native-ui-kitten/commit/409b2b2))
-* **docs:** fix relative url ([875c748](https://github.com/akveo/react-native-ui-kitten/commit/875c748))
-* **docs:** fix scroll top ([1010404](https://github.com/akveo/react-native-ui-kitten/commit/1010404))
-* **docs:** fix styles ([a2c15c2](https://github.com/akveo/react-native-ui-kitten/commit/a2c15c2))
-* **docs:** fix styles ([d309cce](https://github.com/akveo/react-native-ui-kitten/commit/d309cce))
-* **docs:** fix top menu redirect ([d5f1a6a](https://github.com/akveo/react-native-ui-kitten/commit/d5f1a6a))
-* **docs:** fix transition & font-weight ([2e55ff8](https://github.com/akveo/react-native-ui-kitten/commit/2e55ff8))
-* **docs:** hide contact icons, build comandas ([731a22d](https://github.com/akveo/react-native-ui-kitten/commit/731a22d))
-* **docs:** ie and edge fixes ([5498029](https://github.com/akveo/react-native-ui-kitten/commit/5498029))
-* **docs:** improve header ([7a5837a](https://github.com/akveo/react-native-ui-kitten/commit/7a5837a))
-* **docs:** improve styles ([ba12b86](https://github.com/akveo/react-native-ui-kitten/commit/ba12b86))
-* **docs:** navigation issues fix, make links work ([001ca02](https://github.com/akveo/react-native-ui-kitten/commit/001ca02))
-* **forms:** image rkCardImg doesn't work ([d22d195](https://github.com/akveo/react-native-ui-kitten/commit/d22d195))
-* **homepage:** fix gradient ([9041511](https://github.com/akveo/react-native-ui-kitten/commit/9041511))
-* **homepage:** fix homepage layouts ([bb33eae](https://github.com/akveo/react-native-ui-kitten/commit/bb33eae))
-* **rkModalImg:** rkModalImage doesn't support orientation in full screen mode ([ecf4fd9](https://github.com/akveo/react-native-ui-kitten/commit/ecf4fd9))
-* **rkTabView:** scrollView issue with RkTabView ([eeeb839](https://github.com/akveo/react-native-ui-kitten/commit/eeeb839))
-* **scroll:** prevent body from scrolling under menu ([4f86a5d](https://github.com/akveo/react-native-ui-kitten/commit/4f86a5d))
-
-
-### Features
-
-* **common:** create RkPicker component. ([#34](https://github.com/akveo/react-native-ui-kitten/issues/34)) ([c248964](https://github.com/akveo/react-native-ui-kitten/commit/c248964))
-* **common:** implements inherit types ([0de3725](https://github.com/akveo/react-native-ui-kitten/commit/0de3725))
-* **common:** avoid type mapping when there is only one component ([4db1270](https://github.com/akveo/react-native-ui-kitten/commit/4db1270))
-* **common:** convert ExplorerApp to an Expo application ([38cd85a](https://github.com/akveo/react-native-ui-kitten/commit/38cd85a))
-* **docs:** add full pages title ([e15981d](https://github.com/akveo/react-native-ui-kitten/commit/e15981d))
-* **docs:** add google analytics for docs pages ([449ab0d](https://github.com/akveo/react-native-ui-kitten/commit/449ab0d))
-* **docs:** change homepage text ([1408401](https://github.com/akveo/react-native-ui-kitten/commit/1408401))
-* **docs:** fix npm scripts ([9c80182](https://github.com/akveo/react-native-ui-kitten/commit/9c80182))
-* **docs:** layout improvements ([4db4368](https://github.com/akveo/react-native-ui-kitten/commit/4db4368))
-* **docs:** extractNonStyleValue doesn't consider rkType ([3d7ddf2](https://github.com/akveo/react-native-ui-kitten/commit/3d7ddf2))
-* **rkButton:** add hitSlop to RkButton style ([14d0033](https://github.com/akveo/react-native-ui-kitten/commit/14d0033))
-* **rkChoice:** refactor RkChoice component in order to get rid of content style property ([bc5f773](https://github.com/akveo/react-native-ui-kitten/commit/bc5f773))
-* **rkTabView:** add possibility to place content of tabs above of the tabs. ([ac29043](https://github.com/akveo/react-native-ui-kitten/commit/ac29043))
-
-
-### BREAKING CHANGES
-
-* **rkChoice:** specifying of content of component in style property was removed.
+* refactor(common): changelog update ([60109b3](https://github.com/akveo/react-native-ui-kitten/commit/60109b3))
+* refactor(docs): hoc docs and doc-app refactor (#389) ([8718ee7](https://github.com/akveo/react-native-ui-kitten/commit/8718ee7)), closes [#389](https://github.com/akveo/react-native-ui-kitten/issues/389)
+* refactor(framework): adopt to eva mappings ([b688ee8](https://github.com/akveo/react-native-ui-kitten/commit/b688ee8))
+* refactor(framework): apply code style and token-groups ([b5d8ce6](https://github.com/akveo/react-native-ui-kitten/commit/b5d8ce6))
+* refactor(framework): update .spec configuration files ([d0d610f](https://github.com/akveo/react-native-ui-kitten/commit/d0d610f))
+* refactor(mapping): update toggle mapping ([e71ca2c](https://github.com/akveo/react-native-ui-kitten/commit/e71ca2c))
+* refactor(playground): screen refactor ([621875c](https://github.com/akveo/react-native-ui-kitten/commit/621875c))
+* refactor(playground): update playground to use typescript (#246) ([5c9b5d4](https://github.com/akveo/react-native-ui-kitten/commit/5c9b5d4)), closes [#246](https://github.com/akveo/react-native-ui-kitten/issues/246)
+* refactor(tab-set): code style fixes ([ab640ed](https://github.com/akveo/react-native-ui-kitten/commit/ab640ed))
+* refactor(tab-set): component structure separation ([90000c2](https://github.com/akveo/react-native-ui-kitten/commit/90000c2))
+* refactor(tab-set): eslint warning fix ([7afecca](https://github.com/akveo/react-native-ui-kitten/commit/7afecca))
+* refactor(tab-set): fix eslint warnings ([94ecf78](https://github.com/akveo/react-native-ui-kitten/commit/94ecf78))
+* refactor(tab-set): merge tabSet types ([2ffcc23](https://github.com/akveo/react-native-ui-kitten/commit/2ffcc23))
+* refactor(tab-set): rename rkTabView component to rkTabSet & docs update ([9c21cfb](https://github.com/akveo/react-native-ui-kitten/commit/9c21cfb))
+* refactor(tab-set): update examples ([141254e](https://github.com/akveo/react-native-ui-kitten/commit/141254e))
+* refactor(tab-set): update examples ([10e2022](https://github.com/akveo/react-native-ui-kitten/commit/10e2022))
+* refactor(tab-set): update examples ([9e402b0](https://github.com/akveo/react-native-ui-kitten/commit/9e402b0))
+* refactor(tab-set): update examples ([f6fe72c](https://github.com/akveo/react-native-ui-kitten/commit/f6fe72c))
+* refactor(test): button test mapping update ([caf7a7e](https://github.com/akveo/react-native-ui-kitten/commit/caf7a7e))
+* refactor(theme): adopt to eva mapping structure. Closes #266 ([47a4ed7](https://github.com/akveo/react-native-ui-kitten/commit/47a4ed7)), closes [#266](https://github.com/akveo/react-native-ui-kitten/issues/266)
+* refactor(theme): optimize module imports (#225) ([2c86a03](https://github.com/akveo/react-native-ui-kitten/commit/2c86a03)), closes [#225](https://github.com/akveo/react-native-ui-kitten/issues/225)
+* refactor(theme): remove unused exports ([2e9e748](https://github.com/akveo/react-native-ui-kitten/commit/2e9e748))
+* refactor(theme): simplify theme mapping config (#209) ([37274c4](https://github.com/akveo/react-native-ui-kitten/commit/37274c4)), closes [#209](https://github.com/akveo/react-native-ui-kitten/issues/209)
+* refactor(ui): apply checkbox mappings ([a1f1255](https://github.com/akveo/react-native-ui-kitten/commit/a1f1255))
+* refactor(ui): apply input mappings ([db1161d](https://github.com/akveo/react-native-ui-kitten/commit/db1161d))
+* refactor(ui): apply list mappings ([55fe0c9](https://github.com/akveo/react-native-ui-kitten/commit/55fe0c9))
+* refactor(ui): apply overflow-menu mappings ([0b4388b](https://github.com/akveo/react-native-ui-kitten/commit/0b4388b))
+* refactor(ui): apply popover mappings ([130aa7a](https://github.com/akveo/react-native-ui-kitten/commit/130aa7a))
+* refactor(ui): apply radio mappings ([bdd4e5e](https://github.com/akveo/react-native-ui-kitten/commit/bdd4e5e))
+* refactor(ui): apply tab mappings ([ef61e17](https://github.com/akveo/react-native-ui-kitten/commit/ef61e17))
+* refactor(ui): apply tooltip mappings ([b6a191e](https://github.com/akveo/react-native-ui-kitten/commit/b6a191e))
+* refactor(ui): apply top-navigation mappings ([2601897](https://github.com/akveo/react-native-ui-kitten/commit/2601897))
+* refactor(ui): avatar - apply mappings ([7203d2b](https://github.com/akveo/react-native-ui-kitten/commit/7203d2b))
+* refactor(ui): bottom-navigation - apply mappings ([228114a](https://github.com/akveo/react-native-ui-kitten/commit/228114a))
+* refactor(ui): button - apply mappings ([a6f778c](https://github.com/akveo/react-native-ui-kitten/commit/a6f778c))
+* refactor(ui): button - apply mappings ([c6b253f](https://github.com/akveo/react-native-ui-kitten/commit/c6b253f))
+* refactor(ui): button-group layout refactor ([9b54310](https://github.com/akveo/react-native-ui-kitten/commit/9b54310))
+* refactor(ui): icons integration (#292) ([fb5e93d](https://github.com/akveo/react-native-ui-kitten/commit/fb5e93d)), closes [#292](https://github.com/akveo/react-native-ui-kitten/issues/292)
+* refactor(ui): modal component ([8696132](https://github.com/akveo/react-native-ui-kitten/commit/8696132))
+* refactor(ui): prop type names & style ([664a823](https://github.com/akveo/react-native-ui-kitten/commit/664a823))
+* refactor(ui): radio and checkbox mapping refactor ([b67c4c2](https://github.com/akveo/react-native-ui-kitten/commit/b67c4c2))
+* refactor(ui): radio/checkbox hit-slopes add (#403) ([56094b6](https://github.com/akveo/react-native-ui-kitten/commit/56094b6)), closes [#403](https://github.com/akveo/react-native-ui-kitten/issues/403)
+* refactor(ui): radio/checkbox size variant remove ([ecb6568](https://github.com/akveo/react-native-ui-kitten/commit/ecb6568))
+* refactor(ui): tab-view enhancements (#363) ([8d8e404](https://github.com/akveo/react-native-ui-kitten/commit/8d8e404)), closes [#363](https://github.com/akveo/react-native-ui-kitten/issues/363)
+* refactor(ui): toggle icon refactor (#310) ([d88b048](https://github.com/akveo/react-native-ui-kitten/commit/d88b048)), closes [#310](https://github.com/akveo/react-native-ui-kitten/issues/310)
+* feat: enhancements ([3b807ac](https://github.com/akveo/react-native-ui-kitten/commit/3b807ac))
+* feat(calendar): component implementation (#153) ([5daf561](https://github.com/akveo/react-native-ui-kitten/commit/5daf561)), closes [#153](https://github.com/akveo/react-native-ui-kitten/issues/153)
+* feat(ci): integrates coveralls (#204) ([0e38a4f](https://github.com/akveo/react-native-ui-kitten/commit/0e38a4f)), closes [#204](https://github.com/akveo/react-native-ui-kitten/issues/204)
+* feat(ci): travis ci integration (#165) ([2239e5e](https://github.com/akveo/react-native-ui-kitten/commit/2239e5e)), closes [#165](https://github.com/akveo/react-native-ui-kitten/issues/165)
+* feat(docs): components docs and application add (#386) ([885fb81](https://github.com/akveo/react-native-ui-kitten/commit/885fb81)), closes [#386](https://github.com/akveo/react-native-ui-kitten/issues/386)
+* feat(framework): enhancements ([fb8ae55](https://github.com/akveo/react-native-ui-kitten/commit/fb8ae55))
+* feat(framework): modal service (#245) ([6efa3c5](https://github.com/akveo/react-native-ui-kitten/commit/6efa3c5)), closes [#245](https://github.com/akveo/react-native-ui-kitten/issues/245)
+* feat(playground): add showcase settings ([81ab976](https://github.com/akveo/react-native-ui-kitten/commit/81ab976))
+* feat(playground): home screen. Closes #203 (#205) ([e6d030c](https://github.com/akveo/react-native-ui-kitten/commit/e6d030c)), closes [#203](https://github.com/akveo/react-native-ui-kitten/issues/203) [#205](https://github.com/akveo/react-native-ui-kitten/issues/205)
+* feat(release): part of release pipeline add ([0fa18f0](https://github.com/akveo/react-native-ui-kitten/commit/0fa18f0))
+* feat(tab-set): add badge props ([1b0b6c2](https://github.com/akveo/react-native-ui-kitten/commit/1b0b6c2))
+* feat(tab-set): add tab indicator types ([4a54318](https://github.com/akveo/react-native-ui-kitten/commit/4a54318))
+* feat(tab-set): add tabBar indicator to tabView ([34d240e](https://github.com/akveo/react-native-ui-kitten/commit/34d240e))
+* feat(tab-set): add tabView component documentation ([041e453](https://github.com/akveo/react-native-ui-kitten/commit/041e453))
+* feat(tab-set): base implementation ([a6526fd](https://github.com/akveo/react-native-ui-kitten/commit/a6526fd))
+* feat(tab-set): scrollable tabBar ([b085302](https://github.com/akveo/react-native-ui-kitten/commit/b085302))
+* feat(tab-set): tab change event ([11f315d](https://github.com/akveo/react-native-ui-kitten/commit/11f315d))
+* feat(tab-set): update documentation ([66d3399](https://github.com/akveo/react-native-ui-kitten/commit/66d3399))
+* feat(theme): add simple implementation of provider/consumer ([a38af67](https://github.com/akveo/react-native-ui-kitten/commit/a38af67))
+* feat(theme): consumer component props forward ([c14a5f1](https://github.com/akveo/react-native-ui-kitten/commit/c14a5f1))
+* feat(theme): custom mapping ([f1abf83](https://github.com/akveo/react-native-ui-kitten/commit/f1abf83))
+* feat(theme): eva integration (#227) ([4872a85](https://github.com/akveo/react-native-ui-kitten/commit/4872a85)), closes [#227](https://github.com/akveo/react-native-ui-kitten/issues/227)
+* feat(theme): implementing ThemeProvider and withTheme ([efaf224](https://github.com/akveo/react-native-ui-kitten/commit/efaf224))
+* feat(theme): referencing values (#398) ([cbe5056](https://github.com/akveo/react-native-ui-kitten/commit/cbe5056)), closes [#398](https://github.com/akveo/react-native-ui-kitten/issues/398)
+* feat(theme): state mappings (#210) ([14f0cf9](https://github.com/akveo/react-native-ui-kitten/commit/14f0cf9)), closes [#210](https://github.com/akveo/react-native-ui-kitten/issues/210)
+* feat(theme): style consumer dispatch actions (#221) ([cd60eb2](https://github.com/akveo/react-native-ui-kitten/commit/cd60eb2)), closes [#221](https://github.com/akveo/react-native-ui-kitten/issues/221)
+* feat(theme): styled and theme components statics copy ([07d4bcf](https://github.com/akveo/react-native-ui-kitten/commit/07d4bcf))
+* feat(theme): styles validation ([51cdf68](https://github.com/akveo/react-native-ui-kitten/commit/51cdf68))
+* feat(theme): themed-style component (#176) ([34f560a](https://github.com/akveo/react-native-ui-kitten/commit/34f560a)), closes [#176](https://github.com/akveo/react-native-ui-kitten/issues/176)
+* feat(theme): token integration (#191) ([c97fa06](https://github.com/akveo/react-native-ui-kitten/commit/c97fa06)), closes [#191](https://github.com/akveo/react-native-ui-kitten/issues/191)
+* feat(ui): avatar component ([d63df29](https://github.com/akveo/react-native-ui-kitten/commit/d63df29))
+* feat(ui): bottom tab navigator ([8cbe4ec](https://github.com/akveo/react-native-ui-kitten/commit/8cbe4ec))
+* feat(ui): button "textStyle" property add (#377) ([2cbf39c](https://github.com/akveo/react-native-ui-kitten/commit/2cbf39c)), closes [#377](https://github.com/akveo/react-native-ui-kitten/issues/377)
+* feat(ui): button component. Closes #260 (#268) ([1ea28bd](https://github.com/akveo/react-native-ui-kitten/commit/1ea28bd)), closes [#260](https://github.com/akveo/react-native-ui-kitten/issues/260) [#268](https://github.com/akveo/react-native-ui-kitten/issues/268)
+* feat(ui): button group statuses ([56aa6aa](https://github.com/akveo/react-native-ui-kitten/commit/56aa6aa))
+* feat(ui): button-group component. Closes #290 ([6a6a0ad](https://github.com/akveo/react-native-ui-kitten/commit/6a6a0ad)), closes [#290](https://github.com/akveo/react-native-ui-kitten/issues/290)
+* feat(ui): checkbox - add text support ([6b4d0f4](https://github.com/akveo/react-native-ui-kitten/commit/6b4d0f4))
+* feat(ui): checkbox component (#238) ([e8ce139](https://github.com/akveo/react-native-ui-kitten/commit/e8ce139)), closes [#238](https://github.com/akveo/react-native-ui-kitten/issues/238)
+* feat(ui): checkbox indeterminate ([b1e6071](https://github.com/akveo/react-native-ui-kitten/commit/b1e6071))
+* feat(ui): input component ([74fac39](https://github.com/akveo/react-native-ui-kitten/commit/74fac39))
+* feat(ui): input labels (#361) ([dc89874](https://github.com/akveo/react-native-ui-kitten/commit/dc89874)), closes [#361](https://github.com/akveo/react-native-ui-kitten/issues/361)
+* feat(ui): layout component. closes #240 ([553d043](https://github.com/akveo/react-native-ui-kitten/commit/553d043)), closes [#240](https://github.com/akveo/react-native-ui-kitten/issues/240)
+* feat(ui): list component ([42dbbe6](https://github.com/akveo/react-native-ui-kitten/commit/42dbbe6))
+* feat(ui): overflow-menu (#306) ([f396ba7](https://github.com/akveo/react-native-ui-kitten/commit/f396ba7)), closes [#306](https://github.com/akveo/react-native-ui-kitten/issues/306)
+* feat(ui): popover indicator style ([50ef9fe](https://github.com/akveo/react-native-ui-kitten/commit/50ef9fe))
+* feat(ui): props for inline styling add (#379) ([9e57594](https://github.com/akveo/react-native-ui-kitten/commit/9e57594)), closes [#379](https://github.com/akveo/react-native-ui-kitten/issues/379)
+* feat(ui): radio - add text support ([35c35f4](https://github.com/akveo/react-native-ui-kitten/commit/35c35f4))
+* feat(ui): radio group component (#237) ([bfabf75](https://github.com/akveo/react-native-ui-kitten/commit/bfabf75)), closes [#237](https://github.com/akveo/react-native-ui-kitten/issues/237)
+* feat(ui): Radio. Closes #201 (#212) ([48c6cfe](https://github.com/akveo/react-native-ui-kitten/commit/48c6cfe)), closes [#201](https://github.com/akveo/react-native-ui-kitten/issues/201) [#212](https://github.com/akveo/react-native-ui-kitten/issues/212)
+* feat(ui): tab-view component (#243) ([c981213](https://github.com/akveo/react-native-ui-kitten/commit/c981213)), closes [#243](https://github.com/akveo/react-native-ui-kitten/issues/243)
+* feat(ui): text component ([2527260](https://github.com/akveo/react-native-ui-kitten/commit/2527260))
+* feat(ui): toggle component. closes #235 ([920105b](https://github.com/akveo/react-native-ui-kitten/commit/920105b)), closes [#235](https://github.com/akveo/react-native-ui-kitten/issues/235)
+* feat(ui): tooltip component. Closes #261 (#263) ([9028953](https://github.com/akveo/react-native-ui-kitten/commit/9028953)), closes [#261](https://github.com/akveo/react-native-ui-kitten/issues/261) [#263](https://github.com/akveo/react-native-ui-kitten/issues/263)
+* feat(ui): top navigation bar component ([3421311](https://github.com/akveo/react-native-ui-kitten/commit/3421311))
+* fix(ci): travis auth (#270) ([bf65ddb](https://github.com/akveo/react-native-ui-kitten/commit/bf65ddb)), closes [#270](https://github.com/akveo/react-native-ui-kitten/issues/270)
+* fix(docs): update dev and contributing guides (#169) ([b0e1285](https://github.com/akveo/react-native-ui-kitten/commit/b0e1285)), closes [#169](https://github.com/akveo/react-native-ui-kitten/issues/169)
+* fix(framework): eva-adopt ([2a9e315](https://github.com/akveo/react-native-ui-kitten/commit/2a9e315))
+* fix(RkSwitch): Fix incorrect thumb animation in case if gesture was intercepted by parent view ([1492f41](https://github.com/akveo/react-native-ui-kitten/commit/1492f41))
+* fix(tab-set): example screen component description ([f9989bd](https://github.com/akveo/react-native-ui-kitten/commit/f9989bd))
+* fix(tab-set): initial tab render when no selection is passed ([be58950](https://github.com/akveo/react-native-ui-kitten/commit/be58950))
+* fix(tab-set): tabBar styles ([d5cce2f](https://github.com/akveo/react-native-ui-kitten/commit/d5cce2f))
+* fix(tab-view): update rkTabView docs ([15216a4](https://github.com/akveo/react-native-ui-kitten/commit/15216a4))
+* fix(theme): mapping application order. Closes #218 (#220) ([ca37382](https://github.com/akveo/react-native-ui-kitten/commit/ca37382)), closes [#218](https://github.com/akveo/react-native-ui-kitten/issues/218) [#220](https://github.com/akveo/react-native-ui-kitten/issues/220)
+* fix(theme): style HOCs component arg type ([b18b8aa](https://github.com/akveo/react-native-ui-kitten/commit/b18b8aa))
+* fix(theme): style provider - reduce setState calls ([1afbcfe](https://github.com/akveo/react-native-ui-kitten/commit/1afbcfe))
+* fix(theme): theme change fix (#399) ([318c038](https://github.com/akveo/react-native-ui-kitten/commit/318c038)), closes [#399](https://github.com/akveo/react-native-ui-kitten/issues/399)
+* fix(ui): adopt to eva (#397) ([1b90281](https://github.com/akveo/react-native-ui-kitten/commit/1b90281)), closes [#397](https://github.com/akveo/react-native-ui-kitten/issues/397)
+* fix(ui): button layout issues (#375) ([a2e61d4](https://github.com/akveo/react-native-ui-kitten/commit/a2e61d4)), closes [#375](https://github.com/akveo/react-native-ui-kitten/issues/375)
+* fix(ui): common issues ([d0835af](https://github.com/akveo/react-native-ui-kitten/commit/d0835af))
+* fix(ui): container component interactions (#367) ([671ddd1](https://github.com/akveo/react-native-ui-kitten/commit/671ddd1)), closes [#367](https://github.com/akveo/react-native-ui-kitten/issues/367)
+* fix(ui): export tab-view children props ([cb3ebae](https://github.com/akveo/react-native-ui-kitten/commit/cb3ebae))
+* fix(ui): input styles passing and applying fix ([a5fafb1](https://github.com/akveo/react-native-ui-kitten/commit/a5fafb1))
+* fix(ui): list-item activeOpacity ([fe33ffe](https://github.com/akveo/react-native-ui-kitten/commit/fe33ffe))
+* fix(ui): mapping find issues ([a08f8f2](https://github.com/akveo/react-native-ui-kitten/commit/a08f8f2))
+* fix(ui): modal component/service/panel, popover fix ([a0491cb](https://github.com/akveo/react-native-ui-kitten/commit/a0491cb))
+* fix(ui): popover - crash when no styles (#380) ([2c45eae](https://github.com/akveo/react-native-ui-kitten/commit/2c45eae)), closes [#380](https://github.com/akveo/react-native-ui-kitten/issues/380)
+* fix(ui): popover - scrollable container ([766214c](https://github.com/akveo/react-native-ui-kitten/commit/766214c))
+* fix(ui): popover - useless element render ([903f766](https://github.com/akveo/react-native-ui-kitten/commit/903f766))
+* fix(ui): popover margins offsets fix (#371) ([1e3167b](https://github.com/akveo/react-native-ui-kitten/commit/1e3167b)), closes [#371](https://github.com/akveo/react-native-ui-kitten/issues/371)
+* fix(ui): popover position ([d0effb9](https://github.com/akveo/react-native-ui-kitten/commit/d0effb9))
+* fix(ui): top-navigation center align ([a01cbd1](https://github.com/akveo/react-native-ui-kitten/commit/a01cbd1))
+* fix(ui): top-navigation style apply ([9d94b38](https://github.com/akveo/react-native-ui-kitten/commit/9d94b38))
+* fix(ui): top-navigation-bar fix (#392) ([4410486](https://github.com/akveo/react-native-ui-kitten/commit/4410486)), closes [#392](https://github.com/akveo/react-native-ui-kitten/issues/392)
+* fix(ui): update input mappings ([9aa396c](https://github.com/akveo/react-native-ui-kitten/commit/9aa396c))
+* fix(ui): update text mappings ([87b89c1](https://github.com/akveo/react-native-ui-kitten/commit/87b89c1))
+* fix(ui): view-pager swipe ([2925e70](https://github.com/akveo/react-native-ui-kitten/commit/2925e70))
+* build(common): add theme module ([2f8df0f](https://github.com/akveo/react-native-ui-kitten/commit/2f8df0f))
+* build(common): setup env configurations (#394) ([361a62f](https://github.com/akveo/react-native-ui-kitten/commit/361a62f)), closes [#394](https://github.com/akveo/react-native-ui-kitten/issues/394)
+* build(common): setup playground to watch eva changes ([1e0b287](https://github.com/akveo/react-native-ui-kitten/commit/1e0b287))
+* build(common): ui testing integration ([7b45ad7](https://github.com/akveo/react-native-ui-kitten/commit/7b45ad7))
+* build(package): make package prod-compatible ([47d9c15](https://github.com/akveo/react-native-ui-kitten/commit/47d9c15))
+* build(playground): expo-31 upgrade ([65cf7ef](https://github.com/akveo/react-native-ui-kitten/commit/65cf7ef))
+* build(playground): expo/react-native version bump ([f1cccd6](https://github.com/akveo/react-native-ui-kitten/commit/f1cccd6))
+* build(test): configure jest with typescript ([c6dc732](https://github.com/akveo/react-native-ui-kitten/commit/c6dc732))
+* package(common): update typing packages versions (#391) ([735edd3](https://github.com/akveo/react-native-ui-kitten/commit/735edd3)), closes [#391](https://github.com/akveo/react-native-ui-kitten/issues/391)
+* docs(common): add new helpful readme shields ([55065cd](https://github.com/akveo/react-native-ui-kitten/commit/55065cd))
+* docs(common): fix documentation typo at index ([053c303](https://github.com/akveo/react-native-ui-kitten/commit/053c303))
+* docs(common): update readme ([59a780d](https://github.com/akveo/react-native-ui-kitten/commit/59a780d))
+* docs(guides): add getting-started and theme-system guides ([96ef0dd](https://github.com/akveo/react-native-ui-kitten/commit/96ef0dd))
+* docs(theme): add theme components documentation (#387) ([c2e5be0](https://github.com/akveo/react-native-ui-kitten/commit/c2e5be0)), closes [#387](https://github.com/akveo/react-native-ui-kitten/issues/387)
+* test(common): temporary configuration changes ([059bf0c](https://github.com/akveo/react-native-ui-kitten/commit/059bf0c))
+* test(theme): add style-provider change mappings/theme tests ([d75cacb](https://github.com/akveo/react-native-ui-kitten/commit/d75cacb))
+* test(theme): add theme consumer tests ([830a566](https://github.com/akveo/react-native-ui-kitten/commit/830a566))
+* chore(config): integrate with EditorConfig ([4a14277](https://github.com/akveo/react-native-ui-kitten/commit/4a14277))
+* chore(next): initial solution structure ([6b9825b](https://github.com/akveo/react-native-ui-kitten/commit/6b9825b))
+* chore(next): solution clean-up ([39e88bd](https://github.com/akveo/react-native-ui-kitten/commit/39e88bd))
+* chore(tab-set): initial setup ([f5b59ac](https://github.com/akveo/react-native-ui-kitten/commit/f5b59ac))
+* feat(tab-set/tab): add icon prop ([c1ec7a3](https://github.com/akveo/react-native-ui-kitten/commit/c1ec7a3))
