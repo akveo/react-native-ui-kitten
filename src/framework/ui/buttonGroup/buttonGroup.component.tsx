@@ -95,8 +95,8 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
         ...StyleSheet.flatten(style),
       },
       button: {
-        borderRightColor: dividerBackgroundColor,
-        borderRightWidth: dividerWidth,
+        borderEndColor: dividerBackgroundColor,
+        borderEndWidth: dividerWidth,
         ...styles.button,
       },
     };
