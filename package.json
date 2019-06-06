@@ -61,6 +61,7 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "coveralls": "^3.0.2",
     "del": "^4.1.1",
+    "doc-prsr": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^1.0.0",
     "gulp-typedoc": "^2.2.1",
