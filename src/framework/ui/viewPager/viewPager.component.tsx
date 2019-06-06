@@ -11,6 +11,7 @@ import {
   ScrollViewProps,
   LayoutChangeEvent,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import { ScrollEvent } from '../support/typings';
 
@@ -126,23 +127,8 @@ export class ViewPager extends React.Component<ViewPagerProps> {
   private scrollViewRef: React.RefObject<ScrollView> = React.createRef();
   private contentWidth: number = 0;
 
-  public componentDidMount() {
-    const { selectedIndex: index } = this.props;
-
-    this.scrollToIndex({ index });
-  }
-
   public shouldComponentUpdate(nextProps: ViewPagerProps): boolean {
     return this.props.selectedIndex !== nextProps.selectedIndex;
-  }
-
-  public componentDidUpdate() {
-    const { selectedIndex: index } = this.props;
-
-    this.scrollToIndex({
-      index,
-      animated: true,
-    });
   }
 
   public scrollToIndex(params: { index: number; animated?: boolean }) {
@@ -153,28 +139,49 @@ export class ViewPager extends React.Component<ViewPagerProps> {
   }
 
   public scrollToOffset(params: { offset: number; animated?: boolean }) {
+    // Regularly we trigger onSelect when `onMomentumScrollEnd` is triggered, but
+    // there is an issue: https://github.com/facebook/react-native/issues/21718
+
+    const selector = Platform.select({
+      ios: this.scrollToOffsetIOS,
+      android: this.scrollToOffsetAndroid,
+    });
+
+    selector(params);
+  }
+
+  private scrollToOffsetIOS = (params: { offset: number; animated?: boolean }) => {
     const { offset, ...rest } = params;
     const { current: scrollView } = this.scrollViewRef;
 
     scrollView.scrollTo({ x: offset, ...rest });
-  }
+  };
+
+  private scrollToOffsetAndroid = (params: { offset: number; animated?: boolean }) => {
+    this.scrollToOffsetIOS(params);
+    this.dispatchOnSelect(params.offset);
+  };
+
+  private dispatchOnSelect = (offset: number) => {
+    const selectedIndex: number = offset / this.contentWidth;
+
+    if (selectedIndex !== this.props.selectedIndex && this.props.onSelect) {
+      this.props.onSelect(Math.round(selectedIndex));
+    }
+  };
 
   private onScroll = (event: ScrollEvent) => {
     if (this.props.onOffsetChange) {
       const { x: offset } = event.nativeEvent.contentOffset;
+
       this.props.onOffsetChange(offset);
     }
   };
 
   private onScrollEnd = (event: ScrollEvent) => {
     const { x: offset } = event.nativeEvent.contentOffset;
-    const { selectedIndex: derivedSelectedIndex } = this.props;
 
-    const selectedIndex: number = offset / this.contentWidth;
-
-    if (selectedIndex !== derivedSelectedIndex && this.props.onSelect) {
-      this.props.onSelect(Math.round(selectedIndex));
-    }
+    this.dispatchOnSelect(offset);
   };
 
   private onLayout = (event: LayoutChangeEvent) => {
