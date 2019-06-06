@@ -251,6 +251,12 @@ export const structure = [
         source: [
           'Button',
         ],
+        overview: [
+          {
+            name: 'Button',
+            images: ['buttons.png'],
+          },
+        ],
       },
       {
         type: 'tabs',
