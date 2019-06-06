@@ -12,7 +12,6 @@ matrix:
 branches:
   only:
   - next
-  - fix/travis
 before_install:
 - openssl aes-256-cbc -K $encrypted_d1ce48b9cbe6_key -iv $encrypted_d1ce48b9cbe6_iv
   -in travis_deploy_key.enc -out /tmp/travis_deploy_key -d
