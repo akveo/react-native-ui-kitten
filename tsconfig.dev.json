@@ -16,7 +16,15 @@
       "./node_modules/@types"
     ],
     "paths": {
-      "@kitten/*": ["./src/framework/*"]
+      "@kitten/ui": [
+        "./src/framework/ui"
+      ],
+      "@kitten/theme": [
+        "./src/framework/theme"
+      ]
     }
-  }
+  },
+  "include": [
+    "./src"
+  ]
 }

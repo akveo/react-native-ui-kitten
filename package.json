@@ -8,14 +8,16 @@
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
-  "main": "index.js",
   "scripts": {
     "start": "npm run start:pg:dev",
     "start:pg": "npm run install:pg && npm start --prefix ./src/playground",
     "start:pg:prod": "npm run env:set -- prod && npm run start:pg",
     "start:pg:dev": "npm run env:set -- dev && npm run start:pg",
-    "env:set": "sh ./scripts/environment/set-env.sh",
-    "build": "tsc",
+    "env:set": "./scripts/environment/set-env.sh",
+    "build": "./scripts/build/compile-ts.sh",
+    "build:transform": "./scripts/build/transform-paths.sh",
+    "build:dev": "npm run build -- dev && npm run build:transform -- dev",
+    "build:prod": "npm run build -- prod && npm run build:transform -- prod",
     "clean": "rimraf ./dist",
     "docs:parse": "gulp docs",
     "docs:serve": "cd docs && npm start",
@@ -28,11 +30,11 @@
     "ci:install": "npm ci && npm run ci:install:pg",
     "ci:install:pg": "( cd ./src/playground && npm ci )",
     "ci:lint": "npm run lint",
-    "ci:build": "npm run build -- -p ./tsconfig.dev.json",
+    "ci:build": "npm run build:prod",
     "ci:test": "npm t -- --ci --coverage && cat ./dist/jest/coverage/lcov.info | coveralls",
     "install:pg": "( cd ./src/playground && npm i )",
     "publish": "./scripts/publish/publish.sh",
-    "release:prepare": "npm run clean && npm run build -- -p ./tsconfig.publish.json",
+    "release:prepare": "npm run clean && npm run build:prod",
     "release:validate": "npm run lint && npm run test",
     "release": "npm run release:prepare && npm run release:validate && npm run publish",
     "test": "jest"
@@ -72,6 +74,7 @@
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
     "ts-node": "^3.2.2",
+    "tscpaths": "0.0.9",
     "tslint": "^5.12.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.5.1"

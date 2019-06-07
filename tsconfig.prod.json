@@ -11,13 +11,19 @@
     "jsx": "react-native",
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2018"],
+    "lib": [
+      "es2018"
+    ],
     "typeRoots": [
       "./node_modules/@types"
     ],
     "paths": {
-      "@kitten/ui": ["./src/framework/ui"],
-      "@kitten/theme": ["./src/framework/theme"]
+      "@kitten/ui": [
+        "./src/framework/ui"
+      ],
+      "@kitten/theme": [
+        "./src/framework/theme"
+      ]
     }
   },
   "include": [
