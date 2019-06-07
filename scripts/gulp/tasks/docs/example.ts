@@ -27,19 +27,19 @@ task('copy-examples', () => {
     .pipe(dest(EXAMPLES_DEST));
 });
 
-task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
-  const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls => {
-    cls.overview = cls.overview.map(unfold);
-    cls.liveExamples = cls.liveExamples.map(unfold);
-  });
-  writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
-});
+// task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
+//   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+//   docs.classes.forEach(cls => {
+//     cls.overview = cls.overview.map(unfold);
+//     cls.liveExamples = cls.liveExamples.map(unfold);
+//   });
+//   writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
+// });
 
-task('validate-examples', ['parse-themes'], () => {
-  const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls => validate(cls));
-});
+// task('validate-examples', ['parse-themes'], () => {
+//   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+//   docs.classes.forEach(cls => validate(cls));
+// });
 
 function unfold(tag) {
   if (tag.type === 'text') {
