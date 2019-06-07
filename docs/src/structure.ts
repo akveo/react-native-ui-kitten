@@ -150,6 +150,12 @@ export const structure = [
           'List',
           'ListItem',
         ],
+        overview: [
+          {
+            name: 'List',
+            images: ['list.png'],
+          },
+        ],
       },
       {
         type: 'group',
@@ -162,6 +168,12 @@ export const structure = [
         source: [
           'TopNavigation',
         ],
+        overview: [
+          {
+            name: 'TopNavigation',
+            images: ['top-navigation.png'],
+          },
+        ],
       },
       {
         type: 'tabs',
@@ -170,6 +182,12 @@ export const structure = [
         source: [
           'BottomNavigation',
           'BottomNavigationTab',
+        ],
+        overview: [
+          {
+            name: 'BottomNavigation',
+            images: ['bottom-navigation.png'],
+          },
         ],
       },
       {
@@ -192,11 +210,7 @@ export const structure = [
         overview: [
           {
             name: 'TabBar',
-            images: ['tab-bar.png'],
-          },
-          {
-            name: 'Tab',
-            images: ['tab.gif'],
+            images: ['tab-menu.png'],
           },
         ],
       },
@@ -211,6 +225,12 @@ export const structure = [
         source: [
           'CheckBox',
         ],
+        overview: [
+          {
+            name: 'CheckBox',
+            images: ['checkbox.png'],
+          },
+        ],
       },
       {
         type: 'tabs',
@@ -218,6 +238,12 @@ export const structure = [
         icon: 'radio.svg',
         source: [
           'Radio',
+        ],
+        overview: [
+          {
+            name: 'Radio',
+            images: ['radio.png'],
+          },
         ],
       },
       {
@@ -235,6 +261,12 @@ export const structure = [
         source: [
           'Toggle',
         ],
+        overview: [
+          {
+            name: 'Toggle',
+            images: ['toggle.png'],
+          },
+        ],
       },
       {
         type: 'tabs',
@@ -242,6 +274,12 @@ export const structure = [
         icon: 'input.svg',
         source: [
           'Input',
+        ],
+        overview: [
+          {
+            name: 'Input',
+            images: ['input.png'],
+          },
         ],
       },
       {
@@ -254,7 +292,7 @@ export const structure = [
         overview: [
           {
             name: 'Button',
-            images: ['buttons.png'],
+            images: ['button.png'],
           },
         ],
       },
@@ -264,6 +302,12 @@ export const structure = [
         icon: 'button-group.svg',
         source: [
           'ButtonGroup',
+        ],
+        overview: [
+          {
+            name: 'ButtonGroup',
+            images: ['button-group.png'],
+          },
         ],
       },
       {
@@ -277,6 +321,12 @@ export const structure = [
         source: [
           'OverflowMenu',
           'OverflowMenuItem',
+        ],
+        overview: [
+          {
+            name: 'OverflowMenu',
+            images: ['overflow-menu.png'],
+          },
         ],
       },
       {
@@ -294,6 +344,12 @@ export const structure = [
         source: [
           'Popover',
         ],
+        overview: [
+          {
+            name: 'Popover',
+            images: ['popover.png'],
+          },
+        ],
       },
       {
         type: 'tabs',
@@ -301,6 +357,12 @@ export const structure = [
         icon: 'tooltip.svg',
         source: [
           'Tooltip',
+        ],
+        overview: [
+          {
+            name: 'Tooltip',
+            images: ['tooltip.png'],
+          },
         ],
       },
       {
@@ -314,6 +376,12 @@ export const structure = [
         source: [
           'Avatar',
         ],
+        overview: [
+          {
+            name: 'Avatar',
+            images: ['avatar.png'],
+          },
+        ],
       },
       {
         type: 'tabs',
@@ -321,6 +389,12 @@ export const structure = [
         icon: 'text.svg',
         source: [
           'Text',
+        ],
+        overview: [
+          {
+            name: 'Text',
+            images: ['text.png'],
+          },
         ],
       },
     ],
