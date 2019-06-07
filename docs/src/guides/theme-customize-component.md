@@ -152,8 +152,10 @@ The one thing to apply custom mapping is to provide it to `ApplicationProvider` 
 
 ```tsx
 import React from 'react';
-import { mapping } from '@eva-design/eva';
-import { theme } from '@eva/themes';
+import {
+  mapping,
+  theme,
+} from '@eva-design/eva';
 import { 
   ApplicationProvider,
   ApplicationProviderProps

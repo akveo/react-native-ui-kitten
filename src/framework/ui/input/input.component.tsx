@@ -41,6 +41,7 @@ type IconProp = (style: StyleType) => IconElement;
 
 interface ComponentProps {
   status?: string;
+  size?: string;
   disabled?: boolean;
   label?: string;
   caption?: string;
@@ -63,6 +64,10 @@ export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
  * @property {string} status - Determines the status of the component.
  * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
  * By default status is 'primary'.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be 'small' | 'medium' | 'large'.
+ * Default is 'medium'.
  *
  * @property {string} label - Determines label of the component.
  *

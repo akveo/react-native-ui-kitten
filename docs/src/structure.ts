@@ -309,7 +309,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'User (Avatar)',
+        name: 'Avatar',
         icon: 'user.svg',
         source: [
           'Avatar',

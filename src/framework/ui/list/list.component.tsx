@@ -83,6 +83,8 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
  * };
  * ```
  *
+ * @example With Custom ListItem example
+ *
  * ```
  * import React from 'react';
  * import { ListRenderItemInfo } from 'react-native';

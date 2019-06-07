@@ -79,7 +79,7 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
  *   public render(): React.ReactNode {
  *     return (
  *       <Toggle
- *         value={this.state.toggled}
+ *         value={this.state.checked}
  *         onValueChange={this.onChange}
  *       />
  *     );

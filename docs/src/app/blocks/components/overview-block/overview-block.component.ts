@@ -37,14 +37,12 @@ export class NgdOverviewBlockComponent {
 
   @Input('source')
   set setSource(source: any) {
-    this.source = this.prepareImages(source);
+    this.source = this.prepareDescription(source);
     this.hasImage = this.source.images.length && this.source.images.length !== 0;
   }
 
-  private prepareImages(source): any {
-    // TODO: fix in doc-prsr
+  private prepareDescription(source): any {
     source.description = source.description.replace('undefined', '');
-    source.images = source.images.map((image: string) => `assets/images/overview/${image}`);
     return source;
   }
 
