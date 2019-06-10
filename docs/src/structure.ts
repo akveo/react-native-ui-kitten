@@ -200,7 +200,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Tab Set',
+        name: 'Tab View',
         icon: 'tab.svg',
         source: [
           'TabView',

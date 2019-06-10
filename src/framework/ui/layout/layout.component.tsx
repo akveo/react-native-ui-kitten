@@ -27,15 +27,16 @@ interface ComponentProps {
 export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `Layout` component is component which behaves like React Native View.
+ * Layout container component. Behaves like React Native View.
+ * The key feature of using Layout instead of View is that
+ * it automatically picks background color fitting to current theme.
  *
  * @extends React.Component
  *
  * @property {string} level - Determines background color level of component.
- * Can be '1' | '2' | '3' | '4'.
- * Default is '1'.
+ * Can be `1`, `2`, `3` or `4`.
  *
- * @property {React.ReactElement<any>} children - Determines the children of the component.
+ * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines the children of the component.
  *
  * @property ViewProps
  *

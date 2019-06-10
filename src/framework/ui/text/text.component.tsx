@@ -25,22 +25,22 @@ interface ComponentProps {
 export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
 
 /**
- * The `Text` component is a component used to render text blocks.
+ * Styled Text component.
  *
  * @extends React.Component
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} children - Determines text of the component.
  *
  * @property {string} category - Determines the category of the component.
- * Can be 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 's1' | 's2' | 'p1' | 'p2' | 'c1' | 'c2' | 'label'.
- * Default is 'p1'.
+ * Can be `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `s1`, `s2`, `p1`, `p2`, `c1`, `c2`, `label`.
+ * Default is `p1`.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be 'default' | 'alternative' | 'hint'.
- * Default is 'default'.
+ * Can be `default`, `alternative`, `hint`.
+ * Default is `default`.
  *
  * @property TextComponentProps
  *

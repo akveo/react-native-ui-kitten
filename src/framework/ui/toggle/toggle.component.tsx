@@ -37,24 +37,24 @@ interface ComponentProps {
 export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `Toggle` component is an analog of html checkbox and radio buttons.
+ * Styled Toggle component.
  *
  * @extends React.Component
  *
  * @property {boolean} value - Determines whether component is checked.
+ * Default is `false`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
- * Default is false.
+ * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
- * Default is 'primary'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be 'small' | 'medium' | 'large'.
- * Default is 'medium'.
+ * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Default is `medium`.
  *
- * @property {(value: boolean) => void} onChange - Triggered on change value.
+ * @property {(value: boolean) => void} onChange - Fires when selection state is changed.
  *
  * @property TouchableOpacityProps
  *

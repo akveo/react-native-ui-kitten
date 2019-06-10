@@ -41,8 +41,7 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
 export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
 
 /**
- * The `OverflowMenu` component is a component for showing menu content over the screen.
- * Component uses Popover -> ModalPanel -> Modal components "chain"
+ * Renders vertical list of menu items in a modal.
  *
  * @extends React.Component
  *
@@ -52,10 +51,10 @@ export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
  * @property {OverflowMenuItemType[]} items - Determines menu items.
  *
  * @property {string} size - Determines the size of the menu items components.
- * Can be 'small' | 'medium' | 'large'.
- * Default is 'medium'.
+ * Can be `small`, `medium` or `large`.
+ * Default is `medium`.
  *
- * @property {(event: GestureResponderEvent, index: number) => void} onSelect - Triggered on select value.
+ * @property {(event: GestureResponderEvent, index: number) => void} onSelect - Fires when selected item is changed.
  *
  * @property {Omit<PopoverProps, 'content'>}
  *

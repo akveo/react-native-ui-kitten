@@ -41,7 +41,7 @@ interface ComponentProps {
 export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `TopNavigation` component is a component that work like AppBar component.
+ * TopNavigation component is designed to be a Navigation Bar.
  * Can be used for navigation.
  *
  * @extends React.Component
@@ -51,8 +51,7 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
  * @property {string} subtitle - Determines the subtitle of the component.
  *
  * @property {string} alignment - Determines the alignment of the component.
- * Can be 'center' | 'start'.
- * Default is 'start'.
+ * Can be `center` or `start`.
  *
  * @property {React.ReactElement<TopNavigationActionProps>} leftControl - Determines the left control
  * of the component.
@@ -60,9 +59,9 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
  * @property {React.ReactElement<TopNavigationActionProps>[]} rightControls - Determines the right controls
  * of the component.
  *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title
+ * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title.
  *
- * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of subtitle
+ * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of subtitle.
  *
  * @property ViewProps
  *

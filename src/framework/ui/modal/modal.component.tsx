@@ -36,25 +36,26 @@ const { width, height } = Dimensions.get('window');
 export type ModalProps = ViewProps & ComponentProps;
 
 /**
- * The `Modal` component is a wrapper than presents content above an enclosing view.
- * This component is not styled from the mapping(theme) of the system.
+ * Modal component is a wrapper than presents content above an enclosing view.
  *
  * @extends React.Component
  *
  * @property {boolean} visible - Determines whether component is visible. By default is false.
  *
  * @property {React.ReactElement<any> | React.ReactElement<any>[]} children -
- * Determines component's children. Can be passed as JSX template.
+ * Determines component's children.
  *
  * @property {boolean} isBackDropAllowed - Determines whether user can close
  * modal by tapping on backdrop. This feature works in pair with the
- * 'onCloseModal' property. By default is false.
+ * `onCloseModal` property.
+ * Default is `false`.
  *
  * @property {() => void} onCloseModal - Allows passing a function that will
  * be called once the modal has been dismissed.
  *
  * @property {ModalAnimationType} animationType - Controls how the modal showing animates.
- * Can be 'slideInUp' | 'fade' | 'none'. By default is 'none'.
+ * Can be `slideInUp`, `fade` or `none`.
+ * Default is 'none'.
  *
  * @property {number} animationDuration - Time of the animation duration.
  *

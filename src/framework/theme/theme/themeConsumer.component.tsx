@@ -33,9 +33,9 @@ export interface Context {
 export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps & P>;
 
 /**
- * The `withStyles` function is a High Order Function which is used to create themed style for non-styled component.
- * Basically used when need to use `theme` variables somewhere.
- * Returns `ThemedComponentClass` - component class which can be used as styled component.
+ * High Order Function which is used to create themed style for non-styled component.
+ * Basically used when need to use theme variable somewhere.
+ * Returns component class which can be used as themed component.
  *
  * @property {ThemeType} theme - Determines theme used to style component.
  *

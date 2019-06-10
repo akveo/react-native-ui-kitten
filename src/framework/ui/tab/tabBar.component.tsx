@@ -41,7 +41,7 @@ export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
  *
- * @property {(index: number) => void} onSelect - Fires on onPress event and returns tab index.
+ * @property {(index: number) => void} onSelect - Fires on tab select with corresponding index.
  *
  * @property {React.ReactElement<TabProps>} children - Determines tabs.
  *

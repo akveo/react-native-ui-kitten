@@ -29,19 +29,20 @@ interface ComponentProps {
 export type ViewPagerProps = ScrollViewProps & ComponentProps;
 
 /**
- * The `ViewPager` is the component that allows flipping through the "pages".
+ * Allows flipping through the "pages".
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<any>} children - Determines children of the component.
+ * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines children of the component.
  *
  * @property {number} selectedIndex - Determines the index of selected "page".
  *
- * @property {(index: number) => boolean} shouldLoadComponent - Determines loading particular page.
+ * @property {(index: number) => boolean} shouldLoadComponent - Determines loading behavior particular page and can be
+ * used for lazy loading.
  *
- * @property {(offset: number) => void} onOffsetChange - Returns "offset" value on Scroll event.
+ * @property {(offset: number) => void} onOffsetChange - Fires on scroll event with current scroll offset.
  *
- * @property {string} onSelect - Calls on onScrollEnd event and returns an index of the current "page".
+ * @property {(index: number) => void} onSelect - Fires on "page" select with corresponding index.
  *
  * @property ScrollViewProps
  *

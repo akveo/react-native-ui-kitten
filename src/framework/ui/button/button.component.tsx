@@ -41,19 +41,19 @@ interface ComponentProps {
 export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `Button` component is an analog of html button.
+ * Styled Button component.
  *
  * @extends React.Component
  *
- * @property {boolean} disabled - Determines whether component is disabled. Default is false.
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
- * Default is 'primary'.
+ * Can be `primary`, `success`, `info`, `warning`, `danger` or `white`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
- * Default is 'medium'.
+ * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Default is `medium`.
  *
  * @property {string} children - Determines text of the component.
  *
@@ -62,8 +62,8 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be 'filled' | 'outline' | 'ghost'.
- * Default is 'filled'.
+ * Can be `filled` | `outline` | `ghost`.
+ * Default is `filled`.
  *
  * @property TouchableOpacityProps
  *

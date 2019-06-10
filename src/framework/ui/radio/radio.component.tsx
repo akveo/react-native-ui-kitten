@@ -39,17 +39,18 @@ interface ComponentProps {
 export type RadioProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `Radio` component is an analog of html radio button.
+ * Styled Radio component.
  *
  * @extends React.Component
  *
  * @property {boolean} checked - Determines whether component is checked.
+ * Default is `false`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
- * Default is false.
+ * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} text - Determines text of the component.
  *

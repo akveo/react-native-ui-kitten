@@ -29,15 +29,16 @@ interface ComponentProps {
 export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `RadioGroup` component is a component for rendering group of radio-buttons.
+ * Renders a group of radio buttons.
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<RadioProps>[]} children - Determines radio buttons in group. Can be passed through jsx.
+ * @property {React.ReactElement<RadioProps> | React.ReactElement<RadioProps>[]} children -
+ * Determines radio buttons in group.
  *
  * @property {number} selectedIndex - Determines the index of selected button
  *
- * @property {(index: number) => void} onChange - Triggered on onChange event.
+ * @property {(index: number) => void} onChange - Fires when selected radio is changed.
  *
  * @property ViewProps
  *

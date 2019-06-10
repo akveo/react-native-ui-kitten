@@ -7,17 +7,14 @@
 import React from 'react';
 
 /**
- * The `ModalService` singleton service than has 2 methods (show/hide).
- * This service takes React.ReactElement<ModalComponentCloseProps> and
- * pushes it to the DialogPanel.
+ * Singleton service designed to manage modal components.
  *
  * @type ModalServiceType
  *
  * @method {(element: React.ReactElement<ModalComponentCloseProps>,
- * closeOnBackDrop: boolean = false) => string} show - Takes component, returns it's identifier.
+ * closeOnBackDrop: boolean = false) => string} show - Shows component in a modal window.
  *
- * @method {(identifier: string) => void} hide - Hide dialog component with
- * this identifier and removes it from Modal Panel.
+ * @method {(identifier: string) => void} hide - Hides component from a modal window.
  *
  * @example Simple Usage example
  *

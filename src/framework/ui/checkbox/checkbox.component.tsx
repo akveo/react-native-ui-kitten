@@ -43,23 +43,24 @@ interface ComponentProps {
 export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `Checkbox` component is an analog of html checkbox button.
+ * Styled CheckBox component.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.
+ * @property {boolean} checked - Determines whether component is checked.`
+ * Default is `false`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
- * Default is false.
+ * Default is `false.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} text - Determines text of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
- * @property {(checked: boolean) => void} onChange - Triggered on change value.
+ * @property {(checked: boolean) => void} onChange - Fires on checkbox value change.
  *
  * @property TouchableOpacityProps
  *

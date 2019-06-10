@@ -39,8 +39,8 @@ interface ComponentProps {
 export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `BottomNavigationTab` component is a part of the BottomNavigation component.
- * Bottom Navigation Tabs should be wrapped in BottomNavigation to provide usable component.
+ * BottomNavigationTab component is a part of the BottomNavigation component.
+ * BottomNavigation tabs should be wrapped in BottomNavigation to provide usable component.
  * See usage examples at BottomNavigation component documentation.
  *
  * @extends React.Component

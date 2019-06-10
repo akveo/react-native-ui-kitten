@@ -46,7 +46,7 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
 export type TooltipProps = StyledComponentProps & ComponentProps;
 
 /**
- * The `Tooltip` component is a component that displays informative text when users focus on or tap an element.
+ * Displays informative text when users focus on or tap an element.
  *
  * @extends React.Component
  *
@@ -60,10 +60,10 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
- * @property {string | PopoverPlacement} placement - Determines the placement of the tooltip.
- * Can be 'left' | 'top' | 'right' | 'bottom' | 'left start' | 'left end' | 'top start' | 'top end' | 'right start' |
- * 'right end' | 'bottom start' | 'bottom end'.
- * Default is 'bottom'.
+ * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
+ * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
+ * `right end`, `bottom start` or `bottom end`.
+ * Default is `bottom`.
  *
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).

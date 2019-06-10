@@ -37,14 +37,15 @@ interface ComponentProps {
 export type BottomNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `BottomNavigation` component is a component for tab navigation.
+ * BottomNavigation component is designed to be a Bottom Tab Bar.
+ * Can be used for navigation.
  *
  * @extends React.Component
  *
  * @property {number} selectedIndex - Determines index of the selected tab.
  *
  * @property {React.ReactElement<TabProps> | React.ReactElement<TabProps>[]} children -
- * Determines tabs of the Bottom Navigation. Can be passed through JSX.
+ * Determines tabs of the Bottom Navigation.
  *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines styles of the indicator.
  *

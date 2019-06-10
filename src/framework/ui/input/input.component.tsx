@@ -55,19 +55,19 @@ interface ComponentProps {
 export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
 
 /**
- * The `Input` component is an analog of html input.
+ * Styled Input component.
  *
  * @extends React.Component
  *
- * @property {boolean} disabled - Determines whether component is disabled. By default is false.
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
- * By default status is 'primary'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be 'small' | 'medium' | 'large'.
- * Default is 'medium'.
+ * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Default is `medium`.
  *
  * @property {string} label - Determines label of the component.
  *

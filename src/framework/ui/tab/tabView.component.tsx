@@ -42,7 +42,7 @@ interface ComponentProps {
 export type TabViewProps = ViewProps & ComponentProps;
 
 /**
- * The `TabView` component that manages Tab components in whole view.
+ * Dynamic tabset component. Allows flipping through the tab "pages".
  *
  * @extends React.Component
  **
@@ -52,14 +52,14 @@ export type TabViewProps = ViewProps & ComponentProps;
  *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
  *
- * @property {(index: number) => void} onSelect - Fires on onPress event and returns tab index.
+ * @property {(index: number) => void} onSelect - Fires on "page" select with corresponding index.
  *
  * @property {TabElement | TabElement[]} children - Determines children of the component.
  *
- * @property {(index: number) => boolean} shouldLoadComponent - Determines should child mount before it
- * will be selected.
+ * @property {(index: number) => boolean} shouldLoadComponent - Determines loading behavior particular page and can be
+ * used for lazy loading.
  *
- * @property {(offset: number) => void} onOffsetChange - Returns "offset" value on Scroll event.
+ * @property {(offset: number) => void} onOffsetChange - Fires on scroll event with current scroll offset.
  *
  * @property ViewProps
  *

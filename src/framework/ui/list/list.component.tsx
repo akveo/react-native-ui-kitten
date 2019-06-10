@@ -30,13 +30,13 @@ interface ComponentProps {
 export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
 
 /**
- * The `List` component is a performant interface for rendering simple, flat lists. Extends FlatList. Renders list of
- * ListItem components or custom content.
+ * List component is a performant interface for rendering simple, flat lists. Extends `FlatList`. Renders list of
+ * `ListItem` components or custom content.
  *
  * @extends React.Component
  *
  * @property {(info: ListRenderItemInfo<ItemT>, style: StyleType) => React.ReactElement<any>} renderItem - Takes an
- * item from data and renders it into the list. Returns ListRenderItemInfo and style.
+ * item from data and renders it into the list.
  *
  * @property FlatListProps<ItemType>
  *

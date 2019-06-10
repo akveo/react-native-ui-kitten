@@ -26,17 +26,17 @@ interface ComponentProps {
 export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
 
 /**
- * The `Avatar` component is component for styling Image Component.
+ * Styled Image component.
  *
  * @extends React.Component
  *
  * @property {string} shape - Determines the shape of the component.
- * Can be 'round' | 'rounded' | 'square'.
- * Default is 'round'.
+ * Can be `round`, `rounded` or `square`.
+ * Default is `round`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
- * Default is 'medium'.
+ * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Default is `medium`.
  *
  * @property ImageProps
  *
@@ -54,7 +54,7 @@ export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
  *   );
  * };
  * ```
- * */
+ */
 
 export class AvatarComponent extends React.Component<AvatarProps> {
 
