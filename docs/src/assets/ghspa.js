@@ -20,13 +20,15 @@
 
 ;(function(l, projectPages) {
 
+  const versions = [];
   var paths = l.pathname.split('/');
 
   // paths[1] - /react-native-ui-kitten
   // paths[2] - /docs
   var repo = projectPages ? '/' + paths[1] + '/' + paths[2]: '';
-  if (paths[3] === 'next') {
-    repo += '/next';
+
+  if (versions.includes(paths[3])) {
+    repo += '/' + paths[3];
   }
 
   /* redirect all 404 trafic to index.html */
