@@ -21,8 +21,11 @@
 ;(function(l, projectPages) {
 
   var paths = l.pathname.split('/');
-  var repo = projectPages ? '/' + paths[1] : '';
-  if (paths[2] === 'next') {
+
+  // paths[1] - /react-native-ui-kitten
+  // paths[2] - /docs
+  var repo = projectPages ? '/' + paths[1] + '/' + paths[2]: '';
+  if (paths[3] === 'next') {
     repo += '/next';
   }
 
