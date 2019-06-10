@@ -11,7 +11,7 @@ import { NgdVersionService } from '../../services';
         <nb-icon icon="menu-2"></nb-icon>
       </button>
       <div class="logo">
-        <a routerLink="/">React Native UI Kitten</a>
+        <a href="/react-native-ui-kitten">React Native UI Kitten</a>
         <span class="version">v{{ currentVersion }}</span>
       </div>
     </div>
