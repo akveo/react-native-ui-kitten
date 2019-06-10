@@ -6,7 +6,7 @@
     "ng": "ng",
     "ngh": "ngh",
     "start": "ng serve",
-    "build": "rm -rf dist && ng build && cp -r src/landing/ dist/",
+    "build": "rimraf dist && ng build && cp -r src/landing/ dist/",
     "build:prod": "npm run build -- docs --prod --aot --base-href '/docs/react-native-ui-kitten/'",
     "docs:gh-pages": "npm run docs:prod && npm run ngh -- --dir ./docs/dist"
   },
