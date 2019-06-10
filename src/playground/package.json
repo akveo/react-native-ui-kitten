@@ -13,7 +13,6 @@
     "react-navigation": "^3.11.0"
   },
   "devDependencies": {
-    "@types/react-navigation": "^3.0.7",
-    "react-native-typescript-transformer": "^1.2.10"
+    "@types/react-navigation": "^3.0.7"
   }
 }
