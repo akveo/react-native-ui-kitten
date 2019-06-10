@@ -45,8 +45,8 @@ export class NgdDocumentationComponent implements OnDestroy {
     private paginationService: NgdPaginationService) {
 
     this.themeService.changeTheme('docs-page');
-    this.paginationService.setPaginationItems('/docs');
-    this.menuItems = this.service.getPreparedMenu('/docs');
+    this.paginationService.setPaginationItems();
+    this.menuItems = this.service.getPreparedMenu();
 
     // TODO: can we do any better?
     this.router.events
@@ -55,7 +55,7 @@ export class NgdDocumentationComponent implements OnDestroy {
         takeWhile(() => this.alive),
       )
       .subscribe(([event, mediaQuery]: [any, NbMediaBreakpoint]) => {
-        if (event.url === '/docs') {
+        if (event.url === '/') {
           const firstMenuItem = this.menuItems[0].children[0];
           // angular bug with replaceUrl, temp fix with setTimeout
           setTimeout(() => this.router.navigateByUrl(firstMenuItem.link, { replaceUrl: true }));

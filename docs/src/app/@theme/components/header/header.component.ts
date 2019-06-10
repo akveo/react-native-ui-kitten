@@ -39,15 +39,15 @@ export class NgdHeaderComponent implements OnInit {
   mainMenu: NbMenuItem[] = [
     {
       title: 'Docs',
-      link: '/docs',
+      link: '/',
     },
     {
       title: 'Components',
-      link: '/docs/components/components-overview',
+      link: '/components/components-overview',
     },
     {
       title: 'Theme System',
-      link: '/docs/guides/theme-system',
+      link: '/guides/theme-system',
     },
   ];
 
@@ -64,7 +64,7 @@ export class NgdHeaderComponent implements OnInit {
     if (!this.isDocs) {
       this.mainMenu.push({
         title: 'Professional Services',
-        link: '/docs/getting-started/professional-services',
+        link: '/getting-started/professional-services',
       });
     }
   }
