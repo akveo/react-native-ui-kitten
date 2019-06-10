@@ -17,7 +17,7 @@ We don't provide styling configuration files out of the box to let you choose a 
 ### Theme System Installation
 
 ```bash
-npm i @eva/eva @eva/themes
+npm i @eva-design/eva
 ```
 
 <hr>
@@ -25,9 +25,8 @@ npm i @eva/eva @eva/themes
 ### Applying Theme System
 
 ```tsx
-import { mapping } from '@eva-design/eva';
-import { theme } from '@eva/themes';
-import { ApplicationProvider } from '@kitten/theme';
+import { mapping, theme } from '@eva-design/eva';
+import { ApplicationProvider } from 'react-native-ui-kitten';
 import { Application } from './path-to/root.component';
 
 export default class App extends React.Component {
@@ -213,7 +212,7 @@ import React from 'react';
 import {
   Avatar,
   AvatarProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const TinyAvatar = (props?: AvatarProps): React.ReactElement<AvatarProps> => (
   <Avatar 

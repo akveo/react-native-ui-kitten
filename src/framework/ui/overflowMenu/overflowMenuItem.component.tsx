@@ -43,7 +43,9 @@ export interface OverflowMenuItemType extends ListDerivedProps {
 export type OverflowMenuItemProps = StyledComponentProps & TouchableIndexedProps & OverflowMenuItemType;
 
 /**
- * The `OverflowMenuItem` component is a part of the OverflowMenu component.
+ * OverflowMenuItem is a part of the OverflowMenu component.
+ * OverflowMenu items should be wrapped in OverflowMenu to provide usable component.
+ * See usage examples at OverflowMenu component documentation.
  *
  * @extends React.Component
  *
@@ -52,23 +54,19 @@ export type OverflowMenuItemProps = StyledComponentProps & TouchableIndexedProps
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
  * @property {string} size - Determines size of the component.
- * Can be 'small' | 'medium' | 'large'. By default size='medium'.
- *
- * @property {boolean} isLastItem - Determines whether this menu item is the last one in menu.
+ * Can be `small`, `medium` or `large`.
+ * Default is `medium`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
- * By default is false.
+ * By default is `false`.
  *
- * @property {number} index - Determines index of the menu item.
- *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon -
- * Determines the icon of the menu item.
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the menu item.
  *
  * @property TouchableOpacityIndexedProps
  *
  * @property StyledComponentProps
  *
- * */
+ */
 
 export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemProps> {
 

@@ -6,9 +6,9 @@
 
 import React from 'react';
 import {
+  StyleSheet,
   Text as RNText,
   TextProps as RNTextProps,
-  StyleSheet,
 } from 'react-native';
 import {
   styled,
@@ -25,23 +25,22 @@ interface ComponentProps {
 export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
 
 /**
- * The `Text` component is a component used to render text blocks.
+ * Styled Text component.
  *
  * @extends React.Component
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
- * By default status is 'primary'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} children - Determines text of the component.
  *
  * @property {string} category - Determines the category of the component.
- * Can be 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 's1' | 's2' | 'p1' | 'p2' | 'c1' | 'c2' | 'overline' | 'label'.
- * By default category is 'p1'.
+ * Can be `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `s1`, `s2`, `p1`, `p2`, `c1`, `c2`, `label`.
+ * Default is `p1`.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be 'dark' | 'light' | 'hintLight' | 'hintDark'.
- * By default appearance is 'dark'.
+ * Can be `default`, `alternative`, `hint`.
+ * Default is `default`.
  *
  * @property TextComponentProps
  *
@@ -50,29 +49,18 @@ export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
  * @example Simple usage example
  *
  * ```
- * import { Text } from '@kitten/ui';
+ * import React from 'react';
+ * import { Text, TextProps } from 'react-native-ui-kitten';
  *
- * <Text>Test Text</Text>
- * ```
- *
- * @example Text usage and API example
- *
- * ```
- * import { Text } from '@kitten/ui';
- *
- * public render(): React.ReactNode {
+ * export const TextShowcase = (props?: TextProps): React.ReactElement<TextProps> => {
  *   return (
- *     <Text
- *       style={styles.text}
- *       status='danger'
- *       appearance='hintLight'
- *       category='h1'>
- *       Test Text
+ *     <Text>
+ *       Sample Text
  *     </Text>
  *   );
- * }
+ * };
  * ```
- * */
+ */
 
 export class TextComponent extends React.Component<TextProps> {
 

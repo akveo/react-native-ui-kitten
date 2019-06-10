@@ -41,8 +41,8 @@ interface ComponentProps {
 export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `TopNavigation` component is a component that work like AppBar component.
- * Can be used for navigation for example.
+ * TopNavigation component is designed to be a Navigation Bar.
+ * Can be used for navigation.
  *
  * @extends React.Component
  *
@@ -50,8 +50,8 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
  *
  * @property {string} subtitle - Determines the subtitle of the component.
  *
- * @property {string} alignment - Determines the appearance of the component.
- * Can be 'center' | 'start'. By default appearance is 'start'.
+ * @property {string} alignment - Determines the alignment of the component.
+ * Can be `center` or `start`.
  *
  * @property {React.ReactElement<TopNavigationActionProps>} leftControl - Determines the left control
  * of the component.
@@ -59,70 +59,91 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
  * @property {React.ReactElement<TopNavigationActionProps>[]} rightControls - Determines the right controls
  * of the component.
  *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title
+ * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title.
  *
- * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of subtitle
+ * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of subtitle.
  *
  * @property ViewProps
  *
  * @property StyledComponentProps
  *
- * @example TopNavigationBar usage and API example
+ * @example Simple usage example
  *
  * ```
+ * import React from 'react';
  * import {
  *   TopNavigation,
  *   TopNavigationAction,
  *   TopNavigationActionProps,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * private renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
+ * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
  *   return (
- *     <TopNavigationBarAction
- *       icon={(style: StyleType) => <Image source={{ uri: leftControlUri }} style={style}/>}
- *       onPress={() => {...}
- *     />
+ *     <TopNavigation title='Title' />
  *   );
  * };
+ * ```
  *
- * private renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {
- *   return ([
- *     <TopNavigationBarAction
- *       icon={(style: StyleType) => <Image source={{ uri: rightControlUri1 }} style={style}/>}
- *       onPress={() => {...}}
- *     />,
- *     <TopNavigationBarAction
- *       icon={(style: StyleType) => <Image source={{ uri: rightControlUri2 }} style={style}/>}
- *       onPress={() => {...}}
- *     />
- *   ]);
- * };
+ * @example Actions usage example
  *
- * public render(): React.ReactNode {
+ * ```
+ * import React from 'react';
+ * import { Image, ImageProps } from 'react-native';
+ * import {
+ *   TopNavigation,
+ *   TopNavigationAction,
+ *   TopNavigationActionProps,
+ * } from 'react-native-ui-kitten';
+ *
+ * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
+ *
+ *   private onLeftControlPress = () => {
+ *     // Handle Left Control press
+ *   };
+ *
+ *   const renderControlIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+ *     return (
+ *       <Image
+ *         style={style}
+ *         source={{uri: 'https://path-to/awesome-image.png'}}
+ *       />
+ *     );
+ *   };
+ *
+ *   const renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
+ *     return (
+ *       <TopNavigationAction
+ *         icon={this.renderControlIcon}
+ *         onPress={this.onLeftControlPress}
+ *       />
+ *     );
+ *   };
+ *
  *   return (
- *     <TopNavigationBarComponent
- *       appearance='titleCentered'
- *       title='Top Navigation Bar'
- *       subtitle='Subtitle'
+ *     <TopNavigation
+ *       title='Title'
  *       leftControl={this.renderLeftControl()}
- *       rightControls={this.renderRightControls()}
  *     />
  *   );
- * }
+ * };
  * ```
  *
  * @example Inline styling example
  *
  * ```
- * <TopNavigationBarComponent
- *   appearance='titleCentered'
- *   title='Top Navigation Bar'
- *   subtitle='Subtitle'
- *   titleStyle={styles.title}
- *   subtitleStyle={styles.subtitle}
- *   leftControl={this.renderLeftControl()}
- *   rightControls={this.renderRightControls()}
- * />
+ * import React from 'react';
+ * import { TopNavigation, TopNavigationProps } from 'react-native-ui-kitten';
+ *
+ * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
+ *   return (
+ *     <TopNavigation
+ *       title='Title'
+ *       subtitle='Subtitle'
+ *       titleStyle={styles.title}
+ *       subtitleStyle={styles.subtitle}
+ *     />
+ *   );
+ * };
  * ```
  * */
 

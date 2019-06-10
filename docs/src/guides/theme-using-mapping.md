@@ -19,7 +19,7 @@ import {
   styled,
   StyledComponentProps,
   Interaction,
-} from '@kitten/theme';
+} from 'react-native-ui-kitten';
 
 type AwesomeComponentProps = TouchableOpacityProps & StyledComponentProps;
 
@@ -121,12 +121,11 @@ All that you have to do is to provide a custom mapping to ApplicationProvider.
 
 ```tsx
 import React from 'react';
-import { mapping } from '@eva-design/eva';
-import { theme } from '@eva/themes';
-import { 
+import { mapping, theme } from '@eva-design/eva';
+@import { 
   ApplicationProvider,
   ApplicationProviderProps,
-} from '@kitten/theme';
+} from 'react-native-ui-kitten';
 import { Application } from './path-to/root.component';
 import { customMapping } from './path-to/customMapping';
 

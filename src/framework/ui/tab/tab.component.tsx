@@ -41,7 +41,9 @@ interface ComponentProps {
 export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `Tab` component is a part of TabBar or TabView component.
+ * Tab component is a part of TabBar or TabView component.
+ * TabView Tabs should be wrapped in TabBar or TabView to provide usable component.
+ * See usage examples at TabView component documentation.
  *
  * @extends React.Component
  *
@@ -53,38 +55,14 @@ export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentP
  *
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
  *
- * @property {boolean} selected - Determines whether selected tab or not.
+ * @property {boolean} selected - Determines tab selection state.
  *
  * @property {(selected: boolean) => void} onSelect = Fires on onSelect event.
  *
  * @property TouchableOpacityProps
  *
  * @property StyledComponentProps
- *
- * @example Tab simple usage example
- *
- * ```
- * import { Tab } from '@kitten/ui';
- *
- * <Tab
- *   title='Tab'
- *   selected={false}
- * />
- * ```
- *
- * @example Inline styling and API example
- *
- * ```
- * import { Tab } from '@kitten/ui';
- *
- * <Tab
- *   title='Tab'
- *   titleStyle={styles.tabTitle}
- *   icon={(style: StyleType) => <Image source={{ uri: ... }} style={style}/>}
- *   selected={false}
- * />
- * ```
- * */
+ */
 
 export class TabComponent extends React.Component<TabProps> {
 

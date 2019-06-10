@@ -41,7 +41,7 @@ export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
  *
- * @property {(index: number) => void} onSelect - Fires on onPress event and returns tab index.
+ * @property {(index: number) => void} onSelect - Fires on tab select with corresponding index.
  *
  * @property {React.ReactElement<TabProps>} children - Determines tabs.
  *
@@ -49,47 +49,39 @@ export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * @property StyledComponentProps
  *
- * @example TabBar usage and API example
+ * @example Simple usage example
  *
  * ```
+ * import React from 'react';
  * import {
  *   TabBar,
  *   Tab,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   barSelectedIndex: 0,
- * };
+ * export class TabBarShowcase extends React.Component {
  *
- * private onBarSelect = (index: number) => {
- *   this.setState({ barSelectedIndex: index });
- * };
+ *   public state = {
+ *     selectedIndex: 0,
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <TabBar
- *       onSelect={this.onBarSelect}
- *       selectedIndex={this.state.barSelectedIndex}>
- *       <Tab title='Tab 1'/>
- *       <Tab title='Tab 2'/>
- *       <Tab title='Tab 3'/>
- *     </TabBar>
- *   );
+ *   private onBarSelect = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <TabBar
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onBarSelect}>
+ *         <Tab title='Tab 1'/>
+ *         <Tab title='Tab 2'/>
+ *         <Tab title='Tab 3'/>
+ *       </TabBar>
+ *     );
+ *   }
  * }
  * ```
- *
- * @example Inline styling example
- *
- * ```
- * <TabBar
- *   selectedIndex={this.state.barSelectedIndex}
- *   style={styles.tabBar}
- *   indicatorStyle={styles.indicator}
- *   onSelect={this.onBarSelect}>
- *   {this.renderTabs()}
- * </TabBar>
- * ```
- * */
+ */
 
 export class TabBarComponent extends React.Component<TabBarProps> {
 

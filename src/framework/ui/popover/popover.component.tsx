@@ -6,8 +6,6 @@
 
 import React from 'react';
 import {
-  Platform,
-  StatusBar,
   StyleProp,
   StyleSheet,
   View,
@@ -57,7 +55,7 @@ const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
 
 /**
- * The `Popover` component is a component that displays content when users focus on or tap an element.
+ * Displays content in a modal when users focus on or tap an element.
  *
  * @extends React.Component
  *
@@ -68,9 +66,9 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
  * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
- * Can be 'left' | 'top' | 'right' | 'bottom' | 'left start' | 'left end' | 'top start' | 'top end' | 'right start' |
- * 'right end' | 'bottom start' | 'bottom end'.
- * By default placement is 'top'.
+ * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
+ * `right end`, `bottom start` or `bottom end`.
+ * Default is `bottom`.
  *
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
@@ -81,50 +79,52 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @property StyledComponentProps
  *
- * @example Popover usage and API example
+ * @example Popover usage example
  *
  * ```
+ * import React from 'react';
+ * import {
+ *  View,
+ *  ViewProps,
+ * } from 'react-native';
  * import {
  *   Popover,
  *   Button,
  *   Text,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   popoverVisible: false,
- * };
+ * export class PopoverShowcase extends React.Component {
+ *   public state: State = {
+ *     popoverVisible: false,
+ *   };
  *
- * private togglePopover = () => {
- *   this.setState({ popoverVisible: !this.state.popoverVisible });
- * };
+ *   private togglePopover = () => {
+ *     this.setState({ popoverVisible: !this.state.popoverVisible });
+ *   };
  *
- * private renderPopoverContentElement = (): React.ReactElement<ViewProps> => {
- *    return (
- *      <View style={styles.popoverContent}>
- *        <Text>Hi! This is popover.</Text>
- *        <Button>Some Action</Button>
- *      </View>
- *    );
- * };
+ *   private renderPopoverContentElement = (): React.ReactElement<ViewProps> => {
+ *     return (
+ *       <View style={styles.popoverContent}>
+ *         <Text>Hi! This is popover.</Text>
+ *       </View>
+ *     );
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <Popover
- *       style={styles.popoverContainer}
- *       placement='top start'
- *       visible={this.state.popoverVisible}
- *       content={this.renderPopoverContentElement()}
- *       onRequestClose={this.togglePopover}>
- *       <TouchableOpacity
- *         style={styles.popoverChild}
- *         onPress={this.togglePopover}>
- *         <Text style={text}>Top Start</Text>
- *       </TouchableOpacity>
- *     </Popover>
- *   );
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Popover
+ *         visible={this.state.popoverVisible}
+ *         content={this.renderPopoverContentElement()}
+ *         onRequestClose={this.togglePopover}>
+ *         <Button onPress={this.togglePopover}>
+ *           TOGGLE POPOVER
+ *         </Button>
+ *       </Popover>
+ *     );
+ *   }
  * }
  * ```
- * */
+ */
 
 export class PopoverComponent extends React.Component<PopoverProps> {
 

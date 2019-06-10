@@ -6,19 +6,19 @@
 
 import React from 'react';
 import {
-  View,
-  TouchableOpacity,
-  TouchableOpacityProps,
   GestureResponderEvent,
+  StyleProp,
   StyleSheet,
   TextStyle,
-  StyleProp,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
 } from 'react-native';
 import {
+  Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-  Interaction,
 } from '@kitten/theme';
 import {
   Text,
@@ -39,18 +39,18 @@ interface ComponentProps {
 export type RadioProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `Radio` component is an analog of html radio button.
+ * Styled Radio component.
  *
  * @extends React.Component
  *
  * @property {boolean} checked - Determines whether component is checked.
+ * Default is `false`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
- * By default is false.
+ * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
- * By default status='primary'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} text - Determines text of the component.
  *
@@ -65,47 +65,47 @@ export type RadioProps = StyledComponentProps & TouchableOpacityProps & Componen
  * @example Simple usage example
  *
  * ```
- * import { Radio } from '@kitten/ui';
+ * import React from 'react';
+ * import { Radio } from 'react-native-ui-kitten';
  *
- * <Radio checked={true}/>
- * ```
- * @example Radio usage and API example
+ * export class RadioShowcase extends React.Component {
+ *   public state = {
+ *     checked: false,
+ *   };
  *
- * ```
- * import { Radio } from '@kitten/ui';
+ *   private onChange = (checked: boolean) => {
+ *     this.setState({ checked });
+ *   };
  *
- * state: State = {
- *   checked: false,
- * };
- *
- * private onChange = (checked: boolean): void => {
- *   this.setState({ checked: value });
- * };
- *
- * public render(): React.ReactNode {
- *   return (
- *     <Radio
- *       checked={this.state.checked}
- *       size='small'
- *       status='warning'
- *       text='Place your text'
- *       textStyle={styles.radioText}
- *       onChange={this.onChange}
- *     />
- *   )
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Radio
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     )
+ *   }
  * }
  * ```
  *
  * @example Inline styling example
  *
  * ```
- * <Radio
- *   checked={true}
- *   text='Place your text'
- *   textStyle={styles.radioText}
- * />
+ * import React from 'react';
+ * import { Radio, RadioProps } from 'react-native-ui-kitten';
+ *
+ * export const RadioShowcase = (props?: RadioProps): React.ReactElement<RadioProps> => {
+ *   return (
+ *     <Radio
+ *       style={styles.radio}
+ *       textStyle={styles.radioText}
+ *       text='Place your text'
+ *       checked={true}
+ *     />
+ *   );
+ * };
  * ```
- * */
+ */
 
 export class RadioComponent extends React.Component<RadioProps> {
 

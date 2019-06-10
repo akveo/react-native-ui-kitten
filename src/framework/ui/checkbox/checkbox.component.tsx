@@ -43,24 +43,24 @@ interface ComponentProps {
 export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `Checkbox` component is an analog of html checkbox button.
+ * Styled CheckBox component.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.
+ * @property {boolean} checked - Determines whether component is checked.`
+ * Default is `false`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
- * By default is false.
+ * Default is `false.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
- * By default status is 'primary'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} text - Determines text of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
- * @property {(checked: boolean) => void} onChange - Triggered on change value.
+ * @property {(checked: boolean) => void} onChange - Fires on checkbox value change.
  *
  * @property TouchableOpacityProps
  *
@@ -69,46 +69,46 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  * @example Simple usage example
  *
  * ```
- * import { Toggle } from '@kitten/ui';
+ * import React from 'react';
+ * import { Checkbox } from 'react-native-ui-kitten';
  *
- * <Checkbox checked={true}/>
- * ```
+ * export class CheckBoxShowcase extends React.Component {
  *
- * @example Checkbox usage and API example
+ *   public state = {
+ *     checked: false,
+ *   };
  *
- * ```
- * import { Checkbox } from '@kitten/ui';
+ *   private onChange = (checked: boolean) => {
+ *     this.setState({ checked });
+ *   };
  *
- * state: State = {
- *   checked: false,
- * };
- *
- * private onChange = (checked: boolean): void => {
- *   this.setState({ checked: checked });
- * };
- *
- * public render(): React.ReactNode {
- *   return (
- *     <Checkbox
- *       checked={this.state.toggled}
- *       status='info'
- *       text='Place your text'
- *       textStyle={styles.checkboxText}
- *       onChange={this.onChange}
- *     />
- *   );
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Checkbox
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     );
+ *   }
  * }
  * ```
  *
  * @example Inline styling example
  *
  * ```
- * <Checkbox
- *   checked={this.state.toggled}
- *   text='Place your text'
- *   textStyle={styles.checkboxText}
- *   onChange={this.onChange}
- * />
+ * import React from 'react';
+ * import { CheckBox, CheckBoxProps } from 'react-native-ui-kitten';
+ *
+ * export const CheckBoxShowcase = (props?: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
+ *   return (
+ *     <Checkbox
+ *       style={styles.checkbox}
+ *       textStyle={styles.checkboxText}
+ *       text='Place your text'
+ *       checked={this.state.checked}
+ *     />
+ *   );
+ * };
  * ```
  * */
 

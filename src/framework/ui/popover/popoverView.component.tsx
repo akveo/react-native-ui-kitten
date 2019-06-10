@@ -11,10 +11,7 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
-import {
-  Arrow,
-  ArrowProps,
-} from '../support/components';
+import { Arrow } from '../support/components';
 
 interface ComponentProps {
   placement?: string | PopoverPlacement;

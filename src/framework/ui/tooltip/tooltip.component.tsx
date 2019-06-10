@@ -46,7 +46,7 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
 export type TooltipProps = StyledComponentProps & ComponentProps;
 
 /**
- * The `Tooltip` component is a component that displays informative text when users focus on or tap an element.
+ * Displays informative text when users focus on or tap an element.
  *
  * @extends React.Component
  *
@@ -60,10 +60,10 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
- * @property {string | PopoverPlacement} placement - Determines the placement of the tooltip.
- * Can be 'left' | 'top' | 'right' | 'bottom' | 'left start' | 'left end' | 'top start' | 'top end' | 'right start' |
- * 'right end' | 'bottom start' | 'bottom end'.
- * By default placement is 'top'.
+ * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
+ * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
+ * `right end`, `bottom start` or `bottom end`.
+ * Default is `bottom`.
  *
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
@@ -74,43 +74,40 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *
  * @property StyledComponentProps
  *
- * @example Tooltip usage and API example
+ * @example Simple usage example
  *
  * ```
+ * import React from 'react';
  * import {
  *   Tooltip,
  *   Button,
- *   Text,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   tooltipVisible: false,
- * };
+ * export class TooltipShowcase extends React.Component {
  *
- * private onShowPress = () => {
- *   this.setState({ tooltipVisible: !this.state.tooltipVisible });
- * };
+ *   public state = {
+ *     tooltipVisible: false,
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <Tooltip
- *       style={styles.tooltipContainer}
- *       placement='left end'
- *       visible={this.state.tooltipVisible}
- *       text='Tooltip Text'
- *       textStyle={styles.tooltipText}
- *       icon={(style: StyleType) => <Image style={style} source={{ uri: '...' }}/>}
- *       onRequestClose={this.onShowPress}>
- *       <TouchableOpacity
- *         style={styles.tooltipChild}
- *         onPress={this.onShowPress}>
- *         <Text style={text}>Top Start</Text>
- *       </TouchableOpacity>
- *     </Tooltip>
- *   );
+ *   private toggleTooltip = () => {
+ *     this.setState({ tooltipVisible: !this.state.tooltipVisible });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Tooltip
+ *         visible={this.state.tooltipVisible}
+ *         text='Tooltip Text'
+ *         onRequestClose={this.toggleTooltip}>
+ *         <Button onPress={this.toggleTooltip}>
+ *           TOGGLE TOOLTIP
+ *         </Button>
+ *       </Tooltip>
+ *     );
+ *   }
  * }
  * ```
- * */
+ */
 
 export class TooltipComponent extends React.Component<TooltipProps> {
 

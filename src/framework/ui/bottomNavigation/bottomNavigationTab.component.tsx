@@ -39,8 +39,9 @@ interface ComponentProps {
 export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 
 /**
- * The `BottomNavigatorTab` component is a part of the BottomTabNavigator component.
- * Bottom Navigator Tabs should be wrapped in BottomTabNavigator to provide usable component.
+ * BottomNavigationTab component is a part of the BottomNavigation component.
+ * BottomNavigation tabs should be wrapped in BottomNavigation to provide usable component.
+ * See usage examples at BottomNavigation component documentation.
  *
  * @extends React.Component
  *
@@ -58,73 +59,7 @@ export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityPr
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
- *
- * ```
- * import { BottomNavigatorTab } from '@kitten/ui';
- *
- * <BottomNavigatorTab selected={true}/>
- * ```
- *
- * @example With React Navigation usage and API example
- *
- * ```
- * import { Image } from 'react-native';
- * import {
- *   BottomNavigation,
- *   BottomNavigationTab,
- * } from '@kitten/ui';
- * import {
- *   createBottomTabNavigator,
- *   NavigationContainer,
- *   NavigationContainerProps,
- *   NavigationScreenProp,
- *   NavigationState,
- *   NavigationRoute,
- * } from 'react-navigation';
- *
- * type CommonNavigationProps = NavigationProps & NavigationContainerProps;
- *
- * export const TabNavigatorScreen: NavigationContainer = createBottomTabNavigator({
- *   ...screens,
- * }, {
- *   initialRouteName: 'Screen1',
- *   tabBarComponent: (props: CommonNavigationProps) => renderBottomNavigation(props),
- * });
- *
- * function renderBottomNavigation(props: CommonNavigationProps): React.ReactElement<ViewProps> {
- *   const routes: NavigationRoute[] = props.navigation.state.routes;
- *   const index: number = props.navigation.state.index;
- *
- *   return (
- *     <BottomNavigation
- *       selectedIndex={index}
- *       onSelect={(selectedIndex: number) => navigateToTab(selectedIndex)}>
- *       <BottomNavigationTab
- *         title='Screen 1'
- *         icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *       <BottomNavigationTab
- *         title='Screen 2'
- *         icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *       <BottomNavigationTab
- *         title='Screen 3'
- *         icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}/>
- *     </BottomNavigation>
- *   );
- * }
- * ```
- *
- * @example Inline styling example
- *
- * ```
- * <BottomNavigationTab
- *   title='Screen 3'
- *   style={styles.tab}
- *   titleStyle={styles.tabTitle}
- *   icon={(style: StyleType) => <Image source={getIconSource(style, index)}/>}
- * />
- * ```
- * */
+ */
 
 export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
 

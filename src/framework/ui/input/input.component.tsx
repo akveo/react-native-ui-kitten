@@ -41,6 +41,7 @@ type IconProp = (style: StyleType) => IconElement;
 
 interface ComponentProps {
   status?: string;
+  size?: string;
   disabled?: boolean;
   label?: string;
   caption?: string;
@@ -54,15 +55,19 @@ interface ComponentProps {
 export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
 
 /**
- * The `Input` component is an analog of html input.
+ * Styled Input component.
  *
  * @extends React.Component
  *
- * @property {boolean} disabled - Determines whether component is disabled. By default is false.
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger'.
- * By default status is 'primary'.
+ * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Default is `medium`.
  *
  * @property {string} label - Determines label of the component.
  *
@@ -85,62 +90,49 @@ export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
  * @example Simple usage example
  *
  * ```
- * import { Input } from '@kitten/ui';
+ * import React from 'react';
+ * import { Input } from 'react-native-ui-kitten';
  *
- * <Input/>
- * ```
+ * export class InputShowcase extends React.Component {
  *
- * @example Input usage and API example
+ *   public state = {
+ *     inputValue: '',
+ *   };
  *
- * ```
- * import { Input } from '@kitten/ui';
+ *   private onInputValueChange = (inputValue: string) => {
+ *     this.setState({ inputValue });
+ *   };
  *
- * public state: State = {
- *   input: '',
- * };
- *
- * private onInputChange = (input: string) => {
- *   this.setState({ input });
- * };
- *
- * private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
- *   return (
- *     <Image
- *       style={style}
- *       source={ICON}
- *     />
- *   );
- * };
- *
- * public render(): React.ReactNode {
- *   return (
- *     <Input
- *       style={styles.input}
- *       onChangeText={this.onInputChange}
- *       value={this.state.input}
- *       icon={this.renderIcon}
- *       status='warning'
- *       placeholder='Placeholder'
- *       label='Label'
- *       caption='Caption'
- *       captionIcon={this.renderIcon}
- *     />
- *   );
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Input
+ *         value={this.state.inputValue}
+ *         onChangeText={this.onInputValueChange}
+ *       />
+ *     );
+ *   }
  * }
  * ```
  *
  * @example Inline styling example
  *
  * ```
- * <Input
- *   style={styles.input}
- *   placeholder='Placeholder'
- *   label='Label'
- *   caption='Caption'
- *   textStyle={styles.inputText}
- *   labelStyle={styles.inputLabel}
- *   captionStyle={styles.inputCaption}
- * />
+ * import React from 'react';
+ * import { Input, InputProps } from 'react-native-ui-kitten';
+ *
+ * export const InputShowcase = (props?: InputProps): React.ReactElement<InputProps> => {
+ *   return (
+ *     <Input
+ *       style={styles.input}
+ *       textStyle={styles.inputText}
+ *       labelStyle={styles.inputLabel}
+ *       captionStyle={styles.inputCaption}
+ *       label='Label'
+ *       caption='Caption'
+ *       placeholder='Placeholder'
+ *     />
+ *   );
+ * };
  * ```
  * */
 

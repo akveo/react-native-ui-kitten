@@ -48,7 +48,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
-    "@types/gulp": "^4.0.6",
+    "@types/gulp": "^3.8.36",
     "@types/gulp-replace": "0.0.31",
     "@types/jest": "^24.0.13",
     "@types/lodash.merge": "^4.6.6",
@@ -61,6 +61,7 @@
     "conventional-changelog-cli": "^2.0.21",
     "coveralls": "^3.0.2",
     "del": "^4.1.1",
+    "doc-prsr": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^1.0.0",
     "gulp-typedoc": "^2.2.1",

@@ -29,10 +29,10 @@ interface State {
 }
 
 /**
- * The `ApplicationProvider` component is designed to be a root of the application.
+ * ApplicationProvider component is designed to be a root of the application.
  *
  * This does basically two things:
- * - Provides styles for react-native-ui-kitten basic components (e.g 'Button');
+ * - Provides styles for basic components;
  * - Renders modal window which is used to be common for all elements presented as modal;
  *
  * @extends React.Component
@@ -42,7 +42,6 @@ interface State {
  *
  * @property {CustomSchemaType} customMapping - Determines the customization mapping.
  * This is merged with `mapping` property and designed to be used components customization.
- * Optional.
  *
  * @property {ThemeType} theme - Determines the theme for basic components.
  * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva-design/eva`).
@@ -54,8 +53,9 @@ interface State {
  * @example ApplicationProvider API example
  *
  * ```
+ * import React from 'react';
  * import { mapping, theme } from '@eva-design/eva';
- * import { ApplicationProvider } from '@kitten/theme';
+ * import { ApplicationProvider } from 'react-native-ui-kitten';
  * import { Application } from './path-to/root.component';
  *
  * export default class App extends React.Component {

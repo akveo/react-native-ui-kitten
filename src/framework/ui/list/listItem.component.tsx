@@ -7,21 +7,21 @@
 
 import React from 'react';
 import {
-  View,
-  TouchableOpacity,
-  ViewProps,
-  TouchableOpacityProps,
-  ImageProps,
   GestureResponderEvent,
-  StyleSheet,
+  ImageProps,
   StyleProp,
+  StyleSheet,
   TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewProps,
 } from 'react-native';
 import {
+  Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-  Interaction,
 } from '@kitten/theme';
 import {
   Text,
@@ -66,7 +66,9 @@ type ComponentProps = (TemplateTitleProps | TemplateDescriptionProps | CustomCon
 export type ListItemProps = StyledComponentProps & TouchableIndexedProps & ComponentProps;
 
 /**
- * The `ListItem` component is the "support" component for List.
+ * ListItem is a support component for List.
+ * The key feature of wrapping custom list items into ListItem component is that it automatically
+ * picks background color fitting to current theme and responds to touches with feedback.
  *
  * @extends React.Component
  *
@@ -80,51 +82,99 @@ export type ListItemProps = StyledComponentProps & TouchableIndexedProps & Compo
  *
  * @property {React.ReactNode} children - Determines React Children of the component.
  *
- * @property {number} index - Determines index of the ListItem.
- *
  * @property {(style: StyleType, index: number) => React.ReactElement<any>} accessory - Determines the accessory of the
  * component.
  *
  * @property {(style: StyleType, index: number) => React.ReactElement<ImageProps>} icon - Determines the icon of the
  * component.
  *
- * @example ListItem usage and API example
+ * @property {(index: number, event: GestureResponderEvent) => React.ReactElement<ImageProps>} onPress - Emits when
+ * component is pressed.
+ *
+ * @example ListItem title and description template example
  *
  * ```
- * import { ListItem } from '@kitten/ui';
+ * import React from 'react'
+ * import { ListItem, ListItemProps } from 'react-native-ui-kitten';
  *
- * private renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
- *    const { item, index } = info;
- *    const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
- *      <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
- *    );
+ * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
  *
- *    const Accessory = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
- *      <CheckBox checked={index % 2 === 0}/>
- *    );
- *
- *    return (
- *      <ListItem
- *        title={`${item.title} ${index + 1}`}
- *        description={item.description}
- *        icon={Icon}
- *        accessory={Accessory}
- *        onPress={this.onItemPress}
- *      />
- *    );
+ *   return (
+ *     <ListItem
+ *       title='Title'
+ *       description='Description'
+ *     />
+ *   );
  *  };
+ * ```
+ *
+ * @example ListItem icon template example
+ *
+ * ```
+ * import React from 'react'
+ * import { Image, ImageProps } from 'react-native'
+ * import { ListItem, ListItemProps, StyleType } from 'react-native-ui-kitten';
+ *
+ * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+ *
+ *   const Icon = (style: StyleType): React.ReactElement<ImageProps> => {
+ *     return (
+ *       <Image style={style} source={{uri: 'https://path-to/awesome-image.png'}}/>
+ *     );
+ *   };
+ *
+ *   return (
+ *     <ListItem
+ *       title='Title'
+ *       description='Description'
+ *       icon={Icon}
+ *     />
+ *   );
+ *  };
+ * ```
+ *
+ * @example ListItem accessory template example
+ *
+ * ```
+ * import React from 'react'
+ * import { ListItem, ListItemProps, Button, ButtonProps, StyleType } from 'react-native-ui-kitten';
+ *
+ * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+ *
+ *   const Accessory = (style: StyleType): React.ReactElement<ButtonProps> => {
+ *     return (
+ *       <Button style={style}>BUTTON</Button>
+ *     );
+ *   };
+ *
+ *   return (
+ *     <ListItem
+ *       title='Title'
+ *       description='Description'
+ *       accessory={Accessory}
+ *     />
+ *   );
+ * };
  * ```
  *
  * @example Inline styling example
  *
  * ```
- * <ListItem
- *   title={`${item.title} ${index + 1}`}
- *   description={item.description}
- *   style={styles.listItem}
- *   titleStyle={styles.listItemTitle}
- *   descriptionStyle={styles.listItemDescription}
- * />
+ * import React from 'react'
+ * import { ListItem, ListItemProps } from 'react-native-ui-kitten';
+ *
+ * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+ *
+ *   return (
+ *     <ListItem
+ *       style={styles.listItem}
+ *       titleStyle={styles.listItemTitle}
+ *       descriptionStyle={styles.listItemDescription}
+ *       title='Title'
+ *       description='Description'
+ *     />
+ *   );
+ * };
  * ```
  * */
 

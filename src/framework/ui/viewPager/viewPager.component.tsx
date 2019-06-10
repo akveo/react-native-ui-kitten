@@ -6,12 +6,12 @@
 
 import React from 'react';
 import {
-  View,
+  LayoutChangeEvent,
   ScrollView,
   ScrollViewProps,
-  LayoutChangeEvent,
   StyleSheet,
   Platform,
+  View,
 } from 'react-native';
 import { ScrollEvent } from '../support/typings';
 
@@ -29,93 +29,98 @@ interface ComponentProps {
 export type ViewPagerProps = ScrollViewProps & ComponentProps;
 
 /**
- * The `ViewPager` is the component that allows flipping through the "pages". Extends ScrollView.
+ * Allows flipping through the "pages".
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<any>} children - Determines children of the component.
+ * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines children of the component.
  *
  * @property {number} selectedIndex - Determines the index of selected "page".
  *
- * @property {(index: number) => boolean} shouldLoadComponent - Determines loading particular page.
+ * @property {(index: number) => boolean} shouldLoadComponent - Determines loading behavior particular page and can be
+ * used for lazy loading.
  *
- * @property {(offset: number) => void} onOffsetChange - Returns "offset" value on Scroll event.
+ * @property {(offset: number) => void} onOffsetChange - Fires on scroll event with current scroll offset.
  *
- * @property {string} onSelect - Calls on onScrollEnd event and returns an index of the current "page"
+ * @property {(index: number) => void} onSelect - Fires on "page" select with corresponding index.
  *
  * @property ScrollViewProps
  *
- * @example ViewPager usage and API example
+ * @example Simple usage example
  *
  * ```
- * import { ViewPager } from '@kitten/ui';
+ * import React from 'react';
+ * import { ViewPager } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   selectedIndex: 0,
- * };
+ * export class ViewPagerShowcase extends React.Component {
+ *   public state: State = {
+ *      selectedIndex: 0,
+ *    };
  *
- * private onIndexChange = (index: number) => {
- *   this.state.selectedIndex = index;
- * };
+ *   private onIndexChange = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <ViewPager
- *       selectedIndex={this.state.selectedIndex}
- *       contentContainerStyle={styles.container}
- *       onSelect={this.onIndexChange}>
- *       <View style={styles.tabContainer}>
- *         <Text>Tab 1</Text>
- *       </View>
- *       <View style={styles.tabContainer}>
- *         <Text>Tab 2</Text>
- *       </View>
- *       <View style={styles.tabContainer}>
- *         <Text>Tab 3</Text>
- *       </View>
- *     </ViewPager>
- *   );
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <ViewPager
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onIndexChange}>
+ *         <View>
+ *           <Text>Tab 1</Text>
+ *         </View>
+ *         <View>
+ *           <Text>Tab 2</Text>
+ *         </View>
+ *         <View>
+ *           <Text>Tab 3</Text>
+ *         </View>
+ *       </ViewPager>
+ *     );
+ *   }
  * }
  * ```
  *
- * @example ViewPager lazy loading example
+ * @example Lazy loading usage example
  *
  * ```
- * import { ViewPager } from '@kitten/ui';
+ * import React from 'react';
+ * import { ViewPager } from 'react-native-ui-kitten';
  *
- * public state: State = {
- *   selectedIndex: 0,
- * };
+ * export class ViewPagerShowcase extends React.Component {
+ *   public state: State = {
+ *      selectedIndex: 0,
+ *    };
  *
- * private onIndexChange = (index: number) => {
- *   this.state.selectedIndex = index;
- * };
+ *   private onIndexChange = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
  *
- * private shouldLoadPageContent = (index: number): boolean => {
- *   return index === this.state.selectedIndex;
- * };
+ *   private shouldLoadPageContent = (index: number): boolean => {
+ *     return index === this.state.selectedIndex;
+ *   };
  *
- * public render(): React.ReactNode {
- *   return (
- *     <ViewPager
- *       selectedIndex={this.state.selectedIndex}
- *       contentContainerStyle={styles.container}
- *       shouldLoadComponent={this.shouldLoadPageContent}
- *       onSelect={this.onIndexChange}>
- *       <View style={styles.tabContainer}>
- *         <Text>Tab 1</Text>
- *       </View>
- *       <View style={styles.tabContainer}>
- *         <Text>Tab 2</Text>
- *       </View>
- *       <View style={styles.tabContainer}>
- *         <Text>Tab 3</Text>
- *       </View>
- *     </ViewPager>
- *   );
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <ViewPager
+ *         selectedIndex={this.state.selectedIndex}
+ *         shouldLoadComponent={this.shouldLoadPageContent}
+ *         onSelect={this.onIndexChange}>
+ *         <View>
+ *           <Text>Tab 1</Text>
+ *         </View>
+ *         <View>
+ *           <Text>Tab 2</Text>
+ *         </View>
+ *         <View>
+ *           <Text>Tab 3</Text>
+ *         </View>
+ *       </ViewPager>
+ *     );
+ *   }
  * }
  * ```
- * */
+ */
 
 export class ViewPager extends React.Component<ViewPagerProps> {
 

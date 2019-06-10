@@ -33,47 +33,44 @@ interface ComponentProps {
 export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `ButtonGroup` component is a component for placing buttons in row.
+ * Renders a group of buttons.
  *
  * @extends React.Component
  *
  * @property {string} status - Determines the status of the component.
- * Can be 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'white'.
- * By default status is 'primary'.
+ * Can be `primary`, `success`, `info`, `warning`, `danger` or `white`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be 'tiny' | 'small' | 'medium' | 'large' | 'giant'.
- * By default size is 'medium'.
+ * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Default is `medium`.
  *
- * @property {React.ReactElement<ButtonProps>[]} children - Determines buttons in group. Can be passed through jsx.
+ * @property {React.ReactElement<ButtonProps>[]} children - Determines buttons in group.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be 'filled' | 'outline'. By default appearance is 'filled'.
+ * Can be `filled` or `outline`.
+ * Default is `filled`.
  *
  * @property ViewProps
  *
  * @property StyledComponentProps
  *
- * @example ButtonGroup API and usage example
+ * @example ButtonGroup usage example
  *
  * ```
- * import { Button, ButtonGroup } from '@kitten/ui';
+ * import React from 'react';
+ * import { Button, ButtonGroup, ButtonGroupProps } from 'react-native-ui-kitten';
  *
- * public render(): React.ReactNode {
+ * export const ButtonGroupShowcase = (props?: ButtonGroupProps): React.ReactElement<ButtonGroupProps> => {
  *   return (
- *     <ButtonGroup
- *       style={styles.buttonGroup}
- *       appearance='filled'
- *       status='danger'
- *       size='large'>
- *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>Left</Button>
- *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>Mid</Button>
- *       <Button icon={(style: StyleType) => <Image source={{ uri: '...' }}/>}>Right</Button>
+ *     <ButtonGroup>
+ *       <Button>Left</Button>
+ *       <Button>Mid</Button>
+ *       <Button>Right</Button>
  *     </ButtonGroup>
  *   );
- * }
+ * };
  * ```
- * */
+ */
 
 class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 

@@ -20,17 +20,23 @@ type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
 
 interface ComponentProps {
+  level?: string;
   children?: ChildrenProp;
 }
 
 export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 
 /**
- * The `Layout` component is component which behaves like React Native View.
+ * Layout container component. Behaves like React Native View.
+ * The key feature of using Layout instead of View is that
+ * it automatically picks background color fitting to current theme.
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<any>} children - Determines the children of the component.
+ * @property {string} level - Determines background color level of component.
+ * Can be `1`, `2`, `3` or `4`.
+ *
+ * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines the children of the component.
  *
  * @property ViewProps
  *
@@ -39,14 +45,15 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
  * @example Layout usage and API example
  *
  * ```
+ * import React from 'react';
  * import {
  *   Layout,
  *   Text,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * public render(): React.ReactNode {
  *   return (
- *     <Layout style={styles.layout}>
+ *     <Layout>
  *       <Text>Layout</Text>
  *     </Layout>
  *   );

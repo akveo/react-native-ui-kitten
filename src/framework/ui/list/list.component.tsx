@@ -30,13 +30,13 @@ interface ComponentProps {
 export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
 
 /**
- * The `List` component is a performant interface for rendering simple, flat lists. Extends FlatList. Renders list of
- * ListItem components or custom content.
+ * List component is a performant interface for rendering simple, flat lists. Extends `FlatList`. Renders list of
+ * `ListItem` components or custom content.
  *
  * @extends React.Component
  *
  * @property {(info: ListRenderItemInfo<ItemT>, style: StyleType) => React.ReactElement<any>} renderItem - Takes an
- * item from data and renders it into the list. Returns ListRenderItemInfo and style.
+ * item from data and renders it into the list.
  *
  * @property FlatListProps<ItemType>
  *
@@ -45,74 +45,80 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
  * @example With ListItem example
  *
  * ```
+ * import React from 'react';
+ * import { ListRenderItemInfo } from 'react-native';
  * import {
  *   List,
  *   ListItem,
- *   CheckBox,
- *   CheckBoxProps,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
- * private renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
- *    const { item, index } = info;
- *    const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
- *      <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
- *    );
+ * export const ListShowcase = (props?: ListProps): React.ReactElement<ListProps> => {
  *
- *    const Accessory = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
- *      <CheckBox checked={index % 2 === 0}/>
- *    );
+ *   private data: string[] = [
+ *     'Item 1',
+ *     'Item 2',
+ *     'Item 3',
+ *   ];
  *
- *    return (
- *      <ListItem
- *        title={`${item.title} ${index + 1}`}
- *        description={item.description}
- *        icon={Icon}
- *        accessory={Accessory}
- *        onPress={this.onItemPress}
- *      />
- *    );
- *  };
+ *   private onItemPress = (index: number) => {
+ *     // Handle item press
+ *   };
  *
- * public render(): React.ReactNode {
- *    return (
- *      <List
- *        data={this.items}
- *        renderItem={this.renderItem}
- *      />
- *    );
- *  }
- * ```
+ *   private renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
+ *     return (
+ *       <ListItem
+ *         title={`${info.item}`}
+ *         description='Description'
+ *         onPress={onItemPress}
+ *       />
+ *     );
+ *   };
  *
- * @example With custom list item example
- *
- * ```
- * import { List, ListItem } from '@kitten/ui';
- *
- * private renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
- *
- *    return (
- *      <ListItem style={styles.container}>
- *        <Image
- *          style={styles.icon}
- *          source={{ uri: 'https://akveo.github.io/eva-icons/outline/png/128/play-circle-outline.png' }}
- *        />
- *        <View style={styles.contentContainer}>
- *          <Text style={styles.title}>Welcome to the Jungle</Text>
- *          <Text style={styles.description}>Guns N'Roses</Text>
- *        </View>
- *        <Button style={styles.button} status='success'>$2.99</Button>
- *      </ListItem>
- *    );
+ *   return (
+ *     <List
+ *       data={data}
+ *       renderItem={renderItem}
+ *     />
+ *   );
  * };
+ * ```
  *
- * public render(): React.ReactNode {
- *    return (
- *      <List
- *        data={this.items}
- *        renderItem={this.renderItem}
- *      />
- *    );
- * }
+ * @example With Custom ListItem example
+ *
+ * ```
+ * import React from 'react';
+ * import { ListRenderItemInfo } from 'react-native';
+ * import {
+ *   List,
+ *   ListItem,
+ * } from 'react-native-ui-kitten';
+ * import { CustomListItemView } from './path-to/custom-list-item-view';
+ *
+ * export const ListShowcase = (props?: ListProps): React.ReactElement<ListProps> => {
+ *
+ *   const data: string[] = [
+ *      ...
+ *   ];
+ *
+ *   const onItemPress = (index: number) => {
+ *     // Handle List Item press
+ *   };
+ *
+ *   const renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
+ *     return (
+ *       <ListItem onPress={onItemPress}>
+ *         <CustomListItem/>
+ *       </ListItem>
+ *     );
+ *   };=
+ *
+ *   return (
+ *     <List
+ *       data={data}
+ *       renderItem={renderItem}
+ *     />
+ *   );
+ * };
  * ```
  * */
 

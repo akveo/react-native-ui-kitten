@@ -19,7 +19,7 @@ import React from 'react';
 import { 
   Button,
   ButtonProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 const AwesomeButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
   const customStyle = {
@@ -41,9 +41,9 @@ const AwesomeButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => 
 
 ### Pre-defined properties
 
-All React Native UI Kitten components has a set of properties which you can use to style component.
-Each component have `appearance` property which can have single or multiple values depending on mapping configuration.
-Also there are a list of *variant group* properties like `size`, `status` etc.
+All React Native UI Kitten components have a set of properties which you can use to style component.
+Each component has `appearance` property which can have single or multiple values depending on mapping configuration.
+Also, there is a list of *variant group* properties like `size`, `status` etc.
 
 These properties are defined by Eva Design System. For more information read the [Theme System Guide](docs/guides/theme-system).
 
@@ -51,14 +51,14 @@ These properties are defined by Eva Design System. For more information read the
 
 Each React Native UI Kitten component has `appearance` property, where you can pass values depending on mapping configuration.
 
-Assuming that mapping configuration has `outline` *appearance* for Button, you can create outline Button with following code.
+Assuming that mapping configuration has `outline` *appearance* for Button, you can create outline Button with the following code.
 
 ```tsx
 import React from 'react';
 import {
   Button,
   ButtonProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten;
 
 export const OutlineButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => (
   <Button appearance='outline'/>
@@ -71,14 +71,14 @@ export const OutlineButton = (props?: ButtonProps): React.ReactElement<ButtonPro
 
 Unlike `appearance` property, each component can have *variant group* properties, e.g `status` or `size`.
 
-Assuming that mapping configuration has `size` *variant group* and `tiny` *variant* for Button, you can create tiny Button with following code.
+Assuming that mapping configuration has `size` *variant group* and `tiny` *variant* for Button, you can create tiny Button with the following code.
 
 ```tsx
 import React from 'react';
 import {
   Button,
   ButtonProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const TinyButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => (
   <Button size='tiny'/>
@@ -113,11 +113,11 @@ Sometimes there are cases that could not be covered with inline styles. A pretty
 }
 ```
 
-The code above demonstrates how Button component can be modified. This says that by default Button will have `red` background, and when it is `active` it will change to `pink`.
+The code above demonstrates how a Button component can be modified. This says that by default Button will have `red` background, and when it is `active` it will change to `pink`.
 
 This is a short example of how you can customize mapping configuration only with modifying component parameters. Eva Design System does not strict you with creating your own *appearance* and *variant group* configurations.
 
-Let's take a look of how custom *appearance* could be created.
+Let's take a look at how custom *appearance* could be created.
 
 ```json
 {
@@ -152,12 +152,14 @@ The one thing to apply custom mapping is to provide it to `ApplicationProvider` 
 
 ```tsx
 import React from 'react';
-import { mapping } from '@eva-design/eva';
-import { theme } from '@eva/themes';
+import {
+  mapping,
+  theme,
+} from '@eva-design/eva';
 import { 
   ApplicationProvider,
   ApplicationProviderProps
-} from '@kitten/theme';
+} from 'react-native-ui-kitten';
 import { Application } from './path-to/root.component';
 import { customMapping } from './path-to/custom-mapping';
 

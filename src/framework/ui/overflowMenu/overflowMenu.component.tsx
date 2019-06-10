@@ -6,17 +6,17 @@
 
 import React from 'react';
 import {
-  ViewProps,
-  View,
   GestureResponderEvent,
   StyleSheet,
+  View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
+  ModalComponentCloseProps,
+  styled,
   StyledComponentProps,
   StyleType,
-  styled,
-  ModalComponentCloseProps,
 } from '@kitten/theme';
 import {
   OverflowMenuItem,
@@ -41,8 +41,7 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
 export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
 
 /**
- * The `OverflowMenu` component is a component for showing menu content over the screen.
- * Component uses Popover -> ModalPanel -> Modal components "chain"
+ * Renders vertical list of menu items in a modal.
  *
  * @extends React.Component
  *
@@ -52,48 +51,60 @@ export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
  * @property {OverflowMenuItemType[]} items - Determines menu items.
  *
  * @property {string} size - Determines the size of the menu items components.
- * Can be 'small' | 'medium' | 'large'. By default size='medium'.
+ * Can be `small`, `medium` or `large`.
+ * Default is `medium`.
  *
- * @property {(event: GestureResponderEvent, index: number) => void} onSelect - Triggered on select value.
+ * @property {(event: GestureResponderEvent, index: number) => void} onSelect - Fires when selected item is changed.
  *
  * @property {Omit<PopoverProps, 'content'>}
  *
  * @property StyledComponentProps
  *
- * @example Overflow menu items config example
+ * @example OverflowMenu usage example
  *
  * ```
- * const menuItems: OverflowMenuItemType[] = [
- *   {
- *     text: 'Menu Item 1',
- *     icon: (style: StyleType) => <Image source={{ uri: iconUri1 }} style={style}/>,
- *   },
- *   {
- *     text: 'Menu Item 2',
- *     icon: (style: StyleType) => <Image source={{ uri: iconUri2 }} style={style}/>,
- *     disabled: true,
- *   },
- *   {
- *     text: 'Menu Item 3',
- *   },
- * ];
- * ```
+ * import React from 'react';
+ * import {
+ *   OverflowMenu,
+ *   Button,
+ * } from 'react-native-ui-kitten';
  *
- * @example OverflowMenu usage and API example
+ * export class OverflowMenuShowcase extends React.Component {
  *
+ *   private items: OverflowMenuItemType[] = [
+ *     { text: 'Menu Item 1' },
+ *     { text: 'Menu Item 2' },
+ *     { text: 'Menu Item 3' },
+ *   ];
+ *
+ *   public state = {
+ *     menuVisible: false,
+ *   };
+ *
+ *   private onItemSelect = (index: number) => {
+ *     // Handle Menu Item selection
+ *   };
+ *
+ *   private toggleMenu = () => {
+ *     this.setState({ menuVisible: !this.state.menuVisible });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <OverflowMenu
+ *         items={this.items}
+ *         visible={this.state.menuVisible}
+ *         onSelect={this.onItemSelect}
+ *         onRequestClose={this.toggleMenu}>
+ *         <Button onPress={this.toggleMenu}>
+ *           TOGGLE MENU
+ *         </Button>
+ *       </OverflowMenu>
+ *     );
+ *   }
+ * }
  * ```
- * <OverflowMenu
- *   items={menuItems}
- *   placement='bottom start'
- *   visible={this.state.overflowMenuVisible}
- *   onSelect={this.onSelectItem}
- *   onRequestClose={this.setMenu1Visible}>
- *   <TouchableOpacity onPress={this.setMenuVisible}>
- *     <Image style={styles.icon} source={{ uri: menuIconUri }}/>
- *   </TouchableOpacity>
- * </OverflowMenu>
- * ```
- * */
+ */
 
 export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 

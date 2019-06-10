@@ -7,47 +7,57 @@
 import React from 'react';
 
 /**
- * The `ModalService` singleton service than has 2 methods (show/hide).
- * This service takes React.ReactElement<ModalComponentCloseProps> and
- * pushes it to the DialogPanel.
+ * Singleton service designed to manage modal components.
  *
  * @type ModalServiceType
  *
  * @method {(element: React.ReactElement<ModalComponentCloseProps>,
- * closeOnBackDrop: boolean = false) => string} show - Takes component, returns it's identifier.
+ * closeOnBackDrop: boolean = false) => string} show - Shows component in a modal window.
  *
- * @method {(identifier: string) => void} hide - Hide dialog component with
- * this identifier and removes it from Modal Panel.
+ * @method {(identifier: string) => void} hide - Hides component from a modal window.
  *
- * @example Usage example
+ * @example Simple Usage example
  *
  * ```
- * import { ModalService } from '@kitten/theme';
+ * import React from 'react';
+ * import { View, ViewProps } from 'react-native';
+ * import { Button, Text, ModalService } from 'react-native-ui-kitten';
  *
- * private identifier: string = '';
+ * export const ModalServiceShowcase = (): React.ReactElement<ViewProps> => {
  *
- * private show = (): void => {
- *   const component: React.ReactElement<ModalComponentCloseProps> =
- *     <View onRequestClose={() => Alert.alert('Dialog close')}>
- *       <Text>Hi! I'm modal in modal panel!</Text>
- *     </View>;
- *   this.identifier = ModalService.show(component);
- * };
+ *   const modalID: string = '';
  *
- * private hide = (): void => {
- *   ModalService.hide(this.identifier);
- * };
+ *   const showModal = () => {
+ *     const component: React.ReactElement<ViewProps> =
  *
- * public render(): React.ReactNode {
+ *     this.modalID = ModalService.show(this.renderModalContentElement);
+ *   };
+ *
+ *   const hideModal = () => {
+ *     ModalService.hide(this.modalID);
+ *   };
+ *
+ *   const renderModalContentElement = (): React.ReactElement<ViewProps> => {
+ *     return (
+ *       <View>
+ *         <Text>Hi, I'm modal!</Text>
+ *       </View>
+ *     );
+ *   };
+ *
  *   return (
  *     <View>
- *       <Button title='Show Modal' onPress={this.show}/>
- *       <Button title='Hide Modal' onPress={this.hide}/>
+ *       <Button onPress={this.showModal}>
+ *         SHOW MODAL
+ *       </Button>
+ *       <Button onPress={this.hideModal}>
+ *         HIDE MODAL
+ *       </Button>
  *     </View>
- *   )
+ *   );
  * }
  * ```
- * */
+ */
 
 class ModalServiceType {
 

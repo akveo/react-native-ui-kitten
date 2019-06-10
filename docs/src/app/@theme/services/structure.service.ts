@@ -86,19 +86,27 @@ export class NgdStructureService {
     });
   }
 
-  protected getComponents(item: any, preparedDocs) {
+  protected getComponents(item: any, preparedDocs: any) {
     return item.source
       .map(source => preparedDocs.classes.find((data) => data.name === source))
-      .map(component => this.prepareComponent(component));
+      .map(component => this.prepareComponent(component, item));
   }
 
-  protected prepareComponent(component: any) {
+  protected prepareComponent(component: any, structureItem?: any) {
     const textNodes = component.overview.filter(node => node.type === 'text');
     if (textNodes && textNodes.length) {
       textNodes[0].content = `## ${component.name}\n\n${textNodes[0].content}`; // TODO: this is bad
     }
+
+    let images: string[] = [];
+    if (structureItem && structureItem.overview) {
+      const imagesObj: any = structureItem.overview
+        .find((item: any) => item.name === component.name);
+      images = imagesObj ? imagesObj.images : [];
+    }
+
     return {
-      ... component,
+      ...component,
       slag: this.textService.createSlag(component.name),
       overview: component.overview.map((node: any) => {
         if (node.type === 'text') {
@@ -109,6 +117,7 @@ export class NgdStructureService {
         }
         return node;
       }),
+      images: images,
     };
   }
 
@@ -137,7 +146,7 @@ export class NgdStructureService {
     return {
       title: block.source.name,
       fragment: block.source.slag,
-    }
+    };
   }
 
   protected getTocForTabbed(block: any) {

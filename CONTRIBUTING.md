@@ -137,7 +137,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 ## <a name="run"></a> Run playground
 
-React-native-ui-kitten contains playground module which allows you to debug quickly your changes.
+react-native-ui-kitten contains playground module which allows you to debug quickly your changes.
 See the project in [playground directory](src/playground).
 To run it you should:
 * Clone this repo

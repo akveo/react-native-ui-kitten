@@ -39,11 +39,11 @@ export interface ContextProps {
 export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps & P>;
 
 /**
- * The `styled` function is a High Order Function which is used to apply style `mapping`s on components.
+ * High Order Function which is used to apply style mapping on component.
  *
- * To be styled, source component class should have static `styledComponentName` property which defines
- * corresponding component name in `mapping`. (e.g 'Button' for `Button` class).
- * Returns `StyledComponentClass` - component class which can be used as styled component.
+ * Requires component to have `styledComponentName` string property which defines
+ * corresponding component name in mapping. (e.g 'Button' for Button component).
+ * Returns component class which can be used as styled component.
  *
  * @property {string} appearance - Determines style appearance of component. Default is provided by mapping.
  *
@@ -51,22 +51,20 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *
  * @property {StyleType} themedStyle - Determines component style for it's current state.
  *
- * @property {(interaction: Interaction[]) => void} - Determines function
+ * @property {(interaction: Interaction[]) => void} dispatch - Determines function
  * for dispatching current state of component. This is designed to be used as style request function.
  * Calls component re-render if style for requested state differ from current.
  *
- * @param Component - Type: {React.ComponentClass}. Determines class of component to be styled.
+ * @param Component - Type: {React.ComponentClass}. Determines class or functional component to be styled.
  *
  * @example Declaring Styled Component
  *
  * ```
- * import {
- *   styled,
- *   StyledComponentProps,
- *   Interaction,
- * } from '@kitten/theme';
+ * import React from 'react';
+ * import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+ * import { styled, StyledComponentProps, Interaction } from 'react-native-ui-kitten';
  *
- * type StyledButtonProps = ButtonProps & StyledComponentProps;
+ * type StyledButtonProps = TouchableOpacityProps & StyledComponentProps;
  *
  * class Button extends React.Component<StyledButtonProps> {
  *
@@ -116,16 +114,17 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * @example Styled Component Usage
  *
  * ```
+ * import React from 'react';
  * import {
  *   StyledButton,
  *   StyledButtonProps,
  * } from './path-to/styledButton.component';
  *
- * public render(): React.ReactElement<StyledButtonProps> {
+ * export const StyledButtonShowcase = (props?: StyledButtonProps): React.ReactElement<StyledButtonProps> => {
  *   return (
- *     <StyledButton/>
+ *     <StyledButton {...props}/>
  *   );
- * }
+ * };
  * ```
  */
 export const styled = <P extends object>(Component: React.ComponentType<P>): StyledComponentClass<P> => {

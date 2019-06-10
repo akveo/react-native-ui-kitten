@@ -7,7 +7,7 @@ We do what we did before but in a new way.
 
 ## What's new will you have:
 - TypeScript support
-- Full test coverage of framework
+- Full test coverage of the framework
 - Better code quality
 - Better development environment for contributors
 - Better theme system
