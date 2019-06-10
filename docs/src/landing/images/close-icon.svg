@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>Close Icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Wireframes-+-Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-Copy-2" transform="translate(-1016.000000, -55.000000)">
+            <g id="Close-Icon" transform="translate(1016.000000, 55.000000)">
+                <rect id="Rectangle" fill-opacity="0" fill="#9EA0A5" x="0" y="0" width="18" height="18"></rect>
+                <polygon id="Path" fill="#000000" fill-rule="nonzero" points="9 7.58578644 16.0710678 0.514718626 17.4852814 1.92893219 10.4142136 9 17.4852814 16.0710678 16.0710678 17.4852814 9 10.4142136 1.92893219 17.4852814 0.514718626 16.0710678 7.58578644 9 0.514718626 1.92893219 1.92893219 0.514718626 9 7.58578644"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
