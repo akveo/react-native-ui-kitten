@@ -1,6 +1,6 @@
 # Contributing to react-native-ui-kitten
 
-We would love for you to contribute to react-native-ui-kitten and help make it ever better together! :rocket:
+We would love for you to contribute to react-native-ui-kitten and help make it even better together! :rocket:
 
  - [Code of Conduct](#coc)
  - [Question or Problem?](#question)
@@ -22,14 +22,14 @@ Please do not open issues for general support questions as we want to keep GitHu
 StackOverflow is a much better place to ask questions since:
 
 - there are thousands of people willing to help on StackOverflow
-- questions and answers stay available for public viewing so your question / answer might help someone else
+- questions and answers stay available for public viewing so your question/answer might help someone else
 - StackOverflow's voting system assures that the best answers are prominently visible.
 
 To save your and our time, we will be systematically closing all the issues that are requests for general support and redirecting people to StackOverflow.
 
 
 ## <a name="issue"></a> Found an Issue?
-If you find a bug in the source code or a mistake in the documentation, you can help us by [submitting an issue](#submit-issue) to our [GitHub Repository][github]. Including an issue reproduction is the absolute best way to help the team quickly diagnose the problem. Screenshots and error stack traces are also helpful.
+If you find a bug in the source code or a mistake in the documentation, you can help us by [submitting an issue](#submit-issue) to our [GitHub Repository][github]. Including an issue, reproduction is the absolute best way to help the team quickly diagnose the problem. Screenshots and error stack traces are also helpful.
 
 Please follow this simple checklist before submitting:
 
@@ -55,7 +55,7 @@ and help you to craft the change so that it is successfully accepted into the pr
 
 ### <a name="submit-issue"></a> Submitting an Issue Before you submit an issue, search the archive, maybe your question was already answered.
 
-If your issue appears to be a bug, and hasn't been reported, open a new issue. Help us to maximize the effort we can spend fixing issues and adding new features by not reporting duplicate issues. Please make sure to fill out the populated issue form before submitting the issue.
+If your issue appears to be a bug and hasn't been reported, open a new issue. Help us to maximize the effort we can spend fixing issues and adding new features by not reporting duplicate issues. Please make sure to fill out the populated issue form before submitting the issue.
 
 You can file new issues by providing the information [here][new_issue].
 
@@ -137,7 +137,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 ## <a name="run"></a> Run playground
 
-React-native-ui-kitten contains playground module which allows you quickly debug your changes.
+React-native-ui-kitten contains playground module which allows you to debug quickly your changes.
 See the project in [playground directory](src/playground).
 To run it you should:
 * Clone this repo
@@ -153,15 +153,15 @@ npm install
 ```
 npm start
 ```
-* Now you will be prompted by CLI to select device you'd like to run.
+* Now you will be prompted by CLI to select the device you'd like to run.
 Just follow the CLI instructions. Normally you should hit `a` or `i` button
 to make Android or iOS device running.
 
 ## <a name="debug"></a> Debugging your changes
 
-If you done with running playground on Android emulator or iOS simulator,
+If you're done with running playground on Android emulator or iOS simulator,
 you can observe all the changes you do inside [framework](src/framework)
- on device you have started. That's where hot/live reload takes place.
+ on the device you have started. That's where hot/live reload takes place.
 
 ## <a name="commit"></a> Commit Message Guidelines
 
@@ -188,7 +188,7 @@ to read on GitHub as well as in various git tools.
 
 ### Revert
 If the commit reverts a previous commit, it should begin with `revert: `, followed by the header of
-the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is
+the reverted commit. In the body, it should say: `These reverts commit <hash>.`, where the hash is
 the SHA of the commit being reverted.
 
 ### Type
@@ -199,16 +199,16 @@ Must be one of the following:
 * **docs**: Documentation only changes
 * **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing
   semi-colons, etc)
-* **refactor**: A code change that neither fixes a bug nor adds a feature
+* **refactor**: A code change that neither fixes a bug or adds a feature
 * **perf**: A code change that improves performance
 * **test**: Adding missing tests or correcting existing tests
 * **build**: Changes that affect the build system, CI configuration or external dependencies
             (example scopes: gulp, broccoli, npm)
 * **chore**: Other changes that don't modify `src` or `test` files
-* **relese**: Release version commit
+* **release**: Release version commit
 
 ### Scope
-* For [framework's ui module](src/framework/ui) the scope should be name of component that was affected:
+* For [framework's ui module](src/framework/ui) the scope should be the name of the component that was affected:
 ```
 style(button): add styles for pressed state
 ```
@@ -218,10 +218,10 @@ build(playground): react-navigation integration
 ```
 
 ### Subject
-The subject contains succinct description of the change:
+The subject contains a succinct description of the change:
 
 * use the imperative, present tense: "change" not "changed" nor "changes"
-* don't capitalize first letter
+* don't capitalize the first letter
 * no dot (.) at the end
 
 ### Body
@@ -232,7 +232,7 @@ The body should include the motivation for the change and contrast this with pre
 Optional. The footer should contain any information about **Breaking Changes** and is also the place to
 reference GitHub issues that this commit **Closes**.
 
-**Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines.
+**Breaking Changes** should start with the word `BREAKING CHANGE:` with space or two newlines.
 The rest of the commit message is then used for this.
 
 [coc]: CODE_OF_CONDUCT.md
