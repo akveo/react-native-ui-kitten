@@ -6,9 +6,11 @@
     "ng": "ng",
     "ngh": "ngh",
     "start": "ng serve",
-    "build": "rimraf dist && ng build && cp -r src/landing/ dist/",
+    "build": "ng build",
+    "prebuild:prod": "rimraf dist",
     "build:prod": "npm run build -- docs --prod --aot --base-href '/react-native-ui-kitten/docs/'",
-    "docs:gh-pages": "npm run docs:prod && npm run ngh -- --dir ./docs/dist"
+    "postbuild:prod": "cp -r src/landing/ dist/",
+    "docs:gh-pages": "npm run ngh -- --dir ./dist"
   },
   "dependencies": {
     "@angular/animations": "8.0.0",
