@@ -3,7 +3,7 @@
     "name": "react-native-ui-kitten-playground",
     "description": "react-native-ui-kitten-playground",
     "slug": "playground",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "android",
       "ios"

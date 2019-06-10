@@ -89,13 +89,6 @@ const c2Text: ComponentShowcaseItem = {
   },
 };
 
-const overlineText: ComponentShowcaseItem = {
-  title: 'Overline',
-  props: {
-    category: 'overline',
-  },
-};
-
 const labelText: ComponentShowcaseItem = {
   title: 'Label',
   props: {
@@ -118,7 +111,6 @@ const categorySection: ComponentShowcaseSection = {
     p2Text,
     c1Text,
     c2Text,
-    overlineText,
     labelText,
   ],
 };

@@ -1,25 +1,30 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/tsc-out",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "sourceMap": true,
     "moduleResolution": "node",
     "jsx": "react-native",
-    "target": "es2017",
-    "module": "es2015",
-    "experimentalDecorators": true,
-    "types": ["react", "react-native", "jest"],
+    "target": "es2015",
     "lib": [
-      "es2015",
-      "es2016",
-      "es2017.object"
+      "es2018"
     ],
     "typeRoots": [
       "./node_modules/@types"
-    ]
+    ],
+    "paths": {
+      "@kitten/ui": [
+        "./src/framework/ui"
+      ],
+      "@kitten/theme": [
+        "./src/framework/theme"
+      ]
+    }
   },
   "include": [
-    "*.ts",
-    "package.json"
+    "./src"
   ]
 }
