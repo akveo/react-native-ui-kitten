@@ -1,6 +1,6 @@
 const { defaults: tsJestConfig } = require('ts-jest/presets');
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
-const jestConfig = require('./tsconfig.jest');
+const tsConfig = require('./tsconfig.dev');
 
 module.exports = {
   ...tsJestConfig,
@@ -12,24 +12,21 @@ module.exports = {
   globals: {
     'ts-jest': {
       babelConfig: true,
-      tsConfig: './tsconfig.jest.json',
+      tsConfig: './tsconfig.test.json',
     },
   },
   cacheDirectory: './dist/jest/cache',
   coverageDirectory: './dist/jest/coverage',
   snapshotResolver: '<rootDir>/jest.config.snapshot',
-  moduleNameMapper: pathsToModuleNameMapper(jestConfig.compilerOptions.paths, {
+  moduleNameMapper: pathsToModuleNameMapper(tsConfig.compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),
   modulePathIgnorePatterns: [
     '<rootDir>/src/playground/',
   ],
   testPathIgnorePatterns: [
-    '<rootDir>/dist',
     '<rootDir>/node_modules',
+    '<rootDir>/dist',
     '<rootDir>/docs',
-  ],
-  transformIgnorePatterns: [
-    'node_modules/(?!(react-native|react-native-cookies|@eva-design)/)'
   ],
 };

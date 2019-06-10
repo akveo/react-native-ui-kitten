@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/tsc-out",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "jsx": "react-native",
+    "target": "es2015",
+    "module": "esnext",
+    "lib": [
+      "es2018"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "paths": {
+      "@kitten/ui": [
+        "./src/framework/ui"
+      ],
+      "@kitten/theme": [
+        "./src/framework/theme"
+      ]
+    }
+  },
+  "include": [
+    "./src",
+    "./src/**/package.json"
+  ],
+  "exclude": [
+    "./**/*.spec.ts",
+    "./**/*.spec.tsx",
+    "./**/*.snap"
+  ]
+}
