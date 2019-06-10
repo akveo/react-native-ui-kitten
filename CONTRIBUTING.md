@@ -1,6 +1,6 @@
 # Contributing to react-native-ui-kitten
 
-We would love for you to contribute to react-native-ui-kitten and help make it ever better together! :rocket:
+We would love for you to contribute to react-native-ui-kitten and help make it even better together! :rocket:
 
  - [Code of Conduct](#coc)
  - [Question or Problem?](#question)
@@ -137,7 +137,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 ## <a name="run"></a> Run playground
 
-React-native-ui-kitten contains a playground module that allows you to quickly debug your changes.
+react-native-ui-kitten contains playground module which allows you to debug quickly your changes.
 See the project in [playground directory](src/playground).
 To run it you should:
 * Clone this repo
@@ -159,7 +159,7 @@ to make Android or iOS device running.
 
 ## <a name="debug"></a> Debugging your changes
 
-If you are done with running playground on Android emulator or iOS simulator,
+If you're done with running playground on Android emulator or iOS simulator,
 you can observe all the changes you do inside [framework](src/framework)
  on the device you have started. That's where hot/live reload takes place.
 
@@ -188,7 +188,7 @@ to read on GitHub as well as in various git tools.
 
 ### Revert
 If the commit reverts a previous commit, it should begin with `revert: `, followed by the header of
-the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is
+the reverted commit. In the body, it should say: `These reverts commit <hash>.`, where the hash is
 the SHA of the commit being reverted.
 
 ### Type
@@ -205,10 +205,10 @@ Must be one of the following:
 * **build**: Changes that affect the build system, CI configuration or external dependencies
             (example scopes: gulp, broccoli, npm)
 * **chore**: Other changes that don't modify `src` or `test` files
-* **relese**: Release version commit
+* **release**: Release version commit
 
 ### Scope
-* For [framework's ui module](src/framework/ui) the scope should be name of component that was affected:
+* For [framework's ui module](src/framework/ui) the scope should be the name of the component that was affected:
 ```
 style(button): add styles for pressed state
 ```
