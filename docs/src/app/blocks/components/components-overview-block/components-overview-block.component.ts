@@ -17,7 +17,7 @@ export class NgdComponentsOverviewBlockComponent implements OnInit {
 
   ngOnInit() {
     this.components = this.menu
-      .getPreparedMenu('/docs')
+      .getPreparedMenu()
       .find(({ title }) => title === 'Components')
       .children
       .slice(1)
