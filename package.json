@@ -20,6 +20,7 @@
     "build:prod": "npm run build -- prod && npm run build:transform -- prod",
     "clean": "rimraf ./dist",
     "docs:parse": "gulp docs",
+    "docs:build": "cd docs && npm run build",
     "docs:serve": "cd docs && npm start",
     "docs:start": "npm run docs:parse && npm run docs:serve",
     "conventional-changelog": "conventional-changelog",
