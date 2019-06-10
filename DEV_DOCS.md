@@ -10,8 +10,8 @@
 8. Push the branch, create PR, approve, merge
 9. Switch to master branch and pull changes
 10. Run tests: `npm run release:validate`
-11. Prepare build: `npm run release:prepare`
+11. Assemble build: `npm run release:prepare`
 12. Publish the package to npm: `npm run release`
 13. Generate public [docs](docs/DEV_DOCS.md)
 14. Create and push [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with template `(vX.X.X)`
-15. Create release on github for the tag
+15. Create release on GitHub for the tag
