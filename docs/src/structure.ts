@@ -109,7 +109,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'ApplicationProvider',
-        icon: 'stepper.svg',
+        icon: 'application-provider.svg',
         source: [
           'ApplicationProvider',
         ],
@@ -117,7 +117,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'styled',
-        icon: 'stepper.svg',
+        icon: 'styled.svg',
         source: [
           'styled',
         ],
@@ -125,7 +125,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'withStyles',
-        icon: 'stepper.svg',
+        icon: 'with-styles.svg',
         source: [
           'withStyles',
         ],
