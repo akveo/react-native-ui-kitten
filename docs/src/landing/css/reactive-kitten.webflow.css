@@ -2368,7 +2368,7 @@
     text-decoration: none;
   }
   .navbar {
-    z-index: 0;
+    z-index: 3;
     padding-right: 24px;
     padding-left: 24px;
   }
