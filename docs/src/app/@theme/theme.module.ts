@@ -17,6 +17,8 @@ import {
   NbCardModule,
   NbCheckboxModule,
   NbIconModule,
+  NbSelectModule,
+  NbInputModule, NbButtonModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -60,6 +62,9 @@ import {
     NbMenuModule,
     NbTabsetModule,
     NbIconModule,
+    NbButtonModule,
+    NbSelectModule,
+    NbInputModule,
     NbEvaIconsModule,
     RouterModule,
   ],

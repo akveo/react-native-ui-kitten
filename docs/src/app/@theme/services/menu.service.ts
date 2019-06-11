@@ -24,7 +24,7 @@ export class NgdMenuService {
               private textService: NgdTextService) {
   }
 
-  getPreparedMenu(basePath: string): any {
+  getPreparedMenu(basePath: string = ''): any {
     return this.prepareMenu(this.structureService.getPreparedStructure(), { link: basePath });
   }
 

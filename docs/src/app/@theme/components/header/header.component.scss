@@ -41,6 +41,8 @@
 
     &.middle {
       flex: 1;
+      align-items: center;
+      margin: 0 -0.5rem;
     }
   }
 
@@ -52,10 +54,6 @@
 
       .menu-item {
         border: none;
-
-        &:first-child a {
-          padding-left: 0;
-        }
 
         a {
           color: $menu-item-fg;
@@ -100,6 +98,10 @@
     margin-left: auto;
   }
 
+  .version-select {
+    display: none;
+  }
+
   @include media-breakpoint-up(is) {
     .section {
       padding: 0.875rem 1.125rem;
@@ -117,6 +119,10 @@
       .version {
         display: inline;
       }
+    }
+
+    .version-select {
+      display: block;
     }
   }
 
@@ -184,6 +190,9 @@
     ngd-search {
       display: none;
     }
+    .version-select {
+      margin-left: 1rem;
+    }
 
     @include media-breakpoint-up(is) {
       ::ng-deep nb-menu .menu-items li:first-child {
@@ -195,6 +204,7 @@
       ngd-search {
         display: flex;
         align-items: center;
+        margin-left: auto;
       }
     }
 

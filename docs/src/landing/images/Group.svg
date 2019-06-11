@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="14px" viewBox="0 0 7 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M9.9995,19 C9.7735,19 9.5465,18.924 9.3595,18.768 C8.9355,18.415 8.8785,17.784 9.2315,17.36 L13.7075,11.989 L9.3925,6.627 C9.0465,6.197 9.1145,5.567 9.5445,5.221 C9.9755,4.875 10.6045,4.943 10.9515,5.373 L15.7795,11.373 C16.0775,11.744 16.0735,12.274 15.7685,12.64 L10.7685,18.64 C10.5705,18.877 10.2865,19 9.9995,19" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-(1)" transform="translate(-33.000000, -41.000000)">
+            <g id="Group" transform="translate(24.000000, 36.000000)">
+                <g id="arrow-ios-right">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="🎨-Icon-color" fill="#2A344F" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
