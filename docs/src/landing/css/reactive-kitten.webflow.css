@@ -610,6 +610,11 @@
   text-transform: uppercase;
 }
 
+.button-giant-white-default:hover {
+  background-color: #f1f1f1;
+  color: #343333;
+}
+
 .text-block-3 {
   padding-top: 0px;
   padding-bottom: 0px;
