@@ -66,7 +66,7 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
         }),
         filter(item => item),
         tap((item: any) => {
-          this.titleService.setTitle(`RNUK - ${item.name}`);
+          this.titleService.setTitle(`UI Kitten - ${item.name}`);
         }),
         publishReplay(),
         refCount(),

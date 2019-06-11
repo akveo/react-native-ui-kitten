@@ -34,7 +34,7 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
  * @extends React.Component
  *
  * @property {string} level - Determines background color level of component.
- * Can be `1`, `2`, `3` or `4`.
+ * Can be `level='1'`, `level='2'`, `level='3'` or `level='4'`.
  *
  * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines the children of the component.
  *
