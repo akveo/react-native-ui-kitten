@@ -17,7 +17,6 @@ import { NgdVersionService } from '../../services';
     </div>
     <div class="section middle">
       <nb-menu [items]="mainMenu"></nb-menu>
-      <ngd-search *ngIf="showSearch"></ngd-search>
     </div>
     <div class="section right">
       <iframe class="stars"
@@ -31,7 +30,6 @@ import { NgdVersionService } from '../../services';
 })
 export class NgdHeaderComponent implements OnInit {
 
-  @Input() showSearch = true;
   @HostBinding('class.docs-page') @Input() isDocs = false;
 
   currentVersion: string;
