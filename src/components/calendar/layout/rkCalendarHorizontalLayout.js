@@ -1,6 +1,8 @@
-import * as RkCalendarService from '../services';
+import { DAYS_IN_WEEK } from '../services/calendarDate.service';
 
 class HorizontalLayout {
+  description = 'horizontal';
+
   getLayoutConfig() {
     return {
       horizontal: true,
@@ -13,7 +15,7 @@ class HorizontalLayout {
    * returns width of list item
    */
   getItemSize(item, index, daySize) {
-    return daySize * RkCalendarService.Date.DAYS_IN_WEEK;
+    return daySize * DAYS_IN_WEEK;
   }
 
   getPrimaryAxisOffset(offset) {
@@ -21,5 +23,4 @@ class HorizontalLayout {
   }
 }
 
-export const layout = new HorizontalLayout();
-export const description = 'horizontal';
+export default new HorizontalLayout();

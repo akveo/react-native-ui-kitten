@@ -1,6 +1,19 @@
-import * as RkCalendarService from '../services';
+import {
+  today,
+  compareDates,
+  getMonthEnd,
+  getMonthStart,
+  getYearEnd,
+  getYearStart,
+  isBetweenIncludingSafe,
+  isBetweenSafe,
+  isSameDaySafe,
+} from '../services/calendarDate.service';
+import { defaultBoundingFallback } from '../services/calendarMonthModel.service';
 
 class RangedSelectionStrategy {
+  description = 'range';
+
   getStateFromSelection(state, selection) {
     const { start, end } = state.selected;
     if (start && !end) {
@@ -15,7 +28,7 @@ class RangedSelectionStrategy {
 
   getStateFromSelectionEnd(state, end) {
     const { start } = state.selected;
-    if (RkCalendarService.Date.compareDates(end, start) > 0) {
+    if (compareDates(end, start) > 0) {
       return this.getStateFromSelectionRange({ start, end });
     }
     return this.getStateFromSelectionRange({ start: end, end: start });
@@ -34,7 +47,7 @@ class RangedSelectionStrategy {
 
   isDayHighlighted(props) {
     const { date, selected } = props;
-    return RkCalendarService.Date.isBetweenSafe(date, selected.start, selected.end) || false;
+    return isBetweenSafe(date, selected.start, selected.end) || false;
   }
 
   isDayDisabled(props) {
@@ -45,19 +58,19 @@ class RangedSelectionStrategy {
       max,
     } = props;
     const isFitsFilter = props.filter(date);
-    const isBetweenRange = (RkCalendarService.Date.isBetweenIncludingSafe(date, min, max) || false);
+    const isBetweenRange = (isBetweenIncludingSafe(date, min, max) || false);
     const isBoundingDay = isBoundingDateSafe(date, monthDate) || false;
     return isBoundingDay || !isFitsFilter || !isBetweenRange;
   }
 
   isDayToday(props) {
     const { date } = props;
-    return (RkCalendarService.Date.isSameDaySafe(date, RkCalendarService.Date.today()) || false);
+    return (isSameDaySafe(date, today()) || false);
   }
 
   isDayEmpty(props) {
     const { date } = props;
-    return date === RkCalendarService.Month.defaultBoundingFallback;
+    return date === defaultBoundingFallback;
   }
 
   shouldUpdateDay(props, nextProps) {
@@ -69,7 +82,7 @@ class RangedSelectionStrategy {
   }
 
   shouldUpdateWeek(props, nextProps) {
-    const dates = props.dates.filter(d => d !== RkCalendarService.Month.defaultBoundingFallback);
+    const dates = props.dates.filter(d => d !== defaultBoundingFallback);
     const weekRange = {
       start: dates[0],
       end: dates[dates.length - 1],
@@ -81,8 +94,8 @@ class RangedSelectionStrategy {
 
   shouldUpdateMonth(props, nextProps) {
     const monthRange = {
-      start: RkCalendarService.Date.getMonthStart(props.date),
-      end: RkCalendarService.Date.getMonthEnd(props.date),
+      start: getMonthStart(props.date),
+      end: getMonthEnd(props.date),
     };
     const { date, selected: currentSelected, boundingMonth: isBoundingMonth } = props;
     const { selected: nextSelected } = nextProps;
@@ -98,8 +111,8 @@ class RangedSelectionStrategy {
 
   shouldUpdateYear(props, nextProps) {
     const yearRange = {
-      start: RkCalendarService.Date.getYearStart(props.date),
-      end: RkCalendarService.Date.getYearEnd(props.date),
+      start: getYearStart(props.date),
+      end: getYearEnd(props.date),
     };
     const wasInRange = isDateRangeInRange(yearRange, props.selected);
     const willInRange = isDateRangeInRange(yearRange, nextProps.selected);
@@ -111,11 +124,11 @@ function isDateInRange(date, range) {
   // false as default is case when month starts/ends with null date
   const { start, end } = range;
   if (start && !end) {
-    return RkCalendarService.Date.isSameDaySafe(date, start) || false;
+    return isSameDaySafe(date, start) || false;
   } else if (start && end) {
-    const isRangeStart = RkCalendarService.Date.isSameDaySafe(date, start) || false;
-    const isRangeEnd = RkCalendarService.Date.isSameDaySafe(date, end) || false;
-    const isBetweenRange = RkCalendarService.Date.isBetweenSafe(date, start, end) || false;
+    const isRangeStart = isSameDaySafe(date, start) || false;
+    const isRangeEnd = isSameDaySafe(date, end) || false;
+    const isBetweenRange = isBetweenSafe(date, start, end) || false;
     return isRangeStart || isRangeEnd || isBetweenRange;
   }
   return false;
@@ -143,5 +156,4 @@ function isBoundingRange(range, monthDate) {
   return isRangeStartBounding || isRangeEndBounding;
 }
 
-export const strategy = new RangedSelectionStrategy();
-export const description = 'range';
+export default new RangedSelectionStrategy();

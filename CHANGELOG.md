@@ -1,13 +1,22 @@
-<a name="3.1.2"></a>
+<a name="3.1.4"></a>
+## [3.1.4](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.3...v3.1.4) (2019-05-10)
+
+### Bug Fixes
+
+* **Common:** v3.1.3 critical issues ([7ea85cf](https://github.com/akveo/react-native-ui-kitten/commit/7ea85cf))
+
+* **rkChoice:** Set the same behaviour for `onChange` in rkChoiceGroup as behaviour after click on choiceTrigger element ([71e76c0](https://github.com/akveo/react-native-ui-kitten/commit/71e76c0))
+
+<a name="3.1.3"></a>
 ## [3.1.3](https://github.com/akveo/react-native-ui-kitten/compare/v3.1.2...v3.1.3) (2019-04-10)
 
 * **rkChoiceGroup:** incorrect children selection ([27f5c49](https://github.com/akveo/react-native-ui-kitten/commit/27f5c49))
 
- * **rkChoice:** incorrect `onChange` args ([ef5bf27](https://github.com/akveo/react-native-ui-kitten/commit/ef5bf27))
+* **rkChoice:** incorrect `onChange` args ([ef5bf27](https://github.com/akveo/react-native-ui-kitten/commit/ef5bf27))
 
- * **rkTextInput:** focus behavior when `onPress` called ([3598613](https://github.com/akveo/react-native-ui-kitten/commit/3598613))
+* **rkTextInput:** focus behavior when `onPress` called ([3598613](https://github.com/akveo/react-native-ui-kitten/commit/3598613))
 
- * **rkSwitch:** thumb animation ([1492f41](https://github.com/akveo/react-native-ui-kitten/commit/1492f41))
+* **rkSwitch:** thumb animation ([1492f41](https://github.com/akveo/react-native-ui-kitten/commit/1492f41))
 
 ### Bug Fixes
 

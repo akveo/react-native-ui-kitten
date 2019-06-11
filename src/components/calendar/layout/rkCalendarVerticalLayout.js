@@ -1,6 +1,8 @@
-import * as RkCalendarService from '../services';
+import { getNumberOfWeekRowsInMonth } from '../services/calendarMonthModel.service';
 
 class VerticalLayout {
+  description = 'vertical';
+
   getLayoutConfig() {
     return {
       showsVerticalScrollIndicator: false,
@@ -11,7 +13,7 @@ class VerticalLayout {
    * returns height of list item
    */
   getItemSize(item, index, daySize) {
-    const weekRowCount = RkCalendarService.Month.getNumberOfWeekRowsInMonth(item);
+    const weekRowCount = getNumberOfWeekRowsInMonth(item);
     return (weekRowCount * daySize) + 58; // + header height; TODO
   }
 
@@ -20,5 +22,4 @@ class VerticalLayout {
   }
 }
 
-export const layout = new VerticalLayout();
-export const description = 'vertical';
+export default new VerticalLayout();

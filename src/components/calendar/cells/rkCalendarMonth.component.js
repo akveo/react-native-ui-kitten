@@ -1,9 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  ViewPropTypes,
+} from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarService from '../services';
 import { RkCalendarWeek } from './rkCalendarWeek.component';
 import { RkCalendarDay } from './rkCalendarDay.component';
+import { createDaysGrid } from '../services/calendarMonthModel.service';
 
 /**
  * @extends React.Component
@@ -37,7 +40,7 @@ export class RkCalendarMonth extends React.Component {
     daySize: PropTypes.number.isRequired,
 
     style: PropTypes.shape({
-      container: View.propTypes.style,
+      container: ViewPropTypes.style,
       day: RkCalendarDay.propTypes.style,
     }),
   };
@@ -61,7 +64,7 @@ export class RkCalendarMonth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dates: RkCalendarService.Month.createDaysGrid(this.props.date, this.props.boundingMonth),
+      dates: createDaysGrid(this.props.date, this.props.boundingMonth),
     };
   }
 

@@ -2,11 +2,19 @@ import React from 'react';
 import {
   View,
   FlatList,
+  ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { RkCalendarMonth } from '../cells/rkCalendarMonth.component';
 import { RkCalendarMonthHeader } from '../common/rkCalendarMonthHeader.component';
-import * as RkCalendarService from '../services';
+import {
+  today,
+  getMonthDiff,
+  isSameMonth,
+  DAYS_IN_WEEK,
+  MONTHS_IN_YEAR,
+} from '../services/calendarDate.service';
+import { range } from '../services/calendarUtil.service';
 
 export class RkCalendarView extends React.Component {
   static propTypes = {
@@ -68,7 +76,7 @@ export class RkCalendarView extends React.Component {
     onVisibleMonthChanged: PropTypes.func,
 
     style: PropTypes.shape({
-      container: View.propTypes.style,
+      container: ViewPropTypes.style,
       header: RkCalendarMonthHeader.propTypes.style,
       month: RkCalendarMonth.propTypes.style,
     }),
@@ -91,7 +99,7 @@ export class RkCalendarView extends React.Component {
   state = {
     items: [],
     daySize: -1,
-    visibleMonth: RkCalendarService.Date.today(),
+    visibleMonth: today(),
   };
 
   listRef = undefined;
@@ -99,10 +107,10 @@ export class RkCalendarView extends React.Component {
   itemSizes = new Map();
 
   static getDerivedStateFromProps(props) {
-    const itemCount = RkCalendarService.Date.getMonthDiff(props.min, props.max);
+    const itemCount = getMonthDiff(props.min, props.max);
     const createMonthDateByIndex = (index) => new Date(props.min.getFullYear(), index, 1);
     return {
-      items: RkCalendarService.Util.range(itemCount, createMonthDateByIndex),
+      items: range(itemCount, createMonthDateByIndex),
     };
   }
 
@@ -126,12 +134,12 @@ export class RkCalendarView extends React.Component {
    * }
    */
   scrollToDate(date, params) {
-    const itemPosition = RkCalendarService.Date.getMonthDiff(this.props.min, date) - 1;
+    const itemPosition = getMonthDiff(this.props.min, date) - 1;
     this.scrollToIndex({ index: itemPosition, ...params });
   }
 
   onLayout = (event) => {
-    const state = { daySize: event.nativeEvent.layout.width / RkCalendarService.Date.DAYS_IN_WEEK };
+    const state = { daySize: event.nativeEvent.layout.width / DAYS_IN_WEEK };
     this.setState(state, this.onLayoutCompleted);
   };
 
@@ -207,7 +215,7 @@ export class RkCalendarView extends React.Component {
   };
 
   setVisibleMonthIfNeeded(date) {
-    if (!RkCalendarService.Date.isSameMonth(this.state.visibleMonth, date)) {
+    if (!isSameMonth(this.state.visibleMonth, date)) {
       this.state.visibleMonth = date;
       this.props.onVisibleMonthChanged(date);
     }
@@ -252,7 +260,7 @@ export class RkCalendarView extends React.Component {
       keyExtractor={this.getItemKey}
       onScrollEndDrag={this.onScrollEndDrag}
       onMomentumScrollEnd={this.onScrollEndFling}
-      initialNumToRender={RkCalendarService.Date.MONTHS_IN_YEAR}
+      initialNumToRender={MONTHS_IN_YEAR}
       {...this.props.layout.getLayoutConfig()}
     />
   );

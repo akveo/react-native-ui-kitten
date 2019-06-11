@@ -195,6 +195,7 @@ export class RkChoiceGroup extends RkComponent {
         this.processNotClickTrigger(child, index);
       }
       props.selected = this.choice[index];
+      props.onPress = () => this.onSelect(index);
       props.inTrigger = true;
       props.disabled = this.props.disabled;
     } else if (child.props && child.props.children) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import PropTypes from 'prop-types';
-import * as RkCalendarService from '../services';
+import CalendarLocale from '../services/calendarLocale.service';
 
 export class RkCalendarMonthName extends React.Component {
   static propTypes = {
@@ -14,7 +14,7 @@ export class RkCalendarMonthName extends React.Component {
   };
 
   render() {
-    const text = `${RkCalendarService.Locale.getMonthName(this.props.date)}, ${this.props.date.getFullYear()}`;
+    const text = `${CalendarLocale.getMonthName(this.props.date)}, ${this.props.date.getFullYear()}`;
     return (
       <Text style={this.props.style}>{text}</Text>
     );

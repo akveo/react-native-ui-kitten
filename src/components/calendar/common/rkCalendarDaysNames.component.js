@@ -4,8 +4,9 @@ import {
   View,
   Text,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
-import * as RkCalendarService from '../services';
+import CalendarLocale from '../services/calendarLocale.service';
 
 export class RkCalendarDaysNames extends React.Component {
   static propTypes = {
@@ -15,7 +16,7 @@ export class RkCalendarDaysNames extends React.Component {
      */
     daySize: PropTypes.number.isRequired,
     style: PropTypes.shape({
-      container: View.propTypes.style,
+      container: ViewPropTypes.style,
       text: Text.propTypes.style,
     }),
   };
@@ -27,7 +28,7 @@ export class RkCalendarDaysNames extends React.Component {
     },
   };
 
-  dayOfWeekNames = RkCalendarService.Locale.getDayOfWeekNames();
+  dayOfWeekNames = CalendarLocale.getDayOfWeekNames();
 
   // eslint-disable-next-line arrow-body-style
   getChildComponents = (style) => {

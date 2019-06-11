@@ -4,6 +4,7 @@ import {
   View,
   Text,
   Image,
+  ViewPropTypes,
 } from 'react-native';
 import { RkBadge } from '../badge/rkBadge.component';
 
@@ -34,8 +35,8 @@ export class RkTab extends React.Component {
 
     style: PropTypes.shape({
       container: PropTypes.shape({
-        base: View.propTypes.style,
-        selected: View.propTypes.style,
+        base: ViewPropTypes.style,
+        selected: ViewPropTypes.style,
       }),
       title: PropTypes.shape({
         base: Text.propTypes.style,

@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RkComponent } from '../rkComponent';
 import { RkCalendarView } from './common/rkCalendarView.component';
-import * as SelectionStrategy from './strategy';
-import * as Layout from './layout';
-import * as RkCalendarService from './services';
+import BaseSelectionStrategy from './strategy/baseCalendarSelectionStrategy';
+import RangeSelectionStrategy from './strategy/rangedCalendarSelectionStrategy';
+import HorizontalLayout from './layout/rkCalendarHorizontalLayout';
+import VerticalLayout from './layout/rkCalendarVerticalLayout';
+import { today } from './services/calendarDate.service';
+import { RkComponent } from '../rkComponent';
 
 const defaultScrollParams = {
   animated: true,
@@ -80,12 +82,12 @@ const defaultScrollParams = {
 export class RkCalendar extends RkComponent {
   static propTypes = {
     type: PropTypes.oneOf([
-      SelectionStrategy.Base.description,
-      SelectionStrategy.Range.description,
+      BaseSelectionStrategy.description,
+      RangeSelectionStrategy.description,
     ]),
     layout: PropTypes.oneOf([
-      Layout.Vertical.description,
-      Layout.Horizontal.description,
+      VerticalLayout.description,
+      HorizontalLayout.description,
     ]),
     min: PropTypes.instanceOf(Date).isRequired,
     max: PropTypes.instanceOf(Date).isRequired,
@@ -97,8 +99,8 @@ export class RkCalendar extends RkComponent {
   };
 
   static defaultProps = {
-    type: SelectionStrategy.Base.description,
-    layout: Layout.Vertical.description,
+    type: BaseSelectionStrategy.description,
+    layout: VerticalLayout.description,
     boundingMonth: true,
     renderDay: undefined,
     filter: (() => true),
@@ -115,11 +117,11 @@ export class RkCalendar extends RkComponent {
 
   state = {
     selected: {
-      start: RkCalendarService.Date.today(),
+      start: today(),
       end: undefined,
     },
-    visibleMonth: RkCalendarService.Date.today(),
-    selectionStrategy: SelectionStrategy.Base.strategy,
+    visibleMonth: today(),
+    selectionStrategy: BaseSelectionStrategy,
   };
 
   containerRef = undefined;
@@ -145,9 +147,8 @@ export class RkCalendar extends RkComponent {
   };
 
   onContainerLayoutCompleted = () => {
-    const today = RkCalendarService.Date.today();
     const scrollToToday = () => {
-      this.scrollToDate(today, { animated: false });
+      this.scrollToDate(today(), { animated: false });
     };
     setTimeout(scrollToToday, 100);
   };
@@ -183,7 +184,7 @@ export class RkCalendar extends RkComponent {
    * @param {object} params - additional scroll parameters (optional)
    */
   scrollToToday(params = defaultScrollParams) {
-    this.scrollToDate(RkCalendarService.Date.today(), params);
+    this.scrollToDate(today(), params);
   }
 
   /**
@@ -214,17 +215,17 @@ export class RkCalendar extends RkComponent {
 
   getSelectionStrategy = (type) => {
     switch (type) {
-      case SelectionStrategy.Base.description: return SelectionStrategy.Base.strategy;
-      case SelectionStrategy.Range.description: return SelectionStrategy.Range.strategy;
-      default: return SelectionStrategy.Base.strategy;
+      case BaseSelectionStrategy.description: return BaseSelectionStrategy;
+      case RangeSelectionStrategy.description: return RangeSelectionStrategy;
+      default: return BaseSelectionStrategy;
     }
   };
 
   getLayout = (type) => {
     switch (type) {
-      case Layout.Vertical.description: return Layout.Vertical.layout;
-      case Layout.Horizontal.description: return Layout.Horizontal.layout;
-      default: return Layout.Vertical.layout;
+      case VerticalLayout.description: return VerticalLayout;
+      case HorizontalLayout.description: return HorizontalLayout;
+      default: return VerticalLayout.layout;
     }
   };
 
