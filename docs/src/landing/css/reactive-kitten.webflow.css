@@ -822,6 +822,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 .div-block-30 {
