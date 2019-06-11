@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="14px" viewBox="0 0 7 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>arrow-ios-left</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M13.8286,19 C13.5366,19 13.2466,18.873 13.0486,18.627 L8.2206,12.627 C7.9226,12.256 7.9266,11.726 8.2316,11.36 L13.2316,5.36 C13.5846,4.936 14.2156,4.879 14.6406,5.232 C15.0646,5.585 15.1216,6.216 14.7676,6.64 L10.2926,12.011 L14.6076,17.373 C14.9536,17.803 14.8856,18.433 14.4546,18.779 C14.2706,18.928 14.0486,19 13.8286,19" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="arrow-ios-left" transform="translate(-8.000000, -5.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="🎨-Icon-color" fill="#2A344F" fill-rule="evenodd" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>
