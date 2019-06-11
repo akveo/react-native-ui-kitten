@@ -2638,3 +2638,9 @@
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
 }
+
+.gh-stars {
+  width: 95px;
+  height: 20px;
+  margin-left: auto;
+}
