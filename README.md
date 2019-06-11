@@ -1,30 +1,31 @@
-<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png"/>
 
 # UI Kitten [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />][link:eva] [![npm][badge:license]]() [![Build Status][badge:travis]][link:travis] [![Coverage Status][badge:coveralls]][link:coveralls]
 
 [Documentation][link:doc-homepage]
 
-UI Kitten is a React Native framework for creating stunning cross-platform mobile applications.
-This UI Library based on Eva Design System which brings consistency and scalability in the design and development process. 
+UI Kitten is a React Native UI Library that allows you creating stunning multi-brand cross-platform mobile applications. 
+The library is based on Eva Design System which brings consistency and scalability in the design and development process. 
 It contains a set of general purpose UI components styled in a similar way. 
-And the most awesome thing: the themes can be changed in the runtime, without any need of reloading the application.
+And the most awesome thing: the themes can be changed in the runtime, with no need to reload the application.
 
 100% Free and Open Source!
 
+[<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png">][link:doc-homepage]
+
 ## What's included
 
-- **Almost 20 general purpose components** designed and tested to save you time while. 
+- **20+ general-purpose components** designed and tested to save your time.
 
 - **Comprehensive clear documentation** with the tons of examples.
 
-- **Theming System**. Use Light and modern Dark themes and create your own ones.
+- **Theming System.** Use Light and modern Dark themes and create your own.
 
-- **Eva Design System Support**. Construct any interface using basic components following Eva Guidelines and it will always have a stunning design. 
+- **Eva Design System Support.** Construct an interface using basic components following Eva specifications and it will always have a stunning design.
 
 ## Starter App
 
 **Kitten Tricks** – [react-native starter kit][link:kitten-tricks] allows you to boost the development of a mobile app.
-There are a huge variety of customizable layouts, use “as is” or add new blocks. 
+There is a huge variety of customizable layouts, use “as is” or add new blocks.
 
 **Over 40 screens in dark and light themes** give you the possibility to create a bright and exclusive app while saving your time on compiling numerous details.  Also, you can download the source code and use it for your own benefit.  
 
