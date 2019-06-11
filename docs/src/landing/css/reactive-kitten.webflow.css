@@ -826,6 +826,12 @@
   overflow-x: hidden;
 }
 
+@media (min-width: 50em) {
+  .theme-section {
+    overflow: visible;
+  }
+}
+
 .div-block-30 {
   overflow: visible;
   width: 100%;
