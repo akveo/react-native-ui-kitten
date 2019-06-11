@@ -31,3 +31,7 @@ body {
   min-width: 320px;
   -webkit-font-smoothing: antialiased;
 }
+
+nb-layout-header.fixed {
+  top: 0;
+}
