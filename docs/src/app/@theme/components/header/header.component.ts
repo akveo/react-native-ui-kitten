@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
-import { NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { ChangeDetectionStrategy, Component, HostBinding, Inject, Input, OnInit } from '@angular/core';
+import { NB_WINDOW, NbMenuItem, NbSidebarService } from '@nebular/theme';
 import { NgdVersionService } from '../../services';
 
 @Component({
@@ -17,6 +17,11 @@ import { NgdVersionService } from '../../services';
     </div>
     <div class="section middle">
       <nb-menu [items]="mainMenu"></nb-menu>
+      <nb-select class="version-select" [selected]="currentVersion" (selectedChange)="redirectToVersion($event)">
+        <nb-option *ngFor="let version of versions" [value]="version">
+          {{ version }}
+        </nb-option>
+      </nb-select>
     </div>
     <div class="section right">
       <iframe class="stars"
@@ -32,6 +37,8 @@ export class NgdHeaderComponent implements OnInit {
 
   @HostBinding('class.docs-page') @Input() isDocs = false;
 
+  private window: Window;
+  versions: string[];
   currentVersion: string;
 
   mainMenu: NbMenuItem[] = [
@@ -52,22 +59,29 @@ export class NgdHeaderComponent implements OnInit {
   @Input() sidebarTag: string;
 
   constructor(
-    versionService: NgdVersionService,
+    @Inject(NB_WINDOW) window,
+    private versionService: NgdVersionService,
     private sidebarService: NbSidebarService,
   ) {
+    this.window = window;
     this.currentVersion = versionService.getKittenVersion();
+    this.versions = versionService.getKittenVersions();
   }
 
   ngOnInit() {
     if (!this.isDocs) {
       this.mainMenu.push({
         title: 'Professional Services',
-        link: '/getting-started/professional-services',
+        link: '/docs/getting-started/professional-services',
       });
     }
   }
 
   toggleSidebar() {
     this.sidebarService.toggle(false, this.sidebarTag);
+  }
+
+  redirectToVersion(version: string): void {
+    this.window.location.href = this.versionService.getVersionPath(version);
   }
 }
