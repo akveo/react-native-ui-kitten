@@ -10,7 +10,7 @@ And the most awesome thing: the themes can be changed in the runtime, with no ne
 
 100% Free and Open Source!
 
-[<img src="https://cdn.rawgit.com/akveo/react-native-ui-kitten/085afb52/docs/assets/banner.png">][link:doc-homepage]
+[<img src="https://i.imgur.com/pYl0trU.jpg">][link:doc-homepage]
 
 ## What's included
 
