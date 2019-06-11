@@ -43,7 +43,7 @@ export class NgdOverviewBlockComponent {
 
   private prepareDescription(source): any {
     source.description = source.description.replace('undefined', '');
-    source.images = source.images.map((image: string) => `../../../assets/images/overview/${image}`);
+    source.images = source.images.map((image: string) => `assets/images/overview/${image}`);
     return source;
   }
 
