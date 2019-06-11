@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="13px" viewBox="0 0 18 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>menu@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20.0513,11 C20.5733,11 21.0003,11.427 21.0003,11.949 L21.0003,12.051 C21.0003,12.573 20.5733,13 20.0513,13 L3.9483,13 C3.4263,13 3.0003,12.573 3.0003,12.051 L3.0003,11.949 C3.0003,11.427 3.4263,11 3.9483,11 L20.0513,11 Z M20.0513,16 C20.5733,16 21.0003,16.427 21.0003,16.949 L21.0003,17.051 C21.0003,17.573 20.5733,18 20.0513,18 L3.9483,18 C3.4263,18 3.0003,17.573 3.0003,17.051 L3.0003,16.949 C3.0003,16.427 3.4263,16 3.9483,16 L20.0513,16 Z M20.0513,6 C20.5733,6 21.0003,6.427 21.0003,6.949 L21.0003,7.051 C21.0003,7.573 20.5733,8 20.0513,8 L3.9483,8 C3.4263,8 3.0003,7.573 3.0003,7.051 L3.0003,6.949 C3.0003,6.427 3.4263,6 3.9483,6 L20.0513,6 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Version-9-webflow" transform="translate(-417.000000, -145.000000)">
+            <g id="menu" transform="translate(414.000000, 139.881060)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="🎨-Icon-color" fill="#222B45" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

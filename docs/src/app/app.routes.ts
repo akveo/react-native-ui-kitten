@@ -9,10 +9,6 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: './home/home.module#NgdHomeModule',
-  },
-  {
-    path: 'docs',
     loadChildren: './documentation/documentation.module#NgdDocumentationModule',
   },
   {

@@ -1,28 +1,17 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
-
-  $bg: #f6f6f7;
-  $fg: #8994a3;
-
   position: relative;
 
   input {
-    border-radius: 4px;
-    background-color: $bg;
-    padding: 0.685rem 3rem;
-    border: none;
-
-    &::placeholder {
-      color: $fg;
-    }
+    padding-left: 3rem;
   }
 
   nb-icon {
-    color: $fg;
+    color: nb-theme(input-placeholder-text-color);
     position: absolute;
     top: 50%;
-    transform: translate(0, -50%);
+    transform: translateY(-50%);
     left: 1rem;
     z-index: 1;
     font-size: 1.25rem;

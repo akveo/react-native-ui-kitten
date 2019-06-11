@@ -37,7 +37,7 @@ export class NgdPaginationService {
               private menuService: NgdMenuService) {
   }
 
-  setPaginationItems(basePath: string) {
+  setPaginationItems(basePath: string = '') {
     this.paginationItems = this.addPrevNextPointers(
       this.prepareItems(
         this.structureService.getPreparedStructure(),

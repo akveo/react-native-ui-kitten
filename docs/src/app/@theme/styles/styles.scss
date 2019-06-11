@@ -16,6 +16,9 @@
   @include nb-search-theme();
   @include nb-bootstrap-global();
   @include nb-icon-theme();
+  @include nb-select-theme();
+  @include nb-input-theme();
+  @include nb-overlay-theme();
 
   @include nb-typography();
 

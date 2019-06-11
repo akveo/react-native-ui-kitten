@@ -17,10 +17,10 @@ import {
       <nb-card-body>
         <ng-container class="description">
           <ng-container>
-            <div [innerHTML]="source.description"
+            <div [innerHTML]="description"
                  [ngStyle]="hasImage && {'margin-bottom': '16px'}"></div>
             <img
-              *ngFor="let image of source.images"
+              *ngFor="let image of images"
               src={{image}}
             />
           </ng-container>
@@ -33,6 +33,8 @@ import {
 export class NgdOverviewBlockComponent {
 
   source: any;
+  images: string[];
+  description: string;
   hasImage: boolean;
 
   @Input('source')
@@ -42,8 +44,8 @@ export class NgdOverviewBlockComponent {
   }
 
   private prepareDescription(source): any {
-    source.description = source.description.replace('undefined', '');
-    source.images = source.images.map((image: string) => `../../../assets/images/overview/${image}`);
+    this.description = source.description.replace('undefined', '');
+    this.images = source.images.map((image: string) => `assets/images/overview/${image}`);
     return source;
   }
 

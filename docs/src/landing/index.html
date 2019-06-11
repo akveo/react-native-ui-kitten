@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-wf-page="5cfe3444ba6e260214eb8bb0" data-wf-site="5cfe3444ba6e26ec25eb8baf">
+<head>
+  <meta charset="utf-8">
+  <title>UI kitten - React Native UI Library based on Eva Design System</title>
+  <meta name="description" content="UI Kitten is an Open Source UI framework based on React Native with 20 customizable components and Dark/Light themes for building cross-platform mobile apps">
+  <meta name="keywords" content="React native, React native UI library, open source framework, free ui library, starter kit, ui toolkit, framework, UI Components, free react native ui library, react native ui kit">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/reactive-kitten.webflow.css" rel="stylesheet" type="text/css">
+  <style>@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="9b87f2f0-34f0-cc05-570a-8c7e43d49742"] {background-color:rgba(0,0,0,0);}}@media (max-width:991px) and (min-width:768px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="9b87f2f0-34f0-cc05-570a-8c7e43d49742"] {background-color:rgba(0,0,0,0);}}</style>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/react-native-ui-kitten/docs/assets/img/favicon/favicon-1.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/react-native-ui-kitten/docs/assets/img/favicon/favicon-1@2x.png">
+
+  <!-- Google Tag Manager -->
+  <script>
+    dataLayer = [];
+  </script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-K8MXX5F');</script>
+  <!-- End Google Tag Manager -->
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Raleway:100,200,300,regular,500,600,700,800,900"]  }});</script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8MXX5F"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div data-collapse="small" data-animation="default" data-duration="120" data-easing="ease-in" data-easing2="ease-in" data-w-id="9b87f2f0-34f0-cc05-570a-8c7e43d49742" class="navbar w-nav">
+    <div class="div-block-62">
+      <a href="/react-native-ui-kitten" class="brand w-nav-brand" title="Reactive Kitten"><img src="images/Group-142x.png" width="153" alt="Reactive Kitten" class="image-24"></a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        <a href="/react-native-ui-kitten/docs" class="button-nav w-nav-link">Documentation</a>
+        <a href="https://github.com/akveo/react-native-ui-kitten" class="button-nav w-nav-link">GitHub</a>
+      </nav>
+      <iframe class="gh-stars"
+              src="https://ghbtns.com/github-btn.html?user=akveo&repo=react-native-ui-kitten&type=star&count=true"
+              frameborder="0"
+              scrolling="0">
+      </iframe>
+      <div class="menu-button w-nav-button"><img src="images/menu2x.svg" alt=""></div>
+    </div>
+  </div>
+  <div class="hero-section">
+    <div class="container-hero">
+      <h1 class="text-heading-1 default">UI Kitten 4.0</h1>
+      <div class="div-block-6">
+        <p class="text-paragraph-1 default">React Native framework for creating stunning cross-platform mobile applications. Design system based, brings your product from MVP to enterprise. Forever Open Source and free!</p>
+      </div>
+      <div class="buttons">
+        <a href="docs" class="button-giant-primary-default w-button">Get started</a>
+        <a href="#kitten-tricks" class="button-giant-primary-ghost w-button">Demo</a></div>
+    </div>
+    <div class="div-block-64"><img src="images/Artboard-1.png" srcset="images/Artboard-1.png 500w, images/Artboard-1.png 800w, images/Artboard-1.png 1080w, images/Artboard-1.png 1600w, images/Artboard-1.png 1699w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 70vw, (max-width: 2831px) 60vw, 1699px" alt="" class="image-25"></div>
+  </div>
+  <div class="what-is-ui-kitten">
+    <div class="div-block-24">
+      <div class="div-block-9">
+        <h1 class="text-heading-2 default center">What is UI Kitten</h1>
+        <div class="div-block-7">
+          <p class="text-paragraph-1 default center">UI Kitten is a React Native implementation of Eva Design System. It contains a set of general purpose UI components styled in a similar way. You focus on business logic and the Kitten takes care of visual appearance. And the most awesome thing: the themes can be changed in the runtime, without any need of reloading the application.<br></p>
+        </div>
+      </div>
+      <div class="div-block-8">
+        <a href="/react-native-ui-kitten/docs/components/components-overview" target="_blank" class="feature-card w-inline-block">
+          <img src="images/icon-1.png" srcset="images/icon-1-p-500.png 500w, images/icon-1.png 560w" sizes="(max-width: 479px) 100vw, (max-width: 767px) 63vw, (max-width: 991px) 322px, 21vw" alt="" class="image-4">
+          <h1 class="feature-title">Components</h1>
+          <p class="feature-text">Almost 20 general purpose components designed and tested to save development time while providing smooth app experience</p>
+        </a>
+        <a href="/react-native-ui-kitten/docs/guides/theme-system" target="_blank" class="feature-card w-inline-block">
+          <img src="images/icon-3.png" srcset="images/icon-3-p-500.png 500w, images/icon-3.png 560w" sizes="(max-width: 479px) 100vw, (max-width: 767px) 63vw, (max-width: 991px) 322px, 21vw" alt="" class="image-4">
+          <h1 class="feature-title">Theming System</h1>
+          <p class="feature-text">Use several themes and create your own ones. UI Kitten is based on Eva Design system and it will keep your app clean</p>
+        </a>
+        <a href="/react-native-ui-kitten/docs/getting-started" target="_blank" class="feature-card w-inline-block">
+          <img src="images/icon-2.png" srcset="images/icon-2-p-500.png 500w, images/icon-2.png 560w" sizes="(max-width: 479px) 100vw, (max-width: 767px) 63vw, (max-width: 991px) 322px, 21vw" alt="" class="image-4">
+          <h1 class="feature-title">Guides</h1>
+          <p class="feature-text">Comprehensive clear documentation with the tons of examples can answer any questions that a developer might have</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="how-to-use-the-ui-kitten">
+    <div class="div-block-11">
+      <div id="w-node-e2e89f03d1a5-14eb8bb0" class="div-block-12">
+        <div class="div-block-61">
+          <h1 class="text-heading-2 alternative center">How to use<br>the UI Kitten?</h1>
+        </div>
+        <a href="/react-native-ui-kitten/docs" class="button-giant-white-default w-button">Start App creation</a>
+      </div>
+      <div class="div-block-18">
+        <div class="div-block-27">
+          <div class="div-block-63">
+            <div class="text-subtitle-1 default left">1. Install the UI Kitten package from the NPM<br></div>
+            <div class="div-block-19">
+              <div class="text-block-3"><span>npm i react-native-ui-kitten @eva-design/eva</span></div>
+            </div>
+          </div>
+          <div class="text-subtitle-1 default left">2. Import the component and use it in your project</div>
+          <div class="div-block-19">
+            <div class="text-block-3"><span>import React from &#x27;react&#x27;;<br>import { Button } from &#x27;react-native-ui-kitten&#x27;;<br>export const AwesomeButton = () =&gt; (<br>  &lt;Button&gt;BUTTON&lt;/Button&gt;<br>);</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="awesome-themes-image">
+    <div class="div-block-28">
+      <h1 class="text-heading-2 default center">Multi Theming</h1>
+      <div class="div-block-29">
+        <p class="text-paragraph-1 default center">Unlock the true power of theming system by switching between available Light and Dark themes in the runtime. Drive diversity through creating as many themes as you or your users wish without changing the source code of the components.</p>
+      </div>
+    </div>
+    <div class="div-block-2"></div>
+  </div>
+  <div class="theme-section">
+    <div class="div-block-2"></div><img src="images/Iphone-without-shadow.png" width="349" srcset="images/Iphone-without-shadow-p-500.png 500w, images/Iphone-without-shadow.png 610w" sizes="(max-width: 479px) 100vw, 349px" data-w-id="014a5ce4-a693-dbc6-952f-54d52d50d350" alt="">
+    <div class="div-block-30"><img src="https://uploads-ssl.webflow.com/5cef8a515742d7a5557d20e6/5cf9342dbdc7495b9e74e9cd_Path%202.svg" alt="" class="image-10"></div>
+  </div>
+  <div class="eva-design-system">
+    <div class="div-block-39">
+      <h1 class="text-overline-1 default">BASED ON</h1>
+      <h1 class="text-heading-1 default">Eva Design System</h1>
+      <div class="div-block-38">
+        <p class="text-paragraph-1 default">Construct stunning &amp; consistent interfaces using atomic components by following Eva Design System specifications.<br></p>
+      </div><a href="http://eva.design/" class="button-giant-primary-default w-button">Learn more <span class="visually-hidden">about Eva Design System</span></a></div>
+    <div class="div-block-41"><img src="images/Colors2x.png" width="684" srcset="images/Colors2x-p-500.png 500w, images/Colors2x-p-800.png 800w, images/Colors2x-p-1080.png 1080w, images/Colors2x.png 1368w" sizes="(max-width: 479px) 100vw, (max-width: 767px) 320px, (max-width: 991px) 36vw, 44vw" data-w-id="61ae29fb-6fc2-d9f7-1469-17e940576f91" alt="" class="image-17"><img src="images/Components2x.png" width="671" srcset="images/Components2x-p-500.png 500w, images/Components2x-p-800.png 800w, images/Components2x-p-1080.png 1080w, images/Components2x.png 1342w" sizes="(max-width: 479px) 100vw, (max-width: 767px) 320px, (max-width: 991px) 36vw, 44vw" data-w-id="61ae29fb-6fc2-d9f7-1469-17e940576f92" alt="" class="image-18"></div>
+  </div>
+  <div id="kitten-tricks" class="section-kitten-tricks">
+    <div data-w-id="ec2682e9-1229-425d-37ee-e79e6a6487a3" style="opacity:0" class="div-block-35">
+      <h1 class="text-overline-1 alternative">Demo App</h1>
+      <h1 class="text-heading-1 alternative center">Kitten Tricks</h1>
+      <div class="div-block-32">
+        <p class="text-paragraph-1 alternative left">See UI Kitten in action, download a live Demo published on both App Store and Google Play or simply run it yourself by cloning a GitHub repo. You can use it as a starter kit for your next mobile app for any domain: e-commerce, social, fitness, etc. Compose the application from available screens, add backend integration and you will end up with A-grade cross-platform mobile application.</p>
+      </div>
+      <div class="button-group">
+        <a href="https://itunes.apple.com/us/app/kitten-tricks/id1246143230" class="app-button w-inline-block" title="download on the app store"><img src="images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.png" srcset="images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917-p-500.png 500w, images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.png 519w" sizes="(max-width: 479px) 100vw, (max-width: 991px) 240px, 170px" alt="" class="image-12"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks" class="app-button w-inline-block" title="get it on google play"><img src="images/google-play-badge.png" srcset="images/google-play-badge-p-500.png 500w, images/google-play-badge.png 525w" sizes="(max-width: 479px) 100vw, (max-width: 991px) 240px, 170px" alt=""></a>
+        <a href="https://github.com/akveo/react-native-ui-kitten" class="app-button w-inline-block" title="view it on GitHub"><img src="images/github.png" srcset="images/github-p-500.png 500w, images/github.png 528w" sizes="(max-width: 479px) 100vw, (max-width: 991px) 240px, 170px" alt=""></a>
+      </div>
+    </div>
+    <div class="div-block-36">
+      <div class="div-block-47">
+        <div data-poster-url="https://uploads-ssl.webflow.com/5cfe3444ba6e26ec25eb8baf/5cfe6b855de64783a68ab4ab_Comp 1_3 big-poster-00001.jpg" data-video-urls="https://uploads-ssl.webflow.com/5cfe3444ba6e26ec25eb8baf/5cfe6b855de64783a68ab4ab_Comp 1_3 big-transcode.mp4,https://uploads-ssl.webflow.com/5cfe3444ba6e26ec25eb8baf/5cfe6b855de64783a68ab4ab_Comp 1_3 big-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video w-background-video w-background-video-atom"><video autoplay="" loop="" style="background-image:url(&quot;https://uploads-ssl.webflow.com/5cfe3444ba6e26ec25eb8baf/5cfe6b855de64783a68ab4ab_Comp 1_3 big-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true"><source src="https://uploads-ssl.webflow.com/5cfe3444ba6e26ec25eb8baf/5cfe6b855de64783a68ab4ab_Comp 1_3 big-transcode.mp4" data-wf-ignore="true"><source src="https://uploads-ssl.webflow.com/5cfe3444ba6e26ec25eb8baf/5cfe6b855de64783a68ab4ab_Comp 1_3 big-transcode.webm" data-wf-ignore="true"></video></div>
+      </div>
+      <div class="div-block-37"><img src="images/iPhoneX.svg" alt="" class="image-13"><img src="images/Group-14.png" data-w-id="ec2682e9-1229-425d-37ee-e79e6a6487b6" alt="" class="image-16"><img src="images/Group-15.png" width="991.5" data-w-id="ec2682e9-1229-425d-37ee-e79e6a6487b7" alt="" class="image-15"></div>
+    </div>
+  </div>
+  <div class="section-feedback">
+    <div class="div-block-53">
+      <h1 class="text-heading-2 default center">Kitten Lovers</h1>
+    </div>
+    <div data-animation="outin" data-nav-spacing="4" data-duration="500" data-infinite="1" class="slider w-slider">
+      <div class="w-slider-mask">
+        <div class="slide w-slide">
+          <div class="div-block-43">
+            <div class="div-block-49">
+              <div class="card-feeback">
+                <div class="feedback-header">
+                  <h4 class="text-heading-5">Kanakala Sumanth</h4>
+                </div>
+                <div class="div-block-50"></div>
+                <div class="div-block-45">
+                  <p class="text-paragraph-2 quote">This is just awesome. Very useful and can be easily implementented on native apps like. Thanks to these guys. Saved a lot of effort.</p>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks&reviewId=gp%3AAOqpTOHoA56MHtD6JPSWInbxCwhIW4Vru00PpNMOexLgCQA1TZLTDbdkyJ4W3idB3NEpJXZha3Ysm5giQuEv" class="link-block w-inline-block">
+                  <div class="text-link">Read original comment</div>
+                  <div class="div-block-51"><img src="images/arrow-right-white.svg" alt="" class="image-19"></div>
+                </a>
+              </div>
+              <div class="card-feeback">
+                <div class="feedback-header">
+                  <h4 class="text-heading-5">Priyank Agrawal</h4>
+                </div>
+                <div class="div-block-50"></div>
+                <div class="div-block-45">
+                  <p class="text-paragraph-2 quote">Hey <a href="https://twitter.com/akveo_inc" class="link">@akveo_inc</a>, react-native-ui-kitten is amazing. FeatureRequest: Add a component for popup/dialog box in the theme and demo in app.</p>
+                </div>
+                <a href="https://twitter.com/priyankinfinnov/status/934069326222467072" class="link-block w-inline-block">
+                  <div class="text-link">Read original comment</div>
+                  <div class="div-block-51"><img src="images/arrow-right-white.svg" alt="" class="image-19"></div>
+                </a>
+              </div>
+              <div class="card-feeback">
+                <div class="feedback-header">
+                  <h4 class="text-heading-5">John Veldboom</h4>
+                </div>
+                <div class="div-block-50"></div>
+                <div class="div-block-45">
+                  <p class="text-paragraph-2 quote">Nice UI/UX. Looking forward to trying it on next project.</p>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks&reviewId=gp%3AAOqpTOElWV57-lVak3j-bfdaWnEqpSQ9E9pyL8PkjYDCX-mj20qanrZxv2hb_hrll93alzkyhrCeJ5108XVT" class="link-block w-inline-block">
+                  <div class="text-link">Read original comment</div>
+                  <div class="div-block-51"><img src="images/arrow-right-white.svg" alt="" class="image-19"></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-2 w-slide">
+          <div class="div-block-49">
+            <div class="card-feeback">
+              <div class="feedback-header">
+                <h4 class="text-heading-5">Peter Cruckshank</h4>
+              </div>
+              <div class="div-block-50"></div>
+              <div class="div-block-45">
+                <p class="text-paragraph-2 quote">Great jod with the UI. It’s a nice looking app, can’t wait to check it out on another system.</p>
+              </div>
+              <a href="https://play.google.com/store/apps/details?id=com.akveo.kittenTricks&reviewId=gp%3AAOqpTOGHCd5_-lDuMWVMAPESPH3uh_SHrsXYvnEdvP4g98sMni2Ry6QdFXWOIKFQcbNMZPsqlDIXqr6HM7fH" class="link-block w-inline-block">
+                <div class="text-link">Read original comment</div>
+                <div class="div-block-51"><img src="images/arrow-right-white.svg" alt="" class="image-19"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="left-arrow w-slider-arrow-left">
+        <div class="button-slider-arrow left"><img src="images/arrow-ios-left.svg" alt="" class="image-21"></div>
+      </div>
+      <div class="right-arrow w-slider-arrow-right">
+        <div class="button-slider-arrow right"><img src="images/Group.svg" alt="" class="image-21"></div>
+      </div>
+      <div class="slide-nav w-slider-nav w-round"></div>
+    </div>
+  </div>
+  <div class="section-calltoaction">
+    <div class="div-block-54">
+      <div class="div-block-55">
+        <h1 class="text-overline-1 alternative center">Bring your creative ideas to life</h1>
+        <h1 class="text-heading-2 alternative center">With UI Kitten</h1>
+      </div>
+      <a href="/react-native-ui-kitten/docs" class="button-giant-white-default w-button">Start App creation</a>
+    </div>
+  </div>
+  <div class="section-footer">
+    <div class="div-block-56">
+      <div id="w-node-612d7842f3d6-14eb8bb0" class="div-block-57"><img src="images/Logo-Secondary.svg" alt="" class="image-23"></div>
+      <div id="w-node-612d7842f3d8-14eb8bb0" class="div-block-58">
+        <h6 class="text-subtitle-1">Other Products</h6>
+        <div class="div-block-59"><a href="https://www.akveo.com/" class="text-link-footer">Akveo Website</a><a href="https://akveo.github.io/nebular/" class="text-link-footer">Nebular</a><a href="http://eva.design/" class="text-link-footer">Eva Design System</a><a href="https://akveo.github.io/eva-icons/" class="text-link-footer">Eva Icons</a><a href="https://uibakery.io/" class="text-link-footer">UI Bakery</a></div>
+      </div>
+      <div id="w-node-612d7842f3e6-14eb8bb0">
+        <h6 class="text-subtitle-1">Follow Us</h6>
+        <div class="div-block-59"><a href="https://twitter.com/akveo_inc" class="text-link-footer">Twitter</a><a href="https://www.facebook.com/akveo/" class="text-link-footer">Facebook</a><a href="https://www.linkedin.com/company/akveo/" class="text-link-footer">LinkedIn</a><a href="https://github.com/akveo" class="text-link-footer">GitHub</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="text-caption-1 hint center">© 2015-2019 Akveo LLC.<br>Documentation licensed under CC BY 4.0.</div>
+  </div>
+  <script src="https://d1tdp7z6w94jbb.cloudfront.net/js/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+</body>
+</html>

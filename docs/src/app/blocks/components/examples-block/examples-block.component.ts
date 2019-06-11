@@ -35,7 +35,7 @@ export class NgdExamplesBlockComponent {
     this.examples = source.examples;
   }
 
-  protected hasExamples(): boolean {
+  hasExamples(): boolean {
     return this.examples.length !== 0;
   }
 }
