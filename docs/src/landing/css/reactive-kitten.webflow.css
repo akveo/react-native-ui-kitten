@@ -1537,7 +1537,10 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-image: radial-gradient(circle farthest-corner at 100% 50%, #ff8935, #ff5618);
+  background-image: url('../images/pattern.svg'), radial-gradient(circle farthest-corner at 100% 50%, #ff8935, #ff5618);
+  background-position: 50% 50%, 0px 0px;
+  background-size: auto 100%, auto;
+  background-repeat: repeat, repeat;
 }
 
 .div-block-54 {
