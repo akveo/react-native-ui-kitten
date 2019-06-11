@@ -136,6 +136,20 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Text',
+        icon: 'text.svg',
+        source: [
+          'Text',
+        ],
+        overview: [
+          {
+            name: 'Text',
+            images: ['text.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Layout',
         icon: 'layout.svg',
         source: [
@@ -380,20 +394,6 @@ export const structure = [
           {
             name: 'Avatar',
             images: ['avatar.png'],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Text',
-        icon: 'text.svg',
-        source: [
-          'Text',
-        ],
-        overview: [
-          {
-            name: 'Text',
-            images: ['text.png'],
           },
         ],
       },
