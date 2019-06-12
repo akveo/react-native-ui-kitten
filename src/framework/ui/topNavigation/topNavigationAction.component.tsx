@@ -76,6 +76,8 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
       iconMarginHorizontal,
     } = source;
 
+    const hitSlop: number = 40 - iconWidth;
+
     return {
       container: {
         marginHorizontal: iconMarginHorizontal,
@@ -87,6 +89,12 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
         width: iconWidth,
         height: iconHeight,
         ...styles.icon,
+      },
+      hitSlop: {
+        top: hitSlop,
+        left: hitSlop,
+        bottom: hitSlop,
+        right: hitSlop,
       },
     };
   };
@@ -103,6 +111,7 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
     return (
       <TouchableOpacity
         activeOpacity={1.0}
+        hitSlop={componentStyle.hitSlop}
         {...touchableProps}
         style={componentStyle.container}
         onPress={this.onPress}
