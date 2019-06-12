@@ -25,7 +25,7 @@ npm i @eva-design/eva
 ### Applying Theme System
 
 ```tsx
-import { mapping, theme } from '@eva-design/eva';
+import { mapping, light as lightTheme } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import { Application } from './path-to/root.component';
 
@@ -35,7 +35,7 @@ export default class App extends React.Component {
      return (
        <ApplicationProvider
          mapping={mapping}
-         theme={theme}>
+         theme={lightTheme}>
          <Application/>
        </ApplicationProvider>
      );

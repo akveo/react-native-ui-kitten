@@ -121,7 +121,7 @@ All that you have to do is to provide a custom mapping to ApplicationProvider.
 
 ```tsx
 import React from 'react';
-import { mapping, theme } from '@eva-design/eva';
+import { mapping, light as lightTheme } from '@eva-design/eva';
 @import { 
   ApplicationProvider,
   ApplicationProviderProps,
@@ -135,7 +135,7 @@ export default class App extends React.Component<ApplicationProviderProps> {
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={theme}
+        theme={lightTheme}
         customMapping={customMapping}>
         <Application/>
       </ApplicationProvider>

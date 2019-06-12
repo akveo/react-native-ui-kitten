@@ -41,14 +41,14 @@ Modify your application root:
 
 ```jsx
 import React from 'react';
-import { mapping, theme } from '@eva-design/eva';
+import { mapping, light as lightTheme } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import { Application } from './path-to/application.component';
 
 export default App = () => (
   <ApplicationProvider 
     mapping={mapping}
-    theme={theme}
+    theme={lightTheme}
     <Application/>
   </ApplicationProvider>
 );
