@@ -9,7 +9,7 @@ through the property into the `ApplicationProvider`.
 ### Changing Theme Example
 
 ```tsx
-import { mapping, theme } from '@eva-design/eva';
+import { mapping, light as lightTheme } from '@eva-design/eva';
 import { customTheme } from './path-to/custom-theme;
 import {
   ApplicationProvider,
@@ -24,7 +24,7 @@ interface AppState {
 export default class App extends React.Component<any, State> {
 
   public state: State = {
-    theme: theme,
+    theme: lightTheme,
   };
   
   private changeTheme = () => {
