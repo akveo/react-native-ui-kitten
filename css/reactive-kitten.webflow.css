@@ -733,7 +733,7 @@
   height: 100%;
   max-width: none;
   margin-left: 0px;
-  padding: 7% 10%;
+  padding: 7% 6%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -1946,6 +1946,13 @@
 
 .div-block-67 {
   width: 100%;
+}
+
+.link-2 {
+  font-family: 'Open Sans', sans-serif;
+  color: #ff6721;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 @media (max-width: 991px) {
