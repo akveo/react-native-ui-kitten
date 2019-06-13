@@ -239,12 +239,12 @@ Playground is an example app built on top of the [Expo](https://github.com/expo/
 
 ## Start a Playground
 
-1. Install dependencies if needed with running `npm i` from the repository root
-2. `npm run start:pg:prod` to start a playground in a production environment
+`npm i && npm run start:pg:dev` from the project root
 
 ### Playground environments:
 
 Playground module supports two environments: 
+
 - **Production** (Provides Eva Design System module published to npm)
 - **Development** (Provides local Eva Design System module)
 
@@ -262,7 +262,21 @@ git clone https://github.com/eva-design/eva
 ```
 - Install dependencies if needed and finally run `npm run start:pg:dev`
 
-# Kitten Tricks development
+# Kitten Tricks
+
+## Start an App
+
+1. Clone the repo `git clone https://github.com/akveo/kittenTricks`
+2. Go to the Kitten Tricks project dir and run `npm i && npm start`
+
+## Kitten Tricks environments:
+
+Kitten Tricks app supports two environments: 
+
+- **Production** (Provides Eva Design System and UI Kitten modules published to npm)
+- **Development** (Provides local Eva Design System and UI Kitten modules)
+
+To run App in a development mode:
 
 - Clone UI Kitten to the directory containing Kitten Tricks repo:
 ```bash
@@ -282,3 +296,4 @@ git clone https://github.com/eva-design/eva
 - Inside react-native-ui-kitten dir run `rm -rf ./node_modules ./package-lock.json && npm i` to install latest dependencies.
 - Inside Kitten Tricks directory `rm -rf ./node_modules ./package-lock.json && npm i` to install the latest dependencies.
 - `npm run start:dev` - this will start application in development mode and watch for UI Kitten and Eva changes.
+
