@@ -20,7 +20,7 @@
 
 ;(function(l, projectPages) {
 
-  const versions = ['3.1.3'];
+  const versions = ['3.1.4'];
   var paths = l.pathname.split('/');
 
   // paths[1] - /react-native-ui-kitten
