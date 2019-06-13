@@ -6,7 +6,7 @@
 - [Development](#development)
 - [Release](#release)
 - [Playground](#playground)
-- [Kitten Tricks development](#kitten-tricks-development)
+- [Kitten Tricks](#kitten-tricks)
 
 # Things you must follow before contributing
 - Don’t overcomplicate
