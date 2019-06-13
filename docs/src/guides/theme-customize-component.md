@@ -45,7 +45,7 @@ All React Native UI Kitten components have a set of properties which you can use
 Each component has `appearance` property which can have single or multiple values depending on mapping configuration.
 Also, there is a list of *variant group* properties like `size`, `status` etc.
 
-These properties are defined by Eva Design System. For more information read the [Theme System Guide](docs/guides/theme-system).
+These properties are defined by Eva Design System. For more information read the [Theme System Guide](guides/theme-system).
 
 ### Appearance property
 
@@ -182,5 +182,5 @@ export default class App extends React.Component<ApplicationProviderProps> {
 
 ### Related Articles
 
-* [React Native UI Kitten Theme System](docs/guides/theme-system)
-* [Creating Styled Components](docs/guides/theme-using-mapping)
+* [React Native UI Kitten Theme System](guides/theme-system)
+* [Creating Styled Components](guides/creating-styled-components)

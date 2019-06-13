@@ -228,5 +228,5 @@ That's it! All the magic is done by React Native UI Kitten style system and we d
 
 ## Related Articles
 
-- [Creating Custom Styled Components](docs/guides/creating-styled-components)
-- [Using theme inside Custom Components](docs/guides/creating-themed-components)
+- [Creating Custom Styled Components](guides/creating-styled-components)
+- [Using theme inside Custom Components](guides/creating-themed-components)

@@ -5,7 +5,7 @@ React Native UI Kitten is a framework of UI components powered by Eva Design Sys
 
 ## Quick start tutorials
 
-**[Adding into existing React Native Project](docs/guides/install-into-existing)** 
+**[Adding into existing React Native Project](guides/add-into-existing-project)** 
 
 This tutorial explains how to use React Native UI Kitten if you already have some React Native code as a starting app from scratch.
 

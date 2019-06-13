@@ -166,5 +166,5 @@ export const AwesomeComponentShowcase = (props?: AwesomeComponentProps): React.R
 
 ## Related Articles
 
-- [React Native UI Kitten Theme System](docs/guides/theme-system)
+- [React Native UI Kitten Theme System](guides/theme-system)
 

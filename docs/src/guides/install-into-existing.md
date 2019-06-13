@@ -142,5 +142,5 @@ export const Application: NavigationContainer = createAppContainer(AppNavigator)
 <hr>
 
 ## Related Articles
-- [Top Navigation](docs/components/top-navigation)
-- [Bottom Navigation](docs/components/bottom-navigation)
+- [Top Navigation](components/top-navigation)
+- [Bottom Navigation](components/bottom-navigation)
