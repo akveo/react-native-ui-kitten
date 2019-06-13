@@ -71,7 +71,7 @@ export class ReactDocsComponent implements OnInit, AfterViewInit, OnDestroy {
             this.titleService.setTitle(`React Native UI Kitten Documentation - ${event.item.data.name}`);
             if (event.item.data.demogif) {
               this.demoUrl = event.item.data.demogif;
-              this.demoUrl = `https://raw.githubusercontent.com/akveo/react-native-ui-kitten/master/docs/assets/gif/${this.demoUrl}`;
+              this.demoUrl = `https://raw.githubusercontent.com/akveo/react-native-ui-kitten/v3.1.4/docs/assets/gif/${this.demoUrl}`;
             } else {
               this.demoUrl = '';
             }
