@@ -17,8 +17,8 @@ export class NgdSearchComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.window.docsearch({
-      apiKey: 'fe0dbef6ee2b748314266d7d71d7dea3',
-      indexName: 'nebular',
+      apiKey: '37fb5807fab4fb208cf3a25ddb6aa380',
+      indexName: 'react-native-ui-kitten',
       inputSelector: '#doc-search',
       debug: false,
     });
