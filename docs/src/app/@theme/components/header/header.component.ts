@@ -17,7 +17,7 @@ import { NgdVersionService } from '../../services';
     </div>
     <div class="section middle">
       <nb-menu [items]="mainMenu"></nb-menu>
-      <ngd-search *ngIf="showSearch"></ngd-search>
+      <ngd-search />
       <nb-select class="version-select" [selected]="currentVersion" (selectedChange)="redirectToVersion($event)">
         <nb-option *ngFor="let version of versions" [value]="version">
           {{ version }}
