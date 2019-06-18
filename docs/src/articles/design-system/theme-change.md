@@ -79,6 +79,8 @@ And that’s it! Now your app can support both Light and Dark modes.
 
 We don't force you to implement theme switching using props. This is just a short guide of how it can be done. Working with a real production apps you're also able to implement this with other powerful state management tools like [MobX](https://mobx.js.org/getting-started.html) or [Redux](https://redux.js.org/).
 
+<hr>
+
 ## Related Articles
 
 - [Customize Theme](design-system/customize-theme)
