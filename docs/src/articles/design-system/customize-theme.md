@@ -49,8 +49,8 @@ export const theme = {
   "color-primary-800": "#3e2494",
   "color-primary-900": "#29157a",
 
-  "text-basic-color": "color-basic-800",
-  "text-disabled-color": "color-basic-600",
+  "text-basic-color": "$color-basic-800",
+  "text-disabled-color": "$color-basic-600",
 };
 ```
 <hr>
