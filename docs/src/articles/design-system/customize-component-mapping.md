@@ -1,12 +1,12 @@
-# Customize React Native UI Kitten Components
+# Customize UI Kitten Components
 
-React Native UI Kitten allows you to customize provided components. You have two ways to do this:
+UI Kitten allows you to customize provided components. You have two ways to do this:
 
-* Inline styles
-* Pre-defined properties
-* Appearance property
-* Variant Group properties
-* Mapping customization
+- Inline styles
+- Pre-defined properties
+- Appearance property
+- Variant Group properties
+- Mapping customization
 
 <hr>
 
@@ -14,14 +14,11 @@ React Native UI Kitten allows you to customize provided components. You have two
 
 This way is a regular way of how React Native components could be styled. Passing your custom styles to `style` property is exactly what you can do.
 
-```tsx
-import React from 'react';
-import { 
-  Button,
-  ButtonProps,
-} from 'react-native-ui-kitten';
+```js
+import * as React from 'react';
+import { Button } from 'react-native-ui-kitten';
 
-const AwesomeButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
+export const AwesomeButton = (props) => {
   const customStyle = {
     opacity: 0.75,
   };
@@ -29,10 +26,7 @@ const AwesomeButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => 
   const { style, ...restProps } = props;
   
   return (
-    <Button
-      style={[customStyle, style]}
-      {...restProps}
-    />
+    <Button {...restProps} style={[customStyle, style]} />
   );
 };
 ```
@@ -41,26 +35,21 @@ const AwesomeButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => 
 
 ### Pre-defined properties
 
-All React Native UI Kitten components have a set of properties which you can use to style component.
+All UI Kitten components have a set of properties which you can use to style component.
 Each component has `appearance` property which can have single or multiple values depending on mapping configuration.
 Also, there is a list of *variant group* properties like `size`, `status` etc.
 
-These properties are defined by Eva Design System. For more information read the [Theme System Guide](guides/theme-system).
-
 ### Appearance property
 
-Each React Native UI Kitten component has `appearance` property, where you can pass values depending on mapping configuration.
+Each UI Kitten component has `appearance` property, where you can pass values depending on mapping configuration.
 
 Assuming that mapping configuration has `outline` *appearance* for Button, you can create outline Button with the following code.
 
-```tsx
-import React from 'react';
-import {
-  Button,
-  ButtonProps,
-} from 'react-native-ui-kitten;
+```js
+import * as React from 'react';
+import { Button } from 'react-native-ui-kitten';
 
-export const OutlineButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => (
+export const OutlineButton = (props) => (
   <Button appearance='outline'/>
 );
 ```
@@ -73,14 +62,11 @@ Unlike `appearance` property, each component can have *variant group* properties
 
 Assuming that mapping configuration has `size` *variant group* and `tiny` *variant* for Button, you can create tiny Button with the following code.
 
-```tsx
-import React from 'react';
-import {
-  Button,
-  ButtonProps,
-} from 'react-native-ui-kitten';
+```js
+import * as React from 'react';
+import { Button } from 'react-native-ui-kitten';
 
-export const TinyButton = (props?: ButtonProps): React.ReactElement<ButtonProps> => (
+export const TinyButton = (props) => (
   <Button size='tiny'/>
 );
 ```
@@ -150,37 +136,21 @@ That's it! Now you can pass `square` to Button `appearance` property to apply st
 
 The one thing to apply custom mapping is to provide it to `ApplicationProvider` component.
 
-```tsx
+```js
 import React from 'react';
-import {
-  mapping,
-  theme,
-} from '@eva-design/eva';
-import { 
-  ApplicationProvider,
-  ApplicationProviderProps
-} from 'react-native-ui-kitten';
-import { Application } from './path-to/root.component';
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { ApplicationProvider, Layout } from 'react-native-ui-kitten';
 import { customMapping } from './path-to/custom-mapping';
 
-export default class App extends React.Component<ApplicationProviderProps> {
-  
-  public render(): React.ReactElement<ApplicationProviderProps> {
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={theme}
-        customMapping={customMapping}>
-        <Application/>
-      </ApplicationProvider>
-    );
-  }
-}
+export default App = () => (
+  <ApplicationProvider
+    mapping={mapping}
+    theme={lightTheme}
+    customMapping={customMapping}>
+    <Layout style={{flex: 1}}/>
+  </ApplicationProvider>
+);
 ```
 
 <hr>
 
-### Related Articles
-
-* [React Native UI Kitten Theme System](guides/theme-system)
-* [Creating Styled Components](guides/creating-styled-components)
