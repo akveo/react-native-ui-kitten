@@ -29,6 +29,7 @@ expo init PROJECT-NAME
 npm i react-native-ui-kitten @eva-design/eva
 ```
 
+<hr>
 
 ### Configure Application Root
 

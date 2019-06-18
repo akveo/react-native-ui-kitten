@@ -166,7 +166,6 @@ There are 13 text styles:
 - 2 `paragraph` styles, regular text
 - 2 `caption` styles, used by smaller texts, like tooltip or input caption
 - `label` style, used by label element
-- `button` text style, used by button element
 
 Each styles describes text `fontSize`, `fontWeight` and `lineHeight`, for instance, there is a final style applied by `c1` (caption 1) `Text` component:
 
@@ -177,9 +176,8 @@ Each styles describes text `fontSize`, `fontWeight` and `lineHeight`, for instan
   "text-caption-line-height": 16
 }
 ```
-<hr>
 
-Adjust these styles to change text style of specific groups of elements.
+<hr>
 
 ## Related Articles
 
