@@ -81,5 +81,5 @@ We don't force you to implement theme switching using props. This is just a shor
 
 ## Related Articles
 
-- [Enable Theme Customization](docs/design-system/enable-customizable-theme)
-- [Create Custom Theme](docs/design-system/create-custom-theme)
+- [Customize Theme](design-system/customize-theme)
+- [Create Custom Theme](design-system/create-custom-theme)

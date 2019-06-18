@@ -83,23 +83,23 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Customize theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/customize-theme.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
         name: 'Use Theme Variables',
         children: [
           {
             type: 'block',
             block: 'markdown',
             source: 'design-system/use-theme-variables.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Customize theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/customize-theme.md',
           },
         ],
       },

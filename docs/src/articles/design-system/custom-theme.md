@@ -198,5 +198,5 @@ That's it. In a similar way, the rest of the available theme variables could be 
 
 ## Related Articles
 
-- [Use Theme Variables](docs/design-system/use-theme-variables)
-- [Enable Theme Customization](docs/design-system/enable-customizable-theme)
+- [Use Theme](design-system/use-theme-variables)
+- [Customize Theme](design-system/customize-theme)

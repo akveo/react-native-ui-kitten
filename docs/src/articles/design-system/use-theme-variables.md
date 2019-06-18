@@ -42,3 +42,7 @@ export const AwesomeViewShowcase = (props) => (
   <ThemedAwesomeView {...props} />
 );
 ```
+
+## Related Articles
+
+- [Change Theme](design-system/theme-change)

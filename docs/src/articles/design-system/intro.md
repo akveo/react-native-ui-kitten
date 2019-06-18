@@ -41,5 +41,5 @@ Being a part of Eva Ecosystem, UI Kitten is a great choice for Enterprise-grade 
 
 ## Related Articles
 
-- [Design System Rules](docs/design-system/eva-design-system-theme)
-- [Create Custom Theme](docs/design-system/create-a-custom-theme)
+- [Design System Rules](design-system/design-system-theme)
+- [Create Custom Theme](design-system/create-custom-theme)

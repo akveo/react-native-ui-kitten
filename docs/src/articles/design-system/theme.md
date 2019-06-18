@@ -158,12 +158,10 @@ Text colors use `basic` shades as a source:
 
 <hr>
 
-## Fonts & Text Styles
-
-Each theme has two available fonts: `default` and `secondary`. `secondary` font used for headers, while the default for the rest of the elements.
+## Text Styles
 
 There are 13 text styles:
-- 6 `heading` styles, used by h1-h1 elements 
+- 6 `heading` styles, used by h1-h6 elements 
 - 2 `subtitle` styles, used as a text of most of controls (inputs, menus, etc)
 - 2 `paragraph` styles, regular text
 - 2 `caption` styles, used by smaller texts, like tooltip or input caption
@@ -185,6 +183,6 @@ Adjust these styles to change text style of specific groups of elements.
 
 ## Related Articles
 
-- [Enable Theme Customization](docs/design-system/enable-customizable-theme)
-- [Create Custom Theme](docs/design-system/create-custom-theme)
+- [Customize Theme](design-system/customize-theme)
+- [Create Custom Theme](design-system/create-custom-theme)
 

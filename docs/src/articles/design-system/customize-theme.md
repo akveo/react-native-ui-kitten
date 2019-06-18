@@ -76,7 +76,7 @@ export default App = () => (
 
 ## Related Articles
 
-- [Use Theme Variables](docs/design-system/use-theme-variables)
-- [Create Custom Theme](docs/design-system/create-a-custom-theme)
+- [Using Theme](design-system/use-theme-variables)
+- [Create Custom Theme](design-system/create-a-custom-theme)
 
 
