@@ -1,6 +1,6 @@
 # Create Custom Theme
 
-Custom theme creation is a very similar process to [Theme Customization](docs/design-system/enable-customizable-theme).
+Custom theme creation is a very similar process to [Theme Customization](docs/design-system/customize-theme).
 Only in this case, we suggest following simple but very important rules so that we can minimize the number of necessary changes 
 and avoid repeated code.
 

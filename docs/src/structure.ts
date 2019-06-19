@@ -72,6 +72,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Design System Glossary',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/glossary.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Design System Theme',
         children: [
           {
@@ -94,7 +105,7 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Customize theme',
+        name: 'Customize Theme',
         children: [
           {
             type: 'block',
@@ -122,6 +133,28 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'design-system/theme-change.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Customize Mapping',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/customize-mapping.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Custom Component Mapping',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/custom-mapping.md',
           },
         ],
       },

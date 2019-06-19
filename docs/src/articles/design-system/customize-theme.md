@@ -1,4 +1,4 @@
-# Customize theme
+# Customize Theme
 
 UI Kitten components are styled with Eva Design System configuration files and themes.
 In order to be able to customize theme variables, read a few steps described below.
