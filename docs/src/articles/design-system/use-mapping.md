@@ -4,7 +4,7 @@ React Native UI Kitten allows you creating your own components powered by Eva De
 
 <hr>
 
-### Declare Custom Mappings
+## Declare Custom Mappings
 
 Let's say we have an `AwesomeView` component that we also want to be powered by Eva Design System.
 To do that, you need to use our styling configuration we call `mapping`.
@@ -54,8 +54,7 @@ Let's declare a custom mapping in a separated `customMapping.json` file.
 
 <hr>
 
-
-### Declare Custom Component
+## Declare Custom Component
 
 As a first step, you need to declare your custom component.
 
@@ -96,7 +95,7 @@ export const StyledAwesomeView = styled(AwesomeView);
 In the example above we have declared an `AwesomeView` class which renders `TouchableOpacity`.
 We want it to get some visible feedback when we press it. So we simply call `dispatch` function to request an `active` styles we previously declared in `customMapping.json`.
 
-### Provide Custom Mappings
+## Provide Custom Mappings
 
 The only thing we need to do is to combine `customMapping` with `mapping` exported by Eva Design System. We can do this with the following code:
 

@@ -8,7 +8,7 @@ Working with mappings is a quite difficult process, but it gives you a lot of fl
 
 <hr>
 
-### Determine a change
+## Determine a change
 
 You're able to do the following changes in mapping:
 
@@ -20,7 +20,7 @@ While changing a single parameter is a simple process, changing semantic propert
 
 <hr>
 
-### Create a custom mapping
+## Create a custom mapping
 
 Let's create a file to define a custom mapping. In your project root, create a `custom-mapping.json`;
 
@@ -39,7 +39,7 @@ The code above contains a bare minimum of code to start customizing a Button com
 
 <hr>
 
-### Change a single parameter
+## Change a single parameter
 
 Let's assume we want to change the default `backgroundColor` of a Button. Before we do this, let's take a look at how it is configured by Eva Design System. Open a configuration file. It should be located in `./PROJECT_ROOT/node_modules/@eva-design/eva/mapping.json`
 
@@ -138,7 +138,7 @@ Now let's go back to our `custom-mapping.json` and modify `backgroundColor` to b
 
 <hr>
 
-### Merge mappings
+## Merge mappings
 
 The only thing we have to do is to pass our custom mapping to an `ApplicationProvider` component.
 
@@ -163,7 +163,7 @@ Here we are. Now the default `backgroundColor` of a Button should be `pink`. Her
 
 <hr>
 
-### Change a semantic parameter
+## Change a semantic parameter
 
 Making changes with semantic parameters means changing a set of parameters declared inside it. To do that, simply follow the steps of changing a single parameter explained above.
 
@@ -193,6 +193,6 @@ That's it. Now you're able to use UI Kitten Button without passing `appearance` 
 
 <hr>
 
-### Related articles
+## Related articles
 
 - [Create custom component mapping](design-system/custom-mapping)

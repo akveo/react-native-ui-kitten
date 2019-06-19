@@ -1,12 +1,12 @@
 # Create a Custom Component Mapping
 
-Creation mapping for a custom component is a very similar process to [Mapping Customization](docs/design-system/customize-mapping). Only in this case, we suggest the following simple but very important rules so that we can minimize the number of necessary changes and avoid repeated code.
+Creation mapping for a custom component is a very similar process to [Mapping Customization](design-system/customize-mapping). Only in this case, we suggest the following simple but very important rules so that we can minimize the number of necessary changes and avoid repeated code.
 
 Before we start, let's pretend we want to create a `CircleButton` component.
 
 <hr>
 
-### Prepare the boilerplate
+## Prepare the boilerplate
 
 In this step, we'll create a component and it's initial mapping.
 
@@ -80,7 +80,7 @@ export default App = () => (
 
 <hr>
 
-### Start with an idea
+## Start with an idea
 
 The main idea of `CircleButton` component is that is going to be a circle. This means we need to provide some dimension styles and a `borderRadius` to make it round. Go back to `custom-mapping.json` and paste the following:
 
@@ -132,7 +132,7 @@ This is an initial look:
 
 <hr>
 
-### Expand with a variants
+## Expand with a variants
 
 The example above demonstrates how you can create a really simple configuration. And on this step you might think that it is over-engineering. Let's now do some magic now.
 
@@ -175,7 +175,7 @@ What we did is that we added a rounded [variant](design-system/design-system-glo
 
 <hr>
 
-### Add states
+## Add states
 
 The other great example of the flexibility of using mappings is that you can provide styles to your component for a particular state. Let's say we've pressed this Button and we won't to see the default feedback of `TouchableOpacity`, but make our Button a shade darker.
 
@@ -254,12 +254,12 @@ That's it. Here is the result:
 
 <hr>
 
-### Conclusion
+## Conclusion
 
 Using this way of styling components, you can also declare more [semantic parameters](design-system/design-system-glossary#semantic-properties) to get more flexibility. Try adding one more variant or appearance following the steps described above to feel the real power of UI Kitten theme system.
 
 <hr>
 
-### Related Articles
+## Related Articles
 
 - [Customize mapping](design-system/custom-component-mapping)

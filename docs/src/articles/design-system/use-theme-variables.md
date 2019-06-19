@@ -4,7 +4,7 @@ UI Kitten allows you using the theme you have provided in the application root. 
 
 <hr>
 
-### Declare Custom Component
+## Declare Custom Component
 
 Let's declare a `View` and set it `backgroundColor` to any color of current theme.
 
@@ -32,7 +32,7 @@ That's it! Now you're done and able to use your themed component.
 
 <hr>
 
-### Themed Component Usage
+## Themed Component Usage
 
 ```js
 import * as React from 'react';

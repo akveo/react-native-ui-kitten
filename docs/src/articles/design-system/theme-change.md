@@ -2,6 +2,7 @@
 
 UI Kitten Theme System has support of 2 built-in Eva Design System color schemes - `light` and `dark`. It is both possible to change the theme statically and dynamically during the runtime.
 
+<hr>
 
 ## Runtime Theme Switch
 
