@@ -66,7 +66,7 @@ import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json'; // <-- Import custom mapping
 import CircleButton from './path-to/CircleButton'; // <-- Import custom component
 
-export default App = () => (
+const App = () => (
   <ApplicationProvider 
     mapping={mapping}
     customMapping={customMapping}
@@ -76,6 +76,8 @@ export default App = () => (
     </Layout>
   </ApplicationProvider>
 );
+
+export default App;
 ```
 
 <hr>

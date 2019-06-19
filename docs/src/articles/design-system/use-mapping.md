@@ -106,7 +106,7 @@ import { ApplicationProvider, Layout } from 'react-native-ui-kitten';
 import { StyledAwesomeView } from './path-to/awesome.component'; // <-- Import styled component
 import { customMapping } from './path-to/customMapping'; // <-- Import `customMapping.json` and convert it to JavaScript object
 
-export default App = () => (
+const App = () => (
   <ApplicationProvider
     mapping={mapping}
     theme={lightTheme}
@@ -116,6 +116,8 @@ export default App = () => (
     </Layout>
   </ApplicationProvider>
 );
+
+export default App;
 ```
 
 That's it! Now you're done and able to use your styled component.

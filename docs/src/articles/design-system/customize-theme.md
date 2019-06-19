@@ -65,11 +65,13 @@ import { mapping } from '@eva-design/eva';
 import { ApplicationProvider, Layout } from 'react-native-ui-kitten';
 import { theme } from './path-to/theme'; // <-- Import custom theme
 
-export default App = () => (
+const App = () => (
   <ApplicationProvider mapping={mapping} theme={theme}>
     <Layout style={{flex: 1}}/>
   </ApplicationProvider>
 );
+
+export default App;
 ```
 
 <hr>

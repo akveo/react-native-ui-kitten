@@ -29,7 +29,7 @@ import { mapping, light } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import { HomeScreen } from './path-to/home.component';
 
-export default App = () => {
+const App = () => {
   
   const toggleTheme = () => {
     // 🌞 -> 🌚
@@ -41,6 +41,8 @@ export default App = () => {
     </ApplicationProvider>
   );
 };
+
+export default App;
 ```
 
 Now we should only modify `toggleTheme` function. To do that, let's take a look on the snippet below:
@@ -53,7 +55,7 @@ import { HomeScreen } from './path-to/home.component';
 
 const themes = { light, dark };
 
-export default App = () => {
+const App = () => {
 
   const [theme, setTheme] = React.useState('light');
 
@@ -68,6 +70,8 @@ export default App = () => {
     </ApplicationProvider>
   );
 };
+
+export default App;
 ```
 
 Import both light and dark themes and set them into a `themes` object. Then — we pass the name of the initial theme into the `useState` hook. This will allow us saving the current theme in the application state. And when `toggleTheme` is called — we call the `setTheme` function returned from that hook to apply a dark or light theme depending on the current theme. Notice that in this example we don’t store any theme object, but just it’s key.

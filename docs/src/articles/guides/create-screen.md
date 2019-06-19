@@ -70,13 +70,15 @@ import { mapping, light as lightTheme } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import { HomeScreen } from './path-to/some-screen.component' // <-- Import a screen we've created
 
-export default App = () => (
+const App = () => (
   <ApplicationProvider
     mapping={mapping}
     theme={lightTheme}>
     <HomeScreen/>
   </ApplicationProvider>
 );
+
+export default App;
 ```
 
 As a result, you should have a page with a screen looking similar to this:

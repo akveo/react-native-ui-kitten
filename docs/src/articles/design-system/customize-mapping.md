@@ -148,13 +148,15 @@ import { ApplicationProvider } from 'react-native-ui-kitten';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json'; // <-- import custom mapping
 
-export default App = () => (
+const App = () => (
   <ApplicationProvider 
     mapping={mapping}
     customMapping={customMapping} // <-- apply custom mapping
     theme={lightTheme}>
   </ApplicationProvider>
 );
+
+export default App;
 ```
 
 Here we are. Now the default `backgroundColor` of a Button should be `pink`. Here is a result
