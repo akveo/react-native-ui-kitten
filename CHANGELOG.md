@@ -1,3 +1,27 @@
+## <small>4.0.2 (2019-06-20)</small>
+
+* feat: add hover styles for white buttons ([caacbc2](https://github.com/akveo/react-native-ui-kitten/commit/caacbc2))
+* feat(docs): add contact us link (#455) ([450ab18](https://github.com/akveo/react-native-ui-kitten/commit/450ab18)), closes [#455](https://github.com/akveo/react-native-ui-kitten/issues/455)
+* feat(playground): bump expo to 33.0.6 ([a7cb55f](https://github.com/akveo/react-native-ui-kitten/commit/a7cb55f))
+* docs: add algolia search (#457) ([b9872ab](https://github.com/akveo/react-native-ui-kitten/commit/b9872ab)), closes [#457](https://github.com/akveo/react-native-ui-kitten/issues/457)
+* docs(dev): update DEV_DOCS.md ([6dc56c2](https://github.com/akveo/react-native-ui-kitten/commit/6dc56c2))
+* docs(dev): update DEV_DOCS.md with Kitten Tricks guides ([a3772c7](https://github.com/akveo/react-native-ui-kitten/commit/a3772c7))
+* docs(guides): add design system guides ([165247e](https://github.com/akveo/react-native-ui-kitten/commit/165247e))
+* fix: double scroll ([ad67cee](https://github.com/akveo/react-native-ui-kitten/commit/ad67cee))
+* fix: prevent header disappearing when selecting version ([6e38aff](https://github.com/akveo/react-native-ui-kitten/commit/6e38aff))
+* fix: remove overflow in reviews ([37393d6](https://github.com/akveo/react-native-ui-kitten/commit/37393d6))
+* fix: use capital k in kitten ([f325111](https://github.com/akveo/react-native-ui-kitten/commit/f325111))
+* fix(docs): fix dev-docs Kitten Tricks reference ([91a1e60](https://github.com/akveo/react-native-ui-kitten/commit/91a1e60))
+* fix(docs): fix dev-docs typos ([1c83e23](https://github.com/akveo/react-native-ui-kitten/commit/1c83e23))
+* fix(docs): ie fixes ([39abc18](https://github.com/akveo/react-native-ui-kitten/commit/39abc18))
+* fix(docs): make menu button clickable ([f0234bf](https://github.com/akveo/react-native-ui-kitten/commit/f0234bf))
+* fix(docs): proper cross sections links (#452) ([7bd9ec5](https://github.com/akveo/react-native-ui-kitten/commit/7bd9ec5)), closes [#452](https://github.com/akveo/react-native-ui-kitten/issues/452)
+* fix(docs): theme import typo ([6445a4b](https://github.com/akveo/react-native-ui-kitten/commit/6445a4b))
+* fix(top-navigation): add hit-slop to actions ([ce984cf](https://github.com/akveo/react-native-ui-kitten/commit/ce984cf))
+* refactor: prevent opening links in a new tab ([ff770f2](https://github.com/akveo/react-native-ui-kitten/commit/ff770f2))
+
+
+
 ## 4.0.0 (2019-06-11)
 
 * refactor(docs): common refactor ([67e84d2](https://github.com/akveo/react-native-ui-kitten/commit/67e84d2))

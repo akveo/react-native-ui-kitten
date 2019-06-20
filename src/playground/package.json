@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@eva-design/eva": "1.0.0",
-    "expo": "^33.0.3",
+    "expo": "^33.0.6",
     "react": "^16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-navigation": "^3.11.0"
