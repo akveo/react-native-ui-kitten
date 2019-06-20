@@ -5,12 +5,12 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'What is React Native UI Kitten?',
+        name: 'What is UI Kitten?',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'index.md',
+            source: 'getting-started/what-is-ui-kitten.md',
           },
         ],
       },
@@ -21,7 +21,7 @@ export const structure = [
           {
             type: 'block',
             block: 'markdown',
-            source: 'start.md',
+            source: 'getting-started/where-to-start.md',
           },
         ],
       },
@@ -33,56 +33,128 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Add into existing project',
+        name: 'Install UI Kitten',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'install-into-existing.md',
+            source: 'guides/install.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Theme System',
+        name: 'Create UI Kitten Screen',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'theme-system.md',
+            source: 'guides/create-screen.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Design System',
+    children: [
+      {
+        type: 'page',
+        name: 'Eva Design System Intro',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/intro.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Creating Styled Components',
+        name: 'Design System Glossary',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'theme-using-mapping.md',
+            source: 'design-system/glossary.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Creating Themed Components',
+        name: 'Design System Theme',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'theme-using-variables.md',
+            source: 'design-system/theme.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Theme Switching',
+        name: 'Use Theme Variables',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'theme-switching.md',
+            source: 'design-system/use-theme-variables.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Customize Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/customize-theme.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Create Custom Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/custom-theme.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Changing Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/theme-change.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Customize Mapping',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/customize-mapping.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Custom Component Mapping',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/custom-mapping.md',
           },
         ],
       },
