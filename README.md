@@ -42,16 +42,17 @@ Modify your application root:
 ```jsx
 import React from 'react';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import { ApplicationProvider } from 'react-native-ui-kitten';
-import { Application } from './path-to/application.component';
+import { ApplicationProvider, Layout } from 'react-native-ui-kitten';
 
-export default App = () => (
+const App = () => (
   <ApplicationProvider 
     mapping={mapping}
     theme={lightTheme}
-    <Application/>
+    <Layout style={{flex: 1}}/>
   </ApplicationProvider>
 );
+
+export default App;
 ```
 
 The code above will configure your application component to apply Eva Design System styling magic.
