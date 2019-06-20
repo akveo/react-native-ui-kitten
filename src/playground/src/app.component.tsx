@@ -15,7 +15,7 @@ interface State {
 export default class App extends React.Component {
 
   public state: State = {
-    theme: 'Eva Dark',
+    theme: 'Eva Light',
   };
 
   private toggleTheme = (theme: string) => {
