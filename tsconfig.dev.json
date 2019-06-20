@@ -10,7 +10,8 @@
     "jsx": "react-native",
     "target": "es2015",
     "lib": [
-      "es2018"
+      "dom",
+      "esnext"
     ],
     "typeRoots": [
       "./node_modules/@types"

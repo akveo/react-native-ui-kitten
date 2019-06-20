@@ -12,6 +12,7 @@
     "target": "es2015",
     "module": "esnext",
     "lib": [
+      "dom",
       "es2018"
     ],
     "typeRoots": [
