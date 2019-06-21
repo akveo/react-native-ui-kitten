@@ -1,6 +1,6 @@
 import {
-  ControlThemedStyleType,
   ControlMetaType,
+  ControlThemedStyleType,
   ThemedStyleType,
   ThemeStyleType,
 } from '@eva-design/dss';
@@ -30,6 +30,20 @@ export class StyleConsumerService {
     this.meta = this.safe(context.style[name], (generatedConfig): ControlMetaType => {
       return generatedConfig.meta;
     });
+
+    if (!this.meta) {
+      const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+
+      const message: string = [
+        `\n${this.name}: unsupported configuration.`,
+        'Using UI Kitten components is only possible with configuring ApplicationProvider.',
+        `📖 Documentation: ${docRoot}/guides/install-ui-kitten#configure-application-root`,
+        '\nIn case you have all in place, there might be an incorrect usage of a "styled" function.',
+        `📖 Documentation: ${docRoot}/design-system/custom-component-mapping`,
+      ].join('\n');
+
+      console.error(message);
+    }
   }
 
   public createDefaultProps<P extends object>(): StyledComponentProps {
@@ -47,6 +61,21 @@ export class StyleConsumerService {
     const styleInfo: StyleInfo = this.getStyleInfo(source, interaction);
 
     const generatedMapping: ThemedStyleType = this.getGeneratedStyleMapping(context.style, styleInfo);
+
+    if (!generatedMapping) {
+      const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+
+      const message: string = [
+        `${this.name}: unsupported configuration.`,
+        `Check one of the following prop values ${JSON.stringify(styleInfo, null, 2)}`,
+        `📖 Documentation: ${docRoot}/components/${this.name.toLowerCase()}/api`,
+      ].join('\n');
+
+      console.warn(message);
+
+      return this.withStyledProps({ ...source, ...this.createDefaultProps() }, context, interaction);
+    }
+
     const mapping = this.withValidParameters(generatedMapping);
 
     return {
@@ -78,9 +107,16 @@ export class StyleConsumerService {
     });
 
     if (invalidParameters.length !== 0) {
-      console.warn(
-        `Before using these variables, describe them in the component configuration: ${invalidParameters}`,
-      );
+      const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
+
+      const message: string = [
+        `${this.name}: unsupported configuration.`,
+        `Unable to apply ${invalidParameters}`,
+        'There might be an incorrect usage of mapping',
+        `📖 Documentation: ${docRoot}/design-system/custom-component-mapping`,
+      ].join('\n');
+
+      console.warn(message);
     }
 
     return mapping;
@@ -156,7 +192,10 @@ export class StyleConsumerService {
     return Object.keys(value).reduce((acc: Partial<V>, key: string): any => {
       const nextValue: any = transform(value, key);
 
-      return nextValue ? { ...acc, [key]: nextValue } : acc;
+      return nextValue ? {
+        ...acc,
+        [key]: nextValue,
+      } : acc;
     }, {});
   }
 

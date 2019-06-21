@@ -41,7 +41,7 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
  *
  * @extends React.Component
  *
- * @property {boolean} value - Determines whether component is checked.
+ * @property {boolean} checked - Determines whether component is checked.
  * Default is `false`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
@@ -79,8 +79,8 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
  *   public render(): React.ReactNode {
  *     return (
  *       <Toggle
- *         value={this.state.checked}
- *         onValueChange={this.onChange}
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
  *       />
  *     );
  *   }

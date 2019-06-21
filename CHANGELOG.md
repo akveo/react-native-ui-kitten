@@ -1,3 +1,11 @@
+## <small>4.0.3 (2019-06-21)</small>
+
+* build: fix typescript build errors ([0d0a784](https://github.com/akveo/react-native-ui-kitten/commit/0d0a784))
+* feat(ui): add custom warnings for incorrect component usage ([981d5c8](https://github.com/akveo/react-native-ui-kitten/commit/981d5c8))
+* Update toggle component doc and example ([4fd7ea1](https://github.com/akveo/react-native-ui-kitten/commit/4fd7ea1))
+
+
+
 ## <small>4.0.2 (2019-06-20)</small>
 
 * feat: add hover styles for white buttons ([caacbc2](https://github.com/akveo/react-native-ui-kitten/commit/caacbc2))

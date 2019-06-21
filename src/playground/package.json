@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@expo/webpack-config": "^0.5.11",
-    "@types/react-navigation": "^3.0.7",
     "babel-preset-expo": "^5.2.0"
   }
 }
