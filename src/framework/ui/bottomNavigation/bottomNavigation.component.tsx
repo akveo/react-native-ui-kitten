@@ -16,6 +16,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import { BottomNavigationTabProps } from './bottomNavigationTab.component';
 import {
@@ -235,7 +236,7 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     flexDirection: 'row',
   },

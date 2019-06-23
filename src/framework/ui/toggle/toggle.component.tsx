@@ -23,6 +23,7 @@ import {
   StyleType,
   Interaction,
   styled,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import { CheckMark } from '../support/components';
 
@@ -357,7 +358,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',

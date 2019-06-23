@@ -16,6 +16,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import { TabProps } from './tab.component';
 import { TabIndicator } from '../support/components';
@@ -180,7 +181,7 @@ export class TabBarComponent extends React.Component<TabBarProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     flexDirection: 'row',
   },

@@ -20,6 +20,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -282,7 +283,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',

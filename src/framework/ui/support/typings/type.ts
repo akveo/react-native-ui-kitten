@@ -19,4 +19,3 @@ export type TouchableIndexedProps = Override<TouchableOpacityProps, {
 
 export type ScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
 export type InputFocusEvent = NativeSyntheticEvent<TextInputFocusEventData>;
-export type InputEndEditEvent = NativeSyntheticEvent<TextInputEndEditingEventData>;

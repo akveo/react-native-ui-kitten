@@ -17,6 +17,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   OverflowMenuItem,
@@ -209,7 +210,7 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   popover: {
     overflow: 'hidden',
   },

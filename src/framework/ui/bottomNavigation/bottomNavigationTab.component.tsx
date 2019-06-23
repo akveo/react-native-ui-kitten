@@ -17,6 +17,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -161,7 +162,7 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',

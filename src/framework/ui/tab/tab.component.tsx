@@ -17,6 +17,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -170,7 +171,7 @@ export class TabComponent extends React.Component<TabProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',

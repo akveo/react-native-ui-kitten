@@ -9,10 +9,10 @@ import {
   LayoutChangeEvent,
   ScrollView,
   ScrollViewProps,
-  StyleSheet,
   Platform,
   View,
 } from 'react-native';
+import { PlatformStyleSheet } from '@kitten/theme';
 import { ScrollEvent } from '../support/typings';
 
 type ChildElement = React.ReactElement<any>;
@@ -238,7 +238,7 @@ export class ViewPager extends React.Component<ViewPagerProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   contentViewContainer: {
     flex: 1,
     width: '100%',

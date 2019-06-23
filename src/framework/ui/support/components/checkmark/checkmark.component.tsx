@@ -5,7 +5,10 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
+import {
+  StyleType,
+  PlatformStyleSheet,
+} from '@kitten/theme';
 
 interface ComponentProps {
   isAnimated?: boolean;
@@ -64,7 +67,7 @@ export class CheckMark extends React.Component<CheckMarkProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     transform: [{ rotate: '-5deg' }],
   },

@@ -14,6 +14,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import { RadioProps } from '../radio/radio.component';
 

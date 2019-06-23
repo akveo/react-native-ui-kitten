@@ -16,6 +16,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 
 interface ComponentProps {
@@ -91,7 +92,7 @@ export class AvatarComponent extends React.Component<AvatarProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {},
 });
 

@@ -15,6 +15,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Button,
@@ -143,7 +144,7 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     flexDirection: 'row',
     overflow: 'hidden',

@@ -22,6 +22,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -382,7 +383,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',

@@ -18,6 +18,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -220,7 +221,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   popover: {},
   content: {
     flexDirection: 'row',

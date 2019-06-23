@@ -34,3 +34,4 @@ export {
   ThemedStyleType,
   StyleSheetType,
 } from './theme/type';
+export { PlatformStyleSheet } from './support/platformStyleSheet';

@@ -15,6 +15,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import { ListItemProps } from './listItem.component';
 
@@ -198,7 +199,7 @@ class ListComponent extends React.Component<ListProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {},
   item: {},
 });

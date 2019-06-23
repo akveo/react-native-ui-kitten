@@ -18,6 +18,7 @@ import {
   StyleType,
   Interaction,
   styled,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -189,7 +190,7 @@ export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemP
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',

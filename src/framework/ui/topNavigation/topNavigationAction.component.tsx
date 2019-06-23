@@ -17,6 +17,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 
 type IconElement = React.ReactElement<ImageProps>;
@@ -123,7 +124,7 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {},
   icon: {},
 });

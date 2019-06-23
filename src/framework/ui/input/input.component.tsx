@@ -20,6 +20,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -31,7 +32,6 @@ import {
 } from '../support/services';
 import {
   FlexStyleProps,
-  InputEndEditEvent,
   InputFocusEvent,
 } from '../support/typings';
 
@@ -150,11 +150,11 @@ export class InputComponent extends React.Component<InputProps> {
     }
   };
 
-  private onEndEditing = (event: InputEndEditEvent) => {
+  private onBlur = (event: InputFocusEvent) => {
     this.props.dispatch([]);
 
-    if (this.props.onEndEditing) {
-      this.props.onEndEditing(event);
+    if (this.props.onBlur) {
+      this.props.onBlur(event);
     }
   };
 
@@ -327,7 +327,7 @@ export class InputComponent extends React.Component<InputProps> {
             placeholderTextColor={componentStyle.placeholder.color}
             editable={!disabled}
             onFocus={this.onFocus}
-            onEndEditing={this.onEndEditing}
+            onBlur={this.onBlur}
           />
           {iconElement}
         </View>
@@ -340,7 +340,7 @@ export class InputComponent extends React.Component<InputProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {},
   inputContainer: {
     flexDirection: 'row',

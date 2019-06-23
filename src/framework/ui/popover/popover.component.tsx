@@ -18,6 +18,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   PopoverView,
@@ -282,7 +283,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   popover: {
     position: 'absolute',
     opacity: 0,

@@ -16,6 +16,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
+  PlatformStyleSheet,
 } from '@kitten/theme';
 import { TopNavigationActionProps } from './topNavigationAction.component';
 import {
@@ -290,7 +291,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
   }
 }
 
-const styles = StyleSheet.create({
+const styles = PlatformStyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
