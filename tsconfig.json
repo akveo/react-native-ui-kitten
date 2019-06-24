@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/tsc-out",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "jsx": "react-native",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "paths": {
+      "@kitten/*": [
+        "./src/framework/*"
+      ]
+    }
+  }
+}
