@@ -2,7 +2,6 @@ import {
   GestureResponderEvent,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  TextInputEndEditingEventData,
   TextInputFocusEventData,
   TouchableOpacityProps,
 } from 'react-native';

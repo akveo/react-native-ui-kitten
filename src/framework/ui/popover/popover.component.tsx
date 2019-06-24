@@ -18,7 +18,6 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
-  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   PopoverView,
@@ -157,8 +156,6 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, indicatorStyle } = this.props;
-
     const {
       indicatorWidth,
       indicatorHeight,
@@ -167,17 +164,13 @@ export class PopoverComponent extends React.Component<PopoverProps> {
     } = source;
 
     return {
-      child: {},
-      popover: {
-        ...containerParameters,
-        ...StyleSheet.flatten(style),
-      },
-      popoverIndicator: {
+      container: containerParameters,
+      indicator: {
         width: indicatorWidth,
         height: indicatorHeight,
         backgroundColor: indicatorBackgroundColor,
-        ...StyleSheet.flatten(indicatorStyle),
       },
+      child: {},
     };
   };
 
@@ -220,8 +213,8 @@ export class PopoverComponent extends React.Component<PopoverProps> {
     return placement.frame(popoverFrame, childFrame, offsetRect);
   };
 
-  private renderPopoverElement = (children: ContentElement, style: StyleType): MeasuringElement => {
-    const { placement, ...derivedProps } = this.props;
+  private renderPopoverElement = (children: ContentElement, popoverStyle: Partial<StyleType>): MeasuringElement => {
+    const { style, placement, indicatorStyle, ...derivedProps } = this.props;
 
     const measuringProps: MeasuringElementProps = {
       tag: TAG_CONTENT,
@@ -234,11 +227,11 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       <View
         {...measuringProps}
         key={TAG_CONTENT}
-        style={styles.popover}>
+        style={styles.container}>
         <PopoverView
           {...derivedProps}
-          style={style.popover}
-          indicatorStyle={style.popoverIndicator}
+          style={[popoverStyle.container, style]}
+          indicatorStyle={[popoverStyle.indicator, styles.indicator, indicatorStyle]}
           placement={indicatorPlacement.rawValue}>
           {children}
         </PopoverView>
@@ -253,7 +246,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       <View
         {...measuringProps}
         key={TAG_CHILD}
-        style={style}>
+        style={[style, styles.child]}>
         {source}
       </View>
     );
@@ -283,11 +276,13 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   }
 }
 
-const styles = PlatformStyleSheet.create({
-  popover: {
+const styles = StyleSheet.create({
+  container: {
     position: 'absolute',
     opacity: 0,
   },
+  indicator: {},
+  child: {},
 });
 
 export const Popover = styled<PopoverProps>(PopoverComponent);

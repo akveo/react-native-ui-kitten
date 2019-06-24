@@ -8,19 +8,20 @@ import React from 'react';
 import {
   Image,
   ImageProps,
+  ImageStyle,
   StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
   TextStyle,
   View,
+  ViewStyle,
 } from 'react-native';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-  PlatformStyleSheet,
 } from '@kitten/theme';
 import {
   Text,
@@ -159,14 +160,8 @@ export class InputComponent extends React.Component<InputProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const {
-      style,
-      textStyle,
-      labelStyle,
-      captionTextStyle,
-    } = this.props;
-
-    const { rest: inputContainerStyle, ...containerStyle } = allWithRest(StyleSheet.flatten(style), FlexStyleProps);
+    const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
+    const { rest: inputContainerStyle, ...containerStyle } = allWithRest(flatStyles, FlexStyleProps);
 
     const {
       textMarginHorizontal,
@@ -197,18 +192,13 @@ export class InputComponent extends React.Component<InputProps> {
     } = source;
 
     return {
-      container: {
-        ...styles.container,
-        ...containerStyle,
-      },
+      container: containerStyle,
       inputContainer: {
         ...containerParameters,
-        ...styles.inputContainer,
         ...inputContainerStyle,
       },
       captionContainer: {
         marginTop: captionMarginTop,
-        ...styles.captionContainer,
       },
       text: {
         marginHorizontal: textMarginHorizontal,
@@ -217,8 +207,6 @@ export class InputComponent extends React.Component<InputProps> {
         // lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...styles.text,
-        ...StyleSheet.flatten(textStyle),
       },
       placeholder: {
         color: placeholderColor,
@@ -228,7 +216,6 @@ export class InputComponent extends React.Component<InputProps> {
         height: iconHeight,
         marginHorizontal: iconMarginHorizontal,
         tintColor: iconTintColor,
-        ...styles.icon,
       },
       label: {
         color: labelColor,
@@ -236,62 +223,57 @@ export class InputComponent extends React.Component<InputProps> {
         lineHeight: labelLineHeight,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
-        ...styles.label,
-        ...StyleSheet.flatten(labelStyle),
       },
       captionIcon: {
         width: captionIconWidth,
         height: captionIconHeight,
         tintColor: captionIconTintColor,
         marginRight: captionIconMarginRight,
-        ...styles.captionIcon,
       },
       captionLabel: {
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
         lineHeight: captionLineHeight,
         color: captionColor,
-        ...styles.captionLabel,
-        ...StyleSheet.flatten(captionTextStyle),
       },
     };
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
+  private renderIconElement = (style: ImageStyle): IconElement => {
     const iconElement: IconElement = this.props.icon(style);
 
     return React.cloneElement(iconElement, {
       key: 0,
-      style: [style, iconElement.props.style],
+      style: [style, styles.icon, iconElement.props.style],
     });
   };
 
-  private renderLabelElement = (style: StyleType): TextElement => {
+  private renderLabelElement = (style: TextStyle): TextElement => {
     return (
       <Text
         key={1}
-        style={style}>
+        style={[style, styles.label, this.props.labelStyle]}>
         {this.props.label}
       </Text>
     );
   };
 
-  private renderCaptionElement = (style: StyleType): TextElement => {
+  private renderCaptionElement = (style: TextStyle): TextElement => {
     return (
       <Text
         key={2}
-        style={style}>
+        style={[style, styles.captionLabel, this.props.captionTextStyle]}>
         {this.props.caption}
       </Text>
     );
   };
 
-  private renderCaptionIconElement = (style: StyleType): IconElement => {
+  private renderCaptionIconElement = (style: ImageStyle): IconElement => {
     const iconElement: IconElement = this.props.captionIcon(style);
 
     return React.cloneElement(iconElement, {
       key: 3,
-      style: [style, iconElement.props.style],
+      style: [style, styles.captionIcon, iconElement.props.style],
     });
   };
 
@@ -307,7 +289,7 @@ export class InputComponent extends React.Component<InputProps> {
   };
 
   public render(): React.ReactElement<TextInputProps> {
-    const { themedStyle, disabled, ...restProps } = this.props;
+    const { themedStyle, textStyle, disabled, ...restProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     const [
@@ -318,12 +300,12 @@ export class InputComponent extends React.Component<InputProps> {
     ] = this.renderComponentChildren(componentStyle);
 
     return (
-      <View style={componentStyle.container}>
+      <View style={[componentStyle.container, styles.container]}>
         {labelElement}
-        <View style={componentStyle.inputContainer}>
+        <View style={[componentStyle.inputContainer, styles.inputContainer]}>
           <TextInput
             {...restProps}
-            style={componentStyle.text}
+            style={[componentStyle.text, styles.text, textStyle]}
             placeholderTextColor={componentStyle.placeholder.color}
             editable={!disabled}
             onFocus={this.onFocus}
@@ -331,7 +313,7 @@ export class InputComponent extends React.Component<InputProps> {
           />
           {iconElement}
         </View>
-        <View style={componentStyle.captionContainer}>
+        <View style={[componentStyle.captionContainer, styles.captionContainer]}>
           {captionIconElement}
           {captionElement}
         </View>
@@ -340,7 +322,7 @@ export class InputComponent extends React.Component<InputProps> {
   }
 }
 
-const styles = PlatformStyleSheet.create({
+const styles = StyleSheet.create({
   container: {},
   inputContainer: {
     flexDirection: 'row',
@@ -356,6 +338,7 @@ const styles = PlatformStyleSheet.create({
     flexShrink: 1,
     flexBasis: 'auto',
   },
+  placeholder: {},
   icon: {},
   label: {},
   captionIcon: {},

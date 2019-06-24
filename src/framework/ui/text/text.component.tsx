@@ -6,14 +6,12 @@
 
 import React from 'react';
 import {
-  StyleSheet,
   Text as RNText,
   TextProps as RNTextProps,
 } from 'react-native';
 import {
   styled,
   StyledComponentProps,
-  StyleType,
 } from '@kitten/theme';
 
 interface ComponentProps {
@@ -66,26 +64,13 @@ export class TextComponent extends React.Component<TextProps> {
 
   static styledComponentName: string = 'Text';
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    const { style } = this.props;
-
-    return {
-      fontSize: source.fontSize,
-      lineHeight: source.lineHeight,
-      fontWeight: source.fontWeight,
-      color: source.color,
-      ...StyleSheet.flatten(style),
-    };
-  };
-
   public render(): React.ReactElement<RNTextProps> {
-    const { themedStyle, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { themedStyle, style, ...derivedProps } = this.props;
 
     return (
       <RNText
         {...derivedProps}
-        style={componentStyle}
+        style={[themedStyle, style]}
       />
     );
   }

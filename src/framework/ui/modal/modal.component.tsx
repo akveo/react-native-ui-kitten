@@ -249,7 +249,7 @@ export class Modal extends React.Component<ModalProps> {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
   },
@@ -261,4 +261,4 @@ const styles = {
   animatedWrapper: {
     alignSelf: 'flex-start',
   },
-};
+});

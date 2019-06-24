@@ -4,7 +4,11 @@ import {
   ImageProps,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
-import { Tab } from '@kitten/ui';
+import {
+  Tab,
+  Text,
+  Layout,
+} from '@kitten/ui';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,

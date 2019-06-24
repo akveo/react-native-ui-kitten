@@ -11,8 +11,8 @@ import {
   ScrollViewProps,
   Platform,
   View,
+  StyleSheet,
 } from 'react-native';
-import { PlatformStyleSheet } from '@kitten/theme';
 import { ScrollEvent } from '../support/typings';
 
 type ChildElement = React.ReactElement<any>;
@@ -149,7 +149,7 @@ export class ViewPager extends React.Component<ViewPagerProps> {
 
     const selector = Platform.select({
       ios: this.scrollToOffsetIOS,
-      android: this.scrollToOffsetAndroid,
+      default: this.scrollToOffsetDefault,
     });
 
     selector(params);
@@ -162,7 +162,7 @@ export class ViewPager extends React.Component<ViewPagerProps> {
     scrollView.scrollTo({ x: offset, ...rest });
   };
 
-  private scrollToOffsetAndroid = (params: { offset: number; animated?: boolean }) => {
+  private scrollToOffsetDefault = (params: { offset: number; animated?: boolean }) => {
     this.scrollToOffsetIOS(params);
     this.dispatchOnSelect(params.offset);
   };
@@ -238,7 +238,7 @@ export class ViewPager extends React.Component<ViewPagerProps> {
   }
 }
 
-const styles = PlatformStyleSheet.create({
+const styles = StyleSheet.create({
   contentViewContainer: {
     flex: 1,
     width: '100%',

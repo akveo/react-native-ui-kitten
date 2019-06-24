@@ -10,13 +10,11 @@ import {
   ImageProps,
   ImageStyle,
   StyleSheet,
-  TouchableOpacityProps,
 } from 'react-native';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-  PlatformStyleSheet,
 } from '@kitten/theme';
 
 interface ComponentProps {
@@ -64,11 +62,11 @@ export class AvatarComponent extends React.Component<AvatarProps> {
   private getComponentStyle = (source: StyleType): StyleType => {
     const { roundCoefficient, ...containerParameters } = source;
 
-    const baseStyle: ImageStyle = {
-      ...containerParameters,
-      ...styles.container,
-      ...StyleSheet.flatten(this.props.style),
-    };
+    // @ts-ignore: avoid checking `containerParameters`
+    const baseStyle: ImageStyle = StyleSheet.flatten([
+      containerParameters,
+      this.props.style,
+    ]);
 
     // @ts-ignore: rhs operator is restricted to be number
     const borderRadius: number = roundCoefficient * baseStyle.height;
@@ -79,21 +77,17 @@ export class AvatarComponent extends React.Component<AvatarProps> {
     };
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+  public render(): React.ReactElement<ImageProps> {
+    const { themedStyle, ...restProps } = this.props;
+    const componentStyle: ImageStyle = this.getComponentStyle(themedStyle);
 
     return (
       <Image
-        {...derivedProps}
+        {...restProps}
         style={componentStyle}
       />
     );
   }
 }
-
-const styles = PlatformStyleSheet.create({
-  container: {},
-});
 
 export const Avatar = styled<AvatarProps>(AvatarComponent);
