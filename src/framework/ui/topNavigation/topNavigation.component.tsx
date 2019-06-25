@@ -236,9 +236,11 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
   private renderActionElements(source: ActionElementProp): ActionElement[] {
     return React.Children.map(source, (element: ActionElement, index: number): ActionElement => {
-      return React.cloneElement(element, {
-        key: index,
-      });
+      if (element) {
+        return React.cloneElement(element, {
+          key: index,
+        });
+      }
     });
   }
 
@@ -248,13 +250,12 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     return [
       isValidString(title) && this.renderTextElement(title, style.title),
       isValidString(subtitle) && this.renderTextElement(subtitle, style.subtitle),
-      leftControl && this.renderActionElements(leftControl),
       rightControls && this.renderActionElements(rightControls),
     ];
   };
 
   public render(): React.ReactNode {
-    const { style, themedStyle, ...restProps } = this.props;
+    const { style, themedStyle, leftControl, ...restProps } = this.props;
 
     const {
       container,
@@ -267,7 +268,6 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     const [
       titleElement,
       subtitleElement,
-      leftControlElement,
       rightControlElements,
     ] = this.renderComponentChildren(componentStyles);
 
@@ -276,7 +276,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
         style={[container, style]}
         {...restProps}>
         <View style={leftControlContainer}>
-          {leftControlElement}
+          {leftControl}
         </View>
         <View style={titleContainer}>
           {titleElement}
