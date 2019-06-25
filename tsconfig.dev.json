@@ -1,28 +1,12 @@
 {
+  "extends": "./tsconfig",
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/tsc-out",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "moduleResolution": "node",
     "jsx": "react-native",
     "target": "es2015",
     "lib": [
       "es2018"
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-    "paths": {
-      "@kitten/ui": [
-        "./src/framework/ui"
-      ],
-      "@kitten/theme": [
-        "./src/framework/theme"
-      ]
-    }
+    ]
   },
   "include": [
     "./src"
