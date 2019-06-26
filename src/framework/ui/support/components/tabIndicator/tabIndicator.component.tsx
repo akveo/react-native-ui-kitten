@@ -3,6 +3,7 @@ import {
   Animated,
   Easing,
   LayoutChangeEvent,
+  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -96,6 +97,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
 
     this.scrollToOffset({
       offset: this.indicatorWidth * this.props.selectedPosition,
+      animated: false,
     });
   };
 
