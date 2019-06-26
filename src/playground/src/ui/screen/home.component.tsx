@@ -60,6 +60,7 @@ class HomeScreen extends React.Component<Props> {
   public render(): React.ReactNode {
     return (
       <List
+        style={this.props.themedStyle.container}
         data={routes}
         renderItem={this.renderItem}
       />
@@ -67,4 +68,9 @@ class HomeScreen extends React.Component<Props> {
   }
 }
 
-export default withStyles(HomeScreen, (theme: ThemeType) => ({}));
+export default withStyles(HomeScreen, (theme: ThemeType) => ({
+  container: {
+    flex: 1,
+    backgroundColor: theme['background-basic-color-1'],
+  },
+}));

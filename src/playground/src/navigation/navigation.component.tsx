@@ -51,6 +51,7 @@ const AppNavigator = createStackNavigator({
   ['Overflow Menu']: OverflowMenuContainer,
 }, {
   initialRouteName: 'Home',
+  headerMode: 'screen',
 });
 
 export const Router: any = createAppContainer(AppNavigator);
