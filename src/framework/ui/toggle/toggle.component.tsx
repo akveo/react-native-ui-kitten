@@ -54,7 +54,7 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
  * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
  * Default is `medium`.
  *
- * @property {(value: boolean) => void} onChange - Fires when selection state is changed.
+ * @property {(checked: boolean) => void} onChange - Fires when selection state is changed.
  *
  * @property TouchableOpacityProps
  *
