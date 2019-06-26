@@ -1,6 +1,6 @@
 const { defaults: tsJestConfig } = require('ts-jest/presets');
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
-const tsConfig = require('./tsconfig.dev');
+const tsConfig = require('./tsconfig');
 
 module.exports = {
   ...tsJestConfig,
