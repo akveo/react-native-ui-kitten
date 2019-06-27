@@ -1,3 +1,13 @@
+## <small>4.0.4 (2019-06-27)</small>
+
+* fix(docs): toggle docs fix ([84246ef](https://github.com/akveo/react-native-ui-kitten/commit/84246ef))
+* fix(readme): missing tag add ([3fd790c](https://github.com/akveo/react-native-ui-kitten/commit/3fd790c))
+* fix(ui): add input api methods ([f6395ed](https://github.com/akveo/react-native-ui-kitten/commit/f6395ed))
+* fix(ui): checkbox - usage docs ([5234f85](https://github.com/akveo/react-native-ui-kitten/commit/5234f85))
+* build(common): typescript common issues ([fb4d6ff](https://github.com/akveo/react-native-ui-kitten/commit/fb4d6ff))
+
+
+
 ## <small>4.0.3 (2019-06-21)</small>
 
 * build: fix typescript build errors ([0d0a784](https://github.com/akveo/react-native-ui-kitten/commit/0d0a784))
