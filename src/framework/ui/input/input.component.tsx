@@ -140,7 +140,23 @@ export class InputComponent extends React.Component<InputProps> {
 
   static styledComponentName: string = 'Input';
 
-  static Icon: React.ComponentClass<ImageProps> = Image;
+  private textInputRef: React.RefObject<TextInput> = React.createRef();
+
+  public focus = () => {
+    this.textInputRef.current.focus();
+  };
+
+  public blur = () => {
+    this.textInputRef.current.blur();
+  };
+
+  public isFocused = (): boolean => {
+    return this.textInputRef.current.isFocused();
+  };
+
+  public clear = () => {
+    this.textInputRef.current.clear();
+  };
 
   private onFocus = (event: InputFocusEvent) => {
     this.props.dispatch([Interaction.FOCUSED]);
@@ -322,6 +338,7 @@ export class InputComponent extends React.Component<InputProps> {
         {labelElement}
         <View style={componentStyle.inputContainer}>
           <TextInput
+            ref={this.textInputRef}
             {...restProps}
             style={componentStyle.text}
             placeholderTextColor={componentStyle.placeholder.color}

@@ -42,6 +42,55 @@ const renderComponent = (props?: InputProps): RenderAPI => {
   );
 };
 
+describe('@input: native methods', () => {
+
+  const RefMock = React.forwardRef((props: InputProps, ref: React.Ref<TextInput>) => {
+    return (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={theme}>
+        <Input ref={ref} {...props}/>
+      </ApplicationProvider>
+    );
+  });
+
+  it('* focus', () => {
+    const componentRef: React.RefObject<TextInput> = React.createRef();
+    render(
+      <RefMock ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.focus).toBeTruthy();
+  });
+
+  it('* blur', () => {
+    const componentRef: React.RefObject<TextInput> = React.createRef();
+    render(
+      <RefMock ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.blur).toBeTruthy();
+  });
+
+  it('* isFocused', () => {
+    const componentRef: React.RefObject<TextInput> = React.createRef();
+    render(
+      <RefMock ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.isFocused).toBeTruthy();
+  });
+
+  it('* clear', () => {
+    const componentRef: React.RefObject<TextInput> = React.createRef();
+    render(
+      <RefMock ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.clear).toBeTruthy();
+  });
+});
+
 describe('@input: matches snapshot', () => {
 
   describe('* interaction', () => {
