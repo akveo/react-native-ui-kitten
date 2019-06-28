@@ -56,7 +56,7 @@ export default App;
 ```
 
 The code above will configure your application component to apply Eva Design System styling magic.
-Read the [Theme System guide][link:doc-theme-system] for more details.
+Read the [Design System guide][link:doc-theme-system] for more details.
 
 ## How can I support the developers?
 - Star our GitHub repo :star:
@@ -83,7 +83,7 @@ We're always happy to receive your feedback!
 [link:travis]: https://travis-ci.com/akveo/react-native-ui-kitten
 [link:coveralls]: https://coveralls.io/github/akveo/react-native-ui-kitten?branch=master
 [link:doc-homepage]: https://akveo.github.io/react-native-ui-kitten
-[link:doc-theme-system]: https://akveo.github.io/react-native-ui-kitten/docs/guides/theme-system
+[link:doc-theme-system]: https://akveo.github.io/react-native-ui-kitten/docs/design-system/eva-design-system-intro
 [link:kitten-tricks]: https://github.com/akveo/kittenTricks
 [link:eva-icons]: https://github.com/akveo/eva-icons
 [link:akveo-homepage]: https://akveo.com
