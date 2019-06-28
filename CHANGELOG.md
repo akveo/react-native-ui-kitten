@@ -1,3 +1,10 @@
+## <small>4.0.5 (2019-06-28)</small>
+
+* package: hold @eva-design/* packages on a minor version ([d0fc72a](https://github.com/akveo/react-native-ui-kitten/commit/d0fc72a))
+* docs(readme): update design system link ([46156b5](https://github.com/akveo/react-native-ui-kitten/commit/46156b5))
+
+
+
 ## <small>4.0.4 (2019-06-27)</small>
 
 * fix(docs): toggle docs fix ([84246ef](https://github.com/akveo/react-native-ui-kitten/commit/84246ef))
