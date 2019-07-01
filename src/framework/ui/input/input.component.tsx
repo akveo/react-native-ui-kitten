@@ -6,12 +6,15 @@
 
 import React from 'react';
 import {
+  GestureResponderEvent,
   ImageProps,
   StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
   TextStyle,
+  TouchableWithoutFeedback,
+  TouchableWithoutFeedbackProps,
   View,
 } from 'react-native';
 import {
@@ -48,6 +51,7 @@ interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
   labelStyle?: StyleProp<TextStyle>;
   captionTextStyle?: StyleProp<TextStyle>;
+  onIconPress?: (event: GestureResponderEvent) => void;
 }
 
 export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
@@ -181,6 +185,12 @@ export class InputComponent extends React.Component<InputProps> {
     }
   };
 
+  private onIconPress = (event: GestureResponderEvent) => {
+    if (this.props.onIconPress) {
+      this.props.onIconPress(event);
+    }
+  };
+
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       style,
@@ -280,6 +290,16 @@ export class InputComponent extends React.Component<InputProps> {
     };
   };
 
+  private renderIconTouchableElement = (style: StyleType): React.ReactElement<TouchableWithoutFeedbackProps> => {
+    const iconElement: IconElement = this.renderIconElement(style);
+
+    return (
+      <TouchableWithoutFeedback onPress={this.onIconPress}>
+        {iconElement}
+      </TouchableWithoutFeedback>
+    );
+  };
+
   private renderIconElement = (style: StyleType): IconElement => {
     const iconElement: IconElement = this.props.icon(style);
 
@@ -322,7 +342,7 @@ export class InputComponent extends React.Component<InputProps> {
     const { icon, label, captionIcon, caption } = this.props;
 
     return [
-      icon && this.renderIconElement(style.icon),
+      icon && this.renderIconTouchableElement(style.icon),
       isValidString(label) && this.renderLabelElement(style.label),
       isValidString(caption) && this.renderCaptionElement(style.captionLabel),
       captionIcon && this.renderCaptionIconElement(style.captionIcon),
