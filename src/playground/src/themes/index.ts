@@ -4,5 +4,5 @@ export {
 } from './registry';
 export {
   ThemeContext,
-  ContextType,
+  ThemeContextType,
 } from './themeContext';

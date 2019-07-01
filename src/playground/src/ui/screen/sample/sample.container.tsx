@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sample } from './sample.component';
 import {
-  ContextType,
+  ThemeContextType,
   ThemeContext,
   ThemeKey,
 } from '../../../themes';
@@ -11,17 +11,17 @@ export class SampleContainer extends React.Component {
 
   private profileImage: ImageSourcePropType = require('../../../assets/brand-logo.png');
 
-  private isDarkTheme = (context: ContextType): boolean => {
+  private isDarkTheme = (context: ThemeContextType): boolean => {
     return context.name === 'Eva Dark';
   };
 
-  private toggleTheme = (context: ContextType, dark: boolean) => {
+  private toggleTheme = (context: ThemeContextType, dark: boolean) => {
     const nextTheme: ThemeKey = dark ? 'Eva Dark' : 'Eva Light';
 
     context.toggleTheme(nextTheme);
   };
 
-  private renderContent = (context: ContextType): React.ReactNode => {
+  private renderContent = (context: ThemeContextType): React.ReactNode => {
     return (
       <Sample
         profileImage={this.profileImage}
