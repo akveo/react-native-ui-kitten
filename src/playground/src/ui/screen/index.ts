@@ -16,4 +16,5 @@ export { ToggleContainer } from './toggle/toggle.container';
 export { TopNavigationContainer } from './topNavigation/topNavigation.container';
 export { ModalContainer } from './modal/modal.container';
 export { OverflowMenuContainer } from './overflowMenu/overflowMenu.container';
+export { SampleContainer } from './sample/sample.container';
 export { default as Home } from './home.component';

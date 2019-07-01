@@ -27,7 +27,8 @@ export default class App extends React.Component {
       <ApplicationProvider
         mapping={mapping}
         theme={themes[this.state.theme]}>
-        <ThemeContext.Provider value={{ toggleTheme: this.toggleTheme }}>
+        <ThemeContext.Provider
+          value={{ name: this.state.theme, toggleTheme: this.toggleTheme }}>
           <Router/>
         </ThemeContext.Provider>
       </ApplicationProvider>

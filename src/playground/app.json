@@ -18,6 +18,9 @@
     "androidStatusBar": {
       "barStyle": "light-content",
       "backgroundColor": "#3366FF"
-    }
+    },
+    "assetBundlePatterns": [
+      "./assets"
+    ]
   }
 }

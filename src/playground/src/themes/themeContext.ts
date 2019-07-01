@@ -1,6 +1,8 @@
 import React from 'react';
+import { ThemeKey } from './registry';
 
 export interface ContextType {
+  name: ThemeKey;
   toggleTheme: (theme: string) => void;
 }
 
