@@ -72,7 +72,7 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  *
  * ```
  * import React from 'react';
- * import { Checkbox } from 'react-native-ui-kitten';
+ * import { CheckBox } from 'react-native-ui-kitten';
  *
  * export class CheckBoxShowcase extends React.Component {
  *
@@ -86,7 +86,7 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  *
  *   public render(): React.ReactNode {
  *     return (
- *       <Checkbox
+ *       <CheckBox
  *         checked={this.state.checked}
  *         onChange={this.onChange}
  *       />
@@ -103,7 +103,7 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
  *
  * export const CheckBoxShowcase = (props?: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
  *   return (
- *     <Checkbox
+ *     <CheckBox
  *       style={styles.checkbox}
  *       textStyle={styles.checkboxText}
  *       text='Place your text'

@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {
-  Image,
   ImageProps,
   ImageStyle,
   StyleProp,
@@ -59,6 +58,15 @@ export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
  * Styled Input component.
  *
  * @extends React.Component
+ *
+ * @method {() => void} focus - Requests focus for the given input or view. The exact behavior triggered
+ * will depend on the platform and type of view.
+ *
+ * @method {() => void} blur - Removes focus from an input or view. This is the opposite of `focus()`.
+ *
+ * @method {() => boolean} isFocused - Returns if the input is currently focused.
+ *
+ * @method {() => void} clear - Removes all text from the input.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
  * Default is `false`.
@@ -141,7 +149,23 @@ export class InputComponent extends React.Component<InputProps> {
 
   static styledComponentName: string = 'Input';
 
-  static Icon: React.ComponentClass<ImageProps> = Image;
+  private textInputRef: React.RefObject<TextInput> = React.createRef();
+
+  public focus = () => {
+    this.textInputRef.current.focus();
+  };
+
+  public blur = () => {
+    this.textInputRef.current.blur();
+  };
+
+  public isFocused = (): boolean => {
+    return this.textInputRef.current.isFocused();
+  };
+
+  public clear = () => {
+    this.textInputRef.current.clear();
+  };
 
   private onFocus = (event: InputFocusEvent) => {
     this.props.dispatch([Interaction.FOCUSED]);
@@ -304,6 +328,7 @@ export class InputComponent extends React.Component<InputProps> {
         {labelElement}
         <View style={[componentStyle.inputContainer, styles.inputContainer]}>
           <TextInput
+            ref={this.textInputRef}
             {...restProps}
             style={[componentStyle.text, styles.text, textStyle]}
             placeholderTextColor={componentStyle.placeholder.color}
