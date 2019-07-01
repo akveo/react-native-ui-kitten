@@ -38,6 +38,7 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
+import { Override } from '../support/typings';
 
 type ContentElement = React.ReactElement<any>;
 type ChildElement = React.ReactElement<any>;
@@ -47,6 +48,14 @@ interface ComponentProps extends PopoverViewProps, ModalComponentCloseProps {
   children: ChildElement;
   visible?: boolean;
 }
+
+export type PopoverWrapped<T extends ChildElement> = Override<PopoverProps, {
+  children: T;
+}>;
+
+export type PopoverPresented<T extends ContentElement> = Override<PopoverProps, {
+  content: T;
+}>;
 
 export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
 

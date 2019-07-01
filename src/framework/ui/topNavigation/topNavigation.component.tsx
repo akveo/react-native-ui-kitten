@@ -22,10 +22,13 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
+import { PopoverWrapped } from '../popover/popover.component';
 import { isValidString } from '../support/services';
 
 type TextElement = React.ReactElement<TextProps>;
-type ActionElement = React.ReactElement<TopNavigationActionProps>;
+type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
+type PopoverElement = PopoverWrapped<TopNavigationActionElement>;
+type ActionElement = TopNavigationActionElement | PopoverElement;
 type ActionElementProp = ActionElement | ActionElement[];
 
 interface ComponentProps {
