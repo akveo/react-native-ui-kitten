@@ -8,5 +8,6 @@ export {
   InputEndEditEvent,
   Omit,
   Override,
+  PopoverBaseWrapped,
   TouchableIndexedProps,
 } from './type';

@@ -26,9 +26,8 @@ import { PopoverWrapped } from '../popover/popover.component';
 import { isValidString } from '../support/services';
 
 type TextElement = React.ReactElement<TextProps>;
-type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
-type PopoverElement = PopoverWrapped<TopNavigationActionElement>;
-type ActionElement = TopNavigationActionElement | PopoverElement;
+type PopoverTopNavigationActionProps = PopoverWrapped<TopNavigationActionProps>;
+type ActionElement = React.ReactElement<TopNavigationActionProps | PopoverTopNavigationActionProps>;
 type ActionElementProp = ActionElement | ActionElement[];
 
 interface ComponentProps {
