@@ -31,7 +31,7 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
-type ViewPagerProps = ViewProps & ComponentProps;
+export type ViewPagerProps = ViewProps & ComponentProps;
 
 /**
  * Allows flipping through the "pages".

@@ -5,6 +5,7 @@ import {
   ImageProps,
   ImageSourcePropType,
   Image,
+  Animated,
 } from 'react-native';
 import {
   fireEvent,
@@ -34,6 +35,7 @@ import {
   mapping,
   theme,
 } from '../support/tests';
+import { ViewPager } from '@kitten/ui';
 
 describe('@tab: component checks', () => {
 
@@ -164,43 +166,6 @@ describe('@tab-view: component checks', () => {
     );
   };
 
-  it('* emits onSelect with correct args', () => {
-    const screenWidth: number = 375;
-
-    const onSelect = jest.fn();
-
-    const component = render(
-      <Mock onSelect={onSelect}>
-        <ChildMock>
-          <View/>
-        </ChildMock>
-        <ChildMock>
-          <View/>
-        </ChildMock>
-      </Mock>,
-    );
-
-    const scrollView: ReactTestInstance = component.getByType(ScrollView);
-
-    fireEvent(scrollView, 'layout', {
-      nativeEvent: {
-        layout: {
-          width: screenWidth,
-        },
-      },
-    });
-
-    fireEvent(scrollView, 'momentumScrollEnd', {
-      nativeEvent: {
-        contentOffset: {
-          x: screenWidth,
-        },
-      },
-    });
-
-    expect(onSelect).toBeCalledWith(1);
-  });
-
   it('* shouldLoadComponent disables child loading', () => {
     const disabledComponentIndex: number = 1;
 
@@ -220,8 +185,9 @@ describe('@tab-view: component checks', () => {
       </Mock>,
     );
 
-    const scrollView: ReactTestInstance = component.getByType(ScrollView);
-    const unloadedChild: ReactTestInstance = scrollView.props.children[disabledComponentIndex];
+    const viewPager: ReactTestInstance = component.getByType(ViewPager);
+    const containerView: ReactTestInstance = viewPager.findByType(Animated.View);
+    const unloadedChild: ReactTestInstance = containerView.props.children[disabledComponentIndex];
 
     expect(unloadedChild.props.children).toBeNull();
   });
