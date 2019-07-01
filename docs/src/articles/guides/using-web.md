@@ -31,4 +31,4 @@ In case you don't use Expo, and have already initialized React Native Applicatio
 
 ## Usage
 
-If you already have all in place, UI Kitten does not force you creating any additional web-specific configuration. Just use it as is. The next step to create a multi-platform app would be [Creating a Sample Screen Guide](guides/create-screen) and launching it on both mobile device and browser.
+If you already have all in place, UI Kitten does not force you creating any additional web-specific configuration. Just use it as is. The next step to create a multi-platform app would be [Creating a Sample Screen Guide](guides/create-ui-kitten-screen) and launching it on both mobile device and browser.
