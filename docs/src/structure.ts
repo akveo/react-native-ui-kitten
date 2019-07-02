@@ -417,14 +417,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Modal',
-        icon: 'dialog.svg',
-        source: [
-          'Modal',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Popover',
         icon: 'popover.svg',
         source: [

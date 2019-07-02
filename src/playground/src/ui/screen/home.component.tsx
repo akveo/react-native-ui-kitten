@@ -30,7 +30,6 @@ export const routes: RouteType[] = [
   { name: 'Text' },
   { name: 'Toggle' },
   { name: 'Top Navigation' },
-  { name: 'Modal' },
   { name: 'Overflow Menu' },
 ];
 
