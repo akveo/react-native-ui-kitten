@@ -6,14 +6,19 @@
 
 import React from 'react';
 import {
+  Animated,
+  Easing,
+  GestureResponderEvent,
   LayoutChangeEvent,
-  ScrollView,
-  ScrollViewProps,
+  PanResponder,
+  PanResponderCallbacks,
+  PanResponderGestureState,
+  PanResponderInstance,
   StyleSheet,
-  Platform,
   View,
+  ViewProps,
+  ViewStyle,
 } from 'react-native';
-import { ScrollEvent } from '../support/typings';
 
 type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
@@ -26,7 +31,7 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
-export type ViewPagerProps = ScrollViewProps & ComponentProps;
+export type ViewPagerProps = ViewProps & ComponentProps;
 
 /**
  * Allows flipping through the "pages".
@@ -122,124 +127,148 @@ export type ViewPagerProps = ScrollViewProps & ComponentProps;
  * ```
  */
 
-export class ViewPager extends React.Component<ViewPagerProps> {
+export class ViewPager extends React.Component<ViewPagerProps> implements PanResponderCallbacks {
 
   static defaultProps: Partial<ViewPagerProps> = {
     selectedIndex: 0,
     shouldLoadComponent: (): boolean => true,
   };
 
-  private scrollViewRef: React.RefObject<ScrollView> = React.createRef();
+  private containerRef: React.RefObject<View> = React.createRef();
   private contentWidth: number = 0;
+  private contentOffsetValue: number = 0;
+  private contentOffset: Animated.Value = new Animated.Value(this.contentOffsetValue);
+  private panResponder: PanResponderInstance = PanResponder.create(this);
 
-  public shouldComponentUpdate(nextProps: ViewPagerProps): boolean {
-    return this.props.selectedIndex !== nextProps.selectedIndex;
+  public componentDidMount() {
+    this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
   }
 
-  public scrollToIndex(params: { index: number; animated?: boolean }) {
+  public componentWillUnmount() {
+    this.contentOffset.removeAllListeners();
+  }
+
+  public onMoveShouldSetPanResponder = (event: GestureResponderEvent, state: PanResponderGestureState): boolean => {
+    const isHorizontalMove: boolean = Math.abs(state.dx) > 0 && Math.abs(state.dx) > Math.abs(state.dy);
+
+    if (isHorizontalMove) {
+      const nextSelectedIndex: number = this.props.selectedIndex - Math.sign(state.dx);
+
+      return nextSelectedIndex >= 0 && nextSelectedIndex < this.getChildCount();
+    }
+
+    return false;
+  };
+
+  public onPanResponderMove = (event: GestureResponderEvent, state: PanResponderGestureState) => {
+    const selectedPageOffset: number = this.props.selectedIndex * this.contentWidth;
+
+    this.contentOffset.setValue(state.dx - selectedPageOffset);
+  };
+
+  public onPanResponderRelease = (event: GestureResponderEvent, state: PanResponderGestureState) => {
+    if (Math.abs(state.vx) >= 0.5 || Math.abs(state.dx) >= 0.5 * this.contentWidth) {
+      const index: number = state.dx > 0 ? this.props.selectedIndex - 1 : this.props.selectedIndex + 1;
+      this.scrollToIndex({ index, animated: true });
+    } else {
+      const index: number = this.props.selectedIndex;
+      this.scrollToIndex({ index, animated: true });
+    }
+  };
+
+  public scrollToIndex(params: { index: number, animated?: boolean }) {
     const { index, ...rest } = params;
     const offset: number = this.contentWidth * index;
 
     this.scrollToOffset({ offset, ...rest });
   }
 
-  public scrollToOffset(params: { offset: number; animated?: boolean }) {
-    // Regularly we trigger onSelect when `onMomentumScrollEnd` is triggered, but
-    // there is an issue: https://github.com/facebook/react-native/issues/21718
+  public scrollToOffset = (params: { offset: number, animated?: boolean }) => {
+    this.createOffsetAnimation(params).start(this.onContentOffsetAnimationStateEnd);
+  };
 
-    const selector = Platform.select({
-      ios: this.scrollToOffsetIOS,
-      android: this.scrollToOffsetAndroid,
+  private onLayout = (event: LayoutChangeEvent) => {
+    this.contentWidth = event.nativeEvent.layout.width / this.getChildCount();
+
+    this.scrollToIndex({
+      index: this.props.selectedIndex,
     });
-
-    selector(params);
-  }
-
-  private scrollToOffsetIOS = (params: { offset: number; animated?: boolean }) => {
-    const { offset, ...rest } = params;
-    const { current: scrollView } = this.scrollViewRef;
-
-    scrollView.scrollTo({ x: offset, ...rest });
   };
 
-  private scrollToOffsetAndroid = (params: { offset: number; animated?: boolean }) => {
-    this.scrollToOffsetIOS(params);
-    this.dispatchOnSelect(params.offset);
+  private onContentOffsetAnimationStateChanged = (state: { value: number }) => {
+    this.contentOffsetValue = -state.value;
+
+    if (this.props.onOffsetChange) {
+      this.props.onOffsetChange(this.contentOffsetValue);
+    }
   };
 
-  private dispatchOnSelect = (offset: number) => {
-    const selectedIndex: number = offset / this.contentWidth;
+  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }) => {
+    const selectedIndex: number = this.contentOffsetValue / this.contentWidth;
 
     if (selectedIndex !== this.props.selectedIndex && this.props.onSelect) {
       this.props.onSelect(Math.round(selectedIndex));
     }
   };
 
-  private onScroll = (event: ScrollEvent) => {
-    if (this.props.onOffsetChange) {
-      const { x: offset } = event.nativeEvent.contentOffset;
+  private createOffsetAnimation = (params: { offset: number, animated?: boolean }): Animated.CompositeAnimation => {
+    const animationDuration: number = params.animated ? 300 : 0;
 
-      this.props.onOffsetChange(offset);
-    }
+    return Animated.timing(this.contentOffset, {
+      toValue: -params.offset,
+      easing: Easing.linear,
+      duration: animationDuration,
+    });
   };
 
-  private onScrollEnd = (event: ScrollEvent) => {
-    const { x: offset } = event.nativeEvent.contentOffset;
+  private renderComponentChild = (source: ChildElement, index: number): ChildElement => {
+    const contentView: ChildElement | null = this.props.shouldLoadComponent(index) ? source : null;
 
-    this.dispatchOnSelect(offset);
+    return (
+      <View style={styles.contentContainer}>
+        {contentView}
+      </View>
+    );
   };
 
-  private onLayout = (event: LayoutChangeEvent) => {
-    const { width } = event.nativeEvent.layout;
-    this.contentWidth = width;
-
-    if (this.props.onLayout) {
-      this.props.onLayout(event);
-    }
-  };
-
-  private renderComponentChild = (element: ChildElement, index: number): ChildElement => {
-    const { shouldLoadComponent, contentContainerStyle } = this.props;
-
-    const contentView: ChildElement | null = shouldLoadComponent(index) ? element : null;
-
-    return React.createElement(View, {
-      key: index,
-      style: [styles.contentViewContainer, contentContainerStyle],
-    }, contentView);
-  };
-
-  private renderComponentChildren = (source: ChildElement | ChildElement[]): ChildElement[] => {
+  private renderComponentChildren = (source: ChildrenProp): ChildElement[] => {
     return React.Children.map(source, this.renderComponentChild);
   };
 
-  public render(): React.ReactNode {
-    const { contentContainerStyle, children, ...derivedProps } = this.props;
-    const componentChildren: ChildElement[] = this.renderComponentChildren(children);
+  private getChildCount = (): number => {
+    return React.Children.count(this.props.children);
+  };
 
-    const widthPercent: number = 100 * componentChildren.length;
+  private getContainerStyle = (): ViewStyle => {
+    return {
+      width: `${100 * this.getChildCount()}%`,
+
+      // @ts-ignore: RN has no types for `Animated` styles
+      transform: [{ translateX: this.contentOffset }],
+    };
+  };
+
+  public render(): React.ReactNode {
+    const { style, children, ...restProps } = this.props;
 
     return (
-      <ScrollView
-        bounces={false}
-        contentContainerStyle={{ width: `${widthPercent}%` }}
-        showsHorizontalScrollIndicator={false}
-        {...derivedProps}
-        ref={this.scrollViewRef}
-        scrollEventThrottle={16}
-        horizontal={true}
-        pagingEnabled={true}
-        onScroll={this.onScroll}
-        onMomentumScrollEnd={this.onScrollEnd}
-        onLayout={this.onLayout}>
-        {componentChildren}
-      </ScrollView>
+      <Animated.View
+        {...restProps}
+        ref={this.containerRef}
+        style={[styles.container, style, this.getContainerStyle()]}
+        onLayout={this.onLayout}
+        {...this.panResponder.panHandlers}>
+        {this.renderComponentChildren(children)}
+      </Animated.View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  contentViewContainer: {
+  container: {
+    flexDirection: 'row',
+  },
+  contentContainer: {
     flex: 1,
     width: '100%',
   },

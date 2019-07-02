@@ -16,10 +16,7 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import {
-  Button,
-  ButtonProps,
-} from '../button/button.component';
+import { ButtonProps } from '../button/button.component';
 
 type ButtonElement = React.ReactElement<ButtonProps>;
 type ChildrenProp = ButtonElement | ButtonElement[];
@@ -76,11 +73,7 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 
   static styledComponentName: string = 'ButtonGroup';
 
-  static Button = Button;
-
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style } = this.props;
-
     const {
       dividerBackgroundColor,
       dividerWidth,
@@ -88,15 +81,10 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
     } = source;
 
     return {
-      container: {
-        ...containerParameters,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerParameters,
       button: {
         borderEndColor: dividerBackgroundColor,
         borderEndWidth: dividerWidth,
-        ...styles.button,
       },
     };
   };
@@ -117,7 +105,7 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
       appearance: appearance,
       size: size,
       status: status,
-      style: [element.props.style, additionalStyle],
+      style: [element.props.style, styles.button, additionalStyle],
     });
   };
 
@@ -128,7 +116,7 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const { themedStyle, style, children, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
     const buttonElements: ButtonElement[] = this.renderButtonElements(children, componentStyles);
@@ -136,7 +124,7 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
     return (
       <View
         {...derivedProps}
-        style={container}>
+        style={[container, styles.container, style]}>
         {buttonElements}
       </View>
     );

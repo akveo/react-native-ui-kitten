@@ -9,6 +9,7 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageProps,
+  ImageStyle,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -211,9 +212,6 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    // @ts-ignore: will be not executed if `titleStyle` and `descriptionStyle` properties are provided
-    const { style, titleStyle, descriptionStyle } = this.props;
-
     const {
       iconWidth,
       iconHeight,
@@ -234,17 +232,13 @@ export class ListItemComponent extends React.Component<ListItemProps> {
     } = source;
 
     return {
-      container: {
-        ...containerParameters,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerParameters,
+      contentContainer: {},
       icon: {
         width: iconWidth,
         height: iconHeight,
         marginHorizontal: iconMarginHorizontal,
         tintColor: iconTintColor,
-        ...styles.icon,
       },
       title: {
         marginHorizontal: titleMarginHorizontal,
@@ -252,8 +246,6 @@ export class ListItemComponent extends React.Component<ListItemProps> {
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
-        ...styles.title,
-        ...StyleSheet.flatten(titleStyle),
       },
       description: {
         color: descriptionColor,
@@ -261,17 +253,14 @@ export class ListItemComponent extends React.Component<ListItemProps> {
         fontWeight: descriptionFontWeight,
         lineHeight: descriptionLineHeight,
         marginHorizontal: descriptionMarginHorizontal,
-        ...styles.description,
-        ...StyleSheet.flatten(descriptionStyle),
       },
       accessory: {
         marginHorizontal: accessoryMarginHorizontal,
-        ...styles.accessory,
       },
     };
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
+  private renderIconElement = (style: ImageStyle): IconElement => {
     // @ts-ignore: will be not executed if `icon` prop is provided
     const { index, icon } = this.props;
 
@@ -284,12 +273,13 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   };
 
   private renderContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const [titleElement, descriptionElement] = this.renderContentElementChildren(style);
+    const { contentContainer, ...contentStyles } = style;
+    const [titleElement, descriptionElement] = this.renderContentElementChildren(contentStyles);
 
     return (
       <View
         key={1}
-        style={styles.contentContainer}>
+        style={[contentContainer, styles.contentContainer]}>
         {titleElement}
         {descriptionElement}
       </View>
@@ -298,12 +288,12 @@ export class ListItemComponent extends React.Component<ListItemProps> {
 
   private renderTitleElement = (style: StyleType): TextElement => {
     // @ts-ignore: will be not executed if `title` property is provided
-    const { title } = this.props;
+    const { title, titleStyle } = this.props;
 
     return (
       <Text
         key={2}
-        style={style}>
+        style={[style, styles.title, titleStyle]}>
         {title}
       </Text>
     );
@@ -311,12 +301,12 @@ export class ListItemComponent extends React.Component<ListItemProps> {
 
   private renderDescriptionElement = (style: StyleType): TextElement => {
     // @ts-ignore: will be not executed if `description` property is provided
-    const { description } = this.props;
+    const { description, descriptionStyle } = this.props;
 
     return (
       <Text
         key={3}
-        style={style}>
+        style={[style, styles.description, descriptionStyle]}>
         {description}
       </Text>
     );
@@ -330,7 +320,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
 
     return React.cloneElement(accessoryElement, {
       key: 4,
-      style: [style, accessoryElement.props.style],
+      style: [style, styles.accessory, accessoryElement.props.style],
     });
   };
 
@@ -362,7 +352,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, ...derivedProps } = this.props;
+    const { themedStyle, style, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
@@ -371,7 +361,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...derivedProps}
-        style={container}
+        style={[container, styles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}

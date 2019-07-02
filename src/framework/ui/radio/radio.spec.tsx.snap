@@ -56,29 +56,40 @@ exports[`@radio: matches snapshot default 1`] = `
   onPressIn={[Function]}
   onPressOut={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "flexDirection": "row",
-    }
+    Array [
+      Object {},
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      },
+      undefined,
+    ]
   }
 >
   <View
     style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      }
+      Array [
+        Object {},
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+      ]
     }
   >
     <View
       style={
-        Object {
-          "backgroundColor": "transparent",
-          "borderRadius": 20,
-          "height": 40,
-          "position": "absolute",
-          "width": 40,
-        }
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
+            "height": 40,
+            "width": 40,
+          },
+          Object {
+            "position": "absolute",
+          },
+        ]
       }
     />
     <TouchableOpacity
@@ -89,16 +100,20 @@ exports[`@radio: matches snapshot default 1`] = `
       onPressIn={[Function]}
       onPressOut={[Function]}
       style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#EDF1F7",
-          "borderColor": "#E4E9F2",
-          "borderRadius": 12,
-          "borderWidth": 1,
-          "height": 24,
-          "justifyContent": "center",
-          "width": 24,
-        }
+        Array [
+          Object {
+            "backgroundColor": "#EDF1F7",
+            "borderColor": "#E4E9F2",
+            "borderRadius": 12,
+            "borderWidth": 1,
+            "height": 24,
+            "width": 24,
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+        ]
       }
       theme={
         Object {
@@ -258,12 +273,15 @@ exports[`@radio: matches snapshot default 1`] = `
     >
       <View
         style={
-          Object {
-            "backgroundColor": "transparent",
-            "borderRadius": 8,
-            "height": 16,
-            "width": 16,
-          }
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "borderRadius": 8,
+              "height": 16,
+              "width": 16,
+            },
+            Object {},
+          ]
         }
       />
     </TouchableOpacity>

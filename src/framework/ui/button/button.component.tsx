@@ -8,6 +8,7 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageProps,
+  ImageStyle,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -28,7 +29,7 @@ import { isValidString } from '../support/services';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
-type IconProp = (style: StyleType) => IconElement;
+type IconProp = (style: ImageStyle) => IconElement;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
@@ -140,8 +141,6 @@ export class ButtonComponent extends React.Component<ButtonProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, textStyle } = this.props;
-
     const {
       textColor,
       textFontSize,
@@ -156,46 +155,39 @@ export class ButtonComponent extends React.Component<ButtonProps> {
     } = source;
 
     return {
-      container: {
-        ...containerParameters,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerParameters,
       text: {
         color: textColor,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         marginHorizontal: textMarginHorizontal,
-        ...styles.text,
-        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,
         height: iconHeight,
         tintColor: iconTintColor,
         marginHorizontal: iconMarginHorizontal,
-        ...styles.icon,
       },
     };
   };
 
-  private renderTextElement = (style: StyleType): TextElement => {
+  private renderTextElement = (style: TextStyle): TextElement => {
     return (
       <Text
         key={1}
-        style={style}>
+        style={[style, styles.text, this.props.textStyle]}>
         {this.props.children}
       </Text>
     );
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
+  private renderIconElement = (style: ImageStyle): IconElement => {
     const iconElement: IconElement = this.props.icon(style);
 
     return React.cloneElement(iconElement, {
       key: 2,
-      style: [style, iconElement.props.style],
+      style: [style, styles.icon, iconElement.props.style],
     });
   };
 
@@ -209,16 +201,16 @@ export class ButtonComponent extends React.Component<ButtonProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { themedStyle, style, ...containerProps } = this.props;
+    const { container, ...childStyles } = this.getComponentStyle(themedStyle);
 
-    const [iconElement, textElement] = this.renderComponentChildren(componentStyles);
+    const [iconElement, textElement] = this.renderComponentChildren(childStyles);
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        {...derivedProps}
-        style={container}
+        {...containerProps}
+        style={[container, styles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>

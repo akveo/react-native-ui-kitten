@@ -15,7 +15,7 @@ interface State {
 export default class App extends React.Component {
 
   public state: State = {
-    theme: 'Eva Dark',
+    theme: 'Eva Light',
   };
 
   private toggleTheme = (theme: string) => {
@@ -27,7 +27,8 @@ export default class App extends React.Component {
       <ApplicationProvider
         mapping={mapping}
         theme={themes[this.state.theme]}>
-        <ThemeContext.Provider value={{ toggleTheme: this.toggleTheme }}>
+        <ThemeContext.Provider
+          value={{ name: this.state.theme, toggleTheme: this.toggleTheme }}>
           <Router/>
         </ThemeContext.Provider>
       </ApplicationProvider>

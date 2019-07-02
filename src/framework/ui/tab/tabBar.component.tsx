@@ -112,8 +112,6 @@ export class TabBarComponent extends React.Component<TabBarProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, indicatorStyle } = this.props;
-
     const {
       indicatorHeight,
       indicatorBorderRadius,
@@ -122,17 +120,12 @@ export class TabBarComponent extends React.Component<TabBarProps> {
     } = source;
 
     return {
-      container: {
-        ...containerParameters,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerParameters,
+      item: {},
       indicator: {
         height: indicatorHeight,
         borderRadius: indicatorBorderRadius,
         backgroundColor: indicatorBackgroundColor,
-        ...styles.indicator,
-        ...StyleSheet.flatten(indicatorStyle),
       },
     };
   };
@@ -157,25 +150,25 @@ export class TabBarComponent extends React.Component<TabBarProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, selectedIndex, children, ...derivedProps } = this.props;
+    const { themedStyle, style, indicatorStyle, selectedIndex, children, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     const tabElements: TabElement[] = this.renderTabElements(children);
 
     return (
-      <View>
+      <React.Fragment>
         <View
           {...derivedProps}
-          style={componentStyle.container}>
+          style={[componentStyle.container, styles.container, style]}>
           {tabElements}
         </View>
         <TabIndicator
           ref={this.tabIndicatorRef}
-          style={componentStyle.indicator}
+          style={[componentStyle.indicator, styles.indicator, indicatorStyle]}
           selectedPosition={selectedIndex}
           positions={tabElements.length}
         />
-      </View>
+      </React.Fragment>
     );
   }
 }
@@ -184,10 +177,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
   },
-  indicator: {},
   item: {
     flex: 1,
   },
+  indicator: {},
 });
 
 export const TabBar = styled<TabBarProps>(TabBarComponent);

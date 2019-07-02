@@ -3,10 +3,10 @@ import {
   Animated,
   Easing,
   LayoutChangeEvent,
-  StyleSheet,
+  View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
 
 interface ComponentProps {
   positions: number;
@@ -97,30 +97,30 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
 
     this.scrollToOffset({
       offset: this.indicatorWidth * this.props.selectedPosition,
+      animated: false,
     });
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, positions } = this.props;
-
-    const widthPercent: number = 100 / positions;
+  private getComponentStyle = (): ViewStyle => {
+    const widthPercent: number = 100 / this.props.positions;
 
     return {
-      ...source,
-      ...StyleSheet.flatten(style),
       width: `${widthPercent}%`,
+
+      // @ts-ignore: RN has no types for `Animated` styles
       transform: [{ translateX: this.contentOffset }],
     };
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const componentStyle: StyleType = this.getComponentStyle(this.props.style);
+    const { style, ...restProps } = this.props;
+    const componentStyle: ViewStyle = this.getComponentStyle();
 
     return (
       <Animated.View
-        {...this.props}
+        {...restProps}
         onLayout={this.onLayout}
-        style={componentStyle}
+        style={[style, componentStyle]}
       />
     );
   }

@@ -6,7 +6,8 @@
     "sdkVersion": "33.0.0",
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "web"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,6 +18,9 @@
     "androidStatusBar": {
       "barStyle": "light-content",
       "backgroundColor": "#3366FF"
-    }
+    },
+    "assetBundlePatterns": [
+      "./assets"
+    ]
   }
 }

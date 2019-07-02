@@ -44,6 +44,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Using with React Native Web',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/using-web.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Create UI Kitten Screen',
         children: [
           {

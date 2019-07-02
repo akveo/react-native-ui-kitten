@@ -63,7 +63,6 @@ export class PopoverView extends React.Component<PopoverViewProps> {
       transform: [
         { translateX: containerTranslate },
       ],
-      ...styles.container,
     };
 
     const contentStyle: ViewStyle = {
@@ -71,8 +70,6 @@ export class PopoverView extends React.Component<PopoverViewProps> {
       transform: [
         { translateX: containerTranslate },
       ],
-      ...StyleSheet.flatten(source),
-      ...styles.content,
     };
 
     const indicatorStyle: ViewStyle = {
@@ -97,7 +94,7 @@ export class PopoverView extends React.Component<PopoverViewProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, placement: rawPlacement, children, ...derivedProps } = this.props;
+    const { style, indicatorStyle, placement: rawPlacement, children, ...derivedProps } = this.props;
     const placement: PopoverPlacement = PopoverPlacements.parse(rawPlacement, PLACEMENT_DEFAULT);
 
     const { container, indicator, content } = this.getComponentStyle(style, placement);
@@ -105,10 +102,10 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     return (
       <View
         {...derivedProps}
-        style={container}>
-        <Arrow style={indicator}/>
+        style={[container, styles.container]}>
+        <Arrow style={[indicator, styles.indicator, indicatorStyle]}/>
         <View
-          style={content}>
+          style={[content, styles.content, style]}>
           {children}
         </View>
       </View>

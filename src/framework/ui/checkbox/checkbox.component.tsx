@@ -6,14 +6,16 @@
 
 import React from 'react';
 import {
+  GestureResponderEvent,
+  Insets,
+  StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
-  GestureResponderEvent,
-  StyleProp,
-  TextStyle,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   Interaction,
@@ -141,8 +143,6 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, textStyle } = this.props;
-
     const {
       textMarginHorizontal,
       textColor,
@@ -160,26 +160,16 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       ...containerParameters
     } = source;
 
-    const hitSlop: number = 40 - containerParameters.width;
-
     return {
-      container: {
-        ...StyleSheet.flatten(style),
-        ...styles.container,
-      },
-      highlightContainer: styles.highlightContainer,
-      selectContainer: {
-        ...containerParameters,
-        ...styles.selectContainer,
-      },
+      container: {},
+      highlightContainer: {},
+      selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
         color: textColor,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         lineHeight: textLineHeight,
-        ...styles.text,
-        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,
@@ -192,38 +182,45 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         height: outlineHeight,
         borderRadius: outlineBorderRadius,
         backgroundColor: outlineBackgroundColor,
-        ...styles.highlight,
-      },
-      hitSlop: {
-        top: hitSlop,
-        left: hitSlop,
-        bottom: hitSlop,
-        right: hitSlop,
       },
     };
   };
 
-  private renderTextElement = (style: StyleType): TextElement => {
-    const { text } = this.props;
+  private createHitSlopInsets = (style: StyleProp<ViewStyle>): Insets => {
+    const { width } = StyleSheet.flatten(style);
+
+    // @ts-ignore: `width` is restricted to be a number
+    const value: number = 40 - width;
+
+    return {
+      left: value,
+      top: value,
+      right: value,
+      bottom: value,
+    };
+  };
+
+  private renderTextElement = (style: TextStyle): TextElement => {
+    const { text, textStyle } = this.props;
 
     return (
-      <Text style={style}>{text}</Text>
+      <Text style={[style, styles.text, textStyle]}>{text}</Text>
     );
   };
 
-  private renderSelectIconElement = (style: StyleType): IconElement => {
+  private renderSelectIconElement = (style: ViewStyle): IconElement => {
     return (
-      <CheckMark style={[style, styles.selectIcon]}/>
+      <CheckMark style={[style, styles.icon]}/>
     );
   };
 
-  private renderIndeterminateIconElement = (style: StyleType): IconElement => {
+  private renderIndeterminateIconElement = (style: ViewStyle): IconElement => {
     return (
-      <View style={[style, styles.indeterminateIcon]}/>
+      <View style={[style, styles.icon]}/>
     );
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
+  private renderIconElement = (style: ViewStyle): IconElement => {
     if (this.props.indeterminate) {
       return this.renderIndeterminateIconElement(style);
     } else {
@@ -241,35 +238,37 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, disabled, text, ...derivedProps } = this.props;
+    const { themedStyle, style, disabled, text, ...derivedProps } = this.props;
 
     const {
       container,
       highlightContainer,
       highlight,
       selectContainer,
-      hitSlop,
       ...componentStyle
-    }: StyleType = this.getComponentStyle(themedStyle);
+    } = this.getComponentStyle(themedStyle);
+
+    const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
+    const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
 
     const [iconElement, textElement] = this.renderComponentChildren(componentStyle);
 
     return (
       <TouchableOpacity
-        style={container}
+        style={[container, styles.container, style]}
         activeOpacity={1.0}
         disabled={disabled}
-        hitSlop={hitSlop}
+        hitSlop={hitSlopInsets}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={highlightContainer}>
-          <View style={highlight}/>
+        <View style={[highlightContainer, styles.highlightContainer]}>
+          <View style={[highlight, styles.highlight]}/>
           <TouchableOpacity
             activeOpacity={1.0}
             {...derivedProps}
             disabled={disabled}
-            style={selectContainer}
+            style={selectContainerStyle}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
@@ -295,13 +294,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  selectIcon: {},
-  indeterminateIcon: {
-    borderRadius: 6,
-  },
   highlight: {
     position: 'absolute',
   },
+  icon: {},
   text: {},
 });
 
