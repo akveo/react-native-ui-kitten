@@ -4,12 +4,13 @@ import {
   ImageProps,
   ImageSourcePropType,
   TextInput,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {
-  render,
   fireEvent,
-  shallow,
+  render,
   RenderAPI,
+  shallow,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
@@ -41,6 +42,8 @@ const renderComponent = (props?: InputProps): RenderAPI => {
     <Mock {...props} />,
   );
 };
+
+const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
 describe('@input: native methods', () => {
 
@@ -106,8 +109,6 @@ describe('@input: matches snapshot', () => {
   });
 
   describe('* appearance', () => {
-
-    const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
     it('* icon', () => {
       const icon = (style: StyleType): React.ReactElement<ImageProps> => {
@@ -232,14 +233,33 @@ describe('@input: component checks', () => {
     expect(onFocus).toBeCalled();
   });
 
-  it('* emits onEndEditing', () => {
-    const onEndEditing = jest.fn();
+  it('* emits onBlur', () => {
+    const onBlur = jest.fn();
 
-    const component: RenderAPI = renderComponent({ onEndEditing });
+    const component: RenderAPI = renderComponent({ onBlur });
 
-    fireEvent(component.getByType(TextInput), 'endEditing');
+    fireEvent(component.getByType(TextInput), 'blur');
 
-    expect(onEndEditing).toBeCalled();
+    expect(onBlur).toBeCalled();
+  });
+
+  it('* emits onIconPress', () => {
+    const icon = (style: StyleType): React.ReactElement<ImageProps> => {
+      return (
+        <Image
+          style={style}
+          source={iconSource}
+        />
+      );
+    };
+
+    const onIconPress = jest.fn();
+
+    const component: RenderAPI = renderComponent({ icon, onIconPress });
+
+    fireEvent.press(component.getByType(TouchableWithoutFeedback));
+
+    expect(onIconPress).toBeCalled();
   });
 
   it('* changes text', () => {

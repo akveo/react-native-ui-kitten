@@ -171,7 +171,30 @@ The example above demonstrates how you can create a really simple configuration.
 }
 ```
 
-What we did is that we added a rounded [variant](design-system/design-system-glossary#variant) which will make our `CircleButton` not such circle. And this is how it looks:
+What we did is that we added a rounded [variant](design-system/design-system-glossary#variant) which will make our `CircleButton` not such circle. Let's now pass it to a component:
+
+```js
+import * as React from 'react';
+import { ApplicationProvider, Layout } from 'react-native-ui-kitten';
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { default as customMapping } from './path-to/custom-mapping.json';
+import CircleButton from './path-to/CircleButton';
+
+const App = () => (
+  <ApplicationProvider 
+    mapping={mapping}
+    customMapping={customMapping}
+    theme={lightTheme}>
+    <Layout style={{padding: 64, alignItems: 'center'}}>
+      <CircleButton shape='rounded'/> // <-- Apply `rounded` shape variant
+    </Layout>
+  </ApplicationProvider>
+);
+
+export default App;
+```
+
+And this is how it looks:
 
 ![image](assets/images/articles/design-system/custom-mapping-variant.png)
 
@@ -237,9 +260,10 @@ class CircleButton extends React.Component {
     
     return (
       <TouchableOpacity 
+        {...restProps}
         style={[themedStyle, style]}
         onPressIn={this.onPressIn}
-        {...restProps}
+        onPressOut={this.onPressOut}
       />
     );
   }
