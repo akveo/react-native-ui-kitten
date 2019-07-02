@@ -6,18 +6,19 @@
 
 import React from 'react';
 import {
-  TouchableOpacity,
   GestureResponderEvent,
-  StyleSheet,
   ImageProps,
+  ImageStyle,
   StyleProp,
+  StyleSheet,
   TextStyle,
+  TouchableOpacity,
 } from 'react-native';
 import {
-  StyledComponentProps,
-  StyleType,
   Interaction,
   styled,
+  StyledComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   Text,
@@ -101,8 +102,6 @@ export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemP
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, textStyle } = this.props;
-
     const {
       textMarginHorizontal,
       textFontSize,
@@ -117,18 +116,13 @@ export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemP
     } = source;
 
     return {
-      container: {
-        ...containerStyle,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerStyle,
       text: {
         marginHorizontal: textMarginHorizontal,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,
@@ -139,22 +133,24 @@ export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemP
     };
   };
 
-  private renderTextElement = (style: StyleType): TextElement => {
+  private renderTextElement = (style: TextStyle): TextElement => {
+    const { text, textStyle } = this.props;
+
     return (
       <Text
         key={2}
-        style={style}>
-        {this.props.text}
+        style={[style, styles.text, textStyle]}>
+        {text}
       </Text>
     );
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
+  private renderIconElement = (style: ImageStyle): IconElement => {
     const iconElement: IconElement = this.props.icon(style);
 
     return React.cloneElement(iconElement, {
       key: 1,
-      style: [style, iconElement.props.style],
+      style: [style, styles.icon, iconElement.props.style],
     });
   };
 
@@ -168,7 +164,7 @@ export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemP
   };
 
   public render(): React.ReactNode {
-    const { style, themedStyle, ...restProps } = this.props;
+    const { themedStyle, style, ...restProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
     const [iconElement, textElement] = this.renderComponentChildren(componentStyles);
@@ -177,7 +173,7 @@ export class OverflowMenuItemComponent extends React.Component<OverflowMenuItemP
       <TouchableOpacity
         activeOpacity={1.0}
         {...restProps}
-        style={container}
+        style={[container, styles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
@@ -194,6 +190,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  text: {},
+  icon: {},
 });
 
 export const OverflowMenuItem = styled<OverflowMenuItemProps>(OverflowMenuItemComponent);

@@ -27,13 +27,14 @@ import { isValidString } from '../support/services';
 type TextElement = React.ReactElement<TextProps>;
 type ActionElement = React.ReactElement<TopNavigationActionProps>;
 type ActionElementProp = ActionElement | ActionElement[];
+type AlignmentProp = 'start' | 'center';
 
 interface ComponentProps {
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
   subtitle?: string;
   subtitleStyle?: StyleProp<TextStyle>;
-  alignment?: 'start' | 'center';
+  alignment?: AlignmentProp;
   leftControl?: ActionElement;
   rightControls?: ActionElementProp;
 }
@@ -151,28 +152,20 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
   static styledComponentName: string = 'TopNavigation';
 
-  private getAlignmentDependentStyles = (): StyleType | null => {
-    const { alignment } = this.props;
-
+  private getAlignmentDependentStyles = (alignment: AlignmentProp): StyleType | null => {
     if (alignment === 'center') {
       return {
         container: styles.containerCentered,
         titleContainer: styles.titleContainerCentered,
       };
-    } else {
-      return {
-        rightControlsContainer: styles.rightControlsContainerStart,
-      };
     }
+
+    return {
+      rightControlsContainer: styles.rightControlsContainerStart,
+    };
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const {
-      style,
-      titleStyle,
-      subtitleStyle,
-    } = this.props;
-
     const {
       titleTextAlign,
       titleFontSize,
@@ -184,30 +177,19 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       subtitleLineHeight,
       subtitleFontWeight,
       subtitleColor,
-      ...containerStyle
+      ...containerParameters
     } = source;
 
-    const alignmentDependentStyles: StyleType = this.getAlignmentDependentStyles();
 
     return {
-      container: {
-        ...containerStyle,
-        ...styles.container,
-        ...alignmentDependentStyles.container,
-        ...StyleSheet.flatten(style),
-      },
-      titleContainer: {
-        ...styles.titleContainer,
-        ...alignmentDependentStyles.titleContainer,
-      },
+      container: containerParameters,
+      titleContainer: {},
       title: {
         textAlign: titleTextAlign,
         fontSize: titleFontSize,
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
-        ...styles.title,
-        ...StyleSheet.flatten(titleStyle),
       },
       subtitle: {
         textAlign: subtitleTextAlign,
@@ -215,14 +197,9 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
         color: subtitleColor,
         fontWeight: subtitleFontWeight,
         lineHeight: subtitleLineHeight,
-        ...styles.subtitle,
-        ...StyleSheet.flatten(subtitleStyle),
       },
-      leftControlContainer: styles.leftControlContainer,
-      rightControlsContainer: {
-        ...styles.rightControlsContainer,
-        ...alignmentDependentStyles.rightControlsContainer,
-      },
+      leftControlContainer: {},
+      rightControlsContainer: {},
     };
   };
 
@@ -243,18 +220,25 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
   }
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { title, subtitle, leftControl, rightControls } = this.props;
+    const {
+      title,
+      subtitle,
+      leftControl,
+      rightControls,
+      titleStyle,
+      subtitleStyle,
+    } = this.props;
 
     return [
-      isValidString(title) && this.renderTextElement(title, style.title),
-      isValidString(subtitle) && this.renderTextElement(subtitle, style.subtitle),
+      isValidString(title) && this.renderTextElement(title, [style.title, styles.title, titleStyle]),
+      isValidString(subtitle) && this.renderTextElement(subtitle, [style.subtitle, styles.subtitle, subtitleStyle]),
       leftControl && this.renderActionElements(leftControl),
       rightControls && this.renderActionElements(rightControls),
     ];
   };
 
   public render(): React.ReactNode {
-    const { style, themedStyle, ...restProps } = this.props;
+    const { themedStyle, style, alignment, ...restProps } = this.props;
 
     const {
       container,
@@ -263,6 +247,8 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       rightControlsContainer,
       ...componentStyles
     } = this.getComponentStyle(themedStyle);
+
+    const alignmentStyles: StyleType = this.getAlignmentDependentStyles(alignment);
 
     const [
       titleElement,
@@ -273,16 +259,16 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
     return (
       <View
-        style={[container, style]}
+        style={[container, styles.container, alignmentStyles.container, style]}
         {...restProps}>
-        <View style={leftControlContainer}>
+        <View style={[leftControlContainer, styles.leftControlContainer]}>
           {leftControlElement}
         </View>
-        <View style={titleContainer}>
+        <View style={[titleContainer, styles.titleContainer, alignmentStyles.titleContainer]}>
           {titleElement}
           {subtitleElement}
         </View>
-        <View style={rightControlsContainer}>
+        <View style={[rightControlsContainer, styles.rightControlsContainer, alignmentStyles.rightControlsContainer]}>
           {rightControlElements}
         </View>
       </View>

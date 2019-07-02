@@ -3,6 +3,7 @@ import {
   View,
   ScrollView,
   ViewProps,
+  Animated,
 } from 'react-native';
 import {
   fireEvent,
@@ -24,62 +25,6 @@ describe('@view-pager: component checks', () => {
   const ChildMock = (props?: ViewProps): React.ReactElement<ViewProps> => (
     <View {...props}/>
   );
-
-  it('* emits onSelect with correct args', () => {
-    const screenWidth: number = 375;
-
-    const onSelect = jest.fn();
-
-    const component: RenderAPI = render(
-      <Mock onSelect={onSelect}>
-        <ChildMock/>
-        <ChildMock/>
-      </Mock>,
-    );
-
-    const scrollView: ReactTestInstance = component.getByType(ScrollView);
-
-    fireEvent(scrollView, 'layout', {
-      nativeEvent: {
-        layout: {
-          width: screenWidth,
-        },
-      },
-    });
-
-    fireEvent(scrollView, 'momentumScrollEnd', {
-      nativeEvent: {
-        contentOffset: {
-          x: screenWidth,
-        },
-      },
-    });
-
-    expect(onSelect).toBeCalledWith(1);
-  });
-
-  it('* emits onOffsetChange with correct args', () => {
-
-    const onOffsetChange = jest.fn();
-
-    const component: RenderAPI = render(
-      <Mock onOffsetChange={onOffsetChange}>
-        <ChildMock/>
-        <ChildMock/>
-      </Mock>,
-    );
-    const scrollView: ReactTestInstance = component.getByType(ScrollView);
-
-    fireEvent.scroll(scrollView, {
-      nativeEvent: {
-        contentOffset: {
-          x: 375,
-        },
-      },
-    });
-
-    expect(onOffsetChange).toBeCalledWith(375);
-  });
 
   it('* shouldLoadComponent called for each child', () => {
     const shouldLoadComponent = jest.fn();
@@ -109,7 +54,7 @@ describe('@view-pager: component checks', () => {
       </Mock>,
     );
 
-    const scrollView: ReactTestInstance = component.getByType(ScrollView);
+    const scrollView: ReactTestInstance = component.getByType(Animated.View);
 
     const unloadedChild = scrollView.props.children[disabledComponentIndex];
 

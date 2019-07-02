@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   StyleProp,
+  StyleSheet,
   View,
   ViewProps,
   ViewStyle,
@@ -184,7 +185,10 @@ export class TabView extends React.Component<TabViewProps> {
   private onBarSelect = (index: number) => {
     const { current: viewPager } = this.viewPagerRef;
 
-    viewPager.scrollToIndex({ index });
+    viewPager.scrollToIndex({
+      index,
+      animated: true,
+    });
   };
 
   private onPagerOffsetChange = (offset: number) => {
@@ -218,12 +222,14 @@ export class TabView extends React.Component<TabViewProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { selectedIndex, children, tabBarStyle, indicatorStyle, ...derivedProps } = this.props;
+    const { style, selectedIndex, children, tabBarStyle, indicatorStyle, ...derivedProps } = this.props;
 
     const { tabs, content } = this.renderComponentChildren(children);
 
     return (
-      <View {...derivedProps}>
+      <View
+        {...derivedProps}
+        style={[styles.container, style]}>
         <TabBar
           style={tabBarStyle}
           ref={this.tabBarRef}
@@ -244,3 +250,9 @@ export class TabView extends React.Component<TabViewProps> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+  },
+});

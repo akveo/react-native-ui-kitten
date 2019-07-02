@@ -12,6 +12,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  ImageStyle,
 } from 'react-native';
 import {
   styled,
@@ -26,7 +27,7 @@ import { isValidString } from '../support/services';
 
 type TitleElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
-type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
+type IconProp = (style: ImageStyle) => React.ReactElement<ImageProps>;
 type ContentElement = React.ReactElement<any>;
 
 interface ComponentProps {
@@ -79,8 +80,6 @@ export class TabComponent extends React.Component<TabProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, titleStyle } = this.props;
-
     const {
       textMarginVertical,
       textFontSize,
@@ -95,17 +94,12 @@ export class TabComponent extends React.Component<TabProps> {
     } = source;
 
     return {
-      container: {
-        ...containerParameters,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerParameters,
       icon: {
         width: iconWidth,
         height: iconHeight,
         marginVertical: iconMarginVertical,
         tintColor: iconTintColor,
-        ...styles.icon,
       },
       title: {
         marginVertical: textMarginVertical,
@@ -113,32 +107,28 @@ export class TabComponent extends React.Component<TabProps> {
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...styles.title,
-        ...StyleSheet.flatten(titleStyle),
       },
     };
   };
 
-  private renderTitleElement = (style: StyleType): TitleElement => {
-    const { title: text } = this.props;
+  private renderTitleElement = (style: TextStyle): TitleElement => {
+    const { title, titleStyle } = this.props;
 
     return (
       <Text
         key={1}
-        style={style}>
-        {text}
+        style={[style, styles.title, titleStyle]}>
+        {title}
       </Text>
     );
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
-    const { icon } = this.props;
-
-    const iconElement: React.ReactElement<ImageProps> = icon(style);
+  private renderIconElement = (style: ImageStyle): IconElement => {
+    const iconElement: React.ReactElement<ImageProps> = this.props.icon(style);
 
     return React.cloneElement(iconElement, {
       key: 2,
-      style: [style, iconElement.props.style],
+      style: [style, styles.icon, iconElement.props.style],
     });
   };
 
@@ -152,7 +142,7 @@ export class TabComponent extends React.Component<TabProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, ...derivedProps } = this.props;
+    const { themedStyle, style, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
     const [iconElement, titleElement] = this.renderComponentChildren(componentStyles);
@@ -161,7 +151,7 @@ export class TabComponent extends React.Component<TabProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...derivedProps}
-        style={container}
+        style={[container, styles.container, style]}
         onPress={this.onPress}>
         {iconElement}
         {titleElement}

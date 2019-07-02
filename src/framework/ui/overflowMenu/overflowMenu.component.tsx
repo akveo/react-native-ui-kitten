@@ -121,8 +121,6 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, indicatorStyle } = this.props;
-
     const {
       dividerHeight,
       dividerBackgroundColor,
@@ -131,20 +129,15 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     } = source;
 
     return {
-      popover: {
-        ...containerParameters,
-        ...styles.popover,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerParameters,
       divider: {
         height: dividerHeight,
         backgroundColor: dividerBackgroundColor,
       },
       indicator: {
         backgroundColor: indicatorBackgroundColor,
-        ...StyleSheet.flatten(indicatorStyle),
       },
-      item: styles.item,
+      item: {},
     };
   };
 
@@ -172,6 +165,8 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
       const borderStyle: ViewStyle = {
         borderBottomColor: style.divider.backgroundColor,
+
+        // @ts-ignore: divider `height` is restricted to be a number
         borderBottomWidth: isLastItem ? 0 : style.divider.height,
       };
 
@@ -192,16 +187,16 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
   };
 
   public render(): React.ReactNode {
-    const { style, themedStyle, children, ...restProps } = this.props;
-    const { popover, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const { themedStyle, style, indicatorStyle, children, ...restProps } = this.props;
+    const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
 
     const contentElement: React.ReactElement<ViewProps> = this.renderPopoverContentElement(componentStyle);
 
     return (
       <Popover
         {...restProps}
-        style={popover}
-        indicatorStyle={indicator}
+        style={[container, styles.container, style]}
+        indicatorStyle={[indicator, styles.indicator, indicatorStyle]}
         content={contentElement}>
         {children}
       </Popover>
@@ -210,9 +205,11 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 }
 
 const styles = StyleSheet.create({
-  popover: {
+  container: {
     overflow: 'hidden',
   },
+  indicator: {},
+  divider: {},
   item: {},
 });
 

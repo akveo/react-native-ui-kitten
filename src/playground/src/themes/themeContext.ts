@@ -1,9 +1,14 @@
 import React from 'react';
+import { ThemeKey } from './registry';
 
-export interface ContextType {
-  toggleTheme: (theme: string) => void;
+export interface ThemeContextType {
+  name: ThemeKey;
+  toggleTheme: (theme: ThemeKey) => void;
 }
 
-export const ThemeContext: React.Context<ContextType> = React.createContext({
-  toggleTheme: (theme: string) => {},
-});
+const initialValue: ThemeContextType = {
+  name: 'Eva Light',
+  toggleTheme: (theme: ThemeKey) => {},
+};
+
+export const ThemeContext: React.Context<ThemeContextType> = React.createContext(initialValue);

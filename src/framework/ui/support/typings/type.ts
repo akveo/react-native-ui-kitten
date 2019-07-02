@@ -2,7 +2,6 @@ import {
   GestureResponderEvent,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  TextInputEndEditingEventData,
   TextInputFocusEventData,
   TouchableOpacityProps,
 } from 'react-native';
@@ -19,4 +18,3 @@ export type TouchableIndexedProps = Override<TouchableOpacityProps, {
 
 export type ScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
 export type InputFocusEvent = NativeSyntheticEvent<TextInputFocusEventData>;
-export type InputEndEditEvent = NativeSyntheticEvent<TextInputEndEditingEventData>;

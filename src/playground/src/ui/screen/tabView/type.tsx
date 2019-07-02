@@ -4,7 +4,11 @@ import {
   ImageProps,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
-import { Tab } from '@kitten/ui';
+import {
+  Tab,
+  Text,
+  Layout,
+} from '@kitten/ui';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
@@ -20,9 +24,21 @@ const Icon = (style: StyleType): React.ReactElement<ImageProps> => {
 const titleBottomNavigation: ComponentShowcaseItem = {
   props: {
     children: [
-      <Tab title='Tab 1'/>,
-      <Tab title='Tab 2'/>,
-      <Tab title='Tab 3'/>,
+      <Tab title='Tab 1'>
+        <Layout>
+          <Text>Tab 1</Text>
+        </Layout>
+      </Tab>,
+      <Tab title='Tab 2'>
+        <Layout>
+          <Text>Tab 2</Text>
+        </Layout>
+      </Tab>,
+      <Tab title='Tab 3'>
+        <Layout>
+          <Text>Tab 3</Text>
+        </Layout>
+      </Tab>,
     ],
   },
 };
@@ -30,9 +46,21 @@ const titleBottomNavigation: ComponentShowcaseItem = {
 const iconBottomNavigation: ComponentShowcaseItem = {
   props: {
     children: [
-      <Tab icon={Icon}/>,
-      <Tab icon={Icon}/>,
-      <Tab icon={Icon}/>,
+      <Tab icon={Icon}>
+        <Layout>
+          <Text>Tab 1</Text>
+        </Layout>
+      </Tab>,
+      <Tab icon={Icon}>
+        <Layout>
+          <Text>Tab 2</Text>
+        </Layout>
+      </Tab>,
+      <Tab icon={Icon}>
+        <Layout>
+          <Text>Tab 3</Text>
+        </Layout>
+      </Tab>,
     ],
   },
 };
@@ -40,9 +68,21 @@ const iconBottomNavigation: ComponentShowcaseItem = {
 const iconTitleBottomNavigation: ComponentShowcaseItem = {
   props: {
     children: [
-      <Tab icon={Icon} title='Tab 1'/>,
-      <Tab icon={Icon} title='Tab 2'/>,
-      <Tab icon={Icon} title='Tab 3'/>,
+      <Tab icon={Icon} title='Tab 1'>
+        <Layout>
+          <Text>Tab 1</Text>
+        </Layout>
+      </Tab>,
+      <Tab icon={Icon} title='Tab 2'>
+        <Layout>
+          <Text>Tab 2</Text>
+        </Layout>
+      </Tab>,
+      <Tab icon={Icon} title='Tab 3'>
+        <Layout>
+          <Text>Tab 3</Text>
+        </Layout>
+      </Tab>,
     ],
   },
 };

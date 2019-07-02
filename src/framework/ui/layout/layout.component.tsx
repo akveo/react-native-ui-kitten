@@ -9,6 +9,7 @@ import {
   StyleSheet,
   View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   styled,
@@ -65,21 +66,13 @@ export class LayoutComponent extends React.Component<LayoutProps> {
 
   static styledComponentName: string = 'Layout';
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    return {
-      ...source,
-      ...StyleSheet.flatten(this.props.style),
-    };
-  };
-
   public render(): React.ReactElement<ViewProps> {
     const { style, themedStyle, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
       <View
         {...derivedProps}
-        style={componentStyle}
+        style={[themedStyle, style]}
       />
     );
   }

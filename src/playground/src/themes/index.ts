@@ -2,4 +2,7 @@ export {
   themes,
   ThemeKey,
 } from './registry';
-export { ThemeContext } from './themeContext';
+export {
+  ThemeContext,
+  ThemeContextType,
+} from './themeContext';
