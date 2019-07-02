@@ -41,7 +41,7 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
 export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
 
 /**
- * Renders vertical list of menu items in a modal.
+ * Renders vertical list of menu items in a modalHelper.
  *
  * @extends React.Component
  *

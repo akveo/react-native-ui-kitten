@@ -22,6 +22,7 @@ export const routes: RouteType[] = [
   { name: 'Input' },
   { name: 'Layout' },
   { name: 'List' },
+  { name: 'Modal' },
   { name: 'Popover' },
   { name: 'Radio' },
   { name: 'Radio Group' },

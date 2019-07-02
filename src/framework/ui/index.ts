@@ -39,6 +39,10 @@ export {
   ListItemProps,
 } from './list/listItem.component';
 export {
+  Modal,
+  ModalProps,
+} from './modal/modal.component';
+export {
   OverflowMenu,
   OverflowMenuProps,
 } from './overflowMenu/overflowMenu.component';

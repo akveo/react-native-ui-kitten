@@ -12,13 +12,13 @@ import {
   shallow,
 } from 'react-native-testing-library';
 import {
-  Modal,
+  ModalHelper as Modal,
   ModalAnimationType,
-} from './modal.component';
+} from './modalHelper.component';
 
 jest.useFakeTimers();
 
-describe('@modal component checks', () => {
+describe('@modalHelper component checks', () => {
 
   const MODAL_TEST_IDENTIFIER = (substring: string): string => {
     return `modal-test-identifier-${substring}`;
@@ -68,7 +68,7 @@ describe('@modal component checks', () => {
     }
   }
 
-  it('* modal component renders properly', () => {
+  it('* modalHelper component renders properly', () => {
     const modal1: RenderAPI = render(
       <Modal
         visible={true}
@@ -129,7 +129,7 @@ describe('@modal component checks', () => {
     expect(secondOutput).toMatchSnapshot();
   });
 
-  it('* modal component props checks', () => {
+  it('* modalHelper component props checks', () => {
     const modalPassingProps = {
       visible: true,
       isBackDropAllowed: false,
@@ -140,7 +140,7 @@ describe('@modal component checks', () => {
     expect(modal.props.isBackDropAllowed).toBe(modalPassingProps.isBackDropAllowed);
   });
 
-  it('* modal closes on passed prop', () => {
+  it('* modalHelper closes on passed prop', () => {
     const onCloseModal = jest.fn();
 
     const component: RenderAPI = render(
@@ -170,7 +170,7 @@ describe('@modal component checks', () => {
     expect(closedOutput).toMatchSnapshot();
   });
 
-  it('* modal component close on backDrop checks', () => {
+  it('* modalHelper component close on backDrop checks', () => {
     const onCloseModal = jest.fn();
 
     const component: RenderAPI = render(

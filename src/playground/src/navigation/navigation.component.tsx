@@ -23,6 +23,7 @@ import {
   RadioGroupContainer,
   LayoutContainer,
   SampleContainer,
+  ModalContainer,
 } from '../ui/screen';
 
 export interface RouteType {
@@ -49,8 +50,9 @@ const AppNavigator = createStackNavigator({
   ['Top Navigation']: TopNavigationContainer,
   ['Overflow Menu']: OverflowMenuContainer,
   ['Sample']: SampleContainer,
+  ['Modal']: ModalContainer,
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Modal',
   headerMode: 'screen',
 });
 
