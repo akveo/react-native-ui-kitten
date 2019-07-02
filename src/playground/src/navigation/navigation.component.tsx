@@ -22,6 +22,7 @@ import {
   TopNavigationContainer,
   RadioGroupContainer,
   LayoutContainer,
+  SampleContainer,
 } from '../ui/screen';
 
 export interface RouteType {
@@ -47,8 +48,10 @@ const AppNavigator = createStackNavigator({
   ['Toggle']: ToggleContainer,
   ['Top Navigation']: TopNavigationContainer,
   ['Overflow Menu']: OverflowMenuContainer,
+  ['Sample']: SampleContainer,
 }, {
   initialRouteName: 'Home',
+  headerMode: 'screen',
 });
 
 export const Router: any = createAppContainer(AppNavigator);

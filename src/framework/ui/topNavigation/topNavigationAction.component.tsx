@@ -8,6 +8,9 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageProps,
+  ImageStyle,
+  Insets,
+  StyleProp,
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
@@ -76,13 +79,9 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
       iconMarginHorizontal,
     } = source;
 
-    const hitSlop: number = 40 - iconWidth;
-
     return {
       container: {
         marginHorizontal: iconMarginHorizontal,
-        ...styles.container,
-        ...StyleSheet.flatten(this.props.style),
       },
       icon: {
         tintColor: iconTintColor,
@@ -90,34 +89,45 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
         height: iconHeight,
         ...styles.icon,
       },
-      hitSlop: {
-        top: hitSlop,
-        left: hitSlop,
-        bottom: hitSlop,
-        right: hitSlop,
-      },
     };
   };
 
-  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+  private createHitSlopInsets = (iconStyle: StyleProp<ImageStyle>): Insets => {
+    const flatStyle: ImageStyle = StyleSheet.flatten(iconStyle);
+
+    // @ts-ignore: `width` is restricted to be a number
+    const value: number = 40 - flatStyle.width;
+
+    return {
+      left: value,
+      top: value,
+      right: value,
+      bottom: value,
+    };
+  };
+
+  private renderIconElement = (style: StyleType): IconElement => {
     return this.props.icon(style);
   };
 
   public render(): React.ReactNode {
-    const { themedStyle, icon, ...touchableProps } = this.props;
-
+    const { themedStyle, style, icon, ...touchableProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+
+    const hitSlopInsets: Insets = this.createHitSlopInsets(componentStyle.icon);
+
+    const iconElement: IconElement = this.renderIconElement(componentStyle.icon);
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        hitSlop={componentStyle.hitSlop}
+        hitSlop={hitSlopInsets}
         {...touchableProps}
-        style={componentStyle.container}
+        style={[componentStyle.container, styles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {this.renderIconElement(componentStyle.icon)}
+        {iconElement}
       </TouchableOpacity>
     );
   }

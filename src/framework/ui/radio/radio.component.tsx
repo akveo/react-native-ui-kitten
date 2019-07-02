@@ -7,12 +7,14 @@
 import React from 'react';
 import {
   GestureResponderEvent,
+  Insets,
   StyleProp,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
+  ViewStyle,
 } from 'react-native';
 import {
   Interaction,
@@ -134,8 +136,6 @@ export class RadioComponent extends React.Component<RadioProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, textStyle } = this.props;
-
     const {
       textMarginHorizontal,
       textFontSize,
@@ -153,26 +153,16 @@ export class RadioComponent extends React.Component<RadioProps> {
       ...containerParameters
     } = source;
 
-    const hitSlop: number = 40 - containerParameters.width;
-
     return {
-      container: {
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
-      highlightContainer: styles.highlightContainer,
-      selectContainer: {
-        ...containerParameters,
-        ...styles.iconContainer,
-      },
+      container: {},
+      highlightContainer: {},
+      selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...styles.text,
-        ...StyleSheet.flatten(textStyle),
       },
       icon: {
         width: iconWidth,
@@ -185,23 +175,32 @@ export class RadioComponent extends React.Component<RadioProps> {
         height: outlineHeight,
         borderRadius: outlineBorderRadius,
         backgroundColor: outlineBackgroundColor,
-        ...styles.highlight,
-      },
-      hitSlop: {
-        top: hitSlop,
-        left: hitSlop,
-        bottom: hitSlop,
-        right: hitSlop,
       },
     };
   };
 
+  private createHitSlopInsets = (style: StyleProp<ViewStyle>): Insets => {
+    const flatStyle: ViewStyle = StyleSheet.flatten(style);
+
+    // @ts-ignore `width` is restricted to be a number
+    const value: number = 40 - flatStyle.width;
+
+    return {
+      left: value,
+      top: value,
+      right: value,
+      bottom: value,
+    };
+  };
+
   private renderTextElement = (style: StyleType): TextElement => {
+    const { text, textStyle } = this.props;
+
     return (
       <Text
         key={0}
-        style={style}>
-        {this.props.text}
+        style={[style, styles.text, textStyle]}>
+        {text}
       </Text>
     );
   };
@@ -223,32 +222,34 @@ export class RadioComponent extends React.Component<RadioProps> {
       selectContainer,
       icon,
       highlight,
-      hitSlop,
       ...componentStyles
     } = this.getComponentStyle(themedStyle);
+
+    const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
+    const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
 
     const [textElement] = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
-        style={container}
+        style={[container, styles.container, style]}
         activeOpacity={1.0}
         disabled={disabled}
-        hitSlop={hitSlop}
+        hitSlop={hitSlopInsets}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={highlightContainer}>
-          <View style={highlight}/>
+        <View style={[highlightContainer, styles.highlightContainer]}>
+          <View style={[highlight, styles.highlight]}/>
           <TouchableOpacity
             activeOpacity={1.0}
             {...derivedProps}
             disabled={disabled}
-            style={selectContainer}
+            style={selectContainerStyle}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
-            <View style={icon}/>
+            <View style={[icon, styles.icon]}/>
           </TouchableOpacity>
         </View>
         {textElement}
@@ -266,7 +267,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  iconContainer: {
+  selectContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },

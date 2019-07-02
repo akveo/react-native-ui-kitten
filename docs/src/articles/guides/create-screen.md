@@ -12,7 +12,7 @@ We suppose that you have a separate component per screen, let's open your `some-
 
 <hr>
 
-### Create a Component
+## Create a Component
 
 ```js
 import * as React from 'react';
@@ -30,7 +30,7 @@ The example above will render a simple screen with a welcome text and a button.
 
 <hr>
 
-### Modify styles
+## Modify styles
 
 Now let's add some styles to fit the full available space on the device screen.
 
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 
 <hr>
 
-### Review the changes
+## Review the changes
 
 Let's now set this screen as `ApplicationProvider` children to quickly review changes
 

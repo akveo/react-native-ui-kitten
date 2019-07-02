@@ -4,7 +4,7 @@ If you don't have any code yet, please consider checking <a href="https://facebo
 
 <hr>
 
-### Installation
+## Installation
 
 We recommend to develop React Native with expo-cli, you can install it with the following command.
 
@@ -14,7 +14,7 @@ npm i -g expo-cli
 
 <hr>
 
-### Create a New Project
+## Create a New Project
 
 A new project can be created using Expo CLI tools.
 
@@ -23,7 +23,7 @@ expo init PROJECT-NAME
 ```
 <hr>
 
-### Install UI Kitten and Eva Design System
+## Install UI Kitten and Eva Design System
 
 ```bash
 npm i react-native-ui-kitten @eva-design/eva
@@ -31,7 +31,7 @@ npm i react-native-ui-kitten @eva-design/eva
 
 <hr>
 
-### Configure Application Root
+## Configure Application Root
 
 At this step you have everything in place, let's configure UI Kitten to be used in your app.
 

@@ -1,4 +1,6 @@
-export type StyleType = any;
+export interface StyleType {
+  [key: string]: any;
+}
 
 export enum Interaction {
   ACTIVE = 'active',

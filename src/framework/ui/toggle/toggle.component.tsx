@@ -216,22 +216,17 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     const thumbScale: Animated.AnimatedDiffClamp = this.animateThumbScale(offsetValue);
 
     return {
-      container: {
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: {},
       componentContainer: {
         borderColor: borderColor,
         backgroundColor: interpolatedBackgroundColor,
         ...containerParameters,
-        ...styles.componentContainer,
       },
       highlight: {
         width: outlineWidth,
         height: outlineHeight,
         borderRadius: outlineBorderRadius,
         backgroundColor: outlineBackgroundColor,
-        ...styles.highlight,
       },
       ellipse: {
         width: containerParameters.width - (containerParameters.borderWidth * 2),
@@ -239,7 +234,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         borderRadius: (source.height - (source.borderWidth * 2)) / 2,
         backgroundColor: interpolatedBackgroundColor,
         transform: [{ scale: checked ? thumbScale : this.ellipseScaleAnimation }],
-        ...styles.ellipse,
       },
       thumb: {
         alignSelf: checked ? 'flex-end' : 'flex-start',
@@ -249,7 +243,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         backgroundColor: thumbBackgroundColor,
         elevation: disabled ? 0 : 5,
         transform: [{ translateX: this.thumbTranslateAnimation }],
-        ...styles.thumb,
       },
       icon: {
         width: source.iconWidth,
@@ -328,23 +321,23 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, disabled, checked, ...restProps } = this.props;
+    const { themedStyle, style, disabled, checked, ...restProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     return (
       <View
         {...restProps}
-        style={componentStyle.container}>
-        <View style={componentStyle.highlight}/>
+        style={[componentStyle.container, styles.container, style]}>
+        <View style={[componentStyle.highlight, styles.highlight]}/>
         <TouchableOpacity
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
           onPress={this.onPress}>
           <Animated.View
-            style={componentStyle.componentContainer}
+            style={[componentStyle.componentContainer, styles.componentContainer]}
             {...this.panResponder.panHandlers}>
-            <Animated.View style={componentStyle.ellipse}/>
-            <Animated.View style={componentStyle.thumb}>
+            <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
+            <Animated.View style={[componentStyle.thumb, styles.thumb]}>
               <CheckMark
                 style={componentStyle.icon}
                 isAnimated={true}

@@ -90,11 +90,8 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style } = this.props;
-
     return {
-      ...source,
-      ...StyleSheet.flatten(style),
+      container: source,
     };
   };
 
@@ -111,7 +108,7 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const { themedStyle, style, children, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     const radioElements: RadioElement[] = this.renderRadioElements(children);
@@ -119,11 +116,15 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
     return (
       <View
         {...derivedProps}
-        style={componentStyle}>
+        style={[componentStyle.container, styles.container, style]}>
         {radioElements}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {},
+});
 
 export const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);

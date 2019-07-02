@@ -165,30 +165,26 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, indicatorStyle } = this.props;
     const { indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
-      container: {
-        ...containerParameters,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
+      container: containerParameters,
+      item: {},
       indicator: {
         height: indicatorHeight,
         backgroundColor: indicatorBackgroundColor,
-        ...styles.indicator,
-        ...StyleSheet.flatten(indicatorStyle),
       },
     };
   };
 
-  private renderIndicatorElement = (positions: number, style: StyleType): IndicatorElement => {
+  private renderIndicatorElement = (positions: number, style: ViewStyle): IndicatorElement => {
+    const { indicatorStyle, selectedIndex } = this.props;
+
     return (
       <TabIndicator
         key={0}
-        style={style}
-        selectedPosition={this.props.selectedIndex}
+        style={[style, styles.indicator, indicatorStyle]}
+        selectedPosition={selectedIndex}
         positions={positions}
       />
     );
@@ -207,27 +203,27 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     return React.Children.map(source, this.renderTabElement);
   };
 
-  private renderComponentChildren = (source: ChildrenProp, style: StyleType): React.ReactNodeArray => {
-    const tabElements: TabElement[] = this.renderTabElements(source);
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
+    const tabElements: TabElement[] = this.renderTabElements(this.props.children);
 
     const hasIndicator: boolean = style.indicator.height > 0;
 
     return [
-      hasIndicator ? this.renderIndicatorElement(tabElements.length, style.indicator) : null,
+      hasIndicator && this.renderIndicatorElement(tabElements.length, style.indicator),
       ...tabElements,
     ];
   };
 
   public render(): React.ReactNode {
-    const { style, themedStyle, children, ...derivedProps } = this.props;
+    const { themedStyle, style, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
-    const [indicatorElement, ...tabElements] = this.renderComponentChildren(children, componentStyles);
+    const [indicatorElement, ...tabElements] = this.renderComponentChildren(componentStyles);
 
     return (
       <View
         {...derivedProps}
-        style={container}>
+        style={[container, styles.container, style]}>
         {indicatorElement}
         {tabElements}
       </View>

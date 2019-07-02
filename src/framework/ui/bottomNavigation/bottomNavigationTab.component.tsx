@@ -6,12 +6,13 @@
 
 import React from 'react';
 import {
-  TouchableOpacity,
-  StyleSheet,
   ImageProps,
-  TouchableOpacityProps,
+  ImageStyle,
   StyleProp,
+  StyleSheet,
   TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   styled,
@@ -26,7 +27,7 @@ import { isValidString } from '../support/services';
 
 type TitleElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
-type IconProp = (style: StyleType) => IconElement;
+type IconProp = (style: ImageStyle) => IconElement;
 
 interface ComponentProps {
   title?: string;
@@ -72,8 +73,6 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, titleStyle } = this.props;
-
     const {
       iconWidth,
       iconHeight,
@@ -84,50 +83,43 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
       textLineHeight,
       textFontWeight,
       textColor,
-      ...containerStyle
+      ...containerParameters
     } = source;
 
     return {
-      container: {
-        ...containerStyle,
-        ...styles.container,
-        ...StyleSheet.flatten(style),
-      },
-      icon: {
-        width: iconWidth,
-        height: iconHeight,
-        marginVertical: iconMarginVertical,
-        tintColor: iconTintColor,
-        ...styles.icon,
-      },
+      container: containerParameters,
       text: {
         marginVertical: textMarginVertical,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
-        ...styles.text,
-        ...StyleSheet.flatten(titleStyle),
+      },
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        marginVertical: iconMarginVertical,
+        tintColor: iconTintColor,
       },
     };
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
+  private renderIconElement = (style: ImageStyle): IconElement => {
     const iconElement: IconElement = this.props.icon(style);
 
     return React.cloneElement(iconElement, {
       key: 1,
-      style: [style, iconElement.props.style],
+      style: [style, styles.icon, iconElement.props.style],
     });
   };
 
-  private renderTitleElement = (style: StyleType): TitleElement => {
-    const { title } = this.props;
+  private renderTitleElement = (style: TextStyle): TitleElement => {
+    const { title, titleStyle } = this.props;
 
     return (
       <Text
         key={2}
-        style={style}>
+        style={[style, styles.text, titleStyle]}>
         {title}
       </Text>
     );
@@ -143,15 +135,15 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
   };
 
   public render(): React.ReactNode {
-    const { style, themedStyle, ...derivedProps } = this.props;
+    const { style, themedStyle, ...restProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 
     const [iconElement, titleElement] = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
-        {...derivedProps}
-        style={container}
+        {...restProps}
+        style={[container, styles.container, style]}
         activeOpacity={1.0}
         onPress={this.onPress}>
         {iconElement}
@@ -166,8 +158,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  icon: {},
   text: {},
+  icon: {},
 });
 
 export const BottomNavigationTab = styled<BottomNavigationTabProps>(BottomNavigationTabComponent);

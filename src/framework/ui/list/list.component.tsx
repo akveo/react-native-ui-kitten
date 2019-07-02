@@ -10,6 +10,7 @@ import {
   FlatListProps,
   ListRenderItemInfo,
   StyleSheet,
+  ViewStyle,
 } from 'react-native';
 import {
   styled,
@@ -153,16 +154,13 @@ class ListComponent extends React.Component<ListProps> {
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style } = this.props;
-
     return {
-      ...source,
-      ...styles.container,
-      ...StyleSheet.flatten(style),
+      container: source,
+      item: {},
     };
   };
 
-  private getItemStyle = (source: StyleType, index: number): StyleType => {
+  private getItemStyle = (source: StyleType, index: number): ViewStyle => {
     const { item } = source;
 
     return item;
@@ -190,7 +188,7 @@ class ListComponent extends React.Component<ListProps> {
       <FlatList
         {...derivedProps}
         ref={this.listRef}
-        style={componentStyle}
+        style={[componentStyle.container, styles.container, style]}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
       />
