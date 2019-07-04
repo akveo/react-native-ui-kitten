@@ -56,6 +56,7 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
     const { [index]: theme } = Object.keys(this.props.themes);
 
     this.props.onThemeSelect(theme);
+    this.setState({ themesMenuVisible: false });
   };
 
   private onResetButtonPress = () => {
@@ -68,6 +69,7 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
     this.props.onSettingSelect({
       [setting.propertyName]: setting.value,
     });
+    this.setState({ settingsMenuVisible: false });
   };
 
   private createThemesMenuItems = (): OverflowMenuItemType[] => {

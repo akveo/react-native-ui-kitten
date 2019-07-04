@@ -52,7 +52,7 @@ const AppNavigator = createStackNavigator({
   ['Sample']: SampleContainer,
   ['Modal']: ModalContainer,
 }, {
-  initialRouteName: 'Modal',
+  initialRouteName: 'Home',
   headerMode: 'screen',
 });
 
