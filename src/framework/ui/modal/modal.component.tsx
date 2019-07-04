@@ -42,6 +42,55 @@ interface ComponentProps {
 
 export type ModalProps = ViewProps & ComponentProps;
 
+/**
+ * Modal component is a wrapper than presents content above an enclosing view.
+ *
+ * @extends React.Component
+ *
+ * @property {boolean} visible - Determines whether component is visible. By default is false.
+ *
+ * @property {React.ReactElement<any> | React.ReactElement<any>[]} children -
+ * Determines component's children.
+ *
+ * @property {boolean} closeOnBackdrop - Determines whether user can close
+ * Modal by tapping on backdrop.
+ * Default is `true`.
+ *
+ * @property {{backgroundColor: string, opacity: number }} backdropStyle - Determines the style of backdrop.
+ *
+ * @property ViewProps
+ *
+ * @example Modal usage and API example
+ *
+ * ```
+ * import { Modal } from 'react-native-ui-kitten';
+ *
+ * state: State = {
+ *   visible: false,
+ * };
+ *
+ * private setVisible = (visible: boolean): void => {
+ *   this.setState({ visible });
+ * };
+ *
+ * public render(): React.ReactNode {
+ *   return (
+ *     <View>
+ *       <Button title='Show Modal' onPress={() => this.setVisible(true)}/>
+ *       <Modal
+ *         visible={this.state.visible}
+ *         closeOnBackdrop={false}>
+ *         <View>
+ *           <Text>Hi! This is Modal Component!</Test>
+ *           <Button title='Close Modal' onPress={() => this.setVisible(false)}/>
+ *         <View/>
+ *       </Modal>
+ *     </View>
+ *   )
+ * }
+ * ```
+ * */
+
 export class Modal extends React.Component<ModalProps> {
 
   static defaultProps: Partial<ModalProps> = {
@@ -142,77 +191,3 @@ const styles = StyleSheet.create({
     height: screenHeight,
   },
 });
-
-
-/**
- * Modal component is a wrapper than presents content above an enclosing view.
- *
- * @extends React.Component
- *
- * @property {boolean} visible - Determines whether component is visible. By default is false.
- *
- * @property {React.ReactElement<any> | React.ReactElement<any>[]} children -
- * Determines component's children.
- *
- * @property {boolean} isBackDropAllowed - Determines whether user can close
- * modalHelper by tapping on backdrop. This feature works in pair with the
- * `onCloseModal` property.
- * Default is `false`.
- *
- * @property {() => void} onCloseModal - Allows passing a function that will
- * be called once the modalHelper has been dismissed.
- *
- * @property {ModalAnimationType} animationType - Controls how the modalHelper showing animates.
- * Can be `slideInUp`, `fade` or `none`.
- * Default is 'none'.
- *
- * @property {number} animationDuration - Time of the animation duration.
- *
- * @property ViewProps
- *
- * @example Simple usage example
- *
- * ```
- * import { Modal } from 'react-native-ui-kitten';
- * <Modal visible={true}>
- *  <View><Text>Hello! I'm modalHelper!</Text></View>
- * </Modal>
- * ```
- * @example Modal usage and API example
- *
- * ```
- * import { Modal } from 'react-native-ui-kitten';
- *
- * state: State = {
- *   visible: false,
- * };
- *
- * private setVisible = (): void => {
- *   this.setState({ visible: !this.state.visible });
- * };
- *
- * private onModalDismiss = (): void => {
- *   this.setState({ visible: false });
- * };
- *
- * public render(): React.ReactNode {
- *   return (
- *     <View>
- *       <Button title='Show Modal' onPress={this.setVisible}/>
- *       <Modal
- *         visible={this.state.visible}
- *         animationType='fade'
- *         animationDuration={600}
- *         isBackDropAllowed={true}
- *         onCloseModal={this.onModalDismiss}
- *         onValueChange={this.onChange}>
- *         <View>
- *           <Text>Hi! This is modalHelper component!</Test>
- *           <Button title='Close Modal' onPress={this.setVisible}/>
- *         <View/>
- *       </Modal>
- *     </View>
- *   )
- * }
- * ```
- * */
