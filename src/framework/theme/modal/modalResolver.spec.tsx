@@ -11,21 +11,17 @@ import {
   RenderAPI,
   shallow,
 } from 'react-native-testing-library';
-import {
-  ModalHelper as Modal,
-  ModalAnimationType,
-} from './modalHelper.component';
+import { ModalResolver } from './modalResolver.component';
 
 jest.useFakeTimers();
 
-describe('@modalHelper component checks', () => {
+describe('@modal resolver component checks', () => {
 
   const MODAL_TEST_IDENTIFIER = (substring: string): string => {
     return `modal-test-identifier-${substring}`;
   };
 
   interface TestScreenProps {
-    modalAnimationType: ModalAnimationType;
     buttonTestId: string;
   }
 
@@ -50,27 +46,25 @@ describe('@modalHelper component checks', () => {
             testID={this.props.buttonTestId}
             title='Open Modal'
             onPress={() => this.setModalVisible(true)}/>
-          <Modal
+          <ModalResolver
             visible={this.state.modalVisible}
             isBackDropAllowed={true}
             identifier={MODAL_TEST_IDENTIFIER('1')}
-            onCloseModal={() => 1}
-            animationType={this.props.modalAnimationType}
-            animationDuration={500}>
+            onCloseModal={() => 1}>
             <View>
               <Text>
                 Test2
               </Text>
             </View>
-          </Modal>,
+          </ModalResolver>,
         </View>
       );
     }
   }
 
-  it('* modalHelper component renders properly', () => {
+  it('* modal resolver component renders properly', () => {
     const modal1: RenderAPI = render(
-      <Modal
+      <ModalResolver
         visible={true}
         isBackDropAllowed={false}
         identifier={MODAL_TEST_IDENTIFIER('1')}
@@ -80,11 +74,11 @@ describe('@modalHelper component checks', () => {
             Test1
           </Text>
         </View>
-      </Modal>,
+      </ModalResolver>,
     );
 
     const modal2: RenderAPI = render(
-      <Modal
+      <ModalResolver
         visible={false}
         isBackDropAllowed={false}
         identifier={MODAL_TEST_IDENTIFIER('1')}
@@ -94,57 +88,32 @@ describe('@modalHelper component checks', () => {
             Test2
           </Text>
         </View>
-      </Modal>,
+      </ModalResolver>,
     );
 
-    const { output: firstOutput } = shallow(modal1.getByType(Modal));
-    const { output: secondOutput } = shallow(modal2.getByType(Modal));
+    const { output: firstOutput } = shallow(modal1.getByType(ModalResolver));
+    const { output: secondOutput } = shallow(modal2.getByType(ModalResolver));
 
     expect(firstOutput).toMatchSnapshot();
     expect(secondOutput).toMatchSnapshot();
   });
 
-  it('* with animations', () => {
-    const testApplication1: RenderAPI = render(
-      <TestScreen
-        modalAnimationType='slideInUp'
-        buttonTestId='1'
-      />,
-    );
-
-    const testApplication2: RenderAPI = render(
-      <TestScreen
-        modalAnimationType='fade'
-        buttonTestId='2'
-      />,
-    );
-
-    fireEvent.press(testApplication1.getByTestId('1'));
-    fireEvent.press(testApplication2.getByTestId('2'));
-
-    const { output: firstOutput } = shallow(testApplication1.getByType(Modal));
-    const { output: secondOutput } = shallow(testApplication2.getByType(Modal));
-
-    expect(firstOutput).toMatchSnapshot();
-    expect(secondOutput).toMatchSnapshot();
-  });
-
-  it('* modalHelper component props checks', () => {
+  it('* modal resolver component props checks', () => {
     const modalPassingProps = {
       visible: true,
       isBackDropAllowed: false,
     };
-    const modal = <Modal {...modalPassingProps}/>;
+    const modal = <ModalResolver {...modalPassingProps}/>;
 
     expect(modal.props.visible).toBe(modalPassingProps.visible);
     expect(modal.props.isBackDropAllowed).toBe(modalPassingProps.isBackDropAllowed);
   });
 
-  it('* modalHelper closes on passed prop', () => {
+  it('* modal resolver closes on passed prop', () => {
     const onCloseModal = jest.fn();
 
     const component: RenderAPI = render(
-      <Modal
+      <ModalResolver
         visible={true}
         isBackDropAllowed={true}
         identifier={MODAL_TEST_IDENTIFIER('1')}
@@ -156,25 +125,25 @@ describe('@modalHelper component checks', () => {
             onPress={onCloseModal}
           />
         </View>
-      </Modal>,
+      </ModalResolver>,
     );
 
 
-    const { output: openedOutput } = shallow(component.getByType(Modal));
+    const { output: openedOutput } = shallow(component.getByType(ModalResolver));
     expect(openedOutput).toMatchSnapshot();
 
     fireEvent.press(component.getByType(Button));
     expect(onCloseModal).toHaveBeenCalled();
 
-    const { output: closedOutput } = shallow(component.getByType(Modal));
+    const { output: closedOutput } = shallow(component.getByType(ModalResolver));
     expect(closedOutput).toMatchSnapshot();
   });
 
-  it('* modalHelper component close on backDrop checks', () => {
+  it('* modal resolver component close on backDrop checks', () => {
     const onCloseModal = jest.fn();
 
     const component: RenderAPI = render(
-      <Modal
+      <ModalResolver
         visible={true}
         isBackDropAllowed={true}
         identifier={MODAL_TEST_IDENTIFIER('1')}
@@ -184,27 +153,27 @@ describe('@modalHelper component checks', () => {
             Test1
           </Text>
         </View>
-      </Modal>,
+      </ModalResolver>,
     );
 
-    const { output: openedOutput } = shallow(component.getByType(Modal));
+    const { output: openedOutput } = shallow(component.getByType(ModalResolver));
     expect(openedOutput).toMatchSnapshot();
 
     fireEvent.press(component.getByType(TouchableOpacity));
     expect(onCloseModal).toHaveBeenCalled();
 
-    const { output: closedOutput } = shallow(component.getByType(Modal));
+    const { output: closedOutput } = shallow(component.getByType(ModalResolver));
     expect(closedOutput).toMatchSnapshot();
   });
 
   it('* component styled with mappings', () => {
     const component: RenderAPI = render(
-      <Modal visible={true}>
+      <ModalResolver visible={true}>
         <Text>Test</Text>
-      </Modal>,
+      </ModalResolver>,
     );
 
-    const { output } = shallow(component.getByType(Modal));
+    const { output } = shallow(component.getByType(ModalResolver));
 
     expect(output).toMatchSnapshot();
   });

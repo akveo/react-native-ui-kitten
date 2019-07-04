@@ -17,6 +17,7 @@ import {
 } from '@kitten/theme';
 import {
   MeasureNode,
+  MeasureNodeProps,
   MeasuringElementProps,
   MeasureResult,
 } from '@kitten/ui/popover/measure.component';
@@ -72,26 +73,8 @@ export class Modal extends React.Component<ModalProps> {
     };
   };
 
-  private renderModal = (): React.ReactElement => {
-    const { backdropStyle } = this.props;
-
-    const modal: React.ReactElement<ViewProps> = this.renderBaseModal();
-    if (backdropStyle) {
-      return (
-        <React.Fragment>
-          <View
-            pointerEvents='box-none'
-            style={[styles.backdropBaseStyles, backdropStyle]}/>
-          {modal}
-        </React.Fragment>
-      );
-    } else {
-      return modal;
-    }
-  };
-
   private renderBaseModal = (): React.ReactElement<ViewProps> => {
-    const { style, ...restProps } = this.props;
+    const { style, children, ...restProps } = this.props;
     const absoluteRelatedStyle: StyleType = this.getAbsoluteRelatedStyle();
     const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
@@ -101,19 +84,26 @@ export class Modal extends React.Component<ModalProps> {
         {...measuringProps}
         key={TAG_CHILD}
         style={[styles.container, absoluteRelatedStyle, style]}>
-        {this.props.children}
+        {children}
       </View>
     );
   };
 
-  private onMeasure = (result: MeasureResult): void => {
-    const { width, height } = result[TAG_CHILD].size;
+  private renderModal = (): React.ReactElement => {
+    const { backdropStyle } = this.props;
+    const modal: React.ReactElement<ViewProps> = this.renderBaseModal();
 
-    this.contentHeight = height;
-    this.contentWidth = width;
+    return backdropStyle ? (
+      <React.Fragment>
+        <View
+          pointerEvents='box-none'
+          style={[styles.backdropBaseStyles, backdropStyle]}/>
+        {modal}
+      </React.Fragment>
+    ) : modal;
   };
 
-  public render(): React.ReactNode {
+  private renderMeasureNode = (): React.ReactElement<MeasureNodeProps> => {
     const modal: React.ReactElement = this.renderBaseModal();
     const measureStyledModal: React.ReactElement = React.cloneElement(modal, {
       style: [modal.props.style, styles.hiddenModal],
@@ -125,6 +115,17 @@ export class Modal extends React.Component<ModalProps> {
         {[measureStyledModal]}
       </MeasureNode>
     );
+  };
+
+  private onMeasure = (result: MeasureResult): void => {
+    const { width, height } = result[TAG_CHILD].size;
+
+    this.contentHeight = height;
+    this.contentWidth = width;
+  };
+
+  public render(): React.ReactNode {
+    return this.renderMeasureNode();
   }
 }
 

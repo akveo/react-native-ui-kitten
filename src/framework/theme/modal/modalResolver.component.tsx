@@ -24,11 +24,11 @@ interface ComponentProps {
   onCloseModal?: (index: string) => void;
 }
 
-export type ModalHelperProps = ViewProps & ComponentProps;
+export type ModalResolverProps = ViewProps & ComponentProps;
 
-export class ModalHelper extends React.Component<ModalHelperProps> {
+export class ModalResolver extends React.Component<ModalResolverProps> {
 
-  static defaultProps: Partial<ModalHelperProps> = {
+  static defaultProps: Partial<ModalResolverProps> = {
     visible: false,
     isBackDropAllowed: false,
   };
