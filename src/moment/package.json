@@ -1,0 +1,27 @@
+{
+  "name": "@ui-kitten/moment",
+  "version": "4.0.5",
+  "description": "@ui-kitten/moment",
+  "author": "akveo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+  },
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "keywords": [
+    "react-native",
+    "typescript",
+    "kittenTricks",
+    "theme",
+    "ui-kitten"
+  ],
+  "peerDependencies": {
+    "react-native-ui-kitten": "4.0.5",
+    "moment": "^2.22.2"
+  },
+  "sideEffects": false
+}

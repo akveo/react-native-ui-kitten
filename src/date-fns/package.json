@@ -1,0 +1,27 @@
+{
+  "name": "@ui-kitten/date-fns",
+  "version": "4.0.5",
+  "description": "@ui-kitten/date-fns",
+  "author": "akveo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akveo/react-native-ui-kitten.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+  },
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "keywords": [
+    "react-native",
+    "typescript",
+    "kittenTricks",
+    "theme",
+    "ui-kitten"
+  ],
+  "peerDependencies": {
+    "react-native-ui-kitten": "4.0.5",
+    "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27"
+  },
+  "sideEffects": false
+}
