@@ -19,6 +19,7 @@ function generateDocJson() {
       allowSyntheticDefaultImports: true,
       esModuleInterop: true,
       resolveJsonModule: true,
+      ignoreCompilerErrors: true,
       moduleResolution: 'node',
       jsx: 'react',
       target: 'ES6',
