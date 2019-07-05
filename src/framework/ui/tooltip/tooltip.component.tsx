@@ -29,7 +29,6 @@ import {
   Popover,
   PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;

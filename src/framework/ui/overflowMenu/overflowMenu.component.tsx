@@ -26,7 +26,6 @@ import {
   Popover,
   PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../support/typings';
 
 type MenuItemElement = React.ReactElement<OverflowMenuItemProps>;
 

@@ -19,6 +19,15 @@ export {
   ButtonGroupProps,
 } from './buttonGroup/buttonGroup.component';
 export {
+  Calendar,
+  CalendarProps,
+  CalendarElement,
+} from './calendar/calendar.component';
+export {
+  DateService,
+  NativeDateService,
+} from './calendarKit/service';
+export {
   CheckBox,
   CheckBoxProps,
 } from './checkbox/checkbox.component';
@@ -33,6 +42,7 @@ export {
 export {
   List,
   ListProps,
+  ListElement,
 } from './list/list.component';
 export {
   ListItem,
@@ -79,6 +89,7 @@ export {
 export {
   Text,
   TextProps,
+  TextElement,
 } from './text/text.component';
 export {
   Toggle,

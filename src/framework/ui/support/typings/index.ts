@@ -5,6 +5,6 @@ export {
 export {
   ScrollEvent,
   InputFocusEvent,
-  Omit,
+  Override,
   TouchableIndexedProps,
 } from './type';
