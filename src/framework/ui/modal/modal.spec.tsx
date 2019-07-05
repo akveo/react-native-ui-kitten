@@ -13,9 +13,9 @@ import {
 } from 'react-native-testing-library';
 import {
   Modal,
-  ModalProps,
+  baseModalTestId,
 } from './modal.component';
-import { StyleType } from '../../../../dist/tsc-out/framework/theme';
+import { StyleType } from '@kitten/theme';
 
 const buttonShowModalTestId: string = '@button-show-modal';
 const buttonHideModalTestId: string = '@button-hide-modal';
@@ -64,24 +64,6 @@ class TestScreen extends React.Component<TestScreenProps & ViewProps, TestScreen
 
 describe('@modal component checks', () => {
 
-  it('* modal component props checks', () => {
-    const modalPassingProps: ModalProps = {
-      visible: true,
-      children: [<View><Text>Test Modal</Text></View>],
-      closeOnBackdrop: false,
-      backdropStyle: {
-        backgroundColor: 'black',
-        opacity: 0.5,
-      },
-    };
-    const modal = <Modal {...modalPassingProps}/>;
-
-    expect(modal.props.visible).toBe(modalPassingProps.visible);
-    expect(modal.props.closeOnBackdrop).toBe(modalPassingProps.closeOnBackdrop);
-    expect(modal.props.children).toBe(modalPassingProps.children);
-    expect(modal.props.backdropStyle).toBe(modalPassingProps.backdropStyle);
-  });
-
   it('* modal shows/hides properly', () => {
     const component: RenderAPI = render(<TestScreen/>);
 
@@ -103,17 +85,17 @@ describe('@modal component checks', () => {
     );
 
     fireEvent.press(component.getByTestId(buttonShowModalTestId));
-    fireEvent.press(component.getByTestId(buttonHideModalTestId));
-
     const modalInstance: any = component.getByType(Modal).instance;
-
-    const absoluteStyle: StyleType = modalInstance.getAbsoluteRelatedStyle();
     const expectedStyle: StyleType = {
-      top: (height - modalInstance.contentHeight) / 2,
-      left: (width - modalInstance.contentWidth) / 2,
+      top: (height - modalInstance.contentSize.height) / 2,
+      left: (width - modalInstance.contentSize.width) / 2,
     };
 
-    expect(stringify(absoluteStyle)).toBe(stringify(expectedStyle));
+    const baseModalStyles: StyleType[] = component.getByTestId(baseModalTestId).props.style;
+    const expectedStyleExist: boolean = baseModalStyles[0]
+      .some((style: StyleType) => stringify(style) === stringify(expectedStyle));
+
+    expect(expectedStyleExist).toBe(true);
   });
 
 });

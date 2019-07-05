@@ -21,9 +21,12 @@ import {
   MeasuringElementProps,
   MeasureResult,
 } from '@kitten/ui/popover/measure.component';
+import { Size } from '@kitten/ui/popover/type';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
 const TAG_CHILD: string = 'Modal';
+const initialContentSize: Size = { width: 0, height: 0 };
+export const baseModalTestId: string = '@modal/base';
 
 type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
@@ -97,15 +100,14 @@ export class Modal extends React.Component<ModalProps> {
     closeOnBackdrop: true,
   };
 
-  private contentHeight: number = 0;
-  private contentWidth: number = 0;
+  private contentSize: Size = initialContentSize;
   private id: string = '';
 
-  public componentWillReceiveProps(nextProps: Readonly<ModalProps>): void {
+  public componentWillReceiveProps(nextProps: ModalProps): void {
     this.handleVisibility(nextProps);
   }
 
-  private handleVisibility = (nextProps: Readonly<ModalProps>): void => {
+  private handleVisibility = (nextProps: ModalProps): void => {
     if (nextProps.visible) {
       const modal: React.ReactElement = this.renderModal();
       this.id = ModalService.show(modal, this.props.closeOnBackdrop);
@@ -116,10 +118,16 @@ export class Modal extends React.Component<ModalProps> {
   };
 
   private getAbsoluteRelatedStyle = (): StyleType => {
+    const { width, height } = this.contentSize;
+
     return {
-      top: (screenHeight - this.contentHeight) / 2,
-      left: (screenWidth - this.contentWidth) / 2,
+      top: (screenHeight - height) / 2,
+      left: (screenWidth - width) / 2,
     };
+  };
+
+  private onMeasure = (result: MeasureResult): void => {
+    this.contentSize = result[TAG_CHILD].size;
   };
 
   private renderBaseModal = (): React.ReactElement<ViewProps> => {
@@ -131,6 +139,7 @@ export class Modal extends React.Component<ModalProps> {
       <View
         {...restProps}
         {...measuringProps}
+        testID={baseModalTestId}
         key={TAG_CHILD}
         style={[styles.container, absoluteRelatedStyle, style]}>
         {children}
@@ -166,13 +175,6 @@ export class Modal extends React.Component<ModalProps> {
     );
   };
 
-  private onMeasure = (result: MeasureResult): void => {
-    const { width, height } = result[TAG_CHILD].size;
-
-    this.contentHeight = height;
-    this.contentWidth = width;
-  };
-
   public render(): React.ReactNode {
     return this.renderMeasureNode();
   }
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   hiddenModal: {
-    display: 'none',
+    opacity: 0,
   },
   backdropBaseStyles: {
     position: 'absolute',

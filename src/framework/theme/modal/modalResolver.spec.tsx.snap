@@ -36,7 +36,12 @@ exports[`@modal resolver component checks * component styled with mappings 1`] =
   >
     <Text
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       Test
     </Text>
@@ -74,7 +79,12 @@ exports[`@modal resolver component checks * modal resolver closes on passed prop
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
@@ -132,7 +142,12 @@ exports[`@modal resolver component checks * modal resolver closes on passed prop
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
@@ -190,7 +205,12 @@ exports[`@modal resolver component checks * modal resolver component close on ba
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
@@ -244,7 +264,12 @@ exports[`@modal resolver component checks * modal resolver component close on ba
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
@@ -292,7 +317,12 @@ exports[`@modal resolver component checks * modal resolver component renders pro
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1

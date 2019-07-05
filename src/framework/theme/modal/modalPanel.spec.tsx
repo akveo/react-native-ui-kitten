@@ -18,11 +18,11 @@ import {
   ModalComponentCloseProps,
 } from './modal.service';
 
-describe('@modalHelper-service: service checks', () => {
+describe('@modal-service: service checks', () => {
 
-  const ShowSingleModalTestId: string = '@modalHelper/single';
-  const ShowMultipleModalTestId: string = '@modalHelper/multiple';
-  const ShowModalWithBackDropAllowedId: string = '@modalHelper/backdrop';
+  const ShowSingleModalTestId: string = '@modal/single';
+  const ShowMultipleModalTestId: string = '@modal/multiple';
+  const ShowModalWithBackDropAllowedId: string = '@modal/backdrop';
 
   const textId = (id: number): string => {
     return `@modal/text-${id}`;
@@ -167,11 +167,11 @@ describe('@modalHelper-service: service checks', () => {
 
 jest.useFakeTimers();
 
-describe('@modalHelper panel checks', () => {
+describe('@modal panel checks', () => {
 
-  const showModalTestId: string = '@modalHelper/show';
-  const hideModalTestIdInner: string = '@modalHelper/hide-inner';
-  const hideModalTestIdOuter: string = '@modalHelper/hide-outer';
+  const showModalTestId: string = '@modal/show';
+  const hideModalTestIdInner: string = '@modal/hide-inner';
+  const hideModalTestIdOuter: string = '@modal/hide-outer';
 
   interface HooksProps {
     componentDidMount?: () => void;
@@ -242,7 +242,7 @@ describe('@modalHelper panel checks', () => {
     }
   }
 
-  it('* modalHelper panel renders properly', () => {
+  it('* modal panel renders properly', () => {
     const component: RenderAPI = render(
       <ModalPanelTest/>,
     );
@@ -252,7 +252,7 @@ describe('@modalHelper panel checks', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('* modalHelper panel render with props / children checking', () => {
+  it('* modal panel render with props / children checking', () => {
     const component: RenderAPI = render(
       <ModalPanelTest>
         <Text>
@@ -266,7 +266,7 @@ describe('@modalHelper panel checks', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('* modalHelper panel l/c-hooks checks', () => {
+  it('* modal panel l/c-hooks checks', () => {
     const componentDidMount = jest.fn();
     const componentWillUnmount = jest.fn();
 
@@ -284,7 +284,7 @@ describe('@modalHelper panel checks', () => {
     expect(componentWillUnmount).toHaveBeenCalled();
   });
 
-  it('* close modalHelper checking inner', () => {
+  it('* close modal checking inner', () => {
     const component: RenderAPI = render(
       <ModalPanelTest/>,
     );
@@ -297,7 +297,7 @@ describe('@modalHelper panel checks', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('* close modalHelper checking outer', () => {
+  it('* close modal checking outer', () => {
     const component: RenderAPI = render(
       <ModalPanelTest/>,
     );

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@modalHelper panel checks * close modalHelper checking inner 1`] = `
+exports[`@modal panel checks * close modal checking inner 1`] = `
 <View
   style={
     Object {
@@ -15,18 +15,18 @@ exports[`@modalHelper panel checks * close modalHelper checking inner 1`] = `
   </View>
   <Button
     onPress={[Function]}
-    testID="@modalHelper/show"
+    testID="@modal/show"
     title="Open Modal"
   />
   <Button
     onPress={[Function]}
-    testID="@modalHelper/hide-outer"
+    testID="@modal/hide-outer"
     title="Hide Modal"
   />
 </View>
 `;
 
-exports[`@modalHelper panel checks * close modalHelper checking outer 1`] = `
+exports[`@modal panel checks * close modal checking outer 1`] = `
 <View
   style={
     Object {
@@ -41,18 +41,18 @@ exports[`@modalHelper panel checks * close modalHelper checking outer 1`] = `
   </View>
   <Button
     onPress={[Function]}
-    testID="@modalHelper/show"
+    testID="@modal/show"
     title="Open Modal"
   />
   <Button
     onPress={[Function]}
-    testID="@modalHelper/hide-outer"
+    testID="@modal/hide-outer"
     title="Hide Modal"
   />
 </View>
 `;
 
-exports[`@modalHelper panel checks * modalHelper panel render with props / children checking 1`] = `
+exports[`@modal panel checks * modal panel render with props / children checking 1`] = `
 <View
   style={
     Object {
@@ -67,18 +67,18 @@ exports[`@modalHelper panel checks * modalHelper panel render with props / child
   </View>
   <Button
     onPress={[Function]}
-    testID="@modalHelper/show"
+    testID="@modal/show"
     title="Open Modal"
   />
   <Button
     onPress={[Function]}
-    testID="@modalHelper/hide-outer"
+    testID="@modal/hide-outer"
     title="Hide Modal"
   />
 </View>
 `;
 
-exports[`@modalHelper panel checks * modalHelper panel renders properly 1`] = `
+exports[`@modal panel checks * modal panel renders properly 1`] = `
 <View
   style={
     Object {
@@ -93,18 +93,18 @@ exports[`@modalHelper panel checks * modalHelper panel renders properly 1`] = `
   </View>
   <Button
     onPress={[Function]}
-    testID="@modalHelper/show"
+    testID="@modal/show"
     title="Open Modal"
   />
   <Button
     onPress={[Function]}
-    testID="@modalHelper/hide-outer"
+    testID="@modal/hide-outer"
     title="Hide Modal"
   />
 </View>
 `;
 
-exports[`@modalHelper-service: service checks * unexpected branch cover 1`] = `
+exports[`@modal-service: service checks * unexpected branch cover 1`] = `
 <View
   style={
     Object {
@@ -127,7 +127,7 @@ exports[`@modalHelper-service: service checks * unexpected branch cover 1`] = `
           "opacity": 1,
         }
       }
-      testID="@modalHelper/single"
+      testID="@modal/single"
     >
       <Text>
         Show Single Modal
@@ -147,7 +147,7 @@ exports[`@modalHelper-service: service checks * unexpected branch cover 1`] = `
           "opacity": 1,
         }
       }
-      testID="@modalHelper/multiple"
+      testID="@modal/multiple"
     >
       <Text>
         Show Single Modal
@@ -167,7 +167,7 @@ exports[`@modalHelper-service: service checks * unexpected branch cover 1`] = `
           "opacity": 1,
         }
       }
-      testID="@modalHelper/backdrop"
+      testID="@modal/backdrop"
     >
       <Text>
         Show Back-Drop Allowed Modal

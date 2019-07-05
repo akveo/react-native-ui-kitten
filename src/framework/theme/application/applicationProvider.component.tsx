@@ -33,7 +33,7 @@ interface State {
  *
  * This does basically two things:
  * - Provides styles for basic components;
- * - Renders modalHelper window which is used to be common for all elements presented as modalHelper;
+ * - Renders modal window which is used to be common for all elements presented as modal;
  *
  * @extends React.Component
  *

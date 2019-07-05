@@ -33,7 +33,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
     isBackDropAllowed: false,
   };
 
-  private closeModal: () => void = (): void => {
+  private closeModal = (): void => {
     if (this.props.onCloseModal) {
       this.props.onCloseModal(this.props.identifier);
     }
@@ -45,22 +45,22 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
     }
   };
 
-  private onStartShouldSetResponder = (): boolean => true;
+  private onStartShouldSetResponder = (): boolean => {
+    return true;
+  };
 
   private onResponderRelease = (): void => {
     return;
   };
 
-  private onStartShouldSetResponderCapture = (): boolean => false;
+  private onStartShouldSetResponderCapture = (): boolean => {
+    return false;
+  };
 
   private renderComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
     return React.cloneElement(source, {
-      ...source.props,
       onCloseModal: this.closeModal,
-      style: {
-        ...source.props.style,
-        ...StyleSheet.flatten(this.props.style),
-      },
+      style: [source.props.style, this.props.style],
     });
   };
 
@@ -68,23 +68,29 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
     return React.Children.map(source, this.renderComponentChild);
   };
 
-  private renderWithBackDrop = (component: React.ReactElement<ViewProps>) => (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={this.closeOnBackdrop}
-      activeOpacity={1}>
-      {component}
-    </TouchableOpacity>
-  );
+  private renderWithBackDrop = (component: React.ReactElement<ViewProps>):
+    React.ReactElement<TouchableOpacityProps> => {
 
-  private renderWithoutBackDrop = (component: React.ReactElement<ViewProps>) => (
-    <View style={styles.notVisibleWrapper}>
-      <View
+    return (
+      <TouchableOpacity
         style={styles.container}
-        pointerEvents='none'/>
-      {component}
-    </View>
-  );
+        onPress={this.closeOnBackdrop}
+        activeOpacity={1}>
+        {component}
+      </TouchableOpacity>
+    );
+  };
+
+  private renderWithoutBackDrop = (component: React.ReactElement<ViewProps>): React.ReactElement<ViewProps> => {
+    return (
+      <View style={styles.notVisibleWrapper}>
+        <View
+          style={styles.container}
+          pointerEvents='none'/>
+        {component}
+      </View>
+    );
+  };
 
   private renderComponent = (): React.ReactElement<TouchableOpacityProps | ViewProps> => {
     const { children, isBackDropAllowed, ...derivedProps } = this.props;
@@ -111,9 +117,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-  },
+  container: StyleSheet.absoluteFillObject,
   notVisibleWrapper: {
     position: 'absolute',
     width: 0,
