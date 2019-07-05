@@ -24,6 +24,7 @@ import {
   LayoutContainer,
   ModalContainer,
   SampleContainer,
+  CalendarContainer,
 } from '../ui/screen';
 
 export interface RouteType {
@@ -36,6 +37,7 @@ const AppNavigator = createStackNavigator({
   ['Bottom Navigation']: BottomNavigationContainer,
   ['Button']: ButtonContainer,
   ['Button Group']: ButtonGroupContainer,
+  ['Calendar']: CalendarContainer,
   ['Checkbox']: CheckBoxContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,

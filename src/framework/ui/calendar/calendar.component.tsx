@@ -27,11 +27,15 @@ import {
   ScrollToIndexParams,
   ScrollToOffsetParams,
 } from '../list/list.component';
-import { NativeDateService } from '../calendarKit/service';
+import {
+  DateService,
+  NativeDateService,
+} from '../calendarKit/service';
 import { Override } from '../support/typings';
 
 export type CalendarProps<D> = Override<BaseCalendarProps<D>, {
   renderItem?: (d: D, style: StyleType) => React.ReactElement<any>;
+  dateService?: DateService<D>;
 }>;
 
 export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
@@ -226,6 +230,7 @@ export class Calendar<D> extends React.Component<CalendarProps<D>> {
         ref={this.calendarRef}
         renderItem={this.renderDefaultItem}
         renderMonthHeader={this.renderDefaultMonthHeader}
+        dateService={this.props.dateService}
         {...this.props}
       />
     );
