@@ -9,7 +9,11 @@ import { NativeDateService } from './nativeDate.service';
 
 
 describe('@native-date: service checks', () => {
-  const dateService: DateService<Date> = new NativeDateService('en-US');
+  let dateService: DateService<Date> = new NativeDateService('en');
+
+  beforeEach(() => {
+    dateService = new NativeDateService('en');
+  });
 
   it('* should set locale to jp', () => {
     dateService.setLocale('jp');
