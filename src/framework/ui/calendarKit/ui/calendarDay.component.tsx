@@ -121,7 +121,6 @@ class CalendarDayComponent<D> extends React.Component<CalendarDayProps<D>> {
       <TouchableOpacity
         activeOpacity={1.0}
         onPress={this.onPress}
-        disabled={!date}
         {...restProps}
         style={[container, style]}>
         {contentElement}

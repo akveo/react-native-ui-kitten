@@ -8,9 +8,9 @@ import { CalendarCustomHeader } from './calendarCustomHeader.component';
 
 const defaultCalendar: ComponentShowcaseItem = {
   props: {
-    min: new Date(),
-    max: new Date(),
-    date: new Date(),
+    min: new Date(2019, 0, 1),
+    max: new Date(2019, 1, 0),
+    date: new Date(2019, 0, 1),
   },
 };
 
@@ -32,6 +32,15 @@ const customHeaderCalendar: ComponentShowcaseItem = {
   props: {
     ...defaultCalendar.props,
     renderMonthHeader: CalendarCustomHeader,
+  },
+};
+
+const filterCalendar: ComponentShowcaseItem = {
+  props: {
+    ...defaultCalendar.props,
+    filter: (date: Date): boolean => {
+      return date.getDay() !== 0 && date.getDay() !== 6;
+    },
   },
 };
 
@@ -63,11 +72,19 @@ const customHeaderSection: ComponentShowcaseSection = {
   ],
 };
 
+const filterSection: ComponentShowcaseSection = {
+  title: 'Filter',
+  items: [
+    filterCalendar,
+  ],
+};
+
 export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
     boundingSection,
     customItemSection,
     customHeaderSection,
+    filterSection,
   ],
 };

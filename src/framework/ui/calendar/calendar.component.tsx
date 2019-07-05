@@ -80,6 +80,8 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {boolean} bounding - Defines if we should render previous and next months in the current month view.
  *
+ * @property {(date: D) => ReactElement<any>} filter - Predicate that decides which cells will be disabled.
+ *
  * @example Basic Usage
  *
  * ```

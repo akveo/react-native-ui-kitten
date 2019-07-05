@@ -22,10 +22,24 @@ export abstract class DateService<D> {
   }
 
   /**
+   * Checks if the date is between the start date and the end date.
+   * */
+  public isBetweenSafe(date: D, start: D, end: D): boolean {
+    return date && start && end && this.compareDates(date, start) > 0 && this.compareDates(date, end) < 0;
+  }
+
+  /**
    * Checks if the date is between the start date and the end date including bounds.
    * */
   public isBetweenIncluding(date: D, start: D, end: D): boolean {
     return this.compareDates(date, start) >= 0 && this.compareDates(date, end) <= 0;
+  }
+
+  /**
+   * Checks if the date is between the start date and the end date including bounds.
+   * */
+  public isBetweenIncludingSafe(date: D, start: D, end: D): boolean {
+    return date && start && end && this.isBetweenIncluding(date, start, end);
   }
 
   /**

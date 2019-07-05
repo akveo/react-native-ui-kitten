@@ -57,11 +57,12 @@ export type ScrollToTodayParams<D> = Omit<ScrollToDateParams<D>, 'date'>;
 interface ComponentProps<D> extends ListContainerProps {
   min: D;
   max: D;
-  renderItem: (date: D, style: StyleType) => React.ReactElement<any>;
   dateService: DateService<D>;
   date?: D;
   bounding?: boolean;
+  filter?: (date: D) => boolean;
   onSelect?: (date: D) => void;
+  renderItem: (date: D, style: StyleType) => React.ReactElement<any>;
   renderMonthHeader?: (date: D, style: StyleType) => React.ReactElement<any>;
 }
 
@@ -105,6 +106,8 @@ export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
  * @property {boolean} bounding - Defines if we should render previous and next months in the current month view.
  *
  * @property {(date: D, style: StyleType) => ReactElement<any>} renderMonthHeader - Should return the month header.
+ *
+ * @property {(date: D) => ReactElement<any>} filter - Predicate that decides which cells will be disabled.
  */
 
 export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<D>, State> {
@@ -220,6 +223,18 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
     }
   };
 
+  private isDayFitsFilter = (date: D): boolean => {
+    return this.props.filter && !this.props.filter(date) || false;
+  };
+
+  private isDayFitsBounds = (date: D): boolean => {
+    return this.props.dateService.isBetweenIncludingSafe(date, this.props.min, this.props.max);
+  };
+
+  private isDayDisabled = (date: D): boolean => {
+    return !this.isDayFitsBounds(date) || this.isDayFitsFilter(date);
+  };
+
   private isDaySelected = (date: D): boolean => {
     return this.props.dateService.isSameDaySafe(date, this.props.date);
   };
@@ -266,13 +281,11 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
     return (
       <CalendarDay
         key={index}
-        style={{
-          width: this.state.cellSize,
-          height: this.state.cellSize,
-        }}
+        style={{ width: this.state.cellSize, height: this.state.cellSize }}
         date={item}
         selectedDate={this.props.date}
         selected={this.isDaySelected(item)}
+        disabled={this.isDayDisabled(item)}
         onSelect={this.onDaySelect}
         shouldComponentUpdate={this.shouldUpdateDay}>
         {this.props.renderItem}
