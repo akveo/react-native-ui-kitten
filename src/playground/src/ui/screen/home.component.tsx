@@ -18,6 +18,7 @@ export const routes: RouteType[] = [
   { name: 'Bottom Navigation' },
   { name: 'Button' },
   { name: 'Button Group' },
+  { name: 'Calendar' },
   { name: 'Checkbox' },
   { name: 'Input' },
   { name: 'Layout' },
