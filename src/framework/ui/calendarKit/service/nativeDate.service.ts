@@ -130,13 +130,6 @@ export class NativeDateService extends DateService<Date> {
     return this.createDate(date.getFullYear(), date.getMonth(), 1);
   }
 
-  public getNumberOfMonthsInRange(start: Date, end: Date): number {
-    const numberOfYears: number = end.getFullYear() - start.getFullYear();
-    const numberOfMonths: number = numberOfYears * this.MONTHS_IN_YEAR;
-
-    return numberOfMonths - (start.getMonth() - end.getMonth() - 1);
-  }
-
   public getNumberOfDaysInMonth(date: Date): number {
     return this.getMonthEnd(date).getDate();
   }

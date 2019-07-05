@@ -123,6 +123,10 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
   private estimatedMonthSize: number;
   private visibleMonth: D;
 
+  private get dateService(): DateService<D> {
+    return this.props.dateService;
+  }
+
   constructor(props: BaseCalendarProps<D>) {
     super(props);
     this.monthService = new MonthModelService(props.dateService);
@@ -130,13 +134,13 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
   }
 
   public scrollToToday = (params?: ScrollToTodayParams<D>) => {
-    const date: D = this.props.dateService.today();
+    const date: D = this.dateService.today();
     this.scrollToDate({ date, ...params });
   };
 
   public scrollToDate = (params: ScrollToDateParams<D>) => {
     const { date, ...restParams } = params;
-    const index: number = this.props.dateService.getNumberOfMonthsInRange(this.props.min, date) - 1;
+    const index: number = this.getNumberOfMonthsInRange(this.props.min, date) - 1;
     this.scrollToIndex({ index, ...restParams });
   };
 
@@ -155,8 +159,8 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
   };
 
   private shouldUpdateMonth = (props: CalendarMonthProps<D>, nextProps: CalendarMonthProps<D>): boolean => {
-    const wasSelected: boolean = this.props.dateService.isSameMonthSafe(props.selectedDate, props.date);
-    const willSelected: boolean = this.props.dateService.isSameMonthSafe(nextProps.selectedDate, nextProps.date);
+    const wasSelected: boolean = this.dateService.isSameMonthSafe(props.selectedDate, props.date);
+    const willSelected: boolean = this.dateService.isSameMonthSafe(nextProps.selectedDate, nextProps.date);
 
     return wasSelected || willSelected;
   };
@@ -165,15 +169,15 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
     const week: D[] = props.data.filter(Boolean);
     const { [0]: start, [week.length - 1]: end } = week;
 
-    const wasSelected: boolean = this.props.dateService.isBetweenIncluding(props.selectedDate, start, end);
-    const willSelected: boolean = this.props.dateService.isBetweenIncluding(nextProps.selectedDate, start, end);
+    const wasSelected: boolean = this.dateService.isBetweenIncluding(props.selectedDate, start, end);
+    const willSelected: boolean = this.dateService.isBetweenIncluding(nextProps.selectedDate, start, end);
 
     return wasSelected || willSelected;
   };
 
   private shouldUpdateDay = (props: CalendarDayProps<D>, nextProps: CalendarDayProps<D>): boolean => {
-    const wasSelected: boolean = this.props.dateService.isSameDaySafe(props.selectedDate, props.date);
-    const willSelected: boolean = this.props.dateService.isSameDaySafe(nextProps.selectedDate, nextProps.date);
+    const wasSelected: boolean = this.dateService.isSameDaySafe(props.selectedDate, props.date);
+    const willSelected: boolean = this.dateService.isSameDaySafe(nextProps.selectedDate, nextProps.date);
 
     // TODO: theme comparison should be simplified
     return wasSelected || willSelected || props.theme !== nextProps.theme;
@@ -202,8 +206,15 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
     };
   };
 
+  private getNumberOfMonthsInRange(start: D, end: D): number {
+    const numberOfYears: number = this.dateService.getYear(end) - this.dateService.getYear(start);
+    const numberOfMonths: number = numberOfYears * this.dateService.MONTHS_IN_YEAR;
+
+    return numberOfMonths - (this.dateService.getMonth(start) - this.dateService.getMonth(end) - 1);
+  }
+
   private onMeasureResult = (layout: LayoutRectangle) => {
-    const cellSize: number = layout.width / this.props.dateService.DAYS_IN_WEEK;
+    const cellSize: number = layout.width / this.dateService.DAYS_IN_WEEK;
     this.setState({ cellSize }, this.onCellMeasured);
   };
 
@@ -228,7 +239,7 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
   };
 
   private isDayFitsBounds = (date: D): boolean => {
-    return this.props.dateService.isBetweenIncludingSafe(date, this.props.min, this.props.max);
+    return this.dateService.isBetweenIncludingSafe(date, this.props.min, this.props.max);
   };
 
   private isDayDisabled = (date: D): boolean => {
@@ -236,11 +247,11 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
   };
 
   private isDaySelected = (date: D): boolean => {
-    return this.props.dateService.isSameDaySafe(date, this.props.date);
+    return this.dateService.isSameDaySafe(date, this.props.date);
   };
 
   private createMonthDate = (index: number): D => {
-    return this.props.dateService.addMonth(this.props.min, index);
+    return this.dateService.addMonth(this.props.min, index);
   };
 
   private createMonthData = (date: D): D[][] => {
@@ -248,7 +259,7 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
   };
 
   private createCalendarData = (min: D, max: D): D[] => {
-    const numberOfMonths: number = this.props.dateService.getNumberOfMonthsInRange(min, max);
+    const numberOfMonths: number = this.getNumberOfMonthsInRange(min, max);
 
     return range(numberOfMonths, this.createMonthDate);
   };

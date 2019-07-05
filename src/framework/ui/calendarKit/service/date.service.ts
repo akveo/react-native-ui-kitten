@@ -168,11 +168,6 @@ export abstract class DateService<D> {
   public abstract getMonthEnd(date: D): D;
 
   /**
-   * Finds number of months between two dates.
-   * */
-  public abstract getNumberOfMonthsInRange(start: D, end: D): number;
-
-  /**
    * Creates the same date but with month equals to 0 and day equals to 1.
    * */
   public abstract getYearStart(date: D): D;
