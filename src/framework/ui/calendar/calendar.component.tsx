@@ -32,6 +32,7 @@ import {
   NativeDateService,
 } from '../calendarKit/service';
 import { Override } from '../support/typings';
+import { StyleSheet } from 'react-native';
 
 export type CalendarProps<D> = Override<BaseCalendarProps<D>, {
   renderItem?: (d: D, style: StyleType) => React.ReactElement<any>;
@@ -202,7 +203,7 @@ export class Calendar<D> extends React.Component<CalendarProps<D>> {
     this.calendarRef.current.scrollToEnd(params);
   };
 
-  private renderDefaultMonthHeader = (date: D, style: StyleType): CalendarMonthHeaderElement => {
+  private renderMonthHeader = (date: D, style: StyleType): CalendarMonthHeaderElement => {
     const monthName: string = this.props.dateService.getMonthName(date);
 
     return (
@@ -216,10 +217,10 @@ export class Calendar<D> extends React.Component<CalendarProps<D>> {
     );
   };
 
-  private renderDefaultItem = (date: D, style: StyleType): CalendarDayContentElement => {
+  private renderItem = (date: D, style: StyleType): CalendarDayContentElement => {
     return (
       <CalendarDayContent
-        style={style.container}
+        style={[style.container, styles.dayCell]}
         textStyle={style.text}>
         {`${this.props.dateService.getDate(date)}`}
       </CalendarDayContent>
@@ -230,11 +231,17 @@ export class Calendar<D> extends React.Component<CalendarProps<D>> {
     return (
       <BaseCalendar
         ref={this.calendarRef}
-        renderItem={this.renderDefaultItem}
-        renderMonthHeader={this.renderDefaultMonthHeader}
+        renderItem={this.renderItem}
+        renderMonthHeader={this.renderMonthHeader}
         dateService={this.props.dateService}
         {...this.props}
       />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  dayCell: {
+    aspectRatio: 1,
+  },
+});

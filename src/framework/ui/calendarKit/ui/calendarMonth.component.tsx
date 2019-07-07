@@ -75,18 +75,13 @@ export class CalendarMonth<D> extends React.Component<CalendarMonthProps<D>> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, data, renderItem, ...restProps } = this.props;
+    const { data, renderItem, ...restProps } = this.props;
 
     return (
       <View
-        {...restProps}
-        style={[styles.container, style]}>
+        {...restProps}>
         {data.map(this.renderWeekElement)}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

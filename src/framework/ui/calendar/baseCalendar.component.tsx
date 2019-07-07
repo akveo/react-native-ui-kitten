@@ -5,26 +5,16 @@
  */
 
 import React from 'react';
-import {
-  LayoutRectangle,
-  ListRenderItemInfo,
-  StyleSheet,
-} from 'react-native';
+import { ListRenderItemInfo } from 'react-native';
 import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  MeasureLayout,
-  MeasureLayoutElement,
-  MeasureLayoutProps,
-} from './measureLayout.component';
-import {
   BaseScrollParams,
   List,
   ListComponent,
-  ListElement,
   ListProps,
   ScrollToIndexParams,
   ScrollToOffsetParams,
@@ -64,10 +54,6 @@ interface ComponentProps<D> extends ListContainerProps {
   onSelect?: (date: D) => void;
   renderItem: (date: D, style: StyleType) => React.ReactElement<any>;
   renderMonthHeader?: (date: D, style: StyleType) => React.ReactElement<any>;
-}
-
-interface State {
-  cellSize: number;
 }
 
 export type BaseCalendarProps<D> = StyledComponentProps & ListContainerProps & ComponentProps<D>;
@@ -110,17 +96,12 @@ export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
  * @property {(date: D) => ReactElement<any>} filter - Predicate that decides which cells will be disabled.
  */
 
-export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<D>, State> {
+export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<D>> {
 
   static styledComponentName: string = 'Calendar';
 
-  public state: State = {
-    cellSize: null,
-  };
-
   private monthService: MonthModelService<D>;
   private listRef: React.RefObject<ListComponent> = React.createRef();
-  private estimatedMonthSize: number;
   private visibleMonth: D;
 
   private get dateService(): DateService<D> {
@@ -145,9 +126,7 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
   };
 
   public scrollToIndex = (params: ScrollToIndexParams) => {
-    const { index, ...restParams } = params;
-    const offset: number = this.estimatedMonthSize * index;
-    this.scrollToOffset({ offset, ...restParams });
+    this.listRef.current.scrollToIndex(params);
   };
 
   public scrollToOffset = (params: ScrollToOffsetParams) => {
@@ -197,7 +176,7 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
         color: source.monthTextColor,
       },
       weekday: {
-        width: this.state.cellSize,
+        flex: 1,
         fontSize: source.weekdayTextFontSize,
         fontWeight: source.weekdayTextFontWeight,
         lineHeight: source.weekdayTextLineHeight,
@@ -212,21 +191,6 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
 
     return numberOfMonths - (this.dateService.getMonth(start) - this.dateService.getMonth(end) - 1);
   }
-
-  private onMeasureResult = (layout: LayoutRectangle) => {
-    const cellSize: number = layout.width / this.dateService.DAYS_IN_WEEK;
-    this.setState({ cellSize }, this.onCellMeasured);
-  };
-
-  private onCellMeasured = () => {
-    const { data } = this.listRef.current.props;
-
-    const accMonthSize: number = data.reduce((acc: number, date: Date, index: number): number => {
-      return acc + this.calculateMonthSize(index);
-    }, 0);
-
-    this.estimatedMonthSize = accMonthSize / data.length;
-  };
 
   private onDaySelect = (date: D) => {
     if (this.props.onSelect) {
@@ -264,35 +228,10 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
     return range(numberOfMonths, this.createMonthDate);
   };
 
-  private calculateMonthSize = (index: number): number => {
-    const monthDate: D = this.createMonthDate(index);
-    const numberOfWeeks: number = this.monthService.getNumberOfWeekRowsInMonth(monthDate);
-
-    return numberOfWeeks * this.state.cellSize;
-  };
-
-  private getItemLayout = (data: D[], index: number) => {
-    return {
-      length: this.estimatedMonthSize,
-      offset: this.estimatedMonthSize * index,
-      index: index,
-    };
-  };
-
-  private renderMeasuringElement = (): MeasureLayoutElement => {
-    return (
-      <MeasureLayout
-        style={[styles.container, this.props.themedStyle, this.props.style]}
-        onResult={this.onMeasureResult}
-      />
-    );
-  };
-
   private renderDayElement = (item: D, index: number): CalendarDayElement<D> => {
     return (
       <CalendarDay
         key={index}
-        style={{ width: this.state.cellSize, height: this.state.cellSize }}
         date={item}
         selectedDate={this.props.date}
         selected={this.isDaySelected(item)}
@@ -322,37 +261,20 @@ export class BaseCalendarComponent<D> extends React.Component<BaseCalendarProps<
     );
   };
 
-  private renderCalendarElement = (): ListElement => {
-    const { style, contentContainerStyle, themedStyle, min, max, dateService, ...restProps } = this.props;
+  public render(): React.ReactElement<ListProps> {
+    const { style, themedStyle, min, max, dateService, ...restProps } = this.props;
 
     return (
       <List
         {...restProps}
         ref={this.listRef}
         style={[themedStyle, style]}
-        contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
         initialNumToRender={dateService.MONTHS_IN_YEAR}
         data={this.createCalendarData(min, max)}
         renderItem={this.renderMonthElement}
-        getItemLayout={this.getItemLayout}
       />
     );
-  };
-
-  public render(): React.ReactElement<ListProps | MeasureLayoutProps> {
-    if (!this.state.cellSize) {
-      return this.renderMeasuringElement();
-    }
-
-    return this.renderCalendarElement();
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  contentContainer: {},
-});
 
 export const BaseCalendar = styled(BaseCalendarComponent);

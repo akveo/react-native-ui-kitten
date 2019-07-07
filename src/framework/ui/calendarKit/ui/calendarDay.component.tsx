@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
@@ -122,11 +123,17 @@ class CalendarDayComponent<D> extends React.Component<CalendarDayProps<D>> {
         activeOpacity={1.0}
         onPress={this.onPress}
         {...restProps}
-        style={[container, style]}>
+        style={[container, styles.container, style]}>
         {contentElement}
       </TouchableOpacity>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export const CalendarDay = styled(CalendarDayComponent);
