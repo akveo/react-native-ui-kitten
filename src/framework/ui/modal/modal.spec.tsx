@@ -3,210 +3,99 @@ import {
   View,
   Text,
   Button,
-  TouchableOpacity,
+  Dimensions,
+  ViewProps,
 } from 'react-native';
 import {
   fireEvent,
   render,
   RenderAPI,
-  shallow,
 } from 'react-native-testing-library';
 import {
   Modal,
-  ModalAnimationType,
+  baseModalTestId,
 } from './modal.component';
+import { StyleType } from '@kitten/theme';
 
-jest.useFakeTimers();
+const buttonShowModalTestId: string = '@button-show-modal';
+const buttonHideModalTestId: string = '@button-hide-modal';
+const stringify = (obj: Object): string => JSON.stringify(obj);
+
+interface TestScreenState {
+  modalVisible: boolean;
+}
+
+interface TestScreenProps {
+  modalStyle?: StyleType;
+}
+
+class TestScreen extends React.Component<TestScreenProps & ViewProps, TestScreenState> {
+
+  public state: TestScreenState = {
+    modalVisible: false,
+  };
+
+  private setModalVisible(modalVisible: boolean): void {
+    this.setState({ modalVisible });
+  }
+
+  public render(): React.ReactNode {
+    return (
+      <View>
+        <Button
+          title='Show Modal'
+          testID={buttonShowModalTestId}
+          onPress={() => this.setModalVisible(true)}
+        />
+        <Button
+          title='Show Modal'
+          testID={buttonHideModalTestId}
+          onPress={() => this.setModalVisible(false)}
+        />
+        <Modal
+          style={this.props.modalStyle}
+          visible={this.state.modalVisible}>
+          <Text>Test Modal</Text>
+        </Modal>
+      </View>
+    );
+  }
+}
 
 describe('@modal component checks', () => {
 
-  const MODAL_TEST_IDENTIFIER = (substring: string): string => {
-    return `modal-test-identifier-${substring}`;
-  };
+  it('* modal shows/hides properly', () => {
+    const component: RenderAPI = render(<TestScreen/>);
 
-  interface TestScreenProps {
-    modalAnimationType: ModalAnimationType;
-    buttonTestId: string;
-  }
+    fireEvent.press(component.getByTestId(buttonShowModalTestId));
+    expect(component.getByType(Modal).props.visible).toBe(true);
 
-  interface TestScreenState {
-    modalVisible: boolean;
-  }
+    fireEvent.press(component.getByTestId(buttonHideModalTestId));
+    expect(component.getByType(Modal).props.visible).toBe(false);
+  });
 
-  class TestScreen extends React.Component<TestScreenProps, TestScreenState> {
+  it('* modal default center placement calculated properly', () => {
+    const { width, height } = Dimensions.get('screen');
+    const modalStyle: StyleType = {
+      width: 200,
+      height: 200,
+    };
+    const component: RenderAPI = render(
+      <TestScreen modalStyle={modalStyle}/>,
+    );
 
-    public state: TestScreenState = {
-      modalVisible: false,
+    fireEvent.press(component.getByTestId(buttonShowModalTestId));
+    const modalInstance: any = component.getByType(Modal).instance;
+    const expectedStyle: StyleType = {
+      top: (height - modalInstance.contentSize.height) / 2,
+      left: (width - modalInstance.contentSize.width) / 2,
     };
 
-    private setModalVisible(modalVisible: boolean): void {
-      this.setState({ modalVisible });
-    }
+    const baseModalStyles: StyleType[] = component.getByTestId(baseModalTestId).props.style;
+    const expectedStyleExist: boolean = baseModalStyles[0]
+      .some((style: StyleType) => stringify(style) === stringify(expectedStyle));
 
-    public render(): React.ReactNode {
-      return (
-        <View>
-          <Button
-            testID={this.props.buttonTestId}
-            title='Open Modal'
-            onPress={() => this.setModalVisible(true)}/>
-          <Modal
-            visible={this.state.modalVisible}
-            isBackDropAllowed={true}
-            identifier={MODAL_TEST_IDENTIFIER('1')}
-            onCloseModal={() => 1}
-            animationType={this.props.modalAnimationType}
-            animationDuration={500}>
-            <View>
-              <Text>
-                Test2
-              </Text>
-            </View>
-          </Modal>,
-        </View>
-      );
-    }
-  }
-
-  it('* modal component renders properly', () => {
-    const modal1: RenderAPI = render(
-      <Modal
-        visible={true}
-        isBackDropAllowed={false}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={() => 1}>
-        <View>
-          <Text>
-            Test1
-          </Text>
-        </View>
-      </Modal>,
-    );
-
-    const modal2: RenderAPI = render(
-      <Modal
-        visible={false}
-        isBackDropAllowed={false}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={() => 1}>
-        <View>
-          <Text>
-            Test2
-          </Text>
-        </View>
-      </Modal>,
-    );
-
-    const { output: firstOutput } = shallow(modal1.getByType(Modal));
-    const { output: secondOutput } = shallow(modal2.getByType(Modal));
-
-    expect(firstOutput).toMatchSnapshot();
-    expect(secondOutput).toMatchSnapshot();
-  });
-
-  it('* with animations', () => {
-    const testApplication1: RenderAPI = render(
-      <TestScreen
-        modalAnimationType='slideInUp'
-        buttonTestId='1'
-      />,
-    );
-
-    const testApplication2: RenderAPI = render(
-      <TestScreen
-        modalAnimationType='fade'
-        buttonTestId='2'
-      />,
-    );
-
-    fireEvent.press(testApplication1.getByTestId('1'));
-    fireEvent.press(testApplication2.getByTestId('2'));
-
-    const { output: firstOutput } = shallow(testApplication1.getByType(Modal));
-    const { output: secondOutput } = shallow(testApplication2.getByType(Modal));
-
-    expect(firstOutput).toMatchSnapshot();
-    expect(secondOutput).toMatchSnapshot();
-  });
-
-  it('* modal component props checks', () => {
-    const modalPassingProps = {
-      visible: true,
-      isBackDropAllowed: false,
-    };
-    const modal = <Modal {...modalPassingProps}/>;
-
-    expect(modal.props.visible).toBe(modalPassingProps.visible);
-    expect(modal.props.isBackDropAllowed).toBe(modalPassingProps.isBackDropAllowed);
-  });
-
-  it('* modal closes on passed prop', () => {
-    const onCloseModal = jest.fn();
-
-    const component: RenderAPI = render(
-      <Modal
-        visible={true}
-        isBackDropAllowed={true}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={onCloseModal}>
-        <View>
-          <Text>Test1</Text>
-          <Button
-            title='Close Modal'
-            onPress={onCloseModal}
-          />
-        </View>
-      </Modal>,
-    );
-
-
-    const { output: openedOutput } = shallow(component.getByType(Modal));
-    expect(openedOutput).toMatchSnapshot();
-
-    fireEvent.press(component.getByType(Button));
-    expect(onCloseModal).toHaveBeenCalled();
-
-    const { output: closedOutput } = shallow(component.getByType(Modal));
-    expect(closedOutput).toMatchSnapshot();
-  });
-
-  it('* modal component close on backDrop checks', () => {
-    const onCloseModal = jest.fn();
-
-    const component: RenderAPI = render(
-      <Modal
-        visible={true}
-        isBackDropAllowed={true}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={onCloseModal}>
-        <View>
-          <Text>
-            Test1
-          </Text>
-        </View>
-      </Modal>,
-    );
-
-    const { output: openedOutput } = shallow(component.getByType(Modal));
-    expect(openedOutput).toMatchSnapshot();
-
-    fireEvent.press(component.getByType(TouchableOpacity));
-    expect(onCloseModal).toHaveBeenCalled();
-
-    const { output: closedOutput } = shallow(component.getByType(Modal));
-    expect(closedOutput).toMatchSnapshot();
-  });
-
-  it('* component styled with mappings', () => {
-    const component: RenderAPI = render(
-      <Modal visible={true}>
-        <Text>Test</Text>
-      </Modal>,
-    );
-
-    const { output } = shallow(component.getByType(Modal));
-
-    expect(output).toMatchSnapshot();
+    expect(expectedStyleExist).toBe(true);
   });
 
 });

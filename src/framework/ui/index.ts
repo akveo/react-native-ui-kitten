@@ -41,7 +41,6 @@ export {
 export {
   Modal,
   ModalProps,
-  ModalAnimationType,
 } from './modal/modal.component';
 export {
   OverflowMenu,

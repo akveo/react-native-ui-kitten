@@ -2,68 +2,54 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  ViewProps,
 } from 'react-native';
-import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
-} from '@kitten/theme';
 import {
   Button,
   Modal,
+  ModalProps,
   Text,
 } from '@kitten/ui';
-
-type ModalShowcaseProps = & ThemedComponentProps & ViewProps;
 
 interface State {
   modalVisible: boolean;
 }
 
-class ModalShowcaseComponent extends React.Component<ModalShowcaseProps, State> {
+export class ModalShowcase extends React.Component<ModalProps, State> {
 
   public state: State = {
     modalVisible: false,
   };
 
-  private toggleModal = () => {
-    const modalVisible: boolean = !this.state.modalVisible;
-
+  private toggleModal = (modalVisible: boolean) => {
     this.setState({ modalVisible });
   };
 
-  public render(): React.ReactElement<ViewProps> {
+  public render(): React.ReactNode {
     return (
-      <View style={this.props.themedStyle.container}>
-        <Button onPress={this.toggleModal}>
-          SHOW MODAL
+      <View style={styles.container}>
+        <Button onPress={() => this.toggleModal(true)}>
+          Show Modal
         </Button>
         <Modal
-          style={this.props.themedStyle.modal}
-          identifier='@modal/test'
-          isBackDropAllowed={true}
-          visible={this.state.modalVisible}
-          onCloseModal={this.toggleModal}>
-          <Text>Hi! I'm a Modal</Text>
+          {...this.props}
+          visible={this.state.modalVisible}>
+          <Text>Hi! This is Modal</Text>
+          <Button
+            style={styles.button}
+            onPress={() => this.toggleModal(false)}>
+            Hide me
+          </Button>
         </Modal>
       </View>
     );
   }
 }
 
-export const ModalShowcase = withStyles(ModalShowcaseComponent, (theme: ThemeType) => ({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    justifyContent: 'space-between',
   },
-  modal: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 256,
-    height: 256,
-    backgroundColor: theme['background-basic-color-1'],
-    borderColor: theme['border-basic-color-2'],
-    borderWidth: 1,
+  button: {
+    marginTop: 12,
   },
-}));
+});

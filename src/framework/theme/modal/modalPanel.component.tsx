@@ -4,7 +4,7 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import { Modal } from '../../ui/modal/modal.component';
+import { ModalResolver } from './modalResolver.component';
 import {
   ModalService,
   ModalPresenting,
@@ -77,7 +77,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
       .find(item => this.state.components.get(item) === modal);
     const closeOnBackdrop: boolean = this.state.backdrops.get(identifier);
     return (
-      <Modal
+      <ModalResolver
         {...modal.props}
         visible={true}
         isBackDropAllowed={closeOnBackdrop}
@@ -86,7 +86,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
         onCloseModal={this.hide}
       >
         {modal}
-      </Modal>
+      </ModalResolver>
     );
   }
 

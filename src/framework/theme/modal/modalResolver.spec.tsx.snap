@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@modal component checks * component styled with mappings 1`] = `
+exports[`@modal resolver component checks * component styled with mappings 1`] = `
 <View
   style={
     Object {
@@ -22,33 +22,34 @@ exports[`@modal component checks * component styled with mappings 1`] = `
       }
     }
   />
-  <AnimatedComponent
-    animationDuration={300}
+  <View
     onResponderRelease={[Function]}
     onStartShouldSetResponder={[Function]}
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Array [
-        Object {},
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
+      Object {
+        "alignSelf": "flex-start",
+      }
     }
     visible={true}
   >
     <Text
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       Test
     </Text>
-  </AnimatedComponent>
+  </View>
 </View>
 `;
 
-exports[`@modal component checks * modal closes on passed prop 1`] = `
+exports[`@modal resolver component checks * modal resolver closes on passed prop 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   onPress={[Function]}
@@ -62,8 +63,7 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
     }
   }
 >
-  <AnimatedComponent
-    animationDuration={300}
+  <View
     identifier="modal-test-identifier-1"
     onCloseModal={[MockFunction]}
     onResponderRelease={[Function]}
@@ -71,18 +71,20 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Array [
-        Object {},
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
+      Object {
+        "alignSelf": "flex-start",
+      }
     }
     visible={true}
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
@@ -92,11 +94,11 @@ exports[`@modal component checks * modal closes on passed prop 1`] = `
         title="Close Modal"
       />
     </View>
-  </AnimatedComponent>
+  </View>
 </TouchableOpacity>
 `;
 
-exports[`@modal component checks * modal closes on passed prop 2`] = `
+exports[`@modal resolver component checks * modal resolver closes on passed prop 2`] = `
 <TouchableOpacity
   activeOpacity={1}
   onPress={[Function]}
@@ -110,8 +112,7 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
     }
   }
 >
-  <AnimatedComponent
-    animationDuration={300}
+  <View
     identifier="modal-test-identifier-1"
     onCloseModal={
       [MockFunction] {
@@ -133,18 +134,20 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Array [
-        Object {},
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
+      Object {
+        "alignSelf": "flex-start",
+      }
     }
     visible={true}
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
@@ -168,11 +171,11 @@ exports[`@modal component checks * modal closes on passed prop 2`] = `
         title="Close Modal"
       />
     </View>
-  </AnimatedComponent>
+  </View>
 </TouchableOpacity>
 `;
 
-exports[`@modal component checks * modal component close on backDrop checks 1`] = `
+exports[`@modal resolver component checks * modal resolver component close on backDrop checks 1`] = `
 <TouchableOpacity
   activeOpacity={1}
   onPress={[Function]}
@@ -186,8 +189,7 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
     }
   }
 >
-  <AnimatedComponent
-    animationDuration={300}
+  <View
     identifier="modal-test-identifier-1"
     onCloseModal={[MockFunction]}
     onResponderRelease={[Function]}
@@ -195,28 +197,30 @@ exports[`@modal component checks * modal component close on backDrop checks 1`] 
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Array [
-        Object {},
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
+      Object {
+        "alignSelf": "flex-start",
+      }
     }
     visible={true}
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
       </Text>
     </View>
-  </AnimatedComponent>
+  </View>
 </TouchableOpacity>
 `;
 
-exports[`@modal component checks * modal component close on backDrop checks 2`] = `
+exports[`@modal resolver component checks * modal resolver component close on backDrop checks 2`] = `
 <TouchableOpacity
   activeOpacity={1}
   onPress={[Function]}
@@ -230,8 +234,7 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
     }
   }
 >
-  <AnimatedComponent
-    animationDuration={300}
+  <View
     identifier="modal-test-identifier-1"
     onCloseModal={
       [MockFunction] {
@@ -253,28 +256,30 @@ exports[`@modal component checks * modal component close on backDrop checks 2`] 
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Array [
-        Object {},
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
+      Object {
+        "alignSelf": "flex-start",
+      }
     }
     visible={true}
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
       </Text>
     </View>
-  </AnimatedComponent>
+  </View>
 </TouchableOpacity>
 `;
 
-exports[`@modal component checks * modal component renders properly 1`] = `
+exports[`@modal resolver component checks * modal resolver component renders properly 1`] = `
 <View
   style={
     Object {
@@ -296,8 +301,7 @@ exports[`@modal component checks * modal component renders properly 1`] = `
       }
     }
   />
-  <AnimatedComponent
-    animationDuration={300}
+  <View
     identifier="modal-test-identifier-1"
     onCloseModal={[Function]}
     onResponderRelease={[Function]}
@@ -305,121 +309,27 @@ exports[`@modal component checks * modal component renders properly 1`] = `
     onStartShouldSetResponderCapture={[Function]}
     pointerEvents="box-none"
     style={
-      Array [
-        Object {},
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
+      Object {
+        "alignSelf": "flex-start",
+      }
     }
     visible={true}
   >
     <View
       onCloseModal={[Function]}
-      style={Object {}}
+      style={
+        Array [
+          undefined,
+          undefined,
+        ]
+      }
     >
       <Text>
         Test1
       </Text>
     </View>
-  </AnimatedComponent>
+  </View>
 </View>
 `;
 
-exports[`@modal component checks * modal component renders properly 2`] = `null`;
-
-exports[`@modal component checks * with animations 1`] = `
-<TouchableOpacity
-  activeOpacity={1}
-  onPress={[Function]}
-  style={
-    Object {
-      "bottom": 0,
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
-  }
->
-  <AnimatedComponent
-    animationDuration={500}
-    identifier="modal-test-identifier-1"
-    onCloseModal={[Function]}
-    onResponderRelease={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    pointerEvents="box-none"
-    style={
-      Array [
-        Object {
-          "transform": Array [
-            Object {
-              "translateY": 1334,
-            },
-          ],
-        },
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
-    }
-    visible={true}
-  >
-    <View
-      onCloseModal={[Function]}
-      style={Object {}}
-    >
-      <Text>
-        Test2
-      </Text>
-    </View>
-  </AnimatedComponent>
-</TouchableOpacity>
-`;
-
-exports[`@modal component checks * with animations 2`] = `
-<TouchableOpacity
-  activeOpacity={1}
-  onPress={[Function]}
-  style={
-    Object {
-      "bottom": 0,
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
-  }
->
-  <AnimatedComponent
-    animationDuration={500}
-    identifier="modal-test-identifier-1"
-    onCloseModal={[Function]}
-    onResponderRelease={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    pointerEvents="box-none"
-    style={
-      Array [
-        Object {
-          "opacity": 0,
-        },
-        Object {
-          "alignSelf": "flex-start",
-        },
-      ]
-    }
-    visible={true}
-  >
-    <View
-      onCloseModal={[Function]}
-      style={Object {}}
-    >
-      <Text>
-        Test2
-      </Text>
-    </View>
-  </AnimatedComponent>
-</TouchableOpacity>
-`;
+exports[`@modal resolver component checks * modal resolver component renders properly 2`] = `null`;
