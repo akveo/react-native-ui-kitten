@@ -102,7 +102,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *       <Tooltip
  *         visible={this.state.tooltipVisible}
  *         text='Tooltip Text'
- *         onRequestClose={this.toggleTooltip}>
+ *         onBackdropPress={this.toggleTooltip}>
  *         <Button onPress={this.toggleTooltip}>
  *           TOGGLE TOOLTIP
  *         </Button>

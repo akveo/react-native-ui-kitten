@@ -115,7 +115,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *       <Popover
  *         visible={this.state.popoverVisible}
  *         content={this.renderPopoverContentElement()}
- *         onRequestClose={this.togglePopover}>
+ *         onBackdropPress={this.togglePopover}>
  *         <Button onPress={this.togglePopover}>
  *           TOGGLE POPOVER
  *         </Button>
