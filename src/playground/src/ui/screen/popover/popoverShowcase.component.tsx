@@ -37,7 +37,7 @@ export class PopoverShowcase extends React.Component<PopoverProps, State> {
         {...this.props}
         visible={this.state.popoverVisible}
         content={this.renderPopoverContent()}
-        onRequestClose={this.togglePopover}>
+        onBackdropPress={this.togglePopover}>
         <Button onPress={this.togglePopover}>SHOW POPOVER</Button>
       </Popover>
     );

@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Button,
-  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
@@ -17,58 +16,11 @@ jest.useFakeTimers();
 
 describe('@modal resolver component checks', () => {
 
-  const MODAL_TEST_IDENTIFIER = (substring: string): string => {
-    return `modal-test-identifier-${substring}`;
-  };
-
-  interface TestScreenProps {
-    buttonTestId: string;
-  }
-
-  interface TestScreenState {
-    modalVisible: boolean;
-  }
-
-  class TestScreen extends React.Component<TestScreenProps, TestScreenState> {
-
-    public state: TestScreenState = {
-      modalVisible: false,
-    };
-
-    private setModalVisible(modalVisible: boolean): void {
-      this.setState({ modalVisible });
-    }
-
-    public render(): React.ReactNode {
-      return (
-        <View>
-          <Button
-            testID={this.props.buttonTestId}
-            title='Open Modal'
-            onPress={() => this.setModalVisible(true)}/>
-          <ModalResolver
-            visible={this.state.modalVisible}
-            isBackDropAllowed={true}
-            identifier={MODAL_TEST_IDENTIFIER('1')}
-            onCloseModal={() => 1}>
-            <View>
-              <Text>
-                Test2
-              </Text>
-            </View>
-          </ModalResolver>,
-        </View>
-      );
-    }
-  }
-
   it('* modal resolver component renders properly', () => {
     const modal1: RenderAPI = render(
       <ModalResolver
         visible={true}
-        isBackDropAllowed={false}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={() => 1}>
+        allowBackdrop={false}>
         <View>
           <Text>
             Test1
@@ -80,9 +32,7 @@ describe('@modal resolver component checks', () => {
     const modal2: RenderAPI = render(
       <ModalResolver
         visible={false}
-        isBackDropAllowed={false}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={() => 1}>
+        allowBackdrop={false}>
         <View>
           <Text>
             Test2
@@ -101,81 +51,33 @@ describe('@modal resolver component checks', () => {
   it('* modal resolver component props checks', () => {
     const modalPassingProps = {
       visible: true,
-      isBackDropAllowed: false,
+      allowBackdrop: false,
     };
     const modal = <ModalResolver {...modalPassingProps}/>;
 
     expect(modal.props.visible).toBe(modalPassingProps.visible);
-    expect(modal.props.isBackDropAllowed).toBe(modalPassingProps.isBackDropAllowed);
+    expect(modal.props.allowBackdrop).toBe(modalPassingProps.allowBackdrop);
   });
 
-  it('* modal resolver closes on passed prop', () => {
-    const onCloseModal = jest.fn();
+  it('* modal resolver backdrop press calling checks', () => {
+    const onBackdropPress = jest.fn();
 
     const component: RenderAPI = render(
       <ModalResolver
         visible={true}
-        isBackDropAllowed={true}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={onCloseModal}>
+        allowBackdrop={true}>
         <View>
           <Text>Test1</Text>
           <Button
             title='Close Modal'
-            onPress={onCloseModal}
+            onPress={onBackdropPress}
           />
         </View>
       </ModalResolver>,
     );
 
-
-    const { output: openedOutput } = shallow(component.getByType(ModalResolver));
-    expect(openedOutput).toMatchSnapshot();
-
     fireEvent.press(component.getByType(Button));
-    expect(onCloseModal).toHaveBeenCalled();
-
-    const { output: closedOutput } = shallow(component.getByType(ModalResolver));
-    expect(closedOutput).toMatchSnapshot();
-  });
-
-  it('* modal resolver component close on backDrop checks', () => {
-    const onCloseModal = jest.fn();
-
-    const component: RenderAPI = render(
-      <ModalResolver
-        visible={true}
-        isBackDropAllowed={true}
-        identifier={MODAL_TEST_IDENTIFIER('1')}
-        onCloseModal={onCloseModal}>
-        <View>
-          <Text>
-            Test1
-          </Text>
-        </View>
-      </ModalResolver>,
-    );
-
-    const { output: openedOutput } = shallow(component.getByType(ModalResolver));
-    expect(openedOutput).toMatchSnapshot();
-
-    fireEvent.press(component.getByType(TouchableOpacity));
-    expect(onCloseModal).toHaveBeenCalled();
-
-    const { output: closedOutput } = shallow(component.getByType(ModalResolver));
-    expect(closedOutput).toMatchSnapshot();
-  });
-
-  it('* component styled with mappings', () => {
-    const component: RenderAPI = render(
-      <ModalResolver visible={true}>
-        <Text>Test</Text>
-      </ModalResolver>,
-    );
-
-    const { output } = shallow(component.getByType(ModalResolver));
-
-    expect(output).toMatchSnapshot();
+    expect(onBackdropPress).toHaveBeenCalled();
   });
 
 });

@@ -5,14 +5,14 @@
  */
 
 import React from 'react';
+import { ModalPresentingBased } from '@kitten/ui/support/typings';
 
 /**
  * Singleton service designed to manage modal components.
  *
  * @type ModalServiceType
  *
- * @method {(element: React.ReactElement<ModalComponentCloseProps>,
- * closeOnBackDrop: boolean = false) => string} show - Shows component in a modal window.
+ * @method {(config: ModalPresentingConfig) => string} show - Shows component in a modal window.
  *
  * @method {(identifier: string) => void} hide - Hides component from a modal window.
  *
@@ -28,7 +28,7 @@ import React from 'react';
  *   const modalID: string = '';
  *
  *   const showModal = () => {
- *     const component: React.ReactElement<ViewProps> =
+ *     const component: React.ReactElement<ViewProps> = this.renderModalContentElement();
  *
  *     this.modalID = ModalService.show(this.renderModalContentElement);
  *   };
@@ -71,10 +71,9 @@ class ModalServiceType {
     this.panel = null;
   }
 
-  public show(element: React.ReactElement<ModalComponentCloseProps>,
-              closeOnBackDrop: boolean = false): string {
+  public show(config: ModalPresentingConfig): string {
     if (this.panel) {
-      return this.panel.show(element, closeOnBackDrop);
+      return this.panel.show(config);
     }
   }
 
@@ -85,14 +84,14 @@ class ModalServiceType {
   }
 }
 
-export interface ModalComponentCloseProps {
-  [key: string]: any;
-  onRequestClose: () => void;
+export interface ModalPresentingConfig {
+  element: React.ReactElement<ModalPresentingBased>;
+  allowBackdrop: boolean;
+  onBackdropPress: () => void;
 }
 
 export interface ModalPresenting {
-  show(element: React.ReactElement<ModalComponentCloseProps>,
-       closeOnBackDrop: boolean): string;
+  show(config: ModalPresentingConfig): string;
 
   hide(identifier: string): void;
 }

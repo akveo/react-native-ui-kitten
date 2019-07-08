@@ -26,7 +26,7 @@ export class OverflowMenuShowcase extends React.Component<OverflowMenuProps, Sta
       <OverflowMenu
         {...this.props}
         visible={this.state.overflowMenuVisible}
-        onRequestClose={this.toggleOverflowMenu}>
+        onBackdropPress={this.toggleOverflowMenu}>
         <Button onPress={this.toggleOverflowMenu}>SHOW MENU</Button>
       </OverflowMenu>
     );

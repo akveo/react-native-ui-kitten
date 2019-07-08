@@ -27,7 +27,7 @@ export class TooltipShowcase extends React.Component<TooltipProps, State> {
         {...this.props}
         visible={this.state.tooltipVisible}
         text='Hi! I am Tooltip!'
-        onRequestClose={this.toggleTooltip}>
+        onBackdropPress={this.toggleTooltip}>
         <Button onPress={this.toggleTooltip}>SHOW TOOLTIP</Button>
       </Tooltip>
     );

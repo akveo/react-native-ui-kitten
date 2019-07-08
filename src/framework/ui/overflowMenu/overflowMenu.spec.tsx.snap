@@ -27,7 +27,7 @@ exports[`@overflow-menu: component checks * component renders properly 1`] = `
       },
     ]
   }
-  onRequestClose={[Function]}
+  onBackdropPress={[Function]}
   visible={true}
 >
   <View />
@@ -49,7 +49,7 @@ exports[`@overflow-menu: component checks * single menu-item 1`] = `
       },
     ]
   }
-  onRequestClose={[Function]}
+  onBackdropPress={[Function]}
   visible={true}
 >
   <View />
