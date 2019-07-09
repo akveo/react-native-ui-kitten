@@ -1,30 +1,42 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   View,
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import { ModalResolver } from './modalResolver.component';
+import {
+  ModalResolver,
+  ModalResolverProps,
+} from './modalResolver.component';
 import {
   ModalService,
   ModalPresenting,
-  ModalComponentCloseProps,
+  ModalPresentingConfig,
 } from './modal.service';
+import { ModalPresentingBased } from '../../ui/support/typings';
+
+interface ModalPanelChild extends ModalPresentingConfig {
+  element: React.ReactElement<ModalPresentingBased>;
+}
 
 export interface ModalPanelProps {
   children: React.ReactNode;
 }
 
 interface ModalPanelState {
-  components: Map<string, React.ReactElement<ModalComponentCloseProps>>;
-  backdrops: Map<string, boolean>;
+  components: Map<string, ModalPanelChild>;
 }
 
 export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> implements ModalPresenting {
 
   public state: ModalPanelState = {
     components: new Map(),
-    backdrops: new Map(),
   };
 
   public componentDidMount(): void {
@@ -35,31 +47,22 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     ModalService.unmount();
   }
 
-  public hide = (identifier: string): void => {
-    const component: React.ReactElement<ModalComponentCloseProps> = this.state.components
-      .get(identifier);
-    if (component) {
-      component.props.onRequestClose && component.props.onRequestClose();
-    }
-    const components: Map<string, React.ReactElement<any>> = this.state.components;
+  public hide = (identifier: string): string => {
+    const components: Map<string, ModalPanelChild> = this.state.components;
     components.delete(identifier);
-    const backdrops: Map<string, boolean> = this.state.backdrops;
-    backdrops.delete(identifier);
-    this.setState({
-      components: components,
-      backdrops: backdrops,
-    });
+    this.setState({ components });
+    return '';
   };
 
-  public show(dialogComponent: React.ReactElement<any>, closeOnBackDrop: boolean): string {
+  public show(element: React.ReactElement<ModalPresentingBased>,
+              config: ModalPresentingConfig): string {
+
     const key: string = this.generateUniqueComponentKey();
-    const componentsMap: Map<string, React.ReactElement<any>> = this.state.components
-      .set(key, dialogComponent);
-    const backdrops: Map<string, boolean> = this.state.backdrops.set(key, closeOnBackDrop);
-    this.setState({
-      components: componentsMap,
-      backdrops: backdrops,
-    });
+    const components: Map<string, ModalPanelChild> = this.state.components
+      .set(key, { ...config, element });
+
+    this.setState({ components });
+
     return key;
   }
 
@@ -67,34 +70,26 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     return Math.random().toString(36).substring(2);
   };
 
-  private areThereAnyComponents(): boolean {
+  private areThereAnyComponents = (): boolean => {
     return this.state.components && this.state.components.size !== 0;
-  }
+  };
 
-  private renderModal(modal: React.ReactElement<any>, index: number) {
-    const allModalKeys: string[] = Array.from(this.state.components.keys());
-    const identifier: string = allModalKeys
-      .find(item => this.state.components.get(item) === modal);
-    const closeOnBackdrop: boolean = this.state.backdrops.get(identifier);
+  private renderModal = (config: ModalPanelChild, index: number): React.ReactElement<ModalResolverProps> => {
     return (
       <ModalResolver
-        {...modal.props}
+        {...config.element.props}
         visible={true}
-        isBackDropAllowed={closeOnBackdrop}
         key={index}
-        identifier={identifier}
-        onCloseModal={this.hide}
-      >
-        {modal}
+        allowBackdrop={config.allowBackdrop}
+        onBackdropPress={config.onBackdropPress}>
+        {config.element}
       </ModalResolver>
     );
-  }
+  };
 
-  private renderModals() {
-    return Array.from(this.state.components.values())
-      .map((component: React.ReactElement<any>, i: number) =>
-        this.renderModal(component, i));
-  }
+  private renderModals = (): React.ReactElement<ModalResolverProps>[] => {
+    return Array.from(this.state.components.values()).map(this.renderModal);
+  };
 
   public render(): React.ReactElement<ViewProps> {
     return (

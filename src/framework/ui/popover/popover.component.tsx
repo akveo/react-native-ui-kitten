@@ -13,7 +13,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  ModalComponentCloseProps,
   ModalService,
   styled,
   StyledComponentProps,
@@ -38,11 +37,12 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
+import { ModalPresentingBased } from '../support/typings';
 
 type ContentElement = React.ReactElement<any>;
 type ChildElement = React.ReactElement<any>;
 
-interface ComponentProps extends PopoverViewProps, ModalComponentCloseProps {
+interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
   content: ContentElement;
   children: ChildElement;
   visible?: boolean;
@@ -75,7 +75,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @property ViewProps
  *
- * @property ModalComponentCloseProps
+ * @property ModalPresentingBased
  *
  * @property StyledComponentProps
  *
@@ -115,7 +115,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *       <Popover
  *         visible={this.state.popoverVisible}
  *         content={this.renderPopoverContentElement()}
- *         onRequestClose={this.togglePopover}>
+ *         onBackdropPress={this.togglePopover}>
  *         <Button onPress={this.togglePopover}>
  *           TOGGLE POPOVER
  *         </Button>
@@ -133,6 +133,8 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   static defaultProps: Partial<PopoverProps> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     visible: false,
+    allowBackdrop: true,
+    onBackdropPress: () => null,
   };
 
   private popoverElement: MeasuredElement;
@@ -146,7 +148,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
         // Toggles re-measuring
         this.setState({ layout: undefined });
       } else {
-        ModalService.hide(this.popoverModalId);
+        this.popoverModalId = ModalService.hide(this.popoverModalId);
       }
     }
   }
@@ -183,7 +185,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   };
 
   private showPopoverModal = (element: MeasuredElement, layout: MeasureResult): string => {
-    const { placement, onRequestClose } = this.props;
+    const { placement, allowBackdrop, onBackdropPress } = this.props;
 
     const popoverFrame: Frame = this.getPopoverFrame(layout, placement);
 
@@ -195,12 +197,14 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       opacity: 1,
     };
 
-    const popover: React.ReactElement<ModalComponentCloseProps> = React.cloneElement(element, {
+    const popover: React.ReactElement<ModalPresentingBased> = React.cloneElement(element, {
       style: additionalStyle,
-      onRequestClose: onRequestClose,
     });
 
-    return ModalService.show(popover, true);
+    return ModalService.show(popover, {
+      allowBackdrop,
+      onBackdropPress,
+    });
   };
 
   private getPopoverFrame = (layout: MeasureResult, rawPlacement: string | PopoverPlacement): Frame => {

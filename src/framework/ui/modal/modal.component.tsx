@@ -20,8 +20,9 @@ import {
   MeasureNodeProps,
   MeasuringElementProps,
   MeasureResult,
-} from '@kitten/ui/popover/measure.component';
-import { Size } from '@kitten/ui/popover/type';
+} from '../popover/measure.component';
+import { Size } from '../popover/type';
+import { ModalPresentingBased } from '../support/typings';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
 const TAG_CHILD: string = 'Modal';
@@ -39,11 +40,10 @@ export interface BackdropStyle {
 interface ComponentProps {
   visible: boolean;
   children: ChildrenProp;
-  closeOnBackdrop: boolean;
   backdropStyle?: BackdropStyle;
 }
 
-export type ModalProps = ViewProps & ComponentProps;
+export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
 
 /**
  * Modal component is a wrapper than presents content above an enclosing view.
@@ -55,11 +55,13 @@ export type ModalProps = ViewProps & ComponentProps;
  * @property {React.ReactElement<any> | React.ReactElement<any>[]} children -
  * Determines component's children.
  *
- * @property {boolean} closeOnBackdrop - Determines whether user can close
- * Modal by tapping on backdrop.
- * Default is `true`.
+ * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
+ * Default is `false`.
  *
  * @property {{backgroundColor: string, opacity: number }} backdropStyle - Determines the style of backdrop.
+ *
+ * @property {() => void} onBackdropPress - Determines component's behavior when the user is
+ * tapping on back-drop.
  *
  * @property ViewProps
  *
@@ -82,7 +84,7 @@ export type ModalProps = ViewProps & ComponentProps;
  *       <Button title='Show Modal' onPress={() => this.setVisible(true)}/>
  *       <Modal
  *         visible={this.state.visible}
- *         closeOnBackdrop={false}>
+ *         allowBackdrop={false}>
  *         <View>
  *           <Text>Hi! This is Modal Component!</Test>
  *           <Button title='Close Modal' onPress={() => this.setVisible(false)}/>
@@ -97,7 +99,8 @@ export type ModalProps = ViewProps & ComponentProps;
 export class Modal extends React.Component<ModalProps> {
 
   static defaultProps: Partial<ModalProps> = {
-    closeOnBackdrop: true,
+    allowBackdrop: false,
+    onBackdropPress: () => null,
   };
 
   private contentSize: Size = initialContentSize;
@@ -108,9 +111,11 @@ export class Modal extends React.Component<ModalProps> {
   }
 
   private handleVisibility = (nextProps: ModalProps): void => {
+    const { allowBackdrop, onBackdropPress } = this.props;
+
     if (nextProps.visible) {
-      const modal: React.ReactElement = this.renderModal();
-      this.id = ModalService.show(modal, this.props.closeOnBackdrop);
+      const element: React.ReactElement = this.renderModal();
+      this.id = ModalService.show(element, { allowBackdrop, onBackdropPress });
     } else {
       ModalService.hide(this.id);
       this.id = '';

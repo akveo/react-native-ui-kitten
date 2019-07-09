@@ -13,7 +13,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  ModalComponentCloseProps,
   styled,
   StyledComponentProps,
   StyleType,
@@ -26,13 +25,16 @@ import {
   Popover,
   PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../support/typings';
+import {
+  ModalPresentingBased,
+  Omit,
+} from '../support/typings';
 
 type MenuItemElement = React.ReactElement<OverflowMenuItemProps>;
 
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
 
-interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
+interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
   children: React.ReactElement<any>;
   items: OverflowMenuItemProps[];
   onSelect?: (index: number, event: GestureResponderEvent) => void;
@@ -95,7 +97,7 @@ export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
  *         items={this.items}
  *         visible={this.state.menuVisible}
  *         onSelect={this.onItemSelect}
- *         onRequestClose={this.toggleMenu}>
+ *         onBackdropPress={this.toggleMenu}>
  *         <Button onPress={this.toggleMenu}>
  *           TOGGLE MENU
  *         </Button>

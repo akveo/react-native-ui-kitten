@@ -18,3 +18,8 @@ export type TouchableIndexedProps = Override<TouchableOpacityProps, {
 
 export type ScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
 export type InputFocusEvent = NativeSyntheticEvent<TextInputFocusEventData>;
+
+export interface ModalPresentingBased {
+  allowBackdrop?: boolean;
+  onBackdropPress: () => void;
+}

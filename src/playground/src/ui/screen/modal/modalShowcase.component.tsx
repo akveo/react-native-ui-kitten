@@ -32,7 +32,8 @@ export class ModalShowcase extends React.Component<ModalProps, State> {
         </Button>
         <Modal
           {...this.props}
-          visible={this.state.modalVisible}>
+          visible={this.state.modalVisible}
+          onBackdropPress={() => this.toggleModal(false)}>
           <Text>Hi! This is Modal</Text>
           <Button
             style={styles.button}

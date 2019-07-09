@@ -108,7 +108,7 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
           visible={this.state.themesMenuVisible}
           onSelect={this.onThemeSelect}
           items={this.createThemesMenuItems()}
-          onRequestClose={this.toggleThemesMenu}>
+          onBackdropPress={this.toggleThemesMenu}>
           <Button
             style={themedStyle.button}
             disabled={!this.props.themes}
@@ -121,7 +121,7 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
           visible={this.state.settingsMenuVisible}
           onSelect={this.onSettingSelect}
           items={this.createSettingsMenuItems()}
-          onRequestClose={this.toggleSettingsMenu}>
+          onBackdropPress={this.toggleSettingsMenu}>
           <Button
             style={themedStyle.button}
             disabled={!this.props.settings}

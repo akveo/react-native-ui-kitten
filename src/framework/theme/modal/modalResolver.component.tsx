@@ -19,9 +19,8 @@ type ChildrenProp = ChildElement | ChildElement[];
 interface ComponentProps {
   visible: boolean;
   children: ChildrenProp;
-  isBackDropAllowed?: boolean;
-  identifier?: string;
-  onCloseModal?: (index: string) => void;
+  allowBackdrop: boolean;
+  onBackdropPress: () => void;
 }
 
 export type ModalResolverProps = ViewProps & ComponentProps;
@@ -30,18 +29,13 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
 
   static defaultProps: Partial<ModalResolverProps> = {
     visible: false,
-    isBackDropAllowed: false,
   };
 
-  private closeModal = (): void => {
-    if (this.props.onCloseModal) {
-      this.props.onCloseModal(this.props.identifier);
-    }
-  };
+  private onBackdropPress = (): void => {
+    const { allowBackdrop, onBackdropPress } = this.props;
 
-  private closeOnBackdrop: () => void = () => {
-    if (this.props.isBackDropAllowed) {
-      this.closeModal();
+    if (allowBackdrop) {
+      onBackdropPress();
     }
   };
 
@@ -59,7 +53,6 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
 
   private renderComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
     return React.cloneElement(source, {
-      onCloseModal: this.closeModal,
       style: [source.props.style, this.props.style],
     });
   };
@@ -74,7 +67,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
     return (
       <TouchableOpacity
         style={styles.container}
-        onPress={this.closeOnBackdrop}
+        onPress={this.onBackdropPress}
         activeOpacity={1}>
         {component}
       </TouchableOpacity>
@@ -93,7 +86,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
   };
 
   private renderComponent = (): React.ReactElement<TouchableOpacityProps | ViewProps> => {
-    const { children, isBackDropAllowed, ...derivedProps } = this.props;
+    const { children, allowBackdrop, ...derivedProps } = this.props;
     const componentChildren: React.ReactElement<any>[] = this.renderComponentChildren(children);
 
     const dialog: React.ReactElement<ViewProps> =
@@ -107,7 +100,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
         {componentChildren}
       </View>;
 
-    return isBackDropAllowed ?
+    return allowBackdrop ?
       this.renderWithBackDrop(dialog) : this.renderWithoutBackDrop(dialog);
   };
 

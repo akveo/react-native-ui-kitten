@@ -13,10 +13,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { ModalPanel } from './modalPanel.component';
-import {
-  ModalService,
-  ModalComponentCloseProps,
-} from './modal.service';
+import { ModalService } from './modal.service';
+import { ModalPresentingBased } from '../../ui/support/typings';
 
 describe('@modal-service: service checks', () => {
 
@@ -37,6 +35,10 @@ describe('@modal-service: service checks', () => {
           onCloseModal={this.props.onCloseModal}
           textTestId={textId(1)}
         />,
+        {
+          allowBackdrop: false,
+          onBackdropPress: () => null,
+        },
       );
     };
 
@@ -47,6 +49,10 @@ describe('@modal-service: service checks', () => {
           onCloseModal={this.props.onCloseModal}
           textTestId={textId(1)}
         />,
+        {
+          allowBackdrop: false,
+          onBackdropPress: () => null,
+        },
       );
 
       ModalService.show(
@@ -55,6 +61,10 @@ describe('@modal-service: service checks', () => {
           onCloseModal={this.props.onCloseModal}
           textTestId={textId(2)}
         />,
+        {
+          allowBackdrop: false,
+          onBackdropPress: () => null,
+        },
       );
     };
 
@@ -64,7 +74,12 @@ describe('@modal-service: service checks', () => {
           text={textId(0)}
           onCloseModal={this.props.onCloseModal}
           textTestId={textId(0)}
-        />, true);
+        />,
+        {
+          allowBackdrop: true,
+          onBackdropPress: () => null,
+        },
+      );
     };
 
     public render(): React.ReactNode {
@@ -196,7 +211,11 @@ describe('@modal panel checks', () => {
 
     public showModal() {
       this.modalId = ModalService.show(
-        <TestModal onRequestClose={() => 1}/>, true,
+        <TestModal onBackdropPress={this.hideModal}/>,
+        {
+          allowBackdrop: true,
+          onBackdropPress: () => null,
+        },
       );
     }
 
@@ -227,14 +246,14 @@ describe('@modal panel checks', () => {
     }
   }
 
-  class TestModal extends React.Component<ModalComponentCloseProps> {
+  class TestModal extends React.Component<ModalPresentingBased> {
 
     public render(): React.ReactNode {
       return (
         <View>
           <Button
             title='Close Modal'
-            onPress={this.props.onCloseModal}
+            onPress={this.props.onBackdropPress}
             testID={hideModalTestIdInner}
           />
         </View>

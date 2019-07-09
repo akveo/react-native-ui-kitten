@@ -5,32 +5,40 @@
  */
 
 import React from 'react';
+import { ModalPresentingBased } from '../../ui/support/typings';
 
 /**
  * Singleton service designed to manage modal components.
  *
  * @type ModalServiceType
  *
- * @method {(element: React.ReactElement<ModalComponentCloseProps>,
- * closeOnBackDrop: boolean = false) => string} show - Shows component in a modal window.
+ * @method {(element: React.ReactElement<ModalPresentingBased>, config: ModalPresentingConfig) => string} show -
+ * Shows component in a modal window. Returns its id.
  *
- * @method {(identifier: string) => void} hide - Hides component from a modal window.
+ * @method {(identifier: string) => string} hide - Hides component from a modal window and returns empty string.
  *
  * @example Simple Usage example
  *
  * ```
  * import React from 'react';
- * import { View, ViewProps } from 'react-native';
- * import { Button, Text, ModalService } from 'react-native-ui-kitten';
+ * import {
+ *   View,
+ *   ViewProps,
+ * } from 'react-native';
+ * import {
+ *   Button,
+ *   Text,
+ *   ModalService,
+ * } from 'react-native-ui-kitten';
  *
  * export const ModalServiceShowcase = (): React.ReactElement<ViewProps> => {
  *
  *   const modalID: string = '';
  *
  *   const showModal = () => {
- *     const component: React.ReactElement<ViewProps> =
+ *     const component: React.ReactElement<ViewProps> = this.renderModalContentElement();
  *
- *     this.modalID = ModalService.show(this.renderModalContentElement);
+ *     this.modalID = ModalService.show(component, { allowBackdrop: true, onBackdropPress: this.hideModal });
  *   };
  *
  *   const hideModal = () => {
@@ -71,30 +79,31 @@ class ModalServiceType {
     this.panel = null;
   }
 
-  public show(element: React.ReactElement<ModalComponentCloseProps>,
-              closeOnBackDrop: boolean = false): string {
+  public show(element: React.ReactElement<ModalPresentingBased>,
+              config: ModalPresentingConfig): string {
+
     if (this.panel) {
-      return this.panel.show(element, closeOnBackDrop);
+      return this.panel.show(element, config);
     }
   }
 
-  public hide(identifier: string): void {
+  public hide(identifier: string): string {
     if (this.panel) {
-      this.panel.hide(identifier);
+      return this.panel.hide(identifier);
     }
   }
 }
 
-export interface ModalComponentCloseProps {
-  [key: string]: any;
-  onRequestClose: () => void;
+export interface ModalPresentingConfig {
+  allowBackdrop: boolean;
+  onBackdropPress: () => void;
 }
 
 export interface ModalPresenting {
-  show(element: React.ReactElement<ModalComponentCloseProps>,
-       closeOnBackDrop: boolean): string;
+  show(element: React.ReactElement<ModalPresentingBased>,
+       config: ModalPresentingConfig): string;
 
-  hide(identifier: string): void;
+  hide(identifier: string): string;
 }
 
 export const ModalService = new ModalServiceType();

@@ -71,7 +71,7 @@ const customStyledSection: ComponentShowcaseSection = {
 const customModalBackdropAllowed: ComponentShowcaseItem = {
   title: 'Close On Backdrop: true',
   props: {
-    closeOnBackdrop: true,
+    allowBackdrop: true,
     style: styles.modal,
     backdropStyle: styles.backdropStyle,
   },

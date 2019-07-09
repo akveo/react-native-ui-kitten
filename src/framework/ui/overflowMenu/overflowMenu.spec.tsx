@@ -194,7 +194,7 @@ describe('@overflow-menu: component checks', () => {
       <MockMenu
         visible={true}
         items={menuItems}
-        onRequestClose={onRequestClose}>
+        onBackdropPress={onRequestClose}>
         <View/>
       </MockMenu>,
     );
@@ -212,7 +212,7 @@ describe('@overflow-menu: component checks', () => {
       <MockMenu
         visible={true}
         items={menuItems.slice(0, 1)}
-        onRequestClose={onRequestClose}>
+        onBackdropPress={onRequestClose}>
         <View/>
       </MockMenu>,
     );

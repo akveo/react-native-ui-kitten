@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  ScrollView,
   ImageProps,
   ImageSourcePropType,
   Image,
@@ -35,7 +34,7 @@ import {
   mapping,
   theme,
 } from '../support/tests';
-import { ViewPager } from '@kitten/ui';
+import { ViewPager } from '../viewPager/viewPager.component';
 
 describe('@tab: component checks', () => {
 

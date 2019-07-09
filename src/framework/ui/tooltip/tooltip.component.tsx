@@ -16,7 +16,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  ModalComponentCloseProps,
   styled,
   StyledComponentProps,
   StyleType,
@@ -29,7 +28,10 @@ import {
   Popover,
   PopoverProps,
 } from '../popover/popover.component';
-import { Omit } from '../support/typings';
+import {
+  Omit,
+  ModalPresentingBased,
+} from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
@@ -38,7 +40,7 @@ type WrappingElement = React.ReactElement<any>;
 
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
 
-interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
+interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
   text: string;
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
@@ -72,7 +74,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *
  * @property ViewProps
  *
- * @property ModalComponentCloseProps
+ * @property ModalPresentingBased
  *
  * @property StyledComponentProps
  *
@@ -100,7 +102,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *       <Tooltip
  *         visible={this.state.tooltipVisible}
  *         text='Tooltip Text'
- *         onRequestClose={this.toggleTooltip}>
+ *         onBackdropPress={this.toggleTooltip}>
  *         <Button onPress={this.toggleTooltip}>
  *           TOGGLE TOOLTIP
  *         </Button>
