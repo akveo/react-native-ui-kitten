@@ -22,8 +22,9 @@ import {
 
 interface ComponentProps<D> extends ViewProps {
   data: D[][];
-  isItemSelected?: (item: D) => boolean;
-  isItemDisabled?: (item: D) => boolean;
+  isItemSelected: (item: D) => boolean;
+  isItemDisabled: (item: D) => boolean;
+  isItemToday: (item: D) => boolean;
   onSelect?: (item: D) => void;
   renderItem: (item: D, style: StyleType) => React.ReactElement<any>;
   shouldItemUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
@@ -41,6 +42,7 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
         date={item}
         selected={this.props.isItemSelected(item)}
         disabled={this.props.isItemDisabled(item)}
+        today={this.props.isItemToday(item)}
         onSelect={this.props.onSelect}
         shouldComponentUpdate={this.props.shouldItemUpdate}>
         {this.props.renderItem}

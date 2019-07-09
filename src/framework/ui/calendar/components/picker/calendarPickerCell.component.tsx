@@ -21,6 +21,7 @@ type ChildrenProp<D> = (date: D, style: StyleType) => React.ReactElement<any>;
 interface ComponentProps<D> extends TouchableOpacityProps {
   date: D;
   selected?: boolean;
+  today?: boolean;
   onSelect?: (date: D) => void;
   children: ChildrenProp<D>;
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
@@ -35,6 +36,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
 
   static defaultProps = {
     selected: false,
+    today: false,
   };
 
   public shouldComponentUpdate(nextProps: CalendarPickerCellProps<D>): boolean {

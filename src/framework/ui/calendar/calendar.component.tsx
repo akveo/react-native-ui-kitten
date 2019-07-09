@@ -259,7 +259,6 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     return this.props.date || this.dateService.today();
   }
 
-
   private onDateSelect = (date: D) => {
     if (this.props.onSelect) {
       this.props.onSelect(date);
@@ -391,6 +390,18 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     return !this.isDateFitsBounds(date) || this.isDateFitsFilter(date);
   };
 
+  private isDayToday = (date: D): boolean => {
+    return this.dateService.isSameDaySafe(date, this.dateService.today());
+  };
+
+  private isMonthToday = (date: D): boolean => {
+    return this.dateService.isSameMonthSafe(date, this.dateService.today());
+  };
+
+  private isYearToday = (date: D): boolean => {
+    return this.dateService.isSameYearSafe(date, this.dateService.today());
+  };
+
   private isDateFitsFilter = (date: D): boolean => {
     return this.props.filter && !this.props.filter(date) || false;
   };
@@ -454,10 +465,25 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private createHeaderTitle = (date: D): string => {
-    const month: string = this.dateService.getMonthName(date);
-    const year: number = this.dateService.getYear(date);
+    switch (this.state.viewMode) {
+      case CalendarViewModes.DATE:
+        const dateViewMonth: string = this.dateService.getMonthName(date);
+        const dateViewYear: number = this.dateService.getYear(date);
 
-    return `${month} ${year}`;
+        return `${dateViewMonth} ${dateViewYear}`;
+      case CalendarViewModes.MONTH: {
+        const monthViewYear: number = this.dateService.getYear(date);
+
+        return `${monthViewYear}`;
+      }
+      case CalendarViewModes.YEAR: {
+        const yearViewMinYear: number = this.dateService.getYear(this.min);
+        const yearViewMaxYear: number = this.dateService.getYear(this.max);
+        const yearViewEndYear = yearViewMinYear + CalendarComponent.YEARS_IN_VIEW;
+
+        return `${yearViewMinYear} - ${Math.max(yearViewMaxYear, yearViewEndYear)}`;
+      }
+    }
   };
 
   private createTodayTitle = (date: D): string => {
@@ -516,6 +542,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         onSelect={this.onDateSelect}
         isItemSelected={this.isDaySelected}
         isItemDisabled={this.isDayDisabled}
+        isItemToday={this.isDayToday}
         shouldItemUpdate={this.shouldUpdateDayElement}
         renderItem={this.props.renderDay || this.renderDayElement}
       />
@@ -551,6 +578,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
         isItemDisabled={this.isMonthDisabled}
+        isItemToday={this.isMonthToday}
         renderItem={this.props.renderMonth || this.renderMonthElement}
       />
     );
@@ -564,6 +592,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         onSelect={this.onYearSelect}
         isItemSelected={this.isYearSelected}
         isItemDisabled={this.isYearDisabled}
+        isItemToday={this.isYearToday}
         renderItem={this.props.renderYear || this.renderYearElement}
       />
     );

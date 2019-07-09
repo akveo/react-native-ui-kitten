@@ -20,8 +20,8 @@ const startViewCalendar: ComponentShowcaseItem = {
 
 const boundedCalendar: ComponentShowcaseItem = {
   props: {
-    min: new Date(now.getFullYear() - 1, 0, 1),
-    max: new Date(now.getFullYear() + 1, 0, 1),
+    min: now,
+    max: now,
   },
 };
 
