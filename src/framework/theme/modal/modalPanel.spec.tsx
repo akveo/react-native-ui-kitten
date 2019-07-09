@@ -29,57 +29,57 @@ describe('@modal-service: service checks', () => {
   class TestApplication extends React.Component<any, any> {
 
     private showModal = () => {
-      ModalService.show({
-        element: (
-          <TestModal
-            text={textId(1)}
-            onCloseModal={this.props.onCloseModal}
-            textTestId={textId(1)}
-          />
-        ),
-        allowBackdrop: false,
-        onBackdropPress: () => null,
-      });
+      ModalService.show(
+        <TestModal
+          text={textId(1)}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={textId(1)}
+        />,
+        {
+          allowBackdrop: false,
+          onBackdropPress: () => null,
+        },
+      );
     };
 
     private showMultipleModals = () => {
-      ModalService.show({
-        element: (
-          <TestModal
-            text={textId(1)}
-            onCloseModal={this.props.onCloseModal}
-            textTestId={textId(1)}
-          />
-        ),
-        allowBackdrop: false,
-        onBackdropPress: () => null,
-      });
+      ModalService.show(
+        <TestModal
+          text={textId(1)}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={textId(1)}
+        />,
+        {
+          allowBackdrop: false,
+          onBackdropPress: () => null,
+        },
+      );
 
-      ModalService.show({
-        element: (
-          <TestModal
-            text={textId(2)}
-            onCloseModal={this.props.onCloseModal}
-            textTestId={textId(2)}
-          />
-        ),
-        allowBackdrop: false,
-        onBackdropPress: () => null,
-      });
+      ModalService.show(
+        <TestModal
+          text={textId(2)}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={textId(2)}
+        />,
+        {
+          allowBackdrop: false,
+          onBackdropPress: () => null,
+        },
+      );
     };
 
     private showBackDropAllowedModal = () => {
-      ModalService.show({
-        element: (
-          <TestModal
-            text={textId(0)}
-            onCloseModal={this.props.onCloseModal}
-            textTestId={textId(0)}
-          />
-        ),
-        allowBackdrop: true,
-        onBackdropPress: () => null,
-      });
+      ModalService.show(
+        <TestModal
+          text={textId(0)}
+          onCloseModal={this.props.onCloseModal}
+          textTestId={textId(0)}
+        />,
+        {
+          allowBackdrop: true,
+          onBackdropPress: () => null,
+        },
+      );
     };
 
     public render(): React.ReactNode {
@@ -210,13 +210,13 @@ describe('@modal panel checks', () => {
     }
 
     public showModal() {
-      this.modalId = ModalService.show({
-        element: (
-          <TestModal onBackdropPress={this.hideModal}/>
-        ),
-        allowBackdrop: true,
-        onBackdropPress: () => null,
-      });
+      this.modalId = ModalService.show(
+        <TestModal onBackdropPress={this.hideModal}/>,
+        {
+          allowBackdrop: true,
+          onBackdropPress: () => null,
+        },
+      );
     }
 
     public hideModal() {

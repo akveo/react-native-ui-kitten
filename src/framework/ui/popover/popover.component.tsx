@@ -37,7 +37,7 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
-import { ModalPresentingBased } from '@kitten/ui/support/typings';
+import { ModalPresentingBased } from '../support/typings';
 
 type ContentElement = React.ReactElement<any>;
 type ChildElement = React.ReactElement<any>;
@@ -148,7 +148,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
         // Toggles re-measuring
         this.setState({ layout: undefined });
       } else {
-        ModalService.hide(this.popoverModalId);
+        this.popoverModalId = ModalService.hide(this.popoverModalId);
       }
     }
   }
@@ -201,8 +201,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       style: additionalStyle,
     });
 
-    return ModalService.show({
-      element: popover,
+    return ModalService.show(popover, {
       allowBackdrop,
       onBackdropPress,
     });

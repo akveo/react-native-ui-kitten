@@ -20,9 +20,9 @@ import {
   MeasureNodeProps,
   MeasuringElementProps,
   MeasureResult,
-} from '@kitten/ui/popover/measure.component';
-import { Size } from '@kitten/ui/popover/type';
-import { ModalPresentingBased } from '@kitten/ui/support/typings';
+} from '../popover/measure.component';
+import { Size } from '../popover/type';
+import { ModalPresentingBased } from '../support/typings';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
 const TAG_CHILD: string = 'Modal';
@@ -115,7 +115,7 @@ export class Modal extends React.Component<ModalProps> {
 
     if (nextProps.visible) {
       const element: React.ReactElement = this.renderModal();
-      this.id = ModalService.show({ element, allowBackdrop, onBackdropPress });
+      this.id = ModalService.show(element, { allowBackdrop, onBackdropPress });
     } else {
       ModalService.hide(this.id);
       this.id = '';

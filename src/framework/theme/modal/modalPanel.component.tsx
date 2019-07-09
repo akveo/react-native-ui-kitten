@@ -10,19 +10,27 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import { ModalResolver } from './modalResolver.component';
+import {
+  ModalResolver,
+  ModalResolverProps,
+} from './modalResolver.component';
 import {
   ModalService,
   ModalPresenting,
   ModalPresentingConfig,
 } from './modal.service';
+import { ModalPresentingBased } from '@kitten/ui/support/typings';
+
+interface ModalPanelChild extends ModalPresentingConfig {
+  element: React.ReactElement<ModalPresentingBased>;
+}
 
 export interface ModalPanelProps {
   children: React.ReactNode;
 }
 
 interface ModalPanelState {
-  components: Map<string, ModalPresentingConfig>;
+  components: Map<string, ModalPanelChild>;
 }
 
 export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState> implements ModalPresenting {
@@ -39,17 +47,22 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     ModalService.unmount();
   }
 
-  public hide = (identifier: string): void => {
-    const components: Map<string, ModalPresentingConfig> = this.state.components;
+  public hide = (identifier: string): string => {
+    const components: Map<string, ModalPanelChild> = this.state.components;
     components.delete(identifier);
     this.setState({ components });
+    return '';
   };
 
-  public show(config: ModalPresentingConfig): string {
+  public show(element: React.ReactElement<ModalPresentingBased>,
+              config: ModalPresentingConfig): string {
+
     const key: string = this.generateUniqueComponentKey();
-    const components: Map<string, ModalPresentingConfig> = this.state.components
-      .set(key, config);
+    const components: Map<string, ModalPanelChild> = this.state.components
+      .set(key, { ...config, element });
+
     this.setState({ components });
+
     return key;
   }
 
@@ -57,11 +70,11 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     return Math.random().toString(36).substring(2);
   };
 
-  private areThereAnyComponents(): boolean {
+  private areThereAnyComponents = (): boolean => {
     return this.state.components && this.state.components.size !== 0;
-  }
+  };
 
-  private renderModal(config: ModalPresentingConfig, index: number) {
+  private renderModal = (config: ModalPanelChild, index: number): React.ReactElement<ModalResolverProps> => {
     return (
       <ModalResolver
         {...config.element.props}
@@ -72,11 +85,11 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
         {config.element}
       </ModalResolver>
     );
-  }
+  };
 
-  private renderModals() {
+  private renderModals = (): React.ReactElement<ModalResolverProps>[] => {
     return Array.from(this.state.components.values()).map(this.renderModal);
-  }
+  };
 
   public render(): React.ReactElement<ViewProps> {
     return (
