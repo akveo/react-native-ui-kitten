@@ -37,7 +37,7 @@ Now let's add some styles to fit the full available space on the device screen.
 ```js
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Layout, Text } from '@kitten/ui';
+import { Button, Layout, Text } from 'react-native-ui-kitten';
 
 export const HomeScreen = () => (
   <Layout style={styles.container}>
