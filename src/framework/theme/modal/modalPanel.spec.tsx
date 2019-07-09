@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { ModalPanel } from './modalPanel.component';
 import { ModalService } from './modal.service';
-import { ModalPresentingBased } from '@kitten/ui/support/typings';
+import { ModalPresentingBased } from '../../ui/support/typings';
 
 describe('@modal-service: service checks', () => {
 

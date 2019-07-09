@@ -19,7 +19,7 @@ import {
   ModalPresenting,
   ModalPresentingConfig,
 } from './modal.service';
-import { ModalPresentingBased } from '@kitten/ui/support/typings';
+import { ModalPresentingBased } from '../../ui/support/typings';
 
 interface ModalPanelChild extends ModalPresentingConfig {
   element: React.ReactElement<ModalPresentingBased>;

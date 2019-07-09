@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { ModalPresentingBased } from '@kitten/ui/support/typings';
+import { ModalPresentingBased } from '../../ui/support/typings';
 
 /**
  * Singleton service designed to manage modal components.
