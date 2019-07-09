@@ -5,7 +5,7 @@
  */
 
 
-import { DateService } from '@kitten/ui';
+import { DateService } from 'react-native-ui-kitten';
 import { DateFnsService } from './dateFnsDate.service';
 
 describe('@date-fns: service checks', () => {

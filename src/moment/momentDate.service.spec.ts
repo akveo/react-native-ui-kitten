@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { DateService } from '@kitten/ui';
+import { DateService } from 'react-native-ui-kitten';
 import { MomentDateService } from './momentDate.service';
 import moment from 'moment';
 
