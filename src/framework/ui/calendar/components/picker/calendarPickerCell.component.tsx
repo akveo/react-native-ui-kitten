@@ -16,47 +16,20 @@ import {
   StyleType,
 } from '@kitten/theme';
 
-type CalendarDayContentElement = React.ReactElement<any>;
-type ChildrenProp<D> = (date: D, style: StyleType) => CalendarDayContentElement;
+type ChildrenProp<D> = (date: D, style: StyleType) => React.ReactElement<any>;
 
 interface ComponentProps<D> extends TouchableOpacityProps {
   date: D;
-  selectedDate: D;
   selected?: boolean;
   onSelect?: (date: D) => void;
   children: ChildrenProp<D>;
-  shouldComponentUpdate?: (prevProps: CalendarDayProps<D>, nextProps: CalendarDayProps<D>) => boolean;
+  shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
 }
 
-export type CalendarDayProps<D> = StyledComponentProps & ComponentProps<D>;
-export type CalendarDayElement<D> = React.ReactElement<CalendarDayProps<D>>;
+export type CalendarPickerCellProps<D> = StyledComponentProps & ComponentProps<D>;
+export type CalendarPickerCellElement<D> = React.ReactElement<CalendarPickerCellProps<D>>;
 
-/**
- * Calendar Day component. Styled by Eva Design System (CalendarCell)
- * Used to provide Eva styles to children.
- *
- * @extends React.Component
- *
- * @property {D} date - Date displayed by a component
- *
- * @property {D} selectedDate - date which is now currently selected.
- * Usable with `shouldComponentUpdate` prop.
- *
- * @property {boolean} selected - selection flag.
- * Allows Eva to determine selection changes and provide corresponding styles.
- *
- * @property {(date: D) => void} onSelect - selection emitter.
- * Fires when component is pressed.
- *
- * @property {(date: D, style: StyleType) => ReactElement<any>} children - Render Prop.
- * Should return the content of a component.
- *
- * @property {(prevProps: CalendarDayProps<D>, nextProps: CalendarDayProps<D>) => boolean} shouldComponentUpdate -
- * Delegates `shouldComponentUpdate` lifecycle.
- * This is optional but can be useful when optimizing performance.
- */
-
-class CalendarDayComponent<D> extends React.Component<CalendarDayProps<D>> {
+class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellProps<D>> {
 
   static styledComponentName: string = 'CalendarCell';
 
@@ -64,7 +37,7 @@ class CalendarDayComponent<D> extends React.Component<CalendarDayProps<D>> {
     selected: false,
   };
 
-  public shouldComponentUpdate(nextProps: CalendarDayProps<D>): boolean {
+  public shouldComponentUpdate(nextProps: CalendarPickerCellProps<D>): boolean {
     if (nextProps.shouldComponentUpdate) {
       return nextProps.shouldComponentUpdate(this.props, nextProps);
     }
@@ -105,7 +78,7 @@ class CalendarDayComponent<D> extends React.Component<CalendarDayProps<D>> {
     };
   };
 
-  private renderContentElement = (source: ChildrenProp<D>, style: StyleType): CalendarDayContentElement => {
+  private renderContentElement = (source: ChildrenProp<D>, style: StyleType): React.ReactElement<any> => {
     return source(this.props.date, {
       container: style.contentContainer,
       text: style.contentText,
@@ -116,7 +89,7 @@ class CalendarDayComponent<D> extends React.Component<CalendarDayProps<D>> {
     const { style, themedStyle, date, children, ...restProps } = this.props;
 
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const contentElement: CalendarDayContentElement = date && this.renderContentElement(children, componentStyles);
+    const contentElement: React.ReactElement<any> = date && this.renderContentElement(children, componentStyles);
 
     return (
       <TouchableOpacity
@@ -136,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const CalendarDay = styled(CalendarDayComponent);
+export const CalendarPickerCell = styled(CalendarPickerCellComponent);

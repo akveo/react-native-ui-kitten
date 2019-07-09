@@ -13,6 +13,7 @@ export {
 export {
   Button,
   ButtonProps,
+  ButtonElement,
 } from './button/button.component';
 export {
   ButtonGroup,
@@ -24,9 +25,9 @@ export {
   CalendarElement,
 } from './calendar/calendar.component';
 export {
-  DateService,
-  NativeDateService,
-} from './calendarKit/service';
+  CalendarViewMode,
+  CalendarViewModes,
+} from './calendar/type';
 export {
   CheckBox,
   CheckBoxProps,
@@ -111,3 +112,5 @@ export {
   ViewPager,
   ViewPagerProps,
 } from './viewPager/viewPager.component';
+export { DateService } from './calendar/service/date.service';
+export { NativeDateService } from './calendar/service/nativeDate.service';

@@ -12,17 +12,17 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Text } from '../text/text.component';
+import { Text } from '../../text/text.component';
 
 interface ComponentProps extends ViewProps {
   textStyle?: StyleProp<TextStyle>;
   children: string;
 }
 
-export type CalendarDayContentProps = ComponentProps;
-export type CalendarDayContentElement = React.ReactElement<CalendarDayContentProps>;
+export type CalendarDateContentProps = ComponentProps;
+export type CalendarDateContentElement = React.ReactElement<CalendarDateContentProps>;
 
-export class CalendarDayContent extends React.Component<CalendarDayContentProps> {
+export class CalendarDateContent extends React.Component<CalendarDateContentProps> {
 
   public render(): React.ReactElement<ViewProps> {
     const { style, textStyle, children, ...restProps } = this.props;

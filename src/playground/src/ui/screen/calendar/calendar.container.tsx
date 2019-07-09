@@ -8,7 +8,7 @@ export class CalendarContainer extends React.Component {
 
   private renderItem = (props: CalendarProps<Date>): React.ReactElement<CalendarProps<Date>> => {
     return (
-      <CalendarShowcase {...props}/>
+      <CalendarShowcase style={{flex: 1}} {...props}/>
     );
   };
 

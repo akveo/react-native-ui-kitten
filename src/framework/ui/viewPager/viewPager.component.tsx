@@ -32,6 +32,7 @@ interface ComponentProps {
 }
 
 export type ViewPagerProps = ViewProps & ComponentProps;
+export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 /**
  * Allows flipping through the "pages".
@@ -142,6 +143,14 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
 
   public componentDidMount() {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
+  }
+
+  public componentDidUpdate() {
+    const selectedIndexOffset: number = this.props.selectedIndex * this.contentWidth;
+
+    if (selectedIndexOffset !== this.contentOffsetValue) {
+      this.scrollToIndex({ index: this.props.selectedIndex });
+    }
   }
 
   public componentWillUnmount() {

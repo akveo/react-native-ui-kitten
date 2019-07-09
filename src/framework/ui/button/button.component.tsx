@@ -40,6 +40,7 @@ interface ComponentProps {
 }
 
 export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type ButtonElement = React.ReactElement<ButtonProps>;
 
 /**
  * Styled Button component.

@@ -17,12 +17,9 @@ import {
   StyleType,
 } from '@kitten/theme';
 
-type ChildElement = React.ReactElement<any>;
-type ChildrenProp = ChildElement | ChildElement[];
-
 interface ComponentProps {
   level?: string;
-  children?: ChildrenProp;
+  children?: React.ReactNode;
 }
 
 export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;

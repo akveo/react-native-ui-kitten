@@ -5,13 +5,22 @@
  */
 
 export abstract class DateService<D> {
-  readonly DAYS_IN_WEEK: number = 7;
-  readonly MONTHS_IN_YEAR: number = 12;
+  static DAYS_IN_WEEK: number = 7;
+  static MONTHS_IN_YEAR: number = 12;
 
   protected locale: string;
 
   public setLocale(locale: any) {
     this.locale = locale;
+  }
+
+  public compareDatesSafe(date1: D, date2: D): number {
+    if (date1 && date2) {
+      return this.compareDates(date1, date2);
+    } else if (!date1 && !date2) {
+      return 0;
+    }
+    return -1;
   }
 
   /**

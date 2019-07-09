@@ -66,11 +66,11 @@ describe('@native-date: service checks', () => {
 
   it('* should get month name', () => {
     const month = new Date(2018, 5, 15);
-    expect(dateService.getMonthName(month)).toBe('June');
+    expect(dateService.getMonthName(month)).toBe('Jun');
   });
 
   it('* should get month name by index', () => {
-    expect(dateService.getMonthNameByIndex(5)).toBe('June');
+    expect(dateService.getMonthNameByIndex(5)).toBe('Jun');
   });
 
   it('* should get day of week names', () => {

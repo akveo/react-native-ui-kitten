@@ -15,7 +15,7 @@ const ORIGIN: Date = new Date(1970, 0, 4 + FIRST_DAY_OF_WEEK);
  * */
 export class NativeDateService extends DateService<Date> {
 
-  constructor(locale: string) {
+  constructor(locale: string = 'en') {
     super();
     this.setLocale(locale);
   }
@@ -56,13 +56,13 @@ export class NativeDateService extends DateService<Date> {
     return FIRST_DAY_OF_WEEK;
   }
 
-  public getMonthName(date: Date, style: string = 'long'): string {
+  public getMonthName(date: Date, style: string = 'short'): string {
     const index: number = date.getMonth();
 
     return this.getMonthNameByIndex(index, style);
   }
 
-  public getMonthNameByIndex(index: number, style: string = 'long'): string {
+  public getMonthNameByIndex(index: number, style: string = 'short'): string {
     return this.getLocaleMonthNames(this.locale, style)[index];
   }
 
@@ -159,14 +159,14 @@ export class NativeDateService extends DateService<Date> {
   }
 
   private getLocaleDayNames = (locale: string, style: string): string[] => {
-    return new Array(this.DAYS_IN_WEEK).fill(ORIGIN).map((date: Date, index: number): string => {
+    return new Array(DateService.DAYS_IN_WEEK).fill(ORIGIN).map((date: Date, index: number): string => {
       const weekdayDate: Date = this.addDay(date, index);
       return weekdayDate.toLocaleString(locale, { weekday: style });
     });
   };
 
   private getLocaleMonthNames = (locale: string, style: string = 'short'): string[] => {
-    return new Array(this.MONTHS_IN_YEAR).fill(ORIGIN).map((date: Date, index: number): string => {
+    return new Array(DateService.MONTHS_IN_YEAR).fill(ORIGIN).map((date: Date, index: number): string => {
       const monthDate: Date = this.addMonth(date, index);
       return monthDate.toLocaleString(locale, { month: style });
     });

@@ -1,37 +1,53 @@
+import { CalendarViewModes } from '@kitten/ui';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
 } from '../common/type';
 import { CalendarCustomItem } from './calendarCustomItem.component';
-import { CalendarCustomHeader } from './calendarCustomHeader.component';
+
+const now: Date = new Date();
 
 const defaultCalendar: ComponentShowcaseItem = {
+  props: {},
+};
+
+const startViewCalendar: ComponentShowcaseItem = {
   props: {
-    min: new Date(2019, 0, 1),
-    max: new Date(2019, 1, 0),
-    date: new Date(2019, 0, 1),
+    startView: CalendarViewModes.MONTH,
+  },
+};
+
+const boundedCalendar: ComponentShowcaseItem = {
+  props: {
+    min: new Date(now.getFullYear() - 1, 0, 1),
+    max: new Date(now.getFullYear() + 1, 0, 1),
   },
 };
 
 const boundingCalendar: ComponentShowcaseItem = {
   props: {
     ...defaultCalendar.props,
-    bounding: true,
+    boundingMonth: true,
   },
 };
 
 const customItemCalendar: ComponentShowcaseItem = {
   props: {
     ...defaultCalendar.props,
-    renderItem: CalendarCustomItem,
+    renderDay: CalendarCustomItem,
   },
 };
 
-const customHeaderCalendar: ComponentShowcaseItem = {
+const customTitlesCalendar: ComponentShowcaseItem = {
   props: {
     ...defaultCalendar.props,
-    renderMonthHeader: CalendarCustomHeader,
+    title: (date: Date): string => {
+      return 'MODE';
+    },
+    todayTitle: (date: Date): string => {
+      return 'TODAY';
+    },
   },
 };
 
@@ -51,8 +67,22 @@ const defaultSection: ComponentShowcaseSection = {
   ],
 };
 
-const boundingSection: ComponentShowcaseSection = {
-  title: 'Bounding',
+const startViewSection: ComponentShowcaseSection = {
+  title: 'Start View',
+  items: [
+    startViewCalendar,
+  ],
+};
+
+const boundedSection: ComponentShowcaseSection = {
+  title: 'Bounded',
+  items: [
+    boundedCalendar,
+  ],
+};
+
+const boundingMonthSection: ComponentShowcaseSection = {
+  title: 'Bounding Month',
   items: [
     boundingCalendar,
   ],
@@ -65,10 +95,10 @@ const customItemSection: ComponentShowcaseSection = {
   ],
 };
 
-const customHeaderSection: ComponentShowcaseSection = {
-  title: 'Custom Header',
+const customTitlesSection: ComponentShowcaseSection = {
+  title: 'Custom Titles',
   items: [
-    customHeaderCalendar,
+    customTitlesCalendar,
   ],
 };
 
@@ -82,9 +112,11 @@ const filterSection: ComponentShowcaseSection = {
 export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
-    boundingSection,
+    startViewSection,
+    boundedSection,
     customItemSection,
-    customHeaderSection,
+    boundingMonthSection,
     filterSection,
+    customTitlesSection,
   ],
 };

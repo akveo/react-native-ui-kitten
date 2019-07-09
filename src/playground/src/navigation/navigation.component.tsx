@@ -54,7 +54,7 @@ const AppNavigator = createStackNavigator({
   ['Overflow Menu']: OverflowMenuContainer,
   ['Sample']: SampleContainer,
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Calendar',
   headerMode: 'screen',
 });
 
