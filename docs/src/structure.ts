@@ -339,7 +339,7 @@ export const structure = [
         overview: [
           {
             name: 'Calendar',
-            images: [],
+            images: ['calendar.png'],
           },
         ],
       },
