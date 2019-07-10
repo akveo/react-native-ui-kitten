@@ -4,10 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import merge from 'lodash.merge';
+import dateFormat from 'dateformat';
 import { DateService } from './date.service';
+import {
+  I18n,
+  NativeDateI18n,
+} from './i18n';
+import { LOCALE_EN } from './locale';
 
 const FIRST_DAY_OF_WEEK: number = 0;
-const ORIGIN: Date = new Date(1970, 0, 4 + FIRST_DAY_OF_WEEK);
+
+const LOCALE_DEFAULT: string = 'en';
+
+const I18N_DEFAULT: I18n = {
+  [LOCALE_DEFAULT]: LOCALE_EN,
+};
 
 /**
  * The `NativeDateService` is basic implementation of `DateService` using
@@ -15,8 +27,11 @@ const ORIGIN: Date = new Date(1970, 0, 4 + FIRST_DAY_OF_WEEK);
  * */
 export class NativeDateService extends DateService<Date> {
 
-  constructor(locale: string = 'en') {
+  private readonly i18n: I18n;
+
+  constructor(locale: string = LOCALE_DEFAULT, i18n?: I18n) {
     super();
+    this.i18n = merge({}, I18N_DEFAULT, i18n);
     this.setLocale(locale);
   }
 
@@ -63,18 +78,15 @@ export class NativeDateService extends DateService<Date> {
   }
 
   public getMonthNameByIndex(index: number, style: string = 'short'): string {
-    return this.getLocaleMonthNames(this.locale, style)[index];
+    return this.getLocaleMonthNameByIndex(this.locale, index, style);
   }
 
   public getDayOfWeekNames(style: string = 'narrow'): string[] {
-    return this.getLocaleDayNames(this.locale, style);
+    return this.getLocaleDayOfWeekNames(this.locale, style);
   }
 
-  /**
-   * We haven't got capability to format date using formatting style without third party libraries.
-   * */
   public format(date: Date, format: string): string {
-    return date.toLocaleString(this.locale);
+    return dateFormat(date, format);
   }
 
   /**
@@ -158,17 +170,17 @@ export class NativeDateService extends DateService<Date> {
     return 'native';
   }
 
-  private getLocaleDayNames = (locale: string, style: string): string[] => {
-    return new Array(DateService.DAYS_IN_WEEK).fill(ORIGIN).map((date: Date, index: number): string => {
-      const weekdayDate: Date = this.addDay(date, index);
-      return weekdayDate.toLocaleString(locale, { weekday: style });
-    });
-  };
+  private getLocaleMonthNameByIndex(locale: string, index: number, style: string = 'short'): string {
+    const i18n: NativeDateI18n = this.i18n[locale];
+    const monthNames: string[] = i18n && i18n.monthNames && i18n.monthNames[style];
 
-  private getLocaleMonthNames = (locale: string, style: string = 'short'): string[] => {
-    return new Array(DateService.MONTHS_IN_YEAR).fill(ORIGIN).map((date: Date, index: number): string => {
-      const monthDate: Date = this.addMonth(date, index);
-      return monthDate.toLocaleString(locale, { month: style });
-    });
-  };
+    return (monthNames && monthNames[index]) || this.getLocaleMonthNameByIndex(LOCALE_DEFAULT, index, style);
+  }
+
+  private getLocaleDayOfWeekNames(locale: string, style: string = 'narrow'): string[] {
+    const i18n: NativeDateI18n = this.i18n[locale];
+    const dayNames: string[] = i18n && i18n.dayNames && i18n.dayNames[style];
+
+    return dayNames || this.getLocaleDayOfWeekNames(LOCALE_DEFAULT, style);
+  }
 }

@@ -6,10 +6,42 @@
 
 import { DateService } from './date.service';
 import { NativeDateService } from './nativeDate.service';
-
+import { I18n } from './i18n';
 
 describe('@native-date: service checks', () => {
-  let dateService: DateService<Date> = new NativeDateService('en');
+  let dateService: DateService<Date> = new NativeDateService();
+
+  const i18n: I18n = {
+    ru: {
+      dayNames: {
+        short: [
+          'Вc',
+          'Пн',
+          'Вт',
+          'Ср',
+          'Чт',
+          'Пт',
+          'Сб',
+        ],
+      },
+      monthNames: {
+        short: [
+          'Янв',
+          'Фев',
+          'Март',
+          'Апр',
+          'Май',
+          'Июнь',
+          'Июль',
+          'Авг',
+          'Сен',
+          'Окт',
+          'Ноя',
+          'Дек',
+        ],
+      },
+    },
+  };
 
   beforeEach(() => {
     dateService = new NativeDateService('en');
@@ -69,17 +101,65 @@ describe('@native-date: service checks', () => {
     expect(dateService.getMonthName(month)).toBe('Jun');
   });
 
+  it('* should get i18n month name', () => {
+    dateService = new NativeDateService('ru', i18n);
+    const month = new Date(2018, 5, 15);
+    expect(dateService.getMonthName(month, 'short')).toBe('Июнь');
+  });
+
+  it('* should fallback to default month name', () => {
+    dateService = new NativeDateService('ru', i18n);
+    const month = new Date(2018, 5, 15);
+    jest.spyOn(console, 'warn');
+    expect(dateService.getMonthName(month, 'long')).toBe('June');
+  });
+
   it('* should get month name by index', () => {
     expect(dateService.getMonthNameByIndex(5)).toBe('Jun');
   });
 
   it('* should get day of week names', () => {
-    expect(dateService.getDayOfWeekNames()).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
+    expect(dateService.getDayOfWeekNames()).toEqual([
+      'S',
+      'M',
+      'T',
+      'W',
+      'T',
+      'F',
+      'S',
+    ]);
+  });
+
+  it('* should get custom locale day of week names', () => {
+    dateService = new NativeDateService('ru', i18n);
+    expect(dateService.getDayOfWeekNames('short')).toEqual([
+      'Вc',
+      'Пн',
+      'Вт',
+      'Ср',
+      'Чт',
+      'Пт',
+      'Сб',
+    ]);
+  });
+
+  it('* should fallback to default day of week names', () => {
+    dateService = new NativeDateService('ru', i18n);
+    jest.spyOn(console, 'warn');
+    expect(dateService.getDayOfWeekNames('long')).toEqual([
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ]);
   });
 
   it('* should format date according to the MM.dd.yyyy format', () => {
     const date = new Date(2018, 5, 15);
-    expect(dateService.format(date, 'MM.dd.yyyy')).toBe('6/15/2018, 12:00:00 AM');
+    expect(dateService.format(date, 'mm.dd.yyyy')).toBe('06.15.2018');
   });
 
   it('* should parse date', () => {

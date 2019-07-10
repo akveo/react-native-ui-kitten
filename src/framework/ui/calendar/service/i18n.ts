@@ -15,12 +15,12 @@ export interface NativeDateMonthNames {
   long?: string[];
 }
 
-export interface NativeDateI18nLocale {
+export interface NativeDateI18n {
   dayNames?: NativeDateDayNames;
   monthNames?: NativeDateMonthNames;
 }
 
-export interface NativeDateI18n {
+export interface I18n {
   [key: string]: {
     dayNames?: NativeDateDayNames;
     monthNames?: NativeDateMonthNames;

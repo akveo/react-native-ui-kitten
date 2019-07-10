@@ -1,0 +1,63 @@
+import { NativeDateI18n } from './i18n';
+
+export const LOCALE_EN: NativeDateI18n = {
+  dayNames: {
+    narrow: [
+      'S',
+      'M',
+      'T',
+      'W',
+      'T',
+      'F',
+      'S',
+    ],
+    short: [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+    ],
+    long: [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ],
+  },
+  monthNames: {
+    short: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ],
+    long: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
+  },
+};
