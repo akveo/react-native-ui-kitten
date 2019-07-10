@@ -1,24 +1,15 @@
-import { NativeDateI18n } from './i18n';
+import { I18nConfig } from './type';
 
-export const LOCALE_EN: NativeDateI18n = {
+export const EN: I18nConfig = {
   dayNames: {
-    narrow: [
-      'S',
-      'M',
-      'T',
-      'W',
-      'T',
-      'F',
-      'S',
-    ],
     short: [
-      'Sun',
-      'Mon',
-      'Tue',
-      'Wed',
-      'Thu',
-      'Fri',
-      'Sat',
+      'Su',
+      'Mo',
+      'Tu',
+      'We',
+      'Th',
+      'Fr',
+      'Sa',
     ],
     long: [
       'Sunday',

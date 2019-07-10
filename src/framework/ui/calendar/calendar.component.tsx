@@ -178,7 +178,18 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * export class ChineseCalendar extends React.Component {
  *
- *   const dateService = new NativeDateService('zh');
+ *   const i18n = {
+ *     dayNames: {
+ *       short: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+ *       long: ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+ *     },
+ *     monthNames: {
+ *       short: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+ *       long: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+ *     },
+ *   };
+ *
+ *   dateService = new DateService('zh', i18n);
  *
  *   render() {
  *     return (
@@ -202,7 +213,7 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *     momentDate: moment();
  *   };
  *
- *   const dateService = new MomentDateService();
+ *   dateService = new MomentDateService();
  *
  *   onSelect = (momentDate) => {
  *     this.setState({ momentDate });

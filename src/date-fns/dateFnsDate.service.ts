@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NativeDateService } from 'react-native-ui-kitten';
+import { NativeDateService, I18nConfig } from 'react-native-ui-kitten';
 
 // @ts-ignore
 import dateFnsParse, { default as rollupParse } from 'date-fns/parse';
@@ -24,9 +24,8 @@ export class DateFnsService extends NativeDateService {
 
   protected options: Partial<DateFnsOptions>;
 
-  constructor(locale: string, options: DateFnsOptions) {
-    super(locale);
-    this.setLocale(locale);
+  constructor(locale?: string, i18n?: I18nConfig, options?: DateFnsOptions) {
+    super(locale, i18n);
     this.options = options || {};
   }
 

@@ -3,6 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+import { TranslationWidth } from '../i18n/type';
 
 export abstract class DateService<D> {
   static DAYS_IN_WEEK: number = 7;
@@ -111,17 +112,17 @@ export abstract class DateService<D> {
   /**
    * Returns localized month name by date and style.
    * */
-  public abstract getMonthName(date: D, style?: any): string;
+  public abstract getMonthName(date: D, style?: TranslationWidth): string;
 
   /**
    * Returns localized month name by month index and style.
    * */
-  public abstract getMonthNameByIndex(month: number, style?: any): string;
+  public abstract getMonthNameByIndex(month: number, style?: TranslationWidth): string;
 
   /**
    * Returns localized days names.
    * */
-  public abstract getDayOfWeekNames(style?: any): string[];
+  public abstract getDayOfWeekNames(style?: TranslationWidth): string[];
 
   /**
    * Parses the date string according to the passed format.

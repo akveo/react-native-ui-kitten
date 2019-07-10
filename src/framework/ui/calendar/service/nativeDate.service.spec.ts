@@ -4,52 +4,43 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { DateService } from './date.service';
 import { NativeDateService } from './nativeDate.service';
-import { I18n } from './i18n';
+import {
+  I18nConfig,
+  TranslationWidth,
+} from '../i18n/type';
+import { EN } from '../i18n/en';
+
+const i18n: I18nConfig = {
+  dayNames: {
+    short: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+    long: ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+  },
+  monthNames: {
+    short: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+    long: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+  },
+};
 
 describe('@native-date: service checks', () => {
-  let dateService: DateService<Date> = new NativeDateService();
-
-  const i18n: I18n = {
-    ru: {
-      dayNames: {
-        short: [
-          'Вc',
-          'Пн',
-          'Вт',
-          'Ср',
-          'Чт',
-          'Пт',
-          'Сб',
-        ],
-      },
-      monthNames: {
-        short: [
-          'Янв',
-          'Фев',
-          'Март',
-          'Апр',
-          'Май',
-          'Июнь',
-          'Июль',
-          'Авг',
-          'Сен',
-          'Окт',
-          'Ноя',
-          'Дек',
-        ],
-      },
-    },
-  };
+  let dateService: NativeDateService;
 
   beforeEach(() => {
-    dateService = new NativeDateService('en');
+    dateService = new NativeDateService();
   });
 
-  it('* should set locale to jp', () => {
-    dateService.setLocale('jp');
-    expect((<any>dateService).locale).toBe('jp');
+  it('* should be initialized with en locale', () => {
+    expect((<any>dateService).locale).toBe('en');
+  });
+
+  it('* should be initialized with ru locale', () => {
+    dateService = new NativeDateService('zh', i18n);
+    expect((<any>dateService).locale).toBe('zh');
+  });
+
+  it('* should be initialized with en locale if no i18n', () => {
+    dateService = new NativeDateService('zh');
+    expect((<any>dateService).locale).toBe('en');
   });
 
   it('* should validate as correct if date string is valid according to the format', () => {
@@ -102,16 +93,9 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should get i18n month name', () => {
-    dateService = new NativeDateService('ru', i18n);
+    dateService = new NativeDateService('zh', i18n);
     const month = new Date(2018, 5, 15);
-    expect(dateService.getMonthName(month, 'short')).toBe('Июнь');
-  });
-
-  it('* should fallback to default month name', () => {
-    dateService = new NativeDateService('ru', i18n);
-    const month = new Date(2018, 5, 15);
-    jest.spyOn(console, 'warn');
-    expect(dateService.getMonthName(month, 'long')).toBe('June');
+    expect(dateService.getMonthName(month, TranslationWidth.SHORT)).toBe('6月');
   });
 
   it('* should get month name by index', () => {
@@ -119,61 +103,31 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should get day of week names', () => {
-    expect(dateService.getDayOfWeekNames()).toEqual([
-      'S',
-      'M',
-      'T',
-      'W',
-      'T',
-      'F',
-      'S',
-    ]);
+    expect(dateService.getDayOfWeekNames()).toEqual(EN.dayNames.short);
   });
 
-  it('* should get custom locale day of week names', () => {
-    dateService = new NativeDateService('ru', i18n);
-    expect(dateService.getDayOfWeekNames('short')).toEqual([
-      'Вc',
-      'Пн',
-      'Вт',
-      'Ср',
-      'Чт',
-      'Пт',
-      'Сб',
-    ]);
-  });
-
-  it('* should fallback to default day of week names', () => {
-    dateService = new NativeDateService('ru', i18n);
-    jest.spyOn(console, 'warn');
-    expect(dateService.getDayOfWeekNames('long')).toEqual([
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ]);
+  it('* should get i18n day of week names', () => {
+    dateService = new NativeDateService('zh', i18n);
+    expect(dateService.getDayOfWeekNames(TranslationWidth.SHORT)).toEqual(i18n.dayNames.short);
   });
 
   it('* should format date according to the MM.dd.yyyy format', () => {
-    const date = new Date(2018, 5, 15);
+    const date: Date = new Date(2018, 5, 15);
     expect(dateService.format(date, 'mm.dd.yyyy')).toBe('06.15.2018');
   });
 
   it('* should parse date', () => {
-    const date = '06.15.2018';
+    const date: string = '06.15.2018';
     expect(dateService.parse(date, '')).toEqual(new Date(2018, 5, 15));
   });
 
   it('* should get year end', () => {
-    const date = new Date(2018, 5, 15);
+    const date: Date = new Date(2018, 5, 15);
     expect(dateService.getYearEnd(date)).toEqual(new Date(2018, 11, 31));
   });
 
   it('* should get year start', () => {
-    const date = new Date(2018, 5, 15);
+    const date: Date = new Date(2018, 5, 15);
     expect(dateService.getYearStart(date)).toEqual(new Date(2018, 0, 1));
   });
 

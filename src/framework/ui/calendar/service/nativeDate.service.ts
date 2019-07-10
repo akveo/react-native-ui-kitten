@@ -4,39 +4,31 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import merge from 'lodash.merge';
 import dateFormat from 'dateformat';
 import { DateService } from './date.service';
 import {
-  I18n,
-  NativeDateI18n,
-} from './i18n';
-import { LOCALE_EN } from './locale';
+  I18nConfig,
+  TranslationWidth,
+} from '../i18n/type';
+import { EN } from '../i18n/en';
 
-const FIRST_DAY_OF_WEEK: number = 0;
-
-const LOCALE_DEFAULT: string = 'en';
-
-const I18N_DEFAULT: I18n = {
-  [LOCALE_DEFAULT]: LOCALE_EN,
-};
+export const LOCALE_DEFAULT = 'en';
+export const FIRST_DAY_OF_WEEK: number = 0;
 
 /**
  * The `NativeDateService` is basic implementation of `DateService` using
  * native js date objects.
- * */
+ */
 export class NativeDateService extends DateService<Date> {
 
-  private readonly i18n: I18n;
-
-  constructor(locale: string = LOCALE_DEFAULT, i18n?: I18n) {
+  constructor(locale: string = LOCALE_DEFAULT, i18n?: I18nConfig) {
     super();
-    this.i18n = merge({}, I18N_DEFAULT, i18n);
-    this.setLocale(locale);
+    super.setLocale(i18n ? locale : LOCALE_DEFAULT);
+    this.setDateFormatLocaleData(i18n || EN);
   }
 
   public setLocale(locale: string) {
-    super.setLocale(locale);
+    console.warn('Runtime locale is not supported');
   }
 
   public isValidDateString(date: string, format: string): boolean {
@@ -71,18 +63,22 @@ export class NativeDateService extends DateService<Date> {
     return FIRST_DAY_OF_WEEK;
   }
 
-  public getMonthName(date: Date, style: string = 'short'): string {
+  public getMonthName(date: Date, style: TranslationWidth = TranslationWidth.SHORT): string {
     const index: number = date.getMonth();
 
     return this.getMonthNameByIndex(index, style);
   }
 
-  public getMonthNameByIndex(index: number, style: string = 'short'): string {
-    return this.getLocaleMonthNameByIndex(this.locale, index, style);
+  public getMonthNameByIndex(index: number, style: TranslationWidth = TranslationWidth.SHORT): string {
+    const offset: number = this.getDateFormatMonthNamesOffset(style);
+
+    return dateFormat.i18n.monthNames[offset + index];
   }
 
-  public getDayOfWeekNames(style: string = 'narrow'): string[] {
-    return this.getLocaleDayOfWeekNames(this.locale, style);
+  public getDayOfWeekNames(style: TranslationWidth = TranslationWidth.SHORT): string[] {
+    const offset: number = this.getDateFormatDayNamesOffset(style);
+
+    return dateFormat.i18n.dayNames.slice(offset, DateService.DAYS_IN_WEEK);
   }
 
   public format(date: Date, format: string): string {
@@ -101,7 +97,7 @@ export class NativeDateService extends DateService<Date> {
   }
 
   public addMonth(date: Date, num: number): Date {
-    const month = this.createDate(date.getFullYear(), date.getMonth() + num, 1);
+    const month: Date = this.createDate(date.getFullYear(), date.getMonth() + num, 1);
 
     // In case of date has more days than calculated month js Date will change that month to the next one
     // because of the date overflow.
@@ -170,17 +166,29 @@ export class NativeDateService extends DateService<Date> {
     return 'native';
   }
 
-  private getLocaleMonthNameByIndex(locale: string, index: number, style: string = 'short'): string {
-    const i18n: NativeDateI18n = this.i18n[locale];
-    const monthNames: string[] = i18n && i18n.monthNames && i18n.monthNames[style];
-
-    return (monthNames && monthNames[index]) || this.getLocaleMonthNameByIndex(LOCALE_DEFAULT, index, style);
+  private getDateFormatDayNamesOffset(style: TranslationWidth) {
+    switch (style) {
+      case TranslationWidth.SHORT:
+        return 0;
+      case TranslationWidth.LONG:
+        return DateService.DAYS_IN_WEEK;
+    }
   }
 
-  private getLocaleDayOfWeekNames(locale: string, style: string = 'narrow'): string[] {
-    const i18n: NativeDateI18n = this.i18n[locale];
-    const dayNames: string[] = i18n && i18n.dayNames && i18n.dayNames[style];
+  private getDateFormatMonthNamesOffset(style: TranslationWidth) {
+    switch (style) {
+      case TranslationWidth.SHORT:
+        return 0;
+      case TranslationWidth.LONG:
+        return DateService.MONTHS_IN_YEAR;
+    }
+  }
 
-    return dayNames || this.getLocaleDayOfWeekNames(LOCALE_DEFAULT, style);
+  private setDateFormatLocaleData(config: I18nConfig) {
+    const { [TranslationWidth.SHORT]: shortDays, [TranslationWidth.LONG]: longDays } = config.dayNames;
+    const { [TranslationWidth.SHORT]: shortMonths, [TranslationWidth.LONG]: longMonths } = config.monthNames;
+
+    dateFormat.i18n.dayNames = shortDays.concat(longDays);
+    dateFormat.i18n.monthNames = shortMonths.concat(longMonths);
   }
 }
