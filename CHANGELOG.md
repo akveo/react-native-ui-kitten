@@ -1,3 +1,15 @@
+## 4.1.0 (2019-07-10)
+
+* docs(guides): fix create-screen import typo ([20134ab](https://github.com/akveo/react-native-ui-kitten/commit/20134ab))
+* refactor(docs): doc-prsr version update ([241ade4](https://github.com/akveo/react-native-ui-kitten/commit/241ade4))
+* refactor(ui): modal component reimplement ([97afa07](https://github.com/akveo/react-native-ui-kitten/commit/97afa07))
+* refactor(ui): modal-based components API refactor ([6aea312](https://github.com/akveo/react-native-ui-kitten/commit/6aea312))
+* feat(docs): expand custom-mapping guide ([54310b6](https://github.com/akveo/react-native-ui-kitten/commit/54310b6))
+* feat(ui): input - icon press handler ([9e192ea](https://github.com/akveo/react-native-ui-kitten/commit/9e192ea))
+* feat(ui): react-native-web adopt ([59b4cb6](https://github.com/akveo/react-native-ui-kitten/commit/59b4cb6))
+
+
+
 ## <small>4.0.5 (2019-06-28)</small>
 
 * package: hold @eva-design/* packages on a minor version ([d0fc72a](https://github.com/akveo/react-native-ui-kitten/commit/d0fc72a))
