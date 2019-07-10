@@ -480,7 +480,7 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: auto;
   margin-top: 0px;
   padding: 100px 10% 120px;
