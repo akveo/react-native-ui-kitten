@@ -10,6 +10,8 @@ const moduleResolverConfig = {
   alias: {
     '@kitten/theme': path.resolve(kittenPath, 'theme'),
     '@kitten/ui': path.resolve(kittenPath, 'ui'),
+    '@ui-kitten/moment': path.resolve('./src/moment'),
+    '@ui-kitten/date-fns': path.resolve('./src/date-fns'),
     'react-native-ui-kitten': kittenPath,
   },
 };

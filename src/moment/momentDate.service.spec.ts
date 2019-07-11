@@ -63,15 +63,15 @@ describe('@moment-date: service checks', () => {
 
   it('* should get month name', () => {
     const month = moment().year(2018).month(5).date(15);
-    expect(dateService.getMonthName(month)).toBe('June');
+    expect(dateService.getMonthName(month)).toBe('Jun');
   });
 
   it('* should get month name by index', () => {
-    expect(dateService.getMonthNameByIndex(5)).toBe('June');
+    expect(dateService.getMonthNameByIndex(5)).toBe('Jun');
   });
 
   it('* should get day of week names', () => {
-    expect(dateService.getDayOfWeekNames()).toEqual(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
+    expect(dateService.getDayOfWeekNames()).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
   });
 
   it('* should format date according to the MM.DD.YYYY format', () => {

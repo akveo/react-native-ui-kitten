@@ -4,8 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NativeDateService, I18nConfig } from 'react-native-ui-kitten';
-
+import {
+  I18nConfig,
+  NativeDateService,
+} from 'react-native-ui-kitten';
 // @ts-ignore
 import dateFnsParse, { default as rollupParse } from 'date-fns/parse';
 // @ts-ignore

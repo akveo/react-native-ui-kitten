@@ -4,8 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { DateService } from 'react-native-ui-kitten';
-
+import {
+  DateService,
+  TranslationWidth,
+} from 'react-native-ui-kitten';
 // @ts-ignore
 import _moment, {
   default as _rollupMoment,
@@ -75,7 +77,7 @@ export class MomentDateService extends DateService<Moment> {
     return this.clone(date).day();
   }
 
-  public getDayOfWeekNames(style: string = 'narrow'): string[] {
+  public getDayOfWeekNames(style: TranslationWidth = TranslationWidth.SHORT): string[] {
     return this.localeData.days[style];
   }
 
@@ -91,13 +93,13 @@ export class MomentDateService extends DateService<Moment> {
     return this.clone(date).endOf('month');
   }
 
-  public getMonthName(date: Moment, style: string = 'long'): string {
+  public getMonthName(date: Moment, style: TranslationWidth = TranslationWidth.SHORT): string {
     const month: number = this.getMonth(date);
 
     return this.getMonthNameByIndex(month, style);
   }
 
-  public getMonthNameByIndex(month: number, style: string = 'long'): string {
+  public getMonthNameByIndex(month: number, style: TranslationWidth = TranslationWidth.SHORT): string {
     return this.localeData.months[style][month];
   }
 
@@ -156,13 +158,12 @@ export class MomentDateService extends DateService<Moment> {
       firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
       defaultFormat: momentLocaleData.longDateFormat('L'),
       months: {
-        'short': momentLocaleData.monthsShort(),
-        'long': momentLocaleData.months(),
+        [TranslationWidth.SHORT]: momentLocaleData.monthsShort(),
+        [TranslationWidth.LONG]: momentLocaleData.months(),
       },
       days: {
-        'narrow': momentLocaleData.weekdaysMin(),
-        'short': momentLocaleData.weekdaysShort(),
-        'long': momentLocaleData.weekdays(),
+        [TranslationWidth.SHORT]: momentLocaleData.weekdaysShort(),
+        [TranslationWidth.LONG]: momentLocaleData.weekdays(),
       },
     };
   }

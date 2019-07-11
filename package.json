@@ -65,7 +65,7 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "conventional-changelog-cli": "^2.0.21",
     "coveralls": "^3.0.2",
-    "date-fns": "^2.0.0-alpha.27",
+    "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27",
     "del": "^4.1.1",
     "doc-prsr": "^2.2.2",
     "gulp": "^3.9.1",

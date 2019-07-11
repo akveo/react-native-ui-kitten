@@ -10,8 +10,11 @@ const Config = require('../../config');
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
-    '@kitten/theme': path.resolve(Config.KITTEN_PATH, 'theme'),
-    '@kitten/ui': path.resolve(Config.KITTEN_PATH, 'ui'),
+    'react-native-ui-kitten': path.resolve(Config.MODULES_PATH, 'framework'),
+    '@kitten/theme': path.resolve(Config.MODULES_PATH, 'framework/theme'),
+    '@kitten/ui': path.resolve(Config.MODULES_PATH, 'framework/ui'),
+    '@ui-kitten/moment': path.resolve(Config.MODULES_PATH, 'moment'),
+    '@ui-kitten/date-fns': path.resolve(Config.MODULES_PATH, 'date-fns'),
     '@eva-design/eva': path.resolve(Config.MAPPING_PATH),
     '@eva-design/processor': path.resolve(Config.PROCESSOR_PATH),
   },

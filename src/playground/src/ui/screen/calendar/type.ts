@@ -1,4 +1,7 @@
+import moment from 'moment';
 import { CalendarViewModes } from '@kitten/ui';
+import { MomentDateService } from '@ui-kitten/moment';
+import { DateFnsService } from '@ui-kitten/date-fns';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
@@ -10,6 +13,19 @@ const now: Date = new Date();
 
 const defaultCalendar: ComponentShowcaseItem = {
   props: {},
+};
+
+const momentCalendar: ComponentShowcaseItem = {
+  props: {
+    date: moment(),
+    dateService: new MomentDateService('en'),
+  },
+};
+
+const dateFnsCalendar: ComponentShowcaseItem = {
+  props: {
+    dateService: new DateFnsService('en'),
+  },
 };
 
 const startViewCalendar: ComponentShowcaseItem = {
@@ -67,6 +83,20 @@ const defaultSection: ComponentShowcaseSection = {
   ],
 };
 
+const momentSection: ComponentShowcaseSection = {
+  title: 'Moment',
+  items: [
+    momentCalendar,
+  ],
+};
+
+const dateFnsSection: ComponentShowcaseSection = {
+  title: 'Date FNS',
+  items: [
+    momentCalendar,
+  ],
+};
+
 const startViewSection: ComponentShowcaseSection = {
   title: 'Start View',
   items: [
@@ -112,11 +142,13 @@ const filterSection: ComponentShowcaseSection = {
 export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
-    startViewSection,
-    boundedSection,
+    // momentSection,
+    // dateFnsCalendar
+    // startViewSection,
+    // boundedSection,
     customItemSection,
-    boundingMonthSection,
+    // boundingMonthSection,
     filterSection,
-    customTitlesSection,
+    // customTitlesSection,
   ],
 };

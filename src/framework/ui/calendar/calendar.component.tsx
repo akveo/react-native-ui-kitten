@@ -252,7 +252,6 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private monthService: MonthModelService<D> = new MonthModelService(this.dateService);
-  private dayOfWeekNames: string[] = this.dateService.getDayOfWeekNames();
 
   private get dateService(): DateService<D> {
     return this.props.dateService;
@@ -355,25 +354,12 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     };
   };
 
-  private getMonthHeaderStyle = (source: StyleType): StyleType => {
+  private getWeekdayStyle = (source: StyleType): StyleType => {
     return {
-      container: {
-        paddingHorizontal: source.monthHeaderPaddingHorizontal,
-        paddingVertical: source.monthHeaderPaddingVertical,
-      },
-      month: {
-        fontSize: source.monthTextFontSize,
-        fontWeight: source.monthTextFontWeight,
-        lineHeight: source.monthTextLineHeight,
-        color: source.monthTextColor,
-      },
-      weekday: {
-        flex: 1,
-        fontSize: source.weekdayTextFontSize,
-        fontWeight: source.weekdayTextFontWeight,
-        lineHeight: source.weekdayTextLineHeight,
-        color: source.weekdayTextColor,
-      },
+      fontSize: source.weekdayTextFontSize,
+      fontWeight: source.weekdayTextFontWeight,
+      lineHeight: source.weekdayTextLineHeight,
+      color: source.weekdayTextColor,
     };
   };
 
@@ -515,6 +501,16 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     });
   };
 
+  private renderWeekdayElement = (weekday: string, index: number): CalendarDateContentElement => {
+    return (
+      <CalendarDateContent
+        key={index}
+        textStyle={this.getWeekdayStyle(this.props.themedStyle)}>
+        {weekday}
+      </CalendarDateContent>
+    );
+  };
+
   private renderDayElement = (date: any, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
@@ -561,16 +557,13 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderDayPickerPagerElement = (date: D): React.ReactElement<ViewProps> => {
-    const headerStyle: StyleType = this.getMonthHeaderStyle(this.props.themedStyle);
     const visibleDayPickerIndex: number = this.dateService.getMonth(this.state.visibleDate);
 
     return (
       <React.Fragment>
-        <CalendarMonthHeader
-          style={headerStyle.container}
-          weekdayStyle={headerStyle.weekday}
-          weekdays={this.dayOfWeekNames}
-        />
+        <CalendarMonthHeader data={this.dateService.getDayOfWeekNames()}>
+          {this.renderWeekdayElement}
+        </CalendarMonthHeader>
         <CalendarPager
           selectedIndex={visibleDayPickerIndex}
           data={this.createDayPickerPagerData(date)}
@@ -638,13 +631,14 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   public render(): React.ReactElement<ViewProps> {
     const { style, themedStyle, title, todayTitle, ...restProps } = this.props;
     const headerStyle: StyleType = this.getCalendarHeaderStyle(themedStyle);
+
     const titleSelector = title || this.createHeaderTitle;
     const todayTitleSelector = todayTitle || this.createTodayTitle;
 
     return (
       <View
-        style={[styles.container, style]}
-        {...restProps}>
+        {...restProps}
+        style={[styles.container, style]}>
         <CalendarHeader
           style={headerStyle.container}
           titleStyle={headerStyle.title}
