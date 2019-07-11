@@ -16,22 +16,33 @@ import {
   Text,
   TextElement,
 } from '../../text/text.component';
+import {
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from '@kitten/theme';
 
 interface ComponentProps extends ViewProps {
   weekdays: string[];
   weekdayStyle?: StyleProp<TextStyle>;
 }
 
-export type CalendarMonthHeaderProps = ComponentProps;
+export type CalendarMonthHeaderProps = ThemedComponentProps & ComponentProps;
 export type CalendarMonthHeaderElement = React.ReactElement<CalendarMonthHeaderProps>;
 
-export class CalendarMonthHeader extends React.Component<CalendarMonthHeaderProps> {
+class CalendarMonthHeaderComponent extends React.Component<CalendarMonthHeaderProps> {
+
+  private isHoliday = (index: number): boolean => {
+    return index % 6 === 0;
+  };
 
   private renderWeekdayElement = (weekday: string, index: number): TextElement => {
+    const holidayStyle: TextStyle = this.isHoliday(index) && this.props.themedStyle.holiday;
+
     return (
       <Text
         key={index}
-        style={[styles.weekday, this.props.weekdayStyle]}>
+        style={[this.props.themedStyle.weekday, this.props.weekdayStyle, holidayStyle]}>
         {weekday}
       </Text>
     );
@@ -42,14 +53,14 @@ export class CalendarMonthHeader extends React.Component<CalendarMonthHeaderProp
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, weekdayStyle, weekdays, ...restProps } = this.props;
+    const { themedStyle, style, weekdayStyle, weekdays, ...restProps } = this.props;
     const weekdayElements: TextElement[] = this.renderWeekdayElements(weekdays);
 
     return (
       <View
         {...restProps}
-        style={[styles.container, style]}>
-        <View style={styles.weekdayContainer}>
+        style={[themedStyle.container, style]}>
+        <View style={themedStyle.weekdayContainer}>
           {weekdayElements}
         </View>
       </View>
@@ -57,7 +68,7 @@ export class CalendarMonthHeader extends React.Component<CalendarMonthHeaderProp
   }
 }
 
-const styles = StyleSheet.create({
+export const CalendarMonthHeader = withStyles(CalendarMonthHeaderComponent, (theme: ThemeType) => ({
   container: {
     justifyContent: 'center',
   },
@@ -67,4 +78,7 @@ const styles = StyleSheet.create({
   weekday: {
     textAlign: 'center',
   },
-});
+  holiday: {
+    color: theme['color-danger-default'],
+  },
+}));
