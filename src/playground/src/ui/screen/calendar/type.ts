@@ -18,13 +18,13 @@ const defaultCalendar: ComponentShowcaseItem = {
 const momentCalendar: ComponentShowcaseItem = {
   props: {
     date: moment(),
-    dateService: new MomentDateService('en'),
+    dateService: new MomentDateService(),
   },
 };
 
 const dateFnsCalendar: ComponentShowcaseItem = {
   props: {
-    dateService: new DateFnsService('en'),
+    dateService: new DateFnsService(),
   },
 };
 
@@ -93,7 +93,7 @@ const momentSection: ComponentShowcaseSection = {
 const dateFnsSection: ComponentShowcaseSection = {
   title: 'Date FNS',
   items: [
-    momentCalendar,
+    dateFnsCalendar,
   ],
 };
 
@@ -143,11 +143,11 @@ export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
     // momentSection,
-    // dateFnsCalendar
+    // dateFnsSection,
     // startViewSection,
-    // boundedSection,
-    customItemSection,
-    // boundingMonthSection,
+    boundedSection,
+    // customItemSection,
+    boundingMonthSection,
     filterSection,
     // customTitlesSection,
   ],

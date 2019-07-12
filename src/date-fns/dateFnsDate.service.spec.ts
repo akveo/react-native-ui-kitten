@@ -17,7 +17,7 @@ describe('@date-fns: service checks', () => {
 
   it('* should parse date according to the MM.dd.yyyy format', () => {
     const date = '06.15.2018';
-    expect(dateService.parse(date, 'MM.dd.yyyy')).toEqual(new Date(2018, 5, 15));
+    expect(dateService.parse(date, '')).toEqual(new Date(2018, 5, 15));
   });
 
   it('* should not format if date isn\'t passed', () => {
@@ -26,14 +26,13 @@ describe('@date-fns: service checks', () => {
   });
 
   describe('service global config', () => {
-    const SEPARATOR = '_';
-    const FORMAT = `MM${SEPARATOR}dd${SEPARATOR}yyyy`;
-    const year = 2010;
-    const monthIndex = 10;
-    const month = monthIndex + 1;
-    const day = 20;
-    const date = new Date(year, monthIndex, day);
-    const formattedDate = `${month}${SEPARATOR}${day}${SEPARATOR}${year}`;
+    const FORMAT: string = 'MM-DD-YYYY';
+    const year: number = 2010;
+    const monthIndex: number = 10;
+    const month: number = monthIndex + 1;
+    const day: number = 20;
+    const date: Date = new Date(year, monthIndex, day);
+    const formattedDate: string = `${month}-${day}-${year}`;
 
     beforeEach(() => {
       dateService = new DateFnsService(
@@ -41,8 +40,8 @@ describe('@date-fns: service checks', () => {
         null,
         {
           format: FORMAT,
-          parseOptions: { awareOfUnicodeTokens: true },
-          formatOptions: { awareOfUnicodeTokens: true },
+          parseOptions: {},
+          formatOptions: {},
         },
       );
     });
@@ -50,7 +49,8 @@ describe('@date-fns: service checks', () => {
     it('* should use format from global config if isn\'t passed as parameter', () => {
       expect(dateService.format(date, undefined)).toEqual(formattedDate);
 
-      const parsedDate = dateService.parse(formattedDate, FORMAT);
+      const parsedDate = dateService.parse(formattedDate, '');
+
       expect(parsedDate.valueOf()).toEqual(date.valueOf());
     });
 
@@ -62,17 +62,11 @@ describe('@date-fns: service checks', () => {
     });
 
     it('* should pass parseOptions to parse function', () => {
-      // date-fns require { awareOfUnicodeTokens: true } option to be passed to parse function
-      // when format contains 'DD' or 'YYYY' tokens, otherwise it throws. This option is
-      // passed as global config to service constructor so it shouldn't throw.
-      expect(() => dateService.parse(formattedDate, 'DD/MM/YYYY')).not.toThrow();
+      expect(dateService.parse(formattedDate, '')).toEqual(date);
     });
 
     it('* should pass formatOptions to format function', () => {
-      // date-fns require { awareOfUnicodeTokens: true } option to be passed to format function
-      // when format contains 'DD' or 'YYYY' tokens, otherwise it throws. This option is
-      // passed as global config to service constructor so it shouldn't throw.
-      expect(() => dateService.format(date, 'DD/MM/YYYY')).not.toThrow();
+      expect(dateService.format(date, 'DD/MM/YYYY')).toEqual('20/11/2010');
     });
   });
 });

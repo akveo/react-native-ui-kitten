@@ -20,8 +20,8 @@
     "ui-kitten"
   ],
   "peerDependencies": {
-    "react-native-ui-kitten": "4.0.5",
-    "moment": "^2.22.2"
+    "react-native-ui-kitten": "4.1.0",
+    "moment": "^2.24.0"
   },
   "sideEffects": false
 }

@@ -49,7 +49,7 @@ interface ComponentProps<D> extends ViewProps {
   dateService?: DateService<D>;
   boundingMonth?: boolean;
   startView?: CalendarViewMode;
-  title?: (date: D) => string;
+  title?: (date: D, viewMode: CalendarViewMode) => string;
   todayTitle?: (date: D) => string;
   filter?: (date: D) => boolean;
   onSelect?: (date: D) => void;
@@ -245,6 +245,13 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   static MONTHS_IN_COLUMN: number = 4;
   static YEARS_IN_COLUMN: number = 4;
   static YEARS_IN_VIEW: number = 12;
+
+  static FORMAT_DAY: string = 'D';
+  static FORMAT_MONTH: string = 'MMM';
+  static FORMAT_YEAR: string = 'YYYY';
+  static FORMAT_HEADER_DATE: string = 'MMM YYYY';
+  static FORMAT_HEADER_MONTH: string = 'YYYY';
+  static FORMAT_HEADER_YEAR: string = 'YYYY';
 
   public state: State<D> = {
     viewMode: this.props.startView,
@@ -461,24 +468,22 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     });
   };
 
-  private createHeaderTitle = (date: D): string => {
-    switch (this.state.viewMode) {
+  private createHeaderTitle = (date: D, viewMode: CalendarViewMode): string => {
+    switch (viewMode) {
       case CalendarViewModes.DATE:
-        const dateViewMonth: string = this.dateService.getMonthName(date);
-        const dateViewYear: number = this.dateService.getYear(date);
-
-        return `${dateViewMonth} ${dateViewYear}`;
+        return this.dateService.format(date, CalendarComponent.FORMAT_HEADER_DATE);
       case CalendarViewModes.MONTH: {
-        const monthViewYear: number = this.dateService.getYear(date);
-
-        return `${monthViewYear}`;
+        return this.dateService.format(date, CalendarComponent.FORMAT_HEADER_MONTH);
       }
       case CalendarViewModes.YEAR: {
-        const yearViewMinYear: number = this.dateService.getYear(this.min);
-        const yearViewMaxYear: number = this.dateService.getYear(this.max);
-        const yearViewEndYear = yearViewMinYear + CalendarComponent.YEARS_IN_VIEW;
+        const endYear: D = this.dateService.addYear(this.max, CalendarComponent.YEARS_IN_VIEW);
+        const isExceedsBound: boolean = this.dateService.compareDates(endYear, this.max) > 0;
+        const maxDate: D = isExceedsBound ? endYear : this.max;
 
-        return `${yearViewMinYear} - ${Math.max(yearViewMaxYear, yearViewEndYear)}`;
+        const minDateFormat: string = this.dateService.format(this.min, CalendarComponent.FORMAT_HEADER_YEAR);
+        const maxDateFormat: string = this.dateService.format(maxDate, CalendarComponent.FORMAT_HEADER_YEAR);
+
+        return `${minDateFormat} - ${maxDateFormat}`;
       }
     }
   };
@@ -516,7 +521,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
       <CalendarDateContent
         style={[style.container, styles.dayCell]}
         textStyle={style.text}>
-        {`${this.dateService.getDate(date)}`}
+        {this.dateService.format(date, CalendarComponent.FORMAT_DAY)}
       </CalendarDateContent>
     );
   };
@@ -526,7 +531,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
       <CalendarDateContent
         style={[style.container, styles.monthCell]}
         textStyle={style.text}>
-        {`${this.dateService.getMonthName(date)}`}
+        {this.dateService.format(date, CalendarComponent.FORMAT_MONTH)}
       </CalendarDateContent>
     );
   };
@@ -536,7 +541,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
       <CalendarDateContent
         style={[style.container, styles.yearCell]}
         textStyle={style.text}>
-        {`${this.dateService.getYear(date)}`}
+        {this.dateService.format(date, CalendarComponent.FORMAT_YEAR)}
       </CalendarDateContent>
     );
   };
@@ -643,7 +648,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
           style={headerStyle.container}
           titleStyle={headerStyle.title}
           subtitleStyle={headerStyle.subtitle}
-          title={titleSelector(this.state.visibleDate)}
+          title={titleSelector(this.state.visibleDate, this.state.viewMode)}
           subtitle={todayTitleSelector(this.dateService.today())}
           onTitlePress={this.onPickerNavigationPress}
           onSubtitlePress={this.onTodayPress}

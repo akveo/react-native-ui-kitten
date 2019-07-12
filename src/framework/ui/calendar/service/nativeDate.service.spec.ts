@@ -111,9 +111,9 @@ describe('@native-date: service checks', () => {
     expect(dateService.getDayOfWeekNames(TranslationWidth.SHORT)).toEqual(i18n.dayNames.short);
   });
 
-  it('* should format date according to the MM.dd.yyyy format', () => {
+  it('* should format date according to the MM.DD.YYYY format', () => {
     const date: Date = new Date(2018, 5, 15);
-    expect(dateService.format(date, 'mm.dd.yyyy')).toBe('06.15.2018');
+    expect(dateService.format(date, 'MM.DD.YYYY')).toBe('06.15.2018');
   });
 
   it('* should parse date', () => {

@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import dateFormat from 'dateformat';
+import fecha from 'fecha';
 import { DateService } from './date.service';
 import {
   I18nConfig,
@@ -24,7 +24,7 @@ export class NativeDateService extends DateService<Date> {
   constructor(locale: string = LOCALE_DEFAULT, i18n?: I18nConfig) {
     super();
     super.setLocale(i18n ? locale : LOCALE_DEFAULT);
-    this.setDateFormatLocaleData(i18n || EN);
+    this.setFechaLocaleData(i18n || EN);
   }
 
   public setLocale(locale: string) {
@@ -70,19 +70,15 @@ export class NativeDateService extends DateService<Date> {
   }
 
   public getMonthNameByIndex(index: number, style: TranslationWidth = TranslationWidth.SHORT): string {
-    const offset: number = this.getDateFormatMonthNamesOffset(style);
-
-    return dateFormat.i18n.monthNames[offset + index];
+    return this.getFechaMonthNames(style)[index];
   }
 
   public getDayOfWeekNames(style: TranslationWidth = TranslationWidth.SHORT): string[] {
-    const offset: number = this.getDateFormatDayNamesOffset(style);
-
-    return dateFormat.i18n.dayNames.slice(offset, DateService.DAYS_IN_WEEK);
+    return this.getFechaDayNames(style);
   }
 
   public format(date: Date, format: string): string {
-    return dateFormat(date, format);
+    return fecha.format(date, format);
   }
 
   /**
@@ -166,29 +162,28 @@ export class NativeDateService extends DateService<Date> {
     return 'native';
   }
 
-  private getDateFormatDayNamesOffset(style: TranslationWidth) {
+  private getFechaDayNames(style: TranslationWidth) {
     switch (style) {
       case TranslationWidth.SHORT:
-        return 0;
+        return fecha.i18n.dayNamesShort;
       case TranslationWidth.LONG:
-        return DateService.DAYS_IN_WEEK;
+        return fecha.i18n.dayNames;
     }
   }
 
-  private getDateFormatMonthNamesOffset(style: TranslationWidth) {
+  private getFechaMonthNames(style: TranslationWidth) {
     switch (style) {
       case TranslationWidth.SHORT:
-        return 0;
+        return fecha.i18n.monthNamesShort;
       case TranslationWidth.LONG:
-        return DateService.MONTHS_IN_YEAR;
+        return fecha.i18n.monthNames;
     }
   }
 
-  private setDateFormatLocaleData(config: I18nConfig) {
-    const { [TranslationWidth.SHORT]: shortDays, [TranslationWidth.LONG]: longDays } = config.dayNames;
-    const { [TranslationWidth.SHORT]: shortMonths, [TranslationWidth.LONG]: longMonths } = config.monthNames;
-
-    dateFormat.i18n.dayNames = shortDays.concat(longDays);
-    dateFormat.i18n.monthNames = shortMonths.concat(longMonths);
+  private setFechaLocaleData(config: I18nConfig) {
+    fecha.i18n.dayNames = config.dayNames[TranslationWidth.LONG];
+    fecha.i18n.dayNamesShort = config.dayNames[TranslationWidth.SHORT];
+    fecha.i18n.monthNames = config.monthNames[TranslationWidth.LONG];
+    fecha.i18n.monthNamesShort = config.monthNames[TranslationWidth.SHORT];
   }
 }

@@ -27,7 +27,7 @@ module.exports = {
     path.resolve(__dirname, '../../node_modules/hoist-non-react-statics'),
     path.resolve(__dirname, '../../node_modules/react-is'),
     path.resolve(__dirname, '../../node_modules/lodash.merge'),
-    path.resolve(__dirname, '../../node_modules/dateFormat'),
+    path.resolve(__dirname, '../../node_modules/fecha'),
     path.resolve(__dirname, '../../node_modules/moment'),
     path.resolve(__dirname, '../../node_modules/date-fns'),
   ],

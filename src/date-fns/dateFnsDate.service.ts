@@ -24,11 +24,13 @@ export interface DateFnsOptions {
 
 export class DateFnsService extends NativeDateService {
 
-  protected options: Partial<DateFnsOptions>;
+  protected options: Partial<DateFnsOptions> = {
+    format: `DD/MM/YYYY`,
+  };
 
-  constructor(locale?: string, i18n?: I18nConfig, options?: DateFnsOptions) {
+  constructor(locale: string = 'en', i18n?: I18nConfig, options?: DateFnsOptions) {
     super(locale, i18n);
-    this.options = options || {};
+    this.options = options || this.options;
   }
 
   public format(date: Date, format: string): string {
@@ -40,7 +42,12 @@ export class DateFnsService extends NativeDateService {
   }
 
   public parse(date: string, format: string): Date {
-    return parse(date, format || this.options.format, new Date(), this.options.parseOptions);
+    // Parse format is not supported in current version of date-fns
+    return this.parseDate(date);
+  }
+
+  private parseDate(date: string): Date {
+    return parse(date);
   }
 
   public getId(): string {

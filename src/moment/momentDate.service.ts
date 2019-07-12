@@ -25,7 +25,7 @@ export class MomentDateService extends DateService<Moment> {
     days: { [key: string]: string[] },
   };
 
-  constructor(locale: string) {
+  constructor(locale: string = 'en') {
     super();
     this.setLocale(locale);
   }
