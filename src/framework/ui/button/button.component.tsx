@@ -93,7 +93,7 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
  * };
  * ```
  *
- * @example Inline styling example
+ * @overview-example Inline styling example
  *
  * ```
  * import React from 'react';

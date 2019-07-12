@@ -19,6 +19,11 @@ import {
           <ng-container>
             <div [innerHTML]="description"
                  [ngStyle]="hasImage && {'margin-bottom': '16px'}"></div>
+            <h3>Examples:</h3>
+            <ngd-tabbed-example-block [content]="source.overviewExamples"
+                                      hasViewSwitch="true"
+                                      (changeView)="changeView($event)">
+            </ngd-tabbed-example-block>
             <img
               *ngFor="let image of images"
               src={{image}}
@@ -44,7 +49,7 @@ export class NgdOverviewBlockComponent {
   }
 
   private prepareDescription(source): any {
-    this.description = source.description.replace('undefined', '');
+    this.description = source.description;
     this.images = source.images.map((image: string) => `assets/images/overview/${image}`);
     return source;
   }
