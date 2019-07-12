@@ -276,7 +276,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     return this.props.date || this.dateService.today();
   }
 
-  private onDateSelect = (date: D) => {
+  private onDaySelect = (date: D) => {
     if (this.props.onSelect) {
       this.props.onSelect(date);
     }
@@ -305,6 +305,20 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     this.setState({
       viewMode: this.state.viewMode.pickNext(),
       visibleDate: nextVisibleDate,
+    });
+  };
+
+  private onDayPickerPagerSelect = (index: number) => {
+    const yearStart: D = this.dateService.getYearStart(this.state.visibleDate);
+    this.setState({
+      visibleDate: this.dateService.addMonth(yearStart, index),
+    });
+  };
+
+  private onYearPickerPagerSelect = (index: number) => {
+    const yearStart: D = this.dateService.getYearStart(this.props.min);
+    this.setState({
+      visibleDate: this.dateService.addYear(yearStart, index * CalendarComponent.YEARS_IN_VIEW),
     });
   };
 
@@ -492,20 +506,6 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     return 'Today';
   };
 
-  private onDatePickerPagerSelect = (index: number) => {
-    const yearStart: D = this.dateService.getYearStart(this.state.visibleDate);
-    this.setState({
-      visibleDate: this.dateService.addMonth(yearStart, index),
-    });
-  };
-
-  private onYearPickerPagerSelect = (index: number) => {
-    const yearStart: D = this.dateService.getYearStart(this.props.min);
-    this.setState({
-      visibleDate: this.dateService.addYear(yearStart, index * CalendarComponent.YEARS_IN_VIEW),
-    });
-  };
-
   private renderWeekdayElement = (weekday: string, index: number): CalendarDateContentElement => {
     return (
       <CalendarDateContent
@@ -516,7 +516,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     );
   };
 
-  private renderDayElement = (date: any, style: StyleType): CalendarDateContentElement => {
+  private renderDayElement = (date: D, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
         style={[style.container, styles.dayCell]}
@@ -526,7 +526,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     );
   };
 
-  private renderMonthElement = (date: any, style: StyleType): CalendarDateContentElement => {
+  private renderMonthElement = (date: D, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
         style={[style.container, styles.monthCell]}
@@ -536,7 +536,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     );
   };
 
-  private renderYearElement = (date: any, style: StyleType): CalendarDateContentElement => {
+  private renderYearElement = (date: D, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
         style={[style.container, styles.yearCell]}
@@ -546,12 +546,12 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     );
   };
 
-  private renderDatePickerElement = (date: D, index: number): CalendarPickerElement<D> => {
+  private renderDayPickerElement = (date: D, index: number): CalendarPickerElement<D> => {
     return (
       <CalendarPicker
         key={index}
         data={this.createDayPickerData(date)}
-        onSelect={this.onDateSelect}
+        onSelect={this.onDaySelect}
         isItemSelected={this.isDaySelected}
         isItemDisabled={this.isDayDisabled}
         isItemToday={this.isDayToday}
@@ -572,9 +572,9 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         <CalendarPager
           selectedIndex={visibleDayPickerIndex}
           data={this.createDayPickerPagerData(date)}
-          onSelect={this.onDatePickerPagerSelect}
+          onSelect={this.onDayPickerPagerSelect}
           shouldLoadComponent={this.isDayPickerInViewPort}>
-          {this.renderDatePickerElement}
+          {this.renderDayPickerElement}
         </CalendarPager>
       </React.Fragment>
     );

@@ -50,7 +50,7 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
     );
   };
 
-  private renderWeekElement = (item: D[], index: number): CalendarPickerRowElement<D> => {
+  private renderRowElement = (item: D[], index: number): CalendarPickerRowElement<D> => {
     return (
       <CalendarPickerRow
         key={index}
@@ -66,7 +66,7 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
     return (
       <View
         {...restProps}>
-        {data.map(this.renderWeekElement)}
+        {data.map(this.renderRowElement)}
       </View>
     );
   }
