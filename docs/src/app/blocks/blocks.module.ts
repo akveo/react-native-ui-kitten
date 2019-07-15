@@ -32,6 +32,7 @@ import {
   NgdComponentsOverviewBlockComponent,
   NgdTypesBlockComponent,
   NgdHocParamsBlockComponent,
+  NgdOverviewExampleBlock,
 } from './components/';
 import { NbRadioModule } from '@nebular/theme';
 
@@ -58,6 +59,7 @@ const blocks = [
   NgdComponentsOverviewBlockComponent,
   NgdTypesBlockComponent,
   NgdHocParamsBlockComponent,
+  NgdOverviewExampleBlock,
 ];
 
 @NgModule({

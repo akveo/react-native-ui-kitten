@@ -19,11 +19,10 @@ import {
           <ng-container>
             <div [innerHTML]="description"
                  [ngStyle]="hasImage && {'margin-bottom': '16px'}"></div>
-            <h3>Examples:</h3>
-            <ngd-tabbed-example-block [content]="source.overviewExamples"
-                                      hasViewSwitch="true"
-                                      (changeView)="changeView($event)">
-            </ngd-tabbed-example-block>
+            <ngd-overview-example
+              *ngFor="let example of source.overviewExamples"
+              [example]="example">
+            </ngd-overview-example>
             <img
               *ngFor="let image of images"
               src={{image}}
