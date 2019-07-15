@@ -5,13 +5,13 @@
  */
 
 
-import { MonthModelService } from './monthModel.service';
+import { CalendarDataService } from './monthModel.service';
 import { DateService } from './date.service';
 import { NativeDateService } from './nativeDate.service';
 
 describe('@month-model: service checks', () => {
   const dateService: DateService<Date> = new NativeDateService('en-US');
-  const monthModelService: MonthModelService<Date> = new MonthModelService(dateService);
+  const monthModelService: CalendarDataService<Date> = new CalendarDataService(dateService);
 
   it('* should create days grid with active month', () => {
     const date = new Date(2018, 7, 1);

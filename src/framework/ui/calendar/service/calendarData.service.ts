@@ -10,23 +10,62 @@ import {
   range,
 } from './helpers';
 
-export class MonthModelService<D> {
+export class CalendarDataService<D> {
 
   constructor(protected dateService: DateService<D>) {
   }
 
-  public createDaysGrid(activeMonth: D, boundingMonth: boolean = true): D[][] {
-    const weeks: D[][] = this.createDates(activeMonth);
+  public createDayPickerData = (date: D, boundingMonth: boolean): D[][] => {
+    const weeks: D[][] = this.createDates(date);
 
-    return this.withBoundingMonths(weeks, activeMonth, boundingMonth);
-  }
+    return this.withBoundingMonths(weeks, date, boundingMonth);
+  };
 
-  public getNumberOfWeekRowsInMonth(activeMonth: D): number {
-    const startOfWeekDayDiff: number = this.getStartOfWeekDayDiff(activeMonth);
-    const numberOfDays: number = this.dateService.getNumberOfDaysInMonth(activeMonth);
+  public createMonthPickerData = (date: D, rows: number, columns: number): D[][] => {
+    const yearStart: D = this.dateService.getYearStart(date);
+    const monthRange: D[] = range(rows * columns, (index: number): D => {
+      return this.dateService.addMonth(yearStart, index);
+    });
 
-    return Math.ceil((startOfWeekDayDiff + numberOfDays) / DateService.DAYS_IN_WEEK);
-  }
+    return batch(monthRange, rows);
+  };
+
+  public createYearPickerData = (date: D, rows: number, columns: number): D[][] => {
+    const yearStart: D = this.dateService.getYearStart(date);
+    const yearRange: D[] = range(rows * columns, (index: number): D => {
+      return this.dateService.addYear(yearStart, index);
+    });
+
+    return batch(yearRange, rows);
+  };
+
+  public createDayPickerPagerData = (startDate: D, endDate: D): D[] => {
+    const numberOfDayPickers: number = this.getNumberOfMonths(startDate, endDate) + 1;
+
+    return range(numberOfDayPickers, (index: number): D => {
+      return this.dateService.addMonth(startDate, index);
+    });
+  };
+
+  public createYearPickerPagerData = (startDate: D, endDate: D, rows: number, columns: number): D[] => {
+    const numberOfYears: number = this.getNumberOfYears(startDate, endDate) + 1;
+    const numberOfYearPickers: number = Math.max(Math.ceil(numberOfYears / (rows * columns)), 1);
+
+    return range(numberOfYearPickers, (index: number) => {
+      return this.dateService.addYear(startDate, index * rows * columns);
+    });
+  };
+
+  public getNumberOfMonths = (lhs: D, rhs: D): number => {
+    const numberOfYears: number = this.getNumberOfYears(lhs, rhs);
+    const numberOfMonths: number = this.dateService.getMonth(rhs) - this.dateService.getMonth(lhs);
+
+    return numberOfMonths + numberOfYears * DateService.MONTHS_IN_YEAR;
+  };
+
+  public getNumberOfYears = (lhs: D, rhs: D): number => {
+    return this.dateService.getYear(rhs) - this.dateService.getYear(lhs);
+  };
 
   private createDates(activeMonth: D): D[][] {
     const days = this.createDateRangeForMonth(activeMonth);

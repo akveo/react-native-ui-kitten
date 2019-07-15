@@ -36,11 +36,7 @@ import {
 } from './type';
 import { DateService } from './service/date.service';
 import { NativeDateService } from './service/nativeDate.service';
-import { MonthModelService } from './service/monthModel.service';
-import {
-  batch,
-  range,
-} from './service/helpers';
+import { CalendarDataService } from './service/calendarData.service';
 
 interface ComponentProps<D> extends ViewProps {
   min?: D;
@@ -65,6 +61,17 @@ interface State<D> {
 
 export type CalendarProps<D> = StyledComponentProps & ComponentProps<D>;
 export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
+
+const PICKER_ROWS: number = 4;
+const PICKER_COLUMNS: number = 3;
+const VIEWS_IN_PICKER: number = PICKER_ROWS * PICKER_COLUMNS;
+
+const FORMAT_DAY: string = 'D';
+const FORMAT_MONTH: string = 'MMM';
+const FORMAT_YEAR: string = 'YYYY';
+const FORMAT_HEADER_DATE: string = 'MMM YYYY';
+const FORMAT_HEADER_MONTH: string = 'YYYY';
+const FORMAT_HEADER_YEAR: string = 'YYYY';
 
 /**
  * Styled Calendar component.
@@ -242,23 +249,12 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     startView: CalendarViewModes.DATE,
   };
 
-  static MONTHS_IN_COLUMN: number = 4;
-  static YEARS_IN_COLUMN: number = 4;
-  static YEARS_IN_VIEW: number = 12;
-
-  static FORMAT_DAY: string = 'D';
-  static FORMAT_MONTH: string = 'MMM';
-  static FORMAT_YEAR: string = 'YYYY';
-  static FORMAT_HEADER_DATE: string = 'MMM YYYY';
-  static FORMAT_HEADER_MONTH: string = 'YYYY';
-  static FORMAT_HEADER_YEAR: string = 'YYYY';
-
   public state: State<D> = {
     viewMode: this.props.startView,
     visibleDate: this.dateService.getMonthStart(this.date),
   };
 
-  private monthService: MonthModelService<D> = new MonthModelService(this.dateService);
+  private dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
 
   private get dateService(): DateService<D> {
     return this.props.dateService;
@@ -273,7 +269,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   }
 
   private get date(): D {
-    return this.props.date || this.min;
+    return this.props.date || this.dateService.today();
   }
 
   private onDaySelect = (date: D) => {
@@ -318,7 +314,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   private onYearPickerPagerSelect = (index: number) => {
     const yearStart: D = this.dateService.getYearStart(this.min);
     this.setState({
-      visibleDate: this.dateService.addYear(yearStart, index * CalendarComponent.YEARS_IN_VIEW),
+      visibleDate: this.dateService.addYear(yearStart, index * VIEWS_IN_PICKER),
     });
   };
 
@@ -339,6 +335,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
                                     nextProps: CalendarPickerCellProps<D>): boolean => {
 
     const dateChanged: boolean = this.dateService.compareDatesSafe(props.date, nextProps.date) !== 0;
+
     if (dateChanged) {
       return true;
     }
@@ -429,81 +426,28 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private isDayPickerInViewPort = (index: number): boolean => {
-    const visibleDayPickerIndex: number = this.getNumberOfMonths(this.min, this.state.visibleDate);
+    const visibleDayPickerIndex: number = this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
 
     return index === visibleDayPickerIndex || Math.abs(index - visibleDayPickerIndex) === 1;
   };
 
-  private getNumberOfMonths = (lhs: D, rhs: D): number => {
-    const numberOfYears: number = this.getNumberOfYears(lhs, rhs);
-    const numberOfMonths: number = this.dateService.getMonth(rhs) - this.dateService.getMonth(lhs);
-
-    return numberOfMonths + numberOfYears * DateService.MONTHS_IN_YEAR;
-  };
-
-  private getNumberOfYears = (lhs: D, rhs: D): number => {
-    return this.dateService.getYear(rhs) - this.dateService.getYear(lhs);
-  };
-
   private isYearPickerInViewPort = (index: number): boolean => {
-    const numberOfYears: number = this.getNumberOfYears(this.min, this.state.visibleDate);
-    const visibleYearPickerIndex: number = Math.floor(numberOfYears / CalendarComponent.YEARS_IN_VIEW);
+    const numberOfYears: number = this.dataService.getNumberOfYears(this.min, this.state.visibleDate);
+    const visibleYearPickerIndex: number = Math.floor(numberOfYears / VIEWS_IN_PICKER);
 
     return index === visibleYearPickerIndex || Math.abs(index - visibleYearPickerIndex) === 1;
-  };
-
-  private createDayPickerData = (date: D): D[][] => {
-    const monthStart: D = this.dateService.getMonthStart(date);
-
-    return this.monthService.createDaysGrid(monthStart, this.props.boundingMonth);
-  };
-
-  private createMonthPickerData = (date: D): D[][] => {
-    const yearStart: D = this.dateService.getYearStart(date);
-    const monthRange: D[] = range(DateService.MONTHS_IN_YEAR, (index: number): D => {
-      return this.dateService.addMonth(yearStart, index);
-    });
-
-    return batch(monthRange, CalendarComponent.MONTHS_IN_COLUMN);
-  };
-
-  private createYearPickerData = (date: D): D[][] => {
-    const yearStart: D = this.dateService.getYearStart(date);
-    const yearRange: D[] = range(CalendarComponent.YEARS_IN_VIEW, (index: number): D => {
-      return this.dateService.addYear(yearStart, index);
-    });
-
-    return batch(yearRange, CalendarComponent.YEARS_IN_COLUMN);
-  };
-
-  private createDayPickerPagerData = (date: D): D[] => {
-    const yearStart: D = this.dateService.getYearStart(this.min);
-    const numberOfDayPickers: number = this.getNumberOfMonths(this.min, this.max) + 1;
-
-    return range(numberOfDayPickers, (index: number): D => {
-      return this.dateService.addMonth(yearStart, index);
-    });
-  };
-
-  private createYearPickerPagerData = (date: D): D[] => {
-    const numberOfYears: number = this.getNumberOfYears(this.min, this.max);
-    const numberOfYearPickers: number = Math.max(Math.round(numberOfYears / CalendarComponent.YEARS_IN_VIEW), 1);
-
-    return range(numberOfYearPickers, (index: number) => {
-      return this.dateService.addYear(this.min, index * CalendarComponent.YEARS_IN_VIEW);
-    });
   };
 
   private createHeaderTitle = (date: D, viewMode: CalendarViewMode): string => {
     switch (viewMode) {
       case CalendarViewModes.DATE:
-        return this.dateService.format(date, CalendarComponent.FORMAT_HEADER_DATE);
+        return this.dateService.format(date, FORMAT_HEADER_DATE);
       case CalendarViewModes.MONTH: {
-        return this.dateService.format(date, CalendarComponent.FORMAT_HEADER_MONTH);
+        return this.dateService.format(date, FORMAT_HEADER_MONTH);
       }
       case CalendarViewModes.YEAR: {
-        const minDateFormat: string = this.dateService.format(this.min, CalendarComponent.FORMAT_HEADER_YEAR);
-        const maxDateFormat: string = this.dateService.format(this.max, CalendarComponent.FORMAT_HEADER_YEAR);
+        const minDateFormat: string = this.dateService.format(this.min, FORMAT_HEADER_YEAR);
+        const maxDateFormat: string = this.dateService.format(this.max, FORMAT_HEADER_YEAR);
 
         return `${minDateFormat} - ${maxDateFormat}`;
       }
@@ -529,7 +473,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
       <CalendarDateContent
         style={[style.container, styles.dayCell]}
         textStyle={style.text}>
-        {this.dateService.format(date, CalendarComponent.FORMAT_DAY)}
+        {this.dateService.format(date, FORMAT_DAY)}
       </CalendarDateContent>
     );
   };
@@ -539,7 +483,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
       <CalendarDateContent
         style={[style.container, styles.monthCell]}
         textStyle={style.text}>
-        {this.dateService.format(date, CalendarComponent.FORMAT_MONTH)}
+        {this.dateService.format(date, FORMAT_MONTH)}
       </CalendarDateContent>
     );
   };
@@ -549,16 +493,18 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
       <CalendarDateContent
         style={[style.container, styles.yearCell]}
         textStyle={style.text}>
-        {this.dateService.format(date, CalendarComponent.FORMAT_YEAR)}
+        {this.dateService.format(date, FORMAT_YEAR)}
       </CalendarDateContent>
     );
   };
 
   private renderDayPickerElement = (date: D, index: number): CalendarPickerElement<D> => {
+    const data: D[][] = this.dataService.createDayPickerData(date, this.props.boundingMonth);
+
     return (
       <CalendarPicker
         key={index}
-        data={this.createDayPickerData(date)}
+        data={data}
         onSelect={this.onDaySelect}
         isItemSelected={this.isDaySelected}
         isItemDisabled={this.isDayDisabled}
@@ -570,7 +516,8 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderDayPickerPagerElement = (date: D): React.ReactElement<ViewProps> => {
-    const visibleDayPickerIndex: number = this.getNumberOfMonths(this.min, this.state.visibleDate);
+    const data: D[] = this.dataService.createDayPickerPagerData(this.min, this.max);
+    const visibleDayPickerIndex: number = this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
 
     return (
       <React.Fragment>
@@ -579,7 +526,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         </CalendarMonthHeader>
         <CalendarPager
           selectedIndex={visibleDayPickerIndex}
-          data={this.createDayPickerPagerData(date)}
+          data={data}
           onSelect={this.onDayPickerPagerSelect}
           shouldLoadComponent={this.isDayPickerInViewPort}>
           {this.renderDayPickerElement}
@@ -589,9 +536,11 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderMonthPickerElement = (date: D): CalendarPagerElement<D> => {
+    const data: D[][] = this.dataService.createMonthPickerData(date, PICKER_ROWS, PICKER_COLUMNS);
+
     return (
       <CalendarPicker
-        data={this.createMonthPickerData(date)}
+        data={data}
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
         isItemDisabled={this.isMonthDisabled}
@@ -602,10 +551,12 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderYearPickerElement = (date: D, index: number): React.ReactElement<ViewProps> => {
+    const data: D[][] = this.dataService.createYearPickerData(date, PICKER_ROWS, PICKER_COLUMNS);
+
     return (
       <CalendarPicker
         key={index}
-        data={this.createYearPickerData(date)}
+        data={data}
         onSelect={this.onYearSelect}
         isItemSelected={this.isYearSelected}
         isItemDisabled={this.isYearDisabled}
@@ -616,13 +567,14 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderYearPickerPagerElement = (date: D): CalendarPagerElement<D> => {
-    const numberOfYears: number = this.getNumberOfYears(this.min, this.state.visibleDate);
-    const visibleYearPickerIndex: number = Math.floor(numberOfYears / CalendarComponent.YEARS_IN_VIEW);
+    const data: D[] = this.dataService.createYearPickerPagerData(this.min, this.max, PICKER_ROWS, PICKER_COLUMNS);
+    const numberOfYears: number = this.dataService.getNumberOfYears(this.min, this.state.visibleDate);
+    const visibleYearPickerIndex: number = Math.floor(numberOfYears / VIEWS_IN_PICKER);
 
     return (
       <CalendarPager
         selectedIndex={visibleYearPickerIndex}
-        data={this.createYearPickerPagerData(date)}
+        data={data}
         onSelect={this.onYearPickerPagerSelect}
         shouldLoadComponent={this.isYearPickerInViewPort}>
         {this.renderYearPickerElement}

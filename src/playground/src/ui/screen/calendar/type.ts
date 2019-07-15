@@ -13,8 +13,6 @@ const now: Date = new Date();
 
 const defaultCalendar: ComponentShowcaseItem = {
   props: {
-    min: new Date(now.getFullYear() - 1, 0, 1),
-    max: new Date(now.getFullYear() + 1, 0, 1),
   },
 };
 
@@ -27,6 +25,7 @@ const momentCalendar: ComponentShowcaseItem = {
 
 const dateFnsCalendar: ComponentShowcaseItem = {
   props: {
+    date: now,
     dateService: new DateFnsService(),
   },
 };
@@ -37,10 +36,17 @@ const startViewCalendar: ComponentShowcaseItem = {
   },
 };
 
-const boundedCalendar: ComponentShowcaseItem = {
+const lowerBoundCalendar: ComponentShowcaseItem = {
   props: {
     min: now,
     max: now,
+  },
+};
+
+const higherBoundCalendar: ComponentShowcaseItem = {
+  props: {
+    min: new Date(now.getFullYear() - 12, 0, 1),
+    max: new Date(now.getFullYear() + 12, 0, 1),
   },
 };
 
@@ -107,10 +113,17 @@ const startViewSection: ComponentShowcaseSection = {
   ],
 };
 
-const boundedSection: ComponentShowcaseSection = {
-  title: 'Bounded',
+const lowerBoundedSection: ComponentShowcaseSection = {
+  title: 'Lower Bounds',
   items: [
-    boundedCalendar,
+    lowerBoundCalendar,
+  ],
+};
+
+const higherBoundedSection: ComponentShowcaseSection = {
+  title: 'Higher Bounds',
+  items: [
+    higherBoundCalendar,
   ],
 };
 
@@ -148,7 +161,8 @@ export const calendarShowcase: ComponentShowcase = {
     // momentSection,
     // dateFnsSection,
     // startViewSection,
-    // boundedSection,
+    lowerBoundedSection,
+    higherBoundedSection,
     // customItemSection,
     // boundingMonthSection,
     // filterSection,
