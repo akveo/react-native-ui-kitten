@@ -12,7 +12,10 @@ import { CalendarCustomItem } from './calendarCustomItem.component';
 const now: Date = new Date();
 
 const defaultCalendar: ComponentShowcaseItem = {
-  props: {},
+  props: {
+    min: new Date(now.getFullYear() - 1, 0, 1),
+    max: new Date(now.getFullYear() + 1, 0, 1),
+  },
 };
 
 const momentCalendar: ComponentShowcaseItem = {
@@ -145,10 +148,10 @@ export const calendarShowcase: ComponentShowcase = {
     // momentSection,
     // dateFnsSection,
     // startViewSection,
-    boundedSection,
+    // boundedSection,
     // customItemSection,
-    boundingMonthSection,
-    filterSection,
+    // boundingMonthSection,
+    // filterSection,
     // customTitlesSection,
   ],
 };
