@@ -23,6 +23,11 @@ export {
   CheckBoxProps,
 } from './checkbox/checkbox.component';
 export {
+  Dropdown,
+  DropdownProps,
+} from './dropdown/dropdown.component';
+export { DropdownItemProps as DropdownItemType } from './dropdown/droppdownItem.component';
+export {
   Input,
   InputProps,
 } from './input/input.component';

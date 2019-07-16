@@ -42,17 +42,18 @@ import { ModalPresentingBased } from '../support/typings';
 type ContentElement = React.ReactElement<any>;
 type ChildElement = React.ReactElement<any>;
 
+const TAG_CHILD: number = 0;
+const TAG_CONTENT: number = 1;
+const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
+
 interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
   content: ContentElement;
   children: ChildElement;
   visible?: boolean;
+  onContentMeasure?: (TAG_CONTENT: Frame) => void;
 }
 
 export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
-
-const TAG_CHILD: number = 0;
-const TAG_CONTENT: number = 1;
-const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
 
 /**
  * Displays content in a modal when users focus on or tap an element.
@@ -185,7 +186,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   };
 
   private showPopoverModal = (element: MeasuredElement, layout: MeasureResult): string => {
-    const { placement, allowBackdrop, onBackdropPress } = this.props;
+    const { placement, allowBackdrop, onBackdropPress, onContentMeasure } = this.props;
 
     const popoverFrame: Frame = this.getPopoverFrame(layout, placement);
 
@@ -196,6 +197,8 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       top: popoverPosition.y,
       opacity: 1,
     };
+
+    onContentMeasure && onContentMeasure(popoverFrame);
 
     const popover: React.ReactElement<ModalPresentingBased> = React.cloneElement(element, {
       style: additionalStyle,
