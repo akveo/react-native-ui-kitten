@@ -9,6 +9,7 @@ import {
 import {
   Dropdown,
   DropdownItemType,
+  Text,
 } from '@kitten/ui';
 import { StyleType } from '@kitten/theme';
 
@@ -51,6 +52,8 @@ export class DropdownContainer extends React.Component<any, State> {
     return (
       <View style={styles.container}>
         <Dropdown
+          label='Options'
+          placeholder='Select Option'
           items={this.items}
           icon={this.IconElement}
           selectedIndex={this.state.selectedIndex}
@@ -65,6 +68,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    // justifyContent: 'flex-end',
   },
 });

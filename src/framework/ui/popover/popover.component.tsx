@@ -50,7 +50,6 @@ interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
   content: ContentElement;
   children: ChildElement;
   visible?: boolean;
-  onContentMeasure?: (TAG_CONTENT: Frame) => void;
 }
 
 export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
@@ -186,7 +185,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   };
 
   private showPopoverModal = (element: MeasuredElement, layout: MeasureResult): string => {
-    const { placement, allowBackdrop, onBackdropPress, onContentMeasure } = this.props;
+    const { placement, allowBackdrop, onBackdropPress } = this.props;
 
     const popoverFrame: Frame = this.getPopoverFrame(layout, placement);
 
@@ -198,7 +197,6 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       opacity: 1,
     };
 
-    onContentMeasure && onContentMeasure(popoverFrame);
 
     const popover: React.ReactElement<ModalPresentingBased> = React.cloneElement(element, {
       style: additionalStyle,
