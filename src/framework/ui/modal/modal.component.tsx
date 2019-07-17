@@ -58,7 +58,7 @@ export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
  * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
  * Default is `false`.
  *
- * @property {{backgroundColor: string, opacity: number }} backdropStyle - Determines the style of backdrop.
+ * @property {BackdropStyle} backdropStyle - Determines the style of backdrop.
  *
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
  * tapping on back-drop.
