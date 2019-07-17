@@ -15,7 +15,7 @@ import {
   TouchableOpacityProps,
   LayoutChangeEvent,
   Dimensions,
-  StyleProp,
+  StyleProp, Image,
 } from 'react-native';
 import {
   Interaction,
@@ -43,7 +43,6 @@ import {
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type MenuElement = React.ReactElement<DropdownMenuProps>;
-type IconProp = (style: ImageStyle) => IconElement;
 
 const { height } = Dimensions.get('screen');
 const MEASURED_MENU_TAG: string = 'Menu';
@@ -51,9 +50,12 @@ const MEASURED_MENU_TAG: string = 'Menu';
 interface ComponentProps {
   items: DropdownItemType[];
   selectedIndex?: number;
+  size?: string;
+  status?: string;
+  appearance?: string;
   textStyle?: TextStyle;
-  icon?: IconProp;
   placeholder?: string;
+  placeholderStyle?: StyleProp<TextStyle>;
   label?: string;
   labelStyle?: StyleProp<TextStyle>;
   onSelect: (index: number, event?: GestureResponderEvent) => void;
@@ -211,11 +213,16 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderIconElement = (style: ImageStyle): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
+    const uri: string = this.state.visible ?
+      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png' :
+      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
 
-    return React.cloneElement(iconElement, {
-      style: [style, styles.icon, iconElement.props.style],
-    });
+    return (
+      <Image
+        source={{ uri }}
+        style={style}
+      />
+    );
   };
 
   private renderTextElement = (style: TextStyle): TextElement => {
@@ -230,22 +237,24 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderMenuElement = (style: StyleType): MenuElement => {
-    const { items } = this.props;
+    const { items, selectedIndex, size } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
     return (
       <DropdownMenu
         key={0}
+        size={size}
         items={items}
         style={[styles.menu, style, additionalMenuStyle]}
         bounces={false}
+        selectedIndex={selectedIndex}
         onSelect={this.onItemSelect}
       />
     );
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle } = this.props;
+    const { themedStyle, style, ...restProps } = this.props;
     const { visible, placement, menuWidth } = this.state;
     const { control, icon, text, menu, label } = this.getComponentStyle(themedStyle);
 
@@ -267,6 +276,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
           placement={placement}
           onBackdropPress={this.setVisibility}>
           <TouchableOpacity
+            {...restProps}
             activeOpacity={1.0}
             style={[styles.control, control]}
             onLayout={this.onControlLayout}
@@ -302,6 +312,7 @@ const styles = StyleSheet.create({
   invisibleMenu: {
     position: 'absolute',
     opacity: 0,
+    width: 0,
   },
 });
 

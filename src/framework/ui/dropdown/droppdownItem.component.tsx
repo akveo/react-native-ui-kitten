@@ -1,3 +1,4 @@
+
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -7,8 +8,6 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageProps,
-  ImageStyle,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
@@ -27,13 +26,12 @@ import {
 import { TouchableIndexedProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
-type IconElement = React.ReactElement<ImageProps>;
-type IconProp = (style: ImageStyle) => IconElement;
 
 export interface ComponentProps {
   text: string;
-  style?: TextStyle;
-  icon?: IconProp;
+  selected?: boolean;
+  disabled?: boolean;
+  size?: string;
   textStyle?: TextStyle;
   index?: number;
 }
@@ -61,26 +59,18 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      iconHeight,
-      iconWidth,
-      iconMarginHorizontal,
-      iconTintColor,
       textColor,
       textFontSize,
       textFontWeight,
       textLineHeight,
       textMarginHorizontal,
+      selectedBackgroundColor,
+      selectedTextColor,
       ...containerStyles
     } = source;
 
     return {
       container: containerStyles,
-      icon: {
-        height: iconHeight,
-        width: iconWidth,
-        marginHorizontal: iconMarginHorizontal,
-        tintColor: iconTintColor,
-      },
       text: {
         color: textColor,
         fontSize: textFontSize,
@@ -88,46 +78,46 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
         lineHeight: textLineHeight,
         marginHorizontal: textMarginHorizontal,
       },
+      containerSelected: {
+        backgroundColor: selectedBackgroundColor,
+      },
+      textSelected: {
+        color: selectedTextColor,
+      },
     };
   };
 
-  private renderIconElement = (style: ImageStyle): IconElement | null => {
-    if (this.props.icon) {
-      const iconElement: IconElement = this.props.icon(style);
-
-      return React.cloneElement(iconElement, {
-        style: [style, styles.icon, iconElement.props.style],
-      });
-    } else {
-      return null;
-    }
-  };
-
-  private renderTextElement = (style: TextStyle): TextElement => {
-    const { text } = this.props;
+  private renderTextElement = (style: TextStyle, selectedStyle: TextStyle): TextElement => {
+    const { text, selected } = this.props;
+    const selectedTextStyle: TextStyle = selected ? selectedStyle : {};
 
     return (
-      <Text style={[style, styles.text, this.props.textStyle]}>
+      <Text style={[style, styles.text, selectedTextStyle, this.props.textStyle]}>
         {text}
       </Text>
     );
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, text, index, style } = this.props;
-    const { container, icon: iconStyle, text: textStyle } = this.getComponentStyle(themedStyle);
-    const iconElement: IconElement | null = this.renderIconElement(iconStyle);
-    const textElement: TextElement = this.renderTextElement(textStyle);
+    const { themedStyle, style, disabled, selected } = this.props;
+    const {
+      container,
+      text,
+      containerSelected,
+      textSelected,
+    } = this.getComponentStyle(themedStyle);
+    const textElement: TextElement = this.renderTextElement(text, textSelected);
+    const selectedContainerStyle: StyleType = selected ? containerSelected : {};
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        style={[styles.container, container, style]}
+        style={[styles.container, container, selectedContainerStyle, style]}
+        disabled={disabled}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         {textElement}
-        {iconElement}
       </TouchableOpacity>
     );
   }

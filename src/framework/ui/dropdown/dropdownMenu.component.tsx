@@ -1,3 +1,4 @@
+
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -25,6 +26,8 @@ type DropdownItemElement = React.ReactElement<DropdownItemProps>;
 
 export interface ComponentProps {
   items: DropdownItemType[];
+  selectedIndex: number;
+  size?: string;
   onSelect: (index: number, event?: GestureResponderEvent) => void;
 }
 
@@ -37,21 +40,28 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
   };
 
   private renderItem = (info: ListRenderItemInfo<DropdownItemType>): DropdownItemElement => {
+    const { size } = this.props;
+    const selected: boolean = this.props.selectedIndex === info.index;
+
     return (
       <DropdownItem
         text={info.item.text}
         index={info.index}
+        size={size}
+        disabled={info.item.disabled}
+        selected={selected}
         onPress={this.onSelect}
       />
     );
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { items, ...restProps } = this.props;
+    const { items, style, ...restProps } = this.props;
 
     return (
       <List
         {...restProps}
+        style={[styles.container, style]}
         data={items}
         renderItem={this.renderItem}
       />
