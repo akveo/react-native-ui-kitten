@@ -7,6 +7,7 @@ import { StyleType } from '@kitten/theme';
 import {
   CheckBox,
   CheckBoxProps,
+  Icon,
   ListItem,
   ListItemProps,
 } from '@kitten/ui';
@@ -19,37 +20,37 @@ export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<List
 
 export const ListItemIconShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
 
-  const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
-    <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
+  const IconElement = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
+    <Icon name='star' {...style}/>
   );
 
   return (
-    <ListItem {...props} icon={Icon}/>
+    <ListItem {...props} icon={IconElement}/>
   );
 };
 
 export const ListItemAccessoryShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
 
-  const Accessory = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
+  const AccessoryElement = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
     <CheckBox checked={index % 2 === 0}/>
   );
 
   return (
-    <ListItem {...props} accessory={Accessory}/>
+    <ListItem {...props} accessory={AccessoryElement}/>
   );
 };
 
 export const ListItemIconAccessoryShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
 
-  const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
-    <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
+  const IconElement = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
+    <Icon name='star' {...style}/>
   );
 
-  const Accessory = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
+  const AccessoryElement = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
     <CheckBox checked={index % 2 === 0}/>
   );
 
   return (
-    <ListItem {...props} icon={Icon} accessory={Accessory}/>
+    <ListItem {...props} icon={IconElement} accessory={AccessoryElement}/>
   );
 };

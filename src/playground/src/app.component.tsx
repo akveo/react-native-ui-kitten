@@ -1,11 +1,13 @@
 import React from 'react';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from '@kitten/theme';
+import { IconRegistry } from '@kitten/ui';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { Router } from './navigation';
 import {
+  ThemeContext,
   ThemeKey,
   themes,
-  ThemeContext,
 } from './themes';
 
 interface State {
@@ -31,6 +33,7 @@ export default class App extends React.Component {
           value={{ name: this.state.theme, toggleTheme: this.toggleTheme }}>
           <Router/>
         </ThemeContext.Provider>
+        <IconRegistry icons={EvaIconsPack}/>
       </ApplicationProvider>
     );
   }
