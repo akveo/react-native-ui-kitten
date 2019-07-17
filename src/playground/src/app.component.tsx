@@ -29,11 +29,11 @@ export default class App extends React.Component {
       <ApplicationProvider
         mapping={mapping}
         theme={themes[this.state.theme]}>
+        <IconRegistry icons={EvaIconsPack}/>
         <ThemeContext.Provider
           value={{ name: this.state.theme, toggleTheme: this.toggleTheme }}>
           <Router/>
         </ThemeContext.Provider>
-        <IconRegistry icons={EvaIconsPack}/>
       </ApplicationProvider>
     );
   }

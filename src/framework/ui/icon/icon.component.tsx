@@ -13,7 +13,7 @@ export type IconProps<T = {}> = ComponentProps & T;
 
 /**
  * Icon component. Allows to render any ReactElement registered for a specific name.
- * Starting from UI Kitten 4.2, there is @ui-kitten/eva-icons module
+ * Starting from UI Kitten 4.2, there is `@ui-kitten/eva-icons` module
  * that renders any icon from eva-icons package in `svg` format.
  *
  * @extends React.Component

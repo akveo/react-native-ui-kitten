@@ -64,6 +64,17 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Setup Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-icons-module.md',
+          },
+        ],
+      },
     ],
   },
   {
@@ -376,6 +387,20 @@ export const structure = [
           {
             name: 'Input',
             images: ['input.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
           },
         ],
       },
