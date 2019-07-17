@@ -14,7 +14,6 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  Image,
 } from 'react-native';
 import {
   Interaction,
