@@ -16,7 +16,6 @@ import {
   LayoutChangeEvent,
   Dimensions,
   StyleProp,
-  Image,
   View,
   ViewStyle,
 } from 'react-native';
@@ -46,6 +45,7 @@ import {
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type MenuElement = React.ReactElement<DropdownMenuProps>;
+type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 
 const { height } = Dimensions.get('screen');
 const MEASURED_MENU_TAG: string = 'Menu';
@@ -62,6 +62,7 @@ interface ComponentProps {
   label?: string;
   labelStyle?: StyleProp<TextStyle>;
   controlStyle?: StyleProp<ViewStyle>;
+  icon?: IconProp;
   onSelect: (index: number, event?: GestureResponderEvent) => void;
 }
 
@@ -225,16 +226,10 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderIconElement = (style: ImageStyle): IconElement => {
-    const uri: string = this.state.visible ?
-      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png' :
-      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
+    const { icon } = this.props;
+    const { visible } = this.state;
 
-    return (
-      <Image
-        source={{ uri }}
-        style={style}
-      />
-    );
+    return icon && icon(style, visible);
   };
 
   private renderTextElement = (style: TextStyle): TextElement => {

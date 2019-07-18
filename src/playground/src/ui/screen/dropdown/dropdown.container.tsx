@@ -2,13 +2,16 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  Image,
   GestureResponderEvent,
+  ImageProps,
 } from 'react-native';
 import {
   Dropdown,
   DropdownItemType,
   Text,
 } from '@kitten/ui';
+import { StyleType } from '@kitten/theme';
 
 interface State {
   selectedIndex: number;
@@ -38,6 +41,18 @@ export class DropdownContainer extends React.Component<any, State> {
     this.setState({ selectedIndex });
   };
 
+  private renderIcon = (style: StyleType, visible: boolean): React.ReactElement<ImageProps> => {
+    const uri: string = visible ?
+      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png' :
+      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
+    return (
+      <Image
+        source={{ uri }}
+        style={style}
+      />
+    );
+  };
+
   public render(): React.ReactNode {
     return (
       <View style={styles.container}>
@@ -51,6 +66,7 @@ export class DropdownContainer extends React.Component<any, State> {
           // size='tiny'
           items={this.items}
           selectedIndex={this.state.selectedIndex}
+          icon={this.renderIcon}
           onSelect={this.onSelect}
         />
       </View>
