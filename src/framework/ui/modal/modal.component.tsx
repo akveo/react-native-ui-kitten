@@ -86,7 +86,7 @@ export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
  *         visible={this.state.visible}
  *         allowBackdrop={false}>
  *         <View>
- *           <Text>Hi! This is Modal Component!</Test>
+ *           <Text>Hi! This is Modal Component!</Text>
  *           <Button title='Close Modal' onPress={() => this.setVisible(false)}/>
  *         <View/>
  *       </Modal>
