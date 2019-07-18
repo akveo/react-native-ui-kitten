@@ -15,7 +15,10 @@ import {
   TouchableOpacityProps,
   LayoutChangeEvent,
   Dimensions,
-  StyleProp, Image,
+  StyleProp,
+  Image,
+  View,
+  ViewStyle,
 } from 'react-native';
 import {
   Interaction,
@@ -58,6 +61,7 @@ interface ComponentProps {
   placeholderStyle?: StyleProp<TextStyle>;
   label?: string;
   labelStyle?: StyleProp<TextStyle>;
+  controlStyle?: StyleProp<ViewStyle>;
   onSelect: (index: number, event?: GestureResponderEvent) => void;
 }
 
@@ -144,22 +148,29 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { visible } = this.state;
     const controlStyles: StyleType = this.getPartStyles(source, 'control');
     const iconStyles: StyleType = this.getPartStyles(source, 'icon');
     const textStyles: StyleType = this.getPartStyles(source, 'text');
     const menuStyles: StyleType = this.getPartStyles(source, 'menu');
     const labelStyle: StyleType = this.getPartStyles(source, 'label');
+    const controlBorderStyle: StyleType = {
+      borderTopLeftRadius: controlStyles.controlBorderRadius,
+      borderTopRightRadius: controlStyles.controlBorderRadius,
+      borderBottomLeftRadius: visible ? 0 : controlStyles.controlBorderRadius,
+      borderBottomRightRadius: visible ? 0 : controlStyles.controlBorderRadius,
+    };
 
     return {
       control: {
         backgroundColor: controlStyles.controlBackgroundColor,
         borderColor: controlStyles.controlBorderColor,
-        borderRadius: controlStyles.controlBorderRadius,
         borderWidth: controlStyles.controlBorderWidth,
         minHeight: controlStyles.controlMinHeight,
         minWidth: controlStyles.controlMinWidth,
         paddingHorizontal: controlStyles.controlPaddingHorizontal,
         paddingVertical: controlStyles.controlPaddingVertical,
+        ...controlBorderStyle,
       },
       icon: {
         height: iconStyles.iconHeight,
@@ -176,7 +187,8 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
       },
       menu: {
         maxHeight: menuStyles.menuMaxHeight,
-        borderRadius: menuStyles.menuBorderRadius,
+        borderStartRadius: 0,
+        borderEndRadius: menuStyles.menuBorderRadius,
         borderColor: menuStyles.menuBorderColor,
         borderWidth: menuStyles.menuBorderWidth,
       },
@@ -254,7 +266,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, ...restProps } = this.props;
+    const { themedStyle, style, controlStyle, ...restProps } = this.props;
     const { visible, placement, menuWidth } = this.state;
     const { control, icon, text, menu, label } = this.getComponentStyle(themedStyle);
 
@@ -266,7 +278,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     const additionalMenuStyle: StyleType = { maxWidth: menuWidth };
 
     return (
-      <React.Fragment>
+      <View style={style}>
         {labelElement}
         <Popover
           visible={visible}
@@ -278,7 +290,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
           <TouchableOpacity
             {...restProps}
             activeOpacity={1.0}
-            style={[styles.control, control]}
+            style={[styles.control, control, controlStyle]}
             onLayout={this.onControlLayout}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
@@ -288,7 +300,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
           </TouchableOpacity>
         </Popover>
         {measuredMenu}
-      </React.Fragment>
+      </View>
     );
   }
 }

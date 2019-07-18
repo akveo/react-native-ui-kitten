@@ -42,12 +42,13 @@ export class DropdownContainer extends React.Component<any, State> {
     return (
       <View style={styles.container}>
         <Dropdown
+          style={styles.dropdown}
           label='Options'
           placeholder='Select Option'
           // appearance='outline'
-          status='warning'
+          status='info'
           // disabled={true}
-          // size='giant'
+          // size='tiny'
           items={this.items}
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
@@ -61,6 +62,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    // backgroundColor: 'yellow',
+    // backgroundColor: 'gray',
+  },
+  dropdown: {
+    // marginTop: 200,
   },
 });

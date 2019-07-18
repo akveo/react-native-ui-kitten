@@ -51,10 +51,24 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
 
   private onPressIn = (event: GestureResponderEvent) => {
     this.props.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(this.props.index, event);
+    }
   };
 
   private onPressOut = (event: GestureResponderEvent) => {
     this.props.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(this.props.index, event);
+    }
+  };
+
+  private onLongPress = (event: GestureResponderEvent) => {
+    if (this.props.onLongPress) {
+      this.props.onLongPress(this.props.index, event);
+    }
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -99,7 +113,7 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, disabled, selected } = this.props;
+    const { themedStyle, style, selected, ...restProps } = this.props;
     const {
       container,
       text,
@@ -111,12 +125,13 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
 
     return (
       <TouchableOpacity
+        {...restProps}
         activeOpacity={1.0}
         style={[styles.container, container, selectedContainerStyle, style]}
-        disabled={disabled}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+        onLongPress={this.onLongPress}>
         {textElement}
       </TouchableOpacity>
     );
