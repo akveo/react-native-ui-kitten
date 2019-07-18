@@ -64,7 +64,7 @@
     "conventional-changelog-cli": "^2.0.21",
     "coveralls": "^3.0.2",
     "del": "^4.1.1",
-    "doc-prsr": "^2.2.2",
+    "doc-prsr": "^2.2.3",
     "gulp": "^3.9.1",
     "gulp-replace": "^1.0.0",
     "gulp-typedoc": "^2.2.1",
