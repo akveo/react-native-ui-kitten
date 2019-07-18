@@ -52,7 +52,7 @@ export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
 
 const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
-const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
+const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.AUTO;
 
 /**
  * Displays content in a modal when users focus on or tap an element.
