@@ -66,12 +66,23 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Setup Icons',
+        name: 'Eva Icons',
         children: [
           {
             type: 'block',
             block: 'markdown',
             source: 'guides/setup-icons-module.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: '3rd party Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-vector-icons.md',
           },
         ],
       },
