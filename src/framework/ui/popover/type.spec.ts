@@ -63,6 +63,7 @@ describe('@type: popover model checks', () => {
       source: new Frame(6, 6, 2, 2),
       other: new Frame(2, 2, 4, 4),
       offsets: OffsetRect.zero(),
+      bounds: Frame.zero(),
     };
 
     it('* left', () => {
@@ -156,6 +157,7 @@ describe('@type: popover model checks', () => {
     const options: PlacementOptions = {
       source: new Frame(6, 6, 2, 2),
       other: new Frame(2, 2, 4, 4),
+      bounds: Frame.zero(),
       offsets: {
         left: 2,
         top: 2,
@@ -255,6 +257,7 @@ describe('@type: popover model checks', () => {
     const options: PlacementOptions = {
       source: new Frame(6, 6, 2, 2),
       other: new Frame(2, 2, 4, 4),
+      bounds: Frame.zero(),
       offsets: OffsetRect.zero(),
     };
 

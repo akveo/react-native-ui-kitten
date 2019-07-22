@@ -144,14 +144,8 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   };
 
   private popoverId: string;
-  private placementService: PopoverPlacementService;
-
-  constructor(props: PopoverProps) {
-    super(props);
-
-    const derivedPlacement: PopoverPlacement = PopoverPlacements.parse(props.placement, PLACEMENT_DEFAULT);
-    this.placementService = new PopoverPlacementService(derivedPlacement, WINDOW_BOUNDS);
-  }
+  private placementService: PopoverPlacementService = new PopoverPlacementService();
+  private popoverPlacement: PopoverPlacement;
 
   public componentDidUpdate(prevProps: PopoverProps) {
     if (prevProps.visible !== this.props.visible) {
@@ -185,10 +179,14 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   private onMeasure = (layout: MeasureResult) => {
     if (this.props.visible) {
       const placementOptions: PlacementOptions = this.createPlacementOptions(layout);
-      const placement: PopoverPlacement = this.placementService.find(placementOptions);
+      const popoverPlacement = this.placementService.find(this.popoverPlacement, placementOptions);
 
-      this.popoverId = this.showPopoverModal(placement, placementOptions);
+      this.popoverId = this.showPopoverModal(popoverPlacement, placementOptions);
     }
+  };
+
+  private createPlacement = (value: string | PopoverPlacement): PopoverPlacement => {
+    return PopoverPlacements.parse(value, PLACEMENT_DEFAULT);
   };
 
   private createPlacementOptions = (layout: MeasureResult): PlacementOptions => {
@@ -197,6 +195,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
     return {
       source: layout[TAG_CONTENT],
       other: layout[TAG_CHILD],
+      bounds: WINDOW_BOUNDS,
       offsets: Offsets.find(children.props.style),
     };
   };
@@ -266,8 +265,8 @@ export class PopoverComponent extends React.Component<PopoverProps> {
 
   public render(): React.ReactNode {
     if (this.props.visible) {
-      const placement: PopoverPlacement = this.placementService.getValue();
-      const popoverElement: ContentElement = this.renderPopoverElement(this.props.content, placement);
+      this.popoverPlacement = this.createPlacement(this.props.placement);
+      const popoverElement: ContentElement = this.renderPopoverElement(this.props.content, this.popoverPlacement);
       const childElement: ChildElement = this.renderChildElement(this.props.children);
 
       return this.renderMeasuringElement(childElement, popoverElement);

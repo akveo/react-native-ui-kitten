@@ -252,6 +252,7 @@ export class Offsets {
 export class PlacementOptions {
   source: Frame = Frame.zero();
   other: Frame = Frame.zero();
+  bounds: Frame = Frame.zero();
   offsets: OffsetRect = OffsetRect.zero();
 }
 
