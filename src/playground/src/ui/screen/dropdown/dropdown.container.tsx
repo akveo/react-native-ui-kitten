@@ -79,8 +79,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     // backgroundColor: 'gray',
+    // justifyContent: 'flex-end',
   },
   dropdown: {
-    // marginTop: 200,
+    // marginTop: 500,
   },
 });

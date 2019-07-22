@@ -13,7 +13,6 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  LayoutChangeEvent,
   Dimensions,
   StyleProp,
   View,
@@ -39,16 +38,16 @@ import {
   MeasureNode,
   MeasureResult,
   MeasuringElementProps,
-  MeasuringNode,
 } from '../popover/measure.component';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type MenuElement = React.ReactElement<DropdownMenuProps>;
+type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 
 const { height } = Dimensions.get('screen');
-const MEASURED_MENU_TAG: string = 'Menu';
+const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
   items: DropdownItemType[];
@@ -71,7 +70,6 @@ export type DropdownProps = StyledComponentProps & TouchableOpacityProps & Compo
 interface State {
   visible: boolean;
   menuWidth: number;
-  placement: 'top' | 'bottom';
 }
 
 class DropdownComponent extends React.Component<DropdownProps, State> {
@@ -85,7 +83,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   public state: State = {
     visible: false,
     menuWidth: 0,
-    placement: 'bottom',
   };
 
   private onItemSelect = (index: number, event: GestureResponderEvent): void => {
@@ -131,36 +128,18 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
       }, {});
   };
 
-  private onControlLayout = (event: LayoutChangeEvent): void => {
-    const { width: menuWidth } = event.nativeEvent.layout;
+  private onControlMeasure = (result: MeasureResult): void => {
+    const width: number = result[MEASURED_CONTROL_TAG].size.width;
 
-    if (this.state.menuWidth === 0) {
-      this.setState({ menuWidth });
-    }
-  };
-
-  private onMenuMeasure = (result: MeasureResult): void => {
-    const y: number = result[MEASURED_MENU_TAG].origin.y;
-    const contentHeight: number = result[MEASURED_MENU_TAG].size.height;
-    const restSpace: number = height - y;
-    const placement: 'top' | 'bottom' = restSpace > contentHeight ? 'bottom' : 'top';
-
-    this.setState({ placement });
+    this.setState({ menuWidth: width });
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { visible } = this.state;
     const controlStyles: StyleType = this.getPartStyles(source, 'control');
     const iconStyles: StyleType = this.getPartStyles(source, 'icon');
     const textStyles: StyleType = this.getPartStyles(source, 'text');
     const menuStyles: StyleType = this.getPartStyles(source, 'menu');
     const labelStyle: StyleType = this.getPartStyles(source, 'label');
-    const controlBorderStyle: StyleType = {
-      borderTopLeftRadius: controlStyles.controlBorderRadius,
-      borderTopRightRadius: controlStyles.controlBorderRadius,
-      borderBottomLeftRadius: visible ? 0 : controlStyles.controlBorderRadius,
-      borderBottomRightRadius: visible ? 0 : controlStyles.controlBorderRadius,
-    };
 
     return {
       control: {
@@ -171,7 +150,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
         minWidth: controlStyles.controlMinWidth,
         paddingHorizontal: controlStyles.controlPaddingHorizontal,
         paddingVertical: controlStyles.controlPaddingVertical,
-        ...controlBorderStyle,
+        borderRadius: controlStyles.controlBorderRadius,
       },
       icon: {
         height: iconStyles.iconHeight,
@@ -198,21 +177,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
         marginBottom: labelStyle.labelMarginBottom,
       },
     };
-  };
-
-  private renderMeasuredMenu = (menu: MenuElement): MeasuringNode => {
-    const measuringProps: MeasuringElementProps = { tag: MEASURED_MENU_TAG };
-    const invisibleMenu: MenuElement = React.cloneElement(menu, {
-      ...measuringProps,
-      key: MEASURED_MENU_TAG,
-      style: [menu.props.style, styles.invisibleMenu],
-    });
-
-    return (
-      <MeasureNode onResult={this.onMenuMeasure}>
-        {[invisibleMenu]}
-      </MeasureNode>
-    );
   };
 
   private renderLabelElement = (style: TextStyle): TextElement | null => {
@@ -260,17 +224,45 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     );
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, controlStyle, ...restProps } = this.props;
-    const { visible, placement, menuWidth } = this.state;
-    const { control, icon, text, menu, label } = this.getComponentStyle(themedStyle);
+  private renderControlElement = (): ControlElement => {
+    const { themedStyle, controlStyle, ...restProps } = this.props;
+    const { control, icon, text } = this.getComponentStyle(themedStyle);
 
     const iconElement: IconElement = this.renderIconElement(icon);
     const textElement: TextElement = this.renderTextElement(text);
+
+    const measuringProps: MeasuringElementProps = { tag: MEASURED_CONTROL_TAG };
+
+    return (
+      <MeasureNode onResult={this.onControlMeasure}>
+        {[
+          <TouchableOpacity
+            {...restProps}
+            {...measuringProps}
+            key={MEASURED_CONTROL_TAG}
+            activeOpacity={1.0}
+            style={[styles.control, control, controlStyle]}
+            onPress={this.onPress}
+            onPressIn={this.onPressIn}
+            onPressOut={this.onPressOut}>
+            {textElement}
+            {iconElement}
+          </TouchableOpacity>,
+        ]}
+      </MeasureNode>
+    );
+  };
+
+  public render(): React.ReactElement<TouchableOpacityProps> {
+    const { themedStyle, style } = this.props;
+    const { visible, menuWidth } = this.state;
+    const { menu, label } = this.getComponentStyle(themedStyle);
+
     const menuElement: MenuElement = this.renderMenuElement(menu);
-    const measuredMenu: MeasuringNode = this.renderMeasuredMenu(menuElement);
     const labelElement: TextElement | null = this.renderLabelElement(label);
     const additionalMenuStyle: StyleType = { maxWidth: menuWidth };
+
+    const controlElement: ControlElement = this.renderControlElement();
 
     return (
       <View style={style}>
@@ -280,21 +272,9 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
           content={menuElement}
           style={additionalMenuStyle}
           indicatorStyle={styles.indicator}
-          placement={placement}
           onBackdropPress={this.setVisibility}>
-          <TouchableOpacity
-            {...restProps}
-            activeOpacity={1.0}
-            style={[styles.control, control, controlStyle]}
-            onLayout={this.onControlLayout}
-            onPress={this.onPress}
-            onPressIn={this.onPressIn}
-            onPressOut={this.onPressOut}>
-            {textElement}
-            {iconElement}
-          </TouchableOpacity>
+          {controlElement}
         </Popover>
-        {measuredMenu}
       </View>
     );
   }
