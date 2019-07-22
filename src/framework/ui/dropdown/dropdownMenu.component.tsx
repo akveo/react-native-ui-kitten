@@ -1,4 +1,3 @@
-
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -19,44 +18,82 @@ import {
 import {
   DropdownItem,
   DropdownItemProps,
+  DropdownItemType,
 } from './droppdownItem.component';
+import { DropdownGroup } from './dropdownGroup.component';
 
-export type DropdownItemType = DropdownItemProps;
 type DropdownItemElement = React.ReactElement<DropdownItemProps>;
+
+interface SelectedType {
+  selected: boolean;
+  index?: number;
+}
 
 export interface ComponentProps {
   items: DropdownItemType[];
-  selectedIndex: number;
+  selectedOption?: DropdownItemType;
   size?: string;
-  onSelect: (index: number, event?: GestureResponderEvent) => void;
+  onSelect: (option: DropdownItemType, event?: GestureResponderEvent) => void;
 }
 
-export type DropdownMenuProps =  Partial<ListProps> & ComponentProps;
+export type DropdownMenuProps = Partial<ListProps> & ComponentProps;
 
 export class DropdownMenu extends React.Component<DropdownMenuProps> {
 
-  private onSelect = (index: number, event?: GestureResponderEvent): void => {
-    this.props.onSelect(index, event);
+  private areThereSubItems = (dropdownItem: DropdownItemType): boolean => {
+    const { items } = dropdownItem;
+
+    return items && items.length !== 0;
+  };
+
+  private isOptionSelected = (item: DropdownItemType): SelectedType => {
+    const { selectedOption } = this.props;
+
+    if (this.areThereSubItems(item)) {
+      let selectedIndex: number;
+      const selected: boolean = item.items.some((option: DropdownItemType, index: number) => {
+        if (this.areThereSubItems(option)) {
+          return this.isOptionSelected(option);
+        } else {
+          selectedIndex = index;
+          return option === selectedOption;
+        }
+      });
+      return { selected: selected, index: selectedIndex };
+    }
+    return { selected: selectedOption === item };
+  };
+
+  private onSelect = (option: DropdownItemType, event?: GestureResponderEvent): void => {
+    this.props.onSelect(option, event);
   };
 
   private renderItem = (info: ListRenderItemInfo<DropdownItemType>): DropdownItemElement => {
     const { size } = this.props;
-    const selected: boolean = this.props.selectedIndex === info.index;
+    const selected: SelectedType = this.isOptionSelected(info.item);
+    const groupSelectedIndex: number | null = selected.selected ? selected.index : null;
 
-    return (
-      <DropdownItem
-        text={info.item.text}
-        index={info.index}
+    return this.areThereSubItems(info.item) ? (
+      <DropdownGroup
+        {...info}
+        {...info.item}
         size={size}
-        disabled={info.item.disabled}
-        selected={selected}
+        selectedIndex={groupSelectedIndex}
+        onPress={this.onSelect}
+      />
+    ) : (
+      <DropdownItem
+        {...info}
+        {...info.item}
+        size={size}
+        selected={selected.selected}
         onPress={this.onSelect}
       />
     );
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { items, style, ...restProps } = this.props;
+    const { items, style, selectedOption, ...restProps } = this.props;
 
     return (
       <List

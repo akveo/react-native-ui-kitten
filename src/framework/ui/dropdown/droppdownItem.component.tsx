@@ -1,4 +1,3 @@
-
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -23,37 +22,41 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
-import { TouchableIndexedProps } from '../support/typings';
+import { TouchableTypeReturningProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
 
-export interface ComponentProps {
+export interface DropdownItemType {
   text: string;
-  selected?: boolean;
-  disabled?: boolean;
-  size?: string;
   textStyle?: TextStyle;
-  index?: number;
+  disabled?: boolean;
+  items?: DropdownItemType[];
 }
 
-export type DropdownItemProps = StyledComponentProps & TouchableIndexedProps & ComponentProps;
+export interface ComponentProps {
+  item: DropdownItemType;
+  selected?: boolean;
+  size?: string;
+}
+
+export type DropdownItemProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<DropdownItemType>;
 
 class DropdownItemComponent extends React.Component<DropdownItemProps> {
 
   static styledComponentName: string = 'DropdownItem';
 
   private onPress = (event: GestureResponderEvent) => {
-    const { index, onPress } = this.props;
+    const { item, onPress } = this.props;
 
     this.props.dispatch([]);
-    onPress(index, event);
+    onPress(item, event);
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(this.props.index, event);
+      this.props.onPressIn(this.props.item, event);
     }
   };
 
@@ -61,13 +64,13 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(this.props.index, event);
+      this.props.onPressOut(this.props.item, event);
     }
   };
 
   private onLongPress = (event: GestureResponderEvent) => {
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.props.index, event);
+      this.props.onLongPress(this.props.item, event);
     }
   };
 
@@ -102,12 +105,12 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
   };
 
   private renderTextElement = (style: TextStyle, selectedStyle: TextStyle): TextElement => {
-    const { text, selected } = this.props;
+    const { item, selected } = this.props;
     const selectedTextStyle: TextStyle = selected ? selectedStyle : {};
 
     return (
-      <Text style={[style, styles.text, selectedTextStyle, this.props.textStyle]}>
-        {text}
+      <Text style={[style, styles.text, selectedTextStyle, item.textStyle]}>
+        {item.text}
       </Text>
     );
   };

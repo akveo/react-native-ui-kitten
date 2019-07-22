@@ -14,19 +14,22 @@ import {
 import { StyleType } from '@kitten/theme';
 
 interface State {
-  selectedIndex: number;
+  selectedOption: DropdownItemType;
 }
 
 export class DropdownContainer extends React.Component<any, State> {
 
-  public state: State = {
-    selectedIndex: 0,
-  };
-
   private items: DropdownItemType[] = [
     { text: 'Option 1' },
     { text: 'Option 2', disabled: true },
-    { text: 'Option 3' },
+    {
+      text: 'Option 3',
+      items: [
+        { text: 'Option 31', disabled: true },
+        { text: 'Option 32' },
+        { text: 'Option 33' },
+      ],
+    },
     { text: 'Option 4' },
     { text: 'Option 5' },
     { text: 'Option 6' },
@@ -37,8 +40,12 @@ export class DropdownContainer extends React.Component<any, State> {
     { text: 'Option 12' },
   ];
 
-  private onSelect = (selectedIndex: number, event?: GestureResponderEvent): void => {
-    this.setState({ selectedIndex });
+  public state: State = {
+    selectedOption: null,
+  };
+
+  private onSelect = (selectedOption: DropdownItemType, event?: GestureResponderEvent): void => {
+    this.setState({ selectedOption });
   };
 
   private renderIcon = (style: StyleType, visible: boolean): React.ReactElement<ImageProps> => {
@@ -65,7 +72,7 @@ export class DropdownContainer extends React.Component<any, State> {
           // disabled={true}
           // size='tiny'
           items={this.items}
-          selectedIndex={this.state.selectedIndex}
+          selectedOption={this.state.selectedOption}
           icon={this.renderIcon}
           onSelect={this.onSelect}
         />

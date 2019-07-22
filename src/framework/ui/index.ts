@@ -26,7 +26,7 @@ export {
   Dropdown,
   DropdownProps,
 } from './dropdown/dropdown.component';
-export { DropdownItemProps as DropdownItemType } from './dropdown/droppdownItem.component';
+export { DropdownItemType } from './dropdown/droppdownItem.component';
 export {
   Input,
   InputProps,

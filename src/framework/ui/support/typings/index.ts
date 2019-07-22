@@ -8,4 +8,5 @@ export {
   Omit,
   TouchableIndexedProps,
   ModalPresentingBased,
+  TouchableTypeReturningProps,
 } from './type';

@@ -13,7 +13,6 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  Dimensions,
   StyleProp,
   View,
   ViewStyle,
@@ -32,8 +31,8 @@ import { Popover } from '../popover/popover.component';
 import {
   DropdownMenu,
   DropdownMenuProps,
-  DropdownItemType,
 } from './dropdownMenu.component';
+import { DropdownItemType } from './droppdownItem.component';
 import {
   MeasureNode,
   MeasureResult,
@@ -46,12 +45,11 @@ type MenuElement = React.ReactElement<DropdownMenuProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 
-const { height } = Dimensions.get('screen');
 const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
   items: DropdownItemType[];
-  selectedIndex?: number;
+  selectedOption?: DropdownItemType;
   size?: string;
   status?: string;
   appearance?: string;
@@ -62,7 +60,7 @@ interface ComponentProps {
   labelStyle?: StyleProp<TextStyle>;
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
-  onSelect: (index: number, event?: GestureResponderEvent) => void;
+  onSelect: (option: DropdownItemType, event?: GestureResponderEvent) => void;
 }
 
 export type DropdownProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
@@ -76,7 +74,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
 
   static styledComponentName: string = 'Dropdown';
   static defaultProps: Partial<DropdownProps> = {
-    selectedIndex: -1,
     placeholder: 'Select Option',
   };
 
@@ -85,8 +82,8 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     menuWidth: 0,
   };
 
-  private onItemSelect = (index: number, event: GestureResponderEvent): void => {
-    this.props.onSelect(index, event);
+  private onItemSelect = (option: DropdownItemType, event: GestureResponderEvent): void => {
+    this.props.onSelect(option, event);
     this.setVisibility();
   };
 
@@ -197,18 +194,18 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderTextElement = (style: TextStyle): TextElement => {
-    const { selectedIndex, items, placeholder } = this.props;
-    const selectedOption = selectedIndex === -1 ? placeholder : items[selectedIndex].text;
+    const { selectedOption, items, placeholder } = this.props;
+    const value: string = selectedOption ? selectedOption.text : placeholder;
 
     return (
       <Text style={[style, styles.text, this.props.textStyle]}>
-        {selectedOption}
+        {value}
       </Text>
     );
   };
 
   private renderMenuElement = (style: StyleType): MenuElement => {
-    const { items, selectedIndex, size } = this.props;
+    const { items, selectedOption, size } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
     return (
@@ -218,7 +215,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
         items={items}
         style={[styles.menu, style, additionalMenuStyle]}
         bounces={false}
-        selectedIndex={selectedIndex}
+        selectedOption={selectedOption}
         onSelect={this.onItemSelect}
       />
     );
