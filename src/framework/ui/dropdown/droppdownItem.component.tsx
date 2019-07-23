@@ -22,9 +22,14 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
+import {
+  CheckBox,
+  CheckBoxProps,
+} from '../checkbox/checkbox.component';
 import { TouchableTypeReturningProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
+type CheckboxElement = React.ReactElement<CheckBoxProps>;
 
 export interface DropdownItemType {
   text: string;
@@ -36,6 +41,7 @@ export interface DropdownItemType {
 export interface ComponentProps {
   item: DropdownItemType;
   selected?: boolean;
+  multiSelect?: boolean;
   size?: string;
 }
 
@@ -115,6 +121,17 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
     );
   };
 
+  private renderCheckboxElement = (): CheckboxElement => {
+    const { multiSelect, selected } = this.props;
+
+    return multiSelect ? (
+      <CheckBox
+        checked={selected}
+        onChange={(value: boolean) => 1}
+      />
+    ) : null;
+  };
+
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { themedStyle, style, selected, ...restProps } = this.props;
     const {
@@ -124,6 +141,7 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
       textSelected,
     } = this.getComponentStyle(themedStyle);
     const textElement: TextElement = this.renderTextElement(text, textSelected);
+    const checkboxElement: CheckboxElement = this.renderCheckboxElement();
     const selectedContainerStyle: StyleType = selected ? containerSelected : {};
 
     return (
@@ -135,6 +153,7 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
         onLongPress={this.onLongPress}>
+        {checkboxElement}
         {textElement}
       </TouchableOpacity>
     );

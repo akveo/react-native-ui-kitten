@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { View } from 'react-native';
+import { ListRenderItemInfo, View } from 'react-native';
 import {
   styled,
   StyledComponentProps,
@@ -22,6 +22,8 @@ type ItemElement = React.ReactElement<DropdownItemProps>;
 
 interface ComponentProps {
   selectedIndex: number | null;
+  multiSelect?: boolean;
+  renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
 }
 
 type DropdownGroupProps = ComponentProps & DropdownItemProps & StyledComponentProps;
@@ -57,9 +59,14 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
   };
 
   private renderSubItem = (option: DropdownItemType, index: number): ItemElement => {
-    const { item, ...restProps } = this.props;
+    const { item, renderItem, ...restProps } = this.props;
+    const returningOption: ListRenderItemInfo<DropdownItemType> = {
+      item: option,
+      index: index,
+      separators: null,
+    };
 
-    return (
+    return renderItem ? renderItem(returningOption) : (
       <DropdownItem
         {...restProps}
         selected={restProps.selectedIndex === index}

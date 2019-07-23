@@ -15,7 +15,7 @@ import {
   TouchableOpacityProps,
   StyleProp,
   View,
-  ViewStyle,
+  ViewStyle, ListRenderItemInfo,
 } from 'react-native';
 import {
   Interaction,
@@ -49,6 +49,7 @@ const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
   items: DropdownItemType[];
+  multiSelect?: boolean;
   selectedOption?: DropdownItemType;
   size?: string;
   status?: string;
@@ -60,6 +61,7 @@ interface ComponentProps {
   labelStyle?: StyleProp<TextStyle>;
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
+  renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
   onSelect: (option: DropdownItemType, event?: GestureResponderEvent) => void;
 }
 
@@ -75,6 +77,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   static styledComponentName: string = 'Dropdown';
   static defaultProps: Partial<DropdownProps> = {
     placeholder: 'Select Option',
+    multiSelect: false,
   };
 
   public state: State = {
@@ -83,8 +86,12 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private onItemSelect = (option: DropdownItemType, event: GestureResponderEvent): void => {
+    const { onSelect, multiSelect } = this.props;
+
     this.props.onSelect(option, event);
-    this.setVisibility();
+    // if (!multiSelect) {
+    //   this.setVisibility();
+    // }
   };
 
   private setVisibility = (): void => {
@@ -205,17 +212,15 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderMenuElement = (style: StyleType): MenuElement => {
-    const { items, selectedOption, size } = this.props;
+    const { appearance, ...restProps } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
     return (
       <DropdownMenu
+        {...restProps}
         key={0}
-        size={size}
-        items={items}
         style={[styles.menu, style, additionalMenuStyle]}
         bounces={false}
-        selectedOption={selectedOption}
         onSelect={this.onItemSelect}
       />
     );

@@ -33,6 +33,8 @@ export interface ComponentProps {
   items: DropdownItemType[];
   selectedOption?: DropdownItemType;
   size?: string;
+  multiSelect?: boolean;
+  renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
   onSelect: (option: DropdownItemType, event?: GestureResponderEvent) => void;
 }
 
@@ -68,8 +70,8 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     this.props.onSelect(option, event);
   };
 
-  private renderItem = (info: ListRenderItemInfo<DropdownItemType>): DropdownItemElement => {
-    const { size } = this.props;
+  private renderDefaultItem = (info: ListRenderItemInfo<DropdownItemType>): DropdownItemElement => {
+    const { size, renderItem, multiSelect } = this.props;
     const selected: SelectedType = this.isOptionSelected(info.item);
     const groupSelectedIndex: number | null = selected.selected ? selected.index : null;
 
@@ -78,7 +80,9 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
         {...info}
         {...info.item}
         size={size}
+        multiSelect={multiSelect}
         selectedIndex={groupSelectedIndex}
+        renderItem={renderItem}
         onPress={this.onSelect}
       />
     ) : (
@@ -87,13 +91,20 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
         {...info.item}
         size={size}
         selected={selected.selected}
+        multiSelect={multiSelect}
         onPress={this.onSelect}
       />
     );
   };
 
+  private renderItem = (info: ListRenderItemInfo<DropdownItemType>): React.ReactElement<any> => {
+    const { renderItem } = this.props;
+
+    return renderItem ? renderItem(info) : this.renderDefaultItem(info);
+  };
+
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { items, style, selectedOption, ...restProps } = this.props;
+    const { items, style, ...restProps } = this.props;
 
     return (
       <List
