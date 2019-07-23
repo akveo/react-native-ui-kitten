@@ -10,15 +10,47 @@ const defaultIcon: ComponentShowcaseItem = {
   props: {},
 };
 
+const zoomIcon: ComponentShowcaseItem = {
+  title: 'Zoom',
+  props: {
+    animation: 'zoom',
+  },
+};
+
+const pulseIcon: ComponentShowcaseItem = {
+  title: 'Pulse',
+  props: {
+    animation: 'pulse',
+  },
+};
+
+const shakeIcon: ComponentShowcaseItem = {
+  title: 'Shake',
+  props: {
+    animation: 'shake',
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
+  title: 'Default',
   items: [
     defaultIcon,
+  ],
+};
+
+const animationSection: ComponentShowcaseSection = {
+  title: 'Animations',
+  items: [
+    zoomIcon,
+    pulseIcon,
+    shakeIcon,
   ],
 };
 
 export const iconShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
+    animationSection,
   ],
 };
 

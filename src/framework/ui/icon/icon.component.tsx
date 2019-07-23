@@ -1,5 +1,15 @@
 import React from 'react';
 import {
+  Animated,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
+import {
+  IconAnimation,
+  IconAnimationRegistry,
+  IconAnimations,
+} from './iconAnimation';
+import {
   IconRegistryService,
   RegisteredIcon,
 } from './service/iconRegistry.service';
@@ -7,19 +17,23 @@ import {
 interface ComponentProps {
   name: string;
   pack?: string;
+  animation?: keyof IconAnimationRegistry;
 }
 
 export type IconProps<T = {}> = ComponentProps & T;
 
 /**
- * Icon component. Allows to render any ReactElement registered for a specific name.
+ * Icon component with animation support. Allows to render any ReactElement registered for a specific name.
  * Starting from UI Kitten 4.2, there is `@ui-kitten/eva-icons` module
  * that renders any icon from eva-icons package in `svg` format.
  *
  * @extends React.Component
  *
- * @property {string} name - Name of registered icon
+ * @method {(callback?: Animated.EndCallback) => void} startAnimation - Toggle animation to start.
+ * @method {() => void} stopAnimation - Toggle animation to stop.
+ * @property {string} name - Name of registered icon.
  * @property {string} pack - Name of icon pack that is able to provide an icon for specified name.
+ * @property {string} animation - Animation name. Available `zoom`, `pulse` and `shake`. Default is `zoom`.
  *
  * @overview-example Register Icons
  *
@@ -54,6 +68,21 @@ export type IconProps<T = {}> = ComponentProps & T;
  * export const StarIcon = (props) => (
  *   <Icon name='star'/>
  * );
+ * ```
+ *
+ * @overview-example Animation Usage
+ *
+ * ```
+ * import React from 'react';
+ * import { Icon } from 'react-native-ui-kitten';
+ *
+ * const iconRef = React.createRef();
+ *
+ * export const StarIcon = (props) => (
+ *   <Icon ref={iconRef} name='star' animation='shake'/>
+ * );
+ *
+ * iconRef.current.startAnimation();
  * ```
  *
  * @example Password Input
@@ -128,11 +157,42 @@ export type IconProps<T = {}> = ComponentProps & T;
 
 export class Icon<T> extends React.Component<IconProps<T>> {
 
+
+  static defaultProps: Partial<IconProps> = {
+    animation: 'zoom',
+  };
+
+  private readonly animation: IconAnimation;
+
+  constructor(props: IconProps<T>) {
+    super(props);
+    this.animation = IconAnimations[props.animation];
+  }
+
+  public componentWillUnmount() {
+    this.animation.release();
+  }
+
+  public startAnimation = (callback?: Animated.EndCallback) => {
+    this.animation.start(callback);
+  };
+
+  public stopAnimation = () => {
+    this.animation.stop();
+  };
+
+  private getComponentStyle = (): StyleProp<ViewStyle> => {
+    return this.animation.toProps();
+  };
+
   public render(): React.ReactElement<T> {
     const { name, pack, ...restProps } = this.props;
-
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
 
-    return registeredIcon.icon.toReactElement(restProps as T);
+    return (
+      <Animated.View {...this.getComponentStyle()}>
+        {registeredIcon.icon.toReactElement(restProps as T)}
+      </Animated.View>
+    );
   }
 }
