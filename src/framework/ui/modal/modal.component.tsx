@@ -107,7 +107,11 @@ export class Modal extends React.Component<ModalProps> {
   private id: string = '';
 
   public componentWillReceiveProps(nextProps: ModalProps): void {
-    this.handleVisibility(nextProps);
+    if (this.props.visible !== nextProps.visible) {
+      this.handleVisibility(nextProps);
+    } else if (this.props.visible && nextProps.visible) {
+      ModalService.update(this.id, nextProps.children);
+    }
   }
 
   private handleVisibility = (nextProps: ModalProps): void => {
