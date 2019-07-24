@@ -111,7 +111,7 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
  *         <CustomListItem/>
  *       </ListItem>
  *     );
- *   };=
+ *   };
  *
  *   return (
  *     <List

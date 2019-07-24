@@ -289,6 +289,21 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Drawer',
+        icon: 'list.svg',
+        source: [
+          'Drawer',
+          'DrawerItem',
+        ],
+        overview: [
+          {
+            name: 'Drawer',
+            images: [],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'ViewPager',
         icon: 'view-pager.svg',
         source: [

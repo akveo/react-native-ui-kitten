@@ -1,42 +1,47 @@
 import React from 'react';
 import {
   createAppContainer,
+  createDrawerNavigator,
   createStackNavigator,
+  NavigationRouteConfigMap,
 } from 'react-navigation';
 import {
-  Home,
+  AvatarContainer,
+  BottomNavigationContainer,
   ButtonContainer,
   ButtonGroupContainer,
-  AvatarContainer,
-  InputContainer,
   CheckBoxContainer,
-  ToggleContainer,
-  RadioContainer,
-  TextContainer,
-  ListContainer,
-  PopoverContainer,
-  TooltipContainer,
-  OverflowMenuContainer,
-  BottomNavigationContainer,
-  TabViewContainer,
-  TopNavigationContainer,
-  RadioGroupContainer,
+  DrawerContainer,
+  Home,
+  InputContainer,
   LayoutContainer,
-  SampleContainer,
+  ListContainer,
   ModalContainer,
+  OverflowMenuContainer,
+  PopoverContainer,
+  RadioContainer,
+  RadioGroupContainer,
+  SampleContainer,
+  TabViewContainer,
+  TextContainer,
+  ToggleContainer,
+  TooltipContainer,
+  TopNavigationContainer,
 } from '../ui/screen';
+import { DrawerNavigation } from './drawerNavigation.component';
 
 export interface RouteType {
   name: string;
 }
 
-const AppNavigator = createStackNavigator({
+const routes: NavigationRouteConfigMap = {
   ['Home']: Home,
   ['Avatar']: AvatarContainer,
   ['Bottom Navigation']: BottomNavigationContainer,
   ['Button']: ButtonContainer,
   ['Button Group']: ButtonGroupContainer,
   ['Checkbox']: CheckBoxContainer,
+  ['Drawer']: DrawerContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,
   ['List']: ListContainer,
@@ -51,9 +56,19 @@ const AppNavigator = createStackNavigator({
   ['Overflow Menu']: OverflowMenuContainer,
   ['Sample']: SampleContainer,
   ['Modal']: ModalContainer,
-}, {
+};
+
+const MenuNavigator = createStackNavigator(routes, {
   initialRouteName: 'Home',
   headerMode: 'screen',
 });
 
-export const Router: any = createAppContainer(AppNavigator);
+const DrawerNavigator = createDrawerNavigator({
+  ...routes,
+  ['Home']: MenuNavigator,
+}, {
+  contentComponent: DrawerNavigation,
+  initialRouteName: 'Home',
+});
+
+export const Router: any = createAppContainer(DrawerNavigator);

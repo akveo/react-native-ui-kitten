@@ -1144,6 +1144,38 @@
         }
       }
     },
+    "Drawer": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "headerPaddingHorizontal": {
+            "type": "number"
+          },
+          "headerPaddingVertical": {
+            "type": "number"
+          },
+          "headerBackgroundColor": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "headerPaddingHorizontal": 8,
+            "headerPaddingVertical": 12,
+            "headerBackgroundColor": "background-basic-color-2"
+          }
+        }
+      }
+    },
     "Input": {
       "meta": {
         "scope": "all",

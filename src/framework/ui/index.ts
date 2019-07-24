@@ -23,6 +23,15 @@ export {
   CheckBoxProps,
 } from './checkbox/checkbox.component';
 export {
+  Drawer,
+  DrawerProps,
+  DrawerHeaderElement,
+} from './drawer/drawer.component';
+export {
+  DrawerItem,
+  DrawerItemProps,
+} from './drawer/drawerItem.component';
+export {
   Input,
   InputProps,
 } from './input/input.component';
