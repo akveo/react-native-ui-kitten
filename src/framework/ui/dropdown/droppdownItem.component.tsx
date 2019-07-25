@@ -11,6 +11,8 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
+  ViewProps,
+  View,
 } from 'react-native';
 import {
   Interaction,
@@ -22,14 +24,10 @@ import {
   Text,
   TextProps,
 } from '../text/text.component';
-import {
-  CheckBox,
-  CheckBoxProps,
-} from '../checkbox/checkbox.component';
+import { CheckBox } from '../checkbox/checkbox.component';
 import { TouchableTypeReturningProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
-type CheckboxElement = React.ReactElement<CheckBoxProps>;
 
 export interface DropdownItemType {
   text: string;
@@ -121,19 +119,8 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
     );
   };
 
-  private renderCheckboxElement = (): CheckboxElement => {
-    const { multiSelect, selected } = this.props;
-
-    return multiSelect ? (
-      <CheckBox
-        checked={selected}
-        onChange={(value: boolean) => 1}
-      />
-    ) : null;
-  };
-
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, selected, ...restProps } = this.props;
+  private renderDefaultItem = (): React.ReactElement<TouchableOpacityProps> => {
+    const { themedStyle, style, item, selected, ...restProps } = this.props;
     const {
       container,
       text,
@@ -141,7 +128,6 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
       textSelected,
     } = this.getComponentStyle(themedStyle);
     const textElement: TextElement = this.renderTextElement(text, textSelected);
-    const checkboxElement: CheckboxElement = this.renderCheckboxElement();
     const selectedContainerStyle: StyleType = selected ? containerSelected : {};
 
     return (
@@ -153,10 +139,39 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
         onLongPress={this.onLongPress}>
-        {checkboxElement}
         {textElement}
       </TouchableOpacity>
     );
+  };
+
+  private renderMultiSelectItem = (): React.ReactElement<ViewProps> => {
+    const { disabled, item, themedStyle, selected, style } = this.props;
+    const {
+      container,
+      text,
+      containerSelected,
+      textSelected,
+    } = this.getComponentStyle(themedStyle);
+    const selectedTextStyle: TextStyle = selected ? textSelected : {};
+    const selectedContainerStyle: StyleType = selected ? containerSelected : {};
+
+    return (
+      <View style={[styles.container, container, selectedContainerStyle, style]}>
+        <CheckBox
+          text={item.text}
+          textStyle={[text, selectedTextStyle, item.textStyle]}
+          disabled={disabled}
+          checked={selected}
+          onChange={(value: boolean) => this.onPress(null)}
+        />
+      </View>
+    );
+  };
+
+  public render(): React.ReactNode {
+    const { multiSelect } = this.props;
+
+    return multiSelect ? this.renderMultiSelectItem() : this.renderDefaultItem();
   }
 }
 

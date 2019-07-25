@@ -17,16 +17,17 @@ import {
   DropdownItemProps,
   DropdownItemType,
 } from './droppdownItem.component';
+import { SelectionStrategy } from './selection.strategy';
 
 type ItemElement = React.ReactElement<DropdownItemProps>;
 
 interface ComponentProps {
-  selectedIndex: number | null;
   multiSelect?: boolean;
+  strategy: SelectionStrategy;
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
 }
 
-type DropdownGroupProps = ComponentProps & DropdownItemProps & StyledComponentProps;
+type DropdownGroupProps = ComponentProps & Partial<DropdownItemProps> & StyledComponentProps;
 
 export class DropdownGroupComponent extends React.Component<DropdownGroupProps> {
 
@@ -59,17 +60,18 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
   };
 
   private renderSubItem = (option: DropdownItemType, index: number): ItemElement => {
-    const { item, renderItem, ...restProps } = this.props;
+    const { item, renderItem, strategy, ...restProps } = this.props;
     const returningOption: ListRenderItemInfo<DropdownItemType> = {
       item: option,
       index: index,
       separators: null,
     };
+    const selected: boolean = strategy.isSelected(option);
 
     return renderItem ? renderItem(returningOption) : (
       <DropdownItem
         {...restProps}
-        selected={restProps.selectedIndex === index}
+        selected={selected}
         item={option}
       />
     );

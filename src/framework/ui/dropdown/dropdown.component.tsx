@@ -38,22 +38,25 @@ import {
   MeasureResult,
   MeasuringElementProps,
 } from '../popover/measure.component';
+import {
+  SelectionStrategy,
+  MultiSelectStrategy,
+  SingleSelectStrategy,
+} from './selection.strategy';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type MenuElement = React.ReactElement<DropdownMenuProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
+export type SelectedOption = Array<DropdownItemType> | DropdownItemType;
 
 const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
   items: DropdownItemType[];
   multiSelect?: boolean;
-  selectedOption?: DropdownItemType;
-  size?: string;
-  status?: string;
-  appearance?: string;
+  selectedOption?: SelectedOption;
   textStyle?: TextStyle;
   placeholder?: string;
   placeholderStyle?: StyleProp<TextStyle>;
@@ -61,8 +64,11 @@ interface ComponentProps {
   labelStyle?: StyleProp<TextStyle>;
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
+  onSelect: (option: SelectedOption, event?: GestureResponderEvent) => void;
+  size?: string;
+  status?: string;
+  appearance?: string;
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
-  onSelect: (option: DropdownItemType, event?: GestureResponderEvent) => void;
 }
 
 export type DropdownProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
@@ -85,13 +91,20 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     menuWidth: 0,
   };
 
-  private onItemSelect = (option: DropdownItemType, event: GestureResponderEvent): void => {
-    const { onSelect, multiSelect } = this.props;
+  public componentWillMount(): void {
+    const { multiSelect, selectedOption } = this.props;
 
-    this.props.onSelect(option, event);
-    // if (!multiSelect) {
-    //   this.setVisibility();
-    // }
+    this.strategy = multiSelect ?
+      new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
+  }
+
+  private strategy: SelectionStrategy;
+
+  private onItemSelect = (option: DropdownItemType, event: GestureResponderEvent): void => {
+    const { onSelect } = this.props;
+
+    this.strategy.select(option);
+    onSelect(this.strategy.onSelect(this.setVisibility));
   };
 
   private setVisibility = (): void => {
@@ -201,8 +214,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderTextElement = (style: TextStyle): TextElement => {
-    const { selectedOption, items, placeholder } = this.props;
-    const value: string = selectedOption ? selectedOption.text : placeholder;
+    const value: string = this.strategy.getPlaceholder(this.props.placeholder);
 
     return (
       <Text style={[style, styles.text, this.props.textStyle]}>
@@ -212,12 +224,13 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderMenuElement = (style: StyleType): MenuElement => {
-    const { appearance, ...restProps } = this.props;
+    const { appearance, selectedOption, ...restProps } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
     return (
       <DropdownMenu
         {...restProps}
+        strategy={this.strategy}
         key={0}
         style={[styles.menu, style, additionalMenuStyle]}
         bounces={false}
@@ -297,11 +310,6 @@ const styles = StyleSheet.create({
   },
   menu: {
     flexGrow: 0,
-  },
-  invisibleMenu: {
-    position: 'absolute',
-    opacity: 0,
-    width: 0,
   },
 });
 

@@ -21,19 +21,15 @@ import {
   DropdownItemType,
 } from './droppdownItem.component';
 import { DropdownGroup } from './dropdownGroup.component';
+import { SelectionStrategy } from './selection.strategy';
 
 type DropdownItemElement = React.ReactElement<DropdownItemProps>;
 
-interface SelectedType {
-  selected: boolean;
-  index?: number;
-}
-
 export interface ComponentProps {
   items: DropdownItemType[];
-  selectedOption?: DropdownItemType;
   size?: string;
   multiSelect?: boolean;
+  strategy: SelectionStrategy;
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
   onSelect: (option: DropdownItemType, event?: GestureResponderEvent) => void;
 }
@@ -48,40 +44,21 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     return items && items.length !== 0;
   };
 
-  private isOptionSelected = (item: DropdownItemType): SelectedType => {
-    const { selectedOption } = this.props;
-
-    if (this.areThereSubItems(item)) {
-      let selectedIndex: number;
-      const selected: boolean = item.items.some((option: DropdownItemType, index: number) => {
-        if (this.areThereSubItems(option)) {
-          return this.isOptionSelected(option);
-        } else {
-          selectedIndex = index;
-          return option === selectedOption;
-        }
-      });
-      return { selected: selected, index: selectedIndex };
-    }
-    return { selected: selectedOption === item };
-  };
-
   private onSelect = (option: DropdownItemType, event?: GestureResponderEvent): void => {
     this.props.onSelect(option, event);
   };
 
   private renderDefaultItem = (info: ListRenderItemInfo<DropdownItemType>): DropdownItemElement => {
-    const { size, renderItem, multiSelect } = this.props;
-    const selected: SelectedType = this.isOptionSelected(info.item);
-    const groupSelectedIndex: number | null = selected.selected ? selected.index : null;
+    const { size, renderItem, multiSelect, strategy } = this.props;
+    const selected: boolean = strategy.isSelected(info.item);
 
     return this.areThereSubItems(info.item) ? (
       <DropdownGroup
         {...info}
         {...info.item}
+        strategy={strategy}
         size={size}
         multiSelect={multiSelect}
-        selectedIndex={groupSelectedIndex}
         renderItem={renderItem}
         onPress={this.onSelect}
       />
@@ -89,8 +66,8 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
       <DropdownItem
         {...info}
         {...info.item}
+        selected={selected}
         size={size}
-        selected={selected.selected}
         multiSelect={multiSelect}
         onPress={this.onSelect}
       />
