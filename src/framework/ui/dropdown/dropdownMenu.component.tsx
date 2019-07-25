@@ -55,7 +55,6 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     return this.areThereSubItems(info.item) ? (
       <DropdownGroup
         {...info}
-        {...info.item}
         strategy={strategy}
         size={size}
         multiSelect={multiSelect}
@@ -65,7 +64,6 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     ) : (
       <DropdownItem
         {...info}
-        {...info.item}
         selected={selected}
         size={size}
         multiSelect={multiSelect}

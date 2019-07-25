@@ -28,6 +28,8 @@ import { CheckBox } from '../checkbox/checkbox.component';
 import { TouchableTypeReturningProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
+type DefaultItemElement = React.ReactElement<TouchableOpacityProps>;
+type MultiSelectItemElement = React.ReactElement<ViewProps>;
 
 export interface DropdownItemType {
   text: string;
@@ -54,6 +56,10 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
 
     this.props.dispatch([]);
     onPress(item, event);
+  };
+
+  private onMultiSelectItemPress = (value: boolean): void => {
+    this.onPress(null);
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
@@ -120,7 +126,7 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
   };
 
   private renderDefaultItem = (): React.ReactElement<TouchableOpacityProps> => {
-    const { themedStyle, style, item, selected, ...restProps } = this.props;
+    const { themedStyle, style, selected, ...restProps } = this.props;
     const {
       container,
       text,
@@ -145,7 +151,7 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
   };
 
   private renderMultiSelectItem = (): React.ReactElement<ViewProps> => {
-    const { disabled, item, themedStyle, selected, style } = this.props;
+    const { disabled, item, themedStyle, selected, style, ...restProps } = this.props;
     const {
       container,
       text,
@@ -156,13 +162,15 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
     const selectedContainerStyle: StyleType = selected ? containerSelected : {};
 
     return (
-      <View style={[styles.container, container, selectedContainerStyle, style]}>
+      <View
+        {...restProps}
+        style={[styles.container, container, selectedContainerStyle, style]}>
         <CheckBox
           text={item.text}
           textStyle={[text, selectedTextStyle, item.textStyle]}
           disabled={disabled}
           checked={selected}
-          onChange={(value: boolean) => this.onPress(null)}
+          onChange={this.onMultiSelectItemPress}
         />
       </View>
     );

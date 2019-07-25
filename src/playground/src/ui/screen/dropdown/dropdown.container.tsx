@@ -24,7 +24,7 @@ export class DropdownContainer extends React.Component<any, State> {
 
   private items: DropdownItemType[] = [
     { text: 'Option 1' },
-    // { text: 'Option 2', disabled: true },
+    { text: 'Option 2', disabled: true },
     {
       text: 'Option 3',
       items: [
@@ -35,12 +35,12 @@ export class DropdownContainer extends React.Component<any, State> {
     },
     { text: 'Option 4' },
     { text: 'Option 5' },
-    // { text: 'Option 6' },
-    // { text: 'Option 8' },
-    // { text: 'Option 9' },
-    // { text: 'Option 10' },
-    // { text: 'Option 11' },
-    // { text: 'Option 12' },
+    { text: 'Option 6' },
+    { text: 'Option 8' },
+    { text: 'Option 9' },
+    { text: 'Option 10' },
+    { text: 'Option 11' },
+    { text: 'Option 12' },
   ];
 
   public state: State = {
@@ -53,7 +53,6 @@ export class DropdownContainer extends React.Component<any, State> {
   };
 
   private onMultiSelect = (selectedOptions: DropdownItemType[]): void => {
-
     this.setState({ selectedOptions });
   };
 
@@ -66,41 +65,6 @@ export class DropdownContainer extends React.Component<any, State> {
         source={{ uri }}
         style={style}
       />
-    );
-  };
-
-  private renderItem = (info: ListRenderItemInfo<DropdownItemType>): React.ReactElement<any> => {
-    const uri: string = 'https://akveo.github.io/eva-icons/fill/png/128/star.png';
-
-    return (
-      <React.Fragment>
-        <TouchableOpacity
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: 8,
-          }}
-          onPress={() => this.onSelect(info.item)}>
-          <Image source={{ uri }} style={{ width: 20, height: 20, tintColor: 'red' }}/>
-          <Text style={info.item.textStyle}>{info.item.text}</Text>
-        </TouchableOpacity>
-        {info.item.items && info.item.items.map((item: DropdownItemType, index: number) => {
-          return (
-            <TouchableOpacity
-              onPress={() => this.onSelect(item)}
-              key={index}
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: 8,
-              }}>
-              <Text style={{ marginLeft: 10 }}>{item.text}</Text>
-            </TouchableOpacity>
-          );
-        })}
-      </React.Fragment>
     );
   };
 
@@ -118,7 +82,6 @@ export class DropdownContainer extends React.Component<any, State> {
           items={this.items}
           selectedOption={this.state.selectedOption}
           icon={this.renderIcon}
-          // renderItem={this.renderItem}
           onSelect={this.onSelect}
         />
         <Dropdown
