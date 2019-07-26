@@ -2,7 +2,6 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ListRenderItemInfo,
-  View,
   ViewProps,
 } from 'react-native';
 import {
@@ -34,6 +33,7 @@ interface ComponentProps extends DrawerListProps {
 }
 
 export type DrawerProps = StyledComponentProps & ComponentProps;
+export type DrawerElement = React.ReactElement<DrawerProps>;
 
 /**
  * Styled Navigation Drawer component. The principle of rendering a Drawer is the same as a rendering a List.
@@ -285,4 +285,4 @@ class DrawerComponent extends React.Component<DrawerProps> {
   }
 }
 
-export const Drawer = styled(DrawerComponent);
+export const Drawer = styled<DrawerProps>(DrawerComponent);

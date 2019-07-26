@@ -31,11 +31,13 @@ export {
 export {
   Drawer,
   DrawerProps,
+  DrawerElement,
   DrawerHeaderElement,
 } from './drawer/drawer.component';
 export {
   DrawerItem,
   DrawerItemProps,
+  DrawerItemElement,
 } from './drawer/drawerItem.component';
 export {
   Input,
