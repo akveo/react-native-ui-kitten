@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { LayoutProps } from '@kitten/ui';
+import {
+  LayoutElement,
+  LayoutProps,
+} from '@kitten/ui';
 import { LayoutShowcase } from './layoutShowcase.component';
 import {
   layoutShowcase,
@@ -10,7 +13,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class LayoutContainer extends React.Component {
 
-  private renderItem = (props: LayoutProps): React.ReactElement<LayoutProps> => {
+  private renderItem = (props: LayoutProps): LayoutElement => {
     return (
       <LayoutShowcase
         {...props}

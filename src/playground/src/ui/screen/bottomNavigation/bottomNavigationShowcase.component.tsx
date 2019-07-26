@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   BottomNavigation,
+  BottomNavigationElement,
   BottomNavigationProps,
 } from '@kitten/ui';
 
@@ -18,7 +19,7 @@ export class BottomNavigationShowcase extends React.Component<BottomNavigationPr
     this.setState({ selectedIndex });
   };
 
-  public render(): React.ReactElement<BottomNavigationProps> {
+  public render(): BottomNavigationElement {
     return (
       <BottomNavigation
         {...this.props}

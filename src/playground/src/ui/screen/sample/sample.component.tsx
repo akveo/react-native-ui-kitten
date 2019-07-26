@@ -10,7 +10,7 @@ import {
   Icon,
   Input,
   Layout,
-  LayoutProps,
+  LayoutElement,
   Text,
   Toggle,
 } from '@kitten/ui';
@@ -52,7 +52,7 @@ class SampleComponent extends React.Component<SampleComponentProps, State> {
     );
   };
 
-  public render(): React.ReactElement<LayoutProps> {
+  public render(): LayoutElement {
     const { themedStyle, profileImage, isDark, setTheme } = this.props;
 
     return (

@@ -1,8 +1,11 @@
 import React from 'react';
 import { mapping } from '@eva-design/eva';
-import { ApplicationProvider } from '@kitten/theme';
-import { IconRegistry } from '@kitten/ui';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import {
+  ApplicationProvider,
+  ApplicationProviderElement,
+} from '@kitten/theme';
+import { IconRegistry } from '@kitten/ui';
 import {
   AntDesignIconsPack,
   FeatherIconsPack,
@@ -40,14 +43,17 @@ export default class App extends React.Component {
     this.setState({ theme });
   };
 
-  public render(): React.ReactNode {
+  public render(): ApplicationProviderElement {
     return (
       <ApplicationProvider
         mapping={mapping}
         theme={themes[this.state.theme]}>
         <IconRegistry icons={this.icons}/>
         <ThemeContext.Provider
-          value={{ name: this.state.theme, toggleTheme: this.toggleTheme }}>
+          value={{
+            name: this.state.theme,
+            toggleTheme: this.toggleTheme,
+          }}>
           <Router/>
         </ThemeContext.Provider>
       </ApplicationProvider>

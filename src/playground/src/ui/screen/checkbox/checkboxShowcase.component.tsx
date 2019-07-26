@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   CheckBox,
+  CheckBoxElement,
   CheckBoxProps,
 } from '@kitten/ui';
 
@@ -25,7 +26,7 @@ class CheckBoxShowcaseComponent extends React.Component<CheckBoxProps, CheckBoxS
     this.setState({ checked, indeterminate });
   };
 
-  public render(): React.ReactElement<CheckBoxProps> {
+  public render(): CheckBoxElement {
     return (
       <CheckBox
         {...this.props}
@@ -37,7 +38,7 @@ class CheckBoxShowcaseComponent extends React.Component<CheckBoxProps, CheckBoxS
   }
 }
 
-export const CheckBoxShowcase = (props?: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
+export const CheckBoxShowcase = (props?: CheckBoxProps): CheckBoxElement => {
   return (
     <CheckBoxShowcaseComponent {...props}/>
   );

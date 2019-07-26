@@ -17,15 +17,14 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { BottomNavigationTabProps } from './bottomNavigationTab.component';
+import { BottomNavigationTabElement } from './bottomNavigationTab.component';
 import {
   TabIndicator,
   TabIndicatorProps,
 } from '../support/components';
 
-type TabElement = React.ReactElement<BottomNavigationTabProps>;
 type IndicatorElement = React.ReactElement<TabIndicatorProps>;
-type ChildrenProp = TabElement | TabElement[];
+type ChildrenProp = BottomNavigationTabElement | BottomNavigationTabElement[];
 
 interface ComponentProps {
   children: ChildrenProp;
@@ -35,6 +34,7 @@ interface ComponentProps {
 }
 
 export type BottomNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
+export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
 
 /**
  * BottomNavigation component is designed to be a Bottom Tab Bar.
@@ -223,7 +223,7 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     );
   };
 
-  private renderTabElement = (element: TabElement, index: number): TabElement => {
+  private renderTabElement = (element: BottomNavigationTabElement, index: number): BottomNavigationTabElement => {
     return React.cloneElement(element, {
       key: index,
       style: [styles.item, element.props.style],
@@ -232,12 +232,12 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     });
   };
 
-  private renderTabElements = (source: ChildrenProp): TabElement[] => {
+  private renderTabElements = (source: ChildrenProp): BottomNavigationTabElement[] => {
     return React.Children.map(source, this.renderTabElement);
   };
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const tabElements: TabElement[] = this.renderTabElements(this.props.children);
+    const tabElements: BottomNavigationTabElement[] = this.renderTabElements(this.props.children);
 
     const hasIndicator: boolean = style.indicator.height > 0;
 

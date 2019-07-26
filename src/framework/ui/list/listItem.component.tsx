@@ -26,12 +26,11 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { TouchableIndexedProps } from '../support/typings';
 import { isValidString } from '../support/services';
 
-type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type AccessoryElement = React.ReactElement<any>;
 type IconProp = (style: StyleType, index: number) => IconElement;
@@ -65,6 +64,7 @@ interface CustomContentProps {
 type ComponentProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
 
 export type ListItemProps = StyledComponentProps & TouchableIndexedProps & ComponentProps;
+export type ListItemElement = React.ReactElement<ListItemProps>;
 
 /**
  * ListItem is a support component for List.

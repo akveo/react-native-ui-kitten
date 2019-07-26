@@ -9,6 +9,8 @@ export interface IconRegistryProps {
   defaultIcons?: string;
 }
 
+export type IconRegistryElement = React.ReactElement<IconRegistryProps>;
+
 /**
  * Icon Registry component. Registers one or more icon packs for later usage in `<Icon/>` component.
  * Renders nothing, but should be added as a child of an Application Root.

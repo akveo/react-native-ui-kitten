@@ -12,6 +12,7 @@ interface ComponentProps {
 }
 
 export type CheckMarkProps = ViewProps & ComponentProps;
+export type CheckMarkElement = React.ReactElement<CheckMarkProps>;
 
 export class CheckMark extends React.Component<CheckMarkProps> {
 

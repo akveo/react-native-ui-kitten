@@ -66,6 +66,20 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     return key;
   }
 
+  public update(identifier: string, children: React.ReactNode): void {
+    const panelChild: ModalPanelChild = this.state.components.get(identifier);
+    const childElement: React.ReactElement<ModalPresentingBased> = panelChild.element;
+
+    panelChild.element = React.cloneElement(childElement, {
+      children: children,
+    });
+
+    const components: Map<string, ModalPanelChild> = this.state.components;
+    components.delete(identifier);
+    components.set(identifier, panelChild);
+    this.setState({ components });
+  }
+
   private generateUniqueComponentKey = (): string => {
     return Math.random().toString(36).substring(2);
   };

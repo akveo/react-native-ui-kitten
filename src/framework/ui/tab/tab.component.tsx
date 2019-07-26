@@ -21,11 +21,10 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { isValidString } from '../support/services';
 
-type TitleElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: ImageStyle) => React.ReactElement<ImageProps>;
 type ContentElement = React.ReactElement<any>;
@@ -40,6 +39,7 @@ interface ComponentProps {
 }
 
 export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type TabElement = React.ReactElement<TabProps>;
 
 /**
  * Tab component is a part of TabBar or TabView component.
@@ -111,7 +111,7 @@ export class TabComponent extends React.Component<TabProps> {
     };
   };
 
-  private renderTitleElement = (style: TextStyle): TitleElement => {
+  private renderTitleElement = (style: TextStyle): TextElement => {
     const { title, titleStyle } = this.props;
 
     return (

@@ -21,6 +21,7 @@ interface ComponentProps {
 }
 
 export type IconProps<T = {}> = ComponentProps & T;
+export type IconElement<T> = React.ReactElement<T>;
 
 /**
  * Icon component with animation support. Allows to render any ReactElement registered for a specific name.

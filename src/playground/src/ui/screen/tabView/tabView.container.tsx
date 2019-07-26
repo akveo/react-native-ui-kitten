@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { TabViewProps } from '@kitten/ui';
+import {
+  TabViewElement,
+  TabViewProps,
+} from '@kitten/ui';
 import { TabViewShowcase } from './tabViewShowcase.component';
 import { tabViewShowcase } from './type';
 import { ShowcaseContainer } from '../common/showcase.container';
 
 export class TabViewContainer extends React.Component {
 
-  private renderItem = (props: TabViewProps): React.ReactElement<TabViewProps> => {
+  private renderItem = (props: TabViewProps): TabViewElement => {
     return (
       <TabViewShowcase
         {...props}

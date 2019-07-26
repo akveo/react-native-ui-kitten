@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   Avatar,
+  AvatarElement,
   AvatarProps,
 } from '@kitten/ui';
 
-export const AvatarShowcase = (props?: AvatarProps): React.ReactElement<AvatarProps> => {
+export const AvatarShowcase = (props?: AvatarProps): AvatarElement => {
   return (
     <Avatar
       {...props}

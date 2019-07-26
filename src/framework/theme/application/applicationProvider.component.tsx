@@ -23,6 +23,7 @@ interface ComponentProps {
 }
 
 export type ApplicationProviderProps = ComponentProps & ThemeProviderProps;
+export type ApplicationProviderElement = React.ReactElement<ApplicationProviderProps>;
 
 interface State {
   styles: ThemeStyleType;

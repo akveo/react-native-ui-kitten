@@ -9,6 +9,7 @@ import {
 import { StyleType } from '@kitten/theme';
 
 export type ArrowProps = ViewProps;
+export type ArrowElement = React.ReactElement<ArrowProps>;
 
 export class Arrow extends React.Component<ArrowProps> {
 

@@ -52,6 +52,7 @@ interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
 }
 
 export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
+export type PopoverElement = React.ReactElement<PopoverProps>;
 
 const WINDOW: ScaledSize = Dimensions.get('window');
 const WINDOW_BOUNDS: Frame = new Frame(0, 0, WINDOW.width, WINDOW.height);
@@ -148,6 +149,10 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   private popoverPlacement: PopoverPlacement;
 
   public componentDidUpdate(prevProps: PopoverProps) {
+    this.handleVisibility(prevProps);
+  }
+
+  private handleVisibility = (prevProps: PopoverProps): void => {
     if (prevProps.visible !== this.props.visible) {
       if (this.props.visible) {
         // Toggles re-measuring. This is needed for dynamic containers like ScrollView
@@ -155,8 +160,19 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       } else {
         this.popoverId = ModalService.hide(this.popoverId);
       }
+    } else if (prevProps.visible && this.props.visible) {
+      this.updatePopoverElement();
     }
-  }
+  };
+
+  private updatePopoverElement = (): void => {
+    const element: ContentElement = this.renderPopoverElement(this.props.content, this.popoverPlacement);
+
+    const popoverElement: ContentElement = React.cloneElement(element, {
+      style: [element.props.style, styles.popoverVisible],
+    });
+    this.popoverId && ModalService.update(this.popoverId, popoverElement);
+  };
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
