@@ -91,8 +91,6 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
       textFontWeight,
       textLineHeight,
       textMarginHorizontal,
-      selectedBackgroundColor,
-      selectedTextColor,
       ...containerStyles
     } = source;
 
@@ -105,42 +103,29 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
         lineHeight: textLineHeight,
         marginHorizontal: textMarginHorizontal,
       },
-      containerSelected: {
-        backgroundColor: selectedBackgroundColor,
-      },
-      textSelected: {
-        color: selectedTextColor,
-      },
     };
   };
 
-  private renderTextElement = (style: TextStyle, selectedStyle: TextStyle): TextElement => {
-    const { item, selected } = this.props;
-    const selectedTextStyle: TextStyle = selected ? selectedStyle : {};
+  private renderTextElement = (style: TextStyle): TextElement => {
+    const { item } = this.props;
 
     return (
-      <Text style={[style, styles.text, selectedTextStyle, item.textStyle]}>
+      <Text style={[style, styles.text, item.textStyle]}>
         {item.text}
       </Text>
     );
   };
 
-  private renderDefaultItem = (): React.ReactElement<TouchableOpacityProps> => {
-    const { themedStyle, style, selected, ...restProps } = this.props;
-    const {
-      container,
-      text,
-      containerSelected,
-      textSelected,
-    } = this.getComponentStyle(themedStyle);
-    const textElement: TextElement = this.renderTextElement(text, textSelected);
-    const selectedContainerStyle: StyleType = selected ? containerSelected : {};
+  private renderDefaultItem = (): DefaultItemElement => {
+    const { themedStyle, style, ...restProps } = this.props;
+    const { container, text } = this.getComponentStyle(themedStyle);
+    const textElement: TextElement = this.renderTextElement(text);
 
     return (
       <TouchableOpacity
         {...restProps}
         activeOpacity={1.0}
-        style={[styles.container, container, selectedContainerStyle, style]}
+        style={[styles.container, container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
@@ -150,24 +135,17 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
     );
   };
 
-  private renderMultiSelectItem = (): React.ReactElement<ViewProps> => {
+  private renderMultiSelectItem = (): MultiSelectItemElement => {
     const { disabled, item, themedStyle, selected, style, ...restProps } = this.props;
-    const {
-      container,
-      text,
-      containerSelected,
-      textSelected,
-    } = this.getComponentStyle(themedStyle);
-    const selectedTextStyle: TextStyle = selected ? textSelected : {};
-    const selectedContainerStyle: StyleType = selected ? containerSelected : {};
+    const { container, text } = this.getComponentStyle(themedStyle);
 
     return (
       <View
         {...restProps}
-        style={[styles.container, container, selectedContainerStyle, style]}>
+        style={[styles.container, container, style]}>
         <CheckBox
           text={item.text}
-          textStyle={[text, selectedTextStyle, item.textStyle]}
+          textStyle={[text, item.textStyle]}
           disabled={disabled}
           checked={selected}
           onChange={this.onMultiSelectItemPress}

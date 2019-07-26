@@ -3,9 +3,8 @@ import { DropdownItemType } from './droppdownItem.component';
 export interface SelectionStrategy {
   selectedOption: DropdownItemType | DropdownItemType[];
   isSelected: (item: DropdownItemType) => boolean;
-  select: (option: DropdownItemType) => void;
+  select: (option: DropdownItemType, callback?: () => void) => DropdownItemType | DropdownItemType[];
   getPlaceholder: (placeholder: string) => string;
-  onSelect: (callback?: () => void) => DropdownItemType | DropdownItemType[];
 }
 
 export class MultiSelectStrategy implements SelectionStrategy {
@@ -18,30 +17,36 @@ export class MultiSelectStrategy implements SelectionStrategy {
     }
   }
 
-  public select(option: DropdownItemType): void {
+  public select(option: DropdownItemType, callback?: () => void): DropdownItemType[] {
     const optionAlreadyExist: boolean = this.selectedOption
-      .some((item: DropdownItemType) => item === option);
+      .some((item: DropdownItemType) => {
+        return item === option;
+      });
     if (optionAlreadyExist) {
       this.removeOption(option);
     } else {
       this.selectedOption.push(option);
     }
+    return this.selectedOption;
   }
 
   public getPlaceholder(placeholder: string): string {
     if (this.isSelectedOptionExist()) {
-      return this.selectedOption.map((item: DropdownItemType) => item.text).join(', ');
+      return this.selectedOption
+        .map((item: DropdownItemType) => {
+          return item.text;
+        })
+        .join(', ');
     } else {
       return placeholder;
     }
   }
 
-  public onSelect(): DropdownItemType[] {
-    return this.selectedOption;
-  }
-
   public isSelected(item: DropdownItemType): boolean {
-    return this.selectedOption.some((option: DropdownItemType) => option === item);
+    return this.selectedOption
+      .some((option: DropdownItemType) => {
+        return option === item;
+      });
   }
 
   private isSelectedOptionExist(): boolean {
@@ -50,7 +55,9 @@ export class MultiSelectStrategy implements SelectionStrategy {
 
   private removeOption(option: DropdownItemType): void {
     const index: number = this.selectedOption
-      .findIndex((item: DropdownItemType) => item === option);
+      .findIndex((item: DropdownItemType) => {
+        return item === option;
+      });
     if (index !== -1) {
       this.selectedOption.splice(index, 1);
     }
@@ -67,8 +74,10 @@ export class SingleSelectStrategy implements SelectionStrategy {
     }
   }
 
-  public select(option: DropdownItemType): void {
+  public select(option: DropdownItemType, callback?: () => void): DropdownItemType {
     this.selectedOption = option;
+    callback();
+    return this.selectedOption;
   }
 
   public getPlaceholder(placeholder: string): string {
@@ -77,11 +86,6 @@ export class SingleSelectStrategy implements SelectionStrategy {
     } else {
       return placeholder;
     }
-  }
-
-  public onSelect(callBack: () => void): DropdownItemType {
-    callBack();
-    return this.selectedOption;
   }
 
   public isSelected(item: DropdownItemType): boolean {

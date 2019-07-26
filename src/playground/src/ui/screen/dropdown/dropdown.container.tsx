@@ -79,7 +79,7 @@ export class DropdownContainer extends React.Component<any, State> {
           status='info'
           // disabled={true}
           // size='tiny'
-          items={this.items}
+          data={this.items}
           selectedOption={this.state.selectedOption}
           icon={this.renderIcon}
           onSelect={this.onSelect}
@@ -88,7 +88,7 @@ export class DropdownContainer extends React.Component<any, State> {
           style={styles.dropdown}
           label='Options'
           placeholder='Select Option'
-          items={this.items}
+          data={this.items}
           selectedOption={this.state.selectedOptions}
           icon={this.renderIcon}
           multiSelect

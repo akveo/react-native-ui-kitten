@@ -26,7 +26,7 @@ import { SelectionStrategy } from './selection.strategy';
 type DropdownItemElement = React.ReactElement<DropdownItemProps>;
 
 export interface ComponentProps {
-  items: DropdownItemType[];
+  data: DropdownItemType[];
   size?: string;
   multiSelect?: boolean;
   strategy: SelectionStrategy;
@@ -79,13 +79,12 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { items, style, ...restProps } = this.props;
+    const { style, ...restProps } = this.props;
 
     return (
       <List
         {...restProps}
         style={[styles.container, style]}
-        data={items}
         renderItem={this.renderItem}
       />
     );

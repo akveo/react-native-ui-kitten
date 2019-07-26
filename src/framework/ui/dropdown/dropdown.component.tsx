@@ -43,18 +43,20 @@ import {
   MultiSelectStrategy,
   SingleSelectStrategy,
 } from './selection.strategy';
+import { isValidString } from '../support/services';
 
 type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type MenuElement = React.ReactElement<DropdownMenuProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
+type DropdownChildren = [MenuElement, TextElement, ControlElement];
 export type SelectedOption = Array<DropdownItemType> | DropdownItemType;
 
 const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
-  items: DropdownItemType[];
+  data: DropdownItemType[];
   multiSelect?: boolean;
   selectedOption?: SelectedOption;
   textStyle?: TextStyle;
@@ -91,20 +93,19 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     menuWidth: 0,
   };
 
-  public componentWillMount(): void {
-    const { multiSelect, selectedOption } = this.props;
+  private strategy: SelectionStrategy;
 
+  constructor(props: DropdownProps) {
+    super(props);
+    const { multiSelect, selectedOption } = props;
     this.strategy = multiSelect ?
       new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
   }
 
-  private strategy: SelectionStrategy;
-
   private onItemSelect = (option: DropdownItemType, event: GestureResponderEvent): void => {
     const { onSelect } = this.props;
 
-    this.strategy.select(option);
-    onSelect(this.strategy.onSelect(this.setVisibility));
+    onSelect(this.strategy.select(option, this.setVisibility));
   };
 
   private setVisibility = (): void => {
@@ -196,14 +197,14 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     };
   };
 
-  private renderLabelElement = (style: TextStyle): TextElement | null => {
+  private renderLabelElement = (style: TextStyle): TextElement => {
     const { label, labelStyle } = this.props;
 
-    return label ? (
+    return (
       <Text style={[style, styles.label, labelStyle]}>
         {label}
       </Text>
-    ) : null;
+    );
   };
 
   private renderIconElement = (style: ImageStyle): IconElement => {
@@ -239,12 +240,17 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     );
   };
 
+  private renderControlChildren = (style: StyleType): [IconElement, TextElement] => {
+    return [
+      this.renderIconElement(style.icon),
+      this.renderTextElement(style.text),
+    ];
+  };
+
   private renderControlElement = (): ControlElement => {
     const { themedStyle, controlStyle, ...restProps } = this.props;
-    const { control, icon, text } = this.getComponentStyle(themedStyle);
-
-    const iconElement: IconElement = this.renderIconElement(icon);
-    const textElement: TextElement = this.renderTextElement(text);
+    const { control, ...childrenStyles } = this.getComponentStyle(themedStyle);
+    const [iconElement, textElement] = this.renderControlChildren(childrenStyles);
 
     const measuringProps: MeasuringElementProps = { tag: MEASURED_CONTROL_TAG };
 
@@ -268,16 +274,22 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     );
   };
 
+  private renderComponentChildren = (style: StyleType): DropdownChildren => {
+    const { label } = this.props;
+
+    return [
+      this.renderMenuElement(style.menu),
+      isValidString(label) && this.renderLabelElement(style.label),
+      this.renderControlElement(),
+    ];
+  };
+
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { themedStyle, style } = this.props;
     const { visible, menuWidth } = this.state;
-    const { menu, label } = this.getComponentStyle(themedStyle);
-
-    const menuElement: MenuElement = this.renderMenuElement(menu);
-    const labelElement: TextElement | null = this.renderLabelElement(label);
+    const evaStyles: StyleType = this.getComponentStyle(themedStyle);
+    const [menuElement, labelElement, controlElement] = this.renderComponentChildren(evaStyles);
     const additionalMenuStyle: StyleType = { maxWidth: menuWidth };
-
-    const controlElement: ControlElement = this.renderControlElement();
 
     return (
       <View style={style}>
