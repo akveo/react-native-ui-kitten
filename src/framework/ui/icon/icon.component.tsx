@@ -157,7 +157,6 @@ export type IconProps<T = {}> = ComponentProps & T;
 
 export class Icon<T> extends React.Component<IconProps<T>> {
 
-
   static defaultProps: Partial<IconProps> = {
     animation: 'zoom',
   };
