@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { TopNavigationProps } from '@kitten/ui';
+import {
+  TopNavigationElement,
+  TopNavigationProps,
+} from '@kitten/ui';
 import {
   topNavigationSettings,
   topNavigationShowcase,
@@ -10,7 +13,7 @@ import { TopNavigationShowcase } from './topNavigationShowcase.component';
 
 export class TopNavigationContainer extends React.Component {
 
-  private renderItem = (props: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
+  private renderItem = (props: TopNavigationProps): TopNavigationElement => {
     return (
       <TopNavigationShowcase
         {...props}

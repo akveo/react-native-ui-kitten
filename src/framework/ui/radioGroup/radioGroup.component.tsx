@@ -15,9 +15,8 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { RadioProps } from '../radio/radio.component';
+import { RadioElement } from '../radio/radio.component';
 
-type RadioElement = React.ReactElement<RadioProps>;
 type ChildrenProp = RadioElement | RadioElement[];
 
 interface ComponentProps {
@@ -27,6 +26,7 @@ interface ComponentProps {
 }
 
 export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
+export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
 
 /**
  * Renders a group of radio buttons.

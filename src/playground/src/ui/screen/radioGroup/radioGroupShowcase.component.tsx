@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Radio,
   RadioGroup,
+  RadioGroupElement,
   RadioGroupProps,
 } from '@kitten/ui';
 
@@ -19,7 +20,7 @@ export class RadioGroupShowcase extends React.Component<RadioGroupProps, State> 
     this.setState({ selectedIndex });
   };
 
-  public render(): React.ReactElement<RadioGroupProps> {
+  public render(): RadioGroupElement {
     return (
       <RadioGroup
         selectedIndex={this.state.selectedIndex}

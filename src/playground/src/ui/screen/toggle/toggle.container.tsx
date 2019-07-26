@@ -1,5 +1,8 @@
 import React from 'react';
-import { ToggleProps } from '@kitten/ui';
+import {
+  ToggleElement,
+  ToggleProps,
+} from '@kitten/ui';
 import { ToggleShowcase } from './toggleShowcase.component';
 import {
   toggleSettings,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class ToggleContainer extends React.Component {
 
-  private renderItem = (props: ToggleProps): React.ReactElement<ToggleProps> => {
+  private renderItem = (props: ToggleProps): ToggleElement => {
     return (
       <ToggleShowcase {...props} />
     );

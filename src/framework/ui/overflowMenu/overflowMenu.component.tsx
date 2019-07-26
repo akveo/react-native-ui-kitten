@@ -19,6 +19,7 @@ import {
 } from '@kitten/theme';
 import {
   OverflowMenuItem,
+  OverflowMenuItemElement,
   OverflowMenuItemProps,
 } from './overflowMenuItem.component';
 import {
@@ -30,8 +31,6 @@ import {
   Omit,
 } from '../support/typings';
 
-type MenuItemElement = React.ReactElement<OverflowMenuItemProps>;
-
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
 
 interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
@@ -41,6 +40,7 @@ interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
 }
 
 export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
+export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
 
 /**
  * Renders vertical list of menu items in a modal.
@@ -147,7 +147,10 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     return index === this.props.items.length - 1;
   };
 
-  private renderItemElement = (item: OverflowMenuItemProps, index: number, style: StyleType): MenuItemElement => {
+  private renderItemElement = (item: OverflowMenuItemProps,
+                               index: number,
+                               style: StyleType): OverflowMenuItemElement => {
+
     return (
       <OverflowMenuItem
         key={index}
@@ -159,9 +162,9 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     );
   };
 
-  private renderContentElementChildren = (style: StyleType): MenuItemElement[] => {
+  private renderContentElementChildren = (style: StyleType): OverflowMenuItemElement[] => {
     return this.props.items.map((item: OverflowMenuItemProps, index: number) => {
-      const itemElement: MenuItemElement = this.renderItemElement(item, index, style.item);
+      const itemElement: OverflowMenuItemElement = this.renderItemElement(item, index, style.item);
 
       const isLastItem: boolean = this.isLastItem(index);
 
@@ -179,7 +182,7 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
   };
 
   private renderPopoverContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const menuItems: MenuItemElement[] = this.renderContentElementChildren(style);
+    const menuItems: OverflowMenuItemElement[] = this.renderContentElementChildren(style);
 
     return (
       <View style={this.props.style}>

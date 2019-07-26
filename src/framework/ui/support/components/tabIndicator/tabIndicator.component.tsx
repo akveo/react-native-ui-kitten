@@ -3,7 +3,6 @@ import {
   Animated,
   Easing,
   LayoutChangeEvent,
-  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -15,6 +14,7 @@ interface ComponentProps {
 }
 
 export type TabIndicatorProps = ViewProps & ComponentProps;
+export type TabIndicatorElement = React.ReactElement<TabIndicatorProps>;
 
 export class TabIndicator extends React.Component<TabIndicatorProps> {
 

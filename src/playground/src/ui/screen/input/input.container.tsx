@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { InputProps } from '@kitten/ui';
+import {
+  InputElement,
+  InputProps,
+} from '@kitten/ui';
 import { InputShowcase } from './inputShowcase.component';
 import {
   inputSettings,
@@ -10,7 +13,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class InputContainer extends React.Component {
 
-  private renderItem = (props: InputProps): React.ReactElement<InputProps> => {
+  private renderItem = (props: InputProps): InputElement => {
     return (
       <InputShowcase
         style={styles.component}

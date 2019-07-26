@@ -17,6 +17,8 @@ import { ModalPresentingBased } from '../../ui/support/typings';
  *
  * @method {(identifier: string) => string} hide - Hides component from a modal window and returns empty string.
  *
+ * @method {(identifier: string, children: React.ReactNode) => void} update - Updates component from a modal window.
+ *
  * @example Simple Usage example
  *
  * ```
@@ -87,6 +89,12 @@ class ModalServiceType {
     }
   }
 
+  public update(identifier: string, children: React.ReactNode): void {
+    if (this.panel) {
+      this.panel.update(identifier, children);
+    }
+  }
+
   public hide(identifier: string): string {
     if (this.panel) {
       return this.panel.hide(identifier);
@@ -104,6 +112,8 @@ export interface ModalPresenting {
        config: ModalPresentingConfig): string;
 
   hide(identifier: string): string;
+
+  update(identifier: string, children: React.ReactNode): void;
 }
 
 export const ModalService = new ModalServiceType();

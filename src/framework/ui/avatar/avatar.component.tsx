@@ -23,6 +23,7 @@ interface ComponentProps {
 }
 
 export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
+export type AvatarElement = React.ReactElement<AvatarProps>;
 
 /**
  * Styled Image component.

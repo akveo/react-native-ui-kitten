@@ -1,6 +1,9 @@
 import React from 'react';
 import { mapping } from '@eva-design/eva';
-import { ApplicationProvider } from '@kitten/theme';
+import {
+  ApplicationProvider,
+  ApplicationProviderElement,
+} from '@kitten/theme';
 import { Router } from './navigation';
 import {
   ThemeKey,
@@ -22,7 +25,7 @@ export default class App extends React.Component {
     this.setState({ theme });
   };
 
-  public render(): React.ReactNode {
+  public render(): ApplicationProviderElement {
     return (
       <ApplicationProvider
         mapping={mapping}

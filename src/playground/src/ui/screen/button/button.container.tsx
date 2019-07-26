@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { ButtonProps } from '@kitten/ui';
+import {
+  ButtonElement,
+  ButtonProps,
+} from '@kitten/ui';
 import { ButtonShowcase } from './buttonShowcase.component';
 import {
   buttonShowcase,
@@ -10,7 +13,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class ButtonContainer extends React.Component {
 
-  private renderItem = (props: ButtonProps): React.ReactElement<ButtonProps> => {
+  private renderItem = (props: ButtonProps): ButtonElement => {
     return (
       <ButtonShowcase
         {...props}
