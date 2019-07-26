@@ -24,6 +24,7 @@ import {
   LayoutContainer,
   SampleContainer,
   ModalContainer,
+  SpinnerContainer,
 } from '../ui/screen';
 
 export interface RouteType {
@@ -43,6 +44,7 @@ const AppNavigator = createStackNavigator({
   ['Popover']: PopoverContainer,
   ['Radio']: RadioContainer,
   ['Radio Group']: RadioGroupContainer,
+  ['Spinner']: SpinnerContainer,
   ['Tab View']: TabViewContainer,
   ['Tooltip']: TooltipContainer,
   ['Text']: TextContainer,

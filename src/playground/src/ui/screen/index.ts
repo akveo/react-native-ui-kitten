@@ -9,6 +9,7 @@ export { ListContainer } from './list/list.container';
 export { PopoverContainer } from './popover/popover.container';
 export { RadioContainer } from './radio/radio.container';
 export { RadioGroupContainer } from './radioGroup/radioGroup.container';
+export { SpinnerContainer } from './spinner/spinner.container';
 export { TabViewContainer } from './tabView/tabView.container';
 export { TooltipContainer } from './tooltip/tooltip.container';
 export { TextContainer } from './text/text.container';

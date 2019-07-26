@@ -26,6 +26,7 @@ export const routes: RouteType[] = [
   { name: 'Popover' },
   { name: 'Radio' },
   { name: 'Radio Group' },
+  { name: 'Spinner' },
   { name: 'Tab View' },
   { name: 'Tooltip' },
   { name: 'Text' },

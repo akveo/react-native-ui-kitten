@@ -64,6 +64,10 @@ export {
   RadioGroupProps,
 } from './radioGroup/radioGroup.component';
 export {
+  Spinner,
+  SpinnerProps,
+} from './spinner/spinner.component';
+export {
   TabView,
   TabViewProps,
 } from './tab/tabView.component';
