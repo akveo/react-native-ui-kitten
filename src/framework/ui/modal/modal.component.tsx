@@ -106,14 +106,18 @@ export class Modal extends React.Component<ModalProps> {
   private contentSize: Size = initialContentSize;
   private id: string = '';
 
-  public componentWillReceiveProps(nextProps: ModalProps): void {
-    this.handleVisibility(nextProps);
+  public componentDidUpdate(prevProps: ModalProps): void {
+    if (prevProps.visible !== this.props.visible) {
+      this.handleVisibility(this.props);
+    } else if (prevProps.visible && this.props.visible) {
+      ModalService.update(this.id, this.props.children);
+    }
   }
 
-  private handleVisibility = (nextProps: ModalProps): void => {
+  private handleVisibility = (props: ModalProps): void => {
     const { allowBackdrop, onBackdropPress } = this.props;
 
-    if (nextProps.visible) {
+    if (props.visible) {
       const element: React.ReactElement = this.renderModal();
       this.id = ModalService.show(element, { allowBackdrop, onBackdropPress });
     } else {
