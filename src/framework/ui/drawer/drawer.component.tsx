@@ -272,7 +272,7 @@ class DrawerComponent extends React.Component<DrawerProps> {
     const headerElement: DrawerHeaderElement = header && this.renderHeaderElement(componentStyle.header);
 
     return (
-      <View>
+      <React.Fragment>
         {headerElement}
         <List
           showsVerticalScrollIndicator={false}
@@ -280,7 +280,7 @@ class DrawerComponent extends React.Component<DrawerProps> {
           renderItem={this.renderItemElement}
           {...restProps}
         />
-      </View>
+      </React.Fragment>
     );
   }
 }
