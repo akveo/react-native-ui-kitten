@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Radio,
+  RadioElement,
   RadioProps,
 } from '@kitten/ui';
 
@@ -22,7 +23,7 @@ class RadioShowcaseComponent extends React.Component<RadioProps, RadioShowcaseCo
     this.setState({ checked });
   };
 
-  public render(): React.ReactElement<RadioProps> {
+  public render(): RadioElement {
     return (
       <Radio
         {...this.props}
@@ -33,7 +34,7 @@ class RadioShowcaseComponent extends React.Component<RadioProps, RadioShowcaseCo
   }
 }
 
-export const RadioShowcase = (props?: RadioProps): React.ReactElement<RadioProps> => {
+export const RadioShowcase = (props?: RadioProps): RadioElement => {
   return (
     <RadioShowcaseComponent {...props}/>
   );

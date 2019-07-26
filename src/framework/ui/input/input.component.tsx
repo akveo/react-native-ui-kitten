@@ -27,7 +27,7 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import {
   allWithRest,
@@ -38,7 +38,6 @@ import {
   InputFocusEvent,
 } from '../support/typings';
 
-type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
 
@@ -57,6 +56,7 @@ interface ComponentProps {
 }
 
 export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
+export type InputElement = React.ReactElement<InputProps>;
 
 /**
  * Styled Input component.

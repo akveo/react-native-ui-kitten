@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Button,
   Tooltip,
+  TooltipElement,
   TooltipProps,
 } from '@kitten/ui';
 
@@ -21,13 +22,13 @@ export class TooltipShowcase extends React.Component<TooltipProps, State> {
     this.setState({ tooltipVisible });
   };
 
-  public render(): React.ReactElement<TooltipProps> {
+  public render(): TooltipElement {
     return (
       <Tooltip
         {...this.props}
         visible={this.state.tooltipVisible}
         text='Hi! I am Tooltip!'
-        onRequestClose={this.toggleTooltip}>
+        onBackdropPress={this.toggleTooltip}>
         <Button onPress={this.toggleTooltip}>SHOW TOOLTIP</Button>
       </Tooltip>
     );

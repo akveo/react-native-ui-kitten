@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   TabView,
+  TabViewElement,
   TabViewProps,
 } from '@kitten/ui';
 
@@ -18,7 +19,7 @@ export class TabViewShowcase extends React.Component<TabViewProps, State> {
     this.setState({ selectedIndex });
   };
 
-  public render(): React.ReactElement<TabViewProps> {
+  public render(): TabViewElement {
     return (
       <TabView
         {...this.props}

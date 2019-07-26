@@ -1,5 +1,8 @@
 import React from 'react';
-import { ButtonGroupProps } from '@kitten/ui';
+import {
+  ButtonGroupElement,
+  ButtonGroupProps,
+} from '@kitten/ui';
 import { ButtonGroupShowcase } from './buttonGroupShowcase.component';
 import {
   buttonGroupSettings,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class ButtonGroupContainer extends React.Component {
 
-  private renderItem = (props: ButtonGroupProps): React.ReactElement<ButtonGroupProps> => {
+  private renderItem = (props: ButtonGroupProps): ButtonGroupElement => {
     return (
       <ButtonGroupShowcase {...props}/>
     );

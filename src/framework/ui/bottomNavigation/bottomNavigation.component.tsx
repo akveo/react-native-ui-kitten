@@ -17,15 +17,14 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { BottomNavigationTabProps } from './bottomNavigationTab.component';
+import { BottomNavigationTabElement } from './bottomNavigationTab.component';
 import {
   TabIndicator,
   TabIndicatorProps,
 } from '../support/components';
 
-type TabElement = React.ReactElement<BottomNavigationTabProps>;
 type IndicatorElement = React.ReactElement<TabIndicatorProps>;
-type ChildrenProp = TabElement | TabElement[];
+type ChildrenProp = BottomNavigationTabElement | BottomNavigationTabElement[];
 
 interface ComponentProps {
   children: ChildrenProp;
@@ -35,6 +34,7 @@ interface ComponentProps {
 }
 
 export type BottomNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
+export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
 
 /**
  * BottomNavigation component is designed to be a Bottom Tab Bar.
@@ -43,6 +43,9 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  * @extends React.Component
  *
  * @property {number} selectedIndex - Determines index of the selected tab.
+ *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default` | `noIndicator`.
  *
  * @property {React.ReactElement<TabProps> | React.ReactElement<TabProps>[]} children -
  * Determines tabs of the Bottom Navigation.
@@ -55,7 +58,7 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
@@ -79,6 +82,36 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  *          <BottomNavigationTab title='Tab 1/>
  *          <BottomNavigationTab title='Tab 2/>
  *          <BottomNavigationTab title='Tab 3/>
+ *       </BottomNavigation>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Without indicator
+ *
+ * ```
+ * import React from 'react';
+ * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
+ *
+ * export class BottomNavigationShowcase extends React.Component {
+ *
+ *   public state = {
+ *     selectedIndex: 0,
+ *   };
+ *
+ *   private onTabSelect = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <BottomNavigation
+ *          appearance='noIndicator'
+ *          selectedIndex={this.state.selectedIndex}
+ *          onSelect={this.onTabSelect}
+ *          <BottomNavigationTab title='Tab 1/>
+ *          <BottomNavigationTab title='Tab 2/>
  *       </BottomNavigation>
  *     );
  *   }
@@ -190,7 +223,7 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     );
   };
 
-  private renderTabElement = (element: TabElement, index: number): TabElement => {
+  private renderTabElement = (element: BottomNavigationTabElement, index: number): BottomNavigationTabElement => {
     return React.cloneElement(element, {
       key: index,
       style: [styles.item, element.props.style],
@@ -199,12 +232,12 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     });
   };
 
-  private renderTabElements = (source: ChildrenProp): TabElement[] => {
+  private renderTabElements = (source: ChildrenProp): BottomNavigationTabElement[] => {
     return React.Children.map(source, this.renderTabElement);
   };
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const tabElements: TabElement[] = this.renderTabElements(this.props.children);
+    const tabElements: BottomNavigationTabElement[] = this.renderTabElements(this.props.children);
 
     const hasIndicator: boolean = style.indicator.height > 0;
 

@@ -1,6 +1,6 @@
 {
   "name": "react-native-ui-kitten",
-  "version": "4.0.5",
+  "version": "4.1.0",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
@@ -67,7 +67,7 @@
     "conventional-changelog-cli": "^2.0.21",
     "coveralls": "^3.0.2",
     "del": "^4.1.1",
-    "doc-prsr": "^2.2.2",
+    "doc-prsr": "^2.2.3",
     "gulp": "^3.9.1",
     "gulp-replace": "^1.0.0",
     "gulp-typedoc": "^2.2.1",

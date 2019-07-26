@@ -6,6 +6,8 @@
 
 import React from 'react';
 import {
+  Dimensions,
+  ScaledSize,
   StyleProp,
   StyleSheet,
   View,
@@ -13,7 +15,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  ModalComponentCloseProps,
   ModalService,
   styled,
   StyledComponentProps,
@@ -33,22 +34,28 @@ import {
 } from './measure.component';
 import {
   Frame,
-  OffsetRect,
   Offsets,
+  PlacementOptions,
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
+import { PopoverPlacementService } from './placement.service';
+import { ModalPresentingBased } from '../support/typings';
 
 type ContentElement = React.ReactElement<any>;
 type ChildElement = React.ReactElement<any>;
 
-interface ComponentProps extends PopoverViewProps, ModalComponentCloseProps {
+interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
   content: ContentElement;
   children: ChildElement;
   visible?: boolean;
 }
 
 export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
+export type PopoverElement = React.ReactElement<PopoverProps>;
+
+const WINDOW: ScaledSize = Dimensions.get('window');
+const WINDOW_BOUNDS: Frame = new Frame(0, 0, WINDOW.width, WINDOW.height);
 
 const TAG_CHILD: number = 0;
 const TAG_CONTENT: number = 1;
@@ -75,7 +82,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @property ViewProps
  *
- * @property ModalComponentCloseProps
+ * @property ModalPresentingBased
  *
  * @property StyledComponentProps
  *
@@ -115,7 +122,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *       <Popover
  *         visible={this.state.popoverVisible}
  *         content={this.renderPopoverContentElement()}
- *         onRequestClose={this.togglePopover}>
+ *         onBackdropPress={this.togglePopover}>
  *         <Button onPress={this.togglePopover}>
  *           TOGGLE POPOVER
  *         </Button>
@@ -133,27 +140,39 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   static defaultProps: Partial<PopoverProps> = {
     placement: PLACEMENT_DEFAULT.rawValue,
     visible: false,
+    allowBackdrop: true,
+    onBackdropPress: () => null,
   };
 
-  private popoverElement: MeasuredElement;
-  private popoverModalId: string = '';
+  private popoverId: string;
+  private placementService: PopoverPlacementService = new PopoverPlacementService();
+  private popoverPlacement: PopoverPlacement;
 
   public componentDidUpdate(prevProps: PopoverProps) {
-    const { visible } = this.props;
+    this.handleVisibility(prevProps);
+  }
 
-    if (prevProps.visible !== visible) {
-      if (visible) {
-        // Toggles re-measuring
+  private handleVisibility = (prevProps: PopoverProps): void => {
+    if (prevProps.visible !== this.props.visible) {
+      if (this.props.visible) {
+        // Toggles re-measuring. This is needed for dynamic containers like ScrollView
         this.setState({ layout: undefined });
       } else {
-        ModalService.hide(this.popoverModalId);
+        this.popoverId = ModalService.hide(this.popoverId);
       }
+    } else if (prevProps.visible && this.props.visible) {
+      this.updatePopoverElement();
     }
-  }
+  };
 
-  public componentWillUnmount() {
-    this.popoverModalId = '';
-  }
+  private updatePopoverElement = (): void => {
+    const element: ContentElement = this.renderPopoverElement(this.props.content, this.popoverPlacement);
+
+    const popoverElement: ContentElement = React.cloneElement(element, {
+      style: [element.props.style, styles.popoverVisible],
+    });
+    this.popoverId && ModalService.update(this.popoverId, popoverElement);
+  };
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
@@ -170,83 +189,82 @@ export class PopoverComponent extends React.Component<PopoverProps> {
         height: indicatorHeight,
         backgroundColor: indicatorBackgroundColor,
       },
-      child: {},
     };
   };
 
   private onMeasure = (layout: MeasureResult) => {
-    const { visible } = this.props;
+    if (this.props.visible) {
+      const placementOptions: PlacementOptions = this.createPlacementOptions(layout);
+      const popoverPlacement = this.placementService.find(this.popoverPlacement, placementOptions);
 
-    if (visible) {
-      this.popoverModalId = this.showPopoverModal(this.popoverElement, layout);
+      this.popoverId = this.showPopoverModal(popoverPlacement, placementOptions);
     }
   };
 
-  private showPopoverModal = (element: MeasuredElement, layout: MeasureResult): string => {
-    const { placement, onRequestClose } = this.props;
+  private createPlacement = (value: string | PopoverPlacement): PopoverPlacement => {
+    return PopoverPlacements.parse(value, PLACEMENT_DEFAULT);
+  };
 
-    const popoverFrame: Frame = this.getPopoverFrame(layout, placement);
+  private createPlacementOptions = (layout: MeasureResult): PlacementOptions => {
+    const { children } = this.props;
 
-    const { origin: popoverPosition } = popoverFrame;
+    return {
+      source: layout[TAG_CONTENT],
+      other: layout[TAG_CHILD],
+      bounds: WINDOW_BOUNDS,
+      offsets: Offsets.find(children.props.style),
+    };
+  };
 
-    const additionalStyle: ViewStyle = {
-      left: popoverPosition.x,
-      top: popoverPosition.y,
-      opacity: 1,
+  private showPopoverModal = (placement: PopoverPlacement, options: PlacementOptions): string => {
+    const popoverFrame: Frame = placement.frame(options);
+    const popoverElement: MeasuredElement = this.renderPopoverElement(this.props.content, placement);
+
+    const positionStyle: ViewStyle = {
+      left: popoverFrame.origin.x,
+      top: popoverFrame.origin.y,
     };
 
-    const popover: React.ReactElement<ModalComponentCloseProps> = React.cloneElement(element, {
-      style: additionalStyle,
-      onRequestClose: onRequestClose,
+    const positionedPopoverElement: React.ReactElement<ModalPresentingBased> = React.cloneElement(popoverElement, {
+      style: [styles.popoverVisible, positionStyle],
     });
 
-    return ModalService.show(popover, true);
+    return ModalService.show(positionedPopoverElement, {
+      allowBackdrop: this.props.allowBackdrop,
+      onBackdropPress: this.props.onBackdropPress,
+    });
   };
 
-  private getPopoverFrame = (layout: MeasureResult, rawPlacement: string | PopoverPlacement): Frame => {
-    const { children } = this.props;
-    const { [TAG_CONTENT]: popoverFrame, [TAG_CHILD]: childFrame } = layout;
+  private renderPopoverElement = (children: ContentElement, placement: PopoverPlacement): ContentElement => {
+    const { style: derivedStyle, themedStyle, indicatorStyle, ...derivedProps } = this.props;
+    const { container, indicator } = this.getComponentStyle(themedStyle);
 
-    const offsetRect: OffsetRect = Offsets.find(children.props.style);
-    const placement: PopoverPlacement = PopoverPlacements.parse(rawPlacement, PLACEMENT_DEFAULT);
-
-    return placement.frame(popoverFrame, childFrame, offsetRect);
-  };
-
-  private renderPopoverElement = (children: ContentElement, popoverStyle: Partial<StyleType>): MeasuringElement => {
-    const { style, placement, indicatorStyle, ...derivedProps } = this.props;
-
-    const measuringProps: MeasuringElementProps = {
-      tag: TAG_CONTENT,
-    };
-
-    const popoverPlacement: PopoverPlacement = PopoverPlacements.parse(placement, PLACEMENT_DEFAULT);
-    const indicatorPlacement: PopoverPlacement = popoverPlacement.reverse();
+    const measuringProps: MeasuringElementProps = { tag: TAG_CONTENT };
 
     return (
       <View
         {...measuringProps}
         key={TAG_CONTENT}
-        style={styles.container}>
+        style={[styles.popover, styles.popoverInvisible]}>
         <PopoverView
           {...derivedProps}
-          style={[popoverStyle.container, style]}
-          indicatorStyle={[popoverStyle.indicator, styles.indicator, indicatorStyle]}
-          placement={indicatorPlacement.rawValue}>
+          style={[container, derivedStyle]}
+          indicatorStyle={[indicator, styles.indicator, indicatorStyle]}
+          placement={placement.reverse().rawValue}>
           {children}
         </PopoverView>
       </View>
     );
   };
 
-  private renderChildElement = (source: ChildElement, style: StyleProp<ViewStyle>): MeasuringElement => {
+  private renderChildElement = (source: ChildElement): MeasuringElement => {
     const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
     return (
       <View
         {...measuringProps}
         key={TAG_CHILD}
-        style={[style, styles.child]}>
+        style={styles.child}>
         {source}
       </View>
     );
@@ -261,25 +279,28 @@ export class PopoverComponent extends React.Component<PopoverProps> {
     );
   };
 
-  public render(): MeasuringNode | React.ReactNode {
-    const { themedStyle, content, visible, children } = this.props;
-    const { child, ...popoverStyles } = this.getComponentStyle(themedStyle);
+  public render(): React.ReactNode {
+    if (this.props.visible) {
+      this.popoverPlacement = this.createPlacement(this.props.placement);
+      const popoverElement: ContentElement = this.renderPopoverElement(this.props.content, this.popoverPlacement);
+      const childElement: ChildElement = this.renderChildElement(this.props.children);
 
-    if (visible) {
-      this.popoverElement = this.renderPopoverElement(content, popoverStyles);
-      const childElement: MeasuringElement = this.renderChildElement(children, child);
-
-      return this.renderMeasuringElement(childElement, this.popoverElement);
+      return this.renderMeasuringElement(childElement, popoverElement);
     }
 
-    return children;
+    return this.props.children;
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  popover: {
     position: 'absolute',
+  },
+  popoverInvisible: {
     opacity: 0,
+  },
+  popoverVisible: {
+    opacity: 1,
   },
   indicator: {},
   child: {},

@@ -11,6 +11,7 @@ export {
 export {
   ApplicationProvider,
   ApplicationProviderProps,
+  ApplicationProviderElement,
 } from './application/applicationProvider.component';
 export {
   ModalPanel,
@@ -20,10 +21,7 @@ export {
   ThemeProvider,
   ThemeProviderProps,
 } from './theme/themeProvider.component';
-export {
-  ModalService,
-  ModalComponentCloseProps,
-} from './modal/modal.service';
+export { ModalService } from './modal/modal.service';
 export {
   Interaction,
   State,

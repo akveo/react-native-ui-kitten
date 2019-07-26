@@ -1,14 +1,17 @@
 export {
   Avatar,
   AvatarProps,
+  AvatarElement,
 } from './avatar/avatar.component';
 export {
   BottomNavigation,
   BottomNavigationProps,
+  BottomNavigationElement,
 } from './bottomNavigation/bottomNavigation.component';
 export {
   BottomNavigationTab,
   BottomNavigationTabProps,
+  BottomNavigationTabElement,
 } from './bottomNavigation/bottomNavigationTab.component';
 export {
   Button,
@@ -18,6 +21,7 @@ export {
 export {
   ButtonGroup,
   ButtonGroupProps,
+  ButtonGroupElement,
 } from './buttonGroup/buttonGroup.component';
 export {
   Calendar,
@@ -31,14 +35,17 @@ export {
 export {
   CheckBox,
   CheckBoxProps,
+  CheckBoxElement,
 } from './checkbox/checkbox.component';
 export {
   Input,
   InputProps,
+  InputElement,
 } from './input/input.component';
 export {
   Layout,
   LayoutProps,
+  LayoutElement,
 } from './layout/layout.component';
 export {
   List,
@@ -48,44 +55,53 @@ export {
 export {
   ListItem,
   ListItemProps,
+  ListItemElement,
 } from './list/listItem.component';
 export {
   Modal,
   ModalProps,
-  ModalAnimationType,
+  ModalElement,
 } from './modal/modal.component';
 export {
   OverflowMenu,
   OverflowMenuProps,
+  OverflowMenuElement,
 } from './overflowMenu/overflowMenu.component';
 export {
   OverflowMenuItem,
   OverflowMenuItemProps,
   OverflowMenuItemType,
+  OverflowMenuItemElement,
 } from './overflowMenu/overflowMenuItem.component';
 export {
   Popover,
   PopoverProps,
+  PopoverElement,
 } from './popover/popover.component';
 export {
   Radio,
   RadioProps,
+  RadioElement,
 } from './radio/radio.component';
 export {
   RadioGroup,
   RadioGroupProps,
+  RadioGroupElement,
 } from './radioGroup/radioGroup.component';
 export {
   TabView,
   TabViewProps,
+  TabViewElement,
 } from './tab/tabView.component';
 export {
   TabBar,
   TabBarProps,
+  TabBarElement,
 } from './tab/tabBar.component';
 export {
   Tab,
   TabProps,
+  TabElement,
 } from './tab/tab.component';
 export {
   Text,
@@ -95,22 +111,27 @@ export {
 export {
   Toggle,
   ToggleProps,
+  ToggleElement,
 } from './toggle/toggle.component';
 export {
   Tooltip,
   TooltipProps,
+  TooltipElement,
 } from './tooltip/tooltip.component';
 export {
   TopNavigation,
   TopNavigationProps,
+  TopNavigationElement,
 } from './topNavigation/topNavigation.component';
 export {
   TopNavigationAction,
   TopNavigationActionProps,
+  TopNavigationActionElement,
 } from './topNavigation/topNavigationAction.component';
 export {
   ViewPager,
   ViewPagerProps,
+  ViewPagerElement,
 } from './viewPager/viewPager.component';
 export { DateService } from './calendar/service/date.service';
 export { NativeDateService } from './calendar/service/nativeDate.service';

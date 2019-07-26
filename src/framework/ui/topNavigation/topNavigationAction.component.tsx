@@ -30,6 +30,7 @@ interface ComponentProps {
 }
 
 export type TopNavigationActionProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
 
 /**
  * The `TopNavigationAction` component is a part of the TopNavigation component.

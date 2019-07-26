@@ -1,17 +1,17 @@
 import React from 'react';
-import { ModalProps } from '@kitten/ui';
-import { ModalShowcase } from './modalShowcase.component';
 import {
-  modalShowcase,
-  modalSettings,
-} from './type';
+  ModalElement,
+  ModalProps,
+} from '@kitten/ui';
+import { ModalShowcase } from './modalShowcase.component';
+import { modalShowcase } from './type';
 import { ShowcaseContainer } from '../common/showcase.container';
 
 export class ModalContainer extends React.Component {
 
-  private renderItem = (props: ModalProps): React.ReactElement<ModalProps> => {
+  private renderItem = (props: ModalProps): ModalElement => {
     return (
-      <ModalShowcase {...props} />
+      <ModalShowcase {...props}/>
     );
   };
 
@@ -19,7 +19,6 @@ export class ModalContainer extends React.Component {
     return (
       <ShowcaseContainer
         showcase={modalShowcase}
-        settings={modalSettings}
         renderItem={this.renderItem}>
       </ShowcaseContainer>
     );

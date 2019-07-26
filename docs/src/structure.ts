@@ -427,6 +427,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Modal',
+        icon: 'dialog.svg',
+        source: [
+          'Modal',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Overflow Menu',
         icon: 'menu.svg',
         source: [
@@ -438,14 +446,6 @@ export const structure = [
             name: 'OverflowMenu',
             images: ['overflow-menu.png'],
           },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Modal',
-        icon: 'dialog.svg',
-        source: [
-          'Modal',
         ],
       },
       {

@@ -10,30 +10,41 @@ import {
   ViewProps,
   StyleSheet,
   Dimensions,
-  Animated,
-  TouchableOpacity,
-  TouchableOpacityProps,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
+import {
+  ModalService,
+  StyleType,
+} from '@kitten/theme';
+import {
+  MeasureNode,
+  MeasureNodeProps,
+  MeasuringElementProps,
+  MeasureResult,
+} from '../popover/measure.component';
+import { Size } from '../popover/type';
+import { ModalPresentingBased } from '../support/typings';
 
-export type ModalAnimationType = 'slideInUp' | 'fade' | 'none';
+const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
+const TAG_CHILD: string = 'Modal';
+const initialContentSize: Size = { width: 0, height: 0 };
+export const baseModalTestId: string = '@modal/base';
 
 type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
 
+export interface BackdropStyle {
+  backgroundColor: string;
+  opacity: number;
+}
+
 interface ComponentProps {
   visible: boolean;
   children: ChildrenProp;
-  isBackDropAllowed?: boolean;
-  identifier?: string;
-  animationType?: ModalAnimationType;
-  animationDuration?: number;
-  onCloseModal?: (index: string) => void;
+  backdropStyle?: BackdropStyle;
 }
 
-const { width, height } = Dimensions.get('window');
-
-export type ModalProps = ViewProps & ComponentProps;
+export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
+export type ModalElement = React.ReactElement<ModalProps>;
 
 /**
  * Modal component is a wrapper than presents content above an enclosing view.
@@ -45,30 +56,16 @@ export type ModalProps = ViewProps & ComponentProps;
  * @property {React.ReactElement<any> | React.ReactElement<any>[]} children -
  * Determines component's children.
  *
- * @property {boolean} isBackDropAllowed - Determines whether user can close
- * modal by tapping on backdrop. This feature works in pair with the
- * `onCloseModal` property.
+ * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
  * Default is `false`.
  *
- * @property {() => void} onCloseModal - Allows passing a function that will
- * be called once the modal has been dismissed.
+ * @property {BackdropStyle} backdropStyle - Determines the style of backdrop.
  *
- * @property {ModalAnimationType} animationType - Controls how the modal showing animates.
- * Can be `slideInUp`, `fade` or `none`.
- * Default is 'none'.
- *
- * @property {number} animationDuration - Time of the animation duration.
+ * @property {() => void} onBackdropPress - Determines component's behavior when the user is
+ * tapping on back-drop.
  *
  * @property ViewProps
  *
- * @example Simple usage example
- *
- * ```
- * import { Modal } from 'react-native-ui-kitten';
- * <Modal visible={true}>
- *  <View><Text>Hello! I'm modal!</Text></View>
- * </Modal>
- * ```
  * @example Modal usage and API example
  *
  * ```
@@ -78,28 +75,20 @@ export type ModalProps = ViewProps & ComponentProps;
  *   visible: false,
  * };
  *
- * private setVisible = (): void => {
- *   this.setState({ visible: !this.state.visible });
- * };
- *
- * private onModalDismiss = (): void => {
- *   this.setState({ visible: false });
+ * private setVisible = (visible: boolean): void => {
+ *   this.setState({ visible });
  * };
  *
  * public render(): React.ReactNode {
  *   return (
  *     <View>
- *       <Button title='Show Modal' onPress={this.setVisible}/>
+ *       <Button title='Show Modal' onPress={() => this.setVisible(true)}/>
  *       <Modal
  *         visible={this.state.visible}
- *         animationType='fade'
- *         animationDuration={600}
- *         isBackDropAllowed={true}
- *         onCloseModal={this.onModalDismiss}
- *         onValueChange={this.onChange}>
+ *         allowBackdrop={false}>
  *         <View>
- *           <Text>Hi! This is modal component!</Test>
- *           <Button title='Close Modal' onPress={this.setVisible}/>
+ *           <Text>Hi! This is Modal Component!</Text>
+ *           <Button title='Close Modal' onPress={() => this.setVisible(false)}/>
  *         <View/>
  *       </Modal>
  *     </View>
@@ -111,154 +100,106 @@ export type ModalProps = ViewProps & ComponentProps;
 export class Modal extends React.Component<ModalProps> {
 
   static defaultProps: Partial<ModalProps> = {
-    visible: false,
-    isBackDropAllowed: false,
-    animationType: 'none',
-    animationDuration: 300,
+    allowBackdrop: false,
+    onBackdropPress: () => null,
   };
 
-  private animation: Animated.Value;
+  private contentSize: Size = initialContentSize;
+  private id: string = '';
 
-  constructor(props: ModalProps) {
-    super(props);
-
-    this.setAnimation();
-  }
-
-  public componentDidMount(): void {
-    this.startAnimation();
-  }
-
-  public componentWillReceiveProps(nextProps: Readonly<ModalProps>): void {
-    const { visible, animationType } = this.props;
-
-    const isVisibilityChanged: boolean = nextProps.visible !== visible;
-    const isAnimated: boolean = animationType !== 'none';
-
-    if (isVisibilityChanged && isAnimated) {
-      const initialValue: number = animationType === 'fade' ? 0 : height;
-      this.animation.setValue(initialValue);
-      this.startAnimation();
+  public componentDidUpdate(prevProps: ModalProps): void {
+    if (prevProps.visible !== this.props.visible) {
+      this.handleVisibility(this.props);
+    } else if (prevProps.visible && this.props.visible) {
+      ModalService.update(this.id, this.props.children);
     }
   }
 
-  private getAnimationStyle(type: ModalAnimationType): StyleType | undefined {
-    switch (type) {
-      case 'none':
-        return {};
-      case 'fade':
-        return { opacity: this.animation };
-      default:
-        return { transform: [{ translateY: this.animation }] };
-    }
-  }
+  private handleVisibility = (props: ModalProps): void => {
+    const { allowBackdrop, onBackdropPress } = this.props;
 
-  private setAnimation(): void {
-    if (this.props.animationType === 'slideInUp') {
-      this.animation = new Animated.Value(height);
+    if (props.visible) {
+      const element: React.ReactElement = this.renderModal();
+      this.id = ModalService.show(element, { allowBackdrop, onBackdropPress });
     } else {
-      this.animation = new Animated.Value(0);
-    }
-  }
-
-  private startAnimation(): void {
-    const { animationType, animationDuration } = this.props;
-    const animationValue: number = animationType === 'fade' ? 1 : 0;
-
-    Animated.timing(this.animation, {
-      toValue: animationValue,
-      duration: animationDuration,
-    }).start();
-  }
-
-  private closeModal: () => void = (): void => {
-    if (this.props.onCloseModal) {
-      this.props.onCloseModal(this.props.identifier);
+      ModalService.hide(this.id);
+      this.id = '';
     }
   };
 
-  private closeOnBackdrop: () => void = () => {
-    if (this.props.isBackDropAllowed) {
-      this.closeModal();
-    }
+  private getAbsoluteRelatedStyle = (): StyleType => {
+    const { width, height } = this.contentSize;
+
+    return {
+      top: (screenHeight - height) / 2,
+      left: (screenWidth - width) / 2,
+    };
   };
 
-  private onStartShouldSetResponder = (): boolean => true;
-
-  private onResponderRelease = (): void => {
-    return;
+  private onMeasure = (result: MeasureResult): void => {
+    this.contentSize = result[TAG_CHILD].size;
   };
 
-  private onStartShouldSetResponderCapture = (): boolean => false;
+  private renderBaseModal = (): React.ReactElement<ViewProps> => {
+    const { style, children, ...restProps } = this.props;
+    const absoluteRelatedStyle: StyleType = this.getAbsoluteRelatedStyle();
+    const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
-  private renderComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
-    return React.cloneElement(source, {
-      ...source.props,
-      onCloseModal: this.closeModal,
-      style: {
-        ...source.props.style,
-        ...StyleSheet.flatten(this.props.style),
-      },
-    });
-  };
-
-  private renderComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
-    return React.Children.map(source, this.renderComponentChild);
-  };
-
-  private renderWithBackDrop = (component: React.ReactElement<ViewProps>) => (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={this.closeOnBackdrop}
-      activeOpacity={1}>
-      {component}
-    </TouchableOpacity>
-  );
-
-  private renderWithoutBackDrop = (component: React.ReactElement<ViewProps>) => (
-    <View style={styles.notVisibleWrapper}>
+    return (
       <View
-        style={styles.container}
-        pointerEvents='none'/>
-      {component}
-    </View>
-  );
-
-  private renderComponent = (): React.ReactElement<TouchableOpacityProps | ViewProps> => {
-    const { animationType, children, isBackDropAllowed, ...derivedProps } = this.props;
-    const animationStyle: StyleType = this.getAnimationStyle(animationType);
-    const componentChildren: React.ReactElement<any>[] = this.renderComponentChildren(children);
-
-    const dialog: React.ReactElement<ViewProps> =
-      <Animated.View
-        {...derivedProps}
-        style={[animationStyle, styles.animatedWrapper]}
-        onStartShouldSetResponder={this.onStartShouldSetResponder}
-        onResponderRelease={this.onResponderRelease}
-        onStartShouldSetResponderCapture={this.onStartShouldSetResponderCapture}
-        pointerEvents='box-none'>
-        {componentChildren}
-      </Animated.View>;
-
-    return isBackDropAllowed ?
-      this.renderWithBackDrop(dialog) : this.renderWithoutBackDrop(dialog);
+        {...restProps}
+        {...measuringProps}
+        testID={baseModalTestId}
+        key={TAG_CHILD}
+        style={[styles.container, absoluteRelatedStyle, style]}>
+        {children}
+      </View>
+    );
   };
 
-  public render(): React.ReactElement<ViewProps | TouchableOpacityProps> | null {
-    return this.props.visible ? this.renderComponent() : null;
+  private renderModal = (): React.ReactElement => {
+    const { backdropStyle } = this.props;
+    const modal: React.ReactElement<ViewProps> = this.renderBaseModal();
+
+    return backdropStyle ? (
+      <React.Fragment>
+        <View
+          pointerEvents='box-none'
+          style={[styles.backdropBaseStyles, backdropStyle]}/>
+        {modal}
+      </React.Fragment>
+    ) : modal;
+  };
+
+  private renderMeasureNode = (): React.ReactElement<MeasureNodeProps> => {
+    const modal: React.ReactElement = this.renderBaseModal();
+    const measureStyledModal: React.ReactElement = React.cloneElement(modal, {
+      style: [modal.props.style, styles.hiddenModal],
+      key: TAG_CHILD,
+    });
+
+    return (
+      <MeasureNode onResult={this.onMeasure}>
+        {[measureStyledModal]}
+      </MeasureNode>
+    );
+  };
+
+  public render(): React.ReactNode {
+    return this.renderMeasureNode();
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  notVisibleWrapper: {
     position: 'absolute',
-    width: 0,
-    height: 0,
   },
-  animatedWrapper: {
-    alignSelf: 'flex-start',
+  hiddenModal: {
+    opacity: 0,
+  },
+  backdropBaseStyles: {
+    position: 'absolute',
+    width: screenWidth,
+    height: screenHeight,
   },
 });

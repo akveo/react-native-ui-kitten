@@ -16,28 +16,27 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  ModalComponentCloseProps,
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import {
   Popover,
   PopoverProps,
 } from '../popover/popover.component';
+import { ModalPresentingBased } from '../support/typings';
 
-type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
 type WrappingElement = React.ReactElement<any>;
 
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
 
-interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
+interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
   text: string;
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
@@ -45,6 +44,7 @@ interface ComponentProps extends PopoverContentProps, ModalComponentCloseProps {
 }
 
 export type TooltipProps = StyledComponentProps & ComponentProps;
+export type TooltipElement = React.ReactElement<TooltipProps>;
 
 /**
  * Displays informative text when users focus on or tap an element.
@@ -71,7 +71,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *
  * @property ViewProps
  *
- * @property ModalComponentCloseProps
+ * @property ModalPresentingBased
  *
  * @property StyledComponentProps
  *
@@ -99,7 +99,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
  *       <Tooltip
  *         visible={this.state.tooltipVisible}
  *         text='Tooltip Text'
- *         onRequestClose={this.toggleTooltip}>
+ *         onBackdropPress={this.toggleTooltip}>
  *         <Button onPress={this.toggleTooltip}>
  *           TOGGLE TOOLTIP
  *         </Button>
@@ -199,7 +199,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
     const { themedStyle, style, indicatorStyle, children, ...derivedProps } = this.props;
     const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
 
-    const contentElement: React.ReactElement<TextProps> = this.renderPopoverContentElement(componentStyle);
+    const contentElement: TextElement = this.renderPopoverContentElement(componentStyle);
 
     return (
       <Popover

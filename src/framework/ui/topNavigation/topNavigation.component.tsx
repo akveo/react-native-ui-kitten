@@ -17,16 +17,14 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { TopNavigationActionProps } from './topNavigationAction.component';
+import { TopNavigationActionElement } from './topNavigationAction.component';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { isValidString } from '../support/services';
 
-type TextElement = React.ReactElement<TextProps>;
-type ActionElement = React.ReactElement<TopNavigationActionProps>;
-type ActionElementProp = ActionElement | ActionElement[];
+type ActionElementProp = TopNavigationActionElement | TopNavigationActionElement[];
 type AlignmentProp = 'start' | 'center';
 
 interface ComponentProps {
@@ -35,11 +33,12 @@ interface ComponentProps {
   subtitle?: string;
   subtitleStyle?: StyleProp<TextStyle>;
   alignment?: AlignmentProp;
-  leftControl?: ActionElement;
+  leftControl?: TopNavigationActionElement;
   rightControls?: ActionElementProp;
 }
 
 export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
+export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
 
 /**
  * TopNavigation component is designed to be a Navigation Bar.
@@ -211,8 +210,8 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     );
   };
 
-  private renderActionElements(source: ActionElementProp): ActionElement[] {
-    return React.Children.map(source, (element: ActionElement, index: number): ActionElement => {
+  private renderActionElements(source: ActionElementProp): TopNavigationActionElement[] {
+    return React.Children.map(source, (element: TopNavigationActionElement, index: number) => {
       return React.cloneElement(element, {
         key: index,
       });
