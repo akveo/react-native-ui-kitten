@@ -1,5 +1,8 @@
 import React from 'react';
-import { RadioProps } from '@kitten/ui';
+import {
+  RadioElement,
+  RadioProps,
+} from '@kitten/ui';
 import { RadioShowcase } from './radioShowcase.component';
 import {
   radioSettings,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class RadioContainer extends React.Component {
 
-  private renderItem = (props: RadioProps): React.ReactElement<RadioProps> => {
+  private renderItem = (props: RadioProps): RadioElement => {
     return (
       <RadioShowcase {...props}/>
     );

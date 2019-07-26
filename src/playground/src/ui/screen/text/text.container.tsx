@@ -1,5 +1,8 @@
 import React from 'react';
-import { TextProps } from '@kitten/ui';
+import {
+  TextElement,
+  TextProps,
+} from '@kitten/ui';
 import { TextShowcase } from './textShowcase.component';
 import {
   textSettings,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class TextContainer extends React.Component {
 
-  private renderItem = (props: TextProps): React.ReactElement<TextProps> => {
+  private renderItem = (props: TextProps): TextElement => {
     return (
       <TextShowcase {...props}/>
     );

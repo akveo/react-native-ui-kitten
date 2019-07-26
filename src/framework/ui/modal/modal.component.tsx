@@ -44,6 +44,7 @@ interface ComponentProps {
 }
 
 export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
+export type ModalElement = React.ReactElement<ModalProps>;
 
 /**
  * Modal component is a wrapper than presents content above an enclosing view.

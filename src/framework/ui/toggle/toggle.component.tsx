@@ -35,6 +35,7 @@ interface ComponentProps {
 }
 
 export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
+export type ToggleElement = React.ReactElement<ToggleProps>;
 
 /**
  * Styled Toggle component.

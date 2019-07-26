@@ -1,5 +1,8 @@
 import React from 'react';
-import { OverflowMenuProps } from '@kitten/ui';
+import {
+  OverflowMenuElement,
+  OverflowMenuProps,
+} from '@kitten/ui';
 import { OverflowMenuShowcase } from './overflowMenuShowcase.component';
 import {
   overflowMenuShowcase,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class OverflowMenuContainer extends React.Component {
 
-  private renderItem = (props: OverflowMenuProps): React.ReactElement<OverflowMenuProps> => {
+  private renderItem = (props: OverflowMenuProps): OverflowMenuElement => {
     return (
       <OverflowMenuShowcase {...props} />
     );

@@ -52,6 +52,7 @@ interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
 }
 
 export type PopoverProps = StyledComponentProps & ViewProps & ComponentProps;
+export type PopoverElement = React.ReactElement<PopoverProps>;
 
 const WINDOW: ScaledSize = Dimensions.get('window');
 const WINDOW_BOUNDS: Frame = new Frame(0, 0, WINDOW.width, WINDOW.height);

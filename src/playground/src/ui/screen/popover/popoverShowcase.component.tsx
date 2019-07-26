@@ -3,6 +3,7 @@ import { ViewProps } from 'react-native';
 import {
   Button,
   Popover,
+  PopoverElement,
   PopoverProps,
   Text,
 } from '@kitten/ui';
@@ -31,7 +32,7 @@ export class PopoverShowcase extends React.Component<PopoverProps, State> {
     );
   };
 
-  public render(): React.ReactElement<PopoverProps> {
+  public render(): PopoverElement {
     return (
       <Popover
         {...this.props}

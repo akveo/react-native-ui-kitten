@@ -1,5 +1,8 @@
 import React from 'react';
-import { TooltipProps } from '@kitten/ui';
+import {
+  TooltipElement,
+  TooltipProps,
+} from '@kitten/ui';
 import { TooltipShowcase } from './tooltipShowcase.component';
 import {
   tooltipShowcase,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class TooltipContainer extends React.Component {
 
-  private renderItem = (props: TooltipProps): React.ReactElement<TooltipProps> => {
+  private renderItem = (props: TooltipProps): TooltipElement => {
     return (
       <TooltipShowcase {...props} />
     );

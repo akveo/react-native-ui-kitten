@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   Button,
+  ButtonElement,
   ButtonProps,
 } from '@kitten/ui';
 
-export const ButtonShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
+export const ButtonShowcase = (props?: ButtonProps): ButtonElement => {
   return (
     <Button
       {...props}>

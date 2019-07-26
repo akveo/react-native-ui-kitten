@@ -22,11 +22,10 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { TouchableIndexedProps } from '../support/typings';
 
-type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
 
@@ -42,6 +41,7 @@ export interface OverflowMenuItemType extends ListDerivedProps {
 }
 
 export type OverflowMenuItemProps = StyledComponentProps & TouchableIndexedProps & OverflowMenuItemType;
+export type OverflowMenuItemElement = React.ReactElement<OverflowMenuItemProps>;
 
 /**
  * OverflowMenuItem is a part of the OverflowMenu component.

@@ -22,6 +22,7 @@ interface ComponentProps {
 const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.TOP;
 
 export type PopoverViewProps = ViewProps & ComponentProps;
+export type PopoverViewElement = React.ReactElement<PopoverViewProps>;
 
 export class PopoverView extends React.Component<PopoverViewProps> {
 

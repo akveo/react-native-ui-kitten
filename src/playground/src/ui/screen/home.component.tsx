@@ -8,8 +8,9 @@ import {
 } from '@kitten/theme';
 import {
   List,
+  ListElement,
   ListItem,
-  ListItemProps,
+  ListItemElement,
 } from '@kitten/ui';
 import { RouteType } from '../../navigation';
 
@@ -49,7 +50,7 @@ class HomeScreen extends React.Component<Props> {
     this.props.navigation.navigate(route.name);
   };
 
-  private renderItem = (info: ListRenderItemInfo<RouteType>): React.ReactElement<ListItemProps> => {
+  private renderItem = (info: ListRenderItemInfo<RouteType>): ListItemElement => {
     return (
       <ListItem
         title={info.item.name}
@@ -58,7 +59,7 @@ class HomeScreen extends React.Component<Props> {
     );
   };
 
-  public render(): React.ReactNode {
+  public render(): ListElement {
     return (
       <List
         style={this.props.themedStyle.container}

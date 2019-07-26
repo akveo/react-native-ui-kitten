@@ -21,11 +21,10 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { isValidString } from '../support/services';
 
-type TitleElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: ImageStyle) => IconElement;
 
@@ -38,6 +37,7 @@ interface ComponentProps {
 }
 
 export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabProps>;
 
 /**
  * BottomNavigationTab component is a part of the BottomNavigation component.
@@ -113,7 +113,7 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
     });
   };
 
-  private renderTitleElement = (style: TextStyle): TitleElement => {
+  private renderTitleElement = (style: TextStyle): TextElement => {
     const { title, titleStyle } = this.props;
 
     return (
