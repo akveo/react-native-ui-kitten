@@ -44,6 +44,9 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  *
  * @property {number} selectedIndex - Determines index of the selected tab.
  *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default` | `noIndicator`.
+ *
  * @property {React.ReactElement<TabProps> | React.ReactElement<TabProps>[]} children -
  * Determines tabs of the Bottom Navigation.
  *
@@ -55,7 +58,7 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
@@ -79,6 +82,36 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
  *          <BottomNavigationTab title='Tab 1/>
  *          <BottomNavigationTab title='Tab 2/>
  *          <BottomNavigationTab title='Tab 3/>
+ *       </BottomNavigation>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Without indicator
+ *
+ * ```
+ * import React from 'react';
+ * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
+ *
+ * export class BottomNavigationShowcase extends React.Component {
+ *
+ *   public state = {
+ *     selectedIndex: 0,
+ *   };
+ *
+ *   private onTabSelect = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <BottomNavigation
+ *          appearance='noIndicator'
+ *          selectedIndex={this.state.selectedIndex}
+ *          onSelect={this.onTabSelect}
+ *          <BottomNavigationTab title='Tab 1/>
+ *          <BottomNavigationTab title='Tab 2/>
  *       </BottomNavigation>
  *     );
  *   }

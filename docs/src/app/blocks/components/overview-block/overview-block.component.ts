@@ -19,6 +19,10 @@ import {
           <ng-container>
             <div [innerHTML]="description"
                  [ngStyle]="hasImage && {'margin-bottom': '16px'}"></div>
+            <ngd-overview-example
+              *ngFor="let example of source.overviewExamples"
+              [example]="example">
+            </ngd-overview-example>
             <img
               *ngFor="let image of images"
               src={{image}}
@@ -44,7 +48,7 @@ export class NgdOverviewBlockComponent {
   }
 
   private prepareDescription(source): any {
-    this.description = source.description.replace('undefined', '');
+    this.description = source.description;
     this.images = source.images.map((image: string) => `assets/images/overview/${image}`);
     return source;
   }

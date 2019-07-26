@@ -58,7 +58,7 @@ export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
  * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
  * Default is `false`.
  *
- * @property {{backgroundColor: string, opacity: number }} backdropStyle - Determines the style of backdrop.
+ * @property {BackdropStyle} backdropStyle - Determines the style of backdrop.
  *
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
  * tapping on back-drop.
@@ -86,7 +86,7 @@ export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
  *         visible={this.state.visible}
  *         allowBackdrop={false}>
  *         <View>
- *           <Text>Hi! This is Modal Component!</Test>
+ *           <Text>Hi! This is Modal Component!</Text>
  *           <Button title='Close Modal' onPress={() => this.setVisible(false)}/>
  *         <View/>
  *       </Modal>
