@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   GestureResponderEvent,
   NativeScrollEvent,
@@ -27,6 +28,7 @@ export type ScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
 export type InputFocusEvent = NativeSyntheticEvent<TextInputFocusEventData>;
 
 export interface ModalPresentingBased {
+  children?: React.ReactNode;
   allowBackdrop?: boolean;
   onBackdropPress: () => void;
 }
