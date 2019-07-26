@@ -15,7 +15,8 @@ import {
   TouchableOpacityProps,
   StyleProp,
   View,
-  ViewStyle, ListRenderItemInfo,
+  ViewStyle,
+  ListRenderItemInfo,
 } from 'react-native';
 import {
   Interaction,
@@ -25,12 +26,12 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { Popover } from '../popover/popover.component';
 import {
   DropdownMenu,
-  DropdownMenuProps,
+  DropdownMenuElement,
 } from './dropdownMenu.component';
 import { DropdownItemType } from './droppdownItem.component';
 import {
@@ -45,12 +46,11 @@ import {
 } from './selection.strategy';
 import { isValidString } from '../support/services';
 
-type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
-type MenuElement = React.ReactElement<DropdownMenuProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
-type DropdownChildren = [MenuElement, TextElement, ControlElement];
+type DropdownChildren = [DropdownMenuElement, TextElement, ControlElement];
+
 export type SelectedOption = Array<DropdownItemType> | DropdownItemType;
 
 const MEASURED_CONTROL_TAG: string = 'Control';
@@ -74,6 +74,7 @@ interface ComponentProps {
 }
 
 export type DropdownProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type DropdownElement = React.ReactElement<DropdownProps>;
 
 interface State {
   visible: boolean;
@@ -224,7 +225,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     );
   };
 
-  private renderMenuElement = (style: StyleType): MenuElement => {
+  private renderMenuElement = (style: StyleType): DropdownMenuElement => {
     const { appearance, selectedOption, ...restProps } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
@@ -284,7 +285,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     ];
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
+  public render(): DropdownElement {
     const { themedStyle, style } = this.props;
     const { visible, menuWidth } = this.state;
     const evaStyles: StyleType = this.getComponentStyle(themedStyle);

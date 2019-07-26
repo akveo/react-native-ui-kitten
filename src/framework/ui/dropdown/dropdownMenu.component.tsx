@@ -7,7 +7,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  TouchableOpacityProps,
   ListRenderItemInfo,
   GestureResponderEvent,
 } from 'react-native';
@@ -17,13 +16,17 @@ import {
 } from '../list/list.component';
 import {
   DropdownItem,
-  DropdownItemProps,
   DropdownItemType,
+  DropdownItemElement,
 } from './droppdownItem.component';
-import { DropdownGroup } from './dropdownGroup.component';
+import {
+  DropdownGroup,
+  DropdownGroupElement,
+} from './dropdownGroup.component';
 import { SelectionStrategy } from './selection.strategy';
 
-type DropdownItemElement = React.ReactElement<DropdownItemProps>;
+type DefaultMenuItemElement = DropdownItemElement | DropdownGroupElement;
+type MenuItemElement = DefaultMenuItemElement | React.ReactElement<any>;
 
 export interface ComponentProps {
   data: DropdownItemType[];
@@ -35,6 +38,7 @@ export interface ComponentProps {
 }
 
 export type DropdownMenuProps = Partial<ListProps> & ComponentProps;
+export type DropdownMenuElement = React.ReactElement<DropdownMenuProps>;
 
 export class DropdownMenu extends React.Component<DropdownMenuProps> {
 
@@ -48,7 +52,7 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     this.props.onSelect(option, event);
   };
 
-  private renderDefaultItem = (info: ListRenderItemInfo<DropdownItemType>): DropdownItemElement => {
+  private renderDefaultItem = (info: ListRenderItemInfo<DropdownItemType>): DefaultMenuItemElement => {
     const { size, renderItem, multiSelect, strategy } = this.props;
     const selected: boolean = strategy.isSelected(info.item);
 
@@ -72,13 +76,13 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     );
   };
 
-  private renderItem = (info: ListRenderItemInfo<DropdownItemType>): React.ReactElement<any> => {
+  private renderItem = (info: ListRenderItemInfo<DropdownItemType>): MenuItemElement => {
     const { renderItem } = this.props;
 
     return renderItem ? renderItem(info) : this.renderDefaultItem(info);
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
+  public render(): DropdownMenuElement {
     const { style, ...restProps } = this.props;
 
     return (

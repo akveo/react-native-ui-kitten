@@ -5,7 +5,10 @@
  */
 
 import React from 'react';
-import { ListRenderItemInfo, View } from 'react-native';
+import {
+  ListRenderItemInfo,
+  View,
+} from 'react-native';
 import {
   styled,
   StyledComponentProps,
@@ -14,12 +17,11 @@ import {
 import { Text } from '../text/text.component';
 import {
   DropdownItem,
+  DropdownItemElement,
   DropdownItemProps,
   DropdownItemType,
 } from './droppdownItem.component';
 import { SelectionStrategy } from './selection.strategy';
-
-type ItemElement = React.ReactElement<DropdownItemProps>;
 
 interface ComponentProps {
   multiSelect?: boolean;
@@ -27,7 +29,8 @@ interface ComponentProps {
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
 }
 
-type DropdownGroupProps = ComponentProps & Partial<DropdownItemProps> & StyledComponentProps;
+export type DropdownGroupProps = ComponentProps & Partial<DropdownItemProps> & StyledComponentProps;
+export type DropdownGroupElement = React.ReactElement<DropdownGroupProps>;
 
 export class DropdownGroupComponent extends React.Component<DropdownGroupProps> {
 
@@ -59,7 +62,7 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     };
   };
 
-  private renderSubItem = (option: DropdownItemType, index: number): ItemElement => {
+  private renderSubItem = (option: DropdownItemType, index: number): DropdownItemElement => {
     const { item, renderItem, strategy, ...restProps } = this.props;
     const returningOption: ListRenderItemInfo<DropdownItemType> = {
       item: option,
@@ -77,13 +80,13 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     );
   };
 
-  public render(): React.ReactNode {
+  public render(): DropdownGroupElement {
     const { item, themedStyle } = this.props;
     const { container, item: itemStyle, text: textStyle } = this.getComponentStyle(themedStyle);
 
-    const subItemsElements: ItemElement[] = item.items
+    const subItemsElements: DropdownItemElement[] = item.items
       .map((option: DropdownItemType, index: number) => {
-        const element: ItemElement = this.renderSubItem(option, index);
+        const element: DropdownItemElement = this.renderSubItem(option, index);
 
         return React.cloneElement(element, {
           ...option,

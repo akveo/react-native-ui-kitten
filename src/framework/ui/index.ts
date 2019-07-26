@@ -31,6 +31,8 @@ export {
 export {
   Dropdown,
   DropdownProps,
+  DropdownElement,
+  SelectedOption,
 } from './dropdown/dropdown.component';
 export { DropdownItemType } from './dropdown/droppdownItem.component';
 export {

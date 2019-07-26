@@ -46,6 +46,7 @@ export interface ComponentProps {
 }
 
 export type DropdownItemProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<DropdownItemType>;
+export type DropdownItemElement = React.ReactElement<DropdownItemProps>;
 
 class DropdownItemComponent extends React.Component<DropdownItemProps> {
 
