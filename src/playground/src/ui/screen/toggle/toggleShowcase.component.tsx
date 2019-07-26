@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Toggle,
+  ToggleElement,
   ToggleProps,
 } from '@kitten/ui';
 
@@ -33,7 +34,7 @@ class ToggleShowcaseComponent extends React.Component<ToggleProps, ToggleShowcas
   }
 }
 
-export const ToggleShowcase = (props?: ToggleProps): React.ReactElement<ToggleProps> => {
+export const ToggleShowcase = (props?: ToggleProps): ToggleElement => {
   return (
     <ToggleShowcaseComponent {...props}/>
   );

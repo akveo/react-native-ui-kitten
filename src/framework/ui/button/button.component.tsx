@@ -23,11 +23,10 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { isValidString } from '../support/services';
 
-type TextElement = React.ReactElement<TextProps>;
 type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: ImageStyle) => IconElement;
 
@@ -40,6 +39,7 @@ interface ComponentProps {
 }
 
 export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type ButtonElement = React.ReactElement<ButtonProps>;
 
 /**
  * Styled Button component.

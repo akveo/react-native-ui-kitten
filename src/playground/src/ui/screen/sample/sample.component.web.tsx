@@ -8,7 +8,7 @@ import {
   Button,
   Input,
   Layout,
-  LayoutProps,
+  LayoutElement,
   Text,
   Toggle,
 } from '@kitten/ui';
@@ -28,7 +28,7 @@ type SampleComponentProps = ComponentProps & ThemedComponentProps;
 
 class SampleComponent extends React.Component<SampleComponentProps> {
 
-  public render(): React.ReactElement<LayoutProps> {
+  public render(): LayoutElement {
     const { themedStyle, profileImage, isDark, setTheme } = this.props;
 
     return (

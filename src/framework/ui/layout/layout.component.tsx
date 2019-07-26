@@ -26,6 +26,7 @@ interface ComponentProps {
 }
 
 export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
+export type LayoutElement = React.ReactElement<LayoutProps>;
 
 /**
  * Layout container component. Behaves like React Native View.

@@ -16,9 +16,8 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { ButtonProps } from '../button/button.component';
+import { ButtonElement } from '../button/button.component';
 
-type ButtonElement = React.ReactElement<ButtonProps>;
 type ChildrenProp = ButtonElement | ButtonElement[];
 
 interface ComponentProps {
@@ -28,6 +27,7 @@ interface ComponentProps {
 }
 
 export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps;
+export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
 
 /**
  * Renders a group of buttons.

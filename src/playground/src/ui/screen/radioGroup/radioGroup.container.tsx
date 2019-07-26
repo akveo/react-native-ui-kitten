@@ -1,12 +1,15 @@
 import React from 'react';
-import { RadioGroupProps } from '@kitten/ui';
+import {
+  RadioGroupElement,
+  RadioGroupProps,
+} from '@kitten/ui';
 import { RadioGroupShowcase } from './radioGroupShowcase.component';
 import { radioGroupShowcase } from './type';
 import { ShowcaseContainer } from '../common/showcase.container';
 
 export class RadioGroupContainer extends React.Component {
 
-  private renderItem = (props: RadioGroupProps): React.ReactElement<RadioGroupProps> => {
+  private renderItem = (props: RadioGroupProps): RadioGroupElement => {
     return (
       <RadioGroupShowcase {...props}/>
     );

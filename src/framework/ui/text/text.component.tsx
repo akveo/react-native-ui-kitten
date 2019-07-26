@@ -21,6 +21,7 @@ interface ComponentProps {
 }
 
 export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
+export type TextElement = React.ReactElement<TextProps>;
 
 /**
  * Styled Text component.
