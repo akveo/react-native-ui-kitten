@@ -11,6 +11,7 @@ export {
 export {
   ApplicationProvider,
   ApplicationProviderProps,
+  ApplicationProviderElement,
 } from './application/applicationProvider.component';
 export {
   ModalPanel,

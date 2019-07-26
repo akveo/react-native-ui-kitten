@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Button,
   OverflowMenu,
+  OverflowMenuElement,
   OverflowMenuProps,
 } from '@kitten/ui';
 
@@ -21,7 +22,7 @@ export class OverflowMenuShowcase extends React.Component<OverflowMenuProps, Sta
     this.setState({ overflowMenuVisible });
   };
 
-  public render(): React.ReactElement<OverflowMenuProps> {
+  public render(): OverflowMenuElement {
     return (
       <OverflowMenu
         {...this.props}

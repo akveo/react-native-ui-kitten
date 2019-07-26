@@ -29,6 +29,7 @@ interface ComponentProps {
 }
 
 export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
+export type ListElement = React.ReactElement<ListProps>;
 
 /**
  * List component is a performant interface for rendering simple, flat lists. Extends `FlatList`. Renders list of

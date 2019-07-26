@@ -12,12 +12,11 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { TabProps } from './tab.component';
+import { TabElement } from './tab.component';
 import { TabBar } from './tabBar.component';
 import { ViewPager } from '../viewPager/viewPager.component';
 
 type TabContentElement = React.ReactElement<any>;
-type TabElement = React.ReactElement<TabProps>;
 type ChildrenProp = TabElement | TabElement[];
 
 class TabViewChildElement {
@@ -41,6 +40,7 @@ interface ComponentProps {
 }
 
 export type TabViewProps = ViewProps & ComponentProps;
+export type TabViewElement = React.ReactElement<TabViewProps>;
 
 /**
  * Dynamic tabset component. Allows flipping through the tab "pages".

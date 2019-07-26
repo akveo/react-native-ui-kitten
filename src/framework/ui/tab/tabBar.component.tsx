@@ -17,10 +17,9 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { TabProps } from './tab.component';
+import { TabElement } from './tab.component';
 import { TabIndicator } from '../support/components';
 
-type TabElement = React.ReactElement<TabProps>;
 type ChildrenProp = TabElement | TabElement[];
 
 interface ComponentProps {
@@ -31,6 +30,7 @@ interface ComponentProps {
 }
 
 export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
+export type TabBarElement = React.ReactElement<TabBarProps>;
 
 /**
  * The `TabBar` component that manages Tab components.

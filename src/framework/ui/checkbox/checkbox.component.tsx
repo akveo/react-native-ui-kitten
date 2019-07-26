@@ -25,13 +25,12 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { CheckMark } from '../support/components';
 import { isValidString } from '../support/services';
 
 type IconElement = React.ReactElement<ViewProps>;
-type TextElement = React.ReactElement<TextProps>;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
@@ -43,6 +42,7 @@ interface ComponentProps {
 }
 
 export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 
 /**
  * Styled CheckBox component.
