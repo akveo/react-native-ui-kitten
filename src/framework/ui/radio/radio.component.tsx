@@ -24,11 +24,9 @@ import {
 } from '@kitten/theme';
 import {
   Text,
-  TextProps,
+  TextElement,
 } from '../text/text.component';
 import { isValidString } from '../support/services';
-
-type TextElement = React.ReactElement<TextProps>;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
@@ -39,6 +37,7 @@ interface ComponentProps {
 }
 
 export type RadioProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type RadioElement = React.ReactElement<RadioProps>;
 
 /**
  * Styled Radio component.

@@ -1,5 +1,8 @@
 import React from 'react';
-import { CheckBoxProps } from '@kitten/ui';
+import {
+  CheckBoxElement,
+  CheckBoxProps,
+} from '@kitten/ui';
 import { CheckBoxShowcase } from './checkboxShowcase.component';
 import {
   checkboxSettings,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class CheckBoxContainer extends React.Component {
 
-  private renderItem = (props: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
+  private renderItem = (props: CheckBoxProps): CheckBoxElement => {
     return (
       <CheckBoxShowcase {...props}/>
     );

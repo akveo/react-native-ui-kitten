@@ -32,6 +32,7 @@ interface ComponentProps {
 }
 
 export type ViewPagerProps = ViewProps & ComponentProps;
+export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 /**
  * Allows flipping through the "pages".

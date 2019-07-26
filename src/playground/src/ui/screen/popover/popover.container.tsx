@@ -1,5 +1,8 @@
 import React from 'react';
-import { PopoverProps } from '@kitten/ui';
+import {
+  PopoverElement,
+  PopoverProps,
+} from '@kitten/ui';
 import { PopoverShowcase } from './popoverShowcase.component';
 import {
   popoverShowcase,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class PopoverContainer extends React.Component {
 
-  private renderItem = (props: PopoverProps): React.ReactElement<PopoverProps> => {
+  private renderItem = (props: PopoverProps): PopoverElement => {
     return (
       <PopoverShowcase {...props} />
     );

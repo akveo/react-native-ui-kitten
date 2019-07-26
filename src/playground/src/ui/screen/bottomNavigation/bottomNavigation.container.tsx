@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { BottomNavigationProps } from '@kitten/ui';
+import {
+  BottomNavigationElement,
+  BottomNavigationProps,
+} from '@kitten/ui';
 import { BottomNavigationShowcase } from './bottomNavigationShowcase.component';
 import {
   bottomNavigationSettings,
@@ -10,7 +13,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class BottomNavigationContainer extends React.Component {
 
-  private renderItem = (props: BottomNavigationProps): React.ReactElement<BottomNavigationProps> => {
+  private renderItem = (props: BottomNavigationProps): BottomNavigationElement => {
     return (
       <BottomNavigationShowcase
         {...props}

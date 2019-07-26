@@ -8,16 +8,17 @@ import {
   CheckBox,
   CheckBoxProps,
   ListItem,
+  ListItemElement,
   ListItemProps,
 } from '@kitten/ui';
 
-export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+export const ListItemShowcase = (props?: ListItemProps): ListItemElement => {
   return (
     <ListItem {...props}/>
   );
 };
 
-export const ListItemIconShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+export const ListItemIconShowcase = (props?: ListItemProps): ListItemElement => {
 
   const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
     <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
@@ -28,7 +29,7 @@ export const ListItemIconShowcase = (props?: ListItemProps): React.ReactElement<
   );
 };
 
-export const ListItemAccessoryShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+export const ListItemAccessoryShowcase = (props?: ListItemProps): ListItemElement => {
 
   const Accessory = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
     <CheckBox checked={index % 2 === 0}/>
@@ -39,7 +40,7 @@ export const ListItemAccessoryShowcase = (props?: ListItemProps): React.ReactEle
   );
 };
 
-export const ListItemIconAccessoryShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+export const ListItemIconAccessoryShowcase = (props?: ListItemProps): ListItemElement => {
 
   const Icon = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
     <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
