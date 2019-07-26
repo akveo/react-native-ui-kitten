@@ -30,12 +30,13 @@ interface ComponentProps extends ViewProps {
 }
 
 export type SpinnerProps = StyledComponentProps & ComponentProps;
+export type SpinnerElement = React.ReactElement<SpinnerProps>;
 
 /**
  * Styled Spinner component. Designed to be used as ActivityIndicator component
  *
  * @property {boolean} animating - Determines whether component is animating. Default is `true`.
- * @property {string} circleSize - Determines the the component.
+ * @property {string} containerSize - Determines the the component.
  * Can be `giant`, `large`, `medium`, `small` or `tiny`.
  * Default is `medium`.
  * @property status - Determines the status of the component.
@@ -144,9 +145,9 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     animating: true,
   };
 
-  private animation: SpinnerAnimation = new SpinnerAnimation(this.circleSize.height);
+  private animation: SpinnerAnimation = new SpinnerAnimation(this.containerSize.height);
 
-  private get circleSize(): Size {
+  private get containerSize(): Size {
     const { width, height } = StyleSheet.flatten([this.props.themedStyle, this.props.style]);
     // @ts-ignore: width and height are restricted to be a number
     return new Size(width, height);
@@ -191,7 +192,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     const end: ArcElementStyle = {
       container: source.container,
       arc: source.end,
-      overflow: { top: this.circleSize.height / 2 },
+      overflow: { top: this.containerSize.height / 2 },
     };
 
     return { start, end };
@@ -214,7 +215,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const containerSize: Size = this.circleSize;
+    const containerSize: Size = this.containerSize;
     const { start, end } = this.getComponentStyle(this.animation.toProps());
 
     return (
@@ -233,4 +234,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Spinner = styled(SpinnerComponent);
+export const Spinner = styled<SpinnerProps>(SpinnerComponent);

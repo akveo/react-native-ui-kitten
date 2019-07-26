@@ -82,6 +82,7 @@ export {
 export {
   Spinner,
   SpinnerProps,
+  SpinnerElement,
 } from './spinner/spinner.component';
 export {
   TabView,
