@@ -26,6 +26,7 @@ Let's create a separate file `feather-icons.js` and place there the following co
 
 ```js
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather'; // <-- Import Feather icons
 
 export const FeatherIconsPack = {
@@ -59,17 +60,18 @@ function IconProvider(name) {
   };
 }
 
-function FeatherIcon(props) {
-  const { name, height, tintColor, ...restProps } = props;
+function FeatherIcon({ name, style }) {
+  const { height, tintColor, ...iconStyle } = StyleSheet.flatten(style);
   return (
     <Icon
       name={name}
       size={height}
       color={tintColor}
-      {...restProps}
+      style={iconStyle}
     />
   );
 }
+
 ```
 
 <hr>
@@ -135,6 +137,7 @@ Let's also create a Material Icons provider using the same method.
 // material-icons.js
 
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // <-- Import Material icons
 
 export const MaterialIconsPack = {
@@ -156,14 +159,14 @@ function IconProvider(name) {
   };
 }
 
-function MaterialIcon(props) {
-  const { name, height, tintColor, ...restProps } = props;
+function MaterialIcon({ name, style }) {
+  const { height, tintColor, ...iconStyle } = StyleSheet.flatten(style);
   return (
     <Icon
       name={name}
       size={height}
       color={tintColor}
-      {...restProps}
+      style={iconStyle}
     />
   );
 }
