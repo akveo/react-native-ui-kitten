@@ -395,6 +395,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Dropdown',
+        icon: 'button.svg',
+        source: [
+          'Dropdown',
+        ],
+        overview: [],
+      },
+      {
+        type: 'tabs',
         name: 'Button Group',
         icon: 'button-group.svg',
         source: [
