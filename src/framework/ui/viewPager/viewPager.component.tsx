@@ -145,11 +145,10 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
   }
 
-  public componentDidUpdate() {
-    const selectedIndexOffset: number = this.props.selectedIndex * this.contentWidth;
-
-    if (selectedIndexOffset !== this.contentOffsetValue) {
-      this.scrollToIndex({ index: this.props.selectedIndex });
+  public componentDidUpdate(prevProps: ViewPagerProps) {
+    if (prevProps.selectedIndex !== this.props.selectedIndex) {
+      const index: number = this.props.selectedIndex;
+      this.scrollToIndex({ index, animated: true });
     }
   }
 
