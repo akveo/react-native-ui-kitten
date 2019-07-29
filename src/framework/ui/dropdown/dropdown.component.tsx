@@ -51,14 +51,14 @@ type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 type DropdownChildren = [DropdownMenuElement, TextElement, ControlElement];
 
-export type SelectedOption = Array<DropdownItemType> | DropdownItemType;
+export type DropdownOption = Array<DropdownItemType> | DropdownItemType;
 
 const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
   data: DropdownItemType[];
   multiSelect?: boolean;
-  selectedOption?: SelectedOption;
+  selectedOption?: DropdownOption;
   textStyle?: TextStyle;
   placeholder?: string;
   placeholderStyle?: StyleProp<TextStyle>;
@@ -66,7 +66,7 @@ interface ComponentProps {
   labelStyle?: StyleProp<TextStyle>;
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
-  onSelect: (option: SelectedOption, event?: GestureResponderEvent) => void;
+  onSelect: (option: DropdownOption, event?: GestureResponderEvent) => void;
   size?: string;
   status?: string;
   appearance?: string;
@@ -115,8 +115,11 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     this.setState({ visible });
   };
 
-  private onPress = () => {
+  private onPress = (event: GestureResponderEvent) => {
     this.props.dispatch([]);
+    if (this.props.onPress) {
+      this.props.onPress(event);
+    }
     this.setVisibility();
   };
 
@@ -226,7 +229,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderMenuElement = (style: StyleType): DropdownMenuElement => {
-    const { appearance, selectedOption, ...restProps } = this.props;
+    const { appearance, selectedOption, testID, ...restProps } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
     return (

@@ -68,6 +68,7 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     ) : (
       <DropdownItem
         {...info}
+        {...info.item}
         selected={selected}
         size={size}
         multiSelect={multiSelect}

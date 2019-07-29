@@ -11,13 +11,14 @@ import {
 import {
   Dropdown,
   DropdownItemType,
+  DropdownOption,
   Text,
 } from '@kitten/ui';
 import { StyleType } from '@kitten/theme';
 
 interface State {
-  selectedOption: DropdownItemType;
-  selectedOptions: DropdownItemType[];
+  selectedOption: DropdownOption;
+  selectedOptions: DropdownOption;
 }
 
 export class DropdownContainer extends React.Component<any, State> {
@@ -34,7 +35,7 @@ export class DropdownContainer extends React.Component<any, State> {
       ],
     },
     { text: 'Option 4' },
-    { text: 'Option 5' },
+    { text: 'Option 5', textStyle: { color: 'red' } },
     { text: 'Option 6' },
     { text: 'Option 8' },
     { text: 'Option 9' },
@@ -48,11 +49,11 @@ export class DropdownContainer extends React.Component<any, State> {
     selectedOptions: [],
   };
 
-  private onSelect = (selectedOption: DropdownItemType, event?: GestureResponderEvent): void => {
+  private onSelect = (selectedOption: DropdownOption, event?: GestureResponderEvent): void => {
     this.setState({ selectedOption });
   };
 
-  private onMultiSelect = (selectedOptions: DropdownItemType[]): void => {
+  private onMultiSelect = (selectedOptions: DropdownOption): void => {
     this.setState({ selectedOptions });
   };
 
@@ -87,7 +88,7 @@ export class DropdownContainer extends React.Component<any, State> {
         <Dropdown
           style={styles.dropdown}
           label='Options'
-          placeholder='Select Option'
+          // placeholder='Select Option'
           data={this.items}
           selectedOption={this.state.selectedOptions}
           icon={this.renderIcon}

@@ -31,6 +31,8 @@ type TextElement = React.ReactElement<TextProps>;
 type DefaultItemElement = React.ReactElement<TouchableOpacityProps>;
 type MultiSelectItemElement = React.ReactElement<ViewProps>;
 
+const itemTestId = (text: string): string => `@dropdown-item/${text}`;
+
 export interface DropdownItemType {
   text: string;
   textStyle?: TextStyle;
@@ -118,13 +120,14 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
   };
 
   private renderDefaultItem = (): DefaultItemElement => {
-    const { themedStyle, style, ...restProps } = this.props;
+    const { themedStyle, style, item, ...restProps } = this.props;
     const { container, text } = this.getComponentStyle(themedStyle);
     const textElement: TextElement = this.renderTextElement(text);
 
     return (
       <TouchableOpacity
         {...restProps}
+        testID={itemTestId(item.text)}
         activeOpacity={1.0}
         style={[styles.container, container, style]}
         onPress={this.onPress}
@@ -145,6 +148,7 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
         {...restProps}
         style={[styles.container, container, style]}>
         <CheckBox
+          testID={itemTestId(item.text)}
           text={item.text}
           textStyle={[text, item.textStyle]}
           disabled={disabled}

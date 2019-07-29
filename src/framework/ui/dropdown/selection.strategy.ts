@@ -34,7 +34,7 @@ export class MultiSelectStrategy implements SelectionStrategy {
     if (this.isSelectedOptionExist()) {
       return this.selectedOption
         .map((item: DropdownItemType) => {
-          return item.text;
+          return item && item.text;
         })
         .join(', ');
     } else {

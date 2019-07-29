@@ -32,7 +32,7 @@ export {
   Dropdown,
   DropdownProps,
   DropdownElement,
-  SelectedOption,
+  DropdownOption,
 } from './dropdown/dropdown.component';
 export { DropdownItemType } from './dropdown/droppdownItem.component';
 export {
