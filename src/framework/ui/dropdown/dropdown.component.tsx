@@ -69,7 +69,6 @@ interface ComponentProps {
   onSelect: (option: DropdownOption, event?: GestureResponderEvent) => void;
   size?: string;
   status?: string;
-  appearance?: string;
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
 }
 
