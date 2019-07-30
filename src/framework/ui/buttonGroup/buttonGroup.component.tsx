@@ -51,7 +51,7 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *
  * @property StyledComponentProps
  *
- * @example ButtonGroup usage example
+ * @overview-example ButtonGroup simple usage example
  *
  * ```
  * import React from 'react';
@@ -60,6 +60,25 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * export const ButtonGroupShowcase = (props?: ButtonGroupProps): React.ReactElement<ButtonGroupProps> => {
  *   return (
  *     <ButtonGroup>
+ *       <Button>Left</Button>
+ *       <Button>Mid</Button>
+ *       <Button>Right</Button>
+ *     </ButtonGroup>
+ *   );
+ * };
+ * ```
+ *
+ * @overview-example ButtonGroup Eva Styling Example
+ *
+ * ```
+ * import React from 'react';
+ * import { Button, ButtonGroup, ButtonGroupProps } from 'react-native-ui-kitten';
+ *
+ * export const ButtonGroupShowcase = (props?: ButtonGroupProps): React.ReactElement<ButtonGroupProps> => {
+ *   return (
+ *     <ButtonGroup
+ *       size='large'
+ *       status='warning'>
  *       <Button>Left</Button>
  *       <Button>Mid</Button>
  *       <Button>Right</Button>
