@@ -44,22 +44,64 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * @property StyledComponentProps
  *
- * @example Layout usage and API example
+ * @overview-example Layout usage and API example
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import {
  *   Layout,
  *   Text,
- * } from 'react-native-ui-kitten';
+ * } from '@kitten/ui';
  *
- * public render(): React.ReactNode {
- *   return (
- *     <Layout>
- *       <Text>Layout</Text>
- *     </Layout>
- *   );
- * }
+ * export class LayoutShowcase extends React.Component {
+ *
+ *  public render(): React.ReactNode {
+ *    return (
+ *      <Layout style={styles.container}>
+ *        <Text>Layout</Text>
+ *      </Layout>
+ *    );
+ *  }
+ *}
+ *
+ * const styles = StyleSheet.create({
+ *   container: {
+ *     flex: 1,
+ *     padding: 16,
+ *   },
+ * });
+ * ```
+ *
+ * @overview-example Eva styling example
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import {
+ *   Layout,
+ *   Text,
+ * } from '@kitten/ui';
+ *
+ * export class LayoutShowcase extends React.Component {
+ *
+ *  public render(): React.ReactNode {
+ *    return (
+ *      <Layout
+ *        level='2'
+ *        style={styles.container}>
+ *        <Text>Layout</Text>
+ *      </Layout>
+ *    );
+ *  }
+ *}
+ *
+ * const styles = StyleSheet.create({
+ *   container: {
+ *     flex: 1,
+ *     padding: 16,
+ *   },
+ * });
  * ```
  * */
 
