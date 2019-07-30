@@ -18,6 +18,7 @@ import {
   DropdownOption,
 } from './dropdown.component';
 import { DropdownItemType } from './droppdownItem.component';
+import { CheckBox } from '../checkbox/checkbox.component';
 import {
   mapping,
   theme,
@@ -29,8 +30,6 @@ const stringify = (obj: any): string => JSON.stringify(obj);
 
 const iconClosedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
 const iconOpenedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png';
-const dropdownTestId: string = '@dropdown/control';
-const dropdownMultiSelectTestId: string = '@dropdown-multi/control';
 
 const data: DropdownItemType[] = [
   { text: 'Option 1' },
@@ -116,7 +115,6 @@ class TestApplication extends React.Component<Props, State> {
           disabled={dropdownDisabled}
           label={dropdownLabel}
           placeholder={dropdownPlaceholder}
-          testID={dropdownTestId}
           data={data}
           selectedOption={this.state.dropdownSelected}
           icon={this.renderIcon}
@@ -130,7 +128,6 @@ class TestApplication extends React.Component<Props, State> {
           disabled={multiSelectDisabled}
           label={dropdownLabel}
           placeholder={dropdownPlaceholder}
-          testID={dropdownMultiSelectTestId}
           data={data}
           selectedOption={this.state.dropdownMultiSelected}
           multiSelect
@@ -157,8 +154,8 @@ describe('@ dropdown component checks', () => {
       />,
     );
 
-    fireEvent.press(application.getByTestId(dropdownTestId));
-    fireEvent.press(application.getByTestId(dropdownMultiSelectTestId));
+    fireEvent.press(application.getAllByType(Dropdown)[0]);
+    fireEvent.press(application.getAllByType(Dropdown)[1]);
     expect(onDropdownPress).toHaveBeenCalled();
     expect(onMultiSelectPress).toHaveBeenCalled();
   });
@@ -171,8 +168,9 @@ describe('@ dropdown component checks', () => {
     );
 
     fireEvent.press(application.getAllByType(TouchableOpacity)[0]);
-    fireEvent.press(application.getByTestId('@dropdown-item/Option 1'));
-    const { selectedOption } = application.getByTestId(dropdownTestId).props;
+
+    fireEvent.press(application.getAllByText(expectedSelectedOption.text)[0].parent);
+    const { selectedOption } = application.getAllByType(Dropdown)[0].props;
 
     expect(stringify(selectedOption)).toBe(stringify(expectedSelectedOption));
   });
@@ -188,9 +186,9 @@ describe('@ dropdown component checks', () => {
     );
 
     fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
-    fireEvent(application.getByTestId('@dropdown-item/Option 4'), 'onChange');
-    fireEvent(application.getByTestId('@dropdown-item/Option 32'), 'onChange');
-    const { selectedOption } = application.getByTestId(dropdownMultiSelectTestId).props;
+    fireEvent(application.getAllByText(expectedSelectedOption[0].text)[0], 'onChange');
+    fireEvent(application.getAllByText(expectedSelectedOption[1].text)[0], 'onChange');
+    const { selectedOption } = application.getAllByType(Dropdown)[1].props;
 
     expect(stringify(selectedOption)).toBe(stringify(expectedSelectedOption));
   });
@@ -220,43 +218,49 @@ describe('@ dropdown component checks', () => {
     );
 
     fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
-    fireEvent(application.getByTestId('@dropdown-item/Option 4'), 'onChange');
-    fireEvent(application.getByTestId('@dropdown-item/Option 4'), 'onChange');
-    const { selectedOption } = application.getByTestId(dropdownMultiSelectTestId).props;
+    fireEvent(application.getAllByType(CheckBox)[5], 'onChange');
+    fireEvent(application.getAllByType(CheckBox)[5], 'onChange');
+    const { selectedOption } = application.getAllByType(TouchableOpacity)[1].props;
 
     expect(stringify(selectedOption)).toBe(stringify([]));
   });
 
-  it('* other props checks', () => {
-    const onDropdownPress = jest.fn();
+  it('* dropdown onPress* handling', () => {
     const onDropdownPressIn = jest.fn();
     const onDropdownPressOut = jest.fn();
     const onDropdownLongPress = jest.fn();
-    const passedLabel: string = 'Label';
-    const passedPlaceholder: string = 'Placeholder';
     const application: RenderAPI = render(
       <TestApplication
-        dropdownLabel={passedLabel}
-        dropdownPlaceholder={passedPlaceholder}
-        onDropdownPress={onDropdownPress}
         onDropdownPressIn={onDropdownPressIn}
         onDropdownPressOut={onDropdownPressOut}
         onDropdownLongPress={onDropdownLongPress}
       />,
     );
 
-    fireEvent(application.getByTestId(dropdownTestId), 'pressIn');
-    fireEvent(application.getByTestId(dropdownTestId), 'pressOut');
-    fireEvent(application.getByTestId(dropdownTestId), 'longPress');
-    fireEvent.press(application.getAllByType(TouchableOpacity)[0]);
+    fireEvent(application.getAllByType(TouchableOpacity)[0], 'pressIn');
+    fireEvent(application.getAllByType(TouchableOpacity)[0], 'pressOut');
+    fireEvent(application.getAllByType(TouchableOpacity)[0], 'longPress');
 
-    const { label, placeholder } = application.getByTestId(dropdownTestId).props;
-    expect(label).toBe(passedLabel);
-    expect(placeholder).toBe(passedPlaceholder);
-    expect(onDropdownPress).toHaveBeenCalled();
     expect(onDropdownPressIn).toHaveBeenCalled();
     expect(onDropdownPressOut).toHaveBeenCalled();
     expect(onDropdownLongPress).toHaveBeenCalled();
+  });
+
+  it('* text props checks', () => {
+    const passedLabel: string = 'Label';
+    const passedPlaceholder: string = 'Placeholder';
+    const application: RenderAPI = render(
+      <TestApplication
+        dropdownLabel={passedLabel}
+        dropdownPlaceholder={passedPlaceholder}
+      />,
+    );
+
+    const label: string = application.getAllByText(passedLabel)[0].props.children;
+    const placeholder: string = application.getAllByText(passedPlaceholder)[0].props.children;
+
+    expect(label).toBe(passedLabel);
+    expect(placeholder).toBe(passedPlaceholder);
   });
 
 });

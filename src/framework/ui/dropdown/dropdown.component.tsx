@@ -582,7 +582,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderMenuElement = (style: StyleType): DropdownMenuElement => {
-    const { appearance, selectedOption, testID, ...restProps } = this.props;
+    const { appearance, selectedOption, ...restProps } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
     return (
