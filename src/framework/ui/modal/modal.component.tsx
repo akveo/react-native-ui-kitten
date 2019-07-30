@@ -66,33 +66,123 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *
  * @property ViewProps
  *
- * @example Modal usage and API example
+ * @overview-example Modal simple usage and API example
  *
  * ```
- * import { Modal } from 'react-native-ui-kitten';
+ * import React from 'react';
+ * import {
+ *   StyleSheet,
+ *   View,
+ *   ViewProps,
+ * } from 'react-native';
+ * import {
+ *   Button,
+ *   Modal,
+ *   Text,
+ *   Layout,
+ * } from '@kitten/ui';
  *
- * state: State = {
- *   visible: false,
- * };
+ * interface State {
+ *   modalVisible: boolean;
+ * }
  *
- * private setVisible = (visible: boolean): void => {
- *   this.setState({ visible });
- * };
+ * export class ModalShowcase extends React.Component<any, State> {
  *
- * public render(): React.ReactNode {
- *   return (
- *     <View>
- *       <Button title='Show Modal' onPress={() => this.setVisible(true)}/>
- *       <Modal
- *         visible={this.state.visible}
- *         allowBackdrop={false}>
- *         <View>
- *           <Text>Hi! This is Modal Component!</Text>
- *           <Button title='Close Modal' onPress={() => this.setVisible(false)}/>
- *         <View/>
- *       </Modal>
- *     </View>
- *   )
+ *   public state: State = {
+ *     modalVisible: false,
+ *   };
+ *
+ *   private setModalVisible = (): void => {
+ *     const modalVisible: boolean = !this.state.modalVisible;
+ *
+ *     this.setState({ modalVisible });
+ *   };
+ *
+ *   private renderModalElement = (): React.ReactElement<ViewProps> => {
+ *     return (
+ *       <Layout
+ *         level='3'
+ *         style={styles.modalContainer}>
+ *         <Text>This is modal</Text>
+ *         <Button onPress={this.setModalVisible}>Hide Modal</Button>
+ *       </Layout>
+ *     );
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <View style={styles.container}>
+ *         <Button onPress={this.setModalVisible}>Show Modal</Button>
+ *         <Modal visible={this.state.modalVisible}>
+ *           {this.renderModalElement()}
+ *         </Modal>
+ *       </View>
+ *     );
+ *   }
+ * }
+ *
+ * const styles = StyleSheet.create({
+ *   container: {
+ *     flex: 1,
+ *     padding: 16,
+ *   },
+ *   modalContainer: {
+ *     width: 200,
+ *     height: 200,
+ *     justifyContent: 'center',
+ *     alignItems: 'center',
+ *   },
+ * });
+ * ```
+ *
+ * @example Modal closes on backdrop press example
+ *
+ * ```
+ * // copy imports from basic usage example
+ *
+ * export class ModalShowcase extends React.Component<any, State> {
+ *
+ *   // copy code from basic usage example
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <View style={styles.container}>
+ *         <Button onPress={this.setModalVisible}>Show Modal</Button>
+ *         <Modal
+ *           allowBackdrop={true}
+ *           onBackdropPress={this.setModalVisible}
+ *           visible={this.state.modalVisible}>
+ *           {this.renderModalElement()}
+ *         </Modal>
+ *       </View>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Modal with backdrop style example
+ *
+ * ```
+ * // copy imports from basic usage example
+ *
+ * export class ModalShowcase extends React.Component<any, State> {
+ *
+ *   // copy code from basic usage example
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <View style={styles.container}>
+ *         <Button onPress={this.setModalVisible}>Show Modal</Button>
+ *         <Modal
+ *           allowBackdrop={true}
+ *           backdropStyle={{ backgroundColor: 'black', opacity: 0.5 }}
+ *           onBackdropPress={this.setModalVisible}
+ *           visible={this.state.modalVisible}>
+ *           {this.renderModalElement()}
+ *         </Modal>
+ *       </View>
+ *     );
+ *   }
  * }
  * ```
  * */
