@@ -68,7 +68,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
@@ -95,6 +95,34 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * }
  * ```
  *
+ * @overview-example Eva styling example
+ *
+ * ```
+ * import React from 'react';
+ * import { CheckBox } from 'react-native-ui-kitten';
+ *
+ * export class CheckBoxShowcase extends React.Component {
+ *
+ *   public state = {
+ *     checked: false,
+ *   };
+ *
+ *   private onChange = (checked: boolean) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <CheckBox
+ *         checked={this.state.checked}
+ *         status='success'
+ *         onChange={this.onChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
  * @example Inline styling example
  *
  * ```
@@ -107,6 +135,22 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *       style={styles.checkbox}
  *       textStyle={styles.checkboxText}
  *       text='Place your text'
+ *       checked={this.state.checked}
+ *     />
+ *   );
+ * };
+ * ```
+ *
+ * @example Indeterminate example
+ *
+ * ```
+ * import React from 'react';
+ * import { CheckBox, CheckBoxProps } from 'react-native-ui-kitten';
+ *
+ * export const CheckBoxShowcase = (props?: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
+ *   return (
+ *     <CheckBox
+ *       indeterminate={true}
  *       checked={this.state.checked}
  *     />
  *   );
