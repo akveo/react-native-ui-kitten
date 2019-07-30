@@ -100,7 +100,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
@@ -119,6 +119,35 @@ export type InputElement = React.ReactElement<InputProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <Input
+ *         value={this.state.inputValue}
+ *         onChangeText={this.onInputValueChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Eva styling example
+ *
+ * ```
+ * import React from 'react';
+ * import { Input } from 'react-native-ui-kitten';
+ *
+ * export class InputShowcase extends React.Component {
+ *
+ *   public state = {
+ *     inputValue: '',
+ *   };
+ *
+ *   private onInputValueChange = (inputValue: string) => {
+ *     this.setState({ inputValue });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Input
+ *         size='large'
+ *         status='danger'
  *         value={this.state.inputValue}
  *         onChangeText={this.onInputValueChange}
  *       />
@@ -146,6 +175,58 @@ export type InputElement = React.ReactElement<InputProps>;
  *     />
  *   );
  * };
+ * ```
+ *
+ * @example With icons example
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   StyleSheet,
+ *   View,
+ *   ImageProps,
+ *   Image,
+ *   GestureResponderEvent,
+ *   Alert,
+ * } from 'react-native';
+ * import { Input } from 'react-native-ui-kitten';
+ *
+ * export class InputShowcase extends React.Component {
+ *
+ *   public state = {
+ *     inputValue: '',
+ *   };
+ *
+ *   private onInputValueChange = (inputValue: string) => {
+ *     this.setState({ inputValue });
+ *   };
+ *
+ * private onIconPress = (event: GestureResponderEvent): void => {
+ *   Alert.alert('On Input Icon Press');
+ * };
+ *
+ * private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+ *   return (
+ *     <Image
+ *       style={style}
+ *       source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+ *     />
+ *   );
+ * };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Input
+ *         value={this.state.inputValue}
+ *         icon={this.renderIcon}
+ *         onIconPress={this.onIconPress}
+ *         caption='Caption'
+ *         captionIcon={this.renderIcon}
+ *         onChangeText={this.onInputValueChange}
+ *       />
+ *     );
+ *   }
+ * }
  * ```
  * */
 
