@@ -92,7 +92,7 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * @property {(index: number, event: GestureResponderEvent) => React.ReactElement<ImageProps>} onPress - Emits when
  * component is pressed.
  *
- * @example ListItem title and description template example
+ * @overview-example ListItem title and description template example
  *
  * ```
  * import React from 'react'
@@ -109,7 +109,7 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *  };
  * ```
  *
- * @example ListItem icon template example
+ * @overview-example ListItem icon template example
  *
  * ```
  * import React from 'react'

@@ -44,7 +44,7 @@ export type ListElement = React.ReactElement<ListProps>;
  *
  * @property StyledComponentProps
  *
- * @example With ListItem example
+ * @overview-example With ListItem example
  *
  * ```
  * import React from 'react';
