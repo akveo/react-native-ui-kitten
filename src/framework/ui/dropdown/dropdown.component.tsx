@@ -44,7 +44,10 @@ import {
   MultiSelectStrategy,
   SingleSelectStrategy,
 } from './selection.strategy';
-import { isValidString } from '../support/services';
+import {
+  allWithPrefix,
+  isValidString,
+} from '../support/services';
 
 type IconElement = React.ReactElement<ImageProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
@@ -491,17 +494,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     }
   };
 
-  private getPartStyles = (source: StyleType, key: string): StyleType => {
-    return Object.keys(source)
-      .filter((styleName: string) => styleName.includes(key))
-      .reduce((obj: StyleType, styleKey: string) => {
-        return {
-          ...obj,
-          [styleKey]: source[styleKey],
-        };
-      }, {});
-  };
-
   private onControlMeasure = (result: MeasureResult): void => {
     const width: number = result[MEASURED_CONTROL_TAG].size.width;
 
@@ -509,11 +501,11 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const controlStyles: StyleType = this.getPartStyles(source, 'control');
-    const iconStyles: StyleType = this.getPartStyles(source, 'icon');
-    const textStyles: StyleType = this.getPartStyles(source, 'text');
-    const menuStyles: StyleType = this.getPartStyles(source, 'menu');
-    const labelStyle: StyleType = this.getPartStyles(source, 'label');
+    const controlStyles: StyleType = allWithPrefix(source, 'control');
+    const iconStyles: StyleType = allWithPrefix(source, 'icon');
+    const textStyles: StyleType = allWithPrefix(source, 'text');
+    const menuStyles: StyleType = allWithPrefix(source, 'menu');
+    const labelStyle: StyleType = allWithPrefix(source, 'label');
 
     return {
       control: {
