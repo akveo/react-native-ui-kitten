@@ -1,40 +1,30 @@
 import React from 'react';
 import {
-  Dropdown,
-  DropdownItemType,
-  DropdownOption,
+  DropdownProps,
+  DropdownElement,
 } from '@kitten/ui';
+import { ShowcaseContainer } from '../common/showcase.container';
+import { DropdownShowcase } from './dropdownShowcase.component';
+import {
+  dropdownShowcase,
+  dropdownSettings,
+} from './type';
 
-interface State {
-  selectedOption: DropdownOption;
-}
+export class DropdownContainer extends React.Component {
 
-export class DropdownContainer extends React.Component<any, State> {
-
-  private items: DropdownItemType[] = [
-    { text: 'Option 1' },
-    { text: 'Option 2', disabled: true },
-    { text: 'Option 3', items: [ { text: 'Option 31', disabled: true }, { text: 'Option 32' }, { text: 'Option 33' } ] },
-    { text: 'Option 4' },
-  ];
-
-  public state: State = {
-    selectedOption: [],
-  };
-
-  private onSelect = (selectedOption: DropdownOption): void => {
-    this.setState({ selectedOption });
+  private renderItem = (props: DropdownProps): DropdownElement => {
+    return (
+      <DropdownShowcase {...props}/>
+    );
   };
 
   public render(): React.ReactNode {
     return (
-      <Dropdown
-        data={this.items}
-        multiSelect
-        selectedOption={this.state.selectedOption}
-        onSelect={this.onSelect}
-      />
+      <ShowcaseContainer
+        showcase={dropdownShowcase}
+        settings={dropdownSettings}
+        renderItem={this.renderItem}>
+      </ShowcaseContainer>
     );
   }
 }
-
