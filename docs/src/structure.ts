@@ -480,6 +480,20 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'tabs',
+        name: 'Spinner',
+        icon: 'spinner.svg',
+        source: [
+          'Spinner',
+        ],
+        overview: [
+          {
+            name: 'Spinner',
+            images: [],
+          },
+        ],
+      },
     ],
   },
   {

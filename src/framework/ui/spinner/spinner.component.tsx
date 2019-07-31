@@ -35,11 +35,15 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
 /**
  * Styled Spinner component. Designed to be used as ActivityIndicator component
  *
+ * @extends React.Component
+ *
  * @property {boolean} animating - Determines whether component is animating. Default is `true`.
- * @property {string} containerSize - Determines the the component.
+ *
+ * @property {string} size - Determines the the component.
  * Can be `giant`, `large`, `medium`, `small` or `tiny`.
  * Default is `medium`.
- * @property status - Determines the status of the component.
+ *
+ * @property {string} status - Determines the status of the component.
  * Can be `primary`, `success`, `info`, `warning` or `danger`.
  * Default is `primary`.
  *
