@@ -490,7 +490,7 @@ export const structure = [
         overview: [
           {
             name: 'Spinner',
-            images: [],
+            images: ['spinner.png'],
           },
         ],
       },
