@@ -49,7 +49,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
