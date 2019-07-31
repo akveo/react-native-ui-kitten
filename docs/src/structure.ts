@@ -332,7 +332,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Calendar',
-        icon: 'styled.svg',
+        icon: 'calendar.svg',
         source: [
           'Calendar',
         ],
