@@ -290,7 +290,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Drawer',
-        icon: 'list.svg',
+        icon: 'drawer.svg',
         source: [
           'Drawer',
           'DrawerItem',
@@ -298,7 +298,7 @@ export const structure = [
         overview: [
           {
             name: 'Drawer',
-            images: [],
+            images: ['drawer.png'],
           },
         ],
       },
