@@ -67,7 +67,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
@@ -84,7 +84,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  * };
  * ```
  *
- * @example Actions usage example
+ * @overview-example Actions usage example
  *
  * ```
  * import React from 'react';
