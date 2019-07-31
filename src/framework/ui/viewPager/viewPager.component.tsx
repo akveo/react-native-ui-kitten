@@ -52,7 +52,7 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  *
  * @property ScrollViewProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
