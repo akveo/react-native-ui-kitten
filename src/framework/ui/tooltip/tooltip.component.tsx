@@ -78,7 +78,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple usage example
  *
  * ```
  * import React from 'react';
@@ -102,6 +102,56 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *       <Tooltip
  *         visible={this.state.tooltipVisible}
  *         text='Tooltip Text'
+ *         onBackdropPress={this.toggleTooltip}>
+ *         <Button onPress={this.toggleTooltip}>
+ *           TOGGLE TOOLTIP
+ *         </Button>
+ *       </Tooltip>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Inline styling and 'with-icon' example
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   Image,
+ *   ImageProps,
+ * } from 'react-native';
+ * import {
+ *   Tooltip,
+ *   Button,
+ *   StyleType,
+ * } from 'react-native-ui-kitten';
+ *
+ * export class TooltipShowcase extends React.Component {
+ *
+ *   public state = {
+ *     tooltipVisible: false,
+ *   };
+ *
+ *   private toggleTooltip = () => {
+ *     this.setState({ tooltipVisible: !this.state.tooltipVisible });
+ *   };
+ *
+ *   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+ *     return (
+ *       <Image
+ *         style={style}
+ *         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+ *       />
+ *     );
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Tooltip
+ *         visible={this.state.tooltipVisible}
+ *         text='Tooltip Text'
+ *         textStyle={{ color: 'red', fontSize: 15 }}
+ *         icon={this.renderIcon}
  *         onBackdropPress={this.toggleTooltip}>
  *         <Button onPress={this.toggleTooltip}>
  *           TOGGLE TOOLTIP
