@@ -5,7 +5,6 @@
     "jsx": "react-native",
     "target": "es2015",
     "lib": [
-      "dom",
       "es2018"
     ]
   },
