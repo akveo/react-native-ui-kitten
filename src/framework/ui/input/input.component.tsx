@@ -382,12 +382,17 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 'auto',
+    textAlign: 'left',
   },
   placeholder: {},
   icon: {},
-  label: {},
+  label: {
+    textAlign: 'left',
+  },
   captionIcon: {},
-  captionLabel: {},
+  captionLabel: {
+    textAlign: 'left',
+  },
 });
 
 export const Input = styled<InputProps>(InputComponent);
