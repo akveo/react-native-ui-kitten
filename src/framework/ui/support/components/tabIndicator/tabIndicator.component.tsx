@@ -5,6 +5,7 @@ import {
   LayoutChangeEvent,
   ViewProps,
   ViewStyle,
+  I18nManager,
 } from 'react-native';
 
 interface ComponentProps {
@@ -86,7 +87,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     const animationDuration: number = params.animated ? this.props.animationDuration : 0;
 
     return Animated.timing(this.contentOffset, {
-      toValue: params.offset,
+      toValue: I18nManager.isRTL ? -params.offset : params.offset,
       duration: animationDuration,
       easing: Easing.linear,
     });
