@@ -4,6 +4,7 @@ import {
   Animated,
   StyleSheet,
   ViewProps,
+  I18nManager,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 
@@ -58,8 +59,8 @@ export class CheckMark extends React.Component<CheckMarkProps> {
 
     return (
       <Component style={[container, styles.container]}>
-        <Component style={[shape, left, styles.shape, styles.left]}/>
-        <Component style={[shape, right, styles.shape, styles.right]}/>
+        <Component style={[shape, left, styles.shape, styles.left]} />
+        <Component style={[shape, right, styles.shape, styles.right]} />
       </Component>
     );
   }
@@ -67,15 +68,15 @@ export class CheckMark extends React.Component<CheckMarkProps> {
 
 const styles = StyleSheet.create({
   container: {
-    transform: [{ rotate: '-5deg' }],
+    transform: [{ rotate: I18nManager.isRTL ? '5deg' : '-5deg' }, { rotateY: I18nManager.isRTL ? '180deg' : '0deg' }],
   },
   shape: {
     position: 'absolute',
   },
   left: {
-    transform: [{ rotate: '-40deg' }, { translateY: 1 }],
+    transform: [{ rotate: I18nManager.isRTL ? '40deg' : '-40deg' }, { translateY: 1 }],
   },
   right: {
-    transform: [{ rotate: '40deg' }, { translateY: 1 }],
+    transform: [{ rotate: I18nManager.isRTL ? '-40deg' : '40deg' }, { translateY: 1 }],
   },
 });
