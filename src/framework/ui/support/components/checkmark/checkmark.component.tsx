@@ -4,9 +4,9 @@ import {
   Animated,
   StyleSheet,
   ViewProps,
-  I18nManager,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
+import { I18nLayoutService } from '../../services';
 
 interface ComponentProps {
   isAnimated?: boolean;
@@ -67,16 +67,17 @@ export class CheckMark extends React.Component<CheckMarkProps> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    transform: [{ rotate: I18nManager.isRTL ? '5deg' : '-5deg' }, { rotateY: I18nManager.isRTL ? '180deg' : '0deg' }],
-  },
+  container: I18nLayoutService.toI18nStyle({
+    flexDirection: 'row',
+    transform: [{ rotate: '-5deg' }],
+  }),
   shape: {
     position: 'absolute',
   },
   left: {
-    transform: [{ rotate: I18nManager.isRTL ? '40deg' : '-40deg' }, { translateY: 1 }],
+    transform: [{ rotate: '-40deg' }],
   },
   right: {
-    transform: [{ rotate: I18nManager.isRTL ? '-40deg' : '40deg' }, { translateY: 1 }],
+    transform: [{ rotate: '40deg' }],
   },
 });

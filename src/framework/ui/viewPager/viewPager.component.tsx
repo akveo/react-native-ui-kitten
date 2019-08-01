@@ -18,8 +18,8 @@ import {
   View,
   ViewProps,
   ViewStyle,
-  I18nManager,
 } from 'react-native';
+import { I18nLayoutService } from '../support/services';
 
 type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
@@ -161,7 +161,8 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     const isHorizontalMove: boolean = Math.abs(state.dx) > 0 && Math.abs(state.dx) > Math.abs(state.dy);
 
     if (isHorizontalMove) {
-      const nextSelectedIndex: number = this.props.selectedIndex - Math.sign(I18nManager.isRTL ? -state.dx : state.dx);
+      const i18nOffset: number = I18nLayoutService.select(state.dx, -state.dx);
+      const nextSelectedIndex: number = this.props.selectedIndex - Math.sign(i18nOffset);
 
       return nextSelectedIndex >= 0 && nextSelectedIndex < this.getChildCount();
     }
@@ -170,16 +171,16 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
   };
 
   public onPanResponderMove = (event: GestureResponderEvent, state: PanResponderGestureState) => {
-    const selectedPageOffset: number = this.props.selectedIndex *
-      (I18nManager.isRTL ? -this.contentWidth : this.contentWidth);
+    const i18nOffset: number = I18nLayoutService.select(this.contentWidth, -this.contentWidth);
+    const selectedPageOffset: number = this.props.selectedIndex * i18nOffset;
 
     this.contentOffset.setValue(state.dx - selectedPageOffset);
   };
 
   public onPanResponderRelease = (event: GestureResponderEvent, state: PanResponderGestureState) => {
     if (Math.abs(state.vx) >= 0.5 || Math.abs(state.dx) >= 0.5 * this.contentWidth) {
-      const index: number = (I18nManager.isRTL ? -state.dx : state.dx) > 0 ?
-        this.props.selectedIndex - 1 : this.props.selectedIndex + 1;
+      const i18nOffset: number = I18nLayoutService.select(state.dx, -state.dx);
+      const index: number = i18nOffset > 0 ? this.props.selectedIndex - 1 : this.props.selectedIndex + 1;
       this.scrollToIndex({ index, animated: true });
     } else {
       const index: number = this.props.selectedIndex;
@@ -207,7 +208,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
   };
 
   private onContentOffsetAnimationStateChanged = (state: { value: number }) => {
-    this.contentOffsetValue = I18nManager.isRTL ? state.value : -state.value;
+    this.contentOffsetValue = I18nLayoutService.select(-state.value, state.value);
 
     if (this.props.onOffsetChange) {
       this.props.onOffsetChange(this.contentOffsetValue);
@@ -226,7 +227,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     const animationDuration: number = params.animated ? 300 : 0;
 
     return Animated.timing(this.contentOffset, {
-      toValue: I18nManager.isRTL ? params.offset : -params.offset,
+      toValue: I18nLayoutService.select(-params.offset, params.offset),
       easing: Easing.linear,
       duration: animationDuration,
     });

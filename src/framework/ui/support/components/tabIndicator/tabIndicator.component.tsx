@@ -5,8 +5,8 @@ import {
   LayoutChangeEvent,
   ViewProps,
   ViewStyle,
-  I18nManager,
 } from 'react-native';
+import { I18nLayoutService } from '../../services';
 
 interface ComponentProps {
   positions: number;
@@ -24,8 +24,8 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     animationDuration: 200,
   };
 
-  private contentOffset: Animated.Value = new Animated.Value(0);
   private indicatorWidth: number;
+  private contentOffset: Animated.Value = new Animated.Value(0);
 
   public componentDidMount() {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
@@ -38,10 +38,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   public componentDidUpdate() {
     const { selectedPosition: index } = this.props;
 
-    this.scrollToIndex({
-      index,
-      animated: true,
-    });
+    this.scrollToIndex({ index, animated: true });
   }
 
   public componentWillUnmount() {
@@ -87,7 +84,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     const animationDuration: number = params.animated ? this.props.animationDuration : 0;
 
     return Animated.timing(this.contentOffset, {
-      toValue: I18nManager.isRTL ? -params.offset : params.offset,
+      toValue: I18nLayoutService.select(params.offset, -params.offset),
       duration: animationDuration,
       easing: Easing.linear,
     });

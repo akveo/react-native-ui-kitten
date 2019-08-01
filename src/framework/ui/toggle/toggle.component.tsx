@@ -17,7 +17,6 @@ import {
   PanResponderGestureState,
   TouchableOpacity,
   PanResponderCallbacks,
-  I18nManager,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -26,6 +25,7 @@ import {
   styled,
 } from '@kitten/theme';
 import { CheckMark } from '../support/components';
+import { I18nLayoutService } from '../support/services';
 
 interface ComponentProps {
   checked?: boolean;
@@ -258,7 +258,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.thumbTranslateAnimationActive = true;
 
     Animated.timing(this.thumbTranslateAnimation, {
-      toValue: I18nManager.isRTL ? -value : value,
+      toValue: I18nLayoutService.select(value, -value),
       duration: 150,
       easing: Easing.linear,
     }).start(() => {

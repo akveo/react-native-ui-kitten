@@ -41,28 +41,6 @@ type Props = ThemedComponentProps & NavigationScreenProps;
 
 class HomeScreen extends React.Component<Props> {
 
-  static navigationOptions = {
-    title: 'Home',
-    headerRight: (
-      <Button
-        onPress={HomeScreen.manageeRTL}
-        title={I18nManager.isRTL ? 'LTR' : 'RTL'}
-      />
-    ),
-  };
-
-  private static manageeRTL() {
-    if (I18nManager.isRTL) {
-      I18nManager.allowRTL(false);
-      I18nManager.forceRTL(false);
-      Updates.reload();
-    } else {
-      I18nManager.allowRTL(true);
-      I18nManager.forceRTL(true);
-      Updates.reload();
-    }
-  }
-
   private onItemPress = (index: number) => {
     const { [index]: route } = routes;
 
