@@ -6,6 +6,7 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import { RTLService } from '@kitten/ui/i18n/rtl.service';
 
 interface ComponentProps {
   positions: number;
@@ -23,8 +24,8 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     animationDuration: 200,
   };
 
-  private contentOffset: Animated.Value = new Animated.Value(0);
   private indicatorWidth: number;
+  private contentOffset: Animated.Value = new Animated.Value(0);
 
   public componentDidMount() {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
@@ -86,7 +87,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     const animationDuration: number = params.animated ? this.props.animationDuration : 0;
 
     return Animated.timing(this.contentOffset, {
-      toValue: params.offset,
+      toValue: RTLService.toRTLNumber(params.offset),
       duration: animationDuration,
       easing: Easing.linear,
     });

@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  View,
   Animated,
   StyleSheet,
+  View,
   ViewProps,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
+import { RTLService } from '@kitten/ui/i18n/rtl.service';
 
 interface ComponentProps {
   isAnimated?: boolean;
@@ -31,20 +32,20 @@ export class CheckMark extends React.Component<CheckMarkProps> {
       // the dependence of the variables was determined experimentally. Changes may be needed later.
       shape: {
         borderWidth: width * 0.125,
-        borderTopLeftRadius: height * 0.5,
-        borderTopRightRadius: height * 0.5,
-        borderBottomLeftRadius: height * 0.5,
-        borderBottomRightRadius: height * 0.5,
+        borderTopStartRadius: height * 0.5,
+        borderTopEndRadius: height * 0.5,
+        borderBottomStartRadius: height * 0.5,
+        borderBottomEndRadius: height * 0.5,
         borderColor: backgroundColor,
         backgroundColor: backgroundColor,
       },
       left: {
-        left: width * 0.125,
+        start: width * 0.125,
         top: width * 0.25,
         height: height * 0.65,
       },
       right: {
-        right: width * 0.175,
+        end: width * 0.175,
         height: height * 0.875,
       },
     };
@@ -66,9 +67,10 @@ export class CheckMark extends React.Component<CheckMarkProps> {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: RTLService.ignoreRTLFlexStyle({
+    flexDirection: 'row',
     transform: [{ rotate: '-5deg' }],
-  },
+  }),
   shape: {
     position: 'absolute',
   },

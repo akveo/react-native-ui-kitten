@@ -68,7 +68,6 @@ class ShowcaseSectionComponent extends React.Component<ShowcaseSectionProps> {
 }
 
 export const ShowcaseSection = withStyles(ShowcaseSectionComponent, (theme: ThemeType) => ({
-  container: {},
   titleLabel: {
     marginVertical: 8,
     fontSize: 20,

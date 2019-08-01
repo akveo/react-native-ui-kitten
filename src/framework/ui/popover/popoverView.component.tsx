@@ -1,10 +1,10 @@
 import React from 'react';
 import {
+  StyleProp,
+  StyleSheet,
   View,
   ViewProps,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 import {
@@ -12,6 +12,7 @@ import {
   PopoverPlacements,
 } from './type';
 import { Arrow } from '../support/components';
+import { RTLService } from '@kitten/ui/i18n/rtl.service';
 
 interface ComponentProps {
   placement?: string | PopoverPlacement;
@@ -57,14 +58,15 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     // Reverse if needed
     let indicatorTranslate: number = isVertical ? -this.props.indicatorOffset : this.props.indicatorOffset;
     indicatorTranslate = isReverse ? -indicatorTranslate : indicatorTranslate;
+    indicatorTranslate = isVertical ? RTLService.toRTLNumber(indicatorTranslate) : indicatorTranslate;
 
-    const containerStyle: ViewStyle = {
+    const containerStyle: ViewStyle = RTLService.ignoreRTLFlexStyle({
       flexDirection: direction,
       alignItems: alignment,
       transform: [
         { translateX: containerTranslate },
       ],
-    };
+    });
 
     const contentStyle: ViewStyle = {
       backgroundColor: 'black',

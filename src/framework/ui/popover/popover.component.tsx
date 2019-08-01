@@ -41,6 +41,7 @@ import {
 } from './type';
 import { PopoverPlacementService } from './placement.service';
 import { ModalPresentingBased } from '../support/typings';
+import { RTLService } from '@kitten/ui/i18n/rtl.service';
 
 type ContentElement = React.ReactElement<any>;
 type ChildElement = React.ReactElement<any>;
@@ -213,6 +214,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
       other: layout[TAG_CHILD],
       bounds: WINDOW_BOUNDS,
       offsets: Offsets.find(children.props.style),
+      rtl: RTLService.isRTL(),
     };
   };
 

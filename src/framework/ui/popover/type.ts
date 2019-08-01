@@ -254,6 +254,7 @@ export class PlacementOptions {
   other: Frame = Frame.zero();
   bounds: Frame = Frame.zero();
   offsets: OffsetRect = OffsetRect.zero();
+  rtl: boolean = false;
 }
 
 export interface PopoverPlacement {
@@ -285,8 +286,12 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.leftOf(options.other).centerVerticalOf(options.other);
 
+      const ltrValue: number = origin.x + options.offsets.left;
+      const rtlValue: number =  options.bounds.size.width - (origin.x + size.width);
+
       return new Frame(
-        origin.x + options.offsets.left,
+        // options.rtl ? rtlValue : ltrValue,
+        ltrValue,
         origin.y,
         size.width,
         size.height,
@@ -403,8 +408,11 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.topOf(options.other).centerHorizontalOf(options.other);
 
+      const ltrValue: number = origin.x;
+      const rtlValue: number = options.bounds.size.width - (origin.x + size.width);
+
       return new Frame(
-        origin.x,
+        options.rtl ? rtlValue : ltrValue,
         origin.y + options.offsets.top,
         size.width,
         size.height,
@@ -521,8 +529,11 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.rightOf(options.other).centerVerticalOf(options.other);
 
+      const ltrValue: number = origin.x - options.offsets.right;
+      const rtlValue: number =  options.bounds.size.width - (origin.x + size.width);
+
       return new Frame(
-        origin.x - options.offsets.right,
+        options.rtl ? rtlValue : ltrValue,
         origin.y,
         size.width,
         size.height,
@@ -639,8 +650,11 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.bottomOf(options.other).centerHorizontalOf(options.other);
 
+      const ltrValue: number = origin.x;
+      const rtlValue: number = options.bounds.size.width - (origin.x + size.width);
+
       return new Frame(
-        origin.x,
+        options.rtl ? rtlValue : ltrValue,
         origin.y - options.offsets.bottom,
         size.width,
         size.height,
