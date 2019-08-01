@@ -8,7 +8,6 @@ import {
 import {
   render,
   fireEvent,
-  shallow,
   RenderAPI,
 } from 'react-native-testing-library';
 import {
@@ -41,23 +40,48 @@ const renderComponent = (props?: ButtonProps): RenderAPI => {
   );
 };
 
-describe('@button: matches snapshot', () => {
+const stringify = (object: any): string => JSON.stringify(object);
 
-  describe('* interaction', () => {
+describe('@button: component checks', () => {
 
-    it('* stateless', () => {
-      const component: RenderAPI = renderComponent();
-      const { output } = shallow(component.getByType(Button));
+  it('* emits onPress (in/out)', () => {
+    const onPress = jest.fn();
+    const onPressIn = jest.fn();
+    const onPressOut = jest.fn();
 
-      expect(output).toMatchSnapshot();
+    const component: RenderAPI = renderComponent({
+      onPress: onPress,
+      onPressIn: onPressIn,
+      onPressOut: onPressOut,
     });
 
+    fireEvent.press(component.getByType(TouchableOpacity));
+    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
+    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
+
+    expect(onPress).toBeCalled();
+    expect(onPressIn).toBeCalled();
+    expect(onPressOut).toBeCalled();
   });
 
-  describe('* appearance', () => {
+  it('* component text checks', () => {
+    const expectedText: React.ReactText = 'Button';
+    const component: RenderAPI = renderComponent({
+      children: expectedText,
+    });
+    const buttonText: React.ReactText = component.getByText(expectedText).props.children;
 
+    expect(buttonText).toBe(expectedText);
+  });
+
+  it('* component button checks', () => {
+    const expectedIconStyle: StyleType = {
+      width: 16,
+      height: 16,
+      tintColor: '#FFFFFF',
+      marginHorizontal: 10,
+    };
     const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
     const icon = (style: StyleType): React.ReactElement<ImageProps> => {
       return (
         <Image
@@ -66,71 +90,13 @@ describe('@button: matches snapshot', () => {
         />
       );
     };
-
-    const text: React.ReactText = 'BUTTON';
-
-    it('* empty', () => {
-      const component: RenderAPI = renderComponent();
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* icon', () => {
-      const component: RenderAPI = renderComponent({ icon });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* text', () => {
-      const component: RenderAPI = renderComponent({ children: text });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* icon and text', () => {
-      const component: RenderAPI = renderComponent({
-        icon,
-        children: text,
-      });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-    it('* icon and text (styled)', () => {
-      const component: RenderAPI = renderComponent({
-        icon,
-        children: text,
-        size: 'giant',
-        textStyle: {
-          fontSize: 32,
-          lineHeight: 34,
-        },
-      });
-      const { output } = shallow(component.getByType(Button));
-
-      expect(output).toMatchSnapshot();
-    });
-
-  });
-
-});
-
-describe('@button: component checks', () => {
-
-  it('* emits onPress', () => {
-    const onPress = jest.fn();
-
     const component: RenderAPI = renderComponent({
-      onPress: onPress,
+      icon: icon,
     });
+    const { style: passedIconStyle, source } = component.getByType(Image).props;
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
-    expect(onPress).toBeCalled();
+    expect(stringify(passedIconStyle[0])).toBe(stringify(expectedIconStyle));
+    expect(stringify(source)).toBe(stringify(iconSource));
   });
 
 });
