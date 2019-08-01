@@ -17,6 +17,7 @@ import {
   PanResponderGestureState,
   TouchableOpacity,
   PanResponderCallbacks,
+  I18nManager,
 } from 'react-native';
 import {
   StyledComponentProps,
@@ -257,7 +258,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.thumbTranslateAnimationActive = true;
 
     Animated.timing(this.thumbTranslateAnimation, {
-      toValue: value,
+      toValue: I18nManager.isRTL ? -value : value,
       duration: 150,
       easing: Easing.linear,
     }).start(() => {
@@ -329,7 +330,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       <View
         {...restProps}
         style={[componentStyle.container, styles.container, style]}>
-        <View style={[componentStyle.highlight, styles.highlight]}/>
+        <View style={[componentStyle.highlight, styles.highlight]} />
         <TouchableOpacity
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
@@ -337,7 +338,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
           <Animated.View
             style={[componentStyle.componentContainer, styles.componentContainer]}
             {...this.panResponder.panHandlers}>
-            <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
+            <Animated.View style={[componentStyle.ellipse, styles.ellipse]} />
             <Animated.View style={[componentStyle.thumb, styles.thumb]}>
               <CheckMark
                 style={componentStyle.icon}
