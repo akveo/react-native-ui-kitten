@@ -190,8 +190,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
 
   public scrollToIndex(params: { index: number, animated?: boolean }) {
     const { index, ...rest } = params;
-    const childCount = this.getChildCount() - 1;
-    const offset: number = this.contentWidth * (index < 0 ? 0 : index > childCount ? childCount : index);
+    const offset: number = this.contentWidth * index;
 
     this.scrollToOffset({ offset, ...rest });
   }
