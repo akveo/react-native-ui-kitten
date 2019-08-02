@@ -382,7 +382,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 'auto',
-    textAlign: 'left',
   },
   placeholder: {},
   icon: {},
