@@ -95,12 +95,8 @@ interface State {
  * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Can be `large`, `medium` or `small`.
  * Default is `medium`.
- *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `filled` or `outline`.
- * Default is `filled`.
  *
  * @property {boolean} multiSelect - Determines `multi-select` behavior of the Dropdown component.
  *
@@ -467,7 +463,16 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   private setVisibility = (): void => {
     const visible: boolean = !this.state.visible;
 
-    this.setState({ visible });
+    this.setState({ visible }, this.dispatchFocus);
+  };
+
+  private dispatchFocus = (): void => {
+    const { visible } = this.state;
+    if (visible) {
+      this.props.dispatch([Interaction.FOCUSED]);
+    } else {
+      this.props.dispatch([]);
+    }
   };
 
   private onPress = (event: GestureResponderEvent) => {
@@ -479,8 +484,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
     }
@@ -533,8 +536,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
       },
       menu: {
         maxHeight: menuStyles.menuMaxHeight,
-        borderStartRadius: 0,
-        borderEndRadius: menuStyles.menuBorderRadius,
+        borderRadius: menuStyles.menuBorderRadius,
         borderColor: menuStyles.menuBorderColor,
         borderWidth: menuStyles.menuBorderWidth,
       },
@@ -566,7 +568,10 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     const value: string = this.strategy.getPlaceholder(this.props.placeholder);
 
     return (
-      <Text style={[style, styles.text, this.props.textStyle]}>
+      <Text
+        style={[style, styles.text, this.props.textStyle]}
+        numberOfLines={1}
+        ellipsizeMode='tail'>
         {value}
       </Text>
     );
@@ -661,12 +666,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  text: {},
+  text: {
+    flex: 1,
+  },
   icon: {},
   label: {},
   indicator: {
     width: 0,
-    height: 0,
+    height: 2,
   },
   menu: {
     flexGrow: 0,

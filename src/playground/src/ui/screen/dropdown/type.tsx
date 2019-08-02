@@ -16,7 +16,7 @@ const iconClosedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/ar
 const iconOpenedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png';
 
 const defaultDropdownOption: DropdownItemType[] = [
-  { text: 'Option 1' },
+  { text: 'Option 1', disabled: true },
   { text: 'Option 2' },
   { text: 'Option 3' },
   { text: 'Option 4' },
@@ -109,6 +109,7 @@ const withIconDropdown: ComponentShowcaseItem = {
   props: {
     data: defaultDropdownOption,
     icon: renderIcon,
+    multiSelect: true,
   },
 };
 
@@ -156,14 +157,6 @@ export const dropdownShowcase: ComponentShowcase = {
 };
 
 export const dropdownSettings: ComponentShowcaseSetting[] = [
-  {
-    propertyName: 'appearance',
-    value: 'filled',
-  },
-  {
-    propertyName: 'appearance',
-    value: 'outline',
-  },
   {
     propertyName: 'status',
     value: 'primary',
