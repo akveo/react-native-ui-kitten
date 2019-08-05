@@ -1,7 +1,16 @@
+export interface CalendarDateOptions {
+  bounding: boolean;
+  holiday: boolean;
+}
+
+export interface CalendarDateInfo<D> extends CalendarDateOptions {
+  date: D;
+}
+
 const VIEW_MODE_DATE: CalendarViewMode = {
   id: 'DATE',
   navigationNext: (): CalendarViewMode => {
-    return VIEW_MODE_MONTH;
+    return VIEW_MODE_YEAR;
   },
   pickNext: (): CalendarViewMode => {
     return VIEW_MODE_DATE;
@@ -11,7 +20,7 @@ const VIEW_MODE_DATE: CalendarViewMode = {
 const VIEW_MODE_MONTH: CalendarViewMode = {
   id: 'MONTH',
   navigationNext: (): CalendarViewMode => {
-    return VIEW_MODE_YEAR;
+    return VIEW_MODE_DATE;
   },
   pickNext: (): CalendarViewMode => {
     return VIEW_MODE_DATE;
@@ -24,7 +33,7 @@ const VIEW_MODE_YEAR: CalendarViewMode = {
     return VIEW_MODE_DATE;
   },
   pickNext: (): CalendarViewMode => {
-    return VIEW_MODE_DATE;
+    return VIEW_MODE_MONTH;
   },
 };
 
@@ -45,3 +54,4 @@ export const CalendarViewModes: CalendarViewModes = {
   MONTH: VIEW_MODE_MONTH,
   YEAR: VIEW_MODE_YEAR,
 };
+

@@ -31,6 +31,7 @@ import {
   CalendarDateContentElement,
 } from './components/calendarDateContent.component';
 import {
+  CalendarDateInfo,
   CalendarViewMode,
   CalendarViewModes,
 } from './type';
@@ -49,9 +50,9 @@ interface ComponentProps<D> extends ViewProps {
   todayTitle?: (date: D) => string;
   filter?: (date: D) => boolean;
   onSelect?: (date: D) => void;
-  renderDay?: (date: D, style: StyleType) => React.ReactElement<any>;
-  renderMonth?: (date: D, style: StyleType) => React.ReactElement<any>;
-  renderYear?: (date: D, style: StyleType) => React.ReactElement<any>;
+  renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
+  renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
+  renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
 }
 
 interface State<D> {
@@ -171,7 +172,7 @@ const FORMAT_HEADER_YEAR: string = 'YYYY';
  * export class DailyValueCalendar extends React.Component {
  *   render() {
  *     return (
- *       <Calendar renderDay={DayCell} />
+ *       <Calendar renderDayIfNeeded={DayCell} />
  *     );
  *   }
  * }
@@ -245,7 +246,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
 
   static defaultProps = {
     dateService: new NativeDateService(),
-    boundingMonth: false,
+    boundingMonth: true,
     startView: CalendarViewModes.DATE,
   };
 
@@ -272,16 +273,16 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     return this.props.date || this.dateService.today();
   }
 
-  private onDaySelect = (date: D) => {
+  private onDaySelect = (date: CalendarDateInfo<D>) => {
     if (this.props.onSelect) {
-      this.props.onSelect(date);
+      this.props.onSelect(date.date);
     }
   };
 
-  private onMonthSelect = (date: D) => {
+  private onMonthSelect = (date: CalendarDateInfo<D>) => {
     const nextVisibleDate: D = this.dateService.createDate(
       this.dateService.getYear(this.state.visibleDate),
-      this.dateService.getMonth(date),
+      this.dateService.getMonth(date.date),
       this.dateService.getDate(this.state.visibleDate),
     );
 
@@ -291,9 +292,9 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     });
   };
 
-  private onYearSelect = (date: D) => {
+  private onYearSelect = (date: CalendarDateInfo<D>) => {
     const nextVisibleDate: D = this.dateService.createDate(
-      this.dateService.getYear(date),
+      this.dateService.getYear(date.date),
       this.dateService.getMonth(this.state.visibleDate),
       this.dateService.getDate(this.state.visibleDate),
     );
@@ -334,7 +335,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   private shouldUpdateDayElement = (props: CalendarPickerCellProps<D>,
                                     nextProps: CalendarPickerCellProps<D>): boolean => {
 
-    const dateChanged: boolean = this.dateService.compareDatesSafe(props.date, nextProps.date) !== 0;
+    const dateChanged: boolean = this.dateService.compareDatesSafe(props.date.date, nextProps.date.date) !== 0;
 
     if (dateChanged) {
       return true;
@@ -381,48 +382,48 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     };
   };
 
-  private isDaySelected = (date: D): boolean => {
-    return this.dateService.isSameDaySafe(date, this.date);
+  private isDaySelected = (date: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameDaySafe(date.date, this.date);
   };
 
-  private isMonthSelected = (date: D): boolean => {
-    return this.dateService.isSameMonthSafe(date, this.date);
+  private isMonthSelected = (date: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameMonthSafe(date.date, this.date);
   };
 
-  private isYearSelected = (date: D): boolean => {
-    return this.dateService.isSameYearSafe(date, this.date);
+  private isYearSelected = (date: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameYearSafe(date.date, this.date);
   };
 
-  private isDayDisabled = (date: D): boolean => {
+  private isDayDisabled = (date: CalendarDateInfo<D>): boolean => {
     return !this.isDateFitsBounds(date) || this.isDateFitsFilter(date);
   };
 
-  private isMonthDisabled = (date: D): boolean => {
+  private isMonthDisabled = (date: CalendarDateInfo<D>): boolean => {
     return !this.isDateFitsBounds(date) || this.isDateFitsFilter(date);
   };
 
-  private isYearDisabled = (date: D): boolean => {
+  private isYearDisabled = (date: CalendarDateInfo<D>): boolean => {
     return !this.isDateFitsBounds(date) || this.isDateFitsFilter(date);
   };
 
-  private isDayToday = (date: D): boolean => {
-    return this.dateService.isSameDaySafe(date, this.dateService.today());
+  private isDayToday = (date: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameDaySafe(date.date, this.dateService.today());
   };
 
-  private isMonthToday = (date: D): boolean => {
-    return this.dateService.isSameMonthSafe(date, this.dateService.today());
+  private isMonthToday = (date: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameMonthSafe(date.date, this.dateService.today());
   };
 
-  private isYearToday = (date: D): boolean => {
-    return this.dateService.isSameYearSafe(date, this.dateService.today());
+  private isYearToday = (date: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameYearSafe(date.date, this.dateService.today());
   };
 
-  private isDateFitsFilter = (date: D): boolean => {
-    return this.props.filter && !this.props.filter(date) || false;
+  private isDateFitsFilter = (date: CalendarDateInfo<D>): boolean => {
+    return this.props.filter && !this.props.filter(date.date) || false;
   };
 
-  private isDateFitsBounds = (date: D): boolean => {
-    return this.dateService.isBetweenIncludingSafe(date, this.min, this.max);
+  private isDateFitsBounds = (date: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isBetweenIncludingSafe(date.date, this.min, this.max);
   };
 
   private isDayPickerInViewPort = (index: number): boolean => {
@@ -468,55 +469,64 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     );
   };
 
-  private renderDayElement = (date: D, style: StyleType): CalendarDateContentElement => {
+  private renderDayElement = (date: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
         style={[style.container, styles.dayCell]}
         textStyle={style.text}>
-        {this.dateService.format(date, FORMAT_DAY)}
+        {this.dateService.format(date.date, FORMAT_DAY)}
       </CalendarDateContent>
     );
   };
 
-  private renderMonthElement = (date: D, style: StyleType): CalendarDateContentElement => {
+  private renderDayIfNeeded = (item: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+    const shouldRender: boolean = !item.bounding || this.props.boundingMonth;
+
+    if (shouldRender) {
+      const renderSelector = this.props.renderDay || this.renderDayElement;
+      return renderSelector(item, style);
+    }
+
+    return null;
+  };
+
+  private renderMonthElement = (date: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
         style={[style.container, styles.monthCell]}
         textStyle={style.text}>
-        {this.dateService.format(date, FORMAT_MONTH)}
+        {this.dateService.format(date.date, FORMAT_MONTH)}
       </CalendarDateContent>
     );
   };
 
-  private renderYearElement = (date: D, style: StyleType): CalendarDateContentElement => {
+  private renderYearElement = (date: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
         style={[style.container, styles.yearCell]}
         textStyle={style.text}>
-        {this.dateService.format(date, FORMAT_YEAR)}
+        {this.dateService.format(date.date, FORMAT_YEAR)}
       </CalendarDateContent>
     );
   };
 
-  private renderDayPickerElement = (date: D, index: number): CalendarPickerElement<D> => {
-    const data: D[][] = this.dataService.createDayPickerData(date, this.props.boundingMonth);
-
+  private renderDayPickerElement = (date: CalendarDateInfo<D>, index: number): CalendarPickerElement<D> => {
     return (
       <CalendarPicker
         key={index}
-        data={data}
+        category='day'
+        data={this.dataService.createDayPickerData(date.date)}
         onSelect={this.onDaySelect}
         isItemSelected={this.isDaySelected}
         isItemDisabled={this.isDayDisabled}
         isItemToday={this.isDayToday}
         shouldItemUpdate={this.shouldUpdateDayElement}
-        renderItem={this.props.renderDay || this.renderDayElement}
+        renderItem={this.renderDayIfNeeded}
       />
     );
   };
 
   private renderDayPickerPagerElement = (date: D): React.ReactElement<ViewProps> => {
-    const data: D[] = this.dataService.createDayPickerPagerData(this.min, this.max);
     const visibleDayPickerIndex: number = this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
 
     return (
@@ -526,7 +536,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         </CalendarMonthHeader>
         <CalendarPager
           selectedIndex={visibleDayPickerIndex}
-          data={data}
+          data={this.dataService.createDayPickerPagerData(this.min, this.max)}
           onSelect={this.onDayPickerPagerSelect}
           shouldLoadComponent={this.isDayPickerInViewPort}>
           {this.renderDayPickerElement}
@@ -536,11 +546,10 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderMonthPickerElement = (date: D): CalendarPagerElement<D> => {
-    const data: D[][] = this.dataService.createMonthPickerData(date, PICKER_ROWS, PICKER_COLUMNS);
-
     return (
       <CalendarPicker
-        data={data}
+        category='month'
+        data={this.dataService.createMonthPickerData(date, PICKER_ROWS, PICKER_COLUMNS)}
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
         isItemDisabled={this.isMonthDisabled}
@@ -550,13 +559,12 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     );
   };
 
-  private renderYearPickerElement = (date: D, index: number): React.ReactElement<ViewProps> => {
-    const data: D[][] = this.dataService.createYearPickerData(date, PICKER_ROWS, PICKER_COLUMNS);
-
+  private renderYearPickerElement = (date: CalendarDateInfo<D>, index: number): React.ReactElement<ViewProps> => {
     return (
       <CalendarPicker
         key={index}
-        data={data}
+        category='year'
+        data={this.dataService.createYearPickerData(date.date, PICKER_ROWS, PICKER_COLUMNS)}
         onSelect={this.onYearSelect}
         isItemSelected={this.isYearSelected}
         isItemDisabled={this.isYearDisabled}
@@ -567,14 +575,13 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderYearPickerPagerElement = (date: D): CalendarPagerElement<D> => {
-    const data: D[] = this.dataService.createYearPickerPagerData(this.min, this.max, PICKER_ROWS, PICKER_COLUMNS);
     const numberOfYears: number = this.dataService.getNumberOfYears(this.min, this.state.visibleDate);
     const visibleYearPickerIndex: number = Math.floor(numberOfYears / VIEWS_IN_PICKER);
 
     return (
       <CalendarPager
         selectedIndex={visibleYearPickerIndex}
-        data={data}
+        data={this.dataService.createYearPickerPagerData(this.min, this.max, PICKER_ROWS, PICKER_COLUMNS)}
         onSelect={this.onYearPickerPagerSelect}
         shouldLoadComponent={this.isYearPickerInViewPort}>
         {this.renderYearPickerElement}

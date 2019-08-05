@@ -13,6 +13,8 @@ const now: Date = new Date();
 
 const defaultCalendar: ComponentShowcaseItem = {
   props: {
+    // min: new Date(now.getFullYear(), now.getMonth(), 1),
+    // max: new Date(now.getFullYear(), now.getMonth() + 1, 0),
   },
 };
 

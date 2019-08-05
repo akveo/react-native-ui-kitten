@@ -15,7 +15,7 @@ describe('@month-model: service checks', () => {
 
   it('* should create day picker data with active month', () => {
     const date = new Date(2018, 7, 1);
-    const grid: Date[][] = dataService.createDayPickerData(date, true);
+    const grid: Date[][] = dataService.createDayPickerData(date);
     expect(grid.length).toBe(5);
     grid.forEach((row: Date[]) => {
       expect(row.length).toBe(7);
@@ -24,7 +24,7 @@ describe('@month-model: service checks', () => {
 
   it('* should create day picker data without boundingMonth', () => {
     const date = new Date(2018, 7, 1);
-    const grid: Date[][] = dataService.createDayPickerData(date, false);
+    const grid: Date[][] = dataService.createDayPickerData(date);
     const firstTwoEmpty = grid.shift().slice(0, 3);
     const lastTwoEmpty = grid.pop().slice(6);
     firstTwoEmpty.forEach(cell => {

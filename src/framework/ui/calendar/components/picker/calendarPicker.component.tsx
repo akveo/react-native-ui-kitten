@@ -19,14 +19,16 @@ import {
   CalendarPickerCellElement,
   CalendarPickerCellProps,
 } from './calendarPickerCell.component';
+import { CalendarDateInfo } from '../../type';
 
 interface ComponentProps<D> extends ViewProps {
-  data: D[][];
-  isItemSelected: (item: D) => boolean;
-  isItemDisabled: (item: D) => boolean;
-  isItemToday: (item: D) => boolean;
-  onSelect?: (item: D) => void;
-  renderItem: (item: D, style: StyleType) => React.ReactElement<any>;
+  data: CalendarDateInfo<D>[][];
+  category: string;
+  isItemSelected: (item: CalendarDateInfo<D>) => boolean;
+  isItemDisabled: (item: CalendarDateInfo<D>) => boolean;
+  isItemToday: (item: CalendarDateInfo<D>) => boolean;
+  onSelect?: (item: CalendarDateInfo<D>) => void;
+  renderItem: (item: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
   shouldItemUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
 }
 
@@ -35,13 +37,15 @@ export type CalendarPickerElement<D> = React.ReactElement<CalendarPickerProps<D>
 
 export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
 
-  private renderCellElement = (item: D, index: number): CalendarPickerCellElement<D> => {
+  private renderCellElement = (item: CalendarDateInfo<D>, index: number): CalendarPickerCellElement<D> => {
     return (
       <CalendarPickerCell
         key={index}
         date={item}
+        category={this.props.category}
         selected={this.props.isItemSelected(item)}
         disabled={this.props.isItemDisabled(item)}
+        bounding={item.bounding}
         today={this.props.isItemToday(item)}
         onSelect={this.props.onSelect}
         shouldComponentUpdate={this.props.shouldItemUpdate}>
@@ -50,7 +54,7 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
     );
   };
 
-  private renderRowElement = (item: D[], index: number): CalendarPickerRowElement<D> => {
+  private renderRowElement = (item: CalendarDateInfo<D>[], index: number): CalendarPickerRowElement<D> => {
     return (
       <CalendarPickerRow
         key={index}

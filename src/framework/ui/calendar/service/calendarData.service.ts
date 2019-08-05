@@ -9,50 +9,66 @@ import {
   batch,
   range,
 } from './helpers';
+import {
+  CalendarDateInfo,
+  CalendarDateOptions,
+} from '../type';
+
+const DEFAULT_DATE_OPTIONS: CalendarDateOptions = {
+  bounding: false,
+  holiday: false,
+};
+
+type DateRange<D> = CalendarDateInfo<D>[];
+type DateBatch<D> = DateRange<D>[];
 
 export class CalendarDataService<D> {
 
   constructor(protected dateService: DateService<D>) {
   }
 
-  public createDayPickerData = (date: D, boundingMonth: boolean): D[][] => {
-    const weeks: D[][] = this.createDates(date);
+  public createDayPickerData = (date: D): DateBatch<D> => {
+    const weeks: DateBatch<D> = this.createDates(date, DEFAULT_DATE_OPTIONS);
 
-    return this.withBoundingMonths(weeks, date, boundingMonth);
+    return this.withBoundingMonths(weeks, date);
   };
 
-  public createMonthPickerData = (date: D, rows: number, columns: number): D[][] => {
+  public createMonthPickerData = (date: D, rows: number, columns: number): DateBatch<D> => {
     const yearStart: D = this.dateService.getYearStart(date);
-    const monthRange: D[] = range(rows * columns, (index: number): D => {
-      return this.dateService.addMonth(yearStart, index);
+    const monthRange: DateRange<D> = range(rows * columns, (index: number): CalendarDateInfo<D> => {
+      const monthDate: D = this.dateService.addMonth(yearStart, index);
+      return { date: monthDate, ...DEFAULT_DATE_OPTIONS };
     });
 
     return batch(monthRange, rows);
   };
 
-  public createYearPickerData = (date: D, rows: number, columns: number): D[][] => {
+  public createYearPickerData = (date: D, rows: number, columns: number): DateBatch<D> => {
     const yearStart: D = this.dateService.getYearStart(date);
-    const yearRange: D[] = range(rows * columns, (index: number): D => {
-      return this.dateService.addYear(yearStart, index);
+    const yearRange: DateRange<D> = range(rows * columns, (index: number): CalendarDateInfo<D> => {
+      const yearDate: D = this.dateService.addYear(yearStart, index);
+      return { date: yearDate, ...DEFAULT_DATE_OPTIONS };
     });
 
     return batch(yearRange, rows);
   };
 
-  public createDayPickerPagerData = (startDate: D, endDate: D): D[] => {
+  public createDayPickerPagerData = (startDate: D, endDate: D): DateRange<D> => {
     const numberOfDayPickers: number = this.getNumberOfMonths(startDate, endDate) + 1;
 
-    return range(numberOfDayPickers, (index: number): D => {
-      return this.dateService.addMonth(startDate, index);
+    return range(numberOfDayPickers, (index: number): CalendarDateInfo<D> => {
+      const monthDate: D = this.dateService.addMonth(startDate, index);
+      return { date: monthDate, ...DEFAULT_DATE_OPTIONS };
     });
   };
 
-  public createYearPickerPagerData = (startDate: D, endDate: D, rows: number, columns: number): D[] => {
+  public createYearPickerPagerData = (startDate: D, endDate: D, rows: number, columns: number): DateRange<D> => {
     const numberOfYears: number = this.getNumberOfYears(startDate, endDate) + 1;
     const numberOfYearPickers: number = Math.max(Math.ceil(numberOfYears / (rows * columns)), 1);
 
-    return range(numberOfYearPickers, (index: number) => {
-      return this.dateService.addYear(startDate, index * rows * columns);
+    return range(numberOfYearPickers, (index: number): CalendarDateInfo<D> => {
+      const yearDate: D = this.dateService.addYear(startDate, index * rows * columns);
+      return { date: yearDate, ...DEFAULT_DATE_OPTIONS };
     });
   };
 
@@ -67,58 +83,62 @@ export class CalendarDataService<D> {
     return this.dateService.getYear(rhs) - this.dateService.getYear(lhs);
   };
 
-  private createDates(activeMonth: D): D[][] {
-    const days = this.createDateRangeForMonth(activeMonth);
-    const startOfWeekDayDiff = this.getStartOfWeekDayDiff(activeMonth);
+  private createDates(activeMonth: D, options: CalendarDateOptions): DateBatch<D> {
+    const days: DateRange<D> = this.createDateRangeForMonth(activeMonth, options);
+    const startOfWeekDayDiff: number = this.getStartOfWeekDayDiff(activeMonth);
 
     return batch(days, DateService.DAYS_IN_WEEK, startOfWeekDayDiff);
   }
 
-  private withBoundingMonths(weeks: D[][], activeMonth: D, boundingMonth: boolean): D[][] {
-    let withBoundingMonths = weeks;
+  private withBoundingMonths(weeks: DateBatch<D>, activeMonth: D): DateBatch<D> {
+    let withBoundingMonths: DateBatch<D> = weeks;
 
     if (this.isShouldAddPrevBoundingMonth(withBoundingMonths)) {
-      withBoundingMonths = this.addPrevBoundingMonth(withBoundingMonths, activeMonth, boundingMonth);
+      withBoundingMonths = this.addPrevBoundingMonth(withBoundingMonths, activeMonth);
     }
 
     if (this.isShouldAddNextBoundingMonth(withBoundingMonths)) {
-      withBoundingMonths = this.addNextBoundingMonth(withBoundingMonths, activeMonth, boundingMonth);
+      withBoundingMonths = this.addNextBoundingMonth(withBoundingMonths, activeMonth);
     }
 
     return withBoundingMonths;
   }
 
-  private addPrevBoundingMonth(weeks: D[][], activeMonth: D, boundingMonth: boolean): D[][] {
-    const firstWeek: D[] = weeks.shift();
-    const requiredItems: number = DateService.DAYS_IN_WEEK - firstWeek.length;
-    firstWeek.unshift(...this.createPrevBoundingDays(activeMonth, boundingMonth, requiredItems));
+  private addPrevBoundingMonth(weeks: DateBatch<D>, activeMonth: D): DateBatch<D> {
+    const firstWeek: DateRange<D> = weeks.shift();
+    const numberOfBoundingDates: number = DateService.DAYS_IN_WEEK - firstWeek.length;
+    firstWeek.unshift(...this.createPrevBoundingDays(activeMonth, numberOfBoundingDates));
 
     return [firstWeek, ...weeks];
   }
 
-  private addNextBoundingMonth(weeks: D[][], activeMonth: D, boundingMonth: boolean): D[][] {
-    const lastWeek: D[] = weeks.pop();
-    const requiredItems: number = DateService.DAYS_IN_WEEK - lastWeek.length;
-    lastWeek.push(...this.createNextBoundingDays(activeMonth, boundingMonth, requiredItems));
+  private addNextBoundingMonth(weeks: DateBatch<D>, activeMonth: D): DateBatch<D> {
+    const lastWeek: DateRange<D> = weeks.pop();
+    const numberOfBoundingDates: number = DateService.DAYS_IN_WEEK - lastWeek.length;
+    lastWeek.push(...this.createNextBoundingDays(activeMonth, numberOfBoundingDates));
 
     return [...weeks, lastWeek];
   }
 
-  private createPrevBoundingDays(activeMonth: D, boundingMonth: boolean, requiredItems: number): D[] {
+  private createPrevBoundingDays(activeMonth: D, numberOfBoundingDates: number): DateRange<D> {
     const month: D = this.dateService.addMonth(activeMonth, -1);
     const daysInMonth: number = this.dateService.getNumberOfDaysInMonth(month);
 
-    return this.createDateRangeForMonth(month)
-               .slice(daysInMonth - requiredItems)
-               .map(date => boundingMonth ? date : null);
+    return this.createDateRangeForMonth(month, DEFAULT_DATE_OPTIONS)
+               .slice(daysInMonth - numberOfBoundingDates)
+               .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+                 return {...date, bounding: true };
+               });
   }
 
-  private createNextBoundingDays(activeMonth: D, boundingMonth: boolean, requiredItems: number): D[] {
+  private createNextBoundingDays(activeMonth: D, numberOfBoundingDates: number): DateRange<D> {
     const month: D = this.dateService.addMonth(activeMonth, 1);
 
-    return this.createDateRangeForMonth(month)
-               .slice(0, requiredItems)
-               .map((date: D): D => boundingMonth ? date : null);
+    return this.createDateRangeForMonth(month, DEFAULT_DATE_OPTIONS)
+               .slice(0, numberOfBoundingDates)
+               .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+                 return {...date, bounding: true };
+               });
   }
 
   private getStartOfWeekDayDiff(date: D): number {
@@ -135,22 +155,23 @@ export class CalendarDataService<D> {
     ) % DateService.DAYS_IN_WEEK;
   }
 
-  private isShouldAddPrevBoundingMonth(weeks: D[][]): boolean {
+  private isShouldAddPrevBoundingMonth(weeks: DateBatch<D>): boolean {
     return weeks[0].length < DateService.DAYS_IN_WEEK;
   }
 
-  private isShouldAddNextBoundingMonth(weeks: D[][]): boolean {
+  private isShouldAddNextBoundingMonth(weeks: DateBatch<D>): boolean {
     return weeks[weeks.length - 1].length < DateService.DAYS_IN_WEEK;
   }
 
-  private createDateRangeForMonth(date: D): D[] {
-    const daysInMonth: number = this.dateService.getNumberOfDaysInMonth(date);
+  private createDateRangeForMonth(monthDate: D, options: CalendarDateOptions): DateRange<D> {
+    const daysInMonth: number = this.dateService.getNumberOfDaysInMonth(monthDate);
 
-    return range(daysInMonth, (i: number) => {
-      const year = this.dateService.getYear(date);
-      const month = this.dateService.getMonth(date);
+    return range(daysInMonth, (i: number): CalendarDateInfo<D> => {
+      const year: number = this.dateService.getYear(monthDate);
+      const month: number = this.dateService.getMonth(monthDate);
+      const date: D = this.dateService.createDate(year, month, i + 1);
 
-      return this.dateService.createDate(year, month, i + 1);
+      return { date, ...options };
     });
   }
 }

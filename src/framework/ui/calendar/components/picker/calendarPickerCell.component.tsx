@@ -15,14 +15,17 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import { CalendarDateInfo } from '@kitten/ui/calendar/type';
 
-type ChildrenProp<D> = (date: D, style: StyleType) => React.ReactElement<any>;
+type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
 
 interface ComponentProps<D> extends TouchableOpacityProps {
-  date: D;
+  date: CalendarDateInfo<D>;
+  category?: string;
   selected?: boolean;
+  bounding?: boolean;
   today?: boolean;
-  onSelect?: (date: D) => void;
+  onSelect?: (date: CalendarDateInfo<D>) => void;
   children: ChildrenProp<D>;
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
 }
@@ -54,6 +57,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
+      contentBorderWidth,
       contentBorderRadius,
       contentBorderColor,
       contentBackgroundColor,
@@ -67,6 +71,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
     return {
       container: containerParameters,
       contentContainer: {
+        borderWidth: contentBorderWidth,
         borderRadius: contentBorderRadius,
         borderColor: contentBorderColor,
         backgroundColor: contentBackgroundColor,
@@ -81,17 +86,15 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
   };
 
   private renderContentElement = (source: ChildrenProp<D>, style: StyleType): React.ReactElement<any> => {
-    return source(this.props.date, {
+    return source && source(this.props.date, {
       container: style.contentContainer,
       text: style.contentText,
     });
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, date, children, ...restProps } = this.props;
-
+    const { style, themedStyle, date, bounding, children, ...restProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-    const contentElement: React.ReactElement<any> = date && this.renderContentElement(children, componentStyles);
 
     return (
       <TouchableOpacity
@@ -99,7 +102,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
         onPress={this.onPress}
         {...restProps}
         style={[container, styles.container, style]}>
-        {contentElement}
+        {this.renderContentElement(children, componentStyles)}
       </TouchableOpacity>
     );
   }

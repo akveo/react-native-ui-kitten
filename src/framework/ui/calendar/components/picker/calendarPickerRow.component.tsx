@@ -11,10 +11,11 @@ import {
   ViewProps,
 } from 'react-native';
 import { CalendarPickerCellElement } from './calendarPickerCell.component';
+import { CalendarDateInfo } from '../../type';
 
 interface ComponentProps<D> extends ViewProps {
-  data: D[];
-  renderItem: (item: D, index: number) => CalendarPickerCellElement<D>;
+  data: CalendarDateInfo<D>[];
+  renderItem: (item: CalendarDateInfo<D>, index: number) => CalendarPickerCellElement<D>;
 }
 
 export type CalendarPickerRowProps<D> = ComponentProps<D>;

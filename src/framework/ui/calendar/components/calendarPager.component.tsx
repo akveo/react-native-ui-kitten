@@ -4,11 +4,12 @@ import {
   ViewPagerElement,
   ViewPagerProps,
 } from '../../viewPager/viewPager.component';
+import { CalendarDateInfo } from '../type';
 import { Override } from '../../support/typings';
 
 export type CalendarPagerProps<D> = Override<ViewPagerProps, {
-  data: D[];
-  children: (date: D, index: number) => React.ReactElement<any>;
+  data: CalendarDateInfo<D>[];
+  children: (date: CalendarDateInfo<D>, index: number) => React.ReactElement<any>;
 }>;
 
 export type CalendarPagerElement<D> = React.ReactElement<CalendarPagerProps<D>>;
@@ -29,7 +30,7 @@ export class CalendarPager<D> extends React.Component<CalendarPagerProps<D>> {
     return true;
   };
 
-  private createChildElement = (date: D, index: number): React.ReactElement<any> => {
+  private createChildElement = (date: CalendarDateInfo<D>, index: number): React.ReactElement<any> => {
     if (this.shouldLoadComponent(index)) {
       return this.props.children(date, index);
     }
