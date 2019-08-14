@@ -30,7 +30,7 @@ type MenuItemElement = DefaultMenuItemElement | React.ReactElement<any>;
 
 export interface ComponentProps {
   data: DropdownItemType[];
-  size?: string;
+  status?: string;
   multiSelect?: boolean;
   strategy: SelectionStrategy;
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
@@ -53,14 +53,13 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
   };
 
   private renderDefaultItem = (info: ListRenderItemInfo<DropdownItemType>): DefaultMenuItemElement => {
-    const { size, renderItem, multiSelect, strategy } = this.props;
+    const { status, renderItem, multiSelect, strategy } = this.props;
     const selected: boolean = strategy.isSelected(info.item);
 
     return this.areThereSubItems(info.item) ? (
       <DropdownGroup
         {...info}
         strategy={strategy}
-        size={size}
         multiSelect={multiSelect}
         renderItem={renderItem}
         onPress={this.onSelect}
@@ -70,7 +69,7 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
         {...info}
         disabled={info.item.disabled}
         selected={selected}
-        size={size}
+        status={status}
         multiSelect={multiSelect}
         onPress={this.onSelect}
       />

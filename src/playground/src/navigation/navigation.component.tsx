@@ -54,7 +54,7 @@ const AppNavigator = createStackNavigator({
   ['Sample']: SampleContainer,
   ['Modal']: ModalContainer,
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Dropdown',
   headerMode: 'screen',
 });
 

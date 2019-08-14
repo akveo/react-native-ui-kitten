@@ -48,6 +48,7 @@ import {
   allWithPrefix,
   isValidString,
 } from '../support/services';
+import { TouchableFocusEvent } from '../support/typings/type';
 
 type IconElement = React.ReactElement<ImageProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
@@ -70,7 +71,7 @@ interface ComponentProps {
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
   onSelect: (option: DropdownOption, event?: GestureResponderEvent) => void;
-  size?: string;
+  // size?: string;
   status?: string;
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
 }
@@ -445,7 +446,16 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     menuWidth: 0,
   };
 
+  public focus = () => {
+    this.dropdownRef.current.focus();
+  };
+
+  public blur = () => {
+    this.dropdownRef.current.blur();
+  };
+
   private strategy: SelectionStrategy;
+  private dropdownRef: React.RefObject<TouchableOpacity> = React.createRef();
 
   constructor(props: DropdownProps) {
     super(props);
@@ -463,13 +473,13 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   private setVisibility = (): void => {
     const visible: boolean = !this.state.visible;
 
-    this.setState({ visible }, this.dispatchFocus);
+    this.setState({ visible }, this.dispatchActive);
   };
 
-  private dispatchFocus = (): void => {
+  private dispatchActive = (): void => {
     const { visible } = this.state;
     if (visible) {
-      this.props.dispatch([Interaction.FOCUSED]);
+      this.props.dispatch([Interaction.ACTIVE]);
     } else {
       this.props.dispatch([]);
     }
@@ -484,6 +494,8 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
+    this.props.dispatch([Interaction.ACTIVE]);
+
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
     }
@@ -497,6 +509,22 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     }
   };
 
+  private onFocus = (event: TouchableFocusEvent) => {
+    this.props.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(event);
+    }
+  };
+
+  private onBlur = (event: TouchableFocusEvent) => {
+    this.props.dispatch([]);
+
+    if (this.props.onBlur) {
+      this.props.onBlur(event);
+    }
+  };
+
   private onControlMeasure = (result: MeasureResult): void => {
     const width: number = result[MEASURED_CONTROL_TAG].size.width;
 
@@ -507,8 +535,10 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     const controlStyles: StyleType = allWithPrefix(source, 'control');
     const iconStyles: StyleType = allWithPrefix(source, 'icon');
     const textStyles: StyleType = allWithPrefix(source, 'text');
+    const placeholderStyles: StyleType = allWithPrefix(source, 'placeholder');
     const menuStyles: StyleType = allWithPrefix(source, 'menu');
     const labelStyle: StyleType = allWithPrefix(source, 'label');
+    const outlineStyles: StyleType = allWithPrefix(source, 'outline');
 
     return {
       control: {
@@ -533,6 +563,18 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
         fontWeight: textStyles.textFontWeight,
         lineHeight: textStyles.textLineHeight,
         marginHorizontal: textStyles.textMarginHorizontal,
+      },
+      placeholder: {
+        color: placeholderStyles.placeholderColor,
+        fontSize: placeholderStyles.placeholderFontSize,
+        fontWeight: placeholderStyles.placeholderFontWeight,
+        lineHeight: placeholderStyles.placeholderLineHeight,
+        marginHorizontal: placeholderStyles.placeholderMarginHorizontal,
+      },
+      outline: {
+        backgroundColor: outlineStyles.outlineBackgroundColor,
+        padding: outlineStyles.outlinePadding,
+        borderRadius: outlineStyles.outlineBorderRadius,
       },
       menu: {
         maxHeight: menuStyles.menuMaxHeight,
@@ -564,12 +606,14 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     return icon && icon(style, visible);
   };
 
-  private renderTextElement = (style: TextStyle): TextElement => {
-    const value: string = this.strategy.getPlaceholder(this.props.placeholder);
+  private renderTextElement = (valueStyle: TextStyle, placeholderStyle: TextStyle): TextElement => {
+    const { placeholder, textStyle } = this.props;
+    const value: string = this.strategy.getPlaceholder(placeholder);
+    const style: TextStyle = placeholder === value ? placeholderStyle : valueStyle;
 
     return (
       <Text
-        style={[style, styles.text, this.props.textStyle]}
+        style={[style, styles.text, textStyle]}
         numberOfLines={1}
         ellipsizeMode='tail'>
         {value}
@@ -596,13 +640,13 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   private renderControlChildren = (style: StyleType): [IconElement, TextElement] => {
     return [
       this.renderIconElement(style.icon),
-      this.renderTextElement(style.text),
+      this.renderTextElement(style.text, style.placeholder),
     ];
   };
 
   private renderControlElement = (): ControlElement => {
     const { themedStyle, controlStyle, ...restProps } = this.props;
-    const { control, ...childrenStyles } = this.getComponentStyle(themedStyle);
+    const { control, outline, ...childrenStyles } = this.getComponentStyle(themedStyle);
     const [iconElement, textElement] = this.renderControlChildren(childrenStyles);
 
     const measuringProps: MeasuringElementProps = { tag: MEASURED_CONTROL_TAG };
@@ -616,6 +660,9 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
             key={MEASURED_CONTROL_TAG}
             activeOpacity={1.0}
             style={[styles.control, control, controlStyle]}
+            ref={this.dropdownRef}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
@@ -643,18 +690,21 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     const evaStyles: StyleType = this.getComponentStyle(themedStyle);
     const [menuElement, labelElement, controlElement] = this.renderComponentChildren(evaStyles);
     const additionalMenuStyle: StyleType = { maxWidth: menuWidth };
+    // const outlineStyle: StyleType = { width: menuWidth + 8 };
 
     return (
       <View style={style}>
         {labelElement}
-        <Popover
-          visible={visible}
-          content={menuElement}
-          style={additionalMenuStyle}
-          indicatorStyle={styles.indicator}
-          onBackdropPress={this.setVisibility}>
-          {controlElement}
-        </Popover>
+        <View style={[styles.outline, evaStyles.outline]}>
+          <Popover
+            visible={visible}
+            content={menuElement}
+            style={additionalMenuStyle}
+            indicatorStyle={styles.indicator}
+            onBackdropPress={this.setVisibility}>
+            {controlElement}
+          </Popover>
+        </View>
       </View>
     );
   }
@@ -673,10 +723,18 @@ const styles = StyleSheet.create({
   label: {},
   indicator: {
     width: 0,
-    height: 2,
+    height: 6,
   },
   menu: {
     flexGrow: 0,
+  },
+  outlineContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  outline: {
+    justifyContent: 'center',
   },
 });
 

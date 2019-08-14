@@ -38,7 +38,7 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      itemMarginLeft,
+      itemPaddingLeft,
       textColor,
       textFontSize,
       textFontWeight,
@@ -50,7 +50,7 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     return {
       container: containerStyles,
       item: {
-        marginLeft: itemMarginLeft,
+        paddingLeft: itemPaddingLeft,
       },
       text: {
         color: textColor,

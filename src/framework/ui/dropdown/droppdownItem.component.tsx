@@ -42,7 +42,7 @@ export interface ComponentProps {
   item: DropdownItemType;
   selected?: boolean;
   multiSelect?: boolean;
-  size?: string;
+  status?: string;
 }
 
 export type DropdownItemProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<DropdownItemType>;
@@ -92,13 +92,26 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
       textFontWeight,
       textLineHeight,
       textMarginHorizontal,
+      multiSelectBackgroundColor,
+      multiSelectTextColor,
       ...containerStyles
     } = source;
 
     return {
       container: containerStyles,
+      multiSelectContainer: {
+        ...containerStyles,
+        backgroundColor: multiSelectBackgroundColor,
+      },
       text: {
         color: textColor,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
+        lineHeight: textLineHeight,
+        marginHorizontal: textMarginHorizontal,
+      },
+      multiSelectText: {
+        color: multiSelectTextColor,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         lineHeight: textLineHeight,
@@ -138,15 +151,15 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
 
   private renderMultiSelectItem = (): MultiSelectItemElement => {
     const { disabled, item, themedStyle, selected, style, ...restProps } = this.props;
-    const { container, text } = this.getComponentStyle(themedStyle);
+    const { multiSelectContainer, multiSelectText } = this.getComponentStyle(themedStyle);
 
     return (
       <View
         {...restProps}
-        style={[styles.container, container, style]}>
+        style={[styles.container, multiSelectContainer, style]}>
         <CheckBox
           text={item.text}
-          textStyle={[text, item.textStyle]}
+          textStyle={[multiSelectText, item.textStyle]}
           disabled={disabled}
           checked={selected}
           onChange={this.onMultiSelectItemPress}
