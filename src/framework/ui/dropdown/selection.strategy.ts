@@ -18,6 +18,18 @@ export class MultiSelectStrategy implements SelectionStrategy {
   }
 
   public select(option: DropdownItemType, callback?: () => void): DropdownItemType[] {
+    const subOptionsExist: boolean = this.areThereSubOptions(option);
+
+    if (subOptionsExist) {
+      this.selectOptionWithSubOptions(option);
+    } else {
+      this.selectDefaultOption(option);
+    }
+
+    return this.selectedOption;
+  }
+
+  private selectDefaultOption(option: DropdownItemType): void {
     const optionAlreadyExist: boolean = this.selectedOption
       .some((item: DropdownItemType) => {
         return item === option;
@@ -27,7 +39,22 @@ export class MultiSelectStrategy implements SelectionStrategy {
     } else {
       this.selectedOption.push(option);
     }
-    return this.selectedOption;
+  }
+
+  private selectOptionWithSubOptions(option: DropdownItemType): void {
+    const subOptionsAlreadyExist: boolean = this.selectedOption
+      .some((item: DropdownItemType) => {
+        return option.items
+          .some((subItem: DropdownItemType) => {
+            return subItem === item;
+          });
+      });
+
+    if (subOptionsAlreadyExist) {
+      option.items.forEach((subItem: DropdownItemType) => this.removeOption(subItem));
+    } else {
+      this.selectedOption = this.selectedOption.concat(option.items);
+    }
   }
 
   public getPlaceholder(placeholder: string): string {
@@ -61,6 +88,10 @@ export class MultiSelectStrategy implements SelectionStrategy {
     if (index !== -1) {
       this.selectedOption.splice(index, 1);
     }
+  }
+
+  private areThereSubOptions(option: DropdownItemType): boolean {
+    return option.items && option.items.length !== 0;
   }
 }
 

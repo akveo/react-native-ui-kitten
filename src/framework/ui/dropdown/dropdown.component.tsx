@@ -71,7 +71,6 @@ interface ComponentProps {
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
   onSelect: (option: DropdownOption, event?: GestureResponderEvent) => void;
-  // size?: string;
   status?: string;
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
 }
@@ -94,10 +93,6 @@ interface State {
  *
  * @property {string} status - Determines the status of the component.
  * Can be `primary`, `success`, `info`, `warning` or `danger`.
- *
- * @property {string} size - Determines the size of the component.
- * Can be `large`, `medium` or `small`.
- * Default is `medium`.
  *
  * @property {boolean} multiSelect - Determines `multi-select` behavior of the Dropdown component.
  *
@@ -265,8 +260,6 @@ interface State {
  *       <Dropdown
  *         data={this.items}
  *         style={{ margin: 16 }}
- *         appearance='outline'
- *         size='large'
  *         status='warning'
  *         selectedOption={this.state.selectedOption}
  *         onSelect={this.onSelect}
@@ -690,7 +683,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     const evaStyles: StyleType = this.getComponentStyle(themedStyle);
     const [menuElement, labelElement, controlElement] = this.renderComponentChildren(evaStyles);
     const additionalMenuStyle: StyleType = { maxWidth: menuWidth };
-    // const outlineStyle: StyleType = { width: menuWidth + 8 };
 
     return (
       <View style={style}>

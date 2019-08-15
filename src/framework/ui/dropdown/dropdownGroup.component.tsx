@@ -14,7 +14,10 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Text } from '../text/text.component';
+import {
+  Text,
+  TextElement,
+} from '../text/text.component';
 import {
   DropdownItem,
   DropdownItemElement,
@@ -29,8 +32,14 @@ interface ComponentProps {
   renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
 }
 
+interface MainItemStatus {
+  selected: boolean;
+  indeterminate: boolean;
+}
+
 export type DropdownGroupProps = ComponentProps & Partial<DropdownItemProps> & StyledComponentProps;
 export type DropdownGroupElement = React.ReactElement<DropdownGroupProps>;
+type MainElement = TextElement | DropdownItemElement;
 
 export class DropdownGroupComponent extends React.Component<DropdownGroupProps> {
 
@@ -62,6 +71,22 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     };
   };
 
+  private getMainItemStatus = (subItemsSelectedStatusArray: boolean[]): MainItemStatus => {
+    const someSelected: boolean = subItemsSelectedStatusArray
+      .some((item: boolean) => item === true);
+    const everySelected: boolean = subItemsSelectedStatusArray
+      .every((item: boolean) => item === true);
+
+    switch (true) {
+      case (someSelected && !everySelected):
+        return { selected: true, indeterminate: true };
+      case  !someSelected:
+        return { selected: false, indeterminate: false };
+      case everySelected:
+        return { selected: true, indeterminate: false };
+    }
+  };
+
   private renderSubItem = (option: DropdownItemType, index: number): DropdownItemElement => {
     const { item, renderItem, strategy, ...restProps } = this.props;
     const returningOption: ListRenderItemInfo<DropdownItemType> = {
@@ -80,11 +105,11 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     );
   };
 
-  public render(): DropdownGroupElement {
+  private renderSubItemsElements = (): DropdownItemElement[] => {
     const { item, themedStyle } = this.props;
-    const { container, item: itemStyle, text: textStyle } = this.getComponentStyle(themedStyle);
+    const { item: itemStyle } = this.getComponentStyle(themedStyle);
 
-    const subItemsElements: DropdownItemElement[] = item.items
+    return item.items
       .map((option: DropdownItemType, index: number) => {
         const element: DropdownItemElement = this.renderSubItem(option, index);
 
@@ -94,10 +119,47 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
           key: index,
         });
       });
+  };
+
+  private renderMultiSelectMainElement = (subItemsElements: DropdownItemElement[]): DropdownItemElement => {
+    const { item, ...restProps } = this.props;
+    const subItemsSelectedStatusArray: boolean[] = subItemsElements
+      .map((subItem: DropdownItemElement) => subItem.props.selected);
+    const itemStatus: MainItemStatus = this.getMainItemStatus(subItemsSelectedStatusArray);
+
+    return (
+      <DropdownItem
+        {...restProps}
+        {...itemStatus}
+        item={item}
+      />
+    );
+  };
+
+  private renderDefaultMainElement = (): TextElement => {
+    const { item, themedStyle } = this.props;
+    const { text: textStyle } = this.getComponentStyle(themedStyle);
+
+    return (
+      <Text style={[textStyle, item.textStyle]}>{item.text}</Text>
+    );
+  };
+
+  private renderMainElement = (subItemsElements: DropdownItemElement[]): MainElement => {
+    const { multiSelect } = this.props;
+
+    return multiSelect ? this.renderMultiSelectMainElement(subItemsElements) : this.renderDefaultMainElement();
+  };
+
+  public render(): DropdownGroupElement {
+    const { themedStyle } = this.props;
+    const { container, text: textStyle } = this.getComponentStyle(themedStyle);
+    const subItemsElements: DropdownItemElement[] = this.renderSubItemsElements();
+    const mainElement: MainElement = this.renderMainElement(subItemsElements);
 
     return (
       <View style={container}>
-        <Text style={[textStyle, item.textStyle]}>{item.text}</Text>
+        {mainElement}
         {subItemsElements}
       </View>
     );

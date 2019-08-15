@@ -41,8 +41,8 @@ export interface DropdownItemType {
 export interface ComponentProps {
   item: DropdownItemType;
   selected?: boolean;
+  indeterminate?: boolean;
   multiSelect?: boolean;
-  status?: string;
 }
 
 export type DropdownItemProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<DropdownItemType>;
@@ -150,7 +150,15 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
   };
 
   private renderMultiSelectItem = (): MultiSelectItemElement => {
-    const { disabled, item, themedStyle, selected, style, ...restProps } = this.props;
+    const {
+      disabled,
+      item,
+      themedStyle,
+      selected,
+      style,
+      indeterminate,
+      ...restProps
+    } = this.props;
     const { multiSelectContainer, multiSelectText } = this.getComponentStyle(themedStyle);
 
     return (
@@ -162,6 +170,7 @@ class DropdownItemComponent extends React.Component<DropdownItemProps> {
           textStyle={[multiSelectText, item.textStyle]}
           disabled={disabled}
           checked={selected}
+          indeterminate={indeterminate}
           onChange={this.onMultiSelectItemPress}
         />
       </View>
