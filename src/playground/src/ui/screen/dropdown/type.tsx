@@ -31,7 +31,7 @@ const withGroupsDropdownOption: DropdownItemType[] = [
   {
     text: 'Option 2',
     items: [
-      { text: 'Option 21' },
+      { text: 'Option 21', disabled: true },
       { text: 'Option 22' },
       { text: 'Option 23' },
     ],

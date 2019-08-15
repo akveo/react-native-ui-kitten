@@ -53,7 +53,11 @@ export class MultiSelectStrategy implements SelectionStrategy {
     if (subOptionsAlreadyExist) {
       option.items.forEach((subItem: DropdownItemType) => this.removeOption(subItem));
     } else {
-      this.selectedOption = this.selectedOption.concat(option.items);
+      const enabledItems: DropdownItemType[] = option.items
+        .filter((item: DropdownItemType) => {
+          return !item.disabled;
+        });
+      this.selectedOption = this.selectedOption.concat(enabledItems);
     }
   }
 

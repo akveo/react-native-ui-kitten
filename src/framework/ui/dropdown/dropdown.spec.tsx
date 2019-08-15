@@ -160,6 +160,24 @@ describe('@ dropdown component checks', () => {
     expect(onMultiSelectPress).toHaveBeenCalled();
   });
 
+  it('* disabled props checks', () => {
+    const onDropdownPress = jest.fn();
+    const onMultiSelectPress = jest.fn();
+    const application: RenderAPI = render(
+      <TestApplication
+        dropdownDisabled={false}
+        multiSelectDisabled={true}
+        onDropdownPress={onDropdownPress}
+        onMultiSelectPress={onMultiSelectPress}
+      />,
+    );
+
+    fireEvent.press(application.getAllByType(TouchableOpacity)[0]);
+    expect(onDropdownPress).toHaveBeenCalled();
+    fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
+    expect(onMultiSelectPress).toHaveBeenCalledTimes(0);
+  });
+
   it('* dropdown default onSelect works properly', () => {
     const expectedSelectedOption: DropdownItemType = { text: 'Option 1' };
     const onDropdownPress = jest.fn();
@@ -193,24 +211,6 @@ describe('@ dropdown component checks', () => {
     expect(stringify(selectedOption)).toBe(stringify(expectedSelectedOption));
   });
 
-  it('* disabled props checks', () => {
-    const onDropdownPress = jest.fn();
-    const onMultiSelectPress = jest.fn();
-    const application: RenderAPI = render(
-      <TestApplication
-        dropdownDisabled={false}
-        multiSelectDisabled={true}
-        onDropdownPress={onDropdownPress}
-        onMultiSelectPress={onMultiSelectPress}
-      />,
-    );
-
-    fireEvent.press(application.getAllByType(TouchableOpacity)[0]);
-    expect(onDropdownPress).toHaveBeenCalled();
-    fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
-    expect(onMultiSelectPress).toHaveBeenCalledTimes(0);
-  });
-
   it('* multiSelect unselect works properly', () => {
     const onMultiSelectPress = jest.fn();
     const application: RenderAPI = render(
@@ -223,6 +223,28 @@ describe('@ dropdown component checks', () => {
     const { selectedOption } = application.getAllByType(TouchableOpacity)[1].props;
 
     expect(stringify(selectedOption)).toBe(stringify([]));
+  });
+
+  it('* multiSelect group selected works properly', () => {
+    const expectedSelectedOption: DropdownItemType[] = [
+      { text: 'Option 32' },
+      { text: 'Option 33' },
+    ];
+    const onMultiSelectPress = jest.fn();
+    const application: RenderAPI = render(
+      <TestApplication onMultiSelectPress={onMultiSelectPress}/>,
+    );
+
+    fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
+    fireEvent(application.getAllByText('Option 3')[0], 'onChange');
+    const { selectedOption: selected1 } = application.getAllByType(TouchableOpacity)[1].props;
+
+    expect(stringify(selected1)).toBe(stringify(expectedSelectedOption));
+
+    fireEvent(application.getAllByText('Option 3')[0], 'onChange');
+    const { selectedOption: selected2 } = application.getAllByType(TouchableOpacity)[1].props;
+
+    expect(stringify(selected2)).toBe(stringify([]));
   });
 
   it('* dropdown onPress* handling', () => {

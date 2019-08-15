@@ -439,16 +439,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     menuWidth: 0,
   };
 
-  public focus = () => {
-    this.dropdownRef.current.focus();
-  };
-
-  public blur = () => {
-    this.dropdownRef.current.blur();
-  };
-
   private strategy: SelectionStrategy;
-  private dropdownRef: React.RefObject<TouchableOpacity> = React.createRef();
 
   constructor(props: DropdownProps) {
     super(props);
@@ -499,22 +490,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
-    }
-  };
-
-  private onFocus = (event: TouchableFocusEvent) => {
-    this.props.dispatch([Interaction.FOCUSED]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus(event);
-    }
-  };
-
-  private onBlur = (event: TouchableFocusEvent) => {
-    this.props.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur(event);
     }
   };
 
@@ -653,9 +628,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
             key={MEASURED_CONTROL_TAG}
             activeOpacity={1.0}
             style={[styles.control, control, controlStyle]}
-            ref={this.dropdownRef}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
             onPress={this.onPress}
             onPressIn={this.onPressIn}
             onPressOut={this.onPressOut}>
