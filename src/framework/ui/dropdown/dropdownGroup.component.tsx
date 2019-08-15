@@ -15,10 +15,6 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import {
   DropdownItem,
   DropdownItemElement,
   DropdownItemProps,
@@ -39,7 +35,6 @@ interface MainItemStatus {
 
 export type DropdownGroupProps = ComponentProps & Partial<DropdownItemProps> & StyledComponentProps;
 export type DropdownGroupElement = React.ReactElement<DropdownGroupProps>;
-type MainElement = TextElement | DropdownItemElement;
 
 export class DropdownGroupComponent extends React.Component<DropdownGroupProps> {
 
@@ -48,11 +43,6 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       itemPaddingLeft,
-      textColor,
-      textFontSize,
-      textFontWeight,
-      textLineHeight,
-      textMarginHorizontal,
       ...containerStyles
     } = source;
 
@@ -60,13 +50,6 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
       container: containerStyles,
       item: {
         paddingLeft: itemPaddingLeft,
-      },
-      text: {
-        color: textColor,
-        fontSize: textFontSize,
-        fontWeight: textFontWeight,
-        lineHeight: textLineHeight,
-        marginHorizontal: textMarginHorizontal,
       },
     };
   };
@@ -136,16 +119,18 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     );
   };
 
-  private renderDefaultMainElement = (): TextElement => {
-    const { item, themedStyle } = this.props;
-    const { text: textStyle } = this.getComponentStyle(themedStyle);
+  private renderDefaultMainElement = (): DropdownItemElement => {
+    const { item } = this.props;
 
     return (
-      <Text style={[textStyle, item.textStyle]}>{item.text}</Text>
+      <DropdownItem
+        disabled={true}
+        item={item}
+      />
     );
   };
 
-  private renderMainElement = (subItemsElements: DropdownItemElement[]): MainElement => {
+  private renderMainElement = (subItemsElements: DropdownItemElement[]): DropdownItemElement => {
     const { multiSelect } = this.props;
 
     return multiSelect ? this.renderMultiSelectMainElement(subItemsElements) : this.renderDefaultMainElement();
@@ -153,9 +138,9 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
 
   public render(): DropdownGroupElement {
     const { themedStyle } = this.props;
-    const { container, text: textStyle } = this.getComponentStyle(themedStyle);
+    const { container } = this.getComponentStyle(themedStyle);
     const subItemsElements: DropdownItemElement[] = this.renderSubItemsElements();
-    const mainElement: MainElement = this.renderMainElement(subItemsElements);
+    const mainElement: DropdownItemElement = this.renderMainElement(subItemsElements);
 
     return (
       <View style={container}>

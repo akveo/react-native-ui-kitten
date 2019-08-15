@@ -17,6 +17,7 @@ import {
   View,
   ViewStyle,
   ListRenderItemInfo,
+  Animated,
 } from 'react-native';
 import {
   Interaction,
@@ -48,7 +49,7 @@ import {
   allWithPrefix,
   isValidString,
 } from '../support/services';
-import { TouchableFocusEvent } from '../support/typings/type';
+import { Chevron } from '../support/components';
 
 type IconElement = React.ReactElement<ImageProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
@@ -440,12 +441,14 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private strategy: SelectionStrategy;
+  private iconAnimation: Animated.Value;
 
   constructor(props: DropdownProps) {
     super(props);
     const { multiSelect, selectedOption } = props;
     this.strategy = multiSelect ?
       new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
+    this.iconAnimation = new Animated.Value(-180);
   }
 
   private onItemSelect = (option: DropdownItemType, event: GestureResponderEvent): void => {
@@ -457,7 +460,12 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   private setVisibility = (): void => {
     const visible: boolean = !this.state.visible;
 
-    this.setState({ visible }, this.dispatchActive);
+    this.setState({ visible }, this.handleVisibleChange);
+  };
+
+  private handleVisibleChange = (): void => {
+    this.dispatchActive();
+    this.startIconAnimation();
   };
 
   private dispatchActive = (): void => {
@@ -467,6 +475,22 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     } else {
       this.props.dispatch([]);
     }
+  };
+
+  private startIconAnimation = (): void => {
+    const { visible } = this.state;
+    if (visible) {
+      this.animateIcon(0);
+    } else {
+      this.animateIcon(-180);
+    }
+  };
+
+  private animateIcon = (toValue: number): void => {
+    Animated.timing(this.iconAnimation, {
+      toValue: toValue,
+      duration: 200,
+    }).start();
   };
 
   private onPress = (event: GestureResponderEvent) => {
@@ -567,11 +591,33 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     );
   };
 
+  private renderDefaultIconElement = (style: ImageStyle): IconElement => {
+    const { visible } = this.state;
+
+    const rotateInterpolate = this.iconAnimation.interpolate({
+      inputRange: [-180, 0],
+      outputRange: ['-180deg', '0deg'],
+    });
+    const animatedStyle: StyleType = { transform: [{ rotate: rotateInterpolate }] };
+
+    return (
+      <Chevron
+        style={style}
+        isAnimated={true}
+        animationStyle={animatedStyle}
+      />
+    );
+  };
+
   private renderIconElement = (style: ImageStyle): IconElement => {
     const { icon } = this.props;
     const { visible } = this.state;
 
-    return icon && icon(style, visible);
+    if (icon) {
+      return icon(style, visible);
+    } else {
+      return this.renderDefaultIconElement(style);
+    }
   };
 
   private renderTextElement = (valueStyle: TextStyle, placeholderStyle: TextStyle): TextElement => {
