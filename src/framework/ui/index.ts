@@ -49,6 +49,17 @@ export {
   ListItemElement,
 } from './list/listItem.component';
 export {
+  Menu,
+  MenuProps,
+  MenuElement,
+} from './menu/menu.component';
+export {
+  MenuItem,
+  MenuItemProps,
+  MenuItemElement,
+  MenuItemType,
+} from './menu/menuItem.component';
+export {
   Modal,
   ModalProps,
   ModalElement,

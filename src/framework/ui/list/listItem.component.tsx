@@ -375,7 +375,6 @@ export class ListItemComponent extends React.Component<ListItemProps> {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   contentContainer: {
