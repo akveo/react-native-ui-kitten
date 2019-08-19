@@ -382,8 +382,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   icon: {},
-  title: {},
-  description: {},
+  title: {
+    textAlign: 'left',
+  },
+  description: {
+    textAlign: 'left',
+  },
   accessory: {},
 });
 

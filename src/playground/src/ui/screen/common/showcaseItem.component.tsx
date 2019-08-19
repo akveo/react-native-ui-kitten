@@ -69,6 +69,7 @@ export const ShowcaseItem = withStyles(ShowcaseItemComponent, (theme: ThemeType)
   titleLabel: {
     minWidth: 128,
     fontSize: 13,
+    textAlign: 'left',
   },
   element: {},
 }));

@@ -385,9 +385,13 @@ const styles = StyleSheet.create({
   },
   placeholder: {},
   icon: {},
-  label: {},
+  label: {
+    textAlign: 'left',
+  },
   captionIcon: {},
-  captionLabel: {},
+  captionLabel: {
+    textAlign: 'left',
+  },
 });
 
 export const Input = styled<InputProps>(InputComponent);
