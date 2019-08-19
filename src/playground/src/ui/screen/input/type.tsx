@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image } from 'react-native';
 import { StyleType } from '@kitten/theme';
+import { Icon } from '@kitten/ui';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
@@ -24,11 +24,9 @@ const disabledInput: ComponentShowcaseItem = {
 const iconInput: ComponentShowcaseItem = {
   title: 'Icon',
   props: {
-    icon: (style: StyleType) =>
-      <Image
-        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-        style={style}
-      />,
+    icon: (style: StyleType) => (
+      <Icon name='star' {...style} />
+    ),
   },
 };
 
@@ -50,11 +48,9 @@ const captionIconInput: ComponentShowcaseItem = {
   title: 'Caption Icon',
   props: {
     caption: 'Place your text',
-    captionIcon: (style: StyleType) =>
-      <Image
-        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-        style={style}
-      />,
+    captionIcon: (style: StyleType) => (
+      <Icon name='star' {...style} />
+    ),
   },
 };
 

@@ -29,6 +29,21 @@ export {
   CheckBoxElement,
 } from './checkbox/checkbox.component';
 export {
+  Icon,
+  IconProps,
+  IconElement,
+} from './icon/icon.component';
+export {
+  IconRegistry,
+  IconRegistryProps,
+  IconRegistryElement,
+} from './icon/iconRegistry.component';
+export {
+  IconPack,
+  IconProvider,
+  Icons,
+} from './icon/service/type';
+export {
   Input,
   InputProps,
   InputElement,

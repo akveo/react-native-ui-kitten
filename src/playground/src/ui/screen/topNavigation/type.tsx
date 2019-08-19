@@ -4,7 +4,10 @@ import {
   ImageProps,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
-import { TopNavigationAction } from '@kitten/ui';
+import {
+  Icon,
+  TopNavigationAction,
+} from '@kitten/ui';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
@@ -14,10 +17,7 @@ import {
 
 const RightControlIcon = (style: StyleType): React.ReactElement<ImageProps> => {
   return (
-    <Image
-      style={style}
-      source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-    />
+    <Icon name='star'{...style} />
   );
 };
 

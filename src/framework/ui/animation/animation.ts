@@ -6,7 +6,7 @@ export const DEFAULT_CONFIG: AnimationConfig = {
 };
 
 /**
- * @property {number} cycles - number of animation cycles. -1 for infinite
+ * @property cycles - number of animation cycles. -1 for infinite
  */
 export interface AnimationConfig extends Animated.AnimationConfig {
   cycles?: number;
