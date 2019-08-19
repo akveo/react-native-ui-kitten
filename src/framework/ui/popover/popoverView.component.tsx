@@ -12,6 +12,7 @@ import {
   PopoverPlacements,
 } from './type';
 import { Arrow } from '../support/components';
+import { I18nLayoutService } from '../support/services';
 
 interface ComponentProps {
   placement?: string | PopoverPlacement;
@@ -55,16 +56,18 @@ export class PopoverView extends React.Component<PopoverViewProps> {
 
     // Translate indicator by passed `indicatorOffset`
     // Reverse if needed
+
     let indicatorTranslate: number = isVertical ? -this.props.indicatorOffset : this.props.indicatorOffset;
     indicatorTranslate = isReverse ? -indicatorTranslate : indicatorTranslate;
+    const i18nVerticalIndicatorTranslate = I18nLayoutService.select(indicatorTranslate, -indicatorTranslate);
+    indicatorTranslate = isVertical ? i18nVerticalIndicatorTranslate : indicatorTranslate;
 
-    const containerStyle: ViewStyle = {
+    const containerStyle: ViewStyle = I18nLayoutService.toI18nStyle({
       flexDirection: direction,
-      alignItems: alignment,
       transform: [
         { translateX: containerTranslate },
       ],
-    };
+    });
 
     const contentStyle: ViewStyle = {
       backgroundColor: 'black',
@@ -88,7 +91,10 @@ export class PopoverView extends React.Component<PopoverViewProps> {
     };
 
     return {
-      container: containerStyle,
+      container: {
+        ...containerStyle,
+        alignItems: alignment,
+      },
       content: contentStyle,
       indicator: indicatorStyle,
     };
