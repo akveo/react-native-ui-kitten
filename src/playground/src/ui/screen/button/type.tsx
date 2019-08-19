@@ -10,12 +10,10 @@ import {
   ComponentShowcaseSetting,
 } from '../common/type';
 import { StyleType } from '@kitten/theme';
+import { Icon } from '@kitten/ui';
 
 const IconElement = (style: StyleType): React.ReactElement<ImageProps> => (
-  <Image
-    source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-    style={style}
-  />
+  <Icon name='star' {...style}/>
 );
 
 const defaultButton: ComponentShowcaseItem = {

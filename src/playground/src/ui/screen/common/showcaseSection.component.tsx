@@ -73,6 +73,7 @@ export const ShowcaseSection = withStyles(ShowcaseSectionComponent, (theme: Them
     marginVertical: 8,
     fontSize: 20,
     lineHeight: 28,
+    textAlign: 'left',
   },
   item: {
     marginVertical: 8,

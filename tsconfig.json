@@ -8,12 +8,19 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "jsx": "react-native",
+    "target": "es2015",
     "typeRoots": [
       "./node_modules/@types"
     ],
     "paths": {
       "@kitten/*": [
         "./src/framework/*"
+      ],
+      "@ui-kitten/*": [
+        "./src/*"
+      ],
+      "react-native-ui-kitten": [
+        "./src/framework"
       ]
     }
   }

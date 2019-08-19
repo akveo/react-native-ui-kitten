@@ -29,6 +29,28 @@ export {
   CheckBoxElement,
 } from './checkbox/checkbox.component';
 export {
+  Dropdown,
+  DropdownProps,
+  DropdownElement,
+  DropdownOption,
+} from './dropdown/dropdown.component';
+export { DropdownItemType } from './dropdown/droppdownItem.component';
+export {
+  Icon,
+  IconProps,
+  IconElement,
+} from './icon/icon.component';
+export {
+  IconRegistry,
+  IconRegistryProps,
+  IconRegistryElement,
+} from './icon/iconRegistry.component';
+export {
+  IconPack,
+  IconProvider,
+  Icons,
+} from './icon/service/type';
+export {
   Input,
   InputProps,
   InputElement,
@@ -95,6 +117,11 @@ export {
   RadioGroupProps,
   RadioGroupElement,
 } from './radioGroup/radioGroup.component';
+export {
+  Spinner,
+  SpinnerProps,
+  SpinnerElement,
+} from './spinner/spinner.component';
 export {
   TabView,
   TabViewProps,
