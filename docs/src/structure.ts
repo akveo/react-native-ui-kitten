@@ -75,6 +75,28 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Eva Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-icons-module.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: '3rd party Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-vector-icons.md',
+          },
+        ],
+      },
     ],
   },
   {
@@ -387,6 +409,20 @@ export const structure = [
           {
             name: 'Input',
             images: ['input.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
           },
         ],
       },

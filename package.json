@@ -46,7 +46,9 @@
     "@eva-design/eva": "^1.0.1",
     "@eva-design/processor": "^1.0.1",
     "hoist-non-react-statics": "^3.2.1",
-    "lodash.merge": "^4.6.1"
+    "lodash.merge": "^4.6.1",
+    "react-native-eva-icons": "^1.1.0",
+    "react-native-svg": "^9.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -58,7 +60,7 @@
     "@types/react": "^16.8.19",
     "@types/react-native": "^0.57.60",
     "@types/react-navigation": "^3.0.7",
-    "@types/react-test-renderer": "^16.8.1",
+    "@types/react-test-renderer": "^16.9.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-module-resolver": "^3.2.0",
@@ -75,7 +77,7 @@
     "react": "16.8.3",
     "react-native": "^0.59.8",
     "react-native-testing-library": "^1.5.0",
-    "react-test-renderer": "^16.8.3",
+    "react-test-renderer": "16.8.3",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
     "ts-node": "^3.2.2",

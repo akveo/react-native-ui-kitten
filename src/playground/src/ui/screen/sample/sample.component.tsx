@@ -1,11 +1,13 @@
 import React from 'react';
 import {
+  ImageProps,
   ImageSourcePropType,
   View,
 } from 'react-native';
 import {
   Avatar,
   Button,
+  Icon,
   Input,
   Layout,
   LayoutElement,
@@ -13,6 +15,7 @@ import {
   Toggle,
 } from '@kitten/ui';
 import {
+  StyleType,
   ThemedComponentProps,
   ThemeType,
   withStyles,
@@ -24,9 +27,30 @@ interface ComponentProps {
   setTheme: (dark: boolean) => void;
 }
 
+interface State {
+  passwordVisible: boolean;
+}
+
 type SampleComponentProps = ComponentProps & ThemedComponentProps;
 
-class SampleComponent extends React.Component<SampleComponentProps> {
+class SampleComponent extends React.Component<SampleComponentProps, State> {
+
+  public state: State = {
+    passwordVisible: false,
+  };
+
+  private onPasswordIconPress = () => {
+    const passwordVisible: boolean = !this.state.passwordVisible;
+    this.setState({ passwordVisible });
+  };
+
+  private renderPasswordIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+    const icon: string = this.state.passwordVisible ? 'eye' : 'eye-off';
+
+    return (
+      <Icon name={icon} {...style}/>
+    );
+  };
 
   public render(): LayoutElement {
     const { themedStyle, profileImage, isDark, setTheme } = this.props;
@@ -70,8 +94,11 @@ class SampleComponent extends React.Component<SampleComponentProps> {
             />
             <Input
               style={themedStyle.formInput}
+              secureTextEntry={!this.state.passwordVisible}
               label='Password'
               placeholder='********'
+              icon={this.renderPasswordIcon}
+              onIconPress={this.onPasswordIconPress}
             />
           </Layout>
           <Button style={themedStyle.signInButton}>SIGN IN</Button>
