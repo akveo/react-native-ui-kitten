@@ -24,6 +24,7 @@ import {
   LayoutContainer,
   SampleContainer,
   ModalContainer,
+  DropdownContainer,
   SpinnerContainer,
   IconContainer,
 } from '../ui/screen';
@@ -39,6 +40,7 @@ const AppNavigator = createStackNavigator({
   ['Button']: ButtonContainer,
   ['Button Group']: ButtonGroupContainer,
   ['Checkbox']: CheckBoxContainer,
+  ['Dropdown']: DropdownContainer,
   ['Icon']: IconContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,
