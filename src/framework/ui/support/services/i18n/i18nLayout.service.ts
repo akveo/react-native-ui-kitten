@@ -5,7 +5,6 @@ import {
 import { I18nLayoutFlexMap } from './i18nLayoutFlexMap';
 import { I18nLayoutServiceType } from './type';
 
-
 class NativeI18nLayoutService implements I18nLayoutServiceType {
 
   public isRTL(): boolean {
