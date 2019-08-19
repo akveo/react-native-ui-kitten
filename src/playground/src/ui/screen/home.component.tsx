@@ -1,5 +1,8 @@
 import React from 'react';
-import { ListRenderItemInfo } from 'react-native';
+import {
+  Button,
+  ListRenderItemInfo,
+} from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   ThemedComponentProps,
@@ -21,6 +24,7 @@ export const routes: RouteType[] = [
   { name: 'Button Group' },
   { name: 'Checkbox' },
   { name: 'Drawer' },
+  { name: 'Icon' },
   { name: 'Input' },
   { name: 'Layout' },
   { name: 'List' },
@@ -40,10 +44,6 @@ export const routes: RouteType[] = [
 type Props = ThemedComponentProps & NavigationScreenProps;
 
 class HomeScreen extends React.Component<Props> {
-
-  static navigationOptions = {
-    title: 'Home',
-  };
 
   private onItemPress = (index: number) => {
     const { [index]: route } = routes;

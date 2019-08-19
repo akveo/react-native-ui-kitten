@@ -27,6 +27,7 @@ import {
   ToggleContainer,
   TooltipContainer,
   TopNavigationContainer,
+  IconContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
 
@@ -42,6 +43,7 @@ const routes: NavigationRouteConfigMap = {
   ['Button Group']: ButtonGroupContainer,
   ['Checkbox']: CheckBoxContainer,
   ['Drawer']: DrawerContainer,
+  ['Icon']: IconContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,
   ['List']: ListContainer,

@@ -4,6 +4,7 @@ export { ButtonContainer } from './button/button.container';
 export { ButtonGroupContainer } from './buttonGroup/buttonGroup.container';
 export { CheckBoxContainer } from './checkbox/checkbox.container';
 export { DrawerContainer } from './drawer/drawer.container';
+export { IconContainer } from './icon/icon.container';
 export { InputContainer } from './input/input.container';
 export { LayoutContainer } from './layout/layout.container';
 export { ListContainer } from './list/list.container';
