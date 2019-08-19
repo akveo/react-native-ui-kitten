@@ -2,23 +2,23 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Text, ImageProps, Image,
+  ImageProps,
+  Image,
 } from 'react-native';
 import {
   Menu,
-  MenuItemProps,
   MenuItemType,
 } from '@kitten/ui';
 import { StyleType } from '@kitten/theme';
 
 interface State {
-  selectedIndex: number;
+  selectedItem: MenuItemType;
 }
 
 export class MenuContainer extends React.Component<any, State> {
 
   public state: State = {
-    selectedIndex: null,
+    selectedItem: null,
   };
 
   private Icon = (style: StyleType): React.ReactElement<ImageProps> => (
@@ -39,12 +39,26 @@ export class MenuContainer extends React.Component<any, State> {
       disabled: true,
     },
     {
-      // title: 'Item 3',
+      title: 'Item 3',
       icon: this.Icon,
     },
     {
       title: 'Item 4',
-      // icon: this.Icon,
+      icon: this.Icon,
+      subItems: [
+        {
+          title: 'Item 41',
+          icon: this.Icon,
+        },
+        {
+          title: 'Item 42',
+          icon: this.Icon,
+        },
+        {
+          title: 'Item 43',
+          icon: this.Icon,
+        },
+      ],
     },
     {
       title: 'Item 5',
@@ -52,8 +66,8 @@ export class MenuContainer extends React.Component<any, State> {
     },
   ];
 
-  private onSelect = (selectedIndex: number): void => {
-    this.setState({ selectedIndex });
+  private onSelect = (selectedItem: MenuItemType): void => {
+    this.setState({ selectedItem });
   };
 
   public render(): React.ReactNode {
@@ -62,7 +76,7 @@ export class MenuContainer extends React.Component<any, State> {
         <Menu
           appearance='divider'
           data={this.menuItems}
-          selectedIndex={this.state.selectedIndex}
+          selectedItem={this.state.selectedItem}
           onSelect={this.onSelect}
         />
       </View>

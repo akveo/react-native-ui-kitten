@@ -60,6 +60,11 @@ export {
   MenuItemType,
 } from './menu/menuItem.component';
 export {
+  MenuGroup,
+  MenuGroupElement,
+  MenuGroupProps,
+} from './menu/menuGroup.component';
+export {
   Modal,
   ModalProps,
   ModalElement,

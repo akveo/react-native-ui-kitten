@@ -22,13 +22,15 @@ import {
 } from '../list/list.component';
 import {
   MenuItem,
+  MenuItemType,
   MenuItemElement,
   MenuItemProps,
 } from './menuItem.component';
+import { MenuGroup } from './menuGroup.component';
 
 interface ComponentProps {
-  selectedIndex?: number;
-  onSelect?: (index: number, event?: GestureResponderEvent) => void;
+  selectedItem?: MenuItemType;
+  onSelect?: (item: MenuItemType, event?: GestureResponderEvent) => void;
 }
 
 export type MenuProps = StyledComponentProps & ComponentProps & Omit<ListProps, 'renderItem'>;
@@ -38,11 +40,11 @@ class MenuComponent extends React.Component<MenuProps> {
 
   static styledComponentName: string = 'Menu';
 
-  private onSelect = (index: number, event: GestureResponderEvent): void => {
+  private onSelect = (selectedItem: MenuItemType, event: GestureResponderEvent): void => {
     const { onSelect } = this.props;
 
     if (onSelect) {
-      onSelect(index, event);
+      onSelect(selectedItem, event);
     }
   };
 
@@ -55,11 +57,31 @@ class MenuComponent extends React.Component<MenuProps> {
     };
   };
 
-  private renderMenuItem = (info: ListRenderItemInfo<MenuItemProps>): MenuItemElement => {
-    const { selectedIndex } = this.props;
-    const isSelected: boolean = info.index === selectedIndex;
+  private areThereSubItems = (item: MenuItemProps): boolean => {
+    return item.subItems && item.subItems.length !== 0;
+  };
 
-    return (
+  private getIsSelected = (item: MenuItemType): boolean => {
+    const { selectedItem } = this.props;
+    if (selectedItem) {
+      return selectedItem.title === item.title;
+    }
+    return false;
+  };
+
+  private renderMenuItem = (info: ListRenderItemInfo<MenuItemProps>): MenuItemElement => {
+    const { selectedItem, themedStyle } = this.props;
+    const separatorStyle: StyleType = this.getComponentStyles(themedStyle);
+    const isSelected: boolean = this.getIsSelected(info.item);
+
+    return this.areThereSubItems(info.item) ? (
+      <MenuGroup
+        item={info.item}
+        selectedItem={selectedItem}
+        separatorStyle={separatorStyle}
+        onSelect={this.onSelect}
+      />
+    ) : (
       <MenuItem
         {...info.item}
         selected={isSelected}

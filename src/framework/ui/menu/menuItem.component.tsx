@@ -11,6 +11,7 @@ import {
   ImageProps,
   TouchableOpacity,
   GestureResponderEvent,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   Interaction,
@@ -22,12 +23,12 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import { TouchableIndexedProps } from '../support/typings';
+import { Override } from '../support/typings/type';
 
 type IconElement = React.ReactElement<ImageProps>;
 
 export interface MenuItemType {
-  title?: string;
+  title: string;
   icon?: (style: StyleType) => IconElement;
   disabled?: boolean;
   subItems?: MenuItemType[];
@@ -35,10 +36,9 @@ export interface MenuItemType {
 
 interface ComponentProps extends MenuItemType {
   selected?: boolean;
-  index: number;
 }
 
-export type MenuItemProps = StyledComponentProps & ComponentProps & TouchableIndexedProps;
+export type MenuItemProps = StyledComponentProps & ComponentProps & TouchableTypeReturningProps<MenuItemType>;
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
 
 class MenuItemComponent extends React.Component<MenuItemProps> {
@@ -47,7 +47,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
 
   private onPress = (event: GestureResponderEvent) => {
     if (this.props.onPress) {
-      this.props.onPress(this.props.index, event);
+      this.props.onPress(this.props, event);
     }
   };
 
@@ -55,7 +55,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(this.props.index, event);
+      this.props.onPressIn(this.props, event);
     }
   };
 
@@ -63,13 +63,13 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(this.props.index, event);
+      this.props.onPressOut(this.props, event);
     }
   };
 
   private onLongPress = (event: GestureResponderEvent) => {
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.props.index, event);
+      this.props.onLongPress(this.props, event);
     }
   };
 
@@ -168,10 +168,12 @@ export const MenuItem = styled<MenuItemProps>(MenuItemComponent);
 
 
 
-
-
-
-
+export type TouchableTypeReturningProps<T> = Override<TouchableOpacityProps, {
+  onPress?: (item: T, event: GestureResponderEvent) => void;
+  onPressIn?: (item: T, event: GestureResponderEvent) => void;
+  onPressOut?: (item: T, event: GestureResponderEvent) => void;
+  onLongPress?: (item: T, event: GestureResponderEvent) => void;
+}>;
 
 export function allWithPrefix(source: StyleType, key: string): StyleType {
   return Object.keys(source)
