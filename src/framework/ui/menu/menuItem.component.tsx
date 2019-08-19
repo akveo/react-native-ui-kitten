@@ -11,7 +11,6 @@ import {
   ImageProps,
   TouchableOpacity,
   GestureResponderEvent,
-  TouchableOpacityProps,
 } from 'react-native';
 import {
   Interaction,
@@ -23,7 +22,8 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import { Override } from '../support/typings/type';
+import { TouchableTypeReturningProps } from '../support/typings/type';
+import { allWithPrefix } from '../support/services';
 
 type IconElement = React.ReactElement<ImageProps>;
 
@@ -36,6 +36,7 @@ export interface MenuItemType {
 
 interface ComponentProps extends MenuItemType {
   selected?: boolean;
+  accessory?: (style: StyleType) => IconElement;
 }
 
 export type MenuItemProps = StyledComponentProps & ComponentProps & TouchableTypeReturningProps<MenuItemType>;
@@ -46,31 +47,45 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   static styledComponentName: string = 'MenuItem';
 
   private onPress = (event: GestureResponderEvent) => {
+    const item: MenuItemType = this.getMenuItemObject();
+
     if (this.props.onPress) {
-      this.props.onPress(this.props, event);
+      this.props.onPress(item, event);
     }
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
+    const item: MenuItemType = this.getMenuItemObject();
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(this.props, event);
+      this.props.onPressIn(item, event);
     }
   };
 
   private onPressOut = (event: GestureResponderEvent) => {
+    const item: MenuItemType = this.getMenuItemObject();
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(this.props, event);
+      this.props.onPressOut(item, event);
     }
   };
 
   private onLongPress = (event: GestureResponderEvent) => {
+    const item: MenuItemType = this.getMenuItemObject();
+
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.props, event);
+      this.props.onLongPress(item, event);
     }
+  };
+
+  private getMenuItemObject = (): MenuItemType => {
+    const { title, icon, disabled, subItems } = this.props;
+    const item: MenuItemType = { title, icon, disabled, subItems };
+    Object.keys(item).forEach(key => item[key] === undefined && delete item[key]);
+
+    return item;
   };
 
   private getComponentStyles = (style: StyleType): StyleType => {
@@ -82,6 +97,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
     const titleStyles: StyleType = allWithPrefix(style, 'title');
     const indicatorStyles: StyleType = allWithPrefix(style, 'indicator');
     const iconStyles: StyleType = allWithPrefix(style, 'icon');
+    const accessoryStyle: StyleType = allWithPrefix(style, 'accessory');
 
     return {
       container: {
@@ -106,6 +122,12 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
         marginHorizontal: iconStyles.iconMarginHorizontal,
         tintColor: iconStyles.iconTintColor,
       },
+      accessory: {
+        height: accessoryStyle.accessoryHeight,
+        marginHorizontal: accessoryStyle.accessoryMarginHorizontal,
+        tintColor: accessoryStyle.accessoryTintColor,
+        width: accessoryStyle.accessoryWidth,
+      },
     };
   };
 
@@ -123,17 +145,24 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
     );
   };
 
-  private renderComponentChildren = (style: StyleType): [IconElement, TextElement] => {
+  private renderAccessory = (style: StyleType): IconElement => {
+    const { accessory } = this.props;
+
+    return accessory && accessory(style);
+  };
+
+  private renderComponentChildren = (style: StyleType): [IconElement, TextElement, IconElement] => {
     return [
       this.renderIcon(style.icon),
       this.renderTitle(style.title),
+      this.renderAccessory(style.accessory),
     ];
   };
 
   public render(): React.ReactNode {
     const { themedStyle, style, ...restProps } = this.props;
     const { container, indicator, ...restStyles } = this.getComponentStyles(themedStyle);
-    const [iconElement, textElement] = this.renderComponentChildren(restStyles);
+    const [iconElement, textElement, accessoryElement] = this.renderComponentChildren(restStyles);
 
     return (
       <TouchableOpacity
@@ -145,8 +174,11 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
         onPressOut={this.onPressOut}
         onLongPress={this.onLongPress}>
         <View style={[styles.indicator, indicator]}/>
-        {iconElement}
-        {textElement}
+        <View style={styles.subContainer}>
+          {iconElement}
+          {textElement}
+        </View>
+        {accessoryElement}
       </TouchableOpacity>
     );
   }
@@ -154,6 +186,11 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  subContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -164,24 +201,3 @@ const styles = StyleSheet.create({
 });
 
 export const MenuItem = styled<MenuItemProps>(MenuItemComponent);
-
-
-
-
-export type TouchableTypeReturningProps<T> = Override<TouchableOpacityProps, {
-  onPress?: (item: T, event: GestureResponderEvent) => void;
-  onPressIn?: (item: T, event: GestureResponderEvent) => void;
-  onPressOut?: (item: T, event: GestureResponderEvent) => void;
-  onLongPress?: (item: T, event: GestureResponderEvent) => void;
-}>;
-
-export function allWithPrefix(source: StyleType, key: string): StyleType {
-  return Object.keys(source)
-    .filter((styleName: string) => styleName.includes(key))
-    .reduce((obj: StyleType, styleKey: string) => {
-      return {
-        ...obj,
-        [styleKey]: source[styleKey],
-      };
-    }, {});
-}

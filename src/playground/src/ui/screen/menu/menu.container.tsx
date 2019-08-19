@@ -48,7 +48,8 @@ export class MenuContainer extends React.Component<any, State> {
       subItems: [
         {
           title: 'Item 41',
-          icon: this.Icon,
+          // icon: this.Icon,
+          disabled: true,
         },
         {
           title: 'Item 42',

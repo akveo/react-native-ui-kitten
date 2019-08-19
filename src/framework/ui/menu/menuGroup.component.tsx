@@ -12,6 +12,7 @@ import {
   View,
   Animated,
   StyleSheet,
+  ImageProps,
 } from 'react-native';
 import {
   styled,
@@ -29,6 +30,7 @@ import {
   MeasureNodeProps,
   MeasuringElementProps,
 } from '../popover/measure.component';
+import { Chevron } from '../support/components';
 
 interface ComponentProps {
   item: MenuItemType;
@@ -45,6 +47,7 @@ interface ComponentState {
 export type MenuGroupProps = ComponentProps & StyledComponentProps & TouchableOpacityProps;
 export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
 type OnPressHandler = (item: MenuItemType, event?: GestureResponderEvent) => void;
+type IconElement = React.ReactElement<ImageProps>;
 const MAIN_ITEM_KEY: string = 'Main Item';
 const SEPARATOR_ELEMENT_KEY: string = 'Separator';
 const SUB_ITEMS_MEASURE_TAG: string = 'Sub Items';
@@ -62,17 +65,27 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     if (prevState.subItemsVisible !== this.state.subItemsVisible) {
       if (this.state.subItemsVisible) {
         this.subItemsExpandAnimate(this.state.subItemsHeight);
+        this.animateIcon(0);
       } else {
         this.subItemsExpandAnimate(0);
+        this.animateIcon(-180);
       }
     }
   }
 
   private subItemsAnimation: Animated.Value = new Animated.Value(0);
+  private iconAnimation: Animated.Value = new Animated.Value(-180);
 
   private subItemsExpandAnimate = (toValue: number): void => {
     Animated.spring(this.subItemsAnimation, {
       toValue: toValue,
+    }).start();
+  };
+
+  private animateIcon = (toValue: number): void => {
+    Animated.timing(this.iconAnimation, {
+      toValue: toValue,
+      duration: 200,
     }).start();
   };
 
@@ -89,17 +102,9 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
   };
 
   private getComponentStyles = (style: StyleType): StyleType => {
-    const accessoryStyle: StyleType = allWithPrefix(style, 'accessory');
-
     return {
       subContainer: {
         paddingHorizontal: style.subItemsPaddingHorizontal,
-      },
-      accessory: {
-        height: accessoryStyle.accessoryHeight,
-        marginHorizontal: accessoryStyle.accessoryMarginHorizontal,
-        tintColor: accessoryStyle.accessoryTintColor,
-        width: accessoryStyle.accessoryWidth,
       },
     };
   };
@@ -127,17 +132,34 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     );
   };
 
+  private renderMainItemAccessory = (style: StyleType): IconElement => {
+    const rotateInterpolate = this.iconAnimation.interpolate({
+      inputRange: [-180, 0],
+      outputRange: ['-180deg', '0deg'],
+    });
+    const animatedStyle: StyleType = { transform: [{ rotate: rotateInterpolate }] };
+
+    return (
+      <Chevron
+        style={style}
+        isAnimated={true}
+        animationStyle={animatedStyle}
+      />
+    );
+  };
+
   private renderMenuItem = (item: MenuItemType,
                             isMainItem: boolean,
                             index: number | string): MenuItemElement => {
 
     const onPressHandler: OnPressHandler = isMainItem ? this.onMainItemPress : this.onSubItemPress;
+    const mainMenuItemAccessory = isMainItem ? this.renderMainItemAccessory : null;
 
     return (
       <MenuItem
-        title={item.title}
-        icon={item.icon}
+        {...item}
         key={index}
+        accessory={mainMenuItemAccessory}
         onPress={onPressHandler}
       />
     );
@@ -183,14 +205,21 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     });
   };
 
-  public render(): React.ReactNode {
+  private renderComponentChildren = (): React.ReactNodeArray => {
     const { item, separatorStyle } = this.props;
     const { subItemsVisible } = this.state;
-    const mainItem: MenuItemElement = this.renderMenuItem(item, true, MAIN_ITEM_KEY);
-    const subItems: React.ReactNode = this.renderSubItems();
+
+    return [
+      this.renderMenuItem(item, true, MAIN_ITEM_KEY),
+      this.renderSubItems(),
+      subItemsVisible ? this.renderSeparator(separatorStyle) : null,
+    ];
+  };
+
+  public render(): React.ReactNode {
+    const { subItemsVisible } = this.state;
+    const [mainItem, subItems, separator] = this.renderComponentChildren();
     const invisibleSubs: React.ReactElement<MeasureNodeProps> = this.renderSubItemsInvisible(subItems);
-    const separator: React.ReactElement<ViewProps> = subItemsVisible ?
-      this.renderSeparator(separatorStyle) : null;
 
     const animatedStyle: StyleType = { height: this.subItemsAnimation };
 
@@ -215,15 +244,3 @@ const styles = StyleSheet.create({
 });
 
 export const MenuGroup = styled<MenuGroupProps>(MenuGroupComponent);
-
-
-export function allWithPrefix(source: StyleType, key: string): StyleType {
-  return Object.keys(source)
-    .filter((styleName: string) => styleName.includes(key))
-    .reduce((obj: StyleType, styleKey: string) => {
-      return {
-        ...obj,
-        [styleKey]: source[styleKey],
-      };
-    }, {});
-}
