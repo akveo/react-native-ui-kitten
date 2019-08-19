@@ -95,6 +95,11 @@ export {
   RadioGroupElement,
 } from './radioGroup/radioGroup.component';
 export {
+  Spinner,
+  SpinnerProps,
+  SpinnerElement,
+} from './spinner/spinner.component';
+export {
   TabView,
   TabViewProps,
   TabViewElement,

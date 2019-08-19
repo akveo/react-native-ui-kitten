@@ -24,6 +24,7 @@ import {
   LayoutContainer,
   SampleContainer,
   ModalContainer,
+  SpinnerContainer,
   IconContainer,
 } from '../ui/screen';
 
@@ -45,6 +46,7 @@ const AppNavigator = createStackNavigator({
   ['Popover']: PopoverContainer,
   ['Radio']: RadioContainer,
   ['Radio Group']: RadioGroupContainer,
+  ['Spinner']: SpinnerContainer,
   ['Tab View']: TabViewContainer,
   ['Tooltip']: TooltipContainer,
   ['Text']: TextContainer,
