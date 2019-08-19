@@ -1,18 +1,22 @@
 const path = require('path');
 
-const kittenPath = path.resolve('./src/framework');
-
-// FIXME: Resolve `transform[stderr]: Could not resolve` command-line warnings.
-// FIXME: Reproducible when starting with clearing cache (npm start -- -c)
+/**
+ * UI Kitten modules aliases.
+ * Allows importing framework modules into playground
+ */
+const moduleAliases = {
+  'react-native-ui-kitten': path.resolve(__dirname, './src/framework'),
+  '@kitten/theme': path.resolve(__dirname, './src/framework'),
+  '@kitten/ui': path.resolve(__dirname, './src/framework'),
+  '@ui-kitten/eva-icons': path.resolve(__dirname, './src/eva-icons'),
+  '@ui-kitten/moment': path.resolve('./src/moment'),
+  '@ui-kitten/date-fns': path.resolve('./src/date-fns'),
+};
 
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
-    '@kitten/theme': path.resolve(kittenPath, 'theme'),
-    '@kitten/ui': path.resolve(kittenPath, 'ui'),
-    '@ui-kitten/moment': path.resolve('./src/moment'),
-    '@ui-kitten/date-fns': path.resolve('./src/date-fns'),
-    'react-native-ui-kitten': kittenPath,
+    ...moduleAliases,
   },
 };
 

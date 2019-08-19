@@ -5,19 +5,16 @@ import {
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '../common/type';
-import { OverflowMenuItemType } from '@kitten/ui';
 import {
-  Image,
-  ImageProps,
-} from 'react-native';
+  Icon,
+  OverflowMenuItemType,
+} from '@kitten/ui';
+import { ImageProps } from 'react-native';
 import { StyleType } from '@kitten/theme';
 
-const Icon = (style: StyleType): React.ReactElement<ImageProps> => {
+const IconElement = (style: StyleType): React.ReactElement<ImageProps> => {
   return (
-    <Image
-      style={style}
-      source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-    />
+    <Icon name='star' {...style}/>
   );
 };
 
@@ -27,7 +24,7 @@ const items: OverflowMenuItemType[] = [
   },
   {
     text: 'Icon Item',
-    icon: Icon,
+    icon: IconElement,
   },
   {
     text: 'Disabled Item',
