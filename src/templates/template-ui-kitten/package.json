@@ -1,0 +1,18 @@
+{
+  "name": "react-native-template-ui-kitten",
+  "description": "React Native template with UI Kitten",
+  "version": "4.1.0",
+  "license": "MIT",
+  "author": "akveo <contact@akveo.com>",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
+  "bugs": {
+    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+  },
+  "keywords": [
+    "react-native",
+    "ui-kitten",
+    "template",
+    "boilerplate"
+  ]
+}

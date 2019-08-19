@@ -1,8 +1,10 @@
 import React from 'react';
 import {
+  I18nManager,
   View,
   ViewProps,
 } from 'react-native';
+import { Updates } from 'expo';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -10,6 +12,7 @@ import {
 } from '@kitten/theme';
 import {
   Button,
+  CheckBox,
   OverflowMenu,
   OverflowMenuItemType,
 } from '@kitten/ui';
@@ -98,6 +101,12 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
     this.setState({ settingsMenuVisible });
   };
 
+  private toggleRtl = () => {
+    I18nManager.forceRTL(!I18nManager.isRTL);
+    I18nManager.allowRTL(I18nManager.isRTL);
+    Updates.reload();
+  };
+
   public render(): React.ReactNode {
     const { style, themedStyle } = this.props;
 
@@ -110,7 +119,7 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
           items={this.createThemesMenuItems()}
           onBackdropPress={this.toggleThemesMenu}>
           <Button
-            style={themedStyle.button}
+            size='small'
             disabled={!this.props.themes}
             onPress={this.toggleThemesMenu}>
             THEMES
@@ -123,18 +132,23 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
           items={this.createSettingsMenuItems()}
           onBackdropPress={this.toggleSettingsMenu}>
           <Button
-            style={themedStyle.button}
+            size='small'
             disabled={!this.props.settings}
             onPress={this.toggleSettingsMenu}>
             SETTINGS
           </Button>
         </OverflowMenu>
         <Button
-          style={themedStyle.button}
+          size='small'
           disabled={!this.props.settings}
           onPress={this.onResetButtonPress}>
           RESET
         </Button>
+        <CheckBox
+          checked={I18nManager.isRTL}
+          onChange={this.toggleRtl}
+          text='RTL'
+        />
       </View>
     );
   }
@@ -145,6 +159,6 @@ export const ShowcaseSettings = withStyles(ShowcaseSettingsComponent, (theme: Th
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingVertical: 16,
-    backgroundColor: theme['background-basic-color-1'],
+    backgroundColor: theme['background-basic-color-2'],
   },
 }));

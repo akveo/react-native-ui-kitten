@@ -33,12 +33,23 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Install UI Kitten',
+        name: 'Start a new App',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install.md',
+            source: 'guides/install-new.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Install into existing App',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/install-existing.md',
           },
         ],
       },
@@ -61,6 +72,28 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'guides/create-screen.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Eva Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-icons-module.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: '3rd party Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-vector-icons.md',
           },
         ],
       },
@@ -381,6 +414,20 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Button',
         icon: 'button.svg',
         source: [
@@ -486,6 +533,20 @@ export const structure = [
           {
             name: 'Avatar',
             images: ['avatar.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Spinner',
+        icon: 'spinner.svg',
+        source: [
+          'Spinner',
+        ],
+        overview: [
+          {
+            name: 'Spinner',
+            images: ['spinner.png'],
           },
         ],
       },

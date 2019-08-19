@@ -698,14 +698,14 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   public render(): DropdownElement {
     const { themedStyle, style } = this.props;
     const { visible, menuWidth } = this.state;
-    const evaStyles: StyleType = this.getComponentStyle(themedStyle);
-    const [menuElement, labelElement, controlElement] = this.renderComponentChildren(evaStyles);
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const [menuElement, labelElement, controlElement] = this.renderComponentChildren(componentStyle);
     const additionalMenuStyle: StyleType = { maxWidth: menuWidth };
 
     return (
       <View style={style}>
         {labelElement}
-        <View style={[styles.outline, evaStyles.outline]}>
+        <View style={[styles.outline, componentStyle.outline]}>
           <Popover
             visible={visible}
             content={menuElement}
