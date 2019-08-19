@@ -1,5 +1,8 @@
 import React from 'react';
-import { SpinnerProps } from '@kitten/ui';
+import {
+  SpinnerProps,
+  SpinnerElement,
+} from '@kitten/ui';
 import { SpinnerShowcase } from './spinnerShowcase.component';
 import {
   spinnerSettings,
@@ -9,7 +12,7 @@ import { ShowcaseContainer } from '../common/showcase.container';
 
 export class SpinnerContainer extends React.Component {
 
-  private renderItem = (props: SpinnerProps): React.ReactElement<SpinnerProps> => {
+  private renderItem = (props: SpinnerProps): SpinnerElement => {
     return (
       <SpinnerShowcase {...props}/>
     );
