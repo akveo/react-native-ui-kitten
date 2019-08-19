@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListRenderItemInfo } from 'react-native';
+import { ListRenderItemInfo, Button, I18nManager } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   ThemedComponentProps,
@@ -13,6 +13,7 @@ import {
   ListItemElement,
 } from '@kitten/ui';
 import { RouteType } from '../../navigation';
+import { Updates } from 'expo';
 
 export const routes: RouteType[] = [
   { name: 'Avatar' },
@@ -39,10 +40,6 @@ export const routes: RouteType[] = [
 type Props = ThemedComponentProps & NavigationScreenProps;
 
 class HomeScreen extends React.Component<Props> {
-
-  static navigationOptions = {
-    title: 'Home',
-  };
 
   private onItemPress = (index: number) => {
     const { [index]: route } = routes;
