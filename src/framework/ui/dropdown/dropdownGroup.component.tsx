@@ -42,14 +42,14 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      itemPaddingLeft,
+      itemPaddingHorizontal,
       ...containerStyles
     } = source;
 
     return {
       container: containerStyles,
       item: {
-        paddingLeft: itemPaddingLeft,
+        paddingHorizontal: itemPaddingHorizontal,
       },
     };
   };

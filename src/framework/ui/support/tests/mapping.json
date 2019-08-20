@@ -1148,28 +1148,28 @@
       "meta": {
         "scope": "all",
         "parameters": {
-          "controlMinWidth": {
+          "minWidth": {
             "type": "number"
           },
-          "controlMinHeight": {
+          "minHeight": {
             "type": "number"
           },
-          "controlPaddingHorizontal": {
+          "paddingHorizontal": {
             "type": "number"
           },
-          "controlPaddingVertical": {
+          "paddingVertical": {
             "type": "number"
           },
-          "controlBorderRadius": {
+          "borderRadius": {
             "type": "number"
           },
-          "controlBorderColor": {
+          "borderColor": {
             "type": "string"
           },
-          "controlBorderWidth": {
+          "borderWidth": {
             "type": "number"
           },
-          "controlBackgroundColor": {
+          "backgroundColor": {
             "type": "string"
           },
           "placeholderMarginHorizontal": {
@@ -1295,13 +1295,13 @@
             "menuBorderRadius": 4,
             "menuBorderColor": "border-basic-color-4",
             "menuBorderWidth": 1,
-            "controlBorderRadius": 4,
-            "controlBorderWidth": 1,
-            "controlPaddingHorizontal": 8,
-            "controlBorderColor": "border-basic-color-3",
-            "controlBackgroundColor": "background-basic-color-2",
-            "controlMinHeight": 48,
-            "controlPaddingVertical": 7,
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "paddingHorizontal": 8,
+            "borderColor": "border-basic-color-3",
+            "backgroundColor": "background-basic-color-2",
+            "minHeight": 48,
+            "paddingVertical": 7,
             "placeholderMarginHorizontal": 8,
             "placeholderColor": "text-hint-color",
             "placeholderFontWeight": "text-paragraph-1-font-weight",
@@ -1324,11 +1324,11 @@
             "state": {
               "active": {
                 "outlineBackgroundColor": "outline-color",
-                "controlBackgroundColor": "background-basic-color-1",
+                "backgroundColor": "background-basic-color-1",
                 "iconTintColor": "border-alternative-color-1"
               },
               "disabled": {
-                "controlBorderColor": "border-basic-color-4",
+                "borderColor": "border-basic-color-4",
                 "placeholderColor": "text-disabled-color",
                 "textColor": "text-disabled-color",
                 "iconTintColor": "icon-disabled-color"
@@ -1340,35 +1340,35 @@
               "primary": {
                 "state": {
                   "active": {
-                    "controlBorderColor": "color-primary-default"
+                    "borderColor": "color-primary-default"
                   }
                 }
               },
               "success": {
                 "state": {
                   "active": {
-                    "controlBorderColor": "color-success-default"
+                    "borderColor": "color-success-default"
                   }
                 }
               },
               "info": {
                 "state": {
                   "active": {
-                    "controlBorderColor": "color-info-default"
+                    "borderColor": "color-info-default"
                   }
                 }
               },
               "warning": {
                 "state": {
                   "active": {
-                    "controlBorderColor": "color-warning-default"
+                    "borderColor": "color-warning-default"
                   }
                 }
               },
               "danger": {
                 "state": {
                   "active": {
-                    "controlBorderColor": "color-danger-default"
+                    "borderColor": "color-danger-default"
                   }
                 }
               }
@@ -1473,7 +1473,7 @@
           "backgroundColor": {
             "type": "string"
           },
-          "itemPaddingLeft": {
+          "itemPaddingHorizontal": {
             "type": "number"
           }
         },
@@ -1489,7 +1489,7 @@
         "default": {
           "mapping": {
             "backgroundColor": "background-basic-color-1",
-            "itemPaddingLeft": 20
+            "itemPaddingHorizontal": 20
           }
         }
       }

@@ -524,7 +524,16 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const controlStyles: StyleType = allWithPrefix(source, 'control');
+    const {
+      backgroundColor,
+      borderColor,
+      borderWidth,
+      minHeight,
+      minWidth,
+      paddingHorizontal,
+      paddingVertical,
+      borderRadius,
+    } = source;
     const iconStyles: StyleType = allWithPrefix(source, 'icon');
     const textStyles: StyleType = allWithPrefix(source, 'text');
     const placeholderStyles: StyleType = allWithPrefix(source, 'placeholder');
@@ -534,14 +543,14 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
 
     return {
       control: {
-        backgroundColor: controlStyles.controlBackgroundColor,
-        borderColor: controlStyles.controlBorderColor,
-        borderWidth: controlStyles.controlBorderWidth,
-        minHeight: controlStyles.controlMinHeight,
-        minWidth: controlStyles.controlMinWidth,
-        paddingHorizontal: controlStyles.controlPaddingHorizontal,
-        paddingVertical: controlStyles.controlPaddingVertical,
-        borderRadius: controlStyles.controlBorderRadius,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
+        borderWidth: borderWidth,
+        minHeight: minHeight,
+        minWidth: minWidth,
+        paddingHorizontal: paddingHorizontal,
+        paddingVertical: paddingVertical,
+        borderRadius: borderRadius,
       },
       icon: {
         height: iconStyles.iconHeight,
@@ -592,8 +601,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderDefaultIconElement = (style: ImageStyle): IconElement => {
-    const { visible } = this.state;
-
     const rotateInterpolate = this.iconAnimation.interpolate({
       inputRange: [-180, 0],
       outputRange: ['-180deg', '0deg'],
