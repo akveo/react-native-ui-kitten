@@ -1,3 +1,5 @@
+import { StyleType } from '@kitten/theme';
+
 export interface Props {
   [key: string]: any;
 }
@@ -45,4 +47,23 @@ export function allWithRest(source: Props | undefined, from: string[]): AllWithR
 
     return { ...allOf, rest: { ...rest, [prop]: source[prop] } };
   }, {});
+}
+
+/**
+ * Returns all styles with prefix
+ *
+ * @param {StyleType} source - Eva Styles
+ * @param {string} key - prefix
+ *
+ * @return {StyleType} - all styles with prefix
+ */
+export function allWithPrefix(source: StyleType, key: string): StyleType {
+  return Object.keys(source)
+    .filter((styleName: string) => styleName.includes(key))
+    .reduce((obj: StyleType, styleKey: string) => {
+      return {
+        ...obj,
+        [styleKey]: source[styleKey],
+      };
+    }, {});
 }

@@ -9,6 +9,7 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
+import { I18nLayoutService } from '../support/services';
 
 export class Point {
 
@@ -291,8 +292,13 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.leftOf(options.other).centerVerticalOf(options.other);
 
-      return new Frame(
+      const x: number = I18nLayoutService.select(
         origin.x + options.offsets.left,
+        options.bounds.size.width - size.width - (origin.x + options.offsets.right),
+      );
+
+      return new Frame(
+        x,
         origin.y,
         size.width,
         size.height,
@@ -323,7 +329,7 @@ export class PopoverPlacements {
     }
 
     fits(frame: Frame, other: Frame): boolean {
-      return fitsLeft(frame, other) && fitsTop(frame, other) && fitsBottom(frame, other);
+      return fitsStart(frame, other) && fitsTop(frame, other) && fitsBottom(frame, other);
     }
   };
 
@@ -409,8 +415,14 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.topOf(options.other).centerHorizontalOf(options.other);
 
-      return new Frame(
+
+      const x: number = I18nLayoutService.select(
         origin.x,
+        options.bounds.size.width - (origin.x + size.width),
+      );
+
+      return new Frame(
+        x,
         origin.y + options.offsets.top,
         size.width,
         size.height,
@@ -527,8 +539,13 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.rightOf(options.other).centerVerticalOf(options.other);
 
-      return new Frame(
+      const x: number = I18nLayoutService.select(
         origin.x - options.offsets.right,
+        options.bounds.size.width - size.width - (origin.x - options.offsets.right),
+      );
+
+      return new Frame(
+        x,
         origin.y,
         size.width,
         size.height,
@@ -559,7 +576,7 @@ export class PopoverPlacements {
     }
 
     fits(frame: Frame, other: Frame): boolean {
-      return fitsRight(frame, other) && fitsTop(frame, other) && fitsBottom(frame, other);
+      return fitsEnd(frame, other) && fitsTop(frame, other) && fitsBottom(frame, other);
     }
   };
 
@@ -645,8 +662,13 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.bottomOf(options.other).centerHorizontalOf(options.other);
 
-      return new Frame(
+      const x: number = I18nLayoutService.select(
         origin.x,
+        options.bounds.size.width - (origin.x + size.width),
+      );
+
+      return new Frame(
+        x,
         origin.y - options.offsets.bottom,
         size.width,
         size.height,
@@ -798,6 +820,14 @@ export class PopoverPlacements {
     return rawValue !== undefined;
   }
 }
+
+const fitsStart = (frame: Frame, other: Frame): boolean => {
+  return I18nLayoutService.select(fitsLeft, fitsRight)(frame, other);
+};
+
+const fitsEnd = (frame: Frame, other: Frame): boolean => {
+  return I18nLayoutService.select(fitsRight, fitsLeft)(frame, other);
+};
 
 const fitsLeft = (frame: Frame, other: Frame): boolean => {
   return frame.origin.x >= other.origin.x;
