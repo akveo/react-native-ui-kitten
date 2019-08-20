@@ -29,8 +29,8 @@ import {
 import { MenuGroup } from './menuGroup.component';
 
 interface ComponentProps {
-  selectedItem?: MenuItemType;
-  onSelect?: (item: MenuItemType, event?: GestureResponderEvent) => void;
+  selectedItem: MenuItemType;
+  onSelect: (item: MenuItemType, event?: GestureResponderEvent) => void;
 }
 
 export type MenuProps = StyledComponentProps & ComponentProps & Omit<ListProps, 'renderItem'>;

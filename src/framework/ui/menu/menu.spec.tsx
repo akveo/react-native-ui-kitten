@@ -52,15 +52,11 @@ const data: MenuItemType[] = [
   { title: 'Option 9' },
 ];
 
-interface Props {
-
-}
-
 interface State {
   selectedItem: MenuItemType;
 }
 
-class TestApplication extends React.Component<Props, State> {
+class TestApplication extends React.Component<any, State> {
 
   public state: State = {
     selectedItem: null,
