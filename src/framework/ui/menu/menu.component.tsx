@@ -36,6 +36,150 @@ interface ComponentProps {
 export type MenuProps = StyledComponentProps & ComponentProps & Omit<ListProps, 'renderItem'>;
 export type MenuElement = React.ReactElement<MenuProps>;
 
+/**
+ * `Menu` renders vertical list of `MenuItems`.
+ *
+ * @extends React.Component
+ *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default` or `divider`.
+ * Default is `default`.
+ *
+ * @property {MenuItemType[]} data - Determines menu items.
+ *
+ * @property {(item: MenuItemType, event?: GestureResponderEvent) => void} onSelect - Fires when
+ * selected item is changed.
+ *
+ * @property Omit<ListProps, 'renderItem'>
+ *
+ * @property StyledComponentProps
+ *
+ * @overview-example Simple Usage
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   Menu,
+ *   MenuItemType,
+ * } from 'react-native-ui-kitten';
+ *
+ * interface State {
+ *   selectedItem: MenuItemType;
+ * }
+ *
+ * export class MenuShowcase extends React.Component<any, State> {
+ *
+ *   public state: State = {
+ *     selectedItem: null,
+ *   };
+ *
+ *   private data: MenuItemType[] = [
+ *     { title: 'Item 1' },
+ *     { title: 'Item 2' },
+ *     { title: 'Item 3' },
+ *   ];
+ *
+ *   private onSelect = (selectedItem: MenuItemType): void => {
+ *     this.setState({ selectedItem });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Menu
+ *         data={this.items}
+ *         selectedItem={this.state.selectedItem}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Eva Styling
+ *
+ * ```
+ * // use code from the example above
+ *
+ * <Menu
+ *   appearance='divider'
+ *   data={this.items}
+ *   selectedItem={this.state.selectedItem}
+ *   onSelect={this.onItemSelect}
+ * />
+ * ```
+ *
+ * @example Disabled Item
+ *
+ * ```
+ * // use code from example above
+ *
+ * private data: MenuItemType[] = [
+ *   { title: 'Item 1', disabled: true },
+ *   { title: 'Item 2' },
+ *   { title: 'Item 3' },
+ * ];
+ * ```
+ *
+ * @example With Icons
+ *
+ * ```
+ * // use code from example above
+ *
+ * Icon = (style: StyleType): React.ReactElement<ImageProps> => (
+ *   <Image
+ *     style={style}
+ *     source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+ *   />
+ * );
+ *
+ * private data: MenuItemType[] = [
+ *   {
+ *     title: 'Item 1',
+ *     icon: this.Icon,
+ *   },
+ *   {
+ *     title: 'Item 2',
+ *     icon: this.Icon,
+ *   },
+ *   {
+ *     title: 'Item 3',
+ *     icon: this.Icon,
+ *   },
+ * ];
+ * ```
+ *
+ * @example With Items Groups
+ *
+ * ```
+ * // use code from example above
+ *
+ * private data: MenuItemType[] = [
+ *   { title: 'Item 1' },
+ *   {
+ *     title: 'Item 2',
+ *     subItems: [
+ *       { title: 'Item 21' },
+ *       { title: 'Item 22' },
+ *       { title: 'Item 23' },
+ *     ],
+ *   },
+ *   { title: 'Item 3' },
+ * ];
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * // use code from example above
+ *
+ * private data: MenuItemType[] = [
+ *   { title: 'Item 1', titleStyle: { color: 'red', fontSize: 18 } },
+ *   { title: 'Item 2' },
+ *   { title: 'Item 3' },
+ * ];
+ * ```
+ */
+
 class MenuComponent extends React.Component<MenuProps> {
 
   static styledComponentName: string = 'Menu';

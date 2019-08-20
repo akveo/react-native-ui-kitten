@@ -345,6 +345,15 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'Menu',
+          'MenuItem',
+        ],
+      },
+      {
         type: 'group',
         name: 'Forms',
       },

@@ -11,6 +11,8 @@ import {
   ImageProps,
   TouchableOpacity,
   GestureResponderEvent,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {
   Interaction,
@@ -29,18 +31,42 @@ type IconElement = React.ReactElement<ImageProps>;
 
 export interface MenuItemType {
   title: string;
-  icon?: (style: StyleType) => IconElement;
   disabled?: boolean;
   subItems?: MenuItemType[];
+  titleStyle?: StyleProp<TextStyle>;
+  icon?: (style: StyleType) => IconElement;
+  accessory?: (style: StyleType) => IconElement;
 }
 
 interface ComponentProps extends MenuItemType {
   selected?: boolean;
-  accessory?: (style: StyleType) => IconElement;
 }
 
 export type MenuItemProps = StyledComponentProps & ComponentProps & TouchableTypeReturningProps<MenuItemType>;
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
+
+/**
+ * `MenuItem` is a support component for `Menu`.
+ *
+ * @extends React.Component
+ *
+ * @property {string} title - Determines the title of the ListItem.
+ *
+ * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} accessory - Determines the accessory of the
+ * component.
+ *
+ * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the component.
+ *
+ * @property {MenuItemType[]} subItems - Determines the sub-items of the MenuItem.
+ *
+ * @property {(item: MenuItemType, event: GestureResponderEvent) => void} onPress - Emits when component is pressed.
+ *
+ * @property StyledComponentProps
+ *
+ * @property TouchableTypeReturningProps<MenuItemType>
+ * */
 
 class MenuItemComponent extends React.Component<MenuItemProps> {
 
@@ -138,10 +164,10 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   };
 
   private renderTitle = (style: StyleType): TextElement => {
-    const { title } = this.props;
+    const { title, titleStyle } = this.props;
 
     return title && (
-      <Text style={style}>{title}</Text>
+      <Text style={[style, titleStyle]}>{title}</Text>
     );
   };
 
