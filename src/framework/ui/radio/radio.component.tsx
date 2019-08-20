@@ -40,7 +40,7 @@ export type RadioProps = StyledComponentProps & TouchableOpacityProps & Componen
 export type RadioElement = React.ReactElement<RadioProps>;
 
 /**
- * Styled Radio component.
+ * Styled `Radio` component.
  *
  * @extends React.Component
  *
@@ -63,7 +63,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -89,7 +89,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * }
  * ```
  *
- * @overview-example Eva styling example
+ * @example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -116,7 +116,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * }
  * ```
  *
- * @example Inline styling example
+ * @example Inline Styling
  *
  * ```
  * import React from 'react';

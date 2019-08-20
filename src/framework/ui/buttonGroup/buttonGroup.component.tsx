@@ -30,7 +30,7 @@ export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps
 export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
 
 /**
- * Renders a group of buttons.
+ * Renders a group of `Buttons`.
  *
  * @extends React.Component
  *
@@ -51,7 +51,7 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example ButtonGroup simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -68,7 +68,7 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * };
  * ```
  *
- * @overview-example ButtonGroup Eva Styling Example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';

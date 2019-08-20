@@ -26,7 +26,7 @@ export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
 export type AvatarElement = React.ReactElement<AvatarProps>;
 
 /**
- * Styled Image component.
+ * `Avatar` is a styled `Image` component.
  *
  * @extends React.Component
  *
@@ -42,7 +42,7 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -55,7 +55,7 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  * };
  * ```
  *
- * @overview-example Eva styling example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';

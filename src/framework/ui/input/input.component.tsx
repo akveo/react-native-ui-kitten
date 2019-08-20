@@ -59,7 +59,7 @@ export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
 export type InputElement = React.ReactElement<InputProps>;
 
 /**
- * Styled Input component.
+ * Styled `Input` component.
  *
  * @extends React.Component
  *
@@ -79,7 +79,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Can be `large`, `medium` or `small`.
  * Default is `medium`.
  *
  * @property {string} label - Determines label of the component.
@@ -100,7 +100,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -127,7 +127,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * }
  * ```
  *
- * @overview-example Eva styling example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -156,28 +156,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * }
  * ```
  *
- * @example Inline styling example
- *
- * ```
- * import React from 'react';
- * import { Input, InputProps } from 'react-native-ui-kitten';
- *
- * export const InputShowcase = (props?: InputProps): React.ReactElement<InputProps> => {
- *   return (
- *     <Input
- *       style={styles.input}
- *       textStyle={styles.inputText}
- *       labelStyle={styles.inputLabel}
- *       captionStyle={styles.inputCaption}
- *       label='Label'
- *       caption='Caption'
- *       placeholder='Placeholder'
- *     />
- *   );
- * };
- * ```
- *
- * @example With icons example
+ * @example With Icons and Inline Styling
  *
  * ```
  * import React from 'react';
@@ -201,18 +180,18 @@ export type InputElement = React.ReactElement<InputProps>;
  *     this.setState({ inputValue });
  *   };
  *
- * private onIconPress = (event: GestureResponderEvent): void => {
- *   Alert.alert('On Input Icon Press');
- * };
+ *   private onIconPress = (event: GestureResponderEvent): void => {
+ *     Alert.alert('On Input Icon Press');
+ *   };
  *
- * private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
- *   return (
- *     <Image
- *       style={style}
- *       source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
- *     />
- *   );
- * };
+ *   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+ *     return (
+ *       <Image
+ *         style={style}
+ *         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+ *       />
+ *     );
+ *   };
  *
  *   public render(): React.ReactNode {
  *     return (
@@ -222,6 +201,10 @@ export type InputElement = React.ReactElement<InputProps>;
  *         onIconPress={this.onIconPress}
  *         caption='Caption'
  *         captionIcon={this.renderIcon}
+ *         style={styles.input}
+ *         textStyle={styles.inputText}
+ *         labelStyle={styles.inputLabel}
+ *         captionStyle={styles.inputCaption}
  *         onChangeText={this.onInputValueChange}
  *       />
  *     );

@@ -24,7 +24,7 @@ export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
 export type TextElement = React.ReactElement<TextProps>;
 
 /**
- * Styled Text component.
+ * Styled `Text` component.
  *
  * @extends React.Component
  *
@@ -45,7 +45,7 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -60,7 +60,7 @@ export type TextElement = React.ReactElement<TextProps>;
  * };
  * ```
  *
- * @overview-example Eva styling example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';

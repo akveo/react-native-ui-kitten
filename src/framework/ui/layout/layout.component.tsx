@@ -6,15 +6,12 @@
 
 import React from 'react';
 import {
-  StyleSheet,
   View,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   styled,
   StyledComponentProps,
-  StyleType,
 } from '@kitten/theme';
 
 type ChildElement = React.ReactElement<any>;
@@ -29,8 +26,8 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 export type LayoutElement = React.ReactElement<LayoutProps>;
 
 /**
- * Layout container component. Behaves like React Native View.
- * The key feature of using Layout instead of View is that
+ * `Layout` container component. Behaves like React Native `View`.
+ * The key feature of using `Layout` instead of `View` is that
  * it automatically picks background color fitting to current theme.
  *
  * @extends React.Component
@@ -44,7 +41,7 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Layout usage and API example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -73,7 +70,7 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * });
  * ```
  *
- * @overview-example Eva styling example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -87,21 +84,12 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  *  public render(): React.ReactNode {
  *    return (
- *      <Layout
- *        level='2'
- *        style={styles.container}>
+ *      <Layout level='2'>
  *        <Text>Layout</Text>
  *      </Layout>
  *    );
  *  }
- *}
- *
- * const styles = StyleSheet.create({
- *   container: {
- *     flex: 1,
- *     padding: 16,
- *   },
- * });
+ * }
  * ```
  * */
 

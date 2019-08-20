@@ -39,7 +39,7 @@ export interface ContextProps {
 export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps & P>;
 
 /**
- * High Order Function which is used to apply style mapping on component.
+ * `styled` is a High Order Function which is used to apply style mapping on component.
  *
  * Requires component to have `styledComponentName` string property which defines
  * corresponding component name in mapping. (e.g 'Button' for Button component).
@@ -57,7 +57,7 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *
  * @param Component - Type: {React.ComponentClass}. Determines class or functional component to be styled.
  *
- * @example Declaring Styled Component
+ * @overview-example Declaring Styled Component
  *
  * ```
  * import React from 'react';
@@ -111,7 +111,7 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * export const StyledButton = styled<StyledButtonProps>(Button);
  * ```
  *
- * @example Styled Component Usage
+ * @overview-example Styled Component Usage
  *
  * ```
  * import React from 'react';

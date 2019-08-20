@@ -38,7 +38,7 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
 export type ToggleElement = React.ReactElement<ToggleProps>;
 
 /**
- * Styled Toggle component.
+ * Styled `Toggle` component.
  *
  * @extends React.Component
  *
@@ -61,7 +61,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -88,7 +88,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * }
  * ```
  *
- * @overview-example Eva styling example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';

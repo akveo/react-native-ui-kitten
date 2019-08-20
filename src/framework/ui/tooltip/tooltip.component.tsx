@@ -50,7 +50,7 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
 export type TooltipElement = React.ReactElement<TooltipProps>;
 
 /**
- * Displays informative text when users focus on or tap an element.
+ * `Tooltip` displays informative text when users focus on or tap an element.
  *
  * @extends React.Component
  *
@@ -78,7 +78,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -112,7 +112,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  * }
  * ```
  *
- * @overview-example Inline styling and 'with-icon' example
+ * @example WithIcon
  *
  * ```
  * import React from 'react';
@@ -152,6 +152,42 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *         text='Tooltip Text'
  *         textStyle={{ color: 'red', fontSize: 15 }}
  *         icon={this.renderIcon}
+ *         onBackdropPress={this.toggleTooltip}>
+ *         <Button onPress={this.toggleTooltip}>
+ *           TOGGLE TOOLTIP
+ *         </Button>
+ *       </Tooltip>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   Tooltip,
+ *   Button,
+ *   StyleType,
+ * } from 'react-native-ui-kitten';
+ *
+ * export class TooltipShowcase extends React.Component {
+ *
+ *   public state = {
+ *     tooltipVisible: false,
+ *   };
+ *
+ *   private toggleTooltip = () => {
+ *     this.setState({ tooltipVisible: !this.state.tooltipVisible });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Tooltip
+ *         visible={this.state.tooltipVisible}
+ *         text='Tooltip Text'
+ *         textStyle={{ color: 'red', fontSize: 15 }}
  *         onBackdropPress={this.toggleTooltip}>
  *         <Button onPress={this.toggleTooltip}>
  *           TOGGLE TOOLTIP

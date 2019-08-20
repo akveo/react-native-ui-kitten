@@ -45,7 +45,7 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 
 /**
- * Styled CheckBox component.
+ * Styled `CheckBox` component.
  *
  * @extends React.Component
  *
@@ -68,7 +68,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -95,7 +95,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * }
  * ```
  *
- * @overview-example Eva styling example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -123,7 +123,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * }
  * ```
  *
- * @example Inline styling example
+ * @example Inline Styling and Indeterminate
  *
  * ```
  * import React from 'react';
@@ -135,21 +135,6 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *       style={styles.checkbox}
  *       textStyle={styles.checkboxText}
  *       text='Place your text'
- *       checked={this.state.checked}
- *     />
- *   );
- * };
- * ```
- *
- * @example Indeterminate example
- *
- * ```
- * import React from 'react';
- * import { CheckBox, CheckBoxProps } from 'react-native-ui-kitten';
- *
- * export const CheckBoxShowcase = (props?: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
- *   return (
- *     <CheckBox
  *       indeterminate={true}
  *       checked={this.state.checked}
  *     />

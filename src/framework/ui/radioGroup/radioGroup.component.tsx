@@ -29,7 +29,7 @@ export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
 
 /**
- * Renders a group of radio buttons.
+ * Renders a group of `Radio` buttons.
  *
  * @extends React.Component
  *
@@ -44,7 +44,7 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -74,7 +74,7 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  * }
  * ```
  *
- * @overview-example Eva styling example
+ * @example Eva Styling
  *
  * ```
  * import React from 'react';
