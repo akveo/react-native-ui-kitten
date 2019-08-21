@@ -1937,19 +1937,12 @@
     "Menu": {
       "meta": {
         "scope": "all",
-        "parameters": {
-          "dividerHeight": {
-            "type": "number"
-          },
-          "dividerBackgroundColor": {
-            "type": "string"
-          }
-        },
+        "parameters": {},
         "appearances": {
           "default": {
             "default": true
           },
-          "divider": {
+          "noSeparator": {
             "default": false
           }
         },
@@ -1958,16 +1951,10 @@
       },
       "appearances": {
         "default": {
-          "mapping": {
-            "dividerHeight": 0,
-            "dividerBackgroundColor": "transparent"
-          }
+          "mapping": {}
         },
-        "divider": {
-          "mapping": {
-            "dividerHeight": 1,
-            "dividerBackgroundColor": "background-basic-color-3"
-          }
+        "noSeparator": {
+          "mapping": {}
         }
       }
     },
@@ -2551,6 +2538,34 @@
         "default": {
           "mapping": {
             "padding": 0
+          }
+        }
+      }
+    },
+    "Separator": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "backgroundColor": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "height": 1,
+            "backgroundColor": "background-basic-color-3"
           }
         }
       }

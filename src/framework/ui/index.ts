@@ -118,6 +118,11 @@ export {
   RadioGroupElement,
 } from './radioGroup/radioGroup.component';
 export {
+  Separator,
+  SeparatorElement,
+  SeparatorProps,
+} from './separator/separator.component';
+export {
   Spinner,
   SpinnerProps,
   SpinnerElement,

@@ -155,13 +155,13 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   private renderIcon = (style: StyleType): IconElement => {
     const { icon } = this.props;
 
-    return icon && icon(style);
+    return icon(style);
   };
 
   private renderTitle = (style: StyleType): TextElement => {
     const { title, titleStyle } = this.props;
 
-    return title && (
+    return (
       <Text style={[style, titleStyle]}>{title}</Text>
     );
   };
@@ -169,14 +169,16 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   private renderAccessory = (style: StyleType): IconElement => {
     const { accessory } = this.props;
 
-    return accessory && accessory(style);
+    return accessory(style);
   };
 
   private renderComponentChildren = (style: StyleType): [IconElement, TextElement, IconElement] => {
+    const { title, icon, accessory } = this.props;
+
     return [
-      this.renderIcon(style.icon),
-      this.renderTitle(style.title),
-      this.renderAccessory(style.accessory),
+      icon && this.renderIcon(style.icon),
+      title && this.renderTitle(style.title),
+      accessory && this.renderAccessory(style.accessory),
     ];
   };
 

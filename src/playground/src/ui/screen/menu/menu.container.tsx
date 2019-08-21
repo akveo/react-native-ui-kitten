@@ -10,7 +10,6 @@ import {
   menuSettings,
 } from './type';
 
-
 export class MenuContainer extends React.Component {
 
   private renderItem = (props: MenuProps): MenuElement => {

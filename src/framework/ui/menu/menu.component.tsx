@@ -6,20 +6,21 @@
 
 import React from 'react';
 import {
-  ViewProps,
   ListRenderItemInfo,
   GestureResponderEvent,
-  View,
 } from 'react-native';
 import {
   styled,
   StyledComponentProps,
-  StyleType,
 } from '@kitten/theme';
 import {
   List,
   ListProps,
 } from '../list/list.component';
+import {
+  Separator,
+  SeparatorElement,
+} from '../separator/separator.component';
 import {
   MenuItem,
   MenuItemType,
@@ -43,7 +44,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * @extends React.Component
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be `default` or `divider`.
+ * Can be `default` or `noSeparator`.
  * Default is `default`.
  *
  * @property {MenuItemType[]} data - Determines menu items.
@@ -104,7 +105,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * // use code from the example above
  *
  * <Menu
- *   appearance='divider'
+ *   appearance='noSeparator'
  *   data={this.items}
  *   selectedItem={this.state.selectedIndex}
  *   onSelect={this.onItemSelect}
@@ -197,13 +198,10 @@ class MenuComponent extends React.Component<MenuProps> {
     }
   };
 
-  private getComponentStyles = (style: StyleType): StyleType => {
-    const { dividerHeight, dividerBackgroundColor } = style;
+  private isSeparatorAbsent = (): boolean => {
+    const { appearance } = this.props;
 
-    return {
-      height: dividerHeight,
-      backgroundColor: dividerBackgroundColor,
-    };
+    return appearance !== 'noSeparator';
   };
 
   private areThereSubItems = (item: MenuItemProps): boolean => {
@@ -217,15 +215,14 @@ class MenuComponent extends React.Component<MenuProps> {
   };
 
   private renderMenuItem = (info: ListRenderItemInfo<MenuItemProps>): MenuItemElement => {
-    const { selectedIndex, themedStyle } = this.props;
-    const separatorStyle: StyleType = this.getComponentStyles(themedStyle);
+    const { selectedIndex } = this.props;
     const isSelected: boolean = this.getIsSelected(info.item);
 
     return this.areThereSubItems(info.item) ? (
       <MenuGroup
         item={info.item}
         selectedIndex={selectedIndex}
-        separatorStyle={separatorStyle}
+        separator={this.renderSeparator()}
         onSelect={this.onSelect}
       />
     ) : (
@@ -237,12 +234,9 @@ class MenuComponent extends React.Component<MenuProps> {
     );
   };
 
-  private renderSeparator = (): React.ReactElement<ViewProps> => {
-    const { themedStyle } = this.props;
-    const style: StyleType = this.getComponentStyles(themedStyle);
-
-    return (
-      <View style={style}/>
+  private renderSeparator = (): SeparatorElement => {
+    return this.isSeparatorAbsent() && (
+      <Separator/>
     );
   };
 

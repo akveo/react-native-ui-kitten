@@ -8,7 +8,6 @@ import React from 'react';
 import {
   TouchableOpacityProps,
   GestureResponderEvent,
-  ViewProps,
   View,
   Animated,
   StyleSheet,
@@ -31,11 +30,12 @@ import {
   MeasuringElementProps,
 } from '../popover/measure.component';
 import { Chevron } from '../support/components';
+import { SeparatorElement } from '../separator/separator.component';
 
 interface ComponentProps {
   item: MenuItemType;
   selectedIndex: number;
-  separatorStyle?: StyleType;
+  separator?: SeparatorElement;
   onSelect?: (index: number, event?: GestureResponderEvent) => void;
 }
 
@@ -48,6 +48,7 @@ export type MenuGroupProps = ComponentProps & StyledComponentProps & TouchableOp
 export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
 type OnPressHandler = (index: number, event?: GestureResponderEvent) => void;
 type IconElement = React.ReactElement<ImageProps>;
+
 const MAIN_ITEM_KEY: string = 'Main Item';
 const SEPARATOR_ELEMENT_KEY: string = 'Separator';
 const SUB_ITEMS_MEASURE_TAG: string = 'Sub Items';
@@ -61,6 +62,9 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     subItemsHeight: 0,
   };
 
+  private subItemsAnimation: Animated.Value = new Animated.Value(0);
+  private iconAnimation: Animated.Value = new Animated.Value(-180);
+
   public componentDidUpdate(prevProps: MenuGroupProps, prevState: ComponentState): void {
     if (prevState.subItemsVisible !== this.state.subItemsVisible) {
       if (this.state.subItemsVisible) {
@@ -72,9 +76,6 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
       }
     }
   }
-
-  private subItemsAnimation: Animated.Value = new Animated.Value(0);
-  private iconAnimation: Animated.Value = new Animated.Value(-180);
 
   private subItemsExpandAnimate = (toValue: number): void => {
     Animated.spring(this.subItemsAnimation, {
@@ -121,13 +122,25 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     return selectedIndex === item.menuIndex;
   };
 
-  private renderSeparator = (style: StyleType): React.ReactElement<ViewProps> => {
-    return (
-      <View
-        key={SEPARATOR_ELEMENT_KEY}
-        style={style}
-      />
-    );
+  private isMainItemSeparatorExist = (): boolean => {
+    const { separator } = this.props;
+    const { subItemsVisible } = this.state;
+
+    return subItemsVisible && separator !== null;
+  };
+
+  private isSubItemSeparatorExist = (item: MenuItemType, index: number): boolean => {
+    const { separator } = this.props;
+
+    return (index !== item.subItems.length - 1) && (separator !== null);
+  };
+
+  private renderSeparator = (): SeparatorElement => {
+    const { separator } = this.props;
+
+    return React.cloneElement(separator, {
+      key: SEPARATOR_ELEMENT_KEY,
+    });
   };
 
   private renderMainItemAccessory = (style: StyleType): IconElement => {
@@ -139,9 +152,8 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
 
     return (
       <Chevron
-        style={style}
+        style={[style, animatedStyle]}
         isAnimated={true}
-        animationStyle={animatedStyle}
       />
     );
   };
@@ -181,7 +193,7 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
   };
 
   private renderSubItems = (): React.ReactNode => {
-    const { item, themedStyle, separatorStyle } = this.props;
+    const { item, themedStyle, separator } = this.props;
 
     return item.subItems.map((sub: MenuItemType, index: number) => {
       const { subContainer } = this.getComponentStyles(themedStyle);
@@ -191,26 +203,25 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
         style: subContainer,
         selected: isSelected,
       });
-      const separator: React.ReactElement<ViewProps> = index !== item.subItems.length - 1 ?
-        this.renderSeparator(separatorStyle) : null;
+      const separatorElement: SeparatorElement = this.isSubItemSeparatorExist(item, index) ?
+        this.renderSeparator() : null;
 
       return (
         <React.Fragment key={index}>
           {element}
-          {separator}
+          {separatorElement}
         </React.Fragment>
       );
     });
   };
 
   private renderComponentChildren = (): React.ReactNodeArray => {
-    const { item, separatorStyle } = this.props;
-    const { subItemsVisible } = this.state;
+    const { item } = this.props;
 
     return [
       this.renderMenuItem(item, true, MAIN_ITEM_KEY),
       this.renderSubItems(),
-      subItemsVisible ? this.renderSeparator(separatorStyle) : null,
+      this.isMainItemSeparatorExist() ? this.renderSeparator() : null,
     ];
   };
 
