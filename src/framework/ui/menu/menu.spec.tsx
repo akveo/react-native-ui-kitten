@@ -25,8 +25,6 @@ import {
 
 jest.useFakeTimers();
 
-const stringify = (obj: any): string => JSON.stringify(obj);
-
 const Icon = (style: StyleType): React.ReactElement<ImageProps> => (
   <Image
     style={style}
@@ -53,17 +51,17 @@ const data: MenuItemType[] = [
 ];
 
 interface State {
-  selectedItem: MenuItemType;
+  selectedIndex: number;
 }
 
 class TestApplication extends React.Component<any, State> {
 
   public state: State = {
-    selectedItem: null,
+    selectedIndex: null,
   };
 
-  private onSelect = (selectedItem: MenuItemType): void => {
-    this.setState({ selectedItem });
+  private onSelect = (selectedIndex: number): void => {
+    this.setState({ selectedIndex });
   };
 
   public render(): React.ReactNode {
@@ -73,7 +71,7 @@ class TestApplication extends React.Component<any, State> {
         theme={theme}>
         <Menu
           data={data}
-          selectedItem={this.state.selectedItem}
+          selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
         />
       </ApplicationProvider>
@@ -122,11 +120,11 @@ describe('@ menu component checks', () => {
 
     fireEvent.press(application.getAllByText('Option 1')[0]);
 
-    const { selectedItem } = application.getByType(Menu).props;
+    const { selectedIndex } = application.getByType(Menu).props;
     const { children } = application.getAllByText('Option 1')[0].props;
     const { source } = application.getAllByType(Image)[0].props;
 
-    expect(stringify(selectedItem)).toBe(stringify(expectedSelectedItem));
+    expect(selectedIndex).toBe(0);
     expect(children).toBe(expectedSelectedItem.title);
     expect(source.uri).toBe(expectedUri);
   });
@@ -138,12 +136,12 @@ describe('@ menu component checks', () => {
     );
 
     fireEvent.press(application.getAllByText('Option 3')[0]);
-    const { selectedItem: selectedItem1 } = application.getByType(Menu).props;
-    expect(selectedItem1).toBeNull();
+    const { selectedIndex: selectedIndex1 } = application.getByType(Menu).props;
+    expect(selectedIndex1).toBeNull();
 
     fireEvent.press(application.getAllByText('Option 32')[0]);
-    const { selectedItem: selectedItem2 } = application.getByType(Menu).props;
-    expect(stringify(selectedItem2)).toBe(stringify(expectedSelectedItem));
+    const { selectedIndex: selectedIndex2 } = application.getByType(Menu).props;
+    expect(selectedIndex2).toBe(3);
   });
 
 });

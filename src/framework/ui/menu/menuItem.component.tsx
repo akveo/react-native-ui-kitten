@@ -24,7 +24,7 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import { TouchableTypeReturningProps } from '../support/typings/type';
+import { TouchableIndexedProps } from '../support/typings/type';
 import { allWithPrefix } from '../support/services';
 
 type IconElement = React.ReactElement<ImageProps>;
@@ -34,6 +34,7 @@ export interface MenuItemType {
   disabled?: boolean;
   subItems?: MenuItemType[];
   titleStyle?: StyleProp<TextStyle>;
+  menuIndex?: number;
   icon?: (style: StyleType) => IconElement;
   accessory?: (style: StyleType) => IconElement;
 }
@@ -42,7 +43,7 @@ interface ComponentProps extends MenuItemType {
   selected?: boolean;
 }
 
-export type MenuItemProps = StyledComponentProps & ComponentProps & TouchableTypeReturningProps<MenuItemType>;
+export type MenuItemProps = StyledComponentProps & ComponentProps & TouchableIndexedProps;
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
 
 /**
@@ -61,7 +62,7 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {MenuItemType[]} subItems - Determines the sub-items of the MenuItem.
  *
- * @property {(item: MenuItemType, event: GestureResponderEvent) => void} onPress - Emits when component is pressed.
+ * @property {(index: number, event: GestureResponderEvent) => void} onPress - Emits when component is pressed.
  *
  * @property StyledComponentProps
  *
@@ -73,45 +74,39 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   static styledComponentName: string = 'MenuItem';
 
   private onPress = (event: GestureResponderEvent) => {
-    const item: MenuItemType = this.getMenuItemObject();
+    const { onPress, menuIndex } = this.props;
 
-    if (this.props.onPress) {
-      this.props.onPress(item, event);
+    if (onPress) {
+      onPress(menuIndex, event);
     }
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
-    const item: MenuItemType = this.getMenuItemObject();
-    this.props.dispatch([Interaction.ACTIVE]);
+    const { onPressIn, menuIndex, dispatch } = this.props;
 
-    if (this.props.onPressIn) {
-      this.props.onPressIn(item, event);
+    dispatch([Interaction.ACTIVE]);
+
+    if (onPressIn) {
+      onPressIn(menuIndex, event);
     }
   };
 
   private onPressOut = (event: GestureResponderEvent) => {
-    const item: MenuItemType = this.getMenuItemObject();
-    this.props.dispatch([]);
+    const { onPressOut, menuIndex, dispatch } = this.props;
 
-    if (this.props.onPressOut) {
-      this.props.onPressOut(item, event);
+    dispatch([]);
+
+    if (onPressOut) {
+      onPressOut(menuIndex, event);
     }
   };
 
   private onLongPress = (event: GestureResponderEvent) => {
-    const item: MenuItemType = this.getMenuItemObject();
+    const { onLongPress, menuIndex } = this.props;
 
-    if (this.props.onLongPress) {
-      this.props.onLongPress(item, event);
+    if (onLongPress) {
+      onLongPress(menuIndex, event);
     }
-  };
-
-  private getMenuItemObject = (): MenuItemType => {
-    const { title, icon, disabled, subItems } = this.props;
-    const item: MenuItemType = { title, icon, disabled, subItems };
-    Object.keys(item).forEach(key => item[key] === undefined && delete item[key]);
-
-    return item;
   };
 
   private getComponentStyles = (style: StyleType): StyleType => {

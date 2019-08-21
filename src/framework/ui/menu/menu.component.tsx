@@ -27,10 +27,11 @@ import {
   MenuItemProps,
 } from './menuItem.component';
 import { MenuGroup } from './menuGroup.component';
+import { MenuService } from './menu.service';
 
 interface ComponentProps {
-  selectedItem: MenuItemType;
-  onSelect: (item: MenuItemType, event?: GestureResponderEvent) => void;
+  selectedIndex?: number;
+  onSelect: (index: number, event?: GestureResponderEvent) => void;
 }
 
 export type MenuProps = StyledComponentProps & ComponentProps & Omit<ListProps, 'renderItem'>;
@@ -47,7 +48,9 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *
  * @property {MenuItemType[]} data - Determines menu items.
  *
- * @property {(item: MenuItemType, event?: GestureResponderEvent) => void} onSelect - Fires when
+ * @property {number} selectedIndex - The index of selected item.
+ *
+ * @property {(index: number, event?: GestureResponderEvent) => void} onSelect - Fires when
  * selected item is changed.
  *
  * @property Omit<ListProps, 'renderItem'>
@@ -64,13 +67,13 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * } from 'react-native-ui-kitten';
  *
  * interface State {
- *   selectedItem: MenuItemType;
+ *   selectedIndex: number;
  * }
  *
  * export class MenuShowcase extends React.Component<any, State> {
  *
  *   public state: State = {
- *     selectedItem: null,
+ *     selectedIndex: null,
  *   };
  *
  *   private data: MenuItemType[] = [
@@ -79,15 +82,15 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *     { title: 'Item 3' },
  *   ];
  *
- *   private onSelect = (selectedItem: MenuItemType): void => {
- *     this.setState({ selectedItem });
+ *   private onSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
  *   };
  *
  *   public render(): React.ReactNode {
  *     return (
  *       <Menu
  *         data={this.items}
- *         selectedItem={this.state.selectedItem}
+ *         selectedItem={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
  *       />
  *     );
@@ -103,7 +106,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * <Menu
  *   appearance='divider'
  *   data={this.items}
- *   selectedItem={this.state.selectedItem}
+ *   selectedItem={this.state.selectedIndex}
  *   onSelect={this.onItemSelect}
  * />
  * ```
@@ -184,11 +187,13 @@ class MenuComponent extends React.Component<MenuProps> {
 
   static styledComponentName: string = 'Menu';
 
-  private onSelect = (selectedItem: MenuItemType, event: GestureResponderEvent): void => {
+  private service: MenuService = new MenuService();
+
+  private onSelect = (selectedIndex: number, event: GestureResponderEvent): void => {
     const { onSelect } = this.props;
 
     if (onSelect) {
-      onSelect(selectedItem, event);
+      onSelect(selectedIndex, event);
     }
   };
 
@@ -206,22 +211,20 @@ class MenuComponent extends React.Component<MenuProps> {
   };
 
   private getIsSelected = (item: MenuItemType): boolean => {
-    const { selectedItem } = this.props;
-    if (selectedItem) {
-      return selectedItem.title === item.title;
-    }
-    return false;
+    const { selectedIndex } = this.props;
+
+    return selectedIndex === item.menuIndex;
   };
 
   private renderMenuItem = (info: ListRenderItemInfo<MenuItemProps>): MenuItemElement => {
-    const { selectedItem, themedStyle } = this.props;
+    const { selectedIndex, themedStyle } = this.props;
     const separatorStyle: StyleType = this.getComponentStyles(themedStyle);
     const isSelected: boolean = this.getIsSelected(info.item);
 
     return this.areThereSubItems(info.item) ? (
       <MenuGroup
         item={info.item}
-        selectedItem={selectedItem}
+        selectedIndex={selectedIndex}
         separatorStyle={separatorStyle}
         onSelect={this.onSelect}
       />
@@ -244,12 +247,14 @@ class MenuComponent extends React.Component<MenuProps> {
   };
 
   public render(): React.ReactNode {
-    const { appearance, ...restProps } = this.props;
+    const { appearance, data, ...restProps } = this.props;
+    const items: MenuItemType[] = this.service.setIndexes(data);
 
     return (
       <List
         ItemSeparatorComponent={this.renderSeparator}
         renderItem={this.renderMenuItem}
+        data={items}
         {...restProps}
       />
     );

@@ -34,9 +34,9 @@ import { Chevron } from '../support/components';
 
 interface ComponentProps {
   item: MenuItemType;
-  selectedItem: MenuItemType;
+  selectedIndex: number;
   separatorStyle?: StyleType;
-  onSelect?: (item: MenuItemType, event?: GestureResponderEvent) => void;
+  onSelect?: (index: number, event?: GestureResponderEvent) => void;
 }
 
 interface ComponentState {
@@ -46,7 +46,7 @@ interface ComponentState {
 
 export type MenuGroupProps = ComponentProps & StyledComponentProps & TouchableOpacityProps;
 export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
-type OnPressHandler = (item: MenuItemType, event?: GestureResponderEvent) => void;
+type OnPressHandler = (index: number, event?: GestureResponderEvent) => void;
 type IconElement = React.ReactElement<ImageProps>;
 const MAIN_ITEM_KEY: string = 'Main Item';
 const SEPARATOR_ELEMENT_KEY: string = 'Separator';
@@ -95,9 +95,9 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     this.setState({ subItemsVisible });
   };
 
-  private onSubItemPress = (item: MenuItemType, event: GestureResponderEvent): void => {
+  private onSubItemPress = (index: number, event: GestureResponderEvent): void => {
     if (this.props.onSelect) {
-      this.props.onSelect(item, event);
+      this.props.onSelect(index, event);
     }
   };
 
@@ -116,11 +116,9 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
   };
 
   private getIsSelected = (item: MenuItemType): boolean => {
-    const { selectedItem } = this.props;
-    if (selectedItem) {
-      return selectedItem.title === item.title;
-    }
-    return false;
+    const { selectedIndex } = this.props;
+
+    return selectedIndex === item.menuIndex;
   };
 
   private renderSeparator = (style: StyleType): React.ReactElement<ViewProps> => {
