@@ -102,85 +102,230 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * @overview-example Eva Styling
  *
  * ```
- * // use code from the example above
+ * import React from 'react';
+ * import {
+ *   Menu,
+ *   MenuItemType,
+ * } from 'react-native-ui-kitten';
  *
- * <Menu
- *   appearance='noSeparator'
- *   data={this.items}
- *   selectedItem={this.state.selectedIndex}
- *   onSelect={this.onItemSelect}
- * />
+ * interface State {
+ *   selectedIndex: number;
+ * }
+ *
+ * export class MenuShowcase extends React.Component<any, State> {
+ *
+ *   public state: State = {
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private data: MenuItemType[] = [
+ *     { title: 'Item 1' },
+ *     { title: 'Item 2' },
+ *     { title: 'Item 3' },
+ *   ];
+ *
+ *   private onSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Menu
+ *         appearance='noSeparator'
+ *         data={this.items}
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
  * ```
  *
  * @example Disabled Item
  *
  * ```
- * // use code from example above
+ * import React from 'react';
+ * import {
+ *   Menu,
+ *   MenuItemType,
+ * } from 'react-native-ui-kitten';
  *
- * private data: MenuItemType[] = [
- *   { title: 'Item 1', disabled: true },
- *   { title: 'Item 2' },
- *   { title: 'Item 3' },
- * ];
+ * interface State {
+ *   selectedIndex: number;
+ * }
+ *
+ * export class MenuShowcase extends React.Component<any, State> {
+ *
+ *   public state: State = {
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private data: MenuItemType[] = [
+ *     { title: 'Item 1', disabled: true },
+ *     { title: 'Item 2' },
+ *     { title: 'Item 3' },
+ *   ];
+ *
+ *   private onSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Menu
+ *         data={this.items}
+ *         selectedItem={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
  * ```
  *
  * @example With Icons
  *
  * ```
- * // use code from example above
+ * import React from 'react';
+ * import {
+ *   Menu,
+ *   MenuItemType,
+ * } from 'react-native-ui-kitten';
  *
- * Icon = (style: StyleType): React.ReactElement<ImageProps> => (
- *   <Image
- *     style={style}
- *     source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
- *   />
- * );
+ * interface State {
+ *   selectedIndex: number;
+ * }
  *
- * private data: MenuItemType[] = [
- *   {
- *     title: 'Item 1',
- *     icon: this.Icon,
- *   },
- *   {
- *     title: 'Item 2',
- *     icon: this.Icon,
- *   },
- *   {
- *     title: 'Item 3',
- *     icon: this.Icon,
- *   },
- * ];
+ * export class MenuShowcase extends React.Component<any, State> {
+ *
+ *   public state: State = {
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private data: MenuItemType[] = [
+ *     {
+ *       title: 'Item 1',
+ *       icon: this.Icon,
+ *     },
+ *     {
+ *       title: 'Item 2',
+ *       icon: this.Icon,
+ *     },
+ *     {
+ *       title: 'Item 3',
+ *       icon: this.Icon,
+ *     },
+ *   ];
+ *
+ *   private Icon = (style: StyleType): React.ReactElement<ImageProps> => (
+ *     <Image
+ *       style={style}
+ *       source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+ *     />
+ *   );
+ *
+ *   private onSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Menu
+ *         data={this.items}
+ *         selectedItem={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
  * ```
  *
  * @example With Items Groups
  *
  * ```
- * // use code from example above
+ * import React from 'react';
+ * import {
+ *   Menu,
+ *   MenuItemType,
+ * } from 'react-native-ui-kitten';
  *
- * private data: MenuItemType[] = [
- *   { title: 'Item 1' },
- *   {
- *     title: 'Item 2',
- *     subItems: [
- *       { title: 'Item 21' },
- *       { title: 'Item 22' },
- *       { title: 'Item 23' },
- *     ],
- *   },
- *   { title: 'Item 3' },
- * ];
+ * interface State {
+ *   selectedIndex: number;
+ * }
+ *
+ * export class MenuShowcase extends React.Component<any, State> {
+ *
+ *   public state: State = {
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private data: MenuItemType[] = [
+ *     { title: 'Item 1' },
+ *     {
+ *       title: 'Item 2',
+ *       subItems: [
+ *         { title: 'Item 21' },
+ *         { title: 'Item 22' },
+ *         { title: 'Item 23' },
+ *       ],
+ *     },
+ *     { title: 'Item 3' },
+ *   ];
+ *
+ *   private onSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Menu
+ *         data={this.items}
+ *         selectedItem={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
  * ```
  *
  * @example Inline Styling
  *
  * ```
- * // use code from example above
+ * import React from 'react';
+ * import {
+ *   Menu,
+ *   MenuItemType,
+ * } from 'react-native-ui-kitten';
  *
- * private data: MenuItemType[] = [
- *   { title: 'Item 1', titleStyle: { color: 'red', fontSize: 18 } },
- *   { title: 'Item 2' },
- *   { title: 'Item 3' },
- * ];
+ * interface State {
+ *   selectedIndex: number;
+ * }
+ *
+ * export class MenuShowcase extends React.Component<any, State> {
+ *
+ *   public state: State = {
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private data: MenuItemType[] = [
+ *     { title: 'Item 1', titleStyle: { color: 'red', fontSize: 18 } },
+ *     { title: 'Item 2' },
+ *     { title: 'Item 3' },
+ *   ];
+ *
+ *   private onSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Menu
+ *         data={this.items}
+ *         selectedItem={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
  * ```
  */
 
