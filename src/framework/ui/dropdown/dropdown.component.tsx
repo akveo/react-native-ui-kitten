@@ -592,8 +592,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderDefaultIconElement = (style: ImageStyle): IconElement => {
-    const { visible } = this.state;
-
     const rotateInterpolate = this.iconAnimation.interpolate({
       inputRange: [-180, 0],
       outputRange: ['-180deg', '0deg'],
@@ -602,9 +600,8 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
 
     return (
       <Chevron
-        style={style}
+        style={[style, animatedStyle]}
         isAnimated={true}
-        animationStyle={animatedStyle}
       />
     );
   };
