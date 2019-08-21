@@ -30,7 +30,7 @@ interface State {
 }
 
 /**
- * ApplicationProvider component is designed to be a root of the application.
+ * `ApplicationProvider` component is designed to be a root of the application.
  *
  * This does basically two things:
  * - Provides styles for basic components;
@@ -51,7 +51,7 @@ interface State {
  *
  * @property ThemeProviderProps
  *
- * @example ApplicationProvider API example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';

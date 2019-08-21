@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { ThemedStyleType } from '@eva-design/dss';
 import { StyleType } from './type';
 import { getThemeValue } from '../theme/theme.service';

@@ -36,7 +36,7 @@ export type ViewPagerProps = ViewProps & ComponentProps;
 export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 /**
- * Allows flipping through the "pages".
+ * `ViewPager` allows flipping through the "pages".
  *
  * @extends React.Component
  *
@@ -53,7 +53,7 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  *
  * @property ScrollViewProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -88,7 +88,7 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * }
  * ```
  *
- * @example Lazy loading usage example
+ * @example Lazy Loading
  *
  * ```
  * import React from 'react';

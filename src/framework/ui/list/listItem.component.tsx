@@ -67,8 +67,8 @@ export type ListItemProps = StyledComponentProps & TouchableIndexedProps & Compo
 export type ListItemElement = React.ReactElement<ListItemProps>;
 
 /**
- * ListItem is a support component for List.
- * The key feature of wrapping custom list items into ListItem component is that it automatically
+ * `ListItem` is a support component for `List`.
+ * The key feature of wrapping custom list items into `ListItem` component is that it automatically
  * picks background color fitting to current theme and responds to touches with feedback.
  *
  * @extends React.Component
@@ -92,7 +92,7 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * @property {(index: number, event: GestureResponderEvent) => React.ReactElement<ImageProps>} onPress - Emits when
  * component is pressed.
  *
- * @example ListItem title and description template example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react'
@@ -109,7 +109,7 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *  };
  * ```
  *
- * @example ListItem icon template example
+ * @example With Icon
  *
  * ```
  * import React from 'react'
@@ -134,7 +134,7 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *  };
  * ```
  *
- * @example ListItem accessory template example
+ * @example With Accessory
  *
  * ```
  * import React from 'react'
@@ -158,7 +158,7 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * };
  * ```
  *
- * @example Inline styling example
+ * @example Inline Styling
  *
  * ```
  * import React from 'react'

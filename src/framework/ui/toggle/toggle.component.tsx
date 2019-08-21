@@ -39,7 +39,7 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
 export type ToggleElement = React.ReactElement<ToggleProps>;
 
 /**
- * Styled Toggle component.
+ * Styled `Toggle` component.
  *
  * @extends React.Component
  *
@@ -62,7 +62,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -81,6 +81,35 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <Toggle
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { Toggle } from 'react-native-ui-kitten';
+ *
+ * export class ToggleShowcase extends React.Component {
+ *
+ *   public state = {
+ *     checked: false,
+ *   };
+ *
+ *   private onChange = (checked: boolean) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Toggle
+ *         size='small'
+ *         status='info'
  *         checked={this.state.checked}
  *         onChange={this.onChange}
  *       />
