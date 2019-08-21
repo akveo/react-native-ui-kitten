@@ -44,9 +44,9 @@ export type OverflowMenuItemProps = StyledComponentProps & TouchableIndexedProps
 export type OverflowMenuItemElement = React.ReactElement<OverflowMenuItemProps>;
 
 /**
- * OverflowMenuItem is a part of the OverflowMenu component.
- * OverflowMenu items should be wrapped in OverflowMenu to provide usable component.
- * See usage examples at OverflowMenu component documentation.
+ * `OverflowMenuItem` is a part of the `OverflowMenu` component.
+ * `OverflowMenuItems` should be wrapped in `OverflowMenu` to provide usable component.
+ * See usage examples at `OverflowMenu` component documentation.
  *
  * @extends React.Component
  *

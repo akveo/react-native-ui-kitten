@@ -45,7 +45,7 @@ export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & Compo
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 
 /**
- * Styled CheckBox component.
+ * Styled `CheckBox` component.
  *
  * @extends React.Component
  *
@@ -68,7 +68,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -95,7 +95,35 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * }
  * ```
  *
- * @example Inline styling example
+ * @overview-example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { CheckBox } from 'react-native-ui-kitten';
+ *
+ * export class CheckBoxShowcase extends React.Component {
+ *
+ *   public state = {
+ *     checked: false,
+ *   };
+ *
+ *   private onChange = (checked: boolean) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <CheckBox
+ *         checked={this.state.checked}
+ *         status='success'
+ *         onChange={this.onChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Inline Styling
  *
  * ```
  * import React from 'react';
@@ -107,10 +135,134 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *       style={styles.checkbox}
  *       textStyle={styles.checkboxText}
  *       text='Place your text'
+ *       indeterminate={true}
  *       checked={this.state.checked}
  *     />
  *   );
  * };
+ * ```
+ *
+ * @example Indeterminate
+ *
+ * ```
+ * import React from 'react';
+ * import { CheckBox } from '@kitten/ui';
+ * import { View } from 'react-native';
+ *
+ * interface State {
+ *   mainCheckboxChecked: boolean;
+ *   mainCheckboxIndeterminate: boolean;
+ *   checkbox1Checked: boolean;
+ *   checkbox2Checked: boolean;
+ *   checkbox3Checked: boolean;
+ * }
+ *
+ * export class CheckBoxContainer extends React.Component<any, State> {
+ *
+ *   public state: State = {
+ *     mainCheckboxChecked: false,
+ *     mainCheckboxIndeterminate: false,
+ *     checkbox1Checked: false,
+ *     checkbox2Checked: false,
+ *     checkbox3Checked: false,
+ *   };
+ *
+ *   private onMainCheckboxChange = (checked: boolean): void => {
+ *     if (checked) {
+ *       this.setState({
+ *         checkbox1Checked: true,
+ *         checkbox2Checked: true,
+ *         checkbox3Checked: true,
+ *       });
+ *     } else {
+ *       this.setState({
+ *         checkbox1Checked: false,
+ *         checkbox2Checked: false,
+ *         checkbox3Checked: false,
+ *       });
+ *     }
+ *     this.setState({ mainCheckboxChecked: checked });
+ *   };
+ *
+ *   private onCheckbox1Change = (checked: boolean): void => {
+ *     this.setState({ checkbox1Checked: checked }, this.setMainCheckboxDependingState);
+ *   };
+ *
+ *   private onCheckbox2Change = (checked: boolean): void => {
+ *     this.setState({ checkbox2Checked: checked }, this.setMainCheckboxDependingState);
+ *   };
+ *
+ *   private onCheckbox3Change = (checked: boolean): void => {
+ *     this.setState({ checkbox3Checked: checked }, this.setMainCheckboxDependingState);
+ *   };
+ *
+ *   private setMainCheckboxDependingState = (): void => {
+ *     const { checkbox1Checked, checkbox2Checked, checkbox3Checked } = this.state;
+ *     const states: boolean[] = [checkbox1Checked, checkbox2Checked, checkbox3Checked];
+ *     const someChecked: boolean = states.some((item: boolean) => item === true);
+ *     const everyChecked: boolean = states.every((item: boolean) => item === true);
+ *
+ *     if (someChecked && !everyChecked) {
+ *       this.setState({
+ *         mainCheckboxChecked: true,
+ *         mainCheckboxIndeterminate: true,
+ *       });
+ *     } else if (!someChecked && !everyChecked) {
+ *       this.setState({
+ *         mainCheckboxChecked: false,
+ *         mainCheckboxIndeterminate: false,
+ *       });
+ *     } else if (everyChecked) {
+ *       this.setState({
+ *         mainCheckboxChecked: true,
+ *         mainCheckboxIndeterminate: false,
+ *       });
+ *     }
+ *  };
+ *
+ *  public render(): React.ReactNode {
+ *    const {
+ *      mainCheckboxChecked,
+ *      mainCheckboxIndeterminate,
+ *      checkbox1Checked,
+ *      checkbox2Checked,
+ *      checkbox3Checked,
+ *    } = this.state;
+ *
+ *     return (
+ *      <View style={{
+ *        flex: 1,
+ *        padding: 20,
+ *      }}>
+ *         <CheckBox
+ *           style={{ marginBottom: 12 }}
+ *           text='Main'
+ *           checked={mainCheckboxChecked}
+ *           indeterminate={mainCheckboxIndeterminate}
+ *           onChange={this.onMainCheckboxChange}
+ *         />
+ *         <CheckBox
+ *           text='Checkbox 1'
+ *           style={{ marginLeft: 12, marginBottom: 12 }}
+ *           checked={checkbox1Checked}
+ *           onChange={this.onCheckbox1Change}
+ *         />
+ *         <CheckBox
+ *           text='Checkbox 2'
+ *           style={{ marginLeft: 12, marginBottom: 12 }}
+ *           checked={checkbox2Checked}
+ *           onChange={this.onCheckbox2Change}
+ *         />
+ *         <CheckBox
+ *           text='Checkbox 3'
+ *           style={{ marginLeft: 12 }}
+ *           checked={checkbox3Checked}
+ *           onChange={this.onCheckbox3Change}
+ *         />
+ *       </View>
+ *     );
+ *   }
+ * }
  * ```
  * */
 

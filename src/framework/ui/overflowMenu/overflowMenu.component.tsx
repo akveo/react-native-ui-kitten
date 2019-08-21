@@ -43,7 +43,7 @@ export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
 export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
 
 /**
- * Renders vertical list of menu items in a modal.
+ * `OverflowMenu` renders vertical list of menu items in a modal.
  *
  * @extends React.Component
  *
@@ -62,7 +62,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @property StyledComponentProps
  *
- * @example OverflowMenu usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';

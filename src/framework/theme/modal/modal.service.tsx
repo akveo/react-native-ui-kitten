@@ -19,7 +19,7 @@ import { ModalPresentingBased } from '../../ui/support/typings';
  *
  * @method {(identifier: string, children: React.ReactNode) => void} update - Updates component from a modal window.
  *
- * @example Simple Usage example
+ * @example Simple Usage
  *
  * ```
  * import React from 'react';

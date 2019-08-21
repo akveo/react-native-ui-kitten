@@ -29,7 +29,7 @@ export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
 
 /**
- * Renders a group of radio buttons.
+ * Renders a group of `Radio` buttons.
  *
  * @extends React.Component
  *
@@ -44,7 +44,7 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -63,6 +63,37 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <RadioGroup
+ *         selectedIndex={this.state.selectedIndex}
+ *         onChange={this.onGroupSelectionChange}>
+ *         <Radio />
+ *         <Radio />
+ *         <Radio />
+ *       </RadioGroup>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { Radio, RadioGroup } from 'react-native-ui-kitten';
+ *
+ * export class RadioGroupShowcase extends React.Component {
+ *
+ *   public state = {
+ *     selectedIndex: 0,
+ *   };
+ *
+ *   private onGroupSelectionChange = (selectedIndex: number) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <RadioGroup
+ *         status='danger'
  *         selectedIndex={this.state.selectedIndex}
  *         onChange={this.onGroupSelectionChange}>
  *         <Radio />
