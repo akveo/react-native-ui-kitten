@@ -80,7 +80,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *   Modal,
  *   Text,
  *   Layout,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   modalVisible: boolean;
@@ -149,7 +149,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *   Modal,
  *   Text,
  *   Layout,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   modalVisible: boolean;

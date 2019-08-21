@@ -89,7 +89,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';

@@ -156,7 +156,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * }
  * ```
  *
- * @example With Icons and Inline Styling
+ * @example With Icons
  *
  * ```
  * import React from 'react';
@@ -201,6 +201,43 @@ export type InputElement = React.ReactElement<InputProps>;
  *         onIconPress={this.onIconPress}
  *         caption='Caption'
  *         captionIcon={this.renderIcon}
+ *         style={styles.input}
+ *         onChangeText={this.onInputValueChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   StyleSheet,
+ *   View,
+ *   ImageProps,
+ *   Image,
+ *   GestureResponderEvent,
+ *   Alert,
+ * } from 'react-native';
+ * import { Input } from 'react-native-ui-kitten';
+ *
+ * export class InputShowcase extends React.Component {
+ *
+ *   public state = {
+ *     inputValue: '',
+ *   };
+ *
+ *   private onInputValueChange = (inputValue: string) => {
+ *     this.setState({ inputValue });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Input
+ *         value={this.state.inputValue}
+ *         caption='Caption'
  *         style={styles.input}
  *         textStyle={styles.inputText}
  *         labelStyle={styles.inputLabel}

@@ -112,7 +112,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  * }
  * ```
  *
- * @example WithIcon
+ * @example With Icon
  *
  * ```
  * import React from 'react';

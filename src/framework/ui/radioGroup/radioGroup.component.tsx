@@ -74,7 +74,7 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
