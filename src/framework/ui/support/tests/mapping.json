@@ -1144,6 +1144,34 @@
         }
       }
     },
+    "Divider": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "backgroundColor": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "height": 1,
+            "backgroundColor": "background-basic-color-3"
+          }
+        }
+      }
+    },
     "Dropdown": {
       "meta": {
         "scope": "all",
@@ -1942,7 +1970,7 @@
           "default": {
             "default": true
           },
-          "noSeparator": {
+          "noDivider": {
             "default": false
           }
         },
@@ -1953,12 +1981,12 @@
         "default": {
           "mapping": {}
         },
-        "noSeparator": {
+        "noDivider": {
           "mapping": {}
         }
       }
     },
-    "MenuGroup": {
+    "SubMenu": {
       "meta": {
         "scope": "all",
         "parameters": {
@@ -2027,18 +2055,6 @@
           },
           "titleColor": {
             "type": "string"
-          },
-          "accessoryTintColor": {
-            "type": "string"
-          },
-          "accessoryWidth": {
-            "type": "number"
-          },
-          "accessoryHeight": {
-            "type": "number"
-          },
-          "accessoryMarginHorizontal": {
-            "type": "number"
           }
         },
         "appearances": {
@@ -2082,10 +2098,6 @@
             "titleColor": "text-basic-color",
             "indicatorWidth": 0,
             "indicatorBackgroundColor": "transparent",
-            "accessoryWidth": 20,
-            "accessoryHeight": 20,
-            "accessoryMarginHorizontal": 8,
-            "accessoryTintColor": "text-hint-color",
             "state": {
               "active": {
                 "backgroundColor": "background-basic-color-3"
@@ -2538,34 +2550,6 @@
         "default": {
           "mapping": {
             "padding": 0
-          }
-        }
-      }
-    },
-    "Separator": {
-      "meta": {
-        "scope": "all",
-        "parameters": {
-          "backgroundColor": {
-            "type": "string"
-          },
-          "height": {
-            "type": "number"
-          }
-        },
-        "appearances": {
-          "default": {
-            "default": true
-          }
-        },
-        "variantGroups": {},
-        "states": {}
-      },
-      "appearances": {
-        "default": {
-          "mapping": {
-            "height": 1,
-            "backgroundColor": "background-basic-color-3"
           }
         }
       }

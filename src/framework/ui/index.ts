@@ -82,10 +82,10 @@ export {
   MenuItemType,
 } from './menu/menuItem.component';
 export {
-  MenuGroup,
-  MenuGroupElement,
-  MenuGroupProps,
-} from './menu/menuGroup.component';
+  SubMenu,
+  SubMenuElement,
+  SubMenuProps,
+} from './menu/subMenu.component';
 export {
   Modal,
   ModalProps,
@@ -118,10 +118,10 @@ export {
   RadioGroupElement,
 } from './radioGroup/radioGroup.component';
 export {
-  Separator,
-  SeparatorElement,
-  SeparatorProps,
-} from './separator/separator.component';
+  Divider,
+  DividerElement,
+  DividerProps,
+} from './divider/divider.component';
 export {
   Spinner,
   SpinnerProps,

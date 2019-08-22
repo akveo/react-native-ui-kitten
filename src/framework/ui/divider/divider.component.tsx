@@ -14,14 +14,14 @@ import {
   StyledComponentProps,
 } from '@kitten/theme';
 
-export type SeparatorProps = StyledComponentProps & ViewProps;
-export type SeparatorElement = React.ReactElement<SeparatorProps>;
+export type DividerProps = StyledComponentProps & ViewProps;
+export type DividerElement = React.ReactElement<DividerProps>;
 
-class SeparatorComponent extends React.Component<SeparatorProps> {
+class DividerComponent extends React.Component<DividerProps> {
 
-  static styledComponentName: string = 'Separator';
+  static styledComponentName: string = 'Divider';
 
-  public render(): SeparatorElement {
+  public render(): DividerElement {
     const { style, themedStyle, ...restProps } = this.props;
 
     return (
@@ -33,4 +33,4 @@ class SeparatorComponent extends React.Component<SeparatorProps> {
   }
 }
 
-export const Separator = styled<SeparatorProps>(SeparatorComponent);
+export const Divider = styled<DividerProps>(DividerComponent);

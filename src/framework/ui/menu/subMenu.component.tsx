@@ -30,12 +30,12 @@ import {
   MeasuringElementProps,
 } from '../popover/measure.component';
 import { Chevron } from '../support/components';
-import { SeparatorElement } from '../separator/separator.component';
+import { DividerElement } from '../divider/divider.component';
 
 interface ComponentProps {
   item: MenuItemType;
   selectedIndex: number;
-  separator?: SeparatorElement;
+  divider?: DividerElement;
   onSelect?: (index: number, event?: GestureResponderEvent) => void;
 }
 
@@ -44,18 +44,18 @@ interface ComponentState {
   subItemsHeight: number;
 }
 
-export type MenuGroupProps = ComponentProps & StyledComponentProps & TouchableOpacityProps;
-export type MenuGroupElement = React.ReactElement<MenuGroupProps>;
+export type SubMenuProps = ComponentProps & StyledComponentProps & TouchableOpacityProps;
+export type SubMenuElement = React.ReactElement<SubMenuProps>;
 type OnPressHandler = (index: number, event?: GestureResponderEvent) => void;
 type IconElement = React.ReactElement<ImageProps>;
 
 const MAIN_ITEM_KEY: string = 'Main Item';
-const SEPARATOR_ELEMENT_KEY: string = 'Separator';
+const DIVIDER_ELEMENT_KEY: string = 'Divider';
 const SUB_ITEMS_MEASURE_TAG: string = 'Sub Items';
 
-class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState> {
+class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
 
-  static styledComponentName: string = 'MenuGroup';
+  static styledComponentName: string = 'SubMenu';
 
   public state: ComponentState = {
     subItemsVisible: false,
@@ -65,7 +65,7 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
   private subItemsAnimation: Animated.Value = new Animated.Value(0);
   private iconAnimation: Animated.Value = new Animated.Value(-180);
 
-  public componentDidUpdate(prevProps: MenuGroupProps, prevState: ComponentState): void {
+  public componentDidUpdate(prevProps: SubMenuProps, prevState: ComponentState): void {
     if (prevState.subItemsVisible !== this.state.subItemsVisible) {
       if (this.state.subItemsVisible) {
         this.subItemsExpandAnimate(this.state.subItemsHeight);
@@ -122,24 +122,24 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     return selectedIndex === item.menuIndex;
   };
 
-  private isMainItemSeparatorExist = (): boolean => {
-    const { separator } = this.props;
+  private isMainItemDividerExist = (): boolean => {
+    const { divider } = this.props;
     const { subItemsVisible } = this.state;
 
-    return subItemsVisible && separator !== null;
+    return subItemsVisible && divider !== null;
   };
 
-  private isSubItemSeparatorExist = (item: MenuItemType, index: number): boolean => {
-    const { separator } = this.props;
+  private isSubItemDividerExist = (item: MenuItemType, index: number): boolean => {
+    const { divider } = this.props;
 
-    return (index !== item.subItems.length - 1) && (separator !== null);
+    return (index !== item.subItems.length - 1) && (divider !== null);
   };
 
-  private renderSeparator = (): SeparatorElement => {
-    const { separator } = this.props;
+  private renderDivider = (): DividerElement => {
+    const { divider } = this.props;
 
-    return React.cloneElement(separator, {
-      key: SEPARATOR_ELEMENT_KEY,
+    return divider && React.cloneElement(divider, {
+      key: DIVIDER_ELEMENT_KEY,
     });
   };
 
@@ -193,7 +193,7 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
   };
 
   private renderSubItems = (): React.ReactNode => {
-    const { item, themedStyle, separator } = this.props;
+    const { item, themedStyle, divider } = this.props;
 
     return item.subItems.map((sub: MenuItemType, index: number) => {
       const { subContainer } = this.getComponentStyles(themedStyle);
@@ -203,13 +203,13 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
         style: subContainer,
         selected: isSelected,
       });
-      const separatorElement: SeparatorElement = this.isSubItemSeparatorExist(item, index) ?
-        this.renderSeparator() : null;
+      const dividerElement: DividerElement = this.isSubItemDividerExist(item, index) ?
+        this.renderDivider() : null;
 
       return (
         <React.Fragment key={index}>
           {element}
-          {separatorElement}
+          {dividerElement}
         </React.Fragment>
       );
     });
@@ -221,13 +221,13 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     return [
       this.renderMenuItem(item, true, MAIN_ITEM_KEY),
       this.renderSubItems(),
-      this.isMainItemSeparatorExist() ? this.renderSeparator() : null,
+      this.isMainItemDividerExist() ? this.renderDivider() : null,
     ];
   };
 
   public render(): React.ReactNode {
     const { subItemsVisible } = this.state;
-    const [mainItem, subItems, separator] = this.renderComponentChildren();
+    const [mainItem, subItems, divider] = this.renderComponentChildren();
     const invisibleSubs: React.ReactElement<MeasureNodeProps> = this.renderSubItemsInvisible(subItems);
 
     const animatedStyle: StyleType = { height: this.subItemsAnimation };
@@ -235,7 +235,7 @@ class MenuGroupComponent extends React.Component<MenuGroupProps, ComponentState>
     return (
       <React.Fragment>
         {mainItem}
-        {separator}
+        {divider}
         <Animated.View style={animatedStyle}>
           {subItemsVisible && subItems}
         </Animated.View>
@@ -252,4 +252,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const MenuGroup = styled<MenuGroupProps>(MenuGroupComponent);
+export const SubMenu = styled<SubMenuProps>(SubMenuComponent);

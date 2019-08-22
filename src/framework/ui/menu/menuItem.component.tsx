@@ -143,12 +143,6 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
         marginHorizontal: iconStyles.iconMarginHorizontal,
         tintColor: iconStyles.iconTintColor,
       },
-      accessory: {
-        height: accessoryStyle.accessoryHeight,
-        marginHorizontal: accessoryStyle.accessoryMarginHorizontal,
-        tintColor: accessoryStyle.accessoryTintColor,
-        width: accessoryStyle.accessoryWidth,
-      },
     };
   };
 
@@ -178,7 +172,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
     return [
       icon && this.renderIcon(style.icon),
       title && this.renderTitle(style.title),
-      accessory && this.renderAccessory(style.accessory),
+      accessory && this.renderAccessory(style.icon),
     ];
   };
 

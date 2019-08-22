@@ -18,16 +18,16 @@ import {
   ListProps,
 } from '../list/list.component';
 import {
-  Separator,
-  SeparatorElement,
-} from '../separator/separator.component';
+  Divider,
+  DividerElement,
+} from '../divider/divider.component';
 import {
   MenuItem,
   MenuItemType,
   MenuItemElement,
   MenuItemProps,
 } from './menuItem.component';
-import { MenuGroup } from './menuGroup.component';
+import { SubMenu } from './subMenu.component';
 import { MenuService } from './menu.service';
 
 interface ComponentProps {
@@ -44,7 +44,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * @extends React.Component
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be `default` or `noSeparator`.
+ * Can be `default` or `noDivider`.
  * Default is `default`.
  *
  * @property {MenuItemType[]} data - Determines menu items.
@@ -131,7 +131,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <Menu
- *         appearance='noSeparator'
+ *         appearance='noDivider'
  *         data={this.items}
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
@@ -343,10 +343,10 @@ class MenuComponent extends React.Component<MenuProps> {
     }
   };
 
-  private isSeparatorAbsent = (): boolean => {
+  private isDividerAbsent = (): boolean => {
     const { appearance } = this.props;
 
-    return appearance !== 'noSeparator';
+    return appearance !== 'noDivider';
   };
 
   private areThereSubItems = (item: MenuItemProps): boolean => {
@@ -364,10 +364,10 @@ class MenuComponent extends React.Component<MenuProps> {
     const isSelected: boolean = this.getIsSelected(info.item);
 
     return this.areThereSubItems(info.item) ? (
-      <MenuGroup
+      <SubMenu
         item={info.item}
         selectedIndex={selectedIndex}
-        separator={this.renderSeparator()}
+        divider={this.renderDivider()}
         onSelect={this.onSelect}
       />
     ) : (
@@ -379,9 +379,9 @@ class MenuComponent extends React.Component<MenuProps> {
     );
   };
 
-  private renderSeparator = (): SeparatorElement => {
-    return this.isSeparatorAbsent() && (
-      <Separator/>
+  private renderDivider = (): DividerElement => {
+    return this.isDividerAbsent() && (
+      <Divider/>
     );
   };
 
@@ -391,7 +391,7 @@ class MenuComponent extends React.Component<MenuProps> {
 
     return (
       <List
-        ItemSeparatorComponent={this.renderSeparator}
+        ItemSeparatorComponent={this.renderDivider}
         renderItem={this.renderMenuItem}
         data={items}
         {...restProps}

@@ -144,6 +144,6 @@ export const menuSettings: ComponentShowcaseSetting[] = [
   },
   {
     propertyName: 'appearance',
-    value: 'noSeparator',
+    value: 'noDivider',
   },
 ];
