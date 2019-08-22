@@ -44,7 +44,7 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  * Default is `medium`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * Can be `primary`, `success`, `info`, `warning`, `danger` or `bipolar`.
  * Default is `primary`.
  *
  * @overview-example Simple Usage
