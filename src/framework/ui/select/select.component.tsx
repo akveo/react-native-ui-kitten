@@ -81,7 +81,7 @@ export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
   visible: boolean;
-  menuWidth: number;
+  optionsListWidth: number;
 }
 
 /**
@@ -437,7 +437,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   public state: State = {
     visible: false,
-    menuWidth: 0,
+    optionsListWidth: 0,
   };
 
   private strategy: SelectionStrategy;
@@ -520,7 +520,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
   private onControlMeasure = (result: MeasureResult): void => {
     const width: number = result[MEASURED_CONTROL_TAG].size.width;
 
-    this.setState({ menuWidth: width });
+    this.setState({ optionsListWidth: width });
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -537,7 +537,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
     const iconStyles: StyleType = allWithPrefix(source, 'icon');
     const textStyles: StyleType = allWithPrefix(source, 'text');
     const placeholderStyles: StyleType = allWithPrefix(source, 'placeholder');
-    const menuStyles: StyleType = allWithPrefix(source, 'menu');
+    const optionsListStyles: StyleType = allWithPrefix(source, 'optionsList');
     const labelStyle: StyleType = allWithPrefix(source, 'label');
     const outlineStyles: StyleType = allWithPrefix(source, 'outline');
 
@@ -577,11 +577,11 @@ class SelectComponent extends React.Component<SelectProps, State> {
         padding: outlineStyles.outlinePadding,
         borderRadius: outlineStyles.outlineBorderRadius,
       },
-      menu: {
-        maxHeight: menuStyles.menuMaxHeight,
-        borderRadius: menuStyles.menuBorderRadius,
-        borderColor: menuStyles.menuBorderColor,
-        borderWidth: menuStyles.menuBorderWidth,
+      optionsList: {
+        maxHeight: optionsListStyles.optionsListMaxHeight,
+        borderRadius: optionsListStyles.optionsListBorderRadius,
+        borderColor: optionsListStyles.optionsListBorderColor,
+        borderWidth: optionsListStyles.optionsListBorderWidth,
       },
       label: {
         color: labelStyle.labelColor,
@@ -641,16 +641,16 @@ class SelectComponent extends React.Component<SelectProps, State> {
     );
   };
 
-  private renderMenuElement = (style: StyleType): SelectOptionsListElement => {
+  private renderOptionsListElement = (style: StyleType): SelectOptionsListElement => {
     const { appearance, selectedOption, ...restProps } = this.props;
-    const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
+    const additionalOptionsListStyle: StyleType = { width: this.state.optionsListWidth };
 
     return (
       <SelectOptionsList
         {...restProps}
         strategy={this.strategy}
         key={0}
-        style={[styles.menu, style, additionalMenuStyle]}
+        style={[styles.optionsList, style, additionalOptionsListStyle]}
         bounces={false}
         onSelect={this.onItemSelect}
       />
@@ -695,7 +695,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
     const { label } = this.props;
 
     return [
-      this.renderMenuElement(style.menu),
+      this.renderOptionsListElement(style.optionsList),
       isValidString(label) && this.renderLabelElement(style.label),
       this.renderControlElement(),
     ];
@@ -703,10 +703,10 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   public render(): SelectElement {
     const { themedStyle, style } = this.props;
-    const { visible, menuWidth } = this.state;
+    const { visible, optionsListWidth } = this.state;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-    const [menuElement, labelElement, controlElement] = this.renderComponentChildren(componentStyle);
-    const additionalMenuStyle: StyleType = { maxWidth: menuWidth };
+    const [optionsListElement, labelElement, controlElement] = this.renderComponentChildren(componentStyle);
+    const additionalOptionsListStyle: StyleType = { maxWidth: optionsListWidth };
 
     return (
       <View style={style}>
@@ -714,8 +714,8 @@ class SelectComponent extends React.Component<SelectProps, State> {
         <View style={[styles.outline, componentStyle.outline]}>
           <Popover
             visible={visible}
-            content={menuElement}
-            style={additionalMenuStyle}
+            content={optionsListElement}
+            style={additionalOptionsListStyle}
             indicatorStyle={styles.indicator}
             onBackdropPress={this.setVisibility}>
             {controlElement}
@@ -741,7 +741,7 @@ const styles = StyleSheet.create({
     width: 0,
     height: 6,
   },
-  menu: {
+  optionsList: {
     flexGrow: 0,
   },
   outlineContainer: {
