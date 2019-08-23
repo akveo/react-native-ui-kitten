@@ -31,10 +31,10 @@ import {
 } from '../text/text.component';
 import { Popover } from '../popover/popover.component';
 import {
-  DropdownMenu,
-  DropdownMenuElement,
-} from './dropdownMenu.component';
-import { DropdownItemType } from './droppdownItem.component';
+  SelectOptionsList,
+  SelectOptionsListElement,
+} from './selectOptionsList.component';
+import { SelectOptionType } from './selectOption.component';
 import {
   MeasureNode,
   MeasureResult,
@@ -54,16 +54,16 @@ import { Chevron } from '../support/components';
 type IconElement = React.ReactElement<ImageProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
-type DropdownChildren = [DropdownMenuElement, TextElement, ControlElement];
+type SelectChildren = [SelectOptionsListElement, TextElement, ControlElement];
 
-export type DropdownOption = Array<DropdownItemType> | DropdownItemType;
+export type SelectOption = Array<SelectOptionType> | SelectOptionType;
 
 const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
-  data: DropdownItemType[];
+  data: SelectOptionType[];
   multiSelect?: boolean;
-  selectedOption?: DropdownOption;
+  selectedOption?: SelectOption;
   textStyle?: StyleProp<TextStyle>;
   placeholder?: string;
   placeholderStyle?: StyleProp<TextStyle>;
@@ -71,13 +71,13 @@ interface ComponentProps {
   labelStyle?: StyleProp<TextStyle>;
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
-  onSelect: (option: DropdownOption, event?: GestureResponderEvent) => void;
+  onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
   status?: string;
-  renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
+  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
 }
 
-export type DropdownProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
-export type DropdownElement = React.ReactElement<DropdownProps>;
+export type SelectProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
+export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
   visible: boolean;
@@ -85,7 +85,7 @@ interface State {
 }
 
 /**
- * Styled Dropdown (Select) component.
+ * Styled Select (Select) component.
  *
  * @extends React.Component
  *
@@ -95,18 +95,18 @@ interface State {
  * @property {string} status - Determines the status of the component.
  * Can be `primary`, `success`, `info`, `warning` or `danger`.
  *
- * @property {boolean} multiSelect - Determines `multi-select` behavior of the Dropdown component.
+ * @property {boolean} multiSelect - Determines `multi-select` behavior of the Select component.
  *
- * @property {DropdownOption} selectedOption - Determines selected option of the Dropdown.
- * Can be `DropdownItemType` or `DropdownItemType[]` It depends on `multiSelect` property.
+ * @property {SelectOption} selectedOption - Determines selected option of the Select.
+ * Can be `SelectOptionType` or `SelectOptionType[]` It depends on `multiSelect` property.
  *
- * @property {DropdownItemType[]} data - Determines items of the Dropdown component.
+ * @property {SelectOptionType[]} data - Determines items of the Select component.
  *
- * @property {(option: DropdownOption, event?: GestureResponderEvent) => void} onSelect - Fires on option selection.
+ * @property {(option: SelectOption, event?: GestureResponderEvent) => void} onSelect - Fires on option selection.
  * Returns selected option/options.
  *
- * @property {(item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>} renderItem - Property for
- * rendering custom dropdown items.
+ * @property {(item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>} renderItem - Property for
+ * rendering custom select items.
  *
  * @property {StyleProp<TextStyle>} label - Determines the `label` of the component.
  *
@@ -134,18 +134,18 @@ interface State {
  * ```
  * import React from 'react';
  * import {
- *   Dropdown,
- *   DropdownItemType,
- *   DropdownOption,
+ *   Select,
+ *   SelectOptionType,
+ *   SelectOption,
  * } from '@kitten/ui';
  *
  * interface State {
- *   selectedOption: DropdownOption;
+ *   selectedOption: SelectOption;
  * }
  *
- * export class DropdownContainer extends React.Component<any, State> {
+ * export class SelectContainer extends React.Component<any, State> {
  *
- *   private items: DropdownItemType[] = [
+ *   private items: SelectOptionType[] = [
  *     { text: 'Option 1' },
  *     { text: 'Option 2' },
  *     { text: 'Option 3' },
@@ -159,13 +159,13 @@ interface State {
  *     selectedOption: null,
  *   };
  *
- *   private onSelect = (selectedOption: DropdownOption): void => {
+ *   private onSelect = (selectedOption: SelectOption): void => {
  *     this.setState({ selectedOption });
  *   };
  *
  *   public render(): React.ReactNode {
  *     return (
- *       <Dropdown
+ *       <Select
  *         data={this.items}
  *         selectedOption={this.state.selectedOption}
  *         onSelect={this.onSelect}
@@ -175,23 +175,23 @@ interface State {
  * }
  * ```
  *
- * @overview-example MultiSelect Dropdown
+ * @overview-example MultiSelect
  *
  * ```
  * import React from 'react';
  * import {
- *   Dropdown,
- *   DropdownItemType,
- *   DropdownOption,
+ *   Select,
+ *   SelectOptionType,
+ *   SelectOption,
  * } from '@kitten/ui';
  *
  * interface State {
- *   selectedOption: DropdownOption;
+ *   selectedOption: SelectOption;
  * }
  *
- * export class DropdownContainer extends React.Component<any, State> {
+ * export class SelectContainer extends React.Component<any, State> {
  *
- *   private items: DropdownItemType[] = [
+ *   private items: SelectOptionType[] = [
  *     { text: 'Option 1' },
  *     { text: 'Option 2' },
  *     { text: 'Option 3' },
@@ -205,13 +205,13 @@ interface State {
  *     selectedOption: [],
  *   };
  *
- *   private onSelect = (selectedOption: DropdownOption): void => {
+ *   private onSelect = (selectedOption: SelectOption): void => {
  *     this.setState({ selectedOption });
  *   };
  *
  *   public render(): React.ReactNode {
  *     return (
- *       <Dropdown
+ *       <Select
  *         data={this.items}
  *         multiSelect
  *         selectedOption={this.state.selectedOption}
@@ -222,23 +222,23 @@ interface State {
  * }
  * ```
  *
- * @example With Eva styles
+ * @example Eva Styling
  *
  * ```
  * import React from 'react';
  * import {
- *   Dropdown,
- *   DropdownItemType,
- *   DropdownOption,
+ *   Select,
+ *   SelectOptionType,
+ *   SelectOption,
  * } from '@kitten/ui';
  *
  * interface State {
- *   selectedOption: DropdownOption;
+ *   selectedOption: SelectOption;
  * }
  *
- * export class DropdownContainer extends React.Component<any, State> {
+ * export class SelectContainer extends React.Component<any, State> {
  *
- *   private items: DropdownItemType[] = [
+ *   private items: SelectOptionType[] = [
  *     { text: 'Option 1' },
  *     { text: 'Option 2' },
  *     { text: 'Option 3' },
@@ -252,13 +252,13 @@ interface State {
  *     selectedOption: null,
  *   };
  *
- *   private onSelect = (selectedOption: DropdownOption): void => {
+ *   private onSelect = (selectedOption: SelectOption): void => {
  *     this.setState({ selectedOption });
  *   };
  *
  *   public render(): React.ReactNode {
  *     return (
- *       <Dropdown
+ *       <Select
  *         data={this.items}
  *         style={{ margin: 16 }}
  *         status='warning'
@@ -279,19 +279,19 @@ interface State {
  *   Image,
  * } from 'react-native';
  * import {
- *   Dropdown,
- *   DropdownItemType,
- *   DropdownOption,
+ *   Select,
+ *   SelectOptionType,
+ *   SelectOption,
  * } from '@kitten/ui';
  * import { StyleType } from '@kitten/theme';
  *
  * interface State {
- *   selectedOption: DropdownOption;
+ *   selectedOption: SelectOption;
  * }
  *
- * export class DropdownContainer extends React.Component<any, State> {
+ * export class SelectContainer extends React.Component<any, State> {
  *
- *  private items: DropdownItemType[] = [
+ *  private items: SelectOptionType[] = [
  *    { text: 'Option 1' },
  *    { text: 'Option 2' },
  *    { text: 'Option 3' },
@@ -305,7 +305,7 @@ interface State {
  *    selectedOption: null,
  *  };
  *
- *  private onSelect = (selectedOption: DropdownOption): void => {
+ *  private onSelect = (selectedOption: SelectOption): void => {
  *    this.setState({ selectedOption });
  *  };
  *
@@ -323,7 +323,7 @@ interface State {
  *
  *  public render(): React.ReactNode {
  *    return (
- *      <Dropdown
+ *      <Select
  *        data={this.items}
  *        selectedOption={this.state.selectedOption}
  *        icon={this.renderIcon}
@@ -339,18 +339,18 @@ interface State {
  * import React from 'react';
  * import { StyleSheet } from 'react-native';
  * import {
- *   Dropdown,
- *   DropdownItemType,
- *   DropdownOption,
+ *   Select,
+ *   SelectOptionType,
+ *   SelectOption,
  * } from '@kitten/ui';
  *
  * interface State {
- *   selectedOption: DropdownOption;
+ *   selectedOption: SelectOption;
  * }
  *
- * export class DropdownContainer extends React.Component<any, State> {
+ * export class SelectContainer extends React.Component<any, State> {
  *
- *  private items: DropdownItemType[] = [
+ *  private items: SelectOptionType[] = [
  *    { text: 'Option 1' },
  *    { text: 'Option 2', textStyle: styles.customOptionStyle },
  *    { text: 'Option 3' },
@@ -364,19 +364,19 @@ interface State {
  *    selectedOption: null,
  *  };
  *
- *  private onSelect = (selectedOption: DropdownOption): void => {
+ *  private onSelect = (selectedOption: SelectOption): void => {
  *    this.setState({ selectedOption });
  *  };
  *
  *  public render(): React.ReactNode {
  *    return (
- *       <Dropdown
+ *       <Select
  *         label='Label'
  *         labelStyle={styles.labelStyle}
  *         placeholder='Select Something'
  *         placeholderStyle={styles.placeholderStyle}
  *         controlStyle={styles.controlStyle}
- *         style={styles.dropdown}
+ *         style={styles.select}
  *         data={this.items}
  *         selectedOption={this.state.selectedOption}
  *         onSelect={this.onSelect}
@@ -386,7 +386,7 @@ interface State {
  * }
  *
  * const styles = StyleSheet.create({
- *   dropdown: {
+ *   select: {
  *     margin: 16,
  *   },
  *   customOptionStyle: {
@@ -406,7 +406,7 @@ interface State {
  * @example Disabled Option
  *
  * ```
- * private items: DropdownItemType[] = [
+ * private items: SelectOptionType[] = [
  *   { text: 'Option 1' },
  *   { text: 'Option 2', disabled: true },
  *   { text: 'Option 3' },
@@ -414,10 +414,10 @@ interface State {
  * ];
  * ```
  *
- * @example Dropdown Groups
+ * @example Select Groups
  *
  * ```
- *   private items: DropdownItemType[] = [
+ *   private items: SelectOptionType[] = [
  *   { text: 'Option 1' },
  *   { text: 'Option 2', disabled: true },
  *   { text: 'Option 3', items: [ { text: 'Option 31' }, { text: 'Option 32' }, { text: 'Option 33' } ] },
@@ -427,10 +427,10 @@ interface State {
  *
  */
 
-class DropdownComponent extends React.Component<DropdownProps, State> {
+class SelectComponent extends React.Component<SelectProps, State> {
 
-  static styledComponentName: string = 'Dropdown';
-  static defaultProps: Partial<DropdownProps> = {
+  static styledComponentName: string = 'Select';
+  static defaultProps: Partial<SelectProps> = {
     placeholder: 'Select Option',
     multiSelect: false,
   };
@@ -443,7 +443,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   private strategy: SelectionStrategy;
   private iconAnimation: Animated.Value;
 
-  constructor(props: DropdownProps) {
+  constructor(props: SelectProps) {
     super(props);
     const { multiSelect, selectedOption } = props;
     this.strategy = multiSelect ?
@@ -451,7 +451,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     this.iconAnimation = new Animated.Value(-180);
   }
 
-  private onItemSelect = (option: DropdownItemType, event: GestureResponderEvent): void => {
+  private onItemSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
     const { onSelect } = this.props;
 
     onSelect(this.strategy.select(option, this.setVisibility));
@@ -524,7 +524,16 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const controlStyles: StyleType = allWithPrefix(source, 'control');
+    const {
+      backgroundColor,
+      borderColor,
+      borderWidth,
+      minHeight,
+      minWidth,
+      paddingHorizontal,
+      paddingVertical,
+      borderRadius,
+    } = source;
     const iconStyles: StyleType = allWithPrefix(source, 'icon');
     const textStyles: StyleType = allWithPrefix(source, 'text');
     const placeholderStyles: StyleType = allWithPrefix(source, 'placeholder');
@@ -534,14 +543,14 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
 
     return {
       control: {
-        backgroundColor: controlStyles.controlBackgroundColor,
-        borderColor: controlStyles.controlBorderColor,
-        borderWidth: controlStyles.controlBorderWidth,
-        minHeight: controlStyles.controlMinHeight,
-        minWidth: controlStyles.controlMinWidth,
-        paddingHorizontal: controlStyles.controlPaddingHorizontal,
-        paddingVertical: controlStyles.controlPaddingVertical,
-        borderRadius: controlStyles.controlBorderRadius,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
+        borderWidth: borderWidth,
+        minHeight: minHeight,
+        minWidth: minWidth,
+        paddingHorizontal: paddingHorizontal,
+        paddingVertical: paddingVertical,
+        borderRadius: borderRadius,
       },
       icon: {
         height: iconStyles.iconHeight,
@@ -592,8 +601,6 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
   };
 
   private renderDefaultIconElement = (style: ImageStyle): IconElement => {
-    const { visible } = this.state;
-
     const rotateInterpolate = this.iconAnimation.interpolate({
       inputRange: [-180, 0],
       outputRange: ['-180deg', '0deg'],
@@ -635,12 +642,12 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     );
   };
 
-  private renderMenuElement = (style: StyleType): DropdownMenuElement => {
+  private renderMenuElement = (style: StyleType): SelectOptionsListElement => {
     const { appearance, selectedOption, ...restProps } = this.props;
     const additionalMenuStyle: StyleType = { width: this.state.menuWidth };
 
     return (
-      <DropdownMenu
+      <SelectOptionsList
         {...restProps}
         strategy={this.strategy}
         key={0}
@@ -685,7 +692,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     );
   };
 
-  private renderComponentChildren = (style: StyleType): DropdownChildren => {
+  private renderComponentChildren = (style: StyleType): SelectChildren => {
     const { label } = this.props;
 
     return [
@@ -695,7 +702,7 @@ class DropdownComponent extends React.Component<DropdownProps, State> {
     ];
   };
 
-  public render(): DropdownElement {
+  public render(): SelectElement {
     const { themedStyle, style } = this.props;
     const { visible, menuWidth } = this.state;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
@@ -748,4 +755,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Dropdown = styled<DropdownProps>(DropdownComponent);
+export const Select = styled<SelectProps>(SelectComponent);
