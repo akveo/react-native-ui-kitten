@@ -1,23 +1,23 @@
-import { DropdownItemType } from './droppdownItem.component';
+import { SelectOptionType } from './selectOption.component';
 
 export interface SelectionStrategy {
-  selectedOption: DropdownItemType | DropdownItemType[];
-  isSelected: (item: DropdownItemType) => boolean;
-  select: (option: DropdownItemType, callback?: () => void) => DropdownItemType | DropdownItemType[];
+  selectedOption: SelectOptionType | SelectOptionType[];
+  isSelected: (item: SelectOptionType) => boolean;
+  select: (option: SelectOptionType, callback?: () => void) => SelectOptionType | SelectOptionType[];
   getPlaceholder: (placeholder: string) => string;
 }
 
 export class MultiSelectStrategy implements SelectionStrategy {
 
-  public selectedOption: DropdownItemType[];
+  public selectedOption: SelectOptionType[];
 
-  constructor(options: DropdownItemType | DropdownItemType[]) {
+  constructor(options: SelectOptionType | SelectOptionType[]) {
     if (Array.isArray(options)) {
       this.selectedOption = options;
     }
   }
 
-  public select(option: DropdownItemType, callback?: () => void): DropdownItemType[] {
+  public select(option: SelectOptionType, callback?: () => void): SelectOptionType[] {
     const subOptionsExist: boolean = this.areThereSubOptions(option);
 
     if (subOptionsExist) {
@@ -29,9 +29,9 @@ export class MultiSelectStrategy implements SelectionStrategy {
     return this.selectedOption;
   }
 
-  private selectDefaultOption(option: DropdownItemType): void {
+  private selectDefaultOption(option: SelectOptionType): void {
     const optionAlreadyExist: boolean = this.selectedOption
-      .some((item: DropdownItemType) => {
+      .some((item: SelectOptionType) => {
         return item === option;
       });
     if (optionAlreadyExist) {
@@ -41,20 +41,20 @@ export class MultiSelectStrategy implements SelectionStrategy {
     }
   }
 
-  private selectOptionWithSubOptions(option: DropdownItemType): void {
+  private selectOptionWithSubOptions(option: SelectOptionType): void {
     const subOptionsAlreadyExist: boolean = this.selectedOption
-      .some((item: DropdownItemType) => {
+      .some((item: SelectOptionType) => {
         return option.items
-          .some((subItem: DropdownItemType) => {
+          .some((subItem: SelectOptionType) => {
             return subItem === item;
           });
       });
 
     if (subOptionsAlreadyExist) {
-      option.items.forEach((subItem: DropdownItemType) => this.removeOption(subItem));
+      option.items.forEach((subItem: SelectOptionType) => this.removeOption(subItem));
     } else {
-      const enabledItems: DropdownItemType[] = option.items
-        .filter((item: DropdownItemType) => {
+      const enabledItems: SelectOptionType[] = option.items
+        .filter((item: SelectOptionType) => {
           return !item.disabled;
         });
       this.selectedOption = this.selectedOption.concat(enabledItems);
@@ -64,7 +64,7 @@ export class MultiSelectStrategy implements SelectionStrategy {
   public getPlaceholder(placeholder: string): string {
     if (this.isSelectedOptionExist()) {
       return this.selectedOption
-        .map((item: DropdownItemType) => {
+        .map((item: SelectOptionType) => {
           return item && item.text;
         })
         .join(', ');
@@ -73,9 +73,9 @@ export class MultiSelectStrategy implements SelectionStrategy {
     }
   }
 
-  public isSelected(item: DropdownItemType): boolean {
+  public isSelected(item: SelectOptionType): boolean {
     return this.selectedOption
-      .some((option: DropdownItemType) => {
+      .some((option: SelectOptionType) => {
         return option === item;
       });
   }
@@ -84,9 +84,9 @@ export class MultiSelectStrategy implements SelectionStrategy {
     return this.selectedOption && this.selectedOption.length !== 0;
   }
 
-  private removeOption(option: DropdownItemType): void {
+  private removeOption(option: SelectOptionType): void {
     const index: number = this.selectedOption
-      .findIndex((item: DropdownItemType) => {
+      .findIndex((item: SelectOptionType) => {
         return item === option;
       });
     if (index !== -1) {
@@ -94,22 +94,22 @@ export class MultiSelectStrategy implements SelectionStrategy {
     }
   }
 
-  private areThereSubOptions(option: DropdownItemType): boolean {
+  private areThereSubOptions(option: SelectOptionType): boolean {
     return option.items && option.items.length !== 0;
   }
 }
 
 export class SingleSelectStrategy implements SelectionStrategy {
 
-  public selectedOption: DropdownItemType;
+  public selectedOption: SelectOptionType;
 
-  constructor(options: DropdownItemType | DropdownItemType[]) {
+  constructor(options: SelectOptionType | SelectOptionType[]) {
     if (!Array.isArray(options)) {
       this.selectedOption = options;
     }
   }
 
-  public select(option: DropdownItemType, callback?: () => void): DropdownItemType {
+  public select(option: SelectOptionType, callback?: () => void): SelectOptionType {
     this.selectedOption = option;
     callback();
     return this.selectedOption;
@@ -123,9 +123,9 @@ export class SingleSelectStrategy implements SelectionStrategy {
     }
   }
 
-  public isSelected(item: DropdownItemType): boolean {
+  public isSelected(item: SelectOptionType): boolean {
     if (this.hasOptionSubItems(item)) {
-      return item.items.some((option: DropdownItemType) => {
+      return item.items.some((option: SelectOptionType) => {
         return this.isSelected(option);
       });
     } else {
@@ -133,7 +133,7 @@ export class SingleSelectStrategy implements SelectionStrategy {
     }
   }
 
-  private hasOptionSubItems(option: DropdownItemType): boolean {
+  private hasOptionSubItems(option: SelectOptionType): boolean {
     return option.items && option.items.length !== 0;
   }
 }

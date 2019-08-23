@@ -15,17 +15,17 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  DropdownItem,
-  DropdownItemElement,
-  DropdownItemProps,
-  DropdownItemType,
-} from './droppdownItem.component';
+  SelectOption,
+  SelectOptionElement,
+  SelectOptionProps,
+  SelectOptionType,
+} from './selectOption.component';
 import { SelectionStrategy } from './selection.strategy';
 
 interface ComponentProps {
   multiSelect?: boolean;
   strategy: SelectionStrategy;
-  renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
+  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
 }
 
 interface MainItemStatus {
@@ -33,23 +33,23 @@ interface MainItemStatus {
   indeterminate: boolean;
 }
 
-export type DropdownGroupProps = ComponentProps & Partial<DropdownItemProps> & StyledComponentProps;
-export type DropdownGroupElement = React.ReactElement<DropdownGroupProps>;
+export type SelectGroupOptionProps = ComponentProps & Partial<SelectOptionProps> & StyledComponentProps;
+export type SelectGroupOptionElement = React.ReactElement<SelectGroupOptionProps>;
 
-export class DropdownGroupComponent extends React.Component<DropdownGroupProps> {
+class SelectGroupOptionComponent extends React.Component<SelectGroupOptionProps> {
 
-  static styledComponentName: string = 'DropdownGroup';
+  static styledComponentName: string = 'SelectGroupOption';
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      itemPaddingLeft,
+      itemPaddingHorizontal,
       ...containerStyles
     } = source;
 
     return {
       container: containerStyles,
       item: {
-        paddingLeft: itemPaddingLeft,
+        paddingHorizontal: itemPaddingHorizontal,
       },
     };
   };
@@ -70,9 +70,9 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     }
   };
 
-  private renderSubItem = (option: DropdownItemType, index: number): DropdownItemElement => {
+  private renderSubItem = (option: SelectOptionType, index: number): SelectOptionElement => {
     const { item, renderItem, strategy, ...restProps } = this.props;
-    const returningOption: ListRenderItemInfo<DropdownItemType> = {
+    const returningOption: ListRenderItemInfo<SelectOptionType> = {
       item: option,
       index: index,
       separators: null,
@@ -80,7 +80,7 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     const selected: boolean = strategy.isSelected(option);
 
     return renderItem ? renderItem(returningOption) : (
-      <DropdownItem
+      <SelectOption
         {...restProps}
         selected={selected}
         item={option}
@@ -88,13 +88,13 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     );
   };
 
-  private renderSubItemsElements = (): DropdownItemElement[] => {
+  private renderSubItemsElements = (): SelectOptionElement[] => {
     const { item, themedStyle } = this.props;
     const { item: itemStyle } = this.getComponentStyle(themedStyle);
 
     return item.items
-      .map((option: DropdownItemType, index: number) => {
-        const element: DropdownItemElement = this.renderSubItem(option, index);
+      .map((option: SelectOptionType, index: number) => {
+        const element: SelectOptionElement = this.renderSubItem(option, index);
 
         return React.cloneElement(element, {
           ...option,
@@ -104,14 +104,14 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
       });
   };
 
-  private renderMultiSelectMainElement = (subItemsElements: DropdownItemElement[]): DropdownItemElement => {
+  private renderMultiSelectMainElement = (subItemsElements: SelectOptionElement[]): SelectOptionElement => {
     const { item, ...restProps } = this.props;
     const subItemsSelectedStatusArray: boolean[] = subItemsElements
-      .map((subItem: DropdownItemElement) => subItem.props.selected);
+      .map((subItem: SelectOptionElement) => subItem.props.selected);
     const itemStatus: MainItemStatus = this.getMainItemStatus(subItemsSelectedStatusArray);
 
     return (
-      <DropdownItem
+      <SelectOption
         {...restProps}
         {...itemStatus}
         item={item}
@@ -119,28 +119,28 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
     );
   };
 
-  private renderDefaultMainElement = (): DropdownItemElement => {
+  private renderDefaultMainElement = (): SelectOptionElement => {
     const { item } = this.props;
 
     return (
-      <DropdownItem
+      <SelectOption
         disabled={true}
         item={item}
       />
     );
   };
 
-  private renderMainElement = (subItemsElements: DropdownItemElement[]): DropdownItemElement => {
+  private renderMainElement = (subItemsElements: SelectOptionElement[]): SelectOptionElement => {
     const { multiSelect } = this.props;
 
     return multiSelect ? this.renderMultiSelectMainElement(subItemsElements) : this.renderDefaultMainElement();
   };
 
-  public render(): DropdownGroupElement {
+  public render(): SelectGroupOptionElement {
     const { themedStyle } = this.props;
     const { container } = this.getComponentStyle(themedStyle);
-    const subItemsElements: DropdownItemElement[] = this.renderSubItemsElements();
-    const mainElement: DropdownItemElement = this.renderMainElement(subItemsElements);
+    const subItemsElements: SelectOptionElement[] = this.renderSubItemsElements();
+    const mainElement: SelectOptionElement = this.renderMainElement(subItemsElements);
 
     return (
       <View style={container}>
@@ -151,5 +151,5 @@ export class DropdownGroupComponent extends React.Component<DropdownGroupProps> 
   }
 }
 
-export const DropdownGroup = styled<DropdownGroupProps>(DropdownGroupComponent);
+export const SelectGroupOption = styled<SelectGroupOptionProps>(SelectGroupOptionComponent);
 

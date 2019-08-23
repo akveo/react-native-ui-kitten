@@ -7,6 +7,7 @@ export { IconContainer } from './icon/icon.container';
 export { InputContainer } from './input/input.container';
 export { LayoutContainer } from './layout/layout.container';
 export { ListContainer } from './list/list.container';
+export { MenuContainer } from './menu/menu.container';
 export { PopoverContainer } from './popover/popover.container';
 export { RadioContainer } from './radio/radio.container';
 export { RadioGroupContainer } from './radioGroup/radioGroup.container';
@@ -19,6 +20,5 @@ export { TopNavigationContainer } from './topNavigation/topNavigation.container'
 export { OverflowMenuContainer } from './overflowMenu/overflowMenu.container';
 export { SampleContainer } from './sample/sample.container';
 export { ModalContainer } from './modal/modal.container';
-export { DropdownContainer } from './dropdown/dropdown.container';
-export { MenuContainer } from './menu/menu.container';
+export { SelectContainer } from './select/select.container';
 export { default as Home } from './home.component';

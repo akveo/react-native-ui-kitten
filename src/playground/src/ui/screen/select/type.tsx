@@ -3,7 +3,7 @@ import {
   Image,
   ImageProps,
 } from 'react-native';
-import { DropdownItemType } from '@kitten/ui';
+import { SelectOptionType } from '@kitten/ui';
 import { StyleType } from '@kitten/theme';
 import {
   ComponentShowcase,
@@ -15,7 +15,7 @@ import {
 const iconClosedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
 const iconOpenedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png';
 
-const defaultDropdownOption: DropdownItemType[] = [
+const defaultSelectOption: SelectOptionType[] = [
   { text: 'Option 1', disabled: true },
   { text: 'Option 2' },
   { text: 'Option 3' },
@@ -26,7 +26,7 @@ const defaultDropdownOption: DropdownItemType[] = [
   { text: 'Option 8' },
 ];
 
-const withGroupsDropdownOption: DropdownItemType[] = [
+const withGroupsSelectOption: SelectOptionType[] = [
   { text: 'Option 1' },
   {
     text: 'Option 2',
@@ -52,62 +52,62 @@ const renderIcon = (style: StyleType, visible: boolean): React.ReactElement<Imag
   );
 };
 
-const defaultDropdown: ComponentShowcaseItem = {
+const defaultSelect: ComponentShowcaseItem = {
   title: 'Default',
   props: {
-    data: defaultDropdownOption,
+    data: defaultSelectOption,
   },
 };
 
 const defaultSection: ComponentShowcaseSection = {
-  title: 'Default Dropdown',
+  title: 'Default Select',
   items: [
-    defaultDropdown,
+    defaultSelect,
   ],
 };
 
-const multiSelectDropdown: ComponentShowcaseItem = {
+const multiSelectSelect: ComponentShowcaseItem = {
   title: 'Multiselect',
   props: {
     multiSelect: true,
-    data: defaultDropdownOption,
+    data: defaultSelectOption,
   },
 };
 
 const multiSelectSection: ComponentShowcaseSection = {
-  title: 'Multiselect Dropdown',
+  title: 'Multiselect Select',
   items: [
-    multiSelectDropdown,
+    multiSelectSelect,
   ],
 };
 
-const groupDropdown: ComponentShowcaseItem = {
+const groupSelect: ComponentShowcaseItem = {
   title: 'With Groups',
   props: {
-    data: withGroupsDropdownOption,
+    data: withGroupsSelectOption,
   },
 };
 
-const groupDropdownMultiselect: ComponentShowcaseItem = {
+const groupSelectMultiselect: ComponentShowcaseItem = {
   title: 'Multiselect',
   props: {
     multiSelect: true,
-    data: withGroupsDropdownOption,
+    data: withGroupsSelectOption,
   },
 };
 
 const withGroupsSection: ComponentShowcaseSection = {
-  title: 'Groups Dropdown',
+  title: 'Groups Select',
   items: [
-    groupDropdown,
-    groupDropdownMultiselect,
+    groupSelect,
+    groupSelectMultiselect,
   ],
 };
 
-const withIconDropdown: ComponentShowcaseItem = {
+const withIconSelect: ComponentShowcaseItem = {
   title: 'With icon',
   props: {
-    data: defaultDropdownOption,
+    data: defaultSelectOption,
     icon: renderIcon,
     multiSelect: true,
   },
@@ -116,23 +116,23 @@ const withIconDropdown: ComponentShowcaseItem = {
 const withIconSection: ComponentShowcaseSection = {
   title: 'With icon',
   items: [
-    withIconDropdown,
+    withIconSelect,
   ],
 };
 
-const withLabelDropdown: ComponentShowcaseItem = {
+const withLabelSelect: ComponentShowcaseItem = {
   title: 'Label',
   props: {
-    data: defaultDropdownOption,
+    data: defaultSelectOption,
     icon: renderIcon,
     label: 'Label',
   },
 };
 
-const withCustomPlaceholderDropdown: ComponentShowcaseItem = {
+const withCustomPlaceholderSelect: ComponentShowcaseItem = {
   title: 'Placeholder',
   props: {
-    data: defaultDropdownOption,
+    data: defaultSelectOption,
     icon: renderIcon,
     placeholder: 'Custom Placeholder',
   },
@@ -141,12 +141,12 @@ const withCustomPlaceholderDropdown: ComponentShowcaseItem = {
 const customTextsSection: ComponentShowcaseSection = {
   title: 'Texts',
   items: [
-    withLabelDropdown,
-    withCustomPlaceholderDropdown,
+    withLabelSelect,
+    withCustomPlaceholderSelect,
   ],
 };
 
-export const dropdownShowcase: ComponentShowcase = {
+export const selectShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
     multiSelectSection,
@@ -156,7 +156,7 @@ export const dropdownShowcase: ComponentShowcase = {
   ],
 };
 
-export const dropdownSettings: ComponentShowcaseSetting[] = [
+export const selectSettings: ComponentShowcaseSetting[] = [
   {
     propertyName: 'status',
     value: 'primary',
