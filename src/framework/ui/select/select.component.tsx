@@ -609,9 +609,8 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
     return (
       <Chevron
-        style={style}
+        style={[style, animatedStyle]}
         isAnimated={true}
-        animationStyle={animatedStyle}
       />
     );
   };

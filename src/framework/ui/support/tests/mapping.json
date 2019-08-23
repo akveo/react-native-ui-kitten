@@ -1144,6 +1144,34 @@
         }
       }
     },
+    "Divider": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "backgroundColor": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "height": 1,
+            "backgroundColor": "background-basic-color-3"
+          }
+        }
+      }
+    },
     "Input": {
       "meta": {
         "scope": "all",
@@ -1578,6 +1606,162 @@
             "state": {
               "active": {
                 "backgroundColor": "background-basic-color-3"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Menu": {
+      "meta": {
+        "scope": "all",
+        "parameters": {},
+        "appearances": {
+          "default": {
+            "default": true
+          },
+          "noDivider": {
+            "default": false
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {}
+        },
+        "noDivider": {
+          "mapping": {}
+        }
+      }
+    },
+    "SubMenu": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "subItemsPaddingHorizontal": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "subItemsPaddingHorizontal": 16
+          }
+        }
+      }
+    },
+    "MenuItem": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "indicatorWidth": {
+            "type": "number"
+          },
+          "indicatorBackgroundColor": {
+            "type": "string"
+          },
+          "paddingVertical": {
+            "type": "number"
+          },
+          "paddingHorizontal": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconMarginHorizontal": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          },
+          "titleMarginHorizontal": {
+            "type": "number"
+          },
+          "titleFontSize": {
+            "type": "number"
+          },
+          "titleLineHeight": {
+            "type": "number"
+          },
+          "titleFontWeight": {
+            "type": "string"
+          },
+          "titleColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {
+          "disabled": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "selected": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 2,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "paddingHorizontal": 8,
+            "paddingVertical": 12,
+            "backgroundColor": "background-basic-color-1",
+            "iconWidth": 20,
+            "iconHeight": 20,
+            "iconMarginHorizontal": 8,
+            "iconTintColor": "text-hint-color",
+            "titleMarginHorizontal": 8,
+            "titleFontSize": "text-subtitle-2-font-size",
+            "titleFontWeight": "text-subtitle-2-font-weight",
+            "titleLineHeight": "text-subtitle-2-line-height",
+            "titleColor": "text-basic-color",
+            "indicatorWidth": 0,
+            "indicatorBackgroundColor": "transparent",
+            "state": {
+              "active": {
+                "backgroundColor": "background-basic-color-3"
+              },
+              "selected": {
+                "indicatorWidth": 4,
+                "indicatorBackgroundColor": "color-primary-default",
+                "backgroundColor": "rgba(51, 102, 255, 0.08)",
+                "titleColor": "color-primary-default",
+                "iconTintColor": "color-primary-default"
+              },
+              "disabled": {
+                "titleColor": "text-disabled-color",
+                "iconTintColor": "icon-disabled-color"
               }
             }
           }

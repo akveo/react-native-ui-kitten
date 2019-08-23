@@ -12,7 +12,6 @@ export type ChevronDirection = 'top' | 'bottom' | 'left' | 'right';
 interface ComponentProps {
   isAnimated?: boolean;
   direction?: ChevronDirection;
-  animationStyle?: StyleType;
 }
 
 export type ChevronProps = ViewProps & ComponentProps;
@@ -77,14 +76,14 @@ export class Chevron extends React.Component<ChevronProps> {
   };
 
   public render(): React.ReactNode {
-    const { style, isAnimated, animationStyle } = this.props;
+    const { style, isAnimated } = this.props;
     const { container, shape, left, right } = this.getComponentStyle(StyleSheet.flatten(style));
     const directionStyle: StyleType = this.getDirectionStyle();
 
     const Component = isAnimated ? Animated.View : View;
 
     return (
-      <Component style={[container, directionStyle, animationStyle]}>
+      <Component style={[container, directionStyle, style]}>
         <Component style={[shape, left, styles.shape, styles.left]}/>
         <Component style={[shape, right, styles.shape, styles.right]}/>
       </Component>

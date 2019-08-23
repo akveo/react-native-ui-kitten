@@ -73,6 +73,22 @@ export {
   ListItemElement,
 } from './list/listItem.component';
 export {
+  Menu,
+  MenuProps,
+  MenuElement,
+} from './menu/menu.component';
+export {
+  MenuItem,
+  MenuItemProps,
+  MenuItemElement,
+  MenuItemType,
+} from './menu/menuItem.component';
+export {
+  SubMenu,
+  SubMenuElement,
+  SubMenuProps,
+} from './menu/subMenu.component';
+export {
   Modal,
   ModalProps,
   ModalElement,
@@ -103,6 +119,11 @@ export {
   RadioGroupProps,
   RadioGroupElement,
 } from './radioGroup/radioGroup.component';
+export {
+  Divider,
+  DividerElement,
+  DividerProps,
+} from './divider/divider.component';
 export {
   Spinner,
   SpinnerProps,
