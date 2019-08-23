@@ -5,23 +5,20 @@
  */
 
 import React from 'react';
-import {
-  GestureResponderEvent,
-  StyleSheet,
-  View,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  OverflowMenuItem,
-  OverflowMenuItemElement,
-  OverflowMenuItemProps,
-} from './overflowMenuItem.component';
+  Menu,
+  MenuElement,
+  MenuProps,
+} from '../menu/menu.component';
+import {
+  MenuItemType,
+} from '../menu/menuItem.component';
 import {
   Popover,
   PopoverProps,
@@ -29,17 +26,19 @@ import {
 import {
   ModalPresentingBased,
   Omit,
+  Override,
 } from '../support/typings';
 
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
+export type OverflowMenuItemType = Omit<MenuItemType, 'subItems'>;
 
 interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
   children: React.ReactElement<any>;
-  items: OverflowMenuItemProps[];
-  onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
-export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
+type MenuBasedProps = Override<MenuProps, { data: OverflowMenuItemType[] }>;
+
+export type OverflowMenuProps = & StyledComponentProps & ComponentProps & MenuBasedProps;
 export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
 
 /**
@@ -116,92 +115,44 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     indicatorOffset: 12,
   };
 
-  private onItemSelect = (index: number, event: GestureResponderEvent): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(index, event);
-    }
-  };
-
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      dividerHeight,
-      dividerBackgroundColor,
       indicatorBackgroundColor,
       ...containerParameters
     } = source;
 
     return {
       container: containerParameters,
-      divider: {
-        height: dividerHeight,
-        backgroundColor: dividerBackgroundColor,
-      },
       indicator: {
         backgroundColor: indicatorBackgroundColor,
       },
-      item: {},
     };
   };
 
-  private isLastItem = (index: number): boolean => {
-    return index === this.props.items.length - 1;
-  };
-
-  private renderItemElement = (item: OverflowMenuItemProps,
-                               index: number,
-                               style: StyleType): OverflowMenuItemElement => {
+  private renderPopoverContentElement = (): MenuElement => {
+    const { themedStyle, indicatorStyle, children, data, ...restProps } = this.props;
 
     return (
-      <OverflowMenuItem
-        key={index}
-        style={style}
-        {...item}
-        index={index}
-        onPress={this.onItemSelect}
+      <Menu
+        {...restProps}
+        data={data}
+        style={styles.menu}
+        bounces={false}
       />
     );
   };
 
-  private renderContentElementChildren = (style: StyleType): OverflowMenuItemElement[] => {
-    return this.props.items.map((item: OverflowMenuItemProps, index: number) => {
-      const itemElement: OverflowMenuItemElement = this.renderItemElement(item, index, style.item);
-
-      const isLastItem: boolean = this.isLastItem(index);
-
-      const borderStyle: ViewStyle = {
-        borderBottomColor: style.divider.backgroundColor,
-
-        // @ts-ignore: divider `height` is restricted to be a number
-        borderBottomWidth: isLastItem ? 0 : style.divider.height,
-      };
-
-      return React.cloneElement(itemElement, {
-        style: [itemElement.props.style, borderStyle],
-      });
-    });
-  };
-
-  private renderPopoverContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const menuItems: OverflowMenuItemElement[] = this.renderContentElementChildren(style);
-
-    return (
-      <View style={this.props.style}>
-        {menuItems}
-      </View>
-    );
-  };
-
   public render(): React.ReactNode {
-    const { themedStyle, style, indicatorStyle, children, ...restProps } = this.props;
-    const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const { themedStyle, style, indicatorStyle, children, appearance, ...restProps } = this.props;
+    const { container, indicator } = this.getComponentStyle(themedStyle);
 
-    const contentElement: React.ReactElement<ViewProps> = this.renderPopoverContentElement(componentStyle);
+    const contentElement: MenuElement = this.renderPopoverContentElement();
 
     return (
       <Popover
         {...restProps}
         style={[container, styles.container, style]}
-        indicatorStyle={[indicator, styles.indicator, indicatorStyle]}
+        indicatorStyle={[indicator, indicatorStyle]}
         content={contentElement}>
         {children}
       </Popover>
@@ -213,9 +164,9 @@ const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
   },
-  indicator: {},
-  divider: {},
-  item: {},
+  menu: {
+    flexGrow: 0,
+  },
 });
 
 export const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);

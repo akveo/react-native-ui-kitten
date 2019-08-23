@@ -1,34 +1,46 @@
 import React from 'react';
 import {
-  Button,
   OverflowMenu,
-  OverflowMenuElement,
   OverflowMenuProps,
+  OverflowMenuElement,
+  Button,
 } from '@kitten/ui';
 
 interface State {
-  overflowMenuVisible: boolean;
+  menuVisible: boolean;
+  selectedMenuIndex: number;
 }
 
 export class OverflowMenuShowcase extends React.Component<OverflowMenuProps, State> {
 
   public state: State = {
-    overflowMenuVisible: false,
+    menuVisible: false,
+    selectedMenuIndex: null,
   };
 
-  private toggleOverflowMenu = () => {
-    const overflowMenuVisible: boolean = !this.state.overflowMenuVisible;
+  private toggleMenu = () => {
+    const menuVisible: boolean = !this.state.menuVisible;
 
-    this.setState({ overflowMenuVisible });
+    this.setState({ menuVisible });
+  };
+
+  private onSelect = (selectedMenuIndex: number): void => {
+    this.setState({ selectedMenuIndex }, this.toggleMenu);
   };
 
   public render(): OverflowMenuElement {
+    const { menuVisible, selectedMenuIndex } = this.state;
+
     return (
       <OverflowMenu
         {...this.props}
-        visible={this.state.overflowMenuVisible}
-        onBackdropPress={this.toggleOverflowMenu}>
-        <Button onPress={this.toggleOverflowMenu}>SHOW MENU</Button>
+        visible={menuVisible}
+        selectedIndex={selectedMenuIndex}
+        onSelect={this.onSelect}
+        onBackdropPress={this.toggleMenu}>
+        <Button onPress={this.toggleMenu}>
+          Show
+        </Button>
       </OverflowMenu>
     );
   }
