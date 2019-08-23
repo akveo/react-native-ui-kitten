@@ -42,9 +42,9 @@ export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentP
 export type TabElement = React.ReactElement<TabProps>;
 
 /**
- * Tab component is a part of TabBar or TabView component.
- * TabView Tabs should be wrapped in TabBar or TabView to provide usable component.
- * See usage examples at TabView component documentation.
+ * `Tab` component is a part of `TabBar` or `TabView` component.
+ * `TabView` Tabs should be wrapped in `TabBar` or `TabView` to provide usable component.
+ * See usage examples at `TabView` component documentation.
  *
  * @extends React.Component
  *

@@ -43,7 +43,7 @@ export type TabViewProps = ViewProps & ComponentProps;
 export type TabViewElement = React.ReactElement<TabViewProps>;
 
 /**
- * Dynamic tabset component. Allows flipping through the tab "pages".
+ * `TabView` is a dynamic tabset component. Allows flipping through the tab "pages".
  *
  * @extends React.Component
  **
@@ -64,7 +64,7 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *
  * @property ViewProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -102,7 +102,7 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  * }
  * ```
  *
- * @example Lazy loading usage example
+ * @example Lazy Loading
  *
  * ```
  * import React from 'react';
@@ -146,7 +146,7 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  * }
  * ```
  *
- * @example Inline styling example
+ * @example Inline Styling
  *
  * ```
  * import React from 'react';

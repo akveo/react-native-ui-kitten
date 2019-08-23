@@ -6,15 +6,12 @@
 
 import React from 'react';
 import {
-  StyleSheet,
   View,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   styled,
   StyledComponentProps,
-  StyleType,
 } from '@kitten/theme';
 
 type ChildElement = React.ReactElement<any>;
@@ -29,8 +26,8 @@ export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 export type LayoutElement = React.ReactElement<LayoutProps>;
 
 /**
- * Layout container component. Behaves like React Native View.
- * The key feature of using Layout instead of View is that
+ * `Layout` container component. Behaves like React Native `View`.
+ * The key feature of using `Layout` instead of `View` is that
  * it automatically picks background color fitting to current theme.
  *
  * @extends React.Component
@@ -44,21 +41,54 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * @property StyledComponentProps
  *
- * @example Layout usage and API example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import {
  *   Layout,
  *   Text,
- * } from 'react-native-ui-kitten';
+ * } from '@kitten/ui';
  *
- * public render(): React.ReactNode {
- *   return (
- *     <Layout>
- *       <Text>Layout</Text>
- *     </Layout>
- *   );
+ * export class LayoutShowcase extends React.Component {
+ *
+ *  public render(): React.ReactNode {
+ *    return (
+ *      <Layout style={styles.container}>
+ *        <Text>Layout</Text>
+ *      </Layout>
+ *    );
+ *  }
+ *}
+ *
+ * const styles = StyleSheet.create({
+ *   container: {
+ *     flex: 1,
+ *     padding: 16,
+ *   },
+ * });
+ * ```
+ *
+ * @overview-example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import {
+ *   Layout,
+ *   Text,
+ * } from '@kitten/ui';
+ *
+ * export class LayoutShowcase extends React.Component {
+ *
+ *  public render(): React.ReactNode {
+ *    return (
+ *      <Layout level='2'>
+ *        <Text>Layout</Text>
+ *      </Layout>
+ *    );
+ *  }
  * }
  * ```
  * */
