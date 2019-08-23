@@ -31,26 +31,26 @@ type TextElement = React.ReactElement<TextProps>;
 type DefaultItemElement = React.ReactElement<TouchableOpacityProps>;
 type MultiSelectItemElement = React.ReactElement<ViewProps>;
 
-export interface DropdownItemType {
+export interface SelectOptionType {
   text: string;
   textStyle?: TextStyle;
   disabled?: boolean;
-  items?: DropdownItemType[];
+  items?: SelectOptionType[];
 }
 
 export interface ComponentProps {
-  item: DropdownItemType;
+  item: SelectOptionType;
   selected?: boolean;
   indeterminate?: boolean;
   multiSelect?: boolean;
 }
 
-export type DropdownItemProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<DropdownItemType>;
-export type DropdownItemElement = React.ReactElement<DropdownItemProps>;
+export type SelectOptionProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<SelectOptionType>;
+export type SelectOptionElement = React.ReactElement<SelectOptionProps>;
 
-class DropdownItemComponent extends React.Component<DropdownItemProps> {
+class SelectOptionComponent extends React.Component<SelectOptionProps> {
 
-  static styledComponentName: string = 'DropdownItem';
+  static styledComponentName: string = 'SelectOption';
 
   private onPress = (event: GestureResponderEvent) => {
     const { item, onPress } = this.props;
@@ -193,4 +193,4 @@ const styles = StyleSheet.create({
   text: {},
 });
 
-export const DropdownItem = styled<DropdownItemProps>(DropdownItemComponent);
+export const SelectOption = styled<SelectOptionProps>(SelectOptionComponent);

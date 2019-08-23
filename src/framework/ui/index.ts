@@ -1,3 +1,5 @@
+import { SelectOption } from '@kitten/ui/select/select.component';
+
 export {
   Avatar,
   AvatarProps,
@@ -29,12 +31,12 @@ export {
   CheckBoxElement,
 } from './checkbox/checkbox.component';
 export {
-  Dropdown,
-  DropdownProps,
-  DropdownElement,
-  DropdownOption,
-} from './dropdown/dropdown.component';
-export { DropdownItemType } from './dropdown/droppdownItem.component';
+  Select,
+  SelectProps,
+  SelectElement,
+  SelectOption,
+} from './select/select.component';
+export { SelectOptionType } from './select/selectOption.component';
 export {
   Icon,
   IconProps,

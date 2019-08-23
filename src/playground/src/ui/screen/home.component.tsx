@@ -22,7 +22,6 @@ export const routes: RouteType[] = [
   { name: 'Button Group' },
   { name: 'Checkbox' },
   { name: 'Icon' },
-  { name: 'Dropdown' },
   { name: 'Input' },
   { name: 'Layout' },
   { name: 'List' },
@@ -38,6 +37,7 @@ export const routes: RouteType[] = [
   { name: 'Top Navigation' },
   { name: 'Overflow Menu' },
   { name: 'Sample' },
+  { name: 'Select' },
 ];
 
 type Props = ThemedComponentProps & NavigationScreenProps;

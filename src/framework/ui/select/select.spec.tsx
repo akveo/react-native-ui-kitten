@@ -14,10 +14,10 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Dropdown,
-  DropdownOption,
-} from './dropdown.component';
-import { DropdownItemType } from './droppdownItem.component';
+  Select,
+  SelectOption,
+} from './select.component';
+import { SelectOptionType } from './selectOption.component';
 import { CheckBox } from '../checkbox/checkbox.component';
 import {
   mapping,
@@ -31,7 +31,7 @@ const stringify = (obj: any): string => JSON.stringify(obj);
 const iconClosedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
 const iconOpenedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png';
 
-const data: DropdownItemType[] = [
+const data: SelectOptionType[] = [
   { text: 'Option 1' },
   { text: 'Option 2', disabled: true },
   {
@@ -50,38 +50,38 @@ const data: DropdownItemType[] = [
 ];
 
 interface Props {
-  dropdownLabel?: string;
-  dropdownPlaceholder?: string;
-  dropdownDisabled?: boolean;
+  selectLabel?: string;
+  selectPlaceholder?: string;
+  selectDisabled?: boolean;
   multiSelectDisabled?: boolean;
   labelStyle?: StyleType;
   placeholderStyle?: StyleType;
   controlStyle?: StyleType;
-  onDropdownPress?: () => void;
-  onDropdownPressIn?: () => void;
-  onDropdownPressOut?: () => void;
-  onDropdownLongPress?: () => void;
+  onSelectPress?: () => void;
+  onSelectPressIn?: () => void;
+  onSelectPressOut?: () => void;
+  onSelectLongPress?: () => void;
   onMultiSelectPress?: () => void;
 }
 
 interface State {
-  dropdownSelected: DropdownOption;
-  dropdownMultiSelected: DropdownOption;
+  selectSelected: SelectOption;
+  selectMultiSelected: SelectOption;
 }
 
 class TestApplication extends React.Component<Props, State> {
 
   public state: State = {
-    dropdownSelected: null,
-    dropdownMultiSelected: [],
+    selectSelected: null,
+    selectMultiSelected: [],
   };
 
-  private onDropdownSelect = (dropdownSelected: DropdownOption): void => {
-    this.setState({ dropdownSelected });
+  private onSelectSelect = (selectSelected: SelectOption): void => {
+    this.setState({ selectSelected });
   };
 
-  private onDropdownMultiSelect = (dropdownMultiSelected: DropdownOption): void => {
-    this.setState({ dropdownMultiSelected });
+  private onSelectMultiSelect = (selectMultiSelected: SelectOption): void => {
+    this.setState({ selectMultiSelected });
   };
 
   private renderIcon = (style: StyleType, visible: boolean): React.ReactElement<ImageProps> => {
@@ -97,43 +97,43 @@ class TestApplication extends React.Component<Props, State> {
 
   public render(): React.ReactNode {
     const {
-      onDropdownPress,
+      onSelectPress,
       onMultiSelectPress,
-      dropdownLabel,
-      dropdownPlaceholder,
-      dropdownDisabled,
+      selectLabel,
+      selectPlaceholder,
+      selectDisabled,
       multiSelectDisabled,
-      onDropdownPressIn,
-      onDropdownPressOut,
-      onDropdownLongPress,
+      onSelectPressIn,
+      onSelectPressOut,
+      onSelectLongPress,
 
     } = this.props;
 
     return (
       <ApplicationProvider mapping={mapping} theme={theme}>
-        <Dropdown
-          disabled={dropdownDisabled}
-          label={dropdownLabel}
-          placeholder={dropdownPlaceholder}
+        <Select
+          disabled={selectDisabled}
+          label={selectLabel}
+          placeholder={selectPlaceholder}
           data={data}
-          selectedOption={this.state.dropdownSelected}
+          selectedOption={this.state.selectSelected}
           icon={this.renderIcon}
-          onPress={onDropdownPress}
-          onPressIn={onDropdownPressIn}
-          onPressOut={onDropdownPressOut}
-          onLongPress={onDropdownLongPress}
-          onSelect={this.onDropdownSelect}
+          onPress={onSelectPress}
+          onPressIn={onSelectPressIn}
+          onPressOut={onSelectPressOut}
+          onLongPress={onSelectLongPress}
+          onSelect={this.onSelectSelect}
         />
-        <Dropdown
+        <Select
           disabled={multiSelectDisabled}
-          label={dropdownLabel}
-          placeholder={dropdownPlaceholder}
+          label={selectLabel}
+          placeholder={selectPlaceholder}
           data={data}
-          selectedOption={this.state.dropdownMultiSelected}
+          selectedOption={this.state.selectMultiSelected}
           multiSelect
           icon={this.renderIcon}
           onPress={onMultiSelectPress}
-          onSelect={this.onDropdownMultiSelect}
+          onSelect={this.onSelectMultiSelect}
         />
       </ApplicationProvider>
     );
@@ -142,59 +142,59 @@ class TestApplication extends React.Component<Props, State> {
 }
 
 
-describe('@ dropdown component checks', () => {
+describe('@ select component checks', () => {
 
-  it('* dropdown onPress have been called', () => {
-    const onDropdownPress = jest.fn();
+  it('* select onPress have been called', () => {
+    const onSelectPress = jest.fn();
     const onMultiSelectPress = jest.fn();
     const application: RenderAPI = render(
       <TestApplication
-        onDropdownPress={onDropdownPress}
+        onSelectPress={onSelectPress}
         onMultiSelectPress={onMultiSelectPress}
       />,
     );
 
-    fireEvent.press(application.getAllByType(Dropdown)[0]);
-    fireEvent.press(application.getAllByType(Dropdown)[1]);
-    expect(onDropdownPress).toHaveBeenCalled();
+    fireEvent.press(application.getAllByType(Select)[0]);
+    fireEvent.press(application.getAllByType(Select)[1]);
+    expect(onSelectPress).toHaveBeenCalled();
     expect(onMultiSelectPress).toHaveBeenCalled();
   });
 
   it('* disabled props checks', () => {
-    const onDropdownPress = jest.fn();
+    const onSelectPress = jest.fn();
     const onMultiSelectPress = jest.fn();
     const application: RenderAPI = render(
       <TestApplication
-        dropdownDisabled={false}
+        selectDisabled={false}
         multiSelectDisabled={true}
-        onDropdownPress={onDropdownPress}
+        onSelectPress={onSelectPress}
         onMultiSelectPress={onMultiSelectPress}
       />,
     );
 
     fireEvent.press(application.getAllByType(TouchableOpacity)[0]);
-    expect(onDropdownPress).toHaveBeenCalled();
+    expect(onSelectPress).toHaveBeenCalled();
     fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
     expect(onMultiSelectPress).toHaveBeenCalledTimes(0);
   });
 
-  it('* dropdown default onSelect works properly', () => {
-    const expectedSelectedOption: DropdownItemType = { text: 'Option 1' };
-    const onDropdownPress = jest.fn();
+  it('* select default onSelect works properly', () => {
+    const expectedSelectedOption: SelectOptionType = { text: 'Option 1' };
+    const onSelectPress = jest.fn();
     const application: RenderAPI = render(
-      <TestApplication onDropdownPress={onDropdownPress}/>,
+      <TestApplication onSelectPress={onSelectPress}/>,
     );
 
     fireEvent.press(application.getAllByType(TouchableOpacity)[0]);
 
     fireEvent.press(application.getAllByText(expectedSelectedOption.text)[0].parent);
-    const { selectedOption } = application.getAllByType(Dropdown)[0].props;
+    const { selectedOption } = application.getAllByType(Select)[0].props;
 
     expect(stringify(selectedOption)).toBe(stringify(expectedSelectedOption));
   });
 
-  it('* dropdown multiSelect onSelect works properly', () => {
-    const expectedSelectedOption: DropdownItemType[] = [
+  it('* select multiSelect onSelect works properly', () => {
+    const expectedSelectedOption: SelectOptionType[] = [
       { text: 'Option 4' },
       { text: 'Option 32' },
     ];
@@ -206,7 +206,7 @@ describe('@ dropdown component checks', () => {
     fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
     fireEvent(application.getAllByText(expectedSelectedOption[0].text)[0], 'onChange');
     fireEvent(application.getAllByText(expectedSelectedOption[1].text)[0], 'onChange');
-    const { selectedOption } = application.getAllByType(Dropdown)[1].props;
+    const { selectedOption } = application.getAllByType(Select)[1].props;
 
     expect(stringify(selectedOption)).toBe(stringify(expectedSelectedOption));
   });
@@ -226,7 +226,7 @@ describe('@ dropdown component checks', () => {
   });
 
   it('* multiSelect group selected works properly', () => {
-    const expectedSelectedOption: DropdownItemType[] = [
+    const expectedSelectedOption: SelectOptionType[] = [
       { text: 'Option 32' },
       { text: 'Option 33' },
     ];
@@ -247,15 +247,15 @@ describe('@ dropdown component checks', () => {
     expect(stringify(selected2)).toBe(stringify([]));
   });
 
-  it('* dropdown onPress* handling', () => {
-    const onDropdownPressIn = jest.fn();
-    const onDropdownPressOut = jest.fn();
-    const onDropdownLongPress = jest.fn();
+  it('* select onPress* handling', () => {
+    const onSelectPressIn = jest.fn();
+    const onSelectPressOut = jest.fn();
+    const onSelectLongPress = jest.fn();
     const application: RenderAPI = render(
       <TestApplication
-        onDropdownPressIn={onDropdownPressIn}
-        onDropdownPressOut={onDropdownPressOut}
-        onDropdownLongPress={onDropdownLongPress}
+        onSelectPressIn={onSelectPressIn}
+        onSelectPressOut={onSelectPressOut}
+        onSelectLongPress={onSelectLongPress}
       />,
     );
 
@@ -263,9 +263,9 @@ describe('@ dropdown component checks', () => {
     fireEvent(application.getAllByType(TouchableOpacity)[0], 'pressOut');
     fireEvent(application.getAllByType(TouchableOpacity)[0], 'longPress');
 
-    expect(onDropdownPressIn).toHaveBeenCalled();
-    expect(onDropdownPressOut).toHaveBeenCalled();
-    expect(onDropdownLongPress).toHaveBeenCalled();
+    expect(onSelectPressIn).toHaveBeenCalled();
+    expect(onSelectPressOut).toHaveBeenCalled();
+    expect(onSelectLongPress).toHaveBeenCalled();
   });
 
   it('* text props checks', () => {
@@ -273,8 +273,8 @@ describe('@ dropdown component checks', () => {
     const passedPlaceholder: string = 'Placeholder';
     const application: RenderAPI = render(
       <TestApplication
-        dropdownLabel={passedLabel}
-        dropdownPlaceholder={passedPlaceholder}
+        selectLabel={passedLabel}
+        selectPlaceholder={passedPlaceholder}
       />,
     );
 

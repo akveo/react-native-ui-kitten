@@ -24,7 +24,7 @@ import {
   LayoutContainer,
   SampleContainer,
   ModalContainer,
-  DropdownContainer,
+  SelectContainer,
   SpinnerContainer,
   IconContainer,
 } from '../ui/screen';
@@ -40,7 +40,6 @@ const AppNavigator = createStackNavigator({
   ['Button']: ButtonContainer,
   ['Button Group']: ButtonGroupContainer,
   ['Checkbox']: CheckBoxContainer,
-  ['Dropdown']: DropdownContainer,
   ['Icon']: IconContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,
@@ -56,6 +55,7 @@ const AppNavigator = createStackNavigator({
   ['Top Navigation']: TopNavigationContainer,
   ['Overflow Menu']: OverflowMenuContainer,
   ['Sample']: SampleContainer,
+  ['Select']: SelectContainer,
   ['Modal']: ModalContainer,
 }, {
   initialRouteName: 'Home',
