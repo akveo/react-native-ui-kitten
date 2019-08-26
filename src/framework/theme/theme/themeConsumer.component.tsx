@@ -33,7 +33,7 @@ export interface Context {
 export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps & P>;
 
 /**
- * High Order Function which is used to create themed style for non-styled component.
+ * `withStyles` is a High Order Function which is used to create themed style for non-styled component.
  * Basically used when need to use theme variable somewhere.
  * Returns component class which can be used as themed component.
  *
@@ -45,7 +45,7 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  *
  * @param createStyles - Type: {(theme: ThemeType) => any}. Determines arrow function used to create styles.
  *
- * @example Declaring Themed Component
+ * @overview-example Declaring Themed Component
  *
  * ```
  * import React from 'react';
@@ -76,13 +76,13 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  * }));
  * ```
  *
- * @example Themed Component Usage
+ * @overview-example Themed Component Usage
  *
  * ```
  * import React from 'react';
  * import {
- *  ThemedButton,
- *  ThemedButtonProps,
+ *   ThemedButton,
+ *   ThemedButtonProps,
  * } from './path-to/themedButton.component';
  *
  * export const ThemedButtonShowcase = (props?: ThemedButtonProps): React.ReactElement<ThemedButtonProps> => {
@@ -92,6 +92,7 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  * };
  * ```
  */
+
 export const withStyles = <P extends object>(Component: React.ComponentType<P>,
                                              createStyles?: CreateStylesFunction): ThemedComponentClass<P> => {
 

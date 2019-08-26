@@ -33,7 +33,7 @@ export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
 export type TabBarElement = React.ReactElement<TabBarProps>;
 
 /**
- * The `TabBar` component that manages Tab components.
+ * The `TabBar` component that manages `Tab` components.
  *
  * @extends React.Component
  *
@@ -49,7 +49,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';

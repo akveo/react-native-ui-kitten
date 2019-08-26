@@ -37,7 +37,7 @@ export type BottomNavigationProps = StyledComponentProps & ViewProps & Component
 export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
 
 /**
- * BottomNavigation component is designed to be a Bottom Tab Bar.
+ * `BottomNavigation` component is designed to be a Bottom Tab Bar.
  * Can be used for navigation.
  *
  * @extends React.Component
@@ -58,7 +58,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -88,7 +88,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * }
  * ```
  *
- * @overview-example Without indicator
+ * @overview-example Without Indicator
  *
  * ```
  * import React from 'react';
@@ -118,7 +118,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * }
  * ```
  *
- * @example Inline styling example
+ * @example Inline Styling
  *
  * ```
  * import React, { ReactElement } from 'react';
@@ -137,7 +137,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * };
  * ```
  *
- * @example With React Navigation API and usage example
+ * @example With React Navigation
  *
  * ```
  * import React, { ReactElement } from 'react';

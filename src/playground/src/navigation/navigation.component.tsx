@@ -24,6 +24,10 @@ import {
   LayoutContainer,
   SampleContainer,
   ModalContainer,
+  SelectContainer,
+  SpinnerContainer,
+  IconContainer,
+  MenuContainer,
 } from '../ui/screen';
 
 export interface RouteType {
@@ -37,12 +41,16 @@ const AppNavigator = createStackNavigator({
   ['Button']: ButtonContainer,
   ['Button Group']: ButtonGroupContainer,
   ['Checkbox']: CheckBoxContainer,
+  ['Icon']: IconContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,
   ['List']: ListContainer,
+  ['Menu']: MenuContainer,
+  ['Modal']: ModalContainer,
   ['Popover']: PopoverContainer,
   ['Radio']: RadioContainer,
   ['Radio Group']: RadioGroupContainer,
+  ['Spinner']: SpinnerContainer,
   ['Tab View']: TabViewContainer,
   ['Tooltip']: TooltipContainer,
   ['Text']: TextContainer,
@@ -50,7 +58,7 @@ const AppNavigator = createStackNavigator({
   ['Top Navigation']: TopNavigationContainer,
   ['Overflow Menu']: OverflowMenuContainer,
   ['Sample']: SampleContainer,
-  ['Modal']: ModalContainer,
+  ['Select']: SelectContainer,
 }, {
   initialRouteName: 'Home',
   headerMode: 'screen',

@@ -1,19 +1,31 @@
 const path = require('path');
 const Config = require('../../config');
 
-// FIXME: Resolve `transform[stderr]: Could not resolve` command-line warnings.
-// FIXME: Reproducible when starting with clearing cache (npm start -- -c)
-//
-// TODO: Framework path aliasing even not needed here. Replace?
-// TODO: Replace nested package.json-s with aliases
+/**
+ * UI Kitten modules aliases.
+ * Allows importing framework modules into playground
+ */
+const moduleAliases = {
+  'react-native-ui-kitten': path.resolve(__dirname, '../framework'),
+  '@kitten/theme': path.resolve(__dirname, '../framework/theme'),
+  '@kitten/ui': path.resolve(__dirname, '../framework/ui'),
+  '@ui-kitten/eva-icons': path.resolve(__dirname, '../eva-icons'),
+};
+
+/**
+ * Eva modules aliases.
+ * Allows importing Eva modules into playground depending on environment
+ */
+const evaAliases = {
+  '@eva-design/processor': path.resolve(Config.PROCESSOR_PATH),
+  '@eva-design/eva': path.resolve(Config.MAPPING_PATH),
+};
 
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
-    '@kitten/theme': path.resolve(Config.KITTEN_PATH, 'theme'),
-    '@kitten/ui': path.resolve(Config.KITTEN_PATH, 'ui'),
-    '@eva-design/eva': path.resolve(Config.MAPPING_PATH),
-    '@eva-design/processor': path.resolve(Config.PROCESSOR_PATH),
+    ...evaAliases,
+    ...moduleAliases,
   },
 };
 
