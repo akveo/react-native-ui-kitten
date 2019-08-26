@@ -2274,16 +2274,16 @@
           "iconMarginHorizontal": {
             "type": "number"
           },
-          "menuMaxHeight": {
+          "optionsListMaxHeight": {
             "type": "number"
           },
-          "menuBorderRadius": {
+          "optionsListBorderRadius": {
             "type": "number"
           },
-          "menuBorderColor": {
+          "optionsListBorderColor": {
             "type": "string"
           },
-          "menuBorderWidth": {
+          "optionsListBorderWidth": {
             "type": "number"
           },
           "labelColor": {
@@ -2351,10 +2351,10 @@
       "appearances": {
         "default": {
           "mapping": {
-            "menuMaxHeight": 220,
-            "menuBorderRadius": 4,
-            "menuBorderColor": "border-basic-color-4",
-            "menuBorderWidth": 1,
+            "optionsListMaxHeight": 220,
+            "optionsListBorderRadius": 4,
+            "optionsListBorderColor": "border-basic-color-4",
+            "optionsListBorderWidth": 1,
             "borderRadius": 4,
             "borderWidth": 1,
             "paddingHorizontal": 8,
