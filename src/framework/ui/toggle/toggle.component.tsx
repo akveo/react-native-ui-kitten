@@ -25,6 +25,7 @@ import {
   styled,
 } from '@kitten/theme';
 import { CheckMark } from '../support/components';
+import { I18nLayoutService } from '../support/services';
 
 interface ComponentProps {
   checked?: boolean;
@@ -38,7 +39,7 @@ export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
 export type ToggleElement = React.ReactElement<ToggleProps>;
 
 /**
- * Styled Toggle component.
+ * Styled `Toggle` component.
  *
  * @extends React.Component
  *
@@ -61,7 +62,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -80,6 +81,35 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <Toggle
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { Toggle } from 'react-native-ui-kitten';
+ *
+ * export class ToggleShowcase extends React.Component {
+ *
+ *   public state = {
+ *     checked: false,
+ *   };
+ *
+ *   private onChange = (checked: boolean) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Toggle
+ *         size='small'
+ *         status='info'
  *         checked={this.state.checked}
  *         onChange={this.onChange}
  *       />
@@ -257,7 +287,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.thumbTranslateAnimationActive = true;
 
     Animated.timing(this.thumbTranslateAnimation, {
-      toValue: value,
+      toValue: I18nLayoutService.select(value, -value),
       duration: 150,
       easing: Easing.linear,
     }).start(() => {
@@ -329,7 +359,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       <View
         {...restProps}
         style={[componentStyle.container, styles.container, style]}>
-        <View style={[componentStyle.highlight, styles.highlight]}/>
+        <View style={[componentStyle.highlight, styles.highlight]} />
         <TouchableOpacity
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
@@ -337,7 +367,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
           <Animated.View
             style={[componentStyle.componentContainer, styles.componentContainer]}
             {...this.panResponder.panHandlers}>
-            <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
+            <Animated.View style={[componentStyle.ellipse, styles.ellipse]} />
             <Animated.View style={[componentStyle.thumb, styles.thumb]}>
               <CheckMark
                 style={componentStyle.icon}

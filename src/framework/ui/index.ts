@@ -40,6 +40,28 @@ export {
   DrawerItemElement,
 } from './drawer/drawerItem.component';
 export {
+  Select,
+  SelectProps,
+  SelectElement,
+  SelectOption,
+} from './select/select.component';
+export { SelectOptionType } from './select/selectOption.component';
+export {
+  Icon,
+  IconProps,
+  IconElement,
+} from './icon/icon.component';
+export {
+  IconRegistry,
+  IconRegistryProps,
+  IconRegistryElement,
+} from './icon/iconRegistry.component';
+export {
+  IconPack,
+  IconProvider,
+  Icons,
+} from './icon/service/type';
+export {
   Input,
   InputProps,
   InputElement,
@@ -59,6 +81,22 @@ export {
   ListItemProps,
   ListItemElement,
 } from './list/listItem.component';
+export {
+  Menu,
+  MenuProps,
+  MenuElement,
+} from './menu/menu.component';
+export {
+  MenuItem,
+  MenuItemProps,
+  MenuItemElement,
+  MenuItemType,
+} from './menu/menuItem.component';
+export {
+  SubMenu,
+  SubMenuElement,
+  SubMenuProps,
+} from './menu/subMenu.component';
 export {
   Modal,
   ModalProps,
@@ -90,6 +128,16 @@ export {
   RadioGroupProps,
   RadioGroupElement,
 } from './radioGroup/radioGroup.component';
+export {
+  Divider,
+  DividerElement,
+  DividerProps,
+} from './divider/divider.component';
+export {
+  Spinner,
+  SpinnerProps,
+  SpinnerElement,
+} from './spinner/spinner.component';
 export {
   TabView,
   TabViewProps,

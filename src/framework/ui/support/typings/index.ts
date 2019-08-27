@@ -9,4 +9,5 @@ export {
   Override,
   TouchableIndexedProps,
   ModalPresentingBased,
+  TouchableTypeReturningProps,
 } from './type';

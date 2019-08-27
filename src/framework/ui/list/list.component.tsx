@@ -32,7 +32,7 @@ export type ListProps = StyledComponentProps & FlatListProps<ItemType> & Compone
 export type ListElement = React.ReactElement<ListProps>;
 
 /**
- * List component is a performant interface for rendering simple, flat lists. Extends `FlatList`. Renders list of
+ * `List` component is a performant interface for rendering simple, flat lists. Extends `FlatList`. Renders list of
  * `ListItem` components or custom content.
  *
  * @extends React.Component
@@ -44,7 +44,7 @@ export type ListElement = React.ReactElement<ListProps>;
  *
  * @property StyledComponentProps
  *
- * @example With ListItem example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -85,7 +85,7 @@ export type ListElement = React.ReactElement<ListProps>;
  * };
  * ```
  *
- * @example With Custom ListItem example
+ * @example With Custom ListItem
  *
  * ```
  * import React from 'react';

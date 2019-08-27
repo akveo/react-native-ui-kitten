@@ -6,6 +6,7 @@ export enum Interaction {
   ACTIVE = 'active',
   FOCUSED = 'focused',
   INDETERMINATE = 'indeterminate',
+  VISIBLE = 'visible',
 }
 
 export enum State {

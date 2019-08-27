@@ -6,6 +6,7 @@ import {
   ViewProps,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
+import { I18nLayoutService } from '../../services';
 
 interface ComponentProps {
   isAnimated?: boolean;
@@ -58,24 +59,25 @@ export class CheckMark extends React.Component<CheckMarkProps> {
 
     return (
       <Component style={[container, styles.container]}>
-        <Component style={[shape, left, styles.shape, styles.left]}/>
-        <Component style={[shape, right, styles.shape, styles.right]}/>
+        <Component style={[shape, left, styles.shape, styles.left]} />
+        <Component style={[shape, right, styles.shape, styles.right]} />
       </Component>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: I18nLayoutService.toI18nStyle({
+    flexDirection: 'row',
     transform: [{ rotate: '-5deg' }],
-  },
+  }),
   shape: {
     position: 'absolute',
   },
   left: {
-    transform: [{ rotate: '-40deg' }, { translateY: 1 }],
+    transform: [{ rotate: '-40deg' }],
   },
   right: {
-    transform: [{ rotate: '40deg' }, { translateY: 1 }],
+    transform: [{ rotate: '40deg' }],
   },
 });

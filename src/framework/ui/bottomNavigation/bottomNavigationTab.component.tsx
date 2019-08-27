@@ -40,9 +40,9 @@ export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityPr
 export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabProps>;
 
 /**
- * BottomNavigationTab component is a part of the BottomNavigation component.
- * BottomNavigation tabs should be wrapped in BottomNavigation to provide usable component.
- * See usage examples at BottomNavigation component documentation.
+ * `BottomNavigationTab` component is a part of the `BottomNavigation` component.
+ * `BottomNavigation` tabs should be wrapped in BottomNavigation to provide usable component.
+ * See usage examples at `BottomNavigation` component documentation.
  *
  * @extends React.Component
  *

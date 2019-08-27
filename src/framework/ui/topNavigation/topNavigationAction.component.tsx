@@ -33,9 +33,9 @@ export type TopNavigationActionProps = StyledComponentProps & TouchableOpacityPr
 export type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
 
 /**
- * The `TopNavigationAction` component is a part of the TopNavigation component.
- * Top Navigation Actions should be used in TopNavigation to provide usable component.
- * See usage examples at TopNavigation component documentation.
+ * The `TopNavigationAction` component is a part of the `TopNavigation` component.
+ * `TopNavigationActions` should be used in `TopNavigation` to provide usable component.
+ * See usage examples at `TopNavigation` component documentation.
  *
  * @extends React.Component
  *

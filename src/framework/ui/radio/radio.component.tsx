@@ -40,7 +40,7 @@ export type RadioProps = StyledComponentProps & TouchableOpacityProps & Componen
 export type RadioElement = React.ReactElement<RadioProps>;
 
 /**
- * Styled Radio component.
+ * Styled `Radio` component.
  *
  * @extends React.Component
  *
@@ -63,7 +63,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -89,7 +89,34 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * }
  * ```
  *
- * @example Inline styling example
+ * @overview-example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { Radio } from 'react-native-ui-kitten';
+ *
+ * export class RadioShowcase extends React.Component {
+ *   public state = {
+ *     checked: false,
+ *   };
+ *
+ *   private onChange = (checked: boolean) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <Radio
+ *         status='warning'
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     )
+ *   }
+ * }
+ * ```
+ *
+ * @example Inline Styling
  *
  * ```
  * import React from 'react';
