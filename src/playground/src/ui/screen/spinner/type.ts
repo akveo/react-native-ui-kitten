@@ -75,10 +75,10 @@ const dangerSpinner: ComponentShowcaseItem = {
   },
 };
 
-const bipolarSpinner: ComponentShowcaseItem = {
-  title: 'Bipolar',
+const alternativeSpinner: ComponentShowcaseItem = {
+  title: 'Alternative',
   props: {
-    status: 'bipolar',
+    status: 'alternative',
   },
 };
 
@@ -101,7 +101,7 @@ const statusSection: ComponentShowcaseSection = {
     infoSpinner,
     warningSpinner,
     dangerSpinner,
-    bipolarSpinner,
+    alternativeSpinner,
   ],
 };
 
