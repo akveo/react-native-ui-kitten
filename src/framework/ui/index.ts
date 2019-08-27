@@ -1,3 +1,5 @@
+import { SelectOption } from '@kitten/ui/select/select.component';
+
 export {
   Avatar,
   AvatarProps,
@@ -29,12 +31,12 @@ export {
   CheckBoxElement,
 } from './checkbox/checkbox.component';
 export {
-  Dropdown,
-  DropdownProps,
-  DropdownElement,
-  DropdownOption,
-} from './dropdown/dropdown.component';
-export { DropdownItemType } from './dropdown/droppdownItem.component';
+  Select,
+  SelectProps,
+  SelectElement,
+  SelectOption,
+} from './select/select.component';
+export { SelectOptionType } from './select/selectOption.component';
 export {
   Icon,
   IconProps,
@@ -71,6 +73,22 @@ export {
   ListItemElement,
 } from './list/listItem.component';
 export {
+  Menu,
+  MenuProps,
+  MenuElement,
+} from './menu/menu.component';
+export {
+  MenuItem,
+  MenuItemProps,
+  MenuItemElement,
+  MenuItemType,
+} from './menu/menuItem.component';
+export {
+  SubMenu,
+  SubMenuElement,
+  SubMenuProps,
+} from './menu/subMenu.component';
+export {
   Modal,
   ModalProps,
   ModalElement,
@@ -101,6 +119,11 @@ export {
   RadioGroupProps,
   RadioGroupElement,
 } from './radioGroup/radioGroup.component';
+export {
+  Divider,
+  DividerElement,
+  DividerProps,
+} from './divider/divider.component';
 export {
   Spinner,
   SpinnerProps,

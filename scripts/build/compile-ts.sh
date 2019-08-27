@@ -4,4 +4,4 @@
 # because it should not contain module aliases
 
 env=${1}
-tscpaths -p ./tsconfig.${env}.json -s ./src/framework -o ./dist/tsc-out/framework
+tsc -p ./tsconfig.${env}.json

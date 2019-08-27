@@ -15,48 +15,48 @@ import {
   ListProps,
 } from '../list/list.component';
 import {
-  DropdownItem,
-  DropdownItemType,
-  DropdownItemElement,
-} from './droppdownItem.component';
+  SelectOption,
+  SelectOptionType,
+  SelectOptionElement,
+} from './selectOption.component';
 import {
-  DropdownGroup,
-  DropdownGroupElement,
-} from './dropdownGroup.component';
+  SelectGroupOption,
+  SelectGroupOptionElement,
+} from './selectGroupOption.component';
 import { SelectionStrategy } from './selection.strategy';
 
-type DefaultMenuItemElement = DropdownItemElement | DropdownGroupElement;
+type DefaultMenuItemElement = SelectOptionElement | SelectGroupOptionElement;
 type MenuItemElement = DefaultMenuItemElement | React.ReactElement<any>;
 
 export interface ComponentProps {
-  data: DropdownItemType[];
+  data: SelectOptionType[];
   multiSelect?: boolean;
   strategy: SelectionStrategy;
-  renderItem?: (item: ListRenderItemInfo<DropdownItemType>) => React.ReactElement<any>;
-  onSelect: (option: DropdownItemType, event?: GestureResponderEvent) => void;
+  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
+  onSelect: (option: SelectOptionType, event?: GestureResponderEvent) => void;
 }
 
-export type DropdownMenuProps = Partial<ListProps> & ComponentProps;
-export type DropdownMenuElement = React.ReactElement<DropdownMenuProps>;
+export type SelectOptionsListProps = Partial<ListProps> & ComponentProps;
+export type SelectOptionsListElement = React.ReactElement<SelectOptionsListProps>;
 
-export class DropdownMenu extends React.Component<DropdownMenuProps> {
+export class SelectOptionsList extends React.Component<SelectOptionsListProps> {
 
-  private areThereSubItems = (dropdownItem: DropdownItemType): boolean => {
+  private areThereSubItems = (dropdownItem: SelectOptionType): boolean => {
     const { items } = dropdownItem;
 
     return items && items.length !== 0;
   };
 
-  private onSelect = (option: DropdownItemType, event?: GestureResponderEvent): void => {
+  private onSelect = (option: SelectOptionType, event?: GestureResponderEvent): void => {
     this.props.onSelect(option, event);
   };
 
-  private renderDefaultItem = (info: ListRenderItemInfo<DropdownItemType>): DefaultMenuItemElement => {
+  private renderDefaultItem = (info: ListRenderItemInfo<SelectOptionType>): DefaultMenuItemElement => {
     const { renderItem, multiSelect, strategy } = this.props;
     const selected: boolean = strategy.isSelected(info.item);
 
     return this.areThereSubItems(info.item) ? (
-      <DropdownGroup
+      <SelectGroupOption
         {...info}
         strategy={strategy}
         multiSelect={multiSelect}
@@ -64,7 +64,7 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
         onPress={this.onSelect}
       />
     ) : (
-      <DropdownItem
+      <SelectOption
         {...info}
         disabled={info.item.disabled}
         selected={selected}
@@ -74,13 +74,13 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
     );
   };
 
-  private renderItem = (info: ListRenderItemInfo<DropdownItemType>): MenuItemElement => {
+  private renderItem = (info: ListRenderItemInfo<SelectOptionType>): MenuItemElement => {
     const { renderItem } = this.props;
 
     return renderItem ? renderItem(info) : this.renderDefaultItem(info);
   };
 
-  public render(): DropdownMenuElement {
+  public render(): SelectOptionsListElement {
     const { style, ...restProps } = this.props;
 
     return (
