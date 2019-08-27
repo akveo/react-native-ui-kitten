@@ -103,7 +103,23 @@ export const overflowMenuSettings: ComponentShowcaseSetting[] = [
   },
   {
     propertyName: 'placement',
+    value: 'left start',
+  },
+  {
+    propertyName: 'placement',
+    value: 'left end',
+  },
+  {
+    propertyName: 'placement',
     value: 'top',
+  },
+  {
+    propertyName: 'placement',
+    value: 'top start',
+  },
+  {
+    propertyName: 'placement',
+    value: 'top end',
   },
   {
     propertyName: 'placement',
@@ -111,6 +127,22 @@ export const overflowMenuSettings: ComponentShowcaseSetting[] = [
   },
   {
     propertyName: 'placement',
+    value: 'right start',
+  },
+  {
+    propertyName: 'placement',
+    value: 'right end',
+  },
+  {
+    propertyName: 'placement',
     value: 'bottom',
+  },
+  {
+    propertyName: 'placement',
+    value: 'bottom start',
+  },
+  {
+    propertyName: 'placement',
+    value: 'bottom end',
   },
 ];
