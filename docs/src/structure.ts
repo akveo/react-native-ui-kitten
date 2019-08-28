@@ -64,6 +64,28 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Eva Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-icons-module.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: '3rd party Icons',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/setup-vector-icons.md',
+          },
+        ],
+      },
     ],
   },
   {
@@ -255,6 +277,20 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
+          },
+        ],
+      },
+      {
         type: 'group',
         name: 'Navigation',
       },
@@ -289,6 +325,20 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Drawer',
+        icon: 'drawer.svg',
+        source: [
+          'Drawer',
+        ],
+        overview: [
+          {
+            name: 'Drawer',
+            images: ['drawer.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'ViewPager',
         icon: 'view-pager.svg',
         source: [
@@ -309,6 +359,15 @@ export const structure = [
             name: 'TabBar',
             images: ['tab-menu.png'],
           },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'Menu',
+          'MenuItem',
         ],
       },
       {
@@ -409,6 +468,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Select',
+        icon: 'button.svg',
+        source: [
+          'Select',
+        ],
+        overview: [],
+      },
+      {
+        type: 'tabs',
         name: 'Button Group',
         icon: 'button-group.svg',
         source: [
@@ -439,7 +507,6 @@ export const structure = [
         icon: 'menu.svg',
         source: [
           'OverflowMenu',
-          'OverflowMenuItem',
         ],
         overview: [
           {
@@ -491,6 +558,20 @@ export const structure = [
           {
             name: 'Avatar',
             images: ['avatar.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Spinner',
+        icon: 'spinner.svg',
+        source: [
+          'Spinner',
+        ],
+        overview: [
+          {
+            name: 'Spinner',
+            images: ['spinner.png'],
           },
         ],
       },

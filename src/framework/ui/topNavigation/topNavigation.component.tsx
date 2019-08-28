@@ -41,7 +41,7 @@ export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentPro
 export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
 
 /**
- * TopNavigation component is designed to be a Navigation Bar.
+ * `TopNavigation` component is designed to be a Navigation Bar.
  * Can be used for navigation.
  *
  * @extends React.Component
@@ -67,7 +67,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -84,7 +84,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  * };
  * ```
  *
- * @example Actions usage example
+ * @overview-example Actions
  *
  * ```
  * import React from 'react';
@@ -128,7 +128,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  * };
  * ```
  *
- * @example Inline styling example
+ * @example Inline Styling
  *
  * ```
  * import React from 'react';

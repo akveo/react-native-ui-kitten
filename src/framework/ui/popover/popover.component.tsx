@@ -62,7 +62,7 @@ const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
 
 /**
- * Displays content in a modal when users focus on or tap an element.
+ * Displays content in a `Modal` when users focus on or tap an element. Also supports autoplacement.
  *
  * @extends React.Component
  *
@@ -86,13 +86,13 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @property StyledComponentProps
  *
- * @example Popover usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
  * import {
- *  View,
- *  ViewProps,
+ *   View,
+ *   ViewProps,
  * } from 'react-native';
  * import {
  *   Popover,

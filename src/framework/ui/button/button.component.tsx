@@ -42,7 +42,7 @@ export type ButtonProps = StyledComponentProps & TouchableOpacityProps & Compone
 export type ButtonElement = React.ReactElement<ButtonProps>;
 
 /**
- * Styled Button component.
+ * Styled `Button` component.
  *
  * @extends React.Component
  *
@@ -70,7 +70,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -93,7 +93,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * };
  * ```
  *
- * @overview-example Eva-related props using example
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -119,27 +119,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * };
  * ```
  *
- * @example Inline styling example
- *
- * ```
- * import React from 'react';
- * import {
- *   Button,
- *   ButtonProps,
- * } from 'react-native-ui-kitten';
- *
- * export const ButtonShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
- *   return (
- *     <Button
- *       style={styles.button}
- *       textStyle={styles.buttonText}>
- *       BUTTON
- *     </Button>
- *   );
- * };
- * ```
- *
- * @example Button with Icon usage example
+ * @example Inline Styling with Icon
  *
  * ```
  * import React from 'react';
@@ -155,7 +135,10 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * const ButtonIcon = (style: ImageStyle): React.ReactElement<ImageProps> => {
  *   return (
- *     <Image style={style} source={{ uri: 'path/to/image' }}/>
+ *     <Image
+ *       style={style}
+ *       source={{ uri: 'path/to/image' }}
+ *     />
  *   );
  * };
  *
@@ -163,6 +146,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *   return (
  *     <Button
  *       style={styles.button}
+ *       textStyle={styles.buttonText}
  *       icon={ButtonIcon}>
  *       BUTTON
  *     </Button>

@@ -24,7 +24,7 @@ export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
 export type TextElement = React.ReactElement<TextProps>;
 
 /**
- * Styled Text component.
+ * Styled `Text` component.
  *
  * @extends React.Component
  *
@@ -45,7 +45,7 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * @property StyledComponentProps
  *
- * @example Simple usage example
+ * @overview-example Simple Usage
  *
  * ```
  * import React from 'react';
@@ -54,6 +54,24 @@ export type TextElement = React.ReactElement<TextProps>;
  * export const TextShowcase = (props?: TextProps): React.ReactElement<TextProps> => {
  *   return (
  *     <Text>
+ *       Sample Text
+ *     </Text>
+ *   );
+ * };
+ * ```
+ *
+ * @overview-example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { Text, TextProps } from 'react-native-ui-kitten';
+ *
+ * export const TextShowcase = (props?: TextProps): React.ReactElement<TextProps> => {
+ *   return (
+ *     <Text
+ *       appearance='alternative'
+ *       category='p2'
+ *       status='success'>
  *       Sample Text
  *     </Text>
  *   );
