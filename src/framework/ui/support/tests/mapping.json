@@ -1172,6 +1172,36 @@
         }
       }
     },
+    "Drawer": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "backgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          },
+          "noDivider": {
+            "default": false
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "backgroundColor": "background-basic-color-1"
+          }
+        },
+        "noDivider": {
+          "mapping": {}
+        }
+      }
+    },
     "Input": {
       "meta": {
         "scope": "all",

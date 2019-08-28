@@ -112,7 +112,7 @@ export type ListElement = React.ReactElement<ListProps>;
  *         <CustomListItem/>
  *       </ListItem>
  *     );
- *   };=
+ *   };
  *
  *   return (
  *     <List

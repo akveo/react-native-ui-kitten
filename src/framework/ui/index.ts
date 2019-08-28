@@ -1,5 +1,3 @@
-import { SelectOption } from '@kitten/ui/select/select.component';
-
 export {
   Avatar,
   AvatarProps,
@@ -30,6 +28,17 @@ export {
   CheckBoxProps,
   CheckBoxElement,
 } from './checkbox/checkbox.component';
+export {
+  Drawer,
+  DrawerProps,
+  DrawerElement,
+  DrawerHeaderElement,
+} from './drawer/drawer.component';
+export {
+  DrawerFence,
+  DrawerFenceElement,
+  DrawerFenceProps,
+} from './drawer/drawerFence.component';
 export {
   Select,
   SelectProps,

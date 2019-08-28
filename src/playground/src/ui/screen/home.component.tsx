@@ -1,5 +1,8 @@
 import React from 'react';
-import { ListRenderItemInfo, Button, I18nManager } from 'react-native';
+import {
+  Button,
+  ListRenderItemInfo,
+} from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import {
   ThemedComponentProps,
@@ -13,7 +16,6 @@ import {
   ListItemElement,
 } from '@kitten/ui';
 import { RouteType } from '../../navigation';
-import { Updates } from 'expo';
 
 export const routes: RouteType[] = [
   { name: 'Avatar' },
@@ -21,7 +23,9 @@ export const routes: RouteType[] = [
   { name: 'Button' },
   { name: 'Button Group' },
   { name: 'Checkbox' },
+  { name: 'Drawer' },
   { name: 'Icon' },
+  { name: 'Drawer' },
   { name: 'Input' },
   { name: 'Layout' },
   { name: 'List' },

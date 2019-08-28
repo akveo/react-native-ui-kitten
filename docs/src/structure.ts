@@ -33,23 +33,12 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Start a new App',
+        name: 'Install UI Kitten',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install-new.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Install into existing App',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/install-existing.md',
+            source: 'guides/install.md',
           },
         ],
       },
@@ -331,6 +320,20 @@ export const structure = [
           {
             name: 'BottomNavigation',
             images: ['bottom-navigation.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Drawer',
+        icon: 'drawer.svg',
+        source: [
+          'Drawer',
+        ],
+        overview: [
+          {
+            name: 'Drawer',
+            images: ['drawer.png'],
           },
         ],
       },
