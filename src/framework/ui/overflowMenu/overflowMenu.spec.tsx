@@ -1,225 +1,120 @@
 import React from 'react';
 import {
-  Image,
-  ImageProps,
-  ImageSourcePropType,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {
   fireEvent,
   render,
   RenderAPI,
-  shallow,
-  waitForElement,
 } from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
-import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-  StyleType,
-} from '@kitten/theme';
+import { ApplicationProvider } from '@kitten/theme';
 import {
   OverflowMenuItemType,
-  OverflowMenuItemProps,
-  OverflowMenuItem,
-} from './overflowMenuItem.component';
-import {
   OverflowMenu,
   OverflowMenuProps,
 } from './overflowMenu.component';
+import { Button } from '../button/button.component';
 import {
   mapping,
   theme,
 } from '../support/tests';
 
+interface State {
+  menuVisible: boolean;
+  selectedIndex: number;
+}
 
-const MockMenu = (props?: OverflowMenuProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <OverflowMenu {...props} />
-    </ApplicationProvider>
-  );
-};
+interface ComponentProps {
+  onSelectChecker?: () => void;
+}
 
-const MockMenuItem = (props?: OverflowMenuItemProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <OverflowMenuItem {...props} />
-    </ApplicationProvider>
-  );
-};
+type Props = ComponentProps & Partial<OverflowMenuProps>;
 
-const icon = (style: StyleType): React.ReactElement<ImageProps> => {
-  return (
-    <Image source={iconSource} style={style}/>
-  );
-};
+class TestApplication extends React.Component<Props, State> {
 
-const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+  public state: State = {
+    menuVisible: false,
+    selectedIndex: null,
+  };
 
-const menuItems: OverflowMenuItemType[] = [
-  {
-    text: 'Menu Item 1',
-    textStyle: {
-      fontSize: 24,
-      color: 'blue',
-    },
-    icon: icon,
-  },
-  {
-    text: 'Menu Item 2',
-    icon: icon,
-    disabled: true,
-  },
-  {
-    text: 'Menu Item 3',
-  },
-  {
-    text: 'Menu Item 4',
-    icon: icon,
-  },
-];
+  private setMenuVisible = (): void => {
+    const menuVisible: boolean = !this.state.menuVisible;
 
-describe('@overflow-menu-item: component checks', () => {
+    this.setState({ menuVisible });
+  };
 
-  it('* menu item with "set-1" props', () => {
-    const component: RenderAPI = render(
-      <MockMenuItem
-        text='Test Menu Item'
-        icon={icon}
-        disabled={true}
-        onPress={() => 1}
-      />,
+  private onSelect = (selectedIndex: number): void => {
+    this.props.onSelectChecker && this.props.onSelectChecker();
+    this.setState({ selectedIndex }, this.setMenuVisible);
+  };
+
+  public render(): React.ReactNode {
+    const { data } = this.props;
+    const { menuVisible, selectedIndex } = this.state;
+
+    return (
+      <ApplicationProvider
+        mapping={mapping}
+        theme={theme}>
+        <OverflowMenu
+          data={data}
+          visible={menuVisible}
+          selectedIndex={selectedIndex}
+          onBackdropPress={this.setMenuVisible}
+          onSelect={this.onSelect}>
+          <Button onPress={this.setMenuVisible}>Show</Button>
+        </OverflowMenu>
+      </ApplicationProvider>
     );
-
-    const { output } = shallow(component.getByType(OverflowMenuItem));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* menu item with "set-2" props', () => {
-    const component: RenderAPI = render(
-      <MockMenuItem
-        text='Test Menu Item'
-        disabled={false}
-        onPress={() => 2}
-      />,
-    );
-
-    const { output } = shallow(component.getByType(OverflowMenuItem));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* menu item onPress prop checks', () => {
-    const onPress = jest.fn();
-
-    const menuItemTestId = 'menu-item-1';
-
-    const component: RenderAPI = render(
-      <MockMenuItem
-        testID={menuItemTestId}
-        text='Test Menu Item'
-        onPress={onPress}
-      />,
-    );
-
-    fireEvent.press(component.getByTestId(menuItemTestId));
-
-    expect(onPress).toHaveBeenCalled();
-  });
-
-  it('* menu item onPress method checks', () => {
-    const onPress = jest.fn();
-
-    const component: RenderAPI = render(
-      <MockMenuItem
-        text='Test Menu Item'
-        onPress={onPress}
-      />,
-    );
-
-    fireEvent.press(component.getByType(TouchableOpacity));
-    expect(onPress).toHaveBeenCalled();
-  });
-
-  it('* menu item active checks', async () => {
-    const onPressIn = jest.fn();
-    const onPressOut = jest.fn();
-    const onLongPress = jest.fn();
-
-    const component: RenderAPI = render(
-      <MockMenuItem
-        text='Test Menu Item'
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}
-        onLongPress={onLongPress}
-      />,
-    );
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-    const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(OverflowMenuItem);
-    });
-
-    const { output: activeOutput } = shallow(active);
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-    const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(OverflowMenuItem);
-    });
-
-    const { output: inactiveOutput } = shallow(inactive);
-
-    expect(activeOutput).toMatchSnapshot();
-    expect(inactiveOutput).toMatchSnapshot();
-    expect(onPressIn).toHaveBeenCalled();
-    expect(onPressOut).toHaveBeenCalled();
-  });
-
-});
+  }
+}
 
 describe('@overflow-menu: component checks', () => {
 
-  it('* component renders properly', () => {
-    const onRequestClose = () => {
-    };
+  const defaultItems: OverflowMenuItemType[] = [
+    { title: 'Option 1' },
+    { title: 'Option 2' },
+    { title: 'Option 3' },
+  ];
 
-    const component: RenderAPI = render(
-      <MockMenu
-        visible={true}
-        items={menuItems}
-        onBackdropPress={onRequestClose}>
-        <View/>
-      </MockMenu>,
+  it('* menu-item visible prop check', () => {
+    const application: RenderAPI = render(
+      <TestApplication
+        data={defaultItems}
+      />,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenu));
+    fireEvent.press(application.getByType(Button));
 
-    expect(output).toMatchSnapshot();
+    const { visible } = application.getByType(OverflowMenu).props;
+    expect(visible).toBe(true);
   });
 
-  it('* single menu-item', () => {
-    const onRequestClose = () => {
-    };
-
-    const component: RenderAPI = render(
-      <MockMenu
-        visible={true}
-        items={menuItems.slice(0, 1)}
-        onBackdropPress={onRequestClose}>
-        <View/>
-      </MockMenu>,
+  it('* menu-item onSelect prop check', () => {
+    const onSelectChecker = jest.fn();
+    const application: RenderAPI = render(
+      <TestApplication
+        data={defaultItems}
+        onSelectChecker={onSelectChecker}
+      />,
     );
 
-    const { output } = shallow(component.getByType(OverflowMenu));
+    fireEvent.press(application.getByType(Button));
+    fireEvent.press(application.getAllByText('Option 1')[0]);
 
-    expect(output).toMatchSnapshot();
+    expect(onSelectChecker).toHaveBeenCalled();
+  });
+
+  it('* menu-item onSelect/selectedIndex prop check', () => {
+    const application: RenderAPI = render(
+      <TestApplication
+        data={defaultItems}
+      />,
+    );
+
+    fireEvent.press(application.getByType(Button));
+    fireEvent.press(application.getAllByText('Option 2')[0]);
+
+    const { selectedIndex } = application.getByType(OverflowMenu).props;
+
+    expect(selectedIndex).toBe(1);
   });
 
 });

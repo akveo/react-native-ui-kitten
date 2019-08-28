@@ -45,13 +45,13 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
 
   private createSettingMenuItem = (setting: ComponentShowcaseSetting): OverflowMenuItemType => {
     return {
-      text: setting.description || `${setting.propertyName}: ${setting.value}`,
+      title: setting.description || `${setting.propertyName}: ${setting.value}`,
     };
   };
 
   private createThemeMenuItem = (theme: string): OverflowMenuItemType => {
     return {
-      text: theme,
+      title: theme,
     };
   };
 
@@ -116,7 +116,7 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
           placement='bottom start'
           visible={this.state.themesMenuVisible}
           onSelect={this.onThemeSelect}
-          items={this.createThemesMenuItems()}
+          data={this.createThemesMenuItems()}
           onBackdropPress={this.toggleThemesMenu}>
           <Button
             size='small'
@@ -129,7 +129,7 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
           placement='bottom start'
           visible={this.state.settingsMenuVisible}
           onSelect={this.onSettingSelect}
-          items={this.createSettingsMenuItems()}
+          data={this.createSettingsMenuItems()}
           onBackdropPress={this.toggleSettingsMenu}>
           <Button
             size='small'

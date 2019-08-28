@@ -288,6 +288,20 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
+          },
+        ],
+      },
+      {
         type: 'group',
         name: 'Navigation',
       },
@@ -326,7 +340,6 @@ export const structure = [
         icon: 'drawer.svg',
         source: [
           'Drawer',
-          'DrawerItem',
         ],
         overview: [
           {
@@ -438,20 +451,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Icon',
-        icon: 'icon.svg',
-        source: [
-          'Icon',
-        ],
-        overview: [
-          {
-            name: 'Icon',
-            images: ['icon.png'],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Button',
         icon: 'button.svg',
         source: [
@@ -505,7 +504,6 @@ export const structure = [
         icon: 'menu.svg',
         source: [
           'OverflowMenu',
-          'OverflowMenuItem',
         ],
         overview: [
           {

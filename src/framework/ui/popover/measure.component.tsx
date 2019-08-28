@@ -18,7 +18,7 @@ import { Frame } from './type';
 export type MeasuringElement = React.ReactElement<MeasuringElementProps>;
 export type MeasuringElementProps = { tag: React.ReactText } & any;
 export type MeasuringNode = React.ReactElement<MeasureNodeProps>;
-export type MeasuringNodeProps = MeasureNodeProps & ViewProps;
+export type MeasuringNodeProps = MeasureNodeProps;
 
 export type MeasuredElementProps = MeasuringElementProps & { frame: Frame };
 export type MeasuredElement = React.ReactElement<MeasuredElementProps>;
@@ -34,7 +34,7 @@ export interface MeasureElementProps {
 
 export interface MeasureNodeProps {
   onResult: (result: MeasureResult) => void;
-  children: MeasuringElement[];
+  children: MeasuringElement | MeasuringElement[];
 }
 
 /**
@@ -115,14 +115,14 @@ export const MeasureNode = (props: MeasuringNodeProps): MeasuringNode => {
 
   const result: MeasureResult = {};
 
-  const { children, onResult, ...derivedProps } = props;
+  const { children, onResult } = props;
 
   const onChildMeasure = (element: MeasuredElement) => {
     const { tag, frame } = element.props;
 
     result[tag] = frame;
 
-    if (Object.keys(result).length === children.length) {
+    if (Object.keys(result).length === React.Children.count(children)) {
       onResult(result);
     }
   };
@@ -137,10 +137,13 @@ export const MeasureNode = (props: MeasuringNodeProps): MeasuringNode => {
     );
   };
 
+  const renderChildren = (): MeasuringElement[] => {
+    return React.Children.map(children, renderMeasuringElement);
+  };
+
   return (
-    <View
-      {...derivedProps}>
-      {children.map(renderMeasuringElement)}
-    </View>
+    <React.Fragment>
+      {renderChildren()}
+    </React.Fragment>
   );
 };
