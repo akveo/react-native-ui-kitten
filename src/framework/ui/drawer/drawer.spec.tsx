@@ -3,7 +3,6 @@ import {
   Image,
   ImageSourcePropType,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import {
   fireEvent,
@@ -18,16 +17,17 @@ import {
   Drawer,
   DrawerProps,
 } from '../drawer/drawer.component';
+import { DrawerFence } from './drawerFence.component';
 import {
-  DrawerItem,
-  DrawerItemProps,
-} from '../drawer/drawerItem.component';
+  MenuItemType,
+  MenuItem,
+} from '../menu/menuItem.component';
 import {
   mapping,
   theme,
 } from '../support/tests';
 
-const data: DrawerItemProps[] = [
+const data: MenuItemType[] = [
   { title: 'Item 1' },
   { title: 'Item 2' },
   { title: 'Item 3' },
@@ -54,7 +54,7 @@ describe('@drawer: component checks', () => {
   it('* should render proper number of items', () => {
     const component: RenderAPI = renderComponent();
 
-    expect(component.getAllByType(DrawerItem).length).toEqual(3);
+    expect(component.getAllByType(MenuItem).length).toEqual(3);
   });
 
   it('* item should render title', () => {
@@ -65,20 +65,6 @@ describe('@drawer: component checks', () => {
     expect(component.getByText('Item 3')).toBeTruthy();
   });
 
-  it('* item should render description', () => {
-    const drawerData: DrawerItemProps[] = [
-      { title: 'Item 1', description: 'Description 1' },
-      { title: 'Item 2', description: 'Description 2' },
-      { title: 'Item 3', description: 'Description 3' },
-    ];
-
-    const component: RenderAPI = renderComponent({ data: drawerData });
-
-    expect(component.getByText('Description 1')).toBeTruthy();
-    expect(component.getByText('Description 2')).toBeTruthy();
-    expect(component.getByText('Description 3')).toBeTruthy();
-  });
-
   it('* item should render icon', () => {
     const source: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
 
@@ -86,13 +72,13 @@ describe('@drawer: component checks', () => {
       <Image testID='@drawer-item-icon' source={source}/>
     );
 
-    const drawerData: DrawerItemProps[] = [
+    const drawerData: MenuItemType[] = [
       { title: 'Item 1', icon },
       { title: 'Item 2', icon },
       { title: 'Item 3', icon },
     ];
 
-    const component: RenderAPI = renderComponent({ data: drawerData });
+    const component: RenderAPI = renderComponent({ data: drawerData, onSelect: () => 1 });
 
     expect(component.getAllByTestId('@drawer-item-icon').length).toEqual(3);
   });
@@ -104,35 +90,35 @@ describe('@drawer: component checks', () => {
       <Image testID='@drawer-item-accessory' source={source}/>
     );
 
-    const drawerData: DrawerItemProps[] = [
+    const drawerData: MenuItemType[] = [
       { title: 'Item 1', accessory },
       { title: 'Item 2', accessory },
       { title: 'Item 3', accessory },
     ];
 
-    const component: RenderAPI = renderComponent({ data: drawerData });
+    const component: RenderAPI = renderComponent({ data: drawerData, onSelect: () => 1 });
 
     expect(component.getAllByTestId('@drawer-item-accessory').length).toEqual(3);
   });
 
-  it('* should render custom item', () => {
-    const renderItem = () => (
-      <View testID='@drawer-custom-item'/>
-    );
-
-    const component: RenderAPI = renderComponent({ data, renderItem });
-
-    expect(component.getAllByTestId('@drawer-custom-item').length).toEqual(3);
-  });
-
   it('* should render header', () => {
     const header = () => (
-      <View testID='@drawer-header'/>
+      <DrawerFence testID='@drawer-header'/>
     );
 
-    const component: RenderAPI = renderComponent({ data, header });
+    const component: RenderAPI = renderComponent({ data, header, onSelect: () => 1 });
 
     expect(component.getAllByTestId('@drawer-header').length).toBeTruthy();
+  });
+
+  it('* should render footer', () => {
+    const footer = () => (
+      <DrawerFence testID='@drawer-footer'/>
+    );
+
+    const component: RenderAPI = renderComponent({ data, footer, onSelect: () => 1 });
+
+    expect(component.getAllByTestId('@drawer-footer').length).toBeTruthy();
   });
 
   it('* should call onSelect', () => {

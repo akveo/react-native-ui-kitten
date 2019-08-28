@@ -466,10 +466,10 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Dropdown',
+        name: 'Select',
         icon: 'button.svg',
         source: [
-          'Dropdown',
+          'Select',
         ],
         overview: [],
       },

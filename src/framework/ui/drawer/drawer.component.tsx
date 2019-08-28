@@ -1,38 +1,24 @@
 import React from 'react';
 import {
-  GestureResponderEvent,
-  ListRenderItemInfo,
-  ViewProps,
-} from 'react-native';
-import {
   styled,
   StyledComponentProps,
-  StyleType,
 } from '@kitten/theme';
 import {
-  DrawerItem,
-  DrawerItemElement,
-  DrawerItemProps,
-} from './drawerItem.component';
-import {
-  List,
-  ListProps,
-} from '../list/list.component';
-import { Override } from '../support/typings';
+  Menu,
+  MenuElement,
+  MenuProps,
+} from '../menu/menu.component';
+import { MenuItemType } from '../menu/menuItem.component';
 
 export type DrawerHeaderElement = React.ReactElement<any>;
+export type DrawerFooterElement = React.ReactElement<any>;
 
-type DrawerListProps = Override<ListProps, {
-  data: DrawerItemProps[],
-  renderItem?: (info: ListRenderItemInfo<DrawerItemProps>) => DrawerItemElement;
-}>;
-
-interface ComponentProps extends DrawerListProps {
-  header?: (style: StyleType) => DrawerHeaderElement;
-  onSelect?: (index: number, event: GestureResponderEvent) => void;
+interface ComponentProps {
+  header?: () => DrawerHeaderElement;
+  footer?: () => DrawerFooterElement;
 }
 
-export type DrawerProps = StyledComponentProps & ComponentProps;
+export type DrawerProps = StyledComponentProps & ComponentProps & MenuProps;
 export type DrawerElement = React.ReactElement<DrawerProps>;
 
 /**
@@ -40,13 +26,15 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * @extends React.Component
  *
- * @property {DrawerItemProps[]} data - Determines the items displayed in drawer menu.
+ * @property {MenuItemType[]} data - Determines the items displayed in drawer menu.
  *
- * @property {(info: ListRenderItemInfo<DrawerItemProps>, style: StyleType) => DrawerItemElement} renderItem -
- * Determines the function to render a menu item. By default renders a ListItem
- * with properties passed to a `data` property item.
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default` or `noDivider`.
+ * Default is `default`.
  *
- * @property {(style: StyleType) => DrawerHeaderElement} header - Determines the function to render a header. Optional.
+ * @property {() => DrawerHeaderElement} header - Determines the function to render a header. Optional.
+ *
+ * @property {() => DrawerFooterElement} footer - Determines the function to render a footer. Optional.
  *
  * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Determines the function to handle
  * menu item press.
@@ -189,97 +177,62 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *     justifyContent: 'center',
  *     alignItems: 'center',
  *     height: 24,
+ *     width: 48,
  *     paddingHorizontal: 24,
  *     borderRadius: 12,
  *     backgroundColor: 'orange',
  *   },
  * });
  * ```
- *
- * @example Custom Item
- *
- * ```
- * import React from 'react';
- * import { View } from 'react-native';
- * import { Drawer, DrawerItem, Text } from 'react-native-ui-kitten';
- *
- * const data = [
- *   { title: 'Feed' },
- *   { title: 'Messages' },
- *   { title: 'Settings' },
- * ];
- *
- * const DrawerItemShowcase = ({item, index}, style) => (
- *   <DrawerItem style={style}>
- *     <Text category='s2'>{item.title}</Text>
- *   </View>
- * );
- *
- * export const DrawerShowcase = (props) => (
- *   <Drawer data={data} renderItem={DrawerItemShowcase}/>
- * );
- * ```
  */
+
 class DrawerComponent extends React.Component<DrawerProps> {
 
   static styledComponentName: string = 'Drawer';
 
-  private onItemPress = (index: number, event: GestureResponderEvent) => {
-    if (this.props.onSelect) {
-      this.props.onSelect(index, event);
-    }
+  private renderHeader = (): DrawerHeaderElement => {
+    const { header } = this.props;
+
+    return header();
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    const {
-      headerPaddingHorizontal,
-      headerPaddingVertical,
-      headerBackgroundColor,
-      ...containerParameters
-    } = source;
+  private renderFooter = (): DrawerFooterElement => {
+    const { footer } = this.props;
 
-    return {
-      container: containerParameters,
-      header: {
-        paddingHorizontal: headerPaddingHorizontal,
-        paddingVertical: headerPaddingVertical,
-        backgroundColor: headerBackgroundColor,
-      },
-    };
+    return footer();
   };
 
-  private renderHeaderElement = (style: StyleType): DrawerHeaderElement => {
-    const headerElement: DrawerHeaderElement = this.props.header(style);
+  private renderMenu = (): MenuElement => {
+    const { style, header, footer, themedStyle, ...restProps } = this.props;
 
-    return React.cloneElement(headerElement, {
-      style: [style, headerElement.props.style],
-    });
-  };
-
-  private renderItemElement = (info: ListRenderItemInfo<DrawerItemProps>): DrawerItemElement => {
     return (
-      <DrawerItem
-        onPress={this.onItemPress}
-        {...info.item}
+      <Menu
+        style={themedStyle}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        {...restProps}
       />
     );
   };
 
-  public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, header, ...restProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+  private renderComponentChildren = (): [DrawerHeaderElement, MenuElement, DrawerFooterElement] => {
+    const { header, footer } = this.props;
 
-    const headerElement: DrawerHeaderElement = header && this.renderHeaderElement(componentStyle.header);
+    return [
+      header && this.renderHeader(),
+      this.renderMenu(),
+      footer && this.renderFooter(),
+    ];
+  };
+
+  public render(): React.ReactNode {
+    const [header, menu, footer] = this.renderComponentChildren();
 
     return (
       <React.Fragment>
-        {headerElement}
-        <List
-          showsVerticalScrollIndicator={false}
-          bounces={false}
-          renderItem={this.renderItemElement}
-          {...restProps}
-        />
+        {header}
+        {menu}
+        {footer}
       </React.Fragment>
     );
   }

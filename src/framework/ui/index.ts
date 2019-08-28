@@ -35,10 +35,10 @@ export {
   DrawerHeaderElement,
 } from './drawer/drawer.component';
 export {
-  DrawerItem,
-  DrawerItemProps,
-  DrawerItemElement,
-} from './drawer/drawerItem.component';
+  DrawerFence,
+  DrawerFenceElement,
+  DrawerFenceProps,
+} from './drawer/drawerFence.component';
 export {
   Select,
   SelectProps,
