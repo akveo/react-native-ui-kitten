@@ -6,6 +6,7 @@ export {
   ScrollEvent,
   InputFocusEvent,
   Omit,
+  Override,
   TouchableIndexedProps,
   ModalPresentingBased,
   TouchableTypeReturningProps,

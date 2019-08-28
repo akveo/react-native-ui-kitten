@@ -1775,13 +1775,7 @@
           "borderRadius": {
             "type": "number"
           },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "dividerHeight": {
-            "type": "number"
-          },
-          "dividerBackgroundColor": {
+          "maxHeight": {
             "type": "number"
           },
           "indicatorBackgroundColor": {
@@ -1791,6 +1785,9 @@
         "appearances": {
           "default": {
             "default": true
+          },
+          "noDivider": {
+            "default": false
           }
         },
         "states": {},
@@ -1800,100 +1797,12 @@
         "default": {
           "mapping": {
             "borderRadius": 12,
-            "backgroundColor": "background-basic-color-1",
-            "dividerHeight": 1,
-            "dividerBackgroundColor": "border-basic-color-3",
-            "indicatorBackgroundColor": "transparent"
-          }
-        }
-      }
-    },
-    "OverflowMenuItem": {
-      "meta": {
-        "scope": "all",
-        "parameters": {
-          "minHeight": {
-            "type": "number"
-          },
-          "paddingVertical": {
-            "type": "number"
-          },
-          "paddingHorizontal": {
-            "type": "number"
-          },
-          "textMarginHorizontal": {
-            "type": "number"
-          },
-          "textFontSize": {
-            "type": "number"
-          },
-          "textLineHeight": {
-            "type": "number"
-          },
-          "textFontWeight": {
-            "type": "string"
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "iconWidth": {
-            "type": "number"
-          },
-          "iconHeight": {
-            "type": "number"
-          },
-          "iconMarginHorizontal": {
-            "type": "number"
-          },
-          "iconTintColor": {
-            "type": "string"
+            "indicatorBackgroundColor": "transparent",
+            "maxHeight": 256
           }
         },
-        "appearances": {
-          "default": {
-            "default": true
-          }
-        },
-        "variantGroups": {},
-        "states": {
-          "disabled": {
-            "default": false,
-            "priority": 0,
-            "scope": "all"
-          },
-          "active": {
-            "default": false,
-            "priority": 1,
-            "scope": "all"
-          }
-        }
-      },
-      "appearances": {
-        "default": {
-          "mapping": {
-            "minHeight": 48,
-            "paddingVertical": 12,
-            "paddingHorizontal": 8,
-            "textMarginHorizontal": 8,
-            "textFontSize": "text-subtitle-2-font-size",
-            "textLineHeight": "text-subtitle-2-line-height",
-            "textFontWeight": "text-subtitle-2-font-weight",
-            "textColor": "text-basic-color",
-            "iconWidth": 24,
-            "iconHeight": 24,
-            "iconMarginHorizontal": 8,
-            "iconTintColor": "text-basic-color",
-            "state": {
-              "active": {
-                "textColor": "text-primary-color",
-                "iconTintColor": "text-primary-color"
-              },
-              "disabled": {
-                "textColor": "text-disabled-color",
-                "iconTintColor": "text-disabled-color"
-              }
-            }
-          }
+        "noDivider": {
+          "mapping": {}
         }
       }
     },
