@@ -288,6 +288,20 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
+          },
+        ],
+      },
+      {
         type: 'group',
         name: 'Navigation',
       },
@@ -423,20 +437,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Icon',
-        icon: 'icon.svg',
-        source: [
-          'Icon',
-        ],
-        overview: [
-          {
-            name: 'Icon',
-            images: ['icon.png'],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Button',
         icon: 'button.svg',
         source: [
@@ -451,10 +451,10 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Dropdown',
+        name: 'Select',
         icon: 'button.svg',
         source: [
-          'Dropdown',
+          'Select',
         ],
         overview: [],
       },
@@ -490,7 +490,6 @@ export const structure = [
         icon: 'menu.svg',
         source: [
           'OverflowMenu',
-          'OverflowMenuItem',
         ],
         overview: [
           {

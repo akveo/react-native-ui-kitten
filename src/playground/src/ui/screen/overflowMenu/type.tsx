@@ -5,43 +5,80 @@ import {
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '../common/type';
-import {
-  Icon,
-  OverflowMenuItemType,
-} from '@kitten/ui';
-import { ImageProps } from 'react-native';
+import { OverflowMenuItemType } from '@kitten/ui';
+import { Image, ImageProps } from 'react-native';
 import { StyleType } from '@kitten/theme';
 
-const IconElement = (style: StyleType): React.ReactElement<ImageProps> => {
-  return (
-    <Icon name='star' {...style}/>
-  );
-};
+const Icon = (style: StyleType): React.ReactElement<ImageProps> => (
+  <Image
+    style={style}
+    source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+  />
+);
 
-const items: OverflowMenuItemType[] = [
+const defaultMenuItems: OverflowMenuItemType[] = [
+  { title: 'Item 1' },
+  { title: 'Item 2' },
+  { title: 'Item 3' },
+];
+
+const withIconMenuItems: OverflowMenuItemType[] = [
   {
-    text: 'Default Item',
+    title: 'Item 1',
+    icon: Icon,
   },
   {
-    text: 'Icon Item',
-    icon: IconElement,
+    title: 'Item 2',
+    icon: Icon,
   },
   {
-    text: 'Disabled Item',
+    title: 'Item 3',
+    icon: Icon,
+  },
+];
+
+const withDisabledItemMenuItems: OverflowMenuItemType[] = [
+  {
+    title: 'Item 1',
+    icon: Icon,
+  },
+  {
+    title: 'Item 2',
+    icon: Icon,
     disabled: true,
+  },
+  {
+    title: 'Item 3',
+    icon: Icon,
   },
 ];
 
 const defaultOverflowMenu: ComponentShowcaseItem = {
   title: 'Default',
   props: {
-    items: items,
+    data: defaultMenuItems,
+  },
+};
+
+const withIcons: ComponentShowcaseItem = {
+  title: 'Icon',
+  props: {
+    data: withIconMenuItems,
+  },
+};
+
+const withDisabledItem: ComponentShowcaseItem = {
+  title: 'Icon',
+  props: {
+    data: withDisabledItemMenuItems,
   },
 };
 
 const defaultSection: ComponentShowcaseSection = {
   items: [
     defaultOverflowMenu,
+    withIcons,
+    withDisabledItem,
   ],
 };
 
@@ -52,6 +89,14 @@ export const overflowMenuShowcase: ComponentShowcase = {
 };
 
 export const overflowMenuSettings: ComponentShowcaseSetting[] = [
+  {
+    propertyName: 'appearance',
+    value: 'default',
+  },
+  {
+    propertyName: 'appearance',
+    value: 'noDivider',
+  },
   {
     propertyName: 'placement',
     value: 'left',

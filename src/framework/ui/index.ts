@@ -97,13 +97,8 @@ export {
   OverflowMenu,
   OverflowMenuProps,
   OverflowMenuElement,
-} from './overflowMenu/overflowMenu.component';
-export {
-  OverflowMenuItem,
-  OverflowMenuItemProps,
   OverflowMenuItemType,
-  OverflowMenuItemElement,
-} from './overflowMenu/overflowMenuItem.component';
+} from './overflowMenu/overflowMenu.component';
 export {
   Popover,
   PopoverProps,

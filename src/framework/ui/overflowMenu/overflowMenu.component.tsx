@@ -5,23 +5,18 @@
  */
 
 import React from 'react';
-import {
-  GestureResponderEvent,
-  StyleSheet,
-  View,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
 import {
-  OverflowMenuItem,
-  OverflowMenuItemElement,
-  OverflowMenuItemProps,
-} from './overflowMenuItem.component';
+  Menu,
+  MenuElement,
+  MenuProps,
+} from '../menu/menu.component';
+import { MenuItemType } from '../menu/menuItem.component';
 import {
   Popover,
   PopoverProps,
@@ -29,17 +24,19 @@ import {
 import {
   ModalPresentingBased,
   Omit,
+  Override,
 } from '../support/typings';
 
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
+export type OverflowMenuItemType = Omit<MenuItemType, 'subItems'>;
 
 interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
   children: React.ReactElement<any>;
-  items: OverflowMenuItemProps[];
-  onSelect?: (index: number, event: GestureResponderEvent) => void;
 }
 
-export type OverflowMenuProps = & StyledComponentProps & ComponentProps;
+type MenuBasedProps = Override<MenuProps, { data: OverflowMenuItemType[] }>;
+
+export type OverflowMenuProps = & StyledComponentProps & ComponentProps & MenuBasedProps;
 export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
 
 /**
@@ -50,15 +47,19 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * @property {React.ReactElement<any>} children - Determines the element above
  * which the menu will be rendered.
  *
- * @property {OverflowMenuItemType[]} items - Determines menu items.
+ * @property {boolean} visible - determines the visibility of the component.
  *
- * @property {string} size - Determines the size of the menu items components.
- * Can be `small`, `medium` or `large`.
- * Default is `medium`.
+ * @property {OverflowMenuItemType[]} data - Determines menu items.
  *
- * @property {(event: GestureResponderEvent, index: number) => void} onSelect - Fires when selected item is changed.
+ * @property {number} selectedIndex - Determines the index of currently selected item.
  *
- * @property {Omit<PopoverProps, 'content'>}
+ * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Fires when selected item is changed.
+ *
+ * @property Omit<PopoverProps, 'content'>
+ *
+ * @property Override<MenuProps, { data: OverflowMenuItemType[] }>
+ *
+ * @property ModalPresentingBased
  *
  * @property StyledComponentProps
  *
@@ -68,34 +69,222 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * import React from 'react';
  * import {
  *   OverflowMenu,
+ *   OverflowMenuItemType,
  *   Button,
  * } from 'react-native-ui-kitten';
  *
- * export class OverflowMenuShowcase extends React.Component {
+ * interface State {
+ *   menuVisible: boolean;
+ *   selectedIndex: number;
+ * }
  *
- *   private items: OverflowMenuItemType[] = [
- *     { text: 'Menu Item 1' },
- *     { text: 'Menu Item 2' },
- *     { text: 'Menu Item 3' },
+ * export class OverflowMenuShowcase extends React.Component<any, State> {
+ *
+ *   private data: OverflowMenuItemType[] = [
+ *     { title: 'Menu Item 1' },
+ *     { title: 'Menu Item 2' },
+ *     { title: 'Menu Item 3' },
  *   ];
  *
- *   public state = {
+ *   public state: State = {
  *     menuVisible: false,
+ *     selectedIndex: null,
  *   };
  *
- *   private onItemSelect = (index: number) => {
- *     // Handle Menu Item selection
+ *   private onItemSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
  *   };
  *
- *   private toggleMenu = () => {
- *     this.setState({ menuVisible: !this.state.menuVisible });
+ *   private toggleMenu = (): void => {
+ *     const menuVisible: boolean = !this.state.menuVisible;
+ *
+ *     this.setState({ menuVisible });
  *   };
  *
  *   public render(): React.ReactNode {
  *     return (
  *       <OverflowMenu
- *         items={this.items}
+ *         data={this.items}
  *         visible={this.state.menuVisible}
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *         onBackdropPress={this.toggleMenu}>
+ *         <Button onPress={this.toggleMenu}>
+ *           TOGGLE MENU
+ *         </Button>
+ *       </OverflowMenu>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example With Icons
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   Image,
+ *   ImageProps,
+ * } from 'react-native';
+ * import {
+ *   OverflowMenu,
+ *   OverflowMenuItemType,
+ *   Button,
+ *   StyleType,
+ * } from 'react-native-ui-kitten';
+ *
+ * interface State {
+ *   menuVisible: boolean;
+ *   selectedIndex: number;
+ * }
+ *
+ * export class OverflowMenuShowcase extends React.Component<any, State> {
+ *
+ *   private data: OverflowMenuItemType[] = [
+ *     { title: 'Menu Item 1', icon: this.Icon },
+ *     { title: 'Menu Item 2', icon: this.Icon },
+ *     { title: 'Menu Item 3', icon: this.Icon },
+ *   ];
+ *
+ *   public state: State = {
+ *     menuVisible: false,
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private Icon = (style: StyleType): React.ReactElement<ImageProps> => (
+ *     <Image
+ *       style={style}
+ *       source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+ *      />
+ *   );
+ *
+ *   private onItemSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   private toggleMenu = (): void => {
+ *     const menuVisible: boolean = !this.state.menuVisible;
+ *
+ *     this.setState({ menuVisible });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <OverflowMenu
+ *         data={this.items}
+ *         visible={this.state.menuVisible}
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *         onBackdropPress={this.toggleMenu}>
+ *         <Button onPress={this.toggleMenu}>
+ *           TOGGLE MENU
+ *         </Button>
+ *       </OverflowMenu>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Disabled Item
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   OverflowMenu,
+ *   OverflowMenuItemType,
+ *   Button,
+ * } from 'react-native-ui-kitten';
+ *
+ * interface State {
+ *   menuVisible: boolean;
+ *   selectedIndex: number;
+ * }
+ *
+ * export class OverflowMenuShowcase extends React.Component<any, State> {
+ *
+ *   private data: OverflowMenuItemType[] = [
+ *     { title: 'Menu Item 1' },
+ *     { title: 'Menu Item 2', disabled: true },
+ *     { title: 'Menu Item 3' },
+ *   ];
+ *
+ *   public state: State = {
+ *     menuVisible: false,
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private onItemSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   private toggleMenu = (): void => {
+ *     const menuVisible: boolean = !this.state.menuVisible;
+ *
+ *     this.setState({ menuVisible });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <OverflowMenu
+ *         data={this.items}
+ *         visible={this.state.menuVisible}
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *         onBackdropPress={this.toggleMenu}>
+ *         <Button onPress={this.toggleMenu}>
+ *           TOGGLE MENU
+ *         </Button>
+ *       </OverflowMenu>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Without Divider
+ *
+ * ```
+ * import React from 'react';
+ * import {
+ *   OverflowMenu,
+ *   OverflowMenuItemType,
+ *   Button,
+ * } from 'react-native-ui-kitten';
+ *
+ * interface State {
+ *   menuVisible: boolean;
+ *   selectedIndex: number;
+ * }
+ *
+ * export class OverflowMenuShowcase extends React.Component<any, State> {
+ *
+ *   private data: OverflowMenuItemType[] = [
+ *     { title: 'Menu Item 1' },
+ *     { title: 'Menu Item 2' },
+ *     { title: 'Menu Item 3' },
+ *   ];
+ *
+ *   public state: State = {
+ *     menuVisible: false,
+ *     selectedIndex: null,
+ *   };
+ *
+ *   private onItemSelect = (selectedIndex: number): void => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   private toggleMenu = (): void => {
+ *     const menuVisible: boolean = !this.state.menuVisible;
+ *
+ *     this.setState({ menuVisible });
+ *   };
+ *
+ *   public render(): React.ReactNode {
+ *     return (
+ *       <OverflowMenu
+ *         appearance='noDivider'
+ *         data={this.items}
+ *         visible={this.state.menuVisible}
+ *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
  *         onBackdropPress={this.toggleMenu}>
  *         <Button onPress={this.toggleMenu}>
@@ -108,7 +297,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * ```
  */
 
-export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
+class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   static styledComponentName: string = 'OverflowMenu';
 
@@ -116,92 +305,45 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     indicatorOffset: 12,
   };
 
-  private onItemSelect = (index: number, event: GestureResponderEvent): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(index, event);
-    }
-  };
-
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
-      dividerHeight,
-      dividerBackgroundColor,
       indicatorBackgroundColor,
       ...containerParameters
     } = source;
 
     return {
       container: containerParameters,
-      divider: {
-        height: dividerHeight,
-        backgroundColor: dividerBackgroundColor,
-      },
       indicator: {
         backgroundColor: indicatorBackgroundColor,
       },
-      item: {},
     };
   };
 
-  private isLastItem = (index: number): boolean => {
-    return index === this.props.items.length - 1;
-  };
-
-  private renderItemElement = (item: OverflowMenuItemProps,
-                               index: number,
-                               style: StyleType): OverflowMenuItemElement => {
+  private renderPopoverContentElement = (style: StyleType): MenuElement => {
+    const { themedStyle, indicatorStyle, children, data, ...restProps } = this.props;
 
     return (
-      <OverflowMenuItem
-        key={index}
-        style={style}
-        {...item}
-        index={index}
-        onPress={this.onItemSelect}
+      <Menu
+        {...restProps}
+        data={data}
+        style={[styles.menu, style]}
+        initialNumToRender={data.length}
+        bounces={false}
       />
     );
   };
 
-  private renderContentElementChildren = (style: StyleType): OverflowMenuItemElement[] => {
-    return this.props.items.map((item: OverflowMenuItemProps, index: number) => {
-      const itemElement: OverflowMenuItemElement = this.renderItemElement(item, index, style.item);
-
-      const isLastItem: boolean = this.isLastItem(index);
-
-      const borderStyle: ViewStyle = {
-        borderBottomColor: style.divider.backgroundColor,
-
-        // @ts-ignore: divider `height` is restricted to be a number
-        borderBottomWidth: isLastItem ? 0 : style.divider.height,
-      };
-
-      return React.cloneElement(itemElement, {
-        style: [itemElement.props.style, borderStyle],
-      });
-    });
-  };
-
-  private renderPopoverContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const menuItems: OverflowMenuItemElement[] = this.renderContentElementChildren(style);
-
-    return (
-      <View style={this.props.style}>
-        {menuItems}
-      </View>
-    );
-  };
-
   public render(): React.ReactNode {
-    const { themedStyle, style, indicatorStyle, children, ...restProps } = this.props;
-    const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const { themedStyle, style, indicatorStyle, children, appearance, ...restProps } = this.props;
+    const { container, indicator } = this.getComponentStyle(themedStyle);
 
-    const contentElement: React.ReactElement<ViewProps> = this.renderPopoverContentElement(componentStyle);
+    const contentElement: MenuElement = this.renderPopoverContentElement(container);
 
     return (
       <Popover
         {...restProps}
-        style={[container, styles.container, style]}
-        indicatorStyle={[indicator, styles.indicator, indicatorStyle]}
+        style={[styles.container, style]}
+        indicatorStyle={[indicator, indicatorStyle]}
         content={contentElement}>
         {children}
       </Popover>
@@ -213,9 +355,9 @@ const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
   },
-  indicator: {},
-  divider: {},
-  item: {},
+  menu: {
+    flexGrow: 0,
+  },
 });
 
 export const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);
