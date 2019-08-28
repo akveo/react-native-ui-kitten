@@ -15,6 +15,12 @@
     "paths": {
       "@kitten/*": [
         "./src/framework/*"
+      ],
+      "@ui-kitten/*": [
+        "./src/*"
+      ],
+      "react-native-ui-kitten": [
+        "./src/framework"
       ]
     }
   }
