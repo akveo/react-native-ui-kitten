@@ -1,6 +1,6 @@
 {
   "name": "react-native-ui-kitten",
-  "version": "4.1.0",
+  "version": "4.2.0-beta.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
@@ -38,7 +38,8 @@
     "publish": "./scripts/publish/publish.sh",
     "release:prepare": "npm run clean && npm run build:prod",
     "release:validate": "npm run lint && npm run test",
-    "release": "npm run release:prepare && npm run release:validate && npm run publish",
+    "release:framework": "npm run release:prepare && npm run release:validate && npm run publish-framework",
+    "release:modules": "npm run release:prepare && npm run release:validate && npm run publish-modules",
     "test": "jest"
   },
   "dependencies": {
