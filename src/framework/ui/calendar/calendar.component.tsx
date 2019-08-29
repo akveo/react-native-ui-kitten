@@ -41,6 +41,7 @@ import {
 import { DateService } from './service/date.service';
 import { NativeDateService } from './service/nativeDate.service';
 import { CalendarDataService } from './service/calendarData.service';
+import { Divider } from '../divider/divider.component';
 
 interface ComponentProps<D> extends ViewProps {
   min?: D;
@@ -356,11 +357,17 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     return props.theme !== nextProps.theme;
   };
 
-  private getCalendarHeaderStyle = (source: StyleType): StyleType => {
+  private getCalendarStyle = (source: StyleType): StyleType => {
     return {
       container: {
+        padding: source.padding,
+        borderColor: source.borderColor,
+        borderWidth: source.borderWidth,
+        borderRadius: source.borderRadius,
+      },
+      headerContainer: {
         paddingHorizontal: source.headerPaddingHorizontal,
-        paddingVertical: source.headerPaddingVertical,
+        paddingBottom: source.headerPaddingBottom,
       },
       title: {
         fontSize: source.titleFontSize,
@@ -374,6 +381,9 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         height: source.iconHeight,
         marginHorizontal: source.iconMarginHorizontal,
         tintColor: source.iconTintColor,
+      },
+      divider: {
+        marginVertical: source.dividerMarginVertical,
       },
     };
   };
@@ -483,22 +493,23 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private onCalendarPagerLeft = (): void => {
-    const ref: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
-    const index: number = this.getCalendarPagerIndex();
-
-    this.onCalendarPagerMove(ref, index, -1);
+    this.onCalendarPagerMove(-1);
   };
 
   private onCalendarPagerRight = (): void => {
+    this.onCalendarPagerMove(1);
+  };
+
+  private onCalendarPagerMove = (step: 1 | -1): void => {
     const ref: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
     const index: number = this.getCalendarPagerIndex();
 
-    this.onCalendarPagerMove(ref, index, 1);
+    this.onCalendarPagerMoveStart(ref, index, step);
   };
 
-  private onCalendarPagerMove = (ref: React.RefObject<CalendarPager<D>>,
-                                 index: number,
-                                 step: number): void => {
+  private onCalendarPagerMoveStart = (ref: React.RefObject<CalendarPager<D>>,
+                                      index: number,
+                                      step: number): void => {
 
     ref.current.scrollToIndex({
       index: index + step,
@@ -579,13 +590,16 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderDayPickerPagerElement = (date: D): React.ReactElement<ViewProps> => {
+    const { themedStyle } = this.props;
     const visibleDayPickerIndex: number = this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
+    const { divider } = this.getCalendarStyle(themedStyle);
 
     return (
       <React.Fragment>
         <CalendarMonthHeader data={this.dateService.getDayOfWeekNames()}>
           {this.renderWeekdayElement}
         </CalendarMonthHeader>
+        <Divider style={divider}/>
         <CalendarPager
           ref={this.calendarDayPagerRef}
           selectedIndex={visibleDayPickerIndex}
@@ -656,16 +670,16 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
 
   private renderCalendarHeader = (): CalendarHeaderElement => {
     const { themedStyle, title } = this.props;
-    const headerStyle: StyleType = this.getCalendarHeaderStyle(themedStyle);
+    const { headerContainer, title: titleStyle, icon } = this.getCalendarStyle(themedStyle);
 
     const titleSelector = title || this.createHeaderTitle;
 
     return (
       <CalendarHeader
-        style={headerStyle.container}
+        style={headerContainer}
         title={titleSelector(this.state.visibleDate, this.state.viewMode)}
-        titleStyle={headerStyle.title}
-        iconStyle={headerStyle.icon}
+        titleStyle={titleStyle}
+        iconStyle={icon}
         lateralNavigationAllowed={this.isLateralNavigationAllowed()}
         onTitlePress={this.onPickerNavigationPress}
         onLeft={this.onCalendarPagerLeft}
@@ -675,12 +689,13 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, ...restProps } = this.props;
+    const { style, themedStyle, ...restProps } = this.props;
+    const { container } = this.getCalendarStyle(themedStyle);
 
     return (
       <View
         {...restProps}
-        style={[styles.container, style]}>
+        style={[styles.container, container, style]}>
         {this.renderCalendarHeader()}
         {this.renderPickerElement(this.state.visibleDate)}
       </View>
