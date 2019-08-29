@@ -15,7 +15,10 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { CalendarHeader } from './components/calendarHeader.component';
+import {
+  CalendarHeader,
+  CalendarHeaderElement,
+} from './components/calendarHeader.component';
 import { CalendarMonthHeader } from './components/calendarMonthHeader.component';
 import {
   CalendarPager,
@@ -256,6 +259,8 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
+  private calendarDayPagerRef: React.RefObject<CalendarPager<D>> = React.createRef();
+  private calendarYearPagerRef: React.RefObject<CalendarPager<D>> = React.createRef();
 
   private get dateService(): DateService<D> {
     return this.props.dateService;
@@ -364,11 +369,11 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         marginHorizontal: source.titleMarginHorizontal,
         color: source.titleColor,
       },
-      subtitle: {
-        fontSize: source.subtitleFontSize,
-        fontWeight: source.subtitleFontWeight,
-        lineHeight: source.subtitleLineHeight,
-        marginHorizontal: source.subtitleMarginHorizontal,
+      icon: {
+        width: source.iconWidth,
+        height: source.iconHeight,
+        marginHorizontal: source.iconMarginHorizontal,
+        tintColor: source.iconTintColor,
       },
     };
   };
@@ -459,6 +464,53 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     return 'Today';
   };
 
+  private getCalendarPagerIndex = (): number => {
+    switch (this.state.viewMode.id) {
+      case CalendarViewModes.DATE.id:
+        return this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
+      case CalendarViewModes.YEAR.id:
+        return Math.floor(this.dataService.getNumberOfYears(this.min, this.state.visibleDate) / VIEWS_IN_PICKER);
+    }
+  };
+
+  private getCurrentPagerRef = (): React.RefObject<CalendarPager<D>> => {
+    switch (this.state.viewMode.id) {
+      case CalendarViewModes.DATE.id:
+        return this.calendarDayPagerRef;
+      case CalendarViewModes.YEAR.id:
+        return this.calendarYearPagerRef;
+    }
+  };
+
+  private onCalendarPagerLeft = (): void => {
+    const ref: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
+    const index: number = this.getCalendarPagerIndex();
+
+    this.onCalendarPagerMove(ref, index, -1);
+  };
+
+  private onCalendarPagerRight = (): void => {
+    const ref: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
+    const index: number = this.getCalendarPagerIndex();
+
+    this.onCalendarPagerMove(ref, index, 1);
+  };
+
+  private onCalendarPagerMove = (ref: React.RefObject<CalendarPager<D>>,
+                                 index: number,
+                                 step: number): void => {
+
+    ref.current.scrollToIndex({
+      index: index + step,
+      animated: true,
+    });
+  };
+
+  private isLateralNavigationAllowed = (): boolean => {
+    return this.state.viewMode.id === CalendarViewModes.DATE.id ||
+      this.state.viewMode.id === CalendarViewModes.YEAR.id;
+  };
+
   private renderWeekdayElement = (weekday: string, index: number): CalendarDateContentElement => {
     return (
       <CalendarDateContent
@@ -535,6 +587,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
           {this.renderWeekdayElement}
         </CalendarMonthHeader>
         <CalendarPager
+          ref={this.calendarDayPagerRef}
           selectedIndex={visibleDayPickerIndex}
           data={this.dataService.createDayPickerPagerData(this.min, this.max)}
           onSelect={this.onDayPickerPagerSelect}
@@ -580,6 +633,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
 
     return (
       <CalendarPager
+        ref={this.calendarYearPagerRef}
         selectedIndex={visibleYearPickerIndex}
         data={this.dataService.createYearPickerPagerData(this.min, this.max, PICKER_ROWS, PICKER_COLUMNS)}
         onSelect={this.onYearPickerPagerSelect}
@@ -600,26 +654,34 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     }
   };
 
-  public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, title, todayTitle, ...restProps } = this.props;
+  private renderCalendarHeader = (): CalendarHeaderElement => {
+    const { themedStyle, title } = this.props;
     const headerStyle: StyleType = this.getCalendarHeaderStyle(themedStyle);
 
     const titleSelector = title || this.createHeaderTitle;
-    const todayTitleSelector = todayTitle || this.createTodayTitle;
+
+    return (
+      <CalendarHeader
+        style={headerStyle.container}
+        title={titleSelector(this.state.visibleDate, this.state.viewMode)}
+        titleStyle={headerStyle.title}
+        iconStyle={headerStyle.icon}
+        lateralNavigationAllowed={this.isLateralNavigationAllowed()}
+        onTitlePress={this.onPickerNavigationPress}
+        onLeft={this.onCalendarPagerLeft}
+        onRight={this.onCalendarPagerRight}
+      />
+    );
+  };
+
+  public render(): React.ReactElement<ViewProps> {
+    const { style, ...restProps } = this.props;
 
     return (
       <View
         {...restProps}
         style={[styles.container, style]}>
-        <CalendarHeader
-          style={headerStyle.container}
-          titleStyle={headerStyle.title}
-          subtitleStyle={headerStyle.subtitle}
-          title={titleSelector(this.state.visibleDate, this.state.viewMode)}
-          subtitle={todayTitleSelector(this.dateService.today())}
-          onTitlePress={this.onPickerNavigationPress}
-          onSubtitlePress={this.onTodayPress}
-        />
+        {this.renderCalendarHeader()}
         {this.renderPickerElement(this.state.visibleDate)}
       </View>
     );

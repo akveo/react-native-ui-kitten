@@ -13,8 +13,8 @@ const now: Date = new Date();
 
 const defaultCalendar: ComponentShowcaseItem = {
   props: {
-    // min: new Date(now.getFullYear(), now.getMonth(), 1),
-    // max: new Date(now.getFullYear(), now.getMonth() + 1, 0),
+    min: new Date(now.getFullYear() - 12, 0, 1),
+    max: new Date(now.getFullYear() + 12, 0, 1),
   },
 };
 
@@ -163,8 +163,8 @@ export const calendarShowcase: ComponentShowcase = {
     // momentSection,
     // dateFnsSection,
     // startViewSection,
-    lowerBoundedSection,
-    higherBoundedSection,
+    // lowerBoundedSection,
+    // higherBoundedSection,
     // customItemSection,
     // boundingMonthSection,
     // filterSection,

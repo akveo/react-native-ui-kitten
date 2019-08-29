@@ -16,6 +16,12 @@ export type CalendarPagerElement<D> = React.ReactElement<CalendarPagerProps<D>>;
 
 export class CalendarPager<D> extends React.Component<CalendarPagerProps<D>> {
 
+  public scrollToIndex(params: { index: number, animated?: boolean }) {
+    this.viewPagerRef.current.scrollToIndex(params);
+  }
+
+  private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
+
   private onSelect = (index: number) => {
     // TODO: This fixes layout junks (for any reason)
     setTimeout(() => {
@@ -43,6 +49,7 @@ export class CalendarPager<D> extends React.Component<CalendarPagerProps<D>> {
     return (
       <ViewPager
         {...restProps}
+        ref={this.viewPagerRef}
         shouldLoadComponent={this.shouldLoadComponent}
         onSelect={this.onSelect}>
         {data.map(this.createChildElement)}
