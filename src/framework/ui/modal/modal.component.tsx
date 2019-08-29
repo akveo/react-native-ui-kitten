@@ -288,6 +288,7 @@ export class Modal extends React.Component<ModalProps> {
     const measureStyledModal: React.ReactElement = React.cloneElement(modal, {
       style: [modal.props.style, styles.hiddenModal],
       key: TAG_CHILD,
+      pointerEvents: 'none',
     });
 
     return (
