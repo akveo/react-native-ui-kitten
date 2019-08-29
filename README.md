@@ -34,7 +34,7 @@ There is a huge variety of customizable layouts, use “as is” or add new bloc
 Start a new app with UI Kitten template from a scratch:
 
 ```bash
-react-native init --template ui-kitten
+react-native init AwesomeApp --template ui-kitten
 ```
 
 This will setup a new React Native application configured with UI Kitten.
