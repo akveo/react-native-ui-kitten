@@ -36,6 +36,7 @@ const rootDependencyFolders = [
  */
 const playgroundExtraModules = {
   '@babel/runtime': path.resolve(__dirname, './node_modules/@babel/runtime'),
+  'regenerator-runtime': path.resolve(__dirname, './node_modules/regenerator-runtime'),
   'react': path.resolve(__dirname, './node_modules/react'),
   'react-native': path.resolve(__dirname, './node_modules/react-native'),
 };
