@@ -1,3 +1,32 @@
+## 4.2.0-beta.1 (2019-08-29)
+
+* refactor(framework): install-templates functionality return ([8b3642f](https://github.com/akveo/react-native-ui-kitten/commit/8b3642f))
+* refactor(ui): bottom-navigation documentation update ([144abb4](https://github.com/akveo/react-native-ui-kitten/commit/144abb4))
+* refactor(ui): dropdown styles and refactor ([f488839](https://github.com/akveo/react-native-ui-kitten/commit/f488839))
+* refactor(ui): export react element types ([fced535](https://github.com/akveo/react-native-ui-kitten/commit/fced535))
+* refactor(ui): overflow-menu re-implement ([324995a](https://github.com/akveo/react-native-ui-kitten/commit/324995a))
+* refactor(ui): spinner playground and documentation refactor ([2decd53](https://github.com/akveo/react-native-ui-kitten/commit/2decd53))
+* fix(docs): landing style fix ([e88e90b](https://github.com/akveo/react-native-ui-kitten/commit/e88e90b))
+* fix(ui): fix a bug with view pager where slides could go out of boundry ([1011189](https://github.com/akveo/react-native-ui-kitten/commit/1011189))
+* fix(ui): modal docs fix ([9a93a70](https://github.com/akveo/react-native-ui-kitten/commit/9a93a70))
+* fix(ui): sub-menu components items onPress handling fix ([573d76c](https://github.com/akveo/react-native-ui-kitten/commit/573d76c))
+* fix(ui): view-pager - external state control ([e5285d7](https://github.com/akveo/react-native-ui-kitten/commit/e5285d7))
+* feat(docs): overview-examples handling add ([5b7cdeb](https://github.com/akveo/react-native-ui-kitten/commit/5b7cdeb))
+* feat(eva-icons): add eva-icons module ([e1a1495](https://github.com/akveo/react-native-ui-kitten/commit/e1a1495))
+* feat(template): add ui-kitten template projects ([0a3ec77](https://github.com/akveo/react-native-ui-kitten/commit/0a3ec77))
+* feat(ui): drawer component ([e98f3ea](https://github.com/akveo/react-native-ui-kitten/commit/e98f3ea))
+* feat(ui): dropdown component ([1b2211c](https://github.com/akveo/react-native-ui-kitten/commit/1b2211c))
+* feat(ui): menu component ([73abe87](https://github.com/akveo/react-native-ui-kitten/commit/73abe87))
+* feat(ui): popover - autoplacement ([27eac63](https://github.com/akveo/react-native-ui-kitten/commit/27eac63))
+* feat(ui): RTL support ([14bf854](https://github.com/akveo/react-native-ui-kitten/commit/14bf854))
+* feat(ui): select styles namings refactor ([6eec5ca](https://github.com/akveo/react-native-ui-kitten/commit/6eec5ca))
+* feat(ui): spinner component ([c80d62d](https://github.com/akveo/react-native-ui-kitten/commit/c80d62d))
+* docs(ui): overview-examples add ([647f254](https://github.com/akveo/react-native-ui-kitten/commit/647f254))
+* build(common): update expo to sdk 34 ([c72f7f6](https://github.com/akveo/react-native-ui-kitten/commit/c72f7f6))
+* feat(ui/theme): "modal-team" missing update functionality add ([71dd6f7](https://github.com/akveo/react-native-ui-kitten/commit/71dd6f7))
+
+
+
 ## 4.1.0 (2019-07-10)
 
 * docs(guides): fix create-screen import typo ([20134ab](https://github.com/akveo/react-native-ui-kitten/commit/20134ab))
