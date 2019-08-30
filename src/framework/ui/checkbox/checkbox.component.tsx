@@ -146,7 +146,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * ```
  * import React from 'react';
- * import { CheckBox } from '@kitten/ui';
+ * import { CheckBox } from 'react-native-ui-kitten';
  * import { View } from 'react-native';
  *
  * interface State {

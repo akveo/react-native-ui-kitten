@@ -85,7 +85,7 @@ interface State {
 }
 
 /**
- * Styled Select (Select) component.
+ * Styled `Select` component.
  *
  * @extends React.Component
  *
@@ -137,7 +137,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -183,7 +183,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -230,7 +230,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -282,8 +282,8 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
- * import { StyleType } from '@kitten/theme';
+ *   StyleType
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -342,7 +342,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
