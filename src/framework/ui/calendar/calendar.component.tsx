@@ -54,6 +54,7 @@ interface ComponentProps<D> extends ViewProps {
   todayTitle?: (date: D) => string;
   filter?: (date: D) => boolean;
   onSelect?: (date: D) => void;
+  renderFooter?: () => React.ReactElement<any>;
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
   renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
@@ -325,7 +326,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     });
   };
 
-  private onTodayPress = () => {
+  public onToday = () => {
     this.setState({
       viewMode: CalendarViewModes.DATE,
       visibleDate: this.dateService.today(),
@@ -668,6 +669,12 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     }
   };
 
+  private renderCalendarFooter = (): React.ReactElement<any> => {
+    const { renderFooter } = this.props;
+
+    return renderFooter && renderFooter();
+  };
+
   private renderCalendarHeader = (): CalendarHeaderElement => {
     const { themedStyle, title } = this.props;
     const { headerContainer, title: titleStyle, icon } = this.getCalendarStyle(themedStyle);
@@ -698,6 +705,7 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
         style={[styles.container, container, style]}>
         {this.renderCalendarHeader()}
         {this.renderPickerElement(this.state.visibleDate)}
+        {this.renderCalendarFooter()}
       </View>
     );
   }

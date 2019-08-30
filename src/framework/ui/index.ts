@@ -27,6 +27,7 @@ export {
   Calendar,
   CalendarProps,
   CalendarElement,
+  CalendarComponent,
 } from './calendar/calendar.component';
 export {
   CalendarViewMode,

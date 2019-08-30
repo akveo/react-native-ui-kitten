@@ -15,6 +15,7 @@ const defaultCalendar: ComponentShowcaseItem = {
   props: {
     min: new Date(now.getFullYear() - 12, 0, 1),
     max: new Date(now.getFullYear() + 12, 0, 1),
+    withFooter: true,
   },
 };
 
