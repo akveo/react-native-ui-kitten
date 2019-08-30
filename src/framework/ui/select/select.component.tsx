@@ -85,7 +85,7 @@ interface State {
 }
 
 /**
- * Styled Select (Select) component.
+ * Styled `Select` component.
  *
  * @extends React.Component
  *

@@ -22,7 +22,7 @@ export type DrawerProps = StyledComponentProps & ComponentProps & MenuProps;
 export type DrawerElement = React.ReactElement<DrawerProps>;
 
 /**
- * Styled Navigation Drawer component. The principle of rendering a Drawer is the same as a rendering a List.
+ * Styled `Navigation Drawer` component. The principle of rendering a `Drawer` is the same as a rendering a List.
  *
  * @extends React.Component
  *
