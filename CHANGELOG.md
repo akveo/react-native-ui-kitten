@@ -1,10 +1,5 @@
 ## 4.2.0-beta.2 (2019-08-30)
 
-* release: v.4.2.0-beta.1 ([6f535ea](https://github.com/akveo/react-native-ui-kitten/commit/6f535ea))
-* release: v4.2.0-beta.2 ([9dc1e1e](https://github.com/akveo/react-native-ui-kitten/commit/9dc1e1e))
-
-## 4.2.0-beta.1 (2019-08-29)
-
 * refactor(framework): install-templates functionality return ([8b3642f](https://github.com/akveo/react-native-ui-kitten/commit/8b3642f))
 * refactor(ui): bottom-navigation documentation update ([144abb4](https://github.com/akveo/react-native-ui-kitten/commit/144abb4))
 * refactor(ui): dropdown styles and refactor ([f488839](https://github.com/akveo/react-native-ui-kitten/commit/f488839))
