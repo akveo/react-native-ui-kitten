@@ -1,4 +1,4 @@
-## 4.2.0-beta.1 (2019-08-29)
+## 4.2.0-beta.2 (2019-08-30)
 
 * refactor(framework): install-templates functionality return ([8b3642f](https://github.com/akveo/react-native-ui-kitten/commit/8b3642f))
 * refactor(ui): bottom-navigation documentation update ([144abb4](https://github.com/akveo/react-native-ui-kitten/commit/144abb4))
