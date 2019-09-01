@@ -104,7 +104,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <OverflowMenu
- *         data={this.items}
+ *         data={this.data}
  *         visible={this.state.menuVisible}
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
@@ -171,7 +171,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <OverflowMenu
- *         data={this.items}
+ *         data={this.data}
  *         visible={this.state.menuVisible}
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
@@ -226,7 +226,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *   public render(): React.ReactNode {
  *     return (
  *       <OverflowMenu
- *         data={this.items}
+ *         data={this.data}
  *         visible={this.state.menuVisible}
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
@@ -282,7 +282,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *     return (
  *       <OverflowMenu
  *         appearance='noDivider'
- *         data={this.items}
+ *         data={this.data}
  *         visible={this.state.menuVisible}
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
