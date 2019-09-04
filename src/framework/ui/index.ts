@@ -39,6 +39,9 @@ export {
   CheckBoxElement,
 } from './checkbox/checkbox.component';
 export {
+  Datepicker,
+} from './datepicker/datepicker.component';
+export {
   Drawer,
   DrawerProps,
   DrawerElement,

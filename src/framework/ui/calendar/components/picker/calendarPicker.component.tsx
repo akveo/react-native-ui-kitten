@@ -8,6 +8,7 @@ import React from 'react';
 import {
   View,
   ViewProps,
+  StyleProp,
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 import {
@@ -30,6 +31,7 @@ interface ComponentProps<D> extends ViewProps {
   onSelect?: (item: CalendarDateInfo<D>) => void;
   renderItem: (item: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
   shouldItemUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
+  rowStyle?: StyleProp<ViewProps>;
 }
 
 export type CalendarPickerProps<D> = ComponentProps<D>;
@@ -55,8 +57,11 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
   };
 
   private renderRowElement = (item: CalendarDateInfo<D>[], index: number): CalendarPickerRowElement<D> => {
+    const { rowStyle } = this.props;
+
     return (
       <CalendarPickerRow
+        style={rowStyle}
         key={index}
         data={item}
         renderItem={this.renderCellElement}

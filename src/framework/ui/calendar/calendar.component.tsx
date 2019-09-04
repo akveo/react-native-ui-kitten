@@ -386,6 +386,9 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
       divider: {
         marginVertical: source.dividerMarginVertical,
       },
+      row: {
+        minHeight: source.rowMinHeight,
+      },
     };
   };
 
@@ -575,11 +578,14 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderDayPickerElement = (date: CalendarDateInfo<D>, index: number): CalendarPickerElement<D> => {
+    const { row } = this.getCalendarStyle(this.props.themedStyle);
+
     return (
       <CalendarPicker
         key={index}
         category='day'
         data={this.dataService.createDayPickerData(date.date)}
+        rowStyle={row}
         onSelect={this.onDaySelect}
         isItemSelected={this.isDaySelected}
         isItemDisabled={this.isDayDisabled}
@@ -614,10 +620,13 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderMonthPickerElement = (date: D): CalendarPagerElement<D> => {
+    const { row } = this.getCalendarStyle(this.props.themedStyle);
+
     return (
       <CalendarPicker
         category='month'
         data={this.dataService.createMonthPickerData(date, PICKER_ROWS, PICKER_COLUMNS)}
+        rowStyle={row}
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
         isItemDisabled={this.isMonthDisabled}
@@ -628,11 +637,14 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private renderYearPickerElement = (date: CalendarDateInfo<D>, index: number): React.ReactElement<ViewProps> => {
+    const { row } = this.getCalendarStyle(this.props.themedStyle);
+
     return (
       <CalendarPicker
         key={index}
         category='year'
         data={this.dataService.createYearPickerData(date.date, PICKER_ROWS, PICKER_COLUMNS)}
+        rowStyle={row}
         onSelect={this.onYearSelect}
         isItemSelected={this.isYearSelected}
         isItemDisabled={this.isYearDisabled}

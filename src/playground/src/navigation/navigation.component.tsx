@@ -32,6 +32,7 @@ import {
   IconContainer,
   MenuContainer,
   CalendarContainer,
+  DatepickerContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
 
@@ -48,6 +49,7 @@ const routes: NavigationRouteConfigMap = {
   ['Calendar']: CalendarContainer,
   ['Checkbox']: CheckBoxContainer,
   ['Drawer']: DrawerContainer,
+  ['Datepicker']: DatepickerContainer,
   ['Icon']: IconContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,
@@ -69,7 +71,7 @@ const routes: NavigationRouteConfigMap = {
 };
 
 const MenuNavigator = createStackNavigator(routes, {
-  initialRouteName: 'Calendar',
+  initialRouteName: 'Datepicker',
   headerMode: 'screen',
 });
 
