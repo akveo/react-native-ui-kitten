@@ -49,6 +49,7 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
         disabled={this.props.isItemDisabled(item)}
         bounding={item.bounding}
         today={this.props.isItemToday(item)}
+        range={item.range}
         onSelect={this.props.onSelect}
         shouldComponentUpdate={this.props.shouldItemUpdate}>
         {this.props.renderItem}

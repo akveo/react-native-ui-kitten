@@ -22,7 +22,7 @@ export class DatepickerContainer extends React.Component<any, State> {
     modalVisible: false,
   };
 
-  private setDate = (date: Date): void => {
+  private setDate = (date: Date, range: any): void => {
     this.setState({ date });
   };
 
@@ -35,24 +35,33 @@ export class DatepickerContainer extends React.Component<any, State> {
   public render(): React.ReactNode {
     return (
       <View style={styles.container}>
-        {/*<Calendar*/}
+        {/*<Datepicker*/}
           {/*date={this.state.date}*/}
           {/*onSelect={this.setDate}*/}
         {/*/>*/}
 
-        <Modal
-          style={{ width: '100%'}}
-          allowBackdrop={true}
-          visible={this.state.modalVisible}
-          onBackdropPress={this.setModalVisible}
-        >
-          <Calendar
-            date={this.state.date}
-            onSelect={this.setDate}
-          />
-        </Modal>
+        <Calendar
+          date={this.state.date}
+          min={new Date(new Date().getFullYear(), 8, 1)}
+          max={new Date(new Date().getFullYear() , 8, 30)}
+          // startDate={new Date('2019-09-07T21:00:00.000Z')}
+          // endDate={new Date('2019-09-12T21:00:00.000Z')}
+          // range
+          onSelect={this.setDate}
+        />
 
-        <Button onPress={this.setModalVisible}>Show Calendar</Button>
+        {/*<Modal*/}
+          {/*style={{ width: '100%'}}*/}
+          {/*allowBackdrop={true}*/}
+          {/*visible={this.state.modalVisible}*/}
+          {/*onBackdropPress={this.setModalVisible}*/}
+        {/*>*/}
+          {/*<Calendar*/}
+            {/*date={this.state.date}*/}
+            {/*onSelect={this.setDate}*/}
+          {/*/>*/}
+        {/*</Modal>*/}
+        {/*<Button onPress={this.setModalVisible}>Show Calendar</Button>*/}
       </View>
     );
   }

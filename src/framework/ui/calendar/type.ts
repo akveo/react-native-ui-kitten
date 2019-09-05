@@ -1,6 +1,12 @@
 export interface CalendarDateOptions {
   bounding: boolean;
   holiday: boolean;
+  range?: boolean;
+}
+
+export interface CalendarRange<D> {
+  startDate?: D;
+  endDate?: D;
 }
 
 export interface CalendarDateInfo<D> extends CalendarDateOptions {

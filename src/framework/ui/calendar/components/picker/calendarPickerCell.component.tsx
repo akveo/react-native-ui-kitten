@@ -25,6 +25,7 @@ interface ComponentProps<D> extends TouchableOpacityProps {
   selected?: boolean;
   bounding?: boolean;
   today?: boolean;
+  range?: boolean;
   onSelect?: (date: CalendarDateInfo<D>) => void;
   children: ChildrenProp<D>;
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;

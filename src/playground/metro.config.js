@@ -34,6 +34,7 @@ const rootDependencyFolders = [
   path.resolve(__dirname, '../../node_modules/fecha'),
   path.resolve(__dirname, '../../node_modules/moment'),
   path.resolve(__dirname, '../../node_modules/date-fns'),
+  path.resolve(__dirname, '../../node_modules/@welldone-software/why-did-you-render'),
 ];
 
 /**

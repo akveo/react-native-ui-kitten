@@ -35,6 +35,7 @@ import {
 } from './components/calendarDateContent.component';
 import {
   CalendarDateInfo,
+  CalendarRange,
   CalendarViewMode,
   CalendarViewModes,
 } from './type';
@@ -47,13 +48,16 @@ interface ComponentProps<D> extends ViewProps {
   min?: D;
   max?: D;
   date?: D;
+  range?: boolean;
+  startDate?: D;
+  endDate?: D;
   dateService?: DateService<D>;
   boundingMonth?: boolean;
   startView?: CalendarViewMode;
   title?: (date: D, viewMode: CalendarViewMode) => string;
   todayTitle?: (date: D) => string;
   filter?: (date: D) => boolean;
-  onSelect?: (date: D) => void;
+  onSelect?: (date: D, range?: CalendarRange<D>) => void;
   renderFooter?: () => React.ReactElement<any>;
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
@@ -63,6 +67,8 @@ interface ComponentProps<D> extends ViewProps {
 interface State<D> {
   viewMode: CalendarViewMode;
   visibleDate: D;
+  rangeStartDate: D;
+  rangeEndDate: D;
 }
 
 export type CalendarProps<D> = StyledComponentProps & ComponentProps<D>;
@@ -258,6 +264,8 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   public state: State<D> = {
     viewMode: this.props.startView,
     visibleDate: this.dateService.getMonthStart(this.date),
+    rangeStartDate: this.props.startDate ? this.props.startDate : null,
+    rangeEndDate: this.props.endDate ? this.props.endDate : null,
   };
 
   private dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
@@ -281,9 +289,49 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   }
 
   private onDaySelect = (date: CalendarDateInfo<D>) => {
-    if (this.props.onSelect) {
-      this.props.onSelect(date.date);
+    const { range, onSelect } = this.props;
+
+    if (range) {
+      this.handleRangeSelect(date);
+    } else {
+      onSelect && onSelect(date.date);
     }
+  };
+
+  private handleRangeSelect = (date: CalendarDateInfo<D>): void => {
+    const { rangeStartDate, rangeEndDate } = this.state;
+
+    if (!rangeStartDate && !rangeEndDate) {
+      this.setState({ rangeStartDate: date.date }, this.onSelectRange);
+    } else if (rangeStartDate && !rangeEndDate) {
+      if (this.dateService.compareDatesSafe(rangeStartDate, date.date) === 1) {
+        const startDate: D = this.state.rangeStartDate;
+        this.setState({
+          rangeStartDate: date.date,
+          rangeEndDate: startDate,
+        }, this.onSelectRange);
+      } else {
+        this.setState({ rangeEndDate: date.date }, this.onSelectRange);
+      }
+    } else if (rangeStartDate && rangeEndDate) {
+      if (this.dateService.compareDatesSafe(date.date, rangeStartDate) === -1 &&
+          this.dateService.compareDatesSafe(date.date, rangeEndDate) === -1) {
+        this.setState({ rangeStartDate: date.date}, this.onSelectRange);
+      } else if (this.dateService.compareDatesSafe(date.date, rangeStartDate) === 1 &&
+        this.dateService.compareDatesSafe(date.date, rangeEndDate) === 1) {
+        this.setState({ rangeEndDate: date.date}, this.onSelectRange);
+      } else if (this.dateService.isBetween(date.date, rangeStartDate, rangeEndDate)) {
+        this.setState({ rangeEndDate: date.date}, this.onSelectRange);
+      }
+    }
+  };
+
+  private onSelectRange = (): void => {
+    const { onSelect } = this.props;
+    const { rangeStartDate, rangeEndDate } = this.state;
+    const range: CalendarRange<D> = { startDate: rangeStartDate, endDate: rangeEndDate };
+
+    onSelect && onSelect(null, range);
   };
 
   private onMonthSelect = (date: CalendarDateInfo<D>) => {
@@ -350,8 +398,9 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
 
     const selectionChanged: boolean = props.selected !== nextProps.selected;
     const disablingChanged: boolean = props.disabled !== nextProps.disabled;
+    const rangeChanged: boolean = props.range !== nextProps.range;
 
-    if (selectionChanged || disablingChanged) {
+    if (selectionChanged || disablingChanged || rangeChanged) {
       return true;
     }
 
@@ -579,12 +628,16 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
 
   private renderDayPickerElement = (date: CalendarDateInfo<D>, index: number): CalendarPickerElement<D> => {
     const { row } = this.getCalendarStyle(this.props.themedStyle);
+    const range: CalendarRange<D> = {
+      startDate: this.state.rangeStartDate,
+      endDate: this.state.rangeEndDate,
+    };
 
     return (
       <CalendarPicker
         key={index}
         category='day'
-        data={this.dataService.createDayPickerData(date.date)}
+        data={this.dataService.createDayPickerData(date.date, range)}
         rowStyle={row}
         onSelect={this.onDaySelect}
         isItemSelected={this.isDaySelected}

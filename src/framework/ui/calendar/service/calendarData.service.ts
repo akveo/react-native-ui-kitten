@@ -12,11 +12,13 @@ import {
 import {
   CalendarDateInfo,
   CalendarDateOptions,
+  CalendarRange,
 } from '../type';
 
 const DEFAULT_DATE_OPTIONS: CalendarDateOptions = {
   bounding: false,
   holiday: false,
+  range: false,
 };
 
 type DateRange<D> = CalendarDateInfo<D>[];
@@ -27,8 +29,8 @@ export class CalendarDataService<D> {
   constructor(protected dateService: DateService<D>) {
   }
 
-  public createDayPickerData = (date: D): DateBatch<D> => {
-    const weeks: DateBatch<D> = this.createDates(date, DEFAULT_DATE_OPTIONS);
+  public createDayPickerData = (date: D, calendarRange?: CalendarRange<D>): DateBatch<D> => {
+    const weeks: DateBatch<D> = this.createDates(date, DEFAULT_DATE_OPTIONS, calendarRange);
 
     return this.withBoundingMonths(weeks, date);
   };
@@ -83,11 +85,26 @@ export class CalendarDataService<D> {
     return this.dateService.getYear(rhs) - this.dateService.getYear(lhs);
   };
 
-  private createDates(activeMonth: D, options: CalendarDateOptions): DateBatch<D> {
+  private createDates(activeMonth: D, options: CalendarDateOptions, calendarRange: CalendarRange<D>): DateBatch<D> {
     const days: DateRange<D> = this.createDateRangeForMonth(activeMonth, options);
+    const patchedDays: DateRange<D> = this.patchRangeDates(days, calendarRange);
     const startOfWeekDayDiff: number = this.getStartOfWeekDayDiff(activeMonth);
 
-    return batch(days, DateService.DAYS_IN_WEEK, startOfWeekDayDiff);
+    return batch(patchedDays, DateService.DAYS_IN_WEEK, startOfWeekDayDiff);
+  }
+
+  private patchRangeDates(days: DateRange<D>, calendarRange: CalendarRange<D>): DateRange<D> {
+    if (calendarRange.startDate && calendarRange.endDate) {
+      return days.map((day: CalendarDateInfo<D>) => {
+        const isInRange: boolean = this.dateService.isBetween(day.date, calendarRange.startDate, calendarRange.endDate);
+        return {
+          ...day,
+          range: isInRange,
+        };
+      });
+    } else {
+      return days;
+    }
   }
 
   private withBoundingMonths(weeks: DateBatch<D>, activeMonth: D): DateBatch<D> {
@@ -125,20 +142,20 @@ export class CalendarDataService<D> {
     const daysInMonth: number = this.dateService.getNumberOfDaysInMonth(month);
 
     return this.createDateRangeForMonth(month, DEFAULT_DATE_OPTIONS)
-               .slice(daysInMonth - numberOfBoundingDates)
-               .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
-                 return {...date, bounding: true };
-               });
+      .slice(daysInMonth - numberOfBoundingDates)
+      .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+        return { ...date, bounding: true };
+      });
   }
 
   private createNextBoundingDays(activeMonth: D, numberOfBoundingDates: number): DateRange<D> {
     const month: D = this.dateService.addMonth(activeMonth, 1);
 
     return this.createDateRangeForMonth(month, DEFAULT_DATE_OPTIONS)
-               .slice(0, numberOfBoundingDates)
-               .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
-                 return {...date, bounding: true };
-               });
+      .slice(0, numberOfBoundingDates)
+      .map((date: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+        return { ...date, bounding: true };
+      });
   }
 
   private getStartOfWeekDayDiff(date: D): number {

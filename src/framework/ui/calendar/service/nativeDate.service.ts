@@ -114,6 +114,16 @@ export class NativeDateService extends DateService<Date> {
     return date1.getTime() - date2.getTime();
   }
 
+  public compareDatesSafe(date1: Date, date2: Date): number {
+    if (this.compareDates(date1, date2) < 0) {
+      return -1;
+    } else if (this.compareDates(date1, date2) > 0) {
+      return 1;
+    } else if (this.compareDates(date1, date2) === 0) {
+      return 0;
+    }
+  }
+
   public createDate(year: number, month: number, date: number): Date {
     const result = new Date(year, month, date);
 
