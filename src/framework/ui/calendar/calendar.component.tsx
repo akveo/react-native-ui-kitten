@@ -399,8 +399,13 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
     const selectionChanged: boolean = props.selected !== nextProps.selected;
     const disablingChanged: boolean = props.disabled !== nextProps.disabled;
     const rangeChanged: boolean = props.range !== nextProps.range;
+    const rangeStartPlaceChanged: boolean = props.firstRangeItem !== nextProps.firstRangeItem;
+    const rangeEndPlaceChanged: boolean = props.lastRangeItem !== nextProps.lastRangeItem;
 
-    if (selectionChanged || disablingChanged || rangeChanged) {
+    const value: boolean = selectionChanged || disablingChanged || rangeChanged ||
+      rangeStartPlaceChanged || rangeEndPlaceChanged;
+
+    if (value) {
       return true;
     }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import {
   Datepicker,
@@ -37,17 +38,18 @@ export class DatepickerContainer extends React.Component<any, State> {
       <View style={styles.container}>
         {/*<Datepicker*/}
           {/*date={this.state.date}*/}
+          {/*range*/}
           {/*onSelect={this.setDate}*/}
         {/*/>*/}
 
         <Calendar
-          date={this.state.date}
-          min={new Date(new Date().getFullYear(), 8, 1)}
-          max={new Date(new Date().getFullYear() , 8, 30)}
-          // startDate={new Date('2019-09-07T21:00:00.000Z')}
-          // endDate={new Date('2019-09-12T21:00:00.000Z')}
-          // range
-          onSelect={this.setDate}
+           date={this.state.date}
+           // min={new Date(new Date().getFullYear(), 8, 1)}
+           // max={new Date(new Date().getFullYear() , 8, 30)}
+           // startDate={new Date('2019-09-07T21:00:00.000Z')}
+           // endDate={new Date('2019-09-12T21:00:00.000Z')}
+           range
+           onSelect={this.setDate}
         />
 
         {/*<Modal*/}

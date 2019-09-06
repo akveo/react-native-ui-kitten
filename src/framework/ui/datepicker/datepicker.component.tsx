@@ -15,6 +15,7 @@ import {
 } from '../calendar/calendar.component';
 import { styled, StyleType } from '@kitten/theme';
 import { Dimensions } from 'react-native';
+import { CalendarRange } from '../calendar/type';
 
 interface State {
   visible: boolean;
@@ -28,6 +29,17 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
     visible: false,
   };
 
+  constructor(props: CalendarProps<D>) {
+    super(props);
+    this.range = {
+      startDate: props.startDate,
+      endDate: props.endDate,
+    };
+  }
+
+
+  private range: CalendarRange<D>;
+
   private getComponentStyles = (style: StyleType): StyleType => {
     return {
       popover: {
@@ -36,15 +48,50 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
     };
   };
 
+  private onSelect = (date: D, range: CalendarRange<D>): void => {
+    const { onSelect } = this.props;
+    this.range = range;
+
+    if (onSelect) {
+      onSelect(date, range);
+    }
+  };
+
   private toggleVisible = (): void => {
     const visible: boolean = !this.state.visible;
 
     this.setState({ visible });
   };
 
+  private formatDateToString = (date: D): string => {
+    return new Date(Date.parse(date.toString())).toDateString();
+  };
+
+  private getComponentTitle = (): string => {
+    const { range, date } = this.props;
+    const { startDate, endDate } = this.range;
+
+    if (!date && !startDate && !endDate) {
+      return 'Show Calendar';
+    }
+
+
+    if (range) {
+      const start: string = startDate ? this.formatDateToString(startDate) : '';
+      const end: string = endDate ? this.formatDateToString(endDate) : '';
+
+      return `${start} - ${end}`;
+    } else {
+      return this.formatDateToString(date);
+    }
+  };
+
   private renderCalendar = (): CalendarElement<D> => {
     return (
-      <Calendar {...this.props}/>
+      <Calendar
+        {...this.props}
+        onSelect={this.onSelect}
+      />
     );
   };
 
@@ -56,8 +103,6 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
       width: Dimensions.get('window').width - popover.indent,
     };
 
-    const title: string = date ? date.toString() : 'Show Calendar';
-
     return (
       <Popover
         style={popoverStyle}
@@ -65,7 +110,7 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
         content={this.renderCalendar()}
         onBackdropPress={this.toggleVisible}>
         <Button onPress={this.toggleVisible}>
-          {title}
+          {this.getComponentTitle()}
         </Button>
       </Popover>
     );
