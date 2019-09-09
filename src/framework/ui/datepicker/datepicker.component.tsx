@@ -1,19 +1,28 @@
 import React from 'react';
 import {
-  Button,
-  ButtonElement,
-} from '../button/button.component';
+  ImageStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ImageProps,
+  StyleSheet,
+  GestureResponderEvent,
+} from 'react-native';
 import {
-  Popover,
-  PopoverProps,
-  PopoverElement,
-} from '../popover/popover.component';
+  Text,
+  TextElement,
+} from '../text/text.component';
+import { Popover } from '../popover/popover.component';
 import {
   CalendarElement,
   Calendar,
   CalendarProps,
 } from '../calendar/calendar.component';
-import { styled, StyleType } from '@kitten/theme';
+import {
+  Interaction,
+  styled,
+  StyledComponentProps,
+  StyleType,
+} from '@kitten/theme';
 import { Dimensions } from 'react-native';
 import { CalendarRange } from '../calendar/type';
 
@@ -21,7 +30,13 @@ interface State {
   visible: boolean;
 }
 
-export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, State> {
+interface ComponentProps {
+  icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
+}
+
+type DatepickerProps<D> = ComponentProps & CalendarProps<D> & TouchableOpacityProps & StyledComponentProps;
+
+export class DatepickerComponent<D> extends React.Component<DatepickerProps<D>, State> {
 
   static styledComponentName: string = 'Datepicker';
 
@@ -29,7 +44,7 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
     visible: false,
   };
 
-  constructor(props: CalendarProps<D>) {
+  constructor(props: DatepickerProps<D>) {
     super(props);
     this.range = {
       startDate: props.startDate,
@@ -37,13 +52,36 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
     };
   }
 
-
   private range: CalendarRange<D>;
 
   private getComponentStyles = (style: StyleType): StyleType => {
+    const {
+      popoverMarginHorizontal,
+      textFontSize,
+      textLineHeight,
+      textFontWeight,
+      textColor,
+      iconWidth,
+      iconHeight,
+      iconTintColor,
+      ...containerStyles
+    } = style;
+
     return {
+      container: containerStyles,
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        tintColor: iconTintColor,
+      },
+      text: {
+        fontSize: textFontSize,
+        lineHeight: textLineHeight,
+        fontWeight: textFontWeight,
+        color: textColor,
+      },
       popover: {
-        indent: style.popoverMarginHorizontal,
+        indent: popoverMarginHorizontal,
       },
     };
   };
@@ -57,14 +95,44 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
     }
   };
 
+  private onPressIn = (event: GestureResponderEvent) => {
+    this.props.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event);
+    }
+  };
+
+  private onPressOut = (event: GestureResponderEvent) => {
+    this.props.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event);
+    }
+  };
+
   private toggleVisible = (): void => {
     const visible: boolean = !this.state.visible;
 
-    this.setState({ visible });
+    this.setState({ visible }, this.dispatchActive);
+  };
+
+  private dispatchActive = (): void => {
+    const { visible } = this.state;
+    if (visible) {
+      this.props.dispatch([Interaction.ACTIVE]);
+    } else {
+      this.props.dispatch([]);
+    }
   };
 
   private formatDateToString = (date: D): string => {
-    return new Date(Date.parse(date.toString())).toDateString();
+    const selectedDate: Date = new Date(Date.parse(date.toString()));
+    const day: number = selectedDate.getDate();
+    const month: number = selectedDate.getMonth() + 1;
+    const year: number = selectedDate.getFullYear();
+
+    return `${day}/${month}/${year}`;
   };
 
   private getComponentTitle = (): string => {
@@ -72,7 +140,7 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
     const { startDate, endDate } = this.range;
 
     if (!date && !startDate && !endDate) {
-      return 'Show Calendar';
+      return 'dd/mm/yyyy';
     }
 
 
@@ -90,8 +158,42 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
     return (
       <Calendar
         {...this.props}
+        startDate={this.range.startDate}
+        endDate={this.range.endDate}
         onSelect={this.onSelect}
       />
+    );
+  };
+
+  private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+    const { icon } = this.props;
+
+    return icon && icon(style);
+  };
+
+  private renderText = (style: StyleType): TextElement => {
+    return (
+      <Text style={style}>
+        {this.getComponentTitle()}
+      </Text>
+    );
+  };
+
+  private renderControl = (): React.ReactElement<TouchableOpacityProps> => {
+    const { themedStyle, disabled } = this.props;
+    const { container, icon, text } = this.getComponentStyles(themedStyle);
+
+    return (
+      <TouchableOpacity
+        activeOpacity={1.0}
+        disabled={disabled}
+        style={[container, styles.container]}
+        onPress={this.toggleVisible}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
+        {this.renderText(text)}
+        {this.renderIcon(icon)}
+      </TouchableOpacity>
     );
   };
 
@@ -109,12 +211,18 @@ export class DatepickerComponent<D> extends React.Component<CalendarProps<D>, St
         visible={this.state.visible}
         content={this.renderCalendar()}
         onBackdropPress={this.toggleVisible}>
-        <Button onPress={this.toggleVisible}>
-          {this.getComponentTitle()}
-        </Button>
+        {this.renderControl()}
       </Popover>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+});
 
 export const Datepicker = styled(DatepickerComponent);

@@ -3,13 +3,18 @@ import {
   View,
   StyleSheet,
   Alert,
+  ImageProps,
+  Image,
 } from 'react-native';
 import {
   Datepicker,
   Calendar,
   Modal,
   Button,
+  Icon,
+  IconElement,
 } from '@kitten/ui';
+import { StyleType } from '@kitten/theme';
 
 interface State {
   date: Date;
@@ -33,24 +38,31 @@ export class DatepickerContainer extends React.Component<any, State> {
     this.setState({ modalVisible });
   };
 
+  private renderIcon = (style: StyleType): IconElement<any> => {
+    return (
+      <Icon name='calendar-outline' {...style}/>
+    );
+  };
+
   public render(): React.ReactNode {
     return (
       <View style={styles.container}>
-        {/*<Datepicker*/}
-          {/*date={this.state.date}*/}
-          {/*range*/}
-          {/*onSelect={this.setDate}*/}
-        {/*/>*/}
-
-        <Calendar
-           date={this.state.date}
-           // min={new Date(new Date().getFullYear(), 8, 1)}
-           // max={new Date(new Date().getFullYear() , 8, 30)}
-           // startDate={new Date('2019-09-07T21:00:00.000Z')}
-           // endDate={new Date('2019-09-12T21:00:00.000Z')}
-           range
-           onSelect={this.setDate}
+        <Datepicker
+          date={this.state.date}
+          range
+          icon={this.renderIcon}
+          onSelect={this.setDate}
         />
+
+        {/*<Calendar*/}
+           {/*date={this.state.date}*/}
+           {/*min={new Date(new Date().getFullYear(), 8, 1)}*/}
+           {/*max={new Date(new Date().getFullYear() , 8, 30)}*/}
+           {/*startDate={new Date('2019-09-07T21:00:00.000Z')}*/}
+           {/*endDate={new Date('2019-09-12T21:00:00.000Z')}*/}
+           {/*range*/}
+           {/*onSelect={this.setDate}*/}
+        {/*/>*/}
 
         {/*<Modal*/}
           {/*style={{ width: '100%'}}*/}
