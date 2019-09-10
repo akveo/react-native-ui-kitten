@@ -111,7 +111,11 @@ export class SingleSelectStrategy implements SelectionStrategy {
 
   public select(option: SelectOptionType, callback?: () => void): SelectOptionType {
     this.selectedOption = option;
-    callback();
+
+    if (callback) {
+      callback();
+    }
+
     return this.selectedOption;
   }
 
