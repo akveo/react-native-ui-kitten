@@ -90,7 +90,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
  *
- * @property {string} placeholder - Determines caption of the component.
+ * @property {string} placeholder - Determines placegolder of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
