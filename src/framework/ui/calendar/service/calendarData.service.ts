@@ -94,13 +94,29 @@ export class CalendarDataService<D> {
   }
 
   private patchRangeDates(days: DateRange<D>, calendarRange: CalendarRange<D>): DateRange<D> {
+    if (calendarRange.startDate && !calendarRange.endDate) {
+      days.map((day: CalendarDateInfo<D>) => {
+        if (this.dateService.compareDatesSafe(day.date, calendarRange.startDate) === 0) {
+          day.range = true;
+          return day;
+        }
+      });
+
+      return days;
+    }
+
     if (calendarRange.startDate && calendarRange.endDate) {
       return days.map((day: CalendarDateInfo<D>) => {
-        const isInRange: boolean = this.dateService.isBetween(day.date, calendarRange.startDate, calendarRange.endDate);
-        return {
-          ...day,
-          range: isInRange,
-        };
+        if (this.dateService.compareDatesSafe(day.date, calendarRange.startDate) === 0 ||
+          this.dateService.compareDatesSafe(day.date, calendarRange.endDate) === 0) {
+
+          day.range = true;
+          return day;
+        } else {
+          const isInRange: boolean = this.dateService
+            .isBetween(day.date, calendarRange.startDate, calendarRange.endDate);
+          return { ...day, range: isInRange };
+        }
       });
     } else {
       return days;
