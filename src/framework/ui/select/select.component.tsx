@@ -446,9 +446,12 @@ class SelectComponent extends React.Component<SelectProps, State> {
   constructor(props: SelectProps) {
     super(props);
     const { multiSelect, selectedOption } = props;
-    this.strategy = multiSelect ?
-      new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
+    this.strategy = multiSelect ? new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
     this.iconAnimation = new Animated.Value(-180);
+  }
+
+  public componentDidUpdate(): void {
+    this.strategy.select(this.props.selectedOption);
   }
 
   private onItemSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
