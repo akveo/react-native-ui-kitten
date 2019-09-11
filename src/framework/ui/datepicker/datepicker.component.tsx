@@ -44,16 +44,6 @@ export class DatepickerComponent<D> extends React.Component<DatepickerProps<D>, 
     visible: false,
   };
 
-  constructor(props: DatepickerProps<D>) {
-    super(props);
-    this.range = {
-      startDate: props.startDate,
-      endDate: props.endDate,
-    };
-  }
-
-  private range: CalendarRange<D>;
-
   private getComponentStyles = (style: StyleType): StyleType => {
     const {
       popoverMarginHorizontal,
@@ -84,15 +74,6 @@ export class DatepickerComponent<D> extends React.Component<DatepickerProps<D>, 
         indent: popoverMarginHorizontal,
       },
     };
-  };
-
-  private onSelect = (date: D, range: CalendarRange<D>): void => {
-    const { onSelect } = this.props;
-    this.range = range;
-
-    if (onSelect) {
-      onSelect(date, range);
-    }
   };
 
   private onPressIn = (event: GestureResponderEvent) => {
@@ -137,7 +118,7 @@ export class DatepickerComponent<D> extends React.Component<DatepickerProps<D>, 
 
   private getComponentTitle = (): string => {
     const { range, date } = this.props;
-    const { startDate, endDate } = this.range;
+    const { startDate, endDate } = range;
 
     if (!date && !startDate && !endDate) {
       return 'dd/mm/yyyy';
@@ -156,12 +137,7 @@ export class DatepickerComponent<D> extends React.Component<DatepickerProps<D>, 
 
   private renderCalendar = (): CalendarElement<D> => {
     return (
-      <Calendar
-        {...this.props}
-        startDate={this.range.startDate}
-        endDate={this.range.endDate}
-        onSelect={this.onSelect}
-      />
+      <Calendar {...this.props} />
     );
   };
 

@@ -86,11 +86,13 @@ export class CalendarDataService<D> {
   };
 
   private createDates(activeMonth: D, options: CalendarDateOptions, calendarRange: CalendarRange<D>): DateBatch<D> {
-    const days: DateRange<D> = this.createDateRangeForMonth(activeMonth, options);
-    const patchedDays: DateRange<D> = this.patchRangeDates(days, calendarRange);
+    let days: DateRange<D> = this.createDateRangeForMonth(activeMonth, options);
+    if (calendarRange) {
+      days = this.patchRangeDates(days, calendarRange);
+    }
     const startOfWeekDayDiff: number = this.getStartOfWeekDayDiff(activeMonth);
 
-    return batch(patchedDays, DateService.DAYS_IN_WEEK, startOfWeekDayDiff);
+    return batch(days, DateService.DAYS_IN_WEEK, startOfWeekDayDiff);
   }
 
   private patchRangeDates(days: DateRange<D>, calendarRange: CalendarRange<D>): DateRange<D> {

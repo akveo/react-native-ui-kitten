@@ -49,9 +49,7 @@ interface ComponentProps<D> extends ViewProps {
   min?: D;
   max?: D;
   date?: D;
-  range?: boolean;
-  startDate?: D;
-  endDate?: D;
+  range?: CalendarRange<D>;
   dateService?: DateService<D>;
   boundingMonth?: boolean;
   startView?: CalendarViewMode;
@@ -68,7 +66,6 @@ interface ComponentProps<D> extends ViewProps {
 interface State<D> {
   viewMode: CalendarViewMode;
   visibleDate: D;
-  range: CalendarRange<D>;
 }
 
 export type CalendarProps<D> = StyledComponentProps & ComponentProps<D>;
@@ -264,10 +261,6 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   public state: State<D> = {
     viewMode: this.props.startView,
     visibleDate: this.dateService.getMonthStart(this.date),
-    range: {
-      startDate: this.props.startDate ? this.props.startDate : null,
-      endDate: this.props.endDate ? this.props.endDate : null,
-    },
   };
 
   private dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
@@ -302,15 +295,10 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
   };
 
   private handleRangeSelect = (date: CalendarDateInfo<D>): void => {
-    const range: CalendarRange<D> = this.rangeService.getRange(this.state.range, date);
+    const { range, onSelect } = this.props;
 
-    this.setState({ range }, this.onSelectRange);
-  };
-
-  private onSelectRange = (): void => {
-    const { onSelect } = this.props;
-
-    onSelect && onSelect(null, this.state.range);
+    const calendarRange: CalendarRange<D> = this.rangeService.getRange(range, date);
+    onSelect && onSelect(null, calendarRange);
   };
 
   private onMonthSelect = (date: CalendarDateInfo<D>) => {
@@ -612,16 +600,12 @@ export class CalendarComponent<D> extends React.Component<CalendarProps<D>, Stat
 
   private renderDayPickerElement = (date: CalendarDateInfo<D>, index: number): CalendarPickerElement<D> => {
     const { row } = this.getCalendarStyle(this.props.themedStyle);
-    // const range: CalendarRange<D> = {
-    //   startDate: this.state.rangeStartDate,
-    //   endDate: this.state.rangeEndDate,
-    // };
 
     return (
       <CalendarPicker
         key={index}
         category='day'
-        data={this.dataService.createDayPickerData(date.date, this.state.range)}
+        data={this.dataService.createDayPickerData(date.date, this.props.range)}
         rowStyle={row}
         onSelect={this.onDaySelect}
         isItemSelected={this.isDaySelected}
