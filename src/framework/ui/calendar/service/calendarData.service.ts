@@ -22,7 +22,7 @@ const DEFAULT_DATE_OPTIONS: CalendarDateOptions = {
 };
 
 type DateRange<D> = CalendarDateInfo<D>[];
-type DateBatch<D> = DateRange<D>[];
+export type DateBatch<D> = DateRange<D>[];
 
 export class CalendarDataService<D> {
 

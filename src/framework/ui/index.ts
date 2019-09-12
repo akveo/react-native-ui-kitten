@@ -25,10 +25,14 @@ export {
 } from './buttonGroup/buttonGroup.component';
 export {
   Calendar,
-  CalendarProps,
   CalendarElement,
-  CalendarComponent,
+  CalendarProps,
 } from './calendar/calendar.component';
+export {
+  RangeCalendar,
+  RangeCalendarProps,
+  RangeCalendarElement,
+} from './calendar/rangeCalendar.component';
 export {
   CalendarViewMode,
   CalendarViewModes,
@@ -38,9 +42,8 @@ export {
   CheckBoxProps,
   CheckBoxElement,
 } from './checkbox/checkbox.component';
-export {
-  Datepicker,
-} from './datepicker/datepicker.component';
+export { Datepicker } from './datepicker/datepicker.component';
+export { RangeDatepicker } from './datepicker/rangeDatepicker.component';
 export {
   Drawer,
   DrawerProps,
