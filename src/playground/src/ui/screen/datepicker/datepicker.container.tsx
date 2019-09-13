@@ -52,13 +52,13 @@ export class DatepickerContainer extends React.Component<any, State> {
     return (
       <View style={styles.container}>
         {/*<Calendar*/}
-        {/*date={this.state.date}*/}
-        {/*onSelect={this.setDate}*/}
+          {/*date={this.state.date}*/}
+          {/*onSelect={this.setDate}*/}
         {/*/>*/}
-        {/*<RangeCalendar*/}
-        {/*range={this.state.range}*/}
-        {/*onSelect={this.setRange}*/}
-        {/*/>*/}
+        <RangeCalendar
+          range={this.state.range}
+          onSelect={this.setRange}
+        />
 
 
         {/*<Datepicker*/}
@@ -66,11 +66,11 @@ export class DatepickerContainer extends React.Component<any, State> {
         {/*onSelect={this.setDate}*/}
         {/*/>*/}
 
-        <RangeDatepicker
-          range={this.state.range}
-          icon={this.renderIcon}
-          onSelect={this.setRange}
-        />
+        {/*<RangeDatepicker*/}
+          {/*range={this.state.range}*/}
+          {/*icon={this.renderIcon}*/}
+          {/*onSelect={this.setRange}*/}
+        {/*/>*/}
       </View>
     );
   }

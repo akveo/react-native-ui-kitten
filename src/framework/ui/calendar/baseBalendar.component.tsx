@@ -348,33 +348,36 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   public getCalendarStyle = (source: StyleType): StyleType => {
     return {
       container: {
-        padding: source.padding,
+        paddingVertical: source.paddingVertical,
         borderColor: source.borderColor,
         borderWidth: source.borderWidth,
         borderRadius: source.borderRadius,
       },
       headerContainer: {
         paddingHorizontal: source.headerPaddingHorizontal,
-        paddingBottom: source.headerPaddingBottom,
+        paddingVertical: source.headerPaddingVertical,
       },
       title: {
         fontSize: source.titleFontSize,
         fontWeight: source.titleFontWeight,
         lineHeight: source.titleLineHeight,
-        marginHorizontal: source.titleMarginHorizontal,
         color: source.titleColor,
       },
       icon: {
         width: source.iconWidth,
         height: source.iconHeight,
-        marginHorizontal: source.iconMarginHorizontal,
+        marginLeft: source.iconMarginLeft,
         tintColor: source.iconTintColor,
       },
       divider: {
         marginVertical: source.dividerMarginVertical,
       },
+      daysHeaderContainer: {
+        marginHorizontal: source.rowMarginHorizontal,
+      },
       row: {
         minHeight: source.rowMinHeight,
+        marginHorizontal: source.rowMarginHorizontal,
       },
     };
   };
@@ -584,11 +587,13 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   private renderDayPickerPagerElement = (date: D): React.ReactElement<ViewProps> => {
     const { themedStyle } = this.props;
     const visibleDayPickerIndex: number = this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
-    const { divider } = this.getCalendarStyle(themedStyle);
+    const { divider, daysHeaderContainer } = this.getCalendarStyle(themedStyle);
 
     return (
       <React.Fragment>
-        <CalendarMonthHeader data={this.dateService.getDayOfWeekNames()}>
+        <CalendarMonthHeader
+          style={daysHeaderContainer}
+          data={this.dateService.getDayOfWeekNames()}>
           {this.renderWeekdayElement}
         </CalendarMonthHeader>
         <Divider style={divider}/>
