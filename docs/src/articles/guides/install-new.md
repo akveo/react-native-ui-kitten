@@ -24,7 +24,7 @@ react-native init AwesomeApp --template ui-kitten
 
 Or, if you want to init with TypeScript:
 ```bash
-react-native init --template ui-kitten-typescript
+react-native init AwesomeApp --template ui-kitten-typescript
 ```
 
 That's it. UI Kitten is ready now. For the next steps, simply follow command line instructions.
