@@ -23,7 +23,7 @@ interface ComponentProps<D> {
 export type RangeCalendarProps<D> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
 export type RangeCalendarElement<D> = React.ReactElement<RangeCalendarProps<D>>;
 
-class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCalendarProps<D>> {
+export class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCalendarProps<D>> {
 
   static styledComponentName: string = 'Calendar';
 

@@ -19,6 +19,8 @@ import {
 import { StyleType } from '@kitten/theme';
 import { CalendarRange } from '@kitten/ui/calendar/type';
 
+const now: Date = new Date();
+
 interface State {
   date: Date;
   range: CalendarRange<Date>;
@@ -39,7 +41,7 @@ export class DatepickerContainer extends React.Component<any, State> {
   };
 
   private setRange = (range: CalendarRange<Date>): void => {
-    this.setState({ range });
+    this.setState({ range }, () => console.log(this.state.range));
   };
 
   private renderIcon = (style: StyleType): IconElement<any> => {
@@ -53,6 +55,8 @@ export class DatepickerContainer extends React.Component<any, State> {
       <View style={styles.container}>
         {/*<Calendar*/}
           {/*date={this.state.date}*/}
+          {/*min={new Date(now.getFullYear() - 20, 0, 1)}*/}
+          {/*max={new Date(now.getFullYear() + 10, 0, 1)}*/}
           {/*onSelect={this.setDate}*/}
         {/*/>*/}
         <RangeCalendar
@@ -67,9 +71,9 @@ export class DatepickerContainer extends React.Component<any, State> {
         {/*/>*/}
 
         {/*<RangeDatepicker*/}
-          {/*range={this.state.range}*/}
-          {/*icon={this.renderIcon}*/}
-          {/*onSelect={this.setRange}*/}
+        {/*range={this.state.range}*/}
+        {/*icon={this.renderIcon}*/}
+        {/*onSelect={this.setRange}*/}
         {/*/>*/}
       </View>
     );

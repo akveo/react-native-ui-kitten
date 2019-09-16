@@ -19,7 +19,7 @@ interface ComponentProps<D> {
 export type CalendarProps<D> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
 export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
 
-class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps<D>> {
+export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps<D>> {
 
   static styledComponentName: string = 'Calendar';
 
