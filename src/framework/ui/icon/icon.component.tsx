@@ -24,7 +24,7 @@ export type IconProps<T = {}> = ComponentProps & T;
 export type IconElement<T> = React.ReactElement<T>;
 
 /**
- * Icon component with animation support. Allows to render any ReactElement registered for a specific name.
+ * `Icon` component with animation support. Allows to render any ReactElement registered for a specific name.
  * Starting from UI Kitten 4.2, there is `@ui-kitten/eva-icons` module
  * that renders any icon from eva-icons package in `svg` format.
  *
@@ -52,8 +52,8 @@ export type IconElement<T> = React.ReactElement<T>;
  *       <ApplicationProvider
  *         mapping={mapping}
  *         theme={lightTheme}>
- *         <Application/>
  *         <IconRegistry icons={EvaIconsPack}/>
+ *         <Application/>
  *       </ApplicationProvider>
  *     );
  *   }

@@ -33,7 +33,7 @@ export type SpinnerProps = StyledComponentProps & ComponentProps;
 export type SpinnerElement = React.ReactElement<SpinnerProps>;
 
 /**
- * Styled Spinner component. Designed to be used as ActivityIndicator component
+ * Styled `Spinner` component. Designed to be used as `ActivityIndicator` component
  *
  * @extends React.Component
  *

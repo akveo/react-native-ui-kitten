@@ -90,6 +90,8 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
  *
+ * @property {string} placeholder - Determines placegolder of the component.
+ *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
@@ -237,6 +239,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *     return (
  *       <Input
  *         value={this.state.inputValue}
+ *         placeholder='Placeholder'
  *         caption='Caption'
  *         style={styles.input}
  *         textStyle={styles.inputText}

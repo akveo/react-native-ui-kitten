@@ -33,12 +33,23 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Install UI Kitten',
+        name: 'Start a new App',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install.md',
+            source: 'guides/install-new.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Install into existing App',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/install-existing.md',
           },
         ],
       },

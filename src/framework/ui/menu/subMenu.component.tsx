@@ -183,6 +183,7 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
         {[
           <View
             {...measuringProps}
+            pointerEvents='none'
             key={SUB_ITEMS_MEASURE_TAG}
             style={styles.invisibleMenu}>
             {subItems}

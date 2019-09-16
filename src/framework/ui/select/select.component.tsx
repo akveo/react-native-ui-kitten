@@ -85,7 +85,7 @@ interface State {
 }
 
 /**
- * Styled Select (Select) component.
+ * Styled `Select` component.
  *
  * @extends React.Component
  *
@@ -137,7 +137,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -183,7 +183,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -230,7 +230,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -282,8 +282,8 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
- * import { StyleType } from '@kitten/theme';
+ *   StyleType
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -342,7 +342,7 @@ interface State {
  *   Select,
  *   SelectOptionType,
  *   SelectOption,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * interface State {
  *   selectedOption: SelectOption;
@@ -445,16 +445,54 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   constructor(props: SelectProps) {
     super(props);
-    const { multiSelect, selectedOption } = props;
-    this.strategy = multiSelect ?
-      new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
+    this.strategy = this.createSelectionStrategy();
     this.iconAnimation = new Animated.Value(-180);
   }
+
+  public componentDidUpdate(): void {
+    this.strategy = this.createSelectionStrategy();
+  }
+
+  private onPress = (event: GestureResponderEvent) => {
+    this.props.dispatch([]);
+    if (this.props.onPress) {
+      this.props.onPress(event);
+    }
+    this.setVisibility();
+  };
+
+  private onPressIn = (event: GestureResponderEvent) => {
+    this.props.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event);
+    }
+  };
+
+  private onPressOut = (event: GestureResponderEvent) => {
+    this.props.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event);
+    }
+  };
 
   private onItemSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
     const { onSelect } = this.props;
 
     onSelect(this.strategy.select(option, this.setVisibility));
+  };
+
+  private onControlMeasure = (result: MeasureResult): void => {
+    const width: number = result[MEASURED_CONTROL_TAG].size.width;
+
+    this.setState({ optionsListWidth: width });
+  };
+
+  private createSelectionStrategy = (): SelectionStrategy => {
+    const { multiSelect, selectedOption } = this.props;
+
+    return multiSelect ? new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
   };
 
   private setVisibility = (): void => {
@@ -491,36 +529,6 @@ class SelectComponent extends React.Component<SelectProps, State> {
       toValue: toValue,
       duration: 200,
     }).start();
-  };
-
-  private onPress = (event: GestureResponderEvent) => {
-    this.props.dispatch([]);
-    if (this.props.onPress) {
-      this.props.onPress(event);
-    }
-    this.setVisibility();
-  };
-
-  private onPressIn = (event: GestureResponderEvent) => {
-    this.props.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
-  };
-
-  private onPressOut = (event: GestureResponderEvent) => {
-    this.props.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
-  };
-
-  private onControlMeasure = (result: MeasureResult): void => {
-    const width: number = result[MEASURED_CONTROL_TAG].size.width;
-
-    this.setState({ optionsListWidth: width });
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {

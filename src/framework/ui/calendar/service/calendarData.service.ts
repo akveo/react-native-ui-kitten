@@ -21,7 +21,7 @@ const DEFAULT_DATE_OPTIONS: CalendarDateOptions = {
   range: false,
 };
 
-type DateRange<D> = CalendarDateInfo<D>[];
+export type DateRange<D> = CalendarDateInfo<D>[];
 export type DateBatch<D> = DateRange<D>[];
 
 export class CalendarDataService<D> {

@@ -5,9 +5,14 @@
  */
 
 
-import { CalendarDataService } from './calendarData.service';
+import {
+  CalendarDataService,
+  DateBatch,
+  DateRange,
+} from './calendarData.service';
 import { DateService } from './date.service';
 import { NativeDateService } from './nativeDate.service';
+import { CalendarDateInfo } from '../type';
 
 describe('@month-model: service checks', () => {
   const dateService: DateService<Date> = new NativeDateService('en-US');
@@ -15,36 +20,38 @@ describe('@month-model: service checks', () => {
 
   it('* should create day picker data with active month', () => {
     const date = new Date(2018, 7, 1);
-    const grid: Date[][] = dataService.createDayPickerData(date);
+    const grid: DateRange<Date>[] = dataService.createDayPickerData(date);
     expect(grid.length).toBe(5);
-    grid.forEach((row: Date[]) => {
+    grid.forEach((row: CalendarDateInfo<Date>[]) => {
       expect(row.length).toBe(7);
     });
   });
 
-  it('* should create day picker data without boundingMonth', () => {
+  it('* should create day picker data with boundingMonth', () => {
     const date = new Date(2018, 7, 1);
-    const grid: Date[][] = dataService.createDayPickerData(date);
-    const firstTwoEmpty = grid.shift().slice(0, 3);
-    const lastTwoEmpty = grid.pop().slice(6);
-    firstTwoEmpty.forEach(cell => {
-      expect(cell).toBeNull();
+    const grid: DateRange<Date>[] = dataService.createDayPickerData(date);
+    const firstBounds: CalendarDateInfo<Date>[] = grid.shift().slice(0, 3);
+    const lastBounds: CalendarDateInfo<Date>[] = grid.pop().slice(6);
+
+    firstBounds.forEach((cell: CalendarDateInfo<Date>) => {
+      expect(cell.bounding).toBe(true);
     });
-    lastTwoEmpty.forEach(cell => {
-      expect(cell).toBeNull();
+
+    lastBounds.forEach((cell: CalendarDateInfo<Date>) => {
+      expect(cell.bounding).toBe(true);
     });
   });
 
   it('* should create month picker data', () => {
     const date: Date = new Date(2019, 7, 1);
 
-    const monthPickerData: Date[][] = dataService.createMonthPickerData(date, 4, 3);
+    const monthPickerData: DateBatch<Date> = dataService.createMonthPickerData(date, 4, 3);
     expect(monthPickerData.length).toEqual(3);
-    monthPickerData.forEach((monthRange: Date[], row: number) => {
-      expect(monthRange[0].getMonth()).toEqual(row * 4);
+    monthPickerData.forEach((monthRange: CalendarDateInfo<Date>[], row: number) => {
+      expect(monthRange[0].date.getMonth()).toEqual(row * 4);
       expect(monthRange.length).toEqual(4);
-      monthRange.forEach((monthDate: Date, column: number) => {
-        expect(monthDate.getMonth()).toEqual(monthRange[0].getMonth() + column);
+      monthRange.forEach((monthDate: CalendarDateInfo<Date>, column: number) => {
+        expect(monthDate.date.getMonth()).toEqual(monthRange[0].date.getMonth() + column);
       });
     });
   });
@@ -52,14 +59,14 @@ describe('@month-model: service checks', () => {
   it('* should create year picker data', () => {
     const start: Date = new Date(2019, 7, 1);
 
-    const yearPickerData: Date[][] = dataService.createYearPickerData(start, 4, 3);
+    const yearPickerData: DateBatch<Date> = dataService.createYearPickerData(start, 4, 3);
 
     expect(yearPickerData.length).toEqual(3);
-    yearPickerData.forEach((yearRange: Date[], row: number) => {
-      expect(yearRange[0].getFullYear()).toEqual(start.getFullYear() + row * 4);
+    yearPickerData.forEach((yearRange: CalendarDateInfo<Date>[], row: number) => {
+      expect(yearRange[0].date.getFullYear()).toEqual(start.getFullYear() + row * 4);
       expect(yearRange.length).toEqual(4);
-      yearRange.forEach((yearDate: Date, column: number) => {
-        expect(yearDate.getFullYear()).toEqual(yearRange[0].getFullYear() + column);
+      yearRange.forEach((yearDate: CalendarDateInfo<Date>, column: number) => {
+        expect(yearDate.date.getFullYear()).toEqual(yearRange[0].date.getFullYear() + column);
       });
     });
   });
@@ -68,10 +75,11 @@ describe('@month-model: service checks', () => {
     const start: Date = new Date(2019, 6, 1);
     const end: Date = new Date(2019, 8, 1);
 
-    const yearPickerPagerData: Date[] = dataService.createYearPickerPagerData(start, end, 4, 3);
+    const yearPickerPagerData: CalendarDateInfo<Date>[] = dataService
+      .createYearPickerPagerData(start, end, 4, 3);
 
-    yearPickerPagerData.forEach((pageDate: Date, index: number) => {
-      expect(pageDate.getFullYear()).toEqual(start.getFullYear() + index * 4 * 3);
+    yearPickerPagerData.forEach((pageDate: CalendarDateInfo<Date>, index: number) => {
+      expect(pageDate.date.getFullYear()).toEqual(start.getFullYear() + index * 4 * 3);
     });
   });
 
@@ -79,10 +87,10 @@ describe('@month-model: service checks', () => {
     const start: Date = new Date(2019, 6, 1);
     const end: Date = new Date(2019, 8, 1);
 
-    const dayPickerPagerData: Date[] = dataService.createDayPickerPagerData(start, end);
+    const dayPickerPagerData: CalendarDateInfo<Date>[] = dataService.createDayPickerPagerData(start, end);
 
-    dayPickerPagerData.forEach((pageDate: Date, index: number) => {
-      expect(pageDate.getMonth()).toEqual(start.getMonth() + index);
+    dayPickerPagerData.forEach((pageDate: CalendarDateInfo<Date>, index: number) => {
+      expect(pageDate.date.getMonth()).toEqual(start.getMonth() + index);
     });
 
     expect(dayPickerPagerData.length).toEqual(3);

@@ -46,7 +46,7 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * import {
  *   Layout,
  *   Text,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * export class LayoutShowcase extends React.Component {
  *
@@ -75,7 +75,7 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * import {
  *   Layout,
  *   Text,
- * } from '@kitten/ui';
+ * } from 'react-native-ui-kitten';
  *
  * export class LayoutShowcase extends React.Component {
  *
