@@ -39,28 +39,25 @@ export type CalendarPickerElement<D> = React.ReactElement<CalendarPickerProps<D>
 
 export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
 
-  private getRangedRowItems = (row: CalendarDateInfo<D>[]): CalendarDateInfo<D>[] => {
-    return row.filter((date: CalendarDateInfo<D>) => {
-      return date.range === true;
+  private get rangedArray (): CalendarDateInfo<D>[] {
+    const { data } = this.props;
+
+    return [].concat(...data).filter((item: CalendarDateInfo<D>) => {
+      return item.range;
     });
+  }
+
+  private isFirstRangeItem = (item: CalendarDateInfo<D>, range: CalendarDateInfo<D>[]): boolean => {
+    return range.indexOf(item) === 0;
   };
 
-  private isFirstRangeItem = (item: CalendarDateInfo<D>, row: CalendarDateInfo<D>[]): boolean => {
-    return this.getRangedRowItems(row).indexOf(item) === 0;
+  private isLastRangeItem = (item: CalendarDateInfo<D>, range: CalendarDateInfo<D>[]): boolean => {
+    return range.indexOf(item) === range.length - 1;
   };
 
-  private isLastRangeItem = (item: CalendarDateInfo<D>, row: CalendarDateInfo<D>[]): boolean => {
-    const ranged: CalendarDateInfo<D>[] = this.getRangedRowItems(row);
-
-    return ranged.indexOf(item) === ranged.length - 1;
-  };
-
-  private renderCellElement = (item: CalendarDateInfo<D>,
-                               index: number,
-                               row: CalendarDateInfo<D>[]): CalendarPickerCellElement<D> => {
-
-    const isFirstRangeItem: boolean = this.isFirstRangeItem(item, row);
-    const isLastRangeItem: boolean = this.isLastRangeItem(item, row);
+  private renderCellElement = (item: CalendarDateInfo<D>, index: number): CalendarPickerCellElement<D> => {
+    const isFirstRangeItem: boolean = this.isFirstRangeItem(item, this.rangedArray);
+    const isLastRangeItem: boolean = this.isLastRangeItem(item, this.rangedArray);
 
     return (
       <CalendarPickerCell
@@ -84,15 +81,12 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
   private renderRowElement = (item: CalendarDateInfo<D>[], index: number): CalendarPickerRowElement<D> => {
     const { rowStyle } = this.props;
 
-    // todo: refactor somehow renderItem
     return (
       <CalendarPickerRow
         style={rowStyle}
         key={index}
         data={item}
-        renderItem={(date: CalendarDateInfo<D>, counter: number) => {
-          return this.renderCellElement(date, counter, item);
-        }}
+        renderItem={this.renderCellElement}
       />
     );
   };

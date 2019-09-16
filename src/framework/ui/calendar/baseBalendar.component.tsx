@@ -254,12 +254,27 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   };
 
   public dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
-  private calendarDayPagerRef: React.RefObject<CalendarPager<D>> = React.createRef();
-  private calendarYearPagerRef: React.RefObject<CalendarPager<D>> = React.createRef();
 
   public get dateService(): DateService<D> {
     return this.props.dateService;
   }
+
+  public abstract get date(): D;
+  public abstract onDaySelect(item: any): void;
+  public abstract getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D>;
+  public abstract shouldUpdateDayElement(props: CalendarPickerCellProps<D>,
+                                         nextProps: CalendarPickerCellProps<D>): boolean;
+  public abstract isDaySelected(date: CalendarDateInfo<D>): boolean;
+
+  public onToday = () => {
+    this.setState({
+      viewMode: CalendarViewModes.DATE,
+      visibleDate: this.dateService.today(),
+    });
+  };
+
+  private calendarDayPagerRef: React.RefObject<CalendarPager<D>> = React.createRef();
+  private calendarYearPagerRef: React.RefObject<CalendarPager<D>> = React.createRef();
 
   private get min(): D {
     return this.props.min || this.dateService.getYearStart(this.dateService.today());
@@ -269,15 +284,9 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     return this.props.max || this.dateService.getYearEnd(this.dateService.today());
   }
 
-  public abstract get date(): D;
-
   private getDate(): D {
     return this.date;
   }
-
-  public abstract onDaySelect(item: any): void;
-
-  public abstract getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D>;
 
   private onSelect = (item: CalendarDateInfo<D>): void => {
     this.onDaySelect(item);
@@ -323,21 +332,11 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     });
   };
 
-  public onToday = () => {
-    this.setState({
-      viewMode: CalendarViewModes.DATE,
-      visibleDate: this.dateService.today(),
-    });
-  };
-
   private onPickerNavigationPress = () => {
     this.setState({
       viewMode: this.state.viewMode.navigationNext(),
     });
   };
-
-  public abstract shouldUpdateDayElement(props: CalendarPickerCellProps<D>,
-                                         nextProps: CalendarPickerCellProps<D>): boolean;
 
   private shouldUpdateDayItem = (props: CalendarPickerCellProps<D>,
                                  nextProps: CalendarPickerCellProps<D>): boolean => {
@@ -352,6 +351,8 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
         borderColor: source.borderColor,
         borderWidth: source.borderWidth,
         borderRadius: source.borderRadius,
+        maxWidth: source.maxWidth,
+        maxHeight: source.maxHeight,
       },
       headerContainer: {
         paddingHorizontal: source.headerPaddingHorizontal,
@@ -390,8 +391,6 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
       color: source.weekdayTextColor,
     };
   };
-
-  public abstract isDaySelected(date: CalendarDateInfo<D>): boolean;
 
   private getIsDaySelected = (date: CalendarDateInfo<D>): boolean => {
     return this.isDaySelected(date);
@@ -534,7 +533,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     );
   };
 
-  public renderDayIfNeeded = (item: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderDayIfNeeded = (item: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
     const shouldRender: boolean = !item.bounding || this.props.boundingMonth;
 
     if (shouldRender) {
@@ -565,7 +564,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     );
   };
 
-  public renderDayPickerElement = (date: CalendarDateInfo<D>, index: number): CalendarPickerElement<D> => {
+  private renderDayPickerElement = (date: CalendarDateInfo<D>, index: number): CalendarPickerElement<D> => {
     const { row } = this.getCalendarStyle(this.props.themedStyle);
 
     return (
