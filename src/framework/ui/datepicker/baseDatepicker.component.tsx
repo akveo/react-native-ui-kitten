@@ -29,7 +29,7 @@ interface ComponentProps {
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
 }
 
-type DatepickerProps<D> = ComponentProps & StyledComponentProps & TouchableOpacityProps;
+export type DatepickerProps<D> = ComponentProps & StyledComponentProps & TouchableOpacityProps;
 
 export abstract class BaseDatepickerComponent<D, P> extends React.Component<DatepickerProps<D> & P, State> {
 

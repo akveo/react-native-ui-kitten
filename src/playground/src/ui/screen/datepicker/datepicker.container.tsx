@@ -59,16 +59,18 @@ export class DatepickerContainer extends React.Component<any, State> {
           {/*max={new Date(now.getFullYear() + 10, 0, 1)}*/}
           {/*onSelect={this.setDate}*/}
         {/*/>*/}
-        <RangeCalendar
-          range={this.state.range}
-          onSelect={this.setRange}
-        />
-
-
-        {/*<Datepicker*/}
-        {/*date={this.state.date}*/}
-        {/*onSelect={this.setDate}*/}
+        {/*<RangeDatepicker*/}
+          {/*range={this.state.range}*/}
+          {/*min={new Date(2019, 0, 1)}*/}
+          {/*max={new Date(2019, 0, 30)}*/}
+          {/*onSelect={this.setRange}*/}
         {/*/>*/}
+
+
+        <Datepicker
+          date={this.state.date}
+          onSelect={this.setDate}
+        />
 
         {/*<RangeDatepicker*/}
         {/*range={this.state.range}*/}
