@@ -217,4 +217,14 @@ describe('@native-date: service checks', () => {
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2019, 2, 14))).toBeLessThan(0);
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2018, 6, 16))).toBe(0);
   });
+
+  it('compare dates safe works correctly', () => {
+    expect(dateService.compareDatesSafe(new Date(2018, 1, 15), new Date(2018, 1, 3)))
+      .toBe(1);
+    expect(dateService.compareDatesSafe(new Date(2018, 1, 15), new Date(2018, 1, 18)))
+      .toBe(-1);
+    expect(dateService.compareDatesSafe(new Date(2018, 1, 15), new Date(2018, 1, 15)))
+      .toBe(0);
+  });
+
 });
