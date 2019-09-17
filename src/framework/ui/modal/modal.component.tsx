@@ -223,7 +223,8 @@ export class Modal extends React.Component<ModalProps> {
     if (prevProps.visible !== this.props.visible) {
       this.handleVisibility(this.props);
     } else if (prevProps.visible && this.props.visible) {
-      ModalService.update(this.id, this.props.children);
+      const element: React.ReactElement = this.renderModal();
+      ModalService.update(this.id, element.props.children);
     }
   }
 
