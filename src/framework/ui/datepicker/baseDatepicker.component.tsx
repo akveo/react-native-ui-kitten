@@ -151,6 +151,7 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
 
     const popoverStyle: StyleType = {
       width: Dimensions.get('window').width - popover.indent,
+      maxWidth: Dimensions.get('window').width - popover.indent,
     };
 
     return (

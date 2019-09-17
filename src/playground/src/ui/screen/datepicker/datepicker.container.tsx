@@ -41,7 +41,7 @@ export class DatepickerContainer extends React.Component<any, State> {
   };
 
   private setRange = (range: CalendarRange<Date>): void => {
-    this.setState({ range }, () => console.log(this.state.range));
+    this.setState({ range });
   };
 
   private renderIcon = (style: StyleType): IconElement<any> => {
@@ -67,16 +67,16 @@ export class DatepickerContainer extends React.Component<any, State> {
         {/*/>*/}
 
 
-        <Datepicker
-          date={this.state.date}
-          onSelect={this.setDate}
-        />
-
-        {/*<RangeDatepicker*/}
-        {/*range={this.state.range}*/}
-        {/*icon={this.renderIcon}*/}
-        {/*onSelect={this.setRange}*/}
+        {/*<Datepicker*/}
+          {/*date={this.state.date}*/}
+          {/*onSelect={this.setDate}*/}
         {/*/>*/}
+
+        <RangeDatepicker
+          range={this.state.range}
+          icon={this.renderIcon}
+          onSelect={this.setRange}
+        />
       </View>
     );
   }
