@@ -23,6 +23,7 @@ export const routes: RouteType[] = [
   { name: 'Button' },
   { name: 'Button Group' },
   { name: 'Calendar' },
+  { name: 'Range Calendar' },
   { name: 'Checkbox' },
   { name: 'Datepicker'},
   { name: 'Drawer' },

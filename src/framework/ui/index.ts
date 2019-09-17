@@ -33,6 +33,7 @@ export {
   RangeCalendarProps,
   RangeCalendarElement,
 } from './calendar/rangeCalendar.component';
+export { CalendarRange } from './calendar/type';
 export {
   CalendarViewMode,
   CalendarViewModes,
@@ -42,8 +43,15 @@ export {
   CheckBoxProps,
   CheckBoxElement,
 } from './checkbox/checkbox.component';
-export { Datepicker } from './datepicker/datepicker.component';
-export { RangeDatepicker } from './datepicker/rangeDatepicker.component';
+export {
+  Datepicker,
+  DatepickerComponent,
+} from './datepicker/datepicker.component';
+export {
+  RangeDatepicker,
+  RangeDatepickerComponent,
+} from './datepicker/rangeDatepicker.component';
+export { DatepickerProps } from './datepicker/baseDatepicker.component';
 export {
   Drawer,
   DrawerProps,

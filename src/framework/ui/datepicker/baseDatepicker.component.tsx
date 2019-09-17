@@ -128,14 +128,14 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
   };
 
   private renderControl = (): React.ReactElement<TouchableOpacityProps> => {
-    const { themedStyle, disabled } = this.props;
+    const { themedStyle, disabled, style } = this.props;
     const { container, icon, text } = this.getComponentStyles(themedStyle);
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
         disabled={disabled}
-        style={[container, styles.container]}
+        style={[container, styles.container, style]}
         onPress={this.toggleVisible}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
