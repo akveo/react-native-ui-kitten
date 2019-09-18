@@ -167,7 +167,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('* onToday method works properly', () => {
-    const expectedVisibleDateString: string = now.toLocaleString().split(',')[0];
+    const expectedVisibleDateString: string = now.toISOString().split('T')[0];
     const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
     const application: RenderAPI = render(
       <TestApplication
@@ -181,7 +181,8 @@ describe('@calendar: component checks', () => {
     fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
 
     calendarRef.current.onToday();
-    const visibleDateString: string = calendarRef.current.state.visibleDate.toLocaleString().split(',')[0];
+    const visibleDateString: string = calendarRef.current.state.visibleDate
+      .toISOString().split('T')[0];
 
     expect(visibleDateString).toBe(expectedVisibleDateString);
   });
