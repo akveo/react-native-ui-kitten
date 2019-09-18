@@ -58,7 +58,7 @@ export class MomentDateService extends DateService<Moment> {
   }
 
   public createDate(year: number, month: number, date: number): Moment {
-    return moment([year, month, date]);
+    return moment.utc([year, month, date]);
   }
 
   public format(date: Moment, format: string): string {
