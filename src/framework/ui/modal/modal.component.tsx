@@ -10,6 +10,8 @@ import {
   ViewProps,
   StyleSheet,
   Dimensions,
+  ViewStyle,
+  StyleProp,
 } from 'react-native';
 import {
   ModalService,
@@ -32,15 +34,10 @@ export const baseModalTestId: string = '@modal/base';
 type ChildElement = React.ReactElement<any>;
 type ChildrenProp = ChildElement | ChildElement[];
 
-export interface BackdropStyle {
-  backgroundColor: string;
-  opacity: number;
-}
-
 interface ComponentProps {
   visible: boolean;
   children: ChildrenProp;
-  backdropStyle?: BackdropStyle;
+  backdropStyle?: StyleProp<ViewStyle>;
 }
 
 export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
@@ -278,7 +275,7 @@ export class Modal extends React.Component<ModalProps> {
       <React.Fragment>
         <View
           pointerEvents='box-none'
-          style={[styles.backdropBaseStyles, backdropStyle]}/>
+          style={[styles.backdrop, backdropStyle]}/>
         {modal}
       </React.Fragment>
     ) : modal;
@@ -308,12 +305,12 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
   },
-  hiddenModal: {
-    opacity: 0,
-  },
-  backdropBaseStyles: {
+  backdrop: {
     position: 'absolute',
     width: screenWidth,
     height: screenHeight,
+  },
+  hiddenModal: {
+    opacity: 0,
   },
 });
