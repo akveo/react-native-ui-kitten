@@ -1,5 +1,8 @@
 import { DateService } from './date.service';
-import { CalendarDateInfo, CalendarRange } from '../type';
+import {
+  CalendarDateInfo,
+  CalendarRange,
+} from '../type';
 
 export class RangeService<D> {
 
@@ -17,6 +20,8 @@ export class RangeService<D> {
         return this.getRangeStartDate(range, date);
       case (range.startDate !== null && range.endDate !== null):
         return this.getRangeAllDates(range, date);
+      default:
+        return range;
     }
   }
 
@@ -37,6 +42,8 @@ export class RangeService<D> {
       return { startDate: range.startDate, endDate: date.date };
     } else if (this.dateService.isBetween(date.date, range.startDate, range.endDate)) {
       return { startDate: range.startDate, endDate: date.date };
+    } else {
+      return range;
     }
   }
 

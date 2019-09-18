@@ -7,6 +7,53 @@ import {
 import { styled } from '@kitten/theme';
 import { BaseDatepickerComponent } from './baseDatepicker.component';
 
+/**
+ * Styled `RangeDatepicker` component.
+ * Renders `RangeCalendar` component in the `Popover`.
+ * Supports locales and different date objects like Moment.js or date-fns.
+ * Composes date picker components in a horizontal pageable list.
+ *
+ * @extends React.Component
+ *
+ * @property {(style: ImageStyle) => React.ReactElement<ImageProps>} icon - Determines the icon of the component.
+ *
+ * @property TouchableOpacityProps
+ *
+ * @property StyledComponentProps
+ *
+ * @property CalendarProps<D>
+ *
+ * @overview-example Basic Usage
+ *
+ * ```
+ * import React from 'react';
+ * import { RangeDatepicker } from 'react-native-ui-kitten';
+ *
+ * export class BasicDatepicker extends React.Component {
+ *
+ *   state = {
+ *     range: {
+ *       startDate: null,
+ *       endDate: null,
+ *     },
+ *   };
+ *
+ *   onSelect = (range) => {
+ *     this.setState({ range });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <RangeDatepicker
+ *         range={this.state.range}
+ *         onSelect={this.onSelect}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ */
+
 export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, RangeCalendarProps<D>> {
 
   static styledComponentName: string = 'Datepicker';

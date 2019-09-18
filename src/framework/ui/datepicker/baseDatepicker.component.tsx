@@ -25,7 +25,7 @@ interface State {
   visible: boolean;
 }
 
-interface ComponentProps {
+export interface ComponentProps {
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
 }
 
