@@ -180,7 +180,7 @@ describe('@calendar: component checks', () => {
     fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
     fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
 
-    calendarRef.current.onToday();
+    calendarRef.current.scrollToToday();
     const visibleDateString: string = calendarRef.current.state.visibleDate
       .toISOString().split('T')[0];
 
