@@ -67,7 +67,7 @@ const routes: NavigationRouteConfigMap = {
 };
 
 const MenuNavigator = createStackNavigator(routes, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Radio',
   headerMode: 'screen',
 });
 
