@@ -19,12 +19,12 @@ npm i -g react-native-cli
 A new project can be created using React Native CLI tools ant UI Kitten template.
 
 ```bash
-react-native init AwesomeApp --template ui-kitten
+npx react-native init MyApp --template react-native-template-ui-kitten
 ```
 
 Or, if you want to init with TypeScript:
 ```bash
-react-native init AwesomeApp --template ui-kitten-typescript
+npx react-native init MyApp --template react-native-template-ui-kitten-typescript
 ```
 
 That's it. UI Kitten is ready now. For the next steps, simply follow command line instructions.
