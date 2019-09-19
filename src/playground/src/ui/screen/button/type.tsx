@@ -156,9 +156,5 @@ export const buttonSettings: ComponentShowcaseSetting[] = [
     propertyName: 'status',
     value: 'danger',
   },
-  {
-    propertyName: 'status',
-    value: 'white',
-  },
 ];
 
