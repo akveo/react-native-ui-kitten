@@ -161,13 +161,13 @@ const filterSection: ComponentShowcaseSection = {
 export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
-    momentSection,
-    dateFnsSection,
-    startViewSection,
-    lowerBoundedSection,
-    higherBoundedSection,
-    boundingMonthSection,
-    filterSection,
-    customTitlesSection,
+    // momentSection,
+    // dateFnsSection,
+    // startViewSection,
+    // lowerBoundedSection,
+    // higherBoundedSection,
+    // boundingMonthSection,
+    // filterSection,
+    // customTitlesSection,
   ],
 };

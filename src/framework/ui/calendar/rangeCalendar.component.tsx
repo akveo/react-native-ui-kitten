@@ -13,7 +13,7 @@ import {
 } from './type';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
 import { DateBatch } from './service/calendarData.service';
-import { RangeService } from './service/range.service';
+import { RangeDateService } from './service/rangeDate.service';
 
 export interface ComponentProps<D> {
   range: CalendarRange<D>;
@@ -88,29 +88,30 @@ export type RangeCalendarElement<D> = React.ReactElement<RangeCalendarProps<D>>;
  * }
  * ```
  */
-
 export class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCalendarProps<D>> {
 
   static styledComponentName: string = 'Calendar';
 
-  public get date(): D {
-    return this.dateService.today();
-  }
+  private rangeDateService: RangeDateService<D> = new RangeDateService(this.dateService);
 
-  private rangeService: RangeService<D> = new RangeService(this.dateService);
+  // BaseCalendarComponent
 
-  public isDaySelected(date: CalendarDateInfo<D>): boolean {
-    return false;
-  }
-
-  public onDaySelect(date: CalendarDateInfo<D>): void {
+  protected onDaySelect(date: CalendarDateInfo<D>): void {
     const { range, onSelect } = this.props;
 
-    const calendarRange: CalendarRange<D> = this.rangeService.getRange(range, date);
+    const calendarRange: CalendarRange<D> = this.rangeDateService.createRange(range, date);
     onSelect && onSelect(calendarRange);
   }
 
-  public shouldUpdateDayElement(props: CalendarPickerCellProps<D>,
+  protected getSelectedDate(): D {
+    return this.dateService.today();
+  }
+
+  protected isDaySelected(date: CalendarDateInfo<D>): boolean {
+    return false;
+  }
+
+  protected shouldUpdateDayElement(props: CalendarPickerCellProps<D>,
                                 nextProps: CalendarPickerCellProps<D>): boolean {
 
     const dateChanged: boolean = this.dateService.compareDatesSafe(props.date.date, nextProps.date.date) !== 0;
@@ -125,20 +126,23 @@ export class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCal
     const rangeStartPlaceChanged: boolean = props.firstRangeItem !== nextProps.firstRangeItem;
     const rangeEndPlaceChanged: boolean = props.lastRangeItem !== nextProps.lastRangeItem;
 
-    const value: boolean = selectionChanged || disablingChanged ||
-      rangeChanged || rangeStartPlaceChanged || rangeEndPlaceChanged;
+    const shouldUpdate: boolean =
+      selectionChanged
+      || disablingChanged
+      || rangeChanged
+      || rangeStartPlaceChanged
+      || rangeEndPlaceChanged;
 
-    if (value) {
+    if (shouldUpdate) {
       return true;
     }
 
     return props.theme !== nextProps.theme;
   }
 
-  public getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D> {
+  protected getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D> {
     return this.dataService.createDayPickerData(date.date, this.props.range);
   }
-
 }
 
 export const RangeCalendar = styled(RangeCalendarComponent);

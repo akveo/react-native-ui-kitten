@@ -1,4 +1,4 @@
-import { RangeService } from './range.service';
+import { RangeDateService } from './rangeDate.service';
 import { NativeDateService } from './nativeDate.service';
 import {
   CalendarDateInfo,
@@ -7,7 +7,7 @@ import {
 
 describe('@range service checks', () => {
 
-  let rangeService: RangeService<Date>;
+  let rangeService: RangeDateService<Date>;
 
   const initialRange: CalendarRange<Date> = {
     startDate: null,
@@ -15,7 +15,7 @@ describe('@range service checks', () => {
   };
 
   beforeEach(() => {
-    rangeService = new RangeService(new NativeDateService());
+    rangeService = new RangeDateService(new NativeDateService());
   });
 
   it('* getRange checks 1', () => {
@@ -28,7 +28,7 @@ describe('@range service checks', () => {
       bounding: false,
       holiday: false,
     };
-    const range: CalendarRange<Date> = rangeService.getRange(initialRange, date);
+    const range: CalendarRange<Date> = rangeService.createRange(initialRange, date);
 
     expect(range).toStrictEqual(expectedRange);
   });
@@ -48,8 +48,8 @@ describe('@range service checks', () => {
       bounding: false,
       holiday: false,
     };
-    let range: CalendarRange<Date> = rangeService.getRange(initialRange, date1);
-    range = rangeService.getRange(range, date2);
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
+    range = rangeService.createRange(range, date2);
 
     expect(range).toStrictEqual(expectedRange);
   });
@@ -74,9 +74,9 @@ describe('@range service checks', () => {
       bounding: false,
       holiday: false,
     };
-    let range: CalendarRange<Date> = rangeService.getRange(initialRange, date1);
-    range = rangeService.getRange(range, date2);
-    range = rangeService.getRange(range, date3);
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
+    range = rangeService.createRange(range, date2);
+    range = rangeService.createRange(range, date3);
 
     expect(range).toStrictEqual(expectedRange);
   });
@@ -101,9 +101,9 @@ describe('@range service checks', () => {
       bounding: false,
       holiday: false,
     };
-    let range: CalendarRange<Date> = rangeService.getRange(initialRange, date1);
-    range = rangeService.getRange(range, date2);
-    range = rangeService.getRange(range, date3);
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
+    range = rangeService.createRange(range, date2);
+    range = rangeService.createRange(range, date3);
 
     expect(range).toStrictEqual(expectedRange);
   });
@@ -128,9 +128,9 @@ describe('@range service checks', () => {
       bounding: false,
       holiday: false,
     };
-    let range: CalendarRange<Date> = rangeService.getRange(initialRange, date1);
-    range = rangeService.getRange(range, date2);
-    range = rangeService.getRange(range, date3);
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
+    range = rangeService.createRange(range, date2);
+    range = rangeService.createRange(range, date3);
 
     expect(range).toStrictEqual(expectedRange);
   });

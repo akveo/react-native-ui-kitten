@@ -4,7 +4,7 @@ import {
   CalendarRange,
 } from '../type';
 
-export class RangeService<D> {
+export class RangeDateService<D> {
 
   private dateService: DateService<D>;
 
@@ -12,20 +12,20 @@ export class RangeService<D> {
     this.dateService = dateService;
   }
 
-  public getRange(range: CalendarRange<D>, date: CalendarDateInfo<D>): CalendarRange<D> {
+  public createRange(range: CalendarRange<D>, date: CalendarDateInfo<D>): CalendarRange<D> {
     switch (true) {
       case (!range.startDate && !range.endDate):
         return { startDate: date.date, endDate: null };
       case (range.startDate && !range.endDate):
-        return this.getRangeStartDate(range, date);
+        return this.createRangeForStart(range, date);
       case (range.startDate !== null && range.endDate !== null):
-        return this.getRangeAllDates(range, date);
+        return this.createRangeForStartEnd(range, date);
       default:
         return range;
     }
   }
 
-  private getRangeStartDate(range: CalendarRange<D>, date: CalendarDateInfo<D>): CalendarRange<D> {
+  private createRangeForStart(range: CalendarRange<D>, date: CalendarDateInfo<D>): CalendarRange<D> {
     if (this.dateService.compareDatesSafe(range.startDate, date.date) === 1) {
       return { startDate: date.date, endDate: range.endDate };
     } else {
@@ -33,7 +33,7 @@ export class RangeService<D> {
     }
   }
 
-  private getRangeAllDates(range: CalendarRange<D>, date: CalendarDateInfo<D>): CalendarRange<D> {
+  private createRangeForStartEnd(range: CalendarRange<D>, date: CalendarDateInfo<D>): CalendarRange<D> {
     if (this.dateService.compareDatesSafe(date.date, range.startDate) === -1 &&
       this.dateService.compareDatesSafe(date.date, range.endDate) === -1) {
       return { startDate: date.date, endDate: range.endDate };
@@ -46,5 +46,4 @@ export class RangeService<D> {
       return range;
     }
   }
-
 }

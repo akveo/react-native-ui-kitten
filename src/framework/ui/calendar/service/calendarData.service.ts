@@ -29,8 +29,8 @@ export class CalendarDataService<D> {
   constructor(protected dateService: DateService<D>) {
   }
 
-  public createDayPickerData = (date: D, calendarRange?: CalendarRange<D>): DateBatch<D> => {
-    const weeks: DateBatch<D> = this.createDates(date, DEFAULT_DATE_OPTIONS, calendarRange);
+  public createDayPickerData = (date: D, dateRange?: CalendarRange<D>): DateBatch<D> => {
+    const weeks: DateBatch<D> = this.createDates(date, DEFAULT_DATE_OPTIONS, dateRange);
 
     return this.withBoundingMonths(weeks, date);
   };
@@ -85,44 +85,49 @@ export class CalendarDataService<D> {
     return this.dateService.getYear(rhs) - this.dateService.getYear(lhs);
   };
 
-  private createDates(activeMonth: D, options: CalendarDateOptions, calendarRange: CalendarRange<D>): DateBatch<D> {
+  private createDates(activeMonth: D, options: CalendarDateOptions, dateRange?: CalendarRange<D>): DateBatch<D> {
     let days: DateRange<D> = this.createDateRangeForMonth(activeMonth, options);
-    if (calendarRange) {
-      days = this.patchRangeDates(days, calendarRange);
+
+    if (dateRange) {
+      days = this.withRangedDates(days, dateRange);
     }
+
     const startOfWeekDayDiff: number = this.getStartOfWeekDayDiff(activeMonth);
 
     return batch(days, DateService.DAYS_IN_WEEK, startOfWeekDayDiff);
   }
 
-  private patchRangeDates(days: DateRange<D>, calendarRange: CalendarRange<D>): DateRange<D> {
+  private withRangedDates(days: DateRange<D>, calendarRange: CalendarRange<D>): DateRange<D> {
     if (calendarRange.startDate && !calendarRange.endDate) {
-      days.map((day: CalendarDateInfo<D>) => {
-        if (this.dateService.compareDatesSafe(day.date, calendarRange.startDate) === 0) {
-          day.range = true;
-          return day;
-        }
-      });
-
-      return days;
+      return this.withRangedStartDates(days, calendarRange.startDate);
     }
 
     if (calendarRange.startDate && calendarRange.endDate) {
-      return days.map((day: CalendarDateInfo<D>) => {
-        if (this.dateService.compareDatesSafe(day.date, calendarRange.startDate) === 0 ||
-          this.dateService.compareDatesSafe(day.date, calendarRange.endDate) === 0) {
-
-          day.range = true;
-          return day;
-        } else {
-          const isInRange: boolean = this.dateService
-            .isBetween(day.date, calendarRange.startDate, calendarRange.endDate);
-          return { ...day, range: isInRange };
-        }
-      });
-    } else {
-      return days;
+      return this.withRangedStartEndDates(days, calendarRange.startDate, calendarRange.endDate);
     }
+
+    return days;
+  }
+
+  private withRangedStartDates(days: DateRange<D>, startDate): DateRange<D> {
+    return days.map((day: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+      const isSameStartDate: boolean = this.dateService.compareDatesSafe(day.date, startDate) === 0;
+      return isSameStartDate ? { ...day, range: true } : day;
+    });
+  }
+
+  private withRangedStartEndDates(days: DateRange<D>, startDate: D, endDate: D): DateRange<D> {
+    return days.map((day: CalendarDateInfo<D>): CalendarDateInfo<D> => {
+      const isSameStartDate: boolean = this.dateService.compareDatesSafe(day.date, startDate) === 0;
+      const isSameEndDate: boolean = this.dateService.compareDatesSafe(day.date, endDate) === 0;
+
+      if (isSameStartDate || isSameEndDate) {
+        return { ...day, range: true };
+      } else {
+        const isInRange: boolean = this.dateService.isBetween(day.date, startDate, endDate);
+        return { ...day, range: isInRange };
+      }
+    });
   }
 
   private withBoundingMonths(weeks: DateBatch<D>, activeMonth: D): DateBatch<D> {

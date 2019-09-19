@@ -39,7 +39,7 @@ export class CalendarShowcase extends React.Component<Props, State> {
   };
 
   private onTodayPress = (): void => {
-    this.calendarRef.current.onToday();
+    this.calendarRef.current.scrollToToday();
   };
 
   private renderFooterElement = (): React.ReactElement<any> => {

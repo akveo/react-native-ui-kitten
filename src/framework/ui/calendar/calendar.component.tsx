@@ -189,13 +189,7 @@ export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps
 
   static styledComponentName: string = 'Calendar';
 
-  public get date(): D {
-    return this.props.date || this.dateService.today();
-  }
-
-  public isDaySelected(date: CalendarDateInfo<D>): boolean {
-    return this.dateService.isSameDaySafe(date.date, this.date);
-  }
+  // BaseCalendarComponent
 
   public onDaySelect(date: CalendarDateInfo<D>): void {
     const { onSelect } = this.props;
@@ -203,6 +197,18 @@ export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps
     if (onSelect) {
       onSelect(date.date);
     }
+  }
+
+  public getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D> {
+    return this.dataService.createDayPickerData(date.date);
+  }
+
+  public getSelectedDate(): D {
+    return this.props.date || this.dateService.today();
+  }
+
+  public isDaySelected(date: CalendarDateInfo<D>): boolean {
+    return this.dateService.isSameDaySafe(date.date, this.getSelectedDate());
   }
 
   public shouldUpdateDayElement(props: CalendarPickerCellProps<D>,
@@ -225,11 +231,6 @@ export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps
 
     return props.theme !== nextProps.theme;
   }
-
-  public getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D> {
-    return this.dataService.createDayPickerData(date.date);
-  }
-
 }
 
 export const Calendar = styled(CalendarComponent);
