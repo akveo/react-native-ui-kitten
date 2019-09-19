@@ -50,7 +50,8 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * Can be `primary`, `success`, `info`, `warning`, `danger` or `basic`.
+ * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
  * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
@@ -213,6 +214,18 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }
   };
 
+  private getIconColor = (interpolatedColor: string | Animated.AnimatedDiffClamp)
+    : string | Animated.AnimatedDiffClamp => {
+    // this is due to react-native bug fix the same content-container rgba colors
+    const { checked, disabled } = this.props;
+
+    if (!checked && disabled) {
+      return 'transparent';
+    } else {
+      return interpolatedColor;
+    }
+  };
+
   private getComponentStyle = (source: StyleType): StyleType => {
     const { style, checked, disabled } = this.props;
 
@@ -278,7 +291,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       icon: {
         width: source.iconWidth,
         height: source.iconHeight,
-        backgroundColor: interpolatedIconColor,
+        backgroundColor: this.getIconColor(interpolatedIconColor),
       },
     };
   };
@@ -359,7 +372,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       <View
         {...restProps}
         style={[componentStyle.container, styles.container, style]}>
-        <View style={[componentStyle.highlight, styles.highlight]} />
+        <View style={[componentStyle.highlight, styles.highlight]}/>
         <TouchableOpacity
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
@@ -367,7 +380,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
           <Animated.View
             style={[componentStyle.componentContainer, styles.componentContainer]}
             {...this.panResponder.panHandlers}>
-            <Animated.View style={[componentStyle.ellipse, styles.ellipse]} />
+            <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
             <Animated.View style={[componentStyle.thumb, styles.thumb]}>
               <CheckMark
                 style={componentStyle.icon}
