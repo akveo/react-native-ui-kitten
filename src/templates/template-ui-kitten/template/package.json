@@ -6,7 +6,6 @@
     "start": "react-native start",
     "start:ios": "react-native run-ios",
     "start:android": "react-native run-android",
-    "test": "jest",
     "postinstall": "react-native link"
   },
   "dependencies": {
@@ -21,20 +20,6 @@
     "@babel/core": "^7.5.0",
     "@babel/runtime": "^7.5.0",
     "@react-native-community/eslint-config": "^0.0.3",
-    "babel-jest": "^24.1.0",
-    "jest": "^24.1.0",
-    "metro-react-native-babel-preset": "0.54.1",
-    "react-test-renderer": "16.8.6"
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "metro-react-native-babel-preset": "0.54.1"
   }
 }
