@@ -87,6 +87,10 @@ export const radioSettings: ComponentShowcaseSetting[] = [
     value: 'danger',
   },
   {
+    propertyName: 'status',
+    value: 'control',
+  },
+  {
     propertyName: 'checked',
     value: true,
   },

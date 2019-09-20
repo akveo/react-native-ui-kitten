@@ -51,7 +51,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning`, `danger` or `basic`.
+ * Can be `primary`, `success`, `info`, `warning`, `danger`, basic` or `control`.
  * Default is `basic`.
  *
  * @property {string} text - Determines text of the component.
