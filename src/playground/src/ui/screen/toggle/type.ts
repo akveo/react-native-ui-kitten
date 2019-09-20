@@ -5,6 +5,21 @@ import {
   ComponentShowcaseSetting,
 } from '../common/type';
 
+const leftTitleToggle: ComponentShowcaseItem = {
+  title: 'Right',
+  props: {
+    text: 'Place your text',
+  },
+};
+
+const rightTitleToggle: ComponentShowcaseItem = {
+  title: 'Left',
+  props: {
+    style: { flexDirection: 'row-reverse' },
+    text: 'Place your text',
+  },
+};
+
 const checkedToggle: ComponentShowcaseItem = {
   title: 'Checked',
   props: {
@@ -26,6 +41,14 @@ const disabledToggle: ComponentShowcaseItem = {
   },
 };
 
+const titleSection: ComponentShowcaseSection = {
+  title: 'Title',
+  items: [
+    leftTitleToggle,
+    rightTitleToggle,
+  ],
+};
+
 const stateSection: ComponentShowcaseSection = {
   title: 'State',
   items: [
@@ -38,6 +61,7 @@ const stateSection: ComponentShowcaseSection = {
 export const toggleShowcase: ComponentShowcase = {
   sections: [
     stateSection,
+    titleSection,
   ],
 };
 
