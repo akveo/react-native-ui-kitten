@@ -38,9 +38,9 @@ const stateSection: ComponentShowcaseSection = {
   title: 'State',
   items: [
     checkedToggle,
-    uncheckedToggle,
-    disabledCheckedToggle,
-    disabledUncheckedToggle,
+    // uncheckedToggle,
+    // disabledCheckedToggle,
+    // disabledUncheckedToggle,
   ],
 };
 
@@ -70,5 +70,9 @@ export const toggleSettings: ComponentShowcaseSetting[] = [
   {
     propertyName: 'status',
     value: 'danger',
+  },
+  {
+    propertyName: 'status',
+    value: 'control',
   },
 ];

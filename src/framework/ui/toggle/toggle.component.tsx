@@ -50,7 +50,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning`, `danger` or `basic`.
+ * Can be `primary`, `success`, `info`, `warning`, `danger`, `basic` or `control`.
  * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
