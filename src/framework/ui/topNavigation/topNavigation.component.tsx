@@ -214,6 +214,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     return React.Children.map(source, (element: TopNavigationActionElement, index: number) => {
       return React.cloneElement(element, {
         key: index,
+        appearance: this.props.appearance,
       });
     });
   }
