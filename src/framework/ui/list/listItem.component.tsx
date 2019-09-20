@@ -218,10 +218,12 @@ export class ListItemComponent extends React.Component<ListItemProps> {
       iconMarginHorizontal,
       iconTintColor,
       titleMarginHorizontal,
+      titleFontFamily,
       titleFontSize,
       titleLineHeight,
       titleFontWeight,
       titleColor,
+      descriptionFontFamily,
       descriptionFontSize,
       descriptionFontWeight,
       descriptionLineHeight,
@@ -242,6 +244,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
       },
       title: {
         marginHorizontal: titleMarginHorizontal,
+        fontFamily: titleFontFamily,
         fontSize: titleFontSize,
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
@@ -249,6 +252,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
       },
       description: {
         color: descriptionColor,
+        fontFamily: descriptionFontFamily,
         fontSize: descriptionFontSize,
         fontWeight: descriptionFontWeight,
         lineHeight: descriptionLineHeight,

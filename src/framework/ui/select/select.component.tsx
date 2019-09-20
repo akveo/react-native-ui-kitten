@@ -568,6 +568,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
       },
       text: {
         color: textStyles.textColor,
+        fontFamily: textStyles.textFontFamily,
         fontSize: textStyles.textFontSize,
         fontWeight: textStyles.textFontWeight,
         lineHeight: textStyles.textLineHeight,
@@ -575,6 +576,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
       },
       placeholder: {
         color: placeholderStyles.placeholderColor,
+        fontFamily: placeholderStyles.placeholderFontFamily,
         fontSize: placeholderStyles.placeholderFontSize,
         fontWeight: placeholderStyles.placeholderFontWeight,
         lineHeight: placeholderStyles.placeholderLineHeight,

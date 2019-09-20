@@ -164,6 +164,7 @@ export class RadioComponent extends React.Component<RadioProps> {
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textMarginHorizontal,
+      textFontFamily,
       textFontSize,
       textFontWeight,
       textLineHeight,
@@ -185,6 +186,7 @@ export class RadioComponent extends React.Component<RadioProps> {
       selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,

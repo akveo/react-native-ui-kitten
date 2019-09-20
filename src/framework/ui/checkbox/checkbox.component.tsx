@@ -297,10 +297,11 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textMarginHorizontal,
-      textColor,
+      textFontFamily,
       textFontSize,
       textFontWeight,
       textLineHeight,
+      textColor,
       iconWidth,
       iconHeight,
       iconBorderRadius,
@@ -318,10 +319,11 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
-        color: textColor,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         lineHeight: textLineHeight,
+        color: textColor,
       },
       icon: {
         width: iconWidth,

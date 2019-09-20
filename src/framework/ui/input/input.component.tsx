@@ -303,6 +303,7 @@ export class InputComponent extends React.Component<InputProps> {
 
     const {
       textMarginHorizontal,
+      textFontFamily,
       textFontSize,
       textLineHeight,
       textFontWeight,
@@ -340,6 +341,7 @@ export class InputComponent extends React.Component<InputProps> {
       },
       text: {
         marginHorizontal: textMarginHorizontal,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         // FIXME: RN issue (https://github.com/facebook/react-native/issues/7823)
         // lineHeight: textLineHeight,

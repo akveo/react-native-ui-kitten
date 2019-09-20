@@ -216,6 +216,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
       iconTintColor,
       textMarginHorizontal,
       textFontSize,
+      textFontFamily,
       textLineHeight,
       textColor,
       ...containerParameters
@@ -235,6 +236,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
       },
       text: {
         marginHorizontal: textMarginHorizontal,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         color: textColor,

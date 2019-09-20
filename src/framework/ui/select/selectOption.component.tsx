@@ -88,6 +88,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textColor,
+      textFontFamily,
       textFontSize,
       textFontWeight,
       textLineHeight,
@@ -105,6 +106,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
       },
       text: {
         color: textColor,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         lineHeight: textLineHeight,
@@ -112,6 +114,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
       },
       multiSelectText: {
         color: multiSelectTextColor,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
         lineHeight: textLineHeight,
