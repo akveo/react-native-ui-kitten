@@ -73,6 +73,7 @@ interface ComponentProps {
   icon?: IconProp;
   onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
   status?: string;
+  size?: string;
   renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
 }
 
@@ -94,6 +95,10 @@ interface State {
  *
  * @property {string} status - Determines the status of the component.
  * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `large`, `medium` or `small`.
+ * Default is `medium`.
  *
  * @property {boolean} multiSelect - Determines `multi-select` behavior of the Select component.
  *
