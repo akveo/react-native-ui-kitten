@@ -145,6 +145,8 @@ export const withStyles = <P extends object>(Component: React.ComponentType<P>,
 
   const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElement => {
     return (
+      // @ts-ignore
+
       <Wrapper
         {...props}
         forwardedRef={ref}
