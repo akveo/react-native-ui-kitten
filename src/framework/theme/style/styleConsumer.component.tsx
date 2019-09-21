@@ -17,7 +17,7 @@ import { ThemeContext } from '../theme/themeContext';
 import { ThemeType } from '../theme/type';
 
 interface PrivateProps<T> {
-  forwardedRef?: React.RefObject<T>;
+  forwardedRef?: React.Ref<T>;
 }
 
 export interface StyledComponentProps {
@@ -206,6 +206,8 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
 
   const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElement => {
     return (
+      // @ts-ignore
+
       <Wrapper
         {...props}
         forwardedRef={ref}
