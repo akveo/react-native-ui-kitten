@@ -394,8 +394,8 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
 
     return (
       <View
-        {...this.panResponder.panHandlers}
         {...restProps}
+        {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
         <View style={[componentStyle.toggleContainer, styles.toggleContainer]}>
           <View style={[componentStyle.highlight, styles.highlight]}/>
