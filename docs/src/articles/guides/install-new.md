@@ -6,10 +6,10 @@ If you don't have any code yet, please consider checking <a href="https://facebo
 
 ## Installation
 
-First of all, you should have React Native CLI installed.
+First of all, you should have npx installed.
 
 ```bash
-npm i -g react-native-cli
+npm i -g npx
 ```
 
 <hr>
