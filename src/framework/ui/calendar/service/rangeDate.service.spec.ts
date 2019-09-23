@@ -18,7 +18,7 @@ describe('@range service checks', () => {
     rangeService = new RangeDateService(new NativeDateService());
   });
 
-  it('* getRange checks 1', () => {
+  it('* getRange (only start date)', () => {
     const expectedRange: CalendarRange<Date> = {
       startDate: new Date(Date.UTC(2019, 8, 12)),
       endDate: null,
@@ -33,7 +33,7 @@ describe('@range service checks', () => {
     expect(range).toStrictEqual(expectedRange);
   });
 
-  it('* getRange checks 2', () => {
+  it('* getRange (full range)', () => {
     const expectedRange: CalendarRange<Date> = {
       startDate: new Date(Date.UTC(2019, 8, 12)),
       endDate: new Date(Date.UTC(2019, 8, 24)),
@@ -54,7 +54,7 @@ describe('@range service checks', () => {
     expect(range).toStrictEqual(expectedRange);
   });
 
-  it('* getRange checks 3', () => {
+  it('* getRange (re-select with only start date)', () => {
     const expectedRange: CalendarRange<Date> = {
       startDate: new Date(Date.UTC(2019, 8, 19)),
       endDate: null,
@@ -81,7 +81,7 @@ describe('@range service checks', () => {
     expect(range).toStrictEqual(expectedRange);
   });
 
-  it('* getRange checks 4', () => {
+  it('* getRange (re-select with full range)', () => {
     const expectedRange: CalendarRange<Date> = {
       startDate: new Date(Date.UTC(2019, 8, 10)),
       endDate: new Date(Date.UTC(2019, 8, 13)),
