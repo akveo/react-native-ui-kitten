@@ -17,7 +17,7 @@ import {
   Drawer,
   DrawerProps,
 } from '../drawer/drawer.component';
-import { DrawerFence } from './drawerFence.component';
+import { DrawerHeaderFooter } from './drawerHeaderFooter.component';
 import {
   MenuItemType,
   MenuItem,
@@ -103,7 +103,7 @@ describe('@drawer: component checks', () => {
 
   it('* should render header', () => {
     const header = () => (
-      <DrawerFence testID='@drawer-header'/>
+      <DrawerHeaderFooter testID='@drawer-header'/>
     );
 
     const component: RenderAPI = renderComponent({ data, header, onSelect: () => 1 });
@@ -113,7 +113,7 @@ describe('@drawer: component checks', () => {
 
   it('* should render footer', () => {
     const footer = () => (
-      <DrawerFence testID='@drawer-footer'/>
+      <DrawerHeaderFooter testID='@drawer-footer'/>
     );
 
     const component: RenderAPI = renderComponent({ data, footer, onSelect: () => 1 });
