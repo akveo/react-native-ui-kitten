@@ -6,9 +6,6 @@ import {
 } from '../calendar/calendar.component';
 import { styled } from '@kitten/theme';
 import { BaseDatepickerComponent } from './baseDatepicker.component';
-import { NativeDateService } from '../calendar/service/nativeDate.service';
-
-const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
 
 /**
  * Styled `Datepicker` component.
@@ -57,14 +54,6 @@ const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
 export class DatepickerComponent<D> extends BaseDatepickerComponent<D, CalendarProps<D>> {
 
   static styledComponentName: string = 'Datepicker';
-
-  static defaultProps = {
-    dateService: new NativeDateService(),
-  };
-
-  protected formatDateToString(date: D): string {
-    return this.props.dateService.format(date, FULL_DATE_FORMAT_STRING);
-  }
 
   protected getComponentTitle(): string {
     const { date } = this.props;

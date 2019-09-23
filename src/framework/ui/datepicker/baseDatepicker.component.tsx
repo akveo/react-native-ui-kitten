@@ -12,6 +12,8 @@ import {
   TextElement,
 } from '../text/text.component';
 import { Popover } from '../popover/popover.component';
+import { BaseCalendarProps } from '../calendar/baseBalendar.component';
+import { NativeDateService } from '../calendar/service/nativeDate.service';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
 import {
@@ -21,6 +23,8 @@ import {
 } from '@kitten/theme';
 import { Dimensions } from 'react-native';
 
+const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
+
 interface State {
   visible: boolean;
 }
@@ -29,9 +33,17 @@ export interface ComponentProps {
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
 }
 
-export type DatepickerProps<D> = ComponentProps & StyledComponentProps & TouchableOpacityProps;
+export type DatepickerProps<D> =
+  ComponentProps &
+  StyledComponentProps &
+  TouchableOpacityProps &
+  BaseCalendarProps<D>;
 
 export abstract class BaseDatepickerComponent<D, P> extends React.Component<DatepickerProps<D> & P, State> {
+
+  static defaultProps = {
+    dateService: new NativeDateService(),
+  };
 
   public state: State = {
     visible: false,
@@ -41,7 +53,9 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 
-  protected abstract formatDateToString(date: D): string;
+  protected formatDateToString(date: D): string {
+    return this.props.dateService.format(date, FULL_DATE_FORMAT_STRING);
+  }
 
   private getComponentStyles = (style: StyleType): StyleType => {
     const {
