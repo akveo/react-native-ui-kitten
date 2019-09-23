@@ -37,9 +37,11 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     visible: false,
   };
 
-  public abstract getComponentTitle(): string;
+  protected abstract getComponentTitle(): string;
 
-  public abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
+  protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
+
+  protected abstract formatDateToString(date: D): string;
 
   private getComponentStyles = (style: StyleType): StyleType => {
     const {
@@ -103,15 +105,6 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
       this.props.dispatch([]);
     }
   };
-
-  public formatDateToString(date: D): string {
-    const selectedDate: Date = new Date(Date.parse(date.toString()));
-    const day: number = selectedDate.getDate();
-    const month: number = selectedDate.getMonth() + 1;
-    const year: number = selectedDate.getFullYear();
-
-    return `${day}/${month}/${year}`;
-  }
 
   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
     const { icon } = this.props;

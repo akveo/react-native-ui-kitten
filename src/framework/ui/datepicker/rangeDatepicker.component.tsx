@@ -6,6 +6,9 @@ import {
 } from '../calendar/rangeCalendar.component';
 import { styled } from '@kitten/theme';
 import { BaseDatepickerComponent } from './baseDatepicker.component';
+import { NativeDateService } from '../calendar/service/nativeDate.service';
+
+const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
 
 /**
  * Styled `RangeDatepicker` component.
@@ -58,7 +61,15 @@ export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, Rang
 
   static styledComponentName: string = 'Datepicker';
 
-  public getComponentTitle(): string {
+  static defaultProps = {
+    dateService: new NativeDateService(),
+  };
+
+  protected formatDateToString(date: D): string {
+    return this.props.dateService.format(date, FULL_DATE_FORMAT_STRING);
+  }
+
+  protected getComponentTitle(): string {
     const { range } = this.props;
     const { startDate, endDate } = range;
 
@@ -72,7 +83,7 @@ export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, Rang
     }
   }
 
-  public renderCalendar(): RangeCalendarElement<D> {
+  protected renderCalendar(): RangeCalendarElement<D> {
     return (
       <RangeCalendar {...this.props}/>
     );
