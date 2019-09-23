@@ -80,8 +80,7 @@ describe('@calendar: component checks', () => {
 
   it('* range re-selected properly 1', () => {
     const month: number = 9 - 1;
-    const expectedStartDate: Date = new Date(Date.UTC(2019, month, 11));
-    const expectedEndDate: Date = new Date(Date.UTC(2019, month, 19));
+    const expectedStartDate: Date = new Date(Date.UTC(2019, month, 19));
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[1]);
@@ -90,13 +89,12 @@ describe('@calendar: component checks', () => {
     const { range } = application.getByType(RangeCalendar).props;
 
     expect(range.startDate.toString()).toBe(expectedStartDate.toString());
-    expect(range.endDate.toString()).toBe(expectedEndDate.toString());
+    expect(range.endDate).toBeNull();
   });
 
   it('* range re-selected properly 2', () => {
     const month: number = 9 - 1;
     const expectedStartDate: Date = new Date(Date.UTC(2019, month, 8));
-    const expectedEndDate: Date = new Date(Date.UTC(2019, month, 26));
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[1]);
@@ -105,7 +103,7 @@ describe('@calendar: component checks', () => {
     const { range } = application.getByType(RangeCalendar).props;
 
     expect(range.startDate.toString()).toBe(expectedStartDate.toString());
-    expect(range.endDate.toString()).toBe(expectedEndDate.toString());
+    expect(range.endDate).toBeNull();
   });
 
 });

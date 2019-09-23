@@ -56,8 +56,8 @@ describe('@range service checks', () => {
 
   it('* getRange checks 3', () => {
     const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(Date.UTC(2019, 8, 12)),
-      endDate: new Date(Date.UTC(2019, 8, 19)),
+      startDate: new Date(Date.UTC(2019, 8, 19)),
+      endDate: null,
     };
     const date1: CalendarDateInfo<Date> = {
       date: new Date(Date.UTC(2019, 8, 12)),
@@ -84,7 +84,7 @@ describe('@range service checks', () => {
   it('* getRange checks 4', () => {
     const expectedRange: CalendarRange<Date> = {
       startDate: new Date(Date.UTC(2019, 8, 10)),
-      endDate: new Date(Date.UTC(2019, 8, 24)),
+      endDate: new Date(Date.UTC(2019, 8, 13)),
     };
     const date1: CalendarDateInfo<Date> = {
       date: new Date(Date.UTC(2019, 8, 12)),
@@ -101,36 +101,15 @@ describe('@range service checks', () => {
       bounding: false,
       holiday: false,
     };
-    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
-    range = rangeService.createRange(range, date2);
-    range = rangeService.createRange(range, date3);
-
-    expect(range).toStrictEqual(expectedRange);
-  });
-
-  it('* getRange checks 5', () => {
-    const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(Date.UTC(2019, 8, 12)),
-      endDate: new Date(Date.UTC(2019, 8, 14)),
-    };
-    const date1: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 12)),
-      bounding: false,
-      holiday: false,
-    };
-    const date2: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 24)),
-      bounding: false,
-      holiday: false,
-    };
-    const date3: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 14)),
+    const date4: CalendarDateInfo<Date> = {
+      date: new Date(Date.UTC(2019, 8, 13)),
       bounding: false,
       holiday: false,
     };
     let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
     range = rangeService.createRange(range, date2);
     range = rangeService.createRange(range, date3);
+    range = rangeService.createRange(range, date4);
 
     expect(range).toStrictEqual(expectedRange);
   });
