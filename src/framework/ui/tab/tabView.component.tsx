@@ -8,7 +8,6 @@ import React from 'react';
 import {
   StyleProp,
   StyleSheet,
-  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -144,6 +143,7 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *     );
  *   }
  * }
+ *
  * ```
  *
  * @example Inline Styling
@@ -227,9 +227,7 @@ export class TabView extends React.Component<TabViewProps> {
     const { tabs, content } = this.renderComponentChildren(children);
 
     return (
-      <View
-        {...derivedProps}
-        style={[styles.container, style]}>
+      <React.Fragment>
         <TabBar
           style={tabBarStyle}
           ref={this.tabBarRef}
@@ -240,13 +238,15 @@ export class TabView extends React.Component<TabViewProps> {
         </TabBar>
         <ViewPager
           ref={this.viewPagerRef}
+          {...derivedProps}
+          style={[styles.container, style]}
           selectedIndex={selectedIndex}
           shouldLoadComponent={this.props.shouldLoadComponent}
           onOffsetChange={this.onPagerOffsetChange}
           onSelect={this.onPagerSelect}>
           {content}
         </ViewPager>
-      </View>
+      </React.Fragment>
     );
   }
 }
