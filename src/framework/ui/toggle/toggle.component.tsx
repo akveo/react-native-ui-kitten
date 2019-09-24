@@ -214,18 +214,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }
   };
 
-  private getIconColor = (interpolatedColor: string | Animated.AnimatedDiffClamp)
-    : string | Animated.AnimatedDiffClamp => {
-    // this is due to react-native bug fix the same content-container rgba colors
-    const { checked, disabled } = this.props;
-
-    if (!checked && disabled) {
-      return 'transparent';
-    } else {
-      return interpolatedColor;
-    }
-  };
-
   private getComponentStyle = (source: StyleType): StyleType => {
     const { style, checked, disabled } = this.props;
 
@@ -250,11 +238,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     const interpolatedBackgroundColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
       backgroundColor,
       borderColor,
-    );
-
-    const interpolatedIconColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
-      thumbBackgroundColor,
-      iconTintColor,
     );
 
     const thumbScale: Animated.AnimatedDiffClamp = this.animateThumbScale(offsetValue);
@@ -291,7 +274,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       icon: {
         width: source.iconWidth,
         height: source.iconHeight,
-        backgroundColor: this.getIconColor(interpolatedIconColor),
+        backgroundColor: iconTintColor,
       },
     };
   };

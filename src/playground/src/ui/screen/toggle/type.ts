@@ -22,6 +22,7 @@ const uncheckedToggle: ComponentShowcaseItem = {
 const disabledUncheckedToggle: ComponentShowcaseItem = {
   title: 'Disabled Unchecked',
   props: {
+    checked: false,
     disabled: true,
   },
 };
@@ -29,7 +30,7 @@ const disabledUncheckedToggle: ComponentShowcaseItem = {
 const disabledCheckedToggle: ComponentShowcaseItem = {
   title: 'Disabled Checked',
   props: {
-    checked: false,
+    checked: true,
     disabled: true,
   },
 };
@@ -38,9 +39,9 @@ const stateSection: ComponentShowcaseSection = {
   title: 'State',
   items: [
     checkedToggle,
-    // uncheckedToggle,
-    // disabledCheckedToggle,
-    // disabledUncheckedToggle,
+    uncheckedToggle,
+    disabledCheckedToggle,
+    disabledUncheckedToggle,
   ],
 };
 
