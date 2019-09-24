@@ -15,7 +15,7 @@ import {
   DrawerProps,
   MenuItemType,
   Text,
-  DrawerFence,
+  DrawerHeaderFooter,
   Icon,
   Divider,
 } from '@kitten/ui';
@@ -57,7 +57,8 @@ export class DrawerNavigation extends React.Component<DrawerItemsProps> {
   private renderHeader = (): DrawerHeaderElement => {
     return (
       <React.Fragment>
-        <DrawerFence
+        <DrawerHeaderFooter
+          disabled={true}
           title='UI Kitten'
           description='Playground Module'
           icon={this.renderIcon}
@@ -71,7 +72,10 @@ export class DrawerNavigation extends React.Component<DrawerItemsProps> {
     return (
       <React.Fragment>
         <Divider/>
-        <DrawerFence description='Version 4.2.0'/>
+        <DrawerHeaderFooter
+          disabled={true}
+          description='Version 4.2.0'
+        />
       </React.Fragment>
     );
   };

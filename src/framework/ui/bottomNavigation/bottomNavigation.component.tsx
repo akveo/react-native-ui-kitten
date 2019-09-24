@@ -78,7 +78,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *     return (
  *       <BottomNavigation
  *          selectedIndex={this.state.selectedIndex}
- *          onSelect={this.onTabSelect}
+ *          onSelect={this.onTabSelect}>
  *          <BottomNavigationTab title='Tab 1/>
  *          <BottomNavigationTab title='Tab 2/>
  *          <BottomNavigationTab title='Tab 3/>
@@ -109,7 +109,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *       <BottomNavigation
  *          appearance='noIndicator'
  *          selectedIndex={this.state.selectedIndex}
- *          onSelect={this.onTabSelect}
+ *          onSelect={this.onTabSelect}>
  *          <BottomNavigationTab title='Tab 1/>
  *          <BottomNavigationTab title='Tab 2/>
  *       </BottomNavigation>
