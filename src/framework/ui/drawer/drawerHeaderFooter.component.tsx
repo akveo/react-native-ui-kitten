@@ -103,9 +103,9 @@ export type DrawerHeaderFooterElement = ListItemElement;
  *
  * export const ProfileHeader = (props) => (
  *   <DrawerHeaderFooter
- *     style={styles.listItem}
- *     titleStyle={styles.listItemTitle}
- *     descriptionStyle={styles.listItemDescription}
+ *     style={styles.drawerHeader}
+ *     titleStyle={styles.drawerHeaderTitle}
+ *     descriptionStyle={styles.drawerHeaderDescription}
  *     title='John Doe'
  *     description='React Native Developer'
  *   />
