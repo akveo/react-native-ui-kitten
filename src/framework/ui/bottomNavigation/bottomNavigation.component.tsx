@@ -61,34 +61,77 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @overview-example Simple Usage
  *
  * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
  * import React from 'react';
- * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
+ * import { BottomNavigation, BottomNavigationTab, Icon } from 'react-native-ui-kitten';
+ *
+ * const DashboardIcon = (style) => (
+ *   <Icon {...style} name='layout' />
+ * );
+ *
+ * const SettingsIcon = (style) => (
+ *   <Icon {...style} name='settings' />
+ * );
  *
  * export class BottomNavigationShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onTabSelect = (selectedIndex: number) => {
+ *   onTabSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <BottomNavigation
- *          selectedIndex={this.state.selectedIndex}
- *          onSelect={this.onTabSelect}>
- *          <BottomNavigationTab title='Tab 1/>
- *          <BottomNavigationTab title='Tab 2/>
- *          <BottomNavigationTab title='Tab 3/>
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onTabSelect}>
+ *          <BottomNavigationTab title='Dashboard' icon={DashboardIcon} />
+ *          <BottomNavigationTab title='Settings' icon={SettingsIcon} />
  *       </BottomNavigation>
  *     );
  *   }
  * }
  * ```
  *
- * @overview-example Without Indicator
+ * @overview-example With React Navigation
+ *
+ * ```
+ * import React from 'react';
+ * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
+ * import { createBottomTabNavigator } from 'react-navigation';
+ *
+ * export const TabNavigatorScreen = createBottomTabNavigator({
+ *   ...screens,
+ * }, {
+ *   initialRouteName: 'Screen1',
+ *   tabBarComponent: BottomNavigationShowcase,
+ * });
+ *
+ * export const BottomNavigationShowcase = (props) => {
+ *
+ *  const onTabSelect = (selectedIndex) => {
+ *    const { [index]: selectedRoute } = props.navigation.state.routes;
+ *    props.navigation.navigate(selectedRoute.routeName);
+ *  };
+ *
+ *  return (
+ *    <BottomNavigation
+ *      selectedIndex={props.navigation.state.index}
+ *      onSelect={onTabSelect}>
+ *      <BottomNavigationTab title='Tab 1' />
+ *      <BottomNavigationTab title='Tab 2' />
+ *      <BottomNavigationTab title='Tab 3' />
+ *    </BottomNavigation>
+ *   );
+ * }
+ * ```
+ *
+ * @example Without Indicator
  *
  * ```
  * import React from 'react';
@@ -96,22 +139,22 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * export class BottomNavigationShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onTabSelect = (selectedIndex: number) => {
+ *   onTabSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render()  {
  *     return (
  *       <BottomNavigation
  *          appearance='noIndicator'
  *          selectedIndex={this.state.selectedIndex}
  *          onSelect={this.onTabSelect}>
- *          <BottomNavigationTab title='Tab 1/>
- *          <BottomNavigationTab title='Tab 2/>
+ *          <BottomNavigationTab title='Tab 1' />
+ *          <BottomNavigationTab title='Tab 2' />
  *       </BottomNavigation>
  *     );
  *   }
@@ -121,68 +164,20 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @example Inline Styling
  *
  * ```
- * import React, { ReactElement } from 'react';
- * import { BottomNavigation, BottomNavigationProps, BottomNavigationTab } from 'react-native-ui-kitten';
+ * import React from 'react';
+ * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
  *
- * export const BottomNavigationShowcase = (props?: BottomNavigationProps): ReactElement<BottomNavigationProps> => {
- *   return (
- *     <BottomNavigation
- *        style={styles.bottomBar}
- *        indicatorStyle={styles.indicator}>
- *        <BottomNavigationTab title='Tab 1/>
- *        <BottomNavigationTab title='Tab 2/>
- *        <BottomNavigationTab title='Tab 3/>
- *     </BottomNavigation>
- *   );
- * };
- * ```
- *
- * @example With React Navigation
- *
- * ```
- * import React, { ReactElement } from 'react';
- * import {
- *   BottomNavigation,
- *   BottomNavigationTab,
- *   BottomNavigationProps,
- * } from 'react-native-ui-kitten';
- * import {
- *   createBottomTabNavigator,
- *   NavigationContainer,
- *   NavigationContainerProps,
- *   NavigationRoute,
- * } from 'react-navigation';
- *
- * type CommonNavigationProps = NavigationProps & NavigationContainerProps;
- *
- * export const TabNavigatorScreen: NavigationContainer = createBottomTabNavigator({
- *   ...screens,
- * }, {
- *   initialRouteName: 'Screen1',
- *   tabBarComponent: BottomNavigationShowcase,
- * });
- *
- * export const BottomNavigationShowcase = (props?: BottomNavigationProps): ReactElement<BottomNavigationProps> {
- *
- *  const onTabSelect = (selectedIndex: number) => {
- *    const { [index]: selectedRoute } = props.navigation.state.routes;
- *
- *    navigation.navigate(selectedRoute.routeName);
- *  };
- *
- *  return (
- *    <BottomNavigation
- *      selectedIndex={props.navigation.state.index}
- *      onSelect={onTabSelect}>
- *      <BottomNavigationTab title='Tab 1'/>
- *      <BottomNavigationTab title='Tab 2'/>
- *      <BottomNavigationTab title='Tab 3'/>
- *    </BottomNavigation>
- *   );
- * }
+ * export const BottomNavigationShowcase = (props) => (
+ *   <BottomNavigation
+ *      style={styles.bottomNavigation}
+ *      indicatorStyle={styles.indicator}>
+ *      <BottomNavigationTab title='Tab 1' />
+ *      <BottomNavigationTab title='Tab 2' />
+ *      <BottomNavigationTab title='Tab 3' />
+ *   </BottomNavigation>
+ * );
  * ```
  */
-
 export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 
   static styledComponentName: string = 'BottomNavigation';

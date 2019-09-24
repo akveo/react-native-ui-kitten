@@ -111,11 +111,11 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  *}
  *
  * const styles = StyleSheet.create({
- *  loading: {
- *    flex: 1,
- *    justifyContent: 'center',
- *    alignItems: 'center',
- *  },
+ *   loading: {
+ *     flex: 1,
+ *     justifyContent: 'center',
+ *     alignItems: 'center',
+ *   },
  *});
  *```
  *
@@ -126,7 +126,7 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  * import { Spinner } from 'react-native-ui-kitten';
  *
  * export const GiantSpinner = () => (
- *  <Spinner size='giant'/>
+ *   <Spinner size='giant'/>
  * );
  * ```
  *
@@ -137,7 +137,7 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  * import { Spinner } from 'react-native-ui-kitten';
  *
  * export const DangerSpinner = () => (
- *  <Spinner status='danger'/>
+ *   <Spinner status='danger'/>
  * );
  * ```
  */

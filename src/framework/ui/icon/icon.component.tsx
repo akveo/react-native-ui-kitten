@@ -47,7 +47,7 @@ export type IconElement<T> = React.ReactElement<T>;
  *
  * export default class App extends React.Component {
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <ApplicationProvider
  *         mapping={mapping}
@@ -93,6 +93,7 @@ export type IconElement<T> = React.ReactElement<T>;
  * import { Input, Icon } from 'react-native-ui-kitten';
  *
  * export class PasswordInput extends React.Component {
+ *
  *  state = {
  *    passwordVisible: false,
  *  };
@@ -128,6 +129,7 @@ export type IconElement<T> = React.ReactElement<T>;
  * import { Button, Icon } from 'react-native-ui-kitten';
  *
  * export class LikeButton extends React.Component {
+ *
  *  state = {
  *    liked: false,
  *  };
@@ -155,7 +157,6 @@ export type IconElement<T> = React.ReactElement<T>;
  * }
  * ```
  */
-
 export class Icon<T> extends React.Component<IconProps<T>> {
 
   static defaultProps: Partial<IconProps> = {

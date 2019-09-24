@@ -127,9 +127,11 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @example Icon Item
  *
  * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
  * import React from 'react';
- * import { View, Image } from 'react-native';
- * import { Drawer } from 'react-native-ui-kitten';
+ * import { Drawer, Icon } from 'react-native-ui-kitten';
  *
  * const data = [
  *   { title: 'Feed' },
@@ -138,10 +140,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * ];
  *
  * const MessagesIcon = (style) => (
- *   <Image
- *     style={style}
- *     source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/email.png' }}
- *   />
+ *   <Icon {...style} name='email' />
  * );
  *
  * export const DrawerShowcase = (props) => (
@@ -185,7 +184,6 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * });
  * ```
  */
-
 class DrawerComponent extends React.Component<DrawerProps> {
 
   static styledComponentName: string = 'Drawer';

@@ -61,7 +61,6 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  * @property StyledComponentProps
  *
  */
-
 export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
 
   static styledComponentName: string = 'BottomNavigationTab';

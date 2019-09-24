@@ -71,53 +71,38 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   TopNavigation,
- *   TopNavigationAction,
- *   TopNavigationActionProps,
- * } from 'react-native-ui-kitten';
+ * import { TopNavigation } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
- *   return (
- *     <TopNavigation title='Title' />
- *   );
- * };
+ * export const TopNavigationShowcase = (props) => (
+ *   <TopNavigation title='Title' />
+ * );
  * ```
  *
  * @overview-example Actions
  *
  * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
  * import React from 'react';
- * import { Image, ImageProps } from 'react-native';
- * import {
- *   TopNavigation,
- *   TopNavigationAction,
- *   TopNavigationActionProps,
- * } from 'react-native-ui-kitten';
+ * import { TopNavigation, TopNavigationAction, Icon } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
+ * const BackIcon = (style) => (
+ *   <Icon {...style} name='arrow-back' />
+ * );
  *
- *   private onLeftControlPress = () => {
+ * export const TopNavigationShowcase = (props) => {
+ *
+ *   const onBackPress = () => {
  *     // Handle Left Control press
  *   };
  *
- *   const renderControlIcon = (style: StyleType): React.ReactElement<ImageProps> => {
- *     return (
- *       <Image
- *         style={style}
- *         source={{uri: 'https://path-to/awesome-image.png'}}
- *       />
- *     );
- *   };
- *
- *   const renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
- *     return (
- *       <TopNavigationAction
- *         icon={this.renderControlIcon}
- *         onPress={this.onLeftControlPress}
- *       />
- *     );
- *   };
+ *   const renderLeftControl = () => (
+ *     <TopNavigationAction
+ *       icon={BackIcon}
+ *       onPress={onBackPress}
+ *     />
+ *   );
  *
  *   return (
  *     <TopNavigation
@@ -128,25 +113,37 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  * };
  * ```
  *
+ * @example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { TopNavigation } from 'react-native-ui-kitten';
+ *
+ * export const TopNavigationShowcase = (props) => (
+ *   <TopNavigation
+ *     alignment='center'
+ *     title='Title'
+ *     subtitle='Subtitle'
+ *   />
+ * );
+ * ```
+ *
  * @example Inline Styling
  *
  * ```
  * import React from 'react';
- * import { TopNavigation, TopNavigationProps } from 'react-native-ui-kitten';
+ * import { TopNavigation } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
- *   return (
- *     <TopNavigation
- *       title='Title'
- *       subtitle='Subtitle'
- *       titleStyle={styles.title}
- *       subtitleStyle={styles.subtitle}
- *     />
- *   );
- * };
+ * export const TopNavigationShowcase = (props) => (
+ *   <TopNavigation
+ *     title='Title'
+ *     subtitle='Subtitle'
+ *     titleStyle={styles.title}
+ *     subtitleStyle={styles.subtitle}
+ *   />
+ * );
  * ```
- * */
-
+ */
 export class TopNavigationComponent extends React.Component<TopNavigationProps> {
 
   static styledComponentName: string = 'TopNavigation';

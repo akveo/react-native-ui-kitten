@@ -64,7 +64,6 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @property StyledComponentProps
  */
-
 export class TabComponent extends React.Component<TabProps> {
 
   static styledComponentName: string = 'Tab';

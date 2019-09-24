@@ -56,24 +56,24 @@ interface State {
  * ```
  * import React from 'react';
  * import { mapping, light as lightTheme } from '@eva-design/eva';
- * import { ApplicationProvider } from 'react-native-ui-kitten';
- * import { Application } from './path-to/root.component';
+ * import { ApplicationProvider, Layout, Text } from 'react-native-ui-kitten';
  *
  * export default class App extends React.Component {
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <ApplicationProvider
  *         mapping={mapping}
  *         theme={lightTheme}>
- *         <Application/>
+ *         <Layout style={{ flex: 1 }}>
+ *           <Text>Welcome to UI Kitten</Text>
+ *         </Layout>
  *       </ApplicationProvider>
  *     );
  *   }
  * }
  * ```
  */
-
 export class ApplicationProvider extends React.Component<ApplicationProviderProps, State> {
 
   private schemaProcessor: SchemaProcessor = new SchemaProcessor();

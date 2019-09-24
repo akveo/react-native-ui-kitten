@@ -46,30 +46,26 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  *
  * ```
  * import React from 'react';
- * import { Avatar, AvatarProps } from 'react-native-ui-kitten';
+ * import { Avatar } from 'react-native-ui-kitten';
  *
- * export const AvatarShowcase = (props?: AvatarProps): React.ReactElement<AvatarProps> => {
- *   return (
- *     <Avatar source={{uri: 'https://path-to/awesome-image.png'}} />
- *   );
- * };
+ * export const AvatarShowcase = (props) => (
+ *   <Avatar source={{uri: 'https://path-to/awesome-image.png'}} />
+ * );
  * ```
  *
  * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
- * import { Avatar, AvatarProps } from 'react-native-ui-kitten';
+ * import { Avatar } from 'react-native-ui-kitten';
  *
- * export const AvatarShowcase = (props?: AvatarProps): React.ReactElement<AvatarProps> => {
- *   return (
- *     <Avatar
- *       source={{uri: 'https://path-to/awesome-image.png'}}
- *       size='large'
- *       shape='rounded'
- *     />
- *   );
- * };
+ * export const AvatarShowcase = (props) => (
+ *   <Avatar
+ *     source={{uri: 'https://path-to/awesome-image.png'}}
+ *     size='large'
+ *     shape='rounded'
+ *   />
+ * );
  * ```
  */
 

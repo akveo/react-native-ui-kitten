@@ -62,35 +62,28 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   Menu,
- *   MenuItemType,
- * } from 'react-native-ui-kitten';
+ * import { Menu } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedIndex: number;
- * }
+ * export class MenuShowcase extends React.Component {
  *
- * export class MenuShowcase extends React.Component<any, State> {
- *
- *   public state: State = {
+ *   state = {
  *     selectedIndex: null,
  *   };
  *
- *   private data: MenuItemType[] = [
+ *   data = [
  *     { title: 'Item 1' },
  *     { title: 'Item 2' },
  *     { title: 'Item 3' },
  *   ];
  *
- *   private onSelect = (selectedIndex: number): void => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Menu
- *         data={this.items}
+ *         data={this.data}
  *         selectedItem={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
  *       />
@@ -99,40 +92,74 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * }
  * ```
  *
- * @overview-example Eva Styling
+ * @overview-example With Icons
  *
  * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
  * import React from 'react';
- * import {
- *   Menu,
- *   MenuItemType,
- * } from 'react-native-ui-kitten';
+ * import { Menu, Icon } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedIndex: number;
- * }
+ * const StarIcon = (style) => (
+ *   <Icon {...style} name='star' />
+ * );
  *
- * export class MenuShowcase extends React.Component<any, State> {
+ * export class MenuShowcase extends React.Component {
  *
- *   public state: State = {
+ *   state = {
  *     selectedIndex: null,
  *   };
  *
- *   private data: MenuItemType[] = [
+ *   data = [
+ *     { title: 'Item 1', icon: StarIcon },
+ *     { title: 'Item 2', icon: StarIcon },
+ *     { title: 'Item 3', icon: StarIcon },
+ *   ];
+ *
+ *   onSelect = (selectedIndex) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <Menu
+ *         data={this.data}
+ *         selectedItem={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { Menu } from 'react-native-ui-kitten';
+ *
+ * export class MenuShowcase extends React.Component {
+ *
+ *   state = {
+ *     selectedIndex: null,
+ *   };
+ *
+ *   data = [
  *     { title: 'Item 1' },
  *     { title: 'Item 2' },
  *     { title: 'Item 3' },
  *   ];
  *
- *   private onSelect = (selectedIndex: number): void => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Menu
  *         appearance='noDivider'
- *         data={this.items}
+ *         data={this.data}
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
  *       />
@@ -145,92 +172,28 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   Menu,
- *   MenuItemType,
- * } from 'react-native-ui-kitten';
+ * import { Menu } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedIndex: number;
- * }
+ * export class MenuShowcase extends React.Component {
  *
- * export class MenuShowcase extends React.Component<any, State> {
- *
- *   public state: State = {
+ *   state = {
  *     selectedIndex: null,
  *   };
  *
- *   private data: MenuItemType[] = [
+ *   data = [
  *     { title: 'Item 1', disabled: true },
  *     { title: 'Item 2' },
  *     { title: 'Item 3' },
  *   ];
  *
- *   private onSelect = (selectedIndex: number): void => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Menu
- *         data={this.items}
- *         selectedItem={this.state.selectedIndex}
- *         onSelect={this.onItemSelect}
- *       />
- *     );
- *   }
- * }
- * ```
- *
- * @example With Icons
- *
- * ```
- * import React from 'react';
- * import {
- *   Menu,
- *   MenuItemType,
- * } from 'react-native-ui-kitten';
- *
- * interface State {
- *   selectedIndex: number;
- * }
- *
- * export class MenuShowcase extends React.Component<any, State> {
- *
- *   public state: State = {
- *     selectedIndex: null,
- *   };
- *
- *   private data: MenuItemType[] = [
- *     {
- *       title: 'Item 1',
- *       icon: this.Icon,
- *     },
- *     {
- *       title: 'Item 2',
- *       icon: this.Icon,
- *     },
- *     {
- *       title: 'Item 3',
- *       icon: this.Icon,
- *     },
- *   ];
- *
- *   private Icon = (style: StyleType): React.ReactElement<ImageProps> => (
- *     <Image
- *       style={style}
- *       source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
- *     />
- *   );
- *
- *   private onSelect = (selectedIndex: number): void => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   public render(): React.ReactNode {
- *     return (
- *       <Menu
- *         data={this.items}
+ *         data={this.data}
  *         selectedItem={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
  *       />
@@ -243,22 +206,15 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   Menu,
- *   MenuItemType,
- * } from 'react-native-ui-kitten';
+ * import { Menu } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedIndex: number;
- * }
+ * export class MenuShowcase extends React.Component {
  *
- * export class MenuShowcase extends React.Component<any, State> {
- *
- *   public state: State = {
+ *   state = {
  *     selectedIndex: null,
  *   };
  *
- *   private data: MenuItemType[] = [
+ *   data = [
  *     { title: 'Item 1' },
  *     {
  *       title: 'Item 2',
@@ -271,14 +227,14 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *     { title: 'Item 3' },
  *   ];
  *
- *   private onSelect = (selectedIndex: number): void => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Menu
- *         data={this.items}
+ *         data={this.data}
  *         selectedItem={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
  *       />
@@ -291,35 +247,28 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   Menu,
- *   MenuItemType,
- * } from 'react-native-ui-kitten';
+ * import { Menu } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedIndex: number;
- * }
+ * export class MenuShowcase extends React.Component {
  *
- * export class MenuShowcase extends React.Component<any, State> {
- *
- *   public state: State = {
+ *   state = {
  *     selectedIndex: null,
  *   };
  *
- *   private data: MenuItemType[] = [
+ *   data = [
  *     { title: 'Item 1', titleStyle: { color: 'red', fontSize: 18 } },
  *     { title: 'Item 2' },
  *     { title: 'Item 3' },
  *   ];
  *
- *   private onSelect = (selectedIndex: number): void => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Menu
- *         data={this.items}
+ *         data={this.data}
  *         selectedItem={this.state.selectedIndex}
  *         onSelect={this.onItemSelect}
  *       />
@@ -328,7 +277,6 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * }
  * ```
  */
-
 class MenuComponent extends React.Component<MenuProps> {
 
   static styledComponentName: string = 'Menu';

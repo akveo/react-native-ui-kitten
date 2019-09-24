@@ -45,54 +45,28 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * ```
  * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import {
- *   Layout,
- *   Text,
- * } from 'react-native-ui-kitten';
+ * import { Layout, Text } from 'react-native-ui-kitten';
  *
- * export class LayoutShowcase extends React.Component {
- *
- *  public render(): React.ReactNode {
- *    return (
- *      <Layout style={styles.container}>
- *        <Text>Layout</Text>
- *      </Layout>
- *    );
- *  }
- *}
- *
- * const styles = StyleSheet.create({
- *   container: {
- *     flex: 1,
- *     padding: 16,
- *   },
- * });
+ * export const LayoutShowcase = (props) => (
+ *   <Layout>
+ *     <Text>Layout</Text>
+ *   </Layout>
+ * );
  * ```
  *
  * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import {
- *   Layout,
- *   Text,
- * } from 'react-native-ui-kitten';
+ * import { Layout, Text } from 'react-native-ui-kitten';
  *
- * export class LayoutShowcase extends React.Component {
- *
- *  public render(): React.ReactNode {
- *    return (
- *      <Layout level='2'>
- *        <Text>Layout</Text>
- *      </Layout>
- *    );
- *  }
- * }
+ * export const LayoutShowcase = (props) => (
+ *   <Layout level='2'>
+ *     <Text>Layout</Text>
+ *   </Layout>
+ * );
  * ```
- * */
-
+ */
 export class LayoutComponent extends React.Component<LayoutProps> {
 
   static styledComponentName: string = 'Layout';

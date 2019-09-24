@@ -67,33 +67,28 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   TabView,
- *   Tab,
- * } from 'react-native-ui-kitten';
+ * import { TabView, Tab } from 'react-native-ui-kitten';
  *
  * export class TabViewShowcase extends React.Component {
- *   public state: State = {
+ *
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onSelect = (selectedIndex: number) => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <TabView
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onSelect}>
- *         <Tab title='TAB 1'
+ *         <Tab title='Dashboard'
  *           <Text>Tab 1</Text>
  *         </Tab>
- *         <Tab title='TAB 2'
+ *         <Tab title='Settings'
  *           <Text>Tab 2</Text>
- *         </Tab>
- *         <Tab title='TAB 3'
- *           <Text>Tab 3</Text>
  *         </Tab>
  *       </TabView>
  *     );
@@ -101,30 +96,71 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  * }
  * ```
  *
- * @example Lazy Loading
+ * @overview-example With Icons
  *
  * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
  * import React from 'react';
- * import {
- *   TabView,
- *   Tab,
- * } from 'react-native-ui-kitten';
+ * import { TabView, Tab, Icon } from 'react-native-ui-kitten';
+ *
+ * const DashboardIcon = (style) => (
+ *   <Icon {...style} name='layout' />
+ * );
+ *
+ * const SettingsIcon = (style) => (
+ *   <Icon {...style} name='settings' />
+ * );
  *
  * export class TabViewShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onSelect = (selectedIndex: number) => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   private shouldLoadTabContent = (index: number): boolean => {
+ *   render() {
+ *     return (
+ *       <TabView
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onSelect}>
+ *         <Tab title='Dashboard' icon={DashboardIcon}
+ *           <Text>Tab 1</Text>
+ *         </Tab>
+ *         <Tab title='Settings' icon={SettingsIcon}
+ *           <Text>Tab 2</Text>
+ *         </Tab>
+ *       </TabView>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example Lazy Loading
+ *
+ * ```
+ * import React from 'react';
+ * import { TabView, Tab } from 'react-native-ui-kitten';
+ *
+ * export class TabViewShowcase extends React.Component {
+ *
+ *   state = {
+ *     selectedIndex: 0,
+ *   };
+ *
+ *   onSelect = (selectedIndex) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   shouldLoadTabContent = (index) => {
  *     return index === this.state.selectedIndex;
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <TabView
  *         selectedIndex={this.state.selectedIndex}
@@ -150,29 +186,26 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *
  * ```
  * import React from 'react';
- * import { TabView, Tab, TabViewProps } from 'react-native-ui-kitten';
+ * import { TabView, Tab } from 'react-native-ui-kitten';
  *
- * export const TabViewShowcase = (props?: TabViewProps): React.ReactElement<TabViewProps> => {
- *   return (
- *     <TabView
- *       style={styles.tabView}
- *       tabBarStyle={styles.tabBar}
- *       indicatorStyle={styles.tabViewIndicator}>
- *       <Tab titleStyle={styles.tabTitle} title='TAB 1'>
- *         <Text>Tab 1</Text>
- *       </Tab>
- *       <Tab titleStyle={styles.tabTitle} title='TAB 2'>
- *         <Text>Tab 2</Text>
- *       </Tab>
- *       <Tab titleStyle={styles.tabTitle} title='TAB 3'>
- *         <Text>Tab 3</Text>
- *       </Tab>
- *     </TabView>
- *   );
- * };
+ * export const TabViewShowcase = (props) => (
+ *   <TabView
+ *     style={styles.tabView}
+ *     tabBarStyle={styles.tabBar}
+ *     indicatorStyle={styles.tabViewIndicator}>
+ *     <Tab titleStyle={styles.tabTitle} title='TAB 1'>
+ *       <Text>Tab 1</Text>
+ *     </Tab>
+ *     <Tab titleStyle={styles.tabTitle} title='TAB 2'>
+ *       <Text>Tab 2</Text>
+ *     </Tab>
+ *     <Tab titleStyle={styles.tabTitle} title='TAB 3'>
+ *       <Text>Tab 3</Text>
+ *     </Tab>
+ *   </TabView>
+ * );
  * ```
- * */
-
+ */
 export class TabView extends React.Component<TabViewProps> {
 
   static defaultProps: Partial<TabViewProps> = {

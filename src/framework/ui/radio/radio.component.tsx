@@ -70,15 +70,16 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * import { Radio } from 'react-native-ui-kitten';
  *
  * export class RadioShowcase extends React.Component {
- *   public state = {
+ *
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Radio
  *         checked={this.state.checked}
@@ -87,24 +88,53 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *     )
  *   }
  * }
- * ```
  *
- * @overview-example Eva Styling
+ * ```
+ * @overview-example With Text
  *
  * ```
  * import React from 'react';
  * import { Radio } from 'react-native-ui-kitten';
  *
  * export class RadioShowcase extends React.Component {
- *   public state = {
+ *
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
+ *     return (
+ *       <Radio
+ *         text='Place your text'
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     )
+ *   }
+ * }
+ * ```
+ *
+ * @example Eva Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { Radio } from 'react-native-ui-kitten';
+ *
+ * export class RadioShowcase extends React.Component {
+ *
+ *   state = {
+ *     checked: false,
+ *   };
+ *
+ *   onChange = (checked) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   render() {
  *     return (
  *       <Radio
  *         status='warning'
@@ -120,18 +150,15 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * ```
  * import React from 'react';
- * import { Radio, RadioProps } from 'react-native-ui-kitten';
+ * import { Radio } from 'react-native-ui-kitten';
  *
- * export const RadioShowcase = (props?: RadioProps): React.ReactElement<RadioProps> => {
- *   return (
- *     <Radio
- *       style={styles.radio}
- *       textStyle={styles.radioText}
- *       text='Place your text'
- *       checked={true}
- *     />
- *   );
- * };
+ * export const RadioShowcase = (props) => (
+ *   <Radio
+ *     style={styles.radio}
+ *     textStyle={styles.radioText}
+ *     checked={true}
+ *   />
+ * );
  * ```
  */
 

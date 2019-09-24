@@ -60,15 +60,16 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * import { ViewPager } from 'react-native-ui-kitten';
  *
  * export class ViewPagerShowcase extends React.Component {
- *   public state: State = {
+ *
+ *   state = {
  *      selectedIndex: 0,
  *    };
  *
- *   private onIndexChange = (selectedIndex: number) => {
+ *   onIndexChange = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <ViewPager
  *         selectedIndex={this.state.selectedIndex}
@@ -88,26 +89,27 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * }
  * ```
  *
- * @example Lazy Loading
+ * @overview-example Lazy Loading
  *
  * ```
  * import React from 'react';
  * import { ViewPager } from 'react-native-ui-kitten';
  *
  * export class ViewPagerShowcase extends React.Component {
- *   public state: State = {
- *      selectedIndex: 0,
- *    };
  *
- *   private onIndexChange = (selectedIndex: number) => {
+ *   state = {
+ *     selectedIndex: 0,
+ *   };
+ *
+ *   onIndexChange = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   private shouldLoadPageContent = (index: number): boolean => {
+ *   shouldLoadPageContent = (index) => {
  *     return index === this.state.selectedIndex;
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <ViewPager
  *         selectedIndex={this.state.selectedIndex}
@@ -128,7 +130,6 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * }
  * ```
  */
-
 export class ViewPager extends React.Component<ViewPagerProps> implements PanResponderCallbacks {
 
   static defaultProps: Partial<ViewPagerProps> = {

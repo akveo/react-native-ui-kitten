@@ -70,15 +70,15 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * export class ToggleShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Toggle
  *         checked={this.state.checked}
@@ -97,15 +97,15 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * export class ToggleShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Toggle
  *         size='small'

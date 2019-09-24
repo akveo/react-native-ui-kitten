@@ -51,36 +51,29 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * ```
  * import React from 'react';
- * import { Text, TextProps } from 'react-native-ui-kitten';
+ * import { Text } from 'react-native-ui-kitten';
  *
- * export const TextShowcase = (props?: TextProps): React.ReactElement<TextProps> => {
- *   return (
- *     <Text>
- *       Sample Text
- *     </Text>
- *   );
- * };
+ * export const TextShowcase = (props) => (
+ *   <Text>Sample Text</Text>
+ * );
  * ```
  *
  * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
- * import { Text, TextProps } from 'react-native-ui-kitten';
+ * import { Text } from 'react-native-ui-kitten';
  *
- * export const TextShowcase = (props?: TextProps): React.ReactElement<TextProps> => {
- *   return (
- *     <Text
- *       appearance='alternative'
- *       category='p2'
- *       status='success'>
- *       Sample Text
- *     </Text>
- *   );
- * };
+ * export const TextShowcase = (props) => (
+ *   <Text
+ *     appearance='hint'
+ *     category='p2'
+ *     status='success'>
+ *     Sample Text
+ *   </Text>
+ * );
  * ```
  */
-
 export class TextComponent extends React.Component<TextProps> {
 
   static styledComponentName: string = 'Text';

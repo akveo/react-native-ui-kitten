@@ -45,7 +45,6 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @property StyledComponentProps
  */
-
 class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 
   static styledComponentName: string = 'TopNavigationAction';
