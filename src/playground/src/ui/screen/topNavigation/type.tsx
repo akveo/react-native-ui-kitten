@@ -93,6 +93,14 @@ export const topNavigationShowcase: ComponentShowcase = {
 
 export const topNavigationSettings: ComponentShowcaseSetting[] = [
   {
+    propertyName: 'appearance',
+    value: 'default',
+  },
+  {
+    propertyName: 'appearance',
+    value: 'control',
+  },
+  {
     propertyName: 'alignment',
     value: 'start',
   },
