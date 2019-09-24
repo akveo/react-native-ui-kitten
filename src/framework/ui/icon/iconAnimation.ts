@@ -18,11 +18,12 @@ export interface IconAnimationRegistry {
 export function getIconAnimation(animation?: keyof IconAnimationRegistry,
                                  config?: AnimationConfig): IconAnimation {
 
-  const IconAnimations: IconAnimationRegistry = {
-    zoom: new ZoomAnimation(config),
-    pulse: new PulseAnimation(config),
-    shake: new ShakeAnimation(config),
-  };
-
-  return IconAnimations[animation];
+  switch (animation) {
+    case 'zoom':
+      return new ZoomAnimation(config);
+    case 'pulse':
+      return new PulseAnimation(config);
+    case 'shake':
+      return new ShakeAnimation(config);
+  }
 }

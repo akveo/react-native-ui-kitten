@@ -94,6 +94,28 @@ export type IconElement<T> = React.ReactElement<T>;
  * iconRef.current.startAnimation();
  * ```
  *
+ * @example Infinite Animation
+ *
+ * ```
+ * import React from 'react';
+ * import { Icon } from 'react-native-ui-kitten';
+ *
+ * const iconRef = React.createRef();
+ *
+ * export const StarIcon = (props) => (
+ *   <Icon
+ *     ref={iconRef}
+ *     name='star'
+ *     animation='shake'
+ *     animationConfig={{
+         cycles: -1,
+       }}
+ *   />
+ * );
+ *
+ * iconRef.current.startAnimation();
+ * ```
+ *
  * @example Password Input
  *
  * ```
