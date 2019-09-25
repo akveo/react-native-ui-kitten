@@ -14,10 +14,12 @@ import {
   StyledComponentProps,
 } from '@kitten/theme';
 
+type ChildElement = string | TextElement;
+
 interface ComponentProps {
   category?: string;
   status?: string;
-  children?: string;
+  children?: ChildElement | ChildElement[];
 }
 
 export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;

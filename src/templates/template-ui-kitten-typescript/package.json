@@ -1,22 +1,25 @@
 {
   "name": "react-native-template-ui-kitten-typescript",
-  "description": "React Native template with UI Kitten and TypeScript",
   "version": "4.2.0-beta.2",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
-  "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
+  },
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
   "keywords": [
     "react-native",
-    "ui-kitten",
     "typescript",
+    "jest",
     "template",
     "boilerplate"
   ],
-  "scripts": {
-    "install": "node install.js"
-  }
+  "files": [
+    "template",
+    "template.config.js"
+  ]
 }
