@@ -62,7 +62,8 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * ```
  * import React from 'react';
- * import { createDrawerNavigator, SafeAreaView } from 'react-navigation';
+ * import { SafeAreaView } from 'react-navigation';
+ * import { createDrawerNavigator } from 'react-navigation-drawer';
  * import { Dashboard, Messages, Settings } from './path-to/screen-components'; // <-- Import screen components
  *
  * class DrawerNavigation extends React.Component {

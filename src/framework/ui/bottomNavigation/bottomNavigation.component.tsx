@@ -92,7 +92,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * ```
  * import React from 'react';
  * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
- * import { createBottomTabNavigator } from 'react-navigation';
+ * import { createBottomTabNavigator } from 'react-navigation-tabs';
  * import { Dashboard, Settings } from './path-to/screen-components'; // <-- Import screen components
  *
  * export const BottomNavigationShowcase = (props) => {
