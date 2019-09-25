@@ -4,6 +4,7 @@ import {
   PulseAnimation,
   ShakeAnimation,
   ZoomAnimation,
+  AnimationConfig,
 } from '../animation';
 
 export type IconAnimation = Animation<any, ViewStyle>;
@@ -14,8 +15,15 @@ export interface IconAnimationRegistry {
   shake: IconAnimation;
 }
 
-export const IconAnimations: IconAnimationRegistry = {
-  zoom: new ZoomAnimation(),
-  pulse: new PulseAnimation(),
-  shake: new ShakeAnimation(),
-};
+export function getIconAnimation(animation?: keyof IconAnimationRegistry,
+                                 config?: AnimationConfig): IconAnimation {
+
+  switch (animation) {
+    case 'zoom':
+      return new ZoomAnimation(config);
+    case 'pulse':
+      return new PulseAnimation(config);
+    case 'shake':
+      return new ShakeAnimation(config);
+  }
+}
