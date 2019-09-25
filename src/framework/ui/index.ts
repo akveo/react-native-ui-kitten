@@ -1,3 +1,4 @@
+export { AnimationConfig } from './animation';
 export {
   Avatar,
   AvatarProps,

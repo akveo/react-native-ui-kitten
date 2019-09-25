@@ -31,6 +31,16 @@ const shakeIcon: ComponentShowcaseItem = {
   },
 };
 
+const infiniteExample: ComponentShowcaseItem = {
+  title: 'Infinite',
+  props: {
+    animation: 'shake',
+    animationConfig: {
+      cycles: -1,
+    },
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
   title: 'Default',
   items: [
@@ -47,10 +57,18 @@ const animationSection: ComponentShowcaseSection = {
   ],
 };
 
+const infiniteSection: ComponentShowcaseSection = {
+  title: 'Infinite Animation',
+  items: [
+    infiniteExample,
+  ],
+};
+
 export const iconShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
     animationSection,
+    infiniteSection,
   ],
 };
 

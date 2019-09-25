@@ -31,6 +31,7 @@ function generateDocJson() {
       excludeExternals: true,
       exclude: './node_modules/**/*',
       json: './docs/docs.json',
+      ignoreCompilerErrors: true,
     }));
 }
 
