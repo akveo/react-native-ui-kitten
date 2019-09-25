@@ -8,22 +8,27 @@ import React from 'react';
 import {
   Animated,
   Easing,
+  GestureResponderEvent,
   PanResponder,
+  PanResponderCallbacks,
+  PanResponderGestureState,
+  PanResponderInstance,
+  StyleProp,
   StyleSheet,
+  TextStyle,
   View,
   ViewProps,
-  PanResponderInstance,
-  GestureResponderEvent,
-  PanResponderGestureState,
-  TouchableOpacity,
-  PanResponderCallbacks,
 } from 'react-native';
 import {
-  StyledComponentProps,
-  StyleType,
   Interaction,
   styled,
+  StyledComponentProps,
+  StyleType,
 } from '@kitten/theme';
+import {
+  Text,
+  TextElement,
+} from '../text/text.component';
 import { CheckMark } from '../support/components';
 import { I18nLayoutService } from '../support/services';
 
@@ -32,6 +37,8 @@ interface ComponentProps {
   disabled?: boolean;
   status?: string;
   size?: string;
+  text?: string;
+  textStyle?: StyleProp<TextStyle>;
   onChange?: (checked: boolean) => void;
 }
 
@@ -225,6 +232,12 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       thumbHeight,
       thumbBorderRadius,
       thumbBackgroundColor,
+      textMarginHorizontal,
+      textFontSize,
+      textFontWeight,
+      textLineHeight,
+      textFontFamily,
+      textColor,
       iconWidth,
       iconHeight,
       iconTintColor,
@@ -247,8 +260,8 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     const thumbScale: Animated.AnimatedDiffClamp = this.animateThumbScale(offsetValue);
 
     return {
-      container: {},
-      componentContainer: {
+      toggleContainer: {},
+      ellipseContainer: {
         borderColor: borderColor,
         backgroundColor: interpolatedBackgroundColor,
         ...containerParameters,
@@ -274,6 +287,14 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         backgroundColor: thumbBackgroundColor,
         elevation: disabled ? 0 : 5,
         transform: [{ translateX: this.thumbTranslateAnimation }],
+      },
+      text: {
+        marginHorizontal: textMarginHorizontal,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
+        lineHeight: textLineHeight,
+        fontFamily: textFontFamily,
+        color: textColor,
       },
       icon: {
         width: source.iconWidth,
@@ -351,23 +372,35 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     });
   };
 
+  private renderTextElement = (style: StyleType): TextElement => {
+    return (
+      <Text style={[style, this.props.textStyle]}>
+        {this.props.text}
+      </Text>
+    );
+  };
+
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
+    return [
+      this.props.text && this.renderTextElement(style.text),
+    ];
+  };
+
   public render(): React.ReactElement<ViewProps> {
     const { themedStyle, style, disabled, checked, ...restProps } = this.props;
+
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const [textElement] = this.renderComponentChildren(componentStyle);
 
     return (
       <View
         {...restProps}
-        style={[componentStyle.container, styles.container, style]}>
-        <View style={[componentStyle.highlight, styles.highlight]} />
-        <TouchableOpacity
-          onPressIn={this.onPressIn}
-          onPressOut={this.onPressOut}
-          onPress={this.onPress}>
-          <Animated.View
-            style={[componentStyle.componentContainer, styles.componentContainer]}
-            {...this.panResponder.panHandlers}>
-            <Animated.View style={[componentStyle.ellipse, styles.ellipse]} />
+        {...this.panResponder.panHandlers}
+        style={[styles.container, style]}>
+        <View style={[componentStyle.toggleContainer, styles.toggleContainer]}>
+          <View style={[componentStyle.highlight, styles.highlight]}/>
+          <Animated.View style={[componentStyle.ellipseContainer, styles.ellipseContainer]}>
+            <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
             <Animated.View style={[componentStyle.thumb, styles.thumb]}>
               <CheckMark
                 style={componentStyle.icon}
@@ -375,7 +408,8 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
               />
             </Animated.View>
           </Animated.View>
-        </TouchableOpacity>
+        </View>
+        {textElement}
       </View>
     );
   }
@@ -383,10 +417,15 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  componentContainer: {
+  toggleContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ellipseContainer: {
     justifyContent: 'center',
     alignSelf: 'center',
     overflow: 'hidden',
