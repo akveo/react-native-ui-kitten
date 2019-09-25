@@ -236,7 +236,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -265,10 +265,27 @@ export type InputElement = React.ReactElement<InputProps>;
  * }
  * ```
  *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { Input } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const StarInput = (props) => (
+ *   <Input icon={StarIcon} />
+ * );
+ * ```
+ *
  * @example Inline Styling
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { Input } from 'react-native-ui-kitten';
  *
  * export class InputShowcase extends React.Component {
@@ -294,6 +311,13 @@ export type InputElement = React.ReactElement<InputProps>;
  *     );
  *   }
  * }
+ *
+ * const styles = StyleSheet.create({
+ *   input: { borderRadius: 8 },
+ *   inputText: { color: 'black' },
+ *   inputLabel: { color: 'gray' },
+ *   inputCaption: { color: 'gray' },
+ * });
  * ```
  */
 export class InputComponent extends React.Component<InputProps> {

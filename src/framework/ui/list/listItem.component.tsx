@@ -139,10 +139,27 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * };
  * ```
  *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { ListItem } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const ListItemShowcase = (props) => (
+ *   <ListItem title='Title' description='Description' icon={StarIcon} />
+ * );
+ * ```
+ *
  * @example Inline Styling
  *
  * ```
  * import React from 'react'
+ * import { StyleSheet } from 'react-native-ui-kitten';
  * import { ListItem } from 'react-native-ui-kitten';
  *
  * export const ListItemShowcase = (props) => (
@@ -154,6 +171,12 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *     description='Description'
  *   />
  * );
+ *
+ * const styles = StyleSheet.create({
+ *   listItem: { borderRadius: 8 },
+ *   listItemTitle: { color: 'black' },
+ *   listItemDescription: { color: 'gray' },
+ * });
  * ```
  */
 export class ListItemComponent extends React.Component<ListItemProps> {

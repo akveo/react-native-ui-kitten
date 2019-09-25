@@ -29,8 +29,8 @@ import {
   PopoverProps,
 } from '../popover/popover.component';
 import {
-  Omit,
   ModalPresentingBased,
+  Omit,
 } from '../support/typings';
 
 type IconElement = React.ReactElement<ImageProps>;
@@ -146,10 +146,47 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  * }
  * ```
  *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { Tooltip, Button } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export class TooltipShowcase extends React.Component {
+ *
+ *   state = {
+ *     tooltipVisible: false,
+ *   };
+ *
+ *   toggleTooltip = () => {
+ *     const tooltipVisible = !this.state.tooltipVisible;
+ *     this.setState({ tooltipVisible });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <Tooltip
+ *         visible={this.state.tooltipVisible}
+ *         text='Tooltip Text'
+ *         icon={StarIcon}
+ *         onBackdropPress={this.toggleTooltip}>
+ *         <Button onPress={this.toggleTooltip}>TOGGLE TOOLTIP</Button>
+ *       </Tooltip>
+ *     );
+ *   }
+ * }
+ * ```
+ *
  * @example Inline Styling
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { Tooltip, Button } from 'react-native-ui-kitten';
  *
  * export class TooltipShowcase extends React.Component {
@@ -168,13 +205,17 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *       <Tooltip
  *         visible={this.state.tooltipVisible}
  *         text='Tooltip Text'
- *         textStyle={{ color: 'red', fontSize: 18 }}
+ *         textStyle={styles.tooltipText}
  *         onBackdropPress={this.toggleTooltip}>
  *         <Button onPress={this.toggleTooltip}>TOGGLE TOOLTIP</Button>
  *       </Tooltip>
  *     );
  *   }
  * }
+ *
+ * const styles = StyleSheet.create({
+ *   tooltipText: { color: 'white', fontSize: 18 },
+ * });
  * ```
  */
 export class TooltipComponent extends React.Component<TooltipProps> {

@@ -90,6 +90,7 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { Popover, Layout, Button, Text } from 'react-native-ui-kitten';
  *
  * export class PopoverShowcase extends React.Component {
@@ -120,6 +121,10 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *     );
  *   }
  * }
+ *
+ * const styles = StyleSheet.create({
+ *   popoverContent: { justifyContent: 'center', alignItems: 'center' },
+ * });
  * ```
  */
 export class PopoverComponent extends React.Component<PopoverProps> {

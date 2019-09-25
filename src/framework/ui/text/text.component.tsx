@@ -73,6 +73,22 @@ export type TextElement = React.ReactElement<TextProps>;
  *   </Text>
  * );
  * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Text } from 'react-native-ui-kitten';
+ *
+ * export const TextShowcase = (props) => (
+ *   <Text style={styles.text}>Sample Text</Text>
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   text: { color: 'black', fontSize: 18 },
+ * });
+ * ```
  */
 export class TextComponent extends React.Component<TextProps> {
 

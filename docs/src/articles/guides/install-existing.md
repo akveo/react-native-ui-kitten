@@ -29,9 +29,7 @@ const ApplicationContent = () => (
 ); 
 
 const App = () => (
-  <ApplicationProvider
-    mapping={mapping}
-    theme={lightTheme}>
+  <ApplicationProvider mapping={mapping} theme={lightTheme}>
     <ApplicationContent />
   </ApplicationProvider>
 );

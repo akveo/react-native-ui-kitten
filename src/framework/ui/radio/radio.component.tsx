@@ -118,7 +118,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -150,6 +150,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { Radio } from 'react-native-ui-kitten';
  *
  * export const RadioShowcase = (props) => (
@@ -159,6 +160,11 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *     checked={true}
  *   />
  * );
+ *
+ * const styles = StyleSheet.create({
+ *   radio: { width: 32, height: 32 },
+ *   radioText: { color: 'black' },
+ * });
  * ```
  */
 

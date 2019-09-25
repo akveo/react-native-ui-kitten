@@ -198,6 +198,41 @@ interface State {
  * }
  * ```
  *
+ * @overview-example Select Groups
+ *
+ * ```
+ * import React from 'react';
+ * import { Select } from 'react-native-ui-kitten';
+ *
+ * export class SelectContainer extends React.Component {
+ *
+ *   items = [
+ *     { text: 'Option 1' },
+ *     { text: 'Option 2' },
+ *     { text: 'Option 3', items: [ { text: 'Option 31' }, { text: 'Option 32' }, { text: 'Option 33' } ] },
+ *     { text: 'Option 4' },
+ *   ];
+ *
+ *  state = {
+ *    selectedOption: null,
+ *  };
+ *
+ *  onSelect = (selectedOption) => {
+ *    this.setState({ selectedOption });
+ *  };
+ *
+ *  render() {
+ *    return (
+ *       <Select
+ *         data={this.items}
+ *         selectedOption={this.state.selectedOption}
+ *         onSelect={this.onSelect}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
  * @overview-example With Icon
  *
  * ```
@@ -243,7 +278,7 @@ interface State {
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -270,44 +305,6 @@ interface State {
  *       <Select
  *         data={this.items}
  *         status='warning'
- *         selectedOption={this.state.selectedOption}
- *         onSelect={this.onSelect}
- *       />
- *     );
- *   }
- * }
- * ```
- *
- * @example Custom Styling
- *
- * ```
- * import React from 'react';
- * import { Select } from 'react-native-ui-kitten';
- *
- * export class SelectContainer extends React.Component {
- *
- *  private items: SelectOptionType[] = [
- *    { text: 'Option 1' },
- *    { text: 'Option 2', textStyle: { color: 'red', fontSize: 18 } },
- *    { text: 'Option 3' },
- *  ];
- *
- *  state = {
- *    selectedOption: null,
- *  };
- *
- *  onSelect = (selectedOption) => {
- *    this.setState({ selectedOption });
- *  };
- *
- *  render() {
- *    return (
- *       <Select
- *         style={styles.select}
- *         labelStyle={styles.labelStyle}
- *         placeholderStyle={styles.placeholderStyle}
- *         controlStyle={styles.controlStyle}
- *         data={this.items}
  *         selectedOption={this.state.selectedOption}
  *         onSelect={this.onSelect}
  *       />
@@ -355,20 +352,60 @@ interface State {
  * }
  * ```
  *
- * @example Select Groups
+ * @example Using Asset Icons
  *
  * ```
  * import React from 'react';
+ * import { Image } from 'react-native';
  * import { Select } from 'react-native-ui-kitten';
  *
  * export class SelectContainer extends React.Component {
  *
- *   items = [
- *     { text: 'Option 1' },
- *     { text: 'Option 2' },
- *     { text: 'Option 3', items: [ { text: 'Option 31' }, { text: 'Option 32' }, { text: 'Option 33' } ] },
- *     { text: 'Option 4' },
- *   ];
+ *  items = [
+ *    { text: 'Option 1' },
+ *    { text: 'Option 2' },
+ *    { text: 'Option 3' },
+ *  ];
+ *
+ *  state = {
+ *    selectedOption: null,
+ *  };
+ *
+ *  onSelect = (selectedOption) => {
+ *    this.setState({ selectedOption });
+ *  };
+ *
+ *  renderIcon = (style, visible) => (
+ *    <Image style={style} source={require('path-to-assets/local-image.png')} />
+ *  );
+ *
+ *  render() {
+ *    return (
+ *      <Select
+ *        data={this.items}
+ *        selectedOption={this.state.selectedOption}
+ *        icon={this.renderIcon}
+ *        onSelect={this.onSelect}
+ *      />
+ *    );
+ *   }
+ * }
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Select } from 'react-native-ui-kitten';
+ *
+ * export class SelectContainer extends React.Component {
+ *
+ *  private items: SelectOptionType[] = [
+ *    { text: 'Option 1' },
+ *    { text: 'Option 2', textStyle: { color: 'red', fontSize: 18 } },
+ *    { text: 'Option 3' },
+ *  ];
  *
  *  state = {
  *    selectedOption: null,
@@ -392,6 +429,13 @@ interface State {
  *     );
  *   }
  * }
+ *
+ * const styles = StyleSheet.create({
+ *   select: { borderRadius: 8 },
+ *   labelStyle: { color: 'gray' },
+ *   placeholderStyle: { color: 'gray' },
+ *   controlStyle: { borderRadius: 8 },
+ * });
  * ```
  */
 class SelectComponent extends React.Component<SelectProps, State> {

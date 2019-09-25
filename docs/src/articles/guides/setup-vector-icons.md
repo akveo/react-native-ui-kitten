@@ -97,9 +97,7 @@ const ApplicationContent = () => (
 const App = () => (
   <React.Fragment>
     <IconRegistry icons={[FeatherIconsPack]} />
-    <ApplicationProvider
-      mapping={mapping}
-      theme={lightTheme}>
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
       <ApplicationContent />
     </ApplicationProvider>
   </React.Fragment>
@@ -202,9 +200,7 @@ const ApplicationContent = () => (
 const App = () => (
   <React.Fragment>
     <IconRegistry icons={[FeatherIconsPack, MaterialIconsPack]}/>
-    <ApplicationProvider
-      mapping={mapping}
-      theme={lightTheme}>
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
       <ApplicationContent />
     </ApplicationProvider>
   </React.Fragment>

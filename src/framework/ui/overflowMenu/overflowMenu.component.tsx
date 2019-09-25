@@ -113,7 +113,6 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
  *
  * import React from 'react';
- * import { Image } from 'react-native';
  * import { OverflowMenu, Button, Icon } from 'react-native-ui-kitten';
  *
  * const StarIcon = (style) => (
@@ -232,6 +231,54 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *     return (
  *       <OverflowMenu
  *         appearance='noDivider'
+ *         data={this.data}
+ *         visible={this.state.menuVisible}
+ *         selectedIndex={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *         onBackdropPress={this.toggleMenu}>
+ *         <Button onPress={this.toggleMenu}>TOGGLE MENU</Button>
+ *       </OverflowMenu>
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { OverflowMenu, Button } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export class OverflowMenuShowcase extends React.Component {
+ *
+ *   data = [
+ *     { title: 'Menu Item 1', icon: StarIcon },
+ *     { title: 'Menu Item 2', icon: StarIcon },
+ *     { title: 'Menu Item 3', icon: StarIcon },
+ *   ];
+ *
+ *   state = {
+ *     menuVisible: false,
+ *     selectedIndex: null,
+ *   };
+ *
+ *   onItemSelect = (selectedIndex) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   toggleMenu = () => {
+ *     const menuVisible = !this.state.menuVisible;
+ *     this.setState({ menuVisible });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <OverflowMenu
  *         data={this.data}
  *         visible={this.state.menuVisible}
  *         selectedIndex={this.state.selectedIndex}

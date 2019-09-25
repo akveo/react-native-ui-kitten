@@ -82,6 +82,26 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *   </ButtonGroup>
  * );
  * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Button, ButtonGroup } from 'react-native-ui-kitten';
+ *
+ * export const ButtonGroupShowcase = (props) => (
+ *   <ButtonGroup style={styles.buttonGroup}>
+ *     <Button>Left</Button>
+ *     <Button>Mid</Button>
+ *     <Button>Right</Button>
+ *   </ButtonGroup>
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   buttonGroup: { borderRadius: 8 },
+ * });
+ * ```
  */
 class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 

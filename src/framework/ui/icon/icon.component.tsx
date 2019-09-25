@@ -50,23 +50,25 @@ export type IconElement<T> = React.ReactElement<T>;
  * ```
  * import React from 'react';
  * import { mapping, light as lightTheme } from '@eva-design/eva';
- * import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
+ * import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
  * import { EvaIconsPack } from '@ui-kitten/eva-icons'; // <-- Make sure it is installed. npm i @ui-kitten/eva-icons
- * import { Application } from './path-to/root.component';
  *
- * export default class App extends React.Component {
+ * const ApplicationContent = () => (
+ *   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+ *     <Text>Welcome to UI Kitten</Text>
+ *   </Layout>
+ * );
  *
- *   render() {
- *     return (
- *       <ApplicationProvider
- *         mapping={mapping}
- *         theme={lightTheme}>
- *         <IconRegistry icons={EvaIconsPack}/>
- *         <Application/>
- *       </ApplicationProvider>
- *     );
- *   }
- * }
+ * const App = () => (
+ *   <React.Fragment>
+ *     <IconRegistry icons={EvaIconsPack}/>
+ *     <ApplicationProvider mapping={mapping} theme={lightTheme}>
+ *       <ApplicationContent/>
+ *     </ApplicationProvider>
+ *   </React.Fragment>
+ * );
+ *
+ * export default App;
  * ```
  *
  * @overview-example Simple Usage
@@ -86,32 +88,36 @@ export type IconElement<T> = React.ReactElement<T>;
  * import React from 'react';
  * import { Input, Button, Icon } from 'react-native-ui-kitten';
  *
- * const StarIcon = (style) => (
- *   <Icon {...style} name='star' />
+ * const FacebookIcon = (style) => (
+ *   <Icon {...style} name='facebook' />
  * );
  *
- * export const StarButton = (props) => (
- *   <Button icon={StarIcon}>BUTTON</Button>
+ * const EyeIcon = (style) => (
+ *   <Icon {...style} name='eye' />
  * );
  *
- * export const StarInput = (props) => (
- *   <Input icon={StarIcon} />
+ * export const LoginButton = (props) => (
+ *   <Button icon={FacebookIcon}>Login with Facebook</Button>
+ * );
+ *
+ * export const PasswordInput = (props) => (
+ *   <Input placeholder='Password' icon={EyeIcon} />
  * );
  * ```
  *
- * @overview-example Using Assets
+ * @overview-example Using Asset Source
  *
  * ```
  * import React from 'react';
  * import { Image } from 'react-native';
  * import { Button } from 'react-native-ui-kitten';
  *
- * const StarIcon = (style) => (
+ * const FacebookIcon = (style) => (
  *   <Image style={style} source={require('path-to-assets/local-image.png')} />
  * );
  *
- * export const StarButton = (props) => (
- *   <Button icon={StarIcon}>BUTTON</Button>
+ * export const LoginButton = (props) => (
+ *   <Button icon={FacebookIcon}>Login with Facebook</Button>
  * );
  * ```
  *
@@ -143,9 +149,7 @@ export type IconElement<T> = React.ReactElement<T>;
  *     ref={iconRef}
  *     name='star'
  *     animation='shake'
- *     animationConfig={{
-         cycles: -1,
-       }}
+ *     animationConfig={{ cycles: -1 }}
  *   />
  * );
  *
@@ -221,6 +225,20 @@ export type IconElement<T> = React.ReactElement<T>;
  *    );
  *  }
  * }
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * // Visit react-native-svg documentation for more details
+ * // https://github.com/react-native-community/react-native-svg#common-props
+ *
+ * import React from 'react';
+ * import { Icon } from 'react-native-ui-kitten';
+ *
+ * export const StarIcon = (props) => (
+ *   <Icon name='star' width={32} height={32} fill='#000'/>
+ * );
  * ```
  */
 export class Icon<T> extends React.Component<IconProps<T>> {

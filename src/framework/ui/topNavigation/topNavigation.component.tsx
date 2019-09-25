@@ -73,8 +73,8 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  * import React from 'react';
  * import { TopNavigation } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props) => (
- *   <TopNavigation title='Title' />
+ * export const AwesomeAppHeader = (props) => (
+ *   <TopNavigation title='Awesome App' />
  * );
  * ```
  *
@@ -91,40 +91,57 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *   <Icon {...style} name='arrow-back' />
  * );
  *
- * export const TopNavigationShowcase = (props) => {
+ * const EditIcon = (style) => (
+ *   <Icon {...style} name='edit' />
+ * );
  *
- *   const onBackPress = () => {
- *     // Handle Left Control press
- *   };
+ * const MenuIcon = (style) => (
+ *   <Icon {...style} name='more-vertical' />
+ * );
+ *
+ * const BackAction = (props) => (
+ *   <TopNavigationAction {...props} icon={BackIcon} />
+ * );
+ *
+ * const EditAction = (props) => (
+ *   <TopNavigationAction {...props} icon={EditIcon} />
+ * );
+ *
+ * const MenuAction = (props) => (
+ *   <TopNavigationAction {...props} icon={MenuIcon} />
+ * );
+ *
+ * export const AwesomeAppHeader = (props) => {
+ *
+ *   const onBackPress = () => {};
  *
  *   const renderLeftControl = () => (
- *     <TopNavigationAction
- *       icon={BackIcon}
- *       onPress={onBackPress}
- *     />
+ *     <BackAction onPress={onBackPress} />
  *   );
+ *
+ *   const renderRightControls = () => [
+ *     <EditAction />,
+ *     <MenuAction />,
+ *   ];
  *
  *   return (
  *     <TopNavigation
- *       title='Title'
- *       leftControl={this.renderLeftControl()}
+ *       title='Awesome App'
+ *       leftControl={renderLeftControl()}
+ *       rightControls={renderRightControls()}
  *     />
  *   );
  * };
  * ```
  *
- * @example Eva Styling
+ * @example Centered Title
  *
  * ```
  * import React from 'react';
  * import { TopNavigation } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props) => (
- *   <TopNavigation
- *     alignment='center'
- *     title='Title'
- *     subtitle='Subtitle'
- *   />
+ * export const AwesomeAppHeader = (props) => (
+ *   <TopNavigation alignment='center' title='Awesome App' />
  * );
  * ```
  *
@@ -132,16 +149,24 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { TopNavigation } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props) => (
+ * export const AwesomeAppHeader = (props) => (
  *   <TopNavigation
- *     title='Title'
+ *     style={styles.header}
+ *     title='Awesome App'
  *     subtitle='Subtitle'
- *     titleStyle={styles.title}
- *     subtitleStyle={styles.subtitle}
+ *     titleStyle={styles.headerTitle}
+ *     subtitleStyle={styles.headerSubtitle}
  *   />
  * );
+ *
+ * const styles = StyleSheet.create({
+ *   header: { backgroundColor: 'black' },
+ *   headerTitle: { color: 'white' },
+ *   headerSubtitle: { color: 'gray' },
+ * });
  * ```
  */
 export class TopNavigationComponent extends React.Component<TopNavigationProps> {

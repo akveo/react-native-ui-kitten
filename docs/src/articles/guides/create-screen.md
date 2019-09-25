@@ -47,13 +47,8 @@ export const HomeScreen = () => (
 );
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  text: {
-    marginVertical: 16,
-  },
+  container: { flex: 1, alignItems: 'center' },
+  text: { marginVertical: 16 },
 });
 
 ```
@@ -71,9 +66,7 @@ import { ApplicationProvider } from 'react-native-ui-kitten';
 import { HomeScreen } from './path-to/some-screen.component' // <-- Import a screen we've created
 
 const App = () => (
-  <ApplicationProvider
-    mapping={mapping}
-    theme={lightTheme}>
+  <ApplicationProvider mapping={mapping} theme={lightTheme}>
     <HomeScreen/>
   </ApplicationProvider>
 );

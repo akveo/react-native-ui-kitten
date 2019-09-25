@@ -123,7 +123,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -149,20 +149,6 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *     );
  *   }
  * }
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { CheckBox } from 'react-native-ui-kitten';
- *
- * export const CheckBoxShowcase = (props) => (
- *   <CheckBox
- *     style={styles.checkbox}
- *     textStyle={styles.checkboxText}
- *   />
- * );
  * ```
  *
  * @example Indeterminate State
@@ -275,6 +261,26 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *    );
  *   }
  * }
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { CheckBox } from 'react-native-ui-kitten';
+ *
+ * export const CheckBoxShowcase = (props) => (
+ *   <CheckBox
+ *     style={styles.checkbox}
+ *     textStyle={styles.checkboxText}
+ *   />
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   checkbox: { borderRadius: 8 },
+ *   checkboxText: { color: 'black' },
+ * });
  * ```
  */
 class CheckBoxComponent extends React.Component<CheckBoxProps> {

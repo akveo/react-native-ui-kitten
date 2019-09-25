@@ -106,7 +106,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * );
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -122,10 +122,27 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * );
  * ```
  *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { Button } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const StarButton = (props) => (
+ *   <Button icon={StarIcon}>BUTTON</Button>
+ * );
+ * ```
+ *
  * @example Inline Styling
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { Button } from 'react-native-ui-kitten';
  *
  * export const ButtonShowcase = (props) => (
@@ -135,6 +152,11 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *     BUTTON
  *   </Button>
  * );
+ *
+ * const styles = StyleSheet.create({
+ *   button: { borderRadius: 8 },
+ *   buttonText: { color: 'white' },
+ * });
  * ```
  */
 export class ButtonComponent extends React.Component<ButtonProps> {

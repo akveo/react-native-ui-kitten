@@ -92,6 +92,47 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * }
  * ```
  *
+ * @overview-example Sub Menus
+ *
+ * ```
+ * import React from 'react';
+ * import { Menu } from 'react-native-ui-kitten';
+ *
+ * export class MenuShowcase extends React.Component {
+ *
+ *   state = {
+ *     selectedIndex: null,
+ *   };
+ *
+ *   data = [
+ *     { title: 'Item 1' },
+ *     {
+ *       title: 'Item 2',
+ *       subItems: [
+ *         { title: 'Item 21' },
+ *         { title: 'Item 22' },
+ *         { title: 'Item 23' },
+ *       ],
+ *     },
+ *     { title: 'Item 3' },
+ *   ];
+ *
+ *   onSelect = (selectedIndex) => {
+ *     this.setState({ selectedIndex });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <Menu
+ *         data={this.data}
+ *         selectedItem={this.state.selectedIndex}
+ *         onSelect={this.onItemSelect}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
  * @overview-example With Icons
  *
  * ```
@@ -133,7 +174,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
@@ -202,11 +243,16 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * }
  * ```
  *
- * @example With Items Groups
+ * @example Using Asset Icons
  *
  * ```
  * import React from 'react';
+ * import { Image } from 'react-native';
  * import { Menu } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
  *
  * export class MenuShowcase extends React.Component {
  *
@@ -215,16 +261,9 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *   };
  *
  *   data = [
- *     { title: 'Item 1' },
- *     {
- *       title: 'Item 2',
- *       subItems: [
- *         { title: 'Item 21' },
- *         { title: 'Item 22' },
- *         { title: 'Item 23' },
- *       ],
- *     },
- *     { title: 'Item 3' },
+ *     { title: 'Item 1', icon: StarIcon },
+ *     { title: 'Item 2', icon: StarIcon },
+ *     { title: 'Item 3', icon: StarIcon },
  *   ];
  *
  *   onSelect = (selectedIndex) => {
@@ -247,6 +286,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { Menu } from 'react-native-ui-kitten';
  *
  * export class MenuShowcase extends React.Component {
@@ -256,9 +296,9 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *   };
  *
  *   data = [
- *     { title: 'Item 1', titleStyle: { color: 'red', fontSize: 18 } },
- *     { title: 'Item 2' },
- *     { title: 'Item 3' },
+ *     { title: 'Item 1', titleStyle: styles.menuItemTitle },
+ *     { title: 'Item 2', titleStyle: styles.menuItemTitle },
+ *     { title: 'Item 3', titleStyle: styles.menuItemTitle },
  *   ];
  *
  *   onSelect = (selectedIndex) => {
@@ -275,6 +315,10 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *     );
  *   }
  * }
+ *
+ * const styles = StyleSheet.create({
+ *   menuItemTitle: { color: 'black', fontSize: 18 },
+ * });
  * ```
  */
 class MenuComponent extends React.Component<MenuProps> {

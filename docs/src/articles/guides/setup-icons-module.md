@@ -40,9 +40,7 @@ const ApplicationContent = () => (
 const App = () => (
   <React.Fragment>
     <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider
-      mapping={mapping}
-      theme={lightTheme}>
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
       <ApplicationContent />
     </ApplicationProvider>
   <React.Fragment />

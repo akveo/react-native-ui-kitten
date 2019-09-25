@@ -61,19 +61,8 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @overview-example Simple Usage
  *
  * ```
- * // IMPORTANT: To use Icon component make sure to follow this guide:
- * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
- *
  * import React from 'react';
- * import { BottomNavigation, BottomNavigationTab, Icon } from 'react-native-ui-kitten';
- *
- * const DashboardIcon = (style) => (
- *   <Icon {...style} name='layout' />
- * );
- *
- * const SettingsIcon = (style) => (
- *   <Icon {...style} name='settings' />
- * );
+ * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
  *
  * export class BottomNavigationShowcase extends React.Component {
  *
@@ -90,8 +79,8 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *       <BottomNavigation
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onTabSelect}>
- *          <BottomNavigationTab title='Dashboard' icon={DashboardIcon} />
- *          <BottomNavigationTab title='Settings' icon={SettingsIcon} />
+ *          <BottomNavigationTab title='Dashboard' />
+ *          <BottomNavigationTab title='Settings' />
  *       </BottomNavigation>
  *     );
  *   }
@@ -104,13 +93,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * import React from 'react';
  * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
  * import { createBottomTabNavigator } from 'react-navigation';
- *
- * export const TabNavigatorScreen = createBottomTabNavigator({
- *   ...screens,
- * }, {
- *   initialRouteName: 'Screen1',
- *   tabBarComponent: BottomNavigationShowcase,
- * });
+ * import { Dashboard, Settings } from './path-to/screen-components'; // <-- Import screen components
  *
  * export const BottomNavigationShowcase = (props) => {
  *
@@ -123,12 +106,19 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *    <BottomNavigation
  *      selectedIndex={props.navigation.state.index}
  *      onSelect={onTabSelect}>
- *      <BottomNavigationTab title='Tab 1' />
- *      <BottomNavigationTab title='Tab 2' />
- *      <BottomNavigationTab title='Tab 3' />
+ *      <BottomNavigationTab title='Dashboard' />
+ *      <BottomNavigationTab title='Settings' />
  *    </BottomNavigation>
  *   );
  * }
+ *
+ * export const BottomTabNavigator = createBottomTabNavigator({
+ *   Dashboard: Dashboard,
+ *   Settings: Settings,
+ * }, {
+ *   initialRouteName: 'Dashboard',
+ *   tabBarComponent: BottomNavigationShowcase,
+ * });
  * ```
  *
  * @example Without Indicator
@@ -153,8 +143,8 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *          appearance='noIndicator'
  *          selectedIndex={this.state.selectedIndex}
  *          onSelect={this.onTabSelect}>
- *          <BottomNavigationTab title='Tab 1' />
- *          <BottomNavigationTab title='Tab 2' />
+ *          <BottomNavigationTab title='Dashboard' />
+ *          <BottomNavigationTab title='Settings' />
  *       </BottomNavigation>
  *     );
  *   }
@@ -165,17 +155,22 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * ```
  * import React from 'react';
+ * import { StyleSheet } from 'react-native';
  * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
  *
  * export const BottomNavigationShowcase = (props) => (
  *   <BottomNavigation
  *      style={styles.bottomNavigation}
  *      indicatorStyle={styles.indicator}>
- *      <BottomNavigationTab title='Tab 1' />
- *      <BottomNavigationTab title='Tab 2' />
- *      <BottomNavigationTab title='Tab 3' />
+ *      <BottomNavigationTab title='Dashboard' />
+ *      <BottomNavigationTab title='Settings' />
  *   </BottomNavigation>
  * );
+ *
+ * const styles = StyleSheet.create({
+ *   bottomNavigation: { backgroundColor: 'white' },
+ *   indicator: { backgroundColor: 'black' },
+ * });
  * ```
  */
 export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {

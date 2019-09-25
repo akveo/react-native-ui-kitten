@@ -48,7 +48,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * import { Drawer } from 'react-native-ui-kitten';
  *
  * const data = [
- *   { title: 'Feed' },
+ *   { title: 'Dashboard' },
  *   { title: 'Messages' },
  *   { title: 'Settings' },
  * ];
@@ -63,7 +63,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * ```
  * import React from 'react';
  * import { createDrawerNavigator, SafeAreaView } from 'react-navigation';
- * import { Feed, Messages, Settings } from './path-to/screen-components'; // <-- Import screen components
+ * import { Dashboard, Messages, Settings } from './path-to/screen-components'; // <-- Import screen components
  *
  * class DrawerNavigation extends React.Component {
  *
@@ -91,7 +91,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * }
  *
  * export const DrawerNavigator = createDrawerNavigator({
- *   Feed: Feed,
+ *   Dashboard: Dashboard,
  *   Messages: Messages,
  *   Settings: Settings,
  * }, {
@@ -99,7 +99,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * });
  * ```
  *
- * @overview-example Icon Item
+ * @overview-example With Icons
  *
  * ```
  * // IMPORTANT: To use Icon component make sure to follow this guide:
@@ -109,13 +109,21 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * import { Drawer, Icon } from 'react-native-ui-kitten';
  *
  * const data = [
- *   { title: 'Feed' },
+ *   { title: 'Dashboard', icon: DashboardIcon },
  *   { title: 'Messages', icon: MessagesIcon },
- *   { title: 'Settings' },
+ *   { title: 'Settings', icon: SettingsIcon },
  * ];
+ *
+ * const DashboardIcon = (style) => (
+ *   <Icon {...style} name='layout'/>
+ * );
  *
  * const MessagesIcon = (style) => (
  *   <Icon {...style} name='email'/>
+ * );
+ *
+ * const SettingsIcon = (style) => (
+ *   <Icon {...style} name='settings'/>
  * );
  *
  * export const DrawerShowcase = (props) => (
@@ -123,21 +131,14 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * );
  * ```
  *
- * @example Header
+ * @overview-example Header
  *
  * ```
- * // IMPORTANT: To use Icon component make sure to follow this guide:
- * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
- *
  * import React from 'react'
- * import { DrawerHeaderFooter, Icon } from 'react-native-ui-kitten';
- *
- * const ProfileIcon = (style) => (
- *   <Icon {...style} name='person' />
- * );
+ * import { Drawer, DrawerHeaderFooter } from 'react-native-ui-kitten';
  *
  * export const ProfileHeader = (props) => (
- *   <DrawerHeaderFooter title='John Doe' description='React Native Developer' icon={ProfileIcon} />
+ *   <DrawerHeaderFooter title='John Doe' description='React Native Developer' />
  * );
  *
  * export const DrawerShowcase = (props) => (
@@ -145,14 +146,14 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * );
  * ```
  *
- * @example Footer
+ * @overview-example Footer
  *
  * ```
  * import React from 'react';
  * import { Drawer, DrawerHeaderFooter } from 'react-native-ui-kitten';
  *
  * const data = [
- *   { title: 'Feed' },
+ *   { title: 'Dashboard' },
  *   { title: 'Messages' },
  *   { title: 'Settings' },
  * ];
@@ -174,7 +175,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * import { Drawer, Text } from 'react-native-ui-kitten';
  *
  * const data = [
- *   { title: 'Feed' },
+ *   { title: 'Dashboard' },
  *   { title: 'Messages' },
  *   { title: 'Settings' },
  * ];
@@ -198,7 +199,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * import { Drawer, Text } from 'react-native-ui-kitten';
  *
  * const data = [
- *   { title: 'Feed' },
+ *   { title: 'Dashboard' },
  *   { title: 'Messages', accessory: NotificationBadge },
  *   { title: 'Settings' },
  * ];
