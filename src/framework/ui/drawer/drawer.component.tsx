@@ -97,34 +97,9 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * }, {
  *   contentComponent: DrawerNavigation,
  * });
- *
  * ```
  *
- * @example Header
- *
- * ```
- * import React from 'react';
- * import { View } from 'react-native';
- * import { Drawer, Text } from 'react-native-ui-kitten';
- *
- * const data = [
- *   { title: 'Feed' },
- *   { title: 'Messages' },
- *   { title: 'Settings' },
- * ];
- *
- * const DrawerHeader = (style) => (
- *   <View style={style}>
- *     <Text category='h6'>Awesome Application</Text>
- *   </View>
- * );
- *
- * export const DrawerShowcase = (props) => (
- *   <Drawer data={data} header={DrawerHeader} />
- * );
- * ```
- *
- * @example Icon Item
+ * @overview-example Icon Item
  *
  * ```
  * // IMPORTANT: To use Icon component make sure to follow this guide:
@@ -140,11 +115,78 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * ];
  *
  * const MessagesIcon = (style) => (
- *   <Icon {...style} name='email' />
+ *   <Icon {...style} name='email'/>
  * );
  *
  * export const DrawerShowcase = (props) => (
  *   <Drawer data={data} />
+ * );
+ * ```
+ *
+ * @example Header
+ *
+ * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
+ * import React from 'react'
+ * import { DrawerHeaderFooter, Icon } from 'react-native-ui-kitten';
+ *
+ * const ProfileIcon = (style) => (
+ *   <Icon {...style} name='person' />
+ * );
+ *
+ * export const ProfileHeader = (props) => (
+ *   <DrawerHeaderFooter title='John Doe' description='React Native Developer' icon={ProfileIcon} />
+ * );
+ *
+ * export const DrawerShowcase = (props) => (
+ *   <Drawer data={data} header={ProfileHeader} />
+ * );
+ * ```
+ *
+ * @example Footer
+ *
+ * ```
+ * import React from 'react';
+ * import { Drawer, DrawerHeaderFooter } from 'react-native-ui-kitten';
+ *
+ * const data = [
+ *   { title: 'Feed' },
+ *   { title: 'Messages' },
+ *   { title: 'Settings' },
+ * ];
+ *
+ * const DrawerFooter = () => (
+ *   <DrawerHeaderFooter description='Awesome Application Version 4.2.0-beta.1' />
+ * );
+ *
+ * export const DrawerShowcase = (props) => (
+ *   <Drawer data={data} footer={DrawerFooter} />
+ * );
+ * ```
+ *
+ * @example Custom Header
+ *
+ * ```
+ * import React from 'react';
+ * import { View } from 'react-native';
+ * import { Drawer, Text } from 'react-native-ui-kitten';
+ *
+ * const data = [
+ *   { title: 'Feed' },
+ *   { title: 'Messages' },
+ *   { title: 'Settings' },
+ * ];
+ *
+ * const DrawerHeader = () => (
+ *   <View>
+ *     <Text category='h6'>Awesome Application</Text>
+ *   </View>
+ * );
+ *
+ * export const DrawerShowcase = (props) => (
+ *   <Drawer data={data} header={DrawerHeader} />
  * );
  * ```
  *
