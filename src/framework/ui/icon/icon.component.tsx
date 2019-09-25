@@ -5,19 +5,21 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  getIconAnimation,
   IconAnimation,
   IconAnimationRegistry,
-  IconAnimations,
 } from './iconAnimation';
 import {
   IconRegistryService,
   RegisteredIcon,
 } from './service/iconRegistry.service';
+import { AnimationConfig } from '../animation';
 
 interface ComponentProps {
   name: string;
   pack?: string;
   animation?: keyof IconAnimationRegistry;
+  animationConfig?: AnimationConfig;
 }
 
 export type IconProps<T = {}> = ComponentProps & T;
@@ -31,10 +33,16 @@ export type IconElement<T> = React.ReactElement<T>;
  * @extends React.Component
  *
  * @method {(callback?: Animated.EndCallback) => void} startAnimation - Toggle animation to start.
+ *
  * @method {() => void} stopAnimation - Toggle animation to stop.
+ *
  * @property {string} name - Name of registered icon.
+ *
  * @property {string} pack - Name of icon pack that is able to provide an icon for specified name.
+ *
  * @property {string} animation - Animation name. Available `zoom`, `pulse` and `shake`. Default is `zoom`.
+ *
+ * @property {AnimationConfig} animationConfig - Determines animation config. Extends `Animated.AnimationConfig`.
  *
  * @overview-example Register Icons
  *
@@ -81,6 +89,28 @@ export type IconElement<T> = React.ReactElement<T>;
  *
  * export const StarIcon = (props) => (
  *   <Icon ref={iconRef} name='star' animation='shake'/>
+ * );
+ *
+ * iconRef.current.startAnimation();
+ * ```
+ *
+ * @example Infinite Animation
+ *
+ * ```
+ * import React from 'react';
+ * import { Icon } from 'react-native-ui-kitten';
+ *
+ * const iconRef = React.createRef();
+ *
+ * export const StarIcon = (props) => (
+ *   <Icon
+ *     ref={iconRef}
+ *     name='star'
+ *     animation='shake'
+ *     animationConfig={{
+         cycles: -1,
+       }}
+ *   />
  * );
  *
  * iconRef.current.startAnimation();
@@ -166,7 +196,7 @@ export class Icon<T> extends React.Component<IconProps<T>> {
 
   constructor(props: IconProps<T>) {
     super(props);
-    this.animation = IconAnimations[props.animation];
+    this.animation = getIconAnimation(props.animation, props.animationConfig);
   }
 
   public componentWillUnmount() {

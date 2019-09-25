@@ -1,0 +1,28 @@
+{
+  "name": "HelloWorld",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "start:ios": "react-native run-ios",
+    "start:android": "react-native run-android",
+    "postinstall": "react-native link"
+  },
+  "dependencies": {
+    "@eva-design/eva": "^1.1.0-beta.1",
+    "@ui-kitten/eva-icons": "^4.2.0-beta.2",
+    "react": "16.8.6",
+    "react-native": "0.60.5",
+    "react-native-svg": "^9.9.4",
+    "react-native-ui-kitten": "^4.2.0-beta.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/runtime": "^7.5.0",
+    "@react-native-community/eslint-config": "^0.0.3",
+    "@types/react": "^16.9.2",
+    "@types/react-native": "^0.60.14",
+    "metro-react-native-babel-preset": "0.54.1",
+    "typescript": "^3.6.3"
+  }
+}
