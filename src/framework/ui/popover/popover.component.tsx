@@ -103,13 +103,11 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *     this.setState({ popoverVisible });
  *   };
  *
- *   renderPopoverContentElement = () => {
- *     return (
- *       <Layout style={styles.popoverContent}>
- *         <Text>Hi! This is popover.</Text>
- *       </Layout>
- *     );
- *   };
+ *   renderPopoverContentElement = () => (
+ *     <Layout style={styles.popoverContent}>
+ *       <Text>Hi! This is popover.</Text>
+ *     </Layout>
+ *   );
  *
  *   render() {
  *     return (

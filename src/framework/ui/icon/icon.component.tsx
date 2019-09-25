@@ -27,6 +27,7 @@ export type IconElement<T> = React.ReactElement<T>;
  * `Icon` component with animation support. Allows to render any ReactElement registered for a specific name.
  * Starting from UI Kitten 4.2, there is `@ui-kitten/eva-icons` module
  * that renders any icon from eva-icons package in `svg` format.
+ * It allows easily use icons in any component that has `icon` prop
  *
  * @extends React.Component
  *
@@ -68,6 +69,41 @@ export type IconElement<T> = React.ReactElement<T>;
  *
  * export const StarIcon = (props) => (
  *   <Icon name='star'/>
+ * );
+ * ```
+ *
+ * @overview-example Using with UI Kitten components
+ *
+ * ```
+ * import React from 'react';
+ * import { Input, Button, Icon } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Icon {...style} name='star' />
+ * );
+ *
+ * export const StarButton = (props) => (
+ *   <Button icon={StarIcon}>BUTTON</Button>
+ * );
+ *
+ * export const StarInput = (props) => (
+ *   <Input icon={StarIcon} />
+ * );
+ * ```
+ *
+ * @overview-example Using Assets
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { Button } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const StarButton = (props) => (
+ *   <Button icon={StarIcon}>BUTTON</Button>
  * );
  * ```
  *
