@@ -1,3 +1,4 @@
+export { AnimationConfig } from './animation';
 export {
   Avatar,
   AvatarProps,
@@ -35,10 +36,10 @@ export {
   DrawerHeaderElement,
 } from './drawer/drawer.component';
 export {
-  DrawerFence,
-  DrawerFenceElement,
-  DrawerFenceProps,
-} from './drawer/drawerFence.component';
+  DrawerHeaderFooter,
+  DrawerHeaderFooterElement,
+  DrawerHeaderFooterProps,
+} from './drawer/drawerHeaderFooter.component';
 export {
   Select,
   SelectProps,

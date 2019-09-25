@@ -340,6 +340,7 @@ export const structure = [
         icon: 'drawer.svg',
         source: [
           'Drawer',
+          'DrawerHeaderFooter',
         ],
         overview: [
           {
