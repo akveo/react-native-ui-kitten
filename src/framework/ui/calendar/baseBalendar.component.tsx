@@ -362,7 +362,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   private renderDayElement = (date: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={[style.container, styles.dayCell]}
+        style={style.container}
         textStyle={style.text}>
         {this.dateService.format(date.date, FORMAT_DAY)}
       </CalendarDateContent>
@@ -551,9 +551,6 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
 const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
-  },
-  dayCell: {
-    aspectRatio: 1,
   },
   monthCell: {
     aspectRatio: 0.25 * DateService.DAYS_IN_WEEK,

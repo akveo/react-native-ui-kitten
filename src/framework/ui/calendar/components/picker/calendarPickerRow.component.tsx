@@ -39,5 +39,6 @@ export class CalendarPickerRow<D> extends React.Component<CalendarPickerRowProps
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    overflow: 'hidden',
   },
 });
