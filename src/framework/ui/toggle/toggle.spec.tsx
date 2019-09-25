@@ -1,11 +1,8 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import {
-  render,
-  shallow,
-  RenderAPI,
   fireEvent,
-  waitForElement,
+  render,
+  RenderAPI,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
@@ -14,12 +11,28 @@ import {
 } from '@kitten/theme';
 import {
   Toggle,
+  ToggleComponent,
   ToggleProps,
 } from './toggle.component';
 import {
   mapping,
   theme,
 } from '../support/tests';
+
+jest.mock('Animated', (): unknown => {
+  const AnimatedModule = jest.requireActual('Animated');
+  return {
+    ...AnimatedModule,
+    timing: (value, config) => {
+      return {
+        start: (callback) => {
+          value.setValue(config.toValue);
+          callback && callback();
+        },
+      };
+    },
+  };
+});
 
 const Mock = (props?: ToggleProps): React.ReactElement<ApplicationProviderProps> => {
   return (
@@ -37,92 +50,25 @@ const renderComponent = (props?: ToggleProps): RenderAPI => {
   );
 };
 
-describe('@toggle: matches snapshot', () => {
-
-  it('default', () => {
-    const component: RenderAPI = renderComponent();
-    const { output } = shallow(component.getByType(Toggle));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('checked', () => {
-    const component: RenderAPI = renderComponent({ checked: true });
-    const { output } = shallow(component.getByType(Toggle));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('disabled', () => {
-    const component: RenderAPI = renderComponent({ disabled: true });
-    const { output } = shallow(component.getByType(Toggle));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('checked disabled', () => {
-    const component: RenderAPI = renderComponent({
-      checked: true,
-      disabled: true,
-    });
-    const { output } = shallow(component.getByType(Toggle));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('active', async () => {
-    const component: RenderAPI = renderComponent();
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
-    const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Toggle);
-    });
-    const { output: activeOutput } = shallow(active);
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
-    const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Toggle);
-    });
-    const { output: inactiveOutput } = shallow(inactive);
-
-    expect(activeOutput).toMatchSnapshot();
-    expect(inactiveOutput).toMatchSnapshot('default');
-  });
-
-  it('active checked', async () => {
-    const component: RenderAPI = renderComponent({ checked: true });
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-    const active: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Toggle);
-    });
-    const { output: activeOutput } = shallow(active);
-
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
-    const inactive: ReactTestInstance = await waitForElement(() => {
-      return component.getByType(Toggle);
-    });
-    const { output: inactiveOutput } = shallow(inactive);
-
-    expect(activeOutput).toMatchSnapshot();
-    expect(inactiveOutput).toMatchSnapshot('checked');
-  });
-
-});
-
 describe('@toggle: component checks', () => {
+
+  it('contains text', () => {
+    const component: RenderAPI = renderComponent({
+      text: 'Sample Text',
+    });
+
+    expect(component.getByText('Sample Text')).toBeTruthy();
+  });
 
   it('emits onChange', () => {
     const onChange = jest.fn();
 
-    const component: RenderAPI = renderComponent({ onChange: onChange });
+    const component: RenderAPI = renderComponent({ onChange });
+    const { [0]: containerView } = component.getByType(ToggleComponent).children;
 
-    fireEvent.press(component.getByType(TouchableOpacity));
+    fireEvent(containerView as ReactTestInstance, 'responderRelease');
 
-    expect(onChange).toBeCalled();
+    expect(onChange).toHaveBeenCalled();
   });
 
   it('checking of value direct', () => {
@@ -136,7 +82,9 @@ describe('@toggle: component checks', () => {
       onChange: onChangeValue,
     });
 
-    fireEvent.press(component.getByType(TouchableOpacity));
+    const { [0]: containerView } = component.getByType(ToggleComponent).children;
+
+    fireEvent(containerView as ReactTestInstance, 'responderRelease');
 
     expect(checked).toBe(true);
   });
@@ -152,7 +100,9 @@ describe('@toggle: component checks', () => {
       onChange: onChangeValue,
     });
 
-    fireEvent.press(component.getByType(TouchableOpacity));
+    const { [0]: containerView } = component.getByType(ToggleComponent).children;
+
+    fireEvent(containerView as ReactTestInstance, 'responderRelease');
 
     expect(checked).toBe(false);
   });
