@@ -15,7 +15,7 @@ We suppose that you have a separate component per screen, let's open your `some-
 ## Create a Component
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { Layout, Text, Button } from 'react-native-ui-kitten';
 
 export const HomeScreen = () => (
@@ -35,7 +35,7 @@ The example above will render a simple screen with a welcome text and a button.
 Now let's add some styles to fit the full available space on the device screen.
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Layout, Text } from 'react-native-ui-kitten';
 
@@ -47,13 +47,8 @@ export const HomeScreen = () => (
 );
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  text: {
-    marginVertical: 16,
-  },
+  container: { flex: 1, alignItems: 'center' },
+  text: { marginVertical: 16 },
 });
 
 ```
@@ -65,15 +60,13 @@ const styles = StyleSheet.create({
 Let's now set this screen as `ApplicationProvider` children to quickly review changes
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import { HomeScreen } from './path-to/some-screen.component' // <-- Import a screen we've created
 
 const App = () => (
-  <ApplicationProvider
-    mapping={mapping}
-    theme={lightTheme}>
+  <ApplicationProvider mapping={mapping} theme={lightTheme}>
     <HomeScreen/>
   </ApplicationProvider>
 );

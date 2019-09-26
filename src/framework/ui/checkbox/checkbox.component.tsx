@@ -76,17 +76,45 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * export class CheckBoxShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <CheckBox
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example With Text
+ *
+ * ```
+ * import React from 'react';
+ * import { CheckBox } from 'react-native-ui-kitten';
+ *
+ * export class RememberPasswordCheckBox extends React.Component {
+ *
+ *   state = {
+ *     checked: false,
+ *   };
+ *
+ *   onChange = (checked) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <CheckBox
+ *         text='Remember Password'
  *         checked={this.state.checked}
  *         onChange={this.onChange}
  *       />
@@ -103,15 +131,15 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * export class CheckBoxShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <CheckBox
  *         checked={this.state.checked}
@@ -123,43 +151,16 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * }
  * ```
  *
- * @example Inline Styling
+ * @example Indeterminate State
  *
  * ```
  * import React from 'react';
- * import { CheckBox, CheckBoxProps } from 'react-native-ui-kitten';
- *
- * export const CheckBoxShowcase = (props?: CheckBoxProps): React.ReactElement<CheckBoxProps> => {
- *   return (
- *     <CheckBox
- *       style={styles.checkbox}
- *       textStyle={styles.checkboxText}
- *       text='Place your text'
- *       indeterminate={true}
- *       checked={this.state.checked}
- *     />
- *   );
- * };
- * ```
- *
- * @example Indeterminate
- *
- * ```
- * import React from 'react';
+ * import { View, StyleSheet } from 'react-native';
  * import { CheckBox } from 'react-native-ui-kitten';
- * import { View } from 'react-native';
  *
- * interface State {
- *   mainCheckboxChecked: boolean;
- *   mainCheckboxIndeterminate: boolean;
- *   checkbox1Checked: boolean;
- *   checkbox2Checked: boolean;
- *   checkbox3Checked: boolean;
- * }
+ * export class CheckBoxContainer extends React.Component {
  *
- * export class CheckBoxContainer extends React.Component<any, State> {
- *
- *   public state: State = {
+ *   state = {
  *     mainCheckboxChecked: false,
  *     mainCheckboxIndeterminate: false,
  *     checkbox1Checked: false,
@@ -167,7 +168,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *     checkbox3Checked: false,
  *   };
  *
- *   private onMainCheckboxChange = (checked: boolean): void => {
+ *   onMainCheckboxChange = (checked) => {
  *     if (checked) {
  *       this.setState({
  *         checkbox1Checked: true,
@@ -184,23 +185,23 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *     this.setState({ mainCheckboxChecked: checked });
  *   };
  *
- *   private onCheckbox1Change = (checked: boolean): void => {
+ *   onCheckbox1Change = (checked) => {
  *     this.setState({ checkbox1Checked: checked }, this.setMainCheckboxDependingState);
  *   };
  *
- *   private onCheckbox2Change = (checked: boolean): void => {
+ *   onCheckbox2Change = (checked) => {
  *     this.setState({ checkbox2Checked: checked }, this.setMainCheckboxDependingState);
  *   };
  *
- *   private onCheckbox3Change = (checked: boolean): void => {
+ *   onCheckbox3Change = (checked) => {
  *     this.setState({ checkbox3Checked: checked }, this.setMainCheckboxDependingState);
  *   };
  *
- *   private setMainCheckboxDependingState = (): void => {
+ *   setMainCheckboxDependingState = () => {
  *     const { checkbox1Checked, checkbox2Checked, checkbox3Checked } = this.state;
- *     const states: boolean[] = [checkbox1Checked, checkbox2Checked, checkbox3Checked];
- *     const someChecked: boolean = states.some((item: boolean) => item === true);
- *     const everyChecked: boolean = states.every((item: boolean) => item === true);
+ *     const states = [checkbox1Checked, checkbox2Checked, checkbox3Checked];
+ *     const someChecked = states.some((item) => item === true);
+ *     const everyChecked = states.every((item) => item === true);
  *
  *     if (someChecked && !everyChecked) {
  *       this.setState({
@@ -218,54 +219,70 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *         mainCheckboxIndeterminate: false,
  *       });
  *     }
- *  };
+ *   };
  *
- *  public render(): React.ReactNode {
- *    const {
- *      mainCheckboxChecked,
- *      mainCheckboxIndeterminate,
- *      checkbox1Checked,
- *      checkbox2Checked,
- *      checkbox3Checked,
- *    } = this.state;
+ *   render() {
+ *     const {
+ *       mainCheckboxChecked,
+ *       mainCheckboxIndeterminate,
+ *       checkbox1Checked,
+ *       checkbox2Checked,
+ *       checkbox3Checked,
+ *     } = this.state;
  *
- *     return (
- *      <View style={{
- *        flex: 1,
- *        padding: 20,
- *      }}>
- *         <CheckBox
- *           style={{ marginBottom: 12 }}
- *           text='Main'
- *           checked={mainCheckboxChecked}
- *           indeterminate={mainCheckboxIndeterminate}
- *           onChange={this.onMainCheckboxChange}
- *         />
- *         <CheckBox
- *           text='Checkbox 1'
- *           style={{ marginLeft: 12, marginBottom: 12 }}
- *           checked={checkbox1Checked}
- *           onChange={this.onCheckbox1Change}
- *         />
- *         <CheckBox
- *           text='Checkbox 2'
- *           style={{ marginLeft: 12, marginBottom: 12 }}
- *           checked={checkbox2Checked}
- *           onChange={this.onCheckbox2Change}
- *         />
- *         <CheckBox
- *           text='Checkbox 3'
- *           style={{ marginLeft: 12 }}
- *           checked={checkbox3Checked}
- *           onChange={this.onCheckbox3Change}
- *         />
- *       </View>
- *     );
+ *    return (
+ *      <View style={{ flex: 1 }}>
+ *        <CheckBox
+ *          style={{ marginBottom: 12 }}
+ *          text='Main'
+ *          checked={mainCheckboxChecked}
+ *          indeterminate={mainCheckboxIndeterminate}
+ *          onChange={this.onMainCheckboxChange}
+ *        />
+ *        <CheckBox
+ *          text='Checkbox 1'
+ *          style={{ marginLeft: 12, marginBottom: 12 }}
+ *          checked={checkbox1Checked}
+ *          onChange={this.onCheckbox1Change}
+ *        />
+ *        <CheckBox
+ *          text='Checkbox 2'
+ *          style={{ marginLeft: 12, marginBottom: 12 }}
+ *          checked={checkbox2Checked}
+ *          onChange={this.onCheckbox2Change}
+ *        />
+ *        <CheckBox
+ *          text='Checkbox 3'
+ *          style={{ marginLeft: 12 }}
+ *          checked={checkbox3Checked}
+ *          onChange={this.onCheckbox3Change}
+ *        />
+ *      </View>
+ *    );
  *   }
  * }
  * ```
- * */
-
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { CheckBox } from 'react-native-ui-kitten';
+ *
+ * export const CheckBoxShowcase = (props) => (
+ *   <CheckBox
+ *     style={styles.checkbox}
+ *     textStyle={styles.checkboxText}
+ *   />
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   checkbox: { borderRadius: 8 },
+ *   checkboxText: { color: 'black' },
+ * });
+ * ```
+ */
 class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
   static styledComponentName: string = 'CheckBox';

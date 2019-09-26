@@ -45,28 +45,37 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * ```
  * import React from 'react';
+ * import { Layout, Text } from 'react-native-ui-kitten';
+ *
+ * export const LayoutShowcase = (props) => (
+ *   <Layout>
+ *     <Text>Layout</Text>
+ *   </Layout>
+ * );
+ * ```
+ *
+ * @overview-example Layout Levels
+ *
+ * ```
+ * import React from 'react';
  * import { StyleSheet } from 'react-native';
- * import {
- *   Layout,
- *   Text,
- * } from 'react-native-ui-kitten';
+ * import { Layout, Text } from 'react-native-ui-kitten';
  *
- * export class LayoutShowcase extends React.Component {
- *
- *  public render(): React.ReactNode {
- *    return (
- *      <Layout style={styles.container}>
- *        <Text>Layout</Text>
- *      </Layout>
- *    );
- *  }
- *}
+ * export const LayoutShowcase = (props) => (
+ *   <Layout style={styles.container} level='4'>
+ *     <Layout style={styles.container} level='3'>
+ *       <Layout style={styles.container} level='2'>
+ *         <Layout style={[styles.container, styles.contentContainer]}>
+ *           <Text>Welcome to UI Kitten</Text>
+ *         </Layout>
+ *       </Layout>
+ *     </Layout>
+ *   </Layout>
+ * );
  *
  * const styles = StyleSheet.create({
- *   container: {
- *     flex: 1,
- *     padding: 16,
- *   },
+ *   container: { flex: 1, padding: 16 }
+ *   contentContainer: { justifyContent: 'center', alignItems: 'center' }
  * });
  * ```
  *
@@ -74,25 +83,33 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * ```
  * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import {
- *   Layout,
- *   Text,
- * } from 'react-native-ui-kitten';
+ * import { Layout, Text } from 'react-native-ui-kitten';
  *
- * export class LayoutShowcase extends React.Component {
- *
- *  public render(): React.ReactNode {
- *    return (
- *      <Layout level='2'>
- *        <Text>Layout</Text>
- *      </Layout>
- *    );
- *  }
- * }
+ * export const LayoutShowcase = (props) => (
+ *   <Layout level='2'>
+ *     <Text>Layout</Text>
+ *   </Layout>
+ * );
  * ```
- * */
-
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native-ui-kitten';
+ * import { Layout, Text } from 'react-native-ui-kitten';
+ *
+ * export const LayoutShowcase = (props) => (
+ *   <Layout style={styles.container}>
+ *     <Text>Layout</Text>
+ *   </Layout>
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+ * });
+ * ```
+ */
 export class LayoutComponent extends React.Component<LayoutProps> {
 
   static styledComponentName: string = 'Layout';

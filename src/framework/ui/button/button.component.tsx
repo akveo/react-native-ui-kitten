@@ -74,87 +74,91 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   Button,
- *   ButtonProps,
- * } from 'react-native-ui-kitten';
+ * import { Button } from 'react-native-ui-kitten';
  *
- * export const ButtonShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
+ * export const ButtonShowcase = (props) => {
  *
  *   const onPress = () => {
  *     // Handle Button press
  *   };
  *
  *   return (
- *     <Button onPress={onPress}>
- *       BUTTON
- *     </Button>
+ *     <Button onPress={onPress}>BUTTON</Button>
  *   );
  * };
+ * ```
+ *
+ * @overview-example With Icon
+ *
+ * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
+ * import React from 'react';
+ * import { Button, Icon } from 'react-native-ui-kitten';
+ *
+ * const FacebookIcon = (style) => (
+ *   <Icon {...style} name='facebook' />
+ * );
+ *
+ * export const LoginButton = (props) => (
+ *   <Button icon={FacebookIcon}>Login with Facebook</Button>
+ * );
  * ```
  *
  * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
- * import {
- *   Button,
- *   ButtonProps,
- * } from 'react-native-ui-kitten';
+ * import { Button } from 'react-native-ui-kitten';
  *
- * export const ButtonShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
- *
- *   const onPress = () => {
- *     // Handle Button press
- *   };
- *
- *   return (
- *     <Button
- *       status='danger'
- *       size='large'
- *       onPress={onPress}>
- *       BUTTON
- *     </Button>
- *   );
- * };
+ * export const ButtonShowcase = (props) => (
+ *   <Button
+ *     appearance='outline'
+ *     status='danger'
+ *     size='large'>
+ *     BUTTON
+ *   </Button>
+ * );
  * ```
  *
- * @example Inline Styling with Icon
+ * @example Using Asset Icons
  *
  * ```
  * import React from 'react';
- * import {
- *   ImageStyle,
- *   Image,
- *   ImageProps,
- * } from 'react-native';
- * import {
- *   Button,
- *   ButtonProps,
- * } from 'react-native-ui-kitten';
+ * import { Image } from 'react-native';
+ * import { Button } from 'react-native-ui-kitten';
  *
- * const ButtonIcon = (style: ImageStyle): React.ReactElement<ImageProps> => {
- *   return (
- *     <Image
- *       style={style}
- *       source={{ uri: 'path/to/image' }}
- *     />
- *   );
- * };
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
  *
- * export const ButtonShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
- *   return (
- *     <Button
- *       style={styles.button}
- *       textStyle={styles.buttonText}
- *       icon={ButtonIcon}>
- *       BUTTON
- *     </Button>
- *   );
- * };
+ * export const StarButton = (props) => (
+ *   <Button icon={StarIcon}>BUTTON</Button>
+ * );
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Button } from 'react-native-ui-kitten';
+ *
+ * export const ButtonShowcase = (props) => (
+ *   <Button
+ *     style={styles.button}
+ *     textStyle={styles.buttonText}>
+ *     BUTTON
+ *   </Button>
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   button: { borderRadius: 8 },
+ *   buttonText: { color: 'white' },
+ * });
  * ```
  */
-
 export class ButtonComponent extends React.Component<ButtonProps> {
 
   static styledComponentName: string = 'Button';

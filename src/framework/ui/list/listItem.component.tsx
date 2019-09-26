@@ -96,89 +96,89 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *
  * ```
  * import React from 'react'
- * import { ListItem, ListItemProps } from 'react-native-ui-kitten';
+ * import { ListItem } from 'react-native-ui-kitten';
  *
- * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
- *
- *   return (
- *     <ListItem
- *       title='Title'
- *       description='Description'
- *     />
- *   );
- *  };
+ * export const ListItemShowcase = (props) => (
+ *   <ListItem title='Title' description='Description' />
+ * );
  * ```
  *
- * @example With Icon
+ * @overview-example With Icon
  *
  * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
  * import React from 'react'
- * import { Image, ImageProps } from 'react-native'
- * import { ListItem, ListItemProps, StyleType } from 'react-native-ui-kitten';
+ * import { ListItem, Icon } from 'react-native-ui-kitten';
  *
- * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+ * const StarIcon = (style) => (
+ *   <Icon {...style} name='star' />
+ * );
  *
- *   const Icon = (style: StyleType): React.ReactElement<ImageProps> => {
- *     return (
- *       <Image style={style} source={{uri: 'https://path-to/awesome-image.png'}}/>
- *     );
- *   };
- *
- *   return (
- *     <ListItem
- *       title='Title'
- *       description='Description'
- *       icon={Icon}
- *     />
- *   );
- *  };
+ * export const ListItemShowcase = (props) => (
+ *   <ListItem title='Title' description='Description' icon={StarIcon} />
+ * );
  * ```
  *
  * @example With Accessory
  *
  * ```
  * import React from 'react'
- * import { ListItem, ListItemProps, Button, ButtonProps, StyleType } from 'react-native-ui-kitten';
+ * import { ListItem, Button } from 'react-native-ui-kitten';
  *
- * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+ * export const ListItemShowcase = (props) => {
  *
- *   const Accessory = (style: StyleType): React.ReactElement<ButtonProps> => {
- *     return (
- *       <Button style={style}>BUTTON</Button>
- *     );
- *   };
+ *   const Accessory = (style) => (
+ *     <Button style={style}>BUTTON</Button>
+ *   );
  *
  *   return (
- *     <ListItem
- *       title='Title'
- *       description='Description'
- *       accessory={Accessory}
- *     />
+ *     <ListItem title='Title' description='Description' accessory={Accessory} />
  *   );
  * };
+ * ```
+ *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { ListItem } from 'react-native-ui-kitten';
+ *
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const ListItemShowcase = (props) => (
+ *   <ListItem title='Title' description='Description' icon={StarIcon} />
+ * );
  * ```
  *
  * @example Inline Styling
  *
  * ```
  * import React from 'react'
- * import { ListItem, ListItemProps } from 'react-native-ui-kitten';
+ * import { StyleSheet } from 'react-native-ui-kitten';
+ * import { ListItem } from 'react-native-ui-kitten';
  *
- * export const ListItemShowcase = (props?: ListItemProps): React.ReactElement<ListItemProps> => {
+ * export const ListItemShowcase = (props) => (
+ *   <ListItem
+ *     style={styles.listItem}
+ *     titleStyle={styles.listItemTitle}
+ *     descriptionStyle={styles.listItemDescription}
+ *     title='Title'
+ *     description='Description'
+ *   />
+ * );
  *
- *   return (
- *     <ListItem
- *       style={styles.listItem}
- *       titleStyle={styles.listItemTitle}
- *       descriptionStyle={styles.listItemDescription}
- *       title='Title'
- *       description='Description'
- *     />
- *   );
- * };
+ * const styles = StyleSheet.create({
+ *   listItem: { borderRadius: 8 },
+ *   listItemTitle: { color: 'black' },
+ *   listItemDescription: { color: 'gray' },
+ * });
  * ```
- * */
-
+ */
 export class ListItemComponent extends React.Component<ListItemProps> {
 
   static styledComponentName: string = 'ListItem';

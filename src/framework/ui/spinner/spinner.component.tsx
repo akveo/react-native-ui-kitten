@@ -111,33 +111,22 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  *}
  *
  * const styles = StyleSheet.create({
- *  loading: {
- *    flex: 1,
- *    justifyContent: 'center',
- *    alignItems: 'center',
- *  },
+ *   loading: {
+ *     flex: 1,
+ *     justifyContent: 'center',
+ *     alignItems: 'center',
+ *   },
  *});
  *```
  *
- * @example Size
+ * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
  * import { Spinner } from 'react-native-ui-kitten';
  *
- * export const GiantSpinner = () => (
- *  <Spinner size='giant'/>
- * );
- * ```
- *
- * @example Status
- *
- * ```
- * import React from 'react';
- * import { Spinner } from 'react-native-ui-kitten';
- *
- * export const DangerSpinner = () => (
- *  <Spinner status='danger'/>
+ * export const SpinnerShowcase = (props) => (
+ *   <Spinner size='giant' status='danger' />
  * );
  * ```
  */

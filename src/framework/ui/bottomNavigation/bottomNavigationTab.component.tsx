@@ -60,8 +60,72 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @property StyledComponentProps
  *
+ * @overview-example Simple Usage
+ *
+ * ```
+ * import React from 'react';
+ * import { BottomNavigationTab } from 'react-native-ui-kitten';
+ *
+ * export const BottomNavigationTabShowcase = (props) => (
+ *   <BottomNavigationTab title='Dashboard' />
+ * );
+ * ```
+ *
+ * @overview-example With Icon
+ *
+ * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
+ * import React from 'react';
+ * import { BottomNavigationTab, Icon } from 'react-native-ui-kitten';
+ *
+ * const DashboardIcon = (style) => (
+ *   <Icon {...style} name='layout' />
+ * );
+ *
+ * export const BottomNavigationTabShowcase = (props) => (
+ *   <BottomNavigationTab title='Dashboard' icon={DashboardIcon} />
+ * );
+ * ```
+ *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { BottomNavigationTab } from 'react-native-ui-kitten';
+ *
+ * const DashboardIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const BottomNavigationTabShowcase = (props) => (
+ *   <BottomNavigationTab title='Dashboard' icon={DashboardIcon} />
+ * );
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { BottomNavigationTab } from 'react-native-ui-kitten';
+ *
+ * export const BottomNavigationTabShowcase = (props) => (
+ *   <BottomNavigationTab
+ *     style={styles.tab}
+ *     titleStyle={styles.tabTitle}
+ *     title='Dashboard'
+ *   />
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   tab: { backgroundColor: 'white' },
+ *   tabTitle: { color: 'black' },
+ * });
+ * ```
  */
-
 export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
 
   static styledComponentName: string = 'BottomNavigationTab';

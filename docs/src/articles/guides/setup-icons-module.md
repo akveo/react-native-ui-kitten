@@ -26,18 +26,24 @@ npm i @ui-kitten/eva-icons
 ## Configure Icon Registry
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { ApplicationProvider, Layout, IconRegistry } from 'react-native-ui-kitten';
+import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
+
+const ApplicationContent = () => (
+  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <Text>Welcome to UI Kitten</Text>
+  </Layout>
+); 
 
 const App = () => (
-  <ApplicationProvider
-    mapping={mapping}
-    theme={lightTheme}>
-    <IconRegistry icons={EvaIconsPack}/>
-    <Layout style={{flex: 1}}/>
-  </ApplicationProvider>
+  <React.Fragment>
+    <IconRegistry icons={EvaIconsPack} />
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+      <ApplicationContent />
+    </ApplicationProvider>
+  <React.Fragment />
 );
 
 export default App;
@@ -48,7 +54,7 @@ export default App;
 ## Use it with UI Kitten components
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { Button, Icon } from 'react-native-ui-kitten';
 
 export const FacebookIcon = (style) => (

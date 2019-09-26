@@ -29,6 +29,7 @@ export type IconElement<T> = React.ReactElement<T>;
  * `Icon` component with animation support. Allows to render any ReactElement registered for a specific name.
  * Starting from UI Kitten 4.2, there is `@ui-kitten/eva-icons` module
  * that renders any icon from eva-icons package in `svg` format.
+ * It allows easily use icons in any component that has `icon` prop
  *
  * @extends React.Component
  *
@@ -49,23 +50,25 @@ export type IconElement<T> = React.ReactElement<T>;
  * ```
  * import React from 'react';
  * import { mapping, light as lightTheme } from '@eva-design/eva';
- * import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
+ * import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
  * import { EvaIconsPack } from '@ui-kitten/eva-icons'; // <-- Make sure it is installed. npm i @ui-kitten/eva-icons
- * import { Application } from './path-to/root.component';
  *
- * export default class App extends React.Component {
+ * const ApplicationContent = () => (
+ *   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+ *     <Text>Welcome to UI Kitten</Text>
+ *   </Layout>
+ * );
  *
- *   public render(): React.ReactNode {
- *     return (
- *       <ApplicationProvider
- *         mapping={mapping}
- *         theme={lightTheme}>
- *         <IconRegistry icons={EvaIconsPack}/>
- *         <Application/>
- *       </ApplicationProvider>
- *     );
- *   }
- * }
+ * const App = () => (
+ *   <React.Fragment>
+ *     <IconRegistry icons={EvaIconsPack}/>
+ *     <ApplicationProvider mapping={mapping} theme={lightTheme}>
+ *       <ApplicationContent/>
+ *     </ApplicationProvider>
+ *   </React.Fragment>
+ * );
+ *
+ * export default App;
  * ```
  *
  * @overview-example Simple Usage
@@ -76,6 +79,45 @@ export type IconElement<T> = React.ReactElement<T>;
  *
  * export const StarIcon = (props) => (
  *   <Icon name='star'/>
+ * );
+ * ```
+ *
+ * @overview-example Using with UI Kitten components
+ *
+ * ```
+ * import React from 'react';
+ * import { Input, Button, Icon } from 'react-native-ui-kitten';
+ *
+ * const FacebookIcon = (style) => (
+ *   <Icon {...style} name='facebook' />
+ * );
+ *
+ * const EyeIcon = (style) => (
+ *   <Icon {...style} name='eye' />
+ * );
+ *
+ * export const LoginButton = (props) => (
+ *   <Button icon={FacebookIcon}>Login with Facebook</Button>
+ * );
+ *
+ * export const PasswordInput = (props) => (
+ *   <Input placeholder='Password' icon={EyeIcon} />
+ * );
+ * ```
+ *
+ * @overview-example Using Asset Source
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { Button } from 'react-native-ui-kitten';
+ *
+ * const FacebookIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const LoginButton = (props) => (
+ *   <Button icon={FacebookIcon}>Login with Facebook</Button>
  * );
  * ```
  *
@@ -107,9 +149,7 @@ export type IconElement<T> = React.ReactElement<T>;
  *     ref={iconRef}
  *     name='star'
  *     animation='shake'
- *     animationConfig={{
-         cycles: -1,
-       }}
+ *     animationConfig={{ cycles: -1 }}
  *   />
  * );
  *
@@ -123,6 +163,7 @@ export type IconElement<T> = React.ReactElement<T>;
  * import { Input, Icon } from 'react-native-ui-kitten';
  *
  * export class PasswordInput extends React.Component {
+ *
  *  state = {
  *    passwordVisible: false,
  *  };
@@ -158,6 +199,7 @@ export type IconElement<T> = React.ReactElement<T>;
  * import { Button, Icon } from 'react-native-ui-kitten';
  *
  * export class LikeButton extends React.Component {
+ *
  *  state = {
  *    liked: false,
  *  };
@@ -184,8 +226,21 @@ export type IconElement<T> = React.ReactElement<T>;
  *  }
  * }
  * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * // Visit react-native-svg documentation for more details
+ * // https://github.com/react-native-community/react-native-svg#common-props
+ *
+ * import React from 'react';
+ * import { Icon } from 'react-native-ui-kitten';
+ *
+ * export const StarIcon = (props) => (
+ *   <Icon name='star' width={32} height={32} fill='#000'/>
+ * );
+ * ```
  */
-
 export class Icon<T> extends React.Component<IconProps<T>> {
 
   static defaultProps: Partial<IconProps> = {

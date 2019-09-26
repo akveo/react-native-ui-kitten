@@ -48,33 +48,23 @@ export type ListElement = React.ReactElement<ListProps>;
  *
  * ```
  * import React from 'react';
- * import { ListRenderItemInfo } from 'react-native';
- * import {
- *   List,
- *   ListItem,
- * } from 'react-native-ui-kitten';
+ * import { List, ListItem } from 'react-native-ui-kitten';
  *
- * export const ListShowcase = (props?: ListProps): React.ReactElement<ListProps> => {
+ * export const ListShowcase = (props) => {
  *
- *   private data: string[] = [
- *     'Item 1',
- *     'Item 2',
- *     'Item 3',
- *   ];
+ *   const data = ['Item 1', 'Item 2', 'Item 3'];
  *
- *   private onItemPress = (index: number) => {
+ *   const onItemPress = (index) => {
  *     // Handle item press
  *   };
  *
- *   private renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
- *     return (
- *       <ListItem
- *         title={`${info.item}`}
- *         description='Description'
- *         onPress={onItemPress}
- *       />
- *     );
- *   };
+ *   const renderItem = ({ item, index }) => (
+ *     <ListItem
+ *       title={item}
+ *       description='Description'
+ *       onPress={onItemPress}
+ *     />
+ *   );
  *
  *   return (
  *     <List
@@ -85,34 +75,21 @@ export type ListElement = React.ReactElement<ListProps>;
  * };
  * ```
  *
- * @example With Custom ListItem
+ * @overview-example Custom List Item
  *
  * ```
  * import React from 'react';
- * import { ListRenderItemInfo } from 'react-native';
- * import {
- *   List,
- *   ListItem,
- * } from 'react-native-ui-kitten';
- * import { CustomListItemView } from './path-to/custom-list-item-view';
+ * import { List, ListItem, Text } from 'react-native-ui-kitten';
  *
- * export const ListShowcase = (props?: ListProps): React.ReactElement<ListProps> => {
+ * export const ListShowcase = (props) => {
  *
- *   const data: string[] = [
- *      ...
- *   ];
+ *   const data = ['Item 1', 'Item 2', 'Item 3'];
  *
- *   const onItemPress = (index: number) => {
- *     // Handle List Item press
- *   };
- *
- *   const renderItem = (info: ListRenderItemInfo<ListItemModel>): React.ReactElement<ListItemProps> => {
- *     return (
- *       <ListItem onPress={onItemPress}>
- *         <CustomListItem/>
- *       </ListItem>
- *     );
- *   };
+ *   const renderItem = ({ item, index }) => (
+ *     <ListItem>
+ *       <Text>{item}</Text>
+ *     </ListItem>
+ *   );
  *
  *   return (
  *     <List
@@ -122,8 +99,44 @@ export type ListElement = React.ReactElement<ListProps>;
  *   );
  * };
  * ```
- * */
-
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native-ui-kitten';
+ * import { List, ListItem } from 'react-native-ui-kitten';
+ *
+ * export const ListShowcase = (props) => {
+ *
+ *   const data = ['Item 1', 'Item 2', 'Item 3'];
+ *
+ *   const onItemPress = (index) => {
+ *     // Handle item press
+ *   };
+ *
+ *   const renderItem = ({ item, index }) => (
+ *     <ListItem
+ *       title={item}
+ *       description='Description'
+ *       onPress={onItemPress}
+ *     />
+ *   );
+ *
+ *   return (
+ *     <List
+ *       contentContainerStyle={styles.contentContainer}
+ *       data={data}
+ *       renderItem={renderItem}
+ *     />
+ *   );
+ * };
+ *
+ * const styles = StyleSheet.create({
+ *   contentContainer: { paddingHorizontal: 8 },
+ * });
+ * ```
+ */
 class ListComponent extends React.Component<ListProps> {
 
   static styledComponentName: string = 'List';
