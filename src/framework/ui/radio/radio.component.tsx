@@ -71,17 +71,46 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * import { Radio } from 'react-native-ui-kitten';
  *
  * export class RadioShowcase extends React.Component {
- *   public state = {
+ *
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Radio
+ *         checked={this.state.checked}
+ *         onChange={this.onChange}
+ *       />
+ *     )
+ *   }
+ * }
+ *
+ * ```
+ * @overview-example With Text
+ *
+ * ```
+ * import React from 'react';
+ * import { Radio } from 'react-native-ui-kitten';
+ *
+ * export class RadioShowcase extends React.Component {
+ *
+ *   state = {
+ *     checked: false,
+ *   };
+ *
+ *   onChange = (checked) => {
+ *     this.setState({ checked });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <Radio
+ *         text='Place your text'
  *         checked={this.state.checked}
  *         onChange={this.onChange}
  *       />
@@ -97,15 +126,16 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * import { Radio } from 'react-native-ui-kitten';
  *
  * export class RadioShowcase extends React.Component {
- *   public state = {
+ *
+ *   state = {
  *     checked: false,
  *   };
  *
- *   private onChange = (checked: boolean) => {
+ *   onChange = (checked) => {
  *     this.setState({ checked });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Radio
  *         status='warning'
@@ -121,18 +151,21 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * ```
  * import React from 'react';
- * import { Radio, RadioProps } from 'react-native-ui-kitten';
+ * import { StyleSheet } from 'react-native';
+ * import { Radio } from 'react-native-ui-kitten';
  *
- * export const RadioShowcase = (props?: RadioProps): React.ReactElement<RadioProps> => {
- *   return (
- *     <Radio
- *       style={styles.radio}
- *       textStyle={styles.radioText}
- *       text='Place your text'
- *       checked={true}
- *     />
- *   );
- * };
+ * export const RadioShowcase = (props) => (
+ *   <Radio
+ *     style={styles.radio}
+ *     textStyle={styles.radioText}
+ *     checked={true}
+ *   />
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   radio: { width: 32, height: 32 },
+ *   radioText: { color: 'black' },
+ * });
  * ```
  */
 
@@ -165,6 +198,7 @@ export class RadioComponent extends React.Component<RadioProps> {
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textMarginHorizontal,
+      textFontFamily,
       textFontSize,
       textFontWeight,
       textLineHeight,
@@ -186,6 +220,7 @@ export class RadioComponent extends React.Component<RadioProps> {
       selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,

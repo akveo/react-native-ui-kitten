@@ -51,25 +51,7 @@ export type DrawerHeaderFooterElement = ListItemElement;
  * );
  * ```
  *
- * @example With Icon
- *
- * ```
- * // IMPORTANT: To use Icon component make sure to follow this guide:
- * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
- *
- * import React from 'react'
- * import { DrawerHeaderFooter, Icon } from 'react-native-ui-kitten';
- *
- * const ProfileIcon = (style) => (
- *   <Icon {...style} name='person' />
- * );
- *
- * export const ProfileHeader = (props) => (
- *   <DrawerHeaderFooter title='John Doe' description='React Native Developer' icon={ProfileIcon} />
- * );
- * ```
- *
- * @example With Accessory
+ * @overview-example With Accessory
  *
  * ```
  * // IMPORTANT: To use Icon component make sure to follow this guide:
@@ -83,7 +65,7 @@ export type DrawerHeaderFooterElement = ListItemElement;
  * );
  *
  * const LogoutButton = (style): React.ReactElement<ButtonProps> => (
- *   <Button style={style} icon={LogoutIcon}>LOGOUT</Button>
+ *   <Button style={style} icon={LogoutIcon} />
  * );
  *
  * export const ProfileHeader = (props) => (
@@ -95,10 +77,27 @@ export type DrawerHeaderFooterElement = ListItemElement;
  * );
  * ```
  *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react'
+ * import { Image } from 'react-native-ui-kitten';
+ * import { DrawerHeaderFooter } from 'react-native-ui-kitten';
+ *
+ * const ProfileIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const ProfileHeader = (props) => (
+ *   <DrawerHeaderFooter title='John Doe' description='React Native Developer' icon={ProfileIcon} />
+ * );
+ * ```
+ *
  * @example Inline Styling
  *
  * ```
  * import React from 'react'
+ * import { StyleSheet } from 'react-native';
  * import { DrawerHeaderFooter } from 'react-native-ui-kitten';
  *
  * export const ProfileHeader = (props) => (
@@ -110,6 +109,12 @@ export type DrawerHeaderFooterElement = ListItemElement;
  *     description='React Native Developer'
  *   />
  * );
+ *
+ * const styles = StyleSheet.create({
+ *   drawerHeader: { backgroundColor: 'black' }
+ *   drawerHeaderTitle: { color: 'white' }
+ *   drawerHeaderDescription: { color: 'gray' }
+ * });
  * ```
  */
 export class DrawerHeaderFooter extends React.Component<DrawerHeaderFooterProps> {
