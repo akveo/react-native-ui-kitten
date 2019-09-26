@@ -189,11 +189,13 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       titleTextAlign,
+      titleFontFamily,
       titleFontSize,
       titleLineHeight,
       titleFontWeight,
       titleColor,
       subtitleTextAlign,
+      subtitleFontFamily,
       subtitleFontSize,
       subtitleLineHeight,
       subtitleFontWeight,
@@ -207,6 +209,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       titleContainer: {},
       title: {
         textAlign: titleTextAlign,
+        fontFamily: titleFontFamily,
         fontSize: titleFontSize,
         lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
@@ -214,6 +217,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       },
       subtitle: {
         textAlign: subtitleTextAlign,
+        fontFamily: subtitleFontFamily,
         fontSize: subtitleFontSize,
         color: subtitleColor,
         fontWeight: subtitleFontWeight,

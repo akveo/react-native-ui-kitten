@@ -147,6 +147,7 @@ export class TabComponent extends React.Component<TabProps> {
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textMarginVertical,
+      textFontFamily,
       textFontSize,
       textLineHeight,
       textFontWeight,
@@ -168,6 +169,7 @@ export class TabComponent extends React.Component<TabProps> {
       },
       title: {
         marginVertical: textMarginVertical,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,

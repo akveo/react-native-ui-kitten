@@ -188,6 +188,7 @@ export class ButtonComponent extends React.Component<ButtonProps> {
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       textColor,
+      textFontFamily,
       textFontSize,
       textLineHeight,
       textFontWeight,
@@ -203,6 +204,7 @@ export class ButtonComponent extends React.Component<ButtonProps> {
       container: containerParameters,
       text: {
         color: textColor,
+        fontFamily: textFontFamily,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
