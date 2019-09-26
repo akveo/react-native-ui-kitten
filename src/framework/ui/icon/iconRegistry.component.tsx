@@ -25,20 +25,20 @@ export type IconRegistryElement = React.ReactElement<IconRegistryProps>;
  * ```
  * import React from 'react';
  * import { mapping, light as lightTheme } from '@eva-design/eva';
- * import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
+ * import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
  * import { EvaIconsPack } from '@ui-kitten/eva-icons'; // <-- Make sure it is installed. npm i @ui-kitten/eva-icons
- * import { Application } from './path-to/root.component';
  *
  * export default class App extends React.Component {
- *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
- *       <ApplicationProvider
- *         mapping={mapping}
- *         theme={lightTheme}>
- *         <Application/>
+ *       <React.Fragment>
  *         <IconRegistry icons={EvaIconsPack}/>
- *       </ApplicationProvider>
+ *         <ApplicationProvider mapping={mapping} theme={lightTheme}>
+ *           <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+ *             <Text>Welcome to UI Kitten</Text>
+ *           </Layout>
+ *         </ApplicationProvider>
+ *       <React.Fragment>
  *     );
  *   }
  * }

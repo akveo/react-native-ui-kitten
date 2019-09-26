@@ -44,8 +44,57 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  * @property TouchableOpacityProps
  *
  * @property StyledComponentProps
+ *
+ * @overview-example Simple Usage
+ *
+ * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
+ * import React from 'react';
+ * import { TopNavigationAction, Icon } from 'react-native-ui-kitten';
+ *
+ * const BackIcon = (style) => (
+ *   <Icon {...style} name='arrow-back' } />
+ * );
+ *
+ * export const BackAction = (props) => (
+ *   <TopNavigationAction {...props} icon={BackIcon} />
+ * );
+ * ```
+ *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native-ui-kitten';
+ * import { TopNavigationAction } from 'react-native-ui-kitten';
+ *
+ * const BackIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
+ *
+ * export const BackAction = (props) => (
+ *   <TopNavigationAction {...props} icon={BackIcon} />
+ * );
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { TopNavigationAction } from 'react-native-ui-kitten';
+ *
+ * export const BackAction = (props) => (
+ *   <TopNavigationAction style={styles.action} />
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   action: { marginHorizontal: 4 },
+ * });
+ * ```
  */
-
 class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 
   static styledComponentName: string = 'TopNavigationAction';

@@ -53,22 +53,19 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   TabBar,
- *   Tab,
- * } from 'react-native-ui-kitten';
+ * import { TabBar, Tab } from 'react-native-ui-kitten';
  *
  * export class TabBarShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onBarSelect = (selectedIndex: number) => {
+ *   onBarSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <TabBar
  *         selectedIndex={this.state.selectedIndex}
@@ -82,7 +79,6 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * }
  * ```
  */
-
 export class TabBarComponent extends React.Component<TabBarProps> {
 
   static styledComponentName: string = 'TabBar';

@@ -25,7 +25,7 @@ After vector-icons is installed and you have everything in place, we need to cre
 Let's create a separate file `feather-icons.js` and place there the following code.
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather'; // <-- Import Feather icons
 
@@ -54,6 +54,8 @@ function createIconsMap() {
 And providing function
 
 ```js
+import Icon from 'react-native-vector-icons/Feather'; // <-- Import Feather icons
+
 function IconProvider(name) {
   return {
     toReactElement: (props) => FeatherIcon({ name, ...props }),
@@ -81,18 +83,24 @@ function FeatherIcon({ name, style }) {
 After everything is configured, we simply need to import a feather icon map and register it with UI Kitten APIs.
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import { ApplicationProvider, Layout, IconRegistry } from 'react-native-ui-kitten';
+import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
 import { FeatherIconsPack } from './path-to/feather-icons.js'; // <-- Feather icons map
 
+const ApplicationContent = () => (
+  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <Text>Welcome to UI Kitten</Text>
+  </Layout>
+); 
+
 const App = () => (
-  <ApplicationProvider
-    mapping={mapping}
-    theme={lightTheme}>
-    <IconRegistry icons={[FeatherIconsPack]}/>
-    <Layout style={{flex: 1}}/>
-  </ApplicationProvider>
+  <React.Fragment>
+    <IconRegistry icons={[FeatherIconsPack]} />
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+      <ApplicationContent />
+    </ApplicationProvider>
+  </React.Fragment>
 );
 
 export default App;
@@ -103,7 +111,7 @@ export default App;
 ## Use it with UI Kitten components
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { Button, Icon } from 'react-native-ui-kitten';
 
 export const FacebookIcon = (style) => (
@@ -128,6 +136,8 @@ As a result, you should have a Button looking similar to this:
 As you might notice, UI Kitten API allows you to register **multiple** icon packages with the following instruction.
 
 ```js
+import { IconRegistry } from 'react-native-ui-kitten';
+
 <IconRegistry icons={[FeatherIconsPack]}/>
 ```
 
@@ -175,19 +185,25 @@ function MaterialIcon({ name, style }) {
 Now all we need to do is to extend our `IconRegistry`:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import { ApplicationProvider, Layout, IconRegistry } from 'react-native-ui-kitten';
+import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
 import { FeatherIconsPack } from './path-to/feather-icons.js'; // <-- Feather icons map
 import { MaterialIconsPack } from './path-to/material-icons.js'; // <-- Material icons map
 
+const ApplicationContent = () => (
+  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <Text>Welcome to UI Kitten</Text>
+  </Layout>
+); 
+
 const App = () => (
-  <ApplicationProvider
-    mapping={mapping}
-    theme={lightTheme}>
+  <React.Fragment>
     <IconRegistry icons={[FeatherIconsPack, MaterialIconsPack]}/>
-    <Layout style={{flex: 1}}/>
-  </ApplicationProvider>
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+      <ApplicationContent />
+    </ApplicationProvider>
+  </React.Fragment>
 );
 
 export default App;
@@ -200,7 +216,7 @@ export default App;
 Now you're able to choose an icon library with simply changing `pack` property.
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { Button, Icon } from 'react-native-ui-kitten';
 
 export const HomeIcon = (style) => (

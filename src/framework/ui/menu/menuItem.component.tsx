@@ -128,6 +128,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
       },
       title: {
         marginHorizontal: titleStyles.titleMarginHorizontal,
+        fontFamily: titleStyles.titleFontFamily,
         fontSize: titleStyles.titleFontSize,
         fontWeight: titleStyles.titleFontWeight,
         lineHeight: titleStyles.titleLineHeight,

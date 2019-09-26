@@ -62,7 +62,7 @@ const TAG_CONTENT: number = 1;
 const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
 
 /**
- * Displays content in a `Modal` when users focus on or tap an element. Also supports autoplacement.
+ * Displays content in a `Modal` when users focus on or tap an element. Also supports automatic placement.
  *
  * @extends React.Component
  *
@@ -90,49 +90,43 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * ```
  * import React from 'react';
- * import {
- *   View,
- *   ViewProps,
- * } from 'react-native';
- * import {
- *   Popover,
- *   Button,
- *   Text,
- * } from 'react-native-ui-kitten';
+ * import { StyleSheet } from 'react-native';
+ * import { Popover, Layout, Button, Text } from 'react-native-ui-kitten';
  *
  * export class PopoverShowcase extends React.Component {
- *   public state: State = {
+ *
+ *   state = {
  *     popoverVisible: false,
  *   };
  *
- *   private togglePopover = () => {
- *     this.setState({ popoverVisible: !this.state.popoverVisible });
+ *   togglePopover = () => {
+ *     const popoverVisible = !this.state.popoverVisible;
+ *     this.setState({ popoverVisible });
  *   };
  *
- *   private renderPopoverContentElement = (): React.ReactElement<ViewProps> => {
- *     return (
- *       <View style={styles.popoverContent}>
- *         <Text>Hi! This is popover.</Text>
- *       </View>
- *     );
- *   };
+ *   renderPopoverContentElement = () => (
+ *     <Layout style={styles.popoverContent}>
+ *       <Text>Hi! This is popover.</Text>
+ *     </Layout>
+ *   );
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Popover
  *         visible={this.state.popoverVisible}
  *         content={this.renderPopoverContentElement()}
  *         onBackdropPress={this.togglePopover}>
- *         <Button onPress={this.togglePopover}>
- *           TOGGLE POPOVER
- *         </Button>
+ *         <Button onPress={this.togglePopover}>TOGGLE POPOVER</Button>
  *       </Popover>
  *     );
  *   }
  * }
+ *
+ * const styles = StyleSheet.create({
+ *   popoverContent: { justifyContent: 'center', alignItems: 'center' },
+ * });
  * ```
  */
-
 export class PopoverComponent extends React.Component<PopoverProps> {
 
   static styledComponentName: string = 'Popover';

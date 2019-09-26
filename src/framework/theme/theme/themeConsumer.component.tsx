@@ -49,14 +49,12 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  *
  * ```
  * import React from 'react';
- * import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
- * import { withStyles, ThemedComponentProps } from 'react-native-ui-kitten';
+ * import { TouchableOpacity } from 'react-native';
+ * import { withStyles } from 'react-native-ui-kitten';
  *
- * type ThemedButtonProps = TouchableOpacityProps & ThemedComponentProps;
+ * class Button extends React.Component {
  *
- * class Button extends React.Component<ThemedButtonProps> {
- *
- *   public render(): React.ReactElement<TouchableOpacityProps> {
+ *   render() {
  *     // Retrieve styles from props (provided with themedStyle prop)
  *     // And apply it with saving priority of `style` prop
  *
@@ -71,7 +69,7 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  *   }
  * }
  *
- * export const ThemedButton = withStyles(Button, (theme: ThemeType) => ({
+ * export const ThemedButton = withStyles(Button, (theme) => ({
  *   backgroundColor: theme['color-primary-default'],
  * }));
  * ```
@@ -80,19 +78,13 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  *
  * ```
  * import React from 'react';
- * import {
- *   ThemedButton,
- *   ThemedButtonProps,
- * } from './path-to/themedButton.component';
+ * import { ThemedButton } from './path-to/themedButton.component';
  *
- * export const ThemedButtonShowcase = (props?: ThemedButtonProps): React.ReactElement<ThemedButtonProps> => {
- *   return (
- *     <ThemedButton {...props}/>
- *   );
- * };
+ * export const ThemedButtonShowcase = (props) => (
+ *   <ThemedButton {...props}/>
+ * );
  * ```
  */
-
 export const withStyles = <P extends object>(Component: React.ComponentType<P>,
                                              createStyles?: CreateStylesFunction): ThemedComponentClass<P> => {
 

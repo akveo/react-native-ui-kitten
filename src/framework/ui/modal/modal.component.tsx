@@ -67,35 +67,21 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   StyleSheet,
- *   View,
- *   ViewProps,
- * } from 'react-native';
- * import {
- *   Button,
- *   Modal,
- *   Text,
- *   Layout,
- * } from 'react-native-ui-kitten';
+ * import { StyleSheet } from 'react-native';
+ * import { Button, Modal, Text, Layout } from 'react-native-ui-kitten';
  *
- * interface State {
- *   modalVisible: boolean;
- * }
+ * export class ModalShowcase extends React.Component {
  *
- * export class ModalShowcase extends React.Component<any, State> {
- *
- *   public state: State = {
+ *   state = {
  *     modalVisible: false,
  *   };
  *
- *   private setModalVisible = (): void => {
- *     const modalVisible: boolean = !this.state.modalVisible;
- *
+ *   setModalVisible = () => {
+ *     const modalVisible = !this.state.modalVisible;
  *     this.setState({ modalVisible });
  *   };
  *
- *   private renderModalElement = (): React.ReactElement<ViewProps> => {
+ *   renderModalElement = () => {
  *     return (
  *       <Layout
  *         level='3'
@@ -106,14 +92,14 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *     );
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
- *       <View style={styles.container}>
+ *       <Layout style={styles.container}>
  *         <Button onPress={this.setModalVisible}>Show Modal</Button>
  *         <Modal visible={this.state.modalVisible}>
  *           {this.renderModalElement()}
  *         </Modal>
- *       </View>
+ *       </Layout>
  *     );
  *   }
  * }
@@ -132,39 +118,25 @@ export type ModalElement = React.ReactElement<ModalProps>;
  * });
  * ```
  *
- * @example With Backdrop
+ * @overview-example With Backdrop
  *
  * ```
  * import React from 'react';
- * import {
- *   StyleSheet,
- *   View,
- *   ViewProps,
- * } from 'react-native';
- * import {
- *   Button,
- *   Modal,
- *   Text,
- *   Layout,
- * } from 'react-native-ui-kitten';
+ * import { StyleSheet } from 'react-native';
+ * import { Button, Modal, Text, Layout } from 'react-native-ui-kitten';
  *
- * interface State {
- *   modalVisible: boolean;
- * }
+ * export class ModalShowcase extends React.Component {
  *
- * export class ModalShowcase extends React.Component<any, State> {
- *
- *   public state: State = {
+ *   state = {
  *     modalVisible: false,
  *   };
  *
- *   private setModalVisible = (): void => {
+ *   setModalVisible = () => {
  *     const modalVisible: boolean = !this.state.modalVisible;
- *
  *     this.setState({ modalVisible });
  *   };
  *
- *   private renderModalElement = (): React.ReactElement<ViewProps> => {
+ *   renderModalElement = () => {
  *     return (
  *       <Layout
  *         level='3'
@@ -175,9 +147,9 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *     );
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
- *       <View style={styles.container}>
+ *       <Layout style={styles.container}>
  *         <Button onPress={this.setModalVisible}>Show Modal</Button>
  *         <Modal
  *           allowBackdrop={true}
@@ -204,8 +176,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *   },
  * });
  * ```
- * */
-
+ */
 export class Modal extends React.Component<ModalProps> {
 
   static defaultProps: Partial<ModalProps> = {
