@@ -46,33 +46,58 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  *
  * ```
  * import React from 'react';
- * import { Avatar, AvatarProps } from 'react-native-ui-kitten';
+ * import { Avatar } from 'react-native-ui-kitten';
  *
- * export const AvatarShowcase = (props?: AvatarProps): React.ReactElement<AvatarProps> => {
- *   return (
- *     <Avatar source={{uri: 'https://path-to/awesome-image.png'}} />
- *   );
- * };
+ * export const AvatarShowcase = (props) => (
+ *   <Avatar source={require('path-to-assets/local-image.png')} />
+ * );
+ * ```
+ *
+ * @overview-example Remote Images
+ *
+ * ```
+ * import React from 'react';
+ * import { Avatar } from 'react-native-ui-kitten';
+ *
+ * export const AvatarShowcase = (props) => (
+ *   <Avatar source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }} />
+ * );
  * ```
  *
  * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
- * import { Avatar, AvatarProps } from 'react-native-ui-kitten';
+ * import { Avatar } from 'react-native-ui-kitten';
  *
- * export const AvatarShowcase = (props?: AvatarProps): React.ReactElement<AvatarProps> => {
- *   return (
- *     <Avatar
- *       source={{uri: 'https://path-to/awesome-image.png'}}
- *       size='large'
- *       shape='rounded'
- *     />
- *   );
- * };
+ * export const AvatarShowcase = (props) => (
+ *   <Avatar
+ *     source={require('path-to-assets/local-image.png')}
+ *     size='large'
+ *     shape='rounded'
+ *   />
+ * );
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Avatar } from 'react-native-ui-kitten';
+ *
+ * export const AvatarShowcase = (props) => (
+ *   <Avatar
+ *     style={styles.avatar}
+ *     source={require('path-to-assets/local-image.png')}
+ *   />
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   avatar: { width: 96, height: 96, borderRadius: 16 }
+ * });
  * ```
  */
-
 export class AvatarComponent extends React.Component<AvatarProps> {
 
   static styledComponentName: string = 'Avatar';

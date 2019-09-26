@@ -71,82 +71,104 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   TopNavigation,
- *   TopNavigationAction,
- *   TopNavigationActionProps,
- * } from 'react-native-ui-kitten';
+ * import { TopNavigation } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
- *   return (
- *     <TopNavigation title='Title' />
- *   );
- * };
+ * export const AwesomeAppHeader = (props) => (
+ *   <TopNavigation title='Awesome App' />
+ * );
  * ```
  *
  * @overview-example Actions
  *
  * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
  * import React from 'react';
- * import { Image, ImageProps } from 'react-native';
- * import {
- *   TopNavigation,
- *   TopNavigationAction,
- *   TopNavigationActionProps,
- * } from 'react-native-ui-kitten';
+ * import { TopNavigation, TopNavigationAction, Icon } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
+ * const BackIcon = (style) => (
+ *   <Icon {...style} name='arrow-back' />
+ * );
  *
- *   private onLeftControlPress = () => {
- *     // Handle Left Control press
- *   };
+ * const EditIcon = (style) => (
+ *   <Icon {...style} name='edit' />
+ * );
  *
- *   const renderControlIcon = (style: StyleType): React.ReactElement<ImageProps> => {
- *     return (
- *       <Image
- *         style={style}
- *         source={{uri: 'https://path-to/awesome-image.png'}}
- *       />
- *     );
- *   };
+ * const MenuIcon = (style) => (
+ *   <Icon {...style} name='more-vertical' />
+ * );
  *
- *   const renderLeftControl = (): React.ReactElement<TopNavigationActionProps> => {
- *     return (
- *       <TopNavigationAction
- *         icon={this.renderControlIcon}
- *         onPress={this.onLeftControlPress}
- *       />
- *     );
- *   };
+ * const BackAction = (props) => (
+ *   <TopNavigationAction {...props} icon={BackIcon} />
+ * );
+ *
+ * const EditAction = (props) => (
+ *   <TopNavigationAction {...props} icon={EditIcon} />
+ * );
+ *
+ * const MenuAction = (props) => (
+ *   <TopNavigationAction {...props} icon={MenuIcon} />
+ * );
+ *
+ * export const AwesomeAppHeader = (props) => {
+ *
+ *   const onBackPress = () => {};
+ *
+ *   const renderLeftControl = () => (
+ *     <BackAction onPress={onBackPress} />
+ *   );
+ *
+ *   const renderRightControls = () => [
+ *     <EditAction />,
+ *     <MenuAction />,
+ *   ];
  *
  *   return (
  *     <TopNavigation
- *       title='Title'
- *       leftControl={this.renderLeftControl()}
+ *       title='Awesome App'
+ *       leftControl={renderLeftControl()}
+ *       rightControls={renderRightControls()}
  *     />
  *   );
  * };
+ * ```
+ *
+ * @example Centered Title
+ *
+ * ```
+ * import React from 'react';
+ * import { TopNavigation } from 'react-native-ui-kitten';
+ *
+ * export const AwesomeAppHeader = (props) => (
+ *   <TopNavigation alignment='center' title='Awesome App' />
+ * );
  * ```
  *
  * @example Inline Styling
  *
  * ```
  * import React from 'react';
- * import { TopNavigation, TopNavigationProps } from 'react-native-ui-kitten';
+ * import { StyleSheet } from 'react-native';
+ * import { TopNavigation } from 'react-native-ui-kitten';
  *
- * export const TopNavigationShowcase = (props?: TopNavigationProps): React.ReactElement<TopNavigationProps> => {
- *   return (
- *     <TopNavigation
- *       title='Title'
- *       subtitle='Subtitle'
- *       titleStyle={styles.title}
- *       subtitleStyle={styles.subtitle}
- *     />
- *   );
- * };
+ * export const AwesomeAppHeader = (props) => (
+ *   <TopNavigation
+ *     style={styles.header}
+ *     title='Awesome App'
+ *     subtitle='Subtitle'
+ *     titleStyle={styles.headerTitle}
+ *     subtitleStyle={styles.headerSubtitle}
+ *   />
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   header: { backgroundColor: 'black' },
+ *   headerTitle: { color: 'white' },
+ *   headerSubtitle: { color: 'gray' },
+ * });
  * ```
- * */
-
+ */
 export class TopNavigationComponent extends React.Component<TopNavigationProps> {
 
   static styledComponentName: string = 'TopNavigation';

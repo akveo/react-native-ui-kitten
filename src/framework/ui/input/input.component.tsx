@@ -110,17 +110,124 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * export class InputShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     inputValue: '',
  *   };
  *
- *   private onInputValueChange = (inputValue: string) => {
+ *   onInputValueChange = (inputValue) => {
  *     this.setState({ inputValue });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Input
+ *         value={this.state.inputValue}
+ *         onChangeText={this.onInputValueChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example With Icon
+ *
+ * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
+ * import React from 'react';
+ * import { Input, Icon } from 'react-native-ui-kitten';
+ *
+ * export class SecureInput extends React.Component {
+ *
+ *   state = {
+ *     inputValue: '',
+ *     secureTextEntry: true,
+ *   };
+ *
+ *   onInputValueChange = (inputValue) => {
+ *     this.setState({ inputValue });
+ *   };
+ *
+ *   onIconPress = () => {
+ *     const secureTextEntry = !this.state.secureTextEntry;
+ *     this.setState({ secureTextEntry });
+ *   };
+ *
+ *   renderIcon = (style) => (
+ *     const iconName = this.state.secureTextEntry ? 'eye' : 'eye-off';
+ *     return (
+ *       <Icon {...style} name={iconName} />
+ *     );
+ *   );
+ *
+ *   render() {
+ *     return (
+ *       <Input
+ *         value={this.state.inputValue}
+ *         icon={this.renderIcon}
+ *         secureTextEntry={this.state.secureTextEntry}
+ *         onIconPress={this.onIconPress}
+ *         onChangeText={this.onInputValueChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example With Label
+ *
+ * ```
+ * import React from 'react';
+ * import { Input } from 'react-native-ui-kitten';
+ *
+ * export class EmailInput extends React.Component {
+ *
+ *   state = {
+ *     inputValue: '',
+ *   };
+ *
+ *   onInputValueChange = (inputValue) => {
+ *     this.setState({ inputValue });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <Input
+ *         label='EMAIL'
+ *         value={this.state.inputValue}
+ *         onChangeText={this.onInputValueChange}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ * @overview-example With Caption
+ *
+ * ```
+ * import React from 'react';
+ * import { Input } from 'react-native-ui-kitten';
+ *
+ * export class PasswordInput extends React.Component {
+ *
+ *   state = {
+ *     inputValue: '',
+ *   };
+ *
+ *   onInputValueChange = (inputValue) => {
+ *     this.setState({ inputValue });
+ *   };
+ *
+ *   isValidInputValue = () => {
+ *     return this.state.inputValue.length >= 6;
+ *   };
+ *
+ *   render() {
+ *     const isValidInputValue = this.isValidInputValue();
+ *     return (
+ *       <Input
+ *         status={isValidInputValue ? 'success' : 'danger'}
+ *         caption={isValidInputValue ? '' : 'Invalid password'}
  *         value={this.state.inputValue}
  *         onChangeText={this.onInputValueChange}
  *       />
@@ -137,15 +244,15 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * export class InputShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     inputValue: '',
  *   };
  *
- *   private onInputValueChange = (inputValue: string) => {
+ *   onInputValueChange = (inputValue) => {
  *     this.setState({ inputValue });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Input
  *         size='large'
@@ -158,89 +265,43 @@ export type InputElement = React.ReactElement<InputProps>;
  * }
  * ```
  *
- * @example With Icons
+ * @example Using Asset Icons
  *
  * ```
  * import React from 'react';
- * import {
- *   StyleSheet,
- *   View,
- *   ImageProps,
- *   Image,
- *   GestureResponderEvent,
- *   Alert,
- * } from 'react-native';
+ * import { Image } from 'react-native';
  * import { Input } from 'react-native-ui-kitten';
  *
- * export class InputShowcase extends React.Component {
+ * const StarIcon = (style) => (
+ *   <Image style={style} source={require('path-to-assets/local-image.png')} />
+ * );
  *
- *   public state = {
- *     inputValue: '',
- *   };
- *
- *   private onInputValueChange = (inputValue: string) => {
- *     this.setState({ inputValue });
- *   };
- *
- *   private onIconPress = (event: GestureResponderEvent): void => {
- *     Alert.alert('On Input Icon Press');
- *   };
- *
- *   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
- *     return (
- *       <Image
- *         style={style}
- *         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
- *       />
- *     );
- *   };
- *
- *   public render(): React.ReactNode {
- *     return (
- *       <Input
- *         value={this.state.inputValue}
- *         icon={this.renderIcon}
- *         onIconPress={this.onIconPress}
- *         caption='Caption'
- *         captionIcon={this.renderIcon}
- *         style={styles.input}
- *         onChangeText={this.onInputValueChange}
- *       />
- *     );
- *   }
- * }
+ * export const StarInput = (props) => (
+ *   <Input icon={StarIcon} />
+ * );
  * ```
  *
  * @example Inline Styling
  *
  * ```
  * import React from 'react';
- * import {
- *   StyleSheet,
- *   View,
- *   ImageProps,
- *   Image,
- *   GestureResponderEvent,
- *   Alert,
- * } from 'react-native';
+ * import { StyleSheet } from 'react-native';
  * import { Input } from 'react-native-ui-kitten';
  *
  * export class InputShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     inputValue: '',
  *   };
  *
- *   private onInputValueChange = (inputValue: string) => {
+ *   onInputValueChange = (inputValue) => {
  *     this.setState({ inputValue });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Input
  *         value={this.state.inputValue}
- *         placeholder='Placeholder'
- *         caption='Caption'
  *         style={styles.input}
  *         textStyle={styles.inputText}
  *         labelStyle={styles.inputLabel}
@@ -250,9 +311,15 @@ export type InputElement = React.ReactElement<InputProps>;
  *     );
  *   }
  * }
+ *
+ * const styles = StyleSheet.create({
+ *   input: { borderRadius: 8 },
+ *   inputText: { color: 'black' },
+ *   inputLabel: { color: 'gray' },
+ *   inputCaption: { color: 'gray' },
+ * });
  * ```
- * */
-
+ */
 export class InputComponent extends React.Component<InputProps> {
 
   static styledComponentName: string = 'Input';

@@ -61,17 +61,15 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *
  * ```
  * import React from 'react';
- * import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
- * import { styled, StyledComponentProps, Interaction } from 'react-native-ui-kitten';
+ * import { TouchableOpacity } from 'react-native';
+ * import { styled, Interaction } from 'react-native-ui-kitten';
  *
- * type StyledButtonProps = TouchableOpacityProps & StyledComponentProps;
- *
- * class Button extends React.Component<StyledButtonProps> {
+ * class Button extends React.Component {
  *
  *   // Define component name used in `mapping`
- *   static styledComponentName: string = 'Button';
+ *   static styledComponentName = 'Button';
  *
- *   private onPressIn = (e: GestureResponderEvent) => {
+ *   onPressIn = (e) => {
  *     // Request styles for `active` state and re-render
  *
  *     this.props.dispatch([Interaction.ACTIVE]);
@@ -81,7 +79,7 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *     }
  *   };
  *
- *   private onPressOut = (e: GestureResponderEvent) => {
+ *   onPressOut = (e) => {
  *     // Request styles for default state and re-render
  *
  *     this.props.dispatch([]);
@@ -91,7 +89,7 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *     }
  *   };
  *
- *   public render(): React.ReactElement<ButtonProps> {
+ *   render() {
  *     // Retrieve styles for current state from props (provided with themedStyle prop)
  *     // And apply it with saving priority of `style` prop
  *
@@ -108,23 +106,18 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *   }
  * }
  *
- * export const StyledButton = styled<StyledButtonProps>(Button);
+ * export const StyledButton = styled(Button);
  * ```
  *
  * @overview-example Styled Component Usage
  *
  * ```
  * import React from 'react';
- * import {
- *   StyledButton,
- *   StyledButtonProps,
- * } from './path-to/styledButton.component';
+ * import { StyledButton } from './path-to/styledButton.component';
  *
- * export const StyledButtonShowcase = (props?: StyledButtonProps): React.ReactElement<StyledButtonProps> => {
- *   return (
- *     <StyledButton {...props}/>
- *   );
- * };
+ * export const StyledButtonShowcase = (props) => (
+ *   <StyledButton {...props}/>
+ * );
  * ```
  */
 export const styled = <P extends object>(Component: React.ComponentType<P>): StyledComponentClass<P> => {

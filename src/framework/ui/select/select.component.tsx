@@ -133,37 +133,25 @@ interface State {
  *
  * ```
  * import React from 'react';
- * import {
- *   Select,
- *   SelectOptionType,
- *   SelectOption,
- * } from 'react-native-ui-kitten';
+ * import { Select } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedOption: SelectOption;
- * }
+ * export class SelectContainer extends React.Component {
  *
- * export class SelectContainer extends React.Component<any, State> {
- *
- *   private items: SelectOptionType[] = [
+ *   items = [
  *     { text: 'Option 1' },
  *     { text: 'Option 2' },
  *     { text: 'Option 3' },
- *     { text: 'Option 4' },
- *     { text: 'Option 5' },
- *     { text: 'Option 6' },
- *     { text: 'Option 8' },
  *   ];
  *
- *   public state: State = {
+ *   state = {
  *     selectedOption: null,
  *   };
  *
- *   private onSelect = (selectedOption: SelectOption): void => {
+ *   onSelect = (selectedOption) => {
  *     this.setState({ selectedOption });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Select
  *         data={this.items}
@@ -179,41 +167,29 @@ interface State {
  *
  * ```
  * import React from 'react';
- * import {
- *   Select,
- *   SelectOptionType,
- *   SelectOption,
- * } from 'react-native-ui-kitten';
+ * import { Select } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedOption: SelectOption;
- * }
+ * export class SelectContainer extends React.Component {
  *
- * export class SelectContainer extends React.Component<any, State> {
- *
- *   private items: SelectOptionType[] = [
+ *   items = [
  *     { text: 'Option 1' },
  *     { text: 'Option 2' },
  *     { text: 'Option 3' },
- *     { text: 'Option 4' },
- *     { text: 'Option 5' },
- *     { text: 'Option 6' },
- *     { text: 'Option 8' },
  *   ];
  *
- *   public state: State = {
+ *   state = {
  *     selectedOption: [],
  *   };
  *
- *   private onSelect = (selectedOption: SelectOption): void => {
+ *   onSelect = (selectedOption: SelectOption) => {
  *     this.setState({ selectedOption });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <Select
  *         data={this.items}
- *         multiSelect
+ *         multiSelect={true}
  *         selectedOption={this.state.selectedOption}
  *         onSelect={this.onSelect}
  *       />
@@ -222,106 +198,74 @@ interface State {
  * }
  * ```
  *
- * @example Eva Styling
+ * @overview-example Select Groups
  *
  * ```
  * import React from 'react';
- * import {
- *   Select,
- *   SelectOptionType,
- *   SelectOption,
- * } from 'react-native-ui-kitten';
+ * import { Select } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedOption: SelectOption;
- * }
+ * export class SelectContainer extends React.Component {
  *
- * export class SelectContainer extends React.Component<any, State> {
- *
- *   private items: SelectOptionType[] = [
+ *   items = [
  *     { text: 'Option 1' },
  *     { text: 'Option 2' },
- *     { text: 'Option 3' },
+ *     { text: 'Option 3', items: [ { text: 'Option 31' }, { text: 'Option 32' }, { text: 'Option 33' } ] },
  *     { text: 'Option 4' },
- *     { text: 'Option 5' },
- *     { text: 'Option 6' },
- *     { text: 'Option 8' },
  *   ];
  *
- *   public state: State = {
- *     selectedOption: null,
- *   };
- *
- *   private onSelect = (selectedOption: SelectOption): void => {
- *     this.setState({ selectedOption });
- *   };
- *
- *   public render(): React.ReactNode {
- *     return (
- *       <Select
- *         data={this.items}
- *         style={{ margin: 16 }}
- *         status='warning'
- *         selectedOption={this.state.selectedOption}
- *         onSelect={this.onSelect}
- *       />
- *     );
- *   }
- * }
- * ```
- *
- * @example With Icon
- *
- * ```
- * import React from 'react';
- * import {
- *   ImageProps,
- *   Image,
- * } from 'react-native';
- * import {
- *   Select,
- *   SelectOptionType,
- *   SelectOption,
- *   StyleType
- * } from 'react-native-ui-kitten';
- *
- * interface State {
- *   selectedOption: SelectOption;
- * }
- *
- * export class SelectContainer extends React.Component<any, State> {
- *
- *  private items: SelectOptionType[] = [
- *    { text: 'Option 1' },
- *    { text: 'Option 2' },
- *    { text: 'Option 3' },
- *    { text: 'Option 4' },
- *    { text: 'Option 5' },
- *    { text: 'Option 6' },
- *    { text: 'Option 8' },
- *  ];
- *
- *  public state: State = {
+ *  state = {
  *    selectedOption: null,
  *  };
  *
- *  private onSelect = (selectedOption: SelectOption): void => {
+ *  onSelect = (selectedOption) => {
  *    this.setState({ selectedOption });
  *  };
  *
- *  private renderIcon = (style: StyleType, visible: boolean): React.ReactElement<ImageProps> => {
- *    const uri: string = visible ?
- *      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png' :
- *      'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
+ *  render() {
  *    return (
- *      <Image
- *        source={{ uri }}
- *        style={style}
- *      />
+ *       <Select
+ *         data={this.items}
+ *         selectedOption={this.state.selectedOption}
+ *         onSelect={this.onSelect}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @overview-example With Icon
+ *
+ * ```
+ * // IMPORTANT: To use Icon component make sure to follow this guide:
+ * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ *
+ * import React from 'react';
+ * import { Select, Icon } from 'react-native-ui-kitten';
+ *
+ * export class SelectContainer extends React.Component {
+ *
+ *  items = [
+ *    { text: 'Option 1' },
+ *    { text: 'Option 2' },
+ *    { text: 'Option 3' },
+ *  ];
+ *
+ *  state = {
+ *    selectedOption: null,
+ *  };
+ *
+ *  onSelect = (selectedOption) => {
+ *    this.setState({ selectedOption });
+ *  };
+ *
+ *  renderIcon = (style, visible) => {
+ *    const iconName = visible ? 'arrow-ios-upward' : 'arrow-ios-downward';
+ *    return (
+ *      <Icon {...style} name={iconName} />
  *    );
  *  };
  *
- *  public render(): React.ReactNode {
+ *  render() {
  *    return (
  *      <Select
  *        data={this.items}
@@ -334,49 +278,150 @@ interface State {
  * }
  * ```
  *
- * @example Custom Styling
+ * @overview-example Eva Styling
  *
+ * ```
  * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import {
- *   Select,
- *   SelectOptionType,
- *   SelectOption,
- * } from 'react-native-ui-kitten';
+ * import { Select } from 'react-native-ui-kitten';
  *
- * interface State {
- *   selectedOption: SelectOption;
+ * export class SelectContainer extends React.Component {
+ *
+ *   items = [
+ *     { text: 'Option 1' },
+ *     { text: 'Option 2' },
+ *     { text: 'Option 3' },
+ *   ];
+ *
+ *   state = {
+ *     selectedOption: null,
+ *   };
+ *
+ *   onSelect = (selectedOption) => {
+ *     this.setState({ selectedOption });
+ *   };
+ *
+ *   render() {
+ *     return (
+ *       <Select
+ *         data={this.items}
+ *         status='warning'
+ *         selectedOption={this.state.selectedOption}
+ *         onSelect={this.onSelect}
+ *       />
+ *     );
+ *   }
  * }
+ * ```
  *
- * export class SelectContainer extends React.Component<any, State> {
+ * @example Disabled Option
  *
- *  private items: SelectOptionType[] = [
+ * ```
+ * import React from 'react';
+ * import { Select } from 'react-native-ui-kitten';
+ *
+ * export class SelectContainer extends React.Component {
+ *
+ *  items = [
  *    { text: 'Option 1' },
- *    { text: 'Option 2', textStyle: styles.customOptionStyle },
+ *    { text: 'Option 2', disabled: true },
  *    { text: 'Option 3' },
  *    { text: 'Option 4' },
- *    { text: 'Option 5' },
- *    { text: 'Option 6' },
- *    { text: 'Option 8' },
  *  ];
  *
- *  public state: State = {
+ *  state = {
  *    selectedOption: null,
  *  };
  *
- *  private onSelect = (selectedOption: SelectOption): void => {
+ *  onSelect = (selectedOption) => {
  *    this.setState({ selectedOption });
  *  };
  *
- *  public render(): React.ReactNode {
+ *  render() {
  *    return (
  *       <Select
- *         label='Label'
+ *         style={styles.select}
  *         labelStyle={styles.labelStyle}
- *         placeholder='Select Something'
  *         placeholderStyle={styles.placeholderStyle}
  *         controlStyle={styles.controlStyle}
+ *         data={this.items}
+ *         selectedOption={this.state.selectedOption}
+ *         onSelect={this.onSelect}
+ *       />
+ *     );
+ *   }
+ * }
+ * ```
+ *
+ * @example Using Asset Icons
+ *
+ * ```
+ * import React from 'react';
+ * import { Image } from 'react-native';
+ * import { Select } from 'react-native-ui-kitten';
+ *
+ * export class SelectContainer extends React.Component {
+ *
+ *  items = [
+ *    { text: 'Option 1' },
+ *    { text: 'Option 2' },
+ *    { text: 'Option 3' },
+ *  ];
+ *
+ *  state = {
+ *    selectedOption: null,
+ *  };
+ *
+ *  onSelect = (selectedOption) => {
+ *    this.setState({ selectedOption });
+ *  };
+ *
+ *  renderIcon = (style, visible) => (
+ *    <Image style={style} source={require('path-to-assets/local-image.png')} />
+ *  );
+ *
+ *  render() {
+ *    return (
+ *      <Select
+ *        data={this.items}
+ *        selectedOption={this.state.selectedOption}
+ *        icon={this.renderIcon}
+ *        onSelect={this.onSelect}
+ *      />
+ *    );
+ *   }
+ * }
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Select } from 'react-native-ui-kitten';
+ *
+ * export class SelectContainer extends React.Component {
+ *
+ *  private items: SelectOptionType[] = [
+ *    { text: 'Option 1' },
+ *    { text: 'Option 2', textStyle: { color: 'red', fontSize: 18 } },
+ *    { text: 'Option 3' },
+ *  ];
+ *
+ *  state = {
+ *    selectedOption: null,
+ *  };
+ *
+ *  onSelect = (selectedOption) => {
+ *    this.setState({ selectedOption });
+ *  };
+ *
+ *  render() {
+ *    return (
+ *       <Select
  *         style={styles.select}
+ *         labelStyle={styles.labelStyle}
+ *         placeholderStyle={styles.placeholderStyle}
+ *         controlStyle={styles.controlStyle}
  *         data={this.items}
  *         selectedOption={this.state.selectedOption}
  *         onSelect={this.onSelect}
@@ -386,47 +431,13 @@ interface State {
  * }
  *
  * const styles = StyleSheet.create({
- *   select: {
- *     margin: 16,
- *   },
- *   customOptionStyle: {
- *     color: 'red',
- *   },
- *   labelStyle: {
- *     fontSize: 22,
- *   },
- *   placeholderStyle: {
- *     color: 'yellow',
- *   },
- *   controlStyle: {
- *     backgroundColor: 'black',
- *   },
+ *   select: { borderRadius: 8 },
+ *   labelStyle: { color: 'gray' },
+ *   placeholderStyle: { color: 'gray' },
+ *   controlStyle: { borderRadius: 8 },
  * });
- *
- * @example Disabled Option
- *
  * ```
- * private items: SelectOptionType[] = [
- *   { text: 'Option 1' },
- *   { text: 'Option 2', disabled: true },
- *   { text: 'Option 3' },
- *   { text: 'Option 4' },
- * ];
- * ```
- *
- * @example Select Groups
- *
- * ```
- *   private items: SelectOptionType[] = [
- *   { text: 'Option 1' },
- *   { text: 'Option 2', disabled: true },
- *   { text: 'Option 3', items: [ { text: 'Option 31' }, { text: 'Option 32' }, { text: 'Option 33' } ] },
- *   { text: 'Option 4' },
- * ];
- * ```
- *
  */
-
 class SelectComponent extends React.Component<SelectProps, State> {
 
   static styledComponentName: string = 'Select';

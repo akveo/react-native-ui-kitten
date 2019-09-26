@@ -23,52 +23,38 @@ import { ModalPresentingBased } from '../../ui/support/typings';
  *
  * ```
  * import React from 'react';
- * import {
- *   View,
- *   ViewProps,
- * } from 'react-native';
- * import {
- *   Button,
- *   Text,
- *   ModalService,
- * } from 'react-native-ui-kitten';
+ * import { Layout, Button, Text, ModalService } from 'react-native-ui-kitten';
  *
- * export const ModalServiceShowcase = (): React.ReactElement<ViewProps> => {
+ * export const ModalServiceShowcase = () => {
  *
- *   const modalID: string = '';
+ *   const modalID = '';
  *
  *   const showModal = () => {
- *     const component: React.ReactElement<ViewProps> = this.renderModalContentElement();
- *
- *     this.modalID = ModalService.show(component, { allowBackdrop: true, onBackdropPress: this.hideModal });
+ *     const contentElement = this.renderModalContentElement();
+ *     this.modalID = ModalService.show(contentElement, { allowBackdrop: true, onBackdropPress: this.hideModal });
  *   };
  *
  *   const hideModal = () => {
  *     ModalService.hide(this.modalID);
  *   };
  *
- *   const renderModalContentElement = (): React.ReactElement<ViewProps> => {
+ *   const renderModalContentElement = () => {
  *     return (
- *       <View>
+ *       <Layout>
  *         <Text>Hi, I'm modal!</Text>
- *       </View>
+ *       </Layout>
  *     );
  *   };
  *
  *   return (
- *     <View>
- *       <Button onPress={this.showModal}>
- *         SHOW MODAL
- *       </Button>
- *       <Button onPress={this.hideModal}>
- *         HIDE MODAL
- *       </Button>
- *     </View>
+ *     <Layout>
+ *       <Button onPress={showModal}>SHOW MODAL</Button>
+ *       <Button onPress={hideModal}>HIDE MODAL</Button>
+ *     </Layout>
  *   );
  * }
  * ```
  */
-
 class ModalServiceType {
 
   panel: ModalPresenting | null = null;
