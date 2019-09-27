@@ -134,6 +134,93 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  * };
  * ```
  *
+ * @example With Menu
+ *
+ * ```
+ * import React from 'react';
+ * import { OverflowMenu, TopNavigation, TopNavigationAction, Icon } from 'react-native-ui-kitten';
+ *
+ * const BackIcon = (style) => (
+ *   <Icon {...style} name='arrow-back'/>
+ * );
+ *
+ * const MenuIcon = (style) => (
+ *   <Icon {...style} name='more-vertical'/>
+ * );
+ *
+ * export class TopNavigationWithMenu extends React.Component {
+ *
+ *   state = {
+ *     menuVisible: false,
+ *   };
+ *
+ *   toggleMenu = () => {
+ *     const menuVisible = !this.state.menuVisible;
+ *     this.setState({ menuVisible });
+ *   };
+ *
+ *   onMenuItemSelect = (index) => {
+ *     this.toggleMenu();
+ *     this.props.onMenuItemSelect && this.props.onMenuItemSelect(index);
+ *   };
+ *
+ *   renderMenuAction = () => (
+ *     <OverflowMenu
+ *       visible={this.state.menuVisible}
+ *       data={this.props.menu}
+ *       onSelect={this.onMenuItemSelect}
+ *       onBackdropPress={this.toggleMenu}>
+ *       <TopNavigationAction icon={MenuIcon} onPress={this.toggleMenu} />
+ *     </OverflowMenu>
+ *   );
+ *
+ *   renderBackAction = () => (
+ *     <TopNavigationAction icon={BackIcon} onPress={this.props.onBackPress} />
+ *   );
+ *
+ *   render() {
+ *     const { menu, onBackPress, ...restProps } = this.props;
+ *     return (
+ *       <TopNavigation
+ *         leftControl={onBackPress && this.renderBackAction()}
+ *         rightControls={menu && this.renderMenuAction()}
+ *         {...restProps}
+ *       />
+ *     );
+ *   }
+ * }
+ *
+ * // USAGE:
+ *
+ * const InfoIcon = (style) => (
+ *   <Icon {...style} name='info'/>
+ * );
+ *
+ * const LogoutIcon = (style) => (
+ *   <Icon {...style} name='log-out'/>
+ * );
+ *
+ * const navigationMenu = [
+ *   { title: 'About', icon: InfoIcon },
+ *   { title: 'Logout', icon: LogoutIcon },
+ * ];
+ *
+ * export const HomeScreen = () => {
+ *
+ *   const onMenuItemSelect = () => {};
+ *
+ *   const onBackPress = () => {};
+ *
+ *   return (
+ *     <TopNavigationWithMenu
+ *       menu={navigationMenu}
+ *       onMenuItemSelect={onMenuItemSelect}
+ *       onBackPress={onBackPress}
+ *     />
+ *   );
+ * };
+ * ```
+ *
  * @example Centered Title
  *
  * ```
