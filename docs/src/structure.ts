@@ -409,7 +409,7 @@ export const structure = [
         overview: [
           {
             name: 'Calendar',
-            images: ['calendar.png'],
+            images: [],
           },
         ],
       },
@@ -423,7 +423,7 @@ export const structure = [
         overview: [
           {
             name: 'RangeCalendar',
-            images: ['calendar.png'],
+            images: [],
           },
         ],
       },
@@ -437,7 +437,7 @@ export const structure = [
         overview: [
           {
             name: 'Datepicker',
-            images: ['calendar.png'],
+            images: [],
           },
         ],
       },
@@ -451,7 +451,7 @@ export const structure = [
         overview: [
           {
             name: 'RangeDatepicker',
-            images: ['calendar.png'],
+            images: [],
           },
         ],
       },
