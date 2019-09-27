@@ -1,3 +1,31 @@
+## 4.2.0 (2019-09-27)
+
+* feat(ui): add font-family for each component that has text ([aa11e1c](https://github.com/akveo/react-native-ui-kitten/commit/aa11e1c))
+* feat(ui): animation-config property to Icon component add ([060fe5d](https://github.com/akveo/react-native-ui-kitten/commit/060fe5d))
+* feat(ui): calendar/datepicker components add ([a51159c](https://github.com/akveo/react-native-ui-kitten/commit/a51159c))
+* feat(ui): eva 1.2 mappings and documentation adopt ([d35c244](https://github.com/akveo/react-native-ui-kitten/commit/d35c244))
+* feat(ui): toggle - add text property ([327ce36](https://github.com/akveo/react-native-ui-kitten/commit/327ce36))
+* feat(ui): top-navigation - control appearance ([7fe81f2](https://github.com/akveo/react-native-ui-kitten/commit/7fe81f2))
+* docs(components): add top-navigation with menu example ([5e84acd](https://github.com/akveo/react-native-ui-kitten/commit/5e84acd))
+* docs(components): refactor examples with js code and framework icon components ([5468776](https://github.com/akveo/react-native-ui-kitten/commit/5468776))
+* docs(components): update drawer documentation ([c4ac3a8](https://github.com/akveo/react-native-ui-kitten/commit/c4ac3a8))
+* docs(guides): missing app name in command example ([4de7c9f](https://github.com/akveo/react-native-ui-kitten/commit/4de7c9f))
+* refactor(docs): drawer/icon/select/spinner/checkbox/layout documentation refactor ([44ea5c3](https://github.com/akveo/react-native-ui-kitten/commit/44ea5c3))
+* refactor(docs): input docs expand ([e7abe28](https://github.com/akveo/react-native-ui-kitten/commit/e7abe28))
+* refactor(docs): OverflowMenu example changed ([c4bbda4](https://github.com/akveo/react-native-ui-kitten/commit/c4bbda4))
+* refactor(script): set env script to be executable with node ([f317e38](https://github.com/akveo/react-native-ui-kitten/commit/f317e38))
+* refactor(template): update template modules to new cli config ([3bc19af](https://github.com/akveo/react-native-ui-kitten/commit/3bc19af))
+* refactor(ui): drawer support component naming refactor ([113822c](https://github.com/akveo/react-native-ui-kitten/commit/113822c))
+* refactor(ui): modal - backdrop style prop type declaration ([b9658a4](https://github.com/akveo/react-native-ui-kitten/commit/b9658a4))
+* refactor(ui): text - allow text element in children ([a9904fc](https://github.com/akveo/react-native-ui-kitten/commit/a9904fc))
+* fix(docs): bottom navigation docs-examples fix ([6bf8f4f](https://github.com/akveo/react-native-ui-kitten/commit/6bf8f4f))
+* fix(ui): modal with backdrop update functionality fix ([37a0090](https://github.com/akveo/react-native-ui-kitten/commit/37a0090))
+* fix(ui): select - selectedOption value change ([ae886a4](https://github.com/akveo/react-native-ui-kitten/commit/ae886a4))
+* fix(ui): tab-view - tab content size ([ea2cc59](https://github.com/akveo/react-native-ui-kitten/commit/ea2cc59))
+* build(common): update jest version & remove ts-jest (#629) ([66f04ca](https://github.com/akveo/react-native-ui-kitten/commit/66f04ca)), closes [#629](https://github.com/akveo/react-native-ui-kitten/issues/629)
+
+
+
 ## 4.2.0-beta.2 (2019-08-30)
 
 * refactor(framework): install-templates functionality return ([8b3642f](https://github.com/akveo/react-native-ui-kitten/commit/8b3642f))
