@@ -228,7 +228,6 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
       icon: {
         width: source.iconWidth,
         height: source.iconHeight,
-        marginLeft: source.iconMarginLeft,
         tintColor: source.iconTintColor,
       },
       divider: {

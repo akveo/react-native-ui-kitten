@@ -4,11 +4,10 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableOpacity,
   View,
   ViewProps,
 } from 'react-native';
-import { Text } from '../../text/text.component';
+import { Button } from '../../button/button.component';
 import {
   Chevron,
   ChevronElement,
@@ -18,7 +17,7 @@ import {
 interface ComponentProps extends ViewProps {
   title: string;
   titleStyle?: StyleProp<TextStyle>;
-  iconStyle?: StyleProp<ImageStyle>;
+  iconStyle?: ImageStyle;
   lateralNavigationAllowed: boolean;
   onTitlePress?: () => void;
   onRight?: () => void;
@@ -30,8 +29,9 @@ export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
 
 export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
-  private renderTitleIcon = (style: StyleProp<ImageStyle>,
-                             direction: ChevronDirection): ChevronElement => {
+  private renderSpecificTitleIcon = (style: StyleProp<ImageStyle>,
+                                     direction: ChevronDirection): ChevronElement => {
+
 
     return (
       <Chevron
@@ -41,21 +41,41 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
     );
   };
 
+  private renderTitleIcon = (style: ImageStyle): ChevronElement => {
+    const { iconStyle } = this.props;
+
+    return this.renderSpecificTitleIcon(iconStyle, 'bottom');
+  };
+
+  private renderLeftIcon = (style: ImageStyle): ChevronElement => {
+    const { iconStyle } = this.props;
+
+    return this.renderSpecificTitleIcon([iconStyle, styles.lateralIcon], 'left');
+  };
+
+  private renderRightIcon = (style: ImageStyle): ChevronElement => {
+    const { iconStyle } = this.props;
+
+    return this.renderSpecificTitleIcon([iconStyle, styles.lateralIcon], 'right');
+  };
+
   private renderLateralNavigationControls = (): React.ReactElement<ViewProps> => {
-    const { iconStyle, onLeft, onRight } = this.props;
+    const { onLeft, onRight, titleStyle } = this.props;
 
     return (
       <View style={styles.subContainer}>
-        <TouchableOpacity
-          activeOpacity={0.70}
-          onPress={onLeft}>
-          {this.renderTitleIcon(iconStyle, 'left')}
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.70}
-          onPress={onRight}>
-          {this.renderTitleIcon(iconStyle, 'right')}
-        </TouchableOpacity>
+        <Button
+          style={styles.headerButton}
+          appearance='ghost'
+          // @ts-ignore
+          icon={this.renderLeftIcon}
+          onPress={onLeft}/>
+        <Button
+          style={styles.headerButton}
+          appearance='ghost'
+          // @ts-ignore
+          icon={this.renderRightIcon}
+          onPress={onRight}/>
       </View>
     );
   };
@@ -66,20 +86,21 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
       titleStyle,
       onTitlePress,
       title,
-      iconStyle,
       lateralNavigationAllowed,
       ...restProps
     } = this.props;
 
     return (
       <View style={[styles.container, style]} {...restProps}>
-        <TouchableOpacity
-          activeOpacity={0.70}
-          style={styles.subContainer}
+        <Button
+          style={styles.headerButton}
+          appearance='ghost'
+          textStyle={[titleStyle, styles.headerButtonText]}
+          // @ts-ignore
+          icon={this.renderTitleIcon}
           onPress={onTitlePress}>
-          <Text style={titleStyle}>{title}</Text>
-          {this.renderTitleIcon(iconStyle, 'bottom')}
-        </TouchableOpacity>
+          {title}
+        </Button>
         {lateralNavigationAllowed && this.renderLateralNavigationControls()}
       </View>
     );
@@ -91,6 +112,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  headerButton: {
+    flexDirection: 'row-reverse',
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    minWidth: 25,
+    minHeight: 25,
+  },
+  headerButtonText: {
+    marginHorizontal: 0,
+  },
+  lateralIcon: {
+    marginHorizontal: 0,
   },
   subContainer: {
     flexDirection: 'row',
