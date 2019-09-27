@@ -22,8 +22,11 @@ interface ComponentProps {
   animationConfig?: AnimationConfig;
 }
 
-export type IconProps<T = {}> = ComponentProps & T;
-export type IconElement<T> = React.ReactElement<T>;
+// This is basically needed to avoid generics in required props
+// In general, could be SVGProps if using @ui-kitten/eva-icons or ImageProps if using Image.
+type WrappedElementProps = any;
+export type IconProps<T = WrappedElementProps> = ComponentProps & T;
+export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<T>>;
 
 /**
  * `Icon` component with animation support. Allows to render any ReactElement registered for a specific name.

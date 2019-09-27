@@ -100,4 +100,8 @@ export const toggleSettings: ComponentShowcaseSetting[] = [
     propertyName: 'status',
     value: 'control',
   },
+  {
+    propertyName: 'status',
+    value: 'basic',
+  },
 ];
