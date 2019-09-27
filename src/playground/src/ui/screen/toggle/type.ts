@@ -34,9 +34,18 @@ const uncheckedToggle: ComponentShowcaseItem = {
   },
 };
 
-const disabledToggle: ComponentShowcaseItem = {
-  title: 'Disabled',
+const disabledUncheckedToggle: ComponentShowcaseItem = {
+  title: 'Disabled Unchecked',
   props: {
+    checked: false,
+    disabled: true,
+  },
+};
+
+const disabledCheckedToggle: ComponentShowcaseItem = {
+  title: 'Disabled Checked',
+  props: {
+    checked: true,
     disabled: true,
   },
 };
@@ -54,7 +63,8 @@ const stateSection: ComponentShowcaseSection = {
   items: [
     checkedToggle,
     uncheckedToggle,
-    disabledToggle,
+    disabledCheckedToggle,
+    disabledUncheckedToggle,
   ],
 };
 
@@ -85,5 +95,13 @@ export const toggleSettings: ComponentShowcaseSetting[] = [
   {
     propertyName: 'status',
     value: 'danger',
+  },
+  {
+    propertyName: 'status',
+    value: 'control',
+  },
+  {
+    propertyName: 'status',
+    value: 'basic',
   },
 ];

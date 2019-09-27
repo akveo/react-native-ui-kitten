@@ -101,6 +101,10 @@ export const buttonGroupSettings: ComponentShowcaseSetting[] = [
   },
   {
     propertyName: 'status',
-    value: 'white',
+    value: 'control',
+  },
+  {
+    propertyName: 'status',
+    value: 'basic',
   },
 ];

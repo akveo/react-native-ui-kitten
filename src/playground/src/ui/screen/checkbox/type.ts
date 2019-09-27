@@ -94,4 +94,12 @@ export const checkboxSettings: ComponentShowcaseSetting[] = [
     propertyName: 'status',
     value: 'danger',
   },
+  {
+    propertyName: 'status',
+    value: 'control',
+  },
+  {
+    propertyName: 'status',
+    value: 'basic',
+  },
 ];

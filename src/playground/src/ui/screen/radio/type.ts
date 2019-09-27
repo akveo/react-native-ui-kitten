@@ -19,9 +19,18 @@ const uncheckedRadio: ComponentShowcaseItem = {
   },
 };
 
-const disabledRadio: ComponentShowcaseItem = {
-  title: 'Disabled',
+const disabledCheckedRadio: ComponentShowcaseItem = {
+  title: 'Disabled Checked',
   props: {
+    checked: true,
+    disabled: true,
+  },
+};
+
+const disabledUncheckedRadio: ComponentShowcaseItem = {
+  title: 'Disabled Unchecked',
+  props: {
+    checked: false,
     disabled: true,
   },
 };
@@ -46,7 +55,8 @@ const stateSection: ComponentShowcaseSection = {
   items: [
     checkedRadio,
     uncheckedRadio,
-    disabledRadio,
+    disabledCheckedRadio,
+    disabledUncheckedRadio,
   ],
 };
 
@@ -85,6 +95,14 @@ export const radioSettings: ComponentShowcaseSetting[] = [
   {
     propertyName: 'status',
     value: 'danger',
+  },
+  {
+    propertyName: 'status',
+    value: 'control',
+  },
+  {
+    propertyName: 'status',
+    value: 'basic',
   },
   {
     propertyName: 'checked',
