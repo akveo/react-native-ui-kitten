@@ -13,7 +13,7 @@
     "start:pg": "npm run install:pg && npm start --prefix ./src/playground",
     "start:pg:prod": "npm run env:set -- prod && npm run start:pg",
     "start:pg:dev": "npm run env:set -- dev && npm run start:pg",
-    "env:set": "./scripts/environment/set-env.sh",
+    "env:set": "node ./scripts/environment/set-env.js",
     "build": "./scripts/build/compile-ts.sh",
     "build:transform": "./scripts/build/transform-paths.sh",
     "build:dev": "npm run build -- dev && npm run build:transform -- dev",
