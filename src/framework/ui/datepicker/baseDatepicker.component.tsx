@@ -12,7 +12,7 @@ import {
   TextElement,
 } from '../text/text.component';
 import { Popover } from '../popover/popover.component';
-import { BaseCalendarProps } from '../calendar/baseBalendar.component';
+import { BaseCalendarProps } from '../calendar/baseCalendar.component';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';

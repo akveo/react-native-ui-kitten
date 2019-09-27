@@ -73,7 +73,7 @@ const routes: NavigationRouteConfigMap = {
 };
 
 const MenuNavigator = createStackNavigator(routes, {
-  initialRouteName: 'Calendar',
+  initialRouteName: 'Home',
   headerMode: 'screen',
 });
 

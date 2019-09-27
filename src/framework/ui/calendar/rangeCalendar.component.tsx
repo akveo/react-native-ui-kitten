@@ -2,7 +2,7 @@ import React from 'react';
 import {
   BaseCalendarComponent,
   BaseCalendarProps,
-} from './baseBalendar.component';
+} from './baseCalendar.component';
 import {
   styled,
   StyledComponentProps,
