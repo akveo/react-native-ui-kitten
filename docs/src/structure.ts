@@ -401,6 +401,62 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Calendar',
+        icon: 'calendar.svg',
+        source: [
+          'Calendar',
+        ],
+        overview: [
+          {
+            name: 'Calendar',
+            images: ['calendar.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'RangeCalendar',
+        icon: 'calendar.svg',
+        source: [
+          'RangeCalendar',
+        ],
+        overview: [
+          {
+            name: 'RangeCalendar',
+            images: ['calendar.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Datepicker',
+        icon: 'calendar.svg',
+        source: [
+          'Datepicker',
+        ],
+        overview: [
+          {
+            name: 'Datepicker',
+            images: ['calendar.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'RangeDatepicker',
+        icon: 'calendar.svg',
+        source: [
+          'RangeDatepicker',
+        ],
+        overview: [
+          {
+            name: 'RangeDatepicker',
+            images: ['calendar.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Radio',
         icon: 'radio.svg',
         source: [

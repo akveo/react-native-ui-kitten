@@ -31,6 +31,9 @@ import {
   SpinnerContainer,
   IconContainer,
   MenuContainer,
+  CalendarContainer,
+  DatepickerContainer,
+  RangeCalendarContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
 
@@ -44,8 +47,11 @@ const routes: NavigationRouteConfigMap = {
   ['Bottom Navigation']: BottomNavigationContainer,
   ['Button']: ButtonContainer,
   ['Button Group']: ButtonGroupContainer,
+  ['Calendar']: CalendarContainer,
+  ['Range Calendar']: RangeCalendarContainer,
   ['Checkbox']: CheckBoxContainer,
   ['Drawer']: DrawerContainer,
+  ['Datepicker']: DatepickerContainer,
   ['Icon']: IconContainer,
   ['Input']: InputContainer,
   ['Layout']: LayoutContainer,

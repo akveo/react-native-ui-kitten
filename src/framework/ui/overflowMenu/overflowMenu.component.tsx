@@ -23,7 +23,6 @@ import {
 } from '../popover/popover.component';
 import {
   ModalPresentingBased,
-  Omit,
   Override,
 } from '../support/typings';
 

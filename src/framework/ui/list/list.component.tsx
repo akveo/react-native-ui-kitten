@@ -31,6 +31,23 @@ interface ComponentProps {
 export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
 export type ListElement = React.ReactElement<ListProps>;
 
+export interface BaseScrollParams {
+  animated?: boolean;
+}
+
+export interface ViewScrollParams {
+  viewOffset?: number;
+  viewPosition?: number;
+}
+
+export interface ScrollToIndexParams extends BaseScrollParams, ViewScrollParams {
+  index: number;
+}
+
+export interface ScrollToOffsetParams extends BaseScrollParams {
+  offset: number;
+}
+
 /**
  * `List` component is a performant interface for rendering simple, flat lists. Extends `FlatList`. Renders list of
  * `ListItem` components or custom content.
@@ -137,34 +154,22 @@ export type ListElement = React.ReactElement<ListProps>;
  * });
  * ```
  */
-class ListComponent extends React.Component<ListProps> {
+export class ListComponent extends React.Component<ListProps> {
 
   static styledComponentName: string = 'List';
 
   private listRef: React.RefObject<FlatList<ItemType>> = React.createRef();
 
-  public scrollToEnd = (params?: { animated?: boolean }) => {
-    const { current: list } = this.listRef;
-
-    list.scrollToEnd(params);
+  public scrollToEnd = (params?: BaseScrollParams) => {
+    this.listRef.current.scrollToEnd(params);
   };
 
-  public scrollToIndex = (params: {
-    animated?: boolean;
-    index: number;
-    viewOffset?: number;
-    viewPosition?: number
-  }) => {
-
-    const { current: list } = this.listRef;
-
-    list.scrollToIndex(params);
+  public scrollToIndex = (params: ScrollToIndexParams) => {
+    this.listRef.current.scrollToIndex(params);
   };
 
-  public scrollToOffset(params: { animated?: boolean; offset: number }) {
-    const { current: list } = this.listRef;
-
-    list.scrollToOffset(params);
+  public scrollToOffset(params: ScrollToOffsetParams) {
+    this.listRef.current.scrollToOffset(params);
   }
 
   private getComponentStyle = (source: StyleType): StyleType => {

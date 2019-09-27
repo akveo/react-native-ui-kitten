@@ -52,7 +52,11 @@
     "@eva-design/eva": "^1.1.0-beta.1",
     "@eva-design/processor": "^1.1.0-beta.1",
     "hoist-non-react-statics": "^3.2.1",
+    "@welldone-software/why-did-you-render": "^3.3.3",
+    "date-fns": "^1.30.1",
+    "fecha": "3.0.3",
     "lodash.merge": "^4.6.1",
+    "moment": "^2.24.0",
     "react-native-eva-icons": "^1.1.0",
     "react-native-svg": "^9.5.1"
   },

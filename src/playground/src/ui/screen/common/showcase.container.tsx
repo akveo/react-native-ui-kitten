@@ -13,8 +13,10 @@ import {
   ThemeContext,
   themes,
 } from '../../../themes';
+import { StyleType } from '@kitten/theme';
 
 interface ContainerProps {
+  style?: StyleType;
   showcase: ComponentShowcase;
   settings?: ComponentShowcaseSetting[];
   renderItem: (props: any) => React.ReactElement<any>;
@@ -43,10 +45,10 @@ export class ShowcaseContainer extends React.Component<ContainerProps, State> {
   };
 
   private renderContent = ({ toggleTheme }): React.ReactElement<ScrollViewProps> => {
-    const { showcase, settings, renderItem } = this.props;
+    const { showcase, settings, renderItem, children, style } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={[{ flex: 1 }, style]}>
         <ShowcaseSettings
           themes={themes}
           settings={settings}
@@ -54,6 +56,7 @@ export class ShowcaseContainer extends React.Component<ContainerProps, State> {
           onThemeSelect={toggleTheme}
           onReset={this.onResetSettings}
         />
+        {children}
         <Showcase
           showcase={showcase}
           renderItem={renderItem}

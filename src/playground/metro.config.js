@@ -17,6 +17,8 @@ const moduleFolders = [
   path.resolve(__dirname, '../framework/theme'),
   path.resolve(__dirname, '../framework/ui'),
   path.resolve(__dirname, '../eva-icons'),
+  path.resolve(__dirname, '../moment'),
+  path.resolve(__dirname, '../date-fns'),
 ];
 
 /**
@@ -29,6 +31,10 @@ const rootDependencyFolders = [
   path.resolve(__dirname, '../../node_modules/lodash.merge'),
   path.resolve(__dirname, '../../node_modules/react-native-eva-icons'),
   path.resolve(__dirname, '../../node_modules/react-native-svg'),
+  path.resolve(__dirname, '../../node_modules/fecha'),
+  path.resolve(__dirname, '../../node_modules/moment'),
+  path.resolve(__dirname, '../../node_modules/date-fns'),
+  path.resolve(__dirname, '../../node_modules/@welldone-software/why-did-you-render'),
 ];
 
 /**

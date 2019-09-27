@@ -10,6 +10,8 @@ const moduleAliases = {
   '@kitten/theme': path.resolve(__dirname, '../framework/theme'),
   '@kitten/ui': path.resolve(__dirname, '../framework/ui'),
   '@ui-kitten/eva-icons': path.resolve(__dirname, '../eva-icons'),
+  '@ui-kitten/moment': path.resolve(__dirname, '../moment'),
+  '@ui-kitten/date-fns': path.resolve(__dirname, '../date-fns'),
 };
 
 /**

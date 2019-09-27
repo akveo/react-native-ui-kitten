@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../../../node_modules/@eva-design/dss/schema/schema.json",
+  "$schema": "./node_modules/@eva-design/dss/schema/schema.json",
   "version": 1.0,
   "strict": {
     "text-heading-1-font-size": 36,
@@ -40,7 +40,8 @@
     "text-caption-2-font-weight": "600",
     "text-label-font-size": 12,
     "text-label-line-height": 16,
-    "text-label-font-weight": "800"
+    "text-label-font-weight": "800",
+    "text-font-family": "System"
   },
   "components": {
     "Avatar": {
@@ -485,10 +486,8 @@
                 "iconTintColor": "color-basic-800",
                 "state": {
                   "active": {
-                    "backgroundColor": "color-basic-transparent-200",
-                    "borderColor": "color-basic-transparent-200",
-                    "textColor": "icon-basic-color",
-                    "iconTintColor": "icon-basic-color"
+                    "backgroundColor": "color-basic-300",
+                    "borderColor": "color-basic-300"
                   },
                   "disabled": {
                     "backgroundColor": "color-basic-300",
@@ -596,7 +595,7 @@
                 }
               },
               "primary": {
-                "backgroundColor": "background-basic-color-1",
+                "backgroundColor": "color-primary-transparent-100",
                 "textColor": "text-primary-color",
                 "iconTintColor": "text-primary-color",
                 "state": {
@@ -606,7 +605,7 @@
                 }
               },
               "success": {
-                "backgroundColor": "background-basic-color-1",
+                "backgroundColor": "color-success-transparent-100",
                 "textColor": "text-success-color",
                 "iconTintColor": "text-success-color",
                 "state": {
@@ -616,7 +615,7 @@
                 }
               },
               "info": {
-                "backgroundColor": "background-basic-color-1",
+                "backgroundColor": "color-info-transparent-100",
                 "textColor": "text-info-color",
                 "iconTintColor": "text-info-color",
                 "state": {
@@ -626,7 +625,7 @@
                 }
               },
               "warning": {
-                "backgroundColor": "background-basic-color-1",
+                "backgroundColor": "color-warning-transparent-100",
                 "textColor": "text-warning-color",
                 "iconTintColor": "text-warning-color",
                 "state": {
@@ -636,7 +635,7 @@
                 }
               },
               "danger": {
-                "backgroundColor": "background-basic-color-1",
+                "backgroundColor": "color-danger-transparent-100",
                 "textColor": "text-danger-color",
                 "iconTintColor": "text-danger-color",
                 "state": {
@@ -916,6 +915,280 @@
               "white": {
                 "borderColor": "color-basic-100",
                 "dividerBackgroundColor": "color-basic-100"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Calendar": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "paddingVertical": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "maxWidth": {
+            "type": "number"
+          },
+          "maxHeight": {
+            "type": "number"
+          },
+          "headerPaddingHorizontal": {
+            "type": "number"
+          },
+          "headerPaddingVertical": {
+            "type": "number"
+          },
+          "dividerMarginVertical": {
+            "type": "number"
+          },
+          "titleFontSize": {
+            "type": "number"
+          },
+          "titleFontWeight": {
+            "type": "string"
+          },
+          "titleLineHeight": {
+            "type": "number"
+          },
+          "titleColor": {
+            "type": "string"
+          },
+          "titleFontFamily": {
+            "type": "string"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          },
+          "weekdayTextFontSize": {
+            "type": "number"
+          },
+          "weekdayTextFontWeight": {
+            "type": "string"
+          },
+          "weekdayTextLineHeight": {
+            "type": "number"
+          },
+          "weekdayTextColor": {
+            "type": "string"
+          },
+          "weekdayTextFontFamily": {
+            "type": "string"
+          },
+          "rowMinHeight": {
+            "type": "number"
+          },
+          "rowMarginHorizontal": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+        },
+        "states": {
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "maxWidth": 480,
+            "maxHeight": 480,
+            "paddingVertical": 8,
+            "borderColor": "border-basic-color-4",
+            "borderWidth": 1,
+            "borderRadius": 4,
+            "headerPaddingHorizontal": 20,
+            "headerPaddingVertical": 16,
+            "titleFontSize": "text-heading-6-font-size",
+            "titleFontWeight": "text-heading-6-font-weight",
+            "titleLineHeight": "text-heading-6-line-height",
+            "titleColor": "border-alternative-color-1",
+            "titleFontFamily": "text-font-family",
+            "iconWidth": 24,
+            "iconHeight": 24,
+            "iconTintColor": "border-alternative-color-1",
+            "weekdayTextFontSize": "text-subtitle-1-font-size",
+            "weekdayTextFontWeight": "text-subtitle-1-font-weight",
+            "weekdayTextLineHeight": "text-subtitle-1-line-height",
+            "weekdayTextFontFamily": "text-font-family",
+            "weekdayTextColor": "text-hint-color",
+            "dividerMarginVertical": 4,
+            "rowMinHeight": 45,
+            "rowMarginHorizontal": 10
+          }
+        }
+      }
+    },
+    "CalendarCell": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "paddingHorizontal": {
+            "type": "number"
+          },
+          "paddingVertical": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "contentBorderWidth": {
+            "type": "number"
+          },
+          "contentBorderRadius": {
+            "type": "string"
+          },
+          "contentBorderColor": {
+            "type": "string"
+          },
+          "contentBackgroundColor": {
+            "type": "string"
+          },
+          "contentTextColor": {
+            "type": "string"
+          },
+          "contentTextFontSize": {
+            "type": "number"
+          },
+          "contentTextLineHeight": {
+            "type": "number"
+          },
+          "contentTextFontWeight": {
+            "type": "number"
+          },
+          "contentTextFontFamily": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "category": {
+            "day": {
+              "default": true
+            },
+            "month": {
+              "default": false
+            },
+            "year": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "bounding": {
+            "scope": "all",
+            "priority": 0,
+            "default": false
+          },
+          "today": {
+            "scope": "all",
+            "priority": 1,
+            "default": false
+          },
+          "disabled": {
+            "scope": "all",
+            "priority": 2,
+            "default": false
+          },
+          "selected": {
+            "scope": "all",
+            "priority": 3,
+            "default": false
+          },
+          "range": {
+            "scope": "all",
+            "priority": 4,
+            "default": false
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "paddingHorizontal": 1,
+            "paddingVertical": 0,
+            "backgroundColor": "transparent",
+            "borderRadius": 0,
+            "contentBorderWidth": 1,
+            "contentBorderRadius": 4,
+            "contentBorderColor": "transparent",
+            "contentTextFontSize": "text-subtitle-1-font-size",
+            "contentTextLineHeight": "text-subtitle-1-line-height",
+            "contentTextFontWeight": "text-subtitle-1-font-weight",
+            "contentTextColor": "text-basic-color",
+            "contentTextFontFamily": "text-font-family",
+            "state": {
+              "bounding": {
+                "contentTextColor": "text-hint-color"
+              },
+              "selected": {
+                "contentBorderColor": "color-primary-default",
+                "contentBackgroundColor": "color-primary-default",
+                "contentTextColor": "text-control-color"
+              },
+              "disabled": {
+                "contentTextColor": "color-basic-transparent-600"
+              },
+              "today": {
+                "contentBackgroundColor": "color-primary-100",
+                "contentBorderColor": "color-primary-default",
+                "contentTextColor": "border-alternative-color-1"
+              },
+              "range": {
+                "contentTextColor": "text-control-color",
+                "backgroundColor": "color-primary-default",
+                "borderRadius": 4
+              },
+              "today.range": {
+                "contentBackgroundColor": "color-basic-control-transparent-200",
+                "contentBorderColor": "color-primary-300"
+              }
+            }
+          },
+          "variantGroups": {
+            "category": {
+              "month": {
+                "state": {
+                  "selected": {
+                    "contentBackgroundColor": "color-primary-default",
+                    "contentTextColor": "text-control-color"
+                  }
+                }
+              },
+              "year": {
+                "state": {
+                  "selected": {
+                    "contentBackgroundColor": "color-primary-default",
+                    "contentTextColor": "text-control-color"
+                  }
+                }
               }
             }
           }
@@ -1214,6 +1487,173 @@
                     "backgroundColor": "color-basic-transparent-600",
                     "borderColor": "color-basic-transparent-600",
                     "iconTintColor": "color-basic-100"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Datepicker": {
+      "meta": {
+        "scope": "all",
+        "parameters": {
+          "paddingHorizontal": {
+            "type": "number"
+          },
+          "paddingVertical": {
+            "type": "number"
+          },
+          "borderRadius": {
+            "type": "number"
+          },
+          "borderColor": {
+            "type": "string"
+          },
+          "borderWidth": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "textFontSize": {
+            "type": "number"
+          },
+          "textLineHeight": {
+            "type": "number"
+          },
+          "textFontWeight": {
+            "type": "string"
+          },
+          "textFontFamily": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "iconWidth": {
+            "type": "number"
+          },
+          "iconHeight": {
+            "type": "number"
+          },
+          "iconTintColor": {
+            "type": "string"
+          },
+          "popoverMarginHorizontal": {
+            "type": "number"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "primary": {
+              "default": true
+            },
+            "success": {
+              "default": false
+            },
+            "info": {
+              "default": false
+            },
+            "warning": {
+              "default": false
+            },
+            "danger": {
+              "default": false
+            },
+            "white": {
+              "default": false
+            }
+          }
+        },
+        "states": {
+          "disabled": {
+            "default": false,
+            "priority": 0,
+            "scope": "all"
+          },
+          "active": {
+            "default": false,
+            "priority": 1,
+            "scope": "all"
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "paddingHorizontal": 16,
+            "paddingVertical": 14,
+            "borderColor": "border-basic-color-4",
+            "borderWidth": 1,
+            "borderRadius": 4,
+            "backgroundColor": "background-basic-color-2",
+            "textFontSize": "text-paragraph-1-font-size",
+            "textLineHeight": "text-paragraph-1-line-height",
+            "textFontWeight": "text-paragraph-1-font-weight",
+            "textFontFamily": "text-font-family",
+            "textColor": "text-hint-color",
+            "iconWidth": 20,
+            "iconHeight": 20,
+            "iconTintColor": "text-hint-color",
+            "popoverMarginHorizontal": 16,
+            "state": {
+              "active": {
+                "textColor": "background-alternative-color-1"
+              },
+              "disabled": {
+                "borderColor": "border-basic-color-4",
+                "backgroundColor": "background-basic-color-2",
+                "textColor": "color-basic-transparent-600",
+                "iconTintColor": "text-hint-color"
+              }
+            }
+          },
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "state": {
+                  "active": {
+                    "borderColor": "color-primary-active",
+                    "backgroundColor": "background-basic-color-2"
+                  }
+                }
+              },
+              "success": {
+                "state": {
+                  "active": {
+                    "borderColor": "color-success-active",
+                    "backgroundColor": "background-basic-color-2"
+                  }
+                }
+              },
+              "info": {
+                "state": {
+                  "active": {
+                    "borderColor": "color-info-active",
+                    "backgroundColor": "background-basic-color-2"
+                  }
+                }
+              },
+              "warning": {
+                "state": {
+                  "active": {
+                    "borderColor": "color-warning-active",
+                    "backgroundColor": "background-basic-color-2"
+                  }
+                }
+              },
+              "danger": {
+                "state": {
+                  "active": {
+                    "borderColor": "color-danger-active",
+                    "backgroundColor": "background-basic-color-2"
                   }
                 }
               }
@@ -2656,7 +3096,7 @@
                   "checked": {
                     "iconTintColor": "color-basic-100",
                     "borderColor": "color-basic-100",
-                    "backgroundColor": "color-basic-800"
+                    "backgroundColor": "transparent"
                   },
                   "checked.active": {
                     "outlineBackgroundColor": "color-basic-control-transparent-200",
