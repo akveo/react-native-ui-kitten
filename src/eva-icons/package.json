@@ -1,6 +1,6 @@
 {
   "name": "@ui-kitten/eva-icons",
-  "version": "4.2.0-beta.2",
+  "version": "4.2.0",
   "description": "@ui-kitten/eva-icons",
   "author": "akveo",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "react-native-eva-icons": "1.1.0"
   },
   "peerDependencies": {
-    "react-native-ui-kitten": "4.2.0-beta.2",
+    "react-native-ui-kitten": "4.2.0",
     "react-native-svg": "^9.4.0"
   },
   "sideEffects": false

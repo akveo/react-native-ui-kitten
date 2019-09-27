@@ -6,7 +6,7 @@
     "start": "expo start -c"
   },
   "dependencies": {
-    "@eva-design/eva": "1.1.0-beta.1",
+    "@eva-design/eva": "^1.2.0",
     "expo": "^34.0.3",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
