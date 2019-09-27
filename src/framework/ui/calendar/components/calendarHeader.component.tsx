@@ -29,10 +29,7 @@ export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
 
 export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
-  private renderSpecificTitleIcon = (style: StyleProp<ImageStyle>,
-                                     direction: ChevronDirection): ChevronElement => {
-
-
+  private renderSpecificTitleIcon = (style: StyleProp<ImageStyle>, direction: ChevronDirection): ChevronElement => {
     return (
       <Chevron
         style={style}
@@ -60,8 +57,6 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
   };
 
   private renderLateralNavigationControls = (): React.ReactElement<ViewProps> => {
-    const { onLeft, onRight, titleStyle } = this.props;
-
     return (
       <View style={styles.subContainer}>
         <Button
@@ -69,26 +64,21 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
           appearance='ghost'
           // @ts-ignore
           icon={this.renderLeftIcon}
-          onPress={onLeft}/>
+          onPress={this.props.onLeft}
+        />
         <Button
           style={styles.headerButton}
           appearance='ghost'
           // @ts-ignore
           icon={this.renderRightIcon}
-          onPress={onRight}/>
+          onPress={this.props.onRight}
+        />
       </View>
     );
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const {
-      style,
-      titleStyle,
-      onTitlePress,
-      title,
-      lateralNavigationAllowed,
-      ...restProps
-    } = this.props;
+    const { style, titleStyle, onTitlePress, title, lateralNavigationAllowed, ...restProps } = this.props;
 
     return (
       <View style={[styles.container, style]} {...restProps}>
@@ -114,11 +104,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   headerButton: {
-    flexDirection: 'row-reverse',
     paddingVertical: 0,
     paddingHorizontal: 0,
-    minWidth: 25,
-    minHeight: 25,
+    minWidth: 24,
+    minHeight: 24,
   },
   headerButtonText: {
     marginHorizontal: 0,
