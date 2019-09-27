@@ -224,6 +224,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
         fontWeight: source.titleFontWeight,
         lineHeight: source.titleLineHeight,
         color: source.titleColor,
+        fontFamily: source.titleFontFamily,
       },
       icon: {
         width: source.iconWidth,
@@ -249,6 +250,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
       fontWeight: source.weekdayTextFontWeight,
       lineHeight: source.weekdayTextLineHeight,
       color: source.weekdayTextColor,
+      fontFamily: source.weekdayTextFontFamily,
     };
   };
 

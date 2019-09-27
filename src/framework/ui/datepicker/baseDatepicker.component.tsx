@@ -63,6 +63,7 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
       textFontSize,
       textLineHeight,
       textFontWeight,
+      textFontFamily,
       textColor,
       iconWidth,
       iconHeight,
@@ -82,6 +83,7 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
         lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
+        fontFamily: textFontFamily,
       },
       popover: {
         indent: popoverMarginHorizontal,

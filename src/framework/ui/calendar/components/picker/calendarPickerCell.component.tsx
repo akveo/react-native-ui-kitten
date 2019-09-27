@@ -91,6 +91,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
       contentTextLineHeight,
       contentTextFontWeight,
       contentTextColor,
+      contentTextFontFamily,
       borderRadius,
       ...containerParameters
     } = source;
@@ -111,6 +112,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
         fontWeight: contentTextFontWeight,
         lineHeight: contentTextLineHeight,
         color: contentTextColor,
+        fontFamily: contentTextFontFamily,
       },
     };
   };
