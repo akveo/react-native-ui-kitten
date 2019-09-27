@@ -289,6 +289,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'Menu',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Icon',
         icon: 'icon.svg',
         source: [
@@ -307,10 +315,11 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Top Navigation',
+        name: 'TopNavigation',
         icon: 'top-navigation.svg',
         source: [
           'TopNavigation',
+          'TopNavigationAction',
         ],
         overview: [
           {
@@ -321,7 +330,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Bottom Navigation',
+        name: 'BottomNavigation',
         icon: 'bottom-navigation.svg',
         source: [
           'BottomNavigation',
@@ -359,11 +368,10 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Tab View',
+        name: 'TabView',
         icon: 'tab.svg',
         source: [
           'TabView',
-          'TabBar',
           'Tab',
         ],
         overview: [
@@ -371,15 +379,6 @@ export const structure = [
             name: 'TabBar',
             images: ['tab-menu.png'],
           },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Menu',
-        icon: 'menu.svg',
-        source: [
-          'Menu',
-          'MenuItem',
         ],
       },
       {

@@ -67,33 +67,28 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *
  * ```
  * import React from 'react';
- * import {
- *   TabView,
- *   Tab,
- * } from 'react-native-ui-kitten';
+ * import { TabView, Tab, Text } from 'react-native-ui-kitten';
  *
  * export class TabViewShowcase extends React.Component {
- *   public state: State = {
+ *
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onSelect = (selectedIndex: number) => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <TabView
  *         selectedIndex={this.state.selectedIndex}
  *         onSelect={this.onSelect}>
- *         <Tab title='TAB 1'
- *           <Text>Tab 1</Text>
+ *         <Tab title='DASHBOARD'>
+ *           <Text>DASHBOARD</Text>
  *         </Tab>
- *         <Tab title='TAB 2'
- *           <Text>Tab 2</Text>
- *         </Tab>
- *         <Tab title='TAB 3'
- *           <Text>Tab 3</Text>
+ *         <Tab title='SETTINGS'>
+ *           <Text>SETTINGS</Text>
  *         </Tab>
  *       </TabView>
  *     );
@@ -101,78 +96,72 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  * }
  * ```
  *
- * @example Lazy Loading
+ * @overview-example Lazy Loading
  *
  * ```
  * import React from 'react';
- * import {
- *   TabView,
- *   Tab,
- * } from 'react-native-ui-kitten';
+ * import { TabView, Tab, Text } from 'react-native-ui-kitten';
  *
  * export class TabViewShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onSelect = (selectedIndex: number) => {
+ *   onSelect = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   private shouldLoadTabContent = (index: number): boolean => {
+ *   shouldLoadTabContent = (index) => {
  *     return index === this.state.selectedIndex;
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <TabView
  *         selectedIndex={this.state.selectedIndex}
  *         shouldLoadComponent={this.shouldLoadTabContent}
  *         onSelect={this.onSelect}>
- *         <Tab title='TAB 1'>
- *           <Text>Tab 1</Text>
+ *         <Tab title='DASHBOARD'>
+ *           <Text>DASHBOARD</Text>
  *         </Tab>
- *         <Tab title='TAB 2'>
- *           <Text>Tab 2</Text>
- *         </Tab>
- *         <Tab title='TAB 3'>
- *           <Text>Tab 3</Text>
+ *         <Tab title='SETTINGS'>
+ *           <Text>SETTINGS</Text>
  *         </Tab>
  *       </TabView>
  *     );
  *   }
  * }
- *
  * ```
  *
  * @example Inline Styling
  *
  * ```
  * import React from 'react';
- * import { TabView, Tab, TabViewProps } from 'react-native-ui-kitten';
+ * import { StyleSheet } from 'react-native';
+ * import { TabView, Tab, Text } from 'react-native-ui-kitten';
  *
- * export const TabViewShowcase = (props?: TabViewProps): React.ReactElement<TabViewProps> => {
- *   return (
- *     <TabView
- *       style={styles.tabView}
- *       tabBarStyle={styles.tabBar}
- *       indicatorStyle={styles.tabViewIndicator}>
- *       <Tab titleStyle={styles.tabTitle} title='TAB 1'>
- *         <Text>Tab 1</Text>
- *       </Tab>
- *       <Tab titleStyle={styles.tabTitle} title='TAB 2'>
- *         <Text>Tab 2</Text>
- *       </Tab>
- *       <Tab titleStyle={styles.tabTitle} title='TAB 3'>
- *         <Text>Tab 3</Text>
- *       </Tab>
- *     </TabView>
- *   );
- * };
+ * export const TabViewShowcase = (props) => (
+ *   <TabView
+ *     style={styles.tabView}
+ *     tabBarStyle={styles.tabBar}
+ *     indicatorStyle={styles.tabViewIndicator}>
+ *     <Tab title='DASHBOARD'>
+ *       <Text>DASHBOARD</Text>
+ *     </Tab>
+ *     <Tab title='SETTINGS'>
+ *       <Text>SETTINGS</Text>
+ *     </Tab>
+ *   </TabView>
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   tabView: { backgroundColor: 'white' },
+ *   tabBar: { backgroundColor: 'gray' },
+ *   tabViewIndicator: { backgroundColor: 'blue' },
+ * });
  * ```
- * */
-
+ */
 export class TabView extends React.Component<TabViewProps> {
 
   static defaultProps: Partial<TabViewProps> = {

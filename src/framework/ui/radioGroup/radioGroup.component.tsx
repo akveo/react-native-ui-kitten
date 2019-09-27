@@ -52,22 +52,22 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * export class RadioGroupShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onGroupSelectionChange = (selectedIndex: number) => {
+ *   onGroupSelectionChange = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <RadioGroup
  *         selectedIndex={this.state.selectedIndex}
  *         onChange={this.onGroupSelectionChange}>
- *         <Radio />
- *         <Radio />
- *         <Radio />
+ *         <Radio text='Option 1' />
+ *         <Radio text='Option 2' />
+ *         <Radio text='Option 3' />
  *       </RadioGroup>
  *     );
  *   }
@@ -82,30 +82,29 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * export class RadioGroupShowcase extends React.Component {
  *
- *   public state = {
+ *   state = {
  *     selectedIndex: 0,
  *   };
  *
- *   private onGroupSelectionChange = (selectedIndex: number) => {
+ *   onGroupSelectionChange = (selectedIndex) => {
  *     this.setState({ selectedIndex });
  *   };
  *
- *   public render(): React.ReactNode {
+ *   render() {
  *     return (
  *       <RadioGroup
  *         status='danger'
  *         selectedIndex={this.state.selectedIndex}
  *         onChange={this.onGroupSelectionChange}>
- *         <Radio />
- *         <Radio />
- *         <Radio />
+ *         <Radio text='Option 1' />
+ *         <Radio text='Option 2' />
+ *         <Radio text='Option 3' />
  *       </RadioGroup>
  *     );
  *   }
  * }
  * ```
  */
-
 class RadioGroupComponent extends React.Component<RadioGroupProps> {
 
   static styledComponentName: string = 'RadioGroup';

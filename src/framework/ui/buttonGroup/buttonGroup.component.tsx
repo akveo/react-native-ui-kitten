@@ -55,39 +55,54 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *
  * ```
  * import React from 'react';
- * import { Button, ButtonGroup, ButtonGroupProps } from 'react-native-ui-kitten';
+ * import { Button, ButtonGroup } from 'react-native-ui-kitten';
  *
- * export const ButtonGroupShowcase = (props?: ButtonGroupProps): React.ReactElement<ButtonGroupProps> => {
- *   return (
- *     <ButtonGroup>
- *       <Button>Left</Button>
- *       <Button>Mid</Button>
- *       <Button>Right</Button>
- *     </ButtonGroup>
- *   );
- * };
+ * export const ButtonGroupShowcase = (props) => (
+ *   <ButtonGroup>
+ *     <Button>Left</Button>
+ *     <Button>Mid</Button>
+ *     <Button>Right</Button>
+ *   </ButtonGroup>
+ * );
  * ```
  *
  * @overview-example Eva Styling
  *
  * ```
  * import React from 'react';
- * import { Button, ButtonGroup, ButtonGroupProps } from 'react-native-ui-kitten';
+ * import { Button, ButtonGroup } from 'react-native-ui-kitten';
  *
- * export const ButtonGroupShowcase = (props?: ButtonGroupProps): React.ReactElement<ButtonGroupProps> => {
- *   return (
- *     <ButtonGroup
- *       size='large'
- *       status='warning'>
- *       <Button>Left</Button>
- *       <Button>Mid</Button>
- *       <Button>Right</Button>
- *     </ButtonGroup>
- *   );
- * };
+ * export const DangerButtonGroup = (props) => (
+ *   <ButtonGroup
+ *     size='large'
+ *     status='danger'>
+ *     <Button>Left</Button>
+ *     <Button>Mid</Button>
+ *     <Button>Right</Button>
+ *   </ButtonGroup>
+ * );
+ * ```
+ *
+ * @example Inline Styling
+ *
+ * ```
+ * import React from 'react';
+ * import { StyleSheet } from 'react-native';
+ * import { Button, ButtonGroup } from 'react-native-ui-kitten';
+ *
+ * export const ButtonGroupShowcase = (props) => (
+ *   <ButtonGroup style={styles.buttonGroup}>
+ *     <Button>Left</Button>
+ *     <Button>Mid</Button>
+ *     <Button>Right</Button>
+ *   </ButtonGroup>
+ * );
+ *
+ * const styles = StyleSheet.create({
+ *   buttonGroup: { borderRadius: 8 },
+ * });
  * ```
  */
-
 class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 
   static styledComponentName: string = 'ButtonGroup';
