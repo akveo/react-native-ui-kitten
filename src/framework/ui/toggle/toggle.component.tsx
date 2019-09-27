@@ -57,7 +57,8 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * Can be `primary`, `success`, `info`, `warning`, `danger`, `basic` or `control`.
+ * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
  * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
@@ -318,11 +319,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       borderColor,
     );
 
-    const interpolatedIconColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
-      thumbBackgroundColor,
-      iconTintColor,
-    );
-
     const thumbScale: Animated.AnimatedDiffClamp = this.animateThumbScale(offsetValue);
 
     return {
@@ -365,7 +361,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       icon: {
         width: source.iconWidth,
         height: source.iconHeight,
-        backgroundColor: interpolatedIconColor,
+        backgroundColor: iconTintColor,
       },
     };
   };
