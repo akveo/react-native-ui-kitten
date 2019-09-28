@@ -16,6 +16,8 @@
     "./src/**/package.json"
   ],
   "exclude": [
+    "./src/templates",
+    "./src/playground",
     "./**/*.spec.ts",
     "./**/*.spec.tsx",
     "./**/*.snap"
