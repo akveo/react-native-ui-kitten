@@ -52,8 +52,8 @@ export class NgdHeaderComponent implements OnInit {
       link: '/components/components-overview',
     },
     {
-      title: 'Theme System',
-      link: '/guides/theme-system',
+      title: 'Design System',
+      link: '/design-system/eva-design-system-intro',
     },
   ];
 
