@@ -34,7 +34,10 @@ import {
   NgdHocParamsBlockComponent,
   NgdOverviewExampleBlock,
 } from './components/';
-import { NbRadioModule } from '@nebular/theme';
+import {
+  NbInputModule,
+  NbRadioModule,
+} from '@nebular/theme';
 
 const blocks = [
   NgdMdBLockComponent,
@@ -68,6 +71,7 @@ const blocks = [
     RouterModule,
     NgdThemeModule,
     NbRadioModule,
+    NbInputModule,
   ],
   declarations: [
     ...blocks,
