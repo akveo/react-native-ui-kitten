@@ -28,6 +28,9 @@ export const ThemedAwesomeView = withStyles(AwesomeView, (theme) => ({
 
 In the example above we use `withStyles` function imported from UI Kitten. This allows us create a styles like you usually do with `StyleSheet` but with an ability to use current theme.
 
+Complete list of variables could be found under [Light Theme Variables](design-system/light-theme) table.
+
+
 That's it! Now you're done and able to use your themed component.
 
 <hr>
@@ -46,3 +49,5 @@ export const AwesomeViewShowcase = (props) => (
 ## Related Articles
 
 - [Change Theme](design-system/theme-change)
+- [Light Theme](design-system/light-theme)
+- [Dark Theme](design-system/dark-theme)

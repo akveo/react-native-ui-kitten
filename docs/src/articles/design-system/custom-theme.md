@@ -200,3 +200,5 @@ That's it. In a similar way, the rest of the available theme variables could be 
 
 - [Use Theme](design-system/use-theme-variables)
 - [Customize Theme](design-system/customize-theme)
+- [Light Theme](design-system/light-theme)
+- [Dark Theme](design-system/dark-theme)
