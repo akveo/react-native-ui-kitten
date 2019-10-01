@@ -17,6 +17,8 @@ import { CalendarRange } from '@kitten/ui/calendar/type';
 
 jest.useFakeTimers();
 
+const CURRENT_MONTH: number = new Date().getMonth();
+
 interface State {
   range: CalendarRange<Date>;
 }
@@ -54,8 +56,7 @@ class TestApplication extends React.Component<TestAppProps, State> {
 describe('@calendar: component checks', () => {
 
   it('* start range date selected properly', () => {
-    const month: number = 9 - 1;
-    const expectedStartDate: Date = new Date(Date.UTC(2019, month, 11));
+    const expectedStartDate: Date = new Date(Date.UTC(2019, CURRENT_MONTH, 11));
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[1]);
@@ -65,9 +66,8 @@ describe('@calendar: component checks', () => {
   });
 
   it('* range selected works properly', () => {
-    const month: number = 9 - 1;
-    const expectedStartDate: Date = new Date(Date.UTC(2019, month, 11));
-    const expectedEndDate: Date = new Date(Date.UTC(2019, month, 26));
+    const expectedStartDate: Date = new Date(Date.UTC(2019, CURRENT_MONTH, 11));
+    const expectedEndDate: Date = new Date(Date.UTC(2019, CURRENT_MONTH, 26));
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[1]);
@@ -79,8 +79,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('* range re-selected properly 1', () => {
-    const month: number = 9 - 1;
-    const expectedStartDate: Date = new Date(Date.UTC(2019, month, 19));
+    const expectedStartDate: Date = new Date(Date.UTC(2019, CURRENT_MONTH, 19));
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[1]);
@@ -93,8 +92,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('* range re-selected properly 2', () => {
-    const month: number = 9 - 1;
-    const expectedStartDate: Date = new Date(Date.UTC(2019, month, 8));
+    const expectedStartDate: Date = new Date(Date.UTC(2019, CURRENT_MONTH, 8));
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[1]);
