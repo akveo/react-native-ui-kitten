@@ -1,21 +1,21 @@
 # What is UI Kitten?
 
-**UI Kitten** is a framework of UI components powered by Eva Design System for your next React Native application.
-
-The primary feature of UI Kitten components is to simplify the development process giving you easy-to-use React Native components styled pretty out of the box. It also includes a nice and powerful theme system, which allows you to quickly modify components or even build your own with ease.
+UI Kitten is a customizable React Native UI Library based on <a href="https://eva.design">Eva Design System</a> specifications, with 20+ UI components, 2 visual themes, and other supporting modules.
 <hr>
 
 ## What's included
-
-UI Kitten is distributed as single `npm` package, but we have also a demo app built on top of the UI components:
-
-- **UI Kit**
-
-  Pure React Native components powered by Eva Design System and no 3rd party dependencies.
   
-- **Demo App** <a href="https://github.com/akveo/kittenTricks" target="_blank">Kitten Tricks</a> - React Native application based on UI Kitten components with lots of example layouts. 
+  UI Kitten modules are distributed as separated npm packages:
   
-  It could be used as a starter kit for your next React Native application.
+  - UI Components `react-native-ui-kitten`
+    - Theme - Light and Dark visual themes, based on Design System.
+    - UI Components - high-quality React Native components with no 3rd party dependencies.
+    - Right-to-left writing system support for all components.
+    - <a href="https://github.com/necolas/react-native-web" target="_blank">React Native Web</a> support.
+  - UI Kitten Moment `@ui-kitten/moment`
+  - UI Kitten date-fns `@ui-kitten/date-fns`
+    - modules allowing UI Kitten components to work with dates with help most popular date libraries. 
+  - Demo App <a href="https://github.com/akveo/kittenTricks" target="_blank">Kitten Tricks</a> - React Native application based on UI Kitten modules.
 <hr>
 
 ## Assumptions
