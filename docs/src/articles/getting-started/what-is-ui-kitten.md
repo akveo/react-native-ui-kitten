@@ -12,9 +12,11 @@ UI Kitten is a customizable React Native UI Library based on <a href="https://ev
     - UI Components - high-quality React Native components with no 3rd party dependencies.
     - Right-to-left writing system support for all components.
     - <a href="https://github.com/necolas/react-native-web" target="_blank">React Native Web</a> support.
+  - UI Kitten Eva Icons `@ui-kitten/eva-icons`
+    - <a href="https://akveo.github.io/eva-icons">Eva Icons</a> is a pack of more than 480 beautifully crafted icons. This module runs it in React Native
   - UI Kitten Moment `@ui-kitten/moment`
   - UI Kitten date-fns `@ui-kitten/date-fns`
-    - modules allowing UI Kitten components to work with dates with help most popular date libraries. 
+    - Modules allowing UI Kitten components to work with dates with help most popular date libraries. 
   - Demo App <a href="https://github.com/akveo/kittenTricks" target="_blank">Kitten Tricks</a> - React Native application based on UI Kitten modules.
 <hr>
 
