@@ -3,6 +3,7 @@ export interface StyleType {
 }
 
 export enum Interaction {
+  HOVER = 'hover',
   ACTIVE = 'active',
   FOCUSED = 'focused',
   INDETERMINATE = 'indeterminate',

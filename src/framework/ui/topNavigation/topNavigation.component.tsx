@@ -260,7 +260,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
   static styledComponentName: string = 'TopNavigation';
 
-  private getAlignmentDependentStyles = (alignment: AlignmentProp): StyleType | null => {
+  private getAlignmentDependentStyles = (alignment: AlignmentProp): StyleType => {
     if (alignment === 'center') {
       return {
         container: styles.containerCentered,
@@ -350,7 +350,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     ];
   };
 
-  public render(): React.ReactNode {
+  public render(): React.ReactElement<ViewProps> {
     const { themedStyle, style, alignment, ...restProps } = this.props;
 
     const {

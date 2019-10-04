@@ -6,12 +6,12 @@
 
 import React from 'react';
 import {
-  TouchableOpacityProps,
-  GestureResponderEvent,
-  View,
   Animated,
-  StyleSheet,
+  GestureResponderEvent,
   ImageProps,
+  StyleSheet,
+  TouchableOpacityProps,
+  View,
 } from 'react-native';
 import {
   styled,
@@ -20,13 +20,13 @@ import {
 } from '@kitten/theme';
 import {
   MenuItem,
-  MenuItemType,
   MenuItemElement,
+  MenuItemType,
 } from './menuItem.component';
 import {
   MeasureNode,
-  MeasureResult,
   MeasureNodeProps,
+  MeasureResult,
   MeasuringElementProps,
 } from '../popover/measure.component';
 import { Chevron } from '../support/components';
@@ -180,20 +180,18 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
 
     return (
       <MeasureNode onResult={this.onSubMenuMeasure}>
-        {[
-          <View
-            {...measuringProps}
-            pointerEvents='none'
-            key={SUB_ITEMS_MEASURE_TAG}
-            style={styles.invisibleMenu}>
-            {subItems}
-          </View>,
-        ]}
+        <View
+          {...measuringProps}
+          pointerEvents='none'
+          key={SUB_ITEMS_MEASURE_TAG}
+          style={styles.invisibleMenu}>
+          {subItems}
+        </View>
       </MeasureNode>
     );
   };
 
-  private renderSubItems = (): React.ReactNode => {
+  private renderSubItems = (): React.ReactFragment => {
     const { item, themedStyle, divider } = this.props;
 
     return item.subItems.map((sub: MenuItemType, index: number) => {
@@ -226,7 +224,7 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
     ];
   };
 
-  public render(): React.ReactNode {
+  public render(): React.ReactFragment {
     const { subItemsVisible } = this.state;
     const [mainItem, subItems, divider] = this.renderComponentChildren();
     const invisibleSubs: React.ReactElement<MeasureNodeProps> = this.renderSubItemsInvisible(subItems);

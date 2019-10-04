@@ -233,15 +233,11 @@ class DrawerComponent extends React.Component<DrawerProps> {
   static styledComponentName: string = 'Drawer';
 
   private renderHeader = (): DrawerHeaderElement => {
-    const { header } = this.props;
-
-    return header();
+    return this.props.header();
   };
 
   private renderFooter = (): DrawerFooterElement => {
-    const { footer } = this.props;
-
-    return footer();
+    return this.props.footer();
   };
 
   private renderMenu = (): MenuElement => {
@@ -257,7 +253,7 @@ class DrawerComponent extends React.Component<DrawerProps> {
     );
   };
 
-  private renderComponentChildren = (): [DrawerHeaderElement, MenuElement, DrawerFooterElement] => {
+  private renderComponentChildren = (): React.ReactNodeArray => {
     const { header, footer } = this.props;
 
     return [
@@ -267,7 +263,7 @@ class DrawerComponent extends React.Component<DrawerProps> {
     ];
   };
 
-  public render(): React.ReactNode {
+  public render(): React.ReactFragment {
     const [header, menu, footer] = this.renderComponentChildren();
 
     return (

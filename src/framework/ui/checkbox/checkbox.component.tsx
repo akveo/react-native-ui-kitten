@@ -288,7 +288,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
   static styledComponentName: string = 'CheckBox';
 
-  private onPress = () => {
+  private onPress = (): void => {
     this.props.dispatch([]);
 
     if (this.props.onChange) {
@@ -296,7 +296,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
     }
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
@@ -304,7 +304,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
@@ -427,8 +427,9 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
     return (
       <TouchableOpacity
-        style={[container, styles.container, style]}
         activeOpacity={1.0}
+        {...derivedProps}
+        style={[container, styles.container, style]}
         disabled={disabled}
         hitSlop={hitSlopInsets}
         onPress={this.onPress}
@@ -436,16 +437,9 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         onPressOut={this.onPressOut}>
         <View style={[highlightContainer, styles.highlightContainer]}>
           <View style={[highlight, styles.highlight]}/>
-          <TouchableOpacity
-            activeOpacity={1.0}
-            {...derivedProps}
-            disabled={disabled}
-            style={selectContainerStyle}
-            onPress={this.onPress}
-            onPressIn={this.onPressIn}
-            onPressOut={this.onPressOut}>
+          <View style={selectContainerStyle}>
             {iconElement}
-          </TouchableOpacity>
+          </View>
         </View>
         {textElement}
       </TouchableOpacity>

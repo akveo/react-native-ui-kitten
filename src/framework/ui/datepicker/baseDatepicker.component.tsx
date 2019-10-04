@@ -6,22 +6,25 @@ import {
   ImageProps,
   StyleSheet,
   GestureResponderEvent,
+  Dimensions,
 } from 'react-native';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { Popover } from '../popover/popover.component';
-import { BaseCalendarProps } from '../calendar/baseCalendar.component';
-import { NativeDateService } from '../calendar/service/nativeDate.service';
-import { CalendarElement } from '../calendar/calendar.component';
-import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
 import {
   Interaction,
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { Dimensions } from 'react-native';
+import {
+  Text,
+  TextElement,
+} from '../text/text.component';
+import {
+  Popover,
+  PopoverElement,
+} from '../popover/popover.component';
+import { BaseCalendarProps } from '../calendar/baseCalendar.component';
+import { NativeDateService } from '../calendar/service/nativeDate.service';
+import { CalendarElement } from '../calendar/calendar.component';
+import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
 
 const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
 
@@ -34,10 +37,12 @@ export interface ComponentProps {
 }
 
 export type DatepickerProps<D> =
-  ComponentProps &
-  StyledComponentProps &
-  TouchableOpacityProps &
-  BaseCalendarProps<D>;
+  ComponentProps
+  & StyledComponentProps
+  & TouchableOpacityProps
+  & BaseCalendarProps<D>;
+
+export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
 
 export abstract class BaseDatepickerComponent<D, P> extends React.Component<DatepickerProps<D> & P, State> {
 
@@ -91,7 +96,7 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     };
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
@@ -99,7 +104,7 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
@@ -114,8 +119,7 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
   };
 
   private dispatchActive = (): void => {
-    const { visible } = this.state;
-    if (visible) {
+    if (this.state.visible) {
       this.props.dispatch([Interaction.ACTIVE]);
     } else {
       this.props.dispatch([]);
@@ -123,9 +127,7 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
   };
 
   private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-    const { icon } = this.props;
-
-    return icon && icon(style);
+    return this.props.icon && this.props.icon(style);
   };
 
   private renderText = (style: StyleType): TextElement => {
@@ -154,9 +156,8 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     );
   };
 
-  public render(): React.ReactNode {
-    const { themedStyle } = this.props;
-    const { popover } = this.getComponentStyles(themedStyle);
+  public render(): PopoverElement {
+    const { popover } = this.getComponentStyles(this.props.themedStyle);
 
     const popoverStyle: StyleType = {
       width: Dimensions.get('window').width - popover.indent,

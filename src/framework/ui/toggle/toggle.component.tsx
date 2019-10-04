@@ -16,6 +16,7 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
+  TouchableOpacity,
   View,
   ViewProps,
 } from 'react-native';
@@ -215,6 +216,8 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.panResponder = PanResponder.create(this);
   }
 
+  // PanResponderCallbacks
+
   public onStartShouldSetPanResponder = (): boolean => {
     return true;
   };
@@ -235,7 +238,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     return false;
   };
 
-  public onPanResponderGrant = () => {
+  public onPanResponderGrant = (): void => {
     const { checked, disabled, themedStyle } = this.props;
 
     if (disabled) {
@@ -258,7 +261,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     return true;
   };
 
-  public onPanResponderRelease = (e: GestureResponderEvent, gestureState: PanResponderGestureState) => {
+  public onPanResponderRelease = (e: GestureResponderEvent, gestureState: PanResponderGestureState): void => {
     const { checked, disabled, themedStyle } = this.props;
 
     if (!disabled) {
@@ -273,22 +276,22 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.onPressOut();
   };
 
-  private onPressIn = () => {
+  private onPressIn = (): void => {
     this.props.dispatch([Interaction.ACTIVE]);
   };
 
-  private onPressOut = () => {
+  private onPressOut = (): void => {
     this.props.dispatch([]);
   };
 
-  private onPress = () => {
+  private onPress = (): void => {
     if (this.props.onChange) {
       this.props.onChange(!this.props.checked);
     }
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const { style, checked, disabled } = this.props;
+    const { checked, disabled } = this.props;
 
     const {
       outlineWidth,
@@ -366,7 +369,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     };
   };
 
-  private animateThumbTranslate = (value: number, callback: () => void = () => null) => {
+  private animateThumbTranslate = (value: number, callback: () => void = () => null): void => {
     this.thumbTranslateAnimationActive = true;
 
     Animated.timing(this.thumbTranslateAnimation, {
@@ -379,7 +382,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     });
   };
 
-  private animateThumbWidth = (value: number, callback: () => void = () => null) => {
+  private animateThumbWidth = (value: number, callback: () => void = () => null): void => {
     Animated.timing(this.thumbWidthAnimation, {
       toValue: value,
       duration: 150,
@@ -387,7 +390,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }).start(callback);
   };
 
-  private animateEllipseScale = (value: number, callback: () => void = () => null) => {
+  private animateEllipseScale = (value: number, callback: () => void = () => null): void => {
     Animated.timing(this.ellipseScaleAnimation, {
       toValue: value,
       duration: 200,
@@ -402,7 +405,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     });
   };
 
-  private stopAnimations = () => {
+  private stopAnimations = (): void => {
     const value: number = this.props.checked ? 0.01 : 1;
 
     this.thumbTranslateAnimation.stopAnimation();
@@ -412,7 +415,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.ellipseScaleAnimation.setValue(value);
   };
 
-  private toggle = (callback = (nextValue: boolean) => null) => {
+  private toggle = (callback = (nextValue: boolean) => null): void => {
     const { checked, themedStyle } = this.props;
 
     const value: number = checked ? -themedStyle.offsetValue : themedStyle.offsetValue;
@@ -449,28 +452,27 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, disabled, checked, ...restProps } = this.props;
+    const { themedStyle, style, checked, ...restProps } = this.props;
 
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
     const [textElement] = this.renderComponentChildren(componentStyle);
 
     return (
       <View
-        {...restProps}
         {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
-        <View style={[componentStyle.toggleContainer, styles.toggleContainer]}>
+        <TouchableOpacity
+          activeOpacity={1.0}
+          {...restProps}
+          style={[componentStyle.toggleContainer, styles.toggleContainer]}>
           <View style={[componentStyle.highlight, styles.highlight]}/>
           <Animated.View style={[componentStyle.ellipseContainer, styles.ellipseContainer]}>
             <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
             <Animated.View style={[componentStyle.thumb, styles.thumb]}>
-              <CheckMark
-                style={componentStyle.icon}
-                isAnimated={true}
-              />
+              <CheckMark style={componentStyle.icon} isAnimated={true}/>
             </Animated.View>
           </Animated.View>
-        </View>
+        </TouchableOpacity>
         {textElement}
       </View>
     );

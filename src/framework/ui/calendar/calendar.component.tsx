@@ -208,10 +208,8 @@ export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps
   // BaseCalendarComponent
 
   public onDaySelect(date: CalendarDateInfo<D>): void {
-    const { onSelect } = this.props;
-
-    if (onSelect) {
-      onSelect(date.date);
+    if (this.props.onSelect) {
+      this.props.onSelect(date.date);
     }
   }
 
