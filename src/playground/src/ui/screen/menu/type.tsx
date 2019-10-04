@@ -1,22 +1,19 @@
 import React from 'react';
 import {
-  Image,
-  ImageProps,
-} from 'react-native';
-import { MenuItemType } from '@kitten/ui';
+  MenuItemType,
+  StyleType,
+  Icon,
+  IconElement,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '../common/type';
-import { StyleType } from '@kitten/theme';
 
-const Icon = (style: StyleType): React.ReactElement<ImageProps> => (
-  <Image
-    style={style}
-    source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-  />
+const StarIcon = (style: StyleType): IconElement => (
+  <Icon {...style}  name='star' />
 );
 
 const defaultMenuItems: MenuItemType[] = [
@@ -28,61 +25,61 @@ const defaultMenuItems: MenuItemType[] = [
 const withIconMenuItems: MenuItemType[] = [
   {
     title: 'Item 1',
-    icon: Icon,
+    icon: StarIcon,
   },
   {
     title: 'Item 2',
-    icon: Icon,
+    icon: StarIcon,
   },
   {
     title: 'Item 3',
-    icon: Icon,
+    icon: StarIcon,
   },
 ];
 
 const withDisabledItemMenuItems: MenuItemType[] = [
   {
     title: 'Item 1',
-    icon: Icon,
+    icon: StarIcon,
   },
   {
     title: 'Item 2',
-    icon: Icon,
+    icon: StarIcon,
     disabled: true,
   },
   {
     title: 'Item 3',
-    icon: Icon,
+    icon: StarIcon,
   },
 ];
 
 const withGroupsMenuItems: MenuItemType[] = [
   {
     title: 'Item 1',
-    icon: Icon,
+    icon: StarIcon,
   },
   {
     title: 'Item 2',
-    icon: Icon,
+    icon: StarIcon,
     subItems: [
       {
         title: 'Item 21',
-        icon: Icon,
+        icon: StarIcon,
         disabled: true,
       },
       {
         title: 'Item 22',
-        icon: Icon,
+        icon: StarIcon,
       },
       {
         title: 'Item 23',
-        icon: Icon,
+        icon: StarIcon,
       },
     ],
   },
   {
     title: 'Item 3',
-    icon: Icon,
+    icon: StarIcon,
   },
 ];
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   CheckBoxElement,
   CheckBoxProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { CheckBoxShowcase } from './checkboxShowcase.component';
 import {
   checkboxSettings,
@@ -14,7 +14,7 @@ export class CheckBoxContainer extends React.Component {
 
   private renderItem = (props: CheckBoxProps): CheckBoxElement => {
     return (
-      <CheckBoxShowcase {...props}/>
+      <CheckBoxShowcase {...props} />
     );
   };
 

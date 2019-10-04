@@ -4,7 +4,7 @@ import {
   OverflowMenuProps,
   OverflowMenuElement,
   Button,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   menuVisible: boolean;
@@ -39,7 +39,7 @@ export class OverflowMenuShowcase extends React.Component<OverflowMenuProps, Sta
         onSelect={this.onSelect}
         onBackdropPress={this.toggleMenu}>
         <Button onPress={this.toggleMenu}>
-          Show
+          TOGGLE MENU
         </Button>
       </OverflowMenu>
     );

@@ -4,7 +4,7 @@ import {
   RadioGroup,
   RadioGroupElement,
   RadioGroupProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   selectedIndex: number;

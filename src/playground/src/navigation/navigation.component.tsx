@@ -1,10 +1,14 @@
 import React from 'react';
 import {
   createAppContainer,
-  createDrawerNavigator,
-  createStackNavigator,
   NavigationRouteConfigMap,
 } from 'react-navigation';
+import {
+  createStackNavigator,
+  NavigationStackOptions,
+  NavigationStackProp,
+} from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import {
   AvatarContainer,
   BottomNavigationContainer,
@@ -36,12 +40,13 @@ import {
   RangeCalendarContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
+import { Platform } from 'react-native';
 
 export interface RouteType {
   name: string;
 }
 
-const routes: NavigationRouteConfigMap = {
+const routes: NavigationRouteConfigMap<NavigationStackOptions, NavigationStackProp> = {
   ['Home']: Home,
   ['Avatar']: AvatarContainer,
   ['Bottom Navigation']: BottomNavigationContainer,
@@ -85,4 +90,7 @@ const DrawerNavigator = createDrawerNavigator({
   initialRouteName: 'Home',
 });
 
-export const Router: any = createAppContainer(DrawerNavigator);
+export const Router: any = Platform.select({
+  default: createAppContainer(DrawerNavigator),
+  web: createAppContainer(MenuNavigator),
+});

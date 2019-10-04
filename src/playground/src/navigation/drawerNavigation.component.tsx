@@ -2,27 +2,31 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  ImageProps,
+  ViewProps,
 } from 'react-native';
 import {
-  DrawerItemsProps,
   NavigationRoute,
   SafeAreaView,
 } from 'react-navigation';
 import {
+  DrawerContentComponentProps,
+  NavigationDrawerScreenProps,
+} from 'react-navigation-drawer';
+import {
+  Divider,
   Drawer,
   DrawerHeaderElement,
-  DrawerProps,
-  MenuItemType,
-  Text,
   DrawerHeaderFooter,
   Icon,
-  Divider,
-} from '@kitten/ui';
-import { StyleType } from '@kitten/theme';
-import { DrawerFooterElement } from '@kitten/ui/drawer/drawer.component';
+  MenuItemType,
+  Text,
+  DrawerHeaderFooterElement,
+  StyleType,
+  IconElement,
+  DrawerElement,
+} from 'react-native-ui-kitten';
 
-export class DrawerNavigation extends React.Component<DrawerItemsProps> {
+export class DrawerNavigation extends React.Component<DrawerContentComponentProps & NavigationDrawerScreenProps> {
 
   private onItemSelect = (index: number) => {
     const { [index]: selectedRoute } = this.props.items;
@@ -32,6 +36,7 @@ export class DrawerNavigation extends React.Component<DrawerItemsProps> {
   private createDrawerItem = (source: NavigationRoute): MenuItemType => {
     return {
       title: source.routeName,
+      // @ts-ignore
       accessory: this.shouldRenderBadge(source) && this.renderBadge,
     };
   };
@@ -40,7 +45,7 @@ export class DrawerNavigation extends React.Component<DrawerItemsProps> {
     return source.routeName === 'Drawer';
   };
 
-  private renderBadge = (style: StyleType): React.ReactElement<any> => {
+  private renderBadge = (style: StyleType): React.ReactElement<ViewProps> => {
     return (
       <View style={[style, styles.badge]}>
         <Text category='c2'>NEW</Text>
@@ -48,7 +53,7 @@ export class DrawerNavigation extends React.Component<DrawerItemsProps> {
     );
   };
 
-  private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+  private renderIcon = (style: StyleType): IconElement => {
     return (
       <Icon name='star' {...style}/>
     );
@@ -68,7 +73,7 @@ export class DrawerNavigation extends React.Component<DrawerItemsProps> {
     );
   };
 
-  private renderFooter = (): DrawerFooterElement => {
+  private renderFooter = (): DrawerHeaderFooterElement => {
     return (
       <React.Fragment>
         <Divider/>
@@ -80,7 +85,7 @@ export class DrawerNavigation extends React.Component<DrawerItemsProps> {
     );
   };
 
-  public render(): React.ReactElement<DrawerProps> {
+  public render(): DrawerElement {
     const drawerItems: MenuItemType[] = this.props.items.map(this.createDrawerItem);
 
     return (

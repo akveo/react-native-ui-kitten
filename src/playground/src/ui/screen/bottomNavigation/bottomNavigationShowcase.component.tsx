@@ -3,7 +3,7 @@ import {
   BottomNavigation,
   BottomNavigationElement,
   BottomNavigationProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   selectedIndex: number;

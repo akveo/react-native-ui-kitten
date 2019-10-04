@@ -1,20 +1,11 @@
+import React from 'react';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
 } from '../common/type';
-import { StyleType } from '@kitten/theme';
-import { IconElement } from '@kitten/ui';
-import React from 'react';
 
 const now: Date = new Date();
-
-const Icon = (style: StyleType): IconElement<any> => {
-  return (
-    <Icon name='calendar-outline' {...style}/>
-  );
-};
-
 
 const defaultDatepicker: ComponentShowcaseItem = {
   title: 'Default',

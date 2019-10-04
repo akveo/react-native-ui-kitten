@@ -1,12 +1,15 @@
 import React from 'react';
+import { ListRenderItemInfo } from 'react-native';
+import {
+  ListItemElement,
+  ListItemProps,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '../common/type';
-import { ListRenderItemInfo } from 'react-native';
-import { ListItemProps } from '@kitten/ui';
 import {
   ListItemAccessoryShowcase,
   ListItemIconAccessoryShowcase,
@@ -24,25 +27,25 @@ const data: ListData[] = new Array(42).fill(  {
   description: 'Description',
 });
 
-const renderListItem = (info: ListRenderItemInfo<ListData>): React.ReactElement<ListItemProps> => {
+const renderListItem = (info: ListRenderItemInfo<ListData>): ListItemElement => {
   return (
     <ListItemShowcase {...info.item}/>
   );
 };
 
-const renderIconListItem = (info: ListRenderItemInfo<ListData>): React.ReactElement<ListItemProps> => {
+const renderIconListItem = (info: ListRenderItemInfo<ListData>): ListItemElement => {
   return (
     <ListItemIconShowcase {...info.item}/>
   );
 };
 
-const renderAccessoryListItem = (info: ListRenderItemInfo<ListData>): React.ReactElement<ListItemProps> => {
+const renderAccessoryListItem = (info: ListRenderItemInfo<ListData>): ListItemElement => {
   return (
     <ListItemAccessoryShowcase {...info.item}/>
   );
 };
 
-const renderIconAccessoryListItem = (info: ListRenderItemInfo<ListData>): React.ReactElement<ListItemProps> => {
+const renderIconAccessoryListItem = (info: ListRenderItemInfo<ListData>): ListItemElement => {
   return (
     <ListItemIconAccessoryShowcase {...info.item}/>
   );

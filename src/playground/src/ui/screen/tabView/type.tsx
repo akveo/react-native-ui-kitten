@@ -1,23 +1,21 @@
 import React from 'react';
 import {
-  Image,
-  ImageProps,
-} from 'react-native';
-import { StyleType } from '@kitten/theme';
-import {
   Tab,
   Text,
   Layout,
-} from '@kitten/ui';
+  StyleType,
+  IconElement,
+  Icon,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
 } from '../common/type';
 
-const Icon = (style: StyleType): React.ReactElement<ImageProps> => {
+const StarIcon = (style: StyleType): IconElement => {
   return (
-    <Image source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}/>
+    <Icon {...style} name='star'/>
   );
 };
 
@@ -46,17 +44,17 @@ const titleBottomNavigation: ComponentShowcaseItem = {
 const iconBottomNavigation: ComponentShowcaseItem = {
   props: {
     children: [
-      <Tab icon={Icon}>
+      <Tab icon={StarIcon}>
         <Layout>
           <Text>Tab 1</Text>
         </Layout>
       </Tab>,
-      <Tab icon={Icon}>
+      <Tab icon={StarIcon}>
         <Layout>
           <Text>Tab 2</Text>
         </Layout>
       </Tab>,
-      <Tab icon={Icon}>
+      <Tab icon={StarIcon}>
         <Layout>
           <Text>Tab 3</Text>
         </Layout>

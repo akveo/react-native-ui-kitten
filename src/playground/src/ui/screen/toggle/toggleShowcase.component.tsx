@@ -3,7 +3,7 @@ import {
   Toggle,
   ToggleElement,
   ToggleProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface ToggleShowcaseComponentState {
   checked: boolean;

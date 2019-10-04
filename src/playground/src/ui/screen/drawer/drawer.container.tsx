@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
-import { DrawerProps } from '@kitten/ui';
+import { NavigationDrawerScreenProps } from 'react-navigation-drawer';
+import { DrawerProps } from 'react-native-ui-kitten';
 import { DrawerShowcase } from './drawerShowcase.component';
 import { drawerShowcase } from './type';
 import { ShowcaseContainer } from '../common/showcase.container';
 
-export class DrawerContainer extends React.Component<NavigationScreenProps> {
+export class DrawerContainer extends React.Component<NavigationDrawerScreenProps> {
 
   private toggleDrawer = () => {
     this.props.navigation.toggleDrawer();

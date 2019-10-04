@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleType } from '@kitten/theme';
-import { Icon } from '@kitten/ui';
+import {
+  Icon,
+  StyleType,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,

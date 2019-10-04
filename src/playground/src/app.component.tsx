@@ -4,8 +4,8 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import {
   ApplicationProvider,
   ApplicationProviderElement,
-} from '@kitten/theme';
-import { IconRegistry } from '@kitten/ui';
+  IconRegistry,
+} from 'react-native-ui-kitten';
 import {
   AntDesignIconsPack,
   FeatherIconsPack,

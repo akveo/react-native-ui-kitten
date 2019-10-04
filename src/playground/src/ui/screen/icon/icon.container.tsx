@@ -1,5 +1,8 @@
 import React from 'react';
-import { IconProps } from '@kitten/ui';
+import {
+  IconElement,
+  IconProps,
+} from 'react-native-ui-kitten';
 import {
   iconSettings,
   iconShowcase,
@@ -9,7 +12,7 @@ import { IconShowcase } from './iconShowcase.component';
 
 export class IconContainer extends React.Component {
 
-  private renderItem = (props: IconProps): React.ReactElement<IconProps> => {
+  private renderItem = (props: IconProps): IconElement => {
     return (
       <IconShowcase {...props} />
     );

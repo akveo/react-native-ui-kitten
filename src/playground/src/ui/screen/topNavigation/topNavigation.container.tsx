@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   TopNavigationElement,
   TopNavigationProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import {
   topNavigationSettings,
   topNavigationShowcase,

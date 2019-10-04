@@ -1,20 +1,15 @@
 import React from 'react';
-import {
-  Button,
-  ListRenderItemInfo,
-} from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
-import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
-} from '@kitten/theme';
+import { ListRenderItemInfo } from 'react-native';
+import { NavigationStackScreenProps } from 'react-navigation-stack';
 import {
   List,
   ListElement,
   ListItem,
   ListItemElement,
-} from '@kitten/ui';
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from 'react-native-ui-kitten';
 import { RouteType } from '../../navigation';
 
 export const routes: RouteType[] = [
@@ -47,7 +42,7 @@ export const routes: RouteType[] = [
   { name: 'Sample' },
 ];
 
-type Props = ThemedComponentProps & NavigationScreenProps;
+type Props = ThemedComponentProps & NavigationStackScreenProps;
 
 class HomeScreen extends React.Component<Props> {
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   AvatarProps,
   AvatarElement,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { AvatarShowcase } from './avatarShowcase.component';
 import { avatarShowcase } from './type';
 import { ShowcaseContainer } from '../common/showcase.container';

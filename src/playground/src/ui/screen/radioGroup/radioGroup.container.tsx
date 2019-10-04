@@ -2,7 +2,7 @@ import React from 'react';
 import {
   RadioGroupElement,
   RadioGroupProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { RadioGroupShowcase } from './radioGroupShowcase.component';
 import { radioGroupShowcase } from './type';
 import { ShowcaseContainer } from '../common/showcase.container';

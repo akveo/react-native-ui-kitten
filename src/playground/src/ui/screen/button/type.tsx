@@ -1,16 +1,15 @@
 import React from 'react';
+import { ImageProps } from 'react-native';
 import {
-  Image,
-  ImageProps,
-} from 'react-native';
+  Icon,
+  StyleType,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '../common/type';
-import { StyleType } from '@kitten/theme';
-import { Icon } from '@kitten/ui';
 
 const IconElement = (style: StyleType): React.ReactElement<ImageProps> => (
   <Icon name='star' {...style}/>

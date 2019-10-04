@@ -33,9 +33,17 @@ const disabledCheckBox: ComponentShowcaseItem = {
   },
 };
 
-const textCheckBox: ComponentShowcaseItem = {
-  title: 'Text',
+const rightTextCheckBox: ComponentShowcaseItem = {
+  title: 'Right Text',
   props: {
+    text: 'Place your text',
+  },
+};
+
+const leftTextCheckBox: ComponentShowcaseItem = {
+  title: 'Left Text',
+  props: {
+    style: { flexDirection: 'row-reverse' },
     text: 'Place your text',
   },
 };
@@ -61,7 +69,8 @@ const stateSection: ComponentShowcaseSection = {
 const accessoriesSection: ComponentShowcaseSection = {
   title: 'Accessories',
   items: [
-    textCheckBox,
+    rightTextCheckBox,
+    leftTextCheckBox,
     textDisabledCheckBox,
   ],
 };

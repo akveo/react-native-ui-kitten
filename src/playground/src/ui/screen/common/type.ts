@@ -1,4 +1,4 @@
-import { ThemeType } from '@kitten/theme';
+import { ThemeType } from 'react-native-ui-kitten';
 
 export interface ComponentShowcase {
   sections: ComponentShowcaseSection[];

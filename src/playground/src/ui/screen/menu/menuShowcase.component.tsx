@@ -3,7 +3,7 @@ import {
   Menu,
   MenuProps,
   MenuElement,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   selectedIndex: number;
