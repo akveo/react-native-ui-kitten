@@ -8,17 +8,24 @@ import { Inject, Injectable } from '@angular/core';
 
 import { NgdTabbedService } from './tabbed.service';
 import { NgdTextService } from './text.service';
-import { DOCS, STRUCTURE } from '../../app.options';
+import {
+  DOCS,
+  STRUCTURE,
+  EXAMPLES_STRUCTURE,
+} from '../../app.options';
 
 @Injectable()
 export class NgdStructureService {
 
   protected prepared;
+  protected examplesHelperArray: any[];
 
   constructor(private textService: NgdTextService,
               private tabbedService: NgdTabbedService,
               @Inject(STRUCTURE) structure,
-              @Inject(DOCS) docs) {
+              @Inject(DOCS) docs,
+              @Inject(EXAMPLES_STRUCTURE) examples) {
+    this.examplesHelperArray = examples;
     this.prepared = this.prepareStructure(structure, docs);
   }
 
@@ -104,6 +111,39 @@ export class NgdStructureService {
         .find((item: any) => item.name === component.name);
       images = imagesObj ? imagesObj.images : [];
     }
+
+    // todo: refactor this
+
+    if (component.examples && component.examples.length !== 0) {
+      component.examples.forEach((example) => {
+        this.examplesHelperArray.forEach((helperExample) => {
+          if (example.description === helperExample.name) {
+            component.liveExamples.push({
+              code: helperExample.code,
+              url: `/assets/examples-build/#/${helperExample.name}`,
+              path: helperExample.path,
+              name: example.description,
+            })
+          }
+        });
+      });
+    }
+
+    if (component.overviewExamples && component.overviewExamples.length !== 0) {
+      component.overviewExamples.forEach((example) => {
+        this.examplesHelperArray.forEach((helperExample) => {
+          if (example.description === helperExample.name) {
+            component.liveExamples.push({
+              code: helperExample.code,
+              url: `/assets/examples-build/#/${helperExample.name}`,
+              path: helperExample.url,
+              name: example.description,
+            })
+          }
+        });
+      });
+    }
+
 
     return {
       ...component,

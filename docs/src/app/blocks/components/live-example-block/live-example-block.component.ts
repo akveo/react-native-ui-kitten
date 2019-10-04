@@ -58,7 +58,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
   loading = true;
 
   get url(): string {
-    return this.location.prepareExternalUrl(`example/${this.content.id}`);
+    return this.location.prepareExternalUrl(`/assets/examples-build/#/${this.content.id}`);
   }
 
   get iframeWindow(): Window {
@@ -72,13 +72,16 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnInit() {
-    this.communicator.receive(this.content.id)
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(it => {
-        this.iframeHeight = it.height;
-        this.loading = false;
-        this.changeDetection.detectChanges();
-      });
+    this.iframeHeight = 300;
+    this.loading = false;
+    this.changeDetection.detectChanges();
+    // this.communicator.receive(this.content.id)
+    //   .pipe(takeWhile(() => this.alive))
+    //   .subscribe(it => {
+    //     this.iframeHeight = it.height;
+    //     this.loading = false;
+    //     this.changeDetection.detectChanges();
+    //   });
   }
 
   ngAfterViewInit() {
