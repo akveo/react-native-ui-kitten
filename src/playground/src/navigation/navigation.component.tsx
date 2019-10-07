@@ -44,6 +44,7 @@ import {
   CheckboxStatusShowcase,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
+import { sharingHeightContainer } from './sharingHeight.container';
 
 export interface RouteType {
   name: string;
@@ -79,11 +80,11 @@ const routes: NavigationRouteConfigMap = {
   ['Sample']: SampleContainer,
   ['Select']: SelectContainer,
 
-  ['ButtonSimpleUsage']: ButtonSimpleUsageShowcase,
-  ['ButtonStatus']: ButtonStatusShowcase,
-  ['ButtonSize']: ButtonSizeShowcase,
-  ['CheckboxSimpleUsage']: CheckboxSimpleUsageShowcase,
-  ['CheckboxStatus']: CheckboxStatusShowcase,
+  ['ButtonSimpleUsage']: () => sharingHeightContainer(ButtonSimpleUsageShowcase, 'ButtonSimpleUsage'),
+  ['ButtonStatus']: () => sharingHeightContainer(ButtonStatusShowcase, 'ButtonStatus'),
+  ['ButtonSize']: () => sharingHeightContainer(ButtonSizeShowcase, 'ButtonSize'),
+  ['CheckboxSimpleUsage']: () => sharingHeightContainer(CheckboxSimpleUsageShowcase, 'CheckboxSimpleUsage'),
+  ['CheckboxStatus']: () => sharingHeightContainer(CheckboxStatusShowcase, 'CheckboxStatus'),
 };
 
 const MenuNavigator = createStackNavigator(routes, {
