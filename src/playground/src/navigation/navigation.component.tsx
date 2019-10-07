@@ -75,7 +75,7 @@ const inputDocumentationShowcases: NavigationRouteConfigMap = {
   ['InputWithCaption']: () => sharingHeightContainer(InputWithCaptionShowcase, 'InputWithCaption'),
   ['InputStatus']: () => sharingHeightContainer(InputStatusShowcase, 'InputWithCaption'),
   ['InputSize']: () => sharingHeightContainer(InputSizeShowcase, 'InputSize'),
-  ['InputInlineStyling']: sharingHeightContainer(InputInlineStylingShowcase, 'InputInlineStyling'),
+  ['InputInlineStyling']: () => sharingHeightContainer(InputInlineStylingShowcase, 'InputInlineStyling'),
 };
 
 const routes: NavigationRouteConfigMap = {
