@@ -1,10 +1,12 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import {
   createAppContainer,
   createDrawerNavigator,
   createStackNavigator,
   NavigationRouteConfigMap,
 } from 'react-navigation';
+import { createBrowserApp } from '@react-navigation/web';
 import {
   AvatarContainer,
   BottomNavigationContainer,
@@ -34,6 +36,12 @@ import {
   CalendarContainer,
   DatepickerContainer,
   RangeCalendarContainer,
+
+  ButtonSimpleUsageShowcase,
+  ButtonStatusShowcase,
+  ButtonSizeShowcase,
+  CheckboxSimpleUsageShowcase,
+  CheckboxStatusShowcase,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
 
@@ -70,11 +78,21 @@ const routes: NavigationRouteConfigMap = {
   ['Overflow Menu']: OverflowMenuContainer,
   ['Sample']: SampleContainer,
   ['Select']: SelectContainer,
+
+  ['ButtonSimpleUsage']: ButtonSimpleUsageShowcase,
+  ['ButtonStatus']: ButtonStatusShowcase,
+  ['ButtonSize']: ButtonSizeShowcase,
+  ['CheckboxSimpleUsage']: CheckboxSimpleUsageShowcase,
+  ['CheckboxStatus']: CheckboxStatusShowcase,
 };
 
 const MenuNavigator = createStackNavigator(routes, {
   initialRouteName: 'Home',
-  headerMode: 'screen',
+  headerMode: Platform.select({
+    ios: 'screen',
+    android: 'screen',
+    default: 'none',
+  }),
 });
 
 const DrawerNavigator = createDrawerNavigator({
@@ -85,4 +103,12 @@ const DrawerNavigator = createDrawerNavigator({
   initialRouteName: 'Home',
 });
 
-export const Router: any = createAppContainer(DrawerNavigator);
+export let Router: any;
+
+switch (Platform.OS) {
+  case 'web':
+    Router = createBrowserApp(MenuNavigator, { history: 'hash' });
+    break;
+  default:
+    Router = createAppContainer(DrawerNavigator);
+}

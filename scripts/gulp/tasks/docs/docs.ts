@@ -62,7 +62,7 @@ function processTypeDoc() {
 }
 
 function getExamplesCode() {
-  glob('src/examples/src/examples/**/*.tsx', (error, filePaths) => {
+  glob('src/playground/src/ui/screen/documentationExamples/**/*.tsx', (error, filePaths) => {
     if (!error) {
       const examples: ExampleCode[] = filePaths.map((path: string) => {
         const code: string = fs.readFileSync(path, 'utf8');
@@ -84,6 +84,6 @@ function buildLiveExamplesApplication() {
 }
 
 function copyLiveExamplesAppToDocsAppAssets() {
-  return src(['src/examples/web-build/**/*'])
+  return src(['src/playground/web-build/**/*'])
     .pipe(dest('docs/src/assets/examples-build'));
 }

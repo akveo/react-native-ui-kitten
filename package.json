@@ -19,7 +19,7 @@
     "build:dev": "npm run build -- dev && npm run build:transform -- dev",
     "build:prod": "npm run build -- prod && npm run build:transform -- prod",
     "clean": "rimraf ./dist",
-    "docs:examples:build": "cd src/examples && npm run build:web",
+    "docs:examples:build": "cd src/playground && npm run build:web",
     "docs:parse": "gulp docs",
     "docs:build": "cd docs && npm run build",
     "docs:build:prod": "cd docs && npm run build:prod",

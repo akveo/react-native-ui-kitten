@@ -1,26 +1,33 @@
 {
   "expo": {
-    "name": "react-native-ui-kitten-playground",
-    "description": "react-native-ui-kitten-playground",
-    "slug": "playground",
-    "sdkVersion": "34.0.0",
+    "name": "AwesomeApp",
+    "slug": "awesome-app",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
     "platforms": [
-      "android",
       "ios",
+      "android",
       "web"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "packagerOpts": {
-      "config": "./metro.config.js"
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
-    "androidStatusBarColor": "#3366FF",
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#3366FF"
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "./assets"
-    ]
-  }
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "AwesomeApp",
+  "name": "AwesomeApp"
 }
