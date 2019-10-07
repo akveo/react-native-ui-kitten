@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import {
-  Layout,
-  CheckBox,
-} from 'react-native-ui-kitten';
+  StyleSheet,
+  View,
+} from 'react-native';
+import { CheckBox } from 'react-native-ui-kitten';
 
 export const CheckboxSimpleUsageShowcase = (): React.ReactElement => {
   const [checked1, onChange1] = useState(false);
@@ -25,7 +25,7 @@ export const CheckboxSimpleUsageShowcase = (): React.ReactElement => {
   };
 
   return (
-    <Layout style={styles.container}>
+    <View style={styles.container}>
       <CheckBox
         style={styles.checkbox}
         checked={checked1}
@@ -43,13 +43,12 @@ export const CheckboxSimpleUsageShowcase = (): React.ReactElement => {
         checked={checked3}
         onChange={(value: boolean) => onStateChange(value, 3)}
       />
-    </Layout>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
   },
   checkbox: {

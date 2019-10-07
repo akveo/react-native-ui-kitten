@@ -55,26 +55,27 @@ import {
   InputInlineStylingShowcase,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
+import { sharingHeightContainer } from './sharingHeight.container';
 
 export interface RouteType {
   name: string;
 }
 
 const radioDocumentationShowcases: NavigationRouteConfigMap = {
-  ['RadioSimpleUsage']: RadioSimpleUsageShowcase,
-  ['RadioWithText']: RadioWithTextShowcase,
-  ['RadioStatus']: RadioStatusShowcase,
-  ['RadioInlineStyling']: RadioInlineStylingShowcase,
+  ['RadioSimpleUsage']: () => sharingHeightContainer(RadioSimpleUsageShowcase, 'RadioSimpleUsage'),
+  ['RadioWithText']: () => sharingHeightContainer(RadioWithTextShowcase, 'RadioWithText'),
+  ['RadioStatus']: () => sharingHeightContainer(RadioStatusShowcase, 'RadioStatus'),
+  ['RadioInlineStyling']: () => sharingHeightContainer(RadioInlineStylingShowcase, 'RadioInlineStyling'),
 };
 
 const inputDocumentationShowcases: NavigationRouteConfigMap = {
-  ['InputSimpleUsage']: InputSimpleUsageShowcase,
-  ['InputWithIcon']: InputWithIconShowcase,
-  ['InputWithLabel']: InputWithLabelShowcase,
-  ['InputWithCaption']: InputWithCaptionShowcase,
-  ['InputStatus']: InputStatusShowcase,
-  ['InputSize']: InputSizeShowcase,
-  ['InputInlineStyling']: InputInlineStylingShowcase,
+  ['InputSimpleUsage']: () => sharingHeightContainer(InputSimpleUsageShowcase, 'InputSimpleUsage'),
+  ['InputWithIcon']: () => sharingHeightContainer(InputWithIconShowcase, 'InputWithIcon'),
+  ['InputWithLabel']: () => sharingHeightContainer(InputWithLabelShowcase, 'InputWithLabel'),
+  ['InputWithCaption']: () => sharingHeightContainer(InputWithCaptionShowcase, 'InputWithCaption'),
+  ['InputStatus']: () => sharingHeightContainer(InputStatusShowcase, 'InputWithCaption'),
+  ['InputSize']: () => sharingHeightContainer(InputSizeShowcase, 'InputSize'),
+  ['InputInlineStyling']: sharingHeightContainer(InputInlineStylingShowcase, 'InputInlineStyling'),
 };
 
 const routes: NavigationRouteConfigMap = {
@@ -107,11 +108,11 @@ const routes: NavigationRouteConfigMap = {
   ['Sample']: SampleContainer,
   ['Select']: SelectContainer,
 
-  ['ButtonSimpleUsage']: ButtonSimpleUsageShowcase,
-  ['ButtonStatus']: ButtonStatusShowcase,
-  ['ButtonSize']: ButtonSizeShowcase,
-  ['CheckboxSimpleUsage']: CheckboxSimpleUsageShowcase,
-  ['CheckboxStatus']: CheckboxStatusShowcase,
+  ['ButtonSimpleUsage']: () => sharingHeightContainer(ButtonSimpleUsageShowcase, 'ButtonSimpleUsage'),
+  ['ButtonStatus']: () => sharingHeightContainer(ButtonStatusShowcase, 'ButtonStatus'),
+  ['ButtonSize']: () => sharingHeightContainer(ButtonSizeShowcase, 'ButtonSize'),
+  ['CheckboxSimpleUsage']: () => sharingHeightContainer(CheckboxSimpleUsageShowcase, 'CheckboxSimpleUsage'),
+  ['CheckboxStatus']: () => sharingHeightContainer(CheckboxStatusShowcase, 'CheckboxStatus'),
 
   ...radioDocumentationShowcases,
   ...inputDocumentationShowcases,

@@ -70,7 +70,6 @@ function getExamplesCode() {
           .split(' ')
           .filter((item: string) => item.includes(SHOWCASE_KEY_WORD))[0]
           .replace(SHOWCASE_KEY_WORD, '');
-        console.log('asdasdasd: ', name)
 
         return { code, path, name };
       });
