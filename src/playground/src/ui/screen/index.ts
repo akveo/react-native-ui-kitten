@@ -34,4 +34,21 @@ export {
   CheckboxSimpleUsageShowcase,
 } from './documentationExamples';
 
+export {
+  RadioSimpleUsageShowcase,
+  RadioWithTextShowcase,
+  RadioStatusShowcase,
+  RadioInlineStylingShowcase,
+} from './documentationExamples/radio';
+
+export {
+  InputWithLabelShowcase,
+  InputWithIconShowcase,
+  InputWithCaptionShowcase,
+  InputStatusShowcase,
+  InputSizeShowcase,
+  InputSimpleUsageShowcase,
+  InputInlineStylingShowcase,
+} from './documentationExamples/input';
+
 export { default as Home } from './home.component';

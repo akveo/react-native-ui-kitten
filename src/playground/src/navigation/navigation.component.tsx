@@ -42,12 +42,40 @@ import {
   ButtonSizeShowcase,
   CheckboxSimpleUsageShowcase,
   CheckboxStatusShowcase,
+  RadioSimpleUsageShowcase,
+  RadioWithTextShowcase,
+  RadioStatusShowcase,
+  RadioInlineStylingShowcase,
+  InputSimpleUsageShowcase,
+  InputWithIconShowcase,
+  InputWithLabelShowcase,
+  InputWithCaptionShowcase,
+  InputStatusShowcase,
+  InputSizeShowcase,
+  InputInlineStylingShowcase,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
 
 export interface RouteType {
   name: string;
 }
+
+const radioDocumentationShowcases: NavigationRouteConfigMap = {
+  ['RadioSimpleUsage']: RadioSimpleUsageShowcase,
+  ['RadioWithText']: RadioWithTextShowcase,
+  ['RadioStatus']: RadioStatusShowcase,
+  ['RadioInlineStyling']: RadioInlineStylingShowcase,
+};
+
+const inputDocumentationShowcases: NavigationRouteConfigMap = {
+  ['InputSimpleUsage']: InputSimpleUsageShowcase,
+  ['InputWithIcon']: InputWithIconShowcase,
+  ['InputWithLabel']: InputWithLabelShowcase,
+  ['InputWithCaption']: InputWithCaptionShowcase,
+  ['InputStatus']: InputStatusShowcase,
+  ['InputSize']: InputSizeShowcase,
+  ['InputInlineStyling']: InputInlineStylingShowcase,
+};
 
 const routes: NavigationRouteConfigMap = {
   ['Home']: Home,
@@ -84,6 +112,9 @@ const routes: NavigationRouteConfigMap = {
   ['ButtonSize']: ButtonSizeShowcase,
   ['CheckboxSimpleUsage']: CheckboxSimpleUsageShowcase,
   ['CheckboxStatus']: CheckboxStatusShowcase,
+
+  ...radioDocumentationShowcases,
+  ...inputDocumentationShowcases,
 };
 
 const MenuNavigator = createStackNavigator(routes, {
