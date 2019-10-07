@@ -19,16 +19,9 @@ import {
           <ng-container>
             <div [innerHTML]="description"
                  [ngStyle]="hasImage && {'margin-bottom': '16px'}"></div>
-            <!--<ngd-overview-example-->
-              <!--*ngFor="let example of source.overviewExamples"-->
-              <!--[example]="example">-->
-            <!--</ngd-overview-example>-->
-            <!--<iframe src="/assets/examples-build/#/ButtonSimpleUsage" width="500" height="500"></iframe>-->
-            <!--<iframe src="/assets/examples-build/#/ButtonStatus" width="500" height="500"></iframe>-->
-            <!--<iframe src="/assets/examples-build/#/ButtonSize" width="500" height="500"></iframe>-->
             <ngd-stacked-example-block
-              *ngFor="let content of examplesContents"
-              [content]="content"
+              *ngFor="let example of source.overviewExamples"
+              [content]="example"
               class="widget-block">
             </ngd-stacked-example-block>
           </ng-container>
@@ -44,14 +37,10 @@ export class NgdOverviewBlockComponent {
   images: string[];
   description: string;
   hasImage: boolean;
-  examplesContents: any[];
-
-  testContent: any;
 
   @Input('source')
   set setSource(source: any) {
     this.source = this.prepareDescription(source);
-    this.examplesContents = this.prepareExamples(source.liveExamples);
     this.hasImage = this.source.images.length && this.source.images.length !== 0;
   }
 
@@ -60,15 +49,4 @@ export class NgdOverviewBlockComponent {
     this.images = source.images.map((image: string) => `assets/images/overview/${image}`);
     return source;
   }
-
-  private prepareExamples(examples: any[]): any[] {
-    return examples.map((example) => {
-      return {
-        id: example.name,
-        name: example.name.split(/(?=[A-Z])/).join(' '),
-        files: [{ path: '', code: example.code }],
-      }
-    });
-  }
-
 }

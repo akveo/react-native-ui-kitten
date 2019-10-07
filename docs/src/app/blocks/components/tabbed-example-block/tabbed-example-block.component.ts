@@ -26,28 +26,8 @@ export class NgdTabbedExampleBlockComponent {
 
   @Input()
   set content({ files }) {
-    console.log(files)
-    this.examples = files.map((file: any) => {
-      return {
-        code: file.code,
-        path: file.path,
-        extension: 'tsx',
-      }
-    });
+    this.examples = files;
     this.examples[0].active = true;
-
-    // forkJoin(files.map(file => {
-    //   return {
-    //     code: file.code,
-    //     path: '',
-    //     extension: 'tsx',
-    //   }
-    // }))
-    //   .subscribe(files => {
-    //     (files[0] as any).active = true;
-    //     this.examples = files;
-    //     this.cd.detectChanges();
-    //   });
   }
 
   constructor(private codeLoader: NgdCodeLoaderService, private cd: ChangeDetectorRef) {

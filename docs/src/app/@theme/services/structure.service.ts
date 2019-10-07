@@ -112,38 +112,8 @@ export class NgdStructureService {
       images = imagesObj ? imagesObj.images : [];
     }
 
-    // todo: refactor this
-
-    if (component.examples && component.examples.length !== 0) {
-      component.examples.forEach((example) => {
-        this.examplesHelperArray.forEach((helperExample) => {
-          if (example.description === helperExample.name) {
-            component.liveExamples.push({
-              code: helperExample.code,
-              url: `/assets/examples-build/#/${helperExample.name}`,
-              path: helperExample.path,
-              name: example.description,
-            })
-          }
-        });
-      });
-    }
-
-    if (component.overviewExamples && component.overviewExamples.length !== 0) {
-      component.overviewExamples.forEach((example) => {
-        this.examplesHelperArray.forEach((helperExample) => {
-          if (example.description === helperExample.name) {
-            component.liveExamples.push({
-              code: helperExample.code,
-              url: `/assets/examples-build/#/${helperExample.name}`,
-              path: helperExample.url,
-              name: example.description,
-            })
-          }
-        });
-      });
-    }
-
+    component.overviewExamples = this.processExamples(component.overviewExamples);
+    component.examples = this.processExamples(component.examples);
 
     return {
       ...component,
@@ -158,6 +128,35 @@ export class NgdStructureService {
         return node;
       }),
       images: images,
+    };
+  }
+
+  protected processExamples(examples: any[]): any[] {
+    if (examples && examples.length !== 0) {
+      return examples
+        .map((example: any) => {
+          const helper: any = this.examplesHelperArray.find(item => {
+            return example.description === item.name;
+          });
+          return helper && this.prepareExample(helper, example);
+        })
+        .filter(Boolean);
+    } else {
+      return [];
+    }
+  }
+
+  protected prepareExample(helper: any, example: any): any {
+    return {
+      id: example.description,
+      name: example.description.split(/(?=[A-Z])/).join(' '),
+      files: [{
+        path: helper.path,
+        code: helper.code,
+        extension: helper.path.slice(helper.path.length - 3),
+      }],
+      code: helper.code,
+      url: `/assets/examples-build/#/${helper.name}`,
     };
   }
 
