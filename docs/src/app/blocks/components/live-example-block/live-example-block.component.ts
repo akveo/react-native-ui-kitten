@@ -56,9 +56,10 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnInit() {
-    this.iframeHeight = 700;
+    this.iframeHeight = 500;
     this.loading = false;
     this.changeDetection.detectChanges();
+
     // this.communicator.receive(this.content.id)
     //   .pipe(takeWhile(() => this.alive))
     //   .subscribe(it => {
