@@ -46,11 +46,6 @@ export const routes: RouteType[] = [
   { name: 'Tooltip' },
   { name: 'Top Navigation' },
   { name: 'Sample' },
-  { name: 'ButtonSimpleUsage' },
-  { name: 'ButtonStatus' },
-  { name: 'ButtonSize' },
-  { name: 'CheckboxSimpleUsage' },
-  { name: 'CheckboxStatus' },
 ];
 
 type Props = ThemedComponentProps & NavigationScreenProps;

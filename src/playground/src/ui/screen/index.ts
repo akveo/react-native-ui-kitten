@@ -51,4 +51,12 @@ export {
   InputInlineStylingShowcase,
 } from './documentationExamples/input';
 
+export {
+  ToggleInlineStylingShowcase,
+  ToggleWithTextShowcase,
+  ToggleSizeShowcase,
+  ToggleStatusShowcase,
+  ToggleSimpleUsageShowcase,
+} from './documentationExamples/toggle';
+
 export { default as Home } from './home.component';
