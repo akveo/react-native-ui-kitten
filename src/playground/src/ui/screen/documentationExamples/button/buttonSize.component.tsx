@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-ui-kitten';
 
-export const ButtonSizeShowcase = (): React.ReactElement => {
+export const ButtonSizeShowcase = () => {
   return (
     <View style={styles.container}>
       <Button style={styles.button} size='tiny'>BUTTON</Button>

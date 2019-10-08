@@ -30,7 +30,9 @@ export {
   ButtonSizeShowcase,
   ButtonStatusShowcase,
   ButtonSimpleUsageShowcase,
-} from './documentationExamples';
+  ButtonIconShowcase,
+  ButtonAppearanceShowcase,
+} from './documentationExamples/button';
 
 export {
   CheckboxStatusShowcase,
