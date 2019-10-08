@@ -67,4 +67,10 @@ export {
   AvatarSimpleUsageShowcase,
 } from './documentationExamples/avatar';
 
+export {
+  LayoutInlineStylingShowcase,
+  LayoutLevelShowcase,
+  LayoutSimpleUsageShowcase,
+} from './documentationExamples/layout';
+
 export { default as Home } from './home.component';

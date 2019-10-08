@@ -85,6 +85,21 @@
     "name": "InputWithLabel"
   },
   {
+    "code": "import React from 'react';\nimport { StyleSheet } from 'react-native';\nimport {\n  Layout,\n  Text,\n} from 'react-native-ui-kitten';\n\nexport const LayoutInlineStylingShowcase = () => {\n\n  return (\n    <Layout style={[styles.container, styles.additionalContainerStyle]}>\n      <Text>Welcome To React Native UI Kitten!</Text>\n    </Layout>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n  additionalContainerStyle: {\n    borderColor: 'red',\n    borderWidth: 2,\n    borderRadius: 8,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/layout/layoutInlineStyling.component.tsx",
+    "name": "LayoutInlineStyling"
+  },
+  {
+    "code": "import React from 'react';\nimport { StyleSheet } from 'react-native';\nimport {\n  Layout,\n  Text,\n} from 'react-native-ui-kitten';\n\nexport const LayoutLevelShowcase = () => {\n\n  return (\n    <Layout style={styles.container} level='4'>\n      <Layout style={styles.container} level='3'>\n        <Layout style={styles.container} level='2'>\n          <Layout style={[styles.container, styles.contentContainer]}>\n            <Text>Welcome To React Native UI Kitten!</Text>\n          </Layout>\n        </Layout>\n      </Layout>\n    </Layout>\n\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n  contentContainer: {\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/layout/layoutLevel.component.tsx",
+    "name": "LayoutLevel"
+  },
+  {
+    "code": "import React from 'react';\nimport { StyleSheet } from 'react-native';\nimport {\n  Layout,\n  Text,\n} from 'react-native-ui-kitten';\n\nexport const LayoutSimpleUsageShowcase = () => {\n\n  return (\n    <Layout style={styles.container}>\n      <Text>Welcome To React Native UI Kitten!</Text>\n    </Layout>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/layout/layoutSimpleUsage.component.tsx",
+    "name": "LayoutSimpleUsage"
+  },
+  {
     "code": "import React from 'react';\nimport { StyleSheet } from 'react-native';\nimport { Radio } from 'react-native-ui-kitten';\n\nexport class RadioInlineStylingShowcase extends React.Component {\n\n  state = {\n    checked: false,\n  };\n\n  onChange = (checked) => {\n    this.setState({ checked });\n  };\n\n  render() {\n    return (\n      <Radio\n        style={styles.radio}\n        textStyle={styles.radioText}\n        checked={this.state.checked}\n        text='Place your text'\n        onChange={this.onChange}\n      />\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  radio: {\n    width: 32,\n    height: 32,\n  },\n  radioText: { color: 'purple' },\n});\n",
     "path": "src/playground/src/ui/screen/documentationExamples/radio/radioInlineStyling.component.tsx",
     "name": "RadioInlineStyling"
