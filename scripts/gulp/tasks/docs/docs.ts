@@ -27,17 +27,19 @@ task('get-examples-code', getExamplesCode);
 
 task('generate-navigation', generateDocsNavigation);
 
-task('build-live-examples-app', ['generate-navigation'], buildLiveExamplesApplication);
+task('build-live-examples-app', buildLiveExamplesApplication);
 
 task('copy-live-examples-app', ['build-live-examples-app'], copyLiveExamplesAppToDocsAppAssets);
+
+task('revert-navigation', ['copy-live-examples-app'], revertNavigationChanges);
 
 task('docs', [
   'generate-doc-json',
   'process-type-doc',
   'get-examples-code',
-  'generate-navigation',
   'build-live-examples-app',
   'copy-live-examples-app',
+  'revert-navigation',
 ]);
 
 function generateDocJson() {
@@ -90,4 +92,8 @@ function buildLiveExamplesApplication() {
 function copyLiveExamplesAppToDocsAppAssets() {
   return src(['src/playground/web-build/**/*'])
     .pipe(dest('docs/src/assets/examples-build'));
+}
+
+function revertNavigationChanges() {
+  return exec('npm run docs:revert:navigation');
 }
