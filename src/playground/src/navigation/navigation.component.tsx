@@ -61,6 +61,17 @@ export interface RouteType {
   name: string;
 }
 
+const buttonDocumentationShowcases: NavigationRouteConfigMap = {
+  ['CheckboxSimpleUsage']: () => sharingHeightContainer(CheckboxSimpleUsageShowcase, 'CheckboxSimpleUsage'),
+  ['CheckboxStatus']: () => sharingHeightContainer(CheckboxStatusShowcase, 'CheckboxStatus'),
+};
+
+const checkboxDocumentationShowcases: NavigationRouteConfigMap = {
+  ['ButtonSimpleUsage']: () => sharingHeightContainer(ButtonSimpleUsageShowcase, 'ButtonSimpleUsage'),
+  ['ButtonStatus']: () => sharingHeightContainer(ButtonStatusShowcase, 'ButtonStatus'),
+  ['ButtonSize']: () => sharingHeightContainer(ButtonSizeShowcase, 'ButtonSize'),
+};
+
 const radioDocumentationShowcases: NavigationRouteConfigMap = {
   ['RadioSimpleUsage']: () => sharingHeightContainer(RadioSimpleUsageShowcase, 'RadioSimpleUsage'),
   ['RadioWithText']: () => sharingHeightContainer(RadioWithTextShowcase, 'RadioWithText'),
@@ -108,12 +119,8 @@ const routes: NavigationRouteConfigMap = {
   ['Sample']: SampleContainer,
   ['Select']: SelectContainer,
 
-  ['ButtonSimpleUsage']: () => sharingHeightContainer(ButtonSimpleUsageShowcase, 'ButtonSimpleUsage'),
-  ['ButtonStatus']: () => sharingHeightContainer(ButtonStatusShowcase, 'ButtonStatus'),
-  ['ButtonSize']: () => sharingHeightContainer(ButtonSizeShowcase, 'ButtonSize'),
-  ['CheckboxSimpleUsage']: () => sharingHeightContainer(CheckboxSimpleUsageShowcase, 'CheckboxSimpleUsage'),
-  ['CheckboxStatus']: () => sharingHeightContainer(CheckboxStatusShowcase, 'CheckboxStatus'),
-
+  ...buttonDocumentationShowcases,
+  ...checkboxDocumentationShowcases,
   ...radioDocumentationShowcases,
   ...inputDocumentationShowcases,
 };
