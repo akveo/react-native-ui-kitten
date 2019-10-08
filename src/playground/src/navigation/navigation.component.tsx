@@ -36,23 +36,6 @@ import {
   CalendarContainer,
   DatepickerContainer,
   RangeCalendarContainer,
-
-  ButtonSimpleUsageShowcase,
-  ButtonStatusShowcase,
-  ButtonSizeShowcase,
-  CheckboxSimpleUsageShowcase,
-  CheckboxStatusShowcase,
-  RadioSimpleUsageShowcase,
-  RadioWithTextShowcase,
-  RadioStatusShowcase,
-  RadioInlineStylingShowcase,
-  InputSimpleUsageShowcase,
-  InputWithIconShowcase,
-  InputWithLabelShowcase,
-  InputWithCaptionShowcase,
-  InputStatusShowcase,
-  InputSizeShowcase,
-  InputInlineStylingShowcase,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
 import { sharingHeightContainer } from './sharingHeight.container';
@@ -60,34 +43,6 @@ import { sharingHeightContainer } from './sharingHeight.container';
 export interface RouteType {
   name: string;
 }
-
-const buttonDocumentationShowcases: NavigationRouteConfigMap = {
-  ['CheckboxSimpleUsage']: () => sharingHeightContainer(CheckboxSimpleUsageShowcase, 'CheckboxSimpleUsage'),
-  ['CheckboxStatus']: () => sharingHeightContainer(CheckboxStatusShowcase, 'CheckboxStatus'),
-};
-
-const checkboxDocumentationShowcases: NavigationRouteConfigMap = {
-  ['ButtonSimpleUsage']: () => sharingHeightContainer(ButtonSimpleUsageShowcase, 'ButtonSimpleUsage'),
-  ['ButtonStatus']: () => sharingHeightContainer(ButtonStatusShowcase, 'ButtonStatus'),
-  ['ButtonSize']: () => sharingHeightContainer(ButtonSizeShowcase, 'ButtonSize'),
-};
-
-const radioDocumentationShowcases: NavigationRouteConfigMap = {
-  ['RadioSimpleUsage']: () => sharingHeightContainer(RadioSimpleUsageShowcase, 'RadioSimpleUsage'),
-  ['RadioWithText']: () => sharingHeightContainer(RadioWithTextShowcase, 'RadioWithText'),
-  ['RadioStatus']: () => sharingHeightContainer(RadioStatusShowcase, 'RadioStatus'),
-  ['RadioInlineStyling']: () => sharingHeightContainer(RadioInlineStylingShowcase, 'RadioInlineStyling'),
-};
-
-const inputDocumentationShowcases: NavigationRouteConfigMap = {
-  ['InputSimpleUsage']: () => sharingHeightContainer(InputSimpleUsageShowcase, 'InputSimpleUsage'),
-  ['InputWithIcon']: () => sharingHeightContainer(InputWithIconShowcase, 'InputWithIcon'),
-  ['InputWithLabel']: () => sharingHeightContainer(InputWithLabelShowcase, 'InputWithLabel'),
-  ['InputWithCaption']: () => sharingHeightContainer(InputWithCaptionShowcase, 'InputWithCaption'),
-  ['InputStatus']: () => sharingHeightContainer(InputStatusShowcase, 'InputWithCaption'),
-  ['InputSize']: () => sharingHeightContainer(InputSizeShowcase, 'InputSize'),
-  ['InputInlineStyling']: () => sharingHeightContainer(InputInlineStylingShowcase, 'InputInlineStyling'),
-};
 
 const routes: NavigationRouteConfigMap = {
   ['Home']: Home,
@@ -118,11 +73,6 @@ const routes: NavigationRouteConfigMap = {
   ['Overflow Menu']: OverflowMenuContainer,
   ['Sample']: SampleContainer,
   ['Select']: SelectContainer,
-
-  ...buttonDocumentationShowcases,
-  ...checkboxDocumentationShowcases,
-  ...radioDocumentationShowcases,
-  ...inputDocumentationShowcases,
 };
 
 const MenuNavigator = createStackNavigator(routes, {

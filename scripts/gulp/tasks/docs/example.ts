@@ -1,124 +1,76 @@
-import { dest, src, task } from 'gulp';
-import { accessSync, readFileSync, writeFileSync } from 'fs';
-import { DOCS_OUTPUT, EXTENSIONS } from '../config';
-import { join } from 'path';
+import {
+  Project,
+  SourceFile,
+} from 'ts-morph';
+import * as fs from 'fs';
 
-const del = require('del');
-const replace = require('gulp-replace');
+const glob = require('glob');
 
-/**
- * Copy everything from with-layout and without-layout dirs
- * directly into examples dir. This way we can reference examples
- * without specifying this dirs.
- * For example, @stacked-example(..., button/button-showcase.component)
- * instead of @stacked-example(..., layout/button/button-showcase.component)
- */
-const EXAMPLES_SRC = [
-  './src/playground/*.*',
-  './src/playground/with-layout/**/*.*',
-  './src/playground/without-layout/**/*.*',
-];
-const EXAMPLES_DEST = './docs/assets/examples';
+const SHOWCASE_KEY_WORD: string = 'Showcase';
 
-task('copy-examples', () => {
-  del.sync(EXAMPLES_DEST);
-  src(EXAMPLES_SRC)
-    .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
-    .pipe(dest(EXAMPLES_DEST));
-});
+export function generateDocsNavigation() {
+  const project = new Project();
+  const navigationFile: SourceFile = project
+    .addExistingSourceFile('src/playground/src/navigation/navigation.component.tsx');
+  const statements = navigationFile.getStructure().statements;
+  const showcasesNames: string[] = getShowcasesNames();
+  const showcasesRoutes: string[] = getShowcasesRoutes(showcasesNames);
 
-// task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
-//   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-//   docs.classes.forEach(cls => {
-//     cls.overview = cls.overview.map(unfold);
-//     cls.liveExamples = cls.liveExamples.map(unfold);
-//   });
-//   writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
-// });
+  if (statements) {
+    // @ts-ignore
+    statements = statements.map((statement: any) => {
+      if (statement.moduleSpecifier === '../ui/screen') {
+        const showcasesImports = getShowcasesImportsStructure(showcasesNames);
+        statement.namedImports = statement.namedImports.concat(showcasesImports);
+      }
+      const isRoutesObject: boolean =
+        statement.declarations &&
+        statement.declarations.length !== 0 &&
+        statement.declarations[0].name === 'routes';
+      if (isRoutesObject) {
+        const existingRoutesString: string = statement.declarations[0].initializer.split('}')[0];
+        statement.declarations[0].initializer =
+          existingRoutesString + showcasesRoutes.join(',') + '}';
+      }
 
-// task('validate-examples', ['parse-themes'], () => {
-//   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-//   docs.classes.forEach(cls => validate(cls));
-// });
-
-function unfold(tag) {
-  if (tag.type === 'text') {
-    return tag;
+      return statement;
+    });
   }
 
-  return unfoldWithFiles(tag);
-}
-
-function unfoldWithFiles(tag) {
-  if (isFile(tag.content.id)) {
-    return unfoldFile(tag);
-  }
-
-  return unfoldComponent(tag);
-}
-
-function unfoldFile(tag) {
-  const id = withoutExtension(tag.content.id);
-  const files = [tag.content.id];
-  return createNode(tag, files, id);
-}
-
-function unfoldComponent(tag) {
-  const files = EXTENSIONS
-    .map(extension => `${tag.content.id}.${extension}`)
-    .filter(isFileExists);
-
-  return createNode(tag, files);
-}
-
-function createNode(tag, files, id = tag.content.id) {
-  return {
-    ...tag,
-    content: {
-      ...tag.content,
-      files,
-      id,
+  const sourceFile = project.createSourceFile(
+    'src/playground/src/navigation/navigation.component.tsx',
+    {
+      statements: statements,
     },
-  };
+    {
+      overwrite: true,
+    },
+  );
+  sourceFile.save();
 }
 
-function validate(cls) {
-  const examples = cls.overview
-    .filter(({ type }) => type !== 'text')
-    .map(({ content }) => content);
-
-  const missing = examples.filter(({ id }) => !isFileExists(id) && !isComponentExists(id));
-
-  if (missing.length) {
-    throw new Error(createMissingMsg(missing));
-  }
+function getShowcasesNames() {
+  return glob.sync('src/playground/src/ui/screen/documentationExamples/**/*.tsx')
+    .map((path: string) => {
+      const code: string = fs.readFileSync(path, 'utf8');
+      return code
+        .split(' ')
+        .filter((item: string) => item.includes(SHOWCASE_KEY_WORD))[0];
+    });
 }
 
-function createMissingMsg(examples): string {
-  const missing = examples.map(({ id, name }) => `${name}, ${id}`);
-  return `Can't resolve:\n${missing.join('\n')}`;
+function getShowcasesImportsStructure(names: string[]): { kind: number; name: string; }[] {
+  return names.map((name: string) => {
+    return {
+      name: name,
+      kind: 15,
+    };
+  });
 }
 
-function isComponentExists(path): boolean {
-  return EXTENSIONS
-    .map(extension => `${path}.${extension}`)
-    .some(isFileExists);
-}
-
-function isFileExists(file): boolean {
-  try {
-    const path = join(EXAMPLES_DEST, file);
-    accessSync(path);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-function isFile(id) {
-  return EXTENSIONS.some(extension => id.endsWith(extension));
-}
-
-function withoutExtension(file) {
-  return file.replace(/\.(ts|html|scss)/, '');
+function getShowcasesRoutes(names: string[]): string[] {
+  return names.map((name: string) => {
+    const propName: string = name.replace(SHOWCASE_KEY_WORD, '');
+    return `['${propName}']: () => sharingHeightContainer(${name}, '${propName}')\n`;
+  });
 }

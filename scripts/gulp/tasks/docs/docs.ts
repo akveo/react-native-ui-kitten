@@ -9,6 +9,7 @@ const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;
 const glob = require('glob');
 import * as fs from 'fs';
+import { generateDocsNavigation } from './example';
 
 interface ExampleCode {
   name: string;
@@ -24,7 +25,9 @@ task('process-type-doc', ['generate-doc-json'], processTypeDoc);
 
 task('get-examples-code', getExamplesCode);
 
-task('build-live-examples-app', buildLiveExamplesApplication);
+task('generate-navigation', generateDocsNavigation);
+
+task('build-live-examples-app', ['generate-navigation'], buildLiveExamplesApplication);
 
 task('copy-live-examples-app', ['build-live-examples-app'], copyLiveExamplesAppToDocsAppAssets);
 
@@ -32,6 +35,7 @@ task('docs', [
   'generate-doc-json',
   'process-type-doc',
   'get-examples-code',
+  'generate-navigation',
   'build-live-examples-app',
   'copy-live-examples-app',
 ]);

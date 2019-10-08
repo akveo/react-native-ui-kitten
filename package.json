@@ -90,6 +90,7 @@
     "react-native-testing-library": "^1.5.0",
     "react-test-renderer": "16.8.3",
     "rimraf": "^2.6.2",
+    "ts-morph": "^4.2.0",
     "ts-node": "^3.2.2",
     "tscpaths": "0.0.9",
     "tslint": "^5.12.1",
