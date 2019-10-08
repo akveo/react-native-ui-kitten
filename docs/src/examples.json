@@ -1,5 +1,30 @@
 [
   {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Avatar } from 'react-native-ui-kitten';\n\nexport const AvatarInlineStylingShowcase = () => {\n\n  return (\n    <View style={styles.container}>\n      <Avatar\n        style={styles.avatar}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n  avatar: {\n    width: 96,\n    height: 96,\n    borderRadius: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/avatar/avatarInlineStyling.component.tsx",
+    "name": "AvatarInlineStyling"
+  },
+  {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Avatar } from 'react-native-ui-kitten';\n\nexport const AvatarRemoteImagesShowcase = () => {\n\n  return (\n    <View style={styles.container}>\n      <Avatar source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}/>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/avatar/avatarRemoteImages.component.tsx",
+    "name": "AvatarRemoteImages"
+  },
+  {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Avatar } from 'react-native-ui-kitten';\n\nexport const AvatarShapeShowcase = () => {\n\n  return (\n    <View style={styles.container}>\n      <Avatar\n        shape='round'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n      <Avatar\n        shape='rounded'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n      <Avatar\n        shape='square'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n  item: {\n    marginBottom: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/avatar/avatarShape.component.tsx",
+    "name": "AvatarShape"
+  },
+  {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Avatar } from 'react-native-ui-kitten';\n\nexport const AvatarSimpleUsageShowcase = () => {\n\n  return (\n    <View style={styles.container}>\n      <Avatar source={require('../../../../assets/brand-logo.png')}/>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/avatar/avatarSimpleUsage.component.tsx",
+    "name": "AvatarSimpleUsage"
+  },
+  {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Avatar } from 'react-native-ui-kitten';\n\nexport const AvatarSizeShowcase = () => {\n\n  return (\n    <View style={styles.container}>\n      <Avatar\n        size='tiny'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n      <Avatar\n        size='small'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n      <Avatar\n        size='medium'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n      <Avatar\n        size='large'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n      <Avatar\n        size='giant'\n        style={styles.item}\n        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}\n      />\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n  item: {\n    marginBottom: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/avatar/avatarSize.component.tsx",
+    "name": "AvatarSize"
+  },
+  {
     "code": "import React from 'react';\nimport {\n  StyleSheet,\n  View,\n} from 'react-native';\nimport { Button } from 'react-native-ui-kitten';\n\nexport const ButtonSimpleUsageShowcase = (): React.ReactElement => {\n  return (\n    <View>\n      <Button style={styles.button}>BUTTON</Button>\n      <Button style={styles.button} disabled>BUTTON</Button>\n    </View>\n  );\n};\n\nconst styles = StyleSheet.create({\n  button: {\n    marginBottom: 10,\n  },\n});\n",
     "path": "src/playground/src/ui/screen/documentationExamples/button/buttonSimpleUsage.component.tsx",
     "name": "ButtonSimpleUsage"

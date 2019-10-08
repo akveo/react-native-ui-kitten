@@ -59,4 +59,12 @@ export {
   ToggleSimpleUsageShowcase,
 } from './documentationExamples/toggle';
 
+export {
+  AvatarInlineStylingShowcase,
+  AvatarShapeShowcase,
+  AvatarSizeShowcase,
+  AvatarRemoteImagesShowcase,
+  AvatarSimpleUsageShowcase,
+} from './documentationExamples/avatar';
+
 export { default as Home } from './home.component';

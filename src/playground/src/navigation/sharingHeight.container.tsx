@@ -98,6 +98,7 @@ export const sharingHeightContainer = (Component: React.ComponentType,
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    minHeight: 170,
   },
   themeButton: {
     width: 100,
