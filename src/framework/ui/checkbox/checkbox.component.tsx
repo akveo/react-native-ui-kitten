@@ -72,6 +72,10 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * @overview-example CheckboxSimpleUsage
  *
  * @overview-example CheckboxStatus
+ *
+ * @overview-example CheckboxText
+ *
+ * @example CheckboxInlineStyling
  */
 class CheckBoxComponent extends React.Component<CheckBoxProps> {
 

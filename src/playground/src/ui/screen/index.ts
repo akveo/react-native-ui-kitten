@@ -30,9 +30,14 @@ export {
   ButtonSizeShowcase,
   ButtonStatusShowcase,
   ButtonSimpleUsageShowcase,
+} from './documentationExamples';
+
+export {
   CheckboxStatusShowcase,
   CheckboxSimpleUsageShowcase,
-} from './documentationExamples';
+  CheckboxInlineStylingShowcase,
+  CheckboxTextShowcase,
+} from './documentationExamples/checkbox';
 
 export {
   RadioSimpleUsageShowcase,
