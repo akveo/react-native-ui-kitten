@@ -49,35 +49,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
- *
- * ```
- * import React from 'react';
- * import { TabBar, Tab } from 'react-native-ui-kitten';
- *
- * export class TabBarShowcase extends React.Component {
- *
- *   state = {
- *     selectedIndex: 0,
- *   };
- *
- *   onBarSelect = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render() {
- *     return (
- *       <TabBar
- *         selectedIndex={this.state.selectedIndex}
- *         onSelect={this.onBarSelect}>
- *         <Tab title='Tab 1'/>
- *         <Tab title='Tab 2'/>
- *         <Tab title='Tab 3'/>
- *       </TabBar>
- *     );
- *   }
- * }
- * ```
+ * @overview-example TabBarSimpleUsage
  */
 export class TabBarComponent extends React.Component<TabBarProps> {
 

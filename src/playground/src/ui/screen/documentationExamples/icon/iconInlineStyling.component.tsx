@@ -1,5 +1,7 @@
-// Visit react-native-svg documentation for more details
-// https://github.com/react-native-community/react-native-svg#common-props
+/**
+ * Visit react-native-svg documentation for more details on styling
+ * https://github.com/react-native-community/react-native-svg#common-props
+ */
 
 import React from 'react';
 import { Icon } from 'react-native-ui-kitten';

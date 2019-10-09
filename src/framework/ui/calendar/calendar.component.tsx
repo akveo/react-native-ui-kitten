@@ -55,6 +55,12 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
  *
  * @overview-example CalendarSimpleUsage
+ *
+ * @overview-example CalendarCustomDay
+ *
+ * @overview-example CalendarCustomLocale
+ *
+ * @overview-example CalendarMoment
  */
 export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps<D>> {
 

@@ -53,115 +53,11 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  *
  * @property ScrollViewProps
  *
- * @overview-example Simple Usage
+ * @overview-example ViewPagerSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { ViewPager, Layout, Text } from 'react-native-ui-kitten';
+ * @overview-example ViewPagerLazyLoading
  *
- * export class ViewPagerShowcase extends React.Component {
- *
- *   state = {
- *      selectedIndex: 0,
- *    };
- *
- *   onIndexChange = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render() {
- *     return (
- *       <ViewPager
- *         selectedIndex={this.state.selectedIndex}
- *         onSelect={this.onIndexChange}>
- *         <Layout>
- *           <Text>Tab 1</Text>
- *         </Layout>
- *         <Layout>
- *           <Text>Tab 2</Text>
- *         </Layout>
- *       </ViewPager>
- *     );
- *   }
- * }
- * ```
- *
- * @overview-example Lazy Loading
- *
- * ```
- * import React from 'react';
- * import { ViewPager, Layout, Text } from 'react-native-ui-kitten';
- *
- * export class ViewPagerShowcase extends React.Component {
- *
- *   state = {
- *     selectedIndex: 0,
- *   };
- *
- *   onIndexChange = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   shouldLoadPageContent = (index) => {
- *     return index === this.state.selectedIndex;
- *   };
- *
- *   render() {
- *     return (
- *       <ViewPager
- *         selectedIndex={this.state.selectedIndex}
- *         shouldLoadComponent={this.shouldLoadPageContent}
- *         onSelect={this.onIndexChange}>
- *         <Layout>
- *           <Text>Tab 1</Text>
- *         </Layout>
- *         <Layout>
- *           <Text>Tab 2</Text>
- *         </Layout>
- *       </ViewPager>
- *     );
- *   }
- * }
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { ViewPager, Layout, Text } from 'react-native-ui-kitten';
- *
- * export class ViewPagerShowcase extends React.Component {
- *
- *   state = {
- *      selectedIndex: 0,
- *    };
- *
- *   onIndexChange = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render() {
- *     return (
- *       <ViewPager
- *         style={styles.container}
- *         selectedIndex={this.state.selectedIndex}
- *         onSelect={this.onIndexChange}>
- *         <Layout>
- *           <Text>Tab 1</Text>
- *         </Layout>
- *         <Layout>
- *           <Text>Tab 2</Text>
- *         </Layout>
- *       </ViewPager>
- *     );
- *   }
- * }
- *
- * const styles = StyleSheet.create({
- *   container: { paddingHorizontal: 16 },
- * });
- * ```
+ * @example ViewPagerInlineStyling
  */
 export class ViewPager extends React.Component<ViewPagerProps> implements PanResponderCallbacks {
 

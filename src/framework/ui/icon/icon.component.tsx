@@ -48,31 +48,7 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  *
  * @property {AnimationConfig} animationConfig - Determines animation config. Extends `Animated.AnimationConfig`.
  *
- * @overview-example Register Icons
- *
- * ```
- * import React from 'react';
- * import { mapping, light as lightTheme } from '@eva-design/eva';
- * import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
- * import { EvaIconsPack } from '@ui-kitten/eva-icons'; // <-- Make sure it is installed. npm i @ui-kitten/eva-icons
- *
- * const ApplicationContent = () => (
- *   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
- *     <Text>Welcome to UI Kitten</Text>
- *   </Layout>
- * );
- *
- * const App = () => (
- *   <React.Fragment>
- *     <IconRegistry icons={EvaIconsPack}/>
- *     <ApplicationProvider mapping={mapping} theme={lightTheme}>
- *       <ApplicationContent/>
- *     </ApplicationProvider>
- *   </React.Fragment>
- * );
- *
- * export default App;
- * ```
+ * @overview-example IconSimpleUsage
  *
  * @overview-example IconWithinButton
  *

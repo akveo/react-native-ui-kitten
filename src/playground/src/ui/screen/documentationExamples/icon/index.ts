@@ -1,3 +1,4 @@
+export { IconSimpleUsageShowcase } from './iconSimpleUsage.component';
 export { IconWithinButtonShowcase } from './iconWithinButton.component';
 export { IconWithinInputShowcase } from './iconWithinInput.component';
 export { IconExternalSourceShowcase } from './iconExternalSource.component';
