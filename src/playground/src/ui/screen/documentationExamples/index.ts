@@ -7,3 +7,4 @@ export * from './avatar';
 export * from './layout';
 export * from './menu';
 export * from './select';
+export * from './buttonGroup';

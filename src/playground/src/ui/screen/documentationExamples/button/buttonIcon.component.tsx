@@ -18,7 +18,7 @@ export const ButtonIconShowcase = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Button
         icon={renderIcon}
         style={styles.button}>
@@ -29,6 +29,9 @@ export const ButtonIconShowcase = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
   button: {
     marginBottom: 10,
   },

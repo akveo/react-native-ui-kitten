@@ -97,4 +97,11 @@ export {
   SelectSimpleUsageShowcase,
 } from './documentationExamples/select';
 
+export {
+  ButtonGroupInlineStylingShowcase,
+  ButtonGroupSizeShowcase,
+  ButtonGroupStatusShowcase,
+  ButtonGroupSimpleUsageShowcase,
+} from './documentationExamples/buttonGroup';
+
 export { default as Home } from './home.component';
