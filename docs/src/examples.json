@@ -120,6 +120,31 @@
     "name": "LayoutSimpleUsage"
   },
   {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Menu } from 'react-native-ui-kitten';\n\nexport class MenuAppearanceShowcase extends React.Component {\n\n  state = {\n    selectedIndex: null,\n  };\n\n  data = [\n    { title: 'Item 1' },\n    { title: 'Item 2' },\n    { title: 'Item 3' },\n  ];\n\n  onSelect = (selectedIndex) => {\n    this.setState({ selectedIndex });\n  };\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Menu\n          appearance='noDivider'\n          data={this.data}\n          selectedIndex={this.state.selectedIndex}\n          onSelect={this.onSelect}\n        />\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/menu/menuAppearance.component.tsx",
+    "name": "MenuAppearance"
+  },
+  {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Menu } from 'react-native-ui-kitten';\n\nexport class MenuInlineStylingShowcase extends React.Component {\n\n  state = {\n    selectedIndex: null,\n  };\n\n  data = [\n    { title: 'Item 1', titleStyle: styles.menuItemTitle },\n    { title: 'Item 2' },\n    { title: 'Item 3', titleStyle: styles.menuItemTitle },\n  ];\n\n  onSelect = (selectedIndex) => {\n    this.setState({ selectedIndex });\n  };\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Menu\n          data={this.data}\n          selectedIndex={this.state.selectedIndex}\n          onSelect={this.onSelect}\n        />\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n  menuItemTitle: {\n    color: 'black',\n    fontSize: 18,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/menu/menuInlineStyling.component.tsx",
+    "name": "MenuInlineStyling"
+  },
+  {
+    "code": "import React from 'react';\nimport {\n  StyleSheet,\n  View,\n} from 'react-native';\nimport { Menu } from 'react-native-ui-kitten';\n\nexport class MenuSimpleUsageShowcase extends React.Component {\n\n  state = {\n    selectedIndex: null,\n  };\n\n  data = [\n    { title: 'Item 1' },\n    { title: 'Item 2' },\n    { title: 'Item 3', disabled: true },\n    { title: 'Item 4' },\n  ];\n\n  onSelect = (selectedIndex) => {\n    this.setState({ selectedIndex });\n  };\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Menu\n          data={this.data}\n          selectedIndex={this.state.selectedIndex}\n          onSelect={this.onSelect}\n        />\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/menu/menuSimpleUsage.component.tsx",
+    "name": "MenuSimpleUsage"
+  },
+  {
+    "code": "// IMPORTANT: To use Icon component make sure to follow this guide:\n// https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons\n\nimport React from 'react';\nimport {\n  View,\n  StyleSheet,\n  Image,\n} from 'react-native';\nimport {\n  Menu,\n  Icon,\n} from 'react-native-ui-kitten';\n\nconst StarIcon = (style) => (\n  <Icon {...style} name='star'/>\n);\n\nconst KittenIcon = (style) => (\n  <Image style={style} source={require('../../../../assets/brand-logo.png')}/>\n);\n\nexport class MenuWithIconsShowcase extends React.Component {\n\n  state = {\n    selectedIndex: null,\n  };\n\n  data = [\n    { title: 'Item 1', icon: StarIcon },\n    { title: 'Item 2', icon: KittenIcon },\n    { title: 'Item 3', icon: StarIcon },\n  ];\n\n  onSelect = (selectedIndex) => {\n    this.setState({ selectedIndex });\n  };\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Menu\n          data={this.data}\n          selectedIndex={this.state.selectedIndex}\n          onSelect={this.onSelect}\n        />\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/menu/menuWithIcons.component.tsx",
+    "name": "MenuWithIcons"
+  },
+  {
+    "code": "import React from 'react';\nimport {\n  View,\n  StyleSheet,\n} from 'react-native';\nimport { Menu } from 'react-native-ui-kitten';\n\nexport class MenuWithSubMenuShowcase extends React.Component {\n\n  state = {\n    selectedIndex: null,\n  };\n\n  data = [\n    { title: 'Item 1' },\n    {\n      title: 'Item 2',\n      subItems: [\n        { title: 'Item 21' },\n        { title: 'Item 22' },\n        { title: 'Item 23' },\n      ],\n    },\n    { title: 'Item 3' },\n  ];\n\n  onSelect = (selectedIndex) => {\n    this.setState({ selectedIndex });\n  };\n\n  render() {\n    return (\n      <View style={styles.container}>\n        <Menu\n          data={this.data}\n          selectedIndex={this.state.selectedIndex}\n          onSelect={this.onSelect}\n        />\n      </View>\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    padding: 16,\n  },\n});\n",
+    "path": "src/playground/src/ui/screen/documentationExamples/menu/menuWithSubMenu.component.tsx",
+    "name": "MenuWithSubMenu"
+  },
+  {
     "code": "import React from 'react';\nimport { StyleSheet } from 'react-native';\nimport { Radio } from 'react-native-ui-kitten';\n\nexport class RadioInlineStylingShowcase extends React.Component {\n\n  state = {\n    checked: false,\n  };\n\n  onChange = (checked) => {\n    this.setState({ checked });\n  };\n\n  render() {\n    return (\n      <Radio\n        style={styles.radio}\n        textStyle={styles.radioText}\n        checked={this.state.checked}\n        text='Place your text'\n        onChange={this.onChange}\n      />\n    );\n  }\n}\n\nconst styles = StyleSheet.create({\n  radio: {\n    width: 32,\n    height: 32,\n  },\n  radioText: { color: 'purple' },\n});\n",
     "path": "src/playground/src/ui/screen/documentationExamples/radio/radioInlineStyling.component.tsx",
     "name": "RadioInlineStyling"

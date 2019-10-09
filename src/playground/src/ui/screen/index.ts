@@ -80,4 +80,12 @@ export {
   LayoutSimpleUsageShowcase,
 } from './documentationExamples/layout';
 
+export {
+  MenuInlineStylingShowcase,
+  MenuWithIconsShowcase,
+  MenuAppearanceShowcase,
+  MenuWithSubMenuShowcase,
+  MenuSimpleUsageShowcase,
+} from './documentationExamples/menu';
+
 export { default as Home } from './home.component';
