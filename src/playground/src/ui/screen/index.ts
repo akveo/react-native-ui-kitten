@@ -88,4 +88,13 @@ export {
   MenuSimpleUsageShowcase,
 } from './documentationExamples/menu';
 
+export {
+  SelectStatusShowcase,
+  SelectInlineStylingShowcase,
+  SelectCustomIconShowcase,
+  SelectWithGroupsShowcase,
+  SelectMultiSelectShowcase,
+  SelectSimpleUsageShowcase,
+} from './documentationExamples/select';
+
 export { default as Home } from './home.component';
