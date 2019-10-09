@@ -60,33 +60,6 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * @overview-example Simple Usage
  *
- * ```
- * import React from 'react';
- * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
- *
- * export class BottomNavigationShowcase extends React.Component {
- *
- *   state = {
- *     selectedIndex: 0,
- *   };
- *
- *   onTabSelect = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render() {
- *     return (
- *       <BottomNavigation
- *         selectedIndex={this.state.selectedIndex}
- *         onSelect={this.onTabSelect}>
- *          <BottomNavigationTab title='Dashboard' />
- *          <BottomNavigationTab title='Settings' />
- *       </BottomNavigation>
- *     );
- *   }
- * }
- * ```
- *
  * @overview-example With React Navigation
  *
  * ```
