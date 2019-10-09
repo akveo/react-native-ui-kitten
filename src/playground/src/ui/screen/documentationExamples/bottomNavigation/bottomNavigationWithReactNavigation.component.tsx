@@ -10,7 +10,7 @@ import {
 } from 'react-native-ui-kitten';
 import { createBottomTabNavigator } from 'react-navigation';
 
-const BottomNavigationShowcase = (props) => {
+const BottomNavigationComponent = (props) => {
 
   const onTabSelect = (selectedIndex) => {
     const { [selectedIndex]: selectedRoute } = props.navigation.state.routes;
@@ -48,7 +48,7 @@ export const BottomNavigationWithReactNavigationShowcase = createBottomTabNaviga
   Settings: Settings,
 }, {
   initialRouteName: 'Dashboard',
-  tabBarComponent: BottomNavigationShowcase,
+  tabBarComponent: BottomNavigationComponent,
 });
 
 const styles = StyleSheet.create({

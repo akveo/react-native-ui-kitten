@@ -13,3 +13,4 @@ export * from './calendar';
 export * from './rangeCalendar';
 export * from './radioGroup';
 export * from './drawer';
+export * from './bottomNavigation';

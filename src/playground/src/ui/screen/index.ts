@@ -117,4 +117,11 @@ export {
   DrawerWithIconsShowcase,
 } from './documentationExamples/drawer';
 
+export {
+  BottomNavigationSimpleUsageShowcase,
+  BottomNavigationAppearanceShowcase,
+  BottomNavigationInlineStylingShowcase,
+  BottomNavigationWithIconsShowcase,
+} from './documentationExamples/bottomNavigation';
+
 export { default as Home } from './home.component';
