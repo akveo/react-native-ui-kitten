@@ -104,4 +104,17 @@ export {
   ButtonGroupSimpleUsageShowcase,
 } from './documentationExamples/buttonGroup';
 
+export {
+  RadioGroupSimpleUsageShowcase,
+} from './documentationExamples/radioGroup';
+
+export {
+  DrawerSimpleUsageShowcase,
+  DrawerNotificationBadgeItemShowcase,
+  DrawerCustomHeaderShowcase,
+  DrawerFooterShowcase,
+  DrawerHeaderShowcase,
+  DrawerWithIconsShowcase,
+} from './documentationExamples/drawer';
+
 export { default as Home } from './home.component';
