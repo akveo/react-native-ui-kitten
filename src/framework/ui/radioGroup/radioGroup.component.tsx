@@ -44,66 +44,7 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
- *
- * ```
- * import React from 'react';
- * import { Radio, RadioGroup } from 'react-native-ui-kitten';
- *
- * export class RadioGroupShowcase extends React.Component {
- *
- *   state = {
- *     selectedIndex: 0,
- *   };
- *
- *   onGroupSelectionChange = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render() {
- *     return (
- *       <RadioGroup
- *         selectedIndex={this.state.selectedIndex}
- *         onChange={this.onGroupSelectionChange}>
- *         <Radio text='Option 1' />
- *         <Radio text='Option 2' />
- *         <Radio text='Option 3' />
- *       </RadioGroup>
- *     );
- *   }
- * }
- * ```
- *
- * @overview-example Eva Styling
- *
- * ```
- * import React from 'react';
- * import { Radio, RadioGroup } from 'react-native-ui-kitten';
- *
- * export class RadioGroupShowcase extends React.Component {
- *
- *   state = {
- *     selectedIndex: 0,
- *   };
- *
- *   onGroupSelectionChange = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render() {
- *     return (
- *       <RadioGroup
- *         status='danger'
- *         selectedIndex={this.state.selectedIndex}
- *         onChange={this.onGroupSelectionChange}>
- *         <Radio text='Option 1' />
- *         <Radio text='Option 2' />
- *         <Radio text='Option 3' />
- *       </RadioGroup>
- *     );
- *   }
- * }
- * ```
+ * @overview-example RadioGroupSimpleUsage
  */
 class RadioGroupComponent extends React.Component<RadioGroupProps> {
 

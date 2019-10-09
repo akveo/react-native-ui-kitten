@@ -104,4 +104,8 @@ export {
   ButtonGroupSimpleUsageShowcase,
 } from './documentationExamples/buttonGroup';
 
+export {
+  RadioGroupSimpleUsageShowcase,
+} from './documentationExamples/radioGroup';
+
 export { default as Home } from './home.component';
