@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Platform,
   LayoutChangeEvent,
+  Platform,
   StyleSheet,
+  View,
 } from 'react-native';
 import {
+  Button,
   Layout,
   LayoutProps,
-  Button,
   OverflowMenu,
   OverflowMenuItemType,
-} from '@kitten/ui';
+  IconElement,
+  Icon,
+} from 'react-native-ui-kitten';
 import {
   ThemeContext,
+  ThemeContextType,
+  ThemeKey,
   themes,
 } from '../../src/themes';
 
@@ -22,33 +27,42 @@ interface Props {
 
 export type SharingHeightContainerProps = LayoutProps & Props;
 
+const ColorPaletteIcon = (style): IconElement => (
+  <Icon {...style} name='color-palette' />
+);
+
 export const sharingHeightContainer = (Component: React.ComponentType,
                                        showcaseId: string): React.ReactElement<SharingHeightContainerProps> => {
 
-  const [menuVisible, onChangeMenuVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = React.useState(false);
+  const themeContext: ThemeContextType = React.useContext(ThemeContext);
 
-  const onHeightShare = (event: LayoutChangeEvent): void => {
-    const { height } = event.nativeEvent.layout;
-    const shared: { height: number; id: string; } = {
-      id: showcaseId,
-      height: height,
-    };
-    window.parent.postMessage(shared, '*');
+  const onThemesButtonPress = (): void => {
+    setMenuVisible(!menuVisible);
+  };
+
+  const onThemeSelect = (index: number): void => {
+    const { [index]: selectedTheme } = Object.keys(themes);
+
+    themeContext.toggleTheme(selectedTheme as ThemeKey);
+    setMenuVisible(false);
   };
 
   const onLayout = (event: LayoutChangeEvent): void => {
     if (Platform.OS === 'web') {
-      onHeightShare(event);
+      postLayoutChangeEvent(event);
     }
   };
 
-  const setMenuVisible = (): void => {
-    const visible: boolean = !menuVisible;
-
-    onChangeMenuVisible(visible);
+  const postLayoutChangeEvent = ({ nativeEvent }: LayoutChangeEvent): void => {
+    const layoutChangeMessage: { height: number; id: string; } = {
+      id: showcaseId,
+      height: nativeEvent.layout.height,
+    };
+    window.parent.postMessage(layoutChangeMessage, '*');
   };
 
-  const createThemeMenuItem = (theme: string): OverflowMenuItemType => {
+  const createThemeMenuItem = (theme: ThemeKey): OverflowMenuItemType => {
     return {
       title: theme,
     };
@@ -58,40 +72,28 @@ export const sharingHeightContainer = (Component: React.ComponentType,
     return Object.keys(themes).map(createThemeMenuItem);
   };
 
-  const onToggleTheme = (index: number, toggler: (theme: string) => void): void => {
-    const { [index]: theme } = Object.keys(themes);
-
-    toggler(theme);
-    onChangeMenuVisible(false);
-  };
-
-  const renderContent = ({ toggleTheme }): React.ReactElement<LayoutProps> => {
-    return (
-      <Layout
-        style={styles.container}
-        onLayout={onLayout}>
+  return (
+    <Layout
+      style={styles.container}
+      onLayout={onLayout}>
+      <View style={styles.optionsContainer}>
         <OverflowMenu
-          placement='bottom end'
           visible={menuVisible}
-          onSelect={(index: number) => onToggleTheme(index, toggleTheme)}
+          onSelect={onThemeSelect}
           data={createThemesMenuItems()}
-          onBackdropPress={setMenuVisible}>
+          onBackdropPress={onThemesButtonPress}>
           <Button
+            appearance='ghost'
+            status='basic'
             size='small'
-            style={styles.themeButton}
-            onPress={setMenuVisible}>
-            THEMES
+            icon={ColorPaletteIcon}
+            onPress={onThemesButtonPress}>
+            {themeContext.name}
           </Button>
         </OverflowMenu>
-        <Component/>
-      </Layout>
-    );
-  };
-
-  return (
-    <ThemeContext.Consumer>
-      {renderContent}
-    </ThemeContext.Consumer>
+      </View>
+      <Component/>
+    </Layout>
   );
 };
 
@@ -100,9 +102,8 @@ const styles = StyleSheet.create({
     padding: 16,
     minHeight: 170,
   },
-  themeButton: {
-    width: 100,
-    alignSelf: 'flex-end',
-    marginBottom: 20,
+  optionsContainer: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
 });
