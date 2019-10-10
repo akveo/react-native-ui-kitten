@@ -6,4 +6,5 @@ export {
   BottomNavigationTabWithExternalSourceIconShowcase,
 }from './bottomNavigationTabWithExternalSourceIcon.component';
 export { BottomNavigationTabWithIconShowcase } from './bottomNavigationTabWithIcon.component';
+export { BottomNavigationWithIconsShowcase } from './bottomNavigationWithIcons.component';
 export { BottomNavigationWithoutIndicatorShowcase } from './bottomNavigationWithoutIndicator.component';

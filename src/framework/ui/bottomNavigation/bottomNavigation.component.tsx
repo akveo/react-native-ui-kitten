@@ -96,6 +96,8 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * @example BottomNavigationWithoutIndicator
  *
+ * @overview-example BottomNavigationWithIcons
+ *
  * @example BottomNavigationInlineStyling
  */
 export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {

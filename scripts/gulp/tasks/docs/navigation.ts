@@ -9,7 +9,13 @@ const glob = require('glob');
 const SHOWCASE_KEY_WORD: string = 'Showcase';
 
 export function generateDocsNavigation() {
-  const project = new Project();
+  const project: Project = new Project();
+  generateShowcasesExportsDocumentationExamples(project);
+  generateShowcasesExportsScreens(project);
+  generateNavigationFile(project);
+}
+
+function generateNavigationFile(project: Project) {
   const navigationFile: SourceFile = project
     .addExistingSourceFile('src/playground/src/navigation/navigation.component.tsx');
   const statements = navigationFile.getStructure().statements;
@@ -41,6 +47,57 @@ export function generateDocsNavigation() {
     'src/playground/src/navigation/navigation.component.tsx',
     {
       statements: statements,
+    },
+    {
+      overwrite: true,
+    },
+  );
+  sourceFile.save();
+}
+
+function generateShowcasesExportsDocumentationExamples(project: Project) {
+  project.createWriter();
+  const showcasesDirs: string[] = fs
+    .readdirSync('src/playground/src/ui/screen/documentationExamples', { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+
+  const indexContent: string = showcasesDirs
+    .map((dirName: string) => {
+      return `export * from './${dirName}';\n`;
+    })
+    .join()
+    .replace(/,/g, '');
+  const indexFile = project.createSourceFile(
+    'src/playground/src/ui/screen/documentationExamples/index.ts',
+    indexContent,
+    { overwrite: true },
+  );
+  indexFile.save();
+}
+
+function generateShowcasesExportsScreens(project: Project) {
+  const indexFile: SourceFile = project
+    .addExistingSourceFile('src/playground/src/ui/screen/index.ts');
+  const showcasesNames: string[] = getShowcasesNames();
+
+  const indexStatements = indexFile.getStructure().statements;
+
+  const showcasesExportStatement = {
+    kind: 9,
+    moduleSpecifier: './documentationExamples',
+    namedExports: showcasesNames.map((name: string) => ({
+      kind: 10,
+      name: name,
+    })),
+  };
+
+  // @ts-ignore
+  indexStatements.push(showcasesExportStatement);
+  const sourceFile = project.createSourceFile(
+    'src/playground/src/ui/screen/index.ts',
+    {
+      statements: indexStatements,
     },
     {
       overwrite: true,

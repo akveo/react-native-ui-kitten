@@ -11,7 +11,7 @@ const DashboardIcon = (style) => (
 
 export const BottomNavigationTabWithExternalSourceIconShowcase = () => (
   <BottomNavigationTab
-    title='Dashboard'
+    title='DASHBOARD'
     icon={DashboardIcon}
   />
 );
