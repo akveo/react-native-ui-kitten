@@ -1,38 +1,36 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { Avatar } from 'react-native-ui-kitten';
+  Avatar,
+  Layout,
+} from 'react-native-ui-kitten';
 
-export const AvatarShapeShowcase = () => {
-
-  return (
-    <View style={styles.container}>
-      <Avatar
-        shape='round'
-        style={styles.item}
-        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-      />
-      <Avatar
-        shape='rounded'
-        style={styles.item}
-        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-      />
-      <Avatar
-        shape='square'
-        style={styles.item}
-        source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-      />
-    </View>
-  );
-};
+export const AvatarShapeShowcase = () => (
+  <Layout style={styles.container}>
+    <Avatar
+      style={styles.item}
+      shape='round'
+      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
+    />
+    <Avatar
+      style={styles.item}
+      shape='rounded'
+      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
+    />
+    <Avatar
+      style={styles.item}
+      shape='square'
+      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
+    />
+  </Layout>
+);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
   item: {
-    marginBottom: 16,
+    marginVertical: 8,
   },
 });
