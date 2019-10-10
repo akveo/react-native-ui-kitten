@@ -6,10 +6,10 @@ import {
 
 export const TextStatusesShowcase = () => (
   <Layout>
-    <Text status='primary'>PRIMARY</Text>
-    <Text status='success'>SUCCESS</Text>
-    <Text status='info'>INFO</Text>
-    <Text status='warning'>WARNING</Text>
-    <Text status='danger'>DANGER</Text>
+    <Text status='primary'>Primary</Text>
+    <Text status='success'>Success</Text>
+    <Text status='info'>Info</Text>
+    <Text status='warning'>Warning</Text>
+    <Text status='danger'>Danger</Text>
   </Layout>
 );

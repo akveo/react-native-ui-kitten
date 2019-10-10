@@ -1,102 +1,101 @@
 import React from 'react';
-import { Toggle } from 'react-native-ui-kitten';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  View,
-} from 'react-native';
+  Layout,
+  Toggle,
+} from 'react-native-ui-kitten';
 
 export class ToggleStatusShowcase extends React.Component {
 
   state = {
-    checked1: false,
-    checked2: false,
-    checked3: false,
-    checked4: false,
-    checked5: false,
-    checked6: false,
+    primaryChecked: false,
+    successChecked: false,
+    infoChecked: false,
+    warningChecked: false,
+    dangerChecked: false,
+    basicChecked: false,
   };
 
-  onChecked1Change = (checked1) => {
-    this.setState({ checked1 });
+  onPrimaryChange = (primaryChecked) => {
+    this.setState({ primaryChecked });
   };
 
-  onChecked2Change = (checked2) => {
-    this.setState({ checked2 });
+  onSuccessChange = (successChecked) => {
+    this.setState({ successChecked });
   };
 
-  onChecked3Change = (checked3) => {
-    this.setState({ checked3 });
+  onInfoChange = (infoChecked) => {
+    this.setState({ infoChecked });
   };
 
-  onChecked4Change = (checked4) => {
-    this.setState({ checked4 });
+  onWarningChange = (warningChecked) => {
+    this.setState({ warningChecked });
   };
 
-  onChecked5Change = (checked5) => {
-    this.setState({ checked5 });
+  onDangerChange = (dangerChecked) => {
+    this.setState({ dangerChecked });
   };
 
-  onChecked6Change = (checked6) => {
-    this.setState({ checked6 });
+  onBasicChange = (basicChecked) => {
+    this.setState({ basicChecked });
   };
 
   render() {
-    const {
-      checked1,
-      checked2,
-      checked3,
-      checked4,
-      checked5,
-      checked6,
-    } = this.state;
-
     return (
-      <View style={styles.item}>
+      <Layout style={styles.container}>
         <Toggle
-          checked={checked1}
+          style={styles.toggle}
+          checked={this.state.primaryChecked}
+          text='Primary'
           status='primary'
-          style={styles.item}
-          onChange={this.onChecked1Change}
+          onChange={this.onPrimaryChange}
         />
         <Toggle
-          checked={checked2}
+          style={styles.toggle}
+          checked={this.state.successChecked}
+          text='Success'
           status='success'
-          style={styles.item}
-          onChange={this.onChecked2Change}
+          onChange={this.onSuccessChange}
         />
         <Toggle
-          checked={checked3}
+          style={styles.toggle}
+          checked={this.state.infoChecked}
+          text='Info'
           status='info'
-          style={styles.item}
-          onChange={this.onChecked3Change}
+          onChange={this.onInfoChange}
         />
         <Toggle
-          checked={checked4}
-          status='danger'
-          style={styles.item}
-          onChange={this.onChecked4Change}
-        />
-        <Toggle
-          checked={checked5}
+          style={styles.toggle}
+          checked={this.state.warningChecked}
+          text='Warning'
           status='warning'
-          style={styles.item}
-          onChange={this.onChecked5Change}
+          onChange={this.onWarningChange}
         />
         <Toggle
-          checked={checked6}
-          style={styles.item}
-          onChange={this.onChecked6Change}
+          style={styles.toggle}
+          checked={this.state.dangerChecked}
+          text='Danger'
+          status='danger'
+          onChange={this.onDangerChange}
         />
-      </View>
+        <Toggle
+          style={styles.toggle}
+          checked={this.state.basicChecked}
+          text='Basic'
+          status='basic'
+          onChange={this.onBasicChange}
+        />
+      </Layout>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
-  item: {
-    marginBottom: 16,
+  toggle: {
+    marginVertical: 8,
   },
 });

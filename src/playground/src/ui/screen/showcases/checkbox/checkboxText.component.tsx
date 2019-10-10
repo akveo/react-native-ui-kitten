@@ -1,9 +1,9 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import { CheckBox } from 'react-native-ui-kitten';
+  Layout,
+  CheckBox,
+} from 'react-native-ui-kitten';
 
 export class CheckboxTextShowcase extends React.Component {
 
@@ -17,13 +17,13 @@ export class CheckboxTextShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <CheckBox
           checked={this.state.checked}
-          text='This is Checkbox Component'
+          text='Place your Text'
           onChange={this.onCheckedChange}
         />
-      </View>
+      </Layout>
     );
   }
 }

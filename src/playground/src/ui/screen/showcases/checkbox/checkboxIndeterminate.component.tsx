@@ -1,9 +1,9 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { CheckBox } from 'react-native-ui-kitten';
+  CheckBox,
+  Layout,
+} from 'react-native-ui-kitten';
 
 export class CheckboxIndeterminateShowcase extends React.Component {
 
@@ -78,9 +78,9 @@ export class CheckboxIndeterminateShowcase extends React.Component {
     } = this.state;
 
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <CheckBox
-          style={styles.bottomSpace}
+          style={styles.checkbox}
           text='Main'
           checked={mainCheckboxChecked}
           indeterminate={mainCheckboxIndeterminate}
@@ -88,13 +88,13 @@ export class CheckboxIndeterminateShowcase extends React.Component {
         />
         <CheckBox
           text='Checkbox 1'
-          style={[styles.bottomSpace, styles.leftSpace]}
+          style={[styles.checkbox, styles.leftSpace]}
           checked={checkbox1Checked}
           onChange={this.onCheckbox1Change}
         />
         <CheckBox
           text='Checkbox 2'
-          style={[styles.bottomSpace, styles.leftSpace]}
+          style={[styles.checkbox, styles.leftSpace]}
           checked={checkbox2Checked}
           onChange={this.onCheckbox2Change}
         />
@@ -104,19 +104,20 @@ export class CheckboxIndeterminateShowcase extends React.Component {
           checked={checkbox3Checked}
           onChange={this.onCheckbox3Change}
         />
-      </View>
+      </Layout>
     );
   }
 }
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
-  bottomSpace: {
-    marginBottom: 12,
+  checkbox: {
+    marginVertical: 8,
   },
   leftSpace: {
-    marginLeft: 12,
+    marginHorizontal: 8,
   },
 });

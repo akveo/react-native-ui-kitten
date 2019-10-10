@@ -1,9 +1,9 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import { CheckBox } from 'react-native-ui-kitten';
+  CheckBox,
+  Layout,
+} from 'react-native-ui-kitten';
 
 export class CheckboxInlineStylingShowcase extends React.Component {
 
@@ -17,14 +17,14 @@ export class CheckboxInlineStylingShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <CheckBox
           checked={this.state.checked}
-          text='This is Checkbox Component'
+          text='Place your Text'
           textStyle={styles.text}
           onChange={this.onCheckedChange}
         />
-      </View>
+      </Layout>
     );
   }
 }
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   text: {
-    color: 'green',
-    fontSize: 20,
+    color: '#3366FF',
+    fontSize: 18,
   },
 });

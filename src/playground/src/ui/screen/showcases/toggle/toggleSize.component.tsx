@@ -1,90 +1,89 @@
 import React from 'react';
-import { Toggle } from 'react-native-ui-kitten';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  View,
-} from 'react-native';
+  Layout,
+  Toggle,
+} from 'react-native-ui-kitten';
 
 export class ToggleSizeShowcase extends React.Component {
 
   state = {
-    checked1: false,
-    checked2: false,
-    checked3: false,
-    checked4: false,
-    checked5: false,
+    tinyChecked: false,
+    smallChecked: false,
+    mediumChecked: false,
+    largeChecked: false,
+    giantChecked: false,
   };
 
-  onChecked1Change = (checked1) => {
-    this.setState({ checked1 });
+  onTinyChange = (tinyChecked) => {
+    this.setState({ tinyChecked });
   };
 
-  onChecked2Change = (checked2) => {
-    this.setState({ checked2 });
+  onSmallChange = (smallChecked) => {
+    this.setState({ smallChecked });
   };
 
-  onChecked3Change = (checked3) => {
-    this.setState({ checked3 });
+  onMediumChange = (mediumChecked) => {
+    this.setState({ mediumChecked });
   };
 
-  onChecked4Change = (checked4) => {
-    this.setState({ checked4 });
+  onLargeChange = (largeChecked) => {
+    this.setState({ largeChecked });
   };
 
-  onChecked5Change = (checked5) => {
-    this.setState({ checked5 });
+  onGiantChange = (giantChecked) => {
+    this.setState({ giantChecked });
   };
 
   render() {
-    const {
-      checked1,
-      checked2,
-      checked3,
-      checked4,
-      checked5,
-    } = this.state;
-
     return (
-      <View style={styles.item}>
+      <Layout style={styles.container}>
         <Toggle
-          checked={checked1}
+          style={styles.toggle}
+          checked={this.state.tinyChecked}
+          text='Tiny'
           size='tiny'
-          style={styles.item}
-          onChange={this.onChecked1Change}
+          onChange={this.onTinyChange}
         />
         <Toggle
-          checked={checked2}
+          style={styles.toggle}
+          checked={this.state.smallChecked}
+          text='Small'
           size='small'
-          style={styles.item}
-          onChange={this.onChecked2Change}
+          onChange={this.onSmallChange}
         />
         <Toggle
-          checked={checked3}
-          style={styles.item}
-          onChange={this.onChecked3Change}
+          style={styles.toggle}
+          checked={this.state.mediumChecked}
+          text='Medium'
+          size='medium'
+          onChange={this.onMediumChange}
         />
         <Toggle
-          checked={checked4}
+          style={styles.toggle}
+          checked={this.state.largeChecked}
+          text='Large'
           size='large'
-          style={styles.item}
-          onChange={this.onChecked4Change}
+          onChange={this.onLargeChange}
         />
         <Toggle
-          checked={checked5}
+          style={styles.toggle}
+          checked={this.state.giantChecked}
+          text='Giant'
           size='giant'
-          style={styles.item}
-          onChange={this.onChecked5Change}
+          onChange={this.onGiantChange}
         />
-      </View>
+      </Layout>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
-  item: {
-    marginBottom: 16,
+  toggle: {
+    marginVertical: 8,
   },
 });

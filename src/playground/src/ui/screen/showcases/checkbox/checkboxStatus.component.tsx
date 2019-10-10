@@ -3,92 +3,92 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { CheckBox } from 'react-native-ui-kitten';
+import {
+  CheckBox,
+  Layout,
+} from 'react-native-ui-kitten';
 
 export class CheckboxStatusShowcase extends React.Component {
 
   state = {
-    checked1: false,
-    checked2: false,
-    checked3: false,
-    checked4: false,
-    checked5: false,
-    checked6: false,
+    primaryChecked: false,
+    successChecked: false,
+    infoChecked: false,
+    warningChecked: false,
+    dangerChecked: false,
+    basicChecked: false,
   };
 
-  onChecked1Change = (checked1) => {
-    this.setState({ checked1 });
+  onPrimaryChange = (primaryChecked) => {
+    this.setState({ primaryChecked });
   };
 
-  onChecked2Change = (checked2) => {
-    this.setState({ checked2 });
+  onSuccessChange = (successChecked) => {
+    this.setState({ successChecked });
   };
 
-  onChecked3Change = (checked3) => {
-    this.setState({ checked3 });
+  onInfoChange = (infoChecked) => {
+    this.setState({ infoChecked });
   };
 
-  onChecked4Change = (checked4) => {
-    this.setState({ checked4 });
+  onWarningChange = (warningChecked) => {
+    this.setState({ warningChecked });
   };
 
-  onChecked5Change = (checked5) => {
-    this.setState({ checked5 });
+  onDangerChange = (dangerChecked) => {
+    this.setState({ dangerChecked });
   };
 
-  onChecked6Change = (checked6) => {
-    this.setState({ checked6 });
+  onBasicChange = (basicChecked) => {
+    this.setState({ basicChecked });
   };
 
   render() {
-    const {
-      checked1,
-      checked2,
-      checked3,
-      checked4,
-      checked5,
-      checked6,
-    } = this.state;
-
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <CheckBox
           style={styles.checkbox}
           status='primary'
-          checked={checked1}
-          onChange={this.onChecked1Change}
+          text='Primary'
+          checked={this.state.primaryChecked}
+          onChange={this.onPrimaryChange}
         />
         <CheckBox
           style={styles.checkbox}
           status='success'
-          checked={checked2}
-          onChange={this.onChecked2Change}
+          text='Success'
+          checked={this.state.successChecked}
+          onChange={this.onSuccessChange}
         />
         <CheckBox
           style={styles.checkbox}
           status='info'
-          checked={checked3}
-          onChange={this.onChecked3Change}
+          text='Info'
+          checked={this.state.infoChecked}
+          onChange={this.onInfoChange}
         />
         <CheckBox
           style={styles.checkbox}
           status='warning'
-          checked={checked4}
-          onChange={this.onChecked4Change}
+          text='Warning'
+          checked={this.state.warningChecked}
+          onChange={this.onWarningChange}
         />
         <CheckBox
           style={styles.checkbox}
           status='danger'
-          checked={checked5}
-          onChange={this.onChecked5Change}
+          text='Danger'
+          checked={this.state.dangerChecked}
+          onChange={this.onDangerChange}
         />
         <CheckBox
           style={styles.checkbox}
           status='basic'
-          checked={checked6}
-          onChange={this.onChecked6Change}
+          text='Basic'
+          checked={this.state.basicChecked}
+          onChange={this.onBasicChange}
         />
-      </View>
+      </Layout>
     );
   }
 }

@@ -6,8 +6,8 @@ import {
 
 export const TextAppearancesShowcase = () => (
   <Layout>
-    <Text appearance='default'>Default Text</Text>
-    <Text appearance='alternative'>Alternative Text</Text>
-    <Text appearance='hint'>Hint Text</Text>
+    <Text appearance='default'>Default</Text>
+    <Text appearance='alternative'>Alternative</Text>
+    <Text appearance='hint'>Hint</Text>
   </Layout>
 );

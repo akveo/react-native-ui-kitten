@@ -1,9 +1,9 @@
 import React from 'react';
-import { Toggle } from 'react-native-ui-kitten';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  View,
-} from 'react-native';
+  Layout,
+  Toggle,
+} from 'react-native-ui-kitten';
 
 export class ToggleWithTextShowcase extends React.Component {
 
@@ -11,20 +11,19 @@ export class ToggleWithTextShowcase extends React.Component {
     checked: false,
   };
 
-  onToggleValueChange = (checked) => {
+  onChange = (checked) => {
     this.setState({ checked });
   };
 
   render() {
     return (
-      <View style={styles.item}>
+      <Layout style={styles.container}>
         <Toggle
           checked={this.state.checked}
-          style={styles.item}
-          text='This is a Toggle'
-          onChange={this.onToggleValueChange}
+          text='Place your Text'
+          onChange={this.onChange}
         />
-      </View>
+      </Layout>
     );
   }
 }
@@ -32,8 +31,5 @@ export class ToggleWithTextShowcase extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-  },
-  item: {
-    marginBottom: 16,
   },
 });
