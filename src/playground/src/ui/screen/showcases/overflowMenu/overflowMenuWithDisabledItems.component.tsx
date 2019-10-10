@@ -1,6 +1,8 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   Button,
+  Layout,
   OverflowMenu,
 } from 'react-native-ui-kitten';
 
@@ -29,16 +31,24 @@ export class OverflowMenuWithDisabledItemsShowcase extends React.Component {
 
   render() {
     return (
-      <OverflowMenu
-        data={this.data}
-        visible={this.state.menuVisible}
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onItemSelect}
-        onBackdropPress={this.onToggleButtonPress}>
-        <Button onPress={this.onToggleButtonPress}>
-          TOGGLE MENU
-        </Button>
-      </OverflowMenu>
+      <Layout style={styles.container}>
+        <OverflowMenu
+          data={this.data}
+          visible={this.state.menuVisible}
+          selectedIndex={this.state.selectedIndex}
+          onSelect={this.onItemSelect}
+          onBackdropPress={this.onToggleButtonPress}>
+          <Button onPress={this.onToggleButtonPress}>
+            TOGGLE MENU
+          </Button>
+        </OverflowMenu>
+      </Layout>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    minHeight: 256,
+  },
+});
