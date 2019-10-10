@@ -33,8 +33,8 @@ export const ListCompositeItemShowcase = () => {
 
   const renderItem = ({ item, index }) => (
     <ListItem
-      title={`${item.title} ${index}`}
-      description={`${item.description} ${index}`}
+      title={`${item.title} ${index + 1}`}
+      description={`${item.description} ${index + 1}`}
       icon={renderItemIcon}
       accessory={renderItemAccessory}
     />
