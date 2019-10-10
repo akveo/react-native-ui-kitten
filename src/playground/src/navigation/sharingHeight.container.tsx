@@ -13,6 +13,7 @@ import {
   OverflowMenuItemType,
   IconElement,
   Icon,
+  Text,
 } from 'react-native-ui-kitten';
 import {
   ThemeContext,
@@ -77,6 +78,11 @@ export const sharingHeightContainer = (Component: React.ComponentType,
       style={styles.container}
       onLayout={onLayout}>
       <View style={styles.optionsContainer}>
+        <Text
+          appearance='hint'
+          category='c1'>
+          Powered by React Native Web
+        </Text>
         <OverflowMenu
           visible={menuVisible}
           onSelect={onThemeSelect}
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
     minHeight: 170,
   },
   optionsContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
