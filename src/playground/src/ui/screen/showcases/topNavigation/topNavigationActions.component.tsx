@@ -50,7 +50,7 @@ export const TopNavigationActionsShowcase = () => {
 
   return (
     <TopNavigation
-      title='Awesome App'
+      title='Application Title'
       leftControl={renderLeftControl()}
       rightControls={renderRightControls()}
     />

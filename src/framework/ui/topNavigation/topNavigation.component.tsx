@@ -69,11 +69,11 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * @overview-example TopNavigationSimpleUsage
  *
- * @overview-example TopNavigationActionsShowcase
+ * @overview-example TopNavigationActions
  *
- * @example TopNavigationWithMenu
+ * @overview-example TopNavigationAlignments
  *
- * @example TopNavigationAlignments
+ * @overview-example TopNavigationWithMenu
  *
  * @example TopNavigationInlineStyling
  */

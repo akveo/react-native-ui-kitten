@@ -1,12 +1,30 @@
+/**
+ * IMPORTANT: To use Icon component make sure to follow this guide:
+ * https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ */
+
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { TopNavigation } from 'react-native-ui-kitten';
+import {
+  Icon,
+  TopNavigation,
+  TopNavigationAction,
+} from 'react-native-ui-kitten';
 
-export const TopNavigationInlineStylingShowcase = (props) => (
+const BackIcon = (style) => (
+  <Icon {...style} name='arrow-back' />
+);
+
+const BackAction = () => (
+  <TopNavigationAction icon={BackIcon}/>
+);
+
+export const TopNavigationInlineStylingShowcase = () => (
   <TopNavigation
     style={styles.topNavigation}
     title='Title'
     subtitle='Subtitle'
+    leftControl={BackAction()}
     titleStyle={styles.title}
     subtitleStyle={styles.subtitle}
   />

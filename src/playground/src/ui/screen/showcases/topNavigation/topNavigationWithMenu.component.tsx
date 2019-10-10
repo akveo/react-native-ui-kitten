@@ -1,6 +1,8 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   Icon,
+  Layout,
   OverflowMenu,
   TopNavigation,
   TopNavigationAction,
@@ -61,11 +63,20 @@ export class TopNavigationWithMenuShowcase extends React.Component {
 
   render() {
     return (
-      <TopNavigation
-        leftControl={this.renderBackAction()}
-        rightControls={this.renderMenuAction()}
-      />
+      <Layout style={styles.container}>
+        <TopNavigation
+          title='Application Title'
+          leftControl={this.renderBackAction()}
+          rightControls={this.renderMenuAction()}
+        />
+      </Layout>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    minHeight: 192,
+  },
+});
 
