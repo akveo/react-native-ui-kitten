@@ -44,7 +44,7 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {(date: D) => string} todayTitle - Defines the title for today's date.
  *
- * @property {(date: D) => ReactElement<any>} filter - Predicate that decides which cells will be disabled.
+ * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
  * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
  *
@@ -56,11 +56,15 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * @overview-example CalendarSimpleUsage
  *
- * @overview-example CalendarCustomDay
+ * @overview-example CalendarBoundingMonth
+ *
+ * @overview-example CalendarFilter
  *
  * @overview-example CalendarCustomLocale
  *
- * @overview-example CalendarMoment
+ * @example CalendarMoment
+ *
+ * @example CalendarCustomDay
  */
 export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps<D>> {
 

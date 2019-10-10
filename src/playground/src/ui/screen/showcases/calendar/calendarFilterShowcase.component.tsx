@@ -5,7 +5,7 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export class CalendarSimpleUsageShowcase extends React.Component {
+export class CalendarFilterShowcase extends React.Component {
 
   state = {
     date: new Date(),
@@ -15,12 +15,17 @@ export class CalendarSimpleUsageShowcase extends React.Component {
     this.setState({ date });
   };
 
+  filter = (date) => {
+    return date.getDay() !== 0 && date.getDay() !== 6;
+  };
+
   render() {
     return (
       <Layout style={styles.container}>
         <Calendar
           date={this.state.date}
           onSelect={this.onSelect}
+          filter={this.filter}
         />
       </Layout>
     );

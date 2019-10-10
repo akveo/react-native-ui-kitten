@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import {
   Calendar,
+  Layout,
   Text,
 } from 'react-native-ui-kitten';
 
@@ -20,7 +21,7 @@ export class CalendarCustomDayShowcase extends React.Component {
 
   renderDay = ({ date }, style) => (
     <View
-      style={[styles.container, style.container]}>
+      style={[styles.dayContainer, style.container]}>
       <Text style={style.text}>{`${date.getDate()}`}</Text>
       <Text style={[style.text, styles.value]}>
         {`${100 * date.getDate() + Math.pow(date.getDate(), 2)}$`}
@@ -30,17 +31,24 @@ export class CalendarCustomDayShowcase extends React.Component {
 
   render() {
     return (
-      <Calendar
-        date={this.state.date}
-        onSelect={this.onSelect}
-        renderDay={this.renderDay}
-      />
+      <Layout style={styles.container}>
+        <Calendar
+          date={this.state.date}
+          onSelect={this.onSelect}
+          renderDay={this.renderDay}
+        />
+      </Layout>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+  dayContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

@@ -5,7 +5,7 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export class CalendarSimpleUsageShowcase extends React.Component {
+export class CalendarBoundingMonthShowcase extends React.Component {
 
   state = {
     date: new Date(),
@@ -20,6 +20,7 @@ export class CalendarSimpleUsageShowcase extends React.Component {
       <Layout style={styles.container}>
         <Calendar
           date={this.state.date}
+          boundingMonth={false}
           onSelect={this.onSelect}
         />
       </Layout>
