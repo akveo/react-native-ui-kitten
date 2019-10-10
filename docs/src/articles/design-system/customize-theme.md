@@ -53,6 +53,7 @@ export const theme = {
   "text-disabled-color": "$color-basic-600",
 };
 ```
+
 <hr>
 
 ## Apply Custom Theme
@@ -80,5 +81,7 @@ export default App;
 
 - [Using Theme](design-system/use-theme-variables)
 - [Create Custom Theme](design-system/create-custom-theme)
+- [Light Theme](design-system/light-theme)
+- [Dark Theme](design-system/dark-theme)
 
 

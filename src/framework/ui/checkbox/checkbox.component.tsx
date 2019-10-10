@@ -75,6 +75,8 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @overview-example CheckboxText
  *
+ * @example CheckboxIndeterminate
+ *
  * @example CheckboxInlineStyling
  */
 class CheckBoxComponent extends React.Component<CheckBoxProps> {

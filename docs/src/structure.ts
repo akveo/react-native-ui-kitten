@@ -202,6 +202,30 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Light Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Light',
+            source: 'light',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Dark Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Dark',
+            source: 'dark',
+          },
+        ],
+      },
     ],
   },
   {

@@ -1,13 +1,18 @@
+import * as fs from 'fs';
+import * as path from 'path';
 import {
   src,
   task,
   dest,
 } from 'gulp';
+import {
+  createDocThemes,
+  DocThemes,
+} from './create-doc-themes';
 
 const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;
 const glob = require('glob');
-import * as fs from 'fs';
 import { generateDocsNavigation } from './navigation';
 
 interface ExampleCode {
@@ -19,8 +24,8 @@ interface ExampleCode {
 const SHOWCASE_KEY_WORD: string = 'Showcase';
 
 task('generate-doc-json', generateDocJson);
-
 task('process-type-doc', ['generate-doc-json'], processTypeDoc);
+task('docs', ['generate-doc-json', 'process-type-doc']);
 
 task('get-examples-code', getExamplesCode);
 
@@ -62,21 +67,29 @@ function generateDocJson() {
     }));
 }
 
-function processTypeDoc() {
-  return exec('prsr -g typedoc -f react -i docs/docs.json -o docs/src/input.json');
+function processTypeDoc(): void {
+  const outputFilePath: string = path.resolve(process.cwd(), 'docs/src/input.json');
+  exec(`prsr -g typedoc -f react -i ./docs/docs.json -o ${outputFilePath}`);
+
+  const typedocOutput = require(outputFilePath);
+  const themes: DocThemes = createDocThemes('light', 'dark');
+
+  const output: string = JSON.stringify({ ...typedocOutput, themes }, null, 2);
+
+  return fs.writeFileSync(outputFilePath, output);
 }
 
 function getExamplesCode() {
   glob('src/playground/src/ui/screen/documentationExamples/**/*.tsx', (error, filePaths) => {
     if (!error) {
-      const examples: ExampleCode[] = filePaths.map((path: string) => {
-        const code: string = fs.readFileSync(path, 'utf8');
+      const examples: ExampleCode[] = filePaths.map((pathItem: string) => {
+        const code: string = fs.readFileSync(pathItem, 'utf8');
         const name: string = code
           .split(' ')
           .filter((item: string) => item.includes(SHOWCASE_KEY_WORD))[0]
           .replace(SHOWCASE_KEY_WORD, '');
 
-        return { code, path, name };
+        return { code, path: pathItem, name };
       });
 
       fs.writeFileSync('./docs/src/examples.json', JSON.stringify(examples, null, 2));

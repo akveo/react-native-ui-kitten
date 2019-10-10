@@ -138,7 +138,7 @@ export class NgdStructureService {
           const helper: any = this.examplesHelperArray.find(item => {
             return example.description === item.name;
           });
-          return helper && this.prepareExample(helper, example);
+          return helper ? this.prepareExample(helper, example) : example;
         })
         .filter(Boolean);
     } else {
