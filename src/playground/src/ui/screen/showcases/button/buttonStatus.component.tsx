@@ -18,10 +18,11 @@ export const ButtonStatusShowcase = () => (
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 4,
   },
   button: {
-    marginBottom: 8,
+    marginHorizontal: 4,
   },
 });

@@ -7,17 +7,18 @@ import {
 
 export const ButtonSimpleUsageShowcase = () => (
   <Layout style={styles.container}>
-    <Button style={styles.button}>BUTTON</Button>
-    <Button style={styles.button} disabled={true}>DISABLED BUTTON</Button>
+    <Button style={styles.button}>ACTIVE</Button>
+    <Button style={styles.button} disabled={true}>DISABLED</Button>
   </Layout>
 );
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 16,
-    paddingHorizontal: 8,
+    flexDirection: 'row',
+    paddingVertical: 8,
+    paddingHorizontal: 4,
   },
   button: {
-    marginVertical: 8,
+    marginHorizontal: 4,
   },
 });

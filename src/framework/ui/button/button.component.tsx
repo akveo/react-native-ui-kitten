@@ -79,6 +79,10 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @overview-example ButtonSize
  *
+ * @overview-example ButtonOutline
+ *
+ * @overview-example ButtonGhost
+ *
  * @overview-example ButtonWithIcon
  */
 export class ButtonComponent extends React.Component<ButtonProps> {
