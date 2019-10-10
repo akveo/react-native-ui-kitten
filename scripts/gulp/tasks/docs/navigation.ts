@@ -58,7 +58,7 @@ function generateNavigationFile(project: Project) {
 function generateShowcasesExportsDocumentationExamples(project: Project) {
   project.createWriter();
   const showcasesDirs: string[] = fs
-    .readdirSync('src/playground/src/ui/screen/documentationExamples', { withFileTypes: true })
+    .readdirSync('src/playground/src/ui/screen/showcases', { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
 
@@ -69,7 +69,7 @@ function generateShowcasesExportsDocumentationExamples(project: Project) {
     .join()
     .replace(/,/g, '');
   const indexFile = project.createSourceFile(
-    'src/playground/src/ui/screen/documentationExamples/index.ts',
+    'src/playground/src/ui/screen/showcases/index.ts',
     indexContent,
     { overwrite: true },
   );
@@ -85,7 +85,7 @@ function generateShowcasesExportsScreens(project: Project) {
 
   const showcasesExportStatement = {
     kind: 9,
-    moduleSpecifier: './documentationExamples',
+    moduleSpecifier: './showcases',
     namedExports: showcasesNames.map((name: string) => ({
       kind: 10,
       name: name,
@@ -107,7 +107,7 @@ function generateShowcasesExportsScreens(project: Project) {
 }
 
 function getShowcasesNames() {
-  return glob.sync('src/playground/src/ui/screen/documentationExamples/**/*.tsx')
+  return glob.sync('src/playground/src/ui/screen/showcases/**/*.tsx')
     .map((path: string) => {
       const code: string = fs.readFileSync(path, 'utf8');
       return code

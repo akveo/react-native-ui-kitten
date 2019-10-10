@@ -38,6 +38,7 @@ import {
   RangeCalendarContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
+import { sharingHeightContainer } from './sharingHeight.container';
 
 export interface RouteType {
   name: string;

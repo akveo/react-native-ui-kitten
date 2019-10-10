@@ -49,6 +49,48 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * @overview-example DrawerFooter
  *
+ * @example Using with React Navigation
+ *
+ * ```
+ * import React from 'react';
+ * import { SafeAreaView } from 'react-navigation';
+ * import { createDrawerNavigator } from 'react-navigation-drawer';
+ * import { Dashboard, Messages, Settings } from './path-to/screen-components'; // <-- Import screen components
+ *
+ * class DrawerNavigation extends React.Component {
+ *
+ *   constructor(props) {
+ *     super(props);
+ *     this.drawerData = props.items.map(this.createDrawerItem);
+ *   }
+ *
+ *   onRouteSelect = (index) => {
+ *     const { [index]: route } = this.drawerData;
+ *     this.props.navigation.navigate(route.title);
+ *   };
+ *
+ *   createDrawerItem = ({ routeName }) => ({
+ *     title: routeName,
+ *   });
+ *
+ *   render() {
+ *     return (
+ *       <SafeAreaView>
+ *         <Drawer data={this.drawerData} onSelect={this.onRouteSelect}/>
+ *       </SafeAreaView>
+ *     );
+ *   }
+ * }
+ *
+ * export const DrawerNavigator = createDrawerNavigator({
+ *   Dashboard: Dashboard,
+ *   Messages: Messages,
+ *   Settings: Settings,
+ * }, {
+ *   contentComponent: DrawerNavigation,
+ * });
+ * ```
+ *
  * @example DrawerCustomHeader
  *
  * @example DrawerNotificationBadgeItem
