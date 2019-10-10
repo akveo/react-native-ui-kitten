@@ -7,25 +7,20 @@ import {
   IconPack,
   IconRegistry,
 } from 'react-native-ui-kitten';
-import {
-  ApplicationLoader,
-  ApplicationLoaderElement,
-} from './applicationLoader.component';
-import { default as appMapping } from './mapping.json';
+import { Router } from './navigation';
 import {
   AntDesignIconsPack,
   FeatherIconsPack,
   FontAwesomeIconsPack,
   MaterialCommunityIconsPack,
   MaterialIconsPack,
-} from '../icons';
-import { Router } from '../navigation';
+} from './icons';
 import {
   ThemeContext,
   ThemeContextType,
   ThemeKey,
   themes,
-} from '../themes';
+} from './themes';
 
 interface State {
   theme: ThemeKey;
@@ -40,11 +35,7 @@ const icons: IconPack<any>[] = [
   MaterialCommunityIconsPack,
 ];
 
-const fonts: { [key: string]: number } = {
-  'OpenSans-Regular': require('../assets/OpenSans-Regular.ttf'),
-};
-
-export default class App extends React.Component {
+export default class App extends React.Component<{}, State> {
 
   public state: State = {
     theme: 'Eva Light',
@@ -56,7 +47,6 @@ export default class App extends React.Component {
     return {
       mapping: evaMapping,
       theme: currentTheme,
-      customMapping: appMapping,
     };
   }
 
@@ -67,20 +57,20 @@ export default class App extends React.Component {
     };
   }
 
-  private toggleTheme = (theme: string): void => {
+  private toggleTheme = (theme: ThemeKey): void => {
     this.setState({ theme });
   };
 
-  public render(): ApplicationLoaderElement {
+  public render(): React.ReactFragment {
     return (
-      <ApplicationLoader assets={{ fonts }}>
+      <React.Fragment>
         <IconRegistry icons={icons}/>
         <ApplicationProvider {...this.appConfig}>
           <ThemeContext.Provider value={this.themeContext}>
             <Router/>
           </ThemeContext.Provider>
         </ApplicationProvider>
-      </ApplicationLoader>
+      </React.Fragment>
     );
   }
 }
