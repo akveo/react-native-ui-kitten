@@ -1,27 +1,26 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import { Button } from 'react-native-ui-kitten';
+  Button,
+  Layout,
+} from 'react-native-ui-kitten';
 
-export const ButtonSizeShowcase = () => {
-  return (
-    <View style={styles.container}>
-      <Button style={styles.button} size='tiny'>BUTTON</Button>
-      <Button style={styles.button} size='small'>BUTTON</Button>
-      <Button style={styles.button} size='medium'>BUTTON</Button>
-      <Button style={styles.button} size='large'>BUTTON</Button>
-      <Button style={styles.button} size='giant'>BUTTON</Button>
-    </View>
-  );
-};
+export const ButtonSizeShowcase = () => (
+  <Layout style={styles.container}>
+    <Button style={styles.button} size='tiny'>TINY</Button>
+    <Button style={styles.button} size='small'>SMALL</Button>
+    <Button style={styles.button} size='medium'>MEDIUM</Button>
+    <Button style={styles.button} size='large'>LARGE</Button>
+    <Button style={styles.button} size='giant'>GIANT</Button>
+  </Layout>
+);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
   button: {
-    marginBottom: 10,
+    marginVertical: 8,
   },
 });

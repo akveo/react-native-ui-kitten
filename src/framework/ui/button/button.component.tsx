@@ -73,13 +73,15 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @overview-example ButtonSimpleUsage
  *
+ * @overview-example ButtonAppearances
+ *
  * @overview-example ButtonStatus
  *
- * @overview-example ButtonAppearance
+ * @overview-example ButtonSize
  *
- * @example ButtonSize
+ * @overview-example ButtonWithIcon
  *
- * @example ButtonIcon
+ * @overview-example ButtonPlayground
  */
 export class ButtonComponent extends React.Component<ButtonProps> {
 

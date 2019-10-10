@@ -1,24 +1,23 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import { Button } from 'react-native-ui-kitten';
+  Button,
+  Layout,
+} from 'react-native-ui-kitten';
 
-export const ButtonSimpleUsageShowcase = () => {
-  return (
-    <View style={styles.container}>
-      <Button style={styles.button}>BUTTON</Button>
-      <Button style={styles.button} disabled>BUTTON</Button>
-    </View>
-  );
-};
+export const ButtonSimpleUsageShowcase = () => (
+  <Layout style={styles.container}>
+    <Button style={styles.button}>BUTTON</Button>
+    <Button style={styles.button} disabled={true}>DISABLED BUTTON</Button>
+  </Layout>
+);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 8,
   },
   button: {
-    marginBottom: 10,
+    marginVertical: 8,
   },
 });

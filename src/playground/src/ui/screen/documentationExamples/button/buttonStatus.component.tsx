@@ -1,28 +1,27 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { Button } from 'react-native-ui-kitten';
+  Button,
+  Layout,
+} from 'react-native-ui-kitten';
 
-export const ButtonStatusShowcase = () => {
-  return (
-    <View style={styles.container}>
-      <Button style={styles.button} status='primary'>BUTTON</Button>
-      <Button style={styles.button} status='success'>BUTTON</Button>
-      <Button style={styles.button} status='info'>BUTTON</Button>
-      <Button style={styles.button} status='warning'>BUTTON</Button>
-      <Button style={styles.button} status='danger'>BUTTON</Button>
-      <Button style={styles.button} status='basic'>BUTTON</Button>
-    </View>
-  );
-};
+export const ButtonStatusShowcase = () => (
+  <Layout style={styles.container}>
+    <Button style={styles.button} status='primary'>PRIMARY</Button>
+    <Button style={styles.button} status='success'>SUCCESS</Button>
+    <Button style={styles.button} status='info'>INFO</Button>
+    <Button style={styles.button} status='warning'>WARNING</Button>
+    <Button style={styles.button} status='danger'>DANGER</Button>
+    <Button style={styles.button} status='basic'>BASIC</Button>
+  </Layout>
+);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
   button: {
-    marginBottom: 10,
+    marginBottom: 8,
   },
 });
