@@ -16,10 +16,12 @@ export const ButtonAppearancesShowcase = () => (
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingVertical: 8,
+    flexWrap: 'wrap',
+    paddingVertical: 4,
     paddingHorizontal: 4,
   },
   button: {
+    marginVertical: 4,
     marginHorizontal: 4,
   },
 });

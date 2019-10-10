@@ -17,12 +17,14 @@ export const ButtonSizeShowcase = () => (
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 8,
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    paddingVertical: 4,
     paddingHorizontal: 4,
   },
   button: {
+    marginVertical: 4,
     marginHorizontal: 4,
   },
 });

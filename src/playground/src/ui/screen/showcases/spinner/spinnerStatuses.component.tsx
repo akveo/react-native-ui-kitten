@@ -18,9 +18,10 @@ export const SpinnerStatusesShowcase = () => (
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    minHeight: 256,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    flexWrap: 'wrap',
+    paddingVertical: 4,
+    paddingHorizontal: 4,
   },
 });

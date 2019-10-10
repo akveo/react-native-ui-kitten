@@ -80,12 +80,13 @@ export class ToggleSizeShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 8,
+    flexWrap: 'wrap',
+    paddingVertical: 4,
     paddingHorizontal: 4,
   },
   toggle: {
+    marginVertical: 4,
     marginHorizontal: 4,
   },
 });

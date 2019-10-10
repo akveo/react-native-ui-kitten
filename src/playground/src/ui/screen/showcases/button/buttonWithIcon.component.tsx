@@ -17,43 +17,22 @@ const StarIcon = (style) => (
 
 export const ButtonWithIconShowcase = () => (
   <Layout style={styles.container}>
-    <Button
-      style={styles.button}
-      status='primary'
-      icon={StarIcon}>
-      PRIMARY
-    </Button>
-    <Button
-      style={styles.buttonReverse}
-      status='success'
-      icon={StarIcon}>
-      SUCCESS
-    </Button>
-    <Button
-      style={styles.button}
-      status='danger'
-      icon={StarIcon}
-    />
-    <Button
-      style={styles.button}
-      appearance='ghost'
-      status='danger'
-      icon={StarIcon}
-    />
+    <Button style={styles.button} status='primary' icon={StarIcon}>PRIMARY</Button>
+    <Button style={styles.button} status='success' icon={StarIcon}>SUCCESS</Button>
+    <Button style={styles.button} status='danger' icon={StarIcon}/>
+    <Button style={styles.button} appearance='ghost' status='danger' icon={StarIcon}/>
   </Layout>
 );
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingVertical: 8,
+    flexWrap: 'wrap',
+    paddingVertical: 4,
     paddingHorizontal: 4,
   },
   button: {
-    marginHorizontal: 4,
-  },
-  buttonReverse: {
-    flexDirection: 'row-reverse',
+    marginVertical: 4,
     marginHorizontal: 4,
   },
 });
