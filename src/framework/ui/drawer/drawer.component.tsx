@@ -49,7 +49,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * @overview-example DrawerFooter
  *
- * @example Using with React Navigation
+ * @overview-example Using with React Navigation
  *
  * ```
  * import React from 'react';

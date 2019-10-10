@@ -1,11 +1,10 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import { Drawer } from 'react-native-ui-kitten';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import {
+  Drawer,
+  Layout,
+} from 'react-native-ui-kitten';
 
 export class DrawerSimpleUsageShowcase extends React.Component {
 
@@ -19,22 +18,21 @@ export class DrawerSimpleUsageShowcase extends React.Component {
   ];
 
   onRouteSelect = (index) => {
-    const { [index]: route } = this.drawerData;
-    // here you can handle route selecting after component will be interrated with the
-    // navigation library
+    // const { [index]: route } = this.drawerData;
+    // navigate with React Navigation
     // this.props.navigation.navigate(route.title);
   };
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <SafeAreaView>
           <Drawer
             data={this.drawerData}
             onSelect={this.onRouteSelect}
           />
         </SafeAreaView>
-      </View>
+      </Layout>
     );
   }
 }

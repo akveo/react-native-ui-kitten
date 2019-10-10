@@ -1,14 +1,11 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import {
   Drawer,
+  Layout,
   Text,
 } from 'react-native-ui-kitten';
-import { createDrawerNavigator } from 'react-navigation-drawer';
 
 export class DrawerCustomHeaderShowcase extends React.Component {
 
@@ -22,21 +19,20 @@ export class DrawerCustomHeaderShowcase extends React.Component {
   ];
 
   onRouteSelect = (index) => {
-    const { [index]: route } = this.drawerData;
-    // here you can handle route selecting after component will be interrated with the
-    // navigation library
+    // const { [index]: route } = this.drawerData;
+    // navigate with React Navigation
     // this.props.navigation.navigate(route.title);
   };
 
   renderHeader = () => (
-    <View>
-      <Text category='h6'>Awesome Application</Text>
-    </View>
+    <Layout level='2'>
+      <Text category='h6'>Drawer Header</Text>
+    </Layout>
   );
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <SafeAreaView>
           <Drawer
             data={this.drawerData}
@@ -44,7 +40,7 @@ export class DrawerCustomHeaderShowcase extends React.Component {
             onSelect={this.onRouteSelect}
           />
         </SafeAreaView>
-      </View>
+      </Layout>
     );
   }
 }
