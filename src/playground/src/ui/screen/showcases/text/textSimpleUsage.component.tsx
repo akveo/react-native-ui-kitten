@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native-ui-kitten';
 
-export const TextSimpleUsageShowcase = (props) => (
+export const TextSimpleUsageShowcase = () => (
   <Text>Sample Text</Text>
 );
