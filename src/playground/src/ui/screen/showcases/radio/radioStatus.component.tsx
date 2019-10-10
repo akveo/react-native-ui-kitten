@@ -92,10 +92,11 @@ export class RadioStatusShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 4,
   },
   radio: {
-    marginVertical: 8,
+    marginHorizontal: 4,
   },
 });

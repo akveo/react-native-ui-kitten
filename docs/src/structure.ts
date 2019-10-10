@@ -458,6 +458,7 @@ export const structure = [
         name: 'Radio',
         icon: 'radio.svg',
         source: [
+          'RadioGroup',
           'Radio',
         ],
         overview: [
@@ -465,14 +466,6 @@ export const structure = [
             name: 'Radio',
             images: ['radio.png'],
           },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'RadioGroup',
-        icon: 'radio-group.svg',
-        source: [
-          'RadioGroup',
         ],
       },
       {

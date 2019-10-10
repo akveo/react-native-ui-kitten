@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  Layout,
   Radio,
   RadioGroup,
 } from 'react-native-ui-kitten';
@@ -12,7 +11,7 @@ export class RadioGroupSimpleUsageShowcase extends React.Component {
     selectedIndex: 0,
   };
 
-  onGroupSelectionChange = (selectedIndex) => {
+  onChange = (selectedIndex) => {
     this.setState({ selectedIndex });
   };
 
@@ -21,19 +20,10 @@ export class RadioGroupSimpleUsageShowcase extends React.Component {
       <RadioGroup
         style={styles.container}
         selectedIndex={this.state.selectedIndex}
-        onChange={this.onGroupSelectionChange}>
-        <Radio
-          style={styles.radio}
-          text='Option 1'
-        />
-        <Radio
-          style={styles.radio}
-          text='Option 2'
-        />
-        <Radio
-          style={styles.radio}
-          text='Option 3'
-        />
+        onChange={this.onChange}>
+        <Radio style={styles.radio} text='Option 1' />
+        <Radio style={styles.radio} text='Option 2' />
+        <Radio style={styles.radio} text='Option 3' />
       </RadioGroup>
     );
   }
@@ -41,10 +31,10 @@ export class RadioGroupSimpleUsageShowcase extends React.Component {
 
 export const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
   radio: {
-    marginVertical: 8,
+    marginVertical: 4,
   },
 });

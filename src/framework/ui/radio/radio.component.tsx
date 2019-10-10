@@ -65,8 +65,11 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * @property StyledComponentProps
  *
  * @overview-example RadioSimpleUsage
- * @overview-example RadioWithText
+ *
  * @overview-example RadioStatus
+ *
+ * @overview-example RadioWithText
+ *
  * @example RadioInlineStyling
  */
 export class RadioComponent extends React.Component<RadioProps> {

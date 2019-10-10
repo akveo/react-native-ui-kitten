@@ -1,5 +1,9 @@
 import React from 'react';
-import { Radio } from 'react-native-ui-kitten';
+import { StyleSheet } from 'react-native';
+import {
+  Layout,
+  Radio,
+} from 'react-native-ui-kitten';
 
 export class RadioSimpleUsageShowcase extends React.Component {
 
@@ -13,10 +17,37 @@ export class RadioSimpleUsageShowcase extends React.Component {
 
   render() {
     return (
-      <Radio
-        checked={this.state.checked}
-        onChange={this.onChange}
-      />
+      <Layout style={styles.container}>
+        <Radio
+          style={styles.radio}
+          text='Active'
+          checked={this.state.checked}
+          onChange={this.onChange}
+        />
+        <Radio
+          style={styles.radio}
+          text='Disabled'
+          disabled={true}
+        />
+        <Radio
+          style={styles.radio}
+          text='Checked Disabled'
+          checked={true}
+          disabled={true}
+        />
+      </Layout>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+  },
+  radio: {
+    marginHorizontal: 4,
+  },
+});
+

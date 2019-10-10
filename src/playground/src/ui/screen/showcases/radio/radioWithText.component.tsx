@@ -14,7 +14,7 @@ export class RadioWithTextShowcase extends React.Component {
   render() {
     return (
       <Radio
-        text={`Checked: ${this.state.checked}`}
+        text='Place your Text'
         checked={this.state.checked}
         onChange={this.onChange}
       />

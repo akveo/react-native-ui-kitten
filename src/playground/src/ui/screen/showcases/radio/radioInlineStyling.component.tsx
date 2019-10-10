@@ -30,5 +30,5 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
   },
-  radioText: { color: 'purple' },
+  radioText: { color: '#3366FF' },
 });
