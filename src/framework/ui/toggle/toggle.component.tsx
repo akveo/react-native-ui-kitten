@@ -80,7 +80,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @overview-example ToggleSize
  *
- * @example ToggleWithText
+ * @overview-example ToggleWithText
  *
  * @example ToggleInlineStyling
  */

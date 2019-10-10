@@ -92,10 +92,13 @@ export class ToggleStatusShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingVertical: 4,
+    paddingHorizontal: 4,
   },
   toggle: {
-    marginVertical: 8,
+    marginVertical: 4,
+    marginHorizontal: 4,
   },
 });

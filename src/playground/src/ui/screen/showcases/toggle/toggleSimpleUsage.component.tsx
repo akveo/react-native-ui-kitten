@@ -20,16 +20,18 @@ export class ToggleSimpleUsageShowcase extends React.Component {
       <Layout style={styles.container}>
         <Toggle
           style={styles.toggle}
+          text='Active'
           checked={this.state.checked}
           onChange={this.onToggleValueChange}
         />
         <Toggle
           style={styles.toggle}
-          checked={false}
-          disabled
+          text='Disabled'
+          disabled={true}
         />
         <Toggle
           style={styles.toggle}
+          text='Checked Disabled'
           checked={true}
           disabled={true}
         />
@@ -40,10 +42,11 @@ export class ToggleSimpleUsageShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 4,
   },
   toggle: {
-    marginVertical: 8,
+    marginHorizontal: 4,
   },
 });
