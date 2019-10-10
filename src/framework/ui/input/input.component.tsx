@@ -104,15 +104,15 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @overview-example InputSimpleUsage
  *
+ * @overview-example InputStatus
+ *
+ * @overview-example InputSize
+ *
  * @overview-example InputWithIcon
  *
  * @overview-example InputWithLabel
  *
  * @overview-example InputWithCaption
- *
- * @overview-example InputStatus
- *
- * @overview-example InputSize
  *
  * @example InputInlineStyling
  *

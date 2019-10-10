@@ -1,5 +1,9 @@
 import React from 'react';
-import { Layout, Input } from 'react-native-ui-kitten';
+import { StyleSheet } from 'react-native';
+import {
+  Input,
+  Layout,
+} from 'react-native-ui-kitten';
 
 export class InputSizeShowcase extends React.Component {
 
@@ -23,20 +27,23 @@ export class InputSizeShowcase extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout style={styles.container}>
         <Input
+          style={styles.input}
           size='small'
           placeholder='Small'
           value={this.state.smallValue}
           onChangeText={this.onSmallTextChange}
         />
         <Input
+          style={styles.input}
           size='medium'
           placeholder='Medium'
           value={this.state.mediumValue}
           onChangeText={this.onMediumTextChange}
         />
         <Input
+          style={styles.input}
           size='large'
           placeholder='Large'
           value={this.state.largeValue}
@@ -46,3 +53,14 @@ export class InputSizeShowcase extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+  },
+  input: {
+    marginVertical: 4,
+  },
+});
+

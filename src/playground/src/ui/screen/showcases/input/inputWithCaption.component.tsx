@@ -21,7 +21,7 @@ export class InputWithCaptionShowcase extends React.Component {
       <Input
         placeholder='Place your Text'
         status={isValidInputValue ? 'success' : 'danger'}
-        caption={isValidInputValue ? '' : 'Invalid password'}
+        caption={isValidInputValue ? '' : 'Invalid value'}
         value={this.state.value}
         onChangeText={this.onChangeText}
       />

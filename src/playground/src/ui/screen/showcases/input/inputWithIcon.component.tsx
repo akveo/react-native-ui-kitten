@@ -23,7 +23,7 @@ export class InputWithIconShowcase extends React.Component {
   };
 
   renderIcon = (style) => {
-    const iconName = this.state.secureTextEntry ? 'eye' : 'eye-off';
+    const iconName = this.state.secureTextEntry ? 'eye-off' : 'eye';
     return (
       <Icon {...style} name={iconName}/>
     );
