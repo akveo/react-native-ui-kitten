@@ -1,13 +1,13 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { Select } from 'react-native-ui-kitten';
+  Layout,
+  Select,
+} from 'react-native-ui-kitten';
 
 export class SelectStatusShowcase extends React.Component {
 
-  items = [
+  data = [
     { text: 'Option 1' },
     { text: 'Option 2' },
     { text: 'Option 3' },
@@ -23,38 +23,50 @@ export class SelectStatusShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <Select
-          data={this.items}
+          data={this.data}
           status='primary'
+          placeholder='Primary'
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
         <Select
-          data={this.items}
+          data={this.data}
           status='success'
+          placeholder='Success'
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
         <Select
-          data={this.items}
+          data={this.data}
           status='info'
+          placeholder='Info'
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
         <Select
-          data={this.items}
+          data={this.data}
           status='warning'
+          placeholder='Warning'
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
         <Select
-          data={this.items}
+          data={this.data}
           status='danger'
+          placeholder='Danger'
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
-      </View>
+        <Select
+          data={this.data}
+          status='basic'
+          placeholder='Basic'
+          selectedOption={this.state.selectedOption}
+          onSelect={this.onSelect}
+        />
+      </Layout>
     );
   }
 }

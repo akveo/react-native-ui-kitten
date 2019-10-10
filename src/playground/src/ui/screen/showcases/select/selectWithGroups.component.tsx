@@ -1,9 +1,9 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { Select } from 'react-native-ui-kitten';
+  Layout,
+  Select,
+} from 'react-native-ui-kitten';
 
 export class SelectWithGroupsShowcase extends React.Component {
 
@@ -12,9 +12,11 @@ export class SelectWithGroupsShowcase extends React.Component {
     { text: 'Option 2' },
     {
       text: 'Option 3',
-      items: [{ text: 'Option 31' }, { text: 'Option 32' }, { text: 'Option 33' }],
+      items: [
+        { text: 'SubOption 1' },
+        { text: 'SubOption 2' },
+      ],
     },
-    { text: 'Option 4' },
   ];
 
   state = {
@@ -27,20 +29,20 @@ export class SelectWithGroupsShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <Select
           data={this.items}
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
-      </View>
+      </Layout>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 230,
+    height: 280,
     padding: 16,
   },
 });

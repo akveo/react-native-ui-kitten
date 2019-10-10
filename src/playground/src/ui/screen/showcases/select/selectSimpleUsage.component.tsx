@@ -1,13 +1,13 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { Select } from 'react-native-ui-kitten';
+  Layout,
+  Select,
+} from 'react-native-ui-kitten';
 
 export class SelectSimpleUsageShowcase extends React.Component {
 
-  items = [
+  data = [
     { text: 'Option 1' },
     { text: 'Option 2' },
     { text: 'Option 3', disabled: true },
@@ -24,13 +24,13 @@ export class SelectSimpleUsageShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <Select
-          data={this.items}
+          data={this.data}
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
-      </View>
+      </Layout>
     );
   }
 }

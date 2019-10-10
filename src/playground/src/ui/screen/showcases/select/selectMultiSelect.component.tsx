@@ -1,17 +1,16 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { Select } from 'react-native-ui-kitten';
+  Layout,
+  Select,
+} from 'react-native-ui-kitten';
 
 export class SelectMultiSelectShowcase extends React.Component {
 
-  items = [
+  data = [
     { text: 'Option 1' },
     { text: 'Option 2' },
     { text: 'Option 3' },
-    { text: 'Option 4' },
   ];
 
   state = {
@@ -24,14 +23,14 @@ export class SelectMultiSelectShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <Select
-          data={this.items}
+          data={this.data}
           multiSelect={true}
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
-      </View>
+      </Layout>
     );
   }
 }
