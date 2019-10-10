@@ -95,9 +95,11 @@ export class CheckboxStatusShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    flexDirection: 'row',
+    paddingVertical: 8,
+    paddingHorizontal: 4,
   },
   checkbox: {
-    marginBottom: 16,
+    marginHorizontal: 4,
   },
 });

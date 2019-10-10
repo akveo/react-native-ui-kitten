@@ -22,16 +22,19 @@ export class CheckboxSimpleUsageShowcase extends React.Component {
           style={styles.checkbox}
           checked={this.state.checked1}
           onChange={this.onChecked1Change}
+          text='Active'
         />
         <CheckBox
           style={styles.checkbox}
-          disabled
-          checked={true}
-        />
-        <CheckBox
-          style={styles.checkbox}
-          disabled
+          disabled={true}
           checked={false}
+          text='Disabled'
+        />
+        <CheckBox
+          style={styles.checkbox}
+          disabled={true}
+          checked={true}
+          text='Checked Disabled'
         />
       </Layout>
     );
@@ -40,9 +43,11 @@ export class CheckboxSimpleUsageShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    flexDirection: 'row',
+    paddingVertical: 8,
+    paddingHorizontal: 4,
   },
   checkbox: {
-    marginBottom: 16,
+    marginHorizontal: 4,
   },
 });

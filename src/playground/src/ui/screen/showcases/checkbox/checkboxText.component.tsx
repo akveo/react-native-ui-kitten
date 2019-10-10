@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  CheckBox,
-} from 'react-native-ui-kitten';
+import { CheckBox } from 'react-native-ui-kitten';
 
 export class CheckboxTextShowcase extends React.Component {
 
@@ -17,19 +14,18 @@ export class CheckboxTextShowcase extends React.Component {
 
   render() {
     return (
-      <Layout style={styles.container}>
-        <CheckBox
-          checked={this.state.checked}
-          text='Place your Text'
-          onChange={this.onCheckedChange}
-        />
-      </Layout>
+      <CheckBox
+        style={styles.checkbox}
+        checked={this.state.checked}
+        text='Place your Text'
+        onChange={this.onCheckedChange}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
+  checkbox: {
+    margin: 8,
   },
 });

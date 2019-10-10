@@ -100,7 +100,7 @@ export class CheckboxIndeterminateShowcase extends React.Component {
         />
         <CheckBox
           text='Checkbox 3'
-          style={styles.leftSpace}
+          style={[styles.checkbox, styles.leftSpace]}
           checked={checkbox3Checked}
           onChange={this.onCheckbox3Change}
         />
@@ -111,13 +111,13 @@ export class CheckboxIndeterminateShowcase extends React.Component {
 
 export const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
   checkbox: {
-    marginVertical: 8,
+    marginVertical: 4,
   },
   leftSpace: {
-    marginHorizontal: 8,
+    marginHorizontal: 4,
   },
 });
