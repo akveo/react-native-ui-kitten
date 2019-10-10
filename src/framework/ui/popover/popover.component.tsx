@@ -87,6 +87,8 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  * @property StyledComponentProps
  *
  * @overview-example PopoverSimpleUsage
+ *
+ * @overview-example PopoverPlacement
  */
 export class PopoverComponent extends React.Component<PopoverProps> {
 
