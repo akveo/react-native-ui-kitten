@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Toggle } from 'react-native-ui-kitten';
 import {
   StyleSheet,
   View,
 } from 'react-native';
 
-export const ToggleInlineStylingShowcase = () => {
-  const [checked, onChange] = useState(false);
+export class ToggleInlineStylingShowcase extends React.Component {
 
-  const onToggleValueChange = (value: boolean) => {
-    onChange(value);
+  state = {
+    checked: false,
   };
 
-  return (
-    <View style={styles.item}>
-      <Toggle
-        checked={checked}
-        style={styles.item}
-        text='This is a Toggle'
-        textStyle={styles.text}
-        onChange={onToggleValueChange}
-      />
-    </View>
-  );
-};
+  onToggleValueChange = (checked) => {
+    this.setState({ checked });
+  };
+
+  render() {
+    return (
+      <View style={styles.item}>
+        <Toggle
+          checked={this.state.checked}
+          style={styles.item}
+          text='This is a Toggle'
+          textStyle={styles.text}
+          onChange={this.onToggleValueChange}
+        />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

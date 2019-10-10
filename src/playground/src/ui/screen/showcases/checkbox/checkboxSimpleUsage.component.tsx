@@ -1,41 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
 } from 'react-native';
 import { CheckBox } from 'react-native-ui-kitten';
 
-export const CheckboxSimpleUsageShowcase = (): React.ReactElement => {
-  const [checked1, onChange1] = useState(false);
-  const [checked2, onChange2] = useState(false);
+export class CheckboxSimpleUsageShowcase extends React.Component {
 
-  const onStateChange = (value: boolean, index: number): void => {
-    switch (index) {
-      case 1:
-        onChange1(value);
-        break;
-      case 2:
-        onChange2(value);
-        break;
-    }
+  state = {
+    checked1: false,
   };
 
-  return (
-    <View style={styles.container}>
-      <CheckBox
-        style={styles.checkbox}
-        checked={checked1}
-        onChange={(value: boolean) => onStateChange(value, 1)}
-      />
-      <CheckBox
-        style={styles.checkbox}
-        disabled
-        checked={checked2}
-        onChange={(value: boolean) => onStateChange(value, 2)}
-      />
-    </View>
-  );
-};
+  onChecked1Change = (checked1) => {
+    this.setState({ checked1 });
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <CheckBox
+          style={styles.checkbox}
+          checked={this.state.checked1}
+          onChange={this.onChecked1Change}
+        />
+        <CheckBox
+          style={styles.checkbox}
+          disabled
+          checked={true}
+        />
+        <CheckBox
+          style={styles.checkbox}
+          disabled
+          checked={false}
+        />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

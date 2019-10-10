@@ -1,37 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Toggle } from 'react-native-ui-kitten';
 import {
   StyleSheet,
   View,
 } from 'react-native';
 
-export const ToggleSimpleUsageShowcase = () => {
-  const [checked, onChange] = useState(false);
+export class ToggleSimpleUsageShowcase extends React.Component {
 
-  const onToggleValueChange = (value: boolean) => {
-    onChange(value);
+  state = {
+    checked: false,
   };
 
-  return (
-    <View style={styles.item}>
-      <Toggle
-        checked={checked}
-        style={styles.item}
-        onChange={onToggleValueChange}
-      />
-      <Toggle
-        checked={false}
-        disabled
-        style={styles.item}
-      />
-      <Toggle
-        checked={true}
-        disabled
-        style={styles.item}
-      />
-    </View>
-  );
-};
+  onToggleValueChange = (checked) => {
+    this.setState({ checked });
+  };
+
+  render() {
+    return (
+      <View style={styles.item}>
+        <Toggle
+          checked={this.state.checked}
+          style={styles.item}
+          onChange={this.onToggleValueChange}
+        />
+        <Toggle
+          checked={false}
+          disabled
+          style={styles.item}
+        />
+        <Toggle
+          checked={true}
+          disabled
+          style={styles.item}
+        />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
