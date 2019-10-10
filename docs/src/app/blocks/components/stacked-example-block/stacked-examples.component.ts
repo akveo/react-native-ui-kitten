@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { NgdExampleView } from '../../enum.example-view';
 import { NgdAnalytics } from '../../../@theme/services';
@@ -19,7 +19,7 @@ export const pulse = animation(
 @Component({
   selector: 'ngd-stacked-example-block',
   template: `
-    <div>
+    <div *ngIf="isLiveExample">
       <ngd-live-example-block [hidden]="!isLive"
                               [@exampleState]="isLive ? 'live': 'code'"
                               [content]="content"
@@ -34,6 +34,10 @@ export const pulse = animation(
                                 (changeView)="changeView($event)">
       </ngd-tabbed-example-block>
     </div>
+    <div *ngIf="!isLiveExample">
+      <ngd-overview-example [example]="content">
+      </ngd-overview-example>
+    </div>
   `,
   animations: [
     trigger('exampleState', [
@@ -46,10 +50,15 @@ export const pulse = animation(
     ]),
   ],
 })
-export class NgdStackedExampleComponent {
+export class NgdStackedExampleComponent implements OnInit {
 
   @Input() content: any;
   isLive = true;
+  isLiveExample: boolean;
+
+  ngOnInit(): void {
+    this.isLiveExample = this.content.hasOwnProperty('id');
+  }
 
   constructor(private analytics: NgdAnalytics) {
   }
