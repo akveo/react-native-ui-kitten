@@ -16,6 +16,7 @@ export class InputInlineStylingShowcase extends React.Component {
     return (
       <Input
         value={this.state.inputValue}
+        placeholder='Place your Text'
         style={styles.input}
         textStyle={styles.inputText}
         labelStyle={styles.inputLabel}
@@ -29,8 +30,8 @@ export class InputInlineStylingShowcase extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  input: { borderRadius: 8 },
-  inputText: { color: 'purple' },
-  inputLabel: { color: 'purple' },
-  inputCaption: { color: 'purple' },
+  input: { borderRadius: 24 },
+  inputText: { color: '#3366FF' },
+  inputLabel: { color: '#3366FF' },
+  inputCaption: { color: '#3366FF' },
 });

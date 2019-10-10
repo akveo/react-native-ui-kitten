@@ -5,27 +5,24 @@
 
 import React from 'react';
 import { Icon, Input } from 'react-native-ui-kitten';
+import { Image } from 'react-native';
 
-export class InputWithIconShowcase extends React.Component {
+export class InputWithExternalSourceIconShowcase extends React.Component {
 
   state = {
     value: '',
-    secureTextEntry: true,
   };
 
   onChangeText = (value) => {
     this.setState({ value });
   };
 
-  onIconPress = () => {
-    const secureTextEntry = !this.state.secureTextEntry;
-    this.setState({ secureTextEntry });
-  };
-
   renderIcon = (style) => {
-    const iconName = this.state.secureTextEntry ? 'eye' : 'eye-off';
     return (
-      <Icon {...style} name={iconName}/>
+      <Image
+        style={style}
+        source={{uri: 'https://akveo.github.io/eva-icons/fill/png/128/eye-off.png'}}
+      />
     );
   };
 
@@ -35,8 +32,7 @@ export class InputWithIconShowcase extends React.Component {
         value={this.state.value}
         placeholder='Place your Text'
         icon={this.renderIcon}
-        secureTextEntry={this.state.secureTextEntry}
-        onIconPress={this.onIconPress}
+        secureTextEntry={true}
         onChangeText={this.onChangeText}
       />
     );

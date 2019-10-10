@@ -15,6 +15,7 @@ export class InputWithLabelShowcase extends React.Component {
     return (
       <Input
         label='LABEL'
+        placeholder='Place your Text'
         value={this.state.value}
         onChangeText={this.onChangeText}
       />

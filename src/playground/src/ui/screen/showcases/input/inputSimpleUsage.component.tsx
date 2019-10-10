@@ -16,6 +16,7 @@ export class InputSimpleUsageShowcase extends React.Component {
       <Input
         value={this.state.value}
         onChangeText={this.onChangeText}
+        placeholder='Place your Text'
       />
     );
   }

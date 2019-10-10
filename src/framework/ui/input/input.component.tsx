@@ -103,28 +103,20 @@ export type InputElement = React.ReactElement<InputProps>;
  * @property StyledComponentProps
  *
  * @overview-example InputSimpleUsage
+ *
  * @overview-example InputWithIcon
+ *
  * @overview-example InputWithLabel
+ *
  * @overview-example InputWithCaption
+ *
  * @overview-example InputStatus
+ *
  * @overview-example InputSize
+ *
  * @example InputInlineStyling
  *
- * @example Using Asset Icons
- *
- * ```
- * import React from 'react';
- * import { Image } from 'react-native';
- * import { Input } from 'react-native-ui-kitten';
- *
- * const StarIcon = (style) => (
- *   <Image style={style} source={require('path-to-assets/local-image.png')} />
- * );
- *
- * export const StarInput = (props) => (
- *   <Input icon={StarIcon} />
- * );
- * ```
+ * @example InputWithExternalSourceIcon
  */
 export class InputComponent extends React.Component<InputProps> {
 
