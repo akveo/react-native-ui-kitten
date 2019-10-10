@@ -49,11 +49,11 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  *
  * @overview-example SpinnerSimpleUsage
  *
- * @overview-example SpinnerDataLoading
- *
  * @overview-example SpinnerSizes
  *
  * @overview-example SpinnerStatuses
+ *
+ * @example SpinnerDataLoading
  */
 export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
 

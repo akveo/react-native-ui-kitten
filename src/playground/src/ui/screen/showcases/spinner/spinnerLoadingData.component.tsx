@@ -20,7 +20,7 @@ export class SpinnerDataLoadingShowcase extends React.Component {
   };
 
   componentDidMount() {
-    setTimeout(this.loadData, 3000);
+    setTimeout(this.loadData, 5000);
   }
 
   loadData = () => {
@@ -34,8 +34,8 @@ export class SpinnerDataLoadingShowcase extends React.Component {
     </View>
   );
 
-  renderDataItem = ({ item }) => (
-    <ListItem title={item.title}/>
+  renderDataItem = ({ item, index }) => (
+    <ListItem title={`${item.title} ${index + 1}`}/>
   );
 
   renderData = () => (

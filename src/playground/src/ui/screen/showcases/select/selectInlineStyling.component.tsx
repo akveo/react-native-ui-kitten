@@ -1,13 +1,13 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
-  View,
-  StyleSheet,
-} from 'react-native';
-import { Select } from 'react-native-ui-kitten';
+  Layout,
+  Select,
+} from 'react-native-ui-kitten';
 
 export class SelectInlineStylingShowcase extends React.Component {
 
-  private items = [
+  private data = [
     { text: 'Option 1' },
     { text: 'Option 2', textStyle: styles.option2 },
     { text: 'Option 3' },
@@ -23,16 +23,16 @@ export class SelectInlineStylingShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <Select
           labelStyle={styles.labelStyle}
           placeholderStyle={styles.placeholderStyle}
           controlStyle={styles.controlStyle}
-          data={this.items}
+          data={this.data}
           selectedOption={this.state.selectedOption}
           onSelect={this.onSelect}
         />
-      </View>
+      </Layout>
     );
   }
 }

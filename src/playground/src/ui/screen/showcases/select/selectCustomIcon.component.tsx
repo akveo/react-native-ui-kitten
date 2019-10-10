@@ -1,19 +1,19 @@
-// IMPORTANT: To use Icon component make sure to follow this guide:
-// https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+/**
+ * IMPORTANT: To use Icon component make sure to follow this guide:
+ * https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ */
 
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   Select,
   Icon,
+  Layout,
 } from 'react-native-ui-kitten';
 
 export class SelectCustomIconShowcase extends React.Component {
 
-  items = [
+  data = [
     { text: 'Option 1' },
     { text: 'Option 2' },
     { text: 'Option 3' },
@@ -36,14 +36,14 @@ export class SelectCustomIconShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Layout style={styles.container}>
         <Select
-          data={this.items}
+          data={this.data}
           selectedOption={this.state.selectedOption}
           icon={this.renderIcon}
           onSelect={this.onSelect}
         />
-      </View>
+      </Layout>
     );
   }
 }
