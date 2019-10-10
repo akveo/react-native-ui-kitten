@@ -1,5 +1,9 @@
 import React from 'react';
-import { Layout, Radio } from 'react-native-ui-kitten';
+import { StyleSheet } from 'react-native';
+import {
+  Layout,
+  Radio,
+} from 'react-native-ui-kitten';
 
 export class RadioStatusShowcase extends React.Component {
 
@@ -38,34 +42,46 @@ export class RadioStatusShowcase extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout style={styles.container}>
         <Radio
+          style={styles.radio}
           status='primary'
+          text='Primary'
           checked={this.state.primaryChecked}
           onChange={this.onPrimaryChange}
         />
         <Radio
+          style={styles.radio}
           status='success'
+          text='Success'
           checked={this.state.successChecked}
           onChange={this.onSuccessChange}
         />
         <Radio
+          style={styles.radio}
           status='info'
+          text='Info'
           checked={this.state.infoChecked}
           onChange={this.onInfoChange}
         />
         <Radio
+          style={styles.radio}
           status='warning'
+          text='Warning'
           checked={this.state.warningChecked}
           onChange={this.onWarningChange}
         />
         <Radio
+          style={styles.radio}
           status='danger'
+          text='Danger'
           checked={this.state.dangerChecked}
           onChange={this.onDangerChange}
         />
         <Radio
+          style={styles.radio}
           status='basic'
+          text='Basic'
           checked={this.state.basicChecked}
           onChange={this.onBasicChange}
         />
@@ -73,3 +89,13 @@ export class RadioStatusShowcase extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+  radio: {
+    marginVertical: 8,
+  },
+});
