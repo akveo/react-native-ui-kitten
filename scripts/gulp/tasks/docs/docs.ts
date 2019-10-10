@@ -3,13 +3,12 @@ import {
   task,
   dest,
 } from 'gulp';
-import './example';
 
 const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;
 const glob = require('glob');
 import * as fs from 'fs';
-import { generateDocsNavigation } from './example';
+import { generateDocsNavigation } from './navigation';
 
 interface ExampleCode {
   name: string;
@@ -25,8 +24,6 @@ task('process-type-doc', ['generate-doc-json'], processTypeDoc);
 
 task('get-examples-code', getExamplesCode);
 
-task('generate-navigation', generateDocsNavigation);
-
 task('build-live-examples-app', buildLiveExamplesApplication);
 
 task('copy-live-examples-app', ['build-live-examples-app'], copyLiveExamplesAppToDocsAppAssets);
@@ -41,6 +38,8 @@ task('docs', [
   'copy-live-examples-app',
   'revert-navigation',
 ]);
+
+task('generate-navigation', generateDocsNavigation);
 
 function generateDocJson() {
   return src(['src/framework/**/*.tsx', '!src/framework/**/*.spec.tsx'])
@@ -95,5 +94,7 @@ function copyLiveExamplesAppToDocsAppAssets() {
 }
 
 function revertNavigationChanges() {
-  return exec('npm run docs:revert:navigation');
+  exec('git checkout @ -- src/playground/src/navigation/navigation.component.tsx');
+  exec('git checkout @ -- src/playground/src/ui/screen/index.ts');
+  fs.unlink('src/playground/src/ui/screen/documentationExamples/index.ts', () => {});
 }

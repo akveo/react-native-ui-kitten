@@ -20,7 +20,6 @@
     "build:prod": "npm run build -- prod && npm run build:transform -- prod",
     "clean": "rimraf ./dist",
     "docs:examples:build": "cd src/playground && npm run build:web",
-    "docs:revert:navigation": "git checkout @ -- src/playground/src/navigation/navigation.component.tsx",
     "docs:generate:navigation": "gulp generate-navigation",
     "docs:parse": "gulp generate-navigation && gulp docs",
     "docs:build": "cd docs && npm run build",
