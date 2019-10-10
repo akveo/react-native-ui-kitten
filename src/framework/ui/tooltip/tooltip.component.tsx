@@ -79,6 +79,8 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @overview-example TooltipWithIcon
  *
+ * @overview-example TooltipPlacement
+ *
  * @example TooltipWithExternalSourceIcon
  *
  * @example TooltipInlineStyling
