@@ -1,6 +1,8 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   Datepicker,
+  Layout,
   NativeDateService,
 } from 'react-native-ui-kitten';
 
@@ -29,11 +31,20 @@ export class DatepickerCustomLocaleShowcase extends React.Component {
 
   render() {
     return (
-      <Datepicker
-        date={this.state.date}
-        dateService={this.dateService}
-        onSelect={this.onSelect}
-      />
+      <Layout style={styles.container}>
+        <Datepicker
+          date={this.state.date}
+          dateService={this.dateService}
+          onSelect={this.onSelect}
+        />
+      </Layout>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    minHeight: 400,
+    padding: 16,
+  },
+});

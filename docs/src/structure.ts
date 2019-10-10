@@ -429,6 +429,7 @@ export const structure = [
         icon: 'calendar.svg',
         source: [
           'Calendar',
+          'RangeCalendar',
         ],
         overview: [
           {
@@ -439,42 +440,15 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'RangeCalendar',
-        icon: 'calendar.svg',
-        source: [
-          'RangeCalendar',
-        ],
-        overview: [
-          {
-            name: 'RangeCalendar',
-            images: [],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Datepicker',
         icon: 'calendar.svg',
         source: [
           'Datepicker',
-        ],
-        overview: [
-          {
-            name: 'Datepicker',
-            images: [],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'RangeDatepicker',
-        icon: 'calendar.svg',
-        source: [
           'RangeDatepicker',
         ],
         overview: [
           {
-            name: 'RangeDatepicker',
+            name: 'Datepicker',
             images: [],
           },
         ],

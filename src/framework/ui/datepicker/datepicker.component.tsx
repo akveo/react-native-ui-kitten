@@ -51,11 +51,17 @@ import {
  *
  * @overview-example DatepickerSimpleUsage
  *
- * @overview-example DatepickerCustomDay
+ * @overview-example DatepickerWithIcon
  *
- * @overview-example DatepickerCustomLocale
+ * @overview-example DatepickerBoundingMonth
  *
- * @overview-example DatepickerMoment
+ * @overview-example DatepickerFilter
+ *
+ * @example DatepickerCustomDay
+ *
+ * @example DatepickerCustomLocale
+ *
+ * @example DatepickerMoment
  */
 export class DatepickerComponent<D> extends BaseDatepickerComponent<D, CalendarProps<D>> {
 

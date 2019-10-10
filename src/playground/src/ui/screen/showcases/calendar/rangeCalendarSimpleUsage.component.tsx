@@ -1,25 +1,28 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  Datepicker,
   Layout,
+  RangeCalendar,
 } from 'react-native-ui-kitten';
 
-export class DatepickerSimpleUsageShowcase extends React.Component {
+export class RangeCalendarSimpleUsageShowcase extends React.Component {
 
   state = {
-    date: new Date(),
+    range: {
+      startDate: null,
+      endDate: null,
+    },
   };
 
-  onSelect = (date) => {
-    this.setState({ date });
+  onSelect = (range) => {
+    this.setState({ range });
   };
 
   render() {
     return (
       <Layout style={styles.container}>
-        <Datepicker
-          date={this.state.date}
+        <RangeCalendar
+          range={this.state.range}
           onSelect={this.onSelect}
         />
       </Layout>
@@ -29,7 +32,8 @@ export class DatepickerSimpleUsageShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 400,
     padding: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

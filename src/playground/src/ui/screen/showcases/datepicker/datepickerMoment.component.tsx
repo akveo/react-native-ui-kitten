@@ -4,8 +4,12 @@
  */
 
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import moment from 'moment';
-import { Datepicker } from 'react-native-ui-kitten';
+import {
+  Datepicker,
+  Layout,
+} from 'react-native-ui-kitten';
 import { MomentDateService } from '@ui-kitten/moment';
 
 export class DatepickerMomentShowcase extends React.Component {
@@ -22,11 +26,20 @@ export class DatepickerMomentShowcase extends React.Component {
 
   render() {
     return (
-      <Datepicker
-        date={this.state.date}
-        dateService={this.dateService}
-        onSelect={this.onSelect}
-      />
+      <Layout style={styles.container}>
+        <Datepicker
+          date={this.state.date}
+          dateService={this.dateService}
+          onSelect={this.onSelect}
+        />
+      </Layout>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    minHeight: 400,
+    padding: 16,
+  },
+});

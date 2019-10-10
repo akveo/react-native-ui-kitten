@@ -5,7 +5,7 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export class DatepickerSimpleUsageShowcase extends React.Component {
+export class DatepickerBoundingMonthShowcase extends React.Component {
 
   state = {
     date: new Date(),
@@ -20,6 +20,7 @@ export class DatepickerSimpleUsageShowcase extends React.Component {
       <Layout style={styles.container}>
         <Datepicker
           date={this.state.date}
+          boundingMonth={false}
           onSelect={this.onSelect}
         />
       </Layout>

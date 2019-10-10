@@ -1,25 +1,28 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  Datepicker,
   Layout,
+  RangeDatepicker,
 } from 'react-native-ui-kitten';
 
-export class DatepickerSimpleUsageShowcase extends React.Component {
+export class RangeDatepickerSimpleUsageShowcase extends React.Component {
 
   state = {
-    date: new Date(),
+    range: {
+      startDate: null,
+      endDate: null,
+    },
   };
 
-  onSelect = (date) => {
-    this.setState({ date });
+  onSelect = (range) => {
+    this.setState({ range });
   };
 
   render() {
     return (
       <Layout style={styles.container}>
-        <Datepicker
-          date={this.state.date}
+        <RangeDatepicker
+          range={this.state.range}
           onSelect={this.onSelect}
         />
       </Layout>
@@ -33,3 +36,4 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+

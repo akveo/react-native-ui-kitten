@@ -49,7 +49,7 @@ import {
  *
  * @property StyledComponentProps
  *
- * @overview-example RangeDatepickerSimpleUsageShowcase
+ * @overview-example RangeDatepickerSimpleUsage
  */
 export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, RangeCalendarProps<D>> {
 
