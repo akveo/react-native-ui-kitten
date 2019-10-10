@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
 import { Menu } from 'react-native-ui-kitten';
 
 export class MenuSimpleUsageShowcase extends React.Component {
@@ -14,7 +10,7 @@ export class MenuSimpleUsageShowcase extends React.Component {
   data = [
     { title: 'Item 1' },
     { title: 'Item 2' },
-    { title: 'Item 3', disabled: true },
+    { title: 'Item 3' },
     { title: 'Item 4' },
   ];
 
@@ -24,19 +20,11 @@ export class MenuSimpleUsageShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Menu
-          data={this.data}
-          selectedIndex={this.state.selectedIndex}
-          onSelect={this.onSelect}
-        />
-      </View>
+      <Menu
+        data={this.data}
+        selectedIndex={this.state.selectedIndex}
+        onSelect={this.onSelect}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});

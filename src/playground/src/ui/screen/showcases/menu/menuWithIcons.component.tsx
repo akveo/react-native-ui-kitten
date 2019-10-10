@@ -1,23 +1,16 @@
-// IMPORTANT: To use Icon component make sure to follow this guide:
-// https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+/**
+ * IMPORTANT: To use Icon component make sure to follow this guide:
+ * https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+ */
 
 import React from 'react';
 import {
-  View,
-  StyleSheet,
-  Image,
-} from 'react-native';
-import {
-  Menu,
   Icon,
+  Menu,
 } from 'react-native-ui-kitten';
 
 const StarIcon = (style) => (
   <Icon {...style} name='star'/>
-);
-
-const KittenIcon = (style) => (
-  <Image style={style} source={require('../../../../assets/brand-logo.png')}/>
 );
 
 export class MenuWithIconsShowcase extends React.Component {
@@ -27,9 +20,22 @@ export class MenuWithIconsShowcase extends React.Component {
   };
 
   data = [
-    { title: 'Item 1', icon: StarIcon },
-    { title: 'Item 2', icon: KittenIcon },
-    { title: 'Item 3', icon: StarIcon },
+    {
+      title: 'Item 1',
+      icon: StarIcon,
+    },
+    {
+      title: 'Item 2',
+      icon: StarIcon,
+    },
+    {
+      title: 'Item 3',
+      icon: StarIcon,
+    },
+    {
+      title: 'Item 4',
+      icon: StarIcon,
+    },
   ];
 
   onSelect = (selectedIndex) => {
@@ -38,19 +44,11 @@ export class MenuWithIconsShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Menu
-          data={this.data}
-          selectedIndex={this.state.selectedIndex}
-          onSelect={this.onSelect}
-        />
-      </View>
+      <Menu
+        data={this.data}
+        selectedIndex={this.state.selectedIndex}
+        onSelect={this.onSelect}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});

@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
 import { Menu } from 'react-native-ui-kitten';
 
 export class MenuWithSubMenuShowcase extends React.Component {
@@ -16,12 +12,12 @@ export class MenuWithSubMenuShowcase extends React.Component {
     {
       title: 'Item 2',
       subItems: [
-        { title: 'Item 21' },
-        { title: 'Item 22' },
-        { title: 'Item 23' },
+        { title: 'Sub Item 1' },
+        { title: 'Sub Item 2' },
       ],
     },
     { title: 'Item 3' },
+    { title: 'Item 4' },
   ];
 
   onSelect = (selectedIndex) => {
@@ -30,19 +26,11 @@ export class MenuWithSubMenuShowcase extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Menu
-          data={this.data}
-          selectedIndex={this.state.selectedIndex}
-          onSelect={this.onSelect}
-        />
-      </View>
+      <Menu
+        data={this.data}
+        selectedIndex={this.state.selectedIndex}
+        onSelect={this.onSelect}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
