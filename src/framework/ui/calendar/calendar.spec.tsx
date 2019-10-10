@@ -16,10 +16,14 @@ import {
   theme,
 } from '../support/tests';
 import { CalendarHeader } from './components/calendarHeader.component';
+import { NativeDateService } from './service/nativeDate.service';
 
 jest.useFakeTimers();
 
 const now: Date = new Date();
+const CURRENT_MONTH: number = now.getMonth();
+const FORMAT_HEADER_DATE: string = 'MMM YYYY';
+const dateService: NativeDateService = new NativeDateService();
 
 interface State {
   date: Date;
@@ -60,8 +64,7 @@ class TestApplication extends React.Component<TestAppProps, State> {
 describe('@calendar: component checks', () => {
 
   it('* date changes', () => {
-    const month: number = 9 - 1;
-    const expectedDate: Date = new Date(Date.UTC(2019, month, 5));
+    const expectedDate: Date = new Date(Date.UTC(2019, CURRENT_MONTH, 5));
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('5')[1]);
@@ -81,7 +84,8 @@ describe('@calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(application.getAllByText('Sep 2019')[0]);
+    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
+    fireEvent.press(application.getAllByText(currentHeader)[0]);
     const { id } = calendarRef.current.state.viewMode;
 
     expect(id).toBe(expectedViewModeId);
@@ -98,7 +102,8 @@ describe('@calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(application.getAllByText('Sep 2019')[0]);
+    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
+    fireEvent.press(application.getAllByText(currentHeader)[0]);
     fireEvent.press(application.getAllByText('2018')[0]);
     const { id } = calendarRef.current.state.viewMode;
 
@@ -118,7 +123,8 @@ describe('@calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(application.getAllByText('Sep 2019')[0]);
+    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
+    fireEvent.press(application.getAllByText(currentHeader)[0]);
     fireEvent.press(application.getAllByText('2018')[0]);
     fireEvent.press(application.getAllByText('Jan')[0]);
 
@@ -157,7 +163,8 @@ describe('@calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(application.getAllByText('Sep 2019')[0]);
+    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
+    fireEvent.press(application.getAllByText(currentHeader)[0]);
     fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
     fireEvent.press(application.getAllByText('2026')[0]);
 
