@@ -80,7 +80,7 @@ function processTypeDoc(): void {
 }
 
 function getExamplesCode() {
-  glob('src/playground/src/ui/screen/documentationExamples/**/*.tsx', (error, filePaths) => {
+  glob('src/playground/src/ui/screen/showcases/**/*.tsx', (error, filePaths) => {
     if (!error) {
       const examples: ExampleCode[] = filePaths.map((pathItem: string) => {
         const code: string = fs.readFileSync(pathItem, 'utf8');
@@ -109,5 +109,5 @@ function copyLiveExamplesAppToDocsAppAssets() {
 function revertNavigationChanges() {
   exec('git checkout @ -- src/playground/src/navigation/navigation.component.tsx');
   exec('git checkout @ -- src/playground/src/ui/screen/index.ts');
-  fs.unlink('src/playground/src/ui/screen/documentationExamples/index.ts', () => {});
+  fs.unlink('src/playground/src/ui/screen/showcases/index.ts', () => {});
 }
