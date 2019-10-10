@@ -1,82 +1,97 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
 } from 'react-native';
 import { CheckBox } from 'react-native-ui-kitten';
 
-export const CheckboxStatusShowcase = (): React.ReactElement => {
-  const [checked1, onChange1] = useState(false);
-  const [checked2, onChange2] = useState(false);
-  const [checked3, onChange3] = useState(false);
-  const [checked4, onChange4] = useState(false);
-  const [checked5, onChange5] = useState(false);
-  const [checked6, onChange6] = useState(false);
+export class CheckboxStatusShowcase extends React.Component {
 
-  const onStateChange = (value: boolean, index: number): void => {
-    switch (index) {
-      case 1:
-        onChange1(value);
-        break;
-      case 2:
-        onChange2(value);
-        break;
-      case 3:
-        onChange3(value);
-        break;
-      case 4:
-        onChange4(value);
-        break;
-      case 5:
-        onChange5(value);
-        break;
-      case 6:
-        onChange6(value);
-        break;
-    }
+  state = {
+    checked1: false,
+    checked2: false,
+    checked3: false,
+    checked4: false,
+    checked5: false,
+    checked6: false,
   };
 
-  return (
-    <View style={styles.container}>
-      <CheckBox
-        style={styles.checkbox}
-        status='primary'
-        checked={checked1}
-        onChange={(value: boolean) => onStateChange(value, 1)}
-      />
-      <CheckBox
-        style={styles.checkbox}
-        status='success'
-        checked={checked2}
-        onChange={(value: boolean) => onStateChange(value, 2)}
-      />
-      <CheckBox
-        style={styles.checkbox}
-        status='info'
-        checked={checked3}
-        onChange={(value: boolean) => onStateChange(value, 3)}
-      />
-      <CheckBox
-        style={styles.checkbox}
-        status='warning'
-        checked={checked4}
-        onChange={(value: boolean) => onStateChange(value, 4)}
-      />
-      <CheckBox
-        style={styles.checkbox}
-        status='danger'
-        checked={checked5}
-        onChange={(value: boolean) => onStateChange(value, 5)}
-      />
-      <CheckBox
-        style={styles.checkbox}
-        status='basic'
-        checked={checked6}
-        onChange={(value: boolean) => onStateChange(value, 6)}
-      />
-    </View>
-  );
-};
+  onChecked1Change = (checked1) => {
+    this.setState({ checked1 });
+  };
+
+  onChecked2Change = (checked2) => {
+    this.setState({ checked2 });
+  };
+
+  onChecked3Change = (checked3) => {
+    this.setState({ checked3 });
+  };
+
+  onChecked4Change = (checked4) => {
+    this.setState({ checked4 });
+  };
+
+  onChecked5Change = (checked5) => {
+    this.setState({ checked5 });
+  };
+
+  onChecked6Change = (checked6) => {
+    this.setState({ checked6 });
+  };
+
+  render() {
+    const {
+      checked1,
+      checked2,
+      checked3,
+      checked4,
+      checked5,
+      checked6,
+    } = this.state;
+
+    return (
+      <View style={styles.container}>
+        <CheckBox
+          style={styles.checkbox}
+          status='primary'
+          checked={checked1}
+          onChange={this.onChecked1Change}
+        />
+        <CheckBox
+          style={styles.checkbox}
+          status='success'
+          checked={checked2}
+          onChange={this.onChecked2Change}
+        />
+        <CheckBox
+          style={styles.checkbox}
+          status='info'
+          checked={checked3}
+          onChange={this.onChecked3Change}
+        />
+        <CheckBox
+          style={styles.checkbox}
+          status='warning'
+          checked={checked4}
+          onChange={this.onChecked4Change}
+        />
+        <CheckBox
+          style={styles.checkbox}
+          status='danger'
+          checked={checked5}
+          onChange={this.onChecked5Change}
+        />
+        <CheckBox
+          style={styles.checkbox}
+          status='basic'
+          checked={checked6}
+          onChange={this.onChecked6Change}
+        />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
