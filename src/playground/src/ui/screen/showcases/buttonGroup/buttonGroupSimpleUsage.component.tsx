@@ -1,26 +1,21 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   Button,
   ButtonGroup,
 } from 'react-native-ui-kitten';
 
 export const ButtonGroupSimpleUsageShowcase = () => (
-  <View style={styles.container}>
-    <ButtonGroup>
-      <Button style={styles.button}>Left</Button>
-      <Button style={styles.button}>Mid</Button>
-      <Button style={styles.button}>Right</Button>
-    </ButtonGroup>
-  </View>
+  <ButtonGroup style={styles.container}>
+    <Button style={styles.button}>L</Button>
+    <Button style={styles.button}>M</Button>
+    <Button style={styles.button}>R</Button>
+  </ButtonGroup>
 );
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    margin: 16,
   },
   button: {
     flex: 1,

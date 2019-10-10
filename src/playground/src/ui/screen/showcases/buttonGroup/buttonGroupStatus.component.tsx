@@ -1,58 +1,56 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   Button,
   ButtonGroup,
+  Layout,
 } from 'react-native-ui-kitten';
 
 export const ButtonGroupStatusShowcase = () => (
-  <View style={styles.container}>
+  <Layout style={styles.container}>
     <ButtonGroup
-      style={styles.group}
+      style={styles.buttonGroup}
       status='primary'>
-      <Button style={styles.button}>Left</Button>
-      <Button style={styles.button}>Mid</Button>
-      <Button style={styles.button}>Right</Button>
+      <Button style={styles.button}>L</Button>
+      <Button style={styles.button}>M</Button>
+      <Button style={styles.button}>R</Button>
     </ButtonGroup>
     <ButtonGroup
-      style={styles.group}
+      style={styles.buttonGroup}
       status='success'>
-      <Button style={styles.button}>Left</Button>
-      <Button style={styles.button}>Mid</Button>
-      <Button style={styles.button}>Right</Button>
+      <Button style={styles.button}>L</Button>
+      <Button style={styles.button}>M</Button>
+      <Button style={styles.button}>R</Button>
     </ButtonGroup>
     <ButtonGroup
-      style={styles.group}
+      style={styles.buttonGroup}
       status='info'>
-      <Button style={styles.button}>Left</Button>
-      <Button style={styles.button}>Mid</Button>
-      <Button style={styles.button}>Right</Button>
+      <Button style={styles.button}>L</Button>
+      <Button style={styles.button}>M</Button>
+      <Button style={styles.button}>R</Button>
     </ButtonGroup>
     <ButtonGroup
-      style={styles.group}
+      style={styles.buttonGroup}
       status='warning'>
-      <Button style={styles.button}>Left</Button>
-      <Button style={styles.button}>Mid</Button>
-      <Button style={styles.button}>Right</Button>
+      <Button style={styles.button}>L</Button>
+      <Button style={styles.button}>M</Button>
+      <Button style={styles.button}>R</Button>
     </ButtonGroup>
     <ButtonGroup
-      style={styles.group}
+      style={styles.buttonGroup}
       status='danger'>
-      <Button style={styles.button}>Left</Button>
-      <Button style={styles.button}>Mid</Button>
-      <Button style={styles.button}>Right</Button>
+      <Button style={styles.button}>L</Button>
+      <Button style={styles.button}>M</Button>
+      <Button style={styles.button}>R</Button>
     </ButtonGroup>
-  </View>
+  </Layout>
 );
 
 const styles = StyleSheet.create({
   container: {
     padding: 16,
   },
-  group: {
+  buttonGroup: {
     marginBottom: 10,
   },
   button: {
