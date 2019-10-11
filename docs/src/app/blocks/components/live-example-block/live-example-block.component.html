@@ -1,13 +1,6 @@
 <section class="header" >
   <strong class="title">{{ content.name }}</strong>
   <div class="actions">
-
-    <div class="action-selector">
-      <select class="action-item" [(ngModel)]="currentTheme"  (change)="switchTheme($event.target.value)">
-        <option *ngFor="let theme of themes" [value]="theme.value">{{theme.label}}</option>
-      </select>
-      <nb-icon icon="color-palette-outline"></nb-icon>
-    </div>
     <a class="btn action-item action-button" target="_blank" [href]="url">
       <nb-icon icon="external-link-outline"></nb-icon>
     </a>

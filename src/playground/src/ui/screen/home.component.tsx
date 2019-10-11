@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  Button,
   ListRenderItemInfo,
+  Platform,
 } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
+import { Link } from '@react-navigation/web';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -25,7 +26,7 @@ export const routes: RouteType[] = [
   { name: 'Calendar' },
   { name: 'Range Calendar' },
   { name: 'Checkbox' },
-  { name: 'Datepicker'},
+  { name: 'Datepicker' },
   { name: 'Drawer' },
   { name: 'Icon' },
   { name: 'Input' },
@@ -51,19 +52,35 @@ type Props = ThemedComponentProps & NavigationScreenProps;
 
 class HomeScreen extends React.Component<Props> {
 
-  private onItemPress = (index: number) => {
+  private onItemPressMobile = (index: number) => {
     const { [index]: route } = routes;
 
     this.props.navigation.navigate(route.name);
   };
 
-  private renderItem = (info: ListRenderItemInfo<RouteType>): ListItemElement => {
+  private renderWebListItem = (info: ListRenderItemInfo<RouteType>): ListItemElement => {
+    return (
+      <Link routeName={info.item.name}>
+        <ListItem title={info.item.name}/>
+      </Link>
+    );
+  };
+
+  private renderMobileListItem = (info: ListRenderItemInfo<RouteType>): ListItemElement => {
     return (
       <ListItem
         title={info.item.name}
-        onPress={this.onItemPress}
+        onPress={this.onItemPressMobile}
       />
     );
+  };
+
+  private renderItem = (info: ListRenderItemInfo<RouteType>): ListItemElement => {
+    return Platform.select({
+      ios: this.renderMobileListItem(info),
+      android: this.renderMobileListItem(info),
+      default: this.renderWebListItem(info),
+    });
   };
 
   public render(): ListElement {

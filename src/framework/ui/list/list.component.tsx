@@ -61,97 +61,11 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
+ * @overview-example ListSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { List, ListItem } from 'react-native-ui-kitten';
+ * @overview-example ListCompositeItem
  *
- * export const ListShowcase = (props) => {
- *
- *   const data = ['Item 1', 'Item 2', 'Item 3'];
- *
- *   const onItemPress = (index) => {
- *     // Handle item press
- *   };
- *
- *   const renderItem = ({ item, index }) => (
- *     <ListItem
- *       title={item}
- *       description='Description'
- *       onPress={onItemPress}
- *     />
- *   );
- *
- *   return (
- *     <List
- *       data={data}
- *       renderItem={renderItem}
- *     />
- *   );
- * };
- * ```
- *
- * @overview-example Custom List Item
- *
- * ```
- * import React from 'react';
- * import { List, ListItem, Text } from 'react-native-ui-kitten';
- *
- * export const ListShowcase = (props) => {
- *
- *   const data = ['Item 1', 'Item 2', 'Item 3'];
- *
- *   const renderItem = ({ item, index }) => (
- *     <ListItem>
- *       <Text>{item}</Text>
- *     </ListItem>
- *   );
- *
- *   return (
- *     <List
- *       data={data}
- *       renderItem={renderItem}
- *     />
- *   );
- * };
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native-ui-kitten';
- * import { List, ListItem } from 'react-native-ui-kitten';
- *
- * export const ListShowcase = (props) => {
- *
- *   const data = ['Item 1', 'Item 2', 'Item 3'];
- *
- *   const onItemPress = (index) => {
- *     // Handle item press
- *   };
- *
- *   const renderItem = ({ item, index }) => (
- *     <ListItem
- *       title={item}
- *       description='Description'
- *       onPress={onItemPress}
- *     />
- *   );
- *
- *   return (
- *     <List
- *       contentContainerStyle={styles.contentContainer}
- *       data={data}
- *       renderItem={renderItem}
- *     />
- *   );
- * };
- *
- * const styles = StyleSheet.create({
- *   contentContainer: { paddingHorizontal: 8 },
- * });
+ * @example ListInlineStyling
  * ```
  */
 export class ListComponent extends React.Component<ListProps> {

@@ -49,35 +49,7 @@ import {
  *
  * @property StyledComponentProps
  *
- * @overview-example Basic Usage
- *
- * ```
- * import React from 'react';
- * import { RangeDatepicker } from 'react-native-ui-kitten';
- *
- * export class BasicDatepicker extends React.Component {
- *
- *   state = {
- *     range: {
- *       startDate: null,
- *       endDate: null,
- *     },
- *   };
- *
- *   onSelect = (range) => {
- *     this.setState({ range });
- *   };
- *
- *   render() {
- *     return (
- *       <RangeDatepicker
- *         range={this.state.range}
- *         onSelect={this.onSelect}
- *       />
- *     );
- *   }
- * }
- * ```
+ * @overview-example RangeDatepickerSimpleUsage
  */
 export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, RangeCalendarProps<D>> {
 

@@ -12,6 +12,8 @@ npm-debug.log
 # docs
 docs/docs.json
 docs/src/input.json
+docs/src/assets/examples-build
+docs/src/examples.json
 
 # config
 config/index.js

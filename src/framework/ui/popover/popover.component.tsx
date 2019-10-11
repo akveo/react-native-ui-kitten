@@ -86,46 +86,9 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
+ * @overview-example PopoverSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Popover, Layout, Button, Text } from 'react-native-ui-kitten';
- *
- * export class PopoverShowcase extends React.Component {
- *
- *   state = {
- *     popoverVisible: false,
- *   };
- *
- *   togglePopover = () => {
- *     const popoverVisible = !this.state.popoverVisible;
- *     this.setState({ popoverVisible });
- *   };
- *
- *   renderPopoverContentElement = () => (
- *     <Layout style={styles.popoverContent}>
- *       <Text>Hi! This is popover.</Text>
- *     </Layout>
- *   );
- *
- *   render() {
- *     return (
- *       <Popover
- *         visible={this.state.popoverVisible}
- *         content={this.renderPopoverContentElement()}
- *         onBackdropPress={this.togglePopover}>
- *         <Button onPress={this.togglePopover}>TOGGLE POPOVER</Button>
- *       </Popover>
- *     );
- *   }
- * }
- *
- * const styles = StyleSheet.create({
- *   popoverContent: { justifyContent: 'center', alignItems: 'center' },
- * });
- * ```
+ * @overview-example PopoverPlacement
  */
 export class PopoverComponent extends React.Component<PopoverProps> {
 

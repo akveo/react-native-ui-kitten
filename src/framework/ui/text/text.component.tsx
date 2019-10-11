@@ -47,48 +47,15 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
+ * @overview-example TextSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { Text } from 'react-native-ui-kitten';
+ * @overview-example TextAppearances
  *
- * export const TextShowcase = (props) => (
- *   <Text>Sample Text</Text>
- * );
- * ```
+ * @overview-example TextCategories
  *
- * @overview-example Eva Styling
+ * @overview-example TextStatuses
  *
- * ```
- * import React from 'react';
- * import { Text } from 'react-native-ui-kitten';
- *
- * export const TextShowcase = (props) => (
- *   <Text
- *     appearance='hint'
- *     category='p2'
- *     status='success'>
- *     Sample Text
- *   </Text>
- * );
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Text } from 'react-native-ui-kitten';
- *
- * export const TextShowcase = (props) => (
- *   <Text style={styles.text}>Sample Text</Text>
- * );
- *
- * const styles = StyleSheet.create({
- *   text: { color: 'black', fontSize: 18 },
- * });
- * ```
+ * @example TextInlineStyling
  */
 export class TextComponent extends React.Component<TextProps> {
 

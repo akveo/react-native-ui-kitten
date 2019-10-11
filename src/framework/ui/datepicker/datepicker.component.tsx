@@ -49,152 +49,19 @@ import {
  *
  * @property StyledComponentProps
  *
- * @overview-example Basic Usage
+ * @overview-example DatepickerSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { Datepicker } from 'react-native-ui-kitten';
+ * @overview-example DatepickerWithIcon
  *
- * export class BasicDatepicker extends React.Component {
+ * @overview-example DatepickerBoundingMonth
  *
- *   state = {
- *     date: new Date(),
- *   };
+ * @overview-example DatepickerFilter
  *
- *   onSelect = (date) => {
- *     this.setState({ date });
- *   };
+ * @example DatepickerCustomDay
  *
- *   render() {
- *     return (
- *       <Datepicker
- *         date={this.state.date}
- *         onSelect={this.onSelect}
- *       />
- *     );
- *   }
- * }
- * ```
+ * @example DatepickerCustomLocale
  *
- * @overview-example Custom Day Cell
- *
- * ```
- * import React from 'react';
- * import { View, StyleSheet } from 'react-native';
- * import { Datepicker, Text } from 'react-native-ui-kitten';
- *
- * export const DayCell = ({ date }, style) => (
- *   <View
- *     style={[styles.container, style.container]}>
- *     <Text style={style.text}>{`${date.getDate()}`}</Text>
- *     <Text style={[style.text, styles.value]}>
- *       {`${100 * date.getDate() + Math.pow(date.getDate(), 2)}$`}
- *     </Text>
- *   </View>
- * );
- *
- * const styles = StyleSheet.create({
- *   container: { flex: 1, justifyContent: 'center', alignItems: 'center', aspectRatio: 1 },
- *   value: { fontSize: 12, fontWeight: '400' },
- * });
- *
- * export class DailyValueDatepicker extends React.Component {
- *
- *   state = {
- *     date: new Date(),
- *   };
- *
- *   onSelect = (date) => {
- *     this.setState({ date });
- *   };
- *
- *   render() {
- *     return (
- *       <Datepicker
- *         date={this.state.date}
- *         onSelect={this.onSelect}
- *         renderDay={DayCell}
- *       />
- *     );
- *   }
- * }
- * ```
- *
- * @overview-example Custom Locale
- *
- * ```
- * import React from 'react';
- * import { Datepicker, NativeDateService } from 'react-native-ui-kitten';
- *
- * const i18n = {
- *   dayNames: {
- *     short: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
- *     long: ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
- *   },
- *   monthNames: {
- *     short: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
- *     long: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
- *   },
- * };
- *
- * export class ChineseDatepicker extends React.Component {
- *
- *   dateService = new NativeDateService('zh', i18n);
- *
- *   state = {
- *     date: new Date(),
- *   };
- *
- *   onSelect = (date) => {
- *     this.setState({ date });
- *   };
- *
- *   render() {
- *     return (
- *       <Datepicker
- *         date={this.state.date}
- *         dateService={this.dateService}
- *         onSelect={this.onSelect}
- *       />
- *     );
- *   }
- * }
- * ```
- *
- * @overview-example Working with Moment
- *
- * ```
- * // IMPORTANT: To use Moment make sure to install Moment Date Service
- * // npm i @ui-kitten/moment
- *
- * import React from 'react';
- * import moment from 'moment';
- * import { Datepicker } from 'react-native-ui-kitten';
- * import { MomentDateService } from '@ui-kitten/moment';
- *
- * export class MomentDatepicker extends React.Component {
- *
- *   state = {
- *     date: moment();
- *   };
- *
- *   dateService = new MomentDateService();
- *
- *   onSelect = (date) => {
- *     this.setState({ date });
- *   }
- *
- *   render() {
- *     return (
- *       <Datepicker
- *         date={this.state.date}
- *         dateService={this.dateService}
- *         onSelect={this.onSelect}
- *       />
- *     );
- *   }
- * }
- * ```
+ * @example DatepickerMoment
  */
 export class DatepickerComponent<D> extends BaseDatepickerComponent<D, CalendarProps<D>> {
 

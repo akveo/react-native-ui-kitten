@@ -38,74 +38,11 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
+ * @overview-example LayoutSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { Layout, Text } from 'react-native-ui-kitten';
+ * @overview-example LayoutLevel
  *
- * export const LayoutShowcase = (props) => (
- *   <Layout>
- *     <Text>Layout</Text>
- *   </Layout>
- * );
- * ```
- *
- * @overview-example Layout Levels
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Layout, Text } from 'react-native-ui-kitten';
- *
- * export const LayoutShowcase = (props) => (
- *   <Layout style={styles.container} level='4'>
- *     <Layout style={styles.container} level='3'>
- *       <Layout style={styles.container} level='2'>
- *         <Layout style={[styles.container, styles.contentContainer]}>
- *           <Text>Welcome to UI Kitten</Text>
- *         </Layout>
- *       </Layout>
- *     </Layout>
- *   </Layout>
- * );
- *
- * const styles = StyleSheet.create({
- *   container: { flex: 1, padding: 16 }
- *   contentContainer: { justifyContent: 'center', alignItems: 'center' }
- * });
- * ```
- *
- * @overview-example Eva Styling
- *
- * ```
- * import React from 'react';
- * import { Layout, Text } from 'react-native-ui-kitten';
- *
- * export const LayoutShowcase = (props) => (
- *   <Layout level='2'>
- *     <Text>Layout</Text>
- *   </Layout>
- * );
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native-ui-kitten';
- * import { Layout, Text } from 'react-native-ui-kitten';
- *
- * export const LayoutShowcase = (props) => (
- *   <Layout style={styles.container}>
- *     <Text>Layout</Text>
- *   </Layout>
- * );
- *
- * const styles = StyleSheet.create({
- *   container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
- * });
- * ```
+ * @example LayoutInlineStyling
  */
 export class LayoutComponent extends React.Component<LayoutProps> {
 

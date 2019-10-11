@@ -58,34 +58,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
- *
- * ```
- * import React from 'react';
- * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
- *
- * export class BottomNavigationShowcase extends React.Component {
- *
- *   state = {
- *     selectedIndex: 0,
- *   };
- *
- *   onTabSelect = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render() {
- *     return (
- *       <BottomNavigation
- *         selectedIndex={this.state.selectedIndex}
- *         onSelect={this.onTabSelect}>
- *          <BottomNavigationTab title='Dashboard' />
- *          <BottomNavigationTab title='Settings' />
- *       </BottomNavigation>
- *     );
- *   }
- * }
- * ```
+ * @overview-example BottomNavigationSimpleUsage
  *
  * @overview-example With React Navigation
  *
@@ -121,57 +94,11 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * });
  * ```
  *
- * @example Without Indicator
+ * @example BottomNavigationWithoutIndicator
  *
- * ```
- * import React from 'react';
- * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
+ * @overview-example BottomNavigationWithIcons
  *
- * export class BottomNavigationShowcase extends React.Component {
- *
- *   state = {
- *     selectedIndex: 0,
- *   };
- *
- *   onTabSelect = (selectedIndex) => {
- *     this.setState({ selectedIndex });
- *   };
- *
- *   render()  {
- *     return (
- *       <BottomNavigation
- *          appearance='noIndicator'
- *          selectedIndex={this.state.selectedIndex}
- *          onSelect={this.onTabSelect}>
- *          <BottomNavigationTab title='Dashboard' />
- *          <BottomNavigationTab title='Settings' />
- *       </BottomNavigation>
- *     );
- *   }
- * }
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
- *
- * export const BottomNavigationShowcase = (props) => (
- *   <BottomNavigation
- *      style={styles.bottomNavigation}
- *      indicatorStyle={styles.indicator}>
- *      <BottomNavigationTab title='Dashboard' />
- *      <BottomNavigationTab title='Settings' />
- *   </BottomNavigation>
- * );
- *
- * const styles = StyleSheet.create({
- *   bottomNavigation: { backgroundColor: 'white' },
- *   indicator: { backgroundColor: 'black' },
- * });
- * ```
+ * @example BottomNavigationInlineStyling
  */
 export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 

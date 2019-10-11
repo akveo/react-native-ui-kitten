@@ -58,35 +58,7 @@ export type RangeCalendarElement<D> = React.ReactElement<RangeCalendarProps<D>>;
  *
  * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
  *
- * @overview-example Basic Usage
- *
- * ```
- * import React from 'react';
- * import { RangeCalendar } from 'react-native-ui-kitten';
- *
- * export class RangeCalendar extends React.Component {
- *
- *   state = {
- *     range: {
- *       startDate: null,
- *       endDate: null,
- *     },
- *   };
- *
- *   onSelect = (range) => {
- *     this.setState({ range });
- *   };
- *
- *   render() {
- *     return (
- *       <RangeCalendar
- *         range={this.state.range}
- *         onSelect={this.onSelect}
- *       />
- *     );
- *   }
- * }
- * ```
+ * @overview-example RangeCalendarSimpleUsage
  */
 export class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCalendarProps<D>> {
 

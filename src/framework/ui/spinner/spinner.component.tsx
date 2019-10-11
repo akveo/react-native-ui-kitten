@@ -47,88 +47,13 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  * Can be `primary`, `success`, `info`, `warning`, `danger` or `alternative`.
  * Default is `primary`.
  *
- * @overview-example Simple Usage
+ * @overview-example SpinnerSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { Spinner } from 'react-native-ui-kitten';
+ * @overview-example SpinnerSizes
  *
- * export const SpinnerShowcase = () => (
- *   <Spinner />
- * );
- * ```
+ * @overview-example SpinnerStatuses
  *
- * @overview-example Loading Data
- *
- * ```
- * import React from 'react';
- * import { View, StyleSheet } from 'react-native';
- * import { Spinner, List, ListItem } from 'react-native-ui-kitten';
- *
- * export class SpinnerDataLoading extends React.Component {
- *
- *  state = {
- *    data: [],
- *  };
- *
- *  componentDidMount() {
- *    setTimeout(this.loadData, 3000);
- *  }
- *
- *  loadData = () => {
- *    const data = [
- *      {
- *        title: 'Item 1',
- *      },
- *      {
- *        title: 'Item 2',
- *      },
- *      {
- *        title: 'Item 3',
- *      },
- *    ];
- *    this.setState({ data });
- *  };
- *
- *  private renderLoading = () => (
- *    <View style={styles.loading}>
- *      <Spinner/>
- *    </View>
- *  );
- *
- *  renderDataItem = ({ item }) => (
- *    <ListItem title={item.title}/>
- *  );
- *
- *  renderData = () => (
- *    <List data={this.state.data} renderItem={this.renderDataItem}/>
- *  );
- *
- *  render() {
- *    const isLoaded: boolean = this.state.data.length > 0;
- *    return isLoaded ? this.renderData() : this.renderLoading();
- *  }
- *}
- *
- * const styles = StyleSheet.create({
- *   loading: {
- *     flex: 1,
- *     justifyContent: 'center',
- *     alignItems: 'center',
- *   },
- *});
- *```
- *
- * @overview-example Eva Styling
- *
- * ```
- * import React from 'react';
- * import { Spinner } from 'react-native-ui-kitten';
- *
- * export const SpinnerShowcase = (props) => (
- *   <Spinner size='giant' status='danger' />
- * );
- * ```
+ * @example SpinnerDataLoading
  */
 export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
 

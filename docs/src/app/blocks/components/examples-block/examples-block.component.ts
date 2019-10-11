@@ -16,8 +16,10 @@ import {
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
-        <ngd-stacked-example-block *ngIf="hasExamples()" [content]="examples"
-                                   class="widget-block">
+        <ngd-stacked-example-block
+          *ngFor="let example of source.examples"
+          [content]="example"
+          class="widget-block">
         </ngd-stacked-example-block>
       </nb-card-body>
     </nb-card>
@@ -32,10 +34,9 @@ export class NgdExamplesBlockComponent {
   @Input('source')
   set setExamples(source: any) {
     this.source = source;
-    this.examples = source.examples;
   }
 
   hasExamples(): boolean {
-    return this.examples.length !== 0;
+    return this.source.examples.length !== 0;
   }
 }

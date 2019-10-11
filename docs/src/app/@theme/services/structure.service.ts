@@ -8,17 +8,24 @@ import { Inject, Injectable } from '@angular/core';
 
 import { NgdTabbedService } from './tabbed.service';
 import { NgdTextService } from './text.service';
-import { DOCS, STRUCTURE } from '../../app.options';
+import {
+  DOCS,
+  STRUCTURE,
+  EXAMPLES_STRUCTURE,
+} from '../../app.options';
 
 @Injectable()
 export class NgdStructureService {
 
   protected prepared;
+  protected examplesHelperArray: any[];
 
   constructor(private textService: NgdTextService,
               private tabbedService: NgdTabbedService,
               @Inject(STRUCTURE) structure,
-              @Inject(DOCS) docs) {
+              @Inject(DOCS) docs,
+              @Inject(EXAMPLES_STRUCTURE) examples) {
+    this.examplesHelperArray = examples;
     this.prepared = this.prepareStructure(structure, docs);
   }
 
@@ -105,6 +112,9 @@ export class NgdStructureService {
       images = imagesObj ? imagesObj.images : [];
     }
 
+    component.overviewExamples = this.processExamples(component.overviewExamples);
+    component.examples = this.processExamples(component.examples);
+
     return {
       ...component,
       slag: this.textService.createSlag(component.name),
@@ -118,6 +128,35 @@ export class NgdStructureService {
         return node;
       }),
       images: images,
+    };
+  }
+
+  protected processExamples(examples: any[]): any[] {
+    if (examples && examples.length !== 0) {
+      return examples
+        .map((example: any) => {
+          const helper: any = this.examplesHelperArray.find(item => {
+            return example.description === item.name;
+          });
+          return helper ? this.prepareExample(helper, example) : example;
+        })
+        .filter(Boolean);
+    } else {
+      return [];
+    }
+  }
+
+  protected prepareExample(helper: any, example: any): any {
+    return {
+      id: example.description,
+      name: example.description.split(/(?=[A-Z])/).join(' '),
+      files: [{
+        path: helper.path,
+        code: helper.code,
+        extension: helper.path.slice(helper.path.length - 3),
+      }],
+      code: helper.code,
+      url: `/assets/examples-build/#/${helper.name}`,
     };
   }
 

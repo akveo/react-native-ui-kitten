@@ -56,7 +56,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
  * Default is `false`.
  *
- * @property {BackdropStyle} backdropStyle - Determines the style of backdrop.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
  *
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
  * tapping on back-drop.

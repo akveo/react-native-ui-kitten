@@ -74,123 +74,15 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
+ * @overview-example ToggleSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { Toggle } from 'react-native-ui-kitten';
+ * @overview-example ToggleStatus
  *
- * export class ToggleShowcase extends React.Component {
+ * @overview-example ToggleSize
  *
- *   state = {
- *     checked: false,
- *   };
+ * @overview-example ToggleWithText
  *
- *   onChange = (checked) => {
- *     this.setState({ checked });
- *   };
- *
- *   render() {
- *     return (
- *       <Toggle
- *         checked={this.state.checked}
- *         onChange={this.onChange}
- *       />
- *     );
- *   }
- * }
- * ```
- *
- * @overview-example With Text
- *
- * ```
- * import React from 'react';
- * import { Toggle } from 'react-native-ui-kitten';
- *
- * export class ToggleShowcase extends React.Component {
- *
- *   state = {
- *     checked: false,
- *   };
- *
- *   onChange = (checked) => {
- *     this.setState({ checked });
- *   };
- *
- *   render() {
- *     return (
- *       <Toggle
- *         text='Place your text'
- *         checked={this.state.checked}
- *         onChange={this.onChange}
- *       />
- *     )
- *   }
- * }
- * ```
- *
- * @overview-example Eva Styling
- *
- * ```
- * import React from 'react';
- * import { Toggle } from 'react-native-ui-kitten';
- *
- * export class ToggleShowcase extends React.Component {
- *
- *   state = {
- *     checked: false,
- *   };
- *
- *   onChange = (checked) => {
- *     this.setState({ checked });
- *   };
- *
- *   render() {
- *     return (
- *       <Toggle
- *         size='small'
- *         status='info'
- *         checked={this.state.checked}
- *         onChange={this.onChange}
- *       />
- *     );
- *   }
- * }
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Toggle } from 'react-native-ui-kitten';
- *
- * export class ToggleShowcase extends React.Component {
- *
- *   state = {
- *     checked: false,
- *   };
- *
- *   onChange = (checked) => {
- *     this.setState({ checked });
- *   };
- *
- *   render() {
- *     return (
- *       <Toggle
- *         textStyle={styles.toggleText}
- *         text='Place your Text'
- *         checked={this.state.checked}
- *         onChange={this.onChange}
- *       />
- *     );
- *   }
- * }
- *
- * const styles = StyleSheet.create({
- *   toggleText: { color: 'black' },
- * });
- * ```
+ * @example ToggleInlineStyling
  */
 export class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
 

@@ -64,111 +64,14 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
+ * @overview-example RadioSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { Radio } from 'react-native-ui-kitten';
+ * @overview-example RadioStatus
  *
- * export class RadioShowcase extends React.Component {
+ * @overview-example RadioWithText
  *
- *   state = {
- *     checked: false,
- *   };
- *
- *   onChange = (checked) => {
- *     this.setState({ checked });
- *   };
- *
- *   render() {
- *     return (
- *       <Radio
- *         checked={this.state.checked}
- *         onChange={this.onChange}
- *       />
- *     )
- *   }
- * }
- *
- * ```
- * @overview-example With Text
- *
- * ```
- * import React from 'react';
- * import { Radio } from 'react-native-ui-kitten';
- *
- * export class RadioShowcase extends React.Component {
- *
- *   state = {
- *     checked: false,
- *   };
- *
- *   onChange = (checked) => {
- *     this.setState({ checked });
- *   };
- *
- *   render() {
- *     return (
- *       <Radio
- *         text='Place your text'
- *         checked={this.state.checked}
- *         onChange={this.onChange}
- *       />
- *     )
- *   }
- * }
- * ```
- *
- * @overview-example Eva Styling
- *
- * ```
- * import React from 'react';
- * import { Radio } from 'react-native-ui-kitten';
- *
- * export class RadioShowcase extends React.Component {
- *
- *   state = {
- *     checked: false,
- *   };
- *
- *   onChange = (checked) => {
- *     this.setState({ checked });
- *   };
- *
- *   render() {
- *     return (
- *       <Radio
- *         status='warning'
- *         checked={this.state.checked}
- *         onChange={this.onChange}
- *       />
- *     )
- *   }
- * }
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Radio } from 'react-native-ui-kitten';
- *
- * export const RadioShowcase = (props) => (
- *   <Radio
- *     style={styles.radio}
- *     textStyle={styles.radioText}
- *     checked={true}
- *   />
- * );
- *
- * const styles = StyleSheet.create({
- *   radio: { width: 32, height: 32 },
- *   radioText: { color: 'black' },
- * });
- * ```
+ * @example RadioInlineStyling
  */
-
 export class RadioComponent extends React.Component<RadioProps> {
 
   static styledComponentName: string = 'Radio';

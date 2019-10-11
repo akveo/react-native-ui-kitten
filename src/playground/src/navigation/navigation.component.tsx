@@ -1,10 +1,12 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import {
   createAppContainer,
   createDrawerNavigator,
   createStackNavigator,
   NavigationRouteConfigMap,
 } from 'react-navigation';
+import { createBrowserApp } from '@react-navigation/web';
 import {
   AvatarContainer,
   BottomNavigationContainer,
@@ -36,6 +38,7 @@ import {
   RangeCalendarContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
+import { sharingHeightContainer } from './sharingHeight.container';
 
 export interface RouteType {
   name: string;
@@ -74,7 +77,11 @@ const routes: NavigationRouteConfigMap = {
 
 const MenuNavigator = createStackNavigator(routes, {
   initialRouteName: 'Home',
-  headerMode: 'screen',
+  headerMode: Platform.select({
+    ios: 'screen',
+    android: 'screen',
+    default: 'none',
+  }),
 });
 
 const DrawerNavigator = createDrawerNavigator({
@@ -85,4 +92,12 @@ const DrawerNavigator = createDrawerNavigator({
   initialRouteName: 'Home',
 });
 
-export const Router: any = createAppContainer(DrawerNavigator);
+export let Router: any;
+
+switch (Platform.OS) {
+  case 'web':
+    Router = createBrowserApp(MenuNavigator, { history: 'hash' });
+    break;
+  default:
+    Router = createAppContainer(DrawerNavigator);
+}

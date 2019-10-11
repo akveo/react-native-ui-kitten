@@ -27,11 +27,13 @@ import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import { structure  } from '../structure';
+const docs = require('../input.json');
+const examples = require('../examples.json');
 import {
   DOCS,
   STRUCTURE,
+  EXAMPLES_STRUCTURE,
 } from './app.options';
-const docs = require('../input.json');
 
 @NgModule({
   imports: [
@@ -58,6 +60,7 @@ const docs = require('../input.json');
     Title,
     { provide: STRUCTURE, useValue: structure },
     { provide: DOCS, useValue: docs },
+    { provide: EXAMPLES_STRUCTURE, useValue: examples },
   ],
   entryComponents: [
   ],

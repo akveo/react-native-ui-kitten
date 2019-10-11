@@ -35,30 +35,14 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
     return this.currentTheme === 'default';
   }
 
-  @HostBinding('class.theme-cosmic')
-  private get isCosmic() {
-    return this.currentTheme === 'cosmic';
-  }
-
-  @HostBinding('class.theme-corporate')
-  private get isCorporate() {
-    return this.currentTheme === 'corporate';
-  }
-
   iframeHeight = 0;
   alive: boolean = true;
-
-  themes: {label: string; value: string}[] = [
-    { label: 'Default', value: 'default' },
-    { label: 'Cosmic', value: 'cosmic' },
-    { label: 'Corporate', value: 'corporate' },
-  ];
 
   currentTheme: string = 'default';
   loading = true;
 
   get url(): string {
-    return this.location.prepareExternalUrl(`example/${this.content.id}`);
+    return this.location.prepareExternalUrl(this.content.url);
   }
 
   get iframeWindow(): Window {
@@ -92,11 +76,6 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
 
   ngOnDestroy() {
     this.alive = false;
-  }
-
-  switchTheme(theme: string) {
-    this.analytics.trackEvent('changeTheme', theme);
-    this.communicator.send({ id: this.content.id, theme }, this.iframeWindow);
   }
 
   switchToInlineVew() {

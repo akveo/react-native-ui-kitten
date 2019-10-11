@@ -75,145 +75,15 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example Simple Usage
+ * @overview-example TooltipSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { Tooltip, Button } from 'react-native-ui-kitten';
+ * @overview-example TooltipWithIcon
  *
- * export class TooltipShowcase extends React.Component {
+ * @overview-example TooltipPlacement
  *
- *   state = {
- *     tooltipVisible: false,
- *   };
+ * @example TooltipWithExternalSourceIcon
  *
- *   toggleTooltip = () => {
- *     const tooltipVisible = !this.state.tooltipVisible;
- *     this.setState({ tooltipVisible });
- *   };
- *
- *   render() {
- *     return (
- *       <Tooltip
- *         visible={this.state.tooltipVisible}
- *         text='Tooltip Text'
- *         onBackdropPress={this.toggleTooltip}>
- *         <Button onPress={this.toggleTooltip}>TOGGLE TOOLTIP</Button>
- *       </Tooltip>
- *     );
- *   }
- * }
- * ```
- *
- * @overview-example With Icon
- *
- * ```
- * // IMPORTANT: To use Icon component make sure to follow this guide:
- * // https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
- *
- * import React from 'react';
- * import { Tooltip, Button, Icon } from 'react-native-ui-kitten';
- *
- * const StarIcon = (style) => (
- *   <Icon {...style} name='star' />
- * );
- *
- * export class TooltipShowcase extends React.Component {
- *
- *   state = {
- *     tooltipVisible: false,
- *   };
- *
- *   toggleTooltip = () => {
- *     const tooltipVisible = !this.state.tooltipVisible;
- *     this.setState({ tooltipVisible });
- *   };
- *
- *   render() {
- *     return (
- *       <Tooltip
- *         visible={this.state.tooltipVisible}
- *         text='Tooltip Text'
- *         icon={StarIcon}
- *         onBackdropPress={this.toggleTooltip}>
- *         <Button onPress={this.toggleTooltip}> TOGGLE TOOLTIP</Button>
- *       </Tooltip>
- *     );
- *   }
- * }
- * ```
- *
- * @example Using Asset Icons
- *
- * ```
- * import React from 'react';
- * import { Image } from 'react-native';
- * import { Tooltip, Button } from 'react-native-ui-kitten';
- *
- * const StarIcon = (style) => (
- *   <Image style={style} source={require('path-to-assets/local-image.png')} />
- * );
- *
- * export class TooltipShowcase extends React.Component {
- *
- *   state = {
- *     tooltipVisible: false,
- *   };
- *
- *   toggleTooltip = () => {
- *     const tooltipVisible = !this.state.tooltipVisible;
- *     this.setState({ tooltipVisible });
- *   };
- *
- *   render() {
- *     return (
- *       <Tooltip
- *         visible={this.state.tooltipVisible}
- *         text='Tooltip Text'
- *         icon={StarIcon}
- *         onBackdropPress={this.toggleTooltip}>
- *         <Button onPress={this.toggleTooltip}>TOGGLE TOOLTIP</Button>
- *       </Tooltip>
- *     );
- *   }
- * }
- * ```
- *
- * @example Inline Styling
- *
- * ```
- * import React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Tooltip, Button } from 'react-native-ui-kitten';
- *
- * export class TooltipShowcase extends React.Component {
- *
- *   state = {
- *     tooltipVisible: false,
- *   };
- *
- *   toggleTooltip = () => {
- *     const tooltipVisible = !this.state.tooltipVisible;
- *     this.setState({ tooltipVisible });
- *   };
- *
- *   render() {
- *     return (
- *       <Tooltip
- *         visible={this.state.tooltipVisible}
- *         text='Tooltip Text'
- *         textStyle={styles.tooltipText}
- *         onBackdropPress={this.toggleTooltip}>
- *         <Button onPress={this.toggleTooltip}>TOGGLE TOOLTIP</Button>
- *       </Tooltip>
- *     );
- *   }
- * }
- *
- * const styles = StyleSheet.create({
- *   tooltipText: { color: 'white', fontSize: 18 },
- * });
- * ```
+ * @example TooltipInlineStyling
  */
 export class TooltipComponent extends React.Component<TooltipProps> {
 

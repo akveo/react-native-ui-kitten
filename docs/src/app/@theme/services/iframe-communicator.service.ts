@@ -18,7 +18,11 @@ export class NgdIframeCommunicatorService {
   public receive(id: string): Observable<any> {
     return observableFromEvent(this.window, 'message')
       .pipe(
-        filter((msg: any) => msg.data && msg.data.id === id),
+        filter((msg: any) => {
+          if (msg.data && msg.data.id && msg.data.id.length !== 0) {
+            return msg.data && msg.data.id === id
+          }
+        }),
         map((msg: any) => msg.data),
       );
   }
