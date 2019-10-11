@@ -1,12 +1,10 @@
 const path = require('path');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const createExpoWebpackConfigAsync = require('@expo/webpack-config');
-
 const aliases = {
   'react-native-web': path.resolve(__dirname, './node_modules/react-native-web'),
   '@babel/runtime': path.resolve(__dirname, './node_modules/@babel/runtime'),
 };
-
 const babelLoaderRules = {
   test: /\.tsx?$/,
   loader: 'babel-loader',
@@ -14,10 +12,8 @@ const babelLoaderRules = {
     presets: ['babel-preset-expo'],
   },
 };
-
 module.exports = async function (env, argv) {
   const config = await createExpoWebpackConfigAsync(env, argv);
-
   config.resolve.alias = {
     ...config.resolve.alias,
     ...aliases,
