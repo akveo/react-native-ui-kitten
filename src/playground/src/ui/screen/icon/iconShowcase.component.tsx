@@ -4,8 +4,8 @@ import {
   Icon,
   IconProps,
   Input,
-} from '@kitten/ui';
-import { StyleType } from '@kitten/theme';
+  StyleType,
+} from 'react-native-ui-kitten';
 
 interface State {
   iconName: string;

@@ -1,19 +1,19 @@
 import React from 'react';
 import {
+  Icon,
+  IconElement,
+  OverflowMenuItemType,
+  StyleType,
+} from 'react-native-ui-kitten';
+import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '../common/type';
-import { OverflowMenuItemType } from '@kitten/ui';
-import { Image, ImageProps } from 'react-native';
-import { StyleType } from '@kitten/theme';
 
-const Icon = (style: StyleType): React.ReactElement<ImageProps> => (
-  <Image
-    style={style}
-    source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
-  />
+const StarIcon = (style: StyleType): IconElement => (
+  <Icon {...style} name='star' />
 );
 
 const defaultMenuItems: OverflowMenuItemType[] = [
@@ -25,31 +25,31 @@ const defaultMenuItems: OverflowMenuItemType[] = [
 const withIconMenuItems: OverflowMenuItemType[] = [
   {
     title: 'Item 1',
-    icon: Icon,
+    icon: StarIcon,
   },
   {
     title: 'Item 2',
-    icon: Icon,
+    icon: StarIcon,
   },
   {
     title: 'Item 3',
-    icon: Icon,
+    icon: StarIcon,
   },
 ];
 
 const withDisabledItemMenuItems: OverflowMenuItemType[] = [
   {
     title: 'Item 1',
-    icon: Icon,
+    icon: StarIcon,
   },
   {
     title: 'Item 2',
-    icon: Icon,
+    icon: StarIcon,
     disabled: true,
   },
   {
     title: 'Item 3',
-    icon: Icon,
+    icon: StarIcon,
   },
 ];
 

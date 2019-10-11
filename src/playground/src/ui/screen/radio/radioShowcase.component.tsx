@@ -3,7 +3,7 @@ import {
   Radio,
   RadioElement,
   RadioProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface RadioShowcaseComponentState {
   checked: boolean;

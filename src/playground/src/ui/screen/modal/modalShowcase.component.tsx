@@ -8,7 +8,7 @@ import {
   Modal,
   ModalProps,
   Text,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   modalVisible: boolean;

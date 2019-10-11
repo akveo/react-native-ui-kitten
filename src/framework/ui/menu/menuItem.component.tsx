@@ -6,13 +6,13 @@
 
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  ImageProps,
-  TouchableOpacity,
   GestureResponderEvent,
+  ImageProps,
   StyleProp,
+  StyleSheet,
   TextStyle,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   Interaction,
@@ -73,52 +73,40 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
 
   static styledComponentName: string = 'MenuItem';
 
-  private onPress = (event: GestureResponderEvent) => {
-    const { onPress, menuIndex } = this.props;
-
-    if (onPress) {
-      onPress(menuIndex, event);
+  private onPress = (event: GestureResponderEvent): void => {
+    if (this.props.onPress) {
+      this.props.onPress(this.props.menuIndex, event);
     }
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
-    const { onPressIn, menuIndex, dispatch } = this.props;
+  private onPressIn = (event: GestureResponderEvent): void => {
+    this.props.dispatch([Interaction.ACTIVE]);
 
-    dispatch([Interaction.ACTIVE]);
-
-    if (onPressIn) {
-      onPressIn(menuIndex, event);
+    if (this.props.onPressIn) {
+      this.props.onPressIn(this.props.menuIndex, event);
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
-    const { onPressOut, menuIndex, dispatch } = this.props;
+  private onPressOut = (event: GestureResponderEvent): void => {
+    this.props.dispatch([]);
 
-    dispatch([]);
-
-    if (onPressOut) {
-      onPressOut(menuIndex, event);
+    if (this.props.onPressOut) {
+      this.props.onPressOut(this.props.menuIndex, event);
     }
   };
 
-  private onLongPress = (event: GestureResponderEvent) => {
-    const { onLongPress, menuIndex } = this.props;
-
-    if (onLongPress) {
-      onLongPress(menuIndex, event);
+  private onLongPress = (event: GestureResponderEvent): void => {
+    if (this.props.onLongPress) {
+      this.props.onLongPress(this.props.menuIndex, event);
     }
   };
 
   private getComponentStyles = (style: StyleType): StyleType => {
-    const {
-      paddingHorizontal,
-      paddingVertical,
-      backgroundColor,
-    } = style;
+    const { paddingHorizontal, paddingVertical, backgroundColor } = style;
+
     const titleStyles: StyleType = allWithPrefix(style, 'title');
     const indicatorStyles: StyleType = allWithPrefix(style, 'indicator');
     const iconStyles: StyleType = allWithPrefix(style, 'icon');
-    const accessoryStyle: StyleType = allWithPrefix(style, 'accessory');
 
     return {
       container: {
@@ -148,9 +136,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   };
 
   private renderIcon = (style: StyleType): IconElement => {
-    const { icon } = this.props;
-
-    return icon(style);
+    return this.props.icon(style);
   };
 
   private renderTitle = (style: StyleType): TextElement => {
@@ -162,12 +148,10 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   };
 
   private renderAccessory = (style: StyleType): IconElement => {
-    const { accessory } = this.props;
-
-    return accessory(style);
+    return this.props.accessory(style);
   };
 
-  private renderComponentChildren = (style: StyleType): [IconElement, TextElement, IconElement] => {
+  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { title, icon, accessory } = this.props;
 
     return [

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SpinnerProps,
   SpinnerElement,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { SpinnerShowcase } from './spinnerShowcase.component';
 import {
   spinnerSettings,

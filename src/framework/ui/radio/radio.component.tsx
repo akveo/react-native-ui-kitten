@@ -76,13 +76,13 @@ export class RadioComponent extends React.Component<RadioProps> {
 
   static styledComponentName: string = 'Radio';
 
-  private onPress = () => {
+  private onPress = (): void => {
     if (this.props.onChange) {
       this.props.onChange(!this.props.checked);
     }
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
@@ -90,7 +90,7 @@ export class RadioComponent extends React.Component<RadioProps> {
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
@@ -197,8 +197,9 @@ export class RadioComponent extends React.Component<RadioProps> {
 
     return (
       <TouchableOpacity
-        style={[container, styles.container, style]}
         activeOpacity={1.0}
+        {...derivedProps}
+        style={[container, styles.container, style]}
         disabled={disabled}
         hitSlop={hitSlopInsets}
         onPress={this.onPress}
@@ -206,16 +207,9 @@ export class RadioComponent extends React.Component<RadioProps> {
         onPressOut={this.onPressOut}>
         <View style={[highlightContainer, styles.highlightContainer]}>
           <View style={[highlight, styles.highlight]}/>
-          <TouchableOpacity
-            activeOpacity={1.0}
-            {...derivedProps}
-            disabled={disabled}
-            style={selectContainerStyle}
-            onPress={this.onPress}
-            onPressIn={this.onPressIn}
-            onPressOut={this.onPressOut}>
+          <View style={selectContainerStyle}>
             <View style={[icon, styles.icon]}/>
-          </TouchableOpacity>
+          </View>
         </View>
         {textElement}
       </TouchableOpacity>

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   MenuProps,
   MenuElement,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { ShowcaseContainer } from '../common/showcase.container';
 import { MenuShowcase } from './menuShowcase.component';
 import {

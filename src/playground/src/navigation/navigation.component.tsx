@@ -2,11 +2,15 @@ import React from 'react';
 import { Platform } from 'react-native';
 import {
   createAppContainer,
-  createDrawerNavigator,
-  createStackNavigator,
   NavigationRouteConfigMap,
 } from 'react-navigation';
 import { createBrowserApp } from '@react-navigation/web';
+import {
+  createStackNavigator,
+  NavigationStackOptions,
+  NavigationStackProp,
+} from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import {
   AvatarContainer,
   BottomNavigationContainer,
@@ -38,13 +42,12 @@ import {
   RangeCalendarContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
-import { sharingHeightContainer } from './sharingHeight.container';
 
 export interface RouteType {
   name: string;
 }
 
-const routes: NavigationRouteConfigMap = {
+const routes: NavigationRouteConfigMap<NavigationStackOptions, NavigationStackProp> = {
   ['Home']: Home,
   ['Avatar']: AvatarContainer,
   ['Bottom Navigation']: BottomNavigationContainer,

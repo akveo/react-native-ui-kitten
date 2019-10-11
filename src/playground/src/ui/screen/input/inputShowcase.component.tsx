@@ -3,7 +3,7 @@ import {
   Input,
   InputElement,
   InputProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const InputShowcase = (props?: InputProps): InputElement => {
   return (

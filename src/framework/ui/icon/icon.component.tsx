@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Animated,
   StyleProp,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
@@ -75,15 +76,15 @@ export class Icon<T> extends React.Component<IconProps<T>> {
     this.animation = getIconAnimation(props.animation, props.animationConfig);
   }
 
-  public componentWillUnmount() {
+  public componentWillUnmount(): void {
     this.animation.release();
   }
 
-  public startAnimation = (callback?: Animated.EndCallback) => {
+  public startAnimation = (callback?: Animated.EndCallback): void => {
     this.animation.start(callback);
   };
 
-  public stopAnimation = () => {
+  public stopAnimation = (): void => {
     this.animation.stop();
   };
 
@@ -91,7 +92,7 @@ export class Icon<T> extends React.Component<IconProps<T>> {
     return this.animation.toProps();
   };
 
-  public render(): React.ReactElement<T> {
+  public render(): React.ReactElement<ViewProps> {
     const { name, pack, ...restProps } = this.props;
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
 

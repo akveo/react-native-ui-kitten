@@ -3,19 +3,17 @@ import {
   ListRenderItemInfo,
   Platform,
 } from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
 import { Link } from '@react-navigation/web';
-import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
-} from '@kitten/theme';
+import { NavigationStackScreenProps } from 'react-navigation-stack';
 import {
   List,
   ListElement,
   ListItem,
   ListItemElement,
-} from '@kitten/ui';
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from 'react-native-ui-kitten';
 import { RouteType } from '../../navigation';
 
 export const routes: RouteType[] = [
@@ -48,7 +46,7 @@ export const routes: RouteType[] = [
   { name: 'Sample' },
 ];
 
-type Props = ThemedComponentProps & NavigationScreenProps;
+type Props = ThemedComponentProps & NavigationStackScreenProps;
 
 class HomeScreen extends React.Component<Props> {
 
@@ -77,9 +75,8 @@ class HomeScreen extends React.Component<Props> {
 
   private renderItem = (info: ListRenderItemInfo<RouteType>): ListItemElement => {
     return Platform.select({
-      ios: this.renderMobileListItem(info),
-      android: this.renderMobileListItem(info),
-      default: this.renderWebListItem(info),
+      default: this.renderMobileListItem(info),
+      web: this.renderWebListItem(info),
     });
   };
 

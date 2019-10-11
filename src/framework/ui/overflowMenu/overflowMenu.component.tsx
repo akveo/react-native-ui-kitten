@@ -19,6 +19,7 @@ import {
 import { MenuItemType } from '../menu/menuItem.component';
 import {
   Popover,
+  PopoverElement,
   PopoverProps,
 } from '../popover/popover.component';
 import {
@@ -108,7 +109,7 @@ class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     );
   };
 
-  public render(): React.ReactNode {
+  public render(): PopoverElement {
     const { themedStyle, style, indicatorStyle, children, appearance, ...restProps } = this.props;
     const { container, indicator } = this.getComponentStyle(themedStyle);
 

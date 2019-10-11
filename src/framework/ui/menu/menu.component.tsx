@@ -75,10 +75,8 @@ class MenuComponent extends React.Component<MenuProps> {
   private service: MenuService = new MenuService();
 
   private onSelect = (selectedIndex: number, event: GestureResponderEvent): void => {
-    const { onSelect } = this.props;
-
-    if (onSelect) {
-      onSelect(selectedIndex, event);
+    if (this.props.onSelect) {
+      this.props.onSelect(selectedIndex, event);
     }
   };
 

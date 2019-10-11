@@ -3,8 +3,10 @@ import {
   Image,
   ImageProps,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
-import { BottomNavigationTab } from '@kitten/ui';
+import {
+  BottomNavigationTab,
+  StyleType,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,

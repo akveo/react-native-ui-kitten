@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   Datepicker,
   DatepickerProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   date: Date;

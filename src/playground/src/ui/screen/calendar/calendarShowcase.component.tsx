@@ -9,8 +9,7 @@ import {
   CalendarProps,
   Button,
   Divider,
-} from '@kitten/ui';
-import { CalendarComponent } from '@kitten/ui/calendar/calendar.component';
+} from 'react-native-ui-kitten';
 
 interface State {
   date: Date;
@@ -28,7 +27,7 @@ export class CalendarShowcase extends React.Component<Props, State> {
     withFooter: false,
   };
 
-  private calendarRef: React.RefObject<CalendarComponent<Date>> = React.createRef();
+  private calendarRef: React.RefObject<any> = React.createRef();
 
   public state: State = {
     date: this.props.date,

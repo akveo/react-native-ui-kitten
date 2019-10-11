@@ -1,13 +1,10 @@
 import React from 'react';
 import {
-  Image,
-  ImageProps,
-} from 'react-native';
-import { StyleType } from '@kitten/theme';
-import {
   Icon,
   TopNavigationAction,
-} from '@kitten/ui';
+  StyleType,
+  IconElement,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
@@ -15,9 +12,9 @@ import {
   ComponentShowcaseSetting,
 } from '../common/type';
 
-const RightControlIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+const RightControlIcon = (style: StyleType): IconElement => {
   return (
-    <Icon name='star'{...style} />
+    <Icon {...style} name='star' />
   );
 };
 

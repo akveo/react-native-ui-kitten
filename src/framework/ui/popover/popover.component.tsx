@@ -105,7 +105,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
   private placementService: PopoverPlacementService = new PopoverPlacementService();
   private popoverPlacement: PopoverPlacement;
 
-  public componentDidUpdate(prevProps: PopoverProps) {
+  public componentDidUpdate(prevProps: PopoverProps): void {
     this.handleVisibility(prevProps);
   }
 
@@ -149,7 +149,7 @@ export class PopoverComponent extends React.Component<PopoverProps> {
     };
   };
 
-  private onMeasure = (layout: MeasureResult) => {
+  private onMeasure = (layout: MeasureResult): void => {
     if (this.props.visible) {
       const placementOptions: PlacementOptions = this.createPlacementOptions(layout);
       const popoverPlacement = this.placementService.find(this.popoverPlacement, placementOptions);

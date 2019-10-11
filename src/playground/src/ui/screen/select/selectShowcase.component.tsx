@@ -5,7 +5,7 @@ import {
   SelectOption,
   SelectProps,
   SelectElement,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface SelectShowcaseComponentState {
   selectedOption: SelectOption;

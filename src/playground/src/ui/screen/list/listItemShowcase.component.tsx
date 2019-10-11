@@ -1,17 +1,14 @@
 import React from 'react';
 import {
-  Image,
-  ImageProps,
-} from 'react-native';
-import { StyleType } from '@kitten/theme';
-import {
   CheckBox,
   CheckBoxProps,
   Icon,
   ListItem,
   ListItemElement,
   ListItemProps,
-} from '@kitten/ui';
+  IconElement,
+  StyleType,
+} from 'react-native-ui-kitten';
 
 export const ListItemShowcase = (props?: ListItemProps): ListItemElement => {
   return (
@@ -21,12 +18,12 @@ export const ListItemShowcase = (props?: ListItemProps): ListItemElement => {
 
 export const ListItemIconShowcase = (props?: ListItemProps): ListItemElement => {
 
-  const IconElement = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
+  const StarIcon = (style: StyleType, index: number): IconElement => (
     <Icon name='star' {...style}/>
   );
 
   return (
-    <ListItem {...props} icon={IconElement}/>
+    <ListItem {...props} icon={StarIcon}/>
   );
 };
 
@@ -43,8 +40,8 @@ export const ListItemAccessoryShowcase = (props?: ListItemProps): ListItemElemen
 
 export const ListItemIconAccessoryShowcase = (props?: ListItemProps): ListItemElement => {
 
-  const IconElement = (style: StyleType, index: number): React.ReactElement<ImageProps> => (
-    <Icon name='star' {...style}/>
+  const StarIcon = (style: StyleType, index: number): IconElement => (
+    <Icon {...style} name='star' />
   );
 
   const AccessoryElement = (style: StyleType, index: number): React.ReactElement<CheckBoxProps> => (
@@ -52,6 +49,6 @@ export const ListItemIconAccessoryShowcase = (props?: ListItemProps): ListItemEl
   );
 
   return (
-    <ListItem {...props} icon={IconElement} accessory={AccessoryElement}/>
+    <ListItem {...props} icon={StarIcon} accessory={AccessoryElement}/>
   );
 };

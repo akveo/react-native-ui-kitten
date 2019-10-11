@@ -3,7 +3,7 @@ import {
   Button,
   ButtonElement,
   ButtonProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const ButtonShowcase = (props?: ButtonProps): ButtonElement => {
   return (

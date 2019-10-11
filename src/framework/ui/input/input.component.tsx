@@ -17,6 +17,7 @@ import {
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
   View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
@@ -124,11 +125,11 @@ export class InputComponent extends React.Component<InputProps> {
 
   private textInputRef: React.RefObject<TextInput> = React.createRef();
 
-  public focus = () => {
+  public focus = (): void => {
     this.textInputRef.current.focus();
   };
 
-  public blur = () => {
+  public blur = (): void => {
     this.textInputRef.current.blur();
   };
 
@@ -136,11 +137,11 @@ export class InputComponent extends React.Component<InputProps> {
     return this.textInputRef.current.isFocused();
   };
 
-  public clear = () => {
+  public clear = (): void => {
     this.textInputRef.current.clear();
   };
 
-  private onFocus = (event: InputFocusEvent) => {
+  private onTextFieldFocus = (event: InputFocusEvent): void => {
     this.props.dispatch([Interaction.FOCUSED]);
 
     if (this.props.onFocus) {
@@ -148,7 +149,7 @@ export class InputComponent extends React.Component<InputProps> {
     }
   };
 
-  private onBlur = (event: InputFocusEvent) => {
+  private onTextFieldBlur = (event: InputFocusEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onBlur) {
@@ -156,7 +157,7 @@ export class InputComponent extends React.Component<InputProps> {
     }
   };
 
-  private onIconPress = (event: GestureResponderEvent) => {
+  private onIconPress = (event: GestureResponderEvent): void => {
     if (this.props.onIconPress) {
       this.props.onIconPress(event);
     }
@@ -303,8 +304,8 @@ export class InputComponent extends React.Component<InputProps> {
     ];
   };
 
-  public render(): React.ReactElement<TextInputProps> {
-    const { themedStyle, textStyle, disabled, ...restProps } = this.props;
+  public render(): React.ReactElement<ViewProps> {
+    const { themedStyle, textStyle, ...restProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
     const [
@@ -317,15 +318,16 @@ export class InputComponent extends React.Component<InputProps> {
     return (
       <View style={[componentStyle.container, styles.container]}>
         {labelElement}
-        <View style={[componentStyle.inputContainer, styles.inputContainer]}>
+        <View
+          style={[componentStyle.inputContainer, styles.inputContainer]}>
           <TextInput
             ref={this.textInputRef}
             {...restProps}
             style={[componentStyle.text, styles.text, textStyle]}
             placeholderTextColor={componentStyle.placeholder.color}
-            editable={!disabled}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
+            editable={!restProps.disabled}
+            onFocus={this.onTextFieldFocus}
+            onBlur={this.onTextFieldBlur}
           />
           {iconElement}
         </View>

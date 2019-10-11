@@ -72,7 +72,7 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
 
   static styledComponentName: string = 'BottomNavigationTab';
 
-  private onPress = () => {
+  private onPress = (): void => {
     if (this.props.onSelect) {
       this.props.onSelect(!this.props.selected);
     }
@@ -142,17 +142,16 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
     ];
   };
 
-  public render(): React.ReactNode {
+  public render(): React.ReactElement<TouchableOpacityProps> {
     const { style, themedStyle, ...restProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
-
     const [iconElement, titleElement] = this.renderComponentChildren(componentStyles);
 
     return (
       <TouchableOpacity
+        activeOpacity={1.0}
         {...restProps}
         style={[container, styles.container, style]}
-        activeOpacity={1.0}
         onPress={this.onPress}>
         {iconElement}
         {titleElement}

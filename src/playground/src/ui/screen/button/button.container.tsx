@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   ButtonElement,
   ButtonProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { ButtonShowcase } from './buttonShowcase.component';
 import {
   buttonShowcase,

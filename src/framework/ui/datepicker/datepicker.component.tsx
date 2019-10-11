@@ -68,10 +68,8 @@ export class DatepickerComponent<D> extends BaseDatepickerComponent<D, CalendarP
   static styledComponentName: string = 'Datepicker';
 
   protected getComponentTitle(): string {
-    const { date } = this.props;
-
-    if (date) {
-      return this.formatDateToString(date);
+    if (this.props.date) {
+      return this.formatDateToString(this.props.date);
     } else {
       return 'dd/mm/yyyy';
     }

@@ -18,9 +18,11 @@ module.exports = async function (env, argv) {
     ...config.resolve.alias,
     ...aliases,
   };
+
   config.resolve.plugins = config.resolve.plugins.filter(plugin => {
     return !(plugin instanceof ModuleScopePlugin);
   });
+
   config.module.rules = [
     ...config.module.rules,
     babelLoaderRules,

@@ -61,19 +61,19 @@ export class TabBarComponent extends React.Component<TabBarProps> {
 
   private tabIndicatorRef: React.RefObject<TabIndicator> = React.createRef();
 
-  public scrollToIndex(params: { index: number, animated?: boolean }) {
+  public scrollToIndex(params: { index: number, animated?: boolean }): void {
     const { current: tabIndicator } = this.tabIndicatorRef;
 
     tabIndicator.scrollToIndex(params);
   }
 
-  public scrollToOffset(params: { offset: number, animated?: boolean }) {
+  public scrollToOffset(params: { offset: number, animated?: boolean }): void {
     const { current: tabIndicator } = this.tabIndicatorRef;
 
     tabIndicator.scrollToOffset(params);
   }
 
-  private onTabSelect = (index: number) => {
+  private onTabSelect = (index: number): void => {
     if (this.props.onSelect) {
       this.props.onSelect(index);
     }
@@ -99,9 +99,7 @@ export class TabBarComponent extends React.Component<TabBarProps> {
   };
 
   private isTabSelected = (index: number): boolean => {
-    const { selectedIndex } = this.props;
-
-    return index === selectedIndex;
+    return index === this.props.selectedIndex;
   };
 
   private renderTabElement = (element: TabElement, index: number): TabElement => {
@@ -124,7 +122,7 @@ export class TabBarComponent extends React.Component<TabBarProps> {
     const tabElements: TabElement[] = this.renderTabElements(children);
 
     return (
-      <React.Fragment>
+      <View>
         <View
           {...derivedProps}
           style={[componentStyle.container, styles.container, style]}>
@@ -136,7 +134,7 @@ export class TabBarComponent extends React.Component<TabBarProps> {
           selectedPosition={selectedIndex}
           positions={tabElements.length}
         />
-      </React.Fragment>
+      </View>
     );
   }
 }

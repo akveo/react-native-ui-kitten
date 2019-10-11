@@ -8,7 +8,7 @@ import {
   Spinner,
   SpinnerProps,
   SpinnerElement,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const SpinnerShowcase = (props?: SpinnerProps): SpinnerElement => {
   if (props.status === 'white') {

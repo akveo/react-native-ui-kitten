@@ -2,7 +2,7 @@ import React from 'react';
 import {
   TextElement,
   TextProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { TextShowcase } from './textShowcase.component';
 import {
   textSettings,

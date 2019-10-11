@@ -3,7 +3,7 @@ import {
   Text,
   TextElement,
   TextProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const TextShowcase = (props?: TextProps): TextElement => {
   return (

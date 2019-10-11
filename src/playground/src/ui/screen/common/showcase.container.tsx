@@ -3,6 +3,7 @@ import {
   ScrollViewProps,
   View,
 } from 'react-native';
+import { StyleType } from 'react-native-ui-kitten';
 import { ShowcaseSettings } from './showcaseSettings.component';
 import { Showcase } from './showcase.component';
 import {
@@ -13,7 +14,6 @@ import {
   ThemeContext,
   themes,
 } from '../../../themes';
-import { StyleType } from '@kitten/theme';
 
 interface ContainerProps {
   style?: StyleType;

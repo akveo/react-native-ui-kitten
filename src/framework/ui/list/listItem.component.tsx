@@ -106,13 +106,13 @@ export class ListItemComponent extends React.Component<ListItemProps> {
 
   static styledComponentName: string = 'ListItem';
 
-  private onPress = (event: GestureResponderEvent) => {
+  private onPress = (event: GestureResponderEvent): void => {
     if (this.props.onPress) {
       this.props.onPress(this.props.index, event);
     }
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
@@ -120,7 +120,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
@@ -128,7 +128,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
     }
   };
 
-  private onLongPress = (event: GestureResponderEvent) => {
+  private onLongPress = (event: GestureResponderEvent): void => {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.props.index, event);
     }

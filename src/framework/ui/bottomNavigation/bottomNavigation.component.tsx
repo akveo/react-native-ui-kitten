@@ -108,7 +108,7 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     selectedIndex: 0,
   };
 
-  private onTabSelect = (index: number) => {
+  private onTabSelect = (index: number): void => {
     if (this.props.onSelect && this.props.selectedIndex !== index) {
       this.props.onSelect(index);
     }
@@ -164,7 +164,7 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     ];
   };
 
-  public render(): React.ReactNode {
+  public render(): React.ReactElement<ViewProps> {
     const { themedStyle, style, ...derivedProps } = this.props;
     const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
 

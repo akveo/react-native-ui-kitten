@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import { DatepickerProps } from '@kitten/ui';
+import { DatepickerProps } from 'react-native-ui-kitten';
 import { ShowcaseContainer } from '../common/showcase.container';
 import { DatepickerShowcase } from './datepickerShowcase.component';
 import { RangeDatepickerShowcase } from './rangeDatepickerShowcase.component';
