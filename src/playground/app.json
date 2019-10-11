@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "AwesomeApp",
-    "slug": "awesome-app",
+    "name": "UI Kitten Playground",
+    "slug": "ui-kitten-playground",
+    "description": "UI Kitten Playground Application",
     "privacy": "public",
-    "description": "react-native-ui-kitten-playground",
     "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
