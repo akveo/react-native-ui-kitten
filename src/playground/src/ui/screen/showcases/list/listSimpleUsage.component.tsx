@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   List,
   ListItem,
@@ -18,8 +19,15 @@ export const ListSimpleUsageShowcase = (props) => {
 
   return (
     <List
+      style={styles.list}
       data={data}
       renderItem={renderItem}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  list: {
+    height: 150,
+  },
+});
