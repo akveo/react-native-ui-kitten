@@ -42,12 +42,15 @@ export class TopNavigationWithMenuShowcase extends React.Component {
 
   onMenuItemSelect = (index) => {
     // Handle Item Select
+
+    this.setState({ menuVisible: false });
   };
 
   renderMenuAction = () => (
     <OverflowMenu
       visible={this.state.menuVisible}
       data={this.menuData}
+      placement='bottom end'
       onSelect={this.onMenuItemSelect}
       onBackdropPress={this.onMenuActionPress}>
       <TopNavigationAction
