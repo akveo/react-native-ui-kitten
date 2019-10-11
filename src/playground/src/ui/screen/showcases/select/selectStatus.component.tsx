@@ -14,11 +14,36 @@ export class SelectStatusShowcase extends React.Component {
   ];
 
   state = {
-    selectedOption: null,
+    selectedOptionPrimary: null,
+    selectedOptionSuccess: null,
+    selectedOptionInfo: null,
+    selectedOptionDanger: null,
+    selectedOptionWarning: null,
+    selectedOptionBasic: null,
   };
 
-  onSelect = (selectedOption) => {
-    this.setState({ selectedOption });
+  onPrimarySelect = (selectedOptionPrimary) => {
+    this.setState({ selectedOptionPrimary });
+  };
+
+  onSuccessSelect = (selectedOptionSuccess) => {
+    this.setState({ selectedOptionSuccess });
+  };
+
+  onInfoSelect = (selectedOptionInfo) => {
+    this.setState({ selectedOptionInfo });
+  };
+
+  onDangerSelect = (selectedOptionDanger) => {
+    this.setState({ selectedOptionDanger });
+  };
+
+  onWarningSelect = (selectedOptionWarning) => {
+    this.setState({ selectedOptionWarning });
+  };
+
+  onBasicSelect = (selectedOptionBasic) => {
+    this.setState({ selectedOptionBasic });
   };
 
   render() {
@@ -28,43 +53,43 @@ export class SelectStatusShowcase extends React.Component {
           data={this.data}
           status='primary'
           placeholder='Primary'
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
+          selectedOption={this.state.selectedOptionPrimary}
+          onSelect={this.onPrimarySelect}
         />
         <Select
           data={this.data}
           status='success'
           placeholder='Success'
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
+          selectedOption={this.state.selectedOptionSuccess}
+          onSelect={this.onSuccessSelect}
         />
         <Select
           data={this.data}
           status='info'
           placeholder='Info'
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
+          selectedOption={this.state.selectedOptionInfo}
+          onSelect={this.onInfoSelect}
         />
         <Select
           data={this.data}
           status='warning'
           placeholder='Warning'
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
+          selectedOption={this.state.selectedOptionWarning}
+          onSelect={this.onWarningSelect}
         />
         <Select
           data={this.data}
           status='danger'
           placeholder='Danger'
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
+          selectedOption={this.state.selectedOptionDanger}
+          onSelect={this.onDangerSelect}
         />
         <Select
           data={this.data}
           status='basic'
           placeholder='Basic'
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
+          selectedOption={this.state.selectedOptionBasic}
+          onSelect={this.onBasicSelect}
         />
       </Layout>
     );
