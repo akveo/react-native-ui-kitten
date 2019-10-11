@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   ViewPager,
   Layout,
@@ -25,13 +26,25 @@ export class ViewPagerLazyLoadingShowcase extends React.Component {
         selectedIndex={this.state.selectedIndex}
         shouldLoadComponent={this.shouldLoadComponent}
         onSelect={this.onSelect}>
-        <Layout>
-          <Text>Tab 1</Text>
+        <Layout
+          level='2'
+          style={styles.tab}>
+          <Text category='h5'>Tab 1</Text>
         </Layout>
-        <Layout>
-          <Text>Tab 2</Text>
+        <Layout
+          level='2'
+          style={styles.tab}>
+          <Text category='h5'>Tab 2</Text>
         </Layout>
       </ViewPager>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  tab: {
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
