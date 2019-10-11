@@ -22,12 +22,12 @@ export class InputSimpleUsageShowcase extends React.Component {
           style={styles.input}
           value={this.state.value}
           onChangeText={this.onChangeText}
-          placeholder='Place your Text'
+          placeholder='Active'
         />
         <Input
           style={styles.input}
           disabled={true}
-          placeholder='Place your Text'
+          placeholder='Disabled'
         />
       </Layout>
     );
@@ -37,12 +37,11 @@ export class InputSimpleUsageShowcase extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingVertical: 4,
+    paddingVertical: 8,
     paddingHorizontal: 4,
   },
   input: {
-    marginVertical: 4,
+    flex: 1,
     marginHorizontal: 4,
   },
 });

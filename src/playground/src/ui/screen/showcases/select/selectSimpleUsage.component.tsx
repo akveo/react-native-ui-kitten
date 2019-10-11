@@ -26,8 +26,17 @@ export class SelectSimpleUsageShowcase extends React.Component {
     return (
       <Layout style={styles.container}>
         <Select
+          style={styles.select}
           data={this.data}
+          placeholder='Active'
           selectedOption={this.state.selectedOption}
+          onSelect={this.onSelect}
+        />
+        <Select
+          style={styles.select}
+          data={this.data}
+          placeholder='Disabled'
+          disabled={true}
           onSelect={this.onSelect}
         />
       </Layout>
@@ -37,7 +46,13 @@ export class SelectSimpleUsageShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     height: 230,
-    padding: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+  },
+  select: {
+    flex: 1,
+    marginHorizontal: 4,
   },
 });
