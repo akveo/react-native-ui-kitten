@@ -16,9 +16,7 @@
     "react-native-screens": "^1.0.0-alpha.23",
     "react-native-unimodules": "~0.5.4",
     "react-native-web": "^0.11.7",
-    "react-navigation": "^4.0.10",
-    "react-navigation-drawer": "^2.2.2",
-    "react-navigation-stack": "^1.9.4"
+    "react-navigation": "^3.13.0"
   },
   "devDependencies": {
     "@expo/webpack-config": "^0.7.6",

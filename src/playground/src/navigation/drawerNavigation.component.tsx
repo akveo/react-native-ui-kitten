@@ -7,11 +7,8 @@ import {
 import {
   NavigationRoute,
   SafeAreaView,
+  DrawerItemsProps,
 } from 'react-navigation';
-import {
-  DrawerContentComponentProps,
-  NavigationDrawerScreenProps,
-} from 'react-navigation-drawer';
 import {
   Divider,
   Drawer,
@@ -26,7 +23,7 @@ import {
   DrawerElement,
 } from 'react-native-ui-kitten';
 
-export class DrawerNavigation extends React.Component<DrawerContentComponentProps & NavigationDrawerScreenProps> {
+export class DrawerNavigation extends React.Component<DrawerItemsProps> {
 
   private onItemSelect = (index: number) => {
     const { [index]: selectedRoute } = this.props.items;

@@ -3,8 +3,8 @@ import {
   ListRenderItemInfo,
   Platform,
 } from 'react-native';
+import { NavigationScreenProps } from 'react-navigation';
 import { Link } from '@react-navigation/web';
-import { NavigationStackScreenProps } from 'react-navigation-stack';
 import {
   List,
   ListElement,
@@ -46,7 +46,7 @@ export const routes: RouteType[] = [
   { name: 'Sample' },
 ];
 
-type Props = ThemedComponentProps & NavigationStackScreenProps;
+type Props = ThemedComponentProps & NavigationScreenProps;
 
 class HomeScreen extends React.Component<Props> {
 
