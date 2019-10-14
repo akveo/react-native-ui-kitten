@@ -31,10 +31,10 @@ export class OverflowMenuWithIconsShowcase extends React.Component {
   ];
 
   onItemSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
+    this.setState({ selectedIndex }, this.toggleMenu);
   };
 
-  onToggleButtonPress = () => {
+  toggleMenu = () => {
     const menuVisible = !this.state.menuVisible;
     this.setState({ menuVisible });
   };
@@ -47,8 +47,8 @@ export class OverflowMenuWithIconsShowcase extends React.Component {
           visible={this.state.menuVisible}
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onItemSelect}
-          onBackdropPress={this.onToggleButtonPress}>
-          <Button onPress={this.onToggleButtonPress}>
+          onBackdropPress={this.toggleMenu}>
+          <Button onPress={this.toggleMenu}>
             TOGGLE MENU
           </Button>
         </OverflowMenu>
