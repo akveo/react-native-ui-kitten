@@ -34,8 +34,7 @@ export class CalendarFilterShowcase extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 16,
+    minHeight: 376,
   },
 });
