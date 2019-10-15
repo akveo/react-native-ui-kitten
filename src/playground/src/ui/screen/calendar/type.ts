@@ -161,6 +161,7 @@ const filterSection: ComponentShowcaseSection = {
 export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
+    // customItemSection,
     // momentSection,
     // dateFnsSection,
     // startViewSection,

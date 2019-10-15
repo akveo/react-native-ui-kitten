@@ -18,9 +18,8 @@ export class OverflowMenuShowcase extends React.Component<OverflowMenuProps, Sta
     selectedMenuIndex: null,
   };
 
-  private toggleMenu = () => {
+  private toggleMenu = (): void => {
     const menuVisible: boolean = !this.state.menuVisible;
-
     this.setState({ menuVisible });
   };
 

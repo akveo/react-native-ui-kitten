@@ -9,7 +9,7 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 
-export const CalendarCustomItem = (date: Date, style: StyleType): React.ReactElement<ViewProps> => {
+export const CalendarCustomItem = ({ date }, style: StyleType): React.ReactElement<ViewProps> => {
 
   const value: number = 100 * date.getDate() + Math.pow(date.getDate(), 2);
 
