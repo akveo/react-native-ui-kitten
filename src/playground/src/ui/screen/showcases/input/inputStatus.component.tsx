@@ -13,7 +13,6 @@ export class InputStatusShowcase extends React.Component {
     infoValue: '',
     warningValue: '',
     dangerValue: '',
-    basicValue: '',
   };
 
   onPrimaryTextChange = (primaryValue) => {
@@ -34,10 +33,6 @@ export class InputStatusShowcase extends React.Component {
 
   onDangerTextChange = (dangerValue) => {
     this.setState({ dangerValue });
-  };
-
-  onBasicTextChange = (basicValue) => {
-    this.setState({ basicValue });
   };
 
   render() {
@@ -77,13 +72,6 @@ export class InputStatusShowcase extends React.Component {
           placeholder='Danger'
           value={this.state.dangerValue}
           onChangeText={this.onDangerTextChange}
-        />
-        <Input
-          style={styles.input}
-          status='basic'
-          placeholder='Basic'
-          value={this.state.basicValue}
-          onChangeText={this.onBasicTextChange}
         />
       </Layout>
     );

@@ -58,7 +58,7 @@ export class IconRegistry extends React.Component<IconRegistryProps> {
     return packs[Math.max(0, requestedPackIndex)];
   };
 
-  private registerIcons = (source: IconsProp, defaultPack: string) => {
+  private registerIcons = (source: IconsProp, defaultPack: string): void => {
     const packs: IconPack<any>[] = Array.isArray(source) ? source : [source];
     const defaultIconPack: IconPack<any> = this.findDefaultIconPack(packs, defaultPack);
 

@@ -4,8 +4,10 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
-import { Text } from '@kitten/ui';
+import {
+  StyleType,
+  Text,
+} from 'react-native-ui-kitten';
 
 export const CalendarCustomItem = ({ date }, style: StyleType): React.ReactElement<ViewProps> => {
 

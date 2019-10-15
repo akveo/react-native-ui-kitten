@@ -26,6 +26,7 @@ import {
 } from '../text/text.component';
 import {
   Popover,
+  PopoverElement,
   PopoverProps,
 } from '../popover/popover.component';
 import { ModalPresentingBased } from '../support/typings';
@@ -172,7 +173,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
     );
   };
 
-  public render(): React.ReactElement<PopoverProps> {
+  public render(): PopoverElement {
     const { themedStyle, style, indicatorStyle, children, ...derivedProps } = this.props;
     const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
 

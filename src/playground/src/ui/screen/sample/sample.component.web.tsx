@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ImageProps,
   ImageSourcePropType,
   View,
 } from 'react-native';
@@ -13,13 +12,12 @@ import {
   LayoutElement,
   Text,
   Toggle,
-} from '@kitten/ui';
-import {
   StyleType,
   ThemedComponentProps,
   ThemeType,
   withStyles,
-} from '@kitten/theme';
+  IconElement,
+} from 'react-native-ui-kitten';
 
 interface ComponentProps {
   profileImage: ImageSourcePropType;
@@ -45,7 +43,7 @@ class SampleComponent extends React.Component<SampleComponentProps, State> {
     this.setState({ passwordVisible });
   };
 
-  private renderPasswordIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+  private renderPasswordIcon = (style: StyleType): IconElement => {
     const icon: string = this.state.passwordVisible ? 'eye' : 'eye-off';
 
     return (

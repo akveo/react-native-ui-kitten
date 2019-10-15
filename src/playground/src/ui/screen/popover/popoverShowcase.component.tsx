@@ -6,7 +6,7 @@ import {
   PopoverElement,
   PopoverProps,
   Text,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   popoverVisible: boolean;

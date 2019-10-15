@@ -89,13 +89,13 @@ export class ButtonComponent extends React.Component<ButtonProps> {
 
   static styledComponentName: string = 'Button';
 
-  private onPress = (event: GestureResponderEvent) => {
+  private onPress = (event: GestureResponderEvent): void => {
     if (this.props.onPress) {
       this.props.onPress(event);
     }
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
@@ -103,7 +103,7 @@ export class ButtonComponent extends React.Component<ButtonProps> {
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
@@ -176,7 +176,6 @@ export class ButtonComponent extends React.Component<ButtonProps> {
   public render(): React.ReactElement<TouchableOpacityProps> {
     const { themedStyle, style, ...containerProps } = this.props;
     const { container, ...childStyles } = this.getComponentStyle(themedStyle);
-
     const [iconElement, textElement] = this.renderComponentChildren(childStyles);
 
     return (

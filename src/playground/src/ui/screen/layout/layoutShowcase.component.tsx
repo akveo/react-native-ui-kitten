@@ -3,7 +3,7 @@ import {
   Layout,
   LayoutElement,
   LayoutProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const LayoutShowcase = (props?: LayoutProps): LayoutElement => {
   return (

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   InputElement,
   InputProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { InputShowcase } from './inputShowcase.component';
 import {
   inputSettings,

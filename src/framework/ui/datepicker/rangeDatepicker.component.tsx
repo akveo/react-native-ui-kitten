@@ -56,8 +56,7 @@ export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, Rang
   static styledComponentName: string = 'Datepicker';
 
   protected getComponentTitle(): string {
-    const { range } = this.props;
-    const { startDate, endDate } = range;
+    const { startDate, endDate } = this.props.range;
 
     if (startDate || endDate) {
       const start: string = startDate ? this.formatDateToString(startDate) : '';

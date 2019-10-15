@@ -55,13 +55,13 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
 
   static styledComponentName: string = 'TopNavigationAction';
 
-  private onPress = (event: GestureResponderEvent) => {
+  private onPress = (event: GestureResponderEvent): void => {
     if (this.props.onPress) {
       this.props.onPress(event);
     }
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
@@ -69,7 +69,7 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {

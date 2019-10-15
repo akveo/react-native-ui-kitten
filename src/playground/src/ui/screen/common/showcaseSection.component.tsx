@@ -4,14 +4,12 @@ import {
   ViewProps,
 } from 'react-native';
 import {
+  Text,
+  TextProps,
   ThemedComponentProps,
   ThemeType,
   withStyles,
-} from '@kitten/theme';
-import {
-  Text,
-  TextProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import {
   ShowcaseItem,
   ShowcaseItemProps,

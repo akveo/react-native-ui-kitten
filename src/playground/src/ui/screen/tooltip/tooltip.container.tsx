@@ -2,7 +2,7 @@ import React from 'react';
 import {
   TooltipElement,
   TooltipProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { TooltipShowcase } from './tooltipShowcase.component';
 import {
   tooltipShowcase,

@@ -6,16 +6,16 @@ import {
 } from 'react-native';
 import { Updates } from 'expo';
 import {
+  Button,
+  CheckBox,
+  Icon,
+  OverflowMenu,
+  OverflowMenuItemType,
+  StyleType,
   ThemedComponentProps,
   ThemeType,
   withStyles,
-} from '@kitten/theme';
-import {
-  Button,
-  CheckBox,
-  OverflowMenu,
-  OverflowMenuItemType,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcaseSetting,
   ShowcaseThemes,
@@ -35,6 +35,18 @@ interface State {
 }
 
 export type ShowcaseSettingsProps = ThemedComponentProps & ViewProps & ComponentProps;
+
+const ThemesIcon = (style: StyleType) => (
+  <Icon {...style} name='color-palette' />
+);
+
+const SettingsIcon = (style: StyleType) => (
+  <Icon {...style} name='settings' />
+);
+
+const TrashIcon = (style: StyleType) => (
+  <Icon {...style} name='trash' />
+);
 
 class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, State> {
 
@@ -113,33 +125,35 @@ class ShowcaseSettingsComponent extends React.Component<ShowcaseSettingsProps, S
     return (
       <View style={[themedStyle.container, style]}>
         <OverflowMenu
-          placement='bottom start'
           visible={this.state.themesMenuVisible}
           onSelect={this.onThemeSelect}
           data={this.createThemesMenuItems()}
           onBackdropPress={this.toggleThemesMenu}>
           <Button
-            size='small'
+            size='tiny'
+            icon={ThemesIcon}
             disabled={!this.props.themes}
             onPress={this.toggleThemesMenu}>
             THEMES
           </Button>
         </OverflowMenu>
         <OverflowMenu
-          placement='bottom start'
           visible={this.state.settingsMenuVisible}
           onSelect={this.onSettingSelect}
           data={this.createSettingsMenuItems()}
           onBackdropPress={this.toggleSettingsMenu}>
           <Button
-            size='small'
+            size='tiny'
+            icon={SettingsIcon}
             disabled={!this.props.settings}
             onPress={this.toggleSettingsMenu}>
             SETTINGS
           </Button>
         </OverflowMenu>
         <Button
-          size='small'
+          size='tiny'
+          status='danger'
+          icon={TrashIcon}
           disabled={!this.props.settings}
           onPress={this.onResetButtonPress}>
           RESET

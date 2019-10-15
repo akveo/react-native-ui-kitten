@@ -2,9 +2,9 @@ import React from 'react';
 import { Platform } from 'react-native';
 import {
   createAppContainer,
-  createDrawerNavigator,
-  createStackNavigator,
   NavigationRouteConfigMap,
+  createStackNavigator,
+  createDrawerNavigator,
 } from 'react-navigation';
 import { createBrowserApp } from '@react-navigation/web';
 import {

@@ -3,11 +3,11 @@ import {
   TopNavigation,
   TopNavigationElement,
   TopNavigationProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const TopNavigationShowcase = (props?: TopNavigationProps): TopNavigationElement => {
 
   return (
-    <TopNavigation{...props}/>
+    <TopNavigation {...props}/>
   );
 };

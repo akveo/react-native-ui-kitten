@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ButtonGroupElement,
   ButtonGroupProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { ButtonGroupShowcase } from './buttonGroupShowcase.component';
 import {
   buttonGroupSettings,

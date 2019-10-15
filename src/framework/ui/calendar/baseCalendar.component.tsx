@@ -346,8 +346,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   };
 
   private isLateralNavigationAllowed = (): boolean => {
-    const { viewMode } = this.state;
-    return viewMode.id === CalendarViewModes.DATE.id || viewMode.id === CalendarViewModes.YEAR.id;
+    return this.state.viewMode.id === CalendarViewModes.DATE.id || this.state.viewMode.id === CalendarViewModes.YEAR.id;
   };
 
   private renderWeekdayElement = (weekday: string, index: number): CalendarDateContentElement => {
@@ -420,9 +419,8 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     );
   };
 
-  private renderDayPickerPagerElement = (date: D): React.ReactElement<ViewProps> => {
-    const { themedStyle } = this.props;
-    const { divider, daysHeaderContainer } = this.getCalendarStyle(themedStyle);
+  private renderDayPickerPagerElement = (date: D): React.ReactFragment => {
+    const { divider, daysHeaderContainer } = this.getCalendarStyle(this.props.themedStyle);
     const visibleDayPickerIndex: number = this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
 
     return (
@@ -496,7 +494,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     );
   };
 
-  private renderPickerElement = (date: D): React.ReactElement<ViewProps> => {
+  private renderPickerElement = (date: D): React.ReactNode => {
     switch (this.state.viewMode.id) {
       case CalendarViewModes.DATE.id:
         return this.renderDayPickerPagerElement(date);
@@ -508,16 +506,15 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   };
 
   private renderCalendarFooter = (): React.ReactElement<any> => {
-    const { renderFooter } = this.props;
-
-    return renderFooter && renderFooter();
+    if (this.props.renderFooter) {
+      return this.props.renderFooter();
+    }
+    return null;
   };
 
   private renderCalendarHeader = (): CalendarHeaderElement => {
-    const { themedStyle, title } = this.props;
-    const { headerContainer, title: titleStyle, icon } = this.getCalendarStyle(themedStyle);
-
-    const titleSelector = title || this.createHeaderTitle;
+    const { headerContainer, title: titleStyle, icon } = this.getCalendarStyle(this.props.themedStyle);
+    const titleSelector = this.props.title || this.createHeaderTitle;
 
     return (
       <CalendarHeader

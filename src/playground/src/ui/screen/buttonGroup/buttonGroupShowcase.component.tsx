@@ -4,7 +4,7 @@ import {
   ButtonGroup,
   ButtonGroupElement,
   ButtonGroupProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 export const ButtonGroupShowcase = (props?: ButtonGroupProps): ButtonGroupElement => {
   return (

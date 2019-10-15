@@ -9,6 +9,7 @@ import {
 import {
   styled,
   StyledComponentProps,
+  StyleType,
 } from '@kitten/theme';
 import {
   SpinnerAnimation,
@@ -71,13 +72,13 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     return new Size(width, height);
   }
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     if (this.props.animating) {
       this.startAnimation();
     }
   }
 
-  public componentDidUpdate(prevProps: SpinnerProps) {
+  public componentDidUpdate(prevProps: SpinnerProps): void {
     const animatingChanged: boolean = this.props.animating !== prevProps.animating;
 
     if (animatingChanged && this.props.animating) {
@@ -89,19 +90,19 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     }
   }
 
-  public componentWillUnmount() {
+  public componentWillUnmount(): void {
     this.animation.release();
   }
 
-  private startAnimation = () => {
+  private startAnimation = (): void => {
     this.animation.start();
   };
 
-  private stopAnimation = () => {
+  private stopAnimation = (): void => {
     this.animation.stop();
   };
 
-  private getComponentStyle = (source: SpinnerAnimationStyle) => {
+  private getComponentStyle = (source: SpinnerAnimationStyle): StyleType => {
     const start: ArcElementStyle = {
       container: source.container,
       arc: source.start,

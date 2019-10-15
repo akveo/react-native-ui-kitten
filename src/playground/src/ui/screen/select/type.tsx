@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Image,
-  ImageProps,
-} from 'react-native';
-import { SelectOptionType } from '@kitten/ui';
-import { StyleType } from '@kitten/theme';
+  Icon,
+  IconElement,
+  SelectOptionType,
+  StyleType,
+} from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
@@ -12,11 +12,11 @@ import {
   ComponentShowcaseSetting,
 } from '../common/type';
 
-const iconClosedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
-const iconOpenedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png';
-
 const defaultSelectOption: SelectOptionType[] = [
-  { text: 'Option 1', disabled: true },
+  {
+    text: 'Option 1',
+    disabled: true,
+  },
   { text: 'Option 2' },
   { text: 'Option 3' },
   { text: 'Option 4' },
@@ -31,7 +31,10 @@ const withGroupsSelectOption: SelectOptionType[] = [
   {
     text: 'Option 2',
     items: [
-      { text: 'Option 21', disabled: true },
+      {
+        text: 'Option 21',
+        disabled: true,
+      },
       { text: 'Option 22' },
       { text: 'Option 23' },
     ],
@@ -41,14 +44,11 @@ const withGroupsSelectOption: SelectOptionType[] = [
   { text: 'Option 5' },
 ];
 
-const renderIcon = (style: StyleType, visible: boolean): React.ReactElement<ImageProps> => {
-  const uri: string = visible ? iconOpenedUri : iconClosedUri;
+const renderIcon = (style: StyleType, visible: boolean): IconElement => {
+  const iconName = visible ? 'arrow-ios-upward' : 'arrow-ios-downward';
 
   return (
-    <Image
-      source={{ uri }}
-      style={style}
-    />
+    <Icon {...style} name={iconName}/>
   );
 };
 
@@ -59,10 +59,19 @@ const defaultSelect: ComponentShowcaseItem = {
   },
 };
 
+const disabledSelect: ComponentShowcaseItem = {
+  title: 'Disabled',
+  props: {
+    data: defaultSelectOption,
+    disabled: true,
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
   title: 'Default Select',
   items: [
     defaultSelect,
+    disabledSelect,
   ],
 };
 
@@ -124,7 +133,6 @@ const withLabelSelect: ComponentShowcaseItem = {
   title: 'Label',
   props: {
     data: defaultSelectOption,
-    icon: renderIcon,
     label: 'Label',
   },
 };
@@ -133,8 +141,7 @@ const withCustomPlaceholderSelect: ComponentShowcaseItem = {
   title: 'Placeholder',
   props: {
     data: defaultSelectOption,
-    icon: renderIcon,
-    placeholder: 'Custom Placeholder',
+    placeholder: 'Place your Text',
   },
 };
 

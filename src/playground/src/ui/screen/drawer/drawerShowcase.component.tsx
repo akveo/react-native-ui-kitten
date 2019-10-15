@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   Button,
+  ButtonElement,
   ButtonProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
-export const DrawerShowcase = (props?: ButtonProps): React.ReactElement<ButtonProps> => {
+export const DrawerShowcase = (props?: ButtonProps): ButtonElement => {
   return (
     <Button
       {...props}>

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   LayoutElement,
   LayoutProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { LayoutShowcase } from './layoutShowcase.component';
 import {
   layoutShowcase,

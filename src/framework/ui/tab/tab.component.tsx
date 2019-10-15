@@ -7,12 +7,12 @@
 import React from 'react';
 import {
   ImageProps,
+  ImageStyle,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  ImageStyle,
 } from 'react-native';
 import {
   styled,
@@ -80,7 +80,7 @@ export class TabComponent extends React.Component<TabProps> {
     selected: false,
   };
 
-  private onPress = () => {
+  private onPress = (): void => {
     if (this.props.onSelect) {
       this.props.onSelect(!this.props.selected);
     }

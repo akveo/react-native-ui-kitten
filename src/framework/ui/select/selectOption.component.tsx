@@ -11,7 +11,6 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  ViewProps,
   View,
 } from 'react-native';
 import {
@@ -28,8 +27,7 @@ import { CheckBox } from '../checkbox/checkbox.component';
 import { TouchableTypeReturningProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
-type DefaultItemElement = React.ReactElement<TouchableOpacityProps>;
-type MultiSelectItemElement = React.ReactElement<ViewProps>;
+type ItemElement = React.ReactElement<TouchableOpacityProps>;
 
 export interface SelectOptionType {
   text: string;
@@ -52,18 +50,16 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
 
   static styledComponentName: string = 'SelectOption';
 
-  private onPress = (event: GestureResponderEvent) => {
-    const { item, onPress } = this.props;
-
+  private onPress = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
-    onPress(item, event);
+    this.props.onPress(this.props.item, event);
   };
 
   private onMultiSelectItemPress = (value: boolean): void => {
     this.onPress(null);
   };
 
-  private onPressIn = (event: GestureResponderEvent) => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
@@ -71,7 +67,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
     }
   };
 
-  private onPressOut = (event: GestureResponderEvent) => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
 
     if (this.props.onPressOut) {
@@ -79,7 +75,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
     }
   };
 
-  private onLongPress = (event: GestureResponderEvent) => {
+  private onLongPress = (event: GestureResponderEvent): void => {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.props.item, event);
     }
@@ -100,20 +96,8 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
 
     return {
       container: containerStyles,
-      multiSelectContainer: {
-        ...containerStyles,
-        backgroundColor: multiSelectBackgroundColor,
-      },
       text: {
         color: textColor,
-        fontFamily: textFontFamily,
-        fontSize: textFontSize,
-        fontWeight: textFontWeight,
-        lineHeight: textLineHeight,
-        marginHorizontal: textMarginHorizontal,
-      },
-      multiSelectText: {
-        color: multiSelectTextColor,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
@@ -124,24 +108,23 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
   };
 
   private renderTextElement = (style: TextStyle): TextElement => {
-    const { item } = this.props;
-
     return (
-      <Text style={[style, styles.text, item.textStyle]}>
-        {item.text}
+      <Text style={[style, styles.text, this.props.item.textStyle]}>
+        {this.props.item.text}
       </Text>
     );
   };
 
-  private renderDefaultItem = (): DefaultItemElement => {
+  private renderDefaultItem = (): ItemElement => {
     const { themedStyle, style, item, ...restProps } = this.props;
     const { container, text } = this.getComponentStyle(themedStyle);
     const textElement: TextElement = this.renderTextElement(text);
 
     return (
       <TouchableOpacity
-        {...restProps}
         activeOpacity={1.0}
+        {...restProps}
+        disabled={item.disabled}
         style={[styles.container, container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
@@ -152,25 +135,17 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
     );
   };
 
-  private renderMultiSelectItem = (): MultiSelectItemElement => {
-    const {
-      disabled,
-      item,
-      themedStyle,
-      selected,
-      style,
-      indeterminate,
-      ...restProps
-    } = this.props;
-    const { multiSelectContainer, multiSelectText } = this.getComponentStyle(themedStyle);
+  private renderMultiSelectItem = (): ItemElement => {
+    const { style, themedStyle, selected, disabled, indeterminate, item, ...restProps } = this.props;
+    const { container, text } = this.getComponentStyle(themedStyle);
 
     return (
       <View
         {...restProps}
-        style={[styles.container, multiSelectContainer, style]}>
+        style={[styles.container, container, style]}>
         <CheckBox
           text={item.text}
-          textStyle={[multiSelectText, item.textStyle]}
+          textStyle={[text, item.textStyle]}
           disabled={disabled}
           checked={selected}
           indeterminate={indeterminate}
@@ -181,9 +156,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
   };
 
   public render(): React.ReactNode {
-    const { multiSelect } = this.props;
-
-    return multiSelect ? this.renderMultiSelectItem() : this.renderDefaultItem();
+    return this.props.multiSelect ? this.renderMultiSelectItem() : this.renderDefaultItem();
   }
 }
 

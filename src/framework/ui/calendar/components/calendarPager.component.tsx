@@ -16,14 +16,14 @@ export type CalendarPagerElement<D> = React.ReactElement<CalendarPagerProps<D>>;
 
 export class CalendarPager<D> extends React.Component<CalendarPagerProps<D>> {
 
-  public scrollToIndex(params: { index: number, animated?: boolean }) {
+  public scrollToIndex(params: { index: number, animated?: boolean }): void {
     this.viewPagerRef.current.scrollToIndex(params);
   }
 
   private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
 
-  private onSelect = (index: number) => {
-    // TODO: This fixes layout junks (for any reason)
+  private onSelect = (index: number): void => {
+    // For any reason, this fixes layout junks
     setTimeout(() => {
       this.props.onSelect(index);
     });

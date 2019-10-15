@@ -3,7 +3,7 @@ import {
   CheckBox,
   CheckBoxElement,
   CheckBoxProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface CheckBoxShowcaseComponentState {
   checked: boolean;

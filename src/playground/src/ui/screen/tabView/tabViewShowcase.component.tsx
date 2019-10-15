@@ -3,7 +3,7 @@ import {
   TabView,
   TabViewElement,
   TabViewProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   selectedIndex: number;

@@ -4,7 +4,7 @@ import {
   OverflowMenuProps,
   OverflowMenuElement,
   Button,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   menuVisible: boolean;

@@ -74,15 +74,15 @@ export class ListComponent extends React.Component<ListProps> {
 
   private listRef: React.RefObject<FlatList<ItemType>> = React.createRef();
 
-  public scrollToEnd = (params?: BaseScrollParams) => {
+  public scrollToEnd = (params?: BaseScrollParams): void => {
     this.listRef.current.scrollToEnd(params);
   };
 
-  public scrollToIndex = (params: ScrollToIndexParams) => {
+  public scrollToIndex = (params: ScrollToIndexParams): void => {
     this.listRef.current.scrollToIndex(params);
   };
 
-  public scrollToOffset(params: ScrollToOffsetParams) {
+  public scrollToOffset(params: ScrollToOffsetParams): void {
     this.listRef.current.scrollToOffset(params);
   }
 

@@ -52,7 +52,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
     return true;
   }
 
-  private onPress = () => {
+  private onPress = (): void => {
     if (this.props.onSelect) {
       this.props.onSelect(this.props.date);
     }

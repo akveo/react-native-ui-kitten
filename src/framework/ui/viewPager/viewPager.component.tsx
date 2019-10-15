@@ -72,18 +72,18 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
   private contentOffset: Animated.Value = new Animated.Value(this.contentOffsetValue);
   private panResponder: PanResponderInstance = PanResponder.create(this);
 
-  public componentDidMount() {
+  public componentDidMount(): void {
     this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
   }
 
-  public componentDidUpdate(prevProps: ViewPagerProps) {
+  public componentDidUpdate(prevProps: ViewPagerProps): void {
     if (prevProps.selectedIndex !== this.props.selectedIndex) {
       const index: number = this.props.selectedIndex;
       this.scrollToIndex({ index, animated: true });
     }
   }
 
-  public componentWillUnmount() {
+  public componentWillUnmount(): void {
     this.contentOffset.removeAllListeners();
   }
 
@@ -100,7 +100,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     return false;
   };
 
-  public onPanResponderMove = (event: GestureResponderEvent, state: PanResponderGestureState) => {
+  public onPanResponderMove = (event: GestureResponderEvent, state: PanResponderGestureState): void => {
     const i18nOffset: number = I18nLayoutService.select(this.contentWidth, -this.contentWidth);
     const selectedPageOffset: number = this.props.selectedIndex * i18nOffset;
 
@@ -118,7 +118,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     }
   };
 
-  public scrollToIndex(params: { index: number, animated?: boolean }) {
+  public scrollToIndex(params: { index: number, animated?: boolean }): void {
     const { index, ...rest } = params;
     const childCount = this.getChildCount() - 1;
     const offset: number = this.contentWidth * (index < 0 ? 0 : index > childCount ? childCount : index);
@@ -126,11 +126,11 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     this.scrollToOffset({ offset, ...rest });
   }
 
-  public scrollToOffset = (params: { offset: number, animated?: boolean }) => {
+  public scrollToOffset = (params: { offset: number, animated?: boolean }): void => {
     this.createOffsetAnimation(params).start(this.onContentOffsetAnimationStateEnd);
   };
 
-  private onLayout = (event: LayoutChangeEvent) => {
+  private onLayout = (event: LayoutChangeEvent): void => {
     this.contentWidth = event.nativeEvent.layout.width / this.getChildCount();
 
     this.scrollToIndex({
@@ -138,7 +138,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     });
   };
 
-  private onContentOffsetAnimationStateChanged = (state: { value: number }) => {
+  private onContentOffsetAnimationStateChanged = (state: { value: number }): void => {
     this.contentOffsetValue = I18nLayoutService.select(-state.value, state.value);
 
     if (this.props.onOffsetChange) {
@@ -146,7 +146,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     }
   };
 
-  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }) => {
+  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }): void => {
     const selectedIndex: number = this.contentOffsetValue / this.contentWidth;
 
     if (selectedIndex !== this.props.selectedIndex && this.props.onSelect) {
@@ -191,7 +191,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     };
   };
 
-  public render(): React.ReactNode {
+  public render(): React.ReactElement<ViewProps> {
     const { style, children, ...restProps } = this.props;
 
     return (

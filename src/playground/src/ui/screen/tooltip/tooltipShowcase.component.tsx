@@ -4,7 +4,7 @@ import {
   Tooltip,
   TooltipElement,
   TooltipProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   tooltipVisible: boolean;

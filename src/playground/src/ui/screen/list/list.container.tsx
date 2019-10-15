@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   ListElement,
   ListProps,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 import { ListShowcase } from './listShowcase';
 import {
   listSettings,

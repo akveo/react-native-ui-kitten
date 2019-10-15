@@ -4,7 +4,7 @@ import {
   RangeDatepicker,
   DatepickerProps,
   CalendarRange,
-} from '@kitten/ui';
+} from 'react-native-ui-kitten';
 
 interface State {
   range: CalendarRange<Date>;

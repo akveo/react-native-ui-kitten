@@ -6,16 +6,14 @@ import {
 import { NavigationScreenProps } from 'react-navigation';
 import { Link } from '@react-navigation/web';
 import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
-} from '@kitten/theme';
-import {
   List,
   ListElement,
   ListItem,
   ListItemElement,
-} from '@kitten/ui';
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from 'react-native-ui-kitten';
 import { RouteType } from '../../navigation';
 
 export const routes: RouteType[] = [
@@ -77,9 +75,8 @@ class HomeScreen extends React.Component<Props> {
 
   private renderItem = (info: ListRenderItemInfo<RouteType>): ListItemElement => {
     return Platform.select({
-      ios: this.renderMobileListItem(info),
-      android: this.renderMobileListItem(info),
-      default: this.renderWebListItem(info),
+      default: this.renderMobileListItem(info),
+      web: this.renderWebListItem(info),
     });
   };
 

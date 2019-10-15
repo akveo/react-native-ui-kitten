@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "AwesomeApp",
-    "slug": "awesome-app",
+    "name": "UI Kitten Playground",
+    "slug": "ui-kitten-playground",
+    "description": "UI Kitten Playground Application",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -27,7 +28,5 @@
       "supportsTablet": true
     },
     "entryPoint": "node_modules/expo/AppEntry.js"
-  },
-  "displayName": "AwesomeApp",
-  "name": "AwesomeApp"
+  }
 }

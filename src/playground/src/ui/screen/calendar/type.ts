@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { CalendarViewModes } from '@kitten/ui';
+import { CalendarViewModes } from 'react-native-ui-kitten';
 import { MomentDateService } from '@ui-kitten/moment';
 import { DateFnsService } from '@ui-kitten/date-fns';
 import {

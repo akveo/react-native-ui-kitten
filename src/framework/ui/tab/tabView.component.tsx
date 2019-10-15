@@ -8,6 +8,7 @@ import React from 'react';
 import {
   StyleProp,
   StyleSheet,
+  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -78,23 +79,20 @@ export class TabView extends React.Component<TabViewProps> {
   private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
   private tabBarRef: React.RefObject<any> = React.createRef();
 
-  private onBarSelect = (index: number) => {
+  private onBarSelect = (index: number): void => {
     const { current: viewPager } = this.viewPagerRef;
 
-    viewPager.scrollToIndex({
-      index,
-      animated: true,
-    });
+    viewPager.scrollToIndex({ index, animated: true });
   };
 
-  private onPagerOffsetChange = (offset: number) => {
+  private onPagerOffsetChange = (offset: number): void => {
     const { current: tabBar } = this.tabBarRef;
     const tabCount: number = React.Children.count(tabBar.props.children);
 
     tabBar.scrollToOffset({ offset: offset / tabCount });
   };
 
-  private onPagerSelect = (selectedIndex: number) => {
+  private onPagerSelect = (selectedIndex: number): void => {
     if (this.props.onSelect) {
       this.props.onSelect(selectedIndex);
     }
@@ -123,7 +121,9 @@ export class TabView extends React.Component<TabViewProps> {
     const { tabs, content } = this.renderComponentChildren(children);
 
     return (
-      <React.Fragment>
+      <View
+        style={[styles.container, style]}
+        {...derivedProps}>
         <TabBar
           style={tabBarStyle}
           ref={this.tabBarRef}
@@ -142,7 +142,7 @@ export class TabView extends React.Component<TabViewProps> {
           onSelect={this.onPagerSelect}>
           {content}
         </ViewPager>
-      </React.Fragment>
+      </View>
     );
   }
 }

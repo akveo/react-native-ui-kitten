@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
-import { DrawerProps } from '@kitten/ui';
+import { DrawerProps } from 'react-native-ui-kitten';
 import { DrawerShowcase } from './drawerShowcase.component';
 import { drawerShowcase } from './type';
 import { ShowcaseContainer } from '../common/showcase.container';
