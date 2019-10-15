@@ -64,57 +64,73 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
   static styledComponentName: string = 'ButtonGroup';
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const {
-      dividerBackgroundColor,
-      dividerWidth,
-      ...containerParameters
-    } = source;
+    const { dividerBackgroundColor, dividerWidth, ...containerParameters } = source;
 
     return {
-      container: containerParameters,
+      container: {
+        ...containerParameters,
+        borderWidth: containerParameters.borderWidth + 0.25,
+      },
       button: {
-        borderEndColor: dividerBackgroundColor,
-        borderEndWidth: dividerWidth,
+        borderWidth: dividerWidth,
+        borderColor: dividerBackgroundColor,
       },
     };
   };
 
-  private isLastElement = (index: number): boolean => {
-    const { children } = this.props;
+  private isFirstElement = (index: number): boolean => {
+    return index === 0;
+  };
 
-    return index === React.Children.count(children) - 1;
+  private isLastElement = (index: number): boolean => {
+    return index === React.Children.count(this.props.children) - 1;
   };
 
   private renderButtonElement = (element: ButtonElement, index: number, style: StyleType): ButtonElement => {
     const { appearance, size, status } = this.props;
+    const { borderRadius }: ViewStyle = style.container;
+    const { borderWidth, borderColor }: ViewStyle = style.button;
 
-    const additionalStyle: ViewStyle = this.isLastElement(index) ? styles.lastButton : style;
+    const shapeStyle: ViewStyle = !this.isLastElement(index) && {
+      borderEndWidth: borderWidth,
+      borderEndColor: borderColor,
+    };
+
+    const startShapeStyle: ViewStyle = this.isFirstElement(index) && {
+      borderTopStartRadius: borderRadius,
+      borderBottomStartRadius: borderRadius,
+    };
+
+    const endShapeStyle: ViewStyle = this.isLastElement(index) && {
+      borderTopEndRadius: borderRadius,
+      borderBottomEndRadius: borderRadius,
+    };
 
     return React.cloneElement(element, {
       key: index,
       appearance: appearance,
       size: size,
       status: status,
-      style: [element.props.style, styles.button, additionalStyle],
+      style: [element.props.style, styles.button, shapeStyle, startShapeStyle, endShapeStyle],
     });
   };
 
   private renderButtonElements = (source: ChildrenProp, style: StyleType): ButtonElement[] => {
     return React.Children.map(source, (element: ButtonElement, index: number): ButtonElement => {
-      return this.renderButtonElement(element, index, style.button);
+      return this.renderButtonElement(element, index, style);
     });
   };
 
   public render(): React.ReactElement<ViewProps> {
     const { themedStyle, style, children, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
-    const buttonElements: ButtonElement[] = this.renderButtonElements(children, componentStyles);
+    const buttonElements: ButtonElement[] = this.renderButtonElements(children, componentStyle);
 
     return (
       <View
         {...derivedProps}
-        style={[container, styles.container, style]}>
+        style={[componentStyle.container, styles.container, style]}>
         {buttonElements}
       </View>
     );
@@ -128,13 +144,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 0,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
-  },
-  lastButton: {
     borderWidth: 0,
-    borderRadius: 0,
   },
 });
 
