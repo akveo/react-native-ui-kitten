@@ -32,7 +32,7 @@ export class MultiSelectStrategy implements SelectionStrategy {
   private selectDefaultOption(option: SelectOptionType): void {
     const optionAlreadyExist: boolean = this.selectedOption
       .some((item: SelectOptionType) => {
-        return item === option;
+        return item.text === option.text;
       });
     if (optionAlreadyExist) {
       this.removeOption(option);
@@ -87,7 +87,7 @@ export class MultiSelectStrategy implements SelectionStrategy {
   private removeOption(option: SelectOptionType): void {
     const index: number = this.selectedOption
       .findIndex((item: SelectOptionType) => {
-        return item === option;
+        return item.text === option.text;
       });
     if (index !== -1) {
       this.selectedOption.splice(index, 1);
