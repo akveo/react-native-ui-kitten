@@ -18,6 +18,7 @@ UI Kitten is a customizable React Native UI Library based on <a href="https://ev
   - UI Kitten date-fns `@ui-kitten/date-fns`
     - Modules allowing UI Kitten components to work with dates with help most popular date libraries. 
   - Demo App <a href="https://github.com/akveo/kittenTricks" target="_blank">Kitten Tricks</a> - React Native application based on UI Kitten modules.
+  - <a href="https://bit.ly/2IXkl6n">Backend Bundles</a> - backend starter kits connected to UI Kitten layouts.
 <hr>
 
 ## Assumptions
