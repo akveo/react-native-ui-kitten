@@ -34,6 +34,8 @@ export interface SelectOptionType {
   textStyle?: TextStyle;
   disabled?: boolean;
   items?: SelectOptionType[];
+
+  [key: string]: any;
 }
 
 export interface ComponentProps {
@@ -89,8 +91,6 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
       textFontWeight,
       textLineHeight,
       textMarginHorizontal,
-      multiSelectBackgroundColor,
-      multiSelectTextColor,
       ...containerStyles
     } = source;
 
@@ -124,7 +124,6 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...restProps}
-        disabled={item.disabled}
         style={[styles.container, container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
@@ -145,7 +144,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
         style={[styles.container, container, style]}>
         <CheckBox
           text={item.text}
-          textStyle={[text, item.textStyle]}
+          textStyle={[text, item.textStyle, styles.multiSelectText]}
           disabled={disabled}
           checked={selected}
           indeterminate={indeterminate}
@@ -167,6 +166,9 @@ const styles = StyleSheet.create({
   },
   icon: {},
   text: {},
+  multiSelectText: {
+    width: '100%',
+  },
 });
 
 export const SelectOption = styled<SelectOptionProps>(SelectOptionComponent);
