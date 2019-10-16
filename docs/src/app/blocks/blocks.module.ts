@@ -37,6 +37,7 @@ import {
 import {
   NbInputModule,
   NbRadioModule,
+  NbTooltipModule,
 } from '@nebular/theme';
 
 const blocks = [
@@ -72,6 +73,7 @@ const blocks = [
     NgdThemeModule,
     NbRadioModule,
     NbInputModule,
+    NbTooltipModule,
   ],
   declarations: [
     ...blocks,

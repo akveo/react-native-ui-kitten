@@ -27,6 +27,19 @@
     margin-bottom: 1.875rem;
   }
 
+  .title-caption {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    align-self: flex-start;
+
+    nb-icon {
+      margin-right: 0.5rem;
+      color: #FFAA00;
+      font-size: 16px;
+    }
+  }
+
   .title,
   .actions {
     margin-top: 0.5rem;
