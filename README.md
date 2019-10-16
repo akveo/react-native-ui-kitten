@@ -14,13 +14,15 @@ And the most awesome thing: the themes can be changed in the runtime, with no ne
 
 ## What's included
 
-- **20+ general-purpose components** designed and tested to save your time.
+- **25+ general-purpose components** designed and tested to save your time.
 
 - **Comprehensive clear documentation** with the tons of examples.
 
-- **Theming System.** Use Light and modern Dark themes and create your own.
+- **Theming System -** Use Light and modern Dark themes and create your own.
 
-- **Eva Design System Support.** Construct an interface using basic components following Eva specifications and it will always have a stunning design.
+- **SVG Eva Icons support -** 480+ general purpose icons
+
+- **Eva Design System Support -** Construct an interface using basic components following Eva specifications and it will always have a stunning design.
 
 ## Starter App
 
@@ -39,6 +41,12 @@ npx react-native init MyApp --template react-native-template-ui-kitten
 
 This will setup a new React Native application configured with UI Kitten.
 Refer to the [Documentation][link:doc-where-start] for more options to start.
+
+## Mobile backend Bundles
+
+Easy way to integrate UI Kitten with backend ([Java][link:ui-kitten-bundle-java], [.NET Core][link:ui-kitten-bundle-dotnet-core]).
+
+[<img src="https://i.imgur.com/HVNZQGR.jpg">][link:ui-kitten-bundles]
 
 ## How can I support the developers?
 - Star our GitHub repo :star:
@@ -72,3 +80,6 @@ We're always happy to receive your feedback!
 [link:akveo-medium]: https://medium.com/akveo-engineering
 [link:akveo-twitter]: https://twitter.com/akveo_inc
 [link:akveo-facebook]: https://www.facebook.com/akveo
+[link:ui-kitten-bundles]: https://bit.ly/2MjefPY
+[link:ui-kitten-bundle-java]: http://bit.ly/2MYmOPp
+[link:ui-kitten-bundle-dotnet-core]: http://bit.ly/31gIBqp
