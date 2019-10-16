@@ -46,7 +46,7 @@ Refer to the [Documentation][link:doc-where-start] for more options to start.
 
 Easy way to integrate UI Kitten with backend ([Java][link:ui-kitten-bundle-java], [.NET Core][link:ui-kitten-bundle-dotnet-core]).
 
-[<img src="https://i.imgur.com/HVNZQGR.jpg">][link:ui-kitten-bundles]
+[<img src="https://i.imgur.com/oSaGaCv.jpg">][link:ui-kitten-bundles]
 
 ## How can I support the developers?
 - Star our GitHub repo :star:
