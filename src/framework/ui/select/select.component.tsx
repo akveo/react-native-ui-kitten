@@ -87,7 +87,9 @@ interface State {
 }
 
 /**
- * Styled `Select` component.
+ * Styled `Select` component. By default, the MultiSelect compares the items by reference.
+ * To specify a field from the data object which will be used for the comparison,
+ * implement the `keyExtractor` property.
  *
  * @extends React.Component
  *
@@ -140,6 +142,14 @@ interface State {
  * @overview-example SelectMultiSelect
  *
  * @overview-example SelectWithGroups
+ *
+ * @overview-example SelectPreselectedInline
+ *
+ * @overview-example SelectPreselectedReference
+ *
+ * @overview-example SelectMultiPreselectedInline
+ *
+ * @overview-example SelectMultiPreselectedReference
  *
  * @example SelectCustomIcon
  *
