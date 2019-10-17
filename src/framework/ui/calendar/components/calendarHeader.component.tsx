@@ -20,8 +20,8 @@ interface ComponentProps extends ViewProps {
   iconStyle?: ImageStyle;
   lateralNavigationAllowed: boolean;
   onTitlePress?: () => void;
-  onRight?: () => void;
-  onLeft?: () => void;
+  onNavigationLeftPress?: () => void;
+  onNavigationRightPress?: () => void;
 }
 
 export type CalendarHeaderProps = ComponentProps;
@@ -64,14 +64,14 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
           appearance='ghost'
           // @ts-ignore
           icon={this.renderLeftIcon}
-          onPress={this.props.onLeft}
+          onPress={this.props.onNavigationLeftPress}
         />
         <Button
           style={styles.headerButton}
           appearance='ghost'
           // @ts-ignore
           icon={this.renderRightIcon}
-          onPress={this.props.onRight}
+          onPress={this.props.onNavigationRightPress}
         />
       </View>
     );
