@@ -1,24 +1,67 @@
 import { SelectOptionType } from './selectOption.component';
+import { KeyExtractorType } from './select.component';
 
-export interface SelectionStrategy {
-  selectedOption: SelectOptionType | SelectOptionType[];
-  isSelected: (item: SelectOptionType) => boolean;
-  select: (option: SelectOptionType, callback?: () => void) => SelectOptionType | SelectOptionType[];
-  getPlaceholder: (placeholder: string) => string;
+export abstract class SelectionStrategy<S> {
+
+  public selectedOption: S;
+  protected keyExtractor: KeyExtractorType;
+
+  protected constructor(options: S, data: SelectOptionType[], keyExtractor?: KeyExtractorType) {
+
+    this.selectedOption = options;
+    this.keyExtractor = keyExtractor;
+    this.verifyData(data);
+  }
+
+  public abstract isSelected(item: SelectOptionType): boolean;
+
+  public abstract select(option: SelectOptionType, callback?: () => void): S;
+
+  public abstract getPlaceholder(placeholder: string): string;
+
+  protected abstract verifyData(data: SelectOptionType[]): void;
+
+  protected compareOptions(option1: SelectOptionType, option2: SelectOptionType): boolean {
+    if (!this.keyExtractor) {
+      return option1 === option2;
+    } else {
+      return (option1 && option2) && this.keyExtractor(option1) === this.keyExtractor(option2);
+    }
+  }
+
+  protected hasOptionSubItems(option: SelectOptionType): boolean {
+    return option.items && option.items.length !== 0;
+  }
+
+  protected processData(data: SelectOptionType[]): string[] {
+    return data
+      .reduce((acc: string[], current: SelectOptionType) => {
+        if (this.hasOptionSubItems(current)) {
+          const subTexts: string[] = current.items.map((item: SelectOptionType) => {
+            return item.text;
+          });
+          return acc.concat(subTexts);
+        } else {
+          acc.push(current.text);
+          return acc;
+        }
+      }, []);
+  }
 }
 
-export class MultiSelectStrategy implements SelectionStrategy {
+export class MultiSelectStrategy extends SelectionStrategy<SelectOptionType[]> {
 
-  public selectedOption: SelectOptionType[];
+  constructor(options: SelectOptionType | SelectOptionType[],
+              data: SelectOptionType[],
+              keyExtractor?: KeyExtractorType) {
 
-  constructor(options: SelectOptionType | SelectOptionType[]) {
     if (Array.isArray(options)) {
-      this.selectedOption = options;
+      super(options, data, keyExtractor);
     }
   }
 
   public select(option: SelectOptionType, callback?: () => void): SelectOptionType[] {
-    const subOptionsExist: boolean = this.areThereSubOptions(option);
+    const subOptionsExist: boolean = this.hasOptionSubItems(option);
 
     if (subOptionsExist) {
       this.selectOptionWithSubOptions(option);
@@ -32,7 +75,7 @@ export class MultiSelectStrategy implements SelectionStrategy {
   private selectDefaultOption(option: SelectOptionType): void {
     const optionAlreadyExist: boolean = this.selectedOption
       .some((item: SelectOptionType) => {
-        return item === option;
+        return this.compareOptions(item, option);
       });
     if (optionAlreadyExist) {
       this.removeOption(option);
@@ -76,7 +119,7 @@ export class MultiSelectStrategy implements SelectionStrategy {
   public isSelected(item: SelectOptionType): boolean {
     return this.selectedOption
       .some((option: SelectOptionType) => {
-        return option === item;
+        return this.compareOptions(item, option);
       });
   }
 
@@ -87,25 +130,36 @@ export class MultiSelectStrategy implements SelectionStrategy {
   private removeOption(option: SelectOptionType): void {
     const index: number = this.selectedOption
       .findIndex((item: SelectOptionType) => {
-        return item === option;
+        return this.compareOptions(item, option);
       });
     if (index !== -1) {
       this.selectedOption.splice(index, 1);
     }
   }
 
-  private areThereSubOptions(option: SelectOptionType): boolean {
-    return option.items && option.items.length !== 0;
+  protected verifyData(data: SelectOptionType[]): void {
+    const selectedItemsAreCorrect: boolean = this.processData(data).some((item: string) => {
+      return this.selectedOption.some((selected: SelectOptionType) => {
+        return selected.text === item;
+      });
+    });
+
+    if (!selectedItemsAreCorrect && this.selectedOption.length !== 0) {
+      const message: string = `Some Option doesn't exist in the data array or you ` +
+        'set Main group option selected.';
+      throw Error(message);
+    }
   }
 }
 
-export class SingleSelectStrategy implements SelectionStrategy {
+export class SingleSelectStrategy extends SelectionStrategy<SelectOptionType> {
 
-  public selectedOption: SelectOptionType;
+  constructor(options: SelectOptionType | SelectOptionType[],
+              data: SelectOptionType[],
+              keyExtractor?: KeyExtractorType) {
 
-  constructor(options: SelectOptionType | SelectOptionType[]) {
     if (!Array.isArray(options)) {
-      this.selectedOption = options;
+      super(options, data, keyExtractor);
     }
   }
 
@@ -133,11 +187,20 @@ export class SingleSelectStrategy implements SelectionStrategy {
         return this.isSelected(option);
       });
     } else {
-      return this.selectedOption === item;
+      return this.compareOptions(item, this.selectedOption);
     }
   }
 
-  private hasOptionSubItems(option: SelectOptionType): boolean {
-    return option.items && option.items.length !== 0;
+  protected verifyData(data: SelectOptionType[]): void {
+    const selectedItemsAreCorrect: boolean = this.processData(data).some((item: string) => {
+      if (this.selectedOption) {
+        return item === this.selectedOption.text;
+      }
+    });
+
+    if (!selectedItemsAreCorrect && this.selectedOption) {
+      const message: string = `Option \"${this.selectedOption.text}\" doesn't exist in the data array!`;
+      throw Error(message);
+    }
   }
 }

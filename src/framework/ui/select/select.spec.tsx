@@ -57,11 +57,16 @@ interface Props {
   labelStyle?: StyleType;
   placeholderStyle?: StyleType;
   controlStyle?: StyleType;
+  preselectedRef?: SelectOption;
+  preselectedInline?: SelectOption;
+  preselectedMultiRef?: SelectOption;
+  preselectedMultiInline?: SelectOption;
   onSelectPress?: () => void;
   onSelectPressIn?: () => void;
   onSelectPressOut?: () => void;
   onSelectLongPress?: () => void;
   onMultiSelectPress?: () => void;
+  keyExtractor?: (item: SelectOptionType) => string;
 }
 
 interface State {
@@ -71,9 +76,33 @@ interface State {
 
 class TestApplication extends React.Component<Props, State> {
 
+  private getSelectedOption = (): SelectOption => {
+    const { preselectedRef, preselectedInline } = this.props;
+
+    if (preselectedInline) {
+      return preselectedInline;
+    } else if (preselectedRef) {
+      return preselectedRef;
+    } else {
+      return null;
+    }
+  };
+
+  private getSelectedOptionMulti = (): SelectOption => {
+    const { preselectedMultiInline, preselectedMultiRef } = this.props;
+
+    if (preselectedMultiInline) {
+      return preselectedMultiInline;
+    } else if (preselectedMultiRef) {
+      return preselectedMultiRef;
+    } else {
+      return [];
+    }
+  };
+
   public state: State = {
-    selectSelected: null,
-    selectMultiSelected: [],
+    selectSelected: this.getSelectedOption(),
+    selectMultiSelected: this.getSelectedOptionMulti(),
   };
 
   private onSelectSelect = (selectSelected: SelectOption): void => {
@@ -106,7 +135,7 @@ class TestApplication extends React.Component<Props, State> {
       onSelectPressIn,
       onSelectPressOut,
       onSelectLongPress,
-
+      keyExtractor,
     } = this.props;
 
     return (
@@ -123,6 +152,7 @@ class TestApplication extends React.Component<Props, State> {
           onPressOut={onSelectPressOut}
           onLongPress={onSelectLongPress}
           onSelect={this.onSelectSelect}
+          keyExtractor={keyExtractor}
         />
         <Select
           disabled={multiSelectDisabled}
@@ -134,11 +164,11 @@ class TestApplication extends React.Component<Props, State> {
           icon={this.renderIcon}
           onPress={onMultiSelectPress}
           onSelect={this.onSelectMultiSelect}
+          keyExtractor={keyExtractor}
         />
       </ApplicationProvider>
     );
   }
-
 }
 
 
@@ -283,6 +313,49 @@ describe('@ select component checks', () => {
 
     expect(label).toBe(passedLabel);
     expect(placeholder).toBe(passedPlaceholder);
+  });
+
+  it('* preselected item by reference objects equality checks', () => {
+    const preselectedDefault: SelectOption = data[3];
+    const preselectedMulti: SelectOption = [data[3], data[4]];
+    const application: RenderAPI = render(
+      <TestApplication
+        preselectedRef={preselectedDefault}
+        preselectedMultiRef={preselectedMulti}
+      />,
+    );
+
+    const { selectedOption: defaultSelect } = application.getAllByType(TouchableOpacity)[0].props;
+    const { selectedOption: multiSelect } = application.getAllByType(TouchableOpacity)[1].props;
+
+    expect(defaultSelect).toEqual(preselectedDefault);
+    expect(multiSelect).toEqual(preselectedMulti);
+  });
+
+  it('* preselected item inline objects equality checks', () => {
+    const preselectedMulti: SelectOption = [{ text: 'Option 4' }, { text: 'Option 6' }];
+    const application: RenderAPI = render(
+      <TestApplication
+        preselectedMultiInline={preselectedMulti}
+        keyExtractor={(item: SelectOptionType) => item.text}
+      />,
+    );
+
+    fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
+    fireEvent(application.getAllByType(CheckBox)[6], 'onChange');
+
+    const { selectedOption: multiSelect } = application.getAllByType(TouchableOpacity)[1].props;
+
+    expect(multiSelect.length).toBe(1);
+    expect(stringify(multiSelect)).toBe(stringify([{ text: 'Option 6' }]));
+  });
+
+  it('* unexpected preselected', () => {
+    const preselectedDefault: SelectOption = { text: 'Option 4545'};
+
+    expect(() => {
+      render(<TestApplication preselectedInline={preselectedDefault}/>);
+    }).toThrowError();
   });
 
 });

@@ -39,9 +39,9 @@ const withGroupsSelectOption: SelectOptionType[] = [
       { text: 'Option 23' },
     ],
   },
-  { text: 'Option 3' },
-  { text: 'Option 4' },
-  { text: 'Option 5' },
+  // { text: 'Option 3' },
+  // { text: 'Option 4' },
+  // { text: 'Option 5' },
 ];
 
 const renderIcon = (style: StyleType, visible: boolean): IconElement => {
@@ -109,7 +109,7 @@ const withGroupsSection: ComponentShowcaseSection = {
   title: 'Groups Select',
   items: [
     groupSelect,
-    groupSelectMultiselect,
+    // groupSelectMultiselect,
   ],
 };
 
@@ -153,6 +153,58 @@ const customTextsSection: ComponentShowcaseSection = {
   ],
 };
 
+const preselectedReference: ComponentShowcaseItem = {
+  title: 'Ref',
+  props: {
+    data: defaultSelectOption,
+    preselectedItem: defaultSelectOption[1],
+  },
+};
+
+const preselectedReferenceMultiSelect: ComponentShowcaseItem = {
+  title: 'Multi Ref',
+  props: {
+    multiSelect: true,
+    data: defaultSelectOption,
+    preselectedItem: [defaultSelectOption[1]],
+  },
+};
+
+const preselectedReferenceSection: ComponentShowcaseSection = {
+  title: 'Preselected Reference',
+  items: [
+    preselectedReference,
+    preselectedReferenceMultiSelect,
+  ],
+};
+
+const preselectedInline: ComponentShowcaseItem = {
+  title: 'Inline',
+  props: {
+    data: defaultSelectOption,
+    preselectedItem: { text: 'Option 3' },
+    keyExtractor: (item: SelectOptionType) => item.text,
+  },
+};
+
+const preselectedInlineMultiSelect: ComponentShowcaseItem = {
+  title: 'Multi Inline',
+  props: {
+    multiSelect: true,
+    data: defaultSelectOption,
+    preselectedItem: [{ text: 'Option 3' }],
+    keyExtractor: (item: SelectOptionType) => item.text,
+  },
+};
+
+const preselectedInlineSection: ComponentShowcaseSection = {
+  title: 'Preselected Inline',
+  items: [
+    preselectedInline,
+    preselectedInlineMultiSelect,
+  ],
+};
+
 export const selectShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
@@ -160,6 +212,8 @@ export const selectShowcase: ComponentShowcase = {
     withGroupsSection,
     withIconSection,
     customTextsSection,
+    preselectedReferenceSection,
+    preselectedInlineSection,
   ],
 };
 

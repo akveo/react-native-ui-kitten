@@ -11,14 +11,30 @@ interface SelectShowcaseComponentState {
   selectedOption: SelectOption;
 }
 
-class SelectShowcaseComponent extends React.Component<SelectProps, SelectShowcaseComponentState> {
+interface AdditionalProps {
+  preselectedItem?: SelectOption;
+}
+
+type Props = SelectProps & AdditionalProps;
+
+class SelectShowcaseComponent extends React.Component<Props, SelectShowcaseComponentState> {
 
   public constructor(props: SelectProps) {
     super(props);
     this.state = {
-      selectedOption: props.multiSelect ? [] : null,
+      selectedOption: this.getInitialSelectedOption(),
     };
   }
+
+  private getInitialSelectedOption = (): SelectOption => {
+    const { multiSelect, preselectedItem } = this.props;
+
+    if (multiSelect) {
+      return preselectedItem ? preselectedItem : [];
+    } else {
+      return preselectedItem ? preselectedItem : null;
+    }
+  };
 
   private setSelectedOption = (selectedOption: SelectOption): void => {
     this.setState({ selectedOption });

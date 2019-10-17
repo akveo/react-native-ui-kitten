@@ -57,6 +57,7 @@ type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 type SelectChildren = [SelectOptionsListElement, TextElement, ControlElement];
 
 export type SelectOption = Array<SelectOptionType> | SelectOptionType;
+export type KeyExtractorType = (item: SelectOptionType) => string;
 
 const MEASURED_CONTROL_TAG: string = 'Control';
 
@@ -74,6 +75,7 @@ interface ComponentProps {
   onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
   status?: string;
   renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
+  keyExtractor?: KeyExtractorType;
 }
 
 export type SelectProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
@@ -85,7 +87,9 @@ interface State {
 }
 
 /**
- * Styled `Select` component.
+ * Styled `Select` component. By default, the MultiSelect compares the items by reference.
+ * To specify a field from the data object which will be used for the comparison,
+ * implement the `keyExtractor` property.
  *
  * @extends React.Component
  *
@@ -125,6 +129,8 @@ interface State {
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
+ * @property {KeyExtractorType} keyExtractor - Used to extract a unique key for a given item;
+ *
  * @property TouchableOpacityProps
  *
  * @property StyledComponentProps
@@ -136,6 +142,10 @@ interface State {
  * @overview-example SelectMultiSelect
  *
  * @overview-example SelectWithGroups
+ *
+ * @overview-example SelectMultiPreselectedInline
+ *
+ * @overview-example SelectMultiPreselectedReference
  *
  * @example SelectCustomIcon
  *
@@ -154,7 +164,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
     optionsListWidth: 0,
   };
 
-  private strategy: SelectionStrategy;
+  private strategy: SelectionStrategy<SelectOption>;
   private iconAnimation: Animated.Value;
 
   constructor(props: SelectProps) {
@@ -202,10 +212,12 @@ class SelectComponent extends React.Component<SelectProps, State> {
     this.setState({ optionsListWidth: width });
   };
 
-  private createSelectionStrategy = (): SelectionStrategy => {
-    const { multiSelect, selectedOption } = this.props;
+  private createSelectionStrategy = (): SelectionStrategy<SelectOption> => {
+    const { multiSelect, selectedOption, keyExtractor, data } = this.props;
 
-    return multiSelect ? new MultiSelectStrategy(selectedOption) : new SingleSelectStrategy(selectedOption);
+    return multiSelect ?
+      new MultiSelectStrategy(selectedOption, data, keyExtractor) :
+      new SingleSelectStrategy(selectedOption, data, keyExtractor);
   };
 
   private setVisibility = (): void => {
