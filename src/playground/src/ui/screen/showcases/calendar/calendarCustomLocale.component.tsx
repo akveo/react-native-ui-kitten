@@ -23,7 +23,7 @@ export class CalendarCustomLocaleShowcase extends React.Component {
     date: new Date(),
   };
 
-  dateService = new NativeDateService('zh', i18n);
+  dateService = new NativeDateService('zh', { i18n });
 
   onSelect = (date) => {
     this.setState({ date });
