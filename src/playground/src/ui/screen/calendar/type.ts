@@ -1,5 +1,8 @@
 import moment from 'moment';
-import { CalendarViewModes } from 'react-native-ui-kitten';
+import {
+  CalendarViewModes,
+  NativeDateService,
+} from 'react-native-ui-kitten';
 import { MomentDateService } from '@ui-kitten/moment';
 import { DateFnsService } from '@ui-kitten/date-fns';
 import {
@@ -81,6 +84,15 @@ const filterCalendar: ComponentShowcaseItem = {
   },
 };
 
+const mondayCalendar: ComponentShowcaseItem = {
+  props: {
+    ...defaultCalendar.props,
+    dateService: new NativeDateService('en', {
+      startDayOfWeek: 1,
+    }),
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
   title: 'Default',
   items: [
@@ -144,9 +156,17 @@ const filterSection: ComponentShowcaseSection = {
   ],
 };
 
+const startDayOfWeekSection: ComponentShowcaseSection = {
+  title: 'Start Day of Week',
+  items: [
+    mondayCalendar,
+  ],
+};
+
 export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
+    // startDayOfWeekSection,
     // customItemSection,
     // momentSection,
     // dateFnsSection,
