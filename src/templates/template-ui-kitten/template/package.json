@@ -9,12 +9,12 @@
     "postinstall": "react-native link"
   },
   "dependencies": {
-    "@eva-design/eva": "^1.2.0",
-    "@ui-kitten/eva-icons": "^4.2.0",
+    "@eva-design/eva": "^1.3.0-beta.1",
+    "@ui-kitten/eva-icons": "^4.3.0-beta.1",
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-svg": "^9.9.4",
-    "react-native-ui-kitten": "^4.2.0"
+    "react-native-ui-kitten": "^4.3.0-beta.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",

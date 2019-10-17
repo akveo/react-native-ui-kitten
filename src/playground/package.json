@@ -4,7 +4,7 @@
     "build:web": "expo build:web --no-pwa"
   },
   "dependencies": {
-    "@eva-design/eva": "^1.2.0",
+    "@eva-design/eva": "^1.3.0-beta.1",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "^35.0.0",
     "react": "16.8.3",
