@@ -62,6 +62,8 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * @overview-example CalendarBounds
  *
+ * @overview-example CalendarStartDayOfWeek
+ *
  * @overview-example CalendarCustomLocale
  *
  * @example CalendarMoment

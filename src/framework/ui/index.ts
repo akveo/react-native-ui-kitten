@@ -204,5 +204,11 @@ export {
   ViewPagerElement,
 } from './viewPager/viewPager.component';
 export { DateService } from './calendar/service/date.service';
-export { NativeDateService } from './calendar/service/nativeDate.service';
-export { TranslationWidth, I18nConfig } from './calendar/i18n/type';
+export {
+  NativeDateService,
+  NativeDateServiceOptions,
+} from './calendar/service/nativeDate.service';
+export {
+  TranslationWidth,
+  I18nConfig,
+} from './calendar/i18n/type';
