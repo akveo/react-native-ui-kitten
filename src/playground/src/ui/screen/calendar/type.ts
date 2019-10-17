@@ -1,5 +1,8 @@
 import moment from 'moment';
-import { CalendarViewModes } from 'react-native-ui-kitten';
+import {
+  CalendarViewModes,
+  NativeDateService,
+} from 'react-native-ui-kitten';
 import { MomentDateService } from '@ui-kitten/moment';
 import { DateFnsService } from '@ui-kitten/date-fns';
 import {
@@ -39,17 +42,10 @@ const startViewCalendar: ComponentShowcaseItem = {
   },
 };
 
-const lowerBoundCalendar: ComponentShowcaseItem = {
+const minMaxCalendar: ComponentShowcaseItem = {
   props: {
-    min: now,
-    max: now,
-  },
-};
-
-const higherBoundCalendar: ComponentShowcaseItem = {
-  props: {
-    min: new Date(now.getFullYear() - 12, 0, 1),
-    max: new Date(now.getFullYear() + 12, 0, 1),
+    min: new Date(now.getFullYear(), now.getMonth(), 15),
+    max: new Date(now.getFullYear(), now.getMonth() + 1, 15),
   },
 };
 
@@ -88,6 +84,15 @@ const filterCalendar: ComponentShowcaseItem = {
   },
 };
 
+const mondayCalendar: ComponentShowcaseItem = {
+  props: {
+    ...defaultCalendar.props,
+    dateService: new NativeDateService('en', {
+      startDayOfWeek: 1,
+    }),
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
   title: 'Default',
   items: [
@@ -116,17 +121,10 @@ const startViewSection: ComponentShowcaseSection = {
   ],
 };
 
-const lowerBoundedSection: ComponentShowcaseSection = {
-  title: 'Lower Bounds',
+const minMaxSection: ComponentShowcaseSection = {
+  title: 'Date Bounds',
   items: [
-    lowerBoundCalendar,
-  ],
-};
-
-const higherBoundedSection: ComponentShowcaseSection = {
-  title: 'Higher Bounds',
-  items: [
-    higherBoundCalendar,
+    minMaxCalendar,
   ],
 };
 
@@ -158,15 +156,22 @@ const filterSection: ComponentShowcaseSection = {
   ],
 };
 
+const startDayOfWeekSection: ComponentShowcaseSection = {
+  title: 'Start Day of Week',
+  items: [
+    mondayCalendar,
+  ],
+};
+
 export const calendarShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
+    // startDayOfWeekSection,
     // customItemSection,
     // momentSection,
     // dateFnsSection,
     // startViewSection,
-    // lowerBoundedSection,
-    // higherBoundedSection,
+    // minMaxSection,
     // boundingMonthSection,
     // filterSection,
     // customTitlesSection,

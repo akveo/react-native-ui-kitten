@@ -12,7 +12,7 @@ describe('@date-fns: service checks', () => {
   let dateService: DateService<Date>;
 
   beforeEach(() => {
-    dateService = new DateFnsService('en', null, null);
+    dateService = new DateFnsService('en', null);
   });
 
   it('* should parse date according to the MM.dd.yyyy format', () => {
@@ -37,7 +37,6 @@ describe('@date-fns: service checks', () => {
     beforeEach(() => {
       dateService = new DateFnsService(
         'en',
-        null,
         {
           format: FORMAT,
           parseOptions: {},
