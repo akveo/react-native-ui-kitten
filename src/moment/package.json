@@ -1,6 +1,6 @@
 {
   "name": "@ui-kitten/moment",
-  "version": "4.2.0",
+  "version": "4.3.0-beta.1",
   "description": "@ui-kitten/moment",
   "author": "akveo",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "ui-kitten"
   ],
   "peerDependencies": {
-    "react-native-ui-kitten": "4.2.0",
+    "react-native-ui-kitten": "4.3.0-beta.1",
     "moment": "^2.24.0"
   },
   "sideEffects": false
