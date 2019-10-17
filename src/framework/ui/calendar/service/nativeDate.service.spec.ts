@@ -33,8 +33,8 @@ describe('@native-date: service checks', () => {
     expect((<any>dateService).locale).toBe('en');
   });
 
-  it('* should be initialized with ru locale', () => {
-    dateService = new NativeDateService('zh', i18n);
+  it('* should be initialized with zh locale', () => {
+    dateService = new NativeDateService('zh', { i18n });
     expect((<any>dateService).locale).toBe('zh');
   });
 
@@ -87,13 +87,18 @@ describe('@native-date: service checks', () => {
     expect(dateService.getFirstDayOfWeek()).toBe(0);
   });
 
+  it('* should get custom first day of week if provided', () => {
+    dateService = new NativeDateService('en', { startDayOfWeek: 1 });
+    expect(dateService.getFirstDayOfWeek()).toBe(1);
+  });
+
   it('* should get month name', () => {
     const month = new Date(2018, 5, 15);
     expect(dateService.getMonthName(month)).toBe('Jun');
   });
 
   it('* should get i18n month name', () => {
-    dateService = new NativeDateService('zh', i18n);
+    dateService = new NativeDateService('zh', { i18n });
     const month = new Date(2018, 5, 15);
     expect(dateService.getMonthName(month, TranslationWidth.SHORT)).toBe('6月');
   });
@@ -106,8 +111,16 @@ describe('@native-date: service checks', () => {
     expect(dateService.getDayOfWeekNames()).toEqual(EN.dayNames.short);
   });
 
+  it('* should get day of week names', () => {
+    const startDayOfWeek = 1;
+    dateService = new NativeDateService('en', { startDayOfWeek });
+
+    const { [0]: startDayOfWeekName } = dateService.getDayOfWeekNames();
+    expect(startDayOfWeekName).toEqual(EN.dayNames.short[startDayOfWeek]);
+  });
+
   it('* should get i18n day of week names', () => {
-    dateService = new NativeDateService('zh', i18n);
+    dateService = new NativeDateService('zh', { i18n});
     expect(dateService.getDayOfWeekNames(TranslationWidth.SHORT)).toEqual(i18n.dayNames.short);
   });
 

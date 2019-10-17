@@ -7,6 +7,7 @@
 import {
   I18nConfig,
   NativeDateService,
+  NativeDateServiceOptions,
 } from 'react-native-ui-kitten';
 // @ts-ignore
 import dateFnsParse, { default as rollupParse } from 'date-fns/parse';
@@ -16,7 +17,7 @@ import dateFnsFormat, { default as rollupFormat } from 'date-fns/format';
 const parse = rollupParse || dateFnsParse;
 const formatDate = rollupFormat || dateFnsFormat;
 
-export interface DateFnsOptions {
+export interface DateFnsOptions extends NativeDateServiceOptions {
   format: string;
   parseOptions: {};
   formatOptions: {};
@@ -28,8 +29,8 @@ export class DateFnsService extends NativeDateService {
     format: `DD/MM/YYYY`,
   };
 
-  constructor(locale: string = 'en', i18n?: I18nConfig, options?: DateFnsOptions) {
-    super(locale, i18n);
+  constructor(locale: string = 'en', options?: DateFnsOptions) {
+    super(locale, options);
     this.options = options || this.options;
   }
 

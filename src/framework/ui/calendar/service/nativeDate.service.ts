@@ -13,7 +13,16 @@ import {
 import { EN } from '../i18n/en';
 
 export const LOCALE_DEFAULT = 'en';
-export const FIRST_DAY_OF_WEEK: number = 0;
+
+export interface NativeDateServiceOptions {
+  // 0 for Sunday, 1 for Monday, etc
+  startDayOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  i18n?: I18nConfig;
+}
+
+const DEFAULT_OPTIONS: NativeDateServiceOptions = {
+  startDayOfWeek: 0,
+};
 
 /**
  * The `NativeDateService` is basic implementation of `DateService` using
@@ -21,10 +30,13 @@ export const FIRST_DAY_OF_WEEK: number = 0;
  */
 export class NativeDateService extends DateService<Date> {
 
-  constructor(locale: string = LOCALE_DEFAULT, i18n?: I18nConfig) {
+  protected options: NativeDateServiceOptions;
+
+  constructor(locale: string = LOCALE_DEFAULT, options?: NativeDateServiceOptions) {
     super();
-    super.setLocale(i18n ? locale : LOCALE_DEFAULT);
-    this.setFechaLocaleData(i18n || EN);
+    this.options = { ...DEFAULT_OPTIONS, ...options };
+    super.setLocale(this.options.i18n ? locale : LOCALE_DEFAULT);
+    this.setFechaLocaleData(this.options.i18n || EN);
   }
 
   public setLocale(locale: string) {
@@ -60,7 +72,7 @@ export class NativeDateService extends DateService<Date> {
    * and 0 if from sunday and so on.
    * */
   public getFirstDayOfWeek(): number {
-    return FIRST_DAY_OF_WEEK;
+    return this.options.startDayOfWeek;
   }
 
   public getMonthName(date: Date, style: TranslationWidth = TranslationWidth.SHORT): string {
@@ -74,7 +86,10 @@ export class NativeDateService extends DateService<Date> {
   }
 
   public getDayOfWeekNames(style: TranslationWidth = TranslationWidth.SHORT): string[] {
-    return this.getFechaDayNames(style);
+    const dayNames: string[] = this.getFechaDayNames(style);
+
+    // avoid mutation of source array
+    return this.shiftDayOfWeekNames([...dayNames], this.options.startDayOfWeek);
   }
 
   public format(date: Date, format: string): string {
@@ -172,7 +187,11 @@ export class NativeDateService extends DateService<Date> {
     return 'native';
   }
 
-  private getFechaDayNames(style: TranslationWidth) {
+  protected shiftDayOfWeekNames<T>(value: T[], offset: number): T[] {
+    return value.splice(offset).concat(value);
+  }
+
+  private getFechaDayNames(style: TranslationWidth): string[] {
     switch (style) {
       case TranslationWidth.SHORT:
         return fecha.i18n.dayNamesShort;
@@ -181,7 +200,7 @@ export class NativeDateService extends DateService<Date> {
     }
   }
 
-  private getFechaMonthNames(style: TranslationWidth) {
+  private getFechaMonthNames(style: TranslationWidth): string[] {
     switch (style) {
       case TranslationWidth.SHORT:
         return fecha.i18n.monthNamesShort;
