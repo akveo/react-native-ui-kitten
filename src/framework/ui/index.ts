@@ -69,6 +69,7 @@ export {
   SelectProps,
   SelectElement,
   SelectOption,
+  KeyExtractorType,
 } from './select/select.component';
 export { SelectOptionType } from './select/selectOption.component';
 export {

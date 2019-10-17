@@ -30,7 +30,7 @@ class SelectShowcaseComponent extends React.Component<Props, SelectShowcaseCompo
     const { multiSelect, preselectedItem } = this.props;
 
     if (multiSelect) {
-      return (preselectedItem && preselectedItem.length !== 0) ? preselectedItem : [];
+      return preselectedItem ? preselectedItem : [];
     } else {
       return preselectedItem ? preselectedItem : null;
     }

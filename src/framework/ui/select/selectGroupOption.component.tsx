@@ -20,11 +20,12 @@ import {
   SelectOptionProps,
   SelectOptionType,
 } from './selectOption.component';
+import { SelectOption as BipolarOptionType} from './select.component';
 import { SelectionStrategy } from './selection.strategy';
 
 interface ComponentProps {
   multiSelect?: boolean;
-  strategy: SelectionStrategy<SelectOptionType>;
+  strategy: SelectionStrategy<BipolarOptionType>;
   renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
 }
 

@@ -34,8 +34,6 @@ export interface SelectOptionType {
   textStyle?: TextStyle;
   disabled?: boolean;
   items?: SelectOptionType[];
-
-  [key: string]: any;
 }
 
 export interface ComponentProps {

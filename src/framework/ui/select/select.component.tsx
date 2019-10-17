@@ -129,7 +129,7 @@ interface State {
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
- * @property {(item: SelectOptionType) => string} keyExtractor - Used to extract a unique key for a given item;
+ * @property {KeyExtractorType} keyExtractor - Used to extract a unique key for a given item;
  *
  * @property TouchableOpacityProps
  *
@@ -142,10 +142,6 @@ interface State {
  * @overview-example SelectMultiSelect
  *
  * @overview-example SelectWithGroups
- *
- * @overview-example SelectPreselectedInline
- *
- * @overview-example SelectPreselectedReference
  *
  * @overview-example SelectMultiPreselectedInline
  *
