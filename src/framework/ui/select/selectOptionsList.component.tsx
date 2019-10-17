@@ -23,7 +23,7 @@ import {
   SelectGroupOption,
   SelectGroupOptionElement,
 } from './selectGroupOption.component';
-import { SelectOption as BipolarOptionType} from './select.component';
+import { SelectOption as SelectOptionProp} from './select.component';
 import { SelectionStrategy } from './selection.strategy';
 
 type DefaultMenuItemElement = SelectOptionElement | SelectGroupOptionElement;
@@ -32,7 +32,7 @@ type MenuItemElement = DefaultMenuItemElement | React.ReactElement<any>;
 export interface ComponentProps {
   data: SelectOptionType[];
   multiSelect?: boolean;
-  strategy: SelectionStrategy<BipolarOptionType>;
+  strategy: SelectionStrategy<SelectOptionProp>;
   renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
   onSelect: (option: SelectOptionType, event?: GestureResponderEvent) => void;
 }
