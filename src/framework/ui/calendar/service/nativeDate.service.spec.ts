@@ -98,7 +98,7 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should get i18n month name', () => {
-    dateService = new NativeDateService('zh', { i18n q});
+    dateService = new NativeDateService('zh', { i18n });
     const month = new Date(2018, 5, 15);
     expect(dateService.getMonthName(month, TranslationWidth.SHORT)).toBe('6月');
   });
