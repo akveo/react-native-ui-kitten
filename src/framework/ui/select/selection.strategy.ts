@@ -147,7 +147,7 @@ export class MultiSelectStrategy extends SelectionStrategy<SelectOptionType[]> {
     if (!selectedItemsAreCorrect && this.selectedOption.length !== 0) {
       const message: string = `Some Option doesn't exist in the data array or you ` +
         'set Main group option selected.';
-      console.error(message);
+      throw Error(message);
     }
   }
 }
@@ -200,7 +200,7 @@ export class SingleSelectStrategy extends SelectionStrategy<SelectOptionType> {
 
     if (!selectedItemsAreCorrect && this.selectedOption) {
       const message: string = `Option \"${this.selectedOption.text}\" doesn't exist in the data array!`;
-      console.error(message);
+      throw Error(message);
     }
   }
 }
