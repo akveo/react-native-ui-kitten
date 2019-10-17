@@ -155,9 +155,8 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   };
 
   private onDayPickerPagerSelect = (index: number): void => {
-    const yearStart: D = this.dateService.getYearStart(this.min);
     this.setState({
-      visibleDate: this.dateService.addMonth(yearStart, index),
+      visibleDate: this.dateService.addMonth(this.min, index),
     });
   };
 
@@ -174,27 +173,20 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     });
   };
 
-  private onCalendarPagerLeft = (): void => {
-    this.onCalendarPagerMove(-1);
+  private onHeaderNavigationLeftPress = (): void => {
+    const pagerRef: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
+
+    pagerRef.current.scrollToIndex({
+      index: pagerRef.current.props.selectedIndex - 1,
+      animated: true,
+    });
   };
 
-  private onCalendarPagerRight = (): void => {
-    this.onCalendarPagerMove(1);
-  };
+  private onHeaderNavigationRightPress = (): void => {
+    const pagerRef: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
 
-  private onCalendarPagerMove = (step: number): void => {
-    const ref: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
-    const index: number = this.getCalendarPagerIndex();
-
-    this.onCalendarPagerMoveStart(ref, index, step);
-  };
-
-  private onCalendarPagerMoveStart = (ref: React.RefObject<CalendarPager<D>>,
-                                      index: number,
-                                      step: number): void => {
-
-    ref.current.scrollToIndex({
-      index: index + step,
+    pagerRef.current.scrollToIndex({
+      index: pagerRef.current.props.selectedIndex + 1,
       animated: true,
     });
   };
@@ -524,8 +516,8 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
         iconStyle={icon}
         lateralNavigationAllowed={this.isLateralNavigationAllowed()}
         onTitlePress={this.onPickerNavigationPress}
-        onLeft={this.onCalendarPagerLeft}
-        onRight={this.onCalendarPagerRight}
+        onNavigationLeftPress={this.onHeaderNavigationLeftPress}
+        onNavigationRightPress={this.onHeaderNavigationRightPress}
       />
     );
   };

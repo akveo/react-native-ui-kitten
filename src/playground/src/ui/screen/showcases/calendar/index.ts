@@ -1,4 +1,5 @@
 export { CalendarBoundingMonthShowcase } from './calendarBoundingMonth.component';
+export { CalendarBoundsShowcase } from './calendarBounds.component';
 export { CalendarCustomDayShowcase } from './calendarCustomDay.component';
 export { CalendarCustomLocaleShowcase } from './calendarCustomLocale.component';
 export { CalendarFilterShowcase } from './calendarFilterShowcase.component';

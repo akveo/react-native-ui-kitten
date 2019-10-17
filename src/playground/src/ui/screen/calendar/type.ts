@@ -39,17 +39,10 @@ const startViewCalendar: ComponentShowcaseItem = {
   },
 };
 
-const lowerBoundCalendar: ComponentShowcaseItem = {
+const minMaxCalendar: ComponentShowcaseItem = {
   props: {
-    min: now,
-    max: now,
-  },
-};
-
-const higherBoundCalendar: ComponentShowcaseItem = {
-  props: {
-    min: new Date(now.getFullYear() - 12, 0, 1),
-    max: new Date(now.getFullYear() + 12, 0, 1),
+    min: new Date(now.getFullYear(), now.getMonth(), 15),
+    max: new Date(now.getFullYear(), now.getMonth() + 1, 15),
   },
 };
 
@@ -116,17 +109,10 @@ const startViewSection: ComponentShowcaseSection = {
   ],
 };
 
-const lowerBoundedSection: ComponentShowcaseSection = {
-  title: 'Lower Bounds',
+const minMaxSection: ComponentShowcaseSection = {
+  title: 'Date Bounds',
   items: [
-    lowerBoundCalendar,
-  ],
-};
-
-const higherBoundedSection: ComponentShowcaseSection = {
-  title: 'Higher Bounds',
-  items: [
-    higherBoundCalendar,
+    minMaxCalendar,
   ],
 };
 
@@ -165,8 +151,7 @@ export const calendarShowcase: ComponentShowcase = {
     // momentSection,
     // dateFnsSection,
     // startViewSection,
-    // lowerBoundedSection,
-    // higherBoundedSection,
+    // minMaxSection,
     // boundingMonthSection,
     // filterSection,
     // customTitlesSection,

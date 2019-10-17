@@ -60,6 +60,8 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * @overview-example CalendarFilter
  *
+ * @overview-example CalendarBounds
+ *
  * @overview-example CalendarCustomLocale
  *
  * @example CalendarMoment
