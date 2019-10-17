@@ -12,7 +12,7 @@ export class CalendarStartDayOfWeekShowcase extends React.Component {
     date: new Date(),
   };
 
-  dateService = new NativeDateService('zh', { startDayOfWeek: 1 });
+  dateService = new NativeDateService('en', { startDayOfWeek: 1 });
 
   onSelect = (date) => {
     this.setState({ date });
