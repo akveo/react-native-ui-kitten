@@ -259,15 +259,33 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   };
 
   public isDayDisabled = (date: CalendarDateInfo<D>): boolean => {
-    return !this.isDateFitsBounds(date) || this.isDateFitsFilter(date);
+    const minDayStart: D = this.dateService.createDate(
+      this.dateService.getYear(this.min),
+      this.dateService.getMonth(this.min),
+      this.dateService.getDate(this.min),
+    );
+
+    const maxDayStart: D = this.dateService.createDate(
+      this.dateService.getYear(this.max),
+      this.dateService.getMonth(this.max),
+      this.dateService.getDate(this.max),
+    );
+
+    return !this.dateService.isBetweenIncludingSafe(date.date, minDayStart, maxDayStart) || this.isDateFitsFilter(date);
   };
 
   private isMonthDisabled = (date: CalendarDateInfo<D>): boolean => {
-    return !this.isDateFitsBounds(date) || this.isDateFitsFilter(date);
+    const minMonthStart: D = this.dateService.getMonthStart(this.min);
+    const maxMonthStart: D = this.dateService.getMonthStart(this.max);
+
+    return !this.dateService.isBetweenIncludingSafe(date.date, minMonthStart, maxMonthStart);
   };
 
   private isYearDisabled = (date: CalendarDateInfo<D>): boolean => {
-    return !this.isDateFitsBounds(date) || this.isDateFitsFilter(date);
+    const minYearStart: D = this.dateService.getYearStart(this.min);
+    const maxYearStart: D = this.dateService.getYearEnd(this.max);
+
+    return !this.dateService.isBetweenIncludingSafe(date.date, minYearStart, maxYearStart);
   };
 
   public isDayToday = (date: CalendarDateInfo<D>): boolean => {
