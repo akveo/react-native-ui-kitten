@@ -16,7 +16,7 @@ npm i -g npx
 
 ## Create a New Project
 
-A new project can be created using React Native CLI tools ant UI Kitten template.
+A new project can be created using React Native CLI tools and UI Kitten template.
 
 ```bash
 npx react-native init MyApp --template react-native-template-ui-kitten
