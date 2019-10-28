@@ -13,7 +13,7 @@ Starting from version 4.1, UI Kitten has built-in support for use in web sites u
 
 ## Starting from a scratch
 
-In case you're going to start your project from a scratch, follow the <a href='https://akveo.github.io/react-native-ui-kitten/docs/guides/install-ui-kitten' target='_blank'>Installation Guide</a>. This will create an Expo application with all needed configuration done. After that, simply follow **Usage Guides**.
+In case you're going to start your project from a scratch, follow the <a href='https://akveo.github.io/react-native-ui-kitten/docs/guides/install-into-existing-app' target='_blank'>Installation Guide</a>. This will create an Expo application with all needed configuration done. After that, simply follow **Usage Guides**.
 
 <hr>
 
