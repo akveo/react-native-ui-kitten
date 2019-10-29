@@ -140,6 +140,8 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         height: iconHeight,
         borderRadius: iconBorderRadius,
         tintColor: iconTintColor,
+        // FIXES https://github.com/necolas/react-native-web/issues/1319
+        opacity: this.props.checked ? 1.0 : 0.0,
       },
       highlight: {
         width: outlineWidth,

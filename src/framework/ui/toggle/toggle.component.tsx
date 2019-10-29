@@ -257,6 +257,8 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         width: source.iconWidth,
         height: source.iconHeight,
         tintColor: iconTintColor,
+        // FIXES https://github.com/necolas/react-native-web/issues/1319
+        opacity: this.props.checked ? 1.0 : 0.0,
       },
     };
   };
