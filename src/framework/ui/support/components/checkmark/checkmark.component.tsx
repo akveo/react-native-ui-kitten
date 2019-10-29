@@ -1,83 +1,39 @@
 import React from 'react';
 import {
-  View,
-  Animated,
-  StyleSheet,
-  ViewProps,
+  Image,
+  ImageProps,
+  ImageRequireSource,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
-import { I18nLayoutService } from '../../services';
 
 interface ComponentProps {
-  isAnimated?: boolean;
+  indeterminate: boolean;
 }
 
-export type CheckMarkProps = ViewProps & ComponentProps;
+export type CheckMarkProps = Omit<ImageProps, 'source'> & ComponentProps;
 export type CheckMarkElement = React.ReactElement<CheckMarkProps>;
 
 export class CheckMark extends React.Component<CheckMarkProps> {
 
-  static defaultProps = {
-    isAnimated: false,
+  static defaultProps: Partial<CheckMarkProps> = {
+    indeterminate: false,
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    const { width, height, backgroundColor } = source;
-
-    return {
-      container: {
-        width: width,
-        height: height,
-      },
-      // the dependence of the variables was determined experimentally. Changes may be needed later.
-      shape: {
-        borderWidth: width * 0.125,
-        borderTopLeftRadius: height * 0.5,
-        borderTopRightRadius: height * 0.5,
-        borderBottomLeftRadius: height * 0.5,
-        borderBottomRightRadius: height * 0.5,
-        borderColor: backgroundColor,
-        backgroundColor: backgroundColor,
-      },
-      left: {
-        left: width * 0.125,
-        top: width * 0.25,
-        height: height * 0.65,
-      },
-      right: {
-        right: width * 0.175,
-        height: height * 0.875,
-      },
-    };
+  private getIconSource = (indeterminate: boolean): ImageRequireSource => {
+    if (indeterminate) {
+      return require('../../../../assets/checkmark-indeterminate.png');
+    } else {
+      return require('../../../../assets/checkmark.png');
+    }
   };
 
-  public render(): React.ReactNode {
-    const { style, isAnimated } = this.props;
-    const { container, shape, left, right } = this.getComponentStyle(StyleSheet.flatten(style));
-
-    const Component = isAnimated ? Animated.View : View;
+  public render(): React.ReactElement<ImageProps> {
+    const { indeterminate, ...imageProps } = this.props;
 
     return (
-      <Component style={[container, styles.container]}>
-        <Component style={[shape, left, styles.shape, styles.left]} />
-        <Component style={[shape, right, styles.shape, styles.right]} />
-      </Component>
+      <Image
+        source={this.getIconSource(indeterminate)}
+        {...imageProps}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: I18nLayoutService.toI18nStyle({
-    flexDirection: 'row',
-    transform: [{ rotate: '-5deg' }],
-  }),
-  shape: {
-    position: 'absolute',
-  },
-  left: {
-    transform: [{ rotate: '-40deg' }],
-  },
-  right: {
-    transform: [{ rotate: '40deg' }],
-  },
-});

@@ -256,7 +256,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       icon: {
         width: source.iconWidth,
         height: source.iconHeight,
-        backgroundColor: iconTintColor,
+        tintColor: iconTintColor,
       },
     };
   };
@@ -361,7 +361,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
           <Animated.View style={[componentStyle.ellipseContainer, styles.ellipseContainer]}>
             <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
             <Animated.View style={[componentStyle.thumb, styles.thumb]}>
-              <CheckMark style={componentStyle.icon} isAnimated={true}/>
+              <CheckMark style={componentStyle.icon} />
             </Animated.View>
           </Animated.View>
         </TouchableOpacity>

@@ -14,7 +14,6 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   View,
-  ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
@@ -29,8 +28,6 @@ import {
 } from '../text/text.component';
 import { CheckMark } from '../support/components';
 import { isValidString } from '../support/services';
-
-type IconElement = React.ReactElement<ViewProps>;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
@@ -142,7 +139,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         width: iconWidth,
         height: iconHeight,
         borderRadius: iconBorderRadius,
-        backgroundColor: iconTintColor,
+        tintColor: iconTintColor,
       },
       highlight: {
         width: outlineWidth,
@@ -175,31 +172,10 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
     );
   };
 
-  private renderSelectIconElement = (style: ViewStyle): IconElement => {
-    return (
-      <CheckMark style={[style, styles.icon]}/>
-    );
-  };
-
-  private renderIndeterminateIconElement = (style: ViewStyle): IconElement => {
-    return (
-      <View style={[style, styles.icon]}/>
-    );
-  };
-
-  private renderIconElement = (style: ViewStyle): IconElement => {
-    if (this.props.indeterminate) {
-      return this.renderIndeterminateIconElement(style);
-    } else {
-      return this.renderSelectIconElement(style);
-    }
-  };
-
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { text } = this.props;
 
     return [
-      this.renderIconElement(style.icon),
       isValidString(text) && this.renderTextElement(style.text),
     ];
   };
@@ -212,13 +188,14 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       highlightContainer,
       highlight,
       selectContainer,
+      icon,
       ...componentStyle
     } = this.getComponentStyle(themedStyle);
 
     const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
     const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
 
-    const [iconElement, textElement] = this.renderComponentChildren(componentStyle);
+    const [textElement] = this.renderComponentChildren(componentStyle);
 
     return (
       <TouchableOpacity
@@ -233,7 +210,10 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         <View style={[highlightContainer, styles.highlightContainer]}>
           <View style={[highlight, styles.highlight]}/>
           <View style={selectContainerStyle}>
-            {iconElement}
+            <CheckMark
+              style={icon}
+              indeterminate={this.props.indeterminate}
+            />
           </View>
         </View>
         {textElement}
