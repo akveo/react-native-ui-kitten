@@ -5,7 +5,7 @@ Starting from UI Kitten 4.2, we introduce an icons module built on top of <a hre
 <div class="note note-info">
   <div class="note-title">IMPORTANT</div>
   <div class="note-body">
-  This tutorial assumes you have everything in place and [ApplicationProvider is configured](guides/install-ui-kitten).
+  This tutorial assumes you have everything in place and [ApplicationProvider is configured](guides/install-into-existing-app).
   </div>
 </div>
 
