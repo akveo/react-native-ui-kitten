@@ -69,19 +69,17 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property StyledComponentProps
  *
- * @overview-example ButtonSimpleUsage
+ * @overview-example CardSimpleUsage
  *
- * @overview-example ButtonAppearances
+ * @overview-example CardStatuses
  *
- * @overview-example ButtonStatus
+ * @overview-example CardEvaHeader
  *
- * @overview-example ButtonSize
+ * @overview-example CardCustomHeader
  *
- * @overview-example ButtonOutline
+ * @overview-example CardFooter
  *
- * @overview-example ButtonGhost
- *
- * @overview-example ButtonWithIcon
+ * @overview-example CardHeaderFooter
  */
 
 class CardComponent extends React.Component<CardProps> {

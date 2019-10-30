@@ -78,7 +78,7 @@ const routes: NavigationRouteConfigMap = {
 };
 
 const MenuNavigator = createStackNavigator(routes, {
-  initialRouteName: 'Card',
+  initialRouteName: 'Home',
   headerMode: Platform.select({
     ios: 'screen',
     android: 'screen',

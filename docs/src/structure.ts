@@ -290,6 +290,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Card',
+        icon: 'card.svg',
+        source: [
+          'Card',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Layout',
         icon: 'layout.svg',
         source: [

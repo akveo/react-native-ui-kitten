@@ -28,10 +28,6 @@ export type CardHeaderComponentElement = React.ReactElement<CardHeaderProps>;
  * @property {Partial<ListItemProps>}
  *
  * @property ViewProps
- *
- * @overview-example ButtonSimpleUsage
- *
- * @overview-example ButtonAppearances
  */
 
 export class CardHeader extends React.Component<CardHeaderProps> {
