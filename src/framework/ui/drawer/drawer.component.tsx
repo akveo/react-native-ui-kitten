@@ -43,53 +43,63 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * @overview-example DrawerSimpleUsage
  *
+ * @overview-example Using with React Navigation
+ *
+ * ```
+ * import React from 'react';
+ * import { createAppContainer, SafeAreaView } from 'react-navigation';
+ * import { createDrawerNavigator } from 'react-navigation-drawer';
+ * import { Drawer, Layout, Text } from 'react-native-ui-kitten';
+ *
+ * // React Navigation also requires installing additional dependencies:
+ * //
+ * // npm i react-navigation react-navigation-drawer react-native-reanimated react-native-gesture-handler
+ * //
+ * // Then, install it for ios:
+ * //
+ * // cd ./ios && pod install
+ *
+ * const HomeScreen = () => (
+ *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *     <Text category='h1'>HOME</Text>
+ *   </Layout>
+ * );
+ *
+ * const SettingsScreen = () => (
+ *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *     <Text category='h1'>SETTINGS</Text>
+ *   </Layout>
+ * );
+ *
+ * const DrawerComponent = ({ navigation }) => {
+ *
+ *   const onSelect = (index) => {
+ *     const { [index]: selectedTabRoute } = navigation.state.routes;
+ *     navigation.navigate(selectedTabRoute.routeName);
+ *   };
+ *
+ *   return (
+ *     <SafeAreaView>
+ *       <Drawer data={[{ title: 'Home' }, { title: 'Settings' }]} onSelect={onSelect} />
+ *     </SafeAreaView>
+ *   );
+ * };
+ *
+ * const DrawerNavigator = createDrawerNavigator({
+ *   Home: HomeScreen,
+ *   Settings: SettingsScreen,
+ * }, {
+ *   contentComponent: DrawerComponent,
+ * });
+ *
+ * export const AppNavigator = createAppContainer(DrawerNavigator);
+ * ```
+ *
  * @overview-example DrawerWithIcons
  *
  * @overview-example DrawerHeader
  *
  * @overview-example DrawerFooter
- *
- * @overview-example Using with React Navigation
- *
- * ```
- * import React from 'react';
- * import { SafeAreaView } from 'react-navigation';
- * import { createDrawerNavigator } from 'react-navigation-drawer';
- * import { Dashboard, Messages, Settings } from './path-to/screen-components'; // <-- Import screen components
- *
- * class DrawerNavigation extends React.Component {
- *
- *   constructor(props) {
- *     super(props);
- *     this.drawerData = props.items.map(this.createDrawerItem);
- *   }
- *
- *   onRouteSelect = (index) => {
- *     const { [index]: route } = this.drawerData;
- *     this.props.navigation.navigate(route.title);
- *   };
- *
- *   createDrawerItem = ({ routeName }) => ({
- *     title: routeName,
- *   });
- *
- *   render() {
- *     return (
- *       <SafeAreaView>
- *         <Drawer data={this.drawerData} onSelect={this.onRouteSelect}/>
- *       </SafeAreaView>
- *     );
- *   }
- * }
- *
- * export const DrawerNavigator = createDrawerNavigator({
- *   Dashboard: Dashboard,
- *   Messages: Messages,
- *   Settings: Settings,
- * }, {
- *   contentComponent: DrawerNavigation,
- * });
- * ```
  *
  * @example DrawerCustomHeader
  *
