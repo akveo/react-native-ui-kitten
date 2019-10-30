@@ -126,6 +126,7 @@ class CardComponent extends React.Component<CardProps> {
         fontWeight: titleStyles.titleFontWeight,
         lineHeight: titleStyles.titleLineHeight,
         color: titleStyles.titleColor,
+        marginHorizontal: titleStyles.titleMarginHorizontal,
       },
       description: {
         fontFamily: descriptionStyles.titleFontFamily,
@@ -133,6 +134,7 @@ class CardComponent extends React.Component<CardProps> {
         fontWeight: descriptionStyles.titleFontWeight,
         lineHeight: descriptionStyles.titleLineHeight,
         color: descriptionStyles.descriptionColor,
+        marginHorizontal: descriptionStyles.descriptionMarginHorizontal,
       },
       accent: {
         backgroundColor: accentStyles.accentBackgroundColor,

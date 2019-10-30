@@ -1114,6 +1114,42 @@
           "headerPaddingVertical": {
             "type": "number"
           },
+          "titleFontFamily": {
+            "type": "string"
+          },
+          "titleFontSize": {
+            "type": "number"
+          },
+          "titleLineHeight": {
+            "type": "number"
+          },
+          "titleFontWeight": {
+            "type": "string"
+          },
+          "titleColor": {
+            "type": "string"
+          },
+          "titleMarginHorizontal": {
+            "type": "number"
+          },
+          "descriptionColor": {
+            "type": "string"
+          },
+          "descriptionFontFamily": {
+            "type": "string"
+          },
+          "descriptionFontSize": {
+            "type": "number"
+          },
+          "descriptionFontWeight": {
+            "type": "string"
+          },
+          "descriptionLineHeight": {
+            "type": "number"
+          },
+          "descriptionMarginHorizontal": {
+            "type": "number"
+          },
           "bodyPaddingHorizontal": {
             "type": "number"
           },
@@ -1134,11 +1170,11 @@
           }
         },
         "appearances": {
-          "default": {
-            "default": true
-          },
-          "noDivider": {
+          "filled": {
             "default": false
+          },
+          "outline": {
+            "default": true
           }
         },
         "variantGroups": {
@@ -1163,32 +1199,33 @@
             }
           }
         },
-        "states": {
-          "active": {
-            "default": false,
-            "priority": 2,
-            "scope": "all"
-          }
-        }
+        "states": {}
       },
       "appearances": {
-        "default": {
+        "outline": {
           "mapping": {
-            "backgroundColor": "white",
+            "backgroundColor": "background-basic-color-1",
             "borderRadius": 4,
             "borderColor": "border-basic-color-4",
             "borderWidth": 1,
-            "headerPaddingHorizontal": 10,
-            "headerPaddingVertical": 12,
-            "bodyPaddingHorizontal": 10,
-            "bodyPaddingVertical": 12,
-            "footerPaddingHorizontal": 10,
-            "footerPaddingVertical": 12,
-            "state": {
-              "active": {
-                "backgroundColor": "#f2f4f7"
-              }
-            }
+            "headerPaddingHorizontal": 24,
+            "headerPaddingVertical": 16,
+            "titleFontFamily": "text-font-family",
+            "titleFontSize": "text-heading-6-font-size",
+            "titleFontWeight": "text-heading-6-font-weight",
+            "titleLineHeight": "text-heading-6-line-height",
+            "titleColor": "text-basic-color",
+            "titleMarginHorizontal": 0,
+            "descriptionFontFamily": "text-font-family",
+            "descriptionFontSize": "text-subtitle-2-font-size",
+            "descriptionFontWeight": "text-subtitle-2-font-weight",
+            "descriptionLineHeight": "text-subtitle-2-line-height",
+            "descriptionMarginHorizontal": 0,
+            "descriptionColor": "text-basic-color",
+            "bodyPaddingHorizontal": 24,
+            "bodyPaddingVertical": 16,
+            "footerPaddingHorizontal": 24,
+            "footerPaddingVertical": 16
           },
           "variantGroups": {
             "status": {
@@ -1219,8 +1256,11 @@
             }
           }
         },
-        "noDivider": {
-          "mapping": {}
+        "filled": {
+          "mapping": {
+            "borderWidth": 0,
+            "borderColor": "transparent"
+          }
         }
       }
     },
