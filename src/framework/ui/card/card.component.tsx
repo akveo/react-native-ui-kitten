@@ -56,8 +56,8 @@ export type CardElement = React.ReactElement<CardProps>;
  * Default is `basic`.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be `default` or `noDivider`.
- * Default is `default`.
+ * Can be `filled` or `outline`.
+ * Default is `outline`.
  *
  * @property {React.ReactNode} children - Determines text of the component.
  *
@@ -127,24 +127,20 @@ class CardComponent extends React.Component<CardProps> {
         fontSize: titleStyles.titleFontSize,
         fontWeight: titleStyles.titleFontWeight,
         lineHeight: titleStyles.titleLineHeight,
+        color: titleStyles.titleColor,
       },
       description: {
         fontFamily: descriptionStyles.titleFontFamily,
         fontSize: descriptionStyles.titleFontSize,
         fontWeight: descriptionStyles.titleFontWeight,
         lineHeight: descriptionStyles.titleLineHeight,
+        color: descriptionStyles.descriptionColor,
       },
       accent: {
         backgroundColor: accentStyles.accentBackgroundColor,
         height: accentStyles.accentHeight,
       },
     };
-  };
-
-  private isDividerAbsent = (): boolean => {
-    const { appearance } = this.props;
-
-    return appearance !== 'noDivider';
   };
 
   private renderDivider = (): DividerElement => {
@@ -157,7 +153,7 @@ class CardComponent extends React.Component<CardProps> {
     const header: CardHeaderElement = this.props.header();
 
     return React.cloneElement(header, {
-      style: [styles.header, headerStyles.style, header.props.style],
+      headerStyle: [styles.header, headerStyles.style, header.props.style],
       accentStyle: headerStyles.accent,
       titleStyle: headerStyles.title,
       descriptionStyle: headerStyles.description,
@@ -206,9 +202,9 @@ class CardComponent extends React.Component<CardProps> {
         {...restProps}
         style={[container, styles.container, style]}>
         {header}
-        {this.isDividerAbsent() && this.renderDivider()}
+        {header && this.renderDivider()}
         {body}
-        {this.isDividerAbsent() && this.renderDivider()}
+        {footer && this.renderDivider()}
         {footer}
       </View>
     );

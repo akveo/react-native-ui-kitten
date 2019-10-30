@@ -11,6 +11,7 @@ import {
 } from '../list/listItem.component';
 
 interface ComponentProps {
+  headerStyle?: StyleProp<ViewStyle>;
   accentStyle?: StyleProp<ViewStyle>;
 }
 
@@ -22,11 +23,9 @@ export type CardHeaderComponentElement = React.ReactElement<CardHeaderProps>;
  *
  * @extends React.Component
  *
- * @property {string} title - Determines the title of the component.
- *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
- *
  * @property {StyleProp<ViewStyle>} accentStyle - Determines style of the stripe element.
+ *
+ * @property {Partial<ListItemProps>}
  *
  * @property ViewProps
  *
@@ -38,12 +37,15 @@ export type CardHeaderComponentElement = React.ReactElement<CardHeaderProps>;
 export class CardHeader extends React.Component<CardHeaderProps> {
 
   public render(): CardHeaderComponentElement {
-    const { accentStyle, ...restProps } = this.props;
+    const { accentStyle, style, headerStyle, ...restProps } = this.props;
 
     return (
       <React.Fragment>
         <View style={accentStyle}/>
-        <ListItem{...restProps} />
+        <ListItem
+          style={[style, headerStyle]}
+          {...restProps}
+        />
       </React.Fragment>
     );
   }

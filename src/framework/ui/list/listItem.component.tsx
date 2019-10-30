@@ -45,13 +45,13 @@ interface TemplateBaseProps {
   accessory?: AccessoryProp;
 }
 
-export interface TemplateTitleProps extends TemplateBaseProps {
+interface TemplateTitleProps extends TemplateBaseProps {
   title: string;
   description?: string;
   titleStyle?: StyleProp<TextStyle>;
 }
 
-export interface TemplateDescriptionProps extends TemplateBaseProps {
+interface TemplateDescriptionProps extends TemplateBaseProps {
   title?: string;
   description: string;
   descriptionStyle?: StyleProp<TextStyle>;
