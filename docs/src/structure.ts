@@ -396,6 +396,7 @@ export const structure = [
         icon: 'tab.svg',
         source: [
           'TabView',
+          'TabBar',
           'Tab',
         ],
         overview: [
