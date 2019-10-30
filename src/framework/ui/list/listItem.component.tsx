@@ -92,6 +92,8 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * @property {(index: number, event: GestureResponderEvent) => React.ReactElement<ImageProps>} onPress - Emits when
  * component is pressed.
  *
+ * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ *
  * @overview-example ListItemSimpleUsage
  *
  * @overview-example ListItemWithIcon

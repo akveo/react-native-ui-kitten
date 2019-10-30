@@ -57,9 +57,9 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  * @property {(info: ListRenderItemInfo<ItemT>, style: StyleType) => React.ReactElement<any>} renderItem - Takes an
  * item from data and renders it into the list.
  *
- * @property FlatListProps<ItemType>
+ * @property FlatListProps - Any props applied to FlatList component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example ListSimpleUsage
  *

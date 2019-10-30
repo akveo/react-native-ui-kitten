@@ -60,9 +60,9 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @property {(selected: boolean) => void} onSelect = Fires on onSelect event.
  *
- * @property TouchableOpacityProps
+ * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styledL` component.
  *
  * @overview-example TabSimpleUsage
  *
