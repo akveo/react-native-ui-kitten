@@ -61,7 +61,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
  * tapping on back-drop.
  *
- * @property ViewProps - Any props applied to View component.
+ * @property {ViewProps} - Any props applied to View component.
  *
  * @overview-example Simple Usage
  *
