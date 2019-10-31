@@ -37,6 +37,7 @@ export {
 export {
   CardHeader,
   CardHeaderProps,
+  CardHeaderElement,
 } from './card/cardHeader.component';
 export {
   RangeCalendar,
