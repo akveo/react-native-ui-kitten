@@ -32,7 +32,7 @@ interface HeaderStyles {
   description: StyleProp<TextStyle>;
 }
 
-export type CardHeaderElement = React.ReactElement<any> | CardHeaderComponentElement;
+type HeaderProp = React.ReactElement<any> | CardHeaderElement;
 export type CardFooterElement = React.ReactElement<any>;
 
 interface ComponentProps {
