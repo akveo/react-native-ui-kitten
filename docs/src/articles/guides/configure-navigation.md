@@ -166,6 +166,8 @@ UI Kitten includes much more components that can be used with React Navigation:
 - [TabView](components/tabview) - renders the tabs at the top.
 - [Drawer](components/drawer) - renders swipable side menu.
 
+<hr>
+
 ## Note on the other navigation libraries
 
 Since React Navigation is not the only solution to perform routing within the React Native app, you might be interested
