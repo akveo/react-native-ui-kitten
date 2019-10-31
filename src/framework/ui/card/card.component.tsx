@@ -164,7 +164,7 @@ class CardComponent extends React.Component<CardProps> {
     const footer: CardFooterElement = this.props.footer();
 
     return React.cloneElement(footer, {
-      style: [styles.footer, footer.props.style, style],
+      style: [style, styles.footer, footer.props.style],
     });
   };
 
