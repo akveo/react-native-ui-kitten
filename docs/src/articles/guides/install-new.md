@@ -6,17 +6,15 @@ If you don't have any code yet, please consider checking <a href="https://facebo
 
 ## Installation
 
-First of all, you should have npx installed.
+This guide will help you to init application using UI Kitten template project. First, make sure you have latest React Native CLI installed: 
 
-```bash
-npm i -g npx
+ ```bash
+ npm un -g react-native-cli && npm i -g @react-native-community/cli npx
 ```
 
 <hr>
 
 ## Create a New Project
-
-A new project can be created using React Native CLI tools and UI Kitten template.
 
 ```bash
 npx react-native init MyApp --template react-native-template-ui-kitten
