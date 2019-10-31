@@ -40,7 +40,7 @@ interface ComponentProps {
   status?: string;
   children: React.ReactNode;
   header?: () => HeaderProp;
-  footer?: () => CardFooterElement;
+  footer?: () => FooterProp;
 }
 
 export type CardProps = StyledComponentProps & ViewProps & ComponentProps;
