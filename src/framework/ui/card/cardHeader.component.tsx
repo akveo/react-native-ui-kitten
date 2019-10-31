@@ -16,7 +16,7 @@ interface ComponentProps {
 }
 
 export type CardHeaderProps = Partial<ListItemProps> & ViewProps & ComponentProps;
-export type CardHeaderComponentElement = React.ReactElement<CardHeaderProps>;
+export type CardHeaderElement = React.ReactElement<CardHeaderProps>;
 
 /**
  * Styled `CardHeader` component can be used like `header` in the `Card` component.
