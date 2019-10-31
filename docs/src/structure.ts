@@ -294,6 +294,7 @@ export const structure = [
         icon: 'card.svg',
         source: [
           'Card',
+          'CardHeader',
         ],
       },
       {
