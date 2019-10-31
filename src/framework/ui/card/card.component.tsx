@@ -39,7 +39,7 @@ interface ComponentProps {
   appearance?: string;
   status?: string;
   children: React.ReactNode;
-  header?: () => CardHeaderElement;
+  header?: () => HeaderProp;
   footer?: () => CardFooterElement;
 }
 
