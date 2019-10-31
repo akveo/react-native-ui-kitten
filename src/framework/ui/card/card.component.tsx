@@ -65,7 +65,7 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property {() => CardFooterElement} footer - Determines footer of the component.
  *
- * @property ViewProps
+ * @property ViewProps - Any props applied to View component.
  *
  * @property StyledComponentProps
  *
