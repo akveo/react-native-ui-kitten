@@ -33,7 +33,7 @@ interface HeaderStyles {
 }
 
 type HeaderProp = React.ReactElement<any> | CardHeaderElement;
-export type CardFooterElement = React.ReactElement<any>;
+type FooterProp = React.ReactElement<any>;
 
 interface ComponentProps {
   appearance?: string;
