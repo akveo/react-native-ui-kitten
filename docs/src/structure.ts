@@ -33,45 +33,23 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Start a new App',
+        name: 'Getting Started',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install-new.md',
+            source: 'guides/getting-started.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Install into existing App',
+        name: 'Configure Navigation',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install-existing.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Using with React Native Web',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/using-web.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Create UI Kitten Screen',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/create-screen.md',
+            source: 'guides/configure-navigation.md',
           },
         ],
       },
@@ -94,6 +72,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'guides/setup-vector-icons.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Using with React Native Web',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/using-web.md',
           },
         ],
       },
