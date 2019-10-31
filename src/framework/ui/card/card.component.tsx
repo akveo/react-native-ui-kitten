@@ -67,7 +67,7 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property ViewProps - Any props applied to View component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example CardSimpleUsage
  *
