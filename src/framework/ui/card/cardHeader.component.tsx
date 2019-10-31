@@ -27,7 +27,7 @@ export type CardHeaderElement = React.ReactElement<CardHeaderProps>;
  *
  * @property {Partial<ListItemProps>}
  *
- * @property ViewProps
+ * @property ViewProps - Any props applied to View component.
  */
 
 export class CardHeader extends React.Component<CardHeaderProps> {
