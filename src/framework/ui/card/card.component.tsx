@@ -8,10 +8,12 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  ViewProps,
   StyleProp,
   TextStyle,
   ViewStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  GestureResponderEvent,
 } from 'react-native';
 import {
   styled,
@@ -22,7 +24,7 @@ import {
   Divider,
   DividerElement,
 } from '../divider/divider.component';
-import { CardHeaderComponentElement } from './cardHeader.component';
+import { CardHeaderElement } from './cardHeader.component';
 import { allWithPrefix } from '../support/services';
 
 interface HeaderStyles {
@@ -34,6 +36,7 @@ interface HeaderStyles {
 
 type HeaderProp = React.ReactElement<any> | CardHeaderElement;
 type FooterProp = React.ReactElement<any>;
+export type CardFooterElement = FooterProp;
 
 interface ComponentProps {
   appearance?: string;
@@ -43,7 +46,7 @@ interface ComponentProps {
   footer?: () => FooterProp;
 }
 
-export type CardProps = StyledComponentProps & ViewProps & ComponentProps;
+export type CardProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type CardElement = React.ReactElement<CardProps>;
 
 /**
@@ -61,13 +64,13 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @property {React.ReactNode} children - Determines text of the component.
  *
- * @property {() => CardHeaderElement} header - Determines header of the component.
+ * @property {() => HeaderProp} header - Determines header of the component.
  *
- * @property {() => CardFooterElement} footer - Determines footer of the component.
+ * @property {() => FooterProp} footer - Determines footer of the component.
  *
- * @property ViewProps - Any props applied to View component.
+ * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
  *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {StyledComponentProps} - Any props applied to `styled` component.
  *
  * @overview-example CardSimpleUsage
  *
@@ -85,6 +88,24 @@ export type CardElement = React.ReactElement<CardProps>;
 class CardComponent extends React.Component<CardProps> {
 
   static styledComponentName: string = 'Card';
+
+  private onPress = (event: GestureResponderEvent): void => {
+    if (this.props.onPress) {
+      this.props.onPress(event);
+    }
+  };
+
+  private onPressIn = (event: GestureResponderEvent): void => {
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event);
+    }
+  };
+
+  private onPressOut = (event: GestureResponderEvent): void => {
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event);
+    }
+  };
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
@@ -149,8 +170,8 @@ class CardComponent extends React.Component<CardProps> {
     );
   };
 
-  private renderHeader = (headerStyles: HeaderStyles): CardHeaderElement => {
-    const header: CardHeaderElement = this.props.header();
+  private renderHeader = (headerStyles: HeaderStyles): HeaderProp => {
+    const header: HeaderProp = this.props.header();
 
     return React.cloneElement(header, {
       headerStyle: [styles.header, headerStyles.style, header.props.style],
@@ -160,8 +181,8 @@ class CardComponent extends React.Component<CardProps> {
     });
   };
 
-  private renderFooter = (style: StyleType): CardFooterElement => {
-    const footer: CardFooterElement = this.props.footer();
+  private renderFooter = (style: StyleType): FooterProp => {
+    const footer: FooterProp = this.props.footer();
 
     return React.cloneElement(footer, {
       style: [style, styles.footer, footer.props.style],
@@ -178,7 +199,7 @@ class CardComponent extends React.Component<CardProps> {
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { header, footer } = this.props;
-    
+
     const headerStyles: HeaderStyles = {
       style: style.header,
       accent: style.accent,
@@ -199,15 +220,19 @@ class CardComponent extends React.Component<CardProps> {
     const [header, body, footer] = this.renderComponentChildren(childrenStyles);
 
     return (
-      <View
+      <TouchableOpacity
+        activeOpacity={1.0}
         {...restProps}
-        style={[container, styles.container, style]}>
+        style={[container, styles.container, style]}
+        onPress={this.onPress}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
         {header}
         {header && this.renderDivider()}
         {body}
         {footer && this.renderDivider()}
         {footer}
-      </View>
+      </TouchableOpacity>
     );
   }
 }

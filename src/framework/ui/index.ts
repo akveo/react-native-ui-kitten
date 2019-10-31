@@ -33,6 +33,7 @@ export {
   Card,
   CardProps,
   CardElement,
+  CardFooterElement,
 } from './card/card.component';
 export {
   CardHeader,

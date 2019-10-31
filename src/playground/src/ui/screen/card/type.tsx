@@ -10,7 +10,7 @@ import {
   CardFooter,
   CustomCardHeader,
   EvaCardHeader,
-} from './card.spareParts';
+} from './cardExamples';
 
 const defaultCard: ComponentShowcaseItem = {
   props: {
@@ -122,5 +122,3 @@ export const cardSettings: ComponentShowcaseSetting[] = [
     value: 'danger',
   },
 ];
-
-

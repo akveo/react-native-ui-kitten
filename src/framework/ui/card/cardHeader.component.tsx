@@ -4,10 +4,12 @@ import {
   ViewProps,
   StyleProp,
   ViewStyle,
+  TouchableOpacityProps,
 } from 'react-native';
 import {
   ListItem,
-  ListItemProps,
+  TemplateTitleProps,
+  TemplateDescriptionProps,
 } from '../list/listItem.component';
 
 interface ComponentProps {
@@ -15,7 +17,10 @@ interface ComponentProps {
   accentStyle?: StyleProp<ViewStyle>;
 }
 
-export type CardHeaderProps = Partial<ListItemProps> & ViewProps & ComponentProps;
+type ListItemProps = TemplateTitleProps | TemplateDescriptionProps;
+type ListItemLikeProps = Omit<ListItemProps, 'icon' | 'accessory' | keyof TouchableOpacityProps>;
+
+export type CardHeaderProps = ListItemLikeProps & ViewProps & ComponentProps;
 export type CardHeaderElement = React.ReactElement<CardHeaderProps>;
 
 /**
@@ -25,9 +30,11 @@ export type CardHeaderElement = React.ReactElement<CardHeaderProps>;
  *
  * @property {StyleProp<ViewStyle>} accentStyle - Determines style of the stripe element.
  *
- * @property {Partial<ListItemProps>}
+ * @property {StyleProp<ViewStyle>} accentStyle - Determines style of the header container element.
  *
- * @property ViewProps - Any props applied to View component.
+ * @property {Omit<ListItemProps, 'icon' | 'accessory' | keyof TouchableOpacityProps>}
+ *
+ * @property {ViewProps} - Any props applied to View component.
  */
 
 export class CardHeader extends React.Component<CardHeaderProps> {
