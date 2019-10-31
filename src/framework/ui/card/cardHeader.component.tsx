@@ -32,7 +32,7 @@ export type CardHeaderElement = React.ReactElement<CardHeaderProps>;
 
 export class CardHeader extends React.Component<CardHeaderProps> {
 
-  public render(): CardHeaderComponentElement {
+  public render(): React.ReactFragment {
     const { accentStyle, style, headerStyle, ...restProps } = this.props;
 
     return (
