@@ -50,6 +50,61 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * @property StyledComponentProps
  *
  * @overview-example TabBarSimpleUsage
+ *
+ * @overview-example Using with React Navigation
+ *
+ * ```
+ * import React from 'react';
+ * import { createAppContainer, SafeAreaView } from 'react-navigation';
+ * import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+ * import { TabBar, Tab, Layout, Text } from 'react-native-ui-kitten';
+ *
+ * // React Navigation also requires installing additional dependencies:
+ * //
+ * // npm i react-navigation react-navigation-tabs react-native-reanimated react-native-gesture-handler
+ * //
+ * // Then install it for ios:
+ * //
+ * // cd ios && pod install
+ *
+ * const HomeScreen = () => (
+ *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *     <Text category='h1'>HOME</Text>
+ *   </Layout>
+ * );
+ *
+ * const SettingsScreen = () => (
+ *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *     <Text category='h1'>SETTINGS</Text>
+ *   </Layout>
+ * );
+ *
+ * const TabBarComponent = ({ navigation }) => {
+ *
+ *   const onSelect = (index) => {
+ *     const { [index]: selectedTabRoute } = navigation.state.routes;
+ *     navigation.navigate(selectedTabRoute.routeName);
+ *   };
+ *
+ *   return (
+ *     <SafeAreaView>
+ *       <TabBar selectedIndex={navigation.state.index} onSelect={onSelect}>
+ *         <Tab title='HOME'/>
+ *         <Tab title='SETTINGS'/>
+ *       </TabBar>
+ *     </SafeAreaView>
+ *   );
+ * };
+ *
+ * const TabNavigator = createMaterialTopTabNavigator({
+ *   Home: HomeScreen,
+ *   Settings: SettingsScreen,
+ * }, {
+ *   tabBarComponent: TabBarComponent,
+ * });
+ *
+ * export const AppNavigator = createAppContainer(TabNavigator);
+ * ```
  */
 export class TabBarComponent extends React.Component<TabBarProps> {
 

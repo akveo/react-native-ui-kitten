@@ -60,38 +60,59 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * @overview-example BottomNavigationSimpleUsage
  *
- * @overview-example With React Navigation
+ * @overview-example Using with React Navigation
  *
  * ```
  * import React from 'react';
- * import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten';
+ * import { createAppContainer, SafeAreaView } from 'react-navigation';
  * import { createBottomTabNavigator } from 'react-navigation-tabs';
- * import { Dashboard, Settings } from './path-to/screen-components'; // <-- Import screen components
+ * import { BottomNavigation, BottomNavigationTab, Layout, Text } from 'react-native-ui-kitten';
  *
- * export const BottomNavigationShowcase = (props) => {
+ * // React Navigation also requires installing additional dependencies:
+ * //
+ * // npm i react-navigation react-navigation-tabs react-native-reanimated react-native-gesture-handler
+ * //
+ * // Then install it for ios:
+ * //
+ * // cd ios && pod install
  *
- *  const onTabSelect = (selectedIndex) => {
- *    const { [index]: selectedRoute } = props.navigation.state.routes;
- *    props.navigation.navigate(selectedRoute.routeName);
- *  };
+ * const HomeScreen = () => (
+ *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *     <Text category='h1'>HOME</Text>
+ *   </Layout>
+ * );
  *
- *  return (
- *    <BottomNavigation
- *      selectedIndex={props.navigation.state.index}
- *      onSelect={onTabSelect}>
- *      <BottomNavigationTab title='Dashboard' />
- *      <BottomNavigationTab title='Settings' />
- *    </BottomNavigation>
+ * const SettingsScreen = () => (
+ *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *     <Text category='h1'>SETTINGS</Text>
+ *   </Layout>
+ * );
+ *
+ * const TabBarComponent = ({ navigation }) => {
+ *
+ *   const onSelect = (index) => {
+ *     const { [index]: selectedTabRoute } = navigation.state.routes;
+ *     navigation.navigate(selectedTabRoute.routeName);
+ *   };
+ *
+ *   return (
+ *     <SafeAreaView>
+ *       <BottomNavigation selectedIndex={navigation.state.index} onSelect={onSelect}>
+ *         <BottomNavigationTab title='HOME'/>
+ *         <BottomNavigationTab title='SETTINGS'/>
+ *       </BottomNavigation>
+ *     </SafeAreaView>
  *   );
- * }
+ * };
  *
- * export const BottomTabNavigator = createBottomTabNavigator({
- *   Dashboard: Dashboard,
- *   Settings: Settings,
+ * const TabNavigator = createBottomTabNavigator({
+ *   Home: HomeScreen,
+ *   Settings: SettingsScreen,
  * }, {
- *   initialRouteName: 'Dashboard',
- *   tabBarComponent: BottomNavigationShowcase,
+ *   tabBarComponent: TabBarComponent,
  * });
+ *
+ * export const AppNavigator = createAppContainer(TabNavigator);
  * ```
  *
  * @example BottomNavigationWithoutIndicator

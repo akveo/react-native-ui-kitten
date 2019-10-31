@@ -43,7 +43,7 @@ export class StyleConsumerService {
       const message: string = [
         `\n${this.name}: unsupported configuration.`,
         'Using UI Kitten components is only possible with configuring ApplicationProvider.',
-        `📖 Documentation: ${docRoot}/guides/install-ui-kitten#configure-application-root`,
+        `📖 Documentation: ${docRoot}/guides/install-into-existing-app#configure-application-root`,
         '\nIn case you have all in place, there might be an incorrect usage of a "styled" function.',
         `📖 Documentation: ${docRoot}/design-system/custom-component-mapping`,
       ].join('\n');
