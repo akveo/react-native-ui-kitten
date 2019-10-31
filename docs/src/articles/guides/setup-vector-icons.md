@@ -14,7 +14,7 @@ In case you prefer working with svg - check out <a href="https://akveo.github.io
 
 ## Installation
 
-First, ensure that `react-native-vector-icons` library is installed: **<a href="https://github.com/oblador/react-native-vector-icons#installation" target="_blank">install react-native-vector-icons</a>**.
+First, ensure that `react-native-vector-icons` library is installed: **<a href="https://github.com/oblador/react-native-vector-icons#installation" target="_blank">install react-native-vector-icons</a>**. If you use Expo, this guide can also be applied to `@expo/vector-icons` package.
 
 
 <hr>
@@ -35,45 +35,23 @@ export const FeatherIconsPack = {
 };
 
 function createIconsMap() {
-  return {
-    'facebook': IconProvider('facebook'),
-    'google': IconProvider('google'),
-    // ...
-  };
-
-  // or
-
   return new Proxy({}, {
     get(target, name) {
       return IconProvider(name);
     },
   });
 }
-```
 
-And providing function
-
-```js
-import Icon from 'react-native-vector-icons/Feather'; // <-- Import Feather icons
-
-function IconProvider(name) {
-  return {
-    toReactElement: (props) => FeatherIcon({ name, ...props }),
-  };
-}
+const IconProvider = (name) => ({
+  toReactElement: (props) => FeatherIcon({ name, ...props }),
+});
 
 function FeatherIcon({ name, style }) {
   const { height, tintColor, ...iconStyle } = StyleSheet.flatten(style);
   return (
-    <Icon
-      name={name}
-      size={height}
-      color={tintColor}
-      style={iconStyle}
-    />
+    <Icon name={name} size={height} color={tintColor} style={iconStyle} />
   );
 }
-
 ```
 
 <hr>
@@ -96,7 +74,7 @@ const ApplicationContent = () => (
 
 const App = () => (
   <React.Fragment>
-    <IconRegistry icons={[FeatherIconsPack]} />
+    <IconRegistry icons={FeatherIconsPack} />
     <ApplicationProvider mapping={mapping} theme={lightTheme}>
       <ApplicationContent />
     </ApplicationProvider>
@@ -133,20 +111,12 @@ As a result, you should have a Button looking similar to this:
 
 ## More Icon Libraries
 
-As you might notice, UI Kitten API allows you to register **multiple** icon packages with the following instruction.
-
-```js
-import { IconRegistry } from 'react-native-ui-kitten';
-
-<IconRegistry icons={[FeatherIconsPack]}/>
-```
-
-Let's also create a Material Icons provider using the same method.
+You don't need follow this guide if one icon pack is enough for your application. Anyway, UI Kitten API allows you to register **multiple** icon packages. Let's also create a Material Icons provider using the same method.
 
 ```js
 // material-icons.js
 
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // <-- Import Material icons
 
@@ -163,21 +133,14 @@ function createIconsMap() {
   });
 }
 
-function IconProvider(name) {
-  return {
-    toReactElement: (props) => MaterialIcon({ name, ...props }),
-  };
-}
+const IconProvider = (name) ({
+  toReactElement: (props) => MaterialIcon({ name, ...props }),
+});
 
 function MaterialIcon({ name, style }) {
   const { height, tintColor, ...iconStyle } = StyleSheet.flatten(style);
   return (
-    <Icon
-      name={name}
-      size={height}
-      color={tintColor}
-      style={iconStyle}
-    />
+    <Icon name={name} size={height} color={tintColor} style={iconStyle} />
   );
 }
 ```
