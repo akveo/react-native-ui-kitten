@@ -178,6 +178,7 @@ class CardComponent extends React.Component<CardProps> {
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
     const { header, footer } = this.props;
+    
     const headerStyles: HeaderStyles = {
       style: style.header,
       accent: style.accent,
