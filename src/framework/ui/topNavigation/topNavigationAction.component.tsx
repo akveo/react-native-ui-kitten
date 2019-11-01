@@ -43,7 +43,7 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
  *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {StyledComponentProps} - Any props applied to `styled` component.
  *
  * @overview-example TopNavigationActionSimpleUsage
  *
