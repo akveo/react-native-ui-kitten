@@ -67,7 +67,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * Can be `filled` | `outline` | `ghost`.
  * Default is `filled`.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
  *
  * @property StyledComponentProps - Any props applied to `styled` component.
  *
