@@ -69,7 +69,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
  *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {StyledComponentProps} - Any props applied to `styled` component.
  *
  * @overview-example ButtonSimpleUsage
  *
