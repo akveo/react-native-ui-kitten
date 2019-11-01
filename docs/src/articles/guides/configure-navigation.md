@@ -31,7 +31,7 @@ Let's start from the basics and create a simple example with 2 screens and confi
 
 Create a `home.component.js` file and paste the code below.
 
-```js
+```jsx
 import React from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { Button, Divider, Layout, TopNavigation } from 'react-native-ui-kitten';
@@ -66,7 +66,7 @@ Notice the `navigation` argument passed to `HomeScreen`. It comes from React Nav
 
 Create a `details.component.js` file and paste the code below.
 
-```js
+```jsx
 import React from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from 'react-native-ui-kitten';
@@ -138,7 +138,7 @@ Now, the one thing we have to do is to render `AppNavigator`.
 
 Go back to the `App.js` and paste the following code.
 
-```js
+```jsx
 import React from 'react';
 import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
 import { mapping, light as theme } from '@eva-design/eva';

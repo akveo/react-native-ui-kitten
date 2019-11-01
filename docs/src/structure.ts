@@ -55,34 +55,23 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Eva Icons',
+        name: 'Icon Packages',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/setup-icons-module.md',
+            source: 'guides/icon-packages.md',
           },
         ],
       },
       {
         type: 'page',
-        name: '3rd party Icons',
+        name: 'Running on the Web',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/setup-vector-icons.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Using with React Native Web',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/using-web.md',
+            source: 'guides/running-on-the-web.md',
           },
         ],
       },

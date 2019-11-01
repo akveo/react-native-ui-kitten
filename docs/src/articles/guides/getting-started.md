@@ -52,7 +52,7 @@ npm i react-native-ui-kitten @eva-design/eva
 
 Wrap the root component of your App into `ApplicationProvider` component. In your **App.js**:
 
-```js
+```jsx
 import React from 'react';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from 'react-native-ui-kitten';
@@ -72,4 +72,4 @@ const App = () => (
 export default App;
 ```
 
-That's it. UI Kitten is ready now.
+That's it. UI Kitten is ready now. Next, you might be interested in [configuring Icon packages](guides/icon-packages).
