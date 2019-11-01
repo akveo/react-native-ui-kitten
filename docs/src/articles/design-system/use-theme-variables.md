@@ -48,6 +48,6 @@ export const AwesomeViewShowcase = (props) => (
 
 ## Related Articles
 
-- [Change Theme](design-system/theme-change)
+- [Change Theme](guides/changing-theme)
 - [Light Theme](design-system/light-theme)
 - [Dark Theme](design-system/dark-theme)

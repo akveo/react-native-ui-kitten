@@ -55,6 +55,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Runtime Theming',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/runtime-theming.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Icon Packages',
         children: [
           {
@@ -144,17 +155,6 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'design-system/custom-theme.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Changing Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/theme-change.md',
           },
         ],
       },

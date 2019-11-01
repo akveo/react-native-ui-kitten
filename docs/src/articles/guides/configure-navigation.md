@@ -178,3 +178,9 @@ in other navigation libraries like React Native Navigation by Wix. Currently, UI
 with this library and might have some performance issues.
 
 Consider using React Navigation since UI Kitten has better API support with it.
+
+<hr>
+
+## Conclusion
+
+In this guide, we used React Navigation library to configure routing within React Native app. Consider reading the <a href="https://reactnavigation.org/docs/en/getting-started.html" target="_blank">documentation</a> documentation to become more familiar with it as it is most popular solution in the React world.
