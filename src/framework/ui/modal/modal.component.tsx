@@ -26,7 +26,7 @@ import {
 import { Size } from '../popover/type';
 import { ModalPresentingBased } from '../support/typings';
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
+const initialWindowSize: Size = Dimensions.get('screen');
 const TAG_CHILD: string = 'Modal';
 const initialContentSize: Size = { width: 0, height: 0 };
 export const baseModalTestId: string = '@modal/base';
@@ -61,7 +61,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
  * tapping on back-drop.
  *
- * @property ViewProps
+ * @property {ViewProps} - Any props applied to View component.
  *
  * @overview-example Simple Usage
  *
@@ -209,11 +209,11 @@ export class Modal extends React.Component<ModalProps> {
   };
 
   private getAbsoluteRelatedStyle = (): StyleType => {
-    const { width, height } = this.contentSize;
+    const windowSize: Size = Dimensions.get('window');
 
     return {
-      top: (screenHeight - height) / 2,
-      left: (screenWidth - width) / 2,
+      top: (windowSize.height - this.contentSize.height) / 2,
+      left: (windowSize.width - this.contentSize.width) / 2,
     };
   };
 
@@ -278,8 +278,8 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     position: 'absolute',
-    width: screenWidth,
-    height: screenHeight,
+    width: initialWindowSize.width,
+    height: initialWindowSize.height,
   },
   hiddenModal: {
     opacity: 0,
