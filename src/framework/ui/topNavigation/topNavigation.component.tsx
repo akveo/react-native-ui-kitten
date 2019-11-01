@@ -63,7 +63,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of subtitle.
  *
- * @property ViewProps - Any props applied to View component.
+ * @property {ViewProps} - Any props applied to View component.
  *
  * @property StyledComponentProps - Any props applied to `styled` component.
  *
