@@ -89,24 +89,6 @@ class CardComponent extends React.Component<CardProps> {
 
   static styledComponentName: string = 'Card';
 
-  private onPress = (event: GestureResponderEvent): void => {
-    if (this.props.onPress) {
-      this.props.onPress(event);
-    }
-  };
-
-  private onPressIn = (event: GestureResponderEvent): void => {
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
-  };
-
-  private onPressOut = (event: GestureResponderEvent): void => {
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
-  };
-
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
       backgroundColor,
@@ -223,10 +205,7 @@ class CardComponent extends React.Component<CardProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...restProps}
-        style={[container, styles.container, style]}
-        onPress={this.onPress}
-        onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        style={[container, styles.container, style]}>
         {header}
         {header && this.renderDivider()}
         {body}
