@@ -1,12 +1,12 @@
 # Getting Started
 
-This guide will help you to initialize application with UI Kitten from a scratch. If you have an existing code base, refer to the [Manual Installation](guides/getting-started#manual-installation).
+This guide will help you to initialize the application with UI Kitten from a scratch. If you have an existing code base, refer to the [Manual Installation](guides/getting-started#manual-installation).
 
 <hr>
 
 ## New Apps
 
-This guide will help you to init application using UI Kitten template project. First, make sure you have latest React Native CLI installed: 
+This guide will help you to init an application using UI Kitten template project. First, make sure you have the latest React Native CLI installed: 
 
  ```bash
 npm un -g react-native-cli && npm i -g @react-native-community/cli npx
@@ -24,7 +24,17 @@ Or, if you want to init with TypeScript:
 npx react-native init MyApp --template react-native-template-ui-kitten-typescript
 ```
 
-That's it. For the next steps, simply follow command line instructions and move to the [next guide](guides/configure-navigation).
+### Start your App
+
+By following command-line instructions after successful init, go to the project folder and start your app:
+
+```bash
+npm run start:ios
+``` 
+
+That's it! Move to the [next guide](guides/configure-navigation) to configure navigation in your App.
+
+You can also learn more about starting React Native Apps by reading <a href="https://github.com/react-native-community/cli/blob/master/docs/commands.md#commands" target="_blank">React Native CLI documentation</a>.
 
 <hr>
 
@@ -51,7 +61,7 @@ const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
     <Text catetory='h1'>HOME</Text>
   </Layout>
-); 
+);
 
 const App = () => (
   <ApplicationProvider mapping={mapping} theme={lightTheme}>

@@ -18,6 +18,9 @@ We also need to complete installation for iOS.
 cd ios && pod install
 ```
 
+Now you should have all in place. We need to restart the bundler to apply the changes.
+Go back to the root application directory, shut down the current bundler process and call `npm start -- --reset-cache`.
+
 <hr>
 
 ## Create Screens
@@ -51,13 +54,13 @@ export const HomeScreen = ({ navigation }) => {
 };
 ```
 
-The code above demonstrates the basic example of how to create screens in React Native. It already includes a header and a button to navigate to the second screen. Currently, this will not affect your app. We still need to create the Details screen and connect it with Home using React Navigation. But let's take an additional attention for some details:
+The code above demonstrates the basic example of how to create screens in React Native. It already includes a header and a button to navigate to the second screen. Currently, this will not affect your app. We still need to create the Details screen and connect it with Home using React Navigation. But let's take additional attention for some details:
 
-- `SafeAreaView` is the root element of the screen. This help us to avoid drawing UI over the notches on physical devices.
+- `SafeAreaView` is the root element of the screen. This helps us to avoid drawing UI over the notches on physical devices.
 - `TopNavigation` is the header of our application.
 - `Layout` includes the main content of the screen.
 
-Notice the `navigation` argument passed to `HomeScreen`. It comes from React Navigation when navigator is configured and can be used to perform the navigation between screens. By pressing `Open Details` button it will pefrorm navigation to the Details screen, so let's focus on it's implementation.
+Notice the `navigation` argument passed to `HomeScreen`. It comes from React Navigation when navigator is configured and can be used to perform navigation between screens. By pressing `Open Details` button it will perform navigation to the Details screen, so let's focus on its implementation.
 
 ### Details Screen
 
@@ -124,8 +127,8 @@ const HomeNavigator = createStackNavigator({
 export const AppNavigator = createAppContainer(HomeNavigator);
 ```
 
-With the code above used `createStackNavigator` function to create a stack navigation between Home and Details screens.
-We also used `createAppContainer` function to create `AppNavigator` the root component of your app. 
+With the code above we used `createStackNavigator` function to create stack navigation between Home and Details screens.
+We also used `createAppContainer` function to create `AppNavigator` - the root component of your app. 
 
 Now, the one thing we have to do is to render `AppNavigator`.
 
@@ -154,7 +157,7 @@ const App = () => (
 export default App;
 ```
 
-That's it! With this guide, you learned how to create screens and perform simple navigation between them. Reload your app to review changes!
+That's it! By this guide, you learned how to create screens and perform simple navigation between them. Reload your app to review changes.
 
 <hr>
 
@@ -164,7 +167,7 @@ UI Kitten includes much more components that can be used with React Navigation:
 
 - [BottomNavigation](components/bottomnavigation) - renders the tabs at the bottom.
 - [TabView](components/tabview) - renders the tabs at the top.
-- [Drawer](components/drawer) - renders swipable side menu.
+- [Drawer](components/drawer) - renders swipeable side menu.
 
 <hr>
 
