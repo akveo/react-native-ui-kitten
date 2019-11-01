@@ -36,6 +36,7 @@ import {
   CalendarContainer,
   DatepickerContainer,
   RangeCalendarContainer,
+  CardContainer,
 } from '../ui/screen';
 import { DrawerNavigation } from './drawerNavigation.component';
 import { sharingHeightContainer } from './sharingHeight.container';
@@ -51,6 +52,7 @@ const routes: NavigationRouteConfigMap = {
   ['Button']: ButtonContainer,
   ['Button Group']: ButtonGroupContainer,
   ['Calendar']: CalendarContainer,
+  ['Card']: CardContainer,
   ['Range Calendar']: RangeCalendarContainer,
   ['Checkbox']: CheckBoxContainer,
   ['Drawer']: DrawerContainer,

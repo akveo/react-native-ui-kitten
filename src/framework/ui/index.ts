@@ -30,6 +30,17 @@ export {
   CalendarProps,
 } from './calendar/calendar.component';
 export {
+  Card,
+  CardProps,
+  CardElement,
+  CardFooterElement,
+} from './card/card.component';
+export {
+  CardHeader,
+  CardHeaderProps,
+  CardHeaderElement,
+} from './card/cardHeader.component';
+export {
   RangeCalendar,
   RangeCalendarProps,
   RangeCalendarElement,
