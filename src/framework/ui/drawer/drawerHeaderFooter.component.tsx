@@ -33,6 +33,8 @@ export type DrawerHeaderFooterElement = ListItemElement;
  * @property {(index: number, event: GestureResponderEvent) => React.ReactElement<ImageProps>} onPress - Emits when
  * component is pressed.
  *
+ * @property ListItemProps - Any props applied to ListItem component.
+ *
  * @overview-example DrawerHeaderFooterSimpleUsage
  *
  * @overview-example DrawerHeaderFooterWithAccessory

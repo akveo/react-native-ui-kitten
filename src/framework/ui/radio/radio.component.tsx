@@ -60,9 +60,9 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * @property {(selected: boolean) => void} onChange - Triggered on onChange value.
  *
- * @property TouchableOpacityProps
+ * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example RadioSimpleUsage
  *

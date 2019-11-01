@@ -17,6 +17,13 @@ import {
 export type DividerProps = StyledComponentProps & ViewProps;
 export type DividerElement = React.ReactElement<DividerProps>;
 
+/**
+ * Styled `Divider` component. Behaves like React Native `View`.
+ * The key feature of using `Divider` instead of `View` is that
+ * it automatically picks color fitting to current theme.
+ *
+ * @property ViewProps - Any props applied to View component.
+ */
 class DividerComponent extends React.Component<DividerProps> {
 
   static styledComponentName: string = 'Divider';

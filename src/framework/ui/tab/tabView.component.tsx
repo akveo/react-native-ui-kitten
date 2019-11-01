@@ -62,7 +62,7 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *
  * @property {(offset: number) => void} onOffsetChange - Fires on scroll event with current scroll offset.
  *
- * @property ViewProps
+ * @property ViewProps - Any props applied to View component.
  *
  * @overview-example TabViewSimpleUsage
  *

@@ -51,7 +51,7 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  *
  * @property {(index: number) => void} onSelect - Fires on "page" select with corresponding index.
  *
- * @property ScrollViewProps
+ * @property {ViewProps} - Any props applied to View component.
  *
  * @overview-example ViewPagerSimpleUsage
  *

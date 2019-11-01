@@ -71,9 +71,9 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @property {(checked: boolean) => void} onChange - Fires when selection state is changed.
  *
- * @property TouchableOpacityProps
+ * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example ToggleSimpleUsage
  *

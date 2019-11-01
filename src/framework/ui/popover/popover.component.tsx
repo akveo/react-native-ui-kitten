@@ -80,11 +80,11 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
  *
- * @property ViewProps
+ * @property ViewProps - Any props applied to View component.
  *
- * @property ModalPresentingBased
+ * @property ModalPresentingBased - Any props applied to Modal component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example PopoverSimpleUsage
  *

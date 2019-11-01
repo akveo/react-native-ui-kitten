@@ -58,6 +58,8 @@ export type RangeCalendarElement<D> = React.ReactElement<RangeCalendarProps<D>>;
  *
  * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
  *
+ * @property ViewProps - Any props applied to View component.
+ *
  * @overview-example RangeCalendarSimpleUsage
  */
 export class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCalendarProps<D>> {

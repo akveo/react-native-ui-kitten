@@ -39,7 +39,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Determines the function to handle
  * menu item press.
  *
- * @property ListProps
+ * @property MenuProps - Any props applied to Menu component.
  *
  * @overview-example DrawerSimpleUsage
  *
