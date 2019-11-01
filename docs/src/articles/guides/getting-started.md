@@ -32,7 +32,7 @@ By following command-line instructions after successful init, go to the project 
 npm run start:ios
 ``` 
 
-That's it! Move to the [next guide](guides/configure-navigation) to configure navigation in your App.
+That's it! By moving to the [next guide](guides/configure-navigation) you will learn how to configure navigation in React Native App.
 
 You can also learn more about starting React Native Apps by reading <a href="https://github.com/react-native-community/cli/blob/master/docs/commands.md#commands" target="_blank">React Native CLI documentation</a>.
 

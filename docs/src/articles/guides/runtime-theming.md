@@ -133,3 +133,6 @@ This guide is just a short introduction on how it can be done with standard Reac
 ## Conclusion
 
 In this guide, we used several React tools like <a href="https://reactjs.org/docs/hooks-intro.html" target="_blank">Hooks</a> and <a href="https://reactjs.org/docs/context.html" target="_blank">Context</a>. Consider reading the React documentation to become more familiar with it. Also, take a look on the <a href="https://github.com/react-native-community/react-native-hooks" target="_blank">react-native-hooks</a> library, which also contains a lot of useful hooks you can use in your app.
+
+
+By moving to the [next guide](guides/icon-packages), you will learn how to use icon packages in React Native.

@@ -5,7 +5,7 @@ Starting from UI Kitten 4.2, we introduce an icons module built on top of <a hre
 <div class="note note-info">
   <div class="note-title">NOTE</div>
   <div class="note-body">
-  You might not be interested in this guide, if you have initialized the app using UI Kitten template since it already includes Eva Icons.
+  You might not be interested in this guide, if you have initialized the app using UI Kitten template since it already includes Eva Icons. Anyway, if you want to know how to use 3rd party icon packages like `react-native-vector-icons`, use this guide to make it work in your app.
   </div>
 </div>
 
