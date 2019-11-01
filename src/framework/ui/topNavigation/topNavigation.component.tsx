@@ -65,7 +65,7 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * @property {ViewProps} - Any props applied to View component.
  *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {StyledComponentProps} - Any props applied to `styled` component.
  *
  * @overview-example TopNavigationSimpleUsage
  *
