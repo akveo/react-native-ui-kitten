@@ -174,20 +174,22 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
   };
 
   private onHeaderNavigationLeftPress = (): void => {
-    const pagerRef: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
-
-    pagerRef.current.scrollToIndex({
-      index: pagerRef.current.props.selectedIndex - 1,
-      animated: true,
+    const newDate = this.dateService.createDate(
+      this.dateService.getYear(this.state.visibleDate),
+      this.dateService.getMonth(this.state.visibleDate) - 1,
+      this.dateService.getDate(this.state.visibleDate));
+    this.setState({
+      visibleDate: newDate,
     });
   };
 
   private onHeaderNavigationRightPress = (): void => {
-    const pagerRef: React.RefObject<CalendarPager<D>> = this.getCurrentPagerRef();
-
-    pagerRef.current.scrollToIndex({
-      index: pagerRef.current.props.selectedIndex + 1,
-      animated: true,
+    const newDate = this.dateService.createDate(
+      this.dateService.getYear(this.state.visibleDate),
+      this.dateService.getMonth(this.state.visibleDate) + 1,
+      this.dateService.getDate(this.state.visibleDate));
+    this.setState({
+      visibleDate: newDate,
     });
   };
 
