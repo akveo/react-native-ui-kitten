@@ -119,10 +119,10 @@ export class ListComponent extends React.Component<ListProps> {
 
     return (
       <FlatList
+        keyExtractor={this.keyExtractor}
         {...derivedProps}
         ref={this.listRef}
         style={[componentStyle.container, styles.container, style]}
-        keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
       />
     );
