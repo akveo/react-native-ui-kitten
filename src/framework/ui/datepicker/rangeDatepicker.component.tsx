@@ -1,11 +1,17 @@
 import React from 'react';
 import { styled } from '@kitten/theme';
-import { BaseDatepickerComponent } from './baseDatepicker.component';
+import {
+  BaseDatepickerComponent,
+  BaseDatepickerProps,
+} from './baseDatepicker.component';
 import {
   RangeCalendar,
   RangeCalendarProps,
   RangeCalendarElement,
 } from '../calendar/rangeCalendar.component';
+
+export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
+export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepickerProps<D>>;
 
 /**
  * Styled `RangeDatepicker` component.
@@ -16,6 +22,8 @@ import {
  * @extends React.Component
  *
  * @property {(style: ImageStyle) => React.ReactElement<ImageProps>} icon - Determines the icon of the component.
+ *
+ * @property {string} placeholder - Determines placeholder of the component.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
@@ -51,9 +59,12 @@ import {
  *
  * @overview-example RangeDatepickerSimpleUsage
  */
-export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, RangeCalendarProps<D>> {
+
+export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 
   static styledComponentName: string = 'Datepicker';
+
+  // BaseDatepickerComponent
 
   protected getComponentTitle(): string {
     const { startDate, endDate } = this.props.range;
@@ -64,15 +75,16 @@ export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, Rang
 
       return `${start} - ${end}`;
     } else {
-      return 'dd/mm/yyyy';
+      return this.props.placeholder;
     }
   }
 
   protected renderCalendar(): RangeCalendarElement<D> {
     return (
+      // @ts-ignore
       <RangeCalendar {...this.props}/>
     );
   }
 }
 
-export const RangeDatepicker = styled(RangeDatepickerComponent);
+export const RangeDatepicker = styled<RangeDatepickerProps>(RangeDatepickerComponent);

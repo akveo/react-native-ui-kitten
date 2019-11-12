@@ -42,7 +42,7 @@ import {
 } from './service/calendarData.service';
 import { Divider } from '../divider/divider.component';
 
-export interface BaseCalendarProps<D> extends ViewProps {
+export interface BaseCalendarProps<D = Date> extends ViewProps {
   min?: D;
   max?: D;
   dateService?: DateService<D>;
@@ -76,9 +76,9 @@ const FORMAT_HEADER_DATE: string = 'MMM YYYY';
 const FORMAT_HEADER_MONTH: string = 'YYYY';
 const FORMAT_HEADER_YEAR: string = 'YYYY';
 
-export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCalendarProps<D> & P, State<D>> {
+export abstract class BaseCalendarComponent<P, D = Date> extends React.Component<BaseCalendarProps<D> & P, State<D>> {
 
-  static defaultProps = {
+  static defaultProps: Partial<BaseCalendarProps> = {
     dateService: new NativeDateService(),
     boundingMonth: true,
     startView: CalendarViewModes.DATE,

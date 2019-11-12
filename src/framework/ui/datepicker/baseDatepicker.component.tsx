@@ -1,12 +1,12 @@
 import React from 'react';
 import {
+  Dimensions,
+  GestureResponderEvent,
+  ImageProps,
   ImageStyle,
+  StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
-  ImageProps,
-  StyleSheet,
-  GestureResponderEvent,
-  Dimensions,
 } from 'react-native';
 import {
   Interaction,
@@ -34,20 +34,20 @@ interface State {
 
 export interface ComponentProps {
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
+  placeholder?: string;
 }
 
-export type DatepickerProps<D> =
-  ComponentProps
+export type BaseDatepickerProps<D = Date> =
   & StyledComponentProps
   & TouchableOpacityProps
-  & BaseCalendarProps<D>;
+  & BaseCalendarProps<D>
+  & ComponentProps;
 
-export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
+export abstract class BaseDatepickerComponent<P, D = Date> extends React.Component<BaseDatepickerProps<D> & P, State> {
 
-export abstract class BaseDatepickerComponent<D, P> extends React.Component<DatepickerProps<D> & P, State> {
-
-  static defaultProps = {
+  static defaultProps: Partial<BaseDatepickerProps> = {
     dateService: new NativeDateService(),
+    placeholder: 'dd/mm/yyyy',
   };
 
   public state: State = {
@@ -126,11 +126,11 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     }
   };
 
-  private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-    return this.props.icon && this.props.icon(style);
+  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+    return this.props.icon(style);
   };
 
-  private renderText = (style: StyleType): TextElement => {
+  private renderTextElement = (style: StyleType): TextElement => {
     return (
       <Text style={style}>
         {this.getComponentTitle()}
@@ -138,20 +138,31 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     );
   };
 
+  private renderControlChildren = (style: StyleType): React.ReactNodeArray => {
+    const { icon } = this.props;
+
+    return [
+      this.renderTextElement(style.text),
+      icon && this.renderIconElement(style.icon),
+    ];
+  };
+
   private renderControl = (): React.ReactElement<TouchableOpacityProps> => {
     const { themedStyle, disabled, style } = this.props;
-    const { container, icon, text } = this.getComponentStyles(themedStyle);
+    const componentStyle: StyleType = this.getComponentStyles(themedStyle);
+
+    const [textElement, iconElement] = this.renderControlChildren(componentStyle);
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
         disabled={disabled}
-        style={[container, styles.container, style]}
+        style={[componentStyle.container, styles.container, style]}
         onPress={this.toggleVisible}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {this.renderText(text)}
-        {this.renderIcon(icon)}
+        {textElement}
+        {iconElement}
       </TouchableOpacity>
     );
   };
