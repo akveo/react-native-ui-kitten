@@ -4,65 +4,19 @@ import {
   ComponentShowcaseSection,
 } from '../common/type';
 
-const filledButtonGroup: ComponentShowcaseItem = {
-  title: 'Filled',
-  props: {
-    appearance: 'filled',
-  },
+const defaultRadioGroup: ComponentShowcaseItem = {
+  props: {},
 };
 
-const outlineButtonGroup: ComponentShowcaseItem = {
-  title: 'Outline',
-  props: {
-    appearance: 'outline',
-  },
-};
-
-const giantButtonGroup: ComponentShowcaseItem = {
-  title: 'Giant',
-  props: {
-    size: 'giant',
-  },
-};
-
-const largeButtonGroup: ComponentShowcaseItem = {
-  title: 'Large',
-  props: {
-    size: 'large',
-  },
-};
-
-const mediumButtonGroup: ComponentShowcaseItem = {
-  title: 'Medium',
-  props: {
-    size: 'medium',
-  },
-};
-
-const smallButtonGroup: ComponentShowcaseItem = {
-  title: 'Small',
-  props: {
-    size: 'small',
-  },
-};
-
-const tinyButtonGroup: ComponentShowcaseItem = {
-  title: 'Tiny',
-  props: {
-    size: 'tiny',
-  },
-};
-
-const appearanceSection: ComponentShowcaseSection = {
-  title: 'Appearance',
+const defaultSection: ComponentShowcaseSection = {
+  title: 'Default',
   items: [
-    filledButtonGroup,
-    outlineButtonGroup,
+    defaultRadioGroup,
   ],
 };
 
 export const radioGroupShowcase: ComponentShowcase = {
   sections: [
-    appearanceSection,
+    defaultSection,
   ],
 };

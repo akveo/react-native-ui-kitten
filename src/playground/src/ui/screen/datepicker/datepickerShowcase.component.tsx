@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import {
   Datepicker,
   DatepickerProps,
@@ -23,16 +22,9 @@ export class DatepickerShowcase extends React.Component<DatepickerProps<Date>, S
     return (
       <Datepicker
         {...this.props}
-        style={styles.datepicker}
         date={this.state.date}
         onSelect={this.setDate}
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  datepicker: {
-    marginBottom: 20,
-  },
-});

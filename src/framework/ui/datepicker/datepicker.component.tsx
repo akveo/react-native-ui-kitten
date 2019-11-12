@@ -1,11 +1,20 @@
 import React from 'react';
-import { styled } from '@kitten/theme';
-import { BaseDatepickerComponent } from './baseDatepicker.component';
+import {
+  styled,
+  StyledComponentProps,
+} from '@kitten/theme';
+import {
+  BaseDatepickerComponent,
+  BaseDatepickerProps,
+} from './baseDatepicker.component';
 import {
   CalendarElement,
   Calendar,
   CalendarProps,
 } from '../calendar/calendar.component';
+
+export type DatepickerProps<D> = CalendarProps<D>;
+export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
 
 /**
  * Styled `Datepicker` component.
@@ -16,6 +25,14 @@ import {
  * @extends React.Component
  *
  * @property {(style: ImageStyle) => React.ReactElement<ImageProps>} icon - Determines the icon of the component.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `small`, `medium`, `large`.
+ * Default is `medium`.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
@@ -63,7 +80,8 @@ import {
  *
  * @example DatepickerMoment
  */
-export class DatepickerComponent<D> extends BaseDatepickerComponent<D, CalendarProps<D>> {
+
+export class DatepickerComponent<D> extends BaseDatepickerComponent<D, DatepickerProps<D>> {
 
   static styledComponentName: string = 'Datepicker';
 

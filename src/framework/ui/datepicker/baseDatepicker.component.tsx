@@ -34,17 +34,17 @@ interface State {
 
 export interface ComponentProps {
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
+  status?: string;
+  size?: string;
 }
 
-export type DatepickerProps<D> =
+export type BaseDatepickerProps<D> =
   ComponentProps
   & StyledComponentProps
   & TouchableOpacityProps
   & BaseCalendarProps<D>;
 
-export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
-
-export abstract class BaseDatepickerComponent<D, P> extends React.Component<DatepickerProps<D> & P, State> {
+export abstract class BaseDatepickerComponent<D, P> extends React.Component<BaseDatepickerProps<D> & P, State> {
 
   static defaultProps = {
     dateService: new NativeDateService(),

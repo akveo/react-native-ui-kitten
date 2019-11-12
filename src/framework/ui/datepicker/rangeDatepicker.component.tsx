@@ -7,6 +7,9 @@ import {
   RangeCalendarElement,
 } from '../calendar/rangeCalendar.component';
 
+export type RangeDatepickerProps<D> = RangeCalendarProps<D>;
+export type RangeDatepickerElement<D> = React.ReactElement<RangeDatepickerProps<D>>;
+
 /**
  * Styled `RangeDatepicker` component.
  * Renders `RangeCalendar` component in the `Popover`.
@@ -16,6 +19,14 @@ import {
  * @extends React.Component
  *
  * @property {(style: ImageStyle) => React.ReactElement<ImageProps>} icon - Determines the icon of the component.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `small`, `medium`, `large`.
+ * Default is `medium`.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
@@ -51,7 +62,8 @@ import {
  *
  * @overview-example RangeDatepickerSimpleUsage
  */
-export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, RangeCalendarProps<D>> {
+
+export class RangeDatepickerComponent<D> extends BaseDatepickerComponent<D, RangeDatepickerProps<D>> {
 
   static styledComponentName: string = 'Datepicker';
 

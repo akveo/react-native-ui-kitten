@@ -15,13 +15,12 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
-import { CalendarDateInfo } from '@kitten/ui/calendar/type';
+import { CalendarDateInfo } from '../../type';
 
 type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
 
 interface ComponentProps<D> extends TouchableOpacityProps {
   date: CalendarDateInfo<D>;
-  category?: string;
   selected?: boolean;
   bounding?: boolean;
   today?: boolean;

@@ -97,7 +97,11 @@ interface State {
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning` or `danger` or `control`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `small`, `medium`, `large`.
+ * Default is `medium`.
  *
  * @property {boolean} multiSelect - Determines `multi-select` behavior of the Select component.
  *
@@ -170,7 +174,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
   constructor(props: SelectProps) {
     super(props);
     this.strategy = this.createSelectionStrategy();
-    this.iconAnimation = new Animated.Value(-180);
+    this.iconAnimation = new Animated.Value(0);
   }
 
   public componentDidUpdate(): void {
@@ -243,9 +247,9 @@ class SelectComponent extends React.Component<SelectProps, State> {
   private startIconAnimation = (): void => {
     const { visible } = this.state;
     if (visible) {
-      this.animateIcon(0);
-    } else {
       this.animateIcon(-180);
+    } else {
+      this.animateIcon(0);
     }
   };
 
@@ -273,7 +277,6 @@ class SelectComponent extends React.Component<SelectProps, State> {
     const placeholderStyles: StyleType = allWithPrefix(source, 'placeholder');
     const optionsListStyles: StyleType = allWithPrefix(source, 'optionsList');
     const labelStyle: StyleType = allWithPrefix(source, 'label');
-    const outlineStyles: StyleType = allWithPrefix(source, 'outline');
 
     return {
       control: {
@@ -293,25 +296,20 @@ class SelectComponent extends React.Component<SelectProps, State> {
         tintColor: iconStyles.iconTintColor,
       },
       text: {
+        marginHorizontal: textStyles.textMarginHorizontal,
         color: textStyles.textColor,
-        fontFamily: textStyles.textFontFamily,
         fontSize: textStyles.textFontSize,
         fontWeight: textStyles.textFontWeight,
         lineHeight: textStyles.textLineHeight,
-        marginHorizontal: textStyles.textMarginHorizontal,
+        fontFamily: textStyles.textFontFamily,
       },
       placeholder: {
+        marginHorizontal: placeholderStyles.placeholderMarginHorizontal,
         color: placeholderStyles.placeholderColor,
-        fontFamily: placeholderStyles.placeholderFontFamily,
         fontSize: placeholderStyles.placeholderFontSize,
         fontWeight: placeholderStyles.placeholderFontWeight,
         lineHeight: placeholderStyles.placeholderLineHeight,
-        marginHorizontal: placeholderStyles.placeholderMarginHorizontal,
-      },
-      outline: {
-        backgroundColor: outlineStyles.outlineBackgroundColor,
-        padding: outlineStyles.outlinePadding,
-        borderRadius: outlineStyles.outlineBorderRadius,
+        fontFamily: placeholderStyles.placeholderFontFamily,
       },
       optionsList: {
         maxHeight: optionsListStyles.optionsListMaxHeight,
@@ -320,8 +318,12 @@ class SelectComponent extends React.Component<SelectProps, State> {
         borderWidth: optionsListStyles.optionsListBorderWidth,
       },
       label: {
-        color: labelStyle.labelColor,
         marginBottom: labelStyle.labelMarginBottom,
+        color: labelStyle.labelColor,
+        fontSize: labelStyle.labelFontSize,
+        fontWeight: labelStyle.labelFontWeight,
+        lineHeight: labelStyle.labelLineHeight,
+        fontFamily: labelStyle.labelFontFamily,
       },
     };
   };
@@ -400,7 +402,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   private renderControlElement = (): ControlElement => {
     const { themedStyle, controlStyle, ...restProps } = this.props;
-    const { control, outline, ...childrenStyles } = this.getComponentStyle(themedStyle);
+    const { control, ...childrenStyles } = this.getComponentStyle(themedStyle);
     const [iconElement, textElement] = this.renderControlChildren(childrenStyles);
 
     const measuringProps: MeasuringElementProps = { tag: MEASURED_CONTROL_TAG };
@@ -441,16 +443,14 @@ class SelectComponent extends React.Component<SelectProps, State> {
     return (
       <View style={style}>
         {labelElement}
-        <View style={[styles.outline, componentStyle.outline]}>
-          <Popover
-            visible={this.state.visible}
-            content={optionsListElement}
-            style={additionalOptionsListStyle}
-            indicatorStyle={styles.indicator}
-            onBackdropPress={this.setVisibility}>
-            {controlElement}
-          </Popover>
-        </View>
+        <Popover
+          visible={this.state.visible}
+          content={optionsListElement}
+          style={additionalOptionsListStyle}
+          indicatorStyle={styles.indicator}
+          onBackdropPress={this.setVisibility}>
+          {controlElement}
+        </Popover>
       </View>
     );
   }
@@ -473,14 +473,6 @@ const styles = StyleSheet.create({
   },
   optionsList: {
     flexGrow: 0,
-  },
-  outlineContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  outline: {
-    justifyContent: 'center',
   },
 });
 

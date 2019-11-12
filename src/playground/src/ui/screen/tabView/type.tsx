@@ -66,17 +66,17 @@ const iconBottomNavigation: ComponentShowcaseItem = {
 const iconTitleBottomNavigation: ComponentShowcaseItem = {
   props: {
     children: [
-      <Tab icon={Icon} title='Tab 1'>
+      <Tab icon={StarIcon} title='Tab 1'>
         <Layout>
           <Text>Tab 1</Text>
         </Layout>
       </Tab>,
-      <Tab icon={Icon} title='Tab 2'>
+      <Tab icon={StarIcon} title='Tab 2'>
         <Layout>
           <Text>Tab 2</Text>
         </Layout>
       </Tab>,
-      <Tab icon={Icon} title='Tab 3'>
+      <Tab icon={StarIcon} title='Tab 3'>
         <Layout>
           <Text>Tab 3</Text>
         </Layout>

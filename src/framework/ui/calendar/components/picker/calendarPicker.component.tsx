@@ -24,7 +24,6 @@ import { CalendarDateInfo } from '../../type';
 
 interface ComponentProps<D> extends ViewProps {
   data: CalendarDateInfo<D>[][];
-  category: string;
   isItemSelected: (item: CalendarDateInfo<D>) => boolean;
   isItemDisabled: (item: CalendarDateInfo<D>) => boolean;
   isItemToday: (item: CalendarDateInfo<D>) => boolean;
@@ -63,7 +62,6 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
       <CalendarPickerCell
         key={index}
         date={item}
-        category={this.props.category}
         selected={this.props.isItemSelected(item)}
         disabled={this.props.isItemDisabled(item)}
         bounding={item.bounding}

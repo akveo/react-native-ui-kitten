@@ -3,7 +3,10 @@ import {
   ScrollViewProps,
   View,
 } from 'react-native';
-import { StyleType } from 'react-native-ui-kitten';
+import {
+  Layout,
+  StyleType,
+} from 'react-native-ui-kitten';
 import { ShowcaseSettings } from './showcaseSettings.component';
 import { Showcase } from './showcase.component';
 import {
@@ -48,7 +51,7 @@ export class ShowcaseContainer extends React.Component<ContainerProps, State> {
     const { showcase, settings, renderItem, children, style } = this.props;
 
     return (
-      <View style={[{ flex: 1 }, style]}>
+      <Layout style={[{ flex: 1 }, style]}>
         <ShowcaseSettings
           themes={themes}
           settings={settings}
@@ -62,7 +65,7 @@ export class ShowcaseContainer extends React.Component<ContainerProps, State> {
           renderItem={renderItem}
           settings={this.state.settings}
         />
-      </View>
+      </Layout>
     );
   };
 

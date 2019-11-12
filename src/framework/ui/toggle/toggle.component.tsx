@@ -61,10 +61,6 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * Can be `primary`, `success`, `info`, `warning`, `danger`, `basic` or `control`.
  * Default is `basic`.
  *
- * @property {string} size - Determines the size of the component.
- * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
- * Default is `medium`.
- *
  * @property {string} text - Determines text of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
@@ -203,24 +199,16 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       iconWidth,
       iconHeight,
       iconTintColor,
-      offsetValue,
       backgroundColor,
       borderColor,
       ...containerParameters
     } = source;
 
-    const interpolatedBackgroundColor: Animated.AnimatedDiffClamp = this.getInterpolatedColor(
-      backgroundColor,
-      borderColor,
-    );
-
-    const thumbScale: Animated.AnimatedDiffClamp = this.animateThumbScale(offsetValue);
-
     return {
       toggleContainer: {},
       ellipseContainer: {
         borderColor: borderColor,
-        backgroundColor: interpolatedBackgroundColor,
+        backgroundColor: backgroundColor,
         ...containerParameters,
       },
       highlight: {
@@ -233,8 +221,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         width: containerParameters.width - (containerParameters.borderWidth * 2),
         height: containerParameters.height - (containerParameters.borderWidth * 2),
         borderRadius: (source.height - (source.borderWidth * 2)) / 2,
-        backgroundColor: interpolatedBackgroundColor,
-        transform: [{ scale: checked ? thumbScale : this.ellipseScaleAnimation }],
+        backgroundColor: backgroundColor,
       },
       thumb: {
         alignSelf: checked ? 'flex-end' : 'flex-start',
@@ -290,13 +277,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }).start(callback);
   };
 
-  private animateThumbScale = (value: number): Animated.AnimatedDiffClamp => {
-    return this.thumbTranslateAnimation.interpolate({
-      inputRange: [-value, 0],
-      outputRange: [1, 0.01],
-    });
-  };
-
   private stopAnimations = (): void => {
     const value: number = this.props.checked ? 0.01 : 1;
 
@@ -308,25 +288,14 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   };
 
   private toggle = (callback = (nextValue: boolean) => null): void => {
-    const { checked, themedStyle } = this.props;
-
-    const value: number = checked ? -themedStyle.offsetValue : themedStyle.offsetValue;
+    const value: number = this.props.checked ? -20 : 20;
 
     this.animateThumbTranslate(value, () => {
       this.thumbTranslateAnimation.setValue(0);
-      callback(!checked);
+      callback(!this.props.checked);
     });
 
     this.animateThumbWidth(this.props.themedStyle.thumbWidth);
-  };
-
-  private getInterpolatedColor = (startColor: string, endColor: string): Animated.AnimatedDiffClamp => {
-    const { checked, themedStyle } = this.props;
-
-    return this.thumbTranslateAnimation.interpolate({
-      inputRange: checked ? [-themedStyle.offsetValue, 0] : [0, themedStyle.offsetValue],
-      outputRange: [startColor, endColor],
-    });
   };
 
   private renderTextElement = (style: StyleType): TextElement => {

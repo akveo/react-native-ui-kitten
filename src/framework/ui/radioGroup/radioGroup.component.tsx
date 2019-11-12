@@ -61,28 +61,32 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { itemMarginVertical, ...containerParameters } = source;
+
     return {
-      container: source,
+      container: containerParameters,
+      item: {
+        marginVertical: itemMarginVertical,
+      },
     };
   };
 
-  private renderRadioElement = (element: RadioElement, index: number): RadioElement => {
-    return React.cloneElement(element, {
-      key: index,
-      checked: this.props.selectedIndex === index,
-      onChange: () => this.onRadioChange(index),
+  private renderRadioElements = (source: RadioElement | RadioElement[], style: StyleType): RadioElement[] => {
+    return React.Children.map(source, (element: RadioElement, index: number): RadioElement => {
+      return React.cloneElement(element, {
+        key: index,
+        style: [style, element.props.style],
+        checked: this.props.selectedIndex === index,
+        onChange: () => this.onRadioChange(index),
+      });
     });
-  };
-
-  private renderRadioElements = (source: RadioElement | RadioElement[]): RadioElement[] => {
-    return React.Children.map(source, this.renderRadioElement);
   };
 
   public render(): React.ReactElement<ViewProps> {
     const { themedStyle, style, children, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
-    const radioElements: RadioElement[] = this.renderRadioElements(children);
+    const radioElements: RadioElement[] = this.renderRadioElements(children, componentStyle.item);
 
     return (
       <View

@@ -55,6 +55,7 @@ const disabledIconButton: ComponentShowcaseItem = {
 const giantButton: ComponentShowcaseItem = {
   title: 'Giant',
   props: {
+    icon: IconElement,
     size: 'giant',
   },
 };
@@ -62,6 +63,7 @@ const giantButton: ComponentShowcaseItem = {
 const largeButton: ComponentShowcaseItem = {
   title: 'Large',
   props: {
+    icon: IconElement,
     size: 'large',
   },
 };
@@ -69,6 +71,7 @@ const largeButton: ComponentShowcaseItem = {
 const mediumButton: ComponentShowcaseItem = {
   title: 'Medium',
   props: {
+    icon: IconElement,
     size: 'medium',
   },
 };
@@ -76,6 +79,7 @@ const mediumButton: ComponentShowcaseItem = {
 const smallButton: ComponentShowcaseItem = {
   title: 'Small',
   props: {
+    icon: IconElement,
     size: 'small',
   },
 };
@@ -83,6 +87,7 @@ const smallButton: ComponentShowcaseItem = {
 const tinyButton: ComponentShowcaseItem = {
   title: 'Tiny',
   props: {
+    icon: IconElement,
     size: 'tiny',
   },
 };

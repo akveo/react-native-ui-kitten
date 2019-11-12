@@ -57,13 +57,14 @@ export {
 } from './checkbox/checkbox.component';
 export {
   Datepicker,
-  DatepickerComponent,
+  DatepickerProps,
+  DatepickerElement,
 } from './datepicker/datepicker.component';
 export {
   RangeDatepicker,
-  RangeDatepickerComponent,
+  RangeDatepickerProps,
+  RangeDatepickerElement,
 } from './datepicker/rangeDatepicker.component';
-export { DatepickerProps } from './datepicker/baseDatepicker.component';
 export {
   Drawer,
   DrawerProps,

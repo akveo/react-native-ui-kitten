@@ -13,7 +13,7 @@ interface CheckBoxShowcaseComponentState {
 class CheckBoxShowcaseComponent extends React.Component<CheckBoxProps, CheckBoxShowcaseComponentState> {
 
   static defaultProps: CheckBoxProps = {
-    checked: true,
+    checked: false,
     indeterminate: false,
   };
 

@@ -77,10 +77,11 @@ export type InputElement = React.ReactElement<InputProps>;
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `large`, `medium` or `small`.
+ * Can be `small`, `medium`, `large`.
  * Default is `medium`.
  *
  * @property {string} label - Determines label of the component.

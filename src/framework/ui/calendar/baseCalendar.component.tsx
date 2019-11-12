@@ -416,7 +416,6 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     return (
       <CalendarPicker
         key={index}
-        category='day'
         data={this.getDayPickerData(date)}
         rowStyle={row}
         onSelect={this.onSelect}
@@ -458,7 +457,6 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
 
     return (
       <CalendarPicker
-        category='month'
         data={this.dataService.createMonthPickerData(date, PICKER_ROWS, PICKER_COLUMNS)}
         rowStyle={row}
         onSelect={this.onMonthSelect}
@@ -476,7 +474,6 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     return (
       <CalendarPicker
         key={index}
-        category='year'
         data={this.dataService.createYearPickerData(date.date, PICKER_ROWS, PICKER_COLUMNS)}
         rowStyle={row}
         onSelect={this.onYearSelect}

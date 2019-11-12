@@ -35,7 +35,7 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * @extends React.Component
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning`, `danger` or `white`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  *
  * @property {string} size - Determines the size of the component.
  * Can be `giant`, `large`, `medium`, `small`, or `tiny`.

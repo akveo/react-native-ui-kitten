@@ -238,4 +238,24 @@ export const selectSettings: ComponentShowcaseSetting[] = [
     propertyName: 'status',
     value: 'danger',
   },
+  {
+    propertyName: 'status',
+    value: 'basic',
+  },
+  {
+    propertyName: 'status',
+    value: 'control',
+  },
+  {
+    propertyName: 'size',
+    value: 'small',
+  },
+  {
+    propertyName: 'size',
+    value: 'medium',
+  },
+  {
+    propertyName: 'size',
+    value: 'large',
+  },
 ];
