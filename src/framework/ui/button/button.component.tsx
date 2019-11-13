@@ -46,26 +46,26 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @extends React.Component
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `filled`, `outline` or `ghost`.
+ * Default is `filled`.
  *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `primary`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
  * Default is `medium`.
+ *
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * Default is `false`.
  *
  * @property {string} children - Determines text of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
- *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `filled` | `outline` | `ghost`.
- * Default is `filled`.
  *
  * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
  *

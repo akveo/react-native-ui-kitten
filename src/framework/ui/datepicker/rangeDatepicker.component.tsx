@@ -25,7 +25,7 @@ export type RangeDatepickerElement<D> = React.ReactElement<RangeDatepickerProps<
  * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `small`, `medium`, `large`.
+ * Can be `small`, `medium` or `large`.
  * Default is `medium`.
  *
  * @property {D} min - Minimal date that is able to be selected.

@@ -81,7 +81,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `small`, `medium`, `large`.
+ * Can be `small`, `medium` or `large`.
  * Default is `medium`.
  *
  * @property {string} label - Determines label of the component.

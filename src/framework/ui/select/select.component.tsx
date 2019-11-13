@@ -97,10 +97,11 @@ interface State {
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning` or `danger` or `control`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `small`, `medium`, `large`.
+ * Can be `small`, `medium` or `large`.
  * Default is `medium`.
  *
  * @property {boolean} multiSelect - Determines `multi-select` behavior of the Select component.

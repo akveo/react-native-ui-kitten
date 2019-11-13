@@ -54,13 +54,13 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @extends React.Component
  *
- * @property {string} status - Determines the status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger`.
- * Default is `basic`.
- *
  * @property {string} appearance - Determines the appearance of the component.
  * Can be `filled` or `outline`.
  * Default is `outline`.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger`.
+ * Default is `basic`.
  *
  * @property {React.ReactNode} children - Determines text of the component.
  *

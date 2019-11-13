@@ -45,7 +45,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @property {number} selectedIndex - Determines index of the selected tab.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be `default` | `noIndicator`.
+ * Can be `default` or `noIndicator`.
  *
  * @property {React.ReactElement<TabProps> | React.ReactElement<TabProps>[]} children -
  * Determines tabs of the Bottom Navigation.
