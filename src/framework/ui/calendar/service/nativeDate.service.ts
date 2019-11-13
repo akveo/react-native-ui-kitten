@@ -140,7 +140,7 @@ export class NativeDateService extends DateService<Date> {
   }
 
   public createDate(year: number, month: number, date: number): Date {
-    const result = new Date(Date.UTC(year, month, date));
+    const result = new Date(year, month, date);
 
     // We need to correct for the fact that JS native Date treats years in range [0, 99] as
     // abbreviations for 19xx.
