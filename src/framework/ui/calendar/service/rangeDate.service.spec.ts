@@ -20,11 +20,11 @@ describe('@range service checks', () => {
 
   it('* getRange (only start date)', () => {
     const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(Date.UTC(2019, 8, 12)),
+      startDate: new Date(2019, 8, 12),
       endDate: null,
     };
     const date: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 12)),
+      date: new Date(2019, 8, 12),
       bounding: false,
       holiday: false,
     };
@@ -35,16 +35,16 @@ describe('@range service checks', () => {
 
   it('* getRange (full range)', () => {
     const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(Date.UTC(2019, 8, 12)),
-      endDate: new Date(Date.UTC(2019, 8, 24)),
+      startDate: new Date(2019, 8, 12),
+      endDate: new Date(2019, 8, 24),
     };
     const date1: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 12)),
+      date: new Date(2019, 8, 12),
       bounding: false,
       holiday: false,
     };
     const date2: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 24)),
+      date: new Date(2019, 8, 24),
       bounding: false,
       holiday: false,
     };
@@ -56,21 +56,21 @@ describe('@range service checks', () => {
 
   it('* getRange (re-select with only start date)', () => {
     const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(Date.UTC(2019, 8, 19)),
+      startDate: new Date(2019, 8, 19),
       endDate: null,
     };
     const date1: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 12)),
+      date: new Date(2019, 8, 12),
       bounding: false,
       holiday: false,
     };
     const date2: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 24)),
+      date: new Date(2019, 8, 24),
       bounding: false,
       holiday: false,
     };
     const date3: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 19)),
+      date: new Date(2019, 8, 19),
       bounding: false,
       holiday: false,
     };
@@ -83,26 +83,26 @@ describe('@range service checks', () => {
 
   it('* getRange (re-select with full range)', () => {
     const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(Date.UTC(2019, 8, 10)),
-      endDate: new Date(Date.UTC(2019, 8, 13)),
+      startDate: new Date(2019, 8, 10),
+      endDate: new Date(2019, 8, 13),
     };
     const date1: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 12)),
+      date: new Date(2019, 8, 12),
       bounding: false,
       holiday: false,
     };
     const date2: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 24)),
+      date: new Date(2019, 8, 24),
       bounding: false,
       holiday: false,
     };
     const date3: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 10)),
+      date: new Date(2019, 8, 10),
       bounding: false,
       holiday: false,
     };
     const date4: CalendarDateInfo<Date> = {
-      date: new Date(Date.UTC(2019, 8, 13)),
+      date: new Date(2019, 8, 13),
       bounding: false,
       holiday: false,
     };
