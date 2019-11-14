@@ -64,7 +64,7 @@ class TestApplication extends React.Component<TestAppProps, State> {
 describe('@calendar: component checks', () => {
 
   it('* date changes', () => {
-    const expectedDate: Date = new Date(Date.UTC(2019, CURRENT_MONTH, 5));
+    const expectedDate: Date = new Date(2019, CURRENT_MONTH, 5);
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('5')[1]);
@@ -113,7 +113,7 @@ describe('@calendar: component checks', () => {
   it('* day view appear/month select', () => {
     const month: number = 1 - 1;
     const expectedViewModeId: string = 'DATE';
-    const expectedVisibleDate: Date = new Date(Date.UTC(2018, month, 1));
+    const expectedVisibleDate: Date = new Date(2018, month, 1);
     const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
     const application: RenderAPI = render(
       <TestApplication
