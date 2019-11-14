@@ -353,11 +353,11 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private renderIconElement = (style: ImageStyle): IconElement => {
-    if (this.props.icon) {
-      return this.props.icon(style, this.state.visible);
-    } else {
-      return this.renderDefaultIconElement(style);
-    }
+    const iconElement = this.props.icon(style, this.state.visible);
+
+    return React.cloneElement(iconElement, {
+      style: [style, styles.icon, iconElement.props.style],
+    });
   };
 
   private renderTextElement = (valueStyle: TextStyle, placeholderStyle: TextStyle): TextElement => {
@@ -392,8 +392,10 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private renderControlChildren = (style: StyleType): React.ReactNodeArray => {
+    const iconElement: IconElement = this.props.icon && this.renderIconElement(style.icon);
+
     return [
-      this.renderIconElement(style.icon),
+      iconElement || this.renderDefaultIconElement(style.icon),
       this.renderTextElement(style.text, style.placeholder),
     ];
   };

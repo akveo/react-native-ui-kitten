@@ -113,7 +113,11 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   };
 
   private renderIconElement = (style: StyleType): IconElement => {
-    return this.props.icon(style);
+    const iconElement: IconElement = this.props.icon(style);
+
+    return React.cloneElement(iconElement, {
+      style: [style, iconElement.props.style],
+    });
   };
 
   public render(): React.ReactNode {

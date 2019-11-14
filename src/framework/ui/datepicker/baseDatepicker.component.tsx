@@ -126,11 +126,15 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     }
   };
 
-  private renderIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-    return this.props.icon && this.props.icon(style);
+  private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
+    const iconElement: React.ReactElement<ImageProps> = this.props.icon(style);
+
+    return React.cloneElement(iconElement, {
+      style: [style, iconElement.props.style],
+    });
   };
 
-  private renderText = (style: StyleType): TextElement => {
+  private renderTextElement = (style: StyleType): TextElement => {
     return (
       <Text style={style}>
         {this.getComponentTitle()}
@@ -138,20 +142,31 @@ export abstract class BaseDatepickerComponent<D, P> extends React.Component<Date
     );
   };
 
+  private renderControlChildren = (style: StyleType): React.ReactNodeArray => {
+    const { icon } = this.props;
+
+    return [
+      this.renderTextElement(style.text),
+      icon && this.renderIconElement(style.icon),
+    ];
+  };
+
   private renderControl = (): React.ReactElement<TouchableOpacityProps> => {
     const { themedStyle, disabled, style } = this.props;
-    const { container, icon, text } = this.getComponentStyles(themedStyle);
+    const componentStyle: StyleType = this.getComponentStyles(themedStyle);
+
+    const [textElement, iconElement] = this.renderControlChildren(componentStyle);
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
         disabled={disabled}
-        style={[container, styles.container, style]}
+        style={[componentStyle.container, styles.container, style]}
         onPress={this.toggleVisible}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {this.renderText(text)}
-        {this.renderIcon(icon)}
+        {textElement}
+        {iconElement}
       </TouchableOpacity>
     );
   };
