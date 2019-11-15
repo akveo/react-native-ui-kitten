@@ -12,16 +12,17 @@ import {
   theme,
 } from '../support/tests';
 import { Text } from '../text/text.component';
-import { CalendarProps } from '../calendar/calendar.component';
-import { DatepickerProps } from './baseDatepicker.component';
-import { RangeDatepicker } from './rangeDatepicker.component';
+import {
+  RangeDatepicker,
+  RangeDatepickerProps,
+} from './rangeDatepicker.component';
 import { CalendarRange } from '../calendar/type';
 
 interface State {
   range: CalendarRange<Date>;
 }
 
-type TestAppProps = Omit<CalendarProps<Date>, 'onSelect'> & DatepickerProps<Date>;
+type TestAppProps = Omit<RangeDatepickerProps, 'onSelect'>;
 
 class TestApplication extends React.Component<TestAppProps, State> {
 
@@ -55,7 +56,7 @@ describe('@ range datepicker component checks', () => {
 
   it('* onSelect works properly', async () => {
     const application: RenderAPI = render(
-      <TestApplication/>,
+      <TestApplication range={{}}/>,
     );
 
     fireEvent.press(application.getAllByType(TouchableOpacity)[0]);

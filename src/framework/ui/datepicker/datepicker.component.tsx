@@ -1,14 +1,17 @@
 import React from 'react';
 import { styled } from '@kitten/theme';
-import { BaseDatepickerComponent } from './baseDatepicker.component';
+import {
+  BaseDatepickerComponent,
+  BaseDatepickerProps,
+} from './baseDatepicker.component';
 import {
   CalendarElement,
   Calendar,
   CalendarProps,
 } from '../calendar/calendar.component';
 
-export type DatepickerProps<D> = CalendarProps<D>;
-export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
+export type DatepickerProps<D = Date> = BaseDatepickerProps<D> & CalendarProps<D>;
+export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>;
 
 /**
  * Styled `Datepicker` component.
@@ -30,6 +33,8 @@ export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
  *
  * @property {boolean} disabled - Determines whether component is disabled.
  * Default is `false.
+ *
+ * @property {string} placeholder - Determines placeholder of the component.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
@@ -76,23 +81,26 @@ export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
  * @example DatepickerMoment
  */
 
-export class DatepickerComponent<D> extends BaseDatepickerComponent<D, DatepickerProps<D>> {
+export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
 
   static styledComponentName: string = 'Datepicker';
+
+  // BaseDatepickerComponent
 
   protected getComponentTitle(): string {
     if (this.props.date) {
       return this.formatDateToString(this.props.date);
     } else {
-      return 'dd/mm/yyyy';
+      return this.props.placeholder;
     }
   }
 
   protected renderCalendar(): CalendarElement<D> {
     return (
+      // @ts-ignore
       <Calendar {...this.props}/>
     );
   }
 }
 
-export const Datepicker = styled(DatepickerComponent);
+export const Datepicker = styled<DatepickerProps>(DatepickerComponent);
