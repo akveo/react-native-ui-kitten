@@ -13,7 +13,6 @@ import {
   ViewStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  GestureResponderEvent,
 } from 'react-native';
 import {
   styled,
@@ -34,8 +33,8 @@ interface HeaderStyles {
   description: StyleProp<TextStyle>;
 }
 
-type HeaderProp = React.ReactElement<any> | CardHeaderElement;
-type FooterProp = React.ReactElement<any>;
+type HeaderProp = React.ReactElement | CardHeaderElement;
+type FooterProp = React.ReactElement;
 export type CardFooterElement = FooterProp;
 
 interface ComponentProps {
@@ -62,15 +61,13 @@ export type CardElement = React.ReactElement<CardProps>;
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
  *
- * @property {React.ReactNode} children - Determines text of the component.
+ * @property {ReactNode} children - Determines text of the component.
  *
- * @property {() => HeaderProp} header - Determines header of the component.
+ * @property {() => ReactElement | ReactElement<CardHeaderProps>} header - Determines header of the component.
  *
- * @property {() => FooterProp} footer - Determines footer of the component.
+ * @property {() => ReactElement} footer - Determines footer of the component.
  *
- * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
- *
- * @property {StyledComponentProps} - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CardSimpleUsage
  *

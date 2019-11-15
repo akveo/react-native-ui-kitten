@@ -21,7 +21,7 @@ import { ListItemProps } from './listItem.component';
 
 // this is basically needed to avoid generics in required props
 type ItemType = any;
-type ListItemElement = React.ReactElement<any>;
+type ListItemElement = React.ReactElement;
 type RenderItemProp = (info: ListRenderItemInfo<ItemType>, style: StyleType) => ListItemElement;
 
 interface ComponentProps {
@@ -54,12 +54,10 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  *
  * @extends React.Component
  *
- * @property {(info: ListRenderItemInfo<ItemT>, style: StyleType) => React.ReactElement<any>} renderItem - Takes an
+ * @property {(info: ListRenderItemInfo<ItemT>, style: StyleType) => ReactElement} renderItem - Takes an
  * item from data and renders it into the list.
  *
- * @property FlatListProps - Any props applied to FlatList component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {FlatListProps} ...FlatListProps - Any props applied to FlatList component.
  *
  * @overview-example ListSimpleUsage
  *

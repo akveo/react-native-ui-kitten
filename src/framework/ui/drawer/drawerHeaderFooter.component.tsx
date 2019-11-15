@@ -2,11 +2,10 @@ import React from 'react';
 import {
   ListItem,
   ListItemProps,
-  ListItemElement,
 } from '../list/listItem.component';
 
 export type DrawerHeaderFooterProps = Partial<ListItemProps>;
-export type DrawerHeaderFooterElement = ListItemElement;
+export type DrawerHeaderFooterElement = React.ReactElement<DrawerHeaderFooterProps>;
 
 /**
  * `DrawerHeaderFooter` is a support component for `Drawer`.
@@ -22,18 +21,18 @@ export type DrawerHeaderFooterElement = ListItemElement;
  *
  * @property {StyleProp<TextStyle>} descriptionStyle - Customizes description style.
  *
- * @property {React.ReactNode} children - Determines React Children of the component.
+ * @property {ReactNode} children - Determines React Children of the component.
  *
- * @property {(style: StyleType, index: number) => React.ReactElement<any>} accessory - Determines the accessory of the
+ * @property {(style: StyleType, index: number) => ReactElement} accessory - Determines the accessory of the
  * component.
  *
- * @property {(style: StyleType, index: number) => React.ReactElement<ImageProps>} icon - Determines the icon of the
+ * @property {(style: ImageStyle, index: number) => ReactElement} icon - Determines the icon of the
  * component.
  *
- * @property {(index: number, event: GestureResponderEvent) => React.ReactElement<ImageProps>} onPress - Emits when
+ * @property {(index: number, event: GestureResponderEvent) => ReactElement<ImageProps>} onPress - Emits when
  * component is pressed.
  *
- * @property ListItemProps - Any props applied to ListItem component.
+ * @property {ListItemProps} ...ListItemProps - Any props applied to ListItem component.
  *
  * @overview-example DrawerHeaderFooterSimpleUsage
  *

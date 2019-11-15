@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {
-  ImageProps,
   ImageStyle,
   StyleProp,
   StyleSheet,
@@ -24,6 +23,7 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import {
   Popover,
   PopoverElement,
@@ -31,9 +31,8 @@ import {
 } from '../popover/popover.component';
 import { ModalPresentingBased } from '../support/typings';
 
-type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
-type WrappingElement = React.ReactElement<any>;
+type WrappingElement = React.ReactElement;
 
 type PopoverContentProps = Omit<PopoverProps, 'content'>;
 
@@ -56,9 +55,9 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
  *
- * @property {React.ReactElement<any>} children - Determines the element "above" which popover will be shown.
+ * @property {ReactElement} children - Determines the element "above" which popover will be shown.
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
@@ -70,11 +69,10 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
  *
- * @property Omit<PopoverProps, 'content'> - Any props applied to Popover component, excluding `content`.
+ * @property {Omit<PopoverProps, 'content'>} ...PopoverProps - Any props applied to Popover component,
+ * excluding `content`.
  *
- * @property ModalPresentingBased - Any props applied to Modal component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ModalPresentingBased} ...ModalProps - Any props applied to Modal component.
  *
  * @overview-example TooltipSimpleUsage
  *

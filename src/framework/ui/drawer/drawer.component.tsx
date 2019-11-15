@@ -10,8 +10,8 @@ import {
 } from '../menu/menu.component';
 import { MenuItemType } from '../menu/menuItem.component';
 
-export type DrawerHeaderElement = React.ReactElement<any>;
-export type DrawerFooterElement = React.ReactElement<any>;
+export type DrawerHeaderElement = React.ReactElement;
+export type DrawerFooterElement = React.ReactElement;
 
 interface ComponentProps {
   header?: () => DrawerHeaderElement;
@@ -32,14 +32,14 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * Can be `default` or `noDivider`.
  * Default is `default`.
  *
- * @property {() => DrawerHeaderElement} header - Determines the function to render a header. Optional.
+ * @property {() => ReactElement} header - Determines the function to render a header. Optional.
  *
- * @property {() => DrawerFooterElement} footer - Determines the function to render a footer. Optional.
+ * @property {() => ReactElement} footer - Determines the function to render a footer. Optional.
  *
  * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Determines the function to handle
  * menu item press.
  *
- * @property MenuProps - Any props applied to Menu component.
+ * @property {MenuProps} ...MenuProps - Any props applied to Menu component.
  *
  * @overview-example DrawerSimpleUsage
  *

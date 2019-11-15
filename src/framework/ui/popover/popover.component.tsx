@@ -42,8 +42,8 @@ import {
 import { PopoverPlacementService } from './placement.service';
 import { ModalPresentingBased } from '../support/typings';
 
-type ContentElement = React.ReactElement<any>;
-type ChildElement = React.ReactElement<any>;
+type ContentElement = React.ReactElement;
+type ChildElement = React.ReactElement;
 
 interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
   content: ContentElement;
@@ -66,9 +66,9 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<any>} content - Determines the content of the popover.
+ * @property {ReactElement} content - Determines the content of the popover.
  *
- * @property {React.ReactElement<any>} children - Determines the element "above" which popover will be shown.
+ * @property {ReactElement} children - Determines the element "above" which popover will be shown.
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
@@ -80,11 +80,9 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
  *
- * @property ViewProps - Any props applied to View component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
- * @property ModalPresentingBased - Any props applied to Modal component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ModalPresentingBased} ...ModalProps - Any props applied to Modal component.
  *
  * @overview-example PopoverSimpleUsage
  *

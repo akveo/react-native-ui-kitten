@@ -26,7 +26,7 @@ import { SelectionStrategy } from './selection.strategy';
 interface ComponentProps {
   multiSelect?: boolean;
   strategy: SelectionStrategy<SelectOptionProp>;
-  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
+  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement;
 }
 
 interface MainItemStatus {

@@ -17,7 +17,7 @@ import {
 } from '@kitten/theme';
 import { CalendarDateInfo } from '../../type';
 
-type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
+type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
 
 interface ComponentProps<D> extends TouchableOpacityProps {
   date: CalendarDateInfo<D>;
@@ -116,7 +116,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
     };
   };
 
-  private renderContentElement = (source: ChildrenProp<D>, style: StyleType): React.ReactElement<any> => {
+  private renderContentElement = (source: ChildrenProp<D>, style: StyleType): React.ReactElement => {
     return source && source(this.props.date, {
       container: style.contentContainer,
       text: style.contentText,

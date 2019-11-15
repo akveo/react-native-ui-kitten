@@ -7,7 +7,6 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageProps,
   ImageStyle,
   StyleProp,
   StyleSheet,
@@ -25,9 +24,9 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { isValidString } from '../support/services';
 
-type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: ImageStyle) => IconElement;
 
 interface ComponentProps {
@@ -65,11 +64,9 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ * @property {(style: ImageStyle) => ReactElement} icon - Determines icon of the component.
  *
- * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
- *
- * @property {StyledComponentProps} - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ButtonSimpleUsage
  *

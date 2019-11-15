@@ -51,10 +51,10 @@ export interface BaseCalendarProps<D> extends ViewProps {
   title?: (date: D, viewMode: CalendarViewMode) => string;
   todayTitle?: (date: D) => string;
   filter?: (date: D) => boolean;
-  renderFooter?: () => React.ReactElement<any>;
-  renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
-  renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
-  renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
+  renderFooter?: () => React.ReactElement;
+  renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
+  renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
+  renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   themedStyle?: StyleType;
 }
 
@@ -512,7 +512,7 @@ export abstract class BaseCalendarComponent<D, P> extends React.Component<BaseCa
     }
   };
 
-  private renderCalendarFooter = (): React.ReactElement<any> => {
+  private renderCalendarFooter = (): React.ReactElement => {
     if (this.props.renderFooter) {
       return this.props.renderFooter();
     }

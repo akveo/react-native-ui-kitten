@@ -8,9 +8,7 @@ import React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  ImageProps,
   ImageStyle,
-  ListRenderItemInfo,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -29,6 +27,7 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { Popover } from '../popover/popover.component';
 import {
   SelectOptionsList,
@@ -51,7 +50,6 @@ import {
 } from '../support/services';
 import { Chevron } from '../support/components';
 
-type IconElement = React.ReactElement<ImageProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 type SelectChildren = [SelectOptionsListElement, TextElement, ControlElement];
@@ -74,7 +72,6 @@ interface ComponentProps {
   icon?: IconProp;
   onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
   status?: string;
-  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
   keyExtractor?: KeyExtractorType;
 }
 
@@ -93,9 +90,6 @@ interface State {
  *
  * @extends React.Component
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
- *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
@@ -103,6 +97,9 @@ interface State {
  * @property {string} size - Determines the size of the component.
  * Can be `small`, `medium` or `large`.
  * Default is `medium`.
+ *
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * Default is `false.
  *
  * @property {boolean} multiSelect - Determines `multi-select` behavior of the Select component.
  *
@@ -113,9 +110,6 @@ interface State {
  *
  * @property {(option: SelectOption, event?: GestureResponderEvent) => void} onSelect - Fires on option selection.
  * Returns selected option/options.
- *
- * @property {(item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>} renderItem - Property for
- * rendering custom select items.
  *
  * @property {StyleProp<TextStyle>} label - Determines the `label` of the component.
  *
@@ -130,15 +124,13 @@ interface State {
  *
  * @property {StyleProp<ViewStyle>} controlStyle - Determines the style of `control`.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
  * @property {KeyExtractorType} keyExtractor - Used to extract a unique key for a given item;
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example SelectSimpleUsage
  *

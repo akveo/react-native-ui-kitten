@@ -46,11 +46,9 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
  * Default is `medium`.
  *
- * @property {React.ReactElement<ButtonProps>[]} children - Determines buttons in group.
+ * @property {{ReactElement<ButtonProps> | ReactElement<ButtonProps>[]} children - Determines buttons in group.
  *
- * @property ViewProps - Any props applied to View component.
- *
- * @property StyledComponentProps - - Any props applied to `styled` component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ButtonGroupSimpleUsage
  *

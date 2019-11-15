@@ -30,13 +30,12 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * @extends React.Component
  *
  * @property {string} level - Determines background color level of component.
- * Can be `level='1'`, `level='2'`, `level='3'` or `level='4'`.
+ * Can be `'1'`, `'2'`, `'3'` or `'4'`.
+ * Default is `'1'`.
  *
- * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines the children of the component.
+ * @property {ReactElement | ReactElement[]} children - Determines the children of the component.
  *
- * @property ViewProps - Any props applied to View component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example LayoutSimpleUsage
  *

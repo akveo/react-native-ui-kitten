@@ -55,7 +55,7 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * for dispatching current state of component. This is designed to be used as style request function.
  * Calls component re-render if style for requested state differ from current.
  *
- * @param Component - Type: {React.ComponentClass}. Determines class or functional component to be styled.
+ * @param Component - Type: {ComponentType}. Determines class or functional component to be styled.
  *
  * @overview-example Declaring Styled Component
  *

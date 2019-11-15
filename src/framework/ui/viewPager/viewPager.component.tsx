@@ -21,7 +21,7 @@ import {
 } from 'react-native';
 import { I18nLayoutService } from '../support/services';
 
-type ChildElement = React.ReactElement<any>;
+type ChildElement = React.ReactElement;
 type ChildrenProp = ChildElement | ChildElement[];
 
 interface ComponentProps {
@@ -40,7 +40,7 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines children of the component.
+ * @property {ReactElement | ReactElement[]} children - Determines children of the component.
  *
  * @property {number} selectedIndex - Determines the index of selected "page".
  *
@@ -51,7 +51,7 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  *
  * @property {(index: number) => void} onSelect - Fires on "page" select with corresponding index.
  *
- * @property {ViewProps} - Any props applied to View component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ViewPagerSimpleUsage
  *

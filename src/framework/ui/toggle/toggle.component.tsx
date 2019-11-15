@@ -55,7 +55,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * Default is `false`.
  *
  * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
+ * Default is `false.
  *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
@@ -67,9 +67,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @property {(checked: boolean) => void} onChange - Fires when selection state is changed.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ToggleSimpleUsage
  *

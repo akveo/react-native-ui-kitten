@@ -31,7 +31,7 @@ const TAG_CHILD: string = 'Modal';
 const initialContentSize: Size = { width: 0, height: 0 };
 export const baseModalTestId: string = '@modal/base';
 
-type ChildElement = React.ReactElement<any>;
+type ChildElement = React.ReactElement;
 type ChildrenProp = ChildElement | ChildElement[];
 
 interface ComponentProps {
@@ -50,8 +50,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *
  * @property {boolean} visible - Determines whether component is visible. By default is false.
  *
- * @property {React.ReactElement<any> | React.ReactElement<any>[]} children -
- * Determines component's children.
+ * @property {ReactElement | ReactElement[]} children - Determines component's children.
  *
  * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
  * Default is `false`.
@@ -61,7 +60,7 @@ export type ModalElement = React.ReactElement<ModalProps>;
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
  * tapping on back-drop.
  *
- * @property {ViewProps} - Any props applied to View component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example Simple Usage
  *

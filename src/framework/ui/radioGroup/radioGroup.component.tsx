@@ -33,16 +33,13 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<RadioProps> | React.ReactElement<RadioProps>[]} children -
- * Determines radio buttons in group.
+ * @property {ReactElement<RadioProps> | ReactElement<RadioProps>[]} children - Determines radio buttons in group.
  *
  * @property {number} selectedIndex - Determines the index of selected button
  *
  * @property {(index: number) => void} onChange - Fires when selected radio is changed.
  *
- * @property ViewProps - Any props applied to View component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example RadioGroupSimpleUsage
  */

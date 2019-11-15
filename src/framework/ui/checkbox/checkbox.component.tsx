@@ -27,10 +27,11 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import { CheckMark } from '../support/components';
+import {
+  CheckMark,
+  CheckMarkElement,
+} from '../support/components';
 import { isValidString } from '../support/services';
-
-type IconElement = React.ReactElement<ViewProps>;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
@@ -65,9 +66,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @property {(checked: boolean) => void} onChange - Fires on checkbox value change.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CheckboxSimpleUsage
  *
@@ -175,19 +174,19 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
     );
   };
 
-  private renderSelectIconElement = (style: ViewStyle): IconElement => {
+  private renderSelectIconElement = (style: ViewStyle): CheckMarkElement => {
     return (
       <CheckMark style={[style, styles.icon]}/>
     );
   };
 
-  private renderIndeterminateIconElement = (style: ViewStyle): IconElement => {
+  private renderIndeterminateIconElement = (style: ViewStyle): React.ReactElement<ViewProps> => {
     return (
       <View style={[style, styles.icon]}/>
     );
   };
 
-  private renderIconElement = (style: ViewStyle): IconElement => {
+  private renderIconElement = (style: ViewStyle): React.ReactElement => {
     if (this.props.indeterminate) {
       return this.renderIndeterminateIconElement(style);
     } else {

@@ -28,7 +28,7 @@ interface ComponentProps<D> extends ViewProps {
   isItemDisabled: (item: CalendarDateInfo<D>) => boolean;
   isItemToday: (item: CalendarDateInfo<D>) => boolean;
   onSelect?: (item: CalendarDateInfo<D>) => void;
-  renderItem: (item: CalendarDateInfo<D>, style: StyleType) => React.ReactElement<any>;
+  renderItem: (item: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   shouldItemUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
   rowStyle?: StyleProp<ViewProps>;
 }
