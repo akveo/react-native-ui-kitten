@@ -1,7 +1,8 @@
 export { SelectCustomIconShowcase } from './selectCustomIcon.component';
 export { SelectDisabledOptionsShowcase } from './selectDisabledOptions.component';
+export { SelectInitialValueShowcase } from './selectInitialValue.component';
 export { SelectInlineStylingShowcase } from './selectInlineStyling.component';
-export { SelectMultiPreselectedReferenceShowcase } from './selectMultiPreselectedReference.component';
+export { SelectMultiInitialValueShowcase } from './selectMultiInitialValue.component';
 export { SelectMultiSelectShowcase } from './selectMultiSelect.component';
 export { SelectSimpleUsageShowcase } from './selectSimpleUsage.component';
 export { SelectSizeShowcase } from './selectSize.component';

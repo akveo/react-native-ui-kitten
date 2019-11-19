@@ -61,8 +61,6 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @overview-example BottomNavigationTabWithIcon
  *
- * @example BottomNavigationTabWithExternalSourceIcon
- *
  * @example BottomNavigationTabInlineStyling
  */
 export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {

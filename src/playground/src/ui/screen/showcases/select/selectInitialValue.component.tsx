@@ -11,15 +11,14 @@ const data = [
   { text: 'Option 3' },
 ];
 
-export const SelectMultiPreselectedReferenceShowcase = () => {
+export const SelectInitialValueShowcase = () => {
 
-  const [selectedOption, setSelectedOption] = React.useState(data[1]);
+  const [selectedOption, setSelectedOption] = React.useState(data[0]);
 
   return (
     <Layout style={styles.container}>
       <Select
         data={data}
-        multiSelect={true}
         selectedOption={selectedOption}
         onSelect={setSelectedOption}
       />
@@ -29,7 +28,7 @@ export const SelectMultiPreselectedReferenceShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 228,
+    minHeight: 228,
   },
 });
 

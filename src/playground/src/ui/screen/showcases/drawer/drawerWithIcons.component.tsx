@@ -39,8 +39,8 @@ export const DrawerWithIconsShowcase = () => {
   return (
     <SafeAreaView>
       <Drawer
-        data={this.drawerData}
-        onSelect={this.onRouteSelect}
+        data={drawerData}
+        onSelect={onRouteSelect}
       />
     </SafeAreaView>
   );

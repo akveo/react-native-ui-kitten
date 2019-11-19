@@ -631,21 +631,4 @@ export const structure = [
       },
     ],
   },
-  {
-    type: 'section',
-    name: 'Services',
-    children: [
-      {
-        type: 'page',
-        name: 'Modal Service',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'ModalServiceType',
-          },
-        ],
-      },
-    ],
-  },
 ];

@@ -147,7 +147,9 @@ interface State {
  *
  * @overview-example SelectDisabledOptions
  *
- * @overview-example SelectMultiPreselectedReference
+ * @example SelectInitialValue
+ *
+ * @example SelectMultiInitialValue
  *
  * @example SelectCustomIcon
  *

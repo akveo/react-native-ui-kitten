@@ -10,7 +10,7 @@ export const ViewPagerLazyLoadingShowcase = () => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const shouldLoadComponent = (index) => index === this.state.selectedIndex;
+  const shouldLoadComponent = (index) => index === selectedIndex;
 
   return (
     <ViewPager
