@@ -63,6 +63,8 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @overview-example OverflowMenuSimpleUsage
  *
+ * @overview-example OverflowMenuPlacement
+ *
  * @overview-example OverflowMenuWithIcons
  *
  * @example OverflowMenuWithDisabledItems

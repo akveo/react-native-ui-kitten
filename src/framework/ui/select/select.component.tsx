@@ -72,6 +72,7 @@ interface ComponentProps {
   icon?: IconProp;
   onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
   status?: string;
+  size?: string;
   keyExtractor?: KeyExtractorType;
 }
 
@@ -134,13 +135,17 @@ interface State {
  *
  * @overview-example SelectSimpleUsage
  *
+ * @overview-example SelectStates
+ *
  * @overview-example SelectStatus
+ *
+ * @overview-example SelectSize
  *
  * @overview-example SelectMultiSelect
  *
  * @overview-example SelectWithGroups
  *
- * @overview-example SelectMultiPreselectedInline
+ * @overview-example SelectDisabledOptions
  *
  * @overview-example SelectMultiPreselectedReference
  *

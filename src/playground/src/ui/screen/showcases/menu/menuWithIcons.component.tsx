@@ -13,42 +13,22 @@ const StarIcon = (style) => (
   <Icon {...style} name='star'/>
 );
 
-export class MenuWithIconsShowcase extends React.Component {
+const data = [
+  { title: 'Item 1', icon: StarIcon },
+  { title: 'Item 2', icon: StarIcon },
+  { title: 'Item 3', icon: StarIcon },
+  { title: 'Item 4', icon: StarIcon },
+];
 
-  state = {
-    selectedIndex: null,
-  };
+export const MenuWithIconsShowcase = () => {
 
-  data = [
-    {
-      title: 'Item 1',
-      icon: StarIcon,
-    },
-    {
-      title: 'Item 2',
-      icon: StarIcon,
-    },
-    {
-      title: 'Item 3',
-      icon: StarIcon,
-    },
-    {
-      title: 'Item 4',
-      icon: StarIcon,
-    },
-  ];
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
 
-  onSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
-
-  render() {
-    return (
-      <Menu
-        data={this.data}
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onSelect}
-      />
-    );
-  }
-}
+  return (
+    <Menu
+      data={data}
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}
+    />
+  );
+};

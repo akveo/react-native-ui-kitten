@@ -7,40 +7,28 @@ import {
 
 export const AvatarSizeShowcase = () => (
   <Layout style={styles.container}>
-    <Avatar
-      style={styles.item}
-      size='tiny'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
-    <Avatar
-      style={styles.item}
-      size='small'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
-    <Avatar
-      style={styles.item}
-      size='medium'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
-    <Avatar
-      style={styles.item}
-      size='large'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
-    <Avatar
-      style={styles.item}
-      size='giant'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
+
+    <Avatar style={styles.avatar} size='tiny' source={require('../../../../assets/brand-logo.png')}/>
+
+    <Avatar style={styles.avatar} size='small' source={require('../../../../assets/brand-logo.png')}/>
+
+    <Avatar style={styles.avatar} size='medium' source={require('../../../../assets/brand-logo.png')}/>
+
+    <Avatar style={styles.avatar} size='large' source={require('../../../../assets/brand-logo.png')}/>
+
+    <Avatar style={styles.avatar} size='giant' source={require('../../../../assets/brand-logo.png')}/>
+
   </Layout>
 );
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: 8,
   },
-  item: {
-    marginVertical: 8,
+  avatar: {
+    margin: 8,
   },
 });

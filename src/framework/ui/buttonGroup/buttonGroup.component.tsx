@@ -52,9 +52,15 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *
  * @overview-example ButtonGroupSimpleUsage
  *
+ * @overview-example ButtonGroupAppearance
+ *
  * @overview-example ButtonGroupStatus
  *
  * @overview-example ButtonGroupSize
+ *
+ * @overview-example ButtonGroupOutline
+ *
+ * @overview-example ButtonGroupWithIcons
  *
  * @example ButtonGroupInlineStyling
  */

@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Tab } from 'react-native-ui-kitten';
 
-export const TabInlineStylingShowcase = (props) => (
+export const TabInlineStylingShowcase = () => (
   <Tab
     style={styles.tab}
     titleStyle={styles.tabTitle}
-    title='DASHBOARD'
+    title='USERS'
   />
 );
 

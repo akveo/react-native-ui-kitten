@@ -103,6 +103,8 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @overview-example InputSimpleUsage
  *
+ * @overview-example InputStates
+ *
  * @overview-example InputStatus
  *
  * @overview-example InputSize

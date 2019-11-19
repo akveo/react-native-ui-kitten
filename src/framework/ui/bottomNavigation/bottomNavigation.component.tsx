@@ -72,38 +72,38 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * //
  * // cd ios && pod install
  *
- * const HomeScreen = () => (
+ * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>HOME</Text>
+ *     <Text category='h1'>USERS</Text>
  *   </Layout>
  * );
  *
- * const SettingsScreen = () => (
+ * const OrdersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>SETTINGS</Text>
+ *     <Text category='h1'>ORDERS</Text>
  *   </Layout>
  * );
  *
  * const TabBarComponent = ({ navigation }) => {
  *
  *   const onSelect = (index) => {
- *     const { [index]: selectedTabRoute } = navigation.state.routes;
+ *     const selectedTabRoute = navigation.state.routes[index];
  *     navigation.navigate(selectedTabRoute.routeName);
  *   };
  *
  *   return (
  *     <SafeAreaView>
  *       <BottomNavigation selectedIndex={navigation.state.index} onSelect={onSelect}>
- *         <BottomNavigationTab title='HOME'/>
- *         <BottomNavigationTab title='SETTINGS'/>
+ *         <BottomNavigationTab title='USERS'/>
+ *         <BottomNavigationTab title='ORDERS'/>
  *       </BottomNavigation>
  *     </SafeAreaView>
  *   );
  * };
  *
  * const TabNavigator = createBottomTabNavigator({
- *   Home: HomeScreen,
- *   Settings: SettingsScreen,
+ *   Users: UsersScreen,
+ *   Orders: OrdersScreen,
  * }, {
  *   tabBarComponent: TabBarComponent,
  * });

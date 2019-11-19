@@ -1,8 +1,10 @@
-export { SelectSimpleUsageShowcase } from './selectSimpleUsage.component';
-export { SelectMultiSelectShowcase } from './selectMultiSelect.component';
-export { SelectWithGroupsShowcase } from './selectWithGroups.component';
 export { SelectCustomIconShowcase } from './selectCustomIcon.component';
-export { SelectStatusShowcase } from './selectStatus.component';
+export { SelectDisabledOptionsShowcase } from './selectDisabledOptions.component';
 export { SelectInlineStylingShowcase } from './selectInlineStyling.component';
-export { SelectMultiPreselectedInlineShowcase } from './selectMultiPreselectedInline.component';
 export { SelectMultiPreselectedReferenceShowcase } from './selectMultiPreselectedReference.component';
+export { SelectMultiSelectShowcase } from './selectMultiSelect.component';
+export { SelectSimpleUsageShowcase } from './selectSimpleUsage.component';
+export { SelectSizeShowcase } from './selectSize.component';
+export { SelectStatesShowcase } from './selectStates.component';
+export { SelectStatusShowcase } from './selectStatus.component';
+export { SelectWithGroupsShowcase } from './selectWithGroups.component';

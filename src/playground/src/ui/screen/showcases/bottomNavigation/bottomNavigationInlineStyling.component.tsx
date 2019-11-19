@@ -5,29 +5,22 @@ import {
   BottomNavigationTab,
 } from 'react-native-ui-kitten';
 
-export class BottomNavigationInlineStylingShowcase extends React.Component {
+export const BottomNavigationInlineStylingShowcase = () => {
 
-  state = {
-    selectedIndex: 0,
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  onTabSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
-
-  render() {
-    return (
-      <BottomNavigation
-        style={styles.bottomNavigation}
-        indicatorStyle={styles.indicator}
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onTabSelect}>
-        <BottomNavigationTab title='DASHBOARD'/>
-        <BottomNavigationTab title='SETTINGS'/>
-      </BottomNavigation>
-    );
-  }
-}
+  return (
+    <BottomNavigation
+      style={styles.bottomNavigation}
+      indicatorStyle={styles.indicator}
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}>
+      <BottomNavigationTab title='USERS'/>
+      <BottomNavigationTab title='ORDERS'/>
+      <BottomNavigationTab title='TRANSACTION'/>
+    </BottomNavigation>
+  );
+};
 
 const styles = StyleSheet.create({
   bottomNavigation: { backgroundColor: 'white' },

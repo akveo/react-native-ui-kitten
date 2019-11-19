@@ -1,30 +1,22 @@
 import React from 'react';
 import { Menu } from 'react-native-ui-kitten';
 
-export class MenuSimpleUsageShowcase extends React.Component {
+const data = [
+  { title: 'Item 1' },
+  { title: 'Item 2' },
+  { title: 'Item 3' },
+  { title: 'Item 4' },
+];
 
-  state = {
-    selectedIndex: null,
-  };
+export const MenuSimpleUsageShowcase = () => {
 
-  data = [
-    { title: 'Item 1' },
-    { title: 'Item 2', disabled: true },
-    { title: 'Item 3' },
-    { title: 'Item 4' },
-  ];
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
 
-  onSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
-
-  render() {
-    return (
-      <Menu
-        data={this.data}
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onSelect}
-      />
-    );
-  }
-}
+  return (
+    <Menu
+      data={data}
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}
+    />
+  );
+};

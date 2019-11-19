@@ -9,31 +9,28 @@ import {
   Icon,
 } from 'react-native-ui-kitten';
 
-export class IconAnimationInfiniteShowcase extends React.Component {
+export const IconAnimationInfiniteShowcase = () => {
 
-  iconRef = React.createRef();
+  const iconRef = React.createRef();
 
-  onPress = () => {
+  const onPress = () => {
     this.iconRef.current.startAnimation();
   };
 
-  renderIcon = (style) => (
+  const renderIcon = (style) => (
     <Icon
       {...style}
-      ref={this.iconRef}
+      ref={iconRef}
       name='star'
-      animation='shake'
-      animationConfig={{ cycles: -1 }}
+      animationConfig={{ cycles: Infinity }}
     />
   );
 
-  render() {
-    return (
-      <Button
-        icon={this.renderIcon}
-        onPress={this.onPress}>
-        START ANIMATION
-      </Button>
-    );
-  }
-}
+  return (
+    <Button
+      icon={renderIcon}
+      onPress={onPress}>
+      START ANIMATION
+    </Button>
+  );
+};

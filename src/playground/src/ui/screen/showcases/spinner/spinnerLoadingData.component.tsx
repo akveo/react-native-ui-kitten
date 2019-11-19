@@ -9,47 +9,41 @@ import {
   Spinner,
 } from 'react-native-ui-kitten';
 
-const SAMPLE_DATA = {
+const DATA = new Array(8).fill({
   title: 'Title for Item',
-};
+});
 
-export class SpinnerDataLoadingShowcase extends React.Component {
+export const SpinnerDataLoadingShowcase = () => {
 
-  state = {
-    data: [],
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    setTimeout(loadData, 5000);
+  }, []);
+
+  const loadData = () => {
+    setData(DATA);
   };
 
-  componentDidMount() {
-    setTimeout(this.loadData, 5000);
-  }
-
-  loadData = () => {
-    const data = new Array(8).fill(SAMPLE_DATA);
-    this.setState({ data });
-  };
-
-  private renderLoading = () => (
+  const renderLoading = () => (
     <View style={styles.loading}>
       <Spinner/>
     </View>
   );
 
-  renderDataItem = ({ item, index }) => (
+  const renderDataItem = ({ item, index }) => (
     <ListItem title={`${item.title} ${index + 1}`}/>
   );
 
-  renderData = () => (
+  const renderData = () => (
     <List
-      data={this.state.data}
-      renderItem={this.renderDataItem}
+      data={data}
+      renderItem={renderDataItem}
     />
   );
 
-  render() {
-    const isLoaded: boolean = this.state.data.length > 0;
-    return isLoaded ? this.renderData() : this.renderLoading();
-  }
-}
+  return data.length > 0 ? renderData() : renderLoading();
+};
 
 const styles = StyleSheet.create({
   loading: {

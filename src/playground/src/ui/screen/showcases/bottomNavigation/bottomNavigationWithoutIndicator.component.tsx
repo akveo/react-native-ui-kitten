@@ -4,25 +4,18 @@ import {
   BottomNavigationTab,
 } from 'react-native-ui-kitten';
 
-export class BottomNavigationWithoutIndicatorShowcase extends React.Component {
+export const BottomNavigationWithoutIndicatorShowcase = () => {
 
-  state = {
-    selectedIndex: 0,
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  onTabSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
-
-  render() {
-    return (
-      <BottomNavigation
-        appearance='noIndicator'
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onTabSelect}>
-        <BottomNavigationTab title='DASHBOARD'/>
-        <BottomNavigationTab title='SETTINGS'/>
-      </BottomNavigation>
-    );
-  }
-}
+  return (
+    <BottomNavigation
+      appearance='noIndicator'
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}>
+      <BottomNavigationTab title='USERS'/>
+      <BottomNavigationTab title='ORDERS'/>
+      <BottomNavigationTab title='TRANSACTIONS'/>
+    </BottomNavigation>
+  );
+};

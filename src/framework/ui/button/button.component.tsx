@@ -70,6 +70,8 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @overview-example ButtonSimpleUsage
  *
+ * @overview-example ButtonStates
+ *
  * @overview-example ButtonAppearances
  *
  * @overview-example ButtonStatus

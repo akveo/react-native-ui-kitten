@@ -71,17 +71,12 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @overview-example CardSimpleUsage
  *
- * @overview-example CardStatuses
- *
- * @overview-example CardEvaHeader
+ * @overview-example CardWithHeaderAndFooter
  *
  * @overview-example CardCustomHeader
  *
- * @overview-example CardFooter
- *
- * @overview-example CardHeaderFooter
+ * @overview-example CardStatuses
  */
-
 class CardComponent extends React.Component<CardProps> {
 
   static styledComponentName: string = 'Card';

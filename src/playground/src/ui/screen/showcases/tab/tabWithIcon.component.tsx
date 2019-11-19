@@ -9,10 +9,13 @@ import {
   Tab,
 } from 'react-native-ui-kitten';
 
-const DashboardIcon = (style) => (
-  <Icon {...style} name='layout'/>
+const PersonIcon = (style) => (
+  <Icon {...style} name='person-outline'/>
 );
 
-export const TabWithIconShowcase = (props) => (
-  <Tab title='DASHBOARD' icon={DashboardIcon}/>
+export const TabWithIconShowcase = () => (
+  <Tab
+    title='USERS'
+    icon={PersonIcon}
+  />
 );

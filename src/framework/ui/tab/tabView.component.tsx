@@ -66,6 +66,8 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *
  * @overview-example TabViewSimpleUsage
  *
+ * @overview-example TabViewWithIcon
+ *
  * @overview-example TabViewLazyLoading
  *
  * @example TabViewInlineStyling

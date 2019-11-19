@@ -49,6 +49,8 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * @overview-example TabBarSimpleUsage
  *
+ * @overview-example TabBarWithIcon
+ *
  * @overview-example Using with React Navigation
  *
  * ```
@@ -65,38 +67,38 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * //
  * // cd ios && pod install
  *
- * const HomeScreen = () => (
+ * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>HOME</Text>
+ *     <Text category='h1'>USERS</Text>
  *   </Layout>
  * );
  *
- * const SettingsScreen = () => (
+ * const OrdersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>SETTINGS</Text>
+ *     <Text category='h1'>ORDERS</Text>
  *   </Layout>
  * );
  *
  * const TabBarComponent = ({ navigation }) => {
  *
  *   const onSelect = (index) => {
- *     const { [index]: selectedTabRoute } = navigation.state.routes;
+ *     const selectedTabRoute = navigation.state.routes[index];
  *     navigation.navigate(selectedTabRoute.routeName);
  *   };
  *
  *   return (
  *     <SafeAreaView>
  *       <TabBar selectedIndex={navigation.state.index} onSelect={onSelect}>
- *         <Tab title='HOME'/>
- *         <Tab title='SETTINGS'/>
+ *         <Tab title='USERS'/>
+ *         <Tab title='ORDERS'/>
  *       </TabBar>
  *     </SafeAreaView>
  *   );
  * };
  *
  * const TabNavigator = createMaterialTopTabNavigator({
- *   Home: HomeScreen,
- *   Settings: SettingsScreen,
+ *   Users: UsersScreen,
+ *   Orders: OrdersScreen,
  * }, {
  *   tabBarComponent: TabBarComponent,
  * });

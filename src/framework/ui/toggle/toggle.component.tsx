@@ -71,11 +71,9 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @overview-example ToggleSimpleUsage
  *
+ * @overview-example ToggleStates
+ *
  * @overview-example ToggleStatus
- *
- * @overview-example ToggleSize
- *
- * @overview-example ToggleWithText
  *
  * @example ToggleInlineStyling
  */

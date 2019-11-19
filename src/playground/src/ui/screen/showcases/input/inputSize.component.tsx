@@ -5,62 +5,51 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export class InputSizeShowcase extends React.Component {
-
-  state = {
-    smallValue: '',
-    mediumValue: '',
-    largeValue: '',
+const useInputChanges = (initialValue = '') => {
+  const [value, setValue] = React.useState(initialValue);
+  return {
+    value,
+    onChangeText: setValue,
   };
+};
 
-  onSmallTextChange = (smallValue) => {
-    this.setState({ smallValue });
-  };
+export const InputSizeShowcase = () => {
 
-  onMediumTextChange = (mediumValue) => {
-    this.setState({ mediumValue });
-  };
+  const smallInputChanges = useInputChanges();
+  const mediumInputChanges = useInputChanges();
+  const largeInputChanges = useInputChanges();
 
-  onLargeTextChange = (largeValue) => {
-    this.setState({ largeValue });
-  };
+  return (
+    <Layout>
 
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Input
-          style={styles.input}
-          size='small'
-          placeholder='Small'
-          value={this.state.smallValue}
-          onChangeText={this.onSmallTextChange}
-        />
-        <Input
-          style={styles.input}
-          size='medium'
-          placeholder='Medium'
-          value={this.state.mediumValue}
-          onChangeText={this.onMediumTextChange}
-        />
-        <Input
-          style={styles.input}
-          size='large'
-          placeholder='Large'
-          value={this.state.largeValue}
-          onChangeText={this.onLargeTextChange}
-        />
-      </Layout>
-    );
-  }
-}
+      <Input
+        style={styles.input}
+        size='small'
+        placeholder='Small'
+        {...smallInputChanges}
+      />
+
+      <Input
+        style={styles.input}
+        size='medium'
+        placeholder='Medium'
+        {...mediumInputChanges}
+      />
+
+      <Input
+        style={styles.input}
+        size='large'
+        placeholder='Large'
+        {...largeInputChanges}
+      />
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-  },
   input: {
-    marginVertical: 4,
+    margin: 8,
   },
 });
 

@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import {
   Calendar,
-  Layout,
   NativeDateService,
 } from 'react-native-ui-kitten';
 
@@ -17,34 +15,17 @@ const i18n = {
   },
 };
 
-export class CalendarCustomLocaleShowcase extends React.Component {
+const dateService = new NativeDateService('zh', { i18n });
 
-  state = {
-    date: new Date(),
-  };
+export const CalendarCustomLocaleShowcase = () => {
 
-  dateService = new NativeDateService('zh', { i18n });
+  const [date, setDate] = React.useState(null);
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Calendar
-          date={this.state.date}
-          dateService={this.dateService}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    minHeight: 376,
-  },
-});
+  return (
+    <Calendar
+      dateService={dateService}
+      date={date}
+      onSelect={setDate}
+    />
+  );
+};

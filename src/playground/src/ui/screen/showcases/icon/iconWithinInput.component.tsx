@@ -9,39 +9,30 @@ import {
   Input,
 } from 'react-native-ui-kitten';
 
-export class IconWithinInputShowcase extends React.Component {
+export const IconWithinInputShowcase = () => {
 
-  state = {
-    value: '',
-    secureTextEntry: true,
+  const [value, setValue] = React.useState('');
+  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+
+  const onIconPress = () => {
+    setSecureTextEntry(!secureTextEntry);
   };
 
-  onChangeText = (value) => {
-    this.setState({ value });
-  };
-
-  onIconPress = () => {
-    const secureTextEntry = !this.state.secureTextEntry;
-    this.setState({ secureTextEntry });
-  };
-
-  renderIcon = (style) => (
+  const renderIcon = (style) => (
     <Icon
       {...style}
-      name={!this.state.secureTextEntry ? 'eye' : 'eye-off'}
+      name={!secureTextEntry ? 'eye' : 'eye-off'}
     />
   );
 
-  render() {
-    return (
-      <Input
-        placeholder='Password'
-        value={this.state.value}
-        secureTextEntry={this.state.secureTextEntry}
-        onChangeText={this.onChangeText}
-        icon={this.renderIcon}
-        onIconPress={this.onIconPress}
-      />
-    );
-  }
-}
+  return (
+    <Input
+      placeholder='Password'
+      value={value}
+      secureTextEntry={secureTextEntry}
+      onChangeText={setValue}
+      icon={renderIcon}
+      onIconPress={onIconPress}
+    />
+  );
+};

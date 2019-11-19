@@ -15,14 +15,12 @@ import {
   ListItem,
 } from 'react-native-ui-kitten';
 
-const SAMPLE_DATA = {
+const data = new Array(8).fill({
   title: 'Title for Item',
   description: 'Description for Item',
-};
+});
 
 export const ListCompositeItemShowcase = () => {
-
-  const data = new Array(8).fill(SAMPLE_DATA);
 
   const renderItemAccessory = (style) => (
     <Button style={style}>FOLLOW</Button>
@@ -43,15 +41,8 @@ export const ListCompositeItemShowcase = () => {
 
   return (
     <List
-      style={styles.list}
       data={data}
       renderItem={renderItem}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  list: {
-    height: 150,
-  },
-});

@@ -9,31 +9,26 @@ import {
   Icon,
 } from 'react-native-ui-kitten';
 
-export class IconWithinButtonShowcase extends React.Component {
+export const IconWithinButtonShowcase = () => {
 
-  state = {
-    liked: false,
+  const [liked, setLiked] = React.useState(false);
+
+  const onPress = () => {
+    setLiked(!liked);
   };
 
-  onPress = () => {
-    const liked = !this.state.liked;
-    this.setState({ liked });
-  };
-
-  renderIcon = (style) => (
+  const renderIcon = (style) => (
     <Icon
-      name={this.state.liked ? 'heart' : 'heart-outline'}
       {...style}
+      name={liked ? 'heart' : 'heart-outline'}
     />
   );
 
-  render() {
-    return (
-      <Button
-        icon={this.renderIcon}
-        onPress={this.onPress}>
-        LIKE
-      </Button>
-    );
-  }
-}
+  return (
+    <Button
+      icon={renderIcon}
+      onPress={onPress}>
+      LIKE
+    </Button>
+  );
+};

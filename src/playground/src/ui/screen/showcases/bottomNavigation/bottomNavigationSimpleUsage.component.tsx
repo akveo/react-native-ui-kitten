@@ -4,24 +4,17 @@ import {
   BottomNavigationTab,
 } from 'react-native-ui-kitten';
 
-export class BottomNavigationSimpleUsageShowcase extends React.Component {
+export const BottomNavigationSimpleUsageShowcase = () => {
 
-  state = {
-    selectedIndex: 0,
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  onTabSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
-
-  render() {
-    return (
-      <BottomNavigation
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onTabSelect}>
-        <BottomNavigationTab title='DASHBOARD'/>
-        <BottomNavigationTab title='SETTINGS'/>
-      </BottomNavigation>
-    );
-  }
-}
+  return (
+    <BottomNavigation
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}>
+      <BottomNavigationTab title='USERS'/>
+      <BottomNavigationTab title='ORDERS'/>
+      <BottomNavigationTab title='TRANSACTIONS'/>
+    </BottomNavigation>
+  );
+};

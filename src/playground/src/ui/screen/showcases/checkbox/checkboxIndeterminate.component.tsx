@@ -5,119 +5,76 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export class CheckboxIndeterminateShowcase extends React.Component {
+export const CheckboxIndeterminateShowcase = () => {
 
-  state = {
-    mainCheckboxChecked: false,
-    mainCheckboxIndeterminate: false,
-    checkbox1Checked: false,
-    checkbox2Checked: false,
-    checkbox3Checked: false,
+  const [allChecked, setAllChecked] = React.useState(false);
+  const [indeterminate, setIndeterminate] = React.useState(false);
+  const [readChecked, setReadChecked] = React.useState(false);
+  const [writeChecked, setWriteChecked] = React.useState(false);
+
+  const onGroupCheckedChange = (checked) => {
+    setReadChecked(checked);
+    setWriteChecked(checked);
+    setAllChecked(checked);
   };
 
-  onMainCheckboxChange = (checked) => {
-    if (checked) {
-      this.setState({
-        checkbox1Checked: true,
-        checkbox2Checked: true,
-        checkbox3Checked: true,
-      });
-    } else {
-      this.setState({
-        checkbox1Checked: false,
-        checkbox2Checked: false,
-        checkbox3Checked: false,
-      });
-    }
-    this.setState({ mainCheckboxChecked: checked });
+  const onReadCheckedChange = (checked) => {
+    setReadChecked(checked);
+    updateGroup(checked, writeChecked);
   };
 
-  onCheckbox1Change = (checked) => {
-    this.setState({ checkbox1Checked: checked }, this.setMainCheckboxDependingState);
+  const onWriteCheckedChange = (checked) => {
+    setWriteChecked(checked);
+    updateGroup(checked, readChecked);
   };
 
-  onCheckbox2Change = (checked) => {
-    this.setState({ checkbox2Checked: checked }, this.setMainCheckboxDependingState);
-  };
-
-  onCheckbox3Change = (checked) => {
-    this.setState({ checkbox3Checked: checked }, this.setMainCheckboxDependingState);
-  };
-
-  setMainCheckboxDependingState = () => {
-    const { checkbox1Checked, checkbox2Checked, checkbox3Checked } = this.state;
-    const states = [checkbox1Checked, checkbox2Checked, checkbox3Checked];
+  const updateGroup = (...states) => {
     const someChecked = states.some((item) => item === true);
     const everyChecked = states.every((item) => item === true);
 
     if (someChecked && !everyChecked) {
-      this.setState({
-        mainCheckboxChecked: true,
-        mainCheckboxIndeterminate: true,
-      });
+      setAllChecked(true);
+      setIndeterminate(true);
     } else if (!someChecked && !everyChecked) {
-      this.setState({
-        mainCheckboxChecked: false,
-        mainCheckboxIndeterminate: false,
-      });
+      setAllChecked(false);
+      setIndeterminate(false);
     } else if (everyChecked) {
-      this.setState({
-        mainCheckboxChecked: true,
-        mainCheckboxIndeterminate: false,
-      });
+      setAllChecked(true);
+      setIndeterminate(false);
     }
   };
 
-  render() {
-    const {
-      mainCheckboxChecked,
-      mainCheckboxIndeterminate,
-      checkbox1Checked,
-      checkbox2Checked,
-      checkbox3Checked,
-    } = this.state;
-
-    return (
-      <Layout style={styles.container}>
-        <CheckBox
-          style={styles.checkbox}
-          text='Main'
-          checked={mainCheckboxChecked}
-          indeterminate={mainCheckboxIndeterminate}
-          onChange={this.onMainCheckboxChange}
-        />
-        <CheckBox
-          text='Checkbox 1'
-          style={[styles.checkbox, styles.leftSpace]}
-          checked={checkbox1Checked}
-          onChange={this.onCheckbox1Change}
-        />
-        <CheckBox
-          text='Checkbox 2'
-          style={[styles.checkbox, styles.leftSpace]}
-          checked={checkbox2Checked}
-          onChange={this.onCheckbox2Change}
-        />
-        <CheckBox
-          text='Checkbox 3'
-          style={[styles.checkbox, styles.leftSpace]}
-          checked={checkbox3Checked}
-          onChange={this.onCheckbox3Change}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout>
+      <CheckBox
+        style={styles.group}
+        text='Permissions'
+        checked={allChecked}
+        indeterminate={indeterminate}
+        onChange={onGroupCheckedChange}
+      />
+      <CheckBox
+        text='Read'
+        style={styles.option}
+        checked={readChecked}
+        onChange={onReadCheckedChange}
+      />
+      <CheckBox
+        text='Write'
+        style={styles.option}
+        checked={writeChecked}
+        onChange={onWriteCheckedChange}
+      />
+    </Layout>
+  );
+};
 
 export const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-  },
-  checkbox: {
+  group: {
     marginVertical: 4,
   },
-  leftSpace: {
-    marginHorizontal: 4,
+  option: {
+    marginVertical: 4,
+    marginHorizontal: 12,
   },
 });

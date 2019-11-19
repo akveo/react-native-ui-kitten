@@ -74,6 +74,10 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @overview-example DatepickerFilter
  *
+ * @overview-example DatepickerStatus
+ *
+ * @overview-example DatepickerSize
+ *
  * @example DatepickerCustomDay
  *
  * @example DatepickerCustomLocale
