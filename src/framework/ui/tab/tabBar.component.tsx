@@ -45,9 +45,9 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * @property {React.ReactElement<TabProps>} children - Determines tabs.
  *
- * @property ViewProps
+ * @property ViewProps - Any props applied to View component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example TabBarSimpleUsage
  *

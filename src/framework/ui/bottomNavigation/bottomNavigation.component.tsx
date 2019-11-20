@@ -54,7 +54,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * @property {(index: number) => void} onSelect - Triggered on select value.
  *
- * @property ViewProps
+ * @property {ViewProps} - Any props applied to View component.
  *
  * @property StyledComponentProps
  *

@@ -56,7 +56,7 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @property {(selected: boolean) => void} onSelect - Triggered on select value.
  *
- * @property TouchableOpacityProps
+ * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
  *
  * @property StyledComponentProps
  *

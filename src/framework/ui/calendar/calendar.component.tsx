@@ -11,13 +11,13 @@ import { CalendarDateInfo } from './type';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
 import { DateBatch } from './service/calendarData.service';
 
-export interface ComponentProps<D> {
+interface ComponentProps<D = Date> {
   date?: D;
   onSelect: (date: D) => void;
 }
 
-export type CalendarProps<D> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
-export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
+export type CalendarProps<D = Date> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
+export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
 
 /**
  * Styled `Calendar` component.
@@ -54,6 +54,8 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
  *
+ * @property ViewProps - - Any props applied to View component.
+ *
  * @overview-example CalendarSimpleUsage
  *
  * @overview-example CalendarBoundingMonth
@@ -70,7 +72,7 @@ export type CalendarElement<D> = React.ReactElement<CalendarProps<D>>;
  *
  * @example CalendarCustomDay
  */
-export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps<D>> {
+export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarProps<D>, D> {
 
   static styledComponentName: string = 'Calendar';
 
@@ -116,4 +118,4 @@ export class CalendarComponent<D> extends BaseCalendarComponent<D, CalendarProps
   }
 }
 
-export const Calendar = styled(CalendarComponent);
+export const Calendar = styled<CalendarProps>(CalendarComponent);

@@ -135,13 +135,13 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should get year end', () => {
-    const date: Date = new Date(Date.UTC(2018, 5, 15));
-    expect(dateService.getYearEnd(date)).toEqual(new Date(Date.UTC(2018, 11, 31)));
+    const date: Date = new Date(2018, 5, 15);
+    expect(dateService.getYearEnd(date)).toEqual(new Date(2018, 11, 31));
   });
 
   it('* should get year start', () => {
-    const date: Date = new Date(Date.UTC(2018, 5, 15));
-    expect(dateService.getYearStart(date)).toEqual(new Date(Date.UTC(2018, 0, 1)));
+    const date: Date = new Date(2018, 5, 15);
+    expect(dateService.getYearStart(date)).toEqual(new Date(2018, 0, 1));
   });
 
   it('* should get number of days in month', () => {
@@ -154,43 +154,43 @@ describe('@native-date: service checks', () => {
   });
 
   it('* should add day', () => {
-    const newDate = dateService.addDay(new Date(Date.UTC(2018, 6, 16)), 1);
-    expect(newDate.getTime()).toBe(new Date(Date.UTC(2018, 6, 17)).getTime());
+    const newDate = dateService.addDay(new Date(2018, 6, 16), 1);
+    expect(newDate.getTime()).toBe(new Date(2018, 6, 17).getTime());
   });
 
   it('* should add day in the end of the year', () => {
     const newDate = dateService.addDay(new Date(2018, 11, 31), 1);
-    expect(newDate.getTime()).toBe(new Date(Date.UTC(2019, 0, 1)).getTime());
+    expect(newDate.getTime()).toBe(new Date(2019, 0, 1).getTime());
   });
 
   it('* should add day in the leap year', () => {
     const newDate = dateService.addDay(new Date(2016, 1, 29), 1);
-    expect(newDate.getTime()).toBe(new Date(Date.UTC(2016, 2, 1)).getTime());
+    expect(newDate.getTime()).toBe(new Date(2016, 2, 1).getTime());
   });
 
   it('* should add month', () => {
     const newDate = dateService.addMonth(new Date(2018, 6, 16), 1);
-    expect(newDate.getTime()).toBe(new Date(Date.UTC(2018, 7, 16)).getTime());
+    expect(newDate.getTime()).toBe(new Date(2018, 7, 16).getTime());
   });
 
   it('* should add month in the end of the year', () => {
     const newDate = dateService.addMonth(new Date(2018, 11, 16), 1);
-    expect(newDate.getTime()).toBe(new Date(Date.UTC(2019, 0, 16)).getTime());
+    expect(newDate.getTime()).toBe(new Date(2019, 0, 16).getTime());
   });
 
   it('* should add month if number of days will be less than current date', () => {
     const newDate = dateService.addMonth(new Date(2018, 11, 31), -1);
-    expect(newDate.getTime()).toBe(new Date(Date.UTC(2018, 10, 30)).getTime());
+    expect(newDate.getTime()).toBe(new Date(2018, 10, 30).getTime());
   });
 
   it('* should add year', () => {
     const newDate = dateService.addYear(new Date(2018, 11, 16), 1);
-    expect(newDate.getTime()).toBe(new Date(Date.UTC(2019, 11, 16)).getTime());
+    expect(newDate.getTime()).toBe(new Date(2019, 11, 16).getTime());
   });
 
   it('* should create date', () => {
     const date = dateService.createDate(2018, 6, 16);
-    expect(date).toEqual(new Date(Date.UTC(2018, 6, 16)));
+    expect(date).toEqual(new Date(2018, 6, 16));
   });
 
   it('* should create date for two digit year', () => {
@@ -207,7 +207,7 @@ describe('@native-date: service checks', () => {
 
   it('* should get month start', () => {
     const date = dateService.getMonthStart(new Date(2018, 6, 16));
-    expect(date.getTime()).toBe(new Date(Date.UTC(2018, 6, 1)).getTime());
+    expect(date.getTime()).toBe(new Date(2018, 6, 1).getTime());
   });
 
   it('* should compare years correctly', () => {
