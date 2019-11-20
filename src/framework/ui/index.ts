@@ -30,6 +30,17 @@ export {
   CalendarProps,
 } from './calendar/calendar.component';
 export {
+  Card,
+  CardProps,
+  CardElement,
+  CardFooterElement,
+} from './card/card.component';
+export {
+  CardHeader,
+  CardHeaderProps,
+  CardHeaderElement,
+} from './card/cardHeader.component';
+export {
   RangeCalendar,
   RangeCalendarProps,
   RangeCalendarElement,
@@ -46,13 +57,14 @@ export {
 } from './checkbox/checkbox.component';
 export {
   Datepicker,
-  DatepickerComponent,
+  DatepickerProps,
+  DatepickerElement,
 } from './datepicker/datepicker.component';
 export {
   RangeDatepicker,
-  RangeDatepickerComponent,
+  RangeDatepickerProps,
+  RangeDatepickerElement,
 } from './datepicker/rangeDatepicker.component';
-export { DatepickerProps } from './datepicker/baseDatepicker.component';
 export {
   Drawer,
   DrawerProps,

@@ -91,7 +91,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
  *
- * @property {string} placeholder - Determines placegolder of the component.
+ * @property {string} placeholder - Determines placeholder of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
@@ -99,9 +99,9 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} captionIcon - Determines caption icon.
  *
- * @property TextInputProps
+ * @property TextInputProps - Any props applied to TextInput component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example InputSimpleUsage
  *

@@ -70,11 +70,11 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
  *
- * @property ViewProps
+ * @property Omit<PopoverProps, 'content'> - Any props applied to Popover component, excluding `content`.
  *
- * @property ModalPresentingBased
+ * @property ModalPresentingBased - Any props applied to Modal component.
  *
- * @property StyledComponentProps
+ * @property StyledComponentProps - Any props applied to `styled` component.
  *
  * @overview-example TooltipSimpleUsage
  *

@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import {
   Datepicker,
+  DatepickerElement,
   DatepickerProps,
 } from 'react-native-ui-kitten';
 
@@ -9,7 +9,7 @@ interface State {
   date: Date;
 }
 
-export class DatepickerShowcase extends React.Component<DatepickerProps<Date>, State> {
+export class DatepickerShowcase extends React.Component<{}, State> {
 
   public state: State = {
     date: null,
@@ -19,20 +19,13 @@ export class DatepickerShowcase extends React.Component<DatepickerProps<Date>, S
     this.setState({ date });
   };
 
-  public render(): React.ReactNode {
+  public render(): DatepickerElement {
     return (
       <Datepicker
         {...this.props}
-        style={styles.datepicker}
         date={this.state.date}
         onSelect={this.setDate}
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  datepicker: {
-    marginBottom: 20,
-  },
-});

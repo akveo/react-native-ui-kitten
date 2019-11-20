@@ -15,13 +15,13 @@ import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.
 import { DateBatch } from './service/calendarData.service';
 import { RangeDateService } from './service/rangeDate.service';
 
-export interface ComponentProps<D> {
+interface ComponentProps<D = Date> {
   range: CalendarRange<D>;
   onSelect: (range: CalendarRange<D>) => void;
 }
 
-export type RangeCalendarProps<D> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
-export type RangeCalendarElement<D> = React.ReactElement<RangeCalendarProps<D>>;
+export type RangeCalendarProps<D = Date> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
+export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarProps<D>>;
 
 /**
  * Styled `RangeCalendar` component.
@@ -58,9 +58,11 @@ export type RangeCalendarElement<D> = React.ReactElement<RangeCalendarProps<D>>;
  *
  * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
  *
+ * @property ViewProps - Any props applied to View component.
+ *
  * @overview-example RangeCalendarSimpleUsage
  */
-export class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCalendarProps<D>> {
+export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<RangeCalendarProps<D>, D> {
 
   static styledComponentName: string = 'Calendar';
 
@@ -117,4 +119,4 @@ export class RangeCalendarComponent<D> extends BaseCalendarComponent<D, RangeCal
   }
 }
 
-export const RangeCalendar = styled(RangeCalendarComponent);
+export const RangeCalendar = styled<RangeCalendarProps>(RangeCalendarComponent);

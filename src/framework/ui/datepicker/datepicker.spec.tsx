@@ -15,14 +15,13 @@ import { ApplicationProvider, StyleType } from '@kitten/theme';
 import {
   Datepicker,
   DatepickerComponent,
+  DatepickerProps,
 } from './datepicker.component';
 import {
   mapping,
   theme,
 } from '../support/tests';
 import { Text } from '../text/text.component';
-import { CalendarProps } from '../calendar/calendar.component';
-import { DatepickerProps } from './baseDatepicker.component';
 
 interface State {
   date: Date;
@@ -36,7 +35,7 @@ interface AdditionalProps {
   onLongPress?: (event: GestureResponderEvent) => void;
 }
 
-type TestAppProps = Omit<CalendarProps<Date>, 'onSelect'> & AdditionalProps & DatepickerProps<Date>;
+type TestAppProps = Omit<DatepickerProps, 'onSelect'> & AdditionalProps;
 
 class TestApplication extends React.Component<TestAppProps, State> {
 
