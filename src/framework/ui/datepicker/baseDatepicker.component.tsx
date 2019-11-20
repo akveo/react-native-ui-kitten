@@ -1,12 +1,12 @@
 import React from 'react';
 import {
+  Dimensions,
+  GestureResponderEvent,
+  ImageProps,
   ImageStyle,
+  StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
-  ImageProps,
-  StyleSheet,
-  GestureResponderEvent,
-  Dimensions,
 } from 'react-native';
 import {
   Interaction,
@@ -34,20 +34,20 @@ interface State {
 
 export interface ComponentProps {
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
+  placeholder?: string;
 }
 
-export type DatepickerProps<D> =
-  ComponentProps
+export type BaseDatepickerProps<D = Date> =
   & StyledComponentProps
   & TouchableOpacityProps
-  & BaseCalendarProps<D>;
+  & BaseCalendarProps<D>
+  & ComponentProps;
 
-export type DatepickerElement<D> = React.ReactElement<DatepickerProps<D>>;
+export abstract class BaseDatepickerComponent<P, D = Date> extends React.Component<BaseDatepickerProps<D> & P, State> {
 
-export abstract class BaseDatepickerComponent<D, P> extends React.Component<DatepickerProps<D> & P, State> {
-
-  static defaultProps = {
+  static defaultProps: Partial<BaseDatepickerProps> = {
     dateService: new NativeDateService(),
+    placeholder: 'dd/mm/yyyy',
   };
 
   public state: State = {

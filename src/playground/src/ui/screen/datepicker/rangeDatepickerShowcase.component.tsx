@@ -2,15 +2,15 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
   RangeDatepicker,
-  DatepickerProps,
   CalendarRange,
+  RangeDatepickerElement,
 } from 'react-native-ui-kitten';
 
 interface State {
   range: CalendarRange<Date>;
 }
 
-export class RangeDatepickerShowcase extends React.Component<DatepickerProps<Date>, State> {
+export class RangeDatepickerShowcase extends React.Component<{}, State> {
 
   public state: State = {
     range: {
@@ -23,7 +23,7 @@ export class RangeDatepickerShowcase extends React.Component<DatepickerProps<Dat
     this.setState({ range });
   };
 
-  public render(): React.ReactNode {
+  public render(): RangeDatepickerElement {
     return (
       <RangeDatepicker
         {...this.props}
