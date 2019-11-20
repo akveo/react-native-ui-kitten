@@ -72,4 +72,4 @@ const App = () => (
 export default App;
 ```
 
-That's it. UI Kitten is ready now. Next, you might be interested in [configuring Icon packages](guides/icon-packages).
+That's it. UI Kitten is ready now. Next, you might be interested in [branding](guides/branding) the application with Eva Design System.

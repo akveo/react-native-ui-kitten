@@ -274,3 +274,5 @@ That's it. Here is a result that you might have
 
 In this guide, you learned how to use UI Kitten Icon component. Since Eva Icons relies on svg icons, consider reading <a href="https://github.com/react-native-community/react-native-svg#react-native-svg" target="_blank">react-native-svg documentation</a> to become more familiar with it. Also, if you your icon pack of choice relies on vector icons, read <a href="https://github.com/oblador/react-native-vector-icons#table-of-contents" target="_blank">react-native-vector-icons docs</a>.
 
+Next, when UI part is configured, let's move to the [next guide](guides/configure-navigation) to configure navigation.
+

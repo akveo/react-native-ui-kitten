@@ -44,6 +44,28 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Branding',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/branding.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Icon Packages',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/icon-packages.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Configure Navigation',
         children: [
           {
@@ -61,17 +83,6 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'guides/runtime-theming.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Icon Packages',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/icon-packages.md',
           },
         ],
       },
