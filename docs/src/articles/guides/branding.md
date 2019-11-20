@@ -1,14 +1,14 @@
 # Branding
 
-While UI Kitten supports 2 built-in themes provided by Eva Design System, you still able to create your own, based on needs of your brand. In this guide we will learn how to create custom theme, apply custom fonts and more.
+While UI Kitten supports 2 built-in themes provided by Eva Design System, you still able to create your own, based on the needs of your brand. In this guide, we will learn how to create a custom theme, apply custom fonts and more.
 
 <hr>
 
 ## Theming
 
-Eva Design System provides a powerful and easy to use deep learning tool for generating colors and . Navigate to <a href="https://colors.eva.design" target="_blank">colors.eva.design</a> to generate a UI Kitten theme.
+Eva Design System provides a powerful and easy to use deep learning tool for generating colors. Navigate to <a href="https://colors.eva.design" target="_blank">colors.eva.design</a> to generate a UI Kitten theme.
 
-Start with picking primary color of the application.
+Start with picking the primary color of the application.
 
 ![image](assets/images/articles/guides/branding-pick-color.gif)
 
@@ -44,7 +44,7 @@ const App = () => (
 export default App;
 ```
 
-With the code above we use Eva Light theme as a base theme and override its semantic colors with custom theme.
+With the code above we use Eva Light theme as a base theme and override its semantic colors with a custom theme.
 You can use Eva Dark theme as a base if you need darker backgrounds.
 
 Reload the app to review the changes!
@@ -53,7 +53,7 @@ Reload the app to review the changes!
 
 ## Fonts
 
-If your app is based on custom fonts, start with copying `.ttf` file and pasting it into `assets` directory. 
+If your app is based on custom fonts, start with copying `.ttf` file and paste it into `assets` directory. 
 Now, by following React Native CLI 
 <a href="https://github.com/react-native-community/cli/blob/master/docs/projects.md#project" target="blank">project guides</a>
 create a `react-native.config.js` file and paste the following code:
