@@ -196,6 +196,12 @@ export class Modal extends React.Component<ModalProps> {
     }
   }
 
+  public componentWillUnmount(): void {
+    if (this.props.visible) {
+      this.handleVisibility({ visible: false });
+    }
+  }
+
   private handleVisibility = (props: ModalProps): void => {
     const { allowBackdrop, onBackdropPress } = this.props;
 
