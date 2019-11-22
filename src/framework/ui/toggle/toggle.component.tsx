@@ -30,7 +30,7 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import { CheckMark } from '../support/components';
+import { CheckMark } from '../support/components/checkmark.component';
 import { I18nLayoutService } from '../support/services';
 
 interface ComponentProps {
@@ -239,7 +239,9 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       icon: {
         width: source.iconWidth,
         height: source.iconHeight,
-        backgroundColor: iconTintColor,
+        fill: iconTintColor,
+        stroke: iconTintColor,
+        strokeWidth: 3,
       },
     };
   };
@@ -326,7 +328,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
           <Animated.View style={[componentStyle.ellipseContainer, styles.ellipseContainer]}>
             <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
             <Animated.View style={[componentStyle.thumb, styles.thumb]}>
-              <CheckMark style={componentStyle.icon} isAnimated={true}/>
+              <CheckMark {...componentStyle.icon} />
             </Animated.View>
           </Animated.View>
         </TouchableOpacity>

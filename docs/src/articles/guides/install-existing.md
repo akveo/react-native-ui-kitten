@@ -7,7 +7,7 @@ If you already have an existing code base, you're able to give UI Kitten a try a
 ## Install UI Kitten and Eva Design System
 
 ```bash
-npm i react-native-ui-kitten @eva-design/eva
+npm i react-native-ui-kitten @eva-design/eva react-native-svg
 ```
 
 <hr>

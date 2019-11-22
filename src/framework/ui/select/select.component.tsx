@@ -48,7 +48,11 @@ import {
   allWithPrefix,
   isValidString,
 } from '../support/services';
-import { Chevron } from '../support/components';
+import {
+  ChevronDown,
+  ChevronDownElement,
+  ChevronDownProps,
+} from '../support/components/chevronDown.component';
 
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
@@ -338,23 +342,23 @@ class SelectComponent extends React.Component<SelectProps, State> {
     );
   };
 
-  private renderDefaultIconElement = (style: ImageStyle): IconElement => {
+  private renderDefaultIconElement = (style: ImageStyle): ChevronDownElement => {
     const rotateInterpolate = this.iconAnimation.interpolate({
       inputRange: [-180, 0],
       outputRange: ['-180deg', '0deg'],
     });
 
     const animatedStyle: StyleType = { transform: [{ rotate: rotateInterpolate }] };
+    const { tintColor, ...svgStyle } = style;
 
     return (
-      <Chevron
-        style={[style, animatedStyle]}
-        isAnimated={true}
-      />
+      <Animated.View style={animatedStyle}>
+        <ChevronDown fill={tintColor} {...svgStyle as ChevronDownProps}/>
+      </Animated.View>
     );
   };
 
-  private renderIconElement = (style: ImageStyle): IconElement => {
+  private renderIconElement = (style: ImageStyle): React.ReactElement => {
     if (this.props.icon) {
       return this.props.icon(style, this.state.visible);
     } else {

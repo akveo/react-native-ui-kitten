@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { SvgProps } from 'react-native-svg';
 import {
   GestureResponderEvent,
   Insets,
@@ -14,7 +15,6 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   View,
-  ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
@@ -29,8 +29,14 @@ import {
 } from '../text/text.component';
 import {
   CheckMark,
+  CheckMarkProps,
   CheckMarkElement,
-} from '../support/components';
+} from '../support/components/checkmark.component';
+import {
+  Minus,
+  MinusElement,
+  MinusProps,
+} from '../support/components/minus.component';
 import { isValidString } from '../support/services';
 
 interface ComponentProps {
@@ -44,6 +50,8 @@ interface ComponentProps {
 
 export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
+
+type IconElement = CheckMarkElement | MinusElement;
 
 /**
  * Styled `CheckBox` component.
@@ -140,8 +148,9 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       icon: {
         width: iconWidth,
         height: iconHeight,
-        borderRadius: iconBorderRadius,
-        backgroundColor: iconTintColor,
+        fill: iconTintColor,
+        stroke: iconTintColor,
+        strokeWidth: 3,
       },
       highlight: {
         width: outlineWidth,
@@ -174,24 +183,11 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
     );
   };
 
-  private renderSelectIconElement = (style: ViewStyle): CheckMarkElement => {
+  private renderIconElement = (style: SvgProps): IconElement => {
+    const Icon: React.ComponentType<MinusProps | CheckMarkProps> = this.props.indeterminate ? Minus : CheckMark;
     return (
-      <CheckMark style={[style, styles.icon]}/>
+      <Icon {...style} />
     );
-  };
-
-  private renderIndeterminateIconElement = (style: ViewStyle): React.ReactElement<ViewProps> => {
-    return (
-      <View style={[style, styles.icon]}/>
-    );
-  };
-
-  private renderIconElement = (style: ViewStyle): React.ReactElement => {
-    if (this.props.indeterminate) {
-      return this.renderIndeterminateIconElement(style);
-    } else {
-      return this.renderSelectIconElement(style);
-    }
   };
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {

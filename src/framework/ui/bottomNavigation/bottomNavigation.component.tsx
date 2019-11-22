@@ -21,7 +21,7 @@ import { BottomNavigationTabElement } from './bottomNavigationTab.component';
 import {
   TabIndicator,
   TabIndicatorElement,
-} from '../support/components';
+} from '../support/components/tabIndicator.component';
 
 type ChildrenProp = BottomNavigationTabElement | BottomNavigationTabElement[];
 

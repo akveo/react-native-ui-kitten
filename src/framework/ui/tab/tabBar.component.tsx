@@ -18,7 +18,7 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { TabElement } from './tab.component';
-import { TabIndicator } from '../support/components';
+import { TabIndicator } from '../support/components/tabIndicator.component';
 
 type ChildrenProp = TabElement | TabElement[];
 
