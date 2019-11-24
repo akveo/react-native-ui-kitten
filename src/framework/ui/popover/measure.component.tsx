@@ -4,7 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React, {
+  useRef,
+} from 'react';
 import {
   findNodeHandle,
   UIManager,
@@ -54,7 +56,7 @@ export interface MeasureNodeProps {
  */
 export const MeasureElement = (props: MeasureElementProps): MeasuringElement => {
 
-  const ref: React.RefObject<any> = React.createRef();
+  const ref: React.RefObject<any> = useRef();
 
   const { children, onResult } = props;
 
