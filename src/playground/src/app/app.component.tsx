@@ -7,20 +7,21 @@ import {
   IconPack,
   IconRegistry,
 } from 'react-native-ui-kitten';
-import { Router } from './navigation';
+import { ApplicationLoader } from './applicationLoader.component';
+import { Router } from '../navigation';
 import {
   AntDesignIconsPack,
   FeatherIconsPack,
   FontAwesomeIconsPack,
   MaterialCommunityIconsPack,
   MaterialIconsPack,
-} from './icons';
+} from '../icons';
 import {
   ThemeContext,
   ThemeContextType,
   ThemeKey,
   themes,
-} from './themes';
+} from '../themes';
 
 interface State {
   theme: ThemeKey;
@@ -35,6 +36,12 @@ const icons: IconPack<any>[] = [
   MaterialCommunityIconsPack,
 ];
 
+const fonts = {
+  'regular': require('../assets/fonts/opensans-regular.ttf'),
+  'semibold': require('../assets/fonts/opensans-semibold.ttf'),
+  'bold': require('../assets/fonts/opensans-bold.ttf'),
+};
+
 export default class App extends React.Component<{}, State> {
 
   public state: State = {
@@ -47,6 +54,8 @@ export default class App extends React.Component<{}, State> {
     return {
       mapping: evaMapping,
       theme: currentTheme,
+      // @ts-ignore
+      customMapping: { strict: { 'text-font-family': 'regular' } },
     };
   }
 
@@ -63,14 +72,14 @@ export default class App extends React.Component<{}, State> {
 
   public render(): React.ReactFragment {
     return (
-      <React.Fragment>
+      <ApplicationLoader assets={{ fonts }} splash={require('../assets/images/splash.png')}>
         <IconRegistry icons={icons}/>
         <ApplicationProvider {...this.appConfig}>
           <ThemeContext.Provider value={this.themeContext}>
             <Router/>
           </ThemeContext.Provider>
         </ApplicationProvider>
-      </React.Fragment>
+      </ApplicationLoader>
     );
   }
 }

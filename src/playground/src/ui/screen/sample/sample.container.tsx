@@ -9,7 +9,7 @@ import { ImageSourcePropType } from 'react-native';
 
 export class SampleContainer extends React.Component {
 
-  private profileImage: ImageSourcePropType = require('../../../assets/brand-logo.png');
+  private profileImage: ImageSourcePropType = require('../../../assets/images/brand-logo.png');
 
   private isDarkTheme = (context: ThemeContextType): boolean => {
     return context.name === 'Eva Dark';
