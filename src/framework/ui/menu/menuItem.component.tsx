@@ -136,7 +136,11 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
   };
 
   private renderIcon = (style: StyleType): IconElement => {
-    return this.props.icon(style);
+    const iconElement: IconElement = this.props.icon(style);
+
+    return React.cloneElement(iconElement, {
+      style: [style, iconElement.props.style],
+    });
   };
 
   private renderTitle = (style: StyleType): TextElement => {

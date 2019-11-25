@@ -127,7 +127,11 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   private renderIconElement = (style: StyleType): React.ReactElement<ImageProps> => {
-    return this.props.icon(style);
+    const iconElement: React.ReactElement<ImageProps> = this.props.icon(style);
+
+    return React.cloneElement(iconElement, {
+      style: [style, iconElement.props.style],
+    });
   };
 
   private renderTextElement = (style: StyleType): TextElement => {
