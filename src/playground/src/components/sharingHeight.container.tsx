@@ -14,11 +14,10 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 import {
+  AppTheme,
   ThemeContext,
   ThemeContextType,
-  ThemeKey,
-  themes,
-} from '../../src/themes';
+} from '@pg/themes/themeContext';
 import { ColorPaletteIcon } from '@pg/icons';
 
 interface Props {
@@ -26,6 +25,8 @@ interface Props {
 }
 
 export type SharingHeightContainerProps = LayoutProps & Props;
+
+const themes: AppTheme[] = [AppTheme.light, AppTheme.dark];
 
 export const sharingHeightContainer = (Component: React.ComponentType,
                                        showcaseId: string): React.ReactElement<SharingHeightContainerProps> => {
@@ -38,9 +39,7 @@ export const sharingHeightContainer = (Component: React.ComponentType,
   };
 
   const onThemeSelect = (index: number): void => {
-    const { [index]: selectedTheme } = Object.keys(themes);
-
-    themeContext.toggleTheme(selectedTheme as ThemeKey);
+    themeContext.setTheme(themes[index]);
     setMenuVisible(false);
   };
 
@@ -55,17 +54,12 @@ export const sharingHeightContainer = (Component: React.ComponentType,
       id: showcaseId,
       height: nativeEvent.layout.height,
     };
+
     window.parent.postMessage(layoutChangeMessage, '*');
   };
 
-  const createThemeMenuItem = (theme: ThemeKey): OverflowMenuItemType => {
-    return {
-      title: theme,
-    };
-  };
-
-  const createThemesMenuItems = (): OverflowMenuItemType[] => {
-    return Object.keys(themes).map(createThemeMenuItem);
+  const createThemeMenuItem = (title: string): OverflowMenuItemType => {
+    return { title };
   };
 
   return (
@@ -81,7 +75,7 @@ export const sharingHeightContainer = (Component: React.ComponentType,
         <OverflowMenu
           visible={menuVisible}
           onSelect={onThemeSelect}
-          data={createThemesMenuItems()}
+          data={themes.map(createThemeMenuItem)}
           onBackdropPress={onThemesButtonPress}>
           <Button
             appearance='ghost'
@@ -89,7 +83,7 @@ export const sharingHeightContainer = (Component: React.ComponentType,
             size='small'
             icon={ColorPaletteIcon}
             onPress={onThemesButtonPress}>
-            {themeContext.name}
+            {themeContext.theme}
           </Button>
         </OverflowMenu>
       </View>

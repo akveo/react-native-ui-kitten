@@ -6,12 +6,9 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export const AvatarSimpleUsageShowcase = (props: AvatarProps) => (
+export const AvatarSimpleUsageShowcase = () => (
   <Layout style={styles.container}>
-    <Avatar
-      {...props}
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
+    <Avatar source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }} />
   </Layout>
 );
 

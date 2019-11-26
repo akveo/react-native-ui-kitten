@@ -13,7 +13,7 @@ const SAMPLE_DATA = {
   title: 'Title for Item',
 };
 
-export class SpinnerDataLoadingShowcase extends React.Component {
+export class SpinnerLoadingDataShowcase extends React.Component {
 
   state = {
     data: [],

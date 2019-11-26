@@ -1,19 +1,16 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import {
-  src,
-  task,
-  dest,
-} from 'gulp';
+import * as rimraf from 'rimraf';
+import * as gulp from 'gulp';
 import {
   createDocThemes,
   DocThemes,
 } from './create-doc-themes';
+import { createDocAppNavigation } from './create-doc-app-navigation';
 
 const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;
 const glob = require('glob');
-import { generateDocsNavigation } from './navigation';
 
 interface ExampleCode {
   name: string;
@@ -21,33 +18,30 @@ interface ExampleCode {
   path: string;
 }
 
+const CURRENT_DIR: string = path.resolve(__dirname);
+const DOCS_DIR: string = path.resolve(CURRENT_DIR, '../../../../docs');
+const PLAYGROUND_DIR: string = path.resolve(CURRENT_DIR, '../../../../src/playground');
+
+const SHOWCASE_DIR: string = path.resolve(PLAYGROUND_DIR, 'src/components/showcases');
 const SHOWCASE_KEY_WORD: string = 'Showcase';
 
-task('generate-doc-json', generateDocJson);
-task('process-type-doc', ['generate-doc-json'], processTypeDoc);
-task('docs', ['generate-doc-json', 'process-type-doc']);
+gulp.task('create-docs-json', createDocsJson);
+gulp.task('create-docs-input-json', ['create-docs-json'], createDocsInputJson);
+gulp.task('create-doc-app-navigation', createDocAppNavigationFile);
+gulp.task('create-playground-json', ['create-doc-app-navigation'], createPlaygroundJson);
+gulp.task('build-playground', buildPlayground);
+gulp.task('copy-playground-to-docs', ['build-playground'], copyPlaygroundBuildToDocs);
+gulp.task('clean-up', ['copy-playground-to-docs'], cleanUp);
 
-task('get-examples-code', getExamplesCode);
-
-task('build-live-examples-app', buildLiveExamplesApplication);
-
-task('copy-live-examples-app', ['build-live-examples-app'], copyLiveExamplesAppToDocsAppAssets);
-
-task('revert-navigation', ['copy-live-examples-app'], revertNavigationChanges);
-
-task('docs', [
-  'generate-doc-json',
-  'process-type-doc',
-  'get-examples-code',
-  'build-live-examples-app',
-  'copy-live-examples-app',
-  'revert-navigation',
+gulp.task('docs', [
+  'create-docs-input-json',
+  'create-playground-json',
+  'copy-playground-to-docs',
+  'clean-up',
 ]);
 
-task('generate-navigation', generateDocsNavigation);
-
-function generateDocJson() {
-  return src(['src/framework/**/*.tsx', '!src/framework/**/*.spec.tsx'])
+function createDocsJson(): void {
+  return gulp.src(['src/framework/**/*.tsx', '!src/framework/**/*.spec.tsx'])
     .pipe(typedoc({
       allowSyntheticDefaultImports: true,
       esModuleInterop: true,
@@ -67,7 +61,7 @@ function generateDocJson() {
     }));
 }
 
-function processTypeDoc(): void {
+function createDocsInputJson(): void {
   const outputFilePath: string = path.resolve(process.cwd(), 'docs/src/input.json');
   exec(`prsr -g typedoc -f react -i ./docs/docs.json -o ${outputFilePath}`);
 
@@ -79,35 +73,38 @@ function processTypeDoc(): void {
   return fs.writeFileSync(outputFilePath, output);
 }
 
-function getExamplesCode() {
-  glob('src/playground/src/ui/screen/showcases/**/*.tsx', (error, filePaths) => {
+function createPlaygroundJson() {
+  glob('src/playground/src/components/showcases/**/*.tsx', (error, filePaths) => {
     if (!error) {
       const examples: ExampleCode[] = filePaths.map((pathItem: string) => {
         const code: string = fs.readFileSync(pathItem, 'utf8');
-        const name: string = code
-          .split(' ')
+        const name: string = code.split(' ')
           .filter((item: string) => item.includes(SHOWCASE_KEY_WORD))[0]
           .replace(SHOWCASE_KEY_WORD, '');
 
         return { code, path: pathItem, name };
       });
 
-      fs.writeFileSync('./docs/src/examples.json', JSON.stringify(examples, null, 2));
+      fs.writeFileSync(`${DOCS_DIR}/src/playground.json`, JSON.stringify(examples, null, 2));
     }
   });
 }
 
-function buildLiveExamplesApplication() {
-  return exec('npm run docs:examples:build');
+function buildPlayground(): void {
+  return exec('npm run docs:build:playground');
 }
 
-function copyLiveExamplesAppToDocsAppAssets() {
-  return src(['src/playground/web-build/**/*'])
-    .pipe(dest('docs/src/assets/examples-build'));
+function copyPlaygroundBuildToDocs() {
+  return gulp.src(['src/playground/web-build/**/*'])
+    .pipe(gulp.dest('docs/src/assets/playground-build'));
 }
 
-function revertNavigationChanges() {
-  exec('git checkout @ -- src/playground/src/navigation/navigation.component.tsx');
-  exec('git checkout @ -- src/playground/src/ui/screen/index.ts');
-  fs.unlink('src/playground/src/ui/screen/showcases/index.ts', () => {});
+function createDocAppNavigationFile(): void {
+  const navigationOutput: string = createDocAppNavigation(SHOWCASE_DIR);
+  return fs.writeFileSync(path.resolve(PLAYGROUND_DIR, 'src/navigation/app.navigator.web.tsx'), navigationOutput);
+}
+
+function cleanUp(): void {
+  rimraf.sync(path.resolve(PLAYGROUND_DIR, 'src/navigation/app.navigator.web.tsx'));
+  rimraf.sync(path.resolve(PLAYGROUND_DIR, 'web-build'));
 }
