@@ -1,6 +1,16 @@
 const path = require('path');
 const Config = require('../../config');
 
+const appAliases = {
+  '@pg/assets': './src/assets',
+  '@pg/components': './src/components',
+  '@pg/icons': './src/icons',
+  '@pg/model': './src/model',
+  '@pg/navigation': './src/navigation',
+  '@pg/scenes': './src/scenes',
+  '@pg/themes': './src/themes',
+};
+
 /**
  * UI Kitten modules aliases.
  * Allows importing framework modules into playground
@@ -26,6 +36,7 @@ const evaAliases = {
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
+    ...appAliases,
     ...evaAliases,
     ...moduleAliases,
   },

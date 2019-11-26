@@ -11,8 +11,6 @@ import {
   LayoutProps,
   OverflowMenu,
   OverflowMenuItemType,
-  IconElement,
-  Icon,
   Text,
 } from 'react-native-ui-kitten';
 import {
@@ -21,16 +19,13 @@ import {
   ThemeKey,
   themes,
 } from '../../src/themes';
+import { ColorPaletteIcon } from '@pg/icons';
 
 interface Props {
   showcaseId: string;
 }
 
 export type SharingHeightContainerProps = LayoutProps & Props;
-
-const ColorPaletteIcon = (style): IconElement => (
-  <Icon {...style} name='color-palette' />
-);
 
 export const sharingHeightContainer = (Component: React.ComponentType,
                                        showcaseId: string): React.ReactElement<SharingHeightContainerProps> => {

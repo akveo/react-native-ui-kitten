@@ -23,7 +23,7 @@
     },
     "assetBundlePatterns": [
       "src/assets/images/*",
-      "src/assets/fonts"
+      "src/assets/fonts/*"
     ],
     "ios": {
       "supportsTablet": true

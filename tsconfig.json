@@ -13,14 +13,20 @@
       "./node_modules/@types"
     ],
     "paths": {
-      "@kitten/*": [
-        "./src/framework/*"
+      "react-native-ui-kitten": [
+        "./src/framework"
       ],
       "@ui-kitten/*": [
         "./src/*"
       ],
-      "react-native-ui-kitten": [
-        "./src/framework"
+      "@kitten/*": [
+        "./src/framework/*"
+      ],
+      "@pg/*": [
+        "./src/playground/src/*"
+      ],
+      "@eva-design/*": [
+        "../eva/packages/*"
       ]
     }
   }
