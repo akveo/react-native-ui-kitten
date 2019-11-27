@@ -12,8 +12,6 @@ npm-debug.log
 # docs
 docs/docs.json
 docs/src/input.json
-docs/src/assets/playground-build
-docs/src/playground.json
 
 # env
 src/playground/env/index.js
