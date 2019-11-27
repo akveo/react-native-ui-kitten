@@ -37,7 +37,7 @@ export type CardHeaderElement = React.ReactElement<CardHeaderProps>;
  *
  * @property {StyleProp<ViewStyle>} headerStyle - Determines style of the header container element.
  *
- * @property {ViewProps} - Any props applied to View component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  */
 
 export class CardHeader extends React.Component<CardHeaderProps> {

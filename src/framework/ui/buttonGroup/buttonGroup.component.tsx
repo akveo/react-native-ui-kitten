@@ -49,7 +49,7 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *
  * @property ViewProps - Any props applied to View component.
  *
- * @property StyledComponentProps - - Any props applied to `styled` component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ButtonGroupSimpleUsage
  *

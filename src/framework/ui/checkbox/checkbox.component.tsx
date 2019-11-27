@@ -65,9 +65,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @property {(checked: boolean) => void} onChange - Fires on checkbox value change.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CheckboxSimpleUsage
  *

@@ -40,9 +40,7 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * @property {(index: number) => void} onChange - Fires when selected radio is changed.
  *
- * @property ViewProps - Any props applied to View component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example RadioGroupSimpleUsage
  */

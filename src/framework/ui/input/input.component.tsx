@@ -99,9 +99,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} captionIcon - Determines caption icon.
  *
- * @property TextInputProps - Any props applied to TextInput component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TextInputProps} ...TextInputProps - Any props applied to TextInput component.
  *
  * @overview-example InputSimpleUsage
  *

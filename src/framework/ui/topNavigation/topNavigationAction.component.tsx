@@ -41,9 +41,7 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the tab.
  *
- * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
- *
- * @property {StyledComponentProps} - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example TopNavigationActionSimpleUsage
  *

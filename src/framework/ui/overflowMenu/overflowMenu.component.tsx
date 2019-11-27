@@ -55,13 +55,12 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Fires when selected item is changed.
  *
- * @property Omit<PopoverProps, 'content'> - Any props applied to Popover component, excluding `content`.
+ * @property {Omit<PopoverProps, 'content'>} ...PopoverProps - Any props applied to Popover component,
+ * excluding `content`.
  *
- * @property Override<MenuProps, { data: OverflowMenuItemType[] }> - Any props applied to Menu component.
+ * @property {Override<MenuProps, { data: OverflowMenuItemType[] }>} ...MenuProps - Any props applied to Menu component.
  *
- * @property ModalPresentingBased - Any props applied to Modal component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ModalPresentingBased} ...ModalProps - Any props applied to Modal component.
  *
  * @overview-example OverflowMenuSimpleUsage
  *

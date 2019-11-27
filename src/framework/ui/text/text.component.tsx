@@ -43,9 +43,7 @@ export type TextElement = React.ReactElement<TextProps>;
  * Can be `default`, `alternative`, `hint`.
  * Default is `default`.
  *
- * @property TextProps - Any props applied to Text component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TextProps} ...TextProps - Any props applied to Text component.
  *
  * @overview-example TextSimpleUsage
  *

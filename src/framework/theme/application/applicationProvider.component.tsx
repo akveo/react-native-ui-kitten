@@ -49,8 +49,6 @@ interface State {
  *
  * @property {React.ReactNode} children - Determines application root component.
  *
- * @property ThemeProviderProps
- *
  * @overview-example Simple Usage
  *
  * ```

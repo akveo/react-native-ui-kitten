@@ -54,9 +54,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * @property {(index: number, event?: GestureResponderEvent) => void} onSelect - Fires when
  * selected item is changed.
  *
- * @property Omit<ListProps, 'renderItem'> - Any props applied to List component, excluding `renderItem`.
- *
- * @property StyledComponentProps
+ * @property {Omit<ListProps, 'renderItem'>} ...ListProps - Any props applied to List component, excluding `renderItem`.
  *
  * @overview-example MenuSimpleUsage
  *

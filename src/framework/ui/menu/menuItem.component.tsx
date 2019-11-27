@@ -64,11 +64,8 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {(index: number, event: GestureResponderEvent) => void} onPress - Emits when component is pressed.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
- * */
-
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ */
 class MenuItemComponent extends React.Component<MenuItemProps> {
 
   static styledComponentName: string = 'MenuItem';

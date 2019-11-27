@@ -53,9 +53,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
  *
- * @property TouchableOpacityProps
- *
- * @property StyledComponentProps
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example DatepickerSimpleUsage
  *

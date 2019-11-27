@@ -131,9 +131,7 @@ interface State {
  *
  * @property {KeyExtractorType} keyExtractor - Used to extract a unique key for a given item;
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example SelectSimpleUsage
  *

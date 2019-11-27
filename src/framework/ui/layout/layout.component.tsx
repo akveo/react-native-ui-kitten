@@ -34,9 +34,7 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  *
  * @property {React.ReactElement<any> | React.ReactElement<any>[]} children - Determines the children of the component.
  *
- * @property ViewProps - Any props applied to View component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example LayoutSimpleUsage
  *
