@@ -3,7 +3,6 @@ import {
   ListRenderItemInfo,
   StyleSheet,
 } from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
 import {
   Divider,
   Input,
@@ -53,7 +52,7 @@ export const routes: string[] = [
   'TopNavigation',
 ];
 
-export const ComponentsScreen = ({ navigation }: NavigationScreenProps): React.ReactElement => {
+export const ComponentsScreen = ({ navigation }): React.ReactElement => {
 
   const [displayComponents, setDisplayComponents] = React.useState<string[]>(routes);
 

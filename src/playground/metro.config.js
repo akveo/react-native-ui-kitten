@@ -1,12 +1,12 @@
 const path = require('path');
-const Config = require('../../config');
+const env = require('./env');
 
 /**
  * Resolves Eva modules Haste Map
  */
 const evaFolders = [
-  path.resolve(Config.MAPPING_PATH),
-  path.resolve(Config.PROCESSOR_PATH),
+  path.resolve(env.MAPPING_PATH),
+  path.resolve(env.PROCESSOR_PATH),
 ];
 
 /**
@@ -25,7 +25,6 @@ const moduleFolders = [
  * Resolves Root Dependencies Haste Map
  */
 const rootDependencyFolders = [
-  path.resolve(__dirname, '../../node_modules/@babel'),
   path.resolve(__dirname, '../../node_modules/hoist-non-react-statics'),
   path.resolve(__dirname, '../../node_modules/react-is'),
   path.resolve(__dirname, '../../node_modules/lodash.merge'),
@@ -34,7 +33,6 @@ const rootDependencyFolders = [
   path.resolve(__dirname, '../../node_modules/fecha'),
   path.resolve(__dirname, '../../node_modules/moment'),
   path.resolve(__dirname, '../../node_modules/date-fns'),
-  path.resolve(__dirname, '../../node_modules/@welldone-software/why-did-you-render'),
 ];
 
 /**
@@ -42,9 +40,10 @@ const rootDependencyFolders = [
  */
 const playgroundExtraModules = {
   '@babel/runtime': path.resolve(__dirname, './node_modules/@babel/runtime'),
-  'regenerator-runtime': path.resolve(__dirname, './node_modules/regenerator-runtime'),
   'react': path.resolve(__dirname, './node_modules/react'),
   'react-native': path.resolve(__dirname, './node_modules/react-native'),
+  'css-tree': path.resolve(__dirname, './node_modules/css-tree'),
+  'css-select': path.resolve(__dirname, './node_modules/css-select'),
 };
 
 module.exports = {

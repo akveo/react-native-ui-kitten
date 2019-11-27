@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { NavigationRoute } from 'react-navigation';
 import {
   Avatar,
   Divider,
@@ -20,11 +19,10 @@ import {
 export const HomeDrawer = ({ navigation, ...props }): DrawerElement => {
 
   const onItemSelect = (index: number): void => {
-    const { [index]: selectedRoute } = this.props.items;
-    this.props.navigation.navigate(selectedRoute.routeName);
+    navigation.toggleDrawer();
   };
 
-  const createDrawerItem = ({ routeName }: NavigationRoute): MenuItemType => {
+  const createDrawerItem = ({ routeName }): MenuItemType => {
     return { title: routeName };
   };
 

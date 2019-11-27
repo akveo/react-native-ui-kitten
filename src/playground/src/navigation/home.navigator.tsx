@@ -1,7 +1,6 @@
-import {
-  createBottomTabNavigator,
-  createDrawerNavigator,
-} from 'react-navigation';
+import { Platform } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { HomeDrawer } from '@pg/scenes/home/homeDrawer.component';
 import { HomeTabBar } from '@pg/scenes/home/homeTabBar.component';
 import { ComponentsNavigator } from './components.navigator';
@@ -14,10 +13,20 @@ const HomeBottomNavigator = createBottomTabNavigator({
   tabBarComponent: HomeTabBar,
 });
 
-export const HomeNavigator = createDrawerNavigator({
+const HomeDrawerNavigator = createDrawerNavigator({
   ['Home']: HomeBottomNavigator,
 }, {
   contentComponent: HomeDrawer,
   initialRouteName: 'Home',
 });
+
+const createHomeNavigator = () => {
+  if (Platform.OS === 'web') {
+    return HomeBottomNavigator;
+  }
+
+  return HomeDrawerNavigator;
+};
+
+export const HomeNavigator = createHomeNavigator();
 

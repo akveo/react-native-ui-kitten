@@ -70,7 +70,7 @@ const createOutput = (imports: string[], statements: string[]): string => {
   return [
     'import React from \'react\';',
     'import { createBrowserApp } from \'@react-navigation/web\';',
-    'import { createStackNavigator } from \'react-navigation\';',
+    'import { createStackNavigator } from \'react-navigation-stack\';',
     'import { sharingHeightContainer } from \'@pg/components/sharingHeight.container\';',
     ...imports,
     '',

@@ -15,8 +15,8 @@ docs/src/input.json
 docs/src/assets/playground-build
 docs/src/playground.json
 
-# config
-config/index.js
+# env
+src/playground/env/index.js
 
 .expo
 dist

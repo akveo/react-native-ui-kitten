@@ -23,7 +23,7 @@ const themes = {
 };
 
 const customMapping = {
-  strict: { 'text-font-family': 'roboto-regular' },
+  strict: { 'text-font-family': 'System' },
 };
 
 const fonts = {

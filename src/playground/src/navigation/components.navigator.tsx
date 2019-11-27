@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { ComponentsScreen } from '@pg/scenes/components/components.component';
 import { AvatarScreen } from '@pg/scenes/avatar/avatar.component';
 import { BottomNavigationScreen } from '@pg/scenes/bottomNavigation/bottomNavigation.component';

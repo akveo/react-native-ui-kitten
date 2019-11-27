@@ -3,7 +3,6 @@ import {
   ListRenderItemInfo,
   StyleSheet,
 } from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
 import {
   Divider,
   List,
@@ -24,7 +23,7 @@ export const routes: string[] = [
   'Auth',
 ];
 
-export const SamplesScreen = ({ navigation }: NavigationScreenProps): React.ReactElement => {
+export const SamplesScreen = ({ navigation }): React.ReactElement => {
 
   const onItemPress = (index: number): void => {
     navigation.navigate(routes[index]);
