@@ -40,7 +40,7 @@ export interface ComponentProps {
   item: SelectOptionType;
   selected?: boolean;
   indeterminate?: boolean;
-  multiSelect?: boolean;
+  multi?: boolean;
 }
 
 export type SelectOptionProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<SelectOptionType>;
@@ -153,7 +153,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
   };
 
   public render(): React.ReactNode {
-    return this.props.multiSelect ? this.renderMultiSelectItem() : this.renderDefaultItem();
+    return this.props.multi ? this.renderMultiSelectItem() : this.renderDefaultItem();
   }
 }
 

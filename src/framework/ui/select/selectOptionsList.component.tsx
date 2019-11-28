@@ -60,7 +60,7 @@ export class SelectOptionsList extends React.Component<SelectOptionsListProps> {
       <SelectGroupOption
         {...info}
         strategy={strategy}
-        multiSelect={multiSelect}
+        multi={multiSelect}
         renderItem={renderItem}
         onPress={this.onSelect}
       />
@@ -69,7 +69,7 @@ export class SelectOptionsList extends React.Component<SelectOptionsListProps> {
         {...info}
         disabled={info.item.disabled}
         selected={selected}
-        multiSelect={multiSelect}
+        multi={multiSelect}
         onPress={this.onSelect}
       />
     );
