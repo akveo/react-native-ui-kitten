@@ -44,7 +44,7 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
     return (
       <ChevronDown
-        style={styles.lateralIcon}
+        style={styles.headerButtonIcon}
         fill={tintColor}
         {...svgProps as ChevronDownProps}
       />
@@ -123,12 +123,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   headerButton: {
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    minWidth: 24,
-    minHeight: 24,
+    flexDirection: 'row-reverse',
   },
   headerButtonText: {
+    marginHorizontal: 0,
+  },
+  headerButtonIcon: {
     marginHorizontal: 0,
   },
   lateralIcon: {

@@ -72,7 +72,7 @@ const VIEWS_IN_PICKER: number = PICKER_ROWS * PICKER_COLUMNS;
 const FORMAT_DAY: string = 'D';
 const FORMAT_MONTH: string = 'MMM';
 const FORMAT_YEAR: string = 'YYYY';
-const FORMAT_HEADER_DATE: string = 'MMM YYYY';
+const FORMAT_HEADER_DATE: string = 'MMMM YYYY';
 const FORMAT_HEADER_MONTH: string = 'YYYY';
 const FORMAT_HEADER_YEAR: string = 'YYYY';
 
