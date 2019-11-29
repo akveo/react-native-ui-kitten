@@ -6,51 +6,39 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  Select,
   Icon,
   Layout,
+  Select,
 } from 'react-native-ui-kitten';
 
-export class SelectCustomIconShowcase extends React.Component {
+const data = [
+  { text: 'Option 1' },
+  { text: 'Option 2' },
+  { text: 'Option 3' },
+];
 
-  data = [
-    { text: 'Option 1' },
-    { text: 'Option 2' },
-    { text: 'Option 3' },
-  ];
+export const SelectCustomIconShowcase = () => {
 
-  state = {
-    selectedOption: null,
-  };
+  const [selectedOption, setSelectedOption] = React.useState(null);
 
-  onSelect = (selectedOption) => {
-    this.setState({ selectedOption });
-  };
+  const renderIcon = (style, visible) => (
+    <Icon {...style} name={visible ? 'arrow-ios-upward' : 'arrow-ios-downward'}/>
+  );
 
-  renderIcon = (style, visible) => {
-    const iconName = visible ? 'arrow-ios-upward' : 'arrow-ios-downward';
-    return (
-      <Icon {...style} name={iconName}/>
-    );
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Select
-          data={this.data}
-          selectedOption={this.state.selectedOption}
-          icon={this.renderIcon}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <Select
+        data={data}
+        icon={renderIcon}
+        selectedOption={selectedOption}
+        onSelect={setSelectedOption}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    height: 230,
-    padding: 16,
+    height: 228,
   },
 });

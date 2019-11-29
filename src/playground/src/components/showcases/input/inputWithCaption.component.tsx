@@ -1,30 +1,18 @@
 import React from 'react';
 import { Input } from 'react-native-ui-kitten';
 
-export class InputWithCaptionShowcase extends React.Component {
+export const InputWithCaptionShowcase = () => {
 
-  state = {
-    value: '',
-  };
+  const [value, setValue] = React.useState('');
+  const isNotEmpty = value && value.length > 0;
 
-  onChangeText = (value) => {
-    this.setState({ value });
-  };
-
-  isValidValue = () => {
-    return this.state.value.length >= 6;
-  };
-
-  render() {
-    const isValidInputValue = this.isValidValue();
-    return (
-      <Input
-        placeholder='Place your Text'
-        status={isValidInputValue ? 'success' : 'danger'}
-        caption={isValidInputValue ? '' : 'Invalid value'}
-        value={this.state.value}
-        onChangeText={this.onChangeText}
-      />
-    );
-  }
-}
+  return (
+    <Input
+      placeholder='Place your Text'
+      status={isNotEmpty ? 'success' : 'danger'}
+      caption={isNotEmpty ? '' : 'Can not be empty'}
+      value={value}
+      onChangeText={setValue}
+    />
+  );
+};

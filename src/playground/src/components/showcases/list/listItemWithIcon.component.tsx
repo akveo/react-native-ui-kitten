@@ -13,7 +13,7 @@ const StarIcon = (style) => (
   <Icon {...style} name='star'/>
 );
 
-export const ListItemWithIconShowcase = (props) => (
+export const ListItemWithIconShowcase = () => (
   <ListItem
     title='Title'
     description='Description'

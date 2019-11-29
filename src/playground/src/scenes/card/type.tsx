@@ -6,15 +6,15 @@ import {
   ComponentShowcaseSetting,
 } from '@pg/model/componentShowcase.model';
 import {
-  CardBodyContent,
-  CardFooter,
-  CustomCardHeader,
-  EvaCardHeader,
+  Body,
+  CustomHeader,
+  Footer,
+  Header,
 } from './cardExamples';
 
 const defaultCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
+    children: <Body/>,
   },
 };
 
@@ -27,8 +27,8 @@ const defaultSection: ComponentShowcaseSection = {
 
 const evaHeaderCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
-    header: EvaCardHeader,
+    children: <Body/>,
+    header: Header,
   },
 };
 
@@ -41,8 +41,8 @@ const evaHeaderSection: ComponentShowcaseSection = {
 
 const customHeaderCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
-    header: CustomCardHeader,
+    children: <Body/>,
+    header: CustomHeader,
   },
 };
 
@@ -55,8 +55,8 @@ const customHeaderSection: ComponentShowcaseSection = {
 
 const footerCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
-    footer: CardFooter,
+    children: <Body/>,
+    footer: Footer,
   },
 };
 
@@ -69,9 +69,9 @@ const footerSection: ComponentShowcaseSection = {
 
 const headerFooterCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
-    header: EvaCardHeader,
-    footer: CardFooter,
+    children: <Body/>,
+    header: Header,
+    footer: Footer,
   },
 };
 
@@ -104,6 +104,10 @@ export const cardSettings: ComponentShowcaseSetting[] = [
   },
   {
     propertyName: 'status',
+    value: 'basic',
+  },
+  {
+    propertyName: 'status',
     value: 'primary',
   },
   {
@@ -121,5 +125,9 @@ export const cardSettings: ComponentShowcaseSetting[] = [
   {
     propertyName: 'status',
     value: 'danger',
+  },
+  {
+    propertyName: 'status',
+    value: 'control',
   },
 ];

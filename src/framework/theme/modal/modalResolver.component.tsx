@@ -13,7 +13,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 
-type ChildElement = React.ReactElement<any>;
+type ChildElement = React.ReactElement;
 type ChildrenProp = ChildElement | ChildElement[];
 
 interface ComponentProps {
@@ -51,13 +51,13 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
     return false;
   };
 
-  private renderComponentChild = (source: React.ReactElement<any>): React.ReactElement<any> => {
+  private renderComponentChild = (source: React.ReactElement): React.ReactElement => {
     return React.cloneElement(source, {
       style: [source.props.style, this.props.style],
     });
   };
 
-  private renderComponentChildren = (source: React.ReactNode): React.ReactElement<any>[] => {
+  private renderComponentChildren = (source: React.ReactNode): React.ReactElement[] => {
     return React.Children.map(source, this.renderComponentChild);
   };
 
@@ -87,7 +87,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
 
   private renderComponent = (): React.ReactElement<TouchableOpacityProps | ViewProps> => {
     const { children, allowBackdrop, ...derivedProps } = this.props;
-    const componentChildren: React.ReactElement<any>[] = this.renderComponentChildren(children);
+    const componentChildren: React.ReactElement[] = this.renderComponentChildren(children);
 
     const dialog: React.ReactElement<ViewProps> =
       <View

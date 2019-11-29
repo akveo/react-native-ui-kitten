@@ -3,62 +3,38 @@ import { StyleSheet } from 'react-native';
 import {
   Card,
   CardHeader,
+  Layout,
   Text,
-  List,
 } from 'react-native-ui-kitten';
 
-const bodyText: string = 'A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. ' +
-  'Originally, nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.';
+const Header = () => (
+  <CardHeader title='Maldives'/>
+);
 
-export class CardStatusesShowcase extends React.Component {
+export const CardStatusesShowcase = () => (
+  <Layout>
 
-  statuses = [
-    'primary',
-    'success',
-    'info',
-    'warning',
-    'danger',
-  ];
-
-  renderHeader = () => (
-    <CardHeader
-      title='Title'
-      description='Description'
-    />
-  );
-
-  renderItem = (info) => (
-    <Card
-      status={info.item}
-      style={styles.card}
-      header={this.renderHeader}>
-      <Text style={styles.bodyText}>
-        {bodyText}
+    <Card style={styles.card} header={Header} status='success'>
+      <Text>
+        The Maldives, officially the Republic of Maldives, is a small country in South Asia,
+        located in the Arabian Sea of the Indian Ocean.
+        It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian continent
       </Text>
     </Card>
-  );
 
-  render() {
-    return (
-      <List
-        style={styles.container}
-        data={this.statuses}
-        renderItem={this.renderItem}
-      />
-    );
-  }
-}
+    <Card style={styles.card} header={Header} status='danger'>
+      <Text>
+        The Maldives, officially the Republic of Maldives, is a small country in South Asia,
+        located in the Arabian Sea of the Indian Ocean.
+        It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian continent
+      </Text>
+    </Card>
+
+  </Layout>
+);
 
 const styles = StyleSheet.create({
-  container: {
-    height: 500,
-    paddingVertical: 4,
-    paddingHorizontal: 4,
-  },
   card: {
-    marginVertical: 4,
-  },
-  bodyText: {
-    color: '#8f8b8b',
+    marginVertical: 8,
   },
 });

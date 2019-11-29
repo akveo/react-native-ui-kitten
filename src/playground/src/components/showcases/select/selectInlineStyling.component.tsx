@@ -5,42 +5,33 @@ import {
   Select,
 } from 'react-native-ui-kitten';
 
-export class SelectInlineStylingShowcase extends React.Component {
+export const SelectInlineStylingShowcase = () => {
 
-  private data = [
+  const data = [
     { text: 'Option 1' },
     { text: 'Option 2', textStyle: styles.option2 },
     { text: 'Option 3' },
   ];
 
-  state = {
-    selectedOption: null,
-  };
+  const [selectedOption, setSelectedOption] = React.useState(null);
 
-  onSelect = (selectedOption) => {
-    this.setState({ selectedOption });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Select
-          labelStyle={styles.labelStyle}
-          placeholderStyle={styles.placeholderStyle}
-          controlStyle={styles.controlStyle}
-          data={this.data}
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <Select
+        labelStyle={styles.labelStyle}
+        placeholderStyle={styles.placeholderStyle}
+        controlStyle={styles.controlStyle}
+        data={data}
+        selectedOption={selectedOption}
+        onSelect={setSelectedOption}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    height: 230,
-    padding: 16,
+    height: 228,
   },
   labelStyle: {
     color: 'gray',

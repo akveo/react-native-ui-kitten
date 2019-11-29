@@ -1,49 +1,39 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  ViewPager,
   Layout,
   Text,
+  ViewPager,
 } from 'react-native-ui-kitten';
 
-export class ViewPagerLazyLoadingShowcase extends React.Component {
+export const ViewPagerLazyLoadingShowcase = () => {
 
-  state = {
-    selectedIndex: 0,
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  onSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
+  const shouldLoadComponent = (index) => index === selectedIndex;
 
-  shouldLoadComponent = (index) => {
-    return index === this.state.selectedIndex;
-  };
-
-  render() {
-    return (
-      <ViewPager
-        selectedIndex={this.state.selectedIndex}
-        shouldLoadComponent={this.shouldLoadComponent}
-        onSelect={this.onSelect}>
-        <Layout
-          level='2'
-          style={styles.tab}>
-          <Text category='h5'>Tab 1</Text>
-        </Layout>
-        <Layout
-          level='2'
-          style={styles.tab}>
-          <Text category='h5'>Tab 2</Text>
-        </Layout>
-      </ViewPager>
-    );
-  }
-}
+  return (
+    <ViewPager
+      selectedIndex={selectedIndex}
+      shouldLoadComponent={shouldLoadComponent}
+      onSelect={setSelectedIndex}>
+      <Layout
+        level='2'
+        style={styles.tab}>
+        <Text category='h5'>Tab 1</Text>
+      </Layout>
+      <Layout
+        level='2'
+        style={styles.tab}>
+        <Text category='h5'>Tab 2</Text>
+      </Layout>
+    </ViewPager>
+  );
+};
 
 const styles = StyleSheet.create({
   tab: {
-    height: 200,
+    height: 192,
     alignItems: 'center',
     justifyContent: 'center',
   },

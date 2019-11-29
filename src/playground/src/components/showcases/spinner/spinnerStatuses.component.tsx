@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Layout,
   Spinner,
@@ -7,12 +10,23 @@ import {
 
 export const SpinnerStatusesShowcase = () => (
   <Layout style={styles.container}>
+
     <Spinner status='primary'/>
+
     <Spinner status='success'/>
+
     <Spinner status='info'/>
+
     <Spinner status='warning'/>
+
     <Spinner status='danger'/>
-    <Spinner status='alternative'/>
+
+    <Spinner status='basic'/>
+
+    <View style={styles.controlContainer}>
+      <Spinner status='control'/>
+    </View>
+
   </Layout>
 );
 
@@ -21,7 +35,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    paddingVertical: 4,
-    paddingHorizontal: 4,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    padding: 12,
+    backgroundColor: '#3366FF',
   },
 });

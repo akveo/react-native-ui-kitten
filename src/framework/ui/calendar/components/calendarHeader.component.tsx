@@ -9,10 +9,20 @@ import {
 } from 'react-native';
 import { Button } from '../../button/button.component';
 import {
-  Chevron,
-  ChevronElement,
-  ChevronDirection,
-} from '../../support/components';
+  ChevronDown,
+  ChevronDownElement,
+  ChevronDownProps,
+} from '../../support/components/chevronDown.component';
+import {
+  ChevronLeft,
+  ChevronLeftElement,
+  ChevronLeftProps,
+} from '../../support/components/chevronLeft.component';
+import {
+  ChevronRight,
+  ChevronRightElement,
+  ChevronRightProps,
+} from '../../support/components/chevronRight.component';
 
 interface ComponentProps extends ViewProps {
   title: string;
@@ -29,31 +39,40 @@ export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
 
 export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
-  private renderSpecificTitleIcon = (style: StyleProp<ImageStyle>, direction: ChevronDirection): ChevronElement => {
+  private renderTitleIcon = (): ChevronDownElement => {
+    const { tintColor, ...svgProps } = this.props.iconStyle;
+
     return (
-      <Chevron
-        style={style}
-        direction={direction}
+      <ChevronDown
+        style={styles.headerButtonIcon}
+        fill={tintColor}
+        {...svgProps as ChevronDownProps}
       />
     );
   };
 
-  private renderTitleIcon = (style: ImageStyle): ChevronElement => {
-    const { iconStyle } = this.props;
+  private renderLeftIcon = (): ChevronLeftElement => {
+    const { tintColor, ...svgProps } = this.props.iconStyle;
 
-    return this.renderSpecificTitleIcon(iconStyle, 'bottom');
+    return (
+      <ChevronLeft
+        style={styles.lateralIcon}
+        fill={tintColor}
+        {...svgProps as ChevronLeftProps}
+      />
+    );
   };
 
-  private renderLeftIcon = (style: ImageStyle): ChevronElement => {
-    const { iconStyle } = this.props;
+  private renderRightIcon = (): ChevronRightElement => {
+    const { tintColor, ...svgProps } = this.props.iconStyle;
 
-    return this.renderSpecificTitleIcon([iconStyle, styles.lateralIcon], 'left');
-  };
-
-  private renderRightIcon = (style: ImageStyle): ChevronElement => {
-    const { iconStyle } = this.props;
-
-    return this.renderSpecificTitleIcon([iconStyle, styles.lateralIcon], 'right');
+    return (
+      <ChevronRight
+        style={styles.lateralIcon}
+        fill={tintColor}
+        {...svgProps as ChevronRightProps}
+      />
+    );
   };
 
   private renderLateralNavigationControls = (): React.ReactElement<ViewProps> => {
@@ -104,12 +123,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   headerButton: {
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    minWidth: 24,
-    minHeight: 24,
+    flexDirection: 'row-reverse',
   },
   headerButtonText: {
+    marginHorizontal: 0,
+  },
+  headerButtonIcon: {
     marginHorizontal: 0,
   },
   lateralIcon: {
@@ -117,6 +136,6 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

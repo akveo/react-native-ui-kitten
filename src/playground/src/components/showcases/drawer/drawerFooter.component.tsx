@@ -1,50 +1,38 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import {
   Drawer,
   DrawerHeaderFooter,
-  Layout,
 } from 'react-native-ui-kitten';
 
-export class DrawerFooterShowcase extends React.Component {
+const drawerData = [
+  { title: 'Dashboard' },
+  { title: 'Messages' },
+  { title: 'Settings' },
+  { title: 'Articles' },
+  { title: 'Ecommerce' },
+  { title: 'Chat' },
+];
 
-  drawerData = [
-    { title: 'Dashboard' },
-    { title: 'Messages' },
-    { title: 'Settings' },
-    { title: 'Articles' },
-    { title: 'Ecommerce' },
-    { title: 'Chat' },
-  ];
+const Footer = () => (
+  <DrawerHeaderFooter description='Drawer Footer'/>
+);
 
-  onRouteSelect = (index) => {
-    // const { [index]: route } = this.drawerData;
+export const DrawerFooterShowcase = () => {
+
+  const onRouteSelect = (index) => {
+    const route = drawerData[index];
     // navigate with React Navigation
     // this.props.navigation.navigate(route.title);
   };
 
-  renderFooter = () => (
-    <DrawerHeaderFooter description='Drawer Footer'/>
+  return (
+    <SafeAreaView>
+      <Drawer
+        data={drawerData}
+        footer={Footer}
+        onSelect={onRouteSelect}
+      />
+    </SafeAreaView>
   );
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <SafeAreaView>
-          <Drawer
-            data={this.drawerData}
-            footer={this.renderFooter}
-            onSelect={this.onRouteSelect}
-          />
-        </SafeAreaView>
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
+};

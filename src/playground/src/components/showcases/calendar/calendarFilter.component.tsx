@@ -1,40 +1,17 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import {
-  Calendar,
-  Layout,
-} from 'react-native-ui-kitten';
+import { Calendar } from 'react-native-ui-kitten';
 
-export class CalendarFilterShowcase extends React.Component {
+export const CalendarFilterShowcase = () => {
 
-  state = {
-    date: new Date(),
-  };
+  const [selectedDate, setSelectedDate] = React.useState(null);
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
+  const filter = (date) => date.getDay() !== 0 && date.getDay() !== 6;
 
-  filter = (date) => {
-    return date.getDay() !== 0 && date.getDay() !== 6;
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Calendar
-          date={this.state.date}
-          onSelect={this.onSelect}
-          filter={this.filter}
-        />
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    minHeight: 376,
-  },
-});
+  return (
+    <Calendar
+      date={selectedDate}
+      onSelect={setSelectedDate}
+      filter={filter}
+    />
+  );
+};

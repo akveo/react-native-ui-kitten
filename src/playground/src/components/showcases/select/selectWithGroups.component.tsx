@@ -5,45 +5,36 @@ import {
   Select,
 } from 'react-native-ui-kitten';
 
-export class SelectWithGroupsShowcase extends React.Component {
+const data = [
+  { text: 'Option 1' },
+  { text: 'Option 2' },
+  {
+    text: 'Option 3',
+    items: [
+      { text: 'Sub Option 1' },
+      { text: 'Sub Option 2' },
+    ],
+  },
+];
 
-  items = [
-    { text: 'Option 1' },
-    { text: 'Option 2' },
-    {
-      text: 'Option 3',
-      items: [
-        { text: 'SubOption 1' },
-        { text: 'SubOption 2' },
-      ],
-    },
-  ];
+export const SelectWithGroupsShowcase = () => {
 
-  state = {
-    selectedOption: null,
-  };
+  const [selectedOption, setSelectedOption] = React.useState(null);
 
-  onSelect = (selectedOption) => {
-    this.setState({ selectedOption });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Select
-          data={this.items}
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <Select
+        data={data}
+        selectedOption={selectedOption}
+        onSelect={setSelectedOption}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     height: 280,
-    padding: 16,
   },
 });
 

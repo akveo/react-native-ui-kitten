@@ -1,44 +1,30 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import {
-  Drawer,
-  Layout,
-} from 'react-native-ui-kitten';
+import { Drawer } from 'react-native-ui-kitten';
 
-export class DrawerSimpleUsageShowcase extends React.Component {
+const drawerData = [
+  { title: 'Dashboard' },
+  { title: 'Messages' },
+  { title: 'Settings' },
+  { title: 'Articles' },
+  { title: 'Ecommerce' },
+  { title: 'Chat' },
+];
 
-  drawerData = [
-    { title: 'Dashboard' },
-    { title: 'Messages' },
-    { title: 'Settings' },
-    { title: 'Articles' },
-    { title: 'Ecommerce' },
-    { title: 'Chat' },
-  ];
+export const DrawerSimpleUsageShowcase = () => {
 
-  onRouteSelect = (index) => {
-    // const { [index]: route } = this.drawerData;
+  const onRouteSelect = (index) => {
+    const route = drawerData[index];
     // navigate with React Navigation
     // this.props.navigation.navigate(route.title);
   };
 
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <SafeAreaView>
-          <Drawer
-            data={this.drawerData}
-            onSelect={this.onRouteSelect}
-          />
-        </SafeAreaView>
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
+  return (
+    <SafeAreaView>
+      <Drawer
+        data={drawerData}
+        onSelect={onRouteSelect}
+      />
+    </SafeAreaView>
+  );
+};

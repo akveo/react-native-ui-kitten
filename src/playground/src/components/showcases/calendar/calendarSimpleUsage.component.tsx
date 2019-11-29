@@ -3,33 +3,36 @@ import { StyleSheet } from 'react-native';
 import {
   Calendar,
   Layout,
+  Text,
 } from 'react-native-ui-kitten';
 
-export class CalendarSimpleUsageShowcase extends React.Component {
+export const CalendarSimpleUsageShowcase = () => {
 
-  state = {
-    date: new Date(),
-  };
+  const [date, setDate] = React.useState(new Date());
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
+  return (
+    <Layout style={styles.container}>
 
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Calendar
-          date={this.state.date}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+      <Text
+        style={styles.text}
+        category='h6'>
+        {`Selected date: ${date.toLocaleDateString()}`}
+      </Text>
+
+      <Calendar
+        date={date}
+        onSelect={setDate}
+      />
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
     minHeight: 376,
+  },
+  text: {
+    marginVertical: 8,
   },
 });

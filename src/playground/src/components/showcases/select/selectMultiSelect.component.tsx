@@ -5,40 +5,31 @@ import {
   Select,
 } from 'react-native-ui-kitten';
 
-export class SelectMultiSelectShowcase extends React.Component {
+const data = [
+  { text: 'Option 1' },
+  { text: 'Option 2' },
+  { text: 'Option 3' },
+];
 
-  data = [
-    { text: 'Option 1' },
-    { text: 'Option 2' },
-    { text: 'Option 3' },
-  ];
+export const SelectMultiSelectShowcase = () => {
 
-  state = {
-    selectedOption: [],
-  };
+  const [selectedOption, setSelectedOption] = React.useState([]);
 
-  onSelect = (selectedOption) => {
-    this.setState({ selectedOption });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Select
-          data={this.data}
-          multiSelect={true}
-          selectedOption={this.state.selectedOption}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <Select
+        data={data}
+        multiSelect={true}
+        selectedOption={selectedOption}
+        onSelect={setSelectedOption}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    height: 230,
-    padding: 16,
+    height: 228,
   },
 });
 

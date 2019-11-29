@@ -9,7 +9,7 @@ import { Override } from '../../support/typings';
 
 export type CalendarPagerProps<D> = Override<ViewPagerProps, {
   data: CalendarDateInfo<D>[];
-  children: (date: CalendarDateInfo<D>, index: number) => React.ReactElement<any>;
+  children: (date: CalendarDateInfo<D>, index: number) => React.ReactElement;
 }>;
 
 export type CalendarPagerElement<D> = React.ReactElement<CalendarPagerProps<D>>;
@@ -36,7 +36,7 @@ export class CalendarPager<D> extends React.Component<CalendarPagerProps<D>> {
     return true;
   };
 
-  private createChildElement = (date: CalendarDateInfo<D>, index: number): React.ReactElement<any> => {
+  private createChildElement = (date: CalendarDateInfo<D>, index: number): React.ReactElement => {
     if (this.shouldLoadComponent(index)) {
       return this.props.children(date, index);
     }

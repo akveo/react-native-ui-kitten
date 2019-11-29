@@ -6,19 +6,26 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 
-export const TabViewInlineStylingShowcase = (props) => (
-  <TabView
-    style={styles.tabView}
-    tabBarStyle={styles.tabBar}
-    indicatorStyle={styles.tabViewIndicator}>
-    <Tab title='DASHBOARD'>
-      <Text>DASHBOARD</Text>
-    </Tab>
-    <Tab title='SETTINGS'>
-      <Text>SETTINGS</Text>
-    </Tab>
-  </TabView>
-);
+export const TabViewInlineStylingShowcase = () => {
+
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  return (
+    <TabView
+      style={styles.tabView}
+      tabBarStyle={styles.tabBar}
+      indicatorStyle={styles.tabViewIndicator}
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}>
+      <Tab title='USERS'>
+        <Text>USERS</Text>
+      </Tab>
+      <Tab title='ORDERS'>
+        <Text>ORDERS</Text>
+      </Tab>
+    </TabView>
+  );
+};
 
 const styles = StyleSheet.create({
   tabView: { backgroundColor: '#EDF1F7' },

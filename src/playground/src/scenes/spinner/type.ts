@@ -75,10 +75,17 @@ const dangerSpinner: ComponentShowcaseItem = {
   },
 };
 
-const alternativeSpinner: ComponentShowcaseItem = {
-  title: 'Alternative',
+const basicSpinner: ComponentShowcaseItem = {
+  title: 'Basic',
   props: {
-    status: 'alternative',
+    status: 'basic',
+  },
+};
+
+const controlSpinner: ComponentShowcaseItem = {
+  title: 'Control',
+  props: {
+    status: 'control',
   },
 };
 
@@ -101,7 +108,8 @@ const statusSection: ComponentShowcaseSection = {
     infoSpinner,
     warningSpinner,
     dangerSpinner,
-    alternativeSpinner,
+    basicSpinner,
+    controlSpinner,
   ],
 };
 

@@ -2,27 +2,23 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Toggle } from 'react-native-ui-kitten';
 
-export class ToggleInlineStylingShowcase extends React.Component {
+export const ToggleInlineStylingShowcase = () => {
 
-  state = {
-    checked: false,
+  const [checked, setChecked] = React.useState(false);
+
+  const onCheckedChange = (isChecked) => {
+    setChecked(isChecked);
   };
 
-  onToggleValueChange = (checked) => {
-    this.setState({ checked });
-  };
-
-  render() {
-    return (
-      <Toggle
-        checked={this.state.checked}
-        text='Place your Text'
-        textStyle={styles.text}
-        onChange={this.onToggleValueChange}
-      />
-    );
-  }
-}
+  return (
+    <Toggle
+      checked={checked}
+      text='Place your Text'
+      textStyle={styles.text}
+      onChange={onCheckedChange}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   text: {

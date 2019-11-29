@@ -13,53 +13,55 @@ import {
   TextElement,
 } from 'react-native-ui-kitten';
 
-export const CardBodyContent = (): TextElement => (
+export const Body = (): TextElement => (
   <Text>
-    A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
-    Originally, nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.
+    The Maldives, officially the Republic of Maldives, is a small country in South Asia,
+    located in the Arabian Sea of the Indian Ocean.
+    It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian continent
   </Text>
 );
 
-export const EvaCardHeader = (): CardHeaderElement => (
+export const Header = () => (
   <CardHeader
-    title='Title'
-    description='Description'
+    title='Maldives'
+    description='By Wikipedia'
   />
 );
 
-export const CustomCardHeader = (): CardHeaderElement => (
+export const CustomHeader = () => (
   <React.Fragment>
     <Image
-      source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg' }}
       style={styles.headerImage}
+      source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg' }}
     />
-    <View style={styles.headerTextContainer}>
-      <Text category='h6'>
-        Title
-      </Text>
-    </View>
+    <Text
+      style={styles.headerText}
+      category='h6'>
+      Maldives
+    </Text>
   </React.Fragment>
 );
 
-export const CardFooter = (): CardFooterElement => (
+export const Footer = () => (
   <View style={styles.footerContainer}>
     <Button
+      style={styles.footerControl}
       size='small'
       status='basic'>
-      Cancel
+      CANCEL
     </Button>
     <Button
-      size='small'
-      style={styles.footerControl}>
-      Accept
+      style={styles.footerControl}
+      size='small'>
+      ACCEPT
     </Button>
   </View>
 );
 
 const styles = StyleSheet.create({
-  headerTextContainer: {
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+  headerText: {
+    marginHorizontal: 24,
+    marginVertical: 16,
   },
   headerImage: {
     flex: 1,
@@ -70,6 +72,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   footerControl: {
-    marginRight: 12,
+    marginHorizontal: 4,
   },
 });

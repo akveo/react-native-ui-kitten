@@ -8,32 +8,28 @@ import {
 
 export const ButtonGroupAppearanceShowcase = () => (
   <Layout style={styles.container}>
-    <ButtonGroup
-      style={styles.buttonGroup}
-      appearance='filled'>
-      <Button style={styles.button}>L</Button>
-      <Button style={styles.button}>M</Button>
-      <Button style={styles.button}>R</Button>
+
+    <ButtonGroup style={styles.buttonGroup} appearance='filled'>
+      <Button>L</Button>
+      <Button>M</Button>
+      <Button>R</Button>
     </ButtonGroup>
-    <ButtonGroup
-      style={styles.buttonGroup}
-      appearance='outline'>
-      <Button style={styles.button}>L</Button>
-      <Button style={styles.button}>M</Button>
-      <Button style={styles.button}>R</Button>
+
+    <ButtonGroup style={styles.buttonGroup} appearance='outline'>
+      <Button>L</Button>
+      <Button>M</Button>
+      <Button>R</Button>
     </ButtonGroup>
+
   </Layout>
 );
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    flexDirection: 'row',
+    padding: 8,
   },
   buttonGroup: {
-    marginVertical: 8,
-  },
-  button: {
-    flex: 1,
+    margin: 8,
   },
 });

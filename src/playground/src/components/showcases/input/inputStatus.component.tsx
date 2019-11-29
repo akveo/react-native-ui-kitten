@@ -1,90 +1,97 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Input,
   Layout,
 } from 'react-native-ui-kitten';
 
-export class InputStatusShowcase extends React.Component {
-
-  state = {
-    primaryValue: '',
-    successValue: '',
-    infoValue: '',
-    warningValue: '',
-    dangerValue: '',
+const useInputChanges = (initialValue = '') => {
+  const [value, setValue] = React.useState(initialValue);
+  return {
+    value,
+    onChangeText: setValue,
   };
+};
 
-  onPrimaryTextChange = (primaryValue) => {
-    this.setState({ primaryValue });
-  };
+export const InputStatusShowcase = () => {
 
-  onSuccessTextChange = (successValue) => {
-    this.setState({ successValue });
-  };
+  const primaryInputChanges = useInputChanges();
+  const successInputChanges = useInputChanges();
+  const infoInputChanges = useInputChanges();
+  const warningInputChanges = useInputChanges();
+  const dangerInputChanges = useInputChanges();
+  const basicInputChanges = useInputChanges();
+  const controlInputChanges = useInputChanges();
 
-  onInfoTextChange = (infoValue) => {
-    this.setState({ infoValue });
-  };
+  return (
+    <Layout>
 
-  onWarningTextChange = (warningValue) => {
-    this.setState({ warningValue });
-  };
+      <Input
+        style={styles.input}
+        status='primary'
+        placeholder='Primary'
+        {...primaryInputChanges}
+      />
 
-  onDangerTextChange = (dangerValue) => {
-    this.setState({ dangerValue });
-  };
+      <Input
+        style={styles.input}
+        status='success'
+        placeholder='Success'
+        {...successInputChanges}
+      />
 
-  render() {
-    return (
-      <Layout style={styles.container}>
+      <Input
+        style={styles.input}
+        status='info'
+        placeholder='Info'
+        {...infoInputChanges}
+      />
+
+      <Input
+        style={styles.input}
+        status='warning'
+        placeholder='Warning'
+        {...warningInputChanges}
+      />
+
+      <Input
+        style={styles.input}
+        status='danger'
+        placeholder='Danger'
+        {...dangerInputChanges}
+      />
+
+      <Input
+        style={styles.input}
+        status='basic'
+        placeholder='Basic'
+        {...basicInputChanges}
+      />
+
+      <View style={styles.controlContainer}>
         <Input
           style={styles.input}
-          status='primary'
-          placeholder='Primary'
-          value={this.state.primaryValue}
-          onChangeText={this.onPrimaryTextChange}
+          status='control'
+          placeholder='Control'
+          {...controlInputChanges}
         />
-        <Input
-          style={styles.input}
-          status='success'
-          placeholder='Success'
-          value={this.state.successValue}
-          onChangeText={this.onSuccessTextChange}
-        />
-        <Input
-          style={styles.input}
-          status='info'
-          placeholder='Info'
-          value={this.state.infoValue}
-          onChangeText={this.onInfoTextChange}
-        />
-        <Input
-          style={styles.input}
-          status='warning'
-          placeholder='Warning'
-          value={this.state.warningValue}
-          onChangeText={this.onWarningTextChange}
-        />
-        <Input
-          style={styles.input}
-          status='danger'
-          placeholder='Danger'
-          value={this.state.dangerValue}
-          onChangeText={this.onDangerTextChange}
-        />
-      </Layout>
-    );
-  }
-}
+      </View>
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-  },
   input: {
-    marginVertical: 4,
+    margin: 8,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 8,
+    backgroundColor: '#3366FF',
   },
 });
 

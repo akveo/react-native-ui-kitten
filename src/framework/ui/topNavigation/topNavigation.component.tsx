@@ -52,12 +52,11 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * @property {string} alignment - Determines the alignment of the component.
  * Can be `center` or `start`.
+ * Default is `start`.
  *
- * @property {React.ReactElement<TopNavigationActionProps>} leftControl - Determines the left control
- * of the component.
+ * @property {ReactElement<TopNavigationActionProps>} leftControl - Determines the left control of the component.
  *
- * @property {React.ReactElement<TopNavigationActionProps>[]} rightControls - Determines the right controls
- * of the component.
+ * @property {ReactElement<TopNavigationActionProps>[]} rightControls - Determines the right controls of the component.
  *
  * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title.
  *

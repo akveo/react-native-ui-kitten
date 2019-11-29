@@ -5,41 +5,32 @@
 
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import moment from 'moment';
 import {
   Datepicker,
   Layout,
 } from 'react-native-ui-kitten';
 import { MomentDateService } from '@ui-kitten/moment';
 
-export class DatepickerMomentShowcase extends React.Component {
+const dateService = new MomentDateService();
 
-  dateService = new MomentDateService();
+export const DatepickerMomentShowcase = () => {
 
-  state = {
-    date: moment(),
-  };
+  const [date, setDate] = React.useState(null);
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Datepicker
-          date={this.state.date}
-          dateService={this.dateService}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <Datepicker
+        placeholder='Pick Date'
+        date={date}
+        dateService={dateService}
+        onSelect={setDate}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 400,
-    padding: 16,
+    minHeight: 376,
   },
 });

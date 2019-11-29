@@ -19,7 +19,7 @@ Let's start with installing Eva Icons and it's required dependencies.
 npm i @ui-kitten/eva-icons react-native-svg
 ```
 
-We also need to complete installation for iOS.
+We also need to complete installation for iOS by linking react-native-svg.
 
 ```bash
 cd ios && pod install

@@ -9,30 +9,27 @@ import {
   Icon,
 } from 'react-native-ui-kitten';
 
-export class IconAnimationShowcase extends React.Component {
+export const IconAnimationShowcase = () => {
 
-  iconRef = React.createRef();
+  const iconRef = React.createRef();
 
-  onPress = () => {
-    this.iconRef.current.startAnimation();
+  const onPress = () => {
+    iconRef.current.startAnimation();
   };
 
-  renderIcon = (style) => (
+  const renderIcon = (style) => (
     <Icon
       {...style}
-      ref={this.iconRef}
+      ref={iconRef}
       name='star'
-      animation='shake'
     />
   );
 
-  render() {
-    return (
-      <Button
-        icon={this.renderIcon}
-        onPress={this.onPress}>
-        START ANIMATION
-      </Button>
-    );
-  }
-}
+  return (
+    <Button
+      icon={renderIcon}
+      onPress={onPress}>
+      START ANIMATION
+    </Button>
+  );
+};
