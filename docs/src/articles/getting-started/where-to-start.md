@@ -5,11 +5,11 @@ UI Kitten is a framework of UI components powered by Eva Design System for your 
 
 ## Quick start tutorials
 
-- **[Start a new App](guides/start-a-new-app)** 
+- **[Start a new App](guides/getting-started#new-apps)** 
 
 This tutorial explains how to setup React Native app with UI Kitten from a scratch.
 
-- **[Install into existing App](guides/install-into-existing-app)**
+- **[Install into existing App](guides/getting-started#manual-installation)**
 
 Please consider creating an issue on GitHub if your use case is not described above. But we kindly ask to always look through the documentation and the list of existing issues first.
   
