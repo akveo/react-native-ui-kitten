@@ -1,6 +1,7 @@
 {
-  "name": "react-native-ui-kitten",
+  "name": "ui-kitten",
   "version": "4.3.0-beta.1",
+  "private": true,
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
@@ -8,58 +9,32 @@
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
+  "workspaces": {
+    "packages": [
+      "src/*",
+      "docs"
+    ]
+  },
   "scripts": {
-    "start": "npm run start:pg:dev",
-    "start:pg:dev": "npm run install:pg && cd src/playground && npm run start:dev",
-    "start:pg:prod": "npm run install:pg && cd src/playground && npm run start:prod",
-    "build": "./scripts/build/compile-ts.sh",
-    "build:transform": "./scripts/build/transform-paths.sh",
-    "build:dev": "npm run build -- dev && npm run build:transform -- dev",
-    "build:prod": "npm run build -- prod && npm run build:transform -- prod",
+    "playground": "yarn --cwd src/playground",
+    "docs": "yarn --cwd docs",
+    "build": "tsc && tscpaths -p ./tsconfig.json -s ./src/framework -o ./dist/tsc-out/framework",
     "clean": "rimraf ./dist",
     "docs:parse": "gulp docs",
-    "docs:build": "cd docs && npm run build",
-    "docs:build:prod": "cd docs && npm run build:prod",
-    "docs:build:playground": "cd src/playground && npm run build:web",
-    "docs:serve": "cd docs && npm start",
-    "docs:start": "npm run docs:parse && npm run docs:serve",
-    "conventional-changelog": "conventional-changelog",
-    "version:changelog": "npm run conventional-changelog -- -i CHANGELOG.md -s",
-    "lint:src": "tslint -c ./tslint.json ./src/framework/**/*.{ts,tsx}",
-    "lint:pg": "tslint -c ./tslint.json ./src/playground/src/**/*.{ts,tsx}",
-    "lint": "npm run lint:src && npm run lint:pg",
-    "ci:install": "npm ci && npm run ci:install:pg",
-    "ci:install:pg": "( cd ./src/playground && npm ci )",
-    "ci:lint": "npm run lint",
-    "ci:build": "npm run build:prod",
-    "ci:test": "npm t -- --ci --coverage && cat ./dist/jest/coverage/lcov.info | coveralls",
-    "install:pg": "( cd ./src/playground && npm i )",
-    "release:prepare": "npm run clean && npm run build:prod",
-    "release:validate": "npm run lint && npm run test",
-    "publish:framework": "./scripts/publish/publish-framework.sh",
-    "publish:framework:beta": "npm run publish:framework -- beta",
-    "publish:modules": "./scripts/publish/publish-modules.sh",
-    "publish:modules:beta": "npm run publish:modules -- beta",
-    "release:framework": "npm run release:prepare && npm run release:validate && npm run publish:framework",
-    "release:modules": "npm run release:prepare && npm run release:validate && npm run publish:modules",
-    "release:framework:beta": "npm run release:prepare && npm run release:validate && npm run publish:framework:beta",
-    "release:modules:beta": "npm run release:prepare && npm run release:validate && npm run publish:modules:beta",
+    "docs:start": "yarn docs:parse && yarn docs start",
+    "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
+    "release:validate": "yarn lint && yarn test",
+    "release:prepare": "yarn clean && yarn build",
+    "release:changelog": "conventional-changelog -i CHANGELOG.md -s",
+    "publish:framework": "./scripts/publish-framework.sh",
+    "publish:modules": "./scripts/publish-modules.sh",
+    "release:framework": "yarn release:prepare && yarn release:validate && yarn publish:framework",
+    "release:modules": "yarn release:prepare && yarn release:validate && npm run publish:modules",
     "test": "jest"
-  },
-  "dependencies": {
-    "@eva-design/dss": "^1.3.0-beta.1",
-    "@eva-design/eva": "^1.3.0-beta.1",
-    "@eva-design/processor": "^1.3.0-beta.1",
-    "date-fns": "^1.30.1",
-    "fecha": "3.0.3",
-    "hoist-non-react-statics": "^3.2.1",
-    "lodash.merge": "^4.6.1",
-    "moment": "^2.24.0",
-    "react-native-eva-icons": "^1.1.0",
-    "react-native-svg": "^9.13.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@eva-design/eva": "^1.3.0-beta.1",
     "@types/gulp": "ts3.5",
     "@types/gulp-replace": "ts3.5",
     "@types/jest": "ts3.5",
@@ -77,9 +52,11 @@
     "gulp-typedoc": "^2.2.3",
     "husky": "^1.1.2",
     "jest": "^24.8.0",
+    "lerna": "^3.19.0",
     "metro-react-native-babel-preset": "^0.54.0",
-    "react": "16.8.3",
-    "react-native": "0.59.8",
+    "react": "~16.8.3",
+    "react-native": "~0.59.10",
+    "react-native-svg": "~9.9.5",
     "react-native-testing-library": "^1.5.0",
     "react-test-renderer": "16.8.3",
     "rimraf": "^2.6.2",
@@ -88,5 +65,12 @@
     "tslint": "^5.12.1",
     "typedoc": "^0.15.3",
     "typescript": "^3.5.1"
+  },
+  "resolutions": {
+    "react": "~16.8.3",
+    "react-native": "~0.59.10",
+    "react-native-svg": "~9.9.5"
   }
 }
+
+

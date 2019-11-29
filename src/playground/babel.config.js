@@ -1,5 +1,22 @@
 const path = require('path');
-const env = require('./env');
+const environment = require('./env');
+
+const evaModules = {
+  '@eva-design/eva': path.resolve(environment.EVA_PATH, 'eva'),
+  '@eva-design/processor': path.resolve(environment.EVA_PATH, 'processor'),
+};
+
+const frameworkModules = {
+  '@ui-kitten/date-fns': path.resolve(__dirname, '../date-fns'),
+  '@ui-kitten/eva-icons': path.resolve(__dirname, '../eva-icons'),
+  '@ui-kitten/moment': path.resolve(__dirname, '../moment'),
+  'react-native-ui-kitten': path.resolve(__dirname, '../framework'),
+};
+
+const uiKittenInternalAliases = {
+  '@kitten/theme': path.resolve(__dirname, '../framework/theme'),
+  '@kitten/ui': path.resolve(__dirname, '../framework/ui'),
+};
 
 const appAliases = {
   '@pg/assets': './src/assets',
@@ -11,51 +28,25 @@ const appAliases = {
   '@pg/themes': './src/themes',
 };
 
-/**
- * UI Kitten modules aliases.
- * Allows importing framework modules into playground
- */
-const moduleAliases = {
-  'react-native-ui-kitten': path.resolve(__dirname, '../framework'),
-  '@ui-kitten/eva-icons': path.resolve(__dirname, '../eva-icons'),
-  '@ui-kitten/moment': path.resolve(__dirname, '../moment'),
-  '@ui-kitten/date-fns': path.resolve(__dirname, '../date-fns'),
-};
-
-const moduleInternalAliases = {
-  '@kitten/theme': path.resolve(__dirname, '../framework/theme'),
-  '@kitten/ui': path.resolve(__dirname, '../framework/ui'),
-};
-
-/**
- * Eva modules aliases.
- * Allows importing Eva modules into playground depending on environment
- */
-const evaAliases = {
-  '@eva-design/processor': path.resolve(env.PROCESSOR_PATH),
-  '@eva-design/eva': path.resolve(env.MAPPING_PATH),
-};
-
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
+    ...evaModules,
+    ...frameworkModules,
+    ...uiKittenInternalAliases,
     ...appAliases,
-    ...moduleAliases,
-    ...moduleInternalAliases,
-    ...evaAliases,
   },
 };
 
+const presets = [
+  'babel-preset-expo',
+];
+
+const plugins = [
+  ['module-resolver', moduleResolverConfig],
+];
+
 module.exports = function (api) {
   api.cache(true);
-
-  const presets = [
-    'babel-preset-expo',
-  ];
-
-  const plugins = [
-    ['module-resolver', moduleResolverConfig],
-  ];
-
   return { presets, plugins };
 };

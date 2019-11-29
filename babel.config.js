@@ -1,8 +1,7 @@
 const path = require('path');
 
 /**
- * UI Kitten modules aliases.
- * Needed for Jest resolver. Same map should be described in jest.config.js
+ * UI Kitten modules aliases (needed for Jest resolver)
  */
 const moduleAliases = {
   'react-native-ui-kitten': path.resolve(__dirname, './src/framework'),
@@ -24,17 +23,16 @@ const moduleResolverConfig = {
   },
 };
 
+const presets = [
+  'module:metro-react-native-babel-preset',
+];
+
+const plugins = [
+  ['module-resolver', moduleResolverConfig],
+];
+
 module.exports = function(api) {
   api.cache(true);
-
-  const presets = [
-    'module:metro-react-native-babel-preset',
-  ];
-
-  const plugins = [
-    ['module-resolver', moduleResolverConfig],
-  ];
-
   return { presets, plugins };
 };
 

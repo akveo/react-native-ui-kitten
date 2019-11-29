@@ -10,6 +10,6 @@ env:
 matrix:
   fast_finish: true
 install:
-- npm run ci:install
+- yarn
 script:
-- scripts/ci/travis-ci-script.sh
+- scripts/travis-ci-script.sh

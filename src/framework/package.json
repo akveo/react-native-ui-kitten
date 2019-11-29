@@ -8,6 +8,9 @@
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@eva-design/dss": "^1.3.0-beta.1",
     "@eva-design/processor": "^1.3.0-beta.1",

@@ -1,0 +1,21 @@
+{
+  "packages": [
+    "src/date-fns",
+    "src/eva-icons",
+    "src/moment",
+    "src/template-js",
+    "src/template-ts"
+  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "fixed",
+  "command": {
+    "publish": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
+      "createRelease": "github",
+      "preId": "beta",
+      "preDistTag": "next"
+    }
+  }
+}

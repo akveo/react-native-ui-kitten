@@ -9,9 +9,8 @@
     "moduleResolution": "node",
     "jsx": "react-native",
     "target": "es2015",
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "declaration": true,
+    "skipLibCheck": true,
     "paths": {
       "react-native-ui-kitten": [
         "./src/framework"
@@ -26,8 +25,20 @@
         "./src/playground/src/*"
       ],
       "@eva-design/*": [
-        "../eva/packages/*"
+        "./node_modules/@eva-design/*"
       ]
     }
-  }
+  },
+  "include": [
+    "./src",
+    "./src/**/package.json"
+  ],
+  "exclude": [
+    "./src/template-js",
+    "./src/template-ts",
+    "./src/playground",
+    "./**/*.spec.ts",
+    "./**/*.spec.tsx",
+    "./**/*.snap"
+  ]
 }

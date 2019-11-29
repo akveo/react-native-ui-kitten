@@ -1,6 +1,6 @@
 {
-  "name": "react-native-template-ui-kitten-typescript",
-  "version": "^4.3.0-beta.1",
+  "name": "@ui-kitten/template-ts",
+  "version": "4.3.0-beta.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
@@ -21,5 +21,8 @@
   "files": [
     "template",
     "template.config.js"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

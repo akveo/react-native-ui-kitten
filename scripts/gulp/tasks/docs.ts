@@ -19,13 +19,13 @@ interface ExampleCode {
 }
 
 const CURRENT_DIR: string = path.resolve(__dirname);
-const DOCS_DIR: string = path.resolve(CURRENT_DIR, '../../../../docs');
-const PLAYGROUND_DIR: string = path.resolve(CURRENT_DIR, '../../../../src/playground');
+const DOCS_DIR: string = path.resolve(CURRENT_DIR, '../../../docs');
+const PLAYGROUND_DIR: string = path.resolve(CURRENT_DIR, '../../../src/playground');
 
 const SHOWCASE_DIR: string = path.resolve(PLAYGROUND_DIR, 'src/components/showcases');
 const SHOWCASE_KEY_WORD: string = 'Showcase';
 
-const tsconfig = require(path.resolve(CURRENT_DIR, '../../../../tsconfig.json'));
+const tsconfig = require(path.resolve(CURRENT_DIR, '../../../tsconfig.json'));
 
 gulp.task('create-docs-json', createDocsJson);
 gulp.task('create-docs-input-json', createDocsInputJson);
@@ -75,15 +75,16 @@ function createDocsJson(done): void {
 }
 
 function createDocsInputJson(done): void {
-  const outputFilePath: string = path.resolve(process.cwd(), 'docs/src/input.json');
-  exec(`prsr -g typedoc -f react -i ./docs/docs.json -o ${outputFilePath}`);
+  const docsJsonPath: string = path.resolve(process.cwd(), 'docs/docs.json');
+  const inputJsonPath: string = path.resolve(process.cwd(), 'docs/src/input.json');
+  exec(`prsr -g typedoc -f react -i ${docsJsonPath} -o ${inputJsonPath}`);
 
-  const typedocOutput = require(outputFilePath);
+  const typedocOutput = require(inputJsonPath);
   const themes: DocThemes = createDocThemes('light', 'dark');
 
   const output: string = JSON.stringify({ ...typedocOutput, themes }, null, 2);
 
-  fs.writeFileSync(outputFilePath, output);
+  fs.writeFileSync(inputJsonPath, output);
 
   done();
 }
@@ -108,7 +109,7 @@ function createPlaygroundJson(done) {
 }
 
 function buildPlayground(done): void {
-  exec('npm run docs:build:playground');
+  exec('yarn playground build:web');
 
   done();
 }
