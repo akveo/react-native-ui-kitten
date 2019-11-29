@@ -48,13 +48,13 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
  *
- * @property {(date: D, style: StyleType) => ReactElement<any>} renderDay - Should return the content of day cell.
+ * @property {(date: D, style: StyleType) => ReactElement} renderDay - Should return the content of day cell.
  *
- * @property {(date: D, style: StyleType) => ReactElement<any>} renderMonth - Should return the content of month cell.
+ * @property {(date: D, style: StyleType) => ReactElement} renderMonth - Should return the content of month cell.
  *
- * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
+ * @property {(date: D, style: StyleType) => ReactElement} renderYear - Should return the content of year cell.
  *
- * @property ViewProps - - Any props applied to View component.
+ * @property {ViewProps} ...ViewProps - - Any props applied to View component.
  *
  * @overview-example CalendarSimpleUsage
  *

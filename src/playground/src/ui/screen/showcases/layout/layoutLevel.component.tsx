@@ -5,27 +5,35 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 
-export const LayoutLevelShowcase = () => {
+export const LayoutLevelShowcase = () => (
+  <Layout style={styles.container}>
 
-  return (
-    <Layout style={styles.container} level='4'>
-      <Layout style={styles.container} level='3'>
-        <Layout style={styles.container} level='2'>
-          <Layout style={[styles.container, styles.contentContainer]}>
-            <Text>Welcome To React Native UI Kitten!</Text>
-          </Layout>
-        </Layout>
-      </Layout>
+    <Layout style={styles.layout} level='4'>
+      <Text>4</Text>
     </Layout>
 
-  );
-};
+    <Layout style={styles.layout} level='3'>
+      <Text>3</Text>
+    </Layout>
+
+    <Layout style={styles.layout} level='2'>
+      <Text>2</Text>
+    </Layout>
+
+    <Layout style={styles.layout} level='1'>
+      <Text>1</Text>
+    </Layout>
+
+  </Layout>
+);
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    flex: 1,
+    flexDirection: 'row',
   },
-  contentContainer: {
+  layout: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

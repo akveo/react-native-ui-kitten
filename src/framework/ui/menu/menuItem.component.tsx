@@ -7,7 +7,6 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageProps,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -24,10 +23,9 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { TouchableIndexedProps } from '../support/typings/type';
 import { allWithPrefix } from '../support/services';
-
-type IconElement = React.ReactElement<ImageProps>;
 
 export interface MenuItemType {
   title: string;
@@ -36,7 +34,7 @@ export interface MenuItemType {
   titleStyle?: StyleProp<TextStyle>;
   menuIndex?: number;
   icon?: (style: StyleType) => IconElement;
-  accessory?: (style: StyleType) => IconElement;
+  accessory?: (style: StyleType) => React.ReactElement;
 }
 
 interface ComponentProps extends MenuItemType {
@@ -55,19 +53,17 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} accessory - Determines the accessory of the
+ * @property {(style: StyleType) => ReactElement} accessory - Determines the accessory of the
  * component.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the component.
+ * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
  *
  * @property {MenuItemType[]} subItems - Determines the sub-items of the MenuItem.
  *
  * @property {(index: number, event: GestureResponderEvent) => void} onPress - Emits when component is pressed.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
- * */
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ */
 
 class MenuItemComponent extends React.Component<MenuItemProps> {
 

@@ -2,44 +2,58 @@
 // https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages
 
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   BottomNavigation,
   BottomNavigationTab,
   Icon,
+  Layout,
 } from 'react-native-ui-kitten';
 
-const DashboardIcon = (style) => (
-  <Icon {...style} name='layout'/>
+const PersonIcon = (style) => (
+  <Icon {...style} name='person-outline' />
 );
 
-const SettingsIcon = (style) => (
-  <Icon {...style} name='settings'/>
+const BellIcon = (style) => (
+  <Icon {...style} name='bell-outline' />
 );
 
-export class BottomNavigationWithIconsShowcase extends React.Component {
+const EmailIcon = (style) => (
+  <Icon {...style} name='email-outline' />
+);
 
-  state = {
-    selectedIndex: 0,
-  };
+export const BottomNavigationWithIconsShowcase = () => {
 
-  onTabSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
+  const [topSelectedIndex, setTopSelectedIndex] = React.useState(0);
+  const [bottomSelectedIndex, setBottomSelectedIndex] = React.useState(0);
 
-  render() {
-    return (
+  return (
+    <Layout>
+
       <BottomNavigation
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onTabSelect}>
-        <BottomNavigationTab
-          title='DASHBOARD'
-          icon={DashboardIcon}
-        />
-        <BottomNavigationTab
-          title='SETTINGS'
-          icon={SettingsIcon}
-        />
+        style={styles.bottomNavigation}
+        selectedIndex={topSelectedIndex}
+        onSelect={setTopSelectedIndex}>
+        <BottomNavigationTab icon={PersonIcon}/>
+        <BottomNavigationTab icon={BellIcon}/>
+        <BottomNavigationTab icon={EmailIcon}/>
       </BottomNavigation>
-    );
-  }
-}
+
+      <BottomNavigation
+        style={styles.bottomNavigation}
+        selectedIndex={bottomSelectedIndex}
+        onSelect={setBottomSelectedIndex}>
+        <BottomNavigationTab title='USERS' icon={PersonIcon}/>
+        <BottomNavigationTab title='ORDERS' icon={BellIcon}/>
+        <BottomNavigationTab title='TRANSACTIONS' icon={EmailIcon}/>
+      </BottomNavigation>
+
+    </Layout>
+  );
+};
+
+const styles = StyleSheet.create({
+  bottomNavigation: {
+    marginVertical: 8,
+  },
+});

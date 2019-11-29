@@ -1,50 +1,31 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import {
   Calendar,
-  Layout,
   NativeDateService,
 } from 'react-native-ui-kitten';
 
 const i18n = {
   dayNames: {
-    short: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-    long: ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+    short: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+    long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   },
   monthNames: {
-    short: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-    long: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dev'],
+    long: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   },
 };
 
-export class CalendarCustomLocaleShowcase extends React.Component {
+const dateService = new NativeDateService('en', { i18n });
 
-  state = {
-    date: new Date(),
-  };
+export const CalendarCustomLocaleShowcase = () => {
 
-  dateService = new NativeDateService('zh', { i18n });
+  const [date, setDate] = React.useState(null);
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Calendar
-          date={this.state.date}
-          dateService={this.dateService}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    minHeight: 376,
-  },
-});
+  return (
+    <Calendar
+      dateService={dateService}
+      date={date}
+      onSelect={setDate}
+    />
+  );
+};

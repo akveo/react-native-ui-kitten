@@ -4,5 +4,7 @@ export { DatepickerFilterShowcase } from './datepickerFilter.component';
 export { DatepickerCustomLocaleShowcase } from './datepickerCustomLocale.component';
 export { DatepickerMomentShowcase } from './datepickerMoment.component';
 export { DatepickerSimpleUsageShowcase } from './datepickerSimpleUsage.component';
+export { DatepickerSizeShowcase } from './datepickerSize.component';
+export { DatepickerStatusShowcase } from './datepickerStatus.component';
 export { DatepickerWithIconShowcase } from './datepickerWithIcon.component';
 export { RangeDatepickerSimpleUsageShowcase } from './rangeDatepickerSimpleUsage.component';

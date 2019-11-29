@@ -30,22 +30,20 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * @extends React.Component
  *
- * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default`, `alternative`, `hint`.
+ * Default is `default`.
  *
- * @property {string} children - Determines text of the component.
+ * @property {string} status - Determines the status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  *
  * @property {string} category - Determines the category of the component.
  * Can be `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `s1`, `s2`, `p1`, `p2`, `c1`, `c2`, `label`.
  * Default is `p1`.
  *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `default`, `alternative`, `hint`.
- * Default is `default`.
+ * @property {string | ReactElement<TextProps>} children - Determines text of the component.
  *
- * @property TextProps - Any props applied to Text component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TextProps} ...TextProps - Any props applied to Text component.
  *
  * @overview-example TextSimpleUsage
  *

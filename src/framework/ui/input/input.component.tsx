@@ -7,7 +7,6 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageProps,
   ImageStyle,
   StyleProp,
   StyleSheet,
@@ -30,6 +29,7 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import {
   allWithRest,
   isValidString,
@@ -39,7 +39,6 @@ import {
   InputFocusEvent,
 } from '../support/typings';
 
-type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
 
 interface ComponentProps {
@@ -77,10 +76,11 @@ export type InputElement = React.ReactElement<InputProps>;
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `large`, `medium` or `small`.
+ * Can be `small`, `medium` or `large`.
  * Default is `medium`.
  *
  * @property {string} label - Determines label of the component.
@@ -95,15 +95,15 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} captionIcon - Determines caption icon.
+ * @property {(style: StyleType) => ReactElement} captionIcon - Determines caption icon.
  *
- * @property TextInputProps - Any props applied to TextInput component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TextInputProps} ...TextInputProps - Any props applied to TextInput component.
  *
  * @overview-example InputSimpleUsage
+ *
+ * @overview-example InputStates
  *
  * @overview-example InputStatus
  *

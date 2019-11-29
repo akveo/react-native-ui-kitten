@@ -7,30 +7,24 @@ import {
 
 export const AvatarShapeShowcase = () => (
   <Layout style={styles.container}>
-    <Avatar
-      style={styles.item}
-      shape='round'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
-    <Avatar
-      style={styles.item}
-      shape='rounded'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
-    <Avatar
-      style={styles.item}
-      shape='square'
-      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' }}
-    />
+
+    <Avatar style={styles.avatar} shape='square' source={require('../../../../assets/brand-logo.png')} />
+
+    <Avatar style={styles.avatar} shape='rounded' source={require('../../../../assets/brand-logo.png')} />
+
+    <Avatar style={styles.avatar} shape='round' source={require('../../../../assets/brand-logo.png')} />
+
   </Layout>
 );
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: 8,
   },
-  item: {
-    marginVertical: 8,
+  avatar: {
+    margin: 8,
   },
 });

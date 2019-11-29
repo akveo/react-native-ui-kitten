@@ -7,7 +7,6 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageProps,
   ImageStyle,
   Insets,
   StyleProp,
@@ -21,8 +20,8 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import { IconElement } from '../icon/icon.component';
 
-type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: StyleType) => IconElement;
 
 interface ComponentProps {
@@ -39,11 +38,9 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @extends React.Component
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the tab.
+ * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
  *
- * @property {TouchableOpacityProps} - Any props applied to TouchableOpacity component.
- *
- * @property {StyledComponentProps} - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example TopNavigationActionSimpleUsage
  *

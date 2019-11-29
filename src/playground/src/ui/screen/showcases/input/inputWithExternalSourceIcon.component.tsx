@@ -4,37 +4,27 @@
  */
 
 import React from 'react';
-import { Icon, Input } from 'react-native-ui-kitten';
+import { Input } from 'react-native-ui-kitten';
 import { Image } from 'react-native';
 
-export class InputWithExternalSourceIconShowcase extends React.Component {
+export const InputWithExternalSourceIconShowcase = () => {
 
-  state = {
-    value: '',
-  };
+  const [value, setValue] = React.useState('');
 
-  onChangeText = (value) => {
-    this.setState({ value });
-  };
+  const renderIcon = (style) => (
+    <Image
+      style={style}
+      source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/eye-off.png' }}
+    />
+  );
 
-  renderIcon = (style) => {
-    return (
-      <Image
-        style={style}
-        source={{uri: 'https://akveo.github.io/eva-icons/fill/png/128/eye-off.png'}}
-      />
-    );
-  };
-
-  render() {
-    return (
-      <Input
-        value={this.state.value}
-        placeholder='Place your Text'
-        icon={this.renderIcon}
-        secureTextEntry={true}
-        onChangeText={this.onChangeText}
-      />
-    );
-  }
-}
+  return (
+    <Input
+      value={value}
+      placeholder='Place your Text'
+      icon={renderIcon}
+      secureTextEntry={true}
+      onChangeText={setValue}
+    />
+  );
+};

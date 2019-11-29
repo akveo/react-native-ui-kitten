@@ -51,7 +51,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning`, `danger`, basic` or `control`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
  *
  * @property {string} text - Determines text of the component.
@@ -60,15 +60,13 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * @property {(selected: boolean) => void} onChange - Triggered on onChange value.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example RadioSimpleUsage
  *
- * @overview-example RadioStatus
+ * @overview-example RadioStates
  *
- * @overview-example RadioWithText
+ * @overview-example RadioStatus
  *
  * @example RadioInlineStyling
  */

@@ -14,5 +14,8 @@
     "hoist-non-react-statics": "^3.2.1",
     "lodash.merge": "^4.6.1",
     "fecha": "3.0.3"
+  },
+  "peerDependencies": {
+    "react-native-svg": "^9.4.0"
   }
 }

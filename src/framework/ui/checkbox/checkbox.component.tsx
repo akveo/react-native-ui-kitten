@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { SvgProps } from 'react-native-svg';
 import {
   GestureResponderEvent,
   Insets,
@@ -14,7 +15,6 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   View,
-  ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
@@ -27,10 +27,17 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import { CheckMark } from '../support/components';
+import {
+  CheckMark,
+  CheckMarkProps,
+  CheckMarkElement,
+} from '../support/components/checkmark.component';
+import {
+  Minus,
+  MinusElement,
+  MinusProps,
+} from '../support/components/minus.component';
 import { isValidString } from '../support/services';
-
-type IconElement = React.ReactElement<ViewProps>;
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
@@ -44,6 +51,8 @@ interface ComponentProps {
 export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 
+type IconElement = CheckMarkElement | MinusElement;
+
 /**
  * Styled `CheckBox` component.
  *
@@ -56,7 +65,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * Default is `false.
  *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning`, `danger`, `basic` or `control`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
  *
  * @property {string} text - Determines text of the component.
@@ -65,17 +74,15 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @property {(checked: boolean) => void} onChange - Fires on checkbox value change.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CheckboxSimpleUsage
  *
+ * @overview-example CheckboxStates
+ *
+ * @overview-example CheckboxIndeterminate
+ *
  * @overview-example CheckboxStatus
- *
- * @overview-example CheckboxText
- *
- * @example CheckboxIndeterminate
  *
  * @example CheckboxInlineStyling
  */
@@ -141,8 +148,9 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       icon: {
         width: iconWidth,
         height: iconHeight,
-        borderRadius: iconBorderRadius,
-        backgroundColor: iconTintColor,
+        fill: iconTintColor,
+        stroke: iconTintColor,
+        strokeWidth: 3,
       },
       highlight: {
         width: outlineWidth,
@@ -175,24 +183,11 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
     );
   };
 
-  private renderSelectIconElement = (style: ViewStyle): IconElement => {
+  private renderIconElement = (style: SvgProps): IconElement => {
+    const Icon: React.ComponentType<MinusProps | CheckMarkProps> = this.props.indeterminate ? Minus : CheckMark;
     return (
-      <CheckMark style={[style, styles.icon]}/>
+      <Icon {...style} />
     );
-  };
-
-  private renderIndeterminateIconElement = (style: ViewStyle): IconElement => {
-    return (
-      <View style={[style, styles.icon]}/>
-    );
-  };
-
-  private renderIconElement = (style: ViewStyle): IconElement => {
-    if (this.props.indeterminate) {
-      return this.renderIndeterminateIconElement(style);
-    } else {
-      return this.renderSelectIconElement(style);
-    }
   };
 
   private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {

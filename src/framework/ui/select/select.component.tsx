@@ -8,9 +8,7 @@ import React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  ImageProps,
   ImageStyle,
-  ListRenderItemInfo,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -29,6 +27,7 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { Popover } from '../popover/popover.component';
 import {
   SelectOptionsList,
@@ -49,9 +48,12 @@ import {
   allWithPrefix,
   isValidString,
 } from '../support/services';
-import { Chevron } from '../support/components';
+import {
+  ChevronDown,
+  ChevronDownElement,
+  ChevronDownProps,
+} from '../support/components/chevronDown.component';
 
-type IconElement = React.ReactElement<ImageProps>;
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 type SelectChildren = [SelectOptionsListElement, TextElement, ControlElement];
@@ -74,7 +76,7 @@ interface ComponentProps {
   icon?: IconProp;
   onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
   status?: string;
-  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
+  size?: string;
   keyExtractor?: KeyExtractorType;
 }
 
@@ -93,11 +95,16 @@ interface State {
  *
  * @extends React.Component
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
- *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning` or `danger`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `small`, `medium` or `large`.
+ * Default is `medium`.
+ *
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * Default is `false.
  *
  * @property {boolean} multiSelect - Determines `multi-select` behavior of the Select component.
  *
@@ -108,9 +115,6 @@ interface State {
  *
  * @property {(option: SelectOption, event?: GestureResponderEvent) => void} onSelect - Fires on option selection.
  * Returns selected option/options.
- *
- * @property {(item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>} renderItem - Property for
- * rendering custom select items.
  *
  * @property {StyleProp<TextStyle>} label - Determines the `label` of the component.
  *
@@ -125,27 +129,31 @@ interface State {
  *
  * @property {StyleProp<ViewStyle>} controlStyle - Determines the style of `control`.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
  * @property {KeyExtractorType} keyExtractor - Used to extract a unique key for a given item;
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example SelectSimpleUsage
  *
+ * @overview-example SelectStates
+ *
  * @overview-example SelectStatus
+ *
+ * @overview-example SelectSize
  *
  * @overview-example SelectMultiSelect
  *
  * @overview-example SelectWithGroups
  *
- * @overview-example SelectMultiPreselectedInline
+ * @overview-example SelectDisabledOptions
  *
- * @overview-example SelectMultiPreselectedReference
+ * @example SelectInitialValue
+ *
+ * @example SelectMultiInitialValue
  *
  * @example SelectCustomIcon
  *
@@ -170,7 +178,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
   constructor(props: SelectProps) {
     super(props);
     this.strategy = this.createSelectionStrategy();
-    this.iconAnimation = new Animated.Value(-180);
+    this.iconAnimation = new Animated.Value(0);
   }
 
   public componentDidUpdate(): void {
@@ -243,9 +251,9 @@ class SelectComponent extends React.Component<SelectProps, State> {
   private startIconAnimation = (): void => {
     const { visible } = this.state;
     if (visible) {
-      this.animateIcon(0);
-    } else {
       this.animateIcon(-180);
+    } else {
+      this.animateIcon(0);
     }
   };
 
@@ -273,7 +281,6 @@ class SelectComponent extends React.Component<SelectProps, State> {
     const placeholderStyles: StyleType = allWithPrefix(source, 'placeholder');
     const optionsListStyles: StyleType = allWithPrefix(source, 'optionsList');
     const labelStyle: StyleType = allWithPrefix(source, 'label');
-    const outlineStyles: StyleType = allWithPrefix(source, 'outline');
 
     return {
       control: {
@@ -293,25 +300,20 @@ class SelectComponent extends React.Component<SelectProps, State> {
         tintColor: iconStyles.iconTintColor,
       },
       text: {
+        marginHorizontal: textStyles.textMarginHorizontal,
         color: textStyles.textColor,
-        fontFamily: textStyles.textFontFamily,
         fontSize: textStyles.textFontSize,
         fontWeight: textStyles.textFontWeight,
         lineHeight: textStyles.textLineHeight,
-        marginHorizontal: textStyles.textMarginHorizontal,
+        fontFamily: textStyles.textFontFamily,
       },
       placeholder: {
+        marginHorizontal: placeholderStyles.placeholderMarginHorizontal,
         color: placeholderStyles.placeholderColor,
-        fontFamily: placeholderStyles.placeholderFontFamily,
         fontSize: placeholderStyles.placeholderFontSize,
         fontWeight: placeholderStyles.placeholderFontWeight,
         lineHeight: placeholderStyles.placeholderLineHeight,
-        marginHorizontal: placeholderStyles.placeholderMarginHorizontal,
-      },
-      outline: {
-        backgroundColor: outlineStyles.outlineBackgroundColor,
-        padding: outlineStyles.outlinePadding,
-        borderRadius: outlineStyles.outlineBorderRadius,
+        fontFamily: placeholderStyles.placeholderFontFamily,
       },
       optionsList: {
         maxHeight: optionsListStyles.optionsListMaxHeight,
@@ -320,8 +322,12 @@ class SelectComponent extends React.Component<SelectProps, State> {
         borderWidth: optionsListStyles.optionsListBorderWidth,
       },
       label: {
-        color: labelStyle.labelColor,
         marginBottom: labelStyle.labelMarginBottom,
+        color: labelStyle.labelColor,
+        fontSize: labelStyle.labelFontSize,
+        fontWeight: labelStyle.labelFontWeight,
+        lineHeight: labelStyle.labelLineHeight,
+        fontFamily: labelStyle.labelFontFamily,
       },
     };
   };
@@ -336,19 +342,19 @@ class SelectComponent extends React.Component<SelectProps, State> {
     );
   };
 
-  private renderDefaultIconElement = (style: ImageStyle): IconElement => {
+  private renderDefaultIconElement = (style: ImageStyle): ChevronDownElement => {
     const rotateInterpolate = this.iconAnimation.interpolate({
       inputRange: [-180, 0],
       outputRange: ['-180deg', '0deg'],
     });
 
     const animatedStyle: StyleType = { transform: [{ rotate: rotateInterpolate }] };
+    const { tintColor, ...svgStyle } = style;
 
     return (
-      <Chevron
-        style={[style, animatedStyle]}
-        isAnimated={true}
-      />
+      <Animated.View style={animatedStyle}>
+        <ChevronDown fill={tintColor} {...svgStyle as ChevronDownProps}/>
+      </Animated.View>
     );
   };
 
@@ -402,7 +408,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   private renderControlElement = (): ControlElement => {
     const { themedStyle, controlStyle, ...restProps } = this.props;
-    const { control, outline, ...childrenStyles } = this.getComponentStyle(themedStyle);
+    const { control, ...childrenStyles } = this.getComponentStyle(themedStyle);
     const [iconElement, textElement] = this.renderControlChildren(childrenStyles);
 
     const measuringProps: MeasuringElementProps = { tag: MEASURED_CONTROL_TAG };
@@ -443,16 +449,14 @@ class SelectComponent extends React.Component<SelectProps, State> {
     return (
       <View style={style}>
         {labelElement}
-        <View style={[styles.outline, componentStyle.outline]}>
-          <Popover
-            visible={this.state.visible}
-            content={optionsListElement}
-            style={additionalOptionsListStyle}
-            indicatorStyle={styles.indicator}
-            onBackdropPress={this.setVisibility}>
-            {controlElement}
-          </Popover>
-        </View>
+        <Popover
+          visible={this.state.visible}
+          content={optionsListElement}
+          style={additionalOptionsListStyle}
+          indicatorStyle={styles.indicator}
+          onBackdropPress={this.setVisibility}>
+          {controlElement}
+        </Popover>
       </View>
     );
   }
@@ -475,14 +479,6 @@ const styles = StyleSheet.create({
   },
   optionsList: {
     flexGrow: 0,
-  },
-  outlineContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  outline: {
-    justifyContent: 'center',
   },
 });
 

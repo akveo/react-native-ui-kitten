@@ -45,8 +45,17 @@ If you have an existing code base and want to use UI Kitten in your project, fol
 ### Install UI Kitten
 
 ```bash
-npm i react-native-ui-kitten @eva-design/eva
+npm i react-native-ui-kitten react-native-svg @eva-design/eva
 ```
+
+We also need to complete installation for iOS by linking react-native-svg.
+
+```bash
+cd ios && pod install
+```
+
+Now you should have all in place. We need to restart the bundler to apply the changes.
+Go back to the root application directory, shut down the current bundler process and call `npm start -- --reset-cache`.
 
 ### Configure Application Root
 

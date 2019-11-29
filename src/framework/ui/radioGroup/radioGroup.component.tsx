@@ -33,16 +33,13 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<RadioProps> | React.ReactElement<RadioProps>[]} children -
- * Determines radio buttons in group.
+ * @property {ReactElement<RadioProps> | ReactElement<RadioProps>[]} children - Determines radio buttons in group.
  *
  * @property {number} selectedIndex - Determines the index of selected button
  *
  * @property {(index: number) => void} onChange - Fires when selected radio is changed.
  *
- * @property ViewProps - Any props applied to View component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example RadioGroupSimpleUsage
  */
@@ -61,28 +58,32 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
+    const { itemMarginVertical, ...containerParameters } = source;
+
     return {
-      container: source,
+      container: containerParameters,
+      item: {
+        marginVertical: itemMarginVertical,
+      },
     };
   };
 
-  private renderRadioElement = (element: RadioElement, index: number): RadioElement => {
-    return React.cloneElement(element, {
-      key: index,
-      checked: this.props.selectedIndex === index,
-      onChange: () => this.onRadioChange(index),
+  private renderRadioElements = (source: RadioElement | RadioElement[], style: StyleType): RadioElement[] => {
+    return React.Children.map(source, (element: RadioElement, index: number): RadioElement => {
+      return React.cloneElement(element, {
+        key: index,
+        style: [style, element.props.style],
+        checked: this.props.selectedIndex === index,
+        onChange: () => this.onRadioChange(index),
+      });
     });
-  };
-
-  private renderRadioElements = (source: RadioElement | RadioElement[]): RadioElement[] => {
-    return React.Children.map(source, this.renderRadioElement);
   };
 
   public render(): React.ReactElement<ViewProps> {
     const { themedStyle, style, children, ...derivedProps } = this.props;
     const componentStyle: StyleType = this.getComponentStyle(themedStyle);
 
-    const radioElements: RadioElement[] = this.renderRadioElements(children);
+    const radioElements: RadioElement[] = this.renderRadioElements(children, componentStyle.item);
 
     return (
       <View

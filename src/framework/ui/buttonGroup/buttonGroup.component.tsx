@@ -34,28 +34,33 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *
  * @extends React.Component
  *
- * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning`, `danger` or `white`.
- *
- * @property {string} size - Determines the size of the component.
- * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
- * Default is `medium`.
- *
- * @property {React.ReactElement<ButtonProps>[]} children - Determines buttons in group.
- *
  * @property {string} appearance - Determines the appearance of the component.
  * Can be `filled` or `outline`.
  * Default is `filled`.
  *
- * @property ViewProps - Any props applied to View component.
+ * @property {string} status - Determines the status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `primary`.
  *
- * @property StyledComponentProps - - Any props applied to `styled` component.
+ * @property {string} size - Determines the size of the component.
+ * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Default is `medium`.
+ *
+ * @property {{ReactElement<ButtonProps> | ReactElement<ButtonProps>[]} children - Determines buttons in group.
+ *
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ButtonGroupSimpleUsage
+ *
+ * @overview-example ButtonGroupAppearance
  *
  * @overview-example ButtonGroupStatus
  *
  * @overview-example ButtonGroupSize
+ *
+ * @overview-example ButtonGroupOutline
+ *
+ * @overview-example ButtonGroupWithIcons
  *
  * @example ButtonGroupInlineStyling
  */

@@ -8,7 +8,6 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageProps,
   ImageStyle,
   StyleProp,
   StyleSheet,
@@ -28,13 +27,12 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { TouchableIndexedProps } from '../support/typings';
 import { isValidString } from '../support/services';
 
-type IconElement = React.ReactElement<ImageProps>;
-type AccessoryElement = React.ReactElement<any>;
 type IconProp = (style: StyleType, index: number) => IconElement;
-type AccessoryProp = (style: StyleType, index: number) => AccessoryElement;
+type AccessoryProp = (style: StyleType, index: number) => React.ReactElement;
 
 interface ListDerivedProps {
   index?: number;
@@ -81,18 +79,18 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *
  * @property {StyleProp<TextStyle>} descriptionStyle - Customizes description style.
  *
- * @property {React.ReactNode} children - Determines React Children of the component.
+ * @property {ReactNode} children - Determines React Children of the component.
  *
- * @property {(style: StyleType, index: number) => React.ReactElement<any>} accessory - Determines the accessory of the
+ * @property {(style: StyleType, index: number) => ReactElement} accessory - Determines the accessory of the
  * component.
  *
- * @property {(style: StyleType, index: number) => React.ReactElement<ImageProps>} icon - Determines the icon of the
+ * @property {(style: ImageStyle, index: number) => ReactElement} icon - Determines the icon of the
  * component.
  *
- * @property {(index: number, event: GestureResponderEvent) => React.ReactElement<ImageProps>} onPress - Emits when
+ * @property {(index: number, event: GestureResponderEvent) => ReactElement<ImageProps>} onPress - Emits when
  * component is pressed.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ListItemSimpleUsage
  *
@@ -241,11 +239,11 @@ export class ListItemComponent extends React.Component<ListItemProps> {
     );
   };
 
-  private renderAccessoryElement = (style: StyleType): AccessoryElement => {
+  private renderAccessoryElement = (style: StyleType): React.ReactElement => {
     // @ts-ignore: will be not executed if `accessory` property is provided
     const { index, accessory } = this.props;
 
-    const accessoryElement: AccessoryElement = accessory(style, index);
+    const accessoryElement: React.ReactElement = accessory(style, index);
 
     return React.cloneElement(accessoryElement, {
       key: 4,

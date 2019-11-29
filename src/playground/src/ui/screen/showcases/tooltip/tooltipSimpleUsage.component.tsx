@@ -4,27 +4,22 @@ import {
   Tooltip,
 } from 'react-native-ui-kitten';
 
-export class TooltipSimpleUsageShowcase extends React.Component {
+export const TooltipSimpleUsageShowcase = () => {
 
-  state = {
-    tooltipVisible: false,
+  const [visible, setVisible] = React.useState(false);
+
+  const toggleTooltip = () => {
+    setVisible(!visible);
   };
 
-  onToggleButtonPress = () => {
-    const tooltipVisible = !this.state.tooltipVisible;
-    this.setState({ tooltipVisible });
-  };
-
-  render() {
-    return (
-      <Tooltip
-        visible={this.state.tooltipVisible}
-        text={'Hi! I\'m a Tooltip'}
-        onBackdropPress={this.onToggleButtonPress}>
-        <Button onPress={this.onToggleButtonPress}>
-          TOGGLE TOOLTIP
-        </Button>
-      </Tooltip>
-    );
-  }
-}
+  return (
+    <Tooltip
+      visible={visible}
+      text={'Hi! I\'m a Tooltip'}
+      onBackdropPress={toggleTooltip}>
+      <Button onPress={toggleTooltip}>
+        TOGGLE TOOLTIP
+      </Button>
+    </Tooltip>
+  );
+};

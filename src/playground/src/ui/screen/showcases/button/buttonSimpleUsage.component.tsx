@@ -1,26 +1,17 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import {
-  Button,
-  Layout,
-} from 'react-native-ui-kitten';
+import { Button } from 'react-native-ui-kitten';
 
-export const ButtonSimpleUsageShowcase = () => (
-  <Layout style={styles.container}>
-    <Button style={styles.button}>ACTIVE</Button>
-    <Button style={styles.button} disabled={true}>DISABLED</Button>
-  </Layout>
-);
+export const ButtonSimpleUsageShowcase = () => {
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingVertical: 4,
-    paddingHorizontal: 4,
-  },
-  button: {
-    marginVertical: 4,
-    marginHorizontal: 4,
-  },
-});
+  const [pressCounter, setPressCounter] = React.useState(0);
+
+  const onPress = () => {
+    setPressCounter(pressCounter + 1);
+  };
+
+  return (
+    <Button onPress={onPress}>
+      {`PRESSED ${pressCounter} TIMES`}
+    </Button>
+  );
+};

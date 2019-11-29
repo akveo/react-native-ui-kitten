@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Layout } from 'react-native-ui-kitten';
+import {
+  DatepickerProps,
+  Layout,
+} from 'react-native-ui-kitten';
 import { ShowcaseContainer } from '../common/showcase.container';
 import { DatepickerShowcase } from './datepickerShowcase.component';
 import { RangeDatepickerShowcase } from './rangeDatepickerShowcase.component';
 
 export class DatepickerContainer extends React.Component {
 
-  private renderItem = (): React.ReactElement<any> => {
+  private renderItem = (props: DatepickerProps<Date>): React.ReactElement<DatepickerProps<Date>> => {
     return null;
   };
 

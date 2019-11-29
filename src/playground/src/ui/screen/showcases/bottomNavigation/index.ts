@@ -2,9 +2,6 @@ export { BottomNavigationInlineStylingShowcase } from './bottomNavigationInlineS
 export { BottomNavigationSimpleUsageShowcase } from './bottomNavigationSimpleUsage.component';
 export { BottomNavigationTabInlineStylingShowcase } from './bottomNavigationTabInlineStyling.component';
 export { BottomNavigationTabSimpleUsageShowcase } from './bottomNavigationTabSimpleUsage.component';
-export {
-  BottomNavigationTabWithExternalSourceIconShowcase,
-}from './bottomNavigationTabWithExternalSourceIcon.component';
 export { BottomNavigationTabWithIconShowcase } from './bottomNavigationTabWithIcon.component';
 export { BottomNavigationWithIconsShowcase } from './bottomNavigationWithIcons.component';
 export { BottomNavigationWithoutIndicatorShowcase } from './bottomNavigationWithoutIndicator.component';

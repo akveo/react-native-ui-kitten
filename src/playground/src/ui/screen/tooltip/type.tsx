@@ -1,3 +1,6 @@
+import React from 'react';
+import { ImageProps } from 'react-native';
+import { Icon, StyleType } from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
@@ -5,9 +8,26 @@ import {
   ComponentShowcaseSetting,
 } from '../common/type';
 
+const StarIcon = (style: StyleType): React.ReactElement<ImageProps> => (
+  <Icon name='star' {...style}/>
+);
+
 const defaultTooltip: ComponentShowcaseItem = {
   title: 'Default',
   props: {},
+};
+
+const iconTooltip: ComponentShowcaseItem = {
+  title: 'Icon',
+  props: {
+    icon: StarIcon,
+  },
+};
+
+const accessoriesSection: ComponentShowcaseSection = {
+  items: [
+    iconTooltip,
+  ],
 };
 
 const defaultSection: ComponentShowcaseSection = {
@@ -19,6 +39,7 @@ const defaultSection: ComponentShowcaseSection = {
 export const tooltipShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
+    accessoriesSection,
   ],
 };
 

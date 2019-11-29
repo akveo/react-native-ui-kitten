@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { SvgProps } from 'react-native-svg';
 import {
   Animated,
   GestureResponderEvent,
@@ -29,7 +30,7 @@ import {
   MeasureResult,
   MeasuringElementProps,
 } from '../popover/measure.component';
-import { Chevron } from '../support/components';
+import { ChevronDown } from '../support/components/chevronDown.component';
 import { DividerElement } from '../divider/divider.component';
 
 interface ComponentProps {
@@ -63,16 +64,16 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
   };
 
   private subItemsAnimation: Animated.Value = new Animated.Value(0);
-  private iconAnimation: Animated.Value = new Animated.Value(-180);
+  private iconAnimation: Animated.Value = new Animated.Value(0);
 
   public componentDidUpdate(prevProps: SubMenuProps, prevState: ComponentState): void {
     if (prevState.subItemsVisible !== this.state.subItemsVisible) {
       if (this.state.subItemsVisible) {
         this.subItemsExpandAnimate(this.state.subItemsHeight);
-        this.animateIcon(0);
+        this.animateIcon(-180);
       } else {
         this.subItemsExpandAnimate(0);
-        this.animateIcon(-180);
+        this.animateIcon(0);
       }
     }
   }
@@ -143,7 +144,7 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
     });
   };
 
-  private renderMainItemAccessory = (style: StyleType): IconElement => {
+  private renderMainItemAccessory = (style: SvgProps): IconElement => {
     const rotateInterpolate = this.iconAnimation.interpolate({
       inputRange: [-180, 0],
       outputRange: ['-180deg', '0deg'],
@@ -151,10 +152,9 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
     const animatedStyle: StyleType = { transform: [{ rotate: rotateInterpolate }] };
 
     return (
-      <Chevron
-        style={[style, animatedStyle]}
-        isAnimated={true}
-      />
+      <Animated.View style={animatedStyle}>
+        <ChevronDown {...style}/>
+      </Animated.View>
     );
   };
 

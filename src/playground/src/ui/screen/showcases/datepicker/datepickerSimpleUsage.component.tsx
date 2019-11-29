@@ -3,33 +3,36 @@ import { StyleSheet } from 'react-native';
 import {
   Datepicker,
   Layout,
+  Text,
 } from 'react-native-ui-kitten';
 
-export class DatepickerSimpleUsageShowcase extends React.Component {
+export const DatepickerSimpleUsageShowcase = () => {
 
-  state = {
-    date: new Date(),
-  };
+  const [date, setDate] = React.useState(new Date());
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
+  return (
+    <Layout style={styles.container}>
 
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Datepicker
-          date={this.state.date}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+      <Text
+        style={styles.text}
+        category='h6'>
+        {`Selected date: ${date.toLocaleDateString()}`}
+      </Text>
+
+      <Datepicker
+        date={date}
+        onSelect={setDate}
+      />
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 400,
-    padding: 16,
+    minHeight: 376,
+  },
+  text: {
+    marginVertical: 8,
   },
 });

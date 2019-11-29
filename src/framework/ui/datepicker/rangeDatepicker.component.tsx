@@ -21,7 +21,18 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @extends React.Component
  *
- * @property {(style: ImageStyle) => React.ReactElement<ImageProps>} icon - Determines the icon of the component.
+ * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
+ *
+ * @property {string} status - Determines the status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `small`, `medium` or `large`.
+ * Default is `medium`.
+ *
+ * @property {boolean} disabled - Determines whether component is disabled.
+ * Default is `false.
  *
  * @property {string} placeholder - Determines placeholder of the component.
  *
@@ -43,19 +54,17 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @property {(date: D) => string} todayTitle - Defines the title for today's date.
  *
- * @property {(date: D) => ReactElement<any>} filter - Predicate that decides which cells will be disabled.
+ * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
  * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
  *
- * @property {(date: D, style: StyleType) => ReactElement<any>} renderDay - Should return the content of day cell.
+ * @property {(date: D, style: StyleType) => ReactElement} renderDay - Should return the content of day cell.
  *
- * @property {(date: D, style: StyleType) => ReactElement<any>} renderMonth - Should return the content of month cell.
+ * @property {(date: D, style: StyleType) => ReactElement} renderMonth - Should return the content of month cell.
  *
- * @property {(date: D, style: StyleType) => ReactElement<any>} renderYear - Should return the content of year cell.
+ * @property {(date: D, style: StyleType) => ReactElement} renderYear - Should return the content of year cell.
  *
- * @property TouchableOpacityProps
- *
- * @property StyledComponentProps
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example RangeDatepickerSimpleUsage
  */

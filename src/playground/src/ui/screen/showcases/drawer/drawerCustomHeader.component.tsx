@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import {
   Drawer,
@@ -7,46 +6,36 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 
-export class DrawerCustomHeaderShowcase extends React.Component {
+const drawerData = [
+  { title: 'Dashboard' },
+  { title: 'Messages' },
+  { title: 'Settings' },
+  { title: 'Articles' },
+  { title: 'Ecommerce' },
+  { title: 'Chat' },
+];
 
-  drawerData = [
-    { title: 'Dashboard' },
-    { title: 'Messages' },
-    { title: 'Settings' },
-    { title: 'Articles' },
-    { title: 'Ecommerce' },
-    { title: 'Chat' },
-  ];
+const Header = () => (
+  <Layout level='2'>
+    <Text category='h6'>Drawer Header</Text>
+  </Layout>
+);
 
-  onRouteSelect = (index) => {
-    // const { [index]: route } = this.drawerData;
+export const DrawerCustomHeaderShowcase = () => {
+
+  const onRouteSelect = (index) => {
+    const route = drawerData[index];
     // navigate with React Navigation
     // this.props.navigation.navigate(route.title);
   };
 
-  renderHeader = () => (
-    <Layout level='2'>
-      <Text category='h6'>Drawer Header</Text>
-    </Layout>
+  return (
+    <SafeAreaView>
+      <Drawer
+        data={drawerData}
+        header={Header}
+        onSelect={onRouteSelect}
+      />
+    </SafeAreaView>
   );
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <SafeAreaView>
-          <Drawer
-            data={this.drawerData}
-            header={this.renderHeader}
-            onSelect={this.onRouteSelect}
-          />
-        </SafeAreaView>
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
+};

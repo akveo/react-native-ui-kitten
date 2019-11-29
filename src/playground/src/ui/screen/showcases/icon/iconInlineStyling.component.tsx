@@ -6,7 +6,7 @@
 import React from 'react';
 import { Icon } from 'react-native-ui-kitten';
 
-export const IconInlineStylingShowcase = (props) => (
+export const IconInlineStylingShowcase = () => (
   <Icon
     name='github'
     width={32}

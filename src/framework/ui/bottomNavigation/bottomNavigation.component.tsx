@@ -20,10 +20,9 @@ import {
 import { BottomNavigationTabElement } from './bottomNavigationTab.component';
 import {
   TabIndicator,
-  TabIndicatorProps,
-} from '../support/components';
+  TabIndicatorElement,
+} from '../support/components/tabIndicator.component';
 
-type IndicatorElement = React.ReactElement<TabIndicatorProps>;
 type ChildrenProp = BottomNavigationTabElement | BottomNavigationTabElement[];
 
 interface ComponentProps {
@@ -45,18 +44,15 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @property {number} selectedIndex - Determines index of the selected tab.
  *
  * @property {string} appearance - Determines the appearance of the component.
- * Can be `default` | `noIndicator`.
+ * Can be `default` or `noIndicator`.
  *
- * @property {React.ReactElement<TabProps> | React.ReactElement<TabProps>[]} children -
- * Determines tabs of the Bottom Navigation.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Determines tabs of the Bottom Navigation.
  *
  * @property {StyleProp<ViewStyle>} indicatorStyle - Determines styles of the indicator.
  *
  * @property {(index: number) => void} onSelect - Triggered on select value.
  *
- * @property {ViewProps} - Any props applied to View component.
- *
- * @property StyledComponentProps
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example BottomNavigationSimpleUsage
  *
@@ -76,38 +72,38 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * //
  * // cd ios && pod install
  *
- * const HomeScreen = () => (
+ * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>HOME</Text>
+ *     <Text category='h1'>USERS</Text>
  *   </Layout>
  * );
  *
- * const SettingsScreen = () => (
+ * const OrdersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>SETTINGS</Text>
+ *     <Text category='h1'>ORDERS</Text>
  *   </Layout>
  * );
  *
  * const TabBarComponent = ({ navigation }) => {
  *
  *   const onSelect = (index) => {
- *     const { [index]: selectedTabRoute } = navigation.state.routes;
+ *     const selectedTabRoute = navigation.state.routes[index];
  *     navigation.navigate(selectedTabRoute.routeName);
  *   };
  *
  *   return (
  *     <SafeAreaView>
  *       <BottomNavigation selectedIndex={navigation.state.index} onSelect={onSelect}>
- *         <BottomNavigationTab title='HOME'/>
- *         <BottomNavigationTab title='SETTINGS'/>
+ *         <BottomNavigationTab title='USERS'/>
+ *         <BottomNavigationTab title='ORDERS'/>
  *       </BottomNavigation>
  *     </SafeAreaView>
  *   );
  * };
  *
  * const TabNavigator = createBottomTabNavigator({
- *   Home: HomeScreen,
- *   Settings: SettingsScreen,
+ *   Users: UsersScreen,
+ *   Orders: OrdersScreen,
  * }, {
  *   tabBarComponent: TabBarComponent,
  * });
@@ -148,7 +144,7 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
     };
   };
 
-  private renderIndicatorElement = (positions: number, style: ViewStyle): IndicatorElement => {
+  private renderIndicatorElement = (positions: number, style: ViewStyle): TabIndicatorElement => {
     const { indicatorStyle, selectedIndex } = this.props;
 
     return (

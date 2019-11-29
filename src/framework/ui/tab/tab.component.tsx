@@ -23,11 +23,11 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { isValidString } from '../support/services';
 
-type IconElement = React.ReactElement<ImageProps>;
-type IconProp = (style: ImageStyle) => React.ReactElement<ImageProps>;
-type ContentElement = React.ReactElement<any>;
+type IconProp = (style: ImageStyle) => IconElement;
+type ContentElement = React.ReactElement;
 
 interface ComponentProps {
   title?: string;
@@ -52,17 +52,15 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @property {StyleProp<TextStyle>} titleStyle - Determines style of the title.
  *
- * @property {React.ReactElement<any>} children - Determines content of the tab.
+ * @property {ReactElement} children - Determines content of the tab.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines icon of the component.
+ * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
  *
  * @property {boolean} selected - Determines tab selection state.
  *
  * @property {(selected: boolean) => void} onSelect = Fires on onSelect event.
  *
- * @property TouchableOpacityProps - Any props applied to TouchableOpacity component.
- *
- * @property StyledComponentProps - Any props applied to `styledL` component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example TabSimpleUsage
  *

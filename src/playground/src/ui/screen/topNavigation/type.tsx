@@ -12,9 +12,21 @@ import {
   ComponentShowcaseSetting,
 } from '../common/type';
 
-const RightControlIcon = (style: StyleType): IconElement => {
+const BackIcon = (style: StyleType): IconElement => {
+  return (
+    <Icon {...style} name='arrow-back' />
+  );
+};
+
+const StarIcon = (style: StyleType): IconElement => {
   return (
     <Icon {...style} name='star' />
+  );
+};
+
+const MenuIcon = (style: StyleType): IconElement => {
+  return (
+    <Icon {...style} name='more-vertical' />
   );
 };
 
@@ -22,10 +34,10 @@ const rightControlsTopNavigation: ComponentShowcaseItem = {
   props: {
     title: 'Title',
     subtitle: 'Subtitle',
-    leftControl: <TopNavigationAction icon={RightControlIcon}/>,
+    leftControl: <TopNavigationAction icon={BackIcon}/>,
     rightControls: [
-      <TopNavigationAction icon={RightControlIcon}/>,
-      <TopNavigationAction icon={RightControlIcon}/>,
+      <TopNavigationAction icon={StarIcon}/>,
+      <TopNavigationAction icon={MenuIcon}/>,
     ],
   },
 };
@@ -34,7 +46,7 @@ const leftControlTopNavigation: ComponentShowcaseItem = {
   props: {
     title: 'Title',
     subtitle: 'Subtitle',
-    leftControl: <TopNavigationAction icon={RightControlIcon}/>,
+    leftControl: <TopNavigationAction icon={BackIcon}/>,
   },
 };
 

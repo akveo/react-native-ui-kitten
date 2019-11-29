@@ -16,7 +16,7 @@ import { TabElement } from './tab.component';
 import { TabBar } from './tabBar.component';
 import { ViewPager } from '../viewPager/viewPager.component';
 
-type TabContentElement = React.ReactElement<any>;
+type TabContentElement = React.ReactElement;
 type ChildrenProp = TabElement | TabElement[];
 
 class TabViewChildElement {
@@ -55,16 +55,18 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  *
  * @property {(index: number) => void} onSelect - Fires on "page" select with corresponding index.
  *
- * @property {TabElement | TabElement[]} children - Determines children of the component.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Determines children of the component.
  *
  * @property {(index: number) => boolean} shouldLoadComponent - Determines loading behavior particular page and can be
  * used for lazy loading.
  *
  * @property {(offset: number) => void} onOffsetChange - Fires on scroll event with current scroll offset.
  *
- * @property ViewProps - Any props applied to View component.
+ * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example TabViewSimpleUsage
+ *
+ * @overview-example TabViewWithIcon
  *
  * @overview-example TabViewLazyLoading
  *

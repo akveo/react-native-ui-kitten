@@ -13,34 +13,33 @@ const NotificationBadge = (style) => (
   </Layout>
 );
 
-export class DrawerNotificationBadgeItemShowcase extends React.Component {
+const drawerData = [
+  { title: 'Dashboard' },
+  {
+    title: 'Messages',
+    accessory: NotificationBadge,
+  },
+  { title: 'Settings' },
+  { title: 'Articles' },
+];
 
-  drawerData = [
-    { title: 'Dashboard' },
-    { title: 'Messages', accessory: NotificationBadge },
-    { title: 'Settings' },
-    { title: 'Articles' },
-  ];
+export const DrawerNotificationBadgeItemShowcase = () => {
 
-  onRouteSelect = (index) => {
-    // const { [index]: route } = this.drawerData;
+  const onRouteSelect = (index) => {
+    const route = drawerData[index];
     // navigate with React Navigation
     // this.props.navigation.navigate(route.title);
   };
 
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <SafeAreaView>
-          <Drawer
-            data={this.drawerData}
-            onSelect={this.onRouteSelect}
-          />
-        </SafeAreaView>
-      </Layout>
-    );
-  }
-}
+  return (
+    <SafeAreaView>
+      <Drawer
+        data={drawerData}
+        onSelect={onRouteSelect}
+      />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -53,6 +52,6 @@ const styles = StyleSheet.create({
     width: 48,
     paddingHorizontal: 24,
     borderRadius: 12,
-    backgroundColor: 'orange',
+    backgroundColor: '#3366FF',
   },
 });

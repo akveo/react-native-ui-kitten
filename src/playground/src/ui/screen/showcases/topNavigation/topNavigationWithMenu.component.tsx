@@ -24,58 +24,53 @@ const LogoutIcon = (style) => (
   <Icon {...style} name='log-out'/>
 );
 
-export class TopNavigationWithMenuShowcase extends React.Component {
+export const TopNavigationWithMenuShowcase = () => {
 
-  state = {
-    menuVisible: false,
-  };
+  const [menuVisible, setMenuVisible] = React.useState(false);
 
-  menuData = [
+  const menuData = [
     { title: 'About', icon: InfoIcon },
     { title: 'Logout', icon: LogoutIcon },
   ];
 
-  onMenuActionPress = () => {
-    const menuVisible = !this.state.menuVisible;
-    this.setState({ menuVisible });
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
   };
 
-  onMenuItemSelect = (index) => {
+  const onMenuItemSelect = (index) => {
     // Handle Item Select
 
-    this.setState({ menuVisible: false });
+    setMenuVisible(false);
   };
 
-  renderMenuAction = () => (
+  const renderMenuAction = () => (
     <OverflowMenu
-      visible={this.state.menuVisible}
-      data={this.menuData}
+      visible={menuVisible}
+      data={menuData}
       placement='bottom end'
-      onSelect={this.onMenuItemSelect}
-      onBackdropPress={this.onMenuActionPress}>
+      onSelect={onMenuItemSelect}
+      onBackdropPress={toggleMenu}>
       <TopNavigationAction
         icon={MenuIcon}
-        onPress={this.onMenuActionPress}
+        onPress={toggleMenu}
       />
     </OverflowMenu>
   );
 
-  renderBackAction = () => (
-    <TopNavigationAction icon={BackIcon} />
+  const renderBackAction = () => (
+    <TopNavigationAction icon={BackIcon}/>
   );
 
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <TopNavigation
-          title='Application Title'
-          leftControl={this.renderBackAction()}
-          rightControls={this.renderMenuAction()}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <TopNavigation
+        title='Application Title'
+        leftControl={renderBackAction()}
+        rightControls={renderMenuAction()}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -4,4 +4,5 @@ export { ButtonOutlineShowcase } from './buttonOutline.component';
 export { ButtonWithIconShowcase } from './buttonWithIcon.component';
 export { ButtonSimpleUsageShowcase } from './buttonSimpleUsage.component';
 export { ButtonSizeShowcase } from './buttonSize.component';
+export { ButtonStatesShowcase } from './buttonStates.component';
 export { ButtonStatusShowcase } from './buttonStatus.component';

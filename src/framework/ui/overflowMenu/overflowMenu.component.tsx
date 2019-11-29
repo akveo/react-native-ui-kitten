@@ -31,7 +31,7 @@ type PopoverContentProps = Omit<PopoverProps, 'content'>;
 export type OverflowMenuItemType = Omit<MenuItemType, 'subItems'>;
 
 interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
-  children: React.ReactElement<any>;
+  children: React.ReactElement;
 }
 
 type MenuBasedProps = Override<MenuProps, { data: OverflowMenuItemType[] }>;
@@ -44,8 +44,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<any>} children - Determines the element above
- * which the menu will be rendered.
+ * @property {ReactElement} children - Determines the element above which the menu will be rendered.
  *
  * @property {boolean} visible - determines the visibility of the component.
  *
@@ -55,19 +54,20 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Fires when selected item is changed.
  *
- * @property Omit<PopoverProps, 'content'> - Any props applied to Popover component, excluding `content`.
+ * @property {Omit<PopoverProps, 'content'>} ...PopoverProps - Any props applied to Popover component,
+ * excluding `content`.
  *
- * @property Override<MenuProps, { data: OverflowMenuItemType[] }> - Any props applied to Menu component.
+ * @property {Override<MenuProps, { data: OverflowMenuItemType[] }>} ...MenuProps - Any props applied to Menu component.
  *
- * @property ModalPresentingBased - Any props applied to Modal component.
- *
- * @property StyledComponentProps - Any props applied to `styled` component.
+ * @property {ModalPresentingBased} ...ModalProps - Any props applied to Modal component.
  *
  * @overview-example OverflowMenuSimpleUsage
  *
+ * @overview-example OverflowMenuPlacement
+ *
  * @overview-example OverflowMenuWithIcons
  *
- * @example OverflowMenuWithDisabledItems
+ * @overview-example OverflowMenuWithDisabledItems
  *
  * @example OverflowMenuWithoutDivider
  *

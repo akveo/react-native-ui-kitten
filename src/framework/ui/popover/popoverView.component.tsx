@@ -17,7 +17,7 @@ import {
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
-import { Arrow } from '../support/components';
+import { Arrow } from '../support/components/arrow.component';
 import { I18nLayoutService } from '../support/services';
 
 interface ComponentProps {

@@ -13,7 +13,7 @@ import {
 
 interface ComponentProps extends ViewProps {
   data: string[];
-  children: (data: string, index: number) => React.ReactElement<any>;
+  children: (data: string, index: number) => React.ReactElement;
 }
 
 export type CalendarMonthHeaderProps = ComponentProps;

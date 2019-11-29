@@ -22,7 +22,7 @@ jest.useFakeTimers();
 
 const now: Date = new Date();
 const CURRENT_MONTH: number = now.getMonth();
-const FORMAT_HEADER_DATE: string = 'MMM YYYY';
+const FORMAT_HEADER_DATE: string = 'MMMM YYYY';
 const dateService: NativeDateService = new NativeDateService();
 
 interface State {

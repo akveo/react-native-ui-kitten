@@ -4,56 +4,44 @@
  */
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import {
   Drawer,
   Icon,
-  Layout,
 } from 'react-native-ui-kitten';
 
-const DashboardIcon = (style) => (
-  <Icon {...style} name='layout'/>
+const PersonIcon = (style) => (
+  <Icon {...style} name='person-outline' />
 );
 
-const MessagesIcon = (style) => (
-  <Icon {...style} name='email'/>
+const BellIcon = (style) => (
+  <Icon {...style} name='bell-outline' />
 );
 
-const SettingsIcon = (style) => (
-  <Icon {...style} name='settings'/>
+const EmailIcon = (style) => (
+  <Icon {...style} name='email-outline' />
 );
 
-export class DrawerWithIconsShowcase extends React.Component {
+const drawerData = [
+  { title: 'Users', icon: PersonIcon },
+  { title: 'Orders', icon: BellIcon },
+  { title: 'Transactions', icon: EmailIcon },
+];
 
-  drawerData = [
-    { title: 'Dashboard', icon: DashboardIcon },
-    { title: 'Messages', icon: MessagesIcon },
-    { title: 'Settings', icon: SettingsIcon },
-  ];
+export const DrawerWithIconsShowcase = () => {
 
-  onRouteSelect = (index) => {
-    // const { [index]: route } = this.drawerData;
+  const onRouteSelect = (index) => {
+    const route = drawerData[index];
     // navigate with React Navigation
     // this.props.navigation.navigate(route.title);
   };
 
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <SafeAreaView>
-          <Drawer
-            data={this.drawerData}
-            onSelect={this.onRouteSelect}
-          />
-        </SafeAreaView>
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
+  return (
+    <SafeAreaView>
+      <Drawer
+        data={drawerData}
+        onSelect={onRouteSelect}
+      />
+    </SafeAreaView>
+  );
+};

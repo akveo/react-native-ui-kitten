@@ -27,13 +27,13 @@ import { SelectOption as SelectOptionProp} from './select.component';
 import { SelectionStrategy } from './selection.strategy';
 
 type DefaultMenuItemElement = SelectOptionElement | SelectGroupOptionElement;
-type MenuItemElement = DefaultMenuItemElement | React.ReactElement<any>;
+type MenuItemElement = DefaultMenuItemElement | React.ReactElement;
 
 export interface ComponentProps {
   data: SelectOptionType[];
   multiSelect?: boolean;
   strategy: SelectionStrategy<SelectOptionProp>;
-  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
+  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement;
   onSelect: (option: SelectOptionType, event?: GestureResponderEvent) => void;
 }
 
@@ -60,7 +60,7 @@ export class SelectOptionsList extends React.Component<SelectOptionsListProps> {
       <SelectGroupOption
         {...info}
         strategy={strategy}
-        multiSelect={multiSelect}
+        multi={multiSelect}
         renderItem={renderItem}
         onPress={this.onSelect}
       />
@@ -69,7 +69,7 @@ export class SelectOptionsList extends React.Component<SelectOptionsListProps> {
         {...info}
         disabled={info.item.disabled}
         selected={selected}
-        multiSelect={multiSelect}
+        multi={multiSelect}
         onPress={this.onSelect}
       />
     );

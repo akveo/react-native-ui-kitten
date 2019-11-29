@@ -5,33 +5,26 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 
-export class TabViewLazyLoadingShowcase extends React.Component {
+export const TabViewLazyLoadingShowcase = () => {
 
-  state = {
-    selectedIndex: 0,
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  onSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
+  const shouldLoadComponent = (index) => index === selectedIndex;
 
-  shouldLoadTabContent = (index) => {
-    return index === this.state.selectedIndex;
-  };
-
-  render() {
-    return (
-      <TabView
-        selectedIndex={this.state.selectedIndex}
-        shouldLoadComponent={this.shouldLoadTabContent}
-        onSelect={this.onSelect}>
-        <Tab title='DASHBOARD'>
-          <Text>DASHBOARD</Text>
-        </Tab>
-        <Tab title='SETTINGS'>
-          <Text>SETTINGS</Text>
-        </Tab>
-      </TabView>
-    );
-  }
-}
+  return (
+    <TabView
+      selectedIndex={selectedIndex}
+      shouldLoadComponent={shouldLoadComponent}
+      onSelect={setSelectedIndex}>
+      <Tab title='USERS'>
+        <Text>List of users.</Text>
+      </Tab>
+      <Tab title='ORDERS'>
+        <Text>List of orders.</Text>
+      </Tab>
+      <Tab title='TRANSACTIONS'>
+        <Text>ORDERS</Text>
+      </Tab>
+    </TabView>
+  );
+};

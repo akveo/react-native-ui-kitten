@@ -5,35 +5,23 @@ import {
   RangeDatepicker,
 } from 'react-native-ui-kitten';
 
-export class RangeDatepickerSimpleUsageShowcase extends React.Component {
+export const RangeDatepickerSimpleUsageShowcase = () => {
 
-  state = {
-    range: {
-      startDate: null,
-      endDate: null,
-    },
-  };
+  const [range, setRange] = React.useState({});
 
-  onSelect = (range) => {
-    this.setState({ range });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <RangeDatepicker
-          range={this.state.range}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <RangeDatepicker
+        range={range}
+        onSelect={setRange}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 400,
-    padding: 16,
+    minHeight: 376,
   },
 });
 

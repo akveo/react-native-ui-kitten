@@ -1,29 +1,24 @@
 import React from 'react';
 import {
+  Image,
+  StyleSheet,
   View,
   ViewProps,
-  StyleSheet,
-  Image,
 } from 'react-native';
 import {
-  Text,
-  CardFooterElement,
-  CardHeaderElement,
-  CardHeader,
   Button,
+  CardFooterElement,
+  CardHeader,
+  CardHeaderElement,
+  Text,
 } from 'react-native-ui-kitten';
-
-const bodyText: string = 'A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. ' +
-  'Originally, nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.';
-const headerImageUri: string = 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg';
 
 export const CardBodyContent = (): React.ReactElement<ViewProps> => {
   return (
-    <View>
-      <Text style={styles.bodyText}>
-        {bodyText}
-      </Text>
-    </View>
+    <Text appearance='hint'>
+      A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+      Originally, nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.
+    </Text>
   );
 };
 
@@ -38,19 +33,17 @@ export const EvaCardHeader = (): CardHeaderElement => {
 
 export const CustomCardHeader = (): CardHeaderElement => {
   return (
-    <View>
+    <React.Fragment>
       <Image
-        source={{ uri: headerImageUri }}
+        source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg' }}
         style={styles.headerImage}
       />
-      <View style={styles.headerTextContainer}>
-        <Text
-          category='h6'
-          style={styles.headerText}>
-          Title
-        </Text>
-      </View>
-    </View>
+      <Text
+        style={styles.headerText}
+        category='h6'>
+        Title
+      </Text>
+    </React.Fragment>
   );
 };
 
@@ -58,13 +51,14 @@ export const CardFooter = (): CardFooterElement => {
   return (
     <View style={styles.footerContainer}>
       <Button
-        size='small'
-        style={styles.footerControl}>
+        style={styles.footerControl}
+        size='small'>
         Accept
       </Button>
       <Button
-        size='small'
-        status='basic'>
+        style={styles.footerControl}
+        status='basic'
+        size='small'>
         Cancel
       </Button>
     </View>
@@ -72,27 +66,19 @@ export const CardFooter = (): CardFooterElement => {
 };
 
 const styles = StyleSheet.create({
-  bodyText: {
-    fontSize: 15,
-    lineHeight: 20,
-    color: 'gray',
-  },
-  headerTextContainer: {
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-  },
   headerText: {
-    color: '#6e5f5e',
+    marginHorizontal: 24,
+    marginVertical: 16,
   },
   headerImage: {
-    width: '100%',
-    height: 230,
+    flex: 1,
+    height: 192,
   },
   footerContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   footerControl: {
-    marginRight: 12,
+    marginHorizontal: 4,
   },
 });

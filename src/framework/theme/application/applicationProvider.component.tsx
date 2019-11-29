@@ -47,9 +47,7 @@ interface State {
  * @property {ThemeType} theme - Determines the theme for basic components.
  * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva-design/eva`).
  *
- * @property {React.ReactNode} children - Determines application root component.
- *
- * @property ThemeProviderProps
+ * @property {ReactNode} children - Determines application root component.
  *
  * @overview-example Simple Usage
  *

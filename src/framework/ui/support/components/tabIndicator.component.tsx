@@ -6,7 +6,7 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { I18nLayoutService } from '../../services';
+import { I18nLayoutService } from '../services';
 
 interface ComponentProps {
   positions: number;

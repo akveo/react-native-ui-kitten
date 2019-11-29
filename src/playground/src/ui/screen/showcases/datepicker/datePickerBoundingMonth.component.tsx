@@ -5,32 +5,24 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export class DatepickerBoundingMonthShowcase extends React.Component {
+export const DatepickerBoundingMonthShowcase = () => {
 
-  state = {
-    date: new Date(),
-  };
+  const [selectedDate, setSelectedDate] = React.useState(null);
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Datepicker
-          date={this.state.date}
-          boundingMonth={false}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <Datepicker
+        placeholder='Pick Date'
+        date={selectedDate}
+        onSelect={setSelectedDate}
+        boundingMonth={false}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 400,
-    padding: 16,
+    minHeight: 376,
   },
 });

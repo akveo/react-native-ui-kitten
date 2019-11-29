@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Button,
   ButtonGroup,
@@ -8,52 +11,59 @@ import {
 
 export const ButtonGroupStatusShowcase = () => (
   <Layout style={styles.container}>
-    <ButtonGroup
-      style={styles.buttonGroup}
-      status='primary'>
-      <Button style={styles.button}>L</Button>
-      <Button style={styles.button}>M</Button>
-      <Button style={styles.button}>R</Button>
+
+    <ButtonGroup style={styles.buttonGroup} status='primary'>
+      <Button>L</Button>
+      <Button>R</Button>
     </ButtonGroup>
-    <ButtonGroup
-      style={styles.buttonGroup}
-      status='success'>
-      <Button style={styles.button}>L</Button>
-      <Button style={styles.button}>M</Button>
-      <Button style={styles.button}>R</Button>
+
+    <ButtonGroup style={styles.buttonGroup} status='success'>
+      <Button>L</Button>
+      <Button>R</Button>
     </ButtonGroup>
-    <ButtonGroup
-      style={styles.buttonGroup}
-      status='info'>
-      <Button style={styles.button}>L</Button>
-      <Button style={styles.button}>M</Button>
-      <Button style={styles.button}>R</Button>
+
+    <ButtonGroup style={styles.buttonGroup} status='info'>
+      <Button>L</Button>
+      <Button>R</Button>
     </ButtonGroup>
-    <ButtonGroup
-      style={styles.buttonGroup}
-      status='warning'>
-      <Button style={styles.button}>L</Button>
-      <Button style={styles.button}>M</Button>
-      <Button style={styles.button}>R</Button>
+
+    <ButtonGroup style={styles.buttonGroup} status='warning'>
+      <Button>L</Button>
+      <Button>R</Button>
     </ButtonGroup>
-    <ButtonGroup
-      style={styles.buttonGroup}
-      status='danger'>
-      <Button style={styles.button}>L</Button>
-      <Button style={styles.button}>M</Button>
-      <Button style={styles.button}>R</Button>
+
+    <ButtonGroup style={styles.buttonGroup} status='danger'>
+      <Button>L</Button>
+      <Button>R</Button>
     </ButtonGroup>
+
+    <ButtonGroup style={styles.buttonGroup} status='basic'>
+      <Button>L</Button>
+      <Button>R</Button>
+    </ButtonGroup>
+
+    <View style={styles.controlContainer}>
+      <ButtonGroup style={styles.buttonGroup} status='control'>
+        <Button>L</Button>
+        <Button>R</Button>
+      </ButtonGroup>
+    </View>
+
   </Layout>
 );
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 8,
   },
   buttonGroup: {
-    marginBottom: 10,
+    margin: 8,
   },
-  button: {
-    flex: 1,
+  controlContainer: {
+    borderRadius: 4,
+    margin: 8,
+    backgroundColor: '#3366FF',
   },
 });

@@ -35,12 +35,10 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  * Default is `round`.
  *
  * @property {string} size - Determines the size of the component.
- * Can be `giant`, `large`, `medium`, `small`, or `tiny`.
+ * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
  * Default is `medium`.
  *
- * @property {ImageProps} - Any props applied to Image component.
- *
- * @property StyledComponentProps
+ * @property {ImageProps} ...imageProps - Any props applied to Image component.
  *
  * @overview-example AvatarSimpleUsage
  *

@@ -4,25 +4,17 @@ import {
   TabBar,
 } from 'react-native-ui-kitten';
 
-export class TabBarSimpleUsageShowcase extends React.Component {
+export const TabBarSimpleUsageShowcase = () => {
 
-  state = {
-    selectedIndex: 0,
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  onBarSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
-
-  render() {
-    return (
-      <TabBar
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onBarSelect}>
-        <Tab title='Tab 1'/>
-        <Tab title='Tab 2'/>
-        <Tab title='Tab 3'/>
-      </TabBar>
-    );
-  }
-}
+  return (
+    <TabBar
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}>
+      <Tab title='USERS'/>
+      <Tab title='ORDERS'/>
+      <Tab title='TRANSACTIONS'/>
+    </TabBar>
+  );
+};
