@@ -36,10 +36,3 @@ Theme extension mechanism allows modifying one theme with another.
 ## Enterprise ready
 
 Being a part of Eva Ecosystem, UI Kitten is a great choice for Enterprise-grade products, providing complete control over application look & feel.
-  
-<hr>
-
-## Related Articles
-
-- [Design System Rules](design-system/design-system-theme)
-- [Create Custom Theme](design-system/create-custom-theme)

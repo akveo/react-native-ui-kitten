@@ -181,8 +181,7 @@ Each styles describes text `fontSize`, `fontWeight` and `lineHeight`, for instan
 
 ## Related Articles
 
-- [Customize Theme](design-system/customize-theme)
-- [Create Custom Theme](design-system/create-custom-theme)
+- [Branding](guides/branding)
 - [Light Theme](design-system/light-theme)
 - [Dark Theme](design-system/dark-theme)
 
