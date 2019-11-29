@@ -126,7 +126,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
         width: iconStyles.iconWidth,
         height: iconStyles.iconHeight,
         marginHorizontal: iconStyles.iconMarginHorizontal,
-        fill: iconStyles.iconTintColor,
+        tintColor: iconStyles.iconTintColor,
       },
     };
   };
