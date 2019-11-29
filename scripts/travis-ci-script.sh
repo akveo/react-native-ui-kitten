@@ -7,7 +7,7 @@
 set -e
 
 # Go to project directory
-cd $(dirname $0)/../..
+cd $(dirname $0)/..
 
 echo ""
 echo "Building sources and running tests. Running mode: ${MODE}"
