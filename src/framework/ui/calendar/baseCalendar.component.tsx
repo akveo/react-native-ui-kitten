@@ -304,10 +304,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return this.props.filter && !this.props.filter(date.date) || false;
   };
 
-  private isDateFitsBounds = (date: CalendarDateInfo<D>): boolean => {
-    return this.dateService.isBetweenIncludingSafe(date.date, this.min, this.max);
-  };
-
   private isDayPickerInViewPort = (index: number): boolean => {
     const visibleDayPickerIndex: number = this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
 
@@ -337,15 +333,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     }
   };
 
-  private getCalendarPagerIndex = (): number => {
-    switch (this.state.viewMode.id) {
-      case CalendarViewModes.DATE.id:
-        return this.dataService.getNumberOfMonths(this.min, this.state.visibleDate);
-      case CalendarViewModes.YEAR.id:
-        return Math.floor(this.dataService.getNumberOfYears(this.min, this.state.visibleDate) / VIEWS_IN_PICKER);
-    }
-  };
-
   private getCurrentPagerRef = (): React.RefObject<CalendarPager<D>> => {
     switch (this.state.viewMode.id) {
       case CalendarViewModes.DATE.id:
@@ -357,6 +344,17 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   private isLateralNavigationAllowed = (): boolean => {
     return this.state.viewMode.id === CalendarViewModes.DATE.id || this.state.viewMode.id === CalendarViewModes.YEAR.id;
+  };
+
+  private renderDayIfNeeded = (item: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+    const shouldRender: boolean = !item.bounding || this.props.boundingMonth;
+
+    if (shouldRender) {
+      const renderSelector = this.props.renderDay || this.renderDayElement;
+      return renderSelector(item, style);
+    }
+
+    return null;
   };
 
   private renderWeekdayElement = (weekday: string, index: number): CalendarDateContentElement => {
@@ -379,21 +377,10 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     );
   };
 
-  private renderDayIfNeeded = (item: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
-    const shouldRender: boolean = !item.bounding || this.props.boundingMonth;
-
-    if (shouldRender) {
-      const renderSelector = this.props.renderDay || this.renderDayElement;
-      return renderSelector(item, style);
-    }
-
-    return null;
-  };
-
   private renderMonthElement = (date: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={[style.container, styles.monthCell]}
+        style={style.container}
         textStyle={style.text}>
         {this.dateService.format(date.date, FORMAT_MONTH)}
       </CalendarDateContent>
@@ -403,7 +390,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   private renderYearElement = (date: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={[style.container, styles.yearCell]}
+        style={style.container}
         textStyle={style.text}>
         {this.dateService.format(date.date, FORMAT_YEAR)}
       </CalendarDateContent>
@@ -556,11 +543,5 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
-  },
-  monthCell: {
-    aspectRatio: 0.25 * DateService.DAYS_IN_WEEK,
-  },
-  yearCell: {
-    aspectRatio: 0.25 * DateService.DAYS_IN_WEEK,
   },
 });
