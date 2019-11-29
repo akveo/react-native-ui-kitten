@@ -33,67 +33,67 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Start a new App',
+        name: 'Getting Started',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install-new.md',
+            source: 'guides/getting-started.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Install into existing App',
+        name: 'Branding',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install-existing.md',
+            source: 'guides/branding.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Using with React Native Web',
+        name: 'Icon Packages',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/using-web.md',
+            source: 'guides/icon-packages.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Create UI Kitten Screen',
+        name: 'Configure Navigation',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/create-screen.md',
+            source: 'guides/configure-navigation.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Eva Icons',
+        name: 'Runtime Theming',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/setup-icons-module.md',
+            source: 'guides/runtime-theming.md',
           },
         ],
       },
       {
         type: 'page',
-        name: '3rd party Icons',
+        name: 'Running on the Web',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/setup-vector-icons.md',
+            source: 'guides/running-on-the-web.md',
           },
         ],
       },
@@ -166,17 +166,6 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'design-system/custom-theme.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Changing Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/theme-change.md',
           },
         ],
       },

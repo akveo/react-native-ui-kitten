@@ -16,6 +16,6 @@
     "fecha": "3.0.3"
   },
   "peerDependencies": {
-    "react-native-svg": "^9.13.3"
+    "react-native-svg": "^9.4.0"
   }
 }
