@@ -104,6 +104,10 @@ export const cardSettings: ComponentShowcaseSetting[] = [
   },
   {
     propertyName: 'status',
+    value: 'basic',
+  },
+  {
+    propertyName: 'status',
     value: 'primary',
   },
   {
@@ -121,5 +125,9 @@ export const cardSettings: ComponentShowcaseSetting[] = [
   {
     propertyName: 'status',
     value: 'danger',
+  },
+  {
+    propertyName: 'status',
+    value: 'control',
   },
 ];

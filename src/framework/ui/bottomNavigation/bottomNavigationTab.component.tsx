@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {
-  ImageProps,
   ImageStyle,
   StyleProp,
   StyleSheet,
@@ -23,9 +22,9 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { isValidString } from '../support/services';
 
-type IconElement = React.ReactElement<ImageProps>;
 type IconProp = (style: ImageStyle) => IconElement;
 
 interface ComponentProps {
@@ -52,7 +51,7 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
  *
- * @property {(style: StyleType) => React.ReactElement<ImageProps>} icon - Determines the icon of the tab.
+ * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the tab.
  *
  * @property {(selected: boolean) => void} onSelect - Triggered on select value.
  *
@@ -61,8 +60,6 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  * @overview-example BottomNavigationTabSimpleUsage
  *
  * @overview-example BottomNavigationTabWithIcon
- *
- * @example BottomNavigationTabWithExternalSourceIcon
  *
  * @example BottomNavigationTabInlineStyling
  */

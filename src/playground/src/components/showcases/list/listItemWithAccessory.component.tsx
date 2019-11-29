@@ -4,32 +4,27 @@ import {
   ListItem,
 } from 'react-native-ui-kitten';
 
-export class ListItemWithAccessoryShowcase extends React.Component {
+export const ListItemWithAccessoryShowcase = () => {
 
-  state = {
-    checked: false,
+  const [checked, setChecked] = React.useState(false);
+
+  const onCheckBoxCheckedChange = (index) => {
+    setChecked(!checked);
   };
 
-  onCheckBoxCheckedChange = (index) => {
-    const checked = !this.state.checked;
-    this.setState({ checked });
-  };
-
-  renderAccessory = (style, index) => (
+  const renderAccessory = (style, index) => (
     <CheckBox
       style={style}
-      checked={this.state.checked}
-      onChange={() => this.onCheckBoxCheckedChange(index)}
+      checked={checked}
+      onChange={() => onCheckBoxCheckedChange(index)}
     />
   );
 
-  render() {
-    return (
-      <ListItem
-        title='Title'
-        description='Description'
-        accessory={this.renderAccessory}
-      />
-    );
-  }
-}
+  return (
+    <ListItem
+      title='Title'
+      description='Description'
+      accessory={renderAccessory}
+    />
+  );
+};

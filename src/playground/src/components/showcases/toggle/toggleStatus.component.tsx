@@ -1,104 +1,105 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Layout,
   Toggle,
 } from 'react-native-ui-kitten';
 
-export class ToggleStatusShowcase extends React.Component {
+const useToggleChanges = (initialCheck = false) => {
+  const [checked, setChecked] = React.useState(initialCheck);
 
-  state = {
-    primaryChecked: false,
-    successChecked: false,
-    infoChecked: false,
-    warningChecked: false,
-    dangerChecked: false,
-    basicChecked: false,
+  const onCheckedChange = (isChecked) => {
+    setChecked(isChecked);
   };
 
-  onPrimaryChange = (primaryChecked) => {
-    this.setState({ primaryChecked });
+  return {
+    checked,
+    onChange: onCheckedChange,
   };
+};
 
-  onSuccessChange = (successChecked) => {
-    this.setState({ successChecked });
-  };
+export const ToggleStatusShowcase = () => {
 
-  onInfoChange = (infoChecked) => {
-    this.setState({ infoChecked });
-  };
+  const primaryToggleChanges = useToggleChanges();
+  const successToggleChanges = useToggleChanges();
+  const infoToggleChanges = useToggleChanges();
+  const warningToggleChanges = useToggleChanges();
+  const dangerToggleChanges = useToggleChanges();
+  const basicToggleChanges = useToggleChanges();
+  const controlToggleChanges = useToggleChanges();
 
-  onWarningChange = (warningChecked) => {
-    this.setState({ warningChecked });
-  };
+  return (
+    <Layout style={styles.container}>
 
-  onDangerChange = (dangerChecked) => {
-    this.setState({ dangerChecked });
-  };
+      <Toggle
+        style={styles.toggle}
+        text='Primary'
+        status='primary'
+        {...primaryToggleChanges}
+      />
 
-  onBasicChange = (basicChecked) => {
-    this.setState({ basicChecked });
-  };
+      <Toggle
+        style={styles.toggle}
+        text='Success'
+        status='success'
+        {...successToggleChanges}
+      />
 
-  render() {
-    return (
-      <Layout style={styles.container}>
+      <Toggle
+        style={styles.toggle}
+        text='Info'
+        status='info'
+        {...infoToggleChanges}
+      />
+
+      <Toggle
+        style={styles.toggle}
+        text='Warning'
+        status='warning'
+        {...warningToggleChanges}
+      />
+
+      <Toggle
+        style={styles.toggle}
+        text='Danger'
+        status='danger'
+        {...dangerToggleChanges}
+      />
+
+      <Toggle
+        style={styles.toggle}
+        text='Basic'
+        status='basic'
+        {...basicToggleChanges}
+      />
+
+      <View style={styles.controlContainer}>
         <Toggle
           style={styles.toggle}
-          checked={this.state.primaryChecked}
-          text='Primary'
-          status='primary'
-          onChange={this.onPrimaryChange}
+          text='Control'
+          status='control'
+          {...controlToggleChanges}
         />
-        <Toggle
-          style={styles.toggle}
-          checked={this.state.successChecked}
-          text='Success'
-          status='success'
-          onChange={this.onSuccessChange}
-        />
-        <Toggle
-          style={styles.toggle}
-          checked={this.state.infoChecked}
-          text='Info'
-          status='info'
-          onChange={this.onInfoChange}
-        />
-        <Toggle
-          style={styles.toggle}
-          checked={this.state.warningChecked}
-          text='Warning'
-          status='warning'
-          onChange={this.onWarningChange}
-        />
-        <Toggle
-          style={styles.toggle}
-          checked={this.state.dangerChecked}
-          text='Danger'
-          status='danger'
-          onChange={this.onDangerChange}
-        />
-        <Toggle
-          style={styles.toggle}
-          checked={this.state.basicChecked}
-          text='Basic'
-          status='basic'
-          onChange={this.onBasicChange}
-        />
-      </Layout>
-    );
-  }
-}
+      </View>
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingVertical: 4,
-    paddingHorizontal: 4,
   },
   toggle: {
-    marginVertical: 4,
-    marginHorizontal: 4,
+    margin: 8,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 8,
+    backgroundColor: '#3366FF',
   },
 });

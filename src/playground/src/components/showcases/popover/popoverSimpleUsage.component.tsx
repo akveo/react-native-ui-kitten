@@ -7,40 +7,36 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 
-export class PopoverSimpleUsageShowcase extends React.Component {
+const PopoverContent = () => (
+  <Layout style={styles.popoverContent}>
+    <Text>Hi! This is popover.</Text>
+  </Layout>
+);
 
-  state = {
-    popoverVisible: false,
+export const PopoverSimpleUsageShowcase = () => {
+
+  const [visible, setVisible] = React.useState(false);
+
+  const togglePopover = () => {
+    setVisible(!visible);
   };
 
-  onToggleButtonPress = () => {
-    const popoverVisible = !this.state.popoverVisible;
-    this.setState({ popoverVisible });
-  };
-
-  renderPopoverContent = () => (
-    <Layout style={styles.popoverContent}>
-      <Text>Hi! This is popover.</Text>
-    </Layout>
+  return (
+    <Popover
+      visible={visible}
+      content={PopoverContent()}
+      onBackdropPress={togglePopover}>
+      <Button onPress={togglePopover}>
+        TOGGLE POPOVER
+      </Button>
+    </Popover>
   );
-
-  render() {
-    return (
-      <Popover
-        visible={this.state.popoverVisible}
-        content={this.renderPopoverContent()}
-        onBackdropPress={this.onToggleButtonPress}>
-        <Button onPress={this.onToggleButtonPress}>
-          TOGGLE POPOVER
-        </Button>
-      </Popover>
-    );
-  }
-}
+};
 
 const styles = StyleSheet.create({
   popoverContent: {
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 24,
   },
 });

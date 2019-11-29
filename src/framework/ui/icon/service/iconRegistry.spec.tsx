@@ -4,7 +4,7 @@ import { IconRegistryService } from './iconRegistry.service';
 import { IconProvider } from './type';
 
 const TestIcon: IconProvider<any> = {
-  toReactElement(): React.ReactElement<any> {
+  toReactElement(): React.ReactElement {
     return (
       <View/>
     );

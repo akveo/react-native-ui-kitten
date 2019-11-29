@@ -6,7 +6,7 @@ export const BottomNavigationTabInlineStylingShowcase = () => (
   <BottomNavigationTab
     style={styles.tab}
     titleStyle={styles.tabTitle}
-    title='TAB 1'
+    title='USERS'
   />
 );
 

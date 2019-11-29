@@ -34,6 +34,8 @@ interface State {
 
 export interface ComponentProps {
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
+  status?: string;
+  size?: string;
   placeholder?: string;
 }
 

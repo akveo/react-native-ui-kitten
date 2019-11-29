@@ -30,7 +30,7 @@ describe('@mapping: ui component checks', () => {
     return withMapping(View);
   };
 
-  const withMapping = (Component: React.ComponentClass<any>): React.ReactElement<any> => {
+  const withMapping = (Component: React.ComponentClass<any>): React.ReactElement => {
     return (
       <MappingContext.Consumer>{(style: ThemeStyleType) => (
         <Component

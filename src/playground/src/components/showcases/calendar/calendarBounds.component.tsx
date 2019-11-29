@@ -1,39 +1,20 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import {
-  Calendar,
-  Layout,
-} from 'react-native-ui-kitten';
+import { Calendar } from 'react-native-ui-kitten';
 
 const now = new Date();
+const minDate = new Date(now.getFullYear(), now.getMonth(), 15);
+const maxDate = new Date(now.getFullYear(), now.getMonth() + 1, 15);
 
-export class CalendarBoundsShowcase extends React.Component {
+export const CalendarBoundsShowcase = () => {
 
-  state = {
-    date: new Date(),
-  };
+  const [date, setDate] = React.useState(null);
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Calendar
-          min={new Date(now.getFullYear(), now.getMonth(), 15)}
-          max={new Date(now.getFullYear(), now.getMonth() + 1, 15)}
-          date={this.state.date}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    minHeight: 376,
-  },
-});
+  return (
+    <Calendar
+      min={minDate}
+      max={maxDate}
+      date={date}
+      onSelect={setDate}
+    />
+  );
+};

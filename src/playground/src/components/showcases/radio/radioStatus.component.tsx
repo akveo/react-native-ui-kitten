@@ -1,104 +1,106 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Layout,
   Radio,
 } from 'react-native-ui-kitten';
 
-export class RadioStatusShowcase extends React.Component {
+const useRadioChanges = (initialCheck = false) => {
+  const [checked, setChecked] = React.useState(initialCheck);
 
-  state = {
-    primaryChecked: false,
-    successChecked: false,
-    infoChecked: false,
-    warningChecked: false,
-    dangerChecked: false,
-    basicChecked: false,
+  const onCheckedChange = (isChecked) => {
+    setChecked(isChecked);
   };
 
-  onPrimaryChange = (primaryChecked) => {
-    this.setState({ primaryChecked });
+  return {
+    checked,
+    onChange: onCheckedChange,
   };
+};
 
-  onSuccessChange = (successChecked) => {
-    this.setState({ successChecked });
-  };
+export const RadioStatusShowcase = () => {
 
-  onInfoChange = (infoChecked) => {
-    this.setState({ infoChecked });
-  };
+  const primaryRadioChanges = useRadioChanges();
+  const successRadioChanges = useRadioChanges();
+  const infoRadioChanges = useRadioChanges();
+  const warningRadioChanges = useRadioChanges();
+  const dangerRadioChanges = useRadioChanges();
+  const basicRadioChanges = useRadioChanges();
+  const controlRadioChanges = useRadioChanges();
 
-  onWarningChange = (warningChecked) => {
-    this.setState({ warningChecked });
-  };
+  return (
+    <Layout style={styles.container}>
 
-  onDangerChange = (dangerChecked) => {
-    this.setState({ dangerChecked });
-  };
+      <Radio
+        style={styles.radio}
+        status='primary'
+        text='Primary'
+        {...primaryRadioChanges}
+      />
 
-  onBasicChange = (basicChecked) => {
-    this.setState({ basicChecked });
-  };
+      <Radio
+        style={styles.radio}
+        status='success'
+        text='Success'
+        {...successRadioChanges}
+      />
 
-  render() {
-    return (
-      <Layout style={styles.container}>
+      <Radio
+        style={styles.radio}
+        status='info'
+        text='Info'
+        {...infoRadioChanges}
+      />
+
+      <Radio
+        style={styles.radio}
+        status='warning'
+        text='Warning'
+        {...warningRadioChanges}
+      />
+
+      <Radio
+        style={styles.radio}
+        status='danger'
+        text='Danger'
+        {...dangerRadioChanges}
+      />
+
+      <Radio
+        style={styles.radio}
+        status='basic'
+        text='Basic'
+        {...basicRadioChanges}
+      />
+
+      <View style={styles.controlContainer}>
         <Radio
           style={styles.radio}
-          status='primary'
-          text='Primary'
-          checked={this.state.primaryChecked}
-          onChange={this.onPrimaryChange}
+          status='control'
+          text='Control'
+          {...controlRadioChanges}
         />
-        <Radio
-          style={styles.radio}
-          status='success'
-          text='Success'
-          checked={this.state.successChecked}
-          onChange={this.onSuccessChange}
-        />
-        <Radio
-          style={styles.radio}
-          status='info'
-          text='Info'
-          checked={this.state.infoChecked}
-          onChange={this.onInfoChange}
-        />
-        <Radio
-          style={styles.radio}
-          status='warning'
-          text='Warning'
-          checked={this.state.warningChecked}
-          onChange={this.onWarningChange}
-        />
-        <Radio
-          style={styles.radio}
-          status='danger'
-          text='Danger'
-          checked={this.state.dangerChecked}
-          onChange={this.onDangerChange}
-        />
-        <Radio
-          style={styles.radio}
-          status='basic'
-          text='Basic'
-          checked={this.state.basicChecked}
-          onChange={this.onBasicChange}
-        />
-      </Layout>
-    );
-  }
-}
+      </View>
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingVertical: 4,
-    paddingHorizontal: 4,
   },
   radio: {
-    marginVertical: 4,
-    marginHorizontal: 4,
+    margin: 8,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 8,
+    padding: 8,
+    backgroundColor: '#3366FF',
   },
 });

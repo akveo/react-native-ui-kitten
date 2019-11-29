@@ -1,103 +1,109 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Layout,
   Select,
 } from 'react-native-ui-kitten';
 
-export class SelectStatusShowcase extends React.Component {
-
-  data = [
-    { text: 'Option 1' },
-    { text: 'Option 2' },
-    { text: 'Option 3' },
-  ];
-
-  state = {
-    selectedOptionPrimary: null,
-    selectedOptionSuccess: null,
-    selectedOptionInfo: null,
-    selectedOptionDanger: null,
-    selectedOptionWarning: null,
-    selectedOptionBasic: null,
+const useSelectChanges = (initialSelection = null) => {
+  const [selectedOption, setSelectedOption] = React.useState(initialSelection);
+  return {
+    selectedOption,
+    onSelect: setSelectedOption,
   };
+};
 
-  onPrimarySelect = (selectedOptionPrimary) => {
-    this.setState({ selectedOptionPrimary });
-  };
+const data = [
+  { text: 'Option 1' },
+  { text: 'Option 2' },
+  { text: 'Option 3' },
+];
 
-  onSuccessSelect = (selectedOptionSuccess) => {
-    this.setState({ selectedOptionSuccess });
-  };
+export const SelectStatusShowcase = () => {
 
-  onInfoSelect = (selectedOptionInfo) => {
-    this.setState({ selectedOptionInfo });
-  };
+  const primarySelectChanges = useSelectChanges();
+  const successSelectChanges = useSelectChanges();
+  const infoSelectChanges = useSelectChanges();
+  const warningSelectChanges = useSelectChanges();
+  const dangerSelectChanges = useSelectChanges();
+  const basicSelectChanges = useSelectChanges();
+  const controlSelectChanges = useSelectChanges();
 
-  onDangerSelect = (selectedOptionDanger) => {
-    this.setState({ selectedOptionDanger });
-  };
+  return (
+    <Layout>
 
-  onWarningSelect = (selectedOptionWarning) => {
-    this.setState({ selectedOptionWarning });
-  };
+      <Select
+        style={styles.select}
+        data={data}
+        status='primary'
+        placeholder='Primary'
+        {...primarySelectChanges}
+      />
 
-  onBasicSelect = (selectedOptionBasic) => {
-    this.setState({ selectedOptionBasic });
-  };
+      <Select
+        style={styles.select}
+        data={data}
+        status='success'
+        placeholder='Success'
+        {...successSelectChanges}
+      />
 
-  render() {
-    return (
-      <Layout style={styles.container}>
+      <Select
+        style={styles.select}
+        data={data}
+        status='info'
+        placeholder='Info'
+        {...infoSelectChanges}
+      />
+
+      <Select
+        style={styles.select}
+        data={data}
+        status='warning'
+        placeholder='Warning'
+        {...warningSelectChanges}
+      />
+
+      <Select
+        style={styles.select}
+        data={data}
+        status='danger'
+        placeholder='Danger'
+        {...dangerSelectChanges}
+      />
+
+      <Select
+        style={styles.select}
+        data={data}
+        status='basic'
+        placeholder='Basic'
+        {...basicSelectChanges}
+      />
+
+      <View style={styles.controlContainer}>
         <Select
-          data={this.data}
-          status='primary'
-          placeholder='Primary'
-          selectedOption={this.state.selectedOptionPrimary}
-          onSelect={this.onPrimarySelect}
+          style={styles.select}
+          data={data}
+          status='control'
+          placeholder='Control'
+          {...controlSelectChanges}
         />
-        <Select
-          data={this.data}
-          status='success'
-          placeholder='Success'
-          selectedOption={this.state.selectedOptionSuccess}
-          onSelect={this.onSuccessSelect}
-        />
-        <Select
-          data={this.data}
-          status='info'
-          placeholder='Info'
-          selectedOption={this.state.selectedOptionInfo}
-          onSelect={this.onInfoSelect}
-        />
-        <Select
-          data={this.data}
-          status='warning'
-          placeholder='Warning'
-          selectedOption={this.state.selectedOptionWarning}
-          onSelect={this.onWarningSelect}
-        />
-        <Select
-          data={this.data}
-          status='danger'
-          placeholder='Danger'
-          selectedOption={this.state.selectedOptionDanger}
-          onSelect={this.onDangerSelect}
-        />
-        <Select
-          data={this.data}
-          status='basic'
-          placeholder='Basic'
-          selectedOption={this.state.selectedOptionBasic}
-          onSelect={this.onBasicSelect}
-        />
-      </Layout>
-    );
-  }
-}
+      </View>
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
+  select: {
+    margin: 8,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 8,
+    backgroundColor: '#3366FF',
   },
 });

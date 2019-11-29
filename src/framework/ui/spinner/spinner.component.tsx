@@ -40,13 +40,13 @@ export type SpinnerElement = React.ReactElement<SpinnerProps>;
  *
  * @property {boolean} animating - Determines whether component is animating. Default is `true`.
  *
- * @property {string} size - Determines the size of the component.
- * Can be `giant`, `large`, `medium`, `small` or `tiny`.
- * Default is `medium`.
- *
  * @property {string} status - Determines the status of the component.
- * Can be `primary`, `success`, `info`, `warning`, `danger` or `alternative`.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `primary`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Default is `medium`.
  *
  * @overview-example SpinnerSimpleUsage
  *

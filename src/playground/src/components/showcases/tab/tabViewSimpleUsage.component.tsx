@@ -1,32 +1,41 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
+  Layout,
   Tab,
   TabView,
   Text,
 } from 'react-native-ui-kitten';
 
-export class TabViewSimpleUsageShowcase extends React.Component {
+export const TabViewSimpleUsageShowcase = () => {
 
-  state = {
-    selectedIndex: 0,
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  onSelect = (selectedIndex) => {
-    this.setState({ selectedIndex });
-  };
+  return (
+    <TabView
+      selectedIndex={selectedIndex}
+      onSelect={setSelectedIndex}>
+      <Tab title='USERS'>
+        <Layout style={styles.tabContainer}>
+          <Text>List of users.</Text>
+        </Layout>
+      </Tab>
+      <Tab title='ORDERS'>
+        <Layout style={styles.tabContainer}>
+          <Text>List of orders.</Text>
+        </Layout>
+      </Tab>
+      <Tab title='TRANSACTIONS'>
+        <Layout style={styles.tabContainer}>
+          <Text>List of transactions.</Text>
+        </Layout>
+      </Tab>
+    </TabView>
+  );
+};
 
-  render() {
-    return (
-      <TabView
-        selectedIndex={this.state.selectedIndex}
-        onSelect={this.onSelect}>
-        <Tab title='DASHBOARD'>
-          <Text>DASHBOARD</Text>
-        </Tab>
-        <Tab title='SETTINGS'>
-          <Text>SETTINGS</Text>
-        </Tab>
-      </TabView>
-    );
-  }
-}
+const styles = StyleSheet.create({
+  tabContainer: {
+    minHeight: 64,
+  },
+});

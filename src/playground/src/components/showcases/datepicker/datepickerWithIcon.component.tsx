@@ -15,32 +15,24 @@ const CalendarIcon = (style) => (
   <Icon {...style} name='calendar'/>
 );
 
-export class DatepickerWithIconShowcase extends React.Component {
+export const DatepickerWithIconShowcase = () => {
 
-  state = {
-    date: new Date(),
-  };
+  const [date, setDate] = React.useState(null);
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Datepicker
-          date={this.state.date}
-          icon={CalendarIcon}
-          onSelect={this.onSelect}
-        />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <Datepicker
+        placeholder='Pick Date'
+        date={date}
+        onSelect={setDate}
+        icon={CalendarIcon}
+      />
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 400,
-    padding: 16,
+    minHeight: 376,
   },
 });

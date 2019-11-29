@@ -4,18 +4,30 @@
  */
 
 import React from 'react';
+import { Image } from 'react-native';
 import {
   BottomNavigationTab,
   Icon,
+  Layout,
 } from 'react-native-ui-kitten';
 
-const DashboardIcon = (style) => (
-  <Icon {...style} name='layout'/>
+const PersonIcon = (style) => (
+  <Icon {...style} name='person'/>
+);
+
+const RemotePersonIcon = (style) => (
+  <Image
+    style={style}
+    source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/person.png' }}
+  />
 );
 
 export const BottomNavigationTabWithIconShowcase = () => (
-  <BottomNavigationTab
-    title='DASHBOARD'
-    icon={DashboardIcon}
-  />
+  <Layout>
+
+    <BottomNavigationTab title='EVA ICON' icon={PersonIcon}/>
+
+    <BottomNavigationTab title='REMOTE EVA ICON' icon={RemotePersonIcon}/>
+
+  </Layout>
 );

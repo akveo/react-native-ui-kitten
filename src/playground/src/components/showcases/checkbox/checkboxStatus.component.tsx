@@ -8,100 +8,96 @@ import {
   Layout,
 } from 'react-native-ui-kitten';
 
-export class CheckboxStatusShowcase extends React.Component {
+const useCheckboxChanges = (initialCheck = false) => {
+  const [checked, setChecked] = React.useState(initialCheck);
 
-  state = {
-    primaryChecked: false,
-    successChecked: false,
-    infoChecked: false,
-    warningChecked: false,
-    dangerChecked: false,
-    basicChecked: false,
+  const onChange = (isChecked) => {
+    setChecked(isChecked);
   };
 
-  onPrimaryChange = (primaryChecked) => {
-    this.setState({ primaryChecked });
-  };
+  return { checked, onChange };
+};
 
-  onSuccessChange = (successChecked) => {
-    this.setState({ successChecked });
-  };
+export const CheckboxStatusShowcase = () => {
 
-  onInfoChange = (infoChecked) => {
-    this.setState({ infoChecked });
-  };
+  const primaryCheckboxChanges = useCheckboxChanges();
+  const successCheckboxChanges = useCheckboxChanges();
+  const infoCheckboxChanges = useCheckboxChanges();
+  const warningCheckboxChanges = useCheckboxChanges();
+  const dangerCheckboxChanges = useCheckboxChanges();
+  const basicCheckboxChanges = useCheckboxChanges();
+  const controlCheckboxChanges = useCheckboxChanges();
 
-  onWarningChange = (warningChecked) => {
-    this.setState({ warningChecked });
-  };
+  return (
+    <Layout style={styles.container}>
 
-  onDangerChange = (dangerChecked) => {
-    this.setState({ dangerChecked });
-  };
+      <CheckBox
+        style={styles.checkbox}
+        status='primary'
+        text='Primary'
+        {...primaryCheckboxChanges}
+      />
 
-  onBasicChange = (basicChecked) => {
-    this.setState({ basicChecked });
-  };
+      <CheckBox
+        style={styles.checkbox}
+        status='success'
+        text='Success'
+        {...successCheckboxChanges}
+      />
 
-  render() {
-    return (
-      <Layout style={styles.container}>
+      <CheckBox
+        style={styles.checkbox}
+        status='info'
+        text='Info'
+        {...infoCheckboxChanges}
+      />
+
+      <CheckBox
+        style={styles.checkbox}
+        status='warning'
+        text='Warning'
+        {...warningCheckboxChanges}
+      />
+
+      <CheckBox
+        style={styles.checkbox}
+        status='danger'
+        text='Danger'
+        {...dangerCheckboxChanges}
+      />
+
+      <CheckBox
+        style={styles.checkbox}
+        status='basic'
+        text='Basic'
+        {...basicCheckboxChanges}
+      />
+
+      <View style={styles.controlContainer}>
         <CheckBox
           style={styles.checkbox}
-          status='primary'
-          text='Primary'
-          checked={this.state.primaryChecked}
-          onChange={this.onPrimaryChange}
+          status='control'
+          text='Control'
+          {...controlCheckboxChanges}
         />
-        <CheckBox
-          style={styles.checkbox}
-          status='success'
-          text='Success'
-          checked={this.state.successChecked}
-          onChange={this.onSuccessChange}
-        />
-        <CheckBox
-          style={styles.checkbox}
-          status='info'
-          text='Info'
-          checked={this.state.infoChecked}
-          onChange={this.onInfoChange}
-        />
-        <CheckBox
-          style={styles.checkbox}
-          status='warning'
-          text='Warning'
-          checked={this.state.warningChecked}
-          onChange={this.onWarningChange}
-        />
-        <CheckBox
-          style={styles.checkbox}
-          status='danger'
-          text='Danger'
-          checked={this.state.dangerChecked}
-          onChange={this.onDangerChange}
-        />
-        <CheckBox
-          style={styles.checkbox}
-          status='basic'
-          text='Basic'
-          checked={this.state.basicChecked}
-          onChange={this.onBasicChange}
-        />
-      </Layout>
-    );
-  }
-}
+      </View>
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingVertical: 4,
-    paddingHorizontal: 4,
+    padding: 8,
   },
   checkbox: {
-    marginVertical: 4,
-    marginHorizontal: 4,
+    margin: 8,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 8,
+    backgroundColor: '#3366FF',
   },
 });

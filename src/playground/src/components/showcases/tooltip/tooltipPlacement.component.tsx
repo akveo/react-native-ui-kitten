@@ -1,86 +1,72 @@
 import React from 'react';
 import {
-  View,
   StyleSheet,
+  View,
 } from 'react-native';
 import {
-  Tooltip,
   Button,
+  Layout,
   Select,
+  Tooltip,
 } from 'react-native-ui-kitten';
 
-export class TooltipPlacementShowcase extends React.Component {
+const PLACEMENTS = [
+  { text: 'top' },
+  { text: 'top start' },
+  { text: 'top end' },
+  { text: 'left' },
+  { text: 'left start' },
+  { text: 'left end' },
+  { text: 'right' },
+  { text: 'right start' },
+  { text: 'right end' },
+  { text: 'bottom' },
+  { text: 'bottom start' },
+  { text: 'bottom end' },
+];
 
-  state = {
-    visible: false,
-    placement: { text: 'top' },
+export const TooltipPlacementShowcase = () => {
+
+  const [visible, setVisible] = React.useState(false);
+  const [placement, setPlacement] = React.useState(PLACEMENTS[0]);
+
+  const toggleTooltip = () => {
+    setVisible(!visible);
   };
 
-  placements = [
-    { text: 'top' },
-    { text: 'top start' },
-    { text: 'top end' },
-    { text: 'left' },
-    { text: 'left start' },
-    { text: 'left end' },
-    { text: 'right' },
-    { text: 'right start' },
-    { text: 'right end' },
-    { text: 'bottom' },
-    { text: 'bottom start' },
-    { text: 'bottom end' },
-  ];
+  return (
+    <Layout>
 
-  setVisible = () => {
-    const visible = !this.state.visible;
+      <Select
+        placeholder='Select Placement'
+        data={PLACEMENTS}
+        selectedOption={placement}
+        onSelect={setPlacement}
+      />
 
-    this.setState({ visible });
-  };
-
-  setPlacement = (placement) => {
-    this.setState({ placement });
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Select
-          label='Select Tooltip Placement'
-          data={this.placements}
-          selectedOption={this.state.placement}
-          onSelect={this.setPlacement}
-        />
-        <View style={styles.subContainer}>
-          <Tooltip
-            visible={this.state.visible}
-            placement={this.state.placement.text}
-            text='Hi! This is tooltip.'
-            onBackdropPress={this.setVisible}>
-            <Button
-              size='giant'
-              onPress={this.setVisible}>
-              SHOW TOOLTIP
-            </Button>
-          </Tooltip>
-        </View>
+      <View style={styles.buttonContainer}>
+        <Tooltip
+          visible={visible}
+          placement={placement.text}
+          text='Hi! This is tooltip.'
+          onBackdropPress={toggleTooltip}>
+          <Button style={styles.button} onPress={toggleTooltip}>
+            TOGGLE TOOLTIP
+          </Button>
+        </Tooltip>
       </View>
-    );
-  }
-}
+
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  subContainer: {
-    height: 400,
+  buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    height: 376,
   },
   button: {
-    width: 150,
-  },
-  select: {
-    position: 'absolute',
+    width: 192,
   },
 });

@@ -5,14 +5,12 @@ import {
   ListItem,
 } from 'react-native-ui-kitten';
 
-const SAMPLE_DATA = {
+const data = new Array(8).fill({
   title: 'Title for Item',
   description: 'Description for Item',
-};
+});
 
-export const ListInlineStylingShowcase = (props) => {
-
-  const data = new Array(8).fill(SAMPLE_DATA);
+export const ListInlineStylingShowcase = () => {
 
   const renderItem = ({ item, index }) => (
     <ListItem

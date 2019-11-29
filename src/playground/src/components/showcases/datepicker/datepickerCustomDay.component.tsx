@@ -9,43 +9,35 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 
-export class DatepickerCustomDayShowcase extends React.Component {
+const DayCell = ({ date }, style) => (
+  <View
+    style={[styles.dayContainer, style.container]}>
+    <Text style={style.text}>{`${date.getDate()}`}</Text>
+    <Text style={[style.text, styles.value]}>
+      {`${100 * date.getDate() + Math.pow(date.getDate(), 2)}$`}
+    </Text>
+  </View>
+);
 
-  state = {
-    date: new Date(),
-  };
+export const DatepickerCustomDayShowcase = () => {
 
-  onSelect = (date) => {
-    this.setState({ date });
-  };
+  const [selectedDate, setSelectedDate] = React.useState(null);
 
-  renderDay = ({ date }, style) => (
-    <View
-      style={[styles.dayContainer, style.container]}>
-      <Text style={style.text}>{`${date.getDate()}`}</Text>
-      <Text style={[style.text, styles.value]}>
-        {`${100 * date.getDate() + Math.pow(date.getDate(), 2)}$`}
-      </Text>
-    </View>
+  return (
+    <Layout style={styles.container}>
+      <Datepicker
+        placeholder='Pick Date'
+        date={selectedDate}
+        onSelect={setSelectedDate}
+        renderDay={DayCell}
+      />
+    </Layout>
   );
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <Datepicker
-          date={this.state.date}
-          onSelect={this.onSelect}
-          renderDay={this.renderDay}
-        />
-      </Layout>
-    );
-  }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 400,
-    padding: 16,
+    minHeight: 376,
   },
   dayContainer: {
     flex: 1,

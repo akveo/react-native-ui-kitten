@@ -2,28 +2,24 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Radio } from 'react-native-ui-kitten';
 
-export class RadioInlineStylingShowcase extends React.Component {
+export const RadioInlineStylingShowcase = () => {
 
-  state = {
-    checked: false,
+  const [checked, setChecked] = React.useState(false);
+
+  const onCheckedChange = (isChecked) => {
+    setChecked(isChecked);
   };
 
-  onChange = (checked) => {
-    this.setState({ checked });
-  };
-
-  render() {
-    return (
-      <Radio
-        style={styles.radio}
-        textStyle={styles.radioText}
-        checked={this.state.checked}
-        text='Place your text'
-        onChange={this.onChange}
-      />
-    );
-  }
-}
+  return (
+    <Radio
+      style={styles.radio}
+      text='Place your text'
+      textStyle={styles.radioText}
+      checked={checked}
+      onChange={onCheckedChange}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   radio: {

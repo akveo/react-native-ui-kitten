@@ -4,41 +4,32 @@
  */
 
 import React from 'react';
-import { Icon, Input } from 'react-native-ui-kitten';
+import {
+  Icon,
+  Input,
+} from 'react-native-ui-kitten';
 
-export class InputWithIconShowcase extends React.Component {
+export const InputWithIconShowcase = () => {
 
-  state = {
-    value: '',
-    secureTextEntry: true,
+  const [value, setValue] = React.useState('');
+  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+
+  const onIconPress = () => {
+    setSecureTextEntry(!secureTextEntry);
   };
 
-  onChangeText = (value) => {
-    this.setState({ value });
-  };
+  const renderIcon = (style) => (
+    <Icon {...style} name={secureTextEntry ? 'eye-off' : 'eye'}/>
+  );
 
-  onIconPress = () => {
-    const secureTextEntry = !this.state.secureTextEntry;
-    this.setState({ secureTextEntry });
-  };
-
-  renderIcon = (style) => {
-    const iconName = this.state.secureTextEntry ? 'eye-off' : 'eye';
-    return (
-      <Icon {...style} name={iconName}/>
-    );
-  };
-
-  render() {
-    return (
-      <Input
-        value={this.state.value}
-        placeholder='Place your Text'
-        icon={this.renderIcon}
-        secureTextEntry={this.state.secureTextEntry}
-        onIconPress={this.onIconPress}
-        onChangeText={this.onChangeText}
-      />
-    );
-  }
-}
+  return (
+    <Input
+      value={value}
+      placeholder='********'
+      icon={renderIcon}
+      secureTextEntry={secureTextEntry}
+      onIconPress={onIconPress}
+      onChangeText={setValue}
+    />
+  );
+};

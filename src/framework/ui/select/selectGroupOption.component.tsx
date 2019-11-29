@@ -24,9 +24,9 @@ import { SelectOption as SelectOptionProp} from './select.component';
 import { SelectionStrategy } from './selection.strategy';
 
 interface ComponentProps {
-  multiSelect?: boolean;
+  multi?: boolean;
   strategy: SelectionStrategy<SelectOptionProp>;
-  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement<any>;
+  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement;
 }
 
 interface MainItemStatus {
@@ -132,9 +132,7 @@ class SelectGroupOptionComponent extends React.Component<SelectGroupOptionProps>
   };
 
   private renderMainElement = (subItemsElements: SelectOptionElement[]): SelectOptionElement => {
-    const { multiSelect } = this.props;
-
-    return multiSelect ? this.renderMultiSelectMainElement(subItemsElements) : this.renderDefaultMainElement();
+    return this.props.multi ? this.renderMultiSelectMainElement(subItemsElements) : this.renderDefaultMainElement();
   };
 
   public render(): SelectGroupOptionElement {

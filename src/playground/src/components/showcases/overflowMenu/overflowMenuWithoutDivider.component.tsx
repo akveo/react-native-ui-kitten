@@ -6,47 +6,43 @@ import {
   OverflowMenu,
 } from 'react-native-ui-kitten';
 
-export class OverflowMenuWithoutDividerShowcase extends React.Component {
+const data = [
+  { title: 'Menu Item 1' },
+  { title: 'Menu Item 2' },
+  { title: 'Menu Item 3' },
+  { title: 'Menu Item 4' },
+];
 
-  state = {
-    menuVisible: false,
-    selectedIndex: null,
+export const OverflowMenuWithoutDividerShowcase = () => {
+
+  const [menuVisible, setMenuVisible] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
+
+  const onItemSelect = (index) => {
+    setSelectedIndex(index);
+    setMenuVisible(false);
   };
 
-  data = [
-    { title: 'Menu Item 1' },
-    { title: 'Menu Item 2' },
-    { title: 'Menu Item 3' },
-    { title: 'Menu Item 4' },
-  ];
-
-  onItemSelect = (selectedIndex) => {
-    this.setState({ selectedIndex }, this.toggleMenu);
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
   };
 
-  toggleMenu = () => {
-    const menuVisible = !this.state.menuVisible;
-    this.setState({ menuVisible });
-  };
-
-  render() {
-    return (
-      <Layout style={styles.container}>
-        <OverflowMenu
-          appearance='noDivider'
-          data={this.data}
-          visible={this.state.menuVisible}
-          selectedIndex={this.state.selectedIndex}
-          onSelect={this.onItemSelect}
-          onBackdropPress={this.toggleMenu}>
-          <Button onPress={this.toggleMenu}>
-            TOGGLE MENU
-          </Button>
-        </OverflowMenu>
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout style={styles.container}>
+      <OverflowMenu
+        appearance='noDivider'
+        data={data}
+        visible={menuVisible}
+        selectedIndex={selectedIndex}
+        onSelect={onItemSelect}
+        onBackdropPress={toggleMenu}>
+        <Button onPress={toggleMenu}>
+          TOGGLE MENU
+        </Button>
+      </OverflowMenu>
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

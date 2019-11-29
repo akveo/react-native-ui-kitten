@@ -41,7 +41,7 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  *
  * @property {StyleType} themedStyle - Determines component style for it's current state.
  *
- * @param Component - Type: {React.ComponentClass}. Determines class of component to be themed.
+ * @param Component - Type: {ComponentType}. Determines class of component to be themed.
  *
  * @param createStyles - Type: {(theme: ThemeType) => any}. Determines arrow function used to create styles.
  *

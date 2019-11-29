@@ -42,8 +42,8 @@ import {
 import { PopoverPlacementService } from './placement.service';
 import { ModalPresentingBased } from '../support/typings';
 
-type ContentElement = React.ReactElement<any>;
-type ChildElement = React.ReactElement<any>;
+type ContentElement = React.ReactElement;
+type ChildElement = React.ReactElement;
 
 interface ComponentProps extends PopoverViewProps, ModalPresentingBased {
   content: ContentElement;
@@ -66,9 +66,9 @@ const PLACEMENT_DEFAULT: PopoverPlacement = PopoverPlacements.BOTTOM;
  *
  * @extends React.Component
  *
- * @property {React.ReactElement<any>} content - Determines the content of the popover.
+ * @property {ReactElement} content - Determines the content of the popover.
  *
- * @property {React.ReactElement<any>} children - Determines the element "above" which popover will be shown.
+ * @property {ReactElement} children - Determines the element "above" which popover will be shown.
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
