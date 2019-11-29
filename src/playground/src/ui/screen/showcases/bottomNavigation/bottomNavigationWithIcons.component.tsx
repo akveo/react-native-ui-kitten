@@ -1,5 +1,5 @@
 // IMPORTANT: To use Icon component make sure to follow this guide:
-// https://akveo.github.io/react-native-ui-kitten/docs/guides/eva-icons
+// https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages
 
 import React from 'react';
 import {
