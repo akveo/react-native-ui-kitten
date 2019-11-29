@@ -108,7 +108,7 @@ Texts color may also be affected by the backgrounds change. In our case, `disabl
 }
 ```
 
-That's it! Aquamarine theme is done. Let's reload the app to review the changes.
+That's it! Pure dark theme is done. Let's reload the app to review the changes.
 
 ![image](assets/images/articles/guides/branding-theme-preview.png)
 
@@ -172,6 +172,8 @@ const App = () => (
 
 export default App;
 ```
+
+<hr>
 
 ## Conclusion
 

@@ -47,8 +47,6 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * Can be `filled` or `outline`.
  * Default is `filled`.
  *
- * @property ViewProps - Any props applied to View component.
- *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ButtonGroupSimpleUsage
