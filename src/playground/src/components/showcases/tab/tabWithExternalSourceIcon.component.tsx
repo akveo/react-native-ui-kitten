@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { Tab } from 'react-native-ui-kitten';
+import { Tab } from '@ui-kitten/components';
 
 const PersonIcon = (style) => (
   <Image

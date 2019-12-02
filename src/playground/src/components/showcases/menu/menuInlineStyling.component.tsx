@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Menu } from 'react-native-ui-kitten';
+import { Menu } from '@ui-kitten/components';
 
 export const MenuInlineStylingShowcase = () => {
 

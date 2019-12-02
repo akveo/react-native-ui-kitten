@@ -10,7 +10,7 @@ import {
   List,
   ListItem,
   ListItemElement,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import {
   SafeAreaLayout,
   SaveAreaInset,

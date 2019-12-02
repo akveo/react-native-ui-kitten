@@ -143,8 +143,8 @@ Now let's go back to our `custom-mapping.json` and modify `backgroundColor` to b
 The only thing we have to do is to pass our custom mapping to an `ApplicationProvider` component.
 
 ```js
-import * as React from 'react';
-import { ApplicationProvider } from 'react-native-ui-kitten';
+import React from 'react';
+import { ApplicationProvider } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json'; // <-- import custom mapping
 

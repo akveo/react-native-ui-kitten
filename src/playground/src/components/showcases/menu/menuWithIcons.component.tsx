@@ -7,7 +7,7 @@ import React from 'react';
 import {
   Icon,
   Menu,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const StarIcon = (style) => (
   <Icon {...style} name='star'/>

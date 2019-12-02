@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { RangeCalendarProps } from 'react-native-ui-kitten';
+import { RangeCalendarProps } from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { RangeCalendarShowcase } from './rangeCalendarShowcase.component';
 import { calendarShowcase } from './type';

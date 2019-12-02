@@ -5,7 +5,7 @@ import {
   Drawer,
   Layout,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const NotificationBadge = (style) => (
   <Layout style={[style, styles.badge]}>

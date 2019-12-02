@@ -3,7 +3,7 @@ import {
   Radio,
   RadioElement,
   RadioProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const RadioShowcase = (props: RadioProps): RadioElement => {
 

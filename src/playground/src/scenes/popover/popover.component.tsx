@@ -2,7 +2,7 @@ import React from 'react';
 import {
   PopoverElement,
   PopoverProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { PopoverShowcase } from './popoverShowcase.component';
 import {

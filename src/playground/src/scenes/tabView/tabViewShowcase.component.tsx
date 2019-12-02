@@ -3,7 +3,7 @@ import {
   TabView,
   TabViewElement,
   TabViewProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const TabViewShowcase = (props: TabViewProps): TabViewElement => {
 

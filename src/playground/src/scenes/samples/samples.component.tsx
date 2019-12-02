@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
   ListItemElement,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { Toolbar } from '@pg/components/toolbar.component';
 import {
   SafeAreaLayout,

@@ -49,7 +49,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * import React from 'react';
  * import { createAppContainer, SafeAreaView } from 'react-navigation';
  * import { createDrawerNavigator } from 'react-navigation-drawer';
- * import { Drawer, Layout, Text } from 'react-native-ui-kitten';
+ * import { Drawer, Layout, Text } from '@ui-kitten/components';
  *
  * // React Navigation also requires installing additional dependencies:
  * //

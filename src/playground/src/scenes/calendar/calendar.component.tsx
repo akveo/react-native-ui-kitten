@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { CalendarProps } from 'react-native-ui-kitten';
+import { CalendarProps } from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { CalendarShowcase } from './calendarShowcase.component';
 import { calendarShowcase } from './type';

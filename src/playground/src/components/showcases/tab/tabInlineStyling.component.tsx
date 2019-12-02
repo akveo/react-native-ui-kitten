@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Tab } from 'react-native-ui-kitten';
+import { Tab } from '@ui-kitten/components';
 
 export const TabInlineStylingShowcase = () => (
   <Tab

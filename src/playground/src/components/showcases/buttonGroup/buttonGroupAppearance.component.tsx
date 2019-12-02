@@ -4,7 +4,7 @@ import {
   Button,
   ButtonGroup,
   Layout,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const ButtonGroupAppearanceShowcase = () => (
   <Layout style={styles.container}>

@@ -16,7 +16,7 @@ import {
   ThemeType,
   Toggle,
   withStyles,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import {
   SafeAreaLayout,
   SaveAreaInset,

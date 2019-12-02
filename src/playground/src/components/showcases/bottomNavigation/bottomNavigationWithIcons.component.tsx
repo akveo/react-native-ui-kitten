@@ -1,5 +1,7 @@
-// IMPORTANT: To use Icon component make sure to follow this guide:
-// https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages
+/**
+ * IMPORTANT: To use Icon component make sure to follow this guide:
+ * https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages
+ */
 
 import React from 'react';
 import { StyleSheet } from 'react-native';
@@ -8,7 +10,7 @@ import {
   BottomNavigationTab,
   Icon,
   Layout,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const PersonIcon = (style) => (
   <Icon {...style} name='person-outline' />

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   List,
   ListItem,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const data = new Array(8).fill({
   title: 'Title for Item',

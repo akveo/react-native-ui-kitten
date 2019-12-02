@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   Layout,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const LayoutSimpleUsageShowcase = () => (
   <Layout style={styles.container}>

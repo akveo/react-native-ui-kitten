@@ -6,7 +6,7 @@ import {
 import {
   Button,
   Layout,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const ButtonGhostShowcase = () => (
   <Layout style={styles.container}>

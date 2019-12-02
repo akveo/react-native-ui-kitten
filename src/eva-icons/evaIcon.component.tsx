@@ -1,6 +1,6 @@
 import React from 'react';
 import { SvgProps } from 'react-native-svg';
-import { IconProvider } from 'react-native-ui-kitten';
+import { IconProvider } from '@ui-kitten/components';
 
 type IconElement = React.ReactElement<SvgProps>;
 type IconComponent = React.ComponentType<SvgProps>;

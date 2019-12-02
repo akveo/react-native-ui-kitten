@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from 'react-native-ui-kitten';
+import { Input } from '@ui-kitten/components';
 
 export const InputWithCaptionShowcase = () => {
 

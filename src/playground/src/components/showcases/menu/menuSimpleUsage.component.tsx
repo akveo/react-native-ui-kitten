@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from 'react-native-ui-kitten';
+import { Menu } from '@ui-kitten/components';
 
 const data = [
   { title: 'Item 1' },

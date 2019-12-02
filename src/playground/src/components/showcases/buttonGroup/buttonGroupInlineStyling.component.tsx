@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   Button,
   ButtonGroup,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const ButtonGroupInlineStylingShowcase = () => (
   <ButtonGroup style={styles.buttonGroup}>

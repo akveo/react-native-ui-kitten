@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   DrawerElement,
   DrawerProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { DrawerShowcase } from './drawerShowcase.component';
 import { drawerShowcase } from './type';

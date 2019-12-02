@@ -3,7 +3,7 @@ import {
   Datepicker,
   DatepickerElement,
   DatepickerProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 type DatepickerShowcaseProps = Omit<DatepickerProps, 'onSelect'>;
 

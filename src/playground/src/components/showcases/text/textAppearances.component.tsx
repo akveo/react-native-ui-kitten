@@ -6,7 +6,7 @@ import {
 import {
   Layout,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const TextAppearancesShowcase = () => (
   <Layout>

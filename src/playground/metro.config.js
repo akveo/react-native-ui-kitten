@@ -2,14 +2,14 @@ const path = require('path');
 const env = require('./env');
 
 const frameworkModules = [
+  path.resolve(__dirname, '../components'),
   path.resolve(__dirname, '../date-fns'),
   path.resolve(__dirname, '../eva-icons'),
-  path.resolve(__dirname, '../framework'),
   path.resolve(__dirname, '../moment'),
 ];
 
 const moduleDependencies = [
-  // react-native-ui-kitten
+  // @ui-kitten/components
   path.resolve(env.EVA_PATH, 'eva'),
   path.resolve(env.EVA_PATH, 'processor'),
   path.resolve(__dirname, '../../node_modules/@eva-design/dss'),

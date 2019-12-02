@@ -14,7 +14,7 @@ import {
   Layout,
   MenuItemType,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const HomeDrawer = ({ navigation, ...props }): DrawerElement => {
 

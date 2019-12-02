@@ -1,5 +1,5 @@
 import React from 'react';
-import { BottomNavigationTab } from 'react-native-ui-kitten';
+import { BottomNavigationTab } from '@ui-kitten/components';
 import { StarIcon } from '@pg/icons';
 import {
   ComponentShowcase,

@@ -7,7 +7,7 @@ import React from 'react';
 import {
   DrawerHeaderFooter,
   Icon,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const ProfileIcon = (style) => (
   <Icon {...style} name='person'/>

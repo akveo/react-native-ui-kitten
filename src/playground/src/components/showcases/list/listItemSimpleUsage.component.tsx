@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem } from 'react-native-ui-kitten';
+import { ListItem } from '@ui-kitten/components';
 
 export const ListItemSimpleUsageShowcase = () => (
   <ListItem title='Title' />

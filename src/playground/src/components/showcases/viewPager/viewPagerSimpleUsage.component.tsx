@@ -4,7 +4,7 @@ import {
   Layout,
   Text,
   ViewPager,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const ViewPagerSimpleUsageShowcase = () => {
 

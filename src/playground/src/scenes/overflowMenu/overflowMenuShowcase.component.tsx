@@ -4,7 +4,7 @@ import {
   OverflowMenu,
   OverflowMenuElement,
   OverflowMenuProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const OverflowMenuShowcase = (props: OverflowMenuProps): OverflowMenuElement => {
 

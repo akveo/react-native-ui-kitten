@@ -19,12 +19,12 @@ import {
   IconRegistry,
   Layout,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import {
   mapping,
   light as theme,
 } from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)

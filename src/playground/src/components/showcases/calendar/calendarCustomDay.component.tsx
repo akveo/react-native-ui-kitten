@@ -6,7 +6,7 @@ import {
 import {
   Calendar,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const DayCell = ({ date }, style) => (
   <View

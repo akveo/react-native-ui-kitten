@@ -50,7 +50,7 @@ export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps 
  * ```
  * import React from 'react';
  * import { TouchableOpacity } from 'react-native';
- * import { withStyles } from 'react-native-ui-kitten';
+ * import { withStyles } from '@ui-kitten/components';
  *
  * class Button extends React.Component {
  *

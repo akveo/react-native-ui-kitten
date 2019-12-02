@@ -2,7 +2,7 @@ import React from 'react';
 import {
   BottomNavigation,
   BottomNavigationTab,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const BottomNavigationSimpleUsageShowcase = () => {
 

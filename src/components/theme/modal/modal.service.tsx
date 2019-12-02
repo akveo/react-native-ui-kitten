@@ -23,7 +23,7 @@ import { ModalPresentingBased } from '../../ui/support/typings';
  *
  * ```
  * import React from 'react';
- * import { Layout, Button, Text, ModalService } from 'react-native-ui-kitten';
+ * import { Layout, Button, Text, ModalService } from '@ui-kitten/components';
  *
  * export const ModalServiceShowcase = () => {
  *

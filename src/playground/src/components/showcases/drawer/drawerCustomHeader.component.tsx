@@ -4,7 +4,7 @@ import {
   Drawer,
   Layout,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const drawerData = [
   { title: 'Dashboard' },

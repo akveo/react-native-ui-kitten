@@ -4,7 +4,7 @@ import {
   Button,
   Layout,
   OverflowMenu,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const data = [
   { title: 'Menu Item 1' },

@@ -3,7 +3,7 @@ import {
   RangeCalendar,
   RangeCalendarElement,
   RangeCalendarProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const RangeCalendarShowcase = (props: RangeCalendarProps): RangeCalendarElement => {
 

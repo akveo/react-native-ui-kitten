@@ -1,13 +1,13 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { mapping, light, dark } from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import {
   ApplicationProvider,
   ApplicationProviderProps,
   IconPack,
   IconRegistry,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { mapping, light, dark } from '@eva-design/eva';
 import { AppNavigator } from '@pg/navigation/app.navigator';
 import { MaterialIconsPack } from '@pg/icons/materialIconPack';
 import {

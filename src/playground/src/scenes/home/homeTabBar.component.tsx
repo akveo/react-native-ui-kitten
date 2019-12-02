@@ -3,7 +3,7 @@ import {
   BottomNavigation,
   BottomNavigationTab,
   Divider,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import {
   SafeAreaLayout,
   SafeAreaLayoutElement,

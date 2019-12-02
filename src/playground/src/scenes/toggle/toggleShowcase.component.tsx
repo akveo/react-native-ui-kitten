@@ -3,7 +3,7 @@ import {
   Toggle,
   ToggleElement,
   ToggleProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const ToggleShowcase = (props: ToggleProps): ToggleElement => {
 

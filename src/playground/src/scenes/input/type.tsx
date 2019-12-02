@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'react-native-ui-kitten';
+import { Icon } from '@ui-kitten/components';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,

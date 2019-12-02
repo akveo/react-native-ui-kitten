@@ -5,7 +5,7 @@ import {
   RangeDatepicker,
   RangeDatepickerElement,
   RangeDatepickerProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 type RangeDatepickerShowcaseProps = Omit<RangeDatepickerProps, 'onSelect'>;
 

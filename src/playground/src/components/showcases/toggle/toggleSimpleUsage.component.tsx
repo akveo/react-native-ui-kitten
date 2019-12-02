@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toggle } from 'react-native-ui-kitten';
+import { Toggle } from '@ui-kitten/components';
 
 export const ToggleSimpleUsageShowcase = () => {
 

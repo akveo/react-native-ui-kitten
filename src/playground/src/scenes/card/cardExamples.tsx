@@ -11,7 +11,7 @@ import {
   CardHeaderElement,
   Text,
   TextElement,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const CardDefaultHeader = (): CardHeaderElement => (
   <CardHeader

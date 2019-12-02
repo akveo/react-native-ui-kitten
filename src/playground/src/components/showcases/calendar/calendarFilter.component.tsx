@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar } from 'react-native-ui-kitten';
+import { Calendar } from '@ui-kitten/components';
 
 export const CalendarFilterShowcase = () => {
 

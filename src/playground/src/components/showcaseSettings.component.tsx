@@ -13,7 +13,7 @@ import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ComponentShowcaseSetting } from '@pg/model/componentShowcase.model';
 import { AppTheme } from '@pg/themes/themeContext';
 import {

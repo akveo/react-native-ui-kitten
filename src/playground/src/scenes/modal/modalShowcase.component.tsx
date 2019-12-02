@@ -8,7 +8,7 @@ import {
   Modal,
   ModalProps,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const ModalShowcase = (props: ModalProps): React.ReactElement => {
 

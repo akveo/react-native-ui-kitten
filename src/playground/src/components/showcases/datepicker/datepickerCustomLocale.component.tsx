@@ -4,7 +4,7 @@ import {
   Datepicker,
   Layout,
   NativeDateService,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const i18n = {
   dayNames: {

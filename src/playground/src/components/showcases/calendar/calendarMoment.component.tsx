@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Calendar } from 'react-native-ui-kitten';
+import { Calendar } from '@ui-kitten/components';
 import { MomentDateService } from '@ui-kitten/moment';
 import moment from 'moment';
 

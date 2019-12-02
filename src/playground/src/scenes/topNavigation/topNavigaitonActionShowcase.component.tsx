@@ -3,7 +3,7 @@ import {
   TopNavigationAction,
   TopNavigationActionElement,
   TopNavigationActionProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import {
   MoreVerticalIcon,
   StarIcon,

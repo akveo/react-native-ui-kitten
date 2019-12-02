@@ -57,7 +57,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * import React from 'react';
  * import { createAppContainer, SafeAreaView } from 'react-navigation';
  * import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
- * import { TabBar, Tab, Layout, Text } from 'react-native-ui-kitten';
+ * import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
  *
  * // React Navigation also requires installing additional dependencies:
  * //

@@ -7,7 +7,7 @@ UI Kitten is a customizable React Native UI Library based on <a href="https://ev
   
   UI Kitten modules are distributed as separated npm packages:
   
-  - UI Components `react-native-ui-kitten`
+  - UI Components `@ui-kitten/components`
     - Theme - Light and Dark visual themes, based on Design System.
     - UI Components - high-quality React Native components with no 3rd party dependencies.
     - Right-to-left writing system support for all components.

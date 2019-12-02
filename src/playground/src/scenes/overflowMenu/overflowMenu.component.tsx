@@ -2,7 +2,7 @@ import React from 'react';
 import {
   OverflowMenuElement,
   OverflowMenuProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { OverflowMenuShowcase } from './overflowMenuShowcase.component';
 import {

@@ -9,7 +9,7 @@ import {
   BottomNavigationTab,
   Icon,
   Layout,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const PersonIcon = (style) => (
   <Icon {...style} name='person'/>

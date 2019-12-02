@@ -12,7 +12,7 @@ import {
   OverflowMenu,
   OverflowMenuItemType,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import {
   AppTheme,
   ThemeContext,

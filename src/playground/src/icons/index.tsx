@@ -3,7 +3,7 @@ import {
   Icon,
   IconElement,
   StyleType,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 /**
  * Should contain all icon names used in app.

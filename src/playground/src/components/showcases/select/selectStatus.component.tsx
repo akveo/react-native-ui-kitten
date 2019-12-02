@@ -6,7 +6,7 @@ import {
 import {
   Layout,
   Select,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const useSelectChanges = (initialSelection = null) => {
   const [selectedOption, setSelectedOption] = React.useState(initialSelection);

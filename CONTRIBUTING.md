@@ -1,6 +1,6 @@
-# Contributing to react-native-ui-kitten
+# Contributing to UI Kitten
 
-We would love for you to contribute to react-native-ui-kitten and help make it even better together! :rocket:
+We would love for you to contribute to UI Kitten and help make it even better together! :rocket:
 
  - [Code of Conduct](#coc)
  - [Question or Problem?](#question)
@@ -13,7 +13,7 @@ We would love for you to contribute to react-native-ui-kitten and help make it e
  - [Commit Message Guidelines](#commit)
 
 ## <a name="coc"></a> Code of Conduct
-Help us keep react-native-ui-kitten open and inclusive. Please read and follow our [Code of Conduct][coc].
+Help us keep UI Kitten open and inclusive. Please read and follow our [Code of Conduct][coc].
 
 ## <a name="question"></a> Got a Question or Problem?
 
@@ -33,7 +33,7 @@ If you find a bug in the source code or a mistake in the documentation, you can 
 
 Please follow this simple checklist before submitting:
 
-* If you have a question about using react-native-ui-kitten, please ask on the [StackOverflow][stackoverflow].
+* If you have a question about using UI Kitten, please ask on the [StackOverflow][stackoverflow].
 
 * It is required that you clearly describe the steps necessary to reproduce the issue you are running into. Although we would love to help our users as much as possible, diagnosing issues without clear reproduction steps is extremely time-consuming and simply not sustainable.
 
@@ -137,7 +137,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 ## <a name="run"></a> Run playground
 
-react-native-ui-kitten contains playground module which allows you to debug quickly your changes.
+UI Kitten contains playground module which allows you to debug quickly your changes.
 See the project in [playground directory](src/playground).
 To run it you should:
 * Clone this repo
@@ -147,11 +147,11 @@ cd ./path-to/react-native-ui-kitten
 ```
 * Install dependencies:
 ```
-npm install
+yarn
 ```
 * That's it! You're ready to run:
 ```
-npm start
+yarn playground start
 ```
 * Now you will be prompted by CLI to select the device you'd like to run.
 Just follow the CLI instructions. Normally you should hit `a` or `i` button
@@ -167,7 +167,7 @@ you can observe all the changes you do inside [framework](src/framework)
 
 We have very precise rules over how our git commit messages can be formatted.  This leads to **more
 readable messages** that are easy to follow when looking through the **project history**.  But also,
-we use the git commit messages to **generate the react-native-ui-kitten change log**.
+we use the git commit messages to **generate the UI Kitten change log**.
 
 ### Commit Message Format
 Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special

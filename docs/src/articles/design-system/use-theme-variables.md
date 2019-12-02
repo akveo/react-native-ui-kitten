@@ -9,9 +9,9 @@ UI Kitten allows you using the theme you have provided in the application root. 
 Let's declare a `View` and set it `backgroundColor` to any color of current theme.
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { withStyles } from 'react-native-ui-kitten';
+import { withStyles } from '@ui-kitten/components';
 
 const AwesomeView = (props) => {
   const { themedStyle, style, ...restProps } = this.props;
@@ -38,7 +38,7 @@ That's it! Now you're done and able to use your themed component.
 ## Themed Component Usage
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { ThemedAwesomeView } from './path-to/awesome.component'; // <-- import themed component
 
 export const AwesomeViewShowcase = (props) => (

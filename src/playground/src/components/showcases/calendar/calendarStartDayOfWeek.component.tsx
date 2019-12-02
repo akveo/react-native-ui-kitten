@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Calendar,
   NativeDateService,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const dateService = new NativeDateService('en', { startDayOfWeek: 1 });
 

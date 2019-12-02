@@ -8,7 +8,7 @@ import {
   Button,
   Icon,
   Tooltip,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const InfoIcon = (style) => (
   <Icon {...style} name='info'/>
