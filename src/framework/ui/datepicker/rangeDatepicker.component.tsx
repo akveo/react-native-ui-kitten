@@ -68,7 +68,6 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @overview-example RangeDatepickerSimpleUsage
  */
-
 export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 
   static styledComponentName: string = 'Datepicker';

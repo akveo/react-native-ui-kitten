@@ -1,1 +1,1 @@
-import './tasks/docs/docs';
+import './tasks/docs';

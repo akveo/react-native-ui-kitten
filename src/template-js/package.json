@@ -1,5 +1,5 @@
 {
-  "name": "react-native-template-ui-kitten",
+  "name": "@ui-kitten/template-js",
   "version": "4.3.0-beta.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
@@ -20,5 +20,8 @@
   "files": [
     "template",
     "template.config.js"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

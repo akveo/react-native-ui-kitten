@@ -19,6 +19,12 @@
     "theme",
     "ui-kitten"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "moment": "^2.24.0"
+  },
   "peerDependencies": {
     "react-native-ui-kitten": "4.3.0-beta.1",
     "moment": "^2.24.0"

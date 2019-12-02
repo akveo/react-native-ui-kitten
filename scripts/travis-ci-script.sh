@@ -7,7 +7,7 @@
 set -e
 
 # Go to project directory
-cd $(dirname $0)/../..
+cd $(dirname $0)/..
 
 echo ""
 echo "Building sources and running tests. Running mode: ${MODE}"
@@ -19,9 +19,9 @@ if [[ -z "$TRAVIS" ]]; then
 fi
 
 if [[ "${MODE}" = lint ]]; then
-  npm run ci:lint
+  npm run lint
 elif [[ "${MODE}" = build ]]; then
-  npm run ci:build
+  npm run build
 elif [[ "${MODE}" =~ test ]]; then
-  npm run ci:test
+  npm run test
 fi

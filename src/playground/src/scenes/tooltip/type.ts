@@ -4,10 +4,18 @@ import {
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '@pg/model/componentShowcase.model';
+import { StarIcon } from '@pg/icons';
 
 const defaultTooltip: ComponentShowcaseItem = {
   title: 'Default',
   props: {},
+};
+
+const iconTooltip: ComponentShowcaseItem = {
+  title: 'Default',
+  props: {
+    icon: StarIcon,
+  },
 };
 
 const defaultSection: ComponentShowcaseSection = {
@@ -16,10 +24,17 @@ const defaultSection: ComponentShowcaseSection = {
   ],
 };
 
+const iconSection: ComponentShowcaseSection = {
+  items: [
+    iconTooltip,
+  ],
+};
+
 export const tooltipShowcase: ComponentShowcase = {
   title: 'Tooltip',
   sections: [
     defaultSection,
+    iconSection,
   ],
 };
 

@@ -1,7 +1,13 @@
 {
-  "name": "docs",
+  "name": "@ui-kitten/docs",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "workspaces": {
+    "nohoist": [
+      "*",
+      "*/**"
+    ]
+  },
   "scripts": {
     "ng": "ng",
     "ngh": "ngh",

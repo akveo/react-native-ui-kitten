@@ -19,8 +19,14 @@
     "theme",
     "ui-kitten"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "react-native-eva-icons": "1.1.0"
+  },
+  "devDependencies": {
+    "react-native-svg": "^9.4.0"
   },
   "peerDependencies": {
     "react-native-ui-kitten": "4.3.0-beta.1",

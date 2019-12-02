@@ -13,55 +13,54 @@ import {
   TextElement,
 } from 'react-native-ui-kitten';
 
-export const Body = (): TextElement => (
-  <Text>
-    The Maldives, officially the Republic of Maldives, is a small country in South Asia,
-    located in the Arabian Sea of the Indian Ocean.
-    It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian continent
-  </Text>
-);
-
-export const Header = () => (
+export const CardDefaultHeader = (): CardHeaderElement => (
   <CardHeader
-    title='Maldives'
-    description='By Wikipedia'
+    title='Title'
+    description='Description'
   />
 );
 
-export const CustomHeader = () => (
+export const CardCustomHeader = (): CardHeaderElement => (
   <React.Fragment>
     <Image
-      style={styles.headerImage}
       source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg' }}
+      style={styles.headerImage}
     />
-    <Text
-      style={styles.headerText}
-      category='h6'>
-      Maldives
-    </Text>
+    <View style={styles.headerTextContainer}>
+      <Text category='h6'>
+        Title
+      </Text>
+    </View>
   </React.Fragment>
 );
 
-export const Footer = () => (
+export const CardFooter = (): CardFooterElement => (
   <View style={styles.footerContainer}>
     <Button
       style={styles.footerControl}
       size='small'
       status='basic'>
-      CANCEL
+      Cancel
     </Button>
     <Button
       style={styles.footerControl}
       size='small'>
-      ACCEPT
+      Accept
     </Button>
   </View>
 );
 
+export const CardBody = (): TextElement => (
+  <Text>
+    A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+    Originally, nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.
+  </Text>
+);
+
 const styles = StyleSheet.create({
-  headerText: {
-    marginHorizontal: 24,
-    marginVertical: 16,
+  headerTextContainer: {
+    paddingHorizontal: 24,
+    paddingVertical: 16,
   },
   headerImage: {
     flex: 1,

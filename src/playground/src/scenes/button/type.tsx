@@ -1,5 +1,4 @@
 import React from 'react';
-import { Icon } from 'react-native-ui-kitten';
 import { StarIcon } from '@pg/icons';
 import {
   ComponentShowcase,

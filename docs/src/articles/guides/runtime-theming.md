@@ -126,7 +126,7 @@ That’s it! Now your app can support both Light and Dark themes.
 
 ## Note on state management
 
-This guide is just a short introduction on how it can be done with standard React tools. Working with real production apps you're also able to implement this with other powerful state management tools like [MobX](https://mobx.js.org/getting-started.html) or [Redux](https://redux.js.org/).
+This guide is just a short introduction on how it can be done with standard React tools. Working with real production apps you're also able to implement this with other powerful state management tools like <a href="https://mobx.js.org/getting-started.html" target="_blank">MobX</a> or <a href="https://redux.js.org/introduction/getting-started" target="_blank">Redux</a>.
 
 <hr>
 

@@ -219,17 +219,17 @@ import {
 To start a new release (publish the framework packages on NPM) you need:
 
 1. Create a new release branch with template `release/vX.X.X`
-3. Run tests: `npm run release:validate`
+3. Run tests: `yarn release:validate`
 3. MANUALLY update a version in main ./package.json to a new one
-4. Generate documentation if needed: `npm run docs:start`
-5. Generate changelog: `npm run version:changelog`
+4. Generate documentation if needed: `yarn docs:start`
+5. Generate changelog: `yarn release:changelog`
 6. Fix/expand changelog manually
 7. Update documentation (e.g [DEV_DOCS.md](./DEV_DOCS.md)) files if needed
 8. Push the branch, create PR, approve - merge
 9. Pull the upstream (master or another version branch (e.g. 4.0.1, next))   
-10. Run tests: `npm run release:validate`
-11. Assemble build: `npm run release:prepare`
-12. Publish the package to npm: `npm run release`
+10. Run tests: `yarn release:validate`
+11. Assemble build: `yarn release:prepare`
+12. Publish the package to npm: `yarn release`
 13. Create and push [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with template `(vX.X.X)`
 14. Create release on GitHub for the tag
 
@@ -239,7 +239,7 @@ Playground is an example app built on top of the [Expo](https://github.com/expo/
 
 ## Start a Playground
 
-`npm i && npm run start:pg:dev` from the project root
+`yarn && yarn playground start` from the project root
 
 ### Playground environments:
 
@@ -260,7 +260,7 @@ git clone https://github.com/eva-design/eva
   - react-native-ui-kitten
   - eva
 ```
-- Install dependencies if needed and finally run `npm run start:pg:dev`
+- Install dependencies if needed and finally run `yarn playground start:dev`
 
 # Kitten Tricks
 

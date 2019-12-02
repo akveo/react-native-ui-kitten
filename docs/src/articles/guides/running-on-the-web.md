@@ -19,16 +19,16 @@ In case you're going to start a new project with web support, the best way to do
 
 ## Existing Expo Applications
 
-Read the great documentation from Expo team to <a href='https://docs.expo.io/versions/latest/introduction/running-in-the-browser/#adding-web-support-to-expo-projects' target='_blank'>add web support in existing Expo projects</a>.
+Read the great documentation from Expo team to <a href='https://docs.expo.io/versions/latest/guides/running-in-the-browser' target='_blank'>add web support in existing Expo projects</a>.
 
 <hr>
 
 ## Regular React Native Applications
 
-In case you don't use Expo, and have already initialized React Native Application using `react-native init`, please follow <a href='https://github.com/necolas/react-native-web/blob/master/docs/guides/multi-platform-apps.md#web-packaging-for-existing-react-native-apps' target='_blank'>official React Native Web Guide</a>.
+In case you don't use Expo, and have already initialized React Native Application using `react-native init`, please follow <a href='https://necolas.github.io/react-native-web/docs/?path=/docs/guides-multi-platform--page' target='_blank'>official React Native Web Guide</a>.
 
 <hr>
 
-## Usage
+## Conclusion
 
-If you already have all in place, UI Kitten does not force you creating any additional web-specific configuration. The next step to create a multi-platform app would be [Configuring Navigation](guides/configure-navigation) and launching it on both mobile device and browser.
+If you already have all in place, UI Kitten does not force you creating any additional web-specific configuration. The next step to create a multi-platform app would be [Branding](guides/branding) and launching it on both mobile device and browser.

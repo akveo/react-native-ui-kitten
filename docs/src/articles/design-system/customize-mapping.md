@@ -197,4 +197,4 @@ That's it. Now you're able to use UI Kitten Button without passing `appearance` 
 
 ## Related articles
 
-- [Create custom component mapping](design-system/custom-mapping)
+- [Create custom component mapping](design-system/custom-component-mapping)

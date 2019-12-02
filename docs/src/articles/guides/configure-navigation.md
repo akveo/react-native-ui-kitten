@@ -1,6 +1,6 @@
 # Configure Navigation
 
-Now, when you have [your app initialized](docs/getting-started), let's configure it to navigate between screens. UI Kitten has built-in components to fit <a href="https://reactnavigation.org" target="_blank">React Navigation</a> API. Let's use it to complete this guide with a simple 3 steps.
+This guide will help you to configure the app to navigate between screens. UI Kitten has built-in components to fit <a href="https://reactnavigation.org" target="_blank">React Navigation</a> API. Let's use it to complete this guide with a simple 3 steps.
 
 <hr>
 
@@ -165,8 +165,8 @@ That's it! By this guide, you learned how to create screens and perform simple n
 
 UI Kitten includes much more components that can be used with React Navigation:
 
-- [BottomNavigation](components/bottomnavigation) - renders the tabs at the bottom.
-- [TabView](components/tabview) - renders the tabs at the top.
+- [BottomNavigation](components/bottom-navigation) - renders the tabs at the bottom.
+- [TabView](components/tab-view) - renders the tabs at the top.
 - [Drawer](components/drawer) - renders swipeable side menu.
 
 <hr>

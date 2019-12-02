@@ -11,7 +11,6 @@ import {
   StarAction,
 } from './topNavigaitonActionShowcase.component';
 
-
 const rightControlsTopNavigation: ComponentShowcaseItem = {
   props: {
     title: 'Title',
