@@ -13,21 +13,14 @@ import {
   TextElement,
 } from 'react-native-ui-kitten';
 
-export const CardBodyContent = (): TextElement => (
-  <Text>
-    A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
-    Originally, nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.
-  </Text>
-);
-
-export const EvaCardHeader = (): CardHeaderElement => (
+export const CardDefaultHeader = (): CardHeaderElement => (
   <CardHeader
     title='Title'
     description='Description'
   />
 );
 
-export const CustomCardHeader = (): CardHeaderElement => (
+export const CardCustomHeader = (): CardHeaderElement => (
   <React.Fragment>
     <Image
       source={{ uri: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704__340.jpg' }}
@@ -44,16 +37,24 @@ export const CustomCardHeader = (): CardHeaderElement => (
 export const CardFooter = (): CardFooterElement => (
   <View style={styles.footerContainer}>
     <Button
+      style={styles.footerControl}
       size='small'
       status='basic'>
       Cancel
     </Button>
     <Button
-      size='small'
-      style={styles.footerControl}>
+      style={styles.footerControl}
+      size='small'>
       Accept
     </Button>
   </View>
+);
+
+export const CardBody = (): TextElement => (
+  <Text>
+    A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+    Originally, nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.
+  </Text>
 );
 
 const styles = StyleSheet.create({
@@ -70,6 +71,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   footerControl: {
-    marginRight: 12,
+    marginHorizontal: 4,
   },
 });

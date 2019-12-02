@@ -6,15 +6,15 @@ import {
   ComponentShowcaseSetting,
 } from '@pg/model/componentShowcase.model';
 import {
-  CardBodyContent,
+  CardDefaultHeader,
+  CardCustomHeader,
+  CardBody,
   CardFooter,
-  CustomCardHeader,
-  EvaCardHeader,
 } from './cardExamples';
 
 const defaultCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
+    children: <CardBody/>,
   },
 };
 
@@ -25,37 +25,37 @@ const defaultSection: ComponentShowcaseSection = {
   ],
 };
 
-const evaHeaderCard: ComponentShowcaseItem = {
+const cardDefaultHeader: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
-    header: EvaCardHeader,
+    children: <CardBody/>,
+    header: CardDefaultHeader,
   },
 };
 
-const evaHeaderSection: ComponentShowcaseSection = {
-  title: 'Eva Header',
+const cardDefaultHeaderSection: ComponentShowcaseSection = {
+  title: 'Header',
   items: [
-    evaHeaderCard,
+    cardDefaultHeader,
   ],
 };
 
-const customHeaderCard: ComponentShowcaseItem = {
+const cardCustomHeader: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
-    header: CustomCardHeader,
+    children: <CardBody/>,
+    header: CardCustomHeader,
   },
 };
 
-const customHeaderSection: ComponentShowcaseSection = {
+const cardCustomHeaderSection: ComponentShowcaseSection = {
   title: 'Custom Header',
   items: [
-    customHeaderCard,
+    cardCustomHeader,
   ],
 };
 
 const footerCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
+    children: <CardBody/>,
     footer: CardFooter,
   },
 };
@@ -69,14 +69,14 @@ const footerSection: ComponentShowcaseSection = {
 
 const headerFooterCard: ComponentShowcaseItem = {
   props: {
-    children: <CardBodyContent/>,
-    header: EvaCardHeader,
+    children: <CardBody/>,
+    header: CardDefaultHeader,
     footer: CardFooter,
   },
 };
 
 const headerFooterSection: ComponentShowcaseSection = {
-  title: 'Header + Footer',
+  title: 'Header & Footer',
   items: [
     headerFooterCard,
   ],
@@ -86,8 +86,8 @@ export const cardShowcase: ComponentShowcase = {
   title: 'Card',
   sections: [
     defaultSection,
-    evaHeaderSection,
-    customHeaderSection,
+    cardDefaultHeaderSection,
+    cardCustomHeaderSection,
     footerSection,
     headerFooterSection,
   ],

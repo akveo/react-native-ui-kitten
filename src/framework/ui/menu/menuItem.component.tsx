@@ -53,8 +53,7 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
  *
- * @property {(style: StyleType) => ReactElement} accessory - Determines the accessory of the
- * component.
+ * @property {(style: StyleType) => ReactElement} accessory - Determines the accessory of the component.
  *
  * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
  *

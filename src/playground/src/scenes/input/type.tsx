@@ -1,15 +1,12 @@
 import React from 'react';
-import {
-  Icon,
-  StyleType,
-} from 'react-native-ui-kitten';
-import { StarIcon } from '@pg/icons';
+import { Icon } from 'react-native-ui-kitten';
 import {
   ComponentShowcase,
   ComponentShowcaseItem,
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '@pg/model/componentShowcase.model';
+import { StarIcon } from '@pg/icons';
 
 const defaultInput: ComponentShowcaseItem = {
   title: 'Default',
@@ -48,9 +45,7 @@ const captionIconInput: ComponentShowcaseItem = {
   title: 'Caption Icon',
   props: {
     caption: 'Place your text',
-    captionIcon: (style: StyleType) => (
-      <Icon name='star' {...style} />
-    ),
+    captionIcon: StarIcon,
   },
 };
 

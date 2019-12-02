@@ -35,6 +35,8 @@ const playgroundExtraModules = {
   '@babel/runtime': path.resolve(__dirname, './node_modules/@babel/runtime'),
   'react': path.resolve(__dirname, './node_modules/react'),
   'react-native': path.resolve(__dirname, './node_modules/react-native'),
+  'css-tree': path.resolve(__dirname, './node_modules/css-tree'),
+  'css-select': path.resolve(__dirname, './node_modules/css-select'),
 };
 
 module.exports = {

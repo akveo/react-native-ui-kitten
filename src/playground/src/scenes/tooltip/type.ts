@@ -12,16 +12,10 @@ const defaultTooltip: ComponentShowcaseItem = {
 };
 
 const iconTooltip: ComponentShowcaseItem = {
-  title: 'Icon',
+  title: 'Default',
   props: {
     icon: StarIcon,
   },
-};
-
-const accessoriesSection: ComponentShowcaseSection = {
-  items: [
-    iconTooltip,
-  ],
 };
 
 const defaultSection: ComponentShowcaseSection = {
@@ -30,11 +24,17 @@ const defaultSection: ComponentShowcaseSection = {
   ],
 };
 
+const iconSection: ComponentShowcaseSection = {
+  items: [
+    iconTooltip,
+  ],
+};
+
 export const tooltipShowcase: ComponentShowcase = {
   title: 'Tooltip',
   sections: [
     defaultSection,
-    accessoriesSection,
+    iconSection,
   ],
 };
 

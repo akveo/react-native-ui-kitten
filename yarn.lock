@@ -1068,7 +1068,15 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4":
+"@babel/runtime-corejs3@^7.7.4":
+  version "7.7.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.7.4.tgz#f861adc1cecb9903dfd66ea97917f02ff8d79888"
+  integrity sha512-BBIEhzk8McXDcB3IbOi8zQPzzINUp4zcLesVlBSOcyGhzPUU8Xezk5GAG7Sy5GVhGmAO0zGd2qRSeY2g4Obqxw==
+  dependencies:
+    core-js-pure "^3.0.0"
+    regenerator-runtime "^0.13.2"
+
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.4.tgz#b23a856751e4bf099262f867767889c0e3fe175b"
   integrity sha512-r24eVUUr0QqNZa+qrImUk8fn5SPhHq+IfYvIoIMg0do3GdK9sMdiLKP3GYVVaxpPKORgm8KRKaNTEhAjgIpLMw==
@@ -3465,11 +3473,12 @@ aws4@^1.8.0:
   integrity sha512-Uvq6hVe90D0B2WEnUqtdgY1bATGz3mw33nH9Y+dmA+w5DHvUmBgkr5rM/KCHpCsiFNRUfokW/szpPPgMK2hm4A==
 
 axobject-query@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.0.2.tgz#ea187abe5b9002b377f925d8bf7d1c561adf38f9"
-  integrity sha512-MCeek8ZH7hKyO1rWUbKNQBbl4l2eY0ntk7OGi+q0RlafrCnfPxC06WZA+uebCfmYp4mNU9jRBP1AhGyf8+W3ww==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.1.1.tgz#2a3b1271ec722d48a4cd4b3fcc20c853326a49a7"
+  integrity sha512-lF98xa/yvy6j3fBHAgQXIYl+J4eZadOSqsPojemUqClzNbBV38wWGpUbQbVEyf4eUF5yF7eHmGgGA2JiHyjeqw==
   dependencies:
-    ast-types-flow "0.0.7"
+    "@babel/runtime" "^7.7.4"
+    "@babel/runtime-corejs3" "^7.7.4"
 
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -4026,13 +4035,13 @@ browserslist@^1.1.1, browserslist@^1.1.3, browserslist@^1.7.6:
     electron-to-chromium "^1.2.7"
 
 browserslist@^4.0.0, browserslist@^4.5.4, browserslist@^4.6.0, browserslist@^4.7.3:
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.7.3.tgz#02341f162b6bcc1e1028e30624815d4924442dc3"
-  integrity sha512-jWvmhqYpx+9EZm/FxcZSbUZyDEvDTLDi3nSAKbzEkyWvtI0mNSmUosey+5awDW1RUlrgXbQb5A6qY1xQH9U6MQ==
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.8.0.tgz#6f06b0f974a7cc3a84babc2ccc56493668e3c789"
+  integrity sha512-HYnxc/oLRWvJ3TsGegR0SRL/UDnknGq2s/a8dYYEO+kOQ9m9apKoS5oiathLKZdh/e9uE+/J3j92qPlGD/vTqA==
   dependencies:
-    caniuse-lite "^1.0.30001010"
-    electron-to-chromium "^1.3.306"
-    node-releases "^1.1.40"
+    caniuse-lite "^1.0.30001012"
+    electron-to-chromium "^1.3.317"
+    node-releases "^1.1.41"
 
 browserstack@^1.5.1:
   version "1.5.3"
@@ -4289,19 +4298,19 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000187, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30001012"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001012.tgz#a792225f33a49068c9c2f5c44f759151f2111d61"
-  integrity sha512-fm4VZQo0F1WYTmJcaTsqGhRuqcbkUW1/1hx8n5xdkbJSyaJV3jZ1vPXHYNcn376cAcuhxUIcE9TpHlSAYtN6bA==
+  version "1.0.30001013"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001013.tgz#7fde3c19efcdb7d9f8d24185e219e586933d31b0"
+  integrity sha512-wvXRZ9Ov0rwDEN2Eqir2OGHMEGS1roQvc90DejA5mbsLGUws8H339GZYxXm2CTT2PT3DhpxLPq7FrYp6XcEWkg==
 
 caniuse-lite@1.0.30000974:
   version "1.0.30000974"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000974.tgz#b7afe14ee004e97ce6dc73e3f878290a12928ad8"
   integrity sha512-xc3rkNS/Zc3CmpMKuczWEdY2sZgx09BkAxfvkxlAEBTqcMHeL8QnPqhKse+5sRTi3nrw2pJwToD2WvKn1Uhvww==
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000957, caniuse-lite@^1.0.30000960, caniuse-lite@^1.0.30000984, caniuse-lite@^1.0.30001010:
-  version "1.0.30001012"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001012.tgz#653ec635e815b9e0fb801890923b0c2079eb34ec"
-  integrity sha512-7RR4Uh04t9K1uYRWzOJmzplgEOAXbfK72oVNokCdMzA67trrhPzy93ahKk1AWHiA0c58tD2P+NHqxrA8FZ+Trg==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000957, caniuse-lite@^1.0.30000960, caniuse-lite@^1.0.30000984, caniuse-lite@^1.0.30001012:
+  version "1.0.30001013"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001013.tgz#da2440d4d266a17d40eb79bd19c0c8cc1d029c72"
+  integrity sha512-hOAXaWKuq/UVFgYawxIOdPdyMQdYcwOCDOjnZcKn7wCgFUrhP7smuNZjGLuJlPSgE6aRA4cRJ+bGSrhtEt7ZAg==
 
 canonical-path@1.0.0:
   version "1.0.0"
@@ -5142,6 +5151,11 @@ core-js-compat@^3.1.1:
   dependencies:
     browserslist "^4.7.3"
     semver "^6.3.0"
+
+core-js-pure@^3.0.0:
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.4.5.tgz#284474cb48d134e26e6e314cb89986c6c59480fb"
+  integrity sha512-v3BoUOhmBvs4Z17jG/oM7qyv+tEEMvD1FYDDfxa6uD5W2rA/DpKvhvmyrBzxuMQTa/91UQKisaiqe0+0GuL2oA==
 
 core-js@2.5.7:
   version "2.5.7"
@@ -6095,10 +6109,10 @@ ejs@^2.6.1:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.7.4.tgz#48661287573dcc53e366c7a1ae52c3a120eec9ba"
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
-electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.124, electron-to-chromium@^1.3.191, electron-to-chromium@^1.3.306:
-  version "1.3.314"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.314.tgz#c186a499ed2c9057bce9eb8dca294d6d5450facc"
-  integrity sha512-IKDR/xCxKFhPts7h+VaSXS02Z1mznP3fli1BbXWXeN89i2gCzKraU8qLpEid8YzKcmZdZD3Mly3cn5/lY9xsBQ==
+electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.124, electron-to-chromium@^1.3.191, electron-to-chromium@^1.3.317:
+  version "1.3.321"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.321.tgz#913869f5ec85daabba0e75c9c314b4bf26cdb01e"
+  integrity sha512-jJy/BZK2s2eAjMPXVMSaCmo7/pSY2aKkfQ+LoAb5Wk39qAhyP9r8KU74c4qTgr9cD/lPUhJgReZxxqU0n5puog==
 
 elliptic@^6.0.0:
   version "6.5.2"
@@ -11251,7 +11265,7 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.1.14, node-releases@^1.1.25, node-releases@^1.1.40:
+node-releases@^1.1.14, node-releases@^1.1.25, node-releases@^1.1.41:
   version "1.1.41"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.41.tgz#57674a82a37f812d18e3b26118aefaf53a00afed"
   integrity sha512-+IctMa7wIs8Cfsa8iYzeaLTFwv5Y4r5jZud+4AnfymzeEXKBCavFX0KBgzVaPVqf0ywa6PrO8/b+bPqdwjGBSg==
@@ -12958,9 +12972,9 @@ pseudomap@^1.0.2:
   integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
 
 psl@^1.1.24, psl@^1.1.28:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/psl/-/psl-1.4.0.tgz#5dd26156cdb69fa1fdb8ab1991667d3f80ced7c2"
-  integrity sha512-HZzqCGPecFLyoRj5HLfuDSKYTJkAfB5thKBIkRHtGjWwY7p1dAyveIbXIq4tO0KYfDF2tHqPUgY9SDnGm00uFw==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/psl/-/psl-1.5.0.tgz#47fd1292def7fdb1e138cd78afa8814cebcf7b13"
+  integrity sha512-4vqUjKi2huMu1OJiLhi3jN6jeeKvMZdI1tYgi/njW5zV52jNLgSAZSdN16m9bJFe61/cT8ulmw4qFitV9QRsEA==
 
 public-encrypt@^4.0.0:
   version "4.0.3"
@@ -15451,9 +15465,9 @@ terser@^3.16.1:
     source-map-support "~0.5.10"
 
 terser@^4.1.2:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.4.0.tgz#22c46b4817cf4c9565434bfe6ad47336af259ac3"
-  integrity sha512-oDG16n2WKm27JO8h4y/w3iqBGAOSCtq7k8dRmrn4Wf9NouL0b2WpMHGChFGZq4nFAQy1FsNJrVQHfurXOSTmOA==
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.4.1.tgz#f3a469c125d9a0eb52f1e6a7fdff587bd6e35902"
+  integrity sha512-e05giplw+8sIYh50qXYHZmr0b76O5dOSm9JwSDebGFLri4ItYzxsnumiAK+yuI56R+H7uIjT9KbVEKNkrprzHw==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
@@ -15939,9 +15953,9 @@ uglify-js@3.4.x:
     source-map "~0.6.1"
 
 uglify-js@^3.0.0, uglify-js@^3.1.4:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.0.tgz#14b854003386b7a7c045910f43afbc96d2aa5307"
-  integrity sha512-PC/ee458NEMITe1OufAjal65i6lB58R1HWMRcxwvdz1UopW0DYqlRL3xdu3IcTvTXsB02CRHykidkTRL+A3hQA==
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.1.tgz#35c7de17971a4aa7689cd2eae0a5b39bb838c0c5"
+  integrity sha512-pnOF7jY82wdIhATVn87uUY/FHU+MDUdPLkmGFvGoclQmeu229eTkbG5gjGGBi3R7UuYYSEeYXY/TTY5j2aym2g==
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"

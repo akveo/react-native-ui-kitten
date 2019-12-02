@@ -8,6 +8,6 @@ import {
 export const AvatarShowcase = (props?: AvatarProps): AvatarElement => (
   <Avatar
     {...props}
-    source={{ uri: 'https://cdn.vox-cdn.com/uploads/chorus_asset/file/7790309/cena.jpg' }}
+    source={require('../../assets/images/brand-logo.png')}
   />
 );

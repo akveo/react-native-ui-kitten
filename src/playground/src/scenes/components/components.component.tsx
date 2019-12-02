@@ -39,7 +39,7 @@ export const routes: string[] = [
   'List',
   'Menu',
   'Modal',
-  'Overflow Menu',
+  'OverflowMenu',
   'Popover',
   'Radio',
   'RadioGroup',
