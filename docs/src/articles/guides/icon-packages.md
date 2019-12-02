@@ -83,7 +83,7 @@ The complete list of available icons could be found on <a href="https://akveo.gi
 
 ## 3rd party Icon packages
 
-If you're not interested in using [Eva Icons](guides/icon-packages#eva-icons), learn how to integrate UI Kitten with other icon packages with a simple 3 steps.
+If you're not interested in using Eva Icon, learn how to integrate UI Kitten with other icon packages with a simple 3 steps.
 
 ### Installation
 
@@ -180,7 +180,7 @@ As a result, you should have a Button looking similar to this:
 
 UI Kitten API allows you to register multiple icon packages. Let's also create a Material Icons provider.
 
-With a similar to [3rd party icons guide](guides/3rd-party-icon-packages) way, create a Material Icons provider.
+With a similar to [3rd party Icon packages guide](guides/icon-packages#3rd-party-icon-packages) way, create a Material Icons provider.
 
 ```jsx
 import * as React from 'react';

@@ -1,6 +1,6 @@
 # Eva Design System
 
-Starting with version 4.0 UI Kitten becomes a React Native implementation of [Eva Design System](https://eva.design?utm_source=ui_kitten_docs&utm_medium=intro).
+Starting with version 4.0 UI Kitten becomes a React Native implementation of <a href="https://eva.design?utm_source=ui_kitten_docs&utm_medium=intro" target="_blank">Eva Design System</a>.
 This means that components visual style and behavior are based on Design System rules and agreements.
 
 <hr>
@@ -17,7 +17,7 @@ Most importantly, Eva is built to be customizable, meaning architectural support
 Eva Design System is implemented for two platforms:
 
 - Mobile - UI Kitten
-- Web - [Nebular](https://github.com/akveo/nebular?utm_source=ui_kitten_docs&utm_medium=intro)
+- Web - <a href="https://github.com/akveo/nebular?utm_source=ui_kitten_docs&utm_medium=intro" target="_blank">Nebular</a>
 
 Both implementations have a single source of truth for styles and unified theming system.
 
