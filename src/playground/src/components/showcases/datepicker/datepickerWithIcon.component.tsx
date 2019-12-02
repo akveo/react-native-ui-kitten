@@ -9,7 +9,7 @@ import {
   Datepicker,
   Icon,
   Layout,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const CalendarIcon = (style) => (
   <Icon {...style} name='calendar'/>

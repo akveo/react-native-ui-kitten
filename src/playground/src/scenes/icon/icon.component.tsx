@@ -2,7 +2,7 @@ import React from 'react';
 import {
   IconElement,
   IconProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { IconShowcase } from './iconShowcase.component';
 import {

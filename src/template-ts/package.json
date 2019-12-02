@@ -1,8 +1,9 @@
 {
   "name": "@ui-kitten/template-ts",
+  "description": "React Native template project with UI Kitten and TypeScript",
   "version": "4.3.0-beta.1",
-  "license": "MIT",
   "author": "akveo <contact@akveo.com>",
+  "license": "MIT",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
@@ -13,8 +14,7 @@
   },
   "keywords": [
     "react-native",
-    "typescript",
-    "jest",
+    "ui-kitten",
     "template",
     "boilerplate"
   ],

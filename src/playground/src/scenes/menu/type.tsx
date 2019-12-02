@@ -2,7 +2,7 @@ import React from 'react';
 import {
   MenuItemType,
   Icon,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { StarIcon } from '@pg/icons';
 import {
   ComponentShowcase,

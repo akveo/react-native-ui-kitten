@@ -7,15 +7,15 @@ const evaModules = {
 };
 
 const frameworkModules = {
+  '@ui-kitten/components': path.resolve(__dirname, '../components'),
   '@ui-kitten/date-fns': path.resolve(__dirname, '../date-fns'),
   '@ui-kitten/eva-icons': path.resolve(__dirname, '../eva-icons'),
   '@ui-kitten/moment': path.resolve(__dirname, '../moment'),
-  'react-native-ui-kitten': path.resolve(__dirname, '../framework'),
 };
 
 const uiKittenInternalAliases = {
-  '@kitten/theme': path.resolve(__dirname, '../framework/theme'),
-  '@kitten/ui': path.resolve(__dirname, '../framework/ui'),
+  '@kitten/theme': path.resolve(__dirname, '../components/theme'),
+  '@kitten/ui': path.resolve(__dirname, '../components/ui'),
 };
 
 const appAliases = {

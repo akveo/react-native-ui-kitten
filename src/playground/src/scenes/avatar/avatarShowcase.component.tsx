@@ -3,7 +3,7 @@ import {
   Avatar,
   AvatarElement,
   AvatarProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const AvatarShowcase = (props?: AvatarProps): AvatarElement => (
   <Avatar

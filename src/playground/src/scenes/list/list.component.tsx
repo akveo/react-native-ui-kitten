@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   ListElement,
   ListProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { ListShowcase } from './listShowcase';
 import {

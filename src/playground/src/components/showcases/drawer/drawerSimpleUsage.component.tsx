@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { Drawer } from 'react-native-ui-kitten';
+import { Drawer } from '@ui-kitten/components';
 
 const drawerData = [
   { title: 'Dashboard' },

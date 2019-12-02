@@ -53,8 +53,8 @@ interface State {
  *
  * ```
  * import React from 'react';
+ * import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
  * import { mapping, light as lightTheme } from '@eva-design/eva';
- * import { ApplicationProvider, Layout, Text } from 'react-native-ui-kitten';
  *
  * export default class App extends React.Component {
  *

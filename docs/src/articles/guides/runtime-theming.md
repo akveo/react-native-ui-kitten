@@ -39,9 +39,9 @@ Open `App.js` and paste the code below.
 
 ```js
 import React from 'react';
-import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
-import { mapping, light, dark } from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { mapping, light, dark } from '@eva-design/eva';
 import { AppNavigator } from './navigation.component';
 import { ThemeContext } from './theme-context';
 
@@ -91,7 +91,7 @@ Let's modify `home.component.js` to switch the theme by pressing a button.
 ```js
 import React from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { Button, Layout } from 'react-native-ui-kitten';
+import { Button, Layout } from '@ui-kitten/components';
 import { ThemeContext } from './theme-context';
 
 export const HomeScreen = ({ navigation }) => {

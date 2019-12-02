@@ -9,7 +9,7 @@ import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ComponentShowcaseItem } from '@pg/model/componentShowcase.model';
 
 interface ComponentProps {

@@ -18,18 +18,16 @@
   "scripts": {
     "playground": "yarn --cwd src/playground",
     "docs": "yarn --cwd docs",
-    "build": "tsc && tscpaths -p ./tsconfig.json -s ./src/framework -o ./dist/tsc-out/framework",
+    "build": "tsc && tscpaths -p ./tsconfig.json -s ./src/components -o ./dist/tsc-out/components",
     "clean": "rimraf ./dist",
     "docs:parse": "gulp docs",
     "docs:start": "yarn docs:parse && yarn docs start",
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
+    "release:changelog": "conventional-changelog -i CHANGELOG.md -s",
     "release:validate": "yarn lint && yarn test",
     "release:prepare": "yarn clean && yarn build",
-    "release:changelog": "conventional-changelog -i CHANGELOG.md -s",
-    "publish:framework": "./scripts/publish-framework.sh",
-    "publish:modules": "./scripts/publish-modules.sh",
-    "release:framework": "yarn release:prepare && yarn release:validate && yarn publish:framework",
-    "release:modules": "yarn release:prepare && yarn release:validate && npm run publish:modules",
+    "release:publish": "./scripts/publish.sh",
+    "release": "yarn release:validate yarn release:prepare && yarn release:publish",
     "test": "jest"
   },
   "devDependencies": {

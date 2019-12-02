@@ -7,7 +7,7 @@
 import {
   DateService,
   TranslationWidth,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 // @ts-ignore
 import _moment, {
   default as _rollupMoment,

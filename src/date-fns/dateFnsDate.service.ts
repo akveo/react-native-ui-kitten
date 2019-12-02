@@ -8,7 +8,7 @@ import {
   I18nConfig,
   NativeDateService,
   NativeDateServiceOptions,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 // @ts-ignore
 import dateFnsParse, { default as rollupParse } from 'date-fns/parse';
 // @ts-ignore

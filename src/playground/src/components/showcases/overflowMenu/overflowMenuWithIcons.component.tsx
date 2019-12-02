@@ -10,7 +10,7 @@ import {
   Icon,
   Layout,
   OverflowMenu,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const StarIcon = (style) => (
   <Icon {...style} name='star'/>

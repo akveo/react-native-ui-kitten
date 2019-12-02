@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio } from 'react-native-ui-kitten';
+import { Radio } from '@ui-kitten/components';
 
 export const RadioSimpleUsageShowcase = () => {
 

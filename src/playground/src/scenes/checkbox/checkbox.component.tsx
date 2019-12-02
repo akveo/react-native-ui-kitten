@@ -2,7 +2,7 @@ import React from 'react';
 import {
   CheckBoxElement,
   CheckBoxProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { CheckBoxShowcase } from './checkboxShowcase.component';
 import {

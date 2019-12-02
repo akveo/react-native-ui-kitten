@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Input } from 'react-native-ui-kitten';
+import { Input } from '@ui-kitten/components';
 
 export const InputInlineStylingShowcase = () => {
 

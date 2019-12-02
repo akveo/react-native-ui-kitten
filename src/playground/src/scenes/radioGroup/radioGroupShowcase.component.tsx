@@ -4,7 +4,7 @@ import {
   RadioGroup,
   RadioGroupElement,
   RadioGroupProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const RadioGroupShowcase = (props: RadioGroupProps): RadioGroupElement => {
 

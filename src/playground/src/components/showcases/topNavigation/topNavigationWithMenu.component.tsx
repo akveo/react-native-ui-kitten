@@ -6,7 +6,7 @@ import {
   OverflowMenu,
   TopNavigation,
   TopNavigationAction,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const BackIcon = (style) => (
   <Icon {...style} name='arrow-back'/>

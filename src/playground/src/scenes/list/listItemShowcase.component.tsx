@@ -6,7 +6,7 @@ import {
   ListItemElement,
   ListItemProps,
   StyleType,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { StarIcon } from '@pg/icons';
 
 export const ListItemShowcase = (props?: ListItemProps): ListItemElement => (

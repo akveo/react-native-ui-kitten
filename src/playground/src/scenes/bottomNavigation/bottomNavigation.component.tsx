@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   BottomNavigationElement,
   BottomNavigationProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { BottomNavigationShowcase } from './bottomNavigationShowcase.component';
 import {

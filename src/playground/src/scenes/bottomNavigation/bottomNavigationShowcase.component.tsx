@@ -3,7 +3,7 @@ import {
   BottomNavigation,
   BottomNavigationElement,
   BottomNavigationProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const BottomNavigationShowcase = (props: BottomNavigationProps): BottomNavigationElement => {
 

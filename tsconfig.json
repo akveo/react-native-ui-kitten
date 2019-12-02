@@ -12,14 +12,11 @@
     "declaration": true,
     "skipLibCheck": true,
     "paths": {
-      "react-native-ui-kitten": [
-        "./src/framework"
-      ],
       "@ui-kitten/*": [
         "./src/*"
       ],
       "@kitten/*": [
-        "./src/framework/*"
+        "./src/components/*"
       ],
       "@pg/*": [
         "./src/playground/src/*"

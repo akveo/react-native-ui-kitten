@@ -3,7 +3,7 @@ import {
   Menu,
   MenuElement,
   MenuProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const MenuShowcase = (props: MenuProps): MenuElement => {
 

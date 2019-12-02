@@ -1,23 +1,21 @@
 {
   "name": "@ui-kitten/eva-icons",
+  "description": "Eva Icons for React Native",
   "version": "4.3.0-beta.1",
-  "description": "@ui-kitten/eva-icons",
-  "author": "akveo",
+  "author": "akveo <contact@akveo.com>",
   "license": "MIT",
+  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akveo/react-native-ui-kitten.git"
+    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
   },
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
-  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "keywords": [
     "react-native",
-    "typescript",
-    "kittenTricks",
-    "theme",
-    "ui-kitten"
+    "ui-kitten",
+    "eva-icons"
   ],
   "publishConfig": {
     "access": "public"
@@ -29,7 +27,7 @@
     "react-native-svg": "^9.4.0"
   },
   "peerDependencies": {
-    "react-native-ui-kitten": "4.3.0-beta.1",
+    "@ui-kitten/components": "4.3.0-beta.1",
     "react-native-svg": "^9.4.0"
   },
   "sideEffects": false

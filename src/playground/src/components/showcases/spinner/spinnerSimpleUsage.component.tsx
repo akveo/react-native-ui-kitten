@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spinner } from 'react-native-ui-kitten';
+import { Spinner } from '@ui-kitten/components';
 
 export const SpinnerSimpleUsageShowcase = () => (
   <Spinner/>

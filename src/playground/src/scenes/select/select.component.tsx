@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SelectElement,
   SelectProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { SelectShowcase } from './selectShowcase.component';
 import {

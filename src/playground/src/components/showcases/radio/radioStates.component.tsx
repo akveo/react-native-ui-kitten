@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   Layout,
   Radio,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const RadioStatesShowcase = () => {
 

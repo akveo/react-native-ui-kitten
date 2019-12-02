@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckBox } from 'react-native-ui-kitten';
+import { CheckBox } from '@ui-kitten/components';
 
 export const CheckboxSimpleUsageShowcase = () => {
 

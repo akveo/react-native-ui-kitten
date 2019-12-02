@@ -8,7 +8,7 @@ import {
   Calendar,
   CalendarProps,
   Divider,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 interface AdditionalProps {
   withFooter?: boolean;

@@ -7,7 +7,7 @@ import {
   List,
   ListItem,
   Spinner,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const DATA = new Array(8).fill({
   title: 'Title for Item',

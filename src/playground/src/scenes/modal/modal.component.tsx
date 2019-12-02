@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ModalElement,
   ModalProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { ModalShowcase } from './modalShowcase.component';
 import { modalShowcase } from './type';

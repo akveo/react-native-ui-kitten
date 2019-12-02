@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { BottomNavigationTab } from 'react-native-ui-kitten';
+import { BottomNavigationTab } from '@ui-kitten/components';
 
 export const BottomNavigationTabInlineStylingShowcase = () => (
   <BottomNavigationTab

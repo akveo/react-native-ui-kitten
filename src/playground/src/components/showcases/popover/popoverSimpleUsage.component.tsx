@@ -5,7 +5,7 @@ import {
   Layout,
   Popover,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const PopoverContent = () => (
   <Layout style={styles.popoverContent}>

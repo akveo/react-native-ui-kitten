@@ -5,7 +5,7 @@ import {
   IconProps,
   Input,
   StyleType,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 interface State {
   iconName: string;

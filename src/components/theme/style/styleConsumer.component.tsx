@@ -62,7 +62,7 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  * ```
  * import React from 'react';
  * import { TouchableOpacity } from 'react-native';
- * import { styled, Interaction } from 'react-native-ui-kitten';
+ * import { styled, Interaction } from '@ui-kitten/components';
  *
  * class Button extends React.Component {
  *

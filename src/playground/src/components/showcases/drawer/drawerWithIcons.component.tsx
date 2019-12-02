@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-navigation';
 import {
   Drawer,
   Icon,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const PersonIcon = (style) => (
   <Icon {...style} name='person-outline' />

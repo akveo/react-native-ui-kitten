@@ -15,13 +15,13 @@ npm un -g react-native-cli && npm i -g @react-native-community/cli npx
 ### Create a New Project
 
 ```bash
-npx react-native init MyApp --template react-native-template-ui-kitten
+npx react-native init MyApp --template @ui-kitten/template-js
 ```
 
 Or, if you want to init with TypeScript:
 
 ```bash
-npx react-native init MyApp --template react-native-template-ui-kitten-typescript
+npx react-native init MyApp --template @ui-kitten/template-ts
 ```
 
 ### Start your App
@@ -45,7 +45,7 @@ If you have an existing code base and want to use UI Kitten in your project, fol
 ### Install UI Kitten
 
 ```bash
-npm i react-native-ui-kitten react-native-svg @eva-design/eva
+npm i @ui-kitten/components @eva-design/eva react-native-svg
 ```
 
 We also need to complete installation for iOS by linking react-native-svg.
@@ -63,8 +63,8 @@ Wrap the root component of your App into `ApplicationProvider` component. In you
 
 ```jsx
 import React from 'react';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text } from 'react-native-ui-kitten';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

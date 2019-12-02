@@ -5,7 +5,7 @@ import {
   SelectElement,
   SelectOption,
   SelectProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 interface AdditionalProps {
   preselectedItem?: SelectOption;

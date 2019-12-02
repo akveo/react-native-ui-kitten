@@ -3,7 +3,7 @@ import {
   Card,
   CardElement,
   CardProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const CardShowcase = (props: CardProps): CardElement => (
   <Card {...props}/>

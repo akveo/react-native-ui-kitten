@@ -9,7 +9,7 @@ import {
   Button,
   Icon,
   Layout,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const StarIcon = (style) => (
   <Icon {...style} name='star'/>

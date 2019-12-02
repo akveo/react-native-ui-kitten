@@ -27,8 +27,8 @@ To apply custom theme, go to the `App.js` and paste the following code:
 
 ```js
 import React from 'react';
+import { ApplicationProvider, Layout, Button } from '@ui-kitten/components';
 import { mapping, dark as darkTheme } from '@eva-design/eva';
-import { ApplicationProvider, Layout, Button } from 'react-native-ui-kitten';
 import { default as appTheme } from './custom-theme.json'; // <-- Import app theme
 
 const theme = { ...darkTheme, ...appTheme };
@@ -151,8 +151,8 @@ The go to the `App.js` and paste the code below:
 
 ```js
 import React from 'react';
+import { ApplicationProvider, Layout, Button } from '@ui-kitten/components';
 import { mapping, light as theme } from '@eva-design/eva';
-import { ApplicationProvider, Layout, Button } from 'react-native-ui-kitten';
 import { default as customMapping } from './custom-mapping.json'; // <-- Import custom mapping
 
 const HomeScreen = () => (

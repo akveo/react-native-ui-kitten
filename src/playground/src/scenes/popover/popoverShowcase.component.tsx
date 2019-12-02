@@ -6,7 +6,7 @@ import {
   PopoverProps,
   Text,
   TextElement,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const PopoverShowcase = (props: PopoverProps): PopoverElement => {
 

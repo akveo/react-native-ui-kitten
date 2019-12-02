@@ -3,7 +3,7 @@ import {
   List,
   ListElement,
   ListProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const ListShowcase = (props?: ListProps): ListElement => (
   <List {...props}/>

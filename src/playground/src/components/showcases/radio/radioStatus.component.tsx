@@ -6,7 +6,7 @@ import {
 import {
   Layout,
   Radio,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const useRadioChanges = (initialCheck = false) => {
   const [checked, setChecked] = React.useState(initialCheck);

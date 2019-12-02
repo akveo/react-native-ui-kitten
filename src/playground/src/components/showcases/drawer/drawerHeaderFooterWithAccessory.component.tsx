@@ -8,7 +8,7 @@ import {
   Button,
   DrawerHeaderFooter,
   Icon,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const LogoutIcon = (style) => (
   <Icon {...style} name='log-out'/>

@@ -25,7 +25,7 @@ export type IconRegistryElement = React.ReactElement<IconRegistryProps>;
  * ```
  * import React from 'react';
  * import { mapping, light as lightTheme } from '@eva-design/eva';
- * import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
+ * import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
  * import { EvaIconsPack } from '@ui-kitten/eva-icons'; // <-- Make sure it is installed. npm i @ui-kitten/eva-icons
  *
  * export default class App extends React.Component {

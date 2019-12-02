@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Toggle } from 'react-native-ui-kitten';
+import { Toggle } from '@ui-kitten/components';
 
 export const ToggleInlineStylingShowcase = () => {
 

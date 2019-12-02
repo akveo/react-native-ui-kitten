@@ -8,7 +8,7 @@ import { StyleSheet } from 'react-native';
 import {
   Datepicker,
   Layout,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { MomentDateService } from '@ui-kitten/moment';
 
 const dateService = new MomentDateService();

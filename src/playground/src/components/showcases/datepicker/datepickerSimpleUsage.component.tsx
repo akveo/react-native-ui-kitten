@@ -4,7 +4,7 @@ import {
   Datepicker,
   Layout,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const DatepickerSimpleUsageShowcase = () => {
 

@@ -9,7 +9,7 @@ import {
   Popover,
   Select,
   Text,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 const PLACEMENTS = [
   { text: 'top' },

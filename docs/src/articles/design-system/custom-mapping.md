@@ -12,9 +12,9 @@ In this step, we'll create a component and it's initial mapping.
 
 Create a component:
 ```js
-import * as React from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { styled } from 'react-native-ui-kitten';
+import { styled } from '@ui-kitten/components';
 
 class CircleButton extends React.Component {
   static styledComponentName = 'CircleButton'; // <-- This is important!
@@ -60,8 +60,8 @@ Create a custom mapping:
 And pass it to an `ApplicationProvider` component:
 
 ```js
-import * as React from 'react';
-import { ApplicationProvider, Layout } from 'react-native-ui-kitten';
+import React from 'react';
+import { ApplicationProvider, Layout } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json'; // <-- Import custom mapping
 import CircleButton from './path-to/CircleButton'; // <-- Import custom component
@@ -174,8 +174,8 @@ The example above demonstrates how you can create a really simple configuration.
 What we did is that we added a rounded [variant](design-system/design-system-glossary#variant) which will make our `CircleButton` not such circle. Let's now pass it to a component:
 
 ```js
-import * as React from 'react';
-import { ApplicationProvider, Layout } from 'react-native-ui-kitten';
+import React from 'react';
+import { ApplicationProvider, Layout } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json';
 import CircleButton from './path-to/CircleButton';
@@ -239,8 +239,9 @@ The other great example of the flexibility of using mappings is that you can pro
 And dispatch this state from a component.
 
 ```js
-// ...
-import { styled, Interaction } from 'react-native-ui-kitten';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import { styled, Interaction } from '@ui-kitten/components';
 
 class CircleButton extends React.Component {
   static styledComponentName = 'CircleButton';

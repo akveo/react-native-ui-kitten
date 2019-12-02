@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   TabViewElement,
   TabViewProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { TabViewShowcase } from './tabViewShowcase.component';
 import { tabViewShowcase } from './type';

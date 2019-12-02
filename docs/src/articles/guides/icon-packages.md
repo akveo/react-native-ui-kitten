@@ -34,9 +34,9 @@ Open `App.js` and paste the code below.
 
 ```jsx
 import React from 'react';
-import { mapping, light as lightTheme } from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
+import { mapping, light as lightTheme } from '@eva-design/eva';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -62,7 +62,7 @@ That's it. Let's see how it can be used in the project.
 
 ```jsx
 import React from 'react';
-import { Button, Icon } from 'react-native-ui-kitten';
+import { Button, Icon } from '@ui-kitten/components';
 
 export const FacebookIcon = (style) => (
   <Icon name='facebook' {...style} />
@@ -131,8 +131,8 @@ Open `App.js` and paste the code below.
 
 ```jsx
 import React from 'react';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
 import { FeatherIconsPack } from './feather-icons';
 
 const HomeScreen = () => (
@@ -159,7 +159,7 @@ That's it. Let's see how it can be used in the project.
 
 ```jsx
 import React from 'react';
-import { Button, Icon } from 'react-native-ui-kitten';
+import { Button, Icon } from '@ui-kitten/components';
 
 export const FacebookIcon = (style) => (
   <Icon name='facebook' {...style} />
@@ -183,7 +183,7 @@ UI Kitten API allows you to register multiple icon packages. Let's also create a
 With a similar to [3rd party Icon packages guide](guides/icon-packages#3rd-party-icon-packages) way, create a Material Icons provider.
 
 ```jsx
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -218,8 +218,8 @@ By passing an array of icon packs, we can register it in the application:
 
 ```jsx
 import React from 'react';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from 'react-native-ui-kitten';
 import { FeatherIconsPack } from './feather-icons.js'; // <-- Import Feather icons
 import { MaterialIconsPack } from './material-icons.js'; // <-- Import Material icons
 
@@ -247,7 +247,7 @@ When using multiple icon packages, you're able to choose an icon library with si
 
 ```jsx
 import React from 'react';
-import { Button, Icon } from 'react-native-ui-kitten';
+import { Button, Icon } from '@ui-kitten/components';
 
 export const HomeIcon = (style) => (
   <Icon {...style} name='home' pack='material' />

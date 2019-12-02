@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ToggleElement,
   ToggleProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { ToggleShowcase } from './toggleShowcase.component';
 import {

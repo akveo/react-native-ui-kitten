@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Radio } from 'react-native-ui-kitten';
+import { Radio } from '@ui-kitten/components';
 
 export const RadioInlineStylingShowcase = () => {
 

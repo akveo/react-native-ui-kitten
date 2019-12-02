@@ -3,7 +3,7 @@ import {
   Spinner,
   SpinnerElement,
   SpinnerProps,
-} from 'react-native-ui-kitten';
+} from '@ui-kitten/components';
 
 export const SpinnerShowcase = (props?: SpinnerProps): SpinnerElement => (
   <Spinner {...props} />
