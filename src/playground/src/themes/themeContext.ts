@@ -1,14 +1,18 @@
 import React from 'react';
-import { ThemeKey } from './registry';
 
-export interface ThemeContextType {
-  name: ThemeKey;
-  toggleTheme: (theme: ThemeKey) => void;
+export enum AppTheme {
+  light = 'Light',
+  dark = 'Dark',
 }
 
-const initialValue: ThemeContextType = {
-  name: 'Eva Light',
-  toggleTheme: (theme: ThemeKey) => {},
-};
+export interface ThemeContextType {
+  theme: AppTheme;
+  setTheme: (theme: AppTheme) => void;
+  isDarkMode: () => boolean;
+}
 
-export const ThemeContext: React.Context<ThemeContextType> = React.createContext(initialValue);
+export const ThemeContext = React.createContext<ThemeContextType>({
+  theme: AppTheme.light,
+  setTheme: (theme: AppTheme) => {},
+  isDarkMode: () => false,
+});

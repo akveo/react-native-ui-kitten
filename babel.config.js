@@ -2,21 +2,25 @@ const path = require('path');
 
 /**
  * UI Kitten modules aliases.
- * Allows importing framework modules into playground
+ * Needed for Jest resolver. Same map should be described in jest.config.js
  */
 const moduleAliases = {
   'react-native-ui-kitten': path.resolve(__dirname, './src/framework'),
-  '@kitten/theme': path.resolve(__dirname, './src/framework'),
-  '@kitten/ui': path.resolve(__dirname, './src/framework'),
   '@ui-kitten/eva-icons': path.resolve(__dirname, './src/eva-icons'),
   '@ui-kitten/moment': path.resolve(__dirname, './src/moment'),
   '@ui-kitten/date-fns': path.resolve(__dirname, './src/date-fns'),
+};
+
+const moduleInternalAliases = {
+  '@kitten/theme': path.resolve(__dirname, './src/framework'),
+  '@kitten/ui': path.resolve(__dirname, './src/framework'),
 };
 
 const moduleResolverConfig = {
   root: path.resolve('./'),
   alias: {
     ...moduleAliases,
+    ...moduleInternalAliases,
   },
 };
 

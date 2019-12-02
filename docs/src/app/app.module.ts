@@ -28,7 +28,7 @@ import { routes } from './app.routes';
 
 import { structure  } from '../structure';
 const docs = require('../input.json');
-const examples = require('../examples.json');
+const examples = require('../playground.json');
 import {
   DOCS,
   STRUCTURE,

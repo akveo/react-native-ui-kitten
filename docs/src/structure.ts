@@ -149,28 +149,6 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Customize Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/customize-theme.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Create Custom Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/custom-theme.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
         name: 'Customize Mapping',
         children: [
           {

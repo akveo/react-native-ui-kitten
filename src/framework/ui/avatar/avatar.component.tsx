@@ -38,7 +38,7 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
  * Default is `medium`.
  *
- * @property {ImageProps} ...imageProps - Any props applied to Image component.
+ * @property {ImageProps} ...ImageProps - Any props applied to Image component.
  *
  * @overview-example AvatarSimpleUsage
  *

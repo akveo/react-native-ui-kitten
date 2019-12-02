@@ -156,7 +156,7 @@ export class NgdStructureService {
         extension: helper.path.slice(helper.path.length - 3),
       }],
       code: helper.code,
-      url: `/assets/examples-build/#/${helper.name}`,
+      url: `/assets/playground-build/#/${helper.name}`,
     };
   }
 

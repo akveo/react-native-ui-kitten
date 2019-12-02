@@ -1,5 +1,6 @@
 import React from 'react';
-import { mapping as evaMapping } from '@eva-design/eva';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { mapping, light, dark } from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import {
   ApplicationProvider,
@@ -7,79 +8,67 @@ import {
   IconPack,
   IconRegistry,
 } from 'react-native-ui-kitten';
-import { ApplicationLoader } from './applicationLoader.component';
-import { Router } from '../navigation';
+import { AppNavigator } from '@pg/navigation/app.navigator';
+import { MaterialIconsPack } from '@pg/icons/materialIconPack';
 import {
-  AntDesignIconsPack,
-  FeatherIconsPack,
-  FontAwesomeIconsPack,
-  MaterialCommunityIconsPack,
-  MaterialIconsPack,
-} from '../icons';
-import {
+  AppTheme,
   ThemeContext,
   ThemeContextType,
-  ThemeKey,
-  themes,
-} from '../themes';
+} from '@pg/themes/themeContext';
+import { ApplicationLoader } from './applicationLoader.component';
 
-interface State {
-  theme: ThemeKey;
-}
+const themes = {
+  Light: light,
+  Dark: dark,
+};
+
+const customMapping = {
+  strict: { 'text-font-family': 'System' },
+};
+
+const fonts = {
+  'opensans-regular': require('../assets/fonts/opensans-regular.ttf'),
+  'roboto-regular': require('../assets/fonts/roboto-regular.ttf'),
+};
 
 const icons: IconPack<any>[] = [
   EvaIconsPack,
-  AntDesignIconsPack,
-  FeatherIconsPack,
-  FontAwesomeIconsPack,
   MaterialIconsPack,
-  MaterialCommunityIconsPack,
 ];
 
-const fonts = {
-  'regular': require('../assets/fonts/opensans-regular.ttf'),
-  'semibold': require('../assets/fonts/opensans-semibold.ttf'),
-  'bold': require('../assets/fonts/opensans-bold.ttf'),
-};
+export default () => {
 
-export default class App extends React.Component<{}, State> {
+  const [theme, setTheme] = React.useState<AppTheme>(AppTheme.light);
 
-  public state: State = {
-    theme: 'Eva Light',
+  const isDarkMode = (): boolean => {
+    return theme === AppTheme.dark;
   };
 
-  private get appConfig(): ApplicationProviderProps {
-    const { [this.state.theme]: currentTheme } = themes;
-
-    return {
-      mapping: evaMapping,
-      theme: currentTheme,
-      // @ts-ignore
-      customMapping: { strict: { 'text-font-family': 'regular' } },
-    };
-  }
-
-  private get themeContext(): ThemeContextType {
-    return {
-      name: this.state.theme,
-      toggleTheme: this.toggleTheme,
-    };
-  }
-
-  private toggleTheme = (theme: ThemeKey): void => {
-    this.setState({ theme });
+  const applicationProviderConfig: ApplicationProviderProps = {
+    mapping: mapping,
+    theme: themes[theme],
+    customMapping: customMapping,
   };
 
-  public render(): React.ReactFragment {
-    return (
+  const themeContextProviderConfig: ThemeContextType = {
+    theme: theme,
+    setTheme: setTheme,
+    isDarkMode: isDarkMode,
+  };
+
+  return (
+    <React.Fragment>
+      <IconRegistry icons={icons}/>
       <ApplicationLoader assets={{ fonts }} splash={require('../assets/images/splash.png')}>
-        <IconRegistry icons={icons}/>
-        <ApplicationProvider {...this.appConfig}>
-          <ThemeContext.Provider value={this.themeContext}>
-            <Router/>
-          </ThemeContext.Provider>
+        <IconRegistry icons={icons} />
+        <ApplicationProvider {...applicationProviderConfig}>
+          <SafeAreaProvider>
+            <ThemeContext.Provider value={themeContextProviderConfig}>
+              <AppNavigator />
+            </ThemeContext.Provider>
+          </SafeAreaProvider>
         </ApplicationProvider>
       </ApplicationLoader>
-    );
-  }
-}
+    </React.Fragment>
+  );
+};

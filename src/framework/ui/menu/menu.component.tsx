@@ -64,7 +64,7 @@ export type MenuElement = React.ReactElement<MenuProps>;
  *
  * @overview-example MenuDisabledOptions
  *
- * @overview-example MenuWithoutIndicator
+ * @overview-example MenuWithoutDivider
  *
  * @example MenuInlineStyling
  */

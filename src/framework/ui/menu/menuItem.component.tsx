@@ -53,8 +53,7 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
  *
- * @property {(style: StyleType) => ReactElement} accessory - Determines the accessory of the
- * component.
+ * @property {(style: StyleType) => ReactElement} accessory - Determines the accessory of the component.
  *
  * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
  *
@@ -64,7 +63,6 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  */
-
 class MenuItemComponent extends React.Component<MenuItemProps> {
 
   static styledComponentName: string = 'MenuItem';

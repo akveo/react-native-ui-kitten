@@ -12,11 +12,11 @@ npm-debug.log
 # docs
 docs/docs.json
 docs/src/input.json
-docs/src/assets/examples-build
-docs/src/examples.json
+docs/src/playground.json
+docs/src/assets/playground-build/
 
-# config
-config/index.js
+# env
+src/playground/env/index.js
 
 .expo
 dist
