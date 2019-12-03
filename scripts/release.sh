@@ -15,15 +15,3 @@ npm run build
 #npm publish ./dist/tsc-out/moment
 #npm publish ./src/templates/template-js
 #npm publish ./src/templates/template-ts
-
-# Documentation
-#npm run parse-docs
-
-#cd docs
-#npm run clean
-# add v3.1.4
-#npm run build:prod
-#npm run landing
-
-#npm run gh-pages
-

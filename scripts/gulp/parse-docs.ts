@@ -11,8 +11,7 @@ import {
   createDocAppShowcases,
   DocShowcase,
 } from './create-doc-app-showcases';
-
-type GulpCompletionCallback = (error?: any) => void;
+import { GulpCompletionCallback } from './common';
 
 const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;

@@ -23,6 +23,7 @@
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
     "test": "jest",
     "parse-docs": "gulp parse-docs",
+    "publish-docs": "gulp publish-docs",
     "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",
     "release": "./scripts/release.sh"
   },
@@ -43,6 +44,7 @@
     "coveralls": "^3.0.2",
     "doc-prsr": "^2.2.3",
     "gulp": "^4.0.2",
+    "gulp-git": "^2.9.0",
     "gulp-typedoc": "^2.2.3",
     "husky": "^1.1.2",
     "jest": "^24.8.0",
