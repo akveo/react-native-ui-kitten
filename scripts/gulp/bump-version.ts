@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 import * as gulp from 'gulp';
-import * as path from 'path';
+import {
+  GulpCompletionCallback,
+  PACKAGES_DIR,
+  ROOT_DIR,
+} from './common';
 
-type GulpCompletionCallback = (error?: any) => void;
 type PackageJson = any;
-
-const ROOT_DIR = path.resolve(__dirname, '../../');
-const PACKAGES_DIR: string = path.resolve(ROOT_DIR, 'src');
 
 const PACKAGES: string[] = [
   'components',

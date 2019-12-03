@@ -1,42 +1,36 @@
 import * as gulp from 'gulp';
+import { execSync } from 'child_process';
 import {
-  GulpCompletionCallback,
   DOCS_DIR,
+  GulpCompletionCallback,
 } from './common';
 
-const exec = require('child_process').execSync;
-
 gulp.task('publish-docs', gulp.series(
-  cleanDist,
-  buildDocs,
+  rebuild,
   addLanding,
   copyOldVersion,
   publish,
 ));
 
-function cleanDist(done: GulpCompletionCallback): void {
-  exec('npm run clean', { cwd: DOCS_DIR });
-  done();
-}
-
-function buildDocs(done: GulpCompletionCallback): void {
-  exec('npm run build:prod', { cwd: DOCS_DIR });
+function rebuild(done: GulpCompletionCallback): void {
+  execSync('npm run clean', { cwd: DOCS_DIR });
+  execSync('npm run build:prod', { cwd: DOCS_DIR });
   done();
 }
 
 function addLanding(done: GulpCompletionCallback): void {
-  exec('npm run landing', { cwd: DOCS_DIR });
+  execSync('npm run landing', { cwd: DOCS_DIR });
   done();
 }
 
 function copyOldVersion(done: GulpCompletionCallback): void {
   gulp.src(['docs/3.1.4/**/*'])
-    .pipe(gulp.dest('docs/dist/docs/3.1.4'));
+      .pipe(gulp.dest('docs/dist/docs/3.1.4'));
 
   done();
 }
 
 function publish(done: GulpCompletionCallback): void {
-  exec('npm run gh-pages', { cwd: DOCS_DIR });
+  execSync('npm run gh-pages', { cwd: DOCS_DIR });
   done();
 }

@@ -17,15 +17,14 @@
   },
   "scripts": {
     "playground": "yarn --cwd src/playground",
-    "docs": "yarn --cwd docs",
     "build": "tsc && tscpaths -p ./tsconfig.json -s ./src/components -o ./dist/tsc-out/components",
     "clean": "rimraf ./dist",
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
     "test": "jest",
     "parse-docs": "gulp parse-docs",
-    "publish-docs": "gulp parse-docs && gulp publish-docs",
     "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",
-    "release": "./scripts/release.sh"
+    "publish-docs": "npm run parse-docs && gulp publish-docs",
+    "publish-packages": "gulp publish-packages"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

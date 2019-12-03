@@ -14,14 +14,16 @@ import {
 import {
   GulpCompletionCallback,
   DOCS_DIR,
+  PACKAGES_DIR,
 } from './common';
 
 const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;
 const glob = require('glob');
 
-const SHOWCASE_DIR: string = path.resolve(__dirname, '../../', 'src/playground', 'src/components/showcases');
-const APP_NAVIGATOR_PATH: string = path.resolve(__dirname, '../../src/playground', 'src/navigation/app.navigator.web.tsx');
+const PLAYGROUND_DIR: string = path.resolve(PACKAGES_DIR, 'playground');
+const SHOWCASE_DIR: string = path.resolve(PLAYGROUND_DIR, 'src/components/showcases');
+const APP_NAVIGATOR_PATH: string = path.resolve(PLAYGROUND_DIR, 'src/navigation/app.navigator.web.tsx');
 const tsconfig = require(path.resolve(__dirname, '../../tsconfig.json'));
 
 gulp.task('parse-docs', gulp.series(
@@ -68,7 +70,7 @@ function createPlaygroundJson(done: GulpCompletionCallback): void {
 }
 
 function buildPlayground(done: GulpCompletionCallback): void {
-  exec('yarn playground build:web');
+  exec('npm run build:web', { cwd: PLAYGROUND_DIR });
 
   done();
 }
