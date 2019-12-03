@@ -13,10 +13,15 @@ npm-debug.log
 docs/docs.json
 docs/src/input.json
 docs/src/playground.json
+docs/src/examples.json
 docs/src/assets/playground-build/
+docs/src/assets/examples-build/
 
 # env
 src/playground/env/index.js
+
+#config
+config/
 
 .expo
 dist
