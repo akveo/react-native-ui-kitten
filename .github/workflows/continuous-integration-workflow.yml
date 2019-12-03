@@ -1,4 +1,4 @@
-name: Build
+name: Node CI
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Test
+    name: Running TypeScript compiler, TSLint and Jest
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
@@ -20,14 +20,14 @@ jobs:
         with:
           node-version: '13.x'
 
-      - name: Install dependencies
+      - name: Install
         run: yarn
 
-      - name: Lint typescript
+      - name: Lint
         run: npm run lint
 
-      - name: Build modules
+      - name: Build
         run: npm run build
 
-      - name: Test modules
+      - name: Test
         run: npm run test
