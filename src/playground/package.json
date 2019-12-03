@@ -11,7 +11,7 @@
   "scripts": {
     "start": "npm run env -- prod && expo start -c",
     "start:dev": "npm run env -- dev && expo start -c",
-    "build:web": "expo build:web",
+    "build:web": "expo build:web --no-pwa",
     "env": "node ./env/set-env.js"
   },
   "dependencies": {
