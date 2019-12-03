@@ -66,7 +66,7 @@ Made with :heart: by [Akveo team][link:akveo-homepage]. Follow us on [Twitter][l
 We're always happy to receive your feedback!
 
 [badge:license]: https://img.shields.io/npm/l/react-native-ui-kitten.svg
-[badge:github-actions]: https://github.com/artyorsh/github-actions-test/workflows/Build/badge.svg
+[badge:github-actions]: https://github.com/akveo/react-native-ui-kitten/workflows/Build/badge.svg
 [badge:coveralls]: https://coveralls.io/repos/github/akveo/react-native-ui-kitten/badge.svg?branch=master
 
 [link:eva]: https://eva.design
