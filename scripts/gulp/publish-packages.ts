@@ -30,7 +30,7 @@ function publish(done: GulpCompletionCallback): void {
   execSync(`npm publish ${PACKAGES_BUILD_DIR}/eva-icons`, { cwd: ROOT_DIR });
   execSync(`npm publish ${PACKAGES_BUILD_DIR}/date-fns`, { cwd: ROOT_DIR });
   execSync(`npm publish ${PACKAGES_BUILD_DIR}/components`, { cwd: ROOT_DIR });
-  execSync(`npm publish ${PACKAGES_DIR}/templates/template-js`, { cwd: ROOT_DIR });
-  execSync(`npm publish ${PACKAGES_DIR}/templates/template-ts`, { cwd: ROOT_DIR });
+  execSync(`npm publish ${PACKAGES_DIR}/template-js`, { cwd: ROOT_DIR });
+  execSync(`npm publish ${PACKAGES_DIR}/template-ts`, { cwd: ROOT_DIR });
   done();
 }
