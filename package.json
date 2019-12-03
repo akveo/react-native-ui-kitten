@@ -17,18 +17,14 @@
   },
   "scripts": {
     "playground": "yarn --cwd src/playground",
-    "docs": "yarn --cwd docs",
     "build": "tsc && tscpaths -p ./tsconfig.json -s ./src/components -o ./dist/tsc-out/components",
     "clean": "rimraf ./dist",
-    "docs:parse": "gulp docs",
-    "docs:start": "yarn docs:parse && yarn docs start",
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
-    "release:changelog": "conventional-changelog -i CHANGELOG.md -s",
-    "release:validate": "yarn lint && yarn test",
-    "release:prepare": "yarn clean && yarn build",
-    "release:publish": "./scripts/publish.sh",
-    "release": "yarn release:validate yarn release:prepare && yarn release:publish",
-    "test": "jest"
+    "test": "jest",
+    "parse-docs": "gulp parse-docs",
+    "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",
+    "publish-docs": "npm run parse-docs && gulp publish-docs",
+    "publish-packages": "gulp publish-packages"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -50,7 +46,6 @@
     "gulp-typedoc": "^2.2.3",
     "husky": "^1.1.2",
     "jest": "^24.8.0",
-    "lerna": "^3.19.0",
     "metro-react-native-babel-preset": "^0.54.0",
     "react": "~16.8.3",
     "react-native": "~0.59.10",
@@ -70,5 +65,3 @@
     "react-native-svg": "~9.9.5"
   }
 }
-
-
