@@ -1,1 +1,2 @@
-import './tasks/docs';
+import './parse-docs';
+import './bump-version';
