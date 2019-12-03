@@ -11,13 +11,15 @@ import {
   createDocAppShowcases,
   DocShowcase,
 } from './create-doc-app-showcases';
-import { GulpCompletionCallback } from './common';
+import {
+  GulpCompletionCallback,
+  DOCS_DIR,
+} from './common';
 
 const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;
 const glob = require('glob');
 
-const DOCS_DIR: string = path.resolve(__dirname, '../../', 'docs');
 const SHOWCASE_DIR: string = path.resolve(__dirname, '../../', 'src/playground', 'src/components/showcases');
 const APP_NAVIGATOR_PATH: string = path.resolve(__dirname, '../../src/playground', 'src/navigation/app.navigator.web.tsx');
 const tsconfig = require(path.resolve(__dirname, '../../tsconfig.json'));

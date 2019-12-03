@@ -1,43 +1,42 @@
 import * as gulp from 'gulp';
-import { GulpCompletionCallback } from './common';
+import {
+  GulpCompletionCallback,
+  DOCS_DIR,
+} from './common';
 
 const exec = require('child_process').execSync;
-const git = require('gulp-git');
-let currentBranchName: string = '';
 
 gulp.task('publish-docs', gulp.series(
-  saveCurrentBranchName,
-  stashCurrent,
-  checkoutOldVersion,
-  checkoutBack,
-  applyStash,
+  cleanDist,
+  buildDocs,
+  addLanding,
+  copyOldVersion,
+  publish,
 ));
 
-function saveCurrentBranchName(done: GulpCompletionCallback): void {
-  git.revParse({args: '--abbrev-ref HEAD'}, (err, branch) => {
-    currentBranchName = branch;
-  });
+function cleanDist(done: GulpCompletionCallback): void {
+  exec('npm run clean', { cwd: DOCS_DIR });
+  done();
+}
+
+function buildDocs(done: GulpCompletionCallback): void {
+  exec('npm run build:prod', { cwd: DOCS_DIR });
+  done();
+}
+
+function addLanding(done: GulpCompletionCallback): void {
+  exec('npm run landing', { cwd: DOCS_DIR });
+  done();
+}
+
+function copyOldVersion(done: GulpCompletionCallback): void {
+  gulp.src(['docs/3.1.4/**/*'])
+    .pipe(gulp.dest('docs/dist/docs/3.1.4'));
 
   done();
 }
 
-function stashCurrent(done: GulpCompletionCallback): void {
-  exec('git stash');
-  done();
-}
-
-function checkoutOldVersion(done: GulpCompletionCallback): void {
-  exec('git checkout v3.1.4');
-  done();
-}
-
-function checkoutBack(done: GulpCompletionCallback): void {
-  exec(`git checkout ${currentBranchName}`);
-  currentBranchName = '';
-  done();
-}
-
-function applyStash(done: GulpCompletionCallback): void {
-  exec('git stash apply');
+function publish(done: GulpCompletionCallback): void {
+  exec('npm run gh-pages', { cwd: DOCS_DIR });
   done();
 }
