@@ -1,5 +1,5 @@
 
-# UI Kitten [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />][link:eva] [![npm][badge:license]]() [![Build Status][badge:travis]][link:travis] [![Coverage Status][badge:coveralls]][link:coveralls]
+# UI Kitten [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />][link:eva] [![npm][badge:license]]() [![Build Status][badge:github-actions]][link:github-actions] [![Coverage Status][badge:coveralls]][link:coveralls]
 
 [Documentation][link:doc-homepage]
 
@@ -66,11 +66,11 @@ Made with :heart: by [Akveo team][link:akveo-homepage]. Follow us on [Twitter][l
 We're always happy to receive your feedback!
 
 [badge:license]: https://img.shields.io/npm/l/react-native-ui-kitten.svg
-[badge:travis]: https://travis-ci.com/akveo/react-native-ui-kitten.svg?branch=master
+[badge:github-actions]: https://github.com/akveo/react-native-ui-kitten/workflows/Build/badge.svg
 [badge:coveralls]: https://coveralls.io/repos/github/akveo/react-native-ui-kitten/badge.svg?branch=master
 
 [link:eva]: https://eva.design
-[link:travis]: https://travis-ci.com/akveo/react-native-ui-kitten
+[link:github-actions]: https://github.com/akveo/react-native-ui-kitten/actions
 [link:coveralls]: https://coveralls.io/github/akveo/react-native-ui-kitten?branch=master
 [link:doc-homepage]: https://akveo.github.io/react-native-ui-kitten
 [link:doc-where-start]: https://akveo.github.io/react-native-ui-kitten/docs/getting-started/where-to-start
