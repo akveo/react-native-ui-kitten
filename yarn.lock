@@ -1124,20 +1124,20 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@eva-design/dss@^1.3.0-beta.1":
-  version "1.3.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@eva-design/dss/-/dss-1.3.0-beta.1.tgz#5acad80422ba5980655a6b3f187675a82d045e8f"
-  integrity sha512-AMW4MGx1Nqm5pwxY+aHQjwRjDN6ernvd9rBgFlePzbBgRUIdcwSWsn963j2QiXSx78PrC8VODqUPGEWHnWCw3w==
+"@eva-design/dss@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@eva-design/dss/-/dss-1.3.0.tgz#f3e33192681d6ddc3dbddbe4040b248bc10e3612"
+  integrity sha512-g5VdOXycxRInC+aZif60q6IySLga78CuhYEdU7ry+oOUul6GXVhGcRe0q+4MVkZXBA90IDdqh/e8gN2SOqfIRQ==
 
-"@eva-design/eva@^1.3.0-beta.1":
-  version "1.3.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@eva-design/eva/-/eva-1.3.0-beta.1.tgz#c1e593bc458a1706a40357ae3501111fa326d665"
-  integrity sha512-UE2dH1twVXKnLTbU8rrX20ChxblqZZjy7U3CXpFNpf3XPtQsetuNmElNHL6iLC4+YtD21xwu8+oDcmyqS1ijEQ==
+"@eva-design/eva@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@eva-design/eva/-/eva-1.3.0.tgz#9e20da2a5bd0f4420728f32d8ab93452c6fcc238"
+  integrity sha512-wdi+wolofBrEzGtSGv2mzLTndS61A+pQMrpqUhd0TH1cH3D5sjS8C81lzonwrv0qCRapNnb3X9mg8Bw0To/xNQ==
 
-"@eva-design/processor@^1.3.0-beta.1":
-  version "1.3.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@eva-design/processor/-/processor-1.3.0-beta.1.tgz#26ed5c8fb2bda0535ea113c90af4575631c367e5"
-  integrity sha512-Avt9TXSQ5Kg+uXn8LlESo+INudoikItm1BZUGUHluARrLIjnMJgu+twjzz0jk4k6WB+giXZU4JAWYAoDvnahrw==
+"@eva-design/processor@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@eva-design/processor/-/processor-1.3.0.tgz#8fd0e7b946d3c3f5969fc8484bb609f3f8606eb4"
+  integrity sha512-wuVI00tjBfA6S4bKLLpxJFBVThFPyQUR+1uBN8OH7pEUUCfo/0u8UoW41SM2+BYdHbhaYCZzw6BXHXsHULZ2Ig==
 
 "@expo/config@^2.1.5", "@expo/config@^2.5.1":
   version "2.5.1"
@@ -3449,9 +3449,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000187, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30001013"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001013.tgz#7fde3c19efcdb7d9f8d24185e219e586933d31b0"
-  integrity sha512-wvXRZ9Ov0rwDEN2Eqir2OGHMEGS1roQvc90DejA5mbsLGUws8H339GZYxXm2CTT2PT3DhpxLPq7FrYp6XcEWkg==
+  version "1.0.30001015"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001015.tgz#9f1b4fa158c747dcc04b15f9c5359ddcf0390d90"
+  integrity sha512-+Fqdu7tOxSD0HDs922QPxseHlwnUzdjLC1Oq32HZ1/LWrMfYNt8JaUWnoiIAR+G4fRzM3tdgc4Lrqo5Nx76UsQ==
 
 caniuse-lite@1.0.30000974:
   version "1.0.30000974"
@@ -3459,9 +3459,9 @@ caniuse-lite@1.0.30000974:
   integrity sha512-xc3rkNS/Zc3CmpMKuczWEdY2sZgx09BkAxfvkxlAEBTqcMHeL8QnPqhKse+5sRTi3nrw2pJwToD2WvKn1Uhvww==
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000957, caniuse-lite@^1.0.30000960, caniuse-lite@^1.0.30000984, caniuse-lite@^1.0.30001012:
-  version "1.0.30001013"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001013.tgz#da2440d4d266a17d40eb79bd19c0c8cc1d029c72"
-  integrity sha512-hOAXaWKuq/UVFgYawxIOdPdyMQdYcwOCDOjnZcKn7wCgFUrhP7smuNZjGLuJlPSgE6aRA4cRJ+bGSrhtEt7ZAg==
+  version "1.0.30001015"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001015.tgz#15a7ddf66aba786a71d99626bc8f2b91c6f0f5f0"
+  integrity sha512-/xL2AbW/XWHNu1gnIrO8UitBGoFthcsDgU9VLK1/dpsoxbaD5LscHozKze05R6WLsBvLhqv78dAPozMFQBYLbQ==
 
 canonical-path@1.0.0:
   version "1.0.0"
@@ -10109,9 +10109,9 @@ node-pre-gyp@^0.12.0:
     tar "^4"
 
 node-releases@^1.1.14, node-releases@^1.1.25, node-releases@^1.1.41:
-  version "1.1.41"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.41.tgz#57674a82a37f812d18e3b26118aefaf53a00afed"
-  integrity sha512-+IctMa7wIs8Cfsa8iYzeaLTFwv5Y4r5jZud+4AnfymzeEXKBCavFX0KBgzVaPVqf0ywa6PrO8/b+bPqdwjGBSg==
+  version "1.1.42"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.42.tgz#a999f6a62f8746981f6da90627a8d2fc090bbad7"
+  integrity sha512-OQ/ESmUqGawI2PRX+XIRao44qWYBBfN54ImQYdWVTQqUckuejOg76ysSqDBK8NG3zwySRVnX36JwDQ6x+9GxzA==
   dependencies:
     semver "^6.3.0"
 
@@ -12128,9 +12128,9 @@ react-navigation-stack@^1.10.3:
     prop-types "^15.7.2"
 
 react-navigation-tabs@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/react-navigation-tabs/-/react-navigation-tabs-2.6.0.tgz#e7b7af54e6dab3f7cf7747859862c9684713d7df"
-  integrity sha512-ffDB9CquA+f+bV1WV228Z3VY3sqUa9eerFnwHw096wgG3YafPDYKo+Xs28N9jQWMQ9Sfb0JB8HvkpR/9pcIS1A==
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/react-navigation-tabs/-/react-navigation-tabs-2.6.2.tgz#6611f3bbc5fcbc004a96a457e1dbe8d957d09ef5"
+  integrity sha512-b7Bwio3pOyb2dJOsfICm1eXUCekULO63VitLlkslsuwB5v5qXD9u+TkuSGADPiAybRH3Fts4cQX/xA5WGsIsfg==
   dependencies:
     hoist-non-react-statics "^3.3.0"
     react-lifecycles-compat "^3.0.4"
@@ -14586,9 +14586,9 @@ typescript@3.4.5:
   integrity sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
 
 typescript@3.7.x, typescript@^3.5.1:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
-  integrity sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.3.tgz#b36840668a16458a7025b9eabfad11b66ab85c69"
+  integrity sha512-Mcr/Qk7hXqFBXMN7p7Lusj1ktCBydylfQM/FZCk5glCNQJrCUKPkMHdo9R0MTFWsC/4kPFvDS0fDPvukfCkFsw==
 
 typescript@^2.7.0:
   version "2.9.2"
