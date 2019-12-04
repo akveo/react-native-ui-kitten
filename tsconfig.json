@@ -20,9 +20,6 @@
       ],
       "@pg/*": [
         "./src/playground/src/*"
-      ],
-      "@eva-design/*": [
-        "./node_modules/@eva-design/*"
       ]
     }
   },
