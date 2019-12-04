@@ -15,6 +15,7 @@ import {
   GulpCompletionCallback,
   DOCS_DIR,
   PACKAGES_DIR,
+  ROOT_DIR,
 } from './common';
 
 const typedoc = require('gulp-typedoc');
@@ -24,7 +25,7 @@ const glob = require('glob');
 const PLAYGROUND_DIR: string = path.resolve(PACKAGES_DIR, 'playground');
 const SHOWCASE_DIR: string = path.resolve(PLAYGROUND_DIR, 'src/components/showcases');
 const APP_NAVIGATOR_PATH: string = path.resolve(PLAYGROUND_DIR, 'src/navigation/app.navigator.web.tsx');
-const tsconfig = require(path.resolve(__dirname, '../../tsconfig.json'));
+const tsconfig = require(path.resolve(ROOT_DIR, 'tsconfig.json'));
 
 gulp.task('parse-docs', gulp.series(
   createDocsJson,
