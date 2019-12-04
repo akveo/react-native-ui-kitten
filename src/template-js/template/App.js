@@ -35,7 +35,7 @@ const HeartIcon = (style) => (
 );
 
 const App = () => (
-  <React.Fragment>
+  <>
     <IconRegistry icons={EvaIconsPack}/>
     <ApplicationProvider mapping={mapping} theme={theme}>
       <Layout style={styles.container}>
@@ -53,7 +53,7 @@ const App = () => (
         </Button>
       </Layout>
     </ApplicationProvider>
-  </React.Fragment>
+  </>
 );
 
 const styles = StyleSheet.create({
