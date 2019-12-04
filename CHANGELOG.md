@@ -1,3 +1,9 @@
+## <small>4.3.1 (2019-12-04)</small>
+
+* fix: typescript build issues ([980414b](https://github.com/akveo/react-native-ui-kitten/commit/980414b))
+
+
+
 ## 4.3.0 (2019-12-04)
 
 * chore: rename main package to @ui-kitten/components ([b6cf0b9](https://github.com/akveo/react-native-ui-kitten/commit/b6cf0b9))
