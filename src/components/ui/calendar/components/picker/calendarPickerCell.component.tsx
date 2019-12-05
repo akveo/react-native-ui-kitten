@@ -39,11 +39,6 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
 
   static styledComponentName: string = 'CalendarCell';
 
-  static defaultProps = {
-    selected: false,
-    today: false,
-  };
-
   public shouldComponentUpdate(nextProps: CalendarPickerCellProps<D>): boolean {
     if (nextProps.shouldComponentUpdate) {
       return nextProps.shouldComponentUpdate(this.props, nextProps);

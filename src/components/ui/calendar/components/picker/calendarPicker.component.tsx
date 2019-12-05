@@ -28,7 +28,7 @@ interface ComponentProps<D> extends ViewProps {
   isItemDisabled: (item: CalendarDateInfo<D>) => boolean;
   isItemToday: (item: CalendarDateInfo<D>) => boolean;
   onSelect?: (item: CalendarDateInfo<D>) => void;
-  renderItem: (item: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
+  children: (item: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   shouldItemUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
   rowStyle?: StyleProp<ViewProps>;
 }
@@ -38,7 +38,7 @@ export type CalendarPickerElement<D> = React.ReactElement<CalendarPickerProps<D>
 
 export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
 
-  private get rangedArray (): CalendarDateInfo<D>[] {
+  private get rangedArray(): CalendarDateInfo<D>[] {
     const { data } = this.props;
 
     return [].concat(...data).filter((item: CalendarDateInfo<D>) => {
@@ -71,26 +71,24 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
         lastRangeItem={isLastRangeItem}
         onSelect={this.props.onSelect}
         shouldComponentUpdate={this.props.shouldItemUpdate}>
-        {this.props.renderItem}
+        {this.props.children}
       </CalendarPickerCell>
     );
   };
 
   private renderRowElement = (item: CalendarDateInfo<D>[], index: number): CalendarPickerRowElement<D> => {
-    const { rowStyle } = this.props;
-
     return (
       <CalendarPickerRow
-        style={rowStyle}
         key={index}
-        data={item}
-        renderItem={this.renderCellElement}
-      />
+        style={this.props.rowStyle}
+        data={item}>
+        {this.renderCellElement}
+      </CalendarPickerRow>
     );
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { data, renderItem, ...restProps } = this.props;
+    const { data, children, ...restProps } = this.props;
 
     return (
       <View

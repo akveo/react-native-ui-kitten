@@ -52,7 +52,7 @@ const minMaxCalendar: ComponentShowcaseItem = {
 const boundingCalendar: ComponentShowcaseItem = {
   props: {
     ...defaultCalendar.props,
-    boundingMonth: true,
+    boundingMonth: false,
   },
 };
 
