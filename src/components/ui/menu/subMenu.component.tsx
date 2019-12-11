@@ -25,11 +25,10 @@ import {
   MenuItemType,
 } from './menuItem.component';
 import {
-  MeasureNode,
-  MeasureNodeProps,
-  MeasureResult,
-  MeasuringElementProps,
-} from '../popover/measure.component';
+  MeasureElement,
+  MeasuringElement,
+} from '../measure/measure.component';
+import { Frame } from '../measure/type';
 import { ChevronDown } from '../support/components/chevronDown.component';
 import { DividerElement } from '../divider/divider.component';
 
@@ -52,7 +51,6 @@ type IconElement = React.ReactElement<ImageProps>;
 
 const MAIN_ITEM_KEY: string = 'Main Item';
 const DIVIDER_ELEMENT_KEY: string = 'Divider';
-const SUB_ITEMS_MEASURE_TAG: string = 'Sub Items';
 
 class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
 
@@ -111,10 +109,8 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
     };
   };
 
-  private onSubMenuMeasure = (result: MeasureResult): void => {
-    const subItemsHeight: number = result[SUB_ITEMS_MEASURE_TAG].size.height;
-
-    this.setState({ subItemsHeight });
+  private onSubMenuMeasure = (frame: Frame): void => {
+    this.setState({ subItemsHeight: frame.size.height });
   };
 
   private getIsSelected = (item: MenuItemType): boolean => {
@@ -175,19 +171,15 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
     );
   };
 
-  private renderSubItemsInvisible = (subItems: React.ReactNode): React.ReactElement<MeasureNodeProps> => {
-    const measuringProps: MeasuringElementProps = { tag: SUB_ITEMS_MEASURE_TAG };
-
+  private renderSubItemsInvisible = (subItems: React.ReactNode): MeasuringElement => {
     return (
-      <MeasureNode onResult={this.onSubMenuMeasure}>
+      <MeasureElement onMeasure={this.onSubMenuMeasure}>
         <View
-          {...measuringProps}
           pointerEvents='none'
-          key={SUB_ITEMS_MEASURE_TAG}
           style={styles.invisibleMenu}>
           {subItems}
         </View>
-      </MeasureNode>
+      </MeasureElement>
     );
   };
 
@@ -227,7 +219,7 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
   public render(): React.ReactFragment {
     const { subItemsVisible } = this.state;
     const [mainItem, subItems, divider] = this.renderComponentChildren();
-    const invisibleSubs: React.ReactElement<MeasureNodeProps> = this.renderSubItemsInvisible(subItems);
+    const invisibleSubs: React.ReactElement = this.renderSubItemsInvisible(subItems);
 
     const animatedStyle: StyleType = { height: this.subItemsAnimation };
 

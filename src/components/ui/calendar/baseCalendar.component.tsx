@@ -44,7 +44,6 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   boundingMonth?: boolean;
   startView?: CalendarViewMode;
   title?: (date: D, viewMode: CalendarViewMode) => string;
-  todayTitle?: (date: D) => string;
   filter?: (date: D) => boolean;
   renderFooter?: () => React.ReactElement;
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
@@ -171,8 +170,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
         borderColor: source.borderColor,
         borderWidth: source.borderWidth,
         borderRadius: source.borderRadius,
-        maxWidth: source.maxWidth,
-        maxHeight: source.maxHeight,
       },
       headerContainer: {
         paddingHorizontal: source.headerPaddingHorizontal,

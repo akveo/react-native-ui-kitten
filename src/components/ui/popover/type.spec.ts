@@ -1,6 +1,5 @@
+import { Frame } from '../measure/type';
 import {
-  Frame,
-  OffsetRect,
   PlacementOptions,
   PopoverPlacement,
   PopoverPlacements,
@@ -8,61 +7,12 @@ import {
 
 describe('@type: popover model checks', () => {
 
-  describe('* frame', () => {
-
-    const lhsFrame: Frame = new Frame(2, 2, 2, 2);
-    const rhsFrame: Frame = new Frame(4, 4, 2, 2);
-
-    it('* left of', () => {
-      const { origin: { x, y } } = rhsFrame.leftOf(lhsFrame);
-
-      expect(x).toEqual(0);
-      expect(y).toEqual(4);
-    });
-
-    it('* top of', () => {
-      const { origin: { x, y } } = rhsFrame.topOf(lhsFrame);
-
-      expect(x).toEqual(4);
-      expect(y).toEqual(0);
-    });
-
-    it('* right of', () => {
-      const { origin: { x, y } } = rhsFrame.rightOf(lhsFrame);
-
-      expect(x).toEqual(4);
-      expect(y).toEqual(4);
-    });
-
-    it('* bottom of', () => {
-      const { origin: { x, y } } = rhsFrame.bottomOf(lhsFrame);
-
-      expect(x).toEqual(4);
-      expect(y).toEqual(4);
-    });
-
-    it('* center horizontal of', () => {
-      const { origin: { x, y } } = rhsFrame.centerHorizontalOf(lhsFrame);
-
-      expect(x).toEqual(2);
-      expect(y).toEqual(4);
-    });
-
-    it('* center vertical of', () => {
-      const { origin: { x, y } } = rhsFrame.centerVerticalOf(lhsFrame);
-
-      expect(x).toEqual(4);
-      expect(y).toEqual(2);
-    });
-
-  });
-
   describe('* placement', () => {
 
     const options: PlacementOptions = {
       source: new Frame(6, 6, 2, 2),
       other: new Frame(2, 2, 4, 4),
-      offsets: OffsetRect.zero(),
+      offsets: Frame.zero(),
       bounds: Frame.zero(),
     };
 
@@ -158,12 +108,7 @@ describe('@type: popover model checks', () => {
       source: new Frame(6, 6, 2, 2),
       other: new Frame(2, 2, 4, 4),
       bounds: Frame.zero(),
-      offsets: {
-        left: 2,
-        top: 2,
-        right: 2,
-        bottom: 2,
-      },
+      offsets: new Frame(2, 2, 2, 2),
     };
 
     it('* left', () => {
@@ -258,7 +203,7 @@ describe('@type: popover model checks', () => {
       source: new Frame(6, 6, 2, 2),
       other: new Frame(2, 2, 4, 4),
       bounds: Frame.zero(),
-      offsets: OffsetRect.zero(),
+      offsets: Frame.zero(),
     };
 
     it('* left', () => {

@@ -115,7 +115,9 @@ exports[`@modal-service: service checks * unexpected branch cover 1`] = `
   <View>
     <View
       accessible={true}
+      focusable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -135,7 +137,9 @@ exports[`@modal-service: service checks * unexpected branch cover 1`] = `
     </View>
     <View
       accessible={true}
+      focusable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -155,7 +159,9 @@ exports[`@modal-service: service checks * unexpected branch cover 1`] = `
     </View>
     <View
       accessible={true}
+      focusable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}

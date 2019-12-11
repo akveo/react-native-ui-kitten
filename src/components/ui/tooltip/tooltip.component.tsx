@@ -29,14 +29,12 @@ import {
   PopoverElement,
   PopoverProps,
 } from '../popover/popover.component';
-import { ModalPresentingBased } from '../support/typings';
+import { PopoverIndicator } from '../popover/popoverIndicator.component';
 
 type IconProp = (style: StyleType) => IconElement;
 type WrappingElement = React.ReactElement;
 
-type PopoverContentProps = Omit<PopoverProps, 'content'>;
-
-interface ComponentProps extends PopoverContentProps, ModalPresentingBased {
+interface ComponentProps extends Omit<PopoverProps, 'content'> {
   text: string;
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
@@ -47,36 +45,41 @@ export type TooltipProps = StyledComponentProps & ComponentProps;
 export type TooltipElement = React.ReactElement<TooltipProps>;
 
 /**
- * `Tooltip` displays informative text when users focus on or tap an element.
+ * Tooltip displays informative text when users focus on or tap an element.
  *
  * @extends React.Component
  *
- * @property {string} text - Determines the text of the tooltip
+ * @property {boolean} visible - Determines whether popover is visible or not.
  *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ * @property {string} text - Determines the text of the tooltip
  *
  * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
  *
+ * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ *
  * @property {ReactElement} children - Determines the element "above" which popover will be shown.
  *
- * @property {boolean} visible - Determines whether popover is visible or not.
- *
- * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
+ * @property {string | PopoverPlacement} placement - Determines the actualPlacement of the popover.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
  * Default is `bottom`.
+ * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
  *
- * @property {number} indicatorOffset - Determines the offset of indicator (arrow).
- * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of indicator (arrow).
+ * @property {boolean} fullWidth - Determines whether content element should have same width as child element.
  *
- * @property {Omit<PopoverProps, 'content'>} ...PopoverProps - Any props applied to Popover component,
- * excluding `content`.
+ * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
+ * Default is `false`.
  *
- * @property {ModalPresentingBased} ...ModalProps - Any props applied to Modal component.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ *
+ * @property {() => void} onBackdropPress - Determines component's behavior when the user is
+ * tapping on back-drop.
  *
  * @overview-example TooltipSimpleUsage
  *
  * @overview-example TooltipWithIcon
+ *
+ * @overview-example TooltipStyledBackdrop
  *
  * @overview-example TooltipPlacement
  *
@@ -88,11 +91,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
 
   static styledComponentName: string = 'Tooltip';
 
-  static defaultProps: Partial<TooltipProps> = {
-    indicatorOffset: 8,
-  };
-
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       indicatorBackgroundColor,
       iconWidth,
@@ -101,8 +100,9 @@ export class TooltipComponent extends React.Component<TooltipProps> {
       iconTintColor,
       textMarginHorizontal,
       textFontSize,
-      textFontFamily,
+      textFontWeight,
       textLineHeight,
+      textFontFamily,
       textColor,
       ...containerParameters
     } = source;
@@ -121,22 +121,21 @@ export class TooltipComponent extends React.Component<TooltipProps> {
       },
       text: {
         marginHorizontal: textMarginHorizontal,
-        fontFamily: textFontFamily,
         fontSize: textFontSize,
         lineHeight: textLineHeight,
+        fontWeight: textFontWeight,
+        fontFamily: textFontFamily,
         color: textColor,
       },
     };
   };
 
   private renderTextElement = (style: TextStyle): TextElement => {
-    const { text, textStyle } = this.props;
-
     return (
       <Text
         key={1}
-        style={[style, styles.text, textStyle]}>
-        {text}
+        style={[style, this.props.textStyle]}>
+        {this.props.text}
       </Text>
     );
   };
@@ -146,17 +145,22 @@ export class TooltipComponent extends React.Component<TooltipProps> {
 
     return React.cloneElement(iconElement, {
       key: 0,
-      style: [style, styles.icon, iconElement.props.style],
+      style: [style, iconElement.props.style],
     });
   };
 
   private renderContentElementChildren = (style: StyleType): React.ReactNodeArray => {
-    const { icon } = this.props;
-
     return [
-      icon && this.renderIconElement(style.icon),
+      this.props.icon && this.renderIconElement(style.icon),
       this.renderTextElement(style.text),
     ];
+  };
+
+  private renderPopoverIndicatorElement = (style: StyleType): React.ReactElement => {
+    const { indicator } = this.getComponentStyle(this.props.themedStyle);
+    return (
+      <PopoverIndicator style={indicator} />
+    );
   };
 
   private renderPopoverContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
@@ -172,17 +176,17 @@ export class TooltipComponent extends React.Component<TooltipProps> {
   };
 
   public render(): PopoverElement {
-    const { themedStyle, style, indicatorStyle, children, ...derivedProps } = this.props;
+    const { themedStyle, style, children, ...props } = this.props;
     const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
 
     const contentElement: TextElement = this.renderPopoverContentElement(componentStyle);
 
     return (
       <Popover
-        {...derivedProps}
-        style={[container, styles.container, style]}
-        indicatorStyle={[indicator, indicatorStyle]}
-        content={contentElement}>
+        {...props}
+        style={[container, style]}
+        content={contentElement}
+        indicator={this.renderPopoverIndicatorElement}>
         {children}
       </Popover>
     );
@@ -190,14 +194,9 @@ export class TooltipComponent extends React.Component<TooltipProps> {
 }
 
 const styles = StyleSheet.create({
-  container: {},
   content: {
     flexDirection: 'row',
-  },
-  indicator: {},
-  icon: {},
-  text: {
-    alignSelf: 'center',
+    justifyContent: 'center',
   },
 });
 

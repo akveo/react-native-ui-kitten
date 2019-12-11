@@ -54,9 +54,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     return '';
   };
 
-  public show(element: React.ReactElement<ModalPresentingBased>,
-              config: ModalPresentingConfig): string {
-
+  public show(element: React.ReactElement<ModalPresentingBased>, config: ModalPresentingConfig): string {
     const key: string = this.generateUniqueComponentKey();
     const components: Map<string, ModalPanelChild> = this.state.components
       .set(key, { ...config, element });
@@ -68,6 +66,11 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
 
   public update(identifier: string, children: React.ReactNode): void {
     const panelChild: ModalPanelChild = this.state.components.get(identifier);
+
+    if (!panelChild) {
+      return;
+    }
+
     const childElement: React.ReactElement<ModalPresentingBased> = panelChild.element;
 
     panelChild.element = React.cloneElement(childElement, {
@@ -92,6 +95,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     return (
       <ModalResolver
         {...config.element.props}
+        style={config.backdropStyle}
         visible={true}
         key={index}
         allowBackdrop={config.allowBackdrop}

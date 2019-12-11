@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import { StyleType } from '@kitten/theme';
 
-export type ArrowProps = ViewProps;
-export type ArrowElement = React.ReactElement<ArrowProps>;
+export type PopoverIndicatorProps = ViewProps;
+export type PopoverIndicatorElement = React.ReactElement<PopoverIndicatorProps>;
 
-export class Arrow extends React.Component<ArrowProps> {
+export class PopoverIndicator extends React.Component<PopoverIndicatorProps> {
 
   private getComponentStyle = (source: StyleProp<ViewStyle>): StyleType => {
     const flatStyle: ViewStyle = StyleSheet.flatten(source);

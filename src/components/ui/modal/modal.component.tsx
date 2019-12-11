@@ -9,38 +9,34 @@ import {
   View,
   ViewProps,
   StyleSheet,
-  Dimensions,
   ViewStyle,
   StyleProp,
 } from 'react-native';
 import {
   ModalService,
   StyleType,
+  ModalPresentingConfig,
 } from '@kitten/theme';
 import {
-  MeasureNode,
-  MeasureNodeProps,
-  MeasuringElementProps,
-  MeasureResult,
-} from '../popover/measure.component';
-import { Size } from '../popover/type';
-import { ModalPresentingBased } from '../support/typings';
+  MeasureElement,
+  MeasuringElement,
+} from '../measure/measure.component';
+import {
+  Frame,
+  Size,
+} from '../measure/type';
 
-const initialWindowSize: Size = Dimensions.get('screen');
-const TAG_CHILD: string = 'Modal';
-const initialContentSize: Size = { width: 0, height: 0 };
+const window: Frame = Frame.window();
 export const baseModalTestId: string = '@modal/base';
 
 type ChildElement = React.ReactElement;
 type ChildrenProp = ChildElement | ChildElement[];
 
-interface ComponentProps {
-  visible: boolean;
+export interface ModalProps extends ViewProps, ModalPresentingConfig {
+  visible?: boolean;
   children: ChildrenProp;
-  backdropStyle?: StyleProp<ViewStyle>;
 }
 
-export type ModalProps = ViewProps & ComponentProps & ModalPresentingBased;
 export type ModalElement = React.ReactElement<ModalProps>;
 
 /**
@@ -69,11 +65,10 @@ export type ModalElement = React.ReactElement<ModalProps>;
 export class Modal extends React.Component<ModalProps> {
 
   static defaultProps: Partial<ModalProps> = {
-    allowBackdrop: false,
     onBackdropPress: () => null,
   };
 
-  private contentSize: Size = initialContentSize;
+  private contentSize: Size = Size.zero();
   private id: string = '';
 
   public componentDidUpdate(prevProps: ModalProps): void {
@@ -92,35 +87,31 @@ export class Modal extends React.Component<ModalProps> {
       const element: React.ReactElement = this.renderModal();
       this.id = ModalService.show(element, { allowBackdrop, onBackdropPress });
     } else {
-      ModalService.hide(this.id);
-      this.id = '';
+      this.id = ModalService.hide(this.id);
     }
   };
 
   private getAbsoluteRelatedStyle = (): StyleType => {
-    const windowSize: Size = Dimensions.get('window');
+    const windowFrame: Frame = Frame.window();
 
     return {
-      top: (windowSize.height - this.contentSize.height) / 2,
-      left: (windowSize.width - this.contentSize.width) / 2,
+      top: (windowFrame.size.height - this.contentSize.height) / 2,
+      left: (windowFrame.size.width - this.contentSize.width) / 2,
     };
   };
 
-  private onMeasure = (result: MeasureResult): void => {
-    this.contentSize = result[TAG_CHILD].size;
+  private onMeasure = (frame: Frame): void => {
+    this.contentSize = frame.size;
   };
 
   private renderBaseModal = (): React.ReactElement<ViewProps> => {
     const { style, children, ...restProps } = this.props;
     const absoluteRelatedStyle: StyleType = this.getAbsoluteRelatedStyle();
-    const measuringProps: MeasuringElementProps = { tag: TAG_CHILD };
 
     return (
       <View
         {...restProps}
-        {...measuringProps}
         testID={baseModalTestId}
-        key={TAG_CHILD}
         style={[styles.container, absoluteRelatedStyle, style]}>
         {children}
       </View>
@@ -141,18 +132,17 @@ export class Modal extends React.Component<ModalProps> {
     ) : modal;
   };
 
-  private renderMeasureNode = (): React.ReactElement<MeasureNodeProps> => {
+  private renderMeasureNode = (): MeasuringElement => {
     const modal: React.ReactElement = this.renderBaseModal();
     const measureStyledModal: React.ReactElement = React.cloneElement(modal, {
       style: [modal.props.style, styles.hiddenModal],
-      key: TAG_CHILD,
       pointerEvents: 'none',
     });
 
     return (
-      <MeasureNode onResult={this.onMeasure}>
-        {[measureStyledModal]}
-      </MeasureNode>
+      <MeasureElement onMeasure={this.onMeasure}>
+        {measureStyledModal}
+      </MeasureElement>
     );
   };
 
@@ -167,8 +157,8 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     position: 'absolute',
-    width: initialWindowSize.width,
-    height: initialWindowSize.height,
+    width: window.size.width,
+    height: window.size.height,
   },
   hiddenModal: {
     opacity: 0,

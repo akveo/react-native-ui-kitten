@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   Icon,
-  IconElement,
   SelectOptionType,
-  StyleType,
 } from '@ui-kitten/components';
 import {
   ComponentShowcase,
@@ -11,16 +9,10 @@ import {
   ComponentShowcaseSection,
   ComponentShowcaseSetting,
 } from '@pg/model/componentShowcase.model';
-import {
-  ArrowDownwardIcon,
-  ArrowUpwardIcon,
-} from '@pg/icons';
+import { StarIcon } from '@pg/icons';
 
-const defaultSelectOption: SelectOptionType[] = [
-  {
-    text: 'Option 1',
-    disabled: true,
-  },
+const defaultOptions: SelectOptionType[] = [
+  { text: 'Option 1' },
   { text: 'Option 2' },
   { text: 'Option 3' },
   { text: 'Option 4' },
@@ -30,181 +22,133 @@ const defaultSelectOption: SelectOptionType[] = [
   { text: 'Option 8' },
 ];
 
-const withGroupsSelectOption: SelectOptionType[] = [
-  { text: 'Option 1' },
+const groupedOptions: SelectOptionType[] = [
   {
-    text: 'Option 2',
+    text: 'Group 1',
     items: [
-      {
-        text: 'Option 21',
-        disabled: true,
-      },
-      { text: 'Option 22' },
-      { text: 'Option 23' },
+      { text: 'Option 1' },
+      { text: 'Option 2' },
     ],
   },
-  // { text: 'Option 3' },
-  // { text: 'Option 4' },
-  // { text: 'Option 5' },
+  {
+    text: 'Group 2',
+    items: [
+      { text: 'Option 1' },
+      { text: 'Option 2' },
+    ],
+  },
 ];
-
-const renderIcon = (style: StyleType, visible: boolean): IconElement => {
-  const Arrow: React.FC = visible ? ArrowUpwardIcon : ArrowDownwardIcon;
-  return (
-    <Arrow {...style} />
-  );
-};
 
 const defaultSelect: ComponentShowcaseItem = {
   title: 'Default',
   props: {
-    data: defaultSelectOption,
+    data: defaultOptions,
   },
 };
 
 const disabledSelect: ComponentShowcaseItem = {
   title: 'Disabled',
   props: {
-    data: defaultSelectOption,
+    ...defaultSelect.props,
     disabled: true,
   },
 };
 
-const defaultSection: ComponentShowcaseSection = {
-  title: 'Default Select',
-  items: [
-    defaultSelect,
-    disabledSelect,
-  ],
-};
-
-const multiSelectSelect: ComponentShowcaseItem = {
-  title: 'Multiselect',
+const initialValueSelect: ComponentShowcaseItem = {
+  title: 'Initial Value',
   props: {
-    multiSelect: true,
-    data: defaultSelectOption,
+    ...defaultSelect.props,
+    selectedOption: defaultOptions[0],
   },
 };
 
-const multiSelectSection: ComponentShowcaseSection = {
-  title: 'Multiselect Select',
-  items: [
-    multiSelectSelect,
-  ],
+const multiSelect: ComponentShowcaseItem = {
+  title: 'Multiselect',
+  props: {
+    ...defaultSelect.props,
+    multiSelect: true,
+  },
+};
+
+const multiSelectInitialValue: ComponentShowcaseItem = {
+  title: 'Initial Value',
+  props: {
+    ...multiSelect.props,
+    selectedOption: [defaultOptions[0], defaultOptions[1]],
+  },
 };
 
 const groupSelect: ComponentShowcaseItem = {
-  title: 'With Groups',
+  title: 'Default',
   props: {
-    data: withGroupsSelectOption,
+    ...defaultSelect.props,
+    data: groupedOptions,
   },
 };
 
-const groupSelectMultiselect: ComponentShowcaseItem = {
+const groupMultiselect: ComponentShowcaseItem = {
   title: 'Multiselect',
   props: {
+    ...groupSelect.props,
     multiSelect: true,
-    data: withGroupsSelectOption,
   },
-};
-
-const withGroupsSection: ComponentShowcaseSection = {
-  title: 'Groups Select',
-  items: [
-    groupSelect,
-    // groupSelectMultiselect,
-  ],
 };
 
 const withIconSelect: ComponentShowcaseItem = {
-  title: 'With icon',
+  title: 'Icon',
   props: {
-    data: defaultSelectOption,
-    icon: renderIcon,
-    multiSelect: true,
+    ...defaultSelect.props,
+    icon: StarIcon,
   },
-};
-
-const withIconSection: ComponentShowcaseSection = {
-  title: 'With icon',
-  items: [
-    withIconSelect,
-  ],
 };
 
 const withLabelSelect: ComponentShowcaseItem = {
   title: 'Label',
   props: {
-    data: defaultSelectOption,
-    label: 'Label',
+    ...defaultSelect.props,
+    label: 'LABEL',
   },
 };
 
-const withCustomPlaceholderSelect: ComponentShowcaseItem = {
+const placeholderSelect: ComponentShowcaseItem = {
   title: 'Placeholder',
   props: {
-    data: defaultSelectOption,
+    ...defaultSelect.props,
     placeholder: 'Place your Text',
   },
 };
 
-const customTextsSection: ComponentShowcaseSection = {
-  title: 'Texts',
+const defaultSection: ComponentShowcaseSection = {
+  title: 'Default',
   items: [
+    defaultSelect,
+    disabledSelect,
+    initialValueSelect,
+  ],
+};
+
+const multiSelectSection: ComponentShowcaseSection = {
+  title: 'Multiselect',
+  items: [
+    multiSelect,
+    multiSelectInitialValue,
+  ],
+};
+
+const groupsSection: ComponentShowcaseSection = {
+  title: 'Groups',
+  items: [
+    groupSelect,
+    groupMultiselect,
+  ],
+};
+
+const accessoriesSection: ComponentShowcaseSection = {
+  title: 'Accessories',
+  items: [
+    withIconSelect,
     withLabelSelect,
-    withCustomPlaceholderSelect,
-  ],
-};
-
-const preselectedReference: ComponentShowcaseItem = {
-  title: 'Ref',
-  props: {
-    data: defaultSelectOption,
-    preselectedItem: defaultSelectOption[1],
-  },
-};
-
-const preselectedReferenceMultiSelect: ComponentShowcaseItem = {
-  title: 'Multi Ref',
-  props: {
-    multiSelect: true,
-    data: defaultSelectOption,
-    preselectedItem: [defaultSelectOption[1]],
-  },
-};
-
-const preselectedReferenceSection: ComponentShowcaseSection = {
-  title: 'Preselected Reference',
-  items: [
-    preselectedReference,
-    preselectedReferenceMultiSelect,
-  ],
-};
-
-const preselectedInline: ComponentShowcaseItem = {
-  title: 'Inline',
-  props: {
-    data: defaultSelectOption,
-    preselectedItem: { text: 'Option 3' },
-    keyExtractor: (item: SelectOptionType) => item.text,
-  },
-};
-
-const preselectedInlineMultiSelect: ComponentShowcaseItem = {
-  title: 'Multi Inline',
-  props: {
-    multiSelect: true,
-    data: defaultSelectOption,
-    preselectedItem: [{ text: 'Option 3' }],
-    keyExtractor: (item: SelectOptionType) => item.text,
-  },
-};
-
-const preselectedInlineSection: ComponentShowcaseSection = {
-  title: 'Preselected Inline',
-  items: [
-    preselectedInline,
-    preselectedInlineMultiSelect,
+    placeholderSelect,
   ],
 };
 
@@ -213,11 +157,8 @@ export const selectShowcase: ComponentShowcase = {
   sections: [
     defaultSection,
     multiSelectSection,
-    withGroupsSection,
-    withIconSection,
-    customTextsSection,
-    preselectedReferenceSection,
-    preselectedInlineSection,
+    groupsSection,
+    accessoriesSection,
   ],
 };
 

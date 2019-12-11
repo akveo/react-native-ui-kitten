@@ -12,29 +12,48 @@ const defaultTooltip: ComponentShowcaseItem = {
 };
 
 const iconTooltip: ComponentShowcaseItem = {
-  title: 'Default',
+  title: 'With Icon',
   props: {
     icon: StarIcon,
   },
 };
 
+const backdropTooltip: ComponentShowcaseItem = {
+  title: 'Styled backdrop',
+  props: {
+    allowBackdrop: true,
+    backdropStyle: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
+  title: 'Default',
   items: [
     defaultTooltip,
   ],
 };
 
-const iconSection: ComponentShowcaseSection = {
+const accessoriesSection: ComponentShowcaseSection = {
+  title: 'Accessories',
   items: [
     iconTooltip,
   ],
 };
 
+const backdropSection: ComponentShowcaseSection = {
+  title: 'Backdrop',
+  items: [
+    backdropTooltip,
+  ],
+};
+
+
 export const tooltipShowcase: ComponentShowcase = {
   title: 'Tooltip',
   sections: [
     defaultSection,
-    iconSection,
+    accessoriesSection,
+    backdropSection,
   ],
 };
 

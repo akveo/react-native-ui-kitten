@@ -27,6 +27,7 @@ import { TopNavigationScreen } from '@pg/scenes/topNavigation/topNavigation.comp
 import { ToggleScreen } from '@pg/scenes/toggle/toggle.component';
 import { SelectScreen } from '@pg/scenes/select/select.component';
 import { OverflowMenuScreen } from '@pg/scenes/overflowMenu/overflowMenu.component';
+import { RangeDatepickerScreen } from '@pg/scenes/rangeDatepicker/rangeDatepicker.component';
 
 export const ComponentsNavigator = createStackNavigator({
   ['Components']: ComponentsScreen,
@@ -35,11 +36,12 @@ export const ComponentsNavigator = createStackNavigator({
   ['Button']: ButtonScreen,
   ['ButtonGroup']: ButtonGroupScreen,
   ['Calendar']: CalendarScreen,
-  ['Card']: CardScreen,
   ['RangeCalendar']: RangeCalendarScreen,
+  ['Card']: CardScreen,
   ['CheckBox']: CheckBoxScreen,
   ['Drawer']: DrawerScreen,
   ['Datepicker']: DatepickerScreen,
+  ['RangeDatepicker']: RangeDatepickerScreen,
   ['Icon']: IconScreen,
   ['Input']: InputScreen,
   ['Layout']: LayoutScreen,
