@@ -4,7 +4,7 @@
     "slug": "ui-kitten-playground",
     "description": "UI Kitten Playground Application",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
@@ -17,6 +17,9 @@
       "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
