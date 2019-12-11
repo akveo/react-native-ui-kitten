@@ -20,7 +20,7 @@ import {
   SelectOptionProps,
   SelectOptionType,
 } from './selectOption.component';
-import { SelectOptionProp } from './select.component';
+import { SelectOption as SelectOptionProp } from './select.component';
 import { SelectionStrategy } from './selection.strategy';
 
 interface ComponentProps {

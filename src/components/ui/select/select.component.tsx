@@ -57,13 +57,13 @@ type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 type SelectChildren = [SelectOptionsListElement, TextElement, ControlElement];
 
-export type SelectOptionProp = SelectOptionType[] | SelectOptionType;
+export type SelectOption = SelectOptionType[] | SelectOptionType;
 export type KeyExtractorType = (item: SelectOptionType) => string;
 
 interface ComponentProps {
   data: SelectOptionType[];
   multiSelect?: boolean;
-  selectedOption?: SelectOptionProp;
+  selectedOption?: SelectOption;
   textStyle?: StyleProp<TextStyle>;
   placeholder?: string;
   placeholderStyle?: StyleProp<TextStyle>;
@@ -71,7 +71,7 @@ interface ComponentProps {
   labelStyle?: StyleProp<TextStyle>;
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
-  onSelect: (option: SelectOptionProp, event?: GestureResponderEvent) => void;
+  onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
   status?: string;
   size?: string;
   keyExtractor?: KeyExtractorType;
@@ -167,7 +167,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
     visible: false,
   };
 
-  private selectionStrategy: SelectionStrategy<SelectOptionProp>;
+  private selectionStrategy: SelectionStrategy<SelectOption>;
   private iconAnimation: Animated.Value = new Animated.Value(0);
 
   constructor(props: SelectProps) {
@@ -205,7 +205,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   private onSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
     if (this.props.onSelect) {
-      const selection: SelectOptionProp = this.selectionStrategy.select(option, this.setVisibility);
+      const selection: SelectOption = this.selectionStrategy.select(option, this.setVisibility);
       this.props.onSelect(selection, event);
       // FIXME: looks like a bug in selection strategy
       this.forceUpdate();

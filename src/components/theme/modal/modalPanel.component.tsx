@@ -19,10 +19,9 @@ import {
   ModalPresenting,
   ModalPresentingConfig,
 } from './modal.service';
-import { ModalPresentingBased } from '../../ui/support/typings';
 
 interface ModalPanelChild extends ModalPresentingConfig {
-  element: React.ReactElement<ModalPresentingBased>;
+  element: React.ReactElement;
 }
 
 export interface ModalPanelProps {
@@ -54,7 +53,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     return '';
   };
 
-  public show(element: React.ReactElement<ModalPresentingBased>, config: ModalPresentingConfig): string {
+  public show(element: React.ReactElement, config: ModalPresentingConfig): string {
     const key: string = this.generateUniqueComponentKey();
     const components: Map<string, ModalPanelChild> = this.state.components
       .set(key, { ...config, element });
@@ -71,7 +70,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
       return;
     }
 
-    const childElement: React.ReactElement<ModalPresentingBased> = panelChild.element;
+    const childElement: React.ReactElement = panelChild.element;
 
     panelChild.element = React.cloneElement(childElement, {
       children: children,
