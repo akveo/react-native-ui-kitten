@@ -68,7 +68,7 @@ import { mapping, light as lightTheme } from '@eva-design/eva';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
