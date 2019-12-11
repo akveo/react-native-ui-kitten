@@ -21,14 +21,13 @@ import {
   mapping,
   theme,
 } from '../support/tests';
-import { Text } from '../text/text.component';
 
 interface State {
   date: Date;
 }
 
 interface AdditionalProps {
-  datepickerRef?: React.LegacyRef<DatepickerComponent<Date>>;
+  datepickerRef?: React.LegacyRef<DatepickerComponent>;
   onPress?: (event: GestureResponderEvent) => void;
   onPressIn?: (event: GestureResponderEvent) => void;
   onPressOut?: (event: GestureResponderEvent) => void;
@@ -76,7 +75,14 @@ class TestApplication extends React.Component<TestAppProps, State> {
   }
 }
 
-describe('@ datepicker component checks', () => {
+describe('@datepicker component checks', () => {
+
+  const message: string = [
+    'Unfortunately, there is no way to test Datepicker since it relies on native code to perform measuring.',
+    'However, most use cases are covered with tests of Calendar and the Input element of Datepicker',
+  ].join('\n');
+
+  console.info(message);
 
   it('* emits onPress', () => {
     const onPress = jest.fn();
@@ -132,21 +138,6 @@ describe('@ datepicker component checks', () => {
     const { visible } = datepickerRef.current.state;
 
     expect(visible).toBe(true);
-  });
-
-  it('* onSelect works properly', async () => {
-    const application: RenderAPI = render(
-      <TestApplication/>,
-    );
-
-    fireEvent.press(application.getAllByType(TouchableOpacity)[0]);
-    const dateControl = await waitForElement(() => {
-      return application.getAllByText('11')[0];
-    });
-    fireEvent.press(dateControl);
-    const title: string = application.getAllByType(Text)[0].props.children;
-
-    expect(title).toMatch('11');
   });
 
   it('* icon renders properly', async () => {

@@ -5,6 +5,15 @@ import {
   PopoverPlacements,
 } from './type';
 
+describe('@popover: component checks', () => {
+
+  const message: string = [
+    'Unfortunately, there is no way to test Popover since it relies on native code to perform measuring.',
+  ].join('\n');
+
+  console.info(message);
+});
+
 describe('@type: popover model checks', () => {
 
   describe('* placement', () => {

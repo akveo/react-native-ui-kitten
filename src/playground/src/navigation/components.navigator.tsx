@@ -60,5 +60,6 @@ export const ComponentsNavigator = createStackNavigator({
   ['OverflowMenu']: OverflowMenuScreen,
   ['Select']: SelectScreen,
 }, {
+  initialRouteName: 'Select',
   headerMode: 'none',
 });

@@ -53,13 +53,13 @@ class TestApplication extends React.Component<TestAppProps, State> {
   }
 }
 
-describe('@calendar: component checks', () => {
+describe('@range-calendar: component checks', () => {
 
   it('* start range date selected properly', () => {
     const expectedStartDate: Date = new Date(2019, CURRENT_MONTH, 11);
     const application: RenderAPI = render(<TestApplication/>);
 
-    fireEvent.press(application.getAllByText('11')[1]);
+    fireEvent.press(application.getAllByText('11')[0]);
     const { range } = application.getByType(RangeCalendar).props;
 
     expect(range.startDate.toString()).toBe(expectedStartDate.toString());
@@ -70,8 +70,8 @@ describe('@calendar: component checks', () => {
     const expectedEndDate: Date = new Date(2019, CURRENT_MONTH, 26);
     const application: RenderAPI = render(<TestApplication/>);
 
-    fireEvent.press(application.getAllByText('11')[1]);
-    fireEvent.press(application.getAllByText('26')[1]);
+    fireEvent.press(application.getAllByText('11')[0]);
+    fireEvent.press(application.getAllByText('26')[0]);
     const { range } = application.getByType(RangeCalendar).props;
 
     expect(range.startDate.toString()).toBe(expectedStartDate.toString());
@@ -82,9 +82,9 @@ describe('@calendar: component checks', () => {
     const expectedStartDate: Date = new Date(2019, CURRENT_MONTH, 19);
     const application: RenderAPI = render(<TestApplication/>);
 
-    fireEvent.press(application.getAllByText('11')[1]);
-    fireEvent.press(application.getAllByText('26')[1]);
-    fireEvent.press(application.getAllByText('19')[1]);
+    fireEvent.press(application.getAllByText('11')[0]);
+    fireEvent.press(application.getAllByText('26')[0]);
+    fireEvent.press(application.getAllByText('19')[0]);
     const { range } = application.getByType(RangeCalendar).props;
 
     expect(range.startDate.toString()).toBe(expectedStartDate.toString());
@@ -95,9 +95,9 @@ describe('@calendar: component checks', () => {
     const expectedStartDate: Date = new Date(2019, CURRENT_MONTH, 8);
     const application: RenderAPI = render(<TestApplication/>);
 
-    fireEvent.press(application.getAllByText('11')[1]);
-    fireEvent.press(application.getAllByText('26')[1]);
-    fireEvent.press(application.getAllByText('8')[1]);
+    fireEvent.press(application.getAllByText('11')[0]);
+    fireEvent.press(application.getAllByText('26')[0]);
+    fireEvent.press(application.getAllByText('8')[0]);
     const { range } = application.getByType(RangeCalendar).props;
 
     expect(range.startDate.toString()).toBe(expectedStartDate.toString());
