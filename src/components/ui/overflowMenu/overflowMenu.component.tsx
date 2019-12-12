@@ -96,30 +96,31 @@ class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     };
   };
 
-  private renderPopoverContentElement = (style: StyleType): MenuElement => {
-    const { themedStyle, indicatorStyle, children, data, ...restProps } = this.props;
+  private renderPopoverContentElement = (): MenuElement => {
+    const { themedStyle, indicatorStyle, children, data, style, ...restProps } = this.props;
 
     return (
       <Menu
         {...restProps}
+        style={styles.menu}
         data={data}
-        style={[styles.menu, style]}
         initialNumToRender={data.length}
+        showsVerticalScrollIndicator={false}
         bounces={false}
       />
     );
   };
 
   public render(): PopoverElement {
-    const { themedStyle, style, indicatorStyle, children, appearance, ...restProps } = this.props;
+    const { style, themedStyle, indicatorStyle, children, appearance, ...restProps } = this.props;
     const { container, indicator } = this.getComponentStyle(themedStyle);
 
-    const contentElement: MenuElement = this.renderPopoverContentElement(container);
+    const contentElement: MenuElement = this.renderPopoverContentElement();
 
     return (
       <Popover
         {...restProps}
-        style={[styles.container, style]}
+        style={[container, style]}
         content={contentElement}>
         {children}
       </Popover>
@@ -128,9 +129,6 @@ class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-  },
   menu: {
     flexGrow: 0,
   },

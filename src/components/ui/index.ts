@@ -45,8 +45,8 @@ export {
   RangeCalendarProps,
   RangeCalendarElement,
 } from './calendar/rangeCalendar.component';
-export { CalendarRange } from './calendar/type';
 export {
+  CalendarRange,
   CalendarViewMode,
   CalendarViewModes,
 } from './calendar/type';

@@ -166,6 +166,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   public getCalendarStyle = (source: StyleType): StyleType => {
     return {
       container: {
+        width: source.width,
         paddingVertical: source.paddingVertical,
         borderColor: source.borderColor,
         borderWidth: source.borderWidth,
