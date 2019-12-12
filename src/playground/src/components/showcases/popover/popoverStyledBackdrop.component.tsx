@@ -13,7 +13,7 @@ const PopoverContent = () => (
   </Layout>
 );
 
-export const PopoverSimpleUsageShowcase = () => {
+export const PopoverStyledBackdropShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
@@ -23,6 +23,7 @@ export const PopoverSimpleUsageShowcase = () => {
 
   return (
     <Popover
+      backdropStyle={styles.backdrop}
       visible={visible}
       content={PopoverContent()}
       onBackdropPress={togglePopover}>
@@ -38,5 +39,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
+  },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });

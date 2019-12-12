@@ -47,7 +47,6 @@ export const TopNavigationWithMenuShowcase = () => {
     <OverflowMenu
       visible={menuVisible}
       data={menuData}
-      placement='bottom end'
       onSelect={onMenuItemSelect}
       onBackdropPress={toggleMenu}>
       <TopNavigationAction

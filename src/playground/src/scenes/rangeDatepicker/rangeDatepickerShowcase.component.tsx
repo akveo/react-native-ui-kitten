@@ -16,7 +16,7 @@ export const RangeDatepickerShowcase = (props: RangeDatepickerShowcaseProps): Ra
   return (
     <RangeDatepicker
       {...props}
-      style={styles.datepicker}
+      style={styles.rangeDatepicker}
       range={range}
       onSelect={setRange}
     />
@@ -24,7 +24,8 @@ export const RangeDatepickerShowcase = (props: RangeDatepickerShowcaseProps): Ra
 };
 
 const styles = StyleSheet.create({
-  datepicker: {
-    marginBottom: 20,
+  rangeDatepicker: {
+    width: 200,
   },
 });
+

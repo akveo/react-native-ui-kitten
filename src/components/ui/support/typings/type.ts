@@ -1,9 +1,7 @@
-import React from 'react';
 import {
   GestureResponderEvent,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  TargetedEvent,
   TextInputFocusEventData,
   TouchableOpacityProps,
 } from 'react-native';
@@ -26,10 +24,3 @@ export type TouchableTypeReturningProps<T> = Override<TouchableOpacityProps, {
 
 export type ScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
 export type InputFocusEvent = NativeSyntheticEvent<TextInputFocusEventData>;
-export type TouchableFocusEvent = NativeSyntheticEvent<TargetedEvent>;
-
-export interface ModalPresentingBased {
-  children?: React.ReactNode;
-  allowBackdrop?: boolean;
-  onBackdropPress: () => void;
-}

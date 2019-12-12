@@ -5,9 +5,9 @@ import {
   BaseDatepickerProps,
 } from './baseDatepicker.component';
 import {
-  RangeCalendar,
   RangeCalendarProps,
   RangeCalendarElement,
+  RangeCalendar,
 } from '../calendar/rangeCalendar.component';
 
 export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
@@ -52,8 +52,6 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @property {(date: D) => string} title - Defines the title for visible date.
  *
- * @property {(date: D) => string} todayTitle - Defines the title for today's date.
- *
  * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
  * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
@@ -64,6 +62,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @property {(date: D, style: StyleType) => ReactElement} renderYear - Should return the content of year cell.
  *
+ * @property {() => ReactElement} renderFooter - Should return the footer.
+ *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example RangeDatepickerSimpleUsage
@@ -71,6 +71,23 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
 export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 
   static styledComponentName: string = 'Datepicker';
+
+  private get calendarProps(): RangeCalendarProps<D> {
+    return {
+      min: this.props.min,
+      max: this.props.max,
+      range: this.props.range,
+      dateService: this.props.dateService,
+      boundingMonth: this.props.boundingMonth,
+      startView: this.props.startView,
+      filter: this.props.filter,
+      title: this.props.title,
+      onSelect: this.props.onSelect,
+      renderDay: this.props.renderDay,
+      renderYear: this.props.renderYear,
+      renderFooter: this.props.renderFooter,
+    };
+  }
 
   // BaseDatepickerComponent
 
@@ -90,7 +107,7 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
   protected renderCalendar(): RangeCalendarElement<D> {
     return (
       // @ts-ignore
-      <RangeCalendar {...this.props}/>
+      <RangeCalendar {...this.calendarProps} />
     );
   }
 }

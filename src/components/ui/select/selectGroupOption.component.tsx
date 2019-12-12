@@ -20,7 +20,7 @@ import {
   SelectOptionProps,
   SelectOptionType,
 } from './selectOption.component';
-import { SelectOption as SelectOptionProp} from './select.component';
+import { SelectOption as SelectOptionProp } from './select.component';
 import { SelectionStrategy } from './selection.strategy';
 
 interface ComponentProps {
@@ -121,12 +121,10 @@ class SelectGroupOptionComponent extends React.Component<SelectGroupOptionProps>
   };
 
   private renderDefaultMainElement = (): SelectOptionElement => {
-    const { item } = this.props;
-
     return (
       <SelectOption
+        item={this.props.item}
         disabled={true}
-        item={item}
       />
     );
   };

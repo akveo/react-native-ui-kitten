@@ -3,8 +3,9 @@ import {
   Button,
   Tooltip,
 } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
-export const TooltipSimpleUsageShowcase = () => {
+export const TooltipStyledBackdropShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
@@ -14,6 +15,7 @@ export const TooltipSimpleUsageShowcase = () => {
 
   return (
     <Tooltip
+      backdropStyle={styles.backdrop}
       visible={visible}
       text='Hi!'
       onBackdropPress={toggleTooltip}>
@@ -23,3 +25,9 @@ export const TooltipSimpleUsageShowcase = () => {
     </Tooltip>
   );
 };
+
+const styles = StyleSheet.create({
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+});

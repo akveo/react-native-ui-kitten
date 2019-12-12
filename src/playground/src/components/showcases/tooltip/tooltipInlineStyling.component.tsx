@@ -16,7 +16,7 @@ export const TooltipInlineStylingShowcase = () => {
   return (
     <Tooltip
       visible={visible}
-      text={'Hi! I\'m a Tooltip'}
+      text='Hi!'
       textStyle={styles.tooltipText}
       onBackdropPress={toggleTooltip}>
       <Button onPress={toggleTooltip}>

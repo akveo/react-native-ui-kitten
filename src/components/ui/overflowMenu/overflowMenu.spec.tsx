@@ -1,8 +1,10 @@
 import React from 'react';
+import { Text } from 'react-native';
 import {
   fireEvent,
   render,
   RenderAPI,
+  waitForElement,
 } from 'react-native-testing-library';
 import { ApplicationProvider } from '@kitten/theme';
 import {
@@ -68,6 +70,13 @@ class TestApplication extends React.Component<Props, State> {
 
 describe('@overflow-menu: component checks', () => {
 
+  const message: string = [
+    'Unfortunately, there is no way to test OverflowMenu since it relies on native code to perform measuring.',
+    'However, most use cases are covered with tests of Menu component',
+  ].join('\n');
+
+  console.info(message);
+
   const defaultItems: OverflowMenuItemType[] = [
     { title: 'Option 1' },
     { title: 'Option 2' },
@@ -86,35 +95,4 @@ describe('@overflow-menu: component checks', () => {
     const { visible } = application.getByType(OverflowMenu).props;
     expect(visible).toBe(true);
   });
-
-  it('* menu-item onSelect prop check', () => {
-    const onSelectChecker = jest.fn();
-    const application: RenderAPI = render(
-      <TestApplication
-        data={defaultItems}
-        onSelectChecker={onSelectChecker}
-      />,
-    );
-
-    fireEvent.press(application.getByType(Button));
-    fireEvent.press(application.getAllByText('Option 1')[0]);
-
-    expect(onSelectChecker).toHaveBeenCalled();
-  });
-
-  it('* menu-item onSelect/selectedIndex prop check', () => {
-    const application: RenderAPI = render(
-      <TestApplication
-        data={defaultItems}
-      />,
-    );
-
-    fireEvent.press(application.getByType(Button));
-    fireEvent.press(application.getAllByText('Option 2')[0]);
-
-    const { selectedIndex } = application.getByType(OverflowMenu).props;
-
-    expect(selectedIndex).toBe(1);
-  });
-
 });

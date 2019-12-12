@@ -7,7 +7,7 @@ import {
 
 const now: Date = new Date();
 
-const defaultDatepicker: ComponentShowcaseItem = {
+const defaultRangeDatepicker: ComponentShowcaseItem = {
   title: 'Default',
   props: {
     min: new Date(now.getFullYear() - 12, 0, 1),
@@ -18,12 +18,12 @@ const defaultDatepicker: ComponentShowcaseItem = {
 const defaultSection: ComponentShowcaseSection = {
   title: 'Default',
   items: [
-    defaultDatepicker,
+    defaultRangeDatepicker,
   ],
 };
 
-export const datepickerShowcase: ComponentShowcase = {
-  title: 'DatePicker',
+export const rangeDatepickerShowcase: ComponentShowcase = {
+  title: 'Range DatePicker',
   sections: [
     defaultSection,
   ],

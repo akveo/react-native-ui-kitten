@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   I18nManager,
+  Platform,
   View,
   ViewProps,
 } from 'react-native';
@@ -86,7 +87,7 @@ const ShowcaseSettingsComponent = (props: ShowcaseSettingsProps): React.ReactEle
   const toggleRtl = (): void => {
     I18nManager.forceRTL(!I18nManager.isRTL);
     I18nManager.allowRTL(I18nManager.isRTL);
-    Updates.reload();
+    Platform.OS !== 'web' && Updates.reload();
   };
 
   const { style, themedStyle } = props;

@@ -1,19 +1,22 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
-import {
-  BaseCalendarComponent,
-  BaseCalendarProps,
-} from './baseCalendar.component';
 import {
   styled,
   StyledComponentProps,
 } from '@kitten/theme';
 import {
-  CalendarDateInfo,
-  CalendarRange,
-} from './type';
+  BaseCalendarComponent,
+  BaseCalendarProps,
+} from './baseCalendar.component';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
 import { DateBatch } from './service/calendarData.service';
 import { RangeDateService } from './service/rangeDate.service';
+import { CalendarRange } from './type';
 
 interface ComponentProps<D = Date> {
   range: CalendarRange<D>;
@@ -46,8 +49,6 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  *
  * @property {(date: D) => string} title - Defines the title for visible date.
  *
- * @property {(date: D) => string} todayTitle - Defines the title for today's date.
- *
  * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
  * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
@@ -68,26 +69,38 @@ export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<Rang
 
   private rangeDateService: RangeDateService<D> = new RangeDateService(this.dateService);
 
-  // BaseCalendarComponent
+  constructor(props: RangeCalendarProps<D>) {
+    super(props);
 
-  protected onDaySelect(date: CalendarDateInfo<D>): void {
-    const { range, onSelect } = this.props;
-
-    const calendarRange: CalendarRange<D> = this.rangeDateService.createRange(range, date);
-    onSelect && onSelect(calendarRange);
+    this.createDates = this.createDates.bind(this);
+    this.selectedDate = this.selectedDate.bind(this);
+    this.onDateSelect = this.onDateSelect.bind(this);
+    this.isDateSelected = this.isDateSelected.bind(this);
+    this.shouldUpdateDate = this.shouldUpdateDate.bind(this);
   }
 
-  protected getSelectedDate(): D {
+  // BaseCalendarComponent
+
+  protected createDates(date: D): DateBatch<D> {
+    return this.dataService.createDayPickerData(date, this.props.range);
+  }
+
+  protected selectedDate(): D {
     return this.dateService.today();
   }
 
-  protected isDaySelected(date: CalendarDateInfo<D>): boolean {
+  protected onDateSelect(date: D): void {
+    if (this.props.onSelect) {
+      const range: CalendarRange<D> = this.rangeDateService.createRange(this.props.range, date);
+      this.props.onSelect(range);
+    }
+  }
+
+  protected isDateSelected(date: D): boolean {
     return false;
   }
 
-  protected shouldUpdateDayElement(props: CalendarPickerCellProps<D>,
-                                nextProps: CalendarPickerCellProps<D>): boolean {
-
+  protected shouldUpdateDate(props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>): boolean {
     const dateChanged: boolean = this.dateService.compareDatesSafe(props.date.date, nextProps.date.date) !== 0;
 
     if (dateChanged) {
@@ -112,10 +125,6 @@ export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<Rang
     }
 
     return props.theme !== nextProps.theme;
-  }
-
-  protected getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D> {
-    return this.dataService.createDayPickerData(date.date, this.props.range);
   }
 }
 

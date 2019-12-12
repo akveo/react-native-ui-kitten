@@ -5,11 +5,11 @@
  */
 
 import {
-  Frame,
   PlacementOptions,
   PopoverPlacement,
   PopoverPlacements,
 } from './type';
+import { Frame } from '../measure/type';
 
 const PLACEMENT_FAMILIES: string[] = [
   PopoverPlacements.BOTTOM.rawValue,

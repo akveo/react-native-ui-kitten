@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {
-  StyleSheet,
   ListRenderItemInfo,
   GestureResponderEvent,
 } from 'react-native';
@@ -23,17 +22,13 @@ import {
   SelectGroupOption,
   SelectGroupOptionElement,
 } from './selectGroupOption.component';
-import { SelectOption as SelectOptionProp} from './select.component';
+import { SelectOption as SelectOptionProp } from './select.component';
 import { SelectionStrategy } from './selection.strategy';
-
-type DefaultMenuItemElement = SelectOptionElement | SelectGroupOptionElement;
-type MenuItemElement = DefaultMenuItemElement | React.ReactElement;
 
 export interface ComponentProps {
   data: SelectOptionType[];
   multiSelect?: boolean;
   strategy: SelectionStrategy<SelectOptionProp>;
-  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement;
   onSelect: (option: SelectOptionType, event?: GestureResponderEvent) => void;
 }
 
@@ -42,21 +37,18 @@ export type SelectOptionsListElement = React.ReactElement<SelectOptionsListProps
 
 export class SelectOptionsList extends React.Component<SelectOptionsListProps> {
 
-  private areThereSubItems = (dropdownItem: SelectOptionType): boolean => {
-    const { items } = dropdownItem;
-
-    return items && items.length !== 0;
-  };
-
   private onSelect = (option: SelectOptionType, event?: GestureResponderEvent): void => {
     this.props.onSelect(option, event);
   };
 
-  private renderDefaultItem = (info: ListRenderItemInfo<SelectOptionType>): DefaultMenuItemElement => {
-    const { renderItem, multiSelect, strategy } = this.props;
-    const selected: boolean = strategy.isSelected(info.item);
+  private hasItems = (item: SelectOptionType): boolean => {
+    return item.items && item.items.length !== 0;
+  };
 
-    return this.areThereSubItems(info.item) ? (
+  private renderGroupItem = (info: ListRenderItemInfo<SelectOptionType>): SelectGroupOptionElement => {
+    const { renderItem, multiSelect, strategy } = this.props;
+
+    return (
       <SelectGroupOption
         {...info}
         strategy={strategy}
@@ -64,36 +56,31 @@ export class SelectOptionsList extends React.Component<SelectOptionsListProps> {
         renderItem={renderItem}
         onPress={this.onSelect}
       />
-    ) : (
+    );
+  };
+
+  private renderSingleItem = (info: ListRenderItemInfo<SelectOptionType>): SelectOptionElement => {
+    return (
       <SelectOption
         {...info}
         disabled={info.item.disabled}
-        selected={selected}
-        multi={multiSelect}
+        selected={this.props.strategy.isSelected(info.item)}
+        multi={this.props.multiSelect}
         onPress={this.onSelect}
       />
     );
   };
 
-  private renderItem = (info: ListRenderItemInfo<SelectOptionType>): MenuItemElement => {
-    const { renderItem } = this.props;
-
-    return renderItem ? renderItem(info) : this.renderDefaultItem(info);
+  private renderItem = (info: ListRenderItemInfo<SelectOptionType>): SelectOptionElement | SelectGroupOptionElement => {
+    return this.hasItems(info.item) ? this.renderGroupItem(info) : this.renderSingleItem(info);
   };
 
   public render(): SelectOptionsListElement {
-    const { style, ...restProps } = this.props;
-
     return (
       <List
-        {...restProps}
-        style={[styles.container, style]}
+        {...this.props}
         renderItem={this.renderItem}
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

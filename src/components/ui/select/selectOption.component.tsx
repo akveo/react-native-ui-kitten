@@ -52,7 +52,10 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
 
   private onPress = (event: GestureResponderEvent): void => {
     this.props.dispatch([]);
-    this.props.onPress(this.props.item, event);
+
+    if (this.props.onPress) {
+      this.props.onPress(this.props.item, event);
+    }
   };
 
   private onMultiSelectItemPress = (value: boolean): void => {

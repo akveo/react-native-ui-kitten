@@ -66,7 +66,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
 
     return (
       <TouchableOpacity
-        style={styles.container}
+        style={[styles.container, this.props.style]}
         onPress={this.onBackdropPress}
         activeOpacity={1}>
         {component}

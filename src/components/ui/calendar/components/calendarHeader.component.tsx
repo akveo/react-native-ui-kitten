@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   ImageStyle,
@@ -7,6 +13,7 @@ import {
   View,
   ViewProps,
 } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 import { Button } from '../../button/button.component';
 import {
   ChevronDown,
@@ -23,6 +30,7 @@ import {
   ChevronRightElement,
   ChevronRightProps,
 } from '../../support/components/chevronRight.component';
+import { I18nLayoutService } from '../../support/services';
 
 interface ComponentProps extends ViewProps {
   title: string;
@@ -53,9 +61,10 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderLeftIcon = (): ChevronLeftElement => {
     const { tintColor, ...svgProps } = this.props.iconStyle;
+    const IconComponent: React.ComponentType<SvgProps> = I18nLayoutService.select(ChevronLeft, ChevronRight);
 
     return (
-      <ChevronLeft
+      <IconComponent
         style={styles.lateralIcon}
         fill={tintColor}
         {...svgProps as ChevronLeftProps}
@@ -65,9 +74,10 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderRightIcon = (): ChevronRightElement => {
     const { tintColor, ...svgProps } = this.props.iconStyle;
+    const IconComponent: React.ComponentType<SvgProps> = I18nLayoutService.select(ChevronRight, ChevronLeft);
 
     return (
-      <ChevronRight
+      <IconComponent
         style={styles.lateralIcon}
         fill={tintColor}
         {...svgProps as ChevronRightProps}

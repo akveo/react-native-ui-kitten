@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Button,
-  Dimensions,
   ViewProps,
 } from 'react-native';
 import {
@@ -19,6 +18,7 @@ import {
   ModalPanel,
   StyleType,
 } from '@kitten/theme';
+import { Frame } from '../measure/type';
 
 const buttonShowModalTestId: string = '@button-show-modal';
 const buttonHideModalTestId: string = '@button-hide-modal';
@@ -78,7 +78,7 @@ describe('@modal component checks', () => {
   });
 
   it('* modal default center placement calculated properly', () => {
-    const { width, height } = Dimensions.get('screen');
+    const window: Frame = Frame.window();
     const modalStyle: StyleType = {
       width: 200,
       height: 200,
@@ -90,8 +90,8 @@ describe('@modal component checks', () => {
     fireEvent.press(component.getByTestId(buttonShowModalTestId));
     const modalInstance: any = component.getByType(Modal).instance;
     const expectedStyle: StyleType = {
-      top: (height - modalInstance.contentSize.height) / 2,
-      left: (width - modalInstance.contentSize.width) / 2,
+      top: (window.size.height - modalInstance.contentSize.height) / 2,
+      left: (window.size.width - modalInstance.contentSize.width) / 2,
     };
 
     const baseModalStyles: StyleType[] = component.getByTestId(baseModalTestId).props.style;

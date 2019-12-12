@@ -7,6 +7,5 @@ export {
   InputFocusEvent,
   Override,
   TouchableIndexedProps,
-  ModalPresentingBased,
   TouchableTypeReturningProps,
 } from './type';

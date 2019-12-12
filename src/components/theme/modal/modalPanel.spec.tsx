@@ -1,20 +1,22 @@
 import React from 'react';
 import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
+import {
   fireEvent,
   render,
   RenderAPI,
   shallow,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
-import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-} from 'react-native';
 import { ModalPanel } from './modalPanel.component';
-import { ModalService } from './modal.service';
-import { ModalPresentingBased } from '../../ui/support/typings';
+import {
+  ModalPresentingConfig,
+  ModalService,
+} from './modal.service';
 
 describe('@modal-service: service checks', () => {
 
@@ -246,7 +248,7 @@ describe('@modal panel checks', () => {
     }
   }
 
-  class TestModal extends React.Component<ModalPresentingBased> {
+  class TestModal extends React.Component<ModalPresentingConfig> {
 
     public render(): React.ReactNode {
       return (

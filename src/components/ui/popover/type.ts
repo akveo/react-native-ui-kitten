@@ -9,211 +9,75 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
+import { Frame } from '../measure/type';
 import { I18nLayoutService } from '../support/services';
 
-export class Point {
-
-  readonly x: number;
-  readonly y: number;
-
-  constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
-  }
-
-  static zero(): Point {
-    return new Point(0, 0);
-  }
-}
-
-export class Size {
-
-  readonly width: number;
-  readonly height: number;
-
-  constructor(width: number, height: number) {
-    this.width = width;
-    this.height = height;
-  }
-
-  static zero(): Size {
-    return new Size(0, 0);
-  }
-}
-
-export class Frame {
-
-  readonly origin: Point;
-  readonly size: Size;
-
-  constructor(x: number, y: number, width: number, height: number) {
-    this.origin = new Point(x, y);
-    this.size = new Size(width, height);
-  }
-
-  /**
-   * Creates new frame aligned to left of other
-   */
-  public leftOf(other: Frame): Frame {
-    return new Frame(
-      other.origin.x - this.size.width,
-      this.origin.y,
-      this.size.width,
-      this.size.height,
-    );
-  }
-
-  /**
-   * Creates new frame aligned to top of other
-   */
-  public topOf(other: Frame): Frame {
-    return new Frame(
-      this.origin.x,
-      other.origin.y - this.size.height,
-      this.size.width,
-      this.size.height,
-    );
-  }
-
-  /**
-   * Creates new frame aligned to right of other
-   */
-  public rightOf(other: Frame): Frame {
-    return new Frame(
-      other.origin.x + other.size.width,
-      this.origin.y,
-      this.size.width,
-      this.size.height,
-    );
-  }
-
-  /**
-   * Creates new frame aligned to bottom of other
-   */
-  public bottomOf(other: Frame): Frame {
-    return new Frame(
-      this.origin.x,
-      other.origin.y + other.size.height,
-      this.size.width,
-      this.size.height,
-    );
-  }
-
-  /**
-   * Creates new frame centered horizontally to other
-   */
-  public centerHorizontalOf(other: Frame): Frame {
-    return new Frame(
-      other.origin.x + (other.size.width - this.size.width) / 2,
-      this.origin.y,
-      this.size.width,
-      this.size.height,
-    );
-  }
-
-  /**
-   * Creates new frame centered vertically to other
-   */
-  public centerVerticalOf(other: Frame): Frame {
-    return new Frame(
-      this.origin.x,
-      other.origin.y + (other.size.height - this.size.height) / 2,
-      this.size.width,
-      this.size.height,
-    );
-  }
-
-  static zero(): Frame {
-    return Frame.from(Point.zero(), Size.zero());
-  }
-
-  static from(point: Point, size: Size): Frame {
-    return new Frame(point.x, point.y, size.width, size.height);
-  }
-}
-
-export interface OffsetValue {
+export interface Offset {
   rawValue: string;
 
-  applyToRect(rect: OffsetRect, value: number): OffsetRect;
-}
-
-export class OffsetRect {
-  left: number;
-  top: number;
-  right: number;
-  bottom: number;
-
-  static zero(): OffsetRect {
-    return { left: 0, top: 0, right: 0, bottom: 0 };
-  }
+  apply(frame: Frame, value: number): Frame;
 }
 
 export class Offsets {
 
-  static MARGIN: OffsetValue = new class implements OffsetValue {
+  static MARGIN: Offset = new class implements Offset {
     rawValue: string = 'margin';
 
-    applyToRect(rect: OffsetRect, value: number): OffsetRect {
-      return {
-        left: value,
-        top: value,
-        right: value,
-        bottom: value,
-      };
+    apply(frame: Frame, value: number): Frame {
+      return new Frame(value, value, value, value);
     }
   };
 
-  static MARGIN_HORIZONTAL: OffsetValue = new class implements OffsetValue {
+  static MARGIN_HORIZONTAL: Offset = new class implements Offset {
     rawValue: string = 'marginHorizontal';
 
-    applyToRect(rect: OffsetRect, value: number): OffsetRect {
-      return { ...rect, left: value, right: value };
+    apply(frame: Frame, value: number): Frame {
+      return new Frame(value, frame.origin.y, value, frame.size.height);
     }
   };
 
-  static MARGIN_VERTICAL: OffsetValue = new class implements OffsetValue {
+  static MARGIN_VERTICAL: Offset = new class implements Offset {
     rawValue: string = 'marginVertical';
 
-    applyToRect(rect: OffsetRect, value: number): OffsetRect {
-      return { ...rect, top: value, bottom: value };
+    apply(frame: Frame, value: number): Frame {
+      return new Frame(frame.origin.x, value, frame.size.width, value);
     }
   };
 
-  static MARGIN_LEFT: OffsetValue = new class implements OffsetValue {
+  static MARGIN_LEFT: Offset = new class implements Offset {
     rawValue: string = 'marginLeft';
 
-    applyToRect(rect: OffsetRect, value: number): OffsetRect {
-      return { ...rect, left: value };
+    apply(frame: Frame, value: number): Frame {
+      return new Frame(value, frame.origin.y, frame.size.width, frame.size.height);
     }
   };
 
-  static MARGIN_TOP: OffsetValue = new class implements OffsetValue {
+  static MARGIN_TOP: Offset = new class implements Offset {
     rawValue: string = 'marginTop';
 
-    applyToRect(rect: OffsetRect, value: number): OffsetRect {
-      return { ...rect, top: value };
+    apply(frame: Frame, value: number): Frame {
+      return new Frame(frame.origin.x, value, frame.size.width, frame.size.height);
     }
   };
 
-  static MARGIN_RIGHT: OffsetValue = new class implements OffsetValue {
+  static MARGIN_RIGHT: Offset = new class implements Offset {
     rawValue: string = 'marginRight';
 
-    applyToRect(rect: OffsetRect, value: number): OffsetRect {
-      return { ...rect, right: value };
+    apply(frame: Frame, value: number): Frame {
+      return new Frame(frame.origin.x, frame.origin.y, value, frame.size.height);
     }
   };
 
-  static MARGIN_BOTTOM: OffsetValue = new class implements OffsetValue {
+  static MARGIN_BOTTOM: Offset = new class implements Offset {
     rawValue: string = 'marginBottom';
 
-    applyToRect(rect: OffsetRect, value: number): OffsetRect {
-      return { ...rect, bottom: value };
+    apply(frame: Frame, value: number): Frame {
+      return new Frame(frame.origin.x, frame.origin.y, frame.size.width, value);
     }
   };
 
-  static find(source: StyleProp<FlexStyle>): OffsetRect {
-    const keys: string[] = [
+  static find(source: StyleProp<FlexStyle>): Frame {
+    const offsetKeys: string[] = [
       Offsets.MARGIN.rawValue,
       Offsets.MARGIN_HORIZONTAL.rawValue,
       Offsets.MARGIN_VERTICAL.rawValue,
@@ -225,16 +89,22 @@ export class Offsets {
 
     const flatStyle: FlexStyle = StyleSheet.flatten(source) || {};
 
-    return Object.keys(flatStyle).filter((key: string) => {
-      return keys.includes(key);
-    }).reduce((acc: OffsetRect, key: string) => {
+    return Object.keys(flatStyle)
+                 .filter((key: string): boolean => offsetKeys.includes(key))
+                 .reduce((acc: Frame, key: string): Frame => {
+
       const value: number = flatStyle[key];
-      const offsetValue: OffsetValue | undefined = Offsets.parseString(key);
-      return offsetValue ? offsetValue.applyToRect(acc, value) : acc;
-    }, OffsetRect.zero());
+      const offsetValue: Offset | undefined = Offsets.parse(key);
+
+      return offsetValue ? offsetValue.apply(acc, value) : acc;
+    }, Frame.zero());
   }
 
-  private static parseString(rawValue: string, fallback?: OffsetValue): OffsetValue | undefined {
+  static parse(value: string | Offset, fallback?: Offset): Offset | undefined {
+    return Offsets.typeOf(value) ? value : Offsets.parseString(value, fallback);
+  }
+
+  private static parseString(rawValue: string, fallback?: Offset): Offset | undefined {
     switch (rawValue) {
       case Offsets.MARGIN.rawValue:
         return Offsets.MARGIN;
@@ -254,13 +124,20 @@ export class Offsets {
         return fallback;
     }
   }
+
+  private static typeOf(value: any): value is Offset {
+    const { rawValue } = (<Offset>value);
+
+    return rawValue !== undefined;
+  }
 }
 
 export class PlacementOptions {
-  source: Frame = Frame.zero();
-  other: Frame = Frame.zero();
-  bounds: Frame = Frame.zero();
-  offsets: OffsetRect = OffsetRect.zero();
+  constructor(readonly source: Frame = Frame.zero(),
+              readonly other: Frame = Frame.zero(),
+              readonly bounds: Frame = Frame.zero(),
+              readonly offsets: Frame = Frame.zero()) {
+  }
 }
 
 export interface PopoverPlacement {
@@ -279,11 +156,6 @@ export interface PopoverPlacement {
   fits(frame: Frame, other: Frame): boolean;
 }
 
-export interface FlexPlacement {
-  direction: 'column' | 'row' | 'column-reverse' | 'row-reverse';
-  alignment: 'flex-start' | 'flex-end' | 'center';
-}
-
 export class PopoverPlacements {
 
   static LEFT: PopoverPlacement = new class implements PopoverPlacement {
@@ -293,8 +165,8 @@ export class PopoverPlacements {
       const { origin, size } = options.source.leftOf(options.other).centerVerticalOf(options.other);
 
       const x: number = I18nLayoutService.select(
-        origin.x + options.offsets.left,
-        options.bounds.size.width - size.width - (origin.x + options.offsets.right),
+        origin.x + options.offsets.origin.x,
+        options.bounds.size.width - size.width - (origin.x + options.offsets.size.width),
       );
 
       return new Frame(
@@ -341,7 +213,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.top,
+        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y,
         size.width,
         size.height,
       );
@@ -379,7 +251,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.bottom,
+        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height,
         size.width,
         size.height,
       );
@@ -423,7 +295,7 @@ export class PopoverPlacements {
 
       return new Frame(
         x,
-        origin.y + options.offsets.top,
+        origin.y + options.offsets.origin.y,
         size.width,
         size.height,
       );
@@ -464,7 +336,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x - (options.other.size.width - size.width) / 2 + options.offsets.left,
+        origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x,
         origin.y,
         size.width,
         size.height,
@@ -502,7 +374,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x + (options.other.size.width - size.width) / 2 - options.offsets.right,
+        origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width,
         origin.y,
         size.width,
         size.height,
@@ -540,8 +412,8 @@ export class PopoverPlacements {
       const { origin, size } = options.source.rightOf(options.other).centerVerticalOf(options.other);
 
       const x: number = I18nLayoutService.select(
-        origin.x - options.offsets.right,
-        options.bounds.size.width - size.width - (origin.x - options.offsets.right),
+        origin.x - options.offsets.size.width,
+        options.bounds.size.width - size.width - (origin.x - options.offsets.size.width),
       );
 
       return new Frame(
@@ -588,7 +460,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.top,
+        origin.y - (options.other.size.height - size.height) / 2 + options.offsets.origin.y,
         size.width,
         size.height,
       );
@@ -626,7 +498,7 @@ export class PopoverPlacements {
 
       return new Frame(
         origin.x,
-        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.bottom,
+        origin.y + (options.other.size.height - size.height) / 2 - options.offsets.size.height,
         size.width,
         size.height,
       );
@@ -669,7 +541,7 @@ export class PopoverPlacements {
 
       return new Frame(
         x,
-        origin.y - options.offsets.bottom,
+        origin.y - options.offsets.size.height,
         size.width,
         size.height,
       );
@@ -710,7 +582,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x - (options.other.size.width - size.width) / 2 + options.offsets.left,
+        origin.x - (options.other.size.width - size.width) / 2 + options.offsets.origin.x,
         origin.y,
         size.width,
         size.height,
@@ -748,7 +620,7 @@ export class PopoverPlacements {
       const { origin, size } = this.parent().frame(options);
 
       return new Frame(
-        origin.x + (options.other.size.width - size.width) / 2 - options.offsets.right,
+        origin.x + (options.other.size.width - size.width) / 2 - options.offsets.size.width,
         origin.y,
         size.width,
         size.height,
@@ -819,6 +691,11 @@ export class PopoverPlacements {
 
     return rawValue !== undefined;
   }
+}
+
+export interface FlexPlacement {
+  direction: 'column' | 'row' | 'column-reverse' | 'row-reverse';
+  alignment: 'flex-start' | 'flex-end' | 'center';
 }
 
 const fitsStart = (frame: Frame, other: Frame): boolean => {

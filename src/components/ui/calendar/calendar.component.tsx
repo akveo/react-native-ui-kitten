@@ -1,13 +1,18 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
-import {
-  BaseCalendarComponent,
-  BaseCalendarProps,
-} from './baseCalendar.component';
 import {
   styled,
   StyledComponentProps,
 } from '@kitten/theme';
-import { CalendarDateInfo } from './type';
+import {
+  BaseCalendarComponent,
+  BaseCalendarProps,
+} from './baseCalendar.component';
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
 import { DateBatch } from './service/calendarData.service';
 
@@ -42,8 +47,6 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {(date: D) => string} title - Defines the title for visible date.
  *
- * @property {(date: D) => string} todayTitle - Defines the title for today's date.
- *
  * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
  * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
@@ -76,29 +79,37 @@ export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarP
 
   static styledComponentName: string = 'Calendar';
 
+  constructor(props: CalendarProps<D>) {
+    super(props);
+
+    this.createDates = this.createDates.bind(this);
+    this.selectedDate = this.selectedDate.bind(this);
+    this.onDateSelect = this.onDateSelect.bind(this);
+    this.isDateSelected = this.isDateSelected.bind(this);
+    this.shouldUpdateDate = this.shouldUpdateDate.bind(this);
+  }
+
   // BaseCalendarComponent
 
-  public onDaySelect(date: CalendarDateInfo<D>): void {
-    if (this.props.onSelect) {
-      this.props.onSelect(date.date);
-    }
+  protected createDates(date: D): DateBatch<D> {
+    return this.dataService.createDayPickerData(date);
   }
 
-  public getDayPickerData(date: CalendarDateInfo<D>): DateBatch<D> {
-    return this.dataService.createDayPickerData(date.date);
-  }
-
-  public getSelectedDate(): D {
+  protected selectedDate(): D {
     return this.props.date || this.dateService.today();
   }
 
-  public isDaySelected(date: CalendarDateInfo<D>): boolean {
-    return this.dateService.isSameDaySafe(date.date, this.getSelectedDate());
+  protected onDateSelect(date: D): void {
+    if (this.props.onSelect) {
+      this.props.onSelect(date);
+    }
   }
 
-  public shouldUpdateDayElement(props: CalendarPickerCellProps<D>,
-                                nextProps: CalendarPickerCellProps<D>): boolean {
+  protected isDateSelected(date: D): boolean {
+    return this.dateService.isSameDaySafe(date, this.selectedDate());
+  }
 
+  protected shouldUpdateDate(props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>): boolean {
     const dateChanged: boolean = this.dateService.compareDatesSafe(props.date.date, nextProps.date.date) !== 0;
 
     if (dateChanged) {

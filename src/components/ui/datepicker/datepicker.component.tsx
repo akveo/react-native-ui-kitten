@@ -5,8 +5,8 @@ import {
   BaseDatepickerProps,
 } from './baseDatepicker.component';
 import {
-  CalendarElement,
   Calendar,
+  CalendarElement,
   CalendarProps,
 } from '../calendar/calendar.component';
 
@@ -52,8 +52,6 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @property {(date: D) => string} title - Defines the title for visible date.
  *
- * @property {(date: D) => string} todayTitle - Defines the title for today's date.
- *
  * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
  * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
@@ -63,6 +61,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @property {(date: D, style: StyleType) => ReactElement} renderMonth - Should return the content of month cell.
  *
  * @property {(date: D, style: StyleType) => ReactElement} renderYear - Should return the content of year cell.
+ *
+ * @property {() => ReactElement} renderFooter - Should return the footer.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -89,6 +89,23 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
 
   static styledComponentName: string = 'Datepicker';
 
+  private get calendarProps(): CalendarProps<D> {
+    return {
+      min: this.props.min,
+      max: this.props.max,
+      date: this.props.date,
+      dateService: this.props.dateService,
+      boundingMonth: this.props.boundingMonth,
+      startView: this.props.startView,
+      filter: this.props.filter,
+      title: this.props.title,
+      onSelect: this.props.onSelect,
+      renderDay: this.props.renderDay,
+      renderYear: this.props.renderYear,
+      renderFooter: this.props.renderFooter,
+    };
+  }
+
   // BaseDatepickerComponent
 
   protected getComponentTitle(): string {
@@ -102,7 +119,7 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
   protected renderCalendar(): CalendarElement<D> {
     return (
       // @ts-ignore
-      <Calendar {...this.props}/>
+      <Calendar {...this.calendarProps} />
     );
   }
 }

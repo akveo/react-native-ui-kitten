@@ -15,8 +15,7 @@ import {
   SpinnerAnimation,
   SpinnerAnimationStyle,
 } from './animation';
-// TODO: Frame, Point, Size types should be refactored to common types
-import { Size } from '../popover/type';
+import { Size } from '../measure/type';
 
 interface ArcElementStyle {
   container: ViewStyle;

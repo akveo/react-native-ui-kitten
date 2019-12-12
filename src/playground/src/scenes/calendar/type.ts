@@ -16,8 +16,8 @@ const now: Date = new Date();
 
 const defaultCalendar: ComponentShowcaseItem = {
   props: {
-    min: new Date(now.getFullYear() - 12, 0, 1),
-    max: new Date(now.getFullYear() + 12, 0, 1),
+    min: new Date(2018, 0, 1),
+    max: new Date(2019, 0, 1),
     withFooter: true,
   },
 };
@@ -52,7 +52,7 @@ const minMaxCalendar: ComponentShowcaseItem = {
 const boundingCalendar: ComponentShowcaseItem = {
   props: {
     ...defaultCalendar.props,
-    boundingMonth: true,
+    boundingMonth: false,
   },
 };
 

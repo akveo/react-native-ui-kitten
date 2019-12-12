@@ -21,7 +21,10 @@ export {
   ThemeProvider,
   ThemeProviderProps,
 } from './theme/themeProvider.component';
-export { ModalService } from './modal/modal.service';
+export {
+  ModalService,
+  ModalPresentingConfig,
+} from './modal/modal.service';
 export {
   Interaction,
   State,

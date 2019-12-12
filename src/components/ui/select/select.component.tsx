@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 import {
@@ -24,26 +25,24 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import { Popover } from '../popover/popover.component';
-import {
   SelectOptionsList,
   SelectOptionsListElement,
 } from './selectOptionsList.component';
-import { SelectOptionType } from './selectOption.component';
 import {
-  MeasureNode,
-  MeasureResult,
-  MeasuringElementProps,
-} from '../popover/measure.component';
+  SelectOption,
+  SelectOptionType,
+} from './selectOption.component';
 import {
   MultiSelectStrategy,
   SelectionStrategy,
   SingleSelectStrategy,
 } from './selection.strategy';
+import {
+  Text,
+  TextElement,
+} from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
+import { Popover } from '../popover/popover.component';
 import {
   allWithPrefix,
   isValidString,
@@ -58,10 +57,8 @@ type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
 type SelectChildren = [SelectOptionsListElement, TextElement, ControlElement];
 
-export type SelectOption = Array<SelectOptionType> | SelectOptionType;
+export type SelectOption = SelectOptionType[] | SelectOptionType;
 export type KeyExtractorType = (item: SelectOptionType) => string;
-
-const MEASURED_CONTROL_TAG: string = 'Control';
 
 interface ComponentProps {
   data: SelectOptionType[];
@@ -85,7 +82,6 @@ export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
   visible: boolean;
-  optionsListWidth: number;
 }
 
 /**
@@ -169,20 +165,18 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   public state: State = {
     visible: false,
-    optionsListWidth: 0,
   };
 
-  private strategy: SelectionStrategy<SelectOption>;
-  private iconAnimation: Animated.Value;
+  private selectionStrategy: SelectionStrategy<SelectOption>;
+  private iconAnimation: Animated.Value = new Animated.Value(0);
 
   constructor(props: SelectProps) {
     super(props);
-    this.strategy = this.createSelectionStrategy();
-    this.iconAnimation = new Animated.Value(0);
-  }
+    const { multiSelect, selectedOption, keyExtractor, data } = this.props;
 
-  public componentDidUpdate(): void {
-    this.strategy = this.createSelectionStrategy();
+    this.selectionStrategy = multiSelect ?
+      new MultiSelectStrategy(selectedOption, data, keyExtractor) :
+      new SingleSelectStrategy(selectedOption, data, keyExtractor);
   }
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -209,28 +203,17 @@ class SelectComponent extends React.Component<SelectProps, State> {
     }
   };
 
-  private onItemSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
-    const selectedOption: SelectOption = this.strategy.select(option, this.setVisibility);
-    this.props.onSelect(selectedOption);
-  };
-
-  private onControlMeasure = (result: MeasureResult): void => {
-    const width: number = result[MEASURED_CONTROL_TAG].size.width;
-
-    this.setState({ optionsListWidth: width });
-  };
-
-  private createSelectionStrategy = (): SelectionStrategy<SelectOption> => {
-    const { multiSelect, selectedOption, keyExtractor, data } = this.props;
-
-    return multiSelect ?
-      new MultiSelectStrategy(selectedOption, data, keyExtractor) :
-      new SingleSelectStrategy(selectedOption, data, keyExtractor);
+  private onSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
+    if (this.props.onSelect) {
+      const selection: SelectOption = this.selectionStrategy.select(option, this.setVisibility);
+      this.props.onSelect(selection, event);
+      // FIXME: looks like a bug in selection strategy
+      this.forceUpdate();
+    }
   };
 
   private setVisibility = (): void => {
     const visible: boolean = !this.state.visible;
-
     this.setState({ visible }, this.handleVisibleChange);
   };
 
@@ -240,21 +223,13 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private dispatchActive = (): void => {
-    const { visible } = this.state;
-    if (visible) {
-      this.props.dispatch([Interaction.ACTIVE]);
-    } else {
-      this.props.dispatch([]);
-    }
+    const interactions: Interaction[] = this.state.visible ? [Interaction.ACTIVE] : [];
+    this.props.dispatch(interactions);
   };
 
   private startIconAnimation = (): void => {
-    const { visible } = this.state;
-    if (visible) {
-      this.animateIcon(-180);
-    } else {
-      this.animateIcon(0);
-    }
+    const deg: number = this.state.visible ? -180 : 0;
+    this.animateIcon(deg);
   };
 
   private animateIcon = (toValue: number): void => {
@@ -270,7 +245,6 @@ class SelectComponent extends React.Component<SelectProps, State> {
       borderColor,
       borderWidth,
       minHeight,
-      minWidth,
       paddingHorizontal,
       paddingVertical,
       borderRadius,
@@ -279,7 +253,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
     const iconStyles: StyleType = allWithPrefix(source, 'icon');
     const textStyles: StyleType = allWithPrefix(source, 'text');
     const placeholderStyles: StyleType = allWithPrefix(source, 'placeholder');
-    const optionsListStyles: StyleType = allWithPrefix(source, 'optionsList');
+    const popoverStyles: StyleType = allWithPrefix(source, 'popover');
     const labelStyle: StyleType = allWithPrefix(source, 'label');
 
     return {
@@ -288,7 +262,6 @@ class SelectComponent extends React.Component<SelectProps, State> {
         borderColor: borderColor,
         borderWidth: borderWidth,
         minHeight: minHeight,
-        minWidth: minWidth,
         paddingHorizontal: paddingHorizontal,
         paddingVertical: paddingVertical,
         borderRadius: borderRadius,
@@ -315,11 +288,11 @@ class SelectComponent extends React.Component<SelectProps, State> {
         lineHeight: placeholderStyles.placeholderLineHeight,
         fontFamily: placeholderStyles.placeholderFontFamily,
       },
-      optionsList: {
-        maxHeight: optionsListStyles.optionsListMaxHeight,
-        borderRadius: optionsListStyles.optionsListBorderRadius,
-        borderColor: optionsListStyles.optionsListBorderColor,
-        borderWidth: optionsListStyles.optionsListBorderWidth,
+      popover: {
+        maxHeight: popoverStyles.popoverMaxHeight,
+        borderRadius: popoverStyles.popoverBorderRadius,
+        borderColor: popoverStyles.popoverBorderColor,
+        borderWidth: popoverStyles.popoverBorderWidth,
       },
       label: {
         marginBottom: labelStyle.labelMarginBottom,
@@ -333,11 +306,9 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private renderLabelElement = (style: TextStyle): TextElement => {
-    const { label, labelStyle } = this.props;
-
     return (
-      <Text style={[style, styles.label, labelStyle]}>
-        {label}
+      <Text style={[style, this.props.labelStyle]}>
+        {this.props.label}
       </Text>
     );
   };
@@ -362,13 +333,13 @@ class SelectComponent extends React.Component<SelectProps, State> {
     const iconElement = this.props.icon(style, this.state.visible);
 
     return React.cloneElement(iconElement, {
-      style: [style, styles.icon, iconElement.props.style],
+      style: [style, iconElement.props.style],
     });
   };
 
   private renderTextElement = (valueStyle: TextStyle, placeholderStyle: TextStyle): TextElement => {
     const { placeholder, textStyle } = this.props;
-    const value: string = this.strategy.getPlaceholder(placeholder);
+    const value: string = this.selectionStrategy.getPlaceholder(placeholder);
     const style: TextStyle = placeholder === value ? placeholderStyle : valueStyle;
 
     return (
@@ -383,16 +354,16 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   private renderOptionsListElement = (style: StyleType): SelectOptionsListElement => {
     const { appearance, selectedOption, ...restProps } = this.props;
-    const additionalOptionsListStyle: StyleType = { width: this.state.optionsListWidth };
 
     return (
       <SelectOptionsList
+        showsVerticalScrollIndicator={false}
         {...restProps}
-        strategy={this.strategy}
         key={0}
-        style={[styles.optionsList, style, additionalOptionsListStyle]}
+        style={styles.optionsList}
         bounces={false}
-        onSelect={this.onItemSelect}
+        strategy={this.selectionStrategy}
+        onSelect={this.onSelect}
       />
     );
   };
@@ -406,28 +377,21 @@ class SelectComponent extends React.Component<SelectProps, State> {
     ];
   };
 
-  private renderControlElement = (): ControlElement => {
+  private renderControlElement = (style: StyleType): ControlElement => {
     const { themedStyle, controlStyle, ...restProps } = this.props;
-    const { control, ...childrenStyles } = this.getComponentStyle(themedStyle);
-    const [iconElement, textElement] = this.renderControlChildren(childrenStyles);
-
-    const measuringProps: MeasuringElementProps = { tag: MEASURED_CONTROL_TAG };
+    const [iconElement, textElement] = this.renderControlChildren(style);
 
     return (
-      <MeasureNode onResult={this.onControlMeasure}>
-        <TouchableOpacity
-          {...restProps}
-          {...measuringProps}
-          key={MEASURED_CONTROL_TAG}
-          activeOpacity={1.0}
-          style={[styles.control, control, controlStyle]}
-          onPress={this.onPress}
-          onPressIn={this.onPressIn}
-          onPressOut={this.onPressOut}>
-          {textElement}
-          {iconElement}
-        </TouchableOpacity>
-      </MeasureNode>
+      <TouchableOpacity
+        {...restProps}
+        activeOpacity={1.0}
+        style={[styles.control, style.control, controlStyle]}
+        onPress={this.onPress}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
+        {textElement}
+        {iconElement}
+      </TouchableOpacity>
     );
   };
 
@@ -435,14 +399,13 @@ class SelectComponent extends React.Component<SelectProps, State> {
     return [
       this.renderOptionsListElement(style.optionsList),
       isValidString(this.props.label) && this.renderLabelElement(style.label),
-      this.renderControlElement(),
+      this.renderControlElement(style),
     ];
   };
 
-  public render(): SelectElement {
+  public render(): React.ReactElement<ViewProps> {
     const { themedStyle, style } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-    const additionalOptionsListStyle: StyleType = { maxWidth: this.state.optionsListWidth };
+    const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
 
     const [optionsListElement, labelElement, controlElement] = this.renderComponentChildren(componentStyle);
 
@@ -450,10 +413,10 @@ class SelectComponent extends React.Component<SelectProps, State> {
       <View style={style}>
         {labelElement}
         <Popover
+          style={[popover, styles.popover]}
+          fullWidth={true}
           visible={this.state.visible}
           content={optionsListElement}
-          style={additionalOptionsListStyle}
-          indicatorStyle={styles.indicator}
           onBackdropPress={this.setVisibility}>
           {controlElement}
         </Popover>
@@ -471,14 +434,11 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
   },
-  icon: {},
-  label: {},
-  indicator: {
-    width: 0,
-    height: 6,
-  },
   optionsList: {
     flexGrow: 0,
+  },
+  popover: {
+    overflow: 'hidden',
   },
 });
 

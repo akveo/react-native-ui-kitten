@@ -1,12 +1,15 @@
 import React from 'react';
 import {
-  Dimensions,
   GestureResponderEvent,
   ImageProps,
   ImageStyle,
+  StyleProp,
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
+  View,
+  ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   Interaction,
@@ -17,22 +20,23 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import {
-  Popover,
-  PopoverElement,
-} from '../popover/popover.component';
+import { Popover } from '../popover/popover.component';
 import { BaseCalendarProps } from '../calendar/baseCalendar.component';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
+import { PopoverPlacements } from '@kitten/ui/popover/type';
 
 const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
+
+type DatepickerChildren<D = Date> = [CalendarElement<D>, React.ReactElement];
 
 interface State {
   visible: boolean;
 }
 
 export interface ComponentProps {
+  controlStyle?: StyleProp<ViewStyle>;
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
@@ -40,7 +44,7 @@ export interface ComponentProps {
 }
 
 export type BaseDatepickerProps<D = Date> =
-  & StyledComponentProps
+  StyledComponentProps
   & TouchableOpacityProps
   & BaseCalendarProps<D>
   & ComponentProps;
@@ -64,9 +68,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     return this.props.dateService.format(date, FULL_DATE_FORMAT_STRING);
   }
 
-  private getComponentStyles = (style: StyleType): StyleType => {
+  private getComponentStyle = (style: StyleType): StyleType => {
     const {
-      popoverMarginHorizontal,
       textFontSize,
       textLineHeight,
       textFontWeight,
@@ -75,11 +78,12 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       iconWidth,
       iconHeight,
       iconTintColor,
+      popoverWidth,
       ...containerStyles
     } = style;
 
     return {
-      container: containerStyles,
+      control: containerStyles,
       icon: {
         width: iconWidth,
         height: iconHeight,
@@ -93,9 +97,17 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         fontFamily: textFontFamily,
       },
       popover: {
-        indent: popoverMarginHorizontal,
+        width: popoverWidth,
       },
     };
+  };
+
+  private onPress = (event: GestureResponderEvent): void => {
+    this.setVisibility();
+
+    if (this.props.onPress) {
+      this.props.onPress(event);
+    }
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
@@ -114,9 +126,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     }
   };
 
-  private toggleVisible = (): void => {
+  private setVisibility = (): void => {
     const visible: boolean = !this.state.visible;
-
     this.setState({ visible }, this.dispatchActive);
   };
 
@@ -138,33 +149,32 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   private renderTextElement = (style: StyleType): TextElement => {
     return (
-      <Text style={style}>
+      <Text
+        style={style}
+        numberOfLines={1}
+        ellipsizeMode='tail'>
         {this.getComponentTitle()}
       </Text>
     );
   };
 
   private renderControlChildren = (style: StyleType): React.ReactNodeArray => {
-    const { icon } = this.props;
-
     return [
+      this.props.icon && this.renderIconElement(style.icon),
       this.renderTextElement(style.text),
-      icon && this.renderIconElement(style.icon),
     ];
   };
 
-  private renderControl = (): React.ReactElement<TouchableOpacityProps> => {
-    const { themedStyle, disabled, style } = this.props;
-    const componentStyle: StyleType = this.getComponentStyles(themedStyle);
-
-    const [textElement, iconElement] = this.renderControlChildren(componentStyle);
+  private renderControlElement = (style: StyleType): React.ReactElement<TouchableOpacityProps> => {
+    const { themedStyle, controlStyle, ...restProps } = this.props;
+    const [iconElement, textElement] = this.renderControlChildren(style);
 
     return (
       <TouchableOpacity
+        {...restProps}
         activeOpacity={1.0}
-        disabled={disabled}
-        style={[componentStyle.container, styles.container, style]}
-        onPress={this.toggleVisible}
+        style={[styles.control, style.control, controlStyle]}
+        onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         {textElement}
@@ -173,31 +183,42 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     );
   };
 
-  public render(): PopoverElement {
-    const { popover } = this.getComponentStyles(this.props.themedStyle);
+  private renderComponentChildren = (style: StyleType): DatepickerChildren<D> => {
+    return [
+      this.renderCalendar(),
+      this.renderControlElement(style),
+    ];
+  };
 
-    const popoverStyle: StyleType = {
-      width: Dimensions.get('window').width - popover.indent,
-      maxWidth: Dimensions.get('window').width - popover.indent,
-    };
+  public render(): React.ReactElement<ViewProps> {
+    const { themedStyle, style } = this.props;
+    const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
+
+    const [calendarElement, controlElement] = this.renderComponentChildren(componentStyle);
 
     return (
-      <Popover
-        style={popoverStyle}
-        visible={this.state.visible}
-        content={this.renderCalendar()}
-        onBackdropPress={this.toggleVisible}>
-        {this.renderControl()}
-      </Popover>
+      <View style={style}>
+        <Popover
+          style={[popover, styles.popover]}
+          placement={PopoverPlacements.BOTTOM_START}
+          visible={this.state.visible}
+          content={calendarElement}
+          onBackdropPress={this.setVisibility}>
+          {controlElement}
+        </Popover>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  control: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  popover: {
+    borderWidth: 0,
   },
 });
 

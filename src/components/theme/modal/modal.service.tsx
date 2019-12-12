@@ -5,7 +5,10 @@
  */
 
 import React from 'react';
-import { ModalPresentingBased } from '../../ui/support/typings';
+import {
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 /**
  * Singleton service designed to manage modal components.
@@ -67,15 +70,13 @@ class ModalServiceType {
     this.panel = null;
   }
 
-  public show(element: React.ReactElement<ModalPresentingBased>,
-              config: ModalPresentingConfig): string {
-
+  public show(element: React.ReactElement, config: ModalPresentingConfig): string {
     if (this.panel) {
       return this.panel.show(element, config);
     }
   }
 
-  public update(identifier: string, children: React.ReactNode): void {
+  public update(identifier: string, children: React.ReactElement): void {
     if (this.panel) {
       this.panel.update(identifier, children);
     }
@@ -89,17 +90,17 @@ class ModalServiceType {
 }
 
 export interface ModalPresentingConfig {
-  allowBackdrop: boolean;
-  onBackdropPress: () => void;
+  allowBackdrop?: boolean;
+  backdropStyle?: StyleProp<ViewStyle>;
+  onBackdropPress?: () => void;
 }
 
 export interface ModalPresenting {
-  show(element: React.ReactElement<ModalPresentingBased>,
-       config: ModalPresentingConfig): string;
+  show(element: React.ReactElement, config: ModalPresentingConfig): string;
 
   hide(identifier: string): string;
 
-  update(identifier: string, children: React.ReactNode): void;
+  update(identifier: string, children: React.ReactElement): void;
 }
 
 export const ModalService = new ModalServiceType();

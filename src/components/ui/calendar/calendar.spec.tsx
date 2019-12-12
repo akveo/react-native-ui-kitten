@@ -15,25 +15,24 @@ import {
   mapping,
   theme,
 } from '../support/tests';
-import { CalendarHeader } from './components/calendarHeader.component';
-import { NativeDateService } from './service/nativeDate.service';
+import { CalendarViewModes } from './type';
 
 jest.useFakeTimers();
 
 const now: Date = new Date();
+const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+
 const CURRENT_MONTH: number = now.getMonth();
-const FORMAT_HEADER_DATE: string = 'MMMM YYYY';
-const dateService: NativeDateService = new NativeDateService();
 
 interface State {
   date: Date;
 }
 
 interface AdditionalProps {
-  calendarRef?: React.LegacyRef<CalendarComponent<Date>>;
+  calendarRef?: React.LegacyRef<CalendarComponent>;
 }
 
-type TestAppProps = Omit<CalendarProps<Date>, 'onSelect'> & AdditionalProps;
+type TestAppProps = Omit<CalendarProps, 'onSelect'> & AdditionalProps;
 
 class TestApplication extends React.Component<TestAppProps, State> {
 
@@ -67,120 +66,113 @@ describe('@calendar: component checks', () => {
     const expectedDate: Date = new Date(2019, CURRENT_MONTH, 5);
     const application: RenderAPI = render(<TestApplication/>);
 
-    fireEvent.press(application.getAllByText('5')[1]);
+    fireEvent.press(application.getAllByText('5')[0]);
     const { date } = application.getByType(Calendar).props;
 
     expect(date.toString()).toBe(expectedDate.toString());
   });
 
   it('* year view appear', () => {
-    const expectedViewModeId: string = 'YEAR';
-    const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
-    const application: RenderAPI = render(
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
+    render(
       <TestApplication
         calendarRef={calendarRef}
-        min={new Date(now.getFullYear() - 1, 0, 1)}
-        max={new Date(now.getFullYear() + 1, 0, 1)}
+        startView={CalendarViewModes.YEAR}
       />,
     );
-
-    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
-    fireEvent.press(application.getAllByText(currentHeader)[0]);
     const { id } = calendarRef.current.state.viewMode;
 
-    expect(id).toBe(expectedViewModeId);
+    expect(id).toBe(CalendarViewModes.YEAR.id);
   });
 
-  it('* month view appear/year select', () => {
-    const expectedViewModeId: string = 'MONTH';
-    const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
-    const application: RenderAPI = render(
+  it('* month view appear', () => {
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
+    render(
       <TestApplication
         calendarRef={calendarRef}
-        min={new Date(now.getFullYear() - 1, 0, 1)}
-        max={new Date(now.getFullYear() + 1, 0, 1)}
+        startView={CalendarViewModes.MONTH}
       />,
     );
-
-    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
-    fireEvent.press(application.getAllByText(currentHeader)[0]);
-    fireEvent.press(application.getAllByText('2018')[0]);
     const { id } = calendarRef.current.state.viewMode;
 
-    expect(id).toBe(expectedViewModeId);
+    expect(id).toBe(CalendarViewModes.MONTH.id);
   });
 
-  it('* day view appear/month select', () => {
-    const month: number = 1 - 1;
-    const expectedViewModeId: string = 'DATE';
-    const expectedVisibleDate: Date = new Date(2018, month, 1);
-    const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
-    const application: RenderAPI = render(
+  it('* day view appear', () => {
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
+    render(
       <TestApplication
         calendarRef={calendarRef}
-        min={new Date(now.getFullYear() - 1, 0, 1)}
-        max={new Date(now.getFullYear() + 1, 0, 1)}
+        startView={CalendarViewModes.DATE}
       />,
     );
+    const { id } = calendarRef.current.state.viewMode;
 
-    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
-    fireEvent.press(application.getAllByText(currentHeader)[0]);
-    fireEvent.press(application.getAllByText('2018')[0]);
-    fireEvent.press(application.getAllByText('Jan')[0]);
-
-    const { viewMode, visibleDate } = calendarRef.current.state;
-
-    expect(viewMode.id).toBe(expectedViewModeId);
-    expect(visibleDate.toString()).toBe(expectedVisibleDate.toString());
+    expect(id).toBe(CalendarViewModes.DATE.id);
   });
 
-  it('* calendar day pager works', () => {
-    const expectedCalendarHeaderTitle: string = 'Oct 2019';
-    const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
+  it('* should change month to next', () => {
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
     const application: RenderAPI = render(
-      <TestApplication
-        calendarRef={calendarRef}
-        min={new Date(now.getFullYear() - 1, 0, 1)}
-        max={new Date(now.getFullYear() + 1, 0, 1)}
-      />,
+      <TestApplication calendarRef={calendarRef} />,
     );
 
+    const initialDate = calendarRef.current.state.visibleDate;
     fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
-    const { title } = application.getAllByType(CalendarHeader)[0].props;
+    const visibleDate = calendarRef.current.state.visibleDate;
 
-    // approx animation time
-    setTimeout(() => expect(title).toBe(expectedCalendarHeaderTitle), 2000);
+    const expectedDate = new Date(initialDate.getFullYear(), initialDate.getMonth() + 1, initialDate.getDate());
+    expect(visibleDate).toEqual(expectedDate);
   });
 
-  it('* calendar year pager works', () => {
-    const expectedCalendarHeaderTitle: string = '2026';
-    const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
+  it('* should change month to previous', () => {
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
     const application: RenderAPI = render(
-      <TestApplication
-        calendarRef={calendarRef}
-        min={new Date(now.getFullYear() - 20, 0, 1)}
-        max={new Date(now.getFullYear() + 10, 0, 1)}
-      />,
+      <TestApplication calendarRef={calendarRef} />,
     );
 
-    const currentHeader: string = dateService.format(now, FORMAT_HEADER_DATE);
-    fireEvent.press(application.getAllByText(currentHeader)[0]);
-    fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
-    fireEvent.press(application.getAllByText('2026')[0]);
+    const initialDate = calendarRef.current.state.visibleDate;
+    fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
+    const visibleDate = calendarRef.current.state.visibleDate;
 
-    const { title } = application.getAllByType(CalendarHeader)[0].props;
-
-    expect(title).toBe(expectedCalendarHeaderTitle);
+    const expectedDate = new Date(initialDate.getFullYear(), initialDate.getMonth() - 1, initialDate.getDate());
+    expect(visibleDate).toEqual(expectedDate);
   });
 
-  it('* onToday method works properly', () => {
-    const expectedVisibleDateString: string = now.toISOString().split('T')[0];
-    const calendarRef: React.LegacyRef<CalendarComponent<Date>> = React.createRef();
+  it('* should change year to next', () => {
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
+    const application: RenderAPI = render(
+      <TestApplication calendarRef={calendarRef} startView={CalendarViewModes.YEAR} />,
+    );
+
+    const initialDate = calendarRef.current.state.visibleDate;
+    fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
+    const visibleDate = calendarRef.current.state.visibleDate;
+
+    const expectedDate = new Date(initialDate.getFullYear() + 12, initialDate.getMonth(), initialDate.getDate());
+    expect(visibleDate).toEqual(expectedDate);
+  });
+
+  it('* should change year to previous', () => {
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
+    const application: RenderAPI = render(
+      <TestApplication calendarRef={calendarRef} startView={CalendarViewModes.YEAR} />,
+    );
+
+    const initialDate = calendarRef.current.state.visibleDate;
+    fireEvent.press(application.getAllByType(TouchableOpacity)[1]);
+    const visibleDate = calendarRef.current.state.visibleDate;
+
+    const expectedDate = new Date(initialDate.getFullYear() - 12, initialDate.getMonth(), initialDate.getDate());
+    expect(visibleDate).toEqual(expectedDate);
+  });
+
+  it('* should change month to current', () => {
+    const calendarRef: React.LegacyRef<CalendarComponent> = React.createRef();
     const application: RenderAPI = render(
       <TestApplication
         calendarRef={calendarRef}
-        min={new Date(now.getFullYear() - 1, 0, 1)}
-        max={new Date(now.getFullYear() + 1, 0, 1)}
+        date={new Date(today.getFullYear(), today.getMonth() - 1, today.getDate())}
       />,
     );
 
@@ -188,10 +180,10 @@ describe('@calendar: component checks', () => {
     fireEvent.press(application.getAllByType(TouchableOpacity)[2]);
 
     calendarRef.current.scrollToToday();
-    const visibleDateString: string = calendarRef.current.state.visibleDate
-      .toISOString().split('T')[0];
 
-    expect(visibleDateString).toBe(expectedVisibleDateString);
+    const visibleDate = calendarRef.current.state.visibleDate;
+
+    expect(visibleDate.getMonth()).toEqual(today.getMonth());
   });
 
 });

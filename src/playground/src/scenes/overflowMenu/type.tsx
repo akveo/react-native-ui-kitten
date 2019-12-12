@@ -63,17 +63,40 @@ const withIcons: ComponentShowcaseItem = {
 };
 
 const withDisabledItem: ComponentShowcaseItem = {
-  title: 'Icon',
+  title: 'Disabled items',
   props: {
     data: withDisabledItemMenuItems,
   },
 };
 
+const styledBackdropOverflowMenu: ComponentShowcaseItem = {
+  title: 'Styled backdrop',
+  props: {
+    data: withIconMenuItems,
+    allowBackdrop: true,
+    backdropStyle: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
+  title: 'Default',
   items: [
     defaultOverflowMenu,
-    withIcons,
     withDisabledItem,
+  ],
+};
+
+const accessoriesSection: ComponentShowcaseSection = {
+  title: 'Accessories',
+  items: [
+    withIcons,
+  ],
+};
+
+const backdropSection: ComponentShowcaseSection = {
+  title: 'Backdrop',
+  items: [
+    styledBackdropOverflowMenu,
   ],
 };
 
@@ -81,6 +104,8 @@ export const overflowMenuShowcase: ComponentShowcase = {
   title: 'Overflow Menu',
   sections: [
     defaultSection,
+    accessoriesSection,
+    backdropSection,
   ],
 };
 

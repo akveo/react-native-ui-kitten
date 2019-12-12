@@ -3,34 +3,23 @@ import { StyleSheet } from 'react-native';
 import {
   Select,
   SelectElement,
-  SelectOption,
   SelectProps,
 } from '@ui-kitten/components';
 
-interface AdditionalProps {
-  preselectedItem?: SelectOption;
-}
+export const SelectShowcase = (props: SelectProps): SelectElement => {
 
-export const SelectShowcase = (props: SelectProps & AdditionalProps): SelectElement => {
+  const [selectedOption, setSelectedOption] = React.useState(props.selectedOption);
 
-  const getInitialSelectedOption = (): SelectOption => {
-    const { multiSelect, preselectedItem } = props;
-
-    if (multiSelect) {
-      return preselectedItem ? preselectedItem : [];
-    } else {
-      return preselectedItem ? preselectedItem : null;
-    }
+  const onSelect = (option) => {
+    setSelectedOption(option);
   };
-
-  const [selectedOption, setSelectedOption] = React.useState(getInitialSelectedOption());
 
   return (
     <Select
       {...props}
       style={styles.select}
       selectedOption={selectedOption}
-      onSelect={setSelectedOption}
+      onSelect={onSelect}
     />
   );
 };

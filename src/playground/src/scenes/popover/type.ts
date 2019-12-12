@@ -10,16 +10,41 @@ const defaultPopover: ComponentShowcaseItem = {
   props: {},
 };
 
+const fullWidthPopover: ComponentShowcaseItem = {
+  title: 'Full Width',
+  props: {
+    fullWidth: true,
+  },
+};
+
+const styledBackdropPopover: ComponentShowcaseItem = {
+  title: 'Styled Backdrop',
+  props: {
+    allowBackdrop: true,
+    backdropStyle: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+  },
+};
+
 const defaultSection: ComponentShowcaseSection = {
   items: [
     defaultPopover,
+    fullWidthPopover,
   ],
 };
+
+const backdropSection: ComponentShowcaseSection = {
+  title: 'Backdrop',
+  items: [
+    styledBackdropPopover,
+  ],
+};
+
 
 export const popoverShowcase: ComponentShowcase = {
   title: 'Popover',
   sections: [
     defaultSection,
+    backdropSection,
   ],
 };
 

@@ -51,7 +51,7 @@ export abstract class SelectionStrategy<S> {
 
 export class MultiSelectStrategy extends SelectionStrategy<SelectOptionType[]> {
 
-  constructor(options: SelectOptionType | SelectOptionType[],
+  constructor(options: SelectOptionType | SelectOptionType[] = [],
               data: SelectOptionType[],
               keyExtractor?: KeyExtractorType) {
 

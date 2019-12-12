@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { CalendarProps } from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { CalendarShowcase } from './calendarShowcase.component';
@@ -7,11 +6,8 @@ import { calendarShowcase } from './type';
 
 export const CalendarScreen = ({ navigation }): React.ReactElement => {
 
-  const renderItem = (props: CalendarProps<Date>): React.ReactElement<CalendarProps<Date>> => (
-    <CalendarShowcase
-      style={styles.calendar}
-      {...props}
-    />
+  const renderItem = (props: CalendarProps): React.ReactElement<CalendarProps> => (
+    <CalendarShowcase {...props} />
   );
 
   return (
@@ -22,9 +18,3 @@ export const CalendarScreen = ({ navigation }): React.ReactElement => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  calendar: {
-    flex: 1,
-  },
-});

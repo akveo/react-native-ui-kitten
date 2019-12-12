@@ -13,7 +13,7 @@ const PopoverContent = () => (
   </Layout>
 );
 
-export const PopoverSimpleUsageShowcase = () => {
+export const PopoverFullWidthShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
@@ -25,6 +25,7 @@ export const PopoverSimpleUsageShowcase = () => {
     <Popover
       visible={visible}
       content={PopoverContent()}
+      fullWidth={true}
       onBackdropPress={togglePopover}>
       <Button onPress={togglePopover}>
         TOGGLE POPOVER
@@ -37,6 +38,5 @@ const styles = StyleSheet.create({
   popoverContent: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 24,
   },
 });

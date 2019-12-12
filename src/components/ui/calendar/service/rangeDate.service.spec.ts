@@ -1,9 +1,6 @@
 import { RangeDateService } from './rangeDate.service';
 import { NativeDateService } from './nativeDate.service';
-import {
-  CalendarDateInfo,
-  CalendarRange,
-} from '../type';
+import { CalendarRange } from '../type';
 
 describe('@range service checks', () => {
 
@@ -18,100 +15,47 @@ describe('@range service checks', () => {
     rangeService = new RangeDateService(new NativeDateService());
   });
 
-  it('* getRange (only start date)', () => {
-    const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(2019, 8, 12),
-      endDate: null,
-    };
-    const date: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 12),
-      bounding: false,
-      holiday: false,
-    };
-    const range: CalendarRange<Date> = rangeService.createRange(initialRange, date);
+  it('* should create range without end date', () => {
+    const startDate = new Date(2019, 8, 12);
+    const range: CalendarRange<Date> = rangeService.createRange(initialRange, startDate);
 
-    expect(range).toStrictEqual(expectedRange);
+    expect(range).toStrictEqual({ startDate, endDate: null });
   });
 
-  it('* getRange (full range)', () => {
-    const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(2019, 8, 12),
-      endDate: new Date(2019, 8, 24),
-    };
-    const date1: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 12),
-      bounding: false,
-      holiday: false,
-    };
-    const date2: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 24),
-      bounding: false,
-      holiday: false,
-    };
-    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
-    range = rangeService.createRange(range, date2);
+  it('* should create range with end date after select', () => {
+    const startDate = new Date(2019, 8, 12);
+    const endDate = new Date(2019, 8, 24);
 
-    expect(range).toStrictEqual(expectedRange);
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, startDate);
+    range = rangeService.createRange(range, endDate);
+
+    expect(range).toStrictEqual({ startDate, endDate });
   });
 
-  it('* getRange (re-select with only start date)', () => {
-    const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(2019, 8, 19),
-      endDate: null,
-    };
-    const date1: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 12),
-      bounding: false,
-      holiday: false,
-    };
-    const date2: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 24),
-      bounding: false,
-      holiday: false,
-    };
-    const date3: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 19),
-      bounding: false,
-      holiday: false,
-    };
-    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
-    range = rangeService.createRange(range, date2);
-    range = rangeService.createRange(range, date3);
+  it('* should create range with start date after re-select', () => {
+    const startDate = new Date(2019, 8, 12);
+    const endDate = new Date(2019, 8, 24);
+    const updatedStartDate = new Date(2019, 8, 19);
 
-    expect(range).toStrictEqual(expectedRange);
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, startDate);
+    range = rangeService.createRange(range, endDate);
+    range = rangeService.createRange(range, updatedStartDate);
+
+    expect(range).toStrictEqual({ startDate: updatedStartDate, endDate: null });
   });
 
-  it('* getRange (re-select with full range)', () => {
-    const expectedRange: CalendarRange<Date> = {
-      startDate: new Date(2019, 8, 10),
-      endDate: new Date(2019, 8, 13),
-    };
-    const date1: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 12),
-      bounding: false,
-      holiday: false,
-    };
-    const date2: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 24),
-      bounding: false,
-      holiday: false,
-    };
-    const date3: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 10),
-      bounding: false,
-      holiday: false,
-    };
-    const date4: CalendarDateInfo<Date> = {
-      date: new Date(2019, 8, 13),
-      bounding: false,
-      holiday: false,
-    };
-    let range: CalendarRange<Date> = rangeService.createRange(initialRange, date1);
-    range = rangeService.createRange(range, date2);
-    range = rangeService.createRange(range, date3);
-    range = rangeService.createRange(range, date4);
+  it('* should create range with start and end date after re-select', () => {
+    const startDate = new Date(2019, 8, 12);
+    const endDate = new Date(2019, 8, 13);
+    const updatedStartDate = new Date(2019, 8, 10);
+    const updatedEndDate = new Date(2019, 8, 11);
 
-    expect(range).toStrictEqual(expectedRange);
+    let range: CalendarRange<Date> = rangeService.createRange(initialRange, startDate);
+    range = rangeService.createRange(range, endDate);
+    range = rangeService.createRange(range, updatedStartDate);
+    range = rangeService.createRange(range, updatedEndDate);
+
+    expect(range).toStrictEqual({ startDate: updatedStartDate, endDate: updatedEndDate });
   });
 
 });
