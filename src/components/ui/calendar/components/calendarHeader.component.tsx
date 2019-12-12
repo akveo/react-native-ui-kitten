@@ -29,6 +29,8 @@ import {
   ChevronRightElement,
   ChevronRightProps,
 } from '../../support/components/chevronRight.component';
+import { I18nLayoutService } from '@kitten/ui/support/services';
+import { SvgProps } from 'react-native-svg';
 
 interface ComponentProps extends ViewProps {
   title: string;
@@ -59,9 +61,10 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderLeftIcon = (): ChevronLeftElement => {
     const { tintColor, ...svgProps } = this.props.iconStyle;
+    const IconComponent: React.ComponentType<SvgProps> = I18nLayoutService.select(ChevronLeft, ChevronRight);
 
     return (
-      <ChevronLeft
+      <IconComponent
         style={styles.lateralIcon}
         fill={tintColor}
         {...svgProps as ChevronLeftProps}
@@ -71,9 +74,10 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderRightIcon = (): ChevronRightElement => {
     const { tintColor, ...svgProps } = this.props.iconStyle;
+    const IconComponent: React.ComponentType<SvgProps> = I18nLayoutService.select(ChevronRight, ChevronLeft);
 
     return (
-      <ChevronRight
+      <IconComponent
         style={styles.lateralIcon}
         fill={tintColor}
         {...svgProps as ChevronRightProps}
