@@ -29,7 +29,7 @@ class TabViewChildren {
   content: TabContentElement[] = [];
 }
 
-interface ComponentProps {
+export interface TabViewProps extends ViewProps {
   children: ChildrenProp;
   selectedIndex?: number;
   tabBarStyle?: StyleProp<ViewStyle>;
@@ -39,7 +39,6 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
-export type TabViewProps = ViewProps & ComponentProps;
 export type TabViewElement = React.ReactElement<TabViewProps>;
 
 /**

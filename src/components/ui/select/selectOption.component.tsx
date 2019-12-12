@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   GestureResponderEvent,
+  Platform,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
@@ -24,6 +25,11 @@ import {
   TextProps,
 } from '../text/text.component';
 import { CheckBox } from '../checkbox/checkbox.component';
+import {
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
 import { TouchableTypeReturningProps } from '../support/typings';
 
 type TextElement = React.ReactElement<TextProps>;
@@ -46,20 +52,24 @@ export interface ComponentProps {
 export type SelectOptionProps = ComponentProps & StyledComponentProps & TouchableTypeReturningProps<SelectOptionType>;
 export type SelectOptionElement = React.ReactElement<SelectOptionProps>;
 
-class SelectOptionComponent extends React.Component<SelectOptionProps> {
+class SelectOptionComponent extends React.Component<SelectOptionProps> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'SelectOption';
 
-  private onPress = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
+  };
+
+  private onPress = (event: GestureResponderEvent): void => {
     if (this.props.onPress) {
       this.props.onPress(this.props.item, event);
     }
-  };
-
-  private onMultiSelectItemPress = (value: boolean): void => {
-    this.onPress(null);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
@@ -82,6 +92,10 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.props.item, event);
     }
+  };
+
+  private onMultiSelectItemPress = (value: boolean): void => {
+    this.onPress(null);
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -125,6 +139,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...restProps}
+        {...this.webEventResponder.eventHandlers}
         style={[styles.container, container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
@@ -142,7 +157,8 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> {
     return (
       <View
         {...restProps}
-        style={[styles.container, container, style]}>
+        {...this.webEventResponder.eventHandlers}
+        style={[styles.container, container, webStyles.container, style]}>
         <CheckBox
           text={item.text}
           textStyle={[text, item.textStyle, styles.multiSelectText]}
@@ -169,6 +185,13 @@ const styles = StyleSheet.create({
   text: {},
   multiSelectText: {
     width: '100%',
+  },
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
   },
 });
 

@@ -27,7 +27,7 @@ import { isValidString } from '../support/services';
 type ActionElementProp = TopNavigationActionElement | TopNavigationActionElement[];
 type AlignmentProp = 'start' | 'center';
 
-interface ComponentProps {
+export interface TopNavigationProps extends StyledComponentProps, ViewProps {
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
   subtitle?: string;
@@ -37,7 +37,6 @@ interface ComponentProps {
   rightControls?: ActionElementProp;
 }
 
-export type TopNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
 
 /**

@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   GestureResponderEvent,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -25,7 +26,12 @@ import {
 } from '../text/text.component';
 import { IconElement } from '../icon/icon.component';
 import { TouchableIndexedProps } from '../support/typings/type';
-import { allWithPrefix } from '../support/services';
+import {
+  allWithPrefix,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
 
 export interface MenuItemType {
   title: string;
@@ -37,11 +43,10 @@ export interface MenuItemType {
   accessory?: (style: StyleType) => React.ReactElement;
 }
 
-interface ComponentProps extends MenuItemType {
+export interface MenuItemProps extends StyledComponentProps, TouchableIndexedProps, MenuItemType {
   selected?: boolean;
 }
 
-export type MenuItemProps = StyledComponentProps & ComponentProps & TouchableIndexedProps;
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
 
 /**
@@ -63,9 +68,27 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  */
-class MenuItemComponent extends React.Component<MenuItemProps> {
+class MenuItemComponent extends React.Component<MenuItemProps> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'MenuItem';
+
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
+  };
+
+  public onFocus = (): void => {
+    this.props.dispatch([Interaction.FOCUSED]);
+  };
+
+  public onBlur = (): void => {
+    this.props.dispatch([]);
+  };
 
   private onPress = (event: GestureResponderEvent): void => {
     if (this.props.onPress) {
@@ -168,7 +191,8 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...restProps}
-        style={[styles.container, container, style]}
+        {...this.webEventResponder.eventHandlers}
+        style={[styles.container, container, webStyles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
@@ -197,6 +221,13 @@ const styles = StyleSheet.create({
   indicator: {
     ...StyleSheet.absoluteFillObject,
     zIndex: 2,
+  },
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
   },
 });
 

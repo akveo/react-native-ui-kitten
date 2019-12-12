@@ -17,12 +17,11 @@ import {
   StyleType,
 } from '@kitten/theme';
 
-interface ComponentProps {
+export interface AvatarProps extends StyledComponentProps, ImageProps {
   shape?: string;
   size?: string;
 }
 
-export type AvatarProps = StyledComponentProps & ImageProps & ComponentProps;
 export type AvatarElement = React.ReactElement<AvatarProps>;
 
 /**

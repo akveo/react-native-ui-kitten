@@ -30,12 +30,11 @@ import {
 import { SubMenu } from './subMenu.component';
 import { MenuService } from './menu.service';
 
-interface ComponentProps {
+export interface MenuProps extends StyledComponentProps, Omit<ListProps, 'renderItem'> {
   selectedIndex?: number;
   onSelect: (index: number, event?: GestureResponderEvent) => void;
 }
 
-export type MenuProps = StyledComponentProps & ComponentProps & Omit<ListProps, 'renderItem'>;
 export type MenuElement = React.ReactElement<MenuProps>;
 
 /**

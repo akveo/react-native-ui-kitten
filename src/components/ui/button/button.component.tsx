@@ -8,6 +8,7 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageStyle,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -25,11 +26,16 @@ import {
   TextElement,
 } from '../text/text.component';
 import { IconElement } from '../icon/icon.component';
-import { isValidString } from '../support/services';
+import {
+  isValidString,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
 
 type IconProp = (style: ImageStyle) => IconElement;
 
-interface ComponentProps {
+export interface ButtonProps extends StyledComponentProps, TouchableOpacityProps {
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
   status?: string;
@@ -37,7 +43,6 @@ interface ComponentProps {
   children?: string;
 }
 
-export type ButtonProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type ButtonElement = React.ReactElement<ButtonProps>;
 
 /**
@@ -84,9 +89,29 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @overview-example ButtonWithIcon
  */
-export class ButtonComponent extends React.Component<ButtonProps> {
+export class ButtonComponent extends React.Component<ButtonProps> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'Button';
+
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
+  // WebEventResponderCallbacks
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
+  };
+
+  public onFocus = (): void => {
+    this.props.dispatch([Interaction.FOCUSED]);
+  };
+
+  public onBlur = (): void => {
+    this.props.dispatch([]);
+  };
 
   private onPress = (event: GestureResponderEvent): void => {
     if (this.props.onPress) {
@@ -181,7 +206,8 @@ export class ButtonComponent extends React.Component<ButtonProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...containerProps}
-        style={[container, styles.container, style]}
+        {...this.webEventResponder.eventHandlers}
+        style={[container, styles.container, webStyles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
@@ -200,6 +226,13 @@ const styles = StyleSheet.create({
   },
   text: {},
   icon: {},
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
+  },
 });
 
 export const Button = styled<ButtonProps>(ButtonComponent);

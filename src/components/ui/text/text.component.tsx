@@ -16,13 +16,12 @@ import {
 
 type ChildElement = string | TextElement;
 
-interface ComponentProps {
+export interface TextProps extends StyledComponentProps, RNTextProps {
   category?: string;
   status?: string;
   children?: ChildElement | ChildElement[];
 }
 
-export type TextProps = StyledComponentProps & RNTextProps & ComponentProps;
 export type TextElement = React.ReactElement<TextProps>;
 
 /**

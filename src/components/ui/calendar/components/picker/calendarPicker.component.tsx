@@ -22,7 +22,7 @@ import {
 } from './calendarPickerCell.component';
 import { CalendarDateInfo } from '../../type';
 
-interface ComponentProps<D> extends ViewProps {
+export interface CalendarPickerProps<D> extends ViewProps {
   data: CalendarDateInfo<D>[][];
   isItemSelected: (item: CalendarDateInfo<D>) => boolean;
   isItemDisabled: (item: CalendarDateInfo<D>) => boolean;
@@ -33,7 +33,6 @@ interface ComponentProps<D> extends ViewProps {
   rowStyle?: StyleProp<ViewProps>;
 }
 
-export type CalendarPickerProps<D> = ComponentProps<D>;
 export type CalendarPickerElement<D> = React.ReactElement<CalendarPickerProps<D>>;
 
 export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {

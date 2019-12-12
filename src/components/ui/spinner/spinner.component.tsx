@@ -23,13 +23,12 @@ interface ArcElementStyle {
   overflow?: ViewStyle;
 }
 
-interface ComponentProps extends ViewProps {
+export interface SpinnerProps extends StyledComponentProps, ViewProps {
   animating?: boolean;
   size?: string;
   status?: string;
 }
 
-export type SpinnerProps = StyledComponentProps & ComponentProps;
 export type SpinnerElement = React.ReactElement<SpinnerProps>;
 
 /**

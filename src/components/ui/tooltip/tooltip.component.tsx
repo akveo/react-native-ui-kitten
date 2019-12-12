@@ -34,14 +34,13 @@ import { PopoverIndicator } from '../popover/popoverIndicator.component';
 type IconProp = (style: StyleType) => IconElement;
 type WrappingElement = React.ReactElement;
 
-interface ComponentProps extends Omit<PopoverProps, 'content'> {
+export interface TooltipProps extends StyledComponentProps, Omit<PopoverProps, 'content'> {
   text: string;
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
   children: WrappingElement;
 }
 
-export type TooltipProps = StyledComponentProps & ComponentProps;
 export type TooltipElement = React.ReactElement<TooltipProps>;
 
 /**

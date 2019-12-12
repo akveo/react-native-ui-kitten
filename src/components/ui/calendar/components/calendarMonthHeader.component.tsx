@@ -11,12 +11,11 @@ import {
   ViewProps,
 } from 'react-native';
 
-interface ComponentProps extends ViewProps {
+export interface CalendarMonthHeaderProps extends ViewProps {
   data: string[];
   children: (data: string, index: number) => React.ReactElement;
 }
 
-export type CalendarMonthHeaderProps = ComponentProps;
 export type CalendarMonthHeaderElement = React.ReactElement<CalendarMonthHeaderProps>;
 
 export class CalendarMonthHeader extends React.Component<CalendarMonthHeaderProps> {

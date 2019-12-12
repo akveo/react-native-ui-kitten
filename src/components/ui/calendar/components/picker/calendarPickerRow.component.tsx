@@ -13,12 +13,11 @@ import {
 import { CalendarPickerCellElement } from './calendarPickerCell.component';
 import { CalendarDateInfo } from '../../type';
 
-interface ComponentProps<D> extends ViewProps {
+export interface CalendarPickerRowProps<D> extends ViewProps {
   data: CalendarDateInfo<D>[];
   children: (item: CalendarDateInfo<D>, index: number) => CalendarPickerCellElement<D>;
 }
 
-export type CalendarPickerRowProps<D> = ComponentProps<D>;
 export type CalendarPickerRowElement<D> = React.ReactElement<CalendarPickerRowProps<D>>;
 
 export class CalendarPickerRow<D> extends React.Component<CalendarPickerRowProps<D>> {

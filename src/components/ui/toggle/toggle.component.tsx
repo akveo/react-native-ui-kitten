@@ -13,10 +13,12 @@ import {
   PanResponderCallbacks,
   PanResponderGestureState,
   PanResponderInstance,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
   TouchableOpacity,
+  TouchableOpacityProps,
   View,
   ViewProps,
 } from 'react-native';
@@ -31,9 +33,13 @@ import {
   TextElement,
 } from '../text/text.component';
 import { CheckMark } from '../support/components/checkmark.component';
-import { I18nLayoutService } from '../support/services';
+import {
+  I18nLayoutService,
+  WebEventResponder,
+  WebEventResponderInstance,
+} from '../support/services';
 
-interface ComponentProps {
+export interface ToggleProps extends StyledComponentProps, TouchableOpacityProps {
   checked?: boolean;
   disabled?: boolean;
   status?: string;
@@ -43,7 +49,6 @@ interface ComponentProps {
   onChange?: (checked: boolean) => void;
 }
 
-export type ToggleProps = StyledComponentProps & ViewProps & ComponentProps;
 export type ToggleElement = React.ReactElement<ToggleProps>;
 
 /**
@@ -86,6 +91,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   private thumbTranslateAnimation: Animated.Value;
   private ellipseScaleAnimation: Animated.Value;
   private thumbTranslateAnimationActive: boolean;
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   constructor(props: ToggleProps) {
     super(props);
@@ -99,6 +105,30 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
 
     this.panResponder = PanResponder.create(this);
   }
+
+  public onMouseEnter = (): void => {
+    if (!this.props.disabled) {
+      this.props.dispatch([Interaction.HOVER]);
+    }
+  };
+
+  public onMouseLeave = (): void => {
+    if (!this.props.disabled) {
+      this.props.dispatch([]);
+    }
+  };
+
+  public onFocus = (): void => {
+    if (!this.props.disabled) {
+      this.props.dispatch([Interaction.FOCUSED]);
+    }
+  };
+
+  public onBlur = (): void => {
+    if (!this.props.disabled) {
+      this.props.dispatch([]);
+    }
+  };
 
   // PanResponderCallbacks
 
@@ -323,7 +353,8 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         <TouchableOpacity
           activeOpacity={1.0}
           {...restProps}
-          style={[componentStyle.toggleContainer, styles.toggleContainer]}>
+          {...this.webEventResponder.eventHandlers}
+          style={[componentStyle.toggleContainer, webStyles.toggleContainer, styles.toggleContainer]}>
           <View style={[componentStyle.highlight, styles.highlight]}/>
           <Animated.View style={[componentStyle.ellipseContainer, styles.ellipseContainer]}>
             <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
@@ -364,6 +395,13 @@ const styles = StyleSheet.create({
   thumb: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  toggleContainer: {
+    // @ts-ignore
+    outlineWidth: 0,
   },
 });
 

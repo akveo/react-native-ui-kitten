@@ -25,17 +25,12 @@ import { BaseCalendarProps } from '../calendar/baseCalendar.component';
 import { NativeDateService } from '../calendar/service/nativeDate.service';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
-import { PopoverPlacements } from '@kitten/ui/popover/type';
+import { PopoverPlacements } from '../popover/type';
 
-const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
+export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
+  TouchableOpacityProps,
+  BaseCalendarProps<D> {
 
-type DatepickerChildren<D = Date> = [CalendarElement<D>, React.ReactElement];
-
-interface State {
-  visible: boolean;
-}
-
-export interface ComponentProps {
   controlStyle?: StyleProp<ViewStyle>;
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
   status?: string;
@@ -43,11 +38,13 @@ export interface ComponentProps {
   placeholder?: string;
 }
 
-export type BaseDatepickerProps<D = Date> =
-  StyledComponentProps
-  & TouchableOpacityProps
-  & BaseCalendarProps<D>
-  & ComponentProps;
+interface State {
+  visible: boolean;
+}
+
+type DatepickerChildren<D = Date> = [CalendarElement<D>, React.ReactElement];
+
+const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
 
 export abstract class BaseDatepickerComponent<P, D = Date> extends React.Component<BaseDatepickerProps<D> & P, State> {
 

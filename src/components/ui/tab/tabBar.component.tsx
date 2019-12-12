@@ -22,14 +22,13 @@ import { TabIndicator } from '../support/components/tabIndicator.component';
 
 type ChildrenProp = TabElement | TabElement[];
 
-interface ComponentProps {
+export interface TabBarProps extends StyledComponentProps, ViewProps {
   children: ChildrenProp;
   selectedIndex?: number;
   indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
 }
 
-export type TabBarProps = StyledComponentProps & ViewProps & ComponentProps;
 export type TabBarElement = React.ReactElement<TabBarProps>;
 
 /**

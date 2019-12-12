@@ -24,7 +24,7 @@ import { I18nLayoutService } from '../support/services';
 type ChildElement = React.ReactElement;
 type ChildrenProp = ChildElement | ChildElement[];
 
-interface ComponentProps {
+export interface ViewPagerProps extends ViewProps {
   children: ChildrenProp;
   selectedIndex?: number;
   shouldLoadComponent?: (index: number) => boolean;
@@ -32,7 +32,6 @@ interface ComponentProps {
   onSelect?: (index: number) => void;
 }
 
-export type ViewPagerProps = ViewProps & ComponentProps;
 export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 /**

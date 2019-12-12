@@ -19,7 +19,7 @@ import { CalendarDateInfo } from '../../type';
 
 type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
 
-interface ComponentProps<D> extends TouchableOpacityProps {
+export interface CalendarPickerCellProps<D> extends StyledComponentProps, TouchableOpacityProps {
   date: CalendarDateInfo<D>;
   selected?: boolean;
   bounding?: boolean;
@@ -32,7 +32,6 @@ interface ComponentProps<D> extends TouchableOpacityProps {
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
 }
 
-export type CalendarPickerCellProps<D> = StyledComponentProps & ComponentProps<D>;
 export type CalendarPickerCellElement<D> = React.ReactElement<CalendarPickerCellProps<D>>;
 
 class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellProps<D>> {

@@ -8,6 +8,7 @@ import React from 'react';
 import {
   GestureResponderEvent,
   Insets,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -26,9 +27,13 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
-import { isValidString } from '../support/services';
+import {
+  isValidString,
+  WebEventResponder,
+  WebEventResponderInstance,
+} from '../support/services';
 
-interface ComponentProps {
+export interface RadioProps extends StyledComponentProps, TouchableOpacityProps {
   textStyle?: StyleProp<TextStyle>;
   text?: string;
   checked?: boolean;
@@ -36,7 +41,6 @@ interface ComponentProps {
   onChange?: (selected: boolean) => void;
 }
 
-export type RadioProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type RadioElement = React.ReactElement<RadioProps>;
 
 /**
@@ -73,6 +77,24 @@ export type RadioElement = React.ReactElement<RadioProps>;
 export class RadioComponent extends React.Component<RadioProps> {
 
   static styledComponentName: string = 'Radio';
+
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
+  };
+
+  public onFocus = (): void => {
+    this.props.dispatch([Interaction.FOCUSED]);
+  };
+
+  public onBlur = (): void => {
+    this.props.dispatch([]);
+  };
 
   private onPress = (): void => {
     if (this.props.onChange) {
@@ -197,7 +219,8 @@ export class RadioComponent extends React.Component<RadioProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...derivedProps}
-        style={[container, styles.container, style]}
+        {...this.webEventResponder.eventHandlers}
+        style={[container, styles.container, webStyles.container, style]}
         disabled={disabled}
         hitSlop={hitSlopInsets}
         onPress={this.onPress}
@@ -234,5 +257,13 @@ const styles = StyleSheet.create({
   },
   text: {},
 });
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
+  },
+});
+
 
 export const Radio = styled<RadioProps>(RadioComponent);

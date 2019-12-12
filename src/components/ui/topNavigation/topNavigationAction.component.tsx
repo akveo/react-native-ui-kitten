@@ -9,6 +9,7 @@ import {
   GestureResponderEvent,
   ImageStyle,
   Insets,
+  Platform,
   StyleProp,
   StyleSheet,
   TouchableOpacity,
@@ -21,14 +22,18 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { IconElement } from '../icon/icon.component';
+import {
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
 
 type IconProp = (style: StyleType) => IconElement;
 
-interface ComponentProps {
+export interface TopNavigationActionProps extends StyledComponentProps, TouchableOpacityProps {
   icon: IconProp;
 }
 
-export type TopNavigationActionProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
 
 /**
@@ -48,9 +53,28 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @example TopNavigationActionInlineStyling
  */
-class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
+class TopNavigationActionComponent extends React.Component<TopNavigationActionProps>
+  implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'TopNavigationAction';
+
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
+  };
+
+  public onFocus = (): void => {
+    this.props.dispatch([Interaction.FOCUSED]);
+  };
+
+  public onBlur = (): void => {
+    this.props.dispatch([]);
+  };
 
   private onPress = (event: GestureResponderEvent): void => {
     if (this.props.onPress) {
@@ -130,7 +154,8 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
         activeOpacity={1.0}
         hitSlop={hitSlopInsets}
         {...touchableProps}
-        style={[componentStyle.container, styles.container, style]}
+        {...this.webEventResponder.eventHandlers}
+        style={[componentStyle.container, styles.container, webStyles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
@@ -143,6 +168,13 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
 const styles = StyleSheet.create({
   container: {},
   icon: {},
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
+  },
 });
 
 export const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);
