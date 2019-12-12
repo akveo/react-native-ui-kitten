@@ -7,6 +7,7 @@
 import React from 'react';
 import { StyleType } from '@kitten/theme';
 import {
+  AccessibilityProps,
   StyleSheet,
   View,
   ViewProps,
@@ -41,6 +42,7 @@ import {
   DateBatch,
 } from './service/calendarData.service';
 import { Divider } from '../divider/divider.component';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 export interface BaseCalendarProps<D = Date> extends ViewProps {
   min?: D;
@@ -528,8 +530,15 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     const { style, themedStyle, ...restProps } = this.props;
     const { container } = this.getCalendarStyle(themedStyle);
 
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'toolbar',
+      'Calendar',
+      {},
+    );
+
     return (
       <View
+        {...accessibilityProps}
         {...restProps}
         style={[styles.container, container, style]}>
         {this.renderCalendarHeader()}

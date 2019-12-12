@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  AccessibilityProps,
   GestureResponderEvent,
   ImageStyle,
   StyleProp,
@@ -26,6 +27,7 @@ import {
 } from '../text/text.component';
 import { IconElement } from '../icon/icon.component';
 import { isValidString } from '../support/services';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 type IconProp = (style: ImageStyle) => IconElement;
 
@@ -176,10 +178,16 @@ export class ButtonComponent extends React.Component<ButtonProps> {
     const { themedStyle, style, ...containerProps } = this.props;
     const { container, ...childStyles } = this.getComponentStyle(themedStyle);
     const [iconElement, textElement] = this.renderComponentChildren(childStyles);
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps<ButtonProps>(
+      'button',
+      ButtonComponent.styledComponentName,
+      containerProps,
+    );
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
+        {...accessibilityProps}
         {...containerProps}
         style={[container, styles.container, style]}
         onPress={this.onPress}

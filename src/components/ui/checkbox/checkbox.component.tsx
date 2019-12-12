@@ -16,6 +16,7 @@ import {
   TouchableOpacityProps,
   View,
   ViewStyle,
+  AccessibilityProps,
 } from 'react-native';
 import {
   Interaction,
@@ -38,6 +39,7 @@ import {
   MinusProps,
 } from '../support/components/minus.component';
 import { isValidString } from '../support/services';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 interface ComponentProps {
   textStyle?: StyleProp<TextStyle>;
@@ -200,7 +202,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, disabled, text, ...derivedProps } = this.props;
+    const { themedStyle, style, disabled, text, ...restProps } = this.props;
 
     const {
       container,
@@ -214,11 +216,17 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
     const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
 
     const [iconElement, textElement] = this.renderComponentChildren(componentStyle);
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'checkbox',
+      CheckBoxComponent.styledComponentName,
+      { disabled, ...restProps },
+    );
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        {...derivedProps}
+        {...accessibilityProps}
+        {...restProps}
         style={[container, styles.container, style]}
         disabled={disabled}
         hitSlop={hitSlopInsets}

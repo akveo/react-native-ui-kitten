@@ -10,6 +10,7 @@ import {
   View,
   ViewProps,
   ViewStyle,
+  AccessibilityProps,
 } from 'react-native';
 import {
   styled,
@@ -17,6 +18,7 @@ import {
   StyleType,
 } from '@kitten/theme';
 import { ButtonElement } from '../button/button.component';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 type ChildrenProp = ButtonElement | ButtonElement[];
 
@@ -132,8 +134,15 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 
     const buttonElements: ButtonElement[] = this.renderButtonElements(children, componentStyle);
 
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'toolbar',
+      ButtonGroupComponent.styledComponentName,
+      {},
+    );
+
     return (
       <View
+        {...accessibilityProps}
         {...derivedProps}
         style={[componentStyle.container, styles.container, style]}>
         {buttonElements}

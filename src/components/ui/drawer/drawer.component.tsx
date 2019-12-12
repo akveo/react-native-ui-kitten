@@ -1,4 +1,5 @@
 import React from 'react';
+import { AccessibilityProps } from 'react-native';
 import {
   styled,
   StyledComponentProps,
@@ -9,6 +10,7 @@ import {
   MenuProps,
 } from '../menu/menu.component';
 import { MenuItemType } from '../menu/menuItem.component';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 export type DrawerHeaderElement = React.ReactElement;
 export type DrawerFooterElement = React.ReactElement;
@@ -142,9 +144,13 @@ class DrawerComponent extends React.Component<DrawerProps> {
 
   public render(): React.ReactFragment {
     const [header, menu, footer] = this.renderComponentChildren();
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'none',
+      DrawerComponent.styledComponentName,
+    );
 
     return (
-      <React.Fragment>
+      <React.Fragment {...accessibilityProps}>
         {header}
         {menu}
         {footer}

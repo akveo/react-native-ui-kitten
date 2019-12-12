@@ -13,6 +13,7 @@ import {
   ViewStyle,
   TouchableOpacity,
   TouchableOpacityProps,
+  AccessibilityProps,
 } from 'react-native';
 import {
   styled,
@@ -25,6 +26,7 @@ import {
 } from '../divider/divider.component';
 import { CardHeaderElement } from './cardHeader.component';
 import { allWithPrefix } from '../support/services';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 interface HeaderStyles {
   style: StyleProp<ViewStyle>;
@@ -192,10 +194,15 @@ class CardComponent extends React.Component<CardProps> {
     const { themedStyle, style, children, ...restProps } = this.props;
     const { container, ...childrenStyles } = this.getComponentStyle(themedStyle);
     const [header, body, footer] = this.renderComponentChildren(childrenStyles);
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'none',
+      CardComponent.styledComponentName,
+    );
 
     return (
       <TouchableOpacity
         activeOpacity={1.0}
+        {...accessibilityProps}
         {...restProps}
         style={[container, styles.container, style]}>
         {header}

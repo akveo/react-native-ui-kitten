@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  AccessibilityProps,
   Image,
   ImageProps,
   ImageStyle,
@@ -16,6 +17,7 @@ import {
   StyledComponentProps,
   StyleType,
 } from '@kitten/theme';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 interface ComponentProps {
   shape?: string;
@@ -75,9 +77,16 @@ export class AvatarComponent extends React.Component<AvatarProps> {
   public render(): React.ReactElement<ImageProps> {
     const { themedStyle, ...restProps } = this.props;
     const componentStyle: ImageStyle = this.getComponentStyle(themedStyle);
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'image',
+      AvatarComponent.styledComponentName,
+      {},
+      { accessibilityIgnoresInvertColors: false },
+    );
 
     return (
       <Image
+        {...accessibilityProps}
         {...restProps}
         style={componentStyle}
       />

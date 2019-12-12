@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AccessibilityProps,
   Animated,
   StyleProp,
   ViewProps,
@@ -15,6 +16,9 @@ import {
   RegisteredIcon,
 } from './service/iconRegistry.service';
 import { AnimationConfig } from '../animation';
+import { getDefaultAccessibilityProps } from '@kitten/accessibility/accessibility.service';
+
+const ACCESSIBILITY_ROLE: string = 'icon';
 
 interface ComponentProps {
   name: string;
@@ -95,9 +99,17 @@ export class Icon<T> extends React.Component<IconProps<T>> {
   public render(): React.ReactElement<ViewProps> {
     const { name, pack, ...restProps } = this.props;
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'image',
+      ACCESSIBILITY_ROLE,
+      {},
+      { accessibilityIgnoresInvertColors: false },
+    );
 
     return (
-      <Animated.View {...this.getComponentStyle()}>
+      <Animated.View
+        {...accessibilityProps}
+        {...this.getComponentStyle()}>
         {registeredIcon.icon.toReactElement(restProps as T)}
       </Animated.View>
     );

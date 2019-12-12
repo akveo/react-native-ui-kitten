@@ -11,6 +11,7 @@ import {
   View,
   ViewProps,
   ViewStyle,
+  AccessibilityProps,
 } from 'react-native';
 import {
   styled,
@@ -22,6 +23,7 @@ import {
   TabIndicator,
   TabIndicatorElement,
 } from '../support/components/tabIndicator.component';
+import { getDefaultAccessibilityProps } from '../../accessibility/accessibility.service';
 
 type ChildrenProp = BottomNavigationTabElement | BottomNavigationTabElement[];
 
@@ -187,8 +189,15 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
 
     const [indicatorElement, ...tabElements] = this.renderComponentChildren(componentStyles);
 
+    const accessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'tablist',
+      BottomNavigationComponent.styledComponentName,
+      {},
+    );
+
     return (
       <View
+        {...accessibilityProps}
         {...derivedProps}
         style={[container, styles.container, style]}>
         {indicatorElement}

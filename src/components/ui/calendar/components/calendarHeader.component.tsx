@@ -6,6 +6,7 @@ import {
   TextStyle,
   View,
   ViewProps,
+  AccessibilityProps,
 } from 'react-native';
 import { Button } from '../../button/button.component';
 import {
@@ -23,6 +24,9 @@ import {
   ChevronRightElement,
   ChevronRightProps,
 } from '../../support/components/chevronRight.component';
+import { getDefaultAccessibilityProps } from '../../../accessibility/accessibility.service';
+
+const COMPONENT_ACCESSIBILITY_LABEL: string = 'Change Calendar View';
 
 interface ComponentProps extends ViewProps {
   title: string;
@@ -98,10 +102,15 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   public render(): React.ReactElement<ViewProps> {
     const { style, titleStyle, onTitlePress, title, lateralNavigationAllowed, ...restProps } = this.props;
+    const viewSwitcherAccessibilityProps: AccessibilityProps = getDefaultAccessibilityProps(
+      'button',
+      COMPONENT_ACCESSIBILITY_LABEL,
+    );
 
     return (
       <View style={[styles.container, style]} {...restProps}>
         <Button
+          {...viewSwitcherAccessibilityProps}
           style={styles.headerButton}
           appearance='ghost'
           textStyle={[titleStyle, styles.headerButtonText]}
