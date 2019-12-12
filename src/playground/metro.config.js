@@ -29,6 +29,7 @@ const moduleDependencies = [
 
   // external
   path.resolve(__dirname, '../../node_modules/react-is'),
+  path.resolve(__dirname, '../../node_modules/source-map'),
 ];
 
 const playgroundExtraModules = {

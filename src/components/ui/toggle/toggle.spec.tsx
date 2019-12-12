@@ -19,8 +19,8 @@ import {
   theme,
 } from '../support/tests';
 
-jest.mock('Animated', (): unknown => {
-  const AnimatedModule = jest.requireActual('Animated');
+jest.mock('react-native/Libraries/Animated/src/Animated', (): unknown => {
+  const AnimatedModule = jest.requireActual('react-native/Libraries/Animated/src/Animated');
   return {
     ...AnimatedModule,
     timing: (value, config) => {
