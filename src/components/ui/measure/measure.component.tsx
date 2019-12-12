@@ -20,12 +20,13 @@ export interface MeasureElementProps<P = any> {
 
 /**
  * Measures child element size and it's screen position asynchronously.
- * Returns measure result in `onResult` callback.
+ * Returns measure result in `onMeasure` callback.
  *
  * Usage:
  *
- * const onMeasure = (element: ElementToMeasure): void => {
- *   const { x, y, width, height } = element.props.frame;
+ * const onMeasure = (frame: Frame): void => {
+ *   const { x, y } = frame.origin;
+ *   const { width, height } = frame.size;
  *   ...
  * };
  *
