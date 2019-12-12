@@ -7,8 +7,10 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "jsx": "react-native",
-    "target": "es2015",
+    "jsx": "react",
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
+    "module": "esnext",
     "declaration": true,
     "skipLibCheck": true,
     "paths": {
