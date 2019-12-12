@@ -13,6 +13,7 @@ import {
   View,
   ViewProps,
 } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 import { Button } from '../../button/button.component';
 import {
   ChevronDown,
@@ -29,8 +30,7 @@ import {
   ChevronRightElement,
   ChevronRightProps,
 } from '../../support/components/chevronRight.component';
-import { I18nLayoutService } from '@kitten/ui/support/services';
-import { SvgProps } from 'react-native-svg';
+import { I18nLayoutService } from '../../support/services';
 
 interface ComponentProps extends ViewProps {
   title: string;
