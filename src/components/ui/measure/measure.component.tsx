@@ -37,8 +37,6 @@ export const MeasureElement = (props: MeasureElementProps): MeasuringElement => 
 
   const ref: React.RefObject<any> = React.useRef();
 
-  let pending: boolean = true;
-
   const bindToWindow = (frame: Frame, window: Frame): Frame => {
     if (frame.origin.x < window.size.width) {
       return frame;
