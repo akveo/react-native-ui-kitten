@@ -39,12 +39,12 @@ export const ShowcaseContainer = (props: ShowcaseContainerProps): React.ReactEle
     setShowcaseSettings({});
   };
 
-  const { showcase, settings, renderItem, children, onBackPress, style, ...layoutProps } = props;
+  const { showcase, settings, renderItem, children, onBackPress, ...layoutProps } = props;
 
   return (
     <SafeAreaLayout
       insets={SaveAreaInset.TOP}
-      style={[styles.container, style]}>
+      style={styles.container}>
       <Toolbar
         title={showcase.title}
         onBackPress={onBackPress}
@@ -58,6 +58,7 @@ export const ShowcaseContainer = (props: ShowcaseContainerProps): React.ReactEle
       />
       {children}
       <Showcase
+        {...layoutProps}
         showcase={showcase}
         renderItem={renderItem}
         settings={showcaseSettings}

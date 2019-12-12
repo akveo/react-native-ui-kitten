@@ -15,7 +15,7 @@ export const TooltipSimpleUsageShowcase = () => {
   return (
     <Tooltip
       visible={visible}
-      text={'Hi! I\'m a Tooltip'}
+      text='Hi!'
       onBackdropPress={toggleTooltip}>
       <Button onPress={toggleTooltip}>
         TOGGLE TOOLTIP

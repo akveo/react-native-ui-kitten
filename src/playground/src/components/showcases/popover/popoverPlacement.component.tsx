@@ -28,7 +28,7 @@ const PLACEMENTS = [
 
 const PopoverContent = () => (
   <Layout style={styles.popoverContent}>
-    <Text>Hi! This is popover.</Text>
+    <Text>Hi!</Text>
   </Layout>
 );
 

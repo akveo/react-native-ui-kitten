@@ -9,11 +9,11 @@ import {
 
 const PopoverContent = () => (
   <Layout style={styles.popoverContent}>
-    <Text>Hi! This is popover.</Text>
+    <Text>Hi!</Text>
   </Layout>
 );
 
-export const PopoverSimpleUsageShowcase = () => {
+export const PopoverFullWidthShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
@@ -38,6 +38,5 @@ const styles = StyleSheet.create({
   popoverContent: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 24,
   },
 });

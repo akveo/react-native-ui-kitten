@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { RangeCalendarProps } from '@ui-kitten/components';
 import { ShowcaseContainer } from '@pg/components/showcaseContainer.component';
 import { RangeCalendarShowcase } from './rangeCalendarShowcase.component';
@@ -7,11 +6,8 @@ import { calendarShowcase } from './type';
 
 export const RangeCalendarScreen = ({ navigation }): React.ReactElement => {
 
-  const renderItem = (props: RangeCalendarProps<Date>): React.ReactElement<RangeCalendarProps<Date>> => (
-    <RangeCalendarShowcase
-      style={styles.rangeCalendar}
-      {...props}
-    />
+  const renderItem = (props: RangeCalendarProps): React.ReactElement<RangeCalendarProps> => (
+    <RangeCalendarShowcase {...props} />
   );
 
   return (
@@ -22,9 +18,3 @@ export const RangeCalendarScreen = ({ navigation }): React.ReactElement => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  rangeCalendar: {
-    flex: 1,
-  },
-});

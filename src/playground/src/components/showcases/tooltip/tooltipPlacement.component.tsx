@@ -48,7 +48,7 @@ export const TooltipPlacementShowcase = () => {
         <Tooltip
           visible={visible}
           placement={placement.text}
-          text='Hi! This is tooltip.'
+          text='Hi!'
           onBackdropPress={toggleTooltip}>
           <Button style={styles.button} onPress={toggleTooltip}>
             TOGGLE TOOLTIP
