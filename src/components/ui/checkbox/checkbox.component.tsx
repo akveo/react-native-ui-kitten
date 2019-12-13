@@ -9,6 +9,7 @@ import { SvgProps } from 'react-native-svg';
 import {
   GestureResponderEvent,
   Insets,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -37,9 +38,14 @@ import {
   MinusElement,
   MinusProps,
 } from '../support/components/minus.component';
-import { isValidString } from '../support/services';
+import {
+  isValidString,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
 
-interface ComponentProps {
+export interface CheckBoxProps extends StyledComponentProps, TouchableOpacityProps {
   textStyle?: StyleProp<TextStyle>;
   text?: string;
   checked?: boolean;
@@ -48,7 +54,6 @@ interface ComponentProps {
   onChange?: (checked: boolean, indeterminate: boolean) => void;
 }
 
-export type CheckBoxProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 
 type IconElement = CheckMarkElement | MinusElement;
@@ -86,9 +91,29 @@ type IconElement = CheckMarkElement | MinusElement;
  *
  * @example CheckboxInlineStyling
  */
-class CheckBoxComponent extends React.Component<CheckBoxProps> {
+class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'CheckBox';
+
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
+  // WebEventResponderCallbacks
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
+  };
+
+  public onFocus = (): void => {
+    this.props.dispatch([Interaction.FOCUSED]);
+  };
+
+  public onBlur = (): void => {
+    this.props.dispatch([]);
+  };
 
   private onPress = (): void => {
     this.props.dispatch([]);
@@ -219,7 +244,8 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...derivedProps}
-        style={[container, styles.container, style]}
+        {...this.webEventResponder.eventHandlers}
+        style={[container, styles.container, webStyles.container, style]}
         disabled={disabled}
         hitSlop={hitSlopInsets}
         onPress={this.onPress}
@@ -255,6 +281,13 @@ const styles = StyleSheet.create({
   },
   icon: {},
   text: {},
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
+  },
 });
 
 export const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);

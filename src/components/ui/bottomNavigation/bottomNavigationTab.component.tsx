@@ -7,6 +7,7 @@
 import React from 'react';
 import {
   ImageStyle,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -14,6 +15,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import {
+  Interaction,
   styled,
   StyledComponentProps,
   StyleType,
@@ -23,11 +25,16 @@ import {
   TextElement,
 } from '../text/text.component';
 import { IconElement } from '../icon/icon.component';
-import { isValidString } from '../support/services';
+import {
+  isValidString,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
 
 type IconProp = (style: ImageStyle) => IconElement;
 
-interface ComponentProps {
+export interface BottomNavigationTabProps extends StyledComponentProps, TouchableOpacityProps {
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
@@ -35,7 +42,6 @@ interface ComponentProps {
   onSelect?: (selected: boolean) => void;
 }
 
-export type BottomNavigationTabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabProps>;
 
 /**
@@ -63,9 +69,22 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @example BottomNavigationTabInlineStyling
  */
-export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
+export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps>
+  implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'BottomNavigationTab';
+
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
+  // WebEventResponderCallbacks
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
+  };
 
   private onPress = (): void => {
     if (this.props.onSelect) {
@@ -146,7 +165,8 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
       <TouchableOpacity
         activeOpacity={1.0}
         {...restProps}
-        style={[container, styles.container, style]}
+        {...this.webEventResponder.eventHandlers}
+        style={[container, styles.container, webStyles.container, style]}
         onPress={this.onPress}>
         {iconElement}
         {titleElement}
@@ -162,6 +182,13 @@ const styles = StyleSheet.create({
   },
   text: {},
   icon: {},
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
+  },
 });
 
 export const BottomNavigationTab = styled<BottomNavigationTabProps>(BottomNavigationTabComponent);

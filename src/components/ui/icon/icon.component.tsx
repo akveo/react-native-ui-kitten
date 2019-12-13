@@ -16,17 +16,17 @@ import {
 } from './service/iconRegistry.service';
 import { AnimationConfig } from '../animation';
 
-interface ComponentProps {
+// This is basically needed to avoid generics in required props
+// In general, could be SVGProps if using @ui-kitten/eva-icons or ImageProps if using Image.
+type WrappedElementProps = any;
+
+export type IconProps<T = WrappedElementProps> = T & {
   name: string;
   pack?: string;
   animation?: keyof IconAnimationRegistry;
   animationConfig?: AnimationConfig;
-}
+};
 
-// This is basically needed to avoid generics in required props
-// In general, could be SVGProps if using @ui-kitten/eva-icons or ImageProps if using Image.
-type WrappedElementProps = any;
-export type IconProps<T = WrappedElementProps> = ComponentProps & T;
 export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<T>>;
 
 /**

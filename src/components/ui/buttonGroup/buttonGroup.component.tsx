@@ -20,13 +20,12 @@ import { ButtonElement } from '../button/button.component';
 
 type ChildrenProp = ButtonElement | ButtonElement[];
 
-interface ComponentProps {
+export interface ButtonGroupProps extends StyledComponentProps, ViewProps {
   size?: string;
   status?: string;
   children: ChildrenProp;
 }
 
-export type ButtonGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
 
 /**

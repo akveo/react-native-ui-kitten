@@ -18,12 +18,11 @@ import { DateBatch } from './service/calendarData.service';
 import { RangeDateService } from './service/rangeDate.service';
 import { CalendarRange } from './type';
 
-interface ComponentProps<D = Date> {
+export interface RangeCalendarProps<D = Date> extends StyledComponentProps, BaseCalendarProps<D> {
   range: CalendarRange<D>;
   onSelect: (range: CalendarRange<D>) => void;
 }
 
-export type RangeCalendarProps<D = Date> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
 export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarProps<D>>;
 
 /**

@@ -13,12 +13,11 @@ import { MenuItemType } from '../menu/menuItem.component';
 export type DrawerHeaderElement = React.ReactElement;
 export type DrawerFooterElement = React.ReactElement;
 
-interface ComponentProps {
+export interface DrawerProps extends StyledComponentProps, MenuProps {
   header?: () => DrawerHeaderElement;
   footer?: () => DrawerFooterElement;
 }
 
-export type DrawerProps = StyledComponentProps & ComponentProps & MenuProps;
 export type DrawerElement = React.ReactElement<DrawerProps>;
 
 /**

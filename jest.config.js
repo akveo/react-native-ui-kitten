@@ -10,6 +10,8 @@ module.exports = {
   ],
   modulePathIgnorePatterns: [
     '<rootDir>/src/playground/',
+    '<rootDir>/src/template-js/',
+    '<rootDir>/src/template-ts/',
   ],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules',

@@ -8,6 +8,7 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageStyle,
+  Platform,
   StyleProp,
   StyleSheet,
   TextInput,
@@ -33,6 +34,9 @@ import { IconElement } from '../icon/icon.component';
 import {
   allWithRest,
   isValidString,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
 } from '../support/services';
 import {
   FlexStyleProps,
@@ -41,7 +45,7 @@ import {
 
 type IconProp = (style: StyleType) => IconElement;
 
-interface ComponentProps {
+export interface InputProps extends StyledComponentProps, TextInputProps {
   status?: string;
   size?: string;
   disabled?: boolean;
@@ -55,7 +59,6 @@ interface ComponentProps {
   onIconPress?: (event: GestureResponderEvent) => void;
 }
 
-export type InputProps = StyledComponentProps & TextInputProps & ComponentProps;
 export type InputElement = React.ReactElement<InputProps>;
 
 /**
@@ -119,11 +122,12 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @example InputWithExternalSourceIcon
  */
-export class InputComponent extends React.Component<InputProps> {
+export class InputComponent extends React.Component<InputProps> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'Input';
 
   private textInputRef: React.RefObject<TextInput> = React.createRef();
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public focus = (): void => {
     this.textInputRef.current.focus();
@@ -139,6 +143,16 @@ export class InputComponent extends React.Component<InputProps> {
 
   public clear = (): void => {
     this.textInputRef.current.clear();
+  };
+
+  // WebEventResponderCallbacks
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
   };
 
   private onTextFieldFocus = (event: InputFocusEvent): void => {
@@ -323,7 +337,8 @@ export class InputComponent extends React.Component<InputProps> {
           <TextInput
             ref={this.textInputRef}
             {...restProps}
-            style={[componentStyle.text, styles.text, textStyle]}
+            {...this.webEventResponder.eventHandlers}
+            style={[componentStyle.text, styles.text, webStyles.text, textStyle]}
             placeholderTextColor={componentStyle.placeholder.color}
             editable={!restProps.disabled}
             onFocus={this.onTextFieldFocus}
@@ -364,6 +379,13 @@ const styles = StyleSheet.create({
   captionIcon: {},
   captionLabel: {
     textAlign: 'left',
+  },
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  text: {
+    // @ts-ignore
+    outlineWidth: 0,
   },
 });
 

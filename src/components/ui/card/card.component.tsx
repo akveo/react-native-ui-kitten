@@ -37,7 +37,7 @@ type HeaderProp = React.ReactElement | CardHeaderElement;
 type FooterProp = React.ReactElement;
 export type CardFooterElement = FooterProp;
 
-interface ComponentProps {
+export interface CardProps extends StyledComponentProps, TouchableOpacityProps {
   appearance?: string;
   status?: string;
   children: React.ReactNode;
@@ -45,7 +45,6 @@ interface ComponentProps {
   footer?: () => FooterProp;
 }
 
-export type CardProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type CardElement = React.ReactElement<CardProps>;
 
 /**

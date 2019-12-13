@@ -16,12 +16,11 @@ import {
 import { CalendarPickerCellProps } from './components/picker/calendarPickerCell.component';
 import { DateBatch } from './service/calendarData.service';
 
-interface ComponentProps<D = Date> {
+export interface CalendarProps<D = Date> extends StyledComponentProps, BaseCalendarProps<D> {
   date?: D;
   onSelect: (date: D) => void;
 }
 
-export type CalendarProps<D = Date> = ComponentProps<D> & BaseCalendarProps<D> & StyledComponentProps;
 export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
 
 /**

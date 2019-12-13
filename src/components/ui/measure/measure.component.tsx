@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import { Frame } from './type';
 
-export type MeasuringElement<P = any> = React.ReactElement;
-
 export interface MeasureElementProps<P = any> {
   onMeasure: (frame: Frame) => void;
   children: React.ReactElement<P>;
 }
+
+export type MeasuringElement<P = any> = React.ReactElement;
 
 /**
  * Measures child element size and it's screen position asynchronously.

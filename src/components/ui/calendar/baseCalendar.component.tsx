@@ -52,12 +52,12 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   themedStyle?: StyleType;
 }
 
+export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
+
 interface State<D> {
   viewMode: CalendarViewMode;
   visibleDate: D;
 }
-
-export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
 
 const PICKER_ROWS: number = 4;
 const PICKER_COLUMNS: number = 3;

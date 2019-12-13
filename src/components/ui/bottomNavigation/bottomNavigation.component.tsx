@@ -25,14 +25,13 @@ import {
 
 type ChildrenProp = BottomNavigationTabElement | BottomNavigationTabElement[];
 
-interface ComponentProps {
+export interface BottomNavigationProps extends StyledComponentProps, ViewProps {
   children: ChildrenProp;
   selectedIndex?: number;
   indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
 }
 
-export type BottomNavigationProps = StyledComponentProps & ViewProps & ComponentProps;
 export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
 
 /**

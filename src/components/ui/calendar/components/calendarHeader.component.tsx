@@ -32,7 +32,7 @@ import {
 } from '../../support/components/chevronRight.component';
 import { I18nLayoutService } from '../../support/services';
 
-interface ComponentProps extends ViewProps {
+export interface CalendarHeaderProps extends ViewProps {
   title: string;
   titleStyle?: StyleProp<TextStyle>;
   iconStyle?: ImageStyle;
@@ -42,7 +42,6 @@ interface ComponentProps extends ViewProps {
   onNavigationRightPress?: () => void;
 }
 
-export type CalendarHeaderProps = ComponentProps;
 export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
 
 export class CalendarHeader extends React.Component<CalendarHeaderProps> {

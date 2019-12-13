@@ -14,12 +14,11 @@ import {
   StyledComponentProps,
 } from '@kitten/theme';
 
-interface ComponentProps {
+export interface LayoutProps extends StyledComponentProps, ViewProps {
   level?: string;
   children?: React.ReactNode;
 }
 
-export type LayoutProps = StyledComponentProps & ViewProps & ComponentProps;
 export type LayoutElement = React.ReactElement<LayoutProps>;
 
 /**

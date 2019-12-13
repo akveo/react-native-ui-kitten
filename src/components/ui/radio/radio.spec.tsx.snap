@@ -54,6 +54,10 @@ exports[`@radio: matches snapshot default 1`] = `
       "top": 16,
     }
   }
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
@@ -65,6 +69,7 @@ exports[`@radio: matches snapshot default 1`] = `
         "alignItems": "center",
         "flexDirection": "row",
       },
+      undefined,
       undefined,
     ]
   }

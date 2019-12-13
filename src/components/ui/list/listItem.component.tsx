@@ -9,6 +9,7 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageStyle,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -288,7 +289,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...derivedProps}
-        style={[container, styles.container, style]}
+        style={[container, styles.container, webStyles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
@@ -315,6 +316,13 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   accessory: {},
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
+  },
 });
 
 export const ListItem = styled<ListItemProps>(ListItemComponent);

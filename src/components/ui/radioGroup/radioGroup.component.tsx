@@ -19,13 +19,12 @@ import { RadioElement } from '../radio/radio.component';
 
 type ChildrenProp = RadioElement | RadioElement[];
 
-interface ComponentProps {
+export interface RadioGroupProps extends StyledComponentProps, ViewProps {
   children: ChildrenProp;
   selectedIndex?: number;
   onChange?: (index: number) => void;
 }
 
-export type RadioGroupProps = StyledComponentProps & ViewProps & ComponentProps;
 export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
 
 /**

@@ -9,6 +9,7 @@ import {
   Animated,
   GestureResponderEvent,
   ImageStyle,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -46,6 +47,8 @@ import { Popover } from '../popover/popover.component';
 import {
   allWithPrefix,
   isValidString,
+  WebEventResponder,
+  WebEventResponderInstance,
 } from '../support/services';
 import {
   ChevronDown,
@@ -60,7 +63,7 @@ type SelectChildren = [SelectOptionsListElement, TextElement, ControlElement];
 export type SelectOption = SelectOptionType[] | SelectOptionType;
 export type KeyExtractorType = (item: SelectOptionType) => string;
 
-interface ComponentProps {
+export interface SelectProps extends StyledComponentProps, TouchableOpacityProps {
   data: SelectOptionType[];
   multiSelect?: boolean;
   selectedOption?: SelectOption;
@@ -77,7 +80,6 @@ interface ComponentProps {
   keyExtractor?: KeyExtractorType;
 }
 
-export type SelectProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
@@ -167,6 +169,8 @@ class SelectComponent extends React.Component<SelectProps, State> {
     visible: false,
   };
 
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
   private selectionStrategy: SelectionStrategy<SelectOption>;
   private iconAnimation: Animated.Value = new Animated.Value(0);
 
@@ -178,6 +182,26 @@ class SelectComponent extends React.Component<SelectProps, State> {
       new MultiSelectStrategy(selectedOption, data, keyExtractor) :
       new SingleSelectStrategy(selectedOption, data, keyExtractor);
   }
+
+  public onMouseEnter = (): void => {
+    if (!this.state.visible) {
+      this.props.dispatch([Interaction.HOVER]);
+    }
+  };
+
+  public onMouseLeave = (): void => {
+    if (!this.state.visible) {
+      this.props.dispatch([]);
+    }
+  };
+
+  public onFocus = (): void => {
+    this.props.dispatch([Interaction.FOCUSED]);
+  };
+
+  public onBlur = (): void => {
+    this.props.dispatch([]);
+  };
 
   private onPress = (event: GestureResponderEvent): void => {
     this.setVisibility();
@@ -383,9 +407,10 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
     return (
       <TouchableOpacity
-        {...restProps}
         activeOpacity={1.0}
-        style={[styles.control, style.control, controlStyle]}
+        {...restProps}
+        {...this.webEventResponder.eventHandlers}
+        style={[styles.control, style.control, webStyles.control, controlStyle]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
@@ -439,6 +464,13 @@ const styles = StyleSheet.create({
   },
   popover: {
     overflow: 'hidden',
+  },
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  control: {
+    // @ts-ignore
+    outlineWidth: 0,
   },
 });
 

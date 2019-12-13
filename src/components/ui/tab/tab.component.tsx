@@ -8,6 +8,7 @@ import React from 'react';
 import {
   ImageProps,
   ImageStyle,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -15,6 +16,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import {
+  Interaction,
   styled,
   StyledComponentProps,
   StyleType,
@@ -24,12 +26,17 @@ import {
   TextElement,
 } from '../text/text.component';
 import { IconElement } from '../icon/icon.component';
-import { isValidString } from '../support/services';
+import {
+  isValidString,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
 
 type IconProp = (style: ImageStyle) => IconElement;
 type ContentElement = React.ReactElement;
 
-interface ComponentProps {
+export interface TabProps extends StyledComponentProps, TouchableOpacityProps {
   title?: string;
   titleStyle?: StyleProp<TextStyle>;
   icon?: IconProp;
@@ -38,7 +45,6 @@ interface ComponentProps {
   children?: ContentElement;
 }
 
-export type TabProps = StyledComponentProps & TouchableOpacityProps & ComponentProps;
 export type TabElement = React.ReactElement<TabProps>;
 
 /**
@@ -70,12 +76,22 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @example TabInlineStyling
  */
-export class TabComponent extends React.Component<TabProps> {
+export class TabComponent extends React.Component<TabProps> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'Tab';
 
   static defaultProps: Partial<TabProps> = {
     selected: false,
+  };
+
+  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+
+  public onMouseEnter = (): void => {
+    this.props.dispatch([Interaction.HOVER]);
+  };
+
+  public onMouseLeave = (): void => {
+    this.props.dispatch([]);
   };
 
   private onPress = (): void => {
@@ -158,7 +174,8 @@ export class TabComponent extends React.Component<TabProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...derivedProps}
-        style={[container, styles.container, style]}
+        {...this.webEventResponder.eventHandlers}
+        style={[container, styles.container, webStyles.container, style]}
         onPress={this.onPress}>
         {iconElement}
         {titleElement}
@@ -174,6 +191,13 @@ const styles = StyleSheet.create({
   },
   icon: {},
   title: {},
+});
+
+const webStyles = Platform.OS === 'web' && StyleSheet.create({
+  container: {
+    // @ts-ignore
+    outlineWidth: 0,
+  },
 });
 
 export const Tab = styled<TabProps>(TabComponent);
