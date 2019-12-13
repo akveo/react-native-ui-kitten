@@ -1,3 +1,10 @@
+## <small>4.3.2 (2019-12-13)</small>
+
+* fix(components): resolve bundling on the web ([2ca7cd0](https://github.com/akveo/react-native-ui-kitten/commit/2ca7cd0))
+* fix(components): calendar and modal performance ([85bb1df](https://github.com/akveo/react-native-ui-kitten/commit/85bb1df))
+
+
+
 ## <small>4.3.1 (2019-12-04)</small>
 
 * fix: typescript build issues ([980414b](https://github.com/akveo/react-native-ui-kitten/commit/980414b))
