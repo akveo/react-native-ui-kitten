@@ -1,52 +1,66 @@
 ## <small>4.3.2 (2019-12-13)</small>
 
-* fix(components): resolve bundling on the web ([2ca7cd0](https://github.com/akveo/react-native-ui-kitten/commit/2ca7cd0))
-* fix(components): calendar and modal performance ([85bb1df](https://github.com/akveo/react-native-ui-kitten/commit/85bb1df))
+### :star: Highlights
 
+Resolve webpack and calendar performance issues [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-565398953)
+
+### :bug: Bug Fixes
+
+* **Web**: resolve webpack build issues ([#763](https://github.com/akveo/react-native-ui-kitten/issues/763), [#729](https://github.com/akveo/react-native-ui-kitten/issues/729), [#792](https://github.com/akveo/react-native-ui-kitten/issues/792)) ([2ca7cd0](https://github.com/akveo/react-native-ui-kitten/commit/2ca7cd0))
+* **Datepicker**: performance issue ([#641](https://github.com/akveo/react-native-ui-kitten/issues/641)) ([85bb1df](https://github.com/akveo/react-native-ui-kitten/commit/85bb1df))
+* **Calendar**: navigation buttons in RTL mode ([#739](https://github.com/akveo/react-native-ui-kitten/issues/739)) ([85bb1df](https://github.com/akveo/react-native-ui-kitten/commit/85bb1df))
 
 
 ## <small>4.3.1 (2019-12-04)</small>
 
-* fix: typescript build issues ([980414b](https://github.com/akveo/react-native-ui-kitten/commit/980414b))
-
+This is a patch release to update incorrectly built packages ([#757](https://github.com/akveo/react-native-ui-kitten/issues/757))
 
 
 ## 4.3.0 (2019-12-04)
 
-* chore: rename main package to @ui-kitten/components ([b6cf0b9](https://github.com/akveo/react-native-ui-kitten/commit/b6cf0b9))
-* chore: upgrade templates to latest react-native ([3759572](https://github.com/akveo/react-native-ui-kitten/commit/3759572))
-* fix(components): calendar - date bounds disabling behavior ([61e4806](https://github.com/akveo/react-native-ui-kitten/commit/61e4806))
-* fix(components): calendar - replace UTC dates with regular dates ([700a902](https://github.com/akveo/react-native-ui-kitten/commit/700a902))
-* fix(components): list - add ability to override keyExtractor ([d5ee185](https://github.com/akveo/react-native-ui-kitten/commit/d5ee185))
-* fix(components): modal center positioning ([301e3f4](https://github.com/akveo/react-native-ui-kitten/commit/301e3f4))
-* feat(components): card component add ([f6c5899](https://github.com/akveo/react-native-ui-kitten/commit/f6c5899))
-* feat(components): datepicker - add placeholder property ([d34bcd4](https://github.com/akveo/react-native-ui-kitten/commit/d34bcd4))
-* refactor(components): unify icon prop stylings ([156646d](https://github.com/akveo/react-native-ui-kitten/commit/156646d))
-* chore(components): update components to eva 1.3 ([c958482](https://github.com/akveo/react-native-ui-kitten/commit/c958482))
-* docs(guides): simplify getting-started ([a93bfed](https://github.com/akveo/react-native-ui-kitten/commit/a93bfed))
+### :star: Highlights
 
+Bring consistency in component styling with Eva 1.3 unified design [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-561593655)
 
+### :bug: Bug Fixes
+
+* Unify the way of styling components provided with `icon` property ([156646d](https://github.com/akveo/react-native-ui-kitten/commit/156646d))
+* **Calendar**: year selection when `min` and `max` properties provided ([#688](https://github.com/akveo/react-native-ui-kitten/issues/688)) ([61e4806](https://github.com/akveo/react-native-ui-kitten/commit/61e4806))
+* **Calendar**: navigation in negative timezone ([#712](https://github.com/akveo/react-native-ui-kitten/issues/712), [#713](https://github.com/akveo/react-native-ui-kitten/issues/713)) ([700a902](https://github.com/akveo/react-native-ui-kitten/commit/700a902))
+* **List**: add ability to override `keyExtractor` property ([#716](https://github.com/akveo/react-native-ui-kitten/issues/716)) ([d5ee185](https://github.com/akveo/react-native-ui-kitten/commit/d5ee185))
+* **Modal**: center positioning on screen resize ([#699](https://github.com/akveo/react-native-ui-kitten/issues/699)) ([301e3f4](https://github.com/akveo/react-native-ui-kitten/commit/301e3f4))
+
+### :rocket: Features
+
+* Synchronize with Eva 1.3 ([c958482](https://github.com/akveo/react-native-ui-kitten/commit/c958482))
+* **Card**: new UI Kitten component ([f6c5899](https://github.com/akveo/react-native-ui-kitten/commit/f6c5899))
+* **Datepicker**: add `placeholder` property ([#721](https://github.com/akveo/react-native-ui-kitten/issues/721)) ([d34bcd4](https://github.com/akveo/react-native-ui-kitten/commit/d34bcd4))
+* **Template packages**: upgrade to react-native 0.61.5 ([3759572](https://github.com/akveo/react-native-ui-kitten/commit/3759572))
+* **Documentation**: Simplify Getting Started ([a93bfed](https://github.com/akveo/react-native-ui-kitten/commit/a93bfed))
+
+### :bomb: BREAKING CHANGES
+
+* `react-native-svg` package is now required and included in peer dependencies
+* deprecate `react-native-ui-kitten` package in order to `@ui-kitten/components`. An old package will be supported till v5
 
 ## 4.3.0-beta.1 (2019-10-17)
 
-* feat(docs): clickable examples ([a08e1d3](https://github.com/akveo/react-native-ui-kitten/commit/a08e1d3))
-* feat(docs): live-examples warning add ([723f16a](https://github.com/akveo/react-native-ui-kitten/commit/723f16a))
-* feat(ui): calendar - start day of week ([1d7a341](https://github.com/akveo/react-native-ui-kitten/commit/1d7a341))
-* feat(ui): select preselected values handling add ([ab0703a](https://github.com/akveo/react-native-ui-kitten/commit/ab0703a))
-* feat(ui): web states support ([84ef56b](https://github.com/akveo/react-native-ui-kitten/commit/84ef56b))
-* fix(docs): calendar outdated images remove ([48d9c0c](https://github.com/akveo/react-native-ui-kitten/commit/48d9c0c))
-* fix(docs): spinner docs fix ([35c72f8](https://github.com/akveo/react-native-ui-kitten/commit/35c72f8))
-* fix(script): template modules publish script ([7f6710f](https://github.com/akveo/react-native-ui-kitten/commit/7f6710f))
-* fix(ui): button-group render issues ([bcbf06a](https://github.com/akveo/react-native-ui-kitten/commit/bcbf06a))
-* fix(ui): calendar min-max navigation ([75e42dd](https://github.com/akveo/react-native-ui-kitten/commit/75e42dd))
-* docs(components): fix calendar showcases ([74cc1b1](https://github.com/akveo/react-native-ui-kitten/commit/74cc1b1))
-* docs(components): fix overflow-menu showcases ([9a5be22](https://github.com/akveo/react-native-ui-kitten/commit/9a5be22))
-* docs(design-system): theme variable tables ([a99cb7e](https://github.com/akveo/react-native-ui-kitten/commit/a99cb7e))
-* docs(getting-started): add @ui-kitten/eva-icons to what-is guide ([9fa4a8e](https://github.com/akveo/react-native-ui-kitten/commit/9fa4a8e))
-* docs(readme): add mobile bundles banner ([9d976a9](https://github.com/akveo/react-native-ui-kitten/commit/9d976a9))
-* docs(readme): update backend bundles image ([d03af5f](https://github.com/akveo/react-native-ui-kitten/commit/d03af5f))
-* docs(what-is): add backend bundles link ([8de0d3b](https://github.com/akveo/react-native-ui-kitten/commit/8de0d3b))
+### :star: Highlights
 
+Clickable examples in documentation and handling of Hover and Focus states in the web ([#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-543216191))
+
+### :bug: Bug Fixes
+
+* **ButtonGroup**: last button render issues ([#516](https://github.com/akveo/react-native-ui-kitten/issues/516)) ([bcbf06a](https://github.com/akveo/react-native-ui-kitten/commit/bcbf06a))
+* **Calendar**: navigation when `min` and `max` properties provided ([75e42dd](https://github.com/akveo/react-native-ui-kitten/commit/75e42dd))
+* **Select**: handling the initial value if passed inline ([ab0703a](https://github.com/akveo/react-native-ui-kitten/commit/ab0703a))
+
+### :rocket: Features
+
+* **Calendar**: add ability to override start day of week ([#682](https://github.com/akveo/react-native-ui-kitten/issues/682)) ([1d7a341](https://github.com/akveo/react-native-ui-kitten/commit/1d7a341))
+* **Web**: handle `focus` and `hover` states with Eva ([84ef56b](https://github.com/akveo/react-native-ui-kitten/commit/84ef56b))
+* **Documentation**: Enhanace with clickable examples ([a08e1d3](https://github.com/akveo/react-native-ui-kitten/commit/a08e1d3))
+* **Documentation**: Add Eva theme variable tables ([a99cb7e](https://github.com/akveo/react-native-ui-kitten/commit/a99cb7e))
 
 
 ## 4.2.0 (2019-09-27)
