@@ -1,5 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { ComponentsScreen } from '@pg/scenes/components/components.component';
+import { AutocompleteScreen } from '@pg/scenes/autocomplete/autocomplete.component';
 import { AvatarScreen } from '@pg/scenes/avatar/avatar.component';
 import { BottomNavigationScreen } from '@pg/scenes/bottomNavigation/bottomNavigation.component';
 import { ButtonScreen } from '@pg/scenes/button/button.component';
@@ -31,6 +32,7 @@ import { RangeDatepickerScreen } from '@pg/scenes/rangeDatepicker/rangeDatepicke
 
 export const ComponentsNavigator = createStackNavigator({
   ['Components']: ComponentsScreen,
+  ['Autocomplete']: AutocompleteScreen,
   ['Avatar']: AvatarScreen,
   ['BottomNavigation']: BottomNavigationScreen,
   ['Button']: ButtonScreen,

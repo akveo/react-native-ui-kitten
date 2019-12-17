@@ -2,7 +2,6 @@ describe('@tooltip: component checks', () => {
 
   const message: string = [
     'Unfortunately, there is no way to test Tooltip since it relies on native code to perform measuring.',
-    'However, most use cases are covered with tests of RangeCalendar and the Input element of Datepicker',
   ].join('\n');
 
 

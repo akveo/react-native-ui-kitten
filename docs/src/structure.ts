@@ -496,6 +496,20 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Autocomplete',
+        icon: 'input.svg',
+        source: [
+          'Autocomplete',
+        ],
+        overview: [
+          {
+            name: 'Autocomplete',
+            images: [],
+          },
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
