@@ -474,7 +474,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Select',
-        icon: 'button.svg',
+        icon: 'select.svg',
         source: [
           'Select',
         ],
@@ -483,7 +483,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Datepicker',
-        icon: 'calendar.svg',
+        icon: 'datepicker.svg',
         source: [
           'Datepicker',
           'RangeDatepicker',
@@ -498,7 +498,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Autocomplete',
-        icon: 'input.svg',
+        icon: 'autocomplete.svg',
         source: [
           'Autocomplete',
         ],
@@ -570,7 +570,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Avatar',
-        icon: 'user.svg',
+        icon: 'avatar.svg',
         source: [
           'Avatar',
         ],
