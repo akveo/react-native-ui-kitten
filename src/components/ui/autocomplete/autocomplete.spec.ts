@@ -11,5 +11,8 @@ describe('@autocomplete: component checks', () => {
     'However, most use cases are covered with tests of Input and List components.',
   ].join('\n');
 
-  console.info(message);
+  it('inform unable to perform test', () => {
+    console.info(message);
+  });
+
 });
