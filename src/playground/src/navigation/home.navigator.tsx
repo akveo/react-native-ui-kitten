@@ -7,8 +7,8 @@ import { ComponentsNavigator } from './components.navigator';
 import { SamplesNavigator } from './samples.navigator';
 
 const HomeBottomNavigator = createBottomTabNavigator({
-  ['Components']: ComponentsNavigator,
   ['Samples']: SamplesNavigator,
+  ['Components']: ComponentsNavigator,
 }, {
   tabBarComponent: HomeTabBar,
 });
