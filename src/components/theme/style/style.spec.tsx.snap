@@ -22,15 +22,6 @@ Object {
 }
 `;
 
-exports[`@style: service methods checks * styling * default theme 1`] = `
-Object {
-  "prop1": "#3366FF",
-  "prop2": "#2541CC",
-  "prop3": "#A6AEBD",
-  "prop4": 42,
-}
-`;
-
 exports[`@style: ui component checks * default appearance styled properly 1`] = `
 Object {
   "borderColor": "#A6AEBD",
@@ -138,5 +129,14 @@ Object {
   "textFontWeight": "500",
   "textMarginLeft": 12,
   "width": 36,
+}
+`;
+
+exports[`@style-sheet: service checks * creates themedStyle property for mapping properly 1`] = `
+Object {
+  "prop1": "#3366FF",
+  "prop2": "#2541CC",
+  "prop3": "#A6AEBD",
+  "prop4": 42,
 }
 `;

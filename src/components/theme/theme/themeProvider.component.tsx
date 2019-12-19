@@ -6,13 +6,25 @@
 
 import React from 'react';
 import { ThemeContext } from './themeContext';
-import { ThemeType } from './type';
+import {
+  StyleSheet,
+  ThemeType,
+} from '../style/styleSheet.service';
 
 export interface ThemeProviderProps {
   theme: ThemeType;
   children?: React.ReactNode;
 }
 
+/**
+ * Since ApplicationProvider is the root component of the application,
+ * it provides same theme for all underlying components.
+ *
+ * ThemeProvider allows modifying this theme so that each component that is the child
+ * of ThemeProvider will use modified theme.
+ *
+ * @overview-example ThemeProviderSimpleUsage
+ */
 export class ThemeProvider extends React.PureComponent<ThemeProviderProps> {
 
   public render(): React.ReactNode {
@@ -20,7 +32,7 @@ export class ThemeProvider extends React.PureComponent<ThemeProviderProps> {
 
     return (
       <ThemeContext.Provider
-        value={theme}>
+        value={StyleSheet.createCompiledTheme(theme)}>
         {children}
       </ThemeContext.Provider>
     );

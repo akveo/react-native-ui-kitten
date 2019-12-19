@@ -9,12 +9,12 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ThemeStyleType } from '@eva-design/dss';
 import { StyleConsumerService } from './styleConsumer.service';
 import {
-  Interaction,
   StyleType,
-} from './type';
+  ThemeType,
+} from './styleSheet.service';
+import { Interaction } from './type';
 import { MappingContext } from '../mapping/mappingContext';
 import { ThemeContext } from '../theme/themeContext';
-import { ThemeType } from '../theme/type';
 
 interface PrivateProps<T> {
   forwardedRef?: React.Ref<T>;
@@ -29,11 +29,6 @@ export interface StyledComponentProps {
 
 interface State {
   interaction: Interaction[];
-}
-
-export interface ContextProps {
-  style: ThemeStyleType;
-  theme: ThemeType;
 }
 
 export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps & P>;
@@ -57,68 +52,11 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *
  * @param Component - Type: {ComponentType}. Determines class or functional component to be styled.
  *
- * @overview-example Declaring Styled Component
+ * @overview-example StyledComponentSimpleUsage
  *
- * ```
- * import React from 'react';
- * import { TouchableOpacity } from 'react-native';
- * import { styled, Interaction } from '@ui-kitten/components';
+ * @overview-example StyledComponentStates
  *
- * class Button extends React.Component {
- *
- *   // Define component name used in `mapping`
- *   static styledComponentName = 'Button';
- *
- *   onPressIn = (e) => {
- *     // Request styles for `active` state and re-render
- *
- *     this.props.dispatch([Interaction.ACTIVE]);
- *
- *     if(this.props.onPressIn) {
- *       this.props.onPressIn(e);
- *     }
- *   };
- *
- *   onPressOut = (e) => {
- *     // Request styles for default state and re-render
- *
- *     this.props.dispatch([]);
- *
- *     if(this.props.onPressOut) {
- *       this.props.onPressOut(e);
- *     }
- *   };
- *
- *   render() {
- *     // Retrieve styles for current state from props (provided with themedStyle prop)
- *     // And apply it with saving priority of `style` prop
- *
- *     const { style, themedStyle, ...restProps } = this.props;
- *
- *     return (
- *       <TouchableOpacity
- *         {...restProps}
- *         style={[themedStyle, style]}
- *         onPressIn={this.onPressIn}
- *         onPressOut={this.onPressOut}
- *       />
- *     );
- *   }
- * }
- *
- * export const StyledButton = styled(Button);
- * ```
- *
- * @overview-example Styled Component Usage
- *
- * ```
- * import React from 'react';
- * import { StyledButton } from './path-to/styledButton.component';
- *
- * export const StyledButtonShowcase = (props) => (
- *   <StyledButton {...props}/>
- * );
- * ```
+ * @overview-example StyledComponentVariants
  */
 export const styled = <P extends object>(Component: React.ComponentType<P>): StyledComponentClass<P> => {
 
@@ -146,34 +84,33 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
     private defaultProps: StyledComponentProps;
     private service: StyleConsumerService;
 
-    private onInit = (context: ContextProps) => {
-
+    private onInit = (style: ThemeStyleType, theme: ThemeType): void => {
       // @ts-ignore
-      this.service = new StyleConsumerService(Component.styledComponentName, context);
+      this.service = new StyleConsumerService(Component.styledComponentName, style, theme);
       this.defaultProps = this.service.createDefaultProps();
 
       this.init = true;
     };
 
-    private onDispatch = (interaction: Interaction[]) => {
+    private onDispatch = (interaction: Interaction[]): void => {
       this.setState({ interaction });
     };
 
-    private withStyledProps = (source: P, context: ContextProps): WrappedProps => {
+    private withStyledProps = (source: P, style: ThemeStyleType, theme: ThemeType): WrappedProps => {
       const { interaction } = this.state;
 
       const props: WrappingProps = { ...this.defaultProps, ...source };
 
-      return this.service.withStyledProps(props, context, interaction);
+      return this.service.withStyledProps(props, style, theme, interaction);
     };
 
-    private renderWrappedElement = (context: ContextProps): WrappedElement => {
+    private renderWrappedElement = (style: ThemeStyleType, theme: ThemeType): WrappedElement => {
       if (!this.init) {
-        this.onInit(context);
+        this.onInit(style, theme);
       }
 
       const { forwardedRef, ...restProps } = this.props;
-      const props: P & StyledComponentProps = this.withStyledProps(restProps as P, context);
+      const props: P & StyledComponentProps = this.withStyledProps(restProps as P, style, theme);
 
       return (
         <Component
@@ -185,13 +122,11 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
     };
 
     public render(): React.ReactNode {
-      const StyledElement = this.renderWrappedElement;
-
       return (
-        <MappingContext.Consumer>{(styles: ThemeStyleType): WrappedElement => (
-          <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => (
-            <StyledElement style={styles} theme={theme}/>
-          )}</ThemeContext.Consumer>
+        <MappingContext.Consumer>{(style: ThemeStyleType): WrappedElement => (
+          <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => {
+           return this.renderWrappedElement(style, theme);
+          }}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
       );
     }

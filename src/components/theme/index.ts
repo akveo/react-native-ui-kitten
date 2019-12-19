@@ -1,14 +1,4 @@
 export {
-  styled,
-  StyledComponentProps,
-  StyledComponentClass,
-} from './style/styleConsumer.component';
-export {
-  withStyles,
-  ThemedComponentProps,
-  ThemedComponentClass,
-} from './theme/themeConsumer.component';
-export {
   ApplicationProvider,
   ApplicationProviderProps,
   ApplicationProviderElement,
@@ -18,20 +8,31 @@ export {
   ModalPanelProps,
 } from './modal/modalPanel.component';
 export {
-  ThemeProvider,
-  ThemeProviderProps,
-} from './theme/themeProvider.component';
-export {
   ModalService,
   ModalPresentingConfig,
 } from './modal/modal.service';
 export {
+  styled,
+  StyledComponentProps,
+  StyledComponentClass,
+} from './style/styled';
+export { useStyleSheet } from './style/useStyleSheet';
+export {
+  StyleType,
+  Styles,
+  ThemeType,
+} from './style/styleSheet.service';
+export {
   Interaction,
   State,
-  StyleType,
 } from './style/type';
 export {
-  ThemeType,
-  ThemedStyleType,
-  StyleSheetType,
-} from './theme/type';
+  ThemeProvider,
+  ThemeProviderProps,
+} from './theme/themeProvider.component';
+export {
+  withStyles,
+  ThemedComponentProps,
+  ThemedComponentClass,
+} from './theme/withStyles';
+export { useTheme } from './theme/useTheme';

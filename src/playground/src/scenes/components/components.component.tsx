@@ -51,6 +51,10 @@ export const routes: string[] = [
   'Toggle',
   'Tooltip',
   'TopNavigation',
+  'Theme Provider',
+  'With Styles',
+  'Use StyleSheet',
+  'Use Theme',
 ];
 
 export const ComponentsScreen = ({ navigation }): React.ReactElement => {

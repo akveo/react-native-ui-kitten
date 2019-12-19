@@ -15,7 +15,6 @@ import {
 import { StyleProvider } from '../style/styleProvider.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
 import { ModalPanel } from '../modal/modalPanel.component';
-import { ThemeType } from '../theme/type';
 
 interface ComponentProps {
   mapping: SchemaType;
@@ -78,7 +77,7 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
 
   constructor(props: ApplicationProviderProps) {
     super(props);
-    const { mapping, customMapping, theme } = this.props;
+    const { mapping, customMapping } = this.props;
 
     const styles: ThemeStyleType = this.createStyles(mapping, customMapping);
 

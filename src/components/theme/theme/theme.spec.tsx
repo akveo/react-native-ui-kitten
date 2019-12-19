@@ -15,9 +15,14 @@ import {
   ThemeProvider,
   ThemeProviderProps,
 } from './themeProvider.component';
-import { withStyles } from './themeConsumer.component';
-import { getThemeValue } from './theme.service';
-import { ThemeType } from './type';
+import {
+  ThemedComponentProps,
+  withStyles,
+} from './withStyles';
+import {
+  StyleSheet,
+  ThemeType,
+} from '../style/styleSheet.service';
 import {
   theme,
   themeInverse,
@@ -28,7 +33,7 @@ const themeChangeTouchableTestId: string = '@theme/btnChangeTheme';
 
 const json = (object: any): string => JSON.stringify(object);
 
-class Mock extends React.Component<ViewProps> {
+class Mock extends React.Component<ViewProps & ThemedComponentProps> {
 
   public render(): React.ReactElement<ViewProps> {
     return (
@@ -95,37 +100,6 @@ class OverrideMock extends React.Component<OverrideMockProps> {
     );
   }
 }
-
-describe('@theme: service method checks', () => {
-
-  it('finds theme value properly', async () => {
-    const themeValue = getThemeValue('gray-100', theme);
-    const undefinedValue = getThemeValue('undefined', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-    expect(undefinedValue).toBeUndefined();
-  });
-
-  it('finds referencing theme value properly', async () => {
-    const themeValue = getThemeValue('referencing', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-  });
-
-  it('finds multiple referencing theme value properly', async () => {
-    const themeValue = getThemeValue('double-referencing', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-  });
-
-  it('finds referencing theme value properly (initial reference)', async () => {
-    const themeValue = getThemeValue('referencing', theme);
-
-    expect(themeValue).toEqual(theme['gray-100']);
-  });
-
-
-});
 
 describe('@theme: ui component checks', () => {
 
@@ -195,8 +169,8 @@ describe('@theme: ui component checks', () => {
     const { theme: theme1 } = themedComponents[0].props;
     const { theme: theme2 } = themedComponents[1].props;
 
-    expect(json(theme1)).toEqual(json(theme));
-    expect(json(theme2)).toEqual(json(themeInverse));
+    expect(theme1).toEqual(StyleSheet.createCompiledTheme(theme));
+    expect(theme2).toEqual(StyleSheet.createCompiledTheme(themeInverse));
   });
 
 });

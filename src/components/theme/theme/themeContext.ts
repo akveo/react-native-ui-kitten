@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import { ThemeType } from './type';
+import { ThemeType } from '../style/styleSheet.service';
 
-const defaultValue: ThemeType = {};
+const defaultTheme: ThemeType = {};
 
-export const ThemeContext: React.Context<ThemeType> = React.createContext(defaultValue);
+export const ThemeContext: React.Context<ThemeType> = React.createContext(defaultTheme);
