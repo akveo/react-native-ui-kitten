@@ -21,9 +21,8 @@ const IconProvider = (name) => ({
 });
 
 const MaterialIconRegistry: AppIconRegistry = {
-  ['arrow-ios-downward']: 'keyboard-arrow-down',
-  ['arrow-ios-upward']: 'keyboard-arrow-up',
   ['arrow-back']: 'arrow-back',
+  ['brush']: 'brush',
   ['color-palette']: 'palette',
   ['grid']: 'dashboard',
   ['list']: 'list',

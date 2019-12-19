@@ -28,10 +28,6 @@ import { ToggleScreen } from '@pg/scenes/toggle/toggle.component';
 import { SelectScreen } from '@pg/scenes/select/select.component';
 import { OverflowMenuScreen } from '@pg/scenes/overflowMenu/overflowMenu.component';
 import { RangeDatepickerScreen } from '@pg/scenes/rangeDatepicker/rangeDatepicker.component';
-import { UseStyleSheetScreen } from '@pg/scenes/useStyleSheet/useStyleSheet.component';
-import { WithStylesScreen } from '@pg/scenes/withStyles/withStyles.component';
-import { ThemeProviderScreen } from '@pg/scenes/themeProvider/themeProvider.component';
-import { UseThemeScreen } from '@pg/scenes/useTheme/useTheme.component';
 
 export const ComponentsNavigator = createStackNavigator({
   ['Components']: ComponentsScreen,
@@ -63,10 +59,6 @@ export const ComponentsNavigator = createStackNavigator({
   ['TopNavigation']: TopNavigationScreen,
   ['OverflowMenu']: OverflowMenuScreen,
   ['Select']: SelectScreen,
-  ['With Styles']: WithStylesScreen,
-  ['Use Theme']: UseThemeScreen,
-  ['Use StyleSheet']: UseStyleSheetScreen,
-  ['Theme Provider']: ThemeProviderScreen,
 }, {
   headerMode: 'none',
 });

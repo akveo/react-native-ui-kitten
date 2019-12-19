@@ -44,7 +44,7 @@ export const Showcase = (props: ShowcaseProps): React.ReactElement => {
 
     const listItemElement: ListItemElement = renderSectionElement(item);
 
-    const borderStyle: ViewStyle | null = index === showcase.sections.length - 1 ? null : themedStyle.itemBorder;
+    const borderStyle: ViewStyle | null = index === showcase.sections.length - 1 ? null : styles.itemBorder;
 
     return React.cloneElement(listItemElement, {
       key: index,

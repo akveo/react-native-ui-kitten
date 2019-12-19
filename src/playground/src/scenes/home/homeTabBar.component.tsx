@@ -10,6 +10,7 @@ import {
   SaveAreaInset,
 } from '@pg/components/safeAreaLayout';
 import {
+  BrushIcon,
   GridIcon,
   ListIcon,
 } from '@pg/icons';
@@ -31,6 +32,10 @@ export const HomeTabBar = ({ navigation }): SafeAreaLayoutElement => {
         <BottomNavigationTab
           title='Components'
           icon={ListIcon}
+        />
+        <BottomNavigationTab
+          title='Services'
+          icon={BrushIcon}
         />
         <BottomNavigationTab
           title='Samples'

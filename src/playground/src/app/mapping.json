@@ -1,0 +1,71 @@
+{
+  "strict": {
+    "text-font-family": "System"
+  },
+  "components": {
+    "StyledComponent": {
+      "meta": {
+        "parameters": {
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "backgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "states": {
+          "active": {
+            "default": false,
+            "priority": 0
+          }
+        },
+        "variantGroups": {
+          "status": {
+            "primary": {
+              "default": true
+            },
+            "danger": {
+              "default": false
+            }
+          }
+        }
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "width": 40,
+            "height": 40
+          },
+          "variantGroups": {
+            "status": {
+              "primary": {
+                "backgroundColor": "color-primary-default",
+                "state": {
+                  "active": {
+                    "backgroundColor": "color-primary-active"
+                  }
+                }
+              },
+              "danger": {
+                "backgroundColor": "color-danger-default",
+                "state": {
+                  "active": {
+                    "backgroundColor": "color-danger-active"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

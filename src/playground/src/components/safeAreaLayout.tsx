@@ -11,7 +11,8 @@ import {
   Layout,
   LayoutElement,
   LayoutProps,
-  useStyleSheet,
+  ThemeType,
+  useTheme,
 } from '@ui-kitten/components';
 
 export enum SaveAreaInset {
@@ -29,7 +30,7 @@ export type SafeAreaLayoutElement = React.ReactElement<SafeAreaLayoutProps>;
 
 export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
 
-  const styles = StyleSheet.create();
+  const theme: ThemeType = useTheme();
 
   const safeAreaInsets: EdgeInsets = useSafeArea();
   const { insets, style, ...layoutProps } = props;
@@ -40,7 +41,10 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
       case SaveAreaInset.BOTTOM:
         return { paddingBottom: safeAreaInsets.bottom };
       case SaveAreaInset.TOP:
-        return { paddingTop: safeAreaInsets.top };
+        return {
+          backgroundColor: theme['background-basic-color-3'],
+          paddingTop: safeAreaInsets.top,
+        };
     }
   };
 
@@ -52,13 +56,7 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
   return (
     <Layout
       {...layoutProps}
-      style={[style, styles.container, createInsets()]}
+      style={[style, createInsets()]}
     />
   );
 };
-
-const StyleSheet = useStyleSheet({
-  container: {
-    backgroundColor: 'background-basic-color-3',
-  },
-});
