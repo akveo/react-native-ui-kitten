@@ -16,18 +16,18 @@ interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;
 }
 
-export interface ThemedComponentProps {
+export interface ThemedComponentProps<T extends Styles<T>> {
   theme?: ThemeType;
-  themedStyle?: Styles<any> | undefined;
+  themedStyle?: T | undefined;
 }
 
-export type ThemedComponentClass<P> = React.ComponentClass<ThemedComponentProps & P>;
+export type ThemedComponentClass<P, S extends Styles<S>> = React.ComponentClass<ThemedComponentProps<S> & P>;
 
 interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;
 }
 
-type CreateStylesFunction = (theme: ThemeType) => Styles<any>;
+type CreateStylesFunction<T extends Styles<T>> = (theme: ThemeType) => T;
 
 /**
  * `withStyles` is a High Order Function which is used to create themed style for non-styled component.
@@ -44,11 +44,11 @@ type CreateStylesFunction = (theme: ThemeType) => Styles<any>;
  *
  * @overview-example WithStylesSimpleUsage
  */
-export const withStyles = <P extends object>(Component: React.ComponentType<P>,
-                                             createStyles?: CreateStylesFunction): ThemedComponentClass<P> => {
+export const withStyles = <P extends object, S>(Component: React.ComponentType<P>,
+                                                createStyles?: CreateStylesFunction<S>): ThemedComponentClass<P, S> => {
 
   type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
-  type WrappedProps = ThemedComponentProps & P;
+  type WrappedProps = ThemedComponentProps<S> & P;
   type WrappingElement = React.ReactElement<WrappingProps>;
   type WrappedElementInstance = React.ReactInstance;
 
@@ -59,7 +59,7 @@ export const withStyles = <P extends object>(Component: React.ComponentType<P>,
       return { ...props, theme, themedStyle };
     };
 
-    private renderWrappedElement = (theme: ThemeType): React.ReactElement<ThemedComponentProps> => {
+    private renderWrappedElement = (theme: ThemeType): React.ReactElement<ThemedComponentProps<S>> => {
       const { forwardedRef, ...restProps } = this.props;
       const props: WrappedProps = this.withThemedProps(restProps as P, theme);
 
