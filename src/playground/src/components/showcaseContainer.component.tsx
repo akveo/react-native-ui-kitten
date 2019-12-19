@@ -21,7 +21,7 @@ import { ShowcaseSettings } from './showcaseSettings.component';
 interface ShowcaseContainerProps extends SafeAreaLayoutProps {
   showcase: ComponentShowcase;
   settings?: ComponentShowcaseSetting[];
-  renderItem: (props: any) => React.ReactElement<any>;
+  renderItem: (props: any) => React.ReactElement;
   onBackPress?: () => void;
 }
 

@@ -13,9 +13,8 @@ import {
   SelectOptionType,
   StyleType,
   Text,
-  ThemeType,
   Toggle,
-  withStyles,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import { Toolbar } from '@pg/components/toolbar.component';
 import {
@@ -27,12 +26,14 @@ import { SampleAuthData } from './type';
 
 const data: SampleAuthData = SampleAuthData.mocked();
 
-export const SampleAuthComponent = ({ navigation, ...props }): React.ReactElement => {
+export const SampleAuthScreen = ({ navigation }): React.ReactElement => {
 
   const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
   const [shouldRemember, setShouldRemember] = React.useState<boolean>(false);
   const [selectedRole, setSelectedRole] = React.useState<SelectOption>(null);
   const themeContext: ThemeContextType = React.useContext(ThemeContext);
+
+  const styles = StyleSheet.create();
 
   const onPasswordIconPress = (): void => {
     setPasswordVisible(!passwordVisible);
@@ -53,19 +54,19 @@ export const SampleAuthComponent = ({ navigation, ...props }): React.ReactElemen
 
   return (
     <Layout
-      style={props.themedStyle.container}
+      style={styles.container}
       level='4'>
       <Toolbar
         title='Auth'
         onBackPress={() => navigation.goBack()}
       />
-      <Layout style={props.themedStyle.cardContainer}>
+      <Layout style={styles.cardContainer}>
         <Layout
-          style={props.themedStyle.cardHeader}
+          style={styles.cardHeader}
           level='3'>
-          <View style={props.themedStyle.themeToggleContainer}>
+          <View style={styles.themeToggleContainer}>
             <Text
-              style={props.themedStyle.themeText}
+              style={styles.themeText}
               category='s2'>
               Dark Mode
             </Text>
@@ -76,26 +77,26 @@ export const SampleAuthComponent = ({ navigation, ...props }): React.ReactElemen
             />
           </View>
           <Avatar
-            style={props.themedStyle.profileImage}
+            style={styles.profileImage}
             source={require('../../assets/images/brand-logo.png')}
           />
-          <View style={props.themedStyle.welcomeContainer}>
+          <View style={styles.welcomeContainer}>
             <Text category='h4'>Welcome</Text>
             <Text category='s1'>Sign in to your account</Text>
           </View>
         </Layout>
         <Layout
-          style={props.themedStyle.formContainer}
+          style={styles.formContainer}
           level='1'>
           <Input
-            style={props.themedStyle.formInput}
-            textStyle={props.themedStyle.formInputBox}
+            style={styles.formInput}
+            textStyle={styles.formInputBox}
             label='Email'
             placeholder='contact@akveo.com'
           />
           <Input
-            style={props.themedStyle.formInput}
-            textStyle={props.themedStyle.formInputBox}
+            style={styles.formInput}
+            textStyle={styles.formInputBox}
             secureTextEntry={!passwordVisible}
             label='Password'
             placeholder='********'
@@ -103,40 +104,40 @@ export const SampleAuthComponent = ({ navigation, ...props }): React.ReactElemen
             onIconPress={onPasswordIconPress}
           />
           <Select
-            style={props.themedStyle.formInput}
+            style={styles.formInput}
             label='Role'
             placeholder='Role on project'
             data={data.roles.map(createRoleOption)}
             selectedOption={selectedRole}
             onSelect={setSelectedRole}
           />
-          <View style={props.themedStyle.forgotPasswordContainer}>
+          <View style={styles.forgotPasswordContainer}>
             <CheckBox
               checked={shouldRemember}
               onChange={setShouldRemember}
               text='I agree to T&C'
             />
             <Button
-              style={props.themedStyle.forgotPasswordButton}
+              style={styles.forgotPasswordButton}
               appearance='ghost'
               status='basic'>
               Forgot password?
             </Button>
           </View>
           <Button
-            style={props.themedStyle.signupButton}
+            style={styles.signupButton}
             appearance='ghost'
             status='basic'>
             No account yet?
           </Button>
-          <Button style={props.themedStyle.signInButton}>SIGN IN</Button>
+          <Button style={styles.signInButton}>SIGN IN</Button>
         </Layout>
       </Layout>
     </Layout>
   );
 };
 
-export const SampleAuthScreen = withStyles(SampleAuthComponent, (theme: ThemeType) => ({
+const StyleSheet = useStyleSheet({
   container: {
     flex: 1,
   },
@@ -168,7 +169,7 @@ export const SampleAuthScreen = withStyles(SampleAuthComponent, (theme: ThemeTyp
     width: 96,
     height: 96,
     borderWidth: 4,
-    borderColor: theme['border-basic-color-4'],
+    borderColor: 'border-basic-color-4',
   },
   welcomeContainer: {
     paddingHorizontal: 16,
@@ -182,6 +183,7 @@ export const SampleAuthScreen = withStyles(SampleAuthComponent, (theme: ThemeTyp
     marginVertical: 4,
   },
   formInputBox: {
+    // @ts-ignore
     outlineWidth: 0,
   },
   forgotPasswordContainer: {
@@ -197,5 +199,5 @@ export const SampleAuthScreen = withStyles(SampleAuthComponent, (theme: ThemeTyp
   signInButton: {
     marginVertical: 16,
   },
-}));
+});
 

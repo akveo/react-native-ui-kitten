@@ -16,7 +16,7 @@ interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;
 }
 
-export interface ThemedComponentProps<T extends Styles<T>> {
+export interface ThemedComponentProps<T extends Styles<T> = any> {
   theme?: ThemeType;
   themedStyle?: T | undefined;
 }

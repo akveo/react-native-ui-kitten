@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StatusBarProps as StatusBarReactNativeProps,
   StyleProp,
   ViewStyle,
 } from 'react-native';
@@ -12,8 +11,7 @@ import {
   Layout,
   LayoutElement,
   LayoutProps,
-  ThemeType,
-  withStyles,
+  useStyleSheet,
 } from '@ui-kitten/components';
 
 export enum SaveAreaInset {
@@ -29,10 +27,12 @@ export interface SafeAreaLayoutProps extends LayoutProps {
 
 export type SafeAreaLayoutElement = React.ReactElement<SafeAreaLayoutProps>;
 
-const SafeAreaLayoutComponent = (props: SafeAreaLayoutProps): LayoutElement => {
+export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
+
+  const styles = StyleSheet.create();
 
   const safeAreaInsets: EdgeInsets = useSafeArea();
-  const { insets, style, themedStyle, ...layoutProps } = props;
+  const { insets, style, ...layoutProps } = props;
 
 
   const toStyleProp = (inset: SaveAreaInset): ViewStyle => {
@@ -40,10 +40,7 @@ const SafeAreaLayoutComponent = (props: SafeAreaLayoutProps): LayoutElement => {
       case SaveAreaInset.BOTTOM:
         return { paddingBottom: safeAreaInsets.bottom };
       case SaveAreaInset.TOP:
-        return {
-          ...themedStyle.container,
-          paddingTop: safeAreaInsets.top,
-        };
+        return { paddingTop: safeAreaInsets.top };
     }
   };
 
@@ -55,13 +52,13 @@ const SafeAreaLayoutComponent = (props: SafeAreaLayoutProps): LayoutElement => {
   return (
     <Layout
       {...layoutProps}
-      style={[style, createInsets()]}
+      style={[style, styles.container, createInsets()]}
     />
   );
 };
 
-export const SafeAreaLayout = withStyles(SafeAreaLayoutComponent, (theme: ThemeType) => ({
+const StyleSheet = useStyleSheet({
   container: {
-    backgroundColor: theme['background-basic-color-3'],
+    backgroundColor: 'background-basic-color-3',
   },
-}));
+});

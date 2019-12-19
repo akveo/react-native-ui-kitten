@@ -17,7 +17,7 @@ import {
 export const HomeTabBar = ({ navigation }): SafeAreaLayoutElement => {
 
   const onSelect = (index: number): void => {
-    const selectedTabRoute: string = navigation.state.routes[index];
+    const selectedTabRoute = navigation.state.routes[index];
     navigation.navigate(selectedTabRoute.routeName);
   };
 
