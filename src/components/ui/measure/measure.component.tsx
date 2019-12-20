@@ -12,6 +12,7 @@ import {
 import { Frame } from './type';
 
 export interface MeasureElementProps<P = any> {
+  force?: boolean;
   onMeasure: (frame: Frame) => void;
   children: React.ReactElement<P>;
 }
@@ -24,6 +25,7 @@ export type MeasuringElement<P = any> = React.ReactElement;
  *
  * Usage:
  *
+ * ```tsx
  * const onMeasure = (frame: Frame): void => {
  *   const { x, y } = frame.origin;
  *   const { width, height } = frame.size;
@@ -33,6 +35,11 @@ export type MeasuringElement<P = any> = React.ReactElement;
  * <MeasureElement onMeasure={onMeasure}>
  *   <ElementToMeasure />
  * </MeasureElement>
+ * ```
+ *
+ * By default, it measures each time onLayout is called,
+ * but `force` property may be used to measure any time it's needed.
+ * DON'T USE THIS FLAG IF THE COMPONENT RENDERS FIRST TIME OR YOU KNOW `onLayout` WILL BE CALLED.
  */
 export const MeasureElement = (props: MeasureElementProps): MeasuringElement => {
 
@@ -58,10 +65,14 @@ export const MeasureElement = (props: MeasureElementProps): MeasuringElement => 
     props.onMeasure(frame);
   };
 
-  const onLayout = (): void => {
+  const measureSelf = (): void => {
     const node: number = findNodeHandle(ref.current);
     UIManager.measureInWindow(node, onUIManagerMeasure);
   };
 
-  return React.cloneElement(props.children, { ref, onLayout });
+  if (props.force) {
+    measureSelf();
+  }
+
+  return React.cloneElement(props.children, { ref, onLayout: measureSelf });
 };

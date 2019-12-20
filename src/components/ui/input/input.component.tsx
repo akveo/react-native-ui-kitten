@@ -86,21 +86,21 @@ export type InputElement = React.ReactElement<InputProps>;
  * Can be `small`, `medium` or `large`.
  * Default is `medium`.
  *
- * @property {string} label - Determines label of the component.
- *
- * @property {StyleProp<TextStyle>} labelStyle - Customizes label style.
- *
- * @property {string} caption - Determines caption of the component.
- *
- * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
- *
  * @property {string} placeholder - Determines placeholder of the component.
  *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ * @property {string} label - Determines text rendered at the top of the component.
+ *
+ * @property {string} caption - Determines caption text rendered at the bottom of the component.
  *
  * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
  *
  * @property {(style: StyleType) => ReactElement} captionIcon - Determines caption icon.
+ *
+ * @property {StyleProp<TextStyle>} labelStyle - Customizes label style.
+ *
+ * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
+ *
+ * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
  * @property {TextInputProps} ...TextInputProps - Any props applied to TextInput component.
  *

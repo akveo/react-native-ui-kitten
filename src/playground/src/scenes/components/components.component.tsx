@@ -24,6 +24,7 @@ import {
 } from '@pg/icons';
 
 export const routes: string[] = [
+  'Autocomplete',
   'Avatar',
   'BottomNavigation',
   'Button',
