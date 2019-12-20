@@ -3,11 +3,7 @@ import {
   ScrollView,
   ViewStyle,
 } from 'react-native';
-import {
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
-} from '@ui-kitten/components';
+import { useStyleSheet } from '@ui-kitten/components';
 import {
   ComponentShowcase,
   ComponentShowcaseSection,
@@ -17,19 +13,18 @@ import {
   ShowcaseSectionProps,
 } from './showcaseSection.component';
 
-interface ComponentProps {
+export interface ShowcaseProps {
   showcase: ComponentShowcase;
   settings?: { [prop: string]: any };
-  renderItem: (props: any) => React.ReactElement<any>;
+  renderItem: (props: any) => React.ReactElement;
 }
-
-export type ShowcaseProps = ThemedComponentProps & ComponentProps;
 
 type ListItemElement = React.ReactElement<ShowcaseSectionProps>;
 
-const ShowcaseComponent = (props: ShowcaseProps): React.ReactElement => {
+export const Showcase = (props: ShowcaseProps): React.ReactElement => {
 
-  const { themedStyle, showcase } = props;
+  const styles = StyleSheet.create();
+  const { showcase } = props;
 
   const renderShowcaseElement = (showcaseProps: any): React.ReactElement => {
     return props.renderItem({
@@ -49,37 +44,35 @@ const ShowcaseComponent = (props: ShowcaseProps): React.ReactElement => {
 
     const listItemElement: ListItemElement = renderSectionElement(item);
 
-    const borderStyle: ViewStyle | null = index === showcase.sections.length - 1 ? null : themedStyle.itemBorder;
+    const borderStyle: ViewStyle | null = index === showcase.sections.length - 1 ? null : styles.itemBorder;
 
     return React.cloneElement(listItemElement, {
       key: index,
-      style: [themedStyle.item, borderStyle, listItemElement.props.style],
+      style: [styles.item, borderStyle, listItemElement.props.style],
     });
   };
 
   return (
     <ScrollView
-      style={themedStyle.container}
+      style={styles.container}
       bounces={false}>
       {showcase.sections.map(renderSectionItem)}
     </ScrollView>
   );
 };
 
-export const Showcase = withStyles(ShowcaseComponent, (theme: ThemeType) => {
-  return {
-    container: {
-      flex: 1,
-      backgroundColor: theme['background-basic-color-1'],
-    },
-    item: {
-      paddingHorizontal: 24,
-      paddingVertical: 16,
-    },
-    itemBorder: {
-      borderBottomWidth: 1,
-      borderBottomColor: theme['border-basic-color-3'],
-    },
-  };
+const StyleSheet = useStyleSheet({
+  container: {
+    flex: 1,
+    backgroundColor: 'background-basic-color-1',
+  },
+  item: {
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+  },
+  itemBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'border-basic-color-3',
+  },
 });
 

@@ -11,9 +11,7 @@ import {
   CheckBox,
   OverflowMenu,
   OverflowMenuItemType,
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
+  useStyleSheet,
 } from '@ui-kitten/components';
 import { ComponentShowcaseSetting } from '@pg/model/componentShowcase.model';
 import { AppTheme } from '@pg/themes/themeContext';
@@ -23,7 +21,7 @@ import {
   TrashIcon,
 } from '@pg/icons';
 
-interface ComponentProps {
+export interface ShowcaseSettingsProps extends ViewProps {
   themes?: AppTheme[];
   settings?: ComponentShowcaseSetting[];
   onThemeSelect?: (theme: AppTheme) => void;
@@ -31,12 +29,12 @@ interface ComponentProps {
   onReset: () => void;
 }
 
-export type ShowcaseSettingsProps = ThemedComponentProps & ViewProps & ComponentProps;
-
-const ShowcaseSettingsComponent = (props: ShowcaseSettingsProps): React.ReactElement => {
+export const ShowcaseSettings = (props: ShowcaseSettingsProps): React.ReactElement => {
 
   const [themesMenuVisible, setThemesMenuVisible] = React.useState<boolean>(false);
   const [settingsMenuVisible, setSettingsMenuVisible] = React.useState<boolean>(false);
+
+  const styles = StyleSheet.create();
 
   const createSettingMenuItem = (setting: ComponentShowcaseSetting): OverflowMenuItemType => {
     return {
@@ -90,10 +88,8 @@ const ShowcaseSettingsComponent = (props: ShowcaseSettingsProps): React.ReactEle
     Platform.OS !== 'web' && Updates.reload();
   };
 
-  const { style, themedStyle } = props;
-
   return (
-    <View style={[themedStyle.container, style]}>
+    <View style={[styles.container, props.style]}>
       <OverflowMenu
         visible={themesMenuVisible}
         onSelect={onThemeSelect}
@@ -137,11 +133,11 @@ const ShowcaseSettingsComponent = (props: ShowcaseSettingsProps): React.ReactEle
   );
 };
 
-export const ShowcaseSettings = withStyles(ShowcaseSettingsComponent, (theme: ThemeType) => ({
+const StyleSheet = useStyleSheet({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingVertical: 16,
-    backgroundColor: theme['background-basic-color-2'],
+    backgroundColor: 'background-basic-color-2',
   },
-}));
+});

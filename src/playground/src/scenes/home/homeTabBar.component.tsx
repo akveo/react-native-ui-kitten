@@ -10,6 +10,7 @@ import {
   SaveAreaInset,
 } from '@pg/components/safeAreaLayout';
 import {
+  BrushIcon,
   GridIcon,
   ListIcon,
 } from '@pg/icons';
@@ -17,7 +18,7 @@ import {
 export const HomeTabBar = ({ navigation }): SafeAreaLayoutElement => {
 
   const onSelect = (index: number): void => {
-    const selectedTabRoute: string = navigation.state.routes[index];
+    const selectedTabRoute = navigation.state.routes[index];
     navigation.navigate(selectedTabRoute.routeName);
   };
 
@@ -31,6 +32,10 @@ export const HomeTabBar = ({ navigation }): SafeAreaLayoutElement => {
         <BottomNavigationTab
           title='Components'
           icon={ListIcon}
+        />
+        <BottomNavigationTab
+          title='Services'
+          icon={BrushIcon}
         />
         <BottomNavigationTab
           title='Samples'

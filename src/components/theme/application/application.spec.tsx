@@ -19,7 +19,7 @@ import {
   theme,
   themeInverse,
 } from '../support/tests';
-import { ThemeType } from '@kitten/theme';
+import { ThemeType } from '../style/styleSheet.service';
 
 describe('@app: application wrapper check', () => {
 

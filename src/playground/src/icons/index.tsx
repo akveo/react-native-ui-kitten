@@ -10,9 +10,8 @@ import {
  * Needed to support compatible icon names between different icon packs.
  */
 export interface AppIconRegistry {
-  ['arrow-ios-downward']: string;
-  ['arrow-ios-upward']: string;
   ['arrow-back']: string;
+  ['brush']: string;
   ['color-palette']: string;
   ['grid']: string;
   ['list']: string;
@@ -24,16 +23,12 @@ export interface AppIconRegistry {
   ['trash']: string;
 }
 
-export const ArrowDownwardIcon = (style: StyleType): IconElement => (
-  <Icon name='arrow-ios-downward' {...style}/>
-);
-
-export const ArrowUpwardIcon = (style: StyleType): IconElement => (
-  <Icon name='arrow-ios-upward' {...style}/>
-);
-
 export const BackIcon = (style): IconElement => (
   <Icon {...style} name='arrow-back'/>
+);
+
+export const BrushIcon = (style): IconElement => (
+  <Icon {...style} name='brush'/>
 );
 
 export const ColorPaletteIcon = (style: StyleType): IconElement => (

@@ -12,6 +12,7 @@ import {
 import { Toolbar } from '@pg/components/toolbar.component';
 import {
   SafeAreaLayout,
+  SafeAreaLayoutElement,
   SaveAreaInset,
 } from '@pg/components/safeAreaLayout';
 import {
@@ -23,7 +24,7 @@ export const routes: string[] = [
   'Auth',
 ];
 
-export const SamplesScreen = ({ navigation }): React.ReactElement => {
+export const SamplesScreen = ({ navigation }): SafeAreaLayoutElement => {
 
   const onItemPress = (index: number): void => {
     navigation.navigate(routes[index]);

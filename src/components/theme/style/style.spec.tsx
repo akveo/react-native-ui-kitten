@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   View,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {
   fireEvent,
@@ -18,18 +19,13 @@ import {
 import {
   styled,
   StyledComponentProps,
-  ContextProps,
-} from './styleConsumer.component';
+} from './styled';
 import { StyleConsumerService } from './styleConsumer.service';
-import { createThemedStyle } from './style.service';
+import { Interaction } from './type';
 import {
-  Interaction,
-  StyleType,
-} from './type';
-import {
-  ThemedStyleType,
+  StyleSheet,
   ThemeType,
-} from '../theme/type';
+} from './styleSheet.service';
 import {
   styles,
   theme,
@@ -98,12 +94,8 @@ const json = (value: any): string => JSON.stringify(value);
 
 describe('@style: consumer service methods check', () => {
 
-  const context: ContextProps = {
-    style: styles,
-    theme: theme,
-  };
-
-  const service: StyleConsumerService = new StyleConsumerService('Radio', context);
+  // @ts-ignore
+  const service: StyleConsumerService = new StyleConsumerService('Radio', styles);
 
   describe('* style mapping', () => {
 
@@ -129,7 +121,8 @@ describe('@style: consumer service methods check', () => {
         ...derivedProps,
       };
 
-      const value: StyledComponentProps = service.withStyledProps(props, context, [Interaction.ACTIVE]);
+      // @ts-ignore
+      const value: StyledComponentProps = service.withStyledProps(props, styles, theme, [Interaction.ACTIVE]);
 
       expect(value.themedStyle).toMatchSnapshot();
     });
@@ -138,23 +131,44 @@ describe('@style: consumer service methods check', () => {
 
 });
 
-describe('@style: service methods checks', () => {
+describe('@style-sheet: service checks', () => {
 
-  describe('* styling', () => {
+  it('finds theme value properly', async () => {
+    const themeValue = StyleSheet.getThemeValue('gray-100', theme);
+    const undefinedValue = StyleSheet.getThemeValue('undefined', theme);
 
-    const mapping: ThemedStyleType = {
+    expect(themeValue).toEqual(theme['gray-100']);
+    expect(undefinedValue).toBeUndefined();
+  });
+
+  it('finds referencing theme value properly', async () => {
+    const themeValue = StyleSheet.getThemeValue('referencing', theme);
+
+    expect(themeValue).toEqual(theme['gray-100']);
+  });
+
+  it('finds multiple referencing theme value properly', async () => {
+    const themeValue = StyleSheet.getThemeValue('double-referencing', theme);
+
+    expect(themeValue).toEqual(theme['gray-100']);
+  });
+
+  it('finds referencing theme value properly (initial reference)', async () => {
+    const themeValue = StyleSheet.getThemeValue('referencing', theme);
+
+    expect(themeValue).toEqual(theme['gray-100']);
+  });
+
+  it('* creates themedStyle property for mapping properly', () => {
+    const mapping = {
       prop1: 'blue-primary',
       prop2: 'blue-dark',
       prop3: 'gray-primary',
       prop4: 42,
     };
 
-    it('* default theme', () => {
-      const value: StyleType = createThemedStyle(mapping, theme);
-
-      expect(value).toMatchSnapshot();
-    });
-
+    const value = StyleSheet.createThemedStyle(mapping as ViewStyle, theme);
+    expect(value).toMatchSnapshot();
   });
 
 });

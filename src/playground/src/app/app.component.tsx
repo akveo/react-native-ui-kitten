@@ -15,15 +15,12 @@ import {
   ThemeContext,
   ThemeContextType,
 } from '@pg/themes/themeContext';
+import { default as customMapping } from './mapping.json';
 import { ApplicationLoader } from './applicationLoader.component';
 
 const themes = {
   Light: light,
   Dark: dark,
-};
-
-const customMapping = {
-  strict: { 'text-font-family': 'System' },
 };
 
 const fonts = {
@@ -47,6 +44,7 @@ export default () => {
   const applicationProviderConfig: ApplicationProviderProps = {
     mapping: mapping,
     theme: themes[theme],
+    // @ts-ignore
     customMapping: customMapping,
   };
 

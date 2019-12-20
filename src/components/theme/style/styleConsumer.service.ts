@@ -8,13 +8,13 @@ import {
   ControlMetaType,
   ControlThemedStyleType,
   ThemedStyleType,
-  ThemeStyleType,
 } from '@eva-design/dss';
+import { StyledComponentProps } from './styled';
 import {
-  ContextProps,
-  StyledComponentProps,
-} from './styleConsumer.component';
-import { createThemedStyle } from './style.service';
+  StyleSheet,
+  StyleType,
+  ThemeType,
+} from './styleSheet.service';
 import { Interaction } from './type';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
@@ -30,10 +30,10 @@ export class StyleConsumerService {
   private readonly name: string;
   private readonly meta: ControlMetaType;
 
-  constructor(name: string, context: ContextProps) {
+  constructor(name: string, style: StyleType) {
     this.name = name;
 
-    this.meta = this.safe(context.style[name], (generatedConfig): ControlMetaType => {
+    this.meta = this.safe(style[name], (generatedConfig): ControlMetaType => {
       return generatedConfig.meta;
     });
 
@@ -61,12 +61,13 @@ export class StyleConsumerService {
   }
 
   public withStyledProps<P extends object>(source: P,
-                                           context: ContextProps,
+                                           style: StyleType,
+                                           theme: ThemeType,
                                            interaction: Interaction[]): P & StyledComponentProps {
 
     const styleInfo: StyleInfo = this.getStyleInfo(source, interaction);
 
-    const generatedMapping: ThemedStyleType = this.getGeneratedStyleMapping(context.style, styleInfo);
+    const generatedMapping: StyleType = this.getGeneratedStyleMapping(style, styleInfo);
 
     if (!generatedMapping) {
       const docRoot: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
@@ -79,20 +80,16 @@ export class StyleConsumerService {
 
       console.warn(message);
 
-      return this.withStyledProps({ ...source, ...this.createDefaultProps() }, context, interaction);
+      return this.withStyledProps({ ...source, ...this.createDefaultProps() }, style, theme, interaction);
     }
 
-    const mapping = this.withValidParameters(generatedMapping);
+    const mapping: StyleType = this.withValidParameters(generatedMapping);
+    const themedStyle: StyleType = StyleSheet.createThemedStyle(mapping, theme);
 
-    return {
-      ...source,
-      theme: context.theme,
-      themedStyle: createThemedStyle(mapping, context.theme),
-    };
+    return { ...source, theme, themedStyle };
   }
 
-  private getGeneratedStyleMapping<P extends StyledComponentProps>(style: ThemeStyleType,
-                                                                   info: StyleInfo): ThemedStyleType {
+  private getGeneratedStyleMapping<P extends StyledComponentProps>(style: StyleType, info: StyleInfo): StyleType {
 
     return this.safe(style[this.name], (componentStyles: ControlThemedStyleType): ThemedStyleType => {
       const styleKeys: string[] = Object.keys(componentStyles.styles);
@@ -102,7 +99,7 @@ export class StyleConsumerService {
     });
   }
 
-  private withValidParameters(mapping: ThemedStyleType): ThemedStyleType {
+  private withValidParameters(mapping: StyleType): StyleType {
     const invalidParameters: string[] = [];
 
     Object.keys(mapping).forEach((key: string) => {

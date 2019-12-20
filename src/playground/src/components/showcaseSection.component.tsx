@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  StyleSheet,
   View,
   ViewProps,
 } from 'react-native';
@@ -7,9 +8,6 @@ import {
   Text,
   TextElement,
   TextProps,
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
 } from '@ui-kitten/components';
 import {
   ComponentShowcaseItem,
@@ -20,28 +18,26 @@ import {
   ShowcaseItemProps,
 } from './showcaseItem.component';
 
-interface ComponentProps {
+export interface ShowcaseSectionProps extends ViewProps {
   section: ComponentShowcaseSection;
   renderItem: (props: any) => React.ReactElement;
 }
 
-export type ShowcaseSectionProps = ThemedComponentProps & ViewProps & ComponentProps;
+export const ShowcaseSection = (props: ShowcaseSectionProps): React.ReactElement => {
 
-const ShowcaseSectionComponent = (props: ShowcaseSectionProps): React.ReactElement => {
-
-  const { style, themedStyle, section, renderItem } = props;
+  const { style, section, renderItem } = props;
 
   const renderShowcaseItem = (item: ComponentShowcaseItem, index: number): React.ReactElement<ShowcaseItemProps> => (
     <ShowcaseItem
       key={index}
-      style={themedStyle.item}
+      style={styles.item}
       item={item}
       renderItem={renderItem}
     />
   );
 
   const renderTitleElement = (): TextElement => (
-    <Text style={themedStyle.titleLabel}>
+    <Text style={styles.titleLabel}>
       {section.title}
     </Text>
   );
@@ -49,14 +45,14 @@ const ShowcaseSectionComponent = (props: ShowcaseSectionProps): React.ReactEleme
   const titleElement: React.ReactElement<TextProps> = section.title && renderTitleElement();
 
   return (
-    <View style={[themedStyle.container, style]}>
+    <View style={[styles.container, style]}>
       {titleElement}
       {section.items.map(renderShowcaseItem)}
     </View>
   );
 };
 
-export const ShowcaseSection = withStyles(ShowcaseSectionComponent, (theme: ThemeType) => ({
+const styles = StyleSheet.create({
   container: {},
   titleLabel: {
     marginVertical: 8,
@@ -67,4 +63,4 @@ export const ShowcaseSection = withStyles(ShowcaseSectionComponent, (theme: Them
   item: {
     marginVertical: 8,
   },
-}));
+});

@@ -1,7 +1,3 @@
-export interface StyleType {
-  [key: string]: any;
-}
-
 export enum Interaction {
   HOVER = 'hover',
   ACTIVE = 'active',

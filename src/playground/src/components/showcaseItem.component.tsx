@@ -2,39 +2,35 @@ import React from 'react';
 import {
   View,
   ViewProps,
+  StyleSheet,
 } from 'react-native';
 import {
   Text,
   TextElement,
-  ThemedComponentProps,
-  ThemeType,
-  withStyles,
 } from '@ui-kitten/components';
 import { ComponentShowcaseItem } from '@pg/model/componentShowcase.model';
 
-interface ComponentProps {
+export interface ShowcaseItemProps extends ViewProps {
   item: ComponentShowcaseItem;
   renderItem: (props: any) => React.ReactElement;
 }
 
-export type ShowcaseItemProps = ThemedComponentProps & ViewProps & ComponentProps;
+export const ShowcaseItem = (props: ShowcaseItemProps): React.ReactElement => {
 
-const ShowcaseItemComponent = (props: ShowcaseItemProps): React.ReactElement => {
-
-  const { style, themedStyle, item, renderItem } = props;
+  const { style, item, renderItem } = props;
 
   const renderElement = (): React.ReactElement => {
     const element: React.ReactElement = renderItem(item.props);
 
     return React.cloneElement(element, {
-      style: [themedStyle.element, element.props.style],
+      style: [element.props.style],
     });
   };
 
   const renderTitleElement = (): TextElement => (
     <Text
       appearance='hint'
-      style={themedStyle.titleLabel}>
+      style={styles.titleLabel}>
       {item.title}
     </Text>
   );
@@ -44,14 +40,14 @@ const ShowcaseItemComponent = (props: ShowcaseItemProps): React.ReactElement => 
   const showcaseElement: React.ReactElement = renderElement();
 
   return (
-    <View style={[themedStyle.container, style]}>
+    <View style={[styles.container, style]}>
       {titleElement}
       {showcaseElement}
     </View>
   );
 };
 
-export const ShowcaseItem = withStyles(ShowcaseItemComponent, (theme: ThemeType) => ({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -62,5 +58,4 @@ export const ShowcaseItem = withStyles(ShowcaseItemComponent, (theme: ThemeType)
     fontSize: 13,
     textAlign: 'left',
   },
-  element: {},
-}));
+});

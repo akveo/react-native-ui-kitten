@@ -4,10 +4,12 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { HomeDrawer } from '@pg/scenes/home/homeDrawer.component';
 import { HomeTabBar } from '@pg/scenes/home/homeTabBar.component';
 import { ComponentsNavigator } from './components.navigator';
+import { ServicesNavigator } from './services.navigator';
 import { SamplesNavigator } from './samples.navigator';
 
 const HomeBottomNavigator = createBottomTabNavigator({
   ['Components']: ComponentsNavigator,
+  ['Services']: ServicesNavigator,
   ['Samples']: SamplesNavigator,
 }, {
   tabBarComponent: HomeTabBar,

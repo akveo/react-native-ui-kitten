@@ -5,70 +5,32 @@ import {
 } from 'react-native';
 import {
   Divider,
-  Input,
-  Layout,
   List,
   ListItem,
   ListItemElement,
 } from '@ui-kitten/components';
 import {
   SafeAreaLayout,
-  SafeAreaLayoutElement,
   SaveAreaInset,
 } from '@pg/components/safeAreaLayout';
 import { Toolbar } from '@pg/components/toolbar.component';
 import {
   ColorPaletteIcon,
   MenuIcon,
-  SearchIcon,
 } from '@pg/icons';
 
 export const routes: string[] = [
-  'Autocomplete',
-  'Avatar',
-  'BottomNavigation',
-  'Button',
-  'ButtonGroup',
-  'Calendar',
-  'RangeCalendar',
-  'Card',
-  'CheckBox',
-  'Datepicker',
-  'RangeDatepicker',
-  'Drawer',
-  'Icon',
-  'Input',
-  'Layout',
-  'List',
-  'Menu',
-  'Modal',
-  'OverflowMenu',
-  'Popover',
-  'Radio',
-  'RadioGroup',
-  'Select',
-  'Spinner',
-  'TabView',
-  'Text',
-  'Toggle',
-  'Tooltip',
-  'TopNavigation',
+  'Use Theme',
+  'Use StyleSheet',
+  'With Styles',
+  'Theme Provider',
+  'Styled',
 ];
 
-export const ComponentsScreen = ({ navigation }): SafeAreaLayoutElement => {
-
-  const [displayComponents, setDisplayComponents] = React.useState<string[]>(routes);
-
-  const onSearchInputTextChange = (text: string): void => {
-    const nextDisplayComponents: string[] = routes.filter((component: string): boolean => {
-      return component.toLowerCase().startsWith(text.toLowerCase());
-    });
-
-    setDisplayComponents(nextDisplayComponents);
-  };
+export const ServicesScreen = ({ navigation }): React.ReactElement => {
 
   const onItemPress = (index: number): void => {
-    navigation.navigate(displayComponents[index]);
+    navigation.navigate(routes[index]);
   };
 
   const renderItem = (info: ListRenderItemInfo<string>): ListItemElement => (
@@ -92,14 +54,8 @@ export const ComponentsScreen = ({ navigation }): SafeAreaLayoutElement => {
         onBackPress={navigation.toggleDrawer}
         menuIcon={ColorPaletteIcon}
       />
-      <Input
-        style={styles.searchInput}
-        placeholder='Search'
-        icon={SearchIcon}
-        onChangeText={onSearchInputTextChange}
-      />
       <List
-        data={displayComponents}
+        data={routes}
         renderItem={renderItem}
       />
     </SafeAreaLayout>
