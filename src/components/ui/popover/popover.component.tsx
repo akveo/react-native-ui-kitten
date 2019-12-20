@@ -17,7 +17,6 @@ import {
 } from './popoverView.component';
 import { PopoverPlacementService } from './placement.service';
 import {
-  Offsets,
   PlacementOptions,
   PopoverPlacement,
   PopoverPlacements,
@@ -43,6 +42,7 @@ export type PopoverElement = React.ReactElement<PopoverProps>;
 interface State {
   childFrame: Frame;
   contentFrame: Frame;
+  forceMeasure: boolean;
 }
 
 const POINT_OUTSCREEN: Point = new Point(-999, -999);
@@ -93,6 +93,7 @@ export class Popover extends React.Component<PopoverProps, State> {
   public state: State = {
     childFrame: Frame.zero(),
     contentFrame: Frame.zero(),
+    forceMeasure: false,
   };
 
   private modalId: string;
@@ -110,43 +111,33 @@ export class Popover extends React.Component<PopoverProps, State> {
     return { left, top };
   }
 
-  private get contentOffsets(): Frame {
-    const { children: childElement } = this.props;
-    return Offsets.find(childElement.props.style);
-  }
-
   private get backdropConfig() {
     const { allowBackdrop, onBackdropPress, backdropStyle } = this.props;
     return { allowBackdrop, onBackdropPress, backdropStyle };
   }
 
   public componentDidUpdate(prevProps: PopoverProps): void {
-    const visibilityChanged: boolean = prevProps.visible !== this.props.visible;
+    if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
+      this.setState({ forceMeasure: true });
+      return;
+    }
 
-    if (visibilityChanged && !this.props.visible) {
-      // this.contentPosition.setValue(POINT_OUTSCREEN);
+    if (this.modalId && !this.props.visible) {
       this.contentPosition = POINT_OUTSCREEN;
       this.modalId = ModalService.hide(this.modalId);
-      return;
-    }
-
-    if (visibilityChanged && this.props.visible) {
-      // Needed when `children` element is rendered within dynamic containers e.g ScrollView.
-      // Will re-measure `children` element to get its actual screen position.
-      this.setState({ childFrame: null, contentFrame: null });
-      return;
-    }
-
-    if (this.modalId && prevProps.visible && this.props.visible) {
-      ModalService.update(this.modalId, this.renderPopoverElement());
     }
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
     this.state.childFrame = childFrame;
 
-    if (this.props.visible && !this.state.contentFrame) {
+    if (!this.modalId && this.props.visible) {
       this.modalId = ModalService.show(this.renderMeasuringPopoverElement(), this.backdropConfig);
+      return;
+    }
+
+    if (this.modalId && this.props.visible) {
+      ModalService.update(this.modalId, this.renderPopoverElement());
     }
   };
 
@@ -166,7 +157,7 @@ export class Popover extends React.Component<PopoverProps, State> {
     const width: number = this.props.fullWidth ? childFrame.size.width : contentFrame.size.width;
     const frame: Frame = new Frame(contentFrame.origin.x, contentFrame.origin.y, width, contentFrame.size.height);
 
-    return new PlacementOptions(frame, childFrame, Frame.window(), this.contentOffsets);
+    return new PlacementOptions(frame, childFrame, Frame.window(), Frame.zero());
   };
 
   private renderContentElement = (): React.ReactElement => {
@@ -179,10 +170,12 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   private renderPopoverElement = (): PopoverViewElement => {
+    const { contentContainerStyle, ...props } = this.props;
+
     return (
       <PopoverView
-        {...this.props}
-        contentContainerStyle={[styles.popoverView, this.contentFlexPosition]}
+        {...props}
+        contentContainerStyle={[contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
         placement={this.actualPlacement.reverse()}>
         {this.renderContentElement()}
       </PopoverView>
@@ -197,19 +190,14 @@ export class Popover extends React.Component<PopoverProps, State> {
     );
   };
 
-  private renderMeasuringChildElement = (): MeasuringElement => {
+  public render(): React.ReactElement {
     return (
-      <MeasureElement onMeasure={this.onChildMeasure}>
+      <MeasureElement
+        force={this.state.forceMeasure}
+        onMeasure={this.onChildMeasure}>
         {this.props.children}
       </MeasureElement>
     );
-  };
-
-  public render(): React.ReactElement {
-    if (this.props.visible) {
-      return this.renderMeasuringChildElement();
-    }
-    return this.props.children;
   }
 }
 

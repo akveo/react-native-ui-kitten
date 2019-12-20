@@ -1,5 +1,11 @@
 export { AnimationConfig } from './animation';
 export {
+  Autocomplete,
+  AutocompleteProps,
+  AutocompleteElement,
+  AutocompleteOption,
+} from './autocomplete/autocomplete.component';
+export {
   Avatar,
   AvatarProps,
   AvatarElement,
