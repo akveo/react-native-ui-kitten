@@ -1,3 +1,15 @@
+## 4.4.0-beta.1 (2020-01-03)
+
+### :star: Highlights
+
+Autocomplete component and Hooks [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-565398953)
+
+### :rocket: Features
+
+* **Autocomplete**: new UI Kitten component ([#750](https://github.com/akveo/react-native-ui-kitten/issues/750)) ([fd63d7b](https://github.com/akveo/react-native-ui-kitten/commit/fd63d7b))
+* **Styling & Theming**: add useTheme and useStyleSheet hooks ([#676](https://github.com/akveo/react-native-ui-kitten/issues/676)), ([#752](https://github.com/akveo/react-native-ui-kitten/issues/752)) ([67a8f8f](https://github.com/akveo/react-native-ui-kitten/commit/67a8f8f))
+
+
 ## <small>4.3.2 (2019-12-13)</small>
 
 ### :star: Highlights
