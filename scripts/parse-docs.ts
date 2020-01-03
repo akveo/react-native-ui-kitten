@@ -45,6 +45,7 @@ function createDocsJson(): NodeJS.Process {
                excludeExternals: true,
                exclude: './node_modules/**/*',
                json: './docs/docs.json',
+               ignoreCompilerErrors: true,
              }));
 }
 
