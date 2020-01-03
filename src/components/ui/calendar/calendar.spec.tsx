@@ -22,8 +22,6 @@ jest.useFakeTimers();
 const now: Date = new Date();
 const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
 
-const CURRENT_MONTH: number = now.getMonth();
-
 interface State {
   date: Date;
 }
@@ -63,8 +61,8 @@ class TestApplication extends React.Component<TestAppProps, State> {
 describe('@calendar: component checks', () => {
 
   it('* date changes', () => {
-    const expectedDate: Date = new Date(2019, CURRENT_MONTH, 5);
-    const application: RenderAPI = render(<TestApplication/>);
+    const expectedDate: Date = new Date(now.getFullYear(), now.getMonth(), 5);
+    const application: RenderAPI = render(<TestApplication date={expectedDate}/>);
 
     fireEvent.press(application.getAllByText('5')[0]);
     const { date } = application.getByType(Calendar).props;
