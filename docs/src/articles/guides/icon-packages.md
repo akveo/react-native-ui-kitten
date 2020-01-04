@@ -50,7 +50,7 @@ const App = () => (
     <ApplicationProvider mapping={mapping} theme={lightTheme}>
       <HomeScreen />
     </ApplicationProvider>
-  <React.Fragment />
+  </React.Fragment>
 );
 
 export default App;
