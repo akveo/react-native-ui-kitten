@@ -2,7 +2,7 @@
 
 ### :star: Highlights
 
-Autocomplete component and Hooks [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-565398953)
+Autocomplete component and Hooks [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-570506225)
 
 ### :rocket: Features
 
