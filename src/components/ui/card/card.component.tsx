@@ -6,15 +6,17 @@
 
 import React from 'react';
 import {
-  StyleSheet,
-  View,
+  GestureResponderEvent,
   StyleProp,
+  StyleSheet,
   TextStyle,
-  ViewStyle,
   TouchableOpacity,
   TouchableOpacityProps,
+  View,
+  ViewStyle,
 } from 'react-native';
 import {
+  Interaction,
   styled,
   StyledComponentProps,
   StyleType,
@@ -79,6 +81,22 @@ export type CardElement = React.ReactElement<CardProps>;
 class CardComponent extends React.Component<CardProps> {
 
   static styledComponentName: string = 'Card';
+
+  private onPressIn = (event: GestureResponderEvent): void => {
+    this.props.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(event);
+    }
+  };
+
+  private onPressOut = (event: GestureResponderEvent): void => {
+    this.props.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(event);
+    }
+  };
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const {
@@ -196,7 +214,9 @@ class CardComponent extends React.Component<CardProps> {
       <TouchableOpacity
         activeOpacity={1.0}
         {...restProps}
-        style={[container, styles.container, style]}>
+        style={[container, styles.container, style]}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}>
         {header}
         {header && this.renderDivider()}
         {body}
