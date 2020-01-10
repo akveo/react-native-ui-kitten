@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "UI Kitten Documentation Showcases",
-    "slug": "ui-kitten-doc-showcases",
-    "description": "UI Kitten Documentation Application",
+    "name": "UI Kitten Showcases",
+    "slug": "ui-kitten-showcases",
+    "description": "UI Kitten Documentation Showcases",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [

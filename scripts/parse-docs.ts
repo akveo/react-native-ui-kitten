@@ -22,7 +22,7 @@ const typedoc = require('gulp-typedoc');
 const exec = require('child_process').execSync;
 const glob = require('glob');
 
-const PLAYGROUND_DIR: string = path.resolve(PACKAGES_DIR, 'doc-showcase');
+const PLAYGROUND_DIR: string = path.resolve(PACKAGES_DIR, 'showcases');
 const SHOWCASE_DIR: string = path.resolve(PLAYGROUND_DIR, 'components');
 const APP_NAVIGATOR_PATH: string = path.resolve(PLAYGROUND_DIR, 'navigation/app.navigator.web.tsx');
 const tsconfig = require(path.resolve(ROOT_DIR, 'tsconfig.json'));
@@ -69,7 +69,7 @@ function createDocsInputJson(done: GulpCompletionCallback): void {
 }
 
 function createDocAppJson(done: GulpCompletionCallback): void {
-  glob('src/doc-showcase/components/**/*.tsx', (error, showcaseFiles: string[]) => {
+  glob('src/showcases/components/**/*.tsx', (error, showcaseFiles: string[]) => {
     const showcases: DocShowcase[] = createDocAppShowcases(showcaseFiles);
     fs.writeFileSync(`${DOCS_DIR}/src/playground.json`, JSON.stringify(showcases, null, 2));
   });
@@ -84,7 +84,7 @@ function buildDocApp(done: GulpCompletionCallback): void {
 }
 
 function copyDocAppBuildToDocs(done: GulpCompletionCallback) {
-  gulp.src(['src/doc-showcase/web-build/**/*'])
+  gulp.src(['src/showcases/web-build/**/*'])
       .pipe(gulp.dest('docs/src/assets/playground-build'));
 
   done();

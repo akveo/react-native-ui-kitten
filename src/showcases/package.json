@@ -1,5 +1,5 @@
 {
-  "name": "@ui-kitten/doc-showcase",
+  "name": "@ui-kitten/showcases",
   "version": "4.4.0-beta.1",
   "private": true,
   "workspaces": {
