@@ -27,7 +27,7 @@
   "exclude": [
     "./src/template-js",
     "./src/template-ts",
-    "./src/doc-showcase",
+    "./src/showcases",
     "./**/*.spec.ts",
     "./**/*.spec.tsx",
     "./**/*.snap"
