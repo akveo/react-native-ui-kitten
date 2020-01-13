@@ -381,7 +381,6 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
     return (
       <SelectOptionsList
-        showsVerticalScrollIndicator={false}
         {...restProps}
         key={0}
         style={styles.optionsList}

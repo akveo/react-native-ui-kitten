@@ -6,8 +6,8 @@
 
 import React from 'react';
 import {
-  ListRenderItemInfo,
   GestureResponderEvent,
+  ListRenderItemInfo,
 } from 'react-native';
 import {
   List,
@@ -15,8 +15,8 @@ import {
 } from '../list/list.component';
 import {
   SelectOption,
-  SelectOptionType,
   SelectOptionElement,
+  SelectOptionType,
 } from './selectOption.component';
 import {
   SelectGroupOption,
