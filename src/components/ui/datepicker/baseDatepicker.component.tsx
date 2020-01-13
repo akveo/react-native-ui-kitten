@@ -36,6 +36,7 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   status?: string;
   size?: string;
   placeholder?: string;
+  dateFormat?: string;
 }
 
 interface State {
@@ -44,13 +45,13 @@ interface State {
 
 type DatepickerChildren<D = Date> = [CalendarElement<D>, React.ReactElement];
 
-const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
 
 export abstract class BaseDatepickerComponent<P, D = Date> extends React.Component<BaseDatepickerProps<D> & P, State> {
 
   static defaultProps: Partial<BaseDatepickerProps> = {
     dateService: new NativeDateService(),
     placeholder: 'dd/mm/yyyy',
+    dateFormat: 'DD/MM/YYYY',
   };
 
   public state: State = {
@@ -62,7 +63,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 
   protected formatDateToString(date: D): string {
-    return this.props.dateService.format(date, FULL_DATE_FORMAT_STRING);
+    return this.props.dateService.format(date, this.props.dateFormat);
   }
 
   private getComponentStyle = (style: StyleType): StyleType => {

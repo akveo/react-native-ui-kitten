@@ -27,6 +27,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
  *
+ * @property {string} dateFormat - Sets the display string of the Date property. Default DD-MM-YY
+ * 
  * @property {string} size - Determines the size of the component.
  * Can be `small`, `medium` or `large`.
  * Default is `medium`.
