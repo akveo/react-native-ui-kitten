@@ -8,6 +8,7 @@ import React from 'react';
 import {
   ListRenderItemInfo,
   StyleSheet,
+  View,
 } from 'react-native';
 import {
   Input,
@@ -166,7 +167,9 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
         fullWidth={true}
         content={listElement}
         onBackdropPress={this.onBackdropPress}>
-        {inputElement}
+        <View>
+          {inputElement}
+        </View>
       </Popover>
     );
   }
