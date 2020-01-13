@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {
   Input,
+  InputComponent,
   InputElement,
   InputProps,
 } from '../input/input.component';
@@ -53,6 +54,15 @@ interface State {
  *
  * @extends React.Component
  *
+ * @method {() => void} focus - Focuses Autocomplete and sets data list visible.
+ *
+ * @method {() => void} blur - Removes focus from Autocomplete and sets data list invisible.
+ * This is the opposite of `focus()`.
+ *
+ * @method {() => boolean} isFocused - Returns true if the Autocomplete is currently focused and visible.
+ *
+ * @method {() => void} clear - Removes all text from the Autocomplete.
+ *
  * @property {AutocompleteOption[]} data - Options displayed in component.
  * Each option can be any type, but should contain `title` property.
  *
@@ -86,10 +96,28 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
     optionsVisible: false,
   };
 
+  private inputRef: React.RefObject<InputComponent> = React.createRef();
+
   private get data(): O[] {
     const hasData: boolean = this.props.data && this.props.data.length > 0;
     return hasData && this.props.data || this.props.placeholderData;
   }
+
+  public focus = (): void => {
+    this.inputRef.current.focus();
+  };
+
+  public blur = (): void => {
+    this.inputRef.current.blur();
+  };
+
+  public isFocused = (): boolean => {
+    return this.inputRef.current.isFocused();
+  };
+
+  public clear = (): void => {
+    this.inputRef.current.clear();
+  };
 
   private onInputFocus = (e: InputFocusEvent): void => {
     this.setState({ optionsVisible: true });
@@ -142,6 +170,7 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
   private renderInputElement = (props: Partial<InputProps>): InputElement => {
     return (
       <Input
+        ref={this.inputRef}
         {...props}
         onFocus={this.onInputFocus}
       />

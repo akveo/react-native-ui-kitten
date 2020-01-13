@@ -55,7 +55,7 @@ export interface InputProps extends StyledComponentProps, TextInputProps {
   icon?: IconProp;
   textStyle?: StyleProp<TextStyle>;
   labelStyle?: StyleProp<TextStyle>;
-  captionTextStyle?: StyleProp<TextStyle>;
+  captionStyle?: StyleProp<TextStyle>;
   onIconPress?: (event: GestureResponderEvent) => void;
 }
 
@@ -71,7 +71,7 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @method {() => void} blur - Removes focus from an input or view. This is the opposite of `focus()`.
  *
- * @method {() => boolean} isFocused - Returns if the input is currently focused.
+ * @method {() => boolean} isFocused - Returns true if the input is currently focused.
  *
  * @method {() => void} clear - Removes all text from the input.
  *
@@ -117,6 +117,8 @@ export type InputElement = React.ReactElement<InputProps>;
  * @overview-example InputWithLabel
  *
  * @overview-example InputWithCaption
+ *
+ * @overview-example InputReference
  *
  * @example InputInlineStyling
  *
@@ -274,7 +276,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
 
     return React.cloneElement(iconElement, {
       key: 0,
-      style: [style, styles.icon, iconElement.props.style],
+      style: [style, iconElement.props.style],
     });
   };
 
@@ -292,7 +294,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
     return (
       <Text
         key={2}
-        style={[style, styles.captionLabel, this.props.captionTextStyle]}>
+        style={[style, styles.captionLabel, this.props.captionStyle]}>
         {this.props.caption}
       </Text>
     );
@@ -303,7 +305,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
 
     return React.cloneElement(iconElement, {
       key: 3,
-      style: [style, styles.captionIcon, iconElement.props.style],
+      style: [style, iconElement.props.style],
     });
   };
 
@@ -330,7 +332,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
     ] = this.renderComponentChildren(componentStyle);
 
     return (
-      <View style={[componentStyle.container, styles.container]}>
+      <View style={componentStyle.container}>
         {labelElement}
         <View
           style={[componentStyle.inputContainer, styles.inputContainer]}>
@@ -356,7 +358,6 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
 }
 
 const styles = StyleSheet.create({
-  container: {},
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -371,12 +372,9 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flexBasis: 'auto',
   },
-  placeholder: {},
-  icon: {},
   label: {
     textAlign: 'left',
   },
-  captionIcon: {},
   captionLabel: {
     textAlign: 'left',
   },
