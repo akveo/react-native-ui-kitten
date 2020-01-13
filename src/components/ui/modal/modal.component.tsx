@@ -6,16 +6,16 @@
 
 import React from 'react';
 import {
+  StyleProp,
+  StyleSheet,
   View,
   ViewProps,
-  StyleSheet,
   ViewStyle,
-  StyleProp,
 } from 'react-native';
 import {
+  ModalPresentingConfig,
   ModalService,
   StyleType,
-  ModalPresentingConfig,
 } from '@kitten/theme';
 import {
   MeasureElement,
@@ -48,9 +48,6 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *
  * @property {ReactElement | ReactElement[]} children - Determines component's children.
  *
- * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
- * Default is `false`.
- *
  * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
  *
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
@@ -71,21 +68,24 @@ export class Modal extends React.Component<ModalProps> {
   private contentSize: Size = Size.zero();
   private id: string = '';
 
+  private get backdropConfig() {
+    const { onBackdropPress, backdropStyle } = this.props;
+    return { onBackdropPress, backdropStyle };
+  }
+
   public componentDidUpdate(prevProps: ModalProps): void {
     if (prevProps.visible !== this.props.visible) {
       this.handleVisibility(this.props);
     } else if (prevProps.visible && this.props.visible) {
-      const element: React.ReactElement = this.renderModal();
+      const element: React.ReactElement = this.renderBaseModal();
       ModalService.update(this.id, element.props.children);
     }
   }
 
   private handleVisibility = (props: ModalProps): void => {
-    const { allowBackdrop, onBackdropPress } = this.props;
-
     if (props.visible) {
-      const element: React.ReactElement = this.renderModal();
-      this.id = ModalService.show(element, { allowBackdrop, onBackdropPress });
+      const element: React.ReactElement = this.renderBaseModal();
+      this.id = ModalService.show(element, this.backdropConfig);
     } else {
       this.id = ModalService.hide(this.id);
     }
@@ -118,21 +118,7 @@ export class Modal extends React.Component<ModalProps> {
     );
   };
 
-  private renderModal = (): React.ReactElement => {
-    const { backdropStyle } = this.props;
-    const modal: React.ReactElement<ViewProps> = this.renderBaseModal();
-
-    return backdropStyle ? (
-      <React.Fragment>
-        <View
-          pointerEvents='box-none'
-          style={[styles.backdrop, backdropStyle]}/>
-        {modal}
-      </React.Fragment>
-    ) : modal;
-  };
-
-  private renderMeasureNode = (): MeasuringElement => {
+  public render(): MeasuringElement {
     const modal: React.ReactElement = this.renderBaseModal();
     const measureStyledModal: React.ReactElement = React.cloneElement(modal, {
       style: [modal.props.style, styles.hiddenModal],
@@ -144,10 +130,6 @@ export class Modal extends React.Component<ModalProps> {
         {measureStyledModal}
       </MeasureElement>
     );
-  };
-
-  public render(): React.ReactNode {
-    return this.renderMeasureNode();
   }
 }
 

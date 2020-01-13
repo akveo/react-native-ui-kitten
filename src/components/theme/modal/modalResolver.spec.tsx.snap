@@ -4,50 +4,42 @@ exports[`@modal resolver component checks * modal resolver component renders pro
 <View
   style={
     Object {
-      "height": 0,
+      "bottom": 0,
+      "left": 0,
       "position": "absolute",
-      "width": 0,
+      "right": 0,
+      "top": 0,
     }
   }
 >
-  <View
-    pointerEvents="none"
+  <TouchableOpacity
+    activeOpacity={1}
     style={
-      Object {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+      ]
     }
   />
   <View
-    onResponderRelease={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
-    pointerEvents="box-none"
     style={
-      Object {
-        "alignSelf": "flex-start",
-      }
+      Array [
+        undefined,
+        undefined,
+      ]
     }
-    visible={true}
   >
-    <View
-      style={
-        Array [
-          undefined,
-          undefined,
-        ]
-      }
-    >
-      <Text>
-        Test1
-      </Text>
-    </View>
+    <Text>
+      Test1
+    </Text>
   </View>
 </View>
 `;
 
-exports[`@modal resolver component checks * modal resolver component renders properly 2`] = `null`;
+exports[`@modal resolver component checks * modal resolver component renders properly 2`] = `false`;

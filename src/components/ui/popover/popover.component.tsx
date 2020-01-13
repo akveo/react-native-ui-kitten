@@ -67,9 +67,6 @@ const POINT_OUTSCREEN: Point = new Point(-999, -999);
  *
  * @property {boolean} fullWidth - Determines whether content element should have same width as child element.
  *
- * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
- * Default is `false`.
- *
  * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
  *
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
@@ -86,7 +83,6 @@ const POINT_OUTSCREEN: Point = new Point(-999, -999);
 export class Popover extends React.Component<PopoverProps, State> {
 
   static defaultProps: Partial<PopoverProps> = {
-    allowBackdrop: true,
     placement: PopoverPlacements.BOTTOM,
   };
 
@@ -112,8 +108,8 @@ export class Popover extends React.Component<PopoverProps, State> {
   }
 
   private get backdropConfig() {
-    const { allowBackdrop, onBackdropPress, backdropStyle } = this.props;
-    return { allowBackdrop, onBackdropPress, backdropStyle };
+    const { onBackdropPress, backdropStyle } = this.props;
+    return { onBackdropPress, backdropStyle };
   }
 
   public componentDidUpdate(prevProps: PopoverProps): void {

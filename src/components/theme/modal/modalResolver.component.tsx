@@ -6,24 +6,24 @@
 
 import React from 'react';
 import {
-  View,
-  ViewProps,
+  StyleProp,
   StyleSheet,
   TouchableOpacity,
-  TouchableOpacityProps,
+  View,
+  ViewProps,
+  ViewStyle,
 } from 'react-native';
+import { ModalPresentingConfig } from './modal.service';
 
 type ChildElement = React.ReactElement;
 type ChildrenProp = ChildElement | ChildElement[];
 
-interface ComponentProps {
+export interface ModalResolverProps extends ViewProps, ModalPresentingConfig {
   visible: boolean;
   children: ChildrenProp;
-  allowBackdrop: boolean;
+  backdropStyle: StyleProp<ViewStyle>;
   onBackdropPress: () => void;
 }
-
-export type ModalResolverProps = ViewProps & ComponentProps;
 
 export class ModalResolver extends React.Component<ModalResolverProps> {
 
@@ -31,92 +31,32 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
     visible: false,
   };
 
-  private onBackdropPress = (): void => {
-    const { allowBackdrop, onBackdropPress } = this.props;
-
-    if (allowBackdrop) {
-      onBackdropPress();
-    }
-  };
-
-  private onStartShouldSetResponder = (): boolean => {
-    return true;
-  };
-
-  private onResponderRelease = (): void => {
-    return;
-  };
-
-  private onStartShouldSetResponderCapture = (): boolean => {
-    return false;
-  };
-
-  private renderComponentChild = (source: React.ReactElement): React.ReactElement => {
+  private renderChildElement = (source: ChildElement): ChildElement => {
     return React.cloneElement(source, {
       style: [source.props.style, this.props.style],
     });
   };
 
-  private renderComponentChildren = (source: React.ReactNode): React.ReactElement[] => {
-    return React.Children.map(source, this.renderComponentChild);
+  private renderComponentChildren = (source: ChildrenProp): ChildElement[] => {
+    return React.Children.map(source, this.renderChildElement);
   };
 
-  private renderWithBackDrop = (component: React.ReactElement<ViewProps>):
-    React.ReactElement<TouchableOpacityProps> => {
+  private renderComponent = (): React.ReactElement<ViewProps> => {
+    const componentChildren = this.renderComponentChildren(this.props.children);
 
     return (
-      <TouchableOpacity
-        style={[styles.container, this.props.style]}
-        onPress={this.onBackdropPress}
-        activeOpacity={1}>
-        {component}
-      </TouchableOpacity>
-    );
-  };
-
-  private renderWithoutBackDrop = (component: React.ReactElement<ViewProps>): React.ReactElement<ViewProps> => {
-    return (
-      <View style={styles.notVisibleWrapper}>
-        <View
-          style={styles.container}
-          pointerEvents='none'/>
-        {component}
+      <View style={StyleSheet.absoluteFill}>
+        <TouchableOpacity
+          style={[StyleSheet.absoluteFill, this.props.backdropStyle]}
+          activeOpacity={1.0}
+          onPress={this.props.onBackdropPress}
+        />
+        {componentChildren}
       </View>
     );
   };
 
-  private renderComponent = (): React.ReactElement<TouchableOpacityProps | ViewProps> => {
-    const { children, allowBackdrop, ...derivedProps } = this.props;
-    const componentChildren: React.ReactElement[] = this.renderComponentChildren(children);
-
-    const dialog: React.ReactElement<ViewProps> =
-      <View
-        {...derivedProps}
-        style={styles.contentWrapper}
-        onStartShouldSetResponder={this.onStartShouldSetResponder}
-        onResponderRelease={this.onResponderRelease}
-        onStartShouldSetResponderCapture={this.onStartShouldSetResponderCapture}
-        pointerEvents='box-none'>
-        {componentChildren}
-      </View>;
-
-    return allowBackdrop ?
-      this.renderWithBackDrop(dialog) : this.renderWithoutBackDrop(dialog);
-  };
-
-  public render(): React.ReactElement<ViewProps | TouchableOpacityProps> | null {
-    return this.props.visible ? this.renderComponent() : null;
+  public render(): React.ReactElement<ViewProps> | undefined {
+    return this.props.visible && this.renderComponent();
   }
 }
-
-const styles = StyleSheet.create({
-  container: StyleSheet.absoluteFillObject,
-  notVisibleWrapper: {
-    position: 'absolute',
-    width: 0,
-    height: 0,
-  },
-  contentWrapper: {
-    alignSelf: 'flex-start',
-  },
-});
