@@ -12,11 +12,12 @@
   "workspaces": {
     "packages": [
       "src/*",
-      "docs"
+      "docs",
+      "../kittenTricks"
     ]
   },
   "scripts": {
-    "playground": "yarn --cwd src/playground",
+    "demo": "yarn --cwd ../kittenTricks",
     "build": "tsc && tscpaths -p ./tsconfig.json -s ./src/components -o ./dist/tsc-out/components",
     "clean": "rimraf ./dist",
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",

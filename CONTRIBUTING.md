@@ -8,7 +8,7 @@ We would love for you to contribute to UI Kitten and help make it even better to
  - [Feature Requests](#feature)
  - [Submission Guidelines](#submit-pr)
  - [Coding Rules](#rules)
- - [Run Playground](#run)
+ - [Run Demo Application](#run)
  - [Debugging your changes](#debug)
  - [Commit Message Guidelines](#commit)
 
@@ -135,12 +135,13 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
 * All public API methods **must be documented** following JsDoc notation.
 
-## <a name="run"></a> Run playground
+## <a name="run"></a> Run Demo Application
 
-UI Kitten contains playground module which allows you to debug quickly your changes.
-See the project in [playground directory](src/playground).
+UI Kitten has [Demo Application](https://github.com/akveo/kittenTricks) which allows you to debug quickly your changes.
 To run it you should:
-* Clone this repo
+* Clone UI Kitten project
+* Clone Kitten Tricks project
+* Clone Eva Design System project
 * Go to project root directory:
 ```
 cd ./path-to/react-native-ui-kitten
@@ -151,7 +152,7 @@ yarn
 ```
 * That's it! You're ready to run:
 ```
-yarn playground start
+yarn demo start:dev
 ```
 * Now you will be prompted by CLI to select the device you'd like to run.
 Just follow the CLI instructions. Normally you should hit `a` or `i` button
@@ -159,8 +160,8 @@ to make Android or iOS device running.
 
 ## <a name="debug"></a> Debugging your changes
 
-If you're done with running playground on Android emulator or iOS simulator,
-you can observe all the changes you do inside [framework](src/framework)
+If you're done with running Kitten Tricks on Android emulator or iOS simulator,
+you can observe all the changes you do inside [components module](src/components)
  on the device you have started. That's where hot/live reload takes place.
 
 ## <a name="commit"></a> Commit Message Guidelines
@@ -208,13 +209,13 @@ Must be one of the following:
 * **release**: Release version commit
 
 ### Scope
-* For [framework's ui module](src/framework/ui) the scope should be the name of the component that was affected:
+* For [components ui module](src/components/ui) the scope should be the name of the component that was affected:
 ```
 style(button): add styles for pressed state
 ```
-* For changes in other modules (like [theme](src/framework/theme) or [playground](src/playground)) the scope should be module name:
+* For changes in other modules (like [moment](src/moment) or [date-fns](src/date-fns)) the scope should be module name:
 ```
-build(playground): react-navigation integration
+feat(date-fns): description of awesome feature
 ```
 
 ### Subject

@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "UI Kitten Showcases",
+    "slug": "ui-kitten-showcases",
+    "description": "UI Kitten Documentation Showcases",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "src/assets/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  }
+}
