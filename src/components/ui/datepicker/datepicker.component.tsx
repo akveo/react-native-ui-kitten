@@ -21,6 +21,14 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @extends React.Component
  *
+ * @method {() => void} focus - Focuses Datepicker and sets it visible.
+ *
+ * @method {() => void} blur - Removes focus from Datepicker and sets it invisible. This is the opposite of `focus()`.
+ *
+ * @method {() => boolean} isFocused - Returns true if the Datepicker is currently focused and visible.
+ *
+ * @method {() => void} clear - Removes all text from the Datepicker.
+ *
  * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
  *
  * @property {string} status - Determines the status of the component.
@@ -35,6 +43,18 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Default is `false.
  *
  * @property {string} placeholder - Determines placeholder of the component.
+ *
+ * @property {string} label - Determines text rendered at the top of the component.
+ *
+ * @property {string} caption - Determines caption text rendered at the bottom of the component.
+ *
+ * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
+ *
+ * @property {(style: StyleType) => ReactElement} captionIcon - Determines caption icon.
+ *
+ * @property {StyleProp<TextStyle>} labelStyle - Customizes label style.
+ *
+ * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
@@ -64,6 +84,12 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @property {() => ReactElement} renderFooter - Should return the footer.
  *
+ * @property {string | PopoverPlacement} placement - Determines the actualPlacement of the popover.
+ * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
+ * `right end`, `bottom start` or `bottom end`.
+ * Default is `bottom`.
+ * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example DatepickerSimpleUsage
@@ -88,6 +114,17 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
 export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
 
   static styledComponentName: string = 'Datepicker';
+
+  constructor(props: DatepickerProps<D>) {
+    super(props);
+    this.clear = this.clear.bind(this);
+  }
+
+  public clear = (): void => {
+    if (this.props.onSelect) {
+      this.props.onSelect(null);
+    }
+  };
 
   private get calendarProps(): CalendarProps<D> {
     return {
