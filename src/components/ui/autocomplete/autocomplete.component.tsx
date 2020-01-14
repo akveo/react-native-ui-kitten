@@ -55,6 +55,10 @@ interface State {
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets data list visible.
+ *
+ * @method {() => void} hide - Sets data list invisible.
+ *
  * @method {() => void} focus - Focuses Autocomplete and sets data list visible.
  *
  * @method {() => void} blur - Removes focus from Autocomplete and sets data list invisible.
@@ -97,12 +101,21 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
     optionsVisible: false,
   };
 
+  private popoverRef: React.RefObject<Popover> = React.createRef();
   private inputRef: React.RefObject<InputComponent> = React.createRef();
 
   private get data(): O[] {
     const hasData: boolean = this.props.data && this.props.data.length > 0;
     return hasData && this.props.data || this.props.placeholderData;
   }
+
+  public show = (): void => {
+    this.popoverRef.current.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current.hide();
+  };
 
   public focus = (): void => {
     this.inputRef.current.focus();
@@ -191,6 +204,7 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
 
     return (
       <Popover
+        ref={this.popoverRef}
         style={styles.popover}
         visible={this.state.optionsVisible}
         fullWidth={true}

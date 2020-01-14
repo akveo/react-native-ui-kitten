@@ -21,6 +21,10 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets picker visible.
+ *
+ * @method {() => void} hide - Sets picker invisible.
+ *
  * @method {() => void} focus - Focuses Datepicker and sets it visible.
  *
  * @method {() => void} blur - Removes focus from Datepicker and sets it invisible. This is the opposite of `focus()`.

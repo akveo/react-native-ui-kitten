@@ -40,6 +40,10 @@ const POINT_OUTSCREEN: Point = new Point(-999, -999);
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets modal visible.
+ *
+ * @method {() => void} hide - Sets modal invisible.
+ *
  * @property {boolean} visible - Determines whether component is visible. By default is false.
  *
  * @property {ReactElement | ReactElement[]} children - Determines component's children.
@@ -75,22 +79,34 @@ export class Modal extends React.Component<ModalProps, State> {
     return { onBackdropPress, backdropStyle };
   }
 
+  public show = (): void => {
+    this.modalId = ModalService.show(this.renderModalElement(this.contentFlexPosition), this.backdropConfig);
+  };
+
+  public hide = (): void => {
+    this.modalId = ModalService.hide(this.modalId);
+  };
+
   public componentDidUpdate(): void {
     if (!this.modalId && this.props.visible) {
-      this.modalId = ModalService.show(this.renderModalElement(this.contentFlexPosition), this.backdropConfig);
+      this.show();
       return;
     }
 
     if (this.modalId && !this.props.visible) {
-      this.modalId = ModalService.hide(this.modalId);
+      this.hide();
     }
+  }
+
+  public componentWillUnmount(): void {
+    this.hide();
   }
 
   private onContentMeasure = (frame: Frame): void => {
     this.state.contentFrame = frame;
 
     if (!this.modalId && this.props.visible) {
-      this.modalId = ModalService.show(this.renderModalElement(this.contentFlexPosition), this.backdropConfig);
+      this.show();
     }
   };
 

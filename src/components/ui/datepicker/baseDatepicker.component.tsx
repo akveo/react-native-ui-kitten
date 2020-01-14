@@ -71,6 +71,16 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     visible: false,
   };
 
+  private popoverRef: React.RefObject<Popover> = React.createRef();
+
+  public show = (): void => {
+    this.popoverRef.current.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current.hide();
+  };
+
   public focus = (): void => {
     this.setState({ visible: true }, this.dispatchActive);
   };
@@ -309,6 +319,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
       <View style={style}>
         {labelElement}
         <Popover
+          ref={this.popoverRef}
           style={[popover, styles.popover]}
           placement={placement}
           visible={this.state.visible}
