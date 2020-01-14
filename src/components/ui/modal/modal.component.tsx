@@ -64,7 +64,7 @@ export class Modal extends React.Component<ModalProps, State> {
   };
 
   private get contentFlexPosition(): FlexStyle {
-    const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style);
+    const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});
     const centerInWindow: Point = this.state.contentFrame.centerOf(Frame.window()).origin;
     // @ts-ignore
     return { left: derivedStyle.left || centerInWindow.x, top: derivedStyle.top || centerInWindow.y };
