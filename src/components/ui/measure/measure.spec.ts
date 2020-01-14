@@ -47,4 +47,11 @@ describe('* frame', () => {
     expect(y).toEqual(2);
   });
 
+  it('* center of', () => {
+    const { origin: { x, y } } = rhsFrame.centerOf(lhsFrame);
+
+    expect(x).toEqual(2);
+    expect(y).toEqual(2);
+  });
+
 });

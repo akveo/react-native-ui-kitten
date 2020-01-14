@@ -6,7 +6,7 @@
 
 import React from 'react';
 import {
-  StyleProp,
+  FlexStyle,
   StyleSheet,
   View,
   ViewProps,
@@ -15,29 +15,25 @@ import {
 import {
   ModalPresentingConfig,
   ModalService,
-  StyleType,
 } from '@kitten/theme';
-import {
-  MeasureElement,
-  MeasuringElement,
-} from '../measure/measure.component';
+import { MeasureElement } from '../measure/measure.component';
 import {
   Frame,
-  Size,
+  Point,
 } from '../measure/type';
-
-const window: Frame = Frame.window();
-export const baseModalTestId: string = '@modal/base';
-
-type ChildElement = React.ReactElement;
-type ChildrenProp = ChildElement | ChildElement[];
 
 export interface ModalProps extends ViewProps, ModalPresentingConfig {
   visible?: boolean;
-  children: ChildrenProp;
+  children: React.ReactNode;
 }
 
 export type ModalElement = React.ReactElement<ModalProps>;
+
+interface State {
+  contentFrame: Frame;
+}
+
+const POINT_OUTSCREEN: Point = new Point(-999, -999);
 
 /**
  * `Modal` component is a wrapper than presents content above an enclosing view.
@@ -59,90 +55,69 @@ export type ModalElement = React.ReactElement<ModalProps>;
  *
  * @overview-example ModalWithBackdrop
  */
-export class Modal extends React.Component<ModalProps> {
+export class Modal extends React.Component<ModalProps, State> {
 
-  static defaultProps: Partial<ModalProps> = {
-    onBackdropPress: () => null,
+  private modalId: string;
+
+  public state: State = {
+    contentFrame: Frame.zero(),
   };
 
-  private contentSize: Size = Size.zero();
-  private id: string = '';
+  private get contentFlexPosition(): FlexStyle {
+    const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style);
+    const centerInWindow: Point = this.state.contentFrame.centerOf(Frame.window()).origin;
+    // @ts-ignore
+    return { left: derivedStyle.left || centerInWindow.x, top: derivedStyle.top || centerInWindow.y };
+  }
 
-  private get backdropConfig() {
+  private get backdropConfig(): ModalPresentingConfig {
     const { onBackdropPress, backdropStyle } = this.props;
     return { onBackdropPress, backdropStyle };
   }
 
-  public componentDidUpdate(prevProps: ModalProps): void {
-    if (prevProps.visible !== this.props.visible) {
-      this.handleVisibility(this.props);
-    } else if (prevProps.visible && this.props.visible) {
-      const element: React.ReactElement = this.renderBaseModal();
-      ModalService.update(this.id, element.props.children);
+  public componentDidUpdate(): void {
+    if (!this.modalId && this.props.visible) {
+      this.modalId = ModalService.show(this.renderModalElement(this.contentFlexPosition), this.backdropConfig);
+      return;
+    }
+
+    if (this.modalId && !this.props.visible) {
+      this.modalId = ModalService.hide(this.modalId);
     }
   }
 
-  private handleVisibility = (props: ModalProps): void => {
-    if (props.visible) {
-      const element: React.ReactElement = this.renderBaseModal();
-      this.id = ModalService.show(element, this.backdropConfig);
-    } else {
-      this.id = ModalService.hide(this.id);
+  private onContentMeasure = (frame: Frame): void => {
+    this.state.contentFrame = frame;
+
+    if (!this.modalId && this.props.visible) {
+      this.modalId = ModalService.show(this.renderModalElement(this.contentFlexPosition), this.backdropConfig);
     }
   };
 
-  private getAbsoluteRelatedStyle = (): StyleType => {
-    const windowFrame: Frame = Frame.window();
-
-    return {
-      top: (windowFrame.size.height - this.contentSize.height) / 2,
-      left: (windowFrame.size.width - this.contentSize.width) / 2,
-    };
-  };
-
-  private onMeasure = (frame: Frame): void => {
-    this.contentSize = frame.size;
-  };
-
-  private renderBaseModal = (): React.ReactElement<ViewProps> => {
-    const { style, children, ...restProps } = this.props;
-    const absoluteRelatedStyle: StyleType = this.getAbsoluteRelatedStyle();
-
+  private renderModalElement = (style: ViewStyle): React.ReactElement<ViewProps> => {
     return (
       <View
-        {...restProps}
-        testID={baseModalTestId}
-        style={[styles.container, absoluteRelatedStyle, style]}>
-        {children}
-      </View>
+        {...this.props}
+        style={[this.props.style, styles.contentView, style]}
+      />
     );
   };
 
-  public render(): MeasuringElement {
-    const modal: React.ReactElement = this.renderBaseModal();
-    const measureStyledModal: React.ReactElement = React.cloneElement(modal, {
-      style: [modal.props.style, styles.hiddenModal],
-      pointerEvents: 'none',
-    });
-
+  public render(): React.ReactElement {
     return (
-      <MeasureElement onMeasure={this.onMeasure}>
-        {measureStyledModal}
+      <MeasureElement onMeasure={this.onContentMeasure}>
+        {this.renderModalElement(styles.outscreen)}
       </MeasureElement>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contentView: {
     position: 'absolute',
   },
-  backdrop: {
-    position: 'absolute',
-    width: window.size.width,
-    height: window.size.height,
-  },
-  hiddenModal: {
-    opacity: 0,
+  outscreen: {
+    left: POINT_OUTSCREEN.x,
+    top: POINT_OUTSCREEN.y,
   },
 });
