@@ -93,6 +93,14 @@ interface State {
  *
  * @extends React.Component
  *
+ * @method {() => void} focus - Focuses Select and sets it visible.
+ *
+ * @method {() => void} blur - Removes focus from Select and sets it invisible. This is the opposite of `focus()`.
+ *
+ * @method {() => boolean} isFocused - Returns true if the Select is currently focused and visible.
+ *
+ * @method {() => void} clear - Removes all text from the Select.
+ *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
@@ -183,6 +191,25 @@ class SelectComponent extends React.Component<SelectProps, State> {
       new SingleSelectStrategy(selectedOption, data, keyExtractor);
   }
 
+  public focus = (): void => {
+    this.setState({ visible: true }, this.dispatchActive);
+  };
+
+  public blur = (): void => {
+    this.setState({ visible: true }, this.dispatchActive);
+  };
+
+  public isFocused = (): boolean => {
+    return this.state.visible;
+  };
+
+  public clear = (): void => {
+    if (this.props.onSelect) {
+      this.selectionStrategy.select(null);
+      this.props.onSelect(null);
+    }
+  };
+
   public onMouseEnter = (): void => {
     if (!this.state.visible) {
       this.props.dispatch([Interaction.HOVER]);
@@ -204,7 +231,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private onPress = (event: GestureResponderEvent): void => {
-    this.setVisibility();
+    this.toggleVisibility();
 
     if (this.props.onPress) {
       this.props.onPress(event);
@@ -229,14 +256,14 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   private onSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
     if (this.props.onSelect) {
-      const selection: SelectOption = this.selectionStrategy.select(option, this.setVisibility);
+      const selection: SelectOption = this.selectionStrategy.select(option, this.toggleVisibility);
       this.props.onSelect(selection, event);
       // FIXME: looks like a bug in selection strategy
       this.forceUpdate();
     }
   };
 
-  private setVisibility = (): void => {
+  private toggleVisibility = (): void => {
     const visible: boolean = !this.state.visible;
     this.setState({ visible }, this.handleVisibleChange);
   };
@@ -442,7 +469,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
           fullWidth={true}
           visible={this.state.visible}
           content={optionsListElement}
-          onBackdropPress={this.setVisibility}>
+          onBackdropPress={this.toggleVisibility}>
           {controlElement}
         </Popover>
       </View>
