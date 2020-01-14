@@ -72,9 +72,11 @@ export const AutocompleteStatesShowcase = () => {
 const styles = StyleSheet.create({
   container: {
     minHeight: 228,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   autocomplete: {
+    width: 192,
     margin: 8,
   },
 });
-
