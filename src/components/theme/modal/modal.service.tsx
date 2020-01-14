@@ -34,7 +34,7 @@ import {
  *
  *   const showModal = () => {
  *     const contentElement = this.renderModalContentElement();
- *     this.modalID = ModalService.show(contentElement, { allowBackdrop: true, onBackdropPress: this.hideModal });
+ *     this.modalID = ModalService.show(contentElement, { onBackdropPress: this.hideModal });
  *   };
  *
  *   const hideModal = () => {
@@ -90,7 +90,6 @@ class ModalServiceType {
 }
 
 export interface ModalPresentingConfig {
-  allowBackdrop?: boolean;
   backdropStyle?: StyleProp<ViewStyle>;
   onBackdropPress?: () => void;
 }

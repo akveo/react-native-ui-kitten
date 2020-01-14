@@ -120,6 +120,15 @@ export class Frame {
     );
   }
 
+  public centerOf(other: Frame): Frame {
+    return new Frame(
+      other.origin.x + (other.size.width - this.size.width) / 2,
+      other.origin.y + (other.size.height - this.size.height) / 2,
+      this.size.width,
+      this.size.height,
+    );
+  }
+
   static zero(): Frame {
     return new Frame(0, 0, 0, 0);
   }
