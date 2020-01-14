@@ -77,30 +77,6 @@ describe('@modal component checks', () => {
     expect(component.getByType(Modal).props.visible).toBe(false);
   });
 
-  it('* modal default center placement calculated properly', () => {
-    const window: Frame = Frame.window();
-    const modalStyle: StyleType = {
-      width: 200,
-      height: 200,
-    };
-    const component: RenderAPI = render(
-      <TestScreen modalStyle={modalStyle}/>,
-    );
-
-    fireEvent.press(component.getByTestId(buttonShowModalTestId));
-    const modalInstance: any = component.getByType(Modal).instance;
-    const expectedStyle: StyleType = {
-      top: (window.size.height - modalInstance.contentSize.height) / 2,
-      left: (window.size.width - modalInstance.contentSize.width) / 2,
-    };
-
-    const baseModalStyles: StyleType[] = component.getByTestId(baseModalTestId).props.style;
-    const expectedStyleExist: boolean = baseModalStyles[0]
-      .some((style: StyleType) => stringify(style) === stringify(expectedStyle));
-
-    expect(expectedStyleExist).toBe(true);
-  });
-
 });
 
 describe('@modal panel checks', () => {

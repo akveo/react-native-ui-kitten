@@ -29,7 +29,6 @@ export const ModalWithBackdropShowcase = () => {
         TOGGLE MODAL
       </Button>
       <Modal
-        allowBackdrop={true}
         backdropStyle={styles.backdrop}
         onBackdropPress={toggleModal}
         visible={visible}>

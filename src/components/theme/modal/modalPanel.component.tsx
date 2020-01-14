@@ -72,9 +72,7 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
 
     const childElement: React.ReactElement = panelChild.element;
 
-    panelChild.element = React.cloneElement(childElement, {
-      children: children,
-    });
+    panelChild.element = React.cloneElement(childElement, childElement.props, children);
 
     const components: Map<string, ModalPanelChild> = this.state.components;
     components.delete(identifier);
@@ -93,11 +91,9 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
   private renderModal = (config: ModalPanelChild, index: number): React.ReactElement<ModalResolverProps> => {
     return (
       <ModalResolver
-        {...config.element.props}
-        style={config.backdropStyle}
-        visible={true}
         key={index}
-        allowBackdrop={config.allowBackdrop}
+        visible={true}
+        backdropStyle={config.backdropStyle}
         onBackdropPress={config.onBackdropPress}>
         {config.element}
       </ModalResolver>

@@ -18,9 +18,7 @@ describe('@modal resolver component checks', () => {
 
   it('* modal resolver component renders properly', () => {
     const modal1: RenderAPI = render(
-      <ModalResolver
-        visible={true}
-        allowBackdrop={false}>
+      <ModalResolver visible={true}>
         <View>
           <Text>
             Test1
@@ -30,9 +28,7 @@ describe('@modal resolver component checks', () => {
     );
 
     const modal2: RenderAPI = render(
-      <ModalResolver
-        visible={false}
-        allowBackdrop={false}>
+      <ModalResolver visible={false}>
         <View>
           <Text>
             Test2
@@ -51,21 +47,17 @@ describe('@modal resolver component checks', () => {
   it('* modal resolver component props checks', () => {
     const modalPassingProps = {
       visible: true,
-      allowBackdrop: false,
     };
     const modal = <ModalResolver {...modalPassingProps}/>;
 
     expect(modal.props.visible).toBe(modalPassingProps.visible);
-    expect(modal.props.allowBackdrop).toBe(modalPassingProps.allowBackdrop);
   });
 
   it('* modal resolver backdrop press calling checks', () => {
     const onBackdropPress = jest.fn();
 
     const component: RenderAPI = render(
-      <ModalResolver
-        visible={true}
-        allowBackdrop={true}>
+      <ModalResolver visible={true}>
         <View>
           <Text>Test1</Text>
           <Button

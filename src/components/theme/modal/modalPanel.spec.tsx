@@ -38,7 +38,6 @@ describe('@modal-service: service checks', () => {
           textTestId={textId(1)}
         />,
         {
-          allowBackdrop: false,
           onBackdropPress: () => null,
         },
       );
@@ -52,7 +51,6 @@ describe('@modal-service: service checks', () => {
           textTestId={textId(1)}
         />,
         {
-          allowBackdrop: false,
           onBackdropPress: () => null,
         },
       );
@@ -64,7 +62,6 @@ describe('@modal-service: service checks', () => {
           textTestId={textId(2)}
         />,
         {
-          allowBackdrop: false,
           onBackdropPress: () => null,
         },
       );
@@ -78,7 +75,6 @@ describe('@modal-service: service checks', () => {
           textTestId={textId(0)}
         />,
         {
-          allowBackdrop: true,
           onBackdropPress: () => null,
         },
       );
@@ -215,7 +211,6 @@ describe('@modal panel checks', () => {
       this.modalId = ModalService.show(
         <TestModal onBackdropPress={this.hideModal}/>,
         {
-          allowBackdrop: true,
           onBackdropPress: () => null,
         },
       );

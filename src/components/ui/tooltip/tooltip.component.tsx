@@ -66,9 +66,6 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @property {boolean} fullWidth - Determines whether content element should have same width as child element.
  *
- * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
- * Default is `false`.
- *
  * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
  *
  * @property {() => void} onBackdropPress - Determines component's behavior when the user is
