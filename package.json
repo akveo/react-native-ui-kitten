@@ -1,6 +1,6 @@
 {
   "name": "ui-kitten",
-  "version": "4.4.0-beta.1",
+  "version": "4.4.0-beta.2",
   "private": true,
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
@@ -12,8 +12,7 @@
   "workspaces": {
     "packages": [
       "src/*",
-      "docs",
-      "../kittenTricks"
+      "docs"
     ]
   },
   "scripts": {
@@ -29,7 +28,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@eva-design/eva": "^1.3.0",
+    "@eva-design/eva": "^1.3.2",
     "@types/gulp": "ts3.7",
     "@types/gulp-replace": "ts3.7",
     "@types/jest": "ts3.7",
