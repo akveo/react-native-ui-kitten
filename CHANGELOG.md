@@ -1,3 +1,25 @@
+## 4.4.0-beta.2 (2020-01-16)
+
+### :star: Highlights
+
+Bug fixes and improvements [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-575060796)
+
+### :rocket: Features
+
+* **Modal**: hide when unmounted ([#735](https://github.com/akveo/react-native-ui-kitten/issues/735)) ([8b2721a](https://github.com/akveo/react-native-ui-kitten/commit/8b2721a))
+* Add direct manipulation methods to input components ([#801](https://github.com/akveo/react-native-ui-kitten/issues/801) [#802](https://github.com/akveo/react-native-ui-kitten/issues/802)) ([01399d7](https://github.com/akveo/react-native-ui-kitten/commit/01399d7))
+* Add direct manipulation methods to modal components ([#808](https://github.com/akveo/react-native-ui-kitten/issues/808) [#813](https://github.com/akveo/react-native-ui-kitten/issues/813)) ([8b2721a](https://github.com/akveo/react-native-ui-kitten/commit/8b2721a))
+* **Demo App**: [Kitten Tricks](https://github.com/akveo/kittenTricks) is used as a runnable framework demo ([1b987c1](https://github.com/akveo/react-native-ui-kitten/commit/1b987c1))
+
+### :bug: Bug Fixes
+
+* **Autocomplete**: Runtime crash on Android ([#800](https://github.com/akveo/react-native-ui-kitten/issues/800)) ([1aa3864](https://github.com/akveo/react-native-ui-kitten/commit/1aa3864))
+* **Input**: Add ability to use placeholderTextColor property ([#828](https://github.com/akveo/react-native-ui-kitten/issues/828)) ([e10f6c7](https://github.com/akveo/react-native-ui-kitten/commit/e10f6c7))
+* **Modal**: Ability to interact with modal contents on Android ([#807](https://github.com/akveo/react-native-ui-kitten/issues/807)) ([5c78095](https://github.com/akveo/react-native-ui-kitten/commit/5c78095))
+* **Select**: Add vertical scroll indicator ([#794](https://github.com/akveo/react-native-ui-kitten/issues/807)) ([231ba89](https://github.com/akveo/react-native-ui-kitten/commit/231ba89))
+
+
+
 ## 4.4.0-beta.1 (2020-01-03)
 
 ### :star: Highlights
