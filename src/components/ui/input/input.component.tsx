@@ -338,10 +338,10 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
           style={[componentStyle.inputContainer, styles.inputContainer]}>
           <TextInput
             ref={this.textInputRef}
+            placeholderTextColor={componentStyle.placeholder.color}
             {...restProps}
             {...this.webEventResponder.eventHandlers}
             style={[componentStyle.text, styles.text, webStyles.text, textStyle]}
-            placeholderTextColor={componentStyle.placeholder.color}
             editable={!restProps.disabled}
             onFocus={this.onTextFieldFocus}
             onBlur={this.onTextFieldBlur}
