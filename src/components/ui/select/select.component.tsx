@@ -93,9 +93,14 @@ interface State {
  *
  * @extends React.Component
  *
- * @method {() => void} focus - Focuses Select and sets it visible.
+ * @method {() => void} show - Sets options list visible.
  *
- * @method {() => void} blur - Removes focus from Select and sets it invisible. This is the opposite of `focus()`.
+ * @method {() => void} hide - Sets options list invisible.
+ *
+ * @method {() => void} focus - Focuses Select and sets options list visible.
+ *
+ * @method {() => void} blur - Removes focus from Select and sets options list invisible.
+ * This is the opposite of `focus()`.
  *
  * @method {() => boolean} isFocused - Returns true if the Select is currently focused and visible.
  *
@@ -168,6 +173,7 @@ interface State {
 class SelectComponent extends React.Component<SelectProps, State> {
 
   static styledComponentName: string = 'Select';
+
   static defaultProps: Partial<SelectProps> = {
     placeholder: 'Select Option',
     multiSelect: false,
@@ -176,6 +182,8 @@ class SelectComponent extends React.Component<SelectProps, State> {
   public state: State = {
     visible: false,
   };
+
+  private popoverRef: React.RefObject<Popover> = React.createRef();
 
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
@@ -190,6 +198,14 @@ class SelectComponent extends React.Component<SelectProps, State> {
       new MultiSelectStrategy(selectedOption, data, keyExtractor) :
       new SingleSelectStrategy(selectedOption, data, keyExtractor);
   }
+
+  public show = (): void => {
+    this.popoverRef.current.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current.hide();
+  };
 
   public focus = (): void => {
     this.setState({ visible: true }, this.dispatchActive);
@@ -464,6 +480,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
       <View style={style}>
         {labelElement}
         <Popover
+          ref={this.popoverRef}
           style={[popover, styles.popover]}
           fullWidth={true}
           visible={this.state.visible}

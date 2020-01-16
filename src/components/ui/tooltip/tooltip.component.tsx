@@ -48,6 +48,10 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets Tooltip visible.
+ *
+ * @method {() => void} hide - Sets Tooltip invisible.
+ *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
  * @property {string} text - Determines the text of the tooltip
@@ -86,6 +90,16 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
 export class TooltipComponent extends React.Component<TooltipProps> {
 
   static styledComponentName: string = 'Tooltip';
+
+  private popoverRef: React.RefObject<Popover> = React.createRef();
+
+  public show = (): void => {
+    this.popoverRef.current.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current.hide();
+  };
 
   private getComponentStyle = (source: StyleType) => {
     const {
@@ -180,6 +194,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
     return (
       <Popover
         {...props}
+        ref={this.popoverRef}
         style={[container, style]}
         content={contentElement}
         indicator={this.renderPopoverIndicatorElement}>
