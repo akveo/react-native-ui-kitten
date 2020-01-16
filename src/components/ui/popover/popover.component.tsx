@@ -53,6 +53,10 @@ const POINT_OUTSCREEN: Point = new Point(-999, -999);
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets `content` element visible.
+ *
+ * @method {() => void} hide - Sets `content` element invisible.
+ *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
  * @property {ReactElement} content - Determines the content of the popover.
@@ -112,6 +116,14 @@ export class Popover extends React.Component<PopoverProps, State> {
     return { onBackdropPress, backdropStyle };
   }
 
+  public show = (): void => {
+    this.modalId = ModalService.show(this.renderMeasuringPopoverElement(), this.backdropConfig);
+  };
+
+  public hide = (): void => {
+    this.modalId = ModalService.hide(this.modalId);
+  };
+
   public componentDidUpdate(prevProps: PopoverProps): void {
     if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
@@ -120,15 +132,19 @@ export class Popover extends React.Component<PopoverProps, State> {
 
     if (this.modalId && !this.props.visible) {
       this.contentPosition = POINT_OUTSCREEN;
-      this.modalId = ModalService.hide(this.modalId);
+      this.hide();
     }
+  }
+
+  public componentWillUnmount(): void {
+    this.hide();
   }
 
   private onChildMeasure = (childFrame: Frame): void => {
     this.state.childFrame = childFrame;
 
     if (!this.modalId && this.props.visible) {
-      this.modalId = ModalService.show(this.renderMeasuringPopoverElement(), this.backdropConfig);
+      this.show();
       return;
     }
 
@@ -166,12 +182,10 @@ export class Popover extends React.Component<PopoverProps, State> {
   };
 
   private renderPopoverElement = (): PopoverViewElement => {
-    const { contentContainerStyle, ...props } = this.props;
-
     return (
       <PopoverView
-        {...props}
-        contentContainerStyle={[contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
+        {...this.props}
+        contentContainerStyle={[this.props.contentContainerStyle, styles.popoverView, this.contentFlexPosition]}
         placement={this.actualPlacement.reverse()}>
         {this.renderContentElement()}
       </PopoverView>
