@@ -2,7 +2,7 @@
 
 ### :star: Highlights
 
-Bug fixes and improvements [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-570506225)
+Bug fixes and improvements [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-575060796)
 
 ### :rocket: Features
 
