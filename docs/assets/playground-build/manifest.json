@@ -1,14 +1,14 @@
 {
   "background_color": "#ffffff",
-  "description": "UI Kitten Playground Application",
+  "description": "UI Kitten Documentation Showcases",
   "dir": "auto",
   "display": "standalone",
   "lang": "en",
-  "name": "UI Kitten Playground",
+  "name": "UI Kitten Showcases",
   "orientation": "portrait",
   "prefer_related_applications": true,
   "related_applications": [],
-  "short_name": "UI Kitten Playground",
+  "short_name": "UI Kitten Showcases",
   "start_url": ".",
   "theme_color": "#4630EB"
 }
