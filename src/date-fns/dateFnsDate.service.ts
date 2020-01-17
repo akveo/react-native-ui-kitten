@@ -18,7 +18,6 @@ const parse = rollupParse || dateFnsParse;
 const formatDate = rollupFormat || dateFnsFormat;
 
 export interface DateFnsOptions extends NativeDateServiceOptions {
-  format: string;
   parseOptions: {};
   formatOptions: {};
 }

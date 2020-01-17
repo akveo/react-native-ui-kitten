@@ -136,8 +136,8 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
     const { startDate, endDate } = this.props.range;
 
     if (startDate || endDate) {
-      const start: string = startDate ? this.formatDateToString(startDate) : '';
-      const end: string = endDate ? this.formatDateToString(endDate) : '';
+      const start: string = startDate ? this.props.dateService.format(startDate, null) : '';
+      const end: string = endDate ? this.props.dateService.format(endDate, null) : '';
 
       return `${start} - ${end}`;
     } else {
