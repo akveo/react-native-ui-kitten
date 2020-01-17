@@ -5,6 +5,7 @@ import {
   ImageStyle,
   StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
@@ -20,88 +21,163 @@ import {
   Text,
   TextElement,
 } from '../text/text.component';
+import { IconElement } from '../icon/icon.component';
 import { Popover } from '../popover/popover.component';
 import { BaseCalendarProps } from '../calendar/baseCalendar.component';
-import { NativeDateService } from '../calendar/service/nativeDate.service';
 import { CalendarElement } from '../calendar/calendar.component';
 import { RangeCalendarElement } from '../calendar/rangeCalendar.component';
-import { PopoverPlacements } from '../popover/type';
+import { NativeDateService } from '../calendar/service/nativeDate.service';
+import { isValidString } from '../support/services';
+import {
+  PopoverPlacement,
+  PopoverPlacements,
+} from '../popover/type';
+
+type IconProp = (style: StyleType) => IconElement;
 
 export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   TouchableOpacityProps,
   BaseCalendarProps<D> {
 
   controlStyle?: StyleProp<ViewStyle>;
+  label?: string;
+  caption?: string;
+  captionIcon?: IconProp;
   icon?: (style: ImageStyle) => React.ReactElement<ImageProps>;
   status?: string;
   size?: string;
   placeholder?: string;
-  dateFormat?: string;
+  labelStyle?: StyleProp<TextStyle>;
+  captionStyle?: StyleProp<TextStyle>;
+  placement?: PopoverPlacement | string;
 }
 
 interface State {
   visible: boolean;
 }
 
-type DatepickerChildren<D = Date> = [CalendarElement<D>, React.ReactElement];
-
-
 export abstract class BaseDatepickerComponent<P, D = Date> extends React.Component<BaseDatepickerProps<D> & P, State> {
 
   static defaultProps: Partial<BaseDatepickerProps> = {
     dateService: new NativeDateService(),
     placeholder: 'dd/mm/yyyy',
-    dateFormat: 'DD/MM/YYYY',
+    placement: PopoverPlacements.BOTTOM_START,
   };
 
   public state: State = {
     visible: false,
   };
 
+  private popoverRef: React.RefObject<Popover> = React.createRef();
+
+  public show = (): void => {
+    this.popoverRef.current.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current.hide();
+  };
+
+  public focus = (): void => {
+    this.setState({ visible: true }, this.dispatchActive);
+  };
+
+  public blur = (): void => {
+    this.setState({ visible: true }, this.dispatchActive);
+  };
+
+  public isFocused = (): boolean => {
+    return this.state.visible;
+  };
+
+  public abstract clear(): void;
+
   protected abstract getComponentTitle(): string;
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
 
-  protected formatDateToString(date: D): string {
-    return this.props.dateService.format(date, this.props.dateFormat);
-  }
-
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
+      textMarginHorizontal,
+      textFontFamily,
       textFontSize,
       textLineHeight,
       textFontWeight,
-      textFontFamily,
       textColor,
+      placeholderColor,
       iconWidth,
       iconHeight,
+      iconMarginHorizontal,
       iconTintColor,
+      labelColor,
+      labelFontSize,
+      labelLineHeight,
+      labelMarginBottom,
+      labelFontWeight,
+      captionMarginTop,
+      captionColor,
+      captionFontSize,
+      captionLineHeight,
+      captionFontWeight,
+      captionIconWidth,
+      captionIconHeight,
+      captionIconMarginRight,
+      captionIconTintColor,
       popoverWidth,
-      ...containerStyles
+      ...controlParameters
     } = style;
 
     return {
-      control: containerStyles,
+      control: controlParameters,
+      captionContainer: {
+        marginTop: captionMarginTop,
+      },
+      text: {
+        marginHorizontal: textMarginHorizontal,
+        fontFamily: textFontFamily,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
+        lineHeight: textLineHeight,
+        color: textColor,
+      },
+      placeholder: {
+        marginHorizontal: textMarginHorizontal,
+        color: placeholderColor,
+      },
       icon: {
         width: iconWidth,
         height: iconHeight,
+        marginHorizontal: iconMarginHorizontal,
         tintColor: iconTintColor,
       },
-      text: {
-        fontSize: textFontSize,
-        lineHeight: textLineHeight,
-        fontWeight: textFontWeight,
-        color: textColor,
-        fontFamily: textFontFamily,
+      label: {
+        color: labelColor,
+        fontSize: labelFontSize,
+        lineHeight: labelLineHeight,
+        marginBottom: labelMarginBottom,
+        fontWeight: labelFontWeight,
+      },
+      captionIcon: {
+        width: captionIconWidth,
+        height: captionIconHeight,
+        tintColor: captionIconTintColor,
+        marginRight: captionIconMarginRight,
+      },
+      captionLabel: {
+        fontSize: captionFontSize,
+        fontWeight: captionFontWeight,
+        lineHeight: captionLineHeight,
+        color: captionColor,
       },
       popover: {
         width: popoverWidth,
+        marginBottom: captionMarginTop,
       },
     };
   };
 
   private onPress = (event: GestureResponderEvent): void => {
-    this.setVisibility();
+    this.toggleVisibility();
 
     if (this.props.onPress) {
       this.props.onPress(event);
@@ -124,7 +200,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     }
   };
 
-  private setVisibility = (): void => {
+  private toggleVisibility = (): void => {
     const visible: boolean = !this.state.visible;
     this.setState({ visible }, this.dispatchActive);
   };
@@ -141,6 +217,35 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     const iconElement: React.ReactElement<ImageProps> = this.props.icon(style);
 
     return React.cloneElement(iconElement, {
+      style: [style, iconElement.props.style],
+    });
+  };
+
+  private renderLabelElement = (style: TextStyle): TextElement => {
+    return (
+      <Text
+        key={1}
+        style={[style, styles.label, this.props.labelStyle]}>
+        {this.props.label}
+      </Text>
+    );
+  };
+
+  private renderCaptionElement = (style: TextStyle): TextElement => {
+    return (
+      <Text
+        key={2}
+        style={[style, styles.captionLabel, this.props.captionStyle]}>
+        {this.props.caption}
+      </Text>
+    );
+  };
+
+  private renderCaptionIconElement = (style: ImageStyle): IconElement => {
+    const iconElement: IconElement = this.props.captionIcon(style);
+
+    return React.cloneElement(iconElement, {
+      key: 3,
       style: [style, iconElement.props.style],
     });
   };
@@ -181,42 +286,66 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     );
   };
 
-  private renderComponentChildren = (style: StyleType): DatepickerChildren<D> => {
+  private renderComponentChildren = (style: StyleType): React.ReactElement[] => {
     return [
       this.renderCalendar(),
+      isValidString(this.props.label) && this.renderLabelElement(style.label),
       this.renderControlElement(style),
+      isValidString(this.props.caption) && this.renderCaptionElement(style.captionLabel),
+      this.props.captionIcon && this.renderCaptionIconElement(style.captionIcon),
     ];
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style } = this.props;
+    const { themedStyle, style, placement } = this.props;
     const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
 
-    const [calendarElement, controlElement] = this.renderComponentChildren(componentStyle);
+    const [
+      calendarElement,
+      labelElement,
+      controlElement,
+      captionElement,
+      captionIconElement,
+    ] = this.renderComponentChildren(componentStyle);
 
     return (
       <View style={style}>
+        {labelElement}
         <Popover
+          ref={this.popoverRef}
           style={[popover, styles.popover]}
-          placement={PopoverPlacements.BOTTOM_START}
+          placement={placement}
           visible={this.state.visible}
           content={calendarElement}
-          onBackdropPress={this.setVisibility}>
+          onBackdropPress={this.toggleVisibility}>
           {controlElement}
         </Popover>
+        <View style={[componentStyle.captionContainer, styles.captionContainer]}>
+          {captionIconElement}
+          {captionElement}
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  popover: {
+    borderWidth: 0,
+  },
   control: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  popover: {
-    borderWidth: 0,
+  label: {
+    textAlign: 'left',
+  },
+  captionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  captionLabel: {
+    textAlign: 'left',
   },
 });
-

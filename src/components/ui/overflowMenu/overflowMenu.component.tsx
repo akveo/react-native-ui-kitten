@@ -41,6 +41,10 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets menu visible.
+ *
+ * @method {() => void} hide - Sets menu invisible.
+ *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
  * @property {OverflowMenuItemType[]} data - Determines menu items.
@@ -58,9 +62,6 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
  *
  * @property {boolean} fullWidth - Determines whether content element should have same width as child element.
- *
- * @property {boolean} allowBackdrop - Determines whether user can tap on back-drop.
- * Default is `false`.
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
  *
@@ -84,6 +85,16 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
 class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   static styledComponentName: string = 'OverflowMenu';
+
+  private popoverRef: React.RefObject<Popover> = React.createRef();
+
+  public show = (): void => {
+    this.popoverRef.current.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current.hide();
+  };
 
   private getComponentStyle = (source: StyleType): StyleType => {
     const { indicatorBackgroundColor, ...containerParameters } = source;
@@ -120,6 +131,7 @@ class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
     return (
       <Popover
         {...restProps}
+        ref={this.popoverRef}
         style={[container, style]}
         content={contentElement}>
         {children}

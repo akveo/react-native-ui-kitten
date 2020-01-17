@@ -21,7 +21,9 @@ interface ShowcaseRouteMap {
 }
 
 export const createDocAppNavigation = (showcasePath: string): string => {
-  const showcaseDirs: string[] = fs.readdirSync(showcasePath);
+  const showcaseDirs: string[] = fs.readdirSync(showcasePath).filter((dirOrFile: string) => {
+    return !dirOrFile.endsWith('.tsx');
+  });
 
   const showcaseMap: ShowcaseMap = showcaseDirs.reduce((map, component: string) => {
     return { ...map, [component]: createComponentShowcase(showcasePath, component) };
@@ -44,7 +46,7 @@ export const createDocAppNavigation = (showcasePath: string): string => {
 
 const createShowcaseRouteMap = (map: ShowcaseMap, component: string): ShowcaseRouteMap => {
   return map[component].showcases.reduce((componentShowcases, showcaseInfo: ShowcaseInfo) => {
-    const showcaseScreenStatement = `() => sharingHeightContainer(${showcaseInfo.name}, '${showcaseInfo.routeName}')`;
+    const showcaseScreenStatement = `() => ShowcaseIFrame(${showcaseInfo.name}, '${showcaseInfo.routeName}')`;
     return { ...componentShowcases, [showcaseInfo.routeName]: showcaseScreenStatement };
   }, {});
 };
@@ -52,7 +54,7 @@ const createShowcaseRouteMap = (map: ShowcaseMap, component: string): ShowcaseRo
 const createShowcaseImportStatements = (map: ShowcaseMap, component: string): string[] => {
   return map[component].showcases.map((showcaseInfo: ShowcaseInfo): string => {
     const platformComponentPath: string = path.parse(showcaseInfo.path).name;
-    return `import { ${showcaseInfo.name} } from '@pg/components/showcases/${component}/${platformComponentPath}';`;
+    return `import { ${showcaseInfo.name} } from '../components/${component}/${platformComponentPath}';`;
   });
 };
 
@@ -71,7 +73,7 @@ const createOutput = (imports: string[], statements: string[]): string => {
     'import React from \'react\';',
     'import { createBrowserApp } from \'@react-navigation/web\';',
     'import { createStackNavigator } from \'react-navigation-stack\';',
-    'import { sharingHeightContainer } from \'@pg/components/sharingHeight.container\';',
+    'import { ShowcaseIFrame } from \'../components/showcaseIFrame.component\';',
     ...imports,
     '',
     ...statements,

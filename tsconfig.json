@@ -17,9 +17,6 @@
       ],
       "@kitten/*": [
         "./src/components/*"
-      ],
-      "@pg/*": [
-        "./src/playground/src/*"
       ]
     }
   },
@@ -30,7 +27,7 @@
   "exclude": [
     "./src/template-js",
     "./src/template-ts",
-    "./src/playground",
+    "./src/showcases",
     "./**/*.spec.ts",
     "./**/*.spec.tsx",
     "./**/*.snap"

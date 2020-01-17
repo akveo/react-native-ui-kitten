@@ -93,6 +93,19 @@ interface State {
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets options list visible.
+ *
+ * @method {() => void} hide - Sets options list invisible.
+ *
+ * @method {() => void} focus - Focuses Select and sets options list visible.
+ *
+ * @method {() => void} blur - Removes focus from Select and sets options list invisible.
+ * This is the opposite of `focus()`.
+ *
+ * @method {() => boolean} isFocused - Returns true if the Select is currently focused and visible.
+ *
+ * @method {() => void} clear - Removes all text from the Select.
+ *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
@@ -160,6 +173,7 @@ interface State {
 class SelectComponent extends React.Component<SelectProps, State> {
 
   static styledComponentName: string = 'Select';
+
   static defaultProps: Partial<SelectProps> = {
     placeholder: 'Select Option',
     multiSelect: false,
@@ -168,6 +182,8 @@ class SelectComponent extends React.Component<SelectProps, State> {
   public state: State = {
     visible: false,
   };
+
+  private popoverRef: React.RefObject<Popover> = React.createRef();
 
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
@@ -182,6 +198,33 @@ class SelectComponent extends React.Component<SelectProps, State> {
       new MultiSelectStrategy(selectedOption, data, keyExtractor) :
       new SingleSelectStrategy(selectedOption, data, keyExtractor);
   }
+
+  public show = (): void => {
+    this.popoverRef.current.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current.hide();
+  };
+
+  public focus = (): void => {
+    this.setState({ visible: true }, this.dispatchActive);
+  };
+
+  public blur = (): void => {
+    this.setState({ visible: true }, this.dispatchActive);
+  };
+
+  public isFocused = (): boolean => {
+    return this.state.visible;
+  };
+
+  public clear = (): void => {
+    if (this.props.onSelect) {
+      this.selectionStrategy.select(null);
+      this.props.onSelect(null);
+    }
+  };
 
   public onMouseEnter = (): void => {
     if (!this.state.visible) {
@@ -204,7 +247,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private onPress = (event: GestureResponderEvent): void => {
-    this.setVisibility();
+    this.toggleVisibility();
 
     if (this.props.onPress) {
       this.props.onPress(event);
@@ -229,14 +272,14 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   private onSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
     if (this.props.onSelect) {
-      const selection: SelectOption = this.selectionStrategy.select(option, this.setVisibility);
+      const selection: SelectOption = this.selectionStrategy.select(option, this.toggleVisibility);
       this.props.onSelect(selection, event);
       // FIXME: looks like a bug in selection strategy
       this.forceUpdate();
     }
   };
 
-  private setVisibility = (): void => {
+  private toggleVisibility = (): void => {
     const visible: boolean = !this.state.visible;
     this.setState({ visible }, this.handleVisibleChange);
   };
@@ -381,7 +424,6 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
     return (
       <SelectOptionsList
-        showsVerticalScrollIndicator={false}
         {...restProps}
         key={0}
         style={styles.optionsList}
@@ -438,11 +480,12 @@ class SelectComponent extends React.Component<SelectProps, State> {
       <View style={style}>
         {labelElement}
         <Popover
+          ref={this.popoverRef}
           style={[popover, styles.popover]}
           fullWidth={true}
           visible={this.state.visible}
           content={optionsListElement}
-          onBackdropPress={this.setVisibility}>
+          onBackdropPress={this.toggleVisibility}>
           {controlElement}
         </Popover>
       </View>

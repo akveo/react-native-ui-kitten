@@ -5,8 +5,7 @@
 - [Documentation](#documentation)
 - [Development](#development)
 - [Release](#release)
-- [Playground](#playground)
-- [Kitten Tricks](#kitten-tricks)
+- [Kitten Tricks](#demo-application---kitten-tricks)
 
 # Things you must follow before contributing
 - Don’t overcomplicate
@@ -14,15 +13,15 @@
 - Use tslint, to check the code style
 - Never forget [document your changes add create some examples](#documentation)
 - Write tests
-- [Create playground components](#creating-playground-components) per each new component/feature
+- [Create showcase components](#create-a-new-component) per each new component/feature
 
 # New Feature Checklist
 - lint checks are passing
-- tests are added/updated and passing
-- showcase in the playground updated
-- tsdocs added/updated
+- tests are added or updated and passing
+- showcase components in demo application added or updated
+- showcase components in documentation application added or updated
+- readable documentation added or updated
 - commit message is properly formatted
-- for the override styles - registered in a list of overrides
 - looks great on all default themes
 - requires approval from several core team contributors
 
@@ -42,18 +41,18 @@ The components documentation is taken from the component comment sections.
     - moment - `@ui-kitten/moment` package. Services that allows UI Kitten components to work with moment.js.    
     - template-js - `@ui-kitten/template-js` package. Template app for creating UI Kitten project with React Native CLI.    
     - template-ts - `@ui-kitten/template-ts` package. Template app for creating TypeScript UI Kitten project with React Native CLI.     
-    - playground - independent module with runnable examples for each feature
+    - [Demo Application](https://github.com/akveo/kittenTricks) - independent application with runnable examples for each feature
       
 ## UI Kit 
 
-Located in [./src/framework](./src/components). Divided into two dirs:
+Located in [./src/components](./src/components). Divided into two dirs:
 
 - [theme](./src/components/theme) - Contains styling services and supporting components used to provide styles to basic components.
 - [ui](./src/components/ui) - Contains basic UI components.
 
 ## Styling services
 
-Located in [./src/framework/theme](./src/components/theme)
+Located in [./src/components/theme](./src/components/theme)
 
 - [theme](./src/components/theme/theme) - ThemeProvider component. Used to provide one of Eva themes used to style basic components.
 - [mapping](./src/components/theme/mapping) - MappingProvider component. Used to provide one of Eva mappings to style basic components.
@@ -196,22 +195,31 @@ And don't forget to specify the language above your example.
 - awesomeComponent.spec.tsx (component tests)
 ````
 
-- create directory in `./src/playground/src/scenes/awesomeComponent` with following files:
+- create directory in Demo Application `./src/scenes/components/awesomeComponent` with following files:
 ````
-- awesomeComponent.component.tsx (component showcase container)
-- awesomeComponentShowcase.component.tsx (basic component showcase)
+- awesome-component.component.tsx (component showcase container)
+- awesome-component-showcase.component.tsx (basic component showcase)
 - type.tsx (component configuration file)
 ````
 
-Look through already existing showcases and use similar implementation (e.g [Button Showcase](./src/playground/src/scenes/button))
+Look through already existing showcases and use similar implementation (e.g [Button Showcase](https://github.com/akveo/kittenTricks/tree/master/src/scenes/components/button))
 
-- register your showcase in a playground: 
+- register your showcase in a Demo Application: 
 
-Open `./src/playground/src/navigation/components.navigator.tsx` and expand playground navigation with your component container:
+Open [Components Navigator](https://github.com/akveo/kittenTricks/tree/master/src/navigation/components.navigator.tsx) and expand navigation with your component container:
 ```
-import { AwesomeComponentScreen } from '@pg/scenes/awesomeComponent/awesomeComponent.component';
+import { AwesomeComponentScreen } from '../scenes/components/awesome-component.component';
 ...
-['AwesomeComponent']: AwesomeComponentScreen
+<Stack.Screen name='AwesomeComponent' component={AwesomeComponentScreen} />
+```
+
+Open [Components Screen](https://github.com/akveo/kittenTricks/tree/master/src/scenes/components/data.ts) and expand it with route to new component:
+```
+{
+    title: 'AwesomeComponent',
+    route: 'AwesomeComponent',
+    ...
+  }
 ```
 
 ## Release
@@ -233,67 +241,38 @@ To start a new release (publish the framework packages on NPM) you need:
 11. Create and push [git tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) with template `(vX.X.X)`
 12. Create release on GitHub for the tag
 
-# Playground
+# Demo Application - Kitten Tricks
 
-Playground is an example app built on top of the [Expo](https://github.com/expo/expo) containing runnable component examples.
+Kitten Tricks is an example app built on top of the [Expo](https://github.com/expo/expo) containing reusable screens and runnable component examples. This application is used as a framework demo.
 
-## Start a Playground
+## Start a Demo Application
 
-`yarn && yarn playground start` from the project root
+`yarn && yarn demo start` from the `react-native-ui-kitten` project
+or
+`yarn && yarn start` from the `kittenTricks` project
 
-### Playground environments:
+### Demo Application environments:
 
-Playground module supports two environments: 
+Demo Application supports two environments: 
 
-- **Production** (Provides Eva Design System module published to npm)
-- **Development** (Provides local Eva Design System module)
+- **Production** (Provides Eva Design System and UI Kitten modules published to npm)
+- **Development** (Provides local Eva Design System and UI Kitten modules)
 
-To run playground in a development mode:
+To run Demo Application in a development mode:
 
 - Clone Eva Design System to the directory containing UI Kitten repo:
 ```bash
 git clone https://github.com/eva-design/eva
 ```
-- Ensure you have the following structure of repos:
-```
-- /Users/UIKittenDeveloper/
-  - react-native-ui-kitten
-  - eva
-```
-- Install dependencies if needed and finally run `yarn playground start:dev`
-
-# Kitten Tricks
-
-## Start an App
-
-1. Clone the repo `git clone https://github.com/akveo/kittenTricks`
-2. Go to the Kitten Tricks project dir and run `npm i && npm start`
-
-## Kitten Tricks environments:
-
-Kitten Tricks app supports two environments: 
-
-- **Production** (Provides Eva Design System and UI Kitten modules published to npm)
-- **Development** (Provides local Eva Design System and UI Kitten modules)
-
-To run App in a development mode:
-
-- Clone UI Kitten to the directory containing Kitten Tricks repo:
+- Clone Demo Application to the directory containing UI Kitten repo:
 ```bash
-git clone https://github.com/akveo/react-native-ui-kitten
+git clone https://github.com/akveo/kittenTricks
 ```
-- Clone Eva Design System to the directory containing Kitten Tricks repo:
-```bash
-git clone https://github.com/eva-design/eva
+- **IMPORTANT** Ensure you have the following structure of repos:
 ```
-- Ensure you have the following structure of repos:
-```
-- /Users/UIKittenDeveloper/
-  - react-native-ui-kitten
+- /
   - eva
   - kittenTricks
+  - react-native-ui-kitten
 ```
-- Inside react-native-ui-kitten dir run `rm -rf yarn.lock ./node_modules && yarn` to install latest dependencies.
-- Inside Kitten Tricks directory `rm -rf ./node_modules ./package-lock.json && npm i` to install the latest dependencies.
-- `npm run start:dev` - this will start application in development mode and watch for UI Kitten and Eva changes.
-
+- Install dependencies if needed and finally run `yarn demo start:dev`
