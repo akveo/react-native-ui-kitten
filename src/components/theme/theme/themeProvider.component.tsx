@@ -7,9 +7,9 @@
 import React from 'react';
 import { ThemeContext } from './themeContext';
 import {
-  EvaStyleSheet,
+  ThemeService,
   ThemeType,
-} from '../style/evaStyleSheet.service';
+} from './theme.service';
 
 export interface ThemeProviderProps {
   theme: ThemeType;
@@ -32,7 +32,7 @@ export class ThemeProvider extends React.PureComponent<ThemeProviderProps> {
 
     return (
       <ThemeContext.Provider
-        value={EvaStyleSheet.createCompiledTheme(theme)}>
+        value={ThemeService.create(theme)}>
         {children}
       </ThemeContext.Provider>
     );

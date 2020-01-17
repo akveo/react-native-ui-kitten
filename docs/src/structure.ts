@@ -235,7 +235,7 @@ export const structure = [
         icon: 'withStyles.svg',
         source: [
           'useTheme',
-          'StyleSheet',
+          'useStyleSheet',
           'withStyles',
         ],
       },

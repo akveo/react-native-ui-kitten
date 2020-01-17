@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { ThemeType } from '../style/evaStyleSheet.service';
+import { ThemeType } from './theme.service';
 
 const defaultTheme: ThemeType = {};
 

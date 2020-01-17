@@ -21,11 +21,11 @@ import {
   StyledComponentProps,
 } from './styled';
 import { StyleConsumerService } from './styleConsumer.service';
-import { Interaction } from './type';
 import {
-  EvaStyleSheet,
-  ThemeType,
-} from './evaStyleSheet.service';
+  StyleService,
+  Interaction,
+} from './style.service';
+import { ThemeType } from '../theme/theme.service';
 import {
   styles,
   theme,
@@ -134,27 +134,27 @@ describe('@style: consumer service methods check', () => {
 describe('@style-sheet: service checks', () => {
 
   it('finds theme value properly', async () => {
-    const themeValue = EvaStyleSheet.getThemeValue('gray-100', theme);
-    const undefinedValue = EvaStyleSheet.getThemeValue('undefined', theme);
+    const themeValue = StyleService.getThemeValue('gray-100', theme);
+    const undefinedValue = StyleService.getThemeValue('undefined', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
     expect(undefinedValue).toBeUndefined();
   });
 
   it('finds referencing theme value properly', async () => {
-    const themeValue = EvaStyleSheet.getThemeValue('referencing', theme);
+    const themeValue = StyleService.getThemeValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds multiple referencing theme value properly', async () => {
-    const themeValue = EvaStyleSheet.getThemeValue('double-referencing', theme);
+    const themeValue = StyleService.getThemeValue('double-referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds referencing theme value properly (initial reference)', async () => {
-    const themeValue = EvaStyleSheet.getThemeValue('referencing', theme);
+    const themeValue = StyleService.getThemeValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
@@ -167,7 +167,7 @@ describe('@style-sheet: service checks', () => {
       prop4: 42,
     };
 
-    const value = EvaStyleSheet.createThemedStyle(mapping as ViewStyle, theme);
+    const value = StyleService.createThemedEntry(mapping as ViewStyle, theme);
     expect(value).toMatchSnapshot();
   });
 
