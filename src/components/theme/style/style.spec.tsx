@@ -25,7 +25,10 @@ import {
   StyleService,
   Interaction,
 } from './style.service';
-import { ThemeType } from '../theme/theme.service';
+import {
+  ThemeService,
+  ThemeType,
+} from '../theme/theme.service';
 import {
   styles,
   theme,
@@ -134,27 +137,27 @@ describe('@style: consumer service methods check', () => {
 describe('@style-sheet: service checks', () => {
 
   it('finds theme value properly', async () => {
-    const themeValue = StyleService.getThemeValue('gray-100', theme);
-    const undefinedValue = StyleService.getThemeValue('undefined', theme);
+    const themeValue = ThemeService.getValue('gray-100', theme);
+    const undefinedValue = ThemeService.getValue('undefined', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
     expect(undefinedValue).toBeUndefined();
   });
 
   it('finds referencing theme value properly', async () => {
-    const themeValue = StyleService.getThemeValue('referencing', theme);
+    const themeValue = ThemeService.getValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds multiple referencing theme value properly', async () => {
-    const themeValue = StyleService.getThemeValue('double-referencing', theme);
+    const themeValue = ThemeService.getValue('double-referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds referencing theme value properly (initial reference)', async () => {
-    const themeValue = StyleService.getThemeValue('referencing', theme);
+    const themeValue = ThemeService.getValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
