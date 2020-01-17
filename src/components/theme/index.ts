@@ -17,11 +17,12 @@ export {
   StyledComponentClass,
 } from './style/styled';
 export { useStyleSheet } from './style/useStyleSheet';
+export { StyleSheet } from './style/styleSheet.service';
 export {
   StyleType,
   Styles,
   ThemeType,
-} from './style/styleSheet.service';
+} from './style/evaStyleSheet.service';
 export {
   Interaction,
   State,

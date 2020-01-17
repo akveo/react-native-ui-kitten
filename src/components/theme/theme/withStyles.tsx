@@ -10,7 +10,7 @@ import { ThemeContext } from './themeContext';
 import {
   Styles,
   ThemeType,
-} from '../style/styleSheet.service';
+} from '../style/evaStyleSheet.service';
 
 interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;

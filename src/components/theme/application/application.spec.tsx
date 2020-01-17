@@ -19,7 +19,7 @@ import {
   theme,
   themeInverse,
 } from '../support/tests';
-import { ThemeType } from '../style/styleSheet.service';
+import { ThemeType } from '../style/evaStyleSheet.service';
 
 describe('@app: application wrapper check', () => {
 

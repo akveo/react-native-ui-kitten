@@ -23,9 +23,9 @@ import {
 import { StyleConsumerService } from './styleConsumer.service';
 import { Interaction } from './type';
 import {
-  StyleSheet,
+  EvaStyleSheet,
   ThemeType,
-} from './styleSheet.service';
+} from './evaStyleSheet.service';
 import {
   styles,
   theme,
@@ -134,27 +134,27 @@ describe('@style: consumer service methods check', () => {
 describe('@style-sheet: service checks', () => {
 
   it('finds theme value properly', async () => {
-    const themeValue = StyleSheet.getThemeValue('gray-100', theme);
-    const undefinedValue = StyleSheet.getThemeValue('undefined', theme);
+    const themeValue = EvaStyleSheet.getThemeValue('gray-100', theme);
+    const undefinedValue = EvaStyleSheet.getThemeValue('undefined', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
     expect(undefinedValue).toBeUndefined();
   });
 
   it('finds referencing theme value properly', async () => {
-    const themeValue = StyleSheet.getThemeValue('referencing', theme);
+    const themeValue = EvaStyleSheet.getThemeValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds multiple referencing theme value properly', async () => {
-    const themeValue = StyleSheet.getThemeValue('double-referencing', theme);
+    const themeValue = EvaStyleSheet.getThemeValue('double-referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds referencing theme value properly (initial reference)', async () => {
-    const themeValue = StyleSheet.getThemeValue('referencing', theme);
+    const themeValue = EvaStyleSheet.getThemeValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
@@ -167,7 +167,7 @@ describe('@style-sheet: service checks', () => {
       prop4: 42,
     };
 
-    const value = StyleSheet.createThemedStyle(mapping as ViewStyle, theme);
+    const value = EvaStyleSheet.createThemedStyle(mapping as ViewStyle, theme);
     expect(value).toMatchSnapshot();
   });
 

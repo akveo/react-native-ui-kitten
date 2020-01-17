@@ -11,7 +11,7 @@ import { StyleConsumerService } from './styleConsumer.service';
 import {
   StyleType,
   ThemeType,
-} from './styleSheet.service';
+} from './evaStyleSheet.service';
 import { Interaction } from './type';
 import { MappingContext } from '../mapping/mappingContext';
 import { ThemeContext } from '../theme/themeContext';

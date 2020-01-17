@@ -2,11 +2,11 @@ import React from 'react';
 import {
   Layout,
   Text,
-  useStyleSheet,
+  StyleSheet,
 } from '@ui-kitten/components';
 
 export const UseStyleSheetSimpleUsageShowcase = () => {
-  const styles = StyleSheet.create();
+  const styles = useStyleSheet();
 
   return (
     <Layout style={styles.container}>
@@ -17,7 +17,7 @@ export const UseStyleSheetSimpleUsageShowcase = () => {
   );
 };
 
-const StyleSheet = useStyleSheet({
+const useStyleSheet = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

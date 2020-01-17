@@ -20,9 +20,9 @@ import {
   withStyles,
 } from './withStyles';
 import {
-  StyleSheet,
+  EvaStyleSheet,
   ThemeType,
-} from '../style/styleSheet.service';
+} from '../style/evaStyleSheet.service';
 import {
   theme,
   themeInverse,
@@ -169,8 +169,8 @@ describe('@theme: ui component checks', () => {
     const { theme: theme1 } = themedComponents[0].props;
     const { theme: theme2 } = themedComponents[1].props;
 
-    expect(theme1).toEqual(StyleSheet.createCompiledTheme(theme));
-    expect(theme2).toEqual(StyleSheet.createCompiledTheme(themeInverse));
+    expect(theme1).toEqual(EvaStyleSheet.createCompiledTheme(theme));
+    expect(theme2).toEqual(EvaStyleSheet.createCompiledTheme(themeInverse));
   });
 
 });

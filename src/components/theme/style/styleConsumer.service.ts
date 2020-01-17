@@ -11,10 +11,10 @@ import {
 } from '@eva-design/dss';
 import { StyledComponentProps } from './styled';
 import {
-  StyleSheet,
+  EvaStyleSheet,
   StyleType,
   ThemeType,
-} from './styleSheet.service';
+} from './evaStyleSheet.service';
 import { Interaction } from './type';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
@@ -84,7 +84,7 @@ export class StyleConsumerService {
     }
 
     const mapping: StyleType = this.withValidParameters(generatedMapping);
-    const themedStyle: StyleType = StyleSheet.createThemedStyle(mapping, theme);
+    const themedStyle: StyleType = EvaStyleSheet.createThemedStyle(mapping, theme);
 
     return { ...source, theme, themedStyle };
   }
