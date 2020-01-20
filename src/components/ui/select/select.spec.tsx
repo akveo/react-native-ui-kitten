@@ -1,24 +1,11 @@
 import React from 'react';
-import {
-  Image,
-  ImageProps,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  render,
-  fireEvent,
-  RenderAPI,
-} from 'react-native-testing-library';
-import {
-  ApplicationProvider,
-  StyleType,
-} from '@kitten/theme';
+import { Image, ImageProps, TouchableOpacity } from 'react-native';
+import { fireEvent, render, RenderAPI } from 'react-native-testing-library';
+import { ApplicationProvider, StyleType } from '@kitten/theme';
 import { Select } from './select.component';
 import { SelectOptionType } from './selectOption.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
+import { mapping, theme } from '../support/tests';
+import { SelectService } from './select.service';
 
 jest.useFakeTimers();
 
@@ -91,7 +78,8 @@ class TestApplication extends React.Component<Props> {
           onPressIn={onSelectPressIn}
           onPressOut={onSelectPressOut}
           onLongPress={onSelectLongPress}
-          onSelect={() => {}}
+          onSelect={() => {
+          }}
         />
         <Select
           label={selectLabel}
@@ -100,13 +88,74 @@ class TestApplication extends React.Component<Props> {
           multiSelect={true}
           icon={this.renderIcon}
           onPress={onMultiSelectPress}
-          onSelect={() => {}}
+          onSelect={() => {
+          }}
         />
       </ApplicationProvider>
     );
   }
 }
 
+describe('@select: service checks', () => {
+
+  const options: SelectOptionType[] = [
+    { text: 'Option 1' },
+    { text: 'Option 2' },
+    { text: 'Option 3' },
+  ];
+
+  const groupOptions: SelectOptionType[] = [
+    {
+      text: 'Group', items: [
+        { text: 'Option 1' },
+        { text: 'Option 2' },
+      ],
+    },
+  ];
+
+  it('* should select single value', () => {
+    const service = new SelectService();
+    const selectedOption = service.select(options[0], []);
+
+    expect(selectedOption).toEqual({ text: 'Option 1' });
+  });
+
+  it('* should change selected value', () => {
+    const service = new SelectService();
+    const selectedOption = service.select(options[1], [options[0]]);
+
+    expect(selectedOption).toEqual({ text: 'Option 2' });
+  });
+
+  it('* should select single from group', () => {
+    const service = new SelectService();
+    const selectedOption = service.select(groupOptions[0].items[0], []);
+
+    expect(selectedOption).toEqual({ text: 'Option 1' });
+  });
+
+  it('* should select all from group', () => {
+    const service = new SelectService();
+    const selectedOption = service.select(groupOptions[0], []);
+
+    expect(selectedOption).toEqual(groupOptions[0]);
+  });
+
+  it('* should change selected value from group', () => {
+    const service = new SelectService();
+    const selectedOption = service.select(groupOptions[0].items[0], groupOptions[0]);
+
+    expect(selectedOption).toEqual({ text: 'Option 1' });
+  });
+
+  it('* should select multiple values', () => {
+    const service = new SelectService({ multiSelect: true });
+    const selectedOption = service.select(options[1], [options[0]]);
+
+    expect(selectedOption).toEqual([{ text: 'Option 1' }, { text: 'Option 2' }]);
+  });
+
+});
 
 describe('@select component checks', () => {
 
