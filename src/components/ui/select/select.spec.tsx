@@ -1,10 +1,24 @@
 import React from 'react';
-import { Image, ImageProps, TouchableOpacity } from 'react-native';
-import { fireEvent, render, RenderAPI } from 'react-native-testing-library';
-import { ApplicationProvider, StyleType } from '@kitten/theme';
+import {
+  Image,
+  ImageProps,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  fireEvent,
+  render,
+  RenderAPI,
+} from 'react-native-testing-library';
+import {
+  ApplicationProvider,
+  StyleType,
+} from '@kitten/theme';
 import { Select } from './select.component';
 import { SelectOptionType } from './selectOption.component';
-import { mapping, theme } from '../support/tests';
+import {
+  mapping,
+  theme,
+} from '../support/tests';
 import { SelectService } from './select.service';
 
 jest.useFakeTimers();
