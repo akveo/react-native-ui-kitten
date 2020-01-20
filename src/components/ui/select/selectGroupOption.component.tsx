@@ -88,7 +88,7 @@ class SelectGroupOptionComponent extends React.Component<SelectGroupOptionProps>
         key={0}
         multi={this.props.multi}
         item={this.props.item}
-        selected={this.props.isOptionSelected(this.props.item)}
+        selected={false}
         onSelect={this.props.onSelect}
         disabled={true}
       />
