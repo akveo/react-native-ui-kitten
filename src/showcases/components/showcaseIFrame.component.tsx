@@ -16,6 +16,7 @@ import {
 } from '@ui-kitten/components';
 import { themes } from '../app/themes';
 import {
+  AppTheme,
   ThemeContext,
   ThemeContextType,
 } from '../services/theme.service';
@@ -34,7 +35,8 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
   };
 
   const onThemeSelect = (index: number): void => {
-    themeContext.setTheme(themes[index]);
+    const nextTheme = Object.keys(themes)[index] as AppTheme;
+    themeContext.setTheme(nextTheme);
     setMenuVisible(false);
   };
 
