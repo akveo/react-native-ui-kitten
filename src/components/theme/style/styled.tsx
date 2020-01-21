@@ -9,12 +9,12 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ThemeStyleType } from '@eva-design/dss';
 import { StyleConsumerService } from './styleConsumer.service';
 import {
+  Interaction,
   StyleType,
-  ThemeType,
-} from './styleSheet.service';
-import { Interaction } from './type';
+} from './style.service';
 import { MappingContext } from '../mapping/mappingContext';
 import { ThemeContext } from '../theme/themeContext';
+import { ThemeType } from '../theme/theme.service';
 
 interface PrivateProps<T> {
   forwardedRef?: React.Ref<T>;
@@ -96,7 +96,9 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
       this.setState({ interaction });
     };
 
-    private withStyledProps = (source: P, style: ThemeStyleType, theme: ThemeType): WrappedProps => {
+    private withStyledProps = (source: P,
+                               style: ThemeStyleType,
+                               theme: ThemeType): WrappedProps => {
       const { interaction } = this.state;
 
       const props: WrappingProps = { ...this.defaultProps, ...source };
@@ -125,14 +127,15 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
       return (
         <MappingContext.Consumer>{(style: ThemeStyleType): WrappedElement => (
           <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => {
-           return this.renderWrappedElement(style, theme);
+            return this.renderWrappedElement(style, theme);
           }}</ThemeContext.Consumer>
         )}</MappingContext.Consumer>
       );
     }
   }
 
-  const WrappingElement = (props: WrappingProps, ref: React.Ref<WrappedElementInstance>): WrappingElement => {
+  const WrappingElement = (props: WrappingProps,
+                           ref: React.Ref<WrappedElementInstance>): WrappingElement => {
     return (
       // @ts-ignore
 

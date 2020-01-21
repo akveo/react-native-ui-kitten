@@ -11,11 +11,11 @@ import {
 } from '@eva-design/dss';
 import { StyledComponentProps } from './styled';
 import {
-  StyleSheet,
+  Interaction,
+  StyleService,
   StyleType,
-  ThemeType,
-} from './styleSheet.service';
-import { Interaction } from './type';
+} from './style.service';
+import { ThemeType } from '../theme/theme.service';
 
 const SEPARATOR_MAPPING_ENTRY: string = '.';
 
@@ -84,7 +84,7 @@ export class StyleConsumerService {
     }
 
     const mapping: StyleType = this.withValidParameters(generatedMapping);
-    const themedStyle: StyleType = StyleSheet.createThemedStyle(mapping, theme);
+    const themedStyle: StyleType = StyleService.createThemedEntry(mapping, theme);
 
     return { ...source, theme, themedStyle };
   }
@@ -125,7 +125,8 @@ export class StyleConsumerService {
     return mapping;
   }
 
-  private getStyleInfo<P extends StyledComponentProps>(props: P, interaction: Interaction[]): StyleInfo {
+  private getStyleInfo<P extends StyledComponentProps>(props: P,
+                                                       interaction: Interaction[]): StyleInfo {
     const variantProps: Partial<P> = this.getDerivedVariants(this.meta, props);
     const stateProps: Partial<P> = this.getDerivedStates(this.meta, props);
 

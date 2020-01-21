@@ -21,11 +21,14 @@ import {
   StyledComponentProps,
 } from './styled';
 import { StyleConsumerService } from './styleConsumer.service';
-import { Interaction } from './type';
 import {
-  StyleSheet,
+  StyleService,
+  Interaction,
+} from './style.service';
+import {
+  ThemeService,
   ThemeType,
-} from './styleSheet.service';
+} from '../theme/theme.service';
 import {
   styles,
   theme,
@@ -134,27 +137,27 @@ describe('@style: consumer service methods check', () => {
 describe('@style-sheet: service checks', () => {
 
   it('finds theme value properly', async () => {
-    const themeValue = StyleSheet.getThemeValue('gray-100', theme);
-    const undefinedValue = StyleSheet.getThemeValue('undefined', theme);
+    const themeValue = ThemeService.getValue('gray-100', theme);
+    const undefinedValue = ThemeService.getValue('undefined', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
     expect(undefinedValue).toBeUndefined();
   });
 
   it('finds referencing theme value properly', async () => {
-    const themeValue = StyleSheet.getThemeValue('referencing', theme);
+    const themeValue = ThemeService.getValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds multiple referencing theme value properly', async () => {
-    const themeValue = StyleSheet.getThemeValue('double-referencing', theme);
+    const themeValue = ThemeService.getValue('double-referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
 
   it('finds referencing theme value properly (initial reference)', async () => {
-    const themeValue = StyleSheet.getThemeValue('referencing', theme);
+    const themeValue = ThemeService.getValue('referencing', theme);
 
     expect(themeValue).toEqual(theme['gray-100']);
   });
@@ -167,7 +170,7 @@ describe('@style-sheet: service checks', () => {
       prop4: 42,
     };
 
-    const value = StyleSheet.createThemedStyle(mapping as ViewStyle, theme);
+    const value = StyleService.createThemedEntry(mapping as ViewStyle, theme);
     expect(value).toMatchSnapshot();
   });
 

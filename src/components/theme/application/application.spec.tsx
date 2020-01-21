@@ -14,12 +14,12 @@ import {
   ApplicationProvider,
   ApplicationProviderProps,
 } from './applicationProvider.component';
+import { ThemeType } from '../theme/theme.service';
 import {
   mapping,
   theme,
   themeInverse,
 } from '../support/tests';
-import { ThemeType } from '../style/styleSheet.service';
 
 describe('@app: application wrapper check', () => {
 
