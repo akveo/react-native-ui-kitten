@@ -29,4 +29,4 @@ This documentation assumes that you are already familiar with JavaScript/TypeScr
 
 ## Have questions?
 
-Didn't find something here? Look through the <a href="https://github.com/akveo/react-native-ui-kitten/issues" target="_blank">issues</a> or simply drop us a line at <a href="mailto:contact@akveo.com">contact@akveo.com</a>.
+Didn't find something here? Ask on <a href="https://stackoverflow.com/questions/ask">Stack Overflow</a> with tag `ui-kitten` or post an issue on <a href="https://github.com/akveo/react-native-ui-kitten/issues/new/choose">GitHub</a>.

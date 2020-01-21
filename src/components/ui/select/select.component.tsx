@@ -26,18 +26,13 @@ import {
   StyleType,
 } from '@kitten/theme';
 import {
-  SelectOptionsList,
-  SelectOptionsListElement,
-} from './selectOptionsList.component';
-import {
   SelectOption,
   SelectOptionType,
 } from './selectOption.component';
 import {
-  MultiSelectStrategy,
-  SelectionStrategy,
-  SingleSelectStrategy,
-} from './selection.strategy';
+  SelectOptionsList,
+  SelectOptionsListElement,
+} from './selectOptionsList.component';
 import {
   Text,
   TextElement,
@@ -45,16 +40,18 @@ import {
 import { IconElement } from '../icon/icon.component';
 import { Popover } from '../popover/popover.component';
 import {
-  allWithPrefix,
-  isValidString,
-  WebEventResponder,
-  WebEventResponderInstance,
-} from '../support/services';
-import {
   ChevronDown,
   ChevronDownElement,
   ChevronDownProps,
 } from '../support/components/chevronDown.component';
+import {
+  allWithPrefix,
+  isValidString,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../support/services';
+import { SelectService } from './select.service';
 
 type ControlElement = React.ReactElement<TouchableOpacityProps>;
 type IconProp = (style: ImageStyle, visible: boolean) => IconElement;
@@ -83,7 +80,7 @@ export interface SelectProps extends StyledComponentProps, TouchableOpacityProps
 export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
-  visible: boolean;
+  optionsVisible: boolean;
 }
 
 /**
@@ -124,7 +121,7 @@ interface State {
  *
  * @property {SelectOptionType[]} data - Determines items of the Select component.
  *
- * @property {(option: SelectOption, event?: GestureResponderEvent) => void} onSelect - Fires on option selection.
+ * @property {(option: SelectOption, event?: GestureResponderEvent) => void} onSelect - Fires on option select.
  * Returns selected option/options.
  *
  * @property {StyleProp<TextStyle>} label - Determines the `label` of the component.
@@ -170,7 +167,7 @@ interface State {
  *
  * @example SelectInlineStyling
  */
-class SelectComponent extends React.Component<SelectProps, State> {
+class SelectComponent extends React.Component<SelectProps, State> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'Select';
 
@@ -180,24 +177,17 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   public state: State = {
-    visible: false,
+    optionsVisible: false,
   };
 
   private popoverRef: React.RefObject<Popover> = React.createRef();
-
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  private selectionStrategy: SelectionStrategy<SelectOption>;
   private iconAnimation: Animated.Value = new Animated.Value(0);
 
-  constructor(props: SelectProps) {
-    super(props);
-    const { multiSelect, selectedOption, keyExtractor, data } = this.props;
-
-    this.selectionStrategy = multiSelect ?
-      new MultiSelectStrategy(selectedOption, data, keyExtractor) :
-      new SingleSelectStrategy(selectedOption, data, keyExtractor);
-  }
+  private selectService: SelectService = new SelectService({
+    multiSelect: this.props.multiSelect,
+    keyExtractor: this.props.keyExtractor,
+  });
 
   public show = (): void => {
     this.popoverRef.current.show();
@@ -208,32 +198,33 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   public focus = (): void => {
-    this.setState({ visible: true }, this.dispatchActive);
+    this.setState({ optionsVisible: true }, this.onOptionsListVisible);
   };
 
   public blur = (): void => {
-    this.setState({ visible: true }, this.dispatchActive);
+    this.setState({ optionsVisible: false }, this.onOptionsListInvisible);
   };
 
   public isFocused = (): boolean => {
-    return this.state.visible;
+    return this.state.optionsVisible;
   };
 
   public clear = (): void => {
     if (this.props.onSelect) {
-      this.selectionStrategy.select(null);
       this.props.onSelect(null);
     }
   };
 
+  // WebEventResponderCallbacks
+
   public onMouseEnter = (): void => {
-    if (!this.state.visible) {
+    if (!this.state.optionsVisible) {
       this.props.dispatch([Interaction.HOVER]);
     }
   };
 
   public onMouseLeave = (): void => {
-    if (!this.state.visible) {
+    if (!this.state.optionsVisible) {
       this.props.dispatch([]);
     }
   };
@@ -247,7 +238,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private onPress = (event: GestureResponderEvent): void => {
-    this.toggleVisibility();
+    this.setOptionsListVisible();
 
     if (this.props.onPress) {
       this.props.onPress(event);
@@ -272,38 +263,44 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
   private onSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
     if (this.props.onSelect) {
-      const selection: SelectOption = this.selectionStrategy.select(option, this.toggleVisibility);
-      this.props.onSelect(selection, event);
-      // FIXME: looks like a bug in selection strategy
-      this.forceUpdate();
+      const options: SelectOption = this.selectService.select(option, this.props.selectedOption);
+      !this.props.multiSelect && this.setOptionsListInvisible();
+
+      this.props.onSelect(options, event);
     }
   };
 
-  private toggleVisibility = (): void => {
-    const visible: boolean = !this.state.visible;
-    this.setState({ visible }, this.handleVisibleChange);
+  private onOptionsListVisible = (): void => {
+    this.props.dispatch([Interaction.ACTIVE]);
+    this.createIconAnimation(-180).start();
   };
 
-  private handleVisibleChange = (): void => {
-    this.dispatchActive();
-    this.startIconAnimation();
+  private onOptionsListInvisible = (): void => {
+    this.props.dispatch([]);
+    this.createIconAnimation(0).start();
   };
 
-  private dispatchActive = (): void => {
-    const interactions: Interaction[] = this.state.visible ? [Interaction.ACTIVE] : [];
-    this.props.dispatch(interactions);
+  private setOptionsListVisible = (): void => {
+    this.setState({ optionsVisible: true }, this.onOptionsListVisible);
   };
 
-  private startIconAnimation = (): void => {
-    const deg: number = this.state.visible ? -180 : 0;
-    this.animateIcon(deg);
+  private setOptionsListInvisible = (): void => {
+    this.setState({ optionsVisible: false }, this.onOptionsListInvisible);
   };
 
-  private animateIcon = (toValue: number): void => {
-    Animated.timing(this.iconAnimation, {
+  private isOptionSelected = (option: SelectOptionType): boolean => {
+    return this.selectService.isSelected(option, this.props.selectedOption);
+  };
+
+  private isOptionGroup = (option: SelectOptionType): boolean => {
+    return SelectService.isGroup(option);
+  };
+
+  private createIconAnimation = (toValue: number): Animated.CompositeAnimation => {
+    return Animated.timing(this.iconAnimation, {
       toValue: toValue,
       duration: 200,
-    }).start();
+    });
   };
 
   private getComponentStyle = (source: StyleType): StyleType => {
@@ -391,45 +388,47 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
     return (
       <Animated.View style={animatedStyle}>
-        <ChevronDown fill={tintColor} {...svgStyle as ChevronDownProps}/>
+        <ChevronDown
+          fill={tintColor}
+          {...svgStyle as ChevronDownProps}
+        />
       </Animated.View>
     );
   };
 
   private renderIconElement = (style: ImageStyle): IconElement => {
-    const iconElement = this.props.icon(style, this.state.visible);
+    const iconElement: React.ReactElement = this.props.icon(style, this.state.optionsVisible);
 
     return React.cloneElement(iconElement, {
       style: [style, iconElement.props.style],
     });
   };
 
-  private renderTextElement = (valueStyle: TextStyle, placeholderStyle: TextStyle): TextElement => {
-    const { placeholder, textStyle } = this.props;
-    const value: string = this.selectionStrategy.getPlaceholder(placeholder);
-    const style: TextStyle = placeholder === value ? placeholderStyle : valueStyle;
+  private renderTextElement = (style: StyleType): TextElement => {
+    const value: string = this.selectService.toStringOptions(this.props.selectedOption);
+    const textStyle: TextStyle = value && style.text;
 
     return (
       <Text
-        style={[style, styles.text, textStyle]}
+        style={[styles.text, style.placeholder, textStyle, this.props.textStyle]}
         numberOfLines={1}
         ellipsizeMode='tail'>
-        {value}
+        {value || this.props.placeholder}
       </Text>
     );
   };
 
   private renderOptionsListElement = (style: StyleType): SelectOptionsListElement => {
-    const { appearance, selectedOption, ...restProps } = this.props;
-
     return (
       <SelectOptionsList
-        {...restProps}
         key={0}
-        style={styles.optionsList}
-        bounces={false}
-        strategy={this.selectionStrategy}
+        style={[styles.optionsList, style]}
+        data={this.props.data}
+        multiSelect={this.props.multiSelect}
+        isOptionSelected={this.isOptionSelected}
+        isOptionGroup={this.isOptionGroup}
         onSelect={this.onSelect}
+        keyExtractor={this.props.keyExtractor}
       />
     );
   };
@@ -439,7 +438,7 @@ class SelectComponent extends React.Component<SelectProps, State> {
 
     return [
       iconElement || this.renderDefaultIconElement(style.icon),
-      this.renderTextElement(style.text, style.placeholder),
+      this.renderTextElement(style),
     ];
   };
 
@@ -474,7 +473,11 @@ class SelectComponent extends React.Component<SelectProps, State> {
     const { themedStyle, style } = this.props;
     const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
 
-    const [optionsListElement, labelElement, controlElement] = this.renderComponentChildren(componentStyle);
+    const [
+      optionsListElement,
+      labelElement,
+      controlElement,
+    ] = this.renderComponentChildren(componentStyle);
 
     return (
       <View style={style}>
@@ -483,9 +486,9 @@ class SelectComponent extends React.Component<SelectProps, State> {
           ref={this.popoverRef}
           style={[popover, styles.popover]}
           fullWidth={true}
-          visible={this.state.visible}
+          visible={this.state.optionsVisible}
           content={optionsListElement}
-          onBackdropPress={this.toggleVisibility}>
+          onBackdropPress={this.setOptionsListInvisible}>
           {controlElement}
         </Popover>
       </View>
