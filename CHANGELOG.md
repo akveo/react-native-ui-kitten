@@ -1,3 +1,15 @@
+## 4.4.0-beta.3 (2020-01-21)
+
+### :star: Highlights
+
+Rethinking useStyleSheet hook and improvements [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-576569359)
+
+* Add ability to specify date format in Calendar and Datepicker components ([#815](https://github.com/akveo/react-native-ui-kitten/issues/815)) ([705dc97](https://github.com/akveo/react-native-ui-kitten/commit/705dc97))
+* **Select**: Fix props mutation issue and update strategies ([#804](https://github.com/akveo/react-native-ui-kitten/issues/804)) ([de531b9](https://github.com/akveo/react-native-ui-kitten/commit/de531b9))
+* **BREAKING CHANGE**: useStyleSheet hook was reimplemented due to not following Rules of Hooks([#831](https://github.com/akveo/react-native-ui-kitten/issues/831)) ([8b33c91](https://github.com/akveo/react-native-ui-kitten/commit/8b33c91))
+
+
+
 ## 4.4.0-beta.2 (2020-01-16)
 
 ### :star: Highlights
