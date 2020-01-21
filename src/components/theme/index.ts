@@ -16,16 +16,16 @@ export {
   StyledComponentProps,
   StyledComponentClass,
 } from './style/styled';
-export { useStyleSheet } from './style/useStyleSheet';
+export {
+  StyleService,
+  useStyleSheet,
+} from './style/style.service';
 export {
   StyleType,
   Styles,
-  ThemeType,
-} from './style/styleSheet.service';
-export {
   Interaction,
   State,
-} from './style/type';
+} from './style/style.service';
 export {
   ThemeProvider,
   ThemeProviderProps,
@@ -35,4 +35,7 @@ export {
   ThemedComponentProps,
   ThemedComponentClass,
 } from './theme/withStyles';
-export { useTheme } from './theme/useTheme';
+export {
+  ThemeType,
+  useTheme,
+} from './theme/theme.service';

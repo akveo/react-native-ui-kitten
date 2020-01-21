@@ -7,10 +7,8 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ThemeContext } from './themeContext';
-import {
-  Styles,
-  ThemeType,
-} from '../style/styleSheet.service';
+import { ThemeType } from './theme.service';
+import { Styles } from '../style/style.service';
 
 interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;
