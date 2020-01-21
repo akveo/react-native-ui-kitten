@@ -35,7 +35,6 @@ import {
 
 type IconProp = (style: StyleType) => IconElement;
 
-
 export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   TouchableOpacityProps,
   BaseCalendarProps<D> {
@@ -56,8 +55,6 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
 interface State {
   visible: boolean;
 }
-
-const FULL_DATE_FORMAT_STRING: string = 'DD/MM/YYYY';
 
 export abstract class BaseDatepickerComponent<P, D = Date> extends React.Component<BaseDatepickerProps<D> & P, State> {
 
@@ -98,10 +95,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   protected abstract getComponentTitle(): string;
 
   protected abstract renderCalendar(): CalendarElement<D> | RangeCalendarElement<D>;
-
-  protected formatDateToString(date: D): string {
-    return this.props.dateService.format(date, FULL_DATE_FORMAT_STRING);
-  }
 
   private getComponentStyle = (style: StyleType): StyleType => {
     const {
@@ -356,4 +349,3 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 });
-

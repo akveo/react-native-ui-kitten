@@ -17,10 +17,12 @@ export const LOCALE_DEFAULT = 'en';
 export interface NativeDateServiceOptions {
   // 0 for Sunday, 1 for Monday, etc
   startDayOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  format?: string;
   i18n?: I18nConfig;
 }
 
 const DEFAULT_OPTIONS: NativeDateServiceOptions = {
+  format: 'DD/MM/YYYY',
   startDayOfWeek: 0,
 };
 
@@ -93,7 +95,7 @@ export class NativeDateService extends DateService<Date> {
   }
 
   public format(date: Date, format: string): string {
-    return fecha.format(date, format);
+    return fecha.format(date, format || this.options.format);
   }
 
   /**

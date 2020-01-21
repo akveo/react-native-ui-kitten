@@ -112,6 +112,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @example DatepickerCustomLocale
  *
+ * @example DatepickerDateFormat
+ *
  * @example DatepickerMoment
  */
 
@@ -151,7 +153,7 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
 
   protected getComponentTitle(): string {
     if (this.props.date) {
-      return this.formatDateToString(this.props.date);
+      return this.props.dateService.format(this.props.date, null);
     } else {
       return this.props.placeholder;
     }
