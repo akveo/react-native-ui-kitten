@@ -7,5 +7,4 @@ export {
   InputFocusEvent,
   Override,
   TouchableIndexedProps,
-  TouchableTypeReturningProps,
 } from './type';

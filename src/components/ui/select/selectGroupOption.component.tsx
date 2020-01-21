@@ -5,10 +5,7 @@
  */
 
 import React from 'react';
-import {
-  ListRenderItemInfo,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 import {
   styled,
   StyledComponentProps,
@@ -17,24 +14,16 @@ import {
 import {
   SelectOption,
   SelectOptionElement,
-  SelectOptionProps,
   SelectOptionType,
 } from './selectOption.component';
-import { SelectOption as SelectOptionProp } from './select.component';
-import { SelectionStrategy } from './selection.strategy';
 
-interface ComponentProps {
-  multi?: boolean;
-  strategy: SelectionStrategy<SelectOptionProp>;
-  renderItem?: (item: ListRenderItemInfo<SelectOptionType>) => React.ReactElement;
+export interface SelectGroupOptionProps extends StyledComponentProps {
+  multi: boolean;
+  item: SelectOptionType;
+  isOptionSelected: (item: SelectOptionType) => boolean;
+  onSelect: (item: SelectOptionType) => void;
 }
 
-interface MainItemStatus {
-  selected: boolean;
-  indeterminate: boolean;
-}
-
-export type SelectGroupOptionProps = ComponentProps & Partial<SelectOptionProps> & StyledComponentProps;
 export type SelectGroupOptionElement = React.ReactElement<SelectGroupOptionProps>;
 
 class SelectGroupOptionComponent extends React.Component<SelectGroupOptionProps> {
@@ -42,107 +31,99 @@ class SelectGroupOptionComponent extends React.Component<SelectGroupOptionProps>
   static styledComponentName: string = 'SelectGroupOption';
 
   private getComponentStyle = (source: StyleType): StyleType => {
-    const {
-      itemPaddingHorizontal,
-      ...containerStyles
-    } = source;
+    const { itemPaddingHorizontal, ...containerParameters } = source;
 
     return {
-      container: containerStyles,
+      container: containerParameters,
       item: {
         paddingHorizontal: itemPaddingHorizontal,
       },
     };
   };
 
-  private getMainItemStatus = (subItemsSelectedStatusArray: boolean[]): MainItemStatus => {
-    const someSelected: boolean = subItemsSelectedStatusArray
-      .some((item: boolean) => item === true);
-    const everySelected: boolean = subItemsSelectedStatusArray
-      .every((item: boolean) => item === true);
+  private getGroupOptionMainItemProps = (children: SelectOptionElement[]) => {
+    const selectedItems: boolean[] = children.map(element => element.props.selected);
 
-    switch (true) {
-      case (someSelected && !everySelected):
-        return { selected: true, indeterminate: true };
-      case  !someSelected:
-        return { selected: false, indeterminate: false };
-      case everySelected:
-        return { selected: true, indeterminate: false };
+    const someSelected: boolean = selectedItems.some((item: boolean) => item === true);
+    const everySelected: boolean = selectedItems.every((item: boolean) => item === true);
+
+    if (someSelected && !everySelected) {
+      return { selected: true, indeterminate: true };
+    }
+
+    if (!someSelected) {
+      return { selected: false, indeterminate: false };
+    }
+
+    if (everySelected) {
+      return { selected: true, indeterminate: false };
     }
   };
 
-  private renderSubItem = (option: SelectOptionType, index: number): SelectOptionElement => {
-    const { item, renderItem, strategy, ...restProps } = this.props;
-    const returningOption: ListRenderItemInfo<SelectOptionType> = {
-      item: option,
-      index: index,
-      separators: null,
-    };
-    const selected: boolean = strategy.isSelected(option);
-
-    return renderItem ? renderItem(returningOption) : (
+  private renderGroupOptionElement = (option: SelectOptionType, index: number): SelectOptionElement => {
+    return (
       <SelectOption
-        {...restProps}
-        selected={selected}
+        key={index}
+        multi={this.props.multi}
         item={option}
+        selected={this.props.isOptionSelected(option)}
+        onSelect={this.props.onSelect}
       />
     );
   };
 
-  private renderSubItemsElements = (): SelectOptionElement[] => {
-    const { item, themedStyle } = this.props;
-    const { item: itemStyle } = this.getComponentStyle(themedStyle);
+  private renderGroupOptionElements = (componentStyle: StyleType): SelectOptionElement[] => {
+    return this.props.item.items.map((option: SelectOptionType, index: number) => {
+      const optionElement: SelectOptionElement = this.renderGroupOptionElement(option, index);
 
-    return item.items
-      .map((option: SelectOptionType, index: number) => {
-        const element: SelectOptionElement = this.renderSubItem(option, index);
-
-        return React.cloneElement(element, {
-          ...option,
-          style: [element.props.style, itemStyle],
-          key: index,
-        });
+      return React.cloneElement(optionElement, {
+        style: [optionElement.props.style, componentStyle.item],
       });
+    });
   };
 
-  private renderMultiSelectMainElement = (subItemsElements: SelectOptionElement[]): SelectOptionElement => {
-    const { item, ...restProps } = this.props;
-    const subItemsSelectedStatusArray: boolean[] = subItemsElements
-      .map((subItem: SelectOptionElement) => subItem.props.selected);
-    const itemStatus: MainItemStatus = this.getMainItemStatus(subItemsSelectedStatusArray);
-
+  private renderSingleElement = (): SelectOptionElement => {
     return (
       <SelectOption
-        {...restProps}
-        {...itemStatus}
-        item={item}
-      />
-    );
-  };
-
-  private renderDefaultMainElement = (): SelectOptionElement => {
-    return (
-      <SelectOption
+        key={0}
+        multi={this.props.multi}
         item={this.props.item}
+        selected={false}
+        onSelect={this.props.onSelect}
         disabled={true}
       />
     );
   };
 
-  private renderMainElement = (subItemsElements: SelectOptionElement[]): SelectOptionElement => {
-    return this.props.multi ? this.renderMultiSelectMainElement(subItemsElements) : this.renderDefaultMainElement();
+  private renderGroupElement = (children: SelectOptionElement[]): SelectOptionElement => {
+    return (
+      <SelectOption
+        {...this.getGroupOptionMainItemProps(children)}
+        key={0}
+        multi={this.props.multi}
+        item={this.props.item}
+        onSelect={this.props.onSelect}
+      />
+    );
+  };
+
+  private renderComponentChildren = (componentStyle: StyleType): React.ReactNodeArray => {
+    const groupOptions: SelectOptionElement[] = this.renderGroupOptionElements(componentStyle);
+
+    return [
+      this.props.multi ? this.renderGroupElement(groupOptions) : this.renderSingleElement(),
+      groupOptions,
+    ];
   };
 
   public render(): SelectGroupOptionElement {
-    const { themedStyle } = this.props;
-    const { container } = this.getComponentStyle(themedStyle);
-    const subItemsElements: SelectOptionElement[] = this.renderSubItemsElements();
-    const mainElement: SelectOptionElement = this.renderMainElement(subItemsElements);
+    const { container, ...componentStyle } = this.getComponentStyle(this.props.themedStyle);
+    const [mainElement, groupOptionElements] = this.renderComponentChildren(componentStyle);
 
     return (
       <View style={container}>
         {mainElement}
-        {subItemsElements}
+        {groupOptionElements}
       </View>
     );
   }
