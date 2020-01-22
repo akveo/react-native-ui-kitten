@@ -1,7 +1,7 @@
 {
   "name": "@ui-kitten/eva-icons",
   "description": "Eva Icons for React Native",
-  "version": "4.4.0-beta.2",
+  "version": "4.4.0-beta.3",
   "author": "akveo <contact@akveo.com>",
   "license": "MIT",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
@@ -27,7 +27,7 @@
     "react-native-svg": "^9.4.0"
   },
   "peerDependencies": {
-    "@ui-kitten/components": "4.4.0-beta.2",
+    "@ui-kitten/components": "4.4.0-beta.3",
     "react-native-svg": "^9.4.0"
   },
   "sideEffects": false
