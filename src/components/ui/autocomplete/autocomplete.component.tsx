@@ -101,6 +101,8 @@ interface State {
  *
  * @overview-example AutocompleteWithLabel
  *
+ * @example AutocompleteHandleKeyboard
+ *
  * @example AutocompleteAsync
  */
 export class Autocomplete<O extends Option = Option> extends React.Component<AutocompleteProps<O>, State> {
