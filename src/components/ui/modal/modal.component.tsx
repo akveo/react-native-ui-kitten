@@ -93,14 +93,25 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     this.modalId = ModalService.hide(this.modalId);
   };
 
+  public componentDidMount(): void {
+    if (!this.modalId && this.props.visible) {
+      this.show();
+      return;
+    }
+  }
+
   public componentDidUpdate(prevProps: ModalProps): void {
     if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
       this.setState({ forceMeasure: true });
       return;
     }
 
+    if (!this.modalId && this.props.visible) {
+      this.show();
+      return;
+    }
+
     if (this.modalId && !this.props.visible) {
-      // this.contentPosition = POINT_OUTSCREEN;
       this.hide();
     }
   }
@@ -136,14 +147,8 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   };
 
   public render(): React.ReactNode {
-    if (!this.modalId && this.props.visible) {
-      this.show();
-      return null;
-    }
-
     if (this.modalId && this.props.visible) {
       ModalService.update(this.modalId, this.renderContentElement());
-      return null;
     }
 
     return null;
