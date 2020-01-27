@@ -50,6 +50,7 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   labelStyle?: StyleProp<TextStyle>;
   captionStyle?: StyleProp<TextStyle>;
   placement?: PopoverPlacement | string;
+  backdropStyle?: StyleProp<ViewStyle>;
 }
 
 interface State {
@@ -297,7 +298,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, placement } = this.props;
+    const { themedStyle, style, placement, backdropStyle } = this.props;
     const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
 
     const [
@@ -314,6 +315,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         <Popover
           ref={this.popoverRef}
           style={[popover, styles.popover]}
+          backdropStyle={backdropStyle}
           placement={placement}
           visible={this.state.visible}
           content={calendarElement}

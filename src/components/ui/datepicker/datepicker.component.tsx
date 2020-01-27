@@ -94,6 +94,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Default is `bottom`.
  * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
  *
+ * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example DatepickerSimpleUsage
