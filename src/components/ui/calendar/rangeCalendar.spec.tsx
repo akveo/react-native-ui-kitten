@@ -18,7 +18,6 @@ import { CalendarRange } from '@kitten/ui/calendar/type';
 jest.useFakeTimers();
 
 const now: Date = new Date();
-const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
 
 interface State {
   range: CalendarRange<Date>;
@@ -68,11 +67,11 @@ describe('@range-calendar: component checks', () => {
 
   it('* range selected works properly', () => {
     const expectedStartDate: Date = new Date(now.getFullYear(), now.getMonth(), 11);
-    const expectedEndDate: Date = new Date(now.getFullYear(), now.getMonth(), 26);
+    const expectedEndDate: Date = new Date(now.getFullYear(), now.getMonth(), 15);
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[0]);
-    fireEvent.press(application.getAllByText('26')[0]);
+    fireEvent.press(application.getAllByText('15')[0]);
     const { range } = application.getByType(RangeCalendar).props;
 
     expect(range.startDate.toString()).toBe(expectedStartDate.toString());
@@ -84,7 +83,7 @@ describe('@range-calendar: component checks', () => {
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[0]);
-    fireEvent.press(application.getAllByText('26')[0]);
+    fireEvent.press(application.getAllByText('15')[0]);
     fireEvent.press(application.getAllByText('19')[0]);
     const { range } = application.getByType(RangeCalendar).props;
 
@@ -97,7 +96,7 @@ describe('@range-calendar: component checks', () => {
     const application: RenderAPI = render(<TestApplication/>);
 
     fireEvent.press(application.getAllByText('11')[0]);
-    fireEvent.press(application.getAllByText('26')[0]);
+    fireEvent.press(application.getAllByText('15')[0]);
     fireEvent.press(application.getAllByText('8')[0]);
     const { range } = application.getByType(RangeCalendar).props;
 
