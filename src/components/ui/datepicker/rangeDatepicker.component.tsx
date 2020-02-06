@@ -94,6 +94,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Default is `bottom`.
  * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
  *
+ * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example RangeDatepickerSimpleUsage
