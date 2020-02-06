@@ -341,7 +341,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
             placeholderTextColor={componentStyle.placeholder.color}
             {...restProps}
             {...this.webEventResponder.eventHandlers}
-            style={[componentStyle.text, styles.text, webStyles.text, textStyle]}
+            style={[componentStyle.text, styles.text, platformStyles.text, textStyle]}
             editable={!restProps.disabled}
             onFocus={this.onTextFieldFocus}
             onBlur={this.onTextFieldBlur}
@@ -380,11 +380,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  text: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
+const platformStyles = StyleSheet.create({
+  text: Platform.select({
+    default: null,
+    android: {
+      paddingVertical: 0,
+    },
+    web: {
+      outlineWidth: 0,
+    },
+  }),
 });
 
 export const Input = styled<InputProps>(InputComponent);
