@@ -88,7 +88,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @property {() => ReactElement} renderFooter - Should return the footer.
  *
- * @property {string | PopoverPlacement} placement - Determines the actualPlacement of the popover.
+ * @property {string | PopoverPlacement} placement - Determines the actual placement of the popover.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
  * Default is `bottom`.

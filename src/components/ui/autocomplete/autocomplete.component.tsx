@@ -30,6 +30,7 @@ import {
   PopoverElement,
 } from '../popover/popover.component';
 import { InputFocusEvent } from '../support/typings';
+import { PopoverPlacement } from '../popover/type';
 
 export interface AutocompleteOption {
   title: string;
@@ -40,6 +41,7 @@ export interface AutocompleteProps<O extends Option = Option> extends InputProps
   placeholderData?: O[];
   onSelect?: (option: O) => void;
   renderItem?: (info: ListRenderItemInfo<O>) => React.ReactElement;
+  placement?: PopoverPlacement | string;
 }
 
 export type AutocompleteElement<O extends Option = Option> = React.ReactElement<AutocompleteProps<O>>;
@@ -79,6 +81,12 @@ interface State {
  * @property {(info: ListRenderItemInfo<AutocompleteOption>) => ReactElement} renderItem - Takes an
  * item from data and renders it into the list. If not provided, ListItem is rendered.
  *
+ * @property {string | PopoverPlacement} placement - Determines the actual placement of the popover.
+ * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
+ * `right end`, `bottom start` or `bottom end`.
+ * Default is `bottom`.
+ * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ *
  * @property {InputProps} ...InputProps - Any props applied to Input component.
  *
  * @overview-example AutocompleteSimpleUsage
@@ -92,6 +100,8 @@ interface State {
  * @overview-example AutocompleteWithIcon
  *
  * @overview-example AutocompleteWithLabel
+ *
+ * @example AutocompleteHandleKeyboard
  *
  * @example AutocompleteAsync
  */
@@ -206,6 +216,7 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
       <Popover
         ref={this.popoverRef}
         style={styles.popover}
+        placement={this.props.placement}
         visible={this.state.optionsVisible}
         fullWidth={true}
         content={listElement}
