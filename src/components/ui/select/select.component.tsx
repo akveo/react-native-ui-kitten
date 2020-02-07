@@ -72,6 +72,8 @@ export interface SelectProps extends StyledComponentProps, TouchableOpacityProps
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
   onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
+  onFocus: () => void;
+  onBlur: () => void;
   status?: string;
   size?: string;
   keyExtractor?: KeyExtractorType;
@@ -123,6 +125,10 @@ interface State {
  *
  * @property {(option: SelectOption, event?: GestureResponderEvent) => void} onSelect - Fires on option select.
  * Returns selected option/options.
+ *
+ * @property {() => void} onFocus - Fires when options list becomes visible.
+ *
+ * @property {() => void} onBlur - Fires when options list becomes invisible.
  *
  * @property {StyleProp<TextStyle>} label - Determines the `label` of the component.
  *
@@ -273,11 +279,19 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   private onOptionsListVisible = (): void => {
     this.props.dispatch([Interaction.ACTIVE]);
     this.createIconAnimation(-180).start();
+
+    if (this.props.onFocus) {
+      this.props.onFocus();
+    }
   };
 
   private onOptionsListInvisible = (): void => {
     this.props.dispatch([]);
     this.createIconAnimation(0).start();
+
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
   };
 
   private setOptionsListVisible = (): void => {
