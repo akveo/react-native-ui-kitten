@@ -78,7 +78,11 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
- * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
+ * @property {(date: D) => void} onSelect - Fires when day cell is pressed.
+ *
+ * @property {() => void} onFocus - Fires when picker becomes visible.
+ *
+ * @property {() => void} onBlur - Fires when picker becomes invisible.
  *
  * @property {(date: D, style: StyleType) => ReactElement} renderDay - Should return the content of day cell.
  *
