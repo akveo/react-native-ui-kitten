@@ -14,15 +14,17 @@ import { View } from 'react-native';
 import { withStyles } from '@ui-kitten/components';
 
 const AwesomeView = (props) => {
-  const { themedStyle, style, ...restProps } = this.props;
+  const { themedStyle, style, ...restProps } = props;
     
   return (
-    <View {...restProps} style={[themedStyle, style]} />
+    <View {...restProps} style={[themedStyle.awesome, style]} />
   );
 };
 
 export const ThemedAwesomeView = withStyles(AwesomeView, (theme) => ({
-  backgroundColor: theme['color-primary-500'],
+  awesome: {
+    backgroundColor: theme['color-primary-500'],
+  },
 }));
 ```
 
