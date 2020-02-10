@@ -5,9 +5,14 @@
  * Ref: https://stackoverflow.com/a/35729334/2603230
  */
 self.addEventListener('message', event => {
-  let data = JSON.parse(event.data);
+  let data;
+  if (typeof event.data === 'string') {
+    try {
+      data = JSON.parse(event.data);
+    } catch (e) {}
+  }
 
-  if (data.fromExpoWebClient) {
+  if (data && data.fromExpoWebClient) {
     self.notificationIcon = data.fromExpoWebClient.notificationIcon;
   }
 });

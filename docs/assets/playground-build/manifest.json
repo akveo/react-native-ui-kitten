@@ -9,6 +9,5 @@
   "prefer_related_applications": true,
   "related_applications": [],
   "short_name": "UI Kitten Showcases",
-  "start_url": ".",
-  "theme_color": "#4630EB"
+  "start_url": "."
 }
