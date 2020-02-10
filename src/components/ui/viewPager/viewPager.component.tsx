@@ -196,10 +196,11 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
     return (
       <Animated.View
         {...restProps}
-        ref={this.containerRef}
         style={[styles.container, style, this.getContainerStyle()]}
         onLayout={this.onLayout}
-        {...this.panResponder.panHandlers}>
+        {...this.panResponder.panHandlers}
+        // @ts-ignore
+        ref={this.containerRef}>
         {this.renderComponentChildren(children)}
       </Animated.View>
     );

@@ -107,7 +107,9 @@ export class TabView extends React.Component<TabViewProps> {
   };
 
   private renderComponentChildren = (source: ChildrenProp): TabViewChildren => {
-    return React.Children.toArray(source).reduce((acc: TabViewChildren, element: TabElement, index: number) => {
+    const children = React.Children.toArray(source) as TabElement[];
+
+    return children.reduce((acc: TabViewChildren, element: TabElement, index: number) => {
       const { tab, content } = this.renderComponentChild(element, index);
       return {
         tabs: [...acc.tabs, tab],
