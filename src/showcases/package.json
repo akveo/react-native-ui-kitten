@@ -1,6 +1,6 @@
 {
   "name": "@ui-kitten/showcases",
-  "version": "4.4.0-beta.3",
+  "version": "4.4.0",
   "private": true,
   "workspaces": {
     "nohoist": [
