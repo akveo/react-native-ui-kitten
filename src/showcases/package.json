@@ -17,12 +17,13 @@
   "dependencies": {
     "@react-navigation/web": "^1.0.0-alpha.9",
     "awesome-debounce-promise": "^2.1.0",
-    "expo": "^36.0.0",
+    "expo": "^36.0.2",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "~0.61.4",
     "react-native-gesture-handler": "~1.5.0",
     "react-native-reanimated": "~1.4.0",
+    "react-native-screens": "^2.0.0-beta.2",
     "react-native-svg": "~9.13.3",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",
@@ -31,8 +32,8 @@
     "react-navigation-tabs": "^2.6.0"
   },
   "devDependencies": {
-    "@expo/webpack-config": "0.7.6",
-    "babel-preset-expo": "^7.1.0",
-    "expo-cli": "^3.11.5"
+    "@expo/webpack-config": "^0.10.11",
+    "babel-preset-expo": "^8.0.0",
+    "expo-cli": "^3.11.9"
   }
 }
