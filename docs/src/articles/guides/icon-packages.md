@@ -143,7 +143,7 @@ const HomeScreen = () => (
 
 const App = () => (
   <React.Fragment>
-    <IconRegistry icons={EvaIconsPack} />
+    <IconRegistry icons={FeatherIconsPack} />
     <ApplicationProvider mapping={mapping} theme={lightTheme}>
       <HomeScreen />
     </ApplicationProvider>
@@ -220,8 +220,8 @@ By passing an array of icon packs, we can register it in the application:
 import React from 'react';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import { FeatherIconsPack } from './feather-icons.js'; // <-- Import Feather icons
-import { MaterialIconsPack } from './material-icons.js'; // <-- Import Material icons
+import { FeatherIconsPack } from './feather-icons'; // <-- Import Feather icons
+import { MaterialIconsPack } from './material-icons'; // <-- Import Material icons
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -267,6 +267,80 @@ That's it. Here is a result that you might have
 **Feather Icons**
 
 ![image](assets/images/articles/guides/3rd-party-icons-feather.png)
+
+<hr>
+
+## Tip: Asset Icon Package
+
+By using same technique, this may be also useful to create an Icon package for all of available icons in assets.
+
+With a similar to [3rd party Icon packages guide](guides/icon-packages#3rd-party-icon-packages) way, create an Asset Icons provider.
+
+```jsx
+import React from 'react';
+import { Image } from 'react-native';
+
+const IconProvider = (source) => ({
+  toReactElement: ({ animation, ...style }) => (
+    <Image style={style} source={source}/>
+  ),
+});
+
+export const AssetIconsPack = {
+  name: 'assets',
+  icons: {
+    'github': IconProvider(require('../assets/images/github.png')),
+    'color-palette': IconProvider(require('../assets/images/color-palette.png')),
+    // ...
+  },
+};
+```
+
+### Register Icons
+
+By passing an array of icon packs, we can register it in the application:
+
+```jsx
+import React from 'react';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { AssetIconsPack } from './asset-icons'; // <-- Import Feather icons
+
+const HomeScreen = () => (
+  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <Text catetory='h1'>HOME</Text>
+  </Layout>
+);
+
+const App = () => (
+  <React.Fragment>
+    <IconRegistry icons={[EvaIconsPack, AssetIconsPack]}/>
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+      <HomeScreen />
+    </ApplicationProvider>
+  </React.Fragment>
+);
+
+export default App;
+```
+
+### Usage
+
+When using multiple icon packages, you're able to choose an icon library with simply changing `pack` property.
+
+```jsx
+import React from 'react';
+import { Button, Icon } from '@ui-kitten/components';
+
+export const GithubIcon = (style) => (
+  <Icon {...style} name='github' pack='assets' />
+);
+
+export const GithubButton = () => (
+  <Button icon={GithubIcon}>View Github</Button>
+);
+```
 
 <hr>
 
