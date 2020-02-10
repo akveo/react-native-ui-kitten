@@ -1,3 +1,22 @@
+## 4.4.0 (2020-02-10)
+
+### :star: Highlights
+
+Eva Material compatibility! :tada: [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-584100452)
+
+### :rocket: Features
+
+* Add `onFocus` and `onBlur` props to input-based components ([#857](https://github.com/akveo/react-native-ui-kitten/issues/857)) ([422b523](https://github.com/akveo/react-native-ui-kitten/commit/422b523))
+* **Datepicker**: Add `backdropStyle` prop ([#849](https://github.com/akveo/react-native-ui-kitten/issues/849))([d69cc02](https://github.com/akveo/react-native-ui-kitten/commit/d69cc02))
+* **Autocomplete**: Add `placement` prop ([#845](https://github.com/akveo/react-native-ui-kitten/issues/845))([c61f63e](https://github.com/akveo/react-native-ui-kitten/commit/c61f63e))
+* **Demo App**: [Kitten Tricks](https://github.com/akveo/kittenTricks) is used as a runnable framework demo ([1b987c1](https://github.com/akveo/react-native-ui-kitten/commit/1b987c1))
+
+### :bug: Bug Fixes
+
+* **Modal**: State update during render ([#847](https://github.com/akveo/react-native-ui-kitten/issues/847)) ([39632ea](https://github.com/akveo/react-native-ui-kitten/commit/39632ea))
+* **Input**: Extra vertical padding on Android ([#609](https://github.com/akveo/react-native-ui-kitten/issues/609)) ([c27c610](https://github.com/akveo/react-native-ui-kitten/commit/c27c610))
+* **Documentation**: fix example usage of theme variable ([#871](https://github.com/akveo/react-native-ui-kitten/issues/871)) [617b40d](https://github.com/akveo/react-native-ui-kitten/commit/617b40d)
+
 ## 4.4.0-beta.3 (2020-01-21)
 
 ### :star: Highlights
