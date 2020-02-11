@@ -1,9 +1,13 @@
-import {
-  dark,
-  light,
-} from '@eva-design/eva';
+import * as eva from '@eva-design/eva';
+import * as material from '@eva-design/material';
 
 export const themes: Record<string, any> = {
-  Light: light,
-  Dark: dark,
+  Eva: {
+    Light: eva.light,
+    Dark: eva.dark,
+  },
+  Material: {
+    Light: material.light,
+    Dark: material.dark,
+  },
 };
