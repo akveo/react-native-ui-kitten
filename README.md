@@ -10,6 +10,8 @@ And the most awesome thing: the themes can be changed in the runtime, with no ne
 
 100% Free and Open Source!
 
+![Kitten Material](https://camo.githubusercontent.com/f0487d92194f3c685213539c53e9784113cd8a4b/68747470733a2f2f692e696d6775722e636f6d2f58384f344748622e706e67)
+
 [<img src="https://i.imgur.com/pYl0trU.jpg">][link:doc-homepage]
 
 ## What's included
