@@ -59,17 +59,12 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * ```
  * import React from 'react';
- * import { createAppContainer, SafeAreaView } from 'react-navigation';
- * import { createBottomTabNavigator } from 'react-navigation-tabs';
+ * import { SafeAreaView } from 'react-native';
+ * import { NavigationContainer } from '@react-navigation/native';
+ * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
  * import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
  *
- * // React Navigation also requires installing additional dependencies:
- * //
- * // npm i react-navigation react-navigation-tabs react-native-reanimated react-native-gesture-handler
- * //
- * // Then install it for ios:
- * //
- * // cd ios && pod install
+ * const BottomTab = createBottomTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -83,16 +78,15 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *   </Layout>
  * );
  *
- * const TabBarComponent = ({ navigation }) => {
+ * const BottomTabBar = ({ navigation, state }) => {
  *
  *   const onSelect = (index) => {
- *     const selectedTabRoute = navigation.state.routes[index];
- *     navigation.navigate(selectedTabRoute.routeName);
+ *     navigation.navigate(state.routeNames[index]);
  *   };
  *
  *   return (
  *     <SafeAreaView>
- *       <BottomNavigation selectedIndex={navigation.state.index} onSelect={onSelect}>
+ *       <BottomNavigation selectedIndex={state.index} onSelect={onSelect}>
  *         <BottomNavigationTab title='USERS'/>
  *         <BottomNavigationTab title='ORDERS'/>
  *       </BottomNavigation>
@@ -100,14 +94,18 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *   );
  * };
  *
- * const TabNavigator = createBottomTabNavigator({
- *   Users: UsersScreen,
- *   Orders: OrdersScreen,
- * }, {
- *   tabBarComponent: TabBarComponent,
- * });
+ * const TabNavigator = () => (
+ *   <BottomTab.Navigator tabBar={props => <BottomTabBar {...props} />}>
+ *     <BottomTab.Screen name='Users' component={UsersScreen}/>
+ *     <BottomTab.Screen name='Orders' component={OrdersScreen}/>
+ *   </BottomTab.Navigator>
+ * );
  *
- * export const AppNavigator = createAppContainer(TabNavigator);
+ * export const AppNavigator = () => (
+ *   <NavigationContainer>
+ *     <TabNavigator/>
+ *   </NavigationContainer>
+ * );
  * ```
  *
  * @example BottomNavigationWithoutIndicator
