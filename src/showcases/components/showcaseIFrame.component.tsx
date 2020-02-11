@@ -16,6 +16,7 @@ import {
 } from '@ui-kitten/components';
 import { themes } from '../app/themes';
 import {
+  AppMapping,
   AppTheme,
   ThemeContext,
   ThemeContextType,
@@ -24,6 +25,16 @@ import {
 export const ColorPaletteIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='color-palette-outline'/>
 );
+
+const createThemesMenu = (): OverflowMenuItemType[] => {
+  return Object.keys(themes).reduce((acc: OverflowMenuItemType[], mappingName: string) => {
+    const themeItems: OverflowMenuItemType[] = Object.keys(themes[mappingName])
+                                                     .map((themeName) => ({ title: `${mappingName} ${themeName}` }));
+    return [...acc, ...themeItems];
+  }, []);
+};
+
+const themesMenu = createThemesMenu();
 
 export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: string): React.ReactElement => {
 
@@ -35,9 +46,19 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
   };
 
   const onThemeSelect = (index: number): void => {
-    const nextTheme = Object.keys(themes)[index] as AppTheme;
-    themeContext.setTheme(nextTheme);
+    const [mapping, theme] = themesMenu[index].title.split(' ');
+
     setMenuVisible(false);
+
+    if (mapping !== themeContext.mapping) {
+      themeContext.setMapping(mapping as AppMapping);
+      themeContext.setTheme(theme as AppTheme);
+      return;
+    }
+
+    if (theme !== themeContext.theme) {
+      themeContext.setTheme(theme as AppTheme);
+    }
   };
 
   const onLayout = (event: LayoutChangeEvent): void => {
@@ -53,10 +74,6 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
     window.parent.postMessage(layoutChangeMessage, '*');
   };
 
-  const createThemeMenuItem = (title: string): OverflowMenuItemType => {
-    return { title };
-  };
-
   return (
     <Layout
       style={styles.container}
@@ -70,7 +87,7 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
         <OverflowMenu
           visible={menuVisible}
           onSelect={onThemeSelect}
-          data={Object.keys(themes).map(createThemeMenuItem)}
+          data={themesMenu}
           onBackdropPress={onThemesButtonPress}>
           <Button
             appearance='ghost'
@@ -78,7 +95,7 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
             size='small'
             icon={ColorPaletteIcon}
             onPress={onThemesButtonPress}>
-            {themeContext.theme}
+            {`${themeContext.mapping} ${themeContext.theme}`}
           </Button>
         </OverflowMenu>
       </View>
@@ -90,10 +107,11 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    minHeight: 170,
+    minHeight: 280,
   },
   optionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

@@ -171,25 +171,49 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Light Theme',
+        name: 'Eva Light Theme',
         children: [
           {
             type: 'block',
             block: 'theme',
-            name: 'Light',
-            source: 'light',
+            name: 'Eva Light',
+            source: 'eva light',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Dark Theme',
+        name: 'Eva Dark Theme',
         children: [
           {
             type: 'block',
             block: 'theme',
-            name: 'Dark',
-            source: 'dark',
+            name: 'Eva Dark',
+            source: 'eva dark',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Material Light Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Material Light',
+            source: 'material light',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Material Dark Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Material Dark',
+            source: 'material dark',
           },
         ],
       },

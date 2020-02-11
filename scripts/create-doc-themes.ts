@@ -30,25 +30,27 @@ export interface DocThemeVariable {
   prop: string;
 }
 
-const THEMES_ROOT: string = `@eva-design/eva/themes`;
+type EvaPackageName = 'eva' | 'material';
+type EvaThemeName = 'light' | 'dark';
 const THEME_REF_KEY: string = '$';
 
 /**
- * @param {string[]} themes - Eva theme names. Should have the same name as $themeName.json file (e.g light.json)
+ * @param {EvaPackageName} evaPackage - Eva package name.
+ * @param {EvaThemeName[]} themes - Eva theme names. Should have the same name as $themeName.json file (e.g light.json)
  * @returns themes object structured to be displayed in documentation
  */
-export const createDocThemes = (...themes: string[]): DocThemes => {
-  return themes.reduce((acc: DocThemes, themeName: string): DocThemes => {
-    return { ...acc, [themeName]: createTheme(themeName) };
+export const createDocThemesForPackage = (evaPackage: EvaPackageName, ...themes: EvaThemeName[]): DocThemes => {
+  return themes.reduce((acc: DocThemes, themeName: EvaThemeName): DocThemes => {
+    return { ...acc, [`${evaPackage} ${themeName}`]: createTheme(evaPackage, themeName) };
   }, {});
 };
 
-const createTheme = (themeName: string): DocTheme  => {
-  const theme: EvaTheme = require(`${THEMES_ROOT}/${themeName}`);
+const createTheme = (evaPackage: EvaPackageName, themeName: EvaThemeName): DocTheme  => {
+  const theme: EvaTheme = require(`@eva-design/${evaPackage}/themes/${themeName}`);
   return { name: themeName, parent: null, data: createThemeData(theme, themeName) };
 };
 
-const createThemeData = (theme: EvaTheme, themeName: string): DocThemeData => {
+const createThemeData = (theme: EvaTheme, themeName: EvaThemeName): DocThemeData => {
   return Object.keys(theme).reduce((acc: DocThemeData, themeVariableName: string): DocThemeData => {
     return { ...acc, [themeVariableName]: createVariableMeta(theme, themeName, themeVariableName) };
   }, {});
