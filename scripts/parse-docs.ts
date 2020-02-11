@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as rimraf from 'rimraf';
 import * as gulp from 'gulp';
 import {
-  createDocThemes,
+  createDocThemesForPackage,
   DocThemes,
 } from './create-doc-themes';
 import { createDocAppNavigation } from './create-doc-app-navigation';
@@ -55,13 +55,14 @@ function createDocsInputJson(done: GulpCompletionCallback): void {
   exec(`prsr -g typedoc -f react -i ${docsJsonPath} -o ${inputJsonPath}`);
 
   const typedocOutput = require(inputJsonPath);
-  const themes: DocThemes = createDocThemes('light', 'dark');
+  const evaThemes: DocThemes = createDocThemesForPackage('eva', 'light', 'dark');
+  const evaMaterialThemes: DocThemes = createDocThemesForPackage('material', 'light', 'dark');
 
   fs.writeFileSync(
     inputJsonPath,
     JSON.stringify({
       ...typedocOutput,
-      themes,
+      themes: { ...evaThemes, ...evaMaterialThemes },
     }, null, 2),
   );
 
