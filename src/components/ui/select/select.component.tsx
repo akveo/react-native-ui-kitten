@@ -72,8 +72,8 @@ export interface SelectProps extends StyledComponentProps, TouchableOpacityProps
   controlStyle?: StyleProp<ViewStyle>;
   icon?: IconProp;
   onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
-  onFocus: () => void;
-  onBlur: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
   status?: string;
   size?: string;
   keyExtractor?: KeyExtractorType;
