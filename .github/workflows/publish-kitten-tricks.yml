@@ -33,6 +33,7 @@ jobs:
           expo-version: 3.x
           expo-username: ${{ secrets.EXPO_CLI_USERNAME_KITTEN_TRICKS }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD_KITTEN_TRICKS }}
+          expo-cache: true
 
       - name: Install UI Kitten dependencies
         run: yarn
