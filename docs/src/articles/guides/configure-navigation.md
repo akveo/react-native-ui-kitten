@@ -8,18 +8,7 @@ This guide will help you to configure the app to navigate between screens. UI Ki
 
 Let's start with installing React Navigation and it's required dependencies.
 
- ```bash
-npm i react-navigation react-navigation-stack react-native-screens react-native-gesture-handler react-native-reanimated
-```
-
-We also need to complete installation for iOS.
-
-```bash
-cd ios && pod install
-```
-
-Now you should have all in place. We need to restart the bundler to apply the changes.
-Go back to the root application directory, shut down the current bundler process and call `npm start -- --reset-cache`.
+Please refer to the [official documentation](https://reactnavigation.org/docs/en/getting-started.html) to complete this step, since it may differ for Expo and Bare React Native projects. 
 
 <hr>
 
@@ -33,7 +22,7 @@ Create a `home.component.js` file and paste the code below.
 
 ```jsx
 import React from 'react';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native';
 import { Button, Divider, Layout, TopNavigation } from '@ui-kitten/components';
 
 export const HomeScreen = ({ navigation }) => {
@@ -68,7 +57,7 @@ Create a `details.component.js` file and paste the code below.
 
 ```jsx
 import React from 'react';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native';
 import { Divider, Icon, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (style) => (
@@ -112,23 +101,30 @@ Create a `navigation.component.js` file and paste the code below.
 
 ```js
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from './home.component';
 import { DetailsScreen } from './details.component';
 
-const HomeNavigator = createStackNavigator({
-  Home: HomeScreen,
-  Details: DetailsScreen,
-}, {
-  headerMode: 'none',
-});
+const Stack = createStackNavigator();
 
-export const AppNavigator = createAppContainer(HomeNavigator);
+const HomeNavigator = () => (
+  <Stack.Navigator headerMode='none'>
+    <Stack.Screen name='Home' component={HomeScreen}/>
+    <Stack.Screen name='Details' component={DetailsScreen}/>
+  </Stack.Navigator>
+);
+
+export const AppNavigator = () => (
+  <NavigationContainer>
+    <HomeNavigator/>
+  </NavigationContainer>
+);
+
 ```
 
 With the code above we used `createStackNavigator` function to create stack navigation between Home and Details screens.
-We also used `createAppContainer` function to create `AppNavigator` - the root component of your app. 
+We also used `NavigationContainer` component to create `AppNavigator` - the root component of your app. 
 
 Now, the one thing we have to do is to render `AppNavigator`.
 
