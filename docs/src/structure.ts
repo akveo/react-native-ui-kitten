@@ -232,7 +232,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Themed Component',
-        icon: 'withStyles.svg',
+        icon: 'with-styles.svg',
         source: [
           'useTheme',
           'useStyleSheet',
