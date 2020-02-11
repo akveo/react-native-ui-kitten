@@ -23,11 +23,9 @@ function addLanding(done: GulpCompletionCallback): void {
   done();
 }
 
-function copyOldVersion(done: GulpCompletionCallback): void {
-  gulp.src(['docs/3.1.4/**/*'])
+function copyOldVersion(done: GulpCompletionCallback) {
+  return gulp.src(['docs/3.1.4/**/*'])
       .pipe(gulp.dest('docs/dist/docs/3.1.4'));
-
-  done();
 }
 
 function publish(done: GulpCompletionCallback): void {
