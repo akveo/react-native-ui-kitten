@@ -8,17 +8,17 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == 'akveo/react-native-ui-kitten'
     steps:
       - name: Checkout UI Kitten
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Checkout Eva
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           repository: eva-design/eva
           ref: next
           path: ./packages-ci/eva
 
       - name: Checkout Kitten Tricks
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           repository: akveo/kittenTricks
           ref: next
