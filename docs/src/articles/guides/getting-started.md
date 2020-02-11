@@ -29,7 +29,7 @@ npx react-native init MyApp --template @ui-kitten/template-ts
 By following command-line instructions after successful init, go to the project folder and start your app:
 
 ```bash
-npm run start:ios
+npm run ios
 ``` 
 
 That's it! By moving to the [next guide](guides/configure-navigation) you will learn how to configure navigation in React Native App.
