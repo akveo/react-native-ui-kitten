@@ -118,8 +118,6 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @overview-example InputWithCaption
  *
- * @overview-example InputReference
- *
  * @example InputInlineStyling
  *
  * @example InputWithExternalSourceIcon

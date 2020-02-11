@@ -46,52 +46,51 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * ```
  * import React from 'react';
- * import { createAppContainer, SafeAreaView } from 'react-navigation';
- * import { createDrawerNavigator } from 'react-navigation-drawer';
- * import { Drawer, Layout, Text } from '@ui-kitten/components';
+ * import { NavigationContainer } from '@react-navigation/native';
+ * import { createDrawerNavigator } from '@react-navigation/drawer';
+ * import { Drawer as UIKittenDrawer, Layout, Text } from '@ui-kitten/components';
  *
- * // React Navigation also requires installing additional dependencies:
- * //
- * // npm i react-navigation react-navigation-drawer react-native-reanimated react-native-gesture-handler
- * //
- * // Then, install it for ios:
- * //
- * // cd ./ios && pod install
+ * const Drawer = createDrawerNavigator();
  *
- * const HomeScreen = () => (
+ * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>HOME</Text>
+ *     <Text category='h1'>USERS</Text>
  *   </Layout>
  * );
  *
- * const SettingsScreen = () => (
+ * const OrdersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
- *     <Text category='h1'>SETTINGS</Text>
+ *     <Text category='h1'>ORDERS</Text>
  *   </Layout>
  * );
  *
- * const DrawerComponent = ({ navigation }) => {
+ * const DrawerContent = ({ navigation, state }) => {
  *
  *   const onSelect = (index) => {
- *     const { [index]: selectedTabRoute } = navigation.state.routes;
- *     navigation.navigate(selectedTabRoute.routeName);
+ *     navigation.navigate(state.routeNames[index]);
  *   };
  *
  *   return (
- *     <SafeAreaView>
- *       <Drawer data={[{ title: 'Home' }, { title: 'Settings' }]} onSelect={onSelect} />
- *     </SafeAreaView>
+ *     <UIKittenDrawer
+ *       data={[{ title: 'Home' }, { title: 'Settings' }]}
+ *       selectedIndex={state.index}
+ *       onSelect={onSelect}
+ *     />
  *   );
  * };
  *
- * const DrawerNavigator = createDrawerNavigator({
- *   Home: HomeScreen,
- *   Settings: SettingsScreen,
- * }, {
- *   contentComponent: DrawerComponent,
- * });
+ * export const DrawerNavigator = () => (
+ *   <Drawer.Navigator drawerContent={props => <DrawerContent {...props}/>}>
+ *     <Drawer.Screen name='Users' component={UsersScreen}/>
+ *     <Drawer.Screen name='Orders' component={OrdersScreen}/>
+ *   </Drawer.Navigator>
+ * );
  *
- * export const AppNavigator = createAppContainer(DrawerNavigator);
+ * export const AppNavigator = () => (
+ *   <NavigationContainer>
+ *     <DrawerNavigator/>
+ *   </NavigationContainer>
+ * );
  * ```
  *
  * @overview-example DrawerWithIcons

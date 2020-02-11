@@ -54,17 +54,15 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * ```
  * import React from 'react';
- * import { createAppContainer, SafeAreaView } from 'react-navigation';
- * import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+ * import { SafeAreaView } from 'react-native';
+ * import { NavigationContainer } from '@react-navigation/native';
+ * import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
  * import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
  *
- * // React Navigation also requires installing additional dependencies:
- * //
- * // npm i react-navigation react-navigation-tabs react-native-reanimated react-native-gesture-handler
- * //
- * // Then install it for ios:
- * //
- * // cd ios && pod install
+ * // React Navigation Top Tabs also requires installation of `react-native-tab-view`
+ * // npm i react-native-tab-view
+ *
+ * const TopTab = createBottomTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -78,31 +76,34 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *   </Layout>
  * );
  *
- * const TabBarComponent = ({ navigation }) => {
+ * const TopTabBar = ({ navigation, state }) => {
  *
  *   const onSelect = (index) => {
- *     const selectedTabRoute = navigation.state.routes[index];
- *     navigation.navigate(selectedTabRoute.routeName);
+ *     navigation.navigate(state.routeNames[index]);
  *   };
  *
  *   return (
  *     <SafeAreaView>
- *       <TabBar selectedIndex={navigation.state.index} onSelect={onSelect}>
+ *       <TabBar selectedIndex={state.index} onSelect={onSelect}>
  *         <Tab title='USERS'/>
  *         <Tab title='ORDERS'/>
- *       </TabBar>
+ *       </BottomNavigation>
  *     </SafeAreaView>
  *   );
  * };
  *
- * const TabNavigator = createMaterialTopTabNavigator({
- *   Users: UsersScreen,
- *   Orders: OrdersScreen,
- * }, {
- *   tabBarComponent: TabBarComponent,
- * });
+ * const TabNavigator = () => (
+ *   <TopTab.Navigator tabBar={props => <TopTabBar {...props} />}>
+ *     <TopTab.Screen name='Users' component={UsersScreen}/>
+ *     <TopTab.Screen name='Orders' component={OrdersScreen}/>
+ *   </TopTab.Navigator>
+ * );
  *
- * export const AppNavigator = createAppContainer(TabNavigator);
+ * export const AppNavigator = () => (
+ *   <NavigationContainer>
+ *     <TabNavigator/>
+ *   </NavigationContainer>
+ * );
  * ```
  */
 export class TabBarComponent extends React.Component<TabBarProps> {
