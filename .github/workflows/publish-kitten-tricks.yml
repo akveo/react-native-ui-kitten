@@ -10,12 +10,19 @@ jobs:
       - name: Checkout UI Kitten
         uses: actions/checkout@v1
 
+      - name: Checkout Eva
+        uses: actions/checkout@v1
+        with:
+          repository: eva-design/eva
+          ref: next
+          path: ./packages-ci/eva
+
       - name: Checkout Kitten Tricks
         uses: actions/checkout@v1
         with:
           repository: akveo/kittenTricks
           ref: next
-          path: ../kittenTricks
+          path: ./packages-ci/kittenTricks
 
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -31,15 +38,15 @@ jobs:
         run: yarn
 
       - name: Install Kitten Tricks dependencies
-        working-directory: ../kittenTricks
+        working-directory: ./kittenTricks
         run: yarn
 
       - name: Switch Kitten Tricks environment
-        working-directory: ../kittenTricks
-        run: yarn env dev
+        working-directory: ./packages-ci/kittenTricks
+        run: yarn env ci
 
       - name: Publish Expo App
-        working-directory: ../kittenTricks
+        working-directory: ./packages-ci/kittenTricks
         run: expo publish --release-channel=pr-${{ github.event.number }}
 
       - name: Get Expo App link
