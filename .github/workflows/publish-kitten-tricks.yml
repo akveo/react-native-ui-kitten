@@ -65,6 +65,19 @@ jobs:
         working-directory: ./packages-ci/kittenTricks
         run: expo publish --release-channel=pr-ui-kitten-${{ github.event.number }}
 
+      - name: Build Web App
+        working-directory: ./packages-ci/kittenTricks
+        run: yarn build:web
+
+      - name: Deploy Web App to Netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=./packages-ci/kittenTricks/web-build --message=pr-ui-kitten-${{ github.event.number }}
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+
       - name: Get Expo App link
         id: expo
         run: echo "::set-output name=path::@ui-kitten/kitten-tricks?release-channel=pr-ui-kitten-${{ github.event.number }}"
