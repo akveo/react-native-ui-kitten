@@ -10,6 +10,9 @@ jobs:
       - name: Checkout UI Kitten
         uses: actions/checkout@v2
 
+      - name: Exclude unused modules
+        run: rm -rf docs src/showcases src/template-js src/template-ts
+
       - name: Checkout Eva
         uses: actions/checkout@v2
         with:
