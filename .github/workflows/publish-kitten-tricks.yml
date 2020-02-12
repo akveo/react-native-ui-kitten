@@ -1,0 +1,90 @@
+name: Kitten Tricks - Expo Preview
+on: [pull_request]
+
+jobs:
+  publish:
+    name: Install and publish
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == 'akveo/react-native-ui-kitten'
+    steps:
+      - name: Checkout UI Kitten
+        uses: actions/checkout@v2
+
+      - name: Exclude unused modules
+        run: rm -rf docs src/showcases src/template-js src/template-ts
+
+      - name: Checkout Eva
+        uses: actions/checkout@v2
+        with:
+          repository: eva-design/eva
+          ref: next
+          path: ./packages-ci/eva
+
+      - name: Checkout Kitten Tricks
+        uses: actions/checkout@v2
+        with:
+          repository: akveo/kittenTricks
+          ref: next
+          path: ./packages-ci/kittenTricks
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v5
+        with:
+          expo-version: 3.x
+          expo-username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
+          expo-password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
+          expo-cache: true
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Check yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install UI Kitten dependencies
+        run: yarn
+
+      - name: Install Kitten Tricks dependencies
+        working-directory: ./packages-ci/kittenTricks
+        run: yarn
+
+      - name: Switch Kitten Tricks environment
+        working-directory: ./packages-ci/kittenTricks
+        run: yarn env ci-ui-kitten
+
+      - name: Publish Expo App
+        working-directory: ./packages-ci/kittenTricks
+        run: expo publish --release-channel=pr-ui-kitten-${{ github.event.number }}
+
+      - name: Build Web App
+        working-directory: ./packages-ci/kittenTricks
+        run: yarn build:web
+
+      - name: Deploy Web App to Netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=./packages-ci/kittenTricks/web-build --message=pr-ui-kitten-${{ github.event.number }}
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+
+      - name: Get Expo App link
+        id: expo
+        run: echo "::set-output name=path::@ui-kitten/kitten-tricks?release-channel=pr-ui-kitten-${{ github.event.number }}"
+
+      - name: Comment on PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: Try running it with [Kitten Tricks](https://expo.io/${{ steps.expo.outputs.path }})<br><br><a href="https://exp.host/${{ steps.expo.outputs.path }}"><img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=exp://exp.host/${{ steps.expo.outputs.path }}" height="200px" width="200px"></a>.
