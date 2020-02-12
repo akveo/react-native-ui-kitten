@@ -31,9 +31,20 @@ jobs:
         uses: expo/expo-github-action@v5
         with:
           expo-version: 3.x
-          expo-username: ${{ secrets.EXPO_CLI_USERNAME_KITTEN_TRICKS }}
-          expo-password: ${{ secrets.EXPO_CLI_PASSWORD_KITTEN_TRICKS }}
+          expo-username: ${{ secrets.EXPO_CLI_USERNAME_UI_KITTEN }}
+          expo-password: ${{ secrets.EXPO_CLI_PASSWORD_UI_KITTEN }}
           expo-cache: true
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install UI Kitten dependencies
         run: yarn
@@ -52,11 +63,11 @@ jobs:
 
       - name: Get Expo App link
         id: expo
-        run: echo "::set-output name=path::@art.yorsh/kitten-tricks?release-channel=pr-${{ github.event.number }}"
+        run: echo "::set-output name=path::@ui-kitten/kitten-tricks?release-channel=pr-${{ github.event.number }}"
 
       - name: Comment on PR
         uses: unsplash/comment-on-pr@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: Whoa!🙀 Try running it with [Kitten Tricks](https://expo.io/${{ steps.expo.outputs.path }})<br><br><a href="https://exp.host/${{ steps.expo.outputs.path }}"><img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=exp://exp.host/${{ steps.expo.outputs.path }}" height="200px" width="200px"></a>.
+          msg: Try running it with [Kitten Tricks](https://expo.io/${{ steps.expo.outputs.path }})<br><br><a href="https://exp.host/${{ steps.expo.outputs.path }}"><img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=exp://exp.host/${{ steps.expo.outputs.path }}" height="200px" width="200px"></a>.
