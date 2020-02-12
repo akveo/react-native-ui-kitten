@@ -56,15 +56,15 @@ jobs:
 
       - name: Switch Kitten Tricks environment
         working-directory: ./packages-ci/kittenTricks
-        run: yarn env ci
+        run: yarn env ci-ui-kitten
 
       - name: Publish Expo App
         working-directory: ./packages-ci/kittenTricks
-        run: expo publish --release-channel=pr-${{ github.event.number }}
+        run: expo publish --release-channel=pr-ui-kitten-${{ github.event.number }}
 
       - name: Get Expo App link
         id: expo
-        run: echo "::set-output name=path::@ui-kitten/kitten-tricks?release-channel=pr-${{ github.event.number }}"
+        run: echo "::set-output name=path::@ui-kitten/kitten-tricks?release-channel=pr-ui-kitten-${{ github.event.number }}"
 
       - name: Comment on PR
         uses: unsplash/comment-on-pr@master
