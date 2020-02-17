@@ -41,7 +41,7 @@ export default class EvaConfigService {
       return false;
     }
 
-    const isEvaPackageInstalled = ProjectService.hasModule(`node_modules/${config.evaPackage}`);
+    const isEvaPackageInstalled: boolean = ProjectService.hasModule(`node_modules/${config.evaPackage}`);
 
     if (!isEvaPackageInstalled) {
       LogService.warn(

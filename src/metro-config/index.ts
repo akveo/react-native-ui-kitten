@@ -4,6 +4,7 @@ import MetroConfig from 'metro-config/src/defaults';
 import { EvaConfig } from './services/eva-config.service';
 import BootstrapService from './services/bootstrap.service';
 import ProjectService from './services/project.service';
+import LogService from './services/log.service';
 
 // TODO: TS definitions for metro config?
 type MetroConfigType = any;
@@ -15,28 +16,30 @@ const customMappingWatchOptions = {
 
 export const create = (evaConfig: EvaConfig, projectConfig?: MetroConfigType): MetroConfigType => {
 
+  const onMetroUpdate = (event) => {
+    const reporter = projectConfig.reporter || defaultMetroConfig.reporter;
+
+    if (reporter && reporter.update) {
+      reporter.update(event);
+    }
+
+    if (event.type === 'initialize_started') {
+      BootstrapService.run(evaConfig);
+
+      const customMappingPath: string = ProjectService.resolvePath(evaConfig.customMappingPath);
+      const customMappingExists: boolean = Fs.existsSync(customMappingPath);
+
+      if (customMappingExists) {
+        Fs.watchFile(customMappingPath, customMappingWatchOptions, () => {
+          BootstrapService.run(evaConfig);
+        });
+      }
+    }
+  };
+
   const metroConfig: MetroConfigType = {
     reporter: {
-      update: (event) => {
-        const reporter = projectConfig.reporter || defaultMetroConfig.reporter;
-
-        if (reporter && reporter.update) {
-          reporter.update(event);
-        }
-
-        if (event.type === 'initialize_started') {
-          BootstrapService.run(evaConfig);
-
-          const customMappingPath = ProjectService.resolvePath(evaConfig.customMappingPath);
-          const customMappingExists: boolean = Fs.existsSync(customMappingPath);
-
-          if (customMappingExists) {
-            Fs.watchFile(customMappingPath, customMappingWatchOptions, () => {
-              BootstrapService.run(evaConfig);
-            });
-          }
-        }
-      },
+      update: onMetroUpdate,
     },
   };
 

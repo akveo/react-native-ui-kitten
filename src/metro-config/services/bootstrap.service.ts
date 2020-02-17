@@ -1,17 +1,15 @@
-import { SchemaProcessor } from '@eva-design/processor';
-import Fs from 'fs';
-import LodashMerge from 'lodash.merge';
-import Hash from 'object-hash';
-import EvaConfigService, {
-  EvaConfig,
-  EvaMappingPackageName,
-} from './eva-config.service';
-import LogService from './log.service';
-import ProjectService from './project.service';
 import {
   CustomSchemaType,
+  SchemaType,
   ThemeStyleType,
 } from '@eva-design/dss';
+import { SchemaProcessor } from '@eva-design/processor';
+import Crypto from 'crypto';
+import Fs from 'fs';
+import LodashMerge from 'lodash.merge';
+import EvaConfigService, { EvaConfig } from './eva-config.service';
+import LogService from './log.service';
+import ProjectService from './project.service';
 
 const DEFAULT_CHECKSUM: string = 'default';
 const CACHE_FILE_NAME: string = 'generated.json';
@@ -67,18 +65,14 @@ export default class BootstrapService {
   };
 
   private static ensureEvaPackagesInstalledOrWarn = (): boolean => {
-    const installedEvaPackages: EvaMappingPackageName[] = [];
+    const numberOfInstalledEvaPackages = EvaConfigService.MAPPING_PACKAGE_NAMES.reduce((acc, packageName): number => {
+      const evaPackageRelativePath: string = RELATIVE_PATHS.evaPackage(packageName);
+      const isEvaPackageInstalled: boolean = ProjectService.hasModule(evaPackageRelativePath);
 
-    EvaConfigService.MAPPING_PACKAGE_NAMES.forEach((packageName: EvaMappingPackageName) => {
-      const evaPackageRelativePath = RELATIVE_PATHS.evaPackage(packageName);
-      const isEvaPackageInstalled = ProjectService.hasModule(evaPackageRelativePath);
+      return isEvaPackageInstalled ? acc + 1 : acc;
+    }, 0);
 
-      if (isEvaPackageInstalled) {
-        installedEvaPackages.push(packageName);
-      }
-    });
-
-    if (installedEvaPackages.length === 0) {
+    if (numberOfInstalledEvaPackages === 0) {
       LogService.warn(
         'This project has no Eva packages installed.',
         '',
@@ -93,37 +87,37 @@ export default class BootstrapService {
   };
 
   private static processMappingIfNeeded = (config: EvaConfig): void => {
-    const evaMappingPath = RELATIVE_PATHS.evaMapping(config.evaPackage);
-    const outputCachePath = RELATIVE_PATHS.cache(config.evaPackage);
+    const evaMappingPath: string = RELATIVE_PATHS.evaMapping(config.evaPackage);
+    const outputCachePath: string = RELATIVE_PATHS.cache(config.evaPackage);
 
     /*
      * Use `require` for eva mapping as it is static module and should not be changed.
-     * Require actual cache by reading file at cache dir as it may change by file system.
+     * Require actual cache by reading file at cache file as it may change by file system.
      */
-    const evaMapping = ProjectService.requireModule(evaMappingPath);
-    const actualCache: EvaCache = BootstrapService.requireActualModule(outputCachePath);
+    const evaMapping: SchemaType = ProjectService.requireModule(evaMappingPath);
+    const actualCacheString: string = ProjectService.requireActualModule(outputCachePath);
+    const actualCache: EvaCache = JSON.parse(actualCacheString);
 
     let customMapping: CustomSchemaType;
-    let actualChecksum = DEFAULT_CHECKSUM;
-    let nextChecksum = DEFAULT_CHECKSUM;
+    let actualChecksum: string = DEFAULT_CHECKSUM;
+    let nextChecksum: string = DEFAULT_CHECKSUM;
 
-    if (actualCache) {
+    if (actualCache && actualCache.checksum) {
       actualChecksum = actualCache.checksum;
     }
 
     if (config.customMappingPath) {
-      const customMappingAbsolutePath = ProjectService.resolvePath(config.customMappingPath);
-      LogService.info(`Looking for custom ${config.evaPackage} at: `, customMappingAbsolutePath);
 
       /*
        * Require custom mapping by reading file at `customMappingPath` as it may change by user.
        */
-      customMapping = BootstrapService.requireActualModule(config.customMappingPath);
+      const customMappingString: string = ProjectService.requireActualModule(config.customMappingPath);
+      customMapping = JSON.parse(customMappingString);
       /*
        * Calculate checksum only for custom mapping,
        * but not for styles we generate because eva mapping is a static module.
        */
-      nextChecksum = Hash.sha1(customMapping);
+      nextChecksum = BootstrapService.createChecksum(customMappingString);
     }
 
     /*
@@ -131,8 +125,8 @@ export default class BootstrapService {
      * Or re-write if custom mapping was changed
      */
     if (actualChecksum === DEFAULT_CHECKSUM || actualChecksum !== nextChecksum) {
-      const mapping = LodashMerge({}, evaMapping, customMapping);
-      const styles = schemaProcessor.process(mapping);
+      const mapping: SchemaType = LodashMerge({}, evaMapping, customMapping);
+      const styles: ThemeStyleType = schemaProcessor.process(mapping);
       const writableCache: string = BootstrapService.createWritableCache(nextChecksum, styles);
 
       Fs.writeFileSync(outputCachePath, writableCache);
@@ -145,18 +139,14 @@ export default class BootstrapService {
       checksum,
       styles,
     };
+
     return JSON.stringify(cache, null, 2);
   };
 
-  private static requireActualModule = <T = {}>(relativePath: string): T | null => {
-    if (!ProjectService.hasModule(relativePath)) {
-      return null;
-    }
-
-    const projectFilePath = ProjectService.resolvePath(relativePath);
-    const projectFileContents = Fs.readFileSync(projectFilePath).toString();
-
-    return JSON.parse(projectFileContents);
+  private static createChecksum = (target: any): string => {
+    return Crypto.createHash('sha1')
+                 .update(target)
+                 .digest('hex');
   };
 }
 

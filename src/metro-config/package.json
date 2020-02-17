@@ -18,9 +18,9 @@
   "devDependencies": {
     "@eva-design/dss": "^1.4.0",
     "@eva-design/processor": "^1.4.0",
-    "@types/object-hash": "^1.3.1",
-    "lodash.merge": "^4.6.1",
-    "object-hash": "^2.0.2"
+    "@types/lodash.merge": "ts3.7",
+    "chalk": "^3.0.0",
+    "lodash.merge": "^4.6.1"
   },
   "peerDependencies": {
     "metro-config": "^0.58.0"
