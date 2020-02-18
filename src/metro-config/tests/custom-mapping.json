@@ -1,0 +1,32 @@
+{
+  "components": {
+    "StatusBar": {
+      "meta": {
+        "scope": "mobile",
+        "parameters": {
+          "barStyle": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "string"
+          }
+        },
+        "appearances": {
+          "default": {
+            "default": true
+          }
+        },
+        "variantGroups": {},
+        "states": {}
+      },
+      "appearances": {
+        "default": {
+          "mapping": {
+            "barStyle": "dark-content",
+            "backgroundColor": "background-basic-color-2"
+          }
+        }
+      }
+    }
+  }
+}
