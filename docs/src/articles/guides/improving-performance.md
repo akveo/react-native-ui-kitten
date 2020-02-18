@@ -39,7 +39,7 @@ export default () => (
   </ApplicationProvider>
 );
 ```
-- Restart Metro Bundler if it is running to apply the changes.
+Restart Metro Bundler if it is running to apply the changes.
 
 <hr>
 
