@@ -170,10 +170,7 @@ UI Kitten includes much more components that can be used with React Navigation:
 ## Note on the other navigation libraries
 
 Since React Navigation is not the only solution to perform routing within the React Native app, you might be interested
-in other navigation libraries like React Native Navigation by Wix. Currently, UI Kitten is not well-adopted to be used
-with this library and might have some performance issues.
-
-Consider using React Navigation since UI Kitten has better API support with it.
+in other navigation libraries like React Native Navigation by Wix. By default, UI Kitten is not well adopted to work with this library, and you may need to [improve it's performance](guides/improving-performance).
 
 <hr>
 

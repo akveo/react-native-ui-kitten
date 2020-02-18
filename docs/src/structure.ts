@@ -97,6 +97,17 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Improving Performance',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/improving-performance.md',
+          },
+        ],
+      },
     ],
   },
   {
