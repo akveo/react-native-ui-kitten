@@ -13,6 +13,7 @@ import ProjectService from './project.service';
 
 const DEFAULT_CHECKSUM: string = 'default';
 const CACHE_FILE_NAME: string = 'generated.json';
+const CACHE_EXPORT_SIGNATURE: string = `\n\nexports.styles = require('./${CACHE_FILE_NAME}').styles`;
 
 const RELATIVE_PATHS = {
   evaPackage: (evaPackage: string): string => {
@@ -20,6 +21,9 @@ const RELATIVE_PATHS = {
   },
   evaMapping: (evaPackage: string): string => {
     return `node_modules/${evaPackage}/mapping.json`;
+  },
+  evaIndex: (evaPackage: string): string => {
+    return `node_modules/${evaPackage}/index.js`;
   },
   cache: (evaPackage: string): string => {
     return `node_modules/${evaPackage}/${CACHE_FILE_NAME}`;
@@ -130,8 +134,22 @@ export default class BootstrapService {
       const writableCache: string = BootstrapService.createWritableCache(nextChecksum, styles);
 
       Fs.writeFileSync(outputCachePath, writableCache);
+    }
+
+    const hasCacheExports: boolean = BootstrapService.hasCacheExports(config);
+    if (!hasCacheExports) {
+      const evaIndexPath: string = RELATIVE_PATHS.evaIndex(config.evaPackage);
+
+      Fs.appendFileSync(evaIndexPath, CACHE_EXPORT_SIGNATURE);
       LogService.success(`Successfully bootstrapped ${config.evaPackage}`);
     }
+  };
+
+  private static hasCacheExports = (config: EvaConfig): boolean => {
+    const evaIndexPath: string = RELATIVE_PATHS.evaIndex(config.evaPackage);
+    const evaIndexString = ProjectService.requireActualModule(evaIndexPath);
+
+    return evaIndexString.includes(CACHE_EXPORT_SIGNATURE);
   };
 
   private static createWritableCache = (checksum: string, styles: ThemeStyleType): string => {
