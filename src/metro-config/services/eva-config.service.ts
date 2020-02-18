@@ -5,7 +5,7 @@ import ProjectService from './project.service';
  * Defines the Eva config passed to UI Kitten metro config
  *
  * @param {EvaMappingPackageName} evaPackage - the name of the eva package.
- * @param {string} customMappingPath - path to custom mapping.
+ * @param {string} customMappingPath - relative path to custom mapping.
  *
  * @example Config for @eva-design/eva package with custom mapping
  * ```
