@@ -7,18 +7,27 @@
 import React from 'react';
 import merge from 'lodash.merge';
 import { SchemaProcessor } from '@eva-design/processor';
-import { CustomSchemaType, SchemaType, ThemeStyleType } from '@eva-design/dss';
+import {
+  CustomSchemaType,
+  SchemaType,
+  ThemeStyleType,
+} from '@eva-design/dss';
 import { StyleProvider } from '../style/styleProvider.component';
 import { ThemeProviderProps } from '../theme/themeProvider.component';
 import { ModalPanel } from '../modal/modalPanel.component';
 
-interface ComponentProps {
+interface EvaRuntimeProcessingProps {
   mapping: SchemaType;
   customMapping?: CustomSchemaType;
-  styles?: ThemeStyleType;
 }
 
-export type ApplicationProviderProps = ComponentProps & ThemeProviderProps;
+interface EvaBuildtimeProcessingProps {
+  styles: ThemeStyleType;
+}
+
+type EvaProcessingProps = EvaRuntimeProcessingProps | EvaBuildtimeProcessingProps;
+
+export type ApplicationProviderProps = EvaProcessingProps & ThemeProviderProps;
 export type ApplicationProviderElement = React.ReactElement<ApplicationProviderProps>;
 
 interface State {
@@ -36,6 +45,7 @@ interface State {
  *
  * @property {SchemaType} mapping - Determines the mapping for basic components.
  * This is designed to be provided from any `@eva-design/*` package (e.g. `@eva-design/eva`)
+ * If provided, will be merged with customMapping to bootstrap eva during the runtime.
  *
  * @property {CustomSchemaType} customMapping - Determines the customized mapping.
  * This is merged with `mapping` property and designed to be used components customization.
@@ -43,8 +53,9 @@ interface State {
  * @property {ThemeType} theme - Determines the theme for basic components.
  * This is designed to be provided by developers team and can be imported from npm package (e.g. `@eva-design/eva`).
  *
- * @property {ThemeStyleType} styles - Determines the compiled styles.
- * If ApplicationProvider receives this property, it will replace runtime mapping processing.
+ * @property {ThemeStyleType} styles - Determines the styles compiled by bootstrapping eva.
+ * If provided, will replace runtime styles calculation.
+ * Should be used with `@ui-kitten/metro-config` package.
  *
  * @property {ReactNode} children - Determines application root component.
  *
@@ -53,28 +64,21 @@ interface State {
  * ```
  * import React from 'react';
  * import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
- * import { mapping, light as lightTheme } from '@eva-design/eva';
+ * import * as eva from '@eva-design/eva';
  *
- * export default class App extends React.Component {
- *
- *   render() {
- *     return (
- *       <ApplicationProvider
- *         mapping={mapping}
- *         theme={lightTheme}>
- *         <Layout style={{ flex: 1 }}>
- *           <Text>Welcome to UI Kitten</Text>
- *         </Layout>
- *       </ApplicationProvider>
- *     );
- *   }
- * }
+ * export default = () => (
+ *   <ApplicationProvider {...eva} theme={eva.light}>
+ *     <Layout style={{ flex: 1 }}>
+ *       <Text>Welcome to UI Kitten</Text>
+ *     </Layout>
+ *   </ApplicationProvider>
+ * );
  * ```
  */
 export class ApplicationProvider extends React.Component<ApplicationProviderProps, State> {
 
   public state: State = {
-    styles: this.props.styles,
+    styles: (this.props as EvaBuildtimeProcessingProps).styles,
   };
 
   private schemaProcessor: SchemaProcessor = new SchemaProcessor();
@@ -83,7 +87,8 @@ export class ApplicationProvider extends React.Component<ApplicationProviderProp
     super(props);
 
     if (!this.state.styles) {
-      this.state.styles = this.createStyles(props.mapping, props.customMapping);
+      const { mapping, customMapping } = this.props as EvaRuntimeProcessingProps;
+      this.state.styles = this.createStyles(mapping, customMapping);
     }
   }
 
