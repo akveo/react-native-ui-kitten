@@ -12,6 +12,7 @@ const PACKAGES: string[] = [
   'components',
   'date-fns',
   'eva-icons',
+  'metro-config',
   'moment',
   'template-js',
   'template-ts',
