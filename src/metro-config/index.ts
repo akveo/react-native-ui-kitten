@@ -1,23 +1,51 @@
 import Fs from 'fs';
 import LodashMerge from 'lodash.merge';
 import MetroConfig from 'metro-config/src/defaults';
-import { EvaConfig } from './services/eva-config.service';
 import BootstrapService from './services/bootstrap.service';
+import { EvaConfig } from './services/eva-config.service';
 import ProjectService from './services/project.service';
-import LogService from './services/log.service';
 
-// TODO: TS definitions for metro config?
+// TS definitions for metro config?
 type MetroConfigType = any;
 
 const defaultMetroConfig = MetroConfig.getDefaultValues();
 const customMappingWatchOptions = {
+  /*
+   * How often the custom mapping should be polled in milliseconds
+   */
   interval: 400,
 };
 
-export const create = (evaConfig: EvaConfig, projectConfig?: MetroConfigType): MetroConfigType => {
+/**
+ * Creates custom Metro config for bootstrapping Eva packages.
+ *
+ * @param {EvaConfig} evaConfig - configuration of Eva Design System used in project.
+ * @see {EvaConfig}
+ *
+ * @param metroConfig - configuration of Metro Bundler used in project.
+ * @link https://facebook.github.io/metro/docs/configuration
+ *
+ * @returns a combination of two metro configurations.
+ *
+ * @example Usage
+ *
+ * ```metro.config.js
+ * const MetroConfig = require('@ui-kitten/metro-config');
+ *
+ * const evaConfig = {
+ *   evaPackage: '@eva-design/eva',              // Required.
+ *   customMappingPath: './custom-mapping.json', // Optional.
+ * };
+ *
+ * module.exports = MetroConfig.create(evaConfig, {
+ *   // Whatever was previously specified
+ * });
+ * ```
+ */
+export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): MetroConfigType => {
 
-  const onMetroUpdate = (event) => {
-    const reporter = projectConfig.reporter || defaultMetroConfig.reporter;
+  const handleMetroEvent = (event): void => {
+    const reporter = metroConfig && metroConfig.reporter || defaultMetroConfig.reporter;
 
     if (reporter && reporter.update) {
       reporter.update(event);
@@ -37,11 +65,11 @@ export const create = (evaConfig: EvaConfig, projectConfig?: MetroConfigType): M
     }
   };
 
-  const metroConfig: MetroConfigType = {
+  const libConfig: MetroConfigType = {
     reporter: {
-      update: onMetroUpdate,
+      update: handleMetroEvent,
     },
   };
 
-  return LodashMerge({}, projectConfig, metroConfig);
+  return LodashMerge({}, libConfig, metroConfig);
 };
