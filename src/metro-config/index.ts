@@ -13,7 +13,7 @@ const customMappingWatchOptions = {
   /*
    * How often the custom mapping should be polled in milliseconds
    */
-  interval: 400,
+  interval: 100,
 };
 
 /**
