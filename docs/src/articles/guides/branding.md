@@ -48,7 +48,7 @@ const App = () => (
 export default App;
 ```
 
-Notice that with the code above in order to minify the amount of work, we used <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/dark-theme" target="_blank">Eva Dark</a> as parent theme. 
+Notice that with the code above in order to minify the amount of work, we used <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/eva-dark-theme" target="_blank">Eva Dark</a> as parent theme.
 
 ### Background colors
 
@@ -112,7 +112,7 @@ That's it! Pure dark theme is done. Let's reload the app to review the changes.
 
 ![image](assets/images/articles/guides/branding-theme-preview.png)
 
-The complete list of theme variables can be found at <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/light-theme" target="_blank">Light</a> or <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/dark-theme" target="_blank">Dark</a> theme docs.
+The complete list of theme variables can be found at <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/eva-light-theme" target="_blank">Light</a> or <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/eva-dark-theme" target="_blank">Dark</a> theme docs.
 
 <hr>
 
@@ -177,6 +177,6 @@ export default App;
 
 ## Conclusion
 
-In this guide, you learned how to configure custom theme with Eva Design System. The complete list of available theme variables can be found in <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/light-theme" target="_blank">Light Theme</a> and <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/dark-theme" target="_blank">Dark Theme</a> docs.
+In this guide, you learned how to configure custom theme with Eva Design System. The complete list of available theme variables can be found in <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/eva-light-theme" target="_blank">Light Theme</a> and <a href="https://akveo.github.io/react-native-ui-kitten/docs/design-system/eva-dark-theme" target="_blank">Dark Theme</a> docs.
 
 By moving to the [next guide](guides/icon-packages), you will learn how to use icon packages in React Native.
