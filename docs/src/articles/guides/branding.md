@@ -10,7 +10,7 @@ Before we start, let's pretend we want to create a pure dark theme with a violet
 
 ### Brand colors
 
-Eva Design System provides a powerful and easy to use deep learning tool for generating colors. Navigate to <a href="https://colors.eva.design" target="_blank">colors.eva.design</a> to generate a UI Kitten theme.
+Eva Design System provides a powerful and easy to use deep learning tool for generating colors. Navigate to <a href="https://hubs.ly/H0n6DdP0" target="_blank">colors.eva.design</a> to generate a UI Kitten theme.
 
 Start with picking the primary color of the application. Our choice is violet.
 
