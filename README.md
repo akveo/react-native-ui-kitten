@@ -77,17 +77,17 @@ We're always happy to receive your feedback!
 [badge:github-actions]: https://github.com/akveo/react-native-ui-kitten/workflows/Build/badge.svg
 [badge:coveralls]: https://coveralls.io/repos/github/akveo/react-native-ui-kitten/badge.svg?branch=master
 
-[link:eva]: https://eva.design
+[link:eva]: https://hubs.ly/H0n6Dd90
 [link:github-actions]: https://github.com/akveo/react-native-ui-kitten/actions
 [link:coveralls]: https://coveralls.io/github/akveo/react-native-ui-kitten?branch=master
-[link:doc-homepage]: https://akveo.github.io/react-native-ui-kitten
-[link:doc-where-start]: https://akveo.github.io/react-native-ui-kitten/docs/getting-started/where-to-start
+[link:doc-homepage]: https://hubs.ly/H0n6CZJ0
+[link:doc-where-start]: https://hubs.ly/H0n6Ddg0
 [link:kitten-tricks]: https://github.com/akveo/kittenTricks
 [link:eva-icons]: https://github.com/akveo/eva-icons
-[link:akveo-homepage]: https://akveo.com
+[link:akveo-homepage]: https://hubs.ly/H0n6Dd50
 [link:akveo-medium]: https://medium.com/akveo-engineering
 [link:akveo-twitter]: https://twitter.com/akveo_inc
 [link:akveo-facebook]: https://www.facebook.com/akveo
-[link:ui-kitten-bundles]: https://bit.ly/2MjefPY
-[link:ui-kitten-bundle-java]: http://bit.ly/2MYmOPp
-[link:ui-kitten-bundle-dotnet-core]: http://bit.ly/31gIBqp
+[link:ui-kitten-bundles]: https://hubs.ly/H0n6Ddn0
+[link:ui-kitten-bundle-java]: https://hubs.ly/H0n6C-00
+[link:ui-kitten-bundle-dotnet-core]: https://hubs.ly/H0n6C-10

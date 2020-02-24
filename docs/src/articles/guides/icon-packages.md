@@ -1,6 +1,6 @@
 # Icon Packages
 
-Starting from UI Kitten 4.2, we introduce an icons module built on top of <a href="https://akveo.github.io/eva-icons" target="_blank">Eva Icons</a>. Eva Icons is a pack of beautifully crafted Open Source icons for common actions and items. If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](guides/icon-packages#3rd-party-icon-packages).
+Starting from UI Kitten 4.2, we introduce an icons module built on top of <a href="https://hubs.ly/H0n6Df50" target="_blank">Eva Icons</a>. Eva Icons is a pack of beautifully crafted Open Source icons for common actions and items. If you're not interested in using Eva Icons, learn how to integrate [3rd party Icon packages](guides/icon-packages#3rd-party-icon-packages).
 
 <div class="note note-info">
   <div class="note-title">NOTE</div>
@@ -77,7 +77,7 @@ As a result, you should have a Button looking similar to this:
 
 ![image](assets/images/articles/guides/sample-icon-button.png)
 
-The complete list of available icons could be found on <a href="https://akveo.github.io/eva-icons" target="_blank">Eva Icons page</a>.
+The complete list of available icons could be found on <a href="https://hubs.ly/H0n6C_60" target="_blank">Eva Icons page</a>.
 
 <hr>
 

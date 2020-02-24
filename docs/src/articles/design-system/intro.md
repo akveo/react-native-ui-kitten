@@ -1,6 +1,6 @@
 # Eva Design System
 
-Starting with version 4.0 UI Kitten becomes a React Native implementation of <a href="https://eva.design?utm_source=ui_kitten_docs&utm_medium=intro" target="_blank">Eva Design System</a>.
+Starting with version 4.0 UI Kitten becomes a React Native implementation of <a href="https://hubs.ly/H0n6C-s0" target="_blank">Eva Design System</a>.
 This means that components visual style and behavior are based on Design System rules and agreements.
 
 <hr>
