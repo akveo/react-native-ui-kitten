@@ -1,6 +1,6 @@
 {
-  "name": "@ui-kitten/eva-icons",
-  "description": "Eva Icons for React Native",
+  "name": "@ui-kitten/metro-config",
+  "description": "UI Kitten config for Metro Bundler",
   "version": "4.4.1",
   "author": "akveo <contact@akveo.com>",
   "license": "MIT",
@@ -12,23 +12,17 @@
   "bugs": {
     "url": "https://github.com/akveo/react-native-ui-kitten/issues"
   },
-  "keywords": [
-    "react-native",
-    "ui-kitten",
-    "eva-icons"
-  ],
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "react-native-eva-icons": "1.1.0"
-  },
   "devDependencies": {
-    "react-native-svg": "^9.4.0"
+    "@eva-design/dss": "^1.4.0",
+    "@eva-design/processor": "^1.4.0",
+    "@types/lodash.merge": "ts3.7",
+    "chalk": "^3.0.0",
+    "lodash.merge": "^4.6.1"
   },
   "peerDependencies": {
-    "@ui-kitten/components": "4.4.1",
-    "react-native-svg": "^9.4.0"
-  },
-  "sideEffects": false
+    "metro-config": "^0.58.0"
+  }
 }

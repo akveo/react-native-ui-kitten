@@ -1,3 +1,12 @@
+## <small>4.4.1 (2020-02-24)</small>
+
+### :star: Highlights
+
+Improving performance with build-time Eva processing [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-590213844)
+
+* Add @ui-kitten/metro-config package [#613](https://github.com/akveo/react-native-ui-kitten/issues/613) [#855](https://github.com/akveo/react-native-ui-kitten/issues/855) [12230c6](https://github.com/akveo/react-native-ui-kitten/commit/12230c6))
+
+
 ## 4.4.0 (2020-02-10)
 
 ### :star: Highlights
