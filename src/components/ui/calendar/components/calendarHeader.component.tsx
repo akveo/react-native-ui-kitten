@@ -14,23 +14,27 @@ import {
   ViewProps,
 } from 'react-native';
 import { SvgProps } from 'react-native-svg';
+import { RTLService } from '../../../devsupport';
 import { Button } from '../../button/button.component';
+import {
+  Text,
+  TextProps,
+} from '../../text/text.component';
 import {
   ChevronDown,
   ChevronDownElement,
   ChevronDownProps,
-} from '../../support/components/chevronDown.component';
+} from '../../shared/chevronDown.component';
 import {
   ChevronLeft,
   ChevronLeftElement,
   ChevronLeftProps,
-} from '../../support/components/chevronLeft.component';
+} from '../../shared/chevronLeft.component';
 import {
   ChevronRight,
   ChevronRightElement,
   ChevronRightProps,
-} from '../../support/components/chevronRight.component';
-import { I18nLayoutService } from '../../support/services';
+} from '../../shared/chevronRight.component';
 
 export interface CalendarHeaderProps extends ViewProps {
   title: string;
@@ -60,7 +64,7 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderLeftIcon = (): ChevronLeftElement => {
     const { tintColor, ...svgProps } = this.props.iconStyle;
-    const IconComponent: React.ComponentType<SvgProps> = I18nLayoutService.select(ChevronLeft, ChevronRight);
+    const IconComponent: React.ComponentType<SvgProps> = RTLService.select(ChevronLeft, ChevronRight);
 
     return (
       <IconComponent
@@ -73,7 +77,7 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderRightIcon = (): ChevronRightElement => {
     const { tintColor, ...svgProps } = this.props.iconStyle;
-    const IconComponent: React.ComponentType<SvgProps> = I18nLayoutService.select(ChevronRight, ChevronLeft);
+    const IconComponent: React.ComponentType<SvgProps> = RTLService.select(ChevronRight, ChevronLeft);
 
     return (
       <IconComponent
@@ -88,36 +92,41 @@ export class CalendarHeader extends React.Component<CalendarHeaderProps> {
     return (
       <View style={styles.subContainer}>
         <Button
-          style={styles.headerButton}
           appearance='ghost'
-          // @ts-ignore
-          icon={this.renderLeftIcon}
+          accessoryRight={this.renderLeftIcon}
           onPress={this.props.onNavigationLeftPress}
         />
         <Button
-          style={styles.headerButton}
           appearance='ghost'
-          // @ts-ignore
-          icon={this.renderRightIcon}
+          accessoryRight={this.renderRightIcon}
           onPress={this.props.onNavigationRightPress}
         />
       </View>
     );
   };
 
+  private renderTitleElement = (props: TextProps): React.ReactElement => {
+    return (
+      <Text
+        {...props}
+        style={[props.style, styles.headerButtonText, this.props.titleStyle]}>
+        {this.props.title}
+      </Text>
+    );
+  };
+
   public render(): React.ReactElement<ViewProps> {
-    const { style, titleStyle, onTitlePress, title, lateralNavigationAllowed, ...restProps } = this.props;
+    const { style, titleStyle, onTitlePress, title, lateralNavigationAllowed, ...viewProps } = this.props;
 
     return (
-      <View style={[styles.container, style]} {...restProps}>
+      <View
+        {...viewProps}
+        style={[styles.container, style]}>
         <Button
-          style={styles.headerButton}
           appearance='ghost'
-          textStyle={[titleStyle, styles.headerButtonText]}
-          // @ts-ignore
-          icon={this.renderTitleIcon}
+          accessoryRight={this.renderTitleIcon}
           onPress={onTitlePress}>
-          {title}
+          {this.renderTitleElement}
         </Button>
         {lateralNavigationAllowed && this.renderLateralNavigationControls()}
       </View>
@@ -130,9 +139,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  headerButton: {
-    flexDirection: 'row-reverse',
   },
   headerButtonText: {
     marginHorizontal: 0,

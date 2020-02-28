@@ -10,9 +10,10 @@ import {
   ViewProps,
 } from 'react-native';
 import {
-  StyleType,
   EvaProp,
-} from '@kitten/theme';
+  StyleType,
+} from '../../theme';
+import { Divider } from '../divider/divider.component';
 import {
   CalendarHeader,
   CalendarHeaderElement,
@@ -38,7 +39,6 @@ import {
   CalendarDataService,
   DateBatch,
 } from './service/calendarData.service';
-import { Divider } from '../divider/divider.component';
 
 export interface BaseCalendarProps<D = Date> extends ViewProps {
   min?: D;
@@ -166,7 +166,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     });
   };
 
-  public getCalendarStyle = (source: StyleType): StyleType => {
+  public getCalendarStyle = (source: StyleType) => {
     return {
       container: {
         width: source.width,
@@ -326,47 +326,47 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     );
   };
 
-  private renderDayElement = ({ date }: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderDayElement = ({ date }: CalendarDateInfo<D>, evaStyle): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={style.container}
-        textStyle={style.text}>
+        style={evaStyle.container}
+        textStyle={evaStyle.text}>
         {this.dateService.format(date, FORMAT_DAY)}
       </CalendarDateContent>
     );
   };
 
-  private renderMonthElement = ({ date }: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderMonthElement = ({ date }: CalendarDateInfo<D>, evaStyle): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={style.container}
-        textStyle={style.text}>
+        style={evaStyle.container}
+        textStyle={evaStyle.text}>
         {this.dateService.format(date, FORMAT_MONTH)}
       </CalendarDateContent>
     );
   };
 
-  private renderYearElement = ({ date }: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderYearElement = ({ date }: CalendarDateInfo<D>, evaStyle): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={style.container}
-        textStyle={style.text}>
+        style={evaStyle.container}
+        textStyle={evaStyle.text}>
         {this.dateService.format(date, FORMAT_YEAR)}
       </CalendarDateContent>
     );
   };
 
-  private renderDayPickerElement = (date: D, style: StyleType): React.ReactFragment => {
+  private renderDayPickerElement = (date: D, evaStyle): React.ReactFragment => {
     return (
       <React.Fragment>
         <CalendarMonthHeader
-          style={style.daysHeaderContainer}
+          style={evaStyle.daysHeaderContainer}
           data={this.dateService.getDayOfWeekNames()}>
           {this.renderWeekdayElement}
         </CalendarMonthHeader>
-        <Divider style={style.divider}/>
+        <Divider style={evaStyle.divider}/>
         <CalendarPicker
-          rowStyle={style.row}
+          rowStyle={evaStyle.row}
           data={this.createDates(date)}
           onSelect={this.onDaySelect}
           isItemSelected={this.isDaySelected}
@@ -379,10 +379,10 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     );
   };
 
-  private renderMonthPickerElement = (date: D, style: StyleType): CalendarPickerElement<D> => {
+  private renderMonthPickerElement = (date: D, evaStyle): CalendarPickerElement<D> => {
     return (
       <CalendarPicker
-        rowStyle={style.row}
+        rowStyle={evaStyle.row}
         data={this.dataService.createMonthPickerData(date, PICKER_ROWS, PICKER_COLUMNS)}
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
@@ -418,22 +418,22 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     }
   };
 
-  private renderFooterElement = (style: StyleType): React.ReactElement => {
+  private renderFooterElement = (evaStyle): React.ReactElement => {
     if (this.props.renderFooter) {
       return this.props.renderFooter();
     }
     return null;
   };
 
-  private renderHeaderElement = (style: StyleType): CalendarHeaderElement => {
+  private renderHeaderElement = (evaStyle): CalendarHeaderElement => {
     const titleSelector = this.props.title || this.createViewModeHeaderTitle;
 
     return (
       <CalendarHeader
-        style={style.headerContainer}
+        style={evaStyle.headerContainer}
         title={titleSelector(this.state.visibleDate, this.state.viewMode)}
-        titleStyle={style.title}
-        iconStyle={style.icon}
+        titleStyle={evaStyle.title}
+        iconStyle={evaStyle.icon}
         lateralNavigationAllowed={this.isHeaderNavigationAllowed()}
         onTitlePress={this.onPickerNavigationPress}
         onNavigationLeftPress={this.onHeaderNavigationLeftPress}
@@ -443,16 +443,16 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, eva, ...restProps } = this.props;
-    const { container, ...componentStyle } = this.getCalendarStyle(eva.style);
+    const { eva, style, ...viewProps } = this.props;
+    const evaStyle = this.getCalendarStyle(eva.style);
 
     return (
       <View
-        {...restProps}
-        style={[container, style]}>
-        {this.renderHeaderElement(componentStyle)}
-        {this.renderPickerElement(this.state.visibleDate, componentStyle)}
-        {this.renderFooterElement(componentStyle)}
+        {...viewProps}
+        style={[evaStyle.container, style]}>
+        {this.renderHeaderElement(evaStyle)}
+        {this.renderPickerElement(this.state.visibleDate, evaStyle)}
+        {this.renderFooterElement(evaStyle)}
       </View>
     );
   }

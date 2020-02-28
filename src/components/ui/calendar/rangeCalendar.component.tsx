@@ -8,7 +8,7 @@ import React from 'react';
 import {
   styled,
   StyledComponentProps,
-} from '@kitten/theme';
+} from '../../theme';
 import {
   BaseCalendarComponent,
   BaseCalendarProps,
