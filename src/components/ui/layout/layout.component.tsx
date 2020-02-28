@@ -9,14 +9,19 @@ import {
   View,
   ViewProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
 import {
   styled,
   StyledComponentProps,
-} from '@kitten/theme';
+} from '../../theme';
 
-export interface LayoutProps extends StyledComponentProps, ViewProps {
-  level?: string;
+type LayoutStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface LayoutProps extends ViewProps, LayoutStyledProps {
   children?: React.ReactNode;
+  level?: '1' | '2' | '3' | '4' | string;
 }
 
 export type LayoutElement = React.ReactElement<LayoutProps>;
@@ -47,11 +52,11 @@ export class LayoutComponent extends React.Component<LayoutProps> {
   static styledComponentName: string = 'Layout';
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, eva, ...derivedProps } = this.props;
+    const { eva, style, ...viewProps } = this.props;
 
     return (
       <View
-        {...derivedProps}
+        {...viewProps}
         style={[eva.style, style]}
       />
     );
