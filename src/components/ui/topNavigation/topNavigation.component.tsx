@@ -6,38 +6,38 @@
 
 import React from 'react';
 import {
-  StyleProp,
   StyleSheet,
-  TextStyle,
   View,
   ViewProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyFC,
+  FalsyText,
+  RenderProp,
+} from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { TopNavigationActionElement } from './topNavigationAction.component';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { isValidString } from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 
-type ActionElementProp = TopNavigationActionElement | TopNavigationActionElement[];
-type AlignmentProp = 'start' | 'center';
+type TopNavigationStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | 'control' | string;
+}>;
 
-export interface TopNavigationProps extends StyledComponentProps, ViewProps {
-  title?: string;
-  titleStyle?: StyleProp<TextStyle>;
-  subtitle?: string;
-  subtitleStyle?: StyleProp<TextStyle>;
+export interface TopNavigationProps extends ViewProps, TopNavigationStyledProps {
+  title?: RenderProp<TextProps> | React.ReactText;
+  subtitle?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp;
+  accessoryRight?: RenderProp;
   alignment?: AlignmentProp;
-  leftControl?: TopNavigationActionElement;
-  rightControls?: ActionElementProp;
 }
 
 export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
+
+type AlignmentProp = 'start' | 'center';
 
 /**
  * `TopNavigation` component is designed to be a Navigation Bar.
@@ -45,21 +45,29 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
  *
  * @extends React.Component
  *
- * @property {string} title - Determines the title of the component.
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default`, `control`.
+ * Default is `default`.
  *
- * @property {string} subtitle - Determines the subtitle of the component.
+ * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
+ * to render within the top navigation.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
+ *
+ * @property {string | (props: TextProps) => ReactElement} subtitle - A string or a function component
+ * to render within the top navigation.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
  * @property {string} alignment - Determines the alignment of the component.
  * Can be `center` or `start`.
  * Default is `start`.
  *
- * @property {ReactElement<TopNavigationActionProps>} leftControl - Determines the left control of the component.
+ * @property {() => ReactElement} accessoryLeft - A function component
+ * to render to the left edge the top navigation.
  *
- * @property {ReactElement<TopNavigationActionProps>[]} rightControls - Determines the right controls of the component.
- *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes text style of title.
- *
- * @property {StyleProp<TextStyle>} subtitleStyle - Customizes text style of subtitle.
+ * @property {() => ReactElement} accessoryLeft - A function component
+ * to render to the right edge the top navigation.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -77,7 +85,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
 
   static styledComponentName: string = 'TopNavigation';
 
-  private getAlignmentDependentStyles = (alignment: AlignmentProp): StyleType => {
+  private getAlignmentDependentStyles = (alignment: AlignmentProp) => {
     if (alignment === 'center') {
       return {
         container: styles.containerCentered,
@@ -90,7 +98,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
     };
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       titleTextAlign,
       titleFontFamily,
@@ -107,10 +115,8 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       ...containerParameters
     } = source;
 
-
     return {
       container: containerParameters,
-      titleContainer: {},
       title: {
         textAlign: titleTextAlign,
         fontFamily: titleFontFamily,
@@ -127,79 +133,34 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
         fontWeight: subtitleFontWeight,
         lineHeight: subtitleLineHeight,
       },
-      leftControlContainer: {},
-      rightControlsContainer: {},
     };
   };
 
-  private renderTextElement = (text: string, style: StyleProp<TextStyle>): TextElement => {
-    return (
-      <Text style={style}>
-        {text}
-      </Text>
-    );
-  };
-
-  private renderActionElements(source: ActionElementProp): TopNavigationActionElement[] {
-    return React.Children.map(source, (element: TopNavigationActionElement, index: number) => {
-      return React.cloneElement(element, {
-        key: index,
-        appearance: this.props.appearance,
-      });
-    });
-  }
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const {
-      title,
-      subtitle,
-      leftControl,
-      rightControls,
-      titleStyle,
-      subtitleStyle,
-    } = this.props;
-
-    return [
-      isValidString(title) && this.renderTextElement(title, [style.title, styles.title, titleStyle]),
-      isValidString(subtitle) && this.renderTextElement(subtitle, [style.subtitle, styles.subtitle, subtitleStyle]),
-      leftControl && this.renderActionElements(leftControl),
-      rightControls && this.renderActionElements(rightControls),
-    ];
-  };
-
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, alignment, ...restProps } = this.props;
+    const { eva, style, title, subtitle, alignment, accessoryLeft, accessoryRight, ...viewProps } = this.props;
 
-    const {
-      container,
-      leftControlContainer,
-      titleContainer,
-      rightControlsContainer,
-      ...componentStyles
-    } = this.getComponentStyle(eva.style);
-
-    const alignmentStyles: StyleType = this.getAlignmentDependentStyles(alignment);
-
-    const [
-      titleElement,
-      subtitleElement,
-      leftControlElement,
-      rightControlElements,
-    ] = this.renderComponentChildren(componentStyles);
+    const evaStyles = this.getComponentStyle(eva.style);
+    const alignmentStyles = this.getAlignmentDependentStyles(alignment);
 
     return (
       <View
-        style={[container, styles.container, alignmentStyles.container, style]}
-        {...restProps}>
-        <View style={[leftControlContainer, styles.leftControlContainer]}>
-          {leftControlElement}
+        style={[evaStyles.container, styles.container, alignmentStyles.container, style]}
+        {...viewProps}>
+        <View style={styles.leftControlContainer}>
+          <FalsyFC component={accessoryLeft}/>
         </View>
-        <View style={[titleContainer, styles.titleContainer, alignmentStyles.titleContainer]}>
-          {titleElement}
-          {subtitleElement}
+        <View style={alignmentStyles.titleContainer}>
+          <FalsyText
+            style={evaStyles.title}
+            component={title}
+          />
+          <FalsyText
+            style={evaStyles.subtitle}
+            component={subtitle}
+          />
         </View>
-        <View style={[rightControlsContainer, styles.rightControlsContainer, alignmentStyles.rightControlsContainer]}>
-          {rightControlElements}
+        <View style={[styles.rightControlsContainer, alignmentStyles.rightControlsContainer]}>
+          <FalsyFC component={accessoryRight}/>
         </View>
       </View>
     );
@@ -214,14 +175,11 @@ const styles = StyleSheet.create({
   containerCentered: {
     justifyContent: 'space-between',
   },
-  titleContainer: {},
   titleContainerCentered: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {},
-  subtitle: {},
   leftControlContainer: {
     flexDirection: 'row',
     zIndex: 1,
