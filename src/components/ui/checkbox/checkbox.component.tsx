@@ -12,72 +12,73 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
   TouchableOpacityProps,
   View,
   ViewStyle,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyText,
+  RenderProp,
+  TouchableWithoutFeedback,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 import {
   CheckMark,
   CheckMarkProps,
-  CheckMarkElement,
-} from '../support/components/checkmark.component';
+} from '../shared/checkmark.component';
 import {
   Minus,
-  MinusElement,
   MinusProps,
-} from '../support/components/minus.component';
-import {
-  isValidString,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../shared/minus.component';
 
-export interface CheckBoxProps extends StyledComponentProps, TouchableOpacityProps {
-  textStyle?: StyleProp<TextStyle>;
-  text?: string;
+type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface CheckBoxProps extends TouchableOpacityProps, CheckBoxStyledProps {
   checked?: boolean;
   indeterminate?: boolean;
-  status?: string;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
+  text?: RenderProp<TextProps> | React.ReactText;
+  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
 }
 
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
-
-type IconElement = CheckMarkElement | MinusElement;
 
 /**
  * Styled `CheckBox` component.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.`
+ * @property {boolean} checked - Determines whether component is checked.
  * Default is `false`.
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false.
+ * @property {boolean} indeterminate - Determines whether checked status is indeterminate.
+ * Will set indeterminate to false when the checked property is changed.
+ * Default is `false`.
  *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
  *
- * @property {string} text - Determines text of the component.
+ * @property {string | (props: TextProps) => ReactElement} text - A string or a function component
+ * to render near the checkbox.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
- *
- * @property {(checked: boolean) => void} onChange - Fires on checkbox value change.
+ * @property {(checked: boolean, indeterminate: boolean) => void} onChange - Called on checkbox value change.
+ * Called with `checked` and `indeterminate` values.
+ * If `indeterminate` was provided in state, it should be changed to the value passed in this function.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -139,7 +140,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
     }
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       textMarginHorizontal,
       textFontFamily,
@@ -159,8 +160,6 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
     } = source;
 
     return {
-      container: {},
-      highlightContainer: {},
       selectContainer: containerParameters,
       text: {
         marginHorizontal: textMarginHorizontal,
@@ -200,65 +199,42 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
     };
   };
 
-  private renderTextElement = (style: TextStyle): TextElement => {
-    const { text, textStyle } = this.props;
-
-    return (
-      <Text style={[style, styles.text, textStyle]}>{text}</Text>
-    );
-  };
-
-  private renderIconElement = (style: SvgProps): IconElement => {
+  private renderIconElement = (style: SvgProps): React.ReactElement<SvgProps> => {
     const Icon: React.ComponentType<MinusProps | CheckMarkProps> = this.props.indeterminate ? Minus : CheckMark;
     return (
       <Icon {...style} />
     );
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { text } = this.props;
-
-    return [
-      this.renderIconElement(style.icon),
-      isValidString(text) && this.renderTextElement(style.text),
-    ];
-  };
-
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { eva, style, disabled, text, ...derivedProps } = this.props;
+    const { eva, style, disabled, text, ...touchableProps } = this.props;
 
-    const {
-      container,
-      highlightContainer,
-      highlight,
-      selectContainer,
-      ...componentStyle
-    } = this.getComponentStyle(eva.style);
+    const evaStyle = this.getComponentStyle(eva.style);
 
-    const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
+    const selectContainerStyle: StyleProp<ViewStyle> = [evaStyle.selectContainer, styles.selectContainer];
     const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
 
-    const [iconElement, textElement] = this.renderComponentChildren(componentStyle);
-
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...derivedProps}
+      <TouchableWithoutFeedback
+        {...touchableProps}
         {...this.webEventResponder.eventHandlers}
-        style={[container, styles.container, webStyles.container, style]}
+        style={[styles.container, webStyles.container, style]}
         disabled={disabled}
         hitSlop={hitSlopInsets}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={[highlightContainer, styles.highlightContainer]}>
-          <View style={[highlight, styles.highlight]}/>
+        <View style={styles.highlightContainer}>
+          <View style={[evaStyle.highlight, styles.highlight]}/>
           <View style={selectContainerStyle}>
-            {iconElement}
+            {this.renderIconElement(evaStyle.icon)}
           </View>
         </View>
-        {textElement}
-      </TouchableOpacity>
+        <FalsyText
+          style={evaStyle.text}
+          component={text}
+        />
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -279,8 +255,6 @@ const styles = StyleSheet.create({
   highlight: {
     position: 'absolute',
   },
-  icon: {},
-  text: {},
 });
 
 const webStyles = Platform.OS === 'web' && StyleSheet.create({
