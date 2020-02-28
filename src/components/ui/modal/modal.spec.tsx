@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {
   fireEvent,
-  render, RenderAPI,
+  render,
   waitForElement,
 } from 'react-native-testing-library';
 import {
@@ -51,16 +51,6 @@ describe('@modal: component checks', () => {
         </React.Fragment>
       </ApplicationProvider>
     );
-  };
-
-  /*
-   * In this test:
-   * [0] for @modal/toggle-button,
-   * [1] for backdrop
-   * [2] for @modal/change-text-button
-   */
-  const touchables = {
-    findBackdropTouchable: (api: RenderAPI) => api.getAllByType(TouchableOpacity)[1],
   };
 
   it('should render nothing when invisible', async () => {
@@ -136,8 +126,13 @@ describe('@modal: component checks', () => {
     const toggleButton = component.getByTestId('@modal/toggle-button');
     fireEvent.press(toggleButton);
 
-
-    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
+    /*
+     * In this test:
+     * [0] for @modal/toggle-button,
+     * [1] for backdrop
+     * [2] for @modal/change-text-button
+     */
+    const backdrop = await waitForElement(() => component.getAllByType(TouchableOpacity)[1]);
     fireEvent.press(backdrop);
 
     expect(onBackdropPress).toBeCalled();
@@ -151,7 +146,7 @@ describe('@modal: component checks', () => {
     const toggleButton = component.getByTestId('@modal/toggle-button');
     fireEvent.press(toggleButton);
 
-    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
+    const backdrop = await waitForElement(() => component.getAllByType(TouchableOpacity)[1]);
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
   });
