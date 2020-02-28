@@ -5,40 +5,39 @@
  */
 
 import React from 'react';
-import {
-  ListRenderItemInfo,
-  GestureResponderEvent,
-} from 'react-native';
+import { ListRenderItemInfo } from 'react-native';
+import { Overwrite } from 'utility-types';
+import { ChildrenWithProps } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
-} from '@kitten/theme';
+} from '../../theme';
+import { Divider } from '../divider/divider.component';
 import {
   List,
+  ListElement,
   ListProps,
 } from '../list/list.component';
 import {
-  Divider,
-  DividerElement,
-} from '../divider/divider.component';
-import {
-  MenuItem,
-  MenuItemType,
   MenuItemElement,
   MenuItemProps,
 } from './menuItem.component';
-import { SubMenu } from './subMenu.component';
-import { MenuService } from './menu.service';
 
-export interface MenuProps extends StyledComponentProps, Omit<ListProps, 'renderItem'> {
-  selectedIndex?: number;
-  onSelect: (index: number, event?: GestureResponderEvent) => void;
+type MenuStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | 'noDivider' | string;
+}>;
+
+type MenuListProps = Omit<ListProps, 'data' | 'renderItem'>;
+
+export interface MenuProps extends MenuListProps, MenuStyledProps {
+  children?: ChildrenWithProps<MenuItemProps>;
 }
 
 export type MenuElement = React.ReactElement<MenuProps>;
 
 /**
- * `Menu` renders vertical list of `MenuItems`.
+ * Styled `Menu` component.
+ * Renders UI Kitten List component with additional styles provided by Eva.
  *
  * @extends React.Component
  *
@@ -46,14 +45,10 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * Can be `default` or `noDivider`.
  * Default is `default`.
  *
- * @property {MenuItemType[]} data - Determines menu items.
+ * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children - Determines items of the Menu.
  *
- * @property {number} selectedIndex - The index of selected item.
- *
- * @property {(index: number, event?: GestureResponderEvent) => void} onSelect - Fires when
- * selected item is changed.
- *
- * @property {Omit<ListProps, 'renderItem'>} ...ListProps - Any props applied to List component, excluding `renderItem`.
+ * @property {ListProps} ...ListProps - Any props applied to List component,
+ * excluding `renderItem` and `data`.
  *
  * @overview-example MenuSimpleUsage
  *
@@ -71,66 +66,27 @@ class MenuComponent extends React.Component<MenuProps> {
 
   static styledComponentName: string = 'Menu';
 
-  private service: MenuService = new MenuService();
+  private get data(): any[] {
+    return React.Children.toArray(this.props.children || []);
+  }
 
-  private onSelect = (selectedIndex: number, event: GestureResponderEvent): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(selectedIndex, event);
-    }
+  private get shouldRenderDividers(): boolean {
+    return this.props.appearance !== 'noDivider';
+  }
+
+  private renderItem = (info: ListRenderItemInfo<MenuItemElement>): MenuItemElement => {
+    return info.item;
   };
 
-  private isDividerAbsent = (): boolean => {
-    const { appearance } = this.props;
-
-    return appearance !== 'noDivider';
-  };
-
-  private areThereSubItems = (item: MenuItemProps): boolean => {
-    return item.subItems && item.subItems.length !== 0;
-  };
-
-  private getIsSelected = (item: MenuItemType): boolean => {
-    const { selectedIndex } = this.props;
-
-    return selectedIndex === item.menuIndex;
-  };
-
-  private renderMenuItem = (info: ListRenderItemInfo<MenuItemProps>): MenuItemElement => {
-    const { selectedIndex } = this.props;
-    const isSelected: boolean = this.getIsSelected(info.item);
-
-    return this.areThereSubItems(info.item) ? (
-      <SubMenu
-        item={info.item}
-        selectedIndex={selectedIndex}
-        divider={this.renderDivider()}
-        onSelect={this.onSelect}
-      />
-    ) : (
-      <MenuItem
-        {...info.item}
-        selected={isSelected}
-        onPress={this.onSelect}
-      />
-    );
-  };
-
-  private renderDivider = (): DividerElement => {
-    return this.isDividerAbsent() && (
-      <Divider/>
-    );
-  };
-
-  public render(): React.ReactNode {
-    const { appearance, data, ...restProps } = this.props;
-    const items: MenuItemType[] = this.service.setIndexes(data);
+  public render(): ListElement {
+    const { appearance, ...listProps } = this.props;
 
     return (
       <List
-        ItemSeparatorComponent={this.renderDivider}
-        renderItem={this.renderMenuItem}
-        data={items}
-        {...restProps}
+        ItemSeparatorComponent={this.shouldRenderDividers && Divider}
+        {...listProps}
+        data={this.data}
+        renderItem={this.renderItem}
       />
     );
   }
