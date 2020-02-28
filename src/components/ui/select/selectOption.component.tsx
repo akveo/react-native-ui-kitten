@@ -8,28 +8,30 @@ import React from 'react';
 import {
   GestureResponderEvent,
   Platform,
+  StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableOpacity,
   TouchableOpacityProps,
-  View, ViewProps,
+  View,
+  ViewProps,
 } from 'react-native';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
+import {
+  TouchableWithoutFeedback,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../../devsupport';
 import {
   Text,
   TextElement,
 } from '../text/text.component';
 import { CheckBox } from '../checkbox/checkbox.component';
-import {
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
 
 export interface SelectOptionType {
   text: string;
@@ -57,11 +59,11 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> implement
   // WebEventResponderCallbacks
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -71,18 +73,18 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> implement
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onMultiSelectItemPress = (value: boolean): void => {
     this.onPress(null);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       textColor,
       textFontFamily,
@@ -106,45 +108,50 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> implement
     };
   };
 
-  private renderTextElement = (style: TextStyle): TextElement => {
+  private renderTextElement = (style: StyleProp<TextStyle>): TextElement => {
+    // style={[evaStyle.text, this.props.item.textStyle]}>
     return (
-      <Text style={[style, styles.text, this.props.item.textStyle]}>
+      <Text style={style}>
         {this.props.item.text}
       </Text>
     );
   };
 
   private renderSingleElement = (): React.ReactElement<TouchableOpacityProps> => {
-    const { themedStyle, style, item, ...restProps } = this.props;
-    const { container, text } = this.getComponentStyle(themedStyle);
-    const textElement: TextElement = this.renderTextElement(text);
+    const { eva, style, item, ...restProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
+      <TouchableWithoutFeedback
         {...restProps}
         {...this.webEventResponder.eventHandlers}
-        style={[styles.container, container, style]}
+        style={[styles.container, evaStyle.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {textElement}
-      </TouchableOpacity>
+        <Text style={[evaStyle.text, item.textStyle]}>
+          {item.text}
+        </Text>
+      </TouchableWithoutFeedback>
     );
   };
 
   private renderMultiSelectElement = (): React.ReactElement<ViewProps> => {
-    const { style, themedStyle, selected, disabled, indeterminate, item, ...restProps } = this.props;
-    const { container, text } = this.getComponentStyle(themedStyle);
+    const { style, eva, selected, disabled, indeterminate, item, ...restProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
         {...restProps}
         {...this.webEventResponder.eventHandlers}
-        style={[styles.container, container, webStyles.container, style]}>
+        style={[styles.container, evaStyle.container, webStyles.container, style]}>
         <CheckBox
-          text={item.text}
-          textStyle={[text, item.textStyle, styles.multiSelectText]}
+          text={props => <Text {...props} style={[
+            props.style,
+            evaStyle.text,
+            item.textStyle,
+            styles.multiSelectText,
+          ]}>{item.text}</Text>}
           disabled={disabled}
           checked={selected}
           indeterminate={indeterminate}
@@ -164,8 +171,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  icon: {},
-  text: {},
   multiSelectText: {
     width: '100%',
   },

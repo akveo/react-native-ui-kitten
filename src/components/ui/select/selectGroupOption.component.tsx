@@ -10,7 +10,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 import {
   SelectOption,
   SelectOptionElement,
