@@ -12,21 +12,28 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import { ChildrenWithProps } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { TabElement } from './tab.component';
-import { TabIndicator } from '../support/components/tabIndicator.component';
+} from '../../theme';
+import {
+  TabElement,
+  TabProps,
+} from './tab.component';
+import { TabIndicator } from '../shared/tabIndicator.component';
 
-type ChildrenProp = TabElement | TabElement[];
+type TabBarStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-export interface TabBarProps extends StyledComponentProps, ViewProps {
-  children: ChildrenProp;
+export interface TabBarProps extends ViewProps, TabBarStyledProps {
   selectedIndex?: number;
-  indicatorStyle?: StyleProp<ViewStyle>;
   onSelect?: (index: number) => void;
+  children?: ChildrenWithProps<TabProps>;
+  indicatorStyle?: StyleProp<ViewStyle>;
 }
 
 export type TabBarElement = React.ReactElement<TabBarProps>;
@@ -36,13 +43,13 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *
  * @extends React.Component
  *
- * @property {number} selectedIndex - Determines current tab index.
+ * @property {number} selectedIndex - Determines index of the selected tab.
  *
- * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
+ * @property {(index: number) => void} onSelect - Called when tab is pressed.
  *
- * @property {(index: number) => void} onSelect - Fires on tab select with corresponding index.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tab components to render within the bar.
  *
- * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Determines tabs.
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of the indicator component.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -134,7 +141,7 @@ export class TabBarComponent extends React.Component<TabBarProps> {
     }
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       indicatorHeight,
       indicatorBorderRadius,
@@ -166,26 +173,25 @@ export class TabBarComponent extends React.Component<TabBarProps> {
     });
   };
 
-  private renderTabElements = (source: ChildrenProp): TabElement[] => {
+  private renderTabElements = (source: ChildrenWithProps<TabProps>): TabElement[] => {
     return React.Children.map(source, this.renderTabElement);
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, indicatorStyle, selectedIndex, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(eva.style);
-
+    const { eva, style, indicatorStyle, selectedIndex, children, ...viewProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
     const tabElements: TabElement[] = this.renderTabElements(children);
 
     return (
       <View>
         <View
-          {...derivedProps}
-          style={[componentStyle.container, styles.container, style]}>
+          {...viewProps}
+          style={[evaStyle.container, styles.container, style]}>
           {tabElements}
         </View>
         <TabIndicator
           ref={this.tabIndicatorRef}
-          style={[componentStyle.indicator, styles.indicator, indicatorStyle]}
+          style={[evaStyle.indicator, styles.indicator, indicatorStyle]}
           selectedPosition={selectedIndex}
           positions={tabElements.length}
         />
