@@ -7,40 +7,39 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageStyle,
+  ImageProps,
   Platform,
-  StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyFC,
+  FalsyText,
+  RenderProp,
+  TouchableWithoutFeedback,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import {
-  isValidString,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 
-type IconProp = (style: ImageStyle) => IconElement;
+type ButtonStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'filled' | 'outline' | 'ghost' | string;
+}>;
 
-export interface ButtonProps extends StyledComponentProps, TouchableOpacityProps {
-  textStyle?: StyleProp<TextStyle>;
-  icon?: IconProp;
-  status?: string;
-  size?: string;
-  children?: string;
+export interface ButtonProps extends TouchableOpacityProps, ButtonStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
+  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  size?: 'tiny' | 'small' | 'medium' | 'large' | 'giant' | string;
 }
 
 export type ButtonElement = React.ReactElement<ButtonProps>;
@@ -62,14 +61,18 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
  * Default is `medium`.
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
+ * @property {ReactText | (props: TextProps) => ReactElement} children - A string or a function component
+ * to render within the button.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {string} children - Determines text of the component.
+ * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * to render to start of the text.
+ * Called with props provided by Eva.
  *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
- *
- * @property {(style: ImageStyle) => ReactElement} icon - Determines icon of the component.
+ * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * to render to end of the text.
+ * Called with props provided by Eva.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -135,7 +138,7 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
     }
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       textColor,
       textFontFamily,
@@ -169,51 +172,31 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
     };
   };
 
-  private renderTextElement = (style: TextStyle): TextElement => {
-    return (
-      <Text
-        key={1}
-        style={[style, styles.text, this.props.textStyle]}>
-        {this.props.children}
-      </Text>
-    );
-  };
-
-  private renderIconElement = (style: ImageStyle): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      key: 2,
-      style: [style, styles.icon, iconElement.props.style],
-    });
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { icon, children } = this.props;
-
-    return [
-      icon && this.renderIconElement(style.icon),
-      isValidString(children) && this.renderTextElement(style.text),
-    ];
-  };
-
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { eva, style, ...containerProps } = this.props;
-    const { container, ...childStyles } = this.getComponentStyle(eva.style);
-    const [iconElement, textElement] = this.renderComponentChildren(childStyles);
+    const { eva, style, accessoryLeft, accessoryRight, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...containerProps}
+      <TouchableWithoutFeedback
+        {...touchableProps}
         {...this.webEventResponder.eventHandlers}
-        style={[container, styles.container, webStyles.container, style]}
+        style={[evaStyle.container, styles.container, webStyles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {iconElement}
-        {textElement}
-      </TouchableOpacity>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={accessoryLeft}
+        />
+        <FalsyText
+          style={evaStyle.text}
+          component={children}
+        />
+        <FalsyFC
+          style={evaStyle.icon}
+          component={accessoryRight}
+        />
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -224,8 +207,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {},
-  icon: {},
 });
 
 const webStyles = Platform.OS === 'web' && StyleSheet.create({
