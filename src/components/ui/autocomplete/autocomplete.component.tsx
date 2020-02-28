@@ -7,20 +7,17 @@
 import React from 'react';
 import {
   ListRenderItemInfo,
+  NativeSyntheticEvent,
   StyleSheet,
+  TextInputFocusEventData,
   View,
 } from 'react-native';
 import {
   Input,
-  InputComponent,
   InputElement,
   InputProps,
 } from '../input/input.component';
-import {
-  List,
-  ListElement,
-  ListProps,
-} from '../list/list.component';
+import { List } from '../list/list.component';
 import {
   ListItem,
   ListItemElement,
@@ -29,24 +26,23 @@ import {
   Popover,
   PopoverElement,
 } from '../popover/popover.component';
-import { InputFocusEvent } from '../support/typings';
 import { PopoverPlacement } from '../popover/type';
 
 export interface AutocompleteOption {
   title: string;
 }
 
+type Option = AutocompleteOption;
+
 export interface AutocompleteProps<O extends Option = Option> extends InputProps {
   data?: O[];
   placeholderData?: O[];
   onSelect?: (option: O) => void;
   renderItem?: (info: ListRenderItemInfo<O>) => React.ReactElement;
-  placement?: PopoverPlacement | string;
+  placement?: string;
 }
 
 export type AutocompleteElement<O extends Option = Option> = React.ReactElement<AutocompleteProps<O>>;
-
-type Option = AutocompleteOption;
 
 interface State {
   optionsVisible: boolean;
@@ -61,31 +57,56 @@ interface State {
  *
  * @method {() => void} hide - Sets data list invisible.
  *
- * @method {() => void} focus - Focuses Autocomplete and sets data list visible.
+ * @method {() => void} focus - Focuses an input field and sets data list visible.
  *
- * @method {() => void} blur - Removes focus from Autocomplete and sets data list invisible.
- * This is the opposite of `focus()`.
+ * @method {() => void} blur - Removes focus from input field and sets data list invisible.
  *
- * @method {() => boolean} isFocused - Returns true if the Autocomplete is currently focused and visible.
+ * @method {() => boolean} isFocused - Returns true if the input field is currently focused.
  *
- * @method {() => void} clear - Removes all text from the Autocomplete.
+ * @method {() => void} clear - Removes all text from the input field.
  *
  * @property {AutocompleteOption[]} data - Options displayed in component.
  * Each option can be any type, but should contain `title` property.
  *
+ * @property {(option: AutocompleteOption) => void} onSelect - Called when option is pressed.
+ *
  * @property {AutocompleteOption[]} placeholderData - Options displayed in component
  * when data is nullable of empty.
  *
- * @property {(option: AutocompleteOption) => void} onSelect - Emits when option is pressed.
- *
  * @property {(info: ListRenderItemInfo<AutocompleteOption>) => ReactElement} renderItem - Takes an
- * item from data and renders it into the list. If not provided, ListItem is rendered.
+ * item from `data` and renders it into the list.
+ * If not provided, ListItem is rendered.
  *
- * @property {string | PopoverPlacement} placement - Determines the actual placement of the popover.
+ * @property {string} status - Determines the status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
+ *
+ * @property {string} size - Determines the size of the component.
+ * Can be `small`, `medium` or `large`.
+ * Default is `medium`.
+ *
+ * @property {string | (props: TextProps) => ReactElement} label - A string or a function component
+ * to render to top of the input field.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
+ *
+ * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * to render to start of the text.
+ * Called with props provided by Eva.
+ *
+ * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * to render to end of the text.
+ * Called with props provided by Eva.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the options list relative to the input field.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
  * Default is `bottom`.
  * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ *
+ * @property {() => void} onFocus - Called when options list becomes visible.
+ *
+ * @property {() => void} onBlur - Called when options list becomes invisible.
  *
  * @property {InputProps} ...InputProps - Any props applied to Input component.
  *
@@ -112,7 +133,7 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
   };
 
   private popoverRef: React.RefObject<Popover> = React.createRef();
-  private inputRef: React.RefObject<InputComponent> = React.createRef();
+  private inputRef: React.RefObject<any> = React.createRef();
 
   private get data(): O[] {
     const hasData: boolean = this.props.data && this.props.data.length > 0;
@@ -143,7 +164,7 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
     this.inputRef.current.clear();
   };
 
-  private onInputFocus = (e: InputFocusEvent): void => {
+  private onInputFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.setState({ optionsVisible: true });
 
     if (this.props.onFocus) {
@@ -152,6 +173,7 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
   };
 
   private onBackdropPress = (): void => {
+    this.blur();
     this.setState({ optionsVisible: false });
   };
 
@@ -166,64 +188,42 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
     return (
       <ListItem
         title={info.item.title}
-        onPress={this.onOptionPress}
-      />
-    );
-  };
-
-  private renderCustomOptionElement = (info: ListRenderItemInfo<O>): React.ReactElement => {
-    return (
-      <ListItem onPress={this.onOptionPress}>
-        {this.props.renderItem(info)}
+        onPress={() => this.onOptionPress(info.index)}>
+        {this.props.renderItem && this.props.renderItem(info)}
       </ListItem>
     );
   };
 
-  private renderOptionListElement(props: Partial<ListProps>): ListElement {
+  private renderInputElement = (props: InputProps): InputElement => {
     return (
-      <List
-        style={styles.optionList}
-        {...props}
-        data={this.data}
-        bounces={false}
-        renderItem={props.renderItem && this.renderCustomOptionElement || this.renderOptionElement}
-      />
+      <View>
+        <Input
+          ref={this.inputRef}
+          {...props}
+          onFocus={this.onInputFocus}
+        />
+      </View>
     );
-  }
-
-  private renderInputElement = (props: Partial<InputProps>): InputElement => {
-    return (
-      <Input
-        ref={this.inputRef}
-        {...props}
-        onFocus={this.onInputFocus}
-      />
-    );
-  };
-
-  private renderComponentChildren = (props: AutocompleteProps): React.ReactElement[] => {
-    const { data, renderItem, placeholderData, ...inputProps } = props;
-    return [
-      this.renderInputElement(inputProps),
-      this.renderOptionListElement({ data, renderItem }),
-    ];
   };
 
   public render(): PopoverElement {
-    const [inputElement, listElement]: React.ReactElement[] = this.renderComponentChildren(this.props);
+    const { data, renderItem, placeholderData, placement, ...inputProps } = this.props;
 
     return (
       <Popover
         ref={this.popoverRef}
         style={styles.popover}
-        placement={this.props.placement}
+        placement={placement}
         visible={this.state.optionsVisible}
         fullWidth={true}
-        content={listElement}
+        anchor={() => this.renderInputElement(inputProps)}
         onBackdropPress={this.onBackdropPress}>
-        <View>
-          {inputElement}
-        </View>
+        <List
+          style={styles.optionList}
+          data={this.data}
+          bounces={false}
+          renderItem={renderItem || this.renderOptionElement}
+        />
       </Popover>
     );
   }

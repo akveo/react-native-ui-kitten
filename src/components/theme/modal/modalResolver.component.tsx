@@ -47,6 +47,7 @@ export class ModalResolver extends React.Component<ModalResolverProps> {
     return (
       <View style={StyleSheet.absoluteFill}>
         <TouchableOpacity
+          testID='BACKDROP'
           style={[StyleSheet.absoluteFill, this.props.backdropStyle]}
           activeOpacity={1.0}
           onPress={this.props.onBackdropPress}

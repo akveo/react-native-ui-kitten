@@ -24,11 +24,11 @@ export type CalendarDateContentElement = React.ReactElement<CalendarDateContentP
 export class CalendarDateContent extends React.Component<CalendarDateContentProps> {
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, textStyle, children, ...restProps } = this.props;
+    const { style, textStyle, children, ...viewProps } = this.props;
 
     return (
       <View
-        {...restProps}
+        {...viewProps}
         style={[styles.container, style]}>
         <Text style={textStyle}>{children}</Text>
       </View>

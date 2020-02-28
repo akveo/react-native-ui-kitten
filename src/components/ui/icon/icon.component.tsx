@@ -1,9 +1,13 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Animated,
-  StyleProp,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 import {
   getIconAnimation,
@@ -31,7 +35,6 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
 
 /**
  * `Icon` component with animation support. Allows to render any ReactElement registered for a specific name.
- * Starting from UI Kitten 4.2, there is `@ui-kitten/eva-icons` module
  * that renders any icon from eva-icons package in `svg` format.
  * It allows easily use icons in any component that has `icon` prop
  *
@@ -45,7 +48,8 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  *
  * @property {string} pack - Name of icon pack that is able to provide an icon for specified name.
  *
- * @property {string} animation - Animation name. Available `zoom`, `pulse` and `shake`. Default is `zoom`.
+ * @property {string} animation - Animation name. Available `zoom`, `pulse` and `shake`.
+ * Default is `zoom`.
  *
  * @property {AnimationConfig} animationConfig - Determines animation config. Extends `Animated.AnimationConfig`.
  *
@@ -88,17 +92,13 @@ export class Icon<T> extends React.Component<IconProps<T>> {
     this.animation.stop();
   };
 
-  private getComponentStyle = (): StyleProp<ViewStyle> => {
-    return this.animation.toProps();
-  };
-
   public render(): React.ReactElement<ViewProps> {
-    const { name, pack, ...restProps } = this.props;
+    const { name, pack, animation, ...iconProps } = this.props;
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
 
     return (
-      <Animated.View {...this.getComponentStyle()}>
-        {registeredIcon.icon.toReactElement(restProps as T)}
+      <Animated.View {...this.animation.toProps()}>
+        {registeredIcon.icon.toReactElement(iconProps as T)}
       </Animated.View>
     );
   }

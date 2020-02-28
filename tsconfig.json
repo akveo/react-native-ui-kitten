@@ -14,9 +14,6 @@
     "paths": {
       "@ui-kitten/*": [
         "./src/*"
-      ],
-      "@kitten/*": [
-        "./src/components/*"
       ]
     }
   },

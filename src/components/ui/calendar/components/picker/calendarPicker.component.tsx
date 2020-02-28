@@ -10,7 +10,7 @@ import {
   ViewProps,
   StyleProp,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
+import { StyleType } from '../../../../theme';
 import {
   CalendarPickerRow,
   CalendarPickerRowElement,
@@ -87,11 +87,11 @@ export class CalendarPicker<D> extends React.Component<CalendarPickerProps<D>> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { data, children, ...restProps } = this.props;
+    const { data, children, ...viewProps } = this.props;
 
     return (
       <View
-        {...restProps}>
+        {...viewProps}>
         {data.map(this.renderRowElement)}
       </View>
     );

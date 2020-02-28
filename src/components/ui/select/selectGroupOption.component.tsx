@@ -10,7 +10,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 import {
   SelectOption,
   SelectOptionElement,
@@ -117,7 +117,7 @@ class SelectGroupOptionComponent extends React.Component<SelectGroupOptionProps>
   };
 
   public render(): SelectGroupOptionElement {
-    const { container, ...componentStyle } = this.getComponentStyle(this.props.themedStyle);
+    const { container, ...componentStyle } = this.getComponentStyle(this.props.eva.style);
     const [mainElement, groupOptionElements] = this.renderComponentChildren(componentStyle);
 
     return (

@@ -9,8 +9,10 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
-import { Frame } from '../measure/type';
-import { I18nLayoutService } from '../support/services';
+import {
+  Frame,
+  RTLService,
+} from '../../devsupport';
 
 export interface Offset {
   rawValue: string;
@@ -93,11 +95,11 @@ export class Offsets {
                  .filter((key: string): boolean => offsetKeys.includes(key))
                  .reduce((acc: Frame, key: string): Frame => {
 
-      const value: number = flatStyle[key];
-      const offsetValue: Offset | undefined = Offsets.parse(key);
+                   const value: number = flatStyle[key];
+                   const offsetValue: Offset | undefined = Offsets.parse(key);
 
-      return offsetValue ? offsetValue.apply(acc, value) : acc;
-    }, Frame.zero());
+                   return offsetValue ? offsetValue.apply(acc, value) : acc;
+                 }, Frame.zero());
   }
 
   static parse(value: string | Offset, fallback?: Offset): Offset | undefined {
@@ -164,7 +166,7 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.leftOf(options.other).centerVerticalOf(options.other);
 
-      const x: number = I18nLayoutService.select(
+      const x: number = RTLService.select(
         origin.x + options.offsets.origin.x,
         options.bounds.size.width - size.width - (origin.x + options.offsets.size.width),
       );
@@ -288,7 +290,7 @@ export class PopoverPlacements {
       const { origin, size } = options.source.topOf(options.other).centerHorizontalOf(options.other);
 
 
-      const x: number = I18nLayoutService.select(
+      const x: number = RTLService.select(
         origin.x,
         options.bounds.size.width - (origin.x + size.width),
       );
@@ -411,7 +413,7 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.rightOf(options.other).centerVerticalOf(options.other);
 
-      const x: number = I18nLayoutService.select(
+      const x: number = RTLService.select(
         origin.x - options.offsets.size.width,
         options.bounds.size.width - size.width - (origin.x - options.offsets.size.width),
       );
@@ -534,7 +536,7 @@ export class PopoverPlacements {
     frame(options: PlacementOptions): Frame {
       const { origin, size } = options.source.bottomOf(options.other).centerHorizontalOf(options.other);
 
-      const x: number = I18nLayoutService.select(
+      const x: number = RTLService.select(
         origin.x,
         options.bounds.size.width - (origin.x + size.width),
       );
@@ -699,11 +701,11 @@ export interface FlexPlacement {
 }
 
 const fitsStart = (frame: Frame, other: Frame): boolean => {
-  return I18nLayoutService.select(fitsLeft, fitsRight)(frame, other);
+  return RTLService.select(fitsLeft, fitsRight)(frame, other);
 };
 
 const fitsEnd = (frame: Frame, other: Frame): boolean => {
-  return I18nLayoutService.select(fitsRight, fitsLeft)(frame, other);
+  return RTLService.select(fitsRight, fitsLeft)(frame, other);
 };
 
 const fitsLeft = (frame: Frame, other: Frame): boolean => {

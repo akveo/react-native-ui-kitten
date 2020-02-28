@@ -1,21 +1,25 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
   ImageProps,
-  ImageSourcePropType,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
   render,
-  RenderAPI,
-  shallow,
 } from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-  StyleType,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   BottomNavigation,
   BottomNavigationProps,
@@ -24,254 +28,106 @@ import {
   BottomNavigationTab,
   BottomNavigationTabProps,
 } from './bottomNavigationTab.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
 
 describe('@bottom-navigation-tab: component checks', () => {
 
-  const iconSource: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
+  const TestBottomNavigationTab = (props?: BottomNavigationTabProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <BottomNavigationTab {...props}/>
+    </ApplicationProvider>
+  );
 
-  const Mock = (props?: BottomNavigationTabProps): React.ReactElement<ApplicationProviderProps> => {
-    return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={theme}>
-        <BottomNavigationTab {...props}/>
-      </ApplicationProvider>
-    );
-  };
-
-  const icon = (style: StyleType): React.ReactElement<ImageProps> => {
-    return (
+  it('should render component passed to icon prop', () => {
+    const Icon = (props?: ImageProps) => (
       <Image
-        style={style}
-        source={iconSource}
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
       />
     );
-  };
 
-  it('* empty', () => {
-    const component: RenderAPI = render(
-      <Mock/>,
+    const component = render(
+      <TestBottomNavigationTab icon={Icon}/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const image = component.getByType(Image);
 
-    expect(output).toMatchSnapshot();
+    expect(image).toBeTruthy();
+    expect(image.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
   });
 
-  it('* with icon', () => {
-    const component: RenderAPI = render(
-      <Mock icon={icon}/>,
+  it('should render text passed to title prop', () => {
+    const component = render(
+      <TestBottomNavigationTab title='I love Babel'/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const title = component.getByText('I love Babel');
 
-    expect(output).toMatchSnapshot();
+    expect(title).toBeTruthy();
   });
 
-  it('* text/selected', () => {
-    const component: RenderAPI = render(
-      <Mock
-        title='Test'
-        selected={true}
-      />,
+  it('should render component passed to title prop', () => {
+    const component = render(
+      <TestBottomNavigationTab title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigationTab));
+    const titleAsComponent = component.getByText('I love Babel');
 
-    expect(output).toMatchSnapshot();
+    expect(titleAsComponent).toBeTruthy();
   });
-
-  it('* text/unselected', () => {
-    const component: RenderAPI = render(
-      <Mock
-        title='Test'
-        selected={false}
-      />,
-    );
-
-    const { output } = shallow(component.getByType(BottomNavigationTab));
-
-    expect(output).toMatchSnapshot();
-  });
-
-  it('* text (styled)', () => {
-    const component: RenderAPI = render(
-      <Mock
-        title='Test'
-        titleStyle={{
-          fontSize: 22,
-          color: 'yellow',
-        }}
-      />,
-    );
-
-    const { output } = shallow(component.getByType(BottomNavigationTab));
-
-    expect(output).toMatchSnapshot();
-  });
-
 });
 
 describe('@bottom-navigation: component checks', () => {
 
-  const Mock = (props?: BottomNavigationProps): React.ReactElement<ApplicationProviderProps> => {
+  const TestBottomNavigation = (props?: Partial<BottomNavigationProps>) => {
+    const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
+
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={theme}>
-        <BottomNavigation {...props} />
+        theme={light}>
+        <BottomNavigation
+          selectedIndex={selectedIndex}
+          onSelect={setSelectedIndex}>
+          <BottomNavigationTab title='Tab 0'/>
+          <BottomNavigationTab title='Tab 1'/>
+        </BottomNavigation>
       </ApplicationProvider>
     );
   };
 
-  const ChildMock = (props: BottomNavigationTabProps): React.ReactElement<BottomNavigationTabProps> => {
-    return (
-      <BottomNavigationTab {...props} />
-    );
-  };
-
-  const tabTestId: string = '@tab/last';
-
-  it('* empty', () => {
-    const component: RenderAPI = render(
-      <Mock children={[]}/>,
+  it('should render 2 tabs passed to children', () => {
+    const component = render(
+      <TestBottomNavigation/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigation));
+    const tabs = component.getAllByType(BottomNavigationTab);
 
-    expect(output).toMatchSnapshot();
+    expect(tabs.length).toEqual(2);
   });
 
-  it('* with routes', () => {
-    const indicatorStyle: StyleType = { backgroundColor: 'red' };
-    const component: RenderAPI = render(
-      <Mock indicatorStyle={indicatorStyle}>
-        <ChildMock
-          title='Screen 1'
-          selected={false}
-        />
-        <ChildMock
-          title='Screen 2'
-          selected={true}
-        />
-        <ChildMock
-          title='Screen 3'
-          selected={false}
-        />
-      </Mock>,
+  it('should set tab selected by passing selectedIndex prop', () => {
+    const component = render(
+      <TestBottomNavigation selectedIndex={1}/>,
     );
 
-    const { output } = shallow(component.getByType(BottomNavigation));
+    const tabs = component.getAllByType(BottomNavigationTab);
 
-    expect(output).toMatchSnapshot();
+    expect(tabs[1].props.selected).toEqual(true);
   });
 
-  it('* current index', () => {
-    const component: RenderAPI = render(
-      <Mock selectedIndex={1}>
-        <ChildMock
-          title='Screen 1'
-          selected={false}
-        />
-        <ChildMock
-          title='Screen 2'
-          selected={true}
-        />
-        <ChildMock
-          title='Screen 3'
-          selected={false}
-        />
-      </Mock>,
+  it('should set tab selected by pressing it', () => {
+    const component = render(
+      <TestBottomNavigation selectedIndex={1}/>,
     );
 
-    const componentInstance: ReactTestInstance = component.getByType(BottomNavigation);
+    const touchables = component.getAllByType(TouchableOpacity);
+    fireEvent.press(touchables[0]);
 
-    expect(componentInstance.props.selectedIndex).toBe(1);
-  });
+    const tabs = component.getAllByType(BottomNavigationTab);
 
-  it('* tab choose', () => {
-    const onSelect = jest.fn();
-
-    const component: RenderAPI = render(
-      <Mock
-        selectedIndex={1}
-        onSelect={onSelect}>
-        <ChildMock
-          title='Screen 1'
-          selected={false}
-        />
-        <ChildMock
-          title='Screen 2'
-          selected={true}
-        />
-        <ChildMock
-          testID={tabTestId}
-          title='Screen 3'
-          selected={false}
-        />
-      </Mock>,
-    );
-
-    fireEvent(component.getByTestId(tabTestId), 'select');
-
-    expect(onSelect).toHaveBeenCalled();
-  });
-
-  it('* choose selected tab', () => {
-    const onSelect = jest.fn();
-
-    const component: RenderAPI = render(
-      <Mock
-        selectedIndex={1}
-        onSelect={onSelect}>
-        <ChildMock
-          title='Screen 1'
-          selected={false}
-        />
-        <ChildMock
-          testID={tabTestId}
-          title='Screen 2'
-          selected={true}
-        />
-        <ChildMock
-          title='Screen 3'
-          selected={false}
-        />
-      </Mock>,
-    );
-
-    fireEvent(component.getByTestId(tabTestId), 'select');
-
-    expect(onSelect).not.toHaveBeenCalled();
-  });
-
-  it('* additional appearance', () => {
-    const component: RenderAPI = render(
-      <Mock appearance='noIndicator'>
-        <ChildMock
-          title='Screen 1'
-          selected={false}
-        />
-        <ChildMock
-          title='Screen 2'
-          selected={true}
-        />
-        <ChildMock
-          testID={tabTestId}
-          title='Screen 3'
-          selected={false}
-        />
-      </Mock>,
-    );
-
-    const { output } = shallow(component.getByType(BottomNavigation));
-
-    expect(output).toMatchSnapshot();
+    expect(tabs[0].props.selected).toEqual(true);
   });
 
 });
-

@@ -6,39 +6,43 @@
 
 import React from 'react';
 import {
-  ImageStyle,
+  ImageProps,
   StyleProp,
   StyleSheet,
-  TextStyle,
   View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyFC,
+  FalsyText,
+  RenderProp,
+} from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
+} from '../../theme';
 import {
   Popover,
   PopoverElement,
   PopoverProps,
 } from '../popover/popover.component';
 import { PopoverIndicator } from '../popover/popoverIndicator.component';
+import { TextProps } from '../text/text.component';
 
-type IconProp = (style: StyleType) => IconElement;
-type WrappingElement = React.ReactElement;
+type TooltipStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-export interface TooltipProps extends StyledComponentProps, Omit<PopoverProps, 'content'> {
-  text: string;
-  textStyle?: StyleProp<TextStyle>;
-  icon?: IconProp;
-  children: WrappingElement;
+type TooltipPopoverProps = Overwrite<PopoverProps, {
+  children: RenderProp<TextProps> | React.ReactText;
+}>;
+
+export interface TooltipProps extends TooltipPopoverProps, TooltipStyledProps {
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
 }
 
 export type TooltipElement = React.ReactElement<TooltipProps>;
@@ -54,26 +58,32 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @property {boolean} visible - Determines whether popover is visible or not.
  *
- * @property {string} text - Determines the text of the tooltip
+ * @property {ReactElement} children - A component relative to which tooltip will be shown.
  *
- * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
+ * @property {ReactText | (props: TextProps) => ReactElement} children - A string or a function component
+ * to render within the button.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
+ * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * to render to start of the text.
+ * Called with props provided by Eva.
  *
- * @property {ReactElement} children - Determines the element "above" which popover will be shown.
+ * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * to render to end of the text.
+ * Called with props provided by Eva.
  *
- * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
+ * @property {() => void} onBackdropPress - Called when backdrop is pressed.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the tooltip relative to the `children`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
  * Default is `bottom`.
  * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
  *
- * @property {boolean} fullWidth - Determines whether content element should have same width as child element.
+ * @property {boolean} fullWidth - Determines whether the tooltip should have same width as `children`.
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
- *
- * @property {() => void} onBackdropPress - Determines component's behavior when the user is
- * tapping on back-drop.
  *
  * @overview-example TooltipSimpleUsage
  *
@@ -119,7 +129,6 @@ export class TooltipComponent extends React.Component<TooltipProps> {
 
     return {
       container: containerParameters,
-      content: {},
       indicator: {
         backgroundColor: indicatorBackgroundColor,
       },
@@ -140,65 +149,37 @@ export class TooltipComponent extends React.Component<TooltipProps> {
     };
   };
 
-  private renderTextElement = (style: TextStyle): TextElement => {
+  private renderPopoverIndicatorElement = (props: ViewProps): React.ReactElement => {
+    const evaStyle = this.getComponentStyle(this.props.eva.style);
     return (
-      <Text
-        key={1}
-        style={[style, this.props.textStyle]}>
-        {this.props.text}
-      </Text>
-    );
-  };
-
-  private renderIconElement = (style: ImageStyle): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      key: 0,
-      style: [style, iconElement.props.style],
-    });
-  };
-
-  private renderContentElementChildren = (style: StyleType): React.ReactNodeArray => {
-    return [
-      this.props.icon && this.renderIconElement(style.icon),
-      this.renderTextElement(style.text),
-    ];
-  };
-
-  private renderPopoverIndicatorElement = (style: StyleType): React.ReactElement => {
-    const { indicator } = this.getComponentStyle(this.props.themedStyle);
-    return (
-      <PopoverIndicator style={indicator} />
-    );
-  };
-
-  private renderPopoverContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const { content, ...childrenStyle } = style;
-
-    const contentChildren: React.ReactNode = this.renderContentElementChildren(childrenStyle);
-
-    return (
-      <View style={[content, styles.content]}>
-        {contentChildren}
-      </View>
+      <PopoverIndicator {...props} style={[props.style, evaStyle.indicator]}/>
     );
   };
 
   public render(): PopoverElement {
-    const { themedStyle, style, children, ...props } = this.props;
-    const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
-
-    const contentElement: TextElement = this.renderPopoverContentElement(componentStyle);
+    const { eva, style, accessoryLeft, accessoryRight, children, ...popoverProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <Popover
-        {...props}
+        {...popoverProps}
         ref={this.popoverRef}
-        style={[container, style]}
-        content={contentElement}
+        style={[evaStyle.container, style]}
         indicator={this.renderPopoverIndicatorElement}>
-        {children}
+        <View style={styles.content}>
+          <FalsyFC
+            style={evaStyle.icon}
+            component={accessoryLeft}
+          />
+          <FalsyText
+            style={evaStyle.text}
+            component={children}
+          />
+          <FalsyFC
+            style={evaStyle.icon}
+            component={accessoryRight}
+          />
+        </View>
       </Popover>
     );
   }

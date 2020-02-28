@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   StyleProp,
@@ -6,14 +12,13 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
 
 export type PopoverIndicatorProps = ViewProps;
 export type PopoverIndicatorElement = React.ReactElement<PopoverIndicatorProps>;
 
 export class PopoverIndicator extends React.Component<PopoverIndicatorProps> {
 
-  private getComponentStyle = (source: StyleProp<ViewStyle>): StyleType => {
+  private getComponentStyle = (source: StyleProp<ViewStyle>) => {
     const flatStyle: ViewStyle = StyleSheet.flatten(source);
 
     return {
@@ -34,12 +39,12 @@ export class PopoverIndicator extends React.Component<PopoverIndicatorProps> {
 
   public render(): React.ReactElement<ViewProps> {
     const { style, ...props } = this.props;
-    const componentStyle = this.getComponentStyle(style);
+    const evaStyle = this.getComponentStyle(style);
 
     return (
       <View
         {...props}
-        style={[style, styles.container, componentStyle.container]}
+        style={[style, styles.container, evaStyle.container]}
       />
     );
   }

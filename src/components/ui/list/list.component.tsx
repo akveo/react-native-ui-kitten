@@ -8,28 +8,19 @@ import React from 'react';
 import {
   FlatList,
   FlatListProps,
-  ListRenderItemInfo,
-  StyleSheet,
-  ViewStyle,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
 import {
   styled,
   StyledComponentProps,
-  StyleType,
-} from '@kitten/theme';
-import { ListItemProps } from './listItem.component';
+} from '../../theme';
 
-// this is basically needed to avoid generics in required props
-type ItemType = any;
-type ListItemElement = React.ReactElement;
-type RenderItemProp = (info: ListRenderItemInfo<ItemType>, style: StyleType) => ListItemElement;
+type ListStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-interface ComponentProps {
-  renderItem: RenderItemProp;
-}
-
-export type ListProps = StyledComponentProps & FlatListProps<ItemType> & ComponentProps;
-export type ListElement = React.ReactElement<ListProps>;
+export type ListProps<ItemT = any> = FlatListProps<ItemT> & ListStyledProps;
+export type ListElement<ItemT = any> = React.ReactElement<ListProps<ItemT>>;
 
 export interface BaseScrollParams {
   animated?: boolean;
@@ -66,11 +57,11 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  * @example ListInlineStyling
  * ```
  */
-export class ListComponent extends React.Component<ListProps> {
+export class ListComponent<ItemT = any> extends React.Component<ListProps> {
 
   static styledComponentName: string = 'List';
 
-  private listRef: React.RefObject<FlatList<ItemType>> = React.createRef();
+  private listRef: React.RefObject<FlatList<ItemT>> = React.createRef();
 
   public scrollToEnd = (params?: BaseScrollParams): void => {
     this.listRef.current.scrollToEnd(params);
@@ -84,52 +75,22 @@ export class ListComponent extends React.Component<ListProps> {
     this.listRef.current.scrollToOffset(params);
   }
 
-  private getComponentStyle = (source: StyleType): StyleType => {
-    return {
-      container: source,
-      item: {},
-    };
-  };
-
-  private getItemStyle = (source: StyleType, index: number): ViewStyle => {
-    const { item } = source;
-
-    return item;
-  };
-
-  private keyExtractor = (item: ItemType, index: number): string => {
+  private keyExtractor = (item: ItemT, index: number): string => {
     return index.toString();
   };
 
-  private renderItem = (info: ListRenderItemInfo<ItemType>): ListItemElement => {
-    const itemStyle: StyleType = this.getItemStyle(this.props.themedStyle, info.index);
-    const itemElement: React.ReactElement<ListItemProps> = this.props.renderItem(info, itemStyle);
-
-    return React.cloneElement(itemElement, {
-      style: [itemStyle, styles.item, itemElement.props.style],
-      index: info.index,
-    });
-  };
-
-  public render(): React.ReactElement<FlatListProps<ItemType>> {
-    const { style, themedStyle, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+  public render(): React.ReactElement {
+    const { eva, style, ...flatListProps } = this.props;
 
     return (
       <FlatList
         keyExtractor={this.keyExtractor}
-        {...derivedProps}
+        {...flatListProps}
         ref={this.listRef}
-        style={[componentStyle.container, styles.container, style]}
-        renderItem={this.renderItem}
+        style={[eva.style, style]}
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  item: {},
-});
 
 export const List = styled<ListProps>(ListComponent);

@@ -23,11 +23,14 @@
   "dependencies": {
     "@eva-design/dss": "^1.4.0",
     "@eva-design/processor": "^1.4.0",
+    "fecha": "3.0.3",
     "hoist-non-react-statics": "^3.2.1",
-    "lodash.merge": "^4.6.1",
-    "fecha": "3.0.3"
+    "lodash.merge": "^4.6.1"
   },
   "peerDependencies": {
     "react-native-svg": "^9.4.0"
+  },
+  "devDependencies": {
+    "utility-types": "^3.10.0"
   }
 }

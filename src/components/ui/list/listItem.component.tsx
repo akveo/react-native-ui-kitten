@@ -4,65 +4,43 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-
 import React from 'react';
 import {
   GestureResponderEvent,
-  ImageStyle,
+  ImageProps,
   Platform,
-  StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
   TouchableOpacityProps,
   View,
   ViewProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyFC,
+  FalsyText,
+  RenderProp,
+  TouchableWithoutFeedback,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import { TouchableIndexedProps } from '../support/typings';
-import { isValidString } from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 
-type IconProp = (style: StyleType, index: number) => IconElement;
-type AccessoryProp = (style: StyleType, index: number) => React.ReactElement;
+type ListItemStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-interface ListDerivedProps {
-  index?: number;
-}
-
-interface TemplateBaseProps {
-  icon?: IconProp;
-  accessory?: AccessoryProp;
-}
-
-interface TemplateTitleProps extends TemplateBaseProps {
-  title: string;
-  description?: string;
-  titleStyle?: StyleProp<TextStyle>;
-}
-
-interface TemplateDescriptionProps extends TemplateBaseProps {
-  title?: string;
-  description: string;
-  descriptionStyle?: StyleProp<TextStyle>;
-}
-
-interface CustomContentProps {
+export interface ListItemProps extends TouchableOpacityProps, ListItemStyledProps {
+  title?: RenderProp<TextProps> | React.ReactText;
+  description?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<ViewProps>;
   children?: React.ReactNode;
 }
 
-type ComponentProps = (TemplateTitleProps | TemplateDescriptionProps | CustomContentProps) & ListDerivedProps;
-
-export type ListItemProps = StyledComponentProps & TouchableIndexedProps & ComponentProps;
 export type ListItemElement = React.ReactElement<ListItemProps>;
 
 /**
@@ -72,24 +50,29 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *
  * @extends React.Component
  *
- * @property {string} title - Determines the title of the ListItem.
+ * @property {string | (props: TextProps)} title - A string or a function component
+ * to render within the item.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {string} description - Determines the description of the ListItem's title.
+ * @property {string | (props: TextProps)} description - A string or a function component
+ * to render within the item.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
+ * @property {ReactNode} children - A component to render within the item.
+ * If provided, `title` and other props will be ignored.
  *
- * @property {StyleProp<TextStyle>} descriptionStyle - Customizes description style.
+ * @property {(props: ImageProps, index: number) => ReactElement} accessoryLeft - A function component
+ * to render to start of the text.
+ * Called with props provided by Eva.
  *
- * @property {ReactNode} children - Determines React Children of the component.
+ * @property {(props: ViewProps, index: number) => ReactElement} accessoryRight - A function component
+ * to render to end of the text.
+ * Called with props provided by Eva.
  *
- * @property {(style: StyleType, index: number) => ReactElement} accessory - Determines the accessory of the
- * component.
- *
- * @property {(style: ImageStyle, index: number) => ReactElement} icon - Determines the icon of the
- * component.
- *
- * @property {(index: number, event: GestureResponderEvent) => ReactElement<ImageProps>} onPress - Emits when
- * component is pressed.
+ * @property {(index: number, event: GestureResponderEvent) => void} onPress - Called when component is pressed.
+ * Note that `index` is provided.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -103,39 +86,27 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  *
  * @example ListItemInlineStyling
  */
-export class ListItemComponent extends React.Component<ListItemProps> {
+export class ListItemComponent extends React.Component<ListItemProps & { index: number }> {
 
   static styledComponentName: string = 'ListItem';
 
-  private onPress = (event: GestureResponderEvent): void => {
-    if (this.props.onPress) {
-      this.props.onPress(this.props.index, event);
-    }
-  };
-
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(this.props.index, event);
+      this.props.onPressIn(event);
     }
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(this.props.index, event);
+      this.props.onPressOut(event);
     }
   };
 
-  private onLongPress = (event: GestureResponderEvent): void => {
-    if (this.props.onLongPress) {
-      this.props.onLongPress(this.props.index, event);
-    }
-  };
-
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       iconWidth,
       iconHeight,
@@ -159,7 +130,6 @@ export class ListItemComponent extends React.Component<ListItemProps> {
 
     return {
       container: containerParameters,
-      contentContainer: {},
       icon: {
         width: iconWidth,
         height: iconHeight,
@@ -188,114 +158,60 @@ export class ListItemComponent extends React.Component<ListItemProps> {
     };
   };
 
-  private renderIconElement = (style: ImageStyle): IconElement => {
-    // @ts-ignore: will be not executed if `icon` prop is provided
-    const { index, icon } = this.props;
-
-    const iconElement: IconElement = icon(style, index);
-
-    return React.cloneElement(iconElement, {
-      key: 0,
-      style: [style, styles.icon, iconElement.props.style],
-    });
-  };
-
-  private renderContentElement = (style: StyleType): React.ReactElement<ViewProps> => {
-    const { contentContainer, ...contentStyles } = style;
-    const [titleElement, descriptionElement] = this.renderContentElementChildren(contentStyles);
-
+  private renderTemplateChildren = (props: ListItemProps, evaStyle): React.ReactFragment => {
     return (
-      <View
-        key={1}
-        style={[contentContainer, styles.contentContainer]}>
-        {titleElement}
-        {descriptionElement}
-      </View>
+      <React.Fragment>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={props.accessoryLeft}
+        />
+        <View
+          key={1}
+          style={styles.contentContainer}>
+          <FalsyText
+            style={[evaStyle.title, styles.title]}
+            component={props.title}
+          />
+          <FalsyText
+            style={[evaStyle.description, styles.description]}
+            component={props.description}
+          />
+        </View>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={props.accessoryRight}
+        />
+      </React.Fragment>
     );
-  };
-
-  private renderTitleElement = (style: StyleType): TextElement => {
-    // @ts-ignore: will be not executed if `title` property is provided
-    const { title, titleStyle } = this.props;
-
-    return (
-      <Text
-        key={2}
-        style={[style, styles.title, titleStyle]}>
-        {title}
-      </Text>
-    );
-  };
-
-  private renderDescriptionElement = (style: StyleType): TextElement => {
-    // @ts-ignore: will be not executed if `description` property is provided
-    const { description, descriptionStyle } = this.props;
-
-    return (
-      <Text
-        key={3}
-        style={[style, styles.description, descriptionStyle]}>
-        {description}
-      </Text>
-    );
-  };
-
-  private renderAccessoryElement = (style: StyleType): React.ReactElement => {
-    // @ts-ignore: will be not executed if `accessory` property is provided
-    const { index, accessory } = this.props;
-
-    const accessoryElement: React.ReactElement = accessory(style, index);
-
-    return React.cloneElement(accessoryElement, {
-      key: 4,
-      style: [style, styles.accessory, accessoryElement.props.style],
-    });
-  };
-
-  private renderContentElementChildren = (style: StyleType): React.ReactNodeArray => {
-    // @ts-ignore: will be not executed if any of properties below is provided
-    const { title, description } = this.props;
-
-    return [
-      isValidString(title) && this.renderTitleElement(style.title),
-      isValidString(description) && this.renderDescriptionElement(style.description),
-    ];
-  };
-
-  private renderTemplateChildren = (style: StyleType): React.ReactNodeArray => {
-    // @ts-ignore: following props could not be provided
-    const { icon, title, description, accessory } = this.props;
-
-    return [
-      icon && this.renderIconElement(style.icon),
-      (title || description) && this.renderContentElement(style),
-      accessory && this.renderAccessoryElement(style.accessory),
-    ];
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNode => {
-    const { children } = this.props;
-
-    return children ? children : this.renderTemplateChildren(style);
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const {
+      eva,
+      style,
+      children,
+      title,
+      description,
+      accessoryLeft,
+      accessoryRight,
+      ...touchableProps
+    } = this.props;
 
-    const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...derivedProps}
-        style={[container, styles.container, webStyles.container, style]}
-        onPress={this.onPress}
+      <TouchableWithoutFeedback
+        {...touchableProps}
+        style={[evaStyle.container, styles.container, webStyles.container, style]}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}
-        onLongPress={this.onLongPress}>
-        {componentChildren}
-      </TouchableOpacity>
+        onPressOut={this.onPressOut}>
+        {children || this.renderTemplateChildren({
+          title,
+          description,
+          accessoryLeft,
+          accessoryRight,
+        }, evaStyle)}
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -308,14 +224,12 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
   },
-  icon: {},
   title: {
     textAlign: 'left',
   },
   description: {
     textAlign: 'left',
   },
-  accessory: {},
 });
 
 const webStyles = Platform.OS === 'web' && StyleSheet.create({

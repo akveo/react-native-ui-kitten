@@ -7,43 +7,53 @@
 import React from 'react';
 import {
   GestureResponderEvent,
+  ImageProps,
   ImageStyle,
   Insets,
   Platform,
   StyleProp,
   StyleSheet,
-  TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyFC,
+  RenderProp,
+  TouchableWithoutFeedback,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { IconElement } from '../icon/icon.component';
-import {
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
 
-type IconProp = (style: StyleType) => IconElement;
+type TopNavigationActionStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | 'control' | string;
+}>;
 
-export interface TopNavigationActionProps extends StyledComponentProps, TouchableOpacityProps {
-  icon: IconProp;
+export interface TopNavigationActionProps extends TouchableOpacityProps, TopNavigationActionStyledProps {
+  icon?: RenderProp<Partial<ImageProps>>;
 }
 
 export type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
 
 /**
- * The `TopNavigationAction` component is a part of the `TopNavigation` component.
- * `TopNavigationActions` should be used in `TopNavigation` to provide usable component.
- * See usage examples at `TopNavigation` component documentation.
+ * `TopNavigationAction` component is a part of the `TopNavigation`.
+ * Top Navigation actions should be passed to in TopNavigation `accessory` properties to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default`, `control`.
+ * Default is `default`.
+ *
+ * @property {(style: ImageStyle) => ReactElement} icon - A function component
+ * to render within the action.
+ * Called with props provided by Eva.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -61,19 +71,19 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -83,7 +93,7 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -91,14 +101,14 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
     }
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       iconTintColor,
       iconWidth,
@@ -111,10 +121,9 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
         marginHorizontal: iconMarginHorizontal,
       },
       icon: {
-        tintColor: iconTintColor,
         width: iconWidth,
         height: iconHeight,
-        ...styles.icon,
+        tintColor: iconTintColor,
       },
     };
   };
@@ -133,42 +142,28 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
     };
   };
 
-  private renderIconElement = (style: StyleType): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      style: [style, iconElement.props.style],
-    });
-  };
-
   public render(): React.ReactNode {
-    const { themedStyle, style, icon, ...touchableProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-
-    const hitSlopInsets: Insets = this.createHitSlopInsets(componentStyle.icon);
-
-    const iconElement: IconElement = this.renderIconElement(componentStyle.icon);
+    const { eva, style, icon, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
+    const hitSlopInsets: Insets = this.createHitSlopInsets(evaStyle.icon);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
+      <TouchableWithoutFeedback
         hitSlop={hitSlopInsets}
         {...touchableProps}
         {...this.webEventResponder.eventHandlers}
-        style={[componentStyle.container, styles.container, webStyles.container, style]}
+        style={[evaStyle.container, webStyles.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {iconElement}
-      </TouchableOpacity>
+        <FalsyFC
+          style={evaStyle.icon}
+          component={icon}
+        />
+      </TouchableWithoutFeedback>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-  icon: {},
-});
 
 const webStyles = Platform.OS === 'web' && StyleSheet.create({
   container: {

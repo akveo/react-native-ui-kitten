@@ -12,18 +12,15 @@ import {
 import {
   ApplicationProvider,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 import { Select } from './select.component';
 import { SelectOptionType } from './selectOption.component';
 import {
   mapping,
-  theme,
-} from '../support/tests';
+  light,
+} from '@eva-design/eva';
 import { SelectService } from './select.service';
 
-jest.useFakeTimers();
-
-const iconClosedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-downward.png';
 const iconOpenedUri: string = 'https://akveo.github.io/eva-icons/fill/png/128/arrow-ios-upward.png';
 
 const data: SelectOptionType[] = [
@@ -59,13 +56,11 @@ interface Props {
 
 class TestApplication extends React.Component<Props> {
 
-  private renderIcon = (style: StyleType, visible: boolean): React.ReactElement<ImageProps> => {
-    const uri: string = visible ? iconOpenedUri : iconClosedUri;
-
+  private renderIcon = (props: Partial<ImageProps>): React.ReactElement<ImageProps> => {
     return (
       <Image
-        source={{ uri }}
-        style={style}
+        {...props}
+        source={{ uri: iconOpenedUri }}
       />
     );
   };
@@ -82,12 +77,12 @@ class TestApplication extends React.Component<Props> {
     } = this.props;
 
     return (
-      <ApplicationProvider mapping={mapping} theme={theme}>
+      <ApplicationProvider mapping={mapping} theme={light}>
         <Select
           label={selectLabel}
           placeholder={selectPlaceholder}
           data={data}
-          icon={this.renderIcon}
+          accessoryRight={this.renderIcon}
           onPress={onSelectPress}
           onPressIn={onSelectPressIn}
           onPressOut={onSelectPressOut}
@@ -100,7 +95,7 @@ class TestApplication extends React.Component<Props> {
           placeholder={selectPlaceholder}
           data={data}
           multiSelect={true}
-          icon={this.renderIcon}
+          accessoryRight={this.renderIcon}
           onPress={onMultiSelectPress}
           onSelect={() => {
           }}

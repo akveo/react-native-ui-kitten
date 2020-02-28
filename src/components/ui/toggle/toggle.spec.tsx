@@ -1,110 +1,88 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
+import { Text } from 'react-native';
 import {
   fireEvent,
   render,
-  RenderAPI,
+  waitForElement,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Toggle,
   ToggleComponent,
   ToggleProps,
 } from './toggle.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
-
-jest.mock('react-native/Libraries/Animated/src/Animated', (): unknown => {
-  const AnimatedModule = jest.requireActual('react-native/Libraries/Animated/src/Animated');
-  return {
-    ...AnimatedModule,
-    timing: (value, config) => {
-      return {
-        start: (callback) => {
-          value.setValue(config.toValue);
-          callback && callback();
-        },
-      };
-    },
-  };
-});
-
-const Mock = (props?: ToggleProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
-    <ApplicationProvider
-      mapping={mapping}
-      theme={theme}>
-      <Toggle {...props} />
-    </ApplicationProvider>
-  );
-};
-
-const renderComponent = (props?: ToggleProps): RenderAPI => {
-  return render(
-    <Mock {...props}/>,
-  );
-};
 
 describe('@toggle: component checks', () => {
 
-  it('contains text', () => {
-    const component: RenderAPI = renderComponent({
-      text: 'Sample Text',
-    });
+  const TestToggle = (props?: ToggleProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Toggle {...props} />
+    </ApplicationProvider>
+  );
 
-    expect(component.getByText('Sample Text')).toBeTruthy();
+  it('should request checking', async () => {
+    const onCheckedChange = jest.fn();
+
+    const component = render(
+      <TestToggle
+        checked={false}
+        onChange={onCheckedChange}
+      />,
+    );
+
+    const responder = component.getByType(ToggleComponent).children[0];
+    fireEvent(responder as ReactTestInstance, 'responderRelease');
+
+    await waitForElement(() => expect(onCheckedChange).toBeCalledWith(true));
   });
 
-  it('emits onChange', () => {
-    const onChange = jest.fn();
+  it('should request unchecking', async () => {
+    const onCheckedChange = jest.fn();
 
-    const component: RenderAPI = renderComponent({ onChange });
-    const { [0]: containerView } = component.getByType(ToggleComponent).children;
+    const component = render(
+      <TestToggle
+        checked={true}
+        onChange={onCheckedChange}
+      />,
+    );
 
-    fireEvent(containerView as ReactTestInstance, 'responderRelease');
+    const responder = component.getByType(ToggleComponent).children[0];
+    fireEvent(responder as ReactTestInstance, 'responderRelease');
 
-    expect(onChange).toHaveBeenCalled();
+    await waitForElement(() => expect(onCheckedChange).toBeCalledWith(false));
   });
 
-  it('checking of value direct', () => {
-    let checked: boolean = false;
-    const onChangeValue = (changed: boolean) => {
-      checked = changed;
-    };
+  it('should render text', () => {
+    const component = render(
+      <TestToggle text='I love Babel'/>,
+    );
 
-    const component: RenderAPI = renderComponent({
-      checked: checked,
-      onChange: onChangeValue,
-    });
+    const text = component.getByText('I love Babel');
 
-    const { [0]: containerView } = component.getByType(ToggleComponent).children;
-
-    fireEvent(containerView as ReactTestInstance, 'responderRelease');
-
-    expect(checked).toBe(true);
+    expect(text).toBeTruthy();
   });
 
-  it('checking of value reverse', () => {
-    let checked: boolean = true;
-    const onChangeValue = (changed: boolean) => {
-      checked = changed;
-    };
+  it('should render text as component', () => {
+    const component = render(
+      <TestToggle text={props => <Text {...props}>I love Babel</Text>}/>,
+    );
 
-    const component: RenderAPI = renderComponent({
-      checked: checked,
-      onChange: onChangeValue,
-    });
+    const text = component.getByText('I love Babel');
 
-    const { [0]: containerView } = component.getByType(ToggleComponent).children;
-
-    fireEvent(containerView as ReactTestInstance, 'responderRelease');
-
-    expect(checked).toBe(false);
+    expect(text).toBeTruthy();
   });
 
 });

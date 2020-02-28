@@ -6,124 +6,169 @@
 
 import React from 'react';
 import {
+  Animated,
   GestureResponderEvent,
+  ImageProps,
   Platform,
-  StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
+  TouchableOpacityProps,
   View,
+  ViewProps,
+  ViewStyle,
 } from 'react-native';
+import {
+  ChildrenWithProps,
+  FalsyFC,
+  FalsyText,
+  Frame,
+  MeasureElement,
+  MeasuringElement,
+  PropsService,
+  RenderProp,
+  TouchableWithoutFeedback,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import { TouchableIndexedProps } from '../support/typings/type';
-import {
-  allWithPrefix,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
+import { ChevronDown } from '../shared/chevronDown.component';
 
-export interface MenuItemType {
-  title: string;
-  disabled?: boolean;
-  subItems?: MenuItemType[];
-  titleStyle?: StyleProp<TextStyle>;
-  menuIndex?: number;
-  icon?: (style: StyleType) => IconElement;
-  accessory?: (style: StyleType) => React.ReactElement;
-}
-
-export interface MenuItemProps extends StyledComponentProps, TouchableIndexedProps, MenuItemType {
+export interface MenuItemProps extends TouchableOpacityProps, StyledComponentProps {
+  title?: RenderProp<TextProps> | React.ReactText;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
+  children?: ChildrenWithProps<any>;
 }
 
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
 
+interface State {
+  submenuHeight: number;
+}
+
 /**
- * `MenuItem` is a support component for `Menu`.
+ * `MenuItem` component is a part of the `Menu`.
+ * Menu items should be passed to in Menu as children to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {string} title - Determines the title of the ListItem.
+ * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
+ * to render within the button.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {StyleProp<TextStyle>} titleStyle - Customizes title style.
+ * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * to render to start of the `title`.
+ * Called with props provided by Eva.
  *
- * @property {(style: StyleType) => ReactElement} accessory - Determines the accessory of the component.
+ * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * to render to end of the `title`.
+ * Called with props provided by Eva.
  *
- * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
+ * @property {boolean} selected
  *
- * @property {MenuItemType[]} subItems - Determines the sub-items of the MenuItem.
- *
- * @property {(index: number, event: GestureResponderEvent) => void} onPress - Emits when component is pressed.
+ * @property {ReactElement | ReactElement[]} children - One or several components to render as `submenu`.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  */
-class MenuItemComponent extends React.Component<MenuItemProps> implements WebEventResponderCallbacks {
+class MenuItemComponent extends React.Component<MenuItemProps, State> implements WebEventResponderCallbacks {
 
   static styledComponentName: string = 'MenuItem';
 
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+  private expandAnimation: Animated.Value = new Animated.Value(0);
+
+  public state: State = {
+    submenuHeight: 1,
+  };
+
+  private get hasSubmenu(): boolean {
+    return React.Children.count(this.props.children) > 0;
+  }
+
+  private get shouldMeasureSubmenu(): boolean {
+    return this.state.submenuHeight === 1;
+  }
+
+  private get expandAnimationValue(): number {
+    // @ts-ignore - private api, but let's us avoid creating animation listeners.
+    // `this.expandAnimation.addListener`
+    return this.expandAnimation._value;
+  }
+
+  private get expandToRotateInterpolation(): Animated.AnimatedInterpolation {
+    return this.expandAnimation.interpolate({
+      inputRange: [-this.state.submenuHeight, 0],
+      outputRange: ['-180deg', '0deg'],
+    });
+  }
+
+  private get submenuStyle(): ViewStyle {
+    // @ts-ignore - issue of `@types/react-native` package
+    return this.shouldMeasureSubmenu ? styles.outscreen : { height: this.expandAnimation };
+  }
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
+    if (this.hasSubmenu) {
+      const expandValue: number = this.expandAnimationValue > 0 ? 0 : this.state.submenuHeight;
+      this.createExpandAnimation(expandValue).start();
+      return;
+    }
+
     if (this.props.onPress) {
-      this.props.onPress(this.props.menuIndex, event);
+      this.props.onPress(event);
     }
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(this.props.menuIndex, event);
+      this.props.onPressIn(event);
     }
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(this.props.menuIndex, event);
+      this.props.onPressOut(event);
     }
   };
 
-  private onLongPress = (event: GestureResponderEvent): void => {
-    if (this.props.onLongPress) {
-      this.props.onLongPress(this.props.menuIndex, event);
-    }
+  private onSubmenuMeasure = (frame: Frame): void => {
+    this.setState({ submenuHeight: frame.size.height });
   };
 
-  private getComponentStyles = (style: StyleType): StyleType => {
+  private getComponentStyle = (style: StyleType) => {
     const { paddingHorizontal, paddingVertical, backgroundColor } = style;
 
-    const titleStyles: StyleType = allWithPrefix(style, 'title');
-    const indicatorStyles: StyleType = allWithPrefix(style, 'indicator');
-    const iconStyles: StyleType = allWithPrefix(style, 'icon');
+    const titleStyles: StyleType = PropsService.allWithPrefix(style, 'title');
+    const indicatorStyles: StyleType = PropsService.allWithPrefix(style, 'indicator');
+    const iconStyles: StyleType = PropsService.allWithPrefix(style, 'icon');
 
     return {
       container: {
@@ -152,58 +197,81 @@ class MenuItemComponent extends React.Component<MenuItemProps> implements WebEve
     };
   };
 
-  private renderIcon = (style: StyleType): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      style: [style, iconElement.props.style],
+  private createExpandAnimation = (toValue: number): Animated.CompositeAnimation => {
+    return Animated.timing(this.expandAnimation, {
+      toValue: toValue,
+      duration: 200,
     });
   };
 
-  private renderTitle = (style: StyleType): TextElement => {
-    const { title, titleStyle } = this.props;
+  private renderSubmenuIconIfNeeded = (evaStyle): React.ReactElement => {
+    if (!this.hasSubmenu) {
+      return null;
+    }
 
     return (
-      <Text style={[style, titleStyle]}>{title}</Text>
+      <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
+        <ChevronDown {...evaStyle} />
+      </Animated.View>
     );
   };
 
-  private renderAccessory = (style: StyleType): IconElement => {
-    return this.props.accessory(style);
+  private renderSubmenu = (evaStyle): React.ReactElement<ViewProps> => {
+    return (
+      <Animated.View style={[this.submenuStyle, evaStyle]}>
+        {this.props.children}
+      </Animated.View>
+    );
   };
 
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { title, icon, accessory } = this.props;
+  private renderMeasuringSubmenu = (evaStyle): MeasuringElement => {
+    return (
+      <MeasureElement onMeasure={this.onSubmenuMeasure}>
+        {this.renderSubmenu(evaStyle)}
+      </MeasureElement>
+    );
+  };
 
-    return [
-      icon && this.renderIcon(style.icon),
-      title && this.renderTitle(style.title),
-      accessory && this.renderAccessory(style.icon),
-    ];
+  private renderSubmenuIfNeeded = (evaStyle): React.ReactNode => {
+    if (!this.hasSubmenu) {
+      return null;
+    }
+
+    return this.shouldMeasureSubmenu ? this.renderMeasuringSubmenu(evaStyle) : this.renderSubmenu(evaStyle);
   };
 
   public render(): React.ReactNode {
-    const { themedStyle, style, ...restProps } = this.props;
-    const { container, indicator, ...restStyles } = this.getComponentStyles(themedStyle);
-    const [iconElement, textElement, accessoryElement] = this.renderComponentChildren(restStyles);
+    const { eva, style, title, accessoryLeft, accessoryRight, children, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...restProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[styles.container, container, webStyles.container, style]}
-        onPress={this.onPress}
-        onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}
-        onLongPress={this.onLongPress}>
-        <View style={[styles.indicator, indicator]}/>
-        <View style={styles.subContainer}>
-          {iconElement}
-          {textElement}
-        </View>
-        {accessoryElement}
-      </TouchableOpacity>
+      <React.Fragment>
+        <TouchableWithoutFeedback
+          {...touchableProps}
+          {...this.webEventResponder.eventHandlers}
+          style={[styles.container, evaStyle.container, webStyles.container, style]}
+          onPress={this.onPress}
+          onPressIn={this.onPressIn}
+          onPressOut={this.onPressOut}>
+          <View style={[styles.indicator, evaStyle.indicator]}/>
+          <View style={styles.subContainer}>
+            <FalsyFC
+              style={evaStyle.icon}
+              component={accessoryLeft}
+            />
+            <FalsyText
+              style={evaStyle.title}
+              component={title}
+            />
+          </View>
+          <FalsyFC
+            style={evaStyle.icon}
+            fallback={this.renderSubmenuIconIfNeeded(evaStyle.icon)}
+            component={accessoryRight}
+          />
+        </TouchableWithoutFeedback>
+        {this.renderSubmenuIfNeeded({})}
+      </React.Fragment>
     );
   }
 }
@@ -221,6 +289,11 @@ const styles = StyleSheet.create({
   indicator: {
     ...StyleSheet.absoluteFillObject,
     zIndex: 2,
+  },
+  outscreen: {
+    position: 'absolute',
+    left: -999,
+    top: -999,
   },
 });
 

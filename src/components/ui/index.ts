@@ -39,13 +39,7 @@ export {
   Card,
   CardProps,
   CardElement,
-  CardFooterElement,
 } from './card/card.component';
-export {
-  CardHeader,
-  CardHeaderProps,
-  CardHeaderElement,
-} from './card/cardHeader.component';
 export {
   RangeCalendar,
   RangeCalendarProps,
@@ -75,13 +69,12 @@ export {
   Drawer,
   DrawerProps,
   DrawerElement,
-  DrawerHeaderElement,
 } from './drawer/drawer.component';
 export {
-  DrawerHeaderFooter,
-  DrawerHeaderFooterElement,
-  DrawerHeaderFooterProps,
-} from './drawer/drawerHeaderFooter.component';
+  DrawerItem,
+  DrawerItemProps,
+  DrawerItemElement,
+} from './drawer/drawerItem.component';
 export {
   Select,
   SelectProps,
@@ -134,13 +127,7 @@ export {
   MenuItem,
   MenuItemProps,
   MenuItemElement,
-  MenuItemType,
 } from './menu/menuItem.component';
-export {
-  SubMenu,
-  SubMenuElement,
-  SubMenuProps,
-} from './menu/subMenu.component';
 export {
   Modal,
   ModalProps,
@@ -150,13 +137,13 @@ export {
   OverflowMenu,
   OverflowMenuProps,
   OverflowMenuElement,
-  OverflowMenuItemType,
 } from './overflowMenu/overflowMenu.component';
 export {
   Popover,
   PopoverProps,
   PopoverElement,
 } from './popover/popover.component';
+export { PopoverPlacements } from './popover/type';
 export {
   Radio,
   RadioProps,

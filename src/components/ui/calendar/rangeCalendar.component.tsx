@@ -8,7 +8,7 @@ import React from 'react';
 import {
   styled,
   StyledComponentProps,
-} from '@kitten/theme';
+} from '../../theme';
 import {
   BaseCalendarComponent,
   BaseCalendarProps,
@@ -123,7 +123,7 @@ export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<Rang
       return true;
     }
 
-    return props.theme !== nextProps.theme;
+    return props.eva.theme !== nextProps.eva.theme;
   }
 }
 

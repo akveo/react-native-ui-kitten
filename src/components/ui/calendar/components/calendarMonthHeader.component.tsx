@@ -21,11 +21,11 @@ export type CalendarMonthHeaderElement = React.ReactElement<CalendarMonthHeaderP
 export class CalendarMonthHeader extends React.Component<CalendarMonthHeaderProps> {
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, data, children, ...restProps } = this.props;
+    const { style, data, children, ...viewProps } = this.props;
 
     return (
       <View
-        {...restProps}
+        {...viewProps}
         style={[styles.container, style]}>
         {data.map(children)}
       </View>

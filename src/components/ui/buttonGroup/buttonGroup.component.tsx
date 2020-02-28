@@ -11,19 +11,26 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import { ChildrenWithProps } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { ButtonElement } from '../button/button.component';
+} from '../../theme';
+import {
+  ButtonElement,
+  ButtonProps,
+} from '../button/button.component';
 
-type ChildrenProp = ButtonElement | ButtonElement[];
+type ButtonGroupStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'filled' | 'outline' | string;
+}>;
 
-export interface ButtonGroupProps extends StyledComponentProps, ViewProps {
-  size?: string;
-  status?: string;
-  children: ChildrenProp;
+export interface ButtonGroupProps extends ViewProps, ButtonGroupStyledProps {
+  children: ChildrenWithProps<ButtonProps>;
+  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  size?: 'tiny' | 'small' | 'medium' | 'large' | 'giant' | string;
 }
 
 export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
@@ -67,7 +74,7 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 
   static styledComponentName: string = 'ButtonGroup';
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { dividerBackgroundColor, dividerWidth, ...containerParameters } = source;
 
     return {
@@ -119,23 +126,21 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
     });
   };
 
-  private renderButtonElements = (source: ChildrenProp, style: StyleType): ButtonElement[] => {
+  private renderButtonElements = (source: ChildrenWithProps<ButtonProps>, style: StyleType): ButtonElement[] => {
     return React.Children.map(source, (element: ButtonElement, index: number): ButtonElement => {
       return this.renderButtonElement(element, index, style);
     });
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
-
-    const buttonElements: ButtonElement[] = this.renderButtonElements(children, componentStyle);
+    const { eva, style, children, ...viewProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
-        {...derivedProps}
-        style={[componentStyle.container, styles.container, style]}>
-        {buttonElements}
+        {...viewProps}
+        style={[evaStyle.container, styles.container, style]}>
+        {this.renderButtonElements(children, evaStyle)}
       </View>
     );
   }

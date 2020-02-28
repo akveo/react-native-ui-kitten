@@ -1,5 +1,11 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
-import { styled } from '@kitten/theme';
+import { styled } from '../../theme';
 import {
   BaseDatepickerComponent,
   BaseDatepickerProps,
@@ -27,13 +33,50 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @method {() => void} focus - Focuses Datepicker and sets it visible.
  *
- * @method {() => void} blur - Removes focus from Datepicker and sets it invisible. This is the opposite of `focus()`.
+ * @method {() => void} blur - Removes focus from Datepicker and sets it invisible.
  *
  * @method {() => boolean} isFocused - Returns true if the Datepicker is currently focused and visible.
  *
  * @method {() => void} clear - Removes all text from the Datepicker.
  *
- * @property {(style: ImageStyle) => ReactElement} icon - Determines the icon of the component.
+ * @property {{ startDate?: D, endDate?: D }} range - Determines the selected date range.
+ *
+ * @property {(range: { startDate?: D, endDate?: D }) => void} onSelect - Called when day cell is pressed.
+ *
+ * @property {D} min - Minimal date that is able to be selected.
+ *
+ * @property {D} max - Maximum date that is able to be selected.
+ *
+ * @property {DateService<D>} dateService - Date service that is able to work with a date objects.
+ * Defaults to Native Date service that works with JS Date.
+ * Allows using different types of date like Moment.js or date-fns.
+ * Moment.js service can be provided by installing `@ui-kitten/moment` package.
+ * date-fns service can be provided by installing `@ui-kitten/date-fns` package.
+ *
+ * @property {boolean} boundingMonth - Defines if previous and next months should be rendered in the current month view.
+ *
+ * @property {(date: D, styles: NamedStyles) => ReactElement} renderDay - A function component
+ * to render instead of default day cell.
+ * Called with a date for this cell and styles provided by Eva.
+ *
+ * @property {(date: D, styles: NamedStyles) => ReactElement} renderMonth - A function component
+ * to render instead of default month cell.
+ * Called with a date for this cell and styles provided by Eva.
+ *
+ * @property {(date: D, styles: NamedStyles) => ReactElement} renderYear - A function component
+ * to render instead of default year cell.
+ * Called with a date for this cell and styles provided by Eva.
+ *
+ * @property {() => ReactElement} renderFooter - A function component
+ * to render to the bottom of the calendar.
+ *
+ * @property {CalendarViewMode} startView - Defines starting view for calendar.
+ * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
+ * Default is `CalendarViewModes.DATE`.
+ *
+ * @property {(date: D) => string} title - Defines the title for visible date.
+ *
+ * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
  *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
@@ -43,56 +86,38 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Can be `small`, `medium` or `large`.
  * Default is `medium`.
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false.
+ * @property {string | (props: TextProps)} placeholder - A string or a function component
+ * to render when input field is empty.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {string} placeholder - Determines placeholder of the component.
+ * @property {string | (props: TextProps) => ReactElement} label - A string or a function component
+ * to render to top of the input field.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {string} label - Determines text rendered at the top of the component.
+ * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * to render to start of the text.
+ * Called with props provided by Eva.
  *
- * @property {string} caption - Determines caption text rendered at the bottom of the component.
+ * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * to render to end of the text.
+ * Called with props provided by Eva.
  *
- * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
+ * @property {string | (props: TextProps) => ReactElement} caption - A string or a function component
+ * to render to bottom of the input field.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {(style: StyleType) => ReactElement} captionIcon - Determines caption icon.
+ * @property {(props: ImageProps) => ReactElement} captionIcon - A function component
+ * to render to start of the `caption`.
+ * Called with props provided by Eva.
  *
- * @property {StyleProp<TextStyle>} labelStyle - Customizes label style.
+ * @property {() => void} onFocus - Called when picker becomes visible.
  *
- * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
+ * @property {() => void} onBlur - Called when picker becomes invisible.
  *
- * @property {D} min - Minimal date that is able to be selected.
- *
- * @property {D} max - Maximum date that is able to be selected.
- *
- * @property {D} date - Date which is currently selected.
- *
- * @property {DateService<D>} dateService - Date service that is able to work with a date objects.
- * Defaults to Native Date service that works with JS Date.
- * Allows using different types of date like Moment.js or date-fns.
- *
- * @property {boolean} boundingMonth - Defines if we should render previous and next months in the current month view.
- *
- * @property {CalendarViewMode} startView - Defines starting view for calendar. Defaults to Date view.
- *
- * @property {(date: D) => string} title - Defines the title for visible date.
- *
- * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
- *
- * @property {(date: D) => void} onSelect - Fires when day cell is pressed.
- *
- * @property {() => void} onFocus - Fires when picker becomes visible.
- *
- * @property {() => void} onBlur - Fires when picker becomes invisible.
- *
- * @property {(date: D, style: StyleType) => ReactElement} renderDay - Should return the content of day cell.
- *
- * @property {(date: D, style: StyleType) => ReactElement} renderMonth - Should return the content of month cell.
- *
- * @property {(date: D, style: StyleType) => ReactElement} renderYear - Should return the content of year cell.
- *
- * @property {() => ReactElement} renderFooter - Should return the footer.
- *
- * @property {string | PopoverPlacement} placement - Determines the placement of the popover.
+ * @property {string | PopoverPlacement} placement - Position of the picker relative to the input field.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
  * Default is `bottom`.
@@ -102,7 +127,25 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
- * @overview-example RangeDatepickerSimpleUsage
+ * @overview-example DatepickerSimpleUsage
+ *
+ * @overview-example DatepickerWithIcon
+ *
+ * @overview-example DatepickerBoundingMonth
+ *
+ * @overview-example DatepickerFilter
+ *
+ * @overview-example DatepickerStatus
+ *
+ * @overview-example DatepickerSize
+ *
+ * @example DatepickerCustomDay
+ *
+ * @example DatepickerCustomLocale
+ *
+ * @example DatepickerDateFormat
+ *
+ * @example DatepickerMoment
  */
 export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 
@@ -131,6 +174,7 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
       title: this.props.title,
       onSelect: this.props.onSelect,
       renderDay: this.props.renderDay,
+      renderMonth: this.props.renderMonth,
       renderYear: this.props.renderYear,
       renderFooter: this.props.renderFooter,
     };
@@ -138,7 +182,7 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
 
   // BaseDatepickerComponent
 
-  protected getComponentTitle(): string {
+  protected getComponentTitle(): React.ReactText {
     const { startDate, endDate } = this.props.range;
 
     if (startDate || endDate) {
