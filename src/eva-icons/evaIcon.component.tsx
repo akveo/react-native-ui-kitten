@@ -13,13 +13,15 @@ export class EvaIcon implements IconProvider<SvgProps> {
   public toReactElement(props: SvgProps): IconElement {
     const Icon: IconComponent = this.content;
 
-    // @ts-ignore - Eva maps icon color to `tintColor`
-    const { tintColor, ...restProps } = props;
+    const { style, ...svgProps } = props;
+    // @ts-ignore - UI Kitten components pass here `tintColor`
+    const fillColor: string = style.tintColor;
 
     return (
       <Icon
-        fill={tintColor}
-        {...restProps}
+        style={props.style}
+        fill={fillColor}
+        {...svgProps}
       />
     );
   }

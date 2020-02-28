@@ -1,5 +1,14 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  ViewProps,
+} from 'react-native';
 import { render } from 'react-native-testing-library';
 import { IconRegistry } from './iconRegistry.component';
 import {
@@ -12,22 +21,18 @@ import {
 } from './service/type';
 
 const DefaultIcon: IconProvider<IconProps> = {
-  toReactElement(props?: IconProps): React.ReactElement<IconProps> {
-    return (
-      <View testID='default' {...props} />
-    );
-  },
+  toReactElement: (props?: IconProps): React.ReactElement<IconProps> => (
+    <View testID='default' {...props} />
+  ),
 };
 
 const AdditionalIcon: IconProvider<IconProps> = {
-  toReactElement(props?: IconProps): React.ReactElement<IconProps> {
-    return (
-      <View testID='additional' {...props} />
-    );
-  },
+  toReactElement: (props?: IconProps): React.ReactElement<IconProps> => (
+    <View testID='additional' {...props} />
+  ),
 };
 
-const testIconPack1: IconPack<any> = {
+const testIconPack1: IconPack<ViewProps> = {
   name: 'test-icon-pack',
   icons: {
     home: DefaultIcon,
@@ -35,7 +40,7 @@ const testIconPack1: IconPack<any> = {
   },
 };
 
-const testIconPack2: IconPack<any> = {
+const testIconPack2: IconPack<ViewProps> = {
   name: 'additional-icon-pack',
   icons: {
     home: AdditionalIcon,
@@ -44,16 +49,25 @@ const testIconPack2: IconPack<any> = {
 
 describe('@icon: component checks', () => {
 
-  beforeEach(() => {
+  beforeAll(() => {
     render(
       <IconRegistry
         icons={[testIconPack1, testIconPack2]}
         defaultIcons={testIconPack1.name}
       />,
     );
+
+    /*
+     * Prevent posting output to console
+     */
+    jest.spyOn(global.console, 'error').mockImplementation(() => jest.fn());
   });
 
-  it('* should render icon from default pack', () => {
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should render icon from default pack', () => {
     const component = render(
       <Icon name='home'/>,
     );
@@ -61,7 +75,7 @@ describe('@icon: component checks', () => {
     expect(component.getByTestId('default')).toBeTruthy();
   });
 
-  it('* should render icon from additional pack', () => {
+  it('should render icon from additional pack', () => {
     const component = render(
       <Icon
         name='home'
@@ -72,7 +86,7 @@ describe('@icon: component checks', () => {
     expect(component.getByTestId('additional')).toBeTruthy();
   });
 
-  it('* should pass props to an icon component', () => {
+  it('should pass props to an icon component', () => {
     const component = render(
       <Icon name='home' testID='custom-test-id'/>,
     );
@@ -80,7 +94,7 @@ describe('@icon: component checks', () => {
     expect(component.getByTestId('custom-test-id')).toBeTruthy();
   });
 
-  it('* should throw while rendering not registered icon', () => {
+  it('should throw while rendering not registered icon', () => {
     expect(() => {
       render(
         <Icon name='not-registered-icon'/>,
