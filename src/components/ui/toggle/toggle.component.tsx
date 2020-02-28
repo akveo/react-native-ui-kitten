@@ -14,39 +14,38 @@ import {
   PanResponderGestureState,
   PanResponderInstance,
   Platform,
-  StyleProp,
   StyleSheet,
-  TextStyle,
-  TouchableOpacity,
   TouchableOpacityProps,
   View,
   ViewProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyText,
+  RenderProp,
+  RTLService,
+  TouchableWithoutFeedback,
+  WebEventResponder,
+  WebEventResponderInstance,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { CheckMark } from '../support/components/checkmark.component';
-import {
-  I18nLayoutService,
-  WebEventResponder,
-  WebEventResponderInstance,
-} from '../support/services';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
+import { CheckMark } from '../shared/checkmark.component';
 
-export interface ToggleProps extends StyledComponentProps, TouchableOpacityProps {
+type ToggleStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface ToggleProps extends TouchableOpacityProps, ToggleStyledProps {
   checked?: boolean;
-  disabled?: boolean;
-  status?: string;
-  size?: string;
-  text?: string;
-  textStyle?: StyleProp<TextStyle>;
   onChange?: (checked: boolean) => void;
+  text?: RenderProp<TextProps> | React.ReactText;
+  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
 }
 
 export type ToggleElement = React.ReactElement<ToggleProps>;
@@ -59,18 +58,16 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * @property {boolean} checked - Determines whether component is checked.
  * Default is `false`.
  *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false.
- *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
  * Default is `basic`.
  *
- * @property {string} text - Determines text of the component.
+ * @property {string | (props: TextProps) => ReactElement} text - A string or a function component
+ * to render near the toggle.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
- *
- * @property {(checked: boolean) => void} onChange - Fires when selection state is changed.
+ * @property {(checked: boolean) => void} onChange - Called on toggle value change.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -204,7 +201,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { checked, disabled } = this.props;
 
     const {
@@ -231,7 +228,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     } = source;
 
     return {
-      toggleContainer: {},
       ellipseContainer: {
         borderColor: borderColor,
         backgroundColor: backgroundColor,
@@ -280,7 +276,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.thumbTranslateAnimationActive = true;
 
     Animated.timing(this.thumbTranslateAnimation, {
-      toValue: I18nLayoutService.select(value, -value),
+      toValue: RTLService.select(value, -value),
       duration: 150,
       easing: Easing.linear,
     }).start(() => {
@@ -326,44 +322,30 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.animateThumbWidth(this.props.eva.style.thumbWidth);
   };
 
-  private renderTextElement = (style: StyleType): TextElement => {
-    return (
-      <Text style={[style, this.props.textStyle]}>
-        {this.props.text}
-      </Text>
-    );
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    return [
-      this.props.text && this.renderTextElement(style.text),
-    ];
-  };
-
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, checked, ...restProps } = this.props;
-
-    const componentStyle: StyleType = this.getComponentStyle(eva.style);
-    const [textElement] = this.renderComponentChildren(componentStyle);
+    const { eva, style, checked, text, ...touchableProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View
         {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
-        <TouchableOpacity
-          activeOpacity={1.0}
-          {...restProps}
+        <TouchableWithoutFeedback
+          {...touchableProps}
           {...this.webEventResponder.eventHandlers}
-          style={[componentStyle.toggleContainer, webStyles.toggleContainer, styles.toggleContainer]}>
-          <View style={[componentStyle.highlight, styles.highlight]}/>
-          <Animated.View style={[componentStyle.ellipseContainer, styles.ellipseContainer]}>
-            <Animated.View style={[componentStyle.ellipse, styles.ellipse]}/>
-            <Animated.View style={[componentStyle.thumb, styles.thumb]}>
-              <CheckMark {...componentStyle.icon} />
+          style={[webStyles.toggleContainer, styles.toggleContainer]}>
+          <View style={[evaStyle.highlight, styles.highlight]}/>
+          <Animated.View style={[evaStyle.ellipseContainer, styles.ellipseContainer]}>
+            <Animated.View style={[evaStyle.ellipse, styles.ellipse]}/>
+            <Animated.View style={[evaStyle.thumb, styles.thumb]}>
+              <CheckMark {...evaStyle.icon} />
             </Animated.View>
           </Animated.View>
-        </TouchableOpacity>
-        {textElement}
+        </TouchableWithoutFeedback>
+        <FalsyText
+          style={evaStyle.text}
+          component={text}
+        />
       </View>
     );
   }
