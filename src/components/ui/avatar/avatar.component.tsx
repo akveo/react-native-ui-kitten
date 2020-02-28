@@ -11,18 +11,26 @@ import {
   ImageStyle,
   StyleSheet,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
 import {
   styled,
   StyledComponentProps,
   StyleType,
 } from '../../theme';
 
-export interface AvatarProps extends StyledComponentProps, ImageProps {
-  shape?: string;
-  size?: string;
+type AvatarStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
+
+export interface AvatarProps extends ImageProps, AvatarStyledProps {
+  shape?: AvatarEvaShape | string;
+  size?: AvatarEvaSize | string;
 }
 
 export type AvatarElement = React.ReactElement<AvatarProps>;
+
+type AvatarEvaShape = 'round' | 'rounded' | 'square';
+type AvatarEvaSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
 
 /**
  * `Avatar` is a styled `Image` component.
@@ -53,7 +61,7 @@ export class AvatarComponent extends React.Component<AvatarProps> {
 
   static styledComponentName: string = 'Avatar';
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType): ImageStyle => {
     const { roundCoefficient, ...containerParameters } = source;
 
     // @ts-ignore: avoid checking `containerParameters`
@@ -72,13 +80,13 @@ export class AvatarComponent extends React.Component<AvatarProps> {
   };
 
   public render(): React.ReactElement<ImageProps> {
-    const { eva, ...restProps } = this.props;
-    const componentStyle: ImageStyle = this.getComponentStyle(eva.style);
+    const { eva, ...imageProps } = this.props;
+    const evaStyle: ImageStyle = this.getComponentStyle(eva.style);
 
     return (
       <Image
-        {...restProps}
-        style={componentStyle}
+        {...imageProps}
+        style={evaStyle}
       />
     );
   }
