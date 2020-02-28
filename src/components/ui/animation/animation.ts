@@ -1,8 +1,20 @@
-import { Animated } from 'react-native';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+import {
+  Animated,
+  Platform,
+} from 'react-native';
 
 export const DEFAULT_CONFIG: AnimationConfig = {
   cycles: 1,
-  useNativeDriver: true,
+  useNativeDriver: Platform.select({
+    default: true,
+    web: false,
+  }),
 };
 
 /**
