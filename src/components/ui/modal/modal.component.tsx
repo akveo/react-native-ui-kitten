@@ -13,17 +13,15 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  ModalPresentingConfig,
-  ModalService,
-} from '@kitten/theme';
-import {
   MeasureElement,
   MeasuringElement,
-} from '../measure/measure.component';
-import {
   Frame,
   Point,
-} from '../measure/type';
+} from '../../devsupport';
+import {
+  ModalPresentingConfig,
+  ModalService,
+} from '../../theme';
 
 export interface ModalProps extends ViewProps, ModalPresentingConfig {
   visible: boolean;
@@ -36,8 +34,6 @@ interface State {
   contentFrame: Frame;
   forceMeasure: boolean;
 }
-
-const POINT_OUTSCREEN: Point = new Point(-999, -999);
 
 /**
  * `Modal` component is a wrapper than presents content above an enclosing view.
@@ -71,7 +67,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   };
 
   private modalId: string;
-  private contentPosition: Point = POINT_OUTSCREEN;
+  private contentPosition: Point = Point.outscreen();
 
   private get contentFlexPosition(): FlexStyle {
     const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});

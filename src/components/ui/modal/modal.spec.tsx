@@ -1,171 +1,159 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
-  View,
-  Text,
   Button,
-  ViewProps,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
-  render,
-  RenderAPI,
+  render, RenderAPI,
+  waitForElement,
 } from 'react-native-testing-library';
 import {
-  Modal,
-  baseModalTestId,
-} from './modal.component';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
-  ModalPanel,
-  StyleType,
-} from '@kitten/theme';
-import { Frame } from '../measure/type';
+  Modal,
+  ModalProps,
+} from './modal.component';
 
-const buttonShowModalTestId: string = '@button-show-modal';
-const buttonHideModalTestId: string = '@button-hide-modal';
-const stringify = (obj: Object): string => JSON.stringify(obj);
+describe('@modal: component checks', () => {
 
-interface TestScreenState {
-  modalVisible: boolean;
-}
+  const TestModal = (props: Partial<ModalProps>) => {
+    const [visible, setVisible] = React.useState(props.visible);
+    const [text, setText] = React.useState('I love Babel');
 
-interface TestScreenProps {
-  modalStyle?: StyleType;
-}
+    const toggleVisible = (): void => {
+      setVisible(!visible);
+    };
 
-class TestScreen extends React.Component<TestScreenProps & ViewProps, TestScreenState> {
+    const changeText = (): void => {
+      setText('I love Jest');
+    };
 
-  public state: TestScreenState = {
-    modalVisible: false,
+    return (
+      <ApplicationProvider mapping={mapping} theme={light}>
+        <React.Fragment>
+          <Modal {...props} visible={visible}>
+            <Text>{text}</Text>
+            <Button testID='@modal/change-text-button' title='' onPress={changeText}/>
+          </Modal>
+          <Button testID='@modal/toggle-button' title='' onPress={toggleVisible}/>
+        </React.Fragment>
+      </ApplicationProvider>
+    );
   };
 
-  private setModalVisible(modalVisible: boolean): void {
-    this.setState({ modalVisible });
-  }
+  /*
+   * In this test:
+   * [0] for @modal/toggle-button,
+   * [1] for backdrop
+   * [2] for @modal/change-text-button
+   */
+  const touchables = {
+    findBackdropTouchable: (api: RenderAPI) => api.getAllByType(TouchableOpacity)[1],
+  };
 
-  public render(): React.ReactNode {
-    return (
-      <View>
-        <Button
-          title='Show Modal'
-          testID={buttonShowModalTestId}
-          onPress={() => this.setModalVisible(true)}
-        />
-        <Button
-          title='Show Modal'
-          testID={buttonHideModalTestId}
-          onPress={() => this.setModalVisible(false)}
-        />
-        <Modal
-          style={this.props.modalStyle}
-          visible={this.state.modalVisible}>
-          <Text>Test Modal</Text>
-        </Modal>
-      </View>
+  it('should render nothing when invisible', async () => {
+    const component = render(
+      <TestModal/>,
     );
-  }
-}
 
-describe('@modal component checks', () => {
+    const text = component.queryByText('I love Babel');
+    expect(text).toBeFalsy();
+  });
 
-  it('* modal shows/hides properly', () => {
-    const component: RenderAPI = render(<TestScreen/>);
+  // TODO
+  // We need somehow to mock `measureInWindow` so that it returns a mocked x, y, width and height to make it work.
+  //
+  // it('should render element passed to children when initially visible', async () => {
+  //   const component = render(
+  //     <TestModal visible={true}/>,
+  //   );
+  //
+  //   component.getByText('I love Babel');
+  //   expect(text).toBeTruthy();
+  // });
 
-    fireEvent.press(component.getByTestId(buttonShowModalTestId));
-    expect(component.getByType(Modal).props.visible).toBe(true);
+  it('should render element passed to children when becomes visible', async () => {
+    const component = render(
+      <TestModal/>,
+    );
 
-    fireEvent.press(component.getByTestId(buttonHideModalTestId));
-    expect(component.getByType(Modal).props.visible).toBe(false);
+    const toggleButton = component.getByTestId('@modal/toggle-button');
+    fireEvent.press(toggleButton);
+
+    const text = await waitForElement(() => component.queryByText('I love Babel'));
+    expect(text).toBeTruthy();
+  });
+
+  it('should render nothing when becomes invisible', async () => {
+    const component = render(
+      <TestModal/>,
+    );
+
+    const toggleButton = component.getByTestId('@modal/toggle-button');
+    fireEvent.press(toggleButton);
+
+    await waitForElement(() => fireEvent.press(toggleButton));
+
+    const text = await waitForElement(() => component.queryByText('I love Babel'));
+    expect(text).toBeFalsy();
+  });
+
+  it('should be able to interact with content element passed to children', async () => {
+    const component = render(
+      <TestModal/>,
+    );
+
+    const toggleButton = component.getByTestId('@modal/toggle-button');
+    fireEvent.press(toggleButton);
+
+    const changeTextButton = await waitForElement(() => component.getByTestId('@modal/change-text-button'));
+    fireEvent.press(changeTextButton);
+
+    const text = await waitForElement(() => component.queryByText('I love Jest'));
+
+    expect(text).toBeTruthy();
+  });
+
+  it('should call onBackdropPress', async () => {
+    const onBackdropPress = jest.fn();
+
+    const component = render(
+      <TestModal onBackdropPress={onBackdropPress}/>,
+    );
+
+    const toggleButton = component.getByTestId('@modal/toggle-button');
+    fireEvent.press(toggleButton);
+
+
+    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
+    fireEvent.press(backdrop);
+
+    expect(onBackdropPress).toBeCalled();
+  });
+
+  it('should style backdrop with backdropStyle prop', async () => {
+    const component = render(
+      <TestModal backdropStyle={{ backgroundColor: 'red' }}/>,
+    );
+
+    const toggleButton = component.getByTestId('@modal/toggle-button');
+    fireEvent.press(toggleButton);
+
+    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
+
+    expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
   });
 
 });
-
-describe('@modal panel checks', () => {
-
-  const showModalButtonTestId: string = '@modal/button-show';
-  const changeModalTextButtonTestId: string = '@modal/button-change-text';
-  const modalTextTestId: string = '@modal/text';
-
-  interface Props {
-    textValue: string;
-    redTextValue: string;
-  }
-
-  interface State {
-    modalVisible: boolean;
-    isModalTextRed: boolean;
-  }
-
-  class TestApplication extends React.Component<Props, State> {
-
-    public state: State = {
-      modalVisible: false,
-      isModalTextRed: false,
-    };
-
-    private setModalVisible = (): void => {
-      const modalVisible: boolean = !this.state.modalVisible;
-
-      this.setState({ modalVisible });
-    };
-
-    private setModalTextRed = (): void => {
-      const isModalTextRed: boolean = !this.state.isModalTextRed;
-
-      this.setState({ isModalTextRed });
-    };
-
-
-    public render(): React.ReactNode {
-      const { textValue, redTextValue } = this.props;
-      const { modalVisible, isModalTextRed } = this.state;
-      const modalTextStyle: StyleType = isModalTextRed ? { color: 'red' } : null;
-      const modalTextValue: string = isModalTextRed ? redTextValue : textValue;
-
-      return (
-        <ModalPanel>
-          <Button
-            testID={showModalButtonTestId}
-            title='Show Modal'
-            onPress={this.setModalVisible}
-          />
-          <Modal
-            visible={modalVisible}
-            onBackdropPress={this.setModalVisible}>
-            <Text
-              style={modalTextStyle}
-              testID={modalTextTestId}>
-              {modalTextValue}
-            </Text>
-            <Button
-              testID={changeModalTextButtonTestId}
-              title='Set Text Red'
-              onPress={this.setModalTextRed}
-            />
-          </Modal>
-        </ModalPanel>
-      );
-    }
-  }
-
-  it('* modal "team" updates content properly', () => {
-    const textValue: string = 'Text Value';
-    const redTextValue: string = 'Red Text Value';
-    const expectedTextStyle: StyleType = { color: 'red' };
-    const application: any = render(
-      <TestApplication
-        textValue={textValue}
-        redTextValue={redTextValue}
-      />,
-    );
-
-    fireEvent.press(application.getByTestId(showModalButtonTestId));
-    fireEvent.press(application.getAllByTestId(changeModalTextButtonTestId)[0]);
-
-    const { children, style } = application.getAllByTestId(modalTextTestId)[0].props;
-
-    expect(stringify(style)).toBe(stringify(expectedTextStyle));
-    expect(children).toBe(redTextValue);
-  });
-
-});
-
