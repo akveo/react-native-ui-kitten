@@ -1,16 +1,15 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
+import { Text } from 'react-native';
 import {
-  View,
-  ScrollView,
-  ViewProps,
-  Animated,
-} from 'react-native';
-import {
-  fireEvent,
   render,
   RenderAPI,
 } from 'react-native-testing-library';
-import { ReactTestInstance } from 'react-test-renderer';
 import {
   ViewPager,
   ViewPagerProps,
@@ -18,47 +17,46 @@ import {
 
 describe('@view-pager: component checks', () => {
 
-  const Mock = (props?: ViewPagerProps): React.ReactElement<ViewPagerProps> => (
+  const TestViewPager = (props?: ViewPagerProps): React.ReactElement<ViewPagerProps> => (
     <ViewPager {...props}/>
   );
 
-  const ChildMock = (props?: ViewProps): React.ReactElement<ViewProps> => (
-    <View {...props}/>
-  );
+  it('should render two tabs', () => {
+    const component = render(
+      <TestViewPager>
+        <Text>Tab 0</Text>
+        <Text>Tab 1</Text>
+      </TestViewPager>,
+    );
 
-  it('* shouldLoadComponent called for each child', () => {
+    expect(component.getByText('Tab 0')).toBeTruthy();
+    expect(component.getByText('Tab 1')).toBeTruthy();
+  });
+
+  it('should call shouldLoadComponent for each child', () => {
     const shouldLoadComponent = jest.fn();
 
     render(
-      <Mock shouldLoadComponent={shouldLoadComponent}>
-        <ChildMock/>
-        <ChildMock/>
-      </Mock>,
+      <TestViewPager shouldLoadComponent={shouldLoadComponent}>
+        <Text>Tab 0</Text>
+        <Text>Tab 1</Text>
+      </TestViewPager>,
     );
 
     expect(shouldLoadComponent).toBeCalledTimes(2);
   });
 
-  it('* shouldLoadComponent disables child loading', () => {
-    const disabledComponentIndex: number = 1;
-
-    const shouldLoadComponent = jest.fn((...args: any[]) => {
-      const index: number = args[0];
-      return index !== disabledComponentIndex;
-    });
+  it('should not render child if disabled by shouldLoadComponent', () => {
 
     const component: RenderAPI = render(
-      <Mock shouldLoadComponent={shouldLoadComponent}>
-        <ChildMock/>
-        <ChildMock/>
-      </Mock>,
+      <TestViewPager shouldLoadComponent={index => index !== 1}>
+        <Text>Tab 0</Text>
+        <Text>Tab 1</Text>
+      </TestViewPager>,
     );
 
-    const scrollView: ReactTestInstance = component.getByType(Animated.View);
-
-    const unloadedChild = scrollView.props.children[disabledComponentIndex];
-
-    expect(unloadedChild.props.children).toBeNull();
+    expect(component.queryByText('Tab 0')).toBeTruthy();
+    expect(component.queryByText('Tab 1')).toBeFalsy();
   });
 
 });
