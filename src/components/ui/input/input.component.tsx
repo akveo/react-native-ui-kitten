@@ -6,57 +6,52 @@
 
 import React from 'react';
 import {
-  GestureResponderEvent,
-  ImageStyle,
+  ImageProps,
+  NativeSyntheticEvent,
   Platform,
   StyleProp,
   StyleSheet,
   TextInput,
+  TextInputFocusEventData,
   TextInputProps,
   TextStyle,
-  TouchableWithoutFeedback,
-  TouchableWithoutFeedbackProps,
   View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  FalsyFC,
+  FalsyText,
+  FlexStyleProps,
+  PropsService,
+  RenderProp,
+  WebEventResponder,
+  WebEventResponderCallbacks,
+  WebEventResponderInstance,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import {
-  Text,
-  TextElement,
-} from '../text/text.component';
-import { IconElement } from '../icon/icon.component';
-import {
-  allWithRest,
-  isValidString,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../support/services';
-import {
-  FlexStyleProps,
-  InputFocusEvent,
-} from '../support/typings';
+} from '../../theme';
+import { TextProps } from '../text/text.component';
 
-type IconProp = (style: StyleType) => IconElement;
+type InputStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-export interface InputProps extends StyledComponentProps, TextInputProps {
-  status?: string;
-  size?: string;
+export interface InputProps extends TextInputProps, InputStyledProps {
+  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  size?: 'small' | 'medium' | 'large' | string;
   disabled?: boolean;
-  label?: string;
-  caption?: string;
-  captionIcon?: IconProp;
-  icon?: IconProp;
+  label?: RenderProp<TextProps> | React.ReactText;
+  caption?: RenderProp<TextProps> | React.ReactText;
+  captionIcon?: RenderProp<Partial<ImageProps>>;
+  accessoryLeft?: RenderProp<Partial<ImageProps>>;
+  accessoryRight?: RenderProp<Partial<ImageProps>>;
   textStyle?: StyleProp<TextStyle>;
-  labelStyle?: StyleProp<TextStyle>;
-  captionStyle?: StyleProp<TextStyle>;
-  onIconPress?: (event: GestureResponderEvent) => void;
 }
 
 export type InputElement = React.ReactElement<InputProps>;
@@ -66,17 +61,8 @@ export type InputElement = React.ReactElement<InputProps>;
  *
  * @extends React.Component
  *
- * @method {() => void} focus - Requests focus for the given input or view. The exact behavior triggered
- * will depend on the platform and type of view.
- *
- * @method {() => void} blur - Removes focus from an input or view. This is the opposite of `focus()`.
- *
- * @method {() => boolean} isFocused - Returns true if the input is currently focused.
- *
- * @method {() => void} clear - Removes all text from the input.
- *
- * @property {boolean} disabled - Determines whether component is disabled.
- * Default is `false`.
+ * @property {boolean} disabled - Determines whether input field is disabled.
+ * This property overrides `editable` property of TextInput.
  *
  * @property {string} status - Determines the status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
@@ -86,19 +72,27 @@ export type InputElement = React.ReactElement<InputProps>;
  * Can be `small`, `medium` or `large`.
  * Default is `medium`.
  *
- * @property {string} placeholder - Determines placeholder of the component.
+ * @property {string | (props: TextProps) => ReactElement} label - A string or a function component
+ * to render to top of the input field.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {string} label - Determines text rendered at the top of the component.
+ * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * to render to start of the text.
+ * Called with props provided by Eva.
  *
- * @property {string} caption - Determines caption text rendered at the bottom of the component.
+ * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * to render to end of the text.
+ * Called with props provided by Eva.
  *
- * @property {(style: StyleType) => ReactElement} icon - Determines icon of the component.
+ * @property {string | (props: TextProps) => ReactElement} caption - A string or a function component
+ * to render to bottom of the input field.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {(style: StyleType) => ReactElement} captionIcon - Determines caption icon.
- *
- * @property {StyleProp<TextStyle>} labelStyle - Customizes label style.
- *
- * @property {StyleProp<TextStyle>} captionStyle - Customizes caption style.
+ * @property {(props: ImageProps) => ReactElement} captionIcon - A function component
+ * to render to start of the `caption`.
+ * Called with props provided by Eva.
  *
  * @property {StyleProp<TextStyle>} textStyle - Customizes text style.
  *
@@ -155,7 +149,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
     this.props.eva.dispatch([]);
   };
 
-  private onTextFieldFocus = (event: InputFocusEvent): void => {
+  private onTextFieldFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
 
     if (this.props.onFocus) {
@@ -163,7 +157,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
     }
   };
 
-  private onTextFieldBlur = (event: InputFocusEvent): void => {
+  private onTextFieldBlur = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.props.eva.dispatch([]);
 
     if (this.props.onBlur) {
@@ -171,15 +165,9 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
     }
   };
 
-  private onIconPress = (event: GestureResponderEvent): void => {
-    if (this.props.onIconPress) {
-      this.props.onIconPress(event);
-    }
-  };
-
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
-    const { rest: inputContainerStyle, ...containerStyle } = allWithRest(flatStyles, FlexStyleProps);
+    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexStyleProps);
 
     const {
       textMarginHorizontal,
@@ -259,96 +247,55 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
     };
   };
 
-  private renderIconTouchableElement = (style: StyleType): React.ReactElement<TouchableWithoutFeedbackProps> => {
-    const iconElement: IconElement = this.renderIconElement(style);
-
-    return (
-      <TouchableWithoutFeedback onPress={this.onIconPress}>
-        {iconElement}
-      </TouchableWithoutFeedback>
-    );
-  };
-
-  private renderIconElement = (style: StyleType): IconElement => {
-    const iconElement: IconElement = this.props.icon(style);
-
-    return React.cloneElement(iconElement, {
-      key: 0,
-      style: [style, iconElement.props.style],
-    });
-  };
-
-  private renderLabelElement = (style: TextStyle): TextElement => {
-    return (
-      <Text
-        key={1}
-        style={[style, styles.label, this.props.labelStyle]}>
-        {this.props.label}
-      </Text>
-    );
-  };
-
-  private renderCaptionElement = (style: TextStyle): TextElement => {
-    return (
-      <Text
-        key={2}
-        style={[style, styles.captionLabel, this.props.captionStyle]}>
-        {this.props.caption}
-      </Text>
-    );
-  };
-
-  private renderCaptionIconElement = (style: ImageStyle): IconElement => {
-    const iconElement: IconElement = this.props.captionIcon(style);
-
-    return React.cloneElement(iconElement, {
-      key: 3,
-      style: [style, iconElement.props.style],
-    });
-  };
-
-  private renderComponentChildren = (style: StyleType): React.ReactNodeArray => {
-    const { icon, label, captionIcon, caption } = this.props;
-
-    return [
-      icon && this.renderIconTouchableElement(style.icon),
-      isValidString(label) && this.renderLabelElement(style.label),
-      isValidString(caption) && this.renderCaptionElement(style.captionLabel),
-      captionIcon && this.renderCaptionIconElement(style.captionIcon),
-    ];
-  };
-
   public render(): React.ReactElement<ViewProps> {
-    const { eva, textStyle, ...restProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(eva.style);
+    const {
+      eva,
+      textStyle,
+      label,
+      caption,
+      accessoryLeft,
+      accessoryRight,
+      captionIcon,
+      ...textInputProps
+    } = this.props;
 
-    const [
-      iconElement,
-      labelElement,
-      captionElement,
-      captionIconElement,
-    ] = this.renderComponentChildren(componentStyle);
+    const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={componentStyle.container}>
-        {labelElement}
-        <View
-          style={[componentStyle.inputContainer, styles.inputContainer]}>
+      <View style={evaStyle.container}>
+        <FalsyText
+          style={[evaStyle.label, styles.label]}
+          component={label}
+        />
+        <View style={[evaStyle.inputContainer, styles.inputContainer]}>
+          <FalsyFC
+            style={evaStyle.icon}
+            component={accessoryLeft}
+          />
           <TextInput
             ref={this.textInputRef}
-            placeholderTextColor={componentStyle.placeholder.color}
-            {...restProps}
+            placeholderTextColor={evaStyle.placeholder.color}
+            {...textInputProps}
             {...this.webEventResponder.eventHandlers}
-            style={[componentStyle.text, styles.text, platformStyles.text, textStyle]}
-            editable={!restProps.disabled}
+            style={[evaStyle.text, styles.text, platformStyles.text, textStyle]}
+            editable={!textInputProps.disabled}
             onFocus={this.onTextFieldFocus}
             onBlur={this.onTextFieldBlur}
           />
-          {iconElement}
+          <FalsyFC
+            style={evaStyle.icon}
+            component={accessoryRight}
+          />
         </View>
-        <View style={[componentStyle.captionContainer, styles.captionContainer]}>
-          {captionIconElement}
-          {captionElement}
+        <View style={[evaStyle.captionContainer, styles.captionContainer]}>
+          <FalsyFC
+            style={evaStyle.captionIcon}
+            component={captionIcon}
+          />
+          <FalsyText
+            style={[evaStyle.captionLabel, styles.captionLabel]}
+            component={caption}
+          />
         </View>
       </View>
     );
