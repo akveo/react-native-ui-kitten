@@ -70,19 +70,19 @@ describe('@popover: component checks', () => {
 
     const AnchorButton = React.useCallback(() => (
       <Button testID='@popover/toggle-button' title='' onPress={togglePopover}/>
-  ), []);
+    ), []);
 
     return (
       <ApplicationProvider mapping={mapping} theme={light}>
-    <Popover
-      ref={ref}
-    visible={visible}
-    anchor={AnchorButton}
-    {...props}>
-    <Text>I love Babel</Text>
-    </Popover>
-    </ApplicationProvider>
-  );
+        <Popover
+          ref={ref}
+          visible={visible}
+          anchor={AnchorButton}
+          {...props}>
+          <Text>I love Babel</Text>
+        </Popover>
+      </ApplicationProvider>
+    );
   });
 
   it('should render element passed to `anchor` prop', () => {
@@ -96,7 +96,7 @@ describe('@popover: component checks', () => {
   it('should not render content when not visible', () => {
     const component = render(
       <TestPopover visible={false}/>,
-  );
+    );
 
     expect(component.queryByText('I love Babel')).toBeFalsy();
   });
@@ -119,7 +119,7 @@ describe('@popover: component checks', () => {
 
     const component = render(
       <TestPopover onBackdropPress={onBackdropPress}/>,
-  );
+    );
 
     fireEvent.press(component.getByTestId('@popover/toggle-button'));
 
@@ -132,7 +132,7 @@ describe('@popover: component checks', () => {
   it('should style backdrop with backdropStyle prop', async () => {
     const component = render(
       <TestPopover backdropStyle={{ backgroundColor: 'red' }}/>,
-  );
+    );
 
     fireEvent.press(component.getByTestId('@popover/toggle-button'));
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
@@ -145,7 +145,7 @@ describe('@popover: component checks', () => {
 
     const component = render(
       <TestPopover ref={componentRef}/>,
-  );
+    );
 
     componentRef.current.show();
     const text = await waitForElement(() => component.queryByText('I love Babel'));
@@ -158,7 +158,7 @@ describe('@popover: component checks', () => {
 
     const component = render(
       <TestPopover ref={componentRef}/>,
-  );
+    );
 
     componentRef.current.show();
     await waitForElement(() => null);
