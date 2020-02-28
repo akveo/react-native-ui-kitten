@@ -27,8 +27,8 @@ jest.mock('path', () => {
  * Also, clean-up the root package.
  */
 afterEach(() => {
-  const generatedFilePath: string = Path.resolve(`node_modules/${evaConfig.evaPackage}/generated.json`);
-  Rimraf.sync(generatedFilePath);
+  // const generatedFilePath: string = Path.resolve(`node_modules/${evaConfig.evaPackage}/generated.json`);
+  // Rimraf.sync(generatedFilePath);
 
   jest.resetAllMocks();
 });
