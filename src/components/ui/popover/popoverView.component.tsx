@@ -128,8 +128,8 @@ class PopoverViewComponent extends React.Component<PopoverViewProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, contentContainerStyle, themedStyle, onLayout, ...props } = this.props;
-    const { content, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const { style, contentContainerStyle, eva, onLayout, ...props } = this.props;
+    const { content, ...componentStyle } = this.getComponentStyle(eva.style);
 
     const directionStyle = this.getDirectionStyle();
     const [indicatorElement]: React.ReactNodeArray = this.renderComponentChildren(componentStyle, directionStyle);

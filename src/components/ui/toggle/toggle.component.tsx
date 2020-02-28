@@ -96,9 +96,9 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   constructor(props: ToggleProps) {
     super(props);
 
-    const { checked, themedStyle } = props;
+    const { checked, eva } = props;
 
-    this.thumbWidthAnimation = new Animated.Value(themedStyle.thumbWidth);
+    this.thumbWidthAnimation = new Animated.Value(eva.style.thumbWidth);
     this.thumbTranslateAnimation = new Animated.Value(0);
     this.ellipseScaleAnimation = new Animated.Value(checked ? 0.01 : 1.0);
     this.thumbTranslateAnimationActive = false;
@@ -108,25 +108,25 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
 
   public onMouseEnter = (): void => {
     if (!this.props.disabled) {
-      this.props.dispatch([Interaction.HOVER]);
+      this.props.eva.dispatch([Interaction.HOVER]);
     }
   };
 
   public onMouseLeave = (): void => {
     if (!this.props.disabled) {
-      this.props.dispatch([]);
+      this.props.eva.dispatch([]);
     }
   };
 
   public onFocus = (): void => {
     if (!this.props.disabled) {
-      this.props.dispatch([Interaction.FOCUSED]);
+      this.props.eva.dispatch([Interaction.FOCUSED]);
     }
   };
 
   public onBlur = (): void => {
     if (!this.props.disabled) {
-      this.props.dispatch([]);
+      this.props.eva.dispatch([]);
     }
   };
 
@@ -153,7 +153,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   };
 
   public onPanResponderGrant = (): void => {
-    const { checked, disabled, themedStyle } = this.props;
+    const { checked, disabled, eva } = this.props;
 
     if (disabled) {
       return;
@@ -167,7 +167,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       return;
     }
 
-    this.animateThumbWidth(themedStyle.thumbWidth * 1.2);
+    this.animateThumbWidth(eva.style.thumbWidth * 1.2);
     this.animateEllipseScale(checked ? 1 : 0.01);
   };
 
@@ -176,7 +176,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   };
 
   public onPanResponderRelease = (e: GestureResponderEvent, gestureState: PanResponderGestureState): void => {
-    const { checked, disabled, themedStyle } = this.props;
+    const { checked, disabled, eva } = this.props;
 
     if (!disabled) {
       if ((!checked && gestureState.dx > -5) || (checked && gestureState.dx < 5)) {
@@ -186,16 +186,16 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       }
     }
 
-    this.animateThumbWidth(themedStyle.thumbWidth);
+    this.animateThumbWidth(eva.style.thumbWidth);
     this.onPressOut();
   };
 
   private onPressIn = (): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
   };
 
   private onPressOut = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (): void => {
@@ -323,7 +323,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       callback(!this.props.checked);
     });
 
-    this.animateThumbWidth(this.props.themedStyle.thumbWidth);
+    this.animateThumbWidth(this.props.eva.style.thumbWidth);
   };
 
   private renderTextElement = (style: StyleType): TextElement => {
@@ -341,9 +341,9 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, checked, ...restProps } = this.props;
+    const { eva, style, checked, ...restProps } = this.props;
 
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const componentStyle: StyleType = this.getComponentStyle(eva.style);
     const [textElement] = this.renderComponentChildren(componentStyle);
 
     return (

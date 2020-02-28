@@ -132,6 +132,7 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
       onSelect: this.props.onSelect,
       renderDay: this.props.renderDay,
       renderYear: this.props.renderYear,
+      renderMonth: this.props.renderMonth,
       renderFooter: this.props.renderFooter,
     };
   }

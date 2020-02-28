@@ -81,19 +81,19 @@ export class RadioComponent extends React.Component<RadioProps> {
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (): void => {
@@ -103,7 +103,7 @@ export class RadioComponent extends React.Component<RadioProps> {
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -111,7 +111,7 @@ export class RadioComponent extends React.Component<RadioProps> {
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
@@ -199,7 +199,7 @@ export class RadioComponent extends React.Component<RadioProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, disabled, ...derivedProps } = this.props;
+    const { style, eva, disabled, ...derivedProps } = this.props;
 
     const {
       container,
@@ -208,7 +208,7 @@ export class RadioComponent extends React.Component<RadioProps> {
       icon,
       highlight,
       ...componentStyles
-    } = this.getComponentStyle(themedStyle);
+    } = this.getComponentStyle(eva.style);
 
     const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
     const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);

@@ -16,7 +16,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 import { BottomNavigationTabElement } from './bottomNavigationTab.component';
 import {
   TabIndicator,
@@ -179,8 +179,8 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { eva, style, ...derivedProps } = this.props;
+    const { container, ...componentStyles } = this.getComponentStyle(eva.style);
 
     const [indicatorElement, ...tabElements] = this.renderComponentChildren(componentStyles);
 

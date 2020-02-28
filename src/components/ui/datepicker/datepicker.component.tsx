@@ -151,6 +151,7 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
       onSelect: this.props.onSelect,
       renderDay: this.props.renderDay,
       renderYear: this.props.renderYear,
+      renderMonth: this.props.renderMonth,
       renderFooter: this.props.renderFooter,
     };
   }

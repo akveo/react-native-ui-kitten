@@ -124,7 +124,7 @@ export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarP
       return true;
     }
 
-    return props.theme !== nextProps.theme;
+    return props.eva.theme !== nextProps.eva.theme;
   }
 }
 

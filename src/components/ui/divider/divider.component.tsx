@@ -29,12 +29,12 @@ class DividerComponent extends React.Component<DividerProps> {
   static styledComponentName: string = 'Divider';
 
   public render(): DividerElement {
-    const { style, themedStyle, ...restProps } = this.props;
+    const { style, eva, ...restProps } = this.props;
 
     return (
       <View
         {...restProps}
-        style={[themedStyle, style]}
+        style={[eva.style, style]}
       />
     );
   }

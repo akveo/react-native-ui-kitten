@@ -123,7 +123,7 @@ export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<Rang
       return true;
     }
 
-    return props.theme !== nextProps.theme;
+    return props.eva.theme !== nextProps.eva.theme;
   }
 }
 

@@ -47,12 +47,12 @@ export class LayoutComponent extends React.Component<LayoutProps> {
   static styledComponentName: string = 'Layout';
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, ...derivedProps } = this.props;
+    const { style, eva, ...derivedProps } = this.props;
 
     return (
       <View
         {...derivedProps}
-        style={[themedStyle, style]}
+        style={[eva.style, style]}
       />
     );
   }

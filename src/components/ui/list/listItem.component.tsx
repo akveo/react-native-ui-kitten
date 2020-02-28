@@ -114,7 +114,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(this.props.index, event);
@@ -122,7 +122,7 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(this.props.index, event);
@@ -280,8 +280,8 @@ export class ListItemComponent extends React.Component<ListItemProps> {
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { eva, style, ...derivedProps } = this.props;
+    const { container, ...componentStyles } = this.getComponentStyle(eva.style);
 
     const componentChildren: React.ReactNode = this.renderComponentChildren(componentStyles);
 

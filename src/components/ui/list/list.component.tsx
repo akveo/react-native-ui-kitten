@@ -102,7 +102,7 @@ export class ListComponent extends React.Component<ListProps> {
   };
 
   private renderItem = (info: ListRenderItemInfo<ItemType>): ListItemElement => {
-    const itemStyle: StyleType = this.getItemStyle(this.props.themedStyle, info.index);
+    const itemStyle: StyleType = this.getItemStyle(this.props.eva.style, info.index);
     const itemElement: React.ReactElement<ListItemProps> = this.props.renderItem(info, itemStyle);
 
     return React.cloneElement(itemElement, {
@@ -112,8 +112,8 @@ export class ListComponent extends React.Component<ListProps> {
   };
 
   public render(): React.ReactElement<FlatListProps<ItemType>> {
-    const { style, themedStyle, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { style, eva, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(eva.style);
 
     return (
       <FlatList

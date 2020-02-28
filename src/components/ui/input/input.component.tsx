@@ -148,15 +148,15 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
   // WebEventResponderCallbacks
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onTextFieldFocus = (event: InputFocusEvent): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
 
     if (this.props.onFocus) {
       this.props.onFocus(event);
@@ -164,7 +164,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
   };
 
   private onTextFieldBlur = (event: InputFocusEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onBlur) {
       this.props.onBlur(event);
@@ -319,8 +319,8 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, textStyle, ...restProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, textStyle, ...restProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(eva.style);
 
     const [
       iconElement,

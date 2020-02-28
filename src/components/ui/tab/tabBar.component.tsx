@@ -171,8 +171,8 @@ export class TabBarComponent extends React.Component<TabBarProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, indicatorStyle, selectedIndex, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, style, indicatorStyle, selectedIndex, children, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(eva.style);
 
     const tabElements: TabElement[] = this.renderTabElements(children);
 

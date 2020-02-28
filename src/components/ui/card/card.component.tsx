@@ -83,7 +83,7 @@ class CardComponent extends React.Component<CardProps> {
   static styledComponentName: string = 'Card';
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -91,7 +91,7 @@ class CardComponent extends React.Component<CardProps> {
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
@@ -206,8 +206,8 @@ class CardComponent extends React.Component<CardProps> {
   };
 
   public render(): CardElement {
-    const { themedStyle, style, children, ...restProps } = this.props;
-    const { container, ...childrenStyles } = this.getComponentStyle(themedStyle);
+    const { eva, style, children, ...restProps } = this.props;
+    const { container, ...childrenStyles } = this.getComponentStyle(eva.style);
     const [header, body, footer] = this.renderComponentChildren(childrenStyles);
 
     return (

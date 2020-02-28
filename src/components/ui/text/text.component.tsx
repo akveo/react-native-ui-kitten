@@ -59,12 +59,12 @@ export class TextComponent extends React.Component<TextProps> {
   static styledComponentName: string = 'Text';
 
   public render(): React.ReactElement<RNTextProps> {
-    const { themedStyle, style, ...derivedProps } = this.props;
+    const { eva, style, ...derivedProps } = this.props;
 
     return (
       <RNText
         {...derivedProps}
-        style={[themedStyle, style]}
+        style={[eva.style, style]}
       />
     );
   }

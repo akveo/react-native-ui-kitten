@@ -9,7 +9,10 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
+import {
+  StyleType,
+  EvaProp,
+} from '@kitten/theme';
 import {
   CalendarHeader,
   CalendarHeaderElement,
@@ -49,7 +52,7 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
-  themedStyle?: StyleType;
+  eva?: EvaProp;
 }
 
 export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
@@ -317,7 +320,7 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         key={index}
-        textStyle={this.getWeekdayStyle(this.props.themedStyle)}>
+        textStyle={this.getWeekdayStyle(this.props.eva.style)}>
         {weekday}
       </CalendarDateContent>
     );
@@ -440,8 +443,8 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, ...restProps } = this.props;
-    const { container, ...componentStyle } = this.getCalendarStyle(themedStyle);
+    const { style, eva, ...restProps } = this.props;
+    const { container, ...componentStyle } = this.getCalendarStyle(eva.style);
 
     return (
       <View

@@ -75,19 +75,19 @@ class MenuItemComponent extends React.Component<MenuItemProps> implements WebEve
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -97,7 +97,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> implements WebEve
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(this.props.menuIndex, event);
@@ -105,7 +105,7 @@ class MenuItemComponent extends React.Component<MenuItemProps> implements WebEve
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(this.props.menuIndex, event);
@@ -183,8 +183,8 @@ class MenuItemComponent extends React.Component<MenuItemProps> implements WebEve
   };
 
   public render(): React.ReactNode {
-    const { themedStyle, style, ...restProps } = this.props;
-    const { container, indicator, ...restStyles } = this.getComponentStyles(themedStyle);
+    const { eva, style, ...restProps } = this.props;
+    const { container, indicator, ...restStyles } = this.getComponentStyles(eva.style);
     const [iconElement, textElement, accessoryElement] = this.renderComponentChildren(restStyles);
 
     return (

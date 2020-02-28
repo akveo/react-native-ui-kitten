@@ -79,8 +79,8 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, style, children, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(eva.style);
 
     const radioElements: RadioElement[] = this.renderRadioElements(children, componentStyle.item);
 

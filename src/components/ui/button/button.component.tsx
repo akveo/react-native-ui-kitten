@@ -98,19 +98,19 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
   // WebEventResponderCallbacks
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -120,7 +120,7 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -128,7 +128,7 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
@@ -198,8 +198,8 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, ...containerProps } = this.props;
-    const { container, ...childStyles } = this.getComponentStyle(themedStyle);
+    const { eva, style, ...containerProps } = this.props;
+    const { container, ...childStyles } = this.getComponentStyle(eva.style);
     const [iconElement, textElement] = this.renderComponentChildren(childStyles);
 
     return (

@@ -167,7 +167,7 @@ export class TooltipComponent extends React.Component<TooltipProps> {
   };
 
   private renderPopoverIndicatorElement = (style: StyleType): React.ReactElement => {
-    const { indicator } = this.getComponentStyle(this.props.themedStyle);
+    const { indicator } = this.getComponentStyle(this.props.eva.style);
     return (
       <PopoverIndicator style={indicator} />
     );
@@ -186,8 +186,8 @@ export class TooltipComponent extends React.Component<TooltipProps> {
   };
 
   public render(): PopoverElement {
-    const { themedStyle, style, children, ...props } = this.props;
-    const { container, indicator, ...componentStyle } = this.getComponentStyle(themedStyle);
+    const { eva, style, children, ...props } = this.props;
+    const { container, indicator, ...componentStyle } = this.getComponentStyle(eva.style);
 
     const contentElement: TextElement = this.renderPopoverContentElement(componentStyle);
 

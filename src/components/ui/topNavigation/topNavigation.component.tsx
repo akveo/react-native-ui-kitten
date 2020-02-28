@@ -168,7 +168,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, alignment, ...restProps } = this.props;
+    const { eva, style, alignment, ...restProps } = this.props;
 
     const {
       container,
@@ -176,7 +176,7 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       titleContainer,
       rightControlsContainer,
       ...componentStyles
-    } = this.getComponentStyle(themedStyle);
+    } = this.getComponentStyle(eva.style);
 
     const alignmentStyles: StyleType = this.getAlignmentDependentStyles(alignment);
 

@@ -79,11 +79,11 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
   // WebEventResponderCallbacks
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (): void => {
@@ -157,8 +157,8 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { style, themedStyle, ...restProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { style, eva, ...restProps } = this.props;
+    const { container, ...componentStyles } = this.getComponentStyle(eva.style);
     const [iconElement, titleElement] = this.renderComponentChildren(componentStyles);
 
     return (

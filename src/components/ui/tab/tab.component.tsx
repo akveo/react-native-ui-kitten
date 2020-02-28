@@ -87,11 +87,11 @@ export class TabComponent extends React.Component<TabProps> implements WebEventR
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (): void => {
@@ -165,8 +165,8 @@ export class TabComponent extends React.Component<TabProps> implements WebEventR
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, ...derivedProps } = this.props;
-    const { container, ...componentStyles } = this.getComponentStyle(themedStyle);
+    const { eva, style, ...derivedProps } = this.props;
+    const { container, ...componentStyles } = this.getComponentStyle(eva.style);
 
     const [iconElement, titleElement] = this.renderComponentChildren(componentStyles);
 

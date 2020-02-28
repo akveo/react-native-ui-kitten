@@ -100,23 +100,23 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
   // WebEventResponderCallbacks
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onChange) {
       this.props.onChange(!this.props.checked, false);
@@ -124,7 +124,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -132,7 +132,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
@@ -225,7 +225,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
   };
 
   public render(): React.ReactElement<TouchableOpacityProps> {
-    const { themedStyle, style, disabled, text, ...derivedProps } = this.props;
+    const { eva, style, disabled, text, ...derivedProps } = this.props;
 
     const {
       container,
@@ -233,7 +233,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
       highlight,
       selectContainer,
       ...componentStyle
-    } = this.getComponentStyle(themedStyle);
+    } = this.getComponentStyle(eva.style);
 
     const selectContainerStyle: StyleProp<ViewStyle> = [selectContainer, styles.selectContainer];
     const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);

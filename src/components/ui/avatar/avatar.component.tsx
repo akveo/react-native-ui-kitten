@@ -15,7 +15,7 @@ import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
+} from '../../theme';
 
 export interface AvatarProps extends StyledComponentProps, ImageProps {
   shape?: string;
@@ -72,8 +72,8 @@ export class AvatarComponent extends React.Component<AvatarProps> {
   };
 
   public render(): React.ReactElement<ImageProps> {
-    const { themedStyle, ...restProps } = this.props;
-    const componentStyle: ImageStyle = this.getComponentStyle(themedStyle);
+    const { eva, ...restProps } = this.props;
+    const componentStyle: ImageStyle = this.getComponentStyle(eva.style);
 
     return (
       <Image

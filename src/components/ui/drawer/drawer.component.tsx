@@ -116,11 +116,11 @@ class DrawerComponent extends React.Component<DrawerProps> {
   };
 
   private renderMenu = (): MenuElement => {
-    const { style, header, footer, themedStyle, ...restProps } = this.props;
+    const { style, header, footer, eva, ...restProps } = this.props;
 
     return (
       <Menu
-        style={themedStyle}
+        style={eva.style}
         showsVerticalScrollIndicator={false}
         bounces={false}
         {...restProps}

@@ -61,19 +61,19 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public onMouseEnter = (): void => {
-    this.props.dispatch([Interaction.HOVER]);
+    this.props.eva.dispatch([Interaction.HOVER]);
   };
 
   public onMouseLeave = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -83,7 +83,7 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -91,7 +91,7 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
@@ -142,8 +142,8 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
   };
 
   public render(): React.ReactNode {
-    const { themedStyle, style, icon, ...touchableProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, style, icon, ...touchableProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(eva.style);
 
     const hitSlopInsets: Insets = this.createHitSlopInsets(componentStyle.icon);
 

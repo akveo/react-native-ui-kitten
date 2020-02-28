@@ -184,10 +184,10 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
   };
 
   private renderSubItems = (): React.ReactFragment => {
-    const { item, themedStyle, divider } = this.props;
+    const { item, eva, divider } = this.props;
 
     return item.subItems.map((sub: MenuItemType, index: number) => {
-      const { subContainer } = this.getComponentStyles(themedStyle);
+      const { subContainer } = this.getComponentStyles(eva.style);
       const isSelected: boolean = this.getIsSelected(sub);
 
       const element: MenuItemElement = React.cloneElement(this.renderMenuItem(sub, false, index), {

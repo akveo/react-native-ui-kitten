@@ -126,8 +126,8 @@ class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, style, children, ...derivedProps } = this.props;
+    const componentStyle: StyleType = this.getComponentStyle(eva.style);
 
     const buttonElements: ButtonElement[] = this.renderButtonElements(children, componentStyle);
 

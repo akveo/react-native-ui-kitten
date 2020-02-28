@@ -65,7 +65,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
   private animation: SpinnerAnimation = new SpinnerAnimation(this.containerSize.height);
 
   private get containerSize(): Size {
-    const { width, height } = StyleSheet.flatten([this.props.themedStyle, this.props.style]);
+    const { width, height } = StyleSheet.flatten([this.props.eva.style, this.props.style]);
     // @ts-ignore: width and height are restricted to be a number
     return new Size(width, height);
   }
@@ -123,7 +123,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
         <View style={[styles.noOverflow, style.overflow, arcSize]}>
           <Animated.View style={[style.arc, size]}>
             <View style={[styles.noOverflow, arcSize]}>
-              <View style={[this.props.themedStyle, this.props.style]}/>
+              <View style={[this.props.eva.style, this.props.style]}/>
             </View>
           </Animated.View>
         </View>

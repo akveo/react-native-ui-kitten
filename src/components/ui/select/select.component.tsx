@@ -225,22 +225,22 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
 
   public onMouseEnter = (): void => {
     if (!this.state.optionsVisible) {
-      this.props.dispatch([Interaction.HOVER]);
+      this.props.eva.dispatch([Interaction.HOVER]);
     }
   };
 
   public onMouseLeave = (): void => {
     if (!this.state.optionsVisible) {
-      this.props.dispatch([]);
+      this.props.eva.dispatch([]);
     }
   };
 
   public onFocus = (): void => {
-    this.props.dispatch([Interaction.FOCUSED]);
+    this.props.eva.dispatch([Interaction.FOCUSED]);
   };
 
   public onBlur = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -252,7 +252,7 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -260,7 +260,7 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
@@ -277,7 +277,7 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   };
 
   private onOptionsListVisible = (): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
     this.createIconAnimation(-180).start();
 
     if (this.props.onFocus) {
@@ -286,7 +286,7 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   };
 
   private onOptionsListInvisible = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
     this.createIconAnimation(0).start();
 
     if (this.props.onBlur) {
@@ -457,7 +457,7 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   };
 
   private renderControlElement = (style: StyleType): ControlElement => {
-    const { themedStyle, controlStyle, ...restProps } = this.props;
+    const { eva, controlStyle, ...restProps } = this.props;
     const [iconElement, textElement] = this.renderControlChildren(style);
 
     return (
@@ -484,8 +484,8 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style } = this.props;
-    const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, style } = this.props;
+    const { popover, ...componentStyle }: StyleType = this.getComponentStyle(eva.style);
 
     const [
       optionsListElement,

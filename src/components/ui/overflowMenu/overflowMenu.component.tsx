@@ -108,7 +108,7 @@ class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
   };
 
   private renderPopoverContentElement = (): MenuElement => {
-    const { themedStyle, indicatorStyle, children, data, style, ...restProps } = this.props;
+    const { eva, indicatorStyle, children, data, style, ...restProps } = this.props;
 
     return (
       <Menu
@@ -123,8 +123,8 @@ class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
   };
 
   public render(): PopoverElement {
-    const { style, themedStyle, indicatorStyle, children, appearance, ...restProps } = this.props;
-    const { container, indicator } = this.getComponentStyle(themedStyle);
+    const { style, eva, indicatorStyle, children, appearance, ...restProps } = this.props;
+    const { container, indicator } = this.getComponentStyle(eva.style);
 
     const contentElement: MenuElement = this.renderPopoverContentElement();
 

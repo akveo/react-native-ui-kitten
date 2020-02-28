@@ -188,7 +188,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
       this.props.onPressIn(event);
@@ -196,7 +196,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
       this.props.onPressOut(event);
@@ -204,7 +204,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   private onPickerVisible = (): void => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onFocus) {
       this.props.onFocus();
@@ -212,7 +212,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   private onPickerInvisible = (): void => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
 
     if (this.props.onBlur) {
       this.props.onBlur();
@@ -283,7 +283,7 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   private renderControlElement = (style: StyleType): React.ReactElement<TouchableOpacityProps> => {
-    const { themedStyle, controlStyle, ...restProps } = this.props;
+    const { eva, controlStyle, ...restProps } = this.props;
     const [iconElement, textElement] = this.renderControlChildren(style);
 
     return (
@@ -311,8 +311,8 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, placement, backdropStyle } = this.props;
-    const { popover, ...componentStyle }: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, style, placement, backdropStyle } = this.props;
+    const { popover, ...componentStyle }: StyleType = this.getComponentStyle(eva.style);
 
     const [
       calendarElement,
