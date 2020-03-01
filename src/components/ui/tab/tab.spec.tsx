@@ -14,6 +14,7 @@ import {
 import {
   fireEvent,
   render,
+  RenderAPI,
 } from 'react-native-testing-library';
 import {
   light,
@@ -55,7 +56,7 @@ describe('@tab: component checks', () => {
       <TestTab icon={Icon}/>,
     );
 
-    const image = component.getByType(Image);
+    const image = component.queryByType(Image);
 
     expect(image).toBeTruthy();
     expect(image.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
@@ -66,8 +67,7 @@ describe('@tab: component checks', () => {
       <TestTab title='I love Babel'/>,
     );
 
-    const title = component.getByText('I love Babel');
-    expect(title).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to title prop', () => {
@@ -75,9 +75,7 @@ describe('@tab: component checks', () => {
       <TestTab title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const titleAsComponent = component.getByText('I love Babel');
-
-    expect(titleAsComponent).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
 });
@@ -101,14 +99,16 @@ describe('@tab-bar: component checks', () => {
     );
   };
 
+  const touchables = {
+    findTabTouchable: (api: RenderAPI, index: number) => api.queryAllByType(TouchableOpacity)[index],
+  };
+
   it('should render 2 tabs passed to children', () => {
     const component = render(
       <TestTabBar/>,
     );
 
-    const tabs = component.getAllByType(Tab);
-
-    expect(tabs.length).toEqual(2);
+    expect(component.queryAllByType(Tab).length).toEqual(2);
   });
 
   it('should set tab selected by passing selectedIndex prop', () => {
@@ -116,22 +116,16 @@ describe('@tab-bar: component checks', () => {
       <TestTabBar selectedIndex={1}/>,
     );
 
-    const tabs = component.getAllByType(Tab);
-
-    expect(tabs[1].props.selected).toEqual(true);
+    expect(component.queryAllByType(Tab)[1].props.selected).toEqual(true);
   });
 
   it('should set tab selected by pressing it', () => {
     const component = render(
-      <TestTabBar selectedIndex={1}/>,
+      <TestTabBar />,
     );
 
-    const touchables = component.getAllByType(TouchableOpacity);
-    fireEvent.press(touchables[0]);
-
-    const tabs = component.getAllByType(Tab);
-
-    expect(tabs[0].props.selected).toEqual(true);
+    fireEvent.press(touchables.findTabTouchable(component, 1));
+    expect(component.queryAllByType(Tab)[1].props.selected).toEqual(true);
   });
 
 });
@@ -158,8 +152,7 @@ describe('@tab-view: component checks', () => {
       <TestTabView/>,
     );
 
-    const tabs = component.getAllByType(Tab);
-    expect(tabs.length).toEqual(2);
+    expect(component.queryAllByType(Tab).length).toEqual(2);
   });
 
   it('should render 2 content elements passed to tab children', () => {
@@ -167,8 +160,8 @@ describe('@tab-view: component checks', () => {
       <TestTabView/>,
     );
 
-    expect(component.getByText('Tab 0')).toBeTruthy();
-    expect(component.getByText('Tab 1')).toBeTruthy();
+    expect(component.queryByText('Tab 0')).toBeTruthy();
+    expect(component.queryByText('Tab 1')).toBeTruthy();
   });
 
   it('should not render content elements if disabled by shouldLoadComponent prop', () => {

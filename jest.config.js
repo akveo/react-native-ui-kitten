@@ -8,7 +8,7 @@ module.exports = {
     'js',
   ],
   modulePathIgnorePatterns: [
-    '<rootDir>/src/doc-showcase/',
+    '<rootDir>/src/showcases/',
     '<rootDir>/src/template-js/',
     '<rootDir>/src/template-ts/',
   ],

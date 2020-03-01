@@ -38,10 +38,10 @@ describe('@avatar: component checks', () => {
       <TestAvatar/>,
     );
 
-    const image = component.getByType(Image);
+    const avatar = component.queryByType(Image);
 
-    expect(image).toBeTruthy();
-    expect(image.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
+    expect(avatar).toBeTruthy();
+    expect(avatar.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
   });
 
   it('should be round', () => {
@@ -49,7 +49,7 @@ describe('@avatar: component checks', () => {
       <TestAvatar shape='round'/>,
     );
 
-    const avatar = component.getByType(Image);
+    const avatar = component.queryByType(Image);
     const { borderRadius, height } = StyleSheet.flatten(avatar.props.style);
 
     expect(borderRadius).toEqual(height / 2);
@@ -60,7 +60,7 @@ describe('@avatar: component checks', () => {
       <TestAvatar shape='rounded'/>,
     );
 
-    const avatar = component.getByType(Image);
+    const avatar = component.queryByType(Image);
     const { borderRadius, height } = StyleSheet.flatten(avatar.props.style);
 
     expect(borderRadius).toBeLessThan(height);
@@ -71,7 +71,7 @@ describe('@avatar: component checks', () => {
       <TestAvatar shape='square'/>,
     );
 
-    const avatar = component.getByType(Image);
+    const avatar = component.queryByType(Image);
     const { borderRadius } = StyleSheet.flatten(avatar.props.style);
 
     expect(borderRadius).toEqual(0);

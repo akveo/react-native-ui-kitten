@@ -71,7 +71,7 @@ describe('@calendar: component checks', () => {
       <TestCalendar onSelect={onSelect}/>,
     );
 
-    fireEvent.press(component.getAllByText('5')[0]);
+    fireEvent.press(component.queryAllByText('5')[0]);
   });
 
   it('should be rendered with view passed to startView prop', () => {
@@ -90,7 +90,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.state.visibleDate;
-    const navigationNextButton = component.getAllByType(TouchableOpacity)[2];
+    const navigationNextButton = component.queryAllByType(TouchableOpacity)[2];
 
     fireEvent.press(navigationNextButton);
 
@@ -106,7 +106,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.state.visibleDate;
-    const navigationPrevButton = component.getAllByType(TouchableOpacity)[1];
+    const navigationPrevButton = component.queryAllByType(TouchableOpacity)[1];
 
     fireEvent.press(navigationPrevButton);
 
@@ -122,7 +122,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.state.visibleDate;
-    const navigationPrevButton = component.getAllByType(TouchableOpacity)[2];
+    const navigationPrevButton = component.queryAllByType(TouchableOpacity)[2];
 
     fireEvent.press(navigationPrevButton);
 
@@ -138,7 +138,7 @@ describe('@calendar: component checks', () => {
     );
 
     const initialDate = componentRef.current.state.visibleDate;
-    const navigationPrevButton = component.getAllByType(TouchableOpacity)[1];
+    const navigationPrevButton = component.queryAllByType(TouchableOpacity)[1];
 
     fireEvent.press(navigationPrevButton);
 

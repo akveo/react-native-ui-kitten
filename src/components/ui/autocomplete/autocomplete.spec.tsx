@@ -50,10 +50,7 @@ describe('@autocomplete: component checks', () => {
 
     const onChangeText = (text: string): void => {
       setValue(text);
-
-      if (props.onChangeText) {
-        props.onChangeText(text);
-      }
+      props.onChangeText && props.onChangeText(text);
     };
 
     return (
@@ -84,7 +81,7 @@ describe('@autocomplete: component checks', () => {
       <TestAutocomplete/>,
     );
 
-    expect(component.getByType(TextInput)).toBeTruthy();
+    expect(component.queryByType(TextInput)).toBeTruthy();
   });
 
   it('should not render options when not focused', () => {
@@ -101,8 +98,7 @@ describe('@autocomplete: component checks', () => {
       <TestAutocomplete/>,
     );
 
-    fireEvent(component.getByType(TextInput), 'focus');
-
+    fireEvent(component.queryByType(TextInput), 'focus');
     const firstOption = await waitForElement(() => component.queryByText('Option 1'));
     const secondOption = component.queryByText('Option 2');
 
@@ -112,29 +108,24 @@ describe('@autocomplete: component checks', () => {
 
   it('should request text change', async () => {
     const onChangeText = jest.fn();
-
     const component = render(
       <TestAutocomplete onChangeText={onChangeText}/>,
     );
 
-    fireEvent.changeText(component.getByType(TextInput), 'I love Babel');
-
+    fireEvent.changeText(component.queryByType(TextInput), 'I love Babel');
     expect(onChangeText).toBeCalledWith('I love Babel');
   });
 
   it('should call onSelect when option is pressed', async () => {
     const onSelect = jest.fn();
-
     const component = render(
       <TestAutocomplete onSelect={onSelect}/>,
     );
 
-    fireEvent(component.getByType(TextInput), 'focus');
-
-    await waitForElement(() => component.queryByText('Option 1'));
+    fireEvent(component.queryByType(TextInput), 'focus');
+    await waitForElement(() => null);
 
     fireEvent.press(touchables.findOptionTouchable(component, 0));
-
     expect(onSelect).toBeCalledWith({ title: 'Option 1' });
   });
 
@@ -146,10 +137,9 @@ describe('@autocomplete: component checks', () => {
       />,
     );
 
-    fireEvent(component.getByType(TextInput), 'focus');
+    fireEvent(component.queryByType(TextInput), 'focus');
 
     const placeholderOption = await waitForElement(() => component.queryByText('Placeholder Option'));
-
     expect(placeholderOption).toBeTruthy();
   });
 
@@ -158,8 +148,7 @@ describe('@autocomplete: component checks', () => {
       <TestAutocomplete renderItem={info => <ListItem title={`Custom ${info.item.title}`}/>}/>,
     );
 
-    fireEvent(component.getByType(TextInput), 'focus');
-
+    fireEvent(component.queryByType(TextInput), 'focus');
     const firstOption = await waitForElement(() => component.queryByText('Custom Option 1'));
     const secondOption = component.queryByText('Custom Option 2');
 
@@ -172,7 +161,7 @@ describe('@autocomplete: component checks', () => {
       <TestAutocomplete/>,
     );
 
-    fireEvent(component.getByType(TextInput), 'focus');
+    fireEvent(component.queryByType(TextInput), 'focus');
 
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
     fireEvent.press(backdrop);
@@ -186,31 +175,26 @@ describe('@autocomplete: component checks', () => {
 
   it('should call onFocus', async () => {
     const onFocus = jest.fn();
-
     const component = render(
       <TestAutocomplete onFocus={onFocus}/>,
     );
 
-    fireEvent(component.getByType(TextInput), 'focus');
-
+    fireEvent(component.queryByType(TextInput), 'focus');
     expect(onFocus).toBeCalled();
   });
 
   it('should call onBlur', async () => {
     const onBlur = jest.fn();
-
     const component = render(
       <TestAutocomplete onBlur={onBlur}/>,
     );
 
-    fireEvent(component.getByType(TextInput), 'blur');
-
+    fireEvent(component.queryByType(TextInput), 'blur');
     expect(onBlur).toBeCalled();
   });
 
   it('should be able to call focus with ref', async () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
-
     render(
       <TestAutocomplete ref={componentRef}/>,
     );
@@ -221,7 +205,6 @@ describe('@autocomplete: component checks', () => {
 
   it('should be able to call blur with ref', async () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
-
     render(
       <TestAutocomplete ref={componentRef}/>,
     );
@@ -232,7 +215,6 @@ describe('@autocomplete: component checks', () => {
 
   it('should be able to call isFocused with ref', () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
-
     render(
       <TestAutocomplete ref={componentRef}/>,
     );
@@ -243,7 +225,6 @@ describe('@autocomplete: component checks', () => {
 
   it('should be able to call clear with ref', () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
-
     render(
       <TestAutocomplete ref={componentRef}/>,
     );
@@ -254,7 +235,6 @@ describe('@autocomplete: component checks', () => {
 
   it('should be able to call show with ref', () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
-
     render(
       <TestAutocomplete ref={componentRef}/>,
     );
@@ -265,7 +245,6 @@ describe('@autocomplete: component checks', () => {
 
   it('should be able to call hide with ref', () => {
     const componentRef: React.RefObject<Autocomplete> = React.createRef();
-
     render(
       <TestAutocomplete ref={componentRef}/>,
     );

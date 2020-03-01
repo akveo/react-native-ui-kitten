@@ -29,7 +29,6 @@
     "./src/template-ts",
     "./src/showcases",
     "./**/*.spec.ts",
-    "./**/*.spec.tsx",
-    "./**/*.snap"
+    "./**/*.spec.tsx"
   ]
 }

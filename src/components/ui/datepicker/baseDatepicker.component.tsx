@@ -232,7 +232,6 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     return (
       <TouchableWithoutFeedback
         {...props}
-        testID='INPUT TOUCHABLE'
         style={[evaStyle.control, styles.control, this.props.controlStyle]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}

@@ -31,9 +31,7 @@ describe('@text: component checks', () => {
       <TestText>I love Babel</TestText>,
     );
 
-    const text = component.getByText('I love Babel');
-
-    expect(text).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to children', () => {
@@ -43,8 +41,6 @@ describe('@text: component checks', () => {
       </TestText>,
     );
 
-    const textAsComponent = component.getByText('I love Babel');
-
-    expect(textAsComponent).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 });

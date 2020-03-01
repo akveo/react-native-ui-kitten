@@ -14,6 +14,7 @@ import {
 import {
   fireEvent,
   render,
+  RenderAPI,
   waitForElement,
 } from 'react-native-testing-library';
 import {
@@ -53,34 +54,32 @@ describe('@modal: component checks', () => {
     );
   };
 
+  /*
+   * In this test:
+   * [0] for @modal/toggle-button,
+   * [1] for backdrop
+   * [2] for @modal/change-text-button
+   */
+  const touchables = {
+    findToggleButton: (api: RenderAPI) => api.queryByTestId('@modal/toggle-button'),
+    findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
+    findChangeTextButton: (api: RenderAPI) => api.queryByTestId('@modal/change-text-button'),
+  };
+
   it('should render nothing when invisible', async () => {
     const component = render(
       <TestModal/>,
     );
 
-    const text = component.queryByText('I love Babel');
-    expect(text).toBeFalsy();
+    expect(component.queryByText('I love Babel')).toBeFalsy();
   });
-
-  // TODO
-  // We need somehow to mock `measureInWindow` so that it returns a mocked x, y, width and height to make it work.
-  //
-  // it('should render element passed to children when initially visible', async () => {
-  //   const component = render(
-  //     <TestModal visible={true}/>,
-  //   );
-  //
-  //   component.getByText('I love Babel');
-  //   expect(text).toBeTruthy();
-  // });
 
   it('should render element passed to children when becomes visible', async () => {
     const component = render(
       <TestModal/>,
     );
 
-    const toggleButton = component.getByTestId('@modal/toggle-button');
-    fireEvent.press(toggleButton);
+    fireEvent.press(touchables.findToggleButton(component));
 
     const text = await waitForElement(() => component.queryByText('I love Babel'));
     expect(text).toBeTruthy();
@@ -91,10 +90,10 @@ describe('@modal: component checks', () => {
       <TestModal/>,
     );
 
-    const toggleButton = component.getByTestId('@modal/toggle-button');
-    fireEvent.press(toggleButton);
-
-    await waitForElement(() => fireEvent.press(toggleButton));
+    fireEvent.press(touchables.findToggleButton(component));
+    await waitForElement(() => {
+      fireEvent.press(touchables.findToggleButton(component));
+    });
 
     const text = await waitForElement(() => component.queryByText('I love Babel'));
     expect(text).toBeFalsy();
@@ -105,35 +104,25 @@ describe('@modal: component checks', () => {
       <TestModal/>,
     );
 
-    const toggleButton = component.getByTestId('@modal/toggle-button');
-    fireEvent.press(toggleButton);
-
-    const changeTextButton = await waitForElement(() => component.getByTestId('@modal/change-text-button'));
-    fireEvent.press(changeTextButton);
+    fireEvent.press(touchables.findToggleButton(component));
+    await waitForElement(() => {
+      fireEvent.press(touchables.findChangeTextButton(component));
+    });
 
     const text = await waitForElement(() => component.queryByText('I love Jest'));
-
     expect(text).toBeTruthy();
   });
 
   it('should call onBackdropPress', async () => {
     const onBackdropPress = jest.fn();
-
     const component = render(
       <TestModal onBackdropPress={onBackdropPress}/>,
     );
 
-    const toggleButton = component.getByTestId('@modal/toggle-button');
-    fireEvent.press(toggleButton);
-
-    /*
-     * In this test:
-     * [0] for @modal/toggle-button,
-     * [1] for backdrop
-     * [2] for @modal/change-text-button
-     */
-    const backdrop = await waitForElement(() => component.getAllByType(TouchableOpacity)[1]);
-    fireEvent.press(backdrop);
+    fireEvent.press(touchables.findToggleButton(component));
+    await waitForElement(() => {
+      fireEvent.press(touchables.findBackdropTouchable(component));
+    });
 
     expect(onBackdropPress).toBeCalled();
   });
@@ -143,10 +132,8 @@ describe('@modal: component checks', () => {
       <TestModal backdropStyle={{ backgroundColor: 'red' }}/>,
     );
 
-    const toggleButton = component.getByTestId('@modal/toggle-button');
-    fireEvent.press(toggleButton);
-
-    const backdrop = await waitForElement(() => component.getAllByType(TouchableOpacity)[1]);
+    fireEvent.press(touchables.findToggleButton(component));
+    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
   });

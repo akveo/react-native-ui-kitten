@@ -26,8 +26,6 @@ import {
   MenuItemProps,
 } from './menuItem.component';
 
-jest.useFakeTimers();
-
 describe('@menu-item: component checks', () => {
 
   const TestMenuItem = (props?: MenuItemProps) => (
@@ -43,19 +41,15 @@ describe('@menu-item: component checks', () => {
       <TestMenuItem title='I love Babel'/>,
     );
 
-    const title = component.getByText('I love Babel');
-
-    expect(title).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to title prop', () => {
     const component = render(
-      <TestMenuItem title={props => <Text {...props}>Title as Component</Text>}/>,
+      <TestMenuItem title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const titleAsComponent = component.getByText('Title as Component');
-
-    expect(titleAsComponent).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
 
@@ -81,7 +75,7 @@ describe('@menu-item: component checks', () => {
       />,
     );
 
-    const [accessoryLeft, accessoryRight] = component.getAllByType(Image);
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
 
     expect(accessoryLeft).toBeTruthy();
     expect(accessoryRight).toBeTruthy();
@@ -98,8 +92,8 @@ describe('@menu-item: component checks', () => {
       </TestMenuItem>,
     );
 
-    const nestedItem1 = component.getByText('Nested Item 1');
-    const nestedItem2 = component.getByText('Nested Item 2');
+    const nestedItem1 = component.queryByText('Nested Item 1');
+    const nestedItem2 = component.queryByText('Nested Item 2');
 
     expect(nestedItem1).toBeTruthy();
     expect(nestedItem2).toBeTruthy();
@@ -107,37 +101,31 @@ describe('@menu-item: component checks', () => {
 
   it('should call onPress', () => {
     const onPress = jest.fn();
-
     const component = render(
       <TestMenuItem onPress={onPress}/>,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onPress).toHaveBeenCalled();
   });
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
-
     const component = render(
       <TestMenuItem onPressIn={onPressIn}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
-
     const component = render(
       <TestMenuItem onPressOut={onPressOut}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 
@@ -161,8 +149,7 @@ describe('@menu: component checks', () => {
       <TestMenu/>,
     );
 
-    const items = component.getAllByType(MenuItem);
-    expect(items.length).toEqual(2);
+    expect(component.queryAllByType(MenuItem).length).toEqual(2);
   });
 });
 

@@ -34,8 +34,6 @@ describe('@layout: component checks', () => {
       </TestLayout>,
     );
 
-    const children = component.getByText('I love Babel');
-
-    expect(children).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 });

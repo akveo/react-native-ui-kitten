@@ -35,7 +35,6 @@ describe('@checkbox component checks', () => {
 
   it('should request checking', () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestCheckBox
         checked={false}
@@ -43,14 +42,12 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onCheckedChange).toBeCalledWith(true, false);
   });
 
   it('should request unchecking', () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestCheckBox
         checked={true}
@@ -58,14 +55,12 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onCheckedChange).toBeCalledWith(false, false);
   });
 
   it('should request clearing indeterminate and checking', () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestCheckBox
         checked={false}
@@ -74,14 +69,12 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onCheckedChange).toBeCalledWith(true, false);
   });
 
   it('should request clearing indeterminate and unchecking', () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestCheckBox
         checked={true}
@@ -90,8 +83,7 @@ describe('@checkbox component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onCheckedChange).toBeCalledWith(false, false);
   });
 
@@ -100,7 +92,7 @@ describe('@checkbox component checks', () => {
       <TestCheckBox text='I love Babel'/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render text as component', () => {
@@ -108,30 +100,26 @@ describe('@checkbox component checks', () => {
       <TestCheckBox text={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
-
     const component = render(
       <TestCheckBox onPressIn={onPressIn}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
-
     const component = render(
       <TestCheckBox onPressOut={onPressOut}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 

@@ -73,7 +73,7 @@ describe('@range-calendar: component checks', () => {
       <TestRangeCalendar onSelect={onSelect}/>,
     );
 
-    fireEvent.press(component.getAllByText('5')[0]);
+    fireEvent.press(component.queryAllByText('5')[0]);
   });
 
   it('should call onSelect with start and end dates if start date passed to props', () => {
@@ -91,7 +91,7 @@ describe('@range-calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getAllByText('6')[0]);
+    fireEvent.press(component.queryAllByText('6')[0]);
   });
 
   it('should call onSelect only with start date if start and end dates passed to props', () => {
@@ -114,6 +114,6 @@ describe('@range-calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getAllByText('5')[0]);
+    fireEvent.press(component.queryAllByText('5')[0]);
   });
 });

@@ -35,7 +35,6 @@ describe('@radio: component checks', () => {
 
   it('should request checking', () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestRadio
         checked={false}
@@ -43,14 +42,12 @@ describe('@radio: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onCheckedChange).toBeCalledWith(true);
   });
 
   it('should request unchecking', () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestRadio
         checked={true}
@@ -58,8 +55,7 @@ describe('@radio: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onCheckedChange).toBeCalledWith(false);
   });
 
@@ -68,9 +64,7 @@ describe('@radio: component checks', () => {
       <TestRadio text='I love Babel'/>,
     );
 
-    const text = component.getByText('I love Babel');
-
-    expect(text).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render text as component', () => {
@@ -78,32 +72,26 @@ describe('@radio: component checks', () => {
       <TestRadio text={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const text = component.getByText('I love Babel');
-
-    expect(text).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
-
     const component = render(
       <TestRadio onPressIn={onPressIn}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
-
     const component = render(
       <TestRadio onPressOut={onPressOut}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 

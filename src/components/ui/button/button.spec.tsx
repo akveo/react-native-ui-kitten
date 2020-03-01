@@ -40,9 +40,7 @@ describe('@button: component checks', () => {
       <TestButton>I love Babel</TestButton>,
     );
 
-    const text = component.getByText('I love Babel');
-
-    expect(text).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to children', () => {
@@ -52,9 +50,7 @@ describe('@button: component checks', () => {
       </TestButton>,
     );
 
-    const textAsComponent = component.getByText('I love Babel');
-
-    expect(textAsComponent).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render components passed to accessoryLeft or accessoryRight props', () => {
@@ -79,7 +75,7 @@ describe('@button: component checks', () => {
       />,
     );
 
-    const [accessoryLeft, accessoryRight] = component.getAllByType(Image);
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
 
     expect(accessoryLeft).toBeTruthy();
     expect(accessoryRight).toBeTruthy();
@@ -95,8 +91,7 @@ describe('@button: component checks', () => {
       <TestButton onPress={onPress}/>,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onPress).toBeCalled();
   });
 
@@ -107,8 +102,7 @@ describe('@button: component checks', () => {
       <TestButton onPressIn={onPressIn}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
@@ -119,8 +113,7 @@ describe('@button: component checks', () => {
       <TestButton onPressOut={onPressOut}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 

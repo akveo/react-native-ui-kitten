@@ -40,8 +40,7 @@ describe('@card: component checks', () => {
       </TestCard>,
     );
 
-    const body = component.getByText('I love Babel');
-    expect(body).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to header prop', () => {
@@ -49,8 +48,7 @@ describe('@card: component checks', () => {
       <TestCard header={props => <Text {...props}>Test Card Header</Text>}/>,
     );
 
-    const header = component.getByText('Test Card Header');
-    expect(header).toBeTruthy();
+    expect(component.queryByText('Test Card Header')).toBeTruthy();
   });
 
   it('should render component passed to footer prop', () => {
@@ -58,42 +56,36 @@ describe('@card: component checks', () => {
       <TestCard footer={props => <Text {...props}>Test Card Footer</Text>}/>,
     );
 
-    const footer = component.getByText('Test Card Footer');
-    expect(footer).toBeTruthy();
+    expect(component.queryByText('Test Card Footer')).toBeTruthy();
   });
 
   it('should call onPress', () => {
     const onPress = jest.fn();
-
     const component = render(
       <TestCard onPress={onPress}/>,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onPress).toBeCalled();
   });
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
-
     const component = render(
       <TestCard onPressIn={onPressIn}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
-
     const component = render(
       <TestCard onPressOut={onPressOut}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 });

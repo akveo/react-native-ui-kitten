@@ -6,10 +6,7 @@
 
 import React from 'react';
 import { Text } from 'react-native';
-import {
-  render,
-  RenderAPI,
-} from 'react-native-testing-library';
+import { render } from 'react-native-testing-library';
 import {
   ViewPager,
   ViewPagerProps,
@@ -29,13 +26,12 @@ describe('@view-pager: component checks', () => {
       </TestViewPager>,
     );
 
-    expect(component.getByText('Tab 0')).toBeTruthy();
-    expect(component.getByText('Tab 1')).toBeTruthy();
+    expect(component.queryByText('Tab 0')).toBeTruthy();
+    expect(component.queryByText('Tab 1')).toBeTruthy();
   });
 
   it('should call shouldLoadComponent for each child', () => {
     const shouldLoadComponent = jest.fn();
-
     render(
       <TestViewPager shouldLoadComponent={shouldLoadComponent}>
         <Text>Tab 0</Text>
@@ -47,8 +43,7 @@ describe('@view-pager: component checks', () => {
   });
 
   it('should not render child if disabled by shouldLoadComponent', () => {
-
-    const component: RenderAPI = render(
+    const component = render(
       <TestViewPager shouldLoadComponent={index => index !== 1}>
         <Text>Tab 0</Text>
         <Text>Tab 1</Text>

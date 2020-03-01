@@ -44,8 +44,7 @@ describe('@drawer-item: component checks', () => {
       <TestDrawerItem title='I love Babel'/>,
     );
 
-    const title = component.getByText('I love Babel');
-    expect(title).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to title prop', () => {
@@ -53,8 +52,7 @@ describe('@drawer-item: component checks', () => {
       <TestDrawerItem title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const titleAsComponent = component.getByText('I love Babel');
-    expect(titleAsComponent).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render components passed to accessoryLeft or accessoryRight props', () => {
@@ -79,7 +77,7 @@ describe('@drawer-item: component checks', () => {
       />,
     );
 
-    const [accessoryLeft, accessoryRight] = component.getAllByType(Image);
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
 
     expect(accessoryLeft).toBeTruthy();
     expect(accessoryRight).toBeTruthy();
@@ -90,13 +88,11 @@ describe('@drawer-item: component checks', () => {
 
   it('should call onPress', () => {
     const onPress = jest.fn();
-
     const component = render(
       <TestDrawerItem onPress={onPress}/>,
     );
 
-    const touchable = component.getByType(TouchableOpacity);
-    fireEvent.press(touchable);
+    fireEvent.press(component.queryByType(TouchableOpacity));
 
     expect(onPress).toHaveBeenCalled();
   });
@@ -120,7 +116,7 @@ describe('@drawer: component checks', () => {
       <TestDrawer/>,
     );
 
-    const items = component.getAllByType(DrawerItem);
+    const items = component.queryAllByType(DrawerItem);
     expect(items.length).toEqual(2);
   });
 
@@ -129,8 +125,7 @@ describe('@drawer: component checks', () => {
       <TestDrawer header={() => <Text>I love Babel</Text>}/>,
     );
 
-    const header = component.getByText('I love Babel');
-    expect(header).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to footer prop', () => {
@@ -138,8 +133,7 @@ describe('@drawer: component checks', () => {
       <TestDrawer footer={() => <Text>I love Babel</Text>}/>,
     );
 
-    const footer = component.getByText('I love Babel');
-    expect(footer).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
 });

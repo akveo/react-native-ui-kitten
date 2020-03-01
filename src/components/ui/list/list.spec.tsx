@@ -42,42 +42,34 @@ describe('@list-item: component checks', () => {
 
   it('should render text passed to title prop', () => {
     const component = render(
-      <TestListItem title='Test List Item Title'/>,
+      <TestListItem title='I love Babel'/>,
     );
 
-    const title = component.getByText('Test List Item Title');
-
-    expect(title).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to title prop', () => {
     const component = render(
-      <TestListItem title={props => <Text {...props}>Title as Component</Text>}/>,
+      <TestListItem title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const titleAsComponent = component.getByText('Title as Component');
-
-    expect(titleAsComponent).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render text passed to description prop', () => {
     const component = render(
-      <TestListItem description='Test List Item Description'/>,
+      <TestListItem description='I love Babel'/>,
     );
 
-    const description = component.getByText('Test List Item Description');
-
-    expect(description).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to description prop', () => {
     const component = render(
-      <TestListItem description={props => <Text {...props}>Description as Component</Text>}/>,
+      <TestListItem description={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const descriptionAsComponent = component.getByText('Description as Component');
-
-    expect(descriptionAsComponent).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render components passed to accessoryLeft or accessoryRight props', () => {
@@ -102,7 +94,7 @@ describe('@list-item: component checks', () => {
       />,
     );
 
-    const [accessoryLeft, accessoryRight] = component.getAllByType(Image);
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
 
     expect(accessoryLeft).toBeTruthy();
     expect(accessoryRight).toBeTruthy();
@@ -113,25 +105,21 @@ describe('@list-item: component checks', () => {
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
-
     const component = render(
       <TestListItem onPressIn={onPressIn}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
     expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
-
     const component = render(
       <TestListItem onPressOut={onPressOut}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toHaveBeenCalled();
   });
 });
@@ -156,14 +144,11 @@ describe('@list: component checks', () => {
       <TestList/>,
     );
 
-    const items = component.getAllByType(ListItem);
-
-    expect(items.length).toEqual(2);
+    expect(component.queryAllByType(ListItem).length).toEqual(2);
   });
 
   it('should call renderItem once per visible item', () => {
     const renderItem = jest.fn();
-
     render(
       <TestList
         data={new Array(11)}
@@ -176,7 +161,6 @@ describe('@list: component checks', () => {
 
   it('should be able to call scrollToEnd with ref', () => {
     const componentRef = React.createRef<ListComponent>();
-
     render(
       <TestList
         ref={componentRef}
@@ -190,7 +174,6 @@ describe('@list: component checks', () => {
 
   it('should be able to call scrollToIndex with ref', () => {
     const componentRef = React.createRef<ListComponent>();
-
     render(
       <TestList ref={componentRef} />,
     );
@@ -201,7 +184,6 @@ describe('@list: component checks', () => {
 
   it('should be able to call scrollToIndex with ref', () => {
     const componentRef = React.createRef<ListComponent>();
-
     render(
       <TestList ref={componentRef} />,
     );

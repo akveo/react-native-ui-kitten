@@ -41,7 +41,7 @@ jest.mock('react-native', () => {
   return ActualReactNative;
 });
 
-describe('@popover: component checks', () => {
+describe('@overflow-menu: component checks', () => {
 
   afterAll(() => {
     jest.clearAllMocks();
@@ -53,11 +53,13 @@ describe('@popover: component checks', () => {
    * [1] for modal backdrop
    */
   const touchables = {
+    findToggleButton: (api: RenderAPI) => api.queryByTestId('@overflow-menu/toggle-button'),
     findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
   };
 
   const TestOverflowMenu = React.forwardRef((props: Partial<OverflowMenuProps>,
                                              ref: React.Ref<OverflowMenuComponent>) => {
+
     const [visible, setVisible] = React.useState(props.visible);
 
     const toggleOverflowMenu = (): void => {
@@ -69,7 +71,7 @@ describe('@popover: component checks', () => {
         <OverflowMenu
           ref={ref}
           visible={visible}
-          anchor={() => <Button testID='@popover/toggle-button' title='' onPress={toggleOverflowMenu}/>}
+          anchor={() => <Button testID='@overflow-menu/toggle-button' title='' onPress={toggleOverflowMenu}/>}
           {...props}>
           <MenuItem title='Option 1'/>
           <MenuItem title='Option 2'/>
@@ -83,7 +85,7 @@ describe('@popover: component checks', () => {
       <TestOverflowMenu/>,
     );
 
-    expect(component.getByTestId('@popover/toggle-button')).toBeTruthy();
+    expect(touchables.findToggleButton(component)).toBeTruthy();
   });
 
   it('should not render content when not visible', async () => {
@@ -92,7 +94,6 @@ describe('@popover: component checks', () => {
     );
 
     const options = await waitForElement(() => component.queryAllByType(MenuItem));
-
     expect(options.length).toEqual(0);
   });
 
@@ -101,9 +102,9 @@ describe('@popover: component checks', () => {
       <TestOverflowMenu visible={true}/>,
     );
 
-    fireEvent.press(component.getByTestId('@popover/toggle-button'));
-    const options = await waitForElement(() => component.queryAllByType(MenuItem));
+    fireEvent.press(touchables.findToggleButton(component));
 
+    const options = await waitForElement(() => component.queryAllByType(MenuItem));
     expect(options.length).toEqual(2);
   });
 
@@ -114,10 +115,11 @@ describe('@popover: component checks', () => {
       <TestOverflowMenu onBackdropPress={onBackdropPress}/>,
     );
 
-    fireEvent.press(component.getByTestId('@popover/toggle-button'));
+    fireEvent.press(touchables.findToggleButton(component));
 
-    const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
-    fireEvent.press(backdrop);
+    await waitForElement(() => {
+      fireEvent.press(touchables.findBackdropTouchable(component));
+    });
 
     expect(onBackdropPress).toBeCalled();
   });
@@ -127,7 +129,7 @@ describe('@popover: component checks', () => {
       <TestOverflowMenu backdropStyle={{ backgroundColor: 'red' }}/>,
     );
 
-    fireEvent.press(component.getByTestId('@popover/toggle-button'));
+    fireEvent.press(touchables.findToggleButton(component));
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
 
     expect(StyleSheet.flatten(backdrop.props.style).backgroundColor).toEqual('red');
@@ -141,8 +143,8 @@ describe('@popover: component checks', () => {
     );
 
     componentRef.current.show();
-    const options = await waitForElement(() => component.queryAllByType(MenuItem));
 
+    const options = await waitForElement(() => component.queryAllByType(MenuItem));
     expect(options.length).toEqual(2);
   });
 
@@ -157,8 +159,8 @@ describe('@popover: component checks', () => {
     await waitForElement(() => null);
 
     componentRef.current.hide();
-    const options = await waitForElement(() => component.queryAllByType(MenuItem));
 
+    const options = await waitForElement(() => component.queryAllByType(MenuItem));
     expect(options.length).toEqual(0);
   });
 

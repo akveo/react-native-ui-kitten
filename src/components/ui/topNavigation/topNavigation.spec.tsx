@@ -51,7 +51,7 @@ describe('@top-navigation-action: component checks', () => {
       <TestTopNavigationAction icon={Icon}/>,
     );
 
-    const image = component.getByType(Image);
+    const image = component.queryByType(Image);
 
     expect(image).toBeTruthy();
     expect(image.props.source).toEqual({ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' });
@@ -59,37 +59,31 @@ describe('@top-navigation-action: component checks', () => {
 
   it('should call onPress', () => {
     const onPress = jest.fn();
-
     const component = render(
       <TestTopNavigationAction onPress={onPress}/>,
     );
 
-    fireEvent.press(component.getByType(TouchableOpacity));
-
+    fireEvent.press(component.queryByType(TouchableOpacity));
     expect(onPress).toBeCalled();
   });
 
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
-
     const component = render(
       <TestTopNavigationAction onPressIn={onPressIn}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressIn');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
     expect(onPressIn).toBeCalled();
   });
 
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
-
     const component = render(
       <TestTopNavigationAction onPressOut={onPressOut}/>,
     );
 
-    fireEvent(component.getByType(TouchableOpacity), 'pressOut');
-
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
   });
 
@@ -110,7 +104,7 @@ describe('@top-navigation: component checks', () => {
       <TestTopNavigation title='I love Babel'/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to title prop', () => {
@@ -118,7 +112,7 @@ describe('@top-navigation: component checks', () => {
       <TestTopNavigation title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render text passed to subtitle prop', () => {
@@ -126,7 +120,7 @@ describe('@top-navigation: component checks', () => {
       <TestTopNavigation subtitle='I love Babel'/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to subtitle prop', () => {
@@ -134,7 +128,7 @@ describe('@top-navigation: component checks', () => {
       <TestTopNavigation subtitle={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to accessoryLeft prop', () => {
@@ -142,7 +136,7 @@ describe('@top-navigation: component checks', () => {
       <TestTopNavigation subtitle={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render component passed to accessoryRight prop', () => {
@@ -150,6 +144,6 @@ describe('@top-navigation: component checks', () => {
       <TestTopNavigation subtitle={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 });

@@ -9,6 +9,7 @@ import { Text } from 'react-native';
 import {
   fireEvent,
   render,
+  RenderAPI,
   waitForElement,
 } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
@@ -33,9 +34,12 @@ describe('@toggle: component checks', () => {
     </ApplicationProvider>
   );
 
+  const touchables = {
+    findRootTouchable: (api: RenderAPI) => api.queryByType(ToggleComponent).children[0] as ReactTestInstance,
+  };
+
   it('should request checking', async () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestToggle
         checked={false}
@@ -43,15 +47,14 @@ describe('@toggle: component checks', () => {
       />,
     );
 
-    const responder = component.getByType(ToggleComponent).children[0];
-    fireEvent(responder as ReactTestInstance, 'responderRelease');
-
-    await waitForElement(() => expect(onCheckedChange).toBeCalledWith(true));
+    fireEvent(touchables.findRootTouchable(component), 'responderRelease');
+    await waitForElement(() => {
+      expect(onCheckedChange).toBeCalledWith(true);
+    });
   });
 
   it('should request unchecking', async () => {
     const onCheckedChange = jest.fn();
-
     const component = render(
       <TestToggle
         checked={true}
@@ -59,10 +62,10 @@ describe('@toggle: component checks', () => {
       />,
     );
 
-    const responder = component.getByType(ToggleComponent).children[0];
-    fireEvent(responder as ReactTestInstance, 'responderRelease');
-
-    await waitForElement(() => expect(onCheckedChange).toBeCalledWith(false));
+    fireEvent(touchables.findRootTouchable(component), 'responderRelease');
+    await waitForElement(() => {
+      expect(onCheckedChange).toBeCalledWith(false);
+    });
   });
 
   it('should render text', () => {
@@ -70,9 +73,7 @@ describe('@toggle: component checks', () => {
       <TestToggle text='I love Babel'/>,
     );
 
-    const text = component.getByText('I love Babel');
-
-    expect(text).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render text as component', () => {
@@ -80,9 +81,7 @@ describe('@toggle: component checks', () => {
       <TestToggle text={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    const text = component.getByText('I love Babel');
-
-    expect(text).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
 });

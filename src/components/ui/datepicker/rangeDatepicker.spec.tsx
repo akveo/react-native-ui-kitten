@@ -26,12 +26,11 @@ import {
   RangeDatepickerComponent,
   RangeDatepickerProps,
 } from './RangeDatepicker.component';
-import { Calendar } from '../calendar/calendar.component';
+import { RangeCalendar } from '../calendar/rangeCalendar.component';
 import {
   CalendarRange,
   CalendarViewModes,
 } from '../calendar/type';
-import { RangeCalendar } from '..';
 
 jest.mock('react-native', () => {
   const ActualReactNative = jest.requireActual('react-native');
@@ -52,7 +51,8 @@ describe('@range-datepicker: component checks', () => {
     jest.clearAllMocks();
   });
 
-  const TestRangeDatepicker = React.forwardRef((props: Partial<RangeDatepickerProps>, ref: React.Ref<RangeDatepickerComponent>) => {
+  const TestRangeDatepicker = React.forwardRef((props: Partial<RangeDatepickerProps>,
+                                                ref: React.Ref<RangeDatepickerComponent>) => {
     const [range, setRange] = React.useState(props.range || {});
 
     const onSelect = (nextRange: CalendarRange<Date>): void => {
@@ -98,8 +98,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const calendar = await waitForElement(() => component.getByType(RangeCalendar));
-
+    const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
     expect(calendar).toBeTruthy();
   });
 
@@ -108,7 +107,7 @@ describe('@range-datepicker: component checks', () => {
       <TestRangeDatepicker label='I love Babel'/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render label as component', async () => {
@@ -116,7 +115,7 @@ describe('@range-datepicker: component checks', () => {
       <TestRangeDatepicker label={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render caption as string', async () => {
@@ -124,7 +123,7 @@ describe('@range-datepicker: component checks', () => {
       <TestRangeDatepicker caption='I love Babel'/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render caption as component', async () => {
@@ -132,7 +131,7 @@ describe('@range-datepicker: component checks', () => {
       <TestRangeDatepicker caption={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
-    expect(component.getByText('I love Babel')).toBeTruthy();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
   it('should render captionIcon', async () => {
@@ -140,7 +139,7 @@ describe('@range-datepicker: component checks', () => {
       <TestRangeDatepicker captionIcon={props => <View {...props} testID='caption icon'/>}/>,
     );
 
-    expect(component.getByTestId('caption icon')).toBeTruthy();
+    expect(component.queryByTestId('caption icon')).toBeTruthy();
   });
 
   it('should render component passed to accessoryLeft prop', async () => {
@@ -148,7 +147,7 @@ describe('@range-datepicker: component checks', () => {
       <TestRangeDatepicker accessoryLeft={props => <View {...props} testID='accessory left'/>}/>,
     );
 
-    expect(component.getByTestId('accessory left')).toBeTruthy();
+    expect(component.queryByTestId('accessory left')).toBeTruthy();
   });
 
   it('should render component passed to accessoryRight prop', async () => {
@@ -156,7 +155,7 @@ describe('@range-datepicker: component checks', () => {
       <TestRangeDatepicker accessoryRight={props => <View {...props} testID='accessory right'/>}/>,
     );
 
-    expect(component.getByTestId('accessory right')).toBeTruthy();
+    expect(component.queryByTestId('accessory right')).toBeTruthy();
   });
 
   it('should call onSelect only with start date', async () => {
@@ -173,8 +172,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const dateTouchable = await waitForElement(() => component.getAllByText('5')[0]);
-
+    const dateTouchable = await waitForElement(() => component.queryAllByText('5')[0]);
     fireEvent.press(dateTouchable);
   });
 
@@ -195,8 +193,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const dateTouchable = await waitForElement(() => component.getAllByText('6')[0]);
-
+    const dateTouchable = await waitForElement(() => component.queryAllByText('6')[0]);
     fireEvent.press(dateTouchable);
   });
 
@@ -222,8 +219,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const dateTouchable = await waitForElement(() => component.getAllByText('5')[0]);
-
+    const dateTouchable = await waitForElement(() => component.queryAllByText('5')[0]);
     fireEvent.press(dateTouchable);
   });
 
@@ -234,8 +230,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const cells = await waitForElement(() => component.getAllByTestId('@range-datepicker/cell'));
-
+    const cells = await waitForElement(() => component.queryAllByTestId('@range-datepicker/cell'));
     expect(cells.length).not.toEqual(0);
   });
 
@@ -249,8 +244,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(component.queryAllByType(TouchableOpacity)[0]);
 
-    const cells = await waitForElement(() => component.getAllByTestId('@range-datepicker/cell'));
-
+    const cells = await waitForElement(() => component.queryAllByTestId('@range-datepicker/cell'));
     expect(cells.length).not.toEqual(0);
   });
 
@@ -264,8 +258,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const cells = await waitForElement(() => component.getAllByTestId('@range-datepicker/cell'));
-
+    const cells = await waitForElement(() => component.queryAllByTestId('@range-datepicker/cell'));
     expect(cells.length).not.toEqual(0);
   });
 
@@ -280,13 +273,11 @@ describe('@range-datepicker: component checks', () => {
     fireEvent.press(backdrop);
 
     const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
-
     expect(calendar).toBeFalsy();
   });
 
   it('should call onFocus when calendar becomes visible', async () => {
     const onFocus = jest.fn();
-
     const component = render(
       <TestRangeDatepicker onFocus={onFocus}/>,
     );
@@ -294,13 +285,11 @@ describe('@range-datepicker: component checks', () => {
     fireEvent.press(touchables.findInputTouchable(component));
 
     await waitForElement(() => null);
-
     expect(onFocus).toBeCalled();
   });
 
   it('should call onBlur when calendar becomes invisible', async () => {
     const onBlur = jest.fn();
-
     const component = render(
       <TestRangeDatepicker onBlur={onBlur}/>,
     );
@@ -315,20 +304,18 @@ describe('@range-datepicker: component checks', () => {
 
   it('should show calendar by calling `show` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
-
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
 
     componentRef.current.show();
-    const calendar = await waitForElement(() => component.getByType(RangeCalendar));
+    const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
 
     expect(calendar).toBeTruthy();
   });
 
   it('should hide calendar by calling `hide` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
-
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -344,20 +331,18 @@ describe('@range-datepicker: component checks', () => {
 
   it('should show calendar by calling `focus` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
-
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
 
     componentRef.current.focus();
-    const calendar = await waitForElement(() => component.getByType(RangeCalendar));
+    const calendar = await waitForElement(() => component.queryByType(RangeCalendar));
 
     expect(calendar).toBeTruthy();
   });
 
   it('should hide calendar by calling `blur` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
-
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -373,7 +358,6 @@ describe('@range-datepicker: component checks', () => {
 
   it('should return false if calendar not visible by calling `isFocused` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
-
     render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -383,7 +367,6 @@ describe('@range-datepicker: component checks', () => {
 
   it('should return true if calendar visible by calling `isFocused` with ref', async () => {
     const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
-
     render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -413,37 +396,31 @@ describe('@range-datepicker: component checks', () => {
 
   it('should call onPress', async () => {
     const onPress = jest.fn();
-
     const component = render(
       <TestRangeDatepicker onPress={onPress}/>,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
-
     expect(onPress).toBeCalled();
   });
 
   it('should call onPressIn', async () => {
     const onPressIn = jest.fn();
-
     const component = render(
       <TestRangeDatepicker onPressIn={onPressIn}/>,
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressIn');
-
     expect(onPressIn).toBeCalled();
   });
 
   it('should call onPressOut', async () => {
     const onPressOut = jest.fn();
-
     const component = render(
       <TestRangeDatepicker onPressOut={onPressOut}/>,
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressOut');
-
     expect(onPressOut).toBeCalled();
   });
 

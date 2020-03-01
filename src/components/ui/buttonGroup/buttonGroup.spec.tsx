@@ -36,9 +36,7 @@ describe('@button-group: component checks', () => {
       <TestButtonGroup/>,
     );
 
-    const buttons = component.getAllByType(Button);
-
-    expect(buttons.length).toEqual(2);
+    expect(component.queryAllByType(Button).length).toEqual(2);
   });
 
   it('should render outline buttons', () => {

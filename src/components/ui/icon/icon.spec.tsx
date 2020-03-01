@@ -72,7 +72,7 @@ describe('@icon: component checks', () => {
       <Icon name='home'/>,
     );
 
-    expect(component.getByTestId('default')).toBeTruthy();
+    expect(component.queryByTestId('default')).toBeTruthy();
   });
 
   it('should render icon from additional pack', () => {
@@ -83,7 +83,7 @@ describe('@icon: component checks', () => {
       />,
     );
 
-    expect(component.getByTestId('additional')).toBeTruthy();
+    expect(component.queryByTestId('additional')).toBeTruthy();
   });
 
   it('should pass props to an icon component', () => {
@@ -91,7 +91,7 @@ describe('@icon: component checks', () => {
       <Icon name='home' testID='custom-test-id'/>,
     );
 
-    expect(component.getByTestId('custom-test-id')).toBeTruthy();
+    expect(component.queryByTestId('custom-test-id')).toBeTruthy();
   });
 
   it('should throw while rendering not registered icon', () => {

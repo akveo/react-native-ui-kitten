@@ -26,13 +26,18 @@ describe('@radio-group: component checks', () => {
   const TestRadioGroup = (props?: Partial<RadioGroupProps>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
+    const onCheckedChange = (index: number): void => {
+      setSelectedIndex(index);
+      props.onChange && props.onChange(index);
+    };
+
     return (
       <ApplicationProvider
         mapping={mapping}
         theme={light}>
         <RadioGroup
           selectedIndex={selectedIndex}
-          onChange={setSelectedIndex}>
+          onChange={onCheckedChange}>
           <Radio text='Option 0'/>
           <Radio text='Option 1'/>
         </RadioGroup>
@@ -45,9 +50,7 @@ describe('@radio-group: component checks', () => {
       <TestRadioGroup/>,
     );
 
-    const radios = component.getAllByType(Radio);
-
-    expect(radios.length).toEqual(2);
+    expect(component.queryAllByType(Radio).length).toEqual(2);
   });
 
   it('should set radio selected by passing selectedIndex prop', () => {
@@ -55,9 +58,7 @@ describe('@radio-group: component checks', () => {
       <TestRadioGroup selectedIndex={1}/>,
     );
 
-    const radios = component.getAllByType(Radio);
-
-    expect(radios[1].props.checked).toEqual(true);
+    expect(component.queryAllByType(Radio)[1].props.checked).toEqual(true);
   });
 
   it('should set radio selected by pressing it', () => {
@@ -65,12 +66,18 @@ describe('@radio-group: component checks', () => {
       <TestRadioGroup selectedIndex={1}/>,
     );
 
-    const touchables = component.getAllByType(TouchableOpacity);
-    fireEvent.press(touchables[0]);
+    fireEvent.press(component.queryAllByType(TouchableOpacity)[0]);
+    expect(component.queryAllByType(Radio)[0].props.checked).toEqual(true);
+  });
 
-    const radios = component.getAllByType(Radio);
+  it('should request selecting', () => {
+    const onChange = jest.fn();
+    const component = render(
+      <TestRadioGroup onChange={onChange}/>,
+    );
 
-    expect(radios[0].props.checked).toEqual(true);
+    fireEvent.press(component.queryAllByType(TouchableOpacity)[1]);
+    expect(onChange).toHaveBeenCalledWith(1);
   });
 
 });
