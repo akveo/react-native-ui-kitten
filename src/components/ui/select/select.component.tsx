@@ -425,7 +425,7 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
 
     return (
       <Text
-        style={[styles.text, textStyle, placeholderStyle]}
+        style={[styles.text, placeholderStyle, textStyle]}
         numberOfLines={1}
         ellipsizeMode='tail'>
         {value || this.props.placeholder}
