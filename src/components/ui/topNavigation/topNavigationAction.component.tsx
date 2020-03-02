@@ -8,21 +8,16 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageProps,
-  ImageStyle,
-  Insets,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  TouchableOpacityProps,
+  NativeSyntheticEvent,
+  TargetedEvent,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   RenderProp,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
 } from '../../devsupport';
 import {
   Interaction,
@@ -35,7 +30,7 @@ type TopNavigationActionStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | 'control' | string;
 }>;
 
-export interface TopNavigationActionProps extends TouchableOpacityProps, TopNavigationActionStyledProps {
+export interface TopNavigationActionProps extends TouchableWebProps, TopNavigationActionStyledProps {
   icon?: RenderProp<Partial<ImageProps>>;
 }
 
@@ -63,27 +58,40 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @example TopNavigationActionInlineStyling
  */
-class TopNavigationActionComponent extends React.Component<TopNavigationActionProps>
-  implements WebEventResponderCallbacks {
+class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 
   static styledComponentName: string = 'TopNavigationAction';
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  public onMouseEnter = (): void => {
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  public onMouseLeave = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(e);
+    }
   };
 
-  public onFocus = (): void => {
+  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
   };
 
-  public onBlur = (): void => {
+  public onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -128,31 +136,18 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
     };
   };
 
-  private createHitSlopInsets = (iconStyle: StyleProp<ImageStyle>): Insets => {
-    const flatStyle: ImageStyle = StyleSheet.flatten(iconStyle);
-
-    // @ts-ignore: `width` is restricted to be a number
-    const value: number = 40 - flatStyle.width;
-
-    return {
-      left: value,
-      top: value,
-      right: value,
-      bottom: value,
-    };
-  };
-
-  public render(): React.ReactNode {
+  public render(): TouchableWebElement {
     const { eva, style, icon, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
-    const hitSlopInsets: Insets = this.createHitSlopInsets(evaStyle.icon);
 
     return (
-      <TouchableWithoutFeedback
-        hitSlop={hitSlopInsets}
+      <TouchableWeb
         {...touchableProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[evaStyle.container, webStyles.container, style]}
+        style={[evaStyle.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
@@ -160,16 +155,9 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
           style={evaStyle.icon}
           component={icon}
         />
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
 
 export const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);

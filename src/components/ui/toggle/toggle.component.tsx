@@ -9,13 +9,13 @@ import {
   Animated,
   Easing,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PanResponder,
   PanResponderCallbacks,
   PanResponderGestureState,
   PanResponderInstance,
-  Platform,
   StyleSheet,
-  TouchableOpacityProps,
+  TargetedEvent,
   View,
   ViewProps,
 } from 'react-native';
@@ -24,9 +24,8 @@ import {
   FalsyText,
   RenderProp,
   RTLService,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -41,7 +40,7 @@ type ToggleStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
 }>;
 
-export interface ToggleProps extends TouchableOpacityProps, ToggleStyledProps {
+export interface ToggleProps extends TouchableWebProps, ToggleStyledProps {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   text?: RenderProp<TextProps> | React.ReactText;
@@ -88,7 +87,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   private thumbTranslateAnimation: Animated.Value;
   private ellipseScaleAnimation: Animated.Value;
   private thumbTranslateAnimationActive: boolean;
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   constructor(props: ToggleProps) {
     super(props);
@@ -102,30 +100,6 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
 
     this.panResponder = PanResponder.create(this);
   }
-
-  public onMouseEnter = (): void => {
-    if (!this.props.disabled) {
-      this.props.eva.dispatch([Interaction.HOVER]);
-    }
-  };
-
-  public onMouseLeave = (): void => {
-    if (!this.props.disabled) {
-      this.props.eva.dispatch([]);
-    }
-  };
-
-  public onFocus = (): void => {
-    if (!this.props.disabled) {
-      this.props.eva.dispatch([Interaction.FOCUSED]);
-    }
-  };
-
-  public onBlur = (): void => {
-    if (!this.props.disabled) {
-      this.props.eva.dispatch([]);
-    }
-  };
 
   // PanResponderCallbacks
 
@@ -149,14 +123,14 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     return false;
   };
 
-  public onPanResponderGrant = (): void => {
+  public onPanResponderGrant = (e: GestureResponderEvent): void => {
     const { checked, disabled, eva } = this.props;
 
     if (disabled) {
       return;
     }
 
-    this.onPressIn();
+    this.onPressIn(e);
 
     if (this.thumbTranslateAnimationActive) {
       this.thumbTranslateAnimationActive = false;
@@ -184,15 +158,71 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }
 
     this.animateThumbWidth(eva.style.thumbWidth);
-    this.onPressOut();
+    this.onPressOut(e);
   };
 
-  private onPressIn = (): void => {
-    this.props.eva.dispatch([Interaction.ACTIVE]);
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  private onPressOut = (): void => {
+  public onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(e);
+    }
+  };
+
+  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
+  };
+
+  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([]);
+
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
+  };
+
+  private onPressIn = (e: GestureResponderEvent): void => {
+    this.props.eva.dispatch([Interaction.ACTIVE]);
+
+    if (this.props.onPressIn) {
+      this.props.onPressIn(e);
+    }
+  };
+
+  private onPressOut = (e: GestureResponderEvent): void => {
+    this.props.eva.dispatch([]);
+
+    if (this.props.onPressOut) {
+      this.props.onPressOut(e);
+    }
   };
 
   private onPress = (): void => {
@@ -330,10 +360,13 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       <View
         {...this.panResponder.panHandlers}
         style={[styles.container, style]}>
-        <TouchableWithoutFeedback
+        <TouchableWeb
           {...touchableProps}
-          {...this.webEventResponder.eventHandlers}
-          style={[webStyles.toggleContainer, styles.toggleContainer]}>
+          style={styles.toggleContainer}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}>
           <View style={[evaStyle.highlight, styles.highlight]}/>
           <Animated.View style={[evaStyle.ellipseContainer, styles.ellipseContainer]}>
             <Animated.View style={[evaStyle.ellipse, styles.ellipse]}/>
@@ -341,7 +374,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
               <CheckMark {...evaStyle.icon} />
             </Animated.View>
           </Animated.View>
-        </TouchableWithoutFeedback>
+        </TouchableWeb>
         <FalsyText
           style={evaStyle.text}
           component={text}
@@ -377,13 +410,6 @@ const styles = StyleSheet.create({
   thumb: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-});
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  toggleContainer: {
-    // @ts-ignore
-    outlineWidth: 0,
   },
 });
 

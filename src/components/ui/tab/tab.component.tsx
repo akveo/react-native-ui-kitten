@@ -7,19 +7,18 @@
 import React from 'react';
 import {
   ImageProps,
-  Platform,
+  NativeSyntheticEvent,
   StyleSheet,
-  TouchableOpacityProps,
+  TargetedEvent,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
   RenderProp,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
 } from '../../devsupport';
 import {
   Interaction,
@@ -33,7 +32,7 @@ type TabStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
 }>;
 
-export interface TabProps extends TouchableOpacityProps, TabStyledProps {
+export interface TabProps extends TouchableWebProps, TabStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   icon?: RenderProp<Partial<ImageProps>>;
   children?: React.ReactElement;
@@ -70,7 +69,7 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @example TabInlineStyling
  */
-export class TabComponent extends React.Component<TabProps> implements WebEventResponderCallbacks {
+export class TabComponent extends React.Component<TabProps> {
 
   static styledComponentName: string = 'Tab';
 
@@ -78,14 +77,20 @@ export class TabComponent extends React.Component<TabProps> implements WebEventR
     selected: false,
   };
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  public onMouseEnter = (): void => {
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  public onMouseLeave = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(e);
+    }
   };
 
   private onPress = (): void => {
@@ -128,15 +133,16 @@ export class TabComponent extends React.Component<TabProps> implements WebEventR
     };
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
+  public render(): TouchableWebElement {
     const { eva, style, title, icon, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...touchableProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[evaStyle.container, styles.container, webStyles.container, style]}
+        style={[evaStyle.container, styles.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
         onPress={this.onPress}>
         <FalsyFC
           style={evaStyle.icon}
@@ -146,7 +152,7 @@ export class TabComponent extends React.Component<TabProps> implements WebEventR
           style={evaStyle.title}
           component={title}
         />
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }
@@ -155,13 +161,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-});
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
   },
 });
 

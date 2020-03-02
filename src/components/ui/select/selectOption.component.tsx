@@ -22,6 +22,7 @@ import {
   StyleType,
 } from '../../theme';
 import {
+  TouchableWeb,
   TouchableWithoutFeedback,
   WebEventResponder,
   WebEventResponderCallbacks,
@@ -55,8 +56,6 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> implement
   static styledComponentName: string = 'SelectOption';
 
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  // WebEventResponderCallbacks
 
   public onMouseEnter = (): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
@@ -122,9 +121,8 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> implement
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...restProps}
-        {...this.webEventResponder.eventHandlers}
         style={[styles.container, evaStyle.container, style]}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
@@ -132,7 +130,7 @@ class SelectOptionComponent extends React.Component<SelectOptionProps> implement
         <Text style={[evaStyle.text, item.textStyle]}>
           {item.text}
         </Text>
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   };
 

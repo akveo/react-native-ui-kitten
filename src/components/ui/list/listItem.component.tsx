@@ -10,7 +10,6 @@ import {
   ImageProps,
   Platform,
   StyleSheet,
-  TouchableOpacityProps,
   View,
   ViewProps,
 } from 'react-native';
@@ -19,7 +18,9 @@ import {
   FalsyFC,
   FalsyText,
   RenderProp,
-  TouchableWithoutFeedback,
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
 } from '../../devsupport';
 import {
   Interaction,
@@ -33,7 +34,7 @@ type ListItemStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
 }>;
 
-export interface ListItemProps extends TouchableOpacityProps, ListItemStyledProps {
+export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   description?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
@@ -185,7 +186,7 @@ export class ListItemComponent extends React.Component<ListItemProps & { index: 
     );
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
+  public render(): TouchableWebElement {
     const {
       eva,
       style,
@@ -200,7 +201,7 @@ export class ListItemComponent extends React.Component<ListItemProps & { index: 
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...touchableProps}
         style={[evaStyle.container, styles.container, webStyles.container, style]}
         onPressIn={this.onPressIn}
@@ -211,7 +212,7 @@ export class ListItemComponent extends React.Component<ListItemProps & { index: 
           accessoryLeft,
           accessoryRight,
         }, evaStyle)}
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }

@@ -7,21 +7,18 @@
 import React from 'react';
 import {
   GestureResponderEvent,
-  Insets,
-  Platform,
-  StyleProp,
+  NativeSyntheticEvent,
   StyleSheet,
-  TouchableOpacityProps,
+  TargetedEvent,
   View,
-  ViewStyle,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   FalsyText,
   RenderProp,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
 } from '../../devsupport';
 import {
   Interaction,
@@ -35,7 +32,7 @@ type RadioStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
 }>;
 
-export interface RadioProps extends TouchableOpacityProps, RadioStyledProps {
+export interface RadioProps extends TouchableWebProps, RadioStyledProps {
   checked?: boolean;
   onChange?: (selected: boolean) => void;
   text?: RenderProp<TextProps> | React.ReactText;
@@ -77,22 +74,36 @@ export class RadioComponent extends React.Component<RadioProps> {
 
   static styledComponentName: string = 'Radio';
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  public onMouseEnter = (): void => {
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  public onMouseLeave = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(e);
+    }
   };
 
-  public onFocus = (): void => {
+  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
   };
 
-  public onBlur = (): void => {
+  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
   };
 
   private onPress = (): void => {
@@ -161,40 +172,24 @@ export class RadioComponent extends React.Component<RadioProps> {
     };
   };
 
-  private createHitSlopInsets = (style: StyleProp<ViewStyle>): Insets => {
-    const flatStyle: ViewStyle = StyleSheet.flatten(style);
-
-    // @ts-ignore `width` is restricted to be a number
-    const value: number = 40 - flatStyle.width;
-
-    return {
-      left: value,
-      top: value,
-      right: value,
-      bottom: value,
-    };
-  };
-
-  public render(): React.ReactElement<TouchableOpacityProps> {
-    const { eva, style, text, disabled, ...touchableProps } = this.props;
+  public render(): TouchableWebElement {
+    const { eva, style, text, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
-    const selectContainerStyle: StyleProp<ViewStyle> = [evaStyle.selectContainer, styles.selectContainer];
-    const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
-
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...touchableProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[styles.container, webStyles.container, style]}
-        disabled={disabled}
-        hitSlop={hitSlopInsets}
+        style={[styles.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <View style={styles.highlightContainer}>
           <View style={[evaStyle.highlight, styles.highlight]}/>
-          <View style={selectContainerStyle}>
+          <View style={[evaStyle.selectContainer, styles.selectContainer]}>
             <View style={evaStyle.icon}/>
           </View>
         </View>
@@ -202,7 +197,7 @@ export class RadioComponent extends React.Component<RadioProps> {
           style={evaStyle.text}
           component={text}
         />
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }
@@ -224,13 +219,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
-  },
-});
-
 
 export const Radio = styled<RadioProps>(RadioComponent);

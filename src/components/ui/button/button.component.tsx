@@ -8,19 +8,18 @@ import React from 'react';
 import {
   GestureResponderEvent,
   ImageProps,
-  Platform,
+  NativeSyntheticEvent,
   StyleSheet,
-  TouchableOpacityProps,
+  TargetedEvent,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
   RenderProp,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
 } from '../../devsupport';
 import {
   Interaction,
@@ -34,7 +33,7 @@ type ButtonStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'filled' | 'outline' | 'ghost' | string;
 }>;
 
-export interface ButtonProps extends TouchableOpacityProps, ButtonStyledProps {
+export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
@@ -92,33 +91,39 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @overview-example ButtonWithIcon
  */
-export class ButtonComponent extends React.Component<ButtonProps> implements WebEventResponderCallbacks {
+export class ButtonComponent extends React.Component<ButtonProps> {
 
   static styledComponentName: string = 'Button';
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  // WebEventResponderCallbacks
-
-  public onMouseEnter = (): void => {
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  public onMouseLeave = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(e);
+    }
   };
 
-  public onFocus = (): void => {
+  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
   };
 
-  public onBlur = (): void => {
+  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-  };
 
-  private onPress = (event: GestureResponderEvent): void => {
-    if (this.props.onPress) {
-      this.props.onPress(event);
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
     }
   };
 
@@ -172,16 +177,18 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
     };
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
+  public render(): TouchableWebElement {
     const { eva, style, accessoryLeft, accessoryRight, children, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...touchableProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[evaStyle.container, styles.container, webStyles.container, style]}
-        onPress={this.onPress}
+        style={[evaStyle.container, styles.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <FalsyFC
@@ -196,7 +203,7 @@ export class ButtonComponent extends React.Component<ButtonProps> implements Web
           style={evaStyle.icon}
           component={accessoryRight}
         />
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }
@@ -206,13 +213,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-});
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
   },
 });
 

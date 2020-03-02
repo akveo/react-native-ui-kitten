@@ -3,7 +3,16 @@ export {
   RenderProp,
 } from './components/falsyFC/falsyFC.component';
 export { FalsyText } from './components/falsyText/falsyText.component';
-export { TouchableWithoutFeedback } from './components/touchableWithoutFeedback.component';
+export {
+  TouchableWithoutFeedback,
+  TouchableWithoutFeedbackProps,
+  TouchableWithoutFeedbackElement,
+} from './components/touchableWithoutFeedback.component';
+export {
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
+} from './components/touchableWeb.component';
 export {
   MeasureElement,
   MeasureElementProps,

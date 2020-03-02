@@ -8,22 +8,18 @@ import React from 'react';
 import { SvgProps } from 'react-native-svg';
 import {
   GestureResponderEvent,
-  Insets,
-  Platform,
-  StyleProp,
+  NativeSyntheticEvent,
   StyleSheet,
-  TouchableOpacityProps,
+  TargetedEvent,
   View,
-  ViewStyle,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   FalsyText,
   RenderProp,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
 } from '../../devsupport';
 import {
   Interaction,
@@ -45,7 +41,7 @@ type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
 }>;
 
-export interface CheckBoxProps extends TouchableOpacityProps, CheckBoxStyledProps {
+export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
   checked?: boolean;
   indeterminate?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
@@ -92,28 +88,40 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @example CheckboxInlineStyling
  */
-class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEventResponderCallbacks {
+class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
   static styledComponentName: string = 'CheckBox';
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  // WebEventResponderCallbacks
-
-  public onMouseEnter = (): void => {
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  public onMouseLeave = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(e);
+    }
   };
 
-  public onFocus = (): void => {
+  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
   };
 
-  public onBlur = (): void => {
+  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
   };
 
   private onPress = (): void => {
@@ -185,20 +193,6 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
     };
   };
 
-  private createHitSlopInsets = (style: StyleProp<ViewStyle>): Insets => {
-    const { width } = StyleSheet.flatten(style);
-
-    // @ts-ignore: `width` is restricted to be a number
-    const value: number = 40 - width;
-
-    return {
-      left: value,
-      top: value,
-      right: value,
-      bottom: value,
-    };
-  };
-
   private renderIconElement = (style: SvgProps): React.ReactElement<SvgProps> => {
     const Icon: React.ComponentType<MinusProps | CheckMarkProps> = this.props.indeterminate ? Minus : CheckMark;
     return (
@@ -206,27 +200,25 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
     );
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
+  public render(): TouchableWebElement {
     const { eva, style, disabled, text, ...touchableProps } = this.props;
-
     const evaStyle = this.getComponentStyle(eva.style);
 
-    const selectContainerStyle: StyleProp<ViewStyle> = [evaStyle.selectContainer, styles.selectContainer];
-    const hitSlopInsets: Insets = this.createHitSlopInsets(selectContainerStyle);
-
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...touchableProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[styles.container, webStyles.container, style]}
+        style={[styles.container, style]}
         disabled={disabled}
-        hitSlop={hitSlopInsets}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <View style={styles.highlightContainer}>
           <View style={[evaStyle.highlight, styles.highlight]}/>
-          <View style={selectContainerStyle}>
+          <View style={[evaStyle.selectContainer, styles.selectContainer]}>
             {this.renderIconElement(evaStyle.icon)}
           </View>
         </View>
@@ -234,7 +226,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> implements WebEve
           style={evaStyle.text}
           component={text}
         />
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }
@@ -254,13 +246,6 @@ const styles = StyleSheet.create({
   },
   highlight: {
     position: 'absolute',
-  },
-});
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
   },
 });
 

@@ -9,9 +9,9 @@ import {
   Animated,
   GestureResponderEvent,
   ImageProps,
-  Platform,
+  NativeSyntheticEvent,
   StyleSheet,
-  TouchableOpacityProps,
+  TargetedEvent,
   View,
   ViewProps,
   ViewStyle,
@@ -25,10 +25,8 @@ import {
   MeasuringElement,
   PropsService,
   RenderProp,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -39,7 +37,7 @@ import {
 import { TextProps } from '../text/text.component';
 import { ChevronDown } from '../shared/chevronDown.component';
 
-export interface MenuItemProps extends TouchableOpacityProps, StyledComponentProps {
+export interface MenuItemProps extends TouchableWebProps, StyledComponentProps {
   title?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
@@ -78,11 +76,10 @@ interface State {
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  */
-class MenuItemComponent extends React.Component<MenuItemProps, State> implements WebEventResponderCallbacks {
+class MenuItemComponent extends React.Component<MenuItemProps, State> {
 
   static styledComponentName: string = 'MenuItem';
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
   private expandAnimation: Animated.Value = new Animated.Value(0);
 
   public state: State = {
@@ -115,20 +112,36 @@ class MenuItemComponent extends React.Component<MenuItemProps, State> implements
     return this.shouldMeasureSubmenu ? styles.outscreen : { height: this.expandAnimation };
   }
 
-  public onMouseEnter = (): void => {
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  public onMouseLeave = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseLeave(e);
+    }
   };
 
-  public onFocus = (): void => {
+  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
+
+    if (this.props.onFocus) {
+      this.props.onFocus(e);
+    }
   };
 
-  public onBlur = (): void => {
+  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onBlur) {
+      this.props.onBlur(e);
+    }
   };
 
   private onPress = (event: GestureResponderEvent): void => {
@@ -246,10 +259,13 @@ class MenuItemComponent extends React.Component<MenuItemProps, State> implements
 
     return (
       <React.Fragment>
-        <TouchableWithoutFeedback
+        <TouchableWeb
           {...touchableProps}
-          {...this.webEventResponder.eventHandlers}
-          style={[styles.container, evaStyle.container, webStyles.container, style]}
+          style={[styles.container, evaStyle.container, style]}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
           onPress={this.onPress}
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}>
@@ -269,7 +285,7 @@ class MenuItemComponent extends React.Component<MenuItemProps, State> implements
             fallback={this.renderSubmenuIconIfNeeded(evaStyle.icon)}
             component={accessoryRight}
           />
-        </TouchableWithoutFeedback>
+        </TouchableWeb>
         {this.renderSubmenuIfNeeded({})}
       </React.Fragment>
     );
@@ -294,13 +310,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: -999,
     top: -999,
-  },
-});
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
   },
 });
 

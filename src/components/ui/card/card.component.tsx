@@ -8,7 +8,6 @@ import React from 'react';
 import {
   GestureResponderEvent,
   StyleSheet,
-  TouchableOpacityProps,
   View,
   ViewProps,
 } from 'react-native';
@@ -16,7 +15,9 @@ import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   RenderProp,
-  TouchableWithoutFeedback,
+  TouchableWeb,
+  TouchableWebProps,
+  TouchableWebElement,
 } from '../../devsupport';
 import {
   Interaction,
@@ -30,7 +31,7 @@ type CardStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'filled' | 'outline' | string;
 }>;
 
-export interface CardProps extends TouchableOpacityProps, CardStyledProps {
+export interface CardProps extends TouchableWebProps, CardStyledProps {
   children?: React.ReactNode;
   accent?: RenderProp<ViewProps>;
   header?: RenderProp<ViewProps>;
@@ -129,12 +130,12 @@ class CardComponent extends React.Component<CardProps> {
     );
   };
 
-  public render(): CardElement {
+  public render(): TouchableWebElement {
     const { eva, style, children, accent, header, footer, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...touchableProps}
         style={[evaStyle.container, styles.container, style]}
         onPressIn={this.onPressIn}
@@ -157,7 +158,7 @@ class CardComponent extends React.Component<CardProps> {
           style={evaStyle.footer}
           component={footer}
         />
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }

@@ -7,19 +7,18 @@
 import React from 'react';
 import {
   ImageProps,
-  Platform,
+  NativeSyntheticEvent,
   StyleSheet,
-  TouchableOpacityProps,
+  TargetedEvent,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
   RenderProp,
-  TouchableWithoutFeedback,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
+  TouchableWeb,
+  TouchableWebElement,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -33,7 +32,7 @@ type BottomNavigationTabStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
 }>;
 
-export interface BottomNavigationTabProps extends TouchableOpacityProps, BottomNavigationTabStyledProps {
+export interface BottomNavigationTabProps extends TouchableWebProps, BottomNavigationTabStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   icon?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
@@ -65,21 +64,24 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @example BottomNavigationTabInlineStyling
  */
-export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps>
-  implements WebEventResponderCallbacks {
+export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
 
   static styledComponentName: string = 'BottomNavigationTab';
 
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-
-  // WebEventResponderCallbacks
-
-  public onMouseEnter = (): void => {
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(e);
+    }
   };
 
-  public onMouseLeave = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+
+    if (this.props.onMouseLeave) {
+      this.props.onMouseEnter(e);
+    }
   };
 
   private onPress = (): void => {
@@ -122,15 +124,16 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
     };
   };
 
-  public render(): React.ReactElement<TouchableOpacityProps> {
+  public render(): TouchableWebElement {
     const { eva, style, title, icon, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <TouchableWithoutFeedback
+      <TouchableWeb
         {...touchableProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[evaStyle.container, styles.container, webStyles.container, style]}
+        style={[evaStyle.container, styles.container, style]}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
         onPress={this.onPress}>
         <FalsyFC
           style={evaStyle.icon}
@@ -140,7 +143,7 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
           style={evaStyle.text}
           component={title}
         />
-      </TouchableWithoutFeedback>
+      </TouchableWeb>
     );
   }
 }
@@ -149,13 +152,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-});
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  container: {
-    // @ts-ignore
-    outlineWidth: 0,
   },
 });
 
