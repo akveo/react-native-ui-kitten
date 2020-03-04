@@ -41,17 +41,17 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @property {string} appearance - appearance of the component.
  * Can be `default` or `noDivider`.
  *
- * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children -
- * items to be rendered within menu.
+ * @property {ReactElement<DrawerItemProps> | ReactElement<DrawerItemProps>[]} children -
+ * items to be rendered within drawer.
  *
  * @property {IndexPath} selectedIndex - index of selected item.
  * IndexPath `{ row: number, section: number | undefined }` - position of element in sectioned list.
- * Menu becomes sectioned when MenuGroup is rendered within children.
+ * Drawer becomes sectioned when DrawerGroup is rendered within children.
  * Updating this property is not required if marking items selected is not needed.
  *
  * @property {(option: IndexPath | IndexPath[]) => void} onSelect - called when item is pressed.
  * Called with `{ row: number }` by default.
- * Called with { row: number, section: number } for items rendered within SelectGroup.
+ * Called with { row: number, section: number } for items rendered within DrawerGroup.
  *
  * @property {ListProps} ...ListProps - Any props applied to List component,
  * excluding `renderItem` and `data`.
@@ -64,9 +64,9 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * import React from 'react';
  * import { NavigationContainer } from '@react-navigation/native';
  * import { createDrawerNavigator } from '@react-navigation/drawer';
- * import { Drawer as UIKittenDrawer, Layout, Text } from '@ui-kitten/components';
+ * import { Drawer, DrawerItem, Layout, Text } from '@ui-kitten/components';
  *
- * const Drawer = createDrawerNavigator();
+ * const { Navigator, Screen } = createDrawerNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -87,7 +87,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *   };
  *
  *   return (
- *     <UIKittenDrawer
+ *     <Drawer
  *       selectedIndex={state.index}
  *       onSelect={onSelect}>
  *       <DrawerItem title='Home' />
@@ -97,10 +97,10 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * };
  *
  * export const DrawerNavigator = () => (
- *   <Drawer.Navigator drawerContent={props => <DrawerContent {...props}/>}>
- *     <Drawer.Screen name='Users' component={UsersScreen}/>
- *     <Drawer.Screen name='Orders' component={OrdersScreen}/>
- *   </Drawer.Navigator>
+ *   <Navigator drawerContent={props => <DrawerContent {...props}/>}>
+ *     <Screen name='Users' component={UsersScreen}/>
+ *     <Screen name='Orders' component={OrdersScreen}/>
+ *   </Navigator>
  * );
  *
  * export const AppNavigator = () => (
