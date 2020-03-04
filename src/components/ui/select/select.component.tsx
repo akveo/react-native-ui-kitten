@@ -7,133 +7,149 @@
 import React from 'react';
 import {
   Animated,
-  GestureResponderEvent,
   ImageProps,
-  ImageStyle,
+  ListRenderItemInfo,
+  NativeSyntheticEvent,
   Platform,
-  StyleProp,
   StyleSheet,
+  TargetedEvent,
   TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
   View,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import {
+  ChildrenWithProps,
+  FalsyFC,
+  FalsyText,
+  IndexPath,
+  RenderProp,
+  TouchableWeb,
+  TouchableWebElement,
+  TouchableWebProps,
+} from '../../devsupport';
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
 } from '../../theme';
-import {
-  FalsyFC,
-  FalsyText,
-  PropsService,
-  RenderProp,
-  WebEventResponder,
-  WebEventResponderCallbacks,
-  WebEventResponderInstance,
-} from '../../devsupport';
-import {
-  SelectOption,
-  SelectOptionType,
-} from './selectOption.component';
-import { SelectOptionsList } from './selectOptionsList.component';
+import { List } from '../list/list.component';
 import { Popover } from '../popover/popover.component';
+import { ChevronDown } from '../shared/chevronDown.component';
+import { SelectGroupProps } from './selectGroup.component';
 import {
-  ChevronDown,
-  ChevronDownElement,
-  ChevronDownProps,
-} from '../shared/chevronDown.component';
-import { SelectService } from './select.service';
+  SelectItemElement,
+  SelectItemProps,
+} from './selectItem.component';
+import {
+  SelectItemDescriptor,
+  SelectService,
+} from './select.service';
 
-type ControlElement = React.ReactElement<TouchableOpacityProps>;
+type SelectStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-export type SelectOption = SelectOptionType[] | SelectOptionType;
-export type KeyExtractorType = (item: SelectOptionType) => string;
-
-export interface SelectProps extends StyledComponentProps, TouchableOpacityProps {
-  data: SelectOptionType[];
+export interface SelectProps extends TouchableWebProps, SelectStyledProps {
+  children?: ChildrenWithProps<SelectItemProps | SelectGroupProps>;
+  selectedIndex?: IndexPath | IndexPath[];
+  onSelect?: (index: IndexPath | IndexPath[]) => void;
+  value?: string;
   multiSelect?: boolean;
-  selectedOption?: SelectOption;
   placeholder?: RenderProp<TextStyle> | string;
   label?: RenderProp<TextStyle> | string;
-  controlStyle?: StyleProp<ViewStyle>;
+  caption?: RenderProp<TextStyle> | string;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
-  onSelect: (option: SelectOption, event?: GestureResponderEvent) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  status?: string;
-  size?: string;
-  keyExtractor?: KeyExtractorType;
+  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  size?: 'small' | 'medium' | 'large' | string;
 }
 
 export type SelectElement = React.ReactElement<SelectProps>;
 
 interface State {
-  optionsVisible: boolean;
+  listVisible: boolean;
 }
 
+const CHEVRON_DEG_COLLAPSED: number = -180;
+const CHEVRON_DEG_EXPANDED: number = 0;
+const CHEVRON_ANIM_DURATION: number = 200;
+
 /**
- * Styled `Select` component. By default, the MultiSelect compares the items by reference.
- * To specify a field from the data object which will be used for the comparison,
- * implement the `keyExtractor` property.
+ * Styled `Select` component. Renders a List of
  *
  * @extends React.Component
  *
- * @method {() => void} show - Sets options list visible.
+ * @method {() => void} show - sets options list visible.
  *
- * @method {() => void} hide - Sets options list invisible.
+ * @method {() => void} hide - sets options list invisible.
  *
- * @method {() => void} focus - Focuses Select and sets options list visible.
+ * @method {() => void} focus - focuses input field and sets options list visible.
  *
- * @method {() => void} blur - Removes focus from Select and sets options list invisible.
+ * @method {() => void} blur - removes focus from input field and sets options list invisible.
  *
- * @method {() => boolean} isFocused - Returns true if the Select is currently focused and visible.
+ * @method {() => boolean} isFocused - whether input field is currently focused and options list is visible.
  *
- * @method {() => void} clear - Removes all text from the Select.
+ * @method {() => void} clear - removes all text from the Select.
  *
- * @property {SelectOptionType[]} data - Determines items of the Select component.
+ * @property {ReactElement<SelectItemProps> | ReactElement<SelectItemProps>[]} children -
+ * items to be rendered within options list.
  *
- * @property {(option: SelectOptionType | SelectOptionType[]) => void} onSelect - Called when option is pressed.
+ * @property {IndexPath | IndexPath[]} selectedIndex - index or array of indices of selected options.
+ * IndexPath `{ row: number, section: number | undefined }` - position of element in sectioned list.
+ * Select becomes sectioned when SelectGroup is rendered within children.
  *
- * @property {boolean} multiSelect - Determines `multi-select` behavior of the Select component.
+ * @property {(option: IndexPath | IndexPath[]) => void} onSelect - called when option is pressed.
+ * Called with `{ row: number }` by default and for SelectGroup items.
+ * Called with { row: number, section: number } for items rendered within SelectGroup.
  *
- * @property {string} status - Determines the status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
+ * @property {string | (props: TextProps) => ReactElement} value - string or a function component
+ * to render for the selected options.
+ * By default, calls `toString()` for each index in selectedIndex property.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {string} size - Determines the size of the component.
- * Can be `small`, `medium` or `large`.
- * Default is `medium`.
+ * @property {boolean} multiSelect - whether multiple options can be selected.
+ * If true, calls onSelect with IndexPath[] in arguments.
+ * Otherwise, with IndexPath in arguments.
  *
- * @property {SelectOption} selectedOption - Determines selected option of the Select.
- * Can be `SelectOptionType` or `SelectOptionType[]` It depends on `multiSelect` property.
+ * @property {string | (props: TextProps) => ReactElement} placeholder - string or a function component
+ * to render when there is no selected options.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {string | (props: TextProps) => ReactElement} label - A string or a function component
+ * @property {string | (props: TextProps) => ReactElement} label - string or a function component
  * to render to top of the input field.
  * If it is a function, it will be called with props provided by Eva.
  * Otherwise, renders a Text styled by Eva.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * @property {(props: ImageProps) => ReactElement} accessoryLeft - function component
  * to render to start of the text.
  * Called with props provided by Eva.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * @property {(props: ImageProps) => ReactElement} accessoryRight - function component
  * to render to end of the text.
  * Called with props provided by Eva.
  *
- * @property {StyleProp<ViewStyle>} controlStyle - Determines the style of `control`.
+ * @property {string | (props: TextProps) => ReactElement} caption - string or a function component
+ * to render to bottom of the input field.
+ * If it is a function, it will be called with props provided by Eva.
+ * Otherwise, renders a Text styled by Eva.
  *
- * @property {KeyExtractorType} keyExtractor - Used to extract a unique key for a given item;
+ * @property {string} status - status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Default is `basic`.
  *
- * @property {() => void} onFocus - Called when options list becomes visible.
+ * @property {string} size - size of the component.
+ * Can be `small`, `medium` or `large`.
+ * Default is `medium`.
  *
- * @property {() => void} onBlur - Called when options list becomes invisible.
+ * @property {() => void} onFocus - called when options list becomes visible.
  *
- * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ * @property {() => void} onBlur - called when options list becomes invisible.
+ *
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - any props applied to TouchableOpacity component.
  *
  * @overview-example SelectSimpleUsage
  *
@@ -157,27 +173,41 @@ interface State {
  *
  * @example SelectInlineStyling
  */
-class SelectComponent extends React.Component<SelectProps, State> implements WebEventResponderCallbacks {
+export class SelectComponent extends React.Component<SelectProps, State> {
 
   static styledComponentName: string = 'Select';
 
-  static defaultProps: Partial<SelectProps> = {
+  static defaultProps = {
     placeholder: 'Select Option',
-    multiSelect: false,
+    selectedIndex: [],
   };
 
   public state: State = {
-    optionsVisible: false,
+    listVisible: false,
   };
 
+  private service: SelectService = new SelectService();
   private popoverRef: React.RefObject<Popover> = React.createRef();
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
-  private iconAnimation: Animated.Value = new Animated.Value(0);
+  private expandAnimation: Animated.Value = new Animated.Value(0);
 
-  private selectService: SelectService = new SelectService({
-    multiSelect: this.props.multiSelect,
-    keyExtractor: this.props.keyExtractor,
-  });
+  private get isMultiSelect(): boolean {
+    return this.props.multiSelect;
+  }
+
+  private get data(): any[] {
+    return React.Children.toArray(this.props.children || []);
+  }
+
+  private get selectedIndices(): IndexPath[] {
+    return Array.isArray(this.props.selectedIndex) ? this.props.selectedIndex : [this.props.selectedIndex];
+  }
+
+  private get expandToRotateInterpolation(): Animated.AnimatedInterpolation {
+    return this.expandAnimation.interpolate({
+      inputRange: [CHEVRON_DEG_COLLAPSED, CHEVRON_DEG_EXPANDED],
+      outputRange: [`${CHEVRON_DEG_COLLAPSED}deg`, `${CHEVRON_DEG_EXPANDED}deg`],
+    });
+  }
 
   public show = (): void => {
     this.popoverRef.current.show();
@@ -188,290 +218,280 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
   };
 
   public focus = (): void => {
-    this.setState({ optionsVisible: true }, this.onOptionsListVisible);
+    this.setOptionsListVisible();
   };
 
   public blur = (): void => {
-    this.setState({ optionsVisible: false }, this.onOptionsListInvisible);
+    this.setOptionsListInvisible();
   };
 
   public isFocused = (): boolean => {
-    return this.state.optionsVisible;
+    return this.state.listVisible;
   };
 
   public clear = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(null);
-    }
+    this.props.onSelect && this.props.onSelect(null);
   };
 
-  // WebEventResponderCallbacks
-
-  public onMouseEnter = (): void => {
-    if (!this.state.optionsVisible) {
-      this.props.eva.dispatch([Interaction.HOVER]);
-    }
+  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([Interaction.HOVER]);
+    this.props.onMouseEnter && this.props.onMouseEnter(e);
   };
 
-  public onMouseLeave = (): void => {
-    if (!this.state.optionsVisible) {
-      this.props.eva.dispatch([]);
-    }
-  };
-
-  public onFocus = (): void => {
-    this.props.eva.dispatch([Interaction.FOCUSED]);
-  };
-
-  public onBlur = (): void => {
+  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
+    this.props.onMouseLeave && this.props.onMouseLeave(e);
   };
 
-  private onPress = (event: GestureResponderEvent): void => {
+  private onPress = (): void => {
     this.setOptionsListVisible();
-
-    if (this.props.onPress) {
-      this.props.onPress(event);
-    }
   };
 
-  private onPressIn = (event: GestureResponderEvent): void => {
+  private onPressIn = (): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
   };
 
-  private onPressOut = (event: GestureResponderEvent): void => {
+  private onPressOut = (): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
   };
 
-  private onSelect = (option: SelectOptionType, event: GestureResponderEvent): void => {
+  private onItemPress = (descriptor: SelectItemDescriptor): void => {
     if (this.props.onSelect) {
-      const options: SelectOption = this.selectService.select(option, this.props.selectedOption);
-      !this.props.multiSelect && this.setOptionsListInvisible();
+      const selectedIndices = this.service.selectItem(this.isMultiSelect, descriptor, this.selectedIndices);
+      !this.isMultiSelect && this.setOptionsListInvisible();
 
-      this.props.onSelect(options, event);
+      this.props.onSelect && this.props.onSelect(selectedIndices);
     }
   };
 
-  private onOptionsListVisible = (): void => {
+  private onBackdropPress = (): void => {
+    this.setOptionsListInvisible();
+  };
+
+  private onListVisible = (): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.createIconAnimation(-180).start();
-
-    if (this.props.onFocus) {
-      this.props.onFocus();
-    }
-  };
-
-  private onOptionsListInvisible = (): void => {
-    this.props.eva.dispatch([]);
-    this.createIconAnimation(0).start();
-
-    if (this.props.onBlur) {
-      this.props.onBlur();
-    }
-  };
-
-  private setOptionsListVisible = (): void => {
-    this.setState({ optionsVisible: true }, this.onOptionsListVisible);
-  };
-
-  private setOptionsListInvisible = (): void => {
-    this.setState({ optionsVisible: false }, this.onOptionsListInvisible);
-  };
-
-  private isOptionSelected = (option: SelectOptionType): boolean => {
-    return this.selectService.isSelected(option, this.props.selectedOption);
-  };
-
-  private isOptionGroup = (option: SelectOptionType): boolean => {
-    return SelectService.isGroup(option);
-  };
-
-  private createIconAnimation = (toValue: number): Animated.CompositeAnimation => {
-    return Animated.timing(this.iconAnimation, {
-      toValue: toValue,
-      duration: 200,
+    this.createExpandAnimation(-CHEVRON_DEG_COLLAPSED).start(() => {
+      this.props.onFocus && this.props.onFocus(null);
     });
   };
 
-  private getComponentStyle = (source: StyleType) => {
-    const {
-      backgroundColor,
-      borderColor,
-      borderWidth,
-      minHeight,
-      paddingHorizontal,
-      paddingVertical,
-      borderRadius,
-    } = source;
+  private onListInvisible = (): void => {
+    this.props.eva.dispatch([]);
+    this.createExpandAnimation(CHEVRON_DEG_EXPANDED).start(() => {
+      this.props.onBlur && this.props.onBlur(null);
+    });
+  };
 
-    const iconStyles: StyleType = PropsService.allWithPrefix(source, 'icon');
-    const textStyles: StyleType = PropsService.allWithPrefix(source, 'text');
-    const placeholderStyles: StyleType = PropsService.allWithPrefix(source, 'placeholder');
-    const popoverStyles: StyleType = PropsService.allWithPrefix(source, 'popover');
-    const labelStyle: StyleType = PropsService.allWithPrefix(source, 'label');
+  private getComponentStyle = (style: StyleType) => {
+    const {
+      textMarginHorizontal,
+      textFontFamily,
+      textFontSize,
+      textLineHeight,
+      textFontWeight,
+      textColor,
+      placeholderColor,
+      iconWidth,
+      iconHeight,
+      iconMarginHorizontal,
+      iconTintColor,
+      labelColor,
+      labelFontSize,
+      labelLineHeight,
+      labelMarginBottom,
+      labelFontWeight,
+      captionMarginTop,
+      captionColor,
+      captionFontSize,
+      captionLineHeight,
+      captionFontWeight,
+      captionIconWidth,
+      captionIconHeight,
+      captionIconMarginRight,
+      captionIconTintColor,
+      popoverMaxHeight,
+      popoverBorderRadius,
+      popoverBorderColor,
+      popoverBorderWidth,
+      ...inputParameters
+    } = style;
 
     return {
-      control: {
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
-        borderWidth: borderWidth,
-        minHeight: minHeight,
-        paddingHorizontal: paddingHorizontal,
-        paddingVertical: paddingVertical,
-        borderRadius: borderRadius,
-      },
-      icon: {
-        height: iconStyles.iconHeight,
-        width: iconStyles.iconWidth,
-        marginHorizontal: iconStyles.iconMarginHorizontal,
-        tintColor: iconStyles.iconTintColor,
-      },
+      input: inputParameters,
       text: {
-        marginHorizontal: textStyles.textMarginHorizontal,
-        color: textStyles.textColor,
-        fontSize: textStyles.textFontSize,
-        fontWeight: textStyles.textFontWeight,
-        lineHeight: textStyles.textLineHeight,
-        fontFamily: textStyles.textFontFamily,
+        marginHorizontal: textMarginHorizontal,
+        fontFamily: textFontFamily,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
+        lineHeight: textLineHeight,
+        color: textColor,
       },
       placeholder: {
-        marginHorizontal: placeholderStyles.placeholderMarginHorizontal,
-        color: placeholderStyles.placeholderColor,
-        fontSize: placeholderStyles.placeholderFontSize,
-        fontWeight: placeholderStyles.placeholderFontWeight,
-        lineHeight: placeholderStyles.placeholderLineHeight,
-        fontFamily: placeholderStyles.placeholderFontFamily,
+        marginHorizontal: textMarginHorizontal,
+        color: placeholderColor,
       },
-      popover: {
-        maxHeight: popoverStyles.popoverMaxHeight,
-        borderRadius: popoverStyles.popoverBorderRadius,
-        borderColor: popoverStyles.popoverBorderColor,
-        borderWidth: popoverStyles.popoverBorderWidth,
+      icon: {
+        width: iconWidth,
+        height: iconHeight,
+        marginHorizontal: iconMarginHorizontal,
+        tintColor: iconTintColor,
       },
       label: {
-        marginBottom: labelStyle.labelMarginBottom,
-        color: labelStyle.labelColor,
-        fontSize: labelStyle.labelFontSize,
-        fontWeight: labelStyle.labelFontWeight,
-        lineHeight: labelStyle.labelLineHeight,
-        fontFamily: labelStyle.labelFontFamily,
+        marginBottom: labelMarginBottom,
+        fontSize: labelFontSize,
+        lineHeight: labelLineHeight,
+        fontWeight: labelFontWeight,
+        color: labelColor,
+      },
+      caption: {
+        marginTop: captionMarginTop,
+        fontSize: captionFontSize,
+        fontWeight: captionFontWeight,
+        lineHeight: captionLineHeight,
+        color: captionColor,
+      },
+      popover: {
+        maxHeight: popoverMaxHeight,
+        borderRadius: popoverBorderRadius,
+        borderWidth: popoverBorderWidth,
+        borderColor: popoverBorderColor,
       },
     };
   };
 
-  private renderDefaultIconElement = (style: ImageStyle): ChevronDownElement => {
-    const rotateInterpolate = this.iconAnimation.interpolate({
-      inputRange: [-180, 0],
-      outputRange: ['-180deg', '0deg'],
+  private setOptionsListVisible = (): void => {
+    const hasData: boolean = this.data.length > 0;
+    hasData && this.setState({ listVisible: true }, this.onListVisible);
+  };
+
+  private setOptionsListInvisible = (): void => {
+    this.setState({ listVisible: false }, this.onListInvisible);
+  };
+
+  private createExpandAnimation = (toValue: number): Animated.CompositeAnimation => {
+    return Animated.timing(this.expandAnimation, {
+      toValue,
+      duration: CHEVRON_ANIM_DURATION,
+      useNativeDriver: Platform.OS !== 'web',
+    });
+  };
+
+  private cloneItemWithProps = (el: SelectItemElement, props: SelectItemProps): SelectItemElement => {
+    const nestedElements = React.Children.map(el.props.children, (nestedEl: SelectItemElement, index: number) => {
+      const descriptor = this.service.createDescriptorForNestedElement(nestedEl, props.descriptor, index);
+      const selected: boolean = this.service.isSelected(descriptor, this.selectedIndices);
+
+      return this.cloneItemWithProps(nestedEl, { ...props, descriptor, selected, disabled: false });
     });
 
-    const animatedStyle: StyleType = { transform: [{ rotate: rotateInterpolate }] };
-    const { tintColor, ...svgStyle } = style;
+    return React.cloneElement(el, { ...props, ...el.props }, nestedElements);
+  };
 
+  private renderItem = (info: ListRenderItemInfo<SelectItemElement>): SelectItemElement => {
+    const descriptor = this.service.createDescriptorForElement(info.item, this.isMultiSelect, info.index);
+    const selected: boolean = this.service.isSelected(descriptor, this.selectedIndices);
+    const disabled: boolean = this.service.isDisabled(descriptor);
+
+    return this.cloneItemWithProps(info.item, { descriptor, selected, disabled, onPress: this.onItemPress });
+  };
+
+  private renderDefaultIconElement = (evaStyle): React.ReactElement => {
     return (
-      <Animated.View style={animatedStyle}>
-        <ChevronDown
-          fill={tintColor}
-          {...svgStyle as ChevronDownProps}
-        />
+      <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
+        <ChevronDown {...evaStyle} fill={evaStyle.tintColor}/>
       </Animated.View>
     );
   };
 
-  private renderControlElement = (evaStyle): ControlElement => {
-    const { eva, controlStyle, accessoryLeft, accessoryRight, selectedOption, ...restProps } = this.props;
-    const value: string = this.selectService.toStringOptions(selectedOption);
+  private renderInputElement = (props: SelectProps, evaStyle): TouchableWebElement => {
+    const value: string = props.value || this.service.toStringSelected(this.selectedIndices);
+    const textStyle: TextStyle = value && evaStyle.text;
 
     return (
-      <TouchableOpacity
-        activeOpacity={1.0}
-        {...restProps}
-        {...this.webEventResponder.eventHandlers}
-        style={[styles.control, evaStyle.control, webStyles.control, controlStyle]}
+      <TouchableWeb
+        style={[styles.input, evaStyle.input]}
         onPress={this.onPress}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <FalsyFC
           style={evaStyle.icon}
-          component={accessoryLeft}
+          component={props.accessoryLeft}
         />
         <FalsyText
-          style={[styles.text, evaStyle.placeholder, value && evaStyle.text]}
+          style={[styles.text, evaStyle.placeholder, textStyle]}
           numberOfLines={1}
           ellipsizeMode='tail'
           component={value || this.props.placeholder}
         />
         <FalsyFC
           style={evaStyle.icon}
-          component={accessoryRight}
+          component={props.accessoryRight}
           fallback={this.renderDefaultIconElement(evaStyle.icon)}
         />
-      </TouchableOpacity>
+      </TouchableWeb>
     );
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, label } = this.props;
+    const { eva, style, label, caption, children, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={style}>
+      <View style={[styles.container, style]}>
         <FalsyText
-          style={evaStyle.label}
+          style={[styles.label, evaStyle.label]}
           component={label}
         />
         <Popover
           ref={this.popoverRef}
-          style={[evaStyle.popover, styles.popover]}
+          style={[styles.popover, evaStyle.popover]}
+          visible={this.state.listVisible}
           fullWidth={true}
-          visible={this.state.optionsVisible}
-          anchor={() => this.renderControlElement(evaStyle)}
-          onBackdropPress={this.setOptionsListInvisible}>
-          <SelectOptionsList
-            key={0}
-            style={[styles.optionsList, style]}
-            data={this.props.data}
-            multiSelect={this.props.multiSelect}
-            isOptionSelected={this.isOptionSelected}
-            isOptionGroup={this.isOptionGroup}
-            onSelect={this.onSelect}
-            keyExtractor={this.props.keyExtractor}
+          anchor={() => this.renderInputElement(touchableProps, evaStyle)}
+          onBackdropPress={this.onBackdropPress}>
+          <List
+            style={styles.list}
+            data={this.data}
+            bounces={false}
+            renderItem={this.renderItem}
           />
         </Popover>
+        <FalsyText
+          style={[styles.caption, evaStyle.caption]}
+          component={caption}
+        />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  control: {
+  container: {
+    flexGrow: 1,
+  },
+  input: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  text: {
-    flex: 1,
-  },
-  optionsList: {
-    flexGrow: 0,
+    backgroundColor: 'red',
   },
   popover: {
     overflow: 'hidden',
   },
-});
-
-const webStyles = Platform.OS === 'web' && StyleSheet.create({
-  control: {
-    // @ts-ignore
-    outlineWidth: 0,
+  list: {
+    flexGrow: 0,
+  },
+  text: {
+    flex: 1,
+    textAlign: 'left',
+  },
+  label: {
+    textAlign: 'left',
+  },
+  caption: {
+    textAlign: 'left',
   },
 });
 

@@ -166,9 +166,7 @@ export class ListItemComponent extends React.Component<ListItemProps & { index: 
           style={evaStyle.icon}
           component={props.accessoryLeft}
         />
-        <View
-          key={1}
-          style={styles.contentContainer}>
+        <View style={styles.contentContainer}>
           <FalsyText
             style={[evaStyle.title, styles.title]}
             component={props.title}
@@ -206,12 +204,7 @@ export class ListItemComponent extends React.Component<ListItemProps & { index: 
         style={[evaStyle.container, styles.container, webStyles.container, style]}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        {children || this.renderTemplateChildren({
-          title,
-          description,
-          accessoryLeft,
-          accessoryRight,
-        }, evaStyle)}
+        {children || this.renderTemplateChildren(this.props, evaStyle)}
       </TouchableWeb>
     );
   }

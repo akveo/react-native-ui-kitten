@@ -34,18 +34,27 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
 
 /**
  * Styled `Drawer` component.
- * Renders a Menu with additional styles provided by Eva.
+ * Renders UI Kitten Menu component with additional styles provided by Eva.
  *
  * @extends React.Component
  *
- * @property {() => ReactElement} header - Determines the function to render a header. Optional.
+ * @property {string} appearance - appearance of the component.
+ * Can be `default` or `noDivider`.
  *
- * @property {() => ReactElement} footer - Determines the function to render a footer. Optional.
+ * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children -
+ * items to be rendered within menu.
  *
- * @property {(index: number, event: GestureResponderEvent) => void} onSelect - Determines the function to handle
- * menu item press.
+ * @property {IndexPath} selectedIndex - index of selected item.
+ * IndexPath `{ row: number, section: number | undefined }` - position of element in sectioned list.
+ * Menu becomes sectioned when MenuGroup is rendered within children.
+ * Updating this property is not required if marking items selected is not needed.
  *
- * @property {MenuProps} ...MenuProps - Any props applied to Menu component.
+ * @property {(option: IndexPath | IndexPath[]) => void} onSelect - called when item is pressed.
+ * Called with `{ row: number }` by default.
+ * Called with { row: number, section: number } for items rendered within SelectGroup.
+ *
+ * @property {ListProps} ...ListProps - Any props applied to List component,
+ * excluding `renderItem` and `data`.
  *
  * @overview-example DrawerSimpleUsage
  *
@@ -79,10 +88,11 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  *   return (
  *     <UIKittenDrawer
- *       data={[{ title: 'Home' }, { title: 'Settings' }]}
  *       selectedIndex={state.index}
- *       onSelect={onSelect}
- *     />
+ *       onSelect={onSelect}>
+ *       <DrawerItem title='Home' />
+ *       <DrawerItem title='Settings' />
+ *     </UIKittenDrawer>
  *   );
  * };
  *

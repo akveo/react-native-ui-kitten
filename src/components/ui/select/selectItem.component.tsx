@@ -11,7 +11,6 @@ import {
   NativeSyntheticEvent,
   StyleSheet,
   TargetedEvent,
-  View,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
@@ -20,6 +19,7 @@ import {
   PropsService,
   RenderProp,
   TouchableWeb,
+  TouchableWebElement,
   TouchableWebProps,
 } from '../../devsupport';
 import {
@@ -28,32 +28,39 @@ import {
   StyledComponentProps,
   StyleType,
 } from '../../theme';
+import {
+  CheckBox,
+  CheckBoxElement,
+} from '../checkbox/checkbox.component';
 import { TextProps } from '../text/text.component';
-import { MenuItemDescriptor } from './menu.service';
+import { SelectItemDescriptor } from './select.service';
 
-type MenuItemStyledProps = Overwrite<StyledComponentProps, {
+type SelectItemStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | 'grouped' | string;
 }>;
 
-type TouchableMenuItemProps = Overwrite<TouchableWebProps, {
-  onPress?: (descriptor: MenuItemDescriptor, event?: GestureResponderEvent) => void;
+type TouchableSelectProps = Overwrite<TouchableWebProps, {
+  onPress?: (descriptor: SelectItemDescriptor, event?: GestureResponderEvent) => void;
 }>;
 
-export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledProps {
+export interface SelectItemProps extends TouchableSelectProps, SelectItemStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   selected?: boolean;
-  descriptor?: MenuItemDescriptor;
+  descriptor?: SelectItemDescriptor;
 }
 
-export type MenuItemElement = React.ReactElement<MenuItemProps>;
+export type SelectItemElement = React.ReactElement<SelectItemProps>;
 
 /**
- * Renders a single item in list displayed in Menu.
- * Items should be rendered within Menu or MenuGroup children to provide a usable component.
+ * Renders a single item in list displayed in Select.
+ * Items should be rendered within Select or SelectGroup children to provide a usable component.
  *
  * @extends React.Component
+ *
+ * @property {string} appearance - Determines the appearance of the component.
+ * Can be `default` or `grouped`.
  *
  * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
  * to render within the button.
@@ -70,70 +77,57 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  */
-class MenuItemComponent extends React.Component<MenuItemProps> {
+class SelectItemComponent extends React.Component<SelectItemProps> {
 
-  static styledComponentName: string = 'MenuItem';
+  static styledComponentName: string = 'SelectOption';
+
+  private get isMultiSelect(): boolean {
+    return this.props.descriptor.multiSelect;
+  }
 
   private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-
-    if (this.props.onMouseEnter) {
-      this.props.onMouseEnter(e);
-    }
+    this.props.onMouseEnter && this.props.onMouseEnter(e);
   };
 
   private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onMouseLeave) {
-      this.props.onMouseLeave(e);
-    }
+    this.props.onMouseLeave && this.props.onMouseLeave(e);
   };
 
   private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
+    this.props.onFocus && this.props.onFocus(e);
   };
 
   private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur(e);
-    }
+    this.props.onBlur && this.props.onBlur(e);
   };
 
-  private onPress = (event: GestureResponderEvent): void => {
-    if (this.props.onPress) {
-      this.props.onPress(this.props.descriptor, event);
-    }
+  private onPress = (e: GestureResponderEvent): void => {
+    this.props.onPress && this.props.onPress(this.props.descriptor, e);
   };
 
-  private onPressIn = (event: GestureResponderEvent): void => {
+  private onPressIn = (e: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.onPressIn && this.props.onPressIn(e);
   };
 
-  private onPressOut = (event: GestureResponderEvent): void => {
+  private onPressOut = (e: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(e);
+  };
 
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+  private onAccessoryCheckedChange = (): void => {
+    this.props.onPress && this.props.onPress(this.props.descriptor);
   };
 
   private getComponentStyle = (style: StyleType) => {
-    const { paddingHorizontal, paddingVertical, paddingLeft, backgroundColor } = style;
+    const { paddingHorizontal, paddingLeft, paddingVertical, backgroundColor } = style;
 
-    const titleStyles: StyleType = PropsService.allWithPrefix(style, 'title');
-    const indicatorStyles: StyleType = PropsService.allWithPrefix(style, 'indicator');
-    const iconStyles: StyleType = PropsService.allWithPrefix(style, 'icon');
+    const textStyles = PropsService.allWithPrefix(style, 'text');
+    const iconStyles = PropsService.allWithPrefix(style, 'icon');
 
     return {
       container: {
@@ -142,17 +136,13 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
         paddingVertical: paddingVertical,
         backgroundColor: backgroundColor,
       },
-      title: {
-        marginHorizontal: titleStyles.titleMarginHorizontal,
-        fontFamily: titleStyles.titleFontFamily,
-        fontSize: titleStyles.titleFontSize,
-        fontWeight: titleStyles.titleFontWeight,
-        lineHeight: titleStyles.titleLineHeight,
-        color: titleStyles.titleColor,
-      },
-      indicator: {
-        width: indicatorStyles.indicatorWidth,
-        backgroundColor: indicatorStyles.indicatorBackgroundColor,
+      text: {
+        marginHorizontal: textStyles.textMarginHorizontal,
+        fontFamily: textStyles.textFontFamily,
+        fontSize: textStyles.textFontSize,
+        fontWeight: textStyles.textFontWeight,
+        lineHeight: textStyles.textLineHeight,
+        color: textStyles.textColor,
       },
       icon: {
         width: iconStyles.iconWidth,
@@ -163,8 +153,22 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
     };
   };
 
-  public render(): React.ReactNode {
-    const { eva, style, title, accessoryLeft, accessoryRight, children, ...touchableProps } = this.props;
+  private renderAccessory = (evaStyle): CheckBoxElement => {
+    if (!this.isMultiSelect) {
+      return null;
+    }
+
+    return (
+      <CheckBox
+        style={evaStyle}
+        checked={this.props.selected}
+        onChange={this.onAccessoryCheckedChange}
+      />
+    );
+  };
+
+  public render(): TouchableWebElement {
+    const { eva, style, title, accessoryLeft, accessoryRight, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -178,13 +182,13 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
         onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
-        <View style={[StyleSheet.absoluteFill, evaStyle.indicator]}/>
         <FalsyFC
           style={evaStyle.icon}
           component={accessoryLeft}
+          fallback={this.renderAccessory(evaStyle.icon)}
         />
         <FalsyText
-          style={[evaStyle.title, styles.title]}
+          style={[styles.text, evaStyle.text]}
           component={title}
         />
         <FalsyFC
@@ -202,10 +206,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  title: {
+  text: {
     flex: 1,
-    textAlign: 'left',
   },
 });
 
-export const MenuItem = styled<MenuItemProps>(MenuItemComponent);
+export const SelectItem = styled<SelectItemProps>(SelectItemComponent);

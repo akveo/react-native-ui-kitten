@@ -71,6 +71,11 @@ export {
   DrawerElement,
 } from './drawer/drawer.component';
 export {
+  DrawerGroup,
+  DrawerGroupProps,
+  DrawerGroupElement,
+} from './drawer/drawerGroup.component';
+export {
   DrawerItem,
   DrawerItemProps,
   DrawerItemElement,
@@ -79,10 +84,17 @@ export {
   Select,
   SelectProps,
   SelectElement,
-  SelectOption,
-  KeyExtractorType,
 } from './select/select.component';
-export { SelectOptionType } from './select/selectOption.component';
+export {
+  SelectGroup,
+  SelectGroupProps,
+  SelectGroupElement,
+} from './select/selectGroup.component';
+export {
+  SelectItem,
+  SelectItemProps,
+  SelectItemElement,
+} from './select/selectItem.component';
 export {
   Icon,
   IconProps,
@@ -123,6 +135,11 @@ export {
   MenuProps,
   MenuElement,
 } from './menu/menu.component';
+export {
+  MenuGroup,
+  MenuGroupProps,
+  MenuGroupElement,
+} from './menu/menuGroup.component';
 export {
   MenuItem,
   MenuItemProps,
@@ -218,3 +235,4 @@ export {
   TranslationWidth,
   I18nConfig,
 } from './calendar/i18n/type';
+export { IndexPath } from '../devsupport';

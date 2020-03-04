@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 export interface TouchableWithoutFeedbackProps extends TouchableOpacityProps {
+  useDefaultHitSlop?: boolean;
   children?: React.ReactNode;
 }
 
@@ -33,7 +34,7 @@ export class TouchableWithoutFeedback extends React.Component<TouchableWithoutFe
     const flatStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});
 
     // @ts-ignore: `width` is restricted to be a number
-    const value: number = 40 - flatStyle.width || 0;
+    const value: number = 40 - flatStyle.height || 0;
 
     return {
       left: value,
@@ -47,7 +48,7 @@ export class TouchableWithoutFeedback extends React.Component<TouchableWithoutFe
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        hitSlop={this.createHitSlopInsets()}
+        hitSlop={this.props.useDefaultHitSlop && this.createHitSlopInsets()}
         {...this.props}
       />
     );
