@@ -16,6 +16,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  EvaInputSize,
+  EvaStatus,
   FalsyFC,
   FalsyText,
   RenderProp,
@@ -47,8 +49,8 @@ export interface BaseDatepickerProps<D = Date> extends StyledComponentProps,
   captionIcon?: RenderProp<Partial<ImageProps>>;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
-  size?: 'small' | 'medium' | 'large' | string;
+  status?: EvaStatus;
+  size?: EvaInputSize;
   placeholder?: React.ReactText;
   placement?: PopoverPlacement | string;
   backdropStyle?: StyleProp<ViewStyle>;
@@ -243,9 +245,9 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
         <FalsyText
           style={evaStyle.text}
           numberOfLines={1}
-          ellipsizeMode='tail'>
-          {this.getComponentTitle()}
-        </FalsyText>
+          ellipsizeMode='tail'
+          component={this.getComponentTitle()}
+        />
         <FalsyFC
           style={evaStyle.icon}
           component={this.props.accessoryRight}

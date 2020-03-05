@@ -9,7 +9,7 @@ import {
   MenuGroup,
   MenuGroupElement,
   MenuGroupProps,
-} from '@ui-kitten/components';
+} from '../menu/menuGroup.component';
 
 export type DrawerGroupProps = MenuGroupProps;
 export type DrawerGroupElement = React.ReactElement<DrawerGroupProps>;

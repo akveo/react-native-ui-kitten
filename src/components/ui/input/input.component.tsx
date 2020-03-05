@@ -21,6 +21,8 @@ import {
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
+  EvaSize,
+  EvaStatus,
   FalsyFC,
   FalsyText,
   FlexStyleProps,
@@ -43,8 +45,8 @@ type InputStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface InputProps extends TextInputProps, InputStyledProps {
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
-  size?: 'small' | 'medium' | 'large' | string;
+  status?: EvaStatus;
+  size?: EvaSize;
   disabled?: boolean;
   label?: RenderProp<TextProps> | React.ReactText;
   caption?: RenderProp<TextProps> | React.ReactText;

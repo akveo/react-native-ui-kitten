@@ -20,6 +20,8 @@ import {
 import { Overwrite } from 'utility-types';
 import {
   ChildrenWithProps,
+  EvaInputSize,
+  EvaStatus,
   FalsyFC,
   FalsyText,
   IndexPath,
@@ -62,8 +64,8 @@ export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   caption?: RenderProp<TextStyle> | string;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
-  size?: 'small' | 'medium' | 'large' | string;
+  status?: EvaStatus;
+  size?: EvaInputSize;
 }
 
 export type SelectElement = React.ReactElement<SelectProps>;
@@ -414,7 +416,8 @@ export class SelectComponent extends React.Component<SelectProps, State> {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+        disabled={props.disabled}>
         <FalsyFC
           style={evaStyle.icon}
           component={props.accessoryLeft}
@@ -423,7 +426,7 @@ export class SelectComponent extends React.Component<SelectProps, State> {
           style={[styles.text, evaStyle.placeholder, textStyle]}
           numberOfLines={1}
           ellipsizeMode='tail'
-          component={value || this.props.placeholder}
+          component={value || props.placeholder}
         />
         <FalsyFC
           style={evaStyle.icon}

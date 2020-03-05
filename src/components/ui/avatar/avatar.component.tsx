@@ -17,20 +17,18 @@ import {
   StyledComponentProps,
   StyleType,
 } from '../../theme';
+import { EvaSize } from '@ui-kitten/components/devsupport';
 
 type AvatarStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
 }>;
 
 export interface AvatarProps extends ImageProps, AvatarStyledProps {
-  shape?: AvatarEvaShape | string;
-  size?: AvatarEvaSize | string;
+  shape?: 'round' | 'rounded' | 'square' | string;
+  size?: EvaSize;
 }
 
 export type AvatarElement = React.ReactElement<AvatarProps>;
-
-type AvatarEvaShape = 'round' | 'rounded' | 'square';
-type AvatarEvaSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
 
 /**
  * `Avatar` is a styled `Image` component.

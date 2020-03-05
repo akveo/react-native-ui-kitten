@@ -13,7 +13,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
-import { Size } from '../../devsupport';
+import {
+  EvaSize,
+  EvaStatus,
+  Size,
+} from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
@@ -29,8 +33,8 @@ type SpinnerStyledProps = Overwrite<StyledComponentProps, {
 
 export interface SpinnerProps extends ViewProps, SpinnerStyledProps {
   animating?: boolean;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'giant' | string;
+  status?: EvaStatus;
+  size?: EvaSize;
 }
 
 export type SpinnerElement = React.ReactElement<SpinnerProps>;
@@ -150,7 +154,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     const evaStyle = this.getComponentStyle(this.animation.toProps());
 
     return (
-      <View style={containerSize}>
+      <View style={[containerSize, { position: 'relative' }]}>
         {this.renderArcElement(evaStyle.start, containerSize)}
         {this.renderArcElement(evaStyle.end, containerSize)}
       </View>

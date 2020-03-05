@@ -14,6 +14,7 @@ import {
   styled,
   StyledComponentProps,
 } from '../../theme';
+import { EvaStatus } from '../../devsupport';
 
 type TextStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | 'alternative' | 'hint' | string;
@@ -24,7 +25,7 @@ type ChildElement = React.ReactText | TextElement;
 export interface TextProps extends RNTextProps, TextStyledProps {
   children?: ChildElement | ChildElement[];
   category?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 's1' | 's2' | 'p1' | 'p2' | 'c1' | 'c2' | 'label' | string;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  status?: EvaStatus;
 }
 
 export type TextElement = React.ReactElement<TextProps>;

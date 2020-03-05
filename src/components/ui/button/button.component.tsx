@@ -14,12 +14,14 @@ import {
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
+  EvaSize,
+  EvaStatus,
   FalsyFC,
   FalsyText,
   RenderProp,
   TouchableWeb,
-  TouchableWebProps,
   TouchableWebElement,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -37,8 +39,8 @@ export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'giant' | string;
+  status?: EvaStatus;
+  size?: EvaSize;
 }
 
 export type ButtonElement = React.ReactElement<ButtonProps>;

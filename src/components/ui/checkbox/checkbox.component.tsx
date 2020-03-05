@@ -15,11 +15,12 @@ import {
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
+  EvaStatus,
   FalsyText,
   RenderProp,
   TouchableWeb,
-  TouchableWebProps,
   TouchableWebElement,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -46,7 +47,7 @@ export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
   indeterminate?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
   text?: RenderProp<TextProps> | React.ReactText;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  status?: EvaStatus;
 }
 
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;

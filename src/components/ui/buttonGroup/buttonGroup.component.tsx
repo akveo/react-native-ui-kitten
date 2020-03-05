@@ -12,7 +12,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Overwrite } from 'utility-types';
-import { ChildrenWithProps } from '../../devsupport';
+import {
+  ChildrenWithProps,
+  EvaSize,
+  EvaStatus,
+} from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
@@ -29,8 +33,8 @@ type ButtonGroupStyledProps = Overwrite<StyledComponentProps, {
 
 export interface ButtonGroupProps extends ViewProps, ButtonGroupStyledProps {
   children: ChildrenWithProps<ButtonProps>;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
-  size?: 'tiny' | 'small' | 'medium' | 'large' | 'giant' | string;
+  status?: EvaStatus;
+  size?: EvaSize;
 }
 
 export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;

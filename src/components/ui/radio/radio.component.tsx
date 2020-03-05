@@ -14,11 +14,12 @@ import {
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
+  EvaStatus,
   FalsyText,
   RenderProp,
   TouchableWeb,
-  TouchableWebProps,
   TouchableWebElement,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -36,7 +37,7 @@ export interface RadioProps extends TouchableWebProps, RadioStyledProps {
   checked?: boolean;
   onChange?: (selected: boolean) => void;
   text?: RenderProp<TextProps> | React.ReactText;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  status?: EvaStatus;
 }
 
 export type RadioElement = React.ReactElement<RadioProps>;

@@ -13,11 +13,12 @@ import {
 } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
+  EvaStatus,
   FalsyFC,
   RenderProp,
   TouchableWeb,
-  TouchableWebProps,
   TouchableWebElement,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -36,7 +37,7 @@ export interface CardProps extends TouchableWebProps, CardStyledProps {
   accent?: RenderProp<ViewProps>;
   header?: RenderProp<ViewProps>;
   footer?: RenderProp<ViewProps>;
-  status?: 'basic' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'control' | string;
+  status?: EvaStatus;
 }
 
 export type CardElement = React.ReactElement<CardProps>;
@@ -137,7 +138,7 @@ class CardComponent extends React.Component<CardProps> {
     return (
       <TouchableWeb
         {...touchableProps}
-        style={[evaStyle.container, styles.container, style]}
+        style={[styles.container, evaStyle.container, style]}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <FalsyFC
