@@ -1,28 +1,28 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Select,
-} from '@ui-kitten/components';
-
-const data = [
-  { text: 'Option 1' },
-  { text: 'Option 2' },
-  { text: 'Option 3' },
-];
+import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
 
 export const SelectMultiSelectShowcase = () => {
 
-  const [selectedOption, setSelectedOption] = React.useState([]);
+  const [selectedIndex, setSelectedIndex] = React.useState([
+    new IndexPath(0),
+    new IndexPath(1),
+  ]);
+
+  const onSelect = (index) => {
+    setSelectedIndex(index);
+  };
 
   return (
     <Layout style={styles.container}>
       <Select
-        data={data}
         multiSelect={true}
-        selectedOption={selectedOption}
-        onSelect={setSelectedOption}
-      />
+        selectedIndex={selectedIndex}
+        onSelect={onSelect}>
+        <SelectItem title='Option 1'/>
+        <SelectItem title='Option 2'/>
+        <SelectItem title='Option 3'/>
+      </Select>
     </Layout>
   );
 };

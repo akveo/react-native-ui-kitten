@@ -30,38 +30,36 @@ type TabBarStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface TabBarProps extends ViewProps, TabBarStyledProps {
+  children?: ChildrenWithProps<TabProps>;
   selectedIndex?: number;
   onSelect?: (index: number) => void;
-  children?: ChildrenWithProps<TabProps>;
   indicatorStyle?: StyleProp<ViewStyle>;
 }
 
 export type TabBarElement = React.ReactElement<TabBarProps>;
 
 /**
- * The `TabBar` component that manages `Tab` components.
+ * A bar with tabs styled by Eva.
+ * TabBar should contain Tab components to provide a useful navigation component.
  *
  * @extends React.Component
  *
- * @property {number} selectedIndex - Determines index of the selected tab.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tabs to be rendered within the bar.
  *
- * @property {(index: number) => void} onSelect - Called when tab is pressed.
+ * @property {number} selectedIndex - Index of currently selected tab.
  *
- * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tab components to render within the bar.
+ * @property {(number) => void} onSelect - Called when tab is pressed.
  *
- * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of the indicator component.
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Style of the indicator component.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example TabBarSimpleUsage
  *
- * @overview-example TabBarWithIcon
- *
  * @overview-example Using with React Navigation
  *
  * ```
  * import React from 'react';
- * import { SafeAreaView } from 'react-native';
  * import { NavigationContainer } from '@react-navigation/native';
  * import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
  * import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
@@ -69,7 +67,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * // React Navigation Top Tabs also requires installation of `react-native-tab-view`
  * // npm i react-native-tab-view
  *
- * const TopTab = createBottomTabNavigator();
+ * const { Navigator, Screen } = createBottomTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -83,27 +81,20 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *   </Layout>
  * );
  *
- * const TopTabBar = ({ navigation, state }) => {
- *
- *   const onSelect = (index) => {
- *     navigation.navigate(state.routeNames[index]);
- *   };
- *
- *   return (
- *     <SafeAreaView>
- *       <TabBar selectedIndex={state.index} onSelect={onSelect}>
- *         <Tab title='USERS'/>
- *         <Tab title='ORDERS'/>
- *       </BottomNavigation>
- *     </SafeAreaView>
- *   );
- * };
+ * const TopTabBar = ({ navigation, state }) => (
+ *   <TabBar
+ *     selectedIndex={state.index}
+ *     onSelect={index => navigation.navigate(state.routeNames[index])}>
+ *     <Tab title='USERS'/>
+ *     <Tab title='ORDERS'/>
+ *   </TabBar>
+ * );
  *
  * const TabNavigator = () => (
- *   <TopTab.Navigator tabBar={props => <TopTabBar {...props} />}>
- *     <TopTab.Screen name='Users' component={UsersScreen}/>
- *     <TopTab.Screen name='Orders' component={OrdersScreen}/>
- *   </TopTab.Navigator>
+ *   <Navigator tabBar={props => <TopTabBar {...props} />}>
+ *     <Screen name='Users' component={UsersScreen}/>
+ *     <Screen name='Orders' component={OrdersScreen}/>
+ *   </Navigator>
  * );
  *
  * export const AppNavigator = () => (
@@ -112,6 +103,8 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  *   </NavigationContainer>
  * );
  * ```
+ *
+ * @overview-example TabBarAccessories
  */
 export class TabBarComponent extends React.Component<TabBarProps> {
 

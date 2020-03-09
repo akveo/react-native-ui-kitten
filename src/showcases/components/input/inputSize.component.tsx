@@ -1,23 +1,17 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Input,
-  Layout,
-} from '@ui-kitten/components';
+import { Input, Layout } from '@ui-kitten/components';
 
-const useInputChanges = (initialValue = '') => {
+const useInputState = (initialValue = '') => {
   const [value, setValue] = React.useState(initialValue);
-  return {
-    value,
-    onChangeText: setValue,
-  };
+  return { value, onChangeText: setValue };
 };
 
 export const InputSizeShowcase = () => {
 
-  const smallInputChanges = useInputChanges();
-  const mediumInputChanges = useInputChanges();
-  const largeInputChanges = useInputChanges();
+  const smallInputState = useInputState();
+  const mediumInputState = useInputState();
+  const largeInputState = useInputState();
 
   return (
     <Layout>
@@ -26,21 +20,21 @@ export const InputSizeShowcase = () => {
         style={styles.input}
         size='small'
         placeholder='Small'
-        {...smallInputChanges}
+        {...smallInputState}
       />
 
       <Input
         style={styles.input}
         size='medium'
         placeholder='Medium'
-        {...mediumInputChanges}
+        {...mediumInputState}
       />
 
       <Input
         style={styles.input}
         size='large'
         placeholder='Large'
-        {...largeInputChanges}
+        {...largeInputState}
       />
 
     </Layout>
@@ -49,7 +43,7 @@ export const InputSizeShowcase = () => {
 
 const styles = StyleSheet.create({
   input: {
-    margin: 8,
+    marginVertical: 2,
   },
 });
 

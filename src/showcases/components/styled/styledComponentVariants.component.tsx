@@ -1,14 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import {
-  ApplicationProvider,
-  Interaction,
-  styled,
-} from '@ui-kitten/components';
-import {
-  light,
-  mapping,
-} from '@eva-design/eva';
+import { ApplicationProvider, Interaction, styled } from '@ui-kitten/components';
+import { light, mapping } from '@eva-design/eva';
 
 /**
  * This example shows how styled component can apply custom properties like status or size.
@@ -39,18 +32,18 @@ class StyledComponent extends React.Component {
   static styledComponentName = 'StyledComponent';
 
   onPressIn = () => {
-    this.props.dispatch([Interaction.ACTIVE]);
+    this.props.eva.dispatch([Interaction.ACTIVE]);
   };
 
   onPressOut = () => {
-    this.props.dispatch([]);
+    this.props.eva.dispatch([]);
   };
 
   render() {
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        style={this.props.themedStyle}
+        style={this.props.eva.style}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
       />

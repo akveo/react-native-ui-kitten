@@ -46,40 +46,42 @@ export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
 export type ButtonElement = React.ReactElement<ButtonProps>;
 
 /**
- * Styled `Button` component.
+ * Buttons allow users to take actions, and make choices, with a single tap.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `filled`, `outline` or `ghost`.
- * Default is `filled`.
- *
- * @property {string} status - Determines the status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `primary`.
- *
- * @property {string} size - Determines the size of the component.
- * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
- *
- * @property {ReactText | (props: TextProps) => ReactElement} children - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
  * to render within the button.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
+ *
+ * @property {string} appearance - Appearance of the component.
+ * Can be `filled`, `outline` or `ghost`.
+ * Defaults to *filled*.
+ *
+ * @property {string} status - Status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
+ *
+ * @property {string} size - Size of the component.
+ * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
+ * Defaults to *medium*.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ButtonSimpleUsage
  *
  * @overview-example ButtonStates
+ *
+ * @overview-example ButtonAccessories
  *
  * @overview-example ButtonAppearances
  *
@@ -91,7 +93,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @overview-example ButtonGhost
  *
- * @overview-example ButtonWithIcon
+ * @example ButtonStyling
  */
 export class ButtonComponent extends React.Component<ButtonProps> {
 

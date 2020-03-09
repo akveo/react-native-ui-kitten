@@ -1,6 +1,7 @@
 import React from 'react';
 import { SvgProps } from 'react-native-svg';
 import { IconProvider } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
 type IconElement = React.ReactElement<SvgProps>;
 type IconComponent = React.ComponentType<SvgProps>;
@@ -15,7 +16,7 @@ export class EvaIcon implements IconProvider<SvgProps> {
 
     const { style, ...svgProps } = props;
     // @ts-ignore - UI Kitten components pass here `tintColor`
-    const fillColor: string = style.tintColor;
+    const fillColor: string = StyleSheet.flatten(style || {}).tintColor;
 
     return (
       <Icon

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Keyboard, Platform, StyleSheet } from 'react-native';
-import { Autocomplete, Layout } from '@ui-kitten/components';
+import { Keyboard, Platform } from 'react-native';
+import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
-const DATA = [
+const movies = [
   { title: 'Star Wars' },
   { title: 'Back to the Future' },
   { title: 'The Matrix' },
@@ -20,10 +20,12 @@ const hideEvent = Platform.select({
   default: 'keyboardWillHide',
 });
 
+const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+
 export const AutocompleteHandleKeyboardShowcase = () => {
 
   const [value, setValue] = React.useState(null);
-  const [data, setData] = React.useState(DATA);
+  const [data, setData] = React.useState(movies);
   const [placement, setPlacement] = React.useState('bottom');
 
   React.useEffect(() => {
@@ -41,31 +43,30 @@ export const AutocompleteHandleKeyboardShowcase = () => {
     };
   });
 
-  const onSelect = ({ title }) => {
-    setValue(title);
+  const onSelect = (index) => {
+    setValue(movies[index].title);
   };
 
   const onChangeText = (query) => {
     setValue(query);
-    setData(DATA.filter(item => item.title.toLowerCase().includes(query.toLowerCase())));
+    setData(movies.filter(item => filter(item, query)));
   };
 
+  const renderOption = (item, index) => (
+    <AutocompleteItem
+      key={index}
+      title={item.title}
+    />
+  );
+
   return (
-    <Layout style={styles.container}>
-      <Autocomplete
-        placeholder='Place your Text'
-        value={value}
-        data={data}
-        placement={placement}
-        onChangeText={onChangeText}
-        onSelect={onSelect}
-      />
-    </Layout>
+    <Autocomplete
+      placeholder='Place your Text'
+      value={value}
+      placement={placement}
+      onChangeText={onChangeText}
+      onSelect={onSelect}>
+      {data.map(renderOption)}
+    </Autocomplete>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    minHeight: 228,
-  },
-});

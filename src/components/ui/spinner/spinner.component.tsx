@@ -46,20 +46,21 @@ interface ArcElementStyle {
 }
 
 /**
- * Styled `Spinner` component. Designed to be used as `ActivityIndicator` component
+ * Displays a loading state of a page or a section.
  *
  * @extends React.Component
  *
- * @property {boolean} animating - Determines whether component is animating.
- * Default is `true`.
+ * @property {boolean} animating - Whether component is animating.
+ * Default is *true*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `primary`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
+ * Defaults to *medium*.
  *
  * @overview-example SpinnerSimpleUsage
  *
@@ -127,10 +128,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
       overflow: { top: this.containerSize.height / 2 },
     };
 
-    return {
-      start,
-      end,
-    };
+    return { start, end };
   };
 
   private renderArcElement = (style: ArcElementStyle, size: Size): React.ReactElement<ViewProps> => {
@@ -154,7 +152,7 @@ export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
     const evaStyle = this.getComponentStyle(this.animation.toProps());
 
     return (
-      <View style={[containerSize, { position: 'relative' }]}>
+      <View style={containerSize}>
         {this.renderArcElement(evaStyle.start, containerSize)}
         {this.renderArcElement(evaStyle.end, containerSize)}
       </View>

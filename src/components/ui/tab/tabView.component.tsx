@@ -41,34 +41,32 @@ export interface TabViewProps extends ViewPagerProps<TabProps> {
 export type TabViewElement = React.ReactElement<TabViewProps>;
 
 /**
- * `TabView` is a dynamic tabset component. Allows flipping through the tab "pages".
+ * A view with tabs and swipeable contents.
+ * TabView should contain Tabs with it's contents to provide a useful component.
  *
  * @extends React.Component
  **
- * @property {number} selectedIndex - Determines index of the selected tab.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tabs to be rendered within the view.
  *
- * @property {(index: number) => void} onSelect - Called when tab is pressed or tab contents become visible.
+ * @property {number} selectedIndex - Index of currently selected tab.
  *
- * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tab components to render within the view.
+ * @property {(number) => void} onSelect - Called when tab is pressed or its content becomes visible.
  *
- * @property {(index: number) => boolean} shouldLoadComponent - Determines loading behavior for particular page.
- * Can be used for lazy loading.
+ * @property {(number) => boolean} shouldLoadComponent - A function to determine
+ * whether content for particular tab should be rendered.
+ * Useful when providing "lazy" loading behavior.
  *
- * @property {(offset: number) => void} onOffsetChange - Called when scroll offset changes.
+ * @property {(number) => void} onOffsetChange - Called when scroll offset changes.
  *
- * @property {StyleProp<ViewStyle>} tabBarStyle - Determines style TabBar component.
+ * @property {StyleProp<ViewStyle>} tabBarStyle - Style of TabBar component.
  *
- * @property {StyleProp<ViewStyle>} indicatorStyle - Determines style of selected tab indicator.
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Style of selected tab indicator.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example TabViewSimpleUsage
  *
- * @overview-example TabViewWithIcon
- *
- * @overview-example TabViewLazyLoading
- *
- * @example TabViewInlineStyling
+ * @example TabViewLazyLoading
  */
 export class TabView extends React.Component<TabViewProps> {
 

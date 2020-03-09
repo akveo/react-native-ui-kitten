@@ -54,35 +54,36 @@ export interface SelectItemProps extends TouchableSelectProps, SelectItemStyledP
 export type SelectItemElement = React.ReactElement<SelectItemProps>;
 
 /**
- * Renders a single item in list displayed in Select.
+ * A single item in Select.
  * Items should be rendered within Select or SelectGroup children to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `default` or `grouped`.
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * to render within the item.
+ * If it is a function, expected to return a Text.
  *
- * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
- * to render within the button.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * to render to start of the *title*.
+ * Expected to return an Image.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
- * to render to start of the `title`.
- * Called with props provided by Eva.
- *
- * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
- * to render to end of the `title`.
- * Called with props provided by Eva.
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * to render to end of the *title*.
+ * Expected to return an Image.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ *
+ * @overview-example SelectItemSimpleUsage
  */
 class SelectItemComponent extends React.Component<SelectItemProps> {
 
   static styledComponentName: string = 'SelectOption';
 
   private get isMultiSelect(): boolean {
-    return this.props.descriptor.multiSelect;
+    if (this.props.descriptor) {
+      return this.props.descriptor.multiSelect;
+    }
+    return false;
   }
 
   private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {

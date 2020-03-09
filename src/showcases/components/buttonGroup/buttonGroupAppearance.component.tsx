@@ -1,10 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Button,
-  ButtonGroup,
-  Layout,
-} from '@ui-kitten/components';
+import { Button, ButtonGroup, Layout } from '@ui-kitten/components';
 
 export const ButtonGroupAppearanceShowcase = () => (
   <Layout style={styles.container}>
@@ -27,9 +23,8 @@ export const ButtonGroupAppearanceShowcase = () => (
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: 8,
   },
   buttonGroup: {
-    margin: 8,
+    margin: 2,
   },
 });

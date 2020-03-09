@@ -45,47 +45,33 @@ export interface ListItemProps extends TouchableWebProps, ListItemStyledProps {
 export type ListItemElement = React.ReactElement<ListItemProps>;
 
 /**
- * `ListItem` is a support component for `List`.
- * The key feature of wrapping custom list items into `ListItem` component is that it automatically
- * picks background color fitting to current theme and responds to touches with feedback.
+ * A single item rendered in List.
+ * Items should be rendered within List by providing them through `renderItem` property to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {string | (props: TextProps)} title - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the item.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {string | (props: TextProps)} description - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} description - String, number or a function component
  * to render within the item.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {ReactNode} children - A component to render within the item.
- * If provided, `title` and other props will be ignored.
- *
- * @property {(props: ImageProps, index: number) => ReactElement} accessoryLeft - A function component
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {(props: ViewProps, index: number) => ReactElement} accessoryRight - A function component
+ * @property {(ViewProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
- * Called with props provided by Eva.
  *
- * @property {(index: number, event: GestureResponderEvent) => void} onPress - Called when component is pressed.
- * Note that `index` is provided.
+ * @property {ReactNode} children - Component to render within the item.
+ * Useful when needed to render a custom item and get a feedback when it is pressed.
+ * If provided, *title* and other properties will be ignored.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ListItemSimpleUsage
- *
- * @overview-example ListItemWithIcon
- *
- * @overview-example ListItemWithAccessory
- *
- * @example ListItemWithExternalIcon
- *
- * @example ListItemInlineStyling
  */
 export class ListItemComponent extends React.Component<ListItemProps & { index: number }> {
 

@@ -19,44 +19,57 @@ import { RangeDateService } from './service/rangeDate.service';
 import { CalendarRange } from './type';
 
 export interface RangeCalendarProps<D = Date> extends StyledComponentProps, BaseCalendarProps<D> {
-  range: CalendarRange<D>;
-  onSelect: (range: CalendarRange<D>) => void;
+  range?: CalendarRange<D>;
+  onSelect?: (range: CalendarRange<D>) => void;
 }
 
 export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarProps<D>>;
 
 /**
- * Styled `RangeCalendar` component.
+ * Range Calendar provides a simple way to select a date range.
+ *
  * Supports locales and different date objects like Moment.js or date-fns.
  * Composes date picker components in a horizontal pageable list.
  *
  * @extends React.Component
  *
+ * @property {CalendarRange<D>} range - Date range which is currently selected.
+ * CalendarRange `startDate?: D, endDate?: D` - Object with start and end dates for date range.
+ * A range may contain only a startDate or both startDate and endDate properties meaning completeness of picked value.
+ *
+ * @property {(CalendarRange) => void} onSelect - Called when day cell is pressed.
+ *
  * @property {D} min - Minimal date that is able to be selected.
  *
  * @property {D} max - Maximum date that is able to be selected.
  *
- * @property {CalendarRange<D>} range - Range which is currently selected.
- *
  * @property {DateService<D>} dateService - Date service that is able to work with a date objects.
  * Defaults to Native Date service that works with JS Date.
  * Allows using different types of date like Moment.js or date-fns.
+ * Moment.js service can be provided by installing `@ui-kitten/moment` package.
+ * date-fns service can be provided by installing `@ui-kitten/date-fns` package.
  *
  * @property {boolean} boundingMonth - Defines if we should render previous and next months in the current month view.
  *
- * @property {CalendarViewMode} startView - Defines starting view for calendar. Defaults to Date view.
+ * @property {CalendarViewMode} startView - Defines starting view for calendar.
+ * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
+ * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(date: D) => string} title - Defines the title for visible date.
+ * @property {(D) => string} title - A function to transform selected date to a string displayed in header.
  *
- * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
+ * @property {(D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
- * @property {(date: D) => void} onSelect - Selection emitter. Fires when another day cell is pressed.
+ * @property {(D, NamedStyles) => ReactElement} renderDay - Function component
+ * to render instead of default day cell.
+ * Called with a date for this cell and styles provided by Eva.
  *
- * @property {(date: D, style: StyleType) => ReactElement} renderDay - Should return the content of day cell.
+ * @property {(D, NamedStyles) => ReactElement} renderMonth - Function component
+ * to render instead of default month cell.
+ * Called with a date for this cell and styles provided by Eva.
  *
- * @property {(date: D, style: StyleType) => ReactElement} renderMonth - Should return the content of month cell.
- *
- * @property {(date: D, style: StyleType) => ReactElement} renderYear - Should return the content of year cell.
+ * @property {(D, NamedStyles) => ReactElement} renderYear - Function component
+ * to render instead of default year cell.
+ * Called with a date for this cell and styles provided by Eva.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -65,6 +78,11 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
 export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<RangeCalendarProps<D>, D> {
 
   static styledComponentName: string = 'Calendar';
+
+  static defaultProps: Partial<RangeCalendarProps> = {
+    ...BaseCalendarComponent.defaultProps,
+    range: {},
+  };
 
   private rangeDateService: RangeDateService<D> = new RangeDateService(this.dateService);
 

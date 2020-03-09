@@ -32,7 +32,6 @@ export interface PopoverViewProps extends ViewProps, StyledComponentProps {
   contentContainerStyle?: StyleProp<AnimatedViewStyle>;
   placement?: PopoverPlacement | string;
   indicator?: (props: ViewProps) => React.ReactElement;
-  children: React.ReactElement;
 }
 
 export type PopoverViewElement = React.ReactElement<PopoverViewProps>;

@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Avatar,
-  Layout,
-} from '@ui-kitten/components';
+import { Avatar, Layout } from '@ui-kitten/components';
 
 export const AvatarShapeShowcase = () => (
   <Layout style={styles.container}>
@@ -22,7 +19,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',
-    padding: 8,
   },
   avatar: {
     margin: 8,

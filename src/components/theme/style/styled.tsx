@@ -38,20 +38,23 @@ interface State {
 export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps & P>;
 
 /**
- * `styled` is a High Order Function which is used to apply style mapping on component.
+ * High Order Function to apply style mapping on a component.
+ * Used by all UI Kitten components and can be used when building custom components with Eva.
  *
- * Requires component to have `styledComponentName` string property which defines
- * corresponding component name in mapping. (e.g 'Button' for Button component).
- * Returns component class which can be used as styled component.
+ * Requires component to have a static `styledComponentName` property which defines
+ * corresponding component name in mapping.
  *
- * @property {string} appearance - Determines style appearance of component. Default is provided by mapping.
+ * Injects `eva` property into component props, which is `{ theme, style, dispatch }`.
+ * Current theme, styles provided by Eva and dispatch function to request styles for a particular state.
+ *
+ * @property {string} appearance - Appearance of component. Default is provided by mapping.
  *
  * @property {EvaProp} eva - Additional property injected to all `styled` components. Includes following properties:
  * `theme` - current theme,
  * `style` - style provided by Eva,
- * `dispatch` - a function for requesting styles from Eva for current component state.
+ * `dispatch` - Function for requesting styles from Eva for current component state.
  *
- * @param Component - Type: {ComponentType}. Determines class or functional component to be styled.
+ * @param Component - Type: {ComponentType}. Component to be styled.
  *
  * @overview-example StyledComponentSimpleUsage
  *

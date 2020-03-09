@@ -7,19 +7,9 @@
 import React from 'react';
 import { ViewProps } from 'react-native';
 import { Overwrite } from 'utility-types';
-import {
-  FalsyFC,
-  RenderProp,
-} from '../../devsupport';
-import {
-  styled,
-  StyledComponentProps,
-  StyleType,
-} from '../../theme';
-import {
-  Menu,
-  MenuProps,
-} from '../menu/menu.component';
+import { FalsyFC, RenderProp } from '../../devsupport';
+import { styled, StyledComponentProps, StyleType } from '../../theme';
+import { Menu, MenuProps } from '../menu/menu.component';
 
 type DrawerStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | 'noDivider' | string;
@@ -33,25 +23,25 @@ export interface DrawerProps extends MenuProps, DrawerStyledProps {
 export type DrawerElement = React.ReactElement<DrawerProps>;
 
 /**
- * Styled `Drawer` component.
- * Renders UI Kitten Menu component with additional styles provided by Eva.
+ * Navigation panel which slides from the side of the screen.
+ * Drawer should contain DrawerItem or DrawerGroup components to provide a useful component.
  *
  * @extends React.Component
- *
- * @property {string} appearance - appearance of the component.
- * Can be `default` or `noDivider`.
  *
  * @property {ReactElement<DrawerItemProps> | ReactElement<DrawerItemProps>[]} children -
  * items to be rendered within drawer.
  *
- * @property {IndexPath} selectedIndex - index of selected item.
- * IndexPath `{ row: number, section: number | undefined }` - position of element in sectioned list.
+ * @property {IndexPath} selectedIndex - Index of selected item.
+ * IndexPath `row: number, section?: number` - position of element in sectioned list.
  * Drawer becomes sectioned when DrawerGroup is rendered within children.
  * Updating this property is not required if marking items selected is not needed.
  *
- * @property {(option: IndexPath | IndexPath[]) => void} onSelect - called when item is pressed.
- * Called with `{ row: number }` by default.
- * Called with { row: number, section: number } for items rendered within DrawerGroup.
+ * @property {(IndexPath | IndexPath[]) => void} onSelect - Called when item is pressed.
+ * Called with `row: number` by default.
+ * Called with `row: number, section: number` for items rendered within DrawerGroup.
+ *
+ * @property {string} appearance - Appearance of the component.
+ * Can be `default` or `noDivider`.
  *
  * @property {ListProps} ...ListProps - Any props applied to List component,
  * excluding `renderItem` and `data`.
@@ -80,21 +70,14 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *   </Layout>
  * );
  *
- * const DrawerContent = ({ navigation, state }) => {
- *
- *   const onSelect = (index) => {
- *     navigation.navigate(state.routeNames[index]);
- *   };
- *
- *   return (
- *     <Drawer
- *       selectedIndex={state.index}
- *       onSelect={onSelect}>
- *       <DrawerItem title='Home' />
- *       <DrawerItem title='Settings' />
- *     </UIKittenDrawer>
- *   );
- * };
+ * const DrawerContent = ({ navigation, state }) => (
+ *   <Drawer
+ *     selectedIndex={state.index}
+ *     onSelect={index => navigation.navigate(state.routeNames[index.row])}>
+ *     <DrawerItem title='Users' />
+ *     <DrawerItem title='Orders' />
+ *   </Drawer>
+ * );
  *
  * export const DrawerNavigator = () => (
  *   <Navigator drawerContent={props => <DrawerContent {...props}/>}>
@@ -110,15 +93,9 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * );
  * ```
  *
- * @overview-example DrawerWithIcons
+ * @overview-example DrawerAccessories
  *
- * @overview-example DrawerHeader
- *
- * @overview-example DrawerFooter
- *
- * @example DrawerCustomHeader
- *
- * @example DrawerNotificationBadgeItem
+ * @example DrawerStyling
  */
 class DrawerComponent extends React.Component<DrawerProps> {
 

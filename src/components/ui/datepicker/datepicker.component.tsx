@@ -15,15 +15,17 @@ import {
   CalendarElement,
   CalendarProps,
 } from '../calendar/calendar.component';
+import { RenderProp } from '@ui-kitten/components/devsupport';
+import { TextProps } from '@ui-kitten/components';
 
 export type DatepickerProps<D = Date> = BaseDatepickerProps<D> & CalendarProps<D>;
 export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>;
 
 /**
- * Styled `Datepicker` component.
- * Renders `Calendar` component in the `Popover`.
+ * Date picker provides a simple way to select a date within a picker displayed in modal.
+ *
+ * Renders an Input box and UI Kitten Calendar component within the Popover component when focused.
  * Supports locales and different date objects like Moment.js or date-fns.
- * Composes date picker components in a horizontal pageable list.
  *
  * @extends React.Component
  *
@@ -39,10 +41,10 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @method {() => void} clear - Removes all text from the Datepicker.
  *
- * @property {D} date - Determines the selected date.
- * Default is current date.
+ * @property {D} date - Date which is currently selected.
+ * Defaults to current date.
  *
- * @property {(date: D) => void} onSelect - Called when day cell is pressed.
+ * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
@@ -56,63 +58,59 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @property {boolean} boundingMonth - Defines if previous and next months should be rendered in the current month view.
  *
- * @property {(date: D, styles: NamedStyles) => ReactElement} renderDay - A function component
+ * @property {(D, NamedStyles) => ReactElement} renderDay - Function component
  * to render instead of default day cell.
  * Called with a date for this cell and styles provided by Eva.
  *
- * @property {(date: D, styles: NamedStyles) => ReactElement} renderMonth - A function component
+ * @property {(D, NamedStyles) => ReactElement} renderMonth - Function component
  * to render instead of default month cell.
  * Called with a date for this cell and styles provided by Eva.
  *
- * @property {(date: D, styles: NamedStyles) => ReactElement} renderYear - A function component
+ * @property {(D, NamedStyles) => ReactElement} renderYear - Function component
  * to render instead of default year cell.
  * Called with a date for this cell and styles provided by Eva.
  *
- * @property {() => ReactElement} renderFooter - A function component
- * to render to the bottom of the calendar.
- *
  * @property {CalendarViewMode} startView - Defines starting view for calendar.
  * Can be `CalendarViewModes.DATE`, `CalendarViewModes.MONTH` or `CalendarViewModes.YEAR`.
- * Default is `CalendarViewModes.DATE`.
+ * Defaults to *CalendarViewModes.DATE*.
  *
- * @property {(date: D) => string} title - Defines the title for visible date.
+ * @property {(date: D) => string} title - A function to transform selected date to a string displayed in header.
  *
- * @property {(date: D) => boolean} filter - Predicate that decides which cells will be disabled.
+ * @property {(date: D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
+ * Defaults to *basic*.
+ * Useful for giving user a hint on the input validity.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `small`, `medium` or `large`.
- * Default is `medium`.
+ * Defaults to *medium*.
  *
- * @property {string | (props: TextProps)} placeholder - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} placeholder - String, number or a function component
  * to render when input field is empty.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {string | (props: TextProps) => ReactElement} label - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
  * to render to top of the input field.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {string | (props: TextProps) => ReactElement} caption - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
  * to render to bottom of the input field.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {(props: ImageProps) => ReactElement} captionIcon - A function component
- * to render to start of the `caption`.
- * Called with props provided by Eva.
+ * @property {(ImageProps) => ReactElement} captionIcon - Function component
+ * to render to start of the *caption*.
+ * Expected to return an Image.
  *
  * @property {() => void} onFocus - Called when picker becomes visible.
  *
@@ -121,20 +119,19 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @property {string | PopoverPlacement} placement - Position of the picker relative to the input field.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
- * Default is `bottom`.
- * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ * Defaults to *bottom*.
  *
- * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example DatepickerSimpleUsage
  *
- * @overview-example DatepickerWithIcon
+ * @overview-example DatepickerAccessories
  *
- * @overview-example DatepickerBoundingMonth
+ * @overview-example DatepickerFilters
  *
- * @overview-example DatepickerFilter
+ * @overview-example DatepickerLocaleSettings
  *
  * @overview-example DatepickerStatus
  *
@@ -142,11 +139,9 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @example DatepickerCustomDay
  *
- * @example DatepickerCustomLocale
- *
- * @example DatepickerDateFormat
- *
  * @example DatepickerMoment
+ *
+ * @example DatepickerStyling
  */
 export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
 
@@ -177,13 +172,12 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
       renderDay: this.props.renderDay,
       renderMonth: this.props.renderMonth,
       renderYear: this.props.renderYear,
-      renderFooter: this.props.renderFooter,
     };
   }
 
   // BaseDatepickerComponent
 
-  protected getComponentTitle(): React.ReactText {
+  protected getComponentTitle(): RenderProp<TextProps> | React.ReactText {
     if (this.props.date) {
       return this.props.dateService.format(this.props.date, null);
     } else {

@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Datepicker,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Calendar, Datepicker, Layout, Text } from '@ui-kitten/components';
 
 const DayCell = ({ date }, style) => (
   <View
@@ -21,16 +14,18 @@ const DayCell = ({ date }, style) => (
 
 export const DatepickerCustomDayShowcase = () => {
 
-  const [selectedDate, setSelectedDate] = React.useState(null);
+  const [date, setDate] = React.useState(new Date());
 
   return (
     <Layout style={styles.container}>
+
       <Datepicker
         placeholder='Pick Date'
-        date={selectedDate}
-        onSelect={setSelectedDate}
+        date={date}
+        onSelect={nextDate => setDate(nextDate)}
         renderDay={DayCell}
       />
+
     </Layout>
   );
 };

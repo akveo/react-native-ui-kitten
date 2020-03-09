@@ -1,39 +1,27 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Button,
-  Layout,
-  Modal,
-  Text,
-} from '@ui-kitten/components';
+import { Button, Layout, Modal, Text } from '@ui-kitten/components';
 
 export const ModalSimpleUsageShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
-  const toggleModal = () => {
-    setVisible(!visible);
-  };
-
-  const renderModalElement = () => (
-    <Layout
-      level='3'
-      style={styles.modalContainer}>
-      <Text>Hi! This is modal</Text>
-      <Button onPress={toggleModal}>
-        DISMISS
-      </Button>
-    </Layout>
-  );
-
   return (
     <Layout style={styles.container}>
-      <Button onPress={toggleModal}>
+
+      <Button onPress={() => setVisible(true)}>
         TOGGLE MODAL
       </Button>
+
       <Modal visible={visible}>
-        {renderModalElement()}
+        <Layout style={styles.modalContainer} level='3'>
+          <Text>Hi! This is modal</Text>
+          <Button onPress={() => setVisible(false)}>
+            DISMISS
+          </Button>
+        </Layout>
       </Modal>
+
     </Layout>
   );
 };
@@ -41,7 +29,6 @@ export const ModalSimpleUsageShowcase = () => {
 const styles = StyleSheet.create({
   container: {
     minHeight: 256,
-    padding: 16,
   },
   modalContainer: {
     justifyContent: 'center',

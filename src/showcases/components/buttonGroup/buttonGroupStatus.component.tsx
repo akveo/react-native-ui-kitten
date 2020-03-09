@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Button,
-  ButtonGroup,
-  Layout,
-} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Button, ButtonGroup, Layout } from '@ui-kitten/components';
 
 export const ButtonGroupStatusShowcase = () => (
   <Layout style={styles.container}>
@@ -56,14 +49,15 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 8,
   },
   buttonGroup: {
-    margin: 8,
+    margin: 2,
   },
   controlContainer: {
     borderRadius: 4,
-    margin: 8,
+    margin: 2,
+    padding: 6,
+    justifyContent: 'center',
     backgroundColor: '#3366FF',
   },
 });

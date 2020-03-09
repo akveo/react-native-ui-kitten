@@ -1,40 +1,11 @@
 import React from 'react';
-import {
-  ImageStyle,
-  LayoutChangeEvent,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Button,
-  Icon,
-  IconElement,
-  Layout,
-  OverflowMenu,
-  OverflowMenuItemType,
-  Text,
-} from '@ui-kitten/components';
-import { themes } from '../app/themes';
-import {
-  AppMapping,
-  AppTheme,
-  ThemeContext,
-  ThemeContextType,
-} from '../services/theme.service';
+import { ImageStyle, LayoutChangeEvent, StyleSheet, View } from 'react-native';
+import { Button, Icon, IconElement, Layout, MenuItem, OverflowMenu, Text } from '@ui-kitten/components';
+import { AppMapping, AppTheme, ThemeContext, ThemeContextType } from '../services/theme.service';
 
-export const ColorPaletteIcon = (style: ImageStyle): IconElement => (
-  <Icon {...style} name='color-palette-outline'/>
+export const ColorPaletteIcon = (props: ImageStyle): IconElement => (
+  <Icon {...props} name='color-palette-outline'/>
 );
-
-const createThemesMenu = (): OverflowMenuItemType[] => {
-  return Object.keys(themes).reduce((acc: OverflowMenuItemType[], mappingName: string) => {
-    const themeItems: OverflowMenuItemType[] = Object.keys(themes[mappingName])
-                                                     .map((themeName) => ({ title: `${mappingName} ${themeName}` }));
-    return [...acc, ...themeItems];
-  }, []);
-};
-
-const themesMenu = createThemesMenu();
 
 export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: string): React.ReactElement => {
 
@@ -45,24 +16,36 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
     setMenuVisible(!menuVisible);
   };
 
-  const onThemeSelect = (index: number): void => {
-    const [mapping, theme] = themesMenu[index].title.split(' ');
-
+  const onEvaLightPress = ({ index }): void => {
+    setTheme(AppMapping.eva, AppTheme.light);
     setMenuVisible(false);
+  };
 
+  const onEvaDarkPress = ({ index }): void => {
+    setTheme(AppMapping.eva, AppTheme.dark);
+    setMenuVisible(false);
+  };
+
+  const onMaterialLightPress = ({ index }): void => {
+    setTheme(AppMapping.material, AppTheme.light);
+    setMenuVisible(false);
+  };
+
+  const onMaterialDarkPress = ({ index }): void => {
+    setTheme(AppMapping.material, AppTheme.dark);
+    setMenuVisible(false);
+  };
+
+  const setTheme = (mapping: AppMapping, theme: AppTheme): void => {
     if (mapping !== themeContext.mapping) {
-      themeContext.setMapping(mapping as AppMapping);
-      themeContext.setTheme(theme as AppTheme);
+      themeContext.setMapping(mapping);
+      themeContext.setTheme(theme);
       return;
     }
 
     if (theme !== themeContext.theme) {
-      themeContext.setTheme(theme as AppTheme);
+      themeContext.setTheme(theme);
     }
-  };
-
-  const onLayout = (event: LayoutChangeEvent): void => {
-    postLayoutChangeEvent(event);
   };
 
   const postLayoutChangeEvent = ({ nativeEvent }: LayoutChangeEvent): void => {
@@ -74,10 +57,21 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
     window.parent.postMessage(layoutChangeMessage, '*');
   };
 
+  const renderThemeButton = () => (
+    <Button
+      appearance='ghost'
+      status='basic'
+      size='small'
+      accessoryLeft={ColorPaletteIcon}
+      onPress={onThemesButtonPress}>
+      {`${themeContext.mapping} ${themeContext.theme}`}
+    </Button>
+  );
+
   return (
     <Layout
       style={styles.container}
-      onLayout={onLayout}>
+      onLayout={postLayoutChangeEvent}>
       <View style={styles.optionsContainer}>
         <Text
           appearance='hint'
@@ -85,33 +79,37 @@ export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: strin
           Powered by React Native Web
         </Text>
         <OverflowMenu
+          anchor={renderThemeButton}
           visible={menuVisible}
-          onSelect={onThemeSelect}
-          data={themesMenu}
+          placement='bottom end'
           onBackdropPress={onThemesButtonPress}>
-          <Button
-            appearance='ghost'
-            status='basic'
-            size='small'
-            icon={ColorPaletteIcon}
-            onPress={onThemesButtonPress}>
-            {`${themeContext.mapping} ${themeContext.theme}`}
-          </Button>
+          <MenuItem title='Eva Light' onPress={onEvaLightPress}/>
+          <MenuItem title='Eva Dark' onPress={onEvaDarkPress}/>
+          <MenuItem title='Material Light' onPress={onMaterialLightPress}/>
+          <MenuItem title='Material Dark' onPress={onMaterialDarkPress}/>
         </OverflowMenu>
       </View>
-      <Component/>
+      <View style={styles.showcaseContainer}>
+        <Component/>
+      </View>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
-    minHeight: 280,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    minHeight: 264,
   },
   optionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 4,
+  },
+  showcaseContainer: {
+    flex: 1,
+    paddingVertical: 4,
   },
 });

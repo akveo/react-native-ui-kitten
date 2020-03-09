@@ -31,17 +31,17 @@ export interface AvatarProps extends ImageProps, AvatarStyledProps {
 export type AvatarElement = React.ReactElement<AvatarProps>;
 
 /**
- * `Avatar` is a styled `Image` component.
+ * An Image with additional styles provided by Eva.
  *
  * @extends React.Component
  *
- * @property {string} shape - Determines the shape of the component.
+ * @property {string} shape - Shape of the component.
  * Can be `round`, `rounded` or `square`.
- * Default is `round`.
+ * Defaults to *round*.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
+ * Defaults to *medium*.
  *
  * @property {ImageProps} ...ImageProps - Any props applied to Image component.
  *
@@ -50,10 +50,6 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  * @overview-example AvatarSize
  *
  * @overview-example AvatarShape
- *
- * @example AvatarRemoteImages
- *
- * @example AvatarInlineStyling
  */
 export class AvatarComponent extends React.Component<AvatarProps> {
 

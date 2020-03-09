@@ -25,9 +25,9 @@ import {
 } from '../../devsupport';
 
 export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
+  children?: ChildrenWithProps<ChildrenProps>;
   selectedIndex?: number;
   onSelect?: (index: number) => void;
-  children?: ChildrenWithProps<ChildrenProps>;
   shouldLoadComponent?: (index: number) => boolean;
   onOffsetChange?: (offset: number) => void;
 }
@@ -35,28 +35,27 @@ export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
 export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
 
 /**
- * `ViewPager` allows flipping through the "pages".
+ * A view with a set of swipeable pages.
  *
  * @extends React.Component
  **
- * @property {number} selectedIndex - Determines index of the selected page.
+ * @property {ReactNode} children - Page components to render within the view.
  *
- * @property {(index: number) => void} onSelect - Called when page become visible.
+ * @property {number} selectedIndex - Index of currently selected view.
  *
- * @property {ReactElement | ReactElement[]} children - Components to render within the view.
+ * @property {(number) => void} onSelect - Called when view becomes visible.
  *
- * @property {(index: number) => boolean} shouldLoadComponent - Determines loading behavior for particular page.
- * Can be used for lazy loading.
+ * @property {(number) => boolean} shouldLoadComponent - A function to determine
+ * whether particular view should be rendered.
+ * Useful when providing "lazy" loading behavior.
  *
- * @property {(offset: number) => void} onOffsetChange - Called when scroll offset changes.
+ * @property {(number) => void} onOffsetChange - Called when scroll offset changes.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ViewPagerSimpleUsage
  *
  * @overview-example ViewPagerLazyLoading
- *
- * @example ViewPagerInlineStyling
  */
 export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProps<ChildrenProps>>
   implements PanResponderCallbacks {

@@ -34,32 +34,34 @@ type RadioStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface RadioProps extends TouchableWebProps, RadioStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
-  onChange?: (selected: boolean) => void;
-  text?: RenderProp<TextProps> | React.ReactText;
+  onChange?: (checked: boolean) => void;
   status?: EvaStatus;
 }
 
 export type RadioElement = React.ReactElement<RadioProps>;
 
 /**
- * Styled `Radio` component.
+ * Radio buttons allow the user to select one option from a set.
+ * Radios should be rendered within RadioGroup to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.
- * Default is `false`.
+ * @property {boolean} checked - Whether component is checked.
+ * Defaults to *false*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {(boolean) => void} onChange - Called when radio
+ * should switch it's value.
+ *
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * to render near the checkbox.
+ * If it is a function, expected to return a Text.
+ *
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
- *
- * @property {string | (props: TextProps) => ReactElement} text - A string or a function component
- * to render near the radio.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
- *
- * @property {(checked: boolean) => void} onChange - Called on radio value change.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -69,7 +71,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * @overview-example RadioStatus
  *
- * @example RadioInlineStyling
+ * @example RadioStyling
  */
 export class RadioComponent extends React.Component<RadioProps> {
 
@@ -174,7 +176,7 @@ export class RadioComponent extends React.Component<RadioProps> {
   };
 
   public render(): TouchableWebElement {
-    const { eva, style, text, ...touchableProps } = this.props;
+    const { eva, style, children, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -196,7 +198,7 @@ export class RadioComponent extends React.Component<RadioProps> {
         </View>
         <FalsyText
           style={evaStyle.text}
-          component={text}
+          component={children}
         />
       </TouchableWeb>
     );

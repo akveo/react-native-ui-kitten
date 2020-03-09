@@ -24,8 +24,8 @@ import {
 } from '../../theme';
 
 export interface ModalProps extends ViewProps, ModalPresentingConfig {
-  visible: boolean;
-  children: React.ReactNode;
+  visible?: boolean;
+  children?: React.ReactNode;
 }
 
 export type ModalElement = React.ReactElement<ModalProps>;
@@ -36,7 +36,7 @@ interface State {
 }
 
 /**
- * `Modal` component is a wrapper than presents content above an enclosing view.
+ * A wrapper that presents content above an enclosing view.
  *
  * @extends React.Component
  *
@@ -44,14 +44,15 @@ interface State {
  *
  * @method {() => void} hide - Sets modal invisible.
  *
- * @property {boolean} visible - Determines whether component is visible. By default is false.
+ * @property {ReactNode} children - Component to render within the modal.
  *
- * @property {ReactElement | ReactElement[]} children - Determines component's children.
+ * @property {boolean} visible - Whether component is visible.
+ * Defaults to false.
  *
- * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ * @property {() => void} onBackdropPress - Called when the modal is visible and the view below it was touched.
+ * Useful when needed to close the modal on outside touches.
  *
- * @property {() => void} onBackdropPress - Determines component's behavior when the user is
- * tapping on back-drop.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *

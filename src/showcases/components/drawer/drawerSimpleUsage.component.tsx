@@ -1,30 +1,54 @@
 import React from 'react';
-import { SafeAreaView } from 'react-navigation';
-import { Drawer } from '@ui-kitten/components';
-
-const drawerData = [
-  { title: 'Dashboard' },
-  { title: 'Messages' },
-  { title: 'Settings' },
-  { title: 'Articles' },
-  { title: 'Ecommerce' },
-  { title: 'Chat' },
-];
+import { StyleSheet } from 'react-native';
+import { IndexPath, Layout, Drawer, DrawerItem, Text } from '@ui-kitten/components';
 
 export const DrawerSimpleUsageShowcase = () => {
 
-  const onRouteSelect = (index) => {
-    const route = drawerData[index];
-    // navigate with React Navigation
-    // this.props.navigation.navigate(route.title);
-  };
+  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+  const [selectedTitle, setSelectedTitle] = React.useState('No markers');
 
   return (
-    <SafeAreaView>
-      <Drawer
-        data={drawerData}
-        onSelect={onRouteSelect}
-      />
-    </SafeAreaView>
+    <Layout style={styles.container}>
+
+      <Layout style={styles.menu}>
+
+        <Text category='h6'>Default</Text>
+
+        <Drawer
+          style={styles.menu}
+          selectedIndex={selectedIndex}
+          onSelect={index => setSelectedIndex(index)}>
+          <DrawerItem title='Users'/>
+          <DrawerItem title='Orders'/>
+          <DrawerItem title='Transactions'/>
+        </Drawer>
+
+      </Layout>
+
+      <Layout style={styles.menu}>
+
+        <Text category='h6'>{selectedTitle}</Text>
+
+        <Drawer>
+          <DrawerItem title='Users' onPress={({ index }) => setSelectedTitle('Users')}/>
+          <DrawerItem title='Orders' onPress={({ index }) => setSelectedTitle('Orders')}/>
+          <DrawerItem title='Transactions' onPress={({ index }) => setSelectedTitle('Transactions')}/>
+        </Drawer>
+
+      </Layout>
+
+    </Layout>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  menu: {
+    flex: 1,
+    margin: 8,
+  },
+});
+

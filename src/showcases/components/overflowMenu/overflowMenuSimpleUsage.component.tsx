@@ -1,43 +1,35 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Button,
-  Layout,
-  OverflowMenu,
-} from '@ui-kitten/components';
-
-const data = [
-  { title: 'Menu Item 1' },
-  { title: 'Menu Item 2' },
-  { title: 'Menu Item 3' },
-  { title: 'Menu Item 4' },
-];
+import { Button, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
 
 export const OverflowMenuSimpleUsageShowcase = () => {
 
-  const [menuVisible, setMenuVisible] = React.useState(false);
+  // Updating `selectedIndex` if marking items selected is not needed.
   const [selectedIndex, setSelectedIndex] = React.useState(null);
+  const [visible, setVisible] = React.useState(false);
 
   const onItemSelect = (index) => {
     setSelectedIndex(index);
-    setMenuVisible(false);
+    setVisible(false);
   };
 
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
+  const renderToggleButton = () => (
+    <Button onPress={() => setVisible(true)}>
+      TOGGLE MENU
+    </Button>
+  );
 
   return (
     <Layout style={styles.container}>
       <OverflowMenu
-        data={data}
-        visible={menuVisible}
+        anchor={renderToggleButton}
+        visible={visible}
         selectedIndex={selectedIndex}
         onSelect={onItemSelect}
-        onBackdropPress={toggleMenu}>
-        <Button onPress={toggleMenu}>
-          TOGGLE MENU
-        </Button>
+        onBackdropPress={() => setVisible(false)}>
+        <MenuItem title='Users'/>
+        <MenuItem title='Orders'/>
+        <MenuItem title='Transactions'/>
       </OverflowMenu>
     </Layout>
   );

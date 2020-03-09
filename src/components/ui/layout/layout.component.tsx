@@ -27,25 +27,22 @@ export interface LayoutProps extends ViewProps, LayoutStyledProps {
 export type LayoutElement = React.ReactElement<LayoutProps>;
 
 /**
- * `Layout` container component. Behaves like React Native `View`.
- * The key feature of using `Layout` instead of `View` is that
- * it automatically picks background color fitting to current theme.
+ * Overall page container.
  *
  * @extends React.Component
  *
- * @property {string} level - Determines background color level of component.
- * Can be `'1'`, `'2'`, `'3'` or `'4'`.
- * Default is `'1'`.
+ * @property {ReactNode} children - Component to render within the layout.
  *
- * @property {ReactElement | ReactElement[]} children - Determines the children of the component.
+ * @property {string} level - Background color level of component.
+ * Can be `1`, `2`, `3` or `4`.
+ * Defaults to *1*.
+ * Use layout levels when needed to highlight the container relative to another.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example LayoutSimpleUsage
  *
  * @overview-example LayoutLevel
- *
- * @example LayoutInlineStyling
  */
 export class LayoutComponent extends React.Component<LayoutProps> {
 

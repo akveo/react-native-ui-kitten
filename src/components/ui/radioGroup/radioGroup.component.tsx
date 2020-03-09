@@ -26,7 +26,7 @@ type RadioGroupStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface RadioGroupProps extends ViewProps, RadioGroupStyledProps {
-  children: ChildrenWithProps<RadioProps>;
+  children?: ChildrenWithProps<RadioProps>;
   selectedIndex?: number;
   onChange?: (index: number) => void;
 }
@@ -34,15 +34,14 @@ export interface RadioGroupProps extends ViewProps, RadioGroupStyledProps {
 export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
 
 /**
- * Renders a group of `Radio` buttons.
+ * Provides to select a single state from multiple options.
+ * RadioGroup should contain Radio components to provide a useful component.
  *
  * @extends React.Component
  *
- * @property {ReactElement<RadioProps> | ReactElement<RadioProps>[]} children - Determines radio buttons in group.
+ * @property {number} selectedIndex - Index of currently checked radio.
  *
- * @property {number} selectedIndex - Determines the index of the selected radio.
- *
- * @property {(index: number) => void} onChange - Called one of the radios is pressed.
+ * @property {(number) => void} onChange - Called when one of the radios is pressed.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *

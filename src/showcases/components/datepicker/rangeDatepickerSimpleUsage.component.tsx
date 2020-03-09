@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  RangeDatepicker,
-} from '@ui-kitten/components';
+import { Layout, RangeDatepicker } from '@ui-kitten/components';
 
 export const RangeDatepickerSimpleUsageShowcase = () => {
 
@@ -11,10 +8,12 @@ export const RangeDatepickerSimpleUsageShowcase = () => {
 
   return (
     <Layout style={styles.container}>
+
       <RangeDatepicker
         range={range}
-        onSelect={setRange}
+        onSelect={nextRange => setRange(nextRange)}
       />
+
     </Layout>
   );
 };

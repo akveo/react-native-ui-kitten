@@ -40,23 +40,26 @@ export interface ButtonGroupProps extends ViewProps, ButtonGroupStyledProps {
 export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
 
 /**
- * Renders a group of `Buttons`.
+ * A group of buttons with additional styles provided by Eva.
+ * ButtonGroup should contain Button components to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
+ * @property {ReactElement<ButtonProps> | ReactElement<ButtonProps>[]} children -
+ * Buttons to be rendered within the group.
+ *
+ * @property {string} appearance - Appearance of the component.
  * Can be `filled` or `outline`.
- * Default is `filled`.
+ * Defaults to *filled*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `primary`.
+ * Defaults to *primary*.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {string} size - Determines the size of the component.
+ * @property {string} size - Size of the component.
  * Can be `tiny`, `small`, `medium`, `large`, or `giant`.
- * Default is `medium`.
- *
- * @property {{ReactElement<ButtonProps> | ReactElement<ButtonProps>[]} children - Determines buttons in group.
+ * Defaults to *medium*.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -71,8 +74,6 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * @overview-example ButtonGroupOutline
  *
  * @overview-example ButtonGroupWithIcons
- *
- * @example ButtonGroupInlineStyling
  */
 class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 

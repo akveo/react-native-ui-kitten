@@ -1,10 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Datepicker,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
+import { Datepicker, Layout, Text } from '@ui-kitten/components';
 
 export const DatepickerSimpleUsageShowcase = () => {
 
@@ -13,15 +9,13 @@ export const DatepickerSimpleUsageShowcase = () => {
   return (
     <Layout style={styles.container}>
 
-      <Text
-        style={styles.text}
-        category='h6'>
-        {`Selected date: ${date.toLocaleDateString()}`}
+      <Text style={styles.text} category='h6'>
+        Selected date: {date.toLocaleDateString()}
       </Text>
 
       <Datepicker
         date={date}
-        onSelect={setDate}
+        onSelect={nextDate => setDate(nextDate)}
       />
 
     </Layout>

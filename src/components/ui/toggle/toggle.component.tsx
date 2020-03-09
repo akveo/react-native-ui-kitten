@@ -42,32 +42,33 @@ type ToggleStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface ToggleProps extends TouchableWebProps, ToggleStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
-  text?: RenderProp<TextProps> | React.ReactText;
   status?: EvaStatus;
 }
 
 export type ToggleElement = React.ReactElement<ToggleProps>;
 
 /**
- * Styled `Toggle` component.
+ * Switches toggle the state of a single setting on or off.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.
- * Default is `false`.
+ * @property {boolean} checked - Whether component is checked.
+ * Defaults to *false*.
  *
- * @property {string} status - Determines the status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
+ * @property {(boolean) => void} onChange - Called when toggle
+ * should switch it's value.
  *
- * @property {string | (props: TextProps) => ReactElement} text - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the toggle.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {(checked: boolean) => void} onChange - Called on toggle value change.
+ * @property {string} status - Status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -77,7 +78,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  *
  * @overview-example ToggleStatus
  *
- * @example ToggleInlineStyling
+ * @example ToggleStyling
  */
 export class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
 
@@ -354,7 +355,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, checked, text, ...touchableProps } = this.props;
+    const { eva, style, checked, children, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -378,7 +379,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
         </TouchableWeb>
         <FalsyText
           style={evaStyle.text}
-          component={text}
+          component={children}
         />
       </View>
     );

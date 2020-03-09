@@ -9,6 +9,7 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
 import {
   Frame,
   MeasureElement,
@@ -30,9 +31,12 @@ import {
   PopoverPlacements,
 } from './type';
 
-export interface PopoverProps extends PopoverViewProps, ModalProps {
+type PopoverModalProps = Overwrite<ModalProps, {
+  children?: React.ReactElement;
+}>;
+
+export interface PopoverProps extends PopoverViewProps, PopoverModalProps {
   anchor: RenderProp;
-  children: React.ReactElement;
   fullWidth?: boolean;
 }
 
@@ -45,8 +49,7 @@ interface State {
 }
 
 /**
- * Displays content in a Modal positioned relative to child component.
- * Supports automatic positioning.
+ * Displays a content positioned relative to another view.
  *
  * @extends React.Component
  *
@@ -54,29 +57,32 @@ interface State {
  *
  * @method {() => void} hide - Sets `content` component invisible.
  *
- * @property {boolean} visible - Determines whether `content` component is visible.
+ * @property {boolean} visible - Whether content component is visible.
+ * Defaults to false.
  *
- * @property {ReactElement} content - A component to render within the the popover.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
- * @property {ReactElement} children - A component relative to which `content` will be shown.
+ * @property {ReactElement} children - A component displayed within the popover.
  *
- * @property {() => void} onBackdropPress - Called when backdrop is pressed.
+ * @property {() => void} onBackdropPress - Called when popover is visible and the underlying view was touched.
+ * Useful when needed to close the modal on outside touches.
  *
- * @property {string | PopoverPlacement} placement - Position of the `content` component relative to the `children`.
+ * @property {boolean} fullWidth - Whether a content component should take the width of `anchor`.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the content component relative to the `anchor`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
- * Default is `bottom`.
- * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ * Defaults to *bottom*.
  *
- * @property {boolean} fullWidth - Determines whether a `content` element should have same width as `children`.
- *
- * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example PopoverSimpleUsage
  *
  * @overview-example PopoverPlacement
+ *
+ * @overview-example PopoverFullWidth
  *
  * @overview-example PopoverStyledBackdrop
  */

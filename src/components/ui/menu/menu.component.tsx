@@ -45,40 +45,36 @@ export interface MenuProps extends MenuListProps, MenuStyledProps {
 export type MenuElement = React.ReactElement<MenuProps>;
 
 /**
- * Styled `Menu` component.
- * Renders UI Kitten List component with additional styles provided by Eva.
+ * A versatile menu for navigation.
+ * Menu should contain MenuItem or MenuGroup components to provide a useful component.
  *
  * @extends React.Component
  *
- * @property {string} appearance - appearance of the component.
+ * @property {string} appearance - Appearance of the component.
  * Can be `default` or `noDivider`.
  *
  * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children -
- * items to be rendered within menu.
+ * Items to be rendered within menu.
  *
- * @property {IndexPath} selectedIndex - index of selected item.
- * IndexPath `{ row: number, section: number | undefined }` - position of element in sectioned list.
+ * @property {IndexPath} selectedIndex - Index of selected item.
+ * IndexPath `row: number, section?: number` - position of element in sectioned list.
  * Menu becomes sectioned when MenuGroup is rendered within children.
  * Updating this property is not required if marking items selected is not needed.
  *
- * @property {(option: IndexPath | IndexPath[]) => void} onSelect - called when item is pressed.
- * Called with `{ row: number }` by default.
- * Called with { row: number, section: number } for items rendered within SelectGroup.
+ * @property {(IndexPath) => void} onSelect - Called when item is pressed.
+ * Called with `row: number` by default.
+ * Called with `row: number, section: number` for items rendered within MenuGroup.
  *
  * @property {ListProps} ...ListProps - Any props applied to List component,
  * excluding `renderItem` and `data`.
  *
  * @overview-example MenuSimpleUsage
  *
- * @overview-example MenuWithSubMenu
- *
- * @overview-example MenuWithIcons
+ * @overview-example MenuAccessories
  *
  * @overview-example MenuDisabledOptions
  *
- * @overview-example MenuWithoutDivider
- *
- * @example MenuInlineStyling
+ * @example MenuStyling
  */
 class MenuComponent extends React.Component<MenuProps> {
 

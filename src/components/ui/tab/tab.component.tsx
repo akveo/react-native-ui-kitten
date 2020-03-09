@@ -33,9 +33,9 @@ type TabStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface TabProps extends TouchableWebProps, TabStyledProps {
+  children?: React.ReactElement;
   title?: RenderProp<TextProps> | React.ReactText;
   icon?: RenderProp<Partial<ImageProps>>;
-  children?: React.ReactElement;
   selected?: boolean;
   onSelect?: (selected: boolean) => void;
 }
@@ -43,31 +43,26 @@ export interface TabProps extends TouchableWebProps, TabStyledProps {
 export type TabElement = React.ReactElement<TabProps>;
 
 /**
- * `Tab` component is a part of the `TabBar` or `TabView`.
- * Tabs should be wrapped in TabBar or TabView to provide a usable component.
+ * A single tab within the TabView or TabBar.
+ * Tabs should be rendered within TabView or TabBar to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
- * to render within the tab.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * @property {ReactElement} children - A component displayed below the tab.
  *
- * @property {string | (props: ImageProps) => ReactElement} icon - A function component
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the tab.
- * Called with props provided by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {ReactElement} children - Determines the content element of the tab.
+ * @property {(ImageProps) => ReactElement} icon - Function component
+ * to render within the tab.
+ * Expected to return an Image.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example TabSimpleUsage
  *
- * @overview-example TabWithIcon
- *
- * @example TabWithExternalSourceIcon
- *
- * @example TabInlineStyling
+ * @example TabStyling
  */
 export class TabComponent extends React.Component<TabProps> {
 

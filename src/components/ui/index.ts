@@ -3,8 +3,12 @@ export {
   Autocomplete,
   AutocompleteProps,
   AutocompleteElement,
-  AutocompleteOption,
 } from './autocomplete/autocomplete.component';
+export {
+  AutocompleteItem,
+  AutocompleteItemProps,
+  AutocompleteItemElement,
+} from './autocomplete/autocompleteItem.component';
 export {
   Avatar,
   AvatarProps,

@@ -1,11 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Radio,
-  RadioGroup,
-  Text,
-} from '@ui-kitten/components';
+import { Layout, Radio, RadioGroup, Text } from '@ui-kitten/components';
 
 export const RadioGroupSimpleUsageShowcase = () => {
 
@@ -18,27 +12,18 @@ export const RadioGroupSimpleUsageShowcase = () => {
   return (
     <Layout>
 
-      <Text style={styles.text} category='h6'>
-        {`Selected Option: Option ${selectedIndex}`}
+      <Text category='h6'>
+        {`Selected Option: ${selectedIndex + 1}`}
       </Text>
 
       <RadioGroup
         selectedIndex={selectedIndex}
         onChange={onCheckedChange}>
-        <Radio style={styles.radio} text='Option 1'/>
-        <Radio style={styles.radio} text='Option 2'/>
-        <Radio style={styles.radio} text='Option 3'/>
+        <Radio>Option 1</Radio>
+        <Radio>Option 2</Radio>
+        <Radio>Option 3</Radio>
       </RadioGroup>
 
     </Layout>
   );
 };
-
-export const styles = StyleSheet.create({
-  text: {
-    marginVertical: 8,
-  },
-  radio: {
-    marginVertical: 8,
-  },
-});

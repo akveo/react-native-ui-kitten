@@ -43,39 +43,40 @@ type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface CheckBoxProps extends TouchableWebProps, CheckBoxStyledProps {
+  children?: RenderProp<TextProps> | React.ReactText;
   checked?: boolean;
-  indeterminate?: boolean;
   onChange?: (checked: boolean, indeterminate: boolean) => void;
-  text?: RenderProp<TextProps> | React.ReactText;
+  indeterminate?: boolean;
   status?: EvaStatus;
 }
 
 export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
 
 /**
- * Styled `CheckBox` component.
+ * Checkboxes allow the user to select one or more items from a set.
  *
  * @extends React.Component
  *
- * @property {boolean} checked - Determines whether component is checked.
- * Default is `false`.
+ * @property {boolean} checked - Whether component is checked.
+ * Defaults to *false*.
  *
- * @property {boolean} indeterminate - Determines whether checked status is indeterminate.
+ * @property {(checked: boolean, indeterminate: boolean) => void} onChange - Called when checkbox
+ * should switch it's value.
+ * Called with *checked* and *indeterminate* values.
+ * If *indeterminate* was provided, it should be changed to the value passed in this function.
+ *
+ * @property {boolean} indeterminate - Whether checked status is indeterminate.
  * Will set indeterminate to false when the checked property is changed.
- * Default is `false`.
+ * Defaults to *false*.
  *
- * @property {string} status - Determines the status of the component.
- * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
- *
- * @property {string | (props: TextProps) => ReactElement} text - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
  * to render near the checkbox.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {(checked: boolean, indeterminate: boolean) => void} onChange - Called on checkbox value change.
- * Called with `checked` and `indeterminate` values.
- * If `indeterminate` was provided in state, it should be changed to the value passed in this function.
+ * @property {string} status - Status of the component.
+ * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
@@ -87,7 +88,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  *
  * @overview-example CheckboxStatus
  *
- * @example CheckboxInlineStyling
+ * @example CheckboxStyling
  */
 class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
@@ -202,7 +203,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
   };
 
   public render(): TouchableWebElement {
-    const { eva, style, disabled, text, ...touchableProps } = this.props;
+    const { eva, style, disabled, children, ...touchableProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -225,7 +226,7 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         </View>
         <FalsyText
           style={evaStyle.text}
-          component={text}
+          component={children}
         />
       </TouchableWeb>
     );

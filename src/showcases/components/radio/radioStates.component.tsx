@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Radio,
-} from '@ui-kitten/components';
+import { Layout, Radio } from '@ui-kitten/components';
 
 export const RadioStatesShowcase = () => {
 
-  const [checked, setChecked] = React.useState(false);
+  const [activeChecked, setActiveChecked] = React.useState(false);
 
-  const onCheckedChange = (isChecked) => {
-    setChecked(isChecked);
+  const onActiveCheckedChange = (isChecked) => {
+    setActiveChecked(isChecked);
   };
 
   return (
@@ -18,23 +15,23 @@ export const RadioStatesShowcase = () => {
 
       <Radio
         style={styles.radio}
-        text='Active'
-        checked={checked}
-        onChange={onCheckedChange}
-      />
+        checked={activeChecked}
+        onChange={onActiveCheckedChange}>
+        Active
+      </Radio>
 
       <Radio
         style={styles.radio}
-        text='Disabled'
-        disabled={true}
-      />
+        disabled={true}>
+        Disabled
+      </Radio>
 
       <Radio
         style={styles.radio}
-        text='Checked Disabled'
         checked={true}
-        disabled={true}
-      />
+        disabled={true}>
+        Checked Disabled
+      </Radio>
 
     </Layout>
   );

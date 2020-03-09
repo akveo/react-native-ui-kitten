@@ -258,7 +258,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Styled Component',
+        name: 'Using Mapping',
         icon: 'styled.svg',
         source: [
           'styled',
@@ -266,7 +266,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Themed Component',
+        name: 'Using Theme',
         icon: 'with-styles.svg',
         source: [
           'useTheme',
@@ -306,15 +306,6 @@ export const structure = [
         icon: 'card.svg',
         source: [
           'Card',
-          'CardHeader',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Menu',
-        icon: 'menu.svg',
-        source: [
-          'Menu',
         ],
       },
       {
@@ -367,7 +358,23 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Bottom Navigation',
+        name: 'Top Tabs',
+        icon: 'tab.svg',
+        source: [
+          'TabBar',
+          'TabView',
+          'Tab',
+        ],
+        overview: [
+          {
+            name: 'TabBar',
+            images: ['tab-menu.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Bottom Tabs',
         icon: 'bottom-navigation.svg',
         source: [
           'BottomNavigation',
@@ -386,7 +393,8 @@ export const structure = [
         icon: 'drawer.svg',
         source: [
           'Drawer',
-          'DrawerHeaderFooter',
+          'DrawerGroup',
+          'DrawerItem',
         ],
         overview: [
           {
@@ -397,26 +405,20 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'View Pager',
-        icon: 'view-pager.svg',
+        name: 'Menu',
+        icon: 'menu.svg',
         source: [
-          'ViewPager',
+          'Menu',
+          'MenuGroup',
+          'MenuItem',
         ],
       },
       {
         type: 'tabs',
-        name: 'Tab View',
-        icon: 'tab.svg',
+        name: 'View Pager',
+        icon: 'view-pager.svg',
         source: [
-          'TabView',
-          'TabBar',
-          'Tab',
-        ],
-        overview: [
-          {
-            name: 'TabBar',
-            images: ['tab-menu.png'],
-          },
+          'ViewPager',
         ],
       },
       {
@@ -514,6 +516,8 @@ export const structure = [
         icon: 'select.svg',
         source: [
           'Select',
+          'SelectGroup',
+          'SelectItem',
         ],
         overview: [],
       },
@@ -592,6 +596,7 @@ export const structure = [
         icon: 'menu.svg',
         source: [
           'OverflowMenu',
+          'MenuItem',
         ],
         overview: [
           {

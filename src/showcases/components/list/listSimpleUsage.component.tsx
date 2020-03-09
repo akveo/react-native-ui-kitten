@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  List,
-  ListItem,
-} from '@ui-kitten/components';
+import { List, ListItem } from '@ui-kitten/components';
 
 const data = new Array(8).fill({
   title: 'Item',

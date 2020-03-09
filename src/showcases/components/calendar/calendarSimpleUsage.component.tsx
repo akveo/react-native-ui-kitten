@@ -1,10 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Calendar,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
+import { Calendar, Layout, Text } from '@ui-kitten/components';
 
 export const CalendarSimpleUsageShowcase = () => {
 
@@ -16,12 +12,12 @@ export const CalendarSimpleUsageShowcase = () => {
       <Text
         style={styles.text}
         category='h6'>
-        {`Selected date: ${date.toLocaleDateString()}`}
+        Selected date: {date.toLocaleDateString()}
       </Text>
 
       <Calendar
         date={date}
-        onSelect={setDate}
+        onSelect={nextDate => setDate(nextDate)}
       />
 
     </Layout>

@@ -34,9 +34,8 @@ export type IconProps<T = WrappedElementProps> = T & {
 export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<T>>;
 
 /**
- * `Icon` component with animation support. Allows to render any ReactElement registered for a specific name.
- * that renders any icon from eva-icons package in `svg` format.
- * It allows easily use icons in any component that has `icon` prop
+ * Animated Icon component.
+ * Render any ReactElement registered within IconRegistry or SVG icons in case of using `@ui-kitten/eva-icons`.
  *
  * @extends React.Component
  *
@@ -44,28 +43,25 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  *
  * @method {() => void} stopAnimation - Toggle animation to stop.
  *
- * @property {string} name - Name of registered icon.
+ * @property {string} name - A name of icon registered in a specific pack.
  *
- * @property {string} pack - Name of icon pack that is able to provide an icon for specified name.
+ * @property {string} pack - A name of icon pack registered in IconRegistry that is able to provide
+ * an icon for a given name.
  *
- * @property {string} animation - Animation name. Available `zoom`, `pulse` and `shake`.
- * Default is `zoom`.
+ * @property {string} animation - Animation name. Can be `zoom`, `pulse` and `shake`.
+ * Defaults to *zoom*.
  *
- * @property {AnimationConfig} animationConfig - Determines animation config. Extends `Animated.AnimationConfig`.
+ * @property {AnimationConfig} animationConfig - Animation config.
+ *
+ * @property {any} ...props - Accepts any props
+ * depending on the component registered in IconRegistry for a given `name` property.
+ * In case of using `@ui-kitten/eva-icons` package, Icon accepts any props for react-native-svg component.
  *
  * @overview-example IconSimpleUsage
  *
- * @overview-example IconWithinButton
- *
- * @overview-example IconWithinInput
- *
- * @overview-example IconExternalSource
+ * @overview-example IconWithinComponents
  *
  * @overview-example IconAnimation
- *
- * @example IconAnimationInfinite
- *
- * @example IconInlineStyling
  */
 export class Icon<T> extends React.Component<IconProps<T>> {
 

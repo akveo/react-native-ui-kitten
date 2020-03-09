@@ -56,46 +56,44 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @method {() => void} hide - Sets Tooltip invisible.
  *
- * @property {boolean} visible - Determines whether popover is visible or not.
+ * @property {() => ReactElement} anchor - A component relative to which content component will be shown.
  *
- * @property {ReactElement} children - A component relative to which tooltip will be shown.
+ * @property {ReactText | (TextProps) => ReactElement} children - String, number or a function component
+ * to render within the tooltip.
+ * If it is a function, expected to return a Text.
  *
- * @property {ReactText | (props: TextProps) => ReactElement} children - A string or a function component
- * to render within the button.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * @property {boolean} visible - Whether content component is visible.
+ * Defaults to false.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {() => void} onBackdropPress - Called when backdrop is pressed.
+ * @property {() => void} onBackdropPress - Called when tooltip is visible and the underlying view was touched.
+ * Useful when needed to close the modal on outside touches.
  *
- * @property {string | PopoverPlacement} placement - Position of the tooltip relative to the `children`.
+ * @property {boolean} fullWidth - Whether a content component should take the width of `anchor`.
+ *
+ * @property {string | PopoverPlacement} placement - Position of the content component relative to the `anchor`.
  * Can be `left`, `top`, `right`, `bottom`, `left start`, `left end`, `top start`, `top end`, `right start`,
  * `right end`, `bottom start` or `bottom end`.
- * Default is `bottom`.
- * Tip: use one of predefined placements instead of strings, e.g `PopoverPlacements.TOP`
+ * Defaults to *bottom*.
  *
- * @property {boolean} fullWidth - Determines whether the tooltip should have same width as `children`.
- *
- * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
  * @overview-example TooltipSimpleUsage
  *
- * @overview-example TooltipWithIcon
+ * @overview-example TooltipAccessories
  *
  * @overview-example TooltipStyledBackdrop
  *
  * @overview-example TooltipPlacement
  *
- * @example TooltipWithExternalSourceIcon
- *
- * @example TooltipInlineStyling
+ * @example TooltipStyling
  */
 export class TooltipComponent extends React.Component<TooltipProps> {
 

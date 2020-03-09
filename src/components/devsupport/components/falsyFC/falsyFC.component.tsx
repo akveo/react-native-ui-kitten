@@ -16,8 +16,8 @@ export type FalsyFCProps<Props = {}> = Props & {
  * If it is a function, will call it with props passed to this component.
  * Otherwise, will return null.
  *
- * @property {RenderProp} component - function component to be rendered.
- * @property {React.ReactElement} fallback - an element to render if children is null or undefined.
+ * @property {RenderProp} component - Function component to be rendered.
+ * @property {React.ReactElement} fallback - Element to render if children is null or undefined.
  *
  * @example Will render nothing.
  * ```

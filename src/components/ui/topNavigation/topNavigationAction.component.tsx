@@ -37,26 +37,23 @@ export interface TopNavigationActionProps extends TouchableWebProps, TopNavigati
 export type TopNavigationActionElement = React.ReactElement<TopNavigationActionProps>;
 
 /**
- * `TopNavigationAction` component is a part of the `TopNavigation`.
- * Top Navigation actions should be passed to in TopNavigation `accessory` properties to provide a usable component.
+ * A single action within the TopNavigation.
+ * Actions should be rendered within TopNavigation by providing them through `accessory` props
+ * to provide a usable component.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `default`, `control`.
- * Default is `default`.
- *
- * @property {(style: ImageStyle) => ReactElement} icon - A function component
+ * @property {(ImageProps) => ReactElement} icon - Function component
  * to render within the action.
- * Called with props provided by Eva.
+ * Expected to return an Image.
+ *
+ * @property {string} appearance - Appearance of the component.
+ * Can be `default` and `control`.
+ * Use *control* appearance when needed to display within a contrast container.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example TopNavigationActionSimpleUsage
- *
- * @example TopNavigationActionExternalSourceIcon
- *
- * @example TopNavigationActionInlineStyling
  */
 class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
 

@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Input,
-  Layout,
-} from '@ui-kitten/components';
+import { Input, Layout } from '@ui-kitten/components';
 
 export const InputStatesShowcase = () => {
 
@@ -15,8 +12,8 @@ export const InputStatesShowcase = () => {
       <Input
         style={styles.input}
         value={value}
-        onChangeText={setValue}
         placeholder='Active'
+        onChangeText={nextValue => setValue(nextValue)}
       />
 
       <Input
@@ -35,7 +32,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    margin: 8,
+    margin: 2,
   },
 });
 

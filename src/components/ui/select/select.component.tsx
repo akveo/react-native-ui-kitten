@@ -13,6 +13,7 @@ import {
   Platform,
   StyleSheet,
   TargetedEvent,
+  TextProps,
   TextStyle,
   View,
   ViewProps,
@@ -30,24 +31,13 @@ import {
   TouchableWebElement,
   TouchableWebProps,
 } from '../../devsupport';
-import {
-  Interaction,
-  styled,
-  StyledComponentProps,
-  StyleType,
-} from '../../theme';
+import { Interaction, styled, StyledComponentProps, StyleType } from '../../theme';
 import { List } from '../list/list.component';
 import { Popover } from '../popover/popover.component';
 import { ChevronDown } from '../shared/chevronDown.component';
 import { SelectGroupProps } from './selectGroup.component';
-import {
-  SelectItemElement,
-  SelectItemProps,
-} from './selectItem.component';
-import {
-  SelectItemDescriptor,
-  SelectService,
-} from './select.service';
+import { SelectItemElement, SelectItemProps } from './selectItem.component';
+import { SelectItemDescriptor, SelectService } from './select.service';
 
 type SelectStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
@@ -57,11 +47,11 @@ export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   children?: ChildrenWithProps<SelectItemProps | SelectGroupProps>;
   selectedIndex?: IndexPath | IndexPath[];
   onSelect?: (index: IndexPath | IndexPath[]) => void;
-  value?: string;
+  value?: RenderProp<TextProps> | React.ReactText;
   multiSelect?: boolean;
-  placeholder?: RenderProp<TextStyle> | string;
-  label?: RenderProp<TextStyle> | string;
-  caption?: RenderProp<TextStyle> | string;
+  placeholder?: RenderProp<TextProps> | React.ReactText;
+  label?: RenderProp<TextProps> | React.ReactText;
+  caption?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
   status?: EvaStatus;
@@ -79,101 +69,94 @@ const CHEVRON_DEG_EXPANDED: number = 0;
 const CHEVRON_ANIM_DURATION: number = 200;
 
 /**
- * Styled `Select` component. Renders a List of
+ * A dropdown menu for displaying selectable options.
+ * Select should contain SelectItem or SelectGroup components to provide a useful component.
  *
  * @extends React.Component
  *
- * @method {() => void} show - sets options list visible.
+ * @method {() => void} show - Sets options list visible.
  *
- * @method {() => void} hide - sets options list invisible.
+ * @method {() => void} hide - Sets options list invisible.
  *
- * @method {() => void} focus - focuses input field and sets options list visible.
+ * @method {() => void} focus - Focuses input field and sets options list visible.
  *
- * @method {() => void} blur - removes focus from input field and sets options list invisible.
+ * @method {() => void} blur - Removes focus from input field and sets options list invisible.
  *
- * @method {() => boolean} isFocused - whether input field is currently focused and options list is visible.
+ * @method {() => boolean} isFocused - Whether input field is currently focused and options list is visible.
  *
- * @method {() => void} clear - removes all text from the Select.
+ * @method {() => void} clear - Removes all text from the Select.
  *
  * @property {ReactElement<SelectItemProps> | ReactElement<SelectItemProps>[]} children -
- * items to be rendered within options list.
+ * Items to be rendered within options list.
  *
- * @property {IndexPath | IndexPath[]} selectedIndex - index or array of indices of selected options.
- * IndexPath `{ row: number, section: number | undefined }` - position of element in sectioned list.
+ * @property {IndexPath | IndexPath[]} selectedIndex - Index or array of indices of selected options.
+ * IndexPath `row: number, section?: number` - position of element in sectioned list.
  * Select becomes sectioned when SelectGroup is rendered within children.
  *
- * @property {(option: IndexPath | IndexPath[]) => void} onSelect - called when option is pressed.
- * Called with `{ row: number }` by default and for SelectGroup items.
- * Called with { row: number, section: number } for items rendered within SelectGroup.
+ * @property {(IndexPath | IndexPath[]) => void} onSelect - Called when option is pressed.
+ * Called with `row: number` by default and for SelectGroup items.
+ * Called with `row: number, section: number` for items rendered within SelectGroup.
+ * Called with array if *multiSelect* was set to true.
  *
- * @property {string | (props: TextProps) => ReactElement} value - string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} value - String, number or a function component
  * to render for the selected options.
- * By default, calls `toString()` for each index in selectedIndex property.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * By default, calls *toString()* for each index in selectedIndex property.
+ * If it is a function, expected to return a Text.
  *
- * @property {boolean} multiSelect - whether multiple options can be selected.
+ * @property {boolean} multiSelect - Whether multiple options can be selected.
  * If true, calls onSelect with IndexPath[] in arguments.
  * Otherwise, with IndexPath in arguments.
  *
- * @property {string | (props: TextProps) => ReactElement} placeholder - string or a function component
- * to render when there is no selected options.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * @property {ReactText | (TextProps) => ReactElement} placeholder - String, number or a function component
+ * to render when there is no selected option.
+ * If it is a function, expected to return a Text.
  *
- * @property {string | (props: TextProps) => ReactElement} label - string or a function component
- * to render to top of the input field.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * @property {ReactText | (TextProps) => ReactElement} label - String, number or a function component
+ * to render above input field.
+ * If it is a function, expected to return a Text.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryLeft - function component
+ * @property {ReactText | (TextProps) => ReactElement} caption - String, number or a function component
+ * to render below the input field.
+ * If it is a function, expected to return a Text.
+ *
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
  * to render to start of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryRight - function component
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
  * to render to end of the text.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
- * @property {string | (props: TextProps) => ReactElement} caption - string or a function component
- * to render to bottom of the input field.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
- *
- * @property {string} status - status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
- * @property {string} size - size of the component.
+ * @property {string} size - Size of the component.
  * Can be `small`, `medium` or `large`.
- * Default is `medium`.
+ * Defaults to *medium*.
  *
- * @property {() => void} onFocus - called when options list becomes visible.
+ * @property {() => void} onFocus - Called when options list becomes visible.
  *
- * @property {() => void} onBlur - called when options list becomes invisible.
+ * @property {() => void} onBlur - Called when options list becomes invisible.
  *
- * @property {TouchableOpacityProps} ...TouchableOpacityProps - any props applied to TouchableOpacity component.
+ * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example SelectSimpleUsage
  *
  * @overview-example SelectStates
  *
+ * @overview-example SelectMultiSelect
+ *
+ * @overview-example SelectAccessories
+ *
+ * @overview-example SelectDisabledOptions
+ *
  * @overview-example SelectStatus
  *
  * @overview-example SelectSize
  *
- * @overview-example SelectMultiSelect
- *
- * @overview-example SelectWithGroups
- *
- * @overview-example SelectDisabledOptions
- *
- * @example SelectInitialValue
- *
- * @example SelectMultiInitialValue
- *
- * @example SelectCustomIcon
- *
- * @example SelectInlineStyling
+ * @example SelectStyling
  */
 export class SelectComponent extends React.Component<SelectProps, State> {
 
@@ -261,8 +244,7 @@ export class SelectComponent extends React.Component<SelectProps, State> {
     if (this.props.onSelect) {
       const selectedIndices = this.service.selectItem(this.isMultiSelect, descriptor, this.selectedIndices);
       !this.isMultiSelect && this.setOptionsListInvisible();
-
-      this.props.onSelect && this.props.onSelect(selectedIndices);
+      this.props.onSelect(selectedIndices);
     }
   };
 
@@ -406,7 +388,7 @@ export class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private renderInputElement = (props: SelectProps, evaStyle): TouchableWebElement => {
-    const value: string = props.value || this.service.toStringSelected(this.selectedIndices);
+    const value = props.value || this.service.toStringSelected(this.selectedIndices);
     const textStyle: TextStyle = value && evaStyle.text;
 
     return (

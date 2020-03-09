@@ -31,22 +31,28 @@ export interface TextProps extends RNTextProps, TextStyledProps {
 export type TextElement = React.ReactElement<TextProps>;
 
 /**
- * Styled `Text` component.
+ * Basic text writing, including headings, paragraphs, captions, and more.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `default`, `alternative`, `hint`.
- * Default is `default`.
+ * @property {ReactText | ReactElement<TextProps>} children - String or number to be rendered as text.
+ * Also can be ReactElement<TextProps> - nested Text component.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} appearance - Can be `default`, `alternative` or `hint`.
+ * Use `alternative` for displaying light text on a dark content and vice versa.
+ * Use `hint` for giving user a hint on something.
+ *
+ * @property {string} category - Can be `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `s1`, `s2`, `p1`, `p2`, `c1`, `c2`, `label`.
+ * Defaults to *p1*.
+ * Use *h* categories when needed to display headings.
+ * Use *s* categories when needed to display subtitles.
+ * Use *p* categories when needed to display regular text.
+ * Use *c* and *label* categories when needed to give user a hint on something.
+ *
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- *
- * @property {string} category - Determines the category of the component.
- * Can be `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `s1`, `s2`, `p1`, `p2`, `c1`, `c2`, `label`.
- * Default is `p1`.
- *
- * @property {string | ReactElement<TextProps>} children - Determines text of the component.
+ * Defaults to *basic*.
+ * Use *control* status when needed to display within a contrast container.
  *
  * @property {TextProps} ...TextProps - Any props applied to Text component.
  *
@@ -54,11 +60,7 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * @overview-example TextAppearances
  *
- * @overview-example TextCategories
- *
  * @overview-example TextStatuses
- *
- * @example TextInlineStyling
  */
 export class TextComponent extends React.Component<TextProps> {
 

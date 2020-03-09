@@ -50,25 +50,26 @@ export interface MenuItemProps extends TouchableMenuItemProps, MenuItemStyledPro
 export type MenuItemElement = React.ReactElement<MenuItemProps>;
 
 /**
- * Renders a single item in list displayed in Menu.
- * Items should be rendered within Menu or MenuGroup children to provide a usable component.
+ * A single item in Menu.
+ * Items should be rendered within Menu or MenuGroup to provide a usable navigation component.
  *
  * @extends React.Component
  *
- * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
- * to render within the button.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
+ * to render within the item.
+ * If it is a function, expected to return a Text.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryLeft - A function component
- * to render to start of the `title`.
- * Called with props provided by Eva.
+ * @property {(ImageProps) => ReactElement} accessoryLeft - Function component
+ * to render to start of the *title*.
+ * Expected to return an Image.
  *
- * @property {(props: ImageProps) => ReactElement} accessoryRight - A function component
- * to render to end of the `title`.
- * Called with props provided by Eva.
+ * @property {(ImageProps) => ReactElement} accessoryRight - Function component
+ * to render to end of the *title*.
+ * Expected to return an Image.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
+ *
+ * @overview-example MenuItemSimpleUsage
  */
 class MenuItemComponent extends React.Component<MenuItemProps> {
 

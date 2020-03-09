@@ -10,10 +10,8 @@ export const RadioSimpleUsageShowcase = () => {
   };
 
   return (
-    <Radio
-      text={`Checked: ${checked}`}
-      checked={checked}
-      onChange={onCheckedChange}
-    />
+    <Radio checked={checked} onChange={onCheckedChange}>
+      {`Checked: ${checked}`}
+    </Radio>
   );
 };

@@ -33,30 +33,30 @@ type BottomNavigationStyledProps = Overwrite<StyledComponentProps, {
 }>;
 
 export interface BottomNavigationProps extends ViewProps, BottomNavigationStyledProps {
+  children?: ChildrenWithProps<BottomNavigationTabProps>;
   selectedIndex?: number;
   onSelect?: (index: number) => void;
-  children?: ChildrenWithProps<BottomNavigationTabProps>;
   indicatorStyle?: StyleProp<ViewStyle>;
 }
 
 export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
 
 /**
- * `BottomNavigation` component is designed to be a Bottom Tab Bar.
- * Can be used for navigation.
+ * A bar with tabs styled by Eva.
+ * BottomNavigation should contain BottomNavigationTab components to provide a usable navigation component.
  *
  * @extends React.Component
  *
- * @property {number} selectedIndex - Determines index of the selected tab.
+ * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Tabs to be rendered within the bar.
  *
- * @property {string} appearance - Determines the appearance of the component.
+ * @property {number} selectedIndex - Index of currently selected tab.
+ *
+ * @property {(number) => void} onSelect - Called when tab is pressed.
+ *
+ * @property {string} appearance - Appearance of the component.
  * Can be `default` or `noIndicator`.
  *
- * @property {ReactElement<TabProps> | ReactElement<TabProps>[]} children - Determines tabs of the Bottom Navigation.
- *
- * @property {StyleProp<ViewStyle>} indicatorStyle - Determines styles of the indicator.
- *
- * @property {(index: number) => void} onSelect - Called when tab is pressed.
+ * @property {StyleProp<ViewStyle>} indicatorStyle - Styles of the indicator.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -66,12 +66,11 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *
  * ```
  * import React from 'react';
- * import { SafeAreaView } from 'react-native';
  * import { NavigationContainer } from '@react-navigation/native';
  * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
  * import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
  *
- * const BottomTab = createBottomTabNavigator();
+ * const { Navigator, Screen } = createBottomTabNavigator();
  *
  * const UsersScreen = () => (
  *   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -85,27 +84,20 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *   </Layout>
  * );
  *
- * const BottomTabBar = ({ navigation, state }) => {
- *
- *   const onSelect = (index) => {
- *     navigation.navigate(state.routeNames[index]);
- *   };
- *
- *   return (
- *     <SafeAreaView>
- *       <BottomNavigation selectedIndex={state.index} onSelect={onSelect}>
- *         <BottomNavigationTab title='USERS'/>
- *         <BottomNavigationTab title='ORDERS'/>
- *       </BottomNavigation>
- *     </SafeAreaView>
- *   );
- * };
+ * const BottomTabBar = ({ navigation, state }) => (*
+ *   <BottomNavigation
+ *     selectedIndex={state.index}
+ *     onSelect={index => navigation.navigate(state.routeNames[index])}>
+ *     <BottomNavigationTab title='USERS'/>
+ *     <BottomNavigationTab title='ORDERS'/>
+ *   </BottomNavigation>
+ * );
  *
  * const TabNavigator = () => (
- *   <BottomTab.Navigator tabBar={props => <BottomTabBar {...props} />}>
- *     <BottomTab.Screen name='Users' component={UsersScreen}/>
- *     <BottomTab.Screen name='Orders' component={OrdersScreen}/>
- *   </BottomTab.Navigator>
+ *   <Navigator tabBar={props => <BottomTabBar {...props} />}>
+ *     <Screen name='Users' component={UsersScreen}/>
+ *     <Screen name='Orders' component={OrdersScreen}/>
+ *   </Navigator>
  * );
  *
  * export const AppNavigator = () => (
@@ -115,11 +107,11 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * );
  * ```
  *
+ * @overview-example BottomNavigationAccessories
+ *
  * @example BottomNavigationWithoutIndicator
  *
- * @overview-example BottomNavigationWithIcons
- *
- * @example BottomNavigationInlineStyling
+ * @example BottomNavigationStyling
  */
 export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 

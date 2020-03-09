@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Layout,
-  Text,
-  StyleService,
-  useStyleSheet,
-} from '@ui-kitten/components';
+import { Layout, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 
 export const UseStyleSheetSimpleUsageShowcase = () => {
   const styles = useStyleSheet(themedStyles);

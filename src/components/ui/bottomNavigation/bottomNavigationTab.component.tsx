@@ -42,27 +42,22 @@ export interface BottomNavigationTabProps extends TouchableWebProps, BottomNavig
 export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabProps>;
 
 /**
- * `BottomNavigationTab` component is a part of the `BottomNavigation`.
- * Bottom Navigation tabs should be wrapped in BottomNavigation to provide a usable component.
+ * A single tab within the BottomNavigation.
+ * Bottom tabs should be rendered within BottomNavigation to provide a usable navigation component.
  *
  * @extends React.Component
  *
- * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the tab.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {string | (props: ImageProps) => ReactElement} icon - A function component
+ * @property {(ImageProps) => ReactElement} icon - Function component
  * to render within the tab.
- * Called with props provided by Eva.
+ * Expected to return an Image.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example BottomNavigationTabSimpleUsage
- *
- * @overview-example BottomNavigationTabWithIcon
- *
- * @example BottomNavigationTabInlineStyling
  */
 export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
 

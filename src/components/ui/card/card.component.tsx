@@ -34,40 +34,44 @@ type CardStyledProps = Overwrite<StyledComponentProps, {
 
 export interface CardProps extends TouchableWebProps, CardStyledProps {
   children?: React.ReactNode;
-  accent?: RenderProp<ViewProps>;
   header?: RenderProp<ViewProps>;
   footer?: RenderProp<ViewProps>;
+  accent?: RenderProp<ViewProps>;
   status?: EvaStatus;
 }
 
 export type CardElement = React.ReactElement<CardProps>;
 
 /**
- * Styled `Card` component is a basic content container component.
+ * Cards contain content and actions about a single subject.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
+ * @property {ReactNode} children - Component to render within the card.
+ *
+ * @property {(ViewProps) => ReactElement} header - Function component
+ * to render above the content.
+ *
+ * @property {(ViewProps) => ReactElement} footer - Function component
+ * to render below the content.
+ *
+ * @property {(ViewProps) => ReactElement} accent - Function component
+ * to render above the card.
+ * Accents may change it's color depending on *status* property.
+ *
+ * @property {string} appearance - Appearance of the component.
  * Can be `filled` or `outline`.
- * Default is `outline`.
+ * Defaults to *outline*.
  *
- * @property {string} status - Determines the status of the component.
+ * @property {string} status - Status of the component.
  * Can be `basic`, `primary`, `success`, `info`, `warning`, `danger` or `control`.
- * Default is `basic`.
- *
- * @property {ReactNode} children - Determines text of the component.
- *
- * @property {() => ReactElement | ReactElement<CardHeaderProps>} header - Determines header of the component.
- *
- * @property {() => ReactElement} footer - Determines footer of the component.
+ * Defaults to *basic*.
  *
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CardSimpleUsage
  *
- * @overview-example CardWithHeaderAndFooter
- *
- * @overview-example CardCustomHeader
+ * @overview-example CardAccessories
  *
  * @overview-example CardStatuses
  */
@@ -166,11 +170,12 @@ class CardComponent extends React.Component<CardProps> {
 
 const styles = StyleSheet.create({
   container: {
-    overflow: 'hidden',
     justifyContent: 'space-between',
+    overflow: 'hidden',
   },
   body: {
     backgroundColor: 'transparent',
+    overflow: 'hidden',
   },
 });
 

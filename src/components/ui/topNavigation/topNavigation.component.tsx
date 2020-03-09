@@ -40,46 +40,41 @@ export type TopNavigationElement = React.ReactElement<TopNavigationProps>;
 type AlignmentProp = 'start' | 'center';
 
 /**
- * `TopNavigation` component is designed to be a Navigation Bar.
- * Can be used for navigation.
+ * TopNavigation provides a heading component for the entire page.
+ * Should contain TopNavigationAction components provided through accessory props
+ * to provide a useful component.
  *
  * @extends React.Component
  *
- * @property {string} appearance - Determines the appearance of the component.
- * Can be `default`, `control`.
- * Default is `default`.
- *
- * @property {string | (props: TextProps) => ReactElement} title - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} title - String, number or a function component
  * to render within the top navigation.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {string | (props: TextProps) => ReactElement} subtitle - A string or a function component
+ * @property {ReactText | (TextProps) => ReactElement} subtitle - String, number or a function component
  * to render within the top navigation.
- * If it is a function, it will be called with props provided by Eva.
- * Otherwise, renders a Text styled by Eva.
+ * If it is a function, expected to return a Text.
  *
- * @property {string} alignment - Determines the alignment of the component.
- * Can be `center` or `start`.
- * Default is `start`.
- *
- * @property {() => ReactElement} accessoryLeft - A function component
+ * @property {() => ReactElement} accessoryLeft - Function component
  * to render to the left edge the top navigation.
  *
- * @property {() => ReactElement} accessoryLeft - A function component
+ * @property {() => ReactElement} accessoryLeft - Function component
  * to render to the right edge the top navigation.
+ *
+ * @property {string} appearance - Appearance of the component.
+ * Can be `default`, `control`.
+ * Use *control* appearance when needed to display within a contrast container.
+ *
+ * @property {string} alignment - Alignment of nested components.
+ * Can be `center` or `start`.
+ * Defaults to *start*.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example TopNavigationSimpleUsage
  *
- * @overview-example TopNavigationActions
+ * @overview-example TopNavigationAccessories
  *
- * @overview-example TopNavigationAlignments
- *
- * @overview-example TopNavigationWithMenu
- *
- * @example TopNavigationInlineStyling
+ * @example TopNavigationStyling
  */
 export class TopNavigationComponent extends React.Component<TopNavigationProps> {
 
