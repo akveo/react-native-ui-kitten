@@ -78,22 +78,38 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ButtonSimpleUsage
+ * Default button size is `medium` and status color is `primary`.
  *
  * @overview-example ButtonStates
+ * Button can be disabled with `disabled` property.
  *
  * @overview-example ButtonAccessories
+ * It may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties. Within Eva,
+ * it is expected to be an image
+ * or [svg icon](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *
  * @overview-example ButtonAppearances
+ * Also, it may change it's appearances by passing `appearance` property.
+ * Within Eva Design System, it can be `filled`, `outline` or `ghost`.
  *
  * @overview-example ButtonStatus
+ * Statuses may be useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds, e.g images.
  *
  * @overview-example ButtonSize
+ * Buttons can be resized by using `size` property.
  *
  * @overview-example ButtonOutline
  *
  * @overview-example ButtonGhost
  *
  * @example ButtonStyling
+ * Buttons support inline styling.
+ * For example, to provide additional styles to Text, it can be provided as function component.
+ *
+ * @example ButtonTheming
+ * But in most cases it is not needed
+ * if [custom theme is used](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class ButtonComponent extends React.Component<ButtonProps> {
 

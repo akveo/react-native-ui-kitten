@@ -445,26 +445,7 @@ export const structure = [
         icon: 'button.svg',
         source: [
           'Button',
-        ],
-        overview: [
-          {
-            name: 'Button',
-            images: ['button.png'],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Button Group',
-        icon: 'button-group.svg',
-        source: [
           'ButtonGroup',
-        ],
-        overview: [
-          {
-            name: 'ButtonGroup',
-            images: ['button-group.png'],
-          },
         ],
       },
       {

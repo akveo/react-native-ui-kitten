@@ -150,6 +150,8 @@ export class NgdStructureService {
     return {
       id: example.description,
       name: example.description.split(/(?=[A-Z])/).join(' '),
+      description: example.description,
+      shortDescription: example.shortDescription,
       files: [{
         path: helper.path,
         code: helper.code,
