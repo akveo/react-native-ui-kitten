@@ -5,12 +5,26 @@
  */
 
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Moment } from 'moment';
-import { fireEvent, render, waitForElement } from 'react-native-testing-library';
-import { light, mapping } from '@eva-design/eva';
+import {
+  fireEvent,
+  render,
+  waitForElement,
+} from 'react-native-testing-library';
+import {
+  light,
+  mapping,
+} from '@eva-design/eva';
 import { ApplicationProvider } from '../../theme';
-import { Calendar, CalendarComponent, CalendarProps } from './calendar.component';
+import {
+  Calendar,
+  CalendarComponent,
+  CalendarProps,
+} from './calendar.component';
 import { CalendarViewModes } from './type';
 import { MomentDateService } from '@ui-kitten/moment';
 

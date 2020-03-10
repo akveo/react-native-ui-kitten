@@ -6,7 +6,8 @@
 
 import React from 'react';
 import {
-  Animated, GestureResponderEvent,
+  Animated,
+  GestureResponderEvent,
   ImageProps,
   ListRenderItemInfo,
   NativeSyntheticEvent,
@@ -233,28 +234,28 @@ export class SelectComponent extends React.Component<SelectProps, State> {
     this.props.onSelect && this.props.onSelect(null);
   };
 
-  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter && this.props.onMouseEnter(e);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave && this.props.onMouseLeave(e);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
   private onPress = (): void => {
     this.setOptionsListVisible();
   };
 
-  private onPressIn = (e: GestureResponderEvent): void => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(e);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
-  private onPressOut = (e: GestureResponderEvent): void => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(e);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
   private onItemPress = (descriptor: SelectItemDescriptor): void => {

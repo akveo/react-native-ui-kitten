@@ -86,38 +86,38 @@ class SelectItemComponent extends React.Component<SelectItemProps> {
     return false;
   }
 
-  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter && this.props.onMouseEnter(e);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave && this.props.onMouseLeave(e);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
-  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-    this.props.onFocus && this.props.onFocus(e);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
-  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onBlur && this.props.onBlur(e);
+    this.props.onBlur && this.props.onBlur(event);
   };
 
-  private onPress = (e: GestureResponderEvent): void => {
-    this.props.onPress && this.props.onPress(this.props.descriptor, e);
+  private onPress = (event: GestureResponderEvent): void => {
+    this.props.onPress && this.props.onPress(this.props.descriptor, event);
   };
 
-  private onPressIn = (e: GestureResponderEvent): void => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn && this.props.onPressIn(e);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
-  private onPressOut = (e: GestureResponderEvent): void => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut && this.props.onPressOut(e);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
   private onAccessoryCheckedChange = (): void => {

@@ -32,6 +32,11 @@ export class PulseAnimation extends Animation<PulseAnimationConfig, ViewProps> {
 
   private value: Animated.Value;
 
+  constructor(config?: PulseAnimationConfig) {
+    super({ ...DEFAULT_CONFIG, ...config });
+    this.value = new Animated.Value(this.config.start);
+  }
+
   protected get animation(): Animated.CompositeAnimation {
     const { start, end, ...restConfig } = this.config;
 
@@ -49,11 +54,6 @@ export class PulseAnimation extends Animation<PulseAnimationConfig, ViewProps> {
       startAnimation,
       endAnimation,
     ]);
-  }
-
-  constructor(config?: PulseAnimationConfig) {
-    super({ ...DEFAULT_CONFIG, ...config });
-    this.value = new Animated.Value(this.config.start);
   }
 
   public toProps(): ViewProps {

@@ -13,9 +13,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
+  Frame,
   MeasureElement,
   MeasuringElement,
-  Frame,
   Point,
 } from '../../devsupport';
 import {

@@ -125,14 +125,14 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     return false;
   };
 
-  public onPanResponderGrant = (e: GestureResponderEvent): void => {
+  public onPanResponderGrant = (event: GestureResponderEvent): void => {
     const { checked, disabled, eva } = this.props;
 
     if (disabled) {
       return;
     }
 
-    this.onPressIn(e);
+    this.onPressIn(event);
 
     if (this.thumbTranslateAnimationActive) {
       this.thumbTranslateAnimationActive = false;
@@ -148,7 +148,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     return true;
   };
 
-  public onPanResponderRelease = (e: GestureResponderEvent, gestureState: PanResponderGestureState): void => {
+  public onPanResponderRelease = (event: GestureResponderEvent, gestureState: PanResponderGestureState): void => {
     const { checked, disabled, eva } = this.props;
 
     if (!disabled) {
@@ -160,22 +160,10 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     }
 
     this.animateThumbWidth(eva.style.thumbWidth);
-    this.onPressOut(e);
+    this.onPressOut(event);
   };
 
-  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
-    if (this.props.disabled) {
-      return;
-    }
-
-    this.props.eva.dispatch([Interaction.HOVER]);
-
-    if (this.props.onMouseEnter) {
-      this.props.onMouseEnter(e);
-    }
-  };
-
-  public onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  public onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     if (this.props.disabled) {
       return;
     }
@@ -183,11 +171,23 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.props.eva.dispatch([]);
 
     if (this.props.onMouseLeave) {
-      this.props.onMouseLeave(e);
+      this.props.onMouseLeave(event);
     }
   };
 
-  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    if (this.props.disabled) {
+      return;
+    }
+
+    this.props.eva.dispatch([Interaction.HOVER]);
+
+    if (this.props.onMouseEnter) {
+      this.props.onMouseEnter(event);
+    }
+  };
+
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     if (this.props.disabled) {
       return;
     }
@@ -195,11 +195,11 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.props.eva.dispatch([Interaction.FOCUSED]);
 
     if (this.props.onFocus) {
-      this.props.onFocus(e);
+      this.props.onFocus(event);
     }
   };
 
-  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     if (this.props.disabled) {
       return;
     }
@@ -207,23 +207,23 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
     this.props.eva.dispatch([]);
 
     if (this.props.onBlur) {
-      this.props.onBlur(e);
+      this.props.onBlur(event);
     }
   };
 
-  private onPressIn = (e: GestureResponderEvent): void => {
+  private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
 
     if (this.props.onPressIn) {
-      this.props.onPressIn(e);
+      this.props.onPressIn(event);
     }
   };
 
-  private onPressOut = (e: GestureResponderEvent): void => {
+  private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
 
     if (this.props.onPressOut) {
-      this.props.onPressOut(e);
+      this.props.onPressOut(event);
     }
   };
 

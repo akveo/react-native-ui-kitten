@@ -32,14 +32,14 @@ export abstract class Animation<C extends AnimationConfig, R> {
   protected running: boolean = false;
   protected config: C;
 
-  public abstract toProps(): R;
-
   constructor(config?: C) {
     this.config = {
       ...DEFAULT_CONFIG,
       ...config,
     };
   }
+
+  public abstract toProps(): R;
 
   public start(callback?: Animated.EndCallback) {
     this.endCallback = callback;

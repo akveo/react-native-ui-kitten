@@ -88,6 +88,16 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
     private defaultProps: StyledComponentProps;
     private service: StyleConsumerService;
 
+    public render(): React.ReactNode {
+      return (
+        <MappingContext.Consumer>{(style: ThemeStyleType): WrappedElement => (
+          <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => {
+            return this.renderWrappedElement(style, theme);
+          }}</ThemeContext.Consumer>
+        )}</MappingContext.Consumer>
+      );
+    }
+
     private onInit = (style: ThemeStyleType, theme: ThemeType): void => {
       // @ts-ignore
       this.service = new StyleConsumerService(Component.styledComponentName, style, theme);
@@ -131,16 +141,6 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
         />
       );
     };
-
-    public render(): React.ReactNode {
-      return (
-        <MappingContext.Consumer>{(style: ThemeStyleType): WrappedElement => (
-          <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => {
-            return this.renderWrappedElement(style, theme);
-          }}</ThemeContext.Consumer>
-        )}</MappingContext.Consumer>
-      );
-    }
   }
 
   const WrappingElement = (props: WrappingProps,

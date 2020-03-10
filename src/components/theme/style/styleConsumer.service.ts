@@ -9,10 +9,7 @@ import {
   ControlThemedStyleType,
   ThemedStyleType,
 } from '@eva-design/dss';
-import {
-  EvaProp,
-  StyledComponentProps,
-} from './styled';
+import { StyledComponentProps } from './styled';
 import {
   Interaction,
   StyleService,

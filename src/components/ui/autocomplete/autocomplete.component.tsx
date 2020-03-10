@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {
-  GestureResponderEvent,
   ListRenderItemInfo,
   NativeSyntheticEvent,
   StyleSheet,
@@ -15,7 +14,8 @@ import {
 } from 'react-native';
 import { ChildrenWithProps } from '../../devsupport';
 import {
-  Input, InputComponent,
+  Input,
+  InputComponent,
   InputElement,
   InputProps,
 } from '../input/input.component';
@@ -142,12 +142,9 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.inputRef.current?.clear();
   };
 
-  private onInputFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+  private onInputFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.setOptionsListVisible();
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
+    this.props.onFocus && this.props.onFocus(event);
   };
 
   private onBackdropPress = (): void => {

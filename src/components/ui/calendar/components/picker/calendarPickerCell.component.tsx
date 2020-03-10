@@ -46,9 +46,7 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
   }
 
   private onPress = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(this.props.date);
-    }
+    this.props.onSelect && this.props.onSelect(this.props.date);
   };
 
   private getContainerBorderRadius = (borderRadius: number): StyleType => {

@@ -85,18 +85,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     viewMode: this.props.startView,
     visibleDate: this.dateService.getMonthStart(this.selectedDate()),
   };
-
-  protected abstract createDates(date: D): DateBatch<D>;
-
-  protected abstract selectedDate(): D;
-
-  protected abstract onDateSelect(item: D): void;
-
-  protected abstract isDateSelected(date: D): boolean;
-
-  protected abstract shouldUpdateDate(props: CalendarPickerCellProps<D>,
-                                      nextProps: CalendarPickerCellProps<D>): boolean;
-
   protected dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
 
   protected get dateService(): DateService<D> {
@@ -117,6 +105,77 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       visibleDate: this.dateService.today(),
     });
   };
+
+  public getCalendarStyle = (source: StyleType) => {
+    return {
+      container: {
+        width: source.width,
+        paddingVertical: source.paddingVertical,
+        borderColor: source.borderColor,
+        borderWidth: source.borderWidth,
+        borderRadius: source.borderRadius,
+      },
+      headerContainer: {
+        paddingHorizontal: source.headerPaddingHorizontal,
+        paddingVertical: source.headerPaddingVertical,
+      },
+      title: {
+        fontSize: source.titleFontSize,
+        fontWeight: source.titleFontWeight,
+        lineHeight: source.titleLineHeight,
+        color: source.titleColor,
+        fontFamily: source.titleFontFamily,
+      },
+      icon: {
+        width: source.iconWidth,
+        height: source.iconHeight,
+        tintColor: source.iconTintColor,
+      },
+      divider: {
+        marginVertical: source.dividerMarginVertical,
+      },
+      daysHeaderContainer: {
+        marginHorizontal: source.rowMarginHorizontal,
+      },
+      row: {
+        minHeight: source.rowMinHeight,
+        marginHorizontal: source.rowMarginHorizontal,
+      },
+    };
+  };
+
+  public isDayDisabled = ({ date }: CalendarDateInfo<D>): boolean => {
+    const minDayStart: D = this.dateService.createDate(
+      this.dateService.getYear(this.min),
+      this.dateService.getMonth(this.min),
+      this.dateService.getDate(this.min),
+    );
+
+    const maxDayStart: D = this.dateService.createDate(
+      this.dateService.getYear(this.max),
+      this.dateService.getMonth(this.max),
+      this.dateService.getDate(this.max),
+    );
+
+    const fitsFilter: boolean = this.props.filter && !this.props.filter(date) || false;
+
+    return !this.dateService.isBetweenIncludingSafe(date, minDayStart, maxDayStart) || fitsFilter;
+  };
+
+  public isDayToday = ({ date }: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameDaySafe(date, this.dateService.today());
+  };
+
+  protected abstract createDates(date: D): DateBatch<D>;
+
+  protected abstract selectedDate(): D;
+
+  protected abstract onDateSelect(item: D): void;
+
+  protected abstract isDateSelected(date: D): boolean;
+
+  protected abstract shouldUpdateDate(props: CalendarPickerCellProps<D>,
+                                      nextProps: CalendarPickerCellProps<D>): boolean;
 
   private onDaySelect = ({ date }: CalendarDateInfo<D>): void => {
     this.onDateSelect(date);
@@ -166,44 +225,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     });
   };
 
-  public getCalendarStyle = (source: StyleType) => {
-    return {
-      container: {
-        width: source.width,
-        paddingVertical: source.paddingVertical,
-        borderColor: source.borderColor,
-        borderWidth: source.borderWidth,
-        borderRadius: source.borderRadius,
-      },
-      headerContainer: {
-        paddingHorizontal: source.headerPaddingHorizontal,
-        paddingVertical: source.headerPaddingVertical,
-      },
-      title: {
-        fontSize: source.titleFontSize,
-        fontWeight: source.titleFontWeight,
-        lineHeight: source.titleLineHeight,
-        color: source.titleColor,
-        fontFamily: source.titleFontFamily,
-      },
-      icon: {
-        width: source.iconWidth,
-        height: source.iconHeight,
-        tintColor: source.iconTintColor,
-      },
-      divider: {
-        marginVertical: source.dividerMarginVertical,
-      },
-      daysHeaderContainer: {
-        marginHorizontal: source.rowMarginHorizontal,
-      },
-      row: {
-        minHeight: source.rowMinHeight,
-        marginHorizontal: source.rowMarginHorizontal,
-      },
-    };
-  };
-
   private getWeekdayStyle = (source: StyleType): StyleType => {
     return {
       fontSize: source.weekdayTextFontSize,
@@ -226,24 +247,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return this.dateService.isSameYearSafe(date, this.selectedDate());
   };
 
-  public isDayDisabled = ({ date }: CalendarDateInfo<D>): boolean => {
-    const minDayStart: D = this.dateService.createDate(
-      this.dateService.getYear(this.min),
-      this.dateService.getMonth(this.min),
-      this.dateService.getDate(this.min),
-    );
-
-    const maxDayStart: D = this.dateService.createDate(
-      this.dateService.getYear(this.max),
-      this.dateService.getMonth(this.max),
-      this.dateService.getDate(this.max),
-    );
-
-    const fitsFilter: boolean = this.props.filter && !this.props.filter(date) || false;
-
-    return !this.dateService.isBetweenIncludingSafe(date, minDayStart, maxDayStart) || fitsFilter;
-  };
-
   private isMonthDisabled = ({ date }: CalendarDateInfo<D>): boolean => {
     const minMonthStart: D = this.dateService.getMonthStart(this.min);
     const maxMonthStart: D = this.dateService.getMonthStart(this.max);
@@ -256,10 +259,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     const maxYearStart: D = this.dateService.getYearEnd(this.max);
 
     return !this.dateService.isBetweenIncludingSafe(date, minYearStart, maxYearStart);
-  };
-
-  public isDayToday = ({ date }: CalendarDateInfo<D>): boolean => {
-    return this.dateService.isSameDaySafe(date, this.dateService.today());
   };
 
   private isMonthToday = (date: CalendarDateInfo<D>): boolean => {

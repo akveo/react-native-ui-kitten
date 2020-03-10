@@ -62,11 +62,10 @@ const POSITION_OUTSCREEN: Point = Point.outscreen();
  */
 export class MenuGroup extends React.Component<MenuGroupProps, State> {
 
-  private expandAnimation: Animated.Value = new Animated.Value(0);
-
   public state: State = {
     submenuHeight: 1,
   };
+  private expandAnimation: Animated.Value = new Animated.Value(0);
 
   private get hasSubmenu(): boolean {
     return React.Children.count(this.props.children) > 0;
@@ -104,7 +103,6 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
       this.createExpandAnimation(expandValue).start();
     }
   };
-
 
   private onSubmenuMeasure = (frame: Frame): void => {
     this.setState({ submenuHeight: frame.size.height });

@@ -1,5 +1,9 @@
 import React from 'react';
-import { Frame, Point, Size } from './type';
+import {
+  Frame,
+  Point,
+  Size,
+} from './type';
 
 describe('@measure: frame class instance checks', () => {
 

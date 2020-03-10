@@ -16,8 +16,8 @@ import {
   FalsyFC,
   RenderProp,
   TouchableWeb,
-  TouchableWebProps,
   TouchableWebElement,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,
@@ -59,24 +59,24 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
 
   static styledComponentName: string = 'TopNavigationAction';
 
-  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  public onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
+    this.props.eva.dispatch([]);
+    this.props.onBlur && this.props.onBlur(event);
+  };
+
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter && this.props.onMouseEnter(e);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave && this.props.onMouseLeave(e);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
-  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-    this.props.onFocus && this.props.onFocus(e);
-  };
-
-  public onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
-    this.props.eva.dispatch([]);
-    this.props.onBlur && this.props.onBlur(e);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {

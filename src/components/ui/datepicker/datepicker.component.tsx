@@ -152,12 +152,6 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
     this.clear = this.clear.bind(this);
   }
 
-  public clear = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(null);
-    }
-  };
-
   private get calendarProps(): CalendarProps<D> {
     return {
       min: this.props.min,
@@ -174,6 +168,12 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
       renderYear: this.props.renderYear,
     };
   }
+
+  public clear = (): void => {
+    if (this.props.onSelect) {
+      this.props.onSelect(null);
+    }
+  };
 
   // BaseDatepickerComponent
 

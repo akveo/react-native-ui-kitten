@@ -7,9 +7,19 @@
 import React from 'react';
 import { ViewProps } from 'react-native';
 import { Overwrite } from 'utility-types';
-import { FalsyFC, RenderProp } from '../../devsupport';
-import { styled, StyledComponentProps, StyleType } from '../../theme';
-import { Menu, MenuProps } from '../menu/menu.component';
+import {
+  FalsyFC,
+  RenderProp,
+} from '../../devsupport';
+import {
+  styled,
+  StyledComponentProps,
+  StyleType,
+} from '../../theme';
+import {
+  Menu,
+  MenuProps,
+} from '../menu/menu.component';
 
 type DrawerStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | 'noDivider' | string;

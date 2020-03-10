@@ -19,8 +19,8 @@ import {
   FalsyText,
   RenderProp,
   TouchableWeb,
-  TouchableWebProps,
   TouchableWebElement,
+  TouchableWebProps,
 } from '../../devsupport';
 import {
   Interaction,

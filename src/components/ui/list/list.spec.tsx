@@ -175,7 +175,7 @@ describe('@list: component checks', () => {
   it('should be able to call scrollToIndex with ref', () => {
     const componentRef = React.createRef<ListComponent>();
     render(
-      <TestList ref={componentRef} />,
+      <TestList ref={componentRef}/>,
     );
 
     expect(componentRef.current.scrollToIndex).toBeTruthy();
@@ -185,7 +185,7 @@ describe('@list: component checks', () => {
   it('should be able to call scrollToIndex with ref', () => {
     const componentRef = React.createRef<ListComponent>();
     render(
-      <TestList ref={componentRef} />,
+      <TestList ref={componentRef}/>,
     );
 
     expect(componentRef.current.scrollToOffset).toBeTruthy();

@@ -1,10 +1,4 @@
 import React from 'react';
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-
 import {
   fireEvent,
   render,
@@ -20,6 +14,11 @@ import {
   RangeCalendarProps,
 } from './rangeCalendar.component';
 import { CalendarRange } from './type';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 describe('@range-calendar: component checks', () => {
 

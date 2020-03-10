@@ -9,19 +9,19 @@ export class Point {
               readonly y: number) {
   }
 
-  public equals(other: Point): boolean {
-    if (!other) {
-      return false;
-    }
-    return this.x === other.x && this.y === other.y;
-  }
-
   static zero(): Point {
     return new Point(0, 0);
   }
 
   static outscreen(): Point {
     return new Point(-999, -999);
+  }
+
+  public equals(other: Point): boolean {
+    if (!other) {
+      return false;
+    }
+    return this.x === other.x && this.y === other.y;
   }
 }
 
@@ -32,15 +32,15 @@ export class Size {
 
   }
 
+  static zero(): Size {
+    return new Size(0, 0);
+  }
+
   public equals(other: Size): boolean {
     if (!other) {
       return false;
     }
     return this.width === other.width && this.height === other.height;
-  }
-
-  static zero(): Size {
-    return new Size(0, 0);
   }
 }
 
@@ -52,6 +52,20 @@ export class Frame {
   constructor(x: number, y: number, width: number, height: number) {
     this.origin = new Point(x, y);
     this.size = new Size(width, height);
+  }
+
+  static zero(): Frame {
+    return new Frame(0, 0, 0, 0);
+  }
+
+  static window(): Frame {
+    const window: ScaledSize = Dimensions.get('window');
+    return new Frame(0, 0, window.width, window.height);
+  }
+
+  static outscreen(): Frame {
+    const point: Point = Point.outscreen();
+    return new Frame(point.x, point.y, 0, 0);
   }
 
   public equals(other: Frame): boolean {
@@ -140,19 +154,5 @@ export class Frame {
       this.size.width,
       this.size.height,
     );
-  }
-
-  static zero(): Frame {
-    return new Frame(0, 0, 0, 0);
-  }
-
-  static window(): Frame {
-    const window: ScaledSize = Dimensions.get('window');
-    return new Frame(0, 0, window.width, window.height);
-  }
-
-  static outscreen(): Frame {
-    const point: Point = Point.outscreen();
-    return new Frame(point.x, point.y, 0, 0);
   }
 }

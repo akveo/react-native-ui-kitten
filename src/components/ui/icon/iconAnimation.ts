@@ -7,10 +7,10 @@
 import { ViewStyle } from 'react-native';
 import {
   Animation,
+  AnimationConfig,
   PulseAnimation,
   ShakeAnimation,
   ZoomAnimation,
-  AnimationConfig,
 } from '../animation';
 
 export type IconAnimation = Animation<any, ViewStyle>;

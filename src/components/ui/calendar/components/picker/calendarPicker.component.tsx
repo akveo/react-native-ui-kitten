@@ -6,9 +6,9 @@
 
 import React from 'react';
 import {
+  StyleProp,
   View,
   ViewProps,
-  StyleProp,
 } from 'react-native';
 import { StyleType } from '../../../../theme';
 import {

@@ -20,7 +20,10 @@ import {
   render,
 } from 'react-native-testing-library';
 import { ApplicationProvider } from '../../theme';
-import { Menu, MenuProps } from './menu.component';
+import {
+  Menu,
+  MenuProps,
+} from './menu.component';
 import {
   MenuItem,
   MenuItemProps,

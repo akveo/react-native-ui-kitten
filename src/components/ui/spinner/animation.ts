@@ -57,15 +57,15 @@ export class SpinnerAnimation extends Animation<SpinnerAnimationConfig, SpinnerA
   private animationFrames: number[];
   private arcSize: number;
 
-  protected get animation(): Animated.CompositeAnimation {
-    return Animated.timing(this.animationValue, { toValue: 1.0, ...this.config });
-  }
-
   constructor(arcSize: number, config?: SpinnerAnimationConfig) {
     super({ ...DEFAULT_CONFIG, ...config });
     this.arcSize = arcSize;
     this.animationValue = new Animated.Value(0);
     this.animationFrames = this.createFrameRange(this.config.duration);
+  }
+
+  protected get animation(): Animated.CompositeAnimation {
+    return Animated.timing(this.animationValue, { toValue: 1.0, ...this.config });
   }
 
   public start(callback?: Animated.EndCallback) {

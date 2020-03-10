@@ -258,7 +258,7 @@ describe('@autocomplete: component checks', () => {
 
   it('should update options list on text change', async () => {
     const component = render(
-      <TestAutocomplete />,
+      <TestAutocomplete/>,
     );
 
     fireEvent(component.queryByType(TextInput), 'focus');

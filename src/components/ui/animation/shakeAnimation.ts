@@ -33,6 +33,11 @@ export class ShakeAnimation extends Animation<ShakeAnimationConfig, ViewProps> {
 
   private value: Animated.Value;
 
+  constructor(config?: ShakeAnimationConfig) {
+    super({ ...DEFAULT_CONFIG, ...config });
+    this.value = new Animated.Value(this.config.start);
+  }
+
   protected get animation(): Animated.CompositeAnimation {
     const { start, offset, ...restConfig } = this.config;
 
@@ -50,11 +55,6 @@ export class ShakeAnimation extends Animation<ShakeAnimationConfig, ViewProps> {
       startAnimation,
       endAnimation,
     ]);
-  }
-
-  constructor(config?: ShakeAnimationConfig) {
-    super({ ...DEFAULT_CONFIG, ...config });
-    this.value = new Animated.Value(this.config.start);
   }
 
   public toProps(): ViewProps {

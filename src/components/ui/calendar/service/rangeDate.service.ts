@@ -39,6 +39,6 @@ export class RangeDateService<D> {
   }
 
   private createRangeForStartEnd(date: D): CalendarRange<D> {
-    return { startDate: date, endDate: null};
+    return { startDate: date, endDate: null };
   }
 }

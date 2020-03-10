@@ -6,7 +6,13 @@
 
 import React from 'react';
 import { SvgProps } from 'react-native-svg';
-import { GestureResponderEvent, NativeSyntheticEvent, StyleSheet, TargetedEvent, View } from 'react-native';
+import {
+  GestureResponderEvent,
+  NativeSyntheticEvent,
+  StyleSheet,
+  TargetedEvent,
+  View,
+} from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   EvaStatus,
@@ -16,10 +22,21 @@ import {
   TouchableWebElement,
   TouchableWebProps,
 } from '../../devsupport';
-import { Interaction, styled, StyledComponentProps, StyleType } from '../../theme';
+import {
+  Interaction,
+  styled,
+  StyledComponentProps,
+  StyleType,
+} from '../../theme';
 import { TextProps } from '../text/text.component';
-import { CheckMark, CheckMarkProps } from '../shared/checkmark.component';
-import { Minus, MinusProps } from '../shared/minus.component';
+import {
+  CheckMark,
+  CheckMarkProps,
+} from '../shared/checkmark.component';
+import {
+  Minus,
+  MinusProps,
+} from '../shared/minus.component';
 
 type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
@@ -77,24 +94,24 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
   static styledComponentName: string = 'CheckBox';
 
-  private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter && this.props.onMouseEnter(e);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
-  private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave && this.props.onMouseLeave(e);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
-  private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-    this.props.onFocus && this.props.onFocus(e);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
-  private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
+  private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onBlur && this.props.onBlur(e);
+    this.props.onBlur && this.props.onBlur(event);
   };
 
   private onPress = (): void => {

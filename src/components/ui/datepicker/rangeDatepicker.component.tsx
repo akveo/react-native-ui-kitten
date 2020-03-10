@@ -137,10 +137,6 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
     this.clear = this.clear.bind(this);
   }
 
-  public clear = (): void => {
-    this.props.onSelect && this.props.onSelect({});
-  };
-
   private get calendarProps(): RangeCalendarProps<D> {
     return {
       min: this.props.min,
@@ -158,6 +154,10 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
       renderFooter: this.props.renderFooter,
     };
   }
+
+  public clear = (): void => {
+    this.props.onSelect && this.props.onSelect({});
+  };
 
   // BaseDatepickerComponent
 

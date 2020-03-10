@@ -17,7 +17,10 @@ import {
   TabElement,
   TabProps,
 } from './tab.component';
-import { TabBar, TabBarComponent } from './tabBar.component';
+import {
+  TabBar,
+  TabBarComponent,
+} from './tabBar.component';
 import {
   ViewPager,
   ViewPagerProps,

@@ -121,7 +121,7 @@ describe('@tab-bar: component checks', () => {
 
   it('should set tab selected by pressing it', () => {
     const component = render(
-      <TestTabBar />,
+      <TestTabBar/>,
     );
 
     fireEvent.press(touchables.findTabTouchable(component, 1));

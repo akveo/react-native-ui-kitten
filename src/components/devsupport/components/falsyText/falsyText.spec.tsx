@@ -1,7 +1,10 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { render } from 'react-native-testing-library';
-import { mapping, light } from '@eva-design/eva';
+import {
+  light,
+  mapping,
+} from '@eva-design/eva';
 import { FalsyText } from './falsyText.component';
 import { ApplicationProvider } from '../../../theme';
 
