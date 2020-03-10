@@ -17,7 +17,7 @@ import {
   TabElement,
   TabProps,
 } from './tab.component';
-import { TabBar } from './tabBar.component';
+import { TabBar, TabBarComponent } from './tabBar.component';
 import {
   ViewPager,
   ViewPagerProps,
@@ -74,29 +74,20 @@ export class TabView extends React.Component<TabViewProps> {
     selectedIndex: 0,
   };
 
-  private viewPagerRef: React.RefObject<ViewPager> = React.createRef();
-  private tabBarRef: React.RefObject<any> = React.createRef();
+  private viewPagerRef = React.createRef<ViewPager>();
+  private tabBarRef = React.createRef<TabBarComponent>();
 
   private onBarSelect = (index: number): void => {
-    const { current: viewPager } = this.viewPagerRef;
-
-    viewPager.scrollToIndex({
-      index,
-      animated: true,
-    });
+    this.viewPagerRef.current?.scrollToIndex({ index, animated: true });
   };
 
   private onPagerOffsetChange = (offset: number): void => {
-    const { current: tabBar } = this.tabBarRef;
-    const tabCount: number = React.Children.count(tabBar.props.children);
-
-    tabBar.scrollToOffset({ offset: offset / tabCount });
+    const tabCount: number = React.Children.count(this.tabBarRef.current?.props.children);
+    this.tabBarRef.current?.scrollToOffset({ offset: offset / tabCount });
   };
 
-  private onPagerSelect = (selectedIndex: number): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(selectedIndex);
-    }
+  private onPagerSelect = (index: number): void => {
+    this.props.onSelect && this.props.onSelect(index);
   };
 
   private renderComponentChild = (element: TabElement, index: number): TabViewChildElement => {

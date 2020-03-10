@@ -61,7 +61,7 @@ describe('@radio: component checks', () => {
 
   it('should render text', () => {
     const component = render(
-      <TestRadio text='I love Babel'/>,
+      <TestRadio>I love Babel</TestRadio>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -69,7 +69,9 @@ describe('@radio: component checks', () => {
 
   it('should render text as component', () => {
     const component = render(
-      <TestRadio text={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestRadio>
+        {props => <Text {...props}>I love Babel</Text>}
+      </TestRadio>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -93,6 +95,49 @@ describe('@radio: component checks', () => {
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
+  });
+  it('should call onMouseEnter', () => {
+    const onMouseEnter = jest.fn();
+
+    const component = render(
+      <TestRadio onMouseEnter={onMouseEnter}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
+    expect(onMouseEnter).toBeCalled();
+  });
+
+  it('should call onMouseLeave', () => {
+    const onMouseLeave = jest.fn();
+
+    const component = render(
+      <TestRadio onMouseLeave={onMouseLeave}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
+    expect(onMouseLeave).toBeCalled();
+  });
+
+  it('should call onFocus', () => {
+    const onFocus = jest.fn();
+
+    const component = render(
+      <TestRadio onFocus={onFocus}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'focus');
+    expect(onFocus).toBeCalled();
+  });
+
+  it('should call onBlur', () => {
+    const onBlur = jest.fn();
+
+    const component = render(
+      <TestRadio onBlur={onBlur}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'blur');
+    expect(onBlur).toBeCalled();
   });
 
 });

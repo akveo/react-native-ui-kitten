@@ -99,14 +99,14 @@ export class TooltipComponent extends React.Component<TooltipProps> {
 
   static styledComponentName: string = 'Tooltip';
 
-  private popoverRef: React.RefObject<Popover> = React.createRef();
+  private popoverRef = React.createRef<Popover>();
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
   private getComponentStyle = (source: StyleType) => {

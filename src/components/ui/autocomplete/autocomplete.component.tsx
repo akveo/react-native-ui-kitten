@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { ChildrenWithProps } from '../../devsupport';
 import {
-  Input,
+  Input, InputComponent,
   InputElement,
   InputProps,
 } from '../input/input.component';
@@ -111,35 +111,35 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     listVisible: false,
   };
 
-  private popoverRef: React.RefObject<Popover> = React.createRef();
-  private inputRef: React.RefObject<any> = React.createRef();
+  private popoverRef = React.createRef<Popover>();
+  private inputRef = React.createRef<InputComponent>();
 
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
   }
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
   public focus = (): void => {
-    this.inputRef.current.focus();
+    this.inputRef.current?.focus();
   };
 
   public blur = (): void => {
-    this.inputRef.current.blur();
+    this.inputRef.current?.blur();
   };
 
   public isFocused = (): boolean => {
-    return this.inputRef.current.isFocused();
+    return this.inputRef.current?.isFocused();
   };
 
   public clear = (): void => {
-    this.inputRef.current.clear();
+    this.inputRef.current?.clear();
   };
 
   private onInputFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>): void => {

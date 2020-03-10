@@ -65,7 +65,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     shouldLoadComponent: (): boolean => true,
   };
 
-  private containerRef: React.RefObject<View> = React.createRef();
+  private containerRef = React.createRef<View>();
   private contentWidth: number = 0;
   private contentOffsetValue: number = 0;
   private contentOffset: Animated.Value = new Animated.Value(this.contentOffsetValue);
@@ -78,10 +78,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   public componentDidUpdate(prevProps: ViewPagerProps): void {
     if (prevProps.selectedIndex !== this.props.selectedIndex) {
       const index: number = this.props.selectedIndex;
-      this.scrollToIndex({
-        index,
-        animated: true,
-      });
+      this.scrollToIndex({ index, animated: true });
     }
   }
 
@@ -95,7 +92,6 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     if (isHorizontalMove) {
       const i18nOffset: number = RTLService.select(state.dx, -state.dx);
       const nextSelectedIndex: number = this.props.selectedIndex - Math.sign(i18nOffset);
-
       return nextSelectedIndex >= 0 && nextSelectedIndex < this.getChildCount();
     }
 
@@ -113,16 +109,10 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
     if (Math.abs(state.vx) >= 0.5 || Math.abs(state.dx) >= 0.5 * this.contentWidth) {
       const i18nOffset: number = RTLService.select(state.dx, -state.dx);
       const index: number = i18nOffset > 0 ? this.props.selectedIndex - 1 : this.props.selectedIndex + 1;
-      this.scrollToIndex({
-        index,
-        animated: true,
-      });
+      this.scrollToIndex({ index, animated: true });
     } else {
       const index: number = this.props.selectedIndex;
-      this.scrollToIndex({
-        index,
-        animated: true,
-      });
+      this.scrollToIndex({ index, animated: true });
     }
   };
 
@@ -140,16 +130,12 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
 
   private onLayout = (event: LayoutChangeEvent): void => {
     this.contentWidth = event.nativeEvent.layout.width / this.getChildCount();
-
-    this.scrollToIndex({
-      index: this.props.selectedIndex,
-    });
+    this.scrollToIndex({ index: this.props.selectedIndex });
   };
 
   private onContentOffsetAnimationStateChanged = (state: { value: number }): void => {
-    this.contentOffsetValue = RTLService.select(-state.value, state.value);
-
     if (this.props.onOffsetChange) {
+      this.contentOffsetValue = RTLService.select(-state.value, state.value);
       this.props.onOffsetChange(this.contentOffsetValue);
     }
   };

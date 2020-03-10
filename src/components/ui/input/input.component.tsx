@@ -126,23 +126,23 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
 
   static styledComponentName: string = 'Input';
 
-  private textInputRef: React.RefObject<TextInput> = React.createRef();
+  private textInputRef = React.createRef<TextInput>();
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
 
   public focus = (): void => {
-    this.textInputRef.current.focus();
+    this.textInputRef.current?.focus();
   };
 
   public blur = (): void => {
-    this.textInputRef.current.blur();
+    this.textInputRef.current?.blur();
   };
 
   public isFocused = (): boolean => {
-    return this.textInputRef.current.isFocused();
+    return this.textInputRef.current?.isFocused();
   };
 
   public clear = (): void => {
-    this.textInputRef.current.clear();
+    this.textInputRef.current?.clear();
   };
 
   // WebEventResponderCallbacks
@@ -157,18 +157,12 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
 
   private onTextFieldFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus(event);
-    }
+    this.props.onFocus && this.props.onFocus(event);
   };
 
   private onTextFieldBlur = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur(event);
-    }
+    this.props.onBlur && this.props.onBlur(event);
   };
 
   private getComponentStyle = (source: StyleType) => {

@@ -38,8 +38,8 @@ describe('@radio-group: component checks', () => {
         <RadioGroup
           selectedIndex={selectedIndex}
           onChange={onCheckedChange}>
-          <Radio text='Option 0'/>
-          <Radio text='Option 1'/>
+          <Radio>Option 1</Radio>
+          <Radio>Option 2</Radio>
         </RadioGroup>
       </ApplicationProvider>
     );

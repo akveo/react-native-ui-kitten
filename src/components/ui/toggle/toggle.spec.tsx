@@ -70,7 +70,7 @@ describe('@toggle: component checks', () => {
 
   it('should render text', () => {
     const component = render(
-      <TestToggle text='I love Babel'/>,
+      <TestToggle>I love Babel</TestToggle>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -78,7 +78,9 @@ describe('@toggle: component checks', () => {
 
   it('should render text as component', () => {
     const component = render(
-      <TestToggle text={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestToggle>
+        {props => <Text {...props}>I love Babel</Text>}
+      </TestToggle>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();

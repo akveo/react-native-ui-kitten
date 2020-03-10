@@ -72,6 +72,27 @@ describe('@bottom-navigation-tab: component checks', () => {
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
   });
+  it('should call onMouseEnter', () => {
+    const onMouseEnter = jest.fn();
+
+    const component = render(
+      <TestBottomNavigationTab onMouseEnter={onMouseEnter}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
+    expect(onMouseEnter).toBeCalled();
+  });
+
+  it('should call onMouseLeave', () => {
+    const onMouseLeave = jest.fn();
+
+    const component = render(
+      <TestBottomNavigationTab onMouseLeave={onMouseLeave}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
+    expect(onMouseLeave).toBeCalled();
+  });
 });
 
 describe('@bottom-navigation: component checks', () => {

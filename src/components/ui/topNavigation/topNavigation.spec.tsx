@@ -87,6 +87,50 @@ describe('@top-navigation-action: component checks', () => {
     expect(onPressOut).toBeCalled();
   });
 
+  it('should call onMouseEnter', () => {
+    const onMouseEnter = jest.fn();
+
+    const component = render(
+      <TestTopNavigationAction onMouseEnter={onMouseEnter}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
+    expect(onMouseEnter).toBeCalled();
+  });
+
+  it('should call onMouseLeave', () => {
+    const onMouseLeave = jest.fn();
+
+    const component = render(
+      <TestTopNavigationAction onMouseLeave={onMouseLeave}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
+    expect(onMouseLeave).toBeCalled();
+  });
+
+  it('should call onFocus', () => {
+    const onFocus = jest.fn();
+
+    const component = render(
+      <TestTopNavigationAction onFocus={onFocus}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'focus');
+    expect(onFocus).toBeCalled();
+  });
+
+  it('should call onBlur', () => {
+    const onBlur = jest.fn();
+
+    const component = render(
+      <TestTopNavigationAction onBlur={onBlur}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'blur');
+    expect(onBlur).toBeCalled();
+  });
+
 });
 
 describe('@top-navigation: component checks', () => {

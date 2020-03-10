@@ -6,6 +6,9 @@
 
 import React from 'react';
 import {
+  Image,
+  ImageProps,
+  Text,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
@@ -24,7 +27,10 @@ import {
   Autocomplete,
   AutocompleteProps,
 } from './autocomplete.component';
-import { ListItem } from '../list/listItem.component';
+import {
+  AutocompleteItem,
+  AutocompleteItemProps,
+} from './autocompleteItem.component';
 
 /*
  * Mock UIManager since Autocomplete relies on native measurements
@@ -39,29 +45,155 @@ jest.mock('react-native', () => {
   return ActualReactNative;
 });
 
+describe('@autocomplete-item: component checks', () => {
+
+  const TestAutocompleteItem = (props?: AutocompleteItemProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <AutocompleteItem {...props}/>
+    </ApplicationProvider>
+  );
+
+  it('should render text passed to title prop', () => {
+    const component = render(
+      <TestAutocompleteItem title='I love Babel'/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to title prop', () => {
+    const component = render(
+      <TestAutocompleteItem title={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render text passed to description prop', () => {
+    const component = render(
+      <TestAutocompleteItem description='I love Babel'/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to description prop', () => {
+    const component = render(
+      <TestAutocompleteItem description={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestAutocompleteItem
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should call onPress', () => {
+    const onPress = jest.fn();
+    const component = render(
+      <TestAutocompleteItem onPress={onPress}/>,
+    );
+
+    fireEvent.press(component.queryByType(TouchableOpacity));
+    expect(onPress).toHaveBeenCalled();
+  });
+
+  it('should call onPressIn', () => {
+    const onPressIn = jest.fn();
+    const component = render(
+      <TestAutocompleteItem onPressIn={onPressIn}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
+    expect(onPressIn).toBeCalled();
+  });
+
+  it('should call onPressOut', () => {
+    const onPressOut = jest.fn();
+    const component = render(
+      <TestAutocompleteItem onPressOut={onPressOut}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
+    expect(onPressOut).toBeCalled();
+  });
+});
+
 describe('@autocomplete: component checks', () => {
 
   afterAll(() => {
     jest.clearAllMocks();
   });
 
+  const movies = [
+    { title: 'Option 1' },
+    { title: 'Option 2' },
+  ];
+
+  const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
+
   const TestAutocomplete = React.forwardRef((props: Partial<AutocompleteProps>, ref: React.Ref<Autocomplete>) => {
     const [value, setValue] = React.useState(props.value);
+    const [data, setData] = React.useState(movies);
 
-    const onChangeText = (text: string): void => {
-      setValue(text);
-      props.onChangeText && props.onChangeText(text);
+    const onSelect = (index) => {
+      setValue(movies[index].title);
+      props.onSelect && props.onSelect(index);
     };
+
+    const onChangeText = (query: string): void => {
+      setValue(query);
+      setData(movies.filter(item => filter(item, query)));
+      props.onChangeText && props.onChangeText(query);
+    };
+
+    const renderOption = (item, index) => (
+      <AutocompleteItem
+        key={index}
+        title={item.title}
+      />
+    );
 
     return (
       <ApplicationProvider mapping={mapping} theme={light}>
         <Autocomplete
           ref={ref}
-          value={value}
-          data={[{ title: 'Option 1' }, { title: 'Option 2' }]}
           {...props}
-          onChangeText={onChangeText}
-        />
+          value={value}
+          onSelect={onSelect}
+          onChangeText={onChangeText}>
+          {data.map(renderOption)}
+        </Autocomplete>
       </ApplicationProvider>
     );
   });
@@ -82,6 +214,14 @@ describe('@autocomplete: component checks', () => {
     );
 
     expect(component.queryByType(TextInput)).toBeTruthy();
+  });
+
+  it('should render placeholder', () => {
+    const component = render(
+      <TestAutocomplete placeholder='I love Babel'/>,
+    );
+
+    expect(component.queryByPlaceholder('I love Babel')).toBeTruthy();
   });
 
   it('should not render options when not focused', () => {
@@ -116,6 +256,22 @@ describe('@autocomplete: component checks', () => {
     expect(onChangeText).toBeCalledWith('I love Babel');
   });
 
+  it('should update options list on text change', async () => {
+    const component = render(
+      <TestAutocomplete />,
+    );
+
+    fireEvent(component.queryByType(TextInput), 'focus');
+    await waitForElement(() => null);
+
+    fireEvent.changeText(component.queryByType(TextInput), '2');
+    const firstOption = await waitForElement(() => component.queryByText('Option 1'));
+    const secondOption = component.queryByText('Option 2');
+
+    expect(firstOption).toBeFalsy();
+    expect(secondOption).toBeTruthy();
+  });
+
   it('should call onSelect when option is pressed', async () => {
     const onSelect = jest.fn();
     const component = render(
@@ -125,35 +281,8 @@ describe('@autocomplete: component checks', () => {
     fireEvent(component.queryByType(TextInput), 'focus');
     await waitForElement(() => null);
 
-    fireEvent.press(touchables.findOptionTouchable(component, 0));
-    expect(onSelect).toBeCalledWith({ title: 'Option 1' });
-  });
-
-  it('should render placeholder options when `data` prop is falsy', async () => {
-    const component = render(
-      <TestAutocomplete
-        data={undefined}
-        placeholderData={[{ title: 'Placeholder Option' }]}
-      />,
-    );
-
-    fireEvent(component.queryByType(TextInput), 'focus');
-
-    const placeholderOption = await waitForElement(() => component.queryByText('Placeholder Option'));
-    expect(placeholderOption).toBeTruthy();
-  });
-
-  it('should render element provided with renderItem prop', async () => {
-    const component = render(
-      <TestAutocomplete renderItem={info => <ListItem title={`Custom ${info.item.title}`}/>}/>,
-    );
-
-    fireEvent(component.queryByType(TextInput), 'focus');
-    const firstOption = await waitForElement(() => component.queryByText('Custom Option 1'));
-    const secondOption = component.queryByText('Custom Option 2');
-
-    expect(firstOption).toBeTruthy();
-    expect(secondOption).toBeTruthy();
+    fireEvent.press(touchables.findOptionTouchable(component, 1));
+    expect(onSelect).toBeCalledWith(1);
   });
 
   it('should hide options when backdrop is pressed', async () => {

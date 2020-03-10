@@ -6,13 +6,7 @@
 
 import React from 'react';
 import { SvgProps } from 'react-native-svg';
-import {
-  GestureResponderEvent,
-  NativeSyntheticEvent,
-  StyleSheet,
-  TargetedEvent,
-  View,
-} from 'react-native';
+import { GestureResponderEvent, NativeSyntheticEvent, StyleSheet, TargetedEvent, View } from 'react-native';
 import { Overwrite } from 'utility-types';
 import {
   EvaStatus,
@@ -22,21 +16,10 @@ import {
   TouchableWebElement,
   TouchableWebProps,
 } from '../../devsupport';
-import {
-  Interaction,
-  styled,
-  StyledComponentProps,
-  StyleType,
-} from '../../theme';
+import { Interaction, styled, StyledComponentProps, StyleType } from '../../theme';
 import { TextProps } from '../text/text.component';
-import {
-  CheckMark,
-  CheckMarkProps,
-} from '../shared/checkmark.component';
-import {
-  Minus,
-  MinusProps,
-} from '../shared/minus.component';
+import { CheckMark, CheckMarkProps } from '../shared/checkmark.component';
+import { Minus, MinusProps } from '../shared/minus.component';
 
 type CheckBoxStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
@@ -96,58 +79,37 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
 
   private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-
-    if (this.props.onMouseEnter) {
-      this.props.onMouseEnter(e);
-    }
+    this.props.onMouseEnter && this.props.onMouseEnter(e);
   };
 
   private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onMouseLeave) {
-      this.props.onMouseLeave(e);
-    }
+    this.props.onMouseLeave && this.props.onMouseLeave(e);
   };
 
   private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
+    this.props.onFocus && this.props.onFocus(e);
   };
 
   private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur(e);
-    }
+    this.props.onBlur && this.props.onBlur(e);
   };
 
   private onPress = (): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onChange) {
-      this.props.onChange(!this.props.checked, false);
-    }
+    this.props.onChange && this.props.onChange(!this.props.checked, false);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
   private getComponentStyle = (source: StyleType) => {

@@ -56,9 +56,7 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   private onRadioChange = (index: number): void => {
-    if (this.props.onChange) {
-      this.props.onChange(index);
-    }
+    this.props.onChange && this.props.onChange(index);
   };
 
   private getComponentStyle = (source: StyleType) => {

@@ -64,18 +64,18 @@ export class ListComponent<ItemT = any> extends React.Component<ListProps> {
 
   static styledComponentName: string = 'List';
 
-  private listRef: React.RefObject<FlatList<ItemT>> = React.createRef();
+  private listRef = React.createRef<FlatList>();
 
   public scrollToEnd = (params?: BaseScrollParams): void => {
-    this.listRef.current.scrollToEnd(params);
+    this.listRef.current?.scrollToEnd(params);
   };
 
   public scrollToIndex = (params: ScrollToIndexParams): void => {
-    this.listRef.current.scrollToIndex(params);
+    this.listRef.current?.scrollToIndex(params);
   };
 
   public scrollToOffset(params: ScrollToOffsetParams): void {
-    this.listRef.current.scrollToOffset(params);
+    this.listRef.current?.scrollToOffset(params);
   }
 
   private keyExtractor = (item: ItemT, index: number): string => {

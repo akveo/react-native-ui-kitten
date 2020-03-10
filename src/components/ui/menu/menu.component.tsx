@@ -62,8 +62,9 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * Updating this property is not required if marking items selected is not needed.
  *
  * @property {(IndexPath) => void} onSelect - Called when item is pressed.
- * Called with `row: number` by default.
- * Called with `row: number, section: number` for items rendered within MenuGroup.
+ * Called with `row: number` for non-grouped items.
+ * Called with `row: number, section: number` for items rendered within group,
+ * where row - index of item in group, section - index of group in list.
  *
  * @property {ListProps} ...ListProps - Any props applied to List component,
  * excluding `renderItem` and `data`.

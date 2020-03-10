@@ -37,8 +37,9 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * Updating this property is not required if marking items selected is not needed.
  *
  * @property {(IndexPath | IndexPath[]) => void} onSelect - Called when item is pressed.
- * Called with `row: number` by default.
- * Called with `row: number, section: number` for items rendered within DrawerGroup.
+ * Called with `row: number` for non-grouped items.
+ * Called with `row: number, section: number` for items rendered within group,
+ * where row - index of item in group, section - index of group in list.
  *
  * @property {string} appearance - Appearance of the component.
  * Can be `default` or `noDivider`.

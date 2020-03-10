@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Autocomplete, AutocompleteItem, Layout } from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
 const movies = [
   { title: 'Star Wars' },

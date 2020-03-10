@@ -65,24 +65,16 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
 
   private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-
-    if (this.props.onMouseEnter) {
-      this.props.onMouseEnter(e);
-    }
+    this.props.onMouseEnter && this.props.onMouseEnter(e);
   };
 
   private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onMouseLeave) {
-      this.props.onMouseEnter(e);
-    }
+    this.props.onMouseLeave && this.props.onMouseLeave(e);
   };
 
   private onPress = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(!this.props.selected);
-    }
+    this.props.onSelect && this.props.onSelect(!this.props.selected);
   };
 
   private getComponentStyle = (source: StyleType) => {

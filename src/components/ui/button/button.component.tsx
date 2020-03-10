@@ -101,50 +101,32 @@ export class ButtonComponent extends React.Component<ButtonProps> {
 
   private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-
-    if (this.props.onMouseEnter) {
-      this.props.onMouseEnter(e);
-    }
+    this.props.onMouseEnter && this.props.onMouseEnter(e);
   };
 
   private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onMouseLeave) {
-      this.props.onMouseLeave(e);
-    }
+    this.props.onMouseLeave && this.props.onMouseLeave(e);
   };
 
   private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
+    this.props.onFocus && this.props.onFocus(e);
   };
 
   private onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur(e);
-    }
+    this.props.onBlur && this.props.onBlur(e);
   };
 
-  private onPressIn = (event: GestureResponderEvent): void => {
+  private onPressIn = (e: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.onPressIn && this.props.onPressIn(e);
   };
 
-  private onPressOut = (event: GestureResponderEvent): void => {
+  private onPressOut = (e: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.onPressOut && this.props.onPressOut(e);
   };
 
   private getComponentStyle = (source: StyleType) => {

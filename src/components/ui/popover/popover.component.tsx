@@ -110,10 +110,7 @@ export class Popover extends React.Component<PopoverProps, State> {
 
   private get contentFlexPosition() {
     const { x: left, y: top } = this.contentPosition;
-    return {
-      left,
-      top,
-    };
+    return { left, top };
   }
 
   private get backdropConfig() {

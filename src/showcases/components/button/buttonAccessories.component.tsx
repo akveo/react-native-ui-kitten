@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Icon, Layout, Spinner } from '@ui-kitten/components';
 
-const StarIcon = (props) => (
-  <Icon {...props} name='star'/>
+const StarIcon = (style) => (
+  <Icon {...style} name='star'/>
 );
 
 const LoadingIndicator = (props) => (
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-    margin: 2,
+    margin: 1,
   },
   indicator: {
     justifyContent: 'center',

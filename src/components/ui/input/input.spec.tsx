@@ -80,6 +80,14 @@ describe('@input: component checks', () => {
     expect(textInput.props.editable).toEqual(false);
   });
 
+  it('should render placeholder', () => {
+    const component = render(
+      <TestInput placeholder='I love Babel'/>,
+    );
+
+    expect(component.queryByPlaceholder('I love Babel')).toBeTruthy();
+  });
+
   it('should render text passed to label prop', () => {
     const component = render(
       <TestInput label='I love Babel'/>,

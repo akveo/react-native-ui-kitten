@@ -84,18 +84,18 @@ export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 
   static styledComponentName: string = 'OverflowMenu';
 
-  private popoverRef: React.RefObject<Popover> = React.createRef();
+  private popoverRef = React.createRef<Popover>();
 
   private get itemsCount(): number {
     return React.Children.count(this.props.children);
   }
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
   private getComponentStyle = (source: StyleType) => {

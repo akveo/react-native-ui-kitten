@@ -114,24 +114,18 @@ export class TabBarComponent extends React.Component<TabBarProps> {
     selectedIndex: 0,
   };
 
-  private tabIndicatorRef: React.RefObject<TabIndicator> = React.createRef();
+  private tabIndicatorRef = React.createRef<TabIndicator>();
 
   public scrollToIndex(params: { index: number, animated?: boolean }): void {
-    const { current: tabIndicator } = this.tabIndicatorRef;
-
-    tabIndicator.scrollToIndex(params);
+    this.tabIndicatorRef.current?.scrollToIndex(params);
   }
 
   public scrollToOffset(params: { offset: number, animated?: boolean }): void {
-    const { current: tabIndicator } = this.tabIndicatorRef;
-
-    tabIndicator.scrollToOffset(params);
+    this.tabIndicatorRef.current?.scrollToOffset(params);
   }
 
   private onTabSelect = (index: number): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect(index);
-    }
+    this.props.onSelect && this.props.onSelect(index);
   };
 
   private getComponentStyle = (source: StyleType) => {

@@ -79,18 +79,12 @@ export class ListItemComponent extends React.Component<ListItemProps & { index: 
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
   private getComponentStyle = (source: StyleType) => {

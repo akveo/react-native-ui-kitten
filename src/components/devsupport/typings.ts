@@ -18,7 +18,7 @@ export class IndexPath {
 
   public toString(): string {
     if (this.section >= 0) {
-      return `${this.row + 1}.${this.section + 1}`;
+      return `${this.section + 1}.${this.row + 1}`;
     }
     return (this.row + 1).toString();
   }

@@ -61,56 +61,32 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
 
   private onMouseEnter = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-
-    if (this.props.onMouseEnter) {
-      this.props.onMouseEnter(e);
-    }
+    this.props.onMouseEnter && this.props.onMouseEnter(e);
   };
 
   private onMouseLeave = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onMouseLeave) {
-      this.props.onMouseLeave(e);
-    }
+    this.props.onMouseLeave && this.props.onMouseLeave(e);
   };
 
   private onFocus = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
+    this.props.onFocus && this.props.onFocus(e);
   };
 
   public onBlur = (e: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur(e);
-    }
-  };
-
-  private onPress = (event: GestureResponderEvent): void => {
-    if (this.props.onPress) {
-      this.props.onPress(event);
-    }
+    this.props.onBlur && this.props.onBlur(e);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
   private getComponentStyle = (source: StyleType) => {
@@ -145,7 +121,6 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
         onMouseLeave={this.onMouseLeave}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
-        onPress={this.onPress}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}>
         <FalsyFC

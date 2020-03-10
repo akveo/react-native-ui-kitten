@@ -56,6 +56,9 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @property {(D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
+ * @property {() => ReactElement} renderFooter - Function component
+ * to render below the calendar.
+ *
  * @property {(D, NamedStyles) => ReactElement} renderDay - Function component
  * to render instead of default day cell.
  * Called with a date for this cell and styles provided by Eva.
@@ -105,9 +108,7 @@ export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarP
   }
 
   protected onDateSelect(date: D): void {
-    if (this.props.onSelect) {
-      this.props.onSelect(date);
-    }
+    this.props.onSelect && this.props.onSelect(date);
   }
 
   protected isDateSelected(date: D): boolean {

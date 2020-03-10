@@ -138,9 +138,7 @@ export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<
   }
 
   public clear = (): void => {
-    if (this.props.onSelect) {
-      this.props.onSelect({});
-    }
+    this.props.onSelect && this.props.onSelect({});
   };
 
   private get calendarProps(): RangeCalendarProps<D> {

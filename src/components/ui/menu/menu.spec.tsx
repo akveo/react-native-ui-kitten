@@ -20,11 +20,13 @@ import {
   render,
 } from 'react-native-testing-library';
 import { ApplicationProvider } from '../../theme';
-import { Menu } from './menu.component';
+import { Menu, MenuProps } from './menu.component';
 import {
   MenuItem,
   MenuItemProps,
 } from './menuItem.component';
+import { IndexPath } from '../../devsupport';
+import { MenuGroup } from './menuGroup.component';
 
 describe('@menu-item: component checks', () => {
 
@@ -84,21 +86,6 @@ describe('@menu-item: component checks', () => {
     expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
   });
 
-  it('should render 2 menu items passed to children', () => {
-    const component = render(
-      <TestMenuItem title='Test Group'>
-        <MenuItem title='Nested Item 1'/>
-        <MenuItem title='Nested Item 2'/>
-      </TestMenuItem>,
-    );
-
-    const nestedItem1 = component.queryByText('Nested Item 1');
-    const nestedItem2 = component.queryByText('Nested Item 2');
-
-    expect(nestedItem1).toBeTruthy();
-    expect(nestedItem2).toBeTruthy();
-  });
-
   it('should call onPress', () => {
     const onPress = jest.fn();
     const component = render(
@@ -133,23 +120,62 @@ describe('@menu-item: component checks', () => {
 
 describe('@menu: component checks', () => {
 
-  const TestMenu = () => (
+  const TestMenu = (props: MenuProps) => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}>
-      <Menu>
-        <MenuItem/>
-        <MenuItem/>
-      </Menu>
+      <Menu {...props}/>
     </ApplicationProvider>
   );
 
   it('should render two menu items passed to children', () => {
     const component = render(
-      <TestMenu/>,
+      <TestMenu>
+        <MenuItem title='Option 1'/>
+        <MenuItem title='Option 2'/>
+      </TestMenu>,
     );
 
-    expect(component.queryAllByType(MenuItem).length).toEqual(2);
+    expect(component.queryByText('Option 1')).toBeTruthy();
+    expect(component.queryByText('Option 2')).toBeTruthy();
+  });
+
+  it('should call onSelect with non-grouped index', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(1);
+      expect(index.section).toBeFalsy();
+    });
+
+    const component = render(
+      <TestMenu onSelect={onSelect}>
+        <MenuItem title='Option 1'/>
+        <MenuItem title='Option 2'/>
+      </TestMenu>,
+    );
+
+    fireEvent.press(component.queryByText('Option 2'));
+  });
+
+  it('should call onSelect with grouped index', () => {
+    const onSelect = jest.fn((index: IndexPath) => {
+      expect(index.row).toEqual(0);
+      expect(index.section).toEqual(1);
+    });
+
+    const component = render(
+      <TestMenu onSelect={onSelect}>
+        <MenuGroup title='Group 1'>
+          <MenuItem title='Option 1.1'/>
+          <MenuItem title='Option 1.2'/>
+        </MenuGroup>
+        <MenuGroup title='Group 2'>
+          <MenuItem title='Option 2.1'/>
+          <MenuItem title='Option 2.2'/>
+        </MenuGroup>
+      </TestMenu>,
+    );
+
+    fireEvent.press(component.queryByText('Option 2.1'));
   });
 });
 

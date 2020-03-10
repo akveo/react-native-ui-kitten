@@ -5,22 +5,14 @@
  */
 
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import {
-  fireEvent,
-  render,
-} from 'react-native-testing-library';
-import {
-  light,
-  mapping,
-} from '@eva-design/eva';
+import { TouchableOpacity, View } from 'react-native';
+import { Moment } from 'moment';
+import { fireEvent, render, waitForElement } from 'react-native-testing-library';
+import { light, mapping } from '@eva-design/eva';
 import { ApplicationProvider } from '../../theme';
-import {
-  Calendar,
-  CalendarComponent,
-  CalendarProps,
-} from './calendar.component';
+import { Calendar, CalendarComponent, CalendarProps } from './calendar.component';
 import { CalendarViewModes } from './type';
+import { MomentDateService } from '@ui-kitten/moment';
 
 describe('@calendar: component checks', () => {
 
@@ -38,14 +30,16 @@ describe('@calendar: component checks', () => {
   const now: Date = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
 
-  const TestCalendar = React.forwardRef((props: Partial<CalendarProps>, ref: React.Ref<CalendarComponent>) => {
-    const [date, setDate] = React.useState<Date>(props.date);
+  const TestCalendar = React.forwardRef((
+    props: Partial<CalendarProps<Date | Moment>>,
+    ref: React.Ref<CalendarComponent>,
+  ) => {
 
-    const onSelect = (nextDate: Date): void => {
-      if (props.onSelect) {
-        props.onSelect(nextDate);
-      }
+    const [date, setDate] = React.useState<Date | Moment>(props.date);
+
+    const onSelect = (nextDate: Date | Moment): void => {
       setDate(date);
+      props.onSelect && props.onSelect(nextDate);
     };
 
     return (
@@ -62,7 +56,7 @@ describe('@calendar: component checks', () => {
     );
   });
 
-  it('should call onSelect when date cell is pressed with it\'s date', () => {
+  it('should request date change on day select', () => {
     const onSelect = jest.fn((date: Date) => {
       expect(date).toEqual(new Date(now.getFullYear(), now.getMonth(), 5));
     });
@@ -71,7 +65,40 @@ describe('@calendar: component checks', () => {
       <TestCalendar onSelect={onSelect}/>,
     );
 
-    fireEvent.press(component.queryAllByText('5')[0]);
+    fireEvent.press(component.queryByText('5'));
+  });
+
+  it('should request date change on month select', async () => {
+    const onSelect = jest.fn((date: Date) => {
+      expect(date).toEqual(new Date(now.getFullYear(), 6, 5));
+    });
+
+    const component = render(
+      <TestCalendar startView={CalendarViewModes.MONTH} onSelect={onSelect}/>,
+    );
+
+    fireEvent.press(component.queryByText('Jul'));
+    const dayCell = await waitForElement(() => component.queryByText('5'));
+
+    fireEvent.press(dayCell);
+  });
+
+  it('should request date change on year select', async () => {
+    const onSelect = jest.fn((date: Date) => {
+      expect(date).toEqual(new Date(now.getFullYear() + 1, 6, 5));
+    });
+
+    const component = render(
+      <TestCalendar startView={CalendarViewModes.YEAR} onSelect={onSelect}/>,
+    );
+
+    fireEvent.press(component.queryByText(`${now.getFullYear() + 1}`));
+    const monthCell = await waitForElement(() => component.queryByText('Jul'));
+
+    fireEvent.press(monthCell);
+    const dayCell = await waitForElement(() => component.queryByText('5'));
+
+    fireEvent.press(dayCell);
   });
 
   it('should be rendered with view passed to startView prop', () => {
@@ -160,5 +187,66 @@ describe('@calendar: component checks', () => {
 
     expect(componentRef.current.state.visibleDate.getMonth()).toEqual(today.getMonth());
   });
+
+  it('should render element provided with renderDay prop', async () => {
+    const component = render(
+      <TestCalendar renderDay={() => <View testID='@calendar/cell'/>}/>,
+    );
+
+    const cells = component.queryAllByTestId('@calendar/cell');
+    expect(cells.length).not.toEqual(0);
+  });
+
+  it('should render element provided with renderMonth prop', async () => {
+    const component = render(
+      <TestCalendar
+        startView={CalendarViewModes.MONTH}
+        renderMonth={() => <View testID='@calendar/cell'/>}
+      />,
+    );
+
+    const cells = component.queryAllByTestId('@calendar/cell');
+    expect(cells.length).not.toEqual(0);
+  });
+
+  it('should render element provided with renderYear prop', async () => {
+    const component = render(
+      <TestCalendar
+        startView={CalendarViewModes.YEAR}
+        renderYear={() => <View testID='@calendar/cell'/>}
+      />,
+    );
+
+    const cells = component.queryAllByTestId('@calendar/cell');
+    expect(cells.length).not.toEqual(0);
+  });
+
+  it('should render element provided with renderFooter prop', async () => {
+    const component = render(
+      <TestCalendar
+        startView={CalendarViewModes.YEAR}
+        renderFooter={() => <View testID='@calendar/footer'/>}
+      />,
+    );
+
+    expect(component.queryByTestId('@calendar/footer')).toBeTruthy();
+  });
+
+  it('should work with Moment', async () => {
+    const dateService = new MomentDateService();
+    const onSelect = jest.fn((moment: Moment) => {
+      expect(moment.toDate).toBeTruthy();
+    });
+
+    const component = render(
+      <TestCalendar
+        dateService={dateService}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.press(component.getByText('5'));
+  });
+
 
 });

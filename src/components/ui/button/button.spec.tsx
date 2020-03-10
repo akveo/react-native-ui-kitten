@@ -117,4 +117,48 @@ describe('@button: component checks', () => {
     expect(onPressOut).toBeCalled();
   });
 
+  it('should call onMouseEnter', () => {
+    const onMouseEnter = jest.fn();
+
+    const component = render(
+      <TestButton onMouseEnter={onMouseEnter}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
+    expect(onMouseEnter).toBeCalled();
+  });
+
+  it('should call onMouseLeave', () => {
+    const onMouseLeave = jest.fn();
+
+    const component = render(
+      <TestButton onMouseLeave={onMouseLeave}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
+    expect(onMouseLeave).toBeCalled();
+  });
+
+  it('should call onFocus', () => {
+    const onFocus = jest.fn();
+
+    const component = render(
+      <TestButton onFocus={onFocus}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'focus');
+    expect(onFocus).toBeCalled();
+  });
+
+  it('should call onBlur', () => {
+    const onBlur = jest.fn();
+
+    const component = render(
+      <TestButton onBlur={onBlur}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'blur');
+    expect(onBlur).toBeCalled();
+  });
+
 });

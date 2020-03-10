@@ -10,6 +10,9 @@ export class Point {
   }
 
   public equals(other: Point): boolean {
+    if (!other) {
+      return false;
+    }
     return this.x === other.x && this.y === other.y;
   }
 
@@ -30,6 +33,9 @@ export class Size {
   }
 
   public equals(other: Size): boolean {
+    if (!other) {
+      return false;
+    }
     return this.width === other.width && this.height === other.height;
   }
 
@@ -49,6 +55,9 @@ export class Frame {
   }
 
   public equals(other: Frame): boolean {
+    if (!other) {
+      return false;
+    }
     return this.origin.equals(other.origin) && this.size.equals(other.size);
   }
 

@@ -74,14 +74,14 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
     visible: false,
   };
 
-  private popoverRef: React.RefObject<Popover> = React.createRef();
+  private popoverRef = React.createRef<Popover>();
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
   public focus = (): void => {
@@ -184,42 +184,27 @@ export abstract class BaseDatepickerComponent<P, D = Date> extends React.Compone
 
   private onPress = (event: GestureResponderEvent): void => {
     this.setPickerVisible();
-
-    if (this.props.onPress) {
-      this.props.onPress(event);
-    }
+    this.props.onPress && this.props.onPress(event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onPressIn) {
-      this.props.onPressIn(event);
-    }
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onPressOut) {
-      this.props.onPressOut(event);
-    }
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
   private onPickerVisible = (): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-
-    if (this.props.onFocus) {
-      this.props.onFocus();
-    }
+    this.props.onFocus && this.props.onFocus();
   };
 
   private onPickerInvisible = (): void => {
     this.props.eva.dispatch([]);
-
-    if (this.props.onBlur) {
-      this.props.onBlur();
-    }
+    this.props.onBlur && this.props.onBlur();
   };
 
   private setPickerVisible = (): void => {

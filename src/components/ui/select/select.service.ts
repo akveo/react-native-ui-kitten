@@ -23,7 +23,7 @@ export class SelectService {
   };
 
   public toStringSelected = (selected: IndexPath[]): string => {
-    if (selected.length === 0) {
+    if (!Array.isArray(selected)) {
       return '';
     }
 
@@ -49,8 +49,8 @@ export class SelectService {
                                        multiSelect: boolean,
                                        index: number): SelectItemDescriptor => {
 
-    const groupIndices = React.Children.map(element.props.children, ((child: SelectItemElement, section: number) => {
-      return new IndexPath(index, section);
+    const groupIndices = React.Children.map(element.props.children, ((child: SelectItemElement, row: number) => {
+      return new IndexPath(row, index);
     }));
 
     return { multiSelect, groupIndices, index: new IndexPath(index) };
@@ -62,7 +62,7 @@ export class SelectService {
 
     return {
       ...descriptor,
-      index: new IndexPath(descriptor.index.row, index),
+      index: new IndexPath(index, descriptor.index.row),
       groupIndices: [],
     };
   };
@@ -99,7 +99,7 @@ export class SelectService {
 
   private containsSomeFromGroup = (index: IndexPath, selected: IndexPath[]): boolean => {
     return selected.some((selectedIndex: IndexPath): boolean => {
-      return selectedIndex.row === index.row;
+      return selectedIndex.section === index.row;
     });
   };
 }

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import {
-  Animated,
+  Animated, GestureResponderEvent,
   ImageProps,
   ListRenderItemInfo,
   NativeSyntheticEvent,
@@ -31,13 +31,24 @@ import {
   TouchableWebElement,
   TouchableWebProps,
 } from '../../devsupport';
-import { Interaction, styled, StyledComponentProps, StyleType } from '../../theme';
+import {
+  Interaction,
+  styled,
+  StyledComponentProps,
+  StyleType,
+} from '../../theme';
 import { List } from '../list/list.component';
 import { Popover } from '../popover/popover.component';
 import { ChevronDown } from '../shared/chevronDown.component';
 import { SelectGroupProps } from './selectGroup.component';
-import { SelectItemElement, SelectItemProps } from './selectItem.component';
-import { SelectItemDescriptor, SelectService } from './select.service';
+import {
+  SelectItemElement,
+  SelectItemProps,
+} from './selectItem.component';
+import {
+  SelectItemDescriptor,
+  SelectService,
+} from './select.service';
 
 type SelectStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | string;
@@ -94,8 +105,9 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * Select becomes sectioned when SelectGroup is rendered within children.
  *
  * @property {(IndexPath | IndexPath[]) => void} onSelect - Called when option is pressed.
- * Called with `row: number` by default and for SelectGroup items.
- * Called with `row: number, section: number` for items rendered within SelectGroup.
+ * Called with `row: number` for non-grouped items.
+ * Called with `row: number, section: number` for items rendered within group,
+ * where row - index of item in group, section - index of group in list.
  * Called with array if *multiSelect* was set to true.
  *
  * @property {ReactText | (TextProps) => ReactElement} value - String, number or a function component
@@ -172,7 +184,7 @@ export class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   private service: SelectService = new SelectService();
-  private popoverRef: React.RefObject<Popover> = React.createRef();
+  private popoverRef = React.createRef<Popover>();
   private expandAnimation: Animated.Value = new Animated.Value(0);
 
   private get isMultiSelect(): boolean {
@@ -184,6 +196,9 @@ export class SelectComponent extends React.Component<SelectProps, State> {
   }
 
   private get selectedIndices(): IndexPath[] {
+    if (!this.props.selectedIndex) {
+      return [];
+    }
     return Array.isArray(this.props.selectedIndex) ? this.props.selectedIndex : [this.props.selectedIndex];
   }
 
@@ -195,11 +210,11 @@ export class SelectComponent extends React.Component<SelectProps, State> {
   }
 
   public show = (): void => {
-    this.popoverRef.current.show();
+    this.popoverRef.current?.show();
   };
 
   public hide = (): void => {
-    this.popoverRef.current.hide();
+    this.popoverRef.current?.hide();
   };
 
   public focus = (): void => {
@@ -232,12 +247,14 @@ export class SelectComponent extends React.Component<SelectProps, State> {
     this.setOptionsListVisible();
   };
 
-  private onPressIn = (): void => {
+  private onPressIn = (e: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
+    this.props.onPressIn && this.props.onPressIn(e);
   };
 
-  private onPressOut = (): void => {
+  private onPressOut = (e: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
+    this.props.onPressOut && this.props.onPressOut(e);
   };
 
   private onItemPress = (descriptor: SelectItemDescriptor): void => {
@@ -460,7 +477,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'red',
   },
   popover: {
     overflow: 'hidden',

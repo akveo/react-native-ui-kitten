@@ -59,6 +59,9 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  *
  * @property {(D) => boolean} filter - A function to determine whether particular date cells should be disabled.
  *
+ * @property {() => ReactElement} renderFooter - Function component
+ * to render below the calendar.
+ *
  * @property {(D, NamedStyles) => ReactElement} renderDay - Function component
  * to render instead of default day cell.
  * Called with a date for this cell and styles provided by Eva.

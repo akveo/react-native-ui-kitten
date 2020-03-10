@@ -89,7 +89,7 @@ describe('@checkbox component checks', () => {
 
   it('should render text', () => {
     const component = render(
-      <TestCheckBox text='I love Babel'/>,
+      <TestCheckBox>I love Babel</TestCheckBox>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -97,7 +97,9 @@ describe('@checkbox component checks', () => {
 
   it('should render text as component', () => {
     const component = render(
-      <TestCheckBox text={props => <Text {...props}>I love Babel</Text>}/>,
+      <TestCheckBox>
+        {props => <Text {...props}>I love Babel</Text>}
+      </TestCheckBox>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -121,6 +123,50 @@ describe('@checkbox component checks', () => {
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
     expect(onPressOut).toBeCalled();
+  });
+
+  it('should call onMouseEnter', () => {
+    const onMouseEnter = jest.fn();
+
+    const component = render(
+      <TestCheckBox onMouseEnter={onMouseEnter}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
+    expect(onMouseEnter).toBeCalled();
+  });
+
+  it('should call onMouseLeave', () => {
+    const onMouseLeave = jest.fn();
+
+    const component = render(
+      <TestCheckBox onMouseLeave={onMouseLeave}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
+    expect(onMouseLeave).toBeCalled();
+  });
+
+  it('should call onFocus', () => {
+    const onFocus = jest.fn();
+
+    const component = render(
+      <TestCheckBox onFocus={onFocus}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'focus');
+    expect(onFocus).toBeCalled();
+  });
+
+  it('should call onBlur', () => {
+    const onBlur = jest.fn();
+
+    const component = render(
+      <TestCheckBox onBlur={onBlur}/>,
+    );
+
+    fireEvent(component.queryByType(TouchableOpacity), 'blur');
+    expect(onBlur).toBeCalled();
   });
 
 });
