@@ -127,7 +127,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * @overview-example InputSize
  * To resize Input, a `size` property may be used.
  *
- * @example InputStyling
+ * @overview-example InputStyling
  * Input and it's inner views can be styled by passing them as function components.
  * ```
  * import { Input, Text } from '@ui-kitten/components';
@@ -139,7 +139,7 @@ export type InputElement = React.ReactElement<InputProps>;
  * />
  * ```
  *
- * @example InputTheming
+ * @overview-example InputTheming
  * In most cases this is redundant,
  * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */

@@ -151,7 +151,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @overview-example DatepickerCustomDay
  * To render custom cells, `renderDay`, `renderMonth` and `renderYear` properties may be used.
  *
- * @example DatepickerStyling
+ * @overview-example DatepickerStyling
  * Datepicker and it's inner views can be styled by passing them as function components.
  * ```
  * import { Datepicker, Text } '@ui-kitten/components';
@@ -163,7 +163,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * />
  * ```
  *
- * @example DatepickerTheming
+ * @overview-example DatepickerTheming
  * In most cases this is redundant,
  * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
