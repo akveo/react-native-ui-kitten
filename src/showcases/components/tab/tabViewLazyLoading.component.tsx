@@ -12,7 +12,7 @@ export const TabViewLazyLoadingShowcase = () => {
     <TabView
       selectedIndex={selectedIndex}
       shouldLoadComponent={shouldLoadComponent}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <Tab title='USERS'>
         <Layout style={styles.tabContainer}>
           <Text category='h5'>USERS</Text>

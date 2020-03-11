@@ -98,12 +98,19 @@ interface State {
  * @property {InputProps} ...InputProps - Any props applied to Input component.
  *
  * @overview-example AutocompleteSimpleUsage
+ * Autocomplete may contain options to be rendered within suggestions list.
+ * Options should be provided by passing them to children.
  *
  * @overview-example AutocompleteAccessories
+ * Autocomplete may contain accessories by passing `accessoryLeft` or `accessoryRight` props.
+ * By default, we expect it to be images.
  *
  * @example AutocompleteHandleKeyboard
+ * On mobile devices, options may be overlapped by keyboard.
+ * It can be handled with `placement` property.
  *
  * @example AutocompleteAsync
+ * For requesting a real-world data by typing, http requests may be sent with debounce.
  */
 export class Autocomplete extends React.Component<AutocompleteProps, State> {
 

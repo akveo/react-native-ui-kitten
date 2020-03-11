@@ -9,7 +9,7 @@ export const ViewPagerSimpleUsageShowcase = () => {
   return (
     <ViewPager
       selectedIndex={selectedIndex}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <Layout
         style={styles.tab}
         level='2'>

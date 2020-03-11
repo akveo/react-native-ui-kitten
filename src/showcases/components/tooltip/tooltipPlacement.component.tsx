@@ -34,7 +34,7 @@ export const TooltipPlacementShowcase = () => {
   );
 
   const renderPlacementItem = (title) => (
-    <SelectItem title={title} />
+    <SelectItem title={title}/>
   );
 
   return (

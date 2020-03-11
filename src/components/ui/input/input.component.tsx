@@ -113,14 +113,35 @@ export type InputElement = React.ReactElement<InputProps>;
  * @overview-example InputSimpleUsage
  *
  * @overview-example InputStates
- *
- * @overview-example InputAccessories
+ * Input can be disabled with `disabled` property.
  *
  * @overview-example InputStatus
+ * Or marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
+ *
+ * @overview-example InputAccessories
+ * Input may contain labels, captions and inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Within Eva, Input accessories are expected to be images
+ * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *
  * @overview-example InputSize
+ * To resize Input, a `size` property may be used.
  *
  * @example InputStyling
+ * Input and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Input, Text } from '@ui-kitten/components';
+ *
+ * <Input
+ *   textStyle={{ ... }}
+ *   label={evaProps => <Text {...evaProps}>Label</Text>}
+ *   caption={evaProps => <Text {...evaProps}>Caption</Text>}
+ * />
+ * ```
+ *
+ * @example InputTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class InputComponent extends React.Component<InputProps> implements WebEventResponderCallbacks {
 

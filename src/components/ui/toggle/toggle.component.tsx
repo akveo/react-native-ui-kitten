@@ -75,10 +75,25 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * @overview-example ToggleSimpleUsage
  *
  * @overview-example ToggleStates
+ * Toggle can be checked or disabled.
  *
  * @overview-example ToggleStatus
+ * Toggle may marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
- * @example ToggleStyling
+ * @overview-example ToggleStyling
+ * Toggle and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Toggle, Text } from '@ui-kitten/components';
+ *
+ * <Toggle>
+ *   {evaProps => <Text {...evaProps}>Place your Text</Text>}
+ * </Toggle>
+ * ```
+ *
+ * @overview-example ToggleTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
 

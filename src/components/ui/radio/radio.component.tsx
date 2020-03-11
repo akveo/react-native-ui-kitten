@@ -68,10 +68,25 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * @overview-example RadioSimpleUsage
  *
  * @overview-example RadioStates
+ * Radio can be checked or disabled.
  *
  * @overview-example RadioStatus
+ * Or marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
- * @example RadioStyling
+ * @overview-example RadioStyling
+ * Radio and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Radio, Text } from '@ui-kitten/components';
+ *
+ * <Radio>
+ *   {evaProps => <Text {...evaProps}>Place your Text</Text>}
+ * </Radio>
+ * ```
+ *
+ * @overview-example RadioTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class RadioComponent extends React.Component<RadioProps> {
 

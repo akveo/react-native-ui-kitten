@@ -41,8 +41,6 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
 
 /**
  * Performant interface for rendering simple, flat lists.
- * Lists should render ListItem components by providing them through `renderItem` property
- * to provide a useful component.
  *
  * @extends React.Component
  *
@@ -54,11 +52,14 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  * @property {FlatListProps} ...FlatListProps - Any props applied to FlatList component.
  *
  * @overview-example ListSimpleUsage
+ * Lists should render ListItem components by providing them through `renderItem` property
+ * to provide a useful component.
  *
  * @overview-example ListAccessories
+ * Items may contain views, by providing them with `accessoryLeft` and `accessoryRight` properties.
  *
- * @example ListStyling
- * ```
+ * @overview-example ListCustomItem
+ * Using ListItem is helpful for basic lists, but not required. For example, cards may be rendered.
  */
 export class ListComponent<ItemT = any> extends React.Component<ListProps> {
 

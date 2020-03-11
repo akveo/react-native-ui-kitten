@@ -6,15 +6,11 @@ export const SelectSimpleUsageShowcase = () => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
 
-  const onSelect = (index) => {
-    setSelectedIndex(index);
-  };
-
   return (
     <Layout style={styles.container}>
       <Select
         selectedIndex={selectedIndex}
-        onSelect={onSelect}>
+        onSelect={index => setSelectedIndex(index)}>
         <SelectItem title='Option 1'/>
         <SelectItem title='Option 2'/>
         <SelectItem title='Option 3'/>

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-    margin: 1,
+    margin: 2,
   },
   indicator: {
     justifyContent: 'center',

@@ -61,8 +61,6 @@ export type TabElement = React.ReactElement<TabProps>;
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example TabSimpleUsage
- *
- * @example TabStyling
  */
 export class TabComponent extends React.Component<TabProps> {
 

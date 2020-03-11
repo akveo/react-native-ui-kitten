@@ -8,7 +8,7 @@ export const TabBarSimpleUsageShowcase = () => {
   return (
     <TabBar
       selectedIndex={selectedIndex}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <Tab title='USERS'/>
       <Tab title='ORDERS'/>
       <Tab title='TRANSACTIONS'/>

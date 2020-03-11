@@ -156,20 +156,54 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example SelectSimpleUsage
- *
- * @overview-example SelectStates
+ * Select works with special index object - IndexPath: `{ row: number, section: number }`.
+ * For non-grouped options, there is only a `row` property.
+ * Otherwise, `row` is index of option within group, section - index of group in list.
  *
  * @overview-example SelectMultiSelect
+ * Multiple options can be selected if `multiSelect` property is configured.
+ * For multiple options, `onSelect` function is called with array if indices.
  *
- * @overview-example SelectAccessories
+ * @overview-example SelectWithGroups
+ * Options may be grouped within `SelectGroup` component.
+ *
+ * @overview-example SelectDisplayValue
+ * By default, Select displays a value by building strings for selected indices.
+ * For a real-word examples, a `value` property should be configured.
+ *
+ * @overview-example SelectStates
+ * Select can be disabled with `disabled` property.
  *
  * @overview-example SelectDisabledOptions
+ * Same for options.
  *
  * @overview-example SelectStatus
+ * It also may be marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
+ *
+ * @overview-example SelectAccessories
+ * Select may contain labels, captions and inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Within Eva, Select accessories are expected to be images
+ * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *
  * @overview-example SelectSize
+ * To resize Select, a `size` property may be used.
  *
- * @example SelectStyling
+ * @overview-example SelectStyling
+ * Select and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Select, SelectItem, Text } from '@ui-kitten/components';
+ *
+ * <Select
+ *   label={evaProps => <Text {...evaProps}>Label</Text>}
+ *   caption={evaProps => <Text {...evaProps}>Caption</Text>}>
+ *   <SelectItem title={evaProps => <Text {...evaProps}>Option 1</Text>} />
+ * </Select>
+ * ```
+ *
+ * @overview-example SelectTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class SelectComponent extends React.Component<SelectProps, State> {
 

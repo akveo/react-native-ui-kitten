@@ -58,8 +58,14 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * excluding `renderItem` and `data`.
  *
  * @overview-example DrawerSimpleUsage
+ * Drawer works with special index object - IndexPath: `{ row: number, section: number }`.
+ * For non-grouped items in drawer, there is only a `row` property.
+ * Otherwise, `row` is an index of option within the group, section - index of group in drawer.
  *
  * @overview-example Using with React Navigation
+ * Drawer can also be
+ * [configured with React Navigation](https://akveo.github.io/react-native-ui-kitten/docs/guides/configure-navigation)
+ * to provide a navigational component.
  *
  * ```
  * import React from 'react';
@@ -104,9 +110,31 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * );
  * ```
  *
- * @overview-example DrawerAccessories
+ * @overview-example DrawerNoMarkers
+ * Pressing of drawer items can be handled without marking items.
  *
- * @example DrawerStyling
+ * @overview-example DrawerAccessories
+ * Drawer may be configured with header and footer,
+ * and items may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Within Eva, item accessories are expected to be images
+ * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ *
+ * @overview-example DrawerGroups
+ * And be grouped within `DrawerGroup` component.
+ *
+ * @overview-example DrawerStyling
+ * Drawer and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { DrawerItem, Text } from '@ui-kitten/components';
+ *
+ * <DrawerItem
+ *   title={evaProps => <Text {...evaProps}>USERS</Text>}>
+ * </DrawerItem>
+ * ```
+ *
+ * @overview-example DrawerTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 class DrawerComponent extends React.Component<DrawerProps> {
 

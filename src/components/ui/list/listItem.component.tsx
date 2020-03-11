@@ -72,6 +72,20 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example ListItemSimpleUsage
+ *
+ * @overview-example ListItemStyling
+ * List Item and it's inner views can be styled by passing them as function components.
+ *
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * ```
+ * import { ListItem, Text } from '@ui-kitten/components';
+ *
+ * <ListItem
+ *   title={evaProps => <Text {...evaProps}>TITLE</Text>}
+ *   description={evaProps => <Text {...evaProps}>DESCRIPTION</Text>}
+ * />
+ * ```
  */
 export class ListItemComponent extends React.Component<ListItemProps & { index: number }> {
 

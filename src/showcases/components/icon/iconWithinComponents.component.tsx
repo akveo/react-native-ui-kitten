@@ -87,7 +87,7 @@ export const IconWithinComponentsShowcase = () => {
           placeholder='Select'
           selectedIndex={selectIndex}
           accessoryLeft={StarIcon}
-          onSelect={setSelectIndex}>
+          onSelect={index => setSelectIndex(index)}>
           <SelectItem accessoryLeft={HeartIcon} title='Option 1'/>
           <SelectItem accessoryLeft={HeartIcon} title='Option 2'/>
           <SelectItem accessoryLeft={HeartIcon} title='Option 3'/>
@@ -97,6 +97,7 @@ export const IconWithinComponentsShowcase = () => {
 
       <OverflowMenu
         fullWidth={true}
+        onSelect={toggleMenu}
         visible={menuVisible}
         anchor={renderMenuButton}
         onBackdropPress={toggleMenu}>

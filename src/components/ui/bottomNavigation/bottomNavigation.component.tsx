@@ -61,8 +61,12 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example BottomNavigationSimpleUsage
+ * In basic examples, tabs are wrapped within `BottomNavigation`.
  *
  * @overview-example Using with React Navigation
+ * BottomNavigation can also be
+ * [configured with React Navigation](https://akveo.github.io/react-native-ui-kitten/docs/guides/configure-navigation)
+ * to provide a navigational component.
  *
  * ```
  * import React from 'react';
@@ -108,10 +112,24 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * ```
  *
  * @overview-example BottomNavigationAccessories
+ * Tabs also may contain [icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages),
+ * to provide a better user interfaces.
+ *
+ * @overview-example BottomNavigationTabStyling
+ * Tabs and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { BottomNavigationTab, Text } from '@ui-kitten/components';
+ *
+ * <BottomNavigationTab
+ *   title={evaProps => <Text {...evaProps}>USERS</Text>}
+ * />
+ * ```
+ * @overview-example BottomNavigationTabTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  *
  * @example BottomNavigationWithoutIndicator
- *
- * @example BottomNavigationStyling
+ * To remove indicator, `appearance` property may be used.
  */
 export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 

@@ -77,6 +77,8 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example RangeCalendarSimpleUsage
+ * Ranged calendar works with special range object - CalendarRange: `{ startDate: Date, endDate: Date }`.
+ * For incomplete ranges, there is only a `startDate` property.
  */
 export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<RangeCalendarProps<D>, D> {
 

@@ -48,8 +48,10 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  * @overview-example AvatarSimpleUsage
  *
  * @overview-example AvatarSize
+ * Avatar can be resized by passing `size` property.
  *
  * @overview-example AvatarShape
+ * Also, it may have different shape configurable with `shape` property.
  */
 export class AvatarComponent extends React.Component<AvatarProps> {
 

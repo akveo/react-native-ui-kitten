@@ -14,17 +14,13 @@ export const SelectAccessoriesShowcase = () => {
 
   const [selectedIndex, setSelectedIndex] = React.useState();
 
-  const onSelect = (index) => {
-    setSelectedIndex(index);
-  };
-
   return (
     <Layout style={styles.container}>
       <Select
         label='Label'
         caption='Caption'
         selectedIndex={selectedIndex}
-        onSelect={onSelect}>
+        onSelect={index => setSelectedIndex(index)}>
         <SelectItem
           title='Option 1'
           accessoryLeft={StarIcon}

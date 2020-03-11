@@ -9,16 +9,12 @@ export const SelectMultiSelectShowcase = () => {
     new IndexPath(1),
   ]);
 
-  const onSelect = (index) => {
-    setSelectedIndex(index);
-  };
-
   return (
     <Layout style={styles.container}>
       <Select
         multiSelect={true}
         selectedIndex={selectedIndex}
-        onSelect={onSelect}>
+        onSelect={index => setSelectedIndex(index)}>
         <SelectItem title='Option 1'/>
         <SelectItem title='Option 2'/>
         <SelectItem title='Option 3'/>

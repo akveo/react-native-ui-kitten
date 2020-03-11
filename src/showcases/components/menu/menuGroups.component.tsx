@@ -1,6 +1,5 @@
 import React from 'react';
-import { Linking } from 'react-native';
-import { Menu, MenuGroup, MenuItem, Icon, IndexPath, Layout } from '@ui-kitten/components';
+import { Icon, Layout, Menu, MenuGroup, MenuItem } from '@ui-kitten/components';
 
 const SmartphoneIcon = (props) => (
   <Icon {...props} name='smartphone-outline'/>
@@ -20,7 +19,7 @@ const StarIcon = (props) => (
 
 export const MenuGroupsShowcase = () => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0, 0));
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
 
   return (
     <Layout>
@@ -29,7 +28,7 @@ export const MenuGroupsShowcase = () => {
         selectedIndex={selectedIndex}
         onSelect={index => setSelectedIndex(index)}>
         <MenuGroup title='Akveo React Native' accessoryLeft={SmartphoneIcon}>
-          <MenuItem title='UI Kitten' accessoryLeft={StarIcon} onPress={() => Linking.ope}/>
+          <MenuItem title='UI Kitten' accessoryLeft={StarIcon}/>
           <MenuItem title='Kitten Tricks' accessoryLeft={StarIcon}/>
         </MenuGroup>
         <MenuGroup title='Akveo Angular' accessoryLeft={BrowserIcon}>

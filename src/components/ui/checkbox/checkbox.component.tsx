@@ -83,12 +83,29 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * @overview-example CheckboxSimpleUsage
  *
  * @overview-example CheckboxStates
+ * CheckBoxes can be checked or disabled.
  *
  * @overview-example CheckboxIndeterminate
+ * An extra state is `indeterminate`, which may be useful for grouping inner checkboxes.
+ * Indeterminate will be set to `false` when the checked state is changed.
  *
  * @overview-example CheckboxStatus
+ * Checkboxes may also be marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
- * @example CheckboxStyling
+ * @overview-example CheckboxStyling
+ * CheckBox and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { CheckBox, Text } from '@ui-kitten/components';
+ *
+ * <CheckBox>
+ *   {evaProps => <Text {...evaProps}>Place your Text</Text>}
+ * </CheckBox>
+ * ```
+ *
+ * @overview-example CheckboxTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 class CheckBoxComponent extends React.Component<CheckBoxProps> {
 

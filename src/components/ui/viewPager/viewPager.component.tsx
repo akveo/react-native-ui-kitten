@@ -54,8 +54,10 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ViewPagerSimpleUsage
+ * Simple usage.
  *
  * @overview-example ViewPagerLazyLoading
+ * Each view can be loaded lazily by using `shouldLoadComponent` property.
  */
 export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProps<ChildrenProps>>
   implements PanResponderCallbacks {

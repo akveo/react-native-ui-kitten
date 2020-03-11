@@ -57,8 +57,11 @@ interface State {
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ModalSimpleUsage
+ * Modals accept content views as child elements and are displayed in the screen center.
+ * To display a modal, a `visible` property should be used.
  *
  * @overview-example ModalWithBackdrop
+ * To configure underlying view, `backdropStyle` property may be used.
  */
 export class Modal extends React.PureComponent<ModalProps, State> {
 

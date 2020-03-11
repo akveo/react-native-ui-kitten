@@ -36,13 +36,16 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * @property {string} level - Background color level of component.
  * Can be `1`, `2`, `3` or `4`.
  * Defaults to *1*.
- * Use layout levels when needed to highlight the container relative to another.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
- * @overview-example LayoutSimpleUsage
- *
  * @overview-example LayoutLevel
+ *
+ * Layout should be used as a root component of the screen.
+ * Comparative to `View` element, it uses a background color with respect to current theme.
+ *
+ * Layouts can be used in different levels.
+ * It is useful, when needed to highlight the container relative to another.
  */
 export class LayoutComponent extends React.Component<LayoutProps> {
 

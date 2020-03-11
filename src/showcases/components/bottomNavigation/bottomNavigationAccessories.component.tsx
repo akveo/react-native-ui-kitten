@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { BottomNavigation, BottomNavigationTab, Icon, Layout } from '@ui-kitten/components';
+import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
 
 const PersonIcon = (props) => (
   <Icon {...props} name='person-outline'/>
@@ -14,7 +14,7 @@ const EmailIcon = (props) => (
   <Icon {...props} name='email-outline'/>
 );
 
-const useBottomNavigationState = (initialState= 0) => {
+const useBottomNavigationState = (initialState = 0) => {
   const [selectedIndex, setSelectedIndex] = React.useState(initialState);
   return { selectedIndex, onSelect: setSelectedIndex };
 };
@@ -25,7 +25,7 @@ export const BottomNavigationAccessoriesShowcase = () => {
   const bottomState = useBottomNavigationState();
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <BottomNavigation style={styles.bottomNavigation} {...topState}>
         <BottomNavigationTab title='USERS' icon={PersonIcon}/>
@@ -39,7 +39,7 @@ export const BottomNavigationAccessoriesShowcase = () => {
         <BottomNavigationTab icon={EmailIcon}/>
       </BottomNavigation>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

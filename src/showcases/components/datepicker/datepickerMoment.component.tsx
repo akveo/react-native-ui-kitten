@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Calendar, Datepicker, Layout } from '@ui-kitten/components';
+import { Datepicker, Layout } from '@ui-kitten/components';
 import { MomentDateService } from '@ui-kitten/moment';
 
 const dateService = new MomentDateService();

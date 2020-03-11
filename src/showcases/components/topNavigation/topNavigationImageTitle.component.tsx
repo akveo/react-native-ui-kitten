@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Avatar, Icon, MenuItem, OverflowMenu, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { Avatar, Icon, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back'/>
@@ -22,7 +22,7 @@ const LogoutIcon = (props) => (
   <Icon {...props} name='log-out'/>
 );
 
-export const TopNavigationStylingShowcase = () => {
+export const TopNavigationImageTitleShowcase = () => {
 
   const [menuVisible, setMenuVisible] = React.useState(false);
 
@@ -48,15 +48,10 @@ export const TopNavigationStylingShowcase = () => {
   );
 
   const renderTitle = (props) => (
-    <View style={styles.titleContainer}>
-      <Avatar
-        style={styles.logo}
-        source={require('../../assets/icon.png')}
-      />
-      <Text {...props}>
-        Eva Application
-      </Text>
-    </View>
+    <Avatar
+      style={styles.logo}
+      source={require('../../assets/icon.png')}
+    />
   );
 
   const renderBackAction = () => (
@@ -74,10 +69,6 @@ export const TopNavigationStylingShowcase = () => {
 };
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   logo: {
     marginHorizontal: 16,
   },

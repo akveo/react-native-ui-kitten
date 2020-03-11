@@ -35,7 +35,6 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
 
 /**
  * Animated Icon component.
- * Render any ReactElement registered within IconRegistry or SVG icons in case of using `@ui-kitten/eva-icons`.
  *
  * @extends React.Component
  *
@@ -58,10 +57,25 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  * In case of using `@ui-kitten/eva-icons` package, Icon accepts any props for react-native-svg component.
  *
  * @overview-example IconSimpleUsage
+ * Icon component provides a simple way to render image by requesting it from an icon set.
+ * Icons come with [additional packages](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages),
+ * that should be configured before using component.
+ * We recommend using [Eva Icons](https://akveo.github.io/eva-icons),
+ * to provide a full consistency with Eva Design System.
  *
  * @overview-example IconWithinComponents
+ * All UI Kitten components that may contain inner views have support for Eva Icons.
+ * When using icons as nested components, icon styles are handled by Eva.
  *
  * @overview-example IconAnimation
+ * Icons have 3 types of animations: `zoom`, `pulse` and `shake`.
+ *
+ * @overview-example IconTheming
+ * In particular cases, Icon should be styled in a different way.
+ * In case of using Eva Icons it renders [svg images](https://github.com/react-native-community/react-native-svg).
+ *
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class Icon<T> extends React.Component<IconProps<T>> {
 

@@ -31,7 +31,7 @@ export interface TextProps extends RNTextProps, TextStyledProps {
 export type TextElement = React.ReactElement<TextProps>;
 
 /**
- * Basic text writing, including headings, paragraphs, captions, and more.
+ * Basic text writing.
  *
  * @extends React.Component
  *
@@ -56,11 +56,27 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * @property {TextProps} ...TextProps - Any props applied to Text component.
  *
- * @overview-example TextSimpleUsage
+ * @overview-example TextCategories
+ * Text has pre-defined set of styles for headings, subtitles, paragraphs, and more.
  *
  * @overview-example TextAppearances
+ * Also, it has 2 types of additional appearances:
+ * `hint` and `alternative`.
+ *
+ * Use hints when needed to give user a hint on action.
+ * And use alternative when needed to display light text in light themes (same for dark).
  *
  * @overview-example TextStatuses
+ *
+ * @overview-example TextStyling
+ * Text can be styled with `style` property.
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * ```
+ * import { Text } from '@ui-kitten/components';
+ *
+ * <Text style={...}>Place your Text</Text>
+ * ```
  */
 export class TextComponent extends React.Component<TextProps> {
 

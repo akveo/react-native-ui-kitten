@@ -1,11 +1,6 @@
 import React from 'react';
 import { Calendar, NativeDateService } from '@ui-kitten/components';
 
-const useCalendarState = (initialDate = null) => {
-  const [date, setDate] = React.useState(initialDate);
-  return { date, onSelect: setDate };
-};
-
 const i18n = {
   dayNames: {
     short: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],

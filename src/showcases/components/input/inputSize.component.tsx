@@ -12,6 +12,7 @@ export const InputSizeShowcase = () => {
   const smallInputState = useInputState();
   const mediumInputState = useInputState();
   const largeInputState = useInputState();
+  const multilineInputState = useInputState();
 
   return (
     <Layout>
@@ -35,6 +36,13 @@ export const InputSizeShowcase = () => {
         size='large'
         placeholder='Large'
         {...largeInputState}
+      />
+
+      <Input
+        multiline={true}
+        textStyle={{ minHeight: 64 }}
+        placeholder='Multiline'
+        {...multilineInputState}
       />
 
     </Layout>

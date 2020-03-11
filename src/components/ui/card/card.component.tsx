@@ -70,8 +70,10 @@ export type CardElement = React.ReactElement<CardProps>;
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example CardSimpleUsage
+ * In basic example, card accepts content view as child element.
  *
  * @overview-example CardAccessories
+ * It also may have header and footer by configuring `header` and `footer` properties.
  *
  * @overview-example CardStatuses
  */

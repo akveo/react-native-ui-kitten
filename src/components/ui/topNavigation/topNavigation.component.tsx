@@ -41,8 +41,6 @@ type AlignmentProp = 'start' | 'center';
 
 /**
  * TopNavigation provides a heading component for the entire page.
- * Should contain TopNavigationAction components provided through accessory props
- * to provide a useful component.
  *
  * @extends React.Component
  *
@@ -71,10 +69,29 @@ type AlignmentProp = 'start' | 'center';
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example TopNavigationSimpleUsage
+ * In basic example TopNavigation contains a title and actions.
  *
  * @overview-example TopNavigationAccessories
+ * A single TopNavigation may contain one action on the left,
+ * and as many actions as needed on the right. Actions can be also a menus.
  *
- * @example TopNavigationStyling
+ * @overview-example TopNavigationImageTitle
+ * Sometimes it is needed to have an image as title.
+ * In this case, a function component can be provided to `title` property.
+ *
+ * @overview-example TopNavigationStyling
+ * TopNavigation and it's inner views can be styled by passing them as function components.
+ *
+ * In most cases, this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * ```
+ * import { TopNavigation, Text } from '@ui-kitten/components';
+ *
+ * <TopNavigation
+ *   title={evaProps => <Text {...evaProps}>Title</Text>}
+ *   subtitle={evaProps => <Text {...evaProps}>Subtitle</Text>}
+ * />
+ * ```
  */
 export class TopNavigationComponent extends React.Component<TopNavigationProps> {
 

@@ -17,7 +17,7 @@ export const SelectStatesShowcase = () => {
         style={styles.select}
         placeholder='Active'
         selectedIndex={selectedIndex}
-        onSelect={onSelect}>
+        onSelect={index => setSelectedIndex(index)}>
         <SelectItem title='Option 1'/>
         <SelectItem title='Option 2'/>
         <SelectItem title='Option 3'/>

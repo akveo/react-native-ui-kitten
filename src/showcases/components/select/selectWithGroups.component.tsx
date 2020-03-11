@@ -6,17 +6,9 @@ export const SelectWithGroupsShowcase = () => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0, 1));
   const [multiSelectedIndex, setMultiSelectedIndex] = React.useState([
-    new IndexPath(0, 1),
-    new IndexPath(0, 2),
+    new IndexPath(0, 0),
+    new IndexPath(1, 1),
   ]);
-
-  const onDefaultSelect = (index) => {
-    setSelectedIndex(index);
-  };
-
-  const onMultiSelect = (index) => {
-    setMultiSelectedIndex(index);
-  };
 
   return (
     <Layout style={styles.container}>
@@ -25,7 +17,7 @@ export const SelectWithGroupsShowcase = () => {
         style={styles.select}
         placeholder='Default'
         selectedIndex={selectedIndex}
-        onSelect={onDefaultSelect}>
+        onSelect={index => setSelectedIndex(index)}>
         <SelectGroup title='Group 1'>
           <SelectItem title='Option 1.1'/>
           <SelectItem title='Option 1.2'/>
@@ -43,7 +35,7 @@ export const SelectWithGroupsShowcase = () => {
         multiSelect={true}
         placeholder='Multi'
         selectedIndex={multiSelectedIndex}
-        onSelect={onMultiSelect}>
+        onSelect={index => setMultiSelectedIndex(index)}>
         <SelectGroup title='Group 1'>
           <SelectItem title='Option 1.1'/>
           <SelectItem title='Option 1.2'/>

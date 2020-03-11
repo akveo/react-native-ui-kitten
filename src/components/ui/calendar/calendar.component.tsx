@@ -26,9 +26,6 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
 /**
  * Calendar provides a simple way to select a date.
  *
- * Supports locales and different date objects like Moment.js or date-fns.
- * Composes date picker components in a horizontal pageable list.
- *
  * @extends React.Component
  *
  * @property {D} date - Date which is currently selected.
@@ -75,13 +72,29 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  *
  * @overview-example CalendarSimpleUsage
  *
+ * @overview-example RangeCalendarSimpleUsage
+ * There is an alternative calendar component, to work with date ranges.
+ *
+ * Ranged calendar works with special range object - CalendarRange: `{ startDate: Date, endDate: Date }`.
+ * For incomplete ranges, there is only a `startDate` property.
+ *
  * @overview-example CalendarFilters
+ * Calendar may accept minimal and maximum dates, filter functions, and `boundingMonth` property,
+ * which disables displaying previous month dates at the current date view.
  *
  * @overview-example CalendarLocaleSettings
+ * Also, it is possible to setup locale by configuring Date Service.
  *
- * @example CalendarMoment
+ * @overview-example CalendarMoment
+ * Calendar is able to work with Moment, by configuring date service.
+ * In order to use Moment, `@ui-kitten/moment` package is required.
  *
- * @example CalendarCustomDay
+ * @overview-example CalendarCustomDay
+ * To render custom cells, `renderDay`, `renderMonth` and `renderYear` properties may be used.
+ *
+ * @overview-example CalendarTheming
+ * Styling of the calendar is possible with
+ * [configuring a custom theme](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarProps<D>, D> {
 

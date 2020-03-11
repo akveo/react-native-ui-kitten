@@ -36,7 +36,6 @@ interface State {
 
 /**
  * Overall application container.
- * Provides Eva styles to UI Kitten components.
  *
  * @extends React.Component
  *
@@ -58,18 +57,41 @@ interface State {
  * Usually, can be provided by `@ui-kitten/metro-config` package.
  *
  * @overview-example Simple Usage
- *
+ * ApplicationProvider is designed to be the root component of the application.
+ * It should be rendered **once**, to provide Eva styles for nested components.
  * ```
  * import React from 'react';
  * import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
  * import * as eva from '@eva-design/eva';
  *
  * export default () => (
- *   <ApplicationProvider {...eva} theme={eva.light}>
- *     <Layout style={{ flex: 1 }}>
+ *   <ApplicationProvider {...eva} theme={eva.light}> // <-- {eva.dark} for dark mode
+ *     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
  *       <Text>Welcome to UI Kitten</Text>
  *     </Layout>
  *   </ApplicationProvider>
+ * );
+ * ```
+ *
+ * @overview-example Ecosystem
+ * Also, it may accept [custom themes](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding)
+ * and [icon packages](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages)
+ * to provide a highly customizable, design system based application.
+ * ```
+ * import React from 'react';
+ * import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
+ * import { EvaIconsPack } from '@ui-kitten/eva-icons';
+ * import * as eva from '@eva-design/eva';
+ *
+ * export default () => (
+ *   <React.Fragment>
+ *     <IconRegistry icons={EvaIconsPack} />
+ *     <ApplicationProvider {...eva} theme={{ ...eva.light, ...myTheme }}>
+ *       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *         <Text>Welcome to UI Kitten</Text>
+ *       </Layout>
+ *     </ApplicationProvider>
+ *   </React.Fragment>
  * );
  * ```
  */

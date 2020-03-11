@@ -4,7 +4,6 @@ import { Button, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
 
 export const OverflowMenuSimpleUsageShowcase = () => {
 
-  // Updating `selectedIndex` if marking items selected is not needed.
   const [selectedIndex, setSelectedIndex] = React.useState(null);
   const [visible, setVisible] = React.useState(false);
 

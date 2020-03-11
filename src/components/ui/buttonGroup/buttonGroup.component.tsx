@@ -64,12 +64,16 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ButtonGroupSimpleUsage
+ * Button Group accepts buttons as child elements.
  *
  * @overview-example ButtonGroupAppearance
+ * Appearance passed to group is also applied for grouped buttons.
  *
  * @overview-example ButtonGroupStatus
+ * Same for status.
  *
  * @overview-example ButtonGroupSize
+ * And size.
  *
  * @overview-example ButtonGroupOutline
  *

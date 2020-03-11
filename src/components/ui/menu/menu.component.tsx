@@ -70,12 +70,38 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * excluding `renderItem` and `data`.
  *
  * @overview-example MenuSimpleUsage
+ * Menu works with special index object - IndexPath: `{ row: number, section: number }`.
+ * For non-grouped items in menu, there is only a `row` property.
+ * Otherwise, `row` is an index of option within the group, section - index of group in menu.
+ *
+ * @overview-example MenuNoMarkers
+ * Pressing of menu items can be handled without marking items.
  *
  * @overview-example MenuAccessories
+ * Items may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Within Eva, item accessories are expected to be images
+ * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ *
+ * @overview-example MenuGroups
+ * And be grouped within `MenuGroup` component.
  *
  * @overview-example MenuDisabledOptions
+ * Also, it may be disabled with `disabled` property.
  *
- * @example MenuStyling
+ * @overview-example MenuStyling
+ * Menu and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { MenuItem, Text } from '@ui-kitten/components';
+ *
+ * <MenuItem
+ *   title={evaProps => <Text {...evaProps}>USERS</Text>}>
+ * </MenuItem>
+ * ```
+ *
+ * @overview-example MenuTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ *
  */
 class MenuComponent extends React.Component<MenuProps> {
 

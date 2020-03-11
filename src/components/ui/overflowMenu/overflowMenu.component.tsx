@@ -69,16 +69,31 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  **
  * @overview-example OverflowMenuSimpleUsage
+ * OverflowMenu accepts `MenuItem` components as child elements and is displayed relative to `anchor` view.
+ *
+ * Menu works with special index object - IndexPath: `{ row: number, section: number }`.
+ * For non-grouped items in menu, there is only a `row` property.
+ * Otherwise, `row` is an index of option within the group, section - index of group in menu.
+ *
+ * @overview-example OverflowMenuNoMarkers
+ * Pressing of menu items can be handled without marking items.
  *
  * @overview-example OverflowMenuPlacement
+ * By default, menu is displayed to the bottom of `anchor` view, but it is configurable with `placement` property.
  *
  * @overview-example OverflowMenuAccessories
- *
- * @overview-example OverflowMenuStyledBackdrop
+ * Menu items may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Within Eva it is expected to be an image
+ * or [svg icon](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *
  * @overview-example OverflowMenuWithDisabledItems
+ * Menu items may be disabled with `disabled` property.
+ *
+ * @overview-example OverflowMenuStyledBackdrop
+ * To style the underlying view, `backdropStyle` property may be used.
  *
  * @example OverflowMenuWithoutDivider
+ * To disable dividers within the menu, `appearance` property may be used.
  */
 export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
 

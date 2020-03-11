@@ -24,9 +24,6 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
 /**
  * Range date picker provides a simple way to select a date range within a picker displayed in modal.
  *
- * Renders an Input box and UI Kitten RangeCalendar component within the Popover component when focused.
- * Supports locales and different date objects like Moment.js or date-fns.
- *
  * @extends React.Component
  *
  * @method {() => void} show - Sets picker visible.
@@ -127,6 +124,8 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example RangeDatepickerSimpleUsage
+ * Ranged picker works with special range object - CalendarRange: `{ startDate: Date, endDate: Date }`.
+ * For incomplete ranges, there is only a `startDate` property.
  */
 export class RangeDatepickerComponent<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 

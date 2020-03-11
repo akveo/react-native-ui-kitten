@@ -24,9 +24,6 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
 /**
  * Date picker provides a simple way to select a date within a picker displayed in modal.
  *
- * Renders an Input box and UI Kitten Calendar component within the Popover component when focused.
- * Supports locales and different date objects like Moment.js or date-fns.
- *
  * @extends React.Component
  *
  * @method {() => void} show - Sets picker visible.
@@ -126,22 +123,49 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example DatepickerSimpleUsage
+ * Both range and date pickers support all parameters as calendar, so, check Calendar API for additional info.
  *
  * @overview-example DatepickerAccessories
+ * Pickers may contain labels, captions and inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Within Eva, Datepicker accessories are expected to be images
+ * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *
  * @overview-example DatepickerFilters
+ * Picker may accept minimal and maximum dates, filter functions, and `boundingMonth` property,
+ * which disables displaying previous month dates at the current date view.
  *
  * @overview-example DatepickerLocaleSettings
+ * Also, it is possible to setup locale by configuring Date Service.
  *
  * @overview-example DatepickerStatus
+ * Datepicker may be marked with `status` property, which is useful within forms validation.
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
  * @overview-example DatepickerSize
+ * To resize Datepicker, a `size` property may be used.
  *
- * @example DatepickerCustomDay
+ * @overview-example DatepickerMoment
+ * Datepicker is able to work with Moment, by configuring date service.
+ * In order to use Moment, `@ui-kitten/moment` package is required.
  *
- * @example DatepickerMoment
+ * @overview-example DatepickerCustomDay
+ * To render custom cells, `renderDay`, `renderMonth` and `renderYear` properties may be used.
  *
  * @example DatepickerStyling
+ * Datepicker and it's inner views can be styled by passing them as function components.
+ * ```
+ * import { Datepicker, Text } '@ui-kitten/components';
+ *
+ * <Datepicker
+ *   controlStyle={{ ... }}
+ *   label={evaProps => <Text {...evaProps}>Label</Text>}
+ *   caption={evaProps => <Text {...evaProps}>Caption</Text>}
+ * />
+ * ```
+ *
+ * @example DatepickerTheming
+ * In most cases this is redundant,
+ * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  */
 export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
 

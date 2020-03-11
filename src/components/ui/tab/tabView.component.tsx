@@ -45,7 +45,6 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
 
 /**
  * A view with tabs and swipeable contents.
- * TabView should contain Tabs with it's contents to provide a useful component.
  *
  * @extends React.Component
  **
@@ -68,8 +67,10 @@ export type TabViewElement = React.ReactElement<TabViewProps>;
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example TabViewSimpleUsage
+ * TabView is an alternative way to build tabbed screens, without a need to configure routing.
  *
- * @example TabViewLazyLoading
+ * @overview-example TabViewLazyLoading
+ * Tab contents may be loaded lazily, by configuring `shouldLoadComponent` property.
  */
 export class TabView extends React.Component<TabViewProps> {
 

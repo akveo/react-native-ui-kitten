@@ -12,7 +12,7 @@ export const ViewPagerLazyLoadingShowcase = () => {
     <ViewPager
       selectedIndex={selectedIndex}
       shouldLoadComponent={shouldLoadComponent}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <Layout
         level='2'
         style={styles.tab}>

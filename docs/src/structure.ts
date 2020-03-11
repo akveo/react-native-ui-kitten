@@ -250,14 +250,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Application Provider',
-        icon: 'application-provider.svg',
-        source: [
-          'ApplicationProvider',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'Using Mapping',
         icon: 'styled.svg',
         source: [
@@ -280,6 +272,22 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Application Provider',
+        icon: 'application-provider.svg',
+        source: [
+          'ApplicationProvider',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Layout',
+        icon: 'layout.svg',
+        source: [
+          'Layout',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Text',
         icon: 'text.svg',
         source: [
@@ -294,10 +302,16 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Layout',
-        icon: 'layout.svg',
+        name: 'Icon',
+        icon: 'icon.svg',
         source: [
-          'Layout',
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
+          },
         ],
       },
       {
@@ -320,20 +334,6 @@ export const structure = [
           {
             name: 'List',
             images: ['list.png'],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Icon',
-        icon: 'icon.svg',
-        source: [
-          'Icon',
-        ],
-        overview: [
-          {
-            name: 'Icon',
-            images: ['icon.png'],
           },
         ],
       },
@@ -389,6 +389,16 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'Menu',
+          'MenuGroup',
+          'MenuItem',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Drawer',
         icon: 'drawer.svg',
         source: [
@@ -405,16 +415,6 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Menu',
-        icon: 'menu.svg',
-        source: [
-          'Menu',
-          'MenuGroup',
-          'MenuItem',
-        ],
-      },
-      {
-        type: 'tabs',
         name: 'View Pager',
         icon: 'view-pager.svg',
         source: [
@@ -424,20 +424,6 @@ export const structure = [
       {
         type: 'group',
         name: 'Forms',
-      },
-      {
-        type: 'tabs',
-        name: 'Input',
-        icon: 'input.svg',
-        source: [
-          'Input',
-        ],
-        overview: [
-          {
-            name: 'Input',
-            images: ['input.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
@@ -464,6 +450,21 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Radio',
+        icon: 'radio.svg',
+        source: [
+          'RadioGroup',
+          'Radio',
+        ],
+        overview: [
+          {
+            name: 'Radio',
+            images: ['radio.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Toggle',
         icon: 'toggle.svg',
         source: [
@@ -478,16 +479,15 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Radio',
-        icon: 'radio.svg',
+        name: 'Input',
+        icon: 'input.svg',
         source: [
-          'RadioGroup',
-          'Radio',
+          'Input',
         ],
         overview: [
           {
-            name: 'Radio',
-            images: ['radio.png'],
+            name: 'Input',
+            images: ['input.png'],
           },
         ],
       },
@@ -504,6 +504,20 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Autocomplete',
+        icon: 'autocomplete.svg',
+        source: [
+          'Autocomplete',
+        ],
+        overview: [
+          {
+            name: 'Autocomplete',
+            images: [],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Datepicker',
         icon: 'datepicker.svg',
         source: [
@@ -513,20 +527,6 @@ export const structure = [
         overview: [
           {
             name: 'Datepicker',
-            images: [],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Autocomplete',
-        icon: 'autocomplete.svg',
-        source: [
-          'Autocomplete',
-        ],
-        overview: [
-          {
-            name: 'Autocomplete',
             images: [],
           },
         ],

@@ -9,7 +9,7 @@ export const TabViewSimpleUsageShowcase = () => {
   return (
     <TabView
       selectedIndex={selectedIndex}
-      onSelect={setSelectedIndex}>
+      onSelect={index => setSelectedIndex(index)}>
       <Tab title='USERS'>
         <Layout style={styles.tabContainer}>
           <Text category='h5'>USERS</Text>

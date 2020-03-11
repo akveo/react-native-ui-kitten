@@ -63,10 +63,18 @@ interface ArcElementStyle {
  * Defaults to *medium*.
  *
  * @overview-example SpinnerSimpleUsage
+ * Default Spinner status is `primary` and size is `medium`.
  *
  * @overview-example SpinnerSizes
+ * To resize Spinner, a `size` property may be used.
  *
  * @overview-example SpinnerStatuses
+ * A color can be changed with `status` property
+ * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
+ *
+ * @overview-example SpinnerTheming
+ * Styling of Spinner is possible with
+ * [configuring a custom theme](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
  *
  * @example SpinnerDataLoading
  */

@@ -2,13 +2,13 @@ import React from 'react';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
-const requestData = () => fetch(`https://facebook.github.io/react-native/movies.json`);
+const requestData = () => fetch('https://facebook.github.io/react-native/movies.json');
 const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
 
 export const AutocompleteAsyncShowcase = () => {
 
   const [query, setQuery] = React.useState(null);
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState([]);
 
   const updateData = () => {
     requestDataWithDebounce()
@@ -41,7 +41,7 @@ export const AutocompleteAsyncShowcase = () => {
 
   return (
     <Autocomplete
-      placeholder='Start typing to fetch options'
+      placeholder='For example, Star Wars'
       value={query}
       onChangeText={onChangeText}
       onSelect={onSelect}>

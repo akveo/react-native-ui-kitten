@@ -79,12 +79,16 @@ interface State {
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example PopoverSimpleUsage
+ * Popover accepts it's content as child element and is displayed relative to `anchor` view.
  *
  * @overview-example PopoverPlacement
+ * By default, it is displayed to the bottom of `anchor` view, but it is configurable with `placement` property.
  *
  * @overview-example PopoverFullWidth
+ * Popover may take the full width of the anchor view by configuring `fullWidth` property.
  *
  * @overview-example PopoverStyledBackdrop
+ * To style the underlying view, `backdropStyle` property may be used.
  */
 export class Popover extends React.Component<PopoverProps, State> {
 
