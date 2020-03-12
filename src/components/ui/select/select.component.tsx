@@ -484,7 +484,7 @@ export class SelectComponent extends React.Component<SelectProps, State> {
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
-      <View style={[styles.container, style]}>
+      <View style={style}>
         <FalsyText
           style={[styles.label, evaStyle.label]}
           component={label}
@@ -513,9 +513,6 @@ export class SelectComponent extends React.Component<SelectProps, State> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-  },
   input: {
     flexDirection: 'row',
     alignItems: 'center',
