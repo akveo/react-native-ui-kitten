@@ -81,12 +81,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   radio: {
-    margin: 8,
+    margin: 2,
   },
   controlContainer: {
     borderRadius: 4,
-    margin: 8,
-    padding: 8,
+    margin: 2,
+    padding: 6,
     backgroundColor: '#3366FF',
   },
 });

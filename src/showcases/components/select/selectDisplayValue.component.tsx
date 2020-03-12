@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 320,
+    height: 192,
   },
   select: {
     flex: 1,

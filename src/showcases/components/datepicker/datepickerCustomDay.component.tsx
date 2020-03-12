@@ -3,9 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import { Datepicker, Layout, Text } from '@ui-kitten/components';
 
 const DayCell = ({ date }, style) => (
-  <View
-    style={[styles.dayContainer, style.container]}>
-    <Text style={style.text}>{`${date.getDate()}`}</Text>
+  <View style={[styles.dayContainer, style.container]}>
+    <Text style={style.text}>
+      {date.getDate()}
+    </Text>
     <Text style={[style.text, styles.value]}>
       {`${100 * date.getDate() + Math.pow(date.getDate(), 2)}$`}
     </Text>
@@ -32,7 +33,7 @@ export const DatepickerCustomDayShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 376,
+    minHeight: 360,
   },
   dayContainer: {
     flex: 1,

@@ -55,11 +55,14 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  * Lists should render ListItem components by providing them through `renderItem` property
  * to provide a useful component.
  *
+ * @overview-example ListDividers
+ * It is a good idea to separate items with `Divider` component.
+ *
  * @overview-example ListAccessories
- * Items may contain views, by providing them with `accessoryLeft` and `accessoryRight` properties.
+ * Items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
  *
  * @overview-example ListCustomItem
- * Using ListItem is helpful for basic lists, but not required. For example, cards may be rendered.
+ * Using ListItem is helpful for basic lists, but not required. For example, `Card` may be used.
  */
 export class ListComponent<ItemT = any> extends React.Component<ListProps> {
 

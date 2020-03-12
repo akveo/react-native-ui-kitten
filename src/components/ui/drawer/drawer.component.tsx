@@ -58,9 +58,17 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * excluding `renderItem` and `data`.
  *
  * @overview-example DrawerSimpleUsage
- * Drawer works with special index object - IndexPath: `{ row: number, section: number }`.
+ *
+ * @overview-example DrawerIndexType
+ * Drawer works with special index object - IndexPath.
  * For non-grouped items in drawer, there is only a `row` property.
  * Otherwise, `row` is an index of option within the group, section - index of group in drawer.
+ * ```
+ * interface IndexPath {
+ *   row: number;
+ *   section?: number;
+ * }
+ * ```
  *
  * @overview-example Using with React Navigation
  * Drawer can also be
@@ -115,7 +123,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * @overview-example DrawerAccessories
  * Drawer may be configured with header and footer,
- * and items may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * and items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
  * Within Eva, item accessories are expected to be images
  * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *

@@ -23,7 +23,6 @@ export const DatepickerFiltersShowcase = () => {
     <Layout style={styles.container}>
 
       <Datepicker
-        style={styles.picker}
         placeholder='Min / Max'
         min={yesterday}
         max={tomorrow}
@@ -54,7 +53,7 @@ export const DatepickerFiltersShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 420,
+    minHeight: 360,
   },
   rowContainer: {
     flexDirection: 'row',

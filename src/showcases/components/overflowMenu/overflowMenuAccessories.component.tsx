@@ -40,6 +40,6 @@ export const OverflowMenuAccessoriesShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 256,
+    minHeight: 144,
   },
 });

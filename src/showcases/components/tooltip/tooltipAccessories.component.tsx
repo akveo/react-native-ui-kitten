@@ -21,7 +21,7 @@ export const TooltipAccessoriesShowcase = () => {
       visible={visible}
       accessoryLeft={InfoIcon}
       onBackdropPress={() => setVisible(false)}>
-      Hi!
+      Welcome to UI Kitten 😻
     </Tooltip>
   );
 };

@@ -18,7 +18,7 @@ export const TooltipStyledBackdropShowcase = () => {
       visible={visible}
       backdropStyle={styles.backdrop}
       onBackdropPress={() => setVisible(false)}>
-      Hi!
+      Welcome to UI Kitten 😻
     </Tooltip>
   );
 };

@@ -61,7 +61,7 @@ interface State {
  * To display a modal, a `visible` property should be used.
  *
  * @overview-example ModalWithBackdrop
- * To configure underlying view, `backdropStyle` property may be used.
+ * To configure underlying view, `backdropStyle` and `onBackdropPress` properties may be used.
  */
 export class Modal extends React.PureComponent<ModalProps, State> {
 

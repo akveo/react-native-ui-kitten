@@ -8,6 +8,7 @@
 
 import React from 'react';
 import { Button, Icon, List, ListItem } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
 const data = new Array(8).fill({
   title: 'Title for Item',
@@ -35,8 +36,15 @@ export const ListAccessoriesShowcase = () => {
 
   return (
     <List
+      style={styles.container}
       data={data}
       renderItem={renderItem}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    maxHeight: 192,
+  },
+});

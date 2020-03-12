@@ -6,10 +6,6 @@ export const SelectStatesShowcase = () => {
 
   const [selectedIndex, setSelectedIndex] = React.useState();
 
-  const onSelect = (index) => {
-    setSelectedIndex(index);
-  };
-
   return (
     <Layout style={styles.container}>
 
@@ -39,7 +35,7 @@ export const SelectStatesShowcase = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 228,
+    height: 128,
   },
   select: {
     flex: 1,

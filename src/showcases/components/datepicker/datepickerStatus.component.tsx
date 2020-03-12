@@ -79,7 +79,7 @@ export const DatepickerStatusShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 480,
+    minHeight: 420,
   },
   rowContainer: {
     flexDirection: 'row',

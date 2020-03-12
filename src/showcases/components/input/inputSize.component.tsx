@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Input, Layout } from '@ui-kitten/components';
+import { Input } from '@ui-kitten/components';
 
 const useInputState = (initialValue = '') => {
   const [value, setValue] = React.useState(initialValue);
@@ -15,7 +15,7 @@ export const InputSizeShowcase = () => {
   const multilineInputState = useInputState();
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Input
         style={styles.input}
@@ -45,7 +45,7 @@ export const InputSizeShowcase = () => {
         {...multilineInputState}
       />
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

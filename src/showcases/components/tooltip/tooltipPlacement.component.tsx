@@ -55,7 +55,7 @@ export const TooltipPlacementShowcase = () => {
           visible={visible}
           placement={placement}
           onBackdropPress={() => setVisible(false)}>
-          Hi!
+          Welcome to UI Kitten 😻
         </Tooltip>
 
       </View>

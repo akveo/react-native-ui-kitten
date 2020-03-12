@@ -75,8 +75,16 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * @overview-example RangeCalendarSimpleUsage
  * There is an alternative calendar component, to work with date ranges.
  *
- * Ranged calendar works with special range object - CalendarRange: `{ startDate: Date, endDate: Date }`.
- * For incomplete ranges, there is only a `startDate` property.
+ * @overview-example RangeCalendarType
+ * Ranged calendar works with special range object - CalendarRange.
+ * For empty ranges, range has no date properties.
+ * And for incomplete ranges, there is only a `startDate` property.
+ * ```
+ * export interface CalendarRange<D> {
+ *   startDate?: D;
+ *   endDate?: D;
+ * }
+ * ```
  *
  * @overview-example CalendarFilters
  * Calendar may accept minimal and maximum dates, filter functions, and `boundingMonth` property,

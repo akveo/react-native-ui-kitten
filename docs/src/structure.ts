@@ -453,8 +453,8 @@ export const structure = [
         name: 'Radio',
         icon: 'radio.svg',
         source: [
-          'RadioGroup',
           'Radio',
+          'RadioGroup',
         ],
         overview: [
           {

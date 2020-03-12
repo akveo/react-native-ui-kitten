@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Layout, Menu, MenuGroup, MenuItem } from '@ui-kitten/components';
+import { Icon, Menu, MenuGroup, MenuItem } from '@ui-kitten/components';
 
 const SmartphoneIcon = (props) => (
   <Icon {...props} name='smartphone-outline'/>
@@ -22,7 +22,7 @@ export const MenuGroupsShowcase = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Menu
         selectedIndex={selectedIndex}
@@ -42,6 +42,6 @@ export const MenuGroupsShowcase = () => {
         </MenuGroup>
       </Menu>
 
-    </Layout>
+    </React.Fragment>
   );
 };

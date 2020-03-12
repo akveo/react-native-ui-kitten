@@ -6,17 +6,13 @@ export const RadioThemingShowcase = () => {
 
   const [activeChecked, setActiveChecked] = React.useState(true);
 
-  const onActiveCheckedChange = (isChecked) => {
-    setActiveChecked(isChecked);
-  };
-
   return (
     <Layout style={styles.container}>
 
       <Radio
         style={styles.radio}
         checked={activeChecked}
-        onChange={onActiveCheckedChange}>
+        onChange={nextChecked => setActiveChecked(nextChecked)}>
         Active
       </Radio>
 
@@ -43,7 +39,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   radio: {
-    margin: 8,
+    margin: 2,
   },
 });
 

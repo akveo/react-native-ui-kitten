@@ -43,7 +43,7 @@ export const DatepickerSizeShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 480,
+    minHeight: 420,
   },
   datepicker: {
     marginVertical: 2,

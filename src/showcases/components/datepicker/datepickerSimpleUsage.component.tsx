@@ -9,7 +9,7 @@ export const DatepickerSimpleUsageShowcase = () => {
   return (
     <Layout style={styles.container}>
 
-      <Text style={styles.text} category='h6'>
+      <Text category='h6'>
         Selected date: {date.toLocaleDateString()}
       </Text>
 
@@ -25,8 +25,5 @@ export const DatepickerSimpleUsageShowcase = () => {
 const styles = StyleSheet.create({
   container: {
     minHeight: 376,
-  },
-  text: {
-    marginVertical: 8,
   },
 });

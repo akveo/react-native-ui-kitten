@@ -72,8 +72,11 @@ type AlignmentProp = 'start' | 'center';
  * In basic example TopNavigation contains a title and actions.
  *
  * @overview-example TopNavigationAccessories
- * A single TopNavigation may contain one action on the left,
- * and as many actions as needed on the right. Actions can be also a menus.
+ * TopNavigation may contain a single action on the left,
+ * and as many actions as needed on the right. In common practices, actions may be wrapped in menus.
+ *
+ * @overview-example TopNavigationDivider
+ * It is a good idea to separate TopNavigation and screen contents with `Divider` component.
  *
  * @overview-example TopNavigationImageTitle
  * Sometimes it is needed to have an image as title.

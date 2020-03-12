@@ -156,9 +156,17 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * @property {TouchableOpacityProps} ...TouchableOpacityProps - Any props applied to TouchableOpacity component.
  *
  * @overview-example SelectSimpleUsage
- * Select works with special index object - IndexPath: `{ row: number, section: number }`.
- * For non-grouped options, there is only a `row` property.
- * Otherwise, `row` is index of option within group, section - index of group in list.
+ *
+ * @overview-example SelectIndexType
+ * Select works with special index object - IndexPath.
+ * For non-grouped items in select, there is only a `row` property.
+ * Otherwise, `row` is an index of option within the group, section - index of group in options list.
+ * ```
+ * interface IndexPath {
+ *   row: number;
+ *   section?: number;
+ * }
+ * ```
  *
  * @overview-example SelectMultiSelect
  * Multiple options can be selected if `multiSelect` property is configured.

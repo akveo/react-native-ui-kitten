@@ -88,7 +88,7 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  *   </Layout>
  * );
  *
- * const BottomTabBar = ({ navigation, state }) => (*
+ * const BottomTabBar = ({ navigation, state }) => (
  *   <BottomNavigation
  *     selectedIndex={state.index}
  *     onSelect={index => navigation.navigate(state.routeNames[index])}>

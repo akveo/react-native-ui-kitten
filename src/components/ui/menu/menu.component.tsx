@@ -70,15 +70,23 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * excluding `renderItem` and `data`.
  *
  * @overview-example MenuSimpleUsage
- * Menu works with special index object - IndexPath: `{ row: number, section: number }`.
+ *
+ * @overview-example MenuIndexType
+ * Menu works with special index object - IndexPath.
  * For non-grouped items in menu, there is only a `row` property.
  * Otherwise, `row` is an index of option within the group, section - index of group in menu.
+ * ```
+ * interface IndexPath {
+ *   row: number;
+ *   section?: number;
+ * }
+ * ```
  *
  * @overview-example MenuNoMarkers
  * Pressing of menu items can be handled without marking items.
  *
  * @overview-example MenuAccessories
- * Items may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
  * Within Eva, item accessories are expected to be images
  * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *

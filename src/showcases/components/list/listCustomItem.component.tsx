@@ -49,7 +49,7 @@ export const ListCustomItemShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    maxHeight: 520,
+    maxHeight: 320,
   },
   contentContainer: {
     paddingHorizontal: 8,

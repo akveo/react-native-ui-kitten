@@ -5,12 +5,10 @@ export const RadioSimpleUsageShowcase = () => {
 
   const [checked, setChecked] = React.useState(false);
 
-  const onCheckedChange = (isChecked) => {
-    setChecked(isChecked);
-  };
-
   return (
-    <Radio checked={checked} onChange={onCheckedChange}>
+    <Radio
+      checked={checked}
+      onChange={nextChecked => setChecked(nextChecked)}>
       {`Checked: ${checked}`}
     </Radio>
   );

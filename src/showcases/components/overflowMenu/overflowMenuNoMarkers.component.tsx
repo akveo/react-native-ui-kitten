@@ -38,11 +38,11 @@ export const OverflowMenuNoMarkersShowcase = () => {
       <Text category='h6'>{selectedTitle}</Text>
       <OverflowMenu
         visible={visible}
-        anchor={renderToggleButton}>
+        anchor={renderToggleButton}
+        onBackdropPress={() => setVisible(false)}>
         <MenuItem title='Users' onPress={onUsersPress}/>
         <MenuItem title='Orders' onPress={onOrdersPress}/>
         <MenuItem title='Transactions' onPress={onTransactionsPress}/>
-        <MenuItem title='Settings' onPress={onSettingsPress}/>
       </OverflowMenu>
     </Layout>
   );
@@ -50,6 +50,6 @@ export const OverflowMenuNoMarkersShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 256,
+    minHeight: 144,
   },
 });

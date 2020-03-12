@@ -70,6 +70,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 64,
+    marginVertical: 80,
   },
 });

@@ -87,7 +87,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * Within Eva Design System, it can be `filled`, `outline` or `ghost`.
  *
  * @overview-example ButtonAccessories
- * Also, it may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Also, it may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
  * Within Eva it is expected to be an image
  * or [svg icon](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *
@@ -99,8 +99,10 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
  * @overview-example ButtonOutline
+ * Status can be combined with `outline` appearance.
  *
  * @overview-example ButtonGhost
+ * As well as for `ghost`.
  *
  * @overview-example ButtonStyling
  * Button and it's inner views can be styled by passing them as function components.

@@ -71,9 +71,16 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * @overview-example OverflowMenuSimpleUsage
  * OverflowMenu accepts `MenuItem` components as child elements and is displayed relative to `anchor` view.
  *
- * Menu works with special index object - IndexPath: `{ row: number, section: number }`.
+ * @overview-example OverflowMenuIndexType
+ * Menu works with special index object - IndexPath.
  * For non-grouped items in menu, there is only a `row` property.
- * Otherwise, `row` is an index of option within the group, section - index of group in menu.
+ * Otherwise, `row` is an index of item within the group, section - index of group in menu.
+ * ```
+ * interface IndexPath {
+ *   row: number;
+ *   section?: number;
+ * }
+ * ```
  *
  * @overview-example OverflowMenuNoMarkers
  * Pressing of menu items can be handled without marking items.
@@ -81,8 +88,11 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * @overview-example OverflowMenuPlacement
  * By default, menu is displayed to the bottom of `anchor` view, but it is configurable with `placement` property.
  *
+ * @overview-example OverflowMenuFullWidth
+ * Menu may take the full width of the anchor view by configuring `fullWidth` property.
+ *
  * @overview-example OverflowMenuAccessories
- * Menu items may contain inner views by configuring `accessoryLeft` or `accessoryRight` properties.
+ * Menu items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
  * Within Eva it is expected to be an image
  * or [svg icon](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
  *

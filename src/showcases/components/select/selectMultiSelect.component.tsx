@@ -25,7 +25,7 @@ export const SelectMultiSelectShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 228,
+    height: 128,
   },
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Layout, Modal, Text } from '@ui-kitten/components';
+import { Button, Card, Layout, Modal, Text } from '@ui-kitten/components';
 
 export const ModalSimpleUsageShowcase = () => {
 
@@ -14,12 +14,12 @@ export const ModalSimpleUsageShowcase = () => {
       </Button>
 
       <Modal visible={visible}>
-        <Layout style={styles.modalContainer} level='3'>
-          <Text>Hi! This is modal</Text>
+        <Card disabled={true}>
+          <Text>Welcome to UI Kitten 😻</Text>
           <Button onPress={() => setVisible(false)}>
             DISMISS
           </Button>
-        </Layout>
+        </Card>
       </Modal>
 
     </Layout>
@@ -28,12 +28,6 @@ export const ModalSimpleUsageShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 256,
-  },
-  modalContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 256,
-    padding: 16,
+    minHeight: 192,
   },
 });

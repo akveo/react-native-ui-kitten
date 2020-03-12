@@ -18,7 +18,7 @@ export const InputStatusShowcase = () => {
   const controlInputState = useInputState();
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Input
         style={styles.input}
@@ -75,7 +75,7 @@ export const InputStatusShowcase = () => {
         </View>
       </Layout>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

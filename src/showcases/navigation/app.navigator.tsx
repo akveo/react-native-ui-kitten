@@ -29,7 +29,7 @@ export const AppNavigator = (): React.ReactElement => (
     <Text style={styles.text} appearance='hint'>
       For example, try changing theme to Dark by simply changing an import
     </Text>
-    <Button style={styles.likeButton} icon={HeartIcon}>
+    <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
       LIKE
     </Button>
   </Layout>

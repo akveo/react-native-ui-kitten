@@ -1,14 +1,7 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Avatar, Icon, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Avatar, Icon, MenuItem, OverflowMenu, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 
-const BackIcon = (props) => (
-  <Icon {...props} name='arrow-back'/>
-);
-
-const EditIcon = (props) => (
-  <Icon {...props} name='edit'/>
-);
 
 const MenuIcon = (props) => (
   <Icon {...props} name='more-vertical'/>
@@ -34,9 +27,8 @@ export const TopNavigationImageTitleShowcase = () => {
     <TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
   );
 
-  const renderRightActions = () => (
+  const renderOverflowMenuAction = () => (
     <React.Fragment>
-      <TopNavigationAction icon={EditIcon}/>
       <OverflowMenu
         anchor={renderMenuAction}
         visible={menuVisible}
@@ -48,27 +40,28 @@ export const TopNavigationImageTitleShowcase = () => {
   );
 
   const renderTitle = (props) => (
-    <Avatar
-      style={styles.logo}
-      source={require('../../assets/icon.png')}
-    />
-  );
-
-  const renderBackAction = () => (
-    <TopNavigationAction icon={BackIcon}/>
+    <View style={styles.titleContainer}>
+      <Avatar
+        style={styles.logo}
+        source={require('../../assets/icon.png')}
+      />
+      <Text {...props}>Eva Application</Text>
+    </View>
   );
 
   return (
     <TopNavigation
-      alignment='center'
       title={renderTitle}
-      accessoryLeft={renderBackAction}
-      accessoryRight={renderRightActions}
+      accessoryRight={renderOverflowMenuAction}
     />
   );
 };
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   logo: {
     marginHorizontal: 16,
   },

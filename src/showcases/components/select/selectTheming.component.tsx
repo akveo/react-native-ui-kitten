@@ -43,7 +43,7 @@ export const SelectThemingShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 228,
+    minHeight: 128,
   },
 });
 

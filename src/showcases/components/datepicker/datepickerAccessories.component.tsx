@@ -28,6 +28,6 @@ export const DatepickerAccessoriesShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 420,
+    minHeight: 360,
   },
 });

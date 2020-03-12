@@ -4,7 +4,6 @@ import { CheckBox, Layout } from '@ui-kitten/components';
 
 const useCheckboxState = (initialCheck = false) => {
   const [checked, setChecked] = React.useState(initialCheck);
-
   return { checked, onChange: setChecked };
 };
 

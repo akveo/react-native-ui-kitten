@@ -20,7 +20,7 @@ export const RangeDatepickerSimpleUsageShowcase = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 376,
+    minHeight: 360,
   },
 });
 

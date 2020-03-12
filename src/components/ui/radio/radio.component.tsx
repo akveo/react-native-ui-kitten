@@ -44,7 +44,6 @@ export type RadioElement = React.ReactElement<RadioProps>;
 
 /**
  * Radio buttons allow the user to select one option from a set.
- * Radios should be rendered within RadioGroup to provide a usable component.
  *
  * @extends React.Component
  *
@@ -67,8 +66,11 @@ export type RadioElement = React.ReactElement<RadioProps>;
  *
  * @overview-example RadioSimpleUsage
  *
+ * @overview-example RadioGroupSimpleUsage
+ * Radios should be passed to RadioGroup child elements to provide a usable component.
+ *
  * @overview-example RadioStates
- * Radio can be checked or disabled.
+ * A single Radio can be checked or disabled.
  *
  * @overview-example RadioStatus
  * Or marked with `status` property, which is useful within forms validation.

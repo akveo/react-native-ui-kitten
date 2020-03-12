@@ -6,16 +6,19 @@ export const IconThemingShowcase = () => {
 
   const zoomIconRef = React.useRef();
   const pulseIconRef = React.useRef();
-  const infiniteAnimationIconRef = React.useRef();
+  const shakeIconRef = React.useRef();
 
   React.useEffect(() => {
-    infiniteAnimationIconRef.current.startAnimation();
+    zoomIconRef.current.startAnimation();
+    pulseIconRef.current.startAnimation();
+    shakeIconRef.current.startAnimation();
   }, []);
 
   const renderZoomIcon = (props) => (
     <Icon
       {...props}
       ref={zoomIconRef}
+      animationConfig={{ cycles: Infinity }}
       animation='zoom'
       name='maximize-outline'
     />
@@ -25,18 +28,19 @@ export const IconThemingShowcase = () => {
     <Icon
       {...props}
       ref={pulseIconRef}
+      animationConfig={{ cycles: Infinity }}
       animation='pulse'
       name='activity'
     />
   );
 
-  const renderInfiniteAnimationIcon = (props) => (
+  const renderShakeIcon = (props) => (
     <Icon
       {...props}
-      ref={infiniteAnimationIconRef}
+      ref={shakeIconRef}
       animationConfig={{ cycles: Infinity }}
       animation='shake'
-      name='clock-outline'
+      name='shake'
     />
   );
 
@@ -45,24 +49,22 @@ export const IconThemingShowcase = () => {
 
       <Button
         style={styles.button}
-        accessoryLeft={renderZoomIcon}
-        onPress={() => zoomIconRef.current.startAnimation()}>
+        accessoryLeft={renderZoomIcon}>
         ZOOM
       </Button>
 
       <Button
         appearance='outline'
         style={styles.button}
-        accessoryLeft={renderPulseIcon}
-        onPress={() => pulseIconRef.current.startAnimation()}>
+        accessoryLeft={renderPulseIcon}>
         PULSE
       </Button>
 
       <Button
         appearance='ghost'
         style={styles.button}
-        accessoryRight={renderInfiniteAnimationIcon}>
-        INFINITE
+        accessoryRight={renderShakeIcon}>
+        SHAKE
       </Button>
 
     </Layout>

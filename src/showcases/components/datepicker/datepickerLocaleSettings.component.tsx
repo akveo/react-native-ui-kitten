@@ -63,7 +63,7 @@ export const DatepickerLocaleSettingsShowcase = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    minHeight: 420,
+    minHeight: 360,
   },
   picker: {
     flex: 1,
