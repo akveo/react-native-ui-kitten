@@ -11,7 +11,7 @@ export const ToggleStatesShowcase = () => {
   };
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Toggle
         style={styles.toggle}

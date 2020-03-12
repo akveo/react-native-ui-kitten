@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import {
   Button,
   Icon,
@@ -71,7 +71,7 @@ export const IconWithinComponentsShowcase = () => {
   return (
     <React.Fragment>
 
-      <Layout style={styles.inputContainer}>
+      <Layout style={styles.inputContainer} level='1'>
 
         <Input
           style={styles.input}
@@ -105,7 +105,7 @@ export const IconWithinComponentsShowcase = () => {
         <MenuItem title='Menu Option 2' accessoryRight={ForwardIcon}/>
       </OverflowMenu>
 
-      <Layout style={styles.buttonContainer}>
+      <Layout style={styles.buttonContainer} level='1'>
 
         <Tooltip
           anchor={renderTooltipButton}

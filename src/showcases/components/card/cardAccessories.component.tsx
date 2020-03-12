@@ -27,7 +27,7 @@ const Footer = (props) => (
 
 export const CardAccessoriesShowcase = () => (
   <React.Fragment>
-    <Layout style={styles.topContainer}>
+    <Layout style={styles.topContainer} level='1'>
 
       <Card style={styles.card} header={Header}>
         <Text>With Header</Text>

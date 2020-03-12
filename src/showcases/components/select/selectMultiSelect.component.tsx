@@ -10,7 +10,7 @@ export const SelectMultiSelectShowcase = () => {
   ]);
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
       <Select
         multiSelect={true}
         selectedIndex={selectedIndex}

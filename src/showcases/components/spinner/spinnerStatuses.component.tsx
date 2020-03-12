@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Layout, Spinner } from '@ui-kitten/components';
 
 export const SpinnerStatusesShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <Spinner status='primary'/>
 

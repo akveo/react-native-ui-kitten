@@ -34,7 +34,7 @@ export const OverflowMenuNoMarkersShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
       <Text category='h6'>{selectedTitle}</Text>
       <OverflowMenu
         visible={visible}

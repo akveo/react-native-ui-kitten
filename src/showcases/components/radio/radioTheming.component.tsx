@@ -7,7 +7,7 @@ export const RadioThemingShowcase = () => {
   const [activeChecked, setActiveChecked] = React.useState(true);
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Radio
         style={styles.radio}

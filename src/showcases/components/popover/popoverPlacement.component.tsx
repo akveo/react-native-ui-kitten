@@ -38,7 +38,7 @@ export const PopoverPlacementShowcase = () => {
   );
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Select
         placeholder='Select Placement'
@@ -67,7 +67,7 @@ export const PopoverPlacementShowcase = () => {
 
       </View>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

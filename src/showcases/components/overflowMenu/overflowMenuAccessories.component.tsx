@@ -23,7 +23,7 @@ export const OverflowMenuAccessoriesShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
       <OverflowMenu
         anchor={renderToggleButton}
         visible={visible}

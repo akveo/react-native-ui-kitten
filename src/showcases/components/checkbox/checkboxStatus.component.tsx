@@ -18,7 +18,7 @@ export const CheckboxStatusShowcase = () => {
   const controlCheckboxState = useCheckboxState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <CheckBox
         style={styles.checkbox}

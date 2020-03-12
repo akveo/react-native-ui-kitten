@@ -27,7 +27,7 @@ export const InputStatusShowcase = () => {
         {...primaryInputState}
       />
 
-      <Layout style={styles.rowContainer}>
+      <Layout style={styles.rowContainer} level='1'>
         <Input
           style={styles.input}
           status='success'
@@ -42,7 +42,7 @@ export const InputStatusShowcase = () => {
         />
       </Layout>
 
-      <Layout style={styles.rowContainer}>
+      <Layout style={styles.rowContainer} level='1'>
         <Input
           style={styles.input}
           status='warning'
@@ -58,13 +58,14 @@ export const InputStatusShowcase = () => {
         />
       </Layout>
 
-      <Layout style={styles.rowContainer}>
+      <Layout style={styles.rowContainer} level='1'>
         <Input
           style={styles.input}
           status='basic'
           placeholder='Basic'
           {...basicInputState}
         />
+
         <View style={styles.controlContainer}>
           <Input
             style={styles.input}

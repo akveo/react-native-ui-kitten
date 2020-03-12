@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Avatar, Layout } from '@ui-kitten/components';
 
 export const AvatarShapeShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <Avatar style={styles.avatar} shape='square' source={require('../../assets/icon.png')}/>
 

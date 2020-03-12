@@ -7,7 +7,7 @@ const StarIcon = (props) => (
 );
 
 export const ButtonGroupWithIconsShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <ButtonGroup style={styles.buttonGroup}>
       <Button accessoryLeft={StarIcon}/>

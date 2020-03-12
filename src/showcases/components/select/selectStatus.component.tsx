@@ -18,7 +18,7 @@ export const SelectStatusShowcase = () => {
   const controlSelectState = useSelectState();
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Select
         style={styles.select}
@@ -30,7 +30,7 @@ export const SelectStatusShowcase = () => {
         <SelectItem title='Option 3'/>
       </Select>
 
-      <Layout style={styles.rowContainer}>
+      <Layout style={styles.rowContainer} level='1'>
 
         <Select
           style={styles.select}
@@ -54,7 +54,7 @@ export const SelectStatusShowcase = () => {
 
       </Layout>
 
-      <Layout style={styles.rowContainer}>
+      <Layout style={styles.rowContainer} level='1'>
 
         <Select
           style={styles.select}
@@ -78,7 +78,7 @@ export const SelectStatusShowcase = () => {
 
       </Layout>
 
-      <Layout style={styles.rowContainer}>
+      <Layout style={styles.rowContainer} level='1'>
 
         <Select
           style={styles.select}
@@ -104,7 +104,7 @@ export const SelectStatusShowcase = () => {
 
       </Layout>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

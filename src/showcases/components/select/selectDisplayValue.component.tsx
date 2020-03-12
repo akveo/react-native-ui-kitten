@@ -44,7 +44,7 @@ export const SelectDisplayValueShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Select
         style={styles.select}

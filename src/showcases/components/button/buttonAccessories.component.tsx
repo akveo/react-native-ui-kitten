@@ -13,7 +13,7 @@ const LoadingIndicator = (props) => (
 );
 
 export const ButtonAccessoriesShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <Button style={styles.button} status='primary' accessoryLeft={StarIcon}>
       PRIMARY

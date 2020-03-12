@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Datepicker, Layout } from '@ui-kitten/components';
 
 const useDatepickerState = (initialDate = null) => {
@@ -17,9 +17,9 @@ export const DatepickerStatusShowcase = () => {
   const basicDatepickerState = useDatepickerState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
-      <Layout style={styles.rowContainer}>
+      <View style={styles.rowContainer}>
 
         <Datepicker
           style={styles.picker}
@@ -35,9 +35,9 @@ export const DatepickerStatusShowcase = () => {
           {...successDatepickerState}
         />
 
-      </Layout>
+      </View>
 
-      <Layout style={styles.rowContainer}>
+      <View style={styles.rowContainer}>
 
         <Datepicker
           style={styles.picker}
@@ -53,9 +53,9 @@ export const DatepickerStatusShowcase = () => {
           {...warningDatepickerState}
         />
 
-      </Layout>
+      </View>
 
-      <Layout style={styles.rowContainer}>
+      <View style={styles.rowContainer}>
 
         <Datepicker
           style={styles.picker}
@@ -71,7 +71,7 @@ export const DatepickerStatusShowcase = () => {
           {...basicDatepickerState}
         />
 
-      </Layout>
+      </View>
 
     </Layout>
   );

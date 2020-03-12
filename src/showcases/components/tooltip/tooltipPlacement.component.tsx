@@ -38,7 +38,7 @@ export const TooltipPlacementShowcase = () => {
   );
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Select
         placeholder='Select Placement'
@@ -48,7 +48,7 @@ export const TooltipPlacementShowcase = () => {
         {placements.map(renderPlacementItem)}
       </Select>
 
-      <View style={styles.buttonContainer}>
+      <Layout style={styles.buttonContainer} level='1'>
 
         <Tooltip
           anchor={renderToggleButton}
@@ -58,9 +58,9 @@ export const TooltipPlacementShowcase = () => {
           Welcome to UI Kitten 😻
         </Tooltip>
 
-      </View>
+      </Layout>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

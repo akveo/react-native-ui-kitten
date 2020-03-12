@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button, ButtonGroup, Layout } from '@ui-kitten/components';
 
 export const ButtonGroupOutlineShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <ButtonGroup style={styles.buttonGroup} appearance='outline' status='primary'>
       <Button>L</Button>

@@ -38,7 +38,7 @@ export const OverflowMenuPlacementShowcase = () => {
   );
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Select
         placeholder='Select Placement'
@@ -62,7 +62,7 @@ export const OverflowMenuPlacementShowcase = () => {
 
       </View>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

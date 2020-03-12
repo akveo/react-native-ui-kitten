@@ -107,7 +107,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  * import { Tooltip, Text } from '@ui-kitten/components';
  *
  * <Tooltip style={...}>
- *   {evaProps => <Text {...evaProps}>{props.children}</Text>}
+ *   {evaProps => <Text {...evaProps}>TEXT</Text>}
  * </Tooltip>
  * ```
  */

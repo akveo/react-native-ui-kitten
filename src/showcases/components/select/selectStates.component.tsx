@@ -7,7 +7,7 @@ export const SelectStatesShowcase = () => {
   const [selectedIndex, setSelectedIndex] = React.useState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Select
         style={styles.select}

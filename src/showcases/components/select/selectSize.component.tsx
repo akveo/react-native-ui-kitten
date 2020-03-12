@@ -14,7 +14,7 @@ export const SelectSizeShowcase = () => {
   const largeSelectState = useSelectState();
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Select
         style={styles.select}
@@ -46,7 +46,7 @@ export const SelectSizeShowcase = () => {
         <SelectItem title='Option 3'/>
       </Select>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 

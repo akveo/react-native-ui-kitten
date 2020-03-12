@@ -3,7 +3,7 @@ import { dark, light } from '@eva-design/eva';
 import { Card, Layout, Text, ThemeProvider } from '@ui-kitten/components';
 
 export const ThemeProviderSimpleUsageShowcase = () => (
-  <Layout>
+  <React.Fragment>
 
     <ThemeProvider theme={light}>
       <Card style={{ marginVertical: 8 }}>
@@ -23,5 +23,5 @@ export const ThemeProviderSimpleUsageShowcase = () => (
       </Card>
     </ThemeProvider>
 
-  </Layout>
+  </React.Fragment>
 );

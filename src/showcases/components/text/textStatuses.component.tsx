@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
 
 export const TextStatusesShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <Text style={styles.text} status='primary'>Primary</Text>
     <Text style={styles.text} status='success'>Success</Text>

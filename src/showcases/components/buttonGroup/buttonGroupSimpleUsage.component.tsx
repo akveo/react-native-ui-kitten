@@ -7,7 +7,7 @@ export const ButtonGroupSimpleUsageShowcase = () => {
   const [text, setText] = React.useState('Press any button');
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <ButtonGroup>
         <Button onPress={() => setText('Left button pressed')}>L</Button>

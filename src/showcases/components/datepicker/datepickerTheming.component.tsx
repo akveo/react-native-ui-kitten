@@ -7,7 +7,7 @@ export const DatepickerThemingShowcase = () => {
   const [date, setDate] = React.useState(new Date());
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Text category='h6'>
         Selected date: {date.toLocaleDateString()}

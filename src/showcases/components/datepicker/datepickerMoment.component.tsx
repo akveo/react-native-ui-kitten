@@ -16,7 +16,7 @@ export const DatepickerMomentShowcase = () => {
   const [date, setDate] = React.useState(moment());
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Datepicker
         placeholder='Pick Date'

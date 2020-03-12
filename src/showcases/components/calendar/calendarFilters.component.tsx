@@ -20,7 +20,7 @@ export const CalendarFiltersShowcase = () => {
   const boundingCalendarState = useCalendarState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <View style={styles.calendarContainer}>
         <Text style={styles.text} category='h6'>

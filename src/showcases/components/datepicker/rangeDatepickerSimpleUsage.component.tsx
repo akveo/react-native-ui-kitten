@@ -7,7 +7,7 @@ export const RangeDatepickerSimpleUsageShowcase = () => {
   const [range, setRange] = React.useState({});
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <RangeDatepicker
         range={range}

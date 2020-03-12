@@ -14,7 +14,7 @@ export const MenuDisabledOptionsShowcase = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
   return (
-    <Layout>
+    <Layout level='1'>
 
       <Menu
         selectedIndex={selectedIndex}

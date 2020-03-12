@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Card, Layout, Text } from '@ui-kitten/components';
 
 export const CardStatusesShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <Card style={styles.card} status='primary'>
       <Text>Primary</Text>

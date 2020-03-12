@@ -7,7 +7,7 @@ export const ButtonSimpleUsageShowcase = () => {
   const [counter, setCounter] = React.useState(0);
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Button onPress={() => setCounter(counter + 1)}>
         BUTTON

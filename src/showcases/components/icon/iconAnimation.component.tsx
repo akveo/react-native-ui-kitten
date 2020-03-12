@@ -51,7 +51,7 @@ export const IconAnimationShowcase = () => {
   );
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Button
         style={styles.button}

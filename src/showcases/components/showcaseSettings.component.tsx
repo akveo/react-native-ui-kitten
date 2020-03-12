@@ -31,7 +31,7 @@ export const ShowcaseSettings = (props: ViewProps): LayoutElement => {
   );
 
   return (
-    <Layout style={[props.style, styles.container]}>
+    <Layout style={[props.style, styles.container]} level='1'>
       <ButtonGroup
         status='basic'
         size='small'>

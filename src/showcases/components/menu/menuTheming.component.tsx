@@ -21,7 +21,7 @@ export const MenuThemingShowcase = () => {
   const rightMenuState = useMenuState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Menu style={styles.menu} {...leftMenuState}>
         <MenuItem title='Users' accessoryLeft={StarIcon}/>

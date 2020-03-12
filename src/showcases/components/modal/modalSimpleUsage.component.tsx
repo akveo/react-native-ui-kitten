@@ -7,7 +7,7 @@ export const ModalSimpleUsageShowcase = () => {
   const [visible, setVisible] = React.useState(false);
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Button onPress={() => setVisible(true)}>
         TOGGLE MODAL

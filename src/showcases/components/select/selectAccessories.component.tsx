@@ -15,7 +15,7 @@ export const SelectAccessoriesShowcase = () => {
   const [selectedIndex, setSelectedIndex] = React.useState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
       <Select
         label='Label'
         caption='Caption'

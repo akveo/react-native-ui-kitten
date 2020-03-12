@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Button, ButtonGroup, Layout } from '@ui-kitten/components';
 
 export const ButtonGroupSizeShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <ButtonGroup style={styles.buttonGroup} size='tiny'>
       <Button>L</Button>

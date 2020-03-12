@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { Icon, Layout, MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
 const BackIcon = (props) => (
   <Icon {...props} name='arrow-back'/>
@@ -51,12 +52,20 @@ export const TopNavigationAccessoriesShowcase = () => {
   );
 
   return (
-    <TopNavigation
-      alignment='center'
-      title='Eva Application'
-      subtitle='Subtitle'
-      accessoryLeft={renderBackAction}
-      accessoryRight={renderRightActions}
-    />
+    <Layout style={styles.container} level='1'>
+      <TopNavigation
+        alignment='center'
+        title='Eva Application'
+        subtitle='Subtitle'
+        accessoryLeft={renderBackAction}
+        accessoryRight={renderRightActions}
+      />
+    </Layout>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    minHeight: 128,
+  },
+});

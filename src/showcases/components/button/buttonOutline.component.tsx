@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Layout } from '@ui-kitten/components';
 
 export const ButtonOutlineShowcase = () => (
-  <Layout style={styles.container}>
+  <Layout style={styles.container} level='1'>
 
     <Button style={styles.button} appearance='outline' status='primary'>
       PRIMARY

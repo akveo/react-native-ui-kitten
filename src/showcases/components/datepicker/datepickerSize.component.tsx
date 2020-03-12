@@ -14,7 +14,7 @@ export const DatepickerSizeShowcase = () => {
   const largeDatepickerState = useDatepickerState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Datepicker
         style={styles.datepicker}

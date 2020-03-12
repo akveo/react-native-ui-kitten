@@ -11,7 +11,7 @@ export const DatepickerAccessoriesShowcase = () => {
   const [date, setDate] = React.useState(new Date());
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Datepicker
         label='Label'
