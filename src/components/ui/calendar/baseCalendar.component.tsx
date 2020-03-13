@@ -122,7 +122,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       title: {
         fontSize: source.titleFontSize,
         fontWeight: source.titleFontWeight,
-        lineHeight: source.titleLineHeight,
         color: source.titleColor,
         fontFamily: source.titleFontFamily,
       },
@@ -229,7 +228,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return {
       fontSize: source.weekdayTextFontSize,
       fontWeight: source.weekdayTextFontWeight,
-      lineHeight: source.weekdayTextLineHeight,
       color: source.weekdayTextColor,
       fontFamily: source.weekdayTextFontFamily,
     };

@@ -79,7 +79,6 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
       contentBorderColor,
       contentBackgroundColor,
       contentTextFontSize,
-      contentTextLineHeight,
       contentTextFontWeight,
       contentTextColor,
       contentTextFontFamily,
@@ -101,7 +100,6 @@ class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellP
       contentText: {
         fontSize: contentTextFontSize,
         fontWeight: contentTextFontWeight,
-        lineHeight: contentTextLineHeight,
         color: contentTextColor,
         fontFamily: contentTextFontFamily,
       },

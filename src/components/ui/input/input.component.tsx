@@ -194,7 +194,6 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
       textMarginHorizontal,
       textFontFamily,
       textFontSize,
-      textLineHeight,
       textFontWeight,
       textColor,
       placeholderColor,
@@ -204,14 +203,14 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
       iconTintColor,
       labelColor,
       labelFontSize,
-      labelLineHeight,
       labelMarginBottom,
       labelFontWeight,
+      labelFontFamily,
       captionMarginTop,
       captionColor,
       captionFontSize,
-      captionLineHeight,
       captionFontWeight,
+      captionFontFamily,
       captionIconWidth,
       captionIconHeight,
       captionIconMarginRight,
@@ -232,8 +231,6 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
         marginHorizontal: textMarginHorizontal,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
-        // FIXME: RN issue (https://github.com/facebook/react-native/issues/7823)
-        // lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
       },
@@ -249,9 +246,9 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
       label: {
         color: labelColor,
         fontSize: labelFontSize,
-        lineHeight: labelLineHeight,
         marginBottom: labelMarginBottom,
         fontWeight: labelFontWeight,
+        fontFamily: labelFontFamily,
       },
       captionIcon: {
         width: captionIconWidth,
@@ -262,7 +259,7 @@ export class InputComponent extends React.Component<InputProps> implements WebEv
       captionLabel: {
         fontSize: captionFontSize,
         fontWeight: captionFontWeight,
-        lineHeight: captionLineHeight,
+        fontFamily: captionFontFamily,
         color: captionColor,
       },
     };

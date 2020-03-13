@@ -86,7 +86,6 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
       textMarginVertical,
       textFontFamily,
       textFontSize,
-      textLineHeight,
       textFontWeight,
       textColor,
       ...containerParameters
@@ -98,7 +97,6 @@ export class BottomNavigationTabComponent extends React.Component<BottomNavigati
         marginVertical: textMarginVertical,
         fontFamily: textFontFamily,
         fontSize: textFontSize,
-        lineHeight: textLineHeight,
         fontWeight: textFontWeight,
         color: textColor,
       },

@@ -118,13 +118,11 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
       titleTextAlign,
       titleFontFamily,
       titleFontSize,
-      titleLineHeight,
       titleFontWeight,
       titleColor,
       subtitleTextAlign,
       subtitleFontFamily,
       subtitleFontSize,
-      subtitleLineHeight,
       subtitleFontWeight,
       subtitleColor,
       ...containerParameters
@@ -136,7 +134,6 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
         textAlign: titleTextAlign,
         fontFamily: titleFontFamily,
         fontSize: titleFontSize,
-        lineHeight: titleLineHeight,
         fontWeight: titleFontWeight,
         color: titleColor,
       },
@@ -146,7 +143,6 @@ export class TopNavigationComponent extends React.Component<TopNavigationProps> 
         fontSize: subtitleFontSize,
         color: subtitleColor,
         fontWeight: subtitleFontWeight,
-        lineHeight: subtitleLineHeight,
       },
     };
   };

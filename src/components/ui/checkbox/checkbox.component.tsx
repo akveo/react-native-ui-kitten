@@ -152,7 +152,6 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
       textFontFamily,
       textFontSize,
       textFontWeight,
-      textLineHeight,
       textColor,
       iconWidth,
       iconHeight,
@@ -172,7 +171,6 @@ class CheckBoxComponent extends React.Component<CheckBoxProps> {
         fontFamily: textFontFamily,
         fontSize: textFontSize,
         fontWeight: textFontWeight,
-        lineHeight: textLineHeight,
         color: textColor,
       },
       icon: {

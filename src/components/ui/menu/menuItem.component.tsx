@@ -128,7 +128,6 @@ class MenuItemComponent extends React.Component<MenuItemProps> {
         fontFamily: titleStyles.titleFontFamily,
         fontSize: titleStyles.titleFontSize,
         fontWeight: titleStyles.titleFontWeight,
-        lineHeight: titleStyles.titleLineHeight,
         color: titleStyles.titleColor,
       },
       indicator: {

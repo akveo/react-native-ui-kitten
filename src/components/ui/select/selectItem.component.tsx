@@ -142,7 +142,6 @@ class SelectItemComponent extends React.Component<SelectItemProps> {
         fontFamily: textStyles.textFontFamily,
         fontSize: textStyles.textFontSize,
         fontWeight: textStyles.textFontWeight,
-        lineHeight: textStyles.textLineHeight,
         color: textStyles.textColor,
       },
       icon: {
