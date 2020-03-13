@@ -58,10 +58,8 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * In basic examples, tabs are wrapped within `TabBar`.
  *
  * @overview-example Using with React Navigation
- * TabBar can also be
- * [configured with React Navigation](https://akveo.github.io/react-native-ui-kitten/docs/guides/configure-navigation)
+ * TabBar can also be [configured with React Navigation](guides/configure-navigation)
  * to provide a navigational component.
- *
  * ```
  * import React from 'react';
  * import { NavigationContainer } from '@react-navigation/native';
@@ -106,8 +104,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * ```
  *
  * @overview-example TabBarAccessories
- * Tabs also may contain [icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages),
- * to provide a better user interfaces.
+ * Tabs also may contain [icons](guides/icon-packages), to provide a better user interfaces.
  *
  * @overview-example TabStyling
  * Tab and it's inner views can be styled by passing them as function components.
@@ -120,8 +117,7 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * ```
  *
  * @overview-example TabTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class TabBarComponent extends React.Component<TabBarProps> {
 

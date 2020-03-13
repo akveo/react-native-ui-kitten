@@ -104,8 +104,7 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * ```
  *
  * @overview-example CheckboxTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 class CheckBoxComponent extends React.Component<CheckBoxProps> {
 

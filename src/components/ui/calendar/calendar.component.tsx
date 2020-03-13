@@ -101,8 +101,7 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * To render custom cells, `renderDay`, `renderMonth` and `renderYear` properties may be used.
  *
  * @overview-example CalendarTheming
- * Styling of the calendar is possible with
- * [configuring a custom theme](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * Styling of the calendar is possible with [configuring a custom theme](guides/branding).
  */
 export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarProps<D>, D> {
 

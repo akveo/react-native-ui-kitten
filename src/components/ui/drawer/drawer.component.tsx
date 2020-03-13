@@ -71,8 +71,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * ```
  *
  * @overview-example Using with React Navigation
- * Drawer can also be
- * [configured with React Navigation](https://akveo.github.io/react-native-ui-kitten/docs/guides/configure-navigation)
+ * Drawer can also be [configured with React Navigation](guides/configure-navigation)
  * to provide a navigational component.
  *
  * ```
@@ -124,8 +123,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @overview-example DrawerAccessories
  * Drawer may be configured with header and footer,
  * and items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
- * Within Eva, item accessories are expected to be images
- * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ * Within Eva, item accessories are expected to be images or [svg icons](guides/icon-packages).
  *
  * @overview-example DrawerGroups
  * And be grouped within `DrawerGroup` component.
@@ -141,8 +139,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * ```
  *
  * @overview-example DrawerTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 class DrawerComponent extends React.Component<DrawerProps> {
 

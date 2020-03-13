@@ -127,8 +127,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  *
  * @overview-example DatepickerAccessories
  * Pickers may contain labels, captions and inner views by configuring `accessoryLeft` or `accessoryRight` properties.
- * Within Eva, Datepicker accessories are expected to be images
- * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ * Within Eva, Datepicker accessories are expected to be images or [svg icons](guides/icon-packages).
  *
  * @overview-example DatepickerFilters
  * Picker may accept minimal and maximum dates, filter functions, and `boundingMonth` property,
@@ -164,8 +163,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * ```
  *
  * @overview-example DatepickerTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
 

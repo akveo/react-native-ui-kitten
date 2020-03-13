@@ -93,8 +93,7 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @overview-example OverflowMenuAccessories
  * Menu items may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
- * Within Eva it is expected to be an image
- * or [svg icon](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ * Within Eva it is expected to be an image or [svg icon](guides/icon-packages).
  *
  * @overview-example OverflowMenuWithDisabledItems
  * Menu items may be disabled with `disabled` property.

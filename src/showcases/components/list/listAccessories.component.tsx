@@ -1,11 +1,3 @@
-/**
- * This example demonstrates how simply could be composed List Item
- * with classic layouts like icon at the left, forward button at the right, etc.
- *
- * IMPORTANT:  sure to follow this guide:
- * https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages
- */
-
 import React from 'react';
 import { Button, Icon, List, ListItem } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';

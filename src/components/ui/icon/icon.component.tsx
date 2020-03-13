@@ -58,7 +58,7 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  *
  * @overview-example IconSimpleUsage
  * Icon component provides a simple way to render image by requesting it from an icon set.
- * Icons come with [additional packages](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages),
+ * Icons come with [additional packages](guides/icon-packages),
  * that should be configured before using component.
  * We recommend using [Eva Icons](https://akveo.github.io/eva-icons),
  * to provide a full consistency with Eva Design System.
@@ -74,8 +74,7 @@ export type IconElement<T = WrappedElementProps> = React.ReactElement<IconProps<
  * In particular cases, Icon should be styled in a different way.
  * In case of using Eva Icons it renders [svg images](https://github.com/react-native-community/react-native-svg).
  *
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class Icon<T> extends React.Component<IconProps<T>> {
 

@@ -74,8 +74,7 @@ interface State {
  * ```
  *
  * @overview-example Ecosystem
- * Also, it may accept [custom themes](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding)
- * and [icon packages](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages)
+ * Also, it may accept [custom themes](guides/branding) and [icon packages](guides/icon-packages)
  * to provide a highly customizable, design system based application.
  * ```
  * import React from 'react';

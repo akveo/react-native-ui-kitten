@@ -70,8 +70,7 @@ export type TextElement = React.ReactElement<TextProps>;
  *
  * @overview-example TextStyling
  * Text can be styled with `style` property.
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  * ```
  * import { Text } from '@ui-kitten/components';
  *

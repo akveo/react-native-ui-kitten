@@ -92,8 +92,7 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * ```
  *
  * @overview-example ToggleTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](docs/guides/branding).
  */
 export class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
 

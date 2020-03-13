@@ -88,8 +88,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  *
  * @overview-example ButtonAccessories
  * Also, it may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
- * Within Eva it is expected to be an image
- * or [svg icon](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ * Within Eva it is expected to be an image or [svg icon](guides/icon-packages).
  *
  * @overview-example ButtonSize
  * Buttons can be resized by using `size` property.
@@ -115,8 +114,7 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * ```
  *
  * @overview-example ButtonTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class ButtonComponent extends React.Component<ButtonProps> {
 

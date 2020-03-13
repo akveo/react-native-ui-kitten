@@ -87,8 +87,7 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * ```
  *
  * @overview-example RadioTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class RadioComponent extends React.Component<RadioProps> {
 

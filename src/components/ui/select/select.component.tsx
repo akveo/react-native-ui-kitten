@@ -191,8 +191,7 @@ const CHEVRON_ANIM_DURATION: number = 200;
  *
  * @overview-example SelectAccessories
  * Select may contain labels, captions and inner views by configuring `accessoryLeft` or `accessoryRight` properties.
- * Within Eva, Select accessories are expected to be images
- * or [svg icons](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ * Within Eva, Select accessories are expected to be images or [svg icons](guides/icon-packages).
  *
  * @overview-example SelectSize
  * To resize Select, a `size` property may be used.
@@ -210,8 +209,7 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * ```
  *
  * @overview-example SelectTheming
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class SelectComponent extends React.Component<SelectProps, State> {
 

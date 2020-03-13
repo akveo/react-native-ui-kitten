@@ -73,8 +73,7 @@ interface ArcElementStyle {
  * An extra status is `control`, which is designed to be used on high-contrast backgrounds.
  *
  * @overview-example SpinnerTheming
- * Styling of Spinner is possible with
- * [configuring a custom theme](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * Styling of Spinner is possible with [configuring a custom theme](guides/branding).
  *
  * @example SpinnerDataLoading
  */

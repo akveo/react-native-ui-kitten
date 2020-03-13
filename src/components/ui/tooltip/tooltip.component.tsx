@@ -90,8 +90,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @overview-example TooltipAccessories
  * Also, it may contain inner views configured with `accessoryLeft` and `accessoryRight` properties.
- * Within Eva it is expected to be an image
- * or [svg icon](https://akveo.github.io/react-native-ui-kitten/docs/guides/icon-packages).
+ * Within Eva it is expected to be an image or [svg icon](docs/guides/icon-packages).
  *
  * @overview-example TooltipStyledBackdrop
  * To style the underlying view, `backdropStyle` property may be used.
@@ -101,8 +100,7 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  *
  * @overview-example TooltipStyling
  * Tooltip and it's inner views can be styled by passing them as function components.
- * In most cases this is redundant,
- * if [custom theme is configured](https://akveo.github.io/react-native-ui-kitten/docs/guides/branding).
+ * In most cases this is redundant, if [custom theme is configured](docs/guides/branding).
  * ```
  * import { Tooltip, Text } from '@ui-kitten/components';
  *
