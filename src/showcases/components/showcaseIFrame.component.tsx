@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutChangeEvent, View } from 'react-native';
+import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { Card, Text } from '@ui-kitten/components';
 import { ShowcaseSettings } from './showcaseSettings.component';
 
@@ -26,6 +26,7 @@ export const ShowcaseIFrame = (Component: React.ComponentType, id: string): Reac
 
   return (
     <Card
+      style={styles.card}
       disabled={true}
       header={props => <ShowcaseSettings {...props}/>}
       footer={props => <ShowcaseCaption {...props}/>}
@@ -34,3 +35,9 @@ export const ShowcaseIFrame = (Component: React.ComponentType, id: string): Reac
     </Card>
   );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    borderRadius: 0,
+  },
+});
