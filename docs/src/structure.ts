@@ -232,6 +232,23 @@ export const structure = [
   },
   {
     type: 'section',
+    name: 'Migration',
+    children: [
+      {
+        type: 'page',
+        name: '4.x-5.0.0 Migration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'migration/4.x-5.0.0-migration.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
     name: 'Components',
     children: [
       {
