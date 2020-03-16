@@ -30,7 +30,7 @@ export type IconRegistryElement = React.ReactElement<IconRegistryProps>;
  *
  * ```
  * import React from 'react';
- * import { mapping, light as lightTheme } from '@eva-design/eva';
+ * import * as eva from '@eva-design/eva';
  * import { ApplicationProvider, IconRegistry, Layout, Text, Icon, Button } from '@ui-kitten/components';
  * import { EvaIconsPack } from '@ui-kitten/eva-icons'; // <-- Make sure it is installed. npm i @ui-kitten/eva-icons
  *
@@ -38,16 +38,16 @@ export type IconRegistryElement = React.ReactElement<IconRegistryProps>;
  *   <Icon {...props} name='like' />
  * );
  *
- * const App = () => (
- *   <React.Fragment>
+ * export default () => (
+ *   <>
  *     <IconRegistry icons={EvaIconsPack}/>
- *     <ApplicationProvider mapping={mapping} theme={lightTheme}>
+ *     <ApplicationProvider {...eva} theme={eva.light}>
  *       <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
  *         <Text>Welcome to UI Kitten</Text>
  *         <Button accessoryLeft={LikeIcon}>LIKE</Text>
  *       </Layout>
  *     </ApplicationProvider>
- *   <React.Fragment>
+ *   </>
  * );
  * ```
  */
