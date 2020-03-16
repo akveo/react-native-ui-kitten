@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ImageProps,
-  ImageStyle,
   StyleSheet,
 } from 'react-native';
 import {
@@ -11,8 +10,8 @@ import {
   Icon,
 } from '@ui-kitten/components';
 
-const HeartIcon = (style: ImageStyle): React.ReactElement<ImageProps> => (
-  <Icon {...style} name='heart'/>
+const HeartIcon = (props: ImageProps): React.ReactElement<ImageProps> => (
+  <Icon {...props} name='heart'/>
 );
 
 /*

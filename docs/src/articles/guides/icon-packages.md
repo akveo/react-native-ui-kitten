@@ -260,7 +260,7 @@ import React from 'react';
 import { Button, Icon } from '@ui-kitten/components';
 
 export const HomeIcon = (props) => (
-  <Icon {...style} name='home' pack='material' />
+  <Icon {...props} name='home' pack='material' />
 );
 
 export const HomeButton = () => (
