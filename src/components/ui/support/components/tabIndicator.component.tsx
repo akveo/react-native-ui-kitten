@@ -87,6 +87,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
       toValue: I18nLayoutService.select(params.offset, -params.offset),
       duration: animationDuration,
       easing: Easing.linear,
+      useNativeDriver: true,
     });
   };
 
