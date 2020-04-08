@@ -9,6 +9,7 @@ gulp.task('publish-docs', gulp.series(
   rebuild,
   addLanding,
   copyOldVersion,
+  copyLatestStableVersion,
   publish,
 ));
 
@@ -24,8 +25,13 @@ function addLanding(done: GulpCompletionCallback): void {
 }
 
 function copyOldVersion(done: GulpCompletionCallback) {
-  return gulp.src(['docs/3.1.4/**/*'])
-      .pipe(gulp.dest('docs/dist/docs/3.1.4'));
+  return gulp.src(['docs/3.x/**/*'])
+      .pipe(gulp.dest('docs/dist/docs/3.x'));
+}
+
+function copyLatestStableVersion(done: GulpCompletionCallback) {
+  return gulp.src(['docs/4.x/**/*'])
+             .pipe(gulp.dest('docs/dist/docs/4.x'));
 }
 
 function publish(done: GulpCompletionCallback): void {

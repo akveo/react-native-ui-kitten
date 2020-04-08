@@ -1,0 +1,21 @@
+{
+  "app.js": "/static/js/app.5b3cf63c.chunk.js",
+  "app.0db62ce630b66cc38127.map": "/0db62ce630b66cc38127.map",
+  "runtime~app.js": "/static/js/runtime~app.57f5bbf7.js",
+  "runtime~app.968dd11ad1a0a4cf3e70.map": "/968dd11ad1a0a4cf3e70.map",
+  "static/js/2.b68e9907.chunk.js": "/static/js/2.b68e9907.chunk.js",
+  "060a0afd215144e7b7cb.map": "/060a0afd215144e7b7cb.map",
+  "expo-service-worker.js": "/expo-service-worker.js",
+  "expo-service-worker.js.gz": "/expo-service-worker.js.gz",
+  "favicon.ico": "/favicon.ico",
+  "index.html": "/index.html",
+  "manifest.json": "/manifest.json",
+  "precache-manifest.34cab0b3dddc95c1ca6a258a9288a4c4.js": "/precache-manifest.34cab0b3dddc95c1ca6a258a9288a4c4.js",
+  "serve.json": "/serve.json",
+  "service-worker.js": "/service-worker.js",
+  "static/js/2.b68e9907.chunk.js.gz": "/static/js/2.b68e9907.chunk.js.gz",
+  "static/js/app.5b3cf63c.chunk.js.gz": "/static/js/app.5b3cf63c.chunk.js.gz",
+  "static/js/runtime~app.57f5bbf7.js.gz": "/static/js/runtime~app.57f5bbf7.js.gz",
+  "static/media/back-icon-mask.png": "/static/media/back-icon-mask.6165c9d7.png",
+  "static/media/icon.png": "/static/media/icon.a78e4b51.png"
+}

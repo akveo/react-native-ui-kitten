@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NgdVersionService {
 
-  supportedVersions = [ '3.1.4' ];
+  supportedVersions = [
+    '3.x',
+    '4.x',
+  ];
 
   getKittenVersion(): string {
     return require('../../../../../package.json').version;
