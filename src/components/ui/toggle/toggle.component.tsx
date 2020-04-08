@@ -323,6 +323,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: RTLService.select(value, -value),
       duration: 150,
       easing: Easing.linear,
+      useNativeDriver: false,
     }).start(() => {
       this.thumbTranslateAnimationActive = false;
       callback();
@@ -334,6 +335,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: value,
       duration: 150,
       easing: Easing.linear,
+      useNativeDriver: false,
     }).start(callback);
   };
 
@@ -342,6 +344,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: value,
       duration: 200,
       easing: Easing.linear,
+      useNativeDriver: false,
     }).start(callback);
   };
 

@@ -11,10 +11,7 @@ import {
 
 export const DEFAULT_CONFIG: AnimationConfig = {
   cycles: 1,
-  useNativeDriver: Platform.select({
-    default: true,
-    web: false,
-  }),
+  useNativeDriver: Platform.OS !== 'web',
 };
 
 /**

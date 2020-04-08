@@ -112,6 +112,7 @@ export class MenuGroup extends React.Component<MenuGroupProps, State> {
     return Animated.timing(this.expandAnimation, {
       toValue: toValue,
       duration: CHEVRON_ANIM_DURATION,
+      useNativeDriver: false,
     });
   };
 

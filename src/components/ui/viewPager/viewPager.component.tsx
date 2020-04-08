@@ -14,6 +14,7 @@ import {
   PanResponderCallbacks,
   PanResponderGestureState,
   PanResponderInstance,
+  Platform,
   StyleSheet,
   View,
   ViewProps,
@@ -157,6 +158,7 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
       toValue: RTLService.select(-params.offset, params.offset),
       easing: Easing.linear,
       duration: animationDuration,
+      useNativeDriver: Platform.OS !== 'web',
     });
   };
 

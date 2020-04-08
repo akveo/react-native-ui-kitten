@@ -9,6 +9,7 @@ import {
   Animated,
   Easing,
   LayoutChangeEvent,
+  Platform,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -91,6 +92,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
       toValue: RTLService.select(params.offset, -params.offset),
       duration: 200,
       easing: Easing.linear,
+      useNativeDriver: Platform.OS !== 'web',
     });
   };
 

@@ -24,11 +24,11 @@
     "react-native-eva-icons": "1.1.0"
   },
   "devDependencies": {
-    "react-native-svg": "^9.4.0"
+    "react-native-svg": "9.13.6"
   },
   "peerDependencies": {
     "@ui-kitten/components": "4.4.1",
-    "react-native-svg": "^9.4.0"
+    "react-native-svg": "9.13.6"
   },
   "sideEffects": false
 }
