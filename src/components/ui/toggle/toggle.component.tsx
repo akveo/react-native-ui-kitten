@@ -283,6 +283,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: I18nLayoutService.select(value, -value),
       duration: 150,
       easing: Easing.linear,
+      useNativeDriver: true,
     }).start(() => {
       this.thumbTranslateAnimationActive = false;
       callback();
@@ -294,6 +295,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: value,
       duration: 150,
       easing: Easing.linear,
+      useNativeDriver: true,
     }).start(callback);
   };
 
@@ -302,6 +304,7 @@ export class ToggleComponent extends React.Component<ToggleProps> implements Pan
       toValue: value,
       duration: 200,
       easing: Easing.linear,
+      useNativeDriver: true,
     }).start(callback);
   };
 

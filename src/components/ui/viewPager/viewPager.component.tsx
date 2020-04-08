@@ -160,6 +160,7 @@ export class ViewPager extends React.Component<ViewPagerProps> implements PanRes
       toValue: I18nLayoutService.select(-params.offset, params.offset),
       easing: Easing.linear,
       duration: animationDuration,
+      useNativeDriver: true,
     });
   };
 

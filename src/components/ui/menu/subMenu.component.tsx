@@ -79,6 +79,7 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
   private subItemsExpandAnimate = (toValue: number): void => {
     Animated.spring(this.subItemsAnimation, {
       toValue: toValue,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -86,6 +87,7 @@ class SubMenuComponent extends React.Component<SubMenuProps, ComponentState> {
     Animated.timing(this.iconAnimation, {
       toValue: toValue,
       duration: 200,
+      useNativeDriver: true,
     }).start();
   };
 

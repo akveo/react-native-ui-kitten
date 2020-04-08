@@ -314,6 +314,7 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
     return Animated.timing(this.iconAnimation, {
       toValue: toValue,
       duration: 200,
+      useNativeDriver: true,
     });
   };
 
