@@ -319,6 +319,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Divider',
+        icon: 'icon.svg',
+        source: [
+          'Divider',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Icon',
         icon: 'icon.svg',
         source: [
