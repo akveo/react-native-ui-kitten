@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@eva-design/eva": "1.4.0",
+    "@eva-design/eva": "2.0.0-alpha.1",
     "@ui-kitten/components": "4.4.1",
     "@ui-kitten/eva-icons": "4.4.1",
     "react": "16.11.0",

@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@eva-design/eva": "^1.4.0",
-    "@eva-design/material": "^1.4.0",
+    "@eva-design/eva": "^2.0.0-alpha.1",
+    "@eva-design/material": "^2.0.0-alpha.1",
     "@types/gulp": "ts3.8",
     "@types/gulp-replace": "ts3.8",
     "@types/jest": "ts3.8",
