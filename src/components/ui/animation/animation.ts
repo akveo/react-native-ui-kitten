@@ -8,6 +8,7 @@ import {
   Animated,
   Platform,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
 
 export const DEFAULT_CONFIG: AnimationConfig = {
   cycles: 1,
