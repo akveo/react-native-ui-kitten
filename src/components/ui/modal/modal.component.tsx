@@ -13,21 +13,19 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  ModalPresentingConfig,
-  ModalService,
-} from '@kitten/theme';
-import {
+  Frame,
   MeasureElement,
   MeasuringElement,
-} from '../measure/measure.component';
-import {
-  Frame,
   Point,
-} from '../measure/type';
+} from '../../devsupport';
+import {
+  ModalPresentingConfig,
+  ModalService,
+} from '../../theme';
 
 export interface ModalProps extends ViewProps, ModalPresentingConfig {
-  visible: boolean;
-  children: React.ReactNode;
+  visible?: boolean;
+  children?: React.ReactNode;
 }
 
 export type ModalElement = React.ReactElement<ModalProps>;
@@ -37,10 +35,8 @@ interface State {
   forceMeasure: boolean;
 }
 
-const POINT_OUTSCREEN: Point = new Point(-999, -999);
-
 /**
- * `Modal` component is a wrapper than presents content above an enclosing view.
+ * A wrapper that presents content above an enclosing view.
  *
  * @extends React.Component
  *
@@ -48,20 +44,24 @@ const POINT_OUTSCREEN: Point = new Point(-999, -999);
  *
  * @method {() => void} hide - Sets modal invisible.
  *
- * @property {boolean} visible - Determines whether component is visible. By default is false.
+ * @property {ReactNode} children - Component to render within the modal.
  *
- * @property {ReactElement | ReactElement[]} children - Determines component's children.
+ * @property {boolean} visible - Whether component is visible.
+ * Defaults to false.
  *
- * @property {StyleProp<ViewStyle>} backdropStyle - Determines the style of backdrop.
+ * @property {() => void} onBackdropPress - Called when the modal is visible and the view below it was touched.
+ * Useful when needed to close the modal on outside touches.
  *
- * @property {() => void} onBackdropPress - Determines component's behavior when the user is
- * tapping on back-drop.
+ * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
  * @overview-example ModalSimpleUsage
+ * Modals accept content views as child elements and are displayed in the screen center.
+ * To display a modal, a `visible` property should be used.
  *
  * @overview-example ModalWithBackdrop
+ * To configure underlying view, `backdropStyle` and `onBackdropPress` properties may be used.
  */
 export class Modal extends React.PureComponent<ModalProps, State> {
 
@@ -71,7 +71,7 @@ export class Modal extends React.PureComponent<ModalProps, State> {
   };
 
   private modalId: string;
-  private contentPosition: Point = POINT_OUTSCREEN;
+  private contentPosition: Point = Point.outscreen();
 
   private get contentFlexPosition(): FlexStyle {
     const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});

@@ -9,7 +9,11 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { StyleType } from '@kitten/theme';
+import {
+  EvaProp,
+  StyleType,
+} from '../../theme';
+import { Divider } from '../divider/divider.component';
 import {
   CalendarHeader,
   CalendarHeaderElement,
@@ -35,7 +39,6 @@ import {
   CalendarDataService,
   DateBatch,
 } from './service/calendarData.service';
-import { Divider } from '../divider/divider.component';
 
 export interface BaseCalendarProps<D = Date> extends ViewProps {
   min?: D;
@@ -49,7 +52,7 @@ export interface BaseCalendarProps<D = Date> extends ViewProps {
   renderDay?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderMonth?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
   renderYear?: (info: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
-  themedStyle?: StyleType;
+  eva?: EvaProp;
 }
 
 export type BaseCalendarElement<D> = React.ReactElement<BaseCalendarProps<D>>;
@@ -82,18 +85,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     viewMode: this.props.startView,
     visibleDate: this.dateService.getMonthStart(this.selectedDate()),
   };
-
-  protected abstract createDates(date: D): DateBatch<D>;
-
-  protected abstract selectedDate(): D;
-
-  protected abstract onDateSelect(item: D): void;
-
-  protected abstract isDateSelected(date: D): boolean;
-
-  protected abstract shouldUpdateDate(props: CalendarPickerCellProps<D>,
-                                      nextProps: CalendarPickerCellProps<D>): boolean;
-
   protected dataService: CalendarDataService<D> = new CalendarDataService(this.dateService);
 
   protected get dateService(): DateService<D> {
@@ -114,6 +105,76 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
       visibleDate: this.dateService.today(),
     });
   };
+
+  public getCalendarStyle = (source: StyleType) => {
+    return {
+      container: {
+        width: source.width,
+        paddingVertical: source.paddingVertical,
+        borderColor: source.borderColor,
+        borderWidth: source.borderWidth,
+        borderRadius: source.borderRadius,
+      },
+      headerContainer: {
+        paddingHorizontal: source.headerPaddingHorizontal,
+        paddingVertical: source.headerPaddingVertical,
+      },
+      title: {
+        fontSize: source.titleFontSize,
+        fontWeight: source.titleFontWeight,
+        color: source.titleColor,
+        fontFamily: source.titleFontFamily,
+      },
+      icon: {
+        width: source.iconWidth,
+        height: source.iconHeight,
+        tintColor: source.iconTintColor,
+      },
+      divider: {
+        marginVertical: source.dividerMarginVertical,
+      },
+      daysHeaderContainer: {
+        marginHorizontal: source.rowMarginHorizontal,
+      },
+      row: {
+        minHeight: source.rowMinHeight,
+        marginHorizontal: source.rowMarginHorizontal,
+      },
+    };
+  };
+
+  public isDayDisabled = ({ date }: CalendarDateInfo<D>): boolean => {
+    const minDayStart: D = this.dateService.createDate(
+      this.dateService.getYear(this.min),
+      this.dateService.getMonth(this.min),
+      this.dateService.getDate(this.min),
+    );
+
+    const maxDayStart: D = this.dateService.createDate(
+      this.dateService.getYear(this.max),
+      this.dateService.getMonth(this.max),
+      this.dateService.getDate(this.max),
+    );
+
+    const fitsFilter: boolean = this.props.filter && !this.props.filter(date) || false;
+
+    return !this.dateService.isBetweenIncludingSafe(date, minDayStart, maxDayStart) || fitsFilter;
+  };
+
+  public isDayToday = ({ date }: CalendarDateInfo<D>): boolean => {
+    return this.dateService.isSameDaySafe(date, this.dateService.today());
+  };
+
+  protected abstract createDates(date: D): DateBatch<D>;
+
+  protected abstract selectedDate(): D;
+
+  protected abstract onDateSelect(item: D): void;
+
+  protected abstract isDateSelected(date: D): boolean;
+
+  protected abstract shouldUpdateDate(props: CalendarPickerCellProps<D>,
+                                      nextProps: CalendarPickerCellProps<D>): boolean;
 
   private onDaySelect = ({ date }: CalendarDateInfo<D>): void => {
     this.onDateSelect(date);
@@ -163,49 +224,10 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     });
   };
 
-  public getCalendarStyle = (source: StyleType): StyleType => {
-    return {
-      container: {
-        width: source.width,
-        paddingVertical: source.paddingVertical,
-        borderColor: source.borderColor,
-        borderWidth: source.borderWidth,
-        borderRadius: source.borderRadius,
-      },
-      headerContainer: {
-        paddingHorizontal: source.headerPaddingHorizontal,
-        paddingVertical: source.headerPaddingVertical,
-      },
-      title: {
-        fontSize: source.titleFontSize,
-        fontWeight: source.titleFontWeight,
-        lineHeight: source.titleLineHeight,
-        color: source.titleColor,
-        fontFamily: source.titleFontFamily,
-      },
-      icon: {
-        width: source.iconWidth,
-        height: source.iconHeight,
-        tintColor: source.iconTintColor,
-      },
-      divider: {
-        marginVertical: source.dividerMarginVertical,
-      },
-      daysHeaderContainer: {
-        marginHorizontal: source.rowMarginHorizontal,
-      },
-      row: {
-        minHeight: source.rowMinHeight,
-        marginHorizontal: source.rowMarginHorizontal,
-      },
-    };
-  };
-
   private getWeekdayStyle = (source: StyleType): StyleType => {
     return {
       fontSize: source.weekdayTextFontSize,
       fontWeight: source.weekdayTextFontWeight,
-      lineHeight: source.weekdayTextLineHeight,
       color: source.weekdayTextColor,
       fontFamily: source.weekdayTextFontFamily,
     };
@@ -223,24 +245,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return this.dateService.isSameYearSafe(date, this.selectedDate());
   };
 
-  public isDayDisabled = ({ date }: CalendarDateInfo<D>): boolean => {
-    const minDayStart: D = this.dateService.createDate(
-      this.dateService.getYear(this.min),
-      this.dateService.getMonth(this.min),
-      this.dateService.getDate(this.min),
-    );
-
-    const maxDayStart: D = this.dateService.createDate(
-      this.dateService.getYear(this.max),
-      this.dateService.getMonth(this.max),
-      this.dateService.getDate(this.max),
-    );
-
-    const fitsFilter: boolean = this.props.filter && !this.props.filter(date) || false;
-
-    return !this.dateService.isBetweenIncludingSafe(date, minDayStart, maxDayStart) || fitsFilter;
-  };
-
   private isMonthDisabled = ({ date }: CalendarDateInfo<D>): boolean => {
     const minMonthStart: D = this.dateService.getMonthStart(this.min);
     const maxMonthStart: D = this.dateService.getMonthStart(this.max);
@@ -253,10 +257,6 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     const maxYearStart: D = this.dateService.getYearEnd(this.max);
 
     return !this.dateService.isBetweenIncludingSafe(date, minYearStart, maxYearStart);
-  };
-
-  public isDayToday = ({ date }: CalendarDateInfo<D>): boolean => {
-    return this.dateService.isSameDaySafe(date, this.dateService.today());
   };
 
   private isMonthToday = (date: CalendarDateInfo<D>): boolean => {
@@ -317,53 +317,53 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     return (
       <CalendarDateContent
         key={index}
-        textStyle={this.getWeekdayStyle(this.props.themedStyle)}>
+        textStyle={this.getWeekdayStyle(this.props.eva.style)}>
         {weekday}
       </CalendarDateContent>
     );
   };
 
-  private renderDayElement = ({ date }: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderDayElement = ({ date }: CalendarDateInfo<D>, evaStyle): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={style.container}
-        textStyle={style.text}>
+        style={evaStyle.container}
+        textStyle={evaStyle.text}>
         {this.dateService.format(date, FORMAT_DAY)}
       </CalendarDateContent>
     );
   };
 
-  private renderMonthElement = ({ date }: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderMonthElement = ({ date }: CalendarDateInfo<D>, evaStyle): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={style.container}
-        textStyle={style.text}>
+        style={evaStyle.container}
+        textStyle={evaStyle.text}>
         {this.dateService.format(date, FORMAT_MONTH)}
       </CalendarDateContent>
     );
   };
 
-  private renderYearElement = ({ date }: CalendarDateInfo<D>, style: StyleType): CalendarDateContentElement => {
+  private renderYearElement = ({ date }: CalendarDateInfo<D>, evaStyle): CalendarDateContentElement => {
     return (
       <CalendarDateContent
-        style={style.container}
-        textStyle={style.text}>
+        style={evaStyle.container}
+        textStyle={evaStyle.text}>
         {this.dateService.format(date, FORMAT_YEAR)}
       </CalendarDateContent>
     );
   };
 
-  private renderDayPickerElement = (date: D, style: StyleType): React.ReactFragment => {
+  private renderDayPickerElement = (date: D, evaStyle): React.ReactFragment => {
     return (
       <React.Fragment>
         <CalendarMonthHeader
-          style={style.daysHeaderContainer}
+          style={evaStyle.daysHeaderContainer}
           data={this.dateService.getDayOfWeekNames()}>
           {this.renderWeekdayElement}
         </CalendarMonthHeader>
-        <Divider style={style.divider}/>
+        <Divider style={evaStyle.divider}/>
         <CalendarPicker
-          rowStyle={style.row}
+          rowStyle={evaStyle.row}
           data={this.createDates(date)}
           onSelect={this.onDaySelect}
           isItemSelected={this.isDaySelected}
@@ -376,10 +376,10 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     );
   };
 
-  private renderMonthPickerElement = (date: D, style: StyleType): CalendarPickerElement<D> => {
+  private renderMonthPickerElement = (date: D, evaStyle): CalendarPickerElement<D> => {
     return (
       <CalendarPicker
-        rowStyle={style.row}
+        rowStyle={evaStyle.row}
         data={this.dataService.createMonthPickerData(date, PICKER_ROWS, PICKER_COLUMNS)}
         onSelect={this.onMonthSelect}
         isItemSelected={this.isMonthSelected}
@@ -415,22 +415,22 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
     }
   };
 
-  private renderFooterElement = (style: StyleType): React.ReactElement => {
+  private renderFooterElement = (evaStyle): React.ReactElement => {
     if (this.props.renderFooter) {
       return this.props.renderFooter();
     }
     return null;
   };
 
-  private renderHeaderElement = (style: StyleType): CalendarHeaderElement => {
+  private renderHeaderElement = (evaStyle): CalendarHeaderElement => {
     const titleSelector = this.props.title || this.createViewModeHeaderTitle;
 
     return (
       <CalendarHeader
-        style={style.headerContainer}
+        style={evaStyle.headerContainer}
         title={titleSelector(this.state.visibleDate, this.state.viewMode)}
-        titleStyle={style.title}
-        iconStyle={style.icon}
+        titleStyle={evaStyle.title}
+        iconStyle={evaStyle.icon}
         lateralNavigationAllowed={this.isHeaderNavigationAllowed()}
         onTitlePress={this.onPickerNavigationPress}
         onNavigationLeftPress={this.onHeaderNavigationLeftPress}
@@ -440,16 +440,16 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { style, themedStyle, ...restProps } = this.props;
-    const { container, ...componentStyle } = this.getCalendarStyle(themedStyle);
+    const { eva, style, ...viewProps } = this.props;
+    const evaStyle = this.getCalendarStyle(eva.style);
 
     return (
       <View
-        {...restProps}
-        style={[container, style]}>
-        {this.renderHeaderElement(componentStyle)}
-        {this.renderPickerElement(this.state.visibleDate, componentStyle)}
-        {this.renderFooterElement(componentStyle)}
+        {...viewProps}
+        style={[evaStyle.container, style]}>
+        {this.renderHeaderElement(evaStyle)}
+        {this.renderPickerElement(this.state.visibleDate, evaStyle)}
+        {this.renderFooterElement(evaStyle)}
       </View>
     );
   }

@@ -14,9 +14,6 @@
     "paths": {
       "@ui-kitten/*": [
         "./src/*"
-      ],
-      "@kitten/*": [
-        "./src/components/*"
       ]
     }
   },
@@ -29,7 +26,6 @@
     "./src/template-ts",
     "./src/showcases",
     "./**/*.spec.ts",
-    "./**/*.spec.tsx",
-    "./**/*.snap"
+    "./**/*.spec.tsx"
   ]
 }

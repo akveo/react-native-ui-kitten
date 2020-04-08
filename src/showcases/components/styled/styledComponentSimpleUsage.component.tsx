@@ -1,13 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import {
-  ApplicationProvider,
-  styled,
-} from '@ui-kitten/components';
-import {
-  light,
-  mapping,
-} from '@eva-design/eva';
+import { ApplicationProvider, styled } from '@ui-kitten/components';
+import { light, mapping } from '@eva-design/eva';
 
 /**
  * All UI Kitten components are based on `styled` component.
@@ -33,7 +27,7 @@ class StyledComponent extends React.Component {
 
   render() {
     return (
-      <TouchableOpacity style={this.props.themedStyle}/>
+      <TouchableOpacity style={this.props.eva.style}/>
     );
   }
 }

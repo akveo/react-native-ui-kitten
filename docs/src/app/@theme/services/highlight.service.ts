@@ -5,6 +5,6 @@ import * as hljs from 'highlight.js';
 export class NgdHighlightService {
 
   public highlight(code: string): string {
-    return hljs.highlightAuto(code, ['ts', 'html', 'scss', 'nginx']).value;
+    return hljs.highlightAuto(code, ['js', 'jsx', 'ts', 'tsx', 'json']).value;
   }
 }

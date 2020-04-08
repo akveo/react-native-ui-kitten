@@ -46,7 +46,8 @@ export const createDocAppNavigation = (showcasePath: string): string => {
 
 const createShowcaseRouteMap = (map: ShowcaseMap, component: string): ShowcaseRouteMap => {
   return map[component].showcases.reduce((componentShowcases, showcaseInfo: ShowcaseInfo) => {
-    const showcaseScreenStatement = `() => ShowcaseIFrame(${showcaseInfo.name}, '${showcaseInfo.routeName}')`;
+    const container = showcaseInfo.name.endsWith(`ThemingShowcase`) ? 'ShowcaseThemingIFrame' : 'ShowcaseIFrame';
+    const showcaseScreenStatement = `() => ${container}(${showcaseInfo.name}, '${showcaseInfo.routeName}')`;
     return { ...componentShowcases, [showcaseInfo.routeName]: showcaseScreenStatement };
   }, {});
 };
@@ -74,6 +75,7 @@ const createOutput = (imports: string[], statements: string[]): string => {
     'import { createBrowserApp } from \'@react-navigation/web\';',
     'import { createStackNavigator } from \'react-navigation-stack\';',
     'import { ShowcaseIFrame } from \'../components/showcaseIFrame.component\';',
+    'import { ShowcaseThemingIFrame } from \'../components/showcaseThemingIFrame.component\';',
     ...imports,
     '',
     ...statements,

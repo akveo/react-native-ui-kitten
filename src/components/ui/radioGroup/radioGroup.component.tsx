@@ -6,21 +6,27 @@
 
 import React from 'react';
 import {
-  StyleSheet,
   View,
   ViewProps,
 } from 'react-native';
+import { Overwrite } from 'utility-types';
+import { ChildrenWithProps } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@kitten/theme';
-import { RadioElement } from '../radio/radio.component';
+} from '../../theme';
+import {
+  RadioElement,
+  RadioProps,
+} from '../radio/radio.component';
 
-type ChildrenProp = RadioElement | RadioElement[];
+type RadioGroupStyledProps = Overwrite<StyledComponentProps, {
+  appearance?: 'default' | string;
+}>;
 
-export interface RadioGroupProps extends StyledComponentProps, ViewProps {
-  children: ChildrenProp;
+export interface RadioGroupProps extends ViewProps, RadioGroupStyledProps {
+  children?: ChildrenWithProps<RadioProps>;
   selectedIndex?: number;
   onChange?: (index: number) => void;
 }
@@ -28,15 +34,14 @@ export interface RadioGroupProps extends StyledComponentProps, ViewProps {
 export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
 
 /**
- * Renders a group of `Radio` buttons.
+ * Provides to select a single state from multiple options.
+ * RadioGroup should contain Radio components to provide a useful component.
  *
  * @extends React.Component
  *
- * @property {ReactElement<RadioProps> | ReactElement<RadioProps>[]} children - Determines radio buttons in group.
+ * @property {number} selectedIndex - Index of currently checked radio.
  *
- * @property {number} selectedIndex - Determines the index of selected button
- *
- * @property {(index: number) => void} onChange - Fires when selected radio is changed.
+ * @property {(number) => void} onChange - Called when one of the radios is pressed.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  *
@@ -51,12 +56,10 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   private onRadioChange = (index: number): void => {
-    if (this.props.onChange) {
-      this.props.onChange(index);
-    }
+    this.props.onChange && this.props.onChange(index);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { itemMarginVertical, ...containerParameters } = source;
 
     return {
@@ -67,7 +70,7 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
     };
   };
 
-  private renderRadioElements = (source: RadioElement | RadioElement[], style: StyleType): RadioElement[] => {
+  private renderRadioElements = (source: ChildrenWithProps<RadioProps>, style: StyleType): RadioElement[] => {
     return React.Children.map(source, (element: RadioElement, index: number): RadioElement => {
       return React.cloneElement(element, {
         key: index,
@@ -79,23 +82,19 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { themedStyle, style, children, ...derivedProps } = this.props;
-    const componentStyle: StyleType = this.getComponentStyle(themedStyle);
+    const { eva, style, children, ...viewProps } = this.props;
+    const evaStyle = this.getComponentStyle(eva.style);
 
-    const radioElements: RadioElement[] = this.renderRadioElements(children, componentStyle.item);
+    const radioElements: RadioElement[] = this.renderRadioElements(children, evaStyle.item);
 
     return (
       <View
-        {...derivedProps}
-        style={[componentStyle.container, styles.container, style]}>
+        {...viewProps}
+        style={[evaStyle.container, style]}>
         {radioElements}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);

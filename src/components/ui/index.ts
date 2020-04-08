@@ -3,8 +3,12 @@ export {
   Autocomplete,
   AutocompleteProps,
   AutocompleteElement,
-  AutocompleteOption,
 } from './autocomplete/autocomplete.component';
+export {
+  AutocompleteItem,
+  AutocompleteItemProps,
+  AutocompleteItemElement,
+} from './autocomplete/autocompleteItem.component';
 export {
   Avatar,
   AvatarProps,
@@ -39,13 +43,7 @@ export {
   Card,
   CardProps,
   CardElement,
-  CardFooterElement,
 } from './card/card.component';
-export {
-  CardHeader,
-  CardHeaderProps,
-  CardHeaderElement,
-} from './card/cardHeader.component';
 export {
   RangeCalendar,
   RangeCalendarProps,
@@ -75,21 +73,32 @@ export {
   Drawer,
   DrawerProps,
   DrawerElement,
-  DrawerHeaderElement,
 } from './drawer/drawer.component';
 export {
-  DrawerHeaderFooter,
-  DrawerHeaderFooterElement,
-  DrawerHeaderFooterProps,
-} from './drawer/drawerHeaderFooter.component';
+  DrawerGroup,
+  DrawerGroupProps,
+  DrawerGroupElement,
+} from './drawer/drawerGroup.component';
+export {
+  DrawerItem,
+  DrawerItemProps,
+  DrawerItemElement,
+} from './drawer/drawerItem.component';
 export {
   Select,
   SelectProps,
   SelectElement,
-  SelectOption,
-  KeyExtractorType,
 } from './select/select.component';
-export { SelectOptionType } from './select/selectOption.component';
+export {
+  SelectGroup,
+  SelectGroupProps,
+  SelectGroupElement,
+} from './select/selectGroup.component';
+export {
+  SelectItem,
+  SelectItemProps,
+  SelectItemElement,
+} from './select/selectItem.component';
 export {
   Icon,
   IconProps,
@@ -131,16 +140,15 @@ export {
   MenuElement,
 } from './menu/menu.component';
 export {
+  MenuGroup,
+  MenuGroupProps,
+  MenuGroupElement,
+} from './menu/menuGroup.component';
+export {
   MenuItem,
   MenuItemProps,
   MenuItemElement,
-  MenuItemType,
 } from './menu/menuItem.component';
-export {
-  SubMenu,
-  SubMenuElement,
-  SubMenuProps,
-} from './menu/subMenu.component';
 export {
   Modal,
   ModalProps,
@@ -150,13 +158,13 @@ export {
   OverflowMenu,
   OverflowMenuProps,
   OverflowMenuElement,
-  OverflowMenuItemType,
 } from './overflowMenu/overflowMenu.component';
 export {
   Popover,
   PopoverProps,
   PopoverElement,
 } from './popover/popover.component';
+export { PopoverPlacements } from './popover/type';
 export {
   Radio,
   RadioProps,
@@ -231,3 +239,4 @@ export {
   TranslationWidth,
   I18nConfig,
 } from './calendar/i18n/type';
+export { IndexPath } from '../devsupport';

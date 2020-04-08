@@ -2,7 +2,7 @@
 
 Starting from version 4.1, UI Kitten has built-in support for web sites using <a href='https://github.com/necolas/react-native-web' target='_blank'>React Native Web</a>. 
 
-<div class="note note-info">
+<div class="note note-warning">
   <div class="note-title">IMPORTANT</div>
   <div class="note-body">
   This has not yet been widely used in production and we consider this feature to be experimental. However, you can follow instructions below to configure your app running in browser.

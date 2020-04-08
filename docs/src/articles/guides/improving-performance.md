@@ -8,6 +8,9 @@ Install the additional metro configuration:
 
 ```bash
 npm i -D @ui-kitten/metro-config
+
+// Using Yarn?
+// yarn add -D @ui-kitten/metro-config
 ```
 
 Create **metro.config.js** at the root of your project if you don't have this file yet and place the following code:
@@ -30,8 +33,8 @@ Modify props passed to ApplicationProvider:
 
 ```jsx
 import React from 'react';
-import { ApplicationProvider } from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
 
 export default () => (
   <ApplicationProvider {...eva} theme={eva.light}>
@@ -39,7 +42,15 @@ export default () => (
   </ApplicationProvider>
 );
 ```
-Restart Metro Bundler if it is running to apply the changes.
+Shut down the current bundler and restart with clearing cache.
+
+```bash
+npm start -- --reset-cache
+
+// Using Expo?
+// expo start -c
+```
+
 
 <hr>
 

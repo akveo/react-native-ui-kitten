@@ -18,7 +18,7 @@ export const CalendarMomentShowcase = () => {
     <Calendar
       dateService={dateService}
       date={date}
-      onSelect={setDate}
+      onSelect={nextDate => setDate(nextDate)}
     />
   );
 };

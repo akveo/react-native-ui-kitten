@@ -11,7 +11,6 @@ import {
   useTheme,
 } from '../theme/theme.service';
 
-
 export type StyleType = Record<string, any>;
 export type Styles<T> = StyleSheet.NamedStyles<T>;
 

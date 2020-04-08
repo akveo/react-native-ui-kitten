@@ -1,40 +1,43 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Card,
-  CardHeader,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
-
-const Header = () => (
-  <CardHeader title='Maldives'/>
-);
+import { Card, Layout, Text } from '@ui-kitten/components';
 
 export const CardStatusesShowcase = () => (
-  <Layout>
+  <Layout style={styles.container} level='1'>
 
-    <Card style={styles.card} header={Header} status='success'>
-      <Text>
-        The Maldives, officially the Republic of Maldives, is a small country in South Asia,
-        located in the Arabian Sea of the Indian Ocean.
-        It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian continent
-      </Text>
+    <Card style={styles.card} status='primary'>
+      <Text>Primary</Text>
     </Card>
 
-    <Card style={styles.card} header={Header} status='danger'>
-      <Text>
-        The Maldives, officially the Republic of Maldives, is a small country in South Asia,
-        located in the Arabian Sea of the Indian Ocean.
-        It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian continent
-      </Text>
+    <Card style={styles.card} status='success'>
+      <Text>Success</Text>
+    </Card>
+
+    <Card style={styles.card} status='info'>
+      <Text>Info</Text>
+    </Card>
+
+    <Card style={styles.card} status='warning'>
+      <Text>Warning</Text>
+    </Card>
+
+    <Card style={styles.card} status='danger'>
+      <Text>Danger</Text>
+    </Card>
+
+    <Card style={styles.card} status='basic'>
+      <Text>Basic</Text>
     </Card>
 
   </Layout>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   card: {
-    marginVertical: 8,
+    margin: 2,
   },
 });

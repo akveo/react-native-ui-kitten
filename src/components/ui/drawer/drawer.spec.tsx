@@ -1,136 +1,139 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
 import {
   Image,
-  ImageSourcePropType,
+  ImageProps,
+  Text,
   TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
   render,
-  RenderAPI,
 } from 'react-native-testing-library';
 import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Drawer,
   DrawerProps,
-} from '../drawer/drawer.component';
-import { DrawerHeaderFooter } from './drawerHeaderFooter.component';
+} from './drawer.component';
 import {
-  MenuItemType,
-  MenuItem,
-} from '../menu/menuItem.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
+  DrawerItem,
+  DrawerItemProps,
+} from './drawerItem.component';
 
-const data: MenuItemType[] = [
-  { title: 'Item 1' },
-  { title: 'Item 2' },
-  { title: 'Item 3' },
-];
+describe('@drawer-item: component checks', () => {
 
-const Mock = (props?: DrawerProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
+  const TestDrawerItem = (props?: DrawerItemProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={theme}>
-      <Drawer data={data} {...props} />
+      theme={light}>
+      <DrawerItem {...props}/>
     </ApplicationProvider>
   );
-};
 
-const renderComponent = (props?: DrawerProps): RenderAPI => {
-  return render(
-    <Mock {...props}/>,
-  );
-};
+  it('should render text passed to title prop', () => {
+    const component = render(
+      <TestDrawerItem title='I love Babel'/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render component passed to title prop', () => {
+    const component = render(
+      <TestDrawerItem title={props => <Text {...props}>I love Babel</Text>}/>,
+    );
+
+    expect(component.queryByText('I love Babel')).toBeTruthy();
+  });
+
+  it('should render components passed to accessoryLeft or accessoryRight props', () => {
+    const AccessoryLeft = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
+      />
+    );
+
+    const AccessoryRight = (props): React.ReactElement<ImageProps> => (
+      <Image
+        {...props}
+        source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
+      />
+    );
+
+    const component = render(
+      <TestDrawerItem
+        accessoryLeft={AccessoryLeft}
+        accessoryRight={AccessoryRight}
+      />,
+    );
+
+    const [accessoryLeft, accessoryRight] = component.queryAllByType(Image);
+
+    expect(accessoryLeft).toBeTruthy();
+    expect(accessoryRight).toBeTruthy();
+
+    expect(accessoryLeft.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/star.png');
+    expect(accessoryRight.props.source.uri).toEqual('https://akveo.github.io/eva-icons/fill/png/128/home.png');
+  });
+
+  it('should call onPress', () => {
+    const onPress = jest.fn();
+    const component = render(
+      <TestDrawerItem onPress={onPress}/>,
+    );
+
+    fireEvent.press(component.queryByType(TouchableOpacity));
+
+    expect(onPress).toHaveBeenCalled();
+  });
+});
 
 describe('@drawer: component checks', () => {
 
-  it('* should render proper number of items', () => {
-    const component: RenderAPI = renderComponent();
+  const TestDrawer = (props?: DrawerProps) => (
+    <ApplicationProvider
+      mapping={mapping}
+      theme={light}>
+      <Drawer {...props}>
+        <DrawerItem/>
+        <DrawerItem/>
+      </Drawer>
+    </ApplicationProvider>
+  );
 
-    expect(component.getAllByType(MenuItem).length).toEqual(3);
-  });
-
-  it('* item should render title', () => {
-    const component: RenderAPI = renderComponent();
-
-    expect(component.getByText('Item 1')).toBeTruthy();
-    expect(component.getByText('Item 2')).toBeTruthy();
-    expect(component.getByText('Item 3')).toBeTruthy();
-  });
-
-  it('* item should render icon', () => {
-    const source: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
-    const icon = () => (
-      <Image testID='@drawer-item-icon' source={source}/>
+  it('should render 2 drawer items passed to children', () => {
+    const component = render(
+      <TestDrawer/>,
     );
 
-    const drawerData: MenuItemType[] = [
-      { title: 'Item 1', icon },
-      { title: 'Item 2', icon },
-      { title: 'Item 3', icon },
-    ];
-
-    const component: RenderAPI = renderComponent({ data: drawerData, onSelect: () => 1 });
-
-    expect(component.getAllByTestId('@drawer-item-icon').length).toEqual(3);
+    const items = component.queryAllByType(DrawerItem);
+    expect(items.length).toEqual(2);
   });
 
-  it('* item should render accessory view', () => {
-    const source: ImageSourcePropType = { uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' };
-
-    const accessory = () => (
-      <Image testID='@drawer-item-accessory' source={source}/>
+  it('should render component passed to header prop', () => {
+    const component = render(
+      <TestDrawer header={() => <Text>I love Babel</Text>}/>,
     );
 
-    const drawerData: MenuItemType[] = [
-      { title: 'Item 1', accessory },
-      { title: 'Item 2', accessory },
-      { title: 'Item 3', accessory },
-    ];
-
-    const component: RenderAPI = renderComponent({ data: drawerData, onSelect: () => 1 });
-
-    expect(component.getAllByTestId('@drawer-item-accessory').length).toEqual(3);
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
-  it('* should render header', () => {
-    const header = () => (
-      <DrawerHeaderFooter testID='@drawer-header'/>
+  it('should render component passed to footer prop', () => {
+    const component = render(
+      <TestDrawer footer={() => <Text>I love Babel</Text>}/>,
     );
 
-    const component: RenderAPI = renderComponent({ data, header, onSelect: () => 1 });
-
-    expect(component.getAllByTestId('@drawer-header').length).toBeTruthy();
-  });
-
-  it('* should render footer', () => {
-    const footer = () => (
-      <DrawerHeaderFooter testID='@drawer-footer'/>
-    );
-
-    const component: RenderAPI = renderComponent({ data, footer, onSelect: () => 1 });
-
-    expect(component.getAllByTestId('@drawer-footer').length).toBeTruthy();
-  });
-
-  it('* should call onSelect', () => {
-    const pressIndex: number = 1;
-
-    const onSelect = jest.fn((index: number) => {
-      expect(index).toEqual(pressIndex);
-    });
-
-    const component: RenderAPI = renderComponent({ data, onSelect });
-
-    fireEvent.press(component.getAllByType(TouchableOpacity)[pressIndex]);
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
 
 });

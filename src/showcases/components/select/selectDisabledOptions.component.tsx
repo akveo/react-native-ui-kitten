@@ -1,37 +1,27 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Select,
-} from '@ui-kitten/components';
-
-const data = [
-  { text: 'Option 1' },
-  {
-    text: 'Option 2',
-    disabled: true,
-  },
-  { text: 'Option 3' },
-];
+import { Layout, Select, SelectItem } from '@ui-kitten/components';
 
 export const SelectDisabledOptionsShowcase = () => {
 
-  const [selectedOption, setSelectedOption] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = React.useState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
       <Select
-        data={data}
-        selectedOption={selectedOption}
-        onSelect={setSelectedOption}
-      />
+        selectedIndex={selectedIndex}
+        onSelect={index => setSelectedIndex(index)}>
+        <SelectItem title='Option 1'/>
+        <SelectItem disabled={true} title='Option 2'/>
+        <SelectItem title='Option 3'/>
+      </Select>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 228,
+    minHeight: 128,
   },
 });
 

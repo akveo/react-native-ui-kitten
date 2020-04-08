@@ -7,7 +7,7 @@
 </button>
 
 <nb-tabset class="tabs-container">
-  <nb-tab *ngFor="let example of examples" tabTitle="{{ example.extension }}" [active]="example.active">
+  <nb-tab *ngFor="let example of examples" tabTitle="Code" [active]="example.active">
     <ngd-code-block [code]="example.code"></ngd-code-block>
   </nb-tab>
 </nb-tabset>

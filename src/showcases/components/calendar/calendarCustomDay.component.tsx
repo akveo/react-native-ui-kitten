@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Calendar,
-  Text,
-} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Calendar, Text } from '@ui-kitten/components';
 
 const DayCell = ({ date }, style) => (
   <View
@@ -20,12 +14,12 @@ const DayCell = ({ date }, style) => (
 
 export const CalendarCustomDayShowcase = () => {
 
-  const [selectedDate, setSelectedDate] = React.useState(null);
+  const [date, setDate] = React.useState(null);
 
   return (
     <Calendar
-      date={selectedDate}
-      onSelect={setSelectedDate}
+      date={date}
+      onSelect={nextDate => setDate(nextDate)}
       renderDay={DayCell}
     />
   );

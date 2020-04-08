@@ -1,39 +1,32 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Select,
-} from '@ui-kitten/components';
-
-const data = [
-  { text: 'Option 1' },
-  { text: 'Option 2' },
-  { text: 'Option 3' },
-  { text: 'Option 4' },
-];
+import { Layout, Select, SelectItem } from '@ui-kitten/components';
 
 export const SelectStatesShowcase = () => {
 
-  const [selectedOption, setSelectedOption] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = React.useState();
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <Select
         style={styles.select}
-        data={data}
         placeholder='Active'
-        selectedOption={selectedOption}
-        onSelect={setSelectedOption}
-      />
+        selectedIndex={selectedIndex}
+        onSelect={index => setSelectedIndex(index)}>
+        <SelectItem title='Option 1'/>
+        <SelectItem title='Option 2'/>
+        <SelectItem title='Option 3'/>
+      </Select>
 
       <Select
         style={styles.select}
-        data={data}
         placeholder='Disabled'
-        disabled={true}
-        onSelect={setSelectedOption}
-      />
+        disabled={true}>
+        <SelectItem title='Option 1'/>
+        <SelectItem title='Option 2'/>
+        <SelectItem title='Option 3'/>
+      </Select>
 
     </Layout>
   );
@@ -42,10 +35,10 @@ export const SelectStatesShowcase = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 228,
+    height: 128,
   },
   select: {
     flex: 1,
-    marginHorizontal: 4,
+    marginHorizontal: 2,
   },
 });

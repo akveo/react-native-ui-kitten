@@ -1,54 +1,39 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import React from 'react';
+import { Text } from 'react-native';
+import { render } from 'react-native-testing-library';
 import {
-  render,
-  shallow,
-  RenderAPI,
-} from 'react-native-testing-library';
-import {
-  ApplicationProvider,
-  ApplicationProviderProps,
-} from '@kitten/theme';
+  light,
+  mapping,
+} from '@eva-design/eva';
+import { ApplicationProvider } from '../../theme';
 import {
   Layout,
   LayoutProps,
 } from './layout.component';
-import {
-  mapping,
-  theme,
-} from '../support/tests';
 
-const Mock = (props?: LayoutProps): React.ReactElement<ApplicationProviderProps> => {
-  return (
+describe('@layout: component checks', () => {
+
+  const TestLayout = (props?: LayoutProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={theme}>
+      theme={light}>
       <Layout {...props} />
     </ApplicationProvider>
   );
-};
 
-const renderComponent = (props?: LayoutProps): RenderAPI => {
-  return render(
-    <Mock {...props}/>,
-  );
-};
+  it('should render component passed to children', () => {
+    const component = render(
+      <TestLayout>
+        <Text>I love Babel</Text>
+      </TestLayout>,
+    );
 
-describe('@layout: matches snapshot', () => {
-
-  it('default', () => {
-    const component: RenderAPI = renderComponent();
-
-    const { output } = shallow(component.getByType(Layout));
-
-    expect(output).toMatchSnapshot();
+    expect(component.queryByText('I love Babel')).toBeTruthy();
   });
-
-  it('with styles', () => {
-    const component: RenderAPI = renderComponent({ style: { height: 300 } });
-
-    const { output } = shallow(component.getByType(Layout));
-
-    expect(output).toMatchSnapshot();
-  });
-
 });
