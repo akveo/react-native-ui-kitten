@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>icon/light/component/radio button</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/light/component/radio-button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M32.5,47 C24.4918711,47 18,40.5081289 18,32.5 C18,24.4918711 24.4918711,18 32.5,18 C40.5081289,18 47,24.4918711 47,32.5 C47,40.5081289 40.5081289,47 32.5,47 Z" id="Mask" stroke="#FF7020" stroke-width="2" fill="#FDDCB9"></path>
+        <circle id="Oval-2" fill="#FF881E" cx="32.5" cy="32.5" r="9.5"></circle>
+        <circle id="Oval-2" fill="#FF881E" cx="32.5" cy="32.5" r="9.5"></circle>
+        <path d="M25,38.4448001 C26.5861319,39.6161524 28.5458877,40.3083183 30.6668676,40.3083183 C35.9499258,40.3083183 40.2326908,36.0138642 40.2326908,30.7163865 C40.2326908,28.574414 39.5325042,26.5964252 38.3491189,25 C40.5710084,26.7014356 42,29.3556262 42,32.4080682 C42,37.7055458 37.7172351,42 32.4341768,42 C29.4325351,42 26.753798,40.6137075 25,38.4448001 Z" id="Combined-Shape" fill="#FF7020"></path>
+    </g>
+</svg>

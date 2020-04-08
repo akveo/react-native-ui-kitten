@@ -1,0 +1,13 @@
+{
+  "background_color": "#ffffff",
+  "description": "UI Kitten Documentation Showcases",
+  "dir": "auto",
+  "display": "standalone",
+  "lang": "en",
+  "name": "UI Kitten Showcases",
+  "orientation": "portrait",
+  "prefer_related_applications": true,
+  "related_applications": [],
+  "short_name": "UI Kitten Showcases",
+  "start_url": "."
+}

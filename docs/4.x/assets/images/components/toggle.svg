@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>icon/component/toogle</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/component/toogle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#FCAF5C" x="2" y="13" width="60" height="33" rx="16.5"></rect>
+        <path d="M61.8800168,27.5 C61.9592319,28.1555973 62,28.8230377 62,29.5 C62,38.6126984 54.6126984,46 45.5,46 L18.5,46 C9.38730163,46 2,38.6126984 2,29.5 C2,28.8230377 2.04076813,28.1555973 2.11998319,27.5 C3.10709468,35.669503 10.0642639,42 18.5,42 L45.5,42 C53.9357361,42 60.8929053,35.669503 61.8800168,27.5 Z" id="Combined-Shape" fill="#FF881E"></path>
+        <rect id="Rectangle" stroke="#FF7020" stroke-width="2" x="3" y="14" width="58" height="31" rx="15.5"></rect>
+        <circle id="Oval" stroke="#FF7020" stroke-width="2" fill="#FEF3E7" cx="45.5" cy="29.5" r="10.5"></circle>
+        <ellipse id="Oval-2-Copy-2" fill="#FDDCB9" cx="32" cy="55.5" rx="20" ry="2.5"></ellipse>
+        <path d="M48.1522234,26.46204 C48.4452186,26.0014315 49.0622477,25.8617285 49.5303964,26.1500047 C49.9985451,26.4382809 50.140535,27.045372 49.8475397,27.5059805 L45.7166633,34 L41.2928889,29.6474762 C40.9023704,29.2632475 40.9023704,28.6402896 41.2928889,28.2560609 C41.6834074,27.8718322 42.316563,27.8718322 42.7070815,28.2560609 L45.3542702,30.8606133 L48.1522234,26.46204 Z" id="Path-5" fill="#FF7020" fill-rule="nonzero"></path>
+    </g>
+</svg>
