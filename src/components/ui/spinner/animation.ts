@@ -8,6 +8,7 @@ import {
   Animated,
   Easing,
   EasingFunction,
+  Platform,
   ViewStyle,
 } from 'react-native';
 import {
@@ -34,6 +35,7 @@ const DEFAULT_CONFIG: SpinnerAnimationConfig = {
   duration: 2400,
   easing: Easing.linear,
   cycles: -1,
+  useNativeDriver: Platform.OS !== 'web',
 };
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
