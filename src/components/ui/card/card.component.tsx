@@ -169,6 +169,9 @@ class CardComponent extends React.Component<CardProps> {
       accentStyle: headerStyles.accent,
       titleStyle: headerStyles.title,
       descriptionStyle: headerStyles.description,
+      onPress: this.props.onPress,
+      onPressIn: this.onPressIn,
+      onPressOut: this.onPressOut,
     });
   };
 
