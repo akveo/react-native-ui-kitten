@@ -1,55 +1,57 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Input,
-  Layout,
-} from '@ui-kitten/components';
+import { Input } from '@ui-kitten/components';
 
-const useInputChanges = (initialValue = '') => {
+const useInputState = (initialValue = '') => {
   const [value, setValue] = React.useState(initialValue);
-  return {
-    value,
-    onChangeText: setValue,
-  };
+  return { value, onChangeText: setValue };
 };
 
 export const InputSizeShowcase = () => {
 
-  const smallInputChanges = useInputChanges();
-  const mediumInputChanges = useInputChanges();
-  const largeInputChanges = useInputChanges();
+  const smallInputState = useInputState();
+  const mediumInputState = useInputState();
+  const largeInputState = useInputState();
+  const multilineInputState = useInputState();
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Input
         style={styles.input}
         size='small'
         placeholder='Small'
-        {...smallInputChanges}
+        {...smallInputState}
       />
 
       <Input
         style={styles.input}
         size='medium'
         placeholder='Medium'
-        {...mediumInputChanges}
+        {...mediumInputState}
       />
 
       <Input
         style={styles.input}
         size='large'
         placeholder='Large'
-        {...largeInputChanges}
+        {...largeInputState}
       />
 
-    </Layout>
+      <Input
+        multiline={true}
+        textStyle={{ minHeight: 64 }}
+        placeholder='Multiline'
+        {...multilineInputState}
+      />
+
+    </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    margin: 8,
+    marginVertical: 2,
   },
 });
 

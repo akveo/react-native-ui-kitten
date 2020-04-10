@@ -1,22 +1,18 @@
 import React from 'react';
-import { Menu } from '@ui-kitten/components';
-
-const data = [
-  { title: 'Item 1' },
-  { title: 'Item 2' },
-  { title: 'Item 3' },
-  { title: 'Item 4' },
-];
+import { IndexPath, Menu, MenuItem } from '@ui-kitten/components';
 
 export const MenuSimpleUsageShowcase = () => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
 
   return (
     <Menu
-      data={data}
       selectedIndex={selectedIndex}
-      onSelect={setSelectedIndex}
-    />
+      onSelect={index => setSelectedIndex(index)}>
+      <MenuItem title='Users'/>
+      <MenuItem title='Orders'/>
+      <MenuItem title='Transactions'/>
+      <MenuItem title='Settings'/>
+    </Menu>
   );
 };

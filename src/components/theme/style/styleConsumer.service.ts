@@ -60,10 +60,10 @@ export class StyleConsumerService {
     return { appearance, ...variants, ...states };
   }
 
-  public withStyledProps<P extends object>(source: P,
+  public createStyleProp<P extends object>(source: P,
                                            style: StyleType,
                                            theme: ThemeType,
-                                           interaction: Interaction[]): P & StyledComponentProps {
+                                           interaction: Interaction[]): StyleType {
 
     const styleInfo: StyleInfo = this.getStyleInfo(source, interaction);
 
@@ -80,13 +80,12 @@ export class StyleConsumerService {
 
       console.warn(message);
 
-      return this.withStyledProps({ ...source, ...this.createDefaultProps() }, style, theme, interaction);
+      return this.createStyleProp({ ...source, ...this.createDefaultProps() }, style, theme, interaction);
     }
 
     const mapping: StyleType = this.withValidParameters(generatedMapping);
-    const themedStyle: StyleType = StyleService.createThemedEntry(mapping, theme);
 
-    return { ...source, theme, themedStyle };
+    return StyleService.createThemedEntry(mapping, theme);
   }
 
   private getGeneratedStyleMapping<P extends StyledComponentProps>(style: StyleType, info: StyleInfo): StyleType {

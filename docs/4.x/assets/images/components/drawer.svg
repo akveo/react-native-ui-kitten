@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>icon/component/Drawer</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/component/Drawer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M7,7 L57,7 C58.1045695,7 59,7.8954305 59,9 L59,19 C59,20.1045695 58.1045695,21 57,21 L7,21 C5.8954305,21 5,20.1045695 5,19 L5,9 C5,7.8954305 5.8954305,7 7,7 Z" id="Rectangle-2" fill="#FDDCB9"></path>
+        <path d="M7,19 L57,19 C58.1045695,19 59,19.8954305 59,21 L59,31 C59,32.1045695 58.1045695,33 57,33 L7,33 C5.8954305,33 5,32.1045695 5,31 L5,21 C5,19.8954305 5.8954305,19 7,19 Z" id="Rectangle-2-Copy" fill="#FCAF5C"></path>
+        <path d="M7,31 L57,31 C58.1045695,31 59,31.8954305 59,33 L59,43 C59,44.1045695 58.1045695,45 57,45 L7,45 C5.8954305,45 5,44.1045695 5,43 L5,33 C5,31.8954305 5.8954305,31 7,31 Z" id="Rectangle-2-Copy-2" fill="#FDDCB9"></path>
+        <path d="M7,43 L57,43 C58.1045695,43 59,43.8954305 59,45 L59,55 C59,56.1045695 58.1045695,57 57,57 L7,57 C5.8954305,57 5,56.1045695 5,55 L5,45 C5,43.8954305 5.8954305,43 7,43 Z" id="Rectangle-2-Copy-2" fill="#FDDCB9"></path>
+        <rect id="Rectangle-2" fill="#FEF3E7" x="5" y="7" width="50" height="14" rx="2"></rect>
+        <rect id="Rectangle-2-Copy" fill="#FDDCB9" x="6" y="19" width="49" height="14" rx="2"></rect>
+        <rect id="Rectangle-2-Copy-2" fill="#FEF3E7" x="5" y="31" width="50" height="14" rx="2"></rect>
+        <rect id="Rectangle-2-Copy-2" fill="#FEF3E7" x="5" y="43" width="50" height="14" rx="2"></rect>
+        <path d="M7,9 L7,19 L57,19 L57,9 L7,9 Z M7,7 L57,7 C58.1045695,7 59,7.8954305 59,9 C59,17 59,21 59,21 L7,21 C5.8954305,21 5,20.1045695 5,19 L5,9 C5,7.8954305 5.8954305,7 7,7 Z" id="Rectangle-2" fill="#FF7020"></path>
+        <path d="M7,21 L7,31 L57,31 L57,21 L7,21 Z M5,19 L57,19 C58.1045695,19 59,19.8954305 59,21 C59,29 59,33 59,33 C23,33 5,33 5,33 C5,33 5,19 5,19 Z" id="Rectangle-2-Copy" fill="#FF7020"></path>
+        <path d="M7,33 L7,43 L57,43 L57,33 L7,33 Z M7,31 L57,31 C58.1045695,31 59,31.8954305 59,33 L59,43 C59,44.1045695 58.1045695,45 57,45 L7,45 C5.8954305,45 5,44.1045695 5,43 L5,33 C5,31.8954305 5.8954305,31 7,31 Z" id="Rectangle-2-Copy-2" fill="#FF7020"></path>
+        <path d="M7,45 L7,55 L57,55 L57,45 L7,45 Z M59,43 L59,55 C59,56.1045695 58.1045695,57 57,57 L7,57 C5.8954305,57 5,56.1045695 5,55 L5,43 C5,43 59,43 59,43 Z" id="Rectangle-2-Copy-2" fill="#FF7020"></path>
+        <path d="M15.1520017,23.4700011 C15.444712,23.0016645 16.0616624,22.8592914 16.5299989,23.1520017 C16.9983355,23.444712 17.1407086,24.0616624 16.8479983,24.5299989 L13.679029,29.6003498 L10.290079,26.184262 C9.90111517,25.7921835 9.90364014,25.1590235 10.2957187,24.7700597 C10.6877972,24.3810959 11.3209572,24.3836208 11.709921,24.7756994 L13.320971,26.3996502 L15.1520017,23.4700011 Z" id="Path-4" fill="#FF7020"></path>
+        <circle id="Oval-3" fill="#FCAF5C" cx="13" cy="38" r="3"></circle>
+        <circle id="Oval-3" fill="#FCAF5C" cx="13" cy="50" r="3"></circle>
+        <circle id="Oval-3" fill="#FCAF5C" cx="13" cy="14" r="3"></circle>
+    </g>
+</svg>

@@ -144,19 +144,18 @@ The only thing we have to do is to pass our custom mapping to an `ApplicationPro
 
 ```js
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json'; // <-- import custom mapping
 
-const App = () => (
+export default () => (
   <ApplicationProvider 
-    mapping={mapping}
+    {...eva}
     customMapping={customMapping} // <-- apply custom mapping
-    theme={lightTheme}>
+    theme={eva.light}>
   </ApplicationProvider>
 );
 
-export default App;
 ```
 
 Here we are. Now the default `backgroundColor` of a Button should be `pink`. Here is a result

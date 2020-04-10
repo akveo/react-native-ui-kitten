@@ -1,117 +1,43 @@
 import React from 'react';
-import {
-  ImageStyle,
-  LayoutChangeEvent,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  Button,
-  Icon,
-  IconElement,
-  Layout,
-  OverflowMenu,
-  OverflowMenuItemType,
-  Text,
-} from '@ui-kitten/components';
-import { themes } from '../app/themes';
-import {
-  AppMapping,
-  AppTheme,
-  ThemeContext,
-  ThemeContextType,
-} from '../services/theme.service';
+import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
+import { Card, Text } from '@ui-kitten/components';
+import { ShowcaseSettings } from './showcaseSettings.component';
 
-export const ColorPaletteIcon = (style: ImageStyle): IconElement => (
-  <Icon {...style} name='color-palette-outline'/>
+const ShowcaseCaption = (props) => (
+  <View {...props}>
+    <Text
+      appearance='hint'
+      category='c2'>
+      Powered by React Native Web
+    </Text>
+    <Text
+      appearance='hint'
+      category='c1'>
+      Rendering of React Native components in a web browser is an experimental feature and may contain issues.
+    </Text>
+  </View>
 );
 
-const createThemesMenu = (): OverflowMenuItemType[] => {
-  return Object.keys(themes).reduce((acc: OverflowMenuItemType[], mappingName: string) => {
-    const themeItems: OverflowMenuItemType[] = Object.keys(themes[mappingName])
-                                                     .map((themeName) => ({ title: `${mappingName} ${themeName}` }));
-    return [...acc, ...themeItems];
-  }, []);
-};
+export const ShowcaseIFrame = (Component: React.ComponentType, id: string): React.ReactElement => {
 
-const themesMenu = createThemesMenu();
-
-export const ShowcaseIFrame = (Component: React.ComponentType, showcaseId: string): React.ReactElement => {
-
-  const [menuVisible, setMenuVisible] = React.useState(false);
-  const themeContext: ThemeContextType = React.useContext(ThemeContext);
-
-  const onThemesButtonPress = (): void => {
-    setMenuVisible(!menuVisible);
-  };
-
-  const onThemeSelect = (index: number): void => {
-    const [mapping, theme] = themesMenu[index].title.split(' ');
-
-    setMenuVisible(false);
-
-    if (mapping !== themeContext.mapping) {
-      themeContext.setMapping(mapping as AppMapping);
-      themeContext.setTheme(theme as AppTheme);
-      return;
-    }
-
-    if (theme !== themeContext.theme) {
-      themeContext.setTheme(theme as AppTheme);
-    }
-  };
-
-  const onLayout = (event: LayoutChangeEvent): void => {
-    postLayoutChangeEvent(event);
-  };
-
-  const postLayoutChangeEvent = ({ nativeEvent }: LayoutChangeEvent): void => {
-    const layoutChangeMessage: { height: number; id: string; } = {
-      id: showcaseId,
-      height: nativeEvent.layout.height,
-    };
-
-    window.parent.postMessage(layoutChangeMessage, '*');
+  const postLayoutChangeEvent = (event: LayoutChangeEvent): void => {
+    window.parent.postMessage({ id, height: event.nativeEvent.layout.height }, '*');
   };
 
   return (
-    <Layout
-      style={styles.container}
-      onLayout={onLayout}>
-      <View style={styles.optionsContainer}>
-        <Text
-          appearance='hint'
-          category='c1'>
-          Powered by React Native Web
-        </Text>
-        <OverflowMenu
-          visible={menuVisible}
-          onSelect={onThemeSelect}
-          data={themesMenu}
-          onBackdropPress={onThemesButtonPress}>
-          <Button
-            appearance='ghost'
-            status='basic'
-            size='small'
-            icon={ColorPaletteIcon}
-            onPress={onThemesButtonPress}>
-            {`${themeContext.mapping} ${themeContext.theme}`}
-          </Button>
-        </OverflowMenu>
-      </View>
+    <Card
+      style={styles.card}
+      disabled={true}
+      header={props => <ShowcaseSettings {...props}/>}
+      footer={props => <ShowcaseCaption {...props}/>}
+      onLayout={postLayoutChangeEvent}>
       <Component/>
-    </Layout>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    minHeight: 280,
-  },
-  optionsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  card: {
+    borderRadius: 0,
   },
 });

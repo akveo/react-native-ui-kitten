@@ -1,63 +1,57 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  Layout,
-  Select,
-} from '@ui-kitten/components';
+import { Layout, Select, SelectItem } from '@ui-kitten/components';
 
-const useSelectChanges = (initialSelection = null) => {
-  const [selectedOption, setSelectedOption] = React.useState(initialSelection);
-  return {
-    selectedOption,
-    onSelect: setSelectedOption,
-  };
+const useSelectState = (initialState = undefined) => {
+  const [selectedIndex, setSelectedIndex] = React.useState(initialState);
+  return { selectedIndex, onSelect: setSelectedIndex };
 };
-
-const data = [
-  { text: 'Option 1' },
-  { text: 'Option 2' },
-  { text: 'Option 3' },
-];
 
 export const SelectSizeShowcase = () => {
 
-  const smallSelectChanges = useSelectChanges();
-  const mediumSelectChanges = useSelectChanges();
-  const largeSelectChanges = useSelectChanges();
+  const smallSelectState = useSelectState();
+  const mediumSelectState = useSelectState();
+  const largeSelectState = useSelectState();
 
   return (
-    <Layout>
+    <React.Fragment>
 
       <Select
         style={styles.select}
-        data={data}
         size='small'
         placeholder='Small'
-        {...smallSelectChanges}
-      />
+        {...smallSelectState}>
+        <SelectItem title='Option 1'/>
+        <SelectItem title='Option 2'/>
+        <SelectItem title='Option 3'/>
+      </Select>
 
       <Select
         style={styles.select}
-        data={data}
         size='medium'
         placeholder='Medium'
-        {...mediumSelectChanges}
-      />
+        {...mediumSelectState}>
+        <SelectItem title='Option 1'/>
+        <SelectItem title='Option 2'/>
+        <SelectItem title='Option 3'/>
+      </Select>
 
       <Select
         style={styles.select}
-        data={data}
         size='large'
         placeholder='Large'
-        {...largeSelectChanges}
-      />
+        {...largeSelectState}>
+        <SelectItem title='Option 1'/>
+        <SelectItem title='Option 2'/>
+        <SelectItem title='Option 3'/>
+      </Select>
 
-    </Layout>
+    </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
   select: {
-    margin: 8,
+    marginVertical: 2,
   },
 });

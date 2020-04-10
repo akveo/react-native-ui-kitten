@@ -1,15 +1,12 @@
 # Where to start?
 
-UI Kitten is a framework of UI components powered by Eva Design System for your next <a href="https://facebook.github.io/react-native/" target="_blank">React Native</a> application. Despite it is not required to know React Native framework to set up your first React Native UI Kitten project, it is highly recommended to go through the React Native tutorial beforehand and be familiar with basic React Native concepts.
+UI Kitten is a framework of UI components powered by Eva Design System for your next <a href="https://facebook.github.io/react-native/" target="_blank">React Native</a> application. Despite it is not required to know React Native framework to set up your first UI Kitten project, it is highly recommended to go through the React Native tutorial beforehand and be familiar with basic React Native concepts.
 <hr>
 
 ## Quick start tutorials
 
-- **[Start a new App](guides/getting-started#new-apps)** 
-
-This tutorial explains how to setup React Native app with UI Kitten from a scratch.
-
-- **[Install into existing App](guides/getting-started#manual-installation)**
+- [Start a new App](guides/getting-started#new-apps) with a single command from a terminal.
+- [Install into existing App](guides/getting-started#manual-installation). Already run some code? No problem.
 
 Please consider creating an issue on GitHub if your use case is not described above. But we kindly ask to always look through the documentation and the list of existing issues first.
   

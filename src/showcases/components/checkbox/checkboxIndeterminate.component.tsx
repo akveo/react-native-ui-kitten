@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  CheckBox,
-  Layout,
-} from '@ui-kitten/components';
+import { CheckBox } from '@ui-kitten/components';
 
 export const CheckboxIndeterminateShowcase = () => {
 
@@ -45,27 +42,27 @@ export const CheckboxIndeterminateShowcase = () => {
   };
 
   return (
-    <Layout>
+    <React.Fragment>
       <CheckBox
         style={styles.group}
-        text='Permissions'
         checked={allChecked}
         indeterminate={indeterminate}
-        onChange={onGroupCheckedChange}
-      />
+        onChange={onGroupCheckedChange}>
+        Permissions
+      </CheckBox>
       <CheckBox
-        text='Read'
         style={styles.option}
         checked={readChecked}
-        onChange={onReadCheckedChange}
-      />
+        onChange={onReadCheckedChange}>
+        Read
+      </CheckBox>
       <CheckBox
-        text='Write'
         style={styles.option}
         checked={writeChecked}
-        onChange={onWriteCheckedChange}
-      />
-    </Layout>
+        onChange={onWriteCheckedChange}>
+        Write
+      </CheckBox>
+    </React.Fragment>
   );
 };
 

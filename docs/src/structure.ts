@@ -232,6 +232,23 @@ export const structure = [
   },
   {
     type: 'section',
+    name: 'Migration',
+    children: [
+      {
+        type: 'page',
+        name: '4.x-5.0.0 Migration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'migration/4.x-5.0.0-migration.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
     name: 'Components',
     children: [
       {
@@ -250,15 +267,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Application Provider',
-        icon: 'application-provider.svg',
-        source: [
-          'ApplicationProvider',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Styled Component',
+        name: 'Using Mapping',
         icon: 'styled.svg',
         source: [
           'styled',
@@ -266,7 +275,7 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Themed Component',
+        name: 'Using Theme',
         icon: 'with-styles.svg',
         source: [
           'useTheme',
@@ -277,6 +286,22 @@ export const structure = [
       {
         type: 'group',
         name: 'Global',
+      },
+      {
+        type: 'tabs',
+        name: 'Application Provider',
+        icon: 'application-provider.svg',
+        source: [
+          'ApplicationProvider',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Layout',
+        icon: 'layout.svg',
+        source: [
+          'Layout',
+        ],
       },
       {
         type: 'tabs',
@@ -294,10 +319,24 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Layout',
-        icon: 'layout.svg',
+        name: 'Divider',
+        icon: 'icon.svg',
         source: [
-          'Layout',
+          'Divider',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Icon',
+        icon: 'icon.svg',
+        source: [
+          'Icon',
+        ],
+        overview: [
+          {
+            name: 'Icon',
+            images: ['icon.png'],
+          },
         ],
       },
       {
@@ -306,15 +345,6 @@ export const structure = [
         icon: 'card.svg',
         source: [
           'Card',
-          'CardHeader',
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Menu',
-        icon: 'menu.svg',
-        source: [
-          'Menu',
         ],
       },
       {
@@ -329,20 +359,6 @@ export const structure = [
           {
             name: 'List',
             images: ['list.png'],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Icon',
-        icon: 'icon.svg',
-        source: [
-          'Icon',
-        ],
-        overview: [
-          {
-            name: 'Icon',
-            images: ['icon.png'],
           },
         ],
       },
@@ -367,7 +383,23 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Bottom Navigation',
+        name: 'Top Tabs',
+        icon: 'tab.svg',
+        source: [
+          'TabBar',
+          'TabView',
+          'Tab',
+        ],
+        overview: [
+          {
+            name: 'TabBar',
+            images: ['tab-menu.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Bottom Tabs',
         icon: 'bottom-navigation.svg',
         source: [
           'BottomNavigation',
@@ -382,11 +414,22 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Menu',
+        icon: 'menu.svg',
+        source: [
+          'Menu',
+          'MenuGroup',
+          'MenuItem',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Drawer',
         icon: 'drawer.svg',
         source: [
           'Drawer',
-          'DrawerHeaderFooter',
+          'DrawerGroup',
+          'DrawerItem',
         ],
         overview: [
           {
@@ -404,38 +447,8 @@ export const structure = [
         ],
       },
       {
-        type: 'tabs',
-        name: 'Tab View',
-        icon: 'tab.svg',
-        source: [
-          'TabView',
-          'TabBar',
-          'Tab',
-        ],
-        overview: [
-          {
-            name: 'TabBar',
-            images: ['tab-menu.png'],
-          },
-        ],
-      },
-      {
         type: 'group',
         name: 'Forms',
-      },
-      {
-        type: 'tabs',
-        name: 'Input',
-        icon: 'input.svg',
-        source: [
-          'Input',
-        ],
-        overview: [
-          {
-            name: 'Input',
-            images: ['input.png'],
-          },
-        ],
       },
       {
         type: 'tabs',
@@ -443,26 +456,7 @@ export const structure = [
         icon: 'button.svg',
         source: [
           'Button',
-        ],
-        overview: [
-          {
-            name: 'Button',
-            images: ['button.png'],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Button Group',
-        icon: 'button-group.svg',
-        source: [
           'ButtonGroup',
-        ],
-        overview: [
-          {
-            name: 'ButtonGroup',
-            images: ['button-group.png'],
-          },
         ],
       },
       {
@@ -476,6 +470,21 @@ export const structure = [
           {
             name: 'CheckBox',
             images: ['checkbox.png'],
+          },
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Radio',
+        icon: 'radio.svg',
+        source: [
+          'Radio',
+          'RadioGroup',
+        ],
+        overview: [
+          {
+            name: 'Radio',
+            images: ['radio.png'],
           },
         ],
       },
@@ -495,16 +504,15 @@ export const structure = [
       },
       {
         type: 'tabs',
-        name: 'Radio',
-        icon: 'radio.svg',
+        name: 'Input',
+        icon: 'input.svg',
         source: [
-          'RadioGroup',
-          'Radio',
+          'Input',
         ],
         overview: [
           {
-            name: 'Radio',
-            images: ['radio.png'],
+            name: 'Input',
+            images: ['input.png'],
           },
         ],
       },
@@ -514,8 +522,24 @@ export const structure = [
         icon: 'select.svg',
         source: [
           'Select',
+          'SelectGroup',
+          'SelectItem',
         ],
         overview: [],
+      },
+      {
+        type: 'tabs',
+        name: 'Autocomplete',
+        icon: 'autocomplete.svg',
+        source: [
+          'Autocomplete',
+        ],
+        overview: [
+          {
+            name: 'Autocomplete',
+            images: [],
+          },
+        ],
       },
       {
         type: 'tabs',
@@ -528,20 +552,6 @@ export const structure = [
         overview: [
           {
             name: 'Datepicker',
-            images: [],
-          },
-        ],
-      },
-      {
-        type: 'tabs',
-        name: 'Autocomplete',
-        icon: 'autocomplete.svg',
-        source: [
-          'Autocomplete',
-        ],
-        overview: [
-          {
-            name: 'Autocomplete',
             images: [],
           },
         ],
@@ -592,6 +602,7 @@ export const structure = [
         icon: 'menu.svg',
         source: [
           'OverflowMenu',
+          'MenuItem',
         ],
         overview: [
           {

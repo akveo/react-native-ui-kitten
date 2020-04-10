@@ -1,6 +1,13 @@
 import React from 'react';
-import { BottomNavigationTab } from '@ui-kitten/components';
+import { BottomNavigationTab, Icon } from '@ui-kitten/components';
+
+const StarIcon = (props) => (
+  <Icon {...props} name='star'/>
+);
 
 export const BottomNavigationTabSimpleUsageShowcase = () => (
-  <BottomNavigationTab title='USERS'/>
+  <BottomNavigationTab
+    title='USERS'
+    icon={StarIcon}
+  />
 );

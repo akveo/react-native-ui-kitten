@@ -1,67 +1,44 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import {
-  Autocomplete,
-  Layout,
-} from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
-const DATA = [
-  {
-    id: 1,
-    title: 'Star Wars',
-    releaseYear: 1977,
-  },
-  {
-    id: 2,
-    title: 'Back to the Future',
-    releaseYear: 1985,
-  },
-  {
-    id: 3,
-    title: 'The Matrix',
-    releaseYear: 1999,
-  },
-  {
-    id: 4,
-    title: 'Inception',
-    releaseYear: 2010,
-  },
-  {
-    id: 5,
-    title: 'Interstellar',
-    releaseYear: 2014,
-  },
+const movies = [
+  { title: 'Star Wars' },
+  { title: 'Back to the Future' },
+  { title: 'The Matrix' },
+  { title: 'Inception' },
+  { title: 'Interstellar' },
 ];
+
+const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
 
 export const AutocompleteSimpleUsageShowcase = () => {
 
   const [value, setValue] = React.useState(null);
-  const [data, setData] = React.useState(DATA);
+  const [data, setData] = React.useState(movies);
 
-  const onSelect = ({ title }) => {
-    setValue(title);
+  const onSelect = (index) => {
+    setValue(movies[index].title);
   };
 
   const onChangeText = (query) => {
     setValue(query);
-    setData(DATA.filter(item => item.title.toLowerCase().includes(query.toLowerCase())));
+    setData(movies.filter(item => filter(item, query)));
   };
 
+  const renderOption = (item, index) => (
+    <AutocompleteItem
+      key={index}
+      title={item.title}
+    />
+  );
+
   return (
-    <Layout style={styles.container}>
-      <Autocomplete
-        placeholder='Place your Text'
-        value={value}
-        data={data}
-        onChangeText={onChangeText}
-        onSelect={onSelect}
-      />
-    </Layout>
+    <Autocomplete
+      placeholder='Place your Text'
+      value={value}
+      onSelect={onSelect}
+      onChangeText={onChangeText}>
+      {data.map(renderOption)}
+    </Autocomplete>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    minHeight: 228,
-  },
-});

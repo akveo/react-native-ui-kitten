@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  Text,
-} from '@ui-kitten/components';
+import { Card, Text } from '@ui-kitten/components';
 
 export const CardSimpleUsageShowcase = () => (
   <Card>

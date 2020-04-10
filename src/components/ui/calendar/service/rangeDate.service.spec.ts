@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { RangeDateService } from './rangeDate.service';
 import { NativeDateService } from './nativeDate.service';
 import { CalendarRange } from '../type';

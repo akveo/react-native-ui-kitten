@@ -61,23 +61,21 @@ And pass it to an `ApplicationProvider` component:
 
 ```js
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json'; // <-- Import custom mapping
 import CircleButton from './path-to/CircleButton'; // <-- Import custom component
 
-const App = () => (
-  <ApplicationProvider 
-    mapping={mapping}
+export default () => (
+  <ApplicationProvider
+    {...eva}
     customMapping={customMapping}
-    theme={lightTheme}>
+    theme={eva.light}>
     <Layout style={{padding: 64, alignItems: 'center'}}>
       <CircleButton />
     </Layout>
   </ApplicationProvider>
 );
-
-export default App;
 ```
 
 <hr>
@@ -175,23 +173,21 @@ What we did is that we added a rounded [variant](design-system/design-system-glo
 
 ```js
 import React from 'react';
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as customMapping } from './path-to/custom-mapping.json';
 import CircleButton from './path-to/CircleButton';
 
-const App = () => (
-  <ApplicationProvider 
-    mapping={mapping}
+export default () => (
+  <ApplicationProvider
+    {...eva}
     customMapping={customMapping}
-    theme={lightTheme}>
+    theme={eva.light}>
     <Layout style={{padding: 64, alignItems: 'center'}}>
       <CircleButton shape='rounded'/> // <-- Apply `rounded` shape variant
     </Layout>
   </ApplicationProvider>
 );
-
-export default App;
 ```
 
 And this is how it looks:

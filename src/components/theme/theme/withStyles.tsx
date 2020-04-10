@@ -9,14 +9,14 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ThemeContext } from './themeContext';
 import { ThemeType } from './theme.service';
 import { Styles } from '../style/style.service';
+import { EvaProp } from '../style/styled';
 
 interface PrivateProps<T> {
   forwardedRef?: React.RefObject<T>;
 }
 
 export interface ThemedComponentProps<T extends Styles<T> = any> {
-  theme?: ThemeType;
-  themedStyle?: T | undefined;
+  eva?: EvaProp;
 }
 
 export type ThemedComponentClass<P, S extends Styles<S>> = React.ComponentClass<ThemedComponentProps<S> & P>;
@@ -28,17 +28,19 @@ interface PrivateProps<T> {
 type CreateStylesFunction<T extends Styles<T>> = (theme: ThemeType) => T;
 
 /**
- * `withStyles` is a High Order Function which is used to create themed style for non-styled component.
- * Basically used when need to use theme variable somewhere.
+ * High Order Function for creating styles mapped to current theme
  * Returns component class which can be used as themed component.
  *
- * @property {ThemeType} theme - Determines theme used to style component.
+ * Injects `eva` property into component props, which is `{ theme, style }`.
+ * Current theme and styles provided by Eva.
  *
- * @property {Styles} themedStyle - Determines component style for it's current state.
+ * @property {EvaProp} eva - Additional property injected to all `styled` components. Includes following properties:
+ * `theme` - current theme,
+ * `style` - styles provided by Eva,
  *
- * @param Component - Type: {ComponentType}. Determines class of component to be themed.
+ * @param Component - Type: {ComponentType}. Component to be themed.
  *
- * @param createStyles - Type: {(theme: ThemeType) => Styles}. Determines arrow function used to create styles.
+ * @param createStyles - Type: {(ThemeType) => NamedStyles}. Function used to create styles mapped on theme.
  *
  * @overview-example WithStylesSimpleUsage
  */
@@ -53,8 +55,14 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
   class Wrapper extends React.Component<WrappingProps> {
 
     private withThemedProps = (props: P, theme: ThemeType): WrappedProps => {
-      const themedStyle = createStyles && createStyles(theme);
-      return { ...props, theme, themedStyle };
+      const style = createStyles && createStyles(theme);
+      return {
+        ...props,
+        eva: {
+          theme,
+          style,
+        },
+      };
     };
 
     private renderWrappedElement = (theme: ThemeType): React.ReactElement<ThemedComponentProps<S>> => {

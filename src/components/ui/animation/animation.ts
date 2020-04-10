@@ -1,8 +1,18 @@
-import { Animated } from 'react-native';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+import {
+  Animated,
+  Platform,
+} from 'react-native';
+import { Overwrite } from 'utility-types';
 
 export const DEFAULT_CONFIG: AnimationConfig = {
   cycles: 1,
-  useNativeDriver: true,
+  useNativeDriver: Platform.OS !== 'web',
 };
 
 /**
@@ -20,14 +30,14 @@ export abstract class Animation<C extends AnimationConfig, R> {
   protected running: boolean = false;
   protected config: C;
 
-  public abstract toProps(): R;
-
   constructor(config?: C) {
     this.config = {
       ...DEFAULT_CONFIG,
       ...config,
     };
   }
+
+  public abstract toProps(): R;
 
   public start(callback?: Animated.EndCallback) {
     this.endCallback = callback;

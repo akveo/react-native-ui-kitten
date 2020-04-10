@@ -13,7 +13,9 @@ import {
 @Component({
   selector: 'ngd-overview-example',
   template: `
-    <h5 style="margin-top: 2rem">{{title}}:</h5>
+    <td>
+      <div *ngIf="title" ngdDescription>{{title}}</div>
+    </td>
     <ngd-code-block [code]="code"></ngd-code-block>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,7 +27,8 @@ export class NgdOverviewExampleBlock {
 
   @Input('example')
   set example(value) {
-    this.code = value.code.replace(/```/g, '');
-    this.title = value.description;
+    this.code = value.code.replace(/```/g, '')
+                     .replace(/^\s+|\s+$/g, '');
+    this.title = value.shortDescription;
   }
 }

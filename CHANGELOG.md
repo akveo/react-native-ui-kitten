@@ -1,3 +1,40 @@
+## 5.0.0-alpha.1 (2020-04-08)
+
+### :star: Highlights
+
+* Rethinking component APIs [#517](https://github.com/akveo/react-native-ui-kitten/issues/517#issuecomment-610952452)
+* Improve TypeScript definitions by describing Eva properties.
+* React Native 0.62 support ([#974](https://github.com/akveo/react-native-ui-kitten/issues/974) [edd0121](https://github.com/akveo/react-native-ui-kitten/commit/edd0121))
+
+### :rocket: Features
+
+* **Documentation**: add developer-friendly documentation for each example ([38d073e](https://github.com/akveo/react-native-ui-kitten/commit/38d073e))
+* **Documentation**: add more details on branding guide ([2250f03](https://github.com/akveo/react-native-ui-kitten/commit/2250f03))
+
+### :bug: Bug Fixes
+
+* fix(components): typography fixes ([d73d0dd](https://github.com/akveo/react-native-ui-kitten/commit/d73d0dd))
+
+### :bomb: Breaking Changes
+
+* **BREAKING CHANGE**: combine eva props into one ([#884](https://github.com/akveo/react-native-ui-kitten/issues/884) [ee100a5](https://github.com/akveo/react-native-ui-kitten/commit/ee100a5))
+* **BREAKING CHANGE**: refactor Menu to new api ([#789](https://github.com/akveo/react-native-ui-kitten/issues/789) [205eb6d](https://github.com/akveo/react-native-ui-kitten/commit/205eb6d))
+* **BREAKING CHANGE**: refactor BottomNavigation to new api ([8ab5608](https://github.com/akveo/react-native-ui-kitten/commit/8ab5608))
+* **BREAKING CHANGE**: refactor Button to new api ([#564](https://github.com/akveo/react-native-ui-kitten/issues/564) [8e8c8a9](https://github.com/akveo/react-native-ui-kitten/commit/8e8c8a9))
+* **BREAKING CHANGE**: refactor Card to new api ([#947](https://github.com/akveo/react-native-ui-kitten/issues/947) [9a6415a](https://github.com/akveo/react-native-ui-kitten/commit/9a6415a))
+* **BREAKING CHANGE**: refactor CheckBox to new api ([3ef75e0](https://github.com/akveo/react-native-ui-kitten/commit/3ef75e0))
+* **BREAKING CHANGE**: refactor Drawer to new api ([9188551](https://github.com/akveo/react-native-ui-kitten/commit/9188551))
+* **BREAKING CHANGE**: refactor Input to new api ([#737](https://github.com/akveo/react-native-ui-kitten/issues/737) [#770](https://github.com/akveo/react-native-ui-kitten/issues/770) [#972](https://github.com/akveo/react-native-ui-kitten/issues/972) [4cae584](https://github.com/akveo/react-native-ui-kitten/commit/4cae584))
+* **BREAKING CHANGE**: refactor List to new api ([533fa81](https://github.com/akveo/react-native-ui-kitten/commit/533fa81))
+* **BREAKING CHANGE**: refactor Menu, Select and Drawer components to new api ([#789](https://github.com/akveo/react-native-ui-kitten/issues/789) [#799](https://github.com/akveo/react-native-ui-kitten/issues/799) [#936](https://github.com/akveo/react-native-ui-kitten/issues/936) [#970](https://github.com/akveo/react-native-ui-kitten/issues/970) [df95586](https://github.com/akveo/react-native-ui-kitten/commit/df95586))
+* **BREAKING CHANGE**: refactor popover-based components to new api ([0526c80](https://github.com/akveo/react-native-ui-kitten/commit/0526c80))
+* **BREAKING CHANGE**: refactor Radio to new api ([577241d](https://github.com/akveo/react-native-ui-kitten/commit/577241d))
+* **BREAKING CHANGE**: refactor Tab to new api ([2d64770](https://github.com/akveo/react-native-ui-kitten/commit/2d64770))
+* **BREAKING CHANGE**: refactor Toggle to new api ([c0b5f1e](https://github.com/akveo/react-native-ui-kitten/commit/c0b5f1e))
+* **BREAKING CHANGE**: refactor TopNavigation to new api ([#777](https://github.com/akveo/react-native-ui-kitten/issues/777) [#810](https://github.com/akveo/react-native-ui-kitten/issues/810) [#863](https://github.com/akveo/react-native-ui-kitten/issues/863) [170e5bb](https://github.com/akveo/react-native-ui-kitten/commit/170e5bb))
+
+
+
 ## <small>4.4.1 (2020-02-24)</small>
 
 ### :star: Highlights

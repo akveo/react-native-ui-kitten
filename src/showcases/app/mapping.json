@@ -1,7 +1,4 @@
 {
-  "strict": {
-    "text-font-family": "System"
-  },
   "components": {
     "StyledComponent": {
       "meta": {

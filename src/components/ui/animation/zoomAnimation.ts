@@ -1,6 +1,12 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import {
   Animated,
-  Easing,
+  Easing, Platform,
   ViewProps,
 } from 'react-native';
 import {
@@ -13,6 +19,7 @@ const DEFAULT_CONFIG: ZoomAnimationConfig = {
   end: 0.5,
   easing: Easing.linear,
   duration: 500,
+  useNativeDriver: Platform.OS !== 'web',
 };
 
 type TimingAnimationConfig = Omit<Animated.TimingAnimationConfig, 'toValue'>;
@@ -25,6 +32,11 @@ export interface ZoomAnimationConfig extends AnimationConfig, TimingAnimationCon
 export class ZoomAnimation extends Animation<ZoomAnimationConfig, ViewProps> {
 
   private value: Animated.Value;
+
+  constructor(config?: ZoomAnimationConfig) {
+    super({ ...DEFAULT_CONFIG, ...config });
+    this.value = new Animated.Value(this.config.start);
+  }
 
   protected get animation(): Animated.CompositeAnimation {
     const { start, end, ...restConfig } = this.config;
@@ -43,11 +55,6 @@ export class ZoomAnimation extends Animation<ZoomAnimationConfig, ViewProps> {
       startAnimation,
       endAnimation,
     ]);
-  }
-
-  constructor(config?: ZoomAnimationConfig) {
-    super({ ...DEFAULT_CONFIG, ...config });
-    this.value = new Animated.Value(this.config.start);
   }
 
   public toProps(): ViewProps {

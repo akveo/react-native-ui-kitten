@@ -1,19 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  CheckBox,
-  Layout,
-} from '@ui-kitten/components';
+import { CheckBox, Layout } from '@ui-kitten/components';
 
 export const CheckboxStatesShowcase = () => {
 
   const [activeChecked, setActiveChecked] = React.useState(false);
-  const [indeterminateChecked, setIndeterminateChecked] = React.useState(true);
-  const [indeterminate, setIndeterminate] = React.useState(false);
-
-  const onActiveChange = (isChecked) => {
-    setActiveChecked(isChecked);
-  };
+  const [indeterminateChecked, setIndeterminateChecked] = React.useState(false);
+  const [indeterminate, setIndeterminate] = React.useState(true);
 
   const onIndeterminateChange = (isChecked, isIndeterminate) => {
     setIndeterminateChecked(isChecked);
@@ -21,35 +14,35 @@ export const CheckboxStatesShowcase = () => {
   };
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={styles.container} level='1'>
 
       <CheckBox
         style={styles.checkbox}
-        text='Active'
         checked={activeChecked}
-        onChange={onActiveChange}
-      />
+        onChange={nextChecked => setActiveChecked(nextChecked)}>
+        Active
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
-        text='Indeterminate'
         checked={indeterminateChecked}
         indeterminate={indeterminate}
-        onChange={onIndeterminateChange}
-      />
+        onChange={onIndeterminateChange}>
+        Indeterminate
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
-        text='Disabled'
-        disabled={true}
-      />
+        disabled={true}>
+        Disabled
+      </CheckBox>
 
       <CheckBox
         style={styles.checkbox}
-        text='Checked Disabled'
         disabled={true}
-        checked={true}
-      />
+        checked={true}>
+        Checked Disabled
+      </CheckBox>
 
     </Layout>
   );
@@ -61,6 +54,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   checkbox: {
-    margin: 8,
+    margin: 2,
   },
 });
