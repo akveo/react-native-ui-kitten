@@ -176,9 +176,6 @@ You are also able to make one of the semantic parameters to be used by default. 
     "Button": {
       "meta": {
         "appearances": {
-          "filled": {
-            "default": false // <-- Previously was set to `true`
-          },
           "outline": {
             "default": true // <-- Set `outline` appearance to be default
           }
