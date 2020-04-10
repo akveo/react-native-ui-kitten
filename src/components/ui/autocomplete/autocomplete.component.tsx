@@ -8,6 +8,8 @@ import React from 'react';
 import {
   ListRenderItemInfo,
   StyleSheet,
+  NativeSyntheticEvent,
+  TextInputSubmitEditingEventData,
   View,
 } from 'react-native';
 import {
@@ -151,8 +153,17 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
     }
   };
 
+  private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
+    this.setState({ optionsVisible: false });
+
+    if (this.props.onSubmitEditing) {
+      this.props.onSubmitEditing(e);
+    }
+  };
+
   private onBackdropPress = (): void => {
     this.setState({ optionsVisible: false });
+    this.inputRef.current.blur();
   };
 
   private onOptionPress = (index: number): void => {
@@ -197,6 +208,7 @@ export class Autocomplete<O extends Option = Option> extends React.Component<Aut
         ref={this.inputRef}
         {...props}
         onFocus={this.onInputFocus}
+        onSubmitEditing={this.onInputSubmitEditing}
       />
     );
   };
