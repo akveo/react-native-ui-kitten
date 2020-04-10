@@ -7,10 +7,10 @@ By default, UI Kitten is configured with processing Eva mapping packages during 
 Install the additional metro configuration:
 
 ```bash
-npm i -D @ui-kitten/metro-config
+npm i -D @ui-kitten/metro-config@next
 
 // Using Yarn?
-// yarn add -D @ui-kitten/metro-config
+// yarn add -D @ui-kitten/metro-config@next
 ```
 
 Create **metro.config.js** at the root of your project if you don't have this file yet and place the following code:

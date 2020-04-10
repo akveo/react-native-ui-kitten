@@ -46,14 +46,14 @@ If you have an existing code base and want to use UI Kitten in your project, fol
 ### Install UI Kitten
 
 ```bash
-npm i @ui-kitten/components @eva-design/eva react-native-svg
+npm i @ui-kitten/components@next @eva-design/eva@next react-native-svg
 
 // Using Yarn?
-// yarn add @ui-kitten/components @eva-design/eva react-native-svg
+// yarn add @ui-kitten/components@next @eva-design/eva@next react-native-svg
 ```
 
 <div class="note note-warning">
-  <div class="note-body">If you use Expo, you should use `expo install react-native-svg` to install svg package.</div>
+  <div class="note-body">If you use Expo, you should use `expo install react-native-svg@9.13.6` to install svg package.</div>
 </div>
 
 Within non-expo environment, we also need to complete installation for iOS by linking react-native-svg.
