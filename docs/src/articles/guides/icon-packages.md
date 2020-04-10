@@ -151,7 +151,7 @@ import { FeatherIconsPack } from './feather-icons';
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
@@ -237,7 +237,7 @@ import { MaterialIconsPack } from './material-icons'; // <-- Import Material ico
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
@@ -319,7 +319,7 @@ import { AssetIconsPack } from './asset-icons'; // <-- Import Feather icons
 
 const HomeScreen = () => (
   <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text catetory='h1'>HOME</Text>
+    <Text category='h1'>HOME</Text>
   </Layout>
 );
 
