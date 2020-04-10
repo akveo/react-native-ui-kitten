@@ -420,11 +420,12 @@ class SelectComponent extends React.Component<SelectProps, State> implements Web
 
   private renderTextElement = (style: StyleType): TextElement => {
     const value: string = this.selectService.toStringOptions(this.props.selectedOption);
-    const textStyle: TextStyle = value && style.text;
+    const textStyle: StyleProp<TextStyle> = value && [style.text, this.props.textStyle];
+    const placeholderStyle: StyleProp<TextStyle> = [style.placeholder, this.props.placeholderStyle];
 
     return (
       <Text
-        style={[styles.text, style.placeholder, textStyle, this.props.textStyle]}
+        style={[styles.text, placeholderStyle, textStyle]}
         numberOfLines={1}
         ellipsizeMode='tail'>
         {value || this.props.placeholder}
