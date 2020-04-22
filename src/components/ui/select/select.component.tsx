@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React from "react";
 import {
   Animated,
   GestureResponderEvent,
@@ -18,8 +18,8 @@ import {
   TextStyle,
   View,
   ViewProps,
-} from 'react-native';
-import { Overwrite } from 'utility-types';
+} from "react-native";
+import { Overwrite } from "utility-types";
 import {
   ChildrenWithProps,
   EvaInputSize,
@@ -31,29 +31,26 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
-} from '../../devsupport';
+} from "../../devsupport";
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '../../theme';
-import { List } from '../list/list.component';
-import { Popover } from '../popover/popover.component';
-import { ChevronDown } from '../shared/chevronDown.component';
-import { SelectGroupProps } from './selectGroup.component';
-import {
-  SelectItemElement,
-  SelectItemProps,
-} from './selectItem.component';
-import {
-  SelectItemDescriptor,
-  SelectService,
-} from './select.service';
+} from "../../theme";
+import { List } from "../list/list.component";
+import { Popover } from "../popover/popover.component";
+import { ChevronDown } from "../shared/chevronDown.component";
+import { SelectGroupProps } from "./selectGroup.component";
+import { SelectItemElement, SelectItemProps } from "./selectItem.component";
+import { SelectItemDescriptor, SelectService } from "./select.service";
 
-type SelectStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: 'default' | string;
-}>;
+type SelectStyledProps = Overwrite<
+  StyledComponentProps,
+  {
+    appearance?: "default" | string;
+  }
+>;
 
 export interface SelectProps extends TouchableWebProps, SelectStyledProps {
   children?: ChildrenWithProps<SelectItemProps | SelectGroupProps>;
@@ -212,11 +209,10 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 export class SelectComponent extends React.Component<SelectProps, State> {
-
-  static styledComponentName: string = 'Select';
+  static styledComponentName: string = "Select";
 
   static defaultProps = {
-    placeholder: 'Select Option',
+    placeholder: "Select Option",
     selectedIndex: [],
   };
 
@@ -240,13 +236,18 @@ export class SelectComponent extends React.Component<SelectProps, State> {
     if (!this.props.selectedIndex) {
       return [];
     }
-    return Array.isArray(this.props.selectedIndex) ? this.props.selectedIndex : [this.props.selectedIndex];
+    return Array.isArray(this.props.selectedIndex)
+      ? this.props.selectedIndex
+      : [this.props.selectedIndex];
   }
 
   private get expandToRotateInterpolation(): Animated.AnimatedInterpolation {
     return this.expandAnimation.interpolate({
       inputRange: [CHEVRON_DEG_COLLAPSED, CHEVRON_DEG_EXPANDED],
-      outputRange: [`${CHEVRON_DEG_COLLAPSED}deg`, `${CHEVRON_DEG_EXPANDED}deg`],
+      outputRange: [
+        `${CHEVRON_DEG_COLLAPSED}deg`,
+        `${CHEVRON_DEG_EXPANDED}deg`,
+      ],
     });
   }
 
@@ -300,7 +301,11 @@ export class SelectComponent extends React.Component<SelectProps, State> {
 
   private onItemPress = (descriptor: SelectItemDescriptor): void => {
     if (this.props.onSelect) {
-      const selectedIndices = this.service.selectItem(this.isMultiSelect, descriptor, this.selectedIndices);
+      const selectedIndices = this.service.selectItem(
+        this.isMultiSelect,
+        descriptor,
+        this.selectedIndices
+      );
       !this.isMultiSelect && this.setOptionsListInvisible();
       this.props.onSelect(selectedIndices);
     }
@@ -414,43 +419,83 @@ export class SelectComponent extends React.Component<SelectProps, State> {
     this.setState({ listVisible: false }, this.onListInvisible);
   };
 
-  private createExpandAnimation = (toValue: number): Animated.CompositeAnimation => {
+  private createExpandAnimation = (
+    toValue: number
+  ): Animated.CompositeAnimation => {
     return Animated.timing(this.expandAnimation, {
       toValue,
       duration: CHEVRON_ANIM_DURATION,
-      useNativeDriver: Platform.OS !== 'web',
+      useNativeDriver: Platform.OS !== "web",
     });
   };
 
-  private cloneItemWithProps = (el: SelectItemElement, props: SelectItemProps): SelectItemElement => {
-    const nestedElements = React.Children.map(el.props.children, (nestedEl: SelectItemElement, index: number) => {
-      const descriptor = this.service.createDescriptorForNestedElement(nestedEl, props.descriptor, index);
-      const selected: boolean = this.service.isSelected(descriptor, this.selectedIndices);
+  private cloneItemWithProps = (
+    el: SelectItemElement,
+    props: SelectItemProps
+  ): SelectItemElement => {
+    const nestedElements = React.Children.map(
+      el.props.children,
+      (nestedEl: SelectItemElement, index: number) => {
+        const descriptor = this.service.createDescriptorForNestedElement(
+          nestedEl,
+          props.descriptor,
+          index
+        );
+        const selected: boolean = this.service.isSelected(
+          descriptor,
+          this.selectedIndices
+        );
 
-      return this.cloneItemWithProps(nestedEl, { ...props, descriptor, selected, disabled: false });
-    });
+        return this.cloneItemWithProps(nestedEl, {
+          ...props,
+          descriptor,
+          selected,
+          disabled: false,
+        });
+      }
+    );
 
     return React.cloneElement(el, { ...props, ...el.props }, nestedElements);
   };
 
-  private renderItem = (info: ListRenderItemInfo<SelectItemElement>): SelectItemElement => {
-    const descriptor = this.service.createDescriptorForElement(info.item, this.isMultiSelect, info.index);
-    const selected: boolean = this.service.isSelected(descriptor, this.selectedIndices);
+  private renderItem = (
+    info: ListRenderItemInfo<SelectItemElement>
+  ): SelectItemElement => {
+    const descriptor = this.service.createDescriptorForElement(
+      info.item,
+      this.isMultiSelect,
+      info.index
+    );
+    const selected: boolean = this.service.isSelected(
+      descriptor,
+      this.selectedIndices
+    );
     const disabled: boolean = this.service.isDisabled(descriptor);
 
-    return this.cloneItemWithProps(info.item, { descriptor, selected, disabled, onPress: this.onItemPress });
+    return this.cloneItemWithProps(info.item, {
+      descriptor,
+      selected,
+      disabled,
+      onPress: this.onItemPress,
+    });
   };
 
   private renderDefaultIconElement = (evaStyle): React.ReactElement => {
     return (
-      <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown {...evaStyle} fill={evaStyle.tintColor}/>
+      <Animated.View
+        style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}
+      >
+        <ChevronDown {...evaStyle} fill={evaStyle.tintColor} />
       </Animated.View>
     );
   };
 
-  private renderInputElement = (props: SelectProps, evaStyle): TouchableWebElement => {
-    const value = props.value || this.service.toStringSelected(this.selectedIndices);
+  private renderInputElement = (
+    props: SelectProps,
+    evaStyle
+  ): TouchableWebElement => {
+    const value =
+      props.value || this.service.toStringSelected(this.selectedIndices);
     const textStyle: TextStyle = value && evaStyle.text;
 
     return (
@@ -461,15 +506,13 @@ export class SelectComponent extends React.Component<SelectProps, State> {
         onMouseLeave={this.onMouseLeave}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
-        disabled={props.disabled}>
-        <FalsyFC
-          style={evaStyle.icon}
-          component={props.accessoryLeft}
-        />
+        disabled={props.disabled}
+      >
+        <FalsyFC style={evaStyle.icon} component={props.accessoryLeft} />
         <FalsyText
           style={[styles.text, evaStyle.placeholder, textStyle]}
           numberOfLines={1}
-          ellipsizeMode='tail'
+          ellipsizeMode="tail"
           component={value || props.placeholder}
         />
         <FalsyFC
@@ -482,22 +525,27 @@ export class SelectComponent extends React.Component<SelectProps, State> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, label, caption, children, ...touchableProps } = this.props;
+    const {
+      eva,
+      style,
+      label,
+      caption,
+      children,
+      ...touchableProps
+    } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
       <View style={style}>
-        <FalsyText
-          style={[styles.label, evaStyle.label]}
-          component={label}
-        />
+        <FalsyText style={[styles.label, evaStyle.label]} component={label} />
         <Popover
           ref={this.popoverRef}
           style={[styles.popover, evaStyle.popover]}
           visible={this.state.listVisible}
           fullWidth={true}
           anchor={() => this.renderInputElement(touchableProps, evaStyle)}
-          onBackdropPress={this.onBackdropPress}>
+          onBackdropPress={this.onBackdropPress}
+        >
           <List
             style={styles.list}
             data={this.data}
@@ -516,25 +564,26 @@ export class SelectComponent extends React.Component<SelectProps, State> {
 
 const styles = StyleSheet.create({
   input: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: Platform.OS === "android" ? 44 : null,
   },
   popover: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   list: {
     flexGrow: 0,
   },
   text: {
     flex: 1,
-    textAlign: 'left',
+    textAlign: "left",
   },
   label: {
-    textAlign: 'left',
+    textAlign: "left",
   },
   caption: {
-    textAlign: 'left',
+    textAlign: "left",
   },
 });
 
