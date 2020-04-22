@@ -516,6 +516,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: Platform.OS === "android" ? 44 : null
   },
   text: {
     flex: 1,
