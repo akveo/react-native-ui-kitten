@@ -151,6 +151,6 @@ export class Calendar<D = Date> extends BaseCalendarComponent<CalendarProps<D>, 
       return true;
     }
 
-    return false;
+    return props.eva.theme !== nextProps.eva.theme;
   }
 }

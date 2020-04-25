@@ -154,6 +154,6 @@ export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendar
       return true;
     }
 
-    return false;
+    return props.eva.theme !== nextProps.eva.theme;
   }
 }
