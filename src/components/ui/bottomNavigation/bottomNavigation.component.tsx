@@ -137,9 +137,7 @@ export class BottomNavigationComponent extends React.Component<BottomNavigationP
   };
 
   private onTabSelect = (index: number): void => {
-    if (this.props.onSelect && this.props.selectedIndex !== index) {
-      this.props.onSelect(index);
-    }
+    this.props.onSelect && this.props.onSelect(index);
   };
 
   private getComponentStyle = (source: StyleType) => {
