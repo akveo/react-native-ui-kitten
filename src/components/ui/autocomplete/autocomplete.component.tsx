@@ -15,7 +15,6 @@ import {
 import { ChildrenWithProps } from '../../devsupport';
 import {
   Input,
-  InputComponent,
   InputElement,
   InputProps,
 } from '../input/input.component';
@@ -119,7 +118,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   private popoverRef = React.createRef<Popover>();
-  private inputRef = React.createRef<InputComponent>();
+  private inputRef = React.createRef<Input>();
 
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);

@@ -71,9 +71,8 @@ export type MenuItemElement = React.ReactElement<MenuItemProps>;
  *
  * @overview-example MenuItemSimpleUsage
  */
-class MenuItemComponent extends React.Component<MenuItemProps> {
-
-  static styledComponentName: string = 'MenuItem';
+@styled('MenuItem')
+export class MenuItem extends React.Component<MenuItemProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
@@ -187,5 +186,3 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 });
-
-export const MenuItem = styled<MenuItemProps>(MenuItemComponent);

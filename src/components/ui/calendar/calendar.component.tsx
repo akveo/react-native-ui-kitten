@@ -103,9 +103,9 @@ export type CalendarElement<D = Date> = React.ReactElement<CalendarProps<D>>;
  * @overview-example CalendarTheming
  * Styling of the calendar is possible with [configuring a custom theme](guides/branding).
  */
-export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarProps<D>, D> {
 
-  static styledComponentName: string = 'Calendar';
+@styled('Calendar')
+export class Calendar<D = Date> extends BaseCalendarComponent<CalendarProps<D>, D> {
 
   constructor(props: CalendarProps<D>) {
     super(props);
@@ -151,8 +151,6 @@ export class CalendarComponent<D = Date> extends BaseCalendarComponent<CalendarP
       return true;
     }
 
-    return props.eva.theme !== nextProps.eva.theme;
+    return false;
   }
 }
-
-export const Calendar = styled<CalendarProps>(CalendarComponent);

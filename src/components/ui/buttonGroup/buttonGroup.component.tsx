@@ -79,9 +79,9 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
  *
  * @overview-example ButtonGroupWithIcons
  */
-class ButtonGroupComponent extends React.Component<ButtonGroupProps> {
 
-  static styledComponentName: string = 'ButtonGroup';
+@styled('ButtonGroup')
+export class ButtonGroup extends React.Component<ButtonGroupProps> {
 
   private getComponentStyle = (source: StyleType) => {
     const { dividerBackgroundColor, dividerWidth, ...containerParameters } = source;
@@ -165,5 +165,3 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
 });
-
-export const ButtonGroup = styled<ButtonGroupProps>(ButtonGroupComponent);

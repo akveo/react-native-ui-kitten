@@ -165,9 +165,8 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @overview-example DatepickerTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
-
-  static styledComponentName: string = 'Datepicker';
+@styled('Datepicker')
+export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
 
   constructor(props: DatepickerProps<D>) {
     super(props);
@@ -214,5 +213,3 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
     );
   }
 }
-
-export const Datepicker = styled<DatepickerProps>(DatepickerComponent);

@@ -141,9 +141,8 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @overview-example DrawerTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-class DrawerComponent extends React.Component<DrawerProps> {
-
-  static styledComponentName: string = 'Drawer';
+@styled('Drawer')
+export class Drawer extends React.Component<DrawerProps> {
 
   private getComponentStyle = (source: StyleType) => {
     const {
@@ -191,5 +190,3 @@ class DrawerComponent extends React.Component<DrawerProps> {
     );
   }
 }
-
-export const Drawer = styled<DrawerProps>(DrawerComponent);

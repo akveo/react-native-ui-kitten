@@ -109,9 +109,8 @@ export type MenuElement = React.ReactElement<MenuProps>;
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  *
  */
-class MenuComponent extends React.Component<MenuProps> {
-
-  static styledComponentName: string = 'Menu';
+@styled('Menu')
+export class Menu extends React.Component<MenuProps> {
 
   private service: MenuService = new MenuService();
 
@@ -166,5 +165,3 @@ class MenuComponent extends React.Component<MenuProps> {
     );
   }
 }
-
-export const Menu = styled<MenuProps>(MenuComponent);

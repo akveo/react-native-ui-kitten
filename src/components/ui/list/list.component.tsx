@@ -64,9 +64,8 @@ export interface ScrollToOffsetParams extends BaseScrollParams {
  * @overview-example ListCustomItem
  * Using ListItem is helpful for basic lists, but not required. For example, `Card` may be used.
  */
-export class ListComponent<ItemT = any> extends React.Component<ListProps> {
-
-  static styledComponentName: string = 'List';
+@styled('List')
+export class List<ItemT = any> extends React.Component<ListProps> {
 
   private listRef = React.createRef<FlatList>();
 
@@ -99,5 +98,3 @@ export class ListComponent<ItemT = any> extends React.Component<ListProps> {
     );
   }
 }
-
-export const List = styled<ListProps>(ListComponent);

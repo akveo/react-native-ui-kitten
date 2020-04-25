@@ -77,9 +77,8 @@ export type CardElement = React.ReactElement<CardProps>;
  *
  * @overview-example CardStatuses
  */
-class CardComponent extends React.Component<CardProps> {
-
-  static styledComponentName: string = 'Card';
+@styled('Card')
+export class Card extends React.Component<CardProps> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
@@ -172,5 +171,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
 });
-
-export const Card = styled<CardProps>(CardComponent);

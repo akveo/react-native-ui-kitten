@@ -211,9 +211,9 @@ const CHEVRON_ANIM_DURATION: number = 200;
  * @overview-example SelectTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class SelectComponent extends React.Component<SelectProps, State> {
 
-  static styledComponentName: string = 'Select';
+@styled('Select')
+export class Select extends React.Component<SelectProps, State> {
 
   static defaultProps = {
     placeholder: 'Select Option',
@@ -537,5 +537,3 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 });
-
-export const Select = styled<SelectProps>(SelectComponent);

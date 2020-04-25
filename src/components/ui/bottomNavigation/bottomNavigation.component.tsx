@@ -128,9 +128,9 @@ export type BottomNavigationElement = React.ReactElement<BottomNavigationProps>;
  * @example BottomNavigationWithoutIndicator
  * To remove indicator, `appearance` property may be used.
  */
-export class BottomNavigationComponent extends React.Component<BottomNavigationProps> {
 
-  static styledComponentName: string = 'BottomNavigation';
+@styled('BottomNavigation')
+export class BottomNavigation extends React.Component<BottomNavigationProps> {
 
   static defaultProps: Partial<BottomNavigationProps> = {
     selectedIndex: 0,
@@ -215,5 +215,3 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
-
-export const BottomNavigation = styled<BottomNavigationProps>(BottomNavigationComponent);

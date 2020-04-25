@@ -27,11 +27,10 @@ export type DividerElement = React.ReactElement<DividerProps>;
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
  */
-class DividerComponent extends React.Component<DividerProps> {
+@styled('Divider')
+export class Divider extends React.Component<DividerProps> {
 
-  static styledComponentName: string = 'Divider';
-
-  public render(): DividerElement {
+  public render(): React.ReactElement {
     const { eva, style, ...viewProps } = this.props;
 
     return (
@@ -42,5 +41,3 @@ class DividerComponent extends React.Component<DividerProps> {
     );
   }
 }
-
-export const Divider = styled<DividerProps>(DividerComponent);

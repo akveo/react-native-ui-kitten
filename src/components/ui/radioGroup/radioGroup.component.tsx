@@ -47,9 +47,8 @@ export type RadioGroupElement = React.ReactElement<RadioGroupProps>;
  *
  * @overview-example RadioGroupSimpleUsage
  */
-class RadioGroupComponent extends React.Component<RadioGroupProps> {
-
-  static styledComponentName: string = 'RadioGroup';
+@styled('RadioGroup')
+export class RadioGroup extends React.Component<RadioGroupProps> {
 
   static defaultProps: Partial<RadioGroupProps> = {
     selectedIndex: -1,
@@ -96,5 +95,3 @@ class RadioGroupComponent extends React.Component<RadioGroupProps> {
     );
   }
 }
-
-export const RadioGroup = styled<RadioGroupProps>(RadioGroupComponent);

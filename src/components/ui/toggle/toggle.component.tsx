@@ -94,9 +94,8 @@ export type ToggleElement = React.ReactElement<ToggleProps>;
  * @overview-example ToggleTheming
  * In most cases this is redundant, if [custom theme is configured](docs/guides/branding).
  */
-export class ToggleComponent extends React.Component<ToggleProps> implements PanResponderCallbacks {
-
-  static styledComponentName: string = 'Toggle';
+@styled('Toggle')
+export class Toggle extends React.Component<ToggleProps> implements PanResponderCallbacks {
 
   private panResponder: PanResponderInstance;
   private thumbWidthAnimation: Animated.Value;
@@ -429,5 +428,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export const Toggle = styled<ToggleProps>(ToggleComponent);

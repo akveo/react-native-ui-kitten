@@ -119,9 +119,8 @@ export type TabBarElement = React.ReactElement<TabBarProps>;
  * @overview-example TabTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class TabBarComponent extends React.Component<TabBarProps> {
-
-  static styledComponentName: string = 'TabBar';
+@styled('TabBar')
+export class TabBar extends React.Component<TabBarProps> {
 
   static defaultProps: Partial<TabBarProps> = {
     selectedIndex: 0,
@@ -209,5 +208,3 @@ const styles = StyleSheet.create({
   },
   indicator: {},
 });
-
-export const TabBar = styled<TabBarProps>(TabBarComponent);

@@ -65,9 +65,8 @@ export type AvatarElement = React.ReactElement<AvatarProps>;
  * Avatar may have different root component to render images.
  * This might be helpful when needed to improve image loading with 3rd party image libraries.
  */
-export class AvatarComponent extends React.Component<AvatarProps> {
-
-  static styledComponentName: string = 'Avatar';
+@styled('Avatar')
+export class Avatar extends React.Component<AvatarProps> {
 
   static defaultProps: Partial<AvatarProps> = {
     ImageComponent: Image,
@@ -109,5 +108,3 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
-
-export const Avatar = styled<AvatarProps>(AvatarComponent);

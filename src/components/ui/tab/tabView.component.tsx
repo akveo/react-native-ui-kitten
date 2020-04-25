@@ -17,10 +17,7 @@ import {
   TabElement,
   TabProps,
 } from './tab.component';
-import {
-  TabBar,
-  TabBarComponent,
-} from './tabBar.component';
+import { TabBar } from './tabBar.component';
 import {
   ViewPager,
   ViewPagerProps,
@@ -79,7 +76,7 @@ export class TabView extends React.Component<TabViewProps> {
   };
 
   private viewPagerRef = React.createRef<ViewPager>();
-  private tabBarRef = React.createRef<TabBarComponent>();
+  private tabBarRef = React.createRef<TabBar>();
 
   private onBarSelect = (index: number): void => {
     this.viewPagerRef.current?.scrollToIndex({ index, animated: true });

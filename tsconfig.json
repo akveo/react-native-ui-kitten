@@ -8,6 +8,7 @@
     "jsx": "react",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
     "sourceMap": true,
     "declaration": true,
     "skipLibCheck": true,

@@ -86,9 +86,8 @@ export type ListItemElement = React.ReactElement<ListItemProps>;
  * />
  * ```
  */
-export class ListItemComponent extends React.Component<ListItemProps & { index: number }> {
-
-  static styledComponentName: string = 'ListItem';
+@styled('ListItem')
+export class ListItem extends React.Component<ListItemProps> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
@@ -221,5 +220,3 @@ const webStyles = Platform.OS === 'web' && StyleSheet.create({
     outlineWidth: 0,
   },
 });
-
-export const ListItem = styled<ListItemProps>(ListItemComponent);

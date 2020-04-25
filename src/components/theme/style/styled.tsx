@@ -16,7 +16,7 @@ import { MappingContext } from '../mapping/mappingContext';
 import { ThemeContext } from '../theme/themeContext';
 import { ThemeType } from '../theme/theme.service';
 
-interface PrivateProps<T> {
+interface PrivateRefProps<T = React.ReactInstance> {
   forwardedRef?: React.Ref<T>;
 }
 
@@ -34,7 +34,16 @@ interface State {
   interaction: Interaction[];
 }
 
-export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps & P>;
+type WrappedComponentProps = any;
+// TODO: Better types. React.ComponentType<WrappedComponentProps>?
+type WrappedComponent = any;
+type StyledComponent = any;
+
+export const styled = (name: string): StyledComponent => {
+  return (component: WrappedComponent): StyledComponent => {
+    return styleInjector(component, name);
+  };
+};
 
 /**
  * High Order Function to apply style mapping on a component.
@@ -61,47 +70,30 @@ export type StyledComponentClass<P> = React.ComponentClass<StyledComponentProps 
  *
  * @overview-example StyledComponentVariants
  */
-export const styled = <P extends object>(Component: React.ComponentType<P>): StyledComponentClass<P> => {
+const styleInjector = (Component: WrappedComponent, name: string): StyledComponent => {
 
-  // @ts-ignore
-  if (!Component.styledComponentName) {
+  if (!name) {
     console.warn('Styled components should specify corresponding style name.');
     return null;
   }
 
-  type WrappingProps = PrivateProps<WrappedElementInstance> & WrappedProps;
-  type WrappedProps = StyledComponentProps & P;
-  type WrappingElement = React.ReactElement<WrappingProps>;
-  type WrappedElement = React.ReactElement<WrappedProps>;
-  type WrappedElementInstance = React.ReactInstance;
+  // type WrappedProps = StyledComponentProps & any;
+  // type WrappingElement = React.ReactElement<WrappingProps>;
+  // type WrappedElement = React.ReactElement<WrappedProps>;
 
-  class Wrapper extends React.Component<WrappingProps, State> {
+  class Wrapper extends React.Component<PrivateRefProps, State> {
 
     public state: State = {
       interaction: [],
     };
 
     private init: boolean = false;
-
-    // Yes. This is not static because it is calculated once we got some meta from style context.
-    private defaultProps: StyledComponentProps;
+    private defaultProps: WrappedComponentProps;
     private service: StyleConsumerService;
 
-    public render(): React.ReactNode {
-      return (
-        <MappingContext.Consumer>{(style: ThemeStyleType): WrappedElement => (
-          <ThemeContext.Consumer>{(theme: ThemeType): WrappedElement => {
-            return this.renderWrappedElement(style, theme);
-          }}</ThemeContext.Consumer>
-        )}</MappingContext.Consumer>
-      );
-    }
-
     private onInit = (style: ThemeStyleType, theme: ThemeType): void => {
-      // @ts-ignore
-      this.service = new StyleConsumerService(Component.styledComponentName, style, theme);
+      this.service = new StyleConsumerService(name, style);
       this.defaultProps = this.service.createDefaultProps();
-
       this.init = true;
     };
 
@@ -109,11 +101,11 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
       this.setState({ interaction });
     };
 
-    private withEvaProp = (sourceProps: P,
+    private withEvaProp = (sourceProps: WrappedComponentProps,
                            sourceStyle: ThemeStyleType,
-                           theme: ThemeType): WrappedProps => {
+                           theme: ThemeType): StyledComponentProps => {
 
-      const props: WrappingProps = { ...this.defaultProps, ...sourceProps };
+      const props: WrappedComponentProps = { ...this.defaultProps, ...sourceProps };
       const style: StyleType = this.service.createStyleProp(props, sourceStyle, theme, this.state.interaction);
 
       return {
@@ -126,7 +118,7 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
       };
     };
 
-    private renderWrappedElement = (style: ThemeStyleType, theme: ThemeType): WrappedElement => {
+    private renderWrappedElement = (style: ThemeStyleType, theme: ThemeType): React.ReactElement => {
       if (!this.init) {
         this.onInit(style, theme);
       }
@@ -135,18 +127,25 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
 
       return (
         <Component
-          {...this.withEvaProp(restProps as P, style, theme)}
+          {...this.withEvaProp(restProps as any, style, theme)}
           ref={forwardedRef}
         />
       );
     };
+
+    public render(): React.ReactElement {
+      return (
+        <MappingContext.Consumer>{(style: ThemeStyleType): React.ReactElement => (
+          <ThemeContext.Consumer>{(theme: ThemeType): React.ReactElement => {
+            return this.renderWrappedElement(style, theme);
+          }}</ThemeContext.Consumer>
+        )}</MappingContext.Consumer>
+      );
+    }
   }
 
-  const WrappingElement = (props: WrappingProps,
-                           ref: React.Ref<WrappedElementInstance>): WrappingElement => {
+  const WrappingElement = (props: WrappedComponentProps, ref: React.Ref<React.ReactInstance>): React.ReactElement => {
     return (
-      // @ts-ignore
-
       <Wrapper
         {...props}
         forwardedRef={ref}
@@ -154,12 +153,9 @@ export const styled = <P extends object>(Component: React.ComponentType<P>): Sty
     );
   };
 
-  const ResultComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
-
+  const ResultComponent = React.forwardRef<React.ReactInstance, PrivateRefProps>(WrappingElement);
   ResultComponent.displayName = Component.displayName || Component.name;
-
   hoistNonReactStatics(ResultComponent, Component);
 
-  // @ts-ignore
   return ResultComponent;
 };

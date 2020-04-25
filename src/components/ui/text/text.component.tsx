@@ -78,9 +78,8 @@ export type TextElement = React.ReactElement<TextProps>;
  * <Text style={...}>Place your Text</Text>
  * ```
  */
-export class TextComponent extends React.Component<TextProps> {
-
-  static styledComponentName: string = 'Text';
+@styled('Text')
+export class Text extends React.Component<TextProps> {
 
   public render(): React.ReactElement<RNTextProps> {
     const { eva, style, ...textProps } = this.props;
@@ -93,5 +92,3 @@ export class TextComponent extends React.Component<TextProps> {
     );
   }
 }
-
-export const Text = styled<TextProps>(TextComponent);

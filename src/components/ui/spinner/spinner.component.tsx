@@ -77,9 +77,8 @@ interface ArcElementStyle {
  *
  * @example SpinnerDataLoading
  */
-export class SpinnerComponent extends React.PureComponent<SpinnerProps> {
-
-  static styledComponentName: string = 'Spinner';
+@styled('Spinner')
+export class Spinner extends React.PureComponent<SpinnerProps> {
 
   static defaultProps: Partial<SpinnerProps> = {
     animating: true,
@@ -172,5 +171,3 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
-
-export const Spinner = styled<SpinnerProps>(SpinnerComponent);
