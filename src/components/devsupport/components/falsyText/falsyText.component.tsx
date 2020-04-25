@@ -58,7 +58,7 @@ export class FalsyText extends React.Component<FalsyTextProps> {
     }
 
     if (typeof component === 'function') {
-      return component(textProps as TextProps);
+      return React.createElement(component, textProps as TextProps);
     }
 
     return (

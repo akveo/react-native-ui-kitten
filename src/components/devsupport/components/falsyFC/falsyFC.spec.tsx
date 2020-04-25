@@ -8,7 +8,7 @@ it('should render nothing', function () {
   expect(component.toJSON()).toEqual(null);
 });
 
-it('should render provided function component', function () {
+it('should render provided function component', () => {
   const component = render(
     <FalsyFC style={{ color: 'red' }} component={props => <Text {...props}>I love Babel</Text>}/>,
   );
@@ -19,6 +19,22 @@ it('should render provided function component', function () {
   expect(textComponent.props.style).toEqual({
     color: 'red',
   });
+});
+
+it('should render provided function component with hooks', () => {
+  const HookComponent = (props) => {
+    const state = React.useState(1);
+    return (
+      <Text {...props}>I love Babel {state}</Text>
+    );
+  };
+
+  const component = render(
+    <FalsyFC style={{ color: 'red' }} component={props => <HookComponent {...props}/>}/>,
+  );
+
+  const textComponent = component.getByText('I love Babel 1');
+  expect(textComponent).toBeTruthy();
 });
 
 it('should render fallback component', function () {
