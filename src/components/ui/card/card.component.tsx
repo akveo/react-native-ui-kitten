@@ -147,16 +147,16 @@ class CardComponent extends React.Component<CardProps> {
           component={accent}
         />
         <FalsyFC
-          style={evaStyle.header}
+          style={[styles.transparent, evaStyle.header]}
           component={header}
         />
         {header && <Divider/>}
-        <View style={[styles.body, evaStyle.body]}>
-          {this.props.children}
+        <View style={evaStyle.body}>
+          {children}
         </View>
         {footer && <Divider/>}
         <FalsyFC
-          style={evaStyle.footer}
+          style={[styles.transparent, evaStyle.footer]}
           component={footer}
         />
       </TouchableWeb>
@@ -166,12 +166,10 @@ class CardComponent extends React.Component<CardProps> {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
     overflow: 'hidden',
   },
-  body: {
+  transparent: {
     backgroundColor: 'transparent',
-    overflow: 'hidden',
   },
 });
 
