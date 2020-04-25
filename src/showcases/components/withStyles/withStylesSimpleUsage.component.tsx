@@ -5,9 +5,9 @@ import { Text, withStyles } from '@ui-kitten/components';
 const ThemedComponent = ({ eva }) => (
   <View style={eva.style.container}>
     <Text
-      appearance='alternative'
+      style={{ color: eva.theme['color-success-default'] }}
       category='h4'>
-      I use info color as background!
+      I use info as background color and success as text color!
     </Text>
   </View>
 );

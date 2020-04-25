@@ -21,6 +21,7 @@ interface PrivateRefProps<T = React.ReactInstance> {
 }
 
 export interface EvaProp {
+  theme?: ThemeType;
   style?: StyleType;
   dispatch?: (interaction: Interaction[]) => void;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { View } from 'react-native';
 
 export const UseStyleSheetSimpleUsageShowcase = () => {
   const styles = useStyleSheet(themedStyles);
