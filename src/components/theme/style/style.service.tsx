@@ -35,8 +35,8 @@ export enum State {
 }
 
 /**
- * Takes a theme provided by ApplicationProvider or ThemeProvider and applies it to style.
- * Consider not using this function when not using Eva theme variables.
+ * Takes an actual theme provided by ApplicationProvider or ThemeProvider and applies it to style object
+ * created with StyleService.
  *
  * @overview-example UseStyleSheetSimpleUsage
  */

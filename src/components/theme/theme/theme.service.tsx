@@ -11,8 +11,7 @@ export type ThemeValue = string;
 export type ThemeType = Record<string, ThemeValue>;
 
 /**
- * Takes an actual theme provided by ApplicationProvider or ThemeProvider and
- * @returns it to a functional component.
+ * Takes an actual theme provided by ApplicationProvider or ThemeProvider and returns it to a functional component.
  *
  * @overview-example UseThemeSimpleUsage
  */

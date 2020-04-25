@@ -21,7 +21,6 @@ interface PrivateProps<T> {
 }
 
 export interface EvaProp {
-  theme?: ThemeType;
   style?: StyleType;
   dispatch?: (interaction: Interaction[]) => void;
 }

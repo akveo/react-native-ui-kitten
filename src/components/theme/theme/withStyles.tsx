@@ -28,14 +28,11 @@ interface PrivateProps<T> {
 type CreateStylesFunction<T extends Styles<T>> = (theme: ThemeType) => T;
 
 /**
- * High Order Function for creating styles mapped to current theme
- * Returns component class which can be used as themed component.
- *
- * Injects `eva` property into component props, which is `{ theme, style }`.
- * Current theme and styles provided by Eva.
+ * Accepts a component and a function to create a StyleSheet object with current theme
+ * for injecting it into component props.
+ * Injects `eva` property, which is `{ style }`, where style - a StyleSheet object mapped to current theme.
  *
  * @property {EvaProp} eva - Additional property injected to all `styled` components. Includes following properties:
- * `theme` - current theme,
  * `style` - styles provided by Eva,
  *
  * @param Component - Type: {ComponentType}. Component to be themed.
@@ -58,10 +55,7 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
       const style = createStyles && createStyles(theme);
       return {
         ...props,
-        eva: {
-          theme,
-          style,
-        },
+        eva: { style },
       };
     };
 
