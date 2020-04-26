@@ -127,7 +127,7 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Ranged picker works with special range object - CalendarRange: `{ startDate: Date, endDate: Date }`.
  * For incomplete ranges, there is only a `startDate` property.
  */
-@styled('RangeDatepicker')
+@styled('Datepicker')
 export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
 
   static styledComponentName: string = 'Datepicker';
