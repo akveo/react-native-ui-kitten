@@ -55,7 +55,7 @@ type AlignmentProp = 'start' | 'center';
  * @property {() => ReactElement} accessoryLeft - Function component
  * to render to the left edge the top navigation.
  *
- * @property {() => ReactElement} accessoryLeft - Function component
+ * @property {() => ReactElement} accessoryRight - Function component
  * to render to the right edge the top navigation.
  *
  * @property {string} appearance - Appearance of the component.
