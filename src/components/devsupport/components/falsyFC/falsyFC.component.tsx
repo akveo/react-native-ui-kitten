@@ -43,6 +43,6 @@ export class FalsyFC<Props = {}> extends React.Component<FalsyFCProps<Props>> {
       return fallback || null;
     }
 
-    return component(props as Props);
+    return React.createElement(component, props as Props);
   }
 }
