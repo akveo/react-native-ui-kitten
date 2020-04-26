@@ -79,12 +79,11 @@ export class TabView extends React.Component<TabViewProps> {
   private tabBarRef = React.createRef<TabBar>();
 
   private onBarSelect = (index: number): void => {
-    this.viewPagerRef.current?.scrollToIndex({ index, animated: true });
+    this.props.onSelect && this.props.onSelect(index);
   };
 
   private onPagerOffsetChange = (offset: number): void => {
-    const tabCount: number = React.Children.count(this.tabBarRef.current?.props.children);
-    this.tabBarRef.current?.scrollToOffset({ offset: offset / tabCount });
+
   };
 
   private onPagerSelect = (index: number): void => {
