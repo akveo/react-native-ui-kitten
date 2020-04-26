@@ -23,17 +23,14 @@ import {
 import {
   ChevronDown,
   ChevronDownElement,
-  ChevronDownProps,
 } from '../../shared/chevronDown.component';
 import {
   ChevronLeft,
   ChevronLeftElement,
-  ChevronLeftProps,
 } from '../../shared/chevronLeft.component';
 import {
   ChevronRight,
   ChevronRightElement,
-  ChevronRightProps,
 } from '../../shared/chevronRight.component';
 
 export interface CalendarHeaderProps extends ViewProps {
@@ -51,39 +48,36 @@ export type CalendarHeaderElement = React.ReactElement<CalendarHeaderProps>;
 export class CalendarHeader extends React.Component<CalendarHeaderProps> {
 
   private renderTitleIcon = (): ChevronDownElement => {
-    const { tintColor, ...svgProps } = this.props.iconStyle;
+    const { tintColor, ...svgStyle } = this.props.iconStyle;
 
     return (
       <ChevronDown
-        style={styles.headerButtonIcon}
+        style={[styles.headerButtonIcon, svgStyle]}
         fill={tintColor}
-        {...svgProps as ChevronDownProps}
       />
     );
   };
 
   private renderLeftIcon = (): ChevronLeftElement => {
-    const { tintColor, ...svgProps } = this.props.iconStyle;
+    const { tintColor, ...svgStyle } = this.props.iconStyle;
     const IconComponent: React.ComponentType<SvgProps> = RTLService.select(ChevronLeft, ChevronRight);
 
     return (
       <IconComponent
-        style={styles.lateralIcon}
+        style={[styles.lateralIcon, svgStyle]}
         fill={tintColor}
-        {...svgProps as ChevronLeftProps}
       />
     );
   };
 
   private renderRightIcon = (): ChevronRightElement => {
-    const { tintColor, ...svgProps } = this.props.iconStyle;
+    const { tintColor, ...svgStyle } = this.props.iconStyle;
     const IconComponent: React.ComponentType<SvgProps> = RTLService.select(ChevronRight, ChevronLeft);
 
     return (
       <IconComponent
-        style={styles.lateralIcon}
+        style={[styles.lateralIcon, svgStyle]}
         fill={tintColor}
-        {...svgProps as ChevronRightProps}
       />
     );
   };

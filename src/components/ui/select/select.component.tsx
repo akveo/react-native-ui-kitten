@@ -442,9 +442,10 @@ export class Select extends React.Component<SelectProps, State> {
   };
 
   private renderDefaultIconElement = (evaStyle): React.ReactElement => {
+    const { tintColor, ...svgStyle } = evaStyle;
     return (
       <Animated.View style={{ transform: [{ rotate: this.expandToRotateInterpolation }] }}>
-        <ChevronDown {...evaStyle} fill={evaStyle.tintColor}/>
+        <ChevronDown style={svgStyle} fill={tintColor}/>
       </Animated.View>
     );
   };
