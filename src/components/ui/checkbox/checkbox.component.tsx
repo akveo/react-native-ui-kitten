@@ -13,7 +13,6 @@ import {
   TargetedEvent,
   View,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaStatus,
   FalsyText,
@@ -21,6 +20,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

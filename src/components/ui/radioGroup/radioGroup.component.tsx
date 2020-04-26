@@ -9,8 +9,10 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
-import { ChildrenWithProps } from '../../devsupport';
+import {
+  ChildrenWithProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   styled,
   StyledComponentProps,

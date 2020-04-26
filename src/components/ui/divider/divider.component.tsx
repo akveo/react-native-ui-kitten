@@ -9,7 +9,7 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
+import { Overwrite } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,

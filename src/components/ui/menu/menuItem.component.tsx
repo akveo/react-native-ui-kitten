@@ -13,7 +13,6 @@ import {
   TargetedEvent,
   View,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
@@ -21,6 +20,7 @@ import {
   RenderProp,
   TouchableWeb,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

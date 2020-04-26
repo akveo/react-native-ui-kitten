@@ -57,8 +57,7 @@
     "tscpaths": "0.0.9",
     "tslint": "^5.12.1",
     "typedoc": "^0.15.3",
-    "typescript": "^3.8.2",
-    "utility-types": "^3.10.0"
+    "typescript": "^3.8.2"
   },
   "resolutions": {
     "react": "~16.9.0",

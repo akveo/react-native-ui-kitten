@@ -6,10 +6,10 @@
 
 import React from 'react';
 import { ViewProps } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   RenderProp,
+  Overwrite,
 } from '../../devsupport';
 import {
   styled,

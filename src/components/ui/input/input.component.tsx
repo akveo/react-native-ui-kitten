@@ -19,7 +19,6 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaSize,
   EvaStatus,
@@ -31,6 +30,7 @@ import {
   WebEventResponder,
   WebEventResponderCallbacks,
   WebEventResponderInstance,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

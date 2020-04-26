@@ -6,10 +6,10 @@
 
 import React from 'react';
 import { ListRenderItemInfo } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   ChildrenWithProps,
   IndexPath,
+  Overwrite,
 } from '../../devsupport';
 import {
   styled,

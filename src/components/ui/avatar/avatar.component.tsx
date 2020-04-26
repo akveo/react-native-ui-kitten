@@ -11,8 +11,10 @@ import {
   ImageStyle,
   StyleSheet,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
-import { EvaSize } from '../../devsupport';
+import {
+  EvaSize,
+  Overwrite,
+} from '../../devsupport';
 import {
   styled,
   StyledComponentProps,

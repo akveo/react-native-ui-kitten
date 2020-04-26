@@ -19,7 +19,6 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   ChildrenWithProps,
   EvaInputSize,
@@ -31,6 +30,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

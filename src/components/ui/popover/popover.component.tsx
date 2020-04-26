@@ -5,17 +5,14 @@
  */
 
 import React from 'react';
-import {
-  StyleSheet,
-  ViewProps,
-} from 'react-native';
-import { Overwrite } from 'utility-types';
+import { StyleSheet } from 'react-native';
 import {
   Frame,
   MeasureElement,
   MeasuringElement,
   Point,
   RenderProp,
+  Overwrite,
 } from '../../devsupport';
 import { ModalService } from '../../theme';
 import { ModalProps } from '../modal/modal.component';

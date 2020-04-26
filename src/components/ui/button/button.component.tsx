@@ -12,7 +12,6 @@ import {
   StyleSheet,
   TargetedEvent,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaSize,
   EvaStatus,
@@ -22,6 +21,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

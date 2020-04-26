@@ -11,13 +11,13 @@ import {
   NativeSyntheticEvent,
   TargetedEvent,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

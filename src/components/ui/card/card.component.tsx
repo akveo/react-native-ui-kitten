@@ -11,7 +11,6 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaStatus,
   FalsyFC,
@@ -19,6 +18,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

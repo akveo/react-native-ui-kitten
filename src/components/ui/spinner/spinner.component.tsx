@@ -12,11 +12,11 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaSize,
   EvaStatus,
   Size,
+  Overwrite,
 } from '../../devsupport';
 import {
   styled,

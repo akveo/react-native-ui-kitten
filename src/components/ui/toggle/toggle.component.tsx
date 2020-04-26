@@ -19,7 +19,6 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaStatus,
   FalsyText,
@@ -27,6 +26,7 @@ import {
   RTLService,
   TouchableWeb,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,

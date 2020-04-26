@@ -9,12 +9,14 @@ import {
   Text as RNText,
   TextProps as RNTextProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
+import {
+  EvaStatus,
+  Overwrite,
+ } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
-import { EvaStatus } from '../../devsupport';
 
 type TextStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | 'alternative' | 'hint' | string;

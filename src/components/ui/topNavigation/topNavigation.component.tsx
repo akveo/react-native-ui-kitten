@@ -10,11 +10,11 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
   RenderProp,
+  Overwrite,
 } from '../../devsupport';
 import {
   styled,
