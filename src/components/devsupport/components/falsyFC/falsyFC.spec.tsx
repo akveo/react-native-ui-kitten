@@ -49,3 +49,25 @@ it('should render fallback component', function () {
 
   expect(textComponent).toBeTruthy();
 });
+
+it('should be able to render components with hooks', function () {
+  const ComponentWithHooks = () => {
+    const [text, setText ] = React.useState('');
+
+    React.useEffect(() => {
+      setText('I love Babel');
+    }, []);
+
+    return <Text>{text}</Text>;
+  };
+
+  const component = render(
+    <FalsyFC
+      component={ComponentWithHooks}
+    />,
+  );
+
+  const textComponent = component.getByText('I love Babel');
+
+  expect(textComponent).toBeTruthy();
+});
