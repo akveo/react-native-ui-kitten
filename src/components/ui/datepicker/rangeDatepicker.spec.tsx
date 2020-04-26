@@ -23,7 +23,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   RangeDatepicker,
-  RangeDatepickerComponent,
   RangeDatepickerProps,
 } from './RangeDatepicker.component';
 import { RangeCalendar } from '../calendar/rangeCalendar.component';
@@ -52,7 +51,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   const TestRangeDatepicker = React.forwardRef((props: Partial<RangeDatepickerProps>,
-                                                ref: React.Ref<RangeDatepickerComponent>) => {
+                                                ref: React.Ref<RangeDatepicker>) => {
     const [range, setRange] = React.useState(props.range || {});
 
     const onSelect = (nextRange: CalendarRange<Date>): void => {
@@ -303,7 +302,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should show calendar by calling `show` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -315,7 +314,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should hide calendar by calling `hide` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -330,7 +329,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should show calendar by calling `focus` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -342,7 +341,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should hide calendar by calling `blur` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const component = render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -357,7 +356,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should return false if calendar not visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -366,7 +365,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should return true if calendar visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     render(
       <TestRangeDatepicker ref={componentRef}/>,
     );
@@ -378,7 +377,7 @@ describe('@range-datepicker: component checks', () => {
   });
 
   it('should call onSelect with empty object when calling `clear` with ref', async () => {
-    const componentRef: React.RefObject<RangeDatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<RangeDatepicker> = React.createRef();
     const onSelect = jest.fn();
 
     render(

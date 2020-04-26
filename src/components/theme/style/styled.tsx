@@ -65,6 +65,8 @@ export const styled = (name: string): StyledComponent => {
  *
  * @param Component - Type: {ComponentType}. Component to be styled.
  *
+ * @param name - Type: {string}. Name of the component in mapping.json.
+ *
  * @overview-example StyledComponentSimpleUsage
  *
  * @overview-example StyledComponentStates
@@ -74,13 +76,9 @@ export const styled = (name: string): StyledComponent => {
 const styleInjector = (Component: WrappedComponent, name: string): StyledComponent => {
 
   if (!name) {
-    console.warn('Styled components should specify corresponding style name.');
+    console.warn('Components annotated with @styled function should also have its in mapping.json.');
     return null;
   }
-
-  // type WrappedProps = StyledComponentProps & any;
-  // type WrappingElement = React.ReactElement<WrappingProps>;
-  // type WrappedElement = React.ReactElement<WrappedProps>;
 
   class Wrapper extends React.Component<PrivateRefProps, State> {
 

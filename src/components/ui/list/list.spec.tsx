@@ -22,7 +22,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   List,
-  ListComponent,
   ListProps,
 } from './list.component';
 import {
@@ -126,7 +125,7 @@ describe('@list-item: component checks', () => {
 
 describe('@list: component checks', () => {
 
-  const TestList = React.forwardRef((props: Partial<ListProps>, ref: React.Ref<ListComponent>) =>
+  const TestList = React.forwardRef((props: Partial<ListProps>, ref: React.Ref<List>) =>
     <ApplicationProvider
       mapping={mapping}
       theme={light}>
@@ -160,7 +159,7 @@ describe('@list: component checks', () => {
   });
 
   it('should be able to call scrollToEnd with ref', () => {
-    const componentRef = React.createRef<ListComponent>();
+    const componentRef = React.createRef<List>();
     render(
       <TestList
         ref={componentRef}
@@ -173,7 +172,7 @@ describe('@list: component checks', () => {
   });
 
   it('should be able to call scrollToIndex with ref', () => {
-    const componentRef = React.createRef<ListComponent>();
+    const componentRef = React.createRef<List>();
     render(
       <TestList ref={componentRef}/>,
     );
@@ -183,7 +182,7 @@ describe('@list: component checks', () => {
   });
 
   it('should be able to call scrollToIndex with ref', () => {
-    const componentRef = React.createRef<ListComponent>();
+    const componentRef = React.createRef<List>();
     render(
       <TestList ref={componentRef}/>,
     );

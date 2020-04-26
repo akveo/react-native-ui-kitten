@@ -22,7 +22,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   Calendar,
-  CalendarComponent,
   CalendarProps,
 } from './calendar.component';
 import { CalendarViewModes } from './type';
@@ -46,7 +45,7 @@ describe('@calendar: component checks', () => {
 
   const TestCalendar = React.forwardRef((
     props: Partial<CalendarProps<Date | Moment>>,
-    ref: React.Ref<CalendarComponent>,
+    ref: React.Ref<Calendar>,
   ) => {
 
     const [date, setDate] = React.useState<Date | Moment>(props.date);
@@ -116,7 +115,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should be rendered with view passed to startView prop', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     render(
       <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
@@ -125,7 +124,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change month to next when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef}/>,
     );
@@ -141,7 +140,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change month to previous when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef}/>,
     );
@@ -157,7 +156,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change year to next when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
@@ -173,7 +172,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change year to previous when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
@@ -189,7 +188,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should scroll to current month when scrollToToday called', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     render(
       <TestCalendar
         ref={componentRef}

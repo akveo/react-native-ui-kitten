@@ -10,7 +10,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   RangeCalendar,
-  RangeCalendarComponent,
   RangeCalendarProps,
 } from './rangeCalendar.component';
 import { CalendarRange } from './type';
@@ -37,7 +36,7 @@ describe('@range-calendar: component checks', () => {
 
   const TestRangeCalendar = React.forwardRef((
     props: Partial<RangeCalendarProps>,
-    ref: React.Ref<RangeCalendarComponent>) => {
+    ref: React.Ref<RangeCalendar>) => {
 
     const [range, setRange] = React.useState<CalendarRange<Date>>(props.range || {});
 
