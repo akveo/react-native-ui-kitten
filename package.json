@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-decorators": "^7.6.2",
     "@eva-design/eva": "^2.0.0-alpha.1",
     "@eva-design/material": "^2.0.0-alpha.1",
     "@types/gulp": "ts3.8",
