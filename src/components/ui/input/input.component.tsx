@@ -345,6 +345,7 @@ const platformStyles = StyleSheet.create({
     default: null,
     android: {
       paddingVertical: 0,
+      marginVertical: -2,
     },
     web: {
       outlineWidth: 0,
