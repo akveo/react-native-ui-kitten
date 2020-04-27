@@ -1,8 +1,24 @@
 import React from 'react';
-import { Animated, ImageProps, StyleSheet, ViewProps, ViewStyle } from 'react-native';
-import { ChildrenWithProps, Frame, MeasureElement, MeasuringElement, Point } from '../../devsupport';
+import {
+  Animated,
+  ImageProps,
+  StyleSheet,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
+import {
+  ChildrenWithProps,
+  Frame,
+  MeasureElement,
+  MeasuringElement,
+  Point,
+} from '../../devsupport';
 import { ChevronDown } from '../shared/chevronDown.component';
-import { MenuItem, MenuItemElement, MenuItemProps } from './menuItem.component';
+import {
+  MenuItem,
+  MenuItemElement,
+  MenuItemProps,
+} from './menuItem.component';
 
 export interface MenuGroupProps extends MenuItemProps {
   children?: ChildrenWithProps<MenuItemProps>;
