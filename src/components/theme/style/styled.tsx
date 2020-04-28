@@ -40,21 +40,9 @@ type WrappedComponentProps = any;
 type WrappedComponent = any;
 type StyledComponent = any;
 
-export const styled = (name: string): StyledComponent => {
-  return (component: WrappedComponent): StyledComponent => {
-    return styleInjector(component, name);
-  };
-};
-
 /**
- * High Order Function to apply style mapping on a component.
+ * `@styled` is a High Order Function to apply style mapping on a component.
  * Used by all UI Kitten components and can be used when building custom components with Eva.
- *
- * Requires component to have a static `styledComponentName` property which defines
- * corresponding component name in mapping.
- *
- * Injects `eva` property into component props, which is `{ theme, style, dispatch }`.
- * Current theme, styles provided by Eva and dispatch function to request styles for a particular state.
  *
  * @property {string} appearance - Appearance of component. Default is provided by mapping.
  *
@@ -63,16 +51,49 @@ export const styled = (name: string): StyledComponent => {
  * `style` - style provided by Eva,
  * `dispatch` - Function for requesting styles from Eva for current component state.
  *
- * @param Component - Type: {ComponentType}. Component to be styled.
- *
  * @param name - Type: {string}. Name of the component in mapping.json.
  *
  * @overview-example StyledComponentSimpleUsage
+ * The below examples demonstrate how components can be styled with Eva.
+ * See [the guide](design-system/custom-component-mapping) for more details.
+ *
+ * @overview-example StyledComponentEvaProp
+ * A styled function injects `eva` property into props of decorated component, where
+ * theme - a current theme,
+ * styles - a styles object provided by Eva
+ * dispatch - a function to request styles for a particular state.
+ *
+ * ```
+ * interface EvaProp {
+ *   theme: ThemeType;
+ *   style: StyleType;
+ *   dispatch: (interaction: Interaction[]) => void;
+ * }
+ * ```
  *
  * @overview-example StyledComponentStates
+ * Styled components may describe its style for a particular state.
+ *
+ * Let's say we don't like the standard behavior of TouchableOpacity when it's pressed and
+ * we want the component to change it's color rather being highlighted.
+ *
+ * We define an active state in `meta` key and in mapping, so that component will change `backgroundColor`,
+ * when `active` is requested. To do this, we call `dispatch` function when Touchable is pressed.
+ * Then, when touch is released, we request nothing, which stands for `default`.
  *
  * @overview-example StyledComponentVariants
+ * Now let's say we want to have a `status` property to make component change its color, for example,
+ * within the forms validation. Furthermore, we want to control its color for both statuses when it is pressed.
+ *
+ * The `variantGroups` key in `meta` defines all properties that can be applied by component.
+ * Each key in variant group is a string value that can be passed to component props.
  */
+export const styled = (name: string): StyledComponent => {
+  return (component: WrappedComponent): StyledComponent => {
+    return styleInjector(component, name);
+  };
+};
+
 const styleInjector = (Component: WrappedComponent, name: string): StyledComponent => {
 
   if (!name) {
