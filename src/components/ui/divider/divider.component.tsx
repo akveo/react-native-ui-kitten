@@ -26,6 +26,8 @@ export type DividerElement = React.ReactElement<DividerProps>;
  * A divider is a thin line that groups content in lists and layouts.
  *
  * @property {ViewProps} ...ViewProps - Any props applied to View component.
+ *
+ * @overview-example DividerSimpleUsage
  */
 @styled('Divider')
 export class Divider extends React.Component<DividerProps> {
