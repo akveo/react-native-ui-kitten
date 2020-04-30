@@ -17,7 +17,7 @@
   },
   "scripts": {
     "demo": "yarn --cwd ../kittenTricks",
-    "build": "tsc",
+    "build": "gulp build",
     "clean": "rimraf ./dist",
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
     "test": "jest",

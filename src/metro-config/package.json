@@ -15,11 +15,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "bin": {
+    "ui-kitten": "./bin/ui-kitten"
+  },
   "devDependencies": {
     "@eva-design/dss": "^2.0.0-alpha.1",
     "@eva-design/processor": "^2.0.0-alpha.1",
     "@types/lodash.merge": "ts3.7",
     "chalk": "^3.0.0",
+    "commander": "^4.1.1",
     "lodash.merge": "^4.6.1"
   },
   "peerDependencies": {
