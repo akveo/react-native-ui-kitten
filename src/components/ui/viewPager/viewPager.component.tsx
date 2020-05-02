@@ -137,8 +137,9 @@ export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProp
   };
 
   private onContentOffsetAnimationStateChanged = (state: { value: number }): void => {
+    this.contentOffsetValue = RTLService.select(-state.value, state.value);
+
     if (this.props.onOffsetChange) {
-      this.contentOffsetValue = RTLService.select(-state.value, state.value);
       this.props.onOffsetChange(this.contentOffsetValue);
     }
   };
