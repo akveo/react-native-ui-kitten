@@ -160,7 +160,7 @@ describe('@range-datepicker: component checks', () => {
   it('should call onSelect only with start date', async () => {
     const onSelect = jest.fn((range: CalendarRange<Date>) => {
       expect(range).toEqual({
-        startDate: new Date(today.getFullYear(), today.getMonth(), 5),
+        startDate: new Date(today.getFullYear(), today.getMonth(), 7),
         endDate: null,
       });
     });
@@ -171,42 +171,42 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const dateTouchable = await waitForElement(() => component.queryAllByText('5')[0]);
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
     fireEvent.press(dateTouchable);
   });
 
   it('should call onSelect with start and end dates if start date passed to props', async () => {
     const onSelect = jest.fn((range: CalendarRange<Date>) => {
       expect(range).toEqual({
-        startDate: new Date(today.getFullYear(), today.getMonth(), 5),
-        endDate: new Date(today.getFullYear(), today.getMonth(), 6),
+        startDate: new Date(today.getFullYear(), today.getMonth(), 7),
+        endDate: new Date(today.getFullYear(), today.getMonth(), 8),
       });
     });
 
     const component = render(
       <TestRangeDatepicker
-        range={{ startDate: new Date(today.getFullYear(), today.getMonth(), 5) }}
+        range={{ startDate: new Date(today.getFullYear(), today.getMonth(), 7) }}
         onSelect={onSelect}
       />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const dateTouchable = await waitForElement(() => component.queryAllByText('6')[0]);
+    const dateTouchable = await waitForElement(() => component.queryAllByText('8')[0]);
     fireEvent.press(dateTouchable);
   });
 
   it('should call onSelect only with start date if start and end dates passed to props', async () => {
     const onSelect = jest.fn((range: CalendarRange<Date>) => {
       expect(range).toEqual({
-        startDate: new Date(today.getFullYear(), today.getMonth(), 5),
+        startDate: new Date(today.getFullYear(), today.getMonth(), 7),
         endDate: null,
       });
     });
 
     const initialRange: CalendarRange<Date> = {
-      startDate: new Date(today.getFullYear(), today.getMonth(), 5),
-      endDate: new Date(today.getFullYear(), today.getMonth(), 6),
+      startDate: new Date(today.getFullYear(), today.getMonth(), 7),
+      endDate: new Date(today.getFullYear(), today.getMonth(), 8),
     };
 
     const component = render(
@@ -218,7 +218,7 @@ describe('@range-datepicker: component checks', () => {
 
     fireEvent.press(touchables.findInputTouchable(component));
 
-    const dateTouchable = await waitForElement(() => component.queryAllByText('5')[0]);
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
     fireEvent.press(dateTouchable);
   });
 

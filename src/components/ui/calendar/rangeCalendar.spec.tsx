@@ -62,7 +62,7 @@ describe('@range-calendar: component checks', () => {
   it('should call onSelect only with start date', () => {
     const onSelect = jest.fn((range: CalendarRange<Date>) => {
       expect(range).toEqual({
-        startDate: new Date(now.getFullYear(), now.getMonth(), 5),
+        startDate: new Date(now.getFullYear(), now.getMonth(), 7),
         endDate: null,
       });
     });
@@ -71,38 +71,38 @@ describe('@range-calendar: component checks', () => {
       <TestRangeCalendar onSelect={onSelect}/>,
     );
 
-    fireEvent.press(component.queryAllByText('5')[0]);
+    fireEvent.press(component.queryAllByText('7')[0]);
   });
 
   it('should call onSelect with start and end dates if start date passed to props', () => {
     const onSelect = jest.fn((range: CalendarRange<Date>) => {
       expect(range).toEqual({
-        startDate: new Date(now.getFullYear(), now.getMonth(), 5),
-        endDate: new Date(now.getFullYear(), now.getMonth(), 6),
+        startDate: new Date(now.getFullYear(), now.getMonth(), 7),
+        endDate: new Date(now.getFullYear(), now.getMonth(), 8),
       });
     });
 
     const component = render(
       <TestRangeCalendar
-        range={{ startDate: new Date(now.getFullYear(), now.getMonth(), 5) }}
+        range={{ startDate: new Date(now.getFullYear(), now.getMonth(), 7) }}
         onSelect={onSelect}
       />,
     );
 
-    fireEvent.press(component.queryAllByText('6')[0]);
+    fireEvent.press(component.queryAllByText('8')[0]);
   });
 
   it('should call onSelect only with start date if start and end dates passed to props', () => {
     const onSelect = jest.fn((range: CalendarRange<Date>) => {
       expect(range).toEqual({
-        startDate: new Date(now.getFullYear(), now.getMonth(), 5),
+        startDate: new Date(now.getFullYear(), now.getMonth(), 7),
         endDate: null,
       });
     });
 
     const initialRange: CalendarRange<Date> = {
-      startDate: new Date(now.getFullYear(), now.getMonth(), 5),
-      endDate: new Date(now.getFullYear(), now.getMonth(), 6),
+      startDate: new Date(now.getFullYear(), now.getMonth(), 7),
+      endDate: new Date(now.getFullYear(), now.getMonth(), 8),
     };
 
     const component = render(
@@ -112,6 +112,6 @@ describe('@range-calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.queryAllByText('5')[0]);
+    fireEvent.press(component.queryAllByText('7')[0]);
   });
 });

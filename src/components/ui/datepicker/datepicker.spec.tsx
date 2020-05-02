@@ -160,10 +160,10 @@ describe('@datepicker: component checks', () => {
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
-    const dateTouchable = await waitForElement(() => component.queryAllByText('5')[0]);
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
 
     fireEvent.press(dateTouchable);
-    expect(onSelect).toBeCalledWith(new Date(today.getFullYear(), today.getMonth(), 5));
+    expect(onSelect).toBeCalledWith(new Date(today.getFullYear(), today.getMonth(), 7));
   });
 
   it('should render element provided with renderDay prop', async () => {
