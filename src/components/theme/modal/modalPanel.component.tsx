@@ -71,13 +71,11 @@ export class ModalPanel extends React.Component<ModalPanelProps, ModalPanelState
     }
 
     const childElement: React.ReactElement = panelChild.element;
-
     panelChild.element = React.cloneElement(childElement, childElement.props, children);
 
     const components: Map<string, ModalPanelChild> = this.state.components;
-    components.delete(identifier);
     components.set(identifier, panelChild);
-    this.setState({ components });
+    this.forceUpdate();
   }
 
   private generateUniqueComponentKey = (): string => {
