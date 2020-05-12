@@ -113,3 +113,45 @@ It may be one of the valid Eva Design System packages.
 **customMappingPath** represents a path to custom mapping if you use [mapping customization](design-system/customize-mapping) feature. You may omit it if you do not customize Eva.
 
 The second argument of `create` function is a standard configuration of Metro Bundler. In case you had `metro.config.js` previously, pass the object you had to merge it with UI Kitten configuration.
+
+## Using with 3rd party Metro configurations
+
+Some libraries may require having specific Metro Bundler configuration, assuming you should merge it with the one provided by UI Kitten. To simplify this process, we made `@ui-kitten/metro-config` package resolve this issue out of the box, meaning you **should not** merge two configurations yourself.
+
+For example, let's have a look on how it can be used with `react-native-svg-transformer` library:
+
+The required configuration is:
+
+```js
+{
+  transformer: {
+    babelTransformerPath: require.resolve("react-native-svg-transformer")
+  },
+  resolver: {
+    assetExts: assetExts.filter(ext => ext !== "svg"),
+    sourceExts: [...sourceExts, "svg"]
+  }
+}
+```
+
+Meaning you can simply put it down into `create` function.
+
+```js
+const MetroConfig = require('@ui-kitten/metro-config');
+const defaultConfig = require('metro-config/src/defaults').getDefaultValues();
+
+const evaConfig = {
+  evaPackage: '@eva-design/eva',
+};
+
+module.exports = MetroConfig.create(evaConfig, {
+  transformer: {
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+  },
+  resolver: {
+    assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'),
+    sourceExts: [...defaultConfig.resolver.sourceExts, 'svg']
+  },
+});
+```
+
