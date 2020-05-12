@@ -45,7 +45,7 @@ export default () => (
         <Text style={styles.text} appearance='hint'>
           For example, try changing theme to Dark by using eva.dark
         </Text>
-        <Button style={styles.likeButton} icon={HeartIcon}>
+        <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
           LIKE
         </Button>
       </Layout>

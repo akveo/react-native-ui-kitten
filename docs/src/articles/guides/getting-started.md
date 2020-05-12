@@ -46,10 +46,10 @@ If you have an existing code base and want to use UI Kitten in your project, fol
 ### Install UI Kitten
 
 ```bash
-npm i @ui-kitten/components@next @eva-design/eva@next react-native-svg
+npm i @ui-kitten/components @eva-design/eva react-native-svg
 
 // Using Yarn?
-// yarn add @ui-kitten/components@next @eva-design/eva@next react-native-svg
+// yarn add @ui-kitten/components @eva-design/eva react-native-svg
 ```
 
 <div class="note note-warning">

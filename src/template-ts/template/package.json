@@ -10,12 +10,12 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@eva-design/eva": "2.0.0-alpha.1",
-    "@ui-kitten/components": "5.0.0-alpha.1",
-    "@ui-kitten/eva-icons": "5.0.0-alpha.1",
+    "@eva-design/eva": "2.0.0",
+    "@ui-kitten/components": "5.0.0",
+    "@ui-kitten/eva-icons": "5.0.0",
     "react": "16.11.0",
-    "react-native": "0.62.1",
-    "react-native-svg": "9.13.6"
+    "react-native": "0.62.2",
+    "react-native-svg": "^12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -26,7 +26,7 @@
     "@types/react-test-renderer": "16.9.2",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
-    "@ui-kitten/metro-config": "4.4.1",
+    "@ui-kitten/metro-config": "5.0.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",

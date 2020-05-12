@@ -8,10 +8,10 @@ By default, UI Kitten is configured with processing Eva mapping packages during 
 
 The following steps are only possible with installing UI Kitten package, which manages these issues:
 ```bash
-npm i -D @ui-kitten/metro-config@next
+npm i -D @ui-kitten/metro-config
 
 // Using Yarn?
-yarn add -D @ui-kitten/metro-config@next
+yarn add -D @ui-kitten/metro-config
 ```
 
 The props passed to ApplicationProvider should also be modified:

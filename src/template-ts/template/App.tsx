@@ -30,7 +30,7 @@ import * as eva from '@eva-design/eva';
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
  * https://akveo.github.io/eva-icons
  */
-const HeartIcon = (props: ImageProps): React.ReactElement<ImageProps> => (
+const HeartIcon = (props?: Partial<ImageProps>): React.ReactElement<ImageProps> => (
   <Icon {...props} name='heart'/>
 );
 
@@ -48,7 +48,7 @@ export default (): React.ReactFragment => (
         <Text style={styles.text} appearance='hint'>
           For example, try changing theme to Dark by using eva.dark
         </Text>
-        <Button style={styles.likeButton} icon={HeartIcon}>
+        <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
           LIKE
         </Button>
       </Layout>

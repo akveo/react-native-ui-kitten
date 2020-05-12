@@ -18,10 +18,10 @@ If you're not interested in using Eva Icons, learn how to integrate [3rd party I
 Let's start with installing Eva Icons and it's required dependencies.
 
 ```bash
-npm i @ui-kitten/eva-icons@next react-native-svg
+npm i @ui-kitten/eva-icons react-native-svg
 
 // Using Yarn?
-// yarn add @ui-kitten/eva-icons@next react-native-svg
+// yarn add @ui-kitten/eva-icons react-native-svg
 ```
 
 <div class="note note-warning">
