@@ -11,7 +11,6 @@ import {
   StyleSheet,
   TargetedEvent,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
@@ -19,6 +18,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -62,9 +62,8 @@ export type TabElement = React.ReactElement<TabProps>;
  *
  * @overview-example TabSimpleUsage
  */
-export class TabComponent extends React.Component<TabProps> {
-
-  static styledComponentName: string = 'Tab';
+@styled('Tab')
+export class Tab extends React.Component<TabProps> {
 
   static defaultProps: Partial<TabProps> = {
     selected: false,
@@ -146,5 +145,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export const Tab = styled<TabProps>(TabComponent);

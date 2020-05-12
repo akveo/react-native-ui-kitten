@@ -14,7 +14,6 @@ export {
 export {
   styled,
   StyledComponentProps,
-  StyledComponentClass,
   EvaProp,
 } from './style/styled';
 export {

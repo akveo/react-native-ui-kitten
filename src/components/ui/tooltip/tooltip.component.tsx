@@ -13,11 +13,11 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
   RenderProp,
+  Overwrite,
 } from '../../devsupport';
 import {
   styled,
@@ -109,9 +109,8 @@ export type TooltipElement = React.ReactElement<TooltipProps>;
  * </Tooltip>
  * ```
  */
-export class TooltipComponent extends React.Component<TooltipProps> {
-
-  static styledComponentName: string = 'Tooltip';
+@styled('Tooltip')
+export class Tooltip extends React.Component<TooltipProps> {
 
   private popoverRef = React.createRef<Popover>();
 
@@ -201,5 +200,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-export const Tooltip = styled<TooltipProps>(TooltipComponent);

@@ -23,7 +23,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   Datepicker,
-  DatepickerComponent,
   DatepickerProps,
 } from './datepicker.component';
 import { Calendar } from '../calendar/calendar.component';
@@ -48,7 +47,7 @@ describe('@datepicker: component checks', () => {
     jest.clearAllMocks();
   });
 
-  const TestDatepicker = React.forwardRef((props: Partial<DatepickerProps>, ref: React.Ref<DatepickerComponent>) => {
+  const TestDatepicker = React.forwardRef((props: Partial<DatepickerProps>, ref: React.Ref<Datepicker>) => {
     const [date, setDate] = React.useState(props.date);
 
     const onSelect = (nextDate: Date): void => {
@@ -161,10 +160,10 @@ describe('@datepicker: component checks', () => {
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
-    const dateTouchable = await waitForElement(() => component.queryAllByText('5')[0]);
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
 
     fireEvent.press(dateTouchable);
-    expect(onSelect).toBeCalledWith(new Date(today.getFullYear(), today.getMonth(), 5));
+    expect(onSelect).toBeCalledWith(new Date(today.getFullYear(), today.getMonth(), 7));
   });
 
   it('should render element provided with renderDay prop', async () => {
@@ -206,9 +205,37 @@ describe('@datepicker: component checks', () => {
     expect(cells.length).not.toEqual(0);
   });
 
+  it('should hide calendar when date pressed', async () => {
+    const component = render(
+      <TestDatepicker />,
+    );
+
+    fireEvent.press(touchables.findInputTouchable(component));
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
+
+    fireEvent.press(dateTouchable);
+
+    const calendar = await waitForElement(() => component.queryByType(Calendar));
+    expect(calendar).toBeFalsy();
+  });
+
+  it('should not hide calendar when date pressed (autoDismiss)', async () => {
+    const component = render(
+      <TestDatepicker autoDismiss={false}/>,
+    );
+
+    fireEvent.press(touchables.findInputTouchable(component));
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
+
+    fireEvent.press(dateTouchable);
+
+    const calendar = await waitForElement(() => component.queryByType(Calendar));
+    expect(calendar).toBeTruthy();
+  });
+
   it('should hide calendar when backdrop pressed', async () => {
     const component = render(
-      <TestDatepicker/>,
+      <TestDatepicker />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
@@ -248,7 +275,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should show calendar by calling `show` with ref', async () => {
-    const componentRef: React.RefObject<DatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
     const component = render(
       <TestDatepicker ref={componentRef}/>,
     );
@@ -260,7 +287,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should hide calendar by calling `hide` with ref', async () => {
-    const componentRef: React.RefObject<DatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
 
     const component = render(
       <TestDatepicker ref={componentRef}/>,
@@ -276,7 +303,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should show calendar by calling `focus` with ref', async () => {
-    const componentRef: React.RefObject<DatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
 
     const component = render(
       <TestDatepicker ref={componentRef}/>,
@@ -289,7 +316,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should hide calendar by calling `blur` with ref', async () => {
-    const componentRef: React.RefObject<DatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
 
     const component = render(
       <TestDatepicker ref={componentRef}/>,
@@ -305,7 +332,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should return false if calendar not visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<DatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
 
     render(
       <TestDatepicker ref={componentRef}/>,
@@ -315,7 +342,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should return true if calendar visible by calling `isFocused` with ref', async () => {
-    const componentRef: React.RefObject<DatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
 
     render(
       <TestDatepicker ref={componentRef}/>,
@@ -328,7 +355,7 @@ describe('@datepicker: component checks', () => {
   });
 
   it('should call onSelect with null when calling `clear` with ref', async () => {
-    const componentRef: React.RefObject<DatepickerComponent> = React.createRef();
+    const componentRef: React.RefObject<Datepicker> = React.createRef();
     const onSelect = jest.fn();
 
     render(

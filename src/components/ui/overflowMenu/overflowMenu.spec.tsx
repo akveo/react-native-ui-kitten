@@ -23,7 +23,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   OverflowMenu,
-  OverflowMenuComponent,
   OverflowMenuProps,
 } from './overflowMenu.component';
 import { MenuItem } from '../menu/menuItem.component';
@@ -58,7 +57,7 @@ describe('@overflow-menu: component checks', () => {
   };
 
   const TestOverflowMenu = React.forwardRef((props: Partial<OverflowMenuProps>,
-                                             ref: React.Ref<OverflowMenuComponent>) => {
+                                             ref: React.Ref<OverflowMenu>) => {
 
     const [visible, setVisible] = React.useState(props.visible);
 
@@ -136,7 +135,7 @@ describe('@overflow-menu: component checks', () => {
   });
 
   it('should be able to show with ref', async () => {
-    const componentRef = React.createRef<OverflowMenuComponent>();
+    const componentRef = React.createRef<OverflowMenu>();
 
     const component = render(
       <TestOverflowMenu ref={componentRef}/>,
@@ -149,7 +148,7 @@ describe('@overflow-menu: component checks', () => {
   });
 
   it('should be able to hide with ref', async () => {
-    const componentRef = React.createRef<OverflowMenuComponent>();
+    const componentRef = React.createRef<OverflowMenu>();
 
     const component = render(
       <TestOverflowMenu ref={componentRef}/>,

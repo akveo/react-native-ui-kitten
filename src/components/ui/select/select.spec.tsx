@@ -25,7 +25,6 @@ import { IndexPath } from '../../devsupport';
 import { ApplicationProvider } from '../../theme';
 import {
   Select,
-  SelectComponent,
   SelectProps,
 } from './select.component';
 import { SelectGroup } from './selectGroup.component';
@@ -149,7 +148,7 @@ describe('@select-item: component checks', () => {
 
 describe('@select: component checks', () => {
 
-  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<SelectComponent>) => {
+  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onSelect = (index: IndexPath | IndexPath[]) => {
@@ -420,7 +419,7 @@ describe('@select: component checks', () => {
   });
 
   it('should be able to call focus with ref', async () => {
-    const componentRef: React.RefObject<SelectComponent> = React.createRef();
+    const componentRef: React.RefObject<Select> = React.createRef();
     render(
       <TestSelect ref={componentRef}/>,
     );
@@ -430,7 +429,7 @@ describe('@select: component checks', () => {
   });
 
   it('should be able to call blur with ref', async () => {
-    const componentRef: React.RefObject<SelectComponent> = React.createRef();
+    const componentRef: React.RefObject<Select> = React.createRef();
     render(
       <TestSelect ref={componentRef}/>,
     );
@@ -440,7 +439,7 @@ describe('@select: component checks', () => {
   });
 
   it('should be able to call isFocused with ref', () => {
-    const componentRef: React.RefObject<SelectComponent> = React.createRef();
+    const componentRef: React.RefObject<Select> = React.createRef();
     render(
       <TestSelect ref={componentRef}/>,
     );
@@ -450,7 +449,7 @@ describe('@select: component checks', () => {
   });
 
   it('should be able to call clear with ref', () => {
-    const componentRef: React.RefObject<SelectComponent> = React.createRef();
+    const componentRef: React.RefObject<Select> = React.createRef();
     render(
       <TestSelect ref={componentRef}/>,
     );
@@ -460,7 +459,7 @@ describe('@select: component checks', () => {
   });
 
   it('should be able to call show with ref', () => {
-    const componentRef: React.RefObject<SelectComponent> = React.createRef();
+    const componentRef: React.RefObject<Select> = React.createRef();
     render(
       <TestSelect ref={componentRef}/>,
     );
@@ -470,7 +469,7 @@ describe('@select: component checks', () => {
   });
 
   it('should be able to call hide with ref', async () => {
-    const componentRef: React.RefObject<SelectComponent> = React.createRef();
+    const componentRef: React.RefObject<Select> = React.createRef();
     render(
       <TestSelect ref={componentRef}/>,
     );
@@ -483,7 +482,7 @@ describe('@select: component checks', () => {
 
 describe('@select: component checks with groups', () => {
 
-  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<SelectComponent>) => {
+  const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onSelect = (index: IndexPath | IndexPath[]) => {

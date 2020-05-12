@@ -39,9 +39,8 @@ export type PopoverViewElement = React.ReactElement<PopoverViewProps>;
 const INDICATOR_OFFSET: number = 8;
 const INDICATOR_WIDTH: number = 6;
 
-class PopoverViewComponent extends React.Component<PopoverViewProps> {
-
-  static styledComponentName: string = 'Popover';
+@styled('Popover')
+export class PopoverView extends React.Component<PopoverViewProps> {
 
   private get placement(): PopoverPlacement {
     return PopoverPlacements.parse(this.props.placement);
@@ -136,5 +135,3 @@ class PopoverViewComponent extends React.Component<PopoverViewProps> {
     );
   }
 }
-
-export const PopoverView = styled<PopoverViewProps>(PopoverViewComponent);

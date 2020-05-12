@@ -11,7 +11,6 @@ import {
   StyleSheet,
   TargetedEvent,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
@@ -19,6 +18,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -59,9 +59,9 @@ export type BottomNavigationTabElement = React.ReactElement<BottomNavigationTabP
  *
  * @overview-example BottomNavigationTabSimpleUsage
  */
-export class BottomNavigationTabComponent extends React.Component<BottomNavigationTabProps> {
 
-  static styledComponentName: string = 'BottomNavigationTab';
+@styled('BottomNavigationTab')
+export class BottomNavigationTab extends React.Component<BottomNavigationTabProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
@@ -139,5 +139,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export const BottomNavigationTab = styled<BottomNavigationTabProps>(BottomNavigationTabComponent);

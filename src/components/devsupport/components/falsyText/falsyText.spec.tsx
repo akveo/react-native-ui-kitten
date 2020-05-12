@@ -29,6 +29,23 @@ it('should render provided function component', function () {
   });
 });
 
+it('should render provided function component with hooks', () => {
+  const HookComponent = (props) => {
+    const state = React.useState(1);
+    return (
+      <Text {...props}>I love Babel {state}</Text>
+    );
+  };
+
+  const component = render(
+    <FalsyText style={{ color: 'red' }} component={props => <HookComponent {...props}/>}/>,
+  );
+
+  const textComponent = component.getByText('I love Babel 1');
+
+  expect(textComponent).toBeTruthy();
+});
+
 it('should render ui kitten text', function () {
   const component = render(
     <ApplicationProvider mapping={mapping} theme={light}>

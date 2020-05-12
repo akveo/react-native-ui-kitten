@@ -12,7 +12,6 @@ import {
   StyleSheet,
   TargetedEvent,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
@@ -21,6 +20,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -75,9 +75,8 @@ export type SelectItemElement = React.ReactElement<SelectItemProps>;
  *
  * @overview-example SelectItemSimpleUsage
  */
-class SelectItemComponent extends React.Component<SelectItemProps> {
-
-  static styledComponentName: string = 'SelectOption';
+@styled('SelectOption')
+export class SelectItem extends React.Component<SelectItemProps> {
 
   private get isMultiSelect(): boolean {
     if (this.props.descriptor) {
@@ -211,5 +210,3 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 });
-
-export const SelectItem = styled<SelectItemProps>(SelectItemComponent);

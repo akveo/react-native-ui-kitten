@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { RenderProp } from '../../devsupport';
 import { styled } from '../../theme';
 import {
   BaseDatepickerComponent,
@@ -15,10 +16,12 @@ import {
   CalendarElement,
   CalendarProps,
 } from '../calendar/calendar.component';
-import { RenderProp } from '@ui-kitten/components/devsupport';
-import { TextProps } from '@ui-kitten/components';
+import { TextProps } from '../text/text.component';
 
-export type DatepickerProps<D = Date> = BaseDatepickerProps<D> & CalendarProps<D>;
+export interface DatepickerProps<D = Date> extends BaseDatepickerProps<D>, CalendarProps<D> {
+  autoDismiss: boolean;
+}
+
 export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>;
 
 /**
@@ -42,6 +45,9 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * Defaults to current date.
  *
  * @property {(D) => void} onSelect - Called when date cell is pressed.
+ *
+ * @property {boolean} autoDismiss - Will hide the calendar when date cell is pressed.
+ * Defaults to *true*.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
@@ -165,9 +171,13 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @overview-example DatepickerTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
+@styled('Datepicker')
+export class Datepicker<D = Date> extends BaseDatepickerComponent<DatepickerProps<D>, D> {
 
-  static styledComponentName: string = 'Datepicker';
+  static defaultProps: DatepickerProps = {
+    ...BaseDatepickerComponent.defaultProps,
+    autoDismiss: true,
+  };
 
   constructor(props: DatepickerProps<D>) {
     super(props);
@@ -207,12 +217,17 @@ export class DatepickerComponent<D = Date> extends BaseDatepickerComponent<Datep
     }
   }
 
+  protected onSelect = (date: D): void => {
+    this.props.onSelect && this.props.onSelect(date);
+    this.props.autoDismiss && this.blur();
+  };
+
   protected renderCalendar(): CalendarElement<D> {
     return (
-      // @ts-ignore
-      <Calendar {...this.calendarProps} />
+      <Calendar
+        {...this.calendarProps}
+        onSelect={this.onSelect}
+      />
     );
   }
 }
-
-export const Datepicker = styled<DatepickerProps>(DatepickerComponent);

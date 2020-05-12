@@ -17,7 +17,7 @@
   },
   "scripts": {
     "demo": "yarn --cwd ../kittenTricks",
-    "build": "tsc",
+    "build": "gulp build",
     "clean": "rimraf ./dist",
     "lint": "tslint -c ./tslint.json ./src/**/*.{ts,tsx}",
     "test": "jest",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-decorators": "^7.6.2",
     "@eva-design/eva": "^2.0.0-alpha.1",
     "@eva-design/material": "^2.0.0-alpha.1",
     "@types/gulp": "ts3.8",
@@ -57,8 +58,7 @@
     "tscpaths": "0.0.9",
     "tslint": "^5.12.1",
     "typedoc": "^0.15.3",
-    "typescript": "^3.8.2",
-    "utility-types": "^3.10.0"
+    "typescript": "^3.8.2"
   },
   "resolutions": {
     "react": "~16.9.0",

@@ -11,13 +11,13 @@ import {
   NativeSyntheticEvent,
   TargetedEvent,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   RenderProp,
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -55,9 +55,8 @@ export type TopNavigationActionElement = React.ReactElement<TopNavigationActionP
  *
  * @overview-example TopNavigationActionSimpleUsage
  */
-class TopNavigationActionComponent extends React.Component<TopNavigationActionProps> {
-
-  static styledComponentName: string = 'TopNavigationAction';
+@styled('TopNavigationAction')
+export class TopNavigationAction extends React.Component<TopNavigationActionProps> {
 
   public onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
@@ -131,5 +130,3 @@ class TopNavigationActionComponent extends React.Component<TopNavigationActionPr
     );
   }
 }
-
-export const TopNavigationAction = styled<TopNavigationActionProps>(TopNavigationActionComponent);

@@ -6,8 +6,10 @@
 
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Overwrite } from 'utility-types';
-import { ChildrenWithProps } from '../../devsupport';
+import {
+  ChildrenWithProps,
+  Overwrite,
+} from '../../devsupport';
 import {
   styled,
   StyleType,
@@ -104,9 +106,8 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  * @example OverflowMenuWithoutDivider
  * To disable dividers within the menu, `appearance` property may be used.
  */
-export class OverflowMenuComponent extends React.Component<OverflowMenuProps> {
-
-  static styledComponentName: string = 'OverflowMenu';
+@styled('OverflowMenu')
+export class OverflowMenu extends React.Component<OverflowMenuProps> {
 
   private popoverRef = React.createRef<Popover>();
 
@@ -172,5 +173,3 @@ const styles = StyleSheet.create({
     flexGrow: 0,
   },
 });
-
-export const OverflowMenu = styled<OverflowMenuProps>(OverflowMenuComponent);

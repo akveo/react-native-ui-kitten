@@ -12,7 +12,6 @@ import {
   StyleSheet,
   TargetedEvent,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaSize,
   EvaStatus,
@@ -22,6 +21,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -116,9 +116,9 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * @overview-example ButtonTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class ButtonComponent extends React.Component<ButtonProps> {
 
-  static styledComponentName: string = 'Button';
+@styled('Button')
+export class Button extends React.Component<ButtonProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
@@ -220,5 +220,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export const Button = styled<ButtonProps>(ButtonComponent);

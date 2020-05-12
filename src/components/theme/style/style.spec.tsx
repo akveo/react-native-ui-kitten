@@ -139,8 +139,10 @@ describe('@style: ui component checks', () => {
   const styleConsumerTestId = '@style/consumer';
   const styleTouchableTestId = '@style/touchable';
 
-  class Test extends React.Component {
-    static styledComponentName: string = 'Test';
+  @styled('Test')
+  class Test extends React.Component<{ disabled?: boolean }> {
+
+    static someStaticValueToCopy: string = 'Test';
 
     public render(): React.ReactElement<ViewProps> {
       return (
@@ -149,30 +151,24 @@ describe('@style: ui component checks', () => {
     }
   }
 
-  it('should returns null if there is no static `styledComponentName`', () => {
+  @styled(null)
+  class NonStyledTest extends React.Component {
 
-    const NonStyledComponent = () => null;
-
-    const styledComponent = styled(NonStyledComponent);
-    expect(styledComponent).toBeFalsy();
-  });
+    public render(): React.ReactElement<ViewProps> {
+      return (
+        <View {...this.props} testID='@style/consumer'/>
+      );
+    }
+  }
 
   it('static methods are copied over', async () => {
-    // @ts-ignore: test-case
-    Test.staticMethod = function () {
-    };
-    const StyleConsumer = styled(Test);
-
-    // @ts-ignore: test-case
-    expect(StyleConsumer.staticMethod).not.toBeFalsy();
+    expect(Test.someStaticValueToCopy).not.toBeFalsy();
   });
 
   it('receives custom props', async () => {
-    const StyleConsumer = styled(Test);
-
     const component: RenderAPI = render(
       <StyleProvider styles={computedMapping} theme={theme}>
-        <StyleConsumer/>
+        <Test/>
       </StyleProvider>,
     );
 
@@ -185,17 +181,15 @@ describe('@style: ui component checks', () => {
   });
 
   it('default appearance styled properly', async () => {
-    const StyleConsumer = styled<any>(Test);
-
     const component: RenderAPI = render(
       <StyleProvider styles={computedMapping} theme={theme}>
-        <StyleConsumer/>
+        <Test/>
       </StyleProvider>,
     );
 
     const withStateProp: RenderAPI = render(
       <StyleProvider styles={computedMapping} theme={theme}>
-        <StyleConsumer disabled={true}/>
+        <Test disabled={true}/>
       </StyleProvider>,
     );
 
@@ -216,11 +210,9 @@ describe('@style: ui component checks', () => {
   });
 
   it('dispatch action works properly', async () => {
-    const StyleConsumer = styled(Test);
-
     const component: RenderAPI = render(
       <StyleProvider styles={computedMapping} theme={theme}>
-        <StyleConsumer/>
+        <Test/>
       </StyleProvider>,
     );
 
@@ -254,8 +246,6 @@ describe('@style: ui component checks', () => {
       );
     };
 
-    const StyleConsumer = styled(Test);
-
     const component: RenderAPI = render(
       <ThemeChangingProvider
         styles={computedMapping}
@@ -264,7 +254,7 @@ describe('@style: ui component checks', () => {
           ...theme,
           defaultColor: '#ffffff',
         }}>
-        <StyleConsumer/>
+        <Test/>
       </ThemeChangingProvider>,
     );
 

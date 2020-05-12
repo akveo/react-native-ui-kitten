@@ -9,7 +9,7 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
+import { Overwrite } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
@@ -47,9 +47,8 @@ export type LayoutElement = React.ReactElement<LayoutProps>;
  * Layouts can be used in different levels.
  * It is useful, when needed to highlight the container relative to another.
  */
-export class LayoutComponent extends React.Component<LayoutProps> {
-
-  static styledComponentName: string = 'Layout';
+@styled('Layout')
+export class Layout extends React.Component<LayoutProps> {
 
   public render(): React.ReactElement<ViewProps> {
     const { eva, style, ...viewProps } = this.props;
@@ -62,5 +61,3 @@ export class LayoutComponent extends React.Component<LayoutProps> {
     );
   }
 }
-
-export const Layout = styled<LayoutProps>(LayoutComponent);

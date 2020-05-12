@@ -13,7 +13,6 @@ import {
   TargetedEvent,
   View,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaStatus,
   FalsyText,
@@ -21,6 +20,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -106,9 +106,8 @@ export type CheckBoxElement = React.ReactElement<CheckBoxProps>;
  * @overview-example CheckboxTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-class CheckBoxComponent extends React.Component<CheckBoxProps> {
-
-  static styledComponentName: string = 'CheckBox';
+@styled('CheckBox')
+export class CheckBox extends React.Component<CheckBoxProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
@@ -243,5 +242,3 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
-
-export const CheckBox = styled<CheckBoxProps>(CheckBoxComponent);

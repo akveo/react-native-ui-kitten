@@ -135,6 +135,7 @@ function FeatherIcon({ name, style }) {
   return (
     <Icon name={name} size={height} color={tintColor} style={iconStyle} />
   );
+}
 ```
 
 With the code above we create a Proxy object, that will direct requested icon to render `FeatherIcon` by requested name.
@@ -291,8 +292,8 @@ import React from 'react';
 import { Image } from 'react-native';
 
 const IconProvider = (source) => ({
-  toReactElement: ({ animation, ...style }) => (
-    <Image style={style} source={source}/>
+  toReactElement: ({ animation, ...props }) => (
+    <Image {...props} source={source}/>
   ),
 });
 

@@ -27,7 +27,7 @@ import {
 
 describe('@input: component checks', () => {
 
-  const TestInput = React.forwardRef((props: InputProps, ref: React.Ref<TextInput>) => (
+  const TestInput = React.forwardRef((props: InputProps, ref: React.Ref<Input>) => (
     <ApplicationProvider
       mapping={mapping}
       theme={light}>
@@ -36,7 +36,7 @@ describe('@input: component checks', () => {
   ));
 
   it('should be able to call focus via ref', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
       <TestInput ref={componentRef}/>,
     );
@@ -45,7 +45,7 @@ describe('@input: component checks', () => {
   });
 
   it('should be able to call blur via ref', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
       <TestInput ref={componentRef}/>,
     );
@@ -54,7 +54,7 @@ describe('@input: component checks', () => {
   });
 
   it('should be able to call isFocused via ref', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
       <TestInput ref={componentRef}/>,
     );
@@ -63,7 +63,7 @@ describe('@input: component checks', () => {
   });
 
   it('should be able to call clear via ref', () => {
-    const componentRef: React.RefObject<TextInput> = React.createRef();
+    const componentRef: React.RefObject<Input> = React.createRef();
     render(
       <TestInput ref={componentRef}/>,
     );

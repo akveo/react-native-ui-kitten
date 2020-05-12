@@ -25,7 +25,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   Tooltip,
-  TooltipComponent,
   TooltipProps,
 } from './tooltip.component';
 
@@ -49,7 +48,7 @@ describe('@tooltip: component checks', () => {
   });
 
   const TestTooltip = React.forwardRef((props: Partial<TooltipProps>,
-                                        ref: React.Ref<TooltipComponent>) => {
+                                        ref: React.Ref<Tooltip>) => {
 
     const [visible, setVisible] = React.useState(props.visible);
 
@@ -177,7 +176,7 @@ describe('@tooltip: component checks', () => {
   });
 
   it('should be able to show with ref', async () => {
-    const componentRef = React.createRef<TooltipComponent>();
+    const componentRef = React.createRef<Tooltip>();
     const component = render(
       <TestTooltip ref={componentRef}>
         I love Babel
@@ -191,7 +190,7 @@ describe('@tooltip: component checks', () => {
   });
 
   it('should be able to hide with ref', async () => {
-    const componentRef = React.createRef<TooltipComponent>();
+    const componentRef = React.createRef<Tooltip>();
     const component = render(
       <TestTooltip ref={componentRef}>
         I love Babel

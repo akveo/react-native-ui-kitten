@@ -10,12 +10,12 @@ import {
   NativeSyntheticEvent,
   StyleSheet,
   TextInputFocusEventData,
+  TextInputSubmitEditingEventData,
   View,
 } from 'react-native';
 import { ChildrenWithProps } from '../../devsupport';
 import {
   Input,
-  InputComponent,
   InputElement,
   InputProps,
 } from '../input/input.component';
@@ -119,7 +119,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
   };
 
   private popoverRef = React.createRef<Popover>();
-  private inputRef = React.createRef<InputComponent>();
+  private inputRef = React.createRef<Input>();
 
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
@@ -154,6 +154,12 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
     this.props.onFocus && this.props.onFocus(event);
   };
 
+  private onInputSubmitEditing = (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>): void => {
+    this.setOptionsListInvisible();
+    this.props.onSubmitEditing && this.props.onSubmitEditing(e);
+  };
+
+
   private onBackdropPress = (): void => {
     this.blur();
     this.setOptionsListInvisible();
@@ -186,6 +192,7 @@ export class Autocomplete extends React.Component<AutocompleteProps, State> {
           {...props}
           ref={this.inputRef}
           onFocus={this.onInputFocus}
+          onSubmitEditing={this.onInputSubmitEditing}
         />
       </View>
     );

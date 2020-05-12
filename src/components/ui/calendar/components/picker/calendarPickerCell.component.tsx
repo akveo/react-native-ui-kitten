@@ -34,9 +34,8 @@ export interface CalendarPickerCellProps<D> extends StyledComponentProps, Toucha
 
 export type CalendarPickerCellElement<D> = React.ReactElement<CalendarPickerCellProps<D>>;
 
-class CalendarPickerCellComponent<D> extends React.Component<CalendarPickerCellProps<D>> {
-
-  static styledComponentName: string = 'CalendarCell';
+@styled('CalendarCell')
+export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellProps<D>> {
 
   public shouldComponentUpdate(nextProps: CalendarPickerCellProps<D>): boolean {
     if (nextProps.shouldComponentUpdate) {
@@ -133,5 +132,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export const CalendarPickerCell = styled(CalendarPickerCellComponent);

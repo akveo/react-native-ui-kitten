@@ -19,7 +19,6 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaSize,
   EvaStatus,
@@ -31,6 +30,7 @@ import {
   WebEventResponder,
   WebEventResponderCallbacks,
   WebEventResponderInstance,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -141,9 +141,8 @@ export type InputElement = React.ReactElement<InputProps>;
  * @overview-example InputTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class InputComponent extends React.Component<InputProps> implements WebEventResponderCallbacks {
-
-  static styledComponentName: string = 'Input';
+@styled('Input')
+export class Input extends React.Component<InputProps> implements WebEventResponderCallbacks {
 
   private textInputRef = React.createRef<TextInput>();
   private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
@@ -346,11 +345,10 @@ const platformStyles = StyleSheet.create({
     default: null,
     android: {
       paddingVertical: 0,
+      marginVertical: -2,
     },
     web: {
       outlineWidth: 0,
     },
   }),
 });
-
-export const Input = styled<InputProps>(InputComponent);

@@ -6,10 +6,10 @@
 
 import React from 'react';
 import { ViewProps } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   RenderProp,
+  Overwrite,
 } from '../../devsupport';
 import {
   styled,
@@ -78,7 +78,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * import React from 'react';
  * import { NavigationContainer } from '@react-navigation/native';
  * import { createDrawerNavigator } from '@react-navigation/drawer';
- * import { Drawer, DrawerItem, Layout, Text } from '@ui-kitten/components';
+ * import { Drawer, DrawerItem, Layout, Text, IndexPath } from '@ui-kitten/components';
  *
  * const { Navigator, Screen } = createDrawerNavigator();
  *
@@ -96,7 +96,7 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  *
  * const DrawerContent = ({ navigation, state }) => (
  *   <Drawer
- *     selectedIndex={state.index}
+ *     selectedIndex={new IndexPath(state.index)}
  *     onSelect={index => navigation.navigate(state.routeNames[index.row])}>
  *     <DrawerItem title='Users' />
  *     <DrawerItem title='Orders' />
@@ -141,9 +141,8 @@ export type DrawerElement = React.ReactElement<DrawerProps>;
  * @overview-example DrawerTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-class DrawerComponent extends React.Component<DrawerProps> {
-
-  static styledComponentName: string = 'Drawer';
+@styled('Drawer')
+export class Drawer extends React.Component<DrawerProps> {
 
   private getComponentStyle = (source: StyleType) => {
     const {
@@ -191,5 +190,3 @@ class DrawerComponent extends React.Component<DrawerProps> {
     );
   }
 }
-
-export const Drawer = styled<DrawerProps>(DrawerComponent);

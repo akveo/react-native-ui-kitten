@@ -89,9 +89,8 @@ export type RangeCalendarElement<D = Date> = React.ReactElement<RangeCalendarPro
  * }
  * ```
  */
-export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<RangeCalendarProps<D>, D> {
-
-  static styledComponentName: string = 'Calendar';
+@styled('Calendar')
+export class RangeCalendar<D = Date> extends BaseCalendarComponent<RangeCalendarProps<D>, D> {
 
   static defaultProps: Partial<RangeCalendarProps> = {
     ...BaseCalendarComponent.defaultProps,
@@ -158,5 +157,3 @@ export class RangeCalendarComponent<D = Date> extends BaseCalendarComponent<Rang
     return props.eva.theme !== nextProps.eva.theme;
   }
 }
-
-export const RangeCalendar = styled<RangeCalendarProps>(RangeCalendarComponent);

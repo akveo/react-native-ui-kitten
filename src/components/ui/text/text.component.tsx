@@ -9,12 +9,14 @@ import {
   Text as RNText,
   TextProps as RNTextProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
+import {
+  EvaStatus,
+  Overwrite,
+ } from '../../devsupport';
 import {
   styled,
   StyledComponentProps,
 } from '../../theme';
-import { EvaStatus } from '../../devsupport';
 
 type TextStyledProps = Overwrite<StyledComponentProps, {
   appearance?: 'default' | 'alternative' | 'hint' | string;
@@ -78,9 +80,8 @@ export type TextElement = React.ReactElement<TextProps>;
  * <Text style={...}>Place your Text</Text>
  * ```
  */
-export class TextComponent extends React.Component<TextProps> {
-
-  static styledComponentName: string = 'Text';
+@styled('Text')
+export class Text extends React.Component<TextProps> {
 
   public render(): React.ReactElement<RNTextProps> {
     const { eva, style, ...textProps } = this.props;
@@ -93,5 +94,3 @@ export class TextComponent extends React.Component<TextProps> {
     );
   }
 }
-
-export const Text = styled<TextProps>(TextComponent);

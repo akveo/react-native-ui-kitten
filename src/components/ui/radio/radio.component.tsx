@@ -12,7 +12,6 @@ import {
   TargetedEvent,
   View,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   EvaStatus,
   FalsyText,
@@ -20,6 +19,7 @@ import {
   TouchableWeb,
   TouchableWebElement,
   TouchableWebProps,
+  Overwrite,
 } from '../../devsupport';
 import {
   Interaction,
@@ -89,9 +89,8 @@ export type RadioElement = React.ReactElement<RadioProps>;
  * @overview-example RadioTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-export class RadioComponent extends React.Component<RadioProps> {
-
-  static styledComponentName: string = 'Radio';
+@styled('Radio')
+export class Radio extends React.Component<RadioProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
@@ -216,5 +215,3 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
-
-export const Radio = styled<RadioProps>(RadioComponent);

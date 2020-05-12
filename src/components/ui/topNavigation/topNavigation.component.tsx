@@ -10,11 +10,11 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import { Overwrite } from 'utility-types';
 import {
   FalsyFC,
   FalsyText,
   RenderProp,
+  Overwrite,
 } from '../../devsupport';
 import {
   styled,
@@ -95,9 +95,8 @@ type AlignmentProp = 'start' | 'center';
  * />
  * ```
  */
-export class TopNavigationComponent extends React.Component<TopNavigationProps> {
-
-  static styledComponentName: string = 'TopNavigation';
+@styled('TopNavigation')
+export class TopNavigation extends React.Component<TopNavigationProps> {
 
   private getAlignmentDependentStyles = (alignment: AlignmentProp) => {
     if (alignment === 'center') {
@@ -203,5 +202,3 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 });
-
-export const TopNavigation = styled<TopNavigationProps>(TopNavigationComponent);

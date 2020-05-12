@@ -17,10 +17,10 @@ import {
   light,
   mapping,
 } from '@eva-design/eva';
+import { TouchableWeb } from '../../devsupport';
 import { ApplicationProvider } from '../../theme';
 import {
   Toggle,
-  ToggleComponent,
   ToggleProps,
 } from './toggle.component';
 
@@ -35,7 +35,7 @@ describe('@toggle: component checks', () => {
   );
 
   const touchables = {
-    findRootTouchable: (api: RenderAPI) => api.queryByType(ToggleComponent).children[0] as ReactTestInstance,
+    findRootTouchable: (api: RenderAPI) => api.queryByType(TouchableWeb).children[0] as ReactTestInstance,
   };
 
   it('should request checking', async () => {

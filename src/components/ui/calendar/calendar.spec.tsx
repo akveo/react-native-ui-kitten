@@ -22,7 +22,6 @@ import {
 import { ApplicationProvider } from '../../theme';
 import {
   Calendar,
-  CalendarComponent,
   CalendarProps,
 } from './calendar.component';
 import { CalendarViewModes } from './type';
@@ -46,7 +45,7 @@ describe('@calendar: component checks', () => {
 
   const TestCalendar = React.forwardRef((
     props: Partial<CalendarProps<Date | Moment>>,
-    ref: React.Ref<CalendarComponent>,
+    ref: React.Ref<Calendar>,
   ) => {
 
     const [date, setDate] = React.useState<Date | Moment>(props.date);
@@ -72,19 +71,19 @@ describe('@calendar: component checks', () => {
 
   it('should request date change on day select', () => {
     const onSelect = jest.fn((date: Date) => {
-      expect(date).toEqual(new Date(now.getFullYear(), now.getMonth(), 5));
+      expect(date).toEqual(new Date(now.getFullYear(), now.getMonth(), 7));
     });
 
     const component = render(
       <TestCalendar onSelect={onSelect}/>,
     );
 
-    fireEvent.press(component.queryByText('5'));
+    fireEvent.press(component.queryByText('7'));
   });
 
   it('should request date change on month select', async () => {
     const onSelect = jest.fn((date: Date) => {
-      expect(date).toEqual(new Date(now.getFullYear(), 6, 5));
+      expect(date).toEqual(new Date(now.getFullYear(), 6, 7));
     });
 
     const component = render(
@@ -92,14 +91,14 @@ describe('@calendar: component checks', () => {
     );
 
     fireEvent.press(component.queryByText('Jul'));
-    const dayCell = await waitForElement(() => component.queryByText('5'));
+    const dayCell = await waitForElement(() => component.queryByText('7'));
 
     fireEvent.press(dayCell);
   });
 
   it('should request date change on year select', async () => {
     const onSelect = jest.fn((date: Date) => {
-      expect(date).toEqual(new Date(now.getFullYear() + 1, 6, 5));
+      expect(date).toEqual(new Date(now.getFullYear() + 1, 6, 7));
     });
 
     const component = render(
@@ -110,13 +109,13 @@ describe('@calendar: component checks', () => {
     const monthCell = await waitForElement(() => component.queryByText('Jul'));
 
     fireEvent.press(monthCell);
-    const dayCell = await waitForElement(() => component.queryByText('5'));
+    const dayCell = await waitForElement(() => component.queryByText('7'));
 
     fireEvent.press(dayCell);
   });
 
   it('should be rendered with view passed to startView prop', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     render(
       <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
@@ -125,7 +124,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change month to next when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef}/>,
     );
@@ -141,7 +140,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change month to previous when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef}/>,
     );
@@ -157,7 +156,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change year to next when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
@@ -173,7 +172,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should change year to previous when navigation button pressed', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     const component = render(
       <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
@@ -189,7 +188,7 @@ describe('@calendar: component checks', () => {
   });
 
   it('should scroll to current month when scrollToToday called', () => {
-    const componentRef = React.createRef<CalendarComponent>();
+    const componentRef = React.createRef<Calendar>();
     render(
       <TestCalendar
         ref={componentRef}
@@ -259,7 +258,7 @@ describe('@calendar: component checks', () => {
       />,
     );
 
-    fireEvent.press(component.getByText('5'));
+    fireEvent.press(component.getByText('7'));
   });
 
 

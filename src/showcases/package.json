@@ -1,6 +1,6 @@
 {
   "name": "@ui-kitten/showcases",
-  "version": "4.4.0",
+  "version": "5.0.0-alpha.1",
   "private": true,
   "workspaces": {
     "nohoist": [
@@ -11,29 +11,28 @@
   "scripts": {
     "start": "npm run env -- prod && expo start -c",
     "start:dev": "npm run env -- dev && expo start -c",
-    "build:web": "expo build:web --no-pwa",
+    "build": "expo build:web",
+    "clean": "rimraf ./web-build",
     "env": "node ./env/set-env.js"
   },
   "dependencies": {
     "@react-navigation/web": "^1.0.0-alpha.9",
     "awesome-debounce-promise": "^2.1.0",
-    "expo": "^36.0.2",
-    "react": "~16.9.0",
-    "react-dom": "~16.9.0",
-    "react-native": "~0.61.4",
-    "react-native-gesture-handler": "~1.5.0",
-    "react-native-reanimated": "~1.4.0",
-    "react-native-screens": "^2.0.0-beta.2",
-    "react-native-svg": "~9.13.3",
-    "react-native-web": "^0.11.7",
-    "react-navigation": "^4.0.10",
-    "react-navigation-drawer": "^2.3.3",
-    "react-navigation-stack": "^1.10.3",
-    "react-navigation-tabs": "^2.6.0"
+    "expo": "^37.0.0",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-reanimated": "~1.7.0",
+    "react-native-safe-area-context": "0.7.3",
+    "react-native-screens": "~2.2.0",
+    "react-native-svg": "11.0.1",
+    "react-native-web": "0.11",
+    "react-navigation": "^4.3.8",
+    "react-navigation-stack": "^2.3.13"
   },
   "devDependencies": {
-    "@expo/webpack-config": "^0.10.11",
-    "babel-preset-expo": "^8.0.0",
-    "expo-cli": "^3.11.9"
+    "@expo/webpack-config": "^0.11.25",
+    "babel-preset-expo": "^8.1.0"
   }
 }
