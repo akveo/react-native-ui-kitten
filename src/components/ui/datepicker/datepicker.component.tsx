@@ -47,7 +47,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @property {(D) => void} onSelect - Called when date cell is pressed.
  *
  * @property {boolean} autoDismiss - Will hide the calendar when date cell is pressed.
- * Defaults to *false*.
+ * Defaults to *true*.
  *
  * @property {D} min - Minimal date that is able to be selected.
  *
