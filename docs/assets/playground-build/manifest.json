@@ -1,13 +1,26 @@
 {
-  "background_color": "#ffffff",
   "description": "UI Kitten Documentation Showcases",
-  "dir": "auto",
   "display": "standalone",
   "lang": "en",
   "name": "UI Kitten Showcases",
-  "orientation": "portrait",
-  "prefer_related_applications": true,
-  "related_applications": [],
   "short_name": "UI Kitten Showcases",
-  "start_url": "."
+  "start_url": "/?utm_source=web_app_manifest",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/pwa/chrome-icon/chrome-icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa/chrome-icon/chrome-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa/chrome-icon/chrome-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
