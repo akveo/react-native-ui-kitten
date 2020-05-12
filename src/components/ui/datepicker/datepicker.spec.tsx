@@ -205,9 +205,37 @@ describe('@datepicker: component checks', () => {
     expect(cells.length).not.toEqual(0);
   });
 
+  it('should hide calendar when date pressed', async () => {
+    const component = render(
+      <TestDatepicker />,
+    );
+
+    fireEvent.press(touchables.findInputTouchable(component));
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
+
+    fireEvent.press(dateTouchable);
+
+    const calendar = await waitForElement(() => component.queryByType(Calendar));
+    expect(calendar).toBeFalsy();
+  });
+
+  it('should not hide calendar when date pressed (autoDismiss)', async () => {
+    const component = render(
+      <TestDatepicker autoDismiss={false}/>,
+    );
+
+    fireEvent.press(touchables.findInputTouchable(component));
+    const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
+
+    fireEvent.press(dateTouchable);
+
+    const calendar = await waitForElement(() => component.queryByType(Calendar));
+    expect(calendar).toBeTruthy();
+  });
+
   it('should hide calendar when backdrop pressed', async () => {
     const component = render(
-      <TestDatepicker/>,
+      <TestDatepicker />,
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
